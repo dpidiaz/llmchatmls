@@ -11,7 +11,7 @@
 import { Env, ChatMessage } from "./types";
 
 // Modelo de Workers AI
-const MODEL_ID = "@cf/meta/llama-3.1-8b-instruct-fp8";
+const MODEL_ID = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 
 /**
  * Comportamiento permanente del Profesor IA.
