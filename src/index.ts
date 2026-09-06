@@ -40,7 +40,7 @@ import { Env, ChatMessage } from "./types";
 
  */
 
-const MODEL_ID = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+const MODEL_ID = "@cf/google/gemma-4-26b-a4b-it";
 
 /**
 
