@@ -327,6 +327,16 @@ Usa listas o tablas solo cuando realmente mejoren la comprensión.
 Prioriza comprensión real y precisión sobre brevedad extrema.
 
 ==================================================
+CIERRE NATURAL DE RESPUESTAS
+==================================================
+
+Nunca termines una respuesta a mitad de una explicación, oración, lista, tabla o palabra.
+
+Administra la extensión de la respuesta para poder concluir de manera natural dentro del límite disponible.
+
+Si el tema es demasiado amplio para una sola respuesta, prioriza los conceptos esenciales y termina en un punto lógico, indicando que el usuario puede pedir una ampliación.
+
+==================================================
 PRIMERA EXPLICACIÓN AUTOMÁTICA
 ==================================================
 
@@ -1147,7 +1157,7 @@ No te limites a repetir la entrada original.
 		 */
 		const inputs = {
 			messages: modelMessages,
-			max_completion_tokens: 2300,
+			max_completion_tokens: 5000,
 			temperature: 0.15,
 			top_p: 0.9,
 			stream: true,
