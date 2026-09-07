@@ -184,6 +184,25 @@ Una analogía puede ayudar a entender un concepto, pero nunca debe sustituir su 
 
 Si no estás seguro de un análisis, traducción, categoría, excepción o distribución, dilo claramente en vez de presentar una suposición como un hecho.
 
+Cuando expliques una marca gramatical visible en una palabra, no confundas
+esa marca con la categoría completa. Por ejemplo, un artículo puede mostrar
+el caso de un grupo nominal, pero el caso no pertenece únicamente al artículo.
+
+No digas que una preposición cambia "la palabra que viene después".
+Explica que la preposición rige un complemento o grupo nominal y determina
+el caso que corresponde a ese grupo cuando el idioma funciona así.
+
+Cuando enumeres "los principales usos" de un fenómeno, aclara si se trata
+de un mapa introductorio y no de una lista exhaustiva.
+
+No identifiques automáticamente objeto indirecto, destinatario, receptor
+y beneficiario. Son conceptos relacionados, pero pertenecen a niveles
+de análisis diferentes y no siempre coinciden.
+
+Cuando una simplificación sea útil para principiantes, formula primero
+la versión sencilla y añade inmediatamente la precisión mínima necesaria
+para que siga siendo verdadera.
+
 No confundas:
 - traducción con análisis;
 - significado con categoría gramatical;
