@@ -1,16 +1,18 @@
 {
   "name": "llmchatmls",
-  "description": "MASTER LANGUAGE SYSTEM Revision 31 — autonomous multilingual grammar wiki",
+  "description": "MASTER LANGUAGE SYSTEM Revision 32 — parallel autonomous multi-provider grammar wiki",
   "cloudflare": {
     "label": "MASTER LANGUAGE SYSTEM",
     "products": [
       "Workers",
-      "Workers AI"
+      "Workers AI",
+      "Queues",
+      "D1"
     ],
     "categories": [
       "ai"
     ],
-    "docs_url": "https://developers.cloudflare.com/workers-ai/",
+    "docs_url": "https://developers.cloudflare.com/queues/",
     "preview_icon_url": "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/a974bd55-20c6-4656-fa29-1551d43ddc00/public",
     "preview_image_url": "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/65dd8441-89d3-491d-c5a1-0a000d070700/preview",
     "publish": true
@@ -29,7 +31,7 @@
   "scripts": {
     "cf-typegen": "wrangler types",
     "check": "tsc --noEmit && wrangler deploy --dry-run",
-    "predeploy": "if [ -f 'MASTER LANGUAGE SYSTEM REVISION 31 BUNDLE.tar.gz' ]; then rm -rf public src && tar -xzf 'MASTER LANGUAGE SYSTEM REVISION 31 BUNDLE.tar.gz'; fi",
+    "predeploy": "if [ -f 'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz' ]; then rm -rf public src && tar -xzf 'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz'; fi",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "e2e:dev": "wrangler dev --config wrangler.e2e.jsonc",
