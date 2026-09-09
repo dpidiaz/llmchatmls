@@ -1,6 +1,6 @@
 {
   "name": "llmchatmls",
-  "description": "MASTER LANGUAGE SYSTEM with Cloudflare Workers AI Professor",
+  "description": "MASTER LANGUAGE SYSTEM Revision 31 — autonomous multilingual grammar wiki",
   "cloudflare": {
     "label": "MASTER LANGUAGE SYSTEM",
     "products": [
@@ -29,7 +29,7 @@
   "scripts": {
     "cf-typegen": "wrangler types",
     "check": "tsc --noEmit && wrangler deploy --dry-run",
-    "predeploy": "if [ -f 'MASTER LANGUAGE SYSTEM REVISION 30 PUBLIC.tar.gz' ]; then rm -rf public && tar -xzf 'MASTER LANGUAGE SYSTEM REVISION 30 PUBLIC.tar.gz'; fi",
+    "predeploy": "if [ -f 'MASTER LANGUAGE SYSTEM REVISION 31 BUNDLE.tar.gz' ]; then rm -rf public src && tar -xzf 'MASTER LANGUAGE SYSTEM REVISION 31 BUNDLE.tar.gz'; fi",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "e2e:dev": "wrangler dev --config wrangler.e2e.jsonc",
