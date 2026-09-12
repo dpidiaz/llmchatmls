@@ -1,4 +1,4 @@
-const CACHE='mls-iphone11-2026-r32-fifo-publish-first';
+const CACHE='mls-iphone11-2026-r32-scrollzero-2';
 const SHELL=[
   './','./index.html','./assets/styles.css','./manifest.webmanifest','./data/index.js',
   './js/core.js','./js/map.js','./js/search.js','./js/compare.js','./js/ai.js','./js/wiki.js','./js/reader.js','./js/ios.js','./js/app.js',
