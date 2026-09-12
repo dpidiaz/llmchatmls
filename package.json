@@ -36,6 +36,6 @@
     "e2e:dev": "wrangler dev --config wrangler.e2e.jsonc",
     "start": "wrangler dev",
     "test": "vitest",
-    "disable-automation": "wrangler queues consumer worker remove mls-wiki-jobs llmchatmls || wrangler queues consumer remove mls-wiki-jobs llmchatmls || true"
+    "disable-automation": "(wrangler queues consumer worker remove mls-wiki-jobs llmchatmls || wrangler queues consumer remove mls-wiki-jobs llmchatmls || true); printf 'y\\n' | wrangler queues delete mls-wiki-jobs || true; printf 'y\\n' | wrangler queues delete mls-wiki-jobs-dlq || true"
   }
 }

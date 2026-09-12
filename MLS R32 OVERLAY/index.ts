@@ -1789,6 +1789,36 @@ async function ensureWikiDb(env: Env): Promise<void> {
 	]);
 	await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_meta(key, value) VALUES ('enqueue_cursor', '0')`).run();
 	await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_meta(key, value) VALUES ('started_at', ?)`).bind(new Date().toISOString()).run();
+
+	const cleanup = await env.WIKI_DB.prepare(`SELECT value FROM wiki_meta WHERE key = 'visit_backlog_cleanup_v1'`)
+		.first<{ value: string }>();
+	if (!cleanup) {
+		const cleanedAt = new Date().toISOString();
+		await env.WIKI_DB.batch([
+			env.WIKI_DB.prepare(`UPDATE wiki_jobs
+				SET status = 'published',
+					last_error = NULL,
+					enqueued_at = NULL,
+					updated_at = ?
+				WHERE EXISTS (SELECT 1 FROM wiki_articles a WHERE a.code = wiki_jobs.code)`)
+				.bind(cleanedAt),
+			env.WIKI_DB.prepare(`UPDATE wiki_jobs
+				SET status = 'pending',
+					attempts = 0,
+					provider = NULL,
+					model = NULL,
+					last_error = NULL,
+					enqueued_at = NULL,
+					started_at = NULL,
+					updated_at = ?
+				WHERE NOT EXISTS (SELECT 1 FROM wiki_articles a WHERE a.code = wiki_jobs.code)`)
+				.bind(cleanedAt),
+			env.WIKI_DB.prepare(`UPDATE wiki_meta SET value = '0' WHERE key = 'enqueue_cursor'`),
+			env.WIKI_DB.prepare(`INSERT INTO wiki_meta(key, value)
+				VALUES ('visit_backlog_cleanup_v1', ?)`)
+				.bind(cleanedAt),
+		]);
+	}
 }
 
 async function getMetaNumber(env: Env, key: string, fallback = 0): Promise<number> {
