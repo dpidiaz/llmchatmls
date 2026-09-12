@@ -1583,7 +1583,7 @@ No te limites a repetir la entrada original.
 			temperature: 0.15,
 			top_p: 0.9,
 			stream: true,
-		} satisfies AiTextGenerationInput & { stream: true };
+		} as unknown as AiTextGenerationInput & { stream: true };
 
 		const stream = await env.AI.run<typeof MODEL_ID>(MODEL_ID, inputs);
 
@@ -2359,7 +2359,7 @@ async function generateWikiDraftR32(env: Env, seed: WikiSeed): Promise<ProviderR
 		{ role: "user", content: `Escribe el artículo correspondiente a esta entrada:\n\n${wikiSeedAsText(seed)}` },
 	];
 	const level = (seed.level || "").toUpperCase();
-	const maxTokens = /A1|A2/.test(level) ? 900 : /B1|B2/.test(level) ? 1200 : 1600;
+	const maxTokens = /A1|A2/.test(level) ? 2400 : /B1|B2/.test(level) ? 3200 : /C1|C2/.test(level) ? 4000 : 3200;
 	return runWithFallback(env, seed.code, messages, maxTokens, 0.12);
 }
 
@@ -2428,7 +2428,7 @@ async function correctWikiDraftR32(env: Env, seed: WikiSeed, draft: string, deci
 		{ role: "system", content: `MÓDULO DEL IDIOMA ACTUAL\n\n${LANGUAGE_MODULES[seed.language] ?? ""}` },
 		{ role: "user", content: `SEMILLA:\n${wikiSeedAsText(seed)}\n\nARTÍCULO ORIGINAL:\n${draft}\n\nCORRECCIONES NECESARIAS:\n${decision.issues.map((x, i) => `${i + 1}. ${x}`).join("\n")}` },
 	];
-	return runWithFallback(env, `${seed.code}-fix`, messages, 1600, 0.05, preferredExclude);
+	return runWithFallback(env, `${seed.code}-fix`, messages, 3200, 0.05, preferredExclude);
 }
 
 async function publishWikiArticle(env: Env, article: WikiPublishedArticle): Promise<void> {
