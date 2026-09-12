@@ -2048,18 +2048,17 @@ async function scheduleWikiQueue(env: Env): Promise<void> {
 	await reconcileWikiBacklog(env);
 	const cursor = await getMetaNumber(env, "enqueue_cursor", 0);
 
-	let physicalBacklog = 0;
-	try {
-		const metrics = await env.WIKI_QUEUE.metrics();
-		physicalBacklog = Number(metrics.backlogCount || 0);
-	} catch {
-		physicalBacklog = 0;
-	}
 	const active = await env.WIKI_DB.prepare(`SELECT COUNT(*) AS count FROM wiki_jobs WHERE status IN ('queued', 'processing')`).first<{ count: number }>();
 
 	const ext = externalProviders(env);
 	const target = queueBacklogTarget(ext.length);
-	const neededMessages = Math.max(0, Math.min(1, Math.ceil(target - physicalBacklog - Number(active?.count || 0))));
+	// Durante el corte FIFO, los mensajes físicos heredados pueden permanecer
+	// diferidos hasta 24 horas. D1 es la autoridad del trabajo activo: solo se
+	// crea una nueva tanda cuando no existe ninguna tanda lógica queued/processing.
+	// Publish First mantiene idempotentes los mensajes heredados al reaparecer.
+	const neededMessages = Number(active?.count || 0) > 0
+		? 0
+		: Math.max(0, Math.min(1, target));
 	if (neededMessages <= 0) return;
 
 	const messages: MessageSendRequest<WikiQueueMessage>[] = [];
