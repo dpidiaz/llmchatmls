@@ -1011,6 +1011,8 @@ export default {
 					service: "MASTER LANGUAGE SYSTEM — Profesor IA",
 					model: MODEL_ID,
 					languages: 10,
+					automation: "disabled",
+					mode: "user-initiated-only",
 				}),
 				{
 					status: 200,
