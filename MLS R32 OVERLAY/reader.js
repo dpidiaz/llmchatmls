@@ -5,12 +5,18 @@
   function stripSpeak(s){return String(s||'').replace(/\*\*/g,'').replace(/`/g,'').replace(/[#>*_~\[\]()]/g,' ').replace(/\n/g,' ').replace(/\s+/g,' ').trim()}
   function normalizeArticleMarkdown(s){
     return String(s||'')
-      .replace(/\$\\(?:rightarrow|to)\$/g,'→')
-      .replace(/\$\\(?:leftarrow)\$/g,'←')
-      .replace(/\$\\(?:Rightarrow|Longrightarrow)\$/g,'⇒')
-      .replace(/\$\\(?:Leftarrow|Longleftarrow)\$/g,'⇐')
+      .replace(/\$\s*\\(?:rightarrow|to)\s*\$/gi,'→')
+      .replace(/\$\s*\\leftarrow\s*\$/gi,'←')
+      .replace(/\$\s*\\(?:Rightarrow|Longrightarrow)\s*\$/g,'⇒')
+      .replace(/\$\s*\\(?:Leftarrow|Longleftarrow)\s*\$/g,'⇐')
+      .replace(/\\(?:rightarrow|to)\b/gi,'→')
+      .replace(/\\leftarrow\b/gi,'←')
+      .replace(/\\(?:Rightarrow|Longrightarrow)\b/g,'⇒')
+      .replace(/\\(?:Leftarrow|Longleftarrow)\b/g,'⇐')
       .replace(/&#x20;|&#32;|&nbsp;/gi,' ')
       .replace(/\\([*_])/g,'$1')
+      .replace(/([\p{L}\p{N}])\*(?=\s*(?:\n|$))/gu,'$1')
+      .replace(/([\p{L}\p{N}])\*([.,;:!?])/gu,'$1$2')
       .replace(/[ \t]+\n/g,'\n')
       .replace(/[ \t]{2,}/g,' ')
       .trim();
