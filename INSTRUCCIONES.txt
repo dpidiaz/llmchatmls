@@ -1,0 +1,19 @@
+MASTER LANGUAGE SYSTEM — archivos para GitHub
+
+Reemplaza o agrega exactamente estos archivos en la rama main:
+
+1. MLS R32 OVERLAY/index.js
+2. MLS R32 OVERLAY/wrangler.jsonc
+3. src/index.js
+4. wrangler.jsonc
+5. package.json
+
+No borres tus demás archivos, semillas, public, D1 ni bindings.
+No subas el Secret xKiroRouter a GitHub. Debe permanecer como Secret de Cloudflare.
+
+Cambio importante:
+assets.run_worker_first ahora es true, por lo que el Worker procesa también las páginas HTML y puede inyectar /mlsaitools.js en todas las entradas.
+
+La cola y el cron automático quedan desactivados.
+La materialización de artículos sigue siendo una vez por entrada visitada.
+Profesor IA /api/chat se conserva.
