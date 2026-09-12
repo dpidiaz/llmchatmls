@@ -1,8 +1,8 @@
 (()=>{
   'use strict';
   const MLS=window.MLS=window.MLS||{};
-  const VERSION='iphone11-2026-r32-fifo-publish-first';
-  const CACHE='mls-iphone11-2026-r32-fifo-publish-first';
+  const VERSION='iphone11-2026-r32-scrollsimple-3';
+  const CACHE='mls-iphone11-2026-r32-scrollsimple-3';
   const FILES=[
     './','./index.html','./assets/styles.css','./manifest.webmanifest','./sw.js',
     './data/index.js','./js/core.js','./js/map.js','./js/search.js','./js/compare.js','./js/reader.js','./js/ios.js','./js/app.js',
@@ -56,43 +56,13 @@
     }finally{try{await wake?.release?.()}catch{}}
   }
   function setMobileActive(){const h=location.hash||'#home';let key='home';if(h.startsWith('#search'))key='search';else if(h.startsWith('#themes'))key='themes';document.querySelectorAll('[data-mobile-nav]').forEach(a=>a.classList.toggle('active',a.dataset.mobileNav===key))}
-  function entryCodeFromHash(){return new URLSearchParams(location.hash.replace(/^#/,'' )).get('entry')||''}
-  function resetAllScrollLayers(){
-    try{if('scrollRestoration' in history)history.scrollRestoration='manual'}catch{}
-    const seen=new Set();
-    const reset=el=>{
-      if(!el||seen.has(el))return;seen.add(el);
-      try{el.scrollTop=0;el.scrollLeft=0}catch{}
-      try{el.scrollTo?.({top:0,left:0,behavior:'auto'})}catch{}
-    };
-    reset(document.scrollingElement);reset(document.documentElement);reset(document.body);reset(MLS.app);reset(document.getElementById('app'));
-    let node=MLS.app||document.getElementById('app');
-    while(node){reset(node);node=node.parentElement}
-    document.querySelectorAll('*').forEach(el=>{if((el.scrollTop||el.scrollLeft)&&(el.scrollHeight>el.clientHeight||el.scrollWidth>el.clientWidth))reset(el)});
-    try{window.scrollTo({top:0,left:0,behavior:'auto'})}catch{try{window.scrollTo(0,0)}catch{}}
-  }
-  function forceAbsoluteEntryTop(){
-    resetAllScrollLayers();
-    requestAnimationFrame(()=>{resetAllScrollLayers();requestAnimationFrame(resetAllScrollLayers)});
-    [40,120,250].forEach(ms=>setTimeout(resetAllScrollLayers,ms));
-  }
-  let pendingEntryTop='';
-  function armAbsoluteEntryTop(){const code=entryCodeFromHash();if(!code)return;pendingEntryTop=code;forceAbsoluteEntryTop()}
-  function observeEntryRender(){
-    const app=document.getElementById('app')||MLS.app;if(!app)return;
-    new MutationObserver(()=>{
-      if(!pendingEntryTop||entryCodeFromHash()!==pendingEntryTop)return;
-      if(!app.querySelector('.reader-wide'))return;
-      forceAbsoluteEntryTop();pendingEntryTop='';
-    }).observe(app,{childList:true,subtree:true});
-  }
   document.addEventListener('click',ev=>{
     const prep=ev.target.closest('[data-offline-prepare]');if(prep){ev.preventDefault();prepare();return}
     const help=ev.target.closest('[data-install-help]');if(help){ev.preventDefault();showInstallHelp();return}
   });
-  window.addEventListener('hashchange',()=>{setMobileActive();armAbsoluteEntryTop()});
+  window.addEventListener('hashchange',setMobileActive);
   window.addEventListener('online',()=>document.body.dataset.online='true');
   window.addEventListener('offline',()=>document.body.dataset.online='false');
-  document.addEventListener('DOMContentLoaded',()=>{document.body.dataset.ios=isIOS()?'true':'false';document.body.dataset.standalone=isStandalone()?'true':'false';document.body.dataset.online=navigator.onLine?'true':'false';setMobileActive();observeEntryRender();if(entryCodeFromHash())armAbsoluteEntryTop()});
+  document.addEventListener('DOMContentLoaded',()=>{document.body.dataset.ios=isIOS()?'true':'false';document.body.dataset.standalone=isStandalone()?'true':'false';document.body.dataset.online=navigator.onLine?'true':'false';setMobileActive()});
   MLS.offline={VERSION,CACHE,FILES,isReady,isStandalone,isIOS,prepare,settingsBlock,homeCard,showInstallHelp,statusMarkup};
 })();
