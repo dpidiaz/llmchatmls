@@ -3,6 +3,18 @@
   const MLS=window.MLS;const {esc,escAttr,short}=MLS.util;
   const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
   function stripSpeak(s){return String(s||'').replace(/\*\*/g,'').replace(/`/g,'').replace(/[#>*_~\[\]()]/g,' ').replace(/\n/g,' ').replace(/\s+/g,' ').trim()}
+  function normalizeArticleMarkdown(s){
+    return String(s||'')
+      .replace(/\$\\(?:rightarrow|to)\$/g,'→')
+      .replace(/\$\\(?:leftarrow)\$/g,'←')
+      .replace(/\$\\(?:Rightarrow|Longrightarrow)\$/g,'⇒')
+      .replace(/\$\\(?:Leftarrow|Longleftarrow)\$/g,'⇐')
+      .replace(/&#x20;|&#32;|&nbsp;/gi,' ')
+      .replace(/\\([*_])/g,'$1')
+      .replace(/[ \t]+\n/g,'\n')
+      .replace(/[ \t]{2,}/g,' ')
+      .trim();
+  }
   function currentEntryIs(code){return new URLSearchParams(location.hash.replace(/^#/,'' )).get('entry')===code}
   function setStatus(code,kind,text){const status=document.getElementById('replacementStatus');if(status&&currentEntryIs(code)){status.className='replacement-status '+kind;status.textContent=text}}
   async function savedArticle(code){
@@ -23,7 +35,7 @@
     if(!article||!currentEntryIs(e.code))return e;
     const body=document.querySelector('.plain-entry'),advanced=document.querySelector('.advanced-details');
     if(!body)return e;
-    const markdown=article.articleMarkdown||'';
+    const markdown=normalizeArticleMarkdown(article.articleMarkdown||'');
     body.className='plain-entry permanent-entry';
     body.innerHTML='<article class="entry-body permanent-entry-body">'+MLS.renderMarkdown(markdown,e.language)+'</article>';
     if(advanced)advanced.hidden=true;
