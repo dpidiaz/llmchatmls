@@ -31,10 +31,11 @@
     "cf-typegen": "wrangler types",
     "check": "tsc --noEmit && wrangler deploy --dry-run",
     "predeploy": "if [ -f 'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz' ]; then rm -rf public src && tar -xzf 'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz'; fi && cp 'MLS R32 OVERLAY/index.ts' src/index.ts && cp 'MLS R32 OVERLAY/wiki config.ts' src/wiki-config.ts && cp 'MLS R32 OVERLAY/wrangler.jsonc' wrangler.jsonc && cp 'MLS R32 OVERLAY/sw.js' public/sw.js && cp 'MLS R32 OVERLAY/ios.js' public/js/ios.js && cp 'MLS R32 OVERLAY/reader.js' public/js/reader.js",
-    "deploy": "if [ -n \"$MLS_EXTERNAL_PROVIDERS_JSON\" ]; then printf '%s' \"$MLS_EXTERNAL_PROVIDERS_JSON\" | wrangler secret put MLS_EXTERNAL_PROVIDERS_JSON; else echo 'MLS_EXTERNAL_PROVIDERS_JSON build secret not set; deploying without external providers'; fi && wrangler deploy",
+    "deploy": "npm run disable-automation && if [ -n \"$MLS_EXTERNAL_PROVIDERS_JSON\" ]; then printf '%s' \"$MLS_EXTERNAL_PROVIDERS_JSON\" | wrangler secret put MLS_EXTERNAL_PROVIDERS_JSON; else echo 'MLS_EXTERNAL_PROVIDERS_JSON build secret not set; deploying without external providers'; fi && wrangler deploy",
     "dev": "wrangler dev",
     "e2e:dev": "wrangler dev --config wrangler.e2e.jsonc",
     "start": "wrangler dev",
-    "test": "vitest"
+    "test": "vitest",
+    "disable-automation": "wrangler queues consumer worker remove mls-wiki-jobs llmchatmls || wrangler queues consumer remove mls-wiki-jobs llmchatmls || true"
   }
 }
