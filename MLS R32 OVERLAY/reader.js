@@ -22,6 +22,11 @@
       .trim();
   }
   function currentEntryIs(code){return new URLSearchParams(location.hash.replace(/^#/,'' )).get('entry')===code}
+  function scrollPageToAbsoluteTop(){
+    document.documentElement.scrollTop=0;
+    if(document.body)document.body.scrollTop=0;
+    window.scrollTo({top:0,left:0,behavior:'auto'});
+  }
   function setStatus(code,kind,text){const status=document.getElementById('replacementStatus');if(status&&currentEntryIs(code)){status.className='replacement-status '+kind;status.textContent=text}}
   async function savedArticle(code){
     const response=await fetch('/api/wiki/article/'+encodeURIComponent(code),{cache:'no-store',headers:{accept:'application/json'}});
@@ -96,6 +101,10 @@
     }
   }
   async function page(code){
+    const previousCode=document.documentElement.dataset.mlsCurrentEntryCode||'';
+    const entryChanged=previousCode!==code;
+    document.documentElement.dataset.mlsCurrentEntryCode=code;
+    if(entryChanged)scrollPageToAbsoluteTop();
     const idx=MLS.data.idxByCode[code];if(!idx){MLS.app.innerHTML=MLS.ui.empty('No encontré esta entrada.');return}
     MLS.state.currentLang=idx.language;MLS.app.innerHTML='<div class="loading">Abriendo…</div>';
     const vol=await MLS.loadVolume(idx.language),e=vol.entries.find(x=>x.code===code);if(!e){MLS.app.innerHTML=MLS.ui.empty('No encontré esta entrada.');return}
@@ -135,6 +144,7 @@
         </div></aside>
       </div>
     </div>`;
+    if(entryChanged){scrollPageToAbsoluteTop();requestAnimationFrame(scrollPageToAbsoluteTop)}
     let activeTutorEntry=e;
     const speechFor=entry=>[entry.title,entry.articleMarkdown||entry.auditedBody||entry.body||entry.definition||easy.lead,stripSpeak(easy.example)].filter(Boolean).join('. ');
     document.getElementById('listenBtn').onclick=()=>MLS.speak(stripSpeak(speechFor(activeTutorEntry)));
