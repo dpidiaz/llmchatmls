@@ -1,39 +1,12 @@
 {
   "name": "llmchatmls",
-  "description": "MASTER LANGUAGE SYSTEM Revision 32 — parallel autonomous multi-provider grammar wiki",
-  "cloudflare": {
-    "label": "MASTER LANGUAGE SYSTEM",
-    "products": [
-      "Workers",
-      "Workers AI",
-      "Queues",
-      "D1"
-    ],
-    "categories": ["ai"],
-    "docs_url": "https://developers.cloudflare.com/queues/",
-    "preview_icon_url": "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/a974bd55-20c6-4656-fa29-1551d43ddc00/public",
-    "preview_image_url": "https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/65dd8441-89d3-491d-c5a1-0a000d070700/preview",
-    "publish": true
-  },
+  "description": "Retired MASTER LANGUAGE SYSTEM deployment",
+  "private": true,
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "0.21.3",
-    "@cloudflare/workers-types": "^4.20260702.1",
-    "@types/node": "24.10.1",
-    "@vitest/runner": "4.1.10",
-    "@vitest/snapshot": "4.1.10",
-    "typescript": "5.9.3",
-    "vitest": "4.1.10",
     "wrangler": "4.127.0"
   },
-  "private": true,
   "scripts": {
-    "cf-typegen": "wrangler types",
-    "check": "tsc --noEmit && wrangler deploy --dry-run",
-    "predeploy": "if [ -f 'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz' ]; then rm -rf public src && tar -xzf 'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz'; fi && cp 'MLS R32 OVERLAY/index.ts' src/index.ts && cp 'MLS R32 OVERLAY/wiki config.ts' src/wiki-config.ts && cp 'MLS R32 OVERLAY/wrangler.jsonc' wrangler.jsonc && cp 'MLS R32 OVERLAY/sw.js' public/sw.js && cp 'MLS R32 OVERLAY/ios.js' public/js/ios.js && cp 'MLS R32 OVERLAY/reader.js' public/js/reader.js",
-    "deploy": "if [ -n \"$MLS_EXTERNAL_PROVIDERS_JSON\" ]; then printf '%s' \"$MLS_EXTERNAL_PROVIDERS_JSON\" | wrangler secret put MLS_EXTERNAL_PROVIDERS_JSON; else echo 'MLS_EXTERNAL_PROVIDERS_JSON build secret not set; deploying without external providers'; fi && wrangler deploy",
-    "dev": "wrangler dev",
-    "e2e:dev": "wrangler dev --config wrangler.e2e.jsonc",
-    "start": "wrangler dev",
-    "test": "vitest"
+    "predeploy": "cp 'MLS R32 OVERLAY/index.ts' src/index.ts && cp 'MLS R32 OVERLAY/wrangler.jsonc' wrangler.jsonc",
+    "deploy": "wrangler deploy"
   }
 }
