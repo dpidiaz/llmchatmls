@@ -2625,6 +2625,16 @@ async function consumeWikiQueue(batch: MessageBatch<WikiQueueMessage>, env: Env)
 			message.ack();
 			continue;
 		}
+		// Reinicio FIFO autorizado el 12 de septiembre de 2026. Los mensajes
+		// físicos creados antes del despliegue FIFO pertenecen al backlog
+		// heredado. Se confirman sin procesarlos: sus trabajos permanecen en D1
+		// como `enqueued`, desde donde el planificador los reconstruye en orden.
+		const createdAt = Date.parse(String(body.createdAt || ""));
+		const fifoCutoverAt = Date.parse("2026-09-12T02:12:04.000Z");
+		if (!Number.isFinite(createdAt) || createdAt < fifoCutoverAt) {
+			message.ack();
+			continue;
+		}
 		let deferSeconds = 0;
 		// FIFO estricto: el primer fallo reintentable detiene el lote. Publish
 		// First vuelve idempotente el reintento de los códigos ya publicados.
