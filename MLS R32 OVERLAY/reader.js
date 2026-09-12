@@ -2,6 +2,61 @@
   'use strict';
   const MLS=window.MLS;const {esc,escAttr,short}=MLS.util;
   function stripSpeak(s){return String(s||'').replace(/\*\*/g,'').replace(/`/g,'').replace(/\n/g,' ').replace(/\s+/g,' ').trim()}
+  function currentEntryIs(code){return location.hash.includes('entry='+code)}
+  async function savedArticle(code){
+    const response=await fetch('/api/wiki/article/'+encodeURIComponent(code),{cache:'no-store'});
+    if(response.status===404)return null;
+    if(!response.ok)throw new Error('No se pudo consultar la versión permanente.');
+    const data=await response.json();return data&&data.found?data.article:null;
+  }
+  async function waitForArticle(code){
+    for(let attempt=0;attempt<20;attempt++){
+      if(!currentEntryIs(code))return null;
+      await new Promise(resolve=>setTimeout(resolve,3000));
+      const article=await savedArticle(code);
+      if(article)return article;
+    }
+    return null;
+  }
+  function installPermanentArticle(article,e,m){
+    if(!article||!currentEntryIs(e.code))return e;
+    const body=document.querySelector('.plain-entry'),status=document.getElementById('replacementStatus'),advanced=document.querySelector('.advanced-details');
+    if(!body)return e;
+    body.className='plain-entry permanent-entry';
+    body.innerHTML='<article class="entry-body permanent-entry-body">'+MLS.renderMarkdown(article.articleMarkdown||'',e.language)+'</article>';
+    if(advanced)advanced.hidden=true;
+    if(status){
+      status.className='replacement-status ready';
+      status.textContent='Contenido permanente · generado una sola vez · '+String(article.generatedAt||'').slice(0,10);
+    }
+    return {...e,body:article.articleMarkdown||e.body,auditedBody:article.articleMarkdown||e.auditedBody,definition:article.articleMarkdown||e.definition};
+  }
+  async function materializeOnVisit(e,m,onReady){
+    const status=document.getElementById('replacementStatus');
+    try{
+      const response=await fetch('/api/wiki/materialize/'+encodeURIComponent(e.code),{
+        method:'POST',
+        headers:{'accept':'application/json'}
+      });
+      const data=await response.json().catch(()=>({}));
+      let article=data.article||null;
+      if(response.status===202)article=await waitForArticle(e.code);
+      if(article){
+        const replacement=installPermanentArticle(article,e,m);
+        onReady(replacement);
+        return;
+      }
+      if(status&&currentEntryIs(e.code)){
+        status.className='replacement-status unavailable';
+        status.textContent=response.status===503?'La IA no está disponible ahora; se conserva el contenido anterior y se intentará en una próxima visita.':'El contenido anterior permanece disponible.';
+      }
+    }catch(error){
+      if(status&&currentEntryIs(e.code)){
+        status.className='replacement-status unavailable';
+        status.textContent='No fue posible crear la versión permanente; se conserva el contenido anterior.';
+      }
+    }
+  }
   async function page(code){
     const idx=MLS.data.idxByCode[code];if(!idx){MLS.app.innerHTML=MLS.ui.empty('No encontré esta entrada.');return}
     MLS.state.currentLang=idx.language;MLS.app.innerHTML='<div class="loading">Abriendo…</div>';
@@ -28,16 +83,12 @@
           <section class="reader-head simple-head">
             <div class="simple-meta">${m.flag} ${esc(m.name)} · ${esc(e.level)}</div>
             <h1>${esc(e.title)}</h1>${e.target?`<div class="target-title">${esc(e.target)}</div>`:''}
-            <div class="reader-actions simple-actions"><button class="btn primary" id="listenBtn">🔊 Escuchar</button><button class="btn ai-entry-btn" id="aiExplainBtn">✨ Explícame este tema</button><button class="btn wiki-entry-btn" id="wikiArticleBtn" hidden>📖 Artículo desarrollado</button><button class="btn" id="favBtn">${fav?'★ Guardado':'☆ Guardar'}</button></div>
+            <div class="reader-actions simple-actions"><button class="btn primary" id="listenBtn">🔊 Escuchar</button><button class="btn ai-entry-btn" id="aiExplainBtn">✨ Profesor IA</button><button class="btn" id="favBtn">${fav?'★ Guardado':'☆ Guardar'}</button></div>
           </section>
+          <div class="replacement-status" id="replacementStatus" role="status">Comprobando la versión permanente…</div>
           <article class="plain-entry" aria-label="Explicación">
             <section class="plain-block lead-block"><p>${esc(easy.lead)}</p></section>${example}${look}
           </article>
-          <section class="wiki-autogen" id="wikiArticleSection" hidden>
-            <div class="wiki-autogen-head"><div><span>Wiki autónoma</span><small data-wiki-meta>Artículo desarrollado automáticamente</small></div><strong>Revisión 32</strong></div>
-            <article class="entry-body wiki-autogen-body" data-wiki-body></article>
-            <footer>Contenido generado y revisado automáticamente. La entrada canónica original permanece intacta.</footer>
-          </section>
           ${advanced}
           <nav class="easy-entry-nav" aria-label="Siguiente o anterior">${prev?`<a class="btn" href="#entry=${prev.code}">← Anterior</a>`:'<span></span>'}<a class="btn" href="${chapterHash}">Temas</a>${next?`<a class="btn primary" href="#entry=${next.code}">Siguiente →</a>`:'<span></span>'}</nav>
         </main>
@@ -47,11 +98,12 @@
         </div></aside>
       </div>
     </div>`;
+    let activeTutorEntry=e;
     document.getElementById('listenBtn').onclick=()=>MLS.speak(speech);
-    document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(e,m);
+    document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(activeTutorEntry,m);
     document.getElementById('favBtn').onclick=()=>{if(MLS.state.favorites.includes(code))MLS.state.favorites=MLS.state.favorites.filter(x=>x!==code);else MLS.state.favorites.push(code);MLS.save();page(code)};
     document.querySelectorAll('[data-scroll]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'start'}));
-    MLS.wiki?.hydrateEntry(e,m);
+    materializeOnVisit(e,m,replacement=>{activeTutorEntry=replacement});
   }
   MLS.reader={page};MLS.pages.entry=page;
 })();

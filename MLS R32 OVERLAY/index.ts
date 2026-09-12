@@ -1821,6 +1821,23 @@ function jobFromGlobalIndex(globalIndex: number): { code: string; language: stri
 	return null;
 }
 
+function jobFromCode(code: string): { code: string; language: string; languageName: string; n: number; seedPath: string } | null {
+	const normalized = String(code || "").trim().toUpperCase();
+	const match = normalized.match(/^(MLS-V\d{2})-(\d{4})$/);
+	if (!match) return null;
+	const language = WIKI_LANGUAGE_ORDER.find((item) => item.prefix === match[1]);
+	const n = Number.parseInt(match[2], 10);
+	if (!language || !Number.isFinite(n) || n < 1 || n > language.total) return null;
+	const padded = String(n).padStart(4, "0");
+	return {
+		code: `${language.prefix}-${padded}`,
+		language: language.slug,
+		languageName: language.name,
+		n,
+		seedPath: `/data/wiki-seeds/${language.slug}/${padded}.json`,
+	};
+}
+
 const STRICT_ZERO_COST_EXTERNAL_MODELS: Record<string, Set<string>> = {
 	gemini: new Set(["gemini-2.5-flash", "gemini-3.6-flash"]),
 	groq: new Set([
@@ -2423,7 +2440,7 @@ async function publishWikiArticle(env: Env, article: WikiPublishedArticle): Prom
 		.bind(article.provider, article.model, new Date().toISOString(), article.code).run();
 }
 
-async function processWikiEntry(env: Env, code: string): Promise<"published" | "skipped"> {
+async function processWikiEntry(env: Env, code: string, alreadyClaimed = false): Promise<"published" | "skipped"> {
 	if (await articleExists(env, code)) {
 		await env.WIKI_DB.prepare(`UPDATE wiki_jobs SET status = 'published', last_error = NULL, updated_at = ? WHERE code = ?`)
 			.bind(new Date().toISOString(), code).run();
@@ -2440,8 +2457,10 @@ async function processWikiEntry(env: Env, code: string): Promise<"published" | "
 		});
 		return "published";
 	}
-	await env.WIKI_DB.prepare(`UPDATE wiki_jobs SET status = 'processing', attempts = attempts + 1, started_at = COALESCE(started_at, ?), updated_at = ? WHERE code = ?`)
-		.bind(new Date().toISOString(), new Date().toISOString(), code).run();
+	if (!alreadyClaimed) {
+		await env.WIKI_DB.prepare(`UPDATE wiki_jobs SET status = 'processing', attempts = attempts + 1, started_at = COALESCE(started_at, ?), updated_at = ? WHERE code = ?`)
+			.bind(new Date().toISOString(), new Date().toISOString(), code).run();
+	}
 	const seed = await loadWikiSeed(env, code);
 	const draft = await generateWikiDraftR32(env, seed);
 	const draftCompletionIssues = basicArticleValidation(draft.text, draft.finishReason);
@@ -2599,7 +2618,7 @@ async function getWikiStatusR32(env: Env): Promise<Record<string, unknown>> {
 	const publishedR31 = Number(revisionRows?.r31 || 0);
 	const publishedLegacy = Number(revisionRows?.legacy || 0);
 	return {
-		service: "MASTER LANGUAGE SYSTEM — Wiki autónoma paralela",
+		service: "MASTER LANGUAGE SYSTEM — Enciclopedia bajo demanda",
 		revision: 32,
 		promptVersion: WIKI_PROMPT_VERSION,
 		totalEntries: WIKI_TOTAL_ENTRIES,
@@ -2615,14 +2634,16 @@ async function getWikiStatusR32(env: Env): Promise<Record<string, unknown>> {
 		indexedForQueue: cursor,
 		remaining: Math.max(0, WIKI_TOTAL_ENTRIES - published - failed),
 		remainingForR32: Math.max(0, WIKI_TOTAL_ENTRIES - publishedR32),
-		backlogPolicy: "FIFO + Publish First",
+		backlogPolicy: "Generate Once on Visit",
+		generationMode: "user-visit-single-materialization",
+		automation: false,
 		queueCleanup: {
 			mode: "ack legacy messages on delivery",
 			cutoverAt: WIKI_FIFO_CUTOVER_AT,
 			legacyMessagesAcked: legacyQueueMessagesAcked,
 		},
 		nextFIFO: nextFifo ?? null,
-		cloudflare: { ...budget, autonomousTargetPercent: 90 },
+		cloudflare: { ...budget, onDemandTargetPercent: 90 },
 		strictZeroCost: true,
 		externalProvidersConfigured: providers.map((p) => p.id),
 		approvedExternalModels: Object.fromEntries(Object.entries(STRICT_ZERO_COST_EXTERNAL_MODELS).map(([id, models]) => [id, [...models]])),
@@ -2635,9 +2656,127 @@ async function getWikiStatusR32(env: Env): Promise<Record<string, unknown>> {
 	};
 }
 
+async function materializeWikiEntryOnVisit(
+	request: Request,
+	env: Env,
+	url: URL,
+	code: string,
+): Promise<Response> {
+	const job = jobFromCode(code);
+	if (!job) {
+		return Response.json({ error: "Código de entrada inválido." }, {
+			status: 404,
+			headers: { "cache-control": "no-store" },
+		});
+	}
+
+	const origin = request.headers.get("origin");
+	if (origin) {
+		try {
+			if (new URL(origin).host !== url.host) {
+				return Response.json({ error: "Origen no permitido." }, {
+					status: 403,
+					headers: { "cache-control": "no-store" },
+				});
+			}
+		} catch {
+			return Response.json({ error: "Origen no válido." }, {
+				status: 403,
+				headers: { "cache-control": "no-store" },
+			});
+		}
+	}
+
+	const now = new Date().toISOString();
+	await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_jobs
+		(code, language, language_name, n, seed_path, status, updated_at)
+		VALUES (?, ?, ?, ?, ?, 'pending', ?)`)
+		.bind(job.code, job.language, job.languageName, job.n, job.seedPath, now).run();
+
+	let article = await getWikiArticleD1(env, job.code);
+	if (article) {
+		return Response.json({
+			found: true,
+			generated: false,
+			flag: "materialized",
+			article,
+		}, { headers: { "cache-control": "private, no-store" } });
+	}
+
+	const staleClaim = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+	const claim = await env.WIKI_DB.prepare(`UPDATE wiki_jobs
+		SET status = 'processing',
+			attempts = attempts + 1,
+			started_at = COALESCE(started_at, ?),
+			last_error = NULL,
+			updated_at = ?
+		WHERE code = ?
+		  AND NOT EXISTS (SELECT 1 FROM wiki_articles WHERE code = wiki_jobs.code)
+		  AND (status != 'processing' OR updated_at < ?)`)
+		.bind(now, now, job.code, staleClaim).run();
+	const claimed = Number((claim as any)?.meta?.changes || 0) > 0;
+
+	if (!claimed) {
+		article = await getWikiArticleD1(env, job.code);
+		if (article) {
+			return Response.json({
+				found: true,
+				generated: false,
+				flag: "materialized",
+				article,
+			}, { headers: { "cache-control": "private, no-store" } });
+		}
+		return Response.json({
+			found: false,
+			generated: false,
+			flag: "processing",
+			code: job.code,
+		}, {
+			status: 202,
+			headers: { "cache-control": "no-store", "retry-after": "3" },
+		});
+	}
+
+	try {
+		await processWikiEntry(env, job.code, true);
+		article = await getWikiArticleD1(env, job.code);
+		if (!article) throw new Error("La generación terminó sin publicar el contenido.");
+
+		return Response.json({
+			found: true,
+			generated: true,
+			flag: "materialized",
+			article,
+		}, {
+			status: 201,
+			headers: { "cache-control": "private, no-store" },
+		});
+	} catch (error) {
+		const message = wikiErrorMessage(error);
+		await markWikiEntryError(env, job.code, message);
+		return Response.json({
+			found: false,
+			generated: false,
+			flag: "generation-failed",
+			code: job.code,
+			error: message,
+		}, {
+			status: 503,
+			headers: { "cache-control": "no-store", "retry-after": "60" },
+		});
+	}
+}
+
 async function handleWikiApi(request: Request, env: Env, url: URL): Promise<Response> {
-	if (request.method !== "GET") return new Response("Method not allowed", { status: 405, headers: { allow: "GET" } });
 	await ensureWikiDb(env);
+	const materializeMatch = url.pathname.match(/^\/api\/wiki\/materialize\/(MLS-V\d{2}-\d{4})$/i);
+	if (materializeMatch) {
+		if (request.method !== "POST") {
+			return new Response("Method not allowed", { status: 405, headers: { allow: "POST" } });
+		}
+		return materializeWikiEntryOnVisit(request, env, url, materializeMatch[1].toUpperCase());
+	}
+	if (request.method !== "GET") return new Response("Method not allowed", { status: 405, headers: { allow: "GET" } });
 	if (url.pathname === "/api/wiki/status") return Response.json(await getWikiStatusR32(env), { headers: { "cache-control": "no-store" } });
 	if (url.pathname === "/api/wiki/recent") {
 		const requested = Number(url.searchParams.get("limit") || "10");
