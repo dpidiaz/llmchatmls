@@ -2017,6 +2017,7 @@ const WIKI_FIFO_ORDER_SQL = `CASE language
 	WHEN 'coreano' THEN 8
 	WHEN 'ruso' THEN 9
 	ELSE 99 END, n`;
+const WIKI_FIFO_CUTOVER_AT = "2026-09-12T02:12:04.000Z";
 
 async function reconcileWikiBacklog(env: Env): Promise<void> {
 	const now = Date.now();
@@ -2630,8 +2631,11 @@ async function consumeWikiQueue(batch: MessageBatch<WikiQueueMessage>, env: Env)
 		// heredado. Se confirman sin procesarlos: sus trabajos permanecen en D1
 		// como `enqueued`, desde donde el planificador los reconstruye en orden.
 		const createdAt = Date.parse(String(body.createdAt || ""));
-		const fifoCutoverAt = Date.parse("2026-09-12T02:12:04.000Z");
+		const fifoCutoverAt = Date.parse(WIKI_FIFO_CUTOVER_AT);
 		if (!Number.isFinite(createdAt) || createdAt < fifoCutoverAt) {
+			await env.WIKI_DB.prepare(`INSERT INTO wiki_meta(key, value)
+				VALUES ('fifo_legacy_acked', '1')
+				ON CONFLICT(key) DO UPDATE SET value = CAST(wiki_meta.value AS INTEGER) + 1`).run();
 			message.ack();
 			continue;
 		}
@@ -2696,6 +2700,7 @@ async function getWikiStatusR32(env: Env): Promise<Record<string, unknown>> {
 		) j ON j.language = l.language`).all<any>();
 	const map = new Map((byLang.results || []).map((r: any) => [r.language, r]));
 	const cursor = await getMetaNumber(env, "enqueue_cursor", 0);
+	const legacyQueueMessagesAcked = await getMetaNumber(env, "fifo_legacy_acked", 0);
 	const budget = await wikiStore(env).getCloudflareBudget() as Record<string, unknown>;
 	const providers = externalProviders(env);
 	const usageRows = await env.WIKI_DB.prepare(`SELECT provider, requests, prompt_tokens, completion_tokens, errors FROM wiki_provider_usage WHERE day = ? ORDER BY provider`).bind(utcDate()).all<any>();
@@ -2738,6 +2743,11 @@ async function getWikiStatusR32(env: Env): Promise<Record<string, unknown>> {
 		remaining: Math.max(0, WIKI_TOTAL_ENTRIES - published - failed),
 		remainingForR32: Math.max(0, WIKI_TOTAL_ENTRIES - publishedR32),
 		backlogPolicy: "FIFO + Publish First",
+		queueCleanup: {
+			mode: "ack legacy messages on delivery",
+			cutoverAt: WIKI_FIFO_CUTOVER_AT,
+			legacyMessagesAcked: legacyQueueMessagesAcked,
+		},
 		nextFIFO: nextFifo ?? null,
 		cloudflare: { ...budget, autonomousTargetPercent: 90 },
 		strictZeroCost: true,
