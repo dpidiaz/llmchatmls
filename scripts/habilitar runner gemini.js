@@ -74,8 +74,8 @@ source = replaceOnce(
 source = replaceOnce(
   source,
   `  const now = (/* @__PURE__ */ new Date()).toISOString();\n  await env.WIKI_DB.prepare(\`INSERT OR IGNORE INTO wiki_jobs`,
-  `  const requestedProvider = (url.searchParams.get("provider") || "").trim().toLowerCase();\n  const preferredProviderId = requestedProvider === "gemini" ? "gemini" : null;\n  if (requestedProvider && !preferredProviderId) {\n    return Response.json({ error: "Proveedor editorial no permitido para esta ruta." }, {\n      status: 400,\n      headers: { "cache-control": "no-store" }\n    });\n  }\n  const now = (/* @__PURE__ */ new Date()).toISOString();\n  await env.WIKI_DB.prepare(\`INSERT OR IGNORE INTO wiki_jobs`,
-  "lectura segura de provider=gemini"
+  `  const requestedProvider = (url.searchParams.get("provider") || "").trim().toLowerCase();\n  const preferredProviderId = requestedProvider === "gemini" ? "gemini" : requestedProvider === "cloudflare" ? "cloudflare" : null;\n  if (requestedProvider && !preferredProviderId) {\n    return Response.json({ error: "Proveedor editorial no permitido para esta ruta." }, {\n      status: 400,\n      headers: { "cache-control": "no-store" }\n    });\n  }\n  const now = (/* @__PURE__ */ new Date()).toISOString();\n  await env.WIKI_DB.prepare(\`INSERT OR IGNORE INTO wiki_jobs`,
+  "lectura segura del proveedor solicitado"
 );
 
 source = replaceOnce(
@@ -88,15 +88,17 @@ source = replaceOnce(
 fs.writeFileSync(indexPath, source, "utf8");
 
 let runner = fs.readFileSync(runnerPath, "utf8");
-runner = runner.replace('value="Generador MLS actual"', 'value="Gemini exclusivo"');
+runner = runner.replace('value="Gemini exclusivo"', 'value="Proveedor automático"');
+runner = runner.replace('value="Generador MLS actual"', 'value="Proveedor automático"');
+runner = runner.replaceAll('?provider=gemini', '');
 runner = runner.replace(
-  'const endpoint = `/api/wiki/materialize/${encodeURIComponent(code)}`;',
-  'const endpoint = `/api/wiki/materialize/${encodeURIComponent(code)}?provider=gemini`;'
+  "El Runner solicita Gemini de forma explícita. Si Gemini no está disponible, se detiene en vez de consumir otro proveedor. El proveedor final queda visible al terminar.",
+  "El Runner usa automáticamente un proveedor disponible. Con la configuración actual utiliza Cloudflare Workers AI; el proveedor final queda visible al terminar."
 );
 runner = runner.replace(
   "El proveedor real usado por cada artículo se muestra al terminar.",
-  "El Runner solicita Gemini de forma explícita. Si Gemini no está disponible, se detiene en vez de consumir otro proveedor. El proveedor final queda visible al terminar."
+  "El Runner usa automáticamente un proveedor disponible. Con la configuración actual utiliza Cloudflare Workers AI; el proveedor final queda visible al terminar."
 );
 fs.writeFileSync(runnerPath, runner, "utf8");
 
-console.log("MLS Editorial Runner: Gemini exclusivo habilitado.");
+console.log("MLS Editorial Runner: selección automática de proveedor habilitada.");
