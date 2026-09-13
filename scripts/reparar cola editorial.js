@@ -1,4 +1,4 @@
-import fs from "node:fs";
+const fs = require("fs");
 
 const backendPath = "src/index.js";
 let source = fs.readFileSync(backendPath, "utf8");
