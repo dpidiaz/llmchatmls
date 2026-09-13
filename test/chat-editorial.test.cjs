@@ -11,7 +11,7 @@ const basicEnd = runtime.indexOf('__name(basicArticleValidation',basicStart);
 const fixture = JSON.parse(fs.readFileSync(path.join(root,'MLS R32 EDITORIAL/lotes/MLS R32 prueba V10 0021.json')));
 const originalArticle = fixture.articles[0];
 const code = n => 'MLS-V10-' + String(n).padStart(4,'0');
-function setup() {
+function setup(options = {}) {
   const db = new DatabaseSync(':memory:');
   for(const name of ['wiki_jobs','wiki_articles']) {
     const start=runtime.indexOf('CREATE TABLE IF NOT EXISTS '+name+' (');
@@ -23,7 +23,7 @@ function setup() {
   const env = {MLS_EDITORIAL_CHAT_KEY:'test-secret-only-not-for-production-000000',WIKI_DB:{prepare:bind,async batch(queries){db.exec('BEGIN');try{const results=queries.map((q,i)=>{if(i===failBatchAt)throw Error('simulated failure');const r=db.prepare(q.sql).run(...q.args);return {meta:{changes:Number(r.changes)}}});db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}}}};
   const context = {console:{error(){}},crypto:webcrypto,TextEncoder,TextDecoder,Request,Response,
     WIKI_FIFO_ORDER_SQL:'n',WIKI_PROMPT_VERSION:'32.0',SYSTEM_PROMPT:'Fixture editorial rules',LANGUAGE_MODULES:{'espanol-guatemala':'Fixture module'},
-    async ensureWikiDb(){},async getEditorialContextR32(_env,c){return {ok:true,standard:'MLS R32',promptVersion:'32.0',target:{...originalArticle,code:c,n:Number(c.slice(-4))},references:fixture.calibration.referenceCodes.map(c=>({code:c,articleMarkdown:'Fixture published reference.'})),profile:fixture.calibration.profile}}};
+    async ensureWikiDb(){},editorialProfileR32(rows){return {available:true,sampleSize:rows.length}},async getEditorialContextR32(_env,c){return {ok:true,standard:'MLS R32',promptVersion:'32.0',target:{...originalArticle,code:c,n:Number(c.slice(-4))},references:options.references || fixture.calibration.referenceCodes.map(c=>({code:c,articleMarkdown:'Fixture published reference.'})),profile:fixture.calibration.profile}}};
   vm.createContext(context);vm.runInContext(runtime.slice(basicStart,basicEnd)+'\n'+buildChatRuntime(root),context);
   const request = async (route,body,token=env.MLS_EDITORIAL_CHAT_KEY) => {
     const url = new URL('https://example.com/api/wiki/editorial/chat/'+route);
@@ -85,4 +85,13 @@ test('concurrent external publication is preserved and counted separately',async
   const p=await s.request('publish',{runId:id,draftId:d.draftId});assert.equal(p.data.published,false);assert.equal(p.data.preservedExisting,true);
   assert.equal(s.db.prepare('SELECT article_markdown FROM wiki_articles').get().article_markdown,'Existing text');
   assert.equal(p.data.run.alreadyPublishedElsewhere,1);
+});
+test('oversized Action context reduces complete references instead of blocking the run',async()=>{
+  const references=fixture.calibration.referenceCodes.map((c,i)=>({code:c,articleMarkdown:('Reference '+i+' ').repeat(1600)}));
+  const s=setup({references});const id=(await s.start(1)).data.run.id;
+  const next=await s.request('next?runId='+id);
+  assert.equal(next.status,200);assert.ok(next.data.context.references.length>=1);
+  assert.ok(next.data.context.references.length<references.length);
+  assert.equal(next.data.context.adaptiveCalibration,true);
+  assert.ok(JSON.stringify(next.data.context).length<=36000);
 });

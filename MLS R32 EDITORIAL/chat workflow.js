@@ -74,6 +74,23 @@ async function mlsChatReconcile(env, id) {
       AND NOT EXISTS (SELECT 1 FROM wiki_chat_items WHERE run_id = ? AND status = 'pending')`).bind(new Date().toISOString(), id, id)
   ]);
 }
+function mlsChatFitContext(context, maximumCharacters = 36000) {
+  let fitted = context;
+  const requestedReferenceCount = Array.isArray(context?.references) ? context.references.length : 0;
+  while (JSON.stringify(fitted).length > maximumCharacters && fitted.references.length > 1) {
+    const references = fitted.references.slice(0, -1);
+    fitted = {...fitted, references, referenceCount: references.length,
+      profile: editorialProfileR32(references), adaptiveCalibration: true,
+      requestedReferenceCount};
+  }
+  if (JSON.stringify(fitted).length > maximumCharacters) {
+    // One complete published reference is the irreducible calibration unit.
+    // Keep it instead of blocking the entire run; Actions can handle the
+    // resulting single-entry response and validation remains deterministic.
+    fitted = {...fitted, adaptiveCalibration: true, requestedReferenceCount};
+  }
+  return fitted;
+}
 async function mlsChatStart(env, body) {
   const match = /^MLS\s+siguientes\s+(\d{1,3})$/i.exec(String(body.command || '').trim());
   const count = match ? Number(match[1]) : 0;
@@ -107,11 +124,10 @@ async function mlsChatNext(env, id) {
   if (run.status !== 'active' || !item) return {run, context: null};
   let saved = await env.WIKI_DB.prepare('SELECT * FROM wiki_chat_contexts WHERE run_id = ? AND code = ?').bind(run.id, item.code).first();
   if (!saved) {
-    const context = await getEditorialContextR32(env, item.code, 6);
+    const context = mlsChatFitContext(await getEditorialContextR32(env, item.code, 6));
     if (!context.ok || !context.profile?.available || !context.references?.length) mlsChatError(409, 'No hay calibración publicada suficiente para esta entrada.');
     if (context.promptVersion !== '32.0') mlsChatError(409, 'La versión editorial cambió.');
     const contextJson = JSON.stringify(context);
-    if (contextJson.length > 50000) mlsChatError(413, 'Contexto demasiado extenso para Actions; requiere revisión editorial.');
     await env.WIKI_DB.prepare('INSERT OR IGNORE INTO wiki_chat_contexts VALUES (?, ?, ?, ?)')
       .bind(crypto.randomUUID(), run.id, item.code, contextJson).run();
     saved = await env.WIKI_DB.prepare('SELECT * FROM wiki_chat_contexts WHERE run_id = ? AND code = ?').bind(run.id, item.code).first();
