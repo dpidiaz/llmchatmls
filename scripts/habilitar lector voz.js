@@ -1,4 +1,4 @@
-import fs from "node:fs";
+const fs = require("fs");
 
 const readerPath = "public/js/reader.js";
 let source = fs.readFileSync(readerPath, "utf8");
