@@ -129,6 +129,7 @@
           <section class="reader-head simple-head">
             <div class="simple-meta">${m.flag} ${esc(m.name)} · ${esc(e.level)}</div>
             <h1>${esc(e.title)}</h1>${e.target?`<div class="target-title">${esc(e.target)}</div>`:''}
+            <nav class="reader-actions simple-actions" aria-label="Navegación entre temas">${prev?`<a class="btn" href="#entry=${prev.code}" rel="prev">← Anterior</a>`:'<button class="btn" type="button" disabled aria-disabled="true">← Anterior</button>'}${next?`<a class="btn primary" href="#entry=${next.code}" rel="next">Siguiente →</a>`:'<button class="btn primary" type="button" disabled aria-disabled="true">Siguiente →</button>'}</nav>
             <div class="reader-actions simple-actions"><button class="btn primary" id="listenBtn">🔊 Escuchar</button><button class="btn ai-entry-btn" id="aiExplainBtn">✨ Profesor IA</button><button class="btn" id="favBtn">${fav?'★ Guardado':'☆ Guardar'}</button></div>
           </section>
           <div class="replacement-status working" id="replacementStatus" role="status">Generando versión ampliada con IA…</div>
