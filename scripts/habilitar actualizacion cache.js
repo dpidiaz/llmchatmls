@@ -1,4 +1,4 @@
-import fs from "node:fs";
+const fs = require("fs");
 
 const indexPath = "public/index.html";
 if (!fs.existsSync(indexPath)) {
