@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MLS Editorial Runner</title>
+<script>window.__MLS_AUTO_MATERIALIZE_INSTALLED__ = true;</script>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#18202a;background:#f4f1eb}
+*{box-sizing:border-box}
+body{margin:0;background:#f4f1eb;color:#18202a}
+main{max-width:980px;margin:0 auto;padding:32px 20px 56px}
+h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.05;margin:0 0 10px}
+p{line-height:1.55;color:#56616c;font-size:1rem}
+.panel{background:#fffdf9;border:1px solid #ddd7cc;border-radius:18px;padding:20px;margin-top:22px;box-shadow:0 12px 30px rgba(40,34,24,.06)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+label{display:block;font-weight:700;font-size:.92rem;margin-bottom:7px}
+select,input,button{width:100%;font:inherit;font-size:1rem;border-radius:11px;border:1px solid #cfc7ba;padding:12px 13px;background:#fff;color:#18202a}
+button{font-weight:750;cursor:pointer;transition:.15s ease}
+button:hover:not(:disabled){transform:translateY(-1px)}
+button:disabled{opacity:.48;cursor:not-allowed}
+.actions{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-top:16px}
+@media(max-width:560px){.actions{grid-template-columns:1fr}}
+.primary{background:#213b31;color:#fff;border-color:#213b31}
+.secondary{background:#f0ece5}
+.danger{background:#fff4f2;border-color:#d9a29a;color:#802f25}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:#f7f4ee;border:1px solid #e2dcd1;border-radius:14px;padding:13px}
+.stat span{display:block;color:#6a736f;font-size:.82rem;margin-bottom:4px}.stat strong{font-size:1.45rem}
+.statusline{display:flex;align-items:center;gap:9px;margin:18px 0 4px;font-weight:700}
+.dot{width:10px;height:10px;border-radius:50%;background:#9aa19d}.dot.running{background:#2c7a52}.dot.paused{background:#c58b1e}.dot.error{background:#b84335}
+.current{margin-top:14px;padding:14px;border-radius:14px;background:#eef3ef;border:1px solid #d3dfd6}
+.current small{display:block;color:#68746d;margin-bottom:4px}.current strong{font-size:1.05rem}
+.progress{height:10px;background:#e5dfd5;border-radius:999px;overflow:hidden;margin-top:14px}.bar{height:100%;width:0;background:#345f4d;transition:width .2s ease}
+.log{margin-top:18px;border:1px solid #ddd7cc;background:#fbfaf7;border-radius:14px;max-height:320px;overflow:auto;padding:8px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;white-space:pre-wrap}
+.note{font-size:.9rem;margin-top:12px;color:#69736f}
+.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:#e7eee9;color:#315643;font-size:.78rem;font-weight:750;margin-left:6px}
+</style>
+</head>
+<body>
+<main>
+<h1>MLS Editorial Runner</h1>
+<p>Procesa entradas pendientes de un idioma de forma secuencial. El Runner toma una entrada, espera a que la generación editorial termine y quede guardada, y solo entonces pasa a la siguiente.</p>
+
+<section class="panel">
+<div class="grid">
+<div>
+<label for="language">Idioma</label>
+<select id="language">
+<option value="espanol-guatemala">Español de Guatemala</option>
+<option value="ingles">Inglés</option>
+<option value="portugues">Portugués brasileño</option>
+<option value="italiano">Italiano</option>
+<option value="frances">Francés</option>
+<option value="aleman">Alemán</option>
+<option value="japones">Japonés</option>
+<option value="chino-taiwan">Chino mandarín de Taiwán</option>
+<option value="coreano">Coreano</option>
+<option value="ruso">Ruso</option>
+</select>
+</div>
+<div>
+<label for="limit">Cantidad máxima</label>
+<select id="limit">
+<option value="3" selected>3 — prueba segura</option>
+<option value="10">10</option>
+<option value="40">40</option>
+<option value="100">100</option>
+<option value="500">500</option>
+<option value="0">Hasta agotar pendientes</option>
+</select>
+</div>
+<div>
+<label for="engine">Motor editorial</label>
+<input id="engine" value="Generador MLS actual" readonly>
+</div>
+</div>
+
+<div class="actions">
+<button class="primary" id="start">Iniciar</button>
+<button class="secondary" id="pause" disabled>Pausar</button>
+<button class="danger" id="stop" disabled>Detener</button>
+</div>
+
+<div class="statusline"><span class="dot" id="dot"></span><span id="statusText">Listo</span></div>
+<div class="current"><small>Entrada actual</small><strong id="current">—</strong><span class="badge" id="provider">sin iniciar</span></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<div class="stats">
+<div class="stat"><span>Procesadas</span><strong id="processed">0</strong></div>
+<div class="stat"><span>Errores</span><strong id="errors">0</strong></div>
+<div class="stat"><span>Pendientes</span><strong id="remaining">—</strong></div>
+<div class="stat"><span>Objetivo</span><strong id="target">3</strong></div>
+</div>
+
+<div class="log" id="log">Runner listo.</div>
+<p class="note">Pausar o detener se aplica entre entradas: una generación que ya comenzó se deja terminar para no desperdiciar trabajo ni dejar una entrada a medias. El proveedor real usado por cada artículo se muestra al terminar.</p>
+</section>
+</main>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const language = $("language");
+  const limit = $("limit");
+  const startButton = $("start");
+  const pauseButton = $("pause");
+  const stopButton = $("stop");
+  const statusText = $("statusText");
+  const dot = $("dot");
+  const current = $("current");
+  const provider = $("provider");
+  const processedNode = $("processed");
+  const errorsNode = $("errors");
+  const remainingNode = $("remaining");
+  const targetNode = $("target");
+  const bar = $("bar");
+  const logNode = $("log");
+
+  let running = false;
+  let paused = false;
+  let stopRequested = false;
+  let processed = 0;
+  let errors = 0;
+  let consecutiveErrors = 0;
+  let initialPending = 0;
+
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const stamp = () => new Date().toLocaleTimeString();
+
+  function log(message) {
+    logNode.textContent += `\n[${stamp()}] ${message}`;
+    logNode.scrollTop = logNode.scrollHeight;
+  }
+
+  function setState(text, kind = "") {
+    statusText.textContent = text;
+    dot.className = `dot ${kind}`.trim();
+  }
+
+  function setButtons() {
+    startButton.disabled = running;
+    pauseButton.disabled = !running;
+    stopButton.disabled = !running;
+    language.disabled = running;
+    limit.disabled = running;
+    pauseButton.textContent = paused ? "Continuar" : "Pausar";
+  }
+
+  function selectedLimit() {
+    return Math.max(0, Number(limit.value) || 0);
+  }
+
+  function updateProgress() {
+    const max = selectedLimit();
+    const denominator = max > 0 ? max : Math.max(1, initialPending);
+    const pct = Math.min(100, Math.round((processed / denominator) * 100));
+    bar.style.width = `${pct}%`;
+    processedNode.textContent = String(processed);
+    errorsNode.textContent = String(errors);
+    targetNode.textContent = max > 0 ? String(max) : "Todos";
+  }
+
+  async function fetchPending(pageSize = 1) {
+    const qs = new URLSearchParams({
+      language: language.value,
+      status: "pending",
+      page: "1",
+      pageSize: String(pageSize)
+    });
+    const response = await fetch(`/api/wiki/articles?${qs}`, { cache: "no-store", credentials: "same-origin" });
+    const data = await response.json();
+    if (!response.ok || !data.ok) throw new Error(data.error || `No se pudo consultar la cola: HTTP ${response.status}`);
+    remainingNode.textContent = String(data.total ?? 0);
+    return data;
+  }
+
+  async function materialize(code) {
+    const endpoint = `/api/wiki/materialize/${encodeURIComponent(code)}`;
+    for (let attempt = 0; attempt < 45; attempt += 1) {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { accept: "application/json" },
+        credentials: "same-origin",
+        cache: "no-store"
+      });
+
+      let payload = null;
+      try { payload = await response.json(); } catch { payload = null; }
+
+      if ((response.ok || response.status === 201) && payload?.article) return payload;
+
+      if (response.status === 202 || payload?.flag === "processing") {
+        const retryAfter = Math.max(1, Number(response.headers.get("retry-after") || 3));
+        setState(`Esperando ${code}…`, "running");
+        await sleep(Math.min(10, retryAfter) * 1000);
+        continue;
+      }
+
+      if (response.status === 503 && attempt < 2) {
+        const retryAfter = Math.max(1, Number(response.headers.get("retry-after") || 5));
+        log(`${code}: proveedor temporalmente no disponible; reintento en ${Math.min(30, retryAfter)} s.`);
+        await sleep(Math.min(30, retryAfter) * 1000);
+        continue;
+      }
+
+      const error = new Error(payload?.error || payload?.message || `HTTP ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
+    throw new Error(`${code}: la generación continúa ocupada después del tiempo máximo de espera.`);
+  }
+
+  async function refreshCounts() {
+    const data = await fetchPending(1);
+    return Number(data.total || 0);
+  }
+
+  async function run() {
+    running = true;
+    paused = false;
+    stopRequested = false;
+    processed = 0;
+    errors = 0;
+    consecutiveErrors = 0;
+    current.textContent = "—";
+    provider.textContent = "preparando";
+    logNode.textContent = "";
+    setButtons();
+    updateProgress();
+
+    try {
+      initialPending = await refreshCounts();
+      const max = selectedLimit();
+      const languageName = language.options[language.selectedIndex].text;
+      log(`Inicio: ${languageName}. Pendientes detectadas: ${initialPending}. Límite: ${max > 0 ? max : "hasta agotar"}.`);
+      setState("Ejecutándose", "running");
+
+      if (initialPending === 0) {
+        setState("No hay entradas pendientes", "");
+        return;
+      }
+
+      while (!stopRequested) {
+        while (paused && !stopRequested) {
+          setState("Pausado", "paused");
+          await sleep(250);
+        }
+        if (stopRequested) break;
+
+        const maxNow = selectedLimit();
+        if (maxNow > 0 && processed >= maxNow) {
+          log(`Objetivo alcanzado: ${processed} entradas procesadas.`);
+          setState("Objetivo completado", "");
+          break;
+        }
+
+        const queue = await fetchPending(1);
+        const next = queue.items?.[0];
+        if (!next) {
+          log("No quedan entradas pendientes para el idioma seleccionado.");
+          setState("Cola completada", "");
+          break;
+        }
+
+        current.textContent = next.code;
+        provider.textContent = "generando";
+        setState(`Generando ${next.code}`, "running");
+        log(`${next.code}: generación iniciada.`);
+
+        try {
+          const result = await materialize(next.code);
+          const article = result.article || {};
+          const usedProvider = article.provider || result.provider || "no informado";
+          const usedModel = article.model || result.model || "";
+          provider.textContent = usedProvider;
+          processed += 1;
+          consecutiveErrors = 0;
+          updateProgress();
+          log(`${next.code}: guardada correctamente con ${usedProvider}${usedModel ? ` · ${usedModel}` : ""}.`);
+          await refreshCounts();
+        } catch (error) {
+          errors += 1;
+          consecutiveErrors += 1;
+          errorsNode.textContent = String(errors);
+          log(`${next.code}: ERROR — ${error.message || error}`);
+          provider.textContent = "error";
+          setState(`Error en ${next.code}`, "error");
+
+          if (error.status === 429 || error.status === 503 || consecutiveErrors >= 3) {
+            log("Runner detenido por seguridad para evitar reintentos costosos o un bucle de errores.");
+            stopRequested = true;
+            break;
+          }
+
+          await sleep(1500);
+        }
+      }
+
+      if (stopRequested && statusText.textContent !== "Error") {
+        setState("Detenido", "");
+        log("Runner detenido.");
+      }
+    } catch (error) {
+      errors += 1;
+      errorsNode.textContent = String(errors);
+      setState("Error", "error");
+      log(`ERROR GENERAL — ${error.message || error}`);
+    } finally {
+      running = false;
+      paused = false;
+      stopRequested = false;
+      setButtons();
+      try { await refreshCounts(); } catch {}
+    }
+  }
+
+  startButton.addEventListener("click", () => { if (!running) run(); });
+  pauseButton.addEventListener("click", () => {
+    if (!running) return;
+    paused = !paused;
+    setButtons();
+    if (paused) log("Pausa solicitada; se aplicará al terminar la entrada actual.");
+    else { log("Runner reanudado."); setState("Ejecutándose", "running"); }
+  });
+  stopButton.addEventListener("click", () => {
+    if (!running) return;
+    stopRequested = true;
+    paused = false;
+    setState("Detención solicitada", "paused");
+    log("Detención solicitada; se aplicará al terminar la entrada actual.");
+  });
+
+  language.addEventListener("change", async () => {
+    localStorage.setItem("mlsRunnerLanguage", language.value);
+    try { initialPending = await refreshCounts(); } catch {}
+  });
+  limit.addEventListener("change", () => {
+    localStorage.setItem("mlsRunnerLimit", limit.value);
+    updateProgress();
+  });
+
+  const savedLanguage = localStorage.getItem("mlsRunnerLanguage");
+  const savedLimit = localStorage.getItem("mlsRunnerLimit");
+  if (savedLanguage && [...language.options].some((o) => o.value === savedLanguage)) language.value = savedLanguage;
+  if (savedLimit && [...limit.options].some((o) => o.value === savedLimit)) limit.value = savedLimit;
+  updateProgress();
+  refreshCounts().catch((error) => log(`No se pudo leer la cola todavía: ${error.message || error}`));
+})();
+</script>
+</body>
+</html>
