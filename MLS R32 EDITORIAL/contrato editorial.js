@@ -25,6 +25,26 @@ module.exports = Object.freeze({
   }),
   minimumWords: 90,
   requiresFourthLevelHeading: true,
+
+  // Coherencia editorial: las entradas ya publicadas son el patrón estilístico
+  // más importante. El prompt define la precisión lingüística; el corpus
+  // publicado define voz, densidad, estructura y proporción de ejemplos.
+  publishedCorpusIsStyleAuthority: true,
+  calibrationRequiredForExternalBatches: true,
+  referenceSampleSize: 6,
+  referenceEndpoint: '/api/wiki/editorial/reference',
+  contextEndpoint: '/api/wiki/editorial/context',
+  pendingEndpoint: '/api/wiki/editorial/pending',
+  calibrationDimensions: Object.freeze([
+    'extensión relativa',
+    'número y orden de secciones',
+    'densidad de ejemplos',
+    'longitud de párrafos',
+    'nivel de tecnicismo',
+    'progresión explicación → ejemplo → regla → matiz',
+    'forma de cerrar la entrada'
+  ]),
+
   importedArticleProvider: 'mls-r32',
   importedArticleModel: 'editorial-standard-32',
   importedAuditProvider: 'mls-r32-validator',
