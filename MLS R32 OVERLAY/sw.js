@@ -1,17 +1,57 @@
-const CACHE='mls-iphone11-2026-r32-scrollsimple-3';
+const CACHE='mls-iphone11-2026-r32-live';
 const SHELL=[
   './','./index.html','./assets/styles.css','./manifest.webmanifest','./data/index.js',
   './js/core.js','./js/map.js','./js/search.js','./js/compare.js','./js/ai.js','./js/wiki.js','./js/reader.js','./js/ios.js','./js/app.js',
   './assets/icon-192.png','./assets/icon-512.png','./assets/apple-touch-icon-180.png','./assets/splash-iphone11-828x1792.png'
 ];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('mls-iphone11-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+
+self.addEventListener('install',event=>event.waitUntil(
+  caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())
+));
+
+self.addEventListener('activate',event=>event.waitUntil(
+  caches.keys()
+    .then(keys=>Promise.all(keys.filter(key=>key.startsWith('mls-iphone11-')&&key!==CACHE).map(key=>caches.delete(key))))
+    .then(()=>self.clients.claim())
+));
+
+async function networkFirst(request){
+  try{
+    const response=await fetch(request,{cache:'no-store'});
+    if(response&&response.ok&&new URL(request.url).origin===self.location.origin){
+      const copy=response.clone();
+      caches.open(CACHE).then(cache=>cache.put(request,copy));
+    }
+    return response;
+  }catch(error){
+    const cached=await caches.match(request);
+    if(cached)return cached;
+    if(request.mode==='navigate')return caches.match('./index.html');
+    throw error;
+  }
+}
+
+async function cacheFirst(request){
+  const cached=await caches.match(request);
+  if(cached)return cached;
+  const response=await fetch(request);
+  if(response&&response.ok&&new URL(request.url).origin===self.location.origin){
+    const copy=response.clone();
+    caches.open(CACHE).then(cache=>cache.put(request,copy));
+  }
+  return response;
+}
+
 self.addEventListener('fetch',event=>{
   if(event.request.method!=='GET')return;
   const url=new URL(event.request.url);
-  if(url.pathname.startsWith('/api/')){event.respondWith(fetch(event.request));return;}
-  event.respondWith(caches.match(event.request).then(hit=>hit||fetch(event.request).then(resp=>{
-    if(resp&&resp.ok&&new URL(event.request.url).origin===self.location.origin){const copy=resp.clone();caches.open(CACHE).then(c=>c.put(event.request,copy));}
-    return resp;
-  }).catch(()=>event.request.mode==='navigate'?caches.match('./index.html'):undefined)));
+  if(url.pathname.startsWith('/api/')){
+    event.respondWith(fetch(event.request,{cache:'no-store'}));
+    return;
+  }
+
+  const destination=event.request.destination;
+  const needsFreshCode=event.request.mode==='navigate'||destination==='document'||destination==='script'||destination==='style'||url.pathname.endsWith('.html')||url.pathname.endsWith('.js')||url.pathname.endsWith('.css');
+
+  event.respondWith(needsFreshCode?networkFirst(event.request):cacheFirst(event.request));
 });
