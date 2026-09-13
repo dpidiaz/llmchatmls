@@ -1,0 +1,869 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "MLS Editorial privado",
+    "version": "32.0.1",
+    "description": "Redacción en ChatGPT y publicación validada de lotes FIFO, reanudables, de 1 a 100 entradas."
+  },
+  "servers": [
+    {
+      "url": "https://llmchatmls.dpidiaz.workers.dev"
+    }
+  ],
+  "security": [
+    {
+      "MLSKey": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "MLSKey": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "paths": {
+    "/api/wiki/editorial/chat/status": {
+      "get": {
+        "operationId": "estadoMLS",
+        "summary": "Consultar progreso del lote sin publicar entradas.",
+        "x-openai-isConsequential": false,
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Identificador del lote; omitir para consultar el activo."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resultado y progreso confirmado del servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "run": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "requested": {
+                          "type": "integer"
+                        },
+                        "selected": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "published": {
+                          "type": "integer"
+                        },
+                        "alreadyPublishedElsewhere": {
+                          "type": "integer"
+                        },
+                        "remaining": {
+                          "type": "integer"
+                        },
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "position": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "contextId": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "editorialRules": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "valid": {
+                      "type": "boolean"
+                    },
+                    "draftId": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "published": {
+                      "type": "boolean"
+                    },
+                    "preservedExisting": {
+                      "type": "boolean"
+                    },
+                    "reused": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "articleUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de lote, orden o contexto; consultar estado."
+          },
+          "422": {
+            "description": "Borrador no válido; corregir antes de publicar."
+          },
+          "503": {
+            "description": "Conexión editorial sin configurar."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/chat/next": {
+      "get": {
+        "operationId": "siguienteContextoMLS",
+        "summary": "Obtener la siguiente semilla, referencias publicadas y reglas R32 del lote.",
+        "x-openai-isConsequential": false,
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Identificador del lote; omitir para consultar el activo."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resultado y progreso confirmado del servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "run": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "requested": {
+                          "type": "integer"
+                        },
+                        "selected": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "published": {
+                          "type": "integer"
+                        },
+                        "alreadyPublishedElsewhere": {
+                          "type": "integer"
+                        },
+                        "remaining": {
+                          "type": "integer"
+                        },
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "position": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "contextId": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "editorialRules": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "valid": {
+                      "type": "boolean"
+                    },
+                    "draftId": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "published": {
+                      "type": "boolean"
+                    },
+                    "preservedExisting": {
+                      "type": "boolean"
+                    },
+                    "reused": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "articleUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de lote, orden o contexto; consultar estado."
+          },
+          "422": {
+            "description": "Borrador no válido; corregir antes de publicar."
+          },
+          "503": {
+            "description": "Conexión editorial sin configurar."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/chat/start": {
+      "post": {
+        "operationId": "iniciarLoteMLS",
+        "summary": "Abrir un lote FIFO acotado o recuperar uno activo; no genera artículos.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "pattern": "^MLS siguientes [0-9]{1,3}$"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "minLength": 16,
+                    "maxLength": 80
+                  }
+                },
+                "required": [
+                  "command",
+                  "requestId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado y progreso confirmado del servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "run": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "requested": {
+                          "type": "integer"
+                        },
+                        "selected": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "published": {
+                          "type": "integer"
+                        },
+                        "alreadyPublishedElsewhere": {
+                          "type": "integer"
+                        },
+                        "remaining": {
+                          "type": "integer"
+                        },
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "position": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "contextId": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "editorialRules": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "valid": {
+                      "type": "boolean"
+                    },
+                    "draftId": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "published": {
+                      "type": "boolean"
+                    },
+                    "preservedExisting": {
+                      "type": "boolean"
+                    },
+                    "reused": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "articleUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de lote, orden o contexto; consultar estado."
+          },
+          "422": {
+            "description": "Borrador no válido; corregir antes de publicar."
+          },
+          "503": {
+            "description": "Conexión editorial sin configurar."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/chat/validate": {
+      "post": {
+        "operationId": "validarBorradorMLS",
+        "summary": "Validar y guardar una entrada redactada contra su contexto y contrato R32.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "runId": {
+                    "type": "string"
+                  },
+                  "contextId": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "articleMarkdown": {
+                    "type": "string",
+                    "maxLength": 16000
+                  },
+                  "referenceCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "editorialReview": {
+                    "type": "string",
+                    "minLength": 40,
+                    "maxLength": 3000
+                  }
+                },
+                "required": [
+                  "runId",
+                  "contextId",
+                  "code",
+                  "articleMarkdown",
+                  "referenceCodes",
+                  "editorialReview"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado y progreso confirmado del servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "run": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "requested": {
+                          "type": "integer"
+                        },
+                        "selected": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "published": {
+                          "type": "integer"
+                        },
+                        "alreadyPublishedElsewhere": {
+                          "type": "integer"
+                        },
+                        "remaining": {
+                          "type": "integer"
+                        },
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "position": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "contextId": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "editorialRules": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "valid": {
+                      "type": "boolean"
+                    },
+                    "draftId": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "published": {
+                      "type": "boolean"
+                    },
+                    "preservedExisting": {
+                      "type": "boolean"
+                    },
+                    "reused": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "articleUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de lote, orden o contexto; consultar estado."
+          },
+          "422": {
+            "description": "Borrador no válido; corregir antes de publicar."
+          },
+          "503": {
+            "description": "Conexión editorial sin configurar."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/chat/publish": {
+      "post": {
+        "operationId": "publicarBorradorMLS",
+        "summary": "Publicar solamente el borrador validado indicado, sin sobrescribir artículos existentes.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "runId": {
+                    "type": "string"
+                  },
+                  "draftId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "runId",
+                  "draftId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado y progreso confirmado del servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "run": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "requested": {
+                          "type": "integer"
+                        },
+                        "selected": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "published": {
+                          "type": "integer"
+                        },
+                        "alreadyPublishedElsewhere": {
+                          "type": "integer"
+                        },
+                        "remaining": {
+                          "type": "integer"
+                        },
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "position": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "contextId": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "editorialRules": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "valid": {
+                      "type": "boolean"
+                    },
+                    "draftId": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "published": {
+                      "type": "boolean"
+                    },
+                    "preservedExisting": {
+                      "type": "boolean"
+                    },
+                    "reused": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "articleUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de lote, orden o contexto; consultar estado."
+          },
+          "422": {
+            "description": "Borrador no válido; corregir antes de publicar."
+          },
+          "503": {
+            "description": "Conexión editorial sin configurar."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/chat/cancel": {
+      "post": {
+        "operationId": "cancelarLoteMLS",
+        "summary": "Cancelar el trabajo pendiente del lote ante solicitud explícita; conserva lo publicado.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "runId": {
+                    "type": "string"
+                  },
+                  "confirm": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "runId",
+                  "confirm"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado y progreso confirmado del servidor.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "run": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "requested": {
+                          "type": "integer"
+                        },
+                        "selected": {
+                          "type": "integer"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "published": {
+                          "type": "integer"
+                        },
+                        "alreadyPublishedElsewhere": {
+                          "type": "integer"
+                        },
+                        "remaining": {
+                          "type": "integer"
+                        },
+                        "entries": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "position": {
+                                "type": "integer"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "contextId": {
+                      "type": "string"
+                    },
+                    "context": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "editorialRules": {
+                      "type": "object",
+                      "additionalProperties": true
+                    },
+                    "valid": {
+                      "type": "boolean"
+                    },
+                    "draftId": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "published": {
+                      "type": "boolean"
+                    },
+                    "preservedExisting": {
+                      "type": "boolean"
+                    },
+                    "reused": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "articleUrl": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de lote, orden o contexto; consultar estado."
+          },
+          "422": {
+            "description": "Borrador no válido; corregir antes de publicar."
+          },
+          "503": {
+            "description": "Conexión editorial sin configurar."
+          }
+        }
+      }
+    }
+  }
+}
