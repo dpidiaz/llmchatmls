@@ -37,6 +37,10 @@ function countWords(text) {
   return clean ? clean.split(/\s+/u).length : 0;
 }
 
+function countFourthLevelHeadings(text) {
+  return (String(text || '').match(/^####\s+.+$/gmu) || []).length;
+}
+
 function verifyCanonicalRuntime() {
   const runtimePath = path.resolve(contract.canonicalRuntime);
   if (!fs.existsSync(runtimePath)) fail(`Falta el runtime canónico R32: ${runtimePath}.`);
@@ -57,7 +61,44 @@ function assertSafeBatchId(value, fileName) {
   return id;
 }
 
-function validateArticle(article, index, fileName) {
+function validateCalibration(batch, fileName) {
+  if (!contract.calibrationRequiredForExternalBatches) {
+    return { mode: 'not-required', referenceCodes: [], profile: null };
+  }
+
+  const calibration = batch.calibration;
+  if (!calibration || typeof calibration !== 'object' || Array.isArray(calibration)) {
+    fail(`${fileName}: falta calibration; todo lote externo debe calibrarse contra entradas ya publicadas.`);
+  }
+  if (calibration.mode !== 'published-corpus') {
+    fail(`${fileName}: calibration.mode debe ser published-corpus.`);
+  }
+
+  const referenceCodes = Array.isArray(calibration.referenceCodes)
+    ? [...new Set(calibration.referenceCodes.map(value => String(value || '').trim().toUpperCase()).filter(Boolean))]
+    : [];
+  if (referenceCodes.length === 0) {
+    fail(`${fileName}: calibration.referenceCodes debe incluir al menos una entrada publicada usada como referencia.`);
+  }
+  for (const code of referenceCodes) {
+    if (!/^MLS-V\d{2}-\d{4}$/.test(code)) fail(`${fileName}: código de referencia inválido: ${code}.`);
+  }
+
+  const profile = calibration.profile && typeof calibration.profile === 'object' && !Array.isArray(calibration.profile)
+    ? calibration.profile
+    : null;
+  if (!profile || !profile.available || Number(profile.sampleSize || 0) < 1) {
+    fail(`${fileName}: calibration.profile debe provenir del endpoint editorial de contexto y contener una muestra publicada.`);
+  }
+
+  return {
+    mode: 'published-corpus',
+    referenceCodes,
+    profile
+  };
+}
+
+function validateArticle(article, index, fileName, calibration) {
   const label = `${fileName} artículo ${index + 1}`;
   if (!article || typeof article !== 'object' || Array.isArray(article)) fail(`${label}: formato inválido.`);
 
@@ -79,7 +120,8 @@ function validateArticle(article, index, fileName) {
 
   const markdown = String(article.articleMarkdown || '').trim();
   if (!markdown) fail(`${label}: falta articleMarkdown.`);
-  if (countWords(markdown) < contract.minimumWords) {
+  const words = countWords(markdown);
+  if (words < contract.minimumWords) {
     fail(`${label}: tiene menos de ${contract.minimumWords} palabras.`);
   }
   if (contract.requiresFourthLevelHeading && !markdown.includes('####')) {
@@ -87,6 +129,27 @@ function validateArticle(article, index, fileName) {
   }
   if (/\b(examen|quiz|ejercicio|tarea|flashcards|gamificaci[oó]n)\b/iu.test(markdown) && /(?:responde|completa|practica|elige|contesta|actividad)/iu.test(markdown)) {
     fail(`${label}: parece convertir la entrada en actividad o curso, contrario al estándar R32.`);
+  }
+
+  const profile = calibration?.profile;
+  if (profile?.words && Number(profile.sampleSize || 0) > 0) {
+    const referenceMin = Number(profile.words.min || 0);
+    const referenceMax = Number(profile.words.max || 0);
+    if (referenceMin > 0 && referenceMax > 0) {
+      const lower = Math.max(contract.minimumWords, Math.floor(referenceMin * 0.5));
+      const upper = Math.max(lower + 1, Math.ceil(referenceMax * 1.8));
+      if (words < lower || words > upper) {
+        fail(`${label}: extensión ${words} palabras fuera del margen de coherencia del corpus publicado (${lower}–${upper}).`);
+      }
+    }
+  }
+
+  if (profile?.headings && Number(profile.sampleSize || 0) > 0) {
+    const headingCount = countFourthLevelHeadings(markdown);
+    const referenceMax = Number(profile.headings.max || 0);
+    if (referenceMax > 0 && headingCount > referenceMax + 4) {
+      fail(`${label}: contiene ${headingCount} secciones ####; se aleja demasiado de la estructura publicada.`);
+    }
   }
 
   return {
@@ -116,7 +179,8 @@ function loadBatch(filePath) {
   const id = assertSafeBatchId(batch.id, fileName);
   if (!Array.isArray(batch.articles) || batch.articles.length === 0) fail(`${fileName}: no contiene artículos.`);
 
-  const articles = batch.articles.map((article, index) => validateArticle(article, index, fileName));
+  const calibration = validateCalibration(batch, fileName);
+  const articles = batch.articles.map((article, index) => validateArticle(article, index, fileName, calibration));
   const codes = new Set();
   for (const article of articles) {
     if (codes.has(article.code)) fail(`${fileName}: código duplicado ${article.code}.`);
@@ -130,6 +194,7 @@ function loadBatch(filePath) {
     generator: String(batch.generator || 'chatgpt').trim() || 'chatgpt',
     generatorModel: String(batch.generatorModel || 'unspecified').trim() || 'unspecified',
     generatedAt: String(batch.generatedAt || new Date().toISOString()),
+    calibration,
     articles
   };
 }
@@ -139,6 +204,7 @@ function buildSql(batch) {
   const now = new Date().toISOString();
   const lines = [
     `CREATE TABLE IF NOT EXISTS wiki_editorial_batches (\n      batch_id TEXT PRIMARY KEY,\n      standard TEXT NOT NULL,\n      prompt_version TEXT NOT NULL,\n      generator TEXT NOT NULL,\n      generator_model TEXT NOT NULL,\n      article_count INTEGER NOT NULL,\n      generated_at TEXT NOT NULL,\n      imported_at TEXT NOT NULL\n    );`,
+    `CREATE TABLE IF NOT EXISTS wiki_editorial_calibration (\n      batch_id TEXT PRIMARY KEY,\n      mode TEXT NOT NULL,\n      reference_codes TEXT NOT NULL,\n      profile_json TEXT NOT NULL,\n      FOREIGN KEY(batch_id) REFERENCES wiki_editorial_batches(batch_id)\n    );`,
     'BEGIN TRANSACTION;'
   ];
 
@@ -149,6 +215,7 @@ function buildSql(batch) {
   }
 
   lines.push(`INSERT OR IGNORE INTO wiki_editorial_batches(\n    batch_id, standard, prompt_version, generator, generator_model, article_count, generated_at, imported_at\n  ) VALUES (\n    ${sqlText(batch.id)}, ${sqlText(batch.standard)}, ${sqlText(batch.promptVersion)},\n    ${sqlText(batch.generator)}, ${sqlText(batch.generatorModel)}, ${batch.articles.length},\n    ${sqlText(batch.generatedAt)}, ${sqlText(now)}\n  );`);
+  lines.push(`INSERT OR IGNORE INTO wiki_editorial_calibration(\n    batch_id, mode, reference_codes, profile_json\n  ) VALUES (\n    ${sqlText(batch.id)}, ${sqlText(batch.calibration.mode)},\n    ${sqlText(JSON.stringify(batch.calibration.referenceCodes))},\n    ${sqlText(JSON.stringify(batch.calibration.profile))}\n  );`);
   lines.push('COMMIT;');
   return lines.join('\n\n');
 }
@@ -159,7 +226,7 @@ function importBatch(filePath) {
   const tempPath = path.join(os.tmpdir(), tempName);
   fs.writeFileSync(tempPath, buildSql(batch), 'utf8');
 
-  console.log(`Importando ${batch.id}: ${batch.articles.length} artículos bajo ${batch.standard}…`);
+  console.log(`Importando ${batch.id}: ${batch.articles.length} artículos bajo ${batch.standard}, calibrados con ${batch.calibration.referenceCodes.length} referencias publicadas…`);
   const result = spawnSync(
     process.platform === 'win32' ? 'npx.cmd' : 'npx',
     ['wrangler', 'd1', 'execute', DB_BINDING, '--remote', '--yes', `--file=${tempPath}`],
