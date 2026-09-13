@@ -37,6 +37,19 @@ function countWords(text) {
   return clean ? clean.split(/\s+/u).length : 0;
 }
 
+function verifyCanonicalRuntime() {
+  const runtimePath = path.resolve(contract.canonicalRuntime);
+  if (!fs.existsSync(runtimePath)) fail(`Falta el runtime canónico R32: ${runtimePath}.`);
+  const runtime = fs.readFileSync(runtimePath, 'utf8');
+  const versionPattern = new RegExp(`WIKI_PROMPT_VERSION\\s*=\\s*[\"']${contract.promptVersion.replace('.', '\\.')}[\"']`);
+  if (!versionPattern.test(runtime)) {
+    fail(`El runtime ya no usa promptVersion ${contract.promptVersion}; se bloquea la importación para evitar deriva editorial.`);
+  }
+  for (const [label, symbol] of Object.entries(contract.canonicalSymbols || {})) {
+    if (!runtime.includes(symbol)) fail(`El runtime R32 ya no contiene ${label}: ${symbol}.`);
+  }
+}
+
 function assertSafeBatchId(value, fileName) {
   const id = String(value || '').trim();
   if (!id) fail(`${fileName}: falta batch.id.`);
@@ -160,6 +173,7 @@ function importBatch(filePath) {
 
 function main() {
   if (!fs.existsSync(CONTRACT_PATH)) fail(`Falta ${CONTRACT_PATH}.`);
+  verifyCanonicalRuntime();
   if (!fs.existsSync(BATCH_DIR)) {
     console.log('No hay lotes editoriales pendientes.');
     return;
