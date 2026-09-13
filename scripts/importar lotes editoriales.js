@@ -205,7 +205,7 @@ function buildSql(batch) {
   const lines = [
     `CREATE TABLE IF NOT EXISTS wiki_editorial_batches (\n      batch_id TEXT PRIMARY KEY,\n      standard TEXT NOT NULL,\n      prompt_version TEXT NOT NULL,\n      generator TEXT NOT NULL,\n      generator_model TEXT NOT NULL,\n      article_count INTEGER NOT NULL,\n      generated_at TEXT NOT NULL,\n      imported_at TEXT NOT NULL\n    );`,
     `CREATE TABLE IF NOT EXISTS wiki_editorial_calibration (\n      batch_id TEXT PRIMARY KEY,\n      mode TEXT NOT NULL,\n      reference_codes TEXT NOT NULL,\n      profile_json TEXT NOT NULL,\n      FOREIGN KEY(batch_id) REFERENCES wiki_editorial_batches(batch_id)\n    );`,
-    'BEGIN TRANSACTION;'
+    // D1 wraps file imports in a transaction; explicit BEGIN/COMMIT are unsupported.
   ];
 
   for (const article of batch.articles) {
@@ -216,7 +216,6 @@ function buildSql(batch) {
 
   lines.push(`INSERT OR IGNORE INTO wiki_editorial_batches(\n    batch_id, standard, prompt_version, generator, generator_model, article_count, generated_at, imported_at\n  ) VALUES (\n    ${sqlText(batch.id)}, ${sqlText(batch.standard)}, ${sqlText(batch.promptVersion)},\n    ${sqlText(batch.generator)}, ${sqlText(batch.generatorModel)}, ${batch.articles.length},\n    ${sqlText(batch.generatedAt)}, ${sqlText(now)}\n  );`);
   lines.push(`INSERT OR IGNORE INTO wiki_editorial_calibration(\n    batch_id, mode, reference_codes, profile_json\n  ) VALUES (\n    ${sqlText(batch.id)}, ${sqlText(batch.calibration.mode)},\n    ${sqlText(JSON.stringify(batch.calibration.referenceCodes))},\n    ${sqlText(JSON.stringify(batch.calibration.profile))}\n  );`);
-  lines.push('COMMIT;');
   return lines.join('\n\n');
 }
 
