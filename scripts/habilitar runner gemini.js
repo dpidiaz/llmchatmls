@@ -18,7 +18,7 @@ let source = fs.readFileSync(indexPath, "utf8");
 source = replaceOnce(
   source,
   `async function runWithFallback(env, seedCode, messages, maxTokens, temperature, excludeId, preferCheapCloudflare = false) {\n  let providers = await availableProviders(env, seedCode, excludeId);\n  if (preferCheapCloudflare && excludeId !== "cloudflare-auditor") {`,
-  `async function runWithFallback(env, seedCode, messages, maxTokens, temperature, excludeId, preferCheapCloudflare = false, preferredProviderId = null) {\n  let providers = await availableProviders(env, seedCode, excludeId);\n  if (preferredProviderId) {\n    providers = providers.filter((provider) => provider.id === preferredProviderId);\n    if (!providers.length) {\n      throw new NoProviderAvailableError(\`El proveedor solicitado [0m\${preferredProviderId} no está configurado, está en cooldown o no tiene cuota disponible.\`, 900);\n    }\n  }\n  if (!preferredProviderId && preferCheapCloudflare && excludeId !== "cloudflare-auditor") {`,
+  `async function runWithFallback(env, seedCode, messages, maxTokens, temperature, excludeId, preferCheapCloudflare = false, preferredProviderId = null) {\n  let providers = await availableProviders(env, seedCode, excludeId);\n  if (preferredProviderId) {\n    providers = providers.filter((provider) => provider.id === preferredProviderId);\n    if (!providers.length) {\n      throw new NoProviderAvailableError(\`El proveedor solicitado \${preferredProviderId} no está configurado, está en cooldown o no tiene cuota disponible.\`, 900);\n    }\n  }\n  if (!preferredProviderId && preferCheapCloudflare && excludeId !== "cloudflare-auditor") {`,
   "preferencia explícita de proveedor"
 );
 
@@ -46,7 +46,7 @@ source = replaceOnce(
 source = replaceOnce(
   source,
   `  return runWithFallback(env, \`\${seed.code}-fix\`, messages, 3200, 0.05, preferredExclude);\n}\n__name(correctWikiDraftR32, "correctWikiDraftR32");`,
-  `  return runWithFallback(env, \`\${seed.code}-fix\`, messages, 3200, 0.05, preferredExclude, false, preferredProviderId);\n}\n__name(correctWikiDraftR32, "correctWikiDraftR32");`,
+  `  const effectiveExclude = preferredProviderId && preferredExclude === preferredProviderId ? void 0 : preferredExclude;\n  return runWithFallback(env, \`\${seed.code}-fix\`, messages, 3200, 0.05, effectiveExclude, false, preferredProviderId);\n}\n__name(correctWikiDraftR32, "correctWikiDraftR32");`,
   "proveedor preferido en corrección"
 );
 
