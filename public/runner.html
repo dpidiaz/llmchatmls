@@ -78,7 +78,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 </div>
 <div>
 <label for="engine">Motor editorial</label>
-<input id="engine" value="Generador MLS actual" readonly>
+<input id="engine" value="Solo proveedores permitidos por política ZERO COST" readonly>
 </div>
 </div>
 
@@ -240,6 +240,11 @@ button:disabled{opacity:.48;cursor:not-allowed}
     const data = await fetchPending(1);
     return Number(data.total || 0);
   }
+  async function freeCircuit() {
+    const response=await fetch('/api/wiki/status',{cache:'no-store',credentials:'same-origin'});
+    const data=await response.json();
+    return data?.cloudflare?.workersAiCircuit || null;
+  }
 
   async function run() {
     running = true;
@@ -255,6 +260,13 @@ button:disabled{opacity:.48;cursor:not-allowed}
     updateProgress();
 
     try {
+      const circuit=await freeCircuit();
+      if (circuit?.status === 'quota_exhausted' && Date.parse(circuit.resetAt) > Date.now()) {
+        provider.textContent='FREE agotado'; current.textContent=circuit.resetAt;
+        setState('Workers AI FREE agotado hasta 00:00 UTC. Runner detenido para mantener costo $0.','paused');
+        log(`Workers AI FREE agotado. ResetAt: ${circuit.resetAt}. No se hizo ninguna inferencia.`);
+        return;
+      }
       initialPending = await refreshCounts();
       const max = selectedLimit();
       const languageName = language.options[language.selectedIndex].text;

@@ -140,12 +140,19 @@ test('two rescue runners atomically claim different deferred incidents',async()=
   await s.rescue('finish',{incidentId:a.data.incident.id,claimId:a.data.claimId,outcome:'infrastructure'});
   assert.equal(s.db.prepare('SELECT runner_attempts,rescue_state FROM wiki_chat_incidents WHERE id=?').get(a.data.incident.id).runner_attempts,0);
 });
+test('chat rescue reserves deferred incidents only and cancellation releases them',async()=>{
+  const s=setup();const original=(await s.start(2)).data.run;
+  for(let item=0;item<2;item++) for(let n=0;n<3;n++) { const next=(await s.request('next?runId='+original.id)).data; await s.request('validate',{runId:original.id,contextId:next.contextId,code:next.context.target.code,articleMarkdown:'short',referenceCodes:fixture.calibration.referenceCodes,editorialReview:'Fixture review verifies grammar, examples, headings and corpus calibration.'}); }
+  const a=await s.request('start',{command:'MLS rescate siguientes 2',requestId:'chat-rescue-request-01'});assert.equal(a.status,200);assert.equal(a.data.run.runType,'rescue-chat');assert.equal(a.data.run.selected,2);
+  const next=await s.request('next?runId='+a.data.run.id);assert.ok([code(1),code(2)].includes(next.data.context.target.code));
+  await s.request('cancel',{runId:a.data.run.id,confirm:true});assert.equal(s.db.prepare("SELECT COUNT(*) AS n FROM wiki_chat_incidents WHERE rescue_state='pending'").get().n,2);
+});
 test('Cloudflare inference retries an empty response before failing regeneration',async()=>{
   const source=fs.readFileSync(path.join(root,'MLS R32 OVERLAY/index.js'),'utf8');
   const begin=source.indexOf('async function runCloudflareProvider(');
   const end=source.indexOf('__name(runCloudflareProvider',begin);
   let calls=0,released=0,settled=0;const usage=[];
-  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:Error,
+  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:Error,WorkersQuotaExceededError:Error,ZeroCostPolicyError:Error,workersAiFailureKind(){return 'other'},
     wikiStore(){return {async reserveCloudflareBudget(){return {ok:true,reserved:0}},async settleCloudflareBudget(){settled++},async releaseCloudflareBudget(){released++},async markQuotaExhausted(){}}},
     secondsUntilNextUtcDay(){return 60},wikiTextResult(result){return result.text||''},wikiUsageResult(){return {promptTokens:10,completionTokens:20}},
     cloudflareNeurons(){return 1},async recordProviderUsage(_env,_id,prompt,completion,error){usage.push({prompt,completion,error})},
@@ -162,7 +169,7 @@ test('Cloudflare capacity errors switch models without repeating the saturated m
   const begin=source.indexOf('async function runCloudflareProvider(');
   const end=source.indexOf('__name(runCloudflareProvider',begin);
   let calls=0,released=0;
-  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:Error,
+  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:Error,WorkersQuotaExceededError:Error,ZeroCostPolicyError:Error,workersAiFailureKind(message){return String(message).includes('3040')?'capacity':'other'},
     wikiStore(){return {async reserveCloudflareBudget(){return {ok:true,reserved:0}},async settleCloudflareBudget(){},async releaseCloudflareBudget(){released++},async markQuotaExhausted(){}}},
     secondsUntilNextUtcDay(){return 60},wikiTextResult(){return ''},wikiUsageResult(){return {promptTokens:0,completionTokens:0}},
     cloudflareNeurons(){return 0},async recordProviderUsage(){},wikiErrorMessage(error){return error?.message||String(error)},isWorkersAIDailyQuotaError(){return false}};
@@ -177,13 +184,13 @@ test('Cloudflare daily quota errors are reported honestly and persisted',async()
   const end=source.indexOf('__name(runCloudflareProvider',begin);
   let calls=0,marked=0,released=0;
   class ProviderUnavailable extends Error { constructor(message,delaySeconds){super(message);this.delaySeconds=delaySeconds} }
-  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:ProviderUnavailable,
+  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:ProviderUnavailable,WorkersQuotaExceededError:ProviderUnavailable,ZeroCostPolicyError:Error,workersAiFailureKind(message){return String(message).includes('3036')?'quota':'other'},
     wikiStore(){return {async reserveCloudflareBudget(){return {ok:true,reserved:0}},async settleCloudflareBudget(){},async releaseCloudflareBudget(){released++},async markQuotaExhausted(){marked++}}},
     secondsUntilNextUtcDay(){return 3600},wikiTextResult(){return ''},wikiUsageResult(){return {promptTokens:0,completionTokens:0}},
     cloudflareNeurons(){return 0},async recordProviderUsage(){},wikiErrorMessage(error){return error?.message||String(error)},
     isWorkersAIDailyQuotaError(message){return message.includes('3036')}};
   vm.createContext(sandbox);vm.runInContext(source.slice(begin,end),sandbox);
   const env={AI:{async run(){calls++;throw Error('3036: used up your daily free allocation')}}};
-  await assert.rejects(sandbox.runCloudflareProvider(env,{id:'cloudflare-gemma',model:'model'},[],100,0.1),/agotó su cuota diaria real/);
+  await assert.rejects(sandbox.runCloudflareProvider(env,{id:'cloudflare-gemma',model:'model'},[],100,0.1),/FREE agotado/);
   assert.equal(calls,1);assert.equal(marked,1);assert.equal(released,1);
 });

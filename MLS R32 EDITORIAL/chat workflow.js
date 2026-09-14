@@ -68,7 +68,12 @@ async function mlsChatEnsureDb(env) {
       runner_attempts INTEGER NOT NULL DEFAULT 0, runner_claim_id TEXT, runner_claimed_at TEXT,
       UNIQUE(source_run_id, code))`),
     env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_chat_incident_runner_idx
-      ON wiki_chat_incidents(rescue_state, runner_eligible, created_at)`)
+      ON wiki_chat_incidents(rescue_state, runner_eligible, created_at)`),
+    env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_chat_run_meta (run_id TEXT PRIMARY KEY, run_type TEXT NOT NULL DEFAULT 'normal')`),
+    env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_chat_rescue_claims (
+      incident_id TEXT PRIMARY KEY, run_id TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'pending', editorial_attempts INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL, updated_at TEXT NOT NULL)`),
+    env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_chat_rescue_claim_run_idx ON wiki_chat_rescue_claims(run_id, status)`)
   ]);
 }
 async function mlsChatRun(env, id) {
@@ -77,7 +82,8 @@ async function mlsChatRun(env, id) {
     : await env.WIKI_DB.prepare('SELECT * FROM wiki_chat_runs WHERE id = ?').bind(id).first();
   if (!run) return null;
   const {results} = await env.WIKI_DB.prepare('SELECT position, code, status FROM wiki_chat_items WHERE run_id = ? ORDER BY position').bind(run.id).all();
-  return {id: run.id, requested: run.requested, selected: results.length, status: run.status,
+  const meta = await env.WIKI_DB.prepare('SELECT run_type FROM wiki_chat_run_meta WHERE run_id = ?').bind(run.id).first();
+  return {id: run.id, runType: meta?.run_type || 'normal', requested: run.requested, selected: results.length, status: run.status,
     published: results.filter(x => x.status === 'published').length,
     alreadyPublishedElsewhere: results.filter(x => x.status === 'external').length,
     preservedExisting: results.filter(x => x.status === 'external').length,
@@ -112,22 +118,35 @@ function mlsChatFitContext(context, maximumCharacters = 36000) {
   return fitted;
 }
 async function mlsChatStart(env, body) {
-  const match = /^MLS\s+siguientes\s+(\d{1,3})$/i.exec(String(body.command || '').trim());
+  const command = String(body.command || '').trim();
+  const rescue = /^MLS\s+rescate\s+siguientes\s+(\d{1,3})$/i.exec(command);
+  const match = rescue || /^MLS\s+siguientes\s+(\d{1,3})$/i.exec(command);
   const count = match ? Number(match[1]) : 0;
-  if (!Number.isInteger(count) || count < 1 || count > 400) mlsChatError(400, 'Usa MLS siguientes N, con N entre 1 y 400.');
+  if (!Number.isInteger(count) || count < 1 || count > 400) mlsChatError(400, 'Usa MLS siguientes N o MLS rescate siguientes N, con N entre 1 y 400.');
   if (!/^[A-Za-z0-9_-]{16,80}$/.test(body.requestId || '')) mlsChatError(400, 'requestId debe ser un identificador estable de 16–80 caracteres.');
   const previous = await env.WIKI_DB.prepare('SELECT id FROM wiki_chat_runs WHERE request_id = ?').bind(body.requestId).first();
   if (previous) return {reused: true, run: await mlsChatRun(env, previous.id)};
   const id = crypto.randomUUID(), now = new Date().toISOString();
   // This is one D1 transaction. The partial reservation index makes the
   // INSERT..SELECT an atomic FIFO claim even when requests arrive together.
+  const runType = rescue ? 'rescue-chat' : 'normal';
   const queries = [
     env.WIKI_DB.prepare('INSERT INTO wiki_chat_runs VALUES (?, ?, ?, ?, ?, ?)').bind(id, body.requestId, count, 'active', now, now),
-    env.WIKI_DB.prepare(`INSERT INTO wiki_chat_items(run_id, position, code)
+    env.WIKI_DB.prepare('INSERT INTO wiki_chat_run_meta(run_id, run_type) VALUES (?, ?)').bind(id, runType),
+    rescue ? env.WIKI_DB.prepare(`INSERT INTO wiki_chat_items(run_id, position, code)
+      SELECT ?, row_number() OVER (ORDER BY i.created_at) - 1, i.code FROM wiki_chat_incidents i
+      WHERE i.rescue_state = 'pending' AND i.runner_eligible = 1
+        AND NOT EXISTS (SELECT 1 FROM wiki_articles a WHERE a.code = i.code)
+        AND NOT EXISTS (SELECT 1 FROM wiki_chat_rescue_claims c WHERE c.incident_id = i.id AND c.status = 'pending')
+      ORDER BY i.created_at LIMIT ?`).bind(id, count) : env.WIKI_DB.prepare(`INSERT INTO wiki_chat_items(run_id, position, code)
       SELECT ?, row_number() OVER (ORDER BY ${WIKI_FIFO_ORDER_SQL}) - 1, code FROM wiki_jobs
       WHERE status <> 'published' AND NOT EXISTS (SELECT 1 FROM wiki_articles a WHERE a.code = wiki_jobs.code)
         AND NOT EXISTS (SELECT 1 FROM wiki_chat_items i WHERE i.code = wiki_jobs.code AND i.status = 'pending')
       ORDER BY ${WIKI_FIFO_ORDER_SQL} LIMIT ?`).bind(id, count),
+    ...(rescue ? [env.WIKI_DB.prepare(`INSERT INTO wiki_chat_rescue_claims(incident_id, run_id, created_at, updated_at)
+      SELECT i.id, ?, ?, ? FROM wiki_chat_incidents i JOIN wiki_chat_items x ON x.code = i.code AND x.run_id = ?`).bind(id, now, now, id),
+      env.WIKI_DB.prepare(`UPDATE wiki_chat_incidents SET rescue_state = 'chat_claimed', runner_eligible = 0, updated_at = ?
+        WHERE EXISTS (SELECT 1 FROM wiki_chat_rescue_claims c WHERE c.incident_id = wiki_chat_incidents.id AND c.run_id = ? AND c.status = 'pending')`).bind(now, id)] : []),
     env.WIKI_DB.prepare(`UPDATE wiki_chat_runs SET status = 'complete', updated_at = ? WHERE id = ?
       AND NOT EXISTS (SELECT 1 FROM wiki_chat_items WHERE run_id = ?)` ).bind(now, id, id)
   ];
@@ -188,6 +207,18 @@ async function mlsChatValidate(env, body) {
     // Only deterministic editorial validation reaches this branch. Provider,
     // timeout and infrastructure failures occur outside it and never consume it.
     const now = new Date().toISOString();
+    if (run.runType === 'rescue-chat') {
+      await env.WIKI_DB.prepare(`UPDATE wiki_chat_rescue_claims SET editorial_attempts = editorial_attempts + 1, updated_at = ?
+        WHERE run_id = ? AND incident_id = (SELECT id FROM wiki_chat_incidents WHERE code = ? AND rescue_state = 'chat_claimed')`).bind(now, run.id, item.code).run();
+      const claim = await env.WIKI_DB.prepare(`SELECT editorial_attempts, incident_id FROM wiki_chat_rescue_claims WHERE run_id = ?
+        AND incident_id = (SELECT id FROM wiki_chat_incidents WHERE code = ? AND rescue_state = 'chat_claimed')`).bind(run.id, item.code).first();
+      if (Number(claim?.editorial_attempts || 0) >= 3) await env.WIKI_DB.batch([
+        env.WIKI_DB.prepare("UPDATE wiki_chat_items SET status = 'needs_review' WHERE run_id = ? AND code = ?").bind(run.id, item.code),
+        env.WIKI_DB.prepare("UPDATE wiki_chat_rescue_claims SET status = 'needs_review', updated_at = ? WHERE incident_id = ?").bind(now, claim.incident_id),
+        env.WIKI_DB.prepare("UPDATE wiki_chat_incidents SET rescue_state = 'needs_review', runner_eligible = 0, updated_at = ? WHERE id = ?").bind(now, claim.incident_id)
+      ]);
+      mlsChatError(422, error.message);
+    }
     await env.WIKI_DB.prepare(`INSERT INTO wiki_chat_incidents(id, code, context_id, source_run_id, original_position, reason, reason_code, editorial_attempts, last_validation_error, created_at, updated_at)
       VALUES (?, ?, ?, ?, ?, ?, 'editorial_validation', 1, ?, ?, ?)
       ON CONFLICT(source_run_id, code) DO UPDATE SET editorial_attempts = editorial_attempts + 1, last_validation_error = excluded.last_validation_error, updated_at = excluded.updated_at`)
@@ -247,6 +278,11 @@ async function mlsChatPublish(env, body) {
   await env.WIKI_DB.batch(queries);
   run = await mlsChatRun(env, run.id);
   const published = run.entries.find(x => x.code === a.code)?.status === 'published';
+  if (run.runType === 'rescue-chat') {
+    const incident = await env.WIKI_DB.prepare("SELECT id FROM wiki_chat_incidents WHERE code = ? AND rescue_state = 'chat_claimed'").bind(a.code).first();
+    if (incident) await env.WIKI_DB.prepare("UPDATE wiki_chat_incidents SET rescue_state = ?, runner_eligible = 0, updated_at = ? WHERE id = ?")
+      .bind(published ? 'resolved' : 'preserved_existing', new Date().toISOString(), incident.id).run();
+  }
   return {published, preservedExisting: !published, code: a.code, run,
     articleUrl: '/api/wiki/article/' + a.code};
 }
@@ -326,6 +362,9 @@ async function handleMlsChat(request, env, url) {
       if (body.confirm !== true || typeof body.runId !== 'string') mlsChatError(400, 'Confirma la cancelación e indica runId.');
       const now = new Date().toISOString();
       await env.WIKI_DB.batch([
+        env.WIKI_DB.prepare(`UPDATE wiki_chat_incidents SET rescue_state = 'pending', runner_eligible = 1, updated_at = ?
+          WHERE rescue_state = 'chat_claimed' AND EXISTS (SELECT 1 FROM wiki_chat_rescue_claims c WHERE c.incident_id = wiki_chat_incidents.id AND c.run_id = ? AND c.status = 'pending')`).bind(now, body.runId),
+        env.WIKI_DB.prepare("UPDATE wiki_chat_rescue_claims SET status = 'cancelled', updated_at = ? WHERE run_id = ? AND status = 'pending'").bind(now, body.runId),
         env.WIKI_DB.prepare("UPDATE wiki_chat_items SET status = 'released' WHERE run_id = ? AND status = 'pending'").bind(body.runId),
         env.WIKI_DB.prepare("UPDATE wiki_chat_runs SET status = 'cancelled', updated_at = ? WHERE id = ? AND status = 'active'").bind(now, body.runId)
       ]);
