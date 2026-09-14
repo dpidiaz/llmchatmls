@@ -126,3 +126,19 @@ test('Cloudflare capacity errors switch models without repeating the saturated m
   await assert.rejects(sandbox.runCloudflareProvider(env,{id:'cloudflare-gemma',model:'model'},[],100,0.1),/3040/);
   assert.equal(calls,1);assert.equal(released,1);
 });
+test('Cloudflare daily quota errors are reported honestly and persisted',async()=>{
+  const source=fs.readFileSync(path.join(root,'MLS R32 OVERLAY/index.js'),'utf8');
+  const begin=source.indexOf('async function runCloudflareProvider(');
+  const end=source.indexOf('__name(runCloudflareProvider',begin);
+  let calls=0,marked=0,released=0;
+  class ProviderUnavailable extends Error { constructor(message,delaySeconds){super(message);this.delaySeconds=delaySeconds} }
+  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:ProviderUnavailable,
+    wikiStore(){return {async reserveCloudflareBudget(){return {ok:true,reserved:0}},async settleCloudflareBudget(){},async releaseCloudflareBudget(){released++},async markQuotaExhausted(){marked++}}},
+    secondsUntilNextUtcDay(){return 3600},wikiTextResult(){return ''},wikiUsageResult(){return {promptTokens:0,completionTokens:0}},
+    cloudflareNeurons(){return 0},async recordProviderUsage(){},wikiErrorMessage(error){return error?.message||String(error)},
+    isWorkersAIDailyQuotaError(message){return message.includes('3036')}};
+  vm.createContext(sandbox);vm.runInContext(source.slice(begin,end),sandbox);
+  const env={AI:{async run(){calls++;throw Error('3036: used up your daily free allocation')}}};
+  await assert.rejects(sandbox.runCloudflareProvider(env,{id:'cloudflare-gemma',model:'model'},[],100,0.1),/agotó su cuota diaria real/);
+  assert.equal(calls,1);assert.equal(marked,1);assert.equal(released,1);
+});
