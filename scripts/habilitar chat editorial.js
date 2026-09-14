@@ -27,7 +27,7 @@ function main() {
   if (runtime.includes('async function handleMlsChat(')) throw Error('La integración ChatGPT ya está instalada en este runtime.');
   const marker = '    const url = new URL(request.url);';
   if (!runtime.includes(marker) || !runtime.includes('function getEditorialContextR32(')) throw Error('Ejecutar primero habilitar flujo editorial.js sobre R32.');
-  runtime = runtime.replace(marker, marker + '\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);');
+  runtime = runtime.replace(marker, marker + '\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);');
   fs.writeFileSync(target, runtime + buildChatRuntime());
   console.log('ChatGPT editorial habilitado; las operaciones requieren MLS_EDITORIAL_CHAT_KEY.');
 }

@@ -14,6 +14,13 @@ function replaceOnce(source, oldText, newText, label) {
 
 let runner = fs.readFileSync(runnerPath, "utf8");
 
+// MLS Farm owns the runner's queue selection.  The legacy patch below targets
+// the pre-Farm markup and must not try to overwrite its normal/deferred modes.
+if (runner.includes('id="mode"')) {
+  console.log("MLS Editorial Runner Farm detectado; se conserva su flujo FREE ONLY.");
+  process.exit(0);
+}
+
 runner = runner.replace('value="Gemini exclusivo"', 'value="Proveedor automático"');
 runner = runner.replace('value="Generador MLS actual"', 'value="Proveedor automático"');
 runner = runner.replaceAll('?provider=gemini', '');

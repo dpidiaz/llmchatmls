@@ -47,6 +47,10 @@ button:disabled{opacity:.48;cursor:not-allowed}
 <section class="panel">
 <div class="grid">
 <div>
+<label for="mode">Origen</label>
+<select id="mode"><option value="normal">Pendientes normales</option><option value="deferred">Estancadas · rescate FREE ONLY</option></select>
+</div>
+<div>
 <label for="language">Idioma</label>
 <select id="language">
 <option value="espanol-guatemala">Español de Guatemala</option>
@@ -104,6 +108,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 (() => {
   const $ = (id) => document.getElementById(id);
   const language = $("language");
+  const mode = $("mode");
   const limit = $("limit");
   const startButton = $("start");
   const pauseButton = $("pause");
@@ -144,7 +149,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
     startButton.disabled = running;
     pauseButton.disabled = !running;
     stopButton.disabled = !running;
-    language.disabled = running;
+    language.disabled = running; mode.disabled = running;
     limit.disabled = running;
     pauseButton.textContent = paused ? "Continuar" : "Pausar";
   }
@@ -164,6 +169,13 @@ button:disabled{opacity:.48;cursor:not-allowed}
   }
 
   async function fetchPending(pageSize = 1) {
+    if (mode.value === "deferred") {
+      const response = await fetch('/api/wiki/editorial/rescue/status', {cache:'no-store', credentials:'same-origin'});
+      const data = await response.json();
+      if (!response.ok || !data.ok || data.freeOnly !== true || data.zeroCost !== true) throw new Error(data.error || 'Rescate FREE ONLY no disponible.');
+      const pending = (data.incidents || []).filter(x => x.rescue_state === 'pending').reduce((n,x) => n + Number(x.count || 0), 0);
+      remainingNode.textContent = String(pending); return {total:pending,items:[]};
+    }
     const qs = new URLSearchParams({
       language: language.value,
       status: "pending",
@@ -213,6 +225,17 @@ button:disabled{opacity:.48;cursor:not-allowed}
     throw new Error(`${code}: la generación continúa ocupada después del tiempo máximo de espera.`);
   }
 
+  async function claimDeferred() {
+    const claimId = crypto.randomUUID();
+    const response = await fetch('/api/wiki/editorial/rescue/claim', {method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify({language:language.value,claimId})});
+    const data = await response.json();
+    if (!response.ok || !data.ok || data.freeOnly !== true || data.zeroCost !== true) throw new Error(data.error || 'El rescate exige capacidad gratuita.');
+    return {claimId, incident:data.incident};
+  }
+  async function finishDeferred(incidentId, claimId, outcome, error='') {
+    await fetch('/api/wiki/editorial/rescue/finish',{method:'POST',headers:{'content-type':'application/json'},credentials:'same-origin',body:JSON.stringify({incidentId,claimId,outcome,error})});
+  }
+
   async function refreshCounts() {
     const data = await fetchPending(1);
     return Number(data.total || 0);
@@ -258,7 +281,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
         }
 
         const queue = await fetchPending(1);
-        const next = queue.items?.[0];
+        const deferredClaim = mode.value === 'deferred' ? await claimDeferred() : null;
+        const next = deferredClaim ? deferredClaim.incident && {code:deferredClaim.incident.code, incident:deferredClaim.incident} : queue.items?.[0];
         if (!next) {
           log("No quedan entradas pendientes para el idioma seleccionado.");
           setState("Cola completada", "");
@@ -272,6 +296,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 
         try {
           const result = await materialize(next.code);
+          if (deferredClaim) await finishDeferred(next.incident.id, deferredClaim.claimId, 'published');
           const article = result.article || {};
           const usedProvider = article.provider || result.provider || "no informado";
           const usedModel = article.model || result.model || "";
@@ -282,6 +307,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
           log(`${next.code}: guardada correctamente con ${usedProvider}${usedModel ? ` · ${usedModel}` : ""}.`);
           await refreshCounts();
         } catch (error) {
+          if (deferredClaim?.incident) await finishDeferred(deferredClaim.incident.id, deferredClaim.claimId, 'infrastructure', error.message || String(error));
           errors += 1;
           consecutiveErrors += 1;
           errorsNode.textContent = String(errors);
@@ -337,14 +363,17 @@ button:disabled{opacity:.48;cursor:not-allowed}
     localStorage.setItem("mlsRunnerLanguage", language.value);
     try { initialPending = await refreshCounts(); } catch {}
   });
+  mode.addEventListener('change', async () => { localStorage.setItem('mlsRunnerMode',mode.value); try { initialPending=await refreshCounts(); } catch {} });
   limit.addEventListener("change", () => {
     localStorage.setItem("mlsRunnerLimit", limit.value);
     updateProgress();
   });
 
   const savedLanguage = localStorage.getItem("mlsRunnerLanguage");
+  const savedMode = localStorage.getItem('mlsRunnerMode');
   const savedLimit = localStorage.getItem("mlsRunnerLimit");
   if (savedLanguage && [...language.options].some((o) => o.value === savedLanguage)) language.value = savedLanguage;
+  if (savedMode === 'deferred') mode.value = savedMode;
   if (savedLimit && [...limit.options].some((o) => o.value === savedLimit)) limit.value = savedLimit;
   updateProgress();
   refreshCounts().catch((error) => log(`No se pudo leer la cola todavía: ${error.message || error}`));

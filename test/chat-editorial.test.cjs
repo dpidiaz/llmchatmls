@@ -17,7 +17,7 @@ function setup(options = {}) {
     const start=runtime.indexOf('CREATE TABLE IF NOT EXISTS '+name+' (');
     db.exec(runtime.slice(start,runtime.indexOf('`',start)));
   }
-  for(let n=1;n<=110;n++) db.prepare("INSERT INTO wiki_jobs(code,language,language_name,n,seed_path,updated_at) VALUES (?,'espanol-guatemala','Español de Guatemala',?,'fixture','before')").run(code(n),n);
+  for(let n=1;n<=(options.jobs || 110);n++) db.prepare("INSERT INTO wiki_jobs(code,language,language_name,n,seed_path,updated_at) VALUES (?,'espanol-guatemala','Español de Guatemala',?,'fixture','before')").run(code(n),n);
   let failBatchAt = -1;
   const bind = (sql,args=[]) => ({sql,args,bind(...a){return bind(sql,a)},async first(){return db.prepare(sql).get(...args)||null},async all(){return {results:db.prepare(sql).all(...args)}},async run(){const r=db.prepare(sql).run(...args);return {meta:{changes:Number(r.changes)}}}});
   const env = {MLS_EDITORIAL_CHAT_KEY:'test-secret-only-not-for-production-000000',WIKI_DB:{prepare:bind,async batch(queries){db.exec('BEGIN');try{const results=queries.map((q,i)=>{if(i===failBatchAt)throw Error('simulated failure');const r=db.prepare(q.sql).run(...q.args);return {meta:{changes:Number(r.changes)}}});db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}}}};
@@ -30,6 +30,11 @@ function setup(options = {}) {
     const r=await context.handleMlsChat(new Request(url,{method:body===undefined?'GET':'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})}),env,url);
     return {status:r.status,data:await r.json()};
   };
+  const rescue = async (route,body) => {
+    const url = new URL('https://example.com/api/wiki/editorial/rescue/'+route);
+    const r=await context.handleMlsRescue(new Request(url,{method:body===undefined?'GET':'POST',headers:{'content-type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})}),env,url);
+    return {status:r.status,data:await r.json()};
+  };
   const start = n => request('start',{command:'MLS siguientes '+n,requestId:'request-fixture-'+n});
   const draft = async runId => {
     const next=await request('next?runId='+runId);assert.equal(next.status,200);
@@ -37,7 +42,7 @@ function setup(options = {}) {
     return request('validate',{runId,contextId:x.contextId,code:x.context.target.code,articleMarkdown:originalArticle.articleMarkdown,
       referenceCodes:fixture.calibration.referenceCodes,editorialReview:'Fixture review verifies grammar, examples, headings and corpus calibration.'});
   };
-  return {db,env,context,request,start,draft,setFailure(i){failBatchAt=i}};
+  return {db,env,context,request,rescue,start,draft,setFailure(i){failBatchAt=i}};
 }
 for(const count of [10,30,50,100]) test('exactly '+count+' publications, persisted continuation, no overflow',async()=>{
   const s=setup();const first=await s.start(count);assert.equal(first.status,200);const id=first.data.run.id;
@@ -59,11 +64,11 @@ test('authentication fails closed; public schema accessible',async()=>{
   s.env.MLS_EDITORIAL_CHAT_KEY='';assert.equal((await s.request('status')).status,503);
   assert.equal((await s.request('openapi.json')).status,200);
 });
-test('invalid size, one active run, missing context, bad draft, FIFO and cancel guards',async()=>{
-  const s=setup();assert.equal((await s.start(101)).status,400);assert.equal((await s.start(0)).status,400);
-  const a=await s.start(10);const id=a.data.run.id;const b=await s.start(30);assert.equal(b.data.run.id,id);
+test('size, concurrent runs, missing context, bad draft, FIFO and cancel guards',async()=>{
+  const s=setup();assert.equal((await s.start(401)).status,400);assert.equal((await s.start(0)).status,400);
+  const a=await s.start(10);const id=a.data.run.id;const b=await s.start(30);assert.notEqual(b.data.run.id,id);
   assert.equal((await s.request('validate',{runId:id,code:code(2)})).status,409);
-  const next=(await s.request('next')).data;
+  const next=(await s.request('next?runId='+id)).data;
   const body={runId:id,code:code(1),contextId:next.contextId,articleMarkdown:'short',referenceCodes:fixture.calibration.referenceCodes,editorialReview:'Fixture review checks all linguistic and editorial properties.'};
   assert.equal((await s.request('validate',body)).status,422);
   body.articleMarkdown=originalArticle.articleMarkdown;body.referenceCodes=[];assert.equal((await s.request('validate',body)).status,422);
@@ -94,6 +99,46 @@ test('oversized Action context reduces complete references instead of blocking t
   assert.ok(next.data.context.references.length<references.length);
   assert.equal(next.data.context.adaptiveCalibration,true);
   assert.ok(JSON.stringify(next.data.context).length<=36000);
+});
+test('Farm atomically reserves three concurrent 400-entry runs without intersections',async()=>{
+  const s=setup({jobs:1300});
+  const start=id=>s.request('start',{command:'MLS siguientes 400',requestId:id});
+  const [a,b,c]=await Promise.all([start('farm-request-00000001'),start('farm-request-00000002'),start('farm-request-00000003')]);
+  assert.equal(a.data.run.selected,400);assert.equal(b.data.run.selected,400);assert.equal(c.data.run.selected,400);
+  const groups=[a,b,c].map(x=>new Set(x.data.run.entries.map(e=>e.code)));
+  assert.equal(new Set([...groups[0],...groups[1],...groups[2]]).size,1200);
+  const repeated=await start('farm-request-00000001');assert.equal(repeated.data.reused,true);assert.equal(repeated.data.run.id,a.data.run.id);
+  const nextA=await s.request('next?runId='+a.data.run.id);const nextB=await s.request('next?runId='+b.data.run.id);
+  assert.notEqual(nextA.data.context.target.code,nextB.data.context.target.code);
+});
+test('three deterministic editorial rejections defer only that item and preserve the next one',async()=>{
+  const s=setup();const run=(await s.start(2)).data.run;
+  for(let n=0;n<3;n++) {
+    const next=(await s.request('next?runId='+run.id)).data;
+    const r=await s.request('validate',{runId:run.id,contextId:next.contextId,code:next.context.target.code,articleMarkdown:'short',referenceCodes:fixture.calibration.referenceCodes,editorialReview:'Fixture review verifies grammar, examples, headings and corpus calibration.'});
+    assert.equal(r.status,422);
+  }
+  const state=(await s.request('status?runId='+run.id)).data.run;assert.equal(state.deferred,1);assert.equal(state.pending,1);
+  const next=(await s.request('next?runId='+run.id)).data;assert.equal(next.context.target.code,code(2));
+  const incident=s.db.prepare('SELECT editorial_attempts,rescue_state,runner_eligible FROM wiki_chat_incidents').get();assert.equal(incident.editorial_attempts,3);assert.equal(incident.rescue_state,'pending');assert.equal(incident.runner_eligible,1);
+});
+test('cancel releases only its pending reservations',async()=>{
+  const s=setup();const a=(await s.request('start',{command:'MLS siguientes 10',requestId:'cancel-farm-request-01'})).data.run;const b=(await s.request('start',{command:'MLS siguientes 10',requestId:'cancel-farm-request-02'})).data.run;
+  await s.request('cancel',{runId:a.id,confirm:true});
+  assert.equal((await s.request('status?runId='+a.id)).data.run.status,'cancelled');
+  assert.equal((await s.request('status?runId='+b.id)).data.run.remaining,10);
+  assert.equal(s.db.prepare("SELECT COUNT(*) AS n FROM wiki_chat_items WHERE run_id=? AND status='released'").get(a.id).n,10);
+});
+test('two rescue runners atomically claim different deferred incidents',async()=>{
+  const s=setup();const run=(await s.start(2)).data.run;
+  for(let item=0;item<2;item++) for(let n=0;n<3;n++) {
+    const next=(await s.request('next?runId='+run.id)).data;
+    await s.request('validate',{runId:run.id,contextId:next.contextId,code:next.context.target.code,articleMarkdown:'short',referenceCodes:fixture.calibration.referenceCodes,editorialReview:'Fixture review verifies grammar, examples, headings and corpus calibration.'});
+  }
+  const [a,b]=await Promise.all([s.rescue('claim',{language:'espanol-guatemala',claimId:'rescue-claim-0001'}),s.rescue('claim',{language:'espanol-guatemala',claimId:'rescue-claim-0002'})]);
+  assert.equal(a.status,200);assert.equal(b.status,200);assert.equal(a.data.freeOnly,true);assert.notEqual(a.data.incident.code,b.data.incident.code);
+  await s.rescue('finish',{incidentId:a.data.incident.id,claimId:a.data.claimId,outcome:'infrastructure'});
+  assert.equal(s.db.prepare('SELECT runner_attempts,rescue_state FROM wiki_chat_incidents WHERE id=?').get(a.data.incident.id).runner_attempts,0);
 });
 test('Cloudflare inference retries an empty response before failing regeneration',async()=>{
   const source=fs.readFileSync(path.join(root,'MLS R32 OVERLAY/index.js'),'utf8');
