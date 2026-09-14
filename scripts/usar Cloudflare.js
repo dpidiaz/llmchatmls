@@ -39,7 +39,7 @@ replaceOnce(
 
 replaceOnce(
   '    externalProvidersConfigured: [...providers.map((p) => p.id), ...(env.xKiroRouter ? ["xkiro-dynamic-free-only"] : [])],\n    xKiroConfigured: Boolean(env.xKiroRouter),\n    xKiroPolicy: "dynamic access_tier=free only",\n    approvedExternalModels: Object.fromEntries(Object.entries(STRICT_ZERO_COST_EXTERNAL_MODELS).map(([id, models]) => [id, [...models]])),',
-  '    externalProvidersConfigured: [],\n    xKiroConfigured: false,\n    xKiroPolicy: "disabled; materialization uses Cloudflare Workers AI only",\n    cloudflareOnly: true,\n    materializationModel: MODEL_ID,\n    approvedExternalModels: {},',
+  '    externalProvidersConfigured: [],\n    xKiroConfigured: false,\n    xKiroPolicy: "disabled; materialization uses Cloudflare Workers AI only",\n    cloudflareOnly: true,\n    materializationModel: MODEL_ID,\n    regenerationMaxAttempts: 3,\n    approvedExternalModels: {},',
   "reflejar la política Cloudflare only en el estado"
 );
 
