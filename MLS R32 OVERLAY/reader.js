@@ -1,7 +1,11 @@
 (()=>{
   'use strict';
   const MLS=window.MLS;const {esc,escAttr,short}=MLS.util;
+  // El lector es el único responsable de materializar entradas de esta SPA.
+  // El cliente global conserva Profesor IA, pero no debe competir por este POST.
+  window.__MLS_NATIVE_READER_MATERIALIZER__=true;
   const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  const materializationTasks=new Map();
   function stripSpeak(s){return String(s||'').replace(/\*\*/g,'').replace(/`/g,'').replace(/[#>*_~\[\]()]/g,' ').replace(/\n/g,' ').replace(/\s+/g,' ').trim()}
   function normalizeArticleMarkdown(s){
     return String(s||'')
@@ -28,6 +32,16 @@
     window.scrollTo({top:0,left:0,behavior:'auto'});
   }
   function setStatus(code,kind,text){const status=document.getElementById('replacementStatus');if(status&&currentEntryIs(code)){status.className='replacement-status '+kind;status.textContent=text}}
+  function offerRetry(e,onReady,text){
+    if(!currentEntryIs(e.code))return;
+    setStatus(e.code,'unavailable',text);
+    const status=document.getElementById('replacementStatus');
+    if(!status||document.getElementById('mlsMaterializationRetry'))return;
+    const retry=document.createElement('button');
+    retry.type='button';retry.id='mlsMaterializationRetry';retry.className='btn';retry.textContent='Reintentar generación';
+    retry.onclick=()=>materializeOnVisit(e,onReady,true);
+    status.insertAdjacentElement('afterend',retry);
+  }
   async function savedArticle(code){
     const response=await fetch('/api/wiki/article/'+encodeURIComponent(code),{cache:'no-store',headers:{accept:'application/json'}});
     if(response.status===404)return null;
@@ -61,44 +75,46 @@
       headers:{accept:'application/json','cache-control':'no-store'}
     });
   }
-  async function materializeOnVisit(e,onReady){
+  async function materializeOnVisit(e,onReady,retry=false){
     if(!e||!e.code||!currentEntryIs(e.code))return;
     const code=e.code;
+    if(materializationTasks.has(code))return materializationTasks.get(code);
+    const run=(async()=>{
+    if(!retry&&document.documentElement.dataset.mlsMaterializedCode===code)return;
     document.documentElement.dataset.mlsMaterializingCode=code;
-    setStatus(code,'working','Generando versión ampliada con IA…');
+    document.getElementById('mlsMaterializationRetry')?.remove();
+    setStatus(code,'working','Comprobando contenido permanente…');
     try{
       const existing=await savedArticle(code).catch(()=>null);
       if(existing&&currentEntryIs(code)){onReady(installPermanentArticle(existing,e));return}
-      const delays=[0,2500,6000];
-      for(let attempt=0;attempt<delays.length;attempt++){
-        if(!currentEntryIs(code))return;
-        if(delays[attempt])await sleep(delays[attempt]);
-        if(!currentEntryIs(code))return;
-        const response=await requestMaterialization(code);
-        const data=await response.json().catch(()=>({}));
-        if(!currentEntryIs(code))return;
-        if(data.article){onReady(installPermanentArticle(data.article,e));return}
-        if(response.status===202){
-          const article=await waitForArticle(code);
-          if(article&&currentEntryIs(code)){onReady(installPermanentArticle(article,e));return}
-          continue;
-        }
-        if(response.status===429||response.status===503){
-          setStatus(code,'unavailable','La IA no está disponible ahora; se conserva el contenido anterior y se intentará en una próxima visita.');
-          return;
-        }
-        if(response.ok){
-          const article=await savedArticle(code).catch(()=>null);
-          if(article&&currentEntryIs(code)){onReady(installPermanentArticle(article,e));return}
-        }
+      if(!currentEntryIs(code))return;
+      setStatus(code,'working','Generando versión ampliada con IA…');
+      const response=await requestMaterialization(code);
+      const data=await response.json().catch(()=>({}));
+      if(!currentEntryIs(code))return;
+      if(data.article){onReady(installPermanentArticle(data.article,e));return}
+      if(response.status===202||data.flag==='processing'){
+        setStatus(code,'working','Generando versión ampliada con IA…');
+        const article=await waitForArticle(code);
+        if(article&&currentEntryIs(code)){onReady(installPermanentArticle(article,e));return}
+        offerRetry(e,onReady,'La generación sigue pendiente. Puedes reintentar la consulta sin crear otra generación.');
+        return;
       }
-      setStatus(code,'unavailable','No fue posible crear la versión permanente; se conserva el contenido anterior y se intentará en una próxima visita.');
+      if(response.status===429||response.status===503){
+        offerRetry(e,onReady,data.error||'Workers AI FREE no está disponible ahora; no se usó ningún servicio de pago.');
+        return;
+      }
+      offerRetry(e,onReady,data.error||'No fue posible crear la versión permanente; se conserva el contenido anterior.');
     }catch(error){
-      setStatus(code,'unavailable','No fue posible crear la versión permanente; se conserva el contenido anterior y se intentará en una próxima visita.');
+      offerRetry(e,onReady,'No fue posible crear la versión permanente; se conserva el contenido anterior.');
       console.warn('MASTER LANGUAGE SYSTEM: materialización automática falló para '+code,error);
     }finally{
       if(document.documentElement.dataset.mlsMaterializingCode===code)delete document.documentElement.dataset.mlsMaterializingCode;
+      materializationTasks.delete(code);
     }
+    })();
+    materializationTasks.set(code,run);
+    return run;
   }
   async function page(code){
     const previousCode=document.documentElement.dataset.mlsCurrentEntryCode||'';
