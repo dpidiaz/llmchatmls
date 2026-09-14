@@ -95,3 +95,20 @@ test('oversized Action context reduces complete references instead of blocking t
   assert.equal(next.data.context.adaptiveCalibration,true);
   assert.ok(JSON.stringify(next.data.context).length<=36000);
 });
+test('Cloudflare inference retries an empty response before failing regeneration',async()=>{
+  const source=fs.readFileSync(path.join(root,'MLS R32 OVERLAY/index.js'),'utf8');
+  const begin=source.indexOf('async function runCloudflareProvider(');
+  const end=source.indexOf('__name(runCloudflareProvider',begin);
+  let calls=0,released=0,settled=0;const usage=[];
+  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:Error,
+    wikiStore(){return {async reserveCloudflareBudget(){return {ok:true,reserved:0}},async settleCloudflareBudget(){settled++},async releaseCloudflareBudget(){released++},async markQuotaExhausted(){}}},
+    secondsUntilNextUtcDay(){return 60},wikiTextResult(result){return result.text||''},wikiUsageResult(){return {promptTokens:10,completionTokens:20}},
+    cloudflareNeurons(){return 1},async recordProviderUsage(_env,_id,prompt,completion,error){usage.push({prompt,completion,error})},
+    wikiErrorMessage(error){return error?.message||String(error)},isWorkersAIDailyQuotaError(){return false}};
+  vm.createContext(sandbox);vm.runInContext(source.slice(begin,end),sandbox);
+  const env={AI:{async run(){calls++;return calls===1?{text:''}:{text:'Artículo regenerado'}}}};
+  const result=await sandbox.runCloudflareProvider(env,{id:'cloudflare',model:'model'},[],100,0.1);
+  assert.equal(result.text,'Artículo regenerado');assert.equal(calls,2);
+  assert.equal(released,0);assert.equal(settled,1);
+  assert.deepEqual(usage,[{prompt:0,completion:0,error:true},{prompt:10,completion:20,error:false}]);
+});
