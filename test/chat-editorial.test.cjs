@@ -112,3 +112,17 @@ test('Cloudflare inference retries an empty response before failing regeneration
   assert.equal(released,0);assert.equal(settled,1);
   assert.deepEqual(usage,[{prompt:0,completion:0,error:true},{prompt:10,completion:20,error:false}]);
 });
+test('Cloudflare capacity errors switch models without repeating the saturated model',async()=>{
+  const source=fs.readFileSync(path.join(root,'MLS R32 OVERLAY/index.js'),'utf8');
+  const begin=source.indexOf('async function runCloudflareProvider(');
+  const end=source.indexOf('__name(runCloudflareProvider',begin);
+  let calls=0,released=0;
+  const sandbox={setTimeout,MODEL_ID:'model',NoProviderAvailableError:Error,
+    wikiStore(){return {async reserveCloudflareBudget(){return {ok:true,reserved:0}},async settleCloudflareBudget(){},async releaseCloudflareBudget(){released++},async markQuotaExhausted(){}}},
+    secondsUntilNextUtcDay(){return 60},wikiTextResult(){return ''},wikiUsageResult(){return {promptTokens:0,completionTokens:0}},
+    cloudflareNeurons(){return 0},async recordProviderUsage(){},wikiErrorMessage(error){return error?.message||String(error)},isWorkersAIDailyQuotaError(){return false}};
+  vm.createContext(sandbox);vm.runInContext(source.slice(begin,end),sandbox);
+  const env={AI:{async run(){calls++;throw Error('3040: out of capacity')}}};
+  await assert.rejects(sandbox.runCloudflareProvider(env,{id:'cloudflare-gemma',model:'model'},[],100,0.1),/3040/);
+  assert.equal(calls,1);assert.equal(released,1);
+});

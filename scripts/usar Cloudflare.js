@@ -16,7 +16,7 @@ if (!providersPattern.test(code)) {
 }
 code = code.replace(
   providersPattern,
-  `async function availableProviders(env, seedCode, excludeId) {\n  if (excludeId === "cloudflare") return [];\n  return [{ id: "cloudflare", kind: "cloudflare", model: MODEL_ID }];\n}\n__name(availableProviders, "availableProviders");`
+  `async function availableProviders(env, seedCode, excludeId) {\n  const candidates = [\n    { id: "cloudflare-gemma", kind: "cloudflare", model: MODEL_ID },\n    { id: "cloudflare-glm", kind: "cloudflare", model: "@cf/zai-org/glm-4.7-flash" },\n    { id: "cloudflare-llama", kind: "cloudflare", model: "@cf/meta/llama-3.3-70b-instruct-fp8-fast" }\n  ];\n  const available = [];\n  for (const provider of candidates) {\n    if (provider.id === excludeId || await providerOnCooldown(env, provider.id)) continue;\n    available.push(provider);\n  }\n  return available;\n}\n__name(availableProviders, "availableProviders");`
 );
 
 replaceOnce(
@@ -39,9 +39,9 @@ replaceOnce(
 
 replaceOnce(
   '    externalProvidersConfigured: [...providers.map((p) => p.id), ...(env.xKiroRouter ? ["xkiro-dynamic-free-only"] : [])],\n    xKiroConfigured: Boolean(env.xKiroRouter),\n    xKiroPolicy: "dynamic access_tier=free only",\n    approvedExternalModels: Object.fromEntries(Object.entries(STRICT_ZERO_COST_EXTERNAL_MODELS).map(([id, models]) => [id, [...models]])),',
-  '    externalProvidersConfigured: [],\n    xKiroConfigured: false,\n    xKiroPolicy: "disabled; materialization uses Cloudflare Workers AI only",\n    cloudflareOnly: true,\n    materializationModel: MODEL_ID,\n    regenerationMaxAttempts: 3,\n    approvedExternalModels: {},',
+  '    externalProvidersConfigured: [],\n    xKiroConfigured: false,\n    xKiroPolicy: "disabled; materialization uses Cloudflare Workers AI only",\n    cloudflareOnly: true,\n    materializationModel: MODEL_ID,\n    materializationModels: [MODEL_ID, "@cf/zai-org/glm-4.7-flash", "@cf/meta/llama-3.3-70b-instruct-fp8-fast"],\n    regenerationMaxAttemptsPerModel: 3,\n    approvedExternalModels: {},',
   "reflejar la política Cloudflare only en el estado"
 );
 
 fs.writeFileSync(path, code);
-console.log("Materialización configurada para usar exclusivamente Cloudflare Workers AI con MODEL_ID.");
+console.log("Materialización configurada con tres modelos de Cloudflare Workers AI y fallback automático.");

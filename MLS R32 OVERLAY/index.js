@@ -2957,6 +2957,7 @@ async function runCloudflareProvider(env, provider, messages, maxTokens, tempera
       } catch (error) {
         if (isWorkersAIDailyQuotaError(wikiErrorMessage(error))) throw error;
         lastInferenceError = error;
+        if (/\b3040\b|out of capacity|sin capacidad/i.test(wikiErrorMessage(error))) break;
       }
       await recordProviderUsage(env, provider.id, 0, 0, true);
       if (inferenceAttempt < 3) await new Promise((resolve) => setTimeout(resolve, inferenceAttempt * 750));
