@@ -23,8 +23,9 @@ No editar el `src/index.js` generado. La integración aditiva incluye:
 | estadoMLS | Añade métricas observadas del run actual. |
 | cancelarLoteMLS | Sin cambios operativos; no continúa trabajo. |
 
-`AUTOOPT_ENABLED="false"` está en ambos wrangler.jsonc, incluido el overlay
-que predeploy copia. Solo `true` booleano o cadena exacta `"true"` activan.
+La entrega inicial dejaba `AUTOOPT_ENABLED="false"`. Tras la autorización
+explícita de activación, ambos wrangler.jsonc incluyen `AUTOOPT_ENABLED="true"`,
+incluido el overlay que predeploy copia. Solo `true` booleano o cadena exacta `"true"` activan.
 Desactivado: no DDL, lecturas, eventos ni campos AUTOOPT; se usa íntegramente
 la validación anterior. Los datos aprendidos se conservan. Reactivar permite
 reutilizarlos. La idempotencia mejorada de fallos solo rige estando activado.
@@ -318,8 +319,11 @@ No existe script lint. checkJs está desactivado en el tsconfig original;
 por ello tsc comprueba las fuentes TS reconstruidas, mientras los módulos
 nuevos JS se verifican con parseo, build y pruebas de ejecución. predeploy
 reconstruye src/public; sus salidas no forman parte del cambio de fuentes.
-No ejecutar npm run deploy como simple prueba: el script existente también
-manipula colas, Secrets de proveedores si están presentes e importa lotes.
+No ejecutar npm run deploy como simple prueba: despliega realmente. Para la
+activación autorizada se cambió a `wrangler deploy --keep-vars`: conserva las
+variables remotas no declaradas y ya no ejecuta limpieza de colas, escritura
+de Secrets ni importación de lotes. Los comandos administrativos independientes
+de importación y limpieza siguen existiendo, pero no se invocan al desplegar.
 
 Despliegue de revisión:
 
@@ -358,3 +362,16 @@ Archivos modificados: `chat workflow.js`, `chat openapi.json`,
 Archivos nuevos: `autoopt.js`, `AUTOOPT schema.sql`, `AUTOOPT arquitectura.md`,
 este `AUTOOPT.md` (los cuatro en MLS R32 EDITORIAL), y
 `scripts/autoopt admin.cjs`.
+
+## Verificar activación sin publicar contenido
+
+El endpoint público `/api/wiki/editorial/chat/openapi.json` devuelve los headers
+`x-mls-autoopt-enabled` y `x-mls-autoopt-version`, calculados del entorno real.
+Solo revelan flag y versión, sin historial ni información privada; no inicializa
+tablas ni valida/publica artículos. `true` y `1.0` confirman que el Worker servido
+tiene AUTOOPT activo. La creación aditiva del esquema ocurre en la primera
+Action autenticada. El cambio de activación también modifica package.json para
+que Cloudflare Builds despliegue sin efectos editoriales secundarios.
+
+Validación de activación: 34/34 pruebas, incluido el diagnóstico público sin
+acceso a almacenamiento; build con AUTOOPT_ENABLED=true y typecheck correctos.

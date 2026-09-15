@@ -29,7 +29,7 @@ function setup(options = {}) {
   const request = async (route,body,token=env.MLS_EDITORIAL_CHAT_KEY) => {
     const url = new URL('https://example.com/api/wiki/editorial/chat/'+route);
     const r=await context.handleMlsChat(new Request(url,{method:body===undefined?'GET':'POST',headers:{authorization:'Bearer '+token,'content-type':'application/json'},...(body===undefined?{}:{body:JSON.stringify(body)})}),env,url);
-    return {status:r.status,data:await r.json()};
+    return {status:r.status,headers:Object.fromEntries(r.headers),data:await r.json()};
   };
   const rescue = async (route,body) => {
     const url = new URL('https://example.com/api/wiki/editorial/rescue/'+route);
@@ -456,4 +456,15 @@ test('AUTOOPT: enabled cancellation, empty status and unknown context preserve b
   assert.equal((await s.request('publish',{runId:id,draftId:d.draftId})).status,409);
   assert.equal(s.db.prepare('SELECT COUNT(*) n FROM wiki_articles').get().n,0);
   assert.equal((await s.request('next?runId='+id)).data.context,null);
+});
+
+test('AUTOOPT: public deployment headers expose only flag and version without initializing storage',async()=>{
+  const s=setup({autoopt:true});
+  const enabled=await s.request('openapi.json',undefined,'not-authenticated');
+  assert.equal(enabled.status,200);
+  assert.equal(enabled.headers['x-mls-autoopt-enabled'],'true');
+  assert.equal(enabled.headers['x-mls-autoopt-version'],'1.0');
+  assert.equal(s.db.prepare("SELECT COUNT(*) n FROM sqlite_master WHERE name='wiki_autoopt_events'").get().n,0);
+  s.env.AUTOOPT_ENABLED='false';
+  assert.equal((await s.request('openapi.json')).headers['x-mls-autoopt-enabled'],'false');
 });

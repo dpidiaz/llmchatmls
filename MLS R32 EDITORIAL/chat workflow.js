@@ -356,7 +356,13 @@ async function handleMlsRescue(request, env, url) {
 }
 async function handleMlsChat(request, env, url) {
   const route = url.pathname.replace('/api/wiki/editorial/chat', '') || '/';
-  if (route === '/openapi.json' && request.method === 'GET') return mlsChatJson(MLS_CHAT_OPENAPI);
+  if (route === '/openapi.json' && request.method === 'GET') {
+    const response = mlsChatJson(MLS_CHAT_OPENAPI);
+    // Public deployment diagnostics only: no observations, credentials or run data.
+    response.headers.set('x-mls-autoopt-enabled', String(mlsAutooptEnabled(env)));
+    response.headers.set('x-mls-autoopt-version', MLS_AUTOOPT_VERSION);
+    return response;
+  }
   if (route === '/instructions' && request.method === 'GET') return new Response(MLS_CHAT_INSTRUCTIONS, {headers: {'content-type': 'text/plain; charset=utf-8'}});
   try {
     await mlsChatAuthenticate(request, env);
