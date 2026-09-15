@@ -176,6 +176,7 @@ async function mlsChatNext(env, id) {
   }
   const context = JSON.parse(saved.context_json);
   return {run, contextId: saved.id, context,
+    ...(mlsAutooptEnabled(env) ? {autoopt:await mlsAutooptProfile(env, context)} : {}),
     editorialRules: {standard: 'MLS R32', promptVersion: '32.0', systemPrompt: SYSTEM_PROMPT,
       languageModule: LANGUAGE_MODULES[context.target.language], contract: MLS_CHAT_CONTRACT},
     instruction: 'Redactar solo context.target; revisar precisión y estilo; validar el borrador antes de publicar.'};
@@ -194,6 +195,7 @@ function mlsChatValidateText(context, markdown, referenceCodes, review) {
   return article;
 }
 async function mlsChatValidate(env, body) {
+  if (mlsAutooptEnabled(env)) return mlsAutooptValidate(env, body);
   const run = await mlsChatRun(env, body.runId);
   if (!run || run.status !== 'active') mlsChatError(409, 'El lote no está activo.');
   const item = run.entries.find(x => x.status === 'pending');
@@ -275,6 +277,18 @@ async function mlsChatPublish(env, body) {
     env.WIKI_DB.prepare(`UPDATE wiki_chat_runs SET status = 'complete', updated_at = ? WHERE id = ? AND status = 'active'
       AND NOT EXISTS (SELECT 1 FROM wiki_chat_items WHERE run_id = ? AND status = 'pending')`).bind(new Date().toISOString(), run.id, run.id)
   ];
+  if (mlsAutooptEnabled(env)) {
+    const data = mlsAutooptFeatures(context, draft.markdown);
+    const first = await env.WIKI_DB.prepare("SELECT created_at FROM wiki_autoopt_events WHERE context_id=? AND kind='validation' ORDER BY created_at LIMIT 1").bind(saved.id).first();
+    data.elapsedMs = first ? Math.max(0,Date.now()-Date.parse(first.created_at)) : 0;
+    for (const [kind,status] of [['published','published'],['preserved','external']]) {
+      queries.push(mlsAutooptEvent(env,{id:'publication:'+run.id+':'+a.code,token:crypto.randomUUID(),
+        context,runId:run.id,contextId:saved.id,kind,draftId:draft.id,data,
+        predicate:`EXISTS (SELECT 1 FROM wiki_chat_items WHERE run_id=? AND code=? AND status=?)
+          AND (?='preserved' OR EXISTS (SELECT 1 FROM wiki_articles WHERE code=? AND audit_model=?))`,
+        predicateArgs:[run.id,a.code,status,kind,a.code,audit]}));
+    }
+  }
   await env.WIKI_DB.batch(queries);
   run = await mlsChatRun(env, run.id);
   const published = run.entries.find(x => x.code === a.code)?.status === 'published';
@@ -347,17 +361,28 @@ async function handleMlsChat(request, env, url) {
   try {
     await mlsChatAuthenticate(request, env);
     await ensureWikiDb(env); await mlsChatEnsureDb(env);
+    if (mlsAutooptEnabled(env)) await mlsAutooptEnsure(env);
     if (route === '/status' && request.method === 'GET') {
       const id = url.searchParams.get('runId') || 'active';
       const run = await mlsChatRun(env, id);
-      return mlsChatJson({ok: true, standard: 'MLS R32', promptVersion: '32.0', run, maximum: 400});
+      return mlsChatJson({ok: true, standard: 'MLS R32', promptVersion: '32.0', run, maximum: 400,
+        ...(mlsAutooptEnabled(env)&&run?{autoopt:await mlsAutooptRunMetrics(env,run)}:{})});
     }
     if (route === '/next' && request.method === 'GET') return mlsChatJson(await mlsChatNext(env, url.searchParams.get('runId') || 'active'));
     if (request.method !== 'POST') mlsChatError(405, 'Método no permitido.');
     const body = await mlsChatBody(request);
     if (route === '/start') return mlsChatJson(await mlsChatStart(env, body));
     if (route === '/validate') return mlsChatJson(await mlsChatValidate(env, body));
-    if (route === '/publish') return mlsChatJson(await mlsChatPublish(env, body));
+    if (route === '/publish') {
+      try { return mlsChatJson(await mlsChatPublish(env, body)); }
+      catch(error) {
+        if(mlsAutooptEnabled(env)) {
+          try { await mlsAutooptPublicationFailure(env,body); }
+          catch { console.error('mls-autoopt-publication-failure-unrecorded'); }
+        }
+        throw error;
+      }
+    }
     if (route === '/cancel') {
       if (body.confirm !== true || typeof body.runId !== 'string') mlsChatError(400, 'Confirma la cancelación e indica runId.');
       const now = new Date().toISOString();

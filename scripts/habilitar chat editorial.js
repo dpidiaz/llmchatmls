@@ -20,7 +20,7 @@ function buildChatRuntime(root = process.cwd()) {
     `var MLS_CHAT_VALIDATORS = (() => { const contract = MLS_CHAT_CONTRACT; ${languages}\n${functions}\nreturn {validateCalibration, validateArticle}; })();\n` +
     `var MLS_CHAT_OPENAPI = ${read('MLS R32 EDITORIAL/chat openapi.json').trim()};\n` +
     `var MLS_CHAT_INSTRUCTIONS = ${JSON.stringify(read('MLS R32 EDITORIAL/GPT privado instrucciones.md'))};\n` +
-    read('MLS R32 EDITORIAL/chat workflow.js');
+    read('MLS R32 EDITORIAL/autoopt.js').replace(/^if \(typeof module .*$/gm, '') + '\n' + read('MLS R32 EDITORIAL/chat workflow.js');
 }
 function main() {
   const target = 'src/index.js'; let runtime = fs.readFileSync(target, 'utf8');
