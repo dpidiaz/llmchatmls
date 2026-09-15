@@ -152,8 +152,9 @@ Fórmulas para inspección:
 * Secciones/referencias típicas = sus sumas / published.
 * Tasa del bucket = bucketNValid / bucketNAttempts; soporte publicado = bucketNPublished.
 
-Las métricas son observaciones desde activación/reset; no un backfill de
-artículos históricos. Un draft validado antes de activar puede publicarse
+Las métricas vivas son observaciones desde activación/reset; no reconstruyen
+artículos históricos. La evidencia histórica opcional se documenta más abajo y
+se mantiene separada. Un draft validado antes de activar puede publicarse
 con intento desconocido (0); se excluye del promedio de intentos conocidos.
 La duración incluye pausas del chat y no mide tiempo puro del modelo.
 Para medir throughput por periodo, tomar snapshots de contadores y tiempos
@@ -375,3 +376,41 @@ que Cloudflare Builds despliegue sin efectos editoriales secundarios.
 
 Validación de activación: 34/34 pruebas, incluido el diagnóstico público sin
 acceso a almacenamiento; build con AUTOOPT_ENABLED=true y typecheck correctos.
+
+## Historial anterior a AUTOOPT 1.0
+
+`AUTOOPT_HISTORY_ENABLED` empieza en `false`. Es una segunda bandera, distinta
+de `AUTOOPT_ENABLED`: el aprendizaje nuevo continúa activo y su comportamiento
+no cambia mientras el historial está desactivado. Esta separación permite
+ensayar, activar o retirar únicamente la evidencia antigua.
+
+El importador administrativo es `scripts/autoopt history.cjs`. No hay Action,
+cron ni Worker que lo ejecute; tampoco genera, valida, publica ni modifica
+artículos. Su única salida persistente son agregados compactos de evidencia
+histórica. Conserva un manifiesto sin Markdown, prompts, revisiones, headers
+ni Secrets. La documentación operativa completa está en
+`AUTOOPT historial.md`.
+
+El historial sólo se considera cuando el contexto actual coincide exactamente
+en `autooptVersion`, `promptVersion`, idioma, nivel, familia y firma de profile
+(mínimo/máximo aplicable y máximo de encabezados). Por ello un valor observado
+en un profile no se convierte en un mínimo global de español. Las referencias,
+el contrato y el profile actuales siguen siendo autoridad.
+
+Una publicación histórica vinculada de forma verificable a su borrador es
+evidencia de que la operación terminó, no una certificación lingüística ni una
+prueba de aprobación al primer intento. Las incidencias históricas sólo
+conservan el primer/último error y un contador potencialmente duplicado: se
+registran como patrones, sin reconstruir intentos únicos, first pass ni tasas
+de validación. Un texto de «actividad o curso» conserva una advertencia de
+tono enciclopédico, pero nunca se rotula como falso positivo demostrado.
+
+Al activarse un lote histórico completo, su influencia inicial se limita al
+20 % de la recomendación de longitud; además disminuye al acumularse
+publicaciones nuevas. Nunca modifica el mínimo contractual, las tasas de
+primer intento, el riesgo R32 ni la confianza del aprendizaje vivo. Con menos
+de tres publicaciones compatibles no altera la longitud ni recomienda número
+de secciones. Retirar un lote (`rollback`) cambia sólo su estado a
+`rolled_back`; los artículos, runs, drafts, incidencias y eventos AUTOOPT
+nuevos permanecen intactos. Reactivarlo requiere la orden administrativa
+explícita `activate`.
