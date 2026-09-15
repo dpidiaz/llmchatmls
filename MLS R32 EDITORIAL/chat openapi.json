@@ -132,6 +132,11 @@
                     },
                     "articleUrl": {
                       "type": "string"
+                    },
+                    "autoopt": {
+                      "type": "object",
+                      "description": "MLS AUTOOPT 1.0: síntesis determinista opcional; no modifica permisos ni validaciones.",
+                      "additionalProperties": true
                     }
                   }
                 }
@@ -150,7 +155,8 @@
           "503": {
             "description": "Conexión editorial sin configurar."
           }
-        }
+        },
+        "description": "Con AUTOOPT activo puede incluir autoopt opcional: recomendaciones operativas o métricas persistentes. El contrato, profile, referencias y R32 conservan prioridad."
       }
     },
     "/api/wiki/editorial/chat/next": {
@@ -260,6 +266,11 @@
                     },
                     "articleUrl": {
                       "type": "string"
+                    },
+                    "autoopt": {
+                      "type": "object",
+                      "description": "MLS AUTOOPT 1.0: síntesis determinista opcional; no modifica permisos ni validaciones.",
+                      "additionalProperties": true
                     }
                   }
                 }
@@ -278,7 +289,8 @@
           "503": {
             "description": "Conexión editorial sin configurar."
           }
-        }
+        },
+        "description": "Con AUTOOPT activo puede incluir autoopt opcional: recomendaciones operativas o métricas persistentes. El contrato, profile, referencias y R32 conservan prioridad."
       }
     },
     "/api/wiki/editorial/chat/start": {
