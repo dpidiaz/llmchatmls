@@ -468,3 +468,125 @@ test('AUTOOPT: public deployment headers expose only flag and version without in
   s.env.AUTOOPT_ENABLED='false';
   assert.equal((await s.request('openapi.json')).headers['x-mls-autoopt-enabled'],'false');
 });
+
+const historyAdmin=require('../scripts/autoopt history.cjs');
+const historyRuntime=require('../MLS R32 EDITORIAL/autoopt history.js');
+const historyOptions={batch:'history-fixture-0001',before:'2026-09-15T00:00:00.000Z',database:'WIKI_DB',target:'local'};
+async function historicalCase(n=3) {
+  const s=setup();const run=(await s.start(n)).data.run.id;
+  const next=(await s.request('next?runId='+run)).data;
+  await s.request('validate',{runId:run,contextId:next.contextId,code:next.context.target.code,
+    articleMarkdown:originalArticle.articleMarkdown+'\nCompleta este ejercicio.',referenceCodes:fixture.calibration.referenceCodes,
+    editorialReview:'Verified fixture review of historical linguistic correctness and corpus.'});
+  for(let i=0;i<n;i++) {const d=(await s.draft(run)).data;assert(d.valid);assert((await s.request('publish',{runId:run,draftId:d.draftId})).data.published);}
+  for(const table of ['wiki_articles','wiki_chat_drafts','wiki_chat_runs','wiki_chat_incidents']) {
+    const fields={wiki_articles:['generated_at'],wiki_chat_drafts:['created_at'],wiki_chat_runs:['created_at','updated_at'],wiki_chat_incidents:['created_at','updated_at']}[table];
+    s.db.exec(`UPDATE ${table} SET ${fields.map(f=>f+"='2026-09-14T12:00:00.000Z'").join(',')}`);
+  }
+  const query=async sql=>/^\s*SELECT/i.test(sql)?s.db.prepare(sql).all():(s.db.exec(sql),[]);
+  const operational=()=>JSON.stringify(['wiki_articles','wiki_chat_drafts','wiki_chat_runs','wiki_chat_items','wiki_chat_contexts','wiki_chat_incidents'].map(t=>s.db.prepare('SELECT * FROM '+t+' ORDER BY rowid').all()));
+  return {...s,run,query,operational,contextData:next.context};
+}
+test('HISTORY: preview is read-only, counts evidence rather than attempts and contains no corpus',async()=>{
+  const s=await historicalCase();const before=s.operational();
+  const plan=await historyAdmin.preview(s.query,historyOptions);
+  assert.equal(plan.report.publications,3);assert.equal(plan.report.incidents,1);
+  assert.equal(plan.report.firstPassRate,null);assert.equal(plan.report.attemptsPerPublication,null);
+  assert.equal(plan.items.find(x=>x.kind==='incident').data.activityLike,1);
+  assert.equal(plan.items.find(x=>x.kind==='incident').data.reportedRejections,1);
+  assert.equal(plan.items.find(x=>x.kind==='publication').data.attempts,null);
+  assert.equal(s.operational(),before);
+  assert.equal(s.db.prepare("SELECT COUNT(*) n FROM sqlite_master WHERE name LIKE 'wiki_autoopt_history_%'").get().n,0);
+  const json=JSON.stringify(plan);assert(!json.includes(originalArticle.articleMarkdown));assert(!json.includes('articleMarkdown'));assert(!json.includes('editorialReview'));
+  for(const group of Object.values(plan.report.groups)) assert.equal(group.comparison.firstPassBefore,group.comparison.firstPassAfter);
+});
+test('HISTORY: staged apply, resume, activation and rollback never mutate operational/live records',async()=>{
+  const s=await historicalCase();const before=s.operational();const plan=await historyAdmin.preview(s.query,historyOptions);
+  assert.equal((await historyAdmin.apply(s.query,plan,plan.digest)).state,'staged');
+  await historyAdmin.apply(s.query,plan,plan.digest);
+  assert.equal(s.db.prepare('SELECT COUNT(*) n FROM wiki_autoopt_history_items').get().n,4);
+  await historyAdmin.activate(s.query,plan.batch);
+  assert.equal((await historyAdmin.apply(s.query,plan,plan.digest)).reused,true);
+  assert.equal(s.db.prepare('SELECT SUM(publications) n FROM wiki_autoopt_history_stats').get().n,3);
+  await historyAdmin.rollback(s.query,plan.batch);
+  assert.equal(s.db.prepare('SELECT state FROM wiki_autoopt_history_batches').get().state,'rolled_back');
+  await assert.rejects(historyAdmin.apply(s.query,plan,plan.digest),/reactivarlo/);
+  await historyAdmin.activate(s.query,plan.batch);
+  assert.equal(s.operational(),before);
+  assert.equal(s.db.prepare("SELECT COUNT(*) n FROM sqlite_master WHERE name='wiki_autoopt_events'").get().n,0);
+});
+test('HISTORY: recommendations use exact profile and never fabricate first-pass rates',async()=>{
+  const s=await historicalCase();const plan=await historyAdmin.preview(s.query,historyOptions);
+  await historyAdmin.apply(s.query,plan,plan.digest);
+  s.env.AUTOOPT_ENABLED='true';s.env.AUTOOPT_HISTORY_ENABLED='true';await s.context.mlsAutooptEnsure(s.env);
+  const before=await s.context.mlsAutooptProfile(s.env,s.contextData);
+  assert.equal(before.historicalEvidence,undefined);
+  await historyAdmin.activate(s.query,plan.batch);
+  const after=await s.context.mlsAutooptProfile(s.env,s.contextData);
+  assert.equal(after.historicalEvidence.publications,3);assert.equal(after.historicalEvidence.incidents,1);
+  assert.equal(after.firstPassSuccessRate,null);assert.equal(after.publications,0);assert.equal(after.observations,0);
+  assert.equal(after.recommendedWordRange.min,before.recommendedWordRange.min);
+  assert(after.historicalEvidence.weight<=0.2);
+  const foreign=JSON.parse(JSON.stringify(s.contextData));foreign.profile.words.min++;
+  foreign.profile.words.min++;
+  assert.equal((await s.context.mlsAutooptProfile(s.env,foreign)).historicalEvidence,undefined);
+  await historyAdmin.rollback(s.query,plan.batch);
+  assert.equal(JSON.stringify(await s.context.mlsAutooptProfile(s.env,s.contextData)),JSON.stringify(before));
+});
+test('HISTORY: changed sources or edited manifests require a new approval',async()=>{
+  const s=await historicalCase();const plan=await historyAdmin.preview(s.query,historyOptions);
+  await assert.rejects(historyAdmin.apply(s.query,plan,'wrong'),/aprobación/);
+  s.db.exec("UPDATE wiki_chat_incidents SET last_validation_error='otro error'");
+  await assert.rejects(historyAdmin.apply(s.query,plan,plan.digest),/fuentes cambiaron/);
+  assert.equal(s.db.prepare("SELECT COUNT(*) n FROM sqlite_master WHERE name='wiki_autoopt_history_items'").get().n,0);
+});
+test('HISTORY: incomplete import stays invisible and safely resumes',async()=>{
+  const s=await historicalCase();const plan=await historyAdmin.preview(s.query,historyOptions);let fail=true;
+  const flaky=async sql=>{if(fail && sql.startsWith('INSERT OR IGNORE INTO wiki_autoopt_history_items')) {
+    await s.query(sql.split(';\n')[0]);fail=false;throw Error('interrupted');
+  }return s.query(sql);};
+  await assert.rejects(historyAdmin.apply(flaky,plan,plan.digest),/interrupted/);
+  await assert.rejects(historyAdmin.activate(s.query,plan.batch),/incompleto/);
+  await historyAdmin.apply(s.query,plan,plan.digest);await historyAdmin.activate(s.query,plan.batch);
+  assert.equal(s.db.prepare('SELECT COUNT(*) n FROM wiki_autoopt_history_items').get().n,4);
+  assert.equal(s.db.prepare('SELECT SUM(incidents) n FROM wiki_autoopt_history_stats').get().n,1);
+});
+test('HISTORY: duplicate campaigns, incompatible versions and active runs are excluded',async()=>{
+  const s=await historicalCase();const plan=await historyAdmin.preview(s.query,historyOptions);
+  await historyAdmin.apply(s.query,plan,plan.digest);
+  const duplicate=await historyAdmin.preview(s.query,{...historyOptions,batch:'history-fixture-0002'});
+  assert.equal(duplicate.items.length,0);assert.equal(duplicate.report.excluded.claimed_by_another_import,4);
+  s.db.exec("UPDATE wiki_chat_runs SET status='active'");
+  const active=await historyAdmin.preview(s.query,historyOptions);assert.equal(active.report.excluded.run_not_closed,4);
+  s.db.exec("UPDATE wiki_chat_runs SET status='complete'; UPDATE wiki_chat_contexts SET context_json=json_set(context_json,'$.promptVersion','33.0')");
+  const version=await historyAdmin.preview(s.query,historyOptions);assert.equal(version.report.excluded.incompatible_prompt,4);
+});
+test('HISTORY: missing lineage and forged publication links never count as success',async()=>{
+  const s=await historicalCase();
+  s.db.exec("UPDATE wiki_articles SET article_markdown='changed' WHERE code='MLS-V10-0001'; UPDATE wiki_articles SET audit_model='external' WHERE code='MLS-V10-0002'");
+  const plan=await historyAdmin.preview(s.query,historyOptions);
+  assert.equal(plan.report.publications,1);assert.equal(plan.report.excluded.publication_mismatch,1);assert.equal(plan.report.excluded.missing_lineage,1);
+});
+test('HISTORY: live observations excluded, rollback preserves concurrent new learning',async()=>{
+  const s=await historicalCase();const plan=await historyAdmin.preview(s.query,historyOptions);
+  await historyAdmin.apply(s.query,plan,plan.digest);await historyAdmin.activate(s.query,plan.batch);
+  s.env.AUTOOPT_ENABLED='true';await s.context.mlsAutooptEnsure(s.env);
+  const nextRun=(await s.start(1)).data.run.id;const d=(await s.draft(nextRun)).data;
+  assert(d.valid);await s.request('publish',{runId:nextRun,draftId:d.draftId});
+  const live=s.db.prepare('SELECT * FROM wiki_autoopt_stats').all();
+  await historyAdmin.rollback(s.query,plan.batch);
+  assert.deepEqual(s.db.prepare('SELECT * FROM wiki_autoopt_stats').all(),live);
+  // Cutoffs cannot reach into observed live activity.
+  await assert.rejects(historyAdmin.preview(s.query,{...historyOptions,before:'2099-01-01T00:00:00.000Z'}),/corte supera/);
+});
+test('HISTORY: increasing live evidence reduces historical influence; contract remains authority',async()=>{
+  const auto=require('../MLS R32 EDITORIAL/autoopt.js'),contract=require('../MLS R32 EDITORIAL/contrato editorial.js');
+  const s=await historicalCase(),c=s.contextData,bounds=auto.mlsAutooptBounds(c,contract);
+  const base=auto.mlsAutooptProfileFromStats(c,{},contract),evidence={publications:819,incidents:76,words_sum:819*2000,sections_sum:819*100,activity_like:76};
+  const first=historyRuntime.mlsAutooptHistoryBlend(base,c,evidence,bounds);
+  const later=historyRuntime.mlsAutooptHistoryBlend({...base,publications:40},c,evidence,bounds);
+  assert(first.historicalEvidence.weight>later.historicalEvidence.weight);
+  assert.equal(first.recommendedWordRange.min,base.recommendedWordRange.min);
+  assert(first.recommendedWordRange.target<=bounds.max);assert(first.preferredSectionCount<=c.profile.headings.max);
+  assert.equal(first.firstPassSuccessRate,null);assert.equal(first.confidence,base.confidence);
+});

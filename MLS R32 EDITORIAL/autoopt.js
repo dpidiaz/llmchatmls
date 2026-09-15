@@ -110,10 +110,10 @@ function mlsAutooptRetention() {
       AND NOT EXISTS (SELECT 1 FROM wiki_chat_runs r WHERE r.id=s.scope_id AND r.status='active') LIMIT 100)`
   ];
 }
-function mlsAutooptFeatures(context, markdown, category = '') {
+function mlsAutooptFeatures(context, markdown, category = '', contract) {
   const text = typeof markdown === 'string' ? markdown.trim() : '';
   const words = text ? text.split(/\s+/u).length : 0;
-  const b = mlsAutooptBounds(context);
+  const b = mlsAutooptBounds(context, contract);
   return {words, sections:(text.match(/^####\s+.+$/gmu)||[]).length,
     references:context.references.length, referenceCodes:context.references.map(x=>x.code),
     estimatedMinimum:b.min, estimatedTarget:Math.min(b.max,Math.ceil(b.min*1.08)),
@@ -138,7 +138,11 @@ async function mlsAutooptProfile(env, context) {
   const row = await env.WIKI_DB.prepare("SELECT stats FROM wiki_autoopt_stats WHERE version=? AND prompt=? AND scope='family' AND scope_id=?")
     .bind(MLS_AUTOOPT_VERSION,context.promptVersion,mlsAutooptKey(context)).first();
   const s = row ? JSON.parse(row.stats) : {};
-  const bounds = mlsAutooptBounds(context), total=s.validationAttempts||0, publications=s.published||0;
+  const p = mlsAutooptProfileFromStats(context,s);
+  return mlsAutooptHistoryEnabled(env) ? mlsAutooptHistoryProfile(env, context, p) : p;
+}
+function mlsAutooptProfileFromStats(context, s = {}, contract) {
+  const bounds = mlsAutooptBounds(context,contract), total=s.validationAttempts||0, publications=s.published||0;
   const min=Math.min(bounds.max,Math.max(bounds.min,s.learnedMinimum||0));
   // A small safety margin; observed successful minimum shrinks gradually toward
   // the authoritative floor as confidence grows, never below it.
@@ -169,7 +173,7 @@ async function mlsAutooptProfile(env, context) {
   return p;
 }
 // Export only for administrative SQL tooling; Worker receives this as source.
-if (typeof module !== 'undefined' && module.exports) module.exports={mlsAutooptSchema,mlsAutooptRetention};
+if (typeof module !== 'undefined' && module.exports) module.exports={mlsAutooptSchema,mlsAutooptRetention,mlsAutooptFamily,mlsAutooptKey,mlsAutooptBounds,mlsAutooptFeatures,mlsAutooptError,mlsAutooptProfileFromStats};
 
 async function mlsAutooptValidate(env, body) {
   const id='validation:'+await mlsChatHash(JSON.stringify([body.runId,body.contextId,body.code,
