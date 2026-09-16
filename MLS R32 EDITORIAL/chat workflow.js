@@ -375,7 +375,11 @@ async function handleMlsChat(request, env, url) {
         ...(mlsAutooptEnabled(env)&&run?{autoopt:await mlsAutooptRunMetrics(env,run)}:{})});
     }
     if (route === '/next' && request.method === 'GET') return mlsChatJson(await mlsChatNext(env, url.searchParams.get('runId') || 'active'));
-    if (request.method !== 'POST') mlsChatError(405, 'Método no permitido.');
+    if (request.method !== 'POST') {
+      const response = mlsChatJson({ok: false, error: 'Método no permitido.'}, 405);
+      response.headers.set('Allow', 'POST');
+      return response;
+    }
     const body = await mlsChatBody(request);
     if (route === '/start') return mlsChatJson(await mlsChatStart(env, body));
     if (route === '/validate') return mlsChatJson(await mlsChatValidate(env, body));
