@@ -1,0 +1,39 @@
+// Alertas de regresión editorial basadas únicamente en eventos AUTOOPT vivos.
+// Diagnóstico read-only: no modifica R32, FIFO, lotes, artículos ni recomendaciones de generación.
+const MLS_REGRESSION_VERSION='1.0';
+const MLS_REGRESSION_RECENT_DAYS=7;
+const MLS_REGRESSION_BASELINE_DAYS=21;
+const MLS_REGRESSION_MIN_RECENT_FIRST=8;
+const MLS_REGRESSION_MIN_BASELINE_FIRST=12;
+function mlsRegressionNum(v){const n=Number(v);return Number.isFinite(n)?n:0;}
+function mlsRegressionScope(familyKey=''){const p=String(familyKey||'').split(':');return {language:p[0]||'unknown',level:p[1]||'unknown',family:p.slice(2).join(':')||'unknown'};}
+function mlsRegressionEmpty(){return {validations:0,firstAttempts:0,firstPass:0,validationFailures:0,deferred:0,needsReview:0,published:0};}
+function mlsRegressionAdd(target,row){let data={};try{data=typeof row.data==='string'?JSON.parse(row.data):row.data||{};}catch{}
+  if(row.kind==='validation'){target.validations++;if(!data.valid)target.validationFailures++;if(Number(data.attempt)===1){target.firstAttempts++;if(data.valid)target.firstPass++;}}
+  else if(row.kind==='deferred')target.deferred++;
+  else if(row.kind==='needs_review')target.needsReview++;
+  else if(row.kind==='published')target.published++;
+  return target;
+}
+function mlsRegressionMetrics(s={}){const round=x=>x===null?null:Math.round(x*1000)/1000;return {validations:mlsRegressionNum(s.validations),firstAttempts:mlsRegressionNum(s.firstAttempts),published:mlsRegressionNum(s.published),deferred:mlsRegressionNum(s.deferred),needsReview:mlsRegressionNum(s.needsReview),firstPassRate:s.firstAttempts?round(s.firstPass/s.firstAttempts):null,rejectionRate:s.validations?round(s.validationFailures/s.validations):null,deferredRate:s.firstAttempts?round(s.deferred/s.firstAttempts):null};}
+function mlsRegressionCompare(recent,baseline){const r=mlsRegressionMetrics(recent),b=mlsRegressionMetrics(baseline);const enough=r.firstAttempts>=MLS_REGRESSION_MIN_RECENT_FIRST&&b.firstAttempts>=MLS_REGRESSION_MIN_BASELINE_FIRST;const delta=(a,c)=>a===null||c===null?null:Math.round((a-c)*1000)/1000;const deltas={firstPassRate:delta(r.firstPassRate,b.firstPassRate),rejectionRate:delta(r.rejectionRate,b.rejectionRate),deferredRate:delta(r.deferredRate,b.deferredRate)};const reasons=[];
+  if(enough&&deltas.firstPassRate!==null&&deltas.firstPassRate<=-0.15)reasons.push(`Primer intento cayó ${Math.round(Math.abs(deltas.firstPassRate)*100)} puntos porcentuales frente al baseline.`);
+  if(enough&&deltas.rejectionRate!==null&&deltas.rejectionRate>=0.15)reasons.push(`Rechazos R32 subieron ${Math.round(deltas.rejectionRate*100)} puntos porcentuales frente al baseline.`);
+  if(enough&&r.deferred>=2&&deltas.deferredRate!==null&&deltas.deferredRate>=0.10)reasons.push(`Deferred subió ${Math.round(deltas.deferredRate*100)} puntos porcentuales frente al baseline.`);
+  if(r.needsReview>0)reasons.push(`Hay ${r.needsReview} evento(s) needs review en la ventana reciente.`);
+  const status=reasons.length?'vigilar':enough?'estable':'evidencia insuficiente';return {status,conclusive:false,reasons:reasons.length?reasons:[enough?'Sin regresión material detectada en la ventana comparada.':'La muestra reciente o baseline aún no alcanza el umbral.'],recent:r,baseline:b,deltas,sampleSufficient:enough};
+}
+function mlsRegressionAggregate(rows=[],now=Date.now()){
+  const recentStart=now-MLS_REGRESSION_RECENT_DAYS*86400000,baselineStart=recentStart-MLS_REGRESSION_BASELINE_DAYS*86400000;
+  const buckets=new Map(),overall={recent:mlsRegressionEmpty(),baseline:mlsRegressionEmpty()};
+  const add=(key,meta,row,period)=>{if(!buckets.has(key))buckets.set(key,{...meta,recent:mlsRegressionEmpty(),baseline:mlsRegressionEmpty()});mlsRegressionAdd(buckets.get(key)[period],row);};
+  for(const row of rows||[]){const t=Date.parse(row.created_at);if(!Number.isFinite(t)||t<baselineStart||t>now)continue;const period=t>=recentStart?'recent':'baseline';mlsRegressionAdd(overall[period],row);const scope=mlsRegressionScope(row.family_key);add('lang|'+scope.language,{language:scope.language},row,period);add('family|'+scope.language+'|'+scope.family,{language:scope.language,family:scope.family},row,period);add('level|'+scope.language+'|'+scope.level,{language:scope.language,level:scope.level},row,period);}
+  const decorate=x=>({...x,...mlsRegressionCompare(x.recent,x.baseline)});const all=[...buckets.values()].map(decorate);const byLanguage=all.filter(x=>x.family===undefined&&x.level===undefined);const byFamily=all.filter(x=>x.family!==undefined);const byLevel=all.filter(x=>x.level!==undefined);
+  const overallCmp=mlsRegressionCompare(overall.recent,overall.baseline);const warnings=[...byLanguage,...byFamily,...byLevel].filter(x=>x.status==='vigilar');if(overallCmp.status!=='vigilar'&&warnings.length)overallCmp.status='vigilar';if(warnings.length)overallCmp.reasons=[...overallCmp.reasons,...warnings.slice(0,5).map(x=>`${x.language}${x.family?' / '+x.family:x.level?' / '+x.level:''}: ${(x.reasons||[])[0]||'Regresión observada.'}`)];
+  const sort=(a,b)=>String(a.language).localeCompare(String(b.language))||String(a.family||a.level||'').localeCompare(String(b.family||b.level||''));return {version:MLS_REGRESSION_VERSION,diagnosticOnly:true,window:{recentDays:MLS_REGRESSION_RECENT_DAYS,baselineDays:MLS_REGRESSION_BASELINE_DAYS,recentStart:new Date(recentStart).toISOString(),baselineStart:new Date(baselineStart).toISOString(),generatedAt:new Date(now).toISOString()},thresholds:{minimumRecentFirstAttempts:MLS_REGRESSION_MIN_RECENT_FIRST,minimumBaselineFirstAttempts:MLS_REGRESSION_MIN_BASELINE_FIRST,firstPassDrop:0.15,rejectionRise:0.15,deferredRise:0.10},overall:overallCmp,byLanguage:byLanguage.sort(sort),byFamily:byFamily.sort(sort),byLevel:byLevel.sort(sort)};
+}
+async function mlsRegressionCollect(env){await mlsAutooptEnsure(env);const now=Date.now(),since=new Date(now-(MLS_REGRESSION_RECENT_DAYS+MLS_REGRESSION_BASELINE_DAYS)*86400000).toISOString();const {results}=await env.WIKI_DB.prepare(`SELECT family_key,kind,data,created_at FROM wiki_autoopt_events WHERE version=? AND prompt=? AND created_at>=? ORDER BY created_at`).bind(MLS_AUTOOPT_VERSION,MLS_CHAT_CONTRACT.promptVersion,since).all();return mlsRegressionAggregate(results||[],now);}
+async function handleMlsRegression(request,env){if(request.method!=='GET')return mlsChatJson({ok:false,error:'Método no permitido.'},405);try{await mlsChatAuthenticate(request,env);return mlsChatJson({ok:true,...await mlsRegressionCollect(env)});}catch(error){if(!error.status)console.error('mls-regression-failure',error.message);return mlsChatJson({ok:false,error:error.status?error.message:'Alertas de regresión temporalmente no disponibles.'},error.status||500);}}
+function mlsRegressionAttachHealth(){if(typeof mlsAutooptHealth==='function'&&!mlsAutooptHealth.__regressionWrapped){const base=mlsAutooptHealth;const wrapped=async function(env){const data=await base(env);try{data.regressionAlerts=await mlsRegressionCollect(env);}catch{data.regressionAlerts={version:MLS_REGRESSION_VERSION,available:false,overall:{status:'evidencia insuficiente',reasons:['Alertas de regresión no disponibles.']},byLanguage:[],byFamily:[],byLevel:[]};if(data.health)data.health.partial=true;}return data;};wrapped.__regressionWrapped=true;mlsAutooptHealth=wrapped;}}
+mlsRegressionAttachHealth();
+if(typeof module!=='undefined'&&module.exports)module.exports={MLS_REGRESSION_VERSION,mlsRegressionScope,mlsRegressionMetrics,mlsRegressionCompare,mlsRegressionAggregate};
