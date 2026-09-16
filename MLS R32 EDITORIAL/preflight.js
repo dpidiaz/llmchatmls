@@ -26,6 +26,11 @@ function mlsPreflightAssess(input={}){
     cloudflareGeneration:{status:cloudflareStatus,reasons:cloudflareReasons,...cloudflare},
     note:'La salud de Workers AI es informativa para generación Cloudflare y no bloquea los lotes editoriales escritos por ChatGPT.'};
 }
+async function mlsPreflightAutoopt(env){
+  if(typeof mlsAutooptEnabled!=='function'||!mlsAutooptEnabled(env))return {status:'deshabilitado',partial:false,reasons:[]};
+  try{const live=await mlsAutooptHealthLive(env);const overall=mlsAutooptHealthOverall(live);return {status:overall.status||'evidencia insuficiente',partial:false,reasons:overall.reasons||[]};}
+  catch{return {status:'evidencia insuficiente',partial:true,reasons:['AUTOOPT no pudo agregarse en este preflight.']};}
+}
 async function mlsPreflightCollect(env){
   await ensureWikiDb(env);await mlsChatEnsureDb(env);
   const queueRows=await env.WIKI_DB.prepare(`SELECT status,COUNT(*) AS n FROM wiki_jobs GROUP BY status`).all();
@@ -34,7 +39,7 @@ async function mlsPreflightCollect(env){
   const runs=await env.WIKI_DB.prepare(`SELECT COUNT(*) AS n FROM wiki_chat_runs WHERE status='active'`).first();
   const reservations=await env.WIKI_DB.prepare(`SELECT COUNT(*) AS n FROM wiki_chat_items WHERE status='pending'`).first();
   const deferred=await env.WIKI_DB.prepare(`SELECT COUNT(*) AS n FROM wiki_chat_incidents i WHERE i.rescue_state='pending' AND i.runner_eligible=1 AND NOT EXISTS (SELECT 1 FROM wiki_articles a WHERE a.code=i.code) AND NOT EXISTS (SELECT 1 FROM wiki_chat_rescue_claims c WHERE c.incident_id=i.id AND c.status='pending')`).first();
-  let autoopt={status:'evidencia insuficiente',partial:true};try{const h=await mlsAutooptHealth(env);autoopt={status:h.health?.status||'evidencia insuficiente',partial:!!h.health?.partial,reasons:h.health?.reasons||[]};}catch{}
+  const autoopt=await mlsPreflightAutoopt(env);
   let semantic={audited:0,watch:0,reviewRequired:0};try{const s=await mlsSemanticStatus(env);semantic={audited:s.audited||0,watch:s.watch||0,reviewRequired:s.reviewRequired||0};}catch{}
   let cloudflare={available:!!env.AI,quotaExhausted:false,circuitOpen:false,dailyNeurons:null,reservedNeurons:null,targetNeurons:typeof WIKI_CLOUDFLARE_NEURON_TARGET==='number'?WIKI_CLOUDFLARE_NEURON_TARGET:null,remainingNeurons:null,estimatedArticleNeurons:null};
   try{const status=await wikiStore(env).getStatus();const target=mlsPreflightNumber(status.dailyNeuronTarget);const used=mlsPreflightNumber(status.dailyNeurons),reserved=mlsPreflightNumber(status.dailyReservedNeurons);cloudflare={...cloudflare,available:!!env.AI,dailyNeurons:used,reservedNeurons:reserved,targetNeurons:target||cloudflare.targetNeurons,remainingNeurons:Math.max(0,(target||0)-used-reserved),estimatedArticleNeurons:mlsPreflightNumber(status.estimatedArticleNeurons),quotaExhausted:!!status.quotaExhaustedDate,circuitOpen:status.workersAiCircuit?.status==='quota_exhausted',circuit:status.workersAiCircuit||null};}catch{cloudflare.available=false;}
