@@ -1,6 +1,14 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+function augmentSemanticOpenApi(text) {
+  const api = JSON.parse(text);
+  api.info.version = '32.0.4';
+  api.paths['/api/wiki/editorial/chat/semantic/status']={get:{operationId:'estadoAuditoriaSemanticaMLS',summary:'Consultar cobertura y hallazgos agregados de la auditoría semántica por muestra.', 'x-openai-isConsequential':false,responses:{'200':{description:'Estado diagnóstico de la muestra.'},'401':{description:'Clave ausente o incorrecta.'}}}};
+  api.paths['/api/wiki/editorial/chat/semantic/sample']={post:{operationId:'muestraAuditoriaSemanticaMLS',summary:'Seleccionar una muestra balanceada de artículos publicados aún no auditados.', 'x-openai-isConsequential':false,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{count:{type:'integer',minimum:1,maximum:10},language:{type:'string'}},additionalProperties:false}}}},responses:{'200':{description:'Muestra privada para revisión semántica.'},'401':{description:'Clave ausente o incorrecta.'}}}};
+  api.paths['/api/wiki/editorial/chat/semantic/record']={post:{operationId:'registrarAuditoriaSemanticaMLS',summary:'Registrar el resultado diagnóstico de una revisión semántica sin modificar el artículo.', 'x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},generatedAt:{type:'string'},verdict:{type:'string',enum:['ok','watch','review_required']},categories:{type:'array',items:{type:'string',enum:['accuracy','terminology','examples','ambiguity','variety','factual','other']}},confidence:{type:'string',enum:['low','medium','high']},notes:{type:'string',minLength:20,maxLength:3000},reviewer:{type:'string',enum:['chatgpt','human']}},required:['code','generatedAt','verdict','categories','confidence','notes','reviewer'],additionalProperties:false}}}},responses:{'200':{description:'Resultado semántico registrado para la versión exacta del artículo.'},'401':{description:'Clave ausente o incorrecta.'},'409':{description:'El artículo cambió desde la muestra.'},'422':{description:'Resultado de auditoría no válido.'}}}};
+  return JSON.stringify(api);
+}
 function buildChatRuntime(root = process.cwd()) {
   const read = file => fs.readFileSync(path.join(root, file), 'utf8');
   const contract = require(path.join(root, 'MLS R32 EDITORIAL/contrato editorial.js'));
@@ -18,21 +26,26 @@ function buildChatRuntime(root = process.cwd()) {
   if (!languages.startsWith('const LANGUAGES =')) throw Error('Falta el mapa original de idiomas.');
   return `\nvar MLS_CHAT_CONTRACT = ${JSON.stringify(contract)};\n` +
     `var MLS_CHAT_VALIDATORS = (() => { const contract = MLS_CHAT_CONTRACT; ${languages}\n${functions}\nreturn {validateCalibration, validateArticle}; })();\n` +
-    `var MLS_CHAT_OPENAPI = ${read('MLS R32 EDITORIAL/chat openapi.json').trim()};\n` +
+    `var MLS_CHAT_OPENAPI = ${augmentSemanticOpenApi(read('MLS R32 EDITORIAL/chat openapi.json'))};\n` +
     `var MLS_CHAT_INSTRUCTIONS = ${JSON.stringify(read('MLS R32 EDITORIAL/GPT privado instrucciones.md'))};\n` +
     read('MLS R32 EDITORIAL/autoopt.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/autoopt history.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/autoopt health.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/chat workflow.js') + '\n' +
-    read('MLS R32 EDITORIAL/deferred rescue.js').replace(/^if \(typeof module .*$/gm, '');
+    read('MLS R32 EDITORIAL/deferred rescue.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
+    read('MLS R32 EDITORIAL/semantic audit.js').replace(/^if \(typeof module .*$/gm, '');
 }
 function patchAutooptPanel(html) {
-  const section = `<section class="card"><h2>Deferred inteligente</h2><p class="note">Diagnóstico determinista de incidencias pendientes. AUTOOPT recomienda; no rescata, publica ni cambia FIFO automáticamente.</p><div id="deferredGeneral" class="grid"></div><div class="tablewrap"><table><thead><tr><th>Categoría</th><th>Cantidad</th></tr></thead><tbody id="deferredCategories"></tbody></table></div><div class="tablewrap"><table><thead><tr><th>Idioma</th><th>Familia</th><th>Cantidad</th></tr></thead><tbody id="deferredFamilies"></tbody></table></div></section>`;
+  const deferredSection = `<section class="card"><h2>Deferred inteligente</h2><p class="note">Diagnóstico determinista de incidencias pendientes. AUTOOPT recomienda; no rescata, publica ni cambia FIFO automáticamente.</p><div id="deferredGeneral" class="grid"></div><div class="tablewrap"><table><thead><tr><th>Categoría</th><th>Cantidad</th></tr></thead><tbody id="deferredCategories"></tbody></table></div><div class="tablewrap"><table><thead><tr><th>Idioma</th><th>Familia</th><th>Cantidad</th></tr></thead><tbody id="deferredFamilies"></tbody></table></div></section>`;
+  const semanticSection = `<section class="card"><h2>Auditoría semántica por muestra</h2><p class="note">Revisión diagnóstica de artículos publicados. Una muestra correcta no certifica todo el corpus y esta vista nunca modifica artículos.</p><div id="semanticGeneral" class="grid"></div><p id="semanticAlert" class="note"></p><div class="tablewrap"><table><thead><tr><th>Idioma</th><th>Familia</th><th>Auditados</th></tr></thead><tbody id="semanticFamilies"></tbody></table></div><div class="tablewrap"><table><thead><tr><th>Hallazgo</th><th>Cantidad</th></tr></thead><tbody id="semanticCategories"></tbody></table></div></section>`;
   const anchor = '<section class="card"><h2>Historial separado de evidencia viva</h2>';
-  if (!html.includes('id="deferredGeneral"')) html = html.replace(anchor, section + '\n' + anchor);
+  if (!html.includes('id="deferredGeneral"')) html = html.replace(anchor, deferredSection + '\n' + anchor);
+  if (!html.includes('id="semanticGeneral"')) html = html.replace(anchor, semanticSection + '\n' + anchor);
   const renderAnchor = "  $('historyGeneral').innerHTML=";
-  const render = `  const d=data.deferredIntelligence||{total:0,retryable:0,notRetryable:0,unknown:0,byCategory:[],byFamily:[]};\n  $('deferredGeneral').innerHTML=metric('Deferred abiertos',num(d.total))+metric('Rescatables',num(d.retryable))+metric('Revisión humana',num(d.notRetryable))+metric('Sin clasificar',num(d.unknown));\n  $('deferredCategories').innerHTML=(d.byCategory||[]).map(x=>\`<tr><td>\${esc(x.name)}</td><td>\${num(x.count)}</td></tr>\`).join('')||'<tr><td colspan="2">Sin deferred abiertos.</td></tr>';\n  $('deferredFamilies').innerHTML=(d.byFamily||[]).map(x=>\`<tr><td>\${esc(x.language)}</td><td>\${esc(x.family)}</td><td>\${num(x.count)}</td></tr>\`).join('')||'<tr><td colspan="3">Sin familias deferred.</td></tr>';\n`;
-  if (!html.includes("$('deferredGeneral').innerHTML")) html = html.replace(renderAnchor, render + renderAnchor);
+  const deferredRender = `  const d=data.deferredIntelligence||{total:0,retryable:0,notRetryable:0,unknown:0,byCategory:[],byFamily:[]};\n  $('deferredGeneral').innerHTML=metric('Deferred abiertos',num(d.total))+metric('Rescatables',num(d.retryable))+metric('Revisión humana',num(d.notRetryable))+metric('Sin clasificar',num(d.unknown));\n  $('deferredCategories').innerHTML=(d.byCategory||[]).map(x=>\`<tr><td>\${esc(x.name)}</td><td>\${num(x.count)}</td></tr>\`).join('')||'<tr><td colspan="2">Sin deferred abiertos.</td></tr>';\n  $('deferredFamilies').innerHTML=(d.byFamily||[]).map(x=>\`<tr><td>\${esc(x.language)}</td><td>\${esc(x.family)}</td><td>\${num(x.count)}</td></tr>\`).join('')||'<tr><td colspan="3">Sin familias deferred.</td></tr>';\n`;
+  const semanticRender = `  const s=data.semanticAudit||{audited:0,totalPublished:0,coverage:0,ok:0,watch:0,reviewRequired:0,byFamily:[],byCategory:[],alert:{status:'evidencia insuficiente',reasons:[]}};\n  $('semanticGeneral').innerHTML=metric('Auditados',num(s.audited))+metric('Publicados',num(s.totalPublished))+metric('Cobertura',pct(s.coverage))+metric('OK',num(s.ok))+metric('Vigilar',num(s.watch))+metric('Revisión requerida',num(s.reviewRequired));\n  $('semanticAlert').textContent=(s.alert?.reasons||[]).join(' ');\n  $('semanticFamilies').innerHTML=(s.byFamily||[]).map(x=>\`<tr><td>\${esc(x.language)}</td><td>\${esc(x.family)}</td><td>\${num(x.count)}</td></tr>\`).join('')||'<tr><td colspan="3">Sin auditorías semánticas todavía.</td></tr>';\n  $('semanticCategories').innerHTML=(s.byCategory||[]).map(x=>\`<tr><td>\${esc(x.name)}</td><td>\${num(x.count)}</td></tr>\`).join('')||'<tr><td colspan="2">Sin hallazgos registrados.</td></tr>';\n`;
+  if (!html.includes("$('deferredGeneral').innerHTML")) html = html.replace(renderAnchor, deferredRender + renderAnchor);
+  if (!html.includes("$('semanticGeneral').innerHTML")) html = html.replace(renderAnchor, semanticRender + renderAnchor);
   return html;
 }
 function main() {
@@ -40,13 +53,13 @@ function main() {
   if (runtime.includes('async function handleMlsChat(')) throw Error('La integración ChatGPT ya está instalada en este runtime.');
   const marker = '    const url = new URL(request.url);';
   if (!runtime.includes(marker) || !runtime.includes('function getEditorialContextR32(')) throw Error('Ejecutar primero habilitar flujo editorial.js sobre R32.');
-  runtime = runtime.replace(marker, marker + '\n    if (url.pathname === "/api/wiki/editorial/chat/autoopt/health") return handleMlsAutooptHealth(request, env);\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);');
+  runtime = runtime.replace(marker, marker + '\n    if (url.pathname === "/api/wiki/editorial/chat/autoopt/health") return handleMlsAutooptHealth(request, env);\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/semantic/")) return handleMlsSemanticAudit(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);');
   fs.writeFileSync(target, runtime + buildChatRuntime());
   const panelSource = path.join(process.cwd(), 'MLS R32 EDITORIAL/autoopt health.html');
   const panelTarget = path.join(process.cwd(), 'public/autoopt.html');
   fs.copyFileSync(panelSource, panelTarget);
   fs.writeFileSync(panelTarget, patchAutooptPanel(fs.readFileSync(panelTarget, 'utf8')));
-  console.log('ChatGPT editorial habilitado; las operaciones requieren MLS_EDITORIAL_CHAT_KEY. Panel AUTOOPT y rescate inteligente copiados.');
+  console.log('ChatGPT editorial habilitado; requiere MLS_EDITORIAL_CHAT_KEY. Panel AUTOOPT, rescate inteligente y auditoría semántica copiados.');
 }
-module.exports = {buildChatRuntime, patchAutooptPanel};
+module.exports = {buildChatRuntime, patchAutooptPanel, augmentSemanticOpenApi};
 if (require.main === module) main();

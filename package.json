@@ -38,6 +38,6 @@
     "start": "wrangler dev",
     "test": "vitest",
     "disable-automation": "(wrangler queues consumer worker remove mls-wiki-jobs llmchatmls || wrangler queues consumer remove mls-wiki-jobs llmchatmls || true); printf 'y\\n' | wrangler queues delete mls-wiki-jobs || true; printf 'y\\n' | wrangler queues delete mls-wiki-jobs-dlq || true",
-    "test:chat-editorial": "node --test 'test/chat-editorial.test.cjs' 'test/autoopt health.test.cjs' 'test/deferred rescue.test.cjs'"
+    "test:chat-editorial": "node --test 'test/chat-editorial.test.cjs' 'test/autoopt health.test.cjs' 'test/deferred rescue.test.cjs' 'test/semantic audit.test.cjs'"
   }
 }
