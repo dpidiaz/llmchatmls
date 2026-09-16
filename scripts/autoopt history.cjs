@@ -1,6 +1,6 @@
 'use strict';
 // Administrative only. No route, scheduler, provider, article write or secret access.
-const fs=require('node:fs'), crypto=require('node:crypto'), {execFileSync}=require('node:child_process');
+const fs=require('node:fs'), path=require('node:path'), crypto=require('node:crypto'), {execFileSync}=require('node:child_process');
 const contract=require('../MLS R32 EDITORIAL/contrato editorial.js');
 const auto=require('../MLS R32 EDITORIAL/autoopt.js');
 const history=require('../MLS R32 EDITORIAL/autoopt history.js');
@@ -157,7 +157,9 @@ async function rollback(query,batch) {
 function wranglerQuery(database,target) {
   return async sql=>{
     let raw;
-    try {raw=execFileSync(process.execPath,[require.resolve('wrangler/bin/wrangler.js'),'d1','execute',database,'--'+target,'--command',sql,'--json'],{encoding:'utf8',maxBuffer:32*1024*1024,stdio:['ignore','pipe','pipe']});}
+    // Wrangler exports its package metadata, not the bin subpath, in Node 24.
+    const wrangler=path.join(path.dirname(require.resolve('wrangler/package.json')),'bin','wrangler.js');
+    try {raw=execFileSync(process.execPath,[wrangler,'d1','execute',database,'--'+target,'--command',sql,'--json'],{encoding:'utf8',maxBuffer:32*1024*1024,stdio:['ignore','pipe','pipe']});}
     catch {throw Error('D1 no pudo ejecutar la operación. Revise autenticación/permisos y conectividad; no se imprimen SQL ni datos privados.');}
     let result;try {result=JSON.parse(raw);} catch {throw Error('Wrangler no devolvió JSON válido.');}
     const chunks=Array.isArray(result)?result:[result];
