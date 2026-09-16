@@ -1,12 +1,14 @@
 'use strict';
+const fs=require('node:fs');
+const path=require('node:path');
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const {patchReader,atlasHelpers}=require('../scripts/habilitar atlas lector.js');
 
-function sampleReader(){return `(()=>{\n  async function page(code){\n    const chapterIndex=chapterEntries.map((x,i)=>\`<a class="local-entry \${x.code===code?'active':''}" href="#entry=\${x.code}"><span>\${String(i+1).padStart(2,'0')}</span><div><strong>\${esc(x.title)}</strong>\${x.target?\`<small>\${esc(x.target)}</small>\`:''}</div></a>\`).join('');\n    MLS.app.innerHTML=\`<details class="mobile-local-index"><summary>Ver temas de este capítulo</summary><div class="local-entry-list">\${chapterIndex}</div></details><div class="reader-actions simple-actions"><button class="btn primary" id="listenBtn">🔊 Escuchar</button><button class="btn ai-entry-btn" id="aiExplainBtn">✨ Profesor IA</button><button class="btn" id="favBtn">\${fav?'★ Guardado':'☆ Guardar'}</button></div>\`;\n    document.getElementById('favBtn').onclick=()=>{if(MLS.state.favorites.includes(code))MLS.state.favorites=MLS.state.favorites.filter(x=>x!==code);else MLS.state.favorites.push(code);MLS.save();page(code)};\n  }\n})();`;}
+const readerSource=()=>fs.readFileSync(path.join(__dirname,'..','MLS R32 OVERLAY','reader.js'),'utf8');
 
-test('el atlas se inserta en el lector sin sustituir navegación existente',()=>{
-  const patched=patchReader(sampleReader());
+test('el atlas se inserta en el lector real sin sustituir navegación existente',()=>{
+  const patched=patchReader(readerSource());
   assert.match(patched,/id="mlsAtlasDialog"/);
   assert.match(patched,/id="mlsAtlasOpen"/);
   assert.match(patched,/atlasBuild\(vol,e,m\)/);
@@ -14,10 +16,12 @@ test('el atlas se inserta en el lector sin sustituir navegación existente',()=>
   assert.match(patched,/Ver temas de este capítulo/);
   assert.match(patched,/Profesor IA/);
   assert.match(patched,/favBtn/);
+  assert.match(patched,/← Anterior/);
+  assert.match(patched,/Siguiente →/);
 });
 
 test('el parche del atlas es idempotente',()=>{
-  const once=patchReader(sampleReader());
+  const once=patchReader(readerSource());
   const twice=patchReader(once);
   assert.equal(twice,once);
   assert.equal((twice.match(/id="mlsAtlasDialog"/g)||[]).length,1);
@@ -28,7 +32,7 @@ test('helpers declaran búsqueda, filtro de nivel, capítulos y tema actual',()=
   assert.match(source,/mlsAtlasSearch/);
   assert.match(source,/mlsAtlasLevel/);
   assert.match(source,/data-atlas-chapter/);
-  assert.match(source,/atlas-entry active/);
+  assert.match(source,/item\.code===e\.code\?'active'/);
   assert.match(source,/No es una ruta obligatoria/);
   assert.doesNotMatch(source,/examen|quiz|progreso obligatorio|ruta obligatoria de aprendizaje/i);
 });
