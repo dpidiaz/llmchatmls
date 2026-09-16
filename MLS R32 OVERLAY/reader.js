@@ -137,7 +137,7 @@
     const advanced=MLS.state.advancedDetails?`<section class="advanced-details"><div class="advanced-title"><span>Detalles avanzados</span><small>Información técnica y de referencia</small></div><article class="entry-body">${MLS.renderMarkdown(e.auditedBody||e.body,e.language)}</article></section>`:'';
     const outlineHTML=MLS.state.advancedDetails&&outline.length?outline.map(x=>`<button type="button" data-scroll="${escAttr(x.id)}">${esc(short(x.label))}</button>`).join(''):'';
     MLS.app.innerHTML=`<div class="reader-wide reading-first">
-      <div class="crumbs reader-crumbs"><a href="#lang=${m.slug}">${m.flag} ${esc(m.name)}</a><span>›</span><a href="${chapterHash}">Capítulo ${esc(e.chapterNum)}</a></div>
+      <div class="crumbs reader-crumbs"><a href="#lang=${m.slug}">${m.flag} ${esc(m.name)}</a><span>›</span><a href="${chapterHash}">Capítulo ${esc(MLS.chapterDisplayNum(e.language,e.chapterNum))}</a></div>
       <details class="mobile-local-index"><summary>Ver temas de este capítulo</summary><div class="local-entry-list">${chapterIndex}</div></details>
       <div class="reader-layout">
         <aside class="reader-left"><div class="sticky-reader-panel"><div class="reader-panel-label">En este capítulo</div><div class="local-entry-list">${chapterIndex}</div></div></aside>
