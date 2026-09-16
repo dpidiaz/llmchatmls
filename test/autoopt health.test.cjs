@@ -29,6 +29,14 @@ test('AUTOOPT health: watch alert is diagnostic for deferred, rejection and firs
   assert(alert.reasons.some(x=>/Deferred/.test(x)));assert(alert.reasons.some(x=>/Rechazos R32/.test(x)));assert(alert.reasons.some(x=>/primer intento/.test(x)));
 });
 
+test('AUTOOPT health: family regression elevates overall health without becoming an action',()=>{
+  const overall=health.mlsAutooptHealthOverall({alert:{status:'estable',reasons:['global ok'],conclusive:false},byFamily:[
+    {language:'ingles',family:'conjugacion_verbal',alert:{status:'vigilar',reasons:['Deferred proporcionalmente alto en la muestra viva.'],conclusive:false}}
+  ]});
+  assert.equal(overall.status,'vigilar');assert.equal(overall.conclusive,false);
+  assert.match(overall.reasons[0],/ingles \/ conjugacion_verbal/);
+});
+
 test('AUTOOPT health: language is part of family and level aggregation key',()=>{
   const stats=JSON.stringify({validationAttempts:8,firstAttempts:8,successfulFirstPass:8,published:5,publicationsWithAttemptHistory:5,attemptsForPublished:5});
   const rows=[
