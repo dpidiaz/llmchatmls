@@ -21,16 +21,21 @@ function buildChatRuntime(root = process.cwd()) {
     `var MLS_CHAT_OPENAPI = ${read('MLS R32 EDITORIAL/chat openapi.json').trim()};\n` +
     `var MLS_CHAT_INSTRUCTIONS = ${JSON.stringify(read('MLS R32 EDITORIAL/GPT privado instrucciones.md'))};\n` +
     read('MLS R32 EDITORIAL/autoopt.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
-    read('MLS R32 EDITORIAL/autoopt history.js').replace(/^if \(typeof module .*$/gm, '') + '\n' + read('MLS R32 EDITORIAL/chat workflow.js');
+    read('MLS R32 EDITORIAL/autoopt history.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
+    read('MLS R32 EDITORIAL/autoopt health.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
+    read('MLS R32 EDITORIAL/chat workflow.js');
 }
 function main() {
   const target = 'src/index.js'; let runtime = fs.readFileSync(target, 'utf8');
   if (runtime.includes('async function handleMlsChat(')) throw Error('La integración ChatGPT ya está instalada en este runtime.');
   const marker = '    const url = new URL(request.url);';
   if (!runtime.includes(marker) || !runtime.includes('function getEditorialContextR32(')) throw Error('Ejecutar primero habilitar flujo editorial.js sobre R32.');
-  runtime = runtime.replace(marker, marker + '\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);');
+  runtime = runtime.replace(marker, marker + '\n    if (url.pathname === "/api/wiki/editorial/chat/autoopt/health") return handleMlsAutooptHealth(request, env);\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);');
   fs.writeFileSync(target, runtime + buildChatRuntime());
-  console.log('ChatGPT editorial habilitado; las operaciones requieren MLS_EDITORIAL_CHAT_KEY.');
+  const panelSource = path.join(process.cwd(), 'MLS R32 EDITORIAL/autoopt health.html');
+  const panelTarget = path.join(process.cwd(), 'public/autoopt.html');
+  fs.copyFileSync(panelSource, panelTarget);
+  console.log('ChatGPT editorial habilitado; las operaciones requieren MLS_EDITORIAL_CHAT_KEY. Panel AUTOOPT copiado.');
 }
 module.exports = {buildChatRuntime};
 if (require.main === module) main();
