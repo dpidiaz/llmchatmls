@@ -2,7 +2,7 @@
 const MLS_COVERAGE_MAP_VERSION='1.0';
 const MLS_COVERAGE_LEVELS=['A1','A2','B1','B2','C1','C2'];
 function mlsCoverageEvidence(count){const n=Number(count)||0;return n===0?'sin evidencia':n<5?'baja':n<20?'media':'alta';}
-function mlsCoverageFamily(target={}){return typeof mlsAutooptFamily==='function'?mlsAutooptFamily(target):String(target.family||'unknown');}
+function mlsCoverageFamily(target={}){if(typeof mlsAutooptFamily==='function')return mlsAutooptFamily(target);if(typeof globalThis!=='undefined'&&typeof globalThis.mlsAutooptFamily==='function')return globalThis.mlsAutooptFamily(target);return String(target.family||'unknown');}
 function mlsCoveragePct(n,d){return d?Math.round((n/d)*10000)/10000:0;}
 function mlsCoverageAggregate(articles=[],audits=[],languageOrder=[]){
   const auditKey=new Map();for(const a of audits||[])auditKey.set(a.code+'|'+a.article_generated_at,a);
