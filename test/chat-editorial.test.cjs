@@ -65,6 +65,35 @@ test('authentication fails closed; public schema accessible',async()=>{
   s.env.MLS_EDITORIAL_CHAT_KEY='';assert.equal((await s.request('status')).status,503);
   assert.equal((await s.request('openapi.json')).status,200);
 });
+test('Action start uses the exact POST path, JSON, auth and controlled method errors',async()=>{
+  const s=setup();
+  const path='/api/wiki/editorial/chat/start';
+  const body={command:'MLS siguientes 5',requestId:'11111111-1111-4111-8111-111111111111'};
+  const call=async (pathname,method='POST',token=s.env.MLS_EDITORIAL_CHAT_KEY,contentType='application/json')=>{
+    const url=new URL('https://example.com'+pathname);
+    const response=await s.context.handleMlsChat(new Request(url,{method,headers:{authorization:'Bearer '+token,'content-type':contentType},...(method==='POST'?{body:JSON.stringify(body)}:{})}),s.env,url);
+    return {status:response.status,allow:response.headers.get('allow'),data:await response.json()};
+  };
+  const first=await call(path);
+  assert.equal(first.status,200);assert.ok(first.data.run.id);assert.equal(first.data.run.requested,5);
+  const again=await call(path);
+  assert.equal(again.status,200);assert.equal(again.data.run.id,first.data.run.id);assert.equal(again.data.reused,true);
+  assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM wiki_chat_runs').get().n,1);
+  const wrongMethod=await call(path,'GET');
+  assert.equal(wrongMethod.status,405);assert.equal(wrongMethod.allow,'POST');
+  assert.equal((await call(path+'/')).status,404);
+  assert.equal((await call(path,'POST','invalid-token')).status,401);
+  assert.equal((await call(path,'POST',s.env.MLS_EDITORIAL_CHAT_KEY,'text/plain')).status,415);
+});
+test('Action rescue start stays in rescue mode and never substitutes normal queue entries',async()=>{
+  const s=setup();
+  const body={command:'MLS rescate siguientes 1',requestId:'22222222-2222-4222-8222-222222222222'};
+  const result=await s.request('start',body);
+  assert.equal(result.status,200);
+  assert.equal(result.data.run.runType,'rescue-chat');
+  assert.equal(result.data.run.selected,0);
+  assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM wiki_chat_items').get().n,0);
+});
 test('size, concurrent runs, missing context, bad draft, FIFO and cancel guards',async()=>{
   const s=setup();assert.equal((await s.start(401)).status,400);assert.equal((await s.start(0)).status,400);
   const a=await s.start(10);const id=a.data.run.id;const b=await s.start(30);assert.notEqual(b.data.run.id,id);
