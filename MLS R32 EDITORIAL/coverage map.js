@@ -1,0 +1,27 @@
+// Read-only editorial coverage map. No AI calls, generation, publication, rescue or FIFO changes.
+const MLS_COVERAGE_MAP_VERSION='1.0';
+const MLS_COVERAGE_LEVELS=['A1','A2','B1','B2','C1','C2'];
+function mlsCoverageEvidence(count){const n=Number(count)||0;return n===0?'sin evidencia':n<5?'baja':n<20?'media':'alta';}
+function mlsCoverageFamily(target={}){return typeof mlsAutooptFamily==='function'?mlsAutooptFamily(target):String(target.family||'unknown');}
+function mlsCoveragePct(n,d){return d?Math.round((n/d)*10000)/10000:0;}
+function mlsCoverageAggregate(articles=[],audits=[],languageOrder=[]){
+  const auditKey=new Map();for(const a of audits||[])auditKey.set(a.code+'|'+a.article_generated_at,a);
+  const exactLanguages=(languageOrder||[]).map(lang=>{const rows=articles.filter(a=>a.language===lang.slug);const audited=rows.filter(a=>auditKey.has(a.code+'|'+a.generated_at)).length;const published=rows.length;return {language:lang.slug,languageName:lang.name,total:Number(lang.total)||0,published,pending:Math.max(0,(Number(lang.total)||0)-published),completion:mlsCoveragePct(published,Number(lang.total)||0),semanticAudited:audited};});
+  const grouped=(keyFn,metaFn)=>{const map=new Map();for(const row of articles){const key=keyFn(row);if(!map.has(key))map.set(key,{...metaFn(row),published:0,semanticAudited:0,watch:0,reviewRequired:0});const x=map.get(key);x.published++;const au=auditKey.get(row.code+'|'+row.generated_at);if(au){x.semanticAudited++;if(au.verdict==='watch')x.watch++;if(au.verdict==='review_required')x.reviewRequired++;}}return [...map.values()].map(x=>({...x,evidence:mlsCoverageEvidence(x.published)}));};
+  const levelRows=[];for(const lang of languageOrder||[])for(const level of MLS_COVERAGE_LEVELS){const rows=articles.filter(a=>a.language===lang.slug&&String(a.level||'').toUpperCase()===level);const audited=rows.filter(a=>auditKey.has(a.code+'|'+a.generated_at)).length;levelRows.push({language:lang.slug,level,published:rows.length,semanticAudited:audited,observedShare:mlsCoveragePct(rows.length,articles.filter(a=>a.language===lang.slug).length),evidence:mlsCoverageEvidence(rows.length)});}
+  const byPart=grouped(a=>[a.language,a.part||'unknown'].join('|'),a=>({language:a.language,part:a.part||'unknown'}));
+  const byChapter=grouped(a=>[a.language,a.part||'unknown',a.chapter||'unknown'].join('|'),a=>({language:a.language,part:a.part||'unknown',chapter:a.chapter||'unknown'}));
+  const famArticles=articles.map(a=>({...a,family:mlsCoverageFamily(a)}));
+  const byFamily=(()=>{const map=new Map();for(const a of famArticles){const key=a.language+'|'+a.family;if(!map.has(key))map.set(key,{language:a.language,family:a.family,published:0,semanticAudited:0,watch:0,reviewRequired:0});const x=map.get(key);x.published++;const au=auditKey.get(a.code+'|'+a.generated_at);if(au){x.semanticAudited++;if(au.verdict==='watch')x.watch++;if(au.verdict==='review_required')x.reviewRequired++;}}return [...map.values()].map(x=>({...x,evidence:mlsCoverageEvidence(x.published)}));})();
+  const planned=(languageOrder||[]).reduce((s,x)=>s+(Number(x.total)||0),0),published=articles.length;
+  return {version:MLS_COVERAGE_MAP_VERSION,diagnosticOnly:true,exact:{scope:'language',planned,published,pending:Math.max(0,planned-published),completion:mlsCoveragePct(published,planned),byLanguage:exactLanguages},observed:{denominatorAvailable:false,levels:levelRows,parts:byPart,chapters:byChapter,families:byFamily,note:'Nivel, parte, capítulo y familia muestran evidencia observada entre artículos publicados; no equivalen a porcentaje de completitud planificada.'}};
+}
+async function mlsCoverageMap(env){
+  const {results:articles}=await env.WIKI_DB.prepare('SELECT code,language,language_name,title,level,part,chapter,generated_at FROM wiki_articles ORDER BY language,n').all();
+  let audits=[];try{if(typeof mlsSemanticEnsure==='function')await mlsSemanticEnsure(env);const r=await env.WIKI_DB.prepare(`SELECT s.code,s.article_generated_at,s.verdict FROM wiki_semantic_audits s JOIN wiki_articles a ON a.code=s.code AND a.generated_at=s.article_generated_at WHERE s.version=?`).bind(typeof MLS_SEMANTIC_AUDIT_VERSION==='string'?MLS_SEMANTIC_AUDIT_VERSION:'1.0').all();audits=r.results||[];}catch{}
+  return mlsCoverageAggregate(articles||[],audits,typeof WIKI_LANGUAGE_ORDER!=='undefined'?WIKI_LANGUAGE_ORDER:[]);
+}
+async function handleMlsCoverageMap(request,env){try{await mlsChatAuthenticate(request,env);if(request.method!=='GET')mlsChatError(405,'Método no permitido.');await ensureWikiDb(env);return mlsChatJson({ok:true,...await mlsCoverageMap(env)});}catch(error){return mlsChatJson({ok:false,error:error.status?error.message:'Mapa de cobertura temporalmente no disponible.'},error.status||500);}}
+function mlsCoverageAttachRuntime(){if(typeof mlsAutooptHealth==='function'&&!mlsAutooptHealth.__coverageWrapped){const base=mlsAutooptHealth;const wrapped=async function(env){const data=await base(env);try{data.coverageMap=await mlsCoverageMap(env);}catch{data.coverageMap={version:MLS_COVERAGE_MAP_VERSION,available:false,exact:{planned:0,published:0,pending:0,completion:0,byLanguage:[]},observed:{levels:[],parts:[],chapters:[],families:[],denominatorAvailable:false}};if(data.health)data.health.partial=true;}return data;};wrapped.__coverageWrapped=true;mlsAutooptHealth=wrapped;}}
+mlsCoverageAttachRuntime();
+if(typeof module!=='undefined'&&module.exports)module.exports={MLS_COVERAGE_LEVELS,mlsCoverageEvidence,mlsCoverageAggregate,mlsCoveragePct};
