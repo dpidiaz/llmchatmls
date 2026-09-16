@@ -59,6 +59,15 @@ function mlsAutooptHealthGroups(rows, mode) {
   return [...groups.values()].map(group=>{const metrics=mlsAutooptHealthMetrics(group.stats,false);return {...group.meta,updatedAt:group.updatedAt,metrics,alert:mlsAutooptHealthAlert(metrics)};})
     .sort((a,b)=>String(a.language).localeCompare(String(b.language))||String(a.family||a.level||'').localeCompare(String(b.family||b.level||'')));
 }
+function mlsAutooptHealthOverall(live) {
+  if(live?.alert?.status==='vigilar') return live.alert;
+  const warnings=(live?.byFamily||[]).filter(x=>x.alert?.status==='vigilar');
+  if(warnings.length) return {status:'vigilar',conclusive:false,reasons:warnings.slice(0,5).map(x=>{
+    const why=(x.alert.reasons||[])[0]||'Señal diagnóstica de regresión.';
+    return `${x.language} / ${x.family}: ${why}`;
+  })};
+  return live?.alert||{status:'evidencia insuficiente',reasons:['No hay evidencia viva disponible.'],conclusive:false};
+}
 function mlsAutooptHealthEmptyLive() {
   const metrics=mlsAutooptHealthMetrics({});
   return {eventCount:0,lastObservationAt:null,metrics,alert:mlsAutooptHealthAlert(metrics),byLanguage:[],byFamily:[],byLevel:[],byPrompt:[]};
@@ -111,8 +120,9 @@ async function mlsAutooptHealth(env) {
   const enabled=mlsAutooptEnabled(env),historyEnabled=mlsAutooptHistoryEnabled(env);let live=mlsAutooptHealthEmptyLive(),liveAvailable=!enabled,partial=false;
   if(enabled){try{live=await mlsAutooptHealthLive(env);liveAvailable=true;}catch{console.error('mls-autoopt-health-live-unavailable');partial=true;}}
   const history=await mlsAutooptHealthHistory(env);if(historyEnabled&&!history.available)partial=true;
+  const overall=mlsAutooptHealthOverall(live);
   return {ok:true,generatedAt:new Date().toISOString(),autoopt:{enabled,historyEnabled,version:MLS_AUTOOPT_VERSION,promptVersion:MLS_CHAT_CONTRACT.promptVersion},live:{...live,available:liveAvailable},history,
-    health:{status:live.alert.status,reasons:live.alert.reasons,diagnosticOnly:true,partial},samplePolicy:{minimumFirstAttempts:MLS_AUTOOPT_HEALTH_MIN_FIRST_ATTEMPTS,
+    health:{status:overall.status,reasons:overall.reasons,diagnosticOnly:true,partial},samplePolicy:{minimumFirstAttempts:MLS_AUTOOPT_HEALTH_MIN_FIRST_ATTEMPTS,
       minimumPublications:MLS_AUTOOPT_HEALTH_MIN_PUBLICATIONS,watchFirstPassBelow:0.70,watchRejectionAtOrAbove:0.30,watchDeferredAtOrAbove:0.15},
     privacy:{aggregatedOnly:true,contentExposed:false,promptsExposed:false,secretsExposed:false}};
 }
@@ -121,4 +131,4 @@ async function handleMlsAutooptHealth(request,env) {
   try {await mlsChatAuthenticate(request,env);return mlsChatJson(await mlsAutooptHealth(env));}
   catch(error){if(!error.status)console.error('mls-autoopt-health-failure');return mlsChatJson({ok:false,error:error.status?error.message:'Panel AUTOOPT temporalmente no disponible.'},error.status||500);}
 }
-if (typeof module !== 'undefined' && module.exports) module.exports={mlsAutooptHealthMetrics,mlsAutooptHealthAlert,mlsAutooptHealthGroups,mlsAutooptHealthHistoryAggregate};
+if (typeof module !== 'undefined' && module.exports) module.exports={mlsAutooptHealthMetrics,mlsAutooptHealthAlert,mlsAutooptHealthGroups,mlsAutooptHealthOverall,mlsAutooptHealthHistoryAggregate};
