@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Salud AUTOOPT · MLS</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17221d;background:#f4f2ed}*{box-sizing:border-box}body{margin:0;background:#f4f2ed;color:#17221d}main{max-width:980px;margin:auto;padding:calc(22px + env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom))}h1{font-size:clamp(1.8rem,7vw,3rem);line-height:1;margin:0 0 8px}h2{font-size:1.15rem;margin:0 0 12px}.sub{color:#5b665f;margin:0 0 18px;line-height:1.45}.card{background:#fff;border:1px solid #ddd8cf;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 10px 28px rgba(33,43,37,.05)}.auth{display:grid;grid-template-columns:1fr auto;gap:9px}.auth input,.auth button{font:inherit;border:1px solid #c8c2b8;border-radius:12px;padding:12px;background:#fff;color:#17221d}.auth button{font-weight:750;background:#244c3d;color:#fff;border-color:#244c3d}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{padding:12px;border-radius:14px;background:#f7f5f0;border:1px solid #e5e0d7}.metric small{display:block;color:#667169;margin-bottom:5px}.metric strong{font-size:1.35rem;line-height:1.1}.status{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:800;font-size:.86rem;background:#ece8df}.status.estable{background:#e7f2ea;color:#225c3c}.status.vigilar{background:#fff0dc;color:#875000}.status.insuficiente{background:#ececf4;color:#52526c}.note{font-size:.9rem;color:#69736c;line-height:1.45}.tablewrap{overflow:auto;margin:0 -4px}table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #ece8e0;vertical-align:top}th{font-size:.78rem;color:#657068;text-transform:uppercase;letter-spacing:.04em}.split{display:grid;gap:12px}.hidden{display:none!important}.error{background:#fff0ee;border-color:#e4b5ad;color:#7c3028}.okline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.bar{height:8px;border-radius:999px;background:#ece9e2;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;background:#315f4d}.sectionhead{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.muted{color:#68736c}.pill{display:inline-block;font-size:.78rem;padding:4px 8px;border-radius:999px;background:#efede8;margin:2px}.refresh{font:inherit;border:1px solid #c8c2b8;border-radius:10px;padding:8px 10px;background:#fff;color:#17221d;font-weight:700}@media(min-width:760px){main{padding-left:28px;padding-right:28px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.split{grid-template-columns:1fr 1fr}}@media(prefers-color-scheme:dark){:root,body{background:#111613;color:#edf2ee}.card{background:#19201c;border-color:#303a34}.sub,.note,.muted,.metric small{color:#abb5ae}.metric{background:#151b18;border-color:#2a342e}.auth input,.auth button,.refresh{background:#151b18;color:#edf2ee;border-color:#3a463f}.auth button{background:#315f4d}.status{background:#2b312d}.status.estable{background:#173c29;color:#b9e8ca}.status.vigilar{background:#4b3315;color:#ffd69a}.status.insuficiente{background:#2d2d40;color:#d4d4ef}th,td{border-color:#303832}.bar{background:#2b332e}.pill{background:#29312c}}
+</style>
+</head>
+<body>
+<main>
+<h1>Salud AUTOOPT</h1>
+<p class="sub">Diagnóstico privado y de solo lectura de MASTER LANGUAGE SYSTEM R32. El panel no genera, publica, reordena ni detiene entradas.</p>
+<section class="card" id="login">
+  <h2>Acceso editorial</h2>
+  <div class="auth"><input id="key" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="MLS editorial key"><button id="load">Abrir</button></div>
+  <p class="note">La clave se usa solo en memoria para esta consulta y no se guarda en localStorage ni se muestra en el panel.</p>
+</section>
+<section id="error" class="card error hidden"></section>
+<div id="panel" class="hidden">
+<section class="card"><div class="sectionhead"><h2>Estado general</h2><button class="refresh" id="refresh">Actualizar</button></div><div class="okline"><span id="healthStatus" class="status"></span><span id="generated" class="muted"></span></div><div id="general" class="grid" style="margin-top:12px"></div><p id="healthReasons" class="note"></p></section>
+<section class="card"><h2>Métricas vivas</h2><div id="live" class="grid"></div><div id="wordRange" class="note"></div></section>
+<section class="card"><h2>Por idioma</h2><p class="note">Cada idioma se evalúa por separado; no se transfieren conclusiones lingüísticas entre idiomas.</p><div class="tablewrap"><table><thead><tr><th>Idioma</th><th>Validaciones</th><th>Publicaciones</th><th>1er intento</th><th>Deferred</th><th>Alerta</th></tr></thead><tbody id="languages"></tbody></table></div></section>
+<section class="card"><h2>Por familia gramatical</h2><div class="tablewrap"><table><thead><tr><th>Idioma</th><th>Familia</th><th>Muestra</th><th>1er intento</th><th>Rechazos</th><th>Alerta</th></tr></thead><tbody id="families"></tbody></table></div></section>
+<section class="card"><h2>Por nivel</h2><div class="tablewrap"><table><thead><tr><th>Idioma</th><th>Nivel</th><th>Validaciones</th><th>Publicaciones</th><th>1er intento</th><th>Alerta</th></tr></thead><tbody id="levels"></tbody></table></div></section>
+<section class="card"><h2>Historial separado de evidencia viva</h2><div id="historyGeneral" class="grid"></div><p id="historyNote" class="note"></p><div class="split"><div><strong>Por idioma</strong><div id="historyLanguages" class="note"></div></div><div><strong>Por perfil</strong><div id="historyProfiles" class="note"></div></div></div></section>
+<section class="card"><h2>Versiones de prompt</h2><div class="tablewrap"><table><thead><tr><th>Prompt</th><th>Validaciones vivas</th><th>Publicaciones vivas</th><th>Historial</th><th>Alerta</th></tr></thead><tbody id="prompts"></tbody></table></div></section>
+<section class="card"><h2>Interpretación</h2><p class="note"><strong>Estable:</strong> hay muestra viva suficiente y no aparecen señales diagnósticas de regresión. <strong>Vigilar:</strong> hay needs review, deferred o rechazos proporcionalmente altos, o una caída de primer intento. <strong>Evidencia insuficiente:</strong> la muestra viva todavía es demasiado pequeña para una conclusión. Ninguna alerta cambia configuraciones ni detiene publicaciones.</p></section>
+</div>
+</main>
+<script>
+(()=>{
+let editorialKey='';const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pct=v=>v==null?'—':Math.round(v*1000)/10+' %';const num=v=>Number(v||0).toLocaleString('es-GT');
+const statusClass=s=>s==='estable'?'estable':s==='vigilar'?'vigilar':'insuficiente';
+function metric(label,value){return `<div class="metric"><small>${esc(label)}</small><strong>${esc(value)}</strong></div>`}
+function setError(message){$('error').textContent=message;$('error').classList.remove('hidden')}
+function hideError(){$('error').classList.add('hidden')}
+function alertCell(a){return `<span class="status ${statusClass(a?.status)}">${esc(a?.status||'evidencia insuficiente')}</span>`}
+function render(data){
+  $('panel').classList.remove('hidden');$('login').classList.add('hidden');hideError();
+  $('healthStatus').className='status '+statusClass(data.health.status);$('healthStatus').textContent=data.health.status;
+  $('generated').textContent='Actualizado '+new Date(data.generatedAt).toLocaleString('es-GT');$('healthReasons').textContent=(data.health.reasons||[]).join(' ');
+  $('general').innerHTML=metric('AUTOOPT',data.autoopt.enabled?'Activo':'Inactivo')+metric('Historial',data.autoopt.historyEnabled?'Activo':'Inactivo')+metric('AUTOOPT versión',data.autoopt.version)+metric('Prompt',data.autoopt.promptVersion)+metric('Eventos vivos',num(data.live.eventCount))+metric('Evidencia histórica',num(data.history.evidenceCount))+metric('Última observación',data.live.lastObservationAt?new Date(data.live.lastObservationAt).toLocaleString('es-GT'):'Sin eventos vivos')+metric('Panel parcial',data.health.partial?'Sí':'No');
+  const m=data.live.metrics;
+  $('live').innerHTML=metric('Validaciones',num(m.validations))+metric('Publicaciones',num(m.publications))+metric('Primer intento exitoso',num(m.firstAttemptSuccesses))+metric('Tasa primer intento',pct(m.firstPassSuccessRate))+metric('Intentos / publicación',m.attemptsPerPublication==null?'—':m.attemptsPerPublication.toFixed(2))+metric('Deferred',num(m.deferred))+metric('Needs review',num(m.needsReview))+metric('Fallos R32',num(m.r32Failures))+metric('Fallos longitud',num(m.lengthFailures))+metric('Fallos regla',num(m.ruleFailures))+metric('Fallos Markdown',num(m.markdownFailures))+metric('Fallos contrato',num(m.contractFailures))+metric('Otros fallos',num(m.otherFailures))+metric('Racha 1er intento',num(m.currentFirstPassStreak));
+  $('wordRange').textContent=`Publicaciones exitosas: ${m.successfulWords.min??'—'}–${m.successfulWords.max??'—'} palabras; promedio ${m.successfulWords.average??'—'}.`;
+  $('languages').innerHTML=(data.live.byLanguage||[]).map(x=>`<tr><td>${esc(x.language)}</td><td>${num(x.metrics.validations)}</td><td>${num(x.metrics.publications)}</td><td>${pct(x.metrics.firstPassSuccessRate)}</td><td>${num(x.metrics.deferred)}</td><td>${alertCell(x.alert)}</td></tr>`).join('')||'<tr><td colspan="6">Sin evidencia viva todavía.</td></tr>';
+  $('families').innerHTML=(data.live.byFamily||[]).map(x=>`<tr><td>${esc(x.language)}</td><td>${esc(x.family)}</td><td>${num(x.metrics.sample.firstAttempts)}</td><td>${pct(x.metrics.firstPassSuccessRate)}</td><td>${pct(x.metrics.rejectionRate)}</td><td>${alertCell(x.alert)}</td></tr>`).join('')||'<tr><td colspan="6">Sin familias observadas todavía.</td></tr>';
+  $('levels').innerHTML=(data.live.byLevel||[]).map(x=>`<tr><td>${esc(x.language)}</td><td>${esc(x.level)}</td><td>${num(x.metrics.validations)}</td><td>${num(x.metrics.publications)}</td><td>${pct(x.metrics.firstPassSuccessRate)}</td><td>${alertCell(x.alert)}</td></tr>`).join('')||'<tr><td colspan="6">Sin niveles observados todavía.</td></tr>';
+  $('historyGeneral').innerHTML=metric('Historial disponible',data.history.available?'Sí':'No')+metric('Lotes activos',num(data.history.activeBatchCount))+metric('Evidencias',num(data.history.evidenceCount))+metric('Peso máximo',pct(data.history.boundedMaxWeight));
+  $('historyNote').textContent=data.history.note||'';
+  $('historyLanguages').innerHTML=(data.history.byLanguage||[]).map(x=>`<span class="pill">${esc(x.language)} · ${num(x.publications)} pub · ${num(x.incidents)} incid.</span>`).join('')||'Sin evidencia histórica compatible.';
+  $('historyProfiles').innerHTML=(data.history.byProfile||[]).slice(0,30).map(x=>`<span class="pill">${esc(x.language)} · ${esc(x.level)} · ${esc(x.family)} · ${esc(x.profile)} · ${num(x.publications)} pub</span>`).join('')||'Sin perfiles históricos compatibles.';
+  const histPrompt=new Map((data.history.byPrompt||[]).map(x=>[x.promptVersion,x]));
+  const prompts=[...(data.live.byPrompt||[])];for(const h of data.history.byPrompt||[])if(!prompts.some(x=>x.promptVersion===h.promptVersion))prompts.push({promptVersion:h.promptVersion,metrics:{validations:0,publications:0},alert:{status:'evidencia insuficiente'}});
+  $('prompts').innerHTML=prompts.map(x=>`<tr><td>${esc(x.promptVersion)}</td><td>${num(x.metrics.validations)}</td><td>${num(x.metrics.publications)}</td><td>${num(histPrompt.get(x.promptVersion)?.publications||0)}</td><td>${alertCell(x.alert)}</td></tr>`).join('')||'<tr><td colspan="5">Sin evidencia por versión.</td></tr>';
+}
+async function load(){hideError();if(!editorialKey)editorialKey=$('key').value.trim();if(!editorialKey){setError('Ingresa la clave editorial privada.');return}try{const r=await fetch('/api/wiki/editorial/chat/autoopt/health',{headers:{authorization:'Bearer '+editorialKey,accept:'application/json'},cache:'no-store'});const data=await r.json();if(!r.ok||!data.ok)throw new Error(data.error||'No se pudo abrir el panel.');render(data)}catch(e){setError(e.message||'No se pudo abrir el panel.')}}
+$('load').addEventListener('click',load);$('key').addEventListener('keydown',e=>{if(e.key==='Enter')load()});$('refresh').addEventListener('click',load);
+})();
+</script>
+</body>
+</html>
