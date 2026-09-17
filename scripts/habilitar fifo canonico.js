@@ -81,7 +81,7 @@ async function mlsChatFillNormalRun(env, runId) {
 }
 `;
 
-const canonicalStart = String.raw`async function mlsChatStart(env, body) {
+async function canonicalStartFunction(env, body) {
   const command = String(body.command || '').trim();
   const rescue = /^MLS\s+rescate\s+siguientes\s+(\d{1,3})$/i.exec(command);
   const match = rescue || /^MLS\s+siguientes\s+(\d{1,3})$/i.exec(command);
@@ -127,7 +127,9 @@ const canonicalStart = String.raw`async function mlsChatStart(env, body) {
     throw error;
   }
   return {reused: false, run: await mlsChatRun(env, id)};
-}`;
+}
+
+const canonicalStart = canonicalStartFunction.toString().replace('async function canonicalStartFunction', 'async function mlsChatStart');
 
 function patchCanonicalFifo(source) {
   if (source.includes(installedMarker)) return source;
