@@ -17,13 +17,14 @@ Convertir en contrato verificable las garantías de cancelación ya implementada
 3. Abrir otra entrada aborta primero la petición de la entrada anterior.
 4. Cambiar el hash de navegación aborta la petición activa.
 5. El streaming deja de escribir si el controlador fue abortado o el modal ya no existe.
-6. Los errores tardíos de cierre o cambio de entrada no vuelven a pintar el modal ni contaminan otra entrada.
-7. Mientras una petición está activa no se permite un segundo envío concurrente desde el mismo modal.
-8. El controlador activo se elimina al finalizar la petición.
+6. El render final y el guardado en historial se bloquean si la petición fue abortada o el modal ya no existe.
+7. Los errores tardíos de cierre o cambio de entrada no vuelven a pintar el modal ni contaminan otra entrada.
+8. Mientras una petición está activa no se permite un segundo envío concurrente desde el mismo modal.
+9. El controlador activo se elimina al finalizar la petición.
 
 ## Fallo cerrado
 
-El script `scripts/habilitar cancelacion segura profesor ia.js` inspecciona el `public/js/ai.js` ya reconstruido y parcheado por robustez. Si falta cualquiera de las ocho garantías, `predeploy` falla en lugar de publicar una versión con cancelación incompleta.
+El script `scripts/habilitar cancelacion segura profesor ia.js` inspecciona el `public/js/ai.js` ya reconstruido y parcheado por robustez. Si falta cualquiera de las nueve garantías, `predeploy` falla en lugar de publicar una versión con cancelación incompleta.
 
 ## Límites
 
