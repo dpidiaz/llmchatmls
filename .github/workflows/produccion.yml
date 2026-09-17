@@ -31,3 +31,5 @@ jobs:
       - name: Verificar Action editorial sin crear lotes
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: node scripts/verify-chat-deployment.cjs
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
