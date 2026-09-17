@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 const origin = 'https://llmchatmls.dpidiaz.workers.dev';
 const path = '/api/wiki/editorial/chat/start';
+const diagnosticPath = '/api/wiki/editorial/chat/fifo/diagnostic?limit=200';
 const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function verify() {
@@ -22,6 +23,23 @@ async function verify() {
   const get = await fetch(origin + path, {redirect:'manual'});
   assert.equal(get.status, 401, 'GET without credentials must remain protected');
   console.log(JSON.stringify({method:'GET', path, status:get.status}));
+
+  const editorialKey = String(process.env.MLS_EDITORIAL_CHAT_KEY || '').trim();
+  if (!editorialKey) {
+    console.log(JSON.stringify({fifoDiagnostic:'skipped', reason:'MLS_EDITORIAL_CHAT_KEY is not configured in GitHub Actions secrets'}));
+    return;
+  }
+
+  const diagnosticResponse = await fetch(origin + diagnosticPath, {
+    method:'GET',
+    redirect:'manual',
+    headers:{authorization:'Bearer ' + editorialKey}
+  });
+  assert.equal(diagnosticResponse.status, 200, 'authenticated FIFO diagnostic must return 200');
+  const diagnostic = await diagnosticResponse.json();
+  assert.equal(diagnostic.readOnly, true, 'FIFO diagnostic must declare readOnly=true');
+  assert.equal(diagnostic.ok, true, 'FIFO diagnostic must return ok=true');
+  console.log('MLS_FIFO_DIAGNOSTIC=' + JSON.stringify(diagnostic));
 }
 
 (async () => {
