@@ -21,6 +21,9 @@ test('contexto conversacional se aplica al ai.js real del bundle e idempotente',
   assert.match(patched,/const MAX_HISTORY=10/);
   assert.match(patched,/const MAX_HISTORY_CHARS=8000/);
   assert.match(patched,/sessionStorage/);
+  assert.match(patched,/function conversationSessionFor\(entry,meta\)/);
+  assert.match(patched,/history=conversationSessionFor\(entry,meta\)/);
+  assert.doesNotMatch(patched,/history=sessionFor\(entry,meta\)/);
   assert.match(patched,/data-ai-clear/);
   assert.match(patched,/Limpiar conversación/);
   assert.match(patched,/professorConversationVersion:CONVERSATION_VERSION/);
