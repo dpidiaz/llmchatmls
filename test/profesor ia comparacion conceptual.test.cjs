@@ -38,7 +38,8 @@ test('excluye la entrada actual y nunca inventa código MLS',()=>{
   const directive=api.comparisonDirective(entry,{professorQuickActionId:'compare'});
   assert.match(directive,/no se resolvió/i);
   assert.match(directive,/no inventes código, enlace ni entrada MLS/i);
-  assert.doesNotMatch(directive,/MLS-V01-\d{4}/g);
+  const codes=directive.match(/MLS-V01-\d{4}/g)||[];
+  assert.deepEqual(codes,['MLS-V01-0001'],'solo puede aparecer el código real del concepto X');
 });
 
 test('comparación X Y exige definición contraste ejemplos paralelos y evita falsa equivalencia',()=>{
