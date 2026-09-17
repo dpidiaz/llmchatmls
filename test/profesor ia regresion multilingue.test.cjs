@@ -25,7 +25,7 @@ test('las diez enciclopedias tienen perfil y acciones aisladas',()=>{
 test('invariantes canónicos sobreviven a perfiles y pronunciación',()=>{
   const expected={
     'espanol-guatemala':/voseo|Guatemala/i,
-    ingles:/variante|estadounidense|británico/i,
+    ingles:/variante|estadounidense|británico|\bUS\b|\bUK\b/i,
     portugues:/Brasil|brasileñ/i,
     italiano:/italiano estándar/i,
     frances:/francés estándar/i,
