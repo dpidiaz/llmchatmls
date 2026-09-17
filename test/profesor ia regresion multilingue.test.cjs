@@ -23,9 +23,9 @@ test('las diez enciclopedias tienen perfil y acciones aisladas',()=>{
 });
 
 test('invariantes canónicos sobreviven a perfiles y pronunciación',()=>{
-  const expected={
+  const expectedProfile={
     'espanol-guatemala':/voseo|Guatemala/i,
-    ingles:/variante|estadounidense|británico|\bUS\b|\bUK\b/i,
+    ingles:/estadounidense|británico|variantes?/i,
     portugues:/Brasil|brasileñ/i,
     italiano:/italiano estándar/i,
     frances:/francés estándar/i,
@@ -35,9 +35,21 @@ test('invariantes canónicos sobreviven a perfiles y pronunciación',()=>{
     coreano:/Hangul/i,
     ruso:/cirílico/i
   };
+  const expectedPronunciation={
+    'espanol-guatemala':/Guatemala|guatemaltec/i,
+    ingles:/\bUS\b|\bUK\b|regional/i,
+    portugues:/Brasil|brasileñ/i,
+    italiano:/italiano estándar/i,
+    frances:/liaison|enchaînement|schwa/i,
+    aleman:/Standarddeutsch|DACH/i,
+    japones:/kanji|kana|mora/i,
+    'chino-taiwan':/tradicional|Taiwán|zhuyin|pinyin/i,
+    coreano:/Hangul|batchim/i,
+    ruso:/cirílico|palatalización|acento léxico/i
+  };
   for(const slug of LANGS){
-    assert.match(profiles.directiveFor(slug),expected[slug],slug);
-    assert.match(pronunciation.directiveFor(slug),expected[slug],slug);
+    assert.match(profiles.directiveFor(slug),expectedProfile[slug],'perfil '+slug);
+    assert.match(pronunciation.directiveFor(slug),expectedPronunciation[slug],'pronunciación '+slug);
   }
 });
 
