@@ -10,8 +10,7 @@ if (!source.includes(marker)) {
   throw new Error('No se encontró handleMlsChat. Ejecutar primero habilitar chat editorial.js.');
 }
 
-const diagnosticFunction = String.raw`
-async function mlsFifoDiagnostic(env, requestedDetailLimit) {
+async function mlsFifoDiagnosticPatch(env, requestedDetailLimit) {
   const detailLimit = Math.max(10, Math.min(1000, Number(requestedDetailLimit) || 200));
   const canonical = [];
   const canonicalByCode = new Map();
@@ -246,10 +245,12 @@ async function mlsFifoDiagnostic(env, requestedDetailLimit) {
     }
   };
 }
-`;
+
+const diagnosticFunction = mlsFifoDiagnosticPatch.toString()
+  .replace('mlsFifoDiagnosticPatch', 'mlsFifoDiagnostic');
 
 if (!source.includes('async function mlsFifoDiagnostic(')) {
-  source = source.replace(marker, diagnosticFunction + '\n' + marker);
+  source = source.replace(marker, diagnosticFunction + '\n\n' + marker);
 }
 
 const authMarker = `    await mlsChatAuthenticate(request, env);\n    await ensureWikiDb(env); await mlsChatEnsureDb(env);`;
