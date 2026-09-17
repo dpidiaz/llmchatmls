@@ -25,7 +25,7 @@ test('parche añade robustez al núcleo combinado e idempotente',()=>{
   assert.match(source,/const REQUEST_TIMEOUT_MS=45000/);
   assert.match(source,/new AbortController\(\)/);
   assert.match(source,/data-ai-cancel/);
-  assert.match(source,/data-ai-retry/);
+  assert.match(source,/dataset\.aiRetry='1'/);
   assert.match(source,/hashchange/);
   assert.equal(robust.patchAi(source),source);
 });
