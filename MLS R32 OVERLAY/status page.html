@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f8fa">
+<title>MLS Status</title>
+<style>
+:root{color-scheme:light;--bg:#f5f7f9;--card:#fff;--ink:#17202a;--muted:#5e6874;--line:#dfe4ea;--soft:#eef2f6;--good:#1e7a4d;--goodbg:#e9f6ef;--warn:#8a5a00;--warnbg:#fff4d8;--bad:#9a3328;--badbg:#fdece8;--accent:#315f84;--accentbg:#eaf2f8;--shadow:0 8px 28px rgba(23,32,42,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 max(11pt,16px)/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{width:min(1040px,calc(100% - 28px));margin:0 auto;padding:34px 0 56px}.top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:22px}.brand{display:flex;gap:13px;align-items:center}.mark{width:44px;height:44px;border-radius:14px;background:var(--accentbg);display:grid;place-items:center;font-size:22px}.eyebrow{font-size:11pt;color:var(--muted);font-weight:700;letter-spacing:.02em}.title{font-size:clamp(24px,5vw,38px);line-height:1.12;margin:2px 0 0}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}button,a.button{appearance:none;border:1px solid var(--line);background:#fff;color:var(--ink);min-height:44px;padding:9px 14px;border-radius:12px;font:700 max(11pt,15px)/1.2 inherit;text-decoration:none;cursor:pointer}button:hover,a.button:hover{background:var(--soft)}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid rgba(49,95,132,.28);outline-offset:2px}.hero{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--shadow);margin-bottom:16px}.heroRow{display:flex;gap:18px;align-items:flex-start;justify-content:space-between}.state{display:inline-flex;align-items:center;gap:8px;font-weight:800;padding:7px 11px;border-radius:999px;background:var(--goodbg);color:var(--good)}.dot{width:9px;height:9px;border-radius:50%;background:currentColor}.state.warn{background:var(--warnbg);color:var(--warn)}.state.bad{background:var(--badbg);color:var(--bad)}.hero h2{font-size:clamp(22px,4vw,30px);line-height:1.2;margin:14px 0 6px}.hero p{margin:0;color:var(--muted)}.updated{font-size:11pt;color:var(--muted);text-align:right}.progress{height:12px;background:var(--soft);border-radius:999px;overflow:hidden;margin:20px 0 8px}.progress>span{display:block;height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width .25s ease}.progressMeta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:11pt}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.metric{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:17px;min-width:0}.metric .k{color:var(--muted);font-size:11pt;font-weight:700}.metric .v{font-size:clamp(23px,4vw,32px);font-weight:850;line-height:1.15;margin-top:5px}.metric .s{color:var(--muted);font-size:11pt;margin-top:4px}.section{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:16px}.sectionHead{display:flex;justify-content:space-between;gap:15px;align-items:end;margin-bottom:14px}.section h3{margin:0;font-size:20px}.sectionHead p{margin:2px 0 0;color:var(--muted);font-size:11pt}.langList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lang{border:1px solid var(--line);border-radius:15px;padding:14px}.langTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.langName{font-weight:800}.tag{font-size:11pt;font-weight:800;border-radius:999px;padding:4px 8px;background:var(--soft);color:var(--muted)}.tag.complete{background:var(--goodbg);color:var(--good)}.tag.generating{background:var(--accentbg);color:var(--accent)}.mini{height:8px;background:var(--soft);border-radius:999px;overflow:hidden;margin:10px 0 6px}.mini span{display:block;height:100%;background:var(--accent);border-radius:inherit}.langMeta{display:flex;justify-content:space-between;color:var(--muted);font-size:11pt}.statusGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.statusItem{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px}.statusItem strong{display:block;margin-bottom:3px}.statusItem span{color:var(--muted)}.notice{border-radius:14px;padding:14px;margin-top:12px;background:var(--accentbg);color:#244b69}.notice.warn{background:var(--warnbg);color:#6e4700}.notice.bad{background:var(--badbg);color:#77271f}details{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}summary{cursor:pointer;font-weight:800;min-height:44px;display:flex;align-items:center}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f4f7;border:1px solid var(--line);border-radius:12px;padding:14px;font:400 11pt/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:420px;overflow:auto}.errorBox{display:none}.errorBox.show{display:block}.skeleton{opacity:.55}@media(max-width:760px){.wrap{width:min(100% - 20px,1040px);padding-top:20px}.top,.heroRow{flex-direction:column}.actions{justify-content:flex-start}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.langList,.statusGrid{grid-template-columns:1fr}.updated{text-align:left}.hero{padding:19px}.section{padding:16px}}@media(max-width:410px){.grid{grid-template-columns:1fr 1fr}.metric{padding:14px}.metric .v{font-size:24px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top">
+  <div class="brand"><div class="mark" aria-hidden="true">✨</div><div><div class="eyebrow">MASTER LANGUAGE SYSTEM</div><h1 class="title">Status</h1></div></div>
+  <div class="actions"><button id="refresh" type="button">Actualizar ahora</button><a class="button" href="/api/wiki/status" target="_blank" rel="noopener">Ver JSON</a></div>
+</header>
+<section class="hero" aria-live="polite">
+  <div class="heroRow"><div><div id="state" class="state"><span class="dot"></span><span>Consultando…</span></div><h2 id="headline">Comprobando el estado de MLS</h2><p id="subline">La página se actualiza automáticamente cada 60 segundos.</p></div><div id="updated" class="updated">—</div></div>
+  <div class="progress" aria-label="Progreso general"><span id="overallBar"></span></div><div class="progressMeta"><span id="overallText">—</span><span id="overallPercent">—</span></div>
+</section>
+<section class="grid" aria-label="Resumen">
+  <article class="metric"><div class="k">Publicadas R32</div><div class="v" id="published">—</div><div class="s" id="publishedSub">de —</div></article>
+  <article class="metric"><div class="k">Pendientes</div><div class="v" id="remaining">—</div><div class="s">por materializar</div></article>
+  <article class="metric"><div class="k">Procesando</div><div class="v" id="processing">—</div><div class="s">ahora mismo</div></article>
+  <article class="metric"><div class="k">Fallidas</div><div class="v" id="failed">—</div><div class="s">requieren revisión</div></article>
+</section>
+<section class="section">
+  <div class="sectionHead"><div><h3>Enciclopedias</h3><p>Progreso de materialización por idioma.</p></div></div>
+  <div id="languages" class="langList skeleton"><div class="lang">Cargando…</div></div>
+</section>
+<section class="section">
+  <div class="sectionHead"><div><h3>Sistema</h3><p>Estado operativo y política de generación.</p></div></div>
+  <div class="statusGrid">
+    <div class="statusItem"><strong>Generación</strong><span id="generationMode">—</span></div>
+    <div class="statusItem"><strong>Costo</strong><span id="costMode">—</span></div>
+    <div class="statusItem"><strong>Workers AI hoy</strong><span id="aiBudget">—</span></div>
+    <div class="statusItem"><strong>Cola</strong><span id="queueState">—</span></div>
+  </div>
+  <div id="notice" class="notice" hidden></div>
+  <div id="errorBox" class="notice bad errorBox"></div>
+  <details><summary>Detalles técnicos</summary><pre id="technical">Cargando…</pre></details>
+</section>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),fmt=n=>Number(n||0).toLocaleString('es-GT'),pct=(a,b)=>b?Math.max(0,Math.min(100,a/b*100)):0;
+function text(id,value){$(id).textContent=value}
+function setState(kind,label){const el=$('state');el.className='state'+(kind==='warn'?' warn':kind==='bad'?' bad':'');el.querySelector('span:last-child').textContent=label}
+function render(data){
+  const total=Number(data.totalEntries||0),published=Number(data.publishedR32??data.totalPublished??0),remaining=Number(data.remainingForR32??data.remaining??Math.max(0,total-published)),failed=Number(data.totalFailed||0),processing=Number(data.processing||0),progress=pct(published,total);
+  const cf=data.cloudflare||{},circuit=cf.workersAiCircuit||data.workersAiCircuit||null,quota=!!(cf.quotaExhaustedDate||data.quotaExhaustedDate||circuit&&circuit.status==='quota_exhausted');
+  if(quota){setState('warn','Operativo · cuota diaria agotada');text('headline','MLS está disponible');text('subline','La lectura funciona normalmente. La generación con IA se reanudará cuando se restablezca la cuota diaria.');}
+  else if(failed>0){setState('warn','Operativo con incidencias');text('headline','MLS está funcionando');text('subline','Hay entradas que requieren revisión, pero el servicio está disponible.');}
+  else{setState('good','Todos los sistemas operativos');text('headline','MLS está funcionando normalmente');text('subline','La enciclopedia y la generación bajo demanda están disponibles.');}
+  $('overallBar').style.width=progress.toFixed(2)+'%';text('overallText',fmt(published)+' de '+fmt(total)+' entradas R32');text('overallPercent',progress.toFixed(1)+'%');
+  text('published',fmt(published));text('publishedSub','de '+fmt(total));text('remaining',fmt(remaining));text('processing',fmt(processing));text('failed',fmt(failed));
+  const langs=Array.isArray(data.languages)?data.languages:[];$('languages').classList.remove('skeleton');$('languages').replaceChildren(...langs.map(l=>{const done=Number(l.published||0),lt=Number(l.total||0),lp=pct(done,lt),card=document.createElement('article');card.className='lang';const state=done>=lt&&lt?'complete':Number(l.processing||0)>0?'generating':String(l.status||'pending');const label=state==='complete'?'Completa':state==='generating'?'En progreso':'Pendiente';card.innerHTML='<div class="langTop"><div class="langName"></div><span class="tag '+state+'">'+label+'</span></div><div class="mini"><span style="width:'+lp.toFixed(2)+'%"></span></div><div class="langMeta"><span>'+fmt(done)+' / '+fmt(lt)+'</span><span>'+lp.toFixed(1)+'%</span></div>';card.querySelector('.langName').textContent=l.name||l.slug||'Idioma';return card;}));
+  text('generationMode',data.automation===false?'Bajo demanda · sin automatización':'Activa');text('costMode',data.strictZeroCost?'Costo cero estricto':'Configuración estándar');
+  const used=Number(cf.dailyNeurons||0),target=Number(cf.targetNeurons||data.dailyNeuronTarget||0);text('aiBudget',target?fmt(Math.round(used))+' / '+fmt(Math.round(target))+' neuronas':'Sin dato disponible');
+  const q=data.queue||{};text('queueState',data.nextFIFO?'Siguiente: '+data.nextFIFO.code:(Number(q.backlogCount||0)>0?fmt(q.backlogCount)+' en cola':'Sin cola activa'));
+  const notice=$('notice');if(quota){notice.hidden=false;notice.className='notice warn';notice.textContent=circuit&&circuit.resetAt?'Workers AI alcanzó la cuota gratuita. Reinicio estimado: '+new Date(circuit.resetAt).toLocaleString('es-GT')+'.':'Workers AI alcanzó la cuota gratuita diaria.';}else{notice.hidden=true;}
+  const lastError=data.lastError||null,errorBox=$('errorBox');if(lastError&&lastError.message){errorBox.classList.add('show');errorBox.textContent='Última incidencia: '+lastError.message;}else errorBox.classList.remove('show');
+  text('technical',JSON.stringify({revision:data.revision,promptVersion:data.promptVersion,backlogPolicy:data.backlogPolicy,generationMode:data.generationMode,strictZeroCost:data.strictZeroCost,externalProvidersConfigured:data.externalProvidersConfigured,nextFIFO:data.nextFIFO,queue:data.queue,cloudflare:data.cloudflare,providerUsageTodayUTC:data.providerUsageTodayUTC},null,2));
+  text('updated','Actualizado '+new Date().toLocaleTimeString('es-GT',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
+}
+async function load(){const button=$('refresh');button.disabled=true;button.textContent='Actualizando…';try{const r=await fetch('/api/wiki/status',{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);render(await r.json());}catch(error){setState('bad','No se pudo consultar');text('headline','No pudimos comprobar el estado');text('subline','La página de Status no pudo comunicarse con el endpoint de estado.');const box=$('errorBox');box.classList.add('show');box.textContent='Error de consulta: '+String(error&&error.message||error);}finally{button.disabled=false;button.textContent='Actualizar ahora';}}
+$('refresh').addEventListener('click',load);load();setInterval(load,60000);
+})();
+</script>
+</body>
+</html>
