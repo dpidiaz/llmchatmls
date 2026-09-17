@@ -6,11 +6,13 @@ const path=require('node:path');
 const installer=require('../scripts/habilitar pagina status.js');
 const root=path.join(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'MLS R32 OVERLAY','status.html'),'utf8');
+const worker=fs.readFileSync(path.join(root,'MLS R32 OVERLAY','index.js'),'utf8');
 
 test('pagina status usa la API existente sin reemplazarla',()=>{
   assert.match(html,/\/api\/wiki\/status/);
   assert.match(html,/Ver JSON técnico/);
   assert.match(html,/\/api\/wiki\/recent\?limit=5&revision=r32/);
+  assert.match(worker,/url\.pathname === "\/api\/wiki\/status"/);
 });
 
 test('pagina status es user friendly y responsive',()=>{
@@ -25,11 +27,20 @@ test('pagina status respeta minimo tipografico aproximado de 11 pt',()=>{
   assert.match(html,/font-size:\.92rem/);
 });
 
-test('instalador crea ruta limpia status sin tocar api wiki status',()=>{
-  const base=`async function x(request,env,url){\n    if (url.pathname.startsWith("/api/wiki/")) {\n      return handleWikiApi(request, env, url);\n    }\n    if (env.ASSETS && typeof env.ASSETS.fetch === "function") return env.ASSETS.fetch(request);\n}`;
-  const once=installer.patchWorker(base);
+test('javascript embebido de status tiene sintaxis valida',()=>{
+  const match=html.match(/<script>([\s\S]*?)<\/script>/i);
+  assert.ok(match&&match[1],'No se encontró el script de status.');
+  assert.doesNotThrow(()=>new Function(match[1]));
+});
+
+test('instalador parchea el worker real y sirve status directamente',()=>{
+  const once=installer.patchWorker(worker,html);
+  assert.match(once,/MLS STATUS PAGE ROUTE 1\.1/);
   assert.match(once,/url\.pathname === "\/status"/);
-  assert.match(once,/\/status\.html/);
+  assert.match(once,/url\.pathname === "\/status\/"/);
+  assert.match(once,/url\.pathname === "\/status\.html"/);
+  assert.match(once,/content-type": "text\/html; charset=utf-8"/);
   assert.match(once,/url\.pathname\.startsWith\("\/api\/wiki\/"\)/);
-  assert.equal(installer.patchWorker(once),once);
+  assert.doesNotMatch(once,/statusUrl\.pathname = "\/status\.html"/);
+  assert.equal(installer.patchWorker(once,html),once);
 });
