@@ -8,7 +8,8 @@ const REQUIRED=[
   ['new AbortController()','AbortController por petición'],
   ["abortModal(previous,'entry-change')",'aborto al reemplazar entrada'],
   ["onHashChange=()=>close('entry-change')",'aborto al cambiar hash'],
-  ["if(controller.signal.aborted||!modal.isConnected)return;",'bloqueo de streaming tardío'],
+  ["if(controller.signal.aborted||!modal.isConnected)return;answer+=piece;",'bloqueo de streaming tardío'],
+  ["if(controller.signal.aborted||!modal.isConnected)return;\n      renderAssistantLinks",'bloqueo de render e historial tardíos'],
   ["if(!modal.isConnected&&(reason==='close'||reason==='entry-change'))return;",'bloqueo de error tardío'],
   ["if(modal.dataset.aiBusy==='1')return;",'protección contra doble envío'],
   ["if(requestControllers.get(modal)===active)requestControllers.delete(modal);",'limpieza del controlador activo']
