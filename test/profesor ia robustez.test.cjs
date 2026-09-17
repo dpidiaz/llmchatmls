@@ -27,6 +27,8 @@ test('parche añade robustez al núcleo combinado e idempotente',()=>{
   assert.match(source,/data-ai-cancel/);
   assert.match(source,/dataset\.aiRetry='1'/);
   assert.match(source,/hashchange/);
+  assert.match(source,/history=conversationSessionFor\(entry,meta\)/);
+  assert.doesNotMatch(source,/history=sessionFor\(entry,meta\)/);
   assert.equal(robust.patchAi(source),source);
 });
 
