@@ -7,23 +7,27 @@ const context=require('../scripts/habilitar contexto conversacional profesor ia.
 const suggestions=require('../scripts/habilitar preguntas sugeridas profesor ia.js');
 const links=require('../scripts/habilitar enlaces internos profesor ia.js');
 const robust=require('../scripts/habilitar robustez profesor ia.js');
+const optimization=require('../scripts/habilitar optimizacion prompt profesor ia.js');
 const cancellation=require('../scripts/habilitar cancelacion segura profesor ia.js');
 
 const bundle=path.join(__dirname,'..','MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz');
 function baseAi(){return execFileSync('tar',['-xOzf',bundle,'public/js/ai.js'],{encoding:'utf8'});}
 function robustAi(){return robust.patchAi(links.patchAi(suggestions.patchAi(context.patchAi(baseAi()))));}
-function patched(){return cancellation.patchAi(robustAi());}
+function optimizedAi(){return optimization.patchAi(robustAi());}
+function patched(){return cancellation.patchAi(optimizedAi());}
 
-test('declara version y certifica todas las defensas de cancelacion',()=>{
+test('declara version y certifica todas las defensas de cancelacion en orden real de predeploy',()=>{
   const source=patched();
+  assert.match(source,/const PROMPT_OPTIMIZATION_VERSION='1\.0'/);
   assert.match(source,/const CANCELLATION_VERSION='1\.0'/);
+  assert.match(source,/professorPromptOptimizationVersion:PROMPT_OPTIMIZATION_VERSION/);
   assert.match(source,/professorCancellationVersion:CANCELLATION_VERSION/);
   for(const [needle] of cancellation.REQUIRED)assert.ok(source.includes(needle),needle);
   assert.equal(cancellation.assertContract(source),true);
 });
 
 test('contrato falla cerrado si desaparece una defensa critica',()=>{
-  const source=robustAi();
+  const source=optimizedAi();
   for(const [needle,label] of cancellation.REQUIRED){
     const broken=source.replace(needle,'/* defensa eliminada */');
     assert.throws(()=>cancellation.assertContract(broken),new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i'),label);
