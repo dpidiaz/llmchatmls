@@ -637,9 +637,9 @@ async function mlsStagingSnapshotAsset(env,request,path){
   return response.text();
 }
 async function mlsStagingCreateSnapshot(request,env,body){
+  const head=await mlsStagingHead(env);
   await ensureWikiDb(env); await mlsChatEnsureDb(env);
   if(mlsAutooptEnabled(env)) await mlsAutooptEnsure(env);
-  const head=await mlsStagingHead(env);
   const seedManifest=JSON.parse(await mlsStagingSnapshotAsset(env,request,'manifest.json'));
   const metaResult=await env.WIKI_DB.prepare("SELECT code,language,n FROM wiki_articles ORDER BY "+WIKI_FIFO_ORDER_SQL).all();
   const canonicalRows=metaResult.results||[];
