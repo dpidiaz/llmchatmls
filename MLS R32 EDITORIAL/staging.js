@@ -41,6 +41,31 @@ function mlsStagingDecodeBase64(text) {
   for (let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
   return bytes;
 }
+function mlsStagingConcatBytes(...parts){
+  const total=parts.reduce((sum,part)=>sum+part.length,0),out=new Uint8Array(total);
+  let offset=0;for(const part of parts){out.set(part,offset);offset+=part.length;}return out;
+}
+function mlsStagingDerLength(length){
+  if(length<128) return new Uint8Array([length]);
+  const bytes=[];let value=length;
+  while(value>0){bytes.unshift(value&255);value>>>=8;}
+  return new Uint8Array([0x80|bytes.length,...bytes]);
+}
+function mlsStagingPkcs1ToPkcs8(pkcs1){
+  const version=new Uint8Array([0x02,0x01,0x00]);
+  const rsaAlgorithm=new Uint8Array([0x30,0x0d,0x06,0x09,0x2a,0x86,0x48,0x86,0xf7,0x0d,0x01,0x01,0x01,0x05,0x00]);
+  const octet=mlsStagingConcatBytes(new Uint8Array([0x04]),mlsStagingDerLength(pkcs1.length),pkcs1);
+  const body=mlsStagingConcatBytes(version,rsaAlgorithm,octet);
+  return mlsStagingConcatBytes(new Uint8Array([0x30]),mlsStagingDerLength(body.length),body);
+}
+function mlsStagingPrivateKeyDer(privateKey){
+  const text=String(privateKey||'').trim();
+  const pkcs1=/-----BEGIN RSA PRIVATE KEY-----([\s\S]+?)-----END RSA PRIVATE KEY-----/.exec(text);
+  if(pkcs1) return mlsStagingPkcs1ToPkcs8(mlsStagingDecodeBase64(pkcs1[1]));
+  const pkcs8=/-----BEGIN PRIVATE KEY-----([\s\S]+?)-----END PRIVATE KEY-----/.exec(text);
+  if(pkcs8) return mlsStagingDecodeBase64(pkcs8[1]);
+  mlsChatError(503,'La clave privada de GitHub App staging no tiene un formato PEM RSA soportado.');
+}
 async function mlsStagingGitHubAppToken(env) {
   const appId = String(env.MLS_STAGING_GITHUB_APP_ID || '').trim();
   const installationId = String(env.MLS_STAGING_GITHUB_INSTALLATION_ID || '').trim();
@@ -48,12 +73,12 @@ async function mlsStagingGitHubAppToken(env) {
   if (!appId || !installationId || !privateKey) return null;
   if (MLS_STAGING_APP_TOKEN_CACHE.token && MLS_STAGING_APP_TOKEN_CACHE.expiresAt > Date.now() + 120000)
     return MLS_STAGING_APP_TOKEN_CACHE.token;
-  const pem = privateKey.replace(/-----BEGIN PRIVATE KEY-----/g,'').replace(/-----END PRIVATE KEY-----/g,'').replace(/\s+/g,'');
   let key;
   try {
-    key = await crypto.subtle.importKey('pkcs8', mlsStagingDecodeBase64(pem), {name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'}, false, ['sign']);
-  } catch {
-    mlsChatError(503, 'La clave privada de GitHub App staging no es PKCS8 válida.');
+    key = await crypto.subtle.importKey('pkcs8', mlsStagingPrivateKeyDer(privateKey), {name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'}, false, ['sign']);
+  } catch(error) {
+    if(error?.status) throw error;
+    mlsChatError(503, 'La clave privada de GitHub App staging no pudo importarse como RSA válida.');
   }
   const now = Math.floor(Date.now()/1000);
   const header = mlsStagingB64url(new TextEncoder().encode(JSON.stringify({alg:'RS256',typ:'JWT'})));
@@ -774,7 +799,7 @@ async function handleMlsStaging(request,env,url){
 }
 if(typeof module!=='undefined'&&module.exports) module.exports={
   mlsStagingIndexPath,mlsStagingSummarize,mlsStagingRanges,mlsStagingSample,mlsStagingAutooptBase,mlsStagingAutooptApply,
-  mlsStagingD1Add,mlsStagingNoD1Env,mlsStagingConfigured,mlsStagingStart,mlsStagingStatus,mlsStagingNext,
+  mlsStagingD1Add,mlsStagingNoD1Env,mlsStagingConfigured,mlsStagingPrivateKeyDer,mlsStagingPkcs1ToPkcs8,mlsStagingStart,mlsStagingStatus,mlsStagingNext,
   mlsStagingValidate,mlsStagingStage,mlsStagingCancel,mlsStagingIntegrate,mlsStagingCodeState,mlsStagingServeArticle,
   MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
 };
