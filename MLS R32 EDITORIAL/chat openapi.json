@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "MLS Editorial privado",
-    "version": "32.0.3",
-    "description": "Redacción en ChatGPT y publicación validada de lotes FIFO, reanudables y concurrentes, de 1 a 400 entradas."
+    "version": "32.1.0-staging-v1",
+    "description": "Redacción y publicación validada del flujo normal MLS, más MLS GitHub Staging para producción editorial sin D1 durante staging."
   },
   "servers": [
     {
@@ -874,6 +874,370 @@
           },
           "503": {
             "description": "Conexión editorial sin configurar."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/staging/start": {
+      "post": {
+        "operationId": "iniciarLoteStagingMLS",
+        "summary": "Abrir un lote MLS GitHub Staging de 1 a 400 entradas sin consultar ni escribir D1.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "pattern": "^MLS staging siguientes [0-9]{1,3}$"
+                  },
+                  "requestId": {
+                    "type": "string",
+                    "minLength": 16,
+                    "maxLength": 80
+                  }
+                },
+                "required": [
+                  "command",
+                  "requestId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado por el backend."
+          },
+          "400": {
+            "description": "Solicitud inválida."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de estado, snapshot o concurrencia."
+          },
+          "422": {
+            "description": "Borrador no válido."
+          },
+          "503": {
+            "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/staging/next": {
+      "get": {
+        "operationId": "siguienteContextoStagingMLS",
+        "summary": "Obtener el siguiente contexto R32 desde el snapshot GitHub del lote, con cero D1.",
+        "x-openai-isConsequential": false,
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado por el backend."
+          },
+          "400": {
+            "description": "Solicitud inválida."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de estado, snapshot o concurrencia."
+          },
+          "422": {
+            "description": "Borrador no válido."
+          },
+          "503": {
+            "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/staging/validate": {
+      "post": {
+        "operationId": "validarBorradorStagingMLS",
+        "summary": "Validar determinísticamente un borrador staging contra R32 sin publicarlo ni usar D1.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "runId": {
+                    "type": "string"
+                  },
+                  "contextId": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "articleMarkdown": {
+                    "type": "string",
+                    "maxLength": 16000
+                  },
+                  "referenceCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "editorialReview": {
+                    "type": "string",
+                    "minLength": 40,
+                    "maxLength": 3000
+                  }
+                },
+                "required": [
+                  "runId",
+                  "contextId",
+                  "code",
+                  "articleMarkdown",
+                  "referenceCodes",
+                  "editorialReview"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado por el backend."
+          },
+          "400": {
+            "description": "Solicitud inválida."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de estado, snapshot o concurrencia."
+          },
+          "422": {
+            "description": "Borrador no válido."
+          },
+          "503": {
+            "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/staging/stage": {
+      "post": {
+        "operationId": "stagearBorradorMLS",
+        "summary": "Persistir en GitHub únicamente un borrador staging previamente validado; nunca publica en D1.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "runId": {
+                    "type": "string"
+                  },
+                  "contextId": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "articleMarkdown": {
+                    "type": "string",
+                    "maxLength": 16000
+                  },
+                  "referenceCodes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "editorialReview": {
+                    "type": "string",
+                    "minLength": 40,
+                    "maxLength": 3000
+                  },
+                  "validationReceipt": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "runId",
+                  "contextId",
+                  "code",
+                  "articleMarkdown",
+                  "referenceCodes",
+                  "editorialReview",
+                  "validationReceipt"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado por el backend."
+          },
+          "400": {
+            "description": "Solicitud inválida."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de estado, snapshot o concurrencia."
+          },
+          "422": {
+            "description": "Borrador no válido."
+          },
+          "503": {
+            "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/staging/status": {
+      "get": {
+        "operationId": "estadoStagingMLS",
+        "summary": "Consultar estado exacto del lote GitHub Staging y métricas AUTOOPT; cero D1.",
+        "x-openai-isConsequential": false,
+        "parameters": [
+          {
+            "name": "runId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado por el backend."
+          },
+          "400": {
+            "description": "Solicitud inválida."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de estado, snapshot o concurrencia."
+          },
+          "422": {
+            "description": "Borrador no válido."
+          },
+          "503": {
+            "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/staging/cancel": {
+      "post": {
+        "operationId": "cancelarLoteStagingMLS",
+        "summary": "Cancelar reservas no staged de un lote staging sin borrar artículos staged ni tocar D1.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "runId": {
+                    "type": "string"
+                  },
+                  "confirm": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "runId",
+                  "confirm"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado por el backend."
+          },
+          "400": {
+            "description": "Solicitud inválida."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de estado, snapshot o concurrencia."
+          },
+          "422": {
+            "description": "Borrador no válido."
+          },
+          "503": {
+            "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/staging/integrate": {
+      "post": {
+        "operationId": "reconciliarStagingMLS",
+        "summary": "Reconciliar artículos staged con D1 de forma idempotente y sin sobrescribir existentes.",
+        "x-openai-isConsequential": false,
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado confirmado por el backend."
+          },
+          "400": {
+            "description": "Solicitud inválida."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "409": {
+            "description": "Conflicto de estado, snapshot o concurrencia."
+          },
+          "422": {
+            "description": "Borrador no válido."
+          },
+          "503": {
+            "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
           }
         }
       }
