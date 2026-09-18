@@ -1,0 +1,93 @@
+name: Bootstrap MLS Staging
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap-staging:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Seleccionar credencial GitHub Staging
+        id: auth
+        shell: bash
+        env:
+          APP_ID: ${{ secrets.MLS_STAGING_GITHUB_APP_ID }}
+          INSTALLATION_ID: ${{ secrets.MLS_STAGING_GITHUB_INSTALLATION_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.MLS_STAGING_GITHUB_APP_PRIVATE_KEY }}
+          STAGING_TOKEN: ${{ secrets.MLS_STAGING_GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -n "$APP_ID" ] && [ -n "$INSTALLATION_ID" ] && [ -n "$APP_PRIVATE_KEY" ]; then
+            echo "mode=app" >> "$GITHUB_OUTPUT"
+            echo "Usando GitHub App para MLS Staging."
+            exit 0
+          fi
+          if [ -n "$STAGING_TOKEN" ]; then
+            echo "mode=token" >> "$GITHUB_OUTPUT"
+            echo "Usando token GitHub de alcance mínimo para MLS Staging."
+            exit 0
+          fi
+          echo "::error::No hay credenciales MLS Staging configuradas como GitHub Actions secrets."
+          echo "::error::Configura GitHub App (preferido) o MLS_STAGING_GITHUB_TOKEN y vuelve a ejecutar este workflow."
+          exit 1
+
+      - name: Instalar credencial GitHub Staging en Cloudflare
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          MODE: ${{ steps.auth.outputs.mode }}
+          APP_ID: ${{ secrets.MLS_STAGING_GITHUB_APP_ID }}
+          INSTALLATION_ID: ${{ secrets.MLS_STAGING_GITHUB_INSTALLATION_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.MLS_STAGING_GITHUB_APP_PRIVATE_KEY }}
+          STAGING_TOKEN: ${{ secrets.MLS_STAGING_GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ "$MODE" = "app" ]; then
+            node -e 'process.stdout.write(JSON.stringify({
+              MLS_STAGING_GITHUB_APP_ID: process.env.APP_ID,
+              MLS_STAGING_GITHUB_INSTALLATION_ID: process.env.INSTALLATION_ID,
+              MLS_STAGING_GITHUB_APP_PRIVATE_KEY: process.env.APP_PRIVATE_KEY,
+              MLS_STAGING_GITHUB_TOKEN: null
+            }))' | npx wrangler secret bulk
+          else
+            node -e 'process.stdout.write(JSON.stringify({
+              MLS_STAGING_GITHUB_APP_ID: null,
+              MLS_STAGING_GITHUB_INSTALLATION_ID: null,
+              MLS_STAGING_GITHUB_APP_PRIVATE_KEY: null,
+              MLS_STAGING_GITHUB_TOKEN: process.env.STAGING_TOKEN
+            }))' | npx wrangler secret bulk
+          fi
+
+      - name: Esperar propagación del Worker
+        run: sleep 5
+
+      - name: Crear snapshot inicial MLS Staging
+        shell: bash
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error \
+            -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/wiki/editorial/staging/snapshot' \
+            -H "Authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
+            -H 'Content-Type: application/json' \
+            --data "{\"sourceCommit\":\"$GITHUB_SHA\"}"
+
+      - name: Confirmar endpoint editorial existente
+        shell: bash
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: node scripts/verify-chat-deployment.cjs
