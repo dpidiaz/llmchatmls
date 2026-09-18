@@ -1,0 +1,182 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "estadoStagingMLS",
+  "method": "GET",
+  "path": "/api/wiki/editorial/staging/status",
+  "response": {
+    "ok": true,
+    "standard": "MLS R32",
+    "promptVersion": "32.0",
+    "run": {
+      "runId": "4972743a-749e-484c-93b9-1c814d41624f",
+      "requestId": "chatbridge20260918fase16lote0001",
+      "runType": "staging",
+      "storageMode": "github-staging",
+      "snapshotVersion": "32.0-4fc97a6b1b85-20260918161056",
+      "snapshotCommit": "261616058b18ac2e3c83b0059e5a7c095f260933",
+      "requested": 2,
+      "selected": 2,
+      "reserved": 0,
+      "validated": 0,
+      "staged": 0,
+      "integrated": 2,
+      "preservedExisting": 0,
+      "deferred": 0,
+      "needsReview": 0,
+      "pending": 0,
+      "cancelled": 0,
+      "status": "complete",
+      "codes": [
+        {
+          "position": 0,
+          "code": "MLS-V02-0493",
+          "status": "integrated"
+        },
+        {
+          "position": 1,
+          "code": "MLS-V02-0494",
+          "status": "integrated"
+        }
+      ],
+      "d1RowsRead": 0,
+      "d1RowsWritten": 0,
+      "ranges": [
+        "MLS-V02-0493…MLS-V02-0494"
+      ]
+    },
+    "autoopt": {
+      "version": 1,
+      "runId": "4972743a-749e-484c-93b9-1c814d41624f",
+      "promptVersion": "32.0",
+      "validationAttempts": 2,
+      "firstPassSuccess": 2,
+      "published": 0,
+      "staged": 2,
+      "deferred": 0,
+      "needsReview": 0,
+      "lengthFailures": 0,
+      "r32FalsePositiveLikeFailures": 0,
+      "ruleFailures": 0,
+      "markdownFailures": 0,
+      "contractFailures": 0,
+      "otherFailures": 0,
+      "consecutiveFirstPassSuccesses": 2,
+      "events": [
+        {
+          "at": "2026-09-18T16:20:36.977Z",
+          "code": "MLS-V02-0493",
+          "attempt": 1,
+          "valid": true,
+          "staged": false,
+          "words": 409,
+          "sections": 5,
+          "references": 6,
+          "referenceCodes": [
+            "MLS-V02-0489",
+            "MLS-V02-0480",
+            "MLS-V02-0472",
+            "MLS-V02-0520",
+            "MLS-V02-0464",
+            "MLS-V02-0529"
+          ],
+          "estimatedMinimum": 155,
+          "estimatedTarget": 168,
+          "observedMinimum": 0,
+          "bucket": 1,
+          "errorCodes": [],
+          "tables": 0,
+          "lists": 1,
+          "examples": 1,
+          "category": ""
+        },
+        {
+          "at": "2026-09-18T16:21:18.280Z",
+          "type": "staged",
+          "code": "MLS-V02-0493",
+          "attempt": 1,
+          "valid": true,
+          "staged": true,
+          "words": 409,
+          "sections": 5,
+          "references": 6,
+          "referenceCodes": [
+            "MLS-V02-0489",
+            "MLS-V02-0480",
+            "MLS-V02-0472",
+            "MLS-V02-0520",
+            "MLS-V02-0464",
+            "MLS-V02-0529"
+          ],
+          "estimatedMinimum": 155,
+          "estimatedTarget": 168,
+          "observedMinimum": 0,
+          "bucket": 1,
+          "errorCodes": [],
+          "tables": 0,
+          "lists": 1,
+          "examples": 1,
+          "category": ""
+        },
+        {
+          "at": "2026-09-18T16:22:35.481Z",
+          "code": "MLS-V02-0494",
+          "attempt": 1,
+          "valid": true,
+          "staged": false,
+          "words": 363,
+          "sections": 5,
+          "references": 6,
+          "referenceCodes": [
+            "MLS-V02-0489",
+            "MLS-V02-0480",
+            "MLS-V02-0472",
+            "MLS-V02-0520",
+            "MLS-V02-0464",
+            "MLS-V02-0529"
+          ],
+          "estimatedMinimum": 155,
+          "estimatedTarget": 168,
+          "observedMinimum": 0,
+          "bucket": 1,
+          "errorCodes": [],
+          "tables": 0,
+          "lists": 1,
+          "examples": 1,
+          "category": ""
+        },
+        {
+          "at": "2026-09-18T16:23:29.250Z",
+          "type": "staged",
+          "code": "MLS-V02-0494",
+          "attempt": 1,
+          "valid": true,
+          "staged": true,
+          "words": 363,
+          "sections": 5,
+          "references": 6,
+          "referenceCodes": [
+            "MLS-V02-0489",
+            "MLS-V02-0480",
+            "MLS-V02-0472",
+            "MLS-V02-0520",
+            "MLS-V02-0464",
+            "MLS-V02-0529"
+          ],
+          "estimatedMinimum": 155,
+          "estimatedTarget": 168,
+          "observedMinimum": 0,
+          "bucket": 1,
+          "errorCodes": [],
+          "tables": 0,
+          "lists": 1,
+          "examples": 1,
+          "category": ""
+        }
+      ],
+      "updatedAt": "2026-09-18T16:23:29.250Z"
+    }
+  },
+  "completedAt": "2026-09-18T16:25:14.963Z",
+  "commandFile": "mls chat bridge/commands/command 0011.json"
+}
