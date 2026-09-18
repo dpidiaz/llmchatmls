@@ -878,6 +878,7 @@ async function mlsStagingBackfillProvenance(env,body){
     skippedMismatch:selected.length-matching.length,pendingProvenance,...metrics,status:pendingProvenance?'partial':'complete'};
 }
 async function mlsStagingIntegrate(env,body){
+  if(typeof ensureWikiArticleProvenanceDb==='function') await ensureWikiArticleProvenanceDb(env);
   if(body?.backfillProvenance===true) return mlsStagingBackfillProvenance(env,body);
   // No unmetered schema/bootstrap queries here: every D1 statement below is added to metrics.
   const metrics={d1RowsRead:0,d1RowsWritten:0};
