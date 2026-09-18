@@ -35,10 +35,15 @@ async function verify() {
     redirect:'manual',
     headers:{authorization:'Bearer ' + editorialKey}
   });
-  assert.equal(diagnosticResponse.status, 200, 'authenticated FIFO diagnostic must return 200');
-  const diagnostic = await diagnosticResponse.json();
-  assert.equal(diagnostic.readOnly, true, 'FIFO diagnostic must declare readOnly=true');
-  assert.equal(diagnostic.ok, true, 'FIFO diagnostic must return ok=true');
+  const diagnostic = await diagnosticResponse.json().catch(()=>null);
+  if (diagnosticResponse.status === 503 && diagnostic?.reason === 'd1_daily_row_read_limit') {
+    console.log('::warning::Verificación FIFO diferida: Cloudflare D1 agotó el límite diario gratuito de rows read.');
+    console.log('MLS_FIFO_DIAGNOSTIC_DEFERRED=' + JSON.stringify(diagnostic));
+    return;
+  }
+  assert.equal(diagnosticResponse.status, 200, 'authenticated FIFO diagnostic must return 200 unless D1 quota is explicitly exhausted');
+  assert.equal(diagnostic?.readOnly, true, 'FIFO diagnostic must declare readOnly=true');
+  assert.equal(diagnostic?.ok, true, 'FIFO diagnostic must return ok=true');
   console.log('MLS_FIFO_DIAGNOSTIC=' + JSON.stringify(diagnostic));
 }
 
