@@ -258,7 +258,12 @@ async function mlsStagingResolveSnapshotCommit(env,pointer) {
 async function mlsStagingSnapshotManifest(env,snapshotVersion,snapshotCommit) {
   const cacheKey=snapshotCommit+':'+snapshotVersion;
   if(MLS_STAGING_MANIFEST_CACHE.has(cacheKey)) return structuredClone(MLS_STAGING_MANIFEST_CACHE.get(cacheKey));
-  const manifest=await mlsStagingSnapshotManifest(env,snapshotVersion,snapshotCommit);
+  const manifest=await mlsStagingReadJson(
+    env,
+    MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/manifest.json',
+    snapshotCommit,
+    false
+  );
   MLS_STAGING_MANIFEST_CACHE.set(cacheKey,manifest);
   return structuredClone(manifest);
 }
