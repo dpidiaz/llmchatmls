@@ -605,7 +605,9 @@ async function mlsStagingIntegrate(env,body){
   // No unmetered schema/bootstrap queries here: every D1 statement below is added to metrics.
   const metrics={d1RowsRead:0,d1RowsWritten:0};
   const head=await mlsStagingHead(env);
-  const staged=await mlsStagingCollectStaged(env,head);
+  const allStaged=await mlsStagingCollectStaged(env,head);
+  const limit=Math.max(1,Math.min(400,Number(body?.limit)||400));
+  const staged=allStaged.slice(0,limit);
   if(!staged.length) return {ok:true,staged:0,integrated:0,preservedExisting:0,failed:0,pending:0,...metrics,status:'complete'};
   const existing=new Map();
   for(let i=0;i<staged.length;i+=100){
@@ -663,8 +665,9 @@ async function mlsStagingIntegrate(env,body){
     try{await mlsStagingCommit(env,files,'MLS staging reconcile '+outcomes.length+' entries',currentHead);break;}
     catch(error){if(error.status!==409||attempt===MLS_STAGING_MAX_GITHUB_RETRIES-1) throw error;}
   }
+  const pending=Math.max(0,allStaged.length-staged.length);
   return {ok:true,staged:staged.length,integrated:outcomes.filter(x=>x.status==='integrated').length,
-    preservedExisting:outcomes.filter(x=>x.status==='preservedExisting').length,failed:0,pending:0,...metrics,status:'complete'};
+    preservedExisting:outcomes.filter(x=>x.status==='preservedExisting').length,failed:0,pending,...metrics,status:pending?'partial':'complete'};
 }
 async function mlsStagingServeArticle(env,code){
   const state=await mlsStagingCodeState(env,code,{strong:false,failOpen:true});
