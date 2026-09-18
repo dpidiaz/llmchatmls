@@ -24,12 +24,12 @@ jobs:
       - run: node --test test/deploy-contract.test.cjs
       - run: npm run check
       - name: Desplegar en produccion
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         run: npm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       - name: Crear snapshot MLS Staging del deploy
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         run: |
           curl --fail-with-body --silent --show-error \
             -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/wiki/editorial/staging/snapshot' \
@@ -40,7 +40,7 @@ jobs:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
 
       - name: Verificar Action editorial sin crear lotes
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         run: node scripts/verify-chat-deployment.cjs
         env:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
