@@ -526,7 +526,7 @@ test('new snapshot pointer resolves immutable commit through GitHub history and 
   const snapshot=bodyOf('mlsStagingCreateSnapshot');
   assert.equal((snapshot.match(/mlsStagingCommit\(env,files/g)||[]).length,1);
   assert.match(snapshot,/externalSubrequestBudget=files\.length\+8/);
-  assert.match(snapshot,/externalSubrequestBudget>49/);
+  assert.match(snapshot,/projectedExternalSubrequestBudget>49/);
   assert.match(snapshot,/snapshots\/latest\.json/);
   assert.doesNotMatch(snapshot,/MLS staging point latest/);
 });
