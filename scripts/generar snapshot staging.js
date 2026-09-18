@@ -51,7 +51,7 @@ function buildStagingTargetCatalog(root = process.cwd()) {
       if (!fs.existsSync(filename)) throw new Error('Falta semilla R32: ' + filename);
       const seed = JSON.parse(fs.readFileSync(filename, 'utf8'));
       const normalized = normalizeSeed(seed, language, n);
-      if (!/^MLS-V\\d{2}-\\d{4}$/.test(normalized.code)) throw new Error('Código inválido en semilla: ' + normalized.code);
+      if (!/^MLS-V\d{2}-\d{4}$/.test(normalized.code)) throw new Error('Código inválido en semilla: ' + normalized.code);
       entries.push(normalized);
     }
     const relative = language.slug + '.json';
