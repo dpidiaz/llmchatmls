@@ -1206,7 +1206,7 @@
     "/api/wiki/editorial/staging/integrate": {
       "post": {
         "operationId": "reconciliarStagingMLS",
-        "summary": "Reconciliar artículos staged con D1 de forma idempotente y sin sobrescribir existentes.",
+        "summary": "Reconciliar artículos staged con D1 de forma idempotente o backfillear su proveniencia editorial.",
         "x-openai-isConsequential": false,
         "requestBody": {
           "required": false,
@@ -1220,6 +1220,11 @@
                     "minimum": 1,
                     "maximum": 400,
                     "default": 400
+                  },
+                  "backfillProvenance": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Si es true, no integra artículos nuevos: registra en D1 la proveniencia de artículos ya integrados desde GitHub Staging."
                   }
                 },
                 "additionalProperties": false
