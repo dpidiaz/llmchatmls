@@ -104,21 +104,33 @@ Si staging todavía no está configurado, el flujo normal conserva su comportami
 
 Si quedan más staged, devuelve `status: partial` y `pending > 0`.
 
-## Credenciales
+## Credenciales y bootstrap
 
-Preferido:
+Modo preferido: GitHub App instalada únicamente en `dpidiaz/llmchatmls`.
+
+Permiso de repositorio requerido:
+
+- **Contents: Read and write**
+
+No requiere permiso Workflows porque el Worker solo escribe bajo `mls-staging/` en la rama de datos y no modifica `.github/workflows`.
+
+Secrets de infraestructura para GitHub App:
 
 - `MLS_STAGING_GITHUB_APP_ID`
 - `MLS_STAGING_GITHUB_INSTALLATION_ID`
-- `MLS_STAGING_GITHUB_APP_PRIVATE_KEY` como Secret (PEM RSA PKCS1 o PKCS8)
+- `MLS_STAGING_GITHUB_APP_PRIVATE_KEY` (PEM RSA PKCS1 o PKCS8)
 
 Fallback de bootstrap:
 
-- `MLS_STAGING_GITHUB_TOKEN` como Secret de alcance mínimo
+- `MLS_STAGING_GITHUB_TOKEN`, fine-grained y limitado únicamente a `dpidiaz/llmchatmls`, con Contents: Read and write.
 
 No se almacena ninguna credencial en el repositorio ni se envía a ChatGPT.
 
-El snapshot posterior al deploy no invalida un deploy productivo ya exitoso cuando las credenciales staging todavía no han sido configuradas: el workflow emite una advertencia y deja pendiente el bootstrap. Una credencial presente pero inválida sí se considera error de infraestructura staging.
+El workflow `.github/workflows/bootstrap staging.yml` se ejecuta manualmente desde `main`. Detecta GitHub App primero y token como fallback, instala la credencial en Cloudflare mediante una sola operación `wrangler secret bulk`, crea el snapshot inicial y verifica el endpoint editorial existente.
+
+Los valores deben existir como GitHub Actions secrets antes de ejecutar el bootstrap. ChatGPT no necesita conocerlos.
+
+El snapshot posterior al deploy no invalida un deploy productivo ya exitoso cuando las credenciales staging todavía no han sido configuradas: el workflow de producción emite una advertencia y deja pendiente el bootstrap. Una credencial presente pero inválida sí se considera error de infraestructura staging.
 
 Variables no secretas:
 
