@@ -31,11 +31,48 @@ jobs:
       - name: Crear snapshot MLS Staging del deploy
         if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         run: |
-          curl --fail-with-body --silent --show-error \
+          set +e
+          response="$(curl --silent --show-error --write-out 
+      - name: Verificar Action editorial sin crear lotes
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+        run: node scripts/verify-chat-deployment.cjs
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+\\n%{http_code}' \
             -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/wiki/editorial/staging/snapshot' \
             -H "Authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
             -H 'Content-Type: application/json' \
-            --data "{\"sourceCommit\":\"$GITHUB_SHA\"}"
+            --data "{\"sourceCommit\":\"$GITHUB_SHA\"}")"
+          curl_status=$?
+          set -e
+          body="${response%
+      - name: Verificar Action editorial sin crear lotes
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+        run: node scripts/verify-chat-deployment.cjs
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+\\n'*}"
+          http_status="${response##*
+      - name: Verificar Action editorial sin crear lotes
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+        run: node scripts/verify-chat-deployment.cjs
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+\\n'}"
+          if [ "$curl_status" -ne 0 ]; then
+            echo "$body"
+            exit "$curl_status"
+          fi
+          if [ "$http_status" = "200" ]; then
+            echo "$body"
+            exit 0
+          fi
+          if [ "$http_status" = "503" ] && echo "$body" | grep -q 'credenciales GitHub configuradas'; then
+            echo "::warning::MLS Staging aún no tiene credenciales GitHub en Cloudflare; producción quedó desplegada y el snapshot se habilitará tras el bootstrap."
+            exit 0
+          fi
+          echo "$body"
+          exit 1
         env:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
 
