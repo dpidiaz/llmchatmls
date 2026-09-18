@@ -495,7 +495,7 @@ test('target catalog is compact and does not copy whole seed objects', () => {
 test('snapshot runtime reads target shards from the pinned manifest', () => {
   const targets=bodyOf('mlsStagingSnapshotTargets');
   assert.match(targets,/descriptor\?\.files/);
-  assert.match(targets,/targets\/\'+file/);
+  assert.ok(targets.includes("+'/targets/'+file"));
   const snapshot=bodyOf('mlsStagingCreateSnapshot');
   assert.match(snapshot,/descriptor\.files/);
   assert.match(snapshot,/maxReferenceBytes=900\*1024/);
