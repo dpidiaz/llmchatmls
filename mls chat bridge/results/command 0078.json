@@ -1,0 +1,55 @@
+{
+  "success": false,
+  "httpStatus": 422,
+  "operationId": "procesarSecuenciaStagingMLS",
+  "method": "ORCHESTRATED",
+  "path": "bridge://staging-sequence",
+  "response": {
+    "ok": false,
+    "runId": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+    "phase": "validate",
+    "code": "MLS-V02-1162",
+    "error": "ChatGPT artículo 1: parece convertir la entrada en actividad o curso, contrario al estándar R32.",
+    "processed": 3,
+    "skipped": 0,
+    "results": [
+      {
+        "code": "MLS-V02-1159",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "nextAttempts": 1,
+        "stageAttempts": 1,
+        "words": 178,
+        "validateCommit": "958039c4d520337bf50d6abc9d4b81394848db88",
+        "stageCommit": "be694b012f7cf00198fdb9395c05fa52dc99a521"
+      },
+      {
+        "code": "MLS-V02-1160",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "nextAttempts": 1,
+        "stageAttempts": 1,
+        "words": 195,
+        "validateCommit": "317896c91a4b473491d09acec706acf42c1934cf",
+        "stageCommit": "42c542ca4f1d5881ed0712f5caefe13e18b1e162"
+      },
+      {
+        "code": "MLS-V02-1161",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "nextAttempts": 1,
+        "stageAttempts": 1,
+        "words": 180,
+        "validateCommit": "7fb56793b618ae87c250f2d7016822f0c4a9f328",
+        "stageCommit": "1e70381e3ef49e286c540271019d4c80d1bce879"
+      }
+    ],
+    "d1RowsRead": 0,
+    "d1RowsWritten": 0
+  },
+  "completedAt": "2026-09-18T19:09:08.055Z",
+  "commandFile": "mls chat bridge/commands/command 0078.json"
+}
