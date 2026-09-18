@@ -460,6 +460,17 @@ test('AUTOOPT staging never invents learnedMinimum', () => {
   assert.equal(doc.learnedMinimum,undefined);
 });
 
+test('GitHub App private keys accept both PKCS1 and PKCS8 PEM', async () => {
+  const nodeCrypto=require('node:crypto');
+  if(!global.crypto) global.crypto=nodeCrypto.webcrypto;
+  const {privateKey}=nodeCrypto.generateKeyPairSync('rsa',{modulusLength:2048});
+  const pkcs1=privateKey.export({type:'pkcs1',format:'pem'}).toString();
+  const pkcs8=privateKey.export({type:'pkcs8',format:'pem'}).toString();
+  const algorithm={name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'};
+  await assert.doesNotReject(()=>global.crypto.subtle.importKey('pkcs8',staging.mlsStagingPrivateKeyDer(pkcs1),algorithm,false,['sign']));
+  await assert.doesNotReject(()=>global.crypto.subtle.importKey('pkcs8',staging.mlsStagingPrivateKeyDer(pkcs8),algorithm,false,['sign']));
+});
+
 test('Snapshot/build contract expects exactly 10 languages and 10,133 targets', () => {
   assert.equal(generator.LANGUAGES.length,10);
   assert.equal(generator.LANGUAGES.reduce((sum,x)=>sum+x.total,0),10133);
