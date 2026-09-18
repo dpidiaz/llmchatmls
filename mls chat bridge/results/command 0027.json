@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "procesarSecuenciaStagingMLS",
+  "method": "ORCHESTRATED",
+  "path": "bridge://staging-sequence",
+  "response": {
+    "ok": true,
+    "runId": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+    "requested": 4,
+    "processed": 4,
+    "skipped": 0,
+    "results": [
+      {
+        "code": "MLS-V02-0905",
+        "status": "staged",
+        "reused": false,
+        "validationReused": true,
+        "stageAttempts": 1,
+        "words": 245,
+        "validateCommit": null,
+        "stageCommit": "3ca39c2bf0a7c9c910b93d7a16c477d2c0f3ac23"
+      },
+      {
+        "code": "MLS-V02-0906",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "stageAttempts": 1,
+        "words": 240,
+        "validateCommit": "bfb16bdd034d7765fb40dd0be1c9f4110037f645",
+        "stageCommit": "14954da7ac4d69c6bb6faceae37873d3cfe098c6"
+      },
+      {
+        "code": "MLS-V02-0907",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "stageAttempts": 1,
+        "words": 253,
+        "validateCommit": "392d3d10d0d48ec9aa48a9897201e05032c8a203",
+        "stageCommit": "b61ab9c75f3b4a0acbe6203dd76b78981a15fdf5"
+      },
+      {
+        "code": "MLS-V02-0908",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "stageAttempts": 1,
+        "words": 266,
+        "validateCommit": "e0aae0e527b87e1f3952a447a631633f32233804",
+        "stageCommit": "0ee30af7ec889e9622760a0e398ffae64576c29d"
+      }
+    ],
+    "d1RowsRead": 0,
+    "d1RowsWritten": 0
+  },
+  "completedAt": "2026-09-18T17:56:33.468Z",
+  "commandFile": "mls chat bridge/commands/command 0027.json"
+}
