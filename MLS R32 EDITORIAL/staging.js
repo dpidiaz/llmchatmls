@@ -681,18 +681,27 @@ async function mlsStagingServeArticle(env,code){
     provider:'mls-r32-staging',model:'editorial-standard-32',auditProvider:'mls-r32-validator',auditModel:metadata.auditModel,
     promptVersion:'32.0',generatedAt:metadata.stagedAt,staged:true};
 }
+function mlsStagingNoD1Env(env){
+  return new Proxy(env,{
+    get(target,prop,receiver){
+      if(prop==='WIKI_DB') mlsChatError(500,'BUG MLS Staging: una operación zero-D1 intentó acceder a WIKI_DB.');
+      return Reflect.get(target,prop,receiver);
+    }
+  });
+}
 async function handleMlsStaging(request,env,url){
   const route=url.pathname.replace('/api/wiki/editorial/staging','')||'/';
   try{
     await mlsChatAuthenticate(request,env);
-    if(route==='/status'&&request.method==='GET') return mlsChatJson(await mlsStagingStatus(env,url.searchParams.get('runId')));
-    if(route==='/next'&&request.method==='GET') return mlsChatJson(await mlsStagingNext(env,url.searchParams.get('runId')));
+    const zeroD1Env=mlsStagingNoD1Env(env);
+    if(route==='/status'&&request.method==='GET') return mlsChatJson(await mlsStagingStatus(zeroD1Env,url.searchParams.get('runId')));
+    if(route==='/next'&&request.method==='GET') return mlsChatJson(await mlsStagingNext(zeroD1Env,url.searchParams.get('runId')));
     if(request.method!=='POST') return mlsChatJson({ok:false,error:'Método no permitido.'},405);
     const body=await mlsChatBody(request);
-    if(route==='/start') return mlsChatJson(await mlsStagingStart(env,body));
-    if(route==='/validate') return mlsChatJson(await mlsStagingValidate(env,body));
-    if(route==='/stage') return mlsChatJson(await mlsStagingStage(env,body));
-    if(route==='/cancel') return mlsChatJson(await mlsStagingCancel(env,body));
+    if(route==='/start') return mlsChatJson(await mlsStagingStart(zeroD1Env,body));
+    if(route==='/validate') return mlsChatJson(await mlsStagingValidate(zeroD1Env,body));
+    if(route==='/stage') return mlsChatJson(await mlsStagingStage(zeroD1Env,body));
+    if(route==='/cancel') return mlsChatJson(await mlsStagingCancel(zeroD1Env,body));
     if(route==='/integrate') return mlsChatJson(await mlsStagingIntegrate(env,body));
     if(route==='/snapshot') return mlsChatJson(await mlsStagingCreateSnapshot(request,env,body));
     mlsChatError(404,'Ruta staging no encontrada.');
