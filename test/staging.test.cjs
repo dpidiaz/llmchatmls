@@ -10,6 +10,7 @@ const source = fs.readFileSync(stagingPath, 'utf8');
 const staging = require(stagingPath);
 const { patchStagingGuards } = require(path.join(process.cwd(), 'scripts', 'habilitar staging github.js'));
 const generator = require(path.join(process.cwd(), 'scripts', 'generar snapshot staging.js'));
+const chatBridge = require(path.join(process.cwd(), 'scripts', 'MLS chat bridge.cjs'));
 
 
 let functionalFixtureSequence=0;
@@ -575,6 +576,65 @@ test('predeploy installs staging after chat runtime and generates catalog last',
   assert.ok(pre.includes("node 'scripts/generar snapshot staging.js'"));
   assert.ok(pre.indexOf('habilitar chat editorial.js')<pre.indexOf('habilitar staging github.js'));
   assert.ok(pre.indexOf('habilitar staging github.js')<pre.indexOf('generar snapshot staging.js'));
+});
+
+test('MLS Chat Bridge exposes only the seven staging operations and no arbitrary URL input', async () => {
+  assert.deepEqual(Object.keys(chatBridge.MLS_CHAT_BRIDGE_OPERATIONS).sort(),[
+    'cancelarLoteStagingMLS',
+    'estadoStagingMLS',
+    'iniciarLoteStagingMLS',
+    'reconciliarStagingMLS',
+    'siguienteContextoStagingMLS',
+    'stagearBorradorMLS',
+    'validarBorradorStagingMLS'
+  ]);
+  assert.throws(
+    ()=>chatBridge.normalizeBridgeCommand({operationId:'fetchAnything',input:{url:'https://example.com'}}),
+    /operationId no permitido/
+  );
+  assert.throws(
+    ()=>chatBridge.normalizeBridgeCommand({operationId:'estadoStagingMLS',input:{runId:'abc',url:'https://example.com'}}),
+    /solo admite input\.runId/
+  );
+
+  let observed=null;
+  const fakeFetch=async (url,init)=>{
+    observed={url:String(url),init};
+    return new Response(JSON.stringify({ok:true,run:{runId:'r'}}),{status:200,headers:{'content-type':'application/json'}});
+  };
+  const result=await chatBridge.executeBridgeCommand(
+    {operationId:'iniciarLoteStagingMLS',input:{command:'MLS staging siguientes 2',requestId:'1234567890123456'}},
+    {fetchImpl:fakeFetch,secret:'bridge-test-secret'}
+  );
+  assert.equal(result.success,true);
+  assert.equal(result.httpStatus,200);
+  assert.equal(observed.url,'https://llmchatmls.dpidiaz.workers.dev/api/wiki/editorial/staging/start');
+  assert.equal(observed.init.method,'POST');
+  assert.equal(observed.init.headers.authorization,'Bearer bridge-test-secret');
+  assert.equal(JSON.parse(observed.init.body).command,'MLS staging siguientes 2');
+
+  observed=null;
+  await chatBridge.executeBridgeCommand(
+    {operationId:'siguienteContextoStagingMLS',input:{runId:'run-1'}},
+    {fetchImpl:fakeFetch,secret:'bridge-test-secret'}
+  );
+  assert.equal(new URL(observed.url).pathname,'/api/wiki/editorial/staging/next');
+  assert.equal(new URL(observed.url).searchParams.get('runId'),'run-1');
+  assert.equal(observed.init.method,'GET');
+  assert.equal(observed.init.body,undefined);
+});
+
+test('MLS Chat Bridge workflow is push-only, control-branch scoped and result writes cannot retrigger it', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','MLS chat bridge.yml'),'utf8');
+  assert.match(workflow,/push:/);
+  assert.doesNotMatch(workflow,/workflow_dispatch/);
+  assert.match(workflow,/mlschatcontrol/);
+  assert.match(workflow,/mls chat bridge\/commands\/\*\*\/\*\.json/);
+  assert.doesNotMatch(workflow,/paths:[\s\S]*mls chat bridge\/results/);
+  assert.match(workflow,/MLS_EDITORIAL_CHAT_KEY/);
+  assert.match(workflow,/permissions:[\s\S]*contents: write/);
+  assert.match(workflow,/git push origin HEAD:mlschatcontrol/);
+  assert.match(workflow,/MLS chat bridge\.cjs' --verify/);
 });
 
 test('bootstrap workflow installs staging credentials once and only from main', () => {
