@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const TARGET_SHARD_MAX_BYTES = 700 * 1024;
+
 const LANGUAGES = [
   { slug: 'espanol-guatemala', name: 'Español de Guatemala', total: 930, prefix: 'MLS-V10' },
   { slug: 'ingles', name: 'Inglés', total: 766, prefix: 'MLS-V01' },
@@ -63,29 +65,54 @@ function buildStagingTargetCatalog(root = process.cwd()) {
       if (!/^MLS-V\d{2}-\d{4}$/.test(normalized.code)) throw new Error('Código inválido en semilla: ' + normalized.code);
       entries.push(normalized);
     }
-    const relative = language.slug + '.json';
-    const content = JSON.stringify(entries);
-    const bytes = Buffer.byteLength(content, 'utf8');
-    const safeGitHubContentsBytes = 900 * 1024;
-    if (bytes > safeGitHubContentsBytes) {
-      throw new Error('Catálogo staging demasiado grande para GitHub Contents: ' + relative + ' = ' + bytes + ' bytes.');
+    const files = [];
+    let shardEntries = [];
+    let shardBytes = 2;
+    let totalBytes = 0;
+    let shardIndex = 1;
+    const flushShard = () => {
+      if (!shardEntries.length) return;
+      const safePrefix = language.prefix.replace(/-/g, ' ');
+      const relative = safePrefix + ' ' + String(shardIndex).padStart(2, '0') + '.json';
+      const content = JSON.stringify(shardEntries);
+      const bytes = Buffer.byteLength(content, 'utf8');
+      fs.writeFileSync(path.join(outputRoot, relative), content);
+      files.push({
+        file: relative,
+        start: shardEntries[0].n,
+        end: shardEntries[shardEntries.length - 1].n,
+        count: shardEntries.length,
+        bytes
+      });
+      totalBytes += bytes;
+      console.log('MLS Staging target shard', language.slug, relative + ':', bytes, 'bytes');
+      shardEntries = [];
+      shardBytes = 2;
+      shardIndex++;
+    };
+    for (const entry of entries) {
+      const serialized = JSON.stringify(entry);
+      const entryBytes = Buffer.byteLength(serialized, 'utf8') + (shardEntries.length ? 1 : 0);
+      if (shardEntries.length && shardBytes + entryBytes > TARGET_SHARD_MAX_BYTES) flushShard();
+      shardEntries.push(entry);
+      shardBytes += entryBytes;
     }
-    fs.writeFileSync(path.join(outputRoot, relative), content);
+    flushShard();
     manifest.languages[language.slug] = {
       name: language.name,
       prefix: language.prefix,
       total: language.total,
-      file: relative,
-      bytes
+      files,
+      bytes: totalBytes
     };
-    console.log('MLS Staging target catalog', language.slug + ':', bytes, 'bytes');
+    console.log('MLS Staging target catalog', language.slug + ':', totalBytes, 'bytes in', files.length, 'shards');
   }
 
   fs.writeFileSync(path.join(outputRoot, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
   return manifest;
 }
 
-module.exports = { LANGUAGES, normalizeSeed, buildStagingTargetCatalog };
+module.exports = { LANGUAGES, TARGET_SHARD_MAX_BYTES, normalizeSeed, buildStagingTargetCatalog };
 if (require.main === module) {
   const manifest = buildStagingTargetCatalog();
   console.log('Catálogo estático MLS Staging generado:', manifest.totalEntries, 'entradas.');
