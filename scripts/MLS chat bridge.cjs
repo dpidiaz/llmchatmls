@@ -131,6 +131,17 @@ function addD1Metrics(target, payload) {
   target.d1RowsWritten += Number(payload?.d1RowsWritten || payload?.run?.d1RowsWritten || 0);
 }
 
+function isTransientValidatedStage409(result) {
+  if (Number(result?.httpStatus) !== 409) return false;
+  const message = String(result?.response?.error || result?.response?.message || '');
+  return /persisted como validated antes de stagear/i.test(message);
+}
+
+async function bridgeSleep(ms, options = {}) {
+  if (typeof options.sleepImpl === 'function') return options.sleepImpl(ms);
+  await new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function executeRemoteOperation(operationId, input, options = {}) {
   const operation = MLS_CHAT_BRIDGE_OPERATIONS[operationId];
   if (!operation) throw new Error('Operación remota no permitida por MLS Chat Bridge.');
@@ -269,13 +280,21 @@ async function executeStagingSequence(input, options = {}) {
     if (!receipt)
       return sequenceFailure(normalized.runId, 'validate', entry.code, validated, metrics, results, 'La validación no devolvió validationReceipt.');
 
-    const staged = await executeRemoteOperation('stagearBorradorMLS', {
-      ...validateInput,
-      validationReceipt: receipt
-    }, options);
-    addD1Metrics(metrics, staged.response);
-    if (!staged.success || !staged.response?.staged)
-      return sequenceFailure(normalized.runId, 'stage', entry.code, staged, metrics, results);
+    let staged = null;
+    let stageAttempts = 0;
+    const stageDelays = [500, 1000, 2000];
+    while (stageAttempts < 4) {
+      stageAttempts += 1;
+      staged = await executeRemoteOperation('stagearBorradorMLS', {
+        ...validateInput,
+        validationReceipt: receipt
+      }, options);
+      addD1Metrics(metrics, staged.response);
+      if (staged.success && staged.response?.staged) break;
+      if (!isTransientValidatedStage409(staged) || stageAttempts >= 4)
+        return sequenceFailure(normalized.runId, 'stage', entry.code, staged, metrics, results);
+      await bridgeSleep(stageDelays[stageAttempts - 1], options);
+    }
 
     codeStates.set(entry.code, 'staged');
     results.push({
@@ -283,6 +302,7 @@ async function executeStagingSequence(input, options = {}) {
       status: 'staged',
       reused: Boolean(staged.response?.reused),
       validationReused: Boolean(validated.response?.reused),
+      stageAttempts,
       words: validated.response?.words ?? null,
       validateCommit: validated.response?.commit ?? null,
       stageCommit: staged.response?.commit ?? null
@@ -389,6 +409,7 @@ module.exports = {
   normalizeStagingSequenceInput,
   normalizeBridgeCommand,
   bridgeResultPath,
+  isTransientValidatedStage409,
   executeRemoteOperation,
   executeStagingSequence,
   executeBridgeCommand,
