@@ -570,6 +570,10 @@ test('bootstrap workflow installs staging credentials once and only from main', 
   assert.match(workflow,/MLS_STAGING_GITHUB_INSTALLATION_ID/);
   assert.match(workflow,/MLS_STAGING_GITHUB_APP_PRIVATE_KEY/);
   assert.match(workflow,/MLS_STAGING_GITHUB_TOKEN/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_TOKEN: null/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_ID: null/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_INSTALLATION_ID: null/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_PRIVATE_KEY: null/);
   assert.match(workflow,/Crear snapshot inicial MLS Staging/);
   assert.match(workflow,/verify-chat-deployment\.cjs/);
 });
