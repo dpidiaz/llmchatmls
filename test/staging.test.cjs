@@ -248,6 +248,14 @@ test('FUNCTIONAL A/B/C/D/I/J/K — concurrent reservations, idempotency, validat
     assert.equal(reused.run.runId,first.run.runId);
     assert.equal(d1.calls,0);
 
+    const targeted=await staging.mlsStagingNext(zero,first.run.runId,firstCodes[1]);
+    assert.equal(targeted.context.target.code,firstCodes[1]);
+    await assert.rejects(
+      staging.mlsStagingNext(zero,first.run.runId,secondCodes[0]),
+      error=>error.status===409
+    );
+    assert.equal(d1.calls,0);
+
     const next=await staging.mlsStagingNext(zero,first.run.runId);
     const code=next.context.target.code;
     const referenceCodes=next.context.references.map(x=>x.code);
@@ -270,6 +278,10 @@ test('FUNCTIONAL A/B/C/D/I/J/K — concurrent reservations, idempotency, validat
       articleMarkdown:'# Tema\n\nContenido válido funcional.',referenceCodes,editorialReview,validationReceipt:valid.validationReceipt});
     assert.equal(staged.staged,true);
     assert.equal(staged.published,false);
+    await assert.rejects(
+      staging.mlsStagingNext(zero,first.run.runId,code),
+      error=>error.status===409
+    );
     assert.equal(d1.calls,0);
 
     const next2=await staging.mlsStagingNext(zero,first.run.runId);
@@ -318,6 +330,390 @@ test('FUNCTIONAL E/F — third retry becomes deferred and snapshot failures beco
     assert.equal(status.run.codes[0].status,'needs_review');
     assert.equal(d1.calls,0);
   },5);
+});
+
+test('targeted staging context is additive in OpenAPI and preserves FIFO default', () => {
+  const api=JSON.parse(fs.readFileSync(path.join(process.cwd(),'MLS R32 EDITORIAL','chat openapi.json'),'utf8'));
+  const params=api.paths['/api/wiki/editorial/staging/next'].get.parameters;
+  const runId=params.find(x=>x.name==='runId');
+  const code=params.find(x=>x.name==='code');
+  assert.equal(runId.required,true);
+  assert.equal(code.required,false);
+  assert.equal(code.schema.pattern,'^MLS-V[0-9]{2}-[0-9]{4}
+  for (const name of ['mlsStagingStart','mlsStagingStatus','mlsStagingNext','mlsStagingValidate','mlsStagingStage','mlsStagingCancel']) {
+    const body = bodyOf(name);
+    assert.doesNotMatch(body, /WIKI_DB|ensureWikiDb|mlsChatEnsureDb/);
+  }
+  const handler = bodyOf('handleMlsStaging');
+  for (const name of ['mlsStagingStatus','mlsStagingNext','mlsStagingStart','mlsStagingValidate','mlsStagingStage','mlsStagingCancel']) {
+    assert.match(handler, new RegExp(name + '\\(zeroD1Env'));
+  }
+  assert.match(handler, /mlsStagingIntegrate\(env,/);
+  assert.match(handler, /mlsStagingCreateSnapshot\(request,env,/);
+
+  const guarded = staging.mlsStagingNoD1Env({WIKI_DB:{forbidden:true},SAFE:42});
+  assert.equal(guarded.SAFE,42);
+  assert.throws(()=>guarded.WIKI_DB);
+
+  const run={runId:'00000000-0000-4000-8000-000000000001',requestId:'abcdefghijklmnop',snapshotVersion:'s',snapshotCommit:'c',requested:2,status:'complete',entries:[
+    {position:0,code:'MLS-V10-0001',status:'staged'},{position:1,code:'MLS-V10-0002',status:'staged'}
+  ]};
+  const summary=staging.mlsStagingSummarize(run);
+  assert.equal(summary.d1RowsRead,0);
+  assert.equal(summary.d1RowsWritten,0);
+  assert.equal(summary.staged,2);
+  assert.equal('published' in summary,false);
+});
+
+test('Git commits inline file content in one tree request instead of one blob request per file', () => {
+  const commit=bodyOf('mlsStagingCommit');
+  assert.doesNotMatch(commit,/\/git\/blobs/);
+  assert.match(commit,/content:String\(file\.content\)/);
+  assert.match(commit,/\/git\/trees/);
+  assert.equal((commit.match(/mlsStagingGitHub\(/g)||[]).length,4);
+});
+
+test('TEST B — concurrency uses optimistic non-force ref updates and persistent shards', () => {
+  const commit=bodyOf('mlsStagingCommit');
+  assert.match(commit,/force:false/);
+  assert.match(bodyOf('mlsStagingStart'),/MLS_STAGING_MAX_GITHUB_RETRIES/);
+  assert.equal(staging.mlsStagingIndexPath('MLS-V10-0001'),'mls-staging/index/MLS-V10/0001-0100.json');
+  assert.equal(staging.mlsStagingIndexPath('MLS-V10-0101'),'mls-staging/index/MLS-V10/0101-0200.json');
+});
+
+test('TEST C — requestId has a durable idempotency record', () => {
+  const start=bodyOf('mlsStagingStart');
+  assert.match(start,/requests\/.*requestKey/);
+  assert.match(start,/prior\?\.runId/);
+  assert.match(start,/reused:true/);
+});
+
+test('TEST D — failed validation can be corrected and only validated content can be staged', () => {
+  const doc=staging.mlsStagingAutooptBase('r');
+  staging.mlsStagingAutooptApply(doc,{code:'MLS-V10-0001',attempt:1,valid:false,category:'markdown'});
+  staging.mlsStagingAutooptApply(doc,{code:'MLS-V10-0001',attempt:2,valid:true,staged:true});
+  assert.equal(doc.validationAttempts,2);
+  assert.equal(doc.markdownFailures,1);
+  assert.equal(doc.staged,1);
+  assert.equal(doc.firstPassSuccess,0);
+  const validate=bodyOf('mlsStagingValidate');
+  assert.match(validate,/target\.status='validated'/);
+  assert.match(validate,/mlsStagingIndexPath\(item\.code\)/);
+  assert.match(validate,/mlsStagingAutooptApply/);
+  const stage=bodyOf('mlsStagingStage');
+  assert.match(stage,/validationReceipt/);
+  assert.match(stage,/mlsChatValidateText/);
+  assert.match(stage,/existing\?\.status!=='validated'/);
+  assert.match(stage,/published:false/);
+});
+
+test('TEST E — deferred is terminal for exhausted entry and no silent substitute is selected', () => {
+  const doc=staging.mlsStagingAutooptBase('r');
+  staging.mlsStagingAutooptApply(doc,{code:'MLS-V10-0001',attempt:3,valid:false,category:'rule',terminal:'deferred'});
+  assert.equal(doc.deferred,1);
+  const failure=bodyOf('mlsStagingValidationFailure');
+  assert.match(failure,/target\.validationAttempts>=3\?'deferred'/);
+  assert.match(failure,/target\.status=terminal\|\|'drafting'/);
+  assert.match(failure,/mlsStagingIndexPath\(item\.code\)/);
+  assert.doesNotMatch(failure,/selected\.push|substitut/i);
+});
+
+test('TEST F — needs_review is terminal and never counted as staged', () => {
+  const doc=staging.mlsStagingAutooptBase('r');
+  staging.mlsStagingAutooptApply(doc,{code:'MLS-V10-0001',attempt:1,valid:false,category:'contract',terminal:'needs_review'});
+  assert.equal(doc.needsReview,1);
+  assert.equal(doc.staged,0);
+  assert.match(bodyOf('mlsStagingValidationFailure'),/needs_review/);
+});
+
+test('TEST G/H — Gemma serves staged R32 and blocks reserved/staged before persistent D1 write', () => {
+  const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
+  const patched=patchStagingGuards(overlay);
+  assert.match(patched,/mlsStagingServeArticle\(env, job\.code\)/);
+  assert.match(patched,/staging-reserved/);
+  assert.match(patched,/mlsStagingCodeState\(env, article\.code, \{ strong: true, failOpen: false \}\)/);
+  assert.match(patched,/autogeneración no puede publicarlo en D1/);
+});
+
+test('TEST I — reconciliation measures real D1 driver metadata', () => {
+  const metrics={d1RowsRead:0,d1RowsWritten:0};
+  staging.mlsStagingD1Add(metrics,{meta:{rows_read:2,rows_written:0}});
+  staging.mlsStagingD1Add(metrics,[{meta:{rows_read:0,rows_written:1}},{meta:{rows_read:2,rows_written:1}}]);
+  assert.deepEqual(metrics,{d1RowsRead:4,d1RowsWritten:2});
+  const integrate=bodyOf('mlsStagingIntegrate');
+  assert.match(integrate,/wiki_articles/);
+  assert.match(integrate,/mlsStagingD1Add/);
+});
+
+test('TEST J — repeated reconciliation is idempotent by audit receipt and ON CONFLICT DO NOTHING', () => {
+  const integrate=bodyOf('mlsStagingIntegrate');
+  assert.match(integrate,/audit_model/);
+  assert.match(integrate,/ON CONFLICT\(code\) DO NOTHING/);
+  assert.match(integrate,/row\?\.audit_model===metadata\.auditModel\?'integrated':'preservedExisting'/);
+});
+
+test('TEST K — existing foreign canonical content is preserved', () => {
+  const integrate=bodyOf('mlsStagingIntegrate');
+  assert.match(integrate,/preservedExisting/);
+  assert.doesNotMatch(integrate,/DO UPDATE SET article_markdown/);
+});
+
+test('TEST L/M — normal Actions remain intact and staging is strictly additive', () => {
+  const api=JSON.parse(fs.readFileSync(path.join(process.cwd(),'MLS R32 EDITORIAL','chat openapi.json'),'utf8'));
+  const operationIds=Object.values(api.paths).flatMap(p=>Object.values(p)).map(op=>op.operationId).filter(Boolean);
+  for(const id of ['iniciarLoteMLS','siguienteContextoMLS','validarBorradorMLS','publicarBorradorMLS','estadoMLS','cancelarLoteMLS'])
+    assert.ok(operationIds.includes(id),id);
+  for(const id of ['iniciarLoteStagingMLS','siguienteContextoStagingMLS','validarBorradorStagingMLS','stagearBorradorMLS','estadoStagingMLS','cancelarLoteStagingMLS','reconciliarStagingMLS'])
+    assert.ok(operationIds.includes(id),id);
+  assert.notEqual(operationIds.indexOf('stagearBorradorMLS'),operationIds.indexOf('publicarBorradorMLS'));
+});
+
+test('TEST N — GitHub failure has no staging fallback to D1', () => {
+  const handler=bodyOf('handleMlsStaging');
+  assert.match(handler,/No se usó D1 como fallback/);
+  for(const name of ['mlsStagingStart','mlsStagingNext','mlsStagingValidate','mlsStagingStage','mlsStagingCancel'])
+    assert.doesNotMatch(bodyOf(name),/WIKI_DB/);
+});
+
+test('selection never silently reuses unresolved or preserved staging states', () => {
+  const select=bodyOf('mlsStagingSelect');
+  assert.match(select,/state && state\.status!=='cancelled'/);
+  assert.doesNotMatch(select,/\['reserved','drafting','validated','staged','integrated','deployed'\]/);
+});
+
+test('workflow YAML has one production, snapshot and verification step only', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
+  assert.equal((workflow.match(/name: Desplegar en produccion/g)||[]).length,1);
+  assert.equal((workflow.match(/name: Crear snapshot MLS Staging del deploy/g)||[]).length,1);
+  assert.equal((workflow.match(/name: Verificar Action editorial sin crear lotes/g)||[]).length,1);
+  assert.doesNotMatch(workflow,/response%|\\\\n%\{http_code\}/);
+});
+
+test('Status reports exact codes and range formatting preserves gaps', () => {
+  const entries=[
+    {code:'MLS-V10-0001'},{code:'MLS-V10-0002'},{code:'MLS-V10-0004'},
+    {code:'MLS-V01-0001'},{code:'MLS-V01-0002'}
+  ];
+  assert.deepEqual(staging.mlsStagingRanges(entries),[
+    'MLS-V10-0001…MLS-V10-0002','MLS-V10-0004','MLS-V01-0001…MLS-V01-0002'
+  ]);
+});
+
+test('AUTOOPT staging never invents learnedMinimum', () => {
+  const doc=staging.mlsStagingAutooptBase('run');
+  assert.equal(doc.learnedMinimum,undefined);
+  staging.mlsStagingAutooptApply(doc,{attempt:1,valid:true,staged:true});
+  assert.equal(doc.learnedMinimum,undefined);
+});
+
+test('GitHub App private keys accept both PKCS1 and PKCS8 PEM', async () => {
+  const nodeCrypto=require('node:crypto');
+  if(!global.crypto) global.crypto=nodeCrypto.webcrypto;
+  const {privateKey}=nodeCrypto.generateKeyPairSync('rsa',{modulusLength:2048});
+  const pkcs1=privateKey.export({type:'pkcs1',format:'pem'}).toString();
+  const pkcs8=privateKey.export({type:'pkcs8',format:'pem'}).toString();
+  const algorithm={name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'};
+  await assert.doesNotReject(()=>global.crypto.subtle.importKey('pkcs8',staging.mlsStagingPrivateKeyDer(pkcs1),algorithm,false,['sign']));
+  await assert.doesNotReject(()=>global.crypto.subtle.importKey('pkcs8',staging.mlsStagingPrivateKeyDer(pkcs8),algorithm,false,['sign']));
+});
+
+test('snapshot manifest cache reads GitHub once and never recurses into itself', () => {
+  const body=bodyOf('mlsStagingSnapshotManifest');
+  assert.match(body,/mlsStagingReadJson/);
+  const selfCalls=(body.match(/mlsStagingSnapshotManifest\(/g)||[]).length;
+  assert.equal(selfCalls,1);
+});
+
+test('snapshot checks GitHub and free subrequest budget before any D1 bootstrap access', () => {
+  const body=bodyOf('mlsStagingCreateSnapshot');
+  const headIndex=body.indexOf('mlsStagingHead(env)');
+  const manifestIndex=body.indexOf("mlsStagingSnapshotAsset(env,request,'manifest.json')");
+  const budgetIndex=body.indexOf('projectedExternalSubrequestBudget>49');
+  const d1Index=body.indexOf('ensureWikiDb(env)');
+  assert.ok(headIndex>=0);
+  assert.ok(manifestIndex>=0);
+  assert.ok(budgetIndex>=0);
+  assert.ok(d1Index>=0);
+  assert.ok(headIndex<manifestIndex);
+  assert.ok(manifestIndex<budgetIndex);
+  assert.ok(budgetIndex<d1Index);
+  assert.match(body,/projectedGithubFiles=targetFileCount\+languages\.length\+2/);
+  assert.match(body,/projectedExternalSubrequestBudget=targetFileCount\+8/);
+  assert.match(body,/files\.length!==projectedGithubFiles/);
+});
+
+test('target catalog is compact and does not copy whole seed objects', () => {
+  const generatorSource=fs.readFileSync(path.join(process.cwd(),'scripts','generar snapshot staging.js'),'utf8');
+  assert.doesNotMatch(generatorSource,/\.\.\.seed/);
+  assert.match(generatorSource,/TARGET_SHARD_MAX_BYTES = 700 \* 1024/);
+  assert.match(generatorSource,/files,/);
+  const out=generator.normalizeSeed({
+    title:'Tema',level:'A1',part:'Parte',chapter:'Capítulo',target:'x',definition:'d',example:'e',notes:'n',reference:'r',unused:'do not copy'
+  },{slug:'espanol-guatemala',name:'Español de Guatemala',prefix:'MLS-V10'},20);
+  assert.equal(out.unused,undefined);
+  assert.deepEqual(Object.keys(out),[
+    'code','language','languageName','n','title','level','part','chapter','target','definition','example','notes','reference'
+  ]);
+});
+
+test('new snapshot pointer resolves immutable commit through GitHub history and stays within free budget', () => {
+  const resolve=bodyOf('mlsStagingResolveSnapshotCommit');
+  assert.match(resolve,/\/commits\?sha=/);
+  assert.match(resolve,/manifestPath/);
+  const snapshot=bodyOf('mlsStagingCreateSnapshot');
+  assert.equal((snapshot.match(/mlsStagingCommit\(env,files/g)||[]).length,1);
+  assert.match(snapshot,/projectedExternalSubrequestBudget=targetFileCount\+8/);
+  assert.match(snapshot,/projectedExternalSubrequestBudget>49/);
+  assert.match(snapshot,/snapshots\/latest\.json/);
+  assert.doesNotMatch(snapshot,/MLS staging point latest/);
+});
+
+test('snapshot runtime reads target shards from the pinned manifest', () => {
+  const targets=bodyOf('mlsStagingSnapshotTargets');
+  assert.match(targets,/descriptor\?\.files/);
+  assert.ok(targets.includes("+'/targets/'+file"));
+  const snapshot=bodyOf('mlsStagingCreateSnapshot');
+  assert.match(snapshot,/descriptor\.files/);
+  assert.match(snapshot,/maxReferenceBytes=900\*1024/);
+  assert.match(snapshot,/referenceCounts/);
+});
+
+test('Snapshot/build contract expects exactly 10 languages and 10,133 targets', () => {
+  assert.equal(generator.LANGUAGES.length,10);
+  assert.equal(generator.LANGUAGES.reduce((sum,x)=>sum+x.total,0),10133);
+  const out=generator.normalizeSeed({title:'Tema',level:'A1',chapter:'Alfabeto'},{slug:'espanol-guatemala',name:'Español de Guatemala',prefix:'MLS-V10'},20);
+  assert.equal(out.code,'MLS-V10-0020');
+  assert.equal(out.language,'espanol-guatemala');
+  assert.equal(out.n,20);
+});
+
+test('predeploy installs staging after chat runtime and generates catalog last', () => {
+  const pkg=JSON.parse(fs.readFileSync(path.join(process.cwd(),'package.json'),'utf8'));
+  const pre=pkg.scripts.predeploy;
+  assert.ok(pre.includes("node 'scripts/habilitar chat editorial.js'"));
+  assert.ok(pre.includes("node 'scripts/habilitar staging github.js'"));
+  assert.ok(pre.includes("node 'scripts/generar snapshot staging.js'"));
+  assert.ok(pre.indexOf('habilitar chat editorial.js')<pre.indexOf('habilitar staging github.js'));
+  assert.ok(pre.indexOf('habilitar staging github.js')<pre.indexOf('generar snapshot staging.js'));
+});
+
+test('MLS Chat Bridge exposes only the seven staging operations and no arbitrary URL input', async () => {
+  assert.deepEqual(Object.keys(chatBridge.MLS_CHAT_BRIDGE_OPERATIONS).sort(),[
+    'cancelarLoteStagingMLS',
+    'estadoStagingMLS',
+    'iniciarLoteStagingMLS',
+    'reconciliarStagingMLS',
+    'siguienteContextoStagingMLS',
+    'stagearBorradorMLS',
+    'validarBorradorStagingMLS'
+  ]);
+  assert.throws(
+    ()=>chatBridge.normalizeBridgeCommand({operationId:'fetchAnything',input:{url:'https://example.com'}}),
+    /operationId no permitido/
+  );
+  assert.throws(
+    ()=>chatBridge.normalizeBridgeCommand({operationId:'estadoStagingMLS',input:{runId:'abc',url:'https://example.com'}}),
+    /solo admite input\.runId/
+  );
+
+  let observed=null;
+  const fakeFetch=async (url,init)=>{
+    observed={url:String(url),init};
+    return new Response(JSON.stringify({ok:true,run:{runId:'r'}}),{status:200,headers:{'content-type':'application/json'}});
+  };
+  const result=await chatBridge.executeBridgeCommand(
+    {operationId:'iniciarLoteStagingMLS',input:{command:'MLS staging siguientes 2',requestId:'1234567890123456'}},
+    {fetchImpl:fakeFetch,secret:'bridge-test-secret'}
+  );
+  assert.equal(result.success,true);
+  assert.equal(result.httpStatus,200);
+  assert.equal(observed.url,'https://llmchatmls.dpidiaz.workers.dev/api/wiki/editorial/staging/start');
+  assert.equal(observed.init.method,'POST');
+  assert.equal(observed.init.headers.authorization,'Bearer bridge-test-secret');
+  assert.equal(JSON.parse(observed.init.body).command,'MLS staging siguientes 2');
+
+  observed=null;
+  await chatBridge.executeBridgeCommand(
+    {operationId:'siguienteContextoStagingMLS',input:{runId:'run-1'}},
+    {fetchImpl:fakeFetch,secret:'bridge-test-secret'}
+  );
+  assert.equal(new URL(observed.url).pathname,'/api/wiki/editorial/staging/next');
+  assert.equal(new URL(observed.url).searchParams.get('runId'),'run-1');
+  assert.equal(new URL(observed.url).searchParams.get('code'),null);
+  assert.equal(observed.init.method,'GET');
+  assert.equal(observed.init.body,undefined);
+
+  observed=null;
+  await chatBridge.executeBridgeCommand(
+    {operationId:'siguienteContextoStagingMLS',input:{runId:'run-1',code:'MLS-V02-0495'}},
+    {fetchImpl:fakeFetch,secret:'bridge-test-secret'}
+  );
+  assert.equal(new URL(observed.url).searchParams.get('runId'),'run-1');
+  assert.equal(new URL(observed.url).searchParams.get('code'),'MLS-V02-0495');
+  assert.throws(
+    ()=>chatBridge.normalizeBridgeCommand({operationId:'siguienteContextoStagingMLS',input:{runId:'run-1',code:'MLS-V02-0495',url:'https://example.com'}}),
+    /solo admite input\.runId e input\.code opcional/
+  );
+});
+
+test('MLS Chat Bridge workflow is push-only, control-branch scoped and result writes cannot retrigger it', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','MLS chat bridge.yml'),'utf8');
+  assert.match(workflow,/push:/);
+  assert.doesNotMatch(workflow,/workflow_dispatch/);
+  assert.match(workflow,/mlschatcontrol/);
+  assert.match(workflow,/mls chat bridge\/commands\/\*\*\/\*\.json/);
+  const pathsBlock=/paths:\n((?:\s+- .+\n)+)/.exec(workflow)?.[1]||'';
+  assert.match(pathsBlock,/mls chat bridge\/commands\/\*\*\/\*\.json/);
+  assert.doesNotMatch(pathsBlock,/mls chat bridge\/results/);
+  assert.match(workflow,/MLS_EDITORIAL_CHAT_KEY/);
+  assert.match(workflow,/permissions:[\s\S]*contents: write/);
+  assert.match(workflow,/git status --porcelain -- 'mls chat bridge\/results'/);
+  assert.doesNotMatch(workflow,/git diff --quiet -- 'mls chat bridge\/results'/);
+  assert.match(workflow,/git push origin HEAD:mlschatcontrol/);
+  assert.match(workflow,/MLS chat bridge\.cjs' --verify/);
+});
+
+test('bootstrap workflow installs staging credentials once and only from main', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','bootstrap staging.yml'),'utf8');
+  assert.match(workflow,/workflow_dispatch/);
+  assert.match(workflow,/github\.ref == 'refs\/heads\/main'/);
+  assert.equal((workflow.match(/wrangler secret bulk/g)||[]).length,2);
+  assert.equal((workflow.match(/wrangler secret put/g)||[]).length,0);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_ID/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_INSTALLATION_ID/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_PRIVATE_KEY/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_TOKEN/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_TOKEN: null/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_ID: null/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_INSTALLATION_ID: null/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_PRIVATE_KEY: null/);
+  assert.match(workflow,/Crear snapshot inicial MLS Staging/);
+  assert.match(workflow,/verify-chat-deployment\.cjs/);
+});
+
+test('production workflow deploy steps are restricted to main branch dispatches', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
+  const guard="github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'";
+  assert.ok(workflow.split(guard).length-1>=3);
+});
+
+test('production workflow captures a versioned snapshot after deploy', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
+  assert.match(workflow,/Crear snapshot MLS Staging del deploy/);
+  assert.match(workflow,/\/api\/wiki\/editorial\/staging\/snapshot/);
+  assert.match(workflow,/sourceCommit/);
+  assert.match(workflow,/GITHUB_SHA/);
+});
+
+test('staging.js parses as standalone JavaScript', () => {
+  assert.doesNotThrow(()=>new Function(source));
+});
+);
+  const next=bodyOf('mlsStagingNext');
+  assert.match(next,/requestedCode/);
+  assert.match(next,/entries\.find\(x=>MLS_STAGING_ACTIVE\.has\(x\.status\)\)/);
+  assert.match(next,/El código solicitado no pertenece a este lote staging/);
+  assert.match(next,/El código solicitado ya no está activo en este lote staging/);
 });
 
 test('TEST A — staging operational paths are runtime-guarded from D1 and report zero D1', () => {
@@ -620,8 +1016,21 @@ test('MLS Chat Bridge exposes only the seven staging operations and no arbitrary
   );
   assert.equal(new URL(observed.url).pathname,'/api/wiki/editorial/staging/next');
   assert.equal(new URL(observed.url).searchParams.get('runId'),'run-1');
+  assert.equal(new URL(observed.url).searchParams.get('code'),null);
   assert.equal(observed.init.method,'GET');
   assert.equal(observed.init.body,undefined);
+
+  observed=null;
+  await chatBridge.executeBridgeCommand(
+    {operationId:'siguienteContextoStagingMLS',input:{runId:'run-1',code:'MLS-V02-0495'}},
+    {fetchImpl:fakeFetch,secret:'bridge-test-secret'}
+  );
+  assert.equal(new URL(observed.url).searchParams.get('runId'),'run-1');
+  assert.equal(new URL(observed.url).searchParams.get('code'),'MLS-V02-0495');
+  assert.throws(
+    ()=>chatBridge.normalizeBridgeCommand({operationId:'siguienteContextoStagingMLS',input:{runId:'run-1',code:'MLS-V02-0495',url:'https://example.com'}}),
+    /solo admite input\.runId e input\.code opcional/
+  );
 });
 
 test('MLS Chat Bridge workflow is push-only, control-branch scoped and result writes cannot retrigger it', () => {
