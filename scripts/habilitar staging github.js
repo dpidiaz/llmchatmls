@@ -44,7 +44,7 @@ function patchStagingGuards(source) {
     }
   }
   const now = (/* @__PURE__ */ new Date()).toISOString();
-  await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_jobs`,
+  await env.WIKI_DB.prepare(\`INSERT OR IGNORE INTO wiki_jobs`,
     'protección temprana de materialización'
   );
 
