@@ -795,7 +795,90 @@ async function mlsStagingCollectStaged(env,head){
   items.sort((a,b)=>a.code.localeCompare(b.code));
   return items;
 }
+async function mlsStagingCollectProvenancePending(env,head){
+  const indexManifest=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/index/manifest.json',head,true,{shards:[]});
+  const items=[];
+  for(const path of indexManifest.shards||[]){
+    const shard=await mlsStagingReadJson(env,path,head,true,null); if(!shard) continue;
+    for(const state of Object.values(shard.codes||{})){
+      if(['integrated','deployed'].includes(state.status)&&!state.provenanceRecordedAt) items.push({...state,indexPath:path});
+    }
+  }
+  items.sort((a,b)=>a.code.localeCompare(b.code));
+  return items;
+}
+function mlsStagingProvenanceStatement(env,metadata,integratedAt){
+  return env.WIKI_DB.prepare(`INSERT INTO wiki_article_provenance(
+      code,origin,standard,prompt_version,staging_run_id,snapshot_version,snapshot_commit,staged_at,integrated_at,source_audit_model,recorded_at)
+    VALUES (?,'github-staging','MLS R32',?,?,?,?,?,?,?,?,?)
+    ON CONFLICT(code) DO UPDATE SET
+      origin=excluded.origin,
+      standard=excluded.standard,
+      prompt_version=excluded.prompt_version,
+      staging_run_id=excluded.staging_run_id,
+      snapshot_version=excluded.snapshot_version,
+      snapshot_commit=excluded.snapshot_commit,
+      staged_at=excluded.staged_at,
+      integrated_at=excluded.integrated_at,
+      source_audit_model=excluded.source_audit_model,
+      recorded_at=excluded.recorded_at`)
+    .bind(metadata.code,metadata.promptVersion||'32.0',metadata.runId||null,metadata.snapshotVersion||null,
+      metadata.snapshotCommit||null,metadata.stagedAt||null,integratedAt||metadata.integratedAt||null,
+      metadata.auditModel||null,mlsStagingNow());
+}
+async function mlsStagingBackfillProvenance(env,body){
+  const metrics={d1RowsRead:0,d1RowsWritten:0};
+  const head=await mlsStagingHead(env);
+  const allPending=await mlsStagingCollectProvenancePending(env,head);
+  const limit=Math.max(1,Math.min(50,Number(body?.limit)||10));
+  const selected=allPending.slice(0,limit);
+  if(!selected.length) return {ok:true,backfillProvenance:true,candidates:0,backfilled:0,skippedMismatch:0,pendingProvenance:0,...metrics,status:'complete'};
+  const loaded=new Map();
+  for(const state of selected){
+    const metadata=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/pending/'+state.code+'/metadata.json',head,false);
+    loaded.set(state.code,metadata);
+  }
+  const existing=new Map();
+  for(let i=0;i<selected.length;i+=100){
+    const chunk=selected.slice(i,i+100);
+    const q=await env.WIKI_DB.prepare("SELECT code,audit_model FROM wiki_articles WHERE code IN ("+chunk.map(()=>'?').join(',')+")").bind(...chunk.map(x=>x.code)).all();
+    mlsStagingD1Add(metrics,q); for(const row of q.results||[])existing.set(row.code,row);
+  }
+  const matching=selected.filter(state=>{
+    const metadata=loaded.get(state.code),row=existing.get(state.code);
+    return Boolean(metadata&&row&&row.audit_model===metadata.auditModel);
+  });
+  if(matching.length){
+    const result=await env.WIKI_DB.batch(matching.map(state=>{
+      const metadata=loaded.get(state.code);
+      return mlsStagingProvenanceStatement(env,metadata,metadata.integratedAt||mlsStagingNow());
+    }));
+    mlsStagingD1Add(metrics,result);
+  }
+  const now=mlsStagingNow();
+  for(let attempt=0;attempt<MLS_STAGING_MAX_GITHUB_RETRIES;attempt++){
+    const currentHead=await mlsStagingHead(env),files=[],runs=new Map(),shards=new Map();
+    for(const state of matching){
+      const metadata={...loaded.get(state.code),provenanceRecordedAt:now};
+      files.push({path:MLS_STAGING_ROOT+'/pending/'+state.code+'/metadata.json',content:JSON.stringify(metadata,null,2)+'\n'});
+      const indexPath=mlsStagingIndexPath(state.code);
+      let shard=shards.get(indexPath);if(!shard){shard=await mlsStagingReadJson(env,indexPath,currentHead,true,mlsStagingEmptyShard(indexPath));shards.set(indexPath,shard);}
+      if(shard.codes?.[state.code]){shard.codes[state.code].provenanceRecordedAt=now;shard.codes[state.code].updatedAt=now;}
+      const runId=metadata.runId;
+      let run=runs.get(runId);if(!run){run=await mlsStagingLoadRun(env,runId,currentHead);if(run)runs.set(runId,run);}
+      const item=run?.entries?.find(x=>x.code===state.code);if(item){item.provenanceRecordedAt=now;item.updatedAt=now;run.updatedAt=now;}
+    }
+    for(const [path,shard] of shards){shard.updatedAt=now;files.push({path,content:JSON.stringify(shard,null,2)+'\n'});}
+    for(const run of runs.values()) files.push({path:MLS_STAGING_ROOT+'/runs/'+run.runId+'/manifest.json',content:JSON.stringify(run,null,2)+'\n'});
+    try{if(files.length) await mlsStagingCommit(env,files,'MLS staging provenance backfill '+matching.length+' entries',currentHead);break;}
+    catch(error){if(error.status!==409||attempt===MLS_STAGING_MAX_GITHUB_RETRIES-1) throw error;}
+  }
+  const pendingProvenance=Math.max(0,allPending.length-matching.length);
+  return {ok:true,backfillProvenance:true,candidates:selected.length,backfilled:matching.length,
+    skippedMismatch:selected.length-matching.length,pendingProvenance,...metrics,status:pendingProvenance?'partial':'complete'};
+}
 async function mlsStagingIntegrate(env,body){
+  if(body?.backfillProvenance===true) return mlsStagingBackfillProvenance(env,body);
   // No unmetered schema/bootstrap queries here: every D1 statement below is added to metrics.
   const metrics={d1RowsRead:0,d1RowsWritten:0};
   const head=await mlsStagingHead(env);
@@ -835,6 +918,13 @@ async function mlsStagingIntegrate(env,body){
     outcomes.push({code:state.code,status:row?.audit_model===metadata.auditModel?'integrated':'preservedExisting'});
   }
   const own=outcomes.filter(x=>x.status==='integrated');
+  const provenanceAt=mlsStagingNow();
+  for(let i=0;i<own.length;i+=50){
+    const result=await env.WIKI_DB.batch(own.slice(i,i+50).map(x=>{
+      const metadata=loaded.get(x.code).metadata;
+      return mlsStagingProvenanceStatement(env,metadata,provenanceAt);
+    }));mlsStagingD1Add(metrics,result);
+  }
   for(let i=0;i<own.length;i+=50){
     const result=await env.WIKI_DB.batch(own.slice(i,i+50).map(x=>{
       const metadata=loaded.get(x.code).metadata;
@@ -845,14 +935,22 @@ async function mlsStagingIntegrate(env,body){
   for(let attempt=0;attempt<MLS_STAGING_MAX_GITHUB_RETRIES;attempt++){
     const currentHead=await mlsStagingHead(env),files=[],runs=new Map(),shards=new Map(),now=mlsStagingNow();
     for(const outcome of outcomes){
-      const data=loaded.get(outcome.code),metadata={...data.metadata,status:outcome.status,integratedAt:now};
+      const data=loaded.get(outcome.code),metadata={...data.metadata,status:outcome.status,integratedAt:now,
+        provenanceRecordedAt:outcome.status==='integrated'?now:(data.metadata.provenanceRecordedAt||null)};
       files.push({path:MLS_STAGING_ROOT+'/pending/'+outcome.code+'/metadata.json',content:JSON.stringify(metadata,null,2)+'\n'});
       const indexPath=mlsStagingIndexPath(outcome.code);
       let shard=shards.get(indexPath);if(!shard){shard=await mlsStagingReadJson(env,indexPath,currentHead,true,mlsStagingEmptyShard(indexPath));shards.set(indexPath,shard);}
-      if(shard.codes?.[outcome.code]){shard.codes[outcome.code].status=outcome.status;shard.codes[outcome.code].updatedAt=now;}
+      if(shard.codes?.[outcome.code]){
+        shard.codes[outcome.code].status=outcome.status;shard.codes[outcome.code].updatedAt=now;
+        if(outcome.status==='integrated') shard.codes[outcome.code].provenanceRecordedAt=now;
+      }
       const runId=data.metadata.runId;
       let run=runs.get(runId);if(!run){run=await mlsStagingLoadRun(env,runId,currentHead);if(run)runs.set(runId,run);}
-      const item=run?.entries?.find(x=>x.code===outcome.code);if(item){item.status=outcome.status;item.integratedAt=now;item.updatedAt=now;run.updatedAt=now;}
+      const item=run?.entries?.find(x=>x.code===outcome.code);if(item){
+        item.status=outcome.status;item.integratedAt=now;item.updatedAt=now;
+        if(outcome.status==='integrated') item.provenanceRecordedAt=now;
+        run.updatedAt=now;
+      }
     }
     for(const [path,shard] of shards){shard.updatedAt=now;files.push({path,content:JSON.stringify(shard,null,2)+'\n'});}
     for(const run of runs.values()) files.push({path:MLS_STAGING_ROOT+'/runs/'+run.runId+'/manifest.json',content:JSON.stringify(run,null,2)+'\n'});
@@ -907,6 +1005,6 @@ async function handleMlsStaging(request,env,url){
 if(typeof module!=='undefined'&&module.exports) module.exports={
   mlsStagingIndexPath,mlsStagingSummarize,mlsStagingRanges,mlsStagingSample,mlsStagingAutooptBase,mlsStagingAutooptApply,
   mlsStagingD1Add,mlsStagingNoD1Env,mlsStagingConfigured,mlsStagingPrivateKeyDer,mlsStagingPkcs1ToPkcs8,mlsStagingResolveSnapshotCommit,mlsStagingStart,mlsStagingStatus,mlsStagingNext,
-  mlsStagingValidate,mlsStagingStage,mlsStagingCancel,mlsStagingIntegrate,mlsStagingCodeState,mlsStagingServeArticle,
+  mlsStagingValidate,mlsStagingStage,mlsStagingCancel,mlsStagingIntegrate,mlsStagingBackfillProvenance,mlsStagingCodeState,mlsStagingServeArticle,
   MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
 };
