@@ -131,7 +131,15 @@ function createFunctionalGitHubFixture(targetCount=8) {
       const baseTree=trees.get(body.base_tree);
       if(!baseTree) return jsonResponse({message:'Base tree missing'},422);
       const nextTree=new Map(baseTree);
-      for(const entry of body.tree||[]) nextTree.set(entry.path,entry.sha);
+      for(const entry of body.tree||[]){
+        let blobSha=entry.sha;
+        if(Object.prototype.hasOwnProperty.call(entry,'content')){
+          blobSha=nextId('b');
+          blobs.set(blobSha,String(entry.content??''));
+        }
+        if(!blobSha) return jsonResponse({message:'Tree entry missing sha/content'},422);
+        nextTree.set(entry.path,blobSha);
+      }
       const sha=nextId('t');trees.set(sha,nextTree);return jsonResponse({sha},201);
     }
     if(apiPath==='/git/commits'&&method==='POST'){
