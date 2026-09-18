@@ -337,6 +337,14 @@ test('TEST A — staging operational paths are runtime-guarded from D1 and repor
   assert.equal('published' in summary,false);
 });
 
+test('Git commits inline file content in one tree request instead of one blob request per file', () => {
+  const commit=bodyOf('mlsStagingCommit');
+  assert.doesNotMatch(commit,/\/git\/blobs/);
+  assert.match(commit,/content:String\(file\.content\)/);
+  assert.match(commit,/\/git\/trees/);
+  assert.equal((commit.match(/mlsStagingGitHub\(/g)||[]).length,4);
+});
+
 test('TEST B — concurrency uses optimistic non-force ref updates and persistent shards', () => {
   const commit=bodyOf('mlsStagingCommit');
   assert.match(commit,/force:false/);
@@ -502,6 +510,7 @@ test('snapshot checks GitHub and free subrequest budget before any D1 bootstrap 
   assert.ok(manifestIndex<budgetIndex);
   assert.ok(budgetIndex<d1Index);
   assert.match(body,/projectedGithubFiles=targetFileCount\+languages\.length\+2/);
+  assert.match(body,/projectedExternalSubrequestBudget=targetFileCount\+8/);
   assert.match(body,/files\.length!==projectedGithubFiles/);
 });
 
@@ -525,7 +534,7 @@ test('new snapshot pointer resolves immutable commit through GitHub history and 
   assert.match(resolve,/manifestPath/);
   const snapshot=bodyOf('mlsStagingCreateSnapshot');
   assert.equal((snapshot.match(/mlsStagingCommit\(env,files/g)||[]).length,1);
-  assert.match(snapshot,/externalSubrequestBudget=files\.length\+8/);
+  assert.match(snapshot,/projectedExternalSubrequestBudget=targetFileCount\+8/);
   assert.match(snapshot,/projectedExternalSubrequestBudget>49/);
   assert.match(snapshot,/snapshots\/latest\.json/);
   assert.doesNotMatch(snapshot,/MLS staging point latest/);
