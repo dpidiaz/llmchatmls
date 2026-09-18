@@ -131,7 +131,15 @@ function createFunctionalGitHubFixture(targetCount=8) {
       const baseTree=trees.get(body.base_tree);
       if(!baseTree) return jsonResponse({message:'Base tree missing'},422);
       const nextTree=new Map(baseTree);
-      for(const entry of body.tree||[]) nextTree.set(entry.path,entry.sha);
+      for(const entry of body.tree||[]){
+        let blobSha=entry.sha;
+        if(Object.prototype.hasOwnProperty.call(entry,'content')){
+          blobSha=nextId('b');
+          blobs.set(blobSha,String(entry.content??''));
+        }
+        if(!blobSha) return jsonResponse({message:'Tree entry missing sha/content'},422);
+        nextTree.set(entry.path,blobSha);
+      }
       const sha=nextId('t');trees.set(sha,nextTree);return jsonResponse({sha},201);
     }
     if(apiPath==='/git/commits'&&method==='POST'){
@@ -337,6 +345,14 @@ test('TEST A — staging operational paths are runtime-guarded from D1 and repor
   assert.equal('published' in summary,false);
 });
 
+test('Git commits inline file content in one tree request instead of one blob request per file', () => {
+  const commit=bodyOf('mlsStagingCommit');
+  assert.doesNotMatch(commit,/\/git\/blobs/);
+  assert.match(commit,/content:String\(file\.content\)/);
+  assert.match(commit,/\/git\/trees/);
+  assert.equal((commit.match(/mlsStagingGitHub\(/g)||[]).length,4);
+});
+
 test('TEST B — concurrency uses optimistic non-force ref updates and persistent shards', () => {
   const commit=bodyOf('mlsStagingCommit');
   assert.match(commit,/force:false/);
@@ -502,6 +518,7 @@ test('snapshot checks GitHub and free subrequest budget before any D1 bootstrap 
   assert.ok(manifestIndex<budgetIndex);
   assert.ok(budgetIndex<d1Index);
   assert.match(body,/projectedGithubFiles=targetFileCount\+languages\.length\+2/);
+  assert.match(body,/projectedExternalSubrequestBudget=targetFileCount\+8/);
   assert.match(body,/files\.length!==projectedGithubFiles/);
 });
 
@@ -525,7 +542,7 @@ test('new snapshot pointer resolves immutable commit through GitHub history and 
   assert.match(resolve,/manifestPath/);
   const snapshot=bodyOf('mlsStagingCreateSnapshot');
   assert.equal((snapshot.match(/mlsStagingCommit\(env,files/g)||[]).length,1);
-  assert.match(snapshot,/externalSubrequestBudget=files\.length\+8/);
+  assert.match(snapshot,/projectedExternalSubrequestBudget=targetFileCount\+8/);
   assert.match(snapshot,/projectedExternalSubrequestBudget>49/);
   assert.match(snapshot,/snapshots\/latest\.json/);
   assert.doesNotMatch(snapshot,/MLS staging point latest/);
