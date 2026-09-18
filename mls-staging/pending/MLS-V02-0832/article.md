@@ -1,0 +1,30 @@
+#### En pocas palabras
+
+**Contanto que + subjuntivo** introduce una condición necesaria para que se cumpla lo expresado en la oración principal. En **Empresto o carro, contanto que você devolva amanhã**, devolver el auto mañana es el requisito para prestarlo.
+
+La expresión equivale aproximadamente a “con tal de que” o “siempre que” en sentido condicional.
+
+#### Cómo funciona
+
+Después de **contanto que** aparece normalmente una forma de subjuntivo: **contanto que seja, contanto que faça, contanto que cheguem**.
+
+La construcción es útil para acuerdos, permisos y decisiones sujetos a una condición. **Você pode participar, contanto que respeite as regras** concede la participación bajo un requisito.
+
+La posición de la cláusula puede variar: **Contanto que todos concordem, podemos começar** y **Podemos começar, contanto que todos concordem** mantienen la misma relación básica.
+
+#### Ejemplos
+
+* **Empresto o carro, contanto que você devolva amanhã.** — se establece una condición para el préstamo.
+* **Podemos viajar, contanto que o tempo melhore.** — el viaje depende de una mejora.
+* **Ela aceita o trabalho, contanto que possa trabalhar de casa.** — el acuerdo depende de una condición.
+* **Contanto que todos estejam prontos, começaremos às oito.** — la preparación es requisito para empezar.
+
+#### Observación importante
+
+**Contanto que** no debe confundirse con el uso temporal de **desde que**. Aunque ambos pueden expresar condiciones en ciertos contextos, **contanto que** tiene de manera central el valor de requisito.
+
+El subjuntivo aquí no significa simplemente “duda”; aparece dentro de una construcción condicional específica.
+
+#### Entradas relacionadas
+
+[830. Caso + subjuntivo](#entrada-830) · [831. Desde que + subjuntivo](#entrada-831) · [833. A menos que + subjuntivo](#entrada-833) · [834. Sem que + subjuntivo](#entrada-834)
