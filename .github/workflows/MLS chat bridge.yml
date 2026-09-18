@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- 'mls chat bridge/results'; then
+          if [ -z "$(git status --porcelain -- 'mls chat bridge/results')" ]; then
             echo "No hay resultados nuevos."
             exit 0
           fi
