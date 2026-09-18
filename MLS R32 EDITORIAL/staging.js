@@ -725,5 +725,7 @@ async function handleMlsStaging(request,env,url){
 }
 if(typeof module!=='undefined'&&module.exports) module.exports={
   mlsStagingIndexPath,mlsStagingSummarize,mlsStagingRanges,mlsStagingSample,mlsStagingAutooptBase,mlsStagingAutooptApply,
-  mlsStagingD1Add,mlsStagingNoD1Env,mlsStagingConfigured,MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
+  mlsStagingD1Add,mlsStagingNoD1Env,mlsStagingConfigured,mlsStagingStart,mlsStagingStatus,mlsStagingNext,
+  mlsStagingValidate,mlsStagingStage,mlsStagingCancel,mlsStagingIntegrate,mlsStagingCodeState,mlsStagingServeArticle,
+  MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
 };
