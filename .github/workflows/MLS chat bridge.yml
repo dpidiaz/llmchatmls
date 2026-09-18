@@ -1,0 +1,71 @@
+name: MLS Chat Bridge
+
+on:
+  push:
+    branches:
+      - mlschatcontrol
+    paths:
+      - 'mls chat bridge/commands/**/*.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mls-chat-bridge-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Ejecutar comandos MLS Chat Bridge
+        shell: bash
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(
+            git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" |
+            grep '^mls chat bridge/commands/.*\.json$' || true
+          )
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No hay comandos MLS Chat Bridge en este commit."
+            exit 0
+          fi
+          printf 'Procesando %s comando(s).\n' "${#files[@]}"
+          node 'scripts/MLS chat bridge.cjs' "${files[@]}"
+
+      - name: Guardar resultados del puente
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- 'mls chat bridge/results'; then
+            echo "No hay resultados nuevos."
+            exit 0
+          fi
+          git config user.name 'MLS Chat Bridge'
+          git config user.email 'actions@users.noreply.github.com'
+          git add 'mls chat bridge/results'
+          git commit -m "Guardar resultado MLS Chat Bridge"
+          git push origin HEAD:mlschatcontrol
+
+      - name: Verificar respuestas MLS Chat Bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(
+            git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" |
+            grep '^mls chat bridge/commands/.*\.json$' || true
+          )
+          if [ "${#files[@]}" -eq 0 ]; then
+            exit 0
+          fi
+          node 'scripts/MLS chat bridge.cjs' --verify "${files[@]}"
