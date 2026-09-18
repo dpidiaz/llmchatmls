@@ -30,48 +30,33 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       - name: Crear snapshot MLS Staging del deploy
         if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+        shell: bash
         run: |
           set +e
-          response="$(curl --silent --show-error --write-out 
-      - name: Verificar Action editorial sin crear lotes
-        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
-        run: node scripts/verify-chat-deployment.cjs
-        env:
-          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
-\\n%{http_code}' \
+          http_status=$(curl --silent --show-error \
+            --output "$RUNNER_TEMP/mlsstagingsnapshot.json" \
+            --write-out '%{http_code}' \
             -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/wiki/editorial/staging/snapshot' \
             -H "Authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
             -H 'Content-Type: application/json' \
-            --data "{\"sourceCommit\":\"$GITHUB_SHA\"}")"
+            --data "{\"sourceCommit\":\"$GITHUB_SHA\"}")
           curl_status=$?
           set -e
-          body="${response%
-      - name: Verificar Action editorial sin crear lotes
-        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
-        run: node scripts/verify-chat-deployment.cjs
-        env:
-          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
-\\n'*}"
-          http_status="${response##*
-      - name: Verificar Action editorial sin crear lotes
-        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
-        run: node scripts/verify-chat-deployment.cjs
-        env:
-          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
-\\n'}"
+          body=$(cat "$RUNNER_TEMP/mlsstagingsnapshot.json" 2>/dev/null || true)
           if [ "$curl_status" -ne 0 ]; then
-            echo "$body"
+            printf '%s\n' "$body"
             exit "$curl_status"
           fi
           if [ "$http_status" = "200" ]; then
-            echo "$body"
+            printf '%s\n' "$body"
             exit 0
           fi
-          if [ "$http_status" = "503" ] && echo "$body" | grep -q 'credenciales GitHub configuradas'; then
-            echo "::warning::MLS Staging aún no tiene credenciales GitHub en Cloudflare; producción quedó desplegada y el snapshot se habilitará tras el bootstrap."
+          if [ "$http_status" = "503" ] && printf '%s' "$body" | grep -q 'credenciales GitHub configuradas'; then
+            printf '%s\n' "$body"
+            echo '::warning::MLS Staging aún no tiene credenciales GitHub en Cloudflare; producción quedó desplegada y el snapshot se habilitará tras el bootstrap.'
             exit 0
           fi
-          echo "$body"
+          printf '%s\n' "$body"
           exit 1
         env:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
