@@ -630,7 +630,9 @@ test('MLS Chat Bridge workflow is push-only, control-branch scoped and result wr
   assert.doesNotMatch(workflow,/workflow_dispatch/);
   assert.match(workflow,/mlschatcontrol/);
   assert.match(workflow,/mls chat bridge\/commands\/\*\*\/\*\.json/);
-  assert.doesNotMatch(workflow,/paths:[\s\S]*mls chat bridge\/results/);
+  const pathsBlock=/paths:\n((?:\s+- .+\n)+)/.exec(workflow)?.[1]||'';
+  assert.match(pathsBlock,/mls chat bridge\/commands\/\*\*\/\*\.json/);
+  assert.doesNotMatch(pathsBlock,/mls chat bridge\/results/);
   assert.match(workflow,/MLS_EDITORIAL_CHAT_KEY/);
   assert.match(workflow,/permissions:[\s\S]*contents: write/);
   assert.match(workflow,/git push origin HEAD:mlschatcontrol/);
