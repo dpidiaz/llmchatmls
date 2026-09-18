@@ -56,6 +56,11 @@ jobs:
             echo '::warning::MLS Staging aún no tiene credenciales GitHub en Cloudflare; producción quedó desplegada y el snapshot se habilitará tras el bootstrap.'
             exit 0
           fi
+          if [ "$http_status" = "503" ] && printf '%s' "$body" | grep -qi "daily row read limit"; then
+            printf '%s\n' "$body"
+            echo '::warning::Snapshot MLS Staging diferido: Cloudflare D1 agotó el límite diario gratuito de rows read. El deploy de producción sí quedó activo; vuelva a ejecutar el workflow después del reset UTC.'
+            exit 0
+          fi
           printf '%s\n' "$body"
           exit 1
         env:

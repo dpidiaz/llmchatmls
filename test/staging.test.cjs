@@ -349,6 +349,28 @@ test('PROVENANCE — integration persists staging origin and backfill is explici
   assert.match(statement,/snapshot_commit/);
 });
 
+test('D1 QUOTA — final installer degrades wiki API to JSON instead of Worker 1101', () => {
+  const installer=require(path.join(process.cwd(),'scripts','habilitar degradacion cuota d1.js'));
+  const sample='async function handleWikiApi(request, env, url) {\n  await ensureWikiDb(env);\n  return Response.json({ok:true});\n}';
+  const patched=installer.patchD1QuotaGuard(sample);
+  assert.match(patched,/function isD1DailyReadQuotaError/);
+  assert.match(patched,/reason:"d1_daily_row_read_limit"/);
+  assert.match(patched,/countsAvailable:false/);
+  assert.match(patched,/if\(isD1DailyReadQuotaError\(error\)\) return d1QuotaResponse/);
+  assert.equal(installer.patchD1QuotaGuard(patched),patched);
+  const packageJson=JSON.parse(fs.readFileSync(path.join(process.cwd(),'package.json'),'utf8'));
+  const predeploy=packageJson.scripts.predeploy;
+  assert.ok(predeploy.indexOf("habilitar degradacion cuota d1.js")>predeploy.indexOf("habilitar runner gemini.js"));
+  assert.ok(predeploy.indexOf("habilitar degradacion cuota d1.js")<predeploy.indexOf("generar snapshot staging.js"));
+});
+
+test('D1 QUOTA — deploy snapshot treats exhausted read quota as deferred warning', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
+  assert.match(workflow,/daily row read limit/);
+  assert.match(workflow,/Snapshot MLS Staging diferido/);
+  assert.match(workflow,/deploy de producción sí quedó activo/);
+});
+
 test('PROVENANCE — schema bootstrap is isolated from core ensureWikiDb and snapshot', () => {
   const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
   const helperStart=overlay.indexOf('async function ensureWikiArticleProvenanceDb');
