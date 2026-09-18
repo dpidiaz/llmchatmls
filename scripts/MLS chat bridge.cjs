@@ -6,16 +6,6 @@ const path = require('node:path');
 const MLS_CHAT_BRIDGE_BASE_URL = 'https://llmchatmls.dpidiaz.workers.dev';
 
 const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
-  iniciarLoteMLS: {
-    method: 'POST',
-    pathname: '/api/wiki/editorial/chat/start',
-    input: 'body'
-  },
-  cancelarLoteMLS: {
-    method: 'POST',
-    pathname: '/api/wiki/editorial/chat/cancel',
-    input: 'body'
-  },
   iniciarLoteStagingMLS: {
     method: 'POST',
     pathname: '/api/wiki/editorial/staging/start',
