@@ -32,15 +32,21 @@ jobs:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
         run: |
           set -euo pipefail
-          mapfile -t files < <(
-            git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" |
-            grep '^mls chat bridge/commands/.*\.json$' || true
-          )
+          queue_file="$RUNNER_TEMP/mls-chat-bridge-pending.txt"
+          : > "$queue_file"
+          while IFS= read -r command_file; do
+            rel="${command_file#mls chat bridge/commands/}"
+            result_file="mls chat bridge/results/$rel"
+            if [ ! -f "$result_file" ]; then
+              printf '%s\n' "$command_file" >> "$queue_file"
+            fi
+          done < <(find 'mls chat bridge/commands' -type f -name '*.json' -print | LC_ALL=C sort)
+          mapfile -t files < "$queue_file"
           if [ "${#files[@]}" -eq 0 ]; then
-            echo "No hay comandos MLS Chat Bridge en este commit."
+            echo "No hay comandos MLS Chat Bridge pendientes."
             exit 0
           fi
-          printf 'Procesando %s comando(s).\n' "${#files[@]}"
+          printf 'Procesando %s comando(s) pendiente(s).\n' "${#files[@]}"
           node 'scripts/MLS chat bridge.cjs' "${files[@]}"
 
       - name: Guardar resultados del puente
@@ -63,11 +69,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mapfile -t files < <(
-            git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" |
-            grep '^mls chat bridge/commands/.*\.json$' || true
-          )
-          if [ "${#files[@]}" -eq 0 ]; then
+          queue_file="$RUNNER_TEMP/mls-chat-bridge-pending.txt"
+          if [ ! -s "$queue_file" ]; then
             exit 0
           fi
+          mapfile -t files < "$queue_file"
           node 'scripts/MLS chat bridge.cjs' --verify "${files[@]}"
