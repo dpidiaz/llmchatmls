@@ -174,11 +174,12 @@ async function mlsStagingCommit(env, files, message, expectedHead) {
   const repo = mlsStagingRepo(env);
   const head = expectedHead || await mlsStagingHead(env);
   const baseCommit = await mlsStagingGitHub(env, '/git/commits/'+encodeURIComponent(head), {method:'GET'});
-  const tree = [];
-  for (const file of files) {
-    const blob = await mlsStagingGitHub(env, '/git/blobs', {method:'POST',body:JSON.stringify({content:String(file.content),encoding:'utf-8'})});
-    tree.push({path:file.path,mode:'100644',type:'blob',sha:blob.sha});
-  }
+  const tree = files.map(file=>({
+    path:file.path,
+    mode:'100644',
+    type:'blob',
+    content:String(file.content)
+  }));
   const nextTree = await mlsStagingGitHub(env, '/git/trees', {method:'POST',body:JSON.stringify({base_tree:baseCommit.tree.sha,tree})});
   const commit = await mlsStagingGitHub(env, '/git/commits', {method:'POST',body:JSON.stringify({message,tree:nextTree.sha,parents:[head]})});
   await mlsStagingGitHub(env, '/git/refs/heads/'+repo.branch.split('/').map(encodeURIComponent).join('/'), {
@@ -695,7 +696,10 @@ async function mlsStagingCreateSnapshot(request,env,body){
     return sum+targetFiles.length;
   },0);
   const projectedGithubFiles=targetFileCount+languages.length+2;
-  const projectedExternalSubrequestBudget=projectedGithubFiles+8;
+  // Conservative free-tier budget: 1 GitHub head read + 1 manifest asset read +
+  // every target asset read + 4 Git data writes/reads + 2 calls of safety margin
+  // for GitHub App token/bootstrap behavior.
+  const projectedExternalSubrequestBudget=targetFileCount+8;
   if(projectedExternalSubrequestBudget>49)
     mlsChatError(503,'El snapshot staging excede el presupuesto seguro de subrequests externos del Worker Free: '+projectedExternalSubrequestBudget+' > 49.');
   await ensureWikiDb(env); await mlsChatEnsureDb(env);
@@ -747,12 +751,11 @@ async function mlsStagingCreateSnapshot(request,env,body){
     editorialRules:{systemPrompt:SYSTEM_PROMPT,languageModules:LANGUAGE_MODULES,contract:MLS_CHAT_CONTRACT}};
   files.push({path:manifestPath,content:JSON.stringify(manifest)});
   files.push({path:MLS_STAGING_ROOT+'/snapshots/latest.json',content:JSON.stringify({snapshotVersion,manifestPath,createdAt,sourceCommit})});
-  const externalSubrequestBudget=files.length+8;
-  if(files.length!==projectedGithubFiles||externalSubrequestBudget!==projectedExternalSubrequestBudget)
-    mlsChatError(503,'El presupuesto real del snapshot staging cambió durante la captura; se aborta antes del commit GitHub.');
+  if(files.length!==projectedGithubFiles)
+    mlsChatError(503,'El número real de archivos del snapshot staging cambió durante la captura; se aborta antes del commit GitHub.');
   const snapshotCommit=await mlsStagingCommit(env,files,'MLS staging snapshot '+snapshotVersion,head);
   return {ok:true,snapshotVersion,snapshotCommit,pointerCommit:snapshotCommit,createdAt,canonical:canonicalRows.length,languages:languages.length,
-    githubFiles:files.length,externalSubrequestBudget};
+    githubFiles:files.length,externalSubrequestBudget:projectedExternalSubrequestBudget};
 }
 async function mlsStagingCollectStaged(env,head){
   const indexManifest=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/index/manifest.json',head,true,{shards:[]});
