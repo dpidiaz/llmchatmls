@@ -429,11 +429,21 @@ async function mlsStagingStatus(env,runId) {
   const autoopt=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/runs/'+run.runId+'/autoopt.json',head,true,null);
   return {ok:true,standard:'MLS R32',promptVersion:'32.0',run:{...mlsStagingSummarize(run),ranges:mlsStagingRanges(run.entries)},autoopt};
 }
-async function mlsStagingNext(env,runId) {
+async function mlsStagingNext(env,runId,requestedCode) {
   const head=await mlsStagingHead(env);
   const run=await mlsStagingLoadRun(env,runId,head);
   if(!run) mlsChatError(404,'No existe ese lote staging.');
-  const item=(run.entries||[]).find(x=>MLS_STAGING_ACTIVE.has(x.status));
+  const entries=run.entries||[];
+  const code=String(requestedCode||'').trim();
+  let item=null;
+  if(code){
+    item=entries.find(x=>x.code===code)||null;
+    if(!item) mlsChatError(409,'El código solicitado no pertenece a este lote staging.');
+    if(!MLS_STAGING_ACTIVE.has(item.status))
+      mlsChatError(409,'El código solicitado ya no está activo en este lote staging.');
+  }else{
+    item=entries.find(x=>MLS_STAGING_ACTIVE.has(x.status))||null;
+  }
   if(run.status!=='active'||!item) return {ok:true,run:{...mlsStagingSummarize(run),ranges:mlsStagingRanges(run.entries)},context:null};
   const built=await mlsStagingContext(env,run,item.code);
   return {ok:true,run:{...mlsStagingSummarize(run),ranges:mlsStagingRanges(run.entries)},contextId:built.contextId,context:built.context,
@@ -861,7 +871,7 @@ async function handleMlsStaging(request,env,url){
     await mlsChatAuthenticate(request,env);
     const zeroD1Env=mlsStagingNoD1Env(env);
     if(route==='/status'&&request.method==='GET') return mlsChatJson(await mlsStagingStatus(zeroD1Env,url.searchParams.get('runId')));
-    if(route==='/next'&&request.method==='GET') return mlsChatJson(await mlsStagingNext(zeroD1Env,url.searchParams.get('runId')));
+    if(route==='/next'&&request.method==='GET') return mlsChatJson(await mlsStagingNext(zeroD1Env,url.searchParams.get('runId'),url.searchParams.get('code')));
     if(request.method!=='POST') return mlsChatJson({ok:false,error:'Método no permitido.'},405);
     const body=await mlsChatBody(request);
     if(route==='/start') return mlsChatJson(await mlsStagingStart(zeroD1Env,body));
