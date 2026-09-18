@@ -285,7 +285,7 @@ async function mlsStagingSelect(env, snapshot, snapshotCommit, count, ref) {
       let shard=shardCache.get(path);
       if(!shard){ shard=await mlsStagingReadJson(env,path,ref,true,mlsStagingEmptyShard(path)); shardCache.set(path,shard); }
       const state=shard.codes?.[code];
-      if(state && ['reserved','drafting','validated','staged','integrated','deployed'].includes(state.status)) continue;
+      if(state && state.status!=='cancelled') continue;
       selected.push(code);
     }
   }
@@ -421,16 +421,23 @@ async function mlsStagingValidationFailure(env,run,head,item,error,body,context)
   target.validationAttempts=Number(target.validationAttempts||0)+1;
   target.lastValidationError=String(error.message||error).slice(0,3000); target.updatedAt=now;
   const terminal=mlsStagingNonRetryable(error)?'needs_review':target.validationAttempts>=3?'deferred':null;
-  if(terminal) target.status=terminal;
+  target.status=terminal||'drafting';
   if(!next.entries.some(x=>MLS_STAGING_ACTIVE.has(x.status))) next.status='complete';
   next.updatedAt=now;
   const autoopt=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/runs/'+run.runId+'/autoopt.json',head,true,mlsStagingAutooptBase(run.runId));
   const category=typeof mlsAutooptError==='function'?mlsAutooptError(error.message):'other';
   const features=typeof mlsAutooptFeatures==='function'?mlsAutooptFeatures(context,body.articleMarkdown,category):{};
   mlsStagingAutooptApply(autoopt,{at:now,code:item.code,attempt:target.validationAttempts,valid:false,category,terminal,...features});
+  const shard=await mlsStagingReadShard(env,item.code,head,true);
+  const state=shard.codes?.[item.code];
+  if(state?.runId===run.runId){
+    shard.codes[item.code]={...state,status:target.status,updatedAt:now,validationAttempts:target.validationAttempts};
+    shard.updatedAt=now;
+  }
   await mlsStagingCommit(env,[
     {path:MLS_STAGING_ROOT+'/runs/'+run.runId+'/manifest.json',content:JSON.stringify(next,null,2)+'\n'},
-    {path:MLS_STAGING_ROOT+'/runs/'+run.runId+'/autoopt.json',content:JSON.stringify(autoopt,null,2)+'\n'}
+    {path:MLS_STAGING_ROOT+'/runs/'+run.runId+'/autoopt.json',content:JSON.stringify(autoopt,null,2)+'\n'},
+    {path:mlsStagingIndexPath(item.code),content:JSON.stringify(shard,null,2)+'\n'}
   ],'MLS staging validation failure '+item.code,head);
   return next;
 }
@@ -449,11 +456,47 @@ async function mlsStagingValidate(env,body) {
     mlsChatError(422,error.message);
   }
   const draftHash=await mlsChatHash(run.runId+'\n'+built.contextId+'\n'+article.articleMarkdown);
+  const reviewHash=await mlsChatHash(body.editorialReview);
+  const sortedReferences=[...body.referenceCodes].sort();
+  if(item.status==='validated'&&item.draftHash===draftHash&&item.contextId===built.contextId&&
+      item.validatedReviewHash===reviewHash&&JSON.stringify(item.validatedReferenceCodes||[])===JSON.stringify(sortedReferences)){
+    const payload={v:1,runId:run.runId,contextId:built.contextId,code:item.code,draftHash,validatedAt:item.validatedAt,
+      referenceCodes:sortedReferences,reviewHash};
+    return {ok:true,reused:true,valid:true,status:'validated',draftId:draftHash,draftHash,code:item.code,validatedAt:item.validatedAt,
+      validationReceipt:await mlsStagingReceipt(env,payload),words:article.articleMarkdown.split(/\s+/u).length,
+      standard:'MLS R32',promptVersion:'32.0',validation:'deterministic-r32',linguisticReview:'performed-by-chatgpt',
+      published:false,staged:false,storageMode:'github-staging',d1RowsRead:0,d1RowsWritten:0};
+  }
   const validatedAt=mlsStagingNow();
+  const next=structuredClone(run);
+  const target=next.entries.find(x=>x.code===item.code);
+  target.status='validated';
+  target.validationAttempts=Number(target.validationAttempts||0)+1;
+  target.contextId=built.contextId;
+  target.draftHash=draftHash;
+  target.validatedAt=validatedAt;
+  target.validatedReviewHash=reviewHash;
+  target.validatedReferenceCodes=sortedReferences;
+  target.lastValidationError=null;
+  target.updatedAt=validatedAt;
+  next.updatedAt=validatedAt;
+  const shard=await mlsStagingReadShard(env,item.code,head,true);
+  const state=shard.codes?.[item.code];
+  if(state?.runId!==run.runId) mlsChatError(409,'La reserva staging ya no pertenece a este lote.');
+  shard.codes[item.code]={...state,status:'validated',updatedAt:validatedAt,validationAttempts:target.validationAttempts,draftHash,contextId:built.contextId,validatedAt};
+  shard.updatedAt=validatedAt;
+  const autoopt=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/runs/'+run.runId+'/autoopt.json',head,true,mlsStagingAutooptBase(run.runId));
+  const features=typeof mlsAutooptFeatures==='function'?mlsAutooptFeatures(built.context,article.articleMarkdown,''):{};
+  mlsStagingAutooptApply(autoopt,{at:validatedAt,code:item.code,attempt:target.validationAttempts,valid:true,staged:false,...features});
   const payload={v:1,runId:run.runId,contextId:built.contextId,code:item.code,draftHash,validatedAt,
-    referenceCodes:[...body.referenceCodes].sort(),reviewHash:await mlsChatHash(body.editorialReview)};
+    referenceCodes:sortedReferences,reviewHash};
   const validationReceipt=await mlsStagingReceipt(env,payload);
-  return {ok:true,valid:true,status:'validated',draftId:draftHash,draftHash,code:item.code,validatedAt,validationReceipt,
+  const commit=await mlsStagingCommit(env,[
+    {path:MLS_STAGING_ROOT+'/runs/'+run.runId+'/manifest.json',content:JSON.stringify(next,null,2)+'\n'},
+    {path:MLS_STAGING_ROOT+'/runs/'+run.runId+'/autoopt.json',content:JSON.stringify(autoopt,null,2)+'\n'},
+    {path:mlsStagingIndexPath(item.code),content:JSON.stringify(shard,null,2)+'\n'}
+  ],'MLS staging validate '+item.code,head);
+  return {ok:true,reused:false,valid:true,status:'validated',draftId:draftHash,draftHash,code:item.code,validatedAt,validationReceipt,commit,
     words:article.articleMarkdown.split(/\s+/u).length,standard:'MLS R32',promptVersion:'32.0',
     validation:'deterministic-r32',linguisticReview:'performed-by-chatgpt',published:false,staged:false,
     storageMode:'github-staging',d1RowsRead:0,d1RowsWritten:0};
@@ -478,6 +521,9 @@ async function mlsStagingStage(env,body) {
       if(metadata.draftHash!==draftHash) mlsChatError(409,'El código ya está staged con otro borrador.');
       return {ok:true,reused:true,staged:true,published:false,code,run:{...mlsStagingSummarize(run),ranges:mlsStagingRanges(run.entries)}};
     }
+    if(existing?.status!=='validated') mlsChatError(409,'El código debe estar persisted como validated antes de stagear.');
+    if(existing.draftHash!==draftHash||existing.contextId!==built.contextId||existing.validatedAt!==receipt.validatedAt)
+      mlsChatError(409,'El estado validated no corresponde a este borrador.');
     const current=run.entries.find(x=>MLS_STAGING_ACTIVE.has(x.status));
     if(run.status!=='active'||!current||current.code!==code) mlsChatError(409,'El lote no permite stagear ese código ahora.');
     const now=mlsStagingNow();
@@ -491,10 +537,13 @@ async function mlsStagingStage(env,body) {
     if(state && state.runId!==run.runId && ['reserved','staged','integrated','deployed'].includes(state.status)) mlsChatError(409,'El código pertenece a otro run staging.');
     shard.codes[code]={...(state||{}),code,runId:run.runId,requestId:run.requestId,snapshotVersion:run.snapshotVersion,status:'staged',updatedAt:now,stagedAt:now,draftHash};
     shard.updatedAt=now;
-    const attempts=Number(item.validationAttempts||0)+1;
+    const attempts=Number(item.validationAttempts||0);
     const autoopt=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/runs/'+run.runId+'/autoopt.json',head,true,mlsStagingAutooptBase(run.runId));
     const features=typeof mlsAutooptFeatures==='function'?mlsAutooptFeatures(built.context,article.articleMarkdown,''):{};
-    mlsStagingAutooptApply(autoopt,{at:now,code,attempt:attempts,valid:true,staged:true,...features});
+    autoopt.staged=Number(autoopt.staged||0)+1;
+    autoopt.events.push({at:now,type:'staged',code,attempt:attempts,valid:true,staged:true,...features});
+    if(autoopt.events.length>200) autoopt.events=autoopt.events.slice(-200);
+    autoopt.updatedAt=now;
     const metadata={
       code,runId:run.runId,contextId:built.contextId,snapshotVersion:run.snapshotVersion,snapshotCommit:run.snapshotCommit,
       draftHash,promptVersion:'32.0',referenceCodes:[...body.referenceCodes],editorialReview:body.editorialReview,
