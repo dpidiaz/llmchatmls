@@ -1,0 +1,76 @@
+{
+  "success": false,
+  "httpStatus": 409,
+  "operationId": "procesarSecuenciaStagingMLS",
+  "method": "ORCHESTRATED",
+  "path": "bridge://staging-sequence",
+  "response": {
+    "ok": false,
+    "runId": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+    "phase": "stage",
+    "code": "MLS-V02-0905",
+    "error": "El código debe estar persisted como validated antes de stagear.",
+    "processed": 6,
+    "skipped": 0,
+    "results": [
+      {
+        "code": "MLS-V02-0899",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "words": 264,
+        "validateCommit": "d0957caca33cd092f3a1f0139f26426819cc3623",
+        "stageCommit": "6cd8066b5fba4cf20cf8bb5d71b8ce56f9df4c04"
+      },
+      {
+        "code": "MLS-V02-0900",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "words": 292,
+        "validateCommit": "2721b19f69b643520484eeca0fd42f08638460ce",
+        "stageCommit": "dc2588a3e1d4bb6f00eab6297c14af7cb60514e3"
+      },
+      {
+        "code": "MLS-V02-0901",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "words": 243,
+        "validateCommit": "e40829f68a370d0c93d0492dd24584171954296b",
+        "stageCommit": "e059ff689b7144ab9705a64ac3762d38400218fc"
+      },
+      {
+        "code": "MLS-V02-0902",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "words": 271,
+        "validateCommit": "6ff1b9346d8c8b6d7190f4db032d60aab1dce23b",
+        "stageCommit": "2a4f11eea4329918b26d903ac6937f2afa00042d"
+      },
+      {
+        "code": "MLS-V02-0903",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "words": 248,
+        "validateCommit": "42fab27570ca08628083796c6a95fffd0c07c06d",
+        "stageCommit": "b2f9ab924ef6949f1bfc51ce9c7728f4d2eaa2a5"
+      },
+      {
+        "code": "MLS-V02-0904",
+        "status": "staged",
+        "reused": false,
+        "validationReused": false,
+        "words": 243,
+        "validateCommit": "4394109ae4bea2bfa3184aaac0c028d3e7c6d011",
+        "stageCommit": "bcfb1ee3bf77f62f6e5689d132bc5b0dd68798b1"
+      }
+    ],
+    "d1RowsRead": 0,
+    "d1RowsWritten": 0
+  },
+  "completedAt": "2026-09-18T17:26:03.992Z",
+  "commandFile": "mls chat bridge/commands/command 0025.json"
+}
