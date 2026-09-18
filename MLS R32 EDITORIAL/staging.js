@@ -303,7 +303,9 @@ async function mlsStagingStart(env,body) {
       const currentBuild=await mlsStagingCurrentBuild(env);
       if(currentBuild && currentBuild!=='local' && latest.manifest.sourceCommit!==currentBuild)
         mlsChatError(409,'El snapshot staging no corresponde al deploy actual; vuelve a generar el snapshot antes de abrir lotes.');
-      snapshotCommit=head; snapshotVersion=latest.pointer.snapshotVersion;
+      snapshotCommit=latest.pointer.snapshotCommit;
+      snapshotVersion=latest.pointer.snapshotVersion;
+      if(!snapshotCommit) mlsChatError(409,'El puntero staging no contiene snapshotCommit.');
     }
     const snapshot=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/manifest.json',snapshotCommit,false);
     const {selected,shardCache}=await mlsStagingSelect(env,snapshot,snapshotCommit,count,head);
@@ -587,9 +589,11 @@ async function mlsStagingCreateSnapshot(request,env,body){
     targetManifest:seedManifest,referenceBankPerLanguage:MLS_STAGING_REFERENCE_BANK,
     editorialRules:{systemPrompt:SYSTEM_PROMPT,languageModules:LANGUAGE_MODULES,contract:MLS_CHAT_CONTRACT}};
   files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/manifest.json',content:JSON.stringify(manifest)});
-  files.push({path:MLS_STAGING_ROOT+'/snapshots/latest.json',content:JSON.stringify({snapshotVersion,createdAt,sourceCommit})});
-  const commit=await mlsStagingCommit(env,files,'MLS staging snapshot '+snapshotVersion,head);
-  return {ok:true,snapshotVersion,snapshotCommit:commit,createdAt,canonical:canonicalRows.length,languages:languages.length};
+  const snapshotCommit=await mlsStagingCommit(env,files,'MLS staging snapshot '+snapshotVersion,head);
+  const pointerCommit=await mlsStagingCommit(env,[
+    {path:MLS_STAGING_ROOT+'/snapshots/latest.json',content:JSON.stringify({snapshotVersion,snapshotCommit,createdAt,sourceCommit})}
+  ],'MLS staging point latest '+snapshotVersion,snapshotCommit);
+  return {ok:true,snapshotVersion,snapshotCommit,pointerCommit,createdAt,canonical:canonicalRows.length,languages:languages.length};
 }
 async function mlsStagingCollectStaged(env,head){
   const indexManifest=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/index/manifest.json',head,true,{shards:[]});
