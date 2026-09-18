@@ -43,6 +43,13 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
   }
 });
 
+const MLS_CHAT_BRIDGE_LOCAL_OPERATIONS = Object.freeze({
+  procesarSecuenciaStagingMLS: 'staging-sequence'
+});
+
+const MLS_CHAT_BRIDGE_TERMINAL_STAGED = new Set(['staged','integrated','deployed','preservedExisting']);
+const MLS_CHAT_BRIDGE_TERMINAL_BLOCKED = new Set(['deferred','needs_review','cancelled']);
+
 function isPlainObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
@@ -53,12 +60,46 @@ function ownKeysExactly(value, allowed) {
   return keys.length === expected.length && keys.every((key, index) => key === expected[index]);
 }
 
+function normalizeStagingSequenceInput(input) {
+  if (!isPlainObject(input) || !ownKeysExactly(input, ['runId','entries']))
+    throw new Error('procesarSecuenciaStagingMLS solo admite input.runId e input.entries.');
+  const runId = String(input.runId || '').trim();
+  if (!runId) throw new Error('runId es obligatorio.');
+  if (!Array.isArray(input.entries) || input.entries.length < 1 || input.entries.length > 400)
+    throw new Error('entries debe contener entre 1 y 400 borradores.');
+
+  const entries = input.entries.map((entry, index) => {
+    if (!isPlainObject(entry) || !ownKeysExactly(entry, ['code','articleMarkdown','editorialReview']))
+      throw new Error('Cada entrada solo admite code, articleMarkdown y editorialReview.');
+    const code = String(entry.code || '').trim().toUpperCase();
+    const articleMarkdown = String(entry.articleMarkdown || '');
+    const editorialReview = String(entry.editorialReview || '');
+    if (!/^MLS-V\d{2}-\d{4}$/.test(code))
+      throw new Error('Código inválido en entries[' + index + '].');
+    if (!articleMarkdown.trim() || articleMarkdown.length > 16000)
+      throw new Error('articleMarkdown inválido en ' + code + '.');
+    if (editorialReview.length < 40 || editorialReview.length > 3000)
+      throw new Error('editorialReview inválido en ' + code + '.');
+    return { code, articleMarkdown, editorialReview };
+  });
+
+  return { runId, entries };
+}
+
 function normalizeBridgeCommand(command) {
   if (!isPlainObject(command)) throw new Error('El comando del puente debe ser un objeto JSON.');
   if (!ownKeysExactly(command, ['operationId', 'input']))
     throw new Error('El comando del puente solo admite operationId e input.');
 
   const operationId = String(command.operationId || '').trim();
+  if (MLS_CHAT_BRIDGE_LOCAL_OPERATIONS[operationId]) {
+    return {
+      operationId,
+      operation: { local: MLS_CHAT_BRIDGE_LOCAL_OPERATIONS[operationId] },
+      input: normalizeStagingSequenceInput(command.input)
+    };
+  }
+
   const operation = MLS_CHAT_BRIDGE_OPERATIONS[operationId];
   if (!operation) throw new Error('operationId no permitido por MLS Chat Bridge.');
 
@@ -85,8 +126,15 @@ function bridgeResultPath(commandPath) {
   return normalized.slice(0, index) + '/results/' + normalized.slice(index + marker.length);
 }
 
-async function executeBridgeCommand(command, options = {}) {
-  const normalized = normalizeBridgeCommand(command);
+function addD1Metrics(target, payload) {
+  target.d1RowsRead += Number(payload?.d1RowsRead || payload?.run?.d1RowsRead || 0);
+  target.d1RowsWritten += Number(payload?.d1RowsWritten || payload?.run?.d1RowsWritten || 0);
+}
+
+async function executeRemoteOperation(operationId, input, options = {}) {
+  const operation = MLS_CHAT_BRIDGE_OPERATIONS[operationId];
+  if (!operation) throw new Error('Operación remota no permitida por MLS Chat Bridge.');
+
   const fetchImpl = options.fetchImpl || global.fetch;
   const secret = String(options.secret ?? process.env.MLS_EDITORIAL_CHAT_KEY ?? '').trim();
   const baseUrl = String(options.baseUrl || MLS_CHAT_BRIDGE_BASE_URL);
@@ -94,20 +142,22 @@ async function executeBridgeCommand(command, options = {}) {
   if (typeof fetchImpl !== 'function') throw new Error('fetch no está disponible.');
   if (!secret) throw new Error('MLS_EDITORIAL_CHAT_KEY no está configurado.');
 
-  const url = new URL(normalized.operation.pathname, baseUrl);
+  const url = new URL(operation.pathname, baseUrl);
   const init = {
-    method: normalized.operation.method,
+    method: operation.method,
     headers: {
       accept: 'application/json',
       authorization: 'Bearer ' + secret
     }
   };
 
-  if (normalized.operation.input === 'runId') {
-    url.searchParams.set('runId', normalized.input.runId);
+  if (operation.input === 'runId') {
+    const runId = String(input?.runId || '').trim();
+    if (!runId) throw new Error('runId es obligatorio.');
+    url.searchParams.set('runId', runId);
   } else {
     init.headers['content-type'] = 'application/json';
-    init.body = JSON.stringify(normalized.input);
+    init.body = JSON.stringify(input || {});
   }
 
   const response = await fetchImpl(url, init);
@@ -122,12 +172,148 @@ async function executeBridgeCommand(command, options = {}) {
   return {
     success: response.ok,
     httpStatus: response.status,
-    operationId: normalized.operationId,
-    method: normalized.operation.method,
-    path: normalized.operation.pathname,
+    operationId,
+    method: operation.method,
+    path: operation.pathname,
     response: payload,
     completedAt: new Date().toISOString()
   };
+}
+
+function sequenceFailure(runId, phase, code, remote, metrics, results, message) {
+  return {
+    success: false,
+    httpStatus: remote?.httpStatus || 409,
+    operationId: 'procesarSecuenciaStagingMLS',
+    method: 'ORCHESTRATED',
+    path: 'bridge://staging-sequence',
+    response: {
+      ok: false,
+      runId,
+      phase,
+      code,
+      error: message || remote?.response?.error || remote?.response || 'Falló la secuencia staging.',
+      processed: results.filter(x => x.status === 'staged').length,
+      skipped: results.filter(x => x.reused).length,
+      results,
+      d1RowsRead: metrics.d1RowsRead,
+      d1RowsWritten: metrics.d1RowsWritten
+    },
+    completedAt: new Date().toISOString()
+  };
+}
+
+async function executeStagingSequence(input, options = {}) {
+  const normalized = normalizeStagingSequenceInput(input);
+  const metrics = { d1RowsRead: 0, d1RowsWritten: 0 };
+  const results = [];
+
+  const status = await executeRemoteOperation('estadoStagingMLS', { runId: normalized.runId }, options);
+  addD1Metrics(metrics, status.response);
+  if (!status.success)
+    return sequenceFailure(normalized.runId, 'status', null, status, metrics, results);
+
+  const codeStates = new Map((status.response?.run?.codes || []).map(item => [
+    String(item.code || '').toUpperCase(),
+    String(item.status || '')
+  ]));
+
+  for (const entry of normalized.entries) {
+    const priorStatus = codeStates.get(entry.code);
+    if (!priorStatus)
+      return sequenceFailure(normalized.runId, 'precheck', entry.code, null, metrics, results, 'El código no pertenece al run staging.');
+
+    if (MLS_CHAT_BRIDGE_TERMINAL_STAGED.has(priorStatus)) {
+      results.push({ code: entry.code, status: priorStatus, reused: true });
+      continue;
+    }
+    if (MLS_CHAT_BRIDGE_TERMINAL_BLOCKED.has(priorStatus))
+      return sequenceFailure(normalized.runId, 'precheck', entry.code, null, metrics, results, 'La entrada está en estado terminal ' + priorStatus + '.');
+
+    const next = await executeRemoteOperation('siguienteContextoStagingMLS', { runId: normalized.runId }, options);
+    addD1Metrics(metrics, next.response);
+    if (!next.success)
+      return sequenceFailure(normalized.runId, 'next', entry.code, next, metrics, results);
+
+    const currentCode = String(next.response?.context?.target?.code || '').toUpperCase();
+    if (currentCode !== entry.code)
+      return sequenceFailure(
+        normalized.runId,
+        'fifo',
+        entry.code,
+        next,
+        metrics,
+        results,
+        'FIFO esperaba ' + (currentCode || 'sin código') + ' y el comando proporcionó ' + entry.code + '.'
+      );
+
+    const contextId = String(next.response?.contextId || '');
+    const referenceCodes = (next.response?.context?.references || []).map(ref => String(ref.code || '')).filter(Boolean);
+    if (!contextId || !referenceCodes.length)
+      return sequenceFailure(normalized.runId, 'context', entry.code, next, metrics, results, 'El contexto staging no contiene contextId o referencias.');
+
+    const validateInput = {
+      runId: normalized.runId,
+      contextId,
+      code: entry.code,
+      articleMarkdown: entry.articleMarkdown,
+      referenceCodes,
+      editorialReview: entry.editorialReview
+    };
+    const validated = await executeRemoteOperation('validarBorradorStagingMLS', validateInput, options);
+    addD1Metrics(metrics, validated.response);
+    if (!validated.success || !validated.response?.valid)
+      return sequenceFailure(normalized.runId, 'validate', entry.code, validated, metrics, results);
+
+    const receipt = String(validated.response?.validationReceipt || '');
+    if (!receipt)
+      return sequenceFailure(normalized.runId, 'validate', entry.code, validated, metrics, results, 'La validación no devolvió validationReceipt.');
+
+    const staged = await executeRemoteOperation('stagearBorradorMLS', {
+      ...validateInput,
+      validationReceipt: receipt
+    }, options);
+    addD1Metrics(metrics, staged.response);
+    if (!staged.success || !staged.response?.staged)
+      return sequenceFailure(normalized.runId, 'stage', entry.code, staged, metrics, results);
+
+    codeStates.set(entry.code, 'staged');
+    results.push({
+      code: entry.code,
+      status: 'staged',
+      reused: Boolean(staged.response?.reused),
+      validationReused: Boolean(validated.response?.reused),
+      words: validated.response?.words ?? null,
+      validateCommit: validated.response?.commit ?? null,
+      stageCommit: staged.response?.commit ?? null
+    });
+  }
+
+  return {
+    success: true,
+    httpStatus: 200,
+    operationId: 'procesarSecuenciaStagingMLS',
+    method: 'ORCHESTRATED',
+    path: 'bridge://staging-sequence',
+    response: {
+      ok: true,
+      runId: normalized.runId,
+      requested: normalized.entries.length,
+      processed: results.filter(x => x.status === 'staged' && !x.reused).length,
+      skipped: results.filter(x => x.reused).length,
+      results,
+      d1RowsRead: metrics.d1RowsRead,
+      d1RowsWritten: metrics.d1RowsWritten
+    },
+    completedAt: new Date().toISOString()
+  };
+}
+
+async function executeBridgeCommand(command, options = {}) {
+  const normalized = normalizeBridgeCommand(command);
+  if (normalized.operation.local === 'staging-sequence')
+    return executeStagingSequence(normalized.input, options);
+  return executeRemoteOperation(normalized.operationId, normalized.input, options);
 }
 
 async function processBridgeCommandFile(commandPath, options = {}) {
@@ -199,8 +385,12 @@ if (require.main === module) {
 module.exports = {
   MLS_CHAT_BRIDGE_BASE_URL,
   MLS_CHAT_BRIDGE_OPERATIONS,
+  MLS_CHAT_BRIDGE_LOCAL_OPERATIONS,
+  normalizeStagingSequenceInput,
   normalizeBridgeCommand,
   bridgeResultPath,
+  executeRemoteOperation,
+  executeStagingSequence,
   executeBridgeCommand,
   processBridgeCommandFile,
   verifyBridgeResults
