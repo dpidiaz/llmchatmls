@@ -351,7 +351,19 @@ test('PROVENANCE — integration persists staging origin and backfill is explici
 
 test('D1 QUOTA — final installer degrades wiki API to JSON instead of Worker 1101', () => {
   const installer=require(path.join(process.cwd(),'scripts','habilitar degradacion cuota d1.js'));
-  const sample='async function handleWikiApi(request, env, url) {\n  await ensureWikiDb(env);\n  return Response.json({ok:true});\n}';
+  const sample=[
+    'async function handleWikiApi(request, env, url) {',
+    '  await ensureWikiDb(env);',
+    '  return Response.json({ok:true});',
+    '}',
+    'async function handleMlsChat(request, env, url) {',
+    '  try { return mlsChatJson({ok:true});',
+    '  } catch (error) {',
+    "    if (!error.status) console.error('mls-chat-failure', error.message);",
+    "    return mlsChatJson({ok:false,error:error.status ? error.message : 'Error temporal. Consulta MLS estado antes de reintentar.'}, error.status || 500);",
+    '  }',
+    '}'
+  ].join('\n');
   const patched=installer.patchD1QuotaGuard(sample);
   assert.match(patched,/function isD1DailyReadQuotaError/);
   assert.match(patched,/reason:"d1_daily_row_read_limit"/);
