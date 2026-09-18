@@ -810,7 +810,7 @@ async function mlsStagingCollectProvenancePending(env,head){
 function mlsStagingProvenanceStatement(env,metadata,integratedAt){
   return env.WIKI_DB.prepare(`INSERT INTO wiki_article_provenance(
       code,origin,standard,prompt_version,staging_run_id,snapshot_version,snapshot_commit,staged_at,integrated_at,source_audit_model,recorded_at)
-    VALUES (?,'github-staging','MLS R32',?,?,?,?,?,?,?,?,?)
+    VALUES (?,'github-staging','MLS R32',?,?,?,?,?,?,?,?)
     ON CONFLICT(code) DO UPDATE SET
       origin=excluded.origin,
       standard=excluded.standard,
