@@ -488,11 +488,21 @@ test('snapshot manifest cache reads GitHub once and never recurses into itself',
   assert.equal(selfCalls,1);
 });
 
-test('snapshot checks GitHub before any D1 bootstrap access', () => {
+test('snapshot checks GitHub and free subrequest budget before any D1 bootstrap access', () => {
   const body=bodyOf('mlsStagingCreateSnapshot');
-  assert.ok(body.indexOf('mlsStagingHead(env)')>=0);
-  assert.ok(body.indexOf('ensureWikiDb(env)')>=0);
-  assert.ok(body.indexOf('mlsStagingHead(env)')<body.indexOf('ensureWikiDb(env)'));
+  const headIndex=body.indexOf('mlsStagingHead(env)');
+  const manifestIndex=body.indexOf("mlsStagingSnapshotAsset(env,request,'manifest.json')");
+  const budgetIndex=body.indexOf('projectedExternalSubrequestBudget>49');
+  const d1Index=body.indexOf('ensureWikiDb(env)');
+  assert.ok(headIndex>=0);
+  assert.ok(manifestIndex>=0);
+  assert.ok(budgetIndex>=0);
+  assert.ok(d1Index>=0);
+  assert.ok(headIndex<manifestIndex);
+  assert.ok(manifestIndex<budgetIndex);
+  assert.ok(budgetIndex<d1Index);
+  assert.match(body,/projectedGithubFiles=targetFileCount\+languages\.length\+2/);
+  assert.match(body,/files\.length!==projectedGithubFiles/);
 });
 
 test('target catalog is compact and does not copy whole seed objects', () => {
