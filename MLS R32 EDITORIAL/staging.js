@@ -13,6 +13,7 @@ const MLS_STAGING_APP_TOKEN_CACHE = { token: null, expiresAt: 0 };
 const MLS_STAGING_SHARD_CACHE = new Map();
 const MLS_STAGING_MANIFEST_CACHE = new Map();
 const MLS_STAGING_TARGET_CACHE = new Map();
+const MLS_STAGING_TARGET_SHARD_CACHE = new Map();
 const MLS_STAGING_REFERENCE_CACHE = new Map();
 
 function mlsStagingNow() { return new Date().toISOString(); }
@@ -288,7 +289,7 @@ async function mlsStagingCurrentBuild(env) {
 async function mlsStagingSnapshotTargets(env, snapshotVersion, language, snapshotCommit) {
   const cacheKey=snapshotCommit+':'+snapshotVersion+':'+language;
   if(MLS_STAGING_TARGET_CACHE.has(cacheKey)) return structuredClone(MLS_STAGING_TARGET_CACHE.get(cacheKey));
-  const manifest=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/manifest.json',snapshotCommit,false);
+  const manifest=await mlsStagingSnapshotManifest(env,snapshotVersion,snapshotCommit);
   const descriptor=manifest?.targetManifest?.languages?.[language]||null;
   const files=Array.isArray(descriptor?.files)&&descriptor.files.length
     ? descriptor.files.map(x=>typeof x==='string'?x:x.file).filter(Boolean)
@@ -302,6 +303,34 @@ async function mlsStagingSnapshotTargets(env, snapshotVersion, language, snapsho
   MLS_STAGING_TARGET_CACHE.set(cacheKey,entries);
   return structuredClone(entries);
 }
+async function mlsStagingSnapshotTarget(env, snapshotVersion, language, snapshotCommit, code) {
+  const targetCode=mlsStagingAssertCode(code);
+  const number=Number(targetCode.slice(-4));
+  const manifest=await mlsStagingSnapshotManifest(env,snapshotVersion,snapshotCommit);
+  const descriptor=manifest?.targetManifest?.languages?.[language]||null;
+  const rawFiles=Array.isArray(descriptor?.files)&&descriptor.files.length
+    ? descriptor.files
+    : [{file:descriptor?.file||language+'.json'}];
+  const ranged=rawFiles.filter(x=>x&&typeof x==='object'&&Number.isFinite(Number(x.start))&&Number.isFinite(Number(x.end)));
+  let candidates=ranged.length
+    ? ranged.filter(x=>number>=Number(x.start)&&number<=Number(x.end))
+    : rawFiles;
+  if(!candidates.length) candidates=rawFiles;
+  for(const descriptorFile of candidates){
+    const file=typeof descriptorFile==='string'?descriptorFile:descriptorFile?.file;
+    if(!file) continue;
+    const cacheKey=snapshotCommit+':'+snapshotVersion+':'+language+':'+file;
+    let chunk=MLS_STAGING_TARGET_SHARD_CACHE.get(cacheKey);
+    if(!chunk){
+      chunk=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/targets/'+file,snapshotCommit,false);
+      if(!Array.isArray(chunk)) mlsChatError(409,'Shard de targets staging inválido: '+file);
+      MLS_STAGING_TARGET_SHARD_CACHE.set(cacheKey,chunk);
+    }
+    const target=chunk.find(x=>String(x.code||'').toUpperCase()===targetCode);
+    if(target) return structuredClone(target);
+  }
+  return null;
+}
 async function mlsStagingSnapshotReferences(env, snapshotVersion, language, snapshotCommit) {
   const cacheKey=snapshotCommit+':'+snapshotVersion+':'+language;
   if(MLS_STAGING_REFERENCE_CACHE.has(cacheKey)) return structuredClone(MLS_STAGING_REFERENCE_CACHE.get(cacheKey));
@@ -314,8 +343,7 @@ async function mlsStagingContext(env, run, code) {
   const targetCode=mlsStagingAssertCode(code);
   const job=jobFromCode(targetCode);
   if(!job) mlsChatError(404,'Código fuera del corpus MLS.');
-  const targets=await mlsStagingSnapshotTargets(env,run.snapshotVersion,job.language,run.snapshotCommit);
-  const target=(targets||[]).find(x=>String(x.code).toUpperCase()===targetCode);
+  const target=await mlsStagingSnapshotTarget(env,run.snapshotVersion,job.language,run.snapshotCommit,targetCode);
   if(!target) mlsChatError(409,'El target no existe en el snapshot del run.');
   let references=await mlsStagingSnapshotReferences(env,run.snapshotVersion,job.language,run.snapshotCommit);
   let fallbackCrossLanguage=false;
