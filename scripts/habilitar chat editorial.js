@@ -33,7 +33,7 @@ function buildChatRuntime(root = process.cwd()) {
     read('MLS R32 EDITORIAL/autoopt history.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/autoopt health.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/chat workflow.js') + '\n' +
-    read('MLS R32 EDITORIAL/staging.js').replace(/^if \\(typeof module .*$/gm, '') + '\n' +
+    read('MLS R32 EDITORIAL/staging.js') + '\n' +
     read('MLS R32 EDITORIAL/deferred rescue.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/semantic audit.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/coverage map.js').replace(/^if \(typeof module .*$/gm, '');
