@@ -2576,20 +2576,6 @@ async function ensureWikiDb(env) {
 			generated_at TEXT NOT NULL
 		)`),
     env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_articles_language_idx ON wiki_articles(language, n)`),
-    env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_article_provenance (
-      code TEXT PRIMARY KEY,
-      origin TEXT NOT NULL,
-      standard TEXT NOT NULL,
-      prompt_version TEXT NOT NULL,
-      staging_run_id TEXT,
-      snapshot_version TEXT,
-      snapshot_commit TEXT,
-      staged_at TEXT,
-      integrated_at TEXT,
-      source_audit_model TEXT,
-      recorded_at TEXT NOT NULL
-    )`),
-    env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx ON wiki_article_provenance(origin)`),
     env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_provider_usage (
 			day TEXT NOT NULL,
 			provider TEXT NOT NULL,
@@ -2606,6 +2592,20 @@ async function ensureWikiDb(env) {
 			updated_at TEXT NOT NULL
 		)`)
   ]);
+  await env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_article_provenance (
+    code TEXT PRIMARY KEY,
+    origin TEXT NOT NULL,
+    standard TEXT NOT NULL,
+    prompt_version TEXT NOT NULL,
+    staging_run_id TEXT,
+    snapshot_version TEXT,
+    snapshot_commit TEXT,
+    staged_at TEXT,
+    integrated_at TEXT,
+    source_audit_model TEXT,
+    recorded_at TEXT NOT NULL
+  )`).run();
+  await env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx ON wiki_article_provenance(origin)`).run();
   await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_meta(key, value) VALUES ('enqueue_cursor', '0')`).run();
   await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_meta(key, value) VALUES ('started_at', ?)`).bind((/* @__PURE__ */ new Date()).toISOString()).run();
   const cleanup = await env.WIKI_DB.prepare(`SELECT value FROM wiki_meta WHERE key = 'visit_backlog_cleanup_v1'`).first();

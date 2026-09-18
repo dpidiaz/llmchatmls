@@ -349,6 +349,19 @@ test('PROVENANCE — integration persists staging origin and backfill is explici
   assert.match(statement,/snapshot_commit/);
 });
 
+test('PROVENANCE — D1 schema creation is sequential outside the base batch', () => {
+  const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
+  const start=overlay.indexOf('async function ensureWikiDb');
+  const end=overlay.indexOf('\nasync function ',start+20);
+  const body=overlay.slice(start,end);
+  const tablePos=body.indexOf('CREATE TABLE IF NOT EXISTS wiki_article_provenance');
+  const indexPos=body.indexOf('CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx');
+  const batchEnd=body.indexOf(']);');
+  assert.ok(tablePos>batchEnd);
+  assert.ok(indexPos>tablePos);
+  assert.match(body.slice(tablePos,indexPos),/\.run\(\);/);
+});
+
 test('PROVENANCE — canonical schema and Action expose provenance safely', () => {
   const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
   const openapi=JSON.parse(fs.readFileSync(path.join(process.cwd(),'MLS R32 EDITORIAL','chat openapi.json'),'utf8'));
