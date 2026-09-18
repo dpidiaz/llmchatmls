@@ -1963,9 +1963,18 @@ var index_default = {
 						j.updated_at,
 						a.title,
 						a.prompt_version,
-						a.generated_at
+						a.generated_at,
+						p.origin AS provenance_origin,
+						p.standard AS provenance_standard,
+						p.prompt_version AS provenance_prompt_version,
+						p.staging_run_id,
+						p.snapshot_version,
+						p.snapshot_commit,
+						p.staged_at,
+						p.integrated_at
 					FROM wiki_jobs j
 					LEFT JOIN wiki_articles a ON a.code = j.code
+					LEFT JOIN wiki_article_provenance p ON p.code = a.code
 					UNION ALL
 					SELECT
 						a.code,
@@ -1978,9 +1987,18 @@ var index_default = {
 						a.generated_at AS updated_at,
 						a.title,
 						a.prompt_version,
-						a.generated_at
+						a.generated_at,
+						p.origin AS provenance_origin,
+						p.standard AS provenance_standard,
+						p.prompt_version AS provenance_prompt_version,
+						p.staging_run_id,
+						p.snapshot_version,
+						p.snapshot_commit,
+						p.staged_at,
+						p.integrated_at
 					FROM wiki_articles a
 					LEFT JOIN wiki_jobs j ON j.code = a.code
+					LEFT JOIN wiki_article_provenance p ON p.code = a.code
 					WHERE j.code IS NULL
 				`).all();
         const byCode = /* @__PURE__ */ new Map();
@@ -2005,7 +2023,17 @@ var index_default = {
             lastError: row?.last_error || null,
             startedAt: row?.started_at || null,
             updatedAt: row?.updated_at || null,
-            publishedAt: row?.generated_at || null
+            publishedAt: row?.generated_at || null,
+            provenance: row?.provenance_origin ? {
+              origin: row.provenance_origin,
+              standard: row.provenance_standard || null,
+              promptVersion: row.provenance_prompt_version || null,
+              stagingRunId: row.staging_run_id || null,
+              snapshotVersion: row.snapshot_version || null,
+              snapshotCommit: row.snapshot_commit || null,
+              stagedAt: row.staged_at || null,
+              integratedAt: row.integrated_at || null
+            } : null
           };
         }).filter((row) => {
           if (requestedStatus && row.status !== requestedStatus) return false;
@@ -2548,6 +2576,20 @@ async function ensureWikiDb(env) {
 			generated_at TEXT NOT NULL
 		)`),
     env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_articles_language_idx ON wiki_articles(language, n)`),
+    env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_article_provenance (
+      code TEXT PRIMARY KEY,
+      origin TEXT NOT NULL,
+      standard TEXT NOT NULL,
+      prompt_version TEXT NOT NULL,
+      staging_run_id TEXT,
+      snapshot_version TEXT,
+      snapshot_commit TEXT,
+      staged_at TEXT,
+      integrated_at TEXT,
+      source_audit_model TEXT,
+      recorded_at TEXT NOT NULL
+    )`),
+    env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx ON wiki_article_provenance(origin)`),
     env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_provider_usage (
 			day TEXT NOT NULL,
 			provider TEXT NOT NULL,
