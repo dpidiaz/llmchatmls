@@ -775,6 +775,11 @@ test('MLS Chat Bridge workflow is push-only, control-branch scoped and result wr
   assert.doesNotMatch(pathsBlock,/mls chat bridge\/results/);
   assert.match(workflow,/MLS_EDITORIAL_CHAT_KEY/);
   assert.match(workflow,/permissions:[\s\S]*contents: write/);
+  assert.match(workflow,/find 'mls chat bridge\/commands' -type f -name '\*\.json'/);
+  assert.match(workflow,/mls chat bridge\/results\/\$rel/);
+  assert.match(workflow,/\[ ! -f "\$result_file" \]/);
+  assert.match(workflow,/mls-chat-bridge-pending\.txt/);
+  assert.doesNotMatch(workflow,/git diff-tree --no-commit-id --name-only -r "\$GITHUB_SHA"/);
   assert.match(workflow,/git status --porcelain -- 'mls chat bridge\/results'/);
   assert.doesNotMatch(workflow,/git diff --quiet -- 'mls chat bridge\/results'/);
   assert.match(workflow,/git fetch origin mlschatcontrol/);
