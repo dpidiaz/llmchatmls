@@ -471,6 +471,13 @@ test('GitHub App private keys accept both PKCS1 and PKCS8 PEM', async () => {
   await assert.doesNotReject(()=>global.crypto.subtle.importKey('pkcs8',staging.mlsStagingPrivateKeyDer(pkcs8),algorithm,false,['sign']));
 });
 
+test('snapshot manifest cache reads GitHub once and never recurses into itself', () => {
+  const body=bodyOf('mlsStagingSnapshotManifest');
+  assert.match(body,/mlsStagingReadJson/);
+  const selfCalls=(body.match(/mlsStagingSnapshotManifest\(/g)||[]).length;
+  assert.equal(selfCalls,1);
+});
+
 test('snapshot checks GitHub before any D1 bootstrap access', () => {
   const body=bodyOf('mlsStagingCreateSnapshot');
   assert.ok(body.indexOf('mlsStagingHead(env)')>=0);
