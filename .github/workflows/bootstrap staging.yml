@@ -59,10 +59,14 @@ jobs:
             node -e 'process.stdout.write(JSON.stringify({
               MLS_STAGING_GITHUB_APP_ID: process.env.APP_ID,
               MLS_STAGING_GITHUB_INSTALLATION_ID: process.env.INSTALLATION_ID,
-              MLS_STAGING_GITHUB_APP_PRIVATE_KEY: process.env.APP_PRIVATE_KEY
+              MLS_STAGING_GITHUB_APP_PRIVATE_KEY: process.env.APP_PRIVATE_KEY,
+              MLS_STAGING_GITHUB_TOKEN: null
             }))' | npx wrangler secret bulk
           else
             node -e 'process.stdout.write(JSON.stringify({
+              MLS_STAGING_GITHUB_APP_ID: null,
+              MLS_STAGING_GITHUB_INSTALLATION_ID: null,
+              MLS_STAGING_GITHUB_APP_PRIVATE_KEY: null,
               MLS_STAGING_GITHUB_TOKEN: process.env.STAGING_TOKEN
             }))' | npx wrangler secret bulk
           fi
