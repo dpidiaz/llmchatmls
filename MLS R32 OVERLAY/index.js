@@ -1939,6 +1939,7 @@ var index_default = {
       }
       try {
         await ensureWikiDb(env);
+        await ensureWikiArticleProvenanceDb(env);
         const page = Math.max(1, Number.parseInt(url.searchParams.get("page") || "1", 10) || 1);
         const pageSize = Math.max(1, Math.min(200, Number.parseInt(url.searchParams.get("pageSize") || "100", 10) || 100));
         const requestedStatus = (url.searchParams.get("status") || "").trim().toLowerCase();
@@ -2538,6 +2539,23 @@ function secondsUntilNextUtcDay() {
   return Math.max(60, Math.min(86400, Math.ceil((next - Date.now()) / 1e3)));
 }
 __name(secondsUntilNextUtcDay, "secondsUntilNextUtcDay");
+async function ensureWikiArticleProvenanceDb(env) {
+  await env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_article_provenance (
+    code TEXT PRIMARY KEY,
+    origin TEXT NOT NULL,
+    standard TEXT NOT NULL,
+    prompt_version TEXT NOT NULL,
+    staging_run_id TEXT,
+    snapshot_version TEXT,
+    snapshot_commit TEXT,
+    staged_at TEXT,
+    integrated_at TEXT,
+    source_audit_model TEXT,
+    recorded_at TEXT NOT NULL
+  )`).run();
+  await env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx ON wiki_article_provenance(origin)`).run();
+}
+__name(ensureWikiArticleProvenanceDb, "ensureWikiArticleProvenanceDb");
 async function ensureWikiDb(env) {
   await env.WIKI_DB.batch([
     env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)`),
@@ -2592,20 +2610,6 @@ async function ensureWikiDb(env) {
 			updated_at TEXT NOT NULL
 		)`)
   ]);
-  await env.WIKI_DB.prepare(`CREATE TABLE IF NOT EXISTS wiki_article_provenance (
-    code TEXT PRIMARY KEY,
-    origin TEXT NOT NULL,
-    standard TEXT NOT NULL,
-    prompt_version TEXT NOT NULL,
-    staging_run_id TEXT,
-    snapshot_version TEXT,
-    snapshot_commit TEXT,
-    staged_at TEXT,
-    integrated_at TEXT,
-    source_audit_model TEXT,
-    recorded_at TEXT NOT NULL
-  )`).run();
-  await env.WIKI_DB.prepare(`CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx ON wiki_article_provenance(origin)`).run();
   await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_meta(key, value) VALUES ('enqueue_cursor', '0')`).run();
   await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_meta(key, value) VALUES ('started_at', ?)`).bind((/* @__PURE__ */ new Date()).toISOString()).run();
   const cleanup = await env.WIKI_DB.prepare(`SELECT value FROM wiki_meta WHERE key = 'visit_backlog_cleanup_v1'`).first();
