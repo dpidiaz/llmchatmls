@@ -676,6 +676,68 @@ test('MLS Chat Bridge staging sequence resumes completed entries and chains next
   assert.equal(result.response.results[1].status,'staged');
 });
 
+test('MLS Chat Bridge retries only the transient validated-to-stage consistency 409', async () => {
+  const review='Revisión editorial funcional con longitud suficiente para validar correctamente.';
+  let stageCalls=0;
+  const sleeps=[];
+  const fakeFetch=async (url,init={})=>{
+    const parsed=new URL(String(url));
+    if(parsed.pathname.endsWith('/status'))
+      return new Response(JSON.stringify({ok:true,run:{codes:[{code:'MLS-V02-0001',status:'reserved'}]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    if(parsed.pathname.endsWith('/next'))
+      return new Response(JSON.stringify({ok:true,contextId:'ctx-1',context:{target:{code:'MLS-V02-0001'},references:[{code:'MLS-V02-0999'}]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    if(parsed.pathname.endsWith('/validate'))
+      return new Response(JSON.stringify({ok:true,valid:true,validationReceipt:'receipt-1',words:120,d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    if(parsed.pathname.endsWith('/stage')){
+      stageCalls++;
+      if(stageCalls===1)
+        return new Response(JSON.stringify({error:'El código debe estar persisted como validated antes de stagear.'}),{status:409});
+      return new Response(JSON.stringify({ok:true,staged:true,commit:'stage-ok',d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    return new Response(JSON.stringify({error:'unexpected'}),{status:500});
+  };
+  const result=await chatBridge.executeBridgeCommand({
+    operationId:'procesarSecuenciaStagingMLS',
+    input:{runId:'run-retry-1',entries:[
+      {code:'MLS-V02-0001',articleMarkdown:'#### En pocas palabras\n\nContenido válido.',editorialReview:review}
+    ]}
+  },{fetchImpl:fakeFetch,secret:'bridge-test-secret',sleepImpl:async ms=>{sleeps.push(ms);}});
+  assert.equal(result.success,true);
+  assert.equal(stageCalls,2);
+  assert.deepEqual(sleeps,[500]);
+  assert.equal(result.response.results[0].stageAttempts,2);
+  assert.equal(result.response.d1RowsRead,0);
+  assert.equal(result.response.d1RowsWritten,0);
+});
+
+test('MLS Chat Bridge does not retry unrelated stage 409 errors', async () => {
+  const review='Revisión editorial funcional con longitud suficiente para validar correctamente.';
+  let stageCalls=0;
+  const fakeFetch=async (url,init={})=>{
+    const parsed=new URL(String(url));
+    if(parsed.pathname.endsWith('/status'))
+      return new Response(JSON.stringify({ok:true,run:{codes:[{code:'MLS-V02-0001',status:'reserved'}]}}),{status:200});
+    if(parsed.pathname.endsWith('/next'))
+      return new Response(JSON.stringify({ok:true,contextId:'ctx-1',context:{target:{code:'MLS-V02-0001'},references:[{code:'MLS-V02-0999'}]}}),{status:200});
+    if(parsed.pathname.endsWith('/validate'))
+      return new Response(JSON.stringify({ok:true,valid:true,validationReceipt:'receipt-1'}),{status:200});
+    if(parsed.pathname.endsWith('/stage')){
+      stageCalls++;
+      return new Response(JSON.stringify({error:'La reserva staging ya no pertenece a este lote.'}),{status:409});
+    }
+    return new Response(JSON.stringify({error:'unexpected'}),{status:500});
+  };
+  const result=await chatBridge.executeBridgeCommand({
+    operationId:'procesarSecuenciaStagingMLS',
+    input:{runId:'run-retry-2',entries:[
+      {code:'MLS-V02-0001',articleMarkdown:'#### En pocas palabras\n\nContenido válido.',editorialReview:review}
+    ]}
+  },{fetchImpl:fakeFetch,secret:'bridge-test-secret',sleepImpl:async()=>{throw new Error('no debe dormir');}});
+  assert.equal(result.success,false);
+  assert.equal(result.response.phase,'stage');
+  assert.equal(stageCalls,1);
+});
+
 test('MLS Chat Bridge staging sequence stops on FIFO mismatch before validation', async () => {
   const review='Revisión editorial funcional con longitud suficiente para validar correctamente.';
   const calls=[];
