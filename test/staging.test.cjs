@@ -11,6 +11,193 @@ const staging = require(stagingPath);
 const { patchStagingGuards } = require(path.join(process.cwd(), 'scripts', 'habilitar staging github.js'));
 const generator = require(path.join(process.cwd(), 'scripts', 'generar snapshot staging.js'));
 
+
+let functionalFixtureSequence=0;
+
+function installStagingRuntimeGlobals() {
+  const nodeCrypto=require('node:crypto');
+  if(!global.crypto) global.crypto=nodeCrypto.webcrypto;
+  global.mlsChatError=(status,message)=>{const error=new Error(message);error.status=status;throw error;};
+  global.mlsChatHash=async value=>nodeCrypto.createHash('sha256').update(String(value)).digest('hex');
+  global.jobFromCode=code=>{
+    const match=/^MLS-V10-(\d{4})$/.exec(String(code||''));
+    return match?{language:'espanol-guatemala',n:Number(match[1])}:null;
+  };
+  global.editorialProfileR32=references=>({referenceCodes:(references||[]).map(x=>x.code)});
+  global.SYSTEM_PROMPT='functional system prompt';
+  global.LANGUAGE_MODULES={'espanol-guatemala':'functional language module'};
+  global.MLS_CHAT_CONTRACT={standard:'MLS R32',promptVersion:'32.0'};
+  global.mlsAutooptFeatures=()=>({fixture:true});
+  global.mlsAutooptError=message=>/rule/i.test(String(message))?'rule':'other';
+  global.mlsChatValidateText=(context,markdown)=>{
+    const text=String(markdown||'');
+    if(text.includes('SNAPSHOT MISSING')) throw new Error('snapshot calibration missing');
+    if(text.includes('INVALID')) throw new Error('rule failure');
+    const target=context.target;
+    return {
+      articleMarkdown:text.trim(),
+      language:target.language,languageName:target.languageName,n:target.n,title:target.title,
+      level:target.level,part:target.part,chapter:target.chapter
+    };
+  };
+}
+
+function createFunctionalGitHubFixture(targetCount=8) {
+  functionalFixtureSequence++;
+  const prefix='fixture'+functionalFixtureSequence;
+  let counter=0;
+  const nextId=kind=>prefix+kind+(++counter);
+  const blobs=new Map(),trees=new Map(),commits=new Map();
+  const refs={main:prefix+'c0','mls-staging':prefix+'c0'};
+  const snapshotVersion='functional-snapshot';
+  const snapshotCommit=refs['mls-staging'];
+  const targets=Array.from({length:targetCount},(_,index)=>{
+    const n=index+1;
+    return {code:'MLS-V10-'+String(n).padStart(4,'0'),language:'espanol-guatemala',languageName:'Español de Guatemala',
+      n,title:'Tema '+n,level:'A1',part:'Fundamentos',chapter:'Capítulo',target:'Objetivo '+n};
+  });
+  const reference={code:'MLS-V10-9999',language:'espanol-guatemala',languageName:'Español de Guatemala',n:9999,
+    title:'Referencia',level:'A1',part:'Fundamentos',chapter:'Capítulo',articleMarkdown:'# Referencia\n\nTexto.',promptVersion:'32.0'};
+  const initialFiles={
+    'mls-staging/snapshots/latest.json':JSON.stringify({snapshotVersion,snapshotCommit}),
+    ['mls-staging/snapshots/'+snapshotVersion+'/manifest.json']:JSON.stringify({
+      version:1,standard:'MLS R32',promptVersion:'32.0',snapshotVersion,sourceCommit:'functional',
+      canonicalCodes:[],languageOrder:['espanol-guatemala'],editorialRules:{}
+    }),
+    ['mls-staging/snapshots/'+snapshotVersion+'/targets/espanol-guatemala.json']:JSON.stringify(targets),
+    ['mls-staging/snapshots/'+snapshotVersion+'/references/espanol-guatemala.json']:JSON.stringify([reference]),
+    ['mls-staging/snapshots/'+snapshotVersion+'/autoopt.json']:JSON.stringify({stats:{}})
+  };
+  const rootTree=new Map();
+  for(const [filePath,content] of Object.entries(initialFiles)){
+    const sha=nextId('b');blobs.set(sha,content);rootTree.set(filePath,sha);
+  }
+  const rootTreeSha=nextId('t');trees.set(rootTreeSha,rootTree);
+  commits.set(snapshotCommit,{sha:snapshotCommit,tree:rootTreeSha,parents:[]});
+
+  function jsonResponse(data,status=200){
+    return new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json'}});
+  }
+  async function githubFetch(input,init={}){
+    const url=new URL(typeof input==='string'?input:input.url);
+    const base='/repos/test/repo';
+    if(!url.pathname.startsWith(base)) return jsonResponse({message:'unexpected host'},500);
+    const apiPath=url.pathname.slice(base.length);
+    const method=String(init.method||'GET').toUpperCase();
+    const body=init.body?JSON.parse(init.body):null;
+
+    let match=/^\/git\/ref\/heads\/(.+)$/.exec(apiPath);
+    if(match&&method==='GET'){
+      const branch=decodeURIComponent(match[1]);
+      const sha=refs[branch];
+      return sha?jsonResponse({ref:'refs/heads/'+branch,object:{sha}}):jsonResponse({message:'Not Found'},404);
+    }
+    if(apiPath==='/git/refs'&&method==='POST'){
+      const branch=String(body.ref||'').replace(/^refs\/heads\//,'');
+      if(refs[branch]) return jsonResponse({message:'Reference already exists'},422);
+      refs[branch]=body.sha;return jsonResponse({ref:body.ref,object:{sha:body.sha}},201);
+    }
+    match=/^\/git\/refs\/heads\/(.+)$/.exec(apiPath);
+    if(match&&method==='PATCH'){
+      const branch=decodeURIComponent(match[1]);
+      const commit=commits.get(body.sha);
+      if(!commit||commit.parents[0]!==refs[branch]) return jsonResponse({message:'Update is not a fast forward'},422);
+      refs[branch]=body.sha;return jsonResponse({ref:'refs/heads/'+branch,object:{sha:body.sha}});
+    }
+    match=/^\/git\/commits\/(.+)$/.exec(apiPath);
+    if(match&&method==='GET'){
+      const commit=commits.get(decodeURIComponent(match[1]));
+      return commit?jsonResponse({sha:commit.sha,tree:{sha:commit.tree},parents:commit.parents.map(sha=>({sha}))}):jsonResponse({message:'Not Found'},404);
+    }
+    if(apiPath==='/git/blobs'&&method==='POST'){
+      const sha=nextId('b');blobs.set(sha,String(body.content||''));return jsonResponse({sha},201);
+    }
+    match=/^\/git\/blobs\/(.+)$/.exec(apiPath);
+    if(match&&method==='GET'){
+      const content=blobs.get(decodeURIComponent(match[1]));
+      return content===undefined?jsonResponse({message:'Not Found'},404):jsonResponse({sha:match[1],encoding:'base64',content:Buffer.from(content).toString('base64')});
+    }
+    if(apiPath==='/git/trees'&&method==='POST'){
+      const baseTree=trees.get(body.base_tree);
+      if(!baseTree) return jsonResponse({message:'Base tree missing'},422);
+      const nextTree=new Map(baseTree);
+      for(const entry of body.tree||[]) nextTree.set(entry.path,entry.sha);
+      const sha=nextId('t');trees.set(sha,nextTree);return jsonResponse({sha},201);
+    }
+    if(apiPath==='/git/commits'&&method==='POST'){
+      const sha=nextId('c');
+      commits.set(sha,{sha,tree:body.tree,parents:[...(body.parents||[])]});
+      return jsonResponse({sha},201);
+    }
+    match=/^\/contents\/(.+)$/.exec(apiPath);
+    if(match&&method==='GET'){
+      const ref=url.searchParams.get('ref');
+      const commit=commits.get(ref);
+      if(!commit) return jsonResponse({message:'Unknown ref'},404);
+      const tree=trees.get(commit.tree);
+      const filePath=decodeURIComponent(match[1]);
+      const blobSha=tree.get(filePath);
+      if(!blobSha) return jsonResponse({message:'Not Found'},404);
+      const content=blobs.get(blobSha);
+      return jsonResponse({type:'file',sha:blobSha,encoding:'base64',content:Buffer.from(content).toString('base64')});
+    }
+    return jsonResponse({message:'Unhandled '+method+' '+apiPath},500);
+  }
+
+  const d1={
+    calls:0,
+    articles:new Map(),
+    jobs:new Map(),
+    prepare(sql){
+      const statement={
+        sql,args:[],
+        bind(...args){this.args=args;return this;},
+        async all(){
+          d1.calls++;
+          if(/^SELECT code,audit_model FROM wiki_articles WHERE code IN/.test(sql)){
+            const results=this.args.filter(code=>d1.articles.has(code)).map(code=>({code,audit_model:d1.articles.get(code).audit_model}));
+            return {results,meta:{rows_read:this.args.length,rows_written:0}};
+          }
+          throw new Error('Unhandled D1 all: '+sql);
+        }
+      };
+      return statement;
+    },
+    async batch(statements){
+      const out=[];
+      for(const statement of statements){
+        d1.calls++;
+        if(/^INSERT INTO wiki_articles/.test(statement.sql)){
+          const code=statement.args[0];
+          let written=0;
+          if(!d1.articles.has(code)){
+            d1.articles.set(code,{code,article_markdown:statement.args[8],audit_model:statement.args[9]});written=1;
+          }
+          out.push({meta:{rows_read:0,rows_written:written}});
+        }else if(/^UPDATE wiki_jobs SET/.test(statement.sql)){
+          out.push({meta:{rows_read:1,rows_written:1}});
+        }else throw new Error('Unhandled D1 batch: '+statement.sql);
+      }
+      return out;
+    }
+  };
+  const env={
+    MLS_STAGING_GITHUB_OWNER:'test',MLS_STAGING_GITHUB_REPO:'repo',MLS_STAGING_GITHUB_BRANCH:'mls-staging',
+    MLS_STAGING_GITHUB_TOKEN:'fixture-token',MLS_EDITORIAL_CHAT_KEY:'functional-secret',
+    WIKI_DB:d1
+  };
+  return {env,d1,githubFetch,targets,refs,blobs,trees,commits};
+}
+
+async function withFunctionalFixture(fn,targetCount=8){
+  installStagingRuntimeGlobals();
+  const fixture=createFunctionalGitHubFixture(targetCount);
+  const previousFetch=global.fetch;
+  global.fetch=fixture.githubFetch;
+  try{return await fn(fixture);}
+  finally{global.fetch=previousFetch;}
+}
+
 function bodyOf(name) {
   const asyncMarker = 'async function ' + name + '(';
   const plainMarker = 'function ' + name + '(';
@@ -22,6 +209,97 @@ function bodyOf(name) {
   const candidates = [nextAsync, nextPlain].filter(x => x > start);
   return source.slice(start, candidates.length ? Math.min(...candidates) : source.length);
 }
+
+test('FUNCTIONAL A/B/C/D/I/J/K — concurrent reservations, idempotency, validation, staging and reconciliation', async () => {
+  await withFunctionalFixture(async ({env,d1})=>{
+    const zero=staging.mlsStagingNoD1Env(env);
+    const [first,second]=await Promise.all([
+      staging.mlsStagingStart(zero,{command:'MLS staging siguientes 2',requestId:'functionalrequest0001'}),
+      staging.mlsStagingStart(zero,{command:'MLS staging siguientes 2',requestId:'functionalrequest0002'})
+    ]);
+    const firstCodes=first.run.codes.map(x=>x.code);
+    const secondCodes=second.run.codes.map(x=>x.code);
+    assert.equal(firstCodes.length,2);
+    assert.equal(secondCodes.length,2);
+    assert.deepEqual(firstCodes.filter(code=>secondCodes.includes(code)),[]);
+    assert.equal(d1.calls,0);
+
+    const reused=await staging.mlsStagingStart(zero,{command:'MLS staging siguientes 2',requestId:'functionalrequest0001'});
+    assert.equal(reused.reused,true);
+    assert.equal(reused.run.runId,first.run.runId);
+    assert.equal(d1.calls,0);
+
+    const next=await staging.mlsStagingNext(zero,first.run.runId);
+    const code=next.context.target.code;
+    const referenceCodes=next.context.references.map(x=>x.code);
+    const editorialReview='Revisión editorial funcional suficientemente extensa para validar el contrato.';
+    await assert.rejects(
+      staging.mlsStagingValidate(zero,{runId:first.run.runId,contextId:next.contextId,code,articleMarkdown:'INVALID borrador',referenceCodes,editorialReview}),
+      error=>error.status===422
+    );
+    let status=await staging.mlsStagingStatus(zero,first.run.runId);
+    assert.equal(status.run.codes.find(x=>x.code===code).status,'drafting');
+
+    const valid=await staging.mlsStagingValidate(zero,{runId:first.run.runId,contextId:next.contextId,code,
+      articleMarkdown:'# Tema\n\nContenido válido funcional.',referenceCodes,editorialReview});
+    assert.equal(valid.status,'validated');
+    status=await staging.mlsStagingStatus(zero,first.run.runId);
+    assert.equal(status.run.codes.find(x=>x.code===code).status,'validated');
+    assert.equal(d1.calls,0);
+
+    const staged=await staging.mlsStagingStage(zero,{runId:first.run.runId,contextId:next.contextId,code,
+      articleMarkdown:'# Tema\n\nContenido válido funcional.',referenceCodes,editorialReview,validationReceipt:valid.validationReceipt});
+    assert.equal(staged.staged,true);
+    assert.equal(staged.published,false);
+    assert.equal(d1.calls,0);
+
+    const next2=await staging.mlsStagingNext(zero,first.run.runId);
+    const code2=next2.context.target.code;
+    const refs2=next2.context.references.map(x=>x.code);
+    const valid2=await staging.mlsStagingValidate(zero,{runId:first.run.runId,contextId:next2.contextId,code:code2,
+      articleMarkdown:'# Tema 2\n\nSegundo contenido válido funcional.',referenceCodes:refs2,editorialReview});
+    await staging.mlsStagingStage(zero,{runId:first.run.runId,contextId:next2.contextId,code:code2,
+      articleMarkdown:'# Tema 2\n\nSegundo contenido válido funcional.',referenceCodes:refs2,editorialReview,validationReceipt:valid2.validationReceipt});
+    assert.equal(d1.calls,0);
+
+    d1.articles.set(code2,{code:code2,article_markdown:'contenido externo',audit_model:'external-existing'});
+    const integrated=await staging.mlsStagingIntegrate(env,{limit:2});
+    assert.equal(integrated.staged,2);
+    assert.equal(integrated.integrated,1);
+    assert.equal(integrated.preservedExisting,1);
+    assert.ok(integrated.d1RowsRead>0);
+    assert.ok(integrated.d1RowsWritten>0);
+    assert.equal(d1.articles.get(code2).article_markdown,'contenido externo');
+
+    const again=await staging.mlsStagingIntegrate(env,{limit:2});
+    assert.equal(again.staged,0);
+    assert.equal(again.integrated,0);
+    assert.equal(again.preservedExisting,0);
+  },8);
+});
+
+test('FUNCTIONAL E/F — third retry becomes deferred and snapshot failures become needs_review', async () => {
+  await withFunctionalFixture(async ({env,d1})=>{
+    const zero=staging.mlsStagingNoD1Env(env);
+    const deferredRun=await staging.mlsStagingStart(zero,{command:'MLS staging siguientes 1',requestId:'functionaldeferred01'});
+    const next=await staging.mlsStagingNext(zero,deferredRun.run.runId);
+    const body={runId:deferredRun.run.runId,contextId:next.contextId,code:next.context.target.code,
+      articleMarkdown:'INVALID borrador',referenceCodes:next.context.references.map(x=>x.code),
+      editorialReview:'Revisión editorial funcional suficientemente extensa para validar el contrato.'};
+    for(let i=0;i<3;i++) await assert.rejects(staging.mlsStagingValidate(zero,body),error=>error.status===422);
+    let status=await staging.mlsStagingStatus(zero,deferredRun.run.runId);
+    assert.equal(status.run.codes[0].status,'deferred');
+
+    const reviewRun=await staging.mlsStagingStart(zero,{command:'MLS staging siguientes 1',requestId:'functionalreview0001'});
+    const nextReview=await staging.mlsStagingNext(zero,reviewRun.run.runId);
+    await assert.rejects(staging.mlsStagingValidate(zero,{runId:reviewRun.run.runId,contextId:nextReview.contextId,code:nextReview.context.target.code,
+      articleMarkdown:'SNAPSHOT MISSING',referenceCodes:nextReview.context.references.map(x=>x.code),
+      editorialReview:'Revisión editorial funcional suficientemente extensa para validar el contrato.'}),error=>error.status===422);
+    status=await staging.mlsStagingStatus(zero,reviewRun.run.runId);
+    assert.equal(status.run.codes[0].status,'needs_review');
+    assert.equal(d1.calls,0);
+  },5);
+});
 
 test('TEST A — staging operational paths are runtime-guarded from D1 and report zero D1', () => {
   for (const name of ['mlsStagingStart','mlsStagingStatus','mlsStagingNext','mlsStagingValidate','mlsStagingStage','mlsStagingCancel']) {
