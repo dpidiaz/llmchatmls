@@ -110,13 +110,15 @@ Preferido:
 
 - `MLS_STAGING_GITHUB_APP_ID`
 - `MLS_STAGING_GITHUB_INSTALLATION_ID`
-- `MLS_STAGING_GITHUB_APP_PRIVATE_KEY` como Secret
+- `MLS_STAGING_GITHUB_APP_PRIVATE_KEY` como Secret (PEM RSA PKCS1 o PKCS8)
 
 Fallback de bootstrap:
 
 - `MLS_STAGING_GITHUB_TOKEN` como Secret de alcance mínimo
 
 No se almacena ninguna credencial en el repositorio ni se envía a ChatGPT.
+
+El snapshot posterior al deploy no invalida un deploy productivo ya exitoso cuando las credenciales staging todavía no han sido configuradas: el workflow emite una advertencia y deja pendiente el bootstrap. Una credencial presente pero inválida sí se considera error de infraestructura staging.
 
 Variables no secretas:
 
