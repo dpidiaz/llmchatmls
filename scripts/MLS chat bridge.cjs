@@ -14,7 +14,7 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
   siguienteContextoStagingMLS: {
     method: 'GET',
     pathname: '/api/wiki/editorial/staging/next',
-    input: 'runId'
+    input: 'runContext'
   },
   validarBorradorStagingMLS: {
     method: 'POST',
@@ -73,6 +73,18 @@ function normalizeBridgeCommand(command) {
     return { operationId, operation, input: { runId } };
   }
 
+  if (operation.input === 'runContext') {
+    const keys=Object.keys(command.input).sort();
+    if (!keys.length || keys.some(key=>!['code','runId'].includes(key)))
+      throw new Error('Esta operación solo admite input.runId e input.code opcional.');
+    const runId = String(command.input.runId || '').trim();
+    const code = String(command.input.code || '').trim();
+    if (!runId) throw new Error('runId es obligatorio.');
+    if (code && !/^MLS-V[0-9]{2}-[0-9]{4}$/.test(code))
+      throw new Error('code staging inválido.');
+    return { operationId, operation, input: code ? { runId, code } : { runId } };
+  }
+
   return { operationId, operation, input: command.input };
 }
 
@@ -103,8 +115,10 @@ async function executeBridgeCommand(command, options = {}) {
     }
   };
 
-  if (normalized.operation.input === 'runId') {
+  if (normalized.operation.input === 'runId' || normalized.operation.input === 'runContext') {
     url.searchParams.set('runId', normalized.input.runId);
+    if (normalized.operation.input === 'runContext' && normalized.input.code)
+      url.searchParams.set('code', normalized.input.code);
   } else {
     init.headers['content-type'] = 'application/json';
     init.body = JSON.stringify(normalized.input);
