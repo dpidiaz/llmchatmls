@@ -33,3 +33,13 @@ jobs:
         run: node scripts/verify-chat-deployment.cjs
         env:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+      - name: Generar snapshot MLS Staging
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          curl --fail-with-body --silent --show-error \
+            -X POST "https://llmchatmls.dpidiaz.workers.dev/api/wiki/editorial/staging/snapshot" \
+            -H "Authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
+            -H "Content-Type: application/json" \
+            --data "{\"sourceCommit\":\"$GITHUB_SHA\"}"
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
