@@ -1,0 +1,57 @@
+name: MLS Chat Bridge
+
+on:
+  push:
+    branches:
+      - mlschatbridgev1
+    paths:
+      - 'mls chat bridge/commands/*.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mls-chat-bridge
+  cancel-in-progress: false
+
+jobs:
+  execute-command:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Identificar comando
+        id: command
+        shell: bash
+        run: |
+          set -euo pipefail
+          command_file=$(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" -- 'mls chat bridge/commands/*.json' | head -n 1)
+          if [ -z "$command_file" ]; then
+            echo "::error::No se encontró un comando MLS Chat Bridge en el commit."
+            exit 1
+          fi
+          base_name=$(basename "$command_file" .json)
+          result_file="mls chat bridge/results/$base_name.json"
+          echo "command_file=$command_file" >> "$GITHUB_OUTPUT"
+          echo "result_file=$result_file" >> "$GITHUB_OUTPUT"
+
+      - name: Ejecutar operación MLS Staging
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: node 'scripts/MLS Chat Bridge Runner.cjs' "${{ steps.command.outputs.command_file }}" "${{ steps.command.outputs.result_file }}"
+
+      - name: Guardar respuesta
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'MLS Chat Bridge'
+          git config user.email 'mls-chat-bridge@users.noreply.github.com'
+          git add "${{ steps.command.outputs.result_file }}"
+          git commit -m "MLS Chat Bridge result ${{ github.sha }}"
+          git push origin HEAD:mlschatbridgev1
