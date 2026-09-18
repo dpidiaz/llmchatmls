@@ -934,7 +934,7 @@
     "/api/wiki/editorial/staging/next": {
       "get": {
         "operationId": "siguienteContextoStagingMLS",
-        "summary": "Obtener el siguiente contexto R32 desde el snapshot GitHub del lote, con cero D1.",
+        "summary": "Obtener un contexto R32 desde el snapshot GitHub del lote, por FIFO o por código reservado, con cero D1.",
         "x-openai-isConsequential": false,
         "parameters": [
           {
@@ -944,6 +944,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^MLS-V[0-9]{2}-[0-9]{4}$"
+            },
+            "description": "Código opcional ya reservado en este run. Si se omite, devuelve la primera entrada activa por FIFO."
           }
         ],
         "responses": {
