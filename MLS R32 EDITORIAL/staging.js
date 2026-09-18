@@ -11,6 +11,8 @@ const MLS_STAGING_ACTIVE = new Set(['reserved','drafting','validated']);
 const MLS_STAGING_TERMINAL = new Set(['staged','deferred','needs_review','integrated','deployed','cancelled','preservedExisting']);
 const MLS_STAGING_APP_TOKEN_CACHE = { token: null, expiresAt: 0 };
 const MLS_STAGING_SHARD_CACHE = new Map();
+const MLS_STAGING_TARGET_CACHE = new Map();
+const MLS_STAGING_REFERENCE_CACHE = new Map();
 
 function mlsStagingNow() { return new Date().toISOString(); }
 function mlsStagingAssertCode(code) {
@@ -258,10 +260,29 @@ async function mlsStagingCurrentBuild(env) {
   } catch { return null; }
 }
 async function mlsStagingSnapshotTargets(env, snapshotVersion, language, snapshotCommit) {
-  return mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/targets/'+language+'.json',snapshotCommit,false);
+  const cacheKey=snapshotCommit+':'+snapshotVersion+':'+language;
+  if(MLS_STAGING_TARGET_CACHE.has(cacheKey)) return structuredClone(MLS_STAGING_TARGET_CACHE.get(cacheKey));
+  const manifest=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/manifest.json',snapshotCommit,false);
+  const descriptor=manifest?.targetManifest?.languages?.[language]||null;
+  const files=Array.isArray(descriptor?.files)&&descriptor.files.length
+    ? descriptor.files.map(x=>typeof x==='string'?x:x.file).filter(Boolean)
+    : [descriptor?.file||language+'.json'];
+  const entries=[];
+  for(const file of files){
+    const chunk=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/targets/'+file,snapshotCommit,false);
+    if(!Array.isArray(chunk)) mlsChatError(409,'Shard de targets staging inválido: '+file);
+    entries.push(...chunk);
+  }
+  MLS_STAGING_TARGET_CACHE.set(cacheKey,entries);
+  return structuredClone(entries);
 }
 async function mlsStagingSnapshotReferences(env, snapshotVersion, language, snapshotCommit) {
-  return mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/references/'+language+'.json',snapshotCommit,true,[]);
+  const cacheKey=snapshotCommit+':'+snapshotVersion+':'+language;
+  if(MLS_STAGING_REFERENCE_CACHE.has(cacheKey)) return structuredClone(MLS_STAGING_REFERENCE_CACHE.get(cacheKey));
+  const refs=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/references/'+language+'.json',snapshotCommit,true,[]);
+  const value=Array.isArray(refs)?refs:[];
+  MLS_STAGING_REFERENCE_CACHE.set(cacheKey,value);
+  return structuredClone(value);
 }
 async function mlsStagingContext(env, run, code) {
   const targetCode=mlsStagingAssertCode(code);
@@ -648,10 +669,16 @@ async function mlsStagingCreateSnapshot(request,env,body){
   const createdAt=mlsStagingNow();
   const sourceCommit=String(body.sourceCommit||seedManifest.sourceCommit||'unknown').replace(/[^A-Za-z0-9._-]/g,'').slice(0,64)||'unknown';
   const snapshotVersion='32.0-'+sourceCommit.slice(0,12)+'-'+createdAt.replace(/[-:.TZ]/g,'').slice(0,14);
-  const files=[],languages=Object.keys(seedManifest.languages||{});
+  const files=[],languages=Object.keys(seedManifest.languages||{}),referenceCounts={};
   for(const language of languages){
-    const targets=await mlsStagingSnapshotAsset(env,request,language+'.json');
-    files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/targets/'+language+'.json',content:targets});
+    const descriptor=seedManifest.languages[language]||{};
+    const targetFiles=Array.isArray(descriptor.files)&&descriptor.files.length
+      ? descriptor.files.map(x=>typeof x==='string'?x:x.file).filter(Boolean)
+      : [descriptor.file||language+'.json'];
+    for(const targetFile of targetFiles){
+      const targets=await mlsStagingSnapshotAsset(env,request,targetFile);
+      files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/targets/'+targetFile,content:targets});
+    }
     const candidates=mlsStagingSample(byLanguage.get(language)||[]);
     let refs=[];
     if(candidates.length){
@@ -659,7 +686,16 @@ async function mlsStagingCreateSnapshot(request,env,body){
       const detail=await env.WIKI_DB.prepare("SELECT code,language,language_name AS languageName,n,title,level,part,chapter,article_markdown AS articleMarkdown,prompt_version AS promptVersion,generated_at AS generatedAt FROM wiki_articles WHERE code IN ("+placeholders+") ORDER BY n").bind(...candidates.map(x=>x.code)).all();
       refs=detail.results||[];
     }
-    files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/references/'+language+'.json',content:JSON.stringify(refs)});
+    let refsContent=JSON.stringify(refs);
+    const maxReferenceBytes=900*1024;
+    while(new TextEncoder().encode(refsContent).length>maxReferenceBytes&&refs.length>MLS_STAGING_REFERENCE_LIMIT){
+      refs=mlsStagingSample(refs,Math.max(MLS_STAGING_REFERENCE_LIMIT,Math.floor(refs.length*0.75)));
+      refsContent=JSON.stringify(refs);
+    }
+    if(new TextEncoder().encode(refsContent).length>maxReferenceBytes)
+      mlsChatError(503,'El banco mínimo de referencias staging excede el límite seguro de GitHub para '+language+'.');
+    referenceCounts[language]=refs.length;
+    files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/references/'+language+'.json',content:refsContent});
   }
   let autoopt={version:MLS_AUTOOPT_VERSION||'unknown',promptVersion:'32.0',stats:{}};
   try{
@@ -669,7 +705,7 @@ async function mlsStagingCreateSnapshot(request,env,body){
   files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/autoopt.json',content:JSON.stringify(autoopt)});
   const manifest={version:1,standard:'MLS R32',promptVersion:'32.0',snapshotVersion,createdAt,sourceCommit,
     canonicalCodes:canonicalRows.map(x=>x.code),languageOrder:WIKI_LANGUAGE_ORDER.map(x=>x.slug),
-    targetManifest:seedManifest,referenceBankPerLanguage:MLS_STAGING_REFERENCE_BANK,
+    targetManifest:seedManifest,referenceBankPerLanguage:MLS_STAGING_REFERENCE_BANK,referenceCounts,
     editorialRules:{systemPrompt:SYSTEM_PROMPT,languageModules:LANGUAGE_MODULES,contract:MLS_CHAT_CONTRACT}};
   files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/manifest.json',content:JSON.stringify(manifest)});
   const snapshotCommit=await mlsStagingCommit(env,files,'MLS staging snapshot '+snapshotVersion,head);
