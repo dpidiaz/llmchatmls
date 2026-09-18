@@ -104,6 +104,29 @@ Si staging todavía no está configurado, el flujo normal conserva su comportami
 
 Si quedan más staged, devuelve `status: partial` y `pending > 0`.
 
+## Proveniencia editorial
+
+Las entradas reconciliadas desde GitHub Staging conservan una fila separada en D1 bajo `wiki_article_provenance`. La tabla no altera `wiki_articles` ni cambia el contenido canónico.
+
+Campos persistidos:
+
+- `origin = github-staging`;
+- `standard = MLS R32`;
+- `prompt_version`;
+- `staging_run_id`;
+- `snapshot_version`;
+- `snapshot_commit`;
+- `staged_at`;
+- `integrated_at`;
+- `source_audit_model`;
+- `recorded_at`.
+
+La proveniencia solo se registra cuando el artículo canónico coincide con el `audit_model` del borrador staging. Un artículo ajeno clasificado como `preservedExisting` no se etiqueta como originado en staging.
+
+`reconciliarStagingMLS` acepta `backfillProvenance: true` para registrar proveniencia de artículos ya integrados antes de esta mejora. El backfill no modifica `wiki_articles`; únicamente verifica la coincidencia canónica y hace UPSERT de la metadata de proveniencia.
+
+`/api/wiki/articles` expone esta información en el campo opcional `provenance`. Las entradas sin proveniencia explícita devuelven `provenance: null`.
+
 ## Credenciales y bootstrap
 
 Modo preferido: GitHub App instalada únicamente en `dpidiaz/llmchatmls`.
