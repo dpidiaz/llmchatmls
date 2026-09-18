@@ -715,6 +715,8 @@ test('MLS Chat Bridge workflow is push-only, control-branch scoped and result wr
   assert.match(workflow,/permissions:[\s\S]*contents: write/);
   assert.match(workflow,/git status --porcelain -- 'mls chat bridge\/results'/);
   assert.doesNotMatch(workflow,/git diff --quiet -- 'mls chat bridge\/results'/);
+  assert.match(workflow,/git fetch origin mlschatcontrol/);
+  assert.match(workflow,/git rebase origin\/mlschatcontrol/);
   assert.match(workflow,/git push origin HEAD:mlschatcontrol/);
   assert.match(workflow,/MLS chat bridge\.cjs' --verify/);
 });
