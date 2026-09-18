@@ -18,12 +18,21 @@ const LANGUAGES = [
 
 function normalizeSeed(seed, language, n) {
   const padded = String(n).padStart(4, '0');
+  const pick = key => seed?.[key] === undefined || seed?.[key] === null ? undefined : seed[key];
   return {
-    ...seed,
     code: String(seed?.code || language.prefix + '-' + padded).toUpperCase(),
     language: seed?.language || language.slug,
     languageName: seed?.languageName || language.name,
-    n: Number(seed?.n || n)
+    n: Number(seed?.n || n),
+    title: pick('title'),
+    level: pick('level'),
+    part: pick('part'),
+    chapter: pick('chapter'),
+    target: pick('target'),
+    definition: pick('definition'),
+    example: pick('example'),
+    notes: pick('notes'),
+    reference: pick('reference')
   };
 }
 
@@ -55,13 +64,21 @@ function buildStagingTargetCatalog(root = process.cwd()) {
       entries.push(normalized);
     }
     const relative = language.slug + '.json';
-    fs.writeFileSync(path.join(outputRoot, relative), JSON.stringify(entries));
+    const content = JSON.stringify(entries);
+    const bytes = Buffer.byteLength(content, 'utf8');
+    const safeGitHubContentsBytes = 900 * 1024;
+    if (bytes > safeGitHubContentsBytes) {
+      throw new Error('Catálogo staging demasiado grande para GitHub Contents: ' + relative + ' = ' + bytes + ' bytes.');
+    }
+    fs.writeFileSync(path.join(outputRoot, relative), content);
     manifest.languages[language.slug] = {
       name: language.name,
       prefix: language.prefix,
       total: language.total,
-      file: relative
+      file: relative,
+      bytes
     };
+    console.log('MLS Staging target catalog', language.slug + ':', bytes, 'bytes');
   }
 
   fs.writeFileSync(path.join(outputRoot, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
