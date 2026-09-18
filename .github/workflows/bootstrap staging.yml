@@ -44,37 +44,28 @@ jobs:
           echo "::error::Configura GitHub App (preferido) o MLS_STAGING_GITHUB_TOKEN y vuelve a ejecutar este workflow."
           exit 1
 
-      - name: Instalar GitHub App ID en Cloudflare
-        if: ${{ steps.auth.outputs.mode == 'app' }}
+      - name: Instalar credencial GitHub Staging en Cloudflare
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          VALUE: ${{ secrets.MLS_STAGING_GITHUB_APP_ID }}
-        run: printf '%s' "$VALUE" | npx wrangler secret put MLS_STAGING_GITHUB_APP_ID
-
-      - name: Instalar GitHub App Installation ID en Cloudflare
-        if: ${{ steps.auth.outputs.mode == 'app' }}
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          VALUE: ${{ secrets.MLS_STAGING_GITHUB_INSTALLATION_ID }}
-        run: printf '%s' "$VALUE" | npx wrangler secret put MLS_STAGING_GITHUB_INSTALLATION_ID
-
-      - name: Instalar GitHub App Private Key en Cloudflare
-        if: ${{ steps.auth.outputs.mode == 'app' }}
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          VALUE: ${{ secrets.MLS_STAGING_GITHUB_APP_PRIVATE_KEY }}
-        run: printf '%s' "$VALUE" | npx wrangler secret put MLS_STAGING_GITHUB_APP_PRIVATE_KEY
-
-      - name: Instalar token GitHub Staging en Cloudflare
-        if: ${{ steps.auth.outputs.mode == 'token' }}
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          VALUE: ${{ secrets.MLS_STAGING_GITHUB_TOKEN }}
-        run: printf '%s' "$VALUE" | npx wrangler secret put MLS_STAGING_GITHUB_TOKEN
+          MODE: ${{ steps.auth.outputs.mode }}
+          APP_ID: ${{ secrets.MLS_STAGING_GITHUB_APP_ID }}
+          INSTALLATION_ID: ${{ secrets.MLS_STAGING_GITHUB_INSTALLATION_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.MLS_STAGING_GITHUB_APP_PRIVATE_KEY }}
+          STAGING_TOKEN: ${{ secrets.MLS_STAGING_GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ "$MODE" = "app" ]; then
+            node -e 'process.stdout.write(JSON.stringify({
+              MLS_STAGING_GITHUB_APP_ID: process.env.APP_ID,
+              MLS_STAGING_GITHUB_INSTALLATION_ID: process.env.INSTALLATION_ID,
+              MLS_STAGING_GITHUB_APP_PRIVATE_KEY: process.env.APP_PRIVATE_KEY
+            }))' | npx wrangler secret bulk
+          else
+            node -e 'process.stdout.write(JSON.stringify({
+              MLS_STAGING_GITHUB_TOKEN: process.env.STAGING_TOKEN
+            }))' | npx wrangler secret bulk
+          fi
 
       - name: Esperar propagación del Worker
         run: sleep 5
