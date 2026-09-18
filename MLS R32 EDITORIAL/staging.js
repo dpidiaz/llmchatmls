@@ -223,6 +223,15 @@ async function mlsStagingLatestSnapshot(env, ref) {
   if (manifest.promptVersion !== '32.0') mlsChatError(409,'El snapshot no corresponde a MLS R32 / 32.0.');
   return {pointer,manifest};
 }
+async function mlsStagingCurrentBuild(env) {
+  if (!env.ASSETS || typeof env.ASSETS.fetch !== 'function') return null;
+  try {
+    const response = await env.ASSETS.fetch(new Request('https://mls.local/mls-staging-targets/manifest.json'));
+    if (!response.ok) return null;
+    const manifest = await response.json();
+    return String(manifest.sourceCommit || '').trim() || null;
+  } catch { return null; }
+}
 async function mlsStagingSnapshotTargets(env, snapshotVersion, language, snapshotCommit) {
   return mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/targets/'+language+'.json',snapshotCommit,false);
 }
@@ -291,6 +300,9 @@ async function mlsStagingStart(env,body) {
     }
     if(!snapshotCommit){
       const latest=await mlsStagingLatestSnapshot(env,head);
+      const currentBuild=await mlsStagingCurrentBuild(env);
+      if(currentBuild && currentBuild!=='local' && latest.manifest.sourceCommit!==currentBuild)
+        mlsChatError(409,'El snapshot staging no corresponde al deploy actual; vuelve a generar el snapshot antes de abrir lotes.');
       snapshotCommit=head; snapshotVersion=latest.pointer.snapshotVersion;
     }
     const snapshot=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/manifest.json',snapshotCommit,false);
@@ -549,7 +561,7 @@ async function mlsStagingCreateSnapshot(request,env,body){
   const byLanguage=new Map();
   for(const row of canonicalRows){if(!byLanguage.has(row.language))byLanguage.set(row.language,[]);byLanguage.get(row.language).push(row);}
   const createdAt=mlsStagingNow();
-  const sourceCommit=String(body.sourceCommit||'unknown').replace(/[^A-Za-z0-9._-]/g,'').slice(0,64)||'unknown';
+  const sourceCommit=String(body.sourceCommit||seedManifest.sourceCommit||'unknown').replace(/[^A-Za-z0-9._-]/g,'').slice(0,64)||'unknown';
   const snapshotVersion='32.0-'+sourceCommit.slice(0,12)+'-'+createdAt.replace(/[-:.TZ]/g,'').slice(0,14);
   const files=[],languages=Object.keys(seedManifest.languages||{});
   for(const language of languages){
