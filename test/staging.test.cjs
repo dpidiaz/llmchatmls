@@ -559,6 +559,22 @@ test('snapshot runtime reads target shards from the pinned manifest', () => {
   assert.match(snapshot,/referenceCounts/);
 });
 
+test('staging context loads only the target shard selected by manifest range', () => {
+  const lookup=bodyOf('mlsStagingSnapshotTarget');
+  assert.match(lookup,/Number\(targetCode\.slice\(-4\)\)/);
+  assert.match(lookup,/number>=Number\(x\.start\)&&number<=Number\(x\.end\)/);
+  assert.match(lookup,/MLS_STAGING_TARGET_SHARD_CACHE/);
+  assert.ok(lookup.includes("+'/targets/'+file"));
+  const context=bodyOf('mlsStagingContext');
+  assert.match(context,/mlsStagingSnapshotTarget\(/);
+  assert.doesNotMatch(context,/mlsStagingSnapshotTargets\(/);
+});
+
+test('full target catalog loader remains available for FIFO selection', () => {
+  const select=bodyOf('mlsStagingSelect');
+  assert.match(select,/mlsStagingSnapshotTargets\(/);
+});
+
 test('Snapshot/build contract expects exactly 10 languages and 10,133 targets', () => {
   assert.equal(generator.LANGUAGES.length,10);
   assert.equal(generator.LANGUAGES.reduce((sum,x)=>sum+x.total,0),10133);
