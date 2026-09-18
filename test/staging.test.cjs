@@ -59,14 +59,17 @@ function createFunctionalGitHubFixture(targetCount=8) {
   const reference={code:'MLS-V10-9999',language:'espanol-guatemala',languageName:'Español de Guatemala',n:9999,
     title:'Referencia',level:'A1',part:'Fundamentos',chapter:'Capítulo',articleMarkdown:'# Referencia\n\nTexto.',promptVersion:'32.0'};
   const initialFiles={
-    'mls-staging/snapshots/latest.json':JSON.stringify({snapshotVersion,snapshotCommit}),
+    'mls-staging/snapshots/latest.json':JSON.stringify({
+      snapshotVersion,
+      manifestPath:'mls-staging/snapshots/'+snapshotVersion+'/manifest.json',
+      sourceCommit:'functional'
+    }),
     ['mls-staging/snapshots/'+snapshotVersion+'/manifest.json']:JSON.stringify({
       version:1,standard:'MLS R32',promptVersion:'32.0',snapshotVersion,sourceCommit:'functional',
-      canonicalCodes:[],languageOrder:['espanol-guatemala'],editorialRules:{}
+      canonicalCodes:[],languageOrder:['espanol-guatemala'],editorialRules:{},autoopt:{stats:{}}
     }),
     ['mls-staging/snapshots/'+snapshotVersion+'/targets/espanol-guatemala.json']:JSON.stringify(targets),
-    ['mls-staging/snapshots/'+snapshotVersion+'/references/espanol-guatemala.json']:JSON.stringify([reference]),
-    ['mls-staging/snapshots/'+snapshotVersion+'/autoopt.json']:JSON.stringify({stats:{}})
+    ['mls-staging/snapshots/'+snapshotVersion+'/references/espanol-guatemala.json']:JSON.stringify([reference])
   };
   const rootTree=new Map();
   for(const [filePath,content] of Object.entries(initialFiles)){
@@ -85,6 +88,13 @@ function createFunctionalGitHubFixture(targetCount=8) {
     const apiPath=url.pathname.slice(base.length);
     const method=String(init.method||'GET').toUpperCase();
     const body=init.body?JSON.parse(init.body):null;
+
+    if(apiPath==='/commits'&&method==='GET'){
+      const requestedPath=url.searchParams.get('path');
+      const manifestPath='mls-staging/snapshots/'+snapshotVersion+'/manifest.json';
+      if(requestedPath===manifestPath) return jsonResponse([{sha:snapshotCommit}]);
+      return jsonResponse([]);
+    }
 
     let match=/^\/git\/ref\/heads\/(.+)$/.exec(apiPath);
     if(match&&method==='GET'){
@@ -497,6 +507,18 @@ test('target catalog is compact and does not copy whole seed objects', () => {
   assert.deepEqual(Object.keys(out),[
     'code','language','languageName','n','title','level','part','chapter','target','definition','example','notes','reference'
   ]);
+});
+
+test('new snapshot pointer resolves immutable commit through GitHub history and stays within free budget', () => {
+  const resolve=bodyOf('mlsStagingResolveSnapshotCommit');
+  assert.match(resolve,/\/commits\?sha=/);
+  assert.match(resolve,/manifestPath/);
+  const snapshot=bodyOf('mlsStagingCreateSnapshot');
+  assert.equal((snapshot.match(/mlsStagingCommit\(env,files/g)||[]).length,1);
+  assert.match(snapshot,/externalSubrequestBudget=files\.length\+8/);
+  assert.match(snapshot,/externalSubrequestBudget>49/);
+  assert.match(snapshot,/snapshots\/latest\.json/);
+  assert.doesNotMatch(snapshot,/MLS staging point latest/);
 });
 
 test('snapshot runtime reads target shards from the pinned manifest', () => {
