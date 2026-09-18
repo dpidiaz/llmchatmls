@@ -735,9 +735,12 @@ async function mlsStagingCreateSnapshot(request,env,body){
     editorialRules:{systemPrompt:SYSTEM_PROMPT,languageModules:LANGUAGE_MODULES,contract:MLS_CHAT_CONTRACT}};
   files.push({path:manifestPath,content:JSON.stringify(manifest)});
   files.push({path:MLS_STAGING_ROOT+'/snapshots/latest.json',content:JSON.stringify({snapshotVersion,manifestPath,createdAt,sourceCommit})});
+  const externalSubrequestBudget=files.length+8;
+  if(externalSubrequestBudget>49)
+    mlsChatError(503,'El snapshot staging excede el presupuesto seguro de subrequests externos del Worker Free: '+externalSubrequestBudget+' > 49.');
   const snapshotCommit=await mlsStagingCommit(env,files,'MLS staging snapshot '+snapshotVersion,head);
   return {ok:true,snapshotVersion,snapshotCommit,pointerCommit:snapshotCommit,createdAt,canonical:canonicalRows.length,languages:languages.length,
-    githubFiles:files.length,externalSubrequestBudget:files.length+8};
+    githubFiles:files.length,externalSubrequestBudget};
 }
 async function mlsStagingCollectStaged(env,head){
   const indexManifest=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/index/manifest.json',head,true,{shards:[]});
