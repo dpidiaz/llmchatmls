@@ -351,7 +351,19 @@ test('PROVENANCE — integration persists staging origin and backfill is explici
 
 test('D1 QUOTA — final installer degrades wiki API to JSON instead of Worker 1101', () => {
   const installer=require(path.join(process.cwd(),'scripts','habilitar degradacion cuota d1.js'));
-  const sample='async function handleWikiApi(request, env, url) {\n  await ensureWikiDb(env);\n  return Response.json({ok:true});\n}';
+  const sample=[
+    'async function handleWikiApi(request, env, url) {',
+    '  await ensureWikiDb(env);',
+    '  return Response.json({ok:true});',
+    '}',
+    'async function handleMlsChat(request, env, url) {',
+    '  try { return mlsChatJson({ok:true});',
+    '  } catch (error) {',
+    "    if (!error.status) console.error('mls-chat-failure', error.message);",
+    "    return mlsChatJson({ok:false,error:error.status ? error.message : 'Error temporal. Consulta MLS estado antes de reintentar.'}, error.status || 500);",
+    '  }',
+    '}'
+  ].join('\n');
   const patched=installer.patchD1QuotaGuard(sample);
   assert.match(patched,/function isD1DailyReadQuotaError/);
   assert.match(patched,/reason:"d1_daily_row_read_limit"/);
@@ -362,6 +374,35 @@ test('D1 QUOTA — final installer degrades wiki API to JSON instead of Worker 1
   const predeploy=packageJson.scripts.predeploy;
   assert.ok(predeploy.indexOf("habilitar degradacion cuota d1.js")>predeploy.indexOf("habilitar runner gemini.js"));
   assert.ok(predeploy.indexOf("habilitar degradacion cuota d1.js")<predeploy.indexOf("generar snapshot staging.js"));
+});
+
+test('D1 QUOTA — final installer also degrades authenticated chat diagnostics', () => {
+  const installer=require(path.join(process.cwd(),'scripts','habilitar degradacion cuota d1.js'));
+  const sample=[
+    'async function handleWikiApi(request, env, url) {',
+    '  await ensureWikiDb(env);',
+    '  return Response.json({ok:true});',
+    '}',
+    "async function handleMlsChat(request, env, url) {",
+    "  try { return mlsChatJson({ok:true});",
+    "  } catch (error) {",
+    "    if (!error.status) console.error('mls-chat-failure', error.message);",
+    "    return mlsChatJson({ok:false,error:error.status ? error.message : 'Error temporal. Consulta MLS estado antes de reintentar.'}, error.status || 500);",
+    "  }",
+    "}"
+  ].join('\n');
+  const patched=installer.patchD1QuotaGuard(sample);
+  assert.match(patched,/reason:'d1_daily_row_read_limit'/);
+  assert.match(patched,/retryAt:nextUtcResetIso\(\)/);
+  assert.match(patched,/isD1DailyReadQuotaError\(error\)/);
+});
+
+test('D1 QUOTA — deployment verifier accepts only explicit D1 quota degradation', () => {
+  const verify=fs.readFileSync(path.join(process.cwd(),'scripts','verify-chat-deployment.cjs'),'utf8');
+  assert.match(verify,/diagnosticResponse\.status === 503/);
+  assert.match(verify,/diagnostic\?\.reason === 'd1_daily_row_read_limit'/);
+  assert.match(verify,/Verificación FIFO diferida/);
+  assert.match(verify,/must return 200 unless D1 quota is explicitly exhausted/);
 });
 
 test('D1 QUOTA — deploy snapshot treats exhausted read quota as deferred warning', () => {
