@@ -2,47 +2,20 @@
   "version": 1,
   "runId": "bf889546-6dbf-4713-9418-d1bca315d7c4",
   "promptVersion": "32.0",
-  "validationAttempts": 324,
+  "validationAttempts": 325,
   "firstPassSuccess": 316,
   "published": 0,
   "staged": 320,
   "deferred": 0,
   "needsReview": 0,
   "lengthFailures": 4,
-  "r32FalsePositiveLikeFailures": 0,
+  "r32FalsePositiveLikeFailures": 1,
   "ruleFailures": 0,
   "markdownFailures": 0,
   "contractFailures": 0,
   "otherFailures": 0,
-  "consecutiveFirstPassSuccesses": 42,
+  "consecutiveFirstPassSuccesses": 0,
   "events": [
-    {
-      "at": "2026-09-18T18:48:22.709Z",
-      "code": "MLS-V02-1060",
-      "attempt": 1,
-      "valid": true,
-      "staged": false,
-      "words": 198,
-      "sections": 5,
-      "references": 6,
-      "referenceCodes": [
-        "MLS-V02-1181",
-        "MLS-V02-0815",
-        "MLS-V02-0806",
-        "MLS-V02-0798",
-        "MLS-V02-0789",
-        "MLS-V02-0781"
-      ],
-      "estimatedMinimum": 145,
-      "estimatedTarget": 157,
-      "observedMinimum": 0,
-      "bucket": 0,
-      "errorCodes": [],
-      "tables": 0,
-      "lists": 1,
-      "examples": 1,
-      "category": ""
-    },
     {
       "at": "2026-09-18T18:48:24.875Z",
       "type": "staged",
@@ -5518,7 +5491,36 @@
       "lists": 1,
       "examples": 1,
       "category": ""
+    },
+    {
+      "at": "2026-09-18T19:09:05.991Z",
+      "code": "MLS-V02-1162",
+      "attempt": 1,
+      "valid": false,
+      "category": "r32_activity_like",
+      "terminal": null,
+      "words": 171,
+      "sections": 5,
+      "references": 6,
+      "referenceCodes": [
+        "MLS-V02-1181",
+        "MLS-V02-0815",
+        "MLS-V02-0806",
+        "MLS-V02-0798",
+        "MLS-V02-0789",
+        "MLS-V02-0781"
+      ],
+      "estimatedMinimum": 145,
+      "estimatedTarget": 157,
+      "observedMinimum": 0,
+      "bucket": 0,
+      "errorCodes": [
+        "r32_activity_like"
+      ],
+      "tables": 0,
+      "lists": 1,
+      "examples": 1
     }
   ],
-  "updatedAt": "2026-09-18T19:09:03.009Z"
+  "updatedAt": "2026-09-18T19:09:06.121Z"
 }
