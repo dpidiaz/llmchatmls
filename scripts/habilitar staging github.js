@@ -15,9 +15,11 @@ function patchStagingGuards(source) {
     source,
     'async function publishWikiArticle(env, article) {\n',
     `async function publishWikiArticle(env, article) {
-  const stagingGuard = await mlsStagingCodeState(env, article.code, { strong: true, failOpen: false });
-  if (stagingGuard && ['reserved','drafting','validated','staged','integrated','deployed'].includes(stagingGuard.status)) {
-    throw new Error('MLS Staging protege ' + article.code + '; la autogeneración no puede publicarlo en D1.');
+  if (mlsStagingConfigured(env)) {
+    const stagingGuard = await mlsStagingCodeState(env, article.code, { strong: true, failOpen: false });
+    if (stagingGuard && ['reserved','drafting','validated','staged','integrated','deployed'].includes(stagingGuard.status)) {
+      throw new Error('MLS Staging protege ' + article.code + '; la autogeneración no puede publicarlo en D1.');
+    }
   }
 `,
     'guardia fuerte antes de publicación Gemma'
@@ -32,12 +34,14 @@ function patchStagingGuards(source) {
       headers: { "cache-control": "private, no-store" }
     });
   }
-  const stagingState = await mlsStagingCodeState(env, job.code, { strong: false, failOpen: false });
-  if (stagingState && ['reserved','drafting','validated'].includes(stagingState.status)) {
-    return Response.json({ found: false, generated: false, flag: "staging-reserved", code: job.code }, {
-      status: 202,
-      headers: { "cache-control": "no-store", "retry-after": "3" }
-    });
+  if (mlsStagingConfigured(env)) {
+    const stagingState = await mlsStagingCodeState(env, job.code, { strong: false, failOpen: false });
+    if (stagingState && ['reserved','drafting','validated'].includes(stagingState.status)) {
+      return Response.json({ found: false, generated: false, flag: "staging-reserved", code: job.code }, {
+        status: 202,
+        headers: { "cache-control": "no-store", "retry-after": "3" }
+      });
+    }
   }
   const now = (/* @__PURE__ */ new Date()).toISOString();
   await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_jobs`,
