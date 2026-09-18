@@ -339,14 +339,22 @@ test('targeted staging context is additive in OpenAPI and preserves FIFO default
   const code=params.find(x=>x.name==='code');
   assert.equal(runId.required,true);
   assert.equal(code.required,false);
-  assert.equal(code.schema.pattern,'^MLS-V[0-9]{2}-[0-9]{4}
+  assert.equal(code.schema.pattern,'^MLS-V[0-9]{2}-[0-9]{4}$');
+  const next=bodyOf('mlsStagingNext');
+  assert.match(next,/requestedCode/);
+  assert.match(next,/entries\.find\(x=>MLS_STAGING_ACTIVE\.has\(x\.status\)\)/);
+  assert.match(next,/El código solicitado no pertenece a este lote staging/);
+  assert.match(next,/El código solicitado ya no está activo en este lote staging/);
+});
+
+test('TEST A — staging operational paths are runtime-guarded from D1 and report zero D1', () => {
   for (const name of ['mlsStagingStart','mlsStagingStatus','mlsStagingNext','mlsStagingValidate','mlsStagingStage','mlsStagingCancel']) {
     const body = bodyOf(name);
     assert.doesNotMatch(body, /WIKI_DB|ensureWikiDb|mlsChatEnsureDb/);
   }
   const handler = bodyOf('handleMlsStaging');
   for (const name of ['mlsStagingStatus','mlsStagingNext','mlsStagingStart','mlsStagingValidate','mlsStagingStage','mlsStagingCancel']) {
-    assert.match(handler, new RegExp(name + '\\(zeroD1Env'));
+    assert.match(handler, new RegExp(name + '\\\\(zeroD1Env'));
   }
   assert.match(handler, /mlsStagingIntegrate\(env,/);
   assert.match(handler, /mlsStagingCreateSnapshot\(request,env,/);
