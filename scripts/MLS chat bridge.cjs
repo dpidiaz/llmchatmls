@@ -241,22 +241,33 @@ async function executeStagingSequence(input, options = {}) {
     if (MLS_CHAT_BRIDGE_TERMINAL_BLOCKED.has(priorStatus))
       return sequenceFailure(normalized.runId, 'precheck', entry.code, null, metrics, results, 'La entrada está en estado terminal ' + priorStatus + '.');
 
-    const next = await executeRemoteOperation('siguienteContextoStagingMLS', { runId: normalized.runId }, options);
-    addD1Metrics(metrics, next.response);
-    if (!next.success)
-      return sequenceFailure(normalized.runId, 'next', entry.code, next, metrics, results);
+    let next = null;
+    let nextAttempts = 0;
+    let currentCode = '';
+    const nextDelays = [500, 1000, 2000];
+    while (nextAttempts < 4) {
+      nextAttempts += 1;
+      next = await executeRemoteOperation('siguienteContextoStagingMLS', { runId: normalized.runId }, options);
+      addD1Metrics(metrics, next.response);
+      if (!next.success)
+        return sequenceFailure(normalized.runId, 'next', entry.code, next, metrics, results);
 
-    const currentCode = String(next.response?.context?.target?.code || '').toUpperCase();
-    if (currentCode !== entry.code)
-      return sequenceFailure(
-        normalized.runId,
-        'fifo',
-        entry.code,
-        next,
-        metrics,
-        results,
-        'FIFO esperaba ' + (currentCode || 'sin código') + ' y el comando proporcionó ' + entry.code + '.'
-      );
+      currentCode = String(next.response?.context?.target?.code || '').toUpperCase();
+      if (currentCode === entry.code) break;
+
+      const staleState = codeStates.get(currentCode);
+      if (!MLS_CHAT_BRIDGE_TERMINAL_STAGED.has(staleState) || nextAttempts >= 4)
+        return sequenceFailure(
+          normalized.runId,
+          'fifo',
+          entry.code,
+          next,
+          metrics,
+          results,
+          'FIFO esperaba ' + (currentCode || 'sin código') + ' y el comando proporcionó ' + entry.code + '.'
+        );
+      await bridgeSleep(nextDelays[nextAttempts - 1], options);
+    }
 
     const contextId = String(next.response?.contextId || '');
     const referenceCodes = (next.response?.context?.references || []).map(ref => String(ref.code || '')).filter(Boolean);
@@ -302,6 +313,7 @@ async function executeStagingSequence(input, options = {}) {
       status: 'staged',
       reused: Boolean(staged.response?.reused),
       validationReused: Boolean(validated.response?.reused),
+      nextAttempts,
       stageAttempts,
       words: validated.response?.words ?? null,
       validateCommit: validated.response?.commit ?? null,

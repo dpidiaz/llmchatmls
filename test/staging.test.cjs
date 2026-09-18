@@ -676,6 +676,50 @@ test('MLS Chat Bridge staging sequence resumes completed entries and chains next
   assert.equal(result.response.results[1].status,'staged');
 });
 
+test('MLS Chat Bridge retries a stale next context only when it points to an entry already staged locally', async () => {
+  const review='Revisión editorial funcional con longitud suficiente para validar correctamente.';
+  let nextCalls=0;
+  const sleeps=[];
+  const fakeFetch=async (url,init={})=>{
+    const parsed=new URL(String(url));
+    if(parsed.pathname.endsWith('/status'))
+      return new Response(JSON.stringify({ok:true,run:{codes:[
+        {code:'MLS-V02-0001',status:'reserved'},
+        {code:'MLS-V02-0002',status:'reserved'}
+      ]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    if(parsed.pathname.endsWith('/next')){
+      nextCalls++;
+      if(nextCalls===1)
+        return new Response(JSON.stringify({ok:true,contextId:'ctx-1',context:{target:{code:'MLS-V02-0001'},references:[{code:'MLS-V02-0999'}]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+      if(nextCalls===2)
+        return new Response(JSON.stringify({ok:true,contextId:'ctx-stale',context:{target:{code:'MLS-V02-0001'},references:[{code:'MLS-V02-0999'}]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+      return new Response(JSON.stringify({ok:true,contextId:'ctx-2',context:{target:{code:'MLS-V02-0002'},references:[{code:'MLS-V02-0999'}]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    if(parsed.pathname.endsWith('/validate')){
+      const body=JSON.parse(init.body||'{}');
+      return new Response(JSON.stringify({ok:true,valid:true,validationReceipt:'receipt-'+body.code,words:160,d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    if(parsed.pathname.endsWith('/stage')){
+      const body=JSON.parse(init.body||'{}');
+      return new Response(JSON.stringify({ok:true,staged:true,commit:'stage-'+body.code,d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    return new Response(JSON.stringify({error:'unexpected'}),{status:500});
+  };
+  const result=await chatBridge.executeBridgeCommand({
+    operationId:'procesarSecuenciaStagingMLS',
+    input:{runId:'run-next-retry',entries:[
+      {code:'MLS-V02-0001',articleMarkdown:'#### En pocas palabras\n\nContenido uno suficientemente desarrollado.',editorialReview:review},
+      {code:'MLS-V02-0002',articleMarkdown:'#### En pocas palabras\n\nContenido dos suficientemente desarrollado.',editorialReview:review}
+    ]}
+  },{fetchImpl:fakeFetch,secret:'bridge-test-secret',sleepImpl:async ms=>{sleeps.push(ms);}});
+  assert.equal(result.success,true);
+  assert.equal(nextCalls,3);
+  assert.deepEqual(sleeps,[500]);
+  assert.equal(result.response.results[1].nextAttempts,2);
+  assert.equal(result.response.d1RowsRead,0);
+  assert.equal(result.response.d1RowsWritten,0);
+});
+
 test('MLS Chat Bridge retries only the transient validated-to-stage consistency 409', async () => {
   const review='Revisión editorial funcional con longitud suficiente para validar correctamente.';
   let stageCalls=0;
