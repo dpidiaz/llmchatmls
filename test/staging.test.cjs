@@ -349,19 +349,22 @@ test('PROVENANCE — integration persists staging origin and backfill is explici
   assert.match(statement,/snapshot_commit/);
 });
 
-test('PROVENANCE — D1 schema creation is sequential outside the base batch', () => {
+test('PROVENANCE — schema bootstrap is isolated from core ensureWikiDb and snapshot', () => {
   const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
-  const start=overlay.indexOf('async function ensureWikiDb');
-  const end=overlay.indexOf('\nasync function ',start+20);
-  const body=overlay.slice(start,end);
-  const tablePos=body.indexOf('CREATE TABLE IF NOT EXISTS wiki_article_provenance');
-  const indexPos=body.indexOf('CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx');
-  const batchEnd=body.indexOf(']);');
-  assert.ok(tablePos>batchEnd);
-  assert.ok(indexPos>tablePos);
-  assert.match(body.slice(tablePos,indexPos),/\.run\(\);/);
+  const helperStart=overlay.indexOf('async function ensureWikiArticleProvenanceDb');
+  const helperEnd=overlay.indexOf('\nasync function ',helperStart+20);
+  const helper=overlay.slice(helperStart,helperEnd);
+  assert.match(helper,/CREATE TABLE IF NOT EXISTS wiki_article_provenance/);
+  assert.match(helper,/CREATE INDEX IF NOT EXISTS wiki_article_provenance_origin_idx/);
+  const coreStart=overlay.indexOf('async function ensureWikiDb');
+  const coreEnd=overlay.indexOf('\nasync function ',coreStart+20);
+  const core=overlay.slice(coreStart,coreEnd);
+  assert.doesNotMatch(core,/wiki_article_provenance/);
+  const snapshot=bodyOf('mlsStagingCreateSnapshot');
+  assert.doesNotMatch(snapshot,/ensureWikiArticleProvenanceDb/);
+  const integrate=bodyOf('mlsStagingIntegrate');
+  assert.match(integrate,/ensureWikiArticleProvenanceDb/);
 });
-
 test('PROVENANCE — canonical schema and Action expose provenance safely', () => {
   const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
   const openapi=JSON.parse(fs.readFileSync(path.join(process.cwd(),'MLS R32 EDITORIAL','chat openapi.json'),'utf8'));
