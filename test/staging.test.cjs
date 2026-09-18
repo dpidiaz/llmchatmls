@@ -521,6 +521,20 @@ test('predeploy installs staging after chat runtime and generates catalog last',
   assert.ok(pre.indexOf('habilitar staging github.js')<pre.indexOf('generar snapshot staging.js'));
 });
 
+test('bootstrap workflow installs staging credentials once and only from main', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','bootstrap staging.yml'),'utf8');
+  assert.match(workflow,/workflow_dispatch/);
+  assert.match(workflow,/github\.ref == 'refs\/heads\/main'/);
+  assert.equal((workflow.match(/wrangler secret bulk/g)||[]).length,2);
+  assert.equal((workflow.match(/wrangler secret put/g)||[]).length,0);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_ID/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_INSTALLATION_ID/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_APP_PRIVATE_KEY/);
+  assert.match(workflow,/MLS_STAGING_GITHUB_TOKEN/);
+  assert.match(workflow,/Crear snapshot inicial MLS Staging/);
+  assert.match(workflow,/verify-chat-deployment\.cjs/);
+});
+
 test('production workflow deploy steps are restricted to main branch dispatches', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
   const guard="github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'";
