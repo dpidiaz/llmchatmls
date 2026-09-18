@@ -1,0 +1,50 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "cancelarLoteStagingMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/staging/cancel",
+  "response": {
+    "ok": true,
+    "reused": false,
+    "run": {
+      "runId": "90370821-0271-49f5-ab52-c730b09cbd7b",
+      "requestId": "phase19accumulationB20260918",
+      "runType": "staging",
+      "storageMode": "github-staging",
+      "snapshotVersion": "32.0-03dd214a4f64-20260918200918",
+      "snapshotCommit": "4ccf58cdebbc08dc0c5c98423c46dad7c05cc428",
+      "requested": 2,
+      "selected": 2,
+      "reserved": 0,
+      "validated": 0,
+      "staged": 0,
+      "integrated": 0,
+      "preservedExisting": 0,
+      "deferred": 0,
+      "needsReview": 0,
+      "pending": 0,
+      "cancelled": 2,
+      "status": "cancelled",
+      "codes": [
+        {
+          "position": 0,
+          "code": "MLS-V03-0051",
+          "status": "cancelled"
+        },
+        {
+          "position": 1,
+          "code": "MLS-V03-0052",
+          "status": "cancelled"
+        }
+      ],
+      "d1RowsRead": 0,
+      "d1RowsWritten": 0,
+      "ranges": [
+        "MLS-V03-0051…MLS-V03-0052"
+      ]
+    }
+  },
+  "completedAt": "2026-09-18T20:21:25.158Z",
+  "commandFile": "mls chat bridge/commands/command 0098.json"
+}
