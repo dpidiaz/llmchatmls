@@ -624,6 +624,84 @@ test('MLS Chat Bridge exposes only the seven staging operations and no arbitrary
   assert.equal(observed.init.body,undefined);
 });
 
+test('MLS Chat Bridge staging sequence resumes completed entries and chains next validate stage with zero D1', async () => {
+  assert.deepEqual(Object.keys(chatBridge.MLS_CHAT_BRIDGE_LOCAL_OPERATIONS),['procesarSecuenciaStagingMLS']);
+  const calls=[];
+  const review='Revisión editorial funcional con longitud suficiente para validar correctamente.';
+  const fakeFetch=async (url,init={})=>{
+    const parsed=new URL(String(url));
+    const method=String(init.method||'GET').toUpperCase();
+    calls.push({path:parsed.pathname,method,body:init.body?JSON.parse(init.body):null});
+    if(parsed.pathname.endsWith('/status')){
+      return new Response(JSON.stringify({ok:true,run:{codes:[
+        {code:'MLS-V02-0001',status:'staged'},
+        {code:'MLS-V02-0002',status:'reserved'}
+      ],d1RowsRead:0,d1RowsWritten:0},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    if(parsed.pathname.endsWith('/next')){
+      return new Response(JSON.stringify({ok:true,contextId:'ctx-2',context:{
+        target:{code:'MLS-V02-0002'},references:[{code:'MLS-V02-0999'}]
+      },d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    if(parsed.pathname.endsWith('/validate')){
+      assert.equal(calls.at(-1).body.code,'MLS-V02-0002');
+      return new Response(JSON.stringify({ok:true,valid:true,validationReceipt:'receipt-2',words:123,reused:false,d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    if(parsed.pathname.endsWith('/stage')){
+      assert.equal(calls.at(-1).body.validationReceipt,'receipt-2');
+      return new Response(JSON.stringify({ok:true,staged:true,reused:false,commit:'stage-commit-2',d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    }
+    return new Response(JSON.stringify({error:'unexpected'}),{status:500});
+  };
+  const result=await chatBridge.executeBridgeCommand({
+    operationId:'procesarSecuenciaStagingMLS',
+    input:{runId:'run-sequence-1',entries:[
+      {code:'MLS-V02-0001',articleMarkdown:'#### En pocas palabras\n\nTexto uno.',editorialReview:review},
+      {code:'MLS-V02-0002',articleMarkdown:'#### En pocas palabras\n\nTexto dos.',editorialReview:review}
+    ]}
+  },{fetchImpl:fakeFetch,secret:'bridge-test-secret'});
+  assert.equal(result.success,true);
+  assert.equal(result.response.requested,2);
+  assert.equal(result.response.skipped,1);
+  assert.equal(result.response.processed,1);
+  assert.equal(result.response.d1RowsRead,0);
+  assert.equal(result.response.d1RowsWritten,0);
+  assert.deepEqual(calls.map(x=>x.path),[
+    '/api/wiki/editorial/staging/status',
+    '/api/wiki/editorial/staging/next',
+    '/api/wiki/editorial/staging/validate',
+    '/api/wiki/editorial/staging/stage'
+  ]);
+  assert.equal(result.response.results[0].reused,true);
+  assert.equal(result.response.results[1].status,'staged');
+});
+
+test('MLS Chat Bridge staging sequence stops on FIFO mismatch before validation', async () => {
+  const review='Revisión editorial funcional con longitud suficiente para validar correctamente.';
+  const calls=[];
+  const fakeFetch=async (url,init={})=>{
+    const parsed=new URL(String(url));
+    calls.push(parsed.pathname);
+    if(parsed.pathname.endsWith('/status'))
+      return new Response(JSON.stringify({ok:true,run:{codes:[{code:'MLS-V02-0001',status:'reserved'}]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    if(parsed.pathname.endsWith('/next'))
+      return new Response(JSON.stringify({ok:true,contextId:'ctx-x',context:{target:{code:'MLS-V02-9999'},references:[{code:'MLS-V02-0999'}]},d1RowsRead:0,d1RowsWritten:0}),{status:200});
+    return new Response(JSON.stringify({error:'should not be called'}),{status:500});
+  };
+  const result=await chatBridge.executeBridgeCommand({
+    operationId:'procesarSecuenciaStagingMLS',
+    input:{runId:'run-sequence-2',entries:[
+      {code:'MLS-V02-0001',articleMarkdown:'#### En pocas palabras\n\nTexto.',editorialReview:review}
+    ]}
+  },{fetchImpl:fakeFetch,secret:'bridge-test-secret'});
+  assert.equal(result.success,false);
+  assert.equal(result.response.phase,'fifo');
+  assert.deepEqual(calls,[
+    '/api/wiki/editorial/staging/status',
+    '/api/wiki/editorial/staging/next'
+  ]);
+});
+
 test('MLS Chat Bridge workflow is push-only, control-branch scoped and result writes cannot retrigger it', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','MLS chat bridge.yml'),'utf8');
   assert.match(workflow,/push:/);
