@@ -32,6 +32,8 @@ jobs:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
         run: |
           set -euo pipefail
+          git fetch origin mlschatcontrol
+          git reset --hard origin/mlschatcontrol
           queue_file="$RUNNER_TEMP/mls-chat-bridge-pending.txt"
           : > "$queue_file"
           while IFS= read -r command_file; do
