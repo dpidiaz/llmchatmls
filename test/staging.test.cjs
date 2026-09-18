@@ -349,6 +349,24 @@ test('PROVENANCE — integration persists staging origin and backfill is explici
   assert.match(statement,/snapshot_commit/);
 });
 
+test('D1 QUOTA — wiki API degrades to JSON instead of throwing Worker 1101', () => {
+  const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
+  assert.match(overlay,/function isD1DailyReadQuotaError/);
+  assert.match(overlay,/reason:"d1_daily_row_read_limit"/);
+  assert.match(overlay,/countsAvailable:false/);
+  const handleStart=overlay.indexOf('async function handleWikiApi');
+  const handleEnd=overlay.indexOf('\nfunction wikiErrorMessage',handleStart);
+  const handle=overlay.slice(handleStart,handleEnd);
+  assert.match(handle,/if\(isD1DailyReadQuotaError\(error\)\) return d1QuotaResponse/);
+});
+
+test('D1 QUOTA — deploy snapshot treats exhausted read quota as deferred warning', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
+  assert.match(workflow,/daily row read limit/);
+  assert.match(workflow,/Snapshot MLS Staging diferido/);
+  assert.match(workflow,/deploy de producción sí quedó activo/);
+});
+
 test('PROVENANCE — schema bootstrap is isolated from core ensureWikiDb and snapshot', () => {
   const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
   const helperStart=overlay.indexOf('async function ensureWikiArticleProvenanceDb');
