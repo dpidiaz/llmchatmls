@@ -481,7 +481,8 @@ test('snapshot checks GitHub before any D1 bootstrap access', () => {
 test('target catalog is compact and does not copy whole seed objects', () => {
   const generatorSource=fs.readFileSync(path.join(process.cwd(),'scripts','generar snapshot staging.js'),'utf8');
   assert.doesNotMatch(generatorSource,/\.\.\.seed/);
-  assert.match(generatorSource,/safeGitHubContentsBytes = 900 \* 1024/);
+  assert.match(generatorSource,/TARGET_SHARD_MAX_BYTES = 700 \* 1024/);
+  assert.match(generatorSource,/files,/);
   const out=generator.normalizeSeed({
     title:'Tema',level:'A1',part:'Parte',chapter:'Capítulo',target:'x',definition:'d',example:'e',notes:'n',reference:'r',unused:'do not copy'
   },{slug:'espanol-guatemala',name:'Español de Guatemala',prefix:'MLS-V10'},20);
@@ -489,6 +490,16 @@ test('target catalog is compact and does not copy whole seed objects', () => {
   assert.deepEqual(Object.keys(out),[
     'code','language','languageName','n','title','level','part','chapter','target','definition','example','notes','reference'
   ]);
+});
+
+test('snapshot runtime reads target shards from the pinned manifest', () => {
+  const targets=bodyOf('mlsStagingSnapshotTargets');
+  assert.match(targets,/descriptor\?\.files/);
+  assert.match(targets,/targets\/\'+file/);
+  const snapshot=bodyOf('mlsStagingCreateSnapshot');
+  assert.match(snapshot,/descriptor\.files/);
+  assert.match(snapshot,/maxReferenceBytes=900\*1024/);
+  assert.match(snapshot,/referenceCounts/);
 });
 
 test('Snapshot/build contract expects exactly 10 languages and 10,133 targets', () => {
