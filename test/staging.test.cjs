@@ -72,9 +72,14 @@ test('TEST D — failed validation can be corrected and only validated content c
   assert.equal(doc.markdownFailures,1);
   assert.equal(doc.staged,1);
   assert.equal(doc.firstPassSuccess,0);
+  const validate=bodyOf('mlsStagingValidate');
+  assert.match(validate,/target\.status='validated'/);
+  assert.match(validate,/mlsStagingIndexPath\(item\.code\)/);
+  assert.match(validate,/mlsStagingAutooptApply/);
   const stage=bodyOf('mlsStagingStage');
   assert.match(stage,/validationReceipt/);
   assert.match(stage,/mlsChatValidateText/);
+  assert.match(stage,/existing\?\.status!=='validated'/);
   assert.match(stage,/published:false/);
 });
 
@@ -84,6 +89,8 @@ test('TEST E — deferred is terminal for exhausted entry and no silent substitu
   assert.equal(doc.deferred,1);
   const failure=bodyOf('mlsStagingValidationFailure');
   assert.match(failure,/target\.validationAttempts>=3\?'deferred'/);
+  assert.match(failure,/target\.status=terminal\|\|'drafting'/);
+  assert.match(failure,/mlsStagingIndexPath\(item\.code\)/);
   assert.doesNotMatch(failure,/selected\.push|substitut/i);
 });
 
@@ -142,6 +149,20 @@ test('TEST N — GitHub failure has no staging fallback to D1', () => {
   assert.match(handler,/No se usó D1 como fallback/);
   for(const name of ['mlsStagingStart','mlsStagingNext','mlsStagingValidate','mlsStagingStage','mlsStagingCancel'])
     assert.doesNotMatch(bodyOf(name),/WIKI_DB/);
+});
+
+test('selection never silently reuses unresolved or preserved staging states', () => {
+  const select=bodyOf('mlsStagingSelect');
+  assert.match(select,/state && state\.status!=='cancelled'/);
+  assert.doesNotMatch(select,/\['reserved','drafting','validated','staged','integrated','deployed'\]/);
+});
+
+test('workflow YAML has one production, snapshot and verification step only', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
+  assert.equal((workflow.match(/name: Desplegar en produccion/g)||[]).length,1);
+  assert.equal((workflow.match(/name: Crear snapshot MLS Staging del deploy/g)||[]).length,1);
+  assert.equal((workflow.match(/name: Verificar Action editorial sin crear lotes/g)||[]).length,1);
+  assert.doesNotMatch(workflow,/response%|\\\\n%\{http_code\}/);
 });
 
 test('Status reports exact codes and range formatting preserves gaps', () => {
