@@ -685,9 +685,21 @@ async function mlsStagingSnapshotAsset(env,request,path){
 }
 async function mlsStagingCreateSnapshot(request,env,body){
   const head=await mlsStagingHead(env);
+  const seedManifest=JSON.parse(await mlsStagingSnapshotAsset(env,request,'manifest.json'));
+  const languages=Object.keys(seedManifest.languages||{});
+  const targetFileCount=languages.reduce((sum,language)=>{
+    const descriptor=seedManifest.languages[language]||{};
+    const targetFiles=Array.isArray(descriptor.files)&&descriptor.files.length
+      ? descriptor.files.map(x=>typeof x==='string'?x:x.file).filter(Boolean)
+      : [descriptor.file||language+'.json'];
+    return sum+targetFiles.length;
+  },0);
+  const projectedGithubFiles=targetFileCount+languages.length+2;
+  const projectedExternalSubrequestBudget=projectedGithubFiles+8;
+  if(projectedExternalSubrequestBudget>49)
+    mlsChatError(503,'El snapshot staging excede el presupuesto seguro de subrequests externos del Worker Free: '+projectedExternalSubrequestBudget+' > 49.');
   await ensureWikiDb(env); await mlsChatEnsureDb(env);
   if(mlsAutooptEnabled(env)) await mlsAutooptEnsure(env);
-  const seedManifest=JSON.parse(await mlsStagingSnapshotAsset(env,request,'manifest.json'));
   const metaResult=await env.WIKI_DB.prepare("SELECT code,language,n FROM wiki_articles ORDER BY "+WIKI_FIFO_ORDER_SQL).all();
   const canonicalRows=metaResult.results||[];
   const byLanguage=new Map();
@@ -695,7 +707,7 @@ async function mlsStagingCreateSnapshot(request,env,body){
   const createdAt=mlsStagingNow();
   const sourceCommit=String(body.sourceCommit||seedManifest.sourceCommit||'unknown').replace(/[^A-Za-z0-9._-]/g,'').slice(0,64)||'unknown';
   const snapshotVersion='32.0-'+sourceCommit.slice(0,12)+'-'+createdAt.replace(/[-:.TZ]/g,'').slice(0,14);
-  const files=[],languages=Object.keys(seedManifest.languages||{}),referenceCounts={};
+  const files=[],referenceCounts={};
   for(const language of languages){
     const descriptor=seedManifest.languages[language]||{};
     const targetFiles=Array.isArray(descriptor.files)&&descriptor.files.length
@@ -736,8 +748,8 @@ async function mlsStagingCreateSnapshot(request,env,body){
   files.push({path:manifestPath,content:JSON.stringify(manifest)});
   files.push({path:MLS_STAGING_ROOT+'/snapshots/latest.json',content:JSON.stringify({snapshotVersion,manifestPath,createdAt,sourceCommit})});
   const externalSubrequestBudget=files.length+8;
-  if(externalSubrequestBudget>49)
-    mlsChatError(503,'El snapshot staging excede el presupuesto seguro de subrequests externos del Worker Free: '+externalSubrequestBudget+' > 49.');
+  if(files.length!==projectedGithubFiles||externalSubrequestBudget!==projectedExternalSubrequestBudget)
+    mlsChatError(503,'El presupuesto real del snapshot staging cambió durante la captura; se aborta antes del commit GitHub.');
   const snapshotCommit=await mlsStagingCommit(env,files,'MLS staging snapshot '+snapshotVersion,head);
   return {ok:true,snapshotVersion,snapshotCommit,pointerCommit:snapshotCommit,createdAt,canonical:canonicalRows.length,languages:languages.length,
     githubFiles:files.length,externalSubrequestBudget};
