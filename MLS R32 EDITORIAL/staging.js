@@ -713,7 +713,10 @@ async function mlsStagingSnapshotAsset(env,request,path){
   return response.text();
 }
 async function mlsStagingCreateSnapshot(request,env,body){
+  let diagnosticStage='github-head';
+  try{
   const head=await mlsStagingHead(env);
+  diagnosticStage='asset-manifest';
   const seedManifest=JSON.parse(await mlsStagingSnapshotAsset(env,request,'manifest.json'));
   const languages=Object.keys(seedManifest.languages||{});
   const targetFileCount=languages.reduce((sum,language)=>{
@@ -730,8 +733,10 @@ async function mlsStagingCreateSnapshot(request,env,body){
   const projectedExternalSubrequestBudget=targetFileCount+8;
   if(projectedExternalSubrequestBudget>49)
     mlsChatError(503,'El snapshot staging excede el presupuesto seguro de subrequests externos del Worker Free: '+projectedExternalSubrequestBudget+' > 49.');
+  diagnosticStage='d1-bootstrap';
   await ensureWikiDb(env); await mlsChatEnsureDb(env);
   if(mlsAutooptEnabled(env)) await mlsAutooptEnsure(env);
+  diagnosticStage='d1-canonical-articles';
   const metaResult=await env.WIKI_DB.prepare("SELECT code,language,n FROM wiki_articles ORDER BY "+WIKI_FIFO_ORDER_SQL).all();
   const canonicalRows=metaResult.results||[];
   const byLanguage=new Map();
@@ -746,6 +751,7 @@ async function mlsStagingCreateSnapshot(request,env,body){
       ? descriptor.files.map(x=>typeof x==='string'?x:x.file).filter(Boolean)
       : [descriptor.file||language+'.json'];
     for(const targetFile of targetFiles){
+      diagnosticStage='asset-target-'+language+'-'+targetFile;
       const targets=await mlsStagingSnapshotAsset(env,request,targetFile);
       files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/targets/'+targetFile,content:targets});
     }
@@ -753,6 +759,7 @@ async function mlsStagingCreateSnapshot(request,env,body){
     let refs=[];
     if(candidates.length){
       const placeholders=candidates.map(()=>'?').join(',');
+      diagnosticStage='d1-references-'+language;
       const detail=await env.WIKI_DB.prepare("SELECT code,language,language_name AS languageName,n,title,level,part,chapter,article_markdown AS articleMarkdown,prompt_version AS promptVersion,generated_at AS generatedAt FROM wiki_articles WHERE code IN ("+placeholders+") ORDER BY n").bind(...candidates.map(x=>x.code)).all();
       refs=detail.results||[];
     }
@@ -767,6 +774,7 @@ async function mlsStagingCreateSnapshot(request,env,body){
     referenceCounts[language]=refs.length;
     files.push({path:MLS_STAGING_ROOT+'/snapshots/'+snapshotVersion+'/references/'+language+'.json',content:refsContent});
   }
+  diagnosticStage='d1-autoopt';
   let autoopt={version:MLS_AUTOOPT_VERSION||'unknown',promptVersion:'32.0',stats:{}};
   try{
     const stats=await env.WIKI_DB.prepare("SELECT scope_id,stats FROM wiki_autoopt_stats WHERE version=? AND prompt=? AND scope='family'").bind(MLS_AUTOOPT_VERSION,'32.0').all();
@@ -781,9 +789,15 @@ async function mlsStagingCreateSnapshot(request,env,body){
   files.push({path:MLS_STAGING_ROOT+'/snapshots/latest.json',content:JSON.stringify({snapshotVersion,manifestPath,createdAt,sourceCommit})});
   if(files.length!==projectedGithubFiles)
     mlsChatError(503,'El número real de archivos del snapshot staging cambió durante la captura; se aborta antes del commit GitHub.');
+  diagnosticStage='github-commit';
   const snapshotCommit=await mlsStagingCommit(env,files,'MLS staging snapshot '+snapshotVersion,head);
   return {ok:true,snapshotVersion,snapshotCommit,pointerCommit:snapshotCommit,createdAt,canonical:canonicalRows.length,languages:languages.length,
     githubFiles:files.length,externalSubrequestBudget:projectedExternalSubrequestBudget};
+  }catch(error){
+    if(error?.status) throw error;
+    const raw=String(error?.message||error||'unknown').replace(/https?:\/\/\S+/g,'[url]').replace(/Bearer\s+\S+/gi,'Bearer [redacted]').slice(0,280);
+    mlsChatError(503,'Snapshot staging falló en etapa '+diagnosticStage+': '+raw);
+  }
 }
 async function mlsStagingCollectStaged(env,head){
   const indexManifest=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/index/manifest.json',head,true,{shards:[]});

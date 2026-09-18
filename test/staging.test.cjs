@@ -564,6 +564,16 @@ test('snapshot manifest cache reads GitHub once and never recurses into itself',
   assert.equal(selfCalls,1);
 });
 
+test('snapshot diagnostics identify safe failure stage without exposing secrets', () => {
+  const snapshot=bodyOf('mlsStagingCreateSnapshot');
+  assert.match(snapshot,/diagnosticStage='github-head'/);
+  assert.match(snapshot,/diagnosticStage='d1-bootstrap'/);
+  assert.match(snapshot,/diagnosticStage='d1-canonical-articles'/);
+  assert.match(snapshot,/diagnosticStage='github-commit'/);
+  assert.match(snapshot,/Snapshot staging falló en etapa/);
+  assert.match(snapshot,/Bearer \[redacted\]/);
+});
+
 test('snapshot checks GitHub and free subrequest budget before any D1 bootstrap access', () => {
   const body=bodyOf('mlsStagingCreateSnapshot');
   const headIndex=body.indexOf('mlsStagingHead(env)');
