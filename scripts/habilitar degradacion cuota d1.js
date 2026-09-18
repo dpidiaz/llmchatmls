@@ -3,7 +3,7 @@
 const fs=require('node:fs');
 
 const TARGET='src/index.js';
-const MARKER='// MLS D1 QUOTA GRACEFUL DEGRADATION 1.0';
+const MARKER='// MLS D1 QUOTA GRACEFUL DEGRADATION 1.1';
 
 function patchD1QuotaGuard(source){
   source=String(source);
@@ -64,7 +64,27 @@ __name(d1QuotaResponse, "d1QuotaResponse");
     throw error;
   }`;
 
-  return source.replace(pattern,helper+'\n'+replacement);
+  source=source.replace(pattern,helper+'\n'+replacement);
+
+  const chatCatch=`  } catch (error) {
+    if (!error.status) console.error('mls-chat-failure', error.message);
+    return mlsChatJson({ok:false,error:error.status ? error.message : 'Error temporal. Consulta MLS estado antes de reintentar.'}, error.status || 500);
+  }`;
+  const chatCatchQuota=`  } catch (error) {
+    if (isD1DailyReadQuotaError(error)) {
+      return mlsChatJson({
+        ok:false,
+        degraded:true,
+        reason:'d1_daily_row_read_limit',
+        error:'D1 no está disponible temporalmente por cuota diaria.',
+        retryAt:nextUtcResetIso()
+      },503);
+    }
+    if (!error.status) console.error('mls-chat-failure', error.message);
+    return mlsChatJson({ok:false,error:error.status ? error.message : 'Error temporal. Consulta MLS estado antes de reintentar.'}, error.status || 500);
+  }`;
+  if(!source.includes(chatCatch)) throw new Error('No se encontró el catch de handleMlsChat para instalar degradación por cuota.');
+  return source.replace(chatCatch,chatCatchQuota);
 }
 
 function install(){
