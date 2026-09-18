@@ -39,6 +39,7 @@ function buildStagingTargetCatalog(root = process.cwd()) {
     promptVersion: '32.0',
     totalEntries: LANGUAGES.reduce((sum, item) => sum + item.total, 0),
     createdAt: new Date().toISOString(),
+    sourceCommit: String(process.env.GITHUB_SHA || process.env.CF_PAGES_COMMIT_SHA || 'local'),
     languages: {}
   };
 
