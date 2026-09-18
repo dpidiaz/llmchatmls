@@ -18,6 +18,10 @@ function mlsStagingAssertCode(code) {
   if (!/^MLS-V\d{2}-\d{4}$/.test(value)) mlsChatError(400, 'Código MLS inválido.');
   return value;
 }
+function mlsStagingConfigured(env) {
+  const app = String(env.MLS_STAGING_GITHUB_APP_ID || '').trim() && String(env.MLS_STAGING_GITHUB_INSTALLATION_ID || '').trim() && String(env.MLS_STAGING_GITHUB_APP_PRIVATE_KEY || '').trim();
+  return Boolean(app || String(env.MLS_STAGING_GITHUB_TOKEN || '').trim());
+}
 function mlsStagingRepo(env) {
   const owner = String(env.MLS_STAGING_GITHUB_OWNER || 'dpidiaz').trim();
   const repo = String(env.MLS_STAGING_GITHUB_REPO || 'llmchatmls').trim();
@@ -684,5 +688,5 @@ async function handleMlsStaging(request,env,url){
 }
 if(typeof module!=='undefined'&&module.exports) module.exports={
   mlsStagingIndexPath,mlsStagingSummarize,mlsStagingRanges,mlsStagingSample,mlsStagingAutooptBase,mlsStagingAutooptApply,
-  mlsStagingD1Add,MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
+  mlsStagingD1Add,mlsStagingConfigured,MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
 };
