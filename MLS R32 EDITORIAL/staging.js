@@ -246,14 +246,23 @@ async function mlsStagingContext(env, run, code) {
   const target=(targets||[]).find(x=>String(x.code).toUpperCase()===targetCode);
   if(!target) mlsChatError(409,'El target no existe en el snapshot del run.');
   let references=await mlsStagingSnapshotReferences(env,run.snapshotVersion,job.language,run.snapshotCommit);
+  let fallbackCrossLanguage=false;
   references=(references||[]).filter(x=>x.code!==targetCode).sort((a,b)=>
     (a.chapter===target.chapter?0:1)-(b.chapter===target.chapter?0:1) ||
     (a.level===target.level?0:1)-(b.level===target.level?0:1) ||
     Math.abs(Number(a.n||0)-Number(target.n||0))-Math.abs(Number(b.n||0)-Number(target.n||0))
   ).slice(0,MLS_STAGING_REFERENCE_LIMIT);
+  if(!references.length){
+    const snapshot=await mlsStagingReadJson(env,MLS_STAGING_ROOT+'/snapshots/'+run.snapshotVersion+'/manifest.json',run.snapshotCommit,false);
+    for(const language of snapshot.languageOrder||[]){
+      if(language===job.language) continue;
+      const cross=(await mlsStagingSnapshotReferences(env,run.snapshotVersion,language,run.snapshotCommit)||[]).filter(x=>x.code!==targetCode);
+      if(cross.length){references=cross.slice(0,MLS_STAGING_REFERENCE_LIMIT);fallbackCrossLanguage=true;break;}
+    }
+  }
   if(!references.length) mlsChatError(409,'El snapshot no contiene referencias R32 suficientes para esta entrada.');
   const context={ok:true,standard:'MLS R32',promptVersion:'32.0',styleAuthority:'snapshot-published-corpus',
-    fallbackCrossLanguage:false,target,referenceCount:references.length,profile:editorialProfileR32(references),references};
+    fallbackCrossLanguage,target,referenceCount:references.length,profile:editorialProfileR32(references),references};
   const contextId=await mlsChatHash(run.snapshotVersion+'\n'+targetCode+'\n'+references.map(x=>x.code).join(','));
   let autoopt=null;
   try {
@@ -716,5 +725,5 @@ async function handleMlsStaging(request,env,url){
 }
 if(typeof module!=='undefined'&&module.exports) module.exports={
   mlsStagingIndexPath,mlsStagingSummarize,mlsStagingRanges,mlsStagingSample,mlsStagingAutooptBase,mlsStagingAutooptApply,
-  mlsStagingD1Add,mlsStagingConfigured,MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
+  mlsStagingD1Add,mlsStagingNoD1Env,mlsStagingConfigured,MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
 };
