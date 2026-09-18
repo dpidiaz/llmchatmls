@@ -586,7 +586,7 @@ async function mlsStagingCollectStaged(env,head){
   return items;
 }
 async function mlsStagingIntegrate(env,body){
-  await ensureWikiDb(env); await mlsChatEnsureDb(env);
+  // No unmetered schema/bootstrap queries here: every D1 statement below is added to metrics.
   const metrics={d1RowsRead:0,d1RowsWritten:0};
   const head=await mlsStagingHead(env);
   const staged=await mlsStagingCollectStaged(env,head);
