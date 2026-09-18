@@ -166,6 +166,7 @@ function createFunctionalGitHubFixture(targetCount=8) {
   const d1={
     calls:0,
     articles:new Map(),
+    provenance:new Map(),
     jobs:new Map(),
     prepare(sql){
       const statement={
@@ -193,6 +194,12 @@ function createFunctionalGitHubFixture(targetCount=8) {
             d1.articles.set(code,{code,article_markdown:statement.args[8],audit_model:statement.args[9]});written=1;
           }
           out.push({meta:{rows_read:0,rows_written:written}});
+        }else if(/^INSERT INTO wiki_article_provenance/.test(statement.sql)){
+          const [code,promptVersion,runId,snapshotVersion,snapshotCommit,stagedAt,integratedAt,auditModel,recordedAt]=statement.args;
+          d1.provenance.set(code,{code,origin:'github-staging',standard:'MLS R32',prompt_version:promptVersion,
+            staging_run_id:runId,snapshot_version:snapshotVersion,snapshot_commit:snapshotCommit,staged_at:stagedAt,
+            integrated_at:integratedAt,source_audit_model:auditModel,recorded_at:recordedAt});
+          out.push({meta:{rows_read:0,rows_written:1}});
         }else if(/^UPDATE wiki_jobs SET/.test(statement.sql)){
           out.push({meta:{rows_read:1,rows_written:1}});
         }else throw new Error('Unhandled D1 batch: '+statement.sql);
@@ -289,6 +296,14 @@ test('FUNCTIONAL A/B/C/D/I/J/K — concurrent reservations, idempotency, validat
     assert.ok(integrated.d1RowsRead>0);
     assert.ok(integrated.d1RowsWritten>0);
     assert.equal(d1.articles.get(code2).article_markdown,'contenido externo');
+    const provenance=d1.provenance.get(code);
+    assert.equal(provenance.origin,'github-staging');
+    assert.equal(provenance.standard,'MLS R32');
+    assert.equal(provenance.prompt_version,'32.0');
+    assert.equal(provenance.staging_run_id,first.run.runId);
+    assert.equal(provenance.snapshot_version,'functional-snapshot');
+    assert.equal(provenance.source_audit_model,d1.articles.get(code).audit_model);
+    assert.equal(d1.provenance.has(code2),false);
 
     const again=await staging.mlsStagingIntegrate(env,{limit:2});
     assert.equal(again.staged,0);
@@ -318,6 +333,34 @@ test('FUNCTIONAL E/F — third retry becomes deferred and snapshot failures beco
     assert.equal(status.run.codes[0].status,'needs_review');
     assert.equal(d1.calls,0);
   },5);
+});
+
+test('PROVENANCE — integration persists staging origin and backfill is explicitly supported', () => {
+  const integrate=bodyOf('mlsStagingIntegrate');
+  const backfill=bodyOf('mlsStagingBackfillProvenance');
+  const statement=bodyOf('mlsStagingProvenanceStatement');
+  assert.match(integrate,/backfillProvenance===true/);
+  assert.match(integrate,/mlsStagingProvenanceStatement/);
+  assert.match(backfill,/wiki_articles WHERE code IN/);
+  assert.match(backfill,/provenanceRecordedAt/);
+  assert.match(statement,/wiki_article_provenance/);
+  assert.match(statement,/github-staging/);
+  assert.match(statement,/snapshot_version/);
+  assert.match(statement,/snapshot_commit/);
+});
+
+test('PROVENANCE — canonical schema and Action expose provenance safely', () => {
+  const overlay=fs.readFileSync(path.join(process.cwd(),'MLS R32 OVERLAY','index.js'),'utf8');
+  const openapi=JSON.parse(fs.readFileSync(path.join(process.cwd(),'MLS R32 EDITORIAL','chat openapi.json'),'utf8'));
+  assert.match(overlay,/CREATE TABLE IF NOT EXISTS wiki_article_provenance/);
+  assert.match(overlay,/provenance_origin/);
+  assert.match(overlay,/origin: row\.provenance_origin/);
+  let operation=null;
+  for(const item of Object.values(openapi.paths||{})){
+    for(const op of Object.values(item||{})) if(op?.operationId==='reconciliarStagingMLS') operation=op;
+  }
+  assert.ok(operation);
+  assert.equal(operation.requestBody.content['application/json'].schema.properties.backfillProvenance.type,'boolean');
 });
 
 test('TEST A — staging operational paths are runtime-guarded from D1 and report zero D1', () => {
