@@ -180,6 +180,12 @@ test('predeploy installs staging after chat runtime and generates catalog last',
   assert.ok(pre.indexOf('habilitar staging github.js')<pre.indexOf('generar snapshot staging.js'));
 });
 
+test('production workflow deploy steps are restricted to main branch dispatches', () => {
+  const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
+  const guard="github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'";
+  assert.ok(workflow.split(guard).length-1>=3);
+});
+
 test('production workflow captures a versioned snapshot after deploy', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
   assert.match(workflow,/Crear snapshot MLS Staging del deploy/);
