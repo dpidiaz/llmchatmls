@@ -471,6 +471,26 @@ test('GitHub App private keys accept both PKCS1 and PKCS8 PEM', async () => {
   await assert.doesNotReject(()=>global.crypto.subtle.importKey('pkcs8',staging.mlsStagingPrivateKeyDer(pkcs8),algorithm,false,['sign']));
 });
 
+test('snapshot checks GitHub before any D1 bootstrap access', () => {
+  const body=bodyOf('mlsStagingCreateSnapshot');
+  assert.ok(body.indexOf('mlsStagingHead(env)')>=0);
+  assert.ok(body.indexOf('ensureWikiDb(env)')>=0);
+  assert.ok(body.indexOf('mlsStagingHead(env)')<body.indexOf('ensureWikiDb(env)'));
+});
+
+test('target catalog is compact and does not copy whole seed objects', () => {
+  const generatorSource=fs.readFileSync(path.join(process.cwd(),'scripts','generar snapshot staging.js'),'utf8');
+  assert.doesNotMatch(generatorSource,/\.\.\.seed/);
+  assert.match(generatorSource,/safeGitHubContentsBytes = 900 \* 1024/);
+  const out=generator.normalizeSeed({
+    title:'Tema',level:'A1',part:'Parte',chapter:'Capítulo',target:'x',definition:'d',example:'e',notes:'n',reference:'r',unused:'do not copy'
+  },{slug:'espanol-guatemala',name:'Español de Guatemala',prefix:'MLS-V10'},20);
+  assert.equal(out.unused,undefined);
+  assert.deepEqual(Object.keys(out),[
+    'code','language','languageName','n','title','level','part','chapter','target','definition','example','notes','reference'
+  ]);
+});
+
 test('Snapshot/build contract expects exactly 10 languages and 10,133 targets', () => {
   assert.equal(generator.LANGUAGES.length,10);
   assert.equal(generator.LANGUAGES.reduce((sum,x)=>sum+x.total,0),10133);
