@@ -91,6 +91,87 @@ async function mlsChatRun(env, id) {
     remaining: results.filter(x => x.status === 'pending').length,
     pending: results.filter(x => x.status === 'pending').length, entries: results};
 }
+async function mlsChatActiveRuns(env) {
+  const now = new Date().toISOString();
+  // Normalize stale active runs that no longer own pending work. This never
+  // revives cancelled runs and never creates a new run.
+  await env.WIKI_DB.prepare(`UPDATE wiki_chat_runs SET status = 'complete', updated_at = ?
+    WHERE status = 'active' AND NOT EXISTS (
+      SELECT 1 FROM wiki_chat_items i WHERE i.run_id = wiki_chat_runs.id AND i.status = 'pending'
+    )`).bind(now).run();
+  const {results} = await env.WIKI_DB.prepare(`SELECT r.id, r.requested, r.created_at, r.updated_at,
+      COALESCE(m.run_type, 'normal') AS run_type,
+      COUNT(i.code) AS selected,
+      SUM(CASE WHEN i.status = 'published' THEN 1 ELSE 0 END) AS published,
+      SUM(CASE WHEN i.status = 'external' THEN 1 ELSE 0 END) AS external_count,
+      SUM(CASE WHEN i.status = 'deferred' THEN 1 ELSE 0 END) AS deferred,
+      SUM(CASE WHEN i.status = 'pending' THEN 1 ELSE 0 END) AS pending
+    FROM wiki_chat_runs r
+    LEFT JOIN wiki_chat_run_meta m ON m.run_id = r.id
+    LEFT JOIN wiki_chat_items i ON i.run_id = r.id
+    WHERE r.status = 'active'
+    GROUP BY r.id, r.requested, r.created_at, r.updated_at, m.run_type
+    HAVING SUM(CASE WHEN i.status = 'pending' THEN 1 ELSE 0 END) > 0
+    ORDER BY r.created_at ASC, r.id ASC`).all();
+  return results.map(row => ({
+    id: row.id,
+    runType: row.run_type || 'normal',
+    requested: Number(row.requested || 0),
+    selected: Number(row.selected || 0),
+    status: 'active',
+    published: Number(row.published || 0),
+    alreadyPublishedElsewhere: Number(row.external_count || 0),
+    preservedExisting: Number(row.external_count || 0),
+    deferred: Number(row.deferred || 0),
+    remaining: Number(row.pending || 0),
+    pending: Number(row.pending || 0),
+    createdAt: row.created_at,
+    updatedAt: row.updated_at
+  }));
+}
+async function mlsChatCancelRun(env, runId) {
+  const now = new Date().toISOString();
+  await env.WIKI_DB.batch([
+    env.WIKI_DB.prepare(`UPDATE wiki_chat_incidents SET rescue_state = 'pending', runner_eligible = 1, updated_at = ?
+      WHERE rescue_state = 'chat_claimed' AND EXISTS (SELECT 1 FROM wiki_chat_rescue_claims c WHERE c.incident_id = wiki_chat_incidents.id AND c.run_id = ? AND c.status = 'pending')`).bind(now, runId),
+    env.WIKI_DB.prepare("UPDATE wiki_chat_rescue_claims SET status = 'cancelled', updated_at = ? WHERE run_id = ? AND status = 'pending'").bind(now, runId),
+    env.WIKI_DB.prepare("UPDATE wiki_chat_items SET status = 'released' WHERE run_id = ? AND status = 'pending'").bind(runId),
+    env.WIKI_DB.prepare("UPDATE wiki_chat_runs SET status = 'cancelled', updated_at = ? WHERE id = ? AND status = 'active'").bind(now, runId)
+  ]);
+  return await mlsChatRun(env, runId);
+}
+async function mlsChatCancelAll(env) {
+  const now = new Date().toISOString();
+  const snapshot = await env.WIKI_DB.prepare("SELECT id FROM wiki_chat_runs WHERE status = 'active' ORDER BY created_at ASC, id ASC").all();
+  const results = await env.WIKI_DB.batch([
+    env.WIKI_DB.prepare(`UPDATE wiki_chat_incidents SET rescue_state = 'pending', runner_eligible = 1, updated_at = ?
+      WHERE rescue_state = 'chat_claimed' AND EXISTS (
+        SELECT 1 FROM wiki_chat_rescue_claims c
+        JOIN wiki_chat_runs r ON r.id = c.run_id
+        WHERE c.incident_id = wiki_chat_incidents.id AND c.status = 'pending' AND r.status = 'active'
+      )`).bind(now),
+    env.WIKI_DB.prepare(`UPDATE wiki_chat_rescue_claims SET status = 'cancelled', updated_at = ?
+      WHERE status = 'pending' AND EXISTS (
+        SELECT 1 FROM wiki_chat_runs r WHERE r.id = wiki_chat_rescue_claims.run_id AND r.status = 'active'
+      )`).bind(now),
+    env.WIKI_DB.prepare(`UPDATE wiki_chat_items SET status = 'released'
+      WHERE status = 'pending' AND EXISTS (
+        SELECT 1 FROM wiki_chat_runs r WHERE r.id = wiki_chat_items.run_id AND r.status = 'active'
+      )`),
+    env.WIKI_DB.prepare("UPDATE wiki_chat_runs SET status = 'cancelled', updated_at = ? WHERE status = 'active'").bind(now)
+  ]);
+  const remaining = await env.WIKI_DB.prepare("SELECT COUNT(*) AS count FROM wiki_chat_runs WHERE status = 'active'").first();
+  return {
+    ok: true,
+    scope: 'global',
+    runIds: (snapshot.results || []).map(row => row.id),
+    cancelledRuns: Number(results?.[3]?.meta?.changes || 0),
+    releasedReservations: Number(results?.[2]?.meta?.changes || 0),
+    cancelledRescueClaims: Number(results?.[1]?.meta?.changes || 0),
+    restoredRescueIncidents: Number(results?.[0]?.meta?.changes || 0),
+    activeRunsRemaining: Number(remaining?.count || 0)
+  };
+}
 async function mlsChatReconcile(env, id) {
   // A visitor may have materialized one of the selected articles. Never replace it.
   await env.WIKI_DB.batch([
@@ -375,6 +456,10 @@ async function handleMlsChat(request, env, url) {
         ...(mlsAutooptEnabled(env)&&run?{autoopt:await mlsAutooptRunMetrics(env,run)}:{})});
     }
     if (route === '/next' && request.method === 'GET') return mlsChatJson(await mlsChatNext(env, url.searchParams.get('runId') || 'active'));
+    if (route === '/active-runs' && request.method === 'GET') {
+      const runs = await mlsChatActiveRuns(env);
+      return mlsChatJson({ok: true, standard: 'MLS R32', promptVersion: '32.0', scope: 'global', count: runs.length, runs});
+    }
     if (request.method !== 'POST') {
       const response = mlsChatJson({ok: false, error: 'Método no permitido.'}, 405);
       response.headers.set('Allow', 'POST');
@@ -393,17 +478,13 @@ async function handleMlsChat(request, env, url) {
         throw error;
       }
     }
+    if (route === '/cancel-all') {
+      if (body.confirm !== true) mlsChatError(400, 'Confirma la cancelación global.');
+      return mlsChatJson(await mlsChatCancelAll(env));
+    }
     if (route === '/cancel') {
       if (body.confirm !== true || typeof body.runId !== 'string') mlsChatError(400, 'Confirma la cancelación e indica runId.');
-      const now = new Date().toISOString();
-      await env.WIKI_DB.batch([
-        env.WIKI_DB.prepare(`UPDATE wiki_chat_incidents SET rescue_state = 'pending', runner_eligible = 1, updated_at = ?
-          WHERE rescue_state = 'chat_claimed' AND EXISTS (SELECT 1 FROM wiki_chat_rescue_claims c WHERE c.incident_id = wiki_chat_incidents.id AND c.run_id = ? AND c.status = 'pending')`).bind(now, body.runId),
-        env.WIKI_DB.prepare("UPDATE wiki_chat_rescue_claims SET status = 'cancelled', updated_at = ? WHERE run_id = ? AND status = 'pending'").bind(now, body.runId),
-        env.WIKI_DB.prepare("UPDATE wiki_chat_items SET status = 'released' WHERE run_id = ? AND status = 'pending'").bind(body.runId),
-        env.WIKI_DB.prepare("UPDATE wiki_chat_runs SET status = 'cancelled', updated_at = ? WHERE id = ? AND status = 'active'").bind(now, body.runId)
-      ]);
-      return mlsChatJson({run: await mlsChatRun(env, body.runId)});
+      return mlsChatJson({run: await mlsChatCancelRun(env, body.runId)});
     }
     mlsChatError(404, 'Ruta no encontrada.');
   } catch (error) {
