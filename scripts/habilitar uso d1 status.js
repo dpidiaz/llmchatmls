@@ -144,7 +144,7 @@ __name(mlsD1UsageStatus,"mlsD1UsageStatus");
 
   const quotaD1='    d1:{quotaExhausted:true,quotaType:normalizedQuotaType,resetAt},';
   if(!source.includes(quotaD1)) throw new Error('No se encontró bloque d1 de respuesta degradada.');
-  source=source.replace(quotaD1,'    d1:{quotaExhausted:true,quotaType:normalizedQuotaType,resetAt},\n    d1Usage:{...d1Usage,quotaExhausted:true,quotaType:normalizedQuotaType,state:"exhausted",resetAt,resetInSeconds:Math.max(0,Math.ceil((Date.parse(resetAt)-Date.now())/1000))},');
+  source=source.replace(quotaD1,'    d1:{quotaExhausted:true,quotaType:normalizedQuotaType,resetAt},\n    d1Usage:{...d1Usage,reason:"d1_daily_row_"+normalizedQuotaType+"_limit",quotaExhausted:true,quotaType:normalizedQuotaType,state:"exhausted",resetAt,resetInSeconds:Math.max(0,Math.ceil((Date.parse(resetAt)-Date.now())/1000))},');
 
   return source;
 }
