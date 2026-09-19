@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "MLS Editorial privado",
-    "version": "32.1.0-staging-v1",
+    "version": "32.0.6",
     "description": "Redacción y publicación validada del flujo normal MLS, más MLS GitHub Staging para producción editorial sin D1 durante staging."
   },
   "servers": [
@@ -1250,6 +1250,185 @@
           },
           "503": {
             "description": "Infraestructura staging no disponible; no hay fallback silencioso a D1."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/chat/active-runs": {
+      "get": {
+        "operationId": "continuarTodosMLS",
+        "summary": "Listar todos los lotes editoriales activos globales con trabajo pendiente para continuar desde cualquier chat.",
+        "x-openai-isConsequential": false,
+        "responses": {
+          "200": {
+            "description": "Inventario global de runs activos, sin crear ni reactivar lotes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "standard": {
+                      "type": "string"
+                    },
+                    "promptVersion": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "global"
+                      ]
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "runs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "runType": {
+                            "type": "string"
+                          },
+                          "requested": {
+                            "type": "integer"
+                          },
+                          "selected": {
+                            "type": "integer"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "published": {
+                            "type": "integer"
+                          },
+                          "preservedExisting": {
+                            "type": "integer"
+                          },
+                          "deferred": {
+                            "type": "integer"
+                          },
+                          "remaining": {
+                            "type": "integer"
+                          },
+                          "pending": {
+                            "type": "integer"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "standard",
+                    "promptVersion",
+                    "scope",
+                    "count",
+                    "runs"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
+          },
+          "503": {
+            "description": "Servicio editorial no configurado temporalmente."
+          }
+        }
+      }
+    },
+    "/api/wiki/editorial/chat/cancel-all": {
+      "post": {
+        "operationId": "cancelarTodosMLS",
+        "summary": "Cancelar globalmente todos los lotes editoriales activos; conserva lo publicado y libera solo trabajo pendiente.",
+        "x-openai-isConsequential": true,
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "confirm": {
+                    "type": "boolean",
+                    "enum": [
+                      true
+                    ]
+                  }
+                },
+                "required": [
+                  "confirm"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resultado idempotente de la cancelación global.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "global"
+                      ]
+                    },
+                    "cancelledRuns": {
+                      "type": "integer"
+                    },
+                    "releasedReservations": {
+                      "type": "integer"
+                    },
+                    "cancelledRescueClaims": {
+                      "type": "integer"
+                    },
+                    "restoredRescueIncidents": {
+                      "type": "integer"
+                    },
+                    "activeRunsRemaining": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "scope",
+                    "cancelledRuns",
+                    "releasedReservations",
+                    "cancelledRescueClaims",
+                    "restoredRescueIncidents",
+                    "activeRunsRemaining"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Falta confirmación explícita."
+          },
+          "401": {
+            "description": "Clave ausente o incorrecta."
           }
         }
       }
