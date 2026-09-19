@@ -142,33 +142,39 @@ async function mlsChatCancelRun(env, runId) {
 }
 async function mlsChatCancelAll(env) {
   const now = new Date().toISOString();
-  const snapshot = await env.WIKI_DB.prepare("SELECT id FROM wiki_chat_runs WHERE status = 'active' ORDER BY created_at ASC, id ASC").all();
+  // The marker exists only inside this D1 batch. It identifies exactly the
+  // runs that were active when the transaction began, so a new run created
+  // after this cancellation is not accidentally released by follow-up SQL.
+  const marker = 'cancel-all:' + crypto.randomUUID();
   const results = await env.WIKI_DB.batch([
+    env.WIKI_DB.prepare("UPDATE wiki_chat_runs SET status = 'cancelled', updated_at = ? WHERE status = 'active'").bind(marker),
     env.WIKI_DB.prepare(`UPDATE wiki_chat_incidents SET rescue_state = 'pending', runner_eligible = 1, updated_at = ?
       WHERE rescue_state = 'chat_claimed' AND EXISTS (
         SELECT 1 FROM wiki_chat_rescue_claims c
         JOIN wiki_chat_runs r ON r.id = c.run_id
-        WHERE c.incident_id = wiki_chat_incidents.id AND c.status = 'pending' AND r.status = 'active'
-      )`).bind(now),
+        WHERE c.incident_id = wiki_chat_incidents.id AND c.status = 'pending'
+          AND r.status = 'cancelled' AND r.updated_at = ?
+      )`).bind(now, marker),
     env.WIKI_DB.prepare(`UPDATE wiki_chat_rescue_claims SET status = 'cancelled', updated_at = ?
       WHERE status = 'pending' AND EXISTS (
-        SELECT 1 FROM wiki_chat_runs r WHERE r.id = wiki_chat_rescue_claims.run_id AND r.status = 'active'
-      )`).bind(now),
+        SELECT 1 FROM wiki_chat_runs r WHERE r.id = wiki_chat_rescue_claims.run_id
+          AND r.status = 'cancelled' AND r.updated_at = ?
+      )`).bind(now, marker),
     env.WIKI_DB.prepare(`UPDATE wiki_chat_items SET status = 'released'
       WHERE status = 'pending' AND EXISTS (
-        SELECT 1 FROM wiki_chat_runs r WHERE r.id = wiki_chat_items.run_id AND r.status = 'active'
-      )`),
-    env.WIKI_DB.prepare("UPDATE wiki_chat_runs SET status = 'cancelled', updated_at = ? WHERE status = 'active'").bind(now)
+        SELECT 1 FROM wiki_chat_runs r WHERE r.id = wiki_chat_items.run_id
+          AND r.status = 'cancelled' AND r.updated_at = ?
+      )`).bind(marker),
+    env.WIKI_DB.prepare("UPDATE wiki_chat_runs SET updated_at = ? WHERE status = 'cancelled' AND updated_at = ?").bind(now, marker)
   ]);
   const remaining = await env.WIKI_DB.prepare("SELECT COUNT(*) AS count FROM wiki_chat_runs WHERE status = 'active'").first();
   return {
     ok: true,
     scope: 'global',
-    runIds: (snapshot.results || []).map(row => row.id),
-    cancelledRuns: Number(results?.[3]?.meta?.changes || 0),
-    releasedReservations: Number(results?.[2]?.meta?.changes || 0),
-    cancelledRescueClaims: Number(results?.[1]?.meta?.changes || 0),
-    restoredRescueIncidents: Number(results?.[0]?.meta?.changes || 0),
+    cancelledRuns: Number(results?.[0]?.meta?.changes || 0),
+    releasedReservations: Number(results?.[3]?.meta?.changes || 0),
+    cancelledRescueClaims: Number(results?.[2]?.meta?.changes || 0),
+    restoredRescueIncidents: Number(results?.[1]?.meta?.changes || 0),
     activeRunsRemaining: Number(remaining?.count || 0)
   };
 }
