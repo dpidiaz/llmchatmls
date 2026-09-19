@@ -73,19 +73,21 @@ async function mlsD1UsageStatus(env){
     return {...mlsD1AnalyticsCache.value,...mlsD1UsageReset(now),cached:true};
   }
   try{
-    const query=`query MLS_D1_USAGE($accountTag: string!, $start: Date!, $end: Date!) {
-      viewer {
-        accounts(filter: { accountTag: $accountTag }) {
-          d1AnalyticsAdaptiveGroups(
-            limit: 10000
-            filter: { date_geq: $start, date_leq: $end }
-          ) {
-            sum { rowsRead rowsWritten }
-            dimensions { date databaseId }
-          }
-        }
-      }
-    }`;
+    const query=[
+      "query MLS_D1_USAGE($accountTag: string!, $start: Date!, $end: Date!) {",
+      "  viewer {",
+      "    accounts(filter: { accountTag: $accountTag }) {",
+      "      d1AnalyticsAdaptiveGroups(",
+      "        limit: 10000",
+      "        filter: { date_geq: $start, date_leq: $end }",
+      "      ) {",
+      "        sum { rowsRead rowsWritten }",
+      "        dimensions { date databaseId }",
+      "      }",
+      "    }",
+      "  }",
+      "}"
+    ].join("\\n");
     const response=await fetch("https://api.cloudflare.com/client/v4/graphql",{
       method:"POST",
       headers:{"authorization":"Bearer "+token,"content-type":"application/json"},
