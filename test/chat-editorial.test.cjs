@@ -186,7 +186,8 @@ test('MLS cancelar todos cancels all active runs, preserves published work and i
   const result=await s.request('cancel-all',{confirm:true});
   assert.equal(result.status,200);assert.equal(result.data.scope,'global');
   assert.equal(result.data.cancelledRuns,2);assert.equal(result.data.activeRunsRemaining,0);
-  assert.deepEqual(result.data.runIds.sort(),[a.id,b.id].sort());
+  assert.equal((await s.request('status?runId='+a.id)).data.run.status,'cancelled');
+  assert.equal((await s.request('status?runId='+b.id)).data.run.status,'cancelled');
   assert.equal(s.db.prepare("SELECT COUNT(*) AS n FROM wiki_articles").get().n,1);
   assert.equal(s.db.prepare("SELECT status FROM wiki_chat_items WHERE run_id=? AND status='published'").get(a.id).status,'published');
   assert.equal(s.db.prepare("SELECT COUNT(*) AS n FROM wiki_chat_items WHERE run_id IN (?,?) AND status='released'").get(a.id,b.id).n,4);
