@@ -44,3 +44,48 @@ test('instalador parchea el worker real y sirve status directamente',()=>{
   assert.doesNotMatch(once,/statusUrl\.pathname = "\/status\.html"/);
   assert.equal(installer.patchWorker(once,html),once);
 });
+
+test('status muestra uso D1 y countdown del reset en ambos niveles',()=>{
+  assert.match(html,/Cloudflare D1 hoy/);
+  assert.match(html,/d1ReadMain/);
+  assert.match(html,/d1WriteMain/);
+  assert.match(html,/d1Countdown/);
+  assert.match(html,/setInterval\(updateD1Countdown,1000\)/);
+  assert.match(html,/s\.d1Usage/);
+  assert.match(html,/statusRes\.status===503&&s\.degraded/);
+});
+
+test('instalador de uso D1 agrega GraphQL oficial sin consultar D1 para medir D1',()=>{
+  const usageInstaller=require('../scripts/habilitar uso d1 status.js');
+  const sample=[
+    'async function getWikiStatusR32(env) {',
+    '  return {',
+    '    nextFIFO: nextFifo ?? null,',
+    '    cloudflare: { ...budget, onDemandTargetPercent: 90 },',
+    '  };',
+    '}',
+    'async function d1QuotaResponse(env,url) {',
+    '  const resetAt=nextUtcResetIso();',
+    '  const base={',
+    '    d1:{quotaExhausted:true,resetAt},',
+    '  };',
+    '}'
+  ].join('\n');
+  const patched=usageInstaller.patchD1UsageStatus(sample);
+  assert.match(patched,/MLS D1 USAGE STATUS 1\.0/);
+  assert.match(patched,/d1AnalyticsAdaptiveGroups/);
+  assert.match(patched,/rowsRead rowsWritten/);
+  assert.match(patched,/D1_ANALYTICS_TOKEN/);
+  assert.match(patched,/D1_ANALYTICS_ACCOUNT_ID/);
+  assert.match(patched,/readLimit:MLS_D1_FREE_READ_LIMIT/);
+  assert.match(patched,/writeLimit:MLS_D1_FREE_WRITE_LIMIT/);
+  assert.match(patched,/d1Usage: await mlsD1UsageStatus\(env\)/);
+  assert.equal(usageInstaller.patchD1UsageStatus(patched),patched);
+});
+
+test('predeploy instala métricas D1 después de la degradación por cuota',()=>{
+  const packageJson=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
+  const predeploy=packageJson.scripts.predeploy;
+  assert.ok(predeploy.indexOf('habilitar uso d1 status.js')>predeploy.indexOf('habilitar degradacion cuota d1.js'));
+  assert.ok(predeploy.indexOf('habilitar uso d1 status.js')<predeploy.indexOf('generar snapshot staging.js'));
+});
