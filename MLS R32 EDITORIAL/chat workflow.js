@@ -91,44 +91,6 @@ async function mlsChatRun(env, id) {
     remaining: results.filter(x => x.status === 'pending').length,
     pending: results.filter(x => x.status === 'pending').length, entries: results};
 }
-async function mlsChatActiveRuns(env) {
-  const now = new Date().toISOString();
-  // Normalize stale active runs that no longer own pending work. This never
-  // revives cancelled runs and never creates a new run.
-  await env.WIKI_DB.prepare(`UPDATE wiki_chat_runs SET status = 'complete', updated_at = ?
-    WHERE status = 'active' AND NOT EXISTS (
-      SELECT 1 FROM wiki_chat_items i WHERE i.run_id = wiki_chat_runs.id AND i.status = 'pending'
-    )`).bind(now).run();
-  const {results} = await env.WIKI_DB.prepare(`SELECT r.id, r.requested, r.created_at, r.updated_at,
-      COALESCE(m.run_type, 'normal') AS run_type,
-      COUNT(i.code) AS selected,
-      SUM(CASE WHEN i.status = 'published' THEN 1 ELSE 0 END) AS published,
-      SUM(CASE WHEN i.status = 'external' THEN 1 ELSE 0 END) AS external_count,
-      SUM(CASE WHEN i.status = 'deferred' THEN 1 ELSE 0 END) AS deferred,
-      SUM(CASE WHEN i.status = 'pending' THEN 1 ELSE 0 END) AS pending
-    FROM wiki_chat_runs r
-    LEFT JOIN wiki_chat_run_meta m ON m.run_id = r.id
-    LEFT JOIN wiki_chat_items i ON i.run_id = r.id
-    WHERE r.status = 'active'
-    GROUP BY r.id, r.requested, r.created_at, r.updated_at, m.run_type
-    HAVING SUM(CASE WHEN i.status = 'pending' THEN 1 ELSE 0 END) > 0
-    ORDER BY r.created_at ASC, r.id ASC`).all();
-  return results.map(row => ({
-    id: row.id,
-    runType: row.run_type || 'normal',
-    requested: Number(row.requested || 0),
-    selected: Number(row.selected || 0),
-    status: 'active',
-    published: Number(row.published || 0),
-    alreadyPublishedElsewhere: Number(row.external_count || 0),
-    preservedExisting: Number(row.external_count || 0),
-    deferred: Number(row.deferred || 0),
-    remaining: Number(row.pending || 0),
-    pending: Number(row.pending || 0),
-    createdAt: row.created_at,
-    updatedAt: row.updated_at
-  }));
-}
 async function mlsChatCancelRun(env, runId) {
   const now = new Date().toISOString();
   await env.WIKI_DB.batch([
@@ -462,10 +424,6 @@ async function handleMlsChat(request, env, url) {
         ...(mlsAutooptEnabled(env)&&run?{autoopt:await mlsAutooptRunMetrics(env,run)}:{})});
     }
     if (route === '/next' && request.method === 'GET') return mlsChatJson(await mlsChatNext(env, url.searchParams.get('runId') || 'active'));
-    if (route === '/active-runs' && request.method === 'GET') {
-      const runs = await mlsChatActiveRuns(env);
-      return mlsChatJson({ok: true, standard: 'MLS R32', promptVersion: '32.0', scope: 'global', count: runs.length, runs});
-    }
     if (request.method !== 'POST') {
       const response = mlsChatJson({ok: false, error: 'Método no permitido.'}, 405);
       response.headers.set('Allow', 'POST');
