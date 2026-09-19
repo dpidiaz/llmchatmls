@@ -36,8 +36,9 @@ async function verify() {
     headers:{authorization:'Bearer ' + editorialKey}
   });
   const diagnostic = await diagnosticResponse.json().catch(()=>null);
-  if (diagnosticResponse.status === 503 && diagnostic?.reason === 'd1_daily_row_read_limit') {
-    console.log('::warning::Verificación FIFO diferida: Cloudflare D1 agotó el límite diario gratuito de rows read.');
+  const d1QuotaReason = /^d1_daily_row_(read|write)_limit$/.test(String(diagnostic?.reason || ''));
+  if (diagnosticResponse.status === 503 && d1QuotaReason) {
+    console.log('::warning::Verificación FIFO diferida: Cloudflare D1 agotó un límite diario gratuito de rows.');
     console.log('MLS_FIFO_DIAGNOSTIC_DEFERRED=' + JSON.stringify(diagnostic));
     return;
   }

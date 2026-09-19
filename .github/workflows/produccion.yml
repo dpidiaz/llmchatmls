@@ -23,6 +23,22 @@ jobs:
       - run: npm run predeploy
       - run: node --test test/deploy-contract.test.cjs
       - run: npm run check
+      - name: Sincronizar credenciales D1 Analytics
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+        shell: bash
+        run: |
+          if [ -n "$D1_ANALYTICS_TOKEN" ] && [ -n "$D1_ANALYTICS_ACCOUNT_ID" ]; then
+            printf '%s' "$D1_ANALYTICS_TOKEN" | npx wrangler secret put D1_ANALYTICS_TOKEN
+            printf '%s' "$D1_ANALYTICS_ACCOUNT_ID" | npx wrangler secret put D1_ANALYTICS_ACCOUNT_ID
+            echo 'Credenciales D1 Analytics de solo lectura sincronizadas.'
+          else
+            echo '::warning::D1 Analytics no está configurado: /status mantendrá el countdown pero el consumo oficial aparecerá como no disponible.'
+          fi
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          D1_ANALYTICS_TOKEN: ${{ secrets.D1_ANALYTICS_TOKEN }}
+          D1_ANALYTICS_ACCOUNT_ID: ${{ secrets.D1_ANALYTICS_ACCOUNT_ID }}
+
       - name: Desplegar en produccion
         if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         run: npm run deploy
@@ -56,9 +72,9 @@ jobs:
             echo '::warning::MLS Staging aún no tiene credenciales GitHub en Cloudflare; producción quedó desplegada y el snapshot se habilitará tras el bootstrap.'
             exit 0
           fi
-          if [ "$http_status" = "503" ] && printf '%s' "$body" | grep -qi "daily row read limit"; then
+          if [ "$http_status" = "503" ] && printf '%s' "$body" | grep -Eqi "daily row (read|write) limit"; then
             printf '%s\n' "$body"
-            echo '::warning::Snapshot MLS Staging diferido: Cloudflare D1 agotó el límite diario gratuito de rows read. El deploy de producción sí quedó activo; vuelva a ejecutar el workflow después del reset UTC.'
+            echo '::warning::Snapshot MLS Staging diferido: Cloudflare D1 agotó un límite diario gratuito de rows. El deploy de producción sí quedó activo; vuelva a ejecutar el workflow después del reset UTC.'
             exit 0
           fi
           printf '%s\n' "$body"

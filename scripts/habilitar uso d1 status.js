@@ -3,7 +3,7 @@
 const fs=require('node:fs');
 
 const TARGET='src/index.js';
-const MARKER='// MLS D1 USAGE STATUS 1.0';
+const MARKER='// MLS D1 USAGE STATUS 1.1';
 
 function patchD1UsageStatus(source){
   source=String(source);
@@ -11,7 +11,7 @@ function patchD1UsageStatus(source){
 
   const statusMarker='async function getWikiStatusR32(env) {';
   if(!source.includes(statusMarker)) throw new Error('No se encontró getWikiStatusR32 para instalar métricas D1.');
-  if(!source.includes('async function d1QuotaResponse(env,url) {')) throw new Error('Instalar primero la degradación por cuota D1.');
+  if(!source.includes('async function d1QuotaResponse(env,url,quotaType="read") {')) throw new Error('Instalar primero la degradación por cuota D1 1.2.');
 
   const helper=`
 ${MARKER}
@@ -142,9 +142,9 @@ __name(mlsD1UsageStatus,"mlsD1UsageStatus");
   if(!source.includes(quotaAnchor)) throw new Error('No se encontró d1QuotaResponse para adjuntar métricas D1.');
   source=source.replace(quotaAnchor,'  const resetAt=nextUtcResetIso();\n  const d1Usage=await mlsD1UsageStatus(env);\n  const base={');
 
-  const quotaD1='    d1:{quotaExhausted:true,resetAt},';
+  const quotaD1='    d1:{quotaExhausted:true,quotaType:normalizedQuotaType,resetAt},';
   if(!source.includes(quotaD1)) throw new Error('No se encontró bloque d1 de respuesta degradada.');
-  source=source.replace(quotaD1,'    d1:{quotaExhausted:true,resetAt},\n    d1Usage:{...d1Usage,quotaExhausted:true,state:"exhausted",resetAt,resetInSeconds:Math.max(0,Math.ceil((Date.parse(resetAt)-Date.now())/1000))},');
+  source=source.replace(quotaD1,'    d1:{quotaExhausted:true,quotaType:normalizedQuotaType,resetAt},\n    d1Usage:{...d1Usage,reason:"d1_daily_row_"+normalizedQuotaType+"_limit",quotaExhausted:true,quotaType:normalizedQuotaType,state:"exhausted",resetAt,resetInSeconds:Math.max(0,Math.ceil((Date.parse(resetAt)-Date.now())/1000))},');
 
   return source;
 }

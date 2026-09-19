@@ -365,10 +365,12 @@ test('D1 QUOTA — final installer degrades wiki API to JSON instead of Worker 1
     '}'
   ].join('\n');
   const patched=installer.patchD1QuotaGuard(sample);
-  assert.match(patched,/function isD1DailyReadQuotaError/);
-  assert.match(patched,/reason:"d1_daily_row_read_limit"/);
+  assert.match(patched,/function d1DailyQuotaType/);
+  assert.match(patched,/daily row write limit/);
+  assert.match(patched,/daily row read limit/);
+  assert.match(patched,/reason:"d1_daily_row_"\+normalizedQuotaType\+"_limit"/);
   assert.match(patched,/countsAvailable:false/);
-  assert.match(patched,/if\(isD1DailyReadQuotaError\(error\)\) return d1QuotaResponse/);
+  assert.match(patched,/if\(quotaType\) return d1QuotaResponse\(env,url,quotaType\)/);
   assert.equal(installer.patchD1QuotaGuard(patched),patched);
   const packageJson=JSON.parse(fs.readFileSync(path.join(process.cwd(),'package.json'),'utf8'));
   const predeploy=packageJson.scripts.predeploy;
@@ -392,22 +394,23 @@ test('D1 QUOTA — final installer also degrades authenticated chat diagnostics'
     "}"
   ].join('\n');
   const patched=installer.patchD1QuotaGuard(sample);
-  assert.match(patched,/reason:'d1_daily_row_read_limit'/);
+  assert.match(patched,/reason:'d1_daily_row_'\+quotaType\+'_limit'/);
+  assert.match(patched,/quotaType,/);
   assert.match(patched,/retryAt:nextUtcResetIso\(\)/);
-  assert.match(patched,/isD1DailyReadQuotaError\(error\)/);
+  assert.match(patched,/d1DailyQuotaType\(error\)/);
 });
 
 test('D1 QUOTA — deployment verifier accepts only explicit D1 quota degradation', () => {
   const verify=fs.readFileSync(path.join(process.cwd(),'scripts','verify-chat-deployment.cjs'),'utf8');
   assert.match(verify,/diagnosticResponse\.status === 503/);
-  assert.match(verify,/diagnostic\?\.reason === 'd1_daily_row_read_limit'/);
+  assert.match(verify,/\^d1_daily_row_\(read\|write\)_limit\$/);
   assert.match(verify,/Verificación FIFO diferida/);
   assert.match(verify,/must return 200 unless D1 quota is explicitly exhausted/);
 });
 
-test('D1 QUOTA — deploy snapshot treats exhausted read quota as deferred warning', () => {
+test('D1 QUOTA — deploy snapshot treats exhausted read or write quota as deferred warning', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
-  assert.match(workflow,/daily row read limit/);
+  assert.match(workflow,/daily row \(read\|write\) limit/);
   assert.match(workflow,/Snapshot MLS Staging diferido/);
   assert.match(workflow,/deploy de producción sí quedó activo/);
 });
