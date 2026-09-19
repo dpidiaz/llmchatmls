@@ -70,7 +70,7 @@ test('instalador de uso D1 agrega GraphQL oficial sin consultar D1 para medir D1
     '    d1:{quotaExhausted:true,resetAt},',
     '  };',
     '}'
-  ].join('\\n');
+  ].join('\n');
   const patched=usageInstaller.patchD1UsageStatus(sample);
   assert.match(patched,/MLS D1 USAGE STATUS 1\.0/);
   assert.match(patched,/d1AnalyticsAdaptiveGroups/);
