@@ -159,6 +159,65 @@ test('cancel releases only its pending reservations',async()=>{
   assert.equal((await s.request('status?runId='+b.id)).data.run.remaining,10);
   assert.equal(s.db.prepare("SELECT COUNT(*) AS n FROM wiki_chat_items WHERE run_id=? AND status='released'").get(a.id).n,10);
 });
+test('MLS continuar todos lists every global active run without creating or reviving runs',async()=>{
+  const s=setup();
+  const a=(await s.request('start',{command:'MLS siguientes 3',requestId:'continue-all-request-01'})).data.run;
+  const b=(await s.request('start',{command:'MLS siguientes 4',requestId:'continue-all-request-02'})).data.run;
+  const cancelled=(await s.request('start',{command:'MLS siguientes 2',requestId:'continue-all-request-03'})).data.run;
+  await s.request('cancel',{runId:cancelled.id,confirm:true});
+  const before=s.db.prepare('SELECT COUNT(*) AS n FROM wiki_chat_runs').get().n;
+  const all=await s.request('active-runs');
+  assert.equal(all.status,200);assert.equal(all.data.scope,'global');assert.equal(all.data.count,2);
+  assert.deepEqual(all.data.runs.map(x=>x.id).sort(),[a.id,b.id].sort());
+  assert.ok(all.data.runs.every(x=>x.status==='active'&&x.pending>0));
+  assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM wiki_chat_runs').get().n,before);
+  assert.equal((await s.request('status?runId='+cancelled.id)).data.run.status,'cancelled');
+});
+test('MLS cancelar todos cancels all active runs, preserves published work and is idempotent',async()=>{
+  const s=setup();
+  const a=(await s.request('start',{command:'MLS siguientes 3',requestId:'cancel-all-request-01'})).data.run;
+  const b=(await s.request('start',{command:'MLS siguientes 2',requestId:'cancel-all-request-02'})).data.run;
+  const old=(await s.request('start',{command:'MLS siguientes 1',requestId:'cancel-all-request-03'})).data.run;
+  await s.request('cancel',{runId:old.id,confirm:true});
+  const draft=(await s.draft(a.id)).data;
+  const published=await s.request('publish',{runId:a.id,draftId:draft.draftId});
+  assert.equal(published.data.published,true);
+  assert.equal((await s.request('cancel-all',{confirm:false})).status,400);
+  const result=await s.request('cancel-all',{confirm:true});
+  assert.equal(result.status,200);assert.equal(result.data.scope,'global');
+  assert.equal(result.data.cancelledRuns,2);assert.equal(result.data.activeRunsRemaining,0);
+  assert.deepEqual(result.data.runIds.sort(),[a.id,b.id].sort());
+  assert.equal(s.db.prepare("SELECT COUNT(*) AS n FROM wiki_articles").get().n,1);
+  assert.equal(s.db.prepare("SELECT status FROM wiki_chat_items WHERE run_id=? AND status='published'").get(a.id).status,'published');
+  assert.equal(s.db.prepare("SELECT COUNT(*) AS n FROM wiki_chat_items WHERE run_id IN (?,?) AND status='released'").get(a.id,b.id).n,4);
+  assert.equal((await s.request('status?runId='+old.id)).data.run.status,'cancelled');
+  const repeat=await s.request('cancel-all',{confirm:true});
+  assert.equal(repeat.data.cancelledRuns,0);assert.equal(repeat.data.releasedReservations,0);assert.equal(repeat.data.activeRunsRemaining,0);
+});
+test('MLS cancelar todos releases rescue claims back to the deferred pool',async()=>{
+  const s=setup();
+  const original=(await s.request('start',{command:'MLS siguientes 1',requestId:'cancel-all-rescue-source'})).data.run;
+  for(let n=0;n<3;n++){
+    const next=(await s.request('next?runId='+original.id)).data;
+    await s.request('validate',{runId:original.id,contextId:next.contextId,code:next.context.target.code,articleMarkdown:'short',referenceCodes:fixture.calibration.referenceCodes,editorialReview:'Fixture review verifies grammar, examples, headings and corpus calibration.'});
+  }
+  const rescue=(await s.request('start',{command:'MLS rescate siguientes 1',requestId:'cancel-all-rescue-run'})).data.run;
+  assert.equal(s.db.prepare("SELECT rescue_state FROM wiki_chat_incidents").get().rescue_state,'chat_claimed');
+  const result=await s.request('cancel-all',{confirm:true});
+  assert.equal(result.data.cancelledRuns,1);assert.equal(result.data.cancelledRescueClaims,1);assert.equal(result.data.restoredRescueIncidents,1);
+  assert.equal((await s.request('status?runId='+rescue.id)).data.run.status,'cancelled');
+  assert.equal(s.db.prepare("SELECT rescue_state,runner_eligible FROM wiki_chat_incidents").get().rescue_state,'pending');
+  assert.equal(s.db.prepare("SELECT runner_eligible FROM wiki_chat_incidents").get().runner_eligible,1);
+  assert.equal(s.db.prepare("SELECT status FROM wiki_chat_rescue_claims").get().status,'cancelled');
+});
+test('global batch controls are exposed to the private GPT Actions schema and instructions',async()=>{
+  const s=setup();const schema=await s.request('openapi.json');
+  assert.equal(schema.data.paths['/api/wiki/editorial/chat/active-runs'].get.operationId,'continuarTodosMLS');
+  assert.equal(schema.data.paths['/api/wiki/editorial/chat/cancel-all'].post.operationId,'cancelarTodosMLS');
+  const built=buildChatRuntime(root);
+  assert.match(built,/MLS continuar todos/);assert.match(built,/MLS cancelar todos/);
+  assert.match(built,/continuarTodosMLS/);assert.match(built,/cancelarTodosMLS/);
+});
 test('two rescue runners atomically claim different deferred incidents',async()=>{
   const s=setup();const run=(await s.start(2)).data.run;
   for(let item=0;item<2;item++) for(let n=0;n<3;n++) {
