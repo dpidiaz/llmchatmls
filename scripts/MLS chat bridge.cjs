@@ -40,11 +40,6 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     method: 'POST',
     pathname: '/api/wiki/editorial/staging/integrate',
     input: 'body'
-  },
-  cancelarTodosMLS: {
-    method: 'POST',
-    pathname: '/api/wiki/editorial/chat/cancel-all',
-    input: 'body'
   }
 });
 
