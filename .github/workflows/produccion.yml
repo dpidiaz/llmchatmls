@@ -2,9 +2,6 @@ name: Desplegar MLS en produccion
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -27,12 +24,12 @@ jobs:
       - run: node --test test/deploy-contract.test.cjs
       - run: npm run check
       - name: Desplegar en produccion
-        if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-now]'))) }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         run: npm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       - name: Sincronizar credenciales D1 Analytics
-        if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-now]'))) }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         shell: bash
         run: |
           if [ -n "$D1_ANALYTICS_TOKEN" ] && [ -n "$D1_ANALYTICS_ACCOUNT_ID" ]; then
@@ -48,7 +45,7 @@ jobs:
           D1_ANALYTICS_ACCOUNT_ID: ${{ secrets.D1_ANALYTICS_ACCOUNT_ID }}
 
       - name: Crear snapshot MLS Staging del deploy
-        if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-now]'))) }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         shell: bash
         run: |
           set +e
@@ -86,7 +83,7 @@ jobs:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
 
       - name: Verificar Action editorial sin crear lotes
-        if: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[deploy-now]'))) }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
         run: node scripts/verify-chat-deployment.cjs
         env:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
