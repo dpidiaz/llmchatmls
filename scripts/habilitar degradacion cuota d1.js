@@ -3,7 +3,7 @@
 const fs=require('node:fs');
 
 const TARGET='src/index.js';
-const MARKER='// MLS D1 QUOTA GRACEFUL DEGRADATION 1.1';
+const MARKER='// MLS D1 QUOTA GRACEFUL DEGRADATION 1.2';
 
 function patchD1QuotaGuard(source){
   source=String(source);
@@ -14,20 +14,26 @@ function patchD1QuotaGuard(source){
 
   const helper=`
 ${MARKER}
-function isD1DailyReadQuotaError(error) {
+function d1DailyQuotaType(error) {
   const message=String(error?.message||error||'').toLowerCase();
-  return message.includes("exceeded d1's free tier daily row read limit") ||
+  if(message.includes("exceeded d1's free tier daily row write limit") ||
+    message.includes('d1 free tier daily row write limit') ||
+    message.includes('daily row write limit')) return "write";
+  if(message.includes("exceeded d1's free tier daily row read limit") ||
     message.includes('d1 free tier daily row read limit') ||
-    message.includes('daily row read limit');
+    message.includes('daily row read limit')) return "read";
+  return null;
 }
-__name(isD1DailyReadQuotaError, "isD1DailyReadQuotaError");
+__name(d1DailyQuotaType, "d1DailyQuotaType");
 function nextUtcResetIso(now=new Date()) {
   return new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1)).toISOString();
 }
 __name(nextUtcResetIso, "nextUtcResetIso");
-async function d1QuotaResponse(env,url) {
+async function d1QuotaResponse(env,url,quotaType="read") {
   let budget=null;
   try{budget=await wikiStore(env).getCloudflareBudget();}catch{}
+  const normalizedQuotaType=quotaType==="write"?"write":"read";
+  const quotaLabel=normalizedQuotaType==="write"?"rows written":"rows read";
   const resetAt=nextUtcResetIso();
   const base={
     ok:false,
@@ -36,8 +42,8 @@ async function d1QuotaResponse(env,url) {
     promptVersion:WIKI_PROMPT_VERSION,
     totalEntries:WIKI_TOTAL_ENTRIES,
     degraded:true,
-    reason:"d1_daily_row_read_limit",
-    d1:{quotaExhausted:true,resetAt},
+    reason:"d1_daily_row_"+normalizedQuotaType+"_limit",
+    d1:{quotaExhausted:true,quotaType:normalizedQuotaType,resetAt},
     cloudflare:budget?{...budget,onDemandTargetPercent:90}:null,
     strictZeroCost:true,
     retryAt:resetAt
@@ -45,7 +51,7 @@ async function d1QuotaResponse(env,url) {
   if(url.pathname==="/api/wiki/status"){
     return Response.json({...base,
       status:"degraded",
-      message:"Cloudflare D1 agotó el límite diario gratuito de rows read. El status completo volverá después del reset UTC.",
+      message:"Cloudflare D1 agotó el límite diario gratuito de "+quotaLabel+". El status completo volverá después del reset UTC.",
       countsAvailable:false,
       languages:WIKI_LANGUAGE_ORDER.map(language=>({slug:language.slug,name:language.name,total:language.total,published:null,failed:null,processing:null,status:"unknown"}))
     },{status:503,headers:{"cache-control":"no-store","retry-after":"3600"}});
@@ -60,7 +66,8 @@ __name(d1QuotaResponse, "d1QuotaResponse");
   try{
     await ensureWikiDb(env);
   }catch(error){
-    if(isD1DailyReadQuotaError(error)) return d1QuotaResponse(env,url);
+    const quotaType=d1DailyQuotaType(error);
+    if(quotaType) return d1QuotaResponse(env,url,quotaType);
     throw error;
   }`;
 
@@ -70,11 +77,13 @@ __name(d1QuotaResponse, "d1QuotaResponse");
   const match=source.match(chatFailurePattern);
   if(!match) throw new Error('No se encontró el marcador mls-chat-failure para instalar degradación por cuota.');
   const indent=match[1]||'    ';
-  const quotaBranch=`${indent}if (isD1DailyReadQuotaError(error)) {
+  const quotaBranch=`${indent}const quotaType=d1DailyQuotaType(error);
+${indent}if (quotaType) {
 ${indent}  return mlsChatJson({
 ${indent}    ok:false,
 ${indent}    degraded:true,
-${indent}    reason:'d1_daily_row_read_limit',
+${indent}    reason:'d1_daily_row_'+quotaType+'_limit',
+${indent}    quotaType,
 ${indent}    error:'D1 no está disponible temporalmente por cuota diaria.',
 ${indent}    retryAt:nextUtcResetIso()
 ${indent}  },503);
