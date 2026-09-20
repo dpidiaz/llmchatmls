@@ -47,7 +47,7 @@ test('reanudar requiere intención efímera y explícita',()=>{
 
 test('navegación normal conserva el contrato de comenzar arriba',()=>{
   const source=continuityReaderSource();
-  assert.match(source,/if\(entryChanged&&!resumeRequested\)scrollPageToAbsoluteTop\(\)/);
+  assert.match(source,/if\(entryChanged\)\{cancelSpeech\(\);if\(!resumeRequested\)scrollPageToAbsoluteTop\(\);\}/);
   assert.match(source,/else if\(entryChanged\)\{\s*scrollPageToAbsoluteTop\(\);\s*requestAnimationFrame\(scrollPageToAbsoluteTop\);/);
   assert.match(source,/href="#entry=\$\{escAttr\(prev\.code\)\}"/);
   assert.match(source,/href="#entry=\$\{escAttr\(next\.code\)\}"/);
