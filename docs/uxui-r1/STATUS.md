@@ -11,7 +11,7 @@
 
 ### Chat 0 — Coordinator
 Status: ACTIVE
-Current: Wave 4 — Accessibility & Responsive corrective pass
+Current: Wave 5 — final integrated certification
 Branch: uxui-r1-integration
 Blockers: none
 
@@ -65,12 +65,16 @@ Delivered: humanized Virtuoso/Profesor IA UX, Visual Foundation consumption, foc
 Dependencies: next checkpoint must start from current integration
 
 ### Chat G — Accessibility & Responsive QA
-Status: WAVE 4 RELEASED — CORRECTIVE PASS AUTHORIZED
+Status: COMPLETE — WAVE 4 INTEGRATED
 Branch: uxui-r1-accessibility
 PR: #107
 Baseline commit: 90c8f9ba6017ccf29407d59e3051700e33331671
 Baseline counts: PASS 18 / FAIL 5 / MANUAL 7 / BLOCKED 1 / N/A 1
-Dependencies: A–F integrated; rerun baseline, compare, perform manual QA, then correct confirmed regressions
+PR: #109
+Integrated commit: 8c24fe792b3d93d9655edef664ae733ae3782bc7
+Final baseline: PASS 23 / FAIL 0 / MANUAL 7 / BLOCKED 1 historical / N/A 1
+Delivered: skip link, global focus-visible, 44px touch targets, reader responsive breakpoints, reduced-motion support, Professor IA focus restoration
+Dependencies: none; Wave 5 final certification pending
 
 ## Formato obligatorio de checkpoint
 Cada worker debe reportar:
