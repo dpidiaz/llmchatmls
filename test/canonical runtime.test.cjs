@@ -34,3 +34,13 @@ test('reader is GitHub-canonical-first and has no D1/materialization read fallba
   assert.doesNotMatch(reader, /e\.plain/);
   assert.doesNotMatch(reader, /easy\.lead/);
 });
+
+
+test('canonical runtime predeploy does not reactivate D1-only regeneration', () => {
+  const fs = require('node:fs');
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const reader = fs.readFileSync('MLS R32 OVERLAY/reader.js', 'utf8');
+  assert.doesNotMatch(pkg.scripts.predeploy, /regenerar entradas\.js/);
+  assert.doesNotMatch(reader, /\/api\/wiki\/regenerate\//);
+  assert.doesNotMatch(reader, /regenerateBtn/);
+});
