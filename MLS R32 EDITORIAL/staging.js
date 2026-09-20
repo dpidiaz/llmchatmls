@@ -15,6 +15,10 @@ const MLS_STAGING_MANIFEST_CACHE = new Map();
 const MLS_STAGING_TARGET_CACHE = new Map();
 const MLS_STAGING_TARGET_SHARD_CACHE = new Map();
 const MLS_STAGING_REFERENCE_CACHE = new Map();
+const MLS_CANONICAL_ROOT = 'content';
+const MLS_CANONICAL_BRANCH_DEFAULT = 'mls-canonical';
+const MLS_CANONICAL_EXPORT_LIMIT_MAX = 100;
+
 
 function mlsStagingNow() { return new Date().toISOString(); }
 function mlsStagingAssertCode(code) {
@@ -988,6 +992,220 @@ async function mlsStagingServeArticle(env,code){
     provider:'mls-r32-staging',model:'editorial-standard-32',auditProvider:'mls-r32-validator',auditModel:metadata.auditModel,
     promptVersion:'32.0',generatedAt:metadata.stagedAt,staged:true};
 }
+
+function mlsCanonicalRepo(env) {
+  const stagingRepo = mlsStagingRepo(env);
+  const branch = String(env.MLS_CANONICAL_GITHUB_BRANCH || MLS_CANONICAL_BRANCH_DEFAULT).trim();
+  if (!/^[A-Za-z0-9._\/-]{1,200}$/.test(branch)) mlsChatError(503, 'Configuración de rama canónica inválida.');
+  return { owner: stagingRepo.owner, repo: stagingRepo.repo, branch };
+}
+async function mlsCanonicalEnsureBranch(env) {
+  const repo = mlsCanonicalRepo(env);
+  const branchPath = '/git/ref/heads/'+repo.branch.split('/').map(encodeURIComponent).join('/');
+  const existing = await mlsStagingGitHub(env, branchPath, {method:'GET',allow404:true});
+  if (existing?.object?.sha) return existing.object.sha;
+  const main = await mlsStagingGitHub(env, '/git/ref/heads/main', {method:'GET'});
+  try {
+    const created = await mlsStagingGitHub(env, '/git/refs', {
+      method:'POST',
+      body:JSON.stringify({ref:'refs/heads/'+repo.branch,sha:main.object.sha})
+    });
+    return created?.object?.sha || main.object.sha;
+  } catch (error) {
+    if (error.status !== 409) throw error;
+    const concurrent = await mlsStagingGitHub(env, branchPath, {method:'GET'});
+    if (concurrent?.object?.sha) return concurrent.object.sha;
+    throw error;
+  }
+}
+async function mlsCanonicalHead(env) {
+  return mlsCanonicalEnsureBranch(env);
+}
+function mlsCanonicalManifestPath() {
+  return MLS_CANONICAL_ROOT+'/manifest.json';
+}
+function mlsCanonicalEntryPath(article) {
+  const language = String(article?.language || '').trim();
+  const n = Number(article?.n);
+  if (!/^[A-Za-z0-9._-]{2,80}$/.test(language)) mlsChatError(409, 'Idioma canónico inválido.');
+  if (!Number.isInteger(n) || n < 1 || n > 9999) mlsChatError(409, 'Número de entrada canónica inválido.');
+  return MLS_CANONICAL_ROOT+'/'+language+'/'+String(n).padStart(4,'0')+'.json';
+}
+async function mlsCanonicalCommit(env, files, message, expectedHead) {
+  const repo = mlsCanonicalRepo(env);
+  const head = expectedHead || await mlsCanonicalHead(env);
+  const baseCommit = await mlsStagingGitHub(env, '/git/commits/'+encodeURIComponent(head), {method:'GET'});
+  const tree = files.map(file=>({path:file.path,mode:'100644',type:'blob',content:String(file.content)}));
+  const nextTree = await mlsStagingGitHub(env, '/git/trees', {
+    method:'POST',
+    body:JSON.stringify({base_tree:baseCommit.tree.sha,tree})
+  });
+  const commit = await mlsStagingGitHub(env, '/git/commits', {
+    method:'POST',
+    body:JSON.stringify({message,tree:nextTree.sha,parents:[head]})
+  });
+  await mlsStagingGitHub(env, '/git/refs/heads/'+repo.branch.split('/').map(encodeURIComponent).join('/'), {
+    method:'PATCH',
+    body:JSON.stringify({sha:commit.sha,force:false})
+  });
+  return commit.sha;
+}
+function mlsCanonicalFilterSql() {
+  return "prompt_version = ? AND article_markdown IS NOT NULL AND length(trim(article_markdown)) > 0 AND COALESCE(provider,'') <> 'cloudflare-legacy' AND COALESCE(audit_provider,'') <> 'cloudflare-legacy'";
+}
+async function mlsCanonicalExpectedCounts(env) {
+  const filter = mlsCanonicalFilterSql();
+  const totalRow = await env.WIKI_DB.prepare('SELECT COUNT(*) AS total FROM wiki_articles WHERE '+filter)
+    .bind(WIKI_PROMPT_VERSION).first();
+  const byLanguageResult = await env.WIKI_DB.prepare('SELECT language, COUNT(*) AS total FROM wiki_articles WHERE '+filter+' GROUP BY language ORDER BY language')
+    .bind(WIKI_PROMPT_VERSION).all();
+  const excludedRow = await env.WIKI_DB.prepare("SELECT COUNT(*) AS total FROM wiki_articles WHERE NOT ("+filter+")")
+    .bind(WIKI_PROMPT_VERSION).first();
+  const expectedByLanguage = {};
+  for (const row of byLanguageResult.results || []) expectedByLanguage[String(row.language)] = Number(row.total || 0);
+  return {
+    expectedTotal:Number(totalRow?.total || 0),
+    expectedByLanguage,
+    excludedLegacyOrNonR32:Number(excludedRow?.total || 0)
+  };
+}
+async function mlsCanonicalNormalizeArticle(row) {
+  const payload = {
+    schemaVersion:1,
+    code:String(row.code),
+    language:String(row.language),
+    languageName:String(row.language_name),
+    n:Number(row.n),
+    title:String(row.title),
+    level:row.level == null ? '' : String(row.level),
+    part:row.part == null ? '' : String(row.part),
+    chapter:row.chapter == null ? '' : String(row.chapter),
+    articleMarkdown:String(row.article_markdown || '').trim(),
+    editorial:{
+      standard:'MLS R32',
+      promptVersion:String(row.prompt_version),
+      provider:String(row.provider || ''),
+      model:String(row.model || ''),
+      auditProvider:row.audit_provider == null ? null : String(row.audit_provider),
+      auditModel:row.audit_model == null ? null : String(row.audit_model),
+      generatedAt:String(row.generated_at || '')
+    }
+  };
+  const contentHash = await mlsChatHash(JSON.stringify(payload));
+  return {...payload,contentHash};
+}
+async function mlsCanonicalLoadManifest(env, ref) {
+  return mlsStagingReadJson(env,mlsCanonicalManifestPath(),ref,true,null);
+}
+async function mlsCanonicalStatus(env) {
+  if (!mlsStagingConfigured(env)) mlsChatError(503, 'MLS Canonical no tiene credenciales GitHub configuradas.');
+  const head = await mlsCanonicalHead(env);
+  const manifest = await mlsCanonicalLoadManifest(env,head);
+  return {
+    ok:true,
+    storageMode:'github-canonical',
+    branch:mlsCanonicalRepo(env).branch,
+    head,
+    manifest
+  };
+}
+async function mlsCanonicalExport(env, body = {}) {
+  if (!mlsStagingConfigured(env)) mlsChatError(503, 'MLS Canonical no tiene credenciales GitHub configuradas.');
+  await ensureWikiDb(env);
+  const limit = Math.max(1,Math.min(MLS_CANONICAL_EXPORT_LIMIT_MAX,Number(body.limit)||50));
+  let head = await mlsCanonicalHead(env);
+  let manifest = await mlsCanonicalLoadManifest(env,head);
+  if (manifest && manifest.promptVersion !== WIKI_PROMPT_VERSION)
+    mlsChatError(409,'El manifest canónico existente no corresponde a la revisión editorial actual.');
+  if (!manifest) {
+    const expected = await mlsCanonicalExpectedCounts(env);
+    const now = mlsStagingNow();
+    manifest = {
+      schemaVersion:1,
+      corpus:'MASTER LANGUAGE SYSTEM',
+      standard:'MLS R32',
+      promptVersion:WIKI_PROMPT_VERSION,
+      branch:mlsCanonicalRepo(env).branch,
+      status:'exporting',
+      expectedTotal:expected.expectedTotal,
+      exportedTotal:0,
+      excludedLegacyOrNonR32:expected.excludedLegacyOrNonR32,
+      expectedByLanguage:expected.expectedByLanguage,
+      exportedByLanguage:{},
+      lastCode:null,
+      createdAt:now,
+      updatedAt:now,
+      completedAt:null
+    };
+  }
+  const cursor = String(manifest.lastCode || '');
+  const filter = mlsCanonicalFilterSql();
+  const rowsResult = await env.WIKI_DB.prepare(
+    'SELECT code,language,language_name,n,title,level,part,chapter,article_markdown,provider,model,audit_provider,audit_model,prompt_version,generated_at '+
+    'FROM wiki_articles WHERE '+filter+' AND code > ? ORDER BY code LIMIT ?'
+  ).bind(WIKI_PROMPT_VERSION,cursor,limit).all();
+  const rows = rowsResult.results || [];
+  const files = [];
+  const exportedByLanguage = {...(manifest.exportedByLanguage || {})};
+  for (const row of rows) {
+    const article = await mlsCanonicalNormalizeArticle(row);
+    files.push({path:mlsCanonicalEntryPath(article),content:JSON.stringify(article,null,2)+'\n'});
+    exportedByLanguage[article.language] = Number(exportedByLanguage[article.language] || 0) + 1;
+  }
+  const exportedTotal = Number(manifest.exportedTotal || 0) + rows.length;
+  const expectedTotal = Number(manifest.expectedTotal || 0);
+  const complete = rows.length === 0 || exportedTotal >= expectedTotal;
+  const now = mlsStagingNow();
+  const nextManifest = {
+    ...manifest,
+    status:complete?'complete':'exporting',
+    exportedTotal,
+    exportedByLanguage,
+    lastCode:rows.length ? String(rows[rows.length-1].code) : manifest.lastCode,
+    updatedAt:now,
+    completedAt:complete ? (manifest.completedAt || now) : null
+  };
+  files.push({path:mlsCanonicalManifestPath(),content:JSON.stringify(nextManifest,null,2)+'\n'});
+  let commit = head;
+  for (let attempt=0;attempt<MLS_STAGING_MAX_GITHUB_RETRIES;attempt++) {
+    try {
+      commit = await mlsCanonicalCommit(env,files,'MLS canonical export '+exportedTotal+'/'+expectedTotal,head);
+      break;
+    } catch (error) {
+      if (error.status !== 409 || attempt === MLS_STAGING_MAX_GITHUB_RETRIES-1) throw error;
+      head = await mlsCanonicalHead(env);
+      const current = await mlsCanonicalLoadManifest(env,head);
+      if (current && Number(current.exportedTotal || 0) >= exportedTotal)
+        return {ok:true,reused:true,storageMode:'github-canonical',branch:mlsCanonicalRepo(env).branch,head,manifest:current};
+      if (current && String(current.lastCode || '') !== cursor)
+        mlsChatError(409,'El cursor canónico avanzó durante el reintento; vuelve a ejecutar la exportación.');
+    }
+  }
+  return {
+    ok:true,
+    reused:false,
+    exportedThisPass:rows.length,
+    storageMode:'github-canonical',
+    branch:mlsCanonicalRepo(env).branch,
+    head:commit,
+    manifest:nextManifest
+  };
+}
+async function handleMlsCanonical(request,env,url){
+  const route=url.pathname.replace('/api/wiki/editorial/canonical','')||'/';
+  try{
+    await mlsChatAuthenticate(request,env);
+    if(route==='/status'&&request.method==='GET') return mlsChatJson(await mlsCanonicalStatus(env));
+    if(request.method!=='POST') return mlsChatJson({ok:false,error:'Método no permitido.'},405);
+    const body=await mlsChatBody(request);
+    if(route==='/export') return mlsChatJson(await mlsCanonicalExport(env,body));
+    mlsChatError(404,'Ruta canónica no encontrada.');
+  }catch(error){
+    if(!error.status) console.error('mls-canonical-failure',error.message);
+    return mlsChatJson({ok:false,error:error.status?error.message:'Error temporal de MLS Canonical.'},error.status||500);
+  }
+}
+
 function mlsStagingNoD1Env(env){
   return new Proxy(env,{
     get(target,prop,receiver){
@@ -1021,5 +1239,6 @@ if(typeof module!=='undefined'&&module.exports) module.exports={
   mlsStagingIndexPath,mlsStagingSummarize,mlsStagingRanges,mlsStagingSample,mlsStagingAutooptBase,mlsStagingAutooptApply,
   mlsStagingD1Add,mlsStagingNoD1Env,mlsStagingConfigured,mlsStagingPrivateKeyDer,mlsStagingPkcs1ToPkcs8,mlsStagingResolveSnapshotCommit,mlsStagingStart,mlsStagingStatus,mlsStagingNext,
   mlsStagingValidate,mlsStagingStage,mlsStagingCancel,mlsStagingIntegrate,mlsStagingBackfillProvenance,mlsStagingCodeState,mlsStagingServeArticle,
-  MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL
+  mlsCanonicalRepo,mlsCanonicalEntryPath,mlsCanonicalNormalizeArticle,mlsCanonicalExpectedCounts,mlsCanonicalStatus,mlsCanonicalExport,handleMlsCanonical,
+  MLS_STAGING_ACTIVE,MLS_STAGING_TERMINAL,MLS_CANONICAL_ROOT,MLS_CANONICAL_BRANCH_DEFAULT
 };
