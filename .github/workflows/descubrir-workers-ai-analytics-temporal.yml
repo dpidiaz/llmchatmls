@@ -1,0 +1,45 @@
+name: Descubrir Workers AI analytics temporal
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/descubrir-workers-ai-analytics-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Introspeccionar GraphQL Analytics sin inferencia
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const token=process.env.CLOUDFLARE_API_TOKEN;
+          if(!token)throw new Error('Falta CLOUDFLARE_API_TOKEN');
+          const response=await fetch('https://api.cloudflare.com/client/v4/graphql',{
+            method:'POST',
+            headers:{authorization:'Bearer '+token,'content-type':'application/json',accept:'application/json'},
+            body:JSON.stringify({query:'query Introspection { __schema { types { name fields { name } } } }'})
+          });
+          const payload=await response.json().catch(()=>({}));
+          console.log('graphql_http_status='+response.status);
+          if(!response.ok||payload?.errors?.length){
+            console.log('graphql_errors='+JSON.stringify(payload?.errors||payload));
+            console.log('SEMANTIC_ANALYTICS_PREFLIGHT=NO_ANALYTICS_ACCESS');
+            process.exit(61);
+          }
+          const matches=[];
+          for(const type of payload?.data?.__schema?.types||[]){
+            const fields=(type.fields||[]).map(x=>x.name);
+            const hitFields=fields.filter(x=>/ai|neuron|inference/i.test(x));
+            if(/ai|neuron|inference/i.test(type.name)||hitFields.length)matches.push({type:type.name,fields:hitFields});
+          }
+          console.log('SEMANTIC_ANALYTICS_MATCHES '+JSON.stringify(matches.slice(0,300)));
+          console.log('SEMANTIC_ANALYTICS_PREFLIGHT=ANALYTICS_READ_OK');
+          NODE
