@@ -161,7 +161,7 @@ function buildBaseline(){
 
   results.push(check(
     'G-READ-001','Reader',
-    has(reader,/<main\\s+class=["']reader-main["']/i)?'PASS':'FAIL',
+    reader.includes('<main class="reader-main">')?'PASS':'FAIL',
     'Primary reader region is structurally identifiable'
   ));
   const smooth=has(reader,/scrollIntoView\(\{behavior:'smooth'/);
