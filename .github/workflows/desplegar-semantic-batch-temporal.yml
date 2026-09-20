@@ -50,7 +50,7 @@ jobs:
           NODE
 
           npm run check
-          npm run deploy
+          npx wrangler deploy --keep-vars
 
           status=$(curl --silent --show-error             --output /tmp/batch.json             --write-out '%{http_code}'             -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/internal/semantic-batch'             -H "authorization: Bearer $GEN_KEY"             -H 'content-type: application/json'             --data '{"texts":["prueba semántica uno","prueba semántica dos"]}')
           echo "batch_http_status=$status"
