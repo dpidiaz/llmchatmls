@@ -32,13 +32,27 @@ jobs:
         run: npm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      - name: Verificar producción sin wiki-seeds legacy
+      - name: Verificar producción R32-only sin legacy
         shell: bash
         run: |
           set -euo pipefail
           base='https://llmchatmls.dpidiaz.workers.dev'
 
-          curl --fail --silent --show-error "$base/data/canonical/compat-health.json" -o compat.json
+          fetch_retry() {
+            local url="$1"
+            local out="$2"
+            local attempts=8
+            local delay=3
+            for i in $(seq 1 "$attempts"); do
+              if curl --fail --silent --show-error "$url" -o "$out"; then
+                return 0
+              fi
+              if [ "$i" -lt "$attempts" ]; then sleep "$delay"; fi
+            done
+            return 1
+          }
+
+          fetch_retry "$base/data/canonical/compat-health.json" compat.json
           node - <<'NODE'
           const fs=require('node:fs');
           const h=JSON.parse(fs.readFileSync('compat.json','utf8'));
@@ -46,33 +60,69 @@ jobs:
           if(h.standard!=='MLS R32'||h.promptVersion!=='32.0') throw new Error('compat-health no es R32');
           if(Number(h.totalEntries)!==10133) throw new Error('totalEntries inesperado: '+h.totalEntries);
           if(h.legacyWikiSeedsPresent!==false) throw new Error('legacyWikiSeedsPresent no es false');
+          if(h.perEntryCanonicalSeedsPresent!==false) throw new Error('perEntryCanonicalSeedsPresent debe ser false');
+          if(Number(h.editorialSeedCatalogs)!==10) throw new Error('editorialSeedCatalogs inesperado: '+h.editorialSeedCatalogs);
           if(Number(h.indexBytes)>=20*1024*1024) throw new Error('indexBytes fuera del margen seguro: '+h.indexBytes);
-          console.log('compat-health OK',h.totalEntries,h.indexBytes);
+          console.log('compat-health OK',h.totalEntries,h.editorialSeedCatalogs,h.indexBytes);
           NODE
 
-          curl --fail --silent --show-error "$base/data/canonical/seeds/chino-taiwan/0484.json" -o seed.json
+          fetch_retry "$base/data/canonical/editorial-seeds/chino-taiwan.json" editorial.json
           node - <<'NODE'
           const fs=require('node:fs');
-          const s=JSON.parse(fs.readFileSync('seed.json','utf8'));
-          if(s.code!=='MLS-V07-0484'||s.title!=='不然') throw new Error('Semilla canónica inesperada');
-          console.log('canonical seed OK',s.code,s.title);
+          const c=JSON.parse(fs.readFileSync('editorial.json','utf8'));
+          const s=c?.entries?.['MLS-V07-0484'];
+          if(c.standard!=='MLS R32'||c.promptVersion!=='32.0') throw new Error('Catálogo editorial no es R32');
+          if(Number(c.totalEntries)!==1016) throw new Error('Conteo chino-taiwan inesperado: '+c.totalEntries);
+          if(!s||s.code!=='MLS-V07-0484'||s.title!=='不然') throw new Error('Entrada canónica 0484 ausente del catálogo editorial');
+          console.log('editorial catalog OK',s.code,s.title);
           NODE
 
-          status=$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "$base/data/wiki-seeds/chino-taiwan/0484.json")
-          if [ "$status" != "404" ]; then
-            echo "::error::La ruta legacy wiki-seeds sigue publicada (HTTP $status)"
-            exit 1
-          fi
-          echo 'legacy wiki-seeds route removed'
+          for legacy in             "$base/data/wiki-seeds/chino-taiwan/0484.json"             "$base/data/canonical/seeds/chino-taiwan/0484.json"; do
+            status=$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "$legacy")
+            if [ "$status" != "404" ]; then
+              echo "::error::Ruta legacy/per-entry sigue publicada: $legacy (HTTP $status)"
+              exit 1
+            fi
+          done
+          echo 'legacy and per-entry seed routes removed'
 
-          curl --fail --silent --show-error --range 0-2047 "$base/data/index.js" -o index-head.js
-          grep -q 'window.MLS_META=' index-head.js
+          fetch_retry "$base/data/index.js" index.js
+          grep -q 'window.MLS_META=' index.js
+          grep -q 'MLS-V07-0484' index.js
           echo 'canonical compatibility index reachable'
 
-          curl --fail --silent --show-error "$base/js/reader.js" -o reader.js
+          fetch_retry "$base/js/reader.js" reader.js
           grep -q '/data/canonical/runtime-manifest.json' reader.js
           if grep -q '/api/wiki/article/' reader.js; then echo 'reader volvió a D1'; exit 1; fi
           if grep -q '/api/wiki/materialize/' reader.js; then echo 'reader volvió a materializar'; exit 1; fi
           echo 'reader remains GitHub-first'
 
-# one-shot trigger
+          fetch_retry "$base/api/wiki/recent?limit=30" recent.json
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const rows=JSON.parse(fs.readFileSync('recent.json','utf8'));
+          if(!Array.isArray(rows)) throw new Error('recent no devolvió array');
+          for(const row of rows){
+            if(row.promptVersion!=='32.0') throw new Error('API recent expuso revisión no R32: '+JSON.stringify(row));
+          }
+          console.log('wiki recent R32-only',rows.length);
+          NODE
+
+          status=$(curl --silent --show-error --output article.json --write-out '%{http_code}' "$base/api/wiki/article/MLS-V07-0484")
+          if [ "$status" = "200" ]; then
+            node - <<'NODE'
+            const fs=require('node:fs');
+            const p=JSON.parse(fs.readFileSync('article.json','utf8'));
+            const a=p?.article;
+            if(!p?.found||!a) throw new Error('article 200 sin artículo');
+            if(a.promptVersion!=='32.0') throw new Error('article no es R32');
+            if(a.provider==='cloudflare-legacy'||a.auditProvider==='cloudflare-legacy') throw new Error('article expuso provider legacy');
+            console.log('wiki article R32-only',a.code,a.promptVersion);
+            NODE
+          elif [ "$status" = "404" ]; then
+            echo 'wiki article absent from D1, no legacy fallback exposed'
+          else
+            echo "::error::wiki article devolvió HTTP $status"
+            cat article.json || true
+            exit 1
+          fi
