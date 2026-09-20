@@ -40,9 +40,13 @@ test('Virtuoso validates candidates against the canonical language catalog befor
   assert.doesNotMatch(BACKEND_BLOCK,/wiki_articles/);
 });
 
-test('Virtuoso uses current Gemma 4 only for reranking and degrades deterministically',()=>{
-  assert.match(BACKEND_BLOCK,/env\.AI\.run\(MODEL_ID/);
+test('Virtuoso uses fixed Gemma 4 only for reranking, disables thinking, and degrades deterministically',()=>{
+  assert.match(BACKEND_BLOCK,/VIRTUOSO_MODEL_ID = "@cf\/google\/gemma-4-26b-a4b-it"/);
+  assert.match(BACKEND_BLOCK,/env\.AI\.run\(VIRTUOSO_MODEL_ID/);
+  assert.doesNotMatch(BACKEND_BLOCK,/env\.AI\.run\(MODEL_ID/);
+  assert.match(BACKEND_BLOCK,/chat_template_kwargs: \{ enable_thinking: false \}/);
   assert.match(BACKEND_BLOCK,/stream: false/);
+  assert.match(BACKEND_BLOCK,/model: VIRTUOSO_MODEL_ID/);
   assert.match(BACKEND_BLOCK,/Virtuoso Gemma fallback/);
   assert.match(BACKEND_BLOCK,/virtuosoFallback/);
   assert.match(BACKEND_BLOCK,/deepLink: "\/#entry=" \+ entry\.code/);
