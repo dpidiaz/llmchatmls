@@ -1,0 +1,98 @@
+name: Deploy Virtuoso search hotfix once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-virtuoso-search-hotfix-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-deploy-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify intended hotfix parent
+        shell: bash
+        run: |
+          set -euo pipefail
+          parent="$(git rev-parse HEAD^)"
+          test "$parent" = "1c3d98fb8afc59bf8bf1b92e823a2a0e3eaaf047"
+          changed="$(git diff --name-only HEAD^ HEAD)"
+          test "$changed" = ".github/workflows/deploy-virtuoso-search-hotfix-once.yml"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run test:chat-editorial
+      - run: npm run predeploy
+      - run: npm run recovery:verify
+      - run: node --test test/deploy-contract.test.cjs
+      - run: npm run check
+
+      - name: Deploy production
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Verify Virtuoso production search
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://llmchatmls.dpidiaz.workers.dev"
+
+          for attempt in 1 2 3 4 5 6; do
+            code="$(curl -L -sS -o /tmp/virtuoso.html -w '%{http_code}' "$base/virtuoso")"
+            if [ "$code" = "200" ]; then break; fi
+            sleep 5
+          done
+          test "$code" = "200"
+
+          node - <<'NODE'
+          const fs=require('fs');
+          const vm=require('node:vm');
+          const html=fs.readFileSync('/tmp/virtuoso.html','utf8');
+          const pattern=/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi;
+          const inline=[...html.matchAll(pattern)].map(m=>m[1].trim()).filter(Boolean);
+          if(!inline.length) throw new Error('no Virtuoso inline script found');
+          for(const [i,source] of inline.entries()) new vm.Script(source,{filename:'production-virtuoso-'+i+'.js'});
+          console.log('VIRTUOSO_BROWSER_SCRIPT_OK');
+          NODE
+
+          curl -LfsS "$base/data/canonical/catalog/ingles.json" -o /tmp/catalog.json
+          node - <<'NODE' >/tmp/virtuoso-request.json
+          const fs=require('fs');
+          const c=JSON.parse(fs.readFileSync('/tmp/catalog.json','utf8'));
+          if(!Array.isArray(c.entries)||!c.entries.length) throw new Error('empty english catalog');
+          const first=c.entries[0];
+          process.stdout.write(JSON.stringify({
+            query:'quiero aprender ingles',
+            targetLanguage:'ingles',
+            candidates:[{code:first.code}]
+          }));
+          NODE
+
+          curl -LfsS "$base/api/virtuoso"             -H 'content-type: application/json'             --data-binary @/tmp/virtuoso-request.json             -o /tmp/virtuoso-response.json
+
+          node - <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('/tmp/virtuoso-response.json','utf8'));
+          if(r.ok!==true) throw new Error('Virtuoso API did not return ok');
+          if(!Array.isArray(r.recommendations)||!r.recommendations.length) throw new Error('Virtuoso returned no recommendations');
+          console.log('VIRTUOSO_SEARCH_PRODUCTION_OK', JSON.stringify({
+            usedAi:r.usedAi,
+            degraded:r.degraded,
+            recommendations:r.recommendations.length,
+            first:r.recommendations[0]?.code
+          }));
+          NODE
