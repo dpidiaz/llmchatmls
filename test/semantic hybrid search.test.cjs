@@ -47,3 +47,22 @@ test('semantic generation is never part of normal predeploy',()=>{
   assert.doesNotMatch(pkg.scripts.predeploy,/generar indice semantico\.js/);
   assert.equal(pkg.scripts['semantic:generate'],"node 'scripts/generar indice semantico.js'");
 });
+
+
+test('semantic manifest gate prevents query embeddings until a complete index is published',()=>{
+  const hybrid=patchSemanticSearch(patchSearch(shellSearch()));
+  assert.match(hybrid,/loadSemanticManifest/);
+  assert.match(hybrid,/data\/semantic\/manifest\.json/);
+  assert.match(hybrid,/if\(response\.status===404\)return null/);
+  assert.match(hybrid,/const semanticSlugs=manifest\?slugs\.filter/);
+  assert.match(hybrid,/if\(semanticSlugs\.length\)\{/);
+  const manifestPos=hybrid.indexOf('const manifest=await loadSemanticManifest()');
+  const queryPos=hybrid.indexOf('const queryVector=await semanticQueryVector(q)');
+  assert.ok(manifestPos>=0&&queryPos>manifestPos);
+});
+
+test('semantic publish step is part of predeploy but generation is not',()=>{
+  const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
+  assert.match(pkg.scripts.predeploy,/publicar indice semantico\.js/);
+  assert.doesNotMatch(pkg.scripts.predeploy,/generar indice semantico\.js/);
+});
