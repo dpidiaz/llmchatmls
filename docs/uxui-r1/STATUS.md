@@ -1,107 +1,81 @@
-# MLS EXPERIENCE REFINEMENT R1 — STATUS
+# MLS EXPERIENCE REFINEMENT R1 — STATUS FINAL
 
 ## Estado global
-- Programa: ACTIVE — WAVE 2
-- Integración: uxui-r1-integration
-- Worker branches synchronized at: 79c658faa3cfd938db831c72a0ce386645459d73
-- Producción: LOCKED — no deploy performed
-- Main base inicial: b53f2dfa529066d4f2d9b6272f6a8a7bd49386b4
+
+- Programa: **CLOSED**
+- Resultado: **CERTIFIED / MERGED / DEPLOYED / VERIFIED**
+- Fecha de cierre en producción: **20 de septiembre de 2026**
+- Base inicial de main: `b53f2dfa529066d4f2d9b6272f6a8a7bd49386b4`
+- PR final: **#110**
+- Producto R1 fusionado a main: `50e0ba4e57472ae3ef36ddb476c623e85ede554a`
+- Wave 5 certification run: **35512048565**
+- Production deployment run: **35512350255**
+- Cloudflare Worker Version ID: `dffa9299-7e60-4fdb-886b-05de128bdf1c`
+- Producción: `https://llmchatmls.dpidiaz.workers.dev`
 
 ## Workstreams
 
-### Chat 0 — Coordinator
-Status: ACTIVE
-Current: Wave 5 — FINAL CERTIFICATION PASSED; final PR to main pending review
-Branch: uxui-r1-integration
-Blockers: none
+| Workstream | Estado | PR |
+| --- | --- | ---: |
+| D — Visual System | COMPLETE | #101 |
+| A — Navigation & Orientation | COMPLETE | #102 |
+| C — Discovery & Learning | COMPLETE | #103 |
+| E — Offline E1–E5 | COMPLETE | #104 |
+| B — Continuity & Personal Library | COMPLETE | #105 |
+| F — AI Experience | COMPLETE para alcance R1 | #106 |
+| G — Accessibility Baseline | COMPLETE | #107 |
+| E — Resilience UX E6–E7 | COMPLETE | #108 |
+| G — Accessibility Corrective Pass | COMPLETE | #109 |
+| Final integration | MERGED | #110 |
 
-### Chat A — Navigation & Orientation
-Status: INTEGRATED — CHECKPOINT A1–A6 COMPLETE
-Branch: uxui-r1-navigation
-PR: #102
-Integrated commit: 01505e6d07acef804501f54844c65d1af13804b7
-Delivered: navigation/orientation microcopy, tooling label normalization, generated-shell contracts
-Dependencies: future A↔F only for local "Buscar aquí" handoff
+## QA final
 
-### Chat B — Continuity & Personal Library
-Status: INTEGRATED — B1–B3 COMPLETE
-Branch: uxui-r1-continuity
-PR: #105
-Integrated commit: 0b7114f06d0509696ec817fcc9b092dbc6944bd9
-Delivered: explicit resume intent, persisted reading position, safe same-entry rerender continuity
-Dependencies: ninguna bloqueante
+Baseline:
 
-### Chat C — Discovery & Learning
-Status: COMPLETE — INTEGRATED
-Branch: uxui-r1-discovery
-PR: #103
-Integrated commit: 5e6a5078185cd957f7e3820fb043872b99c082a2
-Delivered: semantic-neighbor generator, deterministic reranking, 10-language assets, versioned publisher, editorial→semantic Reader fallback
-Dependencies: BGE-M3 existing index; no runtime AI/D1 dependency
+- PASS: **23**
+- FAIL: **0**
+- MANUAL QA REQUIRED: **7**
+- BLOCKED: **1 histórico**
+- N/A: **1**
 
-### Chat D — Visual System
-Status: INTEGRATED — WAVE 1 COMPLETE
-Branch: uxui-r1-visual-system
-PR: #101
-Integrated commit: 233987dd4cc437fca283efd14804353872364e22
-Delivered: Visual Foundation v1, shared tokens, opt-in primitives, central stylesheet loading, focus contrast contract
-Dependencies: ninguna
+QA Chromium:
 
-### Chat E — Offline & Resilience
-Status: COMPLETE — E1–E7 INTEGRATED
-Branch: uxui-r1-offline
-PRs: #104, #108
-Integrated commits: 8052363e166e4d469579f5482d584ed6269e2e4b, 6f361d322b9c58f1802eb847c14badebdbe9116e
-Delivered: cache separation, verified/migrated offline library, per-language preparation, resilience messaging, recovery UX, accessible offline states
-Next: only respond to regressions found by G
-Dependencies: none
+`320 / 375 / 390 / 430 / 768 / 1024 / 1280 / 1440 / 1920`
 
-### Chat F — AI Experience
-Status: CHECKPOINT 1 INTEGRATED
-Branch: uxui-r1-ai-experience
-PR: #106
-Integrated commit: ecce97f2f7634badf2f03742e9cd1859828766c9
-Delivered: humanized Virtuoso/Profesor IA UX, Visual Foundation consumption, focus-visible in Virtuoso
-Dependencies: next checkpoint must start from current integration
+Reflow:
 
-### Chat G — Accessibility & Responsive QA
-Status: COMPLETE — WAVE 4 INTEGRATED
-Branch: uxui-r1-accessibility
-PR: #107
-Baseline commit: 90c8f9ba6017ccf29407d59e3051700e33331671
-Baseline counts: PASS 18 / FAIL 5 / MANUAL 7 / BLOCKED 1 / N/A 1
-PR: #109
-Integrated commit: 8c24fe792b3d93d9655edef664ae733ae3782bc7
-Final baseline: PASS 23 / FAIL 0 / MANUAL 7 / BLOCKED 1 historical / N/A 1
-Delivered: skip link, global focus-visible, 44px touch targets, reader responsive breakpoints, reduced-motion support, Professor IA focus restoration
-Dependencies: none; Wave 5 final certification pending
+- 200%: PASS
+- 400%: PASS
 
-## Formato obligatorio de checkpoint
-Cada worker debe reportar:
-- STATUS
-- DONE
-- CURRENT
-- NEXT
-- BLOCKERS
-- FILES TOUCHED
-- DEPENDENCIES
-- COMMIT / PR
+## Corpus y recuperación
 
+- canonical entries: **10,133**
+- languages: **10**
+- semantic chunks: **10,669**
+- related languages: **10**
+- `content/` modificado por R1: **no**
+- published reads requieren D1: **no**
+- Reader requiere IA: **no**
+- full-text fallback: **preservado**
+- Virtuoso canonical fallback: **preservado**
 
-## Wave 5 Final Certification
-Status: PASSED
-Certified product commit: c3a5fe5235f86272649b16afabbc0e7bc3bd563f
-Certification run: 35512048565
-Checks:
-- repository hygiene: PASS
-- canonical content/ unchanged vs main: PASS
-- npm ci: PASS
-- test:chat-editorial: PASS
-- qa:baseline: PASS
-- predeploy: PASS
-- recovery:verify: PASS
-- deploy-contract: PASS
-- wrangler dry-run: PASS
-- integrated UXUI contracts: PASS
-Temporary Wave 5 workflow: removed after certification.
-Production deploy: NOT PERFORMED
+## Producción
+
+Deploy: **SUCCESS**
+
+Post-deploy smoke: **SUCCESS**
+
+Action editorial read-only verification: **SUCCESS**
+
+Workflows temporales R1 restantes: **0**
+
+## Referencia documental
+
+Ver:
+
+- [INDEX.md](./INDEX.md)
+- [FINAL REPORT.md](./FINAL%20REPORT.md)
+- [RELEASE NOTES.md](./RELEASE%20NOTES.md)
+- [POST DEPLOY VERIFICATION.md](./POST%20DEPLOY%20VERIFICATION.md)
+
+R1 está cerrado. Cualquier trabajo posterior debe abrirse como nueva iteración, hotfix o iniciativa separada.

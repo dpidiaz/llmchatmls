@@ -184,6 +184,23 @@ The repository tests enforce, among other things:
 - sanitized shell bundle;
 - rebuild/recovery contract.
 
+## UX/UI Experience Refinement R1
+
+The first coordinated UX/UI refinement program is complete and deployed.
+
+R1 covered navigation and orientation, reading continuity, semantic related discovery, a shared visual foundation, offline/resilience UX, AI experience, accessibility and responsive QA.
+
+Final accessibility baseline: **23 PASS / 0 FAIL**.
+
+Official documentation is available in:
+
+- `docs/uxui-r1/INDEX.md`
+- `docs/uxui-r1/FINAL REPORT.md`
+- `docs/uxui-r1/RELEASE NOTES.md`
+- `docs/uxui-r1/POST DEPLOY VERIFICATION.md`
+
+R1 preserved the canonical `content/` corpus, Reader independence from D1/AI, lexical fallback and Virtuoso canonical fallback.
+
 ## CI and production
 
 `.github/workflows/produccion.yml` validates pull requests with:
