@@ -1,0 +1,63 @@
+name: Sanear bundle R32 una vez
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/sanear-bundle-r32-temporal.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  sanitize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Generar bundle shell-only
+        run: |
+          set -euo pipefail
+          node "scripts/sanear bundle r32.js"             "MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz"             "/tmp/MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE CLEAN.tar.gz"
+          node - <<'NODE'
+          const {validateSanitizedArchive}=require('./scripts/sanear bundle r32.js');
+          const report=validateSanitizedArchive('/tmp/MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE CLEAN.tar.gz');
+          console.log(JSON.stringify(report,null,2));
+          NODE
+      - name: Reemplazar bundle histórico
+        run: |
+          set -euo pipefail
+          old_bytes=$(wc -c < "MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz")
+          new_bytes=$(wc -c < "/tmp/MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE CLEAN.tar.gz")
+          echo "old_bytes=$old_bytes"
+          echo "new_bytes=$new_bytes"
+          cp "/tmp/MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE CLEAN.tar.gz" "MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz"
+          node -e "require('./scripts/sanear bundle r32.js').validateSanitizedArchive('MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz')"
+      - name: Confirmar que no quedan rutas legacy dentro del bundle
+        run: |
+          set -euo pipefail
+          tar -tzf "MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz" > /tmp/bundle-list.txt
+          if grep -E '(^|/)public/data/|(^|/)src/|wiki-seeds|cloudflare-legacy' /tmp/bundle-list.txt; then
+            echo "::error::El bundle saneado todavía contiene rutas legacy"
+            exit 1
+          fi
+          grep -q 'public/index.html' /tmp/bundle-list.txt
+          grep -q 'public/js/core.js' /tmp/bundle-list.txt
+          echo "Bundle limpio validado."
+      - name: Guardar bundle saneado en main
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- "MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz"; then
+            echo "El bundle ya estaba saneado; no hay cambios."
+            exit 0
+          fi
+          git config user.name "MLS Canonical Corpus Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add "MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz"
+          git commit -m "Sanitize R32 bundle and remove embedded legacy data"
+          git push origin HEAD:main
