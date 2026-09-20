@@ -104,9 +104,9 @@ test('offline runtime treats Cache Storage as source of truth and verifies hashe
 
 test('pack download is opt-in, atomic in status, retryable and removable',()=>{
   assert.match(html,/Usar traducción sin Internet/);
-  assert.match(html,/data\.preparePack/);
+  assert.match(html,/prepare\.dataset\.preparePack/);
   assert.match(html,/Reintentar/);
-  assert.match(html,/data\.removePack/);
+  assert.match(html,/remove\.dataset\.removePack/);
   assert.match(offline,/writeState\(manifest,slug,'downloading'\)/);
   assert.match(offline,/writeState\(manifest,slug,'partial'\)/);
   assert.match(offline,/if\(verified\.status!=='ready'\)throw/);
