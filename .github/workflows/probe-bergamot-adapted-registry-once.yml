@@ -1,0 +1,109 @@
+name: Probe MLS adapted Bergamot registry once
+
+on:
+  push:
+    branches:
+      - feature/translator-pronunciation-offline
+    paths:
+      - ".github/workflows/probe-bergamot-adapted-registry-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  adapted:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Prepare same-origin adapted registry
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bergamot-adapt/site
+          cd /tmp/bergamot-adapt
+          npm init -y >/dev/null
+          npm install --no-save @browsermt/bergamot-translator@0.4.9 playwright
+          npx playwright install --with-deps webkit >/dev/null
+          cp -R node_modules/@browsermt/bergamot-translator site/bergamot
+          node - <<'NODE'
+          const fs=require('fs');
+          const registryUrl='https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json';
+          const modern=await fetch(registryUrl).then(r=>{if(!r.ok)throw new Error('registry '+r.status);return r.json()});
+          const priority=status=>status==='Release'?0:status==='Release Android'?1:status==='Nightly'?2:3;
+          const wanted=['pt-en','en-es','ja-en','en-ja'];
+          const keyFor=pair=>pair.replace('-','');
+          const partMap={lexicalShortlist:'lex',srcVocab:'srcvocab',trgVocab:'trgvocab'};
+          const base=String(modern.baseUrl||'').replace(/\/$/,'');
+          const adapted={};
+          for(const pair of wanted){
+            const choices=(modern.models?.[pair]||[]).slice().sort((a,b)=>priority(a.releaseStatus)-priority(b.releaseStatus));
+            const chosen=choices[0];
+            if(!chosen)throw new Error('Missing '+pair);
+            const files={};
+            for(const [part,file] of Object.entries(chosen.files||{})){
+              if(!file || typeof file!=='object' || !file.path) continue;
+              const mapped=partMap[part]||part;
+              files[mapped]={
+                name:base+'/'+String(file.path).replace(/^\//,''),
+                size:Number(file.size||file.compressedSize||0)||undefined,
+                expectedSha256Hash:file.sha256||file.sha256Hash||file.expectedSha256Hash||file.hash||undefined
+              };
+            }
+            if(chosen.config) files.config=chosen.config;
+            adapted[keyFor(pair)]=files;
+            console.log('ADAPTED_PAIR',pair,JSON.stringify({releaseStatus:chosen.releaseStatus,architecture:chosen.architecture,files},null,2));
+          }
+          fs.writeFileSync('/tmp/bergamot-adapt/site/models.json',JSON.stringify(adapted));
+          NODE
+          cat > site/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8"><title>MLS Bergamot adapted registry probe</title>
+          <pre id="status">starting</pre>
+          <script type="module">
+            import {LatencyOptimisedTranslator} from '/bergamot/translator.js';
+            window.__done=false;
+            window.__probe=[];
+            const translator=new LatencyOptimisedTranslator({
+              registryUrl:'/models.json',
+              pivotLanguage:'en',
+              downloadTimeout:180000
+            });
+            async function run(from,to,text){
+              const started=performance.now();
+              const response=await translator.translate({from,to,text,html:false});
+              return {from,to,text:response?.target?.text||'',elapsed:Math.round(performance.now()-started)};
+            }
+            try{
+              window.__probe.push(await run('pt','es','Eu gostaria de aprender português.'));
+              window.__probe.push(await run('ja','es','日本語を勉強したいです。'));
+            }catch(error){
+              window.__probe.push({ok:false,error:String(error&&error.stack||error)});
+            }finally{
+              translator.delete();
+              document.getElementById('status').textContent=JSON.stringify(window.__probe);
+              window.__done=true;
+            }
+          </script>
+          HTML
+          cd site
+          python3 -m http.server 8765 >/tmp/bergamot-adapt-http.log 2>&1 &
+      - name: Translate through adapted registry in WebKit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/bergamot-adapt
+          node --input-type=module - <<'NODE'
+          import {webkit} from 'playwright';
+          const browser=await webkit.launch({headless:true});
+          const page=await browser.newPage();
+          page.on('console',msg=>console.log('BROWSER_CONSOLE',msg.type(),msg.text()));
+          page.on('pageerror',err=>console.log('BROWSER_ERROR',String(err)));
+          await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded',timeout:30000});
+          await page.waitForFunction(()=>window.__done===true,null,{timeout:300000});
+          const result=await page.evaluate(()=>window.__probe);
+          console.log('MLS_BERGAMOT_ADAPTED_RESULT',JSON.stringify(result));
+          await browser.close();
+          if(!Array.isArray(result)||result.length<2||result.some(x=>x.ok===false)||result.some(x=>!String(x.text||'').trim()))process.exit(2);
+          NODE
