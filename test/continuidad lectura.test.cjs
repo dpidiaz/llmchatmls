@@ -34,18 +34,36 @@ test('el lector persiste progreso fuera de MLS.state para compatibilidad hacia a
 test('reanudar requiere intención efímera y explícita',()=>{
   const source=readerSource();
   assert.match(source,/RESUME_INTENT_KEY='mls\.resumeIntent\.v1'/);
+  assert.match(source,/RESUME_INTENT_MAX_AGE=5\*60\*1000/);
   assert.match(source,/window\.sessionStorage/);
   assert.match(source,/consumeResumeIntent\(normalized\)/);
-  assert.match(source,/if\(entryChanged&&!resumeRequested\)scrollPageToAbsoluteTop\(\)/);
+  assert.match(source,/window\.sessionStorage\?\.removeItem\?\.\(RESUME_INTENT_KEY\)/);
+  assert.match(source,/String\(intent\.code\|\|''\)\.toUpperCase\(\)!==normalized/);
+  assert.match(source,/Date\.now\(\)-at<=RESUME_INTENT_MAX_AGE/);
   assert.match(source,/if\(resumeRequested\)[\s\S]*restoreReadingProgress\(normalized\)/);
 });
 
 test('navegación normal conserva el contrato de comenzar arriba',()=>{
   const source=readerSource();
   assert.match(source,/if\(entryChanged&&!resumeRequested\)scrollPageToAbsoluteTop\(\)/);
-  assert.match(source,/else\{\s*scrollPageToAbsoluteTop\(\);\s*requestAnimationFrame\(scrollPageToAbsoluteTop\);/);
+  assert.match(source,/else if\(entryChanged\)\{\s*scrollPageToAbsoluteTop\(\);\s*requestAnimationFrame\(scrollPageToAbsoluteTop\);/);
   assert.match(source,/href="#entry=\$\{escAttr\(prev\.code\)\}"/);
   assert.match(source,/href="#entry=\$\{escAttr\(next\.code\)\}"/);
+});
+
+test('guardar o quitar favorito preserva la posición perceptible de la misma entrada',()=>{
+  const source=readerSource();
+  assert.match(source,/const scrollBeforeRender=Math\.max\(0,Math\.round\(window\.scrollY/);
+  assert.match(source,/document\.getElementById\('favBtn'\)\.onclick=\(\)=>\{[\s\S]*MLS\.save\(\);[\s\S]*page\(normalized\);/);
+  assert.match(source,/else\{\s*requestAnimationFrame\(\(\)=>window\.scrollTo\(\{top:scrollBeforeRender,left:0,behavior:'auto'\}\)\);\s*\}/);
+});
+
+test('intención vieja, corrupta o de otra entrada nunca restaura accidentalmente',()=>{
+  const source=readerSource();
+  assert.match(source,/catch\{return fallback\}/);
+  assert.match(source,/removeItem\?\.\(RESUME_INTENT_KEY\)/);
+  assert.match(source,/if\(!intent\|\|String\(intent\.code\|\|''\)\.toUpperCase\(\)!==normalized\)return false/);
+  assert.match(source,/Number\.isFinite\(at\)&&at>0&&Date\.now\(\)-at<=RESUME_INTENT_MAX_AGE/);
 });
 
 test('estado corrupto o ausente degrada de forma segura',()=>{
