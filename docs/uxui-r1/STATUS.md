@@ -15,9 +15,9 @@ Branch: uxui-r1-integration
 Blockers: none
 
 ### Chat A — Navigation & Orientation
-Status: READY FOR KICKOFF
+Status: READY — VISUAL FOUNDATION AVAILABLE
 Branch: uxui-r1-navigation
-Dependencies: D para tokens compartidos si realiza cambios visuales globales
+Dependencies: Visual Foundation v1 integrated; consume shared tokens for global visual changes
 
 ### Chat B — Continuity & Personal Library
 Status: READY FOR KICKOFF
@@ -30,9 +30,12 @@ Branch: uxui-r1-discovery
 Dependencies: índice semántico existente; contratos canónicos
 
 ### Chat D — Visual System
-Status: READY FOR WAVE 1
+Status: INTEGRATED — WAVE 1 COMPLETE
 Branch: uxui-r1-visual-system
-Dependencies: ninguna dura al inicio
+PR: #101
+Integrated commit: 233987dd4cc437fca283efd14804353872364e22
+Delivered: Visual Foundation v1, shared tokens, opt-in primitives, central stylesheet loading, focus contrast contract
+Dependencies: ninguna
 
 ### Chat E — Offline & Resilience
 Status: READY FOR KICKOFF
@@ -40,9 +43,9 @@ Branch: uxui-r1-offline
 Dependencies: respetar PWA/cache existentes
 
 ### Chat F — AI Experience
-Status: READY FOR KICKOFF
+Status: READY — VISUAL FOUNDATION AVAILABLE
 Branch: uxui-r1-ai-experience
-Dependencies: no modificar modelos/proveedores
+Dependencies: consume shared tokens/primitives where appropriate; no modificar modelos/proveedores
 
 ### Chat G — Accessibility & Responsive QA
 Status: BASELINE ONLY
