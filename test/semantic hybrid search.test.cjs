@@ -1,6 +1,8 @@
 'use strict';
 
 const fs=require('node:fs');
+const os=require('node:os');
+const path=require('node:path');
 const {execFileSync}=require('node:child_process');
 const test=require('node:test');
 const assert=require('node:assert/strict');
@@ -72,4 +74,28 @@ test('semantic query whitespace normalization keeps the real whitespace regex',(
   const hybrid=patchSemanticSearch(patchSearch(shellSearch()));
   assert.match(hybrid,/replace\(\/\\s\+\/g,' '\)/);
   assert.doesNotMatch(hybrid,/replace\(\/s\+\/g,' '\)/);
+});
+
+
+test('semantic publish health is valid JSON after a real publish',()=>{
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'mls-semantic-publish-'));
+  try{
+    const result=require('node:child_process').spawnSync(
+      process.execPath,
+      ['scripts/publicar indice semantico.js'],
+      {encoding:'utf8',env:{...process.env,MLS_SEMANTIC_PUBLIC_ROOT:dir}}
+    );
+    assert.equal(result.status,0,result.stderr||result.stdout);
+    const raw=fs.readFileSync(path.join(dir,'publish-health.json'),'utf8');
+    const health=JSON.parse(raw);
+    assert.equal(health.ok,true);
+    assert.equal(health.model,'@cf/baai/bge-m3');
+    assert.equal(health.totalEntries,10133);
+    assert.equal(health.totalChunks,10669);
+    assert.equal(health.totalBytes,10967732);
+    assert.ok(raw.endsWith('\n'));
+    assert.ok(!raw.endsWith('\\\\n'));
+  }finally{
+    fs.rmSync(dir,{recursive:true,force:true});
+  }
 });
