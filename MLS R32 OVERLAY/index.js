@@ -172,7 +172,7 @@ var WikiStore = class extends DurableObject {
       language: language.slug,
       languageName: language.name,
       n,
-      seedPath: `/data/wiki-seeds/${language.slug}/${padded}.json`,
+      seedPath: `/data/canonical/seeds/${language.slug}/${padded}.json`,
       claimedAt: now
     };
     state.claim = claim;
@@ -2657,7 +2657,7 @@ function jobFromGlobalIndex(globalIndex) {
         language: language.slug,
         languageName: language.name,
         n,
-        seedPath: `/data/wiki-seeds/${language.slug}/${padded}.json`
+        seedPath: `/data/canonical/seeds/${language.slug}/${padded}.json`
       };
     }
     cursor -= language.total;
@@ -2678,7 +2678,7 @@ function jobFromCode(code) {
     language: language.slug,
     languageName: language.name,
     n,
-    seedPath: `/data/wiki-seeds/${language.slug}/${padded}.json`
+    seedPath: `/data/canonical/seeds/${language.slug}/${padded}.json`
   };
 }
 __name(jobFromCode, "jobFromCode");
