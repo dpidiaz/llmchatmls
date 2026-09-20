@@ -188,7 +188,7 @@
       }
       return combined;
     }catch(error){
-      console.warn('MLS related semantic fallback',language,error);
+      console.warn('MLS related supplemental fallback',language,error);
       return editorial;
     }
   }
