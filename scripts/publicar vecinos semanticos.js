@@ -3,6 +3,7 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
+const {LANGUAGES}=require('./exportar corpus canonico.js');
 
 const SOURCE_ROOT=path.resolve(process.env.MLS_RELATED_ROOT||'related');
 const PUBLIC_ROOT=path.resolve(process.env.MLS_RELATED_PUBLIC_ROOT||'public/data/related');
@@ -11,6 +12,7 @@ const VERSION='1.0';
 const MODEL='@cf/baai/bge-m3';
 const EXPECTED_ENTRIES=10133;
 const EXPECTED_LANGUAGES=10;
+const LANGUAGE_BY_SLUG=new Map(LANGUAGES.map(language=>[language.slug,language]));
 
 function sha256Buffer(value){return crypto.createHash('sha256').update(value).digest('hex')}
 function canonicalBuildId(root=CANONICAL_ROOT){
@@ -37,6 +39,8 @@ function validateRelatedSource(root=SOURCE_ROOT,canonicalRoot=CANONICAL_ROOT){
 
   let totalEntries=0;
   for(const [slug,descriptor] of Object.entries(descriptors)){
+    const language=LANGUAGE_BY_SLUG.get(slug);
+    if(!language)throw new Error('Idioma inesperado en relacionados: '+slug);
     const file=path.join(root,descriptor.file||slug+'.json');
     if(!fs.existsSync(file))throw new Error('Falta archivo de relacionados: '+slug);
     const raw=fs.readFileSync(file);
@@ -54,11 +58,13 @@ function validateRelatedSource(root=SOURCE_ROOT,canonicalRoot=CANONICAL_ROOT){
       typeof payload.neighbors!=='object'
     )throw new Error(slug+': payload de relacionados inválido.');
     if(Number(payload.totalEntries)!==Number(descriptor.totalEntries))throw new Error(slug+': totalEntries inconsistente.');
+    const expectedCodes=new Set(Array.from({length:language.total},(_,index)=>language.prefix+'-'+String(index+1).padStart(4,'0')));
+    if(Object.keys(payload.neighbors).length!==language.total)throw new Error(slug+': mapa de vecinos incompleto.');
     for(const [code,neighbors] of Object.entries(payload.neighbors)){
-      if(!/^MLS-V\d{2}-\d{4}$/.test(code)||!Array.isArray(neighbors))throw new Error(slug+': mapa de vecinos inválido.');
+      if(!expectedCodes.has(code)||!Array.isArray(neighbors))throw new Error(slug+': mapa de vecinos no canónico.');
       const seen=new Set();
       for(const neighbor of neighbors){
-        if(!/^MLS-V\d{2}-\d{4}$/.test(neighbor)||neighbor===code||seen.has(neighbor))throw new Error(slug+': vecino inválido o duplicado en '+code);
+        if(!expectedCodes.has(neighbor)||neighbor===code||seen.has(neighbor))throw new Error(slug+': vecino no canónico, cruzado o duplicado en '+code);
         seen.add(neighbor);
       }
     }
