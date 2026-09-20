@@ -1,0 +1,62 @@
+name: Validar runtime canonico MLS temporal
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/validar-runtime-canonico-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validar salud del corpus publicado
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          curl --fail --silent --show-error "$base/data/canonical/runtime-health.json" -o health.json
+          node -e '
+            const fs=require("fs");
+            const h=JSON.parse(fs.readFileSync("health.json","utf8"));
+            if(h.ok!==true) throw new Error("runtime-health ok != true");
+            if(h.promptVersion!=="32.0") throw new Error("promptVersion inesperada: "+h.promptVersion);
+            if(Number(h.totalEntries)!==10133) throw new Error("totalEntries inesperado: "+h.totalEntries);
+            if(!h.corpusBuildId) throw new Error("falta corpusBuildId");
+            console.log("runtime-health OK", h.totalEntries, h.corpusBuildId.slice(0,12));
+          '
+      - name: Validar manifest y entrada reparada
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          curl --fail --silent --show-error "$base/data/canonical/runtime-manifest.json" -o manifest.json
+          curl --fail --silent --show-error "$base/data/canonical/shards/chino-taiwan/0401-0500.json" -o shard.json
+          node -e '
+            const fs=require("fs");
+            const m=JSON.parse(fs.readFileSync("manifest.json","utf8"));
+            const s=JSON.parse(fs.readFileSync("shard.json","utf8"));
+            if(m.standard!=="MLS R32"||m.promptVersion!=="32.0") throw new Error("manifest canónico inválido");
+            if(Number(m.totalEntries)!==10133) throw new Error("manifest incompleto");
+            if(!m.corpusBuildId) throw new Error("manifest sin corpusBuildId");
+            const a=s.entries&&s.entries["MLS-V07-0484"];
+            if(!a) throw new Error("MLS-V07-0484 no está en el shard publicado");
+            if(a.title!=="不然"||a.promptVersion!=="32.0") throw new Error("MLS-V07-0484 no coincide con R32 canónico");
+            console.log("entrada canónica OK", a.code, a.title);
+          '
+      - name: Validar lector publicado GitHub-first
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          curl --fail --silent --show-error "$base/js/reader.js" -o reader.js
+          grep -q '/data/canonical/runtime-manifest.json' reader.js
+          grep -q 'Contenido no disponible' reader.js
+          if grep -q '/api/wiki/article/' reader.js; then echo 'reader todavía consulta D1 article'; exit 1; fi
+          if grep -q '/api/wiki/materialize/' reader.js; then echo 'reader todavía materializa desde D1'; exit 1; fi
+          if grep -q 'easy.lead' reader.js; then echo 'reader todavía usa lead legacy'; exit 1; fi
+          echo 'reader GitHub-first OK'
