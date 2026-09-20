@@ -5,47 +5,48 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light">
   <title>Virtuoso · Bibliotecario de MASTER LANGUAGE SYSTEM</title>
-  <meta name="description" content="Virtuoso orienta dentro del corpus canónico de MASTER LANGUAGE SYSTEM.">
+  <meta name="description" content="Virtuoso te ayuda a encontrar por dónde empezar dentro de la biblioteca de MASTER LANGUAGE SYSTEM.">
   <style>
-    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#182026;background:#f4f1eb;font-size:16px}
+    :root{font-family:var(--mls-font-sans,Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);color:var(--mls-text-primary,#182026);background:var(--mls-surface-canvas-light,#f4f1eb);font-size:16px}
     *{box-sizing:border-box}
-    body{margin:0;background:#f4f1eb;color:#182026;line-height:1.5}
+    body{margin:0;background:var(--mls-surface-canvas-light,#f4f1eb);color:var(--mls-text-primary,#182026);line-height:var(--mls-line-height-body,1.5)}
     a{color:inherit}
     button,input,select{font:inherit}
-    .shell{max-width:1120px;margin:0 auto;padding:24px 20px 64px}
-    .top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:34px}
+    .shell{max-width:1120px;margin:0 auto;padding:var(--mls-space-5,24px) 20px 64px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:var(--mls-space-4,16px);margin-bottom:34px}
     .brand{font-weight:800;letter-spacing:.04em;text-decoration:none}
-    .back{border:1px solid #c9c1b6;border-radius:12px;padding:9px 13px;text-decoration:none;background:#fff}
+    .back{border:1px solid var(--mls-border-control-light,#c9c1b6);border-radius:var(--mls-radius-md,12px);padding:9px 13px;text-decoration:none;background:var(--mls-surface-raised-light,#fff)}
     .hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.75fr);gap:28px;align-items:start}
-    .card{background:#fff;border:1px solid #d8d0c6;border-radius:20px;box-shadow:0 12px 40px rgba(35,31,26,.07)}
+    .card{background:var(--mls-surface-raised-light,#fff);border:1px solid var(--mls-border-subtle-light,#d8d0c6);border-radius:var(--mls-radius-xl,20px);box-shadow:var(--mls-shadow-card,0 12px 40px rgba(35,31,26,.07))}
     .intro{padding:30px}
     .eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#766452;font-weight:800}
     h1{font-size:clamp(2rem,7vw,4.4rem);line-height:.95;letter-spacing:-.045em;margin:.35rem 0 1rem}
-    .lead{font-size:1.12rem;color:#515961;max-width:720px}
-    .persona{padding:24px;background:#eee7dc}
+    .lead{font-size:1.12rem;color:var(--mls-text-secondary,#515961);max-width:720px}
+    .persona{padding:var(--mls-space-5,24px);background:var(--mls-surface-warm-light,#eee7dc)}
     .persona strong{display:block;font-size:1.08rem;margin-bottom:8px}
     .persona p{margin:0;color:#5c554d}
     .form{margin-top:28px;display:grid;gap:14px}
     label{display:grid;gap:7px;font-weight:750}
-    select,input{width:100%;min-height:48px;border:1px solid #bdb4a8;border-radius:12px;background:#fff;color:#182026;padding:11px 13px}
+    select,input{width:100%;min-height:var(--mls-control-height-large,48px);border:1px solid var(--mls-border-control-light,#bdb4a8);border-radius:var(--mls-radius-md,12px);background:var(--mls-surface-raised-light,#fff);color:var(--mls-text-primary,#182026);padding:11px 13px}
     input{font-size:1.02rem}
     .action-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-    .primary{border:0;border-radius:12px;background:#1e2b33;color:#fff;padding:12px 18px;font-weight:800;cursor:pointer}
+    .primary{min-height:var(--mls-control-height,44px);border:0;border-radius:var(--mls-radius-md,12px);background:var(--mls-action-strong,#1e2b33);color:#fff;padding:12px 18px;font-weight:800;cursor:pointer}
     .primary:disabled{opacity:.55;cursor:not-allowed}
     .status{font-size:.9rem;color:#62686d}
     .examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .example{border:1px solid #cfc6ba;background:#faf8f4;border-radius:999px;padding:8px 11px;cursor:pointer;color:#4c4c49}
+    .example{min-height:var(--mls-control-height,44px);border:1px solid var(--mls-border-subtle-light,#cfc6ba);background:var(--mls-surface-panel-light,#faf8f4);border-radius:var(--mls-radius-pill,999px);padding:8px 11px;cursor:pointer;color:#4c4c49}
     .results{margin-top:28px;display:grid;gap:14px}
-    .summary{padding:18px 20px;background:#eee7dc;border:1px solid #d6c9b8;border-radius:16px}
+    .summary{padding:18px 20px;background:var(--mls-surface-warm-light,#eee7dc);border:1px solid var(--mls-border-subtle-light,#d6c9b8);border-radius:var(--mls-radius-lg,16px)}
     .summary strong{display:block;margin-bottom:3px}
     .result{padding:20px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:start}
     .num{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#e9e2d8;font-weight:850}
     .result h2{font-size:1.12rem;margin:0 0 4px}
     .meta{font-size:.82rem;color:#6c6f71;margin-bottom:8px}
     .reason{margin:0;color:#444b50}
-    .open{align-self:center;border:1px solid #bcb3a8;border-radius:10px;padding:9px 11px;text-decoration:none;background:#fff;font-weight:700}
-    .empty{padding:22px;border:1px dashed #bfb6ab;border-radius:16px;color:#5d6266}
+    .open{align-self:center;min-height:var(--mls-control-height,44px);display:inline-flex;align-items:center;border:1px solid var(--mls-border-control-light,#bcb3a8);border-radius:var(--mls-radius-md,12px);padding:9px 11px;text-decoration:none;background:var(--mls-surface-raised-light,#fff);font-weight:700}
+    .empty{padding:22px;border:1px dashed var(--mls-border-control-light,#bfb6ab);border-radius:var(--mls-radius-lg,16px);color:#5d6266}
     .degraded{font-size:.82rem;color:#745f47;margin-top:8px}
+    .back:focus-visible,.primary:focus-visible,.example:focus-visible,.open:focus-visible,select:focus-visible,input:focus-visible{outline:var(--mls-focus-width,3px) solid var(--mls-focus-color,#527a91);outline-offset:var(--mls-focus-offset,2px)}
     @media(max-width:760px){.shell{padding:18px 14px 44px}.hero{grid-template-columns:1fr}.intro{padding:22px}.persona{order:-1}.result{grid-template-columns:auto 1fr}.open{grid-column:2;justify-self:start}.top{margin-bottom:22px}}
   </style>
 </head>
@@ -96,7 +97,7 @@
 
       <aside class="card persona">
         <strong>Cómo trabaja Virtuoso</strong>
-        <p>No inventa temas ni rutas. Primero busca entradas existentes en el idioma elegido; después ordena una selección breve y explica por qué podrían servirte. Profesor IA sigue siendo quien enseña y practica cada tema.</p>
+        <p>Virtuoso conoce la biblioteca de MLS. Describe lo que quieres aprender y te ayudará a encontrar las entradas más útiles para empezar. Cuando abras una entrada, Profesor IA puede ayudarte a comprenderla y practicarla.</p>
       </aside>
     </section>
 
@@ -224,18 +225,18 @@
     function render(payload,candidates){
       const recs=Array.isArray(payload?.recommendations)&&payload.recommendations.length?payload.recommendations:candidates.slice(0,5).map((c,i)=>({...c,order:i+1,reason:'Esta entrada aparece entre las coincidencias más relevantes de la biblioteca para tu consulta.',deepLink:'/#entry='+c.code}));
       const summaryText=payload?.intro||'Estas son las entradas que mejor encajan con tu consulta.';
-      results.innerHTML='<div class="summary"><strong>'+esc(payload?.intent||'Ruta sugerida')+'</strong>'+esc(summaryText)+(payload?.degraded?'<div class="degraded">Orientación automática no disponible; se muestran los mejores resultados de la búsqueda híbrida.</div>':'')+'</div>'+
+      results.innerHTML='<div class="summary"><strong>'+esc(payload?.intent||'Ruta sugerida')+'</strong>'+esc(summaryText)+(payload?.degraded?'<div class="degraded">Virtuoso no está disponible temporalmente. Mientras tanto, te mostramos las coincidencias más relevantes de la biblioteca.</div>':'')+'</div>+
         recs.map((r,i)=>'<article class="card result"><span class="num">'+esc(r.order||i+1)+'</span><div><h2>'+esc(r.title)+'</h2><div class="meta">'+esc([r.level,r.part,r.chapter].filter(Boolean).join(' · '))+'</div><p class="reason">'+esc(r.reason||'Entrada relevante para tu objetivo.')+'</p></div><a class="open" href="'+esc(r.deepLink||('/#entry='+r.code))+'">Abrir entrada</a></article>').join('');
     }
     async function askVirtuoso(){
       const slug=language.value,text=query.value.trim();
       if(!slug||text.length<2)return;
-      ask.disabled=true;status.textContent='Buscando en la biblioteca…';results.innerHTML='';
+      ask.disabled=true;status.textContent='Buscando en MLS…';results.innerHTML='';
       try{
         localStorage.setItem('mlsVirtuosoLanguage',slug);
         const candidates=await retrieve(text,slug);
         if(!candidates.length){results.innerHTML='<div class="empty">No encontré una entrada suficientemente relacionada. Prueba describiendo el concepto con otras palabras.</div>';return}
-        status.textContent='Ordenando los mejores resultados…';
+        status.textContent='Preparando una selección breve…';
         let payload=null;
         try{
           const response=await fetch('/api/virtuoso',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:text,targetLanguage:slug,candidates})});
