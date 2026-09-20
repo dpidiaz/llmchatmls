@@ -49,12 +49,26 @@
     .muted{color:var(--mls-text-secondary,#515961)}
     .offline-note{margin-top:18px;color:var(--mls-text-secondary,#515961);font-size:.95rem}
     .translate-placeholder{padding:16px;border:1px dashed var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);background:var(--mls-surface-muted-light,#f3efe8);margin-top:16px}
+    .offline-tools{margin-top:18px;border:1px solid var(--mls-border-subtle-light,#ddd6cc);border-radius:var(--mls-radius-md,12px);background:var(--mls-surface-muted-light,#f3efe8);padding:0 14px}
+    .offline-tools summary{min-height:44px;display:flex;align-items:center;font-weight:800;cursor:pointer}
+    .offline-content{padding:0 0 14px}
+    .pack-list{display:grid;gap:10px;margin-top:12px}
+    .pack-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--mls-border-subtle-light,#ddd6cc);border-radius:var(--mls-radius-md,12px);padding:12px}
+    .pack-row strong,.pack-row small{display:block}
+    .pack-row small{color:var(--mls-text-secondary,#515961);margin-top:3px}
+    .pack-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .pack-actions .btn{min-width:92px}
+    progress{width:100%;height:12px;margin-top:10px;accent-color:var(--mls-action-strong,#1e2b33)}
+    .privacy-note{font-size:.92rem;color:var(--mls-text-secondary,#515961);margin:10px 0 0}
     @media(max-width:640px){
       .shell{padding-left:14px;padding-right:14px}
       .top{align-items:flex-start}
       .language-row{grid-template-columns:1fr}
       .swap{border-radius:var(--mls-radius-md,12px);width:100%}
       .actions .btn,.audio-actions .btn{flex:1 1 145px}
+      .pack-row{grid-template-columns:1fr}
+      .pack-actions{justify-content:stretch}
+      .pack-actions .btn{flex:1 1 120px}
     }
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
   </style>
@@ -97,8 +111,19 @@
     </div>
 
     <div class="translate-placeholder" id="translationStatus" role="status" aria-live="polite">
-      La traducción mejorada necesita conexión. La pronunciación puede seguir funcionando de forma independiente.
+      Puedes traducir con conexión. Si preparas los idiomas necesarios, MLS intentará traducir primero en tu dispositivo.
     </div>
+
+    <details class="offline-tools" id="offlineTools">
+      <summary>Usar traducción sin Internet</summary>
+      <div class="offline-content">
+        <p id="offlineToolsSummary" class="muted">Comprobando los paquetes necesarios…</p>
+        <div class="pack-list" id="offlinePackList"></div>
+        <progress id="offlinePackProgress" max="100" value="0" hidden aria-label="Progreso de descarga"></progress>
+        <div id="offlinePackStatus" role="status" aria-live="polite"></div>
+        <p class="privacy-note">Los paquetes se descargan solo cuando tú lo eliges. La traducción local se procesa en este dispositivo y no envía tu texto a Workers AI.</p>
+      </div>
+    </details>
 
     <section class="result" id="translationResult" hidden>
       <h2>Traducción</h2>
@@ -185,6 +210,10 @@
   const translatedText=byId('translatedText');
   const translationGuide=byId('translationGuide');
   const translationSpeechStatus=byId('translationSpeechStatus');
+  const offlineToolsSummary=byId('offlineToolsSummary');
+  const offlinePackList=byId('offlinePackList');
+  const offlinePackProgress=byId('offlinePackProgress');
+  const offlinePackStatus=byId('offlinePackStatus');
   const pronounceLanguage=byId('pronounceLanguage');
   const pronounceInput=byId('pronounceInput');
   const pronunciationResult=byId('pronunciationResult');
@@ -194,6 +223,124 @@
   const speechStatus=byId('speechStatus');
   let voices=[];
   let lastSpeech=null;
+  let offlineModulePromise=null;
+  let offlineRefreshToken=0;
+
+  function offlineModule(){
+    if(!offlineModulePromise)offlineModulePromise=import('/translator/offline.js').catch(error=>{offlineModulePromise=null;throw error});
+    return offlineModulePromise;
+  }
+
+  function escapeText(value){
+    return String(value==null?'':value);
+  }
+
+  function packStatusLabel(status){
+    if(status==='ready')return 'Disponible sin Internet';
+    if(status==='partial')return 'Descarga incompleta';
+    if(status==='unsupported')return 'No disponible en este navegador';
+    return 'No descargado';
+  }
+
+  async function refreshOfflineTools(){
+    const token=++offlineRefreshToken;
+    offlinePackList.replaceChildren();
+    offlineToolsSummary.textContent='Comprobando los paquetes necesarios…';
+    offlinePackStatus.textContent='';
+    offlinePackProgress.hidden=true;
+    try{
+      const offline=await offlineModule();
+      const summary=await offline.packSummary(sourceLanguage.value,targetLanguage.value);
+      if(token!==offlineRefreshToken)return;
+      if(summary.required.length===0){
+        offlineToolsSummary.textContent=sourceLanguage.value===targetLanguage.value
+          ?'No necesitas un paquete adicional cuando el idioma de origen y destino es el mismo.'
+          :'El motor compartido se prepara junto con el primer paquete que descargues.';
+        return;
+      }
+      const total=summary.packs.reduce((sum,item)=>sum+Number(item.compressedBytes||0),0);
+      offlineToolsSummary.textContent='Para esta combinación necesitas '+summary.packs.length+' paquete'+(summary.packs.length===1?'':'s')+' ('+offline.bytesLabel(total)+' aprox.).';
+      for(const pack of summary.packs){
+        const row=document.createElement('div');
+        row.className='pack-row';
+        row.dataset.packSlug=pack.slug;
+        const text=document.createElement('div');
+        const title=document.createElement('strong');
+        title.textContent=pack.label;
+        const meta=document.createElement('small');
+        meta.textContent=offline.bytesLabel(pack.compressedBytes)+' · '+packStatusLabel(pack.status);
+        text.append(title,meta);
+        const actions=document.createElement('div');
+        actions.className='pack-actions';
+        const prepare=document.createElement('button');
+        prepare.type='button';
+        prepare.className='btn';
+        prepare.dataset.preparePack=pack.slug;
+        prepare.textContent=pack.status==='partial'?'Reintentar':'Descargar';
+        if(pack.status==='ready')prepare.hidden=true;
+        const remove=document.createElement('button');
+        remove.type='button';
+        remove.className='btn';
+        remove.dataset.removePack=pack.slug;
+        remove.textContent='Eliminar';
+        remove.hidden=pack.status==='empty'||pack.status==='unsupported';
+        actions.append(prepare,remove);
+        row.append(text,actions);
+        offlinePackList.append(row);
+      }
+      if(summary.storage&&summary.storage.quota){
+        const free=Math.max(0,summary.storage.quota-summary.storage.usage);
+        offlinePackStatus.textContent='Espacio estimado disponible: '+offline.bytesLabel(free)+'.';
+      }
+    }catch(error){
+      if(token!==offlineRefreshToken)return;
+      offlineToolsSummary.textContent='No fue posible comprobar los paquetes offline.';
+      offlinePackStatus.textContent=String(error&&error.message||error);
+    }
+  }
+
+  async function prepareOfflinePack(slug,button){
+    if(!navigator.onLine){
+      offlinePackStatus.textContent='Conéctate a Internet para descargar este paquete.';
+      return;
+    }
+    button.disabled=true;
+    offlinePackProgress.hidden=false;
+    offlinePackProgress.value=0;
+    offlinePackStatus.textContent='Preparando descarga…';
+    try{
+      const offline=await offlineModule();
+      await offline.preparePack(slug,event=>{
+        if(event.totalBytes){
+          const ratio=Math.max(0,Math.min(1,Number(event.completedBytes||0)/Number(event.totalBytes)));
+          offlinePackProgress.value=Math.round(ratio*100);
+        }
+        if(event.phase==='downloading')offlinePackStatus.textContent='Descargando recursos del idioma…';
+        if(event.phase==='verified')offlinePackStatus.textContent='Verificando integridad…';
+      });
+      offlinePackProgress.value=100;
+      offlinePackStatus.textContent='Paquete disponible sin Internet.';
+      await refreshOfflineTools();
+    }catch(error){
+      offlinePackStatus.textContent='La descarga quedó incompleta. '+String(error&&error.message||error);
+      await refreshOfflineTools();
+    }finally{
+      button.disabled=false;
+      setTimeout(()=>{offlinePackProgress.hidden=true},800);
+    }
+  }
+
+  async function removeOfflinePack(slug,button){
+    button.disabled=true;
+    try{
+      const offline=await offlineModule();
+      await offline.removePack(slug);
+      offlinePackStatus.textContent='Paquete eliminado del dispositivo.';
+      await refreshOfflineTools();
+    }catch(error){
+      offlinePackStatus.textContent='No fue posible eliminar el paquete. '+String(error&&error.message||error);
+    }finally{button.disabled=false}
+  }
 
   function optionMarkup(selected){
     return LANGUAGES.map(lang=>'<option value="'+lang.slug+'"'+(lang.slug===selected?' selected':'')+'>'+lang.label+'</option>').join('');
@@ -277,6 +424,7 @@
     const a=sourceLanguage.value;
     sourceLanguage.value=targetLanguage.value;
     targetLanguage.value=a;
+    refreshOfflineTools();
   });
 
   function japaneseKanaToHepburn(input){
@@ -383,6 +531,14 @@
   document.addEventListener('click',event=>{
     const button=event.target.closest('button');
     if(!button)return;
+    if(button.dataset.preparePack){
+      prepareOfflinePack(button.dataset.preparePack,button);
+      return;
+    }
+    if(button.dataset.removePack){
+      removeOfflinePack(button.dataset.removePack,button);
+      return;
+    }
     const host=button.closest('[data-audio-context]');
     const context=host&&host.getAttribute('data-audio-context');
     const statusElement=context==='translation'?translationSpeechStatus:speechStatus;
@@ -407,6 +563,8 @@
   pronounceLanguage.addEventListener('change',()=>{
     if(!pronunciationResult.hidden)preparePronunciation();
   });
+  sourceLanguage.addEventListener('change',refreshOfflineTools);
+  targetLanguage.addEventListener('change',refreshOfflineTools);
 
   translateButton.addEventListener('click',async()=>{
     const text=sanitizeSpeechText(translateInput.value);
@@ -415,38 +573,73 @@
       translateInput.focus();
       return;
     }
-    if(!navigator.onLine){
-      translationStatus.textContent='Sin Internet, la traducción completa todavía no está disponible. Puedes usar Pronunciar y el audio local.';
-      return;
-    }
     const oldLabel=translateButton.textContent;
     translateButton.disabled=true;
     translateButton.textContent='Traduciendo…';
-    translationStatus.textContent='Traduciendo…';
+    translationStatus.textContent='Comprobando traducción local…';
     translationResult.hidden=true;
     if('speechSynthesis' in window)window.speechSynthesis.cancel();
+
     try{
-      const response=await fetch('/api/translate',{
-        method:'POST',
-        headers:{'content-type':'application/json'},
-        cache:'no-store',
-        body:JSON.stringify({
-          text,
-          sourceLanguage:sourceLanguage.value,
-          targetLanguage:targetLanguage.value
-        })
-      });
-      const payload=await response.json().catch(()=>({}));
-      if(!response.ok||payload.ok!==true)throw new Error(payload.error||'No fue posible traducir.');
-      const translation=sanitizeSpeechText(payload.translation);
+      let localResult=null;
+      let localAvailable=false;
+      try{
+        const offline=await offlineModule();
+        const availability=await offline.canTranslateOffline(sourceLanguage.value,targetLanguage.value);
+        localAvailable=availability.ok===true;
+        if(localAvailable){
+          translationStatus.textContent='Traduciendo en este dispositivo…';
+          localResult=await offline.translateLocal({
+            sourceSlug:sourceLanguage.value,
+            targetSlug:targetLanguage.value,
+            text
+          });
+        }
+      }catch(localError){
+        console.warn('MLS local translation unavailable:',localError);
+      }
+
+      let translation;
+      let sameLanguage=false;
+      let local=false;
+      if(localResult){
+        translation=sanitizeSpeechText(localResult.translation);
+        sameLanguage=localResult.sameLanguage===true;
+        local=true;
+      }else{
+        if(!navigator.onLine){
+          translationStatus.textContent=localAvailable
+            ?'El motor local no pudo completar esta traducción. Intenta de nuevo.'
+            :'Esta combinación todavía no está preparada para traducirse sin Internet. Descarga los paquetes indicados abajo.';
+          return;
+        }
+        translationStatus.textContent='Usando traducción mejorada con conexión…';
+        const response=await fetch('/api/translate',{
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          cache:'no-store',
+          body:JSON.stringify({
+            text,
+            sourceLanguage:sourceLanguage.value,
+            targetLanguage:targetLanguage.value
+          })
+        });
+        const payload=await response.json().catch(()=>({}));
+        if(!response.ok||payload.ok!==true)throw new Error(payload.error||'No fue posible traducir.');
+        translation=sanitizeSpeechText(payload.translation);
+        sameLanguage=payload.sameLanguage===true;
+      }
+
       if(!translation)throw new Error('La traducción llegó vacía.');
       translatedText.textContent=translation;
       const guide=pronunciationGuideFor(targetLanguage.value,translation);
       translationGuide.textContent=guide.guide;
       translationResult.hidden=false;
-      translationStatus.textContent=payload.sameLanguage
+      translationStatus.textContent=sameLanguage
         ?'Los idiomas son iguales; se conserva el texto para que puedas practicar su pronunciación.'
-        :'Traducción lista. Puedes escucharla a velocidad normal o lenta.';
+        :local
+          ?'Traducción local lista. El texto se procesó en este dispositivo.'
+          :'Traducción lista con conexión. Puedes escucharla a velocidad normal o lenta.';
       updateTranslationSpeechStatus(targetLanguage.value);
     }catch(error){
       translationStatus.textContent=String(error&&error.message||'No fue posible traducir en este momento.');
@@ -468,12 +661,19 @@
 
   applyContext();
   loadVoices();
+  refreshOfflineTools();
   if('speechSynthesis' in window&&'onvoiceschanged' in window.speechSynthesis){
     window.speechSynthesis.addEventListener('voiceschanged',loadVoices);
   }
   window.addEventListener('beforeunload',()=>{if('speechSynthesis' in window)window.speechSynthesis.cancel()});
-  window.addEventListener('offline',()=>{byId('connectivityNote').textContent='Sin Internet. El audio seguirá disponible solo si el dispositivo tiene una voz local compatible.'});
-  window.addEventListener('online',()=>{byId('connectivityNote').textContent='Conexión restaurada. La pronunciación puede usar las voces compatibles disponibles en el dispositivo.'});
+  window.addEventListener('offline',()=>{
+    byId('connectivityNote').textContent='Sin Internet. La traducción local funciona con paquetes preparados; el audio depende de una voz local compatible.';
+    refreshOfflineTools();
+  });
+  window.addEventListener('online',()=>{
+    byId('connectivityNote').textContent='Conexión restaurada. Puedes descargar paquetes o usar la traducción mejorada.';
+    refreshOfflineTools();
+  });
 })();
 </script>
 </body>
