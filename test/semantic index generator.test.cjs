@@ -57,3 +57,10 @@ test('existing semantic language check rejects missing artifacts',()=>{
     assert.equal(existingLanguageIsCurrent({slug:'ingles',total:766},'x',dir),false);
   }finally{fs.rmSync(dir,{recursive:true,force:true})}
 });
+
+
+test('semantic metadata includes language identity fields',()=>{
+  const source=fs.readFileSync('scripts/generar indice semantico.js','utf8');
+  assert.match(source,/language:language\.slug/);
+  assert.match(source,/languageName:language\.name/);
+});
