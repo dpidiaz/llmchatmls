@@ -3,7 +3,7 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const {
-  semanticNeighbors,levelGap,auditNeighbors,languageOutput
+  semanticNeighbors,levelGap,relatedRank,auditNeighbors,languageOutput
 }=require('../scripts/generar vecinos semanticos.js');
 
 function vector(values){return Float32Array.from(values)}
@@ -34,6 +34,15 @@ test('level gap is conservative and only defined for CEFR labels',()=>{
   assert.equal(levelGap('A1','C1'),4);
   assert.equal(levelGap('A1',''),null);
   assert.equal(levelGap('X','B1'),null);
+});
+
+
+test('deterministic correction keeps semantic score dominant but favors local structure',()=>{
+  const anchor={level:'C1',part:'P',chapter:'C'};
+  const local={level:'B2',part:'P',chapter:'C'};
+  const remote={level:'B2',part:'X',chapter:'Y'};
+  assert.ok(relatedRank(anchor,local,0.70)>relatedRank(anchor,remote,0.72));
+  assert.ok(relatedRank(anchor,remote,0.90)>relatedRank(anchor,local,0.70));
 });
 
 test('neighbor audit exposes quality signals without changing ranking',()=>{
