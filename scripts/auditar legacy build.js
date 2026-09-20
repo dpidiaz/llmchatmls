@@ -42,3 +42,19 @@ console.log(JSON.stringify({
   javascriptReferences:refs.slice(0,120)
 },null,2));
 // audit trigger active
+
+const contractFiles=[
+  'public/data/index.js',
+  'public/data/volumes/chino-taiwan.js'
+];
+console.log('=== CONTRACT EXCERPTS ===');
+for(const name of contractFiles){
+  const file=path.join(tmp,name);
+  if(!fs.existsSync(file)){console.log(name+': MISSING');continue}
+  const text=fs.readFileSync(file,'utf8');
+  console.log('--- '+name+' bytes='+Buffer.byteLength(text,'utf8')+' ---');
+  console.log(text.slice(0,9000));
+  console.log('--- END HEAD '+name+' ---');
+  console.log(text.slice(Math.max(0,text.length-4000)));
+  console.log('--- END TAIL '+name+' ---');
+}
