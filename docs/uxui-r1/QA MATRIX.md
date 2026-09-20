@@ -61,3 +61,19 @@ Antes de integrar un PR a `uxui-r1-integration`:
 - offline sin regresión
 - mobile QA aprobado
 - accessibility QA aprobado
+
+
+## Baseline congelado antes de Wave 2
+
+Commit de referencia:
+`90c8f9ba6017ccf29407d59e3051700e33331671`
+
+Workstream G baseline:
+- PASS: 18
+- FAIL: 5
+- MANUAL QA REQUIRED: 7
+- BLOCKED: 1
+- N/A: 1
+
+Uso:
+Este commit es la referencia reproducible pre-integración funcional de Wave 2. Los cambios posteriores deben compararse contra este punto para distinguir problemas preexistentes, mejoras y regresiones.
