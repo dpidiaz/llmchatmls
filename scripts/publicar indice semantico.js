@@ -65,8 +65,7 @@ function publishSemanticIndex(){
     totalEntries:result.totalEntries,
     totalChunks:result.totalChunks,
     totalBytes:result.totalBytes
-  },null,2)+'
-','utf8');
+  },null,2)+'\\n','utf8');
   console.log(JSON.stringify({published:true,totalEntries:result.totalEntries,totalChunks:result.totalChunks,totalBytes:result.totalBytes}));
   return {published:true,...result};
 }
