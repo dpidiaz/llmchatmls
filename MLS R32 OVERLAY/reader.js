@@ -155,7 +155,6 @@
         relatedManifest?.promptVersion!=='32.0'||
         relatedManifest?.version!=='1.0'||
         relatedManifest?.source!=='semantic-neighbors'||
-        relatedManifest?.semanticModel!=='@cf/baai/bge-m3'||
         relatedManifest?.corpusBuildId!==manifest.corpusBuildId||
         !descriptor?.file
       )throw new Error('Manifest de relacionados incompatible.');
@@ -166,7 +165,6 @@
         payload?.promptVersion!=='32.0'||
         payload?.version!=='1.0'||
         payload?.source!=='semantic-neighbors'||
-        payload?.semanticModel!=='@cf/baai/bge-m3'||
         payload?.corpusBuildId!==manifest.corpusBuildId||
         payload?.language!==language||
         !payload?.neighbors||
