@@ -24,11 +24,16 @@ test('Translator reuses all ten canonical MLS language slugs',()=>{
   }
 });
 
-test('slow speech is a first-class mode rather than playback-rate postprocessing',()=>{
+test('slow speech exposes selectable pedagogical rates and repeat preserves the selected mode',()=>{
   assert.match(html,/const NORMAL_RATE=1;/);
-  assert.match(html,/const SLOW_RATE=0\.65;/);
-  assert.match(html,/new SpeechSynthesisUtterance\(text\)/);
-  assert.match(html,/utterance\.rate=mode==='slow'\?SLOW_RATE:NORMAL_RATE/);
+  assert.match(html,/const DEFAULT_SLOW_RATE=0\.65;/);
+  assert.match(html,/id="slowSpeechRate"/);
+  assert.match(html,/id="pronounceSlowSpeechRate"/);
+  for(const rate of ['0.85','0.65','0.50','0.40']) assert.match(html,new RegExp('value="'+rate.replace('.','\\.')+'"'));
+  assert.match(html,/function selectedSlowRate\(context\)/);
+  assert.match(html,/const rate=mode==='slow'\?selectedSlowRate\(context\):NORMAL_RATE/);
+  assert.match(html,/lastSpeech=\{text,slug,mode,context\}/);
+  assert.match(html,/speak\(lastSpeech\.text,lastSpeech\.slug,lastSpeech\.mode,statusElement,lastSpeech\.context/);
   assert.match(html,/>Escuchar lento<\/button>/);
   assert.doesNotMatch(html,/playbackRate/);
 });
@@ -117,9 +122,23 @@ test('Translator UI calls the dedicated endpoint and keeps offline pronunciation
   assert.match(html,/fetch\('\/api\/translate'/);
   assert.match(html,/sourceLanguage:sourceLanguage\.value/);
   assert.match(html,/targetLanguage:targetLanguage\.value/);
-  assert.match(html,/Esta combinación todavía no está preparada para traducirse sin Internet/);
+  assert.match(html,/Esta combinación no está preparada para traducción local/);
   assert.match(html,/translationResult\.hidden=false/);
   assert.match(html,/translatedText\.textContent=translation/);
+});
+
+test('translation engine is an explicit two-state Online or Local toggle with no automatic fallback',()=>{
+  assert.match(html,/data-translation-mode="online" aria-pressed="true">En línea<\/button>/);
+  assert.match(html,/data-translation-mode="local" aria-pressed="false">Local<\/button>/);
+  assert.match(html,/let translationMode='online'/);
+  assert.match(html,/if\(mode==='local'\)/);
+  assert.match(html,/El motor local no pudo completar esta traducción\. No se usó Internet/);
+  assert.match(html,/Traducción en línea lista\. Los paquetes locales no se usaron/);
+  assert.match(html,/El modo En línea necesita conexión a Internet\. Cambia a Local/);
+  assert.doesNotMatch(html,/value="auto"/);
+  assert.doesNotMatch(html,/Automático/);
+  assert.doesNotMatch(html,/mode==='auto'/);
+  assert.doesNotMatch(html,/alternativa al motor local/);
 });
 
 test('Translator backend executes with a mocked Workers AI binding and preserves privacy',async()=>{
