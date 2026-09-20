@@ -1,0 +1,56 @@
+name: Diagnose Virtuoso production fallback once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/diagnose-virtuoso-production-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Query Virtuoso production five times
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://llmchatmls.dpidiaz.workers.dev"
+          curl -LfsS "$base/data/canonical/catalog/ingles.json" -o /tmp/catalog.json
+          node - <<'NODE' >/tmp/request.json
+          const fs=require('fs');
+          const c=JSON.parse(fs.readFileSync('/tmp/catalog.json','utf8'));
+          const first=c.entries[0];
+          process.stdout.write(JSON.stringify({
+            query:'quiero aprender ingles',
+            targetLanguage:'ingles',
+            candidates:[{code:first.code}]
+          }));
+          NODE
+          for i in 1 2 3 4 5; do
+            code="$(curl -sS -o /tmp/resp.json -w '%{http_code}' "$base/api/virtuoso"               -H 'content-type: application/json'               --data-binary @/tmp/request.json)"
+            echo "HTTP=$code"
+            node - <<'NODE'
+            const fs=require('fs');
+            const r=JSON.parse(fs.readFileSync('/tmp/resp.json','utf8'));
+            console.log(JSON.stringify({
+              ok:r.ok,
+              usedAi:r.usedAi,
+              degraded:r.degraded,
+              model:r.model,
+              intent:r.intent,
+              intro:r.intro,
+              recommendations:Array.isArray(r.recommendations)?r.recommendations.length:null,
+              error:r.error
+            }));
+            NODE
+            sleep 1
+          done
