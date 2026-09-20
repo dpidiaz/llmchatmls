@@ -48,5 +48,6 @@ jobs:
             echo "No generated changes"
           else
             git commit -m "Generate Translator offline pack manifests"
+            git pull --rebase origin feature/translator-pronunciation-offline
             git push origin HEAD:feature/translator-pronunciation-offline
           fi
