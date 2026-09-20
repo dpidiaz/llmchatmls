@@ -1,0 +1,123 @@
+name: Smoke índice semántico MLS V2
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/generar-semantica-smoke-v2-temporal.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: mls-semantic-index-generation-v2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+
+      - name: Validar generador antes de consumir IA
+        run: |
+          node --test "test/semantic index generator.test.cjs"
+          node --test "test/semantic search foundation.test.cjs"
+
+      - name: Preparar clave efímera y Worker temporal
+        shell: bash
+        run: |
+          set -euo pipefail
+          KEY=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
+          echo "::add-mask::$KEY"
+          printf '%s' "$KEY" > /tmp/semantic-key
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const file='scripts/semantic batch worker temp.js';
+          const key=fs.readFileSync('/tmp/semantic-key','utf8').trim();
+          let source=fs.readFileSync(file,'utf8');
+          if(!source.includes('__SEMANTIC_GENERATION_KEY__')) throw new Error('Placeholder de clave temporal ausente.');
+          source=source.replace('__SEMANTIC_GENERATION_KEY__',key);
+          fs.writeFileSync(file,source);
+          NODE
+
+      - name: Desplegar Worker semántico temporal aislado
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx wrangler deploy -c wrangler.semantic-batch-temp.jsonc
+
+      - name: Verificar Worker temporal
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://mls-semantic-generator-temp.dpidiaz.workers.dev'
+          for i in 1 2 3 4 5 6 7 8; do
+            if curl --fail --silent --show-error "$base/health" -o /tmp/semantic-health.json; then break; fi
+            sleep 3
+          done
+          cat /tmp/semantic-health.json
+          KEY=$(cat /tmp/semantic-key)
+          curl --fail --silent --show-error             -H "authorization: Bearer $KEY"             -H 'content-type: application/json'             --data '{"texts":["semantic smoke test"]}'             "$base/embed" -o /tmp/semantic-smoke.json
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const p=JSON.parse(fs.readFileSync('/tmp/semantic-smoke.json','utf8'));
+          if(!p.ok||p.model!=='@cf/baai/bge-m3'||p.count!==1||!(p.dimensions>0)||!Array.isArray(p.vectors?.[0])) throw new Error('Smoke embedding inválido: '+JSON.stringify(p).slice(0,1000));
+          console.log('SEMANTIC_BATCH_SMOKE_OK',p.dimensions);
+          NODE
+
+      - name: Generar índice semántico de Inglés
+        env:
+          MLS_EMBEDDING_ENDPOINT: https://mls-semantic-generator-temp.dpidiaz.workers.dev/embed
+          MLS_SEMANTIC_BATCH_SIZE: "32"
+        shell: bash
+        run: |
+          set -euo pipefail
+          export MLS_EMBEDDING_KEY="$(cat /tmp/semantic-key)"
+          node "scripts/generar indice semantico.js" --language ingles
+
+      - name: Validar índice inglés
+        run: |
+          set -euo pipefail
+          test -s semantic/ingles.json
+          test -s semantic/ingles.bin
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const m=JSON.parse(fs.readFileSync('semantic/ingles.json','utf8'));
+          if(m.standard!=='MLS R32'||m.promptVersion!=='32.0'||m.model!=='@cf/baai/bge-m3') throw new Error('metadata base inválida');
+          if(m.language!=='ingles'||m.languageName!=='Inglés') throw new Error('identidad de idioma inválida');
+          if(Number(m.totalEntries)!==766) throw new Error('entries inesperado '+m.totalEntries);
+          if(!(Number(m.totalChunks)>0&&Number(m.dimensions)>0)) throw new Error('chunks/dimensions inválidos');
+          const bytes=fs.statSync('semantic/ingles.bin').size;
+          if(bytes!==m.totalChunks*m.recordBytes) throw new Error('binario incompatible '+bytes);
+          console.log('SEMANTIC_ENGLISH_OK '+JSON.stringify({entries:m.totalEntries,chunks:m.totalChunks,dimensions:m.dimensions,bytes}));
+          NODE
+
+      - name: Guardar checkpoint inglés
+        run: |
+          set -euo pipefail
+          git config user.name "MLS Semantic Index Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -- scripts/semantic\ batch\ worker\ temp.js
+          git add semantic/ingles.json semantic/ingles.bin
+          if git diff --cached --quiet; then
+            echo "Índice inglés ya estaba actualizado."
+          else
+            git commit -m "Generate English semantic index"
+            git push origin HEAD:mls-semantic-index-generation-v2
+          fi
+
+      - name: Eliminar Worker temporal
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        shell: bash
+        run: |
+          set +e
+          npx wrangler delete mls-semantic-generator-temp --force
+          exit 0
