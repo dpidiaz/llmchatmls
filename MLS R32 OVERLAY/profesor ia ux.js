@@ -1,29 +1,29 @@
 (function(root,factory){const api=factory(root);if(typeof module!=='undefined'&&module.exports)module.exports=api;if(root){root.MLSProfessorUX=api;if(root.MLS)api.install(root.MLS);}})(typeof window!=='undefined'?window:null,function(root){'use strict';
 const VERSION='1.0',STYLE_ID='mlsProfessorUXStyles';
 const STYLE_TEXT=`
-#aiTutorModal{width:min(760px,96vw);max-width:760px;max-height:min(88vh,820px);border:1px solid rgba(24,32,38,.16);border-radius:20px;background:#fbfaf7;color:#182026;box-shadow:0 24px 72px rgba(0,0,0,.24);padding:0;overflow:hidden}
+#aiTutorModal{width:min(760px,96vw);max-width:760px;max-height:min(88vh,820px);border:1px solid rgba(24,32,38,.16);border-radius:var(--mls-radius-xl,20px);background:var(--mls-surface-panel-light,#fbfaf7);color:var(--mls-text-primary,#182026);box-shadow:var(--mls-shadow-dialog,0 24px 72px rgba(0,0,0,.24));padding:0;overflow:hidden}
 #aiTutorModal::backdrop{background:rgba(20,26,32,.42)}
-#aiTutorModal,#aiTutorModal button,#aiTutorModal textarea,#aiTutorModal input,#aiTutorModal select{font-size:max(11pt,1rem)}
-#aiTutorModal .ai-shell,#aiTutorModal [data-ai-shell]{background:#fbfaf7;color:#182026}
-#aiTutorModal .ai-header,#aiTutorModal .ai-context{background:#f3efe8;color:#182026}
+#aiTutorModal,#aiTutorModal button,#aiTutorModal textarea,#aiTutorModal input,#aiTutorModal select{font-size:max(11pt,var(--mls-font-size-body,1rem))}
+#aiTutorModal .ai-shell,#aiTutorModal [data-ai-shell]{background:var(--mls-surface-panel-light,#fbfaf7);color:var(--mls-text-primary,#182026)}
+#aiTutorModal .ai-header,#aiTutorModal .ai-context{background:var(--mls-surface-muted-light,#f3efe8);color:var(--mls-text-primary,#182026)}
 #aiTutorModal .ai-context{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 14px}
 #aiTutorModal .ai-context strong{min-width:0;overflow-wrap:anywhere}
 #aiTutorModal [data-ai-messages]{padding:16px;scroll-padding-bottom:92px;background:#fffdf9}
 #aiTutorModal .ai-message{margin:0 0 12px}
-#aiTutorModal .ai-bubble{max-width:min(92%,680px);border:1px solid #ddd6cc;border-radius:14px;padding:12px 14px;background:#f7f3ed;color:#182026;line-height:1.55}
-#aiTutorModal .ai-message.user .ai-bubble{margin-left:auto;background:#eef3f6;border-color:#d6e0e6;color:#182026}
+#aiTutorModal .ai-bubble{max-width:min(92%,680px);border:1px solid var(--mls-border-subtle-light,#ddd6cc);border-radius:var(--mls-radius-lg,14px);padding:12px 14px;background:#f7f3ed;color:var(--mls-text-primary,#182026);line-height:1.55}
+#aiTutorModal .ai-message.user .ai-bubble{margin-left:auto;background:#eef3f6;border-color:#d6e0e6;color:var(--mls-text-primary,#182026)}
 #aiTutorModal .ai-role{font-size:max(11pt,.9rem);font-weight:700;color:#47515a;margin-bottom:5px}
 #aiTutorModal .ai-text{font-size:max(11pt,1rem);line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}
 #aiTutorModal .ai-text a.ai-internal-link{color:#173d5b;text-decoration:underline;text-underline-offset:2px;font-weight:650}
 #aiTutorModal .ai-status{margin:0;padding:10px 14px;min-height:20px;background:#f7f3ed;color:#38434c;font-size:max(11pt,.95rem)}
 #aiTutorModal .ai-status.error{background:#fff1ed;color:#64281f}
 #aiTutorModal .ai-status.loading{background:#eef5f8;color:#244555}
-#aiTutorModal .ai-compose{position:sticky;bottom:0;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:end;padding:12px 14px;background:#fbfaf7;border-top:1px solid #ddd6cc}
-#aiTutorModal [data-ai-input]{width:100%;min-height:50px;max-height:150px;resize:vertical;border:1px solid #b9b2a8;border-radius:12px;padding:10px 12px;background:#fff;color:#182026;line-height:1.45}
-#aiTutorModal .btn,#aiTutorModal button{min-height:44px;border-radius:10px;color:#182026;background:#f3efe8;border:1px solid #cfc7bc;padding:8px 12px}
-#aiTutorModal .btn.primary,#aiTutorModal button.primary{background:#dcecf3;color:#142c38;border-color:#bfd6e0;font-weight:700}
+#aiTutorModal .ai-compose{position:sticky;bottom:0;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;align-items:end;padding:12px 14px;background:var(--mls-surface-panel-light,#fbfaf7);border-top:1px solid var(--mls-border-subtle-light,#ddd6cc)}
+#aiTutorModal [data-ai-input]{width:100%;min-height:50px;max-height:150px;resize:vertical;border:1px solid var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);padding:10px 12px;background:var(--mls-surface-raised-light,#fff);color:var(--mls-text-primary,#182026);line-height:1.45}
+#aiTutorModal .btn,#aiTutorModal button{min-height:var(--mls-control-height,44px);border-radius:var(--mls-radius-md,10px);color:var(--mls-text-primary,#182026);background:var(--mls-surface-muted-light,#f3efe8);border:1px solid var(--mls-border-subtle-light,#cfc7bc);padding:8px 12px}
+#aiTutorModal .btn.primary,#aiTutorModal button.primary{background:var(--mls-teaching-accent-bg,#dcecf3);color:#142c38;border-color:var(--mls-teaching-accent-border,#bfd6e0);font-weight:700}
 #aiTutorModal button[hidden]{display:none!important}
-#aiTutorModal button:focus-visible,#aiTutorModal textarea:focus-visible,#aiTutorModal a:focus-visible{outline:3px solid #7da5bb;outline-offset:2px}
+#aiTutorModal button:focus-visible,#aiTutorModal textarea:focus-visible,#aiTutorModal a:focus-visible{outline:var(--mls-focus-width,3px) solid var(--mls-focus-color,#527a91);outline-offset:var(--mls-focus-offset,2px)}
 #aiTutorModal [data-ai-clear]{margin-left:auto}
 @media(max-width:600px){#aiTutorModal{width:100vw;max-width:100vw;height:min(92dvh,860px);max-height:92dvh;margin:auto 0 0;border-radius:20px 20px 0 0}#aiTutorModal [data-ai-messages]{padding:14px 12px}#aiTutorModal .ai-bubble{max-width:96%;padding:11px 12px}#aiTutorModal .ai-compose{grid-template-columns:1fr 1fr;padding:10px 12px}#aiTutorModal [data-ai-input]{grid-column:1/-1;min-height:56px}#aiTutorModal [data-ai-send],#aiTutorModal [data-ai-cancel]{width:100%}}
 @media(prefers-reduced-motion:reduce){#aiTutorModal *,#aiTutorModal *::before,#aiTutorModal *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
