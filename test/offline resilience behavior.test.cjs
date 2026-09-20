@@ -53,7 +53,7 @@ function createIosRuntime({fetchImpl}={}){
   };
   const window={
     MLS:{toast(){},pages:{}},
-    navigator,
+    navigator,caches,localStorage,
     matchMedia(){return {matches:false}},
     addEventListener(name,fn){windowListeners[name]=fn}
   };
