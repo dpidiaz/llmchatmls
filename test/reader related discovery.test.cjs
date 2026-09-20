@@ -8,8 +8,8 @@ const reader=fs.readFileSync('MLS R32 OVERLAY/reader.js','utf8');
 
 test('También mira keeps editorial results first and caps the list at five',()=>{
   assert.match(reader,/function relatedFromMarkdown\(markdown,catalog\)/);
-  assert.match(reader,/return related\\.slice\\(0,12\\);/);
-  assert.match(reader,/const editorial=relatedFromMarkdown\\(markdown,catalog\\)\\.slice\\(0,limit\\);/);
+  assert.match(reader,/return related\.slice\(0,12\);/);
+  assert.match(reader,/const editorial=relatedFromMarkdown\(markdown,catalog\)\.slice\(0,limit\);/);
   assert.match(reader,/if\(editorial\.length>=limit\)return editorial;/);
   assert.match(reader,/const combined=\[\.\.\.editorial\];/);
   assert.match(reader,/if\(combined\.length>=limit\)break;/);
