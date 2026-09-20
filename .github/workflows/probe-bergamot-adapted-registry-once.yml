@@ -29,7 +29,7 @@ jobs:
           npx playwright install --with-deps webkit >/dev/null
           cp -R node_modules/@browsermt/bergamot-translator site/bergamot
           node - <<'NODE'
-          const fs=require('fs');
+          const fs=await import('node:fs');
           const registryUrl='https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json';
           const modern=await fetch(registryUrl).then(r=>{if(!r.ok)throw new Error('registry '+r.status);return r.json()});
           const priority=status=>status==='Release'?0:status==='Release Android'?1:status==='Nightly'?2:3;
