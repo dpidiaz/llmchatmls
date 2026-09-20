@@ -31,17 +31,17 @@ function normalizeSeed(seed, language, n) {
     part: pick('part'),
     chapter: pick('chapter'),
     target: pick('target'),
-    definition: pick('definition'),
+    definition: pick('definition') || String(seed?.articleMarkdown || '').replace(/^####.*$/gm, '').replace(/[*_`>#]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 1200),
     example: pick('example'),
     notes: pick('notes'),
-    reference: pick('reference')
+    reference: undefined
   };
 }
 
 function buildStagingTargetCatalog(root = process.cwd()) {
-  const sourceRoot = path.join(root, 'public', 'data', 'wiki-seeds');
+  const sourceRoot = path.join(root, 'content');
   const outputRoot = path.join(root, 'public', 'mls-staging-targets');
-  if (!fs.existsSync(sourceRoot)) throw new Error('No existe public/data/wiki-seeds después de extraer R32.');
+  if (!fs.existsSync(sourceRoot)) throw new Error('No existe content/ con el corpus canónico R32.');
   fs.rmSync(outputRoot, { recursive: true, force: true });
   fs.mkdirSync(outputRoot, { recursive: true });
 
@@ -58,8 +58,9 @@ function buildStagingTargetCatalog(root = process.cwd()) {
     const entries = [];
     for (let n = 1; n <= language.total; n++) {
       const padded = String(n).padStart(4, '0');
-      const filename = path.join(sourceRoot, language.slug, padded + '.json');
-      if (!fs.existsSync(filename)) throw new Error('Falta semilla R32: ' + filename);
+      const code = language.prefix + '-' + padded;
+      const filename = path.join(sourceRoot, language.slug, code + '.json');
+      if (!fs.existsSync(filename)) throw new Error('Falta entrada canónica R32: ' + filename);
       const seed = JSON.parse(fs.readFileSync(filename, 'utf8'));
       const normalized = normalizeSeed(seed, language, n);
       if (!/^MLS-V\d{2}-\d{4}$/.test(normalized.code)) throw new Error('Código inválido en semilla: ' + normalized.code);
