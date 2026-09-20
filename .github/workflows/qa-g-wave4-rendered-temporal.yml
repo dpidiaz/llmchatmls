@@ -34,6 +34,9 @@ jobs:
       - name: 4 Predeploy
         run: npm run predeploy
 
+      - name: Diagnóstico de foco inicial
+        run: |
+          grep -RniE "autofocus|\.focus\(|focus\(" public/js public/index.html | head -80 || true
       - name: Instalar Chromium de QA sin modificar package.json
         run: |
           npm install --no-save --package-lock=false --legacy-peer-deps playwright@1.55.0
