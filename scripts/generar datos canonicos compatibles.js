@@ -91,13 +91,15 @@ function sha256(text){return crypto.createHash('sha256').update(text,'utf8').dig
 function buildCanonicalCompatibility(){
   const volumesRoot=path.join(PUBLIC_DATA_ROOT,'volumes');
   const oldSeedsRoot=path.join(PUBLIC_DATA_ROOT,'wiki-seeds');
-  const canonicalSeedsRoot=path.join(PUBLIC_DATA_ROOT,'canonical','seeds');
+  const perEntrySeedsRoot=path.join(PUBLIC_DATA_ROOT,'canonical','seeds');
+  const editorialSeedsRoot=path.join(PUBLIC_DATA_ROOT,'canonical','editorial-seeds');
 
   fs.rmSync(volumesRoot,{recursive:true,force:true});
   fs.rmSync(oldSeedsRoot,{recursive:true,force:true});
-  fs.rmSync(canonicalSeedsRoot,{recursive:true,force:true});
+  fs.rmSync(perEntrySeedsRoot,{recursive:true,force:true});
+  fs.rmSync(editorialSeedsRoot,{recursive:true,force:true});
   fs.mkdirSync(volumesRoot,{recursive:true});
-  fs.mkdirSync(canonicalSeedsRoot,{recursive:true});
+  fs.mkdirSync(editorialSeedsRoot,{recursive:true});
 
   const ordered=[...LANGUAGES].sort((a,b)=>volumeNumber(a)-volumeNumber(b));
   const metas=[];
@@ -113,6 +115,7 @@ function buildCanonicalCompatibility(){
     const partOrder=new Map();
     const chapterOrder=new Map();
     const entries=[];
+    const editorialSeeds={};
 
     for(let n=1;n<=language.total;n++){
       const article=readArticle(language,n);
@@ -164,7 +167,7 @@ function buildCanonicalCompatibility(){
         plain:indexDefinition
       });
 
-      writeJson(path.join(canonicalSeedsRoot,language.slug,padded(n)+'.json'),{
+      editorialSeeds[article.code]={
         code:article.code,
         language:article.language,
         languageName:article.languageName,
@@ -175,9 +178,11 @@ function buildCanonicalCompatibility(){
         chapter:article.chapter||'',
         definition:lead,
         example
-      });
+      };
       total++;
     }
+
+    writeJson(path.join(editorialSeedsRoot,language.slug+'.json'),{standard:'MLS R32',promptVersion:PROMPT_VERSION,language:language.slug,totalEntries:language.total,entries:editorialSeeds});
 
     const volumeJs='window.MLS_DATA=window.MLS_DATA||{};window.MLS_DATA['+JSON.stringify(language.slug)+']='+JSON.stringify({meta,entries})+';\n';
     fs.writeFileSync(path.join(volumesRoot,language.slug+'.js'),volumeJs,'utf8');
@@ -197,6 +202,8 @@ function buildCanonicalCompatibility(){
     totalEntries:total,
     volumes:ordered.length,
     legacyWikiSeedsPresent:false,
+    perEntryCanonicalSeedsPresent:fs.existsSync(perEntrySeedsRoot),
+    editorialSeedCatalogs:ordered.length,
     indexBytes,
     indexSha256:sha256(indexJs),
     source:'GitHub canonical content/'

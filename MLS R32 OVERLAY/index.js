@@ -172,7 +172,7 @@ var WikiStore = class extends DurableObject {
       language: language.slug,
       languageName: language.name,
       n,
-      seedPath: `/data/canonical/seeds/${language.slug}/${padded}.json`,
+      seedPath: `/data/canonical/editorial-seeds/${language.slug}/${padded}.json`,
       claimedAt: now
     };
     state.claim = claim;
@@ -2657,7 +2657,7 @@ function jobFromGlobalIndex(globalIndex) {
         language: language.slug,
         languageName: language.name,
         n,
-        seedPath: `/data/canonical/seeds/${language.slug}/${padded}.json`
+        seedPath: `/data/canonical/editorial-seeds/${language.slug}/${padded}.json`
       };
     }
     cursor -= language.total;
@@ -2678,7 +2678,7 @@ function jobFromCode(code) {
     language: language.slug,
     languageName: language.name,
     n,
-    seedPath: `/data/canonical/seeds/${language.slug}/${padded}.json`
+    seedPath: `/data/canonical/editorial-seeds/${language.slug}/${padded}.json`
   };
 }
 __name(jobFromCode, "jobFromCode");
@@ -3173,7 +3173,7 @@ async function loadWikiSeed(env, code) {
 }
 __name(loadWikiSeed, "loadWikiSeed");
 async function articleExists(env, code) {
-  const row = await env.WIKI_DB.prepare(`SELECT 1 AS ok FROM wiki_articles WHERE code = ?`).bind(code).first();
+  const row = await env.WIKI_DB.prepare(`SELECT 1 AS ok FROM wiki_articles WHERE code = ? AND prompt_version = ?`).bind(code, WIKI_PROMPT_VERSION).first();
   return Boolean(row?.ok);
 }
 __name(articleExists, "articleExists");
@@ -3336,7 +3336,10 @@ async function markWikiEntryError(env, code, message) {
 }
 __name(markWikiEntryError, "markWikiEntryError");
 async function getWikiArticleD1(env, code) {
-  const row = await env.WIKI_DB.prepare(`SELECT * FROM wiki_articles WHERE code = ?`).bind(code).first();
+  const row = await env.WIKI_DB.prepare(`SELECT * FROM wiki_articles
+    WHERE code = ? AND prompt_version = ?
+      AND COALESCE(provider, '') <> 'cloudflare-legacy'
+      AND COALESCE(audit_provider, '') <> 'cloudflare-legacy'`).bind(code, WIKI_PROMPT_VERSION).first();
   if (!row) return null;
   return {
     code: row.code,
@@ -3566,28 +3569,17 @@ async function handleWikiApi(request, env, url) {
   if (url.pathname === "/api/wiki/recent") {
     const requested = Number(url.searchParams.get("limit") || "10");
     const limit = Number.isFinite(requested) ? Math.max(1, Math.min(30, Math.trunc(requested))) : 10;
-    const revision = (url.searchParams.get("revision") || "").trim().toLowerCase();
-    let sql = `SELECT code, language, title, prompt_version AS promptVersion, generated_at AS generatedAt FROM wiki_articles`;
-    const binds = [];
-    if (revision === "r32") {
-      sql += ` WHERE prompt_version = ?`;
-      binds.push(WIKI_PROMPT_VERSION);
-    } else if (revision === "r31") {
-      sql += ` WHERE prompt_version LIKE '31%'`;
-    }
-    sql += ` ORDER BY generated_at DESC LIMIT ?`;
-    binds.push(limit);
-    const rows = await env.WIKI_DB.prepare(sql).bind(...binds).all();
+    const rows = await env.WIKI_DB.prepare(
+      `SELECT code, language, title, prompt_version AS promptVersion, generated_at AS generatedAt
+       FROM wiki_articles WHERE prompt_version = ?
+       ORDER BY generated_at DESC LIMIT ?`
+    ).bind(WIKI_PROMPT_VERSION, limit).all();
     return Response.json(rows.results || [], { headers: { "cache-control": "no-store" } });
   }
   const articleMatch = url.pathname.match(/^\/api\/wiki\/article\/(MLS-V\d{2}-\d{4})$/i);
   if (articleMatch) {
     const code = articleMatch[1].toUpperCase();
-    let article = await getWikiArticleD1(env, code);
-    if (!article) {
-      const legacy = await wikiStore(env).getArticle(code);
-      if (legacy) article = { ...legacy, provider: "cloudflare-legacy", auditProvider: "cloudflare-legacy", auditModel: legacy.model };
-    }
+    const article = await getWikiArticleD1(env, code);
     if (!article) return Response.json({ found: false, code }, { status: 404, headers: { "cache-control": "no-store" } });
     return Response.json({ found: true, article }, { headers: { "cache-control": "public, max-age=3600" } });
   }

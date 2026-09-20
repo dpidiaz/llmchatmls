@@ -50,23 +50,15 @@ function patchStagingGuards(source) {
 
   source = replaceOnce(
     source,
-    `    let article = await getWikiArticleD1(env, code);
-    if (!article) {
-      const legacy = await wikiStore(env).getArticle(code);
-      if (legacy) article = { ...legacy, provider: "cloudflare-legacy", auditProvider: "cloudflare-legacy", auditModel: legacy.model };
-    }
+    `    const article = await getWikiArticleD1(env, code);
     if (!article) return Response.json({ found: false, code }, { status: 404, headers: { "cache-control": "no-store" } });`,
     `    let article = await getWikiArticleD1(env, code);
-    if (!article || article.promptVersion !== WIKI_PROMPT_VERSION) {
+    if (!article) {
       const staged = await mlsStagingServeArticle(env, code);
       if (staged) article = staged;
     }
-    if (!article) {
-      const legacy = await wikiStore(env).getArticle(code);
-      if (legacy) article = { ...legacy, provider: "cloudflare-legacy", auditProvider: "cloudflare-legacy", auditModel: legacy.model };
-    }
     if (!article) return Response.json({ found: false, code }, { status: 404, headers: { "cache-control": "no-store" } });`,
-    'prioridad staged sobre legacy'
+    'prioridad staged sobre ausencia R32'
   );
 
   return source;
