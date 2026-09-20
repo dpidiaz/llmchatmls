@@ -11,7 +11,7 @@
 
 ### Chat 0 — Coordinator
 Status: ACTIVE
-Current: Wave 2 — integración incremental A/B/E; C sigue en desarrollo
+Current: Wave 4 — Accessibility & Responsive corrective pass
 Branch: uxui-r1-integration
 Blockers: none
 
@@ -32,12 +32,11 @@ Delivered: explicit resume intent, persisted reading position, safe same-entry r
 Dependencies: ninguna bloqueante
 
 ### Chat C — Discovery & Learning
-Status: IN PROGRESS — IMPLEMENTATION COMPLETE / FINAL CERTIFICATION PENDING
+Status: COMPLETE — INTEGRATED
 Branch: uxui-r1-discovery
-PR: #103 (draft)
-Current synced commit: b1e3b5041f53c683a573628a6e89829beee422dc
+PR: #103
+Integrated commit: 5e6a5078185cd957f7e3820fb043872b99c082a2
 Delivered: semantic-neighbor generator, deterministic reranking, 10-language assets, versioned publisher, editorial→semantic Reader fallback
-Next: global suite + predeploy/recovery/dry-run + remove temporary workflow + ready-for-review
 Dependencies: BGE-M3 existing index; no runtime AI/D1 dependency
 
 ### Chat D — Visual System
@@ -66,12 +65,12 @@ Delivered: humanized Virtuoso/Profesor IA UX, Visual Foundation consumption, foc
 Dependencies: next checkpoint must start from current integration
 
 ### Chat G — Accessibility & Responsive QA
-Status: BASELINE INTEGRATED — OBSERVATION MODE
+Status: WAVE 4 RELEASED — CORRECTIVE PASS AUTHORIZED
 Branch: uxui-r1-accessibility
 PR: #107
 Baseline commit: 90c8f9ba6017ccf29407d59e3051700e33331671
 Baseline counts: PASS 18 / FAIL 5 / MANUAL 7 / BLOCKED 1 / N/A 1
-Dependencies: pase correctivo transversal después de integración A–F
+Dependencies: A–F integrated; rerun baseline, compare, perform manual QA, then correct confirmed regressions
 
 ## Formato obligatorio de checkpoint
 Cada worker debe reportar:
