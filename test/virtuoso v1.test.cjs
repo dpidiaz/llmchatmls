@@ -2,6 +2,7 @@
 
 const fs=require('node:fs');
 const {execFileSync}=require('node:child_process');
+const vm=require('node:vm');
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const {patchWorker,patchNavigation,patchAppNavigation,BACKEND_BLOCK,API_MARKER}=require('../scripts/habilitar virtuoso.js');
@@ -83,6 +84,19 @@ test('Virtuoso page uses the same lexical and semantic indexes and requires targ
   assert.match(html,/slice\(0,12\)/);
   assert.match(html,/meta\.language!==slug/);
   assert.doesNotMatch(html,/>Todos los idiomas</);
+});
+
+
+test('Virtuoso browser inline scripts compile without syntax errors',()=>{
+  const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
+  const scriptPattern=/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi;
+  const inline=[...html.matchAll(scriptPattern)]
+    .map(match=>match[1].trim())
+    .filter(Boolean);
+  assert.ok(inline.length>=1,'se espera al menos un script inline de Virtuoso');
+  for(const [index,source] of inline.entries()){
+    assert.doesNotThrow(()=>new vm.Script(source,{filename:'virtuoso-inline-'+index+'.js'}));
+  }
 });
 
 test('Virtuoso remains orientation, not Professor IA',()=>{
