@@ -3284,17 +3284,6 @@ async function processWikiEntry(env, code, alreadyClaimed = false) {
     await env.WIKI_DB.prepare(`UPDATE wiki_jobs SET status = 'published', last_error = NULL, updated_at = ? WHERE code = ?`).bind((/* @__PURE__ */ new Date()).toISOString(), code).run();
     return "skipped";
   }
-  const legacy = await wikiStore(env).getArticle(code);
-  if (legacy?.articleMarkdown) {
-    await publishWikiArticle(env, {
-      ...legacy,
-      provider: "cloudflare-legacy",
-      auditProvider: "cloudflare-legacy",
-      auditModel: legacy.model ?? null,
-      promptVersion: legacy.promptVersion || "31.0"
-    });
-    return "published";
-  }
   if (!alreadyClaimed) {
     await env.WIKI_DB.prepare(`UPDATE wiki_jobs SET status = 'processing', attempts = attempts + 1, started_at = COALESCE(started_at, ?), updated_at = ? WHERE code = ?`).bind((/* @__PURE__ */ new Date()).toISOString(), (/* @__PURE__ */ new Date()).toISOString(), code).run();
   }
