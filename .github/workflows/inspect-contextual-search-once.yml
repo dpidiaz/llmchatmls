@@ -1,0 +1,44 @@
+name: Inspect contextual search shell once
+
+on:
+  push:
+    branches:
+      - fix/contextual-language-search
+    paths:
+      - ".github/workflows/inspect-contextual-search-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run predeploy
+      - name: Print Buscar aqui occurrences
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const files=['public/index.html','public/js/app.js'];
+          for(const file of files){
+            const s=fs.readFileSync(file,'utf8');
+            let pos=0,found=0;
+            while(true){
+              const i=s.indexOf('Buscar aquí',pos);
+              if(i<0)break;
+              found++;
+              console.log('FILE',file,'MATCH',found);
+              console.log(s.slice(Math.max(0,i-1200),Math.min(s.length,i+2200)));
+              pos=i+1;
+            }
+            console.log('COUNT',file,found);
+          }
+          NODE
