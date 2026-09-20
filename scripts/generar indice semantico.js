@@ -192,6 +192,8 @@ async function generateLanguage(language,options={}){
     promptVersion:PROMPT_VERSION,
     version:VERSION,
     model:MODEL,
+    language:language.slug,
+    languageName:language.name,
     corpusBuildId:buildId,
     quantization:'symmetric-int8-unit-vector',
     dimensions,
