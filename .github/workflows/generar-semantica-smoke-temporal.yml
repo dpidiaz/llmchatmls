@@ -25,56 +25,25 @@ jobs:
       - run: npm ci
 
       - name: Validar generador
-        run: node --test "test/semantic index generator.test.cjs"
+        run: |
+          node --test "test/semantic index generator.test.cjs"
+          npm run predeploy
+          node --test test/deploy-contract.test.cjs
+          npm run check
 
-      - name: Crear Worker temporal de embeddings
+      - name: Desplegar endpoint batch temporal en MLS
         shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           set -euo pipefail
-          mkdir -p .semantic-tmp
-          cat > .semantic-tmp/worker.js <<'JS'
-          export default {
-            async fetch(request, env) {
-              if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
-              if ((request.headers.get('x-mls-semantic-key') || '') !== env.SEMANTIC_KEY) {
-                return Response.json({ ok:false, error:'unauthorized' }, { status:401 });
-              }
-              try {
-                const body = await request.json();
-                const texts = Array.isArray(body?.texts) ? body.texts.map(x => String(x || '')) : [];
-                if (!texts.length || texts.length > 16) return Response.json({ ok:false, error:'invalid_batch' }, { status:400 });
-                const result = await env.AI.run('@cf/baai/bge-m3', { text: texts });
-                const data = result?.data;
-                let rows = [];
-                if (Array.isArray(data) && Array.isArray(data[0])) rows = data;
-                else if (Array.isArray(data) && Array.isArray(result?.shape) && result.shape.length === 2) {
-                  const width = Number(result.shape[1]);
-                  rows = Array.from({ length:Number(result.shape[0]) }, (_,i)=>data.slice(i*width,(i+1)*width));
-                }
-                if (rows.length !== texts.length) throw new Error('embedding_shape_mismatch');
-                return Response.json({ ok:true, embeddings:rows });
-              } catch (error) {
-                return Response.json({ ok:false, error:String(error?.message || error) }, { status:500 });
-              }
-            }
-          }
-          JS
-          cat > .semantic-tmp/wrangler.jsonc <<'JSON'
-          {
-            "name": "mls-semantic-builder-temp",
-            "main": "worker.js",
-            "compatibility_date": "2026-09-20",
-            "workers_dev": true,
-            "ai": { "binding": "AI" }
-          }
-          JSON
-          KEY=$(node -e "console.log(require('crypto').randomBytes(24).toString('hex'))")
+          KEY=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
           printf '%s' "$KEY" > /tmp/semantic-key
-          CLOUDFLARE_API_TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}" npx wrangler deploy --config .semantic-tmp/wrangler.jsonc --var SEMANTIC_KEY:"$KEY"
+          npx wrangler deploy --keep-vars --var SEMANTIC_BUILD_KEY:"$KEY"
 
       - name: Generar índice semántico de inglés
         env:
-          MLS_SEMANTIC_EMBED_URL: https://mls-semantic-builder-temp.dpidiaz.workers.dev
+          MLS_SEMANTIC_EMBED_URL: https://llmchatmls.dpidiaz.workers.dev/api/search/embedding-batch
         shell: bash
         run: |
           set -euo pipefail
@@ -110,8 +79,15 @@ jobs:
           git commit -m "Generate English semantic index"
           git push origin HEAD:mls-generate-semantic-index
 
-      - name: Eliminar Worker temporal
+      - name: Restaurar Worker de producción sin endpoint batch
         if: always()
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: npx wrangler delete --name mls-semantic-builder-temp --force || true
+        shell: bash
+        run: |
+          set -euo pipefail
+          git reset --hard
+          git fetch origin main
+          git checkout -B main origin/main
+          npm run predeploy
+          npm run deploy
