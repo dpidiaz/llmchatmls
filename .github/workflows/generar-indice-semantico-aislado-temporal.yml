@@ -1,0 +1,135 @@
+name: Generar índice semántico aislado una vez
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/generar-indice-semantico-aislado-temporal.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: mls-semantic-index-generation
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Preparar clave y verificar Worker aislado
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          GEN_KEY=$(printf '%s' "${CLOUDFLARE_API_TOKEN}:mls-semantic-batch-v1" | sha256sum | awk '{print $1}')
+          echo "::add-mask::$GEN_KEY"
+          echo "MLS_EMBEDDING_KEY=$GEN_KEY" >> "$GITHUB_ENV"
+          echo "MLS_EMBEDDING_ENDPOINT=https://mls-semantic-generator-temp.dpidiaz.workers.dev/embed" >> "$GITHUB_ENV"
+
+          for i in 1 2 3 4 5 6 7 8; do
+            status=$(curl --silent --show-error --output /tmp/preflight.json --write-out '%{http_code}'               -X POST 'https://mls-semantic-generator-temp.dpidiaz.workers.dev/embed'               -H "authorization: Bearer $GEN_KEY"               -H 'content-type: application/json'               --data '{"texts":["preflight semántico MLS"]}')
+            if [ "$status" = "200" ]; then break; fi
+            sleep 3
+          done
+
+          cat /tmp/preflight.json
+          test "$status" = "200"
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const p=JSON.parse(fs.readFileSync('/tmp/preflight.json','utf8'));
+          if(!p.ok||p.model!=='@cf/baai/bge-m3'||p.count!==1||!Array.isArray(p.vectors)||p.vectors.length!==1||p.dimensions!==1024)throw new Error('Preflight semántico aislado inválido');
+          console.log('SEMANTIC_ISOLATED_PREFLIGHT_OK');
+          NODE
+
+      - name: Configurar Git
+        run: |
+          git config user.name "MLS Semantic Index Bot"
+          git config user.email "actions@users.noreply.github.com"
+
+      - name: Generar idiomas con checkpoints
+        env:
+          MLS_SEMANTIC_BATCH_SIZE: "32"
+        shell: bash
+        run: |
+          set -euo pipefail
+          languages=(
+            ingles
+            portugues
+            italiano
+            frances
+            aleman
+            japones
+            chino-taiwan
+            coreano
+            ruso
+            espanol-guatemala
+          )
+
+          for lang in "${languages[@]}"; do
+            echo "===== SEMANTIC START $lang ====="
+            node "scripts/generar indice semantico.js" --language "$lang"
+
+            git add "semantic/$lang.json" "semantic/$lang.bin"
+            if ! git diff --cached --quiet; then
+              git commit -m "Generate semantic index for $lang"
+              git push origin HEAD:mls-semantic-index-generation
+            else
+              echo "$lang ya estaba actualizado."
+            fi
+            echo "===== SEMANTIC DONE $lang ====="
+          done
+
+      - name: Construir manifest y validar índice
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const {buildManifest}=require('./scripts/generar indice semantico.js');
+          const {validateSemanticSource}=require('./scripts/publicar indice semantico.js');
+          const manifest=buildManifest();
+          if(!manifest)throw new Error('Manifest semántico incompleto.');
+          const result=validateSemanticSource();
+          if(!result.complete)throw new Error('Validación incompleta: '+JSON.stringify(result));
+          if(result.totalEntries!==10133)throw new Error('Entradas inesperadas: '+result.totalEntries);
+          console.log('SEMANTIC_COMPLETE '+JSON.stringify({
+            totalEntries:result.totalEntries,
+            totalChunks:result.totalChunks,
+            totalBytes:result.totalBytes,
+            model:manifest.model,
+            corpusBuildId:manifest.corpusBuildId
+          }));
+          NODE
+
+          git add semantic/manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Complete MLS semantic index manifest"
+            git push origin HEAD:mls-semantic-index-generation
+          fi
+
+      - name: Eliminar Worker temporal aislado
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        shell: bash
+        run: |
+          set +e
+          npx wrangler delete --name mls-semantic-generator-temp --force
+          exit 0
+
+      - name: Resumen
+        if: always()
+        run: |
+          git fetch origin mls-semantic-index-generation
+          git log --oneline -15 origin/mls-semantic-index-generation
