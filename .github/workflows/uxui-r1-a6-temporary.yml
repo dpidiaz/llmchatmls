@@ -1,0 +1,31 @@
+name: UXUI R1 A6 verify
+
+on:
+  push:
+    branches:
+      - uxui-r1-navigation
+
+permissions:
+  contents: read
+
+jobs:
+  a6:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Full editorial and UX test suite
+        run: npm run test:chat-editorial
+      - name: Rebuild generated application
+        run: npm run predeploy
+      - name: Accessibility responsive baseline from G
+        run: npm run qa:baseline
+      - name: Recovery verification
+        run: npm run recovery:verify
+      - name: Wrangler dry run
+        run: npm run check
