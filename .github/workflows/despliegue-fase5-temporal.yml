@@ -1,0 +1,76 @@
+name: Despliegue Fase 5 MLS temporal
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/despliegue-fase5-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar suite MLS
+        run: npm run test:chat-editorial
+      - name: Construir build sin datos legacy
+        run: npm run predeploy
+      - name: Verificar contrato de despliegue
+        run: node --test test/deploy-contract.test.cjs
+      - name: Dry run Cloudflare
+        run: npm run check
+      - name: Desplegar Fase 5
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Verificar producción sin wiki-seeds legacy
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+
+          curl --fail --silent --show-error "$base/data/canonical/compat-health.json" -o compat.json
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const h=JSON.parse(fs.readFileSync('compat.json','utf8'));
+          if(h.ok!==true) throw new Error('compat-health ok != true');
+          if(h.standard!=='MLS R32'||h.promptVersion!=='32.0') throw new Error('compat-health no es R32');
+          if(Number(h.totalEntries)!==10133) throw new Error('totalEntries inesperado: '+h.totalEntries);
+          if(h.legacyWikiSeedsPresent!==false) throw new Error('legacyWikiSeedsPresent no es false');
+          if(Number(h.indexBytes)>=20*1024*1024) throw new Error('indexBytes fuera del margen seguro: '+h.indexBytes);
+          console.log('compat-health OK',h.totalEntries,h.indexBytes);
+          NODE
+
+          curl --fail --silent --show-error "$base/data/canonical/seeds/chino-taiwan/0484.json" -o seed.json
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const s=JSON.parse(fs.readFileSync('seed.json','utf8'));
+          if(s.code!=='MLS-V07-0484'||s.title!=='不然') throw new Error('Semilla canónica inesperada');
+          console.log('canonical seed OK',s.code,s.title);
+          NODE
+
+          status=$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "$base/data/wiki-seeds/chino-taiwan/0484.json")
+          if [ "$status" != "404" ]; then
+            echo "::error::La ruta legacy wiki-seeds sigue publicada (HTTP $status)"
+            exit 1
+          fi
+          echo 'legacy wiki-seeds route removed'
+
+          curl --fail --silent --show-error --range 0-2047 "$base/data/index.js" -o index-head.js
+          grep -q 'window.MLS_META=' index-head.js
+          echo 'canonical compatibility index reachable'
+
+          curl --fail --silent --show-error "$base/js/reader.js" -o reader.js
+          grep -q '/data/canonical/runtime-manifest.json' reader.js
+          if grep -q '/api/wiki/article/' reader.js; then echo 'reader volvió a D1'; exit 1; fi
+          if grep -q '/api/wiki/materialize/' reader.js; then echo 'reader volvió a materializar'; exit 1; fi
+          echo 'reader remains GitHub-first'
