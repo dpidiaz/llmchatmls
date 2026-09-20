@@ -20,3 +20,17 @@ test('canonical runtime shard paths are stable and language-scoped', () => {
     'shards/chino-taiwan/0401-0500.json'
   );
 });
+
+
+test('reader is GitHub-canonical-first and has no D1/materialization read fallback', () => {
+  const fs = require('node:fs');
+  const reader = fs.readFileSync('MLS R32 OVERLAY/reader.js', 'utf8');
+  assert.match(reader, /\/data\/canonical\/runtime-manifest\.json/);
+  assert.match(reader, /Contenido no disponible/);
+  assert.match(reader, /no mostrará contenido antiguo/);
+  assert.doesNotMatch(reader, /\/api\/wiki\/article\//);
+  assert.doesNotMatch(reader, /\/api\/wiki\/materialize\//);
+  assert.doesNotMatch(reader, /cloudflare-legacy/);
+  assert.doesNotMatch(reader, /e\.plain/);
+  assert.doesNotMatch(reader, /easy\.lead/);
+});
