@@ -130,7 +130,7 @@
       .trim();
   }
 
-  function relatedFromMarkdown(markdown,catalog,limit=5){
+  function relatedFromMarkdown(markdown,catalog){
     const byCode=new Map(catalog.entries.map(item=>[item.code,item]));
     const seen=new Set();
     const related=[];
@@ -140,11 +140,11 @@
       const item=byCode.get(code);
       if(item){seen.add(code);related.push(item)}
     }
-    return related.slice(0,limit);
+    return related.slice(0,5);
   }
 
   async function relatedForEntry(markdown,catalog,manifest,language,currentCode,limit=5){
-    const editorial=relatedFromMarkdown(markdown,catalog,limit);
+    const editorial=relatedFromMarkdown(markdown,catalog);
     if(editorial.length>=limit)return editorial;
 
     try{
