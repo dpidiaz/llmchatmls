@@ -50,6 +50,16 @@
     return true;
   }
 
+  async function discoverCachedLanguages(){
+    if(!('caches' in window))return null;
+    const cache=await caches.open(LIBRARY_CACHE);
+    const actual=[];
+    for(const slug of ALL_LANGUAGES){
+      if(await cacheHasFiles(cache,LANGUAGES[slug].files))actual.push(slug);
+    }
+    return actual.length?writeState(actual):null;
+  }
+
   async function migrateLegacy(){
     if(!('caches' in window))return null;
     const keys=await caches.keys();
@@ -79,6 +89,7 @@
     }
     let state=readState();
     if(!state)state=await migrateLegacy();
+    if(!state)state=await discoverCachedLanguages();
     if(!state){
       verifiedState={status:'empty',savedLanguages:[],missingLanguages:ALL_LANGUAGES,savedAt:null};
       return verifiedState;
@@ -190,7 +201,7 @@
 
   MLS.offline={
     SCHEMA_VERSION,LIBRARY_VERSION,LIBRARY_CACHE,LANGUAGES,ALL_LANGUAGES,
-    isReady,hasLanguage,isStandalone,isIOS,prepare,verifyOfflineState,refreshStatus,
+    isReady,hasLanguage,isStandalone,isIOS,prepare,verifyOfflineState,refreshStatus,discoverCachedLanguages,
     settingsBlock,homeCard,showInstallHelp,statusMarkup
   };
 })();
