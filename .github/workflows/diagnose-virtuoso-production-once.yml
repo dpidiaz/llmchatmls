@@ -1,0 +1,55 @@
+name: Diagnose Virtuoso production fallback once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/diagnose-virtuoso-production-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Query Virtuoso production repeatedly
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const base='https://llmchatmls.dpidiaz.workers.dev';
+          const catalog=await fetch(base+'/data/canonical/catalog/ingles.json').then(r=>r.json());
+          const candidates=catalog.entries.slice(0,12).map(e=>({code:e.code}));
+          const queries=[
+            'quiero aprender ingles',
+            'quiero hablar del pasado',
+            'necesito entender el presente perfecto',
+            'como uso los verbos modales',
+            'quiero aprender a hacer preguntas'
+          ];
+          for (const query of queries) {
+            const res=await fetch(base+'/api/virtuoso',{
+              method:'POST',
+              headers:{'content-type':'application/json'},
+              body:JSON.stringify({query,targetLanguage:'ingles',candidates})
+            });
+            const body=await res.json().catch(()=>({}));
+            console.log(JSON.stringify({
+              query,
+              http:res.status,
+              ok:body.ok,
+              usedAi:body.usedAi,
+              degraded:body.degraded,
+              model:body.model,
+              intent:body.intent,
+              intro:body.intro,
+              recommendations:Array.isArray(body.recommendations)?body.recommendations.length:null,
+              error:body.error
+            }));
+          }
+          NODE
