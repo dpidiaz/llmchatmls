@@ -61,6 +61,83 @@ El Traductor debe preservar:
 
 Estos puntos no deben marcarse PASS sin observación real.
 
+## Procedimiento reproducible para Safari/iPhone sin desplegar producción
+
+El gate físico debe ejecutarse contra el mismo HEAD del PR, no contra `main` ni contra producción.
+
+En una computadora con el repositorio:
+
+```bash
+git checkout feature/translator-pronunciation-offline
+git pull --ff-only
+npm ci
+npm run predeploy
+npm run dev
+```
+
+Con `wrangler dev` activo, pulsar `t` para abrir un Cloudflare Quick Tunnel. Wrangler mostrará una URL HTTPS temporal bajo `trycloudflare.com`.
+
+Abrir desde Safari en el iPhone:
+
+```text
+https://<quick-tunnel>/traductor
+```
+
+La URL temporal permite probar el Worker local desde el dispositivo físico sin promover la versión a producción. Debe mantenerse `wrangler dev` activo durante la preparación online.
+
+### Preparación online
+
+1. Abrir `/traductor` en Safari.
+2. Confirmar que la interfaz carga completa.
+3. Descargar voluntariamente un solo pack de idioma para la prueba offline.
+4. Ejecutar al menos una traducción con ese pack.
+5. Ejecutar Normal, Lento, Repetir y Detener.
+6. Recargar una vez mientras todavía hay conexión para asegurar que el Service Worker controla la navegación.
+7. Confirmar que no hay errores visuales con teclado abierto, orientación vertical y safe areas.
+
+### Gate físico offline
+
+Activar modo avión y verificar, sin volver a habilitar Wi-Fi o datos:
+
+- recarga de `/traductor` desde el App Shell;
+- traducción con el pack previamente descargado;
+- ausencia de descarga automática de otros packs;
+- voz local disponible cuando iOS disponga de una voz compatible;
+- Normal reproduce a velocidad natural;
+- Lento es perceptiblemente más lento y sigue siendo inteligible;
+- Repetir vuelve a reproducir de forma comprensible;
+- Detener cancela la reproducción;
+- un fallo de voz o pack se comunica sin bloquear la interfaz;
+- el teclado virtual no oculta controles esenciales;
+- no aparece overflow horizontal;
+- no hay cierre de Safari durante varias traducciones consecutivas;
+- no hay calentamiento anormal inmediato ni degradación severa de respuesta.
+
+### Restauración de red
+
+Desactivar modo avión y confirmar:
+
+- recuperación sin recargar forzosamente toda la aplicación;
+- el pack instalado sigue disponible;
+- la traducción local sigue siendo prioritaria cuando el par está cubierto;
+- las funciones online vuelven a estar disponibles sin romper el estado local.
+
+### Registro mínimo del gate
+
+No cerrar el gate físico sin registrar:
+
+- modelo de iPhone;
+- versión de iOS;
+- idioma/voz probada;
+- pack probado;
+- resultado de App Shell offline;
+- resultado de traducción offline;
+- resultado Normal/Lento/Repetir/Detener;
+- teclado/safe areas;
+- memoria/temperatura percibida;
+- PASS/FAIL y observaciones.
+
+Un FAIL debe indicar el paso exacto, el texto mostrado y si es reproducible.
 
 ## Chromium final
 
