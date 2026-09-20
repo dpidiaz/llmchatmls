@@ -26,9 +26,9 @@ const PATCH_CSS=`
   text-decoration:none;
 }
 .mls-skip-link:focus{transform:none}
-:where(a,button,input,select,textarea,summary):focus-visible{
-  outline:var(--mls-focus-width,3px) solid var(--mls-focus-color,#527a91);
-  outline-offset:var(--mls-focus-offset,2px);
+body :is(a,button,input,select,textarea,summary):focus-visible{
+  outline:var(--mls-focus-width,3px) solid var(--mls-focus-color,#527a91)!important;
+  outline-offset:var(--mls-focus-offset,2px)!important;
 }
 .sidebar a,.sidebar button,.mobile-nav a,.mobile-nav button{
   min-height:var(--mls-control-height,44px);
