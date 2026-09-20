@@ -22,6 +22,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run predeploy
+      - name: Tests correctivos G
+        run: node --test 'test/accessibility responsive baseline.test.cjs' 'test/accessibility responsive corrections.test.cjs'
+      - name: Baseline post-fix
+        run: npm run qa:baseline
       - name: Instalar Chromium de QA sin modificar package.json
         run: |
           npm install --no-save --package-lock=false --legacy-peer-deps playwright@1.55.0
@@ -61,7 +65,7 @@ jobs:
                 };
               });
               await page.keyboard.press('Tab');
-              const firstFocus=await page.evaluate(()=>({tag:document.activeElement?.tagName,id:document.activeElement?.id||'',text:(document.activeElement?.innerText||document.activeElement?.getAttribute?.('aria-label')||'').trim().slice(0,80)}));
+              const firstFocus=await page.evaluate(()=>{const a=document.activeElement,s=a?getComputedStyle(a):null;return {tag:a?.tagName,id:a?.id||'',text:(a?.innerText||a?.getAttribute?.('aria-label')||'').trim().slice(0,80),outlineStyle:s?.outlineStyle||'',outlineWidth:s?.outlineWidth||''}});
               out.viewports[width]={home,firstFocus};
               if(home.overflow)push('horizontal-overflow',{area:'Home',width,scrollWidth:home.scrollWidth,clientWidth:home.clientWidth});
               if(width<=430&&home.smallTargetCount)push('touch-targets',{area:'Home',width,count:home.smallTargetCount,sample:home.smallTargets.slice(0,5)});
@@ -93,7 +97,24 @@ jobs:
                       focused:{tag:a?.tagName,id:a?.id||'',label:a?.getAttribute?.('aria-label')||''},
                       overflowX:m.scrollWidth>m.clientWidth+1,ariaLabel:m.getAttribute('aria-label')||'',role:m.getAttribute('role')||m.tagName.toLowerCase()};
                   });
+                  const close=page.locator('#aiTutorModal [data-ai-close]');
+                  if(await close.count()){
+                    await close.click();
+                    await page.waitForTimeout(80);
+                    out.professor[width].focusAfterClose=await page.evaluate(()=>({id:document.activeElement?.id||'',text:(document.activeElement?.innerText||document.activeElement?.getAttribute?.('aria-label')||'').trim().slice(0,60)}));
+                  }
                 }
+              }
+              if([320,390,768,1024].includes(width)){
+                out.viewports[width].scriptProbe=await page.evaluate(()=>{
+                  const host=document.createElement('div');
+                  host.style.cssText='position:absolute;left:0;top:0;width:min(100%,720px);font-size:16px;line-height:1.6;overflow-wrap:anywhere;visibility:hidden';
+                  host.innerHTML='<p lang="ja">日本語の文法を学びます。助詞と動詞の活用を確認します。</p><p lang="zh-Hant">繁體中文語法與句子結構測試。</p><p lang="ko">한국어 문법과 문장 구조를 확인합니다.</p><p lang="ru">Проверка русской типографики и переноса строк.</p>';
+                  document.body.appendChild(host);
+                  const rows=[...host.children].map(el=>({lang:el.lang,scrollWidth:el.scrollWidth,clientWidth:el.clientWidth,scrollHeight:el.scrollHeight,clientHeight:el.clientHeight,font:getComputedStyle(el).fontFamily,lineHeight:getComputedStyle(el).lineHeight}));
+                  host.remove();
+                  return {rows,clipped:rows.some(r=>r.scrollWidth>r.clientWidth+1||r.scrollHeight>r.clientHeight+1)};
+                });
               }
               await context.close();
             }
