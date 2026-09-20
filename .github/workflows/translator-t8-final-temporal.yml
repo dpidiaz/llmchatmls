@@ -99,16 +99,62 @@ jobs:
           npm install --no-save --legacy-peer-deps playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Start local Worker
+      - name: Start static QA server
         shell: bash
         run: |
-          nohup npx wrangler dev --port 8787 --ip 127.0.0.1 > /tmp/mls-wrangler.log 2>&1 &
-          echo $! > /tmp/mls-wrangler.pid
+          cat > /tmp/mls-static-server.mjs <<'NODE'
+          import http from 'node:http';
+          import fs from 'node:fs/promises';
+          import path from 'node:path';
+
+          const root=path.resolve('public');
+          const mime={
+            '.html':'text/html; charset=utf-8',
+            '.js':'text/javascript; charset=utf-8',
+            '.css':'text/css; charset=utf-8',
+            '.json':'application/json; charset=utf-8',
+            '.webmanifest':'application/manifest+json',
+            '.wasm':'application/wasm',
+            '.bin':'application/octet-stream',
+            '.gz':'application/gzip',
+            '.svg':'image/svg+xml',
+            '.png':'image/png',
+            '.jpg':'image/jpeg',
+            '.jpeg':'image/jpeg',
+            '.ico':'image/x-icon'
+          };
+
+          const server=http.createServer(async(req,res)=>{
+            try{
+              const url=new URL(req.url,'http://127.0.0.1');
+              let pathname=decodeURIComponent(url.pathname);
+              if(pathname==='/'||pathname==='/index.html')pathname='/index.html';
+              else if(pathname==='/traductor'||pathname==='/traductor/')pathname='/traductor.html';
+              const file=path.resolve(root,'.'+pathname);
+              if(file!==root&&!file.startsWith(root+path.sep)){
+                res.statusCode=403;res.end('Forbidden');return;
+              }
+              const data=await fs.readFile(file);
+              res.statusCode=200;
+              res.setHeader('content-type',mime[path.extname(file)]||'application/octet-stream');
+              res.setHeader('cache-control','no-cache');
+              res.end(data);
+            }catch{
+              res.statusCode=404;
+              res.end('Not found');
+            }
+          });
+
+          server.listen(8787,'127.0.0.1',()=>console.log('STATIC_QA_READY'));
+          NODE
+
+          nohup node /tmp/mls-static-server.mjs > /tmp/mls-static.log 2>&1 &
+          echo $! > /tmp/mls-static.pid
           for i in {1..30}; do
-            if curl -fsS http://127.0.0.1:8787/ >/dev/null; then exit 0; fi
+            if curl -fsS http://127.0.0.1:8787/traductor >/dev/null; then exit 0; fi
             sleep 1
           done
-          cat /tmp/mls-wrangler.log
+          cat /tmp/mls-static.log
           exit 1
 
       - name: Chromium responsive accessibility and offline shell QA
