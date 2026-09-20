@@ -123,13 +123,18 @@ test('local engine decompresses on device and validates uncompressed integrity',
   assert.match(offline,/new mod\.LatencyOptimisedTranslator\(options,backing\)/);
 });
 
-test('translation is local-first and online remains a graceful enhancement',()=>{
-  const localIndex=html.indexOf('offline.canTranslateOffline');
-  const onlineIndex=html.indexOf("fetch('/api/translate'");
-  assert.ok(localIndex>=0&&onlineIndex>localIndex);
+test('translation engine choice is explicit: Local and Online never silently fall back',()=>{
+  assert.match(html,/data-translation-mode="online"/);
+  assert.match(html,/data-translation-mode="local"/);
+  assert.match(html,/let translationMode='online'/);
+  assert.match(html,/if\(mode==='local'\)/);
+  assert.match(html,/offline\.canTranslateOffline/);
   assert.match(html,/offline\.translateLocal/);
-  assert.match(html,/Traducción local lista\. El texto se procesó en este dispositivo/);
-  assert.match(html,/Esta combinación todavía no está preparada para traducirse sin Internet/);
+  assert.match(html,/fetch\('\/api\/translate'/);
+  assert.match(html,/El motor local no pudo completar esta traducción\. No se usó Internet/);
+  assert.match(html,/Traducción en línea lista\. Los paquetes locales no se usaron/);
+  assert.match(html,/MLS respetará ese motor y no cambiará automáticamente al otro/);
+  assert.doesNotMatch(html,/mode==='auto'/);
 });
 
 test('required packs exclude English and do not download all ten languages',()=>{
