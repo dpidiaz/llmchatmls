@@ -1,0 +1,31 @@
+name: Smoke Workers AI embedding binding
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/smoke-semantic-binding-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probar embedding semántico en producción
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          status=$(curl --silent --show-error             --output /tmp/embedding.json             --write-out '%{http_code}'             -X POST "$base/api/search/embedding"             -H 'content-type: application/json'             --data '{"query":"prueba semántica breve"}')
+          echo "http_status=$status"
+          cat /tmp/embedding.json
+          test "$status" = "200"
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const p=JSON.parse(fs.readFileSync('/tmp/embedding.json','utf8'));
+          if(!p.ok||p.model!=='@cf/baai/bge-m3'||!Array.isArray(p.vector)||p.vector.length<100)throw new Error('Embedding inválido');
+          console.log('SEMANTIC_BINDING_OK dimensions='+p.vector.length);
+          NODE
