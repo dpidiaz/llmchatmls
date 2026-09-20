@@ -32,9 +32,31 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           MLS_SEMANTIC_BATCH_SIZE: "32"
+          MLS_EMBEDDING_ENDPOINT: https://llmchatmls.dpidiaz.workers.dev/api/internal/semantic-batch
         shell: bash
         run: |
           set -euo pipefail
+          GEN_KEY=$(printf '%s' "${CLOUDFLARE_API_TOKEN}:mls-semantic-batch-v1" | sha256sum | awk '{print $1}')
+          export MLS_EMBEDDING_KEY="$GEN_KEY"
+          echo "::add-mask::$GEN_KEY"
+
+          status=$(curl --silent --show-error --output /tmp/semantic-batch-preflight.json --write-out '%{http_code}' \
+            -X POST "$MLS_EMBEDDING_ENDPOINT" \
+            -H "authorization: Bearer $MLS_EMBEDDING_KEY" \
+            -H 'content-type: application/json' \
+            --data '{"texts":["preflight semántico uno","preflight semántico dos"]}')
+          if [ "$status" != "200" ]; then
+            echo "::error::Endpoint semántico temporal no disponible (HTTP $status)"
+            cat /tmp/semantic-batch-preflight.json || true
+            exit 1
+          fi
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const p=JSON.parse(fs.readFileSync('/tmp/semantic-batch-preflight.json','utf8'));
+          if(!p.ok||p.model!=='@cf/baai/bge-m3'||p.count!==2||!Array.isArray(p.vectors)||p.vectors.length!==2)throw new Error('Preflight batch inválido');
+          console.log('SEMANTIC_BATCH_PREFLIGHT_OK dimensions='+p.dimensions);
+          NODE
+
           languages=(
             ingles
             portugues
