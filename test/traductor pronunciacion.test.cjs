@@ -123,7 +123,7 @@ test('Translator UI calls the dedicated endpoint and keeps offline pronunciation
 });
 
 test('worker route serves the static Translator asset and is idempotent',()=>{
-  const source='before\n    if (url.pathname.startsWith("/api/wiki/")) {\nafter';
+  const source='before\nvar index_default = {\nrouter\n    if (url.pathname.startsWith("/api/wiki/")) {\nafter';
   const patched=installer.patchWorker(source);
   assert.match(patched,/MLS_TRANSLATOR_ROUTE_V1/);
   assert.match(patched,/url\.pathname === "\/api\/translate"/);
