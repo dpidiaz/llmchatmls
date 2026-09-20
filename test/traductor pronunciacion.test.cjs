@@ -24,24 +24,28 @@ test('Translator reuses all ten canonical MLS language slugs',()=>{
   }
 });
 
-test('slow speech exposes selectable pedagogical rates and repeat preserves the selected mode',()=>{
-  assert.match(html,/const NORMAL_RATE=1;/);
-  assert.match(html,/const DEFAULT_SLOW_RATE=0\.65;/);
-  assert.match(html,/id="slowSpeechRate"/);
-  assert.match(html,/id="pronounceSlowSpeechRate"/);
-  for(const rate of ['0.85','0.65','0.50','0.40']) assert.match(html,new RegExp('value="'+rate.replace('.','\\.')+'"'));
-  assert.match(html,/function selectedSlowRate\(context\)/);
-  assert.match(html,/const rate=mode==='slow'\?selectedSlowRate\(context\):NORMAL_RATE/);
-  assert.match(html,/lastSpeech=\{text,slug,mode,context\}/);
-  assert.match(html,/speak\(lastSpeech\.text,lastSpeech\.slug,lastSpeech\.mode,statusElement,lastSpeech\.context/);
-  assert.match(html,/>Escuchar lento<\/button>/);
+test('speech exposes the requested 0.10 to 1.00 selector and Listen uses it directly',()=>{
+  assert.match(html,/const DEFAULT_SPEECH_RATE=0\.50;/);
+  assert.match(html,/const MIN_SPEECH_RATE=0\.10;/);
+  assert.match(html,/const MAX_SPEECH_RATE=1\.00;/);
+  assert.match(html,/id="speechRate"/);
+  assert.match(html,/id="pronounceSpeechRate"/);
+  for(const rate of ['0.10','0.25','0.50','0.75','1.00']) assert.match(html,new RegExp('value="'+rate.replace('.','\\.')+'"'));
+  assert.match(html,/function selectedSpeechRate\(context\)/);
+  assert.match(html,/const rate=selectedSpeechRate\(context\)/);
+  assert.match(html,/utterance\.rate=rate/);
+  assert.match(html,/data-speak>Escuchar<\/button>/);
+  assert.doesNotMatch(html,/Escuchar lento/);
   assert.doesNotMatch(html,/playbackRate/);
 });
 
-test('speech always cancels the previous queue before speaking',()=>{
+test('speech cancels the previous queue and repetition is done by pressing Listen again',()=>{
   assert.match(html,/window\.speechSynthesis\.cancel\(\);\s*const utterance=new SpeechSynthesisUtterance/);
-  assert.match(html,/data-repeat/);
+  assert.match(html,/data-speak/);
   assert.match(html,/data-stop/);
+  assert.doesNotMatch(html,/data-repeat/);
+  assert.doesNotMatch(html,/lastSpeech/);
+  assert.doesNotMatch(html,/>Repetir<\/button>/);
 });
 
 test('voice selection prefers locale-compatible local services',()=>{
