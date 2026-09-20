@@ -60,8 +60,13 @@
     .offline-tools{margin-top:18px;border:1px solid var(--mls-border-subtle-light,#ddd6cc);border-radius:var(--mls-radius-md,12px);background:var(--mls-surface-muted-light,#f3efe8);padding:0 14px}
     .offline-tools summary{min-height:44px;display:flex;align-items:center;font-weight:800;cursor:pointer}
     .offline-content{padding:0 0 14px}
+    .pack-toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
     .pack-list{display:grid;gap:10px;margin-top:12px}
-    .pack-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--mls-border-subtle-light,#ddd6cc);border-radius:var(--mls-radius-md,12px);padding:12px}
+    .pack-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--mls-border-subtle-light,#ddd6cc);border-radius:var(--mls-radius-md,12px);padding:12px}
+    .pack-check{width:22px;height:22px;margin:0;accent-color:var(--mls-action-strong,#1e2b33)}
+    .pack-main{display:flex;align-items:center;gap:10px;min-width:0}
+    .pack-flag{font-size:1.55rem;line-height:1;flex:0 0 auto}
+    .pack-copy{min-width:0}
     .pack-row strong,.pack-row small{display:block}
     .pack-row small{color:var(--mls-text-secondary,#515961);margin-top:3px}
     .pack-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
@@ -74,8 +79,8 @@
       .language-row,.preference-row{grid-template-columns:1fr}
       .swap{border-radius:var(--mls-radius-md,12px);width:100%}
       .actions .btn,.audio-actions .btn{flex:1 1 145px}
-      .pack-row{grid-template-columns:1fr}
-      .pack-actions{justify-content:stretch}
+      .pack-row{grid-template-columns:auto minmax(0,1fr)}
+      .pack-actions{grid-column:1/-1;justify-content:stretch}
       .pack-actions .btn{flex:1 1 120px}
     }
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
@@ -145,11 +150,15 @@
     <details class="offline-tools" id="offlineTools">
       <summary>Usar traducción sin Internet</summary>
       <div class="offline-content">
-        <p id="offlineToolsSummary" class="muted">Comprobando los paquetes necesarios…</p>
+        <p id="offlineToolsSummary" class="muted">Comprobando los paquetes guardados en este dispositivo…</p>
+        <div class="pack-toolbar">
+          <button class="btn primary" id="downloadSelectedPacks" type="button" disabled>Descargar seleccionados</button>
+          <button class="btn" id="downloadAllPacks" type="button" disabled>Descargar todos</button>
+        </div>
         <div class="pack-list" id="offlinePackList"></div>
         <progress id="offlinePackProgress" max="100" value="0" hidden aria-label="Progreso de descarga"></progress>
         <div id="offlinePackStatus" role="status" aria-live="polite"></div>
-        <p class="privacy-note">Los paquetes se descargan solo cuando tú lo eliges. La traducción local se procesa en este dispositivo y no envía tu texto a Workers AI.</p>
+        <p class="privacy-note">MLS marca automáticamente los paquetes completos que ya tienes guardados. Los paquetes se descargan solo cuando tú lo eliges. La traducción local se procesa en este dispositivo y no envía tu texto a Workers AI.</p>
       </div>
     </details>
 
@@ -232,6 +241,18 @@
     {slug:'coreano',label:'Coreano',locales:['ko-KR','ko']},
     {slug:'ruso',label:'Ruso',locales:['ru-RU','ru']}
   ];
+  const FLAGS={
+    'espanol-guatemala':'🇬🇹',
+    ingles:'🇺🇸',
+    portugues:'🇧🇷',
+    italiano:'🇮🇹',
+    frances:'🇫🇷',
+    aleman:'🇩🇪',
+    japones:'🇯🇵',
+    'chino-taiwan':'🇹🇼',
+    coreano:'🇰🇷',
+    ruso:'🇷🇺'
+  };
   const NORMAL_RATE=1;
   const DEFAULT_SLOW_RATE=0.65;
   const MIN_SLOW_RATE=0.35;
@@ -258,6 +279,8 @@
   const offlinePackList=byId('offlinePackList');
   const offlinePackProgress=byId('offlinePackProgress');
   const offlinePackStatus=byId('offlinePackStatus');
+  const downloadSelectedPacks=byId('downloadSelectedPacks');
+  const downloadAllPacks=byId('downloadAllPacks');
   const pronounceLanguage=byId('pronounceLanguage');
   const pronounceInput=byId('pronounceInput');
   const pronunciationResult=byId('pronunciationResult');
@@ -280,62 +303,107 @@
   }
 
   function packStatusLabel(status){
-    if(status==='ready')return 'Disponible sin Internet';
-    if(status==='partial')return 'Descarga incompleta';
+    if(status==='ready')return 'Descargado y listo';
+    if(status==='partial')return 'Incompleto · vuelve a descargarlo';
     if(status==='unsupported')return 'No disponible en este navegador';
+    if(status==='base')return 'Base del traductor · no requiere paquete';
     return 'No descargado';
+  }
+
+  function pendingPackCheckboxes(){
+    return [...offlinePackList.querySelectorAll('[data-pack-checkbox]')].filter(input=>!input.disabled);
+  }
+
+  function updatePackDownloadButtons(){
+    const pending=pendingPackCheckboxes();
+    const selected=pending.filter(input=>input.checked);
+    downloadSelectedPacks.disabled=!navigator.onLine||selected.length===0;
+    downloadAllPacks.disabled=!navigator.onLine||pending.length===0;
   }
 
   async function refreshOfflineTools(){
     const token=++offlineRefreshToken;
     offlinePackList.replaceChildren();
-    offlineToolsSummary.textContent='Comprobando los paquetes necesarios…';
+    offlineToolsSummary.textContent='Comprobando los paquetes guardados en este dispositivo…';
     offlinePackStatus.textContent='';
     offlinePackProgress.hidden=true;
+    downloadSelectedPacks.disabled=true;
+    downloadAllPacks.disabled=true;
     try{
       const offline=await offlineModule();
-      const summary=await offline.packSummary(sourceLanguage.value,targetLanguage.value);
+      const catalog=await offline.packCatalog();
       if(token!==offlineRefreshToken)return;
-      if(summary.required.length===0){
-        offlineToolsSummary.textContent=sourceLanguage.value===targetLanguage.value
-          ?'No necesitas un paquete adicional cuando el idioma de origen y destino es el mismo.'
-          :'El motor compartido se prepara junto con el primer paquete que descargues.';
-        return;
-      }
-      const total=summary.packs.reduce((sum,item)=>sum+Number(item.compressedBytes||0),0);
-      offlineToolsSummary.textContent='Para esta combinación necesitas '+summary.packs.length+' paquete'+(summary.packs.length===1?'':'s')+' ('+offline.bytesLabel(total)+' aprox.).';
-      for(const pack of summary.packs){
+
+      const installed=catalog.packs.filter(pack=>pack.status==='ready').length;
+      const pending=catalog.packs.filter(pack=>pack.selectable&&pack.status!=='ready');
+      const pendingBytes=pending.reduce((sum,pack)=>sum+Number(pack.compressedBytes||0),0);
+      offlineToolsSummary.textContent=installed
+        ?installed+' paquete'+(installed===1?'':'s')+' descargado'+(installed===1?'':'s')+'. '+pending.length+' pendiente'+(pending.length===1?'':'s')+' ('+offline.bytesLabel(pendingBytes)+' aprox.).'
+        :'Todavía no tienes paquetes de idioma descargados. Puedes elegirlos individualmente o descargar todos ('+offline.bytesLabel(pendingBytes)+' aprox.).';
+
+      for(const pack of catalog.packs){
         const row=document.createElement('div');
         row.className='pack-row';
         row.dataset.packSlug=pack.slug;
-        const text=document.createElement('div');
+
+        const checkbox=document.createElement('input');
+        checkbox.type='checkbox';
+        checkbox.className='pack-check';
+        checkbox.dataset.packCheckbox=pack.slug;
+        checkbox.setAttribute('aria-label',pack.label+' para traducción sin Internet');
+
+        if(pack.status==='ready'){
+          checkbox.checked=true;
+          checkbox.disabled=true;
+        }else if(pack.status==='base'){
+          checkbox.checked=true;
+          checkbox.disabled=true;
+        }else if(pack.status==='unsupported'){
+          checkbox.checked=false;
+          checkbox.disabled=true;
+        }else{
+          checkbox.checked=false;
+          checkbox.disabled=false;
+        }
+
+        const main=document.createElement('div');
+        main.className='pack-main';
+        const flag=document.createElement('span');
+        flag.className='pack-flag';
+        flag.setAttribute('aria-hidden','true');
+        flag.textContent=FLAGS[pack.slug]||'🌐';
+        const copy=document.createElement('div');
+        copy.className='pack-copy';
         const title=document.createElement('strong');
         title.textContent=pack.label;
         const meta=document.createElement('small');
-        meta.textContent=offline.bytesLabel(pack.compressedBytes)+' · '+packStatusLabel(pack.status);
-        text.append(title,meta);
+        meta.textContent=pack.runtimeOnly
+          ?packStatusLabel(pack.status)
+          :offline.bytesLabel(pack.compressedBytes)+' · '+packStatusLabel(pack.status);
+        copy.append(title,meta);
+        main.append(flag,copy);
+
         const actions=document.createElement('div');
         actions.className='pack-actions';
-        const prepare=document.createElement('button');
-        prepare.type='button';
-        prepare.className='btn';
-        prepare.dataset.preparePack=pack.slug;
-        prepare.textContent=pack.status==='partial'?'Reintentar':'Descargar';
-        if(pack.status==='ready')prepare.hidden=true;
-        const remove=document.createElement('button');
-        remove.type='button';
-        remove.className='btn';
-        remove.dataset.removePack=pack.slug;
-        remove.textContent='Eliminar';
-        remove.hidden=pack.status==='empty'||pack.status==='unsupported';
-        actions.append(prepare,remove);
-        row.append(text,actions);
+        if(pack.status==='ready'||pack.status==='partial'){
+          const remove=document.createElement('button');
+          remove.type='button';
+          remove.className='btn';
+          remove.dataset.removePack=pack.slug;
+          remove.textContent='Eliminar';
+          actions.append(remove);
+        }
+
+        row.append(checkbox,main,actions);
         offlinePackList.append(row);
+        checkbox.addEventListener('change',updatePackDownloadButtons);
       }
-      if(summary.storage&&summary.storage.quota){
-        const free=Math.max(0,summary.storage.quota-summary.storage.usage);
+
+      if(catalog.storage&&catalog.storage.quota){
+        const free=Math.max(0,catalog.storage.quota-catalog.storage.usage);
         offlinePackStatus.textContent='Espacio estimado disponible: '+offline.bytesLabel(free)+'.';
       }
+      updatePackDownloadButtons();
     }catch(error){
       if(token!==offlineRefreshToken)return;
       offlineToolsSummary.textContent='No fue posible comprobar los paquetes offline.';
@@ -343,33 +411,56 @@
     }
   }
 
-  async function prepareOfflinePack(slug,button){
+  async function downloadOfflinePacks(mode){
     if(!navigator.onLine){
-      offlinePackStatus.textContent='Conéctate a Internet para descargar este paquete.';
+      offlinePackStatus.textContent='Conéctate a Internet para descargar paquetes.';
       return;
     }
-    button.disabled=true;
+
+    const offline=await offlineModule();
+    const catalog=await offline.packCatalog();
+    const packBySlug=new Map(catalog.packs.map(pack=>[pack.slug,pack]));
+    const requested=mode==='all'
+      ?catalog.packs.filter(pack=>pack.selectable&&pack.status!=='ready').map(pack=>pack.slug)
+      :pendingPackCheckboxes().filter(input=>input.checked).map(input=>input.dataset.packCheckbox);
+    const queue=[...new Set(requested)].filter(slug=>{
+      const pack=packBySlug.get(slug);
+      return pack&&pack.selectable&&pack.status!=='ready';
+    });
+
+    if(queue.length===0){
+      offlinePackStatus.textContent=mode==='all'
+        ?'Todos los paquetes disponibles ya están descargados.'
+        :'Marca por lo menos un idioma pendiente.';
+      updatePackDownloadButtons();
+      return;
+    }
+
+    downloadSelectedPacks.disabled=true;
+    downloadAllPacks.disabled=true;
+    for(const input of pendingPackCheckboxes())input.disabled=true;
     offlinePackProgress.hidden=false;
     offlinePackProgress.value=0;
-    offlinePackStatus.textContent='Preparando descarga…';
+
+    let completed=0;
     try{
-      const offline=await offlineModule();
-      await offline.preparePack(slug,event=>{
-        if(event.totalBytes){
-          const ratio=Math.max(0,Math.min(1,Number(event.completedBytes||0)/Number(event.totalBytes)));
-          offlinePackProgress.value=Math.round(ratio*100);
-        }
-        if(event.phase==='downloading')offlinePackStatus.textContent='Descargando recursos del idioma…';
-        if(event.phase==='verified')offlinePackStatus.textContent='Verificando integridad…';
-      });
-      offlinePackProgress.value=100;
-      offlinePackStatus.textContent='Paquete disponible sin Internet.';
-      await refreshOfflineTools();
+      for(const slug of queue){
+        const pack=packBySlug.get(slug);
+        offlinePackStatus.textContent='Descargando '+pack.label+' ('+(completed+1)+' de '+queue.length+')…';
+        await offline.preparePack(slug,event=>{
+          const ratio=event.totalBytes
+            ?Math.max(0,Math.min(1,Number(event.completedBytes||0)/Number(event.totalBytes)))
+            :0;
+          offlinePackProgress.value=Math.round(((completed+ratio)/queue.length)*100);
+        });
+        completed++;
+        offlinePackProgress.value=Math.round((completed/queue.length)*100);
+      }
+      offlinePackStatus.textContent=queue.length===1?'Paquete descargado y verificado.':'Paquetes descargados y verificados.';
     }catch(error){
-      offlinePackStatus.textContent='La descarga quedó incompleta. '+String(error&&error.message||error);
-      await refreshOfflineTools();
+      offlinePackStatus.textContent='La descarga se detuvo. '+String(error&&error.message||error);
     }finally{
-      button.disabled=false;
+      await refreshOfflineTools();
       setTimeout(()=>{offlinePackProgress.hidden=true},800);
     }
   }
@@ -385,6 +476,9 @@
       offlinePackStatus.textContent='No fue posible eliminar el paquete. '+String(error&&error.message||error);
     }finally{button.disabled=false}
   }
+
+  downloadSelectedPacks.addEventListener('click',()=>downloadOfflinePacks('selected'));
+  downloadAllPacks.addEventListener('click',()=>downloadOfflinePacks('all'));
 
   function optionMarkup(selected){
     return LANGUAGES.map(lang=>'<option value="'+lang.slug+'"'+(lang.slug===selected?' selected':'')+'>'+lang.label+'</option>').join('');
@@ -598,10 +692,6 @@
   document.addEventListener('click',event=>{
     const button=event.target.closest('button');
     if(!button)return;
-    if(button.dataset.preparePack){
-      prepareOfflinePack(button.dataset.preparePack,button);
-      return;
-    }
     if(button.dataset.removePack){
       removeOfflinePack(button.dataset.removePack,button);
       return;
@@ -630,9 +720,6 @@
   pronounceLanguage.addEventListener('change',()=>{
     if(!pronunciationResult.hidden)preparePronunciation();
   });
-  sourceLanguage.addEventListener('change',refreshOfflineTools);
-  targetLanguage.addEventListener('change',refreshOfflineTools);
-
   translateButton.addEventListener('click',async()=>{
     const text=sanitizeSpeechText(translateInput.value);
     if(!text){
