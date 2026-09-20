@@ -1,0 +1,43 @@
+name: Validate Translator T6 once
+
+on:
+  push:
+    branches:
+      - feature/translator-pronunciation-offline
+    paths:
+      - ".github/workflows/validate-translator-t6-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --test 'test/traductor pronunciacion.test.cjs'
+      - run: npm run test:chat-editorial
+      - run: npm run qa:baseline
+      - run: npm run predeploy
+      - name: Verify generated Translator and translation endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/traductor.html
+          grep -Fq 'href="/traductor" data-nav="translator">Traductor</a>' public/index.html
+          grep -Fq 'MLS_TRANSLATOR_BACKEND_V1' src/index.js
+          grep -Fq 'url.pathname === "/api/translate"' src/index.js
+          grep -Fq '@cf/google/gemma-4-26b-a4b-it' src/index.js
+          grep -Fq "fetch('/api/translate'" public/traductor.html
+          grep -Fq "const SLOW_RATE=0.65" public/traductor.html
+          grep -Fq "'./traductor.html'" public/sw.js
+          echo TRANSLATOR_T6_GENERATED_OK
+      - run: npm run recovery:verify
+      - run: node --test test/deploy-contract.test.cjs
+      - run: npm run check
