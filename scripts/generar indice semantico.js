@@ -107,7 +107,23 @@ function embeddingRows(payload){
   }
   throw new Error('Respuesta de embeddings sin data/shape reconocible.');
 }
-async function embedBatch(texts,{token,accountId,model=MODEL}){
+async function embedBatch(texts,{token,accountId,model=MODEL,embedUrl=process.env.MLS_SEMANTIC_EMBED_URL,embedKey=process.env.MLS_SEMANTIC_EMBED_KEY}){
+  if(embedUrl){
+    const response=await fetch(embedUrl,{
+      method:'POST',
+      headers:{'content-type':'application/json',accept:'application/json',...(embedKey?{'x-mls-semantic-key':embedKey}:{})},
+      body:JSON.stringify({texts})
+    });
+    const payload=await response.json().catch(()=>({}));
+    if(!response.ok||payload?.ok!==true){
+      const error=new Error('Worker temporal de embeddings falló: '+(payload?.error||('HTTP '+response.status)));
+      error.status=response.status;
+      throw error;
+    }
+    const rows=Array.isArray(payload.embeddings)?payload.embeddings:[];
+    if(rows.length!==texts.length)throw new Error('Worker temporal devolvió '+rows.length+' embeddings para '+texts.length+' textos.');
+    return rows;
+  }
   const response=await fetch('https://api.cloudflare.com/client/v4/accounts/'+accountId+'/ai/run/'+model,{
     method:'POST',
     headers:{authorization:'Bearer '+token,'content-type':'application/json',accept:'application/json'},
@@ -137,20 +153,22 @@ function existingLanguageIsCurrent(language,buildId,root=OUTPUT_ROOT){
 async function generateLanguage(language,options={}){
   const sourceRoot=path.resolve(options.sourceRoot||SOURCE_ROOT);
   const outputRoot=path.resolve(options.outputRoot||OUTPUT_ROOT);
+  const embedUrl=options.embedUrl||process.env.MLS_SEMANTIC_EMBED_URL;
+  const embedKey=options.embedKey||process.env.MLS_SEMANTIC_EMBED_KEY;
   const token=options.token||process.env.CLOUDFLARE_API_TOKEN;
-  if(!token)throw new Error('Falta CLOUDFLARE_API_TOKEN.');
+  if(!embedUrl&&!token)throw new Error('Falta CLOUDFLARE_API_TOKEN o MLS_SEMANTIC_EMBED_URL.');
   const buildId=sourceBuildId(sourceRoot);
   fs.mkdirSync(outputRoot,{recursive:true});
   if(!options.force&&existingLanguageIsCurrent(language,buildId,outputRoot)){
     return {language:language.slug,skipped:true};
   }
-  const accountId=options.accountId||await discoverAccountId(token);
+  const accountId=embedUrl?null:(options.accountId||await discoverAccountId(token));
   const records=readLanguageRecords(language,sourceRoot);
   const buffers=[];
   let dimensions=0;
   for(let start=0;start<records.length;start+=BATCH_SIZE){
     const batch=records.slice(start,start+BATCH_SIZE);
-    const vectors=await embedBatch(batch.map(x=>x.text),{token,accountId});
+    const vectors=await embedBatch(batch.map(x=>x.text),{token,accountId,embedUrl,embedKey});
     for(const vector of vectors){
       if(!dimensions)dimensions=vector.length;
       if(vector.length!==dimensions)throw new Error(language.slug+': dimensión inconsistente.');
@@ -225,11 +243,13 @@ async function main(){
   const force=process.argv.includes('--force');
   const languages=only?LANGUAGES.filter(x=>x.slug===only):LANGUAGES;
   if(only&&!languages.length)throw new Error('Idioma desconocido: '+only);
+  const embedUrl=process.env.MLS_SEMANTIC_EMBED_URL;
+  const embedKey=process.env.MLS_SEMANTIC_EMBED_KEY;
   const token=process.env.CLOUDFLARE_API_TOKEN;
-  if(!token)throw new Error('Falta CLOUDFLARE_API_TOKEN.');
-  const accountId=await discoverAccountId(token);
+  if(!embedUrl&&!token)throw new Error('Falta CLOUDFLARE_API_TOKEN o MLS_SEMANTIC_EMBED_URL.');
+  const accountId=embedUrl?null:await discoverAccountId(token);
   for(const language of languages){
-    const result=await generateLanguage(language,{token,accountId,force});
+    const result=await generateLanguage(language,{token,accountId,embedUrl,embedKey,force});
     console.log(JSON.stringify(result));
   }
   const manifest=buildManifest();
