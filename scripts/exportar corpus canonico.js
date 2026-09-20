@@ -115,6 +115,24 @@ function queryCounts() {
   );
 }
 
+function queryPresentNumbers(language) {
+  return runD1(
+    'SELECT n FROM wiki_articles WHERE prompt_version = ' +
+    sqlText(PROMPT_VERSION) +
+    ' AND language = ' + sqlText(language.slug) +
+    ' ORDER BY n'
+  ).map(row => Number(row.n)).filter(Number.isFinite);
+}
+
+function findMissingCodes(language, observedNumbers) {
+  const present = new Set(observedNumbers.map(Number));
+  const missing = [];
+  for (let n = 1; n <= language.total; n++) {
+    if (!present.has(n)) missing.push(language.prefix + '-' + String(n).padStart(4, '0'));
+  }
+  return missing;
+}
+
 function queryPage(language, lastN) {
   const sql =
     'SELECT code, language, language_name AS languageName, n, title, level, part, chapter, ' +
@@ -132,7 +150,11 @@ function assertCompleteCounts(rows) {
   const problems = [];
   for (const language of LANGUAGES) {
     const count = actual.get(language.slug) || 0;
-    if (count !== language.total) problems.push(language.slug + ': ' + count + '/' + language.total);
+    if (count !== language.total) {
+      const missing = findMissingCodes(language, queryPresentNumbers(language));
+      const detail = missing.length ? '; faltan ' + missing.join(', ') : '; sin huecos de n, revisar duplicados o identidad';
+      problems.push(language.slug + ': ' + count + '/' + language.total + detail);
+    }
   }
   for (const language of actual.keys()) {
     if (!LANGUAGES.some(item => item.slug === language)) problems.push('idioma inesperado: ' + language);
@@ -245,6 +267,7 @@ module.exports = {
   rowsFromWranglerJson,
   normalizeArticle,
   validateArticle,
+  findMissingCodes,
   sha256,
   exportCanonicalCorpus
 };
