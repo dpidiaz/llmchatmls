@@ -51,7 +51,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- content; then
+          if [ -z "$(git status --porcelain -- content)" ]; then
             echo "El corpus canónico ya coincide con D1; no hay cambios que guardar."
             exit 0
           fi
