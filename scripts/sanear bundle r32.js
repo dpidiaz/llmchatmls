@@ -9,6 +9,7 @@ const DEFAULT_ARCHIVE=path.resolve('MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.ta
 const REQUIRED_SHELL_FILES=[
   'public/index.html',
   'public/js/core.js',
+  'public/js/ai.js',
   'public/js/app.js',
   'public/js/search.js',
   'public/js/map.js',
@@ -56,6 +57,8 @@ function sanitizeBundle(input=DEFAULT_ARCHIVE,output=path.resolve('MASTER LANGUA
       if(!fs.existsSync(path.join(tmp,required)))throw new Error('Bundle fuente no contiene shell requerido: '+required);
     }
     fs.rmSync(output,{force:true});
+    const topLevel=fs.readdirSync(tmp).sort();
+    if(!topLevel.length)throw new Error('Bundle saneado quedó vacío.');
     run('tar',[
       '--sort=name',
       '--mtime=@0',
@@ -63,7 +66,8 @@ function sanitizeBundle(input=DEFAULT_ARCHIVE,output=path.resolve('MASTER LANGUA
       '--group=0',
       '--numeric-owner',
       '-czf',output,
-      '-C',tmp,'.'
+      '-C',tmp,
+      ...topLevel
     ]);
     const report=validateSanitizedArchive(output);
     report.bytes=fs.statSync(output).size;
