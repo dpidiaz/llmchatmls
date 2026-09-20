@@ -1953,9 +1953,13 @@ async function handleSemanticGenerationBatchRequest(request, env) {
   if (request.method !== "POST") {
     return new Response("Not found", { status: 404 });
   }
-  const secret = String(env.SEMANTIC_GENERATION_KEY || "");
   const auth = request.headers.get("authorization") || "";
-  if (!secret || auth !== "Bearer " + secret) {
+  const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+  if (!token) return new Response("Not found", { status: 404 });
+  const digestBytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(token));
+  const digest = [...new Uint8Array(digestBytes)].map((value) => value.toString(16).padStart(2, "0")).join("");
+  const expectedDigest = "__SEMANTIC_GENERATION_KEY_SHA256__";
+  if (expectedDigest.startsWith("__") || digest !== expectedDigest) {
     return new Response("Not found", { status: 404 });
   }
   try {
