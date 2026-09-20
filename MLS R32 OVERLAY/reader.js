@@ -140,11 +140,11 @@
       const item=byCode.get(code);
       if(item){seen.add(code);related.push(item)}
     }
-    return related.slice(0,5);
+    return related.slice(0,12);
   }
 
   async function relatedForEntry(markdown,catalog,manifest,language,currentCode,limit=5){
-    const editorial=relatedFromMarkdown(markdown,catalog);
+    const editorial=relatedFromMarkdown(markdown,catalog).slice(0,limit);
     if(editorial.length>=limit)return editorial;
 
     try{
