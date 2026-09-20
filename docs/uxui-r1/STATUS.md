@@ -32,12 +32,13 @@ Delivered: explicit resume intent, persisted reading position, safe same-entry r
 Dependencies: ninguna bloqueante
 
 ### Chat C — Discovery & Learning
-Status: IN PROGRESS — QUALITY AUDIT COMPLETE
+Status: IN PROGRESS — IMPLEMENTATION COMPLETE / FINAL CERTIFICATION PENDING
 Branch: uxui-r1-discovery
 PR: #103 (draft)
-Delivered so far: semantic-neighbor generator, deterministic light reranking, quality audit
-Next: publishable assets + manifest + editorial→semantic Reader fallback
-Dependencies: BGE-M3 existing index; must preserve current integration
+Current synced commit: b1e3b5041f53c683a573628a6e89829beee422dc
+Delivered: semantic-neighbor generator, deterministic reranking, 10-language assets, versioned publisher, editorial→semantic Reader fallback
+Next: global suite + predeploy/recovery/dry-run + remove temporary workflow + ready-for-review
+Dependencies: BGE-M3 existing index; no runtime AI/D1 dependency
 
 ### Chat D — Visual System
 Status: INTEGRATED — WAVE 1 COMPLETE
@@ -48,13 +49,13 @@ Delivered: Visual Foundation v1, shared tokens, opt-in primitives, central style
 Dependencies: ninguna
 
 ### Chat E — Offline & Resilience
-Status: E1–E5 INTEGRATED
+Status: COMPLETE — E1–E7 INTEGRATED
 Branch: uxui-r1-offline
-PR: #104
-Integrated commit: 8052363e166e4d469579f5482d584ed6269e2e4b
-Delivered: App Shell/Offline Library separation, verified offline state, migration, per-language preparation, resilience tests
-Next: E6–E7 resilience UX
-Dependencies: no bloqueantes
+PRs: #104, #108
+Integrated commits: 8052363e166e4d469579f5482d584ed6269e2e4b, 6f361d322b9c58f1802eb847c14badebdbe9116e
+Delivered: cache separation, verified/migrated offline library, per-language preparation, resilience messaging, recovery UX, accessible offline states
+Next: only respond to regressions found by G
+Dependencies: none
 
 ### Chat F — AI Experience
 Status: CHECKPOINT 1 INTEGRATED
