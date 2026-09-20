@@ -31,17 +31,17 @@ jobs:
         run: |
           set -euo pipefail
           GEN_KEY=$(printf '%s' "${CLOUDFLARE_API_TOKEN}:mls-semantic-batch-v1" | sha256sum | awk '{print $1}')
-          GEN_HASH=$(printf '%s' "$GEN_KEY" | sha256sum | awk '{print $1}')
           echo "::add-mask::$GEN_KEY"
 
-          node - "$GEN_HASH" <<'NODE'
+          GEN_KEY_B64=$(printf '%s' "$GEN_KEY" | base64 -w0)
+          node - "$GEN_KEY_B64" <<'NODE'
           const fs=require('node:fs');
-          const hash=process.argv[2];
+          const key=Buffer.from(process.argv[2],'base64').toString('utf8');
           const file='scripts/semantic batch worker temp.js';
           let source=fs.readFileSync(file,'utf8');
-          const marker='__SEMANTIC_GENERATION_KEY_SHA256__';
-          if(!source.includes(marker))throw new Error('No se encontró placeholder de digest.');
-          source=source.replaceAll(marker,hash);
+          const marker='__SEMANTIC_GENERATION_KEY__';
+          if(!source.includes(marker))throw new Error('No se encontró placeholder de clave.');
+          source=source.replaceAll(marker,key);
           fs.writeFileSync(file,source);
           NODE
 
