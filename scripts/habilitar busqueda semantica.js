@@ -38,7 +38,7 @@ const BLOCK=[
   '    return task;',
   '  }',
   "  async function semanticQueryVector(query){",
-  "    const key=String(query||'').replace(/\s+/g,' ').trim();",
+  "    const key=String(query||'').replace(/\\s+/g,' ').trim();",
   "    if(key.length<2)throw new Error('Consulta semántica demasiado corta');",
   '    if(semanticQueryCache.has(key))return semanticQueryCache.get(key);',
   "    const task=fetch('/api/search/embedding',{method:'POST',headers:{'content-type':'application/json',accept:'application/json'},body:JSON.stringify({query:key}),cache:'no-store'})",
