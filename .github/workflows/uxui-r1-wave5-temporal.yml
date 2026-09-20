@@ -1,0 +1,78 @@
+name: UXUI R1 Wave 5 final certification
+
+on:
+  push:
+    branches:
+      - uxui-r1-integration
+    paths:
+      - ".github/workflows/uxui-r1-wave5-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Verify Wave 5 repository hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          other_temporals="$(find .github/workflows -maxdepth 1 -type f \( -iname '*temporal*' -o -iname '*temporary*' \) ! -name 'uxui-r1-wave5-temporal.yml' -print)"
+          if [ -n "$other_temporals" ]; then
+            echo "::error::Unexpected temporary workflows remain:"
+            printf '%s\n' "$other_temporals"
+            exit 1
+          fi
+          content_changes="$(git diff --name-only origin/main...HEAD -- content/)"
+          if [ -n "$content_changes" ]; then
+            echo "::error::Canonical content/ changed during UXUI R1:"
+            printf '%s\n' "$content_changes"
+            exit 1
+          fi
+          echo "WAVE5_REPOSITORY_HYGIENE_OK"
+
+      - run: npm ci
+      - run: npm run test:chat-editorial
+      - run: npm run qa:baseline
+      - run: npm run predeploy
+      - run: npm run recovery:verify
+      - run: node --test test/deploy-contract.test.cjs
+      - run: npm run check
+
+      - name: Verify integrated UXUI contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f public/css/design-system.css
+          test -f public/data/related/manifest.json
+          grep -q 'Saltar al contenido principal' public/index.html
+          grep -q '/virtuoso' public/index.html
+          grep -q 'Biblioteca disponible sin Internet' public/js/ios.js
+          grep -q 'prefers-reduced-motion: reduce' public/js/reader.js
+          grep -q 'semantic-neighbors' public/data/related/manifest.json
+          node - <<'NODE'
+          const fs=require('fs');
+          const recovery=JSON.parse(fs.readFileSync('public/data/canonical/manifest.json','utf8'));
+          const related=JSON.parse(fs.readFileSync('public/data/related/manifest.json','utf8'));
+          if(recovery.totalEntries!==10133) throw new Error('canonical totalEntries != 10133');
+          if(Object.keys(recovery.languages||{}).length!==10) throw new Error('canonical languages != 10');
+          if(related.corpusBuildId!==recovery.corpusBuildId) throw new Error('related corpusBuildId mismatch');
+          if(Object.keys(related.languages||{}).length!==10) throw new Error('related languages != 10');
+          console.log('WAVE5_INTEGRATED_CONTRACTS_OK', JSON.stringify({
+            canonicalEntries: recovery.totalEntries,
+            languages: Object.keys(recovery.languages||{}).length,
+            relatedLanguages: Object.keys(related.languages||{}).length,
+            corpusBuildId: recovery.corpusBuildId
+          }));
+          NODE
