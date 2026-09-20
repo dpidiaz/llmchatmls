@@ -1,10 +1,5 @@
 const MODEL='@cf/baai/bge-m3';
-const EXPECTED_DIGEST='__SEMANTIC_GENERATION_KEY_SHA256__';
-
-async function sha256Hex(value){
-  const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));
-  return [...new Uint8Array(bytes)].map(v=>v.toString(16).padStart(2,'0')).join('');
-}
+const EXPECTED_KEY='__SEMANTIC_GENERATION_KEY__';
 
 function rows(result){
   const data=result?.data;
@@ -26,7 +21,7 @@ export default {
     if(url.pathname!=='/embed'||request.method!=='POST')return new Response('Not found',{status:404});
     const auth=request.headers.get('authorization')||'';
     const token=auth.startsWith('Bearer ')?auth.slice(7):'';
-    if(!token||EXPECTED_DIGEST.startsWith('__')||await sha256Hex(token)!==EXPECTED_DIGEST)return new Response('Not found',{status:404});
+    if(!token||EXPECTED_KEY.startsWith('__')||token!==EXPECTED_KEY)return new Response('Not found',{status:404});
     try{
       const body=await request.json();
       const texts=Array.isArray(body?.texts)?body.texts.map(x=>String(x||'').replace(/\s+/g,' ').trim()):[];
