@@ -37,6 +37,15 @@ test('home hero Buscar CTA opens Virtuoso instead of the old hash search',()=>{
   assert.equal(patchAppNavigation(patched),patched);
 });
 
+test('language page Buscar aquí opens Virtuoso with contextual language',()=>{
+  const original=shellApp();
+  assert.match(original,/onclick="location\.hash='#search\?lang=\$\{slug\}'">⌕ Buscar aquí<\/button>/);
+  const patched=patchAppNavigation(original);
+  assert.match(patched,/onclick="location\.href='\/virtuoso\?lang=\$\{slug\}'">⌕ Buscar aquí<\/button>/);
+  assert.doesNotMatch(patched,/onclick="location\.hash='#search\?lang=\$\{slug\}'">⌕ Buscar aquí<\/button>/);
+  assert.equal(patchAppNavigation(patched),patched);
+});
+
 test('Virtuoso backend routes page and API through the current worker',()=>{
   const worker=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8');
   const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
@@ -86,6 +95,14 @@ test('Virtuoso page uses the same lexical and semantic indexes and requires targ
   assert.doesNotMatch(html,/>Todos los idiomas</);
 });
 
+
+test('Virtuoso accepts a validated contextual language from the URL and focuses the query',()=>{
+  const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
+  assert.match(html,/new URLSearchParams\(location\.search\)\.get\('lang'\)/);
+  assert.match(html,/const valid=value=>Boolean\(value\)&&\[\.\.\.language\.options\]\.some\(o=>o\.value===value\)/);
+  assert.match(html,/if\(valid\(requested\)\)\{language\.value=requested;requestAnimationFrame\(\(\)=>query\.focus\(\)\)\}/);
+  assert.match(html,/if\(valid\(saved\)\)language\.value=saved/);
+});
 
 test('Virtuoso browser inline scripts compile without syntax errors',()=>{
   const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
