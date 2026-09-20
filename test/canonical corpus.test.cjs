@@ -7,7 +7,8 @@ const {
   PROMPT_VERSION,
   rowsFromWranglerJson,
   normalizeArticle,
-  validateArticle
+  validateArticle,
+  findMissingCodes
 } = require('../scripts/exportar corpus canonico.js');
 
 test('rowsFromWranglerJson accepts Wrangler result arrays', () => {
@@ -63,4 +64,12 @@ test('validateArticle accepts canonical R32 identity and rejects legacy provider
     () => validateArticle({ ...article, provider: 'cloudflare-legacy' }, language),
     /legacy/
   );
+});
+
+
+test('findMissingCodes reports exact canonical identities', () => {
+  const language = LANGUAGES.find(item => item.slug === 'chino-taiwan');
+  const observed = Array.from({ length: language.total }, (_, index) => index + 1)
+    .filter(n => n !== 731);
+  assert.deepEqual(findMissingCodes(language, observed), ['MLS-V07-0731']);
 });
