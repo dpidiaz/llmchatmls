@@ -11,24 +11,33 @@
 
 ### Chat 0 — Coordinator
 Status: ACTIVE
-Current: Wave 0 — estructura de coordinación
+Current: Wave 2 — integración incremental A/B/E; C sigue en desarrollo
 Branch: uxui-r1-integration
 Blockers: none
 
 ### Chat A — Navigation & Orientation
-Status: READY — VISUAL FOUNDATION AVAILABLE
+Status: INTEGRATED — CHECKPOINT A1–A6 COMPLETE
 Branch: uxui-r1-navigation
-Dependencies: Visual Foundation v1 integrated; consume shared tokens for global visual changes
+PR: #102
+Integrated commit: 01505e6d07acef804501f54844c65d1af13804b7
+Delivered: navigation/orientation microcopy, tooling label normalization, generated-shell contracts
+Dependencies: future A↔F only for local "Buscar aquí" handoff
 
 ### Chat B — Continuity & Personal Library
-Status: READY FOR KICKOFF
+Status: INTEGRATED — B1–B3 COMPLETE
 Branch: uxui-r1-continuity
-Dependencies: ninguna dura al inicio
+PR: #105
+Integrated commit: 0b7114f06d0509696ec817fcc9b092dbc6944bd9
+Delivered: explicit resume intent, persisted reading position, safe same-entry rerender continuity
+Dependencies: ninguna bloqueante
 
 ### Chat C — Discovery & Learning
-Status: READY FOR KICKOFF
+Status: IN PROGRESS — QUALITY AUDIT COMPLETE
 Branch: uxui-r1-discovery
-Dependencies: índice semántico existente; contratos canónicos
+PR: #103 (draft)
+Delivered so far: semantic-neighbor generator, deterministic light reranking, quality audit
+Next: publishable assets + manifest + editorial→semantic Reader fallback
+Dependencies: BGE-M3 existing index; must preserve current integration
 
 ### Chat D — Visual System
 Status: INTEGRATED — WAVE 1 COMPLETE
@@ -39,9 +48,13 @@ Delivered: Visual Foundation v1, shared tokens, opt-in primitives, central style
 Dependencies: ninguna
 
 ### Chat E — Offline & Resilience
-Status: READY FOR KICKOFF
+Status: E1–E5 INTEGRATED
 Branch: uxui-r1-offline
-Dependencies: respetar PWA/cache existentes
+PR: #104
+Integrated commit: 8052363e166e4d469579f5482d584ed6269e2e4b
+Delivered: App Shell/Offline Library separation, verified offline state, migration, per-language preparation, resilience tests
+Next: E6–E7 resilience UX
+Dependencies: no bloqueantes
 
 ### Chat F — AI Experience
 Status: CHECKPOINT 1 INTEGRATED
