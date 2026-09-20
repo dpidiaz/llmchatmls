@@ -7,7 +7,7 @@ const test=require('node:test');
 const assert=require('node:assert/strict');
 const {execFileSync}=require('node:child_process');
 const {normalizeText,tokenizeText,buildFullTextSearch}=require('../scripts/generar indice full text.js');
-const {patchSearch,MARKER}=require('../scripts/habilitar busqueda full text.js');
+const {patchSearch,MARKER,LANGUAGE_FIRST_MARKER}=require('../scripts/habilitar busqueda full text.js');
 
 const archive=path.resolve('MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz');
 
@@ -87,4 +87,29 @@ test('predeploy installs full-text engine after shell numbering and builds index
   const index=p.indexOf("node 'scripts/generar indice full text.js'");
   assert.ok(numbering>=0&&patch>numbering,'El parche full-text debe ejecutarse después de numeración.');
   assert.ok(compat>=0&&index>compat,'El índice full-text debe generarse después de los datos canónicos compatibles.');
+});
+
+
+test('language selection is primary, mandatory, and all-languages is explicit',()=>{
+  const original=shellSearch();
+  const patched=patchSearch(original);
+  assert.ok(patched.includes(LANGUAGE_FIRST_MARKER));
+  assert.match(patched,/search-language-primary/);
+  assert.match(patched,/Selecciona un idioma/);
+  assert.match(patched,/option value="all"/);
+  assert.doesNotMatch(patched,/<option value="">Todos los idiomas<\/option>/);
+  assert.match(patched,/rawLang==='all'\?'':rawLang/);
+  assert.match(patched,/if\(!rawLang\)\{document\.getElementById\('searchInfo'\)\.textContent='Selecciona un idioma para buscar\.'/);
+  assert.match(patched,/MLS\.state\.currentLang/);
+  assert.match(patched,/localStorage\.getItem\('mlsSearchLanguage'\)/);
+  assert.match(patched,/localStorage\.setItem\('mlsSearchLanguage',rawLang\)/);
+  assert.equal(patchSearch(patched),patched);
+});
+
+test('selected language is applied before lexical ranking',()=>{
+  const patched=patchSearch(shellSearch());
+  assert.match(patched,/const slugs=lang\?\[lang\]:MLS_META\.map\(m=>m\.slug\)/);
+  assert.match(patched,/fullTextPasses\(r,lang,level,part,chapter\)/);
+  assert.match(patched,/baseSearch\(q,lang,level,part,chapter\)/);
+  assert.match(patched,/rawLang==='all'\?'':rawLang/);
 });
