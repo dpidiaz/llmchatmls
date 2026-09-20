@@ -98,10 +98,36 @@ test('installer adds Translator to Herramientas and remains idempotent',()=>{
   assert.equal(installer.patchHome(patched),patched);
 });
 
+test('Translator backend uses only the existing free Workers AI binding',()=>{
+  assert.match(installer.BACKEND_BLOCK,/MLS_TRANSLATOR_MODEL_ID = "@cf\/google\/gemma-4-26b-a4b-it"/);
+  assert.match(installer.BACKEND_BLOCK,/env\.AI\.run\(MLS_TRANSLATOR_MODEL_ID/);
+  assert.match(installer.BACKEND_BLOCK,/chat_template_kwargs: \{ enable_thinking: false \}/);
+  assert.match(installer.BACKEND_BLOCK,/La traducción mejorada no está disponible temporalmente/);
+  assert.doesNotMatch(installer.BACKEND_BLOCK,/OpenAI|DeepL|ElevenLabs|Azure|Amazon Polly|Google Translate/i);
+});
+
+test('Translator API validates languages, text length and same-language shortcut',()=>{
+  assert.match(installer.BACKEND_BLOCK,/mlsTranslatorText\(body\?\.text, 1200\)/);
+  assert.match(installer.BACKEND_BLOCK,/MLS_TRANSLATOR_LANGUAGES\[sourceLanguage\]/);
+  assert.match(installer.BACKEND_BLOCK,/sourceLanguage === targetLanguage/);
+  assert.match(installer.BACKEND_BLOCK,/usedAi: false, sameLanguage: true/);
+});
+
+test('Translator UI calls the dedicated endpoint and keeps offline pronunciation available',()=>{
+  assert.match(html,/fetch\('\/api\/translate'/);
+  assert.match(html,/sourceLanguage:sourceLanguage\.value/);
+  assert.match(html,/targetLanguage:targetLanguage\.value/);
+  assert.match(html,/Sin Internet, la traducción completa todavía no está disponible/);
+  assert.match(html,/translationResult\.hidden=false/);
+  assert.match(html,/translatedText\.textContent=translation/);
+});
+
 test('worker route serves the static Translator asset and is idempotent',()=>{
   const source='before\n    if (url.pathname.startsWith("/api/wiki/")) {\nafter';
   const patched=installer.patchWorker(source);
   assert.match(patched,/MLS_TRANSLATOR_ROUTE_V1/);
+  assert.match(patched,/url\.pathname === "\/api\/translate"/);
+  assert.match(patched,/handleTranslatorRequest\(request, env\)/);
   assert.match(patched,/url\.pathname === "\/traductor"/);
   assert.match(patched,/new URL\("\/traductor\.html", request\.url\)/);
   assert.match(patched,/env\.ASSETS\.fetch\(assetRequest\)/);
