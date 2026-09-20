@@ -36,13 +36,13 @@ function patchWorker(source,html){
 
 function patchNavigation(html){
   html=String(html);
-  if(html.includes('href="/virtuoso"')||html.includes("href='/virtuoso'"))return html;
-  const match=html.match(/<a\b[^>]*href=(["'])#search[^"']*\1[^>]*>[\s\S]*?<\/a>/i);
-  if(!match)throw new Error('No se encontró enlace #search en la navegación principal.');
-  const classMatch=match[0].match(/\sclass=(["'])(.*?)\1/i);
-  const classAttr=classMatch?' class="'+classMatch[2].replace(/"/g,'&quot;')+'"':'';
-  const link='<a'+classAttr+' href="/virtuoso" aria-label="Abrir Virtuoso, bibliotecario de MLS">Virtuoso</a>';
-  return html.replace(match[0],match[0]+link);
+  const searchHref=/href=(["'])#search[^"']*\1/gi;
+  if(!searchHref.test(html)){
+    if(html.includes('href="/virtuoso"')||html.includes("href='/virtuoso'"))return html;
+    throw new Error('No se encontraron accesos Buscar (#search) en la navegación principal.');
+  }
+  searchHref.lastIndex=0;
+  return html.replace(searchHref,'href="/virtuoso"');
 }
 
 function install(){
