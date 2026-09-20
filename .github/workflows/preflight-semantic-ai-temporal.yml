@@ -1,0 +1,74 @@
+name: Preflight Workers AI semantic index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/preflight-semantic-ai-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verificar uso actual y margen gratuito
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const token=process.env.CLOUDFLARE_API_TOKEN;
+          if(!token)throw new Error('Falta CLOUDFLARE_API_TOKEN');
+          const headers={authorization:'Bearer '+token,accept:'application/json'};
+          const accounts=await fetch('https://api.cloudflare.com/client/v4/accounts?per_page=50',{headers}).then(r=>r.json());
+          if(accounts?.success===false)throw new Error('No se pudo listar cuentas: '+JSON.stringify(accounts.errors||[]));
+          const list=Array.isArray(accounts?.result)?accounts.result:[];
+          if(list.length!==1)throw new Error('Se esperaba exactamente una cuenta Cloudflare accesible; encontradas '+list.length);
+          const accountId=list[0].id;
+          const now=new Date();
+          const yyyy=now.getUTCFullYear(), mm=String(now.getUTCMonth()+1).padStart(2,'0'), dd=String(now.getUTCDate()).padStart(2,'0');
+          const today=yyyy+'-'+mm+'-'+dd;
+          const usageUrl='https://api.cloudflare.com/client/v4/accounts/'+accountId+'/billable/usage?from='+today+'&to='+today;
+          const response=await fetch(usageUrl,{headers});
+          const payload=await response.json().catch(()=>({}));
+          console.log('usage_http_status='+response.status);
+          if(!response.ok||payload?.success===false){
+            console.log('usage_errors='+JSON.stringify(payload?.errors||payload));
+            console.log('SEMANTIC_PREFLIGHT=UNKNOWN_USAGE');
+            process.exit(42);
+          }
+          const rows=Array.isArray(payload?.result)?payload.result:[];
+          const matches=rows.filter(row=>{
+            const text=Object.values(row||{}).filter(v=>typeof v==='string').join(' ').toLowerCase();
+            return text.includes('workers ai')||text.includes('neuron');
+          });
+          console.log('SEMANTIC_USAGE_ROWS '+JSON.stringify(matches));
+          let neurons=0;
+          for(const row of matches){
+            const unit=String(row.ConsumedUnit||row.consumed_unit||'').toLowerCase();
+            const quantity=Number(row.ConsumedQuantity??row.consumed_quantity??0);
+            if(unit.includes('neuron')&&Number.isFinite(quantity))neurons+=quantity;
+          }
+          console.log('SEMANTIC_NEURONS_TODAY='+neurons);
+          const expected=7000;
+          const free=10000;
+          const remaining=Math.max(0,free-neurons);
+          console.log('SEMANTIC_FREE_REMAINING='+remaining);
+          console.log('SEMANTIC_EXPECTED_FULL_INDEX='+expected);
+          if(neurons<=0&&matches.length===0){
+            console.log('SEMANTIC_PREFLIGHT=NO_WORKERS_AI_USAGE_ROW');
+            process.exit(43);
+          }
+          if(remaining<expected){
+            console.log('SEMANTIC_PREFLIGHT=INSUFFICIENT_FREE_MARGIN');
+            process.exit(44);
+          }
+          console.log('SEMANTIC_PREFLIGHT=SAFE_FOR_FULL_INDEX');
+          NODE
