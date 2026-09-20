@@ -21,6 +21,7 @@ jobs:
       - run: npm ci
       - run: npm run test:chat-editorial
       - run: npm run predeploy
+      - run: npm run recovery:verify
       - run: node --test test/deploy-contract.test.cjs
       - run: npm run check
       - name: Desplegar en produccion
