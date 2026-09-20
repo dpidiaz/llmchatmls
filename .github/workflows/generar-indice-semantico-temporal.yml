@@ -1,0 +1,95 @@
+name: Generar índice semántico MLS una vez
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/generar-indice-semantico-temporal.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: mls-semantic-index-generation
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Configurar Git
+        run: |
+          git config user.name "MLS Semantic Index Bot"
+          git config user.email "actions@users.noreply.github.com"
+
+      - name: Generar índices por idioma con checkpoints
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          MLS_SEMANTIC_BATCH_SIZE: "32"
+        shell: bash
+        run: |
+          set -euo pipefail
+          languages=(
+            ingles
+            portugues
+            italiano
+            frances
+            aleman
+            japones
+            chino-taiwan
+            coreano
+            ruso
+            espanol-guatemala
+          )
+
+          for lang in "${languages[@]}"; do
+            echo "===== SEMANTIC START $lang ====="
+            node "scripts/generar indice semantico.js" --language "$lang"
+
+            git add "semantic/$lang.json" "semantic/$lang.bin"
+            if ! git diff --cached --quiet; then
+              git commit -m "Generate semantic index for $lang"
+              git push origin HEAD:mls-semantic-index-generation
+            else
+              echo "No hay cambios para $lang; ya estaba actualizado."
+            fi
+            echo "===== SEMANTIC DONE $lang ====="
+          done
+
+      - name: Construir y validar manifest completo
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const {buildManifest}=require('./scripts/generar indice semantico.js');
+          const {validateSemanticSource}=require('./scripts/publicar indice semantico.js');
+          const manifest=buildManifest();
+          if(!manifest)throw new Error('Manifest semántico incompleto después de los diez idiomas.');
+          const result=validateSemanticSource();
+          if(!result.complete)throw new Error('Validación semántica incompleta: '+JSON.stringify(result));
+          if(result.totalEntries!==10133)throw new Error('Conteo semántico inesperado: '+result.totalEntries);
+          console.log('SEMANTIC_COMPLETE '+JSON.stringify({
+            totalEntries:result.totalEntries,
+            totalChunks:result.totalChunks,
+            totalBytes:result.totalBytes,
+            model:manifest.model,
+            corpusBuildId:manifest.corpusBuildId
+          }));
+          NODE
+
+          git add semantic/manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Complete MLS semantic index manifest"
+            git push origin HEAD:mls-semantic-index-generation
+          fi
+
+      - name: Resumen final
+        run: |
+          git log --oneline -12
+          du -sh semantic
+          find semantic -maxdepth 1 -type f | sort
