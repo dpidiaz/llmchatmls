@@ -249,7 +249,16 @@
     }
     form.addEventListener('submit',event=>{event.preventDefault();askVirtuoso()});
     document.querySelectorAll('.example').forEach(button=>button.addEventListener('click',()=>{query.value=button.textContent;query.focus()}));
-    try{const saved=localStorage.getItem('mlsVirtuosoLanguage');if(saved&&[...language.options].some(o=>o.value===saved))language.value=saved}catch{}
+    try{
+      const requested=new URLSearchParams(location.search).get('lang');
+      const valid=value=>Boolean(value)&&[...language.options].some(o=>o.value===value);
+      if(requested){
+        if(valid(requested)){language.value=requested;requestAnimationFrame(()=>query.focus())}
+      }else{
+        const saved=localStorage.getItem('mlsVirtuosoLanguage');
+        if(valid(saved))language.value=saved;
+      }
+    }catch{}
   })();
   </script>
 </body>
