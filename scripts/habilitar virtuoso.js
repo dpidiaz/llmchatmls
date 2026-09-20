@@ -50,11 +50,14 @@ function patchAppNavigation(source){
   source=String(source);
   const original='<button class="btn primary big-action" onclick="location.hash=\'#search\'">⌕ Buscar</button>';
   const routed='<button class="btn primary big-action" onclick="location.href=\'/virtuoso\'">⌕ Buscar</button>';
-  if(source.includes(routed))return source;
-  if(!source.includes(original))throw new Error('No se encontró el CTA Buscar del hero.');
-  return source.replace(original,routed);
+  const contextualOriginal='<button class="btn" onclick="location.hash=\'#search?lang=${slug}\'">⌕ Buscar aquí</button>';
+  const contextualRouted='<button class="btn" onclick="location.href=\'/virtuoso?lang=${slug}\'">⌕ Buscar aquí</button>';
+  if(source.includes(original))source=source.replace(original,routed);
+  else if(!source.includes(routed))throw new Error('No se encontró el CTA Buscar del hero.');
+  if(source.includes(contextualOriginal))source=source.replace(contextualOriginal,contextualRouted);
+  else if(!source.includes(contextualRouted))throw new Error('No se encontró Buscar aquí contextual por idioma.');
+  return source;
 }
-
 function install(){
   if(!fs.existsSync(PAGE_SOURCE))throw new Error('No existe la página Virtuoso.');
   if(!fs.existsSync(TARGET)||!fs.existsSync(HOME)||!fs.existsSync(APP))throw new Error('El build R32 no contiene Worker/home/app para Virtuoso.');
