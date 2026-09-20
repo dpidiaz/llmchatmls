@@ -37,8 +37,10 @@ jobs:
 
           GEN_KEY=$(openssl rand -hex 32)
           echo "::add-mask::$GEN_KEY"
+          export MLS_EMBEDDING_KEY="$GEN_KEY"
+          export MLS_EMBEDDING_ENDPOINT="https://mls-semantic-generator-temp.dpidiaz.workers.dev/embed"
           echo "MLS_EMBEDDING_KEY=$GEN_KEY" >> "$GITHUB_ENV"
-          echo "MLS_EMBEDDING_ENDPOINT=https://mls-semantic-generator-temp.dpidiaz.workers.dev/embed" >> "$GITHUB_ENV"
+          echo "MLS_EMBEDDING_ENDPOINT=$MLS_EMBEDDING_ENDPOINT" >> "$GITHUB_ENV"
 
           KEY_B64=$(printf '%s' "$GEN_KEY" | base64 -w0)
           node - "$KEY_B64" <<'NODE'
