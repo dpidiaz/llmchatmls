@@ -55,3 +55,16 @@ test('canonical repo defaults to dedicated branch', () => {
   });
   assert.equal(repo.branch,'mls-canonical');
 });
+
+
+test('canonical route build patch stays syntactically escaped', () => {
+  const fs = require('node:fs');
+  const patchSource = fs.readFileSync(
+    path.join(process.cwd(),'scripts','habilitar chat editorial.js'),
+    'utf8'
+  );
+  assert.match(
+    patchSource,
+    /canonical\\"\)\) return handleMlsCanonical\(request, env, url\);\\\\n/
+  );
+});
