@@ -3,14 +3,15 @@
 const fs=require('node:fs');
 
 const APP='public/js/app.js';
-const ORIGINAL='<button class="btn" onclick="location.hash=\'#entry=${recent.code}\'">↺ Seguir leyendo</button>';
-const PATCHED='<button class="btn" onclick="window.MLS?.reader?.requestResume(\'${recent.code}\');location.hash=\'#entry=${recent.code}\'">↺ Seguir leyendo</button>';
+const RESUME_CALL="window.MLS?.reader?.requestResume('${recent.code}')";
+const CTA_PATTERN=/(<button\b[^>]*\bonclick=")location\.hash='#entry=\$\{recent\.code\}'("[^>]*>\s*↺\s*Seguir leyendo\s*<\/button>)/i;
 
 function patchContinueReading(source){
   source=String(source);
-  if(source.includes(PATCHED))return source;
-  if(!source.includes(ORIGINAL))throw new Error('No se encontró el CTA Seguir leyendo esperado.');
-  return source.replace(ORIGINAL,PATCHED);
+  if(source.includes(RESUME_CALL))return source;
+  if(!CTA_PATTERN.test(source))throw new Error('No se encontró el CTA Seguir leyendo esperado.');
+  CTA_PATTERN.lastIndex=0;
+  return source.replace(CTA_PATTERN,`$1${RESUME_CALL};location.hash='#entry=\${recent.code}'$2`);
 }
 
 function install(){
@@ -20,5 +21,5 @@ function install(){
 
 function main(){install();console.log('Continuidad de lectura habilitada.');}
 
-module.exports={ORIGINAL,PATCHED,patchContinueReading,install};
+module.exports={RESUME_CALL,CTA_PATTERN,patchContinueReading,install};
 if(require.main===module)main();
