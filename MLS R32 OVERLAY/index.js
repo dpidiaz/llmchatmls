@@ -1948,6 +1948,38 @@ async function handleSemanticEmbeddingRequest(request, env) {
   }
 }
 __name(handleSemanticEmbeddingRequest, "handleSemanticEmbeddingRequest");
+function mlsSemanticEmbeddingRows(result) {
+  const data = result?.data;
+  if (Array.isArray(data) && Array.isArray(data[0])) return data.map((row) => row.map(Number));
+  if (Array.isArray(data) && Array.isArray(result?.shape) && result.shape.length === 2) {
+    const rows = Number(result.shape[0]);
+    const width = Number(result.shape[1]);
+    return Array.from({ length: rows }, (_, index) => data.slice(index * width, (index + 1) * width).map(Number));
+  }
+  throw new Error("Respuesta batch de embeddings no reconocida.");
+}
+__name(mlsSemanticEmbeddingRows, "mlsSemanticEmbeddingRows");
+async function handleSemanticEmbeddingBatchRequest(request, env) {
+  if (request.method !== "POST") return new Response("Method not allowed", { status: 405, headers: { allow: "POST" } });
+  if (!env.SEMANTIC_BUILD_KEY || request.headers.get("x-mls-semantic-key") !== env.SEMANTIC_BUILD_KEY) {
+    return Response.json({ ok: false, error: "unauthorized" }, { status: 401, headers: { "cache-control": "no-store" } });
+  }
+  try {
+    const body = await request.json();
+    const texts = Array.isArray(body?.texts) ? body.texts.map((value) => String(value || "").trim()) : [];
+    if (!texts.length || texts.length > 16 || texts.some((value) => value.length < 1 || value.length > 7000)) {
+      return Response.json({ ok: false, error: "invalid_batch" }, { status: 400, headers: { "cache-control": "no-store" } });
+    }
+    const result = await env.AI.run(MLS_SEMANTIC_EMBEDDING_MODEL, { text: texts });
+    const embeddings = mlsSemanticEmbeddingRows(result);
+    if (embeddings.length !== texts.length) throw new Error("Cantidad de embeddings inesperada.");
+    return Response.json({ ok: true, model: MLS_SEMANTIC_EMBEDDING_MODEL, embeddings }, { headers: { "cache-control": "no-store" } });
+  } catch (error) {
+    console.warn("MLS semantic batch unavailable:", error);
+    return Response.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 500, headers: { "cache-control": "no-store" } });
+  }
+}
+__name(handleSemanticEmbeddingBatchRequest, "handleSemanticEmbeddingBatchRequest");
 
 var index_default = {
   async fetch(request, env, _ctx) {
@@ -1988,6 +2020,9 @@ var index_default = {
     }
     if (url.pathname === "/api/search/embedding") {
       return handleSemanticEmbeddingRequest(request, env);
+    }
+    if (url.pathname === "/api/search/embedding-batch") {
+      return handleSemanticEmbeddingBatchRequest(request, env);
     }
     if (url.pathname === "/api/wiki/articles") {
       if (request.method !== "GET") {
