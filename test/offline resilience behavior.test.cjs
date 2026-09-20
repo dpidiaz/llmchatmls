@@ -41,9 +41,11 @@ function createIosRuntime({fetchImpl}={}){
   const localStorage=new FakeStorage();
   const windowListeners={};
   const documentListeners={};
+  const elements=new Map();
   const document={
-    body:{dataset:{}},
-    getElementById(){return null},
+    body:{dataset:{},appendChild(node){if(node?.id)elements.set(node.id,node)}},
+    createElement(){return {id:'',className:'',attributes:{},textContent:'',setAttribute(name,value){this.attributes[name]=String(value)}}},
+    getElementById(id){return elements.get(id)||null},
     querySelectorAll(){return []},
     addEventListener(name,fn){documentListeners[name]=fn}
   };
@@ -59,7 +61,7 @@ function createIosRuntime({fetchImpl}={}){
   };
   const context={
     window,document,navigator,caches,localStorage,
-    location:{protocol:'https:',hash:''},
+    location:{protocol:'https:',hash:'',reloadCalls:0,reload(){this.reloadCalls++}},
     Request:FakeRequest,
     fetch:fetchImpl|| (async req=>new FakeResponse(keyOf(req))),
     setTimeout(fn){fn();return 1},
@@ -69,7 +71,7 @@ function createIosRuntime({fetchImpl}={}){
   context.globalThis=context;
   vm.createContext(context);
   new vm.Script(iosSource,{filename:'ios.js'}).runInContext(context);
-  return {context,caches,localStorage,windowListeners,documentListeners,offline:window.MLS.offline};
+  return {context,caches,localStorage,windowListeners,documentListeners,offline:window.MLS.offline,elements};
 }
 
 async function fillLanguage(cache,slug,offline){
@@ -200,4 +202,54 @@ test('service worker upgrade deletes old app shell but preserves Offline Library
   assert.ok(keys.includes('mls-iphone11-legacy-pack'));
   assert.ok(!keys.includes('mls-iphone11-shell-only'));
   assert.ok(!keys.includes('mls-app-shell-old'));
+});
+
+
+test('conexión perdida announces downloaded-library fallback and AI limitation accessibly',async()=>{
+  const rt=createIosRuntime();
+  await rt.documentListeners.DOMContentLoaded?.();
+  rt.context.navigator.onLine=false;
+  await rt.windowListeners.offline?.();
+  assert.equal(rt.context.document.body.dataset.online,'false');
+  const live=rt.elements.get('offlineLiveRegion');
+  assert.ok(live);
+  assert.equal(live.attributes['aria-live'],'assertive');
+  assert.match(live.textContent,/contenido descargado/i);
+  assert.match(live.textContent,/IA necesitan conexión/i);
+});
+
+test('conexión restaurada re-verifies state and announces recovery',async()=>{
+  const rt=createIosRuntime();
+  await rt.documentListeners.DOMContentLoaded?.();
+  rt.context.navigator.onLine=true;
+  await rt.windowListeners.online?.();
+  assert.equal(rt.context.document.body.dataset.online,'true');
+  const live=rt.elements.get('offlineLiveRegion');
+  assert.ok(live);
+  assert.match(live.textContent,/Conexión restaurada/i);
+});
+
+test('service worker missing-content message is ignored unless it belongs to MLS offline contract',()=>{
+  const rt=createIosRuntime();
+  assert.doesNotThrow(()=>rt.offline.handleServiceWorkerMessage({data:{source:'other',type:'offline-content-missing',url:'/data/volumes/japones.js'}}));
+  assert.equal(rt.elements.has('offlineLiveRegion'),false);
+});
+
+test('missing uncached language produces understandable accessible fallback without technical cache terms',()=>{
+  const rt=createIosRuntime();
+  rt.offline.showMissingContent('/data/volumes/japones.js');
+  const live=rt.elements.get('offlineLiveRegion');
+  assert.ok(live);
+  assert.match(live.textContent,/Japonés no está disponible sin conexión/i);
+  assert.doesNotMatch(live.textContent,/cache|service worker/i);
+});
+
+test('retry without connection does not reload and announces why',async()=>{
+  const rt=createIosRuntime();
+  rt.context.navigator.onLine=false;
+  await rt.offline.retryMissingContent();
+  assert.equal(rt.context.location.reloadCalls,0);
+  const live=rt.elements.get('offlineLiveRegion');
+  assert.ok(live);
+  assert.match(live.textContent,/Todavía no hay conexión/i);
 });
