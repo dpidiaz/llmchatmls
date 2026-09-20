@@ -127,12 +127,33 @@ function queryPage(language, lastN) {
   return runD1(sql);
 }
 
+function queryPresentNs(language) {
+  return runD1(
+    'SELECT n FROM wiki_articles WHERE prompt_version = ' + sqlText(PROMPT_VERSION) +
+    ' AND language = ' + sqlText(language.slug) +
+    ' ORDER BY n ASC'
+  ).map(row => Number(row.n)).filter(Number.isInteger);
+}
+
+function missingCodes(language) {
+  const present = new Set(queryPresentNs(language));
+  const missing = [];
+  for (let n = 1; n <= language.total; n++) {
+    if (!present.has(n)) missing.push(language.prefix + '-' + String(n).padStart(4, '0'));
+  }
+  return missing;
+}
+
 function assertCompleteCounts(rows) {
   const actual = new Map(rows.map(row => [String(row.language), Number(row.count)]));
   const problems = [];
   for (const language of LANGUAGES) {
     const count = actual.get(language.slug) || 0;
-    if (count !== language.total) problems.push(language.slug + ': ' + count + '/' + language.total);
+    if (count !== language.total) {
+      const missing = count < language.total ? missingCodes(language) : [];
+      const detail = missing.length ? ' faltan [' + missing.join(', ') + ']' : '';
+      problems.push(language.slug + ': ' + count + '/' + language.total + detail);
+    }
   }
   for (const language of actual.keys()) {
     if (!LANGUAGES.some(item => item.slug === language)) problems.push('idioma inesperado: ' + language);
