@@ -133,7 +133,7 @@ test('pack download remains opt-in, verified, retryable and removable',()=>{
   assert.match(html,/downloadOfflinePacks\('selected'\)/);
   assert.match(html,/downloadOfflinePacks\('all'\)/);
   assert.match(html,/pack\.status!=='ready'/);
-  assert.match(html,/data\.removePack/);
+  assert.match(html,/remove\.dataset\.removePack/);
 });
 
 test('local engine decompresses on device and validates uncompressed integrity',()=>{
