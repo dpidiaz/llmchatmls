@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Virtuoso · Bibliotecario de MASTER LANGUAGE SYSTEM</title>
+  <meta name="description" content="Virtuoso orienta dentro del corpus canónico de MASTER LANGUAGE SYSTEM.">
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#182026;background:#f4f1eb;font-size:16px}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f1eb;color:#182026;line-height:1.5}
+    a{color:inherit}
+    button,input,select{font:inherit}
+    .shell{max-width:1120px;margin:0 auto;padding:24px 20px 64px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:34px}
+    .brand{font-weight:800;letter-spacing:.04em;text-decoration:none}
+    .back{border:1px solid #c9c1b6;border-radius:12px;padding:9px 13px;text-decoration:none;background:#fff}
+    .hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.75fr);gap:28px;align-items:start}
+    .card{background:#fff;border:1px solid #d8d0c6;border-radius:20px;box-shadow:0 12px 40px rgba(35,31,26,.07)}
+    .intro{padding:30px}
+    .eyebrow{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#766452;font-weight:800}
+    h1{font-size:clamp(2rem,7vw,4.4rem);line-height:.95;letter-spacing:-.045em;margin:.35rem 0 1rem}
+    .lead{font-size:1.12rem;color:#515961;max-width:720px}
+    .persona{padding:24px;background:#eee7dc}
+    .persona strong{display:block;font-size:1.08rem;margin-bottom:8px}
+    .persona p{margin:0;color:#5c554d}
+    .form{margin-top:28px;display:grid;gap:14px}
+    label{display:grid;gap:7px;font-weight:750}
+    select,input{width:100%;min-height:48px;border:1px solid #bdb4a8;border-radius:12px;background:#fff;color:#182026;padding:11px 13px}
+    input{font-size:1.02rem}
+    .action-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .primary{border:0;border-radius:12px;background:#1e2b33;color:#fff;padding:12px 18px;font-weight:800;cursor:pointer}
+    .primary:disabled{opacity:.55;cursor:not-allowed}
+    .status{font-size:.9rem;color:#62686d}
+    .examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .example{border:1px solid #cfc6ba;background:#faf8f4;border-radius:999px;padding:8px 11px;cursor:pointer;color:#4c4c49}
+    .results{margin-top:28px;display:grid;gap:14px}
+    .summary{padding:18px 20px;background:#eee7dc;border:1px solid #d6c9b8;border-radius:16px}
+    .summary strong{display:block;margin-bottom:3px}
+    .result{padding:20px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:start}
+    .num{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#e9e2d8;font-weight:850}
+    .result h2{font-size:1.12rem;margin:0 0 4px}
+    .meta{font-size:.82rem;color:#6c6f71;margin-bottom:8px}
+    .reason{margin:0;color:#444b50}
+    .open{align-self:center;border:1px solid #bcb3a8;border-radius:10px;padding:9px 11px;text-decoration:none;background:#fff;font-weight:700}
+    .empty{padding:22px;border:1px dashed #bfb6ab;border-radius:16px;color:#5d6266}
+    .degraded{font-size:.82rem;color:#745f47;margin-top:8px}
+    @media(max-width:760px){.shell{padding:18px 14px 44px}.hero{grid-template-columns:1fr}.intro{padding:22px}.persona{order:-1}.result{grid-template-columns:auto 1fr}.open{grid-column:2;justify-self:start}.top{margin-bottom:22px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <a class="brand" href="/">MASTER LANGUAGE SYSTEM</a>
+      <a class="back" href="/">Volver a la biblioteca</a>
+    </header>
+
+    <section class="hero">
+      <div class="card intro">
+        <span class="eyebrow">Bibliotecario de MLS</span>
+        <h1>Virtuoso</h1>
+        <p class="lead">Dime qué quieres comprender o aprender. Buscaré dentro de la biblioteca real de MLS y te señalaré por dónde conviene entrar.</p>
+
+        <form class="form" id="virtuosoForm">
+          <label>Idioma que estás estudiando
+            <select id="language" required>
+              <option value="" selected disabled>Selecciona un idioma</option>
+              <option value="ingles">🇬🇧 Inglés</option>
+              <option value="portugues">🇧🇷 Portugués brasileño</option>
+              <option value="espanol-guatemala">🇬🇹 Español</option>
+              <option value="italiano">🇮🇹 Italiano</option>
+              <option value="frances">🇫🇷 Francés</option>
+              <option value="aleman">🇩🇪 Alemán</option>
+              <option value="japones">🇯🇵 Japonés</option>
+              <option value="chino-taiwan">🇹🇼 Chino de Taiwán</option>
+              <option value="coreano">🇰🇷 Coreano</option>
+              <option value="ruso">🇷🇺 Ruso</option>
+            </select>
+          </label>
+          <label>¿Qué quieres encontrar?
+            <input id="query" maxlength="600" autocomplete="off" placeholder="Ej.: Quiero aprender a hablar de acciones pasadas que todavía importan" required>
+          </label>
+          <div class="action-row">
+            <button class="primary" id="ask" type="submit">Consultar a Virtuoso</button>
+            <span class="status" id="status" role="status"></span>
+          </div>
+        </form>
+
+        <div class="examples" aria-label="Consultas de ejemplo">
+          <button class="example" type="button">Quiero hablar del pasado</button>
+          <button class="example" type="button">¿Qué debería estudiar antes del subjuntivo?</button>
+          <button class="example" type="button">No entiendo cuándo usar は y が</button>
+        </div>
+      </div>
+
+      <aside class="card persona">
+        <strong>Cómo trabaja Virtuoso</strong>
+        <p>No inventa temas ni rutas. Primero busca entradas existentes en el idioma elegido; después ordena una selección breve y explica por qué podrían servirte. Profesor IA sigue siendo quien enseña y practica cada tema.</p>
+      </aside>
+    </section>
+
+    <section class="results" id="results" aria-live="polite"></section>
+  </main>
+
+  <script src="/data/index.js"></script>
+  <script>
+  (() => {
+    'use strict';
+    const form=document.getElementById('virtuosoForm');
+    const language=document.getElementById('language');
+    const query=document.getElementById('query');
+    const ask=document.getElementById('ask');
+    const status=document.getElementById('status');
+    const results=document.getElementById('results');
+    const fullCache=new Map(),semanticCache=new Map();
+    let semanticManifestTask=null;
+    const locales={'espanol-guatemala':'es-GT',ingles:'en',portugues:'pt-BR',italiano:'it',frances:'fr',aleman:'de',japones:'ja','chino-taiwan':'zh-TW',coreano:'ko',ruso:'ru'};
+
+    const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    const normalize=(value,locale='es')=>String(value||'').toLocaleLowerCase(locale).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+    const keepToken=token=>Array.from(token).length>=2||/[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/u.test(token);
+    function tokenize(value,locale){
+      const text=normalize(value,locale),out=[];
+      if(typeof Intl.Segmenter==='function'){
+        for(const item of new Intl.Segmenter(locale,{granularity:'word'}).segment(text)){
+          if(item.isWordLike===false)continue;
+          const token=String(item.segment||'').trim();
+          if(token&&keepToken(token))out.push(token);
+        }
+      }else{
+        for(const token of (text.match(/[\p{L}\p{N}]+/gu)||[]))if(keepToken(token))out.push(token);
+      }
+      return [...new Set(out)];
+    }
+    function metaFor(code){return (window.MLS_INDEX||[]).find(item=>item.code===code)||null}
+    async function fullIndex(slug){
+      if(fullCache.has(slug))return fullCache.get(slug);
+      const task=fetch('/data/search/'+encodeURIComponent(slug)+'.json').then(r=>{if(!r.ok)throw new Error('full-text');return r.json()});
+      fullCache.set(slug,task);try{return await task}catch(e){fullCache.delete(slug);throw e}
+    }
+    function lexical(index,text){
+      const tokens=tokenize(text,index.locale),scores=new Map();
+      for(const token of tokens){
+        const posting=index.postings?.[token];
+        if(!Array.isArray(posting))continue;
+        const df=posting.length/2,idf=Math.log((index.totalEntries+1)/(df+1))+1;
+        for(let i=0;i<posting.length;i+=2){
+          const doc=posting[i],tf=posting[i+1];
+          scores.set(doc,(scores.get(doc)||0)+(1+Math.log(Math.max(1,tf)))*idf);
+        }
+      }
+      return [...scores].sort((a,b)=>b[1]-a[1]).slice(0,50).map(([doc,score],rank)=>({code:index.codes[doc],score,rank}));
+    }
+    async function semanticManifest(){
+      if(!semanticManifestTask)semanticManifestTask=fetch('/data/semantic/manifest.json').then(r=>r.ok?r.json():null).catch(()=>null);
+      return semanticManifestTask;
+    }
+    async function semanticIndex(slug,manifest){
+      if(semanticCache.has(slug))return semanticCache.get(slug);
+      const task=Promise.all([
+        fetch('/data/semantic/'+encodeURIComponent(slug)+'.json'),
+        fetch('/data/semantic/'+encodeURIComponent(slug)+'.bin')
+      ]).then(async ([metaRes,binRes])=>{
+        if(!metaRes.ok||!binRes.ok)throw new Error('semantic');
+        const meta=await metaRes.json(),buffer=await binRes.arrayBuffer();
+        if(meta.language!==slug||meta.model!=='@cf/baai/bge-m3'||meta.corpusBuildId!==manifest.corpusBuildId)throw new Error('semantic metadata');
+        return {meta,view:new DataView(buffer)};
+      });
+      semanticCache.set(slug,task);try{return await task}catch(e){semanticCache.delete(slug);throw e}
+    }
+    async function semanticVector(text){
+      const response=await fetch('/api/search/embedding',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:text})});
+      if(!response.ok)throw new Error('semantic unavailable');
+      const payload=await response.json();
+      if(!payload.ok||payload.model!=='@cf/baai/bge-m3'||!Array.isArray(payload.vector))throw new Error('semantic response');
+      return payload.vector.map(Number);
+    }
+    function semanticTop(index,vector){
+      const {meta,view}=index,best=[];
+      for(let i=0;i<meta.chunks.length;i++){
+        const offset=i*meta.recordBytes,scale=view.getFloat32(offset,true);
+        let score=0;
+        for(let d=0;d<meta.dimensions;d++)score+=view.getInt8(offset+4+d)*scale*vector[d];
+        const row={code:meta.chunks[i].code,score,section:meta.chunks[i].section||''};
+        if(best.length<50){best.push(row);best.sort((a,b)=>b.score-a.score)}
+        else if(score>best[best.length-1].score){best[best.length-1]=row;best.sort((a,b)=>b.score-a.score)}
+      }
+      const unique=new Map();
+      for(const item of best)if(!unique.has(item.code))unique.set(item.code,item);
+      return [...unique.values()];
+    }
+    async function retrieve(text,slug){
+      const candidates=new Map();
+      const add=(code,points,detail={})=>{
+        const meta=metaFor(code);if(!meta||meta.language!==slug)return;
+        const row=candidates.get(code)||{code,title:meta.title,level:meta.level||'',part:meta.part||'',chapter:meta.chapter||'',score:0};
+        row.score+=points;Object.assign(row,detail);candidates.set(code,row);
+      };
+      const locale=locales[slug]||'es';
+      const nq=normalize(text,locale);
+      for(const meta of (window.MLS_INDEX||[])){
+        if(meta.language!==slug)continue;
+        const title=normalize(meta.title,locale);
+        if(title===nq)add(meta.code,1200,{exactTitle:true});
+        else if(nq.length>=3&&title.includes(nq))add(meta.code,700,{titleMatch:true});
+      }
+      try{
+        const index=await fullIndex(slug);
+        for(const hit of lexical(index,text))add(hit.code,400/(1+hit.rank/8)+Math.min(80,hit.score*3),{lexicalScore:hit.score});
+      }catch(e){console.warn('Virtuoso lexical fallback',e)}
+      try{
+        const manifest=await semanticManifest();
+        if(manifest?.languages?.[slug]){
+          const [index,vector]=await Promise.all([semanticIndex(slug,manifest),semanticVector(text)]);
+          let rank=0;
+          for(const hit of semanticTop(index,vector).slice(0,40)){
+            add(hit.code,260/(1+rank/10)+Math.max(0,hit.score)*120,{semanticScore:hit.score,section:hit.section});rank++;
+          }
+        }
+      }catch(e){console.warn('Virtuoso semantic fallback',e)}
+      return [...candidates.values()].sort((a,b)=>b.score-a.score||a.title.localeCompare(b.title,'es')).slice(0,12);
+    }
+    function render(payload,candidates){
+      const recs=Array.isArray(payload?.recommendations)&&payload.recommendations.length?payload.recommendations:candidates.slice(0,5).map((c,i)=>({...c,order:i+1,reason:'Esta entrada aparece entre las coincidencias más relevantes de la biblioteca para tu consulta.',deepLink:'/#entry='+c.code}));
+      const summaryText=payload?.intro||'Estas son las entradas que mejor encajan con tu consulta.';
+      results.innerHTML='<div class="summary"><strong>'+esc(payload?.intent||'Ruta sugerida')+'</strong>'+esc(summaryText)+(payload?.degraded?'<div class="degraded">Orientación automática no disponible; se muestran los mejores resultados de la búsqueda híbrida.</div>':'')+'</div>'+
+        recs.map((r,i)=>'<article class="card result"><span class="num">'+esc(r.order||i+1)+'</span><div><h2>'+esc(r.title)+'</h2><div class="meta">'+esc([r.level,r.part,r.chapter].filter(Boolean).join(' · '))+'</div><p class="reason">'+esc(r.reason||'Entrada relevante para tu objetivo.')+'</p></div><a class="open" href="'+esc(r.deepLink||('/#entry='+r.code))+'">Abrir entrada</a></article>').join('');
+    }
+    async function askVirtuoso(){
+      const slug=language.value,text=query.value.trim();
+      if(!slug||text.length<2)return;
+      ask.disabled=true;status.textContent='Buscando en la biblioteca…';results.innerHTML='';
+      try{
+        localStorage.setItem('mlsVirtuosoLanguage',slug);
+        const candidates=await retrieve(text,slug);
+        if(!candidates.length){results.innerHTML='<div class="empty">No encontré una entrada suficientemente relacionada. Prueba describiendo el concepto con otras palabras.</div>';return}
+        status.textContent='Ordenando los mejores resultados…';
+        let payload=null;
+        try{
+          const response=await fetch('/api/virtuoso',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({query:text,targetLanguage:slug,candidates})});
+          if(response.ok)payload=await response.json();
+        }catch(e){console.warn('Virtuoso reasoning fallback',e)}
+        render(payload||{degraded:true},candidates);
+      }finally{ask.disabled=false;status.textContent=''}
+    }
+    form.addEventListener('submit',event=>{event.preventDefault();askVirtuoso()});
+    document.querySelectorAll('.example').forEach(button=>button.addEventListener('click',()=>{query.value=button.textContent;query.focus()}));
+    try{const saved=localStorage.getItem('mlsVirtuosoLanguage');if(saved&&[...language.options].some(o=>o.value===saved))language.value=saved}catch{}
+  })();
+  </script>
+</body>
+</html>
