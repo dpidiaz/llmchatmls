@@ -1,0 +1,87 @@
+name: Deploy MLS current main once
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-current-main-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-deploy-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Verify intended main parent
+        shell: bash
+        run: |
+          set -euo pipefail
+          parent="$(git rev-parse HEAD^)"
+          test "$parent" = "df9ace13dd487b194630d729f49fb18e94de50a9"
+          changed="$(git diff --name-only HEAD^ HEAD)"
+          test "$changed" = ".github/workflows/deploy-current-main-once.yml"
+          echo "INTENDED_MAIN_PARENT_OK $parent"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+      - run: npm run test:chat-editorial
+      - run: npm run qa:baseline
+      - run: npm run predeploy
+      - run: npm run recovery:verify
+      - run: node --test test/deploy-contract.test.cjs
+      - run: npm run check
+
+      - name: Deploy production
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Verify production
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://llmchatmls.dpidiaz.workers.dev"
+          for attempt in 1 2 3 4 5 6; do
+            code="$(curl -L -sS -o /tmp/home.html -w '%{http_code}' "$base/")"
+            if [ "$code" = "200" ] && grep -q 'Saltar al contenido principal' /tmp/home.html; then
+              break
+            fi
+            sleep 5
+          done
+          test "$code" = "200"
+          grep -q 'Saltar al contenido principal' /tmp/home.html
+          grep -q '/virtuoso' /tmp/home.html
+          curl -LfsS "$base/css/design-system.css" -o /tmp/design-system.css
+          grep -q -- '--mls-focus-color' /tmp/design-system.css
+          curl -LfsS "$base/js/reader.js" -o /tmp/reader.js
+          grep -q 'prefers-reduced-motion: reduce' /tmp/reader.js
+          curl -LfsS "$base/js/ios.js" -o /tmp/ios.js
+          grep -q 'Biblioteca disponible sin Internet' /tmp/ios.js
+          curl -LfsS "$base/data/related/manifest.json" -o /tmp/related.json
+          node - <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('/tmp/related.json','utf8'));
+          if(r.standard!=='MLS R32') throw new Error('related standard mismatch');
+          if(r.source!=='semantic-neighbors') throw new Error('related source mismatch');
+          if(Object.keys(r.languages||{}).length!==10) throw new Error('related languages != 10');
+          console.log('PRODUCTION_OK', JSON.stringify({
+            relatedLanguages:Object.keys(r.languages||{}).length,
+            corpusBuildId:r.corpusBuildId
+          }));
+          NODE
+
+      - name: Verify editorial action without creating batches
+        run: node scripts/verify-chat-deployment.cjs
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
