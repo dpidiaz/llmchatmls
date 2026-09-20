@@ -4,14 +4,14 @@
 - Programa: ACTIVE — WAVE 2
 - Integración: uxui-r1-integration
 - Worker branches synchronized at: 79c658faa3cfd938db831c72a0ce386645459d73
-- Producción: LOCKED durante desarrollo
+- Producción: LOCKED — no deploy performed
 - Main base inicial: b53f2dfa529066d4f2d9b6272f6a8a7bd49386b4
 
 ## Workstreams
 
 ### Chat 0 — Coordinator
 Status: ACTIVE
-Current: Wave 5 — final integrated certification
+Current: Wave 5 — FINAL CERTIFICATION PASSED; final PR to main pending review
 Branch: uxui-r1-integration
 Blockers: none
 
@@ -86,3 +86,22 @@ Cada worker debe reportar:
 - FILES TOUCHED
 - DEPENDENCIES
 - COMMIT / PR
+
+
+## Wave 5 Final Certification
+Status: PASSED
+Certified product commit: c3a5fe5235f86272649b16afabbc0e7bc3bd563f
+Certification run: 35512048565
+Checks:
+- repository hygiene: PASS
+- canonical content/ unchanged vs main: PASS
+- npm ci: PASS
+- test:chat-editorial: PASS
+- qa:baseline: PASS
+- predeploy: PASS
+- recovery:verify: PASS
+- deploy-contract: PASS
+- wrangler dry-run: PASS
+- integrated UXUI contracts: PASS
+Temporary Wave 5 workflow: removed after certification.
+Production deploy: NOT PERFORMED
