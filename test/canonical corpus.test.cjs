@@ -64,3 +64,17 @@ test('validateArticle accepts canonical R32 identity and rejects legacy provider
     /legacy/
   );
 });
+
+
+test('missing entry materialization never republishes legacy content', () => {
+  const fs = require('node:fs');
+  const overlay = fs.readFileSync('MLS R32 OVERLAY/index.js', 'utf8');
+  const start = overlay.indexOf('async function processWikiEntry');
+  const end = overlay.indexOf('async function markWikiEntryError', start);
+  assert.ok(start >= 0 && end > start, 'No se encontró processWikiEntry en el overlay.');
+  const materialization = overlay.slice(start, end);
+  assert.doesNotMatch(materialization, /wikiStore\(env\)\.getArticle/);
+  assert.doesNotMatch(materialization, /cloudflare-legacy/);
+  assert.match(materialization, /generateWikiDraftR32/);
+  assert.match(materialization, /promptVersion:\s*WIKI_PROMPT_VERSION/);
+});
