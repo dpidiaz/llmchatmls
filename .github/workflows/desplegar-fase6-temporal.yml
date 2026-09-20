@@ -1,0 +1,75 @@
+name: Desplegar Fase 6 full text temporal
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/desplegar-fase6-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar suite MLS
+        run: npm run test:chat-editorial
+      - name: Construir full-text canónico
+        run: npm run predeploy
+      - name: Verificar contrato
+        run: node --test test/deploy-contract.test.cjs
+      - name: Dry run Cloudflare
+        run: npm run check
+      - name: Desplegar Fase 6
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Verificar full-text en producción
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+
+          fetch_retry() {
+            local url="$1"
+            local out="$2"
+            for i in 1 2 3 4 5 6 7 8; do
+              if curl --fail --silent --show-error "$url" -o "$out"; then return 0; fi
+              if [ "$i" -lt 8 ]; then sleep 3; fi
+            done
+            return 1
+          }
+
+          fetch_retry "$base/data/search/health.json" search-health.json
+          node -e "const h=require('./search-health.json');if(h.ok!==true||h.standard!=='MLS R32'||h.promptVersion!=='32.0'||h.version!=='1.0'||Number(h.totalEntries)!==10133||Number(h.languages)!==10||!(Number(h.totalBytes)>0)||Number(h.maxLanguageBytes)>=20*1024*1024)throw new Error('search health inválido '+JSON.stringify(h));console.log('search health OK',h.totalEntries,h.languages,h.totalBytes,h.maxLanguageBytes)"
+
+          fetch_retry "$base/data/search/manifest.json" search-manifest.json
+          node -e "const m=require('./search-manifest.json');const langs=Object.keys(m.languages||{});if(m.standard!=='MLS R32'||m.promptVersion!=='32.0'||m.version!=='1.0'||Number(m.totalEntries)!==10133||langs.length!==10)throw new Error('manifest full-text inválido');for(const k of langs){const x=m.languages[k];if(!x.path||!(x.bytes>0)||!(x.tokens>0))throw new Error('idioma inválido '+k)}console.log('search manifest OK',langs.join(','))"
+
+          fetch_retry "$base/data/search/chino-taiwan.json" zh-index.json
+          node -e "const x=require('./zh-index.json');const p=x.codes.indexOf('MLS-V07-0484');if(x.standard!=='MLS R32'||x.promptVersion!=='32.0'||x.version!=='1.0'||x.language!=='chino-taiwan'||Number(x.totalEntries)!==1016||p<0||!x.postings||Object.keys(x.postings).length<100)throw new Error('índice chino inválido');console.log('chino full-text OK',x.totalEntries,Object.keys(x.postings).length,p)"
+
+          fetch_retry "$base/js/search.js" search.js
+          grep -q 'MLS FULL TEXT SEARCH 1.0' search.js
+          grep -q "data/search/" search.js
+          grep -q 'Math.log((index.totalEntries+1)/(df+1))+1' search.js
+          if grep -q 'MLS.loadVolume(slug)' search.js; then echo 'deepSearch todavía carga volúmenes'; exit 1; fi
+          if grep -q '/api/' search.js; then echo 'search.js introdujo dependencia API'; exit 1; fi
+          echo 'search.js full-text static OK'
+
+          fetch_retry "$base/data/canonical/compat-health.json" compat.json
+          node -e "const h=require('./compat.json');if(h.legacyWikiSeedsPresent!==false||h.perEntryCanonicalSeedsPresent!==false||Number(h.totalEntries)!==10133)throw new Error('regresión legacy');console.log('legacy guard remains clean')"
+
+          fetch_retry "$base/js/reader.js" reader.js
+          grep -q '/data/canonical/runtime-manifest.json' reader.js
+          ! grep -q '/api/wiki/article/' reader.js
+          ! grep -q '/api/wiki/materialize/' reader.js
+          echo 'reader remains GitHub-first'
