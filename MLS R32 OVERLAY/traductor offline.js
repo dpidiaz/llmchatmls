@@ -185,6 +185,80 @@ async function ensureItem(cache,item,onProgress){
   await cache.put(item.url,new Response(buffer,{status:200,headers}));
 }
 
+async function cachedItemPresent(cache,item){
+  try{return Boolean(await cache.match(item.url,{ignoreSearch:false}))}catch{return false}
+}
+
+export async function packCatalog(){
+  const manifest=await loadPackManifest();
+  const state=readState();
+  const stateMatches=state.packVersion===manifest.packVersion;
+  const languages=Object.values(manifest.languages||{});
+  if(!('caches' in globalThis)){
+    return {
+      packVersion:manifest.packVersion,
+      runtime:{status:'unsupported'},
+      packs:languages.map(lang=>({
+        slug:lang.slug,
+        label:lang.label||lang.slug,
+        runtimeOnly:lang.runtimeOnly===true,
+        compressedBytes:Number(lang.compressedBytes||0),
+        status:lang.runtimeOnly===true?'base':'unsupported',
+        installed:lang.runtimeOnly===true,
+        selectable:false
+      })),
+      storage:await estimateStorage()
+    };
+  }
+
+  const cache=await caches.open(CACHE_NAME);
+  const runtimeItems=allExpectedItems(manifest,'ingles',{includeRuntime:true}).filter(item=>item.kind==='runtime');
+  let runtimePresent=0;
+  for(const item of runtimeItems)if(await cachedItemPresent(cache,item))runtimePresent++;
+  const runtimeStatus=runtimePresent===runtimeItems.length?'ready':runtimePresent>0?'partial':'empty';
+  const packs=[];
+
+  for(const lang of languages){
+    if(lang.runtimeOnly===true){
+      packs.push({
+        slug:lang.slug,
+        label:lang.label||lang.slug,
+        runtimeOnly:true,
+        compressedBytes:0,
+        status:'base',
+        installed:true,
+        selectable:false
+      });
+      continue;
+    }
+    const items=allExpectedItems(manifest,lang.slug,{includeRuntime:false});
+    let present=0;
+    for(const item of items)if(await cachedItemPresent(cache,item))present++;
+    const storedStatus=stateMatches?state.packs?.[lang.slug]?.status:null;
+    const modelsPresent=items.length>0&&present===items.length;
+    const ready=modelsPresent&&runtimeStatus==='ready'&&storedStatus==='ready';
+    const partial=!ready&&(present>0||Boolean(storedStatus)||runtimeStatus==='partial');
+    packs.push({
+      slug:lang.slug,
+      label:lang.label||lang.slug,
+      runtimeOnly:false,
+      compressedBytes:Number(lang.compressedBytes||0),
+      status:ready?'ready':partial?'partial':'empty',
+      installed:ready,
+      selectable:true,
+      present,
+      total:items.length
+    });
+  }
+
+  return {
+    packVersion:manifest.packVersion,
+    runtime:{status:runtimeStatus,present:runtimePresent,total:runtimeItems.length},
+    packs,
+    storage:await estimateStorage()
+  };
+}
+
 export async function preparePack(slug,onProgress){
   slug=normalizeSlug(slug);
   if(!slug)throw new Error('Idioma no válido.');
