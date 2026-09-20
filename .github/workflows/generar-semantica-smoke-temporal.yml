@@ -21,12 +21,66 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: npm
+      - run: npm ci
+
       - name: Validar generador
         run: node --test "test/semantic index generator.test.cjs"
+
+      - name: Crear Worker temporal de embeddings
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .semantic-tmp
+          cat > .semantic-tmp/worker.js <<'JS'
+          export default {
+            async fetch(request, env) {
+              if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
+              if ((request.headers.get('x-mls-semantic-key') || '') !== env.SEMANTIC_KEY) {
+                return Response.json({ ok:false, error:'unauthorized' }, { status:401 });
+              }
+              try {
+                const body = await request.json();
+                const texts = Array.isArray(body?.texts) ? body.texts.map(x => String(x || '')) : [];
+                if (!texts.length || texts.length > 16) return Response.json({ ok:false, error:'invalid_batch' }, { status:400 });
+                const result = await env.AI.run('@cf/baai/bge-m3', { text: texts });
+                const data = result?.data;
+                let rows = [];
+                if (Array.isArray(data) && Array.isArray(data[0])) rows = data;
+                else if (Array.isArray(data) && Array.isArray(result?.shape) && result.shape.length === 2) {
+                  const width = Number(result.shape[1]);
+                  rows = Array.from({ length:Number(result.shape[0]) }, (_,i)=>data.slice(i*width,(i+1)*width));
+                }
+                if (rows.length !== texts.length) throw new Error('embedding_shape_mismatch');
+                return Response.json({ ok:true, embeddings:rows });
+              } catch (error) {
+                return Response.json({ ok:false, error:String(error?.message || error) }, { status:500 });
+              }
+            }
+          }
+          JS
+          cat > .semantic-tmp/wrangler.jsonc <<'JSON'
+          {
+            "name": "mls-semantic-builder-temp",
+            "main": "worker.js",
+            "compatibility_date": "2026-09-20",
+            "workers_dev": true,
+            "ai": { "binding": "AI" }
+          }
+          JSON
+          KEY=$(node -e "console.log(require('crypto').randomBytes(24).toString('hex'))")
+          printf '%s' "$KEY" > /tmp/semantic-key
+          CLOUDFLARE_API_TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}" npx wrangler deploy --config .semantic-tmp/wrangler.jsonc --var SEMANTIC_KEY:"$KEY"
+
       - name: Generar índice semántico de inglés
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: node "scripts/generar indice semantico.js" --language ingles
+          MLS_SEMANTIC_EMBED_URL: https://mls-semantic-builder-temp.dpidiaz.workers.dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          export MLS_SEMANTIC_EMBED_KEY="$(cat /tmp/semantic-key)"
+          node "scripts/generar indice semantico.js" --language ingles
+
       - name: Verificar artefactos
         run: |
           set -euo pipefail
@@ -42,6 +96,7 @@ jobs:
           if(fs.statSync('semantic/ingles.bin').size!==m.totalChunks*m.recordBytes) throw new Error('binario incompatible');
           console.log(JSON.stringify({language:m.language,totalEntries:m.totalEntries,totalChunks:m.totalChunks,dimensions:m.dimensions,bytes:fs.statSync('semantic/ingles.bin').size}));
           NODE
+
       - name: Guardar smoke index en la rama
         run: |
           set -euo pipefail
@@ -54,3 +109,9 @@ jobs:
           fi
           git commit -m "Generate English semantic index"
           git push origin HEAD:mls-generate-semantic-index
+
+      - name: Eliminar Worker temporal
+        if: always()
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx wrangler delete --name mls-semantic-builder-temp --force || true
