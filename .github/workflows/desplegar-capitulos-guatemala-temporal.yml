@@ -1,0 +1,54 @@
+name: Desplegar corrección capítulos Guatemala una vez
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/desplegar-capitulos-guatemala-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Construir MLS
+        run: npm run predeploy
+      - name: Verificar numeración antes de deploy
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs'),vm=require('node:vm');
+          const source=fs.readFileSync('public/js/core.js','utf8');
+          const browser={window:{},document:{getElementById:()=>({}),body:{dataset:{},classList:{toggle(){}}}},localStorage:{getItem:()=>null},MLS_META:[],MLS_INDEX:[]};
+          vm.runInNewContext(source,browser);
+          const f=browser.window.MLS.chapterDisplayNum;
+          if(Number(f('espanol-guatemala',1))!==1||Number(f('espanol-guatemala',2))!==2||Number(f('espanol-guatemala',6))!==6)throw new Error('Numeración visible incorrecta');
+          console.log('Capítulos Guatemala OK: 1, 2, 6 permanecen 1, 2, 6');
+          NODE
+      - run: npm run check
+      - name: Desplegar corrección
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Verificar producción
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          for i in 1 2 3 4 5 6; do
+            if curl --fail --silent --show-error "$base/js/core.js" -o core.js; then break; fi
+            sleep 3
+          done
+          grep -q "MLS.chapterDisplayNum=(slug,num)=>num" core.js
+          if grep -q "n>=49&&n<=52" core.js; then
+            echo "::error::Producción conserva el remapeo obsoleto"
+            exit 1
+          fi
+          echo "Producción ya usa numeración canónica consecutiva."
