@@ -1,0 +1,82 @@
+name: Probe Bergamot WebKit pivot once
+
+on:
+  push:
+    branches:
+      - feature/translator-pronunciation-offline
+    paths:
+      - ".github/workflows/probe-bergamot-webkit-pivot-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  pivot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Prepare Bergamot and Playwright WebKit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bergamot-pivot/site
+          cd /tmp/bergamot-pivot
+          npm init -y >/dev/null
+          npm install --no-save @browsermt/bergamot-translator@0.4.9 playwright
+          npx playwright install --with-deps webkit >/dev/null
+          cp -R node_modules/@browsermt/bergamot-translator site/bergamot
+          cat > site/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8"><title>Bergamot pivot probe</title>
+          <pre id="status">starting</pre>
+          <script type="module">
+            import {LatencyOptimisedTranslator} from '/bergamot/translator.js';
+            const status=document.getElementById('status');
+            window.__done=false;
+            window.__probe=[];
+            const translator=new LatencyOptimisedTranslator({
+              workerUrl:'/bergamot/worker/translator-worker.js',
+              pivotLanguage:'en',
+              downloadTimeout:180000
+            });
+            async function run(from,to,text){
+              const started=performance.now();
+              const response=await translator.translate({from,to,text,html:false});
+              const elapsed=Math.round(performance.now()-started);
+              return {from,to,text:response?.target?.text||'',elapsed};
+            }
+            try{
+              window.__probe.push(await run('pt','es','Eu gostaria de aprender português.'));
+              window.__probe.push(await run('ja','es','日本語を勉強したいです。'));
+              status.textContent=JSON.stringify(window.__probe);
+            }catch(error){
+              window.__probe.push({ok:false,error:String(error&&error.stack||error)});
+              status.textContent=JSON.stringify(window.__probe);
+            }finally{
+              translator.delete();
+              window.__done=true;
+            }
+          </script>
+          HTML
+          cd site
+          python3 -m http.server 8765 >/tmp/bergamot-pivot-http.log 2>&1 &
+      - name: Translate pivot pairs in WebKit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/bergamot-pivot
+          node --input-type=module - <<'NODE'
+          import {webkit} from 'playwright';
+          const browser=await webkit.launch({headless:true});
+          const page=await browser.newPage();
+          page.on('console',msg=>console.log('BROWSER_CONSOLE',msg.type(),msg.text()));
+          page.on('pageerror',err=>console.log('BROWSER_ERROR',String(err)));
+          await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded',timeout:30000});
+          await page.waitForFunction(()=>window.__done===true,null,{timeout:240000});
+          const result=await page.evaluate(()=>window.__probe);
+          console.log('BERGAMOT_WEBKIT_PIVOT_RESULT',JSON.stringify(result));
+          await browser.close();
+          if(!Array.isArray(result)||result.length<2||result.some(x=>x.ok===false)||result.some(x=>!String(x.text||'').trim()))process.exit(2);
+          NODE
