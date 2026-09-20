@@ -32,7 +32,7 @@ function normalizeText(text,locale='es'){
   return String(text||'')
     .toLocaleLowerCase(locale)
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,' ')
+    .replace(/[\u0300-\u036f]/g,'')
     .replace(/\s+/g,' ')
     .trim();
 }
@@ -156,6 +156,7 @@ function buildFullTextSearch(options={}){
     };
     manifest.totalEntries+=codes.length;
     manifest.totalBytes+=bytes;
+    console.log('MLS full-text',language.slug+':',bytes,'bytes,',Object.keys(postings).length,'tokens,',omittedHighFrequency,'high-frequency tokens omitted');
   }
 
   const manifestText=JSON.stringify(manifest,null,2)+'\n';
@@ -169,6 +170,8 @@ function buildFullTextSearch(options={}){
     totalEntries:manifest.totalEntries,
     languages:Object.keys(manifest.languages).length,
     totalBytes:manifest.totalBytes,
+    maxLanguageBytes:Math.max(0,...Object.values(manifest.languages).map(item=>item.bytes)),
+    languageBytes:Object.fromEntries(Object.entries(manifest.languages).map(([slug,item])=>[slug,item.bytes])),
     manifestSha256:sha256(manifestText)
   };
   fs.writeFileSync(path.join(outputRoot,'health.json'),JSON.stringify(health,null,2)+'\n','utf8');
