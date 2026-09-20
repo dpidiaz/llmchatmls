@@ -224,8 +224,10 @@
     }
     function render(payload,candidates){
       const recs=Array.isArray(payload?.recommendations)&&payload.recommendations.length?payload.recommendations:candidates.slice(0,5).map((c,i)=>({...c,order:i+1,reason:'Esta entrada aparece entre las coincidencias más relevantes de la biblioteca para tu consulta.',deepLink:'/#entry='+c.code}));
+      const degradedText='Virtuoso no está disponible temporalmente. Mientras tanto, te mostramos las coincidencias más relevantes de la biblioteca.';
       const summaryText=payload?.intro||'Estas son las entradas que mejor encajan con tu consulta.';
-      results.innerHTML='<div class="summary"><strong>'+esc(payload?.intent||'Ruta sugerida')+'</strong>'+esc(summaryText)+(payload?.degraded?'<div class="degraded">Virtuoso no está disponible temporalmente. Mientras tanto, te mostramos las coincidencias más relevantes de la biblioteca.</div>':'')+'</div>'+
+      const showDegraded=payload?.degraded&&normalize(summaryText)!==normalize(degradedText);
+      results.innerHTML='<div class="summary"><strong>'+esc(payload?.intent||'Ruta sugerida')+'</strong>'+esc(summaryText)+(showDegraded?'<div class="degraded">'+esc(degradedText)+'</div>':'')+'</div>'+
         recs.map((r,i)=>'<article class="card result"><span class="num">'+esc(r.order||i+1)+'</span><div><h2>'+esc(r.title)+'</h2><div class="meta">'+esc([r.level,r.part,r.chapter].filter(Boolean).join(' · '))+'</div><p class="reason">'+esc(r.reason||'Entrada relevante para tu objetivo.')+'</p></div><a class="open" href="'+esc(r.deepLink||('/#entry='+r.code))+'">Abrir entrada</a></article>').join('');
     }
     async function askVirtuoso(){
