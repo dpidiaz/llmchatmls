@@ -1,0 +1,80 @@
+name: Probe Bergamot WebKit translation once
+
+on:
+  push:
+    branches:
+      - feature/translator-pronunciation-offline
+    paths:
+      - ".github/workflows/probe-bergamot-webkit-translation-once.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe-webkit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Prepare Bergamot and Playwright WebKit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bergamot-webkit/site
+          cd /tmp/bergamot-webkit
+          npm init -y >/dev/null
+          npm install --no-save @browsermt/bergamot-translator@0.4.9 playwright
+          npx playwright install --with-deps webkit
+          cp -R node_modules/@browsermt/bergamot-translator site/bergamot
+          cat > site/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8"><title>Bergamot WebKit probe</title>
+          <pre id="status">starting</pre>
+          <script type="module">
+            import {LatencyOptimisedTranslator} from '/bergamot/translator.js';
+            const status=document.getElementById('status');
+            window.__done=false;
+            window.__probe=null;
+            try{
+              const translator=new LatencyOptimisedTranslator({
+                workerUrl:'/bergamot/worker/translator-worker.js',
+                pivotLanguage:'en',
+                downloadTimeout:120000
+              });
+              const started=performance.now();
+              const response=await translator.translate({from:'en',to:'es',text:'Hello, I would like to learn Portuguese.',html:false});
+              const elapsed=Math.round(performance.now()-started);
+              window.__probe={ok:true,text:response?.target?.text||'',elapsed};
+              status.textContent=JSON.stringify(window.__probe);
+              translator.delete();
+            }catch(error){
+              window.__probe={ok:false,error:String(error&&error.stack||error)};
+              status.textContent=JSON.stringify(window.__probe);
+            }finally{
+              window.__done=true;
+            }
+          </script>
+          HTML
+          cd site
+          python3 -m http.server 8765 >/tmp/bergamot-http.log 2>&1 &
+          echo $! >/tmp/bergamot-http.pid
+      - name: Translate in Playwright WebKit
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/bergamot-webkit
+          node --input-type=module - <<'NODE'
+          import {webkit} from 'playwright';
+          const browser=await webkit.launch({headless:true});
+          const page=await browser.newPage();
+          page.on('console',msg=>console.log('BROWSER_CONSOLE',msg.type(),msg.text()));
+          page.on('pageerror',err=>console.log('BROWSER_ERROR',String(err)));
+          await page.goto('http://127.0.0.1:8765/',{waitUntil:'domcontentloaded',timeout:30000});
+          await page.waitForFunction(()=>window.__done===true,null,{timeout:180000});
+          const result=await page.evaluate(()=>window.__probe);
+          console.log('BERGAMOT_WEBKIT_RESULT',JSON.stringify(result));
+          await browser.close();
+          if(!result?.ok)process.exit(2);
+          if(!String(result.text||'').trim())process.exit(3);
+          NODE
