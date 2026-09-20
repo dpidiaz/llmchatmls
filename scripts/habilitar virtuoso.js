@@ -6,6 +6,7 @@ const TARGET='src/index.js';
 const PAGE_SOURCE='MLS R32 OVERLAY/virtuoso.html';
 const PAGE_PUBLIC='public/virtuoso.html';
 const HOME='public/index.html';
+const APP='public/js/app.js';
 const MARKER='// MLS VIRTUOSO V1 1.0';
 const API_MARKER='// MLS VIRTUOSO API V1 1.0';
 const ROUTER_ANCHOR='    if (url.pathname.startsWith("/api/wiki/")) {\n      return handleWikiApi(request, env, url);\n    }';
@@ -45,16 +46,26 @@ function patchNavigation(html){
   return html.replace(searchHref,'href="/virtuoso"');
 }
 
+function patchAppNavigation(source){
+  source=String(source);
+  const original='<button class="btn primary big-action" onclick="location.hash=\'#search\'">⌕ Buscar</button>';
+  const routed='<button class="btn primary big-action" onclick="location.href=\'/virtuoso\'">⌕ Buscar</button>';
+  if(source.includes(routed))return source;
+  if(!source.includes(original))throw new Error('No se encontró el CTA Buscar del hero.');
+  return source.replace(original,routed);
+}
+
 function install(){
   if(!fs.existsSync(PAGE_SOURCE))throw new Error('No existe la página Virtuoso.');
-  if(!fs.existsSync(TARGET)||!fs.existsSync(HOME))throw new Error('El build R32 no contiene Worker/home para Virtuoso.');
+  if(!fs.existsSync(TARGET)||!fs.existsSync(HOME)||!fs.existsSync(APP))throw new Error('El build R32 no contiene Worker/home/app para Virtuoso.');
   const html=fs.readFileSync(PAGE_SOURCE,'utf8');
   fs.mkdirSync(path.dirname(PAGE_PUBLIC),{recursive:true});
   fs.writeFileSync(PAGE_PUBLIC,html,'utf8');
   fs.writeFileSync(TARGET,patchWorker(fs.readFileSync(TARGET,'utf8'),html),'utf8');
   fs.writeFileSync(HOME,patchNavigation(fs.readFileSync(HOME,'utf8')),'utf8');
+  fs.writeFileSync(APP,patchAppNavigation(fs.readFileSync(APP,'utf8')),'utf8');
 }
 
 function main(){install();console.log('Virtuoso V1 habilitado.');}
-module.exports={MARKER,API_MARKER,BACKEND_BLOCK,patchWorker,patchNavigation,install};
+module.exports={MARKER,API_MARKER,BACKEND_BLOCK,patchWorker,patchNavigation,patchAppNavigation,install};
 if(require.main===module)main();
