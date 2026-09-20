@@ -108,6 +108,30 @@ function embeddingRows(payload){
   throw new Error('Respuesta de embeddings sin data/shape reconocible.');
 }
 async function embedBatch(texts,{token,accountId,model=MODEL}){
+  const endpoint=String(process.env.MLS_EMBEDDING_ENDPOINT||'').trim();
+  const endpointKey=String(process.env.MLS_EMBEDDING_KEY||'').trim();
+  if(endpoint){
+    const response=await fetch(endpoint,{
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+        accept:'application/json',
+        ...(endpointKey?{authorization:'Bearer '+endpointKey}:{})
+      },
+      body:JSON.stringify({texts})
+    });
+    const payload=await response.json().catch(()=>({}));
+    if(!response.ok||!payload?.ok||!Array.isArray(payload?.vectors)){
+      const error=new Error('Endpoint de embeddings falló: '+(payload?.error||('HTTP '+response.status)));
+      error.status=response.status;
+      error.endpoint=payload;
+      throw error;
+    }
+    if(payload.model!==model)throw new Error('Modelo inesperado del endpoint: '+payload.model);
+    if(payload.vectors.length!==texts.length)throw new Error('Endpoint devolvió '+payload.vectors.length+' embeddings para '+texts.length+' textos.');
+    return payload.vectors;
+  }
+
   const response=await fetch('https://api.cloudflare.com/client/v4/accounts/'+accountId+'/ai/run/'+model,{
     method:'POST',
     headers:{authorization:'Bearer '+token,'content-type':'application/json',accept:'application/json'},
@@ -144,7 +168,8 @@ async function generateLanguage(language,options={}){
   if(!options.force&&existingLanguageIsCurrent(language,buildId,outputRoot)){
     return {language:language.slug,skipped:true};
   }
-  const accountId=options.accountId||await discoverAccountId(token);
+  const endpoint=String(process.env.MLS_EMBEDDING_ENDPOINT||'').trim();
+  const accountId=endpoint?(options.accountId||null):(options.accountId||await discoverAccountId(token));
   const records=readLanguageRecords(language,sourceRoot);
   const buffers=[];
   let dimensions=0;
@@ -225,7 +250,8 @@ async function main(){
   if(only&&!languages.length)throw new Error('Idioma desconocido: '+only);
   const token=process.env.CLOUDFLARE_API_TOKEN;
   if(!token)throw new Error('Falta CLOUDFLARE_API_TOKEN.');
-  const accountId=await discoverAccountId(token);
+  const endpoint=String(process.env.MLS_EMBEDDING_ENDPOINT||'').trim();
+  const accountId=endpoint?null:await discoverAccountId(token);
   for(const language of languages){
     const result=await generateLanguage(language,{token,accountId,force});
     console.log(JSON.stringify(result));
