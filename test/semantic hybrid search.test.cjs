@@ -17,7 +17,7 @@ test('semantic patch layers after canonical full-text and keeps lexical fallback
   assert.match(hybrid,/semanticQueryVector/);
   assert.match(hybrid,/semanticTop/);
   assert.match(hybrid,/loadFullTextIndex/);
-  assert.match(hybrid,/catch\(error\)\{console\.warn\("MLS semantic query fallback"/);
+  assert.match(hybrid,/catch\(error\)\{console\.warn\("MLS semantic manifest fallback"/);
   assert.match(hybrid,/Búsqueda inteligente: contenido completo \+ significado/);
   assert.match(hybrid,/id="deepCheck" checked/);
   assert.equal(patchSemanticSearch(hybrid),hybrid);
@@ -26,7 +26,7 @@ test('semantic patch layers after canonical full-text and keeps lexical fallback
 test('semantic search remains language-first before loading semantic indexes',()=>{
   const hybrid=patchSemanticSearch(patchSearch(shellSearch()));
   assert.match(hybrid,/const slugs=lang\?\[lang\]:MLS_META\.map\(m=>m\.slug\)/);
-  assert.match(hybrid,/loadSemanticIndex\(slug\)/);
+  assert.match(hybrid,/loadSemanticIndex\(slug,manifest\)/);
   assert.match(hybrid,/fullTextPasses\(r,lang,level,part,chapter\)/);
   assert.match(hybrid,/rawLang==='all'\?'':rawLang/);
 });
