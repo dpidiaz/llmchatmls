@@ -1,0 +1,102 @@
+name: Reparar MLS V07 0484 y publicar corpus canonico
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/reparar-v07-0484.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair-and-export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar protección anti legacy
+        run: npm run test:canonical-tools
+      - name: Preparar build R32
+        run: npm run predeploy
+      - name: Verificar build
+        run: npm run check
+      - name: Desplegar protección anti legacy
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Materializar exclusivamente MLS V07 0484
+        id: materialize
+        shell: bash
+        run: |
+          set -euo pipefail
+          endpoint='https://llmchatmls.dpidiaz.workers.dev/api/wiki/materialize/MLS-V07-0484'
+          body="$RUNNER_TEMP/v07-0484.json"
+          http_status=$(curl --silent --show-error --max-time 300 \
+            --output "$body" \
+            --write-out '%{http_code}' \
+            -X POST "$endpoint" \
+            -H 'Accept: application/json')
+          cat "$body"
+          if [ "$http_status" != "200" ] && [ "$http_status" != "201" ]; then
+            echo "::error::Materialización devolvió HTTP $http_status"
+            exit 1
+          fi
+          node - "$body" <<'NODE'
+          const fs = require('node:fs');
+          const file = process.argv[2];
+          const payload = JSON.parse(fs.readFileSync(file, 'utf8'));
+          const article = payload && payload.article;
+          if (!article) throw new Error('La respuesta no contiene article.');
+          if (article.code !== 'MLS-V07-0484') throw new Error('Código inesperado: ' + article.code);
+          if (String(article.promptVersion) !== '32.0') throw new Error('promptVersion no canónica: ' + article.promptVersion);
+          if (/legacy/i.test(String(article.provider || '')) || /legacy/i.test(String(article.auditProvider || ''))) {
+            throw new Error('Se detectó proveedor legacy en la entrada reparada.');
+          }
+          if (!String(article.articleMarkdown || '').trim()) throw new Error('articleMarkdown vacío.');
+          console.log('✓ MLS-V07-0484 materializada como R32.');
+          NODE
+      - name: Exportar corpus R32 completo desde D1
+        run: npm run canonical:export
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Validar corpus canónico
+        run: npm run canonical:validate
+      - name: Confirmar conteo y entrada reparada
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync('content/manifest.json', 'utf8'));
+          if (manifest.totalEntries !== 10133) throw new Error('Total inesperado: ' + manifest.totalEntries);
+          const hit = manifest.entries.find((entry) => entry.code === 'MLS-V07-0484');
+          if (!hit) throw new Error('MLS-V07-0484 no aparece en manifest.');
+          const article = JSON.parse(fs.readFileSync('content/' + hit.path, 'utf8'));
+          if (article.promptVersion !== '32.0') throw new Error('V07-0484 no es R32.');
+          if (/legacy/i.test(String(article.provider || '')) || /legacy/i.test(String(article.auditProvider || ''))) {
+            throw new Error('V07-0484 contiene proveedor legacy.');
+          }
+          console.log('✓ Corpus completo:', manifest.totalEntries);
+          console.log('✓ Entrada reparada:', hit.code, hit.sha256);
+          NODE
+      - name: Publicar corpus canónico en main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content
+          if git diff --cached --quiet; then
+            echo "No hay cambios de corpus para publicar."
+            exit 0
+          fi
+          git commit -m "Publish canonical MLS R32 corpus"
+          git pull --rebase origin main
+          git push origin HEAD:main
