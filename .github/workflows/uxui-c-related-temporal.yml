@@ -1,4 +1,4 @@
-name: UXUI C validation temporary
+name: UXUI C certification temporary
 
 on:
   push:
@@ -11,10 +11,9 @@ permissions:
   contents: read
 
 jobs:
-  validate:
-    if: github.actor != 'github-actions[bot]'
+  certify:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,9 +21,15 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run test:chat-editorial
-      - run: npm run predeploy
-      - run: npm run recovery:verify
-      - run: node --test test/deploy-contract.test.cjs
-      - run: npm run check
-# rerun after reader contract fix
+      - name: test chat editorial
+        run: npm run test:chat-editorial
+      - name: qa baseline
+        run: npm run qa:baseline
+      - name: predeploy
+        run: npm run predeploy
+      - name: recovery verify
+        run: npm run recovery:verify
+      - name: deploy contract
+        run: node --test test/deploy-contract.test.cjs
+      - name: wrangler dry run
+        run: npm run check
