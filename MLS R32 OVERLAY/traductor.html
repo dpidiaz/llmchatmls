@@ -97,7 +97,7 @@
     </div>
 
     <div class="translate-placeholder" id="translationStatus" role="status" aria-live="polite">
-      La traducción estará disponible cuando se conecte el motor de traducción. Mientras tanto, el módulo de pronunciación funciona de forma independiente.
+      La traducción mejorada necesita conexión. La pronunciación puede seguir funcionando de forma independiente.
     </div>
 
     <section class="result" id="translationResult" hidden>
@@ -114,6 +114,7 @@
         <button class="btn" type="button" data-stop>Detener</button>
         <button class="btn" type="button" data-copy>Copiar</button>
       </div>
+      <div class="status" id="translationSpeechStatus" role="status" aria-live="polite"></div>
     </section>
   </section>
 
@@ -177,6 +178,13 @@
   const pronouncePanel=byId('pronouncePanel');
   const sourceLanguage=byId('sourceLanguage');
   const targetLanguage=byId('targetLanguage');
+  const translateInput=byId('translateInput');
+  const translateButton=byId('translateButton');
+  const translationStatus=byId('translationStatus');
+  const translationResult=byId('translationResult');
+  const translatedText=byId('translatedText');
+  const translationGuide=byId('translationGuide');
+  const translationSpeechStatus=byId('translationSpeechStatus');
   const pronounceLanguage=byId('pronounceLanguage');
   const pronounceInput=byId('pronounceInput');
   const pronunciationResult=byId('pronunciationResult');
@@ -222,6 +230,7 @@
     if(!('speechSynthesis' in window)){voices=[];return}
     voices=window.speechSynthesis.getVoices()||[];
     if(!pronunciationResult.hidden)updateSpeechStatus(pronounceLanguage.value);
+    if(!translationResult.hidden)updateTranslationSpeechStatus(targetLanguage.value);
   }
 
   function updateSpeechStatus(slug){
@@ -238,6 +247,18 @@
     }else{
       speechStatus.textContent='No encontramos una voz compatible instalada para este idioma.';
     }
+  }
+
+  function updateTranslationSpeechStatus(slug){
+    if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
+      translationSpeechStatus.textContent='Este navegador no ofrece síntesis de voz.';
+      return;
+    }
+    const local=selectVoice(slug,{localOnly:true});
+    const any=selectVoice(slug);
+    if(local)translationSpeechStatus.textContent='Voz local compatible disponible. Puedes practicar esta traducción sin consumir IA para el audio.';
+    else if(any)translationSpeechStatus.textContent='Hay una voz compatible, pero puede requerir conexión.';
+    else translationSpeechStatus.textContent='No encontramos una voz compatible instalada para este idioma.';
   }
 
   function setMode(mode){
@@ -319,11 +340,11 @@
     return String(value||'').replace(/\s+/g,' ').trim().slice(0,MAX_TEXT_LENGTH);
   }
 
-  function speak(text,slug,mode){
+  function speak(text,slug,mode,statusElement=speechStatus){
     text=sanitizeSpeechText(text);
     if(!text)return;
     if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
-      speechStatus.textContent='Este navegador no ofrece síntesis de voz.';
+      statusElement.textContent='Este navegador no ofrece síntesis de voz.';
       return;
     }
     const item=language(slug);
@@ -335,9 +356,9 @@
     utterance.rate=mode==='slow'?SLOW_RATE:NORMAL_RATE;
     utterance.pitch=1;
     utterance.volume=1;
-    utterance.onstart=()=>{speechStatus.textContent=mode==='slow'?'Reproduciendo lentamente.':'Reproduciendo.'};
-    utterance.onend=()=>{speechStatus.textContent='Listo para repetir.'};
-    utterance.onerror=event=>{speechStatus.textContent='No fue posible reproducir esta voz'+(event&&event.error?' ('+event.error+').':'.')};
+    utterance.onstart=()=>{statusElement.textContent=mode==='slow'?'Reproduciendo lentamente.':'Reproduciendo.'};
+    utterance.onend=()=>{statusElement.textContent='Listo para repetir.'};
+    utterance.onerror=event=>{statusElement.textContent='No fue posible reproducir esta voz'+(event&&event.error?' ('+event.error+').':'.')};
     lastSpeech={text,slug,mode};
     window.speechSynthesis.speak(utterance);
   }
@@ -362,24 +383,23 @@
   document.addEventListener('click',event=>{
     const button=event.target.closest('button');
     if(!button)return;
+    const host=button.closest('[data-audio-context]');
+    const context=host&&host.getAttribute('data-audio-context');
+    const statusElement=context==='translation'?translationSpeechStatus:speechStatus;
     if(button.hasAttribute('data-speak-rate')){
-      const host=button.closest('[data-audio-context]');
-      const context=host&&host.getAttribute('data-audio-context');
-      const text=context==='translation'?byId('translatedText').textContent:pronunciationText.textContent;
+      const text=context==='translation'?translatedText.textContent:pronunciationText.textContent;
       const slug=context==='translation'?targetLanguage.value:pronounceLanguage.value;
-      speak(text,slug,button.getAttribute('data-speak-rate'));
+      speak(text,slug,button.getAttribute('data-speak-rate'),statusElement);
     }else if(button.hasAttribute('data-repeat')){
-      if(lastSpeech)speak(lastSpeech.text,lastSpeech.slug,lastSpeech.mode);
-      else speechStatus.textContent='Todavía no hay una pronunciación para repetir.';
+      if(lastSpeech)speak(lastSpeech.text,lastSpeech.slug,lastSpeech.mode,statusElement);
+      else statusElement.textContent='Todavía no hay una pronunciación para repetir.';
     }else if(button.hasAttribute('data-stop')){
       if('speechSynthesis' in window)window.speechSynthesis.cancel();
-      speechStatus.textContent='Reproducción detenida.';
+      statusElement.textContent='Reproducción detenida.';
     }else if(button.hasAttribute('data-copy')){
-      const host=button.closest('[data-audio-context]');
-      const context=host&&host.getAttribute('data-audio-context');
-      const text=context==='translation'?byId('translatedText').textContent:pronunciationText.textContent;
+      const text=context==='translation'?translatedText.textContent:pronunciationText.textContent;
       if(navigator.clipboard&&navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text||'').then(()=>{speechStatus.textContent='Texto copiado.'}).catch(()=>{speechStatus.textContent='No fue posible copiar el texto.'});
+        navigator.clipboard.writeText(text||'').then(()=>{statusElement.textContent='Texto copiado.'}).catch(()=>{statusElement.textContent='No fue posible copiar el texto.'});
       }
     }
   });
@@ -388,10 +408,52 @@
     if(!pronunciationResult.hidden)preparePronunciation();
   });
 
-  byId('translateButton').addEventListener('click',()=>{
-    byId('translationStatus').textContent=navigator.onLine
-      ?'El motor de traducción se conectará en una fase posterior. La pronunciación ya puede probarse desde la pestaña Pronunciar.'
-      :'Sin Internet, la traducción completa todavía no está disponible. La pronunciación local puede seguir funcionando.';
+  translateButton.addEventListener('click',async()=>{
+    const text=sanitizeSpeechText(translateInput.value);
+    if(!text){
+      translationStatus.textContent='Escribe una palabra, frase o párrafo corto para traducir.';
+      translateInput.focus();
+      return;
+    }
+    if(!navigator.onLine){
+      translationStatus.textContent='Sin Internet, la traducción completa todavía no está disponible. Puedes usar Pronunciar y el audio local.';
+      return;
+    }
+    const oldLabel=translateButton.textContent;
+    translateButton.disabled=true;
+    translateButton.textContent='Traduciendo…';
+    translationStatus.textContent='Traduciendo…';
+    translationResult.hidden=true;
+    if('speechSynthesis' in window)window.speechSynthesis.cancel();
+    try{
+      const response=await fetch('/api/translate',{
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        cache:'no-store',
+        body:JSON.stringify({
+          text,
+          sourceLanguage:sourceLanguage.value,
+          targetLanguage:targetLanguage.value
+        })
+      });
+      const payload=await response.json().catch(()=>({}));
+      if(!response.ok||payload.ok!==true)throw new Error(payload.error||'No fue posible traducir.');
+      const translation=sanitizeSpeechText(payload.translation);
+      if(!translation)throw new Error('La traducción llegó vacía.');
+      translatedText.textContent=translation;
+      const guide=pronunciationGuideFor(targetLanguage.value,translation);
+      translationGuide.textContent=guide.guide;
+      translationResult.hidden=false;
+      translationStatus.textContent=payload.sameLanguage
+        ?'Los idiomas son iguales; se conserva el texto para que puedas practicar su pronunciación.'
+        :'Traducción lista. Puedes escucharla a velocidad normal o lenta.';
+      updateTranslationSpeechStatus(targetLanguage.value);
+    }catch(error){
+      translationStatus.textContent=String(error&&error.message||'No fue posible traducir en este momento.');
+    }finally{
+      translateButton.disabled=false;
+      translateButton.textContent=oldLabel;
+    }
   });
 
   function applyContext(){
