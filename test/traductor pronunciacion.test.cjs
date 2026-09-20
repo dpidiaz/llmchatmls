@@ -193,8 +193,8 @@ test('worker route serves the static Translator asset and is idempotent',()=>{
   assert.match(patched,/url\.pathname === "\/api\/translate"/);
   assert.match(patched,/handleTranslatorRequest\(request, env\)/);
   assert.match(patched,/url\.pathname === "\/traductor"/);
-  assert.match(patched,/new URL\("\/traductor\.html", request\.url\)/);
-  assert.match(patched,/env\.ASSETS\.fetch\(assetRequest\)/);
+  assert.doesNotMatch(patched,/new URL\("\/traductor\.html", request\.url\)/);
+  assert.match(patched,/return env\.ASSETS\.fetch\(request\)/);
   assert.equal(installer.patchWorker(patched),patched);
 });
 
