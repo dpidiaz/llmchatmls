@@ -1,22 +1,26 @@
   function atlasLabel(value,fallback){const text=String(value||'').trim();return text||fallback}
-  function atlasPartLabel(entry){return atlasLabel(entry.partTitle||entry.partName||entry.part,'Parte '+entry.partNum)}
-  function atlasChapterLabel(entry){return atlasLabel(entry.chapterTitle||entry.chapterName||entry.chapter,'Temas del capítulo')}
-  function atlasBuild(vol,e,m){
-    const levels=[...new Set(vol.entries.map(x=>String(x.level||'').trim()).filter(Boolean))];
+  function atlasPartLabel(entry){return atlasLabel(entry.part,'Parte')}
+  function atlasChapterLabel(entry){return atlasLabel(entry.chapter,'Temas del capítulo')}
+  function atlasBuild(catalog,e,m){
+    const sourceEntries=Array.isArray(catalog?.entries)?catalog.entries:[];
+    const levels=[...new Set(sourceEntries.map(x=>String(x.level||'').trim()).filter(Boolean))];
     const parts=new Map();
-    for(const item of vol.entries){
-      const p=String(item.partNum??'');if(!parts.has(p))parts.set(p,{label:atlasPartLabel(item),chapters:new Map()});
-      const part=parts.get(p),c=String(item.chapterNum??'');if(!part.chapters.has(c))part.chapters.set(c,{first:item,entries:[]});part.chapters.get(c).entries.push(item);
+    for(const item of sourceEntries){
+      const p=atlasPartLabel(item);
+      if(!parts.has(p))parts.set(p,{label:p,chapters:new Map()});
+      const part=parts.get(p),c=atlasChapterLabel(item);
+      if(!part.chapters.has(c))part.chapters.set(c,{label:c,entries:[]});
+      part.chapters.get(c).entries.push(item);
     }
-    const body=[...parts.entries()].map(([partNum,part])=>{
-      const chapters=[...part.chapters.entries()].sort((a,b)=>Number(MLS.chapterDisplayNum(e.language,a[0]))-Number(MLS.chapterDisplayNum(e.language,b[0]))).map(([chapterNum,chapter])=>{
-        const display=MLS.chapterDisplayNum(e.language,chapterNum),active=String(chapterNum)===String(e.chapterNum),chapterHash='#lang='+m.slug+'&part='+encodeURIComponent(partNum)+'&chapter='+encodeURIComponent(chapterNum);
-        const entries=chapter.entries.slice().sort((a,b)=>a.n-b.n).map(item=>`<a class="atlas-entry ${item.code===e.code?'active':''}" data-title="${escAttr((item.title+' '+(item.target||'')).toLocaleLowerCase())}" data-level="${escAttr(String(item.level||''))}" href="#entry=${item.code}"><span class="atlas-entry-code">${esc(item.code)}</span><span class="atlas-entry-copy"><strong>${esc(item.title)}</strong>${item.target?`<small>${esc(item.target)}</small>`:''}</span><span class="atlas-entry-level">${esc(item.level||'')}</span></a>`).join('');
-        return `<section class="atlas-chapter ${active?'current':''}" data-atlas-chapter><div class="atlas-chapter-head"><a href="${chapterHash}"><strong>Capítulo ${esc(display)}</strong><span>${esc(atlasChapterLabel(chapter.first))}</span></a><small>${chapter.entries.length} temas</small></div><div class="atlas-entry-list">${entries}</div></section>`;
+    const body=[...parts.values()].map(part=>{
+      const chapters=[...part.chapters.values()].map(chapter=>{
+        const active=String(chapter.label)===String(e.chapter);
+        const entries=chapter.entries.slice().sort((a,b)=>a.n-b.n).map(item=>`<a class="atlas-entry ${item.code===e.code?'active':''}" data-title="${escAttr(String(item.title||'').toLocaleLowerCase())}" data-level="${escAttr(String(item.level||''))}" href="#entry=${item.code}"><span class="atlas-entry-code">${esc(item.code)}</span><span class="atlas-entry-copy"><strong>${esc(item.title)}</strong></span><span class="atlas-entry-level">${esc(item.level||'')}</span></a>`).join('');
+        return `<section class="atlas-chapter ${active?'current':''}" data-atlas-chapter><div class="atlas-chapter-head"><a href="#entry=${chapter.entries[0]?.code||e.code}"><strong>${esc(chapter.label)}</strong></a><small>${chapter.entries.length} temas</small></div><div class="atlas-entry-list">${entries}</div></section>`;
       }).join('');
       return `<section class="atlas-part"><h3>${esc(part.label)}</h3>${chapters}</section>`;
     }).join('');
-    return `<dialog id="mlsAtlasDialog" class="mls-atlas-dialog" aria-labelledby="mlsAtlasTitle"><div class="atlas-shell"><header class="atlas-head"><div><span class="atlas-kicker">${m.flag} ${esc(m.name)}</span><h2 id="mlsAtlasTitle">Atlas de la enciclopedia</h2><p>Navega directamente por parte, capítulo, nivel o tema. No es una ruta obligatoria.</p></div><button type="button" class="btn" id="mlsAtlasClose" aria-label="Cerrar atlas">Cerrar</button></header><div class="atlas-toolbar"><label><span>Buscar tema</span><input id="mlsAtlasSearch" type="search" placeholder="Escribe un tema…" autocomplete="off"></label><label><span>Nivel</span><select id="mlsAtlasLevel"><option value="">Todos</option>${levels.map(level=>`<option value="${escAttr(level)}">${esc(level)}</option>`).join('')}</select></label><button type="button" class="btn" id="mlsAtlasCurrent">Ir al tema actual</button></div><div class="atlas-current-path">Parte ${esc(e.partNum)} · Capítulo ${esc(MLS.chapterDisplayNum(e.language,e.chapterNum))} · ${esc(e.level||'Sin nivel')}</div><div class="atlas-body" id="mlsAtlasBody">${body}</div><div class="atlas-empty" id="mlsAtlasEmpty" hidden>No hay temas que coincidan con esos filtros.</div></div></dialog>`;
+    return `<dialog id="mlsAtlasDialog" class="mls-atlas-dialog" aria-labelledby="mlsAtlasTitle"><div class="atlas-shell"><header class="atlas-head"><div><span class="atlas-kicker">${m.flag||''} ${esc(m.name||e.languageName||e.language)}</span><h2 id="mlsAtlasTitle">Atlas de la enciclopedia</h2><p>Navega directamente por parte, capítulo, nivel o tema. No es una ruta obligatoria.</p></div><button type="button" class="btn" id="mlsAtlasClose" aria-label="Cerrar atlas">Cerrar</button></header><div class="atlas-toolbar"><label><span>Buscar tema</span><input id="mlsAtlasSearch" type="search" placeholder="Escribe un tema…" autocomplete="off"></label><label><span>Nivel</span><select id="mlsAtlasLevel"><option value="">Todos</option>${levels.map(level=>`<option value="${escAttr(level)}">${esc(level)}</option>`).join('')}</select></label><button type="button" class="btn" id="mlsAtlasCurrent">Ir al tema actual</button></div><div class="atlas-current-path">${esc(e.part||'')} · ${esc(e.chapter||'')} · ${esc(e.level||'Sin nivel')}</div><div class="atlas-body" id="mlsAtlasBody">${body}</div><div class="atlas-empty" id="mlsAtlasEmpty" hidden>No hay temas que coincidan con esos filtros.</div></div></dialog>`;
   }
   function atlasEnsureStyles(){if(document.getElementById('mlsAtlasStyles'))return;const style=document.createElement('style');style.id='mlsAtlasStyles';style.textContent=`
     .mls-atlas-dialog{width:min(1180px,94vw);height:min(860px,92vh);max-width:none;max-height:none;border:1px solid rgba(20,28,36,.16);border-radius:20px;padding:0;background:#f8f6f1;color:#182026;box-shadow:0 28px 90px rgba(0,0,0,.28)}

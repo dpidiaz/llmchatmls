@@ -19,7 +19,9 @@ function patchReader(source){
   const button='<button class="btn ai-entry-btn" id="aiExplainBtn">✨ Profesor IA</button>';
   if(!source.includes(button))throw new Error('No se encontró el botón Profesor IA en el lector.');
   source=source.replace(button,button+'<button class="btn" id="aiPrefsBtn" type="button" aria-label="Preferencias del Profesor IA">⚙ Profesor</button>');
-  const bind="document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(activeTutorEntry,m);";
+  const canonicalBind="document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(e,m);";
+  const legacyBind="document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(activeTutorEntry,m);";
+  const bind=source.includes(canonicalBind)?canonicalBind:legacyBind;
   if(!source.includes(bind))throw new Error('No se encontró el enlace del Profesor IA en el lector.');
   source=source.replace(bind,bind+"\n    document.getElementById('aiPrefsBtn').onclick=()=>window.MLSProfessorPreferences?.openSettingsDialog?.(m);");
   return source;

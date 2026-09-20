@@ -1,14 +1,117 @@
 (()=>{
   'use strict';
-  const MLS=window.MLS;const {esc,escAttr,short}=MLS.util;
-  // El lector es el único responsable de materializar entradas de esta SPA.
-  // El cliente global conserva Profesor IA, pero no debe competir por este POST.
+  const MLS=window.MLS;
+  const {esc,escAttr,short}=MLS.util;
+
+  // El lector canónico es la única ruta de lectura de entradas.
+  // Mantener esta bandera evita que cualquier materializador global compita
+  // con el contenido publicado en GitHub.
   window.__MLS_NATIVE_READER_MATERIALIZER__=true;
-  const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-  const materializationTasks=new Map();
-  function stripSpeak(s){return String(s||'').replace(/\*\*/g,'').replace(/`/g,'').replace(/[#>*_~\[\]()]/g,' ').replace(/\n/g,' ').replace(/\s+/g,' ').trim()}
-  function normalizeArticleMarkdown(s){
+
+  const jsonTasks=new Map();
+  let manifestTask=null;
+
+  function stripSpeak(s){
     return String(s||'')
+      .replace(/\*\*/g,'')
+      .replace(/`/g,'')
+      .replace(/[#>*_~\[\]()]/g,' ')
+      .replace(/\n/g,' ')
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+
+  function scrollPageToAbsoluteTop(){
+    document.documentElement.scrollTop=0;
+    if(document.body)document.body.scrollTop=0;
+    window.scrollTo({top:0,left:0,behavior:'auto'});
+  }
+
+  function versioned(url,buildId){
+    if(!buildId)return url;
+    const join=url.includes('?')?'&':'?';
+    return url+join+'v='+encodeURIComponent(String(buildId).slice(0,16));
+  }
+
+  async function fetchJson(url){
+    if(jsonTasks.has(url))return jsonTasks.get(url);
+    const task=(async()=>{
+      const response=await fetch(url,{
+        cache:'no-cache',
+        headers:{accept:'application/json','cache-control':'no-cache'}
+      });
+      if(!response.ok)throw new Error('No se pudo cargar '+url+' (HTTP '+response.status+').');
+      return response.json();
+    })();
+    jsonTasks.set(url,task);
+    try{return await task}catch(error){jsonTasks.delete(url);throw error}
+  }
+
+  async function runtimeManifest(){
+    if(!manifestTask){
+      manifestTask=fetchJson('/data/canonical/runtime-manifest.json').then(manifest=>{
+        if(!manifest||manifest.standard!=='MLS R32'||manifest.promptVersion!=='32.0'){
+          throw new Error('Runtime manifest canónico inválido.');
+        }
+        if(Number(manifest.totalEntries)!==10133){
+          throw new Error('Runtime manifest incompleto: '+manifest.totalEntries+'.');
+        }
+        return manifest;
+      }).catch(error=>{manifestTask=null;throw error});
+    }
+    return manifestTask;
+  }
+
+  function languageFromCode(manifest,code){
+    const normalized=String(code||'').trim().toUpperCase();
+    for(const [slug,info] of Object.entries(manifest.languages||{})){
+      if(normalized.startsWith(String(info.prefix||'')+'-'))return {slug,info};
+    }
+    return null;
+  }
+
+  async function catalogFor(manifest,language,info){
+    const url=versioned('/data/canonical/'+info.catalog,manifest.corpusBuildId);
+    const catalog=await fetchJson(url);
+    if(!catalog||catalog.language!==language||catalog.promptVersion!=='32.0'||!Array.isArray(catalog.entries)){
+      throw new Error('Catálogo canónico inválido para '+language+'.');
+    }
+    return catalog;
+  }
+
+  function shardDescriptor(info,n){
+    return (info.shards||[]).find(item=>Number(n)>=Number(item.start)&&Number(n)<=Number(item.end))||null;
+  }
+
+  async function canonicalPayload(code){
+    const normalized=String(code||'').trim().toUpperCase();
+    const manifest=await runtimeManifest();
+    const languageHit=languageFromCode(manifest,normalized);
+    if(!languageHit)throw new Error('Código canónico desconocido: '+normalized+'.');
+
+    const {slug:language,info}=languageHit;
+    const catalog=await catalogFor(manifest,language,info);
+    const meta=catalog.entries.find(item=>item.code===normalized);
+    if(!meta)throw new Error(normalized+' no existe en el catálogo canónico.');
+
+    const descriptor=shardDescriptor(info,meta.n);
+    if(!descriptor)throw new Error(normalized+' no tiene shard canónico.');
+
+    const shardUrl=versioned('/data/canonical/'+descriptor.path,manifest.corpusBuildId);
+    const shard=await fetchJson(shardUrl);
+    const article=shard&&shard.entries?shard.entries[normalized]:null;
+    if(!article)throw new Error(normalized+' no existe dentro de su shard canónico.');
+    if(article.promptVersion!=='32.0')throw new Error(normalized+' no es R32.');
+    if(/legacy/i.test(String(article.provider||''))||/legacy/i.test(String(article.auditProvider||''))){
+      throw new Error(normalized+' contiene procedencia legacy.');
+    }
+    if(!String(article.articleMarkdown||'').trim())throw new Error(normalized+' no contiene articleMarkdown.');
+
+    return {manifest,language,info,catalog,meta,article};
+  }
+
+  function normalizeArticleMarkdown(value,prefix){
+    return String(value||'')
       .replace(/\$\s*\\(?:rightarrow|to)\s*\$/gi,'→')
       .replace(/\$\s*\\leftarrow\s*\$/gi,'←')
       .replace(/\$\s*\\(?:Rightarrow|Longrightarrow)\s*\$/g,'⇒')
@@ -21,154 +124,148 @@
       .replace(/\\([*_])/g,'$1')
       .replace(/([\p{L}\p{N}])\*(?=\s*(?:\n|$))/gu,'$1')
       .replace(/([\p{L}\p{N}])\*([.,;:!?])/gu,'$1$2')
+      .replace(/\]\(#entry-(\d+)\)/gi,(_,n)=>'](#entry='+prefix+'-'+String(Number(n)).padStart(4,'0')+')')
       .replace(/[ \t]+\n/g,'\n')
       .replace(/[ \t]{2,}/g,' ')
       .trim();
   }
-  function currentEntryIs(code){return new URLSearchParams(location.hash.replace(/^#/,'' )).get('entry')===code}
-  function scrollPageToAbsoluteTop(){
-    document.documentElement.scrollTop=0;
-    if(document.body)document.body.scrollTop=0;
-    window.scrollTo({top:0,left:0,behavior:'auto'});
-  }
-  function setStatus(code,kind,text){const status=document.getElementById('replacementStatus');if(status&&currentEntryIs(code)){status.className='replacement-status '+kind;status.textContent=text}}
-  function offerRetry(e,onReady,text){
-    if(!currentEntryIs(e.code))return;
-    setStatus(e.code,'unavailable',text);
-    const status=document.getElementById('replacementStatus');
-    if(!status||document.getElementById('mlsMaterializationRetry'))return;
-    const retry=document.createElement('button');
-    retry.type='button';retry.id='mlsMaterializationRetry';retry.className='btn';retry.textContent='Reintentar generación';
-    retry.onclick=()=>materializeOnVisit(e,onReady,true);
-    status.insertAdjacentElement('afterend',retry);
-  }
-  async function savedArticle(code){
-    const response=await fetch('/api/wiki/article/'+encodeURIComponent(code),{cache:'no-store',headers:{accept:'application/json'}});
-    if(response.status===404)return null;
-    if(!response.ok)throw new Error('No se pudo consultar la versión permanente.');
-    const data=await response.json();return data&&data.found?data.article:null;
-  }
-  async function waitForArticle(code){
-    for(let attempt=0;attempt<45;attempt++){
-      if(!currentEntryIs(code))return null;
-      await sleep(2000);
-      try{const article=await savedArticle(code);if(article)return article}catch{}
+
+  function relatedFromMarkdown(markdown,catalog){
+    const byCode=new Map(catalog.entries.map(item=>[item.code,item]));
+    const seen=new Set();
+    const related=[];
+    for(const match of String(markdown||'').matchAll(/#entry=(MLS-V\d{2}-\d{4})/gi)){
+      const code=String(match[1]).toUpperCase();
+      if(seen.has(code))continue;
+      const item=byCode.get(code);
+      if(item){seen.add(code);related.push(item)}
     }
-    return null;
+    return related.slice(0,12);
   }
-  function installPermanentArticle(article,e){
-    if(!article||!currentEntryIs(e.code))return e;
-    const body=document.querySelector('.plain-entry'),advanced=document.querySelector('.advanced-details');
-    if(!body)return e;
-    const markdown=normalizeArticleMarkdown(article.articleMarkdown||'');
-    body.className='plain-entry permanent-entry';
-    body.innerHTML='<article class="entry-body permanent-entry-body">'+MLS.renderMarkdown(markdown,e.language)+'</article>';
-    if(advanced)advanced.hidden=true;
-    setStatus(e.code,'ready','Contenido permanente · generado una sola vez · '+String(article.generatedAt||'').slice(0,10));
-    document.documentElement.dataset.mlsMaterializedCode=e.code;
-    return {...e,body:markdown||e.body,auditedBody:markdown||e.auditedBody,definition:markdown||e.definition,articleMarkdown:markdown};
-  }
-  async function requestMaterialization(code){
-    return fetch('/api/wiki/materialize/'+encodeURIComponent(code),{
-      method:'POST',
-      cache:'no-store',
-      headers:{accept:'application/json','cache-control':'no-store'}
+
+  function canonicalUnavailable(code,error){
+    console.error('MASTER LANGUAGE SYSTEM: canonical entry unavailable',code,error);
+    MLS.app.innerHTML=`<div class="reader-wide reading-first">
+      <main class="reader-main">
+        <section class="reader-head simple-head">
+          <div class="simple-meta">MASTER LANGUAGE SYSTEM · R32</div>
+          <h1>Contenido no disponible</h1>
+          <p>No fue posible cargar la entrada canónica <strong>${esc(code)}</strong>. Por seguridad, MLS no mostrará contenido antiguo como reemplazo.</p>
+          <div class="reader-actions simple-actions">
+            <button class="btn primary" id="canonicalRetry" type="button">Reintentar</button>
+            <a class="btn" href="#">Volver</a>
+          </div>
+        </section>
+      </main>
+    </div>`;
+    document.getElementById('canonicalRetry')?.addEventListener('click',()=>{
+      manifestTask=null;
+      jsonTasks.clear();
+      page(code);
     });
   }
-  async function materializeOnVisit(e,onReady,retry=false){
-    if(!e||!e.code||!currentEntryIs(e.code))return;
-    const code=e.code;
-    if(materializationTasks.has(code))return materializationTasks.get(code);
-    const run=(async()=>{
-    if(!retry&&document.documentElement.dataset.mlsMaterializedCode===code)return;
-    document.documentElement.dataset.mlsMaterializingCode=code;
-    document.getElementById('mlsMaterializationRetry')?.remove();
-    setStatus(code,'working','Comprobando contenido permanente…');
-    try{
-      const existing=await savedArticle(code).catch(()=>null);
-      if(existing&&currentEntryIs(code)){onReady(installPermanentArticle(existing,e));return}
-      if(!currentEntryIs(code))return;
-      setStatus(code,'working','Generando versión ampliada con IA…');
-      const response=await requestMaterialization(code);
-      const data=await response.json().catch(()=>({}));
-      if(!currentEntryIs(code))return;
-      if(data.article){onReady(installPermanentArticle(data.article,e));return}
-      if(response.status===202||data.flag==='processing'){
-        setStatus(code,'working','Generando versión ampliada con IA…');
-        const article=await waitForArticle(code);
-        if(article&&currentEntryIs(code)){onReady(installPermanentArticle(article,e));return}
-        offerRetry(e,onReady,'La generación sigue pendiente. Puedes reintentar la consulta sin crear otra generación.');
-        return;
-      }
-      if(response.status===429||response.status===503){
-        offerRetry(e,onReady,data.error||'Workers AI FREE no está disponible ahora; no se usó ningún servicio de pago.');
-        return;
-      }
-      offerRetry(e,onReady,data.error||'No fue posible crear la versión permanente; se conserva el contenido anterior.');
-    }catch(error){
-      offerRetry(e,onReady,'No fue posible crear la versión permanente; se conserva el contenido anterior.');
-      console.warn('MASTER LANGUAGE SYSTEM: materialización automática falló para '+code,error);
-    }finally{
-      if(document.documentElement.dataset.mlsMaterializingCode===code)delete document.documentElement.dataset.mlsMaterializingCode;
-      materializationTasks.delete(code);
-    }
-    })();
-    materializationTasks.set(code,run);
-    return run;
-  }
+
   async function page(code){
+    const normalized=String(code||'').trim().toUpperCase();
     const previousCode=document.documentElement.dataset.mlsCurrentEntryCode||'';
-    const entryChanged=previousCode!==code;
-    document.documentElement.dataset.mlsCurrentEntryCode=code;
+    const entryChanged=previousCode!==normalized;
+    document.documentElement.dataset.mlsCurrentEntryCode=normalized;
     if(entryChanged)scrollPageToAbsoluteTop();
-    const idx=MLS.data.idxByCode[code];if(!idx){MLS.app.innerHTML=MLS.ui.empty('No encontré esta entrada.');return}
-    MLS.state.currentLang=idx.language;MLS.app.innerHTML='<div class="loading">Abriendo…</div>';
-    const vol=await MLS.loadVolume(idx.language),e=vol.entries.find(x=>x.code===code);if(!e){MLS.app.innerHTML=MLS.ui.empty('No encontré esta entrada.');return}
-    MLS.state.recent=[code,...MLS.state.recent.filter(x=>x!==code)].slice(0,80);MLS.save();
-    const m=MLS.data.metaBySlug[e.language],pos=vol.entries.findIndex(x=>x.code===code),prev=vol.entries[pos-1],next=vol.entries[pos+1];
-    const chapterEntries=vol.entries.filter(x=>String(x.chapterNum)===String(e.chapterNum)).sort((a,b)=>a.n-b.n);
-    const related=MLS.extractRelations(e.body,e.language),outline=MLS.entryOutline(e.body),fav=MLS.state.favorites.includes(code);
-    const chapterHash=`#lang=${m.slug}&part=${encodeURIComponent(e.partNum)}&chapter=${encodeURIComponent(e.chapterNum)}`;
-    const chapterIndex=chapterEntries.map((x,i)=>`<a class="local-entry ${x.code===code?'active':''}" href="#entry=${x.code}"><span>${String(i+1).padStart(2,'0')}</span><div><strong>${esc(x.title)}</strong>${x.target?`<small>${esc(x.target)}</small>`:''}</div></a>`).join('');
-    const relatedHTML=related.length?related.map(x=>`<a class="related-link" href="#entry=${x.code}"><strong>${esc(x.title)}</strong></a>`).join(''):'<span class="muted-note">No hay enlaces directos desde esta entrada.</span>';
-    const easy=e.plain||{lead:e.definition||'',example:'',look:''};
-    const example=easy.example?`<section class="plain-block example-block"><h2>Ejemplo</h2><div class="easy-example">${MLS.renderEasyInline(easy.example)}</div></section>`:'';
-    const look=easy.look?`<section class="plain-block look-block"><h2>Mira</h2><p>${esc(easy.look)}</p></section>`:'';
-    const advanced=MLS.state.advancedDetails?`<section class="advanced-details"><div class="advanced-title"><span>Detalles avanzados</span><small>Información técnica y de referencia</small></div><article class="entry-body">${MLS.renderMarkdown(e.auditedBody||e.body,e.language)}</article></section>`:'';
-    const outlineHTML=MLS.state.advancedDetails&&outline.length?outline.map(x=>`<button type="button" data-scroll="${escAttr(x.id)}">${esc(short(x.label))}</button>`).join(''):'';
+
+    MLS.app.innerHTML='<div class="loading">Abriendo contenido canónico…</div>';
+
+    let payload;
+    try{
+      payload=await canonicalPayload(normalized);
+    }catch(error){
+      canonicalUnavailable(normalized,error);
+      return;
+    }
+
+    const {manifest,language,info,catalog,meta,article}=payload;
+    MLS.state.currentLang=language;
+    MLS.state.recent=[normalized,...MLS.state.recent.filter(x=>x!==normalized)].slice(0,80);
+    MLS.save();
+
+    const m=MLS.data.metaBySlug?.[language]||{
+      slug:language,
+      name:article.languageName||info.name||language,
+      flag:''
+    };
+
+    const markdown=normalizeArticleMarkdown(article.articleMarkdown,info.prefix);
+    const e={
+      ...meta,
+      ...article,
+      code:normalized,
+      language,
+      articleMarkdown:markdown,
+      body:markdown,
+      auditedBody:markdown,
+      definition:markdown
+    };
+
+    const languageEntries=[...catalog.entries].sort((a,b)=>Number(a.n)-Number(b.n));
+    const pos=languageEntries.findIndex(item=>item.code===normalized);
+    const prev=pos>0?languageEntries[pos-1]:null;
+    const next=pos>=0&&pos<languageEntries.length-1?languageEntries[pos+1]:null;
+    const chapterEntries=languageEntries.filter(item=>item.chapter===meta.chapter);
+    const related=relatedFromMarkdown(markdown,catalog);
+    const outline=MLS.entryOutline(markdown);
+    const fav=MLS.state.favorites.includes(normalized);
+
+    const chapterIndex=chapterEntries.map((item,i)=>`<a class="local-entry ${item.code===normalized?'active':''}" href="#entry=${escAttr(item.code)}"><span>${String(i+1).padStart(2,'0')}</span><div><strong>${esc(item.title)}</strong></div></a>`).join('');
+    const relatedHTML=related.length
+      ?related.map(item=>`<a class="related-link" href="#entry=${escAttr(item.code)}"><strong>${esc(item.title)}</strong></a>`).join('')
+      :'<span class="muted-note">No hay enlaces directos desde esta entrada.</span>';
+    const outlineHTML=outline.length
+      ?outline.map(item=>`<button type="button" data-scroll="${escAttr(item.id)}">${esc(short(item.label))}</button>`).join('')
+      :'';
+
     MLS.app.innerHTML=`<div class="reader-wide reading-first">
-      <div class="crumbs reader-crumbs"><a href="#lang=${m.slug}">${m.flag} ${esc(m.name)}</a><span>›</span><a href="${chapterHash}">Capítulo ${esc(MLS.chapterDisplayNum(e.language,e.chapterNum))}</a></div>
+      <div class="crumbs reader-crumbs"><a href="#lang=${escAttr(m.slug||language)}">${m.flag||''} ${esc(m.name||article.languageName||language)}</a><span>›</span><span>${esc(meta.chapter||'Entrada')}</span></div>
       <details class="mobile-local-index"><summary>Ver temas de este capítulo</summary><div class="local-entry-list">${chapterIndex}</div></details>
       <div class="reader-layout">
         <aside class="reader-left"><div class="sticky-reader-panel"><div class="reader-panel-label">En este capítulo</div><div class="local-entry-list">${chapterIndex}</div></div></aside>
         <main class="reader-main">
           <section class="reader-head simple-head">
-            <div class="simple-meta">${m.flag} ${esc(m.name)} · ${esc(e.level)}</div>
-            <h1>${esc(e.title)}</h1>${e.target?`<div class="target-title">${esc(e.target)}</div>`:''}
-            <nav class="reader-actions simple-actions" aria-label="Navegación entre temas">${prev?`<a class="btn" href="#entry=${prev.code}" rel="prev">← Anterior</a>`:'<button class="btn" type="button" disabled aria-disabled="true">← Anterior</button>'}${next?`<a class="btn primary" href="#entry=${next.code}" rel="next">Siguiente →</a>`:'<button class="btn primary" type="button" disabled aria-disabled="true">Siguiente →</button>'}</nav>
+            <div class="simple-meta">${m.flag||''} ${esc(m.name||article.languageName||language)} · ${esc(article.level||'')}</div>
+            <h1>${esc(article.title)}</h1>
+            <nav class="reader-actions simple-actions" aria-label="Navegación entre temas">${prev?`<a class="btn" href="#entry=${escAttr(prev.code)}" rel="prev">← Anterior</a>`:'<button class="btn" type="button" disabled aria-disabled="true">← Anterior</button>'}${next?`<a class="btn primary" href="#entry=${escAttr(next.code)}" rel="next">Siguiente →</a>`:'<button class="btn primary" type="button" disabled aria-disabled="true">Siguiente →</button>'}</nav>
             <div class="reader-actions simple-actions"><button class="btn primary" id="listenBtn">🔊 Escuchar</button><button class="btn ai-entry-btn" id="aiExplainBtn">✨ Profesor IA</button><button class="btn" id="favBtn">${fav?'★ Guardado':'☆ Guardar'}</button></div>
           </section>
-          <div class="replacement-status working" id="replacementStatus" role="status">Generando versión ampliada con IA…</div>
-          <article class="plain-entry" aria-label="Explicación">
-            <section class="plain-block lead-block"><p>${esc(easy.lead)}</p></section>${example}${look}
+          <div class="replacement-status ready" id="replacementStatus" role="status">Contenido canónico · GitHub · R32 · build ${esc(String(manifest.corpusBuildId||'').slice(0,10))}</div>
+          <article class="plain-entry permanent-entry" aria-label="Explicación">
+            <article class="entry-body permanent-entry-body">${MLS.renderMarkdown(markdown,language)}</article>
           </article>
-          ${advanced}
-          <nav class="easy-entry-nav" aria-label="Siguiente o anterior">${prev?`<a class="btn" href="#entry=${prev.code}">← Anterior</a>`:'<span></span>'}<a class="btn" href="${chapterHash}">Temas</a>${next?`<a class="btn primary" href="#entry=${next.code}">Siguiente →</a>`:'<span></span>'}</nav>
+          <nav class="easy-entry-nav" aria-label="Siguiente o anterior">${prev?`<a class="btn" href="#entry=${escAttr(prev.code)}">← Anterior</a>`:'<span></span>'}<a class="btn" href="#lang=${escAttr(m.slug||language)}">Temas</a>${next?`<a class="btn primary" href="#entry=${escAttr(next.code)}">Siguiente →</a>`:'<span></span>'}</nav>
         </main>
         <aside class="reader-right"><div class="sticky-reader-panel">
-          ${MLS.state.advancedDetails&&outlineHTML?`<section class="reader-context-section"><div class="reader-panel-label">En esta entrada</div><nav class="entry-outline">${outlineHTML}</nav></section>`:''}
+          ${outlineHTML?`<section class="reader-context-section"><div class="reader-panel-label">En esta entrada</div><nav class="entry-outline">${outlineHTML}</nav></section>`:''}
           <section class="reader-context-section"><div class="reader-panel-label">También mira</div><div class="related-list">${relatedHTML}</div></section>
         </div></aside>
       </div>
     </div>`;
-    if(entryChanged){scrollPageToAbsoluteTop();requestAnimationFrame(scrollPageToAbsoluteTop)}
-    let activeTutorEntry=e;
-    const speechFor=entry=>[entry.title,entry.articleMarkdown||entry.auditedBody||entry.body||entry.definition||easy.lead,stripSpeak(easy.example)].filter(Boolean).join('. ');
-    document.getElementById('listenBtn').onclick=()=>MLS.speak(stripSpeak(speechFor(activeTutorEntry)));
-    document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(activeTutorEntry,m);
-    document.getElementById('favBtn').onclick=()=>{if(MLS.state.favorites.includes(code))MLS.state.favorites=MLS.state.favorites.filter(x=>x!==code);else MLS.state.favorites.push(code);MLS.save();page(code)};
-    document.querySelectorAll('[data-scroll]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'start'}));
-    materializeOnVisit(e,replacement=>{activeTutorEntry=replacement});
+
+    if(entryChanged){
+      scrollPageToAbsoluteTop();
+      requestAnimationFrame(scrollPageToAbsoluteTop);
+    }
+
+    const speechFor=entry=>[entry.title,entry.articleMarkdown].filter(Boolean).join('. ');
+    document.getElementById('listenBtn').onclick=()=>MLS.speak(stripSpeak(speechFor(e)));
+    document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(e,m);
+    document.getElementById('favBtn').onclick=()=>{
+      if(MLS.state.favorites.includes(normalized))MLS.state.favorites=MLS.state.favorites.filter(x=>x!==normalized);
+      else MLS.state.favorites.push(normalized);
+      MLS.save();
+      page(normalized);
+    };
+    document.querySelectorAll('[data-scroll]').forEach(button=>{
+      button.onclick=()=>document.getElementById(button.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'start'});
+    });
   }
-  MLS.reader={page};MLS.pages.entry=page;
+
+  MLS.reader={page};
+  MLS.pages.entry=page;
 })();

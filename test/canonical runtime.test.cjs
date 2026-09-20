@@ -20,3 +20,27 @@ test('canonical runtime shard paths are stable and language-scoped', () => {
     'shards/chino-taiwan/0401-0500.json'
   );
 });
+
+
+test('reader is GitHub-canonical-first and has no D1/materialization read fallback', () => {
+  const fs = require('node:fs');
+  const reader = fs.readFileSync('MLS R32 OVERLAY/reader.js', 'utf8');
+  assert.match(reader, /\/data\/canonical\/runtime-manifest\.json/);
+  assert.match(reader, /Contenido no disponible/);
+  assert.match(reader, /no mostrará contenido antiguo/);
+  assert.doesNotMatch(reader, /\/api\/wiki\/article\//);
+  assert.doesNotMatch(reader, /\/api\/wiki\/materialize\//);
+  assert.doesNotMatch(reader, /cloudflare-legacy/);
+  assert.doesNotMatch(reader, /e\.plain/);
+  assert.doesNotMatch(reader, /easy\.lead/);
+});
+
+
+test('canonical runtime predeploy does not reactivate D1-only regeneration', () => {
+  const fs = require('node:fs');
+  const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+  const reader = fs.readFileSync('MLS R32 OVERLAY/reader.js', 'utf8');
+  assert.doesNotMatch(pkg.scripts.predeploy, /regenerar entradas\.js/);
+  assert.doesNotMatch(reader, /\/api\/wiki\/regenerate\//);
+  assert.doesNotMatch(reader, /regenerateBtn/);
+});
