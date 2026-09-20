@@ -21,9 +21,13 @@ function patchReader(source){
   if(!source.includes(explain))throw new Error('No se encontró el botón Profesor IA en el lector.');
   source=source.replace(explain,explain+'<button class="btn" id="aiQuickBtn" type="button" aria-label="Acciones rápidas del Profesor IA">⚡ Acciones</button>');
   const prefBind="document.getElementById('aiPrefsBtn').onclick=()=>window.MLSProfessorPreferences?.openSettingsDialog?.(m);";
-  const explainBind="document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(activeTutorEntry,m);";
-  if(source.includes(prefBind))source=source.replace(prefBind,prefBind+"\n    document.getElementById('aiQuickBtn').onclick=()=>window.MLSProfessorQuickActions?.openDialog?.(activeTutorEntry,m);");
-  else if(source.includes(explainBind))source=source.replace(explainBind,explainBind+"\n    document.getElementById('aiQuickBtn').onclick=()=>window.MLSProfessorQuickActions?.openDialog?.(activeTutorEntry,m);");
+  const canonicalExplainBind="document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(e,m);";
+  const legacyExplainBind="document.getElementById('aiExplainBtn').onclick=()=>MLS.aiTutor?.open(activeTutorEntry,m);";
+  const entryExpr=source.includes(canonicalExplainBind)?'e':'activeTutorEntry';
+  const quickBind="document.getElementById('aiQuickBtn').onclick=()=>window.MLSProfessorQuickActions?.openDialog?.("+entryExpr+",m);";
+  if(source.includes(prefBind))source=source.replace(prefBind,prefBind+"\n    "+quickBind);
+  else if(source.includes(canonicalExplainBind))source=source.replace(canonicalExplainBind,canonicalExplainBind+"\n    "+quickBind);
+  else if(source.includes(legacyExplainBind))source=source.replace(legacyExplainBind,legacyExplainBind+"\n    "+quickBind);
   else throw new Error('No se encontró el enlace del Profesor IA en el lector.');
   return source;
 }
