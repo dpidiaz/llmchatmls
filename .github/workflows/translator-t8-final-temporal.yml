@@ -161,7 +161,7 @@ jobs:
         shell: bash
         run: |
           node - <<'NODE'
-          const {chromium}=require('playwright');
+          const {chromium}=await import('playwright');
           const base='http://127.0.0.1:8787';
           const widths=[320,375,390,430,768,1024,1280,1440,1920];
           const browser=await chromium.launch({headless:true});
