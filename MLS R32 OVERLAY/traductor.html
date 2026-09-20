@@ -31,6 +31,12 @@
     .language-row.single{grid-template-columns:1fr}
     .preference-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 18px}
     .helper{font-size:.92rem;color:var(--mls-text-secondary,#515961);font-weight:400}
+    .engine-field{border:0;padding:0;margin:0;min-width:0}
+    .engine-field legend{font-weight:700;margin-bottom:7px}
+    .engine-toggle{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);background:var(--mls-surface-muted-light,#f3efe8)}
+    .engine-toggle button{min-height:44px;border:0;border-radius:9px;background:transparent;color:inherit;cursor:pointer;font-weight:700}
+    .engine-toggle button[aria-pressed="true"]{background:#fff;box-shadow:0 1px 4px rgba(35,31,26,.12)}
+    .engine-field .helper{display:block;margin-top:7px}
     label{display:grid;gap:7px;font-weight:700}
     select,textarea{width:100%;border:1px solid var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);background:#fff;color:var(--mls-text-primary,#182026)}
     select{padding:0 12px}
@@ -105,14 +111,14 @@
     </div>
 
     <div class="preference-row">
-      <label>Motor de traducción
-        <select id="translationMode">
-          <option value="auto" selected>Automático</option>
-          <option value="local">Local</option>
-          <option value="online">En línea</option>
-        </select>
-        <span class="helper">Automático usa local primero. Local nunca envía tu texto. En línea ignora los paquetes descargados.</span>
-      </label>
+      <fieldset class="engine-field">
+        <legend>Motor de traducción</legend>
+        <div class="engine-toggle" role="group" aria-label="Motor de traducción">
+          <button type="button" data-translation-mode="online" aria-pressed="true">En línea</button>
+          <button type="button" data-translation-mode="local" aria-pressed="false">Local</button>
+        </div>
+        <span class="helper">En línea ignora los paquetes descargados. Local procesa el texto en este dispositivo y nunca usa la traducción en línea.</span>
+      </fieldset>
       <label>Velocidad lenta
         <select id="slowSpeechRate">
           <option value="0.85">Un poco lento</option>
@@ -238,7 +244,7 @@
   const pronouncePanel=byId('pronouncePanel');
   const sourceLanguage=byId('sourceLanguage');
   const targetLanguage=byId('targetLanguage');
-  const translationMode=byId('translationMode');
+  const translationModeButtons=[...document.querySelectorAll('[data-translation-mode]')];
   const slowSpeechRate=byId('slowSpeechRate');
   const pronounceSlowSpeechRate=byId('pronounceSlowSpeechRate');
   const translateInput=byId('translateInput');
@@ -458,6 +464,21 @@
   translateTab.addEventListener('click',()=>setMode('translate'));
   pronounceTab.addEventListener('click',()=>setMode('pronounce'));
 
+  let translationMode='online';
+  function setTranslationMode(mode){
+    if(mode!=='online'&&mode!=='local')return;
+    translationMode=mode;
+    for(const button of translationModeButtons){
+      button.setAttribute('aria-pressed',String(button.dataset.translationMode===mode));
+    }
+    translationStatus.textContent=mode==='local'
+      ?'Modo Local: MLS usará únicamente los paquetes descargados y no enviará el texto a la traducción en línea.'
+      :'Modo En línea: MLS usará la traducción con conexión e ignorará los paquetes locales.';
+  }
+  for(const button of translationModeButtons){
+    button.addEventListener('click',()=>setTranslationMode(button.dataset.translationMode));
+  }
+
   byId('swapLanguages').addEventListener('click',()=>{
     const a=sourceLanguage.value;
     sourceLanguage.value=targetLanguage.value;
@@ -619,7 +640,7 @@
       translateInput.focus();
       return;
     }
-    const mode=translationMode.value;
+    const mode=translationMode;
     const oldLabel=translateButton.textContent;
     translateButton.disabled=true;
     translateButton.textContent='Traduciendo…';
@@ -631,14 +652,8 @@
       let sameLanguage=false;
       let local=false;
 
-      if(mode==='online'){
-        if(!navigator.onLine){
-          translationStatus.textContent='El modo En línea necesita conexión a Internet. Cambia a Local o Automático para usar paquetes descargados.';
-          return;
-        }
-        translationStatus.textContent='Usando traducción en línea…';
-      }else{
-        translationStatus.textContent=mode==='local'?'Comprobando paquetes locales…':'Comprobando traducción local…';
+      if(mode==='local'){
+        translationStatus.textContent='Comprobando paquetes locales…';
         let offline;
         let availability;
         try{
@@ -646,44 +661,36 @@
           availability=await offline.canTranslateOffline(sourceLanguage.value,targetLanguage.value);
         }catch(localError){
           console.warn('MLS local translation unavailable:',localError);
-          availability={ok:false};
-        }
-
-        if(availability&&availability.ok===true){
-          try{
-            translationStatus.textContent='Traduciendo en este dispositivo…';
-            const localResult=await offline.translateLocal({
-              sourceSlug:sourceLanguage.value,
-              targetSlug:targetLanguage.value,
-              text
-            });
-            translation=sanitizeSpeechText(localResult.translation);
-            sameLanguage=localResult.sameLanguage===true;
-            local=true;
-          }catch(localError){
-            console.warn('MLS local translation failed:',localError);
-            if(mode==='local'){
-              translationStatus.textContent='El motor local no pudo completar esta traducción. No se usó Internet.';
-              return;
-            }
-          }
-        }else if(mode==='local'){
-          translationStatus.textContent='Esta combinación no está preparada para traducción local. Descarga los paquetes necesarios o cambia el motor.';
+          translationStatus.textContent='No fue posible iniciar el motor local. No se usó Internet.';
           return;
         }
 
-        if(!translation&&mode==='auto'&&!navigator.onLine){
-          translationStatus.textContent='No hay traducción local disponible para esta combinación y no tienes conexión.';
+        if(!availability||availability.ok!==true){
+          translationStatus.textContent='Esta combinación no está preparada para traducción local. Descarga los paquetes necesarios o cambia a En línea.';
           return;
         }
-      }
 
-      if(!translation){
+        try{
+          translationStatus.textContent='Traduciendo en este dispositivo…';
+          const localResult=await offline.translateLocal({
+            sourceSlug:sourceLanguage.value,
+            targetSlug:targetLanguage.value,
+            text
+          });
+          translation=sanitizeSpeechText(localResult.translation);
+          sameLanguage=localResult.sameLanguage===true;
+          local=true;
+        }catch(localError){
+          console.warn('MLS local translation failed:',localError);
+          translationStatus.textContent='El motor local no pudo completar esta traducción. No se usó Internet.';
+          return;
+        }
+      }else{
         if(!navigator.onLine){
-          translationStatus.textContent='La traducción en línea necesita conexión a Internet.';
+          translationStatus.textContent='El modo En línea necesita conexión a Internet. Cambia a Local para usar paquetes descargados.';
           return;
         }
-        translationStatus.textContent=mode==='online'?'Traduciendo en línea…':'Usando traducción en línea como alternativa…';
+        translationStatus.textContent='Traduciendo en línea…';
         const response=await fetch('/api/translate',{
           method:'POST',
           headers:{'content-type':'application/json'},
@@ -708,10 +715,8 @@
       translationStatus.textContent=sameLanguage
         ?'Los idiomas son iguales; se conserva el texto para que puedas practicar su pronunciación.'
         :local
-          ?'Traducción local lista. El texto se procesó en este dispositivo.'
-          :mode==='online'
-            ?'Traducción en línea lista. Los paquetes locales no se usaron.'
-            :'Traducción en línea lista como alternativa al motor local.';
+          ?'Traducción local lista. El texto se procesó en este dispositivo y no se usó Internet.'
+          :'Traducción en línea lista. Los paquetes locales no se usaron.';
       updateTranslationSpeechStatus(targetLanguage.value);
     }catch(error){
       translationStatus.textContent=String(error&&error.message||'No fue posible traducir en este momento.');
@@ -731,6 +736,7 @@
     }catch{}
   }
 
+  setTranslationMode('online');
   applyContext();
   loadVoices();
   refreshOfflineTools();
