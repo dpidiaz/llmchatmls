@@ -23,7 +23,7 @@ jobs:
           node-version: 24
           cache: npm
       - name: Install Bergamot runtime exactly
-        run: npm install --save-dev --save-exact @browsermt/bergamot-translator@0.4.9
+        run: npm install --legacy-peer-deps --save-dev --save-exact @browsermt/bergamot-translator@0.4.9
       - name: Generate versioned offline pack manifests
         run: node 'scripts/generar paquetes traductor.js'
       - name: Show generated sizes
