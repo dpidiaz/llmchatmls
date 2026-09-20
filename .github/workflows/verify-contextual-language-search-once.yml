@@ -38,7 +38,7 @@ jobs:
           if(!html.includes('language.value=requested')) throw new Error('language preselection missing');
           if(!html.includes('requestAnimationFrame(()=>query.focus())')) throw new Error('query focus handoff missing');
 
-          const vm=require('node:vm');
+          const vm=await import('node:vm');
           const pattern=/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi;
           const inline=[...html.matchAll(pattern)].map(m=>m[1].trim()).filter(Boolean);
           for(const [i,source] of inline.entries()) new vm.Script(source,{filename:'production-virtuoso-'+i+'.js'});
