@@ -162,13 +162,13 @@ async function generateLanguage(language,options={}){
   const sourceRoot=path.resolve(options.sourceRoot||SOURCE_ROOT);
   const outputRoot=path.resolve(options.outputRoot||OUTPUT_ROOT);
   const token=options.token||process.env.CLOUDFLARE_API_TOKEN;
-  if(!token)throw new Error('Falta CLOUDFLARE_API_TOKEN.');
+  const endpoint=String(process.env.MLS_EMBEDDING_ENDPOINT||'').trim();
+  if(!endpoint&&!token)throw new Error('Falta CLOUDFLARE_API_TOKEN o MLS_EMBEDDING_ENDPOINT.');
   const buildId=sourceBuildId(sourceRoot);
   fs.mkdirSync(outputRoot,{recursive:true});
   if(!options.force&&existingLanguageIsCurrent(language,buildId,outputRoot)){
     return {language:language.slug,skipped:true};
   }
-  const endpoint=String(process.env.MLS_EMBEDDING_ENDPOINT||'').trim();
   const accountId=endpoint?(options.accountId||null):(options.accountId||await discoverAccountId(token));
   const records=readLanguageRecords(language,sourceRoot);
   const buffers=[];
@@ -251,8 +251,8 @@ async function main(){
   const languages=only?LANGUAGES.filter(x=>x.slug===only):LANGUAGES;
   if(only&&!languages.length)throw new Error('Idioma desconocido: '+only);
   const token=process.env.CLOUDFLARE_API_TOKEN;
-  if(!token)throw new Error('Falta CLOUDFLARE_API_TOKEN.');
   const endpoint=String(process.env.MLS_EMBEDDING_ENDPOINT||'').trim();
+  if(!endpoint&&!token)throw new Error('Falta CLOUDFLARE_API_TOKEN o MLS_EMBEDDING_ENDPOINT.');
   const accountId=endpoint?null:await discoverAccountId(token);
   for(const language of languages){
     const result=await generateLanguage(language,{token,accountId,force});
