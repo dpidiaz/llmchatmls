@@ -174,9 +174,7 @@ function patchWorker(source,packsArg){
     '    if (url.pathname === "/traductor" || url.pathname === "/traductor/") {',
     '      if (request.method !== "GET" && request.method !== "HEAD") return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } });',
     '      if (!env.ASSETS || typeof env.ASSETS.fetch !== "function") return new Response("Traductor no disponible.", { status: 503 });',
-    '      const assetUrl = new URL("/traductor.html", request.url);',
-    '      const assetRequest = new Request(assetUrl.toString(), request);',
-    '      return env.ASSETS.fetch(assetRequest);',
+    '      return env.ASSETS.fetch(request);',
     '    }',
     ROUTER_ANCHOR
   ].join('\n');
