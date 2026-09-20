@@ -7,6 +7,9 @@ const {LANGUAGES,PROMPT_VERSION}=require('./exportar corpus canonico.js');
 
 const SOURCE_ROOT=path.resolve(process.env.MLS_CANONICAL_ROOT||'content');
 const PUBLIC_DATA_ROOT=path.resolve(process.env.MLS_PUBLIC_DATA_ROOT||'public/data');
+const MAX_COMPAT_INDEX_BYTES=20*1024*1024;
+const INDEX_DEFINITION_CHARS=240;
+const INDEX_SEARCH_BODY_CHARS=160;
 
 const UI_META={
   ingles:{native:'English',flag:'🇬🇧'},
@@ -120,8 +123,11 @@ function buildCanonicalCompatibility(){
       const example=firstExample(article.articleMarkdown);
       const partNum=toRoman(partOrder.get(article.part));
       const chapterNum=String(chapterOrder.get(article.chapter));
-      const searchBody=stripMarkdown(article.articleMarkdown).slice(0,1400);
-      const search=normalizeSearch([article.title,article.part,article.chapter,lead,searchBody].join(' '));
+      // Este índice conserva solo metadata/snippets para compatibilidad de UI.
+      // El full-text completo se construye por separado en la Fase 6.
+      const indexDefinition=lead.slice(0,INDEX_DEFINITION_CHARS);
+      const searchBody=stripMarkdown(article.articleMarkdown).slice(0,INDEX_SEARCH_BODY_CHARS);
+      const search=normalizeSearch([article.title,article.part,article.chapter,indexDefinition,searchBody].join(' '));
       const base={
         n:article.n,
         title:article.title,
@@ -153,9 +159,9 @@ function buildCanonicalCompatibility(){
         partNum,
         chapter:article.chapter,
         chapterNum,
-        definition:lead,
+        definition:indexDefinition,
         search,
-        plain:lead
+        plain:indexDefinition
       });
 
       writeJson(path.join(canonicalSeedsRoot,language.slug,padded(n)+'.json'),{
@@ -179,6 +185,8 @@ function buildCanonicalCompatibility(){
 
   globalIndex.sort((a,b)=>a.volume-b.volume||a.n-b.n);
   const indexJs='window.MLS_META='+JSON.stringify(metas)+';window.MLS_INDEX='+JSON.stringify(globalIndex)+';\n';
+  const indexBytes=Buffer.byteLength(indexJs,'utf8');
+  if(indexBytes>MAX_COMPAT_INDEX_BYTES)fail('public/data/index.js excede el margen seguro de 20 MiB: '+indexBytes+' bytes');
   fs.writeFileSync(path.join(PUBLIC_DATA_ROOT,'index.js'),indexJs,'utf8');
 
   if(fs.existsSync(oldSeedsRoot))fail('public/data/wiki-seeds sobrevivió al reemplazo canónico');
@@ -189,7 +197,7 @@ function buildCanonicalCompatibility(){
     totalEntries:total,
     volumes:ordered.length,
     legacyWikiSeedsPresent:false,
-    indexBytes:Buffer.byteLength(indexJs,'utf8'),
+    indexBytes,
     indexSha256:sha256(indexJs),
     source:'GitHub canonical content/'
   };
@@ -198,7 +206,7 @@ function buildCanonicalCompatibility(){
   return health;
 }
 
-module.exports={buildCanonicalCompatibility,stripMarkdown,firstParagraph,firstExample,toRoman};
+module.exports={buildCanonicalCompatibility,stripMarkdown,firstParagraph,firstExample,toRoman,MAX_COMPAT_INDEX_BYTES,INDEX_DEFINITION_CHARS,INDEX_SEARCH_BODY_CHARS};
 if(require.main===module){
   try{buildCanonicalCompatibility()}catch(error){console.error('ERROR canonical compatibility:',error.message);process.exitCode=1}
 }
