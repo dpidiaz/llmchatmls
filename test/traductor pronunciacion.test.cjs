@@ -117,7 +117,7 @@ test('Translator UI calls the dedicated endpoint and keeps offline pronunciation
   assert.match(html,/fetch\('\/api\/translate'/);
   assert.match(html,/sourceLanguage:sourceLanguage\.value/);
   assert.match(html,/targetLanguage:targetLanguage\.value/);
-  assert.match(html,/Sin Internet, la traducción completa todavía no está disponible/);
+  assert.match(html,/Esta combinación todavía no está preparada para traducirse sin Internet/);
   assert.match(html,/translationResult\.hidden=false/);
   assert.match(html,/translatedText\.textContent=translation/);
 });
@@ -125,7 +125,9 @@ test('Translator UI calls the dedicated endpoint and keeps offline pronunciation
 test('worker route serves the static Translator asset and is idempotent',()=>{
   const source='before\nvar index_default = {\nrouter\n    if (url.pathname.startsWith("/api/wiki/")) {\nafter';
   const patched=installer.patchWorker(source);
-  assert.match(patched,/MLS_TRANSLATOR_ROUTE_V2/);
+  assert.match(patched,/MLS_TRANSLATOR_ROUTE_V3/);
+  assert.match(patched,/MLS_TRANSLATOR_MODEL_PROXY_V1/);
+  assert.match(patched,/url\.pathname\.startsWith\("\/translation-models\/"\)/);
   assert.match(patched,/url\.pathname === "\/api\/translate"/);
   assert.match(patched,/handleTranslatorRequest\(request, env\)/);
   assert.match(patched,/url\.pathname === "\/traductor"/);
