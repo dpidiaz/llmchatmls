@@ -144,6 +144,17 @@ function missingCodes(language) {
   return missing;
 }
 
+function queryCodeDiagnostics(codes) {
+  if (!codes.length) return [];
+  return runD1(
+    'SELECT code, language, n, prompt_version AS promptVersion, provider, model, ' +
+    'audit_provider AS auditProvider, audit_model AS auditModel, generated_at AS generatedAt, ' +
+    'LENGTH(article_markdown) AS articleLength FROM wiki_articles WHERE code IN (' +
+    codes.map(sqlText).join(', ') +
+    ') ORDER BY code, prompt_version'
+  );
+}
+
 function assertCompleteCounts(rows) {
   const actual = new Map(rows.map(row => [String(row.language), Number(row.count)]));
   const problems = [];
@@ -151,7 +162,13 @@ function assertCompleteCounts(rows) {
     const count = actual.get(language.slug) || 0;
     if (count !== language.total) {
       const missing = count < language.total ? missingCodes(language) : [];
-      const detail = missing.length ? ' faltan [' + missing.join(', ') + ']' : '';
+      let detail = missing.length ? ' faltan [' + missing.join(', ') + ']' : '';
+      if (missing.length) {
+        const diagnostics = queryCodeDiagnostics(missing);
+        detail += diagnostics.length
+          ? ' filas existentes=' + JSON.stringify(diagnostics)
+          : ' sin filas existentes en wiki_articles';
+      }
       problems.push(language.slug + ': ' + count + '/' + language.total + detail);
     }
   }
