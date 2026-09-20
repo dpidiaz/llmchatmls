@@ -89,7 +89,8 @@ test('Virtuoso page uses the same lexical and semantic indexes and requires targ
 
 test('Virtuoso browser inline scripts compile without syntax errors',()=>{
   const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
-  const inline=[...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)]
+  const scriptPattern=/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi;
+  const inline=[...html.matchAll(scriptPattern)]
     .map(match=>match[1].trim())
     .filter(Boolean);
   assert.ok(inline.length>=1,'se espera al menos un script inline de Virtuoso');
