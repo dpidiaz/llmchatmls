@@ -1,153 +1,213 @@
-# LLM Chat Application Template
+# MASTER LANGUAGE SYSTEM — Revision 32
 
-A simple, ready-to-deploy chat application template powered by Cloudflare Workers AI. This template provides a clean starting point for building AI chat applications with streaming responses.
+MASTER LANGUAGE SYSTEM (MLS) is a multilingual grammar and language-reference portal covering 10 languages and 10,133 canonical entries.
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/llm-chat-app-template)
+The repository is designed so published editorial knowledge is recoverable from GitHub without depending on Cloudflare D1.
 
-<!-- dash-content-start -->
+## Canonical architecture
 
-## Demo
+The central rule is:
 
-This template demonstrates how to build an AI-powered chat interface using Cloudflare Workers AI with streaming responses. It features:
+> GitHub preserves the knowledge. Infrastructure only serves it.
 
-- Real-time streaming of AI responses using Server-Sent Events (SSE)
-- Easy customization of models and system prompts
-- Support for AI Gateway integration
-- Clean, responsive UI that works on mobile and desktop
+The canonical editorial corpus lives under `content/`.
 
-## Features
+Current canonical totals:
 
-- 💬 Simple and responsive chat interface
-- ⚡ Server-Sent Events (SSE) for streaming responses
-- 🧠 Powered by Cloudflare Workers AI LLMs
-- 🛠️ Built with TypeScript and Cloudflare Workers
-- 📱 Mobile-friendly design
-- 🔄 Maintains chat history on the client
-- 🔎 Built-in Observability logging
-<!-- dash-content-end -->
+| Language | Entries |
+| --- | ---: |
+| Spanish of Guatemala | 930 |
+| English | 766 |
+| Brazilian Portuguese | 1,199 |
+| Italian | 810 |
+| French | 1,159 |
+| German | 1,101 |
+| Japanese | 1,027 |
+| Traditional Chinese / Taiwan Mandarin | 1,016 |
+| Korean | 1,094 |
+| Russian | 1,031 |
+| **Total** | **10,133** |
 
-## Getting Started
+Published entry reads are served from static runtime assets generated from `content/`. D1 is not a source of truth for published articles.
 
-### Prerequisites
+## Repository roles
 
-- [Node.js](https://nodejs.org/) (v18 or newer)
-- [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/install-and-update/)
-- A Cloudflare account with Workers AI access
+- `content/` — canonical R32 editorial corpus.
+- `semantic/` — versioned BGE-M3 semantic index derived from the canonical corpus.
+- `MLS R32 OVERLAY/` — current Worker and frontend source overlays.
+- `scripts/` — deterministic builders, validators, installers and editorial tooling.
+- `test/` — regression, canonical, search, Virtuoso and recovery contracts.
+- `MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz` — sanitized application shell only. It must not contain canonical data, legacy wiki seeds or a bundled backend.
+- `public/` and `src/` — generated deployment artifacts after `npm run predeploy`.
 
-### Installation
+## Search architecture
 
-1. Clone this repository:
+MLS search is language-first.
 
-   ```bash
-   git clone https://github.com/cloudflare/templates.git
-   cd templates/llm-chat-app
-   ```
+Normal retrieval order:
 
-2. Install dependencies:
+1. exact/title signals;
+2. canonical full-text index;
+3. BGE-M3 semantic similarity;
+4. optional Gemma 4 reranking through Virtuoso.
 
-   ```bash
-   npm install
-   ```
+Full-text search remains available when Workers AI is unavailable.
 
-3. Generate Worker type definitions:
-   ```bash
-   npm run cf-typegen
-   ```
+The semantic index currently contains 10,669 chunks across all 10 languages, using `@cf/baai/bge-m3`, 1,024 dimensions and symmetric int8 quantization.
 
-### Development
+The semantic index is stored as static files rather than requiring a vector database.
 
-Start a local development server:
+## Virtuoso
+
+Virtuoso is the MLS librarian.
+
+Virtuoso:
+
+- orients users inside the canonical library;
+- uses candidates produced by lexical and semantic retrieval;
+- validates every candidate against the canonical language catalog before model inference;
+- uses `@cf/google/gemma-4-26b-a4b-it` only to rerank and explain a route;
+- cannot create new entry IDs, titles or deep links;
+- degrades to deterministic canonical candidates if Gemma 4 is unavailable.
+
+Virtuoso is not Profesor IA. Profesor IA explains and teaches; Virtuoso navigates the library.
+
+## Build
+
+Requirements:
+
+- Node.js 24 for CI parity;
+- npm;
+- Wrangler for Cloudflare deployment.
+
+Install dependencies:
 
 ```bash
-npm run dev
+npm ci
 ```
 
-This will start a local server at http://localhost:8787.
+Validate the canonical corpus:
 
-Note: Using Workers AI accesses your Cloudflare account even during local development, which will incur usage charges.
+```bash
+npm run canonical:validate
+```
 
-### Deployment
+Build all deployment assets:
 
-Deploy to Cloudflare Workers:
+```bash
+npm run predeploy
+```
+
+The build recreates canonical runtime shards, compatibility data, full-text indexes, the published semantic index, Virtuoso and the Worker runtime. It first removes extracted bundled data/backend paths so the sanitized shell cannot become a hidden source of truth.
+
+Validate disaster recovery and generated artifacts:
+
+```bash
+npm run recovery:verify
+```
+
+Validate the Cloudflare deployment package without deploying:
+
+```bash
+npm run check
+```
+
+## Disaster recovery from GitHub
+
+A clean recovery should be possible with the repository plus the Cloudflare account configuration needed for deployment.
+
+Recommended recovery sequence:
+
+```bash
+git clone <repository>
+cd llmchatmls
+npm ci
+npm run canonical:validate
+npm run predeploy
+npm run recovery:verify
+npm run test:chat-editorial
+npm run check
+```
+
+After these commands pass, the static corpus, lexical search, semantic assets and Virtuoso frontend/backend have been reconstructed from repository state.
+
+Deployment is a separate action:
 
 ```bash
 npm run deploy
 ```
 
-### Monitor
+Runtime Cloudflare bindings and secrets are operational configuration and are not committed to the repository.
 
-View real-time logs associated with any deployed Worker:
+## Failure behavior
+
+### D1 unavailable
+
+Published entries continue to read from canonical static runtime assets. D1-dependent editorial or mutable operations may fail, but published knowledge must remain readable.
+
+### Workers AI unavailable
+
+- entry reading still works;
+- full-text search still works;
+- semantic query embedding falls back to lexical retrieval;
+- Virtuoso falls back to validated canonical candidates;
+- Profesor IA cannot generate a new AI explanation until Workers AI is available.
+
+### Semantic index missing or stale
+
+`scripts/publicar indice semantico.js` rejects an index whose corpus build ID does not match the current canonical manifest. A changed corpus therefore cannot silently publish stale embeddings.
+
+Regenerate embeddings only when the canonical corpus changes:
 
 ```bash
-npm wrangler tail
+npm run semantic:generate
 ```
 
-## Project Structure
+Then validate and publish through the normal build.
 
-```
-/
-├── public/             # Static assets
-│   ├── index.html      # Chat UI HTML
-│   └── chat.js         # Chat UI frontend script
-├── src/
-│   ├── index.ts        # Main Worker entry point
-│   └── types.ts        # TypeScript type definitions
-├── test/               # Test files
-├── wrangler.jsonc      # Cloudflare Worker configuration
-├── tsconfig.json       # TypeScript configuration
-└── README.md           # This documentation
-```
+## Canonical safety contracts
 
-## How It Works
+The repository tests enforce, among other things:
 
-### Backend
+- exactly 10,133 R32 canonical entries;
+- SHA-256 integrity against the canonical manifest;
+- no `cloudflare-legacy` canonical providers;
+- no published-reader D1 fallback;
+- no legacy wiki-seed fallback;
+- language filtering before search ranking;
+- full-text operation without AI;
+- semantic fallback to lexical search;
+- semantic index/corpus build-ID agreement;
+- Virtuoso candidate validation before Gemma 4;
+- Virtuoso Gemma 4 non-thinking reranking;
+- deterministic Virtuoso fallback;
+- sanitized shell bundle;
+- rebuild/recovery contract.
 
-The backend is built with Cloudflare Workers and uses the Workers AI platform to generate responses. The main components are:
+## CI and production
 
-1. **API Endpoint** (`/api/chat`): Accepts POST requests with chat messages and streams responses
-2. **Streaming**: Uses Server-Sent Events (SSE) for real-time streaming of AI responses
-3. **Workers AI Binding**: Connects to Cloudflare's AI service via the Workers AI binding
+`.github/workflows/produccion.yml` validates pull requests with:
 
-### Frontend
+1. dependency installation;
+2. complete MLS test suite;
+3. canonical predeploy build;
+4. disaster recovery verification;
+5. deployment contract tests;
+6. Wrangler dry-run.
 
-The frontend is a simple HTML/CSS/JavaScript application that:
+Production deployment remains an explicit workflow-dispatch action.
 
-1. Presents a chat interface
-2. Sends user messages to the API
-3. Processes streaming responses in real-time
-4. Maintains chat history on the client side
+## Cost policy
 
-## Customization
+The intended steady-state architecture is FREE ONLY whenever Cloudflare's free allocations are sufficient.
 
-### Changing the Model
+No paid external AI provider is a required fallback for published reading, search or Virtuoso navigation.
 
-To use a different AI model, update the `MODEL_ID` constant in `src/index.ts`. You can find available models in the [Cloudflare Workers AI documentation](https://developers.cloudflare.com/workers-ai/models/).
+## Editorial source of truth
 
-### Using AI Gateway
+Do not edit generated `public/data/` assets as canonical content.
 
-The template includes commented code for AI Gateway integration, which provides additional capabilities like rate limiting, caching, and analytics.
+Editorial changes belong in `content/`, followed by validation and deterministic rebuilds.
 
-To enable AI Gateway:
+If the canonical corpus changes, regenerate any derived index whose build ID no longer matches the canonical manifest.
 
-1. [Create an AI Gateway](https://dash.cloudflare.com/?to=/:account/ai/ai-gateway) in your Cloudflare dashboard
-2. Uncomment the gateway configuration in `src/index.ts`
-3. Replace `YOUR_GATEWAY_ID` with your actual AI Gateway ID
-4. Configure other gateway options as needed:
-   - `skipCache`: Set to `true` to bypass gateway caching
-   - `cacheTtl`: Set the cache time-to-live in seconds
-
-Learn more about [AI Gateway](https://developers.cloudflare.com/ai-gateway/).
-
-### Modifying the System Prompt
-
-The default system prompt can be changed by updating the `SYSTEM_PROMPT` constant in `src/index.ts`.
-
-### Styling
-
-The UI styling is contained in the `<style>` section of `public/index.html`. You can modify the CSS variables at the top to quickly change the color scheme.
-
-## Resources
-
-- [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
-- [Cloudflare Workers AI Documentation](https://developers.cloudflare.com/workers-ai/)
-- [Workers AI Models](https://developers.cloudflare.com/workers-ai/models/)
