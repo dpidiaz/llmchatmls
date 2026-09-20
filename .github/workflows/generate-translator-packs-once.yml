@@ -1,0 +1,52 @@
+name: Generate Translator packs once
+
+on:
+  push:
+    branches:
+      - feature/translator-pronunciation-offline
+    paths:
+      - ".github/workflows/generate-translator-packs-once.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/translator-pronunciation-offline
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install Bergamot runtime exactly
+        run: npm install --save-dev --save-exact @browsermt/bergamot-translator@0.4.9
+      - name: Generate versioned offline pack manifests
+        run: node 'scripts/generar paquetes traductor.js'
+      - name: Show generated sizes
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const p=require('./MLS R32 OVERLAY/translator/packs.json');
+          console.log('PACK_VERSION',p.packVersion);
+          console.log('RUNTIME_MIB',(p.runtimeBytes/1048576).toFixed(2));
+          for(const item of Object.values(p.languages)){
+            console.log('PACK',item.slug,(item.compressedBytes/1048576).toFixed(2)+' MiB compressed',(item.uncompressedBytes/1048576).toFixed(2)+' MiB uncompressed');
+          }
+          NODE
+      - name: Commit generated package metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json 'MLS R32 OVERLAY/translator/registry.json' 'MLS R32 OVERLAY/translator/packs.json'
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+          else
+            git commit -m "Generate Translator offline pack manifests"
+            git push origin HEAD:feature/translator-pronunciation-offline
+          fi
