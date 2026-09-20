@@ -1,0 +1,34 @@
+name: Despliegue canonico MLS temporal
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/despliegue-canonico-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-canonical-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar suite MLS
+        run: npm run test:chat-editorial
+      - name: Construir runtime canonico
+        run: npm run predeploy
+      - name: Verificar contrato de despliegue
+        run: node --test test/deploy-contract.test.cjs
+      - name: Dry run Cloudflare
+        run: npm run check
+      - name: Desplegar runtime GitHub-first
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
