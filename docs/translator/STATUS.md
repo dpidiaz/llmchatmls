@@ -9,8 +9,9 @@
 - T4 Language Packs: COMPLETE técnico
 - T5 Traducción offline: COMPLETE técnico
 - T6 Mejora online: COMPLETE técnico
-- T7 Hardening: IN PROGRESS
-- T8 Certificación: PENDING
+- T7 Hardening: COMPLETE
+- T8 Certificación técnica: PASS (`35536193278`)
+- T8 QA físico Safari/iPhone: PENDING
 
 ## Rama
 
@@ -34,7 +35,7 @@ NO desplegado.
 
 ## Bloqueo para Definition of Done total
 
-Se requiere QA real en Safari/iPhone, especialmente:
+La implementación técnica está certificada. Antes de declarar el Definition of Done físico completo se requiere QA real en Safari/iPhone, especialmente:
 - modo avión;
 - audio local;
 - velocidad lenta;
@@ -42,3 +43,23 @@ Se requiere QA real en Safari/iPhone, especialmente:
 - presión de memoria.
 
 La implementación técnica puede quedar lista para PR antes de esta prueba, pero no debe declararse certificación física de iPhone sin evidencia.
+
+
+## Evidencia técnica final
+
+Run: `35536193278`
+
+- Translator + offline tests: PASS
+- test:chat-editorial: PASS
+- qa:baseline: PASS
+- predeploy: PASS
+- pack policy: PASS
+- recovery:verify: PASS
+- deploy-contract: PASS
+- Wrangler dry-run: PASS
+- Chromium 9 viewports: PASS
+- 200% / 400% reflow: PASS
+- App Shell offline reload: PASS
+- `content/`: sin cambios
+
+Producción permanece sin desplegar para este módulo.
