@@ -11,7 +11,7 @@ test('el atlas se inserta en el lector real sin sustituir navegación existente'
   const patched=patchReader(readerSource());
   assert.match(patched,/id="mlsAtlasDialog"/);
   assert.match(patched,/id="mlsAtlasOpen"/);
-  assert.match(patched,/atlasBuild\(vol,e,m\)/);
+  assert.match(patched,/atlasBuild\\(catalog,e,m\\)/);
   assert.match(patched,/atlasBind\(\)/);
   assert.match(patched,/Ver temas de este capítulo/);
   assert.match(patched,/Profesor IA/);
