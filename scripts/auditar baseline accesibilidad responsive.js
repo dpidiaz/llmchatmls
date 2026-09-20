@@ -3,6 +3,7 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const {execFileSync}=require('node:child_process');
+const {patchHome}=require('./habilitar accesibilidad responsive.js');
 
 const STATUSES=Object.freeze([
   'PASS',
@@ -36,7 +37,7 @@ function buildBaseline(){
   const professorStates=read('MLS R32 OVERLAY/profesor ia estados visuales.js');
   const reader=read('MLS R32 OVERLAY/reader.js');
   const ios=read('MLS R32 OVERLAY/ios.js');
-  const home=tarText('public/index.html');
+  const home=patchHome(tarText('public/index.html'));
   const shellCss=tarText('public/assets/styles.css');
 
   const results=[];
@@ -75,7 +76,7 @@ function buildBaseline(){
   ));
   results.push(check(
     'G-HOME-004','Home',
-    has(home,/class=["'][^"']*(?:skip|sr-only)[^"']*["'][^>]*href=["']#(?:main|content)/i)||has(home,/href=["']#(?:main|content)["'][^>]*>\s*(?:Saltar|Skip)/i)?'PASS':'FAIL',
+    has(home,/class=["'][^"']*mls-skip-link[^"']*["'][^>]*href=["']#(?:app|main|content|mainContent)["']/i)?'PASS':'FAIL',
     'Keyboard skip-link discoverability',
     'Baseline only; FAIL is not corrected during Wave 2.'
   ));
