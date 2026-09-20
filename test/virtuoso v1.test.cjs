@@ -4,15 +4,16 @@ const fs=require('node:fs');
 const {execFileSync}=require('node:child_process');
 const test=require('node:test');
 const assert=require('node:assert/strict');
-const {patchWorker,patchNavigation,BACKEND_BLOCK,API_MARKER}=require('../scripts/habilitar virtuoso.js');
+const {patchWorker,patchNavigation,patchAppNavigation,BACKEND_BLOCK,API_MARKER}=require('../scripts/habilitar virtuoso.js');
 
 const archive='MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz';
 function shellHome(){return execFileSync('tar',['-xOzf',archive,'public/index.html'],{encoding:'utf8'})}
+function shellApp(){return execFileSync('tar',['-xOzf',archive,'public/js/app.js'],{encoding:'utf8'})}
 
 test('all public Buscar entry points open Virtuoso without exposing a separate Virtuoso nav item',()=>{
   const original=shellHome();
   const searchLinks=[...original.matchAll(/<a\b[^>]*href=(["'])#search[^"']*\1[^>]*>[\s\S]*?<\/a>/gi)].map(match=>match[0]);
-  assert.ok(searchLinks.length>=3,'se esperan al menos header, sidebar y CTA de portada');
+  assert.ok(searchLinks.length>=3,'se esperan header, sidebar y navegación móvil');
   for(const link of searchLinks)assert.match(link,/Buscar/i);
 
   const patched=patchNavigation(original);
@@ -23,6 +24,16 @@ test('all public Buscar entry points open Virtuoso without exposing a separate V
   assert.doesNotMatch(patched,/href=(["'])#search[^"']*\1/i);
   assert.doesNotMatch(routed.join('\n'),/>\s*Virtuoso\s*<\/a>/i);
   assert.equal(patchNavigation(patched),patched);
+});
+
+test('home hero Buscar CTA opens Virtuoso instead of the old hash search',()=>{
+  const original=shellApp();
+  assert.match(original,/class="btn primary big-action" onclick="location\.hash='#search'">⌕ Buscar<\/button>/);
+  const patched=patchAppNavigation(original);
+  assert.match(patched,/class="btn primary big-action" onclick="location\.href='\/virtuoso'">⌕ Buscar<\/button>/);
+  assert.doesNotMatch(patched,/class="btn primary big-action" onclick="location\.hash='#search'">⌕ Buscar<\/button>/);
+  assert.match(patched,/onclick="location\.hash='#entry=\$\{recent\.code\}'">↺ Seguir leyendo<\/button>/);
+  assert.equal(patchAppNavigation(patched),patched);
 });
 
 test('Virtuoso backend routes page and API through the current worker',()=>{
