@@ -1,4 +1,4 @@
-name: Probe Bergamot WebKit pivot once
+name: Probe Bergamot WebKit current-registry pivot once
 
 on:
   push:
@@ -39,6 +39,7 @@ jobs:
             const translator=new LatencyOptimisedTranslator({
               workerUrl:'/bergamot/worker/translator-worker.js',
               pivotLanguage:'en',
+              registryUrl:'https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json',
               downloadTimeout:180000
             });
             async function run(from,to,text){
