@@ -1893,6 +1893,62 @@ function injectAutomaticAiMaterialization(response) {
 }
 __name(injectAutomaticAiMaterialization, "injectAutomaticAiMaterialization");
 
+
+var MLS_SEMANTIC_EMBEDDING_MODEL = "@cf/baai/bge-m3";
+function mlsSemanticEmbeddingVector(result) {
+  const data = result?.data;
+  if (Array.isArray(data) && Array.isArray(data[0])) return data[0].map(Number);
+  if (Array.isArray(data) && Array.isArray(result?.shape) && result.shape.length === 2) {
+    const width = Number(result.shape[1]);
+    return data.slice(0, width).map(Number);
+  }
+  throw new Error("Respuesta de embedding semántico no reconocida.");
+}
+__name(mlsSemanticEmbeddingVector, "mlsSemanticEmbeddingVector");
+function mlsNormalizeEmbedding(vector) {
+  let sum = 0;
+  for (const value of vector) sum += Number(value) * Number(value);
+  const norm = Math.sqrt(sum) || 1;
+  return vector.map((value) => Number(value) / norm);
+}
+__name(mlsNormalizeEmbedding, "mlsNormalizeEmbedding");
+async function handleSemanticEmbeddingRequest(request, env) {
+  if (request.method !== "POST") {
+    return new Response("Method not allowed", { status: 405, headers: { allow: "POST" } });
+  }
+  try {
+    const contentType = request.headers.get("content-type") || "";
+    if (!contentType.toLowerCase().includes("application/json")) {
+      return Response.json({ ok: false, error: "Se requiere application/json." }, { status: 415 });
+    }
+    const body = await request.json();
+    const query = String(body?.query || "").replace(/\s+/g, " ").trim();
+    if (query.length < 2 || query.length > 800) {
+      return Response.json({ ok: false, error: "La consulta debe tener entre 2 y 800 caracteres." }, { status: 400 });
+    }
+    const result = await env.AI.run(MLS_SEMANTIC_EMBEDDING_MODEL, { text: [query] });
+    const vector = mlsNormalizeEmbedding(mlsSemanticEmbeddingVector(result));
+    if (!vector.length) throw new Error("Embedding vacío.");
+    return Response.json({
+      ok: true,
+      model: MLS_SEMANTIC_EMBEDDING_MODEL,
+      dimensions: vector.length,
+      vector
+    }, { headers: { "cache-control": "private, max-age=300" } });
+  } catch (error) {
+    console.warn("MLS semantic embedding unavailable:", error);
+    return Response.json({
+      ok: false,
+      semanticUnavailable: true,
+      error: "La búsqueda semántica no está disponible temporalmente."
+    }, {
+      status: 503,
+      headers: { "cache-control": "no-store", "retry-after": "60" }
+    });
+  }
+}
+__name(handleSemanticEmbeddingRequest, "handleSemanticEmbeddingRequest");
+
 var index_default = {
   async fetch(request, env, _ctx) {
     const url = new URL(request.url);
@@ -1929,6 +1985,9 @@ var index_default = {
         status: 405,
         headers: { allow: "POST" }
       });
+    }
+    if (url.pathname === "/api/search/embedding") {
+      return handleSemanticEmbeddingRequest(request, env);
     }
     if (url.pathname === "/api/wiki/articles") {
       if (request.method !== "GET") {
