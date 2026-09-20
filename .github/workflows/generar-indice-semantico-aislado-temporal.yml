@@ -54,14 +54,32 @@ jobs:
 
           npx wrangler deploy --config wrangler.semantic-batch-temp.jsonc
 
-          for i in 1 2 3 4 5 6 7 8; do
-            status=$(curl --silent --show-error               --output /tmp/preflight.json               --write-out '%{http_code}'               -X POST "$MLS_EMBEDDING_ENDPOINT"               -H "authorization: Bearer $GEN_KEY"               -H 'content-type: application/json'               --data '{"texts":["preflight semántico MLS","segundo preflight"]}')
-            if [ "$status" = "200" ]; then break; fi
-            sleep 2
+          status="000"
+          curl_status=1
+          for i in $(seq 1 20); do
+            set +e
+            status=$(curl --silent --show-error \
+              --output /tmp/preflight.json \
+              --write-out '%{http_code}' \
+              -X POST "$MLS_EMBEDDING_ENDPOINT" \
+              -H "authorization: Bearer $GEN_KEY" \
+              -H 'content-type: application/json' \
+              --data '{"texts":["preflight semántico MLS","segundo preflight"]}')
+            curl_status=$?
+            set -e
+            if [ "$curl_status" -eq 0 ] && [ "$status" = "200" ]; then
+              break
+            fi
+            echo "Preflight intento $i/20: curl=$curl_status HTTP=$status"
+            cat /tmp/preflight.json 2>/dev/null || true
+            sleep 3
           done
 
-          cat /tmp/preflight.json
-          test "$status" = "200"
+          cat /tmp/preflight.json 2>/dev/null || true
+          if [ "$curl_status" -ne 0 ] || [ "$status" != "200" ]; then
+            echo "::error::Worker semántico aislado no quedó disponible tras 20 intentos (curl=$curl_status HTTP=$status)"
+            exit 1
+          fi
 
           node - <<'NODE'
           const fs=require('node:fs');
@@ -154,12 +172,33 @@ jobs:
           git log --oneline -18 origin/mls-semantic-index-generation
           du -sh semantic 2>/dev/null || true
 
-      - name: Eliminar Worker temporal aislado
+      - name: Neutralizar Worker temporal aislado
         if: always()
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         shell: bash
         run: |
           set +e
-          npx wrangler delete --name mls-semantic-generator-temp --force
+          cat > /tmp/semantic-tombstone.mjs <<'EOF'
+          export default {
+            async fetch() {
+              return new Response('Not found', { status: 404, headers: { 'cache-control': 'no-store' } });
+            }
+          };
+          EOF
+          cat > /tmp/wrangler-semantic-tombstone.jsonc <<'EOF'
+          {
+            "name": "mls-semantic-generator-temp",
+            "main": "/tmp/semantic-tombstone.mjs",
+            "compatibility_date": "2026-09-20",
+            "workers_dev": true
+          }
+          EOF
+          npx wrangler deploy --config /tmp/wrangler-semantic-tombstone.jsonc
+          cleanup_status=$?
+          if [ "$cleanup_status" -ne 0 ]; then
+            echo "::warning::No se pudo neutralizar el Worker temporal; la clave efímera del run se perderá igualmente."
+          else
+            echo "Worker temporal neutralizado con 404."
+          fi
           exit 0
