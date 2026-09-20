@@ -1,0 +1,35 @@
+name: UXUI E6 E7 Validation
+
+on:
+  push:
+    branches:
+      - uxui-r1-offline
+    paths:
+      - ".github/workflows/uxui-e67-validation-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Offline resilience UX
+        run: node --test 'test/offline resilience.test.cjs' 'test/offline resilience behavior.test.cjs'
+      - name: Preserve accessibility baseline
+        run: node --test 'test/accessibility responsive baseline.test.cjs'
+      - run: npm run predeploy
+      - name: Verify published offline overlays
+        shell: bash
+        run: |
+          cmp 'MLS R32 OVERLAY/sw.js' public/sw.js
+          cmp 'MLS R32 OVERLAY/ios.js' public/js/ios.js
+      - run: npm run recovery:verify
+      - run: npm run check
