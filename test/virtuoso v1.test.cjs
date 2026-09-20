@@ -113,8 +113,16 @@ test('Virtuoso user-facing copy hides implementation jargon and explains degrade
   assert.match(html,/Preparando una selección breve/);
   assert.doesNotMatch(html,/Orientación automática no disponible; se muestran los mejores resultados de la búsqueda híbrida/);
   assert.match(BACKEND_BLOCK,/Coincide con tu consulta dentro de la biblioteca de MLS/);
-  assert.match(BACKEND_BLOCK,/Virtuoso no está disponible temporalmente/);
+  assert.match(BACKEND_BLOCK,/Estas son las coincidencias más relevantes encontradas en la biblioteca/);
   assert.doesNotMatch(BACKEND_BLOCK,/se muestran los mejores resultados híbridos disponibles/);
+});
+
+test('Virtuoso degraded mode does not duplicate its explanation',()=>{
+  const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
+  assert.match(html,/const degradedText='Virtuoso no está disponible temporalmente/);
+  assert.match(html,/showDegraded=payload\?\.degraded&&normalize\(summaryText\)!==normalize\(degradedText\)/);
+  assert.match(BACKEND_BLOCK,/Estas son las coincidencias más relevantes encontradas en la biblioteca/);
+  assert.doesNotMatch(BACKEND_BLOCK,/Virtuoso no está disponible temporalmente\. Mientras tanto, te mostramos las coincidencias más relevantes de la biblioteca/);
 });
 
 test('Virtuoso consumes Visual Foundation tokens locally without changing shell navigation',()=>{
