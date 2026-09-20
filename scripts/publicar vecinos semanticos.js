@@ -74,16 +74,19 @@ function validateRelatedSource(root=SOURCE_ROOT,canonicalRoot=CANONICAL_ROOT){
   return {complete:true,manifest,buildId,totalEntries};
 }
 
-function publishRelated(){
-  const result=validateRelatedSource();
-  removePublished();
+function publishRelated(options={}){
+  const sourceRoot=path.resolve(options.sourceRoot||SOURCE_ROOT);
+  const publicRoot=path.resolve(options.publicRoot||PUBLIC_ROOT);
+  const canonicalRoot=path.resolve(options.canonicalRoot||CANONICAL_ROOT);
+  const result=validateRelatedSource(sourceRoot,canonicalRoot);
+  removePublished(publicRoot);
   if(!result.complete){
     console.log(JSON.stringify({published:false,reason:result.reason}));
     return {published:false,reason:result.reason};
   }
-  fs.mkdirSync(path.dirname(PUBLIC_ROOT),{recursive:true});
-  fs.cpSync(SOURCE_ROOT,PUBLIC_ROOT,{recursive:true});
-  fs.writeFileSync(path.join(PUBLIC_ROOT,'publish-health.json'),JSON.stringify({
+  fs.mkdirSync(path.dirname(publicRoot),{recursive:true});
+  fs.cpSync(sourceRoot,publicRoot,{recursive:true});
+  fs.writeFileSync(path.join(publicRoot,'publish-health.json'),JSON.stringify({
     ok:true,
     standard:'MLS R32',
     promptVersion:'32.0',
