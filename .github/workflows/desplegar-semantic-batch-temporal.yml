@@ -28,16 +28,30 @@ jobs:
         run: |
           npm run predeploy
           npm run check
-      - name: Configurar secret temporal y desplegar
+      - name: Inyectar digest temporal, desplegar y probar
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
           GEN_KEY=$(printf '%s' "${CLOUDFLARE_API_TOKEN}:mls-semantic-batch-v1" | sha256sum | awk '{print $1}')
+          GEN_HASH=$(printf '%s' "$GEN_KEY" | sha256sum | awk '{print $1}')
           echo "::add-mask::$GEN_KEY"
-          printf '%s' "$GEN_KEY" | npx wrangler secret put SEMANTIC_GENERATION_KEY
+
+          node - "$GEN_HASH" <<'NODE'
+          const fs=require('node:fs');
+          const hash=process.argv[2];
+          const file='src/index.js';
+          let source=fs.readFileSync(file,'utf8');
+          const marker='__SEMANTIC_GENERATION_KEY_SHA256__';
+          if(!source.includes(marker))throw new Error('No se encontró placeholder de digest semántico.');
+          source=source.replaceAll(marker,hash);
+          fs.writeFileSync(file,source);
+          NODE
+
+          npm run check
           npm run deploy
+
           status=$(curl --silent --show-error             --output /tmp/batch.json             --write-out '%{http_code}'             -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/internal/semantic-batch'             -H "authorization: Bearer $GEN_KEY"             -H 'content-type: application/json'             --data '{"texts":["prueba semántica uno","prueba semántica dos"]}')
           echo "batch_http_status=$status"
           test "$status" = "200"
