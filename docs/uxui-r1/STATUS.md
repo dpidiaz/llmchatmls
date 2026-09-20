@@ -44,14 +44,20 @@ Branch: uxui-r1-offline
 Dependencies: respetar PWA/cache existentes
 
 ### Chat F — AI Experience
-Status: READY — VISUAL FOUNDATION AVAILABLE
+Status: CHECKPOINT 1 INTEGRATED
 Branch: uxui-r1-ai-experience
-Dependencies: consume shared tokens/primitives where appropriate; no modificar modelos/proveedores
+PR: #106
+Integrated commit: ecce97f2f7634badf2f03742e9cd1859828766c9
+Delivered: humanized Virtuoso/Profesor IA UX, Visual Foundation consumption, focus-visible in Virtuoso
+Dependencies: next checkpoint must start from current integration
 
 ### Chat G — Accessibility & Responsive QA
-Status: BASELINE ONLY
+Status: BASELINE INTEGRATED — OBSERVATION MODE
 Branch: uxui-r1-accessibility
-Dependencies: QA correctivo transversal después de integración A–F
+PR: #107
+Baseline commit: 90c8f9ba6017ccf29407d59e3051700e33331671
+Baseline counts: PASS 18 / FAIL 5 / MANUAL 7 / BLOCKED 1 / N/A 1
+Dependencies: pase correctivo transversal después de integración A–F
 
 ## Formato obligatorio de checkpoint
 Cada worker debe reportar:

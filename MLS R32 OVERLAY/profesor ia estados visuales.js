@@ -2,12 +2,12 @@
 const VERSION='1.0',STYLE_ID='mlsProfessorVisualStatesStyles';
 const LABELS={ready:'Listo',thinking:'Pensando',responding:'Respondiendo',offline:'Sin conexión',quota:'Límite temporal',retry:'Listo para reintentar','temporary-error':'Error temporal'};
 const STYLE_TEXT=`
-#aiTutorModal[data-ai-state="thinking"] .ai-status,#aiTutorModal[data-ai-state="responding"] .ai-status{background:#eef5f8;color:#244555}
-#aiTutorModal[data-ai-state="offline"] .ai-status{background:#f5f1e8;color:#55472d}
-#aiTutorModal[data-ai-state="quota"] .ai-status{background:#f7f0e5;color:#5b4521}
+#aiTutorModal[data-ai-state="thinking"] .ai-status,#aiTutorModal[data-ai-state="responding"] .ai-status{background:var(--mls-teaching-accent-bg,#eef5f8);color:#244555}
+#aiTutorModal[data-ai-state="offline"] .ai-status{background:var(--mls-surface-warm-light,#f5f1e8);color:#55472d}
+#aiTutorModal[data-ai-state="quota"] .ai-status{background:var(--mls-surface-muted-light,#f7f0e5);color:#5b4521}
 #aiTutorModal[data-ai-state="retry"] .ai-status,#aiTutorModal[data-ai-state="temporary-error"] .ai-status{background:#fff1ed;color:#64281f}
 #aiTutorModal[data-ai-state="thinking"] [data-ai-send],#aiTutorModal[data-ai-state="responding"] [data-ai-send]{opacity:.72}
-#aiTutorModal [data-ai-retry]{min-height:44px;margin-left:10px}
+#aiTutorModal [data-ai-retry]{min-height:var(--mls-control-height,44px);margin-left:10px}
 `;
 function normalize(value){return String(value||'').replace(/\s+/g,' ').trim();}
 function stateFromSnapshot(snapshot={}){

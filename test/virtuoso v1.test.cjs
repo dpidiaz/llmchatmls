@@ -87,6 +87,28 @@ test('Virtuoso page uses the same lexical and semantic indexes and requires targ
 
 test('Virtuoso remains orientation, not Professor IA',()=>{
   const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
-  assert.match(html,/Profesor IA sigue siendo quien enseña y practica/);
+  assert.match(html,/Virtuoso conoce la biblioteca de MLS/);
+  assert.match(html,/Profesor IA puede ayudarte a comprenderla y practicarla/);
   assert.match(BACKEND_BLOCK,/Tu función es orientar dentro de la biblioteca, no enseñar el tema ni sustituir al Profesor IA/);
+});
+
+test('Virtuoso user-facing copy hides implementation jargon and explains degraded mode in human language',()=>{
+  const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
+  assert.match(html,/te ayuda a encontrar por dónde empezar dentro de la biblioteca/);
+  assert.match(html,/Virtuoso no está disponible temporalmente/);
+  assert.match(html,/Preparando una selección breve/);
+  assert.doesNotMatch(html,/Orientación automática no disponible; se muestran los mejores resultados de la búsqueda híbrida/);
+  assert.match(BACKEND_BLOCK,/Coincide con tu consulta dentro de la biblioteca de MLS/);
+  assert.match(BACKEND_BLOCK,/Virtuoso no está disponible temporalmente/);
+  assert.doesNotMatch(BACKEND_BLOCK,/se muestran los mejores resultados híbridos disponibles/);
+});
+
+test('Virtuoso consumes Visual Foundation tokens locally without changing shell navigation',()=>{
+  const html=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
+  assert.match(html,/--mls-font-sans/);
+  assert.match(html,/--mls-surface-canvas-light/);
+  assert.match(html,/--mls-radius-xl/);
+  assert.match(html,/--mls-control-height/);
+  assert.match(html,/--mls-focus-color/);
+  assert.match(html,/focus-visible/);
 });
