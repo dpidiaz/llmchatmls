@@ -23,6 +23,7 @@
   };
   const ALL_LANGUAGES=Object.keys(LANGUAGES);
   let verifiedState={status:'checking',savedLanguages:[],missingLanguages:[],savedAt:null};
+  let lastMissingContentUrl='';
 
   const isStandalone=()=>window.matchMedia?.('(display-mode: standalone)').matches||window.navigator.standalone===true;
   const isIOS=()=>/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
@@ -114,13 +115,29 @@
   const hasLanguage=slug=>verifiedState.savedLanguages.includes(slug);
 
   function installSteps(){return `<div class="install-help"><h2>Instalar en iPhone</h2><ol><li>Abre esta página en <strong>Safari</strong>.</li><li>Toca <strong>Compartir</strong>.</li><li>Toca <strong>Añadir a pantalla de inicio</strong>.</li><li>Abre el icono <strong>MLS Gramática</strong>.</li><li>Ve a <strong>Más → Configuración → Usar sin Internet</strong>.</li><li>Elige los idiomas que quieres guardar y toca <strong>Preparar selección</strong>.</li></ol><p>La biblioteca descargada funciona sin Internet. Las funciones de IA necesitan conexión.</p><button class="btn primary" data-install-close>Entendido</button></div>`}
-  function showInstallHelp(){const ov=document.getElementById('offlineOverlay');if(!ov)return;ov.hidden=false;ov.innerHTML=installSteps();ov.querySelector('[data-install-close]').onclick=()=>{ov.hidden=true;ov.innerHTML=''}}
+  function configureOverlay(ov,{role='dialog',live='polite',modal=false}={}){
+    if(!ov)return null;
+    ov.hidden=false;
+    ov.setAttribute('role',role);
+    ov.setAttribute('aria-live',live);
+    if(modal)ov.setAttribute('aria-modal','true');else ov.removeAttribute('aria-modal');
+    return ov;
+  }
+  function clearOverlay(){
+    const ov=document.getElementById('offlineOverlay');if(!ov)return;
+    ov.hidden=true;ov.innerHTML='';ov.removeAttribute('role');ov.removeAttribute('aria-live');ov.removeAttribute('aria-modal');
+  }
+  function focusOverlayAction(ov){setTimeout(()=>ov?.querySelector('button,[href],[tabindex]:not([tabindex="-1"])')?.focus?.(),0)}
+  function showInstallHelp(){const ov=configureOverlay(document.getElementById('offlineOverlay'),{role:'dialog',live:'polite',modal:true});if(!ov)return;ov.innerHTML=installSteps();focusOverlayAction(ov);ov.querySelector('[data-install-close]').onclick=clearOverlay}
 
   function statusMarkup(){
     if(location.protocol==='file:')return `<div class="offline-status warn"><strong>Para instalarla como app</strong><span>Ábrela desde Safari usando una dirección HTTPS.</span></div>`;
     if(verifiedState.status==='checking')return `<div class="offline-status"><strong>Comprobando biblioteca offline…</strong><span>Verificando lo que está realmente guardado en este dispositivo.</span></div>`;
     if(verifiedState.status==='unsupported')return `<div class="offline-status warn"><strong>Modo offline no disponible</strong><span>Este navegador no permite guardar la biblioteca localmente.</span></div>`;
-    if(verifiedState.status==='partial')return `<div class="offline-status warn"><strong>Biblioteca incompleta</strong><span>Algunos archivos guardados ya no están disponibles. Vuelve a preparar los idiomas afectados.</span></div>`;
+    if(verifiedState.status==='partial'){
+      const affected=verifiedState.missingLanguages.map(slug=>LANGUAGES[slug]?.label).filter(Boolean);
+      return `<div class="offline-status warn"><strong>Biblioteca incompleta</strong><span>${affected.length?'Falta contenido de '+affected.join(', ')+'. ':'Algunos archivos guardados ya no están disponibles. '}Vuelve a preparar esos idiomas cuando tengas conexión.</span></div>`;
+    }
     if(isReady()){
       const count=verifiedState.savedLanguages.length;
       return `<div class="offline-status ready"><strong>✓ Biblioteca disponible sin Internet</strong><span>${count===10?'Los 10 idiomas':count+' idioma'+(count===1?'':'s')} están verificados en este dispositivo. Las funciones de IA necesitan conexión.</span></div>`;
@@ -139,9 +156,9 @@
   function homeCard(){if(location.protocol==='file:'||isReady())return '';return `<section class="iphone-setup-card" aria-label="Preparar uso sin Internet"><div><strong>¿Lo usarás sin Internet?</strong><span>Guarda la biblioteca que necesites en este dispositivo.</span></div><button class="btn primary" type="button" data-offline-all>Preparar</button></section>`}
 
   function setOverlay(done,total,label='Guardando la biblioteca…'){
-    const ov=document.getElementById('offlineOverlay');if(!ov)return;
-    ov.hidden=false;const pct=Math.round(done/Math.max(1,total)*100);
-    ov.innerHTML=`<div class="offline-progress-card"><div class="offline-progress-icon">MLS</div><h2>${label}</h2><p>Mantén esta pantalla abierta.</p><div class="progress-track"><span style="width:${pct}%"></span></div><strong>${pct}%</strong><small>${done} de ${total} archivos</small></div>`;
+    const ov=configureOverlay(document.getElementById('offlineOverlay'),{role:'status',live:'polite'});if(!ov)return;
+    const pct=Math.round(done/Math.max(1,total)*100);
+    ov.innerHTML=`<div class="offline-progress-card"><div class="offline-progress-icon" aria-hidden="true">MLS</div><h2>${label}</h2><p>Mantén esta pantalla abierta.</p><div class="progress-track" role="progressbar" aria-label="Progreso de descarga" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div><strong>${pct}%</strong><small>${done} de ${total} archivos</small></div>`;
   }
 
   function selectedLanguages(){
@@ -174,10 +191,10 @@
       await verifyOfflineState();
       const used=await estimate();
       setOverlay(paths.length,paths.length,'✓ Biblioteca preparada');
-      setTimeout(()=>{const ov=document.getElementById('offlineOverlay');if(ov){ov.hidden=true;ov.innerHTML=''};if(location.hash.startsWith('#settings'))MLS.pages.settings?.();MLS.toast(`Biblioteca verificada${used?' · '+used:''}`,2600)},1000);
+      setTimeout(()=>{clearOverlay();if(location.hash.startsWith('#settings'))MLS.pages.settings?.();MLS.toast(`Biblioteca verificada${used?' · '+used:''}`,2600)},1000);
     }catch(err){
       await verifyOfflineState().catch(()=>{});
-      const ov=document.getElementById('offlineOverlay');if(ov){ov.hidden=false;ov.innerHTML=`<div class="offline-progress-card"><h2>No se pudo terminar</h2><p>Comprueba la conexión y vuelve a intentarlo. Lo que ya estaba verificado se conserva.</p><small>${String(err.message||err)}</small><button class="btn primary" data-offline-close>Cerrar</button></div>`;ov.querySelector('[data-offline-close]').onclick=()=>{ov.hidden=true;ov.innerHTML=''}}
+      const ov=configureOverlay(document.getElementById('offlineOverlay'),{role:'alertdialog',live:'assertive',modal:true});if(ov){ov.innerHTML=`<div class="offline-progress-card"><h2>No se pudo terminar</h2><p>${navigator.onLine?'Comprueba la conexión y vuelve a intentarlo.':'No hay conexión. Vuelve a intentarlo cuando estés en línea.'} Lo que ya estaba verificado se conserva.</p><small>${String(err.message||err)}</small><button class="btn primary" data-offline-retry>Reintentar</button><button class="btn" data-offline-close>Cerrar</button></div>`;focusOverlayAction(ov);ov.querySelector('[data-offline-retry]').onclick=()=>{clearOverlay();prepare(slugs)};ov.querySelector('[data-offline-close]').onclick=clearOverlay}
     }finally{try{await wake?.release?.()}catch{}}
   }
 
@@ -188,6 +205,63 @@
     return verifiedState;
   }
 
+  function announce(message,assertive=false){
+    let node=document.getElementById('offlineLiveRegion');
+    if(!node){
+      node=document.createElement('div');
+      node.id='offlineLiveRegion';
+      node.className='sr-only';
+      node.setAttribute('aria-live',assertive?'assertive':'polite');
+      node.setAttribute('aria-atomic','true');
+      document.body.appendChild(node);
+    }
+    node.setAttribute('aria-live',assertive?'assertive':'polite');
+    node.textContent='';
+    setTimeout(()=>{node.textContent=message},0);
+  }
+
+  function showMissingContent(url){
+    lastMissingContentUrl=String(url||'');
+    const slug=(lastMissingContentUrl.match(/\/data\/volumes\/([^/]+)\.js$/)||[])[1]||'';
+    const label=LANGUAGES[slug]?.label||'Este contenido';
+    const ov=configureOverlay(document.getElementById('offlineOverlay'),{role:'alertdialog',live:'assertive',modal:true});
+    if(!ov){announce(`${label} no está disponible sin conexión.`,true);return}
+    ov.innerHTML=`<div class="offline-progress-card"><h2>Contenido no disponible sin conexión</h2><p><strong>${label}</strong> no está guardado en este dispositivo.</p><p>Conéctate a Internet para abrirlo o guárdalo después desde Configuración → Usar sin Internet.</p><button class="btn primary" type="button" data-offline-retry-content>Reintentar</button><button class="btn" type="button" data-offline-close>Cerrar</button></div>`;
+    focusOverlayAction(ov);
+    ov.querySelector('[data-offline-retry-content]').onclick=()=>retryMissingContent();
+    ov.querySelector('[data-offline-close]').onclick=clearOverlay;
+  }
+
+  async function retryMissingContent(){
+    if(!navigator.onLine){announce('Todavía no hay conexión. Intenta de nuevo cuando vuelvas a estar en línea.',true);return}
+    const url=lastMissingContentUrl;
+    clearOverlay();
+    announce('Conexión disponible. Reintentando contenido.');
+    if(url){
+      try{const response=await fetch(url,{cache:'reload'});if(!response.ok)throw new Error(String(response.status));location.reload();return}catch{}
+    }
+    location.reload();
+  }
+
+  async function handleOnline(){
+    document.body.dataset.online='true';
+    await refreshStatus().catch(()=>{});
+    announce('Conexión restaurada. Las funciones en línea vuelven a estar disponibles.');
+    MLS.toast?.('Conexión restaurada',2200);
+  }
+
+  function handleOffline(){
+    document.body.dataset.online='false';
+    announce('Sin conexión. Puedes seguir usando el contenido descargado. Las funciones de IA necesitan conexión.',true);
+    MLS.toast?.('Sin conexión · contenido descargado disponible',3000);
+  }
+
+  function handleServiceWorkerMessage(event){
+    const data=event?.data;
+    if(!data||data.source!=='mls-offline')return;
+    if(data.type==='offline-content-missing')showMissingContent(data.url);
+  }
+
   function setMobileActive(){const h=location.hash||'#home';let key='home';if(h.startsWith('#search'))key='search';else if(h.startsWith('#themes'))key='themes';document.querySelectorAll('[data-mobile-nav]').forEach(a=>a.classList.toggle('active',a.dataset.mobileNav===key))}
   document.addEventListener('click',ev=>{
     const prep=ev.target.closest('[data-offline-prepare]');if(prep){ev.preventDefault();prepare(selectedLanguages());return}
@@ -195,13 +269,14 @@
     const help=ev.target.closest('[data-install-help]');if(help){ev.preventDefault();showInstallHelp();return}
   });
   window.addEventListener('hashchange',()=>{setMobileActive();if(location.hash.startsWith('#settings'))setTimeout(refreshStatus,0)});
-  window.addEventListener('online',()=>{document.body.dataset.online='true';refreshStatus().catch(()=>{})});
-  window.addEventListener('offline',()=>document.body.dataset.online='false');
+  window.addEventListener('online',handleOnline);
+  window.addEventListener('offline',handleOffline);
+  navigator.serviceWorker?.addEventListener?.('message',handleServiceWorkerMessage);
   document.addEventListener('DOMContentLoaded',()=>{document.body.dataset.ios=isIOS()?'true':'false';document.body.dataset.standalone=isStandalone()?'true':'false';document.body.dataset.online=navigator.onLine?'true':'false';setMobileActive();refreshStatus().catch(()=>{})});
 
   MLS.offline={
     SCHEMA_VERSION,LIBRARY_VERSION,LIBRARY_CACHE,LANGUAGES,ALL_LANGUAGES,
     isReady,hasLanguage,isStandalone,isIOS,prepare,verifyOfflineState,refreshStatus,discoverCachedLanguages,
-    settingsBlock,homeCard,showInstallHelp,statusMarkup
+    settingsBlock,homeCard,showInstallHelp,statusMarkup,handleOnline,handleOffline,showMissingContent,retryMissingContent,handleServiceWorkerMessage
   };
 })();
