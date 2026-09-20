@@ -2,6 +2,14 @@ name: Exportar corpus canonico MLS
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/exportar corpus canonico.js"
+      - "scripts/validar corpus canonico.js"
+      - "schemas/canonical-entry.schema.json"
+      - ".github/workflows/exportar-corpus-canonico.yml"
 
 permissions:
   contents: write
