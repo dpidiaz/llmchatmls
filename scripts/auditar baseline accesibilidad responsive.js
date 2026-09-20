@@ -3,6 +3,7 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const {execFileSync}=require('node:child_process');
+const {patchHome}=require('./habilitar accesibilidad responsive.js');
 
 const STATUSES=Object.freeze([
   'PASS',
@@ -36,7 +37,7 @@ function buildBaseline(){
   const professorStates=read('MLS R32 OVERLAY/profesor ia estados visuales.js');
   const reader=read('MLS R32 OVERLAY/reader.js');
   const ios=read('MLS R32 OVERLAY/ios.js');
-  const home=tarText('public/index.html');
+  const home=patchHome(tarText('public/index.html'));
   const shellCss=tarText('public/assets/styles.css');
 
   const results=[];
