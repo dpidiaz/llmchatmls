@@ -298,6 +298,7 @@
 
   async function page(code){
     captureReadingProgress();
+    const scrollBeforeRender=Math.max(0,Math.round(window.scrollY||document.documentElement.scrollTop||document.body?.scrollTop||0));
     const normalized=String(code||'').trim().toUpperCase();
     const resumeRequested=consumeResumeIntent(normalized);
     const previousCode=document.documentElement.dataset.mlsCurrentEntryCode||'';
@@ -382,15 +383,15 @@
     </div>`;
 
     activeReadingCode=normalized;
-    if(entryChanged){
-      if(resumeRequested){
-        requestAnimationFrame(()=>requestAnimationFrame(()=>{
-          if(!restoreReadingProgress(normalized))scrollPageToAbsoluteTop();
-        }));
-      }else{
-        scrollPageToAbsoluteTop();
-        requestAnimationFrame(scrollPageToAbsoluteTop);
-      }
+    if(resumeRequested){
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        if(!restoreReadingProgress(normalized))scrollPageToAbsoluteTop();
+      }));
+    }else if(entryChanged){
+      scrollPageToAbsoluteTop();
+      requestAnimationFrame(scrollPageToAbsoluteTop);
+    }else{
+      requestAnimationFrame(()=>window.scrollTo({top:scrollBeforeRender,left:0,behavior:'auto'}));
     }
 
     const speechFor=entry=>[entry.title,entry.articleMarkdown].filter(Boolean).join('. ');
