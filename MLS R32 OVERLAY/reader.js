@@ -143,6 +143,54 @@
     return related.slice(0,12);
   }
 
+  async function relatedForEntry(markdown,catalog,manifest,language,currentCode,limit=5){
+    const editorial=relatedFromMarkdown(markdown,catalog).slice(0,limit);
+    if(editorial.length>=limit)return editorial;
+
+    try{
+      const relatedManifest=await fetchJson(versioned('/data/related/manifest.json',manifest.corpusBuildId));
+      const descriptor=relatedManifest?.languages?.[language];
+      if(
+        relatedManifest?.standard!=='MLS R32'||
+        relatedManifest?.promptVersion!=='32.0'||
+        relatedManifest?.version!=='1.0'||
+        relatedManifest?.source!=='semantic-neighbors'||
+        relatedManifest?.corpusBuildId!==manifest.corpusBuildId||
+        !descriptor?.file
+      )throw new Error('Manifest de relacionados incompatible.');
+
+      const payload=await fetchJson(versioned('/data/related/'+descriptor.file,manifest.corpusBuildId));
+      if(
+        payload?.standard!=='MLS R32'||
+        payload?.promptVersion!=='32.0'||
+        payload?.version!=='1.0'||
+        payload?.source!=='semantic-neighbors'||
+        payload?.corpusBuildId!==manifest.corpusBuildId||
+        payload?.language!==language||
+        !payload?.neighbors||
+        typeof payload.neighbors!=='object'
+      )throw new Error('Payload de relacionados incompatible.');
+
+      const byCode=new Map(catalog.entries.map(item=>[item.code,item]));
+      const seen=new Set([currentCode,...editorial.map(item=>item.code)]);
+      const combined=[...editorial];
+      const semanticCodes=Array.isArray(payload.neighbors[currentCode])?payload.neighbors[currentCode]:[];
+      for(const candidateCode of semanticCodes){
+        const code=String(candidateCode||'').toUpperCase();
+        if(seen.has(code))continue;
+        const item=byCode.get(code);
+        if(!item)continue;
+        seen.add(code);
+        combined.push(item);
+        if(combined.length>=limit)break;
+      }
+      return combined;
+    }catch(error){
+      console.warn('MLS related supplemental fallback',language,error);
+      return editorial;
+    }
+  }
+
   function canonicalUnavailable(code,error){
     console.error('MASTER LANGUAGE SYSTEM: canonical entry unavailable',code,error);
     MLS.app.innerHTML=`<div class="reader-wide reading-first">
@@ -210,14 +258,14 @@
     const prev=pos>0?languageEntries[pos-1]:null;
     const next=pos>=0&&pos<languageEntries.length-1?languageEntries[pos+1]:null;
     const chapterEntries=languageEntries.filter(item=>item.chapter===meta.chapter);
-    const related=relatedFromMarkdown(markdown,catalog);
+    const related=await relatedForEntry(markdown,catalog,manifest,language,normalized,5);
     const outline=MLS.entryOutline(markdown);
     const fav=MLS.state.favorites.includes(normalized);
 
     const chapterIndex=chapterEntries.map((item,i)=>`<a class="local-entry ${item.code===normalized?'active':''}" href="#entry=${escAttr(item.code)}"><span>${String(i+1).padStart(2,'0')}</span><div><strong>${esc(item.title)}</strong></div></a>`).join('');
     const relatedHTML=related.length
       ?related.map(item=>`<a class="related-link" href="#entry=${escAttr(item.code)}"><strong>${esc(item.title)}</strong></a>`).join('')
-      :'<span class="muted-note">No hay enlaces directos desde esta entrada.</span>';
+      :'<span class="muted-note">No hay temas relacionados disponibles.</span>';
     const outlineHTML=outline.length
       ?outline.map(item=>`<button type="button" data-scroll="${escAttr(item.id)}">${esc(short(item.label))}</button>`).join('')
       :'';
