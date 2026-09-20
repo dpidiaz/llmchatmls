@@ -76,7 +76,7 @@ function buildBaseline(){
   ));
   results.push(check(
     'G-HOME-004','Home',
-    has(home,/class=["'][^"']*(?:skip|sr-only)[^"']*["'][^>]*href=["']#(?:main|content)/i)||has(home,/href=["']#(?:main|content)["'][^>]*>\s*(?:Saltar|Skip)/i)?'PASS':'FAIL',
+    has(home,/class=["'][^"']*mls-skip-link[^"']*["'][^>]*href=["']#(?:app|main|content|mainContent)["']/i)?'PASS':'FAIL',
     'Keyboard skip-link discoverability',
     'Baseline only; FAIL is not corrected during Wave 2.'
   ));
