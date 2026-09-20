@@ -66,3 +66,10 @@ test('semantic publish step is part of predeploy but generation is not',()=>{
   assert.match(pkg.scripts.predeploy,/publicar indice semantico\.js/);
   assert.doesNotMatch(pkg.scripts.predeploy,/generar indice semantico\.js/);
 });
+
+
+test('semantic query whitespace normalization keeps the real whitespace regex',()=>{
+  const hybrid=patchSemanticSearch(patchSearch(shellSearch()));
+  assert.match(hybrid,/replace\(\/\\s\+\/g,' '\)/);
+  assert.doesNotMatch(hybrid,/replace\(\/s\+\/g,' '\)/);
+});
