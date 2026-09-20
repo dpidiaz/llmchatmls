@@ -61,7 +61,9 @@ function verifySources(){
 
   const semanticPatch=read('scripts/habilitar busqueda semantica.js');
   assertIncludes(semanticPatch,'MLS SEMANTIC HYBRID SEARCH 1.0','búsqueda semántica');
-  assertIncludes(semanticPatch,'semantic query fallback','búsqueda semántica');
+  assertIncludes(semanticPatch,'const manifest=await loadSemanticManifest();','búsqueda semántica');
+  assertIncludes(semanticPatch,'MLS semantic manifest fallback','búsqueda semántica');
+  assertIncludes(semanticPatch,"return [...ranked.values()]","búsqueda semántica");
   assertIncludes(semanticPatch,"const slugs=lang?[lang]:MLS_META.map(m=>m.slug)",'búsqueda semántica');
 
   const virtuoso=read('scripts/habilitar virtuoso.js');
