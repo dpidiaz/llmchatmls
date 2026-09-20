@@ -39,3 +39,12 @@ test('canonical compatibility build deletes legacy wiki-seeds and rewrites index
   assert.match(source,/window\.MLS_META=/);
   assert.match(source,/window\.MLS_DATA=/);
 });
+
+
+test('compatibility index stays below Cloudflare asset safety margin',()=>{
+  const source=fs.readFileSync('scripts/generar datos canonicos compatibles.js','utf8');
+  assert.match(source,/MAX_COMPAT_INDEX_BYTES=20\*1024\*1024/);
+  assert.match(source,/INDEX_DEFINITION_CHARS=240/);
+  assert.match(source,/INDEX_SEARCH_BODY_CHARS=160/);
+  assert.match(source,/indexBytes>MAX_COMPAT_INDEX_BYTES/);
+});
