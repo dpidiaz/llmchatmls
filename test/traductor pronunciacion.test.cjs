@@ -122,6 +122,68 @@ test('Translator UI calls the dedicated endpoint and keeps offline pronunciation
   assert.match(html,/translatedText\.textContent=translation/);
 });
 
+test('Translator backend executes with a mocked Workers AI binding and preserves privacy',async()=>{
+  const warnings=[];
+  const context={Request,Response,console:{warn:(...args)=>warnings.push(args.join(' '))}};
+  vm.runInNewContext(installer.BACKEND_BLOCK+';globalThis.__translatorHandler=handleTranslatorRequest;',context);
+  const handler=context.__translatorHandler;
+
+  let aiCalls=0;
+  const sameRequest=new Request('https://example.test/api/translate',{
+    method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({text:'Olá 👋',sourceLanguage:'portugues',targetLanguage:'portugues'})
+  });
+  const sameResponse=await handler(sameRequest,{AI:{run:async()=>{aiCalls++;throw new Error('should not run')}}});
+  const same=await sameResponse.json();
+  assert.equal(sameResponse.status,200);
+  assert.equal(same.ok,true);
+  assert.equal(same.usedAi,false);
+  assert.equal(same.translation,'Olá 👋');
+  assert.equal(aiCalls,0);
+
+  const aiRequest=new Request('https://example.test/api/translate',{
+    method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({text:'Buenos días',sourceLanguage:'espanol-guatemala',targetLanguage:'frances'})
+  });
+  const aiResponse=await handler(aiRequest,{AI:{run:async(model,payload)=>{
+    aiCalls++;
+    assert.equal(model,'@cf/google/gemma-4-26b-a4b-it');
+    assert.match(payload.messages[1].content,/Buenos días/);
+    return {response:'{\"translation\":\"Bonjour\"}'};
+  }}});
+  const ai=await aiResponse.json();
+  assert.equal(aiResponse.status,200);
+  assert.equal(ai.ok,true);
+  assert.equal(ai.usedAi,true);
+  assert.equal(ai.translation,'Bonjour');
+
+  const privateText='frase privada 918273';
+  const failedRequest=new Request('https://example.test/api/translate',{
+    method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({text:privateText,sourceLanguage:'espanol-guatemala',targetLanguage:'ingles'})
+  });
+  const failedResponse=await handler(failedRequest,{AI:{run:async()=>{throw new Error('quota_exhausted')}}});
+  const failed=await failedResponse.json();
+  assert.equal(failedResponse.status,503);
+  assert.equal(failed.aiUnavailable,true);
+  assert.ok(warnings.every(line=>!line.includes(privateText)));
+});
+
+test('Translator backend rejects unsupported methods, content types and languages',async()=>{
+  const context={Request,Response,console:{warn:()=>{}}};
+  vm.runInNewContext(installer.BACKEND_BLOCK+';globalThis.__translatorHandler=handleTranslatorRequest;',context);
+  const handler=context.__translatorHandler;
+  const getResponse=await handler(new Request('https://example.test/api/translate'),{});
+  assert.equal(getResponse.status,405);
+  const typeResponse=await handler(new Request('https://example.test/api/translate',{method:'POST',body:'x'}),{});
+  assert.equal(typeResponse.status,415);
+  const invalidResponse=await handler(new Request('https://example.test/api/translate',{
+    method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({text:'hello',sourceLanguage:'ingles',targetLanguage:'klingon'})
+  }),{});
+  assert.equal(invalidResponse.status,400);
+});
+
 test('worker route serves the static Translator asset and is idempotent',()=>{
   const source='before\nvar index_default = {\nrouter\n    if (url.pathname.startsWith("/api/wiki/")) {\nafter';
   const patched=installer.patchWorker(source);
