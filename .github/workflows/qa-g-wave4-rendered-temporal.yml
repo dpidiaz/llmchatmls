@@ -1,0 +1,124 @@
+name: QA G Wave 4 rendered temporal
+
+on:
+  push:
+    branches:
+      - uxui-r1-accessibility
+    paths:
+      - ".github/workflows/qa-g-wave4-rendered-temporal.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  rendered-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run predeploy
+      - name: Instalar Chromium de QA sin modificar package.json
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Servir build local
+        run: |
+          python3 -m http.server 8788 -d public >/tmp/mls-http.log 2>&1 &
+          echo $! > /tmp/mls-http.pid
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8788/ >/dev/null && break; sleep 1; done
+      - name: QA renderizado por viewport
+        run: |
+          cat > /tmp/qa-wave4.cjs <<'NODE'
+          const {chromium}=require('playwright');
+          const widths=[320,375,390,430,768,1024,1280,1440,1920];
+          const base='http://127.0.0.1:8788';
+          const out={viewports:{},reader:{},professor:{},scripts:{},issues:[]};
+          const push=(kind,data)=>out.issues.push({kind,...data});
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            for(const width of widths){
+              const context=await browser.newContext({viewport:{width,height:900}});
+              const page=await context.newPage();
+              await page.goto(base+'/',{waitUntil:'networkidle'});
+              const home=await page.evaluate(()=>{
+                const root=document.documentElement;
+                const selectors='button,input,select,[role="button"],nav a,.btn';
+                const targets=[...document.querySelectorAll(selectors)].filter(el=>{
+                  const s=getComputedStyle(el),r=el.getBoundingClientRect();
+                  return s.display!=='none'&&s.visibility!=='hidden'&&r.width>0&&r.height>0;
+                }).map(el=>{const r=el.getBoundingClientRect();return {tag:el.tagName,text:(el.innerText||el.getAttribute('aria-label')||'').trim().slice(0,70),w:+r.width.toFixed(1),h:+r.height.toFixed(1)}})
+                  .filter(x=>x.w<44||x.h<44);
+                return {
+                  scrollWidth:root.scrollWidth,clientWidth:root.clientWidth,overflow:root.scrollWidth>root.clientWidth+1,
+                  smallTargets:targets.slice(0,20),smallTargetCount:targets.length,
+                  skipLink:!!document.querySelector('a[href="#main"],a[href="#content"],.skip-link'),
+                  lang:document.documentElement.lang||''
+                };
+              });
+              await page.keyboard.press('Tab');
+              const firstFocus=await page.evaluate(()=>({tag:document.activeElement?.tagName,id:document.activeElement?.id||'',text:(document.activeElement?.innerText||document.activeElement?.getAttribute?.('aria-label')||'').trim().slice(0,80)}));
+              out.viewports[width]={home,firstFocus};
+              if(home.overflow)push('horizontal-overflow',{area:'Home',width,scrollWidth:home.scrollWidth,clientWidth:home.clientWidth});
+              if(width<=430&&home.smallTargetCount)push('touch-targets',{area:'Home',width,count:home.smallTargetCount,sample:home.smallTargets.slice(0,5)});
+
+              const code=await page.evaluate(()=>window.MLS_INDEX?.[0]?.code||null);
+              if(code){
+                await page.evaluate(c=>{location.hash='#entry='+encodeURIComponent(c)},code);
+                await page.waitForTimeout(700);
+                const reader=await page.evaluate(()=>{
+                  const q=s=>document.querySelector(s);
+                  const rect=s=>{const e=q(s);if(!e)return null;const r=e.getBoundingClientRect();return {x:+r.x.toFixed(1),w:+r.width.toFixed(1),right:+r.right.toFixed(1),display:getComputedStyle(e).display}};
+                  const root=document.documentElement;
+                  return {overflow:root.scrollWidth>root.clientWidth+1,scrollWidth:root.scrollWidth,clientWidth:root.clientWidth,
+                    layout:rect('.reader-layout'),main:rect('.reader-main'),left:rect('.reader-left'),right:rect('.reader-right'),
+                    articleChars:(q('.markdown')?.innerText||q('.article-body')?.innerText||'').length};
+                });
+                out.reader[width]=reader;
+                if(reader.overflow)push('horizontal-overflow',{area:'Reader',width,scrollWidth:reader.scrollWidth,clientWidth:reader.clientWidth});
+                if((width===1024||width===1280)&&reader.main&&reader.main.w<520)push('reader-width',{width,mainWidth:reader.main.w,left:reader.left,right:reader.right});
+
+                const ai=page.locator('#aiExplainBtn');
+                if(await ai.count()){
+                  await ai.click();
+                  await page.waitForTimeout(150);
+                  out.professor[width]=await page.evaluate(()=>{
+                    const m=document.querySelector('#aiTutorModal');if(!m)return {exists:false};
+                    const r=m.getBoundingClientRect(),a=document.activeElement;
+                    return {exists:true,open:!!m.open,w:+r.width.toFixed(1),h:+r.height.toFixed(1),
+                      focused:{tag:a?.tagName,id:a?.id||'',label:a?.getAttribute?.('aria-label')||''},
+                      overflowX:m.scrollWidth>m.clientWidth+1,ariaLabel:m.getAttribute('aria-label')||'',role:m.getAttribute('role')||m.tagName.toLowerCase()};
+                  });
+                }
+              }
+              await context.close();
+            }
+
+            for(const width of widths){
+              const context=await browser.newContext({viewport:{width,height:900}});
+              const page=await context.newPage();
+              await page.goto(base+'/virtuoso.html',{waitUntil:'networkidle'});
+              const v=await page.evaluate(()=>{
+                const root=document.documentElement;
+                const small=[...document.querySelectorAll('button,input,select,a')].filter(el=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return s.display!=='none'&&r.width>0&&r.height>0&&(r.width<44||r.height<44)}).map(el=>{const r=el.getBoundingClientRect();return {tag:el.tagName,text:(el.innerText||el.getAttribute('aria-label')||'').trim().slice(0,60),w:+r.width.toFixed(1),h:+r.height.toFixed(1)}})
+                return {overflow:root.scrollWidth>root.clientWidth+1,smallTargetCount:small.length,smallTargets:small.slice(0,10)};
+              });
+              out.viewports[width].virtuoso=v;
+              if(v.overflow)push('horizontal-overflow',{area:'Virtuoso',width});
+              if(width<=430&&v.smallTargetCount)push('touch-targets',{area:'Virtuoso',width,count:v.smallTargetCount,sample:v.smallTargets.slice(0,5)});
+              await context.close();
+            }
+
+            // Reflow proxy: 1280px at 200% ~= 640 CSS px; 1280px at 400% ~= 320 CSS px.
+            out.reflow={at200:out.viewports[768]?.home?.overflow===false && out.reader[768]?.overflow===false,
+                        at400:out.viewports[320]?.home?.overflow===false && out.reader[320]?.overflow===false};
+
+            await browser.close();
+            console.log('WAVE4_RENDERED_QA '+JSON.stringify(out));
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+          node /tmp/qa-wave4.cjs
