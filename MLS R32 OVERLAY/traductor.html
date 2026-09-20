@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f1eb">
+  <meta name="description" content="Traductor y práctica de pronunciación de MASTER LANGUAGE SYSTEM">
+  <title>Traductor · MASTER LANGUAGE SYSTEM</title>
+  <link rel="stylesheet" href="/css/design-system.css">
+  <style>
+    *{box-sizing:border-box}
+    html{background:var(--mls-surface-canvas-light,#f4f1eb);color:var(--mls-text-primary,#182026);font-family:var(--mls-font-sans,system-ui,sans-serif)}
+    body{margin:0;min-height:100vh;background:var(--mls-surface-canvas-light,#f4f1eb);font-size:max(11pt,1rem);line-height:1.5}
+    a{color:inherit}
+    button,input,textarea,select{font:inherit}
+    button,select{min-height:44px}
+    .skip{position:fixed;left:12px;top:8px;z-index:10;transform:translateY(-180%);padding:10px 14px;border-radius:10px;background:#fff;border:1px solid var(--mls-border-control-light,#b9b2a8)}
+    .skip:focus{transform:none}
+    .shell{max-width:980px;margin:0 auto;padding:max(20px,env(safe-area-inset-top)) 18px max(30px,env(safe-area-inset-bottom))}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+    .back{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);text-decoration:none;background:var(--mls-surface-panel-light,#fbfaf7)}
+    .brand{font-weight:800;letter-spacing:.02em}
+    .hero{margin:0 0 24px}
+    .hero h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.05;margin:0 0 10px}
+    .hero p{max-width:720px;color:var(--mls-text-secondary,#515961);margin:0;font-size:1.05rem}
+    .tabs{display:flex;gap:8px;margin-bottom:16px}
+    .tab{border:1px solid var(--mls-border-control-light,#b9b2a8);background:var(--mls-surface-panel-light,#fbfaf7);padding:0 18px;border-radius:999px;cursor:pointer}
+    .tab[aria-selected="true"]{background:var(--mls-action-strong,#1e2b33);color:#fff;border-color:var(--mls-action-strong,#1e2b33)}
+    .panel{background:var(--mls-surface-panel-light,#fbfaf7);border:1px solid var(--mls-border-subtle-light,#ddd6cc);border-radius:var(--mls-radius-xl,20px);box-shadow:var(--mls-shadow-card,0 12px 40px rgba(35,31,26,.07));padding:clamp(16px,4vw,28px)}
+    .language-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin-bottom:18px}
+    .language-row.single{grid-template-columns:1fr}
+    label{display:grid;gap:7px;font-weight:700}
+    select,textarea{width:100%;border:1px solid var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);background:#fff;color:var(--mls-text-primary,#182026)}
+    select{padding:0 12px}
+    textarea{min-height:138px;resize:vertical;padding:14px 15px;line-height:1.55}
+    .swap{width:44px;padding:0;border:1px solid var(--mls-border-control-light,#b9b2a8);border-radius:50%;background:#fff;cursor:pointer}
+    .actions,.audio-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .btn{border:1px solid var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);background:#fff;color:inherit;padding:0 16px;min-height:44px;cursor:pointer}
+    .btn.primary{background:var(--mls-action-strong,#1e2b33);color:#fff;border-color:var(--mls-action-strong,#1e2b33)}
+    .btn:disabled{opacity:.55;cursor:not-allowed}
+    :where(a,button,input,select,textarea):focus-visible{outline:var(--mls-focus-width,3px) solid var(--mls-focus-color,#527a91);outline-offset:var(--mls-focus-offset,2px)}
+    .result{margin-top:22px;border-top:1px solid var(--mls-border-subtle-light,#ddd6cc);padding-top:20px}
+    .result[hidden]{display:none}
+    .result h2{font-size:1.05rem;margin:0 0 8px}
+    .spoken{font-size:clamp(1.25rem,3vw,1.6rem);font-weight:700;overflow-wrap:anywhere;margin:0 0 12px}
+    .guide{background:var(--mls-surface-muted-light,#f3efe8);border-radius:var(--mls-radius-md,12px);padding:14px;margin:12px 0}
+    .guide small{display:block;color:var(--mls-text-secondary,#515961);margin-top:6px}
+    .status{margin-top:14px;padding:12px 14px;border-radius:var(--mls-radius-md,12px);background:var(--mls-teaching-accent-bg,#dcecf3);border:1px solid var(--mls-teaching-accent-border,#bfd6e0)}
+    .muted{color:var(--mls-text-secondary,#515961)}
+    .offline-note{margin-top:18px;color:var(--mls-text-secondary,#515961);font-size:.95rem}
+    .translate-placeholder{padding:16px;border:1px dashed var(--mls-border-control-light,#b9b2a8);border-radius:var(--mls-radius-md,12px);background:var(--mls-surface-muted-light,#f3efe8);margin-top:16px}
+    @media(max-width:640px){
+      .shell{padding-left:14px;padding-right:14px}
+      .top{align-items:flex-start}
+      .language-row{grid-template-columns:1fr}
+      .swap{border-radius:var(--mls-radius-md,12px);width:100%}
+      .actions .btn,.audio-actions .btn{flex:1 1 145px}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#translatorApp">Saltar al Traductor</a>
+<main id="translatorApp" class="shell">
+  <div class="top">
+    <a class="back" href="/#home">← Volver a MLS</a>
+    <div class="brand">MASTER LANGUAGE SYSTEM</div>
+  </div>
+
+  <header class="hero">
+    <h1>Traductor</h1>
+    <p>Traduce cuando lo necesites y practica cómo suena una palabra o frase. La pronunciación puede usar las voces disponibles en tu dispositivo.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Modo del Traductor">
+    <button class="tab" id="translateTab" role="tab" aria-selected="true" aria-controls="translatePanel">Traducir</button>
+    <button class="tab" id="pronounceTab" role="tab" aria-selected="false" aria-controls="pronouncePanel">Pronunciar</button>
+  </div>
+
+  <section class="panel" id="translatePanel" role="tabpanel" aria-labelledby="translateTab">
+    <div class="language-row">
+      <label>Idioma de origen
+        <select id="sourceLanguage"></select>
+      </label>
+      <button class="swap" id="swapLanguages" type="button" aria-label="Cambiar idiomas">⇄</button>
+      <label>Idioma de destino
+        <select id="targetLanguage"></select>
+      </label>
+    </div>
+
+    <label>Texto
+      <textarea id="translateInput" maxlength="1200" placeholder="Escribe una palabra, frase o párrafo corto."></textarea>
+    </label>
+
+    <div class="actions">
+      <button class="btn primary" id="translateButton" type="button">Traducir</button>
+    </div>
+
+    <div class="translate-placeholder" id="translationStatus" role="status" aria-live="polite">
+      La traducción estará disponible cuando se conecte el motor de traducción. Mientras tanto, el módulo de pronunciación funciona de forma independiente.
+    </div>
+
+    <section class="result" id="translationResult" hidden>
+      <h2>Traducción</h2>
+      <p class="spoken" id="translatedText"></p>
+      <div class="guide">
+        <strong>Guía de pronunciación</strong>
+        <div id="translationGuide"></div>
+      </div>
+      <div class="audio-actions" data-audio-context="translation">
+        <button class="btn" type="button" data-speak-rate="normal">Escuchar</button>
+        <button class="btn" type="button" data-speak-rate="slow">Escuchar lento</button>
+        <button class="btn" type="button" data-repeat>Repetir</button>
+        <button class="btn" type="button" data-stop>Detener</button>
+        <button class="btn" type="button" data-copy>Copiar</button>
+      </div>
+    </section>
+  </section>
+
+  <section class="panel" id="pronouncePanel" role="tabpanel" aria-labelledby="pronounceTab" hidden>
+    <div class="language-row single">
+      <label>Idioma
+        <select id="pronounceLanguage"></select>
+      </label>
+    </div>
+    <label>Texto que quieres practicar
+      <textarea id="pronounceInput" maxlength="1200" placeholder="Escribe una palabra o frase."></textarea>
+    </label>
+    <div class="actions">
+      <button class="btn primary" id="preparePronunciation" type="button">Preparar pronunciación</button>
+    </div>
+
+    <section class="result" id="pronunciationResult" hidden>
+      <h2>Pronunciación</h2>
+      <p class="spoken" id="pronunciationText"></p>
+      <div class="guide">
+        <strong>Guía escrita</strong>
+        <div id="pronunciationGuide"></div>
+        <small id="guideNote"></small>
+      </div>
+      <div class="audio-actions" data-audio-context="pronunciation">
+        <button class="btn" type="button" data-speak-rate="normal">Escuchar</button>
+        <button class="btn" type="button" data-speak-rate="slow">Escuchar lento</button>
+        <button class="btn" type="button" data-repeat>Repetir</button>
+        <button class="btn" type="button" data-stop>Detener</button>
+        <button class="btn" type="button" data-copy>Copiar</button>
+      </div>
+      <div class="status" id="speechStatus" role="status" aria-live="polite"></div>
+    </section>
+  </section>
+
+  <p class="offline-note" id="connectivityNote">La pronunciación puede seguir funcionando sin Internet cuando el dispositivo tenga una voz local compatible.</p>
+</main>
+
+<script>
+(()=>{
+  'use strict';
+  const LANGUAGES=[
+    {slug:'espanol-guatemala',label:'Español',locales:['es-GT','es-419','es-MX','es-ES']},
+    {slug:'ingles',label:'Inglés',locales:['en-US','en-GB','en']},
+    {slug:'portugues',label:'Portugués',locales:['pt-BR','pt-PT','pt']},
+    {slug:'italiano',label:'Italiano',locales:['it-IT','it']},
+    {slug:'frances',label:'Francés',locales:['fr-FR','fr']},
+    {slug:'aleman',label:'Alemán',locales:['de-DE','de']},
+    {slug:'japones',label:'Japonés',locales:['ja-JP','ja']},
+    {slug:'chino-taiwan',label:'Chino (Taiwán)',locales:['zh-TW','zh-Hant-TW','zh-Hant','zh']},
+    {slug:'coreano',label:'Coreano',locales:['ko-KR','ko']},
+    {slug:'ruso',label:'Ruso',locales:['ru-RU','ru']}
+  ];
+  const NORMAL_RATE=1;
+  const SLOW_RATE=0.65;
+  const MAX_TEXT_LENGTH=1200;
+  const byId=id=>document.getElementById(id);
+  const translateTab=byId('translateTab');
+  const pronounceTab=byId('pronounceTab');
+  const translatePanel=byId('translatePanel');
+  const pronouncePanel=byId('pronouncePanel');
+  const sourceLanguage=byId('sourceLanguage');
+  const targetLanguage=byId('targetLanguage');
+  const pronounceLanguage=byId('pronounceLanguage');
+  const pronounceInput=byId('pronounceInput');
+  const pronunciationResult=byId('pronunciationResult');
+  const pronunciationText=byId('pronunciationText');
+  const pronunciationGuide=byId('pronunciationGuide');
+  const guideNote=byId('guideNote');
+  const speechStatus=byId('speechStatus');
+  let voices=[];
+  let lastSpeech=null;
+
+  function optionMarkup(selected){
+    return LANGUAGES.map(lang=>'<option value="'+lang.slug+'"'+(lang.slug===selected?' selected':'')+'>'+lang.label+'</option>').join('');
+  }
+
+  sourceLanguage.innerHTML=optionMarkup('espanol-guatemala');
+  targetLanguage.innerHTML=optionMarkup('ingles');
+  pronounceLanguage.innerHTML=optionMarkup('ingles');
+
+  function language(slug){return LANGUAGES.find(item=>item.slug===slug)||null}
+  function normalizedTag(value){return String(value||'').trim().toLowerCase().replace(/_/g,'-')}
+  function languageRoot(value){return normalizedTag(value).split('-')[0]}
+
+  function selectVoice(slug,{localOnly=false}={}){
+    const item=language(slug);
+    if(!item)return null;
+    const exact=item.locales.map(normalizedTag);
+    const roots=[...new Set(item.locales.map(languageRoot))];
+    const compatible=voices.filter(voice=>{
+      const tag=normalizedTag(voice.lang);
+      return exact.includes(tag)||roots.includes(languageRoot(tag));
+    });
+    const local=compatible.filter(voice=>voice.localService===true);
+    if(localOnly)return local.find(voice=>exact.includes(normalizedTag(voice.lang)))||local[0]||null;
+    return local.find(voice=>exact.includes(normalizedTag(voice.lang)))||
+      local[0]||
+      compatible.find(voice=>voice.default&&exact.includes(normalizedTag(voice.lang)))||
+      compatible.find(voice=>exact.includes(normalizedTag(voice.lang)))||
+      compatible[0]||
+      null;
+  }
+
+  function loadVoices(){
+    if(!('speechSynthesis' in window)){voices=[];return}
+    voices=window.speechSynthesis.getVoices()||[];
+    if(!pronunciationResult.hidden)updateSpeechStatus(pronounceLanguage.value);
+  }
+
+  function updateSpeechStatus(slug){
+    if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
+      speechStatus.textContent='Este navegador no ofrece síntesis de voz.';
+      return;
+    }
+    const local=selectVoice(slug,{localOnly:true});
+    const any=selectVoice(slug);
+    if(local){
+      speechStatus.textContent='Hay una voz local compatible en este dispositivo. Puede funcionar sin Internet, pero MLS no la marcará como verificada hasta una prueba real en modo avión.';
+    }else if(any){
+      speechStatus.textContent='Hay una voz compatible, pero puede requerir conexión. Para usar audio sin Internet puede ser necesario descargar una voz en el dispositivo.';
+    }else{
+      speechStatus.textContent='No encontramos una voz compatible instalada para este idioma.';
+    }
+  }
+
+  function setMode(mode){
+    const translating=mode==='translate';
+    translateTab.setAttribute('aria-selected',String(translating));
+    pronounceTab.setAttribute('aria-selected',String(!translating));
+    translatePanel.hidden=!translating;
+    pronouncePanel.hidden=translating;
+    if(!translating)requestAnimationFrame(()=>pronounceInput.focus());
+  }
+
+  translateTab.addEventListener('click',()=>setMode('translate'));
+  pronounceTab.addEventListener('click',()=>setMode('pronounce'));
+
+  byId('swapLanguages').addEventListener('click',()=>{
+    const a=sourceLanguage.value;
+    sourceLanguage.value=targetLanguage.value;
+    targetLanguage.value=a;
+  });
+
+  function japaneseKanaToHepburn(input){
+    const table={
+      'あ':'a','い':'i','う':'u','え':'e','お':'o','か':'ka','き':'ki','く':'ku','け':'ke','こ':'ko',
+      'さ':'sa','し':'shi','す':'su','せ':'se','そ':'so','た':'ta','ち':'chi','つ':'tsu','て':'te','と':'to',
+      'な':'na','に':'ni','ぬ':'nu','ね':'ne','の':'no','は':'ha','ひ':'hi','ふ':'fu','へ':'he','ほ':'ho',
+      'ま':'ma','み':'mi','む':'mu','め':'me','も':'mo','や':'ya','ゆ':'yu','よ':'yo','ら':'ra','り':'ri',
+      'る':'ru','れ':'re','ろ':'ro','わ':'wa','を':'o','ん':'n','が':'ga','ぎ':'gi','ぐ':'gu','げ':'ge','ご':'go',
+      'ざ':'za','じ':'ji','ず':'zu','ぜ':'ze','ぞ':'zo','だ':'da','ぢ':'ji','づ':'zu','で':'de','ど':'do',
+      'ば':'ba','び':'bi','ぶ':'bu','べ':'be','ぼ':'bo','ぱ':'pa','ぴ':'pi','ぷ':'pu','ぺ':'pe','ぽ':'po',
+      'ア':'a','イ':'i','ウ':'u','エ':'e','オ':'o','カ':'ka','キ':'ki','ク':'ku','ケ':'ke','コ':'ko',
+      'サ':'sa','シ':'shi','ス':'su','セ':'se','ソ':'so','タ':'ta','チ':'chi','ツ':'tsu','テ':'te','ト':'to',
+      'ナ':'na','ニ':'ni','ヌ':'nu','ネ':'ne','ノ':'no','ハ':'ha','ヒ':'hi','フ':'fu','ヘ':'he','ホ':'ho',
+      'マ':'ma','ミ':'mi','ム':'mu','メ':'me','モ':'mo','ヤ':'ya','ユ':'yu','ヨ':'yo','ラ':'ra','リ':'ri',
+      'ル':'ru','レ':'re','ロ':'ro','ワ':'wa','ヲ':'o','ン':'n'
+    };
+    let out='';
+    let geminate=false;
+    for(const ch of input){
+      if(ch==='っ'||ch==='ッ'){geminate=true;continue}
+      if(ch==='ー'){const m=out.match(/[aeiou]$/);if(m)out+=m[0];continue}
+      const rom=table[ch];
+      if(!rom){out+=ch;geminate=false;continue}
+      if(geminate&&/^[bcdfghjklmnpqrstvwxyz]/.test(rom))out+=rom[0];
+      out+=rom;
+      geminate=false;
+    }
+    return out.replace(/\s+/g,' ').trim();
+  }
+
+  function russianTransliteration(input){
+    const map={
+      'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'Yo','Ж':'Zh','З':'Z','И':'I','Й':'Y','К':'K','Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'Kh','Ц':'Ts','Ч':'Ch','Ш':'Sh','Щ':'Shch','Ъ':'','Ы':'Y','Ь':'','Э':'E','Ю':'Yu','Я':'Ya',
+      'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'kh','ц':'ts','ч':'ch','ш':'sh','щ':'shch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'
+    };
+    return [...input].map(ch=>Object.prototype.hasOwnProperty.call(map,ch)?map[ch]:ch).join('');
+  }
+
+  function pronunciationGuideFor(slug,text){
+    if(slug==='japones'){
+      if(/[一-龯々〆ヵヶ]/u.test(text)){
+        return {guide:'La lectura de kanji necesita un diccionario de pronunciación para ser fiable.',note:'MLS no inventará una lectura. El audio puede seguir funcionando si existe una voz japonesa.'};
+      }
+      const guide=japaneseKanaToHepburn(text);
+      return {guide:guide||'No fue posible generar una romanización local.',note:'Romanización Hepburn básica para kana; la lectura contextual se ampliará con el paquete lingüístico.'};
+    }
+    if(slug==='ruso'){
+      return {guide:russianTransliteration(text),note:'Transliteración local. El acento léxico no se añade sin una fuente fiable.'};
+    }
+    if(slug==='chino-taiwan'){
+      return {guide:'El pinyin con tonos necesita el paquete de pronunciación para evitar lecturas inventadas.',note:'El audio usa zh-TW cuando existe una voz compatible.'};
+    }
+    if(slug==='coreano'){
+      return {guide:'La romanización fonológica completa necesita el paquete de pronunciación.',note:'MLS evita una transliteración mecánica que pueda enseñar una pronunciación incorrecta.'};
+    }
+    return {guide:'Usa el audio para escuchar la pronunciación. La guía fonética escrita se añadirá mediante recursos lingüísticos verificados.',note:'MLS no genera una pronunciación aproximada si no puede sostenerla con reglas o datos fiables.'};
+  }
+
+  function sanitizeSpeechText(value){
+    return String(value||'').replace(/\s+/g,' ').trim().slice(0,MAX_TEXT_LENGTH);
+  }
+
+  function speak(text,slug,mode){
+    text=sanitizeSpeechText(text);
+    if(!text)return;
+    if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
+      speechStatus.textContent='Este navegador no ofrece síntesis de voz.';
+      return;
+    }
+    const item=language(slug);
+    const voice=selectVoice(slug);
+    window.speechSynthesis.cancel();
+    const utterance=new SpeechSynthesisUtterance(text);
+    utterance.lang=(voice&&voice.lang)||(item&&item.locales[0])||'es-GT';
+    if(voice)utterance.voice=voice;
+    utterance.rate=mode==='slow'?SLOW_RATE:NORMAL_RATE;
+    utterance.pitch=1;
+    utterance.volume=1;
+    utterance.onstart=()=>{speechStatus.textContent=mode==='slow'?'Reproduciendo lentamente.':'Reproduciendo.'};
+    utterance.onend=()=>{speechStatus.textContent='Listo para repetir.'};
+    utterance.onerror=event=>{speechStatus.textContent='No fue posible reproducir esta voz'+(event&&event.error?' ('+event.error+').':'.')};
+    lastSpeech={text,slug,mode};
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function preparePronunciation(){
+    const text=sanitizeSpeechText(pronounceInput.value);
+    if(!text){
+      speechStatus.textContent='Escribe una palabra o frase para practicar.';
+      pronounceInput.focus();
+      return;
+    }
+    pronunciationText.textContent=text;
+    const info=pronunciationGuideFor(pronounceLanguage.value,text);
+    pronunciationGuide.textContent=info.guide;
+    guideNote.textContent=info.note;
+    pronunciationResult.hidden=false;
+    updateSpeechStatus(pronounceLanguage.value);
+  }
+
+  byId('preparePronunciation').addEventListener('click',preparePronunciation);
+
+  document.addEventListener('click',event=>{
+    const button=event.target.closest('button');
+    if(!button)return;
+    if(button.hasAttribute('data-speak-rate')){
+      const host=button.closest('[data-audio-context]');
+      const context=host&&host.getAttribute('data-audio-context');
+      const text=context==='translation'?byId('translatedText').textContent:pronunciationText.textContent;
+      const slug=context==='translation'?targetLanguage.value:pronounceLanguage.value;
+      speak(text,slug,button.getAttribute('data-speak-rate'));
+    }else if(button.hasAttribute('data-repeat')){
+      if(lastSpeech)speak(lastSpeech.text,lastSpeech.slug,lastSpeech.mode);
+      else speechStatus.textContent='Todavía no hay una pronunciación para repetir.';
+    }else if(button.hasAttribute('data-stop')){
+      if('speechSynthesis' in window)window.speechSynthesis.cancel();
+      speechStatus.textContent='Reproducción detenida.';
+    }else if(button.hasAttribute('data-copy')){
+      const host=button.closest('[data-audio-context]');
+      const context=host&&host.getAttribute('data-audio-context');
+      const text=context==='translation'?byId('translatedText').textContent:pronunciationText.textContent;
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text||'').then(()=>{speechStatus.textContent='Texto copiado.'}).catch(()=>{speechStatus.textContent='No fue posible copiar el texto.'});
+      }
+    }
+  });
+
+  pronounceLanguage.addEventListener('change',()=>{
+    if(!pronunciationResult.hidden)preparePronunciation();
+  });
+
+  byId('translateButton').addEventListener('click',()=>{
+    byId('translationStatus').textContent=navigator.onLine
+      ?'El motor de traducción se conectará en una fase posterior. La pronunciación ya puede probarse desde la pestaña Pronunciar.'
+      :'Sin Internet, la traducción completa todavía no está disponible. La pronunciación local puede seguir funcionando.';
+  });
+
+  function applyContext(){
+    try{
+      const requested=new URLSearchParams(location.search).get('lang');
+      if(requested&&language(requested)){
+        targetLanguage.value=requested;
+        pronounceLanguage.value=requested;
+      }
+    }catch{}
+  }
+
+  applyContext();
+  loadVoices();
+  if('speechSynthesis' in window&&'onvoiceschanged' in window.speechSynthesis){
+    window.speechSynthesis.addEventListener('voiceschanged',loadVoices);
+  }
+  window.addEventListener('beforeunload',()=>{if('speechSynthesis' in window)window.speechSynthesis.cancel()});
+  window.addEventListener('offline',()=>{byId('connectivityNote').textContent='Sin Internet. El audio seguirá disponible solo si el dispositivo tiene una voz local compatible.'});
+  window.addEventListener('online',()=>{byId('connectivityNote').textContent='Conexión restaurada. La pronunciación puede usar las voces compatibles disponibles en el dispositivo.'});
+})();
+</script>
+</body>
+</html>
