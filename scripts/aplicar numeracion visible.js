@@ -15,7 +15,7 @@ function patch(file, replacements) {
 }
 
 patch('core.js', [
-  ["  MLS.structureFor=slug=>", "  MLS.chapterDisplayNum=(slug,num)=>{const n=Number(num);return slug==='espanol-guatemala'?(n>=49&&n<=52?n-47:n>=2&&n<=48?n+4:n):num};\n  MLS.structureFor=slug=>"],
+  ["  MLS.structureFor=slug=>", "  MLS.chapterDisplayNum=(slug,num)=>num;\n  MLS.structureFor=slug=>"],
   [".sort((a,b)=>Number(a.num)-Number(b.num));return{levels,parts,chapters}", ".sort((a,b)=>Number(MLS.chapterDisplayNum(slug,a.num))-Number(MLS.chapterDisplayNum(slug,b.num)));return{levels,parts,chapters}"]
 ]);
 
