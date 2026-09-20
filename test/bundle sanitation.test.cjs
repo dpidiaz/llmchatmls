@@ -5,6 +5,7 @@ const os=require('node:os');
 const path=require('node:path');
 const test=require('node:test');
 const assert=require('node:assert/strict');
+const {execFileSync}=require('node:child_process');
 const {sanitizeBundle,validateSanitizedArchive,BANNED_PREFIXES}=require('../scripts/sanear bundle r32.js');
 
 const archive=path.resolve('MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz');
@@ -29,8 +30,10 @@ test('sanitizer produces a shell-only bundle with no legacy data or bundled back
     assert.ok(report.bytes>0);
     assert.ok(report.entries>0);
     const validated=validateSanitizedArchive(output);
-    assert.equal(validated.required,6);
+    assert.equal(validated.required,7);
     assert.deepEqual(validated.bannedPrefixes,BANNED_PREFIXES);
+    const ai=execFileSync('tar',['-xOzf',output,'public/js/ai.js'],{encoding:'utf8'});
+    assert.match(ai,/Profesor|AI|fetch|chat/i,'public/js/ai.js debe conservar ruta exacta dentro del tar');
   } finally {
     fs.rmSync(dir,{recursive:true,force:true});
   }
