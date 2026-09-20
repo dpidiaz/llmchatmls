@@ -11,17 +11,17 @@ function shellHome(){return execFileSync('tar',['-xOzf',archive,'public/index.ht
 
 test('all public Buscar entry points open Virtuoso without exposing a separate Virtuoso nav item',()=>{
   const original=shellHome();
-  const searchLinks=[...original.matchAll(/<a\\b[^>]*href=(["'])#search[^"']*\\1[^>]*>[\\s\\S]*?<\\/a>/gi)].map(match=>match[0]);
+  const searchLinks=[...original.matchAll(/<a\b[^>]*href=(["'])#search[^"']*\1[^>]*>[\s\S]*?<\/a>/gi)].map(match=>match[0]);
   assert.ok(searchLinks.length>=3,'se esperan al menos header, sidebar y CTA de portada');
   for(const link of searchLinks)assert.match(link,/Buscar/i);
 
   const patched=patchNavigation(original);
-  const routed=[...patched.matchAll(/<a\\b[^>]*href=(["'])\\/virtuoso\\1[^>]*>[\\s\\S]*?<\\/a>/gi)].map(match=>match[0]);
+  const routed=[...patched.matchAll(/<a\b[^>]*href=(["'])\/virtuoso\1[^>]*>[\s\S]*?<\/a>/gi)].map(match=>match[0]);
   const routedBuscar=routed.filter(link=>/Buscar/i.test(link));
 
   assert.equal(routedBuscar.length,searchLinks.length,'todos los accesos Buscar deben abrir Virtuoso');
-  assert.doesNotMatch(patched,/href=(["'])#search[^"']*\\1/i);
-  assert.doesNotMatch(routed.join('\\n'),/>\\s*Virtuoso\\s*<\\/a>/i);
+  assert.doesNotMatch(patched,/href=(["'])#search[^"']*\1/i);
+  assert.doesNotMatch(routed.join('\n'),/>\s*Virtuoso\s*<\/a>/i);
   assert.equal(patchNavigation(patched),patched);
 });
 
