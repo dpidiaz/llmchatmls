@@ -4,6 +4,7 @@ const fs=require('node:fs');
 
 const HOME='public/index.html';
 const STYLES='public/assets/styles.css';
+const APP='public/js/app.js';
 const MARKER='MLS Accessibility Responsive R1';
 
 const PATCH_CSS=`
@@ -67,12 +68,21 @@ function patchStyles(css){
   return css.trimEnd()+'\n\n'+PATCH_CSS.trim()+'\n';
 }
 
+function patchApp(source){
+  source=String(source||'');
+  const patched="if(window.__mlsRouteHasRun)MLS.app.focus();else window.__mlsRouteHasRun=true;";
+  if(source.includes(patched))return source;
+  if(!source.includes('MLS.app.focus();'))throw new Error('Accessibility R1: no se encontró focus del router.');
+  return source.replace('MLS.app.focus();',patched);
+}
+
 function install(){
-  if(!fs.existsSync(HOME)||!fs.existsSync(STYLES))throw new Error('Accessibility R1 requiere el build generado.');
+  if(!fs.existsSync(HOME)||!fs.existsSync(STYLES)||!fs.existsSync(APP))throw new Error('Accessibility R1 requiere el build generado.');
   fs.writeFileSync(HOME,patchHome(fs.readFileSync(HOME,'utf8')),'utf8');
   fs.writeFileSync(STYLES,patchStyles(fs.readFileSync(STYLES,'utf8')),'utf8');
+  fs.writeFileSync(APP,patchApp(fs.readFileSync(APP,'utf8')),'utf8');
   console.log('MLS Accessibility + Responsive R1 aplicado.');
 }
 
-module.exports={HOME,STYLES,MARKER,PATCH_CSS,patchHome,patchStyles,install};
+module.exports={HOME,STYLES,APP,MARKER,PATCH_CSS,patchHome,patchStyles,patchApp,install};
 if(require.main===module)install();
