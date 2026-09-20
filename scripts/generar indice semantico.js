@@ -111,25 +111,33 @@ async function embedBatch(texts,{token,accountId,model=MODEL}){
   const endpoint=String(process.env.MLS_EMBEDDING_ENDPOINT||'').trim();
   const endpointKey=String(process.env.MLS_EMBEDDING_KEY||'').trim();
   if(endpoint){
-    const response=await fetch(endpoint,{
-      method:'POST',
-      headers:{
-        'content-type':'application/json',
-        accept:'application/json',
-        ...(endpointKey?{authorization:'Bearer '+endpointKey}:{})
-      },
-      body:JSON.stringify({texts})
-    });
-    const payload=await response.json().catch(()=>({}));
-    if(!response.ok||!payload?.ok||!Array.isArray(payload?.vectors)){
-      const error=new Error('Endpoint de embeddings falló: '+(payload?.error||('HTTP '+response.status)));
-      error.status=response.status;
-      error.endpoint=payload;
-      throw error;
+    let lastError=null;
+    for(let attempt=1;attempt<=8;attempt++){
+      const response=await fetch(endpoint,{
+        method:'POST',
+        headers:{
+          'content-type':'application/json',
+          accept:'application/json',
+          ...(endpointKey?{authorization:'Bearer '+endpointKey}:{})
+        },
+        body:JSON.stringify({texts})
+      });
+      const payload=await response.json().catch(()=>({}));
+      if(response.ok&&payload?.ok&&Array.isArray(payload?.vectors)){
+        if(payload.model!==model)throw new Error('Modelo inesperado del endpoint: '+payload.model);
+        if(payload.vectors.length!==texts.length)throw new Error('Endpoint devolvió '+payload.vectors.length+' embeddings para '+texts.length+' textos.');
+        return payload.vectors;
+      }
+      lastError=new Error('Endpoint de embeddings falló: '+(payload?.error||('HTTP '+response.status)));
+      lastError.status=response.status;
+      lastError.endpoint=payload;
+      const retryable=[404,408,409,425,429,500,502,503,504].includes(response.status);
+      if(!retryable||attempt===8)throw lastError;
+      const delay=Math.min(8000,500*Math.pow(2,attempt-1));
+      process.stdout.write('semantic endpoint retry '+attempt+'/8 after HTTP '+response.status+' in '+delay+'ms\n');
+      await new Promise(resolve=>setTimeout(resolve,delay));
     }
-    if(payload.model!==model)throw new Error('Modelo inesperado del endpoint: '+payload.model);
-    if(payload.vectors.length!==texts.length)throw new Error('Endpoint devolvió '+payload.vectors.length+' embeddings para '+texts.length+' textos.');
-    return payload.vectors;
+    throw lastError||new Error('Endpoint de embeddings no disponible.');
   }
 
   const response=await fetch('https://api.cloudflare.com/client/v4/accounts/'+accountId+'/ai/run/'+model,{
