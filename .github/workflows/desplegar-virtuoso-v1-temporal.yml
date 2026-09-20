@@ -76,25 +76,38 @@ jobs:
           }
           JSON
 
-          status=$(curl --silent --show-error --output response.json --write-out '%{http_code}'             -X POST "$base/api/virtuoso" -H 'content-type: application/json' --data-binary @request.json)
-          if [ "$status" != "200" ]; then
-            echo "::error::Virtuoso devolvió HTTP $status"
-            cat response.json || true
-            exit 1
-          fi
-          node - <<'NODE'
+          gemma_ok=0
+          for attempt in 1 2 3; do
+            status=$(curl --silent --show-error --output response.json --write-out '%{http_code}' \
+              -X POST "$base/api/virtuoso" -H 'content-type: application/json' --data-binary @request.json)
+            if [ "$status" = "200" ] && node - <<'NODE'
           const fs=require('node:fs');
           const p=JSON.parse(fs.readFileSync('response.json','utf8'));
           const allowed=new Set(['MLS-V02-0964','MLS-V02-0492','MLS-V02-0490','MLS-V02-0489','MLS-V02-0488','MLS-V02-0613','MLS-V02-0907','MLS-V02-0491']);
-          if(!p.ok)throw new Error('Virtuoso no devolvió ok');
-          if(!Array.isArray(p.recommendations)||p.recommendations.length<1||p.recommendations.length>5)throw new Error('Cantidad de recomendaciones inválida');
+          if(!p.ok)process.exit(2);
+          if(p.usedAi!==true||p.degraded!==false)process.exit(3);
+          if(p.model!=='@cf/google/gemma-4-26b-a4b-it')process.exit(4);
+          if(!Array.isArray(p.recommendations)||p.recommendations.length<1||p.recommendations.length>5)process.exit(5);
           for(const r of p.recommendations){
-            if(!allowed.has(r.code))throw new Error('Virtuoso inventó o salió de candidatos: '+r.code);
-            if(!String(r.title||'').trim())throw new Error('Título canónico vacío');
-            if(r.deepLink!=='/#entry='+r.code)throw new Error('Deep link inválido: '+r.deepLink);
+            if(!allowed.has(r.code))process.exit(6);
+            if(!String(r.title||'').trim())process.exit(7);
+            if(r.deepLink!=='/#entry='+r.code)process.exit(8);
           }
-          console.log('VIRTUOSO_CANONICAL_OK '+JSON.stringify({usedAi:p.usedAi,degraded:p.degraded,count:p.recommendations.length,codes:p.recommendations.map(r=>r.code)}));
+          console.log('VIRTUOSO_GEMMA_OK '+JSON.stringify({usedAi:p.usedAi,degraded:p.degraded,model:p.model,count:p.recommendations.length,codes:p.recommendations.map(r=>r.code)}));
           NODE
+            then
+              gemma_ok=1
+              break
+            fi
+            echo "Virtuoso aún degradado o inválido en intento $attempt; reintentando..."
+            cat response.json || true
+            sleep 5
+          done
+          if [ "$gemma_ok" != "1" ]; then
+            echo "::error::Virtuoso no logró certificar Gemma 4 como reranker activo"
+            cat response.json || true
+            exit 1
+          fi
 
           cat > invalid.json <<'JSON'
           {"query":"pasado","targetLanguage":"portugues","candidates":[{"code":"MLS-V01-0001"}]}
@@ -108,4 +121,4 @@ jobs:
           echo 'VIRTUOSO_LANGUAGE_GUARD_OK'
           echo 'VIRTUOSO_V1_END_TO_END_OK'
 
-# one-shot trigger
+# one-shot trigger — Gemma reranker certification
