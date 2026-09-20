@@ -1,6 +1,7 @@
-const APP_SHELL_VERSION='2026-r32-offline-v1';
+const APP_SHELL_VERSION='2026-r32-offline-v2-translator';
 const APP_SHELL_CACHE='mls-app-shell-'+APP_SHELL_VERSION;
 const OFFLINE_LIBRARY_PREFIX='mls-offline-library-';
+const LANGUAGE_TOOLS_CACHE='mls-language-tools-r1';
 const LEGACY_CACHE_PREFIX='mls-iphone11-';
 const LEGACY_LIBRARY_PROBE='./data/volumes/ingles.js';
 async function notifyClients(type,detail={}){
@@ -9,7 +10,8 @@ async function notifyClients(type,detail={}){
 }
 
 const SHELL=[
-  './','./index.html','./status.html','./assets/styles.css','./manifest.webmanifest',
+  './','./index.html','./status.html','./traductor.html','./assets/styles.css','./css/design-system.css','./manifest.webmanifest',
+  './translator/offline.js','./translator/packs.json','./translator/registry.json',
   './data/index.js','./js/core.js','./js/map.js','./js/search.js','./js/compare.js',
   './js/ai.js','./js/wiki.js','./js/reader.js','./js/ios.js','./js/app.js',
   './assets/icon-192.png','./assets/icon-512.png','./assets/apple-touch-icon-180.png',
@@ -26,6 +28,7 @@ async function cleanupCaches(){
   const keys=await caches.keys();
   await Promise.all(keys.map(async key=>{
     if(key.startsWith(OFFLINE_LIBRARY_PREFIX))return;
+    if(key===LANGUAGE_TOOLS_CACHE)return;
     if(key.startsWith('mls-app-shell-')&&key!==APP_SHELL_CACHE){
       await caches.delete(key);
       return;
@@ -59,10 +62,18 @@ async function networkFirst(request){
     }
     if(request.mode==='navigate'){
       if(url.pathname==='/status'||url.pathname==='/status/')return caches.match('./status.html');
+      if(url.pathname==='/traductor'||url.pathname==='/traductor/')return caches.match('./traductor.html');
       return caches.match('./index.html');
     }
     throw error;
   }
+}
+
+async function languageToolsFirst(request){
+  const cache=await caches.open(LANGUAGE_TOOLS_CACHE);
+  const cached=await cache.match(request,{ignoreSearch:false});
+  if(cached)return cached;
+  return fetch(request,{cache:'no-store'});
 }
 
 async function cacheFirst(request){
@@ -81,6 +92,10 @@ self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);
   if(url.pathname.startsWith('/api/')){
     event.respondWith(fetch(event.request,{cache:'no-store'}));
+    return;
+  }
+  if(url.pathname.startsWith('/translation-models/')||url.pathname.startsWith('/translator/bergamot/')){
+    event.respondWith(languageToolsFirst(event.request));
     return;
   }
   const destination=event.request.destination;

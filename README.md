@@ -201,6 +201,23 @@ Official documentation is available in:
 
 R1 preserved the canonical `content/` corpus, Reader independence from D1/AI, lexical fallback and Virtuoso canonical fallback.
 
+## Translator and Pronunciation
+
+MLS includes a dedicated `/traductor` module on the current Translator feature branch.
+
+The module is designed local-first:
+
+- translation packs are downloaded only when the user chooses them;
+- Bergamot/WASM provides local translation through an English pivot;
+- online translation can use the existing Cloudflare Workers AI binding when local translation is unavailable;
+- pronunciation and speech remain independent from Workers AI;
+- speech controls include Normal, Slow and Repeat;
+- Language Tools use a cache separate from App Shell and Offline Library.
+
+Technical certification and architecture documentation live in `docs/translator/`.
+
+Physical Safari/iPhone mode-airplane verification remains a manual release gate before the feature is considered fully certified for mobile offline speech.
+
 ## CI and production
 
 `.github/workflows/produccion.yml` validates pull requests with:
