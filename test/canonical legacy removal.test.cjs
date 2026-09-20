@@ -23,7 +23,7 @@ test('predeploy replaces extracted legacy data after canonical runtime build',()
 test('worker editorial no references legacy wiki-seeds path',()=>{
   const overlay=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8');
   assert.doesNotMatch(overlay,/\/data\/wiki-seeds\//);
-  assert.match(overlay,/\/data\/canonical\/seeds\//);
+  assert.match(overlay,/\/data\/canonical\/editorial-seeds\//);
 });
 
 test('staging targets derive from GitHub canonical content, not legacy seeds',()=>{
@@ -47,4 +47,24 @@ test('compatibility index stays below Cloudflare asset safety margin',()=>{
   assert.match(source,/INDEX_DEFINITION_CHARS=240/);
   assert.match(source,/INDEX_SEARCH_BODY_CHARS=160/);
   assert.match(source,/indexBytes>MAX_COMPAT_INDEX_BYTES/);
+});
+
+
+test('legacy API fallback is permanently disabled and D1 reads only R32',()=>{
+  const overlay=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8');
+  assert.doesNotMatch(overlay,/const legacy = await wikiStore\(env\)\.getArticle/);
+  assert.doesNotMatch(overlay,/provider:\s*["']cloudflare-legacy["']/);
+  assert.match(overlay,/WHERE code = \? AND prompt_version = \?/);
+  assert.match(overlay,/FROM wiki_articles WHERE prompt_version = \?/);
+});
+
+test('editorial fallback data uses ten canonical language catalogs, never per-entry seed assets',()=>{
+  const overlay=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8');
+  const generator=fs.readFileSync('scripts/generar datos canonicos compatibles.js','utf8');
+  assert.match(overlay,/\/data\/canonical\/editorial-seeds\//);
+  assert.doesNotMatch(overlay,/\/data\/canonical\/seeds\//);
+  assert.match(generator,/editorialSeedsRoot/);
+  assert.match(generator,/editorialSeeds\[article\.code\]/);
+  assert.match(generator,/editorialSeedCatalogs:ordered\.length/);
+  assert.match(generator,/fs\.rmSync\(perEntrySeedsRoot/);
 });
