@@ -1,4 +1,4 @@
-const APP_SHELL_VERSION='2026-r32-offline-v1';
+const APP_SHELL_VERSION='2026-r32-offline-v2-translator';
 const APP_SHELL_CACHE='mls-app-shell-'+APP_SHELL_VERSION;
 const OFFLINE_LIBRARY_PREFIX='mls-offline-library-';
 const LEGACY_CACHE_PREFIX='mls-iphone11-';
@@ -9,7 +9,7 @@ async function notifyClients(type,detail={}){
 }
 
 const SHELL=[
-  './','./index.html','./status.html','./assets/styles.css','./manifest.webmanifest',
+  './','./index.html','./status.html','./traductor.html','./assets/styles.css','./css/design-system.css','./manifest.webmanifest',
   './data/index.js','./js/core.js','./js/map.js','./js/search.js','./js/compare.js',
   './js/ai.js','./js/wiki.js','./js/reader.js','./js/ios.js','./js/app.js',
   './assets/icon-192.png','./assets/icon-512.png','./assets/apple-touch-icon-180.png',
@@ -59,6 +59,7 @@ async function networkFirst(request){
     }
     if(request.mode==='navigate'){
       if(url.pathname==='/status'||url.pathname==='/status/')return caches.match('./status.html');
+      if(url.pathname==='/traductor'||url.pathname==='/traductor/')return caches.match('./traductor.html');
       return caches.match('./index.html');
     }
     throw error;
