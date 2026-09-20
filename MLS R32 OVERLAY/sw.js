@@ -3,6 +3,11 @@ const APP_SHELL_CACHE='mls-app-shell-'+APP_SHELL_VERSION;
 const OFFLINE_LIBRARY_PREFIX='mls-offline-library-';
 const LEGACY_CACHE_PREFIX='mls-iphone11-';
 const LEGACY_LIBRARY_PROBE='./data/volumes/ingles.js';
+async function notifyClients(type,detail={}){
+  const clients=await self.clients.matchAll({type:'window',includeUncontrolled:true});
+  for(const client of clients)client.postMessage({source:'mls-offline',type,...detail});
+}
+
 const SHELL=[
   './','./index.html','./status.html','./assets/styles.css','./manifest.webmanifest',
   './data/index.js','./js/core.js','./js/map.js','./js/search.js','./js/compare.js',
@@ -48,8 +53,11 @@ async function networkFirst(request){
   }catch(error){
     const cached=await caches.match(request);
     if(cached)return cached;
+    const url=new URL(request.url);
+    if(url.pathname.startsWith('/data/volumes/')){
+      notifyClients('offline-content-missing',{url:url.pathname}).catch(()=>{});
+    }
     if(request.mode==='navigate'){
-      const url=new URL(request.url);
       if(url.pathname==='/status'||url.pathname==='/status/')return caches.match('./status.html');
       return caches.match('./index.html');
     }
