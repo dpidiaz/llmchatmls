@@ -102,16 +102,38 @@ test('offline runtime treats Cache Storage as source of truth and verifies hashe
   assert.doesNotMatch(offline,/localStorage\.getItem\(STATE_KEY\).*===.*ready/);
 });
 
-test('pack download is opt-in, atomic in status, retryable and removable',()=>{
+test('pack manager detects prior installs and exposes an explicit language checklist',()=>{
   assert.match(html,/Usar traducción sin Internet/);
-  assert.match(html,/prepare\.dataset\.preparePack/);
-  assert.match(html,/Reintentar/);
-  assert.match(html,/remove\.dataset\.removePack/);
+  assert.match(html,/id="downloadSelectedPacks"/);
+  assert.match(html,/id="downloadAllPacks"/);
+  assert.match(html,/data-pack-checkbox/);
+  assert.match(html,/pack\.status==='ready'/);
+  assert.match(html,/checkbox\.checked=true/);
+  assert.match(html,/checkbox\.disabled=true/);
+  assert.match(html,/pack\.status==='partial'/);
+  assert.match(html,/MLS marca automáticamente los paquetes completos que ya tienes guardados/);
+  for(const flag of ['🇬🇹','🇺🇸','🇧🇷','🇮🇹','🇫🇷','🇩🇪','🇯🇵','🇹🇼','🇰🇷','🇷🇺'])assert.match(html,new RegExp(flag));
+});
+
+test('fast pack catalog combines persisted verified state with real Cache Storage presence',()=>{
+  assert.match(offline,/export async function packCatalog\(\)/);
+  assert.match(offline,/const stateMatches=state\.packVersion===manifest\.packVersion/);
+  assert.match(offline,/cachedItemPresent\(cache,item\)/);
+  assert.match(offline,/const ready=modelsPresent&&runtimeStatus==='ready'&&storedStatus==='ready'/);
+  assert.match(offline,/status:ready\?'ready':partial\?'partial':'empty'/);
+  assert.match(offline,/installed:ready/);
+});
+
+test('pack download remains opt-in, verified, retryable and removable',()=>{
   assert.match(offline,/writeState\(manifest,slug,'downloading'\)/);
   assert.match(offline,/writeState\(manifest,slug,'partial'\)/);
   assert.match(offline,/if\(verified\.status!=='ready'\)throw/);
   assert.match(offline,/writeState\(manifest,slug,'ready'\)/);
   assert.match(offline,/cache\.delete\(item\.url/);
+  assert.match(html,/downloadOfflinePacks\('selected'\)/);
+  assert.match(html,/downloadOfflinePacks\('all'\)/);
+  assert.match(html,/pack\.status!=='ready'/);
+  assert.match(html,/data\.removePack/);
 });
 
 test('local engine decompresses on device and validates uncompressed integrity',()=>{
@@ -137,18 +159,23 @@ test('translation engine choice is explicit: Local and Online never silently fal
   assert.doesNotMatch(html,/mode==='auto'/);
 });
 
-test('required packs exclude English and do not download all ten languages',()=>{
+test('English remains the pivot/base while Download all targets only missing downloadable packs',()=>{
   assert.match(offline,/if\(source!=='ingles'\)out\.push\(source\)/);
   assert.match(offline,/if\(target!=='ingles'/);
+  assert.match(offline,/runtimeOnly:true/);
+  assert.match(html,/Descargar todos/);
+  assert.match(html,/pack\.selectable&&pack\.status!=='ready'/);
+  assert.match(html,/Base del traductor · no requiere paquete/);
   assert.doesNotMatch(offline,/preparePack\([^)]*CANONICAL/);
-  assert.doesNotMatch(html,/Guardar todos/);
 });
 
-test('pack UI exposes real size, progress, privacy and storage estimate',()=>{
+test('pack UI exposes real size, progress, privacy, storage estimate and skips completed downloads',()=>{
   assert.match(html,/offline\.bytesLabel\(pack\.compressedBytes\)/);
   assert.match(html,/id="offlinePackProgress"/);
   assert.match(html,/role="status" aria-live="polite"/);
   assert.match(html,/no envía tu texto a Workers AI/);
+  assert.match(html,/pack&&pack\.selectable&&pack\.status!=='ready'/);
+  assert.match(html,/Todos los paquetes disponibles ya están descargados/);
   assert.match(offline,/navigator\.storage\.estimate/);
 });
 
