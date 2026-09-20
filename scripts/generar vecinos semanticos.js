@@ -88,9 +88,33 @@ function dot(a,b){
   return value;
 }
 
+const LEVEL_ORDER=new Map([['A1',1],['A2',2],['B1',3],['B2',4],['C1',5],['C2',6]]);
+function levelGap(a,b){
+  const x=LEVEL_ORDER.get(String(a||'').toUpperCase());
+  const y=LEVEL_ORDER.get(String(b||'').toUpperCase());
+  return x&&y?Math.abs(x-y):null;
+}
+
+// Corrección determinista ligera validada por la auditoría R1:
+// la similitud BGE-M3 sigue siendo la señal dominante. Capítulo/parte solo
+// resuelven la cola ruidosa; saltos CEFR extremos reciben una penalización mínima.
+function relatedRank(anchor,candidate,semanticScore){
+  const sameChapter=Boolean(anchor.chapter)&&anchor.chapter===candidate.chapter;
+  const samePart=Boolean(anchor.part)&&anchor.part===candidate.part;
+  const gap=levelGap(anchor.level,candidate.level);
+  return semanticScore
+    +(sameChapter?0.035:0)
+    +(samePart?0.012:0)
+    -(gap===null?0:Math.max(0,gap-2)*0.006);
+}
+
 function insertTop(list,candidate,top){
   let i=0;
-  while(i<list.length&&(list[i].score>candidate.score||(list[i].score===candidate.score&&list[i].code<candidate.code)))i++;
+  while(i<list.length&&(
+    list[i].rank>candidate.rank||
+    (list[i].rank===candidate.rank&&list[i].score>candidate.score)||
+    (list[i].rank===candidate.rank&&list[i].score===candidate.score&&list[i].code<candidate.code)
+  ))i++;
   list.splice(i,0,candidate);
   if(list.length>top)list.length=top;
 }
@@ -100,18 +124,19 @@ function semanticNeighbors(entries,top=DEFAULT_TOP){
   for(let i=0;i<entries.length;i++){
     for(let j=i+1;j<entries.length;j++){
       const score=dot(entries[i].vector,entries[j].vector);
-      insertTop(byCode.get(entries[i].code),{code:entries[j].code,score},top);
-      insertTop(byCode.get(entries[j].code),{code:entries[i].code,score},top);
+      insertTop(byCode.get(entries[i].code),{
+        code:entries[j].code,
+        score,
+        rank:relatedRank(entries[i],entries[j],score)
+      },top);
+      insertTop(byCode.get(entries[j].code),{
+        code:entries[i].code,
+        score,
+        rank:relatedRank(entries[j],entries[i],score)
+      },top);
     }
   }
   return byCode;
-}
-
-const LEVEL_ORDER=new Map([['A1',1],['A2',2],['B1',3],['B2',4],['C1',5],['C2',6]]);
-function levelGap(a,b){
-  const x=LEVEL_ORDER.get(String(a||'').toUpperCase());
-  const y=LEVEL_ORDER.get(String(b||'').toUpperCase());
-  return x&&y?Math.abs(x-y):null;
 }
 
 function auditNeighbors(entries,neighbors){
@@ -233,7 +258,7 @@ function main(){
 
 module.exports={
   VERSION,DEFAULT_TOP,readSemanticLanguage,normalizedChunkVector,entryVectors,dot,insertTop,
-  semanticNeighbors,levelGap,auditNeighbors,languageOutput,generateLanguage,buildManifest
+  semanticNeighbors,levelGap,relatedRank,auditNeighbors,languageOutput,generateLanguage,buildManifest
 };
 
 if(require.main===module){
