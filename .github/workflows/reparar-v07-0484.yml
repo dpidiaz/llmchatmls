@@ -68,6 +68,7 @@ jobs:
         run: npm run canonical:export
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          MLS_CANONICAL_PAGE_SIZE: "250"
       - name: Validar corpus canónico
         run: npm run canonical:validate
       - name: Confirmar conteo y entrada reparada
@@ -98,5 +99,8 @@ jobs:
             exit 0
           fi
           git commit -m "Publish canonical MLS R32 corpus"
+          # predeploy modifica archivos generados del runtime; no forman parte del commit
+          # canónico y bloquearían el rebase. Restaurarlos después de guardar content/.
+          git reset --hard HEAD
           git pull --rebase origin main
           git push origin HEAD:main
