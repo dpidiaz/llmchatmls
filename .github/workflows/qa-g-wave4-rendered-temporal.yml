@@ -121,4 +121,4 @@ jobs:
             console.log('WAVE4_RENDERED_QA '+JSON.stringify(out));
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
-          node /tmp/qa-wave4.cjs
+          NODE_PATH="$PWD/node_modules" node /tmp/qa-wave4.cjs
