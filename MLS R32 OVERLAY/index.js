@@ -1949,6 +1949,67 @@ async function handleSemanticEmbeddingRequest(request, env) {
 }
 __name(handleSemanticEmbeddingRequest, "handleSemanticEmbeddingRequest");
 
+async function handleSemanticGenerationBatchRequest(request, env) {
+  if (request.method !== "POST") {
+    return new Response("Not found", { status: 404 });
+  }
+  const secret = String(env.SEMANTIC_GENERATION_KEY || "");
+  const auth = request.headers.get("authorization") || "";
+  if (!secret || auth !== "Bearer " + secret) {
+    return new Response("Not found", { status: 404 });
+  }
+  try {
+    const contentType = request.headers.get("content-type") || "";
+    if (!contentType.toLowerCase().includes("application/json")) {
+      return Response.json({ ok: false, error: "application/json required" }, { status: 415 });
+    }
+    const body = await request.json();
+    const texts = Array.isArray(body?.texts) ? body.texts.map((x) => String(x || "").replace(/\s+/g, " ").trim()) : [];
+    if (!texts.length || texts.length > 32) {
+      return Response.json({ ok: false, error: "texts must contain 1-32 items" }, { status: 400 });
+    }
+    let totalChars = 0;
+    for (const value of texts) {
+      if (value.length < 2 || value.length > 8000) {
+        return Response.json({ ok: false, error: "each text must contain 2-8000 characters" }, { status: 400 });
+      }
+      totalChars += value.length;
+    }
+    if (totalChars > 180000) {
+      return Response.json({ ok: false, error: "batch is too large" }, { status: 413 });
+    }
+    const result = await env.AI.run(MLS_SEMANTIC_EMBEDDING_MODEL, { text: texts });
+    const data = result?.data;
+    let vectors = null;
+    if (Array.isArray(data) && Array.isArray(data[0])) {
+      vectors = data.map((row) => row.map(Number));
+    } else if (Array.isArray(data) && Array.isArray(result?.shape) && result.shape.length === 2) {
+      const rows = Number(result.shape[0]);
+      const width = Number(result.shape[1]);
+      vectors = [];
+      for (let i = 0; i < rows; i++) vectors.push(data.slice(i * width, (i + 1) * width).map(Number));
+    }
+    if (!Array.isArray(vectors) || vectors.length !== texts.length || !vectors.every((row) => Array.isArray(row) && row.length)) {
+      throw new Error("Unexpected Workers AI batch embedding shape.");
+    }
+    return Response.json({
+      ok: true,
+      model: MLS_SEMANTIC_EMBEDDING_MODEL,
+      count: vectors.length,
+      dimensions: vectors[0].length,
+      vectors
+    }, { headers: { "cache-control": "no-store" } });
+  } catch (error) {
+    console.warn("MLS semantic generation batch unavailable:", error);
+    return Response.json({ ok: false, error: "Temporary semantic generation unavailable." }, {
+      status: 503,
+      headers: { "cache-control": "no-store", "retry-after": "30" }
+    });
+  }
+}
+__name(handleSemanticGenerationBatchRequest, "handleSemanticGenerationBatchRequest");
+
+
 var index_default = {
   async fetch(request, env, _ctx) {
     const url = new URL(request.url);
@@ -1988,6 +2049,9 @@ var index_default = {
     }
     if (url.pathname === "/api/search/embedding") {
       return handleSemanticEmbeddingRequest(request, env);
+    }
+    if (url.pathname === "/api/internal/semantic-batch") {
+      return handleSemanticGenerationBatchRequest(request, env);
     }
     if (url.pathname === "/api/wiki/articles") {
       if (request.method !== "GET") {
