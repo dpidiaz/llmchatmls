@@ -21,6 +21,15 @@ test('predeploy discards bundled data and source before installing canonical run
   assert.ok(compat>overlay,'datos canónicos deben reconstruirse después de instalar el runtime');
 });
 
+test('current committed bundle is already legacy-free',()=>{
+  assert.ok(fs.existsSync(archive),'Debe existir el bundle canónico shell');
+  const current=validateSanitizedArchive(archive);
+  assert.equal(current.required,7);
+  assert.deepEqual(current.bannedPrefixes,BANNED_PREFIXES);
+  const ai=execFileSync('tar',['-xOzf',archive,'public/js/ai.js'],{encoding:'utf8'});
+  assert.match(ai,/Profesor|AI|fetch|chat/i);
+});
+
 test('sanitizer produces a shell-only bundle with no legacy data or bundled backend',()=>{
   assert.ok(fs.existsSync(archive),'Debe existir el bundle fuente durante la transición');
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'mls-bundle-test-'));
