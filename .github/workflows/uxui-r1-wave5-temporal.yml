@@ -63,7 +63,7 @@ jobs:
           grep -q 'semantic-neighbors' public/data/related/manifest.json
           node - <<'NODE'
           const fs=require('fs');
-          const recovery=JSON.parse(fs.readFileSync('public/data/canonical/manifest.json','utf8'));
+          const recovery=JSON.parse(fs.readFileSync('public/data/canonical/runtime-manifest.json','utf8'));
           const related=JSON.parse(fs.readFileSync('public/data/related/manifest.json','utf8'));
           if(recovery.totalEntries!==10133) throw new Error('canonical totalEntries != 10133');
           if(Object.keys(recovery.languages||{}).length!==10) throw new Error('canonical languages != 10');
