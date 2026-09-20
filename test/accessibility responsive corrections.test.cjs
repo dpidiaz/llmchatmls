@@ -22,7 +22,7 @@ test('Accessibility R1 añade focus, touch targets y breakpoints de lectura sin 
   const original=tarText('public/assets/styles.css');
   const patched=patchStyles(original);
   assert.ok(patched.includes(MARKER));
-  assert.match(patched,/:where\(a,button,input,select,textarea,summary\):focus-visible/);
+  assert.match(patched,/body :is\(a,button,input,select,textarea,summary\):focus-visible/);
   assert.match(patched,/\.sidebar a,\.sidebar button,\.mobile-nav a,\.mobile-nav button\{\s*min-height:/);
   assert.match(patched,/@media \(max-width:1100px\)/);
   assert.match(patched,/@media \(min-width:1101px\) and \(max-width:1350px\)/);
