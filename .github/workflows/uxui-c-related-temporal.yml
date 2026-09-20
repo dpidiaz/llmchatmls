@@ -1,4 +1,4 @@
-name: UXUI C related generation temporary
+name: UXUI C validation temporary
 
 on:
   push:
@@ -8,35 +8,22 @@ on:
       - ".github/workflows/uxui-c-related-temporal.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  generate-related:
+  validate:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: uxui-r1-discovery
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Tests C
-        run: node --test 'test/semantic neighbors.test.cjs' 'test/semantic related publish.test.cjs' 'test/reader related discovery.test.cjs'
-      - name: Generate semantic related assets
-        run: npm run related:generate
-      - name: Commit generated related assets
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add related
-          if git diff --cached --quiet; then
-            echo "No related asset changes."
-            exit 0
-          fi
-          git commit -m "Generate semantic related assets"
-          git push origin HEAD:uxui-r1-discovery
+      - run: npm run test:chat-editorial
+      - run: npm run predeploy
+      - run: npm run recovery:verify
+      - run: node --test test/deploy-contract.test.cjs
+      - run: npm run check
