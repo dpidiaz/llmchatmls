@@ -1,0 +1,63 @@
+name: Exportar corpus canonico MLS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/exportar corpus canonico.js"
+      - "scripts/validar corpus canonico.js"
+      - "schemas/canonical-entry.schema.json"
+      - ".github/workflows/exportar-corpus-canonico.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  export-canonical-corpus:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: mls-canonical-corpus-export
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verificar herramientas canonicas
+        run: |
+          node --check "scripts/exportar corpus canonico.js"
+          node --check "scripts/validar corpus canonico.js"
+          node --test "test/canonical corpus.test.cjs"
+      - name: Exportar wiki_articles R32 desde D1
+        run: npm run canonical:export
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Validar corpus exportado
+        run: npm run canonical:validate
+      - name: Revisar diff
+        run: |
+          git status --short
+          git diff --check
+      - name: Guardar corpus canonico en GitHub
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- content; then
+            echo "El corpus canónico ya coincide con D1; no hay cambios que guardar."
+            exit 0
+          fi
+          git config user.name "MLS Canonical Corpus"
+          git config user.email "actions@users.noreply.github.com"
+          git add content
+          git commit -m "Publish canonical MLS R32 corpus"
+          git pull --rebase origin main
+          git push origin HEAD:main
