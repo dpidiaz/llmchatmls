@@ -57,10 +57,14 @@ function buildCanonicalRuntime(options = {}) {
   fs.rmSync(outputRoot, { recursive: true, force: true });
   fs.mkdirSync(outputRoot, { recursive: true });
 
+  const sourceManifestRaw = fs.readFileSync(path.join(sourceRoot, 'manifest.json'), 'utf8');
+  const corpusBuildId = sha256(sourceManifestRaw);
+
   const runtimeManifest = {
     standard: 'MLS R32',
     promptVersion: PROMPT_VERSION,
     generatedFrom: 'GitHub canonical content/',
+    corpusBuildId,
     shardSize,
     totalEntries: 0,
     languages: {}
@@ -153,6 +157,7 @@ function buildCanonicalRuntime(options = {}) {
     ok: true,
     promptVersion: PROMPT_VERSION,
     totalEntries: runtimeManifest.totalEntries,
+    corpusBuildId,
     shardSize,
     shardCount: Object.values(runtimeManifest.languages).reduce((sum, item) => sum + item.shards.length, 0),
     catalogCount: Object.keys(runtimeManifest.languages).length,
