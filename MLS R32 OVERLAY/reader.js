@@ -310,7 +310,7 @@
       page(normalized);
     };
     document.querySelectorAll('[data-scroll]').forEach(button=>{
-      button.onclick=()=>document.getElementById(button.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'start'});
+      button.onclick=()=>document.getElementById(button.dataset.scroll)?.scrollIntoView({behavior:window.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
     });
   }
 
