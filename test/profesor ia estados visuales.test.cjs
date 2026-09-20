@@ -28,10 +28,12 @@ test('loading sin busy sigue siendo thinking y streaming con busy responding',()
   assert.equal(states.stateFromSnapshot({busy:true,streamingText:'hola'}),'responding');
 });
 
-test('estilos mantienen superficies claras y retry táctil',()=>{
-  assert.match(states.STYLE_TEXT,/background:#eef5f8/i);
+test('estilos mantienen identidad local consumiendo foundation D',()=>{
+  assert.match(states.STYLE_TEXT,/--mls-teaching-accent-bg/);
+  assert.match(states.STYLE_TEXT,/--mls-surface-warm-light/);
+  assert.match(states.STYLE_TEXT,/--mls-surface-muted-light/);
   assert.match(states.STYLE_TEXT,/background:#fff1ed/i);
-  assert.match(states.STYLE_TEXT,/\[data-ai-retry\]\{min-height:44px/);
+  assert.match(states.STYLE_TEXT,/\[data-ai-retry\]\{min-height:var\(--mls-control-height,44px\)/);
   assert.doesNotMatch(states.STYLE_TEXT,/background:\s*#000|color:\s*#fff/i);
 });
 
