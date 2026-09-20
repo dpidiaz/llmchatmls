@@ -1,8 +1,9 @@
 # MLS EXPERIENCE REFINEMENT R1 — STATUS
 
 ## Estado global
-- Programa: ACTIVE
+- Programa: ACTIVE — WAVE 2
 - Integración: uxui-r1-integration
+- Worker branches synchronized at: 79c658faa3cfd938db831c72a0ce386645459d73
 - Producción: LOCKED durante desarrollo
 - Main base inicial: b53f2dfa529066d4f2d9b6272f6a8a7bd49386b4
 
