@@ -1,0 +1,56 @@
+name: Generar semántica MLS smoke
+
+on:
+  push:
+    branches:
+      - mls-generate-semantic-index
+    paths:
+      - ".github/workflows/generar-semantica-smoke-temporal.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-english:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: mls-generate-semantic-index
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validar generador
+        run: node --test "test/semantic index generator.test.cjs"
+      - name: Generar índice semántico de inglés
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node "scripts/generar indice semantico.js" --language ingles
+      - name: Verificar artefactos
+        run: |
+          set -euo pipefail
+          test -s semantic/ingles.json
+          test -s semantic/ingles.bin
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const m=JSON.parse(fs.readFileSync('semantic/ingles.json','utf8'));
+          if(m.standard!=='MLS R32'||m.promptVersion!=='32.0'||m.model!=='@cf/baai/bge-m3') throw new Error('metadata base inválida');
+          if(m.language!=='ingles') throw new Error('language inválido');
+          if(Number(m.totalEntries)!==766) throw new Error('entries ingles inesperado '+m.totalEntries);
+          if(!(Number(m.totalChunks)>0&&Number(m.dimensions)>0)) throw new Error('chunks/dimensions inválidos');
+          if(fs.statSync('semantic/ingles.bin').size!==m.totalChunks*m.recordBytes) throw new Error('binario incompatible');
+          console.log(JSON.stringify({language:m.language,totalEntries:m.totalEntries,totalChunks:m.totalChunks,dimensions:m.dimensions,bytes:fs.statSync('semantic/ingles.bin').size}));
+          NODE
+      - name: Guardar smoke index en la rama
+        run: |
+          set -euo pipefail
+          git config user.name "MLS Semantic Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add semantic/ingles.json semantic/ingles.bin
+          if git diff --cached --quiet; then
+            echo "Sin cambios semánticos."
+            exit 0
+          fi
+          git commit -m "Generate English semantic index"
+          git push origin HEAD:mls-generate-semantic-index
