@@ -124,14 +124,15 @@
         </div>
         <span class="helper">En línea ignora los paquetes descargados. Local procesa el texto en este dispositivo y nunca usa la traducción en línea.</span>
       </fieldset>
-      <label>Velocidad lenta
-        <select id="slowSpeechRate">
-          <option value="0.85">Un poco lento</option>
-          <option value="0.65" selected>Lento</option>
-          <option value="0.50">Muy lento</option>
-          <option value="0.40">Extra lento</option>
+      <label>Velocidad de pronunciación
+        <select id="speechRate">
+          <option value="0.10">0.10×</option>
+          <option value="0.25">0.25×</option>
+          <option value="0.50" selected>0.50×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1.00">1.00×</option>
         </select>
-        <span class="helper">Se aplica a “Escuchar lento”. Repetir conserva el último modo y usa la velocidad lenta seleccionada.</span>
+        <span class="helper">“Escuchar” usa esta velocidad. Puedes volver a presionarlo cuando quieras repetir.</span>
       </label>
     </div>
 
@@ -170,9 +171,7 @@
         <div id="translationGuide"></div>
       </div>
       <div class="audio-actions" data-audio-context="translation">
-        <button class="btn" type="button" data-speak-rate="normal">Escuchar</button>
-        <button class="btn" type="button" data-speak-rate="slow">Escuchar lento</button>
-        <button class="btn" type="button" data-repeat>Repetir</button>
+        <button class="btn" type="button" data-speak>Escuchar</button>
         <button class="btn" type="button" data-stop>Detener</button>
         <button class="btn" type="button" data-copy>Copiar</button>
       </div>
@@ -190,14 +189,15 @@
       <textarea id="pronounceInput" maxlength="1200" placeholder="Escribe una palabra o frase."></textarea>
     </label>
     <div class="preference-row">
-      <label>Velocidad lenta
-        <select id="pronounceSlowSpeechRate">
-          <option value="0.85">Un poco lento</option>
-          <option value="0.65" selected>Lento</option>
-          <option value="0.50">Muy lento</option>
-          <option value="0.40">Extra lento</option>
+      <label>Velocidad de pronunciación
+        <select id="pronounceSpeechRate">
+          <option value="0.10">0.10×</option>
+          <option value="0.25">0.25×</option>
+          <option value="0.50" selected>0.50×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1.00">1.00×</option>
         </select>
-        <span class="helper">Controla “Escuchar lento”. Repetir conserva el último modo y usa esta velocidad.</span>
+        <span class="helper">“Escuchar” usa esta velocidad. Puedes volver a presionarlo cuando quieras repetir.</span>
       </label>
     </div>
     <div class="actions">
@@ -213,9 +213,7 @@
         <small id="guideNote"></small>
       </div>
       <div class="audio-actions" data-audio-context="pronunciation">
-        <button class="btn" type="button" data-speak-rate="normal">Escuchar</button>
-        <button class="btn" type="button" data-speak-rate="slow">Escuchar lento</button>
-        <button class="btn" type="button" data-repeat>Repetir</button>
+        <button class="btn" type="button" data-speak>Escuchar</button>
         <button class="btn" type="button" data-stop>Detener</button>
         <button class="btn" type="button" data-copy>Copiar</button>
       </div>
@@ -253,10 +251,9 @@
     coreano:'🇰🇷',
     ruso:'🇷🇺'
   };
-  const NORMAL_RATE=1;
-  const DEFAULT_SLOW_RATE=0.65;
-  const MIN_SLOW_RATE=0.35;
-  const MAX_SLOW_RATE=0.9;
+  const DEFAULT_SPEECH_RATE=0.50;
+  const MIN_SPEECH_RATE=0.10;
+  const MAX_SPEECH_RATE=1.00;
   const MAX_TEXT_LENGTH=1200;
   const byId=id=>document.getElementById(id);
   const translateTab=byId('translateTab');
@@ -266,8 +263,8 @@
   const sourceLanguage=byId('sourceLanguage');
   const targetLanguage=byId('targetLanguage');
   const translationModeButtons=[...document.querySelectorAll('[data-translation-mode]')];
-  const slowSpeechRate=byId('slowSpeechRate');
-  const pronounceSlowSpeechRate=byId('pronounceSlowSpeechRate');
+  const speechRate=byId('speechRate');
+  const pronounceSpeechRate=byId('pronounceSpeechRate');
   const translateInput=byId('translateInput');
   const translateButton=byId('translateButton');
   const translationStatus=byId('translationStatus');
@@ -289,7 +286,6 @@
   const guideNote=byId('guideNote');
   const speechStatus=byId('speechStatus');
   let voices=[];
-  let lastSpeech=null;
   let offlineModulePromise=null;
   let offlineRefreshToken=0;
 
@@ -641,14 +637,14 @@
     return String(value||'').replace(/\s+/g,' ').trim().slice(0,MAX_TEXT_LENGTH);
   }
 
-  function selectedSlowRate(context){
-    const control=context==='translation'?slowSpeechRate:pronounceSlowSpeechRate;
+  function selectedSpeechRate(context){
+    const control=context==='translation'?speechRate:pronounceSpeechRate;
     const value=Number(control&&control.value);
-    if(!Number.isFinite(value))return DEFAULT_SLOW_RATE;
-    return Math.max(MIN_SLOW_RATE,Math.min(MAX_SLOW_RATE,value));
+    if(!Number.isFinite(value))return DEFAULT_SPEECH_RATE;
+    return Math.max(MIN_SPEECH_RATE,Math.min(MAX_SPEECH_RATE,value));
   }
 
-  function speak(text,slug,mode,statusElement=speechStatus,context='pronunciation'){
+  function speak(text,slug,statusElement=speechStatus,context='pronunciation'){
     text=sanitizeSpeechText(text);
     if(!text)return;
     if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
@@ -661,14 +657,13 @@
     const utterance=new SpeechSynthesisUtterance(text);
     utterance.lang=(voice&&voice.lang)||(item&&item.locales[0])||'es-GT';
     if(voice)utterance.voice=voice;
-    const rate=mode==='slow'?selectedSlowRate(context):NORMAL_RATE;
+    const rate=selectedSpeechRate(context);
     utterance.rate=rate;
     utterance.pitch=1;
     utterance.volume=1;
-    utterance.onstart=()=>{statusElement.textContent=mode==='slow'?'Reproduciendo lentamente ('+rate.toFixed(2)+'×).':'Reproduciendo.'};
-    utterance.onend=()=>{statusElement.textContent='Listo para repetir.'};
+    utterance.onstart=()=>{statusElement.textContent='Reproduciendo a '+rate.toFixed(2)+'×.'};
+    utterance.onend=()=>{statusElement.textContent='Listo para escuchar de nuevo.'};
     utterance.onerror=event=>{statusElement.textContent='No fue posible reproducir esta voz'+(event&&event.error?' ('+event.error+').':'.')};
-    lastSpeech={text,slug,mode,context};
     window.speechSynthesis.speak(utterance);
   }
 
@@ -699,13 +694,10 @@
     const host=button.closest('[data-audio-context]');
     const context=host&&host.getAttribute('data-audio-context');
     const statusElement=context==='translation'?translationSpeechStatus:speechStatus;
-    if(button.hasAttribute('data-speak-rate')){
+    if(button.hasAttribute('data-speak')){
       const text=context==='translation'?translatedText.textContent:pronunciationText.textContent;
       const slug=context==='translation'?targetLanguage.value:pronounceLanguage.value;
-      speak(text,slug,button.getAttribute('data-speak-rate'),statusElement,context||'pronunciation');
-    }else if(button.hasAttribute('data-repeat')){
-      if(lastSpeech)speak(lastSpeech.text,lastSpeech.slug,lastSpeech.mode,statusElement,lastSpeech.context||context||'pronunciation');
-      else statusElement.textContent='Todavía no hay una pronunciación para repetir.';
+      speak(text,slug,statusElement,context||'pronunciation');
     }else if(button.hasAttribute('data-stop')){
       if('speechSynthesis' in window)window.speechSynthesis.cancel();
       statusElement.textContent='Reproducción detenida.';
