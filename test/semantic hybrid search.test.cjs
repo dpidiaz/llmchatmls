@@ -17,7 +17,7 @@ test('semantic patch layers after canonical full-text and keeps lexical fallback
   assert.match(hybrid,/semanticQueryVector/);
   assert.match(hybrid,/semanticTop/);
   assert.match(hybrid,/loadFullTextIndex/);
-  assert.match(hybrid,/catch\(error\)\{console\.warn\("MLS semantic query fallback"/);
+  assert.match(hybrid,/catch\(error\)\{console\.warn\("MLS semantic manifest fallback"/);
   assert.match(hybrid,/Búsqueda inteligente: contenido completo \+ significado/);
   assert.match(hybrid,/id="deepCheck" checked/);
   assert.equal(patchSemanticSearch(hybrid),hybrid);
@@ -26,7 +26,7 @@ test('semantic patch layers after canonical full-text and keeps lexical fallback
 test('semantic search remains language-first before loading semantic indexes',()=>{
   const hybrid=patchSemanticSearch(patchSearch(shellSearch()));
   assert.match(hybrid,/const slugs=lang\?\[lang\]:MLS_META\.map\(m=>m\.slug\)/);
-  assert.match(hybrid,/loadSemanticIndex\(slug\)/);
+  assert.match(hybrid,/loadSemanticIndex\(slug,manifest\)/);
   assert.match(hybrid,/fullTextPasses\(r,lang,level,part,chapter\)/);
   assert.match(hybrid,/rawLang==='all'\?'':rawLang/);
 });
@@ -46,4 +46,30 @@ test('semantic generation is never part of normal predeploy',()=>{
   assert.match(pkg.scripts.predeploy,/habilitar busqueda semantica\.js/);
   assert.doesNotMatch(pkg.scripts.predeploy,/generar indice semantico\.js/);
   assert.equal(pkg.scripts['semantic:generate'],"node 'scripts/generar indice semantico.js'");
+});
+
+
+test('semantic manifest gate prevents query embeddings until a complete index is published',()=>{
+  const hybrid=patchSemanticSearch(patchSearch(shellSearch()));
+  assert.match(hybrid,/loadSemanticManifest/);
+  assert.match(hybrid,/data\/semantic\/manifest\.json/);
+  assert.match(hybrid,/if\(response\.status===404\)return null/);
+  assert.match(hybrid,/const semanticSlugs=manifest\?slugs\.filter/);
+  assert.match(hybrid,/if\(semanticSlugs\.length\)\{/);
+  const manifestPos=hybrid.indexOf('const manifest=await loadSemanticManifest()');
+  const queryPos=hybrid.indexOf('const queryVector=await semanticQueryVector(q)');
+  assert.ok(manifestPos>=0&&queryPos>manifestPos);
+});
+
+test('semantic publish step is part of predeploy but generation is not',()=>{
+  const pkg=JSON.parse(fs.readFileSync('package.json','utf8'));
+  assert.match(pkg.scripts.predeploy,/publicar indice semantico\.js/);
+  assert.doesNotMatch(pkg.scripts.predeploy,/generar indice semantico\.js/);
+});
+
+
+test('semantic query whitespace normalization keeps the real whitespace regex',()=>{
+  const hybrid=patchSemanticSearch(patchSearch(shellSearch()));
+  assert.match(hybrid,/replace\(\/\\s\+\/g,' '\)/);
+  assert.doesNotMatch(hybrid,/replace\(\/s\+\/g,' '\)/);
 });
