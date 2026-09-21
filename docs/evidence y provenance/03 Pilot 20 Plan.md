@@ -1,11 +1,11 @@
 # MLS R33 Evidence & Provenance — Pilot 20 Plan
 
-**Estado:** PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT  
+**Estado:** IN PROGRESS — CHECKPOINT 1–4 PASS (4/20)  
 **Pilot ID:** `MLS-R33-EVIDENCE-PILOT-20`  
 **Manifest:** `04 Pilot 20 Manifest.json`  
 **Selection base commit:** `a369cff3e0c6b096c1a48b62931f2e1f7f4ce529`
 
-Este documento prepara la Fase 2. No autoriza ni inicia escrituras Evidence en producción.
+Este documento gobierna la Fase 2. El start gate live ya fue aprobado y el piloto está en ejecución controlada. No autoriza escalamiento más allá de los checkpoints definidos.
 
 ## 1. Objetivo
 
@@ -159,7 +159,7 @@ El piloto no debe comenzar hasta que estas métricas sean observables:
 - [x] Existe medición read-only de logical Evidence bytes por entrada mediante `/api/wiki/editorial/evidence/metrics`.
 - [x] Manifest integrity test verde en GitHub Actions run #316.
 - [x] Foundation + Pilot-preparation certification verde en GitHub Actions run #316.
-- [ ] **Live preflight:** sobre el runtime desplegado que vaya a ejecutar el piloto, confirmar si Cloudflare entrega `exactRowsRead=true` y `exactRowsWritten=true`. Si alguno es falso, no iniciar las 20 entradas hasta documentar cómo se medirá el costo D1 sin confundir observación con facturación.
+- [x] **Live preflight:** aprobado sobre el runtime real; Cloudflare devolvió `exactRowsRead=true` y `exactRowsWritten=true` antes de procesar la primera entrada.
 
 GitHub runtime para Evidence debe permanecer en cero. Cualquier uso de GitHub por el proceso de control/documentación se cuenta aparte como `GitHubRequests` / `GitHubMutations`, no como dependencia runtime.
 
@@ -228,6 +228,35 @@ No avanzar a 100 si:
 
 ## 11. Estado actual
 
-**PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT.**
+**IN PROGRESS — CHECKPOINT 1–4 PASS (4/20).**
 
-El manifest está seleccionado, versionado y certificado. La instrumentación local/CI está verde en run #316. No se han creado Sources, Claims, EvidenceLinks ni Reviews del piloto en producción. El único gate previo al inicio es el preflight live de metadata D1 sobre el runtime que efectivamente vaya a ejecutar el piloto.
+Start gate live aprobado. Entradas 1–4 completadas y VERIFIED.
+
+Métricas acumuladas:
+
+```yaml
+entriesProcessed: 4
+entriesVerified: 4
+sourcesCreated: 8
+sourcesReused: 0
+claimsCreated: 10
+claimsVerified: 10
+evidenceLinks: 13
+evidenceConflicts: 0
+needsReview: 0
+verificationAttempts: 4
+d1RowsRead: 1720
+d1RowsWritten: 163
+logicalEvidenceBytes: 26038
+averageEvidenceBytesPerEntry: 6509.5
+averageSourcesPerEntry: 2
+apaValidationFailures: 0
+manualHumanReviewEvents: 0
+articleRevisionsProposed: 0
+```
+
+Checkpoint detallado: `05 Pilot 20 Checkpoint 1 a 4.md`.
+
+Decisión: **PASS — continuar secuencialmente con entradas 5–8.**
+
+No se autoriza Gate 100 ni migración masiva.

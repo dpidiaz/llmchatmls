@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 2 — PILOTO 20 / PREPARED, START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT**
+**Estado actual: FASE 2 — PILOTO 20 / IN PROGRESS — CHECKPOINT 1–4 PASS (4/20)**
 
 Progreso global inicial:
 
@@ -45,7 +45,7 @@ Progreso global inicial:
 | Documentación contractual R33 | COMPLETE | Prompt y roadmap versionados |
 | Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
 | Fase 1 Foundation | COMPLETE | Foundation R33 certificada |
-| Fase 2 Piloto 20 | PREPARED — NOT STARTED | Live D1 telemetry preflight + métricas piloto aceptables |
+| Fase 2 Piloto 20 | IN PROGRESS — 4/20 | Checkpoint 1–4 PASS; continuar 5–8 |
 | Fase 3 Evaluación | NOT STARTED | Decisión explícita go/no go |
 | Fase 4 Gate 100 | NOT STARTED | 100 estables |
 | Fase 5 Gate 500 | NOT STARTED | 500 estables |
@@ -367,7 +367,7 @@ Foundation debe demostrar:
 
 # 8. FASE 2 — PILOTO 20
 
-**Estado: PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT**
+**Estado: IN PROGRESS — CHECKPOINT 1–4 PASS (4/20)**
 
 ## Selección
 
@@ -460,9 +460,9 @@ Registrar:
 - [x] Endpoint read-only `/api/wiki/editorial/evidence/metrics` calcula bytes lógicos Evidence.
 - [x] Manifest integrity y telemetry tests verdes en run #316.
 - [x] Full Foundation regression suite verde en run #316.
-- [ ] **Start gate live:** confirmar sobre el runtime desplegado del piloto si Cloudflare devuelve `exactRowsRead=true` y `exactRowsWritten=true`.
+- [x] **Start gate live:** confirmado en producción con `exactRowsRead=true` y `exactRowsWritten=true` sobre `MLS-V10-0020` antes de iniciar el piloto.
 
-El Pilot 20 continúa **NOT STARTED** hasta cerrar ese último gate. No se han creado Sources, Claims, Links ni Reviews del piloto en producción.
+El Pilot 20 está **IN PROGRESS**. Checkpoint 1–4: PASS. Entradas 1–4 están VERIFIED; continuar secuencialmente con 5–8.
 
 
 ## Exit gate
@@ -663,23 +663,34 @@ El renderer nunca sustituye metadata normalizada.
 Actualizar en cada checkpoint.
 
 ```yaml
-entriesProcessed: 0
-sourcesCreated: 0
+entriesProcessed: 4
+entriesVerified: 4
+entriesReviewedHuman: 0
+sourcesCreated: 8
 sourcesReused: 0
-claimsCreated: 0
-claimsVerified: 0
-evidenceLinks: 0
+claimsCreated: 10
+claimsVerified: 10
+evidenceLinks: 13
 evidenceConflicts: 0
 needsReview: 0
-verificationAttempts: 0
-d1RowsRead: 0
-d1RowsWritten: 0
-githubRequests: 0
-githubMutations: 0
-repoSizeDeltaBytes: 0
-averageEvidenceBytesPerEntry: null
-averageSourcesPerEntry: null
+verificationAttempts: 4
+verificationReviewsCreated: 4
+articleRevisionsProposed: 0
+d1RowsRead: 1720
+d1RowsWritten: 163
+runtimeGitHubRequests: 0
+runtimeGitHubMutations: 0
+controlPlaneCommits: 42
+controlBranchBlobDeltaBytes: 147177
+githubTransportRequests: null
+mainRepoEvidenceDataDeltaBytes: 0
+logicalEvidenceBytes: 26038
+averageEvidenceBytesPerEntry: 6509.5
+averageSourcesPerEntry: 2
+averageClaimsPerEntry: 2.5
+averageEvidenceLinksPerEntry: 3.25
 apaValidationFailures: 0
+manualHumanReviewEvents: 0
 ```
 
 No inventar números cuando no se hayan medido.
@@ -687,6 +698,35 @@ No inventar números cuando no se hayan medido.
 ---
 
 # 18. CHANGE LOG DEL ROADMAP
+
+## 2026-09-21 — Pilot 20 checkpoint 1–4 PASS
+
+- Start gate live aprobado con metadata D1 exacta.
+- Entradas procesadas: 4/20.
+- MLS-V10-0020: VERIFIED, 3 Sources, 3 Claims, 4 Links, 7,787 logical Evidence bytes.
+- MLS-V10-0140: VERIFIED, 2 Sources, 3 Claims, 4 Links, 7,542 bytes.
+- MLS-V01-0115: VERIFIED, 1 Source, 2 Claims, 2 Links, 4,527 bytes.
+- MLS-V01-0613: VERIFIED, 2 Sources, 2 Claims, 3 Links, 6,182 bytes.
+- 10/10 Claims sustanciales verificados.
+- 8 Sources creadas; 0 reutilizadas porque no hubo una Source repetida entre estas cuatro entradas.
+- 13 EvidenceLinks.
+- 0 conflictos.
+- 0 needsReview.
+- 0 article revisions.
+- 0 editorial reviews humanas.
+- 0 fallos APA.
+- D1 acumulado: 1,720 rows read / 163 rows written.
+- Logical Evidence total: 26,038 bytes; promedio 6,509.5 bytes/entrada.
+- Promedio D1: 430 reads / 40.75 writes por entrada.
+- Proyección lineal del Pilot 20: ~8,600 reads / ~815 writes / ~130,190 logical bytes.
+- FREE ONLY continúa viable para el piloto bajo los límites oficiales actuales de D1 Free.
+- Una extrapolación lineal a 10,133 entradas excedería el límite diario de writes; no autoriza migración masiva y confirma la necesidad de gates/lotes.
+- Evidence runtime mantuvo GitHub requests/mutations = 0.
+- Bridge de control: 42 commits y +147,177 blob bytes desde el baseline del control plane.
+- Los pushes a mlschatcontrol producen Workers Builds/Version IDs; auditar Branch control/Build watch paths antes de escalamiento prolongado.
+- Stop conditions audit: PASS.
+- Decisión: continuar secuencialmente con entradas 5–8.
+- Documento detallado: `05 Pilot 20 Checkpoint 1 a 4.md`.
 
 ## 2026-09-21 — Pilot 20 preparado; ejecución aún bloqueada
 
@@ -868,102 +908,105 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 2 PILOT 20 PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT
+STATUS: PHASE 2 PILOT 20 IN PROGRESS — CHECKPOINT 1–4 PASS
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-pilot-20-preparation
-BASE: main
-BASE HEAD: a369cff3e0c6b096c1a48b62931f2e1f7f4ce529
+MAIN HEAD AT CHECKPOINT BASE: f22c5ac610698235bbf63ce33f06fa13b2907fd3
+CONTROL BRANCH: mlschatcontrol
+CONTROL HEAD AFTER ENTRY 4: 0a7f3835af6323e938fa46071b7f01c3575ff240
+DOCUMENTATION BRANCH: r33-evidence-pilot-checkpoint-4
 
 DONE:
-- Phase 1 Foundation complete and merged
-- Pilot 20 plan created
-- Pilot 20 manifest created
-- 20 canonical entries selected and version-locked
-- exactly 2 entries per each of 10 MLS languages
-- level and phenomenon coverage locked by test
-- Source create/reuse/update telemetry added
-- D1 exact-vs-observed telemetry added
-- read-only logical Evidence byte measurement added
-- private /evidence/metrics endpoint added
-- Pilot manifest/telemetry/runtime certification green in run #316
+- Live D1 telemetry preflight passed
+- Entry 1 MLS-V10-0020 VERIFIED
+- Entry 2 MLS-V10-0140 VERIFIED
+- Entry 3 MLS-V01-0115 VERIFIED
+- Entry 4 MLS-V01-0613 VERIFIED
+- Checkpoint 1–4 stop-condition audit PASS
+- Detailed checkpoint document created
 
 CURRENT:
-- Pilot remains NOT STARTED
-- Final documentation recertification for PR #134
+- 4 of 20 Pilot entries processed
+- No canonical article revision proposed
+- No human editorial review performed
 
 NEXT:
-- Recertify final PR #134 HEAD
-- Merge PR #134 if green
-- On a separately authorized/deployed Pilot runtime, perform read-only live telemetry preflight
-- Start entries 1–4 only if the live D1 telemetry gate is satisfied
+- Merge checkpoint documentation after CI
+- Continue sequentially with entries 5–8
+- Entry 5: MLS-V02-0180
+- Checkpoint again after entry 8
 
 BLOCKERS:
-- Live D1 telemetry metadata has not yet been observed on the runtime that will execute the pilot
+- None for continuing 5–8
+- Operational optimization pending: audit Cloudflare Branch control / Build watch paths for mlschatcontrol
 
 DECISIONS:
-- No D1 billed-row number is inferred from observed row counts
-- No Pilot source is preapproved merely because it appears plausible
-- No sample entry may drift from its locked version silently
-- Pilot begins sequentially, checkpoints every 4 entries
-- No canonical article overwrite during Pilot 20
+- VERIFIED is allowed without REVIEWED when deterministic guard passes and ChatGPT verification review is persisted
+- Human review events remain 0; never fabricate REVIEWED
+- Optional backshift was modeled as legitimate variation, not contradiction
+- sourcesReused=0 is not interpreted as dedupe failure because no repeated Source candidate occurred
+- No corpus-scale migration
+- No article overwrite
 
 AUTOOPT IMPACT:
-- None; classifier is only used to characterize the sample
+- None
 
 R32 COMPATIBILITY:
 - Preserved
 
 EVIDENCE STATUS:
-- Foundation complete
-- Pilot sample prepared
-- Pilot execution not started
+- 4 VERIFIED
+- 0 REVIEWED
+- 16 Pilot entries not yet processed
 
 ENTRIES PROCESSED:
-- 0 production
+- 4
 
 SOURCES CREATED:
-- 0 production
+- 8
 
 SOURCES REUSED:
-- 0 production
+- 0
 
 CLAIMS CREATED:
-- 0 production
+- 10
 
 CLAIMS VERIFIED:
-- 0 production
+- 10
 
 EVIDENCE LINKS:
-- 0 production
+- 13
 
 CONFLICTS:
-- 0 production
+- 0
 
 NEEDS REVIEW:
-- 0 production
+- 0
 
 D1 IMPACT:
-- 0 production Pilot writes
-- live exact rows not yet observed
+- 1720 exact rows read
+- 163 exact rows written
+- average 430 read / 40.75 written per completed entry
+
+SIZE:
+- logical Evidence bytes: 26038
+- average: 6509.5 bytes/entry
 
 GITHUB IMPACT:
-- manifest, plan, telemetry and tests only
+- Evidence runtime GitHub requests/mutations: 0
+- control plane commits since baseline: 42
+- control branch blob delta: +147177 bytes
+- transport-level GitHub request count: not instrumented; do not invent
 
-TESTS:
-- GitHub Actions run #316: SUCCESS
-- npm run test:chat-editorial: SUCCESS
-- npm run test:evidence: SUCCESS
-- npm run test:canonical-tools: SUCCESS
-- npm run qa:baseline: SUCCESS
-- npm run predeploy: SUCCESS
-- npm run recovery:verify: SUCCESS
-- deploy-contract: SUCCESS
-- npm run check: SUCCESS
-- production deploy step: SKIPPED
+APA:
+- validation failures: 0
 
-PR:
-- #134 — feat: prepare MLS R33 Evidence Pilot 20
+MANUAL REVIEW:
+- human events: 0
+- article revisions proposed: 0
+
+CHECKPOINT:
+- PASS — continue entries 5–8
 ```
 ---
 
