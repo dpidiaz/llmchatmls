@@ -1,0 +1,97 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V01-0613",
+    "articleGeneratedAt": "2026-09-17T11:31:41.336Z",
+    "articleHash": "601d8ead821aa97ccd4bd60ec561720fd73b24f340a7cb2b67b055249f66c73c",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "huddleston-pullum-2005",
+        "sourceType": "book",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "A Student's Introduction to English Grammar",
+        "authors": [
+          "Huddleston, Rodney D.",
+          "Pullum, Geoffrey K."
+        ],
+        "publicationYear": 2005,
+        "publisher": "Cambridge University Press",
+        "isbn": "9780521848374",
+        "language": "en",
+        "topics": [
+          "English grammar",
+          "reported speech",
+          "backshift",
+          "tense"
+        ]
+      },
+      {
+        "clientId": "cambridge-reported-speech",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "C",
+        "status": "active",
+        "title": "Reported speech: indirect speech",
+        "institution": "Cambridge University Press & Assessment",
+        "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+        "language": "en",
+        "topics": [
+          "reported speech",
+          "indirect speech",
+          "backshift",
+          "no backshift"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-backshift",
+        "sectionKey": "En pocas palabras / Contraste con el retroceso temporal",
+        "summary": "En estilo indirecto inglés, un verbo de reporte en pasado puede provocar backshift: una forma de presente del enunciado original puede aparecer como pretérito en el reporte, sin que ese pretérito por sí solo afirme que la situación haya dejado de ser verdadera.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-no-backshift",
+        "sectionKey": "Cómo funciona / Observación importante",
+        "summary": "Con verbos de reporte en pasado, el backshift no siempre es obligatorio: el hablante puede conservar el presente cuando la situación sigue siendo verdadera o relevante, y la elección entre forma retrocedida y no retrocedida puede reflejar la perspectiva temporal del reporte.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-backshift",
+        "sourceRef": "huddleston-pullum-2005",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "page": "47",
+          "section": "Backshift in indirect reported speech"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-no-backshift",
+        "sourceRef": "huddleston-pullum-2005",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "page": "47",
+          "section": "Optional backshift"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-no-backshift",
+        "sourceRef": "cambridge-reported-speech",
+        "supportType": "supports",
+        "locator": {
+          "section": "No backshift"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
