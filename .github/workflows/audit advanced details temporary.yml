@@ -25,7 +25,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '=== MATCHES ==='
-          grep -Rni -E 'Detalles avanzados|información técnica|excepciones y fuentes|advanced.?detail|show.?detail|technical.?detail' public src || true
-          echo '=== RELATED MORE SETTINGS ==='
-          grep -Rni -E 'Tamaño de letra|Elige el tamaño más cómodo|Fondo|Claro u oscuro|Profesor IA' public | head -n 120 || true
+          node <<'NODE'
+          const fs=require('fs');
+          const files=['public/js/app.js','public/js/reader.js','public/js/ai.js','public/index.html'].filter(fs.existsSync);
+          for(const file of files){
+            const text=fs.readFileSync(file,'utf8');
+            for(const needle of ['advancedDetails','advancedToggle','Detalles avanzados']){
+              const indexes=[];
+              let at=0;
+              while((at=text.indexOf(needle,at))!==-1){indexes.push(at);at+=needle.length;}
+              console.log('AUDIT',file,needle,'COUNT',indexes.length);
+              indexes.slice(0,12).forEach((idx,n)=>{
+                console.log('CTX',file,needle,n+1,JSON.stringify(text.slice(Math.max(0,idx-260),Math.min(text.length,idx+needle.length+360))));
+              });
+            }
+          }
+          NODE
