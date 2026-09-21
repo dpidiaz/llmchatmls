@@ -101,8 +101,15 @@ function main() {
   if (runtime.includes('async function handleMlsChat(')) throw Error('La integración ChatGPT ya está instalada en este runtime.');
   const marker = '    const url = new URL(request.url);';
   if (!runtime.includes(marker) || !runtime.includes('function getEditorialContextR32(')) throw Error('Ejecutar primero habilitar flujo editorial.js sobre R32.');
-  runtime = runtime.replace(marker, marker + '\n    if (url.pathname === "/api/wiki/editorial/chat/autoopt/health") return handleMlsAutooptHealth(request, env);\n    if (url.pathname === "/api/wiki/editorial/chat/coverage/status") return handleMlsCoverageMap(request, env);\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/semantic/")) return handleMlsSemanticAudit(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/staging/")) return handleMlsStaging(request, env, url);
-    if (url.pathname.startsWith("/api/wiki/editorial/evidence/")) return MLS_EVIDENCE_API.handleMlsEvidence(request, env, url, {authenticate:mlsChatAuthenticate, body:mlsChatBody, json:mlsChatJson, error:mlsChatError, ensureWikiDb});\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);');
+  const privateRoutes = `
+    if (url.pathname === "/api/wiki/editorial/chat/autoopt/health") return handleMlsAutooptHealth(request, env);
+    if (url.pathname === "/api/wiki/editorial/chat/coverage/status") return handleMlsCoverageMap(request, env);
+    if (url.pathname.startsWith("/api/wiki/editorial/chat/semantic/")) return handleMlsSemanticAudit(request, env, url);
+    if (url.pathname.startsWith("/api/wiki/editorial/staging/")) return handleMlsStaging(request, env, url);
+    if (url.pathname.startsWith("/api/wiki/editorial/evidence/")) return MLS_EVIDENCE_API.handleMlsEvidence(request, env, url, {authenticate:mlsChatAuthenticate, body:mlsChatBody, json:mlsChatJson, error:mlsChatError, ensureWikiDb});
+    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);
+    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);`;
+  runtime = runtime.replace(marker, marker + privateRoutes);
   fs.writeFileSync(target, runtime + buildChatRuntime());
   const panelSource = path.join(process.cwd(), 'MLS R32 EDITORIAL/autoopt health.html');
   const panelTarget = path.join(process.cwd(), 'public/autoopt.html');
