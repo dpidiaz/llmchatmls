@@ -292,7 +292,7 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F1 normalización: DOI, ISBN y canonical URL.
 - [x] F1 state machine base y optimistic concurrency 409.
 - [x] F1 tests dedicados: 12 casos locales verdes.
-- [ ] F1 certificación completa del PR #125 contra main.
+- [x] F1 certificación completa del PR #125 contra main.
 - [ ] F2 Source Registry runtime/persistence.
 - [ ] F3 Claims and links persistence.
 - [ ] F4 State validator integrado.
@@ -649,6 +649,13 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F1 Contracts and schema certificado
+
+- GitHub Actions run #279 completó SUCCESS contra `main`.
+- Pasaron `test:chat-editorial`, `predeploy`, `recovery:verify`, deploy-contract y `check`.
+- El paso de despliegue de producción del workflow fue SKIPPED.
+- F1 cumple su gate técnico y queda listo para merge.
+
 ## 2026-09-21 — F1 Contracts and schema iniciado
 
 - Se creó la rama `r33-evidence-provenance-foundation` desde el checkpoint documental.
@@ -695,7 +702,7 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F1 IN PROGRESS
+STATUS: PHASE 1 F1 COMPLETE
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
 BRANCH: r33-evidence-provenance-foundation
@@ -712,10 +719,10 @@ DONE:
 - 12 dedicated local tests green
 
 CURRENT:
-- PR #125 certification against main
+- F1 complete; preparing merge of PR #125
 
 NEXT:
-- Close F1 after repository CI/regression checks
+- Merge PR #125
 - Begin F2 Source Registry persistence and read/upsert contract
 
 BLOCKERS:
@@ -748,7 +755,13 @@ D1 IMPACT:
 
 TESTS:
 - test/evidence foundation.test.cjs: 12/12 local pass
-- Full PR certification pending
+- GitHub Actions run #279: SUCCESS
+- npm run test:chat-editorial: SUCCESS
+- npm run predeploy: SUCCESS
+- npm run recovery:verify: SUCCESS
+- node --test test/deploy-contract.test.cjs: SUCCESS
+- npm run check: SUCCESS
+- workflow production deploy step: SKIPPED
 
 COMMIT SHA:
 - 4832608710cc4f2e5a91a9eddab2802853db7534 before roadmap sync
