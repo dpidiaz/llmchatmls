@@ -20,24 +20,27 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node --test 'test/detalles avanzados removal.test.cjs'
       - run: npm run predeploy
-      - name: Locate advanced-details UI and bindings
+      - name: Verify advanced-details removal in built assets
         shell: bash
         run: |
           set -euo pipefail
           node <<'NODE'
           const fs=require('fs');
           const files=[...fs.readdirSync('public/js').filter(name=>name.endsWith('.js')).map(name=>'public/js/'+name),'public/index.html'].filter(fs.existsSync);
+          const forbidden=['advancedDetails','advancedToggle','Detalles avanzados','mlsAdvancedDetails'];
+          const failures=[];
           for(const file of files){
             const text=fs.readFileSync(file,'utf8');
-            for(const needle of ['advancedDetails','advancedToggle','Detalles avanzados']){
-              const indexes=[];
-              let at=0;
-              while((at=text.indexOf(needle,at))!==-1){indexes.push(at);at+=needle.length;}
-              console.log('AUDIT',file,needle,'COUNT',indexes.length);
-              indexes.slice(0,12).forEach((idx,n)=>{
-                console.log('CTX',file,needle,n+1,JSON.stringify(text.slice(Math.max(0,idx-260),Math.min(text.length,idx+needle.length+360))));
-              });
-            }
+            for(const needle of forbidden) if(text.includes(needle)) failures.push(file+': '+needle);
           }
+          if(failures.length){
+            console.error('FORBIDDEN_REFS',failures);
+            process.exit(1);
+          }
+          const app=fs.readFileSync('public/js/app.js','utf8');
+          for(const required of ['Profesor IA','Tamaño de letra','Fondo']) if(!app.includes(required)) throw new Error('Falta ajuste requerido: '+required);
+          console.log('ADVANCED_DETAILS_REMOVAL_OK');
           NODE
+      - run: npm run test:chat-editorial
