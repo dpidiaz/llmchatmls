@@ -1,6 +1,6 @@
 # MLS R33 Evidence & Provenance — Pilot 20 Plan
 
-**Estado:** IN PROGRESS — CHECKPOINT 1–4 PASS (4/20)  
+**Estado:** IN PROGRESS — CHECKPOINT 5–8 PASS (8/20)  
 **Pilot ID:** `MLS-R33-EVIDENCE-PILOT-20`  
 **Manifest:** `04 Pilot 20 Manifest.json`  
 **Selection base commit:** `a369cff3e0c6b096c1a48b62931f2e1f7f4ce529`
@@ -228,35 +228,42 @@ No avanzar a 100 si:
 
 ## 11. Estado actual
 
-**IN PROGRESS — CHECKPOINT 1–4 PASS (4/20).**
+**IN PROGRESS — CHECKPOINT 5–8 PASS (8/20).**
 
-Start gate live aprobado. Entradas 1–4 completadas y VERIFIED.
+Start gate live aprobado. Entradas 1–8 completadas y VERIFIED.
 
 Métricas acumuladas:
 
 ```yaml
-entriesProcessed: 4
-entriesVerified: 4
-sourcesCreated: 8
-sourcesReused: 0
-claimsCreated: 10
-claimsVerified: 10
-evidenceLinks: 13
+entriesProcessed: 8
+entriesVerified: 8
+sourcesCreated: 18
+sourceReuseOperations: 2
+sourceMetadataUpdates: 1
+crossEntrySourceReuse: 0
+claimsCreated: 19
+claimReuseOperations: 2
+claimsVerified: 19
+evidenceLinks: 26
+evidenceLinkReuseOperations: 3
 evidenceConflicts: 0
 needsReview: 0
-verificationAttempts: 4
-d1RowsRead: 1720
-d1RowsWritten: 163
-logicalEvidenceBytes: 26038
-averageEvidenceBytesPerEntry: 6509.5
-averageSourcesPerEntry: 2
+verificationAttempts: 8
+d1RowsRead: 3595
+d1RowsWritten: 335
+logicalEvidenceBytes: 53868
+averageEvidenceBytesPerEntry: 6733.5
+averageSourcesPerEntry: 2.25
 apaValidationFailures: 0
+apaMetadataCorrectionsBeforeVerification: 1
 manualHumanReviewEvents: 0
 articleRevisionsProposed: 0
 ```
 
-Checkpoint detallado: `05 Pilot 20 Checkpoint 1 a 4.md`.
+Checkpoint detallado: `06 Pilot 20 Checkpoint 5 a 8.md`.
 
-Decisión: **PASS — continuar secuencialmente con entradas 5–8.**
+Observación: el retry/enrichment de la entrada 6 ejercitó dedupe/idempotencia live sin cambiar IDs; la reutilización cross-entry de una misma Source sigue pendiente de observación.
+
+Decisión: **PASS — continuar secuencialmente con entradas 9–12.**
 
 No se autoriza Gate 100 ni migración masiva.
