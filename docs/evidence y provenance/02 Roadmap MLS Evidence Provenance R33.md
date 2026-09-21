@@ -297,7 +297,7 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F3 Claims and links persistence (local tests green; repository certification pending).
 - [x] F4 State validator integrado (local tests green; repository certification pending).
 - [x] F5 APA renderer/validator (local suite green; repository certification pending).
-- [ ] F6 Reviews/revisions.
+- [x] F6 Reviews/revisions.
 - [ ] F7 Private API/OpenAPI.
 - [ ] F8 Regression certification.
 
@@ -649,6 +649,19 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F6 Reviews y Article Revisions certificado
+
+- Se añadieron reviews append-only con `review_kind` y `evidence_snapshot_hash`.
+- VERIFIED requiere un verification review persistido cuyo hash coincida exactamente con el snapshot Evidence vigente.
+- REVIEWED requiere un segundo editorial review posterior y sobre el mismo snapshot.
+- Cambiar claims, EvidenceLinks, metadata de Source o conflictos invalida automáticamente el review anterior para el estado efectivo.
+- `verificationConfirmed` dejó de ser una vía de promoción: los booleanos de cliente no producen VERIFIED.
+- `verifyEntryEvidence` y `reviewEntryEvidence` son las únicas orquestaciones internas de promoción definidas en Foundation.
+- Los reviews son idempotentes y conservan historial; un snapshot stale falla con 409.
+- Se implementó baseline de artículo y revisiones `proposed` con guard por articleHash.
+- F6 no incluye ninguna ruta para sobrescribir `wiki_articles`; la integración canónica queda diferida al piloto.
+- GitHub Actions run #290: SUCCESS; deploy de producción SKIPPED.
+
 ## 2026-09-21 — F5 APA validator y renderer implementados
 
 - Se verificó nuevamente la base institucional: la guía URL 2025 declara alineación con APA 7.
@@ -760,56 +773,55 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F5 IMPLEMENTED / CERTIFICATION PENDING
+STATUS: PHASE 1 F6 COMPLETE / FINAL HEAD RECERTIFICATION
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-apa
+BRANCH: r33-evidence-reviews-revisions
 BASE: main
-BASE HEAD: 3d6008aaa9ba931fc1b9dd1444c4372589f3e7cd
+BASE HEAD: c1cf76661619373e60b7c1510e24f58d57a6a1d2
 
 DONE:
-- F1 contracts/schema merged
-- F2 Source Registry merged
-- F3 Claims/Links/Conflicts merged
-- F4 deterministic state validator merged
-- F5 APA metadata validator
-- F5 APA reference renderer
-- F5 parenthetical and narrative in-text citations
-- F5 editors metadata support
-- F5 backend-derived citationReady
-- F5 DOI-over-URL rendering
-- F5 URL-GT-2025 Spanish date profile
-- Local accumulated F1-F5 evidence tests: 43/43 green
+- F1 contracts/schema
+- F2 Source Registry
+- F3 Claims/Links/Conflicts
+- F4 deterministic state validator
+- F5 APA validator/renderer
+- F6 append-only Evidence reviews
+- F6 Evidence snapshot hashing
+- F6 VERIFIED/REVIEWED persisted-review requirement
+- F6 automatic review invalidation after Evidence mutation
+- F6 article baseline snapshots
+- F6 proposed article revisions without canonical overwrite
 
 CURRENT:
-- Prepare PR and repository certification for F5
+- Final F6 HEAD recertification after roadmap update
 
 NEXT:
-- Certify and merge F5
-- Begin F6 Reviews and article revision model
+- Merge PR #130 when final HEAD is green
+- Begin F7 private Evidence API/OpenAPI and chat-native operations
 
 BLOCKERS:
-- No F5 logic blockers
-- Full institutional URL guide text requires authenticated URL access; implementation therefore follows APA 7 public rules plus the verified URL 2025 profile statement and fails closed for unsupported cases
+- None in F6 logic
+- Canonical article integration remains intentionally deferred to pilot
 
 DECISIONS:
-- APA strings are generated output, never Source identity
-- citationReady is calculated by backend and cannot be asserted by client
-- Initial supported types are deliberately limited; unsupported source types fail closed
-- Renderer preserves curated title capitalization instead of guessing proper nouns
-- DOI preferred when present
-- Unresolved Source cannot contribute citationReady
+- Client flags cannot create VERIFIED or REVIEWED
+- Verification is an append-only auditable event bound to evidenceSnapshotHash
+- Evidence mutation invalidates prior verification for effective status
+- Proposed article revisions never overwrite wiki_articles in Foundation
+- Historical invalid reviews remain preserved rather than deleted
 
 AUTOOPT IMPACT:
 - None
 
 R32 COMPATIBILITY:
 - Preserved
-- No public runtime wiring
-- reader / Virtuoso / Profesor IA / staging unchanged
+- Watchdog additions on main preserved
+- Reader / Virtuoso / Profesor IA / staging unchanged
 
 EVIDENCE STATUS:
-- Validator + APA gate implemented; no production corpus verification yet
+- Foundation review lifecycle implemented
+- No production corpus verification yet
 
 SOURCES CREATED:
 - 0 production
@@ -824,12 +836,16 @@ D1 IMPACT:
 - 0 production Evidence writes
 
 TESTS:
-- F4 GitHub Actions run #287: SUCCESS
-- Accumulated local Evidence suite F1-F5: 43/43 PASS
-- Full F5 repository certification pending
+- GitHub Actions run #290: SUCCESS
+- npm run test:chat-editorial: SUCCESS
+- npm run predeploy: SUCCESS
+- npm run recovery:verify: SUCCESS
+- deploy-contract: SUCCESS
+- npm run check: SUCCESS
+- production deploy step: SKIPPED
 
 PR:
-- Pending creation
+- #130 — feat: add MLS R33 evidence reviews and revisions
 ```
 ---
 

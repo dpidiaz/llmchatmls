@@ -58,12 +58,14 @@ function evidenceSchema(){
     "CREATE TABLE IF NOT EXISTS wiki_evidence_reviews ("+
       "review_id TEXT PRIMARY KEY, code TEXT NOT NULL, article_generated_at TEXT NOT NULL, article_hash TEXT NOT NULL, evidence_version TEXT NOT NULL, "+
       "evidence_revision INTEGER NOT NULL, source_revision INTEGER NOT NULL, "+
+      "review_kind TEXT NOT NULL CHECK(review_kind IN ('verification','editorial_review')), evidence_snapshot_hash TEXT NOT NULL, "+
       "status_before TEXT NOT NULL CHECK(status_before IN ('UNSOURCED','SOURCED','VERIFIED','REVIEWED')), "+
       "status_after TEXT NOT NULL CHECK(status_after IN ('UNSOURCED','SOURCED','VERIFIED','REVIEWED')), "+
       "claims_total INTEGER NOT NULL, claims_verified INTEGER NOT NULL, sources_total INTEGER NOT NULL, conflicts_total INTEGER NOT NULL, "+
       "reviewer_type TEXT NOT NULL CHECK(reviewer_type IN ('chatgpt','human','system')), reviewer TEXT, verification_method TEXT NOT NULL, "+
-      "citation_renderer_version TEXT NOT NULL, notes TEXT, run_id TEXT, created_at TEXT NOT NULL)",
+      "citation_renderer_version TEXT NOT NULL, parent_review_id TEXT, article_revision_id TEXT, notes TEXT, run_id TEXT, created_at TEXT NOT NULL)",
     "CREATE INDEX IF NOT EXISTS wiki_evidence_reviews_entry_idx ON wiki_evidence_reviews(code,created_at)",
+    "CREATE INDEX IF NOT EXISTS wiki_evidence_reviews_kind_idx ON wiki_evidence_reviews(code,review_kind,created_at)",
     "CREATE TABLE IF NOT EXISTS wiki_article_revisions ("+
       "revision_id TEXT PRIMARY KEY, code TEXT NOT NULL, revision_number INTEGER NOT NULL CHECK(revision_number>=1), parent_revision_id TEXT, "+
       "article_markdown TEXT NOT NULL, article_hash TEXT NOT NULL, source_generated_at TEXT NOT NULL, change_reason TEXT NOT NULL, "+
