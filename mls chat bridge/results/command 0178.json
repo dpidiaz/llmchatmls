@@ -1,0 +1,44 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "metricasEvidenceEntradaMLS",
+  "method": "GET",
+  "path": "/api/wiki/editorial/evidence/metrics",
+  "response": {
+    "ok": true,
+    "storage": {
+      "code": "MLS-V01-0115",
+      "generatedAt": "2026-09-16T09:05:43.150Z",
+      "rowCounts": {
+        "state": 1,
+        "claims": 2,
+        "links": 2,
+        "conflicts": 0,
+        "reviews": 1,
+        "revisions": 0,
+        "sources": 1
+      },
+      "entryOwnedBytes": 3623,
+      "referencedSourceBytes": 904,
+      "logicalEvidenceBytes": 4527,
+      "measurement": "UTF-8 JSON logical payload; not physical SQLite file size. Referenced source bytes may be shared across entries."
+    },
+    "telemetry": {
+      "d1": {
+        "queries": 8,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 30,
+        "d1RowsWritten": 0,
+        "observedRowsRead": 8,
+        "observedRowsWritten": 0,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:38:18.743Z",
+  "commandFile": "mls chat bridge/commands/command 0178.json"
+}
