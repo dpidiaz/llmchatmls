@@ -1,0 +1,121 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V10-0020",
+    "articleGeneratedAt": "2026-09-13T06:49:01.298Z",
+    "articleHash": "fa337573f8ab8694cb69671d88a15ca8c37aaf7f92c784ba09c41e26014fa438",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "rae-ortografia",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "Ortografía",
+        "institution": "Real Academia Española",
+        "canonicalUrl": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+        "language": "es",
+        "topics": [
+          "ortografía",
+          "abecedario",
+          "dígrafos"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "rae-dpd-dieresis",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "diéresis",
+        "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+        "canonicalUrl": "https://www.rae.es/dpd/di%C3%A9resis",
+        "language": "es",
+        "topics": [
+          "diéresis",
+          "signos diacríticos"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "rae-seseo",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "El seseo y el ceceo",
+        "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+        "canonicalUrl": "https://www.rae.es/buen-uso-espa%C3%B1ol/el-seseo-y-el-ceceo",
+        "language": "es",
+        "topics": [
+          "seseo",
+          "pronunciación",
+          "ortografía",
+          "variación regional"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-alfabeto",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "El abecedario español actual consta de 27 letras; ch y ll son dígrafos formados por dos letras y no letras independientes del abecedario, aunque continúan utilizándose en la escritura.",
+        "claimType": "orthography",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-diacriticos",
+        "sectionKey": "Cómo funciona",
+        "summary": "La tilde y la diéresis son signos ortográficos que se aplican a letras o vocales; sus formas marcadas no añaden posiciones independientes al inventario de 27 letras del abecedario.",
+        "claimType": "orthography",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-seseo",
+        "sectionKey": "Observación importante",
+        "summary": "En el español seseante de América, incluido Guatemala, c ante e/i y z se pronuncian con /s/; esta coincidencia fonológica no elimina las distinciones ortográficas entre esas letras.",
+        "claimType": "regional_variation",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-alfabeto",
+        "sourceRef": "rae-ortografia",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "1. Abecedario y uso de las letras"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-diacriticos",
+        "sourceRef": "rae-ortografia",
+        "supportType": "supports",
+        "locator": {
+          "section": "Abecedario y acentuación gráfica"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-diacriticos",
+        "sourceRef": "rae-dpd-dieresis",
+        "supportType": "supports",
+        "locator": {
+          "section": "1. Signo ortográfico diacrítico"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-seseo",
+        "sourceRef": "rae-seseo",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "El seseo / Consecuencias ortográficas"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
