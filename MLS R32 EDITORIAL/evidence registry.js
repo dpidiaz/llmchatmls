@@ -14,8 +14,9 @@ function rowToSource(row){
 }
 function sourceParams(s,now,createdAt=now){return [s.sourceId,s.identityKind,s.identityKey,s.metadataHash,s.sourceType,s.authorityTier,s.status,s.title,JSON.stringify(s.authors),JSON.stringify(s.editors||[]),JSON.stringify(s.contributors),dbValue(s.institution),dbValue(s.publicationYear),dbValue(s.publicationDate),dbValue(s.publisher),dbValue(s.edition),dbValue(s.containerTitle),dbValue(s.journal),dbValue(s.volume),dbValue(s.issue),dbValue(s.pages),dbValue(s.articleNumber),dbValue(s.isbn),dbValue(s.issn),dbValue(s.doi),dbValue(s.canonicalUrl),dbValue(s.language),JSON.stringify(s.topics),dbValue(s.resourceVersion),dbValue(s.supersedesSourceId),dbValue(s.accessedAt),createdAt,now];}
 async function ensureEvidenceDb(env){
-  let task=ready.get(env.WIKI_DB);
-  if(!task){task=env.WIKI_DB.batch(foundation.evidenceSchema().map(sql=>env.WIKI_DB.prepare(sql)));ready.set(env.WIKI_DB,task);task.catch(()=>ready.delete(env.WIKI_DB));}
+  const key=env.WIKI_DB&&env.WIKI_DB.__mlsEvidenceOriginal?env.WIKI_DB.__mlsEvidenceOriginal:env.WIKI_DB;
+  let task=ready.get(key);
+  if(!task){task=env.WIKI_DB.batch(foundation.evidenceSchema().map(sql=>env.WIKI_DB.prepare(sql)));ready.set(key,task);task.catch(()=>ready.delete(key));}
   await task;
 }
 async function getSourceById(env,sourceId){await ensureEvidenceDb(env);const row=await env.WIKI_DB.prepare('SELECT * FROM wiki_sources WHERE source_id=?').bind(String(sourceId||'')).first();return rowToSource(row);}
