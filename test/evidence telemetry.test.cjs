@@ -8,7 +8,7 @@ const claims=require('../MLS R32 EDITORIAL/evidence claims.js');
 function sqliteEnv(){
   const db=new DatabaseSync(':memory:');
   db.exec("CREATE TABLE wiki_articles(code TEXT PRIMARY KEY,language TEXT,language_name TEXT,title TEXT,level TEXT,part TEXT,chapter TEXT,article_markdown TEXT NOT NULL,prompt_version TEXT,generated_at TEXT NOT NULL)");
-  db.prepare("INSERT INTO wiki_articles VALUES(?,?,?,?,?,?,?,?,?,?,?)").run('MLS-V10-0020','espanol-guatemala','Español','Tema','A1','Parte','Capítulo','#### Regla\nContenido.','32.0','2026-09-21T10:00:00Z');
+  db.prepare("INSERT INTO wiki_articles VALUES(?,?,?,?,?,?,?,?,?,?)").run('MLS-V10-0020','espanol-guatemala','Español','Tema','A1','Parte','Capítulo','#### Regla\nContenido.','32.0','2026-09-21T10:00:00Z');
   const wrap=(sql,args=[])=>({sql,args,bind(...x){return wrap(sql,x)},async first(){return db.prepare(sql).get(...args)||null},async all(){return {results:db.prepare(sql).all(...args)}},async run(){const r=db.prepare(sql).run(...args);return {meta:{changes:Number(r.changes)}}}});
   const WIKI_DB={prepare:wrap,async batch(stmts){db.exec('BEGIN');try{const out=stmts.map(q=>{const raw=q.__mlsEvidenceRawStatement||q;const r=db.prepare(raw.sql).run(...raw.args);return {meta:{changes:Number(r.changes)}}});db.exec('COMMIT');return out}catch(e){db.exec('ROLLBACK');throw e}}};
   return {db,env:{WIKI_DB}};
