@@ -11,11 +11,18 @@ function gitBlobSha(buffer){
   return crypto.createHash('sha1').update(Buffer.from('blob '+buffer.length+'\0')).update(buffer).digest('hex');
 }
 
-test('Pilot 20 manifest: remains prepared and never self-starts',()=>{
+test('Pilot 20 manifest: reflects the live execution state without fabricating completion',()=>{
   assert.equal(manifest.pilotId,'MLS-R33-EVIDENCE-PILOT-20');
-  assert.equal(manifest.status,'prepared_not_started');
-  assert.equal(manifest.execution.started,false);
-  assert.equal(manifest.execution.runId,null);
+  assert.equal(manifest.status,'in_progress');
+  assert.equal(manifest.execution.started,true);
+  assert.equal(manifest.execution.runId,'MLS-R33-EVIDENCE-PILOT-20-20260921-A');
+  assert.equal(manifest.execution.startedAt,'2026-09-21T17:07:44Z');
+  assert.equal(manifest.execution.completedAt,null);
+  assert.equal(manifest.execution.entriesProcessed,8);
+  assert.equal(manifest.execution.lastCompletedOrder,8);
+  assert.equal(manifest.execution.lastCompletedCode,'MLS-V03-0648');
+  assert.equal(manifest.execution.lastCheckpoint,'5-8');
+  assert.equal(manifest.execution.lastCheckpointStatus,'pass');
   assert.equal(manifest.entries.length,20);
 });
 
