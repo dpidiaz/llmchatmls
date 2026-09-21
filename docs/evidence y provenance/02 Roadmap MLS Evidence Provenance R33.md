@@ -36,15 +36,15 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 0 — AUDITORÍA Y DISEÑO**
+**Estado actual: FASE 1 — FOUNDATION / READY TO START**
 
 Progreso global inicial:
 
 | Fase | Estado | Gate |
 | --- | --- | --- |
 | Documentación contractual R33 | COMPLETE | Prompt y roadmap versionados |
-| Fase 0 Auditoría | IN PROGRESS | Arquitectura y schema recomendados |
-| Fase 1 Foundation | NOT STARTED | Tests foundation verdes |
+| Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
+| Fase 1 Foundation | READY TO START | Tests foundation verdes |
 | Fase 2 Piloto 20 | NOT STARTED | Métricas piloto aceptables |
 | Fase 3 Evaluación | NOT STARTED | Decisión explícita go/no go |
 | Fase 4 Gate 100 | NOT STARTED | 100 estables |
@@ -181,7 +181,7 @@ Cambiar una decisión LOCKED requiere documentar motivo, impacto, compatibilidad
 
 # 6. FASE 0 — AUDITORÍA Y DISEÑO
 
-**Estado: IN PROGRESS**
+**Estado: COMPLETE**
 
 ## Objetivo
 
@@ -203,22 +203,29 @@ Comprender completamente R32 y producir un diseño implementable de Foundation s
 
 ## Trabajo pendiente
 
-- [ ] Inventariar todos los DDL actuales relacionados con `wiki_articles`, staging y provenance.
-- [ ] Localizar definición exacta/installer de `wiki_article_provenance`.
-- [ ] Inventariar endpoints editoriales y rutas OpenAPI que R33 deberá extender.
-- [ ] Auditar Virtuoso y Profesor IA para puntos de integración Evidence.
-- [ ] Auditar semantic/full text search para futura señal de `evidenceStatus`.
-- [ ] Auditar canonical entry schema.
-- [ ] Auditar rutas offline para asegurar que Evidence no rompa lectura local.
-- [ ] Medir shape y tamaño medio de metadata actual por entrada.
-- [ ] Diseñar 2–3 opciones de schema D1.
-- [ ] Elegir diseño recomendado con estimación de rows/entry y bytes/entry.
-- [ ] Definir transición exacta UNSOURCED → SOURCED → VERIFIED → REVIEWED.
-- [ ] Definir reglas deterministas mínimas de VERIFIED.
-- [ ] Definir contrato de revision/concurrency.
-- [ ] Definir estructura de source policies.
-- [ ] Definir Source Registry dedupe/fingerprint.
-- [ ] Definir APA metadata schema + renderer versioning.
+Ninguno para el exit gate de Fase 0.
+
+## Trabajo completado adicional
+
+- [x] Inventariar DDL actual de `wiki_articles`, Chat Editorial, AUTOOPT, Semantic Audit y provenance.
+- [x] Localizar `ensureWikiArticleProvenanceDb` y su schema exacto.
+- [x] Inventariar superficie editorial/OpenAPI relevante.
+- [x] Auditar Virtuoso y Profesor IA como consumidores futuros de Evidence.
+- [x] Auditar semantic/full text search.
+- [x] Auditar `canonical-entry.schema.json`.
+- [x] Auditar Service Worker/offline: `/api/*` es network-only y la lectura canónica no depende de Evidence.
+- [x] Medir corpus canónico: ~31.3 MB de entradas, ~3.1 KB/entrada.
+- [x] Evaluar tres opciones de schema.
+- [x] Seleccionar capa D1 normalizada separada.
+- [x] Definir state machine UNSOURCED → SOURCED → VERIFIED → REVIEWED.
+- [x] Definir guardas deterministas mínimas de VERIFIED.
+- [x] Definir optimistic concurrency por generatedAt + articleHash + evidenceRevision.
+- [x] Definir estructura conceptual de source policies.
+- [x] Definir dedupe Source Registry por DOI/ISBN/URL/fingerprint.
+- [x] Definir metadata APA + versionado de renderer.
+- [x] Documentar impacto D1/GitHub/tamaño y unidades F1–F8.
+
+Documento de cierre: `03 Fase 0 Arquitectura y diseño recomendado.md`.
 
 ## Deliverable de cierre
 
@@ -244,7 +251,7 @@ Fase 0 solo se cierra cuando existe una arquitectura Foundation suficientemente 
 
 # 7. FASE 1 — FOUNDATION
 
-**Estado: NOT STARTED**
+**Estado: READY TO START**
 
 ## Alcance permitido
 
@@ -625,6 +632,19 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — Cierre de Fase 0
+
+- Auditoría D1, provenance, OpenAPI, Virtuoso, Profesor IA, search, offline y canonical schema completada.
+- Se rechazó añadir Evidence directamente a `wiki_articles`.
+- Se seleccionó arquitectura D1 normalizada separada.
+- Se definió vínculo de Evidence a `code + generatedAt + articleHash`.
+- Se definió Source Registry global deduplicado.
+- Se definieron state machine, concurrency guard, reviews y article revision strategy.
+- Se midió el corpus canónico en ~31.3 MB de entradas, ~3.1 KB por entrada.
+- Se estimó Evidence completo en escenarios lean/expected/high y se dejó el piloto como autoridad final de métricas.
+- Fase 1 queda READY TO START.
+- No se modificó código de producción ni D1.
+
 ## 2026-09-21 — Baseline documental
 
 - Se creó documentación R33.
@@ -647,31 +667,48 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: DOCUMENTATION BASELINE COMPLETE
+STATUS: PHASE 0 COMPLETE
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
 BRANCH: r33-evidence-provenance-docs
 BASE HEAD: 47c720005bfc0a3ceab1aad46079d4db913ffb61
 
 DONE:
-- Combined Master Prompt R33
-- APA 7 / URL Guatemala profile
-- Living roadmap
-- Initial R32 architecture inspection
+- Full R32 architecture audit
+- D1/provenance inventory
+- OpenAPI/editorial inventory
+- Virtuoso / Profesor IA / search / offline audit
+- Canonical schema audit
+- Corpus size baseline
+- Three schema options evaluated
+- Recommended normalized D1 architecture selected
+- State machine and concurrency contract defined
+- APA metadata/renderer design defined
+- Phase 0 architecture document created
 
 CURRENT:
-- Fase 0 audit and schema design
+- Fase 1 Foundation READY TO START
 
 NEXT:
-- Full D1 and endpoint inventory
-- Foundation schema options
-- Recommended architecture and impact estimates
+- F1 contracts and additive schema
+- F2 Source Registry
+- F3 Claims and EvidenceLinks
+- F4 deterministic state validator
 
 BLOCKERS:
-- None documented
+- Production-code pushes may trigger Cloudflare Git deployment from branch activity.
+- Do not push Foundation production code until this deployment behavior is controlled or explicitly accepted.
+
+DECISIONS:
+- Evidence does not add mandatory columns to wiki_articles in Foundation.
+- Semantic Audit remains diagnostic only.
+- R32 references remain style references.
+- Source IDs should be deterministic, not a global sequential coordination point.
+- Evidence binds to exact generatedAt + articleHash.
+- Worker will not autonomously crawl the web in Foundation.
 
 AUTOOPT IMPACT:
-- None; documentation only
+- None
 
 R32 COMPATIBILITY:
 - Preserved
@@ -695,26 +732,23 @@ NEEDS REVIEW:
 - 0 measured
 
 D1 IMPACT:
-- 0 writes from this documentation checkpoint
+- 0 Evidence writes
 
 GITHUB IMPACT:
-- Documentation branch only
+- Documentation only
 
 SIZE DELTA:
 - Documentation only
+- Canonical corpus baseline measured at ~31.3 MB excluding manifests
 
 TESTS:
-- Not applicable to documentation-only checkpoint
-- No deploy command executed manually
-- Cloudflare Git integration reported an automatic successful deployment for the documentation branch; no production-code file changed in this PR
-
-COMMIT SHA:
-- df97395f5cbdccb0cc0cb471f785e69744ebca3d (roadmap creation checkpoint)
+- Architecture audit only
+- No production-code QA required yet
+- No manual deploy command executed
 
 PR:
 - #124 — docs: define MLS R33 Evidence and Provenance
 ```
-
 ---
 
 # 20. PROTOCOLO PARA FUTUROS CHATS
