@@ -1,0 +1,38 @@
+{
+  "protocol": "MLS Watchdog Protocol R1",
+  "canonicalPath": "docs/watchdogs/MLS Watchdog Protocol R1.md",
+  "commands": {
+    "MLS activar watchdogs": {
+      "scope": "current chat",
+      "action": "create or enable one isolated three-task watchdog group",
+      "idempotent": true
+    },
+    "MLS detener watchdogs": {
+      "scope": "current chat",
+      "action": "pause only the current chat watchdog group"
+    },
+    "MLS reactivar watchdogs": {
+      "scope": "current chat",
+      "action": "enable only the current chat watchdog group",
+      "atomic": true
+    },
+    "MLS estado watchdogs": {
+      "scope": "current chat",
+      "action": "inspect only the current chat watchdog group",
+      "readOnly": true
+    },
+    "MLS detener watchdogs global": {
+      "scope": "all MLS watchdog groups",
+      "action": "pause every task matching the canonical MLS Watchdog naming contract"
+    },
+    "MLS estado watchdogs global": {
+      "scope": "all MLS watchdog groups",
+      "action": "inspect all canonical MLS watchdog groups",
+      "readOnly": true
+    },
+    "MLS watchdog group <GROUP ID>": {
+      "scope": "current chat",
+      "action": "explicitly establish a known logical group for recovery when local context is insufficient"
+    }
+  }
+}
