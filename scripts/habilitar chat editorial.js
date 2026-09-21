@@ -15,6 +15,7 @@ function augmentEditorialOpenApi(text) {
   api.paths['/api/wiki/editorial/evidence/status']={get:{operationId:'estadoEvidenceMLS',summary:'Consultar estado agregado de Evidence & Provenance.','x-openai-isConsequential':false,responses}};
   api.paths['/api/wiki/editorial/evidence/entry']={get:{operationId:'evidenceEntradaMLS',summary:'Obtener artículo canónico, versión exacta, estado Evidence y reviews.','x-openai-isConsequential':false,parameters:[codeParam],responses}};
   api.paths['/api/wiki/editorial/evidence/sources']={get:{operationId:'fuentesEntradaMLS',summary:'Listar Sources vinculadas a una entrada y su referencia APA cuando sea válida.','x-openai-isConsequential':false,parameters:[codeParam],responses}};
+  api.paths['/api/wiki/editorial/evidence/provenance']={get:{operationId:'provenanceEntradaMLS',summary:'Obtener provenance compuesto R32 + R33 para la versión canónica vigente.','x-openai-isConsequential':false,parameters:[codeParam],responses}};
   api.paths['/api/wiki/editorial/evidence/validate']={post:{operationId:'validarEvidenceMLS',summary:'Validar cobertura Evidence y APA sin promover estado.','x-openai-isConsequential':false,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'}},required:['code'],additionalProperties:false}}}},responses}};
   api.paths['/api/wiki/editorial/evidence/proposal']={post:{operationId:'proponerEvidenceMLS',summary:'Persistir una propuesta idempotente para la versión exacta del artículo.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},articleGeneratedAt:{type:'string'},articleHash:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},sources:{type:'array',maxItems:30,items:{type:'object'}},claims:{type:'array',maxItems:50,items:{type:'object'}},links:{type:'array',maxItems:100,items:{type:'object'}},conflicts:{type:'array',maxItems:30,items:{type:'object'}}},required:['code','articleGeneratedAt','articleHash','expectedEvidenceRevision','sources','claims','links'],additionalProperties:false}}}},responses}};
   api.paths['/api/wiki/editorial/evidence/verify']={post:{operationId:'verificarEvidenceMLS',summary:'Crear un verification review ligado al snapshot actual y promover a VERIFIED solo si el backend lo permite.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},reviewerType:{type:'string',enum:['chatgpt','human','system']},reviewer:{type:'string'},verificationMethod:{type:'string'},notes:{type:'string'},runId:{type:'string'}},required:['code','expectedEvidenceRevision'],additionalProperties:false}}}},responses}};
@@ -24,22 +25,35 @@ function augmentEditorialOpenApi(text) {
 }
 function buildChatRuntime(root = process.cwd()) {
   const read = file => fs.readFileSync(path.join(root, file), 'utf8');
+  const packageMeta=JSON.parse(read('package.json'));
+  const repositoryUrl=String(packageMeta.repository?.url||'').replace(/\.git$/,'');
+  const repositoryName=repositoryUrl.replace(/^https:\/\/github\.com\//,'');
+  const evidenceFoundation=require(path.join(root,'MLS R32 EDITORIAL/evidence foundation.js'));
+  evidenceFoundation.assertRepositoryContext({
+    system:packageMeta.mlsContext?.system,
+    repository:repositoryName,
+    domain:packageMeta.mlsContext?.domain
+  });
   const evidenceNames={
     'MLS R32 EDITORIAL/evidence foundation.js':'MLS_EVIDENCE_FOUNDATION',
+    'MLS R32 EDITORIAL/evidence policies.js':'MLS_EVIDENCE_POLICIES',
     'MLS R32 EDITORIAL/evidence registry.js':'MLS_EVIDENCE_REGISTRY',
     'MLS R32 EDITORIAL/evidence claims.js':'MLS_EVIDENCE_CLAIMS',
     'MLS R32 EDITORIAL/evidence apa.js':'MLS_EVIDENCE_APA',
     'MLS R32 EDITORIAL/evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
     'MLS R32 EDITORIAL/evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
+    'MLS R32 EDITORIAL/evidence provenance.js':'MLS_EVIDENCE_PROVENANCE',
     'MLS R32 EDITORIAL/evidence api.js':'MLS_EVIDENCE_API'
   };
   const evidenceDeps={
     './evidence foundation.js':'MLS_EVIDENCE_FOUNDATION',
+    './evidence policies.js':'MLS_EVIDENCE_POLICIES',
     './evidence registry.js':'MLS_EVIDENCE_REGISTRY',
     './evidence claims.js':'MLS_EVIDENCE_CLAIMS',
     './evidence apa.js':'MLS_EVIDENCE_APA',
     './evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
     './evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
+    './evidence provenance.js':'MLS_EVIDENCE_PROVENANCE',
     './evidence api.js':'MLS_EVIDENCE_API'
   };
   const bundleEvidence=file=>{

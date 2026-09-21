@@ -1,6 +1,7 @@
 'use strict';
 
 const MLS_EVIDENCE_VERSION='1.0';
+const MLS_EVIDENCE_CONTEXT=Object.freeze({system:'MLS',repository:'dpidiaz/llmchatmls',domain:'language'});
 const MLS_CITATION_STYLE='APA';
 const MLS_CITATION_EDITION=7;
 const MLS_CITATION_PROFILE='URL-GT-2025';
@@ -75,6 +76,14 @@ function evidenceSchema(){
   ];
 }
 
+function assertRepositoryContext(input={}){
+  const got={system:String(input.system||''),repository:String(input.repository||''),domain:String(input.domain||'')};
+  const expected=MLS_EVIDENCE_CONTEXT;
+  if(got.system!==expected.system||got.repository!==expected.repository||got.domain!==expected.domain){
+    const e=new Error('REPO_CONTEXT_MISMATCH');e.code='REPO_CONTEXT_MISMATCH';e.status=409;e.expected=expected;e.received=got;throw e;
+  }
+  return true;
+}
 function normalizeText(v){return String(v??'').normalize('NFKC').replace(/\s+/gu,' ').trim();}
 function normalizeArticleMarkdown(v){return String(v??'').replace(/\r\n?/g,'\n').split('\n').map(x=>x.replace(/[ \t]+$/g,'')).join('\n').trim();}
 function hex(bytes){return Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');}
@@ -220,7 +229,7 @@ function assertExpectedEvidenceRevision(currentRevision,expectedRevision){
 }
 
 module.exports={
-  MLS_EVIDENCE_VERSION,MLS_CITATION_STYLE,MLS_CITATION_EDITION,MLS_CITATION_PROFILE,MLS_CITATION_RENDERER_VERSION,
+  MLS_EVIDENCE_VERSION,MLS_EVIDENCE_CONTEXT,assertRepositoryContext,MLS_CITATION_STYLE,MLS_CITATION_EDITION,MLS_CITATION_PROFILE,MLS_CITATION_RENDERER_VERSION,
   EVIDENCE_STATUSES,SOURCE_TIERS,SUPPORT_TYPES,CLAIM_MATERIALITY,SOURCE_TYPES,evidenceSchema,normalizeArticleMarkdown,sha256Hex,articleHash,
   normalizeDoi,normalizeIsbn,normalizeUrl,normalizeSourceMetadata,sourceIdentity,claimIdentity,evidenceLinkIdentity,stableJson,
   assertEvidenceVersionMatch:sameVersion,effectiveEvidenceStatus,deriveEvidenceStatus,assertExpectedEvidenceRevision

@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 1 — FOUNDATION / IN PROGRESS**
+**Estado actual: FASE 2 — PILOTO 20 / READY, NOT STARTED**
 
 Progreso global inicial:
 
@@ -44,8 +44,8 @@ Progreso global inicial:
 | --- | --- | --- |
 | Documentación contractual R33 | COMPLETE | Prompt y roadmap versionados |
 | Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
-| Fase 1 Foundation | IN PROGRESS — CONTRACT CLOSURE | Tests + source policies + provenance contract verdes |
-| Fase 2 Piloto 20 | NOT STARTED | Métricas piloto aceptables |
+| Fase 1 Foundation | COMPLETE | Foundation R33 certificada |
+| Fase 2 Piloto 20 | READY — NOT STARTED | Métricas piloto aceptables |
 | Fase 3 Evaluación | NOT STARTED | Decisión explícita go/no go |
 | Fase 4 Gate 100 | NOT STARTED | 100 estables |
 | Fase 5 Gate 500 | NOT STARTED | 500 estables |
@@ -251,7 +251,7 @@ Fase 0 solo se cierra cuando existe una arquitectura Foundation suficientemente 
 
 # 7. FASE 1 — FOUNDATION
 
-**Estado: IN PROGRESS**
+**Estado: COMPLETE**
 
 ## Alcance permitido
 
@@ -293,16 +293,16 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F1 state machine base y optimistic concurrency 409.
 - [x] F1 tests dedicados: 12 casos locales verdes.
 - [x] F1 certificación completa del PR #125 contra main.
-- [x] F2 Source Registry runtime/persistence (local tests green; repository certification pending).
-- [x] F3 Claims and links persistence (local tests green; repository certification pending).
-- [x] F4 State validator integrado (local tests green; repository certification pending).
-- [x] F5 APA renderer/validator (local suite green; repository certification pending).
+- [x] F2 Source Registry runtime/persistence; repository-certified.
+- [x] F3 Claims and links persistence; repository-certified.
+- [x] F4 State validator integrado; repository-certified.
+- [x] F5 APA renderer/validator; repository-certified.
 - [x] F6 Reviews/revisions.
 - [x] F7 Private API/OpenAPI.
 - [x] F8 Regression certification.
-- [ ] F9 Contract closure: source policies por los 10 idiomas.
-- [ ] F9 Contract closure: provenance R32+R33 compuesto explícitamente.
-- [ ] F9 Contract closure: repo identity / boundary contracts explícitos.
+- [x] F9 Contract closure: source policies por los 10 idiomas.
+- [x] F9 Contract closure: provenance R32+R33 compuesto explícitamente.
+- [x] F9 Contract closure: repo identity / boundary contracts explícitos.
 
 ## Required tests
 
@@ -317,20 +317,20 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] VERIFIED hard guard.
 - [x] Unresolved claims block VERIFIED.
 - [x] Contradiction handling.
-- [ ] Idempotent verification.
+- [x] Idempotent verification.
 - [x] Concurrent verification.
-- [ ] Revision creation.
-- [ ] No silent overwrite.
-- [ ] Style references remain distinct.
-- [ ] AUTOOPT unchanged.
-- [ ] GitHub Staging unchanged.
-- [ ] FREE ONLY.
-- [ ] Repo identity guard.
-- [ ] No image storage.
-- [ ] No exercises.
-- [ ] APA metadata/render separation.
-- [ ] Citation versioning.
-- [ ] No invented locator acceptance.
+- [x] Revision creation.
+- [x] No silent overwrite.
+- [x] Style references remain distinct.
+- [x] AUTOOPT unchanged.
+- [x] GitHub Staging unchanged.
+- [x] FREE ONLY.
+- [x] Repo identity guard.
+- [x] No image storage.
+- [x] No exercises.
+- [x] APA metadata/render separation.
+- [x] Citation versioning.
+- [x] No invented locator acceptance.
 
 ## Regression gate
 
@@ -340,8 +340,12 @@ Mínimo esperado:
 
 ```sh
 npm run test:chat-editorial
+npm run test:evidence
+npm run test:canonical-tools
 npm run qa:baseline
 npm run predeploy
+npm run recovery:verify
+node --test test/deploy-contract.test.cjs
 npm run check
 ```
 
@@ -652,6 +656,23 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F9 Contract Closure certificado; Phase 1 COMPLETE
+
+- Se implementaron Source Policies explícitas para los 10 idiomas canónicos MLS.
+- approvedSourcePool permanece vacío hasta verificar fuentes reales durante el piloto; no se preaprobaron autoridades concretas por intuición.
+- Español Guatemala, Portugués Brasil y Chino Taiwán conservan explícitamente su variante objetivo.
+- El Evidence Validator selecciona la policy a partir del language canónico del artículo.
+- Se añadió provenance compuesto R32 + R33 reutilizando wiki_article_provenance cuando existe.
+- Se añadió endpoint privado read-only de provenance.
+- Se declaró y bloqueó la identidad canónica MLS / dpidiaz/llmchatmls / language; mismatch produce REPO_CONTEXT_MISMATCH.
+- Tests de boundary impiden paid APIs, GitHub como runtime DB, style-reference laundering, imágenes/ejercicios y overwrite de wiki_articles desde Evidence.
+- verifyEntryEvidence quedó idempotente sobre el mismo snapshot: reusa el verification review y no incrementa evidence_revision.
+- GitHub Actions run #309: SUCCESS.
+- test:chat-editorial, test:evidence, test:canonical-tools, qa:baseline, predeploy, recovery:verify, deploy-contract y check: SUCCESS.
+- Production deploy: SKIPPED.
+- No se crearon Sources, Claims ni EvidenceLinks en D1 de producción.
+- Phase 1 queda COMPLETE. Phase 2 Pilot 20 queda READY pero NOT STARTED.
+
 ## 2026-09-21 — F8 Regression certification aprobado; gap audit de cierre
 
 - GitHub Actions run #303: SUCCESS.
@@ -798,57 +819,64 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F8 CERTIFIED / CONTRACT CLOSURE REQUIRED
+STATUS: PHASE 1 COMPLETE / PHASE 2 PILOT 20 READY — NOT STARTED
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-foundation-certification
+BRANCH: r33-evidence-contract-closure
 BASE: main
-BASE HEAD: 020b6a7a075618e5fd46efc4540f7dfa9ba9cfe2
+BASE HEAD: 5345ac75537fdd7e69d83b870698d3d7de150420
 
 DONE:
-- F1 through F7 implemented and merged
-- F8 explicit certification gates implemented
-- GitHub Actions run #303 SUCCESS
-- test:chat-editorial SUCCESS
-- test:evidence SUCCESS
-- test:canonical-tools SUCCESS
-- qa:baseline SUCCESS
-- predeploy SUCCESS
-- recovery:verify SUCCESS
-- deploy-contract SUCCESS
-- check SUCCESS
-- production deploy SKIPPED
+- F1 contracts/schema
+- F2 Source Registry
+- F3 Claims/Links/Conflicts
+- F4 deterministic Evidence state validator
+- F5 APA validator/renderer
+- F6 append-only Reviews + Article Revisions
+- F7 private Evidence API/OpenAPI + runtime bundle
+- F8 explicit CI regression certification
+- F9 source policies for all 10 MLS languages
+- F9 composite R32+R33 provenance
+- F9 canonical repository context guard
+- F9 architecture boundary contracts
+- Idempotent verification on identical Evidence snapshot
+- Full Foundation certification in GitHub Actions run #309
 
 CURRENT:
-- Contract gap audit before closing Phase 1
+- Phase 1 closed
+- Preparing Phase 2 Pilot 20 only
+- No pilot Evidence has been written yet
 
 NEXT:
-- Merge PR #132 after final HEAD certification
-- F9 source policies for all 10 MLS languages
-- F9 explicit R32+R33 provenance composition
-- F9 repo identity / boundary contract tests
-- Recertify Foundation
-- Only then mark Phase 1 COMPLETE and Phase 2 Pilot 20 READY
+- Merge PR #133 after final roadmap HEAD recertification
+- Create controlled Pilot 20 manifest/measurement plan
+- Select representative 20-entry sample without processing it yet
+- Run Pilot 20 only as a separate explicitly tracked phase
 
 BLOCKERS:
-- Phase 1 closure blocked by missing sourcePolicies/approvedSourcePool configuration
-- Phase 1 closure blocked by missing explicit R32+R33 provenance composition contract
-- Phase 1 closure blocked by missing explicit repo identity/boundary test
+- None for Phase 1
+- Pilot execution intentionally not started
 
 DECISIONS:
-- A green CI run does not override incomplete architectural requirements
-- F8 is technically complete
-- F9 is a closure hardening unit, not scope expansion
+- approvedSourcePool remains empty until sources are actually verified
+- Source policy defines authority categories and claim rules, not invented bibliography
+- R32 provenance is reused and composed rather than duplicated
+- VERIFIED/REVIEWED remain snapshot-bound append-only events
+- A repeated verify on the same valid snapshot is idempotent
+- No corpus-scale migration before Pilot 20 evaluation
 
 AUTOOPT IMPACT:
-- None
+- None; AUTOOPT remains observational and independent
 
 R32 COMPATIBILITY:
 - Preserved
+- R32 editorial generation remains promptVersion 32.0
+- Existing staging/watchdog/reader/Virtuoso/Profesor IA behavior unchanged by Evidence Foundation
 
 EVIDENCE STATUS:
-- Foundation runtime/API exists
-- No pilot or corpus migration started
+- Foundation complete
+- Production corpus remains un-migrated
+- Pilot not started
 
 SOURCES CREATED:
 - 0 production
@@ -859,15 +887,29 @@ CLAIMS CREATED:
 CLAIMS VERIFIED:
 - 0 production
 
+CONFLICTS:
+- 0 production
+
+NEEDS REVIEW:
+- 0 production
+
 D1 IMPACT:
-- 0 production Evidence writes
+- 0 production Evidence writes during Foundation implementation
 
 TESTS:
-- GitHub Actions run #303: SUCCESS
+- GitHub Actions run #309: SUCCESS
+- npm run test:chat-editorial: SUCCESS
+- npm run test:evidence: SUCCESS
+- npm run test:canonical-tools: SUCCESS
+- npm run qa:baseline: SUCCESS
+- npm run predeploy: SUCCESS
+- npm run recovery:verify: SUCCESS
+- deploy-contract: SUCCESS
+- npm run check: SUCCESS
 - production deploy step: SKIPPED
 
 PR:
-- #132 — ci: certify MLS R33 Evidence foundation
+- #133 — feat: close MLS R33 Evidence Foundation contracts
 ```
 ---
 

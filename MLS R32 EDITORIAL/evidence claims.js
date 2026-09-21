@@ -11,9 +11,19 @@ async function currentArticleVersion(env,code){
   await registry.ensureEvidenceDb(env);
   const normalized=String(code||'').trim().toUpperCase();
   if(!/^MLS-V\d{2}-\d{4}$/.test(normalized))throw evidenceError('INVALID_ENTRY_CODE',400,'Código MLS inválido.');
-  const row=await env.WIKI_DB.prepare('SELECT code,article_markdown,generated_at FROM wiki_articles WHERE code=?').bind(normalized).first();
+  const row=await env.WIKI_DB.prepare('SELECT * FROM wiki_articles WHERE code=?').bind(normalized).first();
   if(!row)throw evidenceError('ARTICLE_NOT_FOUND',404,'La entrada canónica no existe.');
-  return {code:row.code,articleGeneratedAt:row.generated_at,articleHash:await foundation.articleHash(row.article_markdown)};
+  return {
+    code:row.code,
+    articleGeneratedAt:row.generated_at,
+    articleHash:await foundation.articleHash(row.article_markdown),
+    language:row.language||null,
+    languageName:row.language_name||null,
+    title:row.title||null,
+    level:row.level||null,
+    part:row.part||null,
+    chapter:row.chapter||null
+  };
 }
 async function assertArticleVersion(env,input={}){
   const current=await currentArticleVersion(env,input.code);
