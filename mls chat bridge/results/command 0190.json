@@ -1,0 +1,147 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V02-0959",
+    "article": {
+      "code": "MLS-V02-0959",
+      "articleGeneratedAt": "2026-09-18T18:10:29.878Z",
+      "articleHash": "8ce198c24a925f9c3d77736b42dcc95d0fbc7bedc39c28e3375a95715b940bb0",
+      "language": "portugues",
+      "languageName": "Portugués brasileño",
+      "title": "Enfim",
+      "level": "B1",
+      "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+      "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira"
+    },
+    "state": {
+      "code": "MLS-V02-0959",
+      "article_generated_at": "2026-09-18T18:10:29.878Z",
+      "article_hash": "8ce198c24a925f9c3d77736b42dcc95d0fbc7bedc39c28e3375a95715b940bb0",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 2,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-21T21:53:55.719Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 2,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "cunha-2024-relacoes-textuais": "MLS-SRC-3205658601ED2E0F605D",
+        "infopedia-enfim": "MLS-SRC-7E757D12697A7F80C46E"
+      },
+      "claims": {
+        "c-discursivo": "MLS-CLM-3E5EBAF38D0BBFB7E290BC9C",
+        "c-temporal": "MLS-CLM-2AEF7C9BB0D7A9E86230E8FD"
+      }
+    },
+    "links": [
+      "MLS-LNK-755406BED7C5F81E524685F8",
+      "MLS-LNK-4529D8606A5B628D4F4DE7F3",
+      "MLS-LNK-B1A01DE5736D7DF5EBE4492A"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 2,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 2,
+      "claimsReused": 0,
+      "linksCreated": 3,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "cunha-2024-relacoes-textuais",
+          "sourceId": "MLS-SRC-3205658601ED2E0F605D",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "infopedia-enfim",
+          "sourceId": "MLS-SRC-7E757D12697A7F80C46E",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-discursivo",
+          "claimId": "MLS-CLM-3E5EBAF38D0BBFB7E290BC9C",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-temporal",
+          "claimId": "MLS-CLM-2AEF7C9BB0D7A9E86230E8FD",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-755406BED7C5F81E524685F8",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-4529D8606A5B628D4F4DE7F3",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-B1A01DE5736D7DF5EBE4492A",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 52,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 73,
+        "d1RowsWritten": 32,
+        "observedRowsRead": 36,
+        "observedRowsWritten": 8,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:53:56.831Z",
+  "commandFile": "mls chat bridge/commands/command 0190.json"
+}
