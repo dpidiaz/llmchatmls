@@ -75,6 +75,11 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     method: 'POST',
     pathname: '/api/wiki/editorial/evidence/review',
     input: 'body'
+  },
+  proponerRevisionEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/revision/propose',
+    input: 'body'
   }
 });
 
