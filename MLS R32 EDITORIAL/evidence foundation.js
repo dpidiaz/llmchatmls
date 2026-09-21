@@ -138,7 +138,7 @@ async function sourceIdentity(source={}){
   let identityKind,identityKey;
   if(doi){identityKind='doi';identityKey=doi;}
   else if(isbn){identityKind='isbn';identityKey=isbn;}
-  else if(canonicalUrl){identityKind='url';identityKey=canonicalUrl;}
+  else if(canonicalUrl){identityKind='url';const version=normalizeText(source.resourceVersion||source.publicationDate||'');identityKey=canonicalUrl+(version?'#version:'+version:'');}
   else{
     const signals=[normalizeArray(source.authors,normalizePerson).length,normalizeText(source.institution),year(source.publicationYear),normalizeText(source.publisher),normalizeText(source.edition)].filter(Boolean).length;
     if(!normalizeText(source.title)||signals<1)throw new Error('La fuente no tiene identidad bibliográfica suficiente.');
