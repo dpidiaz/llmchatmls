@@ -11,7 +11,8 @@ const shared=require('../scripts/habilitar presupuesto compartido workers ai.js'
 
 function fullyPatchedWorker(){
   const base=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8');
-  return shared.patchWorker(translator.patchWorker(virtuoso.patchWorker(base)));
+  const virtuosoHtml=fs.readFileSync('MLS R32 OVERLAY/virtuoso.html','utf8');
+  return shared.patchWorker(translator.patchWorker(virtuoso.patchWorker(base,virtuosoHtml)));
 }
 
 test('shared Workers AI budget covers semantic, Virtuoso and Profesor IA direct inference paths',()=>{
