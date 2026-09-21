@@ -41,10 +41,40 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/wiki/editorial/staging/integrate',
     input: 'body'
   },
+  entradaEvidenceMLS: {
+    method: 'GET',
+    pathname: '/api/wiki/editorial/evidence/entry',
+    input: 'code'
+  },
+  fuentesEntradaEvidenceMLS: {
+    method: 'GET',
+    pathname: '/api/wiki/editorial/evidence/sources',
+    input: 'code'
+  },
   metricasEvidenceEntradaMLS: {
     method: 'GET',
     pathname: '/api/wiki/editorial/evidence/metrics',
     input: 'code'
+  },
+  validarEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/validate',
+    input: 'body'
+  },
+  proponerEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/proposal',
+    input: 'body'
+  },
+  verificarEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/verify',
+    input: 'body'
+  },
+  revisarEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/review',
+    input: 'body'
   }
 });
 
