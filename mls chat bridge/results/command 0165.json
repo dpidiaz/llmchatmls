@@ -1,0 +1,168 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V10-0020",
+    "article": {
+      "code": "MLS-V10-0020",
+      "articleGeneratedAt": "2026-09-13T06:49:01.298Z",
+      "articleHash": "fa337573f8ab8694cb69671d88a15ca8c37aaf7f92c784ba09c41e26014fa438",
+      "language": "espanol-guatemala",
+      "languageName": "Español de Guatemala",
+      "title": "Las 27 letras del abecedario español",
+      "level": "G1",
+      "part": "Fundamentos, escritura y ortografía / Foundations, writing, and orthography",
+      "chapter": "Alfabeto, grafemas y ortografía fundamental / Alphabet, graphemes, and core orthography"
+    },
+    "state": {
+      "code": "MLS-V10-0020",
+      "article_generated_at": "2026-09-13T06:49:01.298Z",
+      "article_hash": "fa337573f8ab8694cb69671d88a15ca8c37aaf7f92c784ba09c41e26014fa438",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 3,
+      "claims_verified": 3,
+      "sources_total": 3,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-21T17:07:57.017Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 3,
+      "claimsVerified": 3,
+      "sourcesTotal": 3,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "rae-ortografia": "MLS-SRC-A51B39B1F9F8AA4051D9",
+        "rae-dpd-dieresis": "MLS-SRC-20F3416022C9101A29F5",
+        "rae-seseo": "MLS-SRC-7C953D2D5FAB0F879F3F"
+      },
+      "claims": {
+        "c-alfabeto": "MLS-CLM-FA964ED11C268F6BD7AF775B",
+        "c-diacriticos": "MLS-CLM-1418907925B5182E11C6047B",
+        "c-seseo": "MLS-CLM-3CBA62993C6531C76FB9A230"
+      }
+    },
+    "links": [
+      "MLS-LNK-79378C9818D1B7691DF2DA4A",
+      "MLS-LNK-16F28947B5AB9C0DB580394A",
+      "MLS-LNK-4C7FBB7D80BEB0D5F0A70BA6",
+      "MLS-LNK-E6FF86E2EFC3D5934DA6A7A6"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 3,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 3,
+      "claimsReused": 0,
+      "linksCreated": 4,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "rae-ortografia",
+          "sourceId": "MLS-SRC-A51B39B1F9F8AA4051D9",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "rae-dpd-dieresis",
+          "sourceId": "MLS-SRC-20F3416022C9101A29F5",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "rae-seseo",
+          "sourceId": "MLS-SRC-7C953D2D5FAB0F879F3F",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-alfabeto",
+          "claimId": "MLS-CLM-FA964ED11C268F6BD7AF775B",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-diacriticos",
+          "claimId": "MLS-CLM-1418907925B5182E11C6047B",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-seseo",
+          "claimId": "MLS-CLM-3CBA62993C6531C76FB9A230",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-79378C9818D1B7691DF2DA4A",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-16F28947B5AB9C0DB580394A",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-4C7FBB7D80BEB0D5F0A70BA6",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-E6FF86E2EFC3D5934DA6A7A6",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 68,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 93,
+        "d1RowsWritten": 44,
+        "observedRowsRead": 49,
+        "observedRowsWritten": 11,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T17:07:58.086Z",
+  "commandFile": "mls chat bridge/commands/command 0165.json"
+}
