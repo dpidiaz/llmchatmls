@@ -52,7 +52,7 @@ function evidenceSchema(){
       "conflict_id TEXT PRIMARY KEY, code TEXT NOT NULL, article_generated_at TEXT NOT NULL, claim_id TEXT NOT NULL, "+
       "conflict_type TEXT NOT NULL CHECK(conflict_type IN ('contradiction','regional_variation','standard_variation','register_variation','historical_variation','metadata_conflict')), "+
       "status TEXT NOT NULL DEFAULT 'unresolved' CHECK(status IN ('unresolved','resolved','accepted_variation')), "+
-      "context TEXT NOT NULL, resolution TEXT, needs_review INTEGER NOT NULL DEFAULT 1 CHECK(needs_review IN (0,1)), created_at TEXT NOT NULL, resolved_at TEXT)",
+      "context TEXT NOT NULL, resolution TEXT, needs_review INTEGER NOT NULL DEFAULT 1 CHECK(needs_review IN (0,1)), source_ids_json TEXT NOT NULL DEFAULT '[]', created_at TEXT NOT NULL, resolved_at TEXT)",
     "CREATE INDEX IF NOT EXISTS wiki_evidence_conflicts_entry_idx ON wiki_evidence_conflicts(code,status)",
     "CREATE INDEX IF NOT EXISTS wiki_evidence_conflicts_claim_idx ON wiki_evidence_conflicts(claim_id)",
     "CREATE TABLE IF NOT EXISTS wiki_evidence_reviews ("+

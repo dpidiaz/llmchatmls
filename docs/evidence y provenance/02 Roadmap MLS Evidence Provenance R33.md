@@ -294,7 +294,7 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F1 tests dedicados: 12 casos locales verdes.
 - [x] F1 certificación completa del PR #125 contra main.
 - [x] F2 Source Registry runtime/persistence (local tests green; repository certification pending).
-- [ ] F3 Claims and links persistence.
+- [x] F3 Claims and links persistence (local tests green; repository certification pending).
 - [ ] F4 State validator integrado.
 - [ ] F5 APA renderer/validator.
 - [ ] F6 Reviews/revisions.
@@ -649,6 +649,20 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F3 Claims, EvidenceLinks y conflictos implementado
+
+- Claims se vinculan obligatoriamente a la versión exacta `code + generatedAt + articleHash`.
+- Claim IDs y EvidenceLink IDs son deterministas e idempotentes.
+- Los constructed examples se modelan explícitamente y no se convierten por sí solos en claims sustanciales verificados.
+- EvidenceLinks requieren Claim y Source existentes.
+- Locators aceptan únicamente page, pageRange, chapter, section, paragraph, table, figure, timestamp y urlFragment.
+- Un locator ausente permanece ausente: no se inventa página ni sección.
+- Conflictos registran `source_ids_json` para preservar qué fuentes intervienen.
+- Contradicción unresolved marca needsReview; variación accepted requiere resolución explícita.
+- F3 no promueve VERIFIED ni modifica `wiki_evidence_entry_state`; eso queda reservado a F4.
+- 10/10 tests locales de F3 verdes.
+- F2 quedó certificado por GitHub Actions run #282 y fue integrado en `main` mediante PR #126 (`b494432...`).
+
 ## 2026-09-21 — F2 Source Registry implementado
 
 - Se creó `evidence registry.js` con persistencia D1 aislada del runtime público.
@@ -716,42 +730,41 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F2 IMPLEMENTED / CERTIFICATION PENDING
+STATUS: PHASE 1 F3 IMPLEMENTED / CERTIFICATION PENDING
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-source-registry
+BRANCH: r33-evidence-claims-links
 BASE: main
-BASE HEAD: c2ad43958ce84d8308442b3e8b3ff754b09c05d8
+BASE HEAD: b494432b6e3d0640d5284891486341cea7f570b8
 
 DONE:
-- F1 merged to main
-- F2 Source Registry persistence
-- Idempotent source upsert
-- DOI / ISBN / canonical URL / fingerprint dedupe
-- Conservative metadata enrichment
-- Strong metadata conflict guard 409
-- Superseded-source guard
-- Stable URL resource version identity
-- Source Registry aggregate status
-- 8 dedicated F2 local tests green
+- F1 merged and certified
+- F2 Source Registry merged and certified
+- F3 exact-version claim persistence
+- F3 deterministic/idempotent Claim IDs
+- F3 EvidenceLink persistence
+- F3 strict locator model
+- F3 source existence guard
+- F3 conflict persistence with implicated source IDs
+- F3 accepted-variation resolution guard
+- 10 dedicated F3 local tests green
 
 CURRENT:
-- Prepare PR and repository certification for F2
+- Prepare PR and repository certification for F3
 
 NEXT:
-- Certify F2 against main
-- Merge F2 if green
-- Begin F3 Claims and EvidenceLinks persistence
+- Certify and merge F3
+- Begin F4 deterministic state validator integration
 
 BLOCKERS:
-- None in Source Registry logic
-- Cloudflare Git integration may independently build branch pushes; F2 remains disconnected from predeploy/runtime
+- None in F3 logic
+- Public runtime remains intentionally disconnected from Evidence modules
 
 DECISIONS:
-- Source identity uses version suffix for canonical URL when resourceVersion or publicationDate is explicitly known
-- MetadataHash excludes transient registry timestamps/hash field itself
-- Conflicting strong metadata never silently overwrites the registry row
-- Source Registry upsert never creates claims or evidence state
+- F3 is additive/idempotent and does not destructively replace evidence proposals
+- F3 cannot promote VERIFIED
+- Missing locators remain missing; backend never manufactures page/chapter/section
+- Conflicts preserve source IDs explicitly
 
 AUTOOPT IMPACT:
 - None
@@ -759,30 +772,31 @@ AUTOOPT IMPACT:
 R32 COMPATIBILITY:
 - Preserved
 - wiki_articles untouched
-- existing provenance untouched
-- Semantic Audit untouched
+- reader / Virtuoso / Profesor IA untouched
 - style references untouched
+- Semantic Audit untouched
+- GitHub Staging untouched
 
 EVIDENCE STATUS:
-- No corpus migration
+- No canonical status promotion yet
 
 SOURCES CREATED:
-- 0 in production D1
+- 0 production
 
 CLAIMS CREATED:
-- 0
+- 0 production
 
 CLAIMS VERIFIED:
 - 0
 
 D1 IMPACT:
-- 0 production writes
-- Local SQLite only
+- 0 production Evidence writes
+- Local SQLite tests only
 
 TESTS:
-- test/evidence registry.test.cjs: 8/8 local pass
-- F1 suite previously certified
-- Full repository certification pending
+- F2 GitHub Actions run #282: SUCCESS
+- test/evidence claims.test.cjs: 10/10 local pass
+- Full F3 repository certification pending
 
 PR:
 - Pending creation
