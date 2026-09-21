@@ -3,15 +3,55 @@ const fs = require('fs');
 const path = require('path');
 function augmentEditorialOpenApi(text) {
   const api = JSON.parse(text);
-  api.info.version = '32.0.7';
-  api.paths['/api/wiki/editorial/chat/semantic/status']={get:{operationId:'estadoAuditoriaSemanticaMLS',summary:'Consultar cobertura y hallazgos agregados de la auditoría semántica por muestra.', 'x-openai-isConsequential':false,responses:{'200':{description:'Estado diagnóstico de la muestra.'},'401':{description:'Clave ausente o incorrecta.'}}}};
-  api.paths['/api/wiki/editorial/chat/semantic/sample']={post:{operationId:'muestraAuditoriaSemanticaMLS',summary:'Seleccionar una muestra balanceada de artículos publicados aún no auditados.', 'x-openai-isConsequential':false,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{count:{type:'integer',minimum:1,maximum:10},language:{type:'string'}},additionalProperties:false}}}},responses:{'200':{description:'Muestra privada para revisión semántica.'},'401':{description:'Clave ausente o incorrecta.'}}}};
-  api.paths['/api/wiki/editorial/chat/semantic/record']={post:{operationId:'registrarAuditoriaSemanticaMLS',summary:'Registrar el resultado diagnóstico de una revisión semántica sin modificar el artículo.', 'x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},generatedAt:{type:'string'},verdict:{type:'string',enum:['ok','watch','review_required']},categories:{type:'array',items:{type:'string',enum:['accuracy','terminology','examples','ambiguity','variety','factual','other']}},confidence:{type:'string',enum:['low','medium','high']},notes:{type:'string',minLength:20,maxLength:3000},reviewer:{type:'string',enum:['chatgpt','human']}},required:['code','generatedAt','verdict','categories','confidence','notes','reviewer'],additionalProperties:false}}}},responses:{'200':{description:'Resultado semántico registrado para la versión exacta del artículo.'},'401':{description:'Clave ausente o incorrecta.'},'409':{description:'El artículo cambió desde la muestra.'},'422':{description:'Resultado de auditoría no válido.'}}}};
-  api.paths['/api/wiki/editorial/chat/coverage/status']={get:{operationId:'estadoCoberturaEditorialMLS',summary:'Consultar el mapa de cobertura editorial de solo lectura.', 'x-openai-isConsequential':false,responses:{'200':{description:'Avance exacto por idioma y evidencia observada por nivel, parte, capítulo y familia.'},'401':{description:'Clave ausente o incorrecta.'}}}};
+  api.info.version = '33.0.0';
+  api.info.description += ' MLS R33 Evidence & Provenance se añade de forma aditiva y privada.';
+  api.paths['/api/wiki/editorial/chat/semantic/status']={get:{operationId:'estadoAuditoriaSemanticaMLS',summary:'Consultar cobertura y hallazgos agregados de la auditoría semántica por muestra.','x-openai-isConsequential':false,responses:{'200':{description:'Estado diagnóstico de la muestra.'},'401':{description:'Clave ausente o incorrecta.'}}}};
+  api.paths['/api/wiki/editorial/chat/semantic/sample']={post:{operationId:'muestraAuditoriaSemanticaMLS',summary:'Seleccionar una muestra balanceada de artículos publicados aún no auditados.','x-openai-isConsequential':false,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{count:{type:'integer',minimum:1,maximum:10},language:{type:'string'}},additionalProperties:false}}}},responses:{'200':{description:'Muestra privada para revisión semántica.'},'401':{description:'Clave ausente o incorrecta.'}}}};
+  api.paths['/api/wiki/editorial/chat/semantic/record']={post:{operationId:'registrarAuditoriaSemanticaMLS',summary:'Registrar el resultado diagnóstico de una revisión semántica sin modificar el artículo.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},generatedAt:{type:'string'},verdict:{type:'string',enum:['ok','watch','review_required']},categories:{type:'array',items:{type:'string',enum:['accuracy','terminology','examples','ambiguity','variety','factual','other']}},confidence:{type:'string',enum:['low','medium','high']},notes:{type:'string',minLength:20,maxLength:3000},reviewer:{type:'string',enum:['chatgpt','human']}},required:['code','generatedAt','verdict','categories','confidence','notes','reviewer'],additionalProperties:false}}}},responses:{'200':{description:'Resultado semántico registrado para la versión exacta del artículo.'},'401':{description:'Clave ausente o incorrecta.'},'409':{description:'El artículo cambió desde la muestra.'},'422':{description:'Resultado de auditoría no válido.'}}}};
+  api.paths['/api/wiki/editorial/chat/coverage/status']={get:{operationId:'estadoCoberturaEditorialMLS',summary:'Consultar el mapa de cobertura editorial de solo lectura.','x-openai-isConsequential':false,responses:{'200':{description:'Avance exacto por idioma y evidencia observada por nivel, parte, capítulo y familia.'},'401':{description:'Clave ausente o incorrecta.'}}}};
+
+  const codeParam={name:'code',in:'query',required:true,schema:{type:'string',pattern:'^MLS-V[0-9]{2}-[0-9]{4}$'}};
+  const responses={'200':{description:'Operación Evidence completada.'},'400':{description:'Solicitud inválida.'},'401':{description:'Clave ausente o incorrecta.'},'404':{description:'Entrada o recurso no encontrado.'},'409':{description:'Conflicto de versión, snapshot o revisión.'},'422':{description:'Evidence o metadata no válida.'}};
+  api.paths['/api/wiki/editorial/evidence/status']={get:{operationId:'estadoEvidenceMLS',summary:'Consultar estado agregado de Evidence & Provenance.','x-openai-isConsequential':false,responses}};
+  api.paths['/api/wiki/editorial/evidence/entry']={get:{operationId:'evidenceEntradaMLS',summary:'Obtener artículo canónico, versión exacta, estado Evidence y reviews.','x-openai-isConsequential':false,parameters:[codeParam],responses}};
+  api.paths['/api/wiki/editorial/evidence/sources']={get:{operationId:'fuentesEntradaMLS',summary:'Listar Sources vinculadas a una entrada y su referencia APA cuando sea válida.','x-openai-isConsequential':false,parameters:[codeParam],responses}};
+  api.paths['/api/wiki/editorial/evidence/validate']={post:{operationId:'validarEvidenceMLS',summary:'Validar cobertura Evidence y APA sin promover estado.','x-openai-isConsequential':false,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'}},required:['code'],additionalProperties:false}}}},responses}};
+  api.paths['/api/wiki/editorial/evidence/proposal']={post:{operationId:'proponerEvidenceMLS',summary:'Persistir una propuesta idempotente para la versión exacta del artículo.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},articleGeneratedAt:{type:'string'},articleHash:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},sources:{type:'array',maxItems:30,items:{type:'object'}},claims:{type:'array',maxItems:50,items:{type:'object'}},links:{type:'array',maxItems:100,items:{type:'object'}},conflicts:{type:'array',maxItems:30,items:{type:'object'}}},required:['code','articleGeneratedAt','articleHash','expectedEvidenceRevision','sources','claims','links'],additionalProperties:false}}}},responses}};
+  api.paths['/api/wiki/editorial/evidence/verify']={post:{operationId:'verificarEvidenceMLS',summary:'Crear un verification review ligado al snapshot actual y promover a VERIFIED solo si el backend lo permite.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},reviewerType:{type:'string',enum:['chatgpt','human','system']},reviewer:{type:'string'},verificationMethod:{type:'string'},notes:{type:'string'},runId:{type:'string'}},required:['code','expectedEvidenceRevision'],additionalProperties:false}}}},responses}};
+  api.paths['/api/wiki/editorial/evidence/review']={post:{operationId:'revisarEvidenceMLS',summary:'Registrar una revisión editorial posterior sobre un snapshot VERIFIED vigente.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},reviewerType:{type:'string',enum:['chatgpt','human','system']},reviewer:{type:'string'},verificationMethod:{type:'string'},notes:{type:'string'},runId:{type:'string'}},required:['code','expectedEvidenceRevision'],additionalProperties:false}}}},responses}};
+  api.paths['/api/wiki/editorial/evidence/revision/propose']={post:{operationId:'proponerRevisionEvidenceMLS',summary:'Guardar una revisión de artículo propuesta sin sobrescribir wiki_articles.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedArticleHash:{type:'string'},articleMarkdown:{type:'string'},changeReason:{type:'string'},evidenceReviewId:{type:'string'}},required:['code','expectedArticleHash','articleMarkdown','changeReason'],additionalProperties:false}}}},responses}};
   return JSON.stringify(api);
 }
 function buildChatRuntime(root = process.cwd()) {
   const read = file => fs.readFileSync(path.join(root, file), 'utf8');
+  const evidenceNames={
+    'MLS R32 EDITORIAL/evidence foundation.js':'MLS_EVIDENCE_FOUNDATION',
+    'MLS R32 EDITORIAL/evidence registry.js':'MLS_EVIDENCE_REGISTRY',
+    'MLS R32 EDITORIAL/evidence claims.js':'MLS_EVIDENCE_CLAIMS',
+    'MLS R32 EDITORIAL/evidence apa.js':'MLS_EVIDENCE_APA',
+    'MLS R32 EDITORIAL/evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
+    'MLS R32 EDITORIAL/evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
+    'MLS R32 EDITORIAL/evidence api.js':'MLS_EVIDENCE_API'
+  };
+  const evidenceDeps={
+    './evidence foundation.js':'MLS_EVIDENCE_FOUNDATION',
+    './evidence registry.js':'MLS_EVIDENCE_REGISTRY',
+    './evidence claims.js':'MLS_EVIDENCE_CLAIMS',
+    './evidence apa.js':'MLS_EVIDENCE_APA',
+    './evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
+    './evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
+    './evidence api.js':'MLS_EVIDENCE_API'
+  };
+  const bundleEvidence=file=>{
+    let source=read(file).replace(/^['"]use strict['"];?\s*/,'');
+    source=source.replace(/const\s+(\w+)\s*=\s*require\(['"]([^'"]+)['"]\);/g,(all,name,id)=>{
+      const dep=evidenceDeps[id]; if(!dep) throw Error('Dependencia Evidence no permitida: '+id);
+      return 'const '+name+'='+dep+';';
+    });
+    if(/\brequire\s*\(/.test(source)) throw Error('Evidence runtime conserva require(): '+file);
+    return 'var '+evidenceNames[file]+'=(()=>{const module={exports:{}};'+source+'\nreturn module.exports;})();\n';
+  };
+  const evidenceRuntime=Object.keys(evidenceNames).map(bundleEvidence).join('');
   const contract = require(path.join(root, 'MLS R32 EDITORIAL/contrato editorial.js'));
   if (contract.promptVersion !== '32.0') throw Error('Actualizar integración de ChatGPT para la nueva versión editorial.');
   if (!/WIKI_PROMPT_VERSION\s*=\s*["']32\.0["']/.test(read(contract.canonicalRuntime))) throw Error('El runtime canónico ya no es R32 / 32.0.');
@@ -29,6 +69,7 @@ function buildChatRuntime(root = process.cwd()) {
     `var MLS_CHAT_VALIDATORS = (() => { const contract = MLS_CHAT_CONTRACT; ${languages}\n${functions}\nreturn {validateCalibration, validateArticle}; })();\n` +
     `var MLS_CHAT_OPENAPI = ${augmentEditorialOpenApi(read('MLS R32 EDITORIAL/chat openapi.json'))};\n` +
     `var MLS_CHAT_INSTRUCTIONS = ${JSON.stringify(read('MLS R32 EDITORIAL/GPT privado instrucciones.md'))};\n` +
+    evidenceRuntime +
     read('MLS R32 EDITORIAL/autoopt.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/autoopt history.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
     read('MLS R32 EDITORIAL/autoopt health.js').replace(/^if \(typeof module .*$/gm, '') + '\n' +
@@ -60,7 +101,15 @@ function main() {
   if (runtime.includes('async function handleMlsChat(')) throw Error('La integración ChatGPT ya está instalada en este runtime.');
   const marker = '    const url = new URL(request.url);';
   if (!runtime.includes(marker) || !runtime.includes('function getEditorialContextR32(')) throw Error('Ejecutar primero habilitar flujo editorial.js sobre R32.');
-  runtime = runtime.replace(marker, marker + '\n    if (url.pathname === "/api/wiki/editorial/chat/autoopt/health") return handleMlsAutooptHealth(request, env);\n    if (url.pathname === "/api/wiki/editorial/chat/coverage/status") return handleMlsCoverageMap(request, env);\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/semantic/")) return handleMlsSemanticAudit(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/staging/")) return handleMlsStaging(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);\n    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);');
+  const privateRoutes = `
+    if (url.pathname === "/api/wiki/editorial/chat/autoopt/health") return handleMlsAutooptHealth(request, env);
+    if (url.pathname === "/api/wiki/editorial/chat/coverage/status") return handleMlsCoverageMap(request, env);
+    if (url.pathname.startsWith("/api/wiki/editorial/chat/semantic/")) return handleMlsSemanticAudit(request, env, url);
+    if (url.pathname.startsWith("/api/wiki/editorial/staging/")) return handleMlsStaging(request, env, url);
+    if (url.pathname.startsWith("/api/wiki/editorial/evidence/")) return MLS_EVIDENCE_API.handleMlsEvidence(request, env, url, {authenticate:mlsChatAuthenticate, body:mlsChatBody, json:mlsChatJson, error:mlsChatError, ensureWikiDb});
+    if (url.pathname.startsWith("/api/wiki/editorial/chat/")) return handleMlsChat(request, env, url);
+    if (url.pathname.startsWith("/api/wiki/editorial/rescue/")) return handleMlsRescue(request, env, url);`;
+  runtime = runtime.replace(marker, marker + privateRoutes);
   fs.writeFileSync(target, runtime + buildChatRuntime());
   const panelSource = path.join(process.cwd(), 'MLS R32 EDITORIAL/autoopt health.html');
   const panelTarget = path.join(process.cwd(), 'public/autoopt.html');

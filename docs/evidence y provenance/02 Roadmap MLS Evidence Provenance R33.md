@@ -298,7 +298,7 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F4 State validator integrado (local tests green; repository certification pending).
 - [x] F5 APA renderer/validator (local suite green; repository certification pending).
 - [x] F6 Reviews/revisions.
-- [ ] F7 Private API/OpenAPI.
+- [x] F7 Private API/OpenAPI.
 - [ ] F8 Regression certification.
 
 ## Required tests
@@ -649,6 +649,19 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F7 Private Evidence API certificado
+
+- Se añadió el namespace privado `/api/wiki/editorial/evidence/*` bajo la misma autenticación `MLS_EDITORIAL_CHAT_KEY`.
+- Operaciones disponibles: status, entry, sources, proposal, validate, verify, review y revision/propose.
+- El flujo chat-native queda operativo como `entry → investigación externa de ChatGPT → proposal → validate → verify → review`.
+- El Worker no hace crawling ni búsqueda académica automática.
+- `proposal` exige versión/hash exactos y `expectedEvidenceRevision`; preflight valida referencias internas antes de escrituras Evidence.
+- `validate` es read-only; `proposal`, `verify`, `review` y `revision/propose` son consecuenciales en OpenAPI.
+- Los módulos CommonJS de Evidence se empaquetan como IIFEs aisladas para Cloudflare; el runtime generado no conserva `require('./evidence...')`.
+- OpenAPI privado pasa a versión 33.0.0, manteniendo el contrato de generación editorial R32/32.0 intacto.
+- Se corrigieron dos defectos del ensamblador detectados por CI: un literal regex mal escapado y un bloque residual duplicado; ambos fueron corregidos sin ampliar alcance.
+- GitHub Actions run #299: SUCCESS; production deploy SKIPPED.
+
 ## 2026-09-21 — F6 Reviews y Article Revisions certificado
 
 - Se añadieron reviews append-only con `review_kind` y `evidence_snapshot_hash`.
@@ -773,12 +786,12 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F6 COMPLETE / FINAL HEAD RECERTIFICATION
+STATUS: PHASE 1 F7 COMPLETE / FINAL HEAD RECERTIFICATION
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-reviews-revisions
+BRANCH: r33-evidence-chat-api
 BASE: main
-BASE HEAD: c1cf76661619373e60b7c1510e24f58d57a6a1d2
+BASE HEAD: 1ab98abef7d1af20f6d3f4f4736f15049dc93017
 
 DONE:
 - F1 contracts/schema
@@ -786,42 +799,44 @@ DONE:
 - F3 Claims/Links/Conflicts
 - F4 deterministic state validator
 - F5 APA validator/renderer
-- F6 append-only Evidence reviews
-- F6 Evidence snapshot hashing
-- F6 VERIFIED/REVIEWED persisted-review requirement
-- F6 automatic review invalidation after Evidence mutation
-- F6 article baseline snapshots
-- F6 proposed article revisions without canonical overwrite
+- F6 Reviews and Article Revisions
+- F7 private Evidence API
+- F7 OpenAPI 33.0.0
+- F7 chat-native proposal/validate/verify/review flow
+- F7 Cloudflare runtime bundling
+- F7 private-route/authentication integration
 
 CURRENT:
-- Final F6 HEAD recertification after roadmap update
+- Final F7 HEAD recertification after roadmap update
 
 NEXT:
-- Merge PR #130 when final HEAD is green
-- Begin F7 private Evidence API/OpenAPI and chat-native operations
+- Merge PR #131 when final HEAD is green
+- Execute F8 Foundation regression certification
+- If F8 passes, close Phase 1 and prepare Phase 2 pilot 20
 
 BLOCKERS:
-- None in F6 logic
-- Canonical article integration remains intentionally deferred to pilot
+- None in F7 logic
 
 DECISIONS:
-- Client flags cannot create VERIFIED or REVIEWED
-- Verification is an append-only auditable event bound to evidenceSnapshotHash
-- Evidence mutation invalidates prior verification for effective status
-- Proposed article revisions never overwrite wiki_articles in Foundation
-- Historical invalid reviews remain preserved rather than deleted
+- Evidence remains private under MLS_EDITORIAL_CHAT_KEY
+- ChatGPT researches externally; Worker validates/persists only
+- No public Evidence endpoint
+- No automatic crawling or paid source service
+- OpenAPI Evidence writes are consequential
+- Article revision proposal remains non-canonical
 
 AUTOOPT IMPACT:
 - None
 
 R32 COMPATIBILITY:
 - Preserved
-- Watchdog additions on main preserved
-- Reader / Virtuoso / Profesor IA / staging unchanged
+- R32 editorial generation stays promptVersion 32.0
+- Existing watchdog changes preserved
+- Reader/Virtuoso/Profesor IA unchanged
 
 EVIDENCE STATUS:
-- Foundation review lifecycle implemented
-- No production corpus verification yet
+- Chat-native Foundation API implemented
+- No corpus pilot started
 
 SOURCES CREATED:
 - 0 production
@@ -833,10 +848,10 @@ CLAIMS VERIFIED:
 - 0 production
 
 D1 IMPACT:
-- 0 production Evidence writes
+- 0 production Evidence writes during Foundation development
 
 TESTS:
-- GitHub Actions run #290: SUCCESS
+- GitHub Actions run #299: SUCCESS
 - npm run test:chat-editorial: SUCCESS
 - npm run predeploy: SUCCESS
 - npm run recovery:verify: SUCCESS
@@ -845,7 +860,7 @@ TESTS:
 - production deploy step: SKIPPED
 
 PR:
-- #130 — feat: add MLS R33 evidence reviews and revisions
+- #131 — feat: add MLS R33 private Evidence API
 ```
 ---
 
