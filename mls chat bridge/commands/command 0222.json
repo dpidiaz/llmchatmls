@@ -1,0 +1,127 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V05-0881",
+    "articleGeneratedAt": "2026-09-19T08:52:30.973Z",
+    "articleHash": "615d6e0a4a29a72aa1109399c4e6d22869d4c5406675be71411c206c61db7a25",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "duden-laut",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "laut",
+        "institution": "Duden",
+        "canonicalUrl": "https://www.duden.de/rechtschreibung/laut_zufolge_bezueglich",
+        "language": "de",
+        "topics": [
+          "laut",
+          "Präposition",
+          "Dativ",
+          "Genitiv",
+          "Quellenangabe"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "ids-laut",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "laut",
+        "institution": "Leibniz-Institut für Deutsche Sprache — grammis",
+        "canonicalUrl": "https://grammis.ids-mannheim.de/praepositionen/299306",
+        "language": "de",
+        "topics": [
+          "laut",
+          "Präposition",
+          "Dativ",
+          "Quellenangabe",
+          "Redewiedergabe"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "duden-praepositionen",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Präpositionen",
+        "institution": "Duden",
+        "canonicalUrl": "https://www.duden.de/sprachwissen/fuer-lernende/wortarten-pr%C3%A4positionen",
+        "language": "de",
+        "topics": [
+          "Präpositionen",
+          "Rektion",
+          "laut",
+          "Dativ",
+          "Genitiv"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-laut-quelle",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "La preposición laut introduce una fuente o base de información: presenta el contenido de una afirmación remitiéndolo a la persona, documento o fuente expresada en su complemento, sin convertir por sí sola esa atribución en una garantía del hablante.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-laut-kasus",
+        "sectionKey": "En pocas palabras / Cómo funciona / Ejemplos",
+        "summary": "En el alemán actual, laut admite dativo y también genitivo. Duden presenta el dativo como el patrón ordinario y el genitivo como más raro; por ello no es correcto enseñar uno de los dos casos como la única construcción válida.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-phrase-kasus",
+        "sectionKey": "Cómo funciona",
+        "summary": "El caso seleccionado por una preposición pertenece al sintagma nominal completo y se refleja por concordancia en determinantes, adjetivos y, cuando corresponde, en la forma del sustantivo; no es simplemente una terminación aislada del artículo.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-laut-quelle",
+        "sourceRef": "ids-laut",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Bedeutung — Angabe einer Quelle bei der Redewiedergabe"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-laut-kasus",
+        "sourceRef": "duden-laut",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Grammatik — Präposition mit Dativ, selten mit Genitiv"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-laut-kasus",
+        "sourceRef": "duden-praepositionen",
+        "supportType": "supports",
+        "locator": {
+          "section": "Rektion — bei manchen Präpositionen schwankt der Gebrauch"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-phrase-kasus",
+        "sourceRef": "duden-praepositionen",
+        "supportType": "supports",
+        "locator": {
+          "section": "Rektion"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
