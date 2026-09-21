@@ -125,7 +125,7 @@
         <span class="helper">En línea ignora los paquetes descargados. Local procesa el texto en este dispositivo y nunca usa la traducción en línea.</span>
       </fieldset>
       <label>Velocidad de pronunciación
-        <select id="speechRate">
+        <select id="speechRate" autocomplete="off">
           <option value="0.10">0.10×</option>
           <option value="0.25">0.25×</option>
           <option value="0.50" selected>0.50×</option>
@@ -190,7 +190,7 @@
     </label>
     <div class="preference-row">
       <label>Velocidad de pronunciación
-        <select id="pronounceSpeechRate">
+        <select id="pronounceSpeechRate" autocomplete="off">
           <option value="0.10">0.10×</option>
           <option value="0.25">0.25×</option>
           <option value="0.50" selected>0.50×</option>
@@ -637,6 +637,12 @@
     return String(value||'').replace(/\s+/g,' ').trim().slice(0,MAX_TEXT_LENGTH);
   }
 
+  function resetSpeechRateDefaults(){
+    const value=DEFAULT_SPEECH_RATE.toFixed(2);
+    speechRate.value=value;
+    pronounceSpeechRate.value=value;
+  }
+
   function selectedSpeechRate(context){
     const control=context==='translation'?speechRate:pronounceSpeechRate;
     const value=Number(control&&control.value);
@@ -816,6 +822,7 @@
   }
 
   setTranslationMode('online');
+  resetSpeechRateDefaults();
   applyContext();
   loadVoices();
   refreshOfflineTools();

@@ -28,9 +28,15 @@ test('speech exposes the requested 0.10 to 1.00 selector and Listen uses it dire
   assert.match(html,/const DEFAULT_SPEECH_RATE=0\.50;/);
   assert.match(html,/const MIN_SPEECH_RATE=0\.10;/);
   assert.match(html,/const MAX_SPEECH_RATE=1\.00;/);
-  assert.match(html,/id="speechRate"/);
-  assert.match(html,/id="pronounceSpeechRate"/);
+  assert.match(html,/id="speechRate" autocomplete="off"/);
+  assert.match(html,/id="pronounceSpeechRate" autocomplete="off"/);
   for(const rate of ['0.10','0.25','0.50','0.75','1.00']) assert.match(html,new RegExp('value="'+rate.replace('.','\\.')+'"'));
+  assert.match(html,/value="0\.50" selected>0\.50×<\/option>/);
+  assert.match(html,/function resetSpeechRateDefaults\(\)/);
+  assert.match(html,/const value=DEFAULT_SPEECH_RATE\.toFixed\(2\)/);
+  assert.match(html,/speechRate\.value=value/);
+  assert.match(html,/pronounceSpeechRate\.value=value/);
+  assert.match(html,/resetSpeechRateDefaults\(\);\s*applyContext\(\);/);
   assert.match(html,/function selectedSpeechRate\(context\)/);
   assert.match(html,/const rate=selectedSpeechRate\(context\)/);
   assert.match(html,/utterance\.rate=rate/);
