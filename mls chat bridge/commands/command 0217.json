@@ -1,0 +1,115 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V05-0165",
+    "articleGeneratedAt": "2026-09-19T08:09:44.755Z",
+    "articleHash": "a1f18d3143efee4304264f5db880b4ae762af0b2e719658ed48b4c999d7aab74",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "duden-kein-deklination",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Deklination von deklinierbar",
+        "institution": "Duden",
+        "canonicalUrl": "https://www.duden.de/deklination/adjektive/deklinierbar",
+        "language": "de",
+        "topics": [
+          "kein",
+          "Dativ",
+          "Deklination",
+          "gemischte Beugung"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "ids-dativ-plural",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Kasusflexion in der Nominalphrase",
+        "institution": "Leibniz-Institut für Deutsche Sprache — grammis",
+        "canonicalUrl": "https://grammis.ids-mannheim.de/kontrastive-grammatik/3589",
+        "language": "de",
+        "topics": [
+          "Dativ Plural",
+          "Kasusflexion",
+          "-n"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "ids-mit",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "mit",
+        "institution": "Leibniz-Institut für Deutsche Sprache — grammis",
+        "doi": "10.14618/wb-praepositionen",
+        "canonicalUrl": "https://grammis.ids-mannheim.de/praepositionen/299660",
+        "language": "de",
+        "topics": [
+          "mit",
+          "Präposition",
+          "Rektion",
+          "Dativ"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-kein-dativ",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "El determinante negativo kein- sigue el paradigma de los determinantes del tipo ein: en dativo aparecen keinem para masculino y neutro, keiner para femenino y keinen para plural. La forma keinen también coincide con el acusativo masculino singular, por lo que su caso no se identifica de manera aislada.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-dativ-plural-n",
+        "sectionKey": "Cómo funciona",
+        "summary": "En el alemán estándar, el dativo plural marca normalmente el sustantivo con -n cuando la forma plural lo permite; los plurales que ya terminan en -n/-en no añaden otra n y los plurales en -s no reciben esa marca, como Kinder → Kindern frente a Frauen y Autos.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-mit-dativ",
+        "sectionKey": "Ejemplos",
+        "summary": "La preposición mit rige un sintagma nominal en dativo; por eso construcciones como mit keinem Mann, mit keiner Frau y mit keinen Kindern requieren las formas dativas del grupo nominal.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-kein-dativ",
+        "sourceRef": "duden-kein-deklination",
+        "supportType": "supports",
+        "locator": {
+          "section": "Gemischte Beugung (mit ein, kein, Possessivpronomen u. a.)"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-dativ-plural-n",
+        "sourceRef": "ids-dativ-plural",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Kasusflexion — Dativ Plural"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-mit-dativ",
+        "sourceRef": "ids-mit",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Rektion"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
