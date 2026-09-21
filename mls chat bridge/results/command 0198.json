@@ -1,0 +1,153 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "validarEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/validate",
+  "response": {
+    "ok": true,
+    "code": "MLS-V03-0122",
+    "canVerify": true,
+    "assessment": {
+      "status": "SOURCED",
+      "reasons": [],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 2,
+      "conflictsTotal": 0,
+      "coverageComplete": true,
+      "citationReady": true
+    },
+    "sources": [
+      {
+        "source": {
+          "sourceId": "MLS-SRC-781BC013DBE23EF6A59F",
+          "identityKind": "url",
+          "identityKey": "https://www.treccani.it/enciclopedia/partitivo_%28Enciclopedia-dell%27Italiano%29",
+          "metadataHash": "b2da670e1d59eaf3aecf1c4e23ae6b33dbcf7da41df6b1a8229453a801656efe",
+          "sourceType": "institutional_webpage",
+          "authorityTier": "B",
+          "status": "active",
+          "title": "Partitivo",
+          "authors": [
+            "Cimaglia, Riccardo"
+          ],
+          "editors": [],
+          "contributors": [],
+          "institution": "Treccani — Istituto della Enciclopedia Italiana",
+          "publicationYear": 2011,
+          "publicationDate": null,
+          "publisher": null,
+          "edition": null,
+          "containerTitle": null,
+          "journal": null,
+          "volume": null,
+          "issue": null,
+          "pages": null,
+          "articleNumber": null,
+          "isbn": null,
+          "issn": null,
+          "doi": null,
+          "canonicalUrl": "https://www.treccani.it/enciclopedia/partitivo_%28Enciclopedia-dell%27Italiano%29",
+          "language": "it",
+          "topics": [
+            "articolo partitivo",
+            "quantità indefinita",
+            "articolo indeterminativo",
+            "italiano"
+          ],
+          "resourceVersion": null,
+          "supersedesSourceId": null,
+          "accessedAt": "2026-09-21",
+          "createdAt": "2026-09-21T21:57:40.641Z",
+          "updatedAt": "2026-09-21T21:57:40.641Z"
+        },
+        "citation": {
+          "valid": true,
+          "citationReady": true,
+          "errors": [],
+          "warnings": [],
+          "style": "APA",
+          "edition": 7,
+          "profile": "URL-GT-2025",
+          "rendererVersion": "1.0",
+          "markdown": "Cimaglia, R. (2011). *Partitivo*. https://www.treccani.it/enciclopedia/partitivo_%28Enciclopedia-dell%27Italiano%29",
+          "text": "Cimaglia, R. (2011). Partitivo. https://www.treccani.it/enciclopedia/partitivo_%28Enciclopedia-dell%27Italiano%29",
+          "url": "https://www.treccani.it/enciclopedia/partitivo_%28Enciclopedia-dell%27Italiano%29"
+        }
+      },
+      {
+        "source": {
+          "sourceId": "MLS-SRC-E1F01807D0B0FAE3CCA6",
+          "identityKind": "url",
+          "identityKey": "https://www.treccani.it/vocabolario/di1",
+          "metadataHash": "d5f43f0b79c2a3917c47d968560f8579c6e0c8eaed2fe58267b9134a5fefe420",
+          "sourceType": "institutional_webpage",
+          "authorityTier": "C",
+          "status": "active",
+          "title": "di",
+          "authors": [],
+          "editors": [],
+          "contributors": [],
+          "institution": "Treccani — Istituto della Enciclopedia Italiana",
+          "publicationYear": null,
+          "publicationDate": null,
+          "publisher": null,
+          "edition": null,
+          "containerTitle": null,
+          "journal": null,
+          "volume": null,
+          "issue": null,
+          "pages": null,
+          "articleNumber": null,
+          "isbn": null,
+          "issn": null,
+          "doi": null,
+          "canonicalUrl": "https://www.treccani.it/vocabolario/di1",
+          "language": "it",
+          "topics": [
+            "preposizione di",
+            "preposizioni articolate",
+            "specificazione",
+            "partitivo"
+          ],
+          "resourceVersion": null,
+          "supersedesSourceId": null,
+          "accessedAt": "2026-09-21",
+          "createdAt": "2026-09-21T21:57:40.824Z",
+          "updatedAt": "2026-09-21T21:57:40.824Z"
+        },
+        "citation": {
+          "valid": true,
+          "citationReady": true,
+          "errors": [],
+          "warnings": [],
+          "style": "APA",
+          "edition": 7,
+          "profile": "URL-GT-2025",
+          "rendererVersion": "1.0",
+          "markdown": "Treccani — Istituto della Enciclopedia Italiana. (s. f.). *di*. https://www.treccani.it/vocabolario/di1",
+          "text": "Treccani — Istituto della Enciclopedia Italiana. (s. f.). di. https://www.treccani.it/vocabolario/di1",
+          "url": "https://www.treccani.it/vocabolario/di1"
+        }
+      }
+    ],
+    "telemetry": {
+      "d1": {
+        "queries": 12,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 40,
+        "d1RowsWritten": 0,
+        "observedRowsRead": 16,
+        "observedRowsWritten": 0,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:58:19.690Z",
+  "commandFile": "mls chat bridge/commands/command 0198.json"
+}
