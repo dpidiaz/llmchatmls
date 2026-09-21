@@ -40,6 +40,11 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     method: 'POST',
     pathname: '/api/wiki/editorial/staging/integrate',
     input: 'body'
+  },
+  metricasEvidenceEntradaMLS: {
+    method: 'GET',
+    pathname: '/api/wiki/editorial/evidence/metrics',
+    input: 'code'
   }
 });
 
@@ -114,6 +119,15 @@ function normalizeBridgeCommand(command) {
     return { operationId, operation, input: { runId } };
   }
 
+  if (operation.input === 'code') {
+    if (!ownKeysExactly(command.input, ['code']))
+      throw new Error('Esta operación solo admite input.code.');
+    const code = String(command.input.code || '').trim().toUpperCase();
+    if (!/^MLS-V\d{2}-\d{4}$/.test(code))
+      throw new Error('code MLS inválido.');
+    return { operationId, operation, input: { code } };
+  }
+
   return { operationId, operation, input: command.input };
 }
 
@@ -166,6 +180,10 @@ async function executeRemoteOperation(operationId, input, options = {}) {
     const runId = String(input?.runId || '').trim();
     if (!runId) throw new Error('runId es obligatorio.');
     url.searchParams.set('runId', runId);
+  } else if (operation.input === 'code') {
+    const code = String(input?.code || '').trim().toUpperCase();
+    if (!/^MLS-V\d{2}-\d{4}$/.test(code)) throw new Error('code MLS inválido.');
+    url.searchParams.set('code', code);
   } else {
     init.headers['content-type'] = 'application/json';
     init.body = JSON.stringify(input || {});
