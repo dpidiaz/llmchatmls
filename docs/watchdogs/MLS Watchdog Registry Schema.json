@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MLS Watchdog Registry",
+  "type": "object",
+  "required": ["schemaVersion", "protocolVersion", "repository", "groups"],
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 1 },
+    "protocolVersion": { "type": "string" },
+    "repository": { "type": "string" },
+    "updatedAt": { "type": "string" },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["groupId", "scope", "status", "timezone", "slots", "taskTitles"],
+        "properties": {
+          "groupId": { "type": "string", "pattern": "^WDG[A-Z0-9]+$" },
+          "scope": { "type": "string", "const": "chat" },
+          "status": { "enum": ["active", "paused", "done", "blocked", "unknown"] },
+          "timezone": { "type": "string" },
+          "slots": {
+            "type": "array",
+            "prefixItems": [
+              { "const": "00" },
+              { "const": "20" },
+              { "const": "40" }
+            ],
+            "items": false
+          },
+          "taskTitles": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": { "type": "string" }
+          },
+          "createdDate": { "type": "string" },
+          "updatedDate": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
