@@ -5,6 +5,7 @@ const claims=require('./evidence claims.js');
 const validator=require('./evidence validator.js');
 const reviews=require('./evidence reviews.js');
 const apa=require('./evidence apa.js');
+const provenance=require('./evidence provenance.js');
 
 function fail(code,status,message=code,extra={}){const e=new Error(message);e.code=code;e.status=status;Object.assign(e,extra);return e;}
 function trim(v,max=200){return String(v??'').normalize('NFKC').replace(/\s+/gu,' ').trim().slice(0,max);}
@@ -38,14 +39,14 @@ async function status(env){
   const sourceRegistry=await registry.sourceRegistryStatus(env);
   const states=await env.WIKI_DB.prepare('SELECT status AS name,COUNT(*) AS n FROM wiki_evidence_entry_state GROUP BY status ORDER BY status').all();
   const reviewsCount=await env.WIKI_DB.prepare('SELECT review_kind AS name,COUNT(*) AS n FROM wiki_evidence_reviews GROUP BY review_kind ORDER BY review_kind').all();
-  return {ok:true,evidenceVersion:foundation.MLS_EVIDENCE_VERSION,citation:{style:foundation.MLS_CITATION_STYLE,edition:foundation.MLS_CITATION_EDITION,profile:foundation.MLS_CITATION_PROFILE,rendererVersion:foundation.MLS_CITATION_RENDERER_VERSION},sourceRegistry,entriesByStatus:Object.fromEntries((states.results||[]).map(x=>[x.name,Number(x.n)])),reviewsByKind:Object.fromEntries((reviewsCount.results||[]).map(x=>[x.name,Number(x.n)])),freeOnly:true,zeroCost:true};
+  return {ok:true,context:foundation.MLS_EVIDENCE_CONTEXT,evidenceVersion:foundation.MLS_EVIDENCE_VERSION,citation:{style:foundation.MLS_CITATION_STYLE,edition:foundation.MLS_CITATION_EDITION,profile:foundation.MLS_CITATION_PROFILE,rendererVersion:foundation.MLS_CITATION_RENDERER_VERSION},sourceRegistry,entriesByStatus:Object.fromEntries((states.results||[]).map(x=>[x.name,Number(x.n)])),reviewsByKind:Object.fromEntries((reviewsCount.results||[]).map(x=>[x.name,Number(x.n)])),freeOnly:true,zeroCost:true};
 }
 async function entry(env,code){
   const {row,version}=await articleRecord(env,code);
   const state=await validator.getEvidenceState(env,version.code);
   const evaluation=await validator.evaluateEntryEvidence(env,version.code);
   const reviewRows=await reviews.listReviews(env,version.code);
-  return {ok:true,article:row,version,state,evaluation:{status:evaluation.status,reasons:evaluation.reasons,claimsTotal:evaluation.claimsTotal,claimsVerified:evaluation.claimsVerified,sourcesTotal:evaluation.sourcesTotal,conflictsTotal:evaluation.conflictsTotal,needsReview:evaluation.needsReview,citationReady:evaluation.citationReady,verifiedAt:evaluation.verifiedAt||null,reviewedAt:evaluation.reviewedAt||null},reviews:reviewRows,policy:validator.DEFAULT_EVIDENCE_POLICY};
+  return {ok:true,article:row,version,state,evaluation:{status:evaluation.status,reasons:evaluation.reasons,claimsTotal:evaluation.claimsTotal,claimsVerified:evaluation.claimsVerified,sourcesTotal:evaluation.sourcesTotal,conflictsTotal:evaluation.conflictsTotal,needsReview:evaluation.needsReview,citationReady:evaluation.citationReady,verifiedAt:evaluation.verifiedAt||null,reviewedAt:evaluation.reviewedAt||null},reviews:reviewRows,policy:evaluation.policy,provenance:await provenance.composeArticleProvenance(env,version.code)};
 }
 async function preflightProposal(env,body){
   const article=await claims.assertArticleVersion(env,body);
@@ -120,6 +121,7 @@ async function handleMlsEvidence(request,env,url,runtime){
     if(route==='/status'&&request.method==='GET')return json(await status(env));
     if(route==='/entry'&&request.method==='GET')return json(await entry(env,url.searchParams.get('code')));
     if(route==='/sources'&&request.method==='GET')return json({ok:true,code:String(url.searchParams.get('code')||'').toUpperCase(),sources:await entrySources(env,url.searchParams.get('code'))});
+    if(route==='/provenance'&&request.method==='GET')return json({ok:true,provenance:await provenance.composeArticleProvenance(env,url.searchParams.get('code'))});
     if(route==='/validate'&&request.method==='POST'){const body=await runtime.body(request);return json(await validateEntry(env,body.code));}
     if(route==='/proposal'&&request.method==='POST'){const body=await runtime.body(request);return json(await applyProposal(env,body));}
     if(route==='/verify'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.verifyEntryEvidence(env,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'chatgpt',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'manual_source_match',notes:body.notes,runId:body.runId});return json({ok:true,...out});}
