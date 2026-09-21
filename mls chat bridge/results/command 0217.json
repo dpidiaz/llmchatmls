@@ -1,0 +1,162 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V05-0165",
+    "article": {
+      "code": "MLS-V05-0165",
+      "articleGeneratedAt": "2026-09-19T08:09:44.755Z",
+      "articleHash": "a1f18d3143efee4304264f5db880b4ae762af0b2e719658ed48b4c999d7aab74",
+      "language": "aleman",
+      "languageName": "Alemán",
+      "title": "keinem/keiner/keinem en dativo",
+      "level": "A2",
+      "part": "Casos — Kasus",
+      "chapter": "Dativo — Dativ"
+    },
+    "state": {
+      "code": "MLS-V05-0165",
+      "article_generated_at": "2026-09-19T08:09:44.755Z",
+      "article_hash": "a1f18d3143efee4304264f5db880b4ae762af0b2e719658ed48b4c999d7aab74",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 3,
+      "claims_verified": 3,
+      "sources_total": 3,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-21T23:47:17.699Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 3,
+      "claimsVerified": 3,
+      "sourcesTotal": 3,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "duden-kein-deklination": "MLS-SRC-336B1537FBD6673CD1E0",
+        "ids-dativ-plural": "MLS-SRC-6BE31D9234BB99DEB003",
+        "ids-mit": "MLS-SRC-64B6BBB95C5D1F331FDA"
+      },
+      "claims": {
+        "c-kein-dativ": "MLS-CLM-E7AFCCE7F57708C6F1E0D437",
+        "c-dativ-plural-n": "MLS-CLM-BFF80936411462014D54ED86",
+        "c-mit-dativ": "MLS-CLM-A415755DAC6FB6C613D3BFAA"
+      }
+    },
+    "links": [
+      "MLS-LNK-AD0D9B34A29749AE31834544",
+      "MLS-LNK-A7371B01DC33C4617D54B95C",
+      "MLS-LNK-A94B76BBFA58F96DEFCB2652"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 3,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 3,
+      "claimsReused": 0,
+      "linksCreated": 3,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "duden-kein-deklination",
+          "sourceId": "MLS-SRC-336B1537FBD6673CD1E0",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "ids-dativ-plural",
+          "sourceId": "MLS-SRC-6BE31D9234BB99DEB003",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "ids-mit",
+          "sourceId": "MLS-SRC-64B6BBB95C5D1F331FDA",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-kein-dativ",
+          "claimId": "MLS-CLM-E7AFCCE7F57708C6F1E0D437",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-dativ-plural-n",
+          "claimId": "MLS-CLM-BFF80936411462014D54ED86",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-mit-dativ",
+          "claimId": "MLS-CLM-A415755DAC6FB6C613D3BFAA",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-AD0D9B34A29749AE31834544",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-A7371B01DC33C4617D54B95C",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-A94B76BBFA58F96DEFCB2652",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 62,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 90,
+        "d1RowsWritten": 39,
+        "observedRowsRead": 43,
+        "observedRowsWritten": 10,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T23:47:18.478Z",
+  "commandFile": "mls chat bridge/commands/command 0217.json"
+}
