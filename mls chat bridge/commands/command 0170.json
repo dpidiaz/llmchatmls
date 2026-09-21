@@ -1,0 +1,122 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V10-0140",
+    "articleGeneratedAt": "2026-09-13T10:24:16.857Z",
+    "articleHash": "2c065c4146bc518cfc8a8b7566b3ef7d346087524806b3a63b57a012854575d3",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "rae-battaner-2017",
+        "sourceType": "report",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "Algunos pozos sin fondo en los diccionarios",
+        "authors": [
+          "Battaner Arias, María Paz"
+        ],
+        "institution": "Real Academia Española",
+        "publicationYear": 2017,
+        "canonicalUrl": "https://www.rae.es/sites/default/files/discurso_ingreso_paz_battaner.pdf",
+        "language": "es",
+        "topics": [
+          "morfología derivativa",
+          "nominalización",
+          "polisemia",
+          "semántica léxica"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "polakof-2013",
+        "sourceType": "journal_article",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "La estructura funcional de las nominalizaciones deverbales de evento y resultado a partir de verbos de realización",
+        "authors": [
+          "Polakof, Ana Clara"
+        ],
+        "publicationYear": 2013,
+        "journal": "Anuari de Filologia. Estudis de Lingüística",
+        "volume": "3",
+        "pages": "113-144",
+        "issn": "2014-1408",
+        "canonicalUrl": "https://dialnet.unirioja.es/descarga/articulo/4550202.pdf",
+        "language": "es",
+        "topics": [
+          "nominalizaciones deverbales",
+          "evento",
+          "resultado",
+          "morfología"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-evento-resultado",
+        "sectionKey": "Acción y resultado / Una palabra puede desarrollar varios sentidos / El contexto decide entre lecturas posibles",
+        "summary": "Las nominalizaciones deverbales pueden presentar lecturas de evento o proceso y lecturas de resultado o producto; una misma forma nominal puede admitir más de una de estas lecturas según su estructura y contexto.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-significados-derivativos",
+        "sectionKey": "El sufijo no determina por sí solo el significado / Nombres que designan participantes u objetos relacionados",
+        "summary": "Los sufijos nominalizadores pueden participar en nombres de acción, efecto o resultado, producto, cualidad, agente o instrumento, estado, circunstancia o ubicación; reconocer un sufijo no basta para asignar automáticamente un único significado al derivado.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-polisemia-lexicalizacion",
+        "sectionKey": "Polisemia y lexicalización / Observación importante",
+        "summary": "Los derivados nominales pueden desarrollar polisemia y especializaciones semánticas no totalmente predecibles a partir de su forma; la interpretación concreta depende de factores léxicos, estructurales, históricos y contextuales.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-evento-resultado",
+        "sourceRef": "polakof-2013",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "page": "118",
+          "section": "Clasificación de nominalizaciones de evento y resultado"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-significados-derivativos",
+        "sourceRef": "rae-battaner-2017",
+        "supportType": "primary_source",
+        "locator": {
+          "page": "38",
+          "section": "Trabajos de gramática / morfología derivativa"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-polisemia-lexicalizacion",
+        "sourceRef": "rae-battaner-2017",
+        "supportType": "primary_source",
+        "locator": {
+          "pageRange": "35-40",
+          "section": "Polisemia y especialización semántica de sustantivos abstractos"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-polisemia-lexicalizacion",
+        "sourceRef": "polakof-2013",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "page": "118",
+          "section": "Una misma forma con lecturas diferentes"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
