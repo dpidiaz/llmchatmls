@@ -9,6 +9,43 @@ const html=fs.readFileSync('MLS R32 OVERLAY/traductor.html','utf8');
 const sw=fs.readFileSync('MLS R32 OVERLAY/sw.js','utf8');
 const installer=require('../scripts/habilitar traductor pronunciacion.js');
 
+function translatorBackendContext(warnings=[]){
+  let dailyNeurons=100;
+  let reservedNeurons=0;
+  const events=[];
+  const store={
+    async reserveCloudflareBudget(estimate){reservedNeurons+=estimate;events.push(['reserve',estimate]);return {ok:true,reserved:estimate,dailyNeurons,dailyReservedNeurons:reservedNeurons,targetNeurons:9000}},
+    async settleCloudflareBudget(reserved,actual){reservedNeurons=Math.max(0,reservedNeurons-reserved);dailyNeurons+=actual;events.push(['settle',reserved,actual]);return {ok:true,dailyNeurons,dailyReservedNeurons:reservedNeurons,targetNeurons:9000}},
+    async releaseCloudflareBudget(reserved){reservedNeurons=Math.max(0,reservedNeurons-reserved);events.push(['release',reserved]);return {ok:true,dailyReservedNeurons:reservedNeurons}},
+    async getCloudflareBudget(){return {dailyNeurons,dailyReservedNeurons:reservedNeurons,targetNeurons:9000}},
+    async markQuotaExhausted(code,message){events.push(['quota',code,message]);return {ok:false,quotaExhausted:true}}
+  };
+  const context={
+    Request,Response,
+    console:{warn:(...args)=>warnings.push(args.join(' '))},
+    WIKI_CLOUDFLARE_NEURON_TARGET:9000,
+    wikiStore:()=>store,
+    wikiUsageResult(result){
+      const usage=result?.usage||result?.result?.usage||{};
+      return {
+        promptTokens:Number(usage.prompt_tokens||usage.input_tokens||0),
+        completionTokens:Number(usage.completion_tokens||usage.output_tokens||0)
+      };
+    },
+    cloudflareNeurons(_model,promptTokens,completionTokens){return (promptTokens*9091+completionTokens*27273)/1e6},
+    async recordProviderUsage(_env,id,promptTokens,completionTokens,error){events.push(['usage',id,promptTokens,completionTokens,error])},
+    wikiErrorMessage:error=>error instanceof Error?error.message:String(error),
+    workersAiFailureKind(message){
+      const value=String(message||'').toLowerCase();
+      if(/3036|daily free allocation|10,000 neurons|10000 neurons|used up your daily|429/.test(value))return 'quota';
+      if(/5035|workers paid|requires paid/.test(value))return 'paid';
+      return 'other';
+    },
+    secondsUntilNextUtcDay:()=>3600
+  };
+  return {context,events,store,get dailyNeurons(){return dailyNeurons},get reservedNeurons(){return reservedNeurons}};
+}
+
 test('Translator exposes a dedicated accessible route shell',()=>{
   assert.match(html,/<title>Traductor · MASTER LANGUAGE SYSTEM<\/title>/);
   assert.match(html,/id="translatorApp"/);
@@ -115,9 +152,16 @@ test('installer adds Translator to Herramientas and remains idempotent',()=>{
 
 test('Translator backend uses only the existing free Workers AI binding',()=>{
   assert.match(installer.BACKEND_BLOCK,/MLS_TRANSLATOR_MODEL_ID = "@cf\/google\/gemma-4-26b-a4b-it"/);
+  assert.match(installer.BACKEND_BLOCK,/MLS_TRANSLATOR_PROVIDER_ID = "cloudflare-translator"/);
   assert.match(installer.BACKEND_BLOCK,/env\.AI\.run\(MLS_TRANSLATOR_MODEL_ID/);
   assert.match(installer.BACKEND_BLOCK,/chat_template_kwargs: \{ enable_thinking: false \}/);
-  assert.match(installer.BACKEND_BLOCK,/La traducción mejorada no está disponible temporalmente/);
+  assert.match(installer.BACKEND_BLOCK,/reserveCloudflareBudget\(MLS_TRANSLATOR_ESTIMATED_NEURONS\)/);
+  assert.match(installer.BACKEND_BLOCK,/settleCloudflareBudget\(reserved, neurons\)/);
+  assert.match(installer.BACKEND_BLOCK,/releaseCloudflareBudget\(reserved\)/);
+  assert.match(installer.BACKEND_BLOCK,/markQuotaExhausted\("translator", message\)/);
+  assert.match(installer.BACKEND_BLOCK,/recordProviderUsage\(env, MLS_TRANSLATOR_PROVIDER_ID/);
+  assert.match(installer.BACKEND_BLOCK,/workersAiFailureKind\(message\)/);
+  assert.match(installer.BACKEND_BLOCK,/zeroCostPolicy: true/);
   assert.doesNotMatch(installer.BACKEND_BLOCK,/OpenAI|DeepL|ElevenLabs|Azure|Amazon Polly|Google Translate/i);
 });
 
@@ -135,6 +179,10 @@ test('Translator UI calls the dedicated endpoint and keeps offline pronunciation
   assert.match(html,/Esta combinación no está preparada para traducción local/);
   assert.match(html,/translationResult\.hidden=false/);
   assert.match(html,/translatedText\.textContent=translation/);
+  assert.match(html,/id="translationNeuronStatus"/);
+  assert.match(html,/function formatNeuronUsage\(usage/);
+  assert.match(html,/Workers AI: /);
+  assert.match(html,/onlineUsage=payload\.usage\|\|null/);
 });
 
 test('translation engine is an explicit two-state Online or Local toggle with no automatic fallback',()=>{
@@ -151,11 +199,11 @@ test('translation engine is an explicit two-state Online or Local toggle with no
   assert.doesNotMatch(html,/alternativa al motor local/);
 });
 
-test('Translator backend executes with a mocked Workers AI binding and preserves privacy',async()=>{
+test('Translator backend executes with a mocked Workers AI binding, measures neurons and preserves privacy',async()=>{
   const warnings=[];
-  const context={Request,Response,console:{warn:(...args)=>warnings.push(args.join(' '))}};
-  vm.runInNewContext(installer.BACKEND_BLOCK+';globalThis.__translatorHandler=handleTranslatorRequest;',context);
-  const handler=context.__translatorHandler;
+  const rt=translatorBackendContext(warnings);
+  vm.runInNewContext(installer.BACKEND_BLOCK+';globalThis.__translatorHandler=handleTranslatorRequest;',rt.context);
+  const handler=rt.context.__translatorHandler;
 
   let aiCalls=0;
   const sameRequest=new Request('https://example.test/api/translate',{
@@ -168,6 +216,7 @@ test('Translator backend executes with a mocked Workers AI binding and preserves
   assert.equal(same.ok,true);
   assert.equal(same.usedAi,false);
   assert.equal(same.translation,'Olá 👋');
+  assert.equal(same.usage.neurons,0);
   assert.equal(aiCalls,0);
 
   const aiRequest=new Request('https://example.test/api/translate',{
@@ -178,30 +227,42 @@ test('Translator backend executes with a mocked Workers AI binding and preserves
     aiCalls++;
     assert.equal(model,'@cf/google/gemma-4-26b-a4b-it');
     assert.match(payload.messages[1].content,/Buenos días/);
-    return {response:'{\"translation\":\"Bonjour\"}'};
+    return {response:'{"translation":"Bonjour"}',usage:{prompt_tokens:100,completion_tokens:20}};
   }}});
   const ai=await aiResponse.json();
   assert.equal(aiResponse.status,200);
   assert.equal(ai.ok,true);
   assert.equal(ai.usedAi,true);
   assert.equal(ai.translation,'Bonjour');
+  assert.equal(ai.usage.measured,true);
+  assert.equal(ai.usage.promptTokens,100);
+  assert.equal(ai.usage.completionTokens,20);
+  assert.equal(ai.usage.neurons,1.4546);
+  assert.equal(ai.usage.dailyNeurons,101.45);
+  assert.equal(ai.usage.targetNeurons,9000);
+  assert.ok(rt.events.some(event=>event[0]==='reserve'&&event[1]===40));
+  assert.ok(rt.events.some(event=>event[0]==='settle'));
+  assert.ok(rt.events.some(event=>event[0]==='usage'&&event[1]==='cloudflare-translator'&&event[4]===false));
 
   const privateText='frase privada 918273';
   const failedRequest=new Request('https://example.test/api/translate',{
     method:'POST',headers:{'content-type':'application/json'},
     body:JSON.stringify({text:privateText,sourceLanguage:'espanol-guatemala',targetLanguage:'ingles'})
   });
-  const failedResponse=await handler(failedRequest,{AI:{run:async()=>{throw new Error('quota_exhausted')}}});
+  const failedResponse=await handler(failedRequest,{AI:{run:async()=>{throw new Error('3036: daily free allocation of 10,000 neurons used up')}}});
   const failed=await failedResponse.json();
-  assert.equal(failedResponse.status,503);
+  assert.equal(failedResponse.status,429);
   assert.equal(failed.aiUnavailable,true);
+  assert.equal(failed.quotaProtected,true);
+  assert.equal(failed.circuitOpen,true);
+  assert.ok(rt.events.some(event=>event[0]==='quota'&&event[1]==='translator'));
   assert.ok(warnings.every(line=>!line.includes(privateText)));
 });
 
 test('Translator backend rejects unsupported methods, content types and languages',async()=>{
-  const context={Request,Response,console:{warn:()=>{}}};
-  vm.runInNewContext(installer.BACKEND_BLOCK+';globalThis.__translatorHandler=handleTranslatorRequest;',context);
-  const handler=context.__translatorHandler;
+  const rt=translatorBackendContext();
+  vm.runInNewContext(installer.BACKEND_BLOCK+';globalThis.__translatorHandler=handleTranslatorRequest;',rt.context);
+  const handler=rt.context.__translatorHandler;
   const getResponse=await handler(new Request('https://example.test/api/translate'),{});
   assert.equal(getResponse.status,405);
   const typeResponse=await handler(new Request('https://example.test/api/translate',{method:'POST',body:'x'}),{});
