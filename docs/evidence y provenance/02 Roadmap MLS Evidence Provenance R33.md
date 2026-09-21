@@ -704,6 +704,12 @@ SIZE DELTA:
 TESTS:
 - Not applicable to documentation-only checkpoint
 - No deploy executed
+
+COMMIT SHA:
+- df97395f5cbdccb0cc0cb471f785e69744ebca3d (roadmap creation checkpoint)
+
+PR:
+- #124 — docs: define MLS R33 Evidence and Provenance
 ```
 
 ---
