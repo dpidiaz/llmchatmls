@@ -27,7 +27,7 @@ jobs:
           set -euo pipefail
           node <<'NODE'
           const fs=require('fs');
-          const files=['public/js/app.js','public/js/reader.js','public/js/ai.js','public/index.html'].filter(fs.existsSync);
+          const files=[...fs.readdirSync('public/js').filter(name=>name.endsWith('.js')).map(name=>'public/js/'+name),'public/index.html'].filter(fs.existsSync);
           for(const file of files){
             const text=fs.readFileSync(file,'utf8');
             for(const needle of ['advancedDetails','advancedToggle','Detalles avanzados']){
