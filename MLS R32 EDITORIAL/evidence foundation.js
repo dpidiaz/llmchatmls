@@ -19,7 +19,7 @@ function evidenceSchema(){
       "source_id TEXT PRIMARY KEY, identity_kind TEXT NOT NULL, identity_key TEXT NOT NULL, metadata_hash TEXT NOT NULL, "+
       "source_type TEXT NOT NULL, authority_tier TEXT NOT NULL CHECK(authority_tier IN ('A','B','C','D','X')), "+
       "status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','unresolved','superseded')), "+
-      "title TEXT NOT NULL, authors_json TEXT NOT NULL DEFAULT '[]', contributors_json TEXT NOT NULL DEFAULT '[]', "+
+      "title TEXT NOT NULL, authors_json TEXT NOT NULL DEFAULT '[]', editors_json TEXT NOT NULL DEFAULT '[]', contributors_json TEXT NOT NULL DEFAULT '[]', "+
       "institution TEXT, publication_year INTEGER, publication_date TEXT, publisher TEXT, edition TEXT, container_title TEXT, "+
       "journal TEXT, volume TEXT, issue TEXT, pages TEXT, article_number TEXT, isbn TEXT, issn TEXT, doi TEXT, canonical_url TEXT, "+
       "language TEXT, topics_json TEXT NOT NULL DEFAULT '[]', resource_version TEXT, supersedes_source_id TEXT, accessed_at TEXT, "+
@@ -159,7 +159,7 @@ async function normalizeSourceMetadata(input={}){
   const title=normalizeText(input.title);if(!title)throw new Error('title es obligatorio.');
   const identity=await sourceIdentity(input);
   const normalized={...identity,sourceType,authorityTier,status:normalizeText(input.status||'active').toLowerCase(),title,
-    authors:normalizeArray(input.authors,normalizePerson),contributors:normalizeArray(input.contributors,normalizePerson),
+    authors:normalizeArray(input.authors,normalizePerson),editors:normalizeArray(input.editors,normalizePerson),contributors:normalizeArray(input.contributors,normalizePerson),
     institution:normalizeText(input.institution)||null,publicationYear:year(input.publicationYear),publicationDate:normalizeText(input.publicationDate)||null,
     publisher:normalizeText(input.publisher)||null,edition:normalizeText(input.edition)||null,containerTitle:normalizeText(input.containerTitle)||null,
     journal:normalizeText(input.journal)||null,volume:normalizeText(input.volume)||null,issue:normalizeText(input.issue)||null,pages:normalizeText(input.pages)||null,
