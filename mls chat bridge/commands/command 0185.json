@@ -1,0 +1,102 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V02-0180",
+    "articleGeneratedAt": "2026-09-18T04:50:05.454Z",
+    "articleHash": "104bdb2071fb215f3dbd86c5adc8e5226088fe5dc77b8fe4a050f0d1bdf44d3f",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "bechara-2009",
+        "sourceType": "book",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Moderna gramática portuguesa",
+        "authors": [
+          "Bechara, Evanildo"
+        ],
+        "publicationYear": 2009,
+        "publisher": "Nova Fronteira",
+        "edition": "37. ed. rev., ampl. e atual.",
+        "isbn": "9788520923184",
+        "language": "pt-BR",
+        "topics": [
+          "gramática do português",
+          "pronomes indefinidos",
+          "mais",
+          "menos",
+          "invariabilidade"
+        ]
+      },
+      {
+        "clientId": "ciberduvidas-mais-menos-2012",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "C",
+        "status": "active",
+        "title": "Mais e menos com substantivos abstratos",
+        "authors": [
+          "Rocha, Carlos"
+        ],
+        "institution": "Ciberdúvidas da Língua Portuguesa",
+        "publicationYear": 2012,
+        "publicationDate": "2012-10-19",
+        "canonicalUrl": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/mais-e-menos-com-substantivos-abstratos/31647",
+        "language": "pt",
+        "topics": [
+          "mais",
+          "menos",
+          "quantificadores",
+          "substantivos",
+          "comparação"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-quantificacao",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "Delante de un sustantivo, mais y menos expresan una cantidad mayor o menor respecto de una referencia explícita o implícita y pueden participar en comparaciones del tipo mais/menos ... do que.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-invariabilidade",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "Mais y menos son formas invariables en género y número; en portugués pueden funcionar con valor cuantificador junto a nombres y también con valor adverbial en otros contextos, sin crear formas flexionadas como *maisa o *menosa.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-quantificacao",
+        "sourceRef": "ciberduvidas-mais-menos-2012",
+        "supportType": "supports",
+        "locator": {
+          "section": "Resposta — mais e menos com nomes e valor comparativo"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-quantificacao",
+        "sourceRef": "bechara-2009",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "section": "Pronomes indefinidos"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-invariabilidade",
+        "sourceRef": "bechara-2009",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "section": "Pronomes indefinidos — quantidades indeterminadas"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
