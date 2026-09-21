@@ -185,3 +185,21 @@ La principal leccion del caso es que una plataforma educativa no se vuelve solid
 
 | CIERRE MLS ya puede documentarse como un prototipo avanzado de tecnologia educativa y arquitectura del conocimiento. Su siguiente etapa consiste en convertir esa amplitud en una version consolidada, verificable y reproducible. |
 | --- |
+
+
+## 25. Expansion futura y estandarizacion
+
+La madurez alcanzada por MLS permite identificar principios potencialmente reutilizables en otras enciclopedias especializadas. Sin embargo, la recomendacion arquitectonica no es transformar este repositorio en un sistema universal ni mezclar corpus de dominios distintos.
+
+La estrategia documentada es preservar MLS como producto linguistico independiente y, si en el futuro se construyen sistemas de conocimiento para Diseño Grafico, Marketing, Psicologia, Filosofia u otras disciplinas, comenzar con repositorios e infraestructura aislados. Solo despues de tener al menos dos implementaciones reales debe extraerse un nucleo MKS con los componentes que hayan demostrado ser realmente independientes del dominio.
+
+Esta estrategia protege el corpus, AUTOOPT, staging, releases y QA de MLS; reduce el radio de impacto de fallos; evita mezclar politicas epistemologicas diferentes y facilita que cada futuro proyecto tenga su propio namespace, Source Registry, Evidence & Provenance y contrato editorial.
+
+La expansion se documenta en:
+
+- `docs/expansion y estandarizacion/01 Recomendacion de expansion MKS.md`
+- `docs/expansion y estandarizacion/02 Estandar de proyectos derivados de MLS.md`
+
+El segundo documento transforma las lecciones de MLS en un estandar de referencia basado en garantias: corpus canonico recuperable, source policy, Evidence, staging, idempotencia, busqueda degradable, accesibilidad, QA, ligereza y seguridad de contexto entre repositorios.
+
+Esta expansion queda registrada como posibilidad futura. La prioridad inmediata sigue siendo consolidar MLS y desarrollar Evidence & Provenance de forma incremental y compatible con R32.

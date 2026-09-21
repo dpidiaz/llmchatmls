@@ -245,3 +245,15 @@ Editorial changes belong in `content/`, followed by validation and deterministic
 
 If the canonical corpus changes, regenerate any derived index whose build ID no longer matches the canonical manifest.
 
+
+
+## Future expansion and derived project standardization
+
+MLS is also being documented as a reference implementation for future specialized knowledge systems. This is a future architectural direction, not a conversion of the current repository into a universal corpus.
+
+Official recommendations:
+
+- `docs/expansion y estandarizacion/01 Recomendacion de expansion MKS.md`
+- `docs/expansion y estandarizacion/02 Estandar de proyectos derivados de MLS.md`
+
+The central rule is that MLS remains an independent language product. Future knowledge systems should begin isolated by repository and domain; a shared MKS Core should only be extracted after reuse has been demonstrated by at least two real systems.
