@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 2 — PILOTO 20 / READY, NOT STARTED**
+**Estado actual: FASE 2 — PILOTO 20 / PREPARED, START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT**
 
 Progreso global inicial:
 
@@ -45,7 +45,7 @@ Progreso global inicial:
 | Documentación contractual R33 | COMPLETE | Prompt y roadmap versionados |
 | Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
 | Fase 1 Foundation | COMPLETE | Foundation R33 certificada |
-| Fase 2 Piloto 20 | READY — NOT STARTED | Métricas piloto aceptables |
+| Fase 2 Piloto 20 | PREPARED — NOT STARTED | Live D1 telemetry preflight + métricas piloto aceptables |
 | Fase 3 Evaluación | NOT STARTED | Decisión explícita go/no go |
 | Fase 4 Gate 100 | NOT STARTED | 100 estables |
 | Fase 5 Gate 500 | NOT STARTED | 500 estables |
@@ -367,7 +367,7 @@ Foundation debe demostrar:
 
 # 8. FASE 2 — PILOTO 20
 
-**Estado: NOT STARTED**
+**Estado: PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT**
 
 ## Selección
 
@@ -388,6 +388,25 @@ La muestra debe incluir:
 - al menos algunos casos potencialmente ambiguos o conflictivos.
 
 No elegir solo casos fáciles.
+
+### Muestra preparada
+
+Manifest canónico: `docs/evidence y provenance/04 Pilot 20 Manifest.json`.
+
+Plan operativo: `docs/evidence y provenance/03 Pilot 20 Plan.md`.
+
+La muestra queda bloqueada en 20 entradas reales:
+
+- 10 idiomas;
+- 2 entradas por idioma;
+- niveles A1, A2, B1, B2, C1, G1 y G4;
+- ortografía, morfología, sintaxis, pronunciación, discurso, casos, opcionalidad y variación regional;
+- 42,966 caracteres de artículo;
+- mínimo 1,052; máximo 6,529;
+- identidad fijada por Git blob SHA, `generatedAt` y metadata canónica.
+
+Una entrada que cambie produce `PILOT_ENTRY_VERSION_MISMATCH`; no se sustituye silenciosamente.
+
 
 ## Flujo por entrada
 
@@ -432,6 +451,19 @@ Registrar:
 - averageSourcesPerEntry;
 - APA validation failures;
 - manual review burden.
+
+### Instrumentación preparada
+
+- [x] `proposal` reporta Sources creadas/reutilizadas/actualizadas y operaciones de Claims/Links/conflictos.
+- [x] Telemetry D1 por request distingue metadata exacta de filas meramente observadas.
+- [x] `d1RowsRead/d1RowsWritten` permanecen `null` si Cloudflare no entrega metadata exacta.
+- [x] Endpoint read-only `/api/wiki/editorial/evidence/metrics` calcula bytes lógicos Evidence.
+- [x] Manifest integrity y telemetry tests verdes en run #316.
+- [x] Full Foundation regression suite verde en run #316.
+- [ ] **Start gate live:** confirmar sobre el runtime desplegado del piloto si Cloudflare devuelve `exactRowsRead=true` y `exactRowsWritten=true`.
+
+El Pilot 20 continúa **NOT STARTED** hasta cerrar ese último gate. No se han creado Sources, Claims, Links ni Reviews del piloto en producción.
+
 
 ## Exit gate
 
@@ -656,6 +688,23 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — Pilot 20 preparado; ejecución aún bloqueada
+
+- PR #134 prepara Phase 2 sin ejecutar Evidence sobre el corpus.
+- Se fijó una muestra canónica de 20 entradas: dos por cada idioma MLS.
+- La muestra se bloqueó por Git blob SHA + generatedAt + metadata para evitar drift silencioso.
+- Se añadió plan operativo y stop conditions.
+- Se añadió telemetría por request para D1; rows exactas solo se reportan cuando Cloudflare las entrega.
+- `observedRowsRead/observedRowsWritten` quedan separados y nunca sustituyen billed rows.
+- `proposal` reporta creación/reutilización de Sources, Claims, Links y conflictos.
+- Se añadió medición read-only de bytes lógicos Evidence.
+- CI detectó y corrigió dos errores de preparación: familia AUTOOPT esperada incorrecta para MLS-V01-0613 y un placeholder extra en un fixture SQLite.
+- GitHub Actions run #316: SUCCESS.
+- test:chat-editorial, test:evidence, test:canonical-tools, qa:baseline, predeploy, recovery:verify, deploy-contract y check: SUCCESS.
+- Production deploy: SKIPPED.
+- Start gate pendiente: preflight live de metadata D1 en el runtime que vaya a ejecutar el piloto.
+- entriesProcessed=0; sourcesCreated=0; claimsCreated=0; claimsVerified=0 en producción.
+
 ## 2026-09-21 — F9 Contract Closure certificado; Phase 1 COMPLETE
 
 - Se implementaron Source Policies explícitas para los 10 idiomas canónicos MLS.
@@ -819,72 +868,73 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 COMPLETE / PHASE 2 PILOT 20 READY — NOT STARTED
+STATUS: PHASE 2 PILOT 20 PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-contract-closure
+BRANCH: r33-evidence-pilot-20-preparation
 BASE: main
-BASE HEAD: 5345ac75537fdd7e69d83b870698d3d7de150420
+BASE HEAD: a369cff3e0c6b096c1a48b62931f2e1f7f4ce529
 
 DONE:
-- F1 contracts/schema
-- F2 Source Registry
-- F3 Claims/Links/Conflicts
-- F4 deterministic Evidence state validator
-- F5 APA validator/renderer
-- F6 append-only Reviews + Article Revisions
-- F7 private Evidence API/OpenAPI + runtime bundle
-- F8 explicit CI regression certification
-- F9 source policies for all 10 MLS languages
-- F9 composite R32+R33 provenance
-- F9 canonical repository context guard
-- F9 architecture boundary contracts
-- Idempotent verification on identical Evidence snapshot
-- Full Foundation certification in GitHub Actions run #309
+- Phase 1 Foundation complete and merged
+- Pilot 20 plan created
+- Pilot 20 manifest created
+- 20 canonical entries selected and version-locked
+- exactly 2 entries per each of 10 MLS languages
+- level and phenomenon coverage locked by test
+- Source create/reuse/update telemetry added
+- D1 exact-vs-observed telemetry added
+- read-only logical Evidence byte measurement added
+- private /evidence/metrics endpoint added
+- Pilot manifest/telemetry/runtime certification green in run #316
 
 CURRENT:
-- Phase 1 closed
-- Preparing Phase 2 Pilot 20 only
-- No pilot Evidence has been written yet
+- Pilot remains NOT STARTED
+- Final documentation recertification for PR #134
 
 NEXT:
-- Merge PR #133 after final roadmap HEAD recertification
-- Create controlled Pilot 20 manifest/measurement plan
-- Select representative 20-entry sample without processing it yet
-- Run Pilot 20 only as a separate explicitly tracked phase
+- Recertify final PR #134 HEAD
+- Merge PR #134 if green
+- On a separately authorized/deployed Pilot runtime, perform read-only live telemetry preflight
+- Start entries 1–4 only if the live D1 telemetry gate is satisfied
 
 BLOCKERS:
-- None for Phase 1
-- Pilot execution intentionally not started
+- Live D1 telemetry metadata has not yet been observed on the runtime that will execute the pilot
 
 DECISIONS:
-- approvedSourcePool remains empty until sources are actually verified
-- Source policy defines authority categories and claim rules, not invented bibliography
-- R32 provenance is reused and composed rather than duplicated
-- VERIFIED/REVIEWED remain snapshot-bound append-only events
-- A repeated verify on the same valid snapshot is idempotent
-- No corpus-scale migration before Pilot 20 evaluation
+- No D1 billed-row number is inferred from observed row counts
+- No Pilot source is preapproved merely because it appears plausible
+- No sample entry may drift from its locked version silently
+- Pilot begins sequentially, checkpoints every 4 entries
+- No canonical article overwrite during Pilot 20
 
 AUTOOPT IMPACT:
-- None; AUTOOPT remains observational and independent
+- None; classifier is only used to characterize the sample
 
 R32 COMPATIBILITY:
 - Preserved
-- R32 editorial generation remains promptVersion 32.0
-- Existing staging/watchdog/reader/Virtuoso/Profesor IA behavior unchanged by Evidence Foundation
 
 EVIDENCE STATUS:
 - Foundation complete
-- Production corpus remains un-migrated
-- Pilot not started
+- Pilot sample prepared
+- Pilot execution not started
+
+ENTRIES PROCESSED:
+- 0 production
 
 SOURCES CREATED:
+- 0 production
+
+SOURCES REUSED:
 - 0 production
 
 CLAIMS CREATED:
 - 0 production
 
 CLAIMS VERIFIED:
+- 0 production
+
+EVIDENCE LINKS:
 - 0 production
 
 CONFLICTS:
@@ -894,10 +944,14 @@ NEEDS REVIEW:
 - 0 production
 
 D1 IMPACT:
-- 0 production Evidence writes during Foundation implementation
+- 0 production Pilot writes
+- live exact rows not yet observed
+
+GITHUB IMPACT:
+- manifest, plan, telemetry and tests only
 
 TESTS:
-- GitHub Actions run #309: SUCCESS
+- GitHub Actions run #316: SUCCESS
 - npm run test:chat-editorial: SUCCESS
 - npm run test:evidence: SUCCESS
 - npm run test:canonical-tools: SUCCESS
@@ -909,7 +963,7 @@ TESTS:
 - production deploy step: SKIPPED
 
 PR:
-- #133 — feat: close MLS R33 Evidence Foundation contracts
+- #134 — feat: prepare MLS R33 Evidence Pilot 20
 ```
 ---
 
