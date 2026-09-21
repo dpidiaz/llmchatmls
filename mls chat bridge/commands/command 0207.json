@@ -1,0 +1,165 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V04-0174",
+    "articleGeneratedAt": "2026-09-19T07:08:48.021Z",
+    "articleHash": "2849dfc6bba4146edd06fbba2effdb7b7ae1955ac9a46b9546e206663d6ebf82",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "oqlf-pronom-demonstratif-2022",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "pronom démonstratif",
+        "institution": "Office québécois de la langue française",
+        "publicationYear": 2022,
+        "canonicalUrl": "https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/26559761/pronom-demonstratif",
+        "language": "fr",
+        "topics": [
+          "pronom démonstratif",
+          "celui-ci",
+          "celui-là",
+          "proximité",
+          "éloignement"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "oqlf-ci-la",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Les particules adverbiales ci et là",
+        "institution": "Office québécois de la langue française",
+        "canonicalUrl": "https://vitrinelinguistique.oqlf.gouv.qc.ca/23480/la-grammaire/ladverbe/les-particules-adverbiales-ci-et-la",
+        "language": "fr",
+        "topics": [
+          "ci",
+          "là",
+          "proximité",
+          "éloignement",
+          "trait d’union",
+          "pronom démonstratif"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "cnrtl-celle-ci",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "C",
+        "status": "active",
+        "title": "CELLE-CI : Définition de CELLE-CI",
+        "institution": "Centre National de Ressources Textuelles et Lexicales",
+        "canonicalUrl": "https://www.cnrtl.fr/definition/celle-ci",
+        "language": "fr",
+        "topics": [
+          "celui-ci",
+          "celle-ci",
+          "anaphore",
+          "ordre du discours"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "cnrtl-ceux-la",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "C",
+        "status": "active",
+        "title": "CEUX-LÀ : Définition de CEUX-LÀ",
+        "institution": "Centre National de Ressources Textuelles et Lexicales",
+        "canonicalUrl": "https://www.cnrtl.fr/definition/ceux-l%C3%A0",
+        "language": "fr",
+        "topics": [
+          "celui-là",
+          "ceux-là",
+          "anaphore",
+          "ordre du discours"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-formes-demonstratives",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "Celui-ci y celui-là son formas compuestas del pronombre demostrativo masculino singular celui. Las partículas -ci y -là pueden marcar respectivamente proximidad y alejamiento, se unen al pronombre con guion y permiten distinguir o retomar referentes sin repetir el nombre.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-ordre-anaphorique",
+        "sectionKey": "Cómo funciona",
+        "summary": "Cuando dos antecedentes ya han sido mencionados en el discurso escrito, celui-ci puede remitir al último mencionado y celui-là al primero; por ello no es correcto presentar de forma general -ci como 'el primero de dos' y -là como 'el segundo'.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-usage-contextuel",
+        "sectionKey": "Cómo funciona / Observación importante",
+        "summary": "La oposición -ci/-là es contextual y no siempre mantiene una separación absoluta de cercanía: en la lengua hablada, là puede sustituir a ci incluso sin una oposición estricta de distancia.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-formes-demonstratives",
+        "sourceRef": "oqlf-pronom-demonstratif-2022",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Définition / Notes"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-formes-demonstratives",
+        "sourceRef": "oqlf-ci-la",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Ci / Là"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-ordre-anaphorique",
+        "sourceRef": "cnrtl-celle-ci",
+        "supportType": "supports",
+        "locator": {
+          "section": "Celui-ci employé dans un système d'opposition — contexte"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-ordre-anaphorique",
+        "sourceRef": "cnrtl-ceux-la",
+        "supportType": "supports",
+        "locator": {
+          "section": "Celui-là employé dans un système d'opposition — contexte"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-usage-contextuel",
+        "sourceRef": "oqlf-ci-la",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Langue parlée"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": [
+      {
+        "claimRef": "c-ordre-anaphorique",
+        "sourceRefs": [
+          "cnrtl-celle-ci",
+          "cnrtl-ceux-la"
+        ],
+        "conflictType": "contradiction",
+        "status": "unresolved",
+        "context": "La versión canónica afirma que -ci puede presentar 'el primero de dos elementos contrastados' y -là 'el segundo'. Las referencias CNRTL documentan para la referencia textual de dos elementos el patrón celui-ci = último mencionado y celui-là = primero mencionado. La formulación canónica requiere corrección antes de VERIFIED."
+      }
+    ]
+  }
+}
