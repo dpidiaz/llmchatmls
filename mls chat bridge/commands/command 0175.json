@@ -1,0 +1,71 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V01-0115",
+    "articleGeneratedAt": "2026-09-16T09:05:43.150Z",
+    "articleHash": "d03e9d5358c8e675f142c8e830622bd4381e20c02edd6a373aeaa675707aac2b",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "alexander-1990",
+        "sourceType": "book",
+        "authorityTier": "C",
+        "status": "active",
+        "title": "Longman English Grammar Practice",
+        "authors": [
+          "Alexander, L. G."
+        ],
+        "publicationYear": 1990,
+        "publisher": "Longman",
+        "edition": "Illustrated edition",
+        "isbn": "9780582045880",
+        "language": "en",
+        "topics": [
+          "English grammar",
+          "articles",
+          "zero article",
+          "meals"
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-zero-meals",
+        "sectionKey": "En pocas palabras / Cómo funciona",
+        "summary": "En inglés, los nombres de comidas como breakfast, lunch, tea, dinner y supper se usan normalmente sin artículo cuando se refieren a la comida de manera general; construcciones como have breakfast, at lunch y dinner is served son patrones estándar.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-specific-meals",
+        "sectionKey": "Cómo funciona / Ejemplos",
+        "summary": "Los nombres de comidas admiten artículos cuando la referencia se vuelve particular: the puede identificar una comida específica y a/an puede aparecer al describir una instancia concreta de la comida.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-zero-meals",
+        "sourceRef": "alexander-1990",
+        "supportType": "supports",
+        "locator": {
+          "page": "59",
+          "section": "3.6A Zero article for parts of the day and for meals"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-specific-meals",
+        "sourceRef": "alexander-1990",
+        "supportType": "supports",
+        "locator": {
+          "page": "59",
+          "section": "3.6A Zero article for parts of the day and for meals"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
