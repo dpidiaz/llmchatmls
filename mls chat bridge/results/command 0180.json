@@ -1,0 +1,147 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V01-0613",
+    "article": {
+      "code": "MLS-V01-0613",
+      "articleGeneratedAt": "2026-09-17T11:31:41.336Z",
+      "articleHash": "601d8ead821aa97ccd4bd60ec561720fd73b24f340a7cb2b67b055249f66c73c",
+      "language": "ingles",
+      "languageName": "Inglés",
+      "title": "Ausencia de retroceso temporal cuando el contenido sigue siendo verdadero",
+      "level": "B2",
+      "part": "Estilo indirecto, cita y evidencialidad — Reported speech, quotation, and evidentiality",
+      "chapter": "Estilo indirecto — Reported speech"
+    },
+    "state": {
+      "code": "MLS-V01-0613",
+      "article_generated_at": "2026-09-17T11:31:41.336Z",
+      "article_hash": "601d8ead821aa97ccd4bd60ec561720fd73b24f340a7cb2b67b055249f66c73c",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 2,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-21T21:39:44.641Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 2,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "huddleston-pullum-2005": "MLS-SRC-013B8A9FFC2ABAB53A03",
+        "cambridge-reported-speech": "MLS-SRC-17A874612878804D24BE"
+      },
+      "claims": {
+        "c-backshift": "MLS-CLM-2E2B86C7805788878D38548C",
+        "c-no-backshift": "MLS-CLM-4EFA735557ABE854BCC2C943"
+      }
+    },
+    "links": [
+      "MLS-LNK-E3819469DB4DC12D575B6E8B",
+      "MLS-LNK-1D5A7565C5C21CA1961B3FBF",
+      "MLS-LNK-337F2228E4D09976315AA093"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 2,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 2,
+      "claimsReused": 0,
+      "linksCreated": 3,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "huddleston-pullum-2005",
+          "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "cambridge-reported-speech",
+          "sourceId": "MLS-SRC-17A874612878804D24BE",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-backshift",
+          "claimId": "MLS-CLM-2E2B86C7805788878D38548C",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-no-backshift",
+          "claimId": "MLS-CLM-4EFA735557ABE854BCC2C943",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-E3819469DB4DC12D575B6E8B",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-1D5A7565C5C21CA1961B3FBF",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-337F2228E4D09976315AA093",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 52,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 73,
+        "d1RowsWritten": 32,
+        "observedRowsRead": 36,
+        "observedRowsWritten": 8,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:39:45.693Z",
+  "commandFile": "mls chat bridge/commands/command 0180.json"
+}
