@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 1 — FOUNDATION / READY TO START**
+**Estado actual: FASE 1 — FOUNDATION / IN PROGRESS**
 
 Progreso global inicial:
 
@@ -44,7 +44,7 @@ Progreso global inicial:
 | --- | --- | --- |
 | Documentación contractual R33 | COMPLETE | Prompt y roadmap versionados |
 | Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
-| Fase 1 Foundation | READY TO START | Tests foundation verdes |
+| Fase 1 Foundation | IN PROGRESS | Tests foundation verdes |
 | Fase 2 Piloto 20 | NOT STARTED | Métricas piloto aceptables |
 | Fase 3 Evaluación | NOT STARTED | Decisión explícita go/no go |
 | Fase 4 Gate 100 | NOT STARTED | 100 estables |
@@ -251,7 +251,7 @@ Fase 0 solo se cierra cuando existe una arquitectura Foundation suficientemente 
 
 # 7. FASE 1 — FOUNDATION
 
-**Estado: READY TO START**
+**Estado: IN PROGRESS**
 
 ## Alcance permitido
 
@@ -284,21 +284,38 @@ Nombres tentativos, no aprobados todavía:
 
 Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas tablas.
 
+## Progreso de implementación
+
+- [x] F1 contracts: constantes Evidence/APA.
+- [x] F1 schema: siete tablas aditivas y sus índices mínimos.
+- [x] F1 identidad: articleHash SHA-256, Source/Claim/EvidenceLink IDs deterministas.
+- [x] F1 normalización: DOI, ISBN y canonical URL.
+- [x] F1 state machine base y optimistic concurrency 409.
+- [x] F1 tests dedicados: 12 casos locales verdes.
+- [x] F1 certificación completa del PR #125 contra main.
+- [ ] F2 Source Registry runtime/persistence.
+- [ ] F3 Claims and links persistence.
+- [ ] F4 State validator integrado.
+- [ ] F5 APA renderer/validator.
+- [ ] F6 Reviews/revisions.
+- [ ] F7 Private API/OpenAPI.
+- [ ] F8 Regression certification.
+
 ## Required tests
 
-- [ ] Source deduplication DOI.
-- [ ] Source deduplication ISBN.
-- [ ] Source deduplication canonical URL.
-- [ ] Fingerprint fallback.
-- [ ] Invalid DOI.
-- [ ] Invalid ISBN.
-- [ ] UNSOURCED default.
-- [ ] SOURCED transition.
-- [ ] VERIFIED hard guard.
-- [ ] Unresolved claims block VERIFIED.
-- [ ] Contradiction handling.
+- [x] Source deduplication DOI.
+- [x] Source deduplication ISBN.
+- [x] Source deduplication canonical URL.
+- [x] Fingerprint fallback.
+- [x] Invalid DOI.
+- [x] Invalid ISBN.
+- [x] UNSOURCED default.
+- [x] SOURCED transition.
+- [x] VERIFIED hard guard.
+- [x] Unresolved claims block VERIFIED.
+- [x] Contradiction handling.
 - [ ] Idempotent verification.
-- [ ] Concurrent verification.
+- [x] Concurrent verification.
 - [ ] Revision creation.
 - [ ] No silent overwrite.
 - [ ] Style references remain distinct.
@@ -632,6 +649,24 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F1 Contracts and schema certificado
+
+- GitHub Actions run #279 completó SUCCESS contra `main`.
+- Pasaron `test:chat-editorial`, `predeploy`, `recovery:verify`, deploy-contract y `check`.
+- El paso de despliegue de producción del workflow fue SKIPPED.
+- F1 cumple su gate técnico y queda listo para merge.
+
+## 2026-09-21 — F1 Contracts and schema iniciado
+
+- Se creó la rama `r33-evidence-provenance-foundation` desde el checkpoint documental.
+- Se añadieron contratos y schema aditivos sin conectar Evidence al runtime.
+- Se añadieron IDs deterministas y normalización DOI/ISBN/URL.
+- Se añadieron guards UNSOURCED/SOURCED/VERIFIED/REVIEWED y concurrencia 409.
+- 12 tests dedicados pasaron localmente.
+- `test:evidence` y el test de Foundation se añadieron al contrato de tests.
+- PR #125 abierto contra `main` para certificación real.
+- No se ejecutó migración D1 ni procesamiento de corpus.
+
 ## 2026-09-21 — Cierre de Fase 0
 
 - Auditoría D1, provenance, OpenAPI, Virtuoso, Profesor IA, search, offline y canonical schema completada.
@@ -667,87 +702,72 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 0 COMPLETE
+STATUS: PHASE 1 F1 COMPLETE
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-provenance-docs
-BASE HEAD: 47c720005bfc0a3ceab1aad46079d4db913ffb61
+BRANCH: r33-evidence-provenance-foundation
+BASE: main
 
 DONE:
-- Full R32 architecture audit
-- D1/provenance inventory
-- OpenAPI/editorial inventory
-- Virtuoso / Profesor IA / search / offline audit
-- Canonical schema audit
-- Corpus size baseline
-- Three schema options evaluated
-- Recommended normalized D1 architecture selected
-- State machine and concurrency contract defined
-- APA metadata/renderer design defined
-- Phase 0 architecture document created
+- Phase 0 documentation merged via PR #124
+- F1 additive schema contract
+- F1 deterministic source / claim / link identities
+- F1 DOI / ISBN / URL normalization
+- F1 article hash
+- F1 base evidence state machine
+- F1 optimistic concurrency guard
+- 12 dedicated local tests green
 
 CURRENT:
-- Fase 1 Foundation READY TO START
+- F1 complete; preparing merge of PR #125
 
 NEXT:
-- F1 contracts and additive schema
-- F2 Source Registry
-- F3 Claims and EvidenceLinks
-- F4 deterministic state validator
+- Merge PR #125
+- Begin F2 Source Registry persistence and read/upsert contract
 
 BLOCKERS:
-- Production-code pushes may trigger Cloudflare Git deployment from branch activity.
-- Do not push Foundation production code until this deployment behavior is controlled or explicitly accepted.
-
-DECISIONS:
-- Evidence does not add mandatory columns to wiki_articles in Foundation.
-- Semantic Audit remains diagnostic only.
-- R32 references remain style references.
-- Source IDs should be deterministic, not a global sequential coordination point.
-- Evidence binds to exact generatedAt + articleHash.
-- Worker will not autonomously crawl the web in Foundation.
+- Cloudflare Git integration can build/deploy branch activity independently of repository workflow.
+- Foundation module is intentionally disconnected from predeploy/runtime, so current branch code does not change public MLS behavior.
 
 AUTOOPT IMPACT:
 - None
 
 R32 COMPATIBILITY:
-- Preserved
+- wiki_articles untouched
+- style references untouched
+- Semantic Audit untouched
+- staging untouched
 
 EVIDENCE STATUS:
-- No corpus migration started
+- Foundation only; no corpus migration
 
 SOURCES CREATED:
-- 0
+- 0 runtime sources
 
 CLAIMS CREATED:
-- 0
+- 0 runtime claims
 
 CLAIMS VERIFIED:
 - 0
 
-CONFLICTS:
-- 0 measured
-
-NEEDS REVIEW:
-- 0 measured
-
 D1 IMPACT:
-- 0 Evidence writes
-
-GITHUB IMPACT:
-- Documentation only
-
-SIZE DELTA:
-- Documentation only
-- Canonical corpus baseline measured at ~31.3 MB excluding manifests
+- 0 runtime Evidence writes
 
 TESTS:
-- Architecture audit only
-- No production-code QA required yet
-- No manual deploy command executed
+- test/evidence foundation.test.cjs: 12/12 local pass
+- GitHub Actions run #279: SUCCESS
+- npm run test:chat-editorial: SUCCESS
+- npm run predeploy: SUCCESS
+- npm run recovery:verify: SUCCESS
+- node --test test/deploy-contract.test.cjs: SUCCESS
+- npm run check: SUCCESS
+- workflow production deploy step: SKIPPED
+
+COMMIT SHA:
+- 4832608710cc4f2e5a91a9eddab2802853db7534 before roadmap sync
 
 PR:
-- #124 — docs: define MLS R33 Evidence and Provenance
+- #125 — feat: add MLS R33 evidence foundation
 ```
 ---
 
