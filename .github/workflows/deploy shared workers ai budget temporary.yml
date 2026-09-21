@@ -34,7 +34,7 @@ jobs:
         run: |
           set -euo pipefail
           tmp="$RUNNER_TEMP/semantic.json"
-          code=$(curl --silent --show-error             --output "$tmp" --write-out '%{http_code}'             -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/semantic/query'             -H 'content-type: application/json'             --data '{"query":"verbos"}')
+          code=$(curl --silent --show-error             --output "$tmp" --write-out '%{http_code}'             -X POST 'https://llmchatmls.dpidiaz.workers.dev/api/search/embedding'             -H 'content-type: application/json'             --data '{"query":"verbos"}')
           body=$(cat "$tmp")
           printf '%s\n' "$body"
           if [ "$code" = "200" ]; then
