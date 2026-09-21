@@ -1,6 +1,6 @@
 # MLS R33 Evidence & Provenance — Pilot 20 Plan
 
-**Estado:** PREPARED — NOT STARTED  
+**Estado:** PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT  
 **Pilot ID:** `MLS-R33-EVIDENCE-PILOT-20`  
 **Manifest:** `04 Pilot 20 Manifest.json`  
 **Selection base commit:** `a369cff3e0c6b096c1a48b62931f2e1f7f4ce529`
@@ -153,12 +153,13 @@ Registrar además:
 
 El piloto no debe comenzar hasta que estas métricas sean observables:
 
-- [ ] `proposal` distingue Sources creadas vs reutilizadas.
-- [ ] Cada operación Pilot reporta telemetry D1 con rows read/written cuando Cloudflare lo proporciona.
-- [ ] Si D1 no entrega metadata exacta para una operación, distinguir `observedRows` de `billedRows`; no etiquetar una estimación como D1RowsRead.
-- [ ] Existe medición de logical Evidence bytes por entrada.
-- [ ] Manifest integrity test verde.
-- [ ] Full Foundation certification verde en el HEAD que ejecutará el piloto.
+- [x] `proposal` distingue Sources creadas, reutilizadas y actualizadas; también reporta creación/reutilización de Claims, Links y conflictos.
+- [x] Cada operación Evidence puede reportar telemetry D1 por request y consume `rows_read/rows_written` únicamente cuando Cloudflare los proporciona.
+- [x] Si D1 no entrega metadata exacta, `d1RowsRead/d1RowsWritten` permanecen `null` y `observedRowsRead/observedRowsWritten` se muestran por separado; nunca se presentan como billed rows.
+- [x] Existe medición read-only de logical Evidence bytes por entrada mediante `/api/wiki/editorial/evidence/metrics`.
+- [x] Manifest integrity test verde en GitHub Actions run #316.
+- [x] Foundation + Pilot-preparation certification verde en GitHub Actions run #316.
+- [ ] **Live preflight:** sobre el runtime desplegado que vaya a ejecutar el piloto, confirmar si Cloudflare entrega `exactRowsRead=true` y `exactRowsWritten=true`. Si alguno es falso, no iniciar las 20 entradas hasta documentar cómo se medirá el costo D1 sin confundir observación con facturación.
 
 GitHub runtime para Evidence debe permanecer en cero. Cualquier uso de GitHub por el proceso de control/documentación se cuenta aparte como `GitHubRequests` / `GitHubMutations`, no como dependencia runtime.
 
@@ -227,6 +228,6 @@ No avanzar a 100 si:
 
 ## 11. Estado actual
 
-**PREPARED — NOT STARTED.**
+**PREPARED — START GATE PENDING LIVE D1 TELEMETRY PREFLIGHT.**
 
-El manifest está seleccionado y versionado. No se han creado Sources, Claims, EvidenceLinks ni Reviews del piloto en producción.
+El manifest está seleccionado, versionado y certificado. La instrumentación local/CI está verde en run #316. No se han creado Sources, Claims, EvidenceLinks ni Reviews del piloto en producción. El único gate previo al inicio es el preflight live de metadata D1 sobre el runtime que efectivamente vaya a ejecutar el piloto.
