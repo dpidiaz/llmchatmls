@@ -1,0 +1,133 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V01-0115",
+    "article": {
+      "code": "MLS-V01-0115",
+      "articleGeneratedAt": "2026-09-16T09:05:43.150Z",
+      "articleHash": "d03e9d5358c8e675f142c8e830622bd4381e20c02edd6a373aeaa675707aac2b",
+      "language": "ingles",
+      "languageName": "Inglés",
+      "title": "Artículo cero con comidas",
+      "level": "A2",
+      "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+      "chapter": "Sistema de artículos — Article system"
+    },
+    "state": {
+      "code": "MLS-V01-0115",
+      "article_generated_at": "2026-09-16T09:05:43.150Z",
+      "article_hash": "d03e9d5358c8e675f142c8e830622bd4381e20c02edd6a373aeaa675707aac2b",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 1,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-21T21:36:19.499Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 1,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "alexander-1990": "MLS-SRC-6C7DC15B371322B1A80F"
+      },
+      "claims": {
+        "c-zero-meals": "MLS-CLM-184FD0CD7E8A46383D606DA5",
+        "c-specific-meals": "MLS-CLM-1FA58CE628571549316F31BA"
+      }
+    },
+    "links": [
+      "MLS-LNK-5A1650CBC0CCFF0BB50EA1A9",
+      "MLS-LNK-14BBD1EA7EA051C2A91E0303"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 1,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 2,
+      "claimsReused": 0,
+      "linksCreated": 2,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "alexander-1990",
+          "sourceId": "MLS-SRC-6C7DC15B371322B1A80F",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-zero-meals",
+          "claimId": "MLS-CLM-184FD0CD7E8A46383D606DA5",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-specific-meals",
+          "claimId": "MLS-CLM-1FA58CE628571549316F31BA",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-5A1650CBC0CCFF0BB50EA1A9",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-14BBD1EA7EA051C2A91E0303",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 40,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 59,
+        "d1RowsWritten": 23,
+        "observedRowsRead": 27,
+        "observedRowsWritten": 6,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:36:20.345Z",
+  "commandFile": "mls chat bridge/commands/command 0175.json"
+}
