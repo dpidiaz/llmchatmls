@@ -1,0 +1,147 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V03-0122",
+    "article": {
+      "code": "MLS-V03-0122",
+      "articleGeneratedAt": "2026-09-19T05:09:42.928Z",
+      "articleHash": "da9d600b48f9c49408eea4d9231342eff8c4d0869aaf8cd91731b5aa77ce9d31",
+      "language": "italiano",
+      "languageName": "Italiano",
+      "title": "Artículo partitivo del/della/dei/degli/delle",
+      "level": "A2",
+      "part": "Artículos, determinantes y cuantificación — Articoli, determinanti e quantificazione",
+      "chapter": "Artículos definidos e indefinidos — Articoli determinativi e indeterminativi"
+    },
+    "state": {
+      "code": "MLS-V03-0122",
+      "article_generated_at": "2026-09-19T05:09:42.928Z",
+      "article_hash": "da9d600b48f9c49408eea4d9231342eff8c4d0869aaf8cd91731b5aa77ce9d31",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 2,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-21T21:57:42.508Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 2,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "treccani-partitivo-2011": "MLS-SRC-781BC013DBE23EF6A59F",
+        "treccani-di": "MLS-SRC-E1F01807D0B0FAE3CCA6"
+      },
+      "claims": {
+        "c-forme-partitive": "MLS-CLM-50B8A54834A49E7D22FA68E8",
+        "c-forma-no-basta": "MLS-CLM-C7F32BB4DBA370F224936FDD"
+      }
+    },
+    "links": [
+      "MLS-LNK-DE361BFDB4DFE09BC3C9443E",
+      "MLS-LNK-F65A67236E1A6527C66387B2",
+      "MLS-LNK-7CF35830C191623A6F0BB484"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 2,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 2,
+      "claimsReused": 0,
+      "linksCreated": 3,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "treccani-partitivo-2011",
+          "sourceId": "MLS-SRC-781BC013DBE23EF6A59F",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "treccani-di",
+          "sourceId": "MLS-SRC-E1F01807D0B0FAE3CCA6",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-forme-partitive",
+          "claimId": "MLS-CLM-50B8A54834A49E7D22FA68E8",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-forma-no-basta",
+          "claimId": "MLS-CLM-C7F32BB4DBA370F224936FDD",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-DE361BFDB4DFE09BC3C9443E",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-F65A67236E1A6527C66387B2",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-7CF35830C191623A6F0BB484",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 52,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 73,
+        "d1RowsWritten": 32,
+        "observedRowsRead": 36,
+        "observedRowsWritten": 8,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:57:43.420Z",
+  "commandFile": "mls chat bridge/commands/command 0197.json"
+}
