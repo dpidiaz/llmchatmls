@@ -20,6 +20,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:chat-editorial
+      - run: npm run test:evidence
+      - run: npm run test:canonical-tools
+      - run: npm run qa:baseline
       - run: npm run predeploy
       - run: npm run recovery:verify
       - run: node --test test/deploy-contract.test.cjs
