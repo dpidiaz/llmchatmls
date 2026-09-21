@@ -94,6 +94,12 @@ async function persistEvaluation(env,code,{expectedEvidenceRevision=0,policy=nul
   return {...result,state:await getEvidenceState(env,result.article.code)};
 }
 async function verifyEntryEvidence(env,code,{expectedEvidenceRevision=0,policy=null,reviewerType='chatgpt',reviewer=null,verificationMethod='manual_source_match',notes=null,runId=null,now=new Date().toISOString()}={}){
+  const already=await evaluateEntryEvidence(env,code,{policy});
+  if((already.status==='VERIFIED'||already.status==='REVIEWED')&&already.verificationReviewId){
+    const state=await getEvidenceState(env,already.article.code);
+    const valid=await reviews.validReviewState(env,code);
+    return {...already,state,review:valid.verification,reviewCreated:false,reused:true};
+  }
   const assessment=await assessEntryEvidence(env,code,{policy});
   if(!assessment.coverageComplete)throw evidenceError('EVIDENCE_NOT_READY',422,'No todos los claims sustanciales están respaldados.',{reasons:assessment.reasons});
   if(!assessment.citationReady)throw evidenceError('APA_VALIDATION_REQUIRED',422,'Las fuentes que sustentan los claims no pasan APA Validator.',{reasons:assessment.reasons});
@@ -102,7 +108,7 @@ async function verifyEntryEvidence(env,code,{expectedEvidenceRevision=0,policy=n
   const snapshotHash=await reviews.evidenceSnapshotHash(env,code);
   const review=await reviews.recordReview(env,{code:assessment.article.code,articleGeneratedAt:assessment.article.articleGeneratedAt,articleHash:assessment.article.articleHash,expectedEvidenceRevision:revision,expectedSnapshotHash:snapshotHash,reviewKind:'verification',statusBefore:current?.status||'UNSOURCED',statusAfter:'VERIFIED',counts:assessment,reviewerType,reviewer,verificationMethod,notes,runId},{now});
   const persisted=await persistEvaluation(env,code,{expectedEvidenceRevision:revision,policy,now});
-  return {...persisted,review:review.review,reviewCreated:review.created};
+  return {...persisted,review:review.review,reviewCreated:review.created,reused:!review.created};
 }
 async function reviewEntryEvidence(env,code,{expectedEvidenceRevision,policy=null,reviewerType='human',reviewer=null,verificationMethod='editorial_review',notes=null,runId=null,now=new Date().toISOString()}={}){
   const currentEval=await evaluateEntryEvidence(env,code,{policy});
