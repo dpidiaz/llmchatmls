@@ -2,6 +2,7 @@
 const foundation=require('./evidence foundation.js');
 const registry=require('./evidence registry.js');
 const claimsApi=require('./evidence claims.js');
+const apa=require('./evidence apa.js');
 
 const VERIFYING_SUPPORT_TYPES=new Set(['supports','primary_source','secondary_interpretation']);
 const DEFAULT_EVIDENCE_POLICY=Object.freeze({
@@ -30,13 +31,14 @@ async function loadSources(env,links){
   for(const id of [...new Set(links.map(x=>x.source_id||x.sourceId).filter(Boolean))])out.set(id,await registry.getSourceById(env,id));
   return out;
 }
-async function evaluateEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY,citationReady=false,verificationConfirmed=false,reviewedAt=null,verifiedAt=null}={}){
+async function evaluateEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY,verificationConfirmed=false,reviewedAt=null,verifiedAt=null}={}){
   const snap=await claimsApi.entryEvidenceSnapshot(env,code);const sources=await loadSources(env,snap.links);
   const byClaim=new Map();for(const link of snap.links){const id=link.claim_id||link.claimId;if(!byClaim.has(id))byClaim.set(id,[]);byClaim.get(id).push(link);}
   const substantial=snap.claims.filter(x=>(x.materiality||'substantial')==='substantial');
   const evaluation=substantial.map(claim=>{
     const links=byClaim.get(claim.claim_id)||[];const qualifying=links.filter(link=>linkQualifies(link,sources.get(link.source_id),claim,policy));
-    return {claimId:claim.claim_id,verified:qualifying.length>0,qualifyingLinks:qualifying.length};
+    const citationReadyLinks=qualifying.filter(link=>apa.validateApaSource(sources.get(link.source_id)||{}).citationReady);
+    return {claimId:claim.claim_id,verified:qualifying.length>0,qualifyingLinks:qualifying.length,citationReady:citationReadyLinks.length>0,citationReadyLinks:citationReadyLinks.length};
   });
   const activeMapped=snap.links.filter(link=>sourceAvailable(sources.get(link.source_id)));
   const unresolved=snap.conflicts.filter(x=>x.status==='unresolved'&&x.conflict_type==='contradiction');
@@ -48,6 +50,7 @@ async function evaluateEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY,ci
     if(evaluation.some(x=>!x.verified))reasons.push('unverified_substantial_claims');
     if(unresolved.length)reasons.push('unresolved_substantive_conflict');
     const coverageComplete=substantial.length>0&&evaluation.every(x=>x.verified)&&!unresolved.length;
+    const citationReady=coverageComplete&&evaluation.every(x=>x.citationReady);
     if(coverageComplete&&!citationReady)reasons.push('apa_validation_required');
     if(coverageComplete&&citationReady&&!verificationConfirmed)reasons.push('verification_event_missing');
     if(coverageComplete&&citationReady&&verificationConfirmed){
@@ -55,12 +58,13 @@ async function evaluateEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY,ci
       if(reviewedAt&&verifiedAt&&Date.parse(reviewedAt)>Date.parse(verifiedAt))status='REVIEWED';
     }
   } else reasons.push('insufficient_mapping');
-  return {article:snap.article,status,reasons:[...new Set(reasons)],claimsTotal:substantial.length,claimsVerified:evaluation.filter(x=>x.verified).length,sourcesTotal:sources.size,conflictsTotal:snap.conflicts.length,needsReview:unresolved.length>0,evaluation,snapshot:snap};
+  const citationReady=status==='VERIFIED'||status==='REVIEWED'||(substantial.length>0&&evaluation.every(x=>x.verified&&x.citationReady)&&!unresolved.length);
+  return {article:snap.article,status,reasons:[...new Set(reasons)],claimsTotal:substantial.length,claimsVerified:evaluation.filter(x=>x.verified).length,sourcesTotal:sources.size,conflictsTotal:snap.conflicts.length,needsReview:unresolved.length>0,citationReady,evaluation,snapshot:snap};
 }
 async function getEvidenceState(env,code){await registry.ensureEvidenceDb(env);return await env.WIKI_DB.prepare('SELECT * FROM wiki_evidence_entry_state WHERE code=?').bind(String(code||'').toUpperCase()).first();}
 async function effectiveState(env,code){const article=await claimsApi.currentArticleVersion(env,code),state=await getEvidenceState(env,article.code);return {article,state,effectiveStatus:foundation.effectiveEvidenceStatus({article,state})};}
-async function persistEvaluation(env,code,{expectedEvidenceRevision=0,policy=DEFAULT_EVIDENCE_POLICY,citationReady=false,verificationConfirmed=false,verifiedAt=null,reviewedAt=null,now=new Date().toISOString()}={}){
-  await registry.ensureEvidenceDb(env);const result=await evaluateEntryEvidence(env,code,{policy,citationReady,verificationConfirmed,verifiedAt,reviewedAt});const current=await getEvidenceState(env,result.article.code);
+async function persistEvaluation(env,code,{expectedEvidenceRevision=0,policy=DEFAULT_EVIDENCE_POLICY,verificationConfirmed=false,verifiedAt=null,reviewedAt=null,now=new Date().toISOString()}={}){
+  await registry.ensureEvidenceDb(env);const result=await evaluateEntryEvidence(env,code,{policy,verificationConfirmed,verifiedAt,reviewedAt});const current=await getEvidenceState(env,result.article.code);
   const exact=current&&foundation.assertEvidenceVersionMatch(result.article,current);const currentRevision=exact?Number(current.evidence_revision||0):0;
   foundation.assertExpectedEvidenceRevision(currentRevision,expectedEvidenceRevision);
   const values=[foundation.MLS_EVIDENCE_VERSION,result.status,result.claimsTotal,result.claimsVerified,result.sourcesTotal,result.conflictsTotal,result.needsReview?1:0,foundation.MLS_CITATION_STYLE,foundation.MLS_CITATION_EDITION,foundation.MLS_CITATION_PROFILE,foundation.MLS_CITATION_RENDERER_VERSION,verifiedAt,reviewedAt,now];
