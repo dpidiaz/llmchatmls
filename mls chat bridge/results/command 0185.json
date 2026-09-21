@@ -1,0 +1,147 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V02-0180",
+    "article": {
+      "code": "MLS-V02-0180",
+      "articleGeneratedAt": "2026-09-18T04:50:05.454Z",
+      "articleHash": "104bdb2071fb215f3dbd86c5adc8e5226088fe5dc77b8fe4a050f0d1bdf44d3f",
+      "language": "portugues",
+      "languageName": "Portugués brasileño",
+      "title": "Mais y menos como cuantificadores",
+      "level": "A2",
+      "part": "Artículos, determinantes y cuantificación — Artigos, determinantes e quantificação",
+      "chapter": "Determinantes, demostrativos y cuantificación — Determinantes, demonstrativos e quantificação"
+    },
+    "state": {
+      "code": "MLS-V02-0180",
+      "article_generated_at": "2026-09-18T04:50:05.454Z",
+      "article_hash": "104bdb2071fb215f3dbd86c5adc8e5226088fe5dc77b8fe4a050f0d1bdf44d3f",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 2,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-21T21:49:36.535Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 2,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "bechara-2009": "MLS-SRC-05FC4825A0C7C8C75F6F",
+        "ciberduvidas-mais-menos-2012": "MLS-SRC-01CC51C7E48F1D081990"
+      },
+      "claims": {
+        "c-quantificacao": "MLS-CLM-6D05CCB55F784FC866EB143A",
+        "c-invariabilidade": "MLS-CLM-A7AEDE7FD2F809C2A40177CE"
+      }
+    },
+    "links": [
+      "MLS-LNK-C3186825B8B0426BE59E88BF",
+      "MLS-LNK-16E4DB6B982DE5D47FAD1A22",
+      "MLS-LNK-B9F3BE70B07A3291F32D2257"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 2,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 2,
+      "claimsReused": 0,
+      "linksCreated": 3,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "bechara-2009",
+          "sourceId": "MLS-SRC-05FC4825A0C7C8C75F6F",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "ciberduvidas-mais-menos-2012",
+          "sourceId": "MLS-SRC-01CC51C7E48F1D081990",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-quantificacao",
+          "claimId": "MLS-CLM-6D05CCB55F784FC866EB143A",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-invariabilidade",
+          "claimId": "MLS-CLM-A7AEDE7FD2F809C2A40177CE",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-C3186825B8B0426BE59E88BF",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-16E4DB6B982DE5D47FAD1A22",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-B9F3BE70B07A3291F32D2257",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 52,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 73,
+        "d1RowsWritten": 32,
+        "observedRowsRead": 36,
+        "observedRowsWritten": 8,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:49:37.289Z",
+  "commandFile": "mls chat bridge/commands/command 0185.json"
+}
