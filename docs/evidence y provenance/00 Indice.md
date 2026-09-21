@@ -16,6 +16,9 @@ R33 es aditivo. Las entradas R32 continúan siendo utilizables aunque su estado 
 2. [02 Roadmap MLS Evidence Provenance R33](./02%20Roadmap%20MLS%20Evidence%20Provenance%20R33.md)  
    Roadmap vivo y obligatorio. Debe consultarse antes de cada cambio R33 y actualizarse al cerrar cada checkpoint.
 
+3. [03 Fase 0 Arquitectura y diseño recomendado](./03%20Fase%200%20Arquitectura%20y%20dise%C3%B1o%20recomendado.md)  
+   Auditoría técnica de R32, opciones de schema, arquitectura D1 recomendada, state machine, concurrencia, APA, estimaciones de tamaño y unidades de implementación de Foundation.
+
 ## Contexto R32 inspeccionado al crear esta documentación
 
 Repositorio: `dpidiaz/llmchatmls`  
