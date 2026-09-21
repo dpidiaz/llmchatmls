@@ -142,7 +142,7 @@ async function handleMlsEvidence(request,env,url,runtime){
     await registry.ensureEvidenceDb(env);
     meter=telemetry.createD1Meter();
     const measuredEnv={...env,WIKI_DB:meter.wrap(env.WIKI_DB)};
-    const respond=payload=>json({...payload,telemetry:{d1:meter.snapshot()}});
+    const respond=(payload,status=200)=>json({...payload,telemetry:{d1:meter.snapshot()}},status);
     const route=url.pathname.replace('/api/wiki/editorial/evidence','')||'/';
     if(route==='/status'&&request.method==='GET')return respond(await status(measuredEnv));
     if(route==='/entry'&&request.method==='GET')return respond(await entry(measuredEnv,url.searchParams.get('code')));
@@ -154,7 +154,7 @@ async function handleMlsEvidence(request,env,url,runtime){
     if(route==='/verify'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.verifyEntryEvidence(measuredEnv,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'chatgpt',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'manual_source_match',notes:body.notes,runId:body.runId});return respond({ok:true,...out});}
     if(route==='/review'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.reviewEntryEvidence(measuredEnv,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'human',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'editorial_review',notes:body.notes,runId:body.runId});return respond({ok:true,...out});}
     if(route==='/revision/propose'&&request.method==='POST'){const body=await runtime.body(request);return respond({ok:true,...await reviews.proposeArticleRevision(measuredEnv,body)});}
-    if(!['GET','POST'].includes(request.method)){const r=respond({ok:false,error:'Método no permitido.'});r.status=405;r.headers.set('Allow','GET, POST');return r;}
+    if(!['GET','POST'].includes(request.method)){const r=respond({ok:false,error:'Método no permitido.'},405);r.headers.set('Allow','GET, POST');return r;}
     error(404,'Ruta Evidence no encontrada.');
   }catch(e){
     if(!e.status)console.error('mls-evidence-failure',e.message);
