@@ -3,6 +3,7 @@ const foundation=require('./evidence foundation.js');
 const registry=require('./evidence registry.js');
 const claimsApi=require('./evidence claims.js');
 const apa=require('./evidence apa.js');
+const reviews=require('./evidence reviews.js');
 
 const VERIFYING_SUPPORT_TYPES=new Set(['supports','primary_source','secondary_interpretation']);
 const DEFAULT_EVIDENCE_POLICY=Object.freeze({
@@ -31,7 +32,7 @@ async function loadSources(env,links){
   for(const id of [...new Set(links.map(x=>x.source_id||x.sourceId).filter(Boolean))])out.set(id,await registry.getSourceById(env,id));
   return out;
 }
-async function evaluateEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY,verificationConfirmed=false,reviewedAt=null,verifiedAt=null}={}){
+async function assessEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY}={}){
   const snap=await claimsApi.entryEvidenceSnapshot(env,code);const sources=await loadSources(env,snap.links);
   const byClaim=new Map();for(const link of snap.links){const id=link.claim_id||link.claimId;if(!byClaim.has(id))byClaim.set(id,[]);byClaim.get(id).push(link);}
   const substantial=snap.claims.filter(x=>(x.materiality||'substantial')==='substantial');
@@ -49,24 +50,30 @@ async function evaluateEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY,ve
     if(!substantial.length)reasons.push('no_substantial_claims');
     if(evaluation.some(x=>!x.verified))reasons.push('unverified_substantial_claims');
     if(unresolved.length)reasons.push('unresolved_substantive_conflict');
-    const coverageComplete=substantial.length>0&&evaluation.every(x=>x.verified)&&!unresolved.length;
-    const citationReady=coverageComplete&&evaluation.every(x=>x.citationReady);
-    if(coverageComplete&&!citationReady)reasons.push('apa_validation_required');
-    if(coverageComplete&&citationReady&&!verificationConfirmed)reasons.push('verification_event_missing');
-    if(coverageComplete&&citationReady&&verificationConfirmed){
-      status='VERIFIED';
-      if(reviewedAt&&verifiedAt&&Date.parse(reviewedAt)>Date.parse(verifiedAt))status='REVIEWED';
-    }
   } else reasons.push('insufficient_mapping');
-  const citationReady=status==='VERIFIED'||status==='REVIEWED'||(substantial.length>0&&evaluation.every(x=>x.verified&&x.citationReady)&&!unresolved.length);
-  return {article:snap.article,status,reasons:[...new Set(reasons)],claimsTotal:substantial.length,claimsVerified:evaluation.filter(x=>x.verified).length,sourcesTotal:sources.size,conflictsTotal:snap.conflicts.length,needsReview:unresolved.length>0,citationReady,evaluation,snapshot:snap};
+  const coverageComplete=status==='SOURCED'&&substantial.length>0&&evaluation.every(x=>x.verified)&&!unresolved.length;
+  const citationReady=coverageComplete&&evaluation.every(x=>x.citationReady);
+  if(coverageComplete&&!citationReady)reasons.push('apa_validation_required');
+  return {article:snap.article,status,reasons:[...new Set(reasons)],claimsTotal:substantial.length,claimsVerified:evaluation.filter(x=>x.verified).length,sourcesTotal:sources.size,conflictsTotal:snap.conflicts.length,needsReview:unresolved.length>0,coverageComplete,citationReady,evaluation,snapshot:snap};
+}
+async function evaluateEntryEvidence(env,code,{policy=DEFAULT_EVIDENCE_POLICY}={}){
+  const assessment=await assessEntryEvidence(env,code,{policy});
+  if(!assessment.coverageComplete||!assessment.citationReady)return assessment;
+  const reviewState=await reviews.validReviewState(env,code);
+  if(!reviewState.verification)return {...assessment,status:'SOURCED',reasons:[...new Set([...assessment.reasons,'verification_event_missing'])],evidenceSnapshotHash:reviewState.snapshotHash,verifiedAt:null,reviewedAt:null,verificationReviewId:null,editorialReviewId:null};
+  const status=reviewState.editorial?'REVIEWED':'VERIFIED';
+  return {...assessment,status,reasons:assessment.reasons.filter(x=>x!=='verification_event_missing'),evidenceSnapshotHash:reviewState.snapshotHash,verifiedAt:reviewState.verifiedAt,reviewedAt:reviewState.reviewedAt,verificationReviewId:reviewState.verification.review_id,editorialReviewId:reviewState.editorial?.review_id||null};
 }
 async function getEvidenceState(env,code){await registry.ensureEvidenceDb(env);return await env.WIKI_DB.prepare('SELECT * FROM wiki_evidence_entry_state WHERE code=?').bind(String(code||'').toUpperCase()).first();}
-async function effectiveState(env,code){const article=await claimsApi.currentArticleVersion(env,code),state=await getEvidenceState(env,article.code);return {article,state,effectiveStatus:foundation.effectiveEvidenceStatus({article,state})};}
-async function persistEvaluation(env,code,{expectedEvidenceRevision=0,policy=DEFAULT_EVIDENCE_POLICY,verificationConfirmed=false,verifiedAt=null,reviewedAt=null,now=new Date().toISOString()}={}){
-  await registry.ensureEvidenceDb(env);const result=await evaluateEntryEvidence(env,code,{policy,verificationConfirmed,verifiedAt,reviewedAt});const current=await getEvidenceState(env,result.article.code);
+async function effectiveState(env,code,{policy=DEFAULT_EVIDENCE_POLICY}={}){
+  const article=await claimsApi.currentArticleVersion(env,code),state=await getEvidenceState(env,article.code),evaluation=await evaluateEntryEvidence(env,code,{policy});
+  return {article,state,effectiveStatus:evaluation.status,evaluation};
+}
+async function persistEvaluation(env,code,{expectedEvidenceRevision=0,policy=DEFAULT_EVIDENCE_POLICY,now=new Date().toISOString()}={}){
+  await registry.ensureEvidenceDb(env);const result=await evaluateEntryEvidence(env,code,{policy});const current=await getEvidenceState(env,result.article.code);
   const exact=current&&foundation.assertEvidenceVersionMatch(result.article,current);const currentRevision=exact?Number(current.evidence_revision||0):0;
   foundation.assertExpectedEvidenceRevision(currentRevision,expectedEvidenceRevision);
+  const verifiedAt=result.verifiedAt||null,reviewedAt=result.reviewedAt||null;
   const values=[foundation.MLS_EVIDENCE_VERSION,result.status,result.claimsTotal,result.claimsVerified,result.sourcesTotal,result.conflictsTotal,result.needsReview?1:0,foundation.MLS_CITATION_STYLE,foundation.MLS_CITATION_EDITION,foundation.MLS_CITATION_PROFILE,foundation.MLS_CITATION_RENDERER_VERSION,verifiedAt,reviewedAt,now];
   if(!current){
     const write=await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO wiki_evidence_entry_state(code,article_generated_at,article_hash,evidence_version,status,claims_total,claims_verified,sources_total,conflicts_total,needs_review,evidence_revision,source_revision,citation_style,citation_edition,citation_profile,citation_renderer_version,verified_at,reviewed_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`)
@@ -83,4 +90,25 @@ async function persistEvaluation(env,code,{expectedEvidenceRevision=0,policy=DEF
   }
   return {...result,state:await getEvidenceState(env,result.article.code)};
 }
-module.exports={DEFAULT_EVIDENCE_POLICY,sourceAvailable,sourceCounts,linkQualifies,evaluateEntryEvidence,getEvidenceState,effectiveState,persistEvaluation};
+async function verifyEntryEvidence(env,code,{expectedEvidenceRevision=0,policy=DEFAULT_EVIDENCE_POLICY,reviewerType='chatgpt',reviewer=null,verificationMethod='manual_source_match',notes=null,runId=null,now=new Date().toISOString()}={}){
+  const assessment=await assessEntryEvidence(env,code,{policy});
+  if(!assessment.coverageComplete)throw evidenceError('EVIDENCE_NOT_READY',422,'No todos los claims sustanciales están respaldados.',{reasons:assessment.reasons});
+  if(!assessment.citationReady)throw evidenceError('APA_VALIDATION_REQUIRED',422,'Las fuentes que sustentan los claims no pasan APA Validator.',{reasons:assessment.reasons});
+  const current=await getEvidenceState(env,assessment.article.code);const exact=current&&foundation.assertEvidenceVersionMatch(assessment.article,current);const revision=exact?Number(current.evidence_revision||0):0;
+  foundation.assertExpectedEvidenceRevision(revision,expectedEvidenceRevision);
+  const snapshotHash=await reviews.evidenceSnapshotHash(env,code);
+  const review=await reviews.recordReview(env,{code:assessment.article.code,articleGeneratedAt:assessment.article.articleGeneratedAt,articleHash:assessment.article.articleHash,expectedEvidenceRevision:revision,expectedSnapshotHash:snapshotHash,reviewKind:'verification',statusBefore:current?.status||'UNSOURCED',statusAfter:'VERIFIED',counts:assessment,reviewerType,reviewer,verificationMethod,notes,runId},{now});
+  const persisted=await persistEvaluation(env,code,{expectedEvidenceRevision:revision,policy,now});
+  return {...persisted,review:review.review,reviewCreated:review.created};
+}
+async function reviewEntryEvidence(env,code,{expectedEvidenceRevision,policy=DEFAULT_EVIDENCE_POLICY,reviewerType='human',reviewer=null,verificationMethod='editorial_review',notes=null,runId=null,now=new Date().toISOString()}={}){
+  const currentEval=await evaluateEntryEvidence(env,code,{policy});
+  if(currentEval.status==='REVIEWED')return {...currentEval,state:await getEvidenceState(env,code),review:null,reviewCreated:false,reused:true};
+  if(currentEval.status!=='VERIFIED')throw evidenceError('VERIFIED_REVIEW_REQUIRED',422,'La entrada debe estar VERIFIED antes de REVIEWED.');
+  const state=await getEvidenceState(env,code);const revision=Number(state?.evidence_revision||0);
+  foundation.assertExpectedEvidenceRevision(revision,expectedEvidenceRevision);
+  const review=await reviews.recordReview(env,{code:currentEval.article.code,articleGeneratedAt:currentEval.article.articleGeneratedAt,articleHash:currentEval.article.articleHash,expectedEvidenceRevision:revision,expectedSnapshotHash:currentEval.evidenceSnapshotHash,reviewKind:'editorial_review',statusBefore:'VERIFIED',statusAfter:'REVIEWED',counts:currentEval,reviewerType,reviewer,verificationMethod,parentReviewId:currentEval.verificationReviewId,notes,runId},{now});
+  const persisted=await persistEvaluation(env,code,{expectedEvidenceRevision:revision,policy,now});
+  return {...persisted,review:review.review,reviewCreated:review.created};
+}
+module.exports={DEFAULT_EVIDENCE_POLICY,sourceAvailable,sourceCounts,linkQualifies,assessEntryEvidence,evaluateEntryEvidence,getEvidenceState,effectiveState,persistEvaluation,verifyEntryEvidence,reviewEntryEvidence};
