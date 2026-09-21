@@ -1,0 +1,154 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "validarEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/validate",
+  "response": {
+    "ok": true,
+    "code": "MLS-V01-0613",
+    "canVerify": true,
+    "assessment": {
+      "status": "SOURCED",
+      "reasons": [],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 2,
+      "conflictsTotal": 0,
+      "coverageComplete": true,
+      "citationReady": true
+    },
+    "sources": [
+      {
+        "source": {
+          "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+          "identityKind": "isbn",
+          "identityKey": "9780521848374",
+          "metadataHash": "a3701713a8e03327f3d584ea654bf0085009457712676fb87553b5958e99f5ea",
+          "sourceType": "book",
+          "authorityTier": "B",
+          "status": "active",
+          "title": "A Student's Introduction to English Grammar",
+          "authors": [
+            "Huddleston, Rodney D.",
+            "Pullum, Geoffrey K."
+          ],
+          "editors": [],
+          "contributors": [],
+          "institution": null,
+          "publicationYear": 2005,
+          "publicationDate": null,
+          "publisher": "Cambridge University Press",
+          "edition": null,
+          "containerTitle": null,
+          "journal": null,
+          "volume": null,
+          "issue": null,
+          "pages": null,
+          "articleNumber": null,
+          "isbn": "9780521848374",
+          "issn": null,
+          "doi": null,
+          "canonicalUrl": null,
+          "language": "en",
+          "topics": [
+            "English grammar",
+            "reported speech",
+            "backshift",
+            "tense"
+          ],
+          "resourceVersion": null,
+          "supersedesSourceId": null,
+          "accessedAt": null,
+          "createdAt": "2026-09-21T21:39:42.690Z",
+          "updatedAt": "2026-09-21T21:39:42.690Z"
+        },
+        "citation": {
+          "valid": true,
+          "citationReady": true,
+          "errors": [],
+          "warnings": [],
+          "style": "APA",
+          "edition": 7,
+          "profile": "URL-GT-2025",
+          "rendererVersion": "1.0",
+          "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+          "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+          "url": null
+        }
+      },
+      {
+        "source": {
+          "sourceId": "MLS-SRC-17A874612878804D24BE",
+          "identityKind": "url",
+          "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+          "metadataHash": "76a0e3407f4ef0512cb3cba77ce125e45c3da5fc640b842e1e736c8b2fa18145",
+          "sourceType": "institutional_webpage",
+          "authorityTier": "C",
+          "status": "active",
+          "title": "Reported speech: indirect speech",
+          "authors": [],
+          "editors": [],
+          "contributors": [],
+          "institution": "Cambridge University Press & Assessment",
+          "publicationYear": null,
+          "publicationDate": null,
+          "publisher": null,
+          "edition": null,
+          "containerTitle": null,
+          "journal": null,
+          "volume": null,
+          "issue": null,
+          "pages": null,
+          "articleNumber": null,
+          "isbn": null,
+          "issn": null,
+          "doi": null,
+          "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+          "language": "en",
+          "topics": [
+            "reported speech",
+            "indirect speech",
+            "backshift",
+            "no backshift"
+          ],
+          "resourceVersion": null,
+          "supersedesSourceId": null,
+          "accessedAt": "2026-09-21",
+          "createdAt": "2026-09-21T21:39:42.885Z",
+          "updatedAt": "2026-09-21T21:39:42.885Z"
+        },
+        "citation": {
+          "valid": true,
+          "citationReady": true,
+          "errors": [],
+          "warnings": [],
+          "style": "APA",
+          "edition": 7,
+          "profile": "URL-GT-2025",
+          "rendererVersion": "1.0",
+          "markdown": "Cambridge University Press & Assessment. (s. f.). *Reported speech: indirect speech*. https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+          "text": "Cambridge University Press & Assessment. (s. f.). Reported speech: indirect speech. https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech"
+        }
+      }
+    ],
+    "telemetry": {
+      "d1": {
+        "queries": 12,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 40,
+        "d1RowsWritten": 0,
+        "observedRowsRead": 16,
+        "observedRowsWritten": 0,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-21T21:40:14.040Z",
+  "commandFile": "mls chat bridge/commands/command 0181.json"
+}
