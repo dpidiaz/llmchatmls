@@ -293,7 +293,7 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F1 state machine base y optimistic concurrency 409.
 - [x] F1 tests dedicados: 12 casos locales verdes.
 - [x] F1 certificación completa del PR #125 contra main.
-- [ ] F2 Source Registry runtime/persistence.
+- [x] F2 Source Registry runtime/persistence (local tests green; repository certification pending).
 - [ ] F3 Claims and links persistence.
 - [ ] F4 State validator integrado.
 - [ ] F5 APA renderer/validator.
@@ -649,6 +649,20 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F2 Source Registry implementado
+
+- Se creó `evidence registry.js` con persistencia D1 aislada del runtime público.
+- Upsert idempotente: repetir metadata idéntica no genera escritura adicional.
+- Deduplicación efectiva por DOI, ISBN, canonical URL y fingerprint.
+- Enriquecimiento conservador completa campos ausentes sin crear otra Source.
+- Conflictos en metadata fuerte fallan cerrado con `SOURCE_METADATA_CONFLICT` 409.
+- Una fuente superseded no puede reactivarse silenciosamente.
+- URL estable + `resourceVersion`/publicationDate produce identidad versionada distinta.
+- Estado agregado del Source Registry disponible internamente.
+- 8/8 tests locales del registry verdes tras corregir el hash para excluir campos transitorios.
+- No se crearon Sources, Claims ni EvidenceLinks en D1 real; son pruebas SQLite en memoria.
+- Certificación completa del PR pendiente.
+
 ## 2026-09-21 — F1 Contracts and schema certificado
 
 - GitHub Actions run #279 completó SUCCESS contra `main`.
@@ -702,72 +716,76 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F1 COMPLETE
+STATUS: PHASE 1 F2 IMPLEMENTED / CERTIFICATION PENDING
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-provenance-foundation
+BRANCH: r33-evidence-source-registry
 BASE: main
+BASE HEAD: c2ad43958ce84d8308442b3e8b3ff754b09c05d8
 
 DONE:
-- Phase 0 documentation merged via PR #124
-- F1 additive schema contract
-- F1 deterministic source / claim / link identities
-- F1 DOI / ISBN / URL normalization
-- F1 article hash
-- F1 base evidence state machine
-- F1 optimistic concurrency guard
-- 12 dedicated local tests green
+- F1 merged to main
+- F2 Source Registry persistence
+- Idempotent source upsert
+- DOI / ISBN / canonical URL / fingerprint dedupe
+- Conservative metadata enrichment
+- Strong metadata conflict guard 409
+- Superseded-source guard
+- Stable URL resource version identity
+- Source Registry aggregate status
+- 8 dedicated F2 local tests green
 
 CURRENT:
-- F1 complete; preparing merge of PR #125
+- Prepare PR and repository certification for F2
 
 NEXT:
-- Merge PR #125
-- Begin F2 Source Registry persistence and read/upsert contract
+- Certify F2 against main
+- Merge F2 if green
+- Begin F3 Claims and EvidenceLinks persistence
 
 BLOCKERS:
-- Cloudflare Git integration can build/deploy branch activity independently of repository workflow.
-- Foundation module is intentionally disconnected from predeploy/runtime, so current branch code does not change public MLS behavior.
+- None in Source Registry logic
+- Cloudflare Git integration may independently build branch pushes; F2 remains disconnected from predeploy/runtime
+
+DECISIONS:
+- Source identity uses version suffix for canonical URL when resourceVersion or publicationDate is explicitly known
+- MetadataHash excludes transient registry timestamps/hash field itself
+- Conflicting strong metadata never silently overwrites the registry row
+- Source Registry upsert never creates claims or evidence state
 
 AUTOOPT IMPACT:
 - None
 
 R32 COMPATIBILITY:
+- Preserved
 - wiki_articles untouched
-- style references untouched
+- existing provenance untouched
 - Semantic Audit untouched
-- staging untouched
+- style references untouched
 
 EVIDENCE STATUS:
-- Foundation only; no corpus migration
+- No corpus migration
 
 SOURCES CREATED:
-- 0 runtime sources
+- 0 in production D1
 
 CLAIMS CREATED:
-- 0 runtime claims
+- 0
 
 CLAIMS VERIFIED:
 - 0
 
 D1 IMPACT:
-- 0 runtime Evidence writes
+- 0 production writes
+- Local SQLite only
 
 TESTS:
-- test/evidence foundation.test.cjs: 12/12 local pass
-- GitHub Actions run #279: SUCCESS
-- npm run test:chat-editorial: SUCCESS
-- npm run predeploy: SUCCESS
-- npm run recovery:verify: SUCCESS
-- node --test test/deploy-contract.test.cjs: SUCCESS
-- npm run check: SUCCESS
-- workflow production deploy step: SKIPPED
-
-COMMIT SHA:
-- 4832608710cc4f2e5a91a9eddab2802853db7534 before roadmap sync
+- test/evidence registry.test.cjs: 8/8 local pass
+- F1 suite previously certified
+- Full repository certification pending
 
 PR:
-- #125 — feat: add MLS R33 evidence foundation
+- Pending creation
 ```
 ---
 
