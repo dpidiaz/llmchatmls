@@ -1,0 +1,127 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V04-0927",
+    "articleGeneratedAt": "2026-09-19T07:55:53.101Z",
+    "articleHash": "63629fc6b8219f074762faa611e94026a25fcf53231b416e47a0db94dc983de5",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "oqlf-charnieres-consequence",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Liste de charnières",
+        "institution": "Office québécois de la langue française",
+        "canonicalUrl": "https://vitrinelinguistique.oqlf.gouv.qc.ca/25159/la-redaction-et-la-communication/organisation-textuelle/liste-de-charnieres",
+        "language": "fr",
+        "topics": [
+          "connecteurs",
+          "conséquence",
+          "c'est pourquoi",
+          "par conséquent",
+          "donc"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "quebec-francisation-consequence",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Cause et conséquence",
+        "institution": "Gouvernement du Québec — Références francisation",
+        "canonicalUrl": "https://referencesfrancisation.immigration-quebec.gouv.qc.ca/moodle_ref/pluginfile.php/1/block_public_files/files/Cours_specialises/ADA/Cahier-guide/Tire-a-part.pdf",
+        "language": "fr",
+        "topics": [
+          "cause",
+          "conséquence",
+          "c'est pourquoi",
+          "donc",
+          "par conséquent"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "academie-pourquoi-2024",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "« Pourquoi » et « Pour quoi »",
+        "institution": "Académie française",
+        "publicationYear": 2024,
+        "publicationDate": "2024-02-01",
+        "canonicalUrl": "https://www.academie-francaise.fr/pourquoi-et-pour-quoi",
+        "language": "fr",
+        "topics": [
+          "pourquoi",
+          "interrogation",
+          "cause"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-consequence",
+        "sectionKey": "En pocas palabras / Cómo funciona / Ejemplos",
+        "summary": "C’est pourquoi es un marcador de relación que introduce una consecuencia lógica derivada de un hecho o explicación anterior; pertenece al mismo campo funcional de marcadores de consecuencia como donc y par conséquent.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-position",
+        "sectionKey": "Cómo funciona",
+        "summary": "C’est pourquoi se emplea como articulación entre un segmento previo y la proposición que expresa la consecuencia, típicamente tras una puntuación que separa ambos segmentos.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-interrogatif",
+        "sectionKey": "Observación importante",
+        "summary": "El pourquoi de una interrogación pregunta ordinariamente por la causa o razón de algo; ese uso interrogativo debe distinguirse de la locución c’est pourquoi, que introduce una consecuencia o conclusión.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-consequence",
+        "sourceRef": "oqlf-charnieres-consequence",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Pour marquer une conséquence"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-consequence",
+        "sourceRef": "quebec-francisation-consequence",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Cause et conséquence — Moyens d'exprimer la conséquence"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-position",
+        "sourceRef": "quebec-francisation-consequence",
+        "supportType": "supports",
+        "locator": {
+          "section": "Cause et conséquence — c'est pourquoi"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-interrogatif",
+        "sourceRef": "academie-pourquoi-2024",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Pourquoi et Pour quoi"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
