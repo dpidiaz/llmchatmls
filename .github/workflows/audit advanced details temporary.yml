@@ -1,0 +1,31 @@
+name: Temporary advanced details audit
+
+on:
+  push:
+    branches:
+      - audit/remove-advanced-details-setting
+    paths:
+      - '.github/audit-advanced-details-trigger'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run predeploy
+      - name: Locate advanced-details UI and bindings
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== MATCHES ==='
+          grep -Rni -E 'Detalles avanzados|información técnica|excepciones y fuentes|advanced.?detail|show.?detail|technical.?detail' public src || true
+          echo '=== RELATED MORE SETTINGS ==='
+          grep -Rni -E 'Tamaño de letra|Elige el tamaño más cómodo|Fondo|Claro u oscuro|Profesor IA' public | head -n 120 || true
