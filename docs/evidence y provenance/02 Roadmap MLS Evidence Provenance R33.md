@@ -296,7 +296,7 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F2 Source Registry runtime/persistence (local tests green; repository certification pending).
 - [x] F3 Claims and links persistence (local tests green; repository certification pending).
 - [x] F4 State validator integrado (local tests green; repository certification pending).
-- [ ] F5 APA renderer/validator.
+- [x] F5 APA renderer/validator (local suite green; repository certification pending).
 - [ ] F6 Reviews/revisions.
 - [ ] F7 Private API/OpenAPI.
 - [ ] F8 Regression certification.
@@ -649,6 +649,21 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F5 APA validator y renderer implementados
+
+- Se verificó nuevamente la base institucional: la guía URL 2025 declara alineación con APA 7.
+- Se añadió metadata explícita de editors para capítulos de libro.
+- APA Validator soporta inicialmente book, book chapter, journal article, institutional webpage, report y reference entry.
+- El renderer produce referencia APA derivada de metadata estructurada y citas parentéticas/narrativas.
+- DOI se normaliza como `https://doi.org/...` y tiene prioridad sobre URL.
+- Se implementó regla APA 7 de hasta 20 autores y elipsis para más de 20.
+- El perfil `URL-GT-2025` usa fechas renderizadas en español para `es-GT`.
+- El renderer no inventa sentence case, autores, páginas, DOI ni metadata faltante: falla cerrado cuando un tipo requiere campos ausentes.
+- `citationReady` dejó de ser confiable desde el cliente: F4 ahora lo calcula internamente usando el APA Validator sobre las fuentes que realmente sostienen cada claim.
+- Una fuente `unresolved` puede renderizarse si su metadata es suficiente, pero nunca cuenta como `citationReady`.
+- Suite acumulada local F1–F5: 43/43 verde.
+- F4 fue certificado en GitHub Actions run #287 e integrado por PR #128 (`3d6008a...`).
+
 ## 2026-09-21 — F4 State validator implementado
 
 - Se añadió validador determinista separado de Editorial Validator y del futuro APA Validator.
@@ -745,44 +760,45 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F4 IMPLEMENTED / CERTIFICATION PENDING
+STATUS: PHASE 1 F5 IMPLEMENTED / CERTIFICATION PENDING
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-state-validator
+BRANCH: r33-evidence-apa
 BASE: main
-BASE HEAD: 305cf0984e64b76998e47429db8c75ae4913e0ed
+BASE HEAD: 3d6008aaa9ba931fc1b9dd1444c4372589f3e7cd
 
 DONE:
 - F1 contracts/schema merged
 - F2 Source Registry merged
 - F3 Claims/Links/Conflicts merged
-- F4 deterministic state evaluation
-- F4 configurable source-strength policy
-- F4 locator requirement policy
-- F4 APA readiness gate
-- F4 verification-event gate
-- F4 unresolved contradiction guard
-- F4 optimistic state revision persistence
-- F4 stale article invalidation/reset
-- 12 dedicated F4 local tests green
+- F4 deterministic state validator merged
+- F5 APA metadata validator
+- F5 APA reference renderer
+- F5 parenthetical and narrative in-text citations
+- F5 editors metadata support
+- F5 backend-derived citationReady
+- F5 DOI-over-URL rendering
+- F5 URL-GT-2025 Spanish date profile
+- Local accumulated F1-F5 evidence tests: 43/43 green
 
 CURRENT:
-- Prepare PR and repository certification for F4
+- Prepare PR and repository certification for F5
 
 NEXT:
-- Certify and merge F4
-- Begin F5 APA metadata validator and renderer
+- Certify and merge F5
+- Begin F6 Reviews and article revision model
 
 BLOCKERS:
-- No F4 logic blockers
-- VERIFIED remains intentionally dependent on future APA validation and verification event
+- No F5 logic blockers
+- Full institutional URL guide text requires authenticated URL access; implementation therefore follows APA 7 public rules plus the verified URL 2025 profile statement and fails closed for unsupported cases
 
 DECISIONS:
-- SOURCED means evidence exists even if authority is insufficient for VERIFIED
-- Normative claims default to Tier A/B
-- Quotation claims require a real locator
-- F4 never treats citation formatting as evidence
-- Article change invalidates current evidence state by version/hash
+- APA strings are generated output, never Source identity
+- citationReady is calculated by backend and cannot be asserted by client
+- Initial supported types are deliberately limited; unsupported source types fail closed
+- Renderer preserves curated title capitalization instead of guessing proper nouns
+- DOI preferred when present
+- Unresolved Source cannot contribute citationReady
 
 AUTOOPT IMPACT:
 - None
@@ -790,10 +806,10 @@ AUTOOPT IMPACT:
 R32 COMPATIBILITY:
 - Preserved
 - No public runtime wiring
-- Existing reader/search/AI/staging untouched
+- reader / Virtuoso / Profesor IA / staging unchanged
 
 EVIDENCE STATUS:
-- State engine implemented but not used on production corpus
+- Validator + APA gate implemented; no production corpus verification yet
 
 SOURCES CREATED:
 - 0 production
@@ -808,9 +824,9 @@ D1 IMPACT:
 - 0 production Evidence writes
 
 TESTS:
-- F3 GitHub Actions run #284: SUCCESS
-- test/evidence validator.test.cjs: 12/12 local pass
-- Full F4 repository certification pending
+- F4 GitHub Actions run #287: SUCCESS
+- Accumulated local Evidence suite F1-F5: 43/43 PASS
+- Full F5 repository certification pending
 
 PR:
 - Pending creation
