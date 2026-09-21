@@ -1,0 +1,95 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V03-0122",
+    "articleGeneratedAt": "2026-09-19T05:09:42.928Z",
+    "articleHash": "da9d600b48f9c49408eea4d9231342eff8c4d0869aaf8cd91731b5aa77ce9d31",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "treccani-partitivo-2011",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Partitivo",
+        "authors": [
+          "Cimaglia, Riccardo"
+        ],
+        "institution": "Treccani — Istituto della Enciclopedia Italiana",
+        "publicationYear": 2011,
+        "canonicalUrl": "https://www.treccani.it/enciclopedia/partitivo_%28Enciclopedia-dell%27Italiano%29/",
+        "language": "it",
+        "topics": [
+          "articolo partitivo",
+          "quantità indefinita",
+          "articolo indeterminativo",
+          "italiano"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "treccani-di",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "C",
+        "status": "active",
+        "title": "di",
+        "institution": "Treccani — Istituto della Enciclopedia Italiana",
+        "canonicalUrl": "https://www.treccani.it/vocabolario/di1/",
+        "language": "it",
+        "topics": [
+          "preposizione di",
+          "preposizioni articolate",
+          "specificazione",
+          "partitivo"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-forme-partitive",
+        "sectionKey": "En pocas palabras / Cómo funciona / Ejemplos",
+        "summary": "En italiano, el artículo partitivo se forma mediante la fusión de di con el artículo definido: del/dello/della/dell' en singular y dei/degli/delle en plural. En singular suele expresar una cantidad indefinida con nombres de masa; en plural puede funcionar como plural indefinido de nombres contables.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-forma-no-basta",
+        "sectionKey": "Observación importante",
+        "summary": "Las formas del/dello/della/dei/degli/delle no son siempre artículos partitivos: también pueden ser preposiciones articuladas con otras relaciones sintácticas, por ejemplo especificación o posesión; la función se determina por la estructura y el significado.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-forme-partitive",
+        "sourceRef": "treccani-partitivo-2011",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "L’articolo partitivo in italiano"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-forma-no-basta",
+        "sourceRef": "treccani-di",
+        "supportType": "supports",
+        "locator": {
+          "section": "di¹ — preposizione articolata e complemento di specificazione"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-forma-no-basta",
+        "sourceRef": "treccani-partitivo-2011",
+        "supportType": "contextualizes",
+        "locator": {
+          "section": "L’articolo partitivo in italiano"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
