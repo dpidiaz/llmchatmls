@@ -170,6 +170,7 @@
         <strong>Guía de pronunciación</strong>
         <div id="translationGuide"></div>
       </div>
+      <div class="status" id="translationNeuronStatus" role="status" aria-live="polite"></div>
       <div class="audio-actions" data-audio-context="translation">
         <button class="btn" type="button" data-speak>Escuchar</button>
         <button class="btn" type="button" data-stop>Detener</button>
@@ -271,6 +272,7 @@
   const translationResult=byId('translationResult');
   const translatedText=byId('translatedText');
   const translationGuide=byId('translationGuide');
+  const translationNeuronStatus=byId('translationNeuronStatus');
   const translationSpeechStatus=byId('translationSpeechStatus');
   const offlineToolsSummary=byId('offlineToolsSummary');
   const offlinePackList=byId('offlinePackList');
@@ -555,6 +557,17 @@
   pronounceTab.addEventListener('click',()=>setMode('pronounce'));
 
   let translationMode='online';
+  function formatNeuronUsage(usage,{local=false,sameLanguage=false}={}){
+    if(local)return 'Workers AI: 0 neurons · traducción local.';
+    if(sameLanguage)return 'Workers AI: 0 neurons · no fue necesaria una inferencia.';
+    if(!usage)return 'Workers AI: consumo no disponible para esta traducción.';
+    const neurons=Number(usage.neurons||0);
+    const daily=Number(usage.dailyNeurons||0);
+    const target=Number(usage.targetNeurons||9000);
+    const measured=usage.measured===true?'medidos':'estimados de forma conservadora';
+    return 'Workers AI: '+neurons.toFixed(2)+' neurons esta traducción ('+measured+') · '+daily.toFixed(2)+' / '+target.toLocaleString('en-US')+' usados hoy.';
+  }
+
   function setTranslationMode(mode){
     if(mode!=='online'&&mode!=='local')return;
     translationMode=mode;
@@ -730,12 +743,14 @@
     translateButton.disabled=true;
     translateButton.textContent='Traduciendo…';
     translationResult.hidden=true;
+    translationNeuronStatus.textContent='';
     if('speechSynthesis' in window)window.speechSynthesis.cancel();
 
     try{
       let translation='';
       let sameLanguage=false;
       let local=false;
+      let onlineUsage=null;
 
       if(mode==='local'){
         translationStatus.textContent='Comprobando paquetes locales…';
@@ -790,6 +805,7 @@
         if(!response.ok||payload.ok!==true)throw new Error(payload.error||'No fue posible traducir.');
         translation=sanitizeSpeechText(payload.translation);
         sameLanguage=payload.sameLanguage===true;
+        onlineUsage=payload.usage||null;
       }
 
       if(!translation)throw new Error('La traducción llegó vacía.');
@@ -802,6 +818,7 @@
         :local
           ?'Traducción local lista. El texto se procesó en este dispositivo y no se usó Internet.'
           :'Traducción en línea lista. Los paquetes locales no se usaron.';
+      translationNeuronStatus.textContent=formatNeuronUsage(onlineUsage,{local,sameLanguage});
       updateTranslationSpeechStatus(targetLanguage.value);
     }catch(error){
       translationStatus.textContent=String(error&&error.message||'No fue posible traducir en este momento.');
