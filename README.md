@@ -257,3 +257,24 @@ Official recommendations:
 - `docs/expansion y estandarizacion/02 Estandar de proyectos derivados de MLS.md`
 
 The central rule is that MLS remains an independent language product. Future knowledge systems should begin isolated by repository and domain; a shared MKS Core should only be extracted after reuse has been demonstrated by at least two real systems.
+
+## MLS Watchdog Protocol
+
+MLS includes a documented ChatGPT Scheduled-task watchdog protocol for keeping already-authorized workstreams moving across normal turn boundaries.
+
+Canonical files:
+
+- `docs/watchdogs/MLS Watchdog Protocol R1.md` — normative behavior and safety contract.
+- `docs/watchdogs/MLS Watchdog Commands.json` — machine-readable command manifest.
+- `docs/watchdogs/MLS Watchdog Registry.json` — privacy-safe logical group registry.
+- `docs/watchdogs/MLS Watchdog Registry Schema.json` — registry schema.
+- `AGENTS.md` — repository-level routing instructions for agents.
+
+A watchdog group is scoped to one originating chat and uses a unique GROUP ID. The standard group contains three hourly Scheduled tasks offset at minute 00, 20 and 40, creating an effective 20-minute pulse while keeping each individual task within the hourly scheduling limit.
+
+Supported commands include `MLS activar watchdogs`, `MLS detener watchdogs`, `MLS reactivar watchdogs`, `MLS estado watchdogs`, and the explicit global stop `MLS detener watchdogs global`.
+
+The runtime Scheduled-task service is authoritative for live task state. GitHub stores the durable protocol and privacy-safe logical registry. Raw ChatGPT conversation IDs and Scheduled task IDs must not be committed to this public repository.
+
+Account-level Scheduled task capacity still applies. Activation and reactivation must be atomic: if a complete three-task group cannot be enabled, the protocol must not intentionally leave a partial group.
+
