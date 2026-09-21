@@ -587,6 +587,7 @@ El renderer nunca sustituye metadata normalizada.
 | APA string como canonical data | Media | Metadata estructurada + renderer |
 | AUTOOPT reinterpretado como truth metric | Alta | Separación contractual |
 | R32 regression | Alta | Additive migrations + regression suites |
+| Auto deploy al hacer push de ramas | Media/Alta | Verificar integración Cloudflare/GitHub antes de ramas de implementación; distinguir push documental de autorización explícita de release |
 | Paid API creep | Alta | FREE ONLY contract |
 | Reader clutter | Media | Fuentes y fundamento discreto |
 | Search bias excesivo | Media | VERIFIED solo desempata relevancia equivalente |
@@ -634,7 +635,8 @@ No inventar números cuando no se hayan medido.
 - Se confirmó provenance existente de GitHub Staging.
 - Se fijó Fase 0 como estado activo.
 - No se cambió código de producción.
-- No se ejecutó deploy.
+- No se ejecutó manualmente `npm run deploy` ni un comando remoto de despliegue.
+- La integración GitHub → Cloudflare desplegó automáticamente el commit de documentación de la rama; el cambio desplegado contiene solo documentación y no modifica código de producción.
 - No se ejecutó migración D1.
 - No se procesaron entradas del corpus.
 
@@ -703,7 +705,8 @@ SIZE DELTA:
 
 TESTS:
 - Not applicable to documentation-only checkpoint
-- No deploy executed
+- No deploy command executed manually
+- Cloudflare Git integration reported an automatic successful deployment for the documentation branch; no production-code file changed in this PR
 
 COMMIT SHA:
 - df97395f5cbdccb0cc0cb471f785e69744ebca3d (roadmap creation checkpoint)
