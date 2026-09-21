@@ -6,6 +6,7 @@ const validator=require('./evidence validator.js');
 const reviews=require('./evidence reviews.js');
 const apa=require('./evidence apa.js');
 const provenance=require('./evidence provenance.js');
+const telemetry=require('./evidence telemetry.js');
 
 function fail(code,status,message=code,extra={}){const e=new Error(message);e.code=code;e.status=status;Object.assign(e,extra);return e;}
 function trim(v,max=200){return String(v??'').normalize('NFKC').replace(/\s+/gu,' ').trim().slice(0,max);}
@@ -87,26 +88,45 @@ async function preflightProposal(env,body){
 async function applyProposal(env,body){
   const p=await preflightProposal(env,body);
   const resolvedSources=new Map(),resolvedClaims=new Map();
+  const sourceOperations=[],claimOperations=[],linkOperations=[],conflictOperations=[];
   for(const item of p.preparedSources){
     const result=await registry.upsertSource(env,item.raw);
     resolvedSources.set(item.clientId,result.source);
+    sourceOperations.push({clientId:item.clientId,sourceId:result.source.sourceId,created:!!result.created,updated:!!result.updated,reused:!!result.reused});
   }
   for(const item of p.preparedClaims){
     const result=await claims.upsertClaim(env,{...item.raw,...p.article});
     resolvedClaims.set(item.clientId,result.claim);
+    claimOperations.push({clientId:item.clientId,claimId:result.claim.claim_id,created:!!result.created,reused:!!result.reused});
   }
   const links=[];
   for(const item of p.preparedLinks){
     const cl=resolvedClaims.get(item.claimRef),src=resolvedSources.get(item.sourceRef);
-    links.push((await claims.upsertEvidenceLink(env,{claimId:cl.claim_id,sourceId:src.sourceId,supportType:item.raw.supportType,locator:item.locator,notes:item.raw.notes,verificationMethod:item.raw.verificationMethod||'manual_source_match'})).link);
+    const result=await claims.upsertEvidenceLink(env,{claimId:cl.claim_id,sourceId:src.sourceId,supportType:item.raw.supportType,locator:item.locator,notes:item.raw.notes,verificationMethod:item.raw.verificationMethod||'manual_source_match'});
+    links.push(result.link);
+    linkOperations.push({linkId:result.link.link_id,created:!!result.created,reused:!!result.reused});
   }
   const conflicts=[];
   for(const item of p.preparedConflicts){
     const cl=resolvedClaims.get(item.claimRef),sourceIds=item.sourceRefs.map(x=>resolvedSources.get(x).sourceId);
-    conflicts.push((await claims.recordConflict(env,{claimId:cl.claim_id,conflictType:item.raw.conflictType,status:item.raw.status,context:item.raw.context,resolution:item.raw.resolution,sourceIds})).conflict);
+    const result=await claims.recordConflict(env,{claimId:cl.claim_id,conflictType:item.raw.conflictType,status:item.raw.status,context:item.raw.context,resolution:item.raw.resolution,sourceIds});
+    conflicts.push(result.conflict);
+    conflictOperations.push({conflictId:result.conflict.conflict_id,created:!!result.created,reused:!!result.reused});
   }
   const evaluation=await validator.persistEvaluation(env,p.article.code,{expectedEvidenceRevision:p.revision});
-  return {ok:true,code:p.article.code,article:p.article,state:evaluation.state,evaluation:{status:evaluation.status,reasons:evaluation.reasons,claimsTotal:evaluation.claimsTotal,claimsVerified:evaluation.claimsVerified,sourcesTotal:evaluation.sourcesTotal,conflictsTotal:evaluation.conflictsTotal,citationReady:evaluation.citationReady},mappings:{sources:Object.fromEntries([...resolvedSources].map(([k,v])=>[k,v.sourceId])),claims:Object.fromEntries([...resolvedClaims].map(([k,v])=>[k,v.claim_id]))},links:links.map(x=>x.link_id),conflicts:conflicts.map(x=>x.conflict_id),idempotentRetrySafe:true};
+  const operations={
+    sourcesCreated:sourceOperations.filter(x=>x.created).length,
+    sourcesReused:sourceOperations.filter(x=>x.reused).length,
+    sourcesUpdated:sourceOperations.filter(x=>x.updated).length,
+    claimsCreated:claimOperations.filter(x=>x.created).length,
+    claimsReused:claimOperations.filter(x=>x.reused).length,
+    linksCreated:linkOperations.filter(x=>x.created).length,
+    linksReused:linkOperations.filter(x=>x.reused).length,
+    conflictsCreated:conflictOperations.filter(x=>x.created).length,
+    conflictsReused:conflictOperations.filter(x=>x.reused).length,
+    sourceOperations,claimOperations,linkOperations,conflictOperations
+  };
+  return {ok:true,code:p.article.code,article:p.article,state:evaluation.state,evaluation:{status:evaluation.status,reasons:evaluation.reasons,claimsTotal:evaluation.claimsTotal,claimsVerified:evaluation.claimsVerified,sourcesTotal:evaluation.sourcesTotal,conflictsTotal:evaluation.conflictsTotal,citationReady:evaluation.citationReady},mappings:{sources:Object.fromEntries([...resolvedSources].map(([k,v])=>[k,v.sourceId])),claims:Object.fromEntries([...resolvedClaims].map(([k,v])=>[k,v.claim_id]))},links:links.map(x=>x.link_id),conflicts:conflicts.map(x=>x.conflict_id),operations,idempotentRetrySafe:true};
 }
 async function validateEntry(env,code){
   const assessment=await validator.assessEntryEvidence(env,code);
@@ -115,23 +135,30 @@ async function validateEntry(env,code){
 }
 async function handleMlsEvidence(request,env,url,runtime){
   const json=runtime.json,error=runtime.error;
+  let meter=null;
   try{
-    await runtime.authenticate(request,env);await runtime.ensureWikiDb(env);await registry.ensureEvidenceDb(env);
+    await runtime.authenticate(request,env);
+    await runtime.ensureWikiDb(env);
+    await registry.ensureEvidenceDb(env);
+    meter=telemetry.createD1Meter();
+    const measuredEnv={...env,WIKI_DB:meter.wrap(env.WIKI_DB)};
+    const respond=payload=>json({...payload,telemetry:{d1:meter.snapshot()}});
     const route=url.pathname.replace('/api/wiki/editorial/evidence','')||'/';
-    if(route==='/status'&&request.method==='GET')return json(await status(env));
-    if(route==='/entry'&&request.method==='GET')return json(await entry(env,url.searchParams.get('code')));
-    if(route==='/sources'&&request.method==='GET')return json({ok:true,code:String(url.searchParams.get('code')||'').toUpperCase(),sources:await entrySources(env,url.searchParams.get('code'))});
-    if(route==='/provenance'&&request.method==='GET')return json({ok:true,provenance:await provenance.composeArticleProvenance(env,url.searchParams.get('code'))});
-    if(route==='/validate'&&request.method==='POST'){const body=await runtime.body(request);return json(await validateEntry(env,body.code));}
-    if(route==='/proposal'&&request.method==='POST'){const body=await runtime.body(request);return json(await applyProposal(env,body));}
-    if(route==='/verify'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.verifyEntryEvidence(env,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'chatgpt',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'manual_source_match',notes:body.notes,runId:body.runId});return json({ok:true,...out});}
-    if(route==='/review'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.reviewEntryEvidence(env,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'human',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'editorial_review',notes:body.notes,runId:body.runId});return json({ok:true,...out});}
-    if(route==='/revision/propose'&&request.method==='POST'){const body=await runtime.body(request);return json({ok:true,...await reviews.proposeArticleRevision(env,body)});}
-    if(!['GET','POST'].includes(request.method)){const r=json({ok:false,error:'Método no permitido.'},405);r.headers.set('Allow','GET, POST');return r;}
+    if(route==='/status'&&request.method==='GET')return respond(await status(measuredEnv));
+    if(route==='/entry'&&request.method==='GET')return respond(await entry(measuredEnv,url.searchParams.get('code')));
+    if(route==='/sources'&&request.method==='GET')return respond({ok:true,code:String(url.searchParams.get('code')||'').toUpperCase(),sources:await entrySources(measuredEnv,url.searchParams.get('code'))});
+    if(route==='/provenance'&&request.method==='GET')return respond({ok:true,provenance:await provenance.composeArticleProvenance(measuredEnv,url.searchParams.get('code'))});
+    if(route==='/metrics'&&request.method==='GET')return respond({ok:true,storage:await telemetry.measureEntryLogicalBytes(measuredEnv,url.searchParams.get('code'))});
+    if(route==='/validate'&&request.method==='POST'){const body=await runtime.body(request);return respond(await validateEntry(measuredEnv,body.code));}
+    if(route==='/proposal'&&request.method==='POST'){const body=await runtime.body(request);return respond(await applyProposal(measuredEnv,body));}
+    if(route==='/verify'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.verifyEntryEvidence(measuredEnv,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'chatgpt',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'manual_source_match',notes:body.notes,runId:body.runId});return respond({ok:true,...out});}
+    if(route==='/review'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.reviewEntryEvidence(measuredEnv,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'human',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'editorial_review',notes:body.notes,runId:body.runId});return respond({ok:true,...out});}
+    if(route==='/revision/propose'&&request.method==='POST'){const body=await runtime.body(request);return respond({ok:true,...await reviews.proposeArticleRevision(measuredEnv,body)});}
+    if(!['GET','POST'].includes(request.method)){const r=respond({ok:false,error:'Método no permitido.'});r.status=405;r.headers.set('Allow','GET, POST');return r;}
     error(404,'Ruta Evidence no encontrada.');
   }catch(e){
     if(!e.status)console.error('mls-evidence-failure',e.message);
-    return json({ok:false,error:e.status?e.message:'Error temporal de Evidence.',code:e.code||null,...(e.fields?{fields:e.fields}:{})},e.status||500);
+    return json({ok:false,error:e.status?e.message:'Error temporal de Evidence.',code:e.code||null,...(e.fields?{fields:e.fields}:{}),...(meter?{telemetry:{d1:meter.snapshot()}}:{})},e.status||500);
   }
 }
 module.exports={status,entry,entrySources,preflightProposal,applyProposal,validateEntry,handleMlsEvidence};
