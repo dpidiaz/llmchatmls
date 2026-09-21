@@ -295,7 +295,7 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F1 certificación completa del PR #125 contra main.
 - [x] F2 Source Registry runtime/persistence (local tests green; repository certification pending).
 - [x] F3 Claims and links persistence (local tests green; repository certification pending).
-- [ ] F4 State validator integrado.
+- [x] F4 State validator integrado (local tests green; repository certification pending).
 - [ ] F5 APA renderer/validator.
 - [ ] F6 Reviews/revisions.
 - [ ] F7 Private API/OpenAPI.
@@ -649,6 +649,21 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F4 State validator implementado
+
+- Se añadió validador determinista separado de Editorial Validator y del futuro APA Validator.
+- Fuente identificada se distingue de fuente suficientemente fuerte: una fuente débil puede mantener SOURCED sin contar para VERIFIED.
+- Claims `normative` requieren Tier A/B por política inicial; la política es configurable.
+- Claims `quotation` requieren locator explícito; nunca se inventa uno.
+- Cobertura completa no puede alcanzar VERIFIED si `citationReady` es falso.
+- Cobertura completa tampoco alcanza VERIFIED sin evento explícito de verificación.
+- Contradicción sustantiva unresolved bloquea VERIFIED; variación regional accepted no lo bloquea.
+- Estado efectivo vuelve a UNSOURCED automáticamente si cambia el hash/version del artículo.
+- Persistencia del state usa `expectedEvidenceRevision` y devuelve conflicto 409 ante revisión obsoleta.
+- Un state stale puede reiniciarse a la nueva versión únicamente con expected revision 0.
+- 12/12 tests locales de F4 verdes.
+- F3 fue certificado por GitHub Actions run #284 e integrado por PR #127 (`305cf098...`).
+
 ## 2026-09-21 — F3 Claims, EvidenceLinks y conflictos implementado
 
 - Claims se vinculan obligatoriamente a la versión exacta `code + generatedAt + articleHash`.
@@ -730,55 +745,55 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F3 IMPLEMENTED / CERTIFICATION PENDING
+STATUS: PHASE 1 F4 IMPLEMENTED / CERTIFICATION PENDING
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-claims-links
+BRANCH: r33-evidence-state-validator
 BASE: main
-BASE HEAD: b494432b6e3d0640d5284891486341cea7f570b8
+BASE HEAD: 305cf0984e64b76998e47429db8c75ae4913e0ed
 
 DONE:
-- F1 merged and certified
-- F2 Source Registry merged and certified
-- F3 exact-version claim persistence
-- F3 deterministic/idempotent Claim IDs
-- F3 EvidenceLink persistence
-- F3 strict locator model
-- F3 source existence guard
-- F3 conflict persistence with implicated source IDs
-- F3 accepted-variation resolution guard
-- 10 dedicated F3 local tests green
+- F1 contracts/schema merged
+- F2 Source Registry merged
+- F3 Claims/Links/Conflicts merged
+- F4 deterministic state evaluation
+- F4 configurable source-strength policy
+- F4 locator requirement policy
+- F4 APA readiness gate
+- F4 verification-event gate
+- F4 unresolved contradiction guard
+- F4 optimistic state revision persistence
+- F4 stale article invalidation/reset
+- 12 dedicated F4 local tests green
 
 CURRENT:
-- Prepare PR and repository certification for F3
+- Prepare PR and repository certification for F4
 
 NEXT:
-- Certify and merge F3
-- Begin F4 deterministic state validator integration
+- Certify and merge F4
+- Begin F5 APA metadata validator and renderer
 
 BLOCKERS:
-- None in F3 logic
-- Public runtime remains intentionally disconnected from Evidence modules
+- No F4 logic blockers
+- VERIFIED remains intentionally dependent on future APA validation and verification event
 
 DECISIONS:
-- F3 is additive/idempotent and does not destructively replace evidence proposals
-- F3 cannot promote VERIFIED
-- Missing locators remain missing; backend never manufactures page/chapter/section
-- Conflicts preserve source IDs explicitly
+- SOURCED means evidence exists even if authority is insufficient for VERIFIED
+- Normative claims default to Tier A/B
+- Quotation claims require a real locator
+- F4 never treats citation formatting as evidence
+- Article change invalidates current evidence state by version/hash
 
 AUTOOPT IMPACT:
 - None
 
 R32 COMPATIBILITY:
 - Preserved
-- wiki_articles untouched
-- reader / Virtuoso / Profesor IA untouched
-- style references untouched
-- Semantic Audit untouched
-- GitHub Staging untouched
+- No public runtime wiring
+- Existing reader/search/AI/staging untouched
 
 EVIDENCE STATUS:
-- No canonical status promotion yet
+- State engine implemented but not used on production corpus
 
 SOURCES CREATED:
 - 0 production
@@ -787,16 +802,15 @@ CLAIMS CREATED:
 - 0 production
 
 CLAIMS VERIFIED:
-- 0
+- 0 production
 
 D1 IMPACT:
 - 0 production Evidence writes
-- Local SQLite tests only
 
 TESTS:
-- F2 GitHub Actions run #282: SUCCESS
-- test/evidence claims.test.cjs: 10/10 local pass
-- Full F3 repository certification pending
+- F3 GitHub Actions run #284: SUCCESS
+- test/evidence validator.test.cjs: 12/12 local pass
+- Full F4 repository certification pending
 
 PR:
 - Pending creation
