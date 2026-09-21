@@ -1,0 +1,98 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V02-0959",
+    "articleGeneratedAt": "2026-09-18T18:10:29.878Z",
+    "articleHash": "8ce198c24a925f9c3d77736b42dcc95d0fbc7bedc39c28e3375a95715b940bb0",
+    "expectedEvidenceRevision": 1,
+    "sources": [
+      {
+        "clientId": "cunha-2024-relacoes-textuais",
+        "sourceType": "journal_article",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "As relações textuais como procedimentos para a atribuição de ações na interação",
+        "authors": [
+          "Cunha, Gustavo Ximenes"
+        ],
+        "publicationYear": 2024,
+        "journal": "Alfa: Revista de Linguística",
+        "volume": "68",
+        "articleNumber": "e18257",
+        "doi": "10.1590/1981-5794-e18257",
+        "canonicalUrl": "https://www.scielo.br/j/alfa/a/8LXWmxK5JFx8ntrcGCR7bvy/",
+        "language": "pt-BR",
+        "topics": [
+          "pragmática",
+          "marcadores discursivos",
+          "reformulação",
+          "enfim"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "infopedia-enfim",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "C",
+        "status": "active",
+        "title": "enfim",
+        "institution": "Porto Editora",
+        "canonicalUrl": "https://www.infopedia.pt/dicionarios/lingua-portuguesa/enfim",
+        "language": "pt",
+        "topics": [
+          "enfim",
+          "advérbio",
+          "finalmente",
+          "conclusão"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-discursivo",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "Enfim puede funcionar como marcador discursivo de reformulación o conclusión, ayudando a resumir, cerrar o reorientar una secuencia previa; por eso no debe interpretarse siempre como un adverbio temporal equivalente a 'finalmente'.",
+        "claimType": "regional_variation",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-temporal",
+        "sectionKey": "Cómo funciona / Ejemplos",
+        "summary": "Enfim también puede tener valor adverbial temporal o resultativo, con sentidos como 'por último' o 'finalmente', especialmente cuando señala que algo ocurre después de una espera o al término de una secuencia.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-discursivo",
+        "sourceRef": "cunha-2024-relacoes-textuais",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "section": "Quadro 1 — Relações textuais interativas e marcadores típicos"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-discursivo",
+        "sourceRef": "infopedia-enfim",
+        "supportType": "supports",
+        "locator": {
+          "section": "advérbio — em conclusão"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-temporal",
+        "sourceRef": "infopedia-enfim",
+        "supportType": "supports",
+        "locator": {
+          "section": "advérbio — por último; finalmente"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
