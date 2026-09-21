@@ -44,7 +44,7 @@ Progreso global inicial:
 | --- | --- | --- |
 | Documentación contractual R33 | COMPLETE | Prompt y roadmap versionados |
 | Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
-| Fase 1 Foundation | IN PROGRESS | Tests foundation verdes |
+| Fase 1 Foundation | IN PROGRESS — CONTRACT CLOSURE | Tests + source policies + provenance contract verdes |
 | Fase 2 Piloto 20 | NOT STARTED | Métricas piloto aceptables |
 | Fase 3 Evaluación | NOT STARTED | Decisión explícita go/no go |
 | Fase 4 Gate 100 | NOT STARTED | 100 estables |
@@ -299,7 +299,10 @@ Debe decidirse si `wiki_article_provenance` se amplía o se relaciona con nuevas
 - [x] F5 APA renderer/validator (local suite green; repository certification pending).
 - [x] F6 Reviews/revisions.
 - [x] F7 Private API/OpenAPI.
-- [ ] F8 Regression certification.
+- [x] F8 Regression certification.
+- [ ] F9 Contract closure: source policies por los 10 idiomas.
+- [ ] F9 Contract closure: provenance R32+R33 compuesto explícitamente.
+- [ ] F9 Contract closure: repo identity / boundary contracts explícitos.
 
 ## Required tests
 
@@ -649,6 +652,15 @@ No inventar números cuando no se hayan medido.
 
 # 18. CHANGE LOG DEL ROADMAP
 
+## 2026-09-21 — F8 Regression certification aprobado; gap audit de cierre
+
+- GitHub Actions run #303: SUCCESS.
+- Pasaron explícitamente `test:chat-editorial`, `test:evidence`, `test:canonical-tools`, `qa:baseline`, `predeploy`, `recovery:verify`, deploy-contract y `check`.
+- Production deploy permaneció SKIPPED.
+- El gate técnico F8 está aprobado.
+- El contraste contra el contrato completo de Foundation detectó tres pendientes antes de cerrar Phase 1: source policies por los 10 idiomas, composición explícita de provenance R32+R33 y boundary/repo identity contracts explícitos.
+- Se crea F9 Contract Closure; Phase 1 no se declara COMPLETE hasta que esos contratos estén implementados y recertificados.
+
 ## 2026-09-21 — F7 Private Evidence API certificado
 
 - Se añadió el namespace privado `/api/wiki/editorial/evidence/*` bajo la misma autenticación `MLS_EDITORIAL_CHAT_KEY`.
@@ -786,57 +798,57 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 1 F7 COMPLETE / FINAL HEAD RECERTIFICATION
+STATUS: PHASE 1 F8 CERTIFIED / CONTRACT CLOSURE REQUIRED
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-BRANCH: r33-evidence-chat-api
+BRANCH: r33-evidence-foundation-certification
 BASE: main
-BASE HEAD: 1ab98abef7d1af20f6d3f4f4736f15049dc93017
+BASE HEAD: 020b6a7a075618e5fd46efc4540f7dfa9ba9cfe2
 
 DONE:
-- F1 contracts/schema
-- F2 Source Registry
-- F3 Claims/Links/Conflicts
-- F4 deterministic state validator
-- F5 APA validator/renderer
-- F6 Reviews and Article Revisions
-- F7 private Evidence API
-- F7 OpenAPI 33.0.0
-- F7 chat-native proposal/validate/verify/review flow
-- F7 Cloudflare runtime bundling
-- F7 private-route/authentication integration
+- F1 through F7 implemented and merged
+- F8 explicit certification gates implemented
+- GitHub Actions run #303 SUCCESS
+- test:chat-editorial SUCCESS
+- test:evidence SUCCESS
+- test:canonical-tools SUCCESS
+- qa:baseline SUCCESS
+- predeploy SUCCESS
+- recovery:verify SUCCESS
+- deploy-contract SUCCESS
+- check SUCCESS
+- production deploy SKIPPED
 
 CURRENT:
-- Final F7 HEAD recertification after roadmap update
+- Contract gap audit before closing Phase 1
 
 NEXT:
-- Merge PR #131 when final HEAD is green
-- Execute F8 Foundation regression certification
-- If F8 passes, close Phase 1 and prepare Phase 2 pilot 20
+- Merge PR #132 after final HEAD certification
+- F9 source policies for all 10 MLS languages
+- F9 explicit R32+R33 provenance composition
+- F9 repo identity / boundary contract tests
+- Recertify Foundation
+- Only then mark Phase 1 COMPLETE and Phase 2 Pilot 20 READY
 
 BLOCKERS:
-- None in F7 logic
+- Phase 1 closure blocked by missing sourcePolicies/approvedSourcePool configuration
+- Phase 1 closure blocked by missing explicit R32+R33 provenance composition contract
+- Phase 1 closure blocked by missing explicit repo identity/boundary test
 
 DECISIONS:
-- Evidence remains private under MLS_EDITORIAL_CHAT_KEY
-- ChatGPT researches externally; Worker validates/persists only
-- No public Evidence endpoint
-- No automatic crawling or paid source service
-- OpenAPI Evidence writes are consequential
-- Article revision proposal remains non-canonical
+- A green CI run does not override incomplete architectural requirements
+- F8 is technically complete
+- F9 is a closure hardening unit, not scope expansion
 
 AUTOOPT IMPACT:
 - None
 
 R32 COMPATIBILITY:
 - Preserved
-- R32 editorial generation stays promptVersion 32.0
-- Existing watchdog changes preserved
-- Reader/Virtuoso/Profesor IA unchanged
 
 EVIDENCE STATUS:
-- Chat-native Foundation API implemented
-- No corpus pilot started
+- Foundation runtime/API exists
+- No pilot or corpus migration started
 
 SOURCES CREATED:
 - 0 production
@@ -848,19 +860,14 @@ CLAIMS VERIFIED:
 - 0 production
 
 D1 IMPACT:
-- 0 production Evidence writes during Foundation development
+- 0 production Evidence writes
 
 TESTS:
-- GitHub Actions run #299: SUCCESS
-- npm run test:chat-editorial: SUCCESS
-- npm run predeploy: SUCCESS
-- npm run recovery:verify: SUCCESS
-- deploy-contract: SUCCESS
-- npm run check: SUCCESS
+- GitHub Actions run #303: SUCCESS
 - production deploy step: SKIPPED
 
 PR:
-- #131 — feat: add MLS R33 private Evidence API
+- #132 — ci: certify MLS R33 Evidence foundation
 ```
 ---
 
