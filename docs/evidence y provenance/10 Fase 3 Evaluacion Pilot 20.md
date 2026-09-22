@@ -3,8 +3,8 @@
 **Fecha:** 2026-09-21 / 2026-09-22 UTC  
 **Pilot ID:** `MLS-R33-EVIDENCE-PILOT-20`  
 **Pilot result:** COMPLETE — PASS WITH FINDINGS  
-**Decision:** **CORRECT AND REPEAT**  
-**Gate 100:** **NOT AUTHORIZED**
+**Decision:** **GO**  
+**Gate 100:** **READY — SCALE RUNTIME NOT LIVE YET**
 
 ## 1. Resumen ejecutivo
 
@@ -276,13 +276,9 @@ Debe demostrarse live que dos artículos distintos pueden referenciar el mismo S
 - cambiar su metadata;
 - invalidar incorrectamente la otra entrada.
 
-### E3 — Human REVIEWED lifecycle — STILL BLOCKING
+### E3 — Human REVIEWED lifecycle — CLOSED LIVE
 
-Se requiere un review humano real.
-
-No se autoriza crear `reviewerType=human` a partir de inferencia o de una instrucción genérica.
-
-El ejercicio debe usar una entrada VERIFIED y un humano que realmente haya revisado el material.
+PASS LIVE. El usuario aprobó explícitamente `MLS-V10-0020` después de revisar la entrada y sus fuentes. Command 0285 registró un `editorial_review` con `reviewer_type=human`, preservó el mismo Evidence snapshot y promovió VERIFIED → REVIEWED. Estado final: 3/3 claims verificados, 3 Sources, 0 conflictos, needsReview=false, evidenceRevision=3.
 
 ### E4 — Control plane scaling — MITIGATED
 
@@ -327,17 +323,16 @@ Crear un **Correction Repeat** pequeño y dirigido, suficiente para demostrar lo
 
 ## 7. Decision
 
-**CORRECT AND REPEAT**
+**GO**
 
 Interpretación:
 
-- la arquitectura no se descarta;
-- Pilot 20 no debe repetirse completo;
-- Gate 100 sigue cerrado;
-- se implementan E1–E5;
-- se ejecuta un repeat dirigido;
-- si el repeat queda verde, Fase 3 puede emitir GO hacia Gate 100;
-- si aparece un fallo estructural nuevo, volver a evaluar.
+- E1–E5 quedaron demostrados;
+- el repeat dirigido cerró los huecos estructurales del Pilot 20;
+- Gate 100 queda autorizado metodológicamente;
+- Gate 100 debe usar batch triage + Registry-first + exception-first;
+- no se autoriza volver al patrón artesanal por entrada del Pilot 20;
+- la ejecución live del Gate 100 comienza únicamente cuando el runtime de scalability prep de PR #146 esté disponible.
 
 ## 8. Exit criteria de la corrección
 
@@ -347,7 +342,7 @@ Para reabrir la decisión:
 - [x] Migración D1 aditiva/idempotente.
 - [x] APA respeta DOI de contenedor vs recurso.
 - [x] Cross-entry Source reuse demostrado live.
-- [ ] REVIEWED humano demostrado live.
+- [x] REVIEWED humano demostrado live.
 - [x] Consumer evidence contract testeado.
 - [x] Control-plane builds mitigados o aceptados con configuración documentada.
 - [x] Full regression verde.
@@ -374,3 +369,20 @@ Estado:
 La decisión general permanece **CORRECT AND REPEAT** porque E3 no puede ser sustituido por una simulación de review humano.
 
 Gate 100 continúa **NOT AUTHORIZED**.
+
+## 10. E3 Human REVIEWED — cierre live 2026-09-22
+
+- Entry: `MLS-V10-0020`.
+- Command: `0285`.
+- HTTP: 200.
+- Before: VERIFIED, evidenceRevision 2.
+- After: REVIEWED, evidenceRevision 3.
+- Claims: 3/3 verified.
+- Sources: 3.
+- Conflicts: 0.
+- needsReview: false.
+- editorialReviewId: `MLS-REVW-6D2F925AD10C240E9AD96E59`.
+- reviewedAt: `2026-09-22T06:04:13.978Z`.
+- Human review was explicit; no synthetic reviewer event was created.
+
+**Final Phase 3 decision: GO.**
