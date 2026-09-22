@@ -8,7 +8,7 @@ test('reader materialization attaches only the public Evidence consumer summary'
   const source=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8');
   const patched=patchEvidenceReader(source);
   assert.ok(patched.includes(MARKER));
-  assert.match(patched,/MLS_EVIDENCE_CONSUMER\.contextForEntry\(env, code\)/);
+  assert.match(patched,/MLS_EVIDENCE_CONSUMER\.contextForEntry\(env, normalized\)/);
   assert.match(patched,/MLS_EVIDENCE_CONSUMER\.publicSummary\(context\)/);
   assert.match(patched,/SELECT 1 AS ok FROM wiki_evidence_entry_state WHERE code=\?/);
   assert.doesNotMatch(patched,/article\.evidenceSnapshotHash/);
@@ -61,4 +61,12 @@ test('reader exposes APA 7 references for Evidence-backed entries',()=>{
 test('reader removes references section when current entry has no visible references',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
   assert.match(patched,/if \(!references\.length\) \{[\s\S]*section\?\.remove\(\);[\s\S]*return;/);
+});
+
+
+test('reader exposes a public Evidence-only endpoint without making D1 an article fallback',()=>{
+  const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
+  assert.match(patched,/evidence-public\\\/(MLS-V\\d\{2\}-\\d\{4\})/);
+  assert.match(patched,/mlsPublicEvidenceForCode\(env, publicEvidenceMatch\[1\]\.toUpperCase\(\)\)/);
+  assert.match(patched,/Response\.json\(\{ ok: true, evidence \}/);
 });
