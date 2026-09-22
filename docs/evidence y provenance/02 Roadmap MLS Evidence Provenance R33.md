@@ -1071,61 +1071,58 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 3 COMPLETE — CORRECT AND REPEAT / GATE 100 BLOCKED
+STATUS: PHASE 3 CORRECTION REPEAT — E3 HUMAN BLOCKER
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-MAIN HEAD AFTER PILOT CLOSE: e4234ad7b6b5207951359bc9c7b02b9ac0f029b7
-BRANCH: r33-evidence-phase3-evaluation
+MAIN BASE: 7505483f6dcd164739b2fcdda7aec78a1215634b
+BRANCH: r33-evidence-repeat-e4-e5
+PR: #145
 
 DONE:
-- Phase 2 Pilot 20 complete
-- 20/20 entries processed
-- 17 VERIFIED
-- 3 SOURCED not VERIFIED
-- 53/55 claims coverage-qualified
-- Fase 3 evaluation completed
-- Decision: CORRECT AND REPEAT
-- Evaluation document created
+- Pilot 20 complete: 20/20
+- Phase 3 decision: CORRECT AND REPEAT
+- E1 DOI scope code merged in PR #143
+- E1 live repeat PASS (commands 0274–0279)
+- E2 cross-entry Source reuse PASS LIVE (commands 0269–0271)
+- E4 Bridge batching PASS LIVE (command 0280: 3/3)
+- E4 Bridge recovery copy synchronized to main branch work
+- E5 deterministic consumer contract implemented
+- E5 Profesor IA integration implemented
+- E5 Virtuoso post-ranking annotation implemented
+- E5 private consumer endpoint/OpenAPI implemented
+- E5 CI runs #337 and #338 SUCCESS
+- Full regression green
+- FREE ONLY preserved
+- R32 preserved
 
 CURRENT:
-- Gate 100 blocked
-- E1 DOI identity scope implemented and certified
-- E2–E5 still required
-- E1 live repeat awaits runtime updated with merged code
+- Final documentation/certification of PR #145
+- E3 human REVIEWED remains intentionally unexecuted
 
 NEXT:
-- Merge PR #143 after final HEAD certification
-- Update runtime with E1 before live repeat
-- E2 targeted cross-entry Source reuse repeat
-- E3 real human REVIEWED exercise
-- E4 control-plane scaling mitigation/documentation
-- E5 consumer evidence contract
-- Run directed repeat
+- Recertify final documentation HEAD of PR #145
+- Merge PR #145 if green
+- Verify E5 consumer endpoint live after updated main runtime is available
+- Execute E3 only after a real human reviews the selected VERIFIED entry
 - Re-evaluate GO / CORRECT AND REPEAT / STOP
+- Gate 100 only after GO
 
 BLOCKERS FOR GATE 100:
-- DOI scope live behavior not yet exercised on updated runtime
-- cross-entry Source reuse not demonstrated live
-- human REVIEWED not demonstrated live
-- control-plane builds/commit noise not closed
-- Virtuoso/Profesor IA Evidence consumption not certified
+- E3 human REVIEWED lifecycle not demonstrated live
+- E5 live runtime smoke test pending updated production runtime
 
-PILOT FINAL:
-- entriesProcessed: 20
-- entriesVerified: 17
-- entriesSourcedNotVerified: 3
+CORRECTION REPEAT LIVE:
+- E1 laut source: MLS-SRC-5C3B2FDCD580343CD374
+- E1 mit source: MLS-SRC-37F3FA7F5D30322681BD
+- shared container DOI: 10.14618/wb-praepositionen
+- E2 reused source: MLS-SRC-13608E329726A3D4557A
+- MLS-V05-0881: VERIFIED, evidenceRevision 4
+- MLS-V05-0165: VERIFIED, evidenceRevision 6
+- E4 batch command 0280: requested 3 / processed 3 / failures 0
+
+HUMAN REVIEW:
 - entriesReviewed: 0
-- sourcesCreated: 57
-- claimsCreated: 55
-- claimsCoverageQualified: 53
-- evidenceLinks: 81
-- conflicts: 1
-- needsReview: 1
-- articleRevisionsProposed: 3
-- d1RowsRead: 9232
-- d1RowsWritten: 1000
-- logicalEvidenceBytes: 176399
-- apaValidationFailures: 0
+- reviewerType=human must not be fabricated
 
 DECISION:
 - CORRECT AND REPEAT
@@ -1153,3 +1150,21 @@ Cuando un chat reciba una instrucción para continuar R33:
 14. reportar el formato de checkpoint del Master Prompt.
 
 El Roadmap es parte del sistema de control de cambios R33, no una nota opcional.
+
+## 2026-09-22 — Correction Repeat E1/E2/E4/E5
+
+- E1 PASS LIVE: commands 0274–0279 demostraron `doiScope=container` con URLs granulares distintas para `laut` y `mit`; ambas entradas regresaron a VERIFIED.
+- E2 PASS LIVE: commands 0269–0271 reutilizaron `MLS-SRC-13608E329726A3D4557A` entre artículos distintos sin duplicar Source.
+- La actualización de una Source compartida invalidó correctamente un review anterior por cambio de Evidence snapshot; tras estabilizar metadata, la entrada fue revalidada.
+- E4 PASS/MITIGATED: batch envelope de 1–50 operaciones implementado. Command 0280 procesó 3/3 operaciones HTTP 200 mediante un solo command/result pair.
+- El script operativo completo del Bridge se preserva también en main para recuperación; allowlist cerrada, sin URL arbitraria.
+- Build watch path recomendado: excluir `mls chat bridge/*` en Cloudflare Workers Builds. Es configuración externa documentada; no se afirma aplicada desde Git.
+- E5 CODE + CI PASS: contrato read-only para UNSOURCED/SOURCED/VERIFIED/REVIEWED, needsReview y revisiones propuestas.
+- Profesor IA recibe Evidence como system guidance de la entrada actual y degrada de forma segura si no puede leerlo.
+- Virtuoso conserva relevance/reranking y solo recibe anotación Evidence después de seleccionar recomendaciones; no puede inferir VERIFIED/REVIEWED.
+- Endpoint privado `/api/wiki/editorial/evidence/consumer` añadido como non-consequential.
+- PR #145 runs #337 y #338: SUCCESS; test:chat-editorial, test:evidence, canonical tools, baseline, predeploy, recovery, deploy-contract y check verdes; production deploy SKIPPED.
+- E3 permanece PENDING HUMAN. No se creó ni se autoriza crear un REVIEWED humano ficticio.
+- Gate 100 continúa BLOCKED.
+- Documento: `11 Correction Repeat E1 E2 E4 E5.md`.
+
