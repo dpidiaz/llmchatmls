@@ -1,0 +1,35 @@
+name: MLS Farm Tests
+
+on:
+  pull_request:
+    paths:
+      - 'MLS R32 EDITORIAL/farm core.js'
+      - 'scripts/MLS farm scheduler.cjs'
+      - 'scripts/MLS farm worker.cjs'
+      - '.github/workflows/MLS Farm Scheduler.yml'
+      - '.github/workflows/MLS Farm Worker Events.yml'
+      - 'test/mls farm.test.cjs'
+  push:
+    branches:
+      - main
+    paths:
+      - 'MLS R32 EDITORIAL/farm core.js'
+      - 'scripts/MLS farm scheduler.cjs'
+      - 'scripts/MLS farm worker.cjs'
+      - '.github/workflows/MLS Farm Scheduler.yml'
+      - '.github/workflows/MLS Farm Worker Events.yml'
+      - 'test/mls farm.test.cjs'
+
+permissions:
+  contents: read
+
+jobs:
+  farm-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Run MLS Farm regression tests
+        run: npm run test:farm
