@@ -7,9 +7,10 @@ const reader=fs.readFileSync('MLS R32 OVERLAY/reader.js','utf8');
 
 test('native reader requests public Evidence for the active canonical code',()=>{
   assert.match(reader,/async function publicEvidence\(code\)/);
-  assert.match(reader,/fetch\('\/api\/wiki\/article\/'\+encodeURIComponent\(normalized\)/);
+  assert.match(reader,/fetch\('\\/api\\/wiki\\/evidence-public\\/'\+encodeURIComponent\(normalized\)/);
   assert.match(reader,/cache:'no-store'/);
-  assert.match(reader,/return payload\?\.article\?\.evidence\|\|null/);
+  assert.doesNotMatch(reader,/\/api\/wiki\/article\//);
+  assert.match(reader,/return payload\?\.evidence\|\|null/);
 });
 
 test('native reader renders Evidence state and APA references in main article flow',()=>{
