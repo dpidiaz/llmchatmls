@@ -46,45 +46,60 @@ function consumerPolicy(status,{humanReviewed=false,needsReview=false}={}){
   };
 }
 
+async function contextsForEntries(env,codes){
+  const normalized=[...new Set((Array.isArray(codes)?codes:[]).map(normalizeCode).filter(Boolean))].slice(0,50);
+  if(!normalized.length)return {};
+  await registry.ensureEvidenceDb(env);
+  const marks=normalized.map(()=>'?').join(',');
+  const articleRows=await env.WIKI_DB.prepare(`SELECT code,generated_at,article_markdown FROM wiki_articles WHERE code IN (${marks})`).bind(...normalized).all();
+  const stateRows=await env.WIKI_DB.prepare(`SELECT * FROM wiki_evidence_entry_state WHERE code IN (${marks})`).bind(...normalized).all();
+  const reviewRows=await env.WIKI_DB.prepare(`SELECT code,review_id,reviewer_type,reviewer,created_at
+    FROM wiki_evidence_reviews
+    WHERE review_kind='editorial_review' AND code IN (${marks})
+    ORDER BY code,created_at DESC,review_id DESC`).bind(...normalized).all();
+  const states=new Map((stateRows.results||[]).map(row=>[row.code,row]));
+  const latestHumanReview=new Map();
+  for(const row of reviewRows.results||[]){
+    if(!latestHumanReview.has(row.code))latestHumanReview.set(row.code,row);
+  }
+  const out={};
+  for(const article of articleRows.results||[]){
+    const code=String(article.code||'').toUpperCase();
+    const hash=await foundation.articleHash(article.article_markdown);
+    const state=states.get(code)||null;
+    const current=!!state&&String(state.article_generated_at||'')===String(article.generated_at||'')&&String(state.article_hash||'')===hash;
+    const rawStatus=current&&CONSUMER_STATUS.includes(state.status)?state.status:'UNSOURCED';
+    const humanReview=latestHumanReview.get(code)||null;
+    const humanReviewed=rawStatus==='REVIEWED'&&humanReview?.reviewer_type==='human';
+    const policy=consumerPolicy(rawStatus,{humanReviewed,needsReview:!!Number(state?.needs_review||0)});
+    out[code]={
+      code,
+      articleGeneratedAt:article.generated_at,
+      articleHash:hash,
+      stateCurrent:current,
+      evidenceStatus:policy.status,
+      rawEvidenceStatus:rawStatus,
+      claimsTotal:current?Number(state?.claims_total||0):0,
+      claimsVerified:current?Number(state?.claims_verified||0):0,
+      sourcesTotal:current?Number(state?.sources_total||0):0,
+      conflictsTotal:current?Number(state?.conflicts_total||0):0,
+      needsReview:current?!!Number(state?.needs_review||0):false,
+      verifiedAt:current?state?.verified_at||null:null,
+      reviewedAt:humanReviewed?state?.reviewed_at||humanReview?.created_at||null:null,
+      humanReviewed,
+      canSayVerified:policy.canSayVerified,
+      canSayHumanReviewed:policy.canSayHumanReviewed,
+      caution:policy.caution,
+      prompt:policy.prompt
+    };
+  }
+  return out;
+}
 async function contextForEntry(env,code){
   const normalized=normalizeCode(code);
   if(!normalized)return null;
-  await registry.ensureEvidenceDb(env);
-  const article=await env.WIKI_DB.prepare('SELECT code,generated_at,article_markdown FROM wiki_articles WHERE code=?').bind(normalized).first();
-  if(!article)return null;
-  const hash=await foundation.articleHash(article.article_markdown);
-  const state=await env.WIKI_DB.prepare('SELECT * FROM wiki_evidence_entry_state WHERE code=?').bind(normalized).first();
-  const current=!!state&&String(state.article_generated_at||'')===String(article.generated_at||'')&&String(state.article_hash||'')===hash;
-  let status=current&&CONSUMER_STATUS.includes(state.status)?state.status:'UNSOURCED';
-  let humanReview=null;
-  if(status==='REVIEWED'){
-    humanReview=await env.WIKI_DB.prepare(`SELECT review_id,reviewer_type,reviewer,created_at
-      FROM wiki_evidence_reviews
-      WHERE code=? AND review_kind='editorial_review'
-      ORDER BY created_at DESC,review_id DESC LIMIT 1`).bind(normalized).first();
-  }
-  const humanReviewed=status==='REVIEWED'&&humanReview?.reviewer_type==='human';
-  const policy=consumerPolicy(status,{humanReviewed,needsReview:!!Number(state?.needs_review||0)});
-  return {
-    code:normalized,
-    articleGeneratedAt:article.generated_at,
-    articleHash:hash,
-    stateCurrent:current,
-    evidenceStatus:policy.status,
-    rawEvidenceStatus:status,
-    claimsTotal:current?Number(state?.claims_total||0):0,
-    claimsVerified:current?Number(state?.claims_verified||0):0,
-    sourcesTotal:current?Number(state?.sources_total||0):0,
-    conflictsTotal:current?Number(state?.conflicts_total||0):0,
-    needsReview:current?!!Number(state?.needs_review||0):false,
-    verifiedAt:current?state?.verified_at||null:null,
-    reviewedAt:humanReviewed?state?.reviewed_at||humanReview?.created_at||null:null,
-    humanReviewed,
-    canSayVerified:policy.canSayVerified,
-    canSayHumanReviewed:policy.canSayHumanReviewed,
-    caution:policy.caution,
-    prompt:policy.prompt
-  };
+  const contexts=await contextsForEntries(env,[normalized]);
+  return contexts[normalized]||null;
 }
 
 function professorGuidance(context){
@@ -108,4 +123,4 @@ function virtuosoLabel(context){
   return {status:'UNSOURCED',label:'Verificación pendiente',canSayVerified:false,humanReviewed:false};
 }
 
-module.exports={CONSUMER_STATUS,normalizeCode,consumerPolicy,contextForEntry,professorGuidance,virtuosoLabel};
+module.exports={CONSUMER_STATUS,normalizeCode,consumerPolicy,contextsForEntries,contextForEntry,professorGuidance,virtuosoLabel};
