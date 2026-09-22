@@ -99,7 +99,7 @@ async function handleClaim(issue,command,ledgers){
     await updateIssue(issue.number,{title:'[MLS Farm][COMPLETE] sin trabajo pendiente',body:renderResponse('MLS Farm complete',{ok:true,operation:'claim',assigned:0,progress}),state:'closed',state_reason:'completed'});
     return;
   }
-  const batch=core.makeBatchState({issueNumber:issue.number,requestId:command.requestId,workerId:command.workerId,entries,now:core.iso(now)});
+  const batch=core.makeBatchState({issueNumber:issue.number,requestId:command.requestId,workerId:command.workerId,workerLogin:issue.user?.login||null,entries,now:core.iso(now)});
   await updateIssue(issue.number,{title:'[MLS Farm][LEASED] '+batch.batchId,body:core.renderBatchBody(batch)});
 }
 async function handleStatus(issue,ledgers){
