@@ -22,7 +22,7 @@ function evidenceSchema(){
       "status TEXT NOT NULL DEFAULT 'active' CHECK(status IN ('active','unresolved','superseded')), "+
       "title TEXT NOT NULL, authors_json TEXT NOT NULL DEFAULT '[]', editors_json TEXT NOT NULL DEFAULT '[]', contributors_json TEXT NOT NULL DEFAULT '[]', "+
       "institution TEXT, publication_year INTEGER, publication_date TEXT, publisher TEXT, edition TEXT, container_title TEXT, "+
-      "journal TEXT, volume TEXT, issue TEXT, pages TEXT, article_number TEXT, isbn TEXT, issn TEXT, doi TEXT, canonical_url TEXT, "+
+      "journal TEXT, volume TEXT, issue TEXT, pages TEXT, article_number TEXT, isbn TEXT, issn TEXT, doi TEXT, doi_scope TEXT, canonical_url TEXT, "+
       "language TEXT, topics_json TEXT NOT NULL DEFAULT '[]', resource_version TEXT, supersedes_source_id TEXT, accessed_at TEXT, "+
       "created_at TEXT NOT NULL, updated_at TEXT NOT NULL, UNIQUE(identity_kind, identity_key))",
     "CREATE INDEX IF NOT EXISTS wiki_sources_status_idx ON wiki_sources(status)",
@@ -99,6 +99,16 @@ function normalizeDoi(v){
   if(!x)return null;
   return /^10\.\d{4,9}\/[\w.()/:;+-]+$/i.test(x)?x:null;
 }
+function normalizeDoiScope(v,{hasDoi=false}={}){
+  const raw=normalizeText(v).toLowerCase();
+  if(!hasDoi){
+    if(raw)throw new Error('doiScope requiere DOI.');
+    return null;
+  }
+  const scope=raw||'resource';
+  if(!['resource','container'].includes(scope))throw new Error('doiScope debe ser resource o container.');
+  return scope;
+}
 function isbn10(x){
   if(!/^\d{9}[\dX]$/.test(x))return false;
   let s=0;for(let i=0;i<10;i++)s+=(10-i)*(x[i]==='X'?10:Number(x[i]));
@@ -144,10 +154,13 @@ function fingerprintPayload(s){
 }
 async function sourceIdentity(source={}){
   const doi=normalizeDoi(source.doi);if(source.doi&&!doi)throw new Error('DOI inválido.');
+  const doiScope=normalizeDoiScope(source.doiScope,{hasDoi:!!doi});
   const isbn=normalizeIsbn(source.isbn);if(source.isbn&&!isbn)throw new Error('ISBN inválido.');
   const canonicalUrl=normalizeUrl(source.canonicalUrl||source.url);if((source.canonicalUrl||source.url)&&!canonicalUrl)throw new Error('URL canónica inválida.');
+  if(doiScope==='container'&&!canonicalUrl)throw new Error('doiScope=container requiere canonicalUrl granular.');
   let identityKind,identityKey;
-  if(doi){identityKind='doi';identityKey=doi;}
+  if(doi&&doiScope==='resource'){identityKind='doi';identityKey=doi;}
+  else if(doiScope==='container'&&canonicalUrl){identityKind='url';const version=normalizeText(source.resourceVersion||source.publicationDate||'');identityKey=canonicalUrl+(version?'#version:'+version:'');}
   else if(isbn){identityKind='isbn';identityKey=isbn;}
   else if(canonicalUrl){identityKind='url';const version=normalizeText(source.resourceVersion||source.publicationDate||'');identityKey=canonicalUrl+(version?'#version:'+version:'');}
   else{
@@ -155,7 +168,7 @@ async function sourceIdentity(source={}){
     if(!normalizeText(source.title)||signals<1)throw new Error('La fuente no tiene identidad bibliográfica suficiente.');
     identityKind='fingerprint';identityKey='fp:'+await sha256Hex(fingerprintPayload(source));
   }
-  return {sourceId:'MLS-SRC-'+(await sha256Hex(identityKind+':'+identityKey)).slice(0,20).toUpperCase(),identityKind,identityKey,doi,isbn,canonicalUrl};
+  return {sourceId:'MLS-SRC-'+(await sha256Hex(identityKind+':'+identityKey)).slice(0,20).toUpperCase(),identityKind,identityKey,doi,doiScope,isbn,canonicalUrl};
 }
 function stableJson(v){
   if(Array.isArray(v))return '['+v.map(stableJson).join(',')+']';
@@ -231,6 +244,6 @@ function assertExpectedEvidenceRevision(currentRevision,expectedRevision){
 module.exports={
   MLS_EVIDENCE_VERSION,MLS_EVIDENCE_CONTEXT,assertRepositoryContext,MLS_CITATION_STYLE,MLS_CITATION_EDITION,MLS_CITATION_PROFILE,MLS_CITATION_RENDERER_VERSION,
   EVIDENCE_STATUSES,SOURCE_TIERS,SUPPORT_TYPES,CLAIM_MATERIALITY,SOURCE_TYPES,evidenceSchema,normalizeArticleMarkdown,sha256Hex,articleHash,
-  normalizeDoi,normalizeIsbn,normalizeUrl,normalizeSourceMetadata,sourceIdentity,claimIdentity,evidenceLinkIdentity,stableJson,
+  normalizeDoi,normalizeDoiScope,normalizeIsbn,normalizeUrl,normalizeSourceMetadata,sourceIdentity,claimIdentity,evidenceLinkIdentity,stableJson,
   assertEvidenceVersionMatch:sameVersion,effectiveEvidenceStatus,deriveEvidenceStatus,assertExpectedEvidenceRevision
 };
