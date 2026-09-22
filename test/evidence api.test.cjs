@@ -51,3 +51,5 @@ test('evidence api: container DOI survives Source Registry roundtrip without bec
   assert.equal(listed.body.sources[0].source.identityKind,'url');
   assert.equal(listed.body.sources[0].citation.url,'https://grammis.ids-mannheim.de/praepositionen/299306');
 });
+
+test('evidence api: consumer endpoint is read-only and conservative for UNSOURCED',async()=>{const s=setup();const r=await json(await call(s,'/api/wiki/editorial/evidence/consumer?code=MLS-V10-0020'));assert.equal(r.status,200);assert.equal(r.body.evidence.status,'UNSOURCED');assert.match(r.body.evidence.disclosure,/fundamentación bibliográfica/);});
