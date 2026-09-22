@@ -1,6 +1,6 @@
 # MLS R33 Evidence & Provenance — Pilot 20 Plan
 
-**Estado:** IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20)  
+**Estado:** COMPLETE — PASS WITH FINDINGS (20/20) — FASE 3 REQUIRED  
 **Pilot ID:** `MLS-R33-EVIDENCE-PILOT-20`  
 **Manifest:** `04 Pilot 20 Manifest.json`  
 **Selection base commit:** `a369cff3e0c6b096c1a48b62931f2e1f7f4ce529`
@@ -228,52 +228,58 @@ No avanzar a 100 si:
 
 ## 11. Estado actual
 
-**IN PROGRESS — CHECKPOINT 13–16 PASS WITH FINDING (16/20).**
+**COMPLETE — PASS WITH FINDINGS (20/20).**
 
-Acumulado:
+Acumulado final:
 
 ```yaml
-entriesProcessed: 16
-entriesVerified: 14
-entriesSourcedNotVerified: 2
+entriesProcessed: 20
+entriesVerified: 17
+entriesSourcedNotVerified: 3
 entriesSourcedNeedsReview: 1
-sourcesCreated: 44
-sourceReuseOperations: 2
+sourcesCreated: 57
+sourceReuseOperations: 3
 sourceMetadataUpdates: 1
 crossEntrySourceReuse: 0
-claimsCreated: 43
+claimsCreated: 55
 claimReuseOperations: 2
-claimsVerifiedByCoverage: 42
-evidenceLinks: 64
+claimsVerifiedByCoverage: 53
+evidenceLinks: 81
 evidenceLinkReuseOperations: 3
 evidenceConflicts: 1
 needsReview: 1
-verificationAttempts: 14
-verificationReviewsCreated: 14
-d1RowsRead: 7325
-d1RowsWritten: 785
-logicalEvidenceBytes: 134815
-averageEvidenceBytesPerEntry: 8425.9375
-averageSourcesPerEntry: 2.75
+verificationAttempts: 17
+verificationReviewsCreated: 17
+d1RowsRead: 9232
+d1RowsWritten: 1000
+logicalEvidenceBytes: 176399
+averageEvidenceBytesPerEntry: 8819.95
+averageSourcesPerEntry: 2.85
 apaValidationFailures: 0
 apaMetadataCorrectionsBeforeVerification: 1
 manualHumanReviewEvents: 0
-articleRevisionsProposed: 2
+articleRevisionsProposed: 3
+articleRevisionsIntegrated: 0
 ```
 
-Checkpoint detallado: `08 Pilot 20 Checkpoint 13 a 16.md`.
+Checkpoint final detallado: `09 Pilot 20 Checkpoint 17 a 20.md`.
 
-Hallazgos principales:
+Hallazgos que pasan a Fase 3:
 
-- `MLS-V04-0174` permanece `SOURCED + needsReview` por conflicto sustantivo; su revisión propuesta sigue sin integrar.
-- `MLS-V07-0813` permanece `SOURCED` porque 3/4 claims sustanciales tienen cobertura suficiente, mientras la afirmación fuerte de que 啦 causa por sí sola suavización y una lista fija de tonos quedó como evidence gap.
-- El guard bloqueó VERIFIED en ambos casos por razones distintas: conflicto en entry 9 y claim sustancial no verificado en entry 16.
-- Se creó una segunda revisión propuesta sin overwrite.
-- Las entradas 13–15 sí alcanzaron VERIFIED.
-- El DOI compartido por una obra/contenedor sigue siendo un pendiente de política de identidad antes de Gate 100.
+- `MLS-V04-0174`: conflicto sustantivo; SOURCED + needsReview; revisión propuesta.
+- `MLS-V07-0813`: evidence gap pragmático; SOURCED; revisión propuesta.
+- `MLS-V08-0875`: claim de frecuencia académica insuficientemente sustentado; SOURCED; revisión propuesta.
+- No hubo falsos VERIFIED observados.
+- El guard distinguió contradicción de simple ausencia de evidencia.
+- Source Registry fue idempotente en retry/enrichment.
+- No apareció reutilización cross-entry natural de una Source.
+- La identidad por DOI necesita distinguir DOI específico del recurso frente a DOI de obra/contenedor.
+- El lifecycle REVIEWED humano sigue sin ejercicio live.
+- Evidence runtime no usó GitHub; el Bridge de control sí acumuló commits/resultados.
 
-Decisión: **PASS WITH FINDING — continuar secuencialmente con entradas 17–20.**
+Decisión de Fase 2: **PASS WITH FINDINGS — Pilot 20 COMPLETE.**
 
-No resolver las entradas 9 o 16 fingiendo revisión humana. No integrar revisiones propuestas automáticamente.
+Siguiente paso obligatorio: **Fase 3 — Evaluación** con una única salida `GO`, `CORRECT AND REPEAT` o `STOP`.
 
-No se autoriza Gate 100 ni migración masiva.
+No se autoriza Gate 100 ni migración masiva hasta completar Fase 3.
+
