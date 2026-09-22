@@ -62,3 +62,39 @@ test('source registry: upsert touches no claim or article state rows',async()=>{
   assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM wiki_evidence_entry_state').get().n,0);
   assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM wiki_evidence_links').get().n,0);
 });
+
+test('source registry: two granular resources may share one container DOI without collision',async()=>{
+  const s=setup();
+  const common={sourceType:'institutional_webpage',authorityTier:'A',institution:'IDS',doi:'10.14618/wb-praepositionen',doiScope:'container'};
+  const a=await registry.upsertSource(s.env,{...common,title:'mit',canonicalUrl:'https://grammis.ids-mannheim.de/praepositionen/299660'});
+  const b=await registry.upsertSource(s.env,{...common,title:'laut',canonicalUrl:'https://grammis.ids-mannheim.de/praepositionen/299306'});
+  assert.notEqual(a.source.sourceId,b.source.sourceId);
+  assert.equal(a.source.identityKind,'url');
+  assert.equal(b.source.identityKind,'url');
+  assert.equal(a.source.doiScope,'container');
+  assert.equal(b.source.doiScope,'container');
+  assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM wiki_sources').get().n,2);
+});
+
+test('source registry: legacy wiki_sources migrates DOI scope idempotently',async()=>{
+  const s=setup();
+  s.db.exec(`CREATE TABLE wiki_sources (
+    source_id TEXT PRIMARY KEY, identity_kind TEXT NOT NULL, identity_key TEXT NOT NULL, metadata_hash TEXT NOT NULL,
+    source_type TEXT NOT NULL, authority_tier TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'active',
+    title TEXT NOT NULL, authors_json TEXT NOT NULL DEFAULT '[]', editors_json TEXT NOT NULL DEFAULT '[]', contributors_json TEXT NOT NULL DEFAULT '[]',
+    institution TEXT, publication_year INTEGER, publication_date TEXT, publisher TEXT, edition TEXT, container_title TEXT,
+    journal TEXT, volume TEXT, issue TEXT, pages TEXT, article_number TEXT, isbn TEXT, issn TEXT, doi TEXT, canonical_url TEXT,
+    language TEXT, topics_json TEXT NOT NULL DEFAULT '[]', resource_version TEXT, supersedes_source_id TEXT, accessed_at TEXT,
+    created_at TEXT NOT NULL, updated_at TEXT NOT NULL, UNIQUE(identity_kind, identity_key)
+  )`);
+  s.db.prepare(`INSERT INTO wiki_sources(source_id,identity_kind,identity_key,metadata_hash,source_type,authority_tier,status,title,doi,authors_json,editors_json,contributors_json,topics_json,created_at,updated_at)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).run('MLS-SRC-LEGACY','doi','10.1000/legacy','legacy-hash','journal_article','B','active','Legacy DOI','10.1000/legacy','[]','[]','[]','[]','2026-09-21T00:00:00Z','2026-09-21T00:00:00Z');
+  await registry.ensureEvidenceDb(s.env);
+  const columns=s.db.prepare('PRAGMA table_info(wiki_sources)').all().map(x=>x.name);
+  assert.ok(columns.includes('doi_scope'));
+  assert.equal(s.db.prepare('SELECT doi_scope FROM wiki_sources WHERE source_id=?').get('MLS-SRC-LEGACY').doi_scope,'resource');
+  const src=await registry.getSourceById(s.env,'MLS-SRC-LEGACY');
+  assert.equal(src.doiScope,'resource');
+  await registry.ensureEvidenceDb(s.env);
+  assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM wiki_sources WHERE source_id=?').get('MLS-SRC-LEGACY').n,1);
+});
