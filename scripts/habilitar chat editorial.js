@@ -20,7 +20,7 @@ function augmentEditorialOpenApi(text) {
   api.paths['/api/wiki/editorial/evidence/validate']={post:{operationId:'validarEvidenceMLS',summary:'Validar cobertura Evidence y APA sin promover estado.','x-openai-isConsequential':false,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'}},required:['code'],additionalProperties:false}}}},responses}};
   api.paths['/api/wiki/editorial/evidence/proposal']={post:{operationId:'proponerEvidenceMLS',summary:'Persistir una propuesta idempotente para la versión exacta del artículo.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},articleGeneratedAt:{type:'string'},articleHash:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},sources:{type:'array',maxItems:30,items:{type:'object'}},claims:{type:'array',maxItems:50,items:{type:'object'}},links:{type:'array',maxItems:100,items:{type:'object'}},conflicts:{type:'array',maxItems:30,items:{type:'object'}}},required:['code','articleGeneratedAt','articleHash','expectedEvidenceRevision','sources','claims','links'],additionalProperties:false}}}},responses}};
   api.paths['/api/wiki/editorial/evidence/verify']={post:{operationId:'verificarEvidenceMLS',summary:'Crear un verification review ligado al snapshot actual y promover a VERIFIED solo si el backend lo permite.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},reviewerType:{type:'string',enum:['chatgpt','human','system']},reviewer:{type:'string'},verificationMethod:{type:'string'},notes:{type:'string'},runId:{type:'string'}},required:['code','expectedEvidenceRevision'],additionalProperties:false}}}},responses}};
-  api.paths['/api/wiki/editorial/evidence/review']={post:{operationId:'revisarEvidenceMLS',summary:'Registrar una revisión editorial posterior sobre un snapshot VERIFIED vigente.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},reviewerType:{type:'string',enum:['chatgpt','human','system']},reviewer:{type:'string'},verificationMethod:{type:'string'},notes:{type:'string'},runId:{type:'string'}},required:['code','expectedEvidenceRevision'],additionalProperties:false}}}},responses}};
+  api.paths['/api/wiki/editorial/evidence/review']={post:{operationId:'revisarEvidenceMLS',summary:'Registrar una revisión editorial humana posterior sobre un snapshot VERIFIED vigente.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedEvidenceRevision:{type:'integer',minimum:0},reviewerType:{type:'string',enum:['human']},reviewer:{type:'string',minLength:1},verificationMethod:{type:'string'},notes:{type:'string'},runId:{type:'string'}},required:['code','expectedEvidenceRevision','reviewer'],additionalProperties:false}}}},responses}};
   api.paths['/api/wiki/editorial/evidence/revision/propose']={post:{operationId:'proponerRevisionEvidenceMLS',summary:'Guardar una revisión de artículo propuesta sin sobrescribir wiki_articles.','x-openai-isConsequential':true,requestBody:{required:true,content:{'application/json':{schema:{type:'object',properties:{code:{type:'string'},expectedArticleHash:{type:'string'},articleMarkdown:{type:'string'},changeReason:{type:'string'},evidenceReviewId:{type:'string'}},required:['code','expectedArticleHash','articleMarkdown','changeReason'],additionalProperties:false}}}},responses}};
   return JSON.stringify(api);
 }
@@ -44,6 +44,7 @@ function buildChatRuntime(root = process.cwd()) {
     'MLS R32 EDITORIAL/evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
     'MLS R32 EDITORIAL/evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
     'MLS R32 EDITORIAL/evidence provenance.js':'MLS_EVIDENCE_PROVENANCE',
+    'MLS R32 EDITORIAL/evidence consumer.js':'MLS_EVIDENCE_CONSUMER',
     'MLS R32 EDITORIAL/evidence telemetry.js':'MLS_EVIDENCE_TELEMETRY',
     'MLS R32 EDITORIAL/evidence api.js':'MLS_EVIDENCE_API'
   };
@@ -56,6 +57,7 @@ function buildChatRuntime(root = process.cwd()) {
     './evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
     './evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
     './evidence provenance.js':'MLS_EVIDENCE_PROVENANCE',
+    './evidence consumer.js':'MLS_EVIDENCE_CONSUMER',
     './evidence telemetry.js':'MLS_EVIDENCE_TELEMETRY',
     './evidence api.js':'MLS_EVIDENCE_API'
   };

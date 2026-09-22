@@ -111,6 +111,8 @@ async function verifyEntryEvidence(env,code,{expectedEvidenceRevision=0,policy=n
   return {...persisted,review:review.review,reviewCreated:review.created,reused:!review.created};
 }
 async function reviewEntryEvidence(env,code,{expectedEvidenceRevision,policy=null,reviewerType='human',reviewer=null,verificationMethod='editorial_review',notes=null,runId=null,now=new Date().toISOString()}={}){
+  if(String(reviewerType||'').trim().toLowerCase()!=='human')throw evidenceError('HUMAN_REVIEW_REQUIRED',422,'REVIEWED requiere una revisión editorial humana real.');
+  if(!String(reviewer||'').trim())throw evidenceError('HUMAN_REVIEWER_REQUIRED',422,'REVIEWED requiere identificar al revisor humano.');
   const currentEval=await evaluateEntryEvidence(env,code,{policy});
   if(currentEval.status==='REVIEWED')return {...currentEval,state:await getEvidenceState(env,code),review:null,reviewCreated:false,reused:true};
   if(currentEval.status!=='VERIFIED')throw evidenceError('VERIFIED_REVIEW_REQUIRED',422,'La entrada debe estar VERIFIED antes de REVIEWED.');
