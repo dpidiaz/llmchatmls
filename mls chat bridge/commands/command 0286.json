@@ -1,0 +1,25 @@
+{
+  "batchId": "GATE100-SCALABILITY-SMOKE-20260922-B",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "candidatosReuseEvidenceMLS",
+      "input": {
+        "language": "aleman",
+        "topics": ["Präpositionen", "Dativ"],
+        "limit": 5
+      }
+    },
+    {
+      "operationId": "triageBatchEvidenceMLS",
+      "input": {
+        "entries": [
+          {"code": "MLS-V05-0881", "topics": ["Präpositionen", "Dativ"]},
+          {"code": "MLS-V04-0174"},
+          {"code": "MLS-V10-0020", "topics": ["abecedario", "ortografía"]}
+        ],
+        "candidateLimit": 5
+      }
+    }
+  ]
+}
