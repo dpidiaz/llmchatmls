@@ -37,6 +37,9 @@ R33 es aditivo. Las entradas R32 continúan siendo utilizables aunque su estado 
 9. [12 Gate 100 Scalability Preparation](./12%20Gate%20100%20Scalability%20Preparation.md)  
    Preparación batch-first y exception-first para que Gate 100 mida escalabilidad real: Source Registry first, reuse candidates, triage de hasta 50 entradas y discovery externo solo cuando sea necesario.
 
+10. [13 Gate 100 Manifest](./13%20Gate%20100%20Manifest.json)  
+   Muestra determinista de 100 entradas: 10 por idioma, cuantiles canónicos, exclusión del Pilot 20 y bloqueo por blob SHA.
+
 ## Contexto R32 inspeccionado al crear esta documentación
 
 Repositorio: `dpidiaz/llmchatmls`  
