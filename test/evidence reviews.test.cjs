@@ -12,3 +12,22 @@ test('revisions: baseline snapshot is idempotent',async()=>{const s=setup();awai
 test('revisions: proposal does not overwrite canonical article',async()=>{const s=setup();await registry.ensureEvidenceDb(s.env);const current=await claims.currentArticleVersion(s.env,'MLS-V10-0020');const before=s.db.prepare('SELECT article_markdown FROM wiki_articles WHERE code=?').get('MLS-V10-0020').article_markdown;const p=await reviews.proposeArticleRevision(s.env,{code:'MLS-V10-0020',expectedArticleHash:current.articleHash,articleMarkdown:'#### Regla\nLeer forma *leyendo*.',changeReason:'Ajuste respaldado por evidencia.'});assert.equal(p.revision.status,'proposed');assert.equal(s.db.prepare('SELECT article_markdown FROM wiki_articles WHERE code=?').get('MLS-V10-0020').article_markdown,before);assert.equal(s.db.prepare('SELECT COUNT(*) n FROM wiki_article_revisions').get().n,2);});
 test('revisions: stale article hash is rejected',async()=>{const s=setup();await registry.ensureEvidenceDb(s.env);await assert.rejects(()=>reviews.proposeArticleRevision(s.env,{code:'MLS-V10-0020',expectedArticleHash:'0'.repeat(64),articleMarkdown:'Nuevo',changeReason:'Cambio'}),e=>e.code==='ARTICLE_VERSION_CONFLICT'&&e.status===409);});
 test('revisions: duplicate proposed text reuses the same revision',async()=>{const s=setup();await registry.ensureEvidenceDb(s.env);const v=await claims.currentArticleVersion(s.env,'MLS-V10-0020');const input={code:'MLS-V10-0020',expectedArticleHash:v.articleHash,articleMarkdown:'#### Regla\nTexto corregido.',changeReason:'Corrección'};const a=await reviews.proposeArticleRevision(s.env,input),b=await reviews.proposeArticleRevision(s.env,input);assert.equal(a.revision.revision_id,b.revision.revision_id);assert.equal(b.reused,true);});
+
+test('reviews: REVIEWED requires an identified human reviewer',async()=>{
+  const s=setup();await seed(s);
+  await validator.persistEvaluation(s.env,'MLS-V10-0020',{expectedEvidenceRevision:0});
+  let state=await validator.getEvidenceState(s.env,'MLS-V10-0020');
+  await validator.verifyEntryEvidence(s.env,'MLS-V10-0020',{expectedEvidenceRevision:state.evidence_revision,reviewerType:'chatgpt',reviewer:'ChatGPT'});
+  state=await validator.getEvidenceState(s.env,'MLS-V10-0020');
+  await assert.rejects(
+    ()=>validator.reviewEntryEvidence(s.env,'MLS-V10-0020',{expectedEvidenceRevision:state.evidence_revision,reviewerType:'chatgpt',reviewer:'ChatGPT'}),
+    e=>e.code==='HUMAN_REVIEW_REQUIRED'&&e.status===422
+  );
+  await assert.rejects(
+    ()=>validator.reviewEntryEvidence(s.env,'MLS-V10-0020',{expectedEvidenceRevision:state.evidence_revision,reviewerType:'human',reviewer:'   '}),
+    e=>e.code==='HUMAN_REVIEWER_REQUIRED'&&e.status===422
+  );
+  const reviewed=await validator.reviewEntryEvidence(s.env,'MLS-V10-0020',{expectedEvidenceRevision:state.evidence_revision,reviewerType:'human',reviewer:'Revisor humano'});
+  assert.equal(reviewed.status,'REVIEWED');
+  assert.equal(reviewed.review.reviewer_type,'human');
+});
