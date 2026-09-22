@@ -1,0 +1,115 @@
+{
+  "batchId": "MLS-FARM-PUBLISH-20260922-FINALIZE165",
+  "stopOnError": false,
+  "commands": [
+    {
+      "operationId": "proponerEvidenceMLS",
+      "input": {
+        "code": "MLS-V10-0030",
+        "articleGeneratedAt": "2026-09-13T07:48:14.157Z",
+        "articleHash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+        "expectedEvidenceRevision": 1,
+        "sources": [
+          {
+            "clientId": "bipm-si-report",
+            "sourceType": "report",
+            "authorityTier": "A",
+            "status": "active",
+            "title": "The International System of Units (SI Brochure)",
+            "institution": "Bureau International des Poids et Mesures",
+            "publicationYear": 2026,
+            "publisher": "Bureau International des Poids et Mesures",
+            "edition": "9th edition",
+            "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+            "language": "en",
+            "topics": [
+              "SI",
+              "unit symbols",
+              "quantity values"
+            ],
+            "accessedAt": "2026-09-22"
+          }
+        ],
+        "claims": [
+          {
+            "clientId": "c1",
+            "sectionKey": "Cómo funciona",
+            "summary": "Los símbolos de unidades del SI son entidades convencionales, no abreviaturas: no llevan punto salvo el cierre de oración y no forman plural añadiendo una s.",
+            "claimType": "standard_rule",
+            "materiality": "substantial"
+          },
+          {
+            "clientId": "c2",
+            "sectionKey": "Cómo funciona",
+            "summary": "En la expresión de valores de magnitudes, el valor numérico precede al símbolo de unidad y se deja un espacio entre ambos; esta regla incluye el símbolo °C.",
+            "claimType": "standard_rule",
+            "materiality": "substantial"
+          }
+        ],
+        "links": [
+          {
+            "claimRef": "c1",
+            "sourceRef": "bipm-si-report",
+            "supportType": "primary_source",
+            "locator": {
+              "section": "5.2 Unit symbols"
+            },
+            "verificationMethod": "manual_source_match"
+          },
+          {
+            "claimRef": "c2",
+            "sourceRef": "bipm-si-report",
+            "supportType": "primary_source",
+            "locator": {
+              "section": "5.4.3 Formatting the value of a quantity"
+            },
+            "verificationMethod": "manual_source_match"
+          }
+        ],
+        "conflicts": []
+      }
+    },
+    {
+      "operationId": "verificarEvidenceMLS",
+      "input": {
+        "code": "MLS-V10-0030",
+        "expectedEvidenceRevision": 2,
+        "reviewerType": "chatgpt",
+        "reviewer": "MLS Farm reconciler",
+        "verificationMethod": "farm_source_backed_reconciliation",
+        "notes": "BIPM SI Brochure reconciled as institutional report for APA 7 rendering; 2/2 substantial claims source-backed.",
+        "runId": "MLS-FARM-PUBLISH-20260922-A"
+      }
+    },
+    {
+      "operationId": "verificarEvidenceMLS",
+      "input": {
+        "code": "MLS-V10-0027",
+        "expectedEvidenceRevision": 2,
+        "reviewerType": "chatgpt",
+        "reviewer": "MLS Farm reconciler",
+        "verificationMethod": "farm_source_backed_reconciliation",
+        "notes": "Re-verification after shared RAE Source Registry metadata stabilized.",
+        "runId": "MLS-FARM-PUBLISH-20260922-A"
+      }
+    },
+    {
+      "operationId": "consumerEvidenceEntradaMLS",
+      "input": {
+        "code": "MLS-V10-0027"
+      }
+    },
+    {
+      "operationId": "consumerEvidenceEntradaMLS",
+      "input": {
+        "code": "MLS-V10-0030"
+      }
+    },
+    {
+      "operationId": "consumerEvidenceEntradaMLS",
+      "input": {
+        "code": "MLS-V10-0051"
+      }
+    }
+  ]
+}
