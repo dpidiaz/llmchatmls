@@ -38,7 +38,7 @@ test('Farm checkpoint is idempotent and terminal work survives expiration accoun
     {code:'MLS-V10-0002',language:'espanol-guatemala',n:2,path:'b'}
   ];
   const state=core.makeBatchState({issueNumber:57,requestId:'request-12345678',workerId:'worker-12345678',entries,now:'2026-09-22T06:00:00.000Z',token:'abc'});
-  const ev={operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:57,status:'submitted',result:{code:'MLS-V10-0001',sources:[],claims:[],links:[]}}]};
+  const ev={operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:57,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{}}}]};
   const once=core.applyWorkerEvent(state,ev,{createdAt:'2026-09-22T06:10:00.000Z',commentId:3});
   const twice=core.applyWorkerEvent(once,ev,{createdAt:'2026-09-22T06:11:00.000Z',commentId:4});
   assert.equal(Object.keys(twice.results).length,1);
@@ -47,8 +47,8 @@ test('Farm checkpoint is idempotent and terminal work survives expiration accoun
 
 test('Farm rejects conflicting second result for same code',()=>{
   const state=core.makeBatchState({issueNumber:58,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'a'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
-  const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',x:1}}]},{createdAt:'2026-09-22T06:10:00.000Z',commentId:5});
-  assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',x:2}}]},{createdAt:'2026-09-22T06:11:00.000Z',commentId:6}),e=>e.code==='RESULT_HASH_CONFLICT');
+  const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{x:1}}}]},{createdAt:'2026-09-22T06:10:00.000Z',commentId:5});
+  assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',sources:[],claims:[],links:[],conflicts:[],provenance:{x:2}}}]},{createdAt:'2026-09-22T06:11:00.000Z',commentId:6}),e=>e.code==='RESULT_HASH_CONFLICT');
 });
 
 test('Farm ledger excludes submitted, review and preserved entries from future claims',()=>{
@@ -86,4 +86,9 @@ test('Farm workflows use GitHub Issues, per-batch concurrency and scheduled 15-m
   for(const source of [scheduler,worker,fs.readFileSync('scripts/MLS farm scheduler.cjs','utf8'),fs.readFileSync('scripts/MLS farm worker.cjs','utf8')]){
     assert.doesNotMatch(source,/WIKI_DB|D1|cloudflare|workers\.dev/i);
   }
+});
+
+test('Farm result contract requires article version and Evidence arrays',()=>{
+  assert.throws(()=>core.validateResultShape({code:'MLS-V10-0001'},'MLS-V10-0001'),e=>e.code==='RESULT_VERSION_MISSING');
+  assert.equal(core.validateResultShape({code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'c'.repeat(64),sources:[],claims:[],links:[],conflicts:[],provenance:{}},'MLS-V10-0001'),true);
 });
