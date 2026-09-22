@@ -1,0 +1,134 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V09-0155",
+    "articleGeneratedAt": "2026-09-19T09:26:20.839Z",
+    "articleHash": "de8919d47337ac520d129b4d7e768085e26b2d98b2f39256b22fef6f7b16fd19",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "gramota-do",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "до",
+        "institution": "Грамота.ру",
+        "canonicalUrl": "https://gramota.ru/poisk?mode=slovari&page=3&query=%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%BE%D0%B3+%D0%B4%D0%BE&simple=0",
+        "language": "ru",
+        "topics": [
+          "до",
+          "предлог",
+          "родительный падеж",
+          "временной предел",
+          "пространственный предел"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "gramota-posle",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "после",
+        "institution": "Грамота.ру",
+        "canonicalUrl": "https://gramota.ru/poisk?mode=slovari&query=%D0%9F%D0%BE%D1%81%D0%BB%D0%B5",
+        "language": "ru",
+        "topics": [
+          "после",
+          "предлог",
+          "родительный падеж",
+          "время"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "gramota-adj-declension",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Склонение прилагательных",
+        "institution": "Грамота.ру",
+        "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/sklonenie-prilagatelnykh",
+        "language": "ru",
+        "topics": [
+          "прилагательные",
+          "согласование",
+          "падеж",
+          "родительный падеж"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-government",
+        "sectionKey": "En pocas palabras / Cómo funciona",
+        "summary": "Las preposiciones rusas до y после rigen un complemento en genitivo; por eso el nombre o pronombre que las sigue aparece en forma genitiva.",
+        "claimType": "normative",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-temporal-semantics",
+        "sectionKey": "En pocas palabras / Cómo funciona / Observación importante",
+        "summary": "До puede marcar un límite temporal, espacial o cuantitativo y, en usos temporales, corresponde a valores como 'hasta' o 'antes de'; после introduce un evento o estado tras el cual ocurre otra situación y corresponde a 'después de'.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-phrase-agreement",
+        "sectionKey": "Cómo funciona / Ejemplos",
+        "summary": "El caso se manifiesta en el sintagma nominal completo: los adjetivos concuerdan con el sustantivo en género, número y caso, de modo que en grupos como после долгого урока tanto el adjetivo como el sustantivo muestran formas de genitivo.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-government",
+        "sourceRef": "gramota-do",
+        "supportType": "supports",
+        "locator": {
+          "section": "Большой универсальный словарь русского языка — ДО, предл. с род."
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-government",
+        "sourceRef": "gramota-posle",
+        "supportType": "supports",
+        "locator": {
+          "section": "Большой универсальный словарь русского языка — ПОСЛЕ, предл. с род."
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-temporal-semantics",
+        "sourceRef": "gramota-do",
+        "supportType": "supports",
+        "locator": {
+          "section": "ДО — пространственный, временной или количественный предел"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-temporal-semantics",
+        "sourceRef": "gramota-posle",
+        "supportType": "supports",
+        "locator": {
+          "section": "ПОСЛЕ — следование во времени за названным событием"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-phrase-agreement",
+        "sourceRef": "gramota-adj-declension",
+        "supportType": "supports",
+        "locator": {
+          "section": "Склонение прилагательных — согласование в роде, числе и падеже"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
