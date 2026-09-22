@@ -59,7 +59,7 @@ test('MLS Chat Bridge batch stops after first failure by default',async()=>{
 });
 
 test('MLS Chat Bridge operational definition includes all Evidence correction operations',()=>{
-  for(const id of ['entradaEvidenceMLS','fuentesEntradaEvidenceMLS','metricasEvidenceEntradaMLS','validarEvidenceMLS','proponerEvidenceMLS','verificarEvidenceMLS','revisarEvidenceMLS','proponerRevisionEvidenceMLS']){
+  for(const id of ['entradaEvidenceMLS','fuentesEntradaEvidenceMLS','metricasEvidenceEntradaMLS','consumerEvidenceEntradaMLS','validarEvidenceMLS','proponerEvidenceMLS','verificarEvidenceMLS','revisarEvidenceMLS','proponerRevisionEvidenceMLS']){
     assert.ok(bridge.MLS_CHAT_BRIDGE_OPERATIONS[id],id);
   }
 });
