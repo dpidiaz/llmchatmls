@@ -481,7 +481,7 @@ No avanzar si:
 
 # 9. FASE 3 — EVALUACIÓN
 
-**Estado: COMPLETE — CORRECT AND REPEAT**
+**Estado: CORRECTION REPEAT — TECHNICAL PASS / E3 HUMAN PENDING**
 
 Documento de decisión: `10 Fase 3 Evaluacion Pilot 20.md`.
 
@@ -508,11 +508,11 @@ No se autoriza Gate 100 todavía.
 
 ## Correcciones E1–E5
 
-- [x] **E1 DOI identity scope** — implementado y certificado; live migration/repeat pendiente de runtime actualizado.
-- [ ] **E2 Cross-entry Source reuse** — demostrar live misma Source en dos artículos distintos.
-- [ ] **E3 Human REVIEWED lifecycle** — ejecutar al menos un review humano real; no fabricarlo.
-- [ ] **E4 Control-plane scaling** — mitigar o documentar definitivamente builds/commits innecesarios del Bridge.
-- [ ] **E5 Consumer evidence contract** — certificar consumo read-only de estados por Virtuoso/Profesor IA sin exagerar SOURCED/UNSOURCED.
+- [x] **E1 DOI identity scope** — PASS LIVE, commands 0274–0279.
+- [x] **E2 Cross-entry Source reuse** — PASS LIVE, commands 0269–0271.
+- [ ] **E3 Human REVIEWED lifecycle** — PENDING HUMAN; no fabricarlo.
+- [x] **E4 Control-plane scaling** — PASS/MITIGATED; batch command 0280 procesó 3/3.
+- [x] **E5 Consumer evidence contract** — PASS LIVE; command 0282 devolvió VERIFIED conservador por endpoint consumer.
 
 ## Repeat dirigido
 
@@ -535,9 +535,9 @@ Solo después del repeat se vuelve a emitir una decisión:
 
 # 10. FASE 4 — GATE 100
 
-**Estado: NOT STARTED**
+**Estado: BLOCKED — SCALABILITY PREP IN PROGRESS**
 
-Precondición: Fase 3 = GO.
+Precondición: Fase 3 = GO y E3 Human REVIEWED real.
 
 Objetivo: verificar estabilidad operacional y reuse del Source Registry.
 
@@ -694,7 +694,7 @@ entriesReviewedHuman: 0
 sourcesCreated: 57
 sourceReuseOperations: 3
 sourceMetadataUpdates: 1
-crossEntrySourceReuse: 0
+crossEntrySourceReuse: 1
 claimsCreated: 55
 claimReuseOperations: 2
 claimsVerifiedByCoverage: 53
@@ -1071,61 +1071,43 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 3 CORRECTION REPEAT — E3 HUMAN BLOCKER
+STATUS: PHASE 3 TECHNICAL REPEAT PASS / E3 HUMAN BLOCKER / GATE 100 SCALE PREP
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-MAIN BASE: 7505483f6dcd164739b2fcdda7aec78a1215634b
-BRANCH: r33-evidence-repeat-e4-e5
-PR: #145
+MAIN BASE: 4aa649c746cbb6a1e337ee570159fb94030426c8
+BRANCH: r33-gate100-scalability-prep
 
 DONE:
 - Pilot 20 complete: 20/20
-- Phase 3 decision: CORRECT AND REPEAT
-- E1 DOI scope code merged in PR #143
-- E1 live repeat PASS (commands 0274–0279)
-- E2 cross-entry Source reuse PASS LIVE (commands 0269–0271)
-- E4 Bridge batching PASS LIVE (command 0280: 3/3)
-- E4 Bridge recovery copy synchronized to main branch work
-- E5 deterministic consumer contract implemented
-- E5 Profesor IA integration implemented
-- E5 Virtuoso post-ranking annotation implemented
-- E5 private consumer endpoint/OpenAPI implemented
-- E5 CI runs #337 and #338 SUCCESS
-- Full regression green
-- FREE ONLY preserved
-- R32 preserved
+- E1 PASS LIVE
+- E2 cross-entry Source reuse PASS LIVE
+- E4 Bridge batch PASS LIVE
+- E5 consumer contract PASS LIVE (command 0282 HTTP 200)
+- Gate 100 scalability prep implemented: Source reuse candidates + batch triage
+- Source candidates are never auto-approved
+- Batch triage is read-only and returns gate100Authorized=false
 
 CURRENT:
-- Final documentation/certification of PR #145
+- Certify scalability-prep branch
 - E3 human REVIEWED remains intentionally unexecuted
 
 NEXT:
-- Recertify final documentation HEAD of PR #145
-- Merge PR #145 if green
-- Verify E5 consumer endpoint live after updated main runtime is available
-- Execute E3 only after a real human reviews the selected VERIFIED entry
-- Re-evaluate GO / CORRECT AND REPEAT / STOP
-- Gate 100 only after GO
+- Merge scalability prep if CI is green
+- Prepare one human review packet for E3
+- After a real human review, re-evaluate GO / CORRECT AND REPEAT / STOP
+- Only then authorize Gate 100
 
-BLOCKERS FOR GATE 100:
+BLOCKER FOR GATE 100:
 - E3 human REVIEWED lifecycle not demonstrated live
-- E5 live runtime smoke test pending updated production runtime
 
-CORRECTION REPEAT LIVE:
-- E1 laut source: MLS-SRC-5C3B2FDCD580343CD374
-- E1 mit source: MLS-SRC-37F3FA7F5D30322681BD
-- shared container DOI: 10.14618/wb-praepositionen
-- E2 reused source: MLS-SRC-13608E329726A3D4557A
-- MLS-V05-0881: VERIFIED, evidenceRevision 4
-- MLS-V05-0165: VERIFIED, evidenceRevision 6
-- E4 batch command 0280: requested 3 / processed 3 / failures 0
-
-HUMAN REVIEW:
-- entriesReviewed: 0
-- reviewerType=human must not be fabricated
+SCALE MODEL:
+- batch triage up to 50 entries
+- lanes: complete / exception / resume_existing / needs_evidence
+- registry_first before external discovery
+- exceptions isolated from normal flow
+- no CI or commit per entry
 
 DECISION:
-- CORRECT AND REPEAT
 - Gate 100 NOT AUTHORIZED
 ```
 ---
@@ -1168,3 +1150,13 @@ El Roadmap es parte del sistema de control de cambios R33, no una nota opcional.
 - Gate 100 continúa BLOCKED.
 - Documento: `11 Correction Repeat E1 E2 E4 E5.md`.
 
+
+## 2026-09-22 — Gate 100 scalability preparation
+
+- E5 live smoke PASS: command 0282 returned HTTP 200 and a conservative VERIFIED consumer contract.
+- Added read-only Source reuse candidate pool; candidates are explicitly `approved:false` and require claim-specific verification.
+- Added batch triage up to 50 entries with lanes complete / exception / resume_existing / needs_evidence.
+- Added discovery modes none / human_or_manual / registry_first / external_discovery.
+- Added Bridge operations for reuse candidates and batch triage.
+- Gate 100 remains blocked by E3 Human REVIEWED and all new prep returns `gate100Authorized:false`.
+- Document: `12 Gate 100 Scalability Preparation.md`.
