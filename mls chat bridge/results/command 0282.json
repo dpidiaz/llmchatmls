@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "consumerEvidenceEntradaMLS",
+  "method": "GET",
+  "path": "/api/wiki/editorial/evidence/consumer",
+  "response": {
+    "ok": true,
+    "evidence": {
+      "status": "VERIFIED",
+      "label": "Verificado con fuentes",
+      "disclosure": "Esta entrada fue contrastada con fuentes para su snapshot de Evidence vigente.",
+      "needsReview": false,
+      "hasProposedRevision": false,
+      "verifiedAt": "2026-09-22T05:14:37.873Z",
+      "reviewedAt": null
+    },
+    "telemetry": {
+      "d1": {
+        "queries": 17,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 59,
+        "d1RowsWritten": 0,
+        "observedRowsRead": 24,
+        "observedRowsWritten": 0,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T05:31:42.176Z",
+  "commandFile": "mls chat bridge/commands/command 0282.json"
+}
