@@ -1,0 +1,66 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V10-0027",
+    "articleGeneratedAt": "2026-09-13T07:46:57.552Z",
+    "articleHash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "rae-orth-27",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "Ortografía",
+        "institution": "Real Academia Española",
+        "canonicalUrl": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+        "language": "es",
+        "topics": [
+          "mayúsculas",
+          "instituciones",
+          "documentos legales"
+        ],
+        "accessedAt": "2026-09-22"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c1",
+        "sectionKey": "Cómo funciona",
+        "summary": "Los sustantivos y adjetivos significativos que integran nombres oficiales de entidades e instituciones se escriben con mayúscula inicial, mientras que las palabras gramaticales internas suelen permanecer en minúscula.",
+        "claimType": "orthographic_rule",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c2",
+        "sectionKey": "Cómo funciona",
+        "summary": "Los sustantivos y adjetivos que forman parte del título oficial de documentos legales o jurídicos se escriben con mayúscula; las referencias genéricas no reciben esa mayúscula por jerarquía o respeto.",
+        "claimType": "orthographic_rule",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c1",
+        "sourceRef": "rae-orth-27",
+        "supportType": "primary_source",
+        "locator": {
+          "page": "9",
+          "section": "2.2.7"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c2",
+        "sourceRef": "rae-orth-27",
+        "supportType": "primary_source",
+        "locator": {
+          "page": "9",
+          "section": "2.2.11"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
