@@ -60,16 +60,16 @@ test('Farm checkpoint is idempotent and terminal work survives expiration accoun
   ];
   const state=core.makeBatchState({issueNumber:57,requestId:'request-12345678',workerId:'worker-12345678',entries,now:'2026-09-22T06:00:00.000Z',token:'abc'});
   const ev={operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:57,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{}}}]};
-  const once=core.applyWorkerEvent(state,ev,{createdAt:'2026-09-22T06:10:00.000Z',commentId:3});
-  const twice=core.applyWorkerEvent(once,ev,{createdAt:'2026-09-22T06:11:00.000Z',commentId:4});
+  const once=core.applyWorkerEvent(state,ev,{createdAt:'2026-09-22T06:04:00.000Z',commentId:3});
+  const twice=core.applyWorkerEvent(once,ev,{createdAt:'2026-09-22T06:04:30.000Z',commentId:4});
   assert.equal(Object.keys(twice.results).length,1);
   assert.deepEqual(core.pendingCodes(twice),['MLS-V10-0002']);
 });
 
 test('Farm rejects conflicting second result for same code',()=>{
   const state=core.makeBatchState({issueNumber:58,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'a'},{code:'MLS-V10-0002',language:'espanol-guatemala',n:2,path:'b'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
-  const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{x:1}}}]},{createdAt:'2026-09-22T06:10:00.000Z',commentId:5});
-  assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',sources:[],claims:[],links:[],conflicts:[],provenance:{x:2}}}]},{createdAt:'2026-09-22T06:11:00.000Z',commentId:6}),e=>e.code==='RESULT_HASH_CONFLICT');
+  const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{x:1}}}]},{createdAt:'2026-09-22T06:04:00.000Z',commentId:5});
+  assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',sources:[],claims:[],links:[],conflicts:[],provenance:{x:2}}}]},{createdAt:'2026-09-22T06:05:00.000Z',commentId:6}),e=>e.code==='RESULT_HASH_CONFLICT');
 });
 
 test('Farm ledger excludes submitted, review and preserved entries from future claims',()=>{
