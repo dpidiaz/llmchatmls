@@ -43,3 +43,22 @@ test('Evidence reader patch is idempotent',()=>{
   const once=patchEvidenceReader(source);
   assert.equal(patchEvidenceReader(once),once);
 });
+
+
+test('reader exposes APA 7 references for Evidence-backed entries',()=>{
+  const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
+  assert.match(patched,/MLS_EVIDENCE_API\.entrySources\(env, code\)/);
+  assert.match(patched,/references = \(rows \|\| \[\]\)/);
+  assert.match(patched,/function ensureEvidenceReferences\(article, code, target\)/);
+  assert.match(patched,/section\.id = "mls-evidence-references"/);
+  assert.match(patched,/title\.textContent = "Referencias"/);
+  assert.match(patched,/note\.textContent = "Formato APA 7"/);
+  assert.match(patched,/citation\.textContent = String\(reference\.text \|\| ""\)/);
+  assert.match(patched,/link\.textContent = "Abrir fuente"/);
+  assert.match(patched,/ensureEvidenceReferences\(article, code, target\)/);
+});
+
+test('reader removes references section when current entry has no visible references',()=>{
+  const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
+  assert.match(patched,/if \(!references\.length\) \{[\s\S]*section\?\.remove\(\);[\s\S]*return;/);
+});
