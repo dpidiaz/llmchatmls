@@ -30,6 +30,22 @@ test('evidence foundation: source identity deduplicates DOI ISBN and canonical U
   assert.equal(e.sourceId,f.sourceId);
 });
 
+test('evidence foundation: container DOI keeps granular URL identity while resource DOI still deduplicates',async()=>{
+  const common={sourceType:'institutional_webpage',authorityTier:'A',institution:'IDS',doi:'10.14618/wb-praepositionen',doiScope:'container'};
+  const mit=await evidence.normalizeSourceMetadata({...common,title:'mit',canonicalUrl:'https://grammis.ids-mannheim.de/praepositionen/299660'});
+  const laut=await evidence.normalizeSourceMetadata({...common,title:'laut',canonicalUrl:'https://grammis.ids-mannheim.de/praepositionen/299306'});
+  assert.equal(mit.doi,'10.14618/wb-praepositionen');
+  assert.equal(mit.doiScope,'container');
+  assert.equal(mit.identityKind,'url');
+  assert.equal(laut.identityKind,'url');
+  assert.notEqual(mit.sourceId,laut.sourceId);
+  const a=await evidence.normalizeSourceMetadata({sourceType:'journal_article',authorityTier:'B',title:'A',doi:'10.1000/shared',doiScope:'resource',canonicalUrl:'https://example.org/a'});
+  const b=await evidence.normalizeSourceMetadata({sourceType:'journal_article',authorityTier:'B',title:'B',doi:'10.1000/shared',doiScope:'resource',canonicalUrl:'https://example.org/b'});
+  assert.equal(a.identityKind,'doi');assert.equal(a.sourceId,b.sourceId);
+  await assert.rejects(()=>evidence.normalizeSourceMetadata({...common,title:'No URL',canonicalUrl:null}),/canonicalUrl granular/);
+  await assert.rejects(()=>evidence.normalizeSourceMetadata({sourceType:'report',authorityTier:'A',title:'Bad scope',institution:'X',doi:'10.1000/x',doiScope:'work'}),/doiScope debe ser resource o container/);
+});
+
 test('evidence foundation: invalid DOI and ISBN fail closed',async()=>{
   await assert.rejects(()=>evidence.normalizeSourceMetadata({sourceType:'book',authorityTier:'B',title:'Bad',doi:'not-a-doi'}),/DOI inválido/);
   await assert.rejects(()=>evidence.normalizeSourceMetadata({sourceType:'book',authorityTier:'B',title:'Bad',isbn:'9780000000000'}),/ISBN inválido/);
