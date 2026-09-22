@@ -1,0 +1,177 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "MLS-FARM-PUBLISH-20260922-CHECK",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0030",
+          "canVerify": false,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [
+              "apa_validation_required"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": false
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-C6E574E7A5E6165239DA",
+                "identityKind": "doi",
+                "identityKey": "10.59161/auez1291",
+                "metadataHash": "53e5437db0c1e912c8efd7ba8237d697b4d68b64c5b668ace2427748843b12de",
+                "sourceType": "standard",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "The International System of Units (SI Brochure)",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": "Bureau International des Poids et Mesures",
+                "publicationYear": 2026,
+                "publicationDate": null,
+                "publisher": "Bureau International des Poids et Mesures",
+                "edition": "9th edition",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": "10.59161/auez1291",
+                "doiScope": "resource",
+                "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+                "language": "en",
+                "topics": [
+                  "SI",
+                  "unit symbols",
+                  "quantity values"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-22",
+                "createdAt": "2026-09-22T08:18:48.526Z",
+                "updatedAt": "2026-09-22T08:18:48.526Z"
+              },
+              "citation": null
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 34,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 12,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:22:08.135Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "consumerEvidenceEntradaMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/consumer",
+        "response": {
+          "ok": true,
+          "evidence": {
+            "status": "SOURCED",
+            "label": "Fuentes identificadas",
+            "disclosure": "Esta entrada tiene fuentes identificadas, pero la verificación bibliográfica todavía no está completa.",
+            "needsReview": false,
+            "hasProposedRevision": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 12,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 13,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:22:08.781Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "consumerEvidenceEntradaMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/consumer",
+        "response": {
+          "ok": true,
+          "evidence": {
+            "status": "SOURCED",
+            "label": "Fuentes identificadas",
+            "disclosure": "Esta entrada tiene fuentes identificadas, pero la verificación bibliográfica todavía no está completa.",
+            "needsReview": true,
+            "hasProposedRevision": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 6,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 24,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 10,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:22:09.186Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-22T08:22:09.186Z",
+  "commandFile": "mls chat bridge/commands/command 0296.json"
+}
