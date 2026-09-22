@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 2 — PILOTO 20 / IN PROGRESS — CHECKPOINT 5–8 PASS (8/20)**
+**Estado actual: FASE 2 — PILOTO 20 / IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20)**
 
 Progreso global inicial:
 
@@ -367,7 +367,7 @@ Foundation debe demostrar:
 
 # 8. FASE 2 — PILOTO 20
 
-**Estado: IN PROGRESS — CHECKPOINT 5–8 PASS (8/20)**
+**Estado: IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20)**
 
 ## Selección
 
@@ -462,7 +462,7 @@ Registrar:
 - [x] Full Foundation regression suite verde en run #316.
 - [x] **Start gate live:** confirmado en producción con `exactRowsRead=true` y `exactRowsWritten=true` sobre `MLS-V10-0020` antes de iniciar el piloto.
 
-El Pilot 20 está **IN PROGRESS**. Checkpoints 1–4 y 5–8: PASS. Entradas 1–8 están VERIFIED; continuar secuencialmente con 9–12.
+El Pilot 20 está **IN PROGRESS**. Checkpoints 1–4 y 5–8: PASS. Checkpoint 9–12: PASS WITH FINDING. Acumulado: 12/20 procesadas, 11 VERIFIED y 1 SOURCED + needsReview; continuar secuencialmente con 13–16.
 
 
 ## Exit gate
@@ -663,38 +663,39 @@ El renderer nunca sustituye metadata normalizada.
 Actualizar en cada checkpoint.
 
 ```yaml
-entriesProcessed: 8
-entriesVerified: 8
+entriesProcessed: 12
+entriesVerified: 11
+entriesSourcedNeedsReview: 1
 entriesReviewedHuman: 0
-sourcesCreated: 18
+sourcesCreated: 31
 sourceReuseOperations: 2
 sourceMetadataUpdates: 1
 crossEntrySourceReuse: 0
-claimsCreated: 19
+claimsCreated: 31
 claimReuseOperations: 2
-claimsVerified: 19
-evidenceLinks: 26
+claimsVerifiedByCoverage: 31
+evidenceLinks: 42
 evidenceLinkReuseOperations: 3
-evidenceConflicts: 0
-needsReview: 0
-verificationAttempts: 8
-verificationReviewsCreated: 8
-articleRevisionsProposed: 0
-d1RowsRead: 3595
-d1RowsWritten: 335
+evidenceConflicts: 1
+needsReview: 1
+verificationAttempts: 11
+verificationReviewsCreated: 11
+articleRevisionsProposed: 1
+d1RowsRead: 5419
+d1RowsWritten: 547
 runtimeGitHubRequests: 0
 runtimeGitHubMutations: 0
-controlPlaneCommits: 83
-controlBranchBlobDeltaBytes: 302120
+controlPlaneCommits: 121
+controlBranchBlobDeltaBytes: 456479
 githubTransportRequests: null
 mainRepoEvidenceDataDeltaBytes: 0
-logicalEvidenceBytes: 53868
-averageD1RowsReadPerEntry: 449.375
-averageD1RowsWrittenPerEntry: 41.875
-averageEvidenceBytesPerEntry: 6733.5
-averageSourcesPerEntry: 2.25
-averageClaimsPerEntry: 2.375
-averageEvidenceLinksPerEntry: 3.25
+logicalEvidenceBytes: 91838
+averageD1RowsReadPerEntry: 451.5833333333333
+averageD1RowsWrittenPerEntry: 45.583333333333336
+averageEvidenceBytesPerEntry: 7653.166666666667
+averageSourcesPerEntry: 2.5833333333333335
+averageClaimsPerEntry: 2.5833333333333335
+averageEvidenceLinksPerEntry: 3.5
 apaValidationFailures: 0
 apaMetadataCorrectionsBeforeVerification: 1
 manualHumanReviewEvents: 0
@@ -707,6 +708,31 @@ No inventar números cuando no se hayan medido.
 ---
 
 # 18. CHANGE LOG DEL ROADMAP
+
+## 2026-09-21 — Pilot 20 checkpoint 9–12 PASS WITH FINDING
+
+- Entradas procesadas acumuladas: 12/20.
+- Estado acumulado: 11 VERIFIED; 1 SOURCED + needsReview.
+- MLS-V04-0174: SOURCED, 4 Sources, 3 Claims, 5 Links, 1 conflicto, 1 article revision proposed, 13,804 logical Evidence bytes.
+- MLS-V04-0927: VERIFIED, 3 Sources, 3 Claims, 4 Links, 8,336 bytes.
+- MLS-V05-0165: VERIFIED, 3 Sources, 3 Claims, 3 Links, 7,598 bytes.
+- MLS-V05-0881: VERIFIED, 3 Sources, 3 Claims, 4 Links, 8,232 bytes.
+- Entry 9 detectó la primera contradicción sustantiva real del piloto: la regla canónica “-ci = primero / -là = segundo” no se sostuvo como regla general.
+- El backend bloqueó VERIFIED con unresolved_substantive_conflict y mantuvo needsReview=1.
+- Se creó revisión propuesta MLS-ARTREV-624FF06CE1F0EB39C9214F60 sin overwrite del artículo R32.
+- Checkpoint 9–12: 1,824 rows read / 212 rows written / 37,970 logical Evidence bytes.
+- Acumulado 1–12: 5,419 reads / 547 writes / 91,838 bytes.
+- 31 Claims tienen cobertura Evidence; 3 pertenecen a la entrada 9 y no elevan el estado global a VERIFIED mientras exista el conflicto.
+- 31 Sources creadas; cross-entry source reuse aún no observado.
+- Hallazgo de granularidad: un DOI de obra/contenedor compartido por múltiples fichas IDS puede ser demasiado grueso para identificar una Source específica. En entry 12 se usó canonical URL para evitar falso dedupe.
+- 1 conflicto acumulado; 1 needsReview; 1 article revision proposed; 0 human reviews.
+- 0 falsos VERIFIED.
+- 0 fallos APA.
+- Pilot 20 sigue compatible con FREE ONLY.
+- Control plane acumulado: 121 commits, +456,479 blob bytes.
+- Decisión: PASS WITH FINDING; continuar 13–16.
+- Documento detallado: `07 Pilot 20 Checkpoint 9 a 12.md`.
+
 
 ## 2026-09-21 — Pilot 20 checkpoint 5–8 PASS
 
@@ -943,48 +969,57 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 2 PILOT 20 IN PROGRESS — CHECKPOINT 5–8 PASS
+STATUS: PHASE 2 PILOT 20 IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-MAIN HEAD AT CHECKPOINT BASE: 0ba1611fb470d216230b7ee868414ffa7460cd70
+MAIN HEAD AT CHECKPOINT BASE: 179f720b0f8c4fb95b30726a39032e52ac1faf23
 CONTROL BRANCH: mlschatcontrol
-CONTROL HEAD AFTER ENTRY 8: d7603214cd79b6fbb132d033b2b0e9168d0c59de
-DOCUMENTATION BRANCH: r33-evidence-pilot-checkpoint-8
+CONTROL HEAD AFTER ENTRY 12: d6357426b2c0b1850c4b0c49525f12cca9878476
+DOCUMENTATION BRANCH: r33-evidence-pilot-checkpoint-12
 
 DONE:
-- Checkpoint 1–4 PASS and merged
-- Entry 5 MLS-V02-0180 VERIFIED
-- Entry 6 MLS-V02-0959 VERIFIED
-- Entry 7 MLS-V03-0122 VERIFIED
-- Entry 8 MLS-V03-0648 VERIFIED
-- Live Source/Claim/Link retry dedupe exercised on entry 6
-- APA metadata enrichment before VERIFIED exercised on entry 6
-- Checkpoint 5–8 stop-condition audit PASS
+- Checkpoints 1–4 and 5–8 PASS
+- Entry 9 MLS-V04-0174 processed; SOURCED + needsReview
+- Entry 9 conflict persisted; VERIFIED correctly blocked
+- Entry 9 article revision proposed without overwrite
+- Entry 10 MLS-V04-0927 VERIFIED
+- Entry 11 MLS-V05-0165 VERIFIED
+- Entry 12 MLS-V05-0881 VERIFIED
+- Source identity granularity issue for shared work-level DOI identified and mitigated
+- Checkpoint 9–12 stop-condition audit PASS WITH FINDING
+- Manifest synchronized to 12/20
 - Detailed checkpoint document created
 
 CURRENT:
-- 8 of 20 Pilot entries processed
-- 8 VERIFIED
+- 12 of 20 Pilot entries processed
+- 11 VERIFIED
+- 1 SOURCED + needsReview
 - 0 REVIEWED
-- No canonical article revision proposed
-- No human editorial review performed
+- 1 article revision proposed
+- 0 human editorial reviews
 
 NEXT:
-- Merge checkpoint 5–8 documentation after CI
-- Continue sequentially with entries 9–12
-- Entry 9: MLS-V04-0174
-- Checkpoint again after entry 12
+- Merge checkpoint 9–12 documentation after CI
+- Continue sequentially with entries 13–16
+- Entry 13: MLS-V06-0010
+- Entry 14: MLS-V06-0822
+- Entry 15: MLS-V07-0152
+- Entry 16: MLS-V07-0813
+- Checkpoint again after entry 16
 
 BLOCKERS:
-- None for continuing 9–12
+- None for continuing 13–16
+- Entry 9 remains unresolved and must not be promoted to VERIFIED until its revision is editorially resolved
+- Cross-entry Source reuse not yet observed
+- Source identity policy should distinguish resource-specific DOI from work/container DOI before Gate 100
 - Operational optimization pending: audit Cloudflare Branch control / Build watch paths for mlschatcontrol
-- Cross-entry Source reuse not yet observed in live pilot
 
 DECISIONS:
-- Retry/enrichment reuse and cross-entry Source reuse are measured separately
-- Aggregate citationReady does not replace manual inspection of each linked Source metadata
+- A detected article error is a successful Pilot finding, not a reason to force VERIFIED
+- Claims with complete source coverage do not override an unresolved substantive conflict
+- Proposed article revisions never overwrite wiki_articles
+- For resource-specific records, do not use a shared work-level DOI when it would collapse distinct Source entities
 - No corpus-scale migration
-- No article overwrite
 - Human review events remain 0; never fabricate REVIEWED
 
 AUTOOPT IMPACT:
@@ -994,47 +1029,52 @@ R32 COMPATIBILITY:
 - Preserved
 
 EVIDENCE STATUS:
-- 8 VERIFIED
+- 11 VERIFIED
+- 1 SOURCED + needsReview
 - 0 REVIEWED
-- 12 Pilot entries not yet processed
+- 8 Pilot entries not yet processed
 
 ENTRIES PROCESSED:
-- 8
+- 12
 
 SOURCES:
-- created: 18
+- created: 31
 - retry/enrichment reuse operations: 2
 - metadata updates: 1
 - cross-entry reuse: 0
 
 CLAIMS:
-- created: 19
-- verified: 19
+- created: 31
+- coverage-qualified: 31
 - retry reuse operations: 2
 
 EVIDENCE LINKS:
-- created/current: 26
+- created/current: 42
 - retry reuse operations: 3
 
 CONFLICTS:
-- 0
+- 1
 
 NEEDS REVIEW:
-- 0
+- 1
+
+ARTICLE REVISIONS:
+- proposed: 1
+- integrated: 0
 
 D1 IMPACT:
-- 3595 exact rows read
-- 335 exact rows written
-- average 449.375 read / 41.875 written per completed entry
+- 5419 exact rows read
+- 547 exact rows written
+- average 451.5833333333333 read / 45.583333333333336 written per processed entry
 
 SIZE:
-- logical Evidence bytes: 53868
-- average: 6733.5 bytes/entry
+- logical Evidence bytes: 91838
+- average: 7653.166666666667 bytes/entry
 
 GITHUB IMPACT:
 - Evidence runtime GitHub requests/mutations: 0
-- control plane commits since Pilot baseline: 83
-- control branch blob delta: +302120 bytes
+- control plane commits since Pilot baseline: 121
+- control branch blob delta: +456479 bytes
 - transport-level GitHub request count: not instrumented; do not invent
 
 APA:
@@ -1043,10 +1083,9 @@ APA:
 
 MANUAL REVIEW:
 - human events: 0
-- article revisions proposed: 0
 
 CHECKPOINT:
-- PASS — continue entries 9–12
+- PASS WITH FINDING — continue entries 13–16
 ```
 ---
 
