@@ -83,6 +83,23 @@
     return (info.shards||[]).find(item=>Number(n)>=Number(item.start)&&Number(n)<=Number(item.end))||null;
   }
 
+  async function publicEvidence(code){
+    const normalized=String(code||'').trim().toUpperCase();
+    if(!/^MLS-V\d{2}-\d{4}$/.test(normalized))return null;
+    try{
+      const response=await fetch('/api/wiki/evidence-public/'+encodeURIComponent(normalized),{
+        cache:'no-store',
+        headers:{accept:'application/json','cache-control':'no-cache'}
+      });
+      if(!response.ok)return null;
+      const payload=await response.json();
+      return payload?.evidence||null;
+    }catch(error){
+      console.warn('MLS Evidence public summary unavailable',normalized,error);
+      return null;
+    }
+  }
+
   async function canonicalPayload(code){
     const normalized=String(code||'').trim().toUpperCase();
     const manifest=await runtimeManifest();
@@ -231,6 +248,7 @@
     }
 
     const {manifest,language,info,catalog,meta,article}=payload;
+    const evidence=await publicEvidence(normalized);
     MLS.state.currentLang=language;
     MLS.state.recent=[normalized,...MLS.state.recent.filter(x=>x!==normalized)].slice(0,80);
     MLS.save();
@@ -259,6 +277,26 @@
     const next=pos>=0&&pos<languageEntries.length-1?languageEntries[pos+1]:null;
     const chapterEntries=languageEntries.filter(item=>item.chapter===meta.chapter);
     const related=await relatedForEntry(markdown,catalog,manifest,language,normalized,5);
+    const evidenceReferences=Array.isArray(evidence?.references)?evidence.references:[];
+    const evidenceReferenceHTML=evidenceReferences.length
+      ?evidenceReferences.map(reference=>{
+        const citationMarkdown=String(reference?.markdown||'').trim();
+        const citationText=String(reference?.text||'').trim();
+        const citation=citationMarkdown?MLS.renderMarkdown(citationMarkdown,language):esc(citationText);
+        const sourceLink=reference?.url
+          ?` <a href="${escAttr(reference.url)}" target="_blank" rel="noopener noreferrer">Abrir fuente</a>`
+          :'';
+        return `<div class="evidence-reference" role="listitem">${citation}${sourceLink}</div>`;
+      }).join('')
+      :'';
+    const evidenceHTML=evidence
+      ?`<section class="reader-context-section evidence-reader-panel" aria-labelledby="evidenceTitle">
+          <div class="reader-panel-label" id="evidenceTitle">${esc(evidence.label||evidence.status||'Estado de fuentes')}</div>
+          ${evidence.needsReview?'<p><strong>Revisión pendiente</strong></p>':''}
+          ${evidence.disclosure?`<p class="muted-note">${esc(evidence.disclosure)}</p>`:''}
+          ${evidenceReferenceHTML?`<div class="evidence-references"><h2>Referencias</h2><p class="muted-note">Formato APA 7</p><div role="list">${evidenceReferenceHTML}</div></div>`:''}
+        </section>`
+      :'';
     const outline=MLS.entryOutline(markdown);
     const fav=MLS.state.favorites.includes(normalized);
 
@@ -286,6 +324,7 @@
           <article class="plain-entry permanent-entry" aria-label="Explicación">
             <article class="entry-body permanent-entry-body">${MLS.renderMarkdown(markdown,language)}</article>
           </article>
+          ${evidenceHTML}
           <nav class="easy-entry-nav" aria-label="Siguiente o anterior">${prev?`<a class="btn" href="#entry=${escAttr(prev.code)}">← Anterior</a>`:'<span></span>'}<a class="btn" href="#lang=${escAttr(m.slug||language)}">Temas</a>${next?`<a class="btn primary" href="#entry=${escAttr(next.code)}">Siguiente →</a>`:'<span></span>'}</nav>
         </main>
         <aside class="reader-right"><div class="sticky-reader-panel">
