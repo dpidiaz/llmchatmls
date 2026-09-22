@@ -31,6 +31,9 @@ R33 es aditivo. Las entradas R32 continúan siendo utilizables aunque su estado 
 7. [10 Fase 3 Evaluacion Pilot 20](./10%20Fase%203%20Evaluacion%20Pilot%2020.md)  
    Evaluación posterior al piloto. Decisión vigente: **CORRECT AND REPEAT**; Gate 100 bloqueado hasta cerrar E1–E5.
 
+8. [11 Correction Repeat E1 E2 E4 E5](./11%20Correction%20Repeat%20E1%20E2%20E4%20E5.md)  
+   Evidencia reproducible del repeat dirigido: E1 y E2 PASS live; E4 mitigado con batching; E5 certificado en código/CI; E3 permanece reservado para review humano real.
+
 ## Contexto R32 inspeccionado al crear esta documentación
 
 Repositorio: `dpidiaz/llmchatmls`  
