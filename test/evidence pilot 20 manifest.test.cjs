@@ -18,11 +18,13 @@ test('Pilot 20 manifest: reflects the live execution state without fabricating c
   assert.equal(manifest.execution.runId,'MLS-R33-EVIDENCE-PILOT-20-20260921-A');
   assert.equal(manifest.execution.startedAt,'2026-09-21T17:07:44Z');
   assert.equal(manifest.execution.completedAt,null);
-  assert.equal(manifest.execution.entriesProcessed,8);
-  assert.equal(manifest.execution.lastCompletedOrder,8);
-  assert.equal(manifest.execution.lastCompletedCode,'MLS-V03-0648');
-  assert.equal(manifest.execution.lastCheckpoint,'5-8');
-  assert.equal(manifest.execution.lastCheckpointStatus,'pass');
+  assert.equal(manifest.execution.entriesProcessed,12);
+  assert.equal(manifest.execution.entriesVerified,11);
+  assert.equal(manifest.execution.entriesNeedsReview,1);
+  assert.equal(manifest.execution.lastCompletedOrder,12);
+  assert.equal(manifest.execution.lastCompletedCode,'MLS-V05-0881');
+  assert.equal(manifest.execution.lastCheckpoint,'9-12');
+  assert.equal(manifest.execution.lastCheckpointStatus,'pass_with_finding');
   assert.equal(manifest.entries.length,20);
 });
 

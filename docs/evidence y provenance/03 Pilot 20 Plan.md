@@ -1,6 +1,6 @@
 # MLS R33 Evidence & Provenance — Pilot 20 Plan
 
-**Estado:** IN PROGRESS — CHECKPOINT 5–8 PASS (8/20)  
+**Estado:** IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20)  
 **Pilot ID:** `MLS-R33-EVIDENCE-PILOT-20`  
 **Manifest:** `04 Pilot 20 Manifest.json`  
 **Selection base commit:** `a369cff3e0c6b096c1a48b62931f2e1f7f4ce529`
@@ -228,42 +228,50 @@ No avanzar a 100 si:
 
 ## 11. Estado actual
 
-**IN PROGRESS — CHECKPOINT 5–8 PASS (8/20).**
+**IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20).**
 
-Start gate live aprobado. Entradas 1–8 completadas y VERIFIED.
-
-Métricas acumuladas:
+Acumulado:
 
 ```yaml
-entriesProcessed: 8
-entriesVerified: 8
-sourcesCreated: 18
+entriesProcessed: 12
+entriesVerified: 11
+entriesSourcedNeedsReview: 1
+sourcesCreated: 31
 sourceReuseOperations: 2
 sourceMetadataUpdates: 1
 crossEntrySourceReuse: 0
-claimsCreated: 19
+claimsCreated: 31
 claimReuseOperations: 2
-claimsVerified: 19
-evidenceLinks: 26
+claimsVerifiedByCoverage: 31
+evidenceLinks: 42
 evidenceLinkReuseOperations: 3
-evidenceConflicts: 0
-needsReview: 0
-verificationAttempts: 8
-d1RowsRead: 3595
-d1RowsWritten: 335
-logicalEvidenceBytes: 53868
-averageEvidenceBytesPerEntry: 6733.5
-averageSourcesPerEntry: 2.25
+evidenceConflicts: 1
+needsReview: 1
+verificationAttempts: 11
+verificationReviewsCreated: 11
+d1RowsRead: 5419
+d1RowsWritten: 547
+logicalEvidenceBytes: 91838
+averageEvidenceBytesPerEntry: 7653.166666666667
+averageSourcesPerEntry: 2.5833333333333335
 apaValidationFailures: 0
 apaMetadataCorrectionsBeforeVerification: 1
 manualHumanReviewEvents: 0
-articleRevisionsProposed: 0
+articleRevisionsProposed: 1
 ```
 
-Checkpoint detallado: `06 Pilot 20 Checkpoint 5 a 8.md`.
+Checkpoint detallado: `07 Pilot 20 Checkpoint 9 a 12.md`.
 
-Observación: el retry/enrichment de la entrada 6 ejercitó dedupe/idempotencia live sin cambiar IDs; la reutilización cross-entry de una misma Source sigue pendiente de observación.
+Hallazgo principal:
 
-Decisión: **PASS — continuar secuencialmente con entradas 9–12.**
+- `MLS-V04-0174` permanece `SOURCED + needsReview`;
+- el guard bloqueó VERIFIED por un conflicto sustantivo;
+- se creó una revisión propuesta sin overwrite;
+- las entradas 10–12 sí alcanzaron VERIFIED;
+- se detectó además que un DOI de obra compartido por varias fichas puede ser una identidad demasiado gruesa para Source Registry; se mitigó usando canonical URL para la ficha específica.
+
+Decisión: **PASS WITH FINDING — continuar secuencialmente con entradas 13–16.**
+
+No resolver la entrada 9 fingiendo revisión humana. No integrar la revisión propuesta automáticamente.
 
 No se autoriza Gate 100 ni migración masiva.
