@@ -228,50 +228,52 @@ No avanzar a 100 si:
 
 ## 11. Estado actual
 
-**IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20).**
+**IN PROGRESS — CHECKPOINT 13–16 PASS WITH FINDING (16/20).**
 
 Acumulado:
 
 ```yaml
-entriesProcessed: 12
-entriesVerified: 11
+entriesProcessed: 16
+entriesVerified: 14
+entriesSourcedNotVerified: 2
 entriesSourcedNeedsReview: 1
-sourcesCreated: 31
+sourcesCreated: 44
 sourceReuseOperations: 2
 sourceMetadataUpdates: 1
 crossEntrySourceReuse: 0
-claimsCreated: 31
+claimsCreated: 43
 claimReuseOperations: 2
-claimsVerifiedByCoverage: 31
-evidenceLinks: 42
+claimsVerifiedByCoverage: 42
+evidenceLinks: 64
 evidenceLinkReuseOperations: 3
 evidenceConflicts: 1
 needsReview: 1
-verificationAttempts: 11
-verificationReviewsCreated: 11
-d1RowsRead: 5419
-d1RowsWritten: 547
-logicalEvidenceBytes: 91838
-averageEvidenceBytesPerEntry: 7653.166666666667
-averageSourcesPerEntry: 2.5833333333333335
+verificationAttempts: 14
+verificationReviewsCreated: 14
+d1RowsRead: 7325
+d1RowsWritten: 785
+logicalEvidenceBytes: 134815
+averageEvidenceBytesPerEntry: 8425.9375
+averageSourcesPerEntry: 2.75
 apaValidationFailures: 0
 apaMetadataCorrectionsBeforeVerification: 1
 manualHumanReviewEvents: 0
-articleRevisionsProposed: 1
+articleRevisionsProposed: 2
 ```
 
-Checkpoint detallado: `07 Pilot 20 Checkpoint 9 a 12.md`.
+Checkpoint detallado: `08 Pilot 20 Checkpoint 13 a 16.md`.
 
-Hallazgo principal:
+Hallazgos principales:
 
-- `MLS-V04-0174` permanece `SOURCED + needsReview`;
-- el guard bloqueó VERIFIED por un conflicto sustantivo;
-- se creó una revisión propuesta sin overwrite;
-- las entradas 10–12 sí alcanzaron VERIFIED;
-- se detectó además que un DOI de obra compartido por varias fichas puede ser una identidad demasiado gruesa para Source Registry; se mitigó usando canonical URL para la ficha específica.
+- `MLS-V04-0174` permanece `SOURCED + needsReview` por conflicto sustantivo; su revisión propuesta sigue sin integrar.
+- `MLS-V07-0813` permanece `SOURCED` porque 3/4 claims sustanciales tienen cobertura suficiente, mientras la afirmación fuerte de que 啦 causa por sí sola suavización y una lista fija de tonos quedó como evidence gap.
+- El guard bloqueó VERIFIED en ambos casos por razones distintas: conflicto en entry 9 y claim sustancial no verificado en entry 16.
+- Se creó una segunda revisión propuesta sin overwrite.
+- Las entradas 13–15 sí alcanzaron VERIFIED.
+- El DOI compartido por una obra/contenedor sigue siendo un pendiente de política de identidad antes de Gate 100.
 
-Decisión: **PASS WITH FINDING — continuar secuencialmente con entradas 13–16.**
+Decisión: **PASS WITH FINDING — continuar secuencialmente con entradas 17–20.**
 
-No resolver la entrada 9 fingiendo revisión humana. No integrar la revisión propuesta automáticamente.
+No resolver las entradas 9 o 16 fingiendo revisión humana. No integrar revisiones propuestas automáticamente.
 
 No se autoriza Gate 100 ni migración masiva.
