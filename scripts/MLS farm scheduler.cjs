@@ -36,7 +36,7 @@ function preservedByPrefix(){
   return map;
 }
 async function ensureLedgers(){
-  const issues=await allIssues('all'),byPrefix=new Map();
+  const issues=await allIssues('open'),byPrefix=new Map();
   for(const issue of issues.filter(ledgerIssue)){
     const ledger=core.parseLedger(issue.body||'');if(ledger)byPrefix.set(ledger.prefix,{issue,ledger:core.normalizeLedger(ledger),dirty:false});
   }
