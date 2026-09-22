@@ -29,3 +29,18 @@ Important invariants:
 - preserve unrelated Scheduled tasks.
 
 If the protocol conflicts with informal remembered wording, the repository protocol wins.
+
+
+## MLS Farm commands
+
+When the user issues a command beginning with `MLS Farm`, read and follow:
+
+`MLS R32 EDITORIAL/MLS Farm Protocol R1.md`
+
+Important invariants:
+
+- create only canonical `MLS_FARM_COMMAND` envelopes;
+- do not revive legacy unmarked claims;
+- acknowledge a lease immediately with a worker heartbeat;
+- do not leave a live claim or lease behind when the chat turn ends;
+- preserve ledger terminal states and active lease overlap protection.
