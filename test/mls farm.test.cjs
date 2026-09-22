@@ -20,16 +20,30 @@ test('Farm claim parser defaults to 25 and caps at 100',()=>{
   assert.throws(()=>core.parseCommand(JSON.stringify({operation:'claim',requested:101,requestId:'request-12345678',workerId:'worker-12345678'})),/1 y 100/);
 });
 
-test('Farm lease is exactly 60 minutes since last accepted progress',()=>{
+test('Farm canonical command renderer emits MLS_FARM_COMMAND while legacy raw JSON remains readable',()=>{
+  const body=core.renderCommandBody({operation:'claim',requested:25,requestId:'request-12345678',workerId:'worker-12345678'});
+  assert.match(body,/MLS_FARM_COMMAND/);
+  assert.equal(core.parseCommand(body).requested,25);
+  assert.equal(core.parseCommand(JSON.stringify({operation:'reap'})).operation,'reap');
+});
+
+test('Farm requires ACK within 2 minutes and then renews a 60 minute lease',()=>{
   const state=core.makeBatchState({issueNumber:55,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'x'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
+  assert.equal(state.ackDeadlineAt,'2026-09-22T06:02:00.000Z');
+  assert.equal(state.acknowledgedAt,null);
   assert.equal(state.expiresAt,'2026-09-22T07:00:00.000Z');
-  const next=core.applyWorkerEvent(state,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T06:20:00.000Z',commentId:1});
+  assert.equal(core.isLeaseExpired(state,Date.parse('2026-09-22T06:02:00.001Z')),true);
+  const ack=core.applyWorkerEvent(state,{operation:'ack',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T06:01:00.000Z',commentId:1});
+  assert.equal(ack.acknowledgedAt,'2026-09-22T06:01:00.000Z');
+  assert.equal(ack.expiresAt,'2026-09-22T07:01:00.000Z');
+  const next=core.applyWorkerEvent(ack,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T06:20:00.000Z',commentId:2});
   assert.equal(next.expiresAt,'2026-09-22T07:20:00.000Z');
 });
 
-test('Farm rejects zombie worker event after lease expiry',()=>{
+test('Farm rejects zombie worker event after acknowledged lease expiry',()=>{
   const state=core.makeBatchState({issueNumber:56,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'x'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
-  assert.throws(()=>core.applyWorkerEvent(state,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T07:00:00.001Z',commentId:2}),e=>e.code==='LEASE_EXPIRED');
+  const ack=core.applyWorkerEvent(state,{operation:'ack',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T06:01:00.000Z',commentId:2});
+  assert.throws(()=>core.applyWorkerEvent(ack,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T07:01:00.001Z',commentId:3}),e=>e.code==='LEASE_EXPIRED');
 });
 
 test('Farm checkpoint is idempotent and terminal work survives expiration accounting',()=>{
@@ -39,16 +53,16 @@ test('Farm checkpoint is idempotent and terminal work survives expiration accoun
   ];
   const state=core.makeBatchState({issueNumber:57,requestId:'request-12345678',workerId:'worker-12345678',entries,now:'2026-09-22T06:00:00.000Z',token:'abc'});
   const ev={operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:57,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{}}}]};
-  const once=core.applyWorkerEvent(state,ev,{createdAt:'2026-09-22T06:10:00.000Z',commentId:3});
-  const twice=core.applyWorkerEvent(once,ev,{createdAt:'2026-09-22T06:11:00.000Z',commentId:4});
+  const once=core.applyWorkerEvent(state,ev,{createdAt:'2026-09-22T06:01:00.000Z',commentId:3});
+  const twice=core.applyWorkerEvent(once,ev,{createdAt:'2026-09-22T06:02:00.000Z',commentId:4});
   assert.equal(Object.keys(twice.results).length,1);
   assert.deepEqual(core.pendingCodes(twice),['MLS-V10-0002']);
 });
 
 test('Farm rejects conflicting second result for same code',()=>{
   const state=core.makeBatchState({issueNumber:58,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'a'},{code:'MLS-V10-0002',language:'espanol-guatemala',n:2,path:'b'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
-  const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{x:1}}}]},{createdAt:'2026-09-22T06:10:00.000Z',commentId:5});
-  assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',sources:[],claims:[],links:[],conflicts:[],provenance:{x:2}}}]},{createdAt:'2026-09-22T06:11:00.000Z',commentId:6}),e=>e.code==='RESULT_HASH_CONFLICT');
+  const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{x:1}}}]},{createdAt:'2026-09-22T06:01:00.000Z',commentId:5});
+  assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',sources:[],claims:[],links:[],conflicts:[],provenance:{x:2}}}]},{createdAt:'2026-09-22T06:02:00.000Z',commentId:6}),e=>e.code==='RESULT_HASH_CONFLICT');
 });
 
 test('Farm ledger excludes submitted, review and preserved entries from future claims',()=>{
@@ -81,6 +95,8 @@ test('Farm workflows use GitHub Issues, per-batch concurrency and scheduled 15-m
   assert.match(scheduler,/issues:\s*\n\s*types:/);
   assert.match(scheduler,/cron: '\*\/15 \* \* \* \*'/);
   assert.match(scheduler,/group: mls-farm-scheduler/);
+  assert.match(fs.readFileSync('scripts/MLS farm scheduler.cjs','utf8'),/drainPendingCommands/);
+  assert.match(fs.readFileSync('scripts/MLS farm worker.cjs','utf8'),/renderCommandBody\(\{operation:'reap'\}\)/);
   assert.match(worker,/issue_comment:/);
   assert.match(worker,/group: mls-farm-batch-\$\{\{ github\.event\.issue\.number \}\}/);
   for(const source of [scheduler,worker,fs.readFileSync('scripts/MLS farm scheduler.cjs','utf8'),fs.readFileSync('scripts/MLS farm worker.cjs','utf8')]){

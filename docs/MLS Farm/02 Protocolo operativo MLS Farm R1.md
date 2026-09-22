@@ -27,16 +27,22 @@ Cloudflare no forma parte de este flujo.
 - corpus: 10,133 entradas;
 - batch: 1–100;
 - default: 25;
-- lease: 60 minutos desde último progreso válido;
+- claim TTL: 90 segundos;
+- ACK del worker: máximo 2 minutos desde `claimedAt`;
+- lease confirmado: 60 minutos desde último progreso válido;
 - reaper: cada 15 minutos;
 - checkpoint: 1–10 entradas;
 - workers simultáneos: limitados por GitHub/ChatGPT, no por un lock editorial global.
 
 ## Estados
 
+Comando:
+
+`claim → leased | stale | complete | rejected`
+
 Batch:
 
-`leased → done | expired | cancelled`
+`leased (awaiting ACK) → leased (acknowledged) → done | expired | cancelled`
 
 Resultado por entrada:
 
@@ -67,9 +73,20 @@ Un resultado posterior diferente para el mismo código dentro del mismo lease fa
 
 ## Worker zombi
 
-Un comentario posterior a `expiresAt` no renueva el lote.
+Un lease sin `ack` antes de `ackDeadlineAt` se considera abandonado aunque su `expiresAt` de 60 minutos todavía no haya llegado.
+
+Después del ACK, un comentario posterior a `expiresAt` no renueva el lote.
 
 Un batch nuevo utiliza otro issue, otro token y otro epoch.
+
+
+## Recuperación de comandos
+
+Todos los comandos operativos nuevos usan el marcador canónico `MLS_FARM_COMMAND`.
+
+El Scheduler drena en una sola ruta idempotente `claim`, `status_global` y `reap`. Los claims legacy con JSON suelto se pueden leer para saneamiento, pero si ya excedieron el TTL se cierran como `STALE` y nunca se convierten retroactivamente en leases.
+
+Cuando el último checkpoint deja el batch listo para cerrar, el worker crea un comando canónico `reap` para que el Scheduler consolide los resultados y cierre el Issue sin depender únicamente del cron.
 
 ## Coste Cloudflare
 

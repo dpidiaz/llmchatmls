@@ -19,6 +19,7 @@ async function gh(method,endpoint,body){
   return data;
 }
 async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
+async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});}
 
 async function main(){
   const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
@@ -30,6 +31,10 @@ async function main(){
     const farmEvent=core.parseWorkerEvent(comment.body||'');
     const next=core.applyWorkerEvent(state,farmEvent,{createdAt:comment.created_at,commentId:comment.id});
     await updateIssue(issue.number,{body:core.renderBatchBody(next)});
+    const becameClosable=(next.readyToClose&&!state.readyToClose)||(next.cancelRequested&&!state.cancelRequested);
+    if(becameClosable){
+      await createIssue('[MLS Farm] reap '+next.batchId,core.renderCommandBody({operation:'reap'}));
+    }
   }catch(error){
     const next={...state,lastRejectedEvent:{operation:'comment',commentId:Number(comment.id),reason:error.code||'FARM_EVENT_REJECTED',message:error.message,at:comment.created_at}};
     await updateIssue(issue.number,{body:core.renderBatchBody(next)});
