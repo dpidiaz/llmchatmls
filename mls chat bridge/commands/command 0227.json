@@ -1,0 +1,108 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V06-0010",
+    "articleGeneratedAt": "2026-09-19T07:23:13.752Z",
+    "articleHash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "bunka-romanization-2025",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "ローマ字のつづり方",
+        "institution": "文化庁",
+        "publicationYear": 2025,
+        "publicationDate": "2025-12-22",
+        "canonicalUrl": "https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/roma/index2.html",
+        "language": "ja",
+        "topics": [
+          "ローマ字",
+          "ひらがな",
+          "サ行",
+          "し",
+          "shi"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "jpf-madrid-a1-2018",
+        "sourceType": "report",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "まるごと 日本のことばと文化 入門 A1 文法解説書",
+        "institution": "国際交流基金マドリード日本文化センター",
+        "publicationYear": 2018,
+        "canonicalUrl": "https://md.jpf.go.jp/userfiles/file/2018/Lengua%20Japonesa/Gramatica/A1-JP_rev.pdf",
+        "language": "ja",
+        "topics": [
+          "ひらがな",
+          "発音",
+          "ローマ字",
+          "し",
+          "shi",
+          "si"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-sagyo",
+        "sectionKey": "En pocas palabras / Cómo funciona",
+        "summary": "La fila さ行 del kana básico contiene さ・し・す・せ・そ. En la romanización oficial japonesa vigente desde 2025 estas formas se representan sa, shi, su, se, so.",
+        "claimType": "orthography",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-shi-pronunciation",
+        "sectionKey": "Observación importante",
+        "summary": "し pertenece a la fila de s, pero en materiales de enseñanza su pronunciación se representa como shi y no como una secuencia española/regular 'si'. La grafía romanizada si ha existido en otros sistemas, por lo que shi frente a si es una diferencia de romanización y no dos kana distintos.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-sagyo",
+        "sourceRef": "bunka-romanization-2025",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "本表 — サ シ ス セ ソ / sa shi su se so"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-sagyo",
+        "sourceRef": "jpf-madrid-a1-2018",
+        "supportType": "supports",
+        "locator": {
+          "page": "4",
+          "section": "各かな文字の発音上の注意"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-shi-pronunciation",
+        "sourceRef": "jpf-madrid-a1-2018",
+        "supportType": "supports",
+        "locator": {
+          "page": "4",
+          "section": "「し／シ」は「s」の行にありますが「si」ではなく「shi」の音です"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-shi-pronunciation",
+        "sourceRef": "bunka-romanization-2025",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "本表 / （付）対照表 — シ: shi / si"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
