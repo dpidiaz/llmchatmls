@@ -4,11 +4,14 @@ const crypto=require('node:crypto');
 const fs=require('node:fs');
 const path=require('node:path');
 
-const FARM_VERSION='1.0';
+const FARM_VERSION='1.1';
 const FARM_DEFAULT_BATCH=25;
 const FARM_MAX_BATCH=100;
+const FARM_CLAIM_TTL_MS=90*1000;
+const FARM_ACK_TTL_MS=5*60*1000;
 const FARM_LEASE_TTL_MS=60*60*1000;
-const FARM_REAPER_CADENCE_MINUTES=15;
+const FARM_REAPER_CADENCE_MINUTES=5;
+const FARM_COMMAND_MARKER='MLS_FARM_COMMAND';
 const FARM_EVENT_MARKER='MLS_FARM_EVENT';
 const FARM_STATE_MARKER='MLS_FARM_STATE';
 const FARM_LEDGER_MARKER='MLS_FARM_LEDGER';
@@ -83,6 +86,9 @@ function extractMarkedJson(text,marker){
   return parseJsonLoose(raw);
 }
 function renderMarked(marker,value){return '<!-- '+marker+'\n'+JSON.stringify(value,null,2)+'\n-->';}
+function renderCommandBody(command){
+  return ['## MLS Farm command','',renderMarked(FARM_COMMAND_MARKER,command)].join('\n');
+}
 function renderBatchBody(state){
   const terminal=Object.keys(state.results||{}).length;
   const pending=Math.max(0,(state.entries||[]).length-terminal);
@@ -94,6 +100,8 @@ function renderBatchBody(state){
     '**Asignadas:** '+state.entries.length+'  ',
     '**Resultados recibidos:** '+terminal+'  ',
     '**Pendientes:** '+pending+'  ',
+    '**Worker acknowledged:** '+(state.acknowledgedAt?'sí':'no')+'  ',
+    '**Ack deadline:** '+(state.ackDeadlineAt||'legacy')+'  ',
     '**Lease expira:** '+state.expiresAt+'  ',
     '',
     'Este issue es estado operativo de MLS Farm. No edites manualmente el bloque de control.',
@@ -111,7 +119,7 @@ function renderLedgerBody(ledger){
   ].join('\n');
 }
 function parseCommand(body){
-  const value=extractMarkedJson(body,'MLS_FARM_COMMAND');
+  const value=extractMarkedJson(body,FARM_COMMAND_MARKER);
   const operation=String(value.operation||'').trim().toLowerCase();
   if(!operation)throw farmError('MISSING_OPERATION','Falta operation.');
   if(operation==='claim'){
@@ -176,16 +184,21 @@ function addTerminalToLedger(ledger,code,status){
 }
 function makeBatchState({issueNumber,requestId,workerId,workerLogin=null,entries,now=iso(),token=randomToken()}){
   const claimedAt=iso(now),batchId='MLS-FARM-'+String(issueNumber).padStart(6,'0');
+  const ackDeadlineAt=plusMs(claimedAt,FARM_ACK_TTL_MS);
   return {
     kind:'batch',version:FARM_VERSION,batchId,issueNumber:Number(issueNumber),requestId,workerId,workerLogin:workerLogin?String(workerLogin):null,
-    leaseToken:token,leaseEpoch:Number(issueNumber),status:'leased',claimedAt,lastHeartbeatAt:claimedAt,
-    expiresAt:plusMs(claimedAt,FARM_LEASE_TTL_MS),entries:entries.map((x,i)=>({...x,position:i+1,leaseEpoch:Number(issueNumber)})),
+    leaseToken:token,leaseEpoch:Number(issueNumber),status:'leased',claimedAt,acknowledgedAt:null,ackDeadlineAt,lastHeartbeatAt:null,
+    expiresAt:ackDeadlineAt,entries:entries.map((x,i)=>({...x,position:i+1,leaseEpoch:Number(issueNumber)})),
     results:{},conflicts:[],readyToClose:false,cancelRequested:false,lastRejectedEvent:null,closedAt:null
   };
 }
+function isClaimStale(createdAt,at=Date.now()){
+  const created=parseDate(createdAt);
+  return created===null||Number(at)-created>FARM_CLAIM_TTL_MS;
+}
 function isLeaseExpired(state,at=Date.now()){
   if(!state||state.status!=='leased')return true;
-  const expiry=parseDate(state.expiresAt);
+  const expiry=!state.acknowledgedAt&&state.ackDeadlineAt?parseDate(state.ackDeadlineAt):parseDate(state.expiresAt);
   return expiry===null||Number(at)>expiry;
 }
 function pendingCodes(state){const done=new Set(Object.keys(state.results||{}));return (state.entries||[]).map(x=>x.code).filter(code=>!done.has(code));}
@@ -196,7 +209,7 @@ function validateLeaseEvent(state,event,createdAt){
     throw farmError('LEASE_TOKEN_MISMATCH','batchId/leaseToken no coincide.',409);
   const when=parseDate(createdAt);
   if(when===null)throw farmError('INVALID_EVENT_TIME','Timestamp de comentario inválido.',409);
-  if(when>parseDate(state.expiresAt))throw farmError('LEASE_EXPIRED','El evento llegó después del vencimiento del lease.',409);
+  if(isLeaseExpired(state,when))throw farmError('LEASE_EXPIRED','El evento llegó después del vencimiento del lease.',409);
   return when;
 }
 function validateResultShape(result,code){
@@ -211,6 +224,7 @@ function validateResultShape(result,code){
 function resultDigest(result){return sha256(stableStringify(result));}
 function applyWorkerEvent(state,event,{createdAt,commentId}){
   const next=structuredClone(state),when=validateLeaseEvent(next,event,createdAt),at=iso(when);
+  if(!next.acknowledgedAt)next.acknowledgedAt=at;
   if(event.operation==='cancel'){
     next.cancelRequested=true;next.lastHeartbeatAt=at;next.expiresAt=at;return next;
   }
@@ -280,10 +294,10 @@ function preservedPilotCodes(root='.'){
 }
 
 module.exports={
-  FARM_VERSION,FARM_DEFAULT_BATCH,FARM_MAX_BATCH,FARM_LEASE_TTL_MS,FARM_REAPER_CADENCE_MINUTES,
-  FARM_EVENT_MARKER,FARM_STATE_MARKER,FARM_LEDGER_MARKER,LANGUAGE_ORDER,
+  FARM_VERSION,FARM_DEFAULT_BATCH,FARM_MAX_BATCH,FARM_CLAIM_TTL_MS,FARM_ACK_TTL_MS,FARM_LEASE_TTL_MS,FARM_REAPER_CADENCE_MINUTES,
+  FARM_COMMAND_MARKER,FARM_EVENT_MARKER,FARM_STATE_MARKER,FARM_LEDGER_MARKER,LANGUAGE_ORDER,
   farmError,iso,parseDate,plusMs,randomToken,sha256,stableStringify,assertCode,codeParts,corpusEntries,
-  parseJsonLoose,extractMarkedJson,renderMarked,renderBatchBody,renderLedgerBody,parseCommand,parseFarmState,parseLedger,parseWorkerEvent,
-  initialLedger,normalizeLedger,terminalCodesFromLedgers,addTerminalToLedger,makeBatchState,isLeaseExpired,pendingCodes,
+  parseJsonLoose,extractMarkedJson,renderMarked,renderCommandBody,renderBatchBody,renderLedgerBody,parseCommand,parseFarmState,parseLedger,parseWorkerEvent,
+  initialLedger,normalizeLedger,terminalCodesFromLedgers,addTerminalToLedger,makeBatchState,isClaimStale,isLeaseExpired,pendingCodes,
   validateLeaseEvent,validateResultShape,resultDigest,applyWorkerEvent,protectedCodesFromBatches,selectNextEntries,farmProgress,preservedPilotCodes
 };
