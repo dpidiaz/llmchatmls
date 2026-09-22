@@ -118,50 +118,76 @@ async function reject(issue,error){
   await updateIssue(issue.number,{title:'[MLS Farm][REJECTED] '+issue.number,body:renderResponse('MLS Farm rejected',payload),state:'closed',state_reason:'not_planned'});
 }
 function pendingCommandIssue(issue){
-  return farmIssue(issue)&&!ledgerIssue(issue)&&/<!--\s*MLS_FARM_COMMAND\b/.test(String(issue.body||''));
+  if(!farmIssue(issue)||ledgerIssue(issue)||core.parseFarmState(issue.body||''))return false;
+  const body=String(issue.body||''),title=String(issue.title||'');
+  return /<!--\s*MLS_FARM_COMMAND\b/.test(body)||/^\[MLS Farm\].*\b(claim|status|reap)\b/i.test(title);
 }
-async function drainPendingClaims(ledgers){
+function claimIsStale(issue,nowMs=Date.now()){
+  const created=core.parseDate(issue?.created_at);
+  return created===null||Number(nowMs)-created>core.FARM_CLAIM_TTL_MS;
+}
+async function closeStaleClaim(issue,command,nowMs){
+  const payload={ok:false,operation:'claim',stale:true,error:'CLAIM_TTL_EXPIRED',message:'El claim venció antes de obtener lease; no se reservaron entradas.',requestId:command.requestId,requested:command.requested,closedAt:core.iso(nowMs)};
+  await updateIssue(issue.number,{title:'[MLS Farm][STALE] '+issue.number,body:renderResponse('MLS Farm stale claim',payload),state:'closed',state_reason:'not_planned'});
+}
+async function drainPendingCommands(ledgers){
   const now=Date.now(),s=await sweep(ledgers,now),corpus=core.corpusEntries(root),terminal=terminalSet(ledgers);
-  const activeStates=s.active.map(x=>x.state);
+  const activeStates=s.active.map(x=>x.state),reaped=[...s.closed];
   const issues=(await allIssues('open')).filter(pendingCommandIssue).sort((a,b)=>Number(a.number)-Number(b.number));
   const drained=[];
   for(const issue of issues){
     let command;
     try{command=core.parseCommand(issue.body||'');}
     catch(error){await reject(issue,error);drained.push({issueNumber:issue.number,status:'rejected'});continue;}
-    if(command.operation!=='claim')continue;
-    const protectedCodes=core.protectedCodesFromBatches(activeStates);
-    const entries=core.selectNextEntries(corpus,terminal,protectedCodes,command.requested);
-    if(!entries.length){
-      const progress=core.farmProgress({corpus,ledgers:[...ledgers.values()].map(x=>x.ledger),batches:activeStates});
-      await updateIssue(issue.number,{title:'[MLS Farm][COMPLETE] sin trabajo pendiente',body:renderResponse('MLS Farm complete',{ok:true,operation:'claim',assigned:0,progress}),state:'closed',state_reason:'completed'});
-      drained.push({issueNumber:issue.number,status:'complete',assigned:0});
+
+    if(command.operation==='claim'){
+      if(claimIsStale(issue,now)){
+        await closeStaleClaim(issue,command,now);
+        drained.push({issueNumber:issue.number,status:'stale'});
+        continue;
+      }
+      const protectedCodes=core.protectedCodesFromBatches(activeStates);
+      const entries=core.selectNextEntries(corpus,terminal,protectedCodes,command.requested);
+      if(!entries.length){
+        const progress=core.farmProgress({corpus,ledgers:[...ledgers.values()].map(x=>x.ledger),batches:activeStates});
+        await updateIssue(issue.number,{title:'[MLS Farm][COMPLETE] sin trabajo pendiente',body:renderResponse('MLS Farm complete',{ok:true,operation:'claim',assigned:0,progress}),state:'closed',state_reason:'completed'});
+        drained.push({issueNumber:issue.number,status:'complete',assigned:0});
+        continue;
+      }
+      const batch=core.makeBatchState({issueNumber:issue.number,requestId:command.requestId,workerId:command.workerId,workerLogin:issue.user?.login||null,entries,now:core.iso(now)});
+      await updateIssue(issue.number,{title:'[MLS Farm][LEASED] '+batch.batchId,body:core.renderBatchBody(batch)});
+      activeStates.push(batch);
+      drained.push({issueNumber:issue.number,status:'leased',batchId:batch.batchId,assigned:entries.length,ackDeadlineAt:batch.ackDeadlineAt});
       continue;
     }
-    const batch=core.makeBatchState({issueNumber:issue.number,requestId:command.requestId,workerId:command.workerId,workerLogin:issue.user?.login||null,entries,now:core.iso(now)});
-    await updateIssue(issue.number,{title:'[MLS Farm][LEASED] '+batch.batchId,body:core.renderBatchBody(batch)});
-    activeStates.push(batch);
-    drained.push({issueNumber:issue.number,status:'leased',batchId:batch.batchId,assigned:entries.length});
+
+    if(command.operation==='status_global'){
+      const progress=core.farmProgress({corpus,ledgers:[...ledgers.values()].map(x=>x.ledger),batches:activeStates});
+      await updateIssue(issue.number,{title:'[MLS Farm][STATUS] global',body:renderResponse('MLS Farm status',{ok:true,progress,reaped}),state:'closed',state_reason:'completed'});
+      drained.push({issueNumber:issue.number,status:'status'});
+      continue;
+    }
+
+    if(command.operation==='reap'){
+      const progress=core.farmProgress({corpus,ledgers:[...ledgers.values()].map(x=>x.ledger),batches:activeStates});
+      await updateIssue(issue.number,{title:'[MLS Farm][REAP] complete',body:renderResponse('MLS Farm reap',{ok:true,reaped,progress}),state:'closed',state_reason:'completed'});
+      drained.push({issueNumber:issue.number,status:'reap'});
+    }
   }
-  return drained;
+  return {drained,reaped};
 }
 async function main(){
   const eventName=process.env.GITHUB_EVENT_NAME||'',ledgers=await ensureLedgers();
-  if(eventName==='schedule'||eventName==='workflow_dispatch'){await handleReap(null,ledgers);return;}
-  const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-  const issue=event.issue;if(!issue||!String(issue.title||'').startsWith('[MLS Farm]')||String(issue.title||'').startsWith('[MLS Farm Ledger]'))return;
+  const result=await drainPendingCommands(ledgers);
+  if(result.drained.length)console.log(JSON.stringify({ok:true,...result}));
 
-  const drained=await drainPendingClaims(ledgers);
-  if(drained.length)console.log(JSON.stringify({ok:true,drained}));
-
-  try{
-    const command=core.parseCommand(issue.body||'');
-    if(command.operation==='claim')return;
-    if(command.operation==='status_global')return await handleStatus(issue,ledgers);
-    if(command.operation==='reap')return await handleReap(issue,ledgers);
-  }catch(error){
-    if(pendingCommandIssue(issue)&&drained.some(x=>x.issueNumber===issue.number))return;
-    await reject(issue,error);
+  if(eventName==='schedule'||eventName==='workflow_dispatch'){
+    await handleReap(null,ledgers);
+    return;
   }
+
+  const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
+  const issue=event.issue;
+  if(!issue||!String(issue.title||'').startsWith('[MLS Farm]')||String(issue.title||'').startsWith('[MLS Farm Ledger]'))return;
 }
 main().catch(error=>{console.error(error);process.exitCode=1});
