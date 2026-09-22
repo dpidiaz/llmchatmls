@@ -22,7 +22,7 @@ function referenceDate(source,locale='es-GT'){
   if(locale.startsWith('es'))return day?'('+y+', '+day+' de '+name+').':'('+y+', '+name+').';
   return day?'('+y+', '+name+' '+day+').':'('+y+', '+name+').';
 }
-function doiOrUrl(source){if(source.doi)return 'https://doi.org/'+String(source.doi).replace(/^https?:\/\/(?:dx\.)?doi\.org\//i,'');return clean(source.canonicalUrl)||'';}
+function doiOrUrl(source){if(source.doi&&source.doiScope!=='container')return 'https://doi.org/'+String(source.doi).replace(/^https?:\/\/(?:dx\.)?doi\.org\//i,'');return clean(source.canonicalUrl)||'';}
 function same(a,b){return clean(a).toLocaleLowerCase('es')===clean(b).toLocaleLowerCase('es');}
 function validateApaSource(source={}){
   const errors=[],warnings=[];const t=source.sourceType;
@@ -49,7 +49,12 @@ function validateApaSource(source={}){
     if(!clean(source.containerTitle))errors.push('container_title_required');
     if(!clean(source.publisher)&&!clean(source.canonicalUrl))errors.push('reference_container_source_required');
   }
-  if(source.doi&&!foundation.normalizeDoi(source.doi))errors.push('invalid_doi');
+  const normalizedDoi=source.doi?foundation.normalizeDoi(source.doi):null;
+  if(source.doi&&!normalizedDoi)errors.push('invalid_doi');
+  const doiScope=clean(source.doiScope).toLowerCase();
+  if(doiScope&&!source.doi)errors.push('doi_scope_requires_doi');
+  if(doiScope&&!['resource','container'].includes(doiScope))errors.push('invalid_doi_scope');
+  if(normalizedDoi&&doiScope==='container'&&!clean(source.canonicalUrl))errors.push('container_doi_requires_canonical_url');
   if(source.canonicalUrl&&!foundation.normalizeUrl(source.canonicalUrl))errors.push('invalid_url');
   return {valid:errors.length===0,citationReady:errors.length===0&&(!source.status||source.status==='active'),errors,warnings,style:foundation.MLS_CITATION_STYLE,edition:foundation.MLS_CITATION_EDITION,profile:foundation.MLS_CITATION_PROFILE,rendererVersion:foundation.MLS_CITATION_RENDERER_VERSION};
 }
