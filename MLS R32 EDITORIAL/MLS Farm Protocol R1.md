@@ -64,6 +64,16 @@ It also:
 - processes orphaned marked `status_global` and `reap` commands idempotently;
 - runs a scheduled recovery sweep every 5 minutes.
 
+## Execution environment invariant
+
+The natural-language command `MLS Farm siguientes N` includes an explicit execution constraint:
+
+> **CHAT ONLY — NO CHATGPT WORK.**
+
+When this command is issued, the agent MUST keep execution in the current ChatGPT conversation. It MUST NOT hand off, redirect, or suggest moving the task to ChatGPT Work merely because repository operations, long processing, or multiple tool calls are involved. This constraint is part of the command itself and does not need to be repeated by the user each time.
+
+Only an explicit override in the same user request may change this rule.
+
 ## Chat worker rule
 
 A ChatGPT turn is not a persistent background worker.
