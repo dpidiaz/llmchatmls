@@ -32,7 +32,10 @@ R33 es aditivo. Las entradas R32 continúan siendo utilizables aunque su estado 
    Evaluación posterior al piloto. Decisión vigente: **CORRECT AND REPEAT**; Gate 100 bloqueado hasta cerrar E1–E5.
 
 8. [11 Correction Repeat E1 E2 E4 E5](./11%20Correction%20Repeat%20E1%20E2%20E4%20E5.md)  
-   Evidencia reproducible del repeat dirigido: E1 y E2 PASS live; E4 mitigado con batching; E5 certificado en código/CI; E3 permanece reservado para review humano real.
+   Evidencia reproducible del repeat dirigido: E1, E2, E4 y E5 PASS; E3 permanece reservado para review humano real.
+
+9. [12 Gate 100 Scalability Preparation](./12%20Gate%20100%20Scalability%20Preparation.md)  
+   Preparación batch-first y exception-first para que Gate 100 mida escalabilidad real: Source Registry first, reuse candidates, triage de hasta 50 entradas y discovery externo solo cuando sea necesario.
 
 ## Contexto R32 inspeccionado al crear esta documentación
 

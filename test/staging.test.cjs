@@ -732,6 +732,7 @@ test('predeploy installs staging after chat runtime and generates catalog last',
 test('MLS Chat Bridge exposes only the explicit staging and Evidence allowlist and no arbitrary URL input', async () => {
   assert.deepEqual(Object.keys(chatBridge.MLS_CHAT_BRIDGE_OPERATIONS).sort(),[
     'cancelarLoteStagingMLS',
+    'candidatosReuseEvidenceMLS',
     'consumerEvidenceEntradaMLS',
     'entradaEvidenceMLS',
     'estadoStagingMLS',
@@ -744,6 +745,7 @@ test('MLS Chat Bridge exposes only the explicit staging and Evidence allowlist a
     'revisarEvidenceMLS',
     'siguienteContextoStagingMLS',
     'stagearBorradorMLS',
+    'triageBatchEvidenceMLS',
     'validarBorradorStagingMLS',
     'validarEvidenceMLS',
     'verificarEvidenceMLS'

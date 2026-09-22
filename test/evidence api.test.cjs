@@ -53,3 +53,6 @@ test('evidence api: container DOI survives Source Registry roundtrip without bec
 });
 
 test('evidence api: consumer endpoint is read-only and conservative for UNSOURCED',async()=>{const s=setup();const r=await json(await call(s,'/api/wiki/editorial/evidence/consumer?code=MLS-V10-0020'));assert.equal(r.status,200);assert.equal(r.body.evidence.status,'UNSOURCED');assert.match(r.body.evidence.disclosure,/fundamentación bibliográfica/);});
+
+test('evidence api: reuse candidates endpoint is read-only and never auto-approves',async()=>{const s=setup();const r=await json(await call(s,'/api/wiki/editorial/evidence/reuse-candidates',{method:'POST',body:{language:'espanol-guatemala',topics:['gerundio'],limit:5}}));assert.equal(r.status,200);assert.equal(r.body.contract.approved,false);assert.equal(r.body.telemetry.d1.d1RowsWritten,null);});
+test('evidence api: batch triage remains non-authorizing',async()=>{const s=setup();const r=await json(await call(s,'/api/wiki/editorial/evidence/triage',{method:'POST',body:{entries:[{code:'MLS-V10-0020',topics:['gerundio']}],candidateLimit:5}}));assert.equal(r.status,200);assert.equal(r.body.requested,1);assert.equal(r.body.gate100Authorized,false);assert.equal(r.body.items[0].lane,'needs_evidence');assert.equal(r.body.telemetry.d1.d1RowsWritten,null);});

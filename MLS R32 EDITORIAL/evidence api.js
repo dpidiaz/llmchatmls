@@ -8,6 +8,7 @@ const apa=require('./evidence apa.js');
 const provenance=require('./evidence provenance.js');
 const telemetry=require('./evidence telemetry.js');
 const consumer=require('./evidence consumer.js');
+const scale=require('./evidence scale.js');
 
 function fail(code,status,message=code,extra={}){const e=new Error(message);e.code=code;e.status=status;Object.assign(e,extra);return e;}
 function trim(v,max=200){return String(v??'').normalize('NFKC').replace(/\s+/gu,' ').trim().slice(0,max);}
@@ -151,6 +152,8 @@ async function handleMlsEvidence(request,env,url,runtime){
     if(route==='/provenance'&&request.method==='GET')return respond({ok:true,provenance:await provenance.composeArticleProvenance(measuredEnv,url.searchParams.get('code'))});
     if(route==='/metrics'&&request.method==='GET')return respond({ok:true,storage:await telemetry.measureEntryLogicalBytes(measuredEnv,url.searchParams.get('code'))});
     if(route==='/consumer'&&request.method==='GET')return respond({ok:true,evidence:consumer.publicSummary(await consumer.contextForEntry(measuredEnv,url.searchParams.get('code')))});
+    if(route==='/reuse-candidates'&&request.method==='POST'){const body=await runtime.body(request);return respond({ok:true,...await scale.reusableSourceCandidates(measuredEnv,body)});}
+    if(route==='/triage'&&request.method==='POST'){const body=await runtime.body(request);return respond({ok:true,...await scale.batchTriage(measuredEnv,body)});}
     if(route==='/validate'&&request.method==='POST'){const body=await runtime.body(request);return respond(await validateEntry(measuredEnv,body.code));}
     if(route==='/proposal'&&request.method==='POST'){const body=await runtime.body(request);return respond(await applyProposal(measuredEnv,body));}
     if(route==='/verify'&&request.method==='POST'){const body=await runtime.body(request);const out=await validator.verifyEntryEvidence(measuredEnv,body.code,{expectedEvidenceRevision:body.expectedEvidenceRevision,reviewerType:body.reviewerType||'chatgpt',reviewer:body.reviewer,verificationMethod:body.verificationMethod||'manual_source_match',notes:body.notes,runId:body.runId});return respond({ok:true,...out});}

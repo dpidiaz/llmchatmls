@@ -63,3 +63,13 @@ test('MLS Chat Bridge operational definition includes all Evidence correction op
     assert.ok(bridge.MLS_CHAT_BRIDGE_OPERATIONS[id],id);
   }
 });
+
+
+test('bridge: Gate 100 read-only scalability operations are allowlisted', async()=> {
+  assert.ok(bridge.MLS_CHAT_BRIDGE_OPERATIONS.candidatosReuseEvidenceMLS);
+  assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.candidatosReuseEvidenceMLS.method,'POST');
+  assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.candidatosReuseEvidenceMLS.pathname,'/api/wiki/editorial/evidence/reuse-candidates');
+  assert.ok(bridge.MLS_CHAT_BRIDGE_OPERATIONS.triageBatchEvidenceMLS);
+  assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.triageBatchEvidenceMLS.method,'POST');
+  assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.triageBatchEvidenceMLS.pathname,'/api/wiki/editorial/evidence/triage');
+});
