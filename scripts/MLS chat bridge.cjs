@@ -56,6 +56,11 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/wiki/editorial/evidence/metrics',
     input: 'code'
   },
+  consumerEvidenceEntradaMLS: {
+    method: 'GET',
+    pathname: '/api/wiki/editorial/evidence/consumer',
+    input: 'code'
+  },
   validarEvidenceMLS: {
     method: 'POST',
     pathname: '/api/wiki/editorial/evidence/validate',
