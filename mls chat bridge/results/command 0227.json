@@ -1,0 +1,153 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V06-0010",
+    "article": {
+      "code": "MLS-V06-0010",
+      "articleGeneratedAt": "2026-09-19T07:23:13.752Z",
+      "articleHash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+      "language": "japones",
+      "languageName": "Japonés",
+      "title": "さ行 さしすせそ",
+      "level": "A1",
+      "part": "Escritura y pronunciación — 文字と発音",
+      "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み"
+    },
+    "state": {
+      "code": "MLS-V06-0010",
+      "article_generated_at": "2026-09-19T07:23:13.752Z",
+      "article_hash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 2,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-22T00:52:40.178Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 2,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "bunka-romanization-2025": "MLS-SRC-2F918539B2B168086706",
+        "jpf-madrid-a1-2018": "MLS-SRC-E60607E78C2254F41EA7"
+      },
+      "claims": {
+        "c-sagyo": "MLS-CLM-D914B62C128BCA191776C3A3",
+        "c-shi-pronunciation": "MLS-CLM-102CA2578B18FDEE5956E04E"
+      }
+    },
+    "links": [
+      "MLS-LNK-489851BAA307A26ACC9CBE0B",
+      "MLS-LNK-C9B22E092DCD65553168186E",
+      "MLS-LNK-9E827C1D4D0FE3FECED72FB5",
+      "MLS-LNK-06142F37C812AAA069A78E8F"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 2,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 2,
+      "claimsReused": 0,
+      "linksCreated": 4,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "bunka-romanization-2025",
+          "sourceId": "MLS-SRC-2F918539B2B168086706",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "jpf-madrid-a1-2018",
+          "sourceId": "MLS-SRC-E60607E78C2254F41EA7",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-sagyo",
+          "claimId": "MLS-CLM-D914B62C128BCA191776C3A3",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-shi-pronunciation",
+          "claimId": "MLS-CLM-102CA2578B18FDEE5956E04E",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-489851BAA307A26ACC9CBE0B",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-C9B22E092DCD65553168186E",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-9E827C1D4D0FE3FECED72FB5",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-06142F37C812AAA069A78E8F",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 58,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 82,
+        "d1RowsWritten": 37,
+        "observedRowsRead": 42,
+        "observedRowsWritten": 9,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T00:52:40.949Z",
+  "commandFile": "mls chat bridge/commands/command 0227.json"
+}
