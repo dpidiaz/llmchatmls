@@ -4,7 +4,7 @@ const path=require('node:path');
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const {patchWorker}=require('../scripts/habilitar virtuoso.js');
-const {buildChatRuntime}=require('../scripts/habilitar chat editorial.js');
+const {buildChatRuntime,augmentEditorialOpenApi}=require('../scripts/habilitar chat editorial.js');
 const {patchRuntime,MARKER}=require('../scripts/habilitar consumidores evidence.js');
 
 function runtimeBeforeConsumer(){
@@ -39,4 +39,13 @@ test('Evidence consumer integration: package predeploy installs contract after p
   const editorial=cmd.indexOf("node 'scripts/habilitar chat editorial.js'");
   const consumer=cmd.indexOf("node 'scripts/habilitar consumidores evidence.js'");
   assert.ok(editorial>=0&&consumer>editorial);
+});
+
+test('Evidence consumer integration: private OpenAPI allows REVIEWED only through identified human review',()=>{
+  const raw=fs.readFileSync(path.join(__dirname,'..','MLS R32 EDITORIAL/chat openapi.json'),'utf8');
+  const api=JSON.parse(augmentEditorialOpenApi(raw));
+  const schema=api.paths['/api/wiki/editorial/evidence/review'].post.requestBody.content['application/json'].schema;
+  assert.deepEqual(schema.properties.reviewerType.enum,['human']);
+  assert.ok(schema.required.includes('reviewer'));
+  assert.match(api.paths['/api/wiki/editorial/evidence/review'].post.summary,/humana/i);
 });
