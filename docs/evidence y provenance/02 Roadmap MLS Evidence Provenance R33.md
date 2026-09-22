@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 2 — PILOTO 20 / IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20)**
+**Estado actual: FASE 2 — PILOTO 20 / IN PROGRESS — CHECKPOINT 13–16 PASS WITH FINDING (16/20)**
 
 Progreso global inicial:
 
@@ -45,7 +45,7 @@ Progreso global inicial:
 | Documentación contractual R33 | COMPLETE | Prompt y roadmap versionados |
 | Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
 | Fase 1 Foundation | COMPLETE | Foundation R33 certificada |
-| Fase 2 Piloto 20 | IN PROGRESS — 8/20 | Checkpoint 5–8 PASS; continuar 9–12 |
+| Fase 2 Piloto 20 | IN PROGRESS — 16/20 | Checkpoint 13–16 PASS WITH FINDING; continuar 17–20 |
 | Fase 3 Evaluación | NOT STARTED | Decisión explícita go/no go |
 | Fase 4 Gate 100 | NOT STARTED | 100 estables |
 | Fase 5 Gate 500 | NOT STARTED | 500 estables |
@@ -367,7 +367,7 @@ Foundation debe demostrar:
 
 # 8. FASE 2 — PILOTO 20
 
-**Estado: IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING (12/20)**
+**Estado: IN PROGRESS — CHECKPOINT 13–16 PASS WITH FINDING (16/20)**
 
 ## Selección
 
@@ -462,7 +462,7 @@ Registrar:
 - [x] Full Foundation regression suite verde en run #316.
 - [x] **Start gate live:** confirmado en producción con `exactRowsRead=true` y `exactRowsWritten=true` sobre `MLS-V10-0020` antes de iniciar el piloto.
 
-El Pilot 20 está **IN PROGRESS**. Checkpoints 1–4 y 5–8: PASS. Checkpoint 9–12: PASS WITH FINDING. Acumulado: 12/20 procesadas, 11 VERIFIED y 1 SOURCED + needsReview; continuar secuencialmente con 13–16.
+El Pilot 20 está **IN PROGRESS**. Checkpoints 1–4 y 5–8: PASS. Checkpoints 9–12 y 13–16: PASS WITH FINDING. Acumulado: 16/20 procesadas, 14 VERIFIED y 2 SOURCED sin VERIFIED; continuar secuencialmente con 17–20.
 
 
 ## Exit gate
@@ -663,39 +663,40 @@ El renderer nunca sustituye metadata normalizada.
 Actualizar en cada checkpoint.
 
 ```yaml
-entriesProcessed: 12
-entriesVerified: 11
+entriesProcessed: 16
+entriesVerified: 14
+entriesSourcedNotVerified: 2
 entriesSourcedNeedsReview: 1
 entriesReviewedHuman: 0
-sourcesCreated: 31
+sourcesCreated: 44
 sourceReuseOperations: 2
 sourceMetadataUpdates: 1
 crossEntrySourceReuse: 0
-claimsCreated: 31
+claimsCreated: 43
 claimReuseOperations: 2
-claimsVerifiedByCoverage: 31
-evidenceLinks: 42
+claimsVerifiedByCoverage: 42
+evidenceLinks: 64
 evidenceLinkReuseOperations: 3
 evidenceConflicts: 1
 needsReview: 1
-verificationAttempts: 11
-verificationReviewsCreated: 11
-articleRevisionsProposed: 1
-d1RowsRead: 5419
-d1RowsWritten: 547
+verificationAttempts: 14
+verificationReviewsCreated: 14
+articleRevisionsProposed: 2
+d1RowsRead: 7325
+d1RowsWritten: 785
 runtimeGitHubRequests: 0
 runtimeGitHubMutations: 0
-controlPlaneCommits: 121
-controlBranchBlobDeltaBytes: 456479
+controlPlaneCommits: 158
+controlBranchBlobDeltaBytes: 621522
 githubTransportRequests: null
 mainRepoEvidenceDataDeltaBytes: 0
-logicalEvidenceBytes: 91838
-averageD1RowsReadPerEntry: 451.5833333333333
-averageD1RowsWrittenPerEntry: 45.583333333333336
-averageEvidenceBytesPerEntry: 7653.166666666667
-averageSourcesPerEntry: 2.5833333333333335
-averageClaimsPerEntry: 2.5833333333333335
-averageEvidenceLinksPerEntry: 3.5
+logicalEvidenceBytes: 134815
+averageD1RowsReadPerEntry: 457.8125
+averageD1RowsWrittenPerEntry: 49.0625
+averageEvidenceBytesPerEntry: 8425.9375
+averageSourcesPerEntry: 2.75
+averageClaimsPerEntry: 2.6875
+averageEvidenceLinksPerEntry: 4
 apaValidationFailures: 0
 apaMetadataCorrectionsBeforeVerification: 1
 manualHumanReviewEvents: 0
@@ -708,6 +709,27 @@ No inventar números cuando no se hayan medido.
 ---
 
 # 18. CHANGE LOG DEL ROADMAP
+
+## 2026-09-21 — Pilot 20 checkpoint 13–16 PASS WITH FINDING
+
+- Entradas procesadas acumuladas: 16/20.
+- Estado acumulado: 14 VERIFIED; 2 SOURCED sin VERIFIED.
+- MLS-V06-0010: VERIFIED, 2 Sources, 2 Claims, 4 Links, 6,706 logical Evidence bytes.
+- MLS-V06-0822: VERIFIED, 3 Sources, 3 Claims, 5 Links, 8,988 bytes.
+- MLS-V07-0152: VERIFIED, 4 Sources, 3 Claims, 5 Links, 9,391 bytes.
+- MLS-V07-0813: SOURCED, 4 Sources, 4 Claims, 3 coverage-qualified, 8 Links, 1 article revision proposed, 17,892 bytes.
+- Entry 16 detectó un evidence gap: la literatura sí sostiene usos discursivos de 沒有 y 啦 como marcador de ajuste, pero no basta para atribuir a 啦 una regla causal general de suavización y una lista fija de tonos.
+- El backend bloqueó VERIFIED por unverified_substantial_claims; no se fabricó conflicto.
+- Se creó revisión propuesta MLS-ARTREV-76D3ACB29540CC3F85EA22E2 sin overwrite.
+- Checkpoint 13–16: 1,906 rows read / 238 rows written / 42,977 logical Evidence bytes.
+- Acumulado 1–16: 7,325 reads / 785 writes / 134,815 bytes.
+- 43 Claims creados; 42 tienen cobertura calificable.
+- 44 Sources creadas; cross-entry Source reuse aún no observado.
+- 1 conflicto acumulado; 1 needsReview; 2 article revisions proposed; 0 human reviews.
+- 0 falsos VERIFIED y 0 fallos APA.
+- Control plane acumulado: 158 commits, +621,522 blob bytes.
+- Decisión: PASS WITH FINDING; continuar 17–20.
+- Documento detallado: `08 Pilot 20 Checkpoint 13 a 16.md`.
 
 ## 2026-09-21 — Pilot 20 checkpoint 9–12 PASS WITH FINDING
 
@@ -969,56 +991,57 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 2 PILOT 20 IN PROGRESS — CHECKPOINT 9–12 PASS WITH FINDING
+STATUS: PHASE 2 PILOT 20 IN PROGRESS — CHECKPOINT 13–16 PASS WITH FINDING
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-MAIN HEAD AT CHECKPOINT BASE: 179f720b0f8c4fb95b30726a39032e52ac1faf23
+MAIN HEAD AT CHECKPOINT BASE: 3dc7bc098b438cc7349b73ab6a24d5ac181003ed
 CONTROL BRANCH: mlschatcontrol
-CONTROL HEAD AFTER ENTRY 12: d6357426b2c0b1850c4b0c49525f12cca9878476
-DOCUMENTATION BRANCH: r33-evidence-pilot-checkpoint-12
+CONTROL HEAD AFTER ENTRY 16: 499ddb343b17795a48c156a9afd27cf964befb74
+DOCUMENTATION BRANCH: r33-evidence-pilot-checkpoint-16
 
 DONE:
 - Checkpoints 1–4 and 5–8 PASS
-- Entry 9 MLS-V04-0174 processed; SOURCED + needsReview
-- Entry 9 conflict persisted; VERIFIED correctly blocked
-- Entry 9 article revision proposed without overwrite
-- Entry 10 MLS-V04-0927 VERIFIED
-- Entry 11 MLS-V05-0165 VERIFIED
-- Entry 12 MLS-V05-0881 VERIFIED
-- Source identity granularity issue for shared work-level DOI identified and mitigated
-- Checkpoint 9–12 stop-condition audit PASS WITH FINDING
-- Manifest synchronized to 12/20
+- Checkpoints 9–12 and 13–16 PASS WITH FINDING
+- Entry 13 MLS-V06-0010 VERIFIED
+- Entry 14 MLS-V06-0822 VERIFIED
+- Entry 15 MLS-V07-0152 VERIFIED
+- Entry 16 MLS-V07-0813 SOURCED with one unverified substantial claim
+- Entry 16 VERIFIED correctly blocked
+- Entry 16 article revision proposed without overwrite
+- Manifest synchronized to 16/20
 - Detailed checkpoint document created
 
 CURRENT:
-- 12 of 20 Pilot entries processed
-- 11 VERIFIED
-- 1 SOURCED + needsReview
+- 16 of 20 Pilot entries processed
+- 14 VERIFIED
+- 2 SOURCED not VERIFIED
+- 1 of those 2 has needsReview from substantive conflict
 - 0 REVIEWED
-- 1 article revision proposed
+- 2 article revisions proposed
 - 0 human editorial reviews
 
 NEXT:
-- Merge checkpoint 9–12 documentation after CI
-- Continue sequentially with entries 13–16
-- Entry 13: MLS-V06-0010
-- Entry 14: MLS-V06-0822
-- Entry 15: MLS-V07-0152
-- Entry 16: MLS-V07-0813
-- Checkpoint again after entry 16
+- Merge checkpoint 13–16 documentation after CI
+- Continue sequentially with entries 17–20
+- Entry 17: MLS-V08-0010
+- Entry 18: MLS-V08-0875
+- Entry 19: MLS-V09-0155
+- Entry 20: MLS-V09-0825
+- Final Pilot checkpoint after entry 20
+- Then Fase 3 evaluation: GO / CORRECT AND REPEAT / STOP
 
 BLOCKERS:
-- None for continuing 13–16
+- None for continuing 17–20
 - Entry 9 remains unresolved and must not be promoted to VERIFIED until its revision is editorially resolved
+- Entry 16 remains SOURCED until the overclaim is editorially resolved and Evidence revalidated
 - Cross-entry Source reuse not yet observed
 - Source identity policy should distinguish resource-specific DOI from work/container DOI before Gate 100
 - Operational optimization pending: audit Cloudflare Branch control / Build watch paths for mlschatcontrol
 
 DECISIONS:
-- A detected article error is a successful Pilot finding, not a reason to force VERIFIED
-- Claims with complete source coverage do not override an unresolved substantive conflict
+- Evidence gap is sufficient reason to block VERIFIED even without a contradiction
+- Contextualizing sources do not count as support for the stronger unsupported claim
 - Proposed article revisions never overwrite wiki_articles
-- For resource-specific records, do not use a shared work-level DOI when it would collapse distinct Source entities
 - No corpus-scale migration
 - Human review events remain 0; never fabricate REVIEWED
 
@@ -1029,27 +1052,28 @@ R32 COMPATIBILITY:
 - Preserved
 
 EVIDENCE STATUS:
-- 11 VERIFIED
+- 14 VERIFIED
 - 1 SOURCED + needsReview
+- 1 SOURCED due evidence gap
 - 0 REVIEWED
-- 8 Pilot entries not yet processed
+- 4 Pilot entries not yet processed
 
 ENTRIES PROCESSED:
-- 12
+- 16
 
 SOURCES:
-- created: 31
+- created: 44
 - retry/enrichment reuse operations: 2
 - metadata updates: 1
 - cross-entry reuse: 0
 
 CLAIMS:
-- created: 31
-- coverage-qualified: 31
+- created: 43
+- coverage-qualified: 42
 - retry reuse operations: 2
 
 EVIDENCE LINKS:
-- created/current: 42
+- created/current: 64
 - retry reuse operations: 3
 
 CONFLICTS:
@@ -1059,22 +1083,22 @@ NEEDS REVIEW:
 - 1
 
 ARTICLE REVISIONS:
-- proposed: 1
+- proposed: 2
 - integrated: 0
 
 D1 IMPACT:
-- 5419 exact rows read
-- 547 exact rows written
-- average 451.5833333333333 read / 45.583333333333336 written per processed entry
+- 7325 exact rows read
+- 785 exact rows written
+- average 457.8125 read / 49.0625 written per processed entry
 
 SIZE:
-- logical Evidence bytes: 91838
-- average: 7653.166666666667 bytes/entry
+- logical Evidence bytes: 134815
+- average: 8425.9375 bytes/entry
 
 GITHUB IMPACT:
 - Evidence runtime GitHub requests/mutations: 0
-- control plane commits since Pilot baseline: 121
-- control branch blob delta: +456479 bytes
+- control plane commits since Pilot baseline: 158
+- control branch blob delta: +621522 bytes
 - transport-level GitHub request count: not instrumented; do not invent
 
 APA:
@@ -1085,7 +1109,7 @@ MANUAL REVIEW:
 - human events: 0
 
 CHECKPOINT:
-- PASS WITH FINDING — continue entries 13–16
+- PASS WITH FINDING — continue entries 17–20
 ```
 ---
 
