@@ -1,0 +1,48 @@
+{
+  "success": false,
+  "httpStatus": 404,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "GATE100-SCALABILITY-SMOKE-20260922-A",
+    "requested": 2,
+    "processed": 1,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": false,
+        "httpStatus": 404,
+        "operationId": "candidatosReuseEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/reuse-candidates",
+        "response": {
+          "ok": false,
+          "error": "Ruta Evidence no encontrada.",
+          "code": null,
+          "telemetry": {
+            "d1": {
+              "queries": 0,
+              "batchCalls": 0,
+              "exactRowsRead": false,
+              "exactRowsWritten": false,
+              "d1RowsRead": null,
+              "d1RowsWritten": null,
+              "observedRowsRead": 0,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T05:43:02.759Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-22T05:43:02.759Z",
+  "commandFile": "mls chat bridge/commands/command 0284.json"
+}
