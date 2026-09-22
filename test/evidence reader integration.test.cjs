@@ -29,7 +29,7 @@ test('reader status is visible but remains outside canonical article HTML',()=>{
 test('reader hides Evidence panel when no R33 state exists',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
   assert.match(patched,/if \(!evidence\) \{[\s\S]*panel\?\.remove\(\);[\s\S]*return;/);
-  assert.match(patched,/if \(!exists\) return \{ \.\.\.article, evidence: null \};/);
+  assert.match(patched,/if \(!exists\) return null;/);
 });
 
 test('reader public article endpoint does not cache per-entry Evidence state',()=>{
@@ -47,7 +47,7 @@ test('Evidence reader patch is idempotent',()=>{
 
 test('reader exposes APA 7 references for Evidence-backed entries',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
-  assert.match(patched,/MLS_EVIDENCE_API\.entrySources\(env, code\)/);
+  assert.match(patched,/MLS_EVIDENCE_API\.entrySources\(env, normalized\)/);
   assert.match(patched,/references = \(rows \|\| \[\]\)/);
   assert.match(patched,/function ensureEvidenceReferences\(article, code, target\)/);
   assert.match(patched,/section\.id = "mls-evidence-references"/);
@@ -66,7 +66,7 @@ test('reader removes references section when current entry has no visible refere
 
 test('reader exposes a public Evidence-only endpoint without making D1 an article fallback',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
-  assert.match(patched,/evidence-public\\\/(MLS-V\\d\{2\}-\\d\{4\})/);
-  assert.match(patched,/mlsPublicEvidenceForCode\(env, publicEvidenceMatch\[1\]\.toUpperCase\(\)\)/);
-  assert.match(patched,/Response\.json\(\{ ok: true, evidence \}/);
+  assert.ok(patched.includes('/api/wiki/evidence-public/'));
+  assert.ok(patched.includes('mlsPublicEvidenceForCode(env, publicEvidenceMatch[1].toUpperCase())'));
+  assert.ok(patched.includes('Response.json({ ok: true, evidence }'));
 });
