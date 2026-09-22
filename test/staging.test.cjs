@@ -729,15 +729,24 @@ test('predeploy installs staging after chat runtime and generates catalog last',
   assert.ok(pre.indexOf('habilitar staging github.js')<pre.indexOf('generar snapshot staging.js'));
 });
 
-test('MLS Chat Bridge exposes only the seven staging operations and no arbitrary URL input', async () => {
+test('MLS Chat Bridge exposes only the explicit staging and Evidence allowlist and no arbitrary URL input', async () => {
   assert.deepEqual(Object.keys(chatBridge.MLS_CHAT_BRIDGE_OPERATIONS).sort(),[
     'cancelarLoteStagingMLS',
+    'consumerEvidenceEntradaMLS',
+    'entradaEvidenceMLS',
     'estadoStagingMLS',
+    'fuentesEntradaEvidenceMLS',
     'iniciarLoteStagingMLS',
+    'metricasEvidenceEntradaMLS',
+    'proponerEvidenceMLS',
+    'proponerRevisionEvidenceMLS',
     'reconciliarStagingMLS',
+    'revisarEvidenceMLS',
     'siguienteContextoStagingMLS',
     'stagearBorradorMLS',
-    'validarBorradorStagingMLS'
+    'validarBorradorStagingMLS',
+    'validarEvidenceMLS',
+    'verificarEvidenceMLS'
   ]);
   assert.throws(
     ()=>chatBridge.normalizeBridgeCommand({operationId:'fetchAnything',input:{url:'https://example.com'}}),
