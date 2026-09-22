@@ -44,6 +44,7 @@ function buildChatRuntime(root = process.cwd()) {
     'MLS R32 EDITORIAL/evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
     'MLS R32 EDITORIAL/evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
     'MLS R32 EDITORIAL/evidence provenance.js':'MLS_EVIDENCE_PROVENANCE',
+    'MLS R32 EDITORIAL/evidence consumer.js':'MLS_EVIDENCE_CONSUMER',
     'MLS R32 EDITORIAL/evidence telemetry.js':'MLS_EVIDENCE_TELEMETRY',
     'MLS R32 EDITORIAL/evidence api.js':'MLS_EVIDENCE_API'
   };
@@ -56,6 +57,7 @@ function buildChatRuntime(root = process.cwd()) {
     './evidence reviews.js':'MLS_EVIDENCE_REVIEWS',
     './evidence validator.js':'MLS_EVIDENCE_VALIDATOR',
     './evidence provenance.js':'MLS_EVIDENCE_PROVENANCE',
+    './evidence consumer.js':'MLS_EVIDENCE_CONSUMER',
     './evidence telemetry.js':'MLS_EVIDENCE_TELEMETRY',
     './evidence api.js':'MLS_EVIDENCE_API'
   };
