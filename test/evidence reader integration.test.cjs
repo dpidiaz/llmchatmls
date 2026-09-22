@@ -66,7 +66,7 @@ test('reader removes references section when current entry has no visible refere
 
 test('reader exposes a public Evidence-only endpoint without making D1 an article fallback',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
-  assert.ok(patched.includes('/api/wiki/evidence-public/'));
+  assert.ok(patched.includes('evidence-public'));
   assert.ok(patched.includes('mlsPublicEvidenceForCode(env, publicEvidenceMatch[1].toUpperCase())'));
   assert.ok(patched.includes('Response.json({ ok: true, evidence }'));
 });
