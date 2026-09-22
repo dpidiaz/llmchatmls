@@ -1,0 +1,34 @@
+name: Verify Evidence Live
+
+on:
+  push:
+    branches:
+      - verify-evidence-live-20260922
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify public Evidence endpoint
+        run: |
+          set -euo pipefail
+          endpoint='https://llmchatmls.dpidiaz.workers.dev/api/wiki/evidence-public/MLS-V10-0027'
+          body="$(curl -fsSL --retry 3 --retry-delay 2 "$endpoint")"
+          printf '%s\n' "$body"
+          printf '%s' "$body" | grep -F '"status":"VERIFIED"'
+          printf '%s' "$body" | grep -F 'Real Academia Española'
+          printf '%s' "$body" | grep -F '"references":'
+      - name: Verify native reader asset
+        run: |
+          set -euo pipefail
+          url='https://llmchatmls.dpidiaz.workers.dev/js/reader.js'
+          curl -fsSL --retry 3 --retry-delay 2 "$url" -o /tmp/reader.js
+          grep -F '/api/wiki/evidence-public/' /tmp/reader.js
+          grep -F 'Referencias' /tmp/reader.js
+          grep -F 'Formato APA 7' /tmp/reader.js
+          grep -F 'Abrir fuente' /tmp/reader.js
+          echo 'LIVE_READER_EVIDENCE_OK'
