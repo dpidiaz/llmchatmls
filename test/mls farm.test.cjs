@@ -46,7 +46,7 @@ test('Farm checkpoint is idempotent and terminal work survives expiration accoun
 });
 
 test('Farm rejects conflicting second result for same code',()=>{
-  const state=core.makeBatchState({issueNumber:58,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'a'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
+  const state=core.makeBatchState({issueNumber:58,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'a'},{code:'MLS-V10-0002',language:'espanol-guatemala',n:2,path:'b'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
   const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',sources:[],claims:[],links:[],conflicts:[],provenance:{x:1}}}]},{createdAt:'2026-09-22T06:10:00.000Z',commentId:5});
   assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code:'MLS-V10-0001',leaseEpoch:58,status:'submitted',result:{code:'MLS-V10-0001',articleGeneratedAt:'2026-09-12T08:32:27.459Z',articleHash:'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',sources:[],claims:[],links:[],conflicts:[],provenance:{x:2}}}]},{createdAt:'2026-09-22T06:11:00.000Z',commentId:6}),e=>e.code==='RESULT_HASH_CONFLICT');
 });
