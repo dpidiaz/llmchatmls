@@ -13,3 +13,22 @@ test('APA: institutional webpage omits repeated site name',()=>{const src={statu
 test('APA: unresolved source can render but is not citationReady',()=>{const src={...base,status:'unresolved',sourceType:'book',title:'Libro',publisher:'Editorial'};const r=apa.renderApaReference(src);assert.equal(r.valid,true);assert.equal(r.citationReady,false);assert.ok(r.warnings.includes('source_not_active'));});
 test('APA: in-text one two and three authors follow APA author shortening',()=>{const one={...base,sourceType:'book',title:'A',publisher:'P'};assert.equal(apa.renderInTextCitation(one),'(Doe, 2025)');const two={...one,authors:['Doe, Jane','Roe, Richard']};assert.equal(apa.renderInTextCitation(two),'(Doe & Roe, 2025)');assert.equal(apa.renderInTextCitation(two,{narrative:true,locale:'es-GT'}),'Doe y Roe (2025)');const three={...one,authors:['Doe, Jane','Roe, Richard','Moe, Mary']};assert.equal(apa.renderInTextCitation(three),'(Doe et al., 2025)');});
 test('APA: unsupported source type fails closed',()=>{assert.equal(apa.validateApaSource({...base,sourceType:'other',title:'X'}).citationReady,false);assert.throws(()=>apa.renderApaReference({...base,sourceType:'other',title:'X'}),e=>e.code==='APA_METADATA_INVALID');});
+
+test('APA: container DOI is preserved as metadata but granular canonical URL is rendered',()=>{
+  const src={status:'active',sourceType:'institutional_webpage',title:'laut',institution:'IDS grammis',doi:'10.14618/wb-praepositionen',doiScope:'container',canonicalUrl:'https://grammis.ids-mannheim.de/praepositionen/299306'};
+  const r=apa.renderApaReference(src);
+  assert.equal(r.citationReady,true);
+  assert.equal(r.url,'https://grammis.ids-mannheim.de/praepositionen/299306');
+  assert.ok(!r.markdown.includes('https://doi.org/10.14618/wb-praepositionen'));
+});
+test('APA: container DOI without granular URL fails closed',()=>{
+  const src={status:'active',sourceType:'report',title:'Container child',institution:'Institution',doi:'10.1000/container',doiScope:'container'};
+  const v=apa.validateApaSource(src);
+  assert.equal(v.citationReady,false);
+  assert.ok(v.errors.includes('container_doi_requires_canonical_url'));
+});
+test('APA: resource DOI still wins over canonical URL',()=>{
+  const src={...base,sourceType:'journal_article',title:'Artículo DOI recurso',journal:'Revista',articleNumber:'e1',doi:'10.1000/resource',doiScope:'resource',canonicalUrl:'https://example.org/article'};
+  const r=apa.renderApaReference(src);
+  assert.equal(r.url,'https://doi.org/10.1000/resource');
+});

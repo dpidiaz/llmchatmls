@@ -31,3 +31,23 @@ test('evidence api: provenance endpoint composes R32 and R33 without public muta
 test('evidence api: responses expose D1 telemetry without inventing billed rows',async()=>{const s=setup();const r=await json(await call(s,'/api/wiki/editorial/evidence/status'));assert.equal(r.status,200);assert.ok(r.body.telemetry?.d1);assert.equal(r.body.telemetry.d1.d1RowsRead,null);assert.equal(r.body.telemetry.d1.exactRowsRead,false);assert.ok(r.body.telemetry.d1.observedRowsRead>=0);});
 test('evidence api: proposal reports Source creation and later reuse explicitly',async()=>{const s=setup(),v=await version(s);let r=await json(await call(s,'/api/wiki/editorial/evidence/proposal',{method:'POST',body:proposal(v,0)}));assert.equal(r.body.operations.sourcesCreated,1);assert.equal(r.body.operations.sourcesReused,0);assert.equal(r.body.operations.claimsCreated,1);assert.equal(r.body.operations.linksCreated,1);r=await json(await call(s,'/api/wiki/editorial/evidence/proposal',{method:'POST',body:proposal(v,1)}));assert.equal(r.status,200);assert.equal(r.body.operations.sourcesCreated,0);assert.equal(r.body.operations.sourcesReused,1);assert.equal(r.body.operations.claimsReused,1);assert.equal(r.body.operations.linksReused,1);});
 test('evidence api: metrics endpoint reports logical Evidence bytes read-only',async()=>{const s=setup(),v=await version(s);await call(s,'/api/wiki/editorial/evidence/proposal',{method:'POST',body:proposal(v)});const before=s.db.prepare('SELECT evidence_revision FROM wiki_evidence_entry_state WHERE code=?').get(v.code).evidence_revision;const r=await json(await call(s,'/api/wiki/editorial/evidence/metrics?code='+v.code));assert.equal(r.status,200);assert.ok(r.body.storage.logicalEvidenceBytes>0);assert.equal(r.body.storage.rowCounts.claims,1);assert.ok(r.body.telemetry?.d1);assert.equal(s.db.prepare('SELECT evidence_revision FROM wiki_evidence_entry_state WHERE code=?').get(v.code).evidence_revision,before);});
+
+test('evidence api: container DOI survives Source Registry roundtrip without becoming granular identity',async()=>{
+  const s=setup(),v=await version(s);
+  const p={
+    code:v.code,articleGeneratedAt:v.articleGeneratedAt,articleHash:v.articleHash,expectedEvidenceRevision:0,
+    sources:[{clientId:'src1',sourceType:'institutional_webpage',authorityTier:'A',title:'laut',institution:'IDS grammis',doi:'10.14618/wb-praepositionen',doiScope:'container',canonicalUrl:'https://grammis.ids-mannheim.de/praepositionen/299306'}],
+    claims:[{clientId:'cl1',sectionKey:'Regla',summary:'Claim granular.',claimType:'general',materiality:'substantial'}],
+    links:[{claimRef:'cl1',sourceRef:'src1',supportType:'supports',verificationMethod:'manual_source_match'}],
+    conflicts:[]
+  };
+  const created=await json(await call(s,'/api/wiki/editorial/evidence/proposal',{method:'POST',body:p}));
+  assert.equal(created.status,200);
+  const listed=await json(await call(s,'/api/wiki/editorial/evidence/sources?code='+v.code));
+  assert.equal(listed.status,200);
+  assert.equal(listed.body.sources.length,1);
+  assert.equal(listed.body.sources[0].source.doi,'10.14618/wb-praepositionen');
+  assert.equal(listed.body.sources[0].source.doiScope,'container');
+  assert.equal(listed.body.sources[0].source.identityKind,'url');
+  assert.equal(listed.body.sources[0].citation.url,'https://grammis.ids-mannheim.de/praepositionen/299306');
+});
