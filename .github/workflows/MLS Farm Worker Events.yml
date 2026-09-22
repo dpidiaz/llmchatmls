@@ -1,0 +1,30 @@
+name: MLS Farm Worker Events
+
+on:
+  issue_comment:
+    types:
+      - created
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: mls-farm-batch-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  worker-event:
+    if: ${{ startsWith(github.event.issue.title, '[MLS Farm][LEASED]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Procesar heartbeat o checkpoint Farm
+        run: node 'scripts/MLS farm worker.cjs'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
