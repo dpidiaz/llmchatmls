@@ -1,0 +1,162 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V08-0010",
+    "article": {
+      "code": "MLS-V08-0010",
+      "articleGeneratedAt": "2026-09-19T07:39:46.725Z",
+      "articleHash": "8fc5162afbe93da14fc19f9e383187a5e1d353b48885bb01e26310f77fe50aaa",
+      "language": "coreano",
+      "languageName": "Coreano",
+      "title": "Consonante ㅅ",
+      "level": "A1",
+      "part": "Hangul y pronunciación — 한글과 발음",
+      "chapter": "Consonantes de hangul y nombres de las letras — 한글 자음과 글자 이름"
+    },
+    "state": {
+      "code": "MLS-V08-0010",
+      "article_generated_at": "2026-09-19T07:39:46.725Z",
+      "article_hash": "8fc5162afbe93da14fc19f9e383187a5e1d353b48885bb01e26310f77fe50aaa",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 3,
+      "claims_verified": 3,
+      "sources_total": 3,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-22T01:17:56.001Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 3,
+      "claimsVerified": 3,
+      "sourcesTotal": 3,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "krdict-siot": "MLS-SRC-53F353482D322DDE6289",
+        "nikl-standard-pronunciation": "MLS-SRC-F5D2C467F9B141168B4C",
+        "kang-2010-s-coarticulation": "MLS-SRC-9F9CF523616D4098219A"
+      },
+      "claims": {
+        "c-siot-name": "MLS-CLM-3E04C156B8681429599108F9",
+        "c-onset-palatalization": "MLS-CLM-38A13FC21FA05383F8566C4E",
+        "c-coda-neutralization": "MLS-CLM-9EF2627FC811F1918E45676B"
+      }
+    },
+    "links": [
+      "MLS-LNK-BBE3AC2DA4AFEE7B82F593E9",
+      "MLS-LNK-8F8E8C487029884484D91088",
+      "MLS-LNK-7EC38BDBA19C229D655239B4"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 3,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 3,
+      "claimsReused": 0,
+      "linksCreated": 3,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "krdict-siot",
+          "sourceId": "MLS-SRC-53F353482D322DDE6289",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "nikl-standard-pronunciation",
+          "sourceId": "MLS-SRC-F5D2C467F9B141168B4C",
+          "created": true,
+          "updated": false,
+          "reused": false
+        },
+        {
+          "clientId": "kang-2010-s-coarticulation",
+          "sourceId": "MLS-SRC-9F9CF523616D4098219A",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-siot-name",
+          "claimId": "MLS-CLM-3E04C156B8681429599108F9",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-onset-palatalization",
+          "claimId": "MLS-CLM-38A13FC21FA05383F8566C4E",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c-coda-neutralization",
+          "claimId": "MLS-CLM-9EF2627FC811F1918E45676B",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-BBE3AC2DA4AFEE7B82F593E9",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-8F8E8C487029884484D91088",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-7EC38BDBA19C229D655239B4",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 62,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 90,
+        "d1RowsWritten": 39,
+        "observedRowsRead": 43,
+        "observedRowsWritten": 10,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T01:17:57.022Z",
+  "commandFile": "mls chat bridge/commands/command 0247.json"
+}
