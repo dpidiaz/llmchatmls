@@ -1,0 +1,285 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "verificarEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/verify",
+  "response": {
+    "ok": true,
+    "article": {
+      "code": "MLS-V06-0010",
+      "articleGeneratedAt": "2026-09-19T07:23:13.752Z",
+      "articleHash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+      "language": "japones",
+      "languageName": "Japonés",
+      "title": "さ行 さしすせそ",
+      "level": "A1",
+      "part": "Escritura y pronunciación — 文字と発音",
+      "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み"
+    },
+    "policy": {
+      "version": "1.0",
+      "language": "japones",
+      "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+      "defaultAllowedTiers": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "claimRules": {
+        "normative": {
+          "allowedTiers": [
+            "A",
+            "B"
+          ]
+        },
+        "orthography": {
+          "allowedTiers": [
+            "A",
+            "B"
+          ]
+        },
+        "quotation": {
+          "allowedTiers": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "requiresLocator": true
+        },
+        "regional_variation": {
+          "allowedTiers": [
+            "A",
+            "B",
+            "C"
+          ],
+          "preserveVariation": true
+        },
+        "historical": {
+          "allowedTiers": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      },
+      "preferredAuthorityKinds": [
+        "official_language_or_standards_institution",
+        "national_education_or_culture_authority",
+        "official_dictionary_or_normative_reference",
+        "institutional_corpus"
+      ],
+      "recommendedAcademicSourceKinds": [
+        "peer_reviewed_linguistics",
+        "university_press",
+        "academic_monograph",
+        "specialist_book_chapter",
+        "recognized_academic_corpus"
+      ],
+      "disallowedEvidenceKinds": [
+        "ai_output",
+        "unauthored_content",
+        "unknown_blog",
+        "aggregator",
+        "untraceable_content"
+      ],
+      "variation": {
+        "regional": true,
+        "standard": true,
+        "register": true,
+        "historical": true,
+        "doNotTreatAsConflictByDefault": true
+      },
+      "approvedSourcePool": [],
+      "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+    },
+    "status": "VERIFIED",
+    "reasons": [],
+    "claimsTotal": 2,
+    "claimsVerified": 2,
+    "sourcesTotal": 2,
+    "conflictsTotal": 0,
+    "needsReview": false,
+    "coverageComplete": true,
+    "citationReady": true,
+    "evaluation": [
+      {
+        "claimId": "MLS-CLM-D914B62C128BCA191776C3A3",
+        "verified": true,
+        "qualifyingLinks": 2,
+        "citationReady": true,
+        "citationReadyLinks": 2
+      },
+      {
+        "claimId": "MLS-CLM-102CA2578B18FDEE5956E04E",
+        "verified": true,
+        "qualifyingLinks": 2,
+        "citationReady": true,
+        "citationReadyLinks": 2
+      }
+    ],
+    "snapshot": {
+      "article": {
+        "code": "MLS-V06-0010",
+        "articleGeneratedAt": "2026-09-19T07:23:13.752Z",
+        "articleHash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+        "language": "japones",
+        "languageName": "Japonés",
+        "title": "さ行 さしすせそ",
+        "level": "A1",
+        "part": "Escritura y pronunciación — 文字と発音",
+        "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み"
+      },
+      "claims": [
+        {
+          "claim_id": "MLS-CLM-D914B62C128BCA191776C3A3",
+          "code": "MLS-V06-0010",
+          "article_generated_at": "2026-09-19T07:23:13.752Z",
+          "article_hash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+          "section_key": "En pocas palabras / Cómo funciona",
+          "summary": "La fila さ行 del kana básico contiene さ・し・す・せ・そ. En la romanización oficial japonesa vigente desde 2025 estas formas se representan sa, shi, su, se, so.",
+          "claim_type": "orthography",
+          "materiality": "substantial",
+          "status": "unverified",
+          "created_at": "2026-09-22T00:52:38.724Z",
+          "verified_at": null,
+          "verification_revision": null
+        },
+        {
+          "claim_id": "MLS-CLM-102CA2578B18FDEE5956E04E",
+          "code": "MLS-V06-0010",
+          "article_generated_at": "2026-09-19T07:23:13.752Z",
+          "article_hash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+          "section_key": "Observación importante",
+          "summary": "し pertenece a la fila de s, pero en materiales de enseñanza su pronunciación se representa como shi y no como una secuencia española/regular 'si'. La grafía romanizada si ha existido en otros sistemas, por lo que shi frente a si es una diferencia de romanización y no dos kana distintos.",
+          "claim_type": "general",
+          "materiality": "substantial",
+          "status": "unverified",
+          "created_at": "2026-09-22T00:52:38.901Z",
+          "verified_at": null,
+          "verification_revision": null
+        }
+      ],
+      "links": [
+        {
+          "link_id": "MLS-LNK-489851BAA307A26ACC9CBE0B",
+          "claim_id": "MLS-CLM-D914B62C128BCA191776C3A3",
+          "source_id": "MLS-SRC-2F918539B2B168086706",
+          "support_type": "primary_source",
+          "locator_json": "{\"section\":\"本表 — サ シ ス セ ソ / sa shi su se so\"}",
+          "notes": null,
+          "verification_method": "manual_source_match",
+          "verified_at": null,
+          "created_at": "2026-09-22T00:52:39.116Z"
+        },
+        {
+          "link_id": "MLS-LNK-C9B22E092DCD65553168186E",
+          "claim_id": "MLS-CLM-D914B62C128BCA191776C3A3",
+          "source_id": "MLS-SRC-E60607E78C2254F41EA7",
+          "support_type": "supports",
+          "locator_json": "{\"page\":\"4\",\"section\":\"各かな文字の発音上の注意\"}",
+          "notes": null,
+          "verification_method": "manual_source_match",
+          "verified_at": null,
+          "created_at": "2026-09-22T00:52:39.376Z"
+        },
+        {
+          "link_id": "MLS-LNK-9E827C1D4D0FE3FECED72FB5",
+          "claim_id": "MLS-CLM-102CA2578B18FDEE5956E04E",
+          "source_id": "MLS-SRC-E60607E78C2254F41EA7",
+          "support_type": "supports",
+          "locator_json": "{\"page\":\"4\",\"section\":\"「し/シ」は「s」の行にありますが「si」ではなく「shi」の音です\"}",
+          "notes": null,
+          "verification_method": "manual_source_match",
+          "verified_at": null,
+          "created_at": "2026-09-22T00:52:39.641Z"
+        },
+        {
+          "link_id": "MLS-LNK-06142F37C812AAA069A78E8F",
+          "claim_id": "MLS-CLM-102CA2578B18FDEE5956E04E",
+          "source_id": "MLS-SRC-2F918539B2B168086706",
+          "support_type": "primary_source",
+          "locator_json": "{\"section\":\"本表 / (付)対照表 — シ: shi / si\"}",
+          "notes": null,
+          "verification_method": "manual_source_match",
+          "verified_at": null,
+          "created_at": "2026-09-22T00:52:39.907Z"
+        }
+      ],
+      "conflicts": []
+    },
+    "evidenceSnapshotHash": "26e8dc0432bd6239d27c4e3105053c5eae7b170f9ed18a9283e86432b455e65a",
+    "verifiedAt": "2026-09-22T00:53:46.582Z",
+    "reviewedAt": null,
+    "verificationReviewId": "MLS-REVW-35E2335F3F8A12BE08C17F3B",
+    "editorialReviewId": null,
+    "state": {
+      "code": "MLS-V06-0010",
+      "article_generated_at": "2026-09-19T07:23:13.752Z",
+      "article_hash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+      "evidence_version": "1.0",
+      "status": "VERIFIED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 2,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 2,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": "2026-09-22T00:53:46.582Z",
+      "reviewed_at": null,
+      "updated_at": "2026-09-22T00:53:46.582Z"
+    },
+    "review": {
+      "review_id": "MLS-REVW-35E2335F3F8A12BE08C17F3B",
+      "code": "MLS-V06-0010",
+      "article_generated_at": "2026-09-19T07:23:13.752Z",
+      "article_hash": "1e54eba3f389d880dec2b57f0753cbf075a4d4e1873ae9d83c9fd0d752c2ac43",
+      "evidence_version": "1.0",
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "review_kind": "verification",
+      "evidence_snapshot_hash": "26e8dc0432bd6239d27c4e3105053c5eae7b170f9ed18a9283e86432b455e65a",
+      "status_before": "SOURCED",
+      "status_after": "VERIFIED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 2,
+      "conflicts_total": 0,
+      "reviewer_type": "chatgpt",
+      "reviewer": "ChatGPT R33 Evidence Pilot",
+      "verification_method": "manual_source_match",
+      "citation_renderer_version": "1.0",
+      "parent_review_id": null,
+      "article_revision_id": null,
+      "notes": "Pilot 20 entry 13. The hiragana s-row and the distinction between current shi romanization, alternative si notation and learner pronunciation were matched to the current 2025 Agency for Cultural Affairs standard and Japan Foundation teaching material; no unresolved contradiction.",
+      "run_id": "MLS-R33-EVIDENCE-PILOT-20-20260921-A",
+      "created_at": "2026-09-22T00:53:46.582Z"
+    },
+    "reviewCreated": true,
+    "reused": false,
+    "telemetry": {
+      "d1": {
+        "queries": 54,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 170,
+        "d1RowsWritten": 6,
+        "observedRowsRead": 70,
+        "observedRowsWritten": 2,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T00:53:48.835Z",
+  "commandFile": "mls chat bridge/commands/command 0229.json"
+}
