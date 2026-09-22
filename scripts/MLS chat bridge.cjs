@@ -61,6 +61,16 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/wiki/editorial/evidence/consumer',
     input: 'code'
   },
+  candidatosReuseEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/reuse-candidates',
+    input: 'body'
+  },
+  triageBatchEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/triage',
+    input: 'body'
+  },
   validarEvidenceMLS: {
     method: 'POST',
     pathname: '/api/wiki/editorial/evidence/validate',
