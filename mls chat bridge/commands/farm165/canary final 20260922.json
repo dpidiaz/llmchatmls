@@ -1,0 +1,30 @@
+{
+  "batchId": "FARM165-CANARY-FINAL-20260922",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "validarEvidenceMLS",
+      "input": {
+        "code": "MLS-V10-0027"
+      }
+    },
+    {
+      "operationId": "verificarEvidenceMLS",
+      "input": {
+        "code": "MLS-V10-0027",
+        "expectedEvidenceRevision": 1,
+        "reviewerType": "chatgpt",
+        "reviewer": "ChatGPT MLS Farm",
+        "verificationMethod": "manual_source_match",
+        "notes": "MLS Farm R1 canonical-hash reconciliation and verification.",
+        "runId": "MLS-FARM-000165"
+      }
+    },
+    {
+      "operationId": "consumerEvidenceEntradaMLS",
+      "input": {
+        "code": "MLS-V10-0027"
+      }
+    }
+  ]
+}
