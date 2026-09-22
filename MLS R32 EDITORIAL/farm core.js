@@ -174,10 +174,10 @@ function addTerminalToLedger(ledger,code,status){
   l.updatedAt=iso();
   return l;
 }
-function makeBatchState({issueNumber,requestId,workerId,entries,now=iso(),token=randomToken()}){
+function makeBatchState({issueNumber,requestId,workerId,workerLogin=null,entries,now=iso(),token=randomToken()}){
   const claimedAt=iso(now),batchId='MLS-FARM-'+String(issueNumber).padStart(6,'0');
   return {
-    kind:'batch',version:FARM_VERSION,batchId,issueNumber:Number(issueNumber),requestId,workerId,
+    kind:'batch',version:FARM_VERSION,batchId,issueNumber:Number(issueNumber),requestId,workerId,workerLogin:workerLogin?String(workerLogin):null,
     leaseToken:token,leaseEpoch:Number(issueNumber),status:'leased',claimedAt,lastHeartbeatAt:claimedAt,
     expiresAt:plusMs(claimedAt,FARM_LEASE_TTL_MS),entries:entries.map((x,i)=>({...x,position:i+1,leaseEpoch:Number(issueNumber)})),
     results:{},conflicts:[],readyToClose:false,cancelRequested:false,lastRejectedEvent:null,closedAt:null
@@ -198,6 +198,15 @@ function validateLeaseEvent(state,event,createdAt){
   if(when===null)throw farmError('INVALID_EVENT_TIME','Timestamp de comentario inválido.',409);
   if(when>parseDate(state.expiresAt))throw farmError('LEASE_EXPIRED','El evento llegó después del vencimiento del lease.',409);
   return when;
+}
+function validateResultShape(result,code){
+  if(!result||typeof result!=='object'||Array.isArray(result))throw farmError('INVALID_RESULT','Falta result estructurado para '+code);
+  if(String(result.code||'').toUpperCase()!==code)throw farmError('RESULT_CODE_MISMATCH','result.code no coincide.');
+  if(!/^\d{4}-\d{2}-\d{2}T/.test(String(result.articleGeneratedAt||'')))throw farmError('RESULT_VERSION_MISSING','Falta articleGeneratedAt para '+code);
+  if(!/^[a-f0-9]{64}$/i.test(String(result.articleHash||'')))throw farmError('RESULT_HASH_MISSING','Falta articleHash SHA-256 para '+code);
+  for(const field of ['sources','claims','links','conflicts'])if(!Array.isArray(result[field]))throw farmError('RESULT_SCHEMA_INVALID',field+' debe ser array para '+code);
+  if(result.provenance!==undefined&&(typeof result.provenance!=='object'||result.provenance===null||Array.isArray(result.provenance)))throw farmError('RESULT_SCHEMA_INVALID','provenance inválido para '+code);
+  return true;
 }
 function resultDigest(result){return sha256(stableStringify(result));}
 function applyWorkerEvent(state,event,{createdAt,commentId}){
@@ -223,8 +232,7 @@ function applyWorkerEvent(state,event,{createdAt,commentId}){
     if(Number(raw.leaseEpoch)!==Number(assignment.leaseEpoch))throw farmError('LEASE_EPOCH_MISMATCH','leaseEpoch obsoleto para '+code,409);
     const status=String(raw.status||'').toLowerCase();
     if(!['submitted','needs_review'].includes(status))throw farmError('INVALID_RESULT_STATUS','status debe ser submitted o needs_review.');
-    if(!raw.result||typeof raw.result!=='object'||Array.isArray(raw.result))throw farmError('INVALID_RESULT','Falta result estructurado para '+code);
-    if(String(raw.result.code||code).toUpperCase()!==code)throw farmError('RESULT_CODE_MISMATCH','result.code no coincide.');
+    validateResultShape(raw.result,code);
     const hash=resultDigest(raw.result),existing=next.results[code];
     if(existing){
       if(existing.hash!==hash){
@@ -277,5 +285,5 @@ module.exports={
   farmError,iso,parseDate,plusMs,randomToken,sha256,stableStringify,assertCode,codeParts,corpusEntries,
   parseJsonLoose,extractMarkedJson,renderMarked,renderBatchBody,renderLedgerBody,parseCommand,parseFarmState,parseLedger,parseWorkerEvent,
   initialLedger,normalizeLedger,terminalCodesFromLedgers,addTerminalToLedger,makeBatchState,isLeaseExpired,pendingCodes,
-  validateLeaseEvent,resultDigest,applyWorkerEvent,protectedCodesFromBatches,selectNextEntries,farmProgress,preservedPilotCodes
+  validateLeaseEvent,validateResultShape,resultDigest,applyWorkerEvent,protectedCodesFromBatches,selectNextEntries,farmProgress,preservedPilotCodes
 };
