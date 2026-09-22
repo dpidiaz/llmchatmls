@@ -1,0 +1,120 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V05-0165",
+    "article": {
+      "code": "MLS-V05-0165",
+      "articleGeneratedAt": "2026-09-19T08:09:44.755Z",
+      "articleHash": "a1f18d3143efee4304264f5db880b4ae762af0b2e719658ed48b4c999d7aab74",
+      "language": "aleman",
+      "languageName": "Alemán",
+      "title": "keinem/keiner/keinem en dativo",
+      "level": "A2",
+      "part": "Casos — Kasus",
+      "chapter": "Dativo — Dativ"
+    },
+    "state": {
+      "code": "MLS-V05-0165",
+      "article_generated_at": "2026-09-19T08:09:44.755Z",
+      "article_hash": "a1f18d3143efee4304264f5db880b4ae762af0b2e719658ed48b4c999d7aab74",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 3,
+      "claims_verified": 3,
+      "sources_total": 5,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 5,
+      "source_revision": 3,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-22T05:13:36.489Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 3,
+      "claimsVerified": 3,
+      "sourcesTotal": 5,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "ids-mit-container-doi": "MLS-SRC-37F3FA7F5D30322681BD"
+      },
+      "claims": {
+        "c-mit-dativ-e1": "MLS-CLM-A415755DAC6FB6C613D3BFAA"
+      }
+    },
+    "links": [
+      "MLS-LNK-1160C0D36CAA4408AA31334D"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 1,
+      "sourcesReused": 0,
+      "sourcesUpdated": 0,
+      "claimsCreated": 0,
+      "claimsReused": 1,
+      "linksCreated": 1,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "ids-mit-container-doi",
+          "sourceId": "MLS-SRC-37F3FA7F5D30322681BD",
+          "created": true,
+          "updated": false,
+          "reused": false
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-mit-dativ-e1",
+          "claimId": "MLS-CLM-A415755DAC6FB6C613D3BFAA",
+          "created": false,
+          "reused": true
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-1160C0D36CAA4408AA31334D",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 36,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 82,
+        "d1RowsWritten": 11,
+        "observedRowsRead": 39,
+        "observedRowsWritten": 3,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T05:13:37.778Z",
+  "commandFile": "mls chat bridge/commands/command 0275.json"
+}
