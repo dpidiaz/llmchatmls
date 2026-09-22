@@ -1,0 +1,33 @@
+name: MLS Farm Scheduler
+
+on:
+  issues:
+    types:
+      - opened
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: mls-farm-scheduler
+  cancel-in-progress: false
+
+jobs:
+  scheduler:
+    if: ${{ github.event_name != 'issues' || startsWith(github.event.issue.title, '[MLS Farm]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Ejecutar MLS Farm Scheduler
+        run: node 'scripts/MLS farm scheduler.cjs'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
