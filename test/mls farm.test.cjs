@@ -20,11 +20,32 @@ test('Farm claim parser defaults to 25 and caps at 100',()=>{
   assert.throws(()=>core.parseCommand(JSON.stringify({operation:'claim',requested:101,requestId:'request-12345678',workerId:'worker-12345678'})),/1 y 100/);
 });
 
-test('Farm lease is exactly 60 minutes since last accepted progress',()=>{
+test('Farm lease requires acknowledgement before the long 60-minute lease begins',()=>{
   const state=core.makeBatchState({issueNumber:55,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'x'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
-  assert.equal(state.expiresAt,'2026-09-22T07:00:00.000Z');
-  const next=core.applyWorkerEvent(state,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T06:20:00.000Z',commentId:1});
-  assert.equal(next.expiresAt,'2026-09-22T07:20:00.000Z');
+  assert.equal(state.acknowledgedAt,null);
+  assert.equal(state.ackDeadlineAt,'2026-09-22T06:05:00.000Z');
+  assert.equal(state.expiresAt,'2026-09-22T06:05:00.000Z');
+  const next=core.applyWorkerEvent(state,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T06:02:00.000Z',commentId:1});
+  assert.equal(next.acknowledgedAt,'2026-09-22T06:02:00.000Z');
+  assert.equal(next.lastHeartbeatAt,'2026-09-22T06:02:00.000Z');
+  assert.equal(next.expiresAt,'2026-09-22T07:02:00.000Z');
+});
+
+test('Farm releases an unacknowledged lease after five minutes',()=>{
+  const state=core.makeBatchState({issueNumber:551,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'x'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
+  assert.equal(core.isLeaseExpired(state,Date.parse('2026-09-22T06:05:00.000Z')),false);
+  assert.equal(core.isLeaseExpired(state,Date.parse('2026-09-22T06:05:00.001Z')),true);
+});
+
+test('Farm claim TTL prevents late claims from becoming orphan leases',()=>{
+  assert.equal(core.isClaimStale('2026-09-22T06:00:00.000Z',Date.parse('2026-09-22T06:01:30.000Z')),false);
+  assert.equal(core.isClaimStale('2026-09-22T06:00:00.000Z',Date.parse('2026-09-22T06:01:30.001Z')),true);
+});
+
+test('Farm renders canonical commands with MLS_FARM_COMMAND marker',()=>{
+  const body=core.renderCommandBody({operation:'claim',requested:50,requestId:'request-12345678',workerId:'worker-12345678'});
+  assert.match(body,/MLS_FARM_COMMAND/);
+  assert.equal(core.parseCommand(body).requested,50);
 });
 
 test('Farm rejects zombie worker event after lease expiry',()=>{
@@ -79,11 +100,15 @@ test('Farm workflows use GitHub Issues, per-batch concurrency and scheduled 15-m
   const scheduler=fs.readFileSync('.github/workflows/MLS Farm Scheduler.yml','utf8');
   const worker=fs.readFileSync('.github/workflows/MLS Farm Worker Events.yml','utf8');
   assert.match(scheduler,/issues:\s*\n\s*types:/);
-  assert.match(scheduler,/cron: '\*\/15 \* \* \* \*'/);
+  assert.match(scheduler,/cron: '\*\/5 \* \* \* \*'/);
   assert.match(scheduler,/group: mls-farm-scheduler/);
   assert.match(worker,/issue_comment:/);
   assert.match(worker,/group: mls-farm-batch-\$\{\{ github\.event\.issue\.number \}\}/);
-  for(const source of [scheduler,worker,fs.readFileSync('scripts/MLS farm scheduler.cjs','utf8'),fs.readFileSync('scripts/MLS farm worker.cjs','utf8')]){
+  const schedulerSource=fs.readFileSync('scripts/MLS farm scheduler.cjs','utf8');
+  assert.match(schedulerSource,/drainPendingCommands/);
+  assert.match(schedulerSource,/LEGACY_UNMARKED_COMMAND/);
+  assert.match(schedulerSource,/STALE_CLAIM/);
+  for(const source of [scheduler,worker,schedulerSource,fs.readFileSync('scripts/MLS farm worker.cjs','utf8')]){
     assert.doesNotMatch(source,/WIKI_DB|D1|cloudflare|workers\.dev/i);
   }
 });
