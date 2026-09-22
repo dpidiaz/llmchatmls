@@ -1,0 +1,140 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V09-0825",
+    "articleGeneratedAt": "2026-09-19T09:17:10.460Z",
+    "articleHash": "7b40ad95c17f180cae62758c62ad80b7321c31ff3fde67de6896f9d574cf8059",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "gramota-date-nominative",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "Ответ справочной службы: одиннадцатое сентября",
+        "institution": "Грамота.ру",
+        "canonicalUrl": "https://gramota.ru/poisk?mode=all&query=%D0%BE%D0%B4%D0%B8%D0%BD%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D0%BE%D0%B3%D0%BE",
+        "language": "ru",
+        "topics": [
+          "даты",
+          "порядковые числительные",
+          "именительный падеж",
+          "сентябрь"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "gramota-date-genitive",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "Ответ справочной службы: чтение дат в предложении",
+        "institution": "Грамота.ру",
+        "canonicalUrl": "https://gramota.ru/poisk?mode=spravka&query=%D0%B4%D0%B2%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D1%8C+%D1%82%D1%80%D0%B5%D1%82%D1%8C%D0%B5+%D0%B8%D1%8E%D0%BB%D1%8F",
+        "language": "ru",
+        "topics": [
+          "даты",
+          "родительный падеж",
+          "порядковые числительные",
+          "временные выражения"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "gramota-ordinal-declension",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Грамматические признаки порядковых числительных",
+        "institution": "Грамота.ру",
+        "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/grammaticheskie-priznaki-poryadkovykh-chislitelnykh",
+        "language": "ru",
+        "topics": [
+          "порядковые числительные",
+          "склонение",
+          "согласование",
+          "падеж"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "gramota-date-writing",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Как правильно записать дату?",
+        "institution": "Грамота.ру",
+        "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/pismovnik/kak-pravilno-zapisat-datu",
+        "language": "ru",
+        "topics": [
+          "даты",
+          "месяцы",
+          "календарная дата"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-date-nominative",
+        "sectionKey": "Observación importante",
+        "summary": "Cuando se nombra la fecha como identificación del día, el ruso puede usar el ordinal neutro en nominativo con el mes en genitivo, como третье сентября; esta construcción se explica por la elipsis de число y del vínculo con el nombre del mes.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-date-genitive",
+        "sectionKey": "En pocas palabras / Cómo funciona / Ejemplos",
+        "summary": "En muchos complementos temporales que responden a 'cuándo', el día de la fecha aparece con el ordinal en genitivo, como третьего сентября o двадцать второго июня, mientras el nombre del mes permanece en genitivo.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-ordinal-inflection",
+        "sectionKey": "Cómo funciona",
+        "summary": "Los numerales ordinales rusos se declinan como adjetivos y concuerdan en género, número y caso con el sustantivo implícito o explícito; por eso третий admite formas como neutro nominativo третье y genitivo третьего según la función sintáctica.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-date-nominative",
+        "sourceRef": "gramota-date-nominative",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Ответ: Правильно: одиннадцатое сентября; пропущены слова число месяца"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-date-genitive",
+        "sourceRef": "gramota-date-genitive",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "Ответ № 289893 — чтение даты в предложении"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-date-genitive",
+        "sourceRef": "gramota-date-writing",
+        "supportType": "supports",
+        "locator": {
+          "section": "Как правильно записать дату? — буквенно-цифровое обозначение"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-ordinal-inflection",
+        "sourceRef": "gramota-ordinal-declension",
+        "supportType": "supports",
+        "locator": {
+          "section": "Грамматические признаки порядковых числительных"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
