@@ -541,6 +541,8 @@ Precondición: Fase 3 = GO. Cumplida. Antes de ejecutar Gate 100, el runtime que
 
 Objetivo: verificar estabilidad operacional y reuse del Source Registry.
 
+Manifest preparado: `13 Gate 100 Manifest.json` — 100 entradas exactas, 10 por idioma, selección determinista por cuantiles y exclusión del Pilot 20.
+
 Medir nuevamente todas las métricas.
 
 Añadir especial atención a:
@@ -1096,6 +1098,7 @@ CURRENT:
 - Gate 100 not yet executing because scale runtime endpoints from #146 are not live
 
 NEXT:
+- Gate 100 manifest prepared and blob-locked (100 entries, 10 per language)
 - Make scale runtime available through the normal authorized deployment path
 - Re-run one read-only scalability smoke
 - Start Gate 100 with batch triage, registry-first reuse and exception-first handling
