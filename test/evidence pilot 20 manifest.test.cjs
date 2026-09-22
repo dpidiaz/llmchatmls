@@ -11,22 +11,22 @@ function gitBlobSha(buffer){
   return crypto.createHash('sha1').update(Buffer.from('blob '+buffer.length+'\0')).update(buffer).digest('hex');
 }
 
-test('Pilot 20 manifest: reflects the live execution state without fabricating completion',()=>{
+test('Pilot 20 manifest: reflects completed live execution without fabricating review state',()=>{
   assert.equal(manifest.pilotId,'MLS-R33-EVIDENCE-PILOT-20');
-  assert.equal(manifest.status,'in_progress');
+  assert.equal(manifest.status,'completed');
   assert.equal(manifest.execution.started,true);
   assert.equal(manifest.execution.runId,'MLS-R33-EVIDENCE-PILOT-20-20260921-A');
   assert.equal(manifest.execution.startedAt,'2026-09-21T17:07:44Z');
-  assert.equal(manifest.execution.completedAt,null);
-  assert.equal(manifest.execution.entriesProcessed,16);
-  assert.equal(manifest.execution.entriesVerified,14);
-  assert.equal(manifest.execution.entriesSourcedNotVerified,2);
+  assert.equal(manifest.execution.completedAt,'2026-09-22T01:51:55.091Z');
+  assert.equal(manifest.execution.entriesProcessed,20);
+  assert.equal(manifest.execution.entriesVerified,17);
+  assert.equal(manifest.execution.entriesSourcedNotVerified,3);
   assert.equal(manifest.execution.entriesNeedsReview,1);
-  assert.equal(manifest.execution.articleRevisionsProposed,2);
-  assert.equal(manifest.execution.lastCompletedOrder,16);
-  assert.equal(manifest.execution.lastCompletedCode,'MLS-V07-0813');
-  assert.equal(manifest.execution.lastCheckpoint,'13-16');
-  assert.equal(manifest.execution.lastCheckpointStatus,'pass_with_finding');
+  assert.equal(manifest.execution.articleRevisionsProposed,3);
+  assert.equal(manifest.execution.lastCompletedOrder,20);
+  assert.equal(manifest.execution.lastCompletedCode,'MLS-V09-0825');
+  assert.equal(manifest.execution.lastCheckpoint,'17-20');
+  assert.equal(manifest.execution.lastCheckpointStatus,'pass_with_findings');
   assert.equal(manifest.entries.length,20);
 });
 
