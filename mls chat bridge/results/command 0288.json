@@ -1,0 +1,29 @@
+{
+  "success": false,
+  "httpStatus": 409,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": false,
+    "error": "La entrada cambió; vuelve a cargar la versión canónica.",
+    "code": "ARTICLE_VERSION_CONFLICT",
+    "telemetry": {
+      "d1": {
+        "queries": 1,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 1,
+        "d1RowsWritten": 0,
+        "observedRowsRead": 1,
+        "observedRowsWritten": 0,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T08:12:57.722Z",
+  "commandFile": "mls chat bridge/commands/command 0288.json"
+}
