@@ -176,9 +176,9 @@ function patchEvidenceReader(source){
   if(!source.includes(serverAnchor))throw new Error('No se encontró materializeWikiEntryOnVisit.');
   source=source.replace(serverAnchor,MARKER+'\n'+SERVER_HELPER+'\n'+serverAnchor);
 
-  const wikiApiAnchor='async function handleWikiApi(request, env, url) {\\n  await ensureWikiDb(env);';
+  const wikiApiAnchor='async function handleWikiApi(request, env, url) {\n  await ensureWikiDb(env);';
   if(!source.includes(wikiApiAnchor))throw new Error('No se encontró handleWikiApi para Evidence pública.');
-  const publicEvidenceRoute=\`async function handleWikiApi(request, env, url) {
+  const publicEvidenceRoute=`async function handleWikiApi(request, env, url) {
   await ensureWikiDb(env);
   const publicEvidenceMatch = url.pathname.match(/^\\/api\\/wiki\\/evidence-public\\/(MLS-V\\d{2}-\\d{4})$/i);
   if (publicEvidenceMatch) {
@@ -187,7 +187,7 @@ function patchEvidenceReader(source){
     }
     const evidence = await mlsPublicEvidenceForCode(env, publicEvidenceMatch[1].toUpperCase());
     return Response.json({ ok: true, evidence }, { headers: { "cache-control": "private, no-store" } });
-  }\`;
+  }`;
   source=source.replace(wikiApiAnchor,publicEvidenceRoute);
 
   const materializedPattern=/flag: "materialized",\n\s+article\n/g;
