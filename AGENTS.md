@@ -43,4 +43,5 @@ Important invariants:
 - do not revive legacy unmarked claims;
 - acknowledge a lease immediately with a worker heartbeat;
 - do not leave a live claim or lease behind when the chat turn ends;
-- preserve ledger terminal states and active lease overlap protection.
+- preserve ledger terminal states and active lease overlap protection;
+- `MLS Farm siguientes N` is explicitly **chat-only**: execute the complete Farm lifecycle in the current ChatGPT conversation and **never hand off, redirect, or suggest ChatGPT Work** for this command unless the user explicitly overrides this rule in that same request.
