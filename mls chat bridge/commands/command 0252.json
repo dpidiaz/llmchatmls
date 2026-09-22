@@ -1,0 +1,124 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V08-0875",
+    "articleGeneratedAt": "2026-09-19T09:18:32.683Z",
+    "articleHash": "5f0df8a2a4b27917f26e3e4a3e32ac6109436bbc673acff039594cb4a3111515",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "krdict-yoyakhada",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "요약하다",
+        "institution": "국립국어원 한국어기초사전",
+        "canonicalUrl": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=26622",
+        "language": "ko",
+        "topics": [
+          "요약하다",
+          "요약",
+          "학술 담화",
+          "summary"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "lee-2014-academic-korean",
+        "sourceType": "report",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "효과적인 학문 목적 한국어 교육과정 연구",
+        "authors": [
+          "이은희"
+        ],
+        "institution": "건국대학교 대학원",
+        "publicationYear": 2014,
+        "canonicalUrl": "https://www.dbpia.co.kr/journal/detail?nodeId=T13557483",
+        "language": "ko",
+        "topics": [
+          "학문 목적 한국어",
+          "학술 텍스트",
+          "요약하면",
+          "결론"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "nikl-ttaraseo-2026",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "‘따라서’와 ‘그러므로’의 차이",
+        "institution": "국립국어원 온라인가나다",
+        "publicationYear": 2026,
+        "publicationDate": "2026-03-09",
+        "canonicalUrl": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=&pageIndex=1&qna_seq=327990",
+        "language": "ko",
+        "topics": [
+          "따라서",
+          "접속 부사",
+          "원인",
+          "이유",
+          "근거"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-summary-function",
+        "sectionKey": "En pocas palabras / Cómo funciona / Ejemplos",
+        "summary": "요약하다 significa seleccionar los puntos importantes de un texto o discurso y hacerlos más breves; la forma 요약하면 se usa en textos académicos para introducir una formulación condensada de resultados o contenido previamente expuesto, como en el patrón ‘연구 결과를 요약하면 다음과 같다’.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-summary-vs-consequence",
+        "sectionKey": "Observación importante",
+        "summary": "요약하면 y 따라서 no son equivalentes discursivos: 요약하면 presenta una síntesis de contenido previo, mientras 따라서 es un adverbio conjuntivo que señala que lo anterior constituye causa, razón o fundamento de lo que sigue.",
+        "claimType": "general",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-summary-function",
+        "sourceRef": "krdict-yoyakhada",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "요약하다 — 말이나 글에서 중요한 것을 골라 짧게 만들다"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-summary-function",
+        "sourceRef": "lee-2014-academic-korean",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "section": "5장 결론 — 이 연구의 결과를 요약하면 다음과 같다"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-summary-vs-consequence",
+        "sourceRef": "krdict-yoyakhada",
+        "supportType": "supports",
+        "locator": {
+          "section": "요약하다"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-summary-vs-consequence",
+        "sourceRef": "nikl-ttaraseo-2026",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "온라인가나다 답변 — 따라서의 사전 뜻풀이"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
