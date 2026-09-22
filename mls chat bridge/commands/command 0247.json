@@ -1,0 +1,124 @@
+{
+  "operationId": "proponerEvidenceMLS",
+  "input": {
+    "code": "MLS-V08-0010",
+    "articleGeneratedAt": "2026-09-19T07:39:46.725Z",
+    "articleHash": "8fc5162afbe93da14fc19f9e383187a5e1d353b48885bb01e26310f77fe50aaa",
+    "expectedEvidenceRevision": 0,
+    "sources": [
+      {
+        "clientId": "krdict-siot",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "시옷",
+        "institution": "국립국어원 한국어기초사전",
+        "canonicalUrl": "https://krdict.korean.go.kr/eng/dicSearch/wordLinkViewPopup?ParaWordNo=69089&nation=eng&nationCode=6",
+        "language": "ko",
+        "topics": [
+          "시옷",
+          "ㅅ",
+          "한글 자모",
+          "자음"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "nikl-standard-pronunciation",
+        "sourceType": "institutional_webpage",
+        "authorityTier": "A",
+        "status": "active",
+        "title": "한국어 어문 규범 — 표준 발음법",
+        "institution": "국립국어원",
+        "canonicalUrl": "https://www.korean.go.kr/kornorms/m/m_regltn.do?regltn_code=0002",
+        "language": "ko",
+        "topics": [
+          "표준 발음법",
+          "받침",
+          "ㅅ",
+          "대표음 ㄷ"
+        ],
+        "accessedAt": "2026-09-21"
+      },
+      {
+        "clientId": "kang-2010-s-coarticulation",
+        "sourceType": "journal_article",
+        "authorityTier": "B",
+        "status": "active",
+        "title": "Coarticulation effects of Korean sibilant /s/ before a high front segment",
+        "authors": [
+          "Kang, Hyunsook"
+        ],
+        "publicationYear": 2010,
+        "journal": "Studies in Phonetics, Phonology, and Morphology",
+        "volume": "16",
+        "issue": "1",
+        "pages": "3-18",
+        "issn": "1226-8690",
+        "doi": "10.17959/sppm.2010.16.1.3",
+        "canonicalUrl": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART001444770",
+        "language": "en",
+        "topics": [
+          "Korean /s/",
+          "palatalization",
+          "coarticulation",
+          "high front vowels"
+        ],
+        "accessedAt": "2026-09-21"
+      }
+    ],
+    "claims": [
+      {
+        "clientId": "c-siot-name",
+        "sectionKey": "En pocas palabras / Observación importante",
+        "summary": "El jamo consonántico ㅅ recibe el nombre 시옷 (siot) en coreano; el nombre de la letra no implica que ㅅ tenga una única realización fonética constante.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-onset-palatalization",
+        "sectionKey": "Cómo funciona / Ejemplos",
+        "summary": "La sibilante coreana ㅅ presenta realizaciones dependientes del contexto: ante segmentos frontales altos como /i/ y secuencias con /j/ adquiere características palatalizadas/alveolopalatales, mientras que ante vocales no frontales su realización es más anterior. Por eso 시 no se pronuncia exactamente como una s española seguida de i.",
+        "claimType": "general",
+        "materiality": "substantial"
+      },
+      {
+        "clientId": "c-coda-neutralization",
+        "sectionKey": "Cómo funciona / Ejemplos",
+        "summary": "En posición final de sílaba o ante otra consonante, el 받침 ㅅ se neutraliza al sonido representativo [ㄷ], fonéticamente un cierre coronal no liberado; por eso 옷 aislado se pronuncia [옫], no con una s final continua.",
+        "claimType": "normative",
+        "materiality": "substantial"
+      }
+    ],
+    "links": [
+      {
+        "claimRef": "c-siot-name",
+        "sourceRef": "krdict-siot",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "시옷 — 한글 자모 ‘ㅅ’의 이름"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-onset-palatalization",
+        "sourceRef": "kang-2010-s-coarticulation",
+        "supportType": "secondary_interpretation",
+        "locator": {
+          "section": "Abstract / Korean /s/ before high front segments"
+        },
+        "verificationMethod": "manual_source_match"
+      },
+      {
+        "claimRef": "c-coda-neutralization",
+        "sourceRef": "nikl-standard-pronunciation",
+        "supportType": "primary_source",
+        "locator": {
+          "section": "표준 발음법 제9항 — 받침 ㅅ은 어말 또는 자음 앞에서 대표음 [ㄷ]"
+        },
+        "verificationMethod": "manual_source_match"
+      }
+    ],
+    "conflicts": []
+  }
+}
