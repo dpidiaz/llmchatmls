@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 3 — EVALUACIÓN / READY — PILOT 20 COMPLETE (20/20)**
+**Estado actual: FASE 3 — EVALUACIÓN / COMPLETE — CORRECT AND REPEAT**
 
 Progreso global inicial:
 
@@ -46,8 +46,8 @@ Progreso global inicial:
 | Fase 0 Auditoría | COMPLETE | Arquitectura y schema recomendados |
 | Fase 1 Foundation | COMPLETE | Foundation R33 certificada |
 | Fase 2 Piloto 20 | COMPLETE — PASS WITH FINDINGS | 20/20 procesadas; Fase 3 obligatoria |
-| Fase 3 Evaluación | READY — NOT STARTED | GO / CORRECT AND REPEAT / STOP |
-| Fase 4 Gate 100 | NOT STARTED | 100 estables |
+| Fase 3 Evaluación | COMPLETE — CORRECT AND REPEAT | Correcciones E1–E5 + repeat dirigido |
+| Fase 4 Gate 100 | BLOCKED | Requiere cierre de Correction Repeat y decisión GO |
 | Fase 5 Gate 500 | NOT STARTED | 500 estables |
 | Fase 6 Gate 1000 | NOT STARTED | 1000 estables |
 | Fase 7 Escalamiento corpus | NOT STARTED | Viabilidad demostrada |
@@ -481,32 +481,55 @@ No avanzar si:
 
 # 9. FASE 3 — EVALUACIÓN
 
-**Estado: NOT STARTED**
+**Estado: COMPLETE — CORRECT AND REPEAT**
 
-Comparar resultados del piloto contra los objetivos.
+Documento de decisión: `10 Fase 3 Evaluacion Pilot 20.md`.
 
-Preguntas obligatorias:
+## Resultado
 
-1. ¿Qué porcentaje de claims quedó realmente verificado?
-2. ¿Cuántas fuentes se reutilizaron?
-3. ¿Cuántos conflictos reales aparecieron?
-4. ¿Cuánto review manual se requiere?
-5. ¿Cuál es el costo D1 por entrada?
-6. ¿Cuál es el costo GitHub por batch?
-7. ¿Cuál es el crecimiento medio en bytes?
-8. ¿Cuántos false matches ocurrieron?
-9. ¿El modelo de claims es demasiado granular?
-10. ¿Los source tiers están funcionando?
-11. ¿La política por idioma necesita ajustes?
-12. ¿El renderer APA produce salidas consistentes?
-13. ¿Virtuoso/Profesor IA pueden consumir el estado sin exagerarlo?
-14. ¿UNSOURCED sigue funcionando sin degradar R32?
+El Pilot 20 validó las garantías centrales:
 
-Resultado:
+- 20/20 entradas procesadas;
+- 17 VERIFIED;
+- 3 SOURCED bloqueadas correctamente;
+- 53/55 claims sustanciales con cobertura suficiente;
+- 1 conflicto sustantivo real detectado;
+- 3 revisiones de artículo propuestas;
+- 0 silent overwrite;
+- 0 falsos VERIFIED observados;
+- 0 fallos APA finales;
+- FREE ONLY compatible con Pilot 20.
+
+La decisión es:
+
+`CORRECT AND REPEAT`
+
+No se autoriza Gate 100 todavía.
+
+## Correcciones E1–E5
+
+- [ ] **E1 DOI identity scope** — distinguir DOI de recurso específico de DOI de obra/contenedor.
+- [ ] **E2 Cross-entry Source reuse** — demostrar live misma Source en dos artículos distintos.
+- [ ] **E3 Human REVIEWED lifecycle** — ejecutar al menos un review humano real; no fabricarlo.
+- [ ] **E4 Control-plane scaling** — mitigar o documentar definitivamente builds/commits innecesarios del Bridge.
+- [ ] **E5 Consumer evidence contract** — certificar consumo read-only de estados por Virtuoso/Profesor IA sin exagerar SOURCED/UNSOURCED.
+
+## Repeat dirigido
+
+No repetir las 20 entradas completas.
+
+El repeat debe demostrar:
+
+1. dos recursos granulares distintos con un DOI de contenedor compartido no colisionan;
+2. DOI de recurso específico conserva dedupe por DOI;
+3. reuse cross-entry devuelve el mismo Source ID;
+4. REVIEWED humano funciona sobre snapshot VERIFIED vigente;
+5. consumidores distinguen UNSOURCED / SOURCED / VERIFIED / REVIEWED;
+6. full regression permanece verde.
+
+Solo después del repeat se vuelve a emitir una decisión:
 
 `GO`, `CORRECT AND REPEAT` o `STOP`.
-
-No escalar por inercia.
 
 ---
 
@@ -736,6 +759,23 @@ No inventar números cuando no se hayan medido.
 - Lifecycle REVIEWED humano no fue ejercitado live.
 - Pilot 20 COMPLETE. Gate 100 NO autorizado hasta Fase 3.
 - Documento detallado: `09 Pilot 20 Checkpoint 17 a 20.md`.
+
+## 2026-09-21 / 2026-09-22 — Fase 3 evaluada: CORRECT AND REPEAT
+
+- Pilot 20 completo: 20/20.
+- 17 VERIFIED; 3 SOURCED no VERIFIED.
+- 53/55 claims con cobertura suficiente.
+- 1 conflicto sustantivo; 3 article revisions propuestas; 0 integradas.
+- D1: 9,232 reads / 1,000 writes.
+- Logical Evidence: 176,399 bytes.
+- Source retry/enrichment reuse funcionó; cross-entry reuse no se observó.
+- REVIEWED humano no se ejercitó.
+- DOI de contenedor compartido puede causar falsa colisión si se trata como DOI del recurso granular.
+- Control plane acumuló 197 commits y +788,553 blob bytes.
+- Virtuoso/Profesor IA todavía no tienen certificación de consumo Evidence.
+- Decisión: CORRECT AND REPEAT.
+- Gate 100: BLOCKED.
+- Documento: `10 Fase 3 Evaluacion Pilot 20.md`.
 
 ## 2026-09-21 — Pilot 20 checkpoint 13–16 PASS WITH FINDING
 
@@ -1018,125 +1058,63 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 2 PILOT 20 COMPLETE — PASS WITH FINDINGS / PHASE 3 READY
+STATUS: PHASE 3 COMPLETE — CORRECT AND REPEAT / GATE 100 BLOCKED
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-MAIN HEAD AT PILOT CLOSE BASE: d00d554f6792b1877c857cdcb5383e9b4c7c03d7
-CONTROL BRANCH: mlschatcontrol
-CONTROL HEAD AFTER ENTRY 20: 2e04f482c3b8fd247f238411245ffe61896fbc5d
-DOCUMENTATION BRANCH: r33-evidence-pilot-checkpoint-20
+MAIN HEAD AFTER PILOT CLOSE: e4234ad7b6b5207951359bc9c7b02b9ac0f029b7
+BRANCH: r33-evidence-phase3-evaluation
 
 DONE:
-- All 20 Pilot entries processed
-- Entries 1–8 completed
-- Entry 9 SOURCED + needsReview; substantive conflict; revision proposed
-- Entries 10–15 VERIFIED
-- Entry 16 SOURCED; evidence gap; revision proposed
-- Entry 17 VERIFIED
-- Entry 18 SOURCED; unsupported frequency claim; revision proposed
-- Entries 19–20 VERIFIED
-- Final checkpoint document created
-- Manifest synchronized to completed 20/20
+- Phase 2 Pilot 20 complete
+- 20/20 entries processed
+- 17 VERIFIED
+- 3 SOURCED not VERIFIED
+- 53/55 claims coverage-qualified
+- Fase 3 evaluation completed
+- Decision: CORRECT AND REPEAT
+- Evaluation document created
 
 CURRENT:
-- Phase 2 complete
-- 17 VERIFIED
-- 3 SOURCED not VERIFIED
-- 1 SOURCED + needsReview
-- 0 REVIEWED
-- 3 article revisions proposed
-- 0 article revisions integrated
-- Phase 3 evaluation required
+- Gate 100 blocked
+- Correction work E1–E5 required
 
 NEXT:
-- Certify and merge Pilot close documentation
-- Run Fase 3 evaluation
-- Produce exactly one decision: GO / CORRECT AND REPEAT / STOP
-- Do not start Gate 100 before that decision
+- Merge Fase 3 evaluation documentation after CI
+- E1 implement DOI identity scope
+- E2 targeted cross-entry Source reuse repeat
+- E3 real human REVIEWED exercise
+- E4 control-plane scaling mitigation/documentation
+- E5 consumer evidence contract
+- Run directed repeat
+- Re-evaluate GO / CORRECT AND REPEAT / STOP
 
-BLOCKERS / FINDINGS FOR PHASE 3:
-- Source identity must distinguish resource-specific DOI from container/work DOI
-- Cross-entry Source reuse not observed live
-- Human REVIEWED lifecycle not exercised live
-- Entry 9 remains unresolved conflict
-- Entry 16 remains evidence-gap SOURCED
-- Entry 18 remains evidence-gap SOURCED
-- Workers Builds on mlschatcontrol should be audited before sustained scaling
+BLOCKERS FOR GATE 100:
+- DOI resource vs container scope not modeled
+- cross-entry Source reuse not demonstrated live
+- human REVIEWED not demonstrated live
+- control-plane builds/commit noise not closed
+- Virtuoso/Profesor IA Evidence consumption not certified
 
-DECISIONS:
-- No false VERIFIED observed
-- Evidence gap alone can and did block VERIFIED
-- Contradiction can and did block VERIFIED
-- Proposed revisions never overwrite canonical articles
-- No fabricated human review
-- No Gate 100 authorization yet
+PILOT FINAL:
+- entriesProcessed: 20
+- entriesVerified: 17
+- entriesSourcedNotVerified: 3
+- entriesReviewed: 0
+- sourcesCreated: 57
+- claimsCreated: 55
+- claimsCoverageQualified: 53
+- evidenceLinks: 81
+- conflicts: 1
+- needsReview: 1
+- articleRevisionsProposed: 3
+- d1RowsRead: 9232
+- d1RowsWritten: 1000
+- logicalEvidenceBytes: 176399
+- apaValidationFailures: 0
 
-AUTOOPT IMPACT:
-- None
-
-R32 COMPATIBILITY:
-- Preserved
-
-EVIDENCE STATUS:
-- 17 VERIFIED
-- 3 SOURCED not VERIFIED
-- 1 of the 3 needsReview
-- 0 REVIEWED
-
-ENTRIES PROCESSED:
-- 20 / 20
-
-SOURCES:
-- created: 57
-- retry/enrichment reuse operations: 3
-- metadata updates: 1
-- cross-entry reuse: 0
-
-CLAIMS:
-- created: 55
-- coverage-qualified: 53
-- retry reuse operations: 2
-
-EVIDENCE LINKS:
-- current: 81
-- retry reuse operations: 3
-
-CONFLICTS:
-- 1
-
-NEEDS REVIEW:
-- 1
-
-ARTICLE REVISIONS:
-- proposed: 3
-- integrated: 0
-
-D1 IMPACT:
-- 9232 exact rows read
-- 1000 exact rows written
-- average 461.6 read / 50 written per entry
-
-SIZE:
-- logical Evidence bytes: 176399
-- average: 8819.95 bytes/entry
-
-GITHUB IMPACT:
-- Evidence runtime GitHub requests/mutations: 0
-- control plane commits since baseline: 197
-- control branch blob delta: +788553 bytes
-- transport-level GitHub request count: not instrumented
-
-APA:
-- validation failures: 0
-- metadata corrections before verification: 1
-
-MANUAL REVIEW:
-- human events: 0
-
-CHECKPOINT:
-- PASS WITH FINDINGS — Pilot 20 COMPLETE
+DECISION:
+- CORRECT AND REPEAT
 - Gate 100 NOT AUTHORIZED
-- Phase 3 READY
 ```
 ---
 

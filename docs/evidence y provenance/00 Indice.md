@@ -19,6 +19,18 @@ R33 es aditivo. Las entradas R32 continúan siendo utilizables aunque su estado 
 3. [03 Fase 0 Arquitectura y diseño recomendado](./03%20Fase%200%20Arquitectura%20y%20dise%C3%B1o%20recomendado.md)  
    Auditoría técnica de R32, opciones de schema, arquitectura D1 recomendada, state machine, concurrencia, APA, estimaciones de tamaño y unidades de implementación de Foundation.
 
+4. [03 Pilot 20 Plan](./03%20Pilot%2020%20Plan.md)  
+   Plan operativo y gates del Pilot 20.
+
+5. [04 Pilot 20 Manifest](./04%20Pilot%2020%20Manifest.json)  
+   Muestra canónica bloqueada y estado de ejecución del piloto.
+
+6. Checkpoints Pilot 20: `05` a `09`  
+   Métricas y hallazgos por bloques de cuatro entradas.
+
+7. [10 Fase 3 Evaluacion Pilot 20](./10%20Fase%203%20Evaluacion%20Pilot%2020.md)  
+   Evaluación posterior al piloto. Decisión vigente: **CORRECT AND REPEAT**; Gate 100 bloqueado hasta cerrar E1–E5.
+
 ## Contexto R32 inspeccionado al crear esta documentación
 
 Repositorio: `dpidiaz/llmchatmls`  
