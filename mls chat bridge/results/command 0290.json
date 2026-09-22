@@ -1,0 +1,133 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V10-0027",
+    "article": {
+      "code": "MLS-V10-0027",
+      "articleGeneratedAt": "2026-09-13T07:46:57.552Z",
+      "articleHash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+      "language": "espanol-guatemala",
+      "languageName": "Español de Guatemala",
+      "title": "Mayúsculas en instituciones y documentos",
+      "level": "G0",
+      "part": "Fundamentos, escritura y ortografía / Foundations, writing, and orthography",
+      "chapter": "Alfabeto, grafemas y ortografía fundamental / Alphabet, graphemes, and core orthography"
+    },
+    "state": {
+      "code": "MLS-V10-0027",
+      "article_generated_at": "2026-09-13T07:46:57.552Z",
+      "article_hash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 2,
+      "claims_verified": 2,
+      "sources_total": 1,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 1,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-22T08:14:53.200Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "verification_event_missing"
+      ],
+      "claimsTotal": 2,
+      "claimsVerified": 2,
+      "sourcesTotal": 1,
+      "conflictsTotal": 0,
+      "citationReady": true
+    },
+    "mappings": {
+      "sources": {
+        "rae-orth-27": "MLS-SRC-A51B39B1F9F8AA4051D9"
+      },
+      "claims": {
+        "c1": "MLS-CLM-62B37C5AAD6646E5A635A17E",
+        "c2": "MLS-CLM-B4108626C18A208DDC66CC57"
+      }
+    },
+    "links": [
+      "MLS-LNK-6CE8D51E8EDD4AE78A0B3B61",
+      "MLS-LNK-D34F2254BA2088E383CC27A1"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 0,
+      "sourcesReused": 1,
+      "sourcesUpdated": 1,
+      "claimsCreated": 2,
+      "claimsReused": 0,
+      "linksCreated": 2,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "rae-orth-27",
+          "sourceId": "MLS-SRC-A51B39B1F9F8AA4051D9",
+          "created": false,
+          "updated": true,
+          "reused": true
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c1",
+          "claimId": "MLS-CLM-62B37C5AAD6646E5A635A17E",
+          "created": true,
+          "reused": false
+        },
+        {
+          "clientId": "c2",
+          "claimId": "MLS-CLM-B4108626C18A208DDC66CC57",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-6CE8D51E8EDD4AE78A0B3B61",
+          "created": true,
+          "reused": false
+        },
+        {
+          "linkId": "MLS-LNK-D34F2254BA2088E383CC27A1",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 40,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 62,
+        "d1RowsWritten": 21,
+        "observedRowsRead": 29,
+        "observedRowsWritten": 6,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T08:14:54.088Z",
+  "commandFile": "mls chat bridge/commands/command 0290.json"
+}
