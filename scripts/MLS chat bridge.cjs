@@ -40,6 +40,46 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     method: 'POST',
     pathname: '/api/wiki/editorial/staging/integrate',
     input: 'body'
+  },
+  entradaEvidenceMLS: {
+    method: 'GET',
+    pathname: '/api/wiki/editorial/evidence/entry',
+    input: 'code'
+  },
+  fuentesEntradaEvidenceMLS: {
+    method: 'GET',
+    pathname: '/api/wiki/editorial/evidence/sources',
+    input: 'code'
+  },
+  metricasEvidenceEntradaMLS: {
+    method: 'GET',
+    pathname: '/api/wiki/editorial/evidence/metrics',
+    input: 'code'
+  },
+  validarEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/validate',
+    input: 'body'
+  },
+  proponerEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/proposal',
+    input: 'body'
+  },
+  verificarEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/verify',
+    input: 'body'
+  },
+  revisarEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/review',
+    input: 'body'
+  },
+  proponerRevisionEvidenceMLS: {
+    method: 'POST',
+    pathname: '/api/wiki/editorial/evidence/revision/propose',
+    input: 'body'
   }
 });
 
@@ -114,6 +154,15 @@ function normalizeBridgeCommand(command) {
     return { operationId, operation, input: { runId } };
   }
 
+  if (operation.input === 'code') {
+    if (!ownKeysExactly(command.input, ['code']))
+      throw new Error('Esta operación solo admite input.code.');
+    const code = String(command.input.code || '').trim().toUpperCase();
+    if (!/^MLS-V\d{2}-\d{4}$/.test(code))
+      throw new Error('code MLS inválido.');
+    return { operationId, operation, input: { code } };
+  }
+
   return { operationId, operation, input: command.input };
 }
 
@@ -166,6 +215,10 @@ async function executeRemoteOperation(operationId, input, options = {}) {
     const runId = String(input?.runId || '').trim();
     if (!runId) throw new Error('runId es obligatorio.');
     url.searchParams.set('runId', runId);
+  } else if (operation.input === 'code') {
+    const code = String(input?.code || '').trim().toUpperCase();
+    if (!/^MLS-V\d{2}-\d{4}$/.test(code)) throw new Error('code MLS inválido.');
+    url.searchParams.set('code', code);
   } else {
     init.headers['content-type'] = 'application/json';
     init.body = JSON.stringify(input || {});
@@ -348,13 +401,77 @@ async function executeBridgeCommand(command, options = {}) {
   return executeRemoteOperation(normalized.operationId, normalized.input, options);
 }
 
+function normalizeBridgeBatch(batch) {
+  if (!isPlainObject(batch)) throw new Error('El batch del puente debe ser un objeto JSON.');
+  const allowed = new Set(['batchId','commands','stopOnError']);
+  for (const key of Object.keys(batch)) if (!allowed.has(key)) throw new Error('Campo no permitido en batch: ' + key);
+  const batchId = String(batch.batchId || '').trim();
+  if (!/^[A-Za-z0-9_.:-]{1,100}$/.test(batchId)) throw new Error('batchId inválido.');
+  if (!Array.isArray(batch.commands) || batch.commands.length < 1 || batch.commands.length > 50)
+    throw new Error('commands debe contener entre 1 y 50 operaciones.');
+  return {
+    batchId,
+    stopOnError: batch.stopOnError !== false,
+    commands: batch.commands.map((command, index) => {
+      try { normalizeBridgeCommand(command); return command; }
+      catch (error) { throw new Error('commands[' + index + ']: ' + String(error?.message || error)); }
+    })
+  };
+}
+
+async function executeBridgeBatch(batch, options = {}) {
+  const normalized = normalizeBridgeBatch(batch);
+  const results = [];
+  for (let index = 0; index < normalized.commands.length; index += 1) {
+    const command = normalized.commands[index];
+    let result;
+    try {
+      result = await executeBridgeCommand(command, options);
+    } catch (error) {
+      result = {
+        success: false,
+        httpStatus: 0,
+        operationId: String(command?.operationId || '') || null,
+        method: null,
+        path: null,
+        response: { error: String(error?.message || error) },
+        completedAt: new Date().toISOString()
+      };
+    }
+    results.push({ index, ...result });
+    if (!result.success && normalized.stopOnError) break;
+  }
+  const completed = results.length;
+  const failures = results.filter(item => !item.success).length;
+  const allRequestedProcessed = completed === normalized.commands.length;
+  return {
+    success: failures === 0 && allRequestedProcessed,
+    httpStatus: failures === 0 && allRequestedProcessed ? 200 : (results.find(item => !item.success)?.httpStatus || 409),
+    operationId: 'bridgeBatch',
+    method: 'BATCH',
+    path: 'bridge://batch',
+    response: {
+      ok: failures === 0 && allRequestedProcessed,
+      batchId: normalized.batchId,
+      requested: normalized.commands.length,
+      processed: completed,
+      failures,
+      stopOnError: normalized.stopOnError,
+      results
+    },
+    completedAt: new Date().toISOString()
+  };
+}
+
 async function processBridgeCommandFile(commandPath, options = {}) {
   const resultPath = bridgeResultPath(commandPath);
   let result;
 
   try {
     const command = JSON.parse(fs.readFileSync(commandPath, 'utf8'));
-    result = await executeBridgeCommand(command, options);
+    result = Array.isArray(command?.commands)
+      ? await executeBridgeBatch(command, options)
+      : await executeBridgeCommand(command, options);
   } catch (error) {
     result = {
       success: false,
@@ -425,6 +542,8 @@ module.exports = {
   executeRemoteOperation,
   executeStagingSequence,
   executeBridgeCommand,
+  normalizeBridgeBatch,
+  executeBridgeBatch,
   processBridgeCommandFile,
   verifyBridgeResults
 };
