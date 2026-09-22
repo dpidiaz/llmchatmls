@@ -87,13 +87,13 @@
     const normalized=String(code||'').trim().toUpperCase();
     if(!/^MLS-V\d{2}-\d{4}$/.test(normalized))return null;
     try{
-      const response=await fetch('/api/wiki/article/'+encodeURIComponent(normalized),{
+      const response=await fetch('/api/wiki/evidence-public/'+encodeURIComponent(normalized),{
         cache:'no-store',
         headers:{accept:'application/json','cache-control':'no-cache'}
       });
       if(!response.ok)return null;
       const payload=await response.json();
-      return payload?.article?.evidence||null;
+      return payload?.evidence||null;
     }catch(error){
       console.warn('MLS Evidence public summary unavailable',normalized,error);
       return null;
