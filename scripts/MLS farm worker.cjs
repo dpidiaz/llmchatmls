@@ -25,6 +25,7 @@ async function main(){
   const issue=event.issue,comment=event.comment;
   if(!issue||!comment||!String(issue.title||'').startsWith('[MLS Farm][LEASED]'))return;
   const state=core.parseFarmState(issue.body||'');if(!state)return;
+  if(state.workerLogin&&String(comment.user?.login||'')!==String(state.workerLogin))return;
   try{
     const farmEvent=core.parseWorkerEvent(comment.body||'');
     const next=core.applyWorkerEvent(state,farmEvent,{createdAt:comment.created_at,commentId:comment.id});
