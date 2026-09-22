@@ -1,0 +1,808 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "MLS-FARM-PUBLISH-20260922-FINALIZE165",
+    "requested": 6,
+    "processed": 6,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0030",
+          "article": {
+            "code": "MLS-V10-0030",
+            "articleGeneratedAt": "2026-09-13T07:48:14.157Z",
+            "articleHash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+            "language": "espanol-guatemala",
+            "languageName": "Español de Guatemala",
+            "title": "Símbolos y unidades",
+            "level": "G1",
+            "part": "Fundamentos, escritura y ortografía / Foundations, writing, and orthography",
+            "chapter": "Alfabeto, grafemas y ortografía fundamental / Alphabet, graphemes, and core orthography"
+          },
+          "state": {
+            "code": "MLS-V10-0030",
+            "article_generated_at": "2026-09-13T07:48:14.157Z",
+            "article_hash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 2,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-22T08:23:45.713Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 2,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "bipm-si-report": "MLS-SRC-12D254C9C11E4F214CBC"
+            },
+            "claims": {
+              "c1": "MLS-CLM-667B7652D9D97FCCB15F4B9A",
+              "c2": "MLS-CLM-C3DD1D972D2750E4885B07E6"
+            }
+          },
+          "links": [
+            "MLS-LNK-489FD7B9281784A4D58126C1",
+            "MLS-LNK-1E0AE29AB65E1E3645DEAAF8"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 1,
+            "sourcesReused": 0,
+            "sourcesUpdated": 0,
+            "claimsCreated": 0,
+            "claimsReused": 2,
+            "linksCreated": 2,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "bipm-si-report",
+                "sourceId": "MLS-SRC-12D254C9C11E4F214CBC",
+                "created": true,
+                "updated": false,
+                "reused": false
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-667B7652D9D97FCCB15F4B9A",
+                "created": false,
+                "reused": true
+              },
+              {
+                "clientId": "c2",
+                "claimId": "MLS-CLM-C3DD1D972D2750E4885B07E6",
+                "created": false,
+                "reused": true
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-489FD7B9281784A4D58126C1",
+                "created": true,
+                "reused": false
+              },
+              {
+                "linkId": "MLS-LNK-1E0AE29AB65E1E3645DEAAF8",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 38,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 68,
+              "d1RowsWritten": 16,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 4,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:23:46.005Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V10-0030",
+            "articleGeneratedAt": "2026-09-13T07:48:14.157Z",
+            "articleHash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+            "language": "espanol-guatemala",
+            "languageName": "Español de Guatemala",
+            "title": "Símbolos y unidades",
+            "level": "G1",
+            "part": "Fundamentos, escritura y ortografía / Foundations, writing, and orthography",
+            "chapter": "Alfabeto, grafemas y ortografía fundamental / Alphabet, graphemes, and core orthography"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "espanol-guatemala",
+            "regionalScope": "Guatemala y español internacional; preservar voseo y variación regional legítima.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No imponer una variedad panhispánica como sustituto automático del uso guatemalteco."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 2,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-667B7652D9D97FCCB15F4B9A",
+              "verified": true,
+              "qualifyingLinks": 2,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-C3DD1D972D2750E4885B07E6",
+              "verified": true,
+              "qualifyingLinks": 2,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V10-0030",
+              "articleGeneratedAt": "2026-09-13T07:48:14.157Z",
+              "articleHash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+              "language": "espanol-guatemala",
+              "languageName": "Español de Guatemala",
+              "title": "Símbolos y unidades",
+              "level": "G1",
+              "part": "Fundamentos, escritura y ortografía / Foundations, writing, and orthography",
+              "chapter": "Alfabeto, grafemas y ortografía fundamental / Alphabet, graphemes, and core orthography"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-667B7652D9D97FCCB15F4B9A",
+                "code": "MLS-V10-0030",
+                "article_generated_at": "2026-09-13T07:48:14.157Z",
+                "article_hash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+                "section_key": "Cómo funciona",
+                "summary": "Los símbolos de unidades del SI son entidades convencionales, no abreviaturas: no llevan punto salvo el cierre de oración y no forman plural añadiendo una s.",
+                "claim_type": "standard_rule",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-22T08:18:48.716Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-C3DD1D972D2750E4885B07E6",
+                "code": "MLS-V10-0030",
+                "article_generated_at": "2026-09-13T07:48:14.157Z",
+                "article_hash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+                "section_key": "Cómo funciona",
+                "summary": "En la expresión de valores de magnitudes, el valor numérico precede al símbolo de unidad y se deja un espacio entre ambos; esta regla incluye el símbolo °C.",
+                "claim_type": "standard_rule",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-22T08:18:48.958Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-70A9D34D1236E08C29C14FB1",
+                "claim_id": "MLS-CLM-667B7652D9D97FCCB15F4B9A",
+                "source_id": "MLS-SRC-C6E574E7A5E6165239DA",
+                "support_type": "primary_source",
+                "locator_json": "{\"section\":\"5.2 Unit symbols\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-22T08:18:49.186Z"
+              },
+              {
+                "link_id": "MLS-LNK-67C162926421556D4328E988",
+                "claim_id": "MLS-CLM-C3DD1D972D2750E4885B07E6",
+                "source_id": "MLS-SRC-C6E574E7A5E6165239DA",
+                "support_type": "primary_source",
+                "locator_json": "{\"section\":\"5.4.3 Formatting the value of a quantity\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-22T08:18:49.528Z"
+              },
+              {
+                "link_id": "MLS-LNK-489FD7B9281784A4D58126C1",
+                "claim_id": "MLS-CLM-667B7652D9D97FCCB15F4B9A",
+                "source_id": "MLS-SRC-12D254C9C11E4F214CBC",
+                "support_type": "primary_source",
+                "locator_json": "{\"section\":\"5.2 Unit symbols\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-22T08:23:45.551Z"
+              },
+              {
+                "link_id": "MLS-LNK-1E0AE29AB65E1E3645DEAAF8",
+                "claim_id": "MLS-CLM-C3DD1D972D2750E4885B07E6",
+                "source_id": "MLS-SRC-12D254C9C11E4F214CBC",
+                "support_type": "primary_source",
+                "locator_json": "{\"section\":\"5.4.3 Formatting the value of a quantity\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-22T08:23:45.634Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "41562daafa97af7448ff77e5002afed7b4f9042ee42717dd6688e53d81af80cb",
+          "verifiedAt": "2026-09-22T08:23:46.060Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-2352F63E969AA250E0A296D9",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V10-0030",
+            "article_generated_at": "2026-09-13T07:48:14.157Z",
+            "article_hash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 3,
+            "source_revision": 2,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-22T08:23:46.060Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-22T08:23:46.060Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-2352F63E969AA250E0A296D9",
+            "code": "MLS-V10-0030",
+            "article_generated_at": "2026-09-13T07:48:14.157Z",
+            "article_hash": "73e8de266f4c133a0e442720e5c9d313d9a269c46e4c5beda52e975ba0d1d917",
+            "evidence_version": "1.0",
+            "evidence_revision": 2,
+            "source_revision": 2,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "41562daafa97af7448ff77e5002afed7b4f9042ee42717dd6688e53d81af80cb",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "MLS Farm reconciler",
+            "verification_method": "farm_source_backed_reconciliation",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "BIPM SI Brochure reconciled as institutional report for APA 7 rendering; 2/2 substantial claims source-backed.",
+            "run_id": "MLS-FARM-PUBLISH-20260922-A",
+            "created_at": "2026-09-22T08:23:46.060Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 54,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 170,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 70,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:23:46.735Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V10-0027",
+            "articleGeneratedAt": "2026-09-13T07:46:57.552Z",
+            "articleHash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+            "language": "espanol-guatemala",
+            "languageName": "Español de Guatemala",
+            "title": "Mayúsculas en instituciones y documentos",
+            "level": "G0",
+            "part": "Fundamentos, escritura y ortografía / Foundations, writing, and orthography",
+            "chapter": "Alfabeto, grafemas y ortografía fundamental / Alphabet, graphemes, and core orthography"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "espanol-guatemala",
+            "regionalScope": "Guatemala y español internacional; preservar voseo y variación regional legítima.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No imponer una variedad panhispánica como sustituto automático del uso guatemalteco."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-62B37C5AAD6646E5A635A17E",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-B4108626C18A208DDC66CC57",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V10-0027",
+              "articleGeneratedAt": "2026-09-13T07:46:57.552Z",
+              "articleHash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+              "language": "espanol-guatemala",
+              "languageName": "Español de Guatemala",
+              "title": "Mayúsculas en instituciones y documentos",
+              "level": "G0",
+              "part": "Fundamentos, escritura y ortografía / Foundations, writing, and orthography",
+              "chapter": "Alfabeto, grafemas y ortografía fundamental / Alphabet, graphemes, and core orthography"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-62B37C5AAD6646E5A635A17E",
+                "code": "MLS-V10-0027",
+                "article_generated_at": "2026-09-13T07:46:57.552Z",
+                "article_hash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+                "section_key": "Cómo funciona",
+                "summary": "Los sustantivos y adjetivos significativos que integran nombres oficiales de entidades e instituciones se escriben con mayúscula inicial, mientras que las palabras gramaticales internas suelen permanecer en minúscula.",
+                "claim_type": "orthographic_rule",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-22T08:14:51.938Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-B4108626C18A208DDC66CC57",
+                "code": "MLS-V10-0027",
+                "article_generated_at": "2026-09-13T07:46:57.552Z",
+                "article_hash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+                "section_key": "Cómo funciona",
+                "summary": "Los sustantivos y adjetivos que forman parte del título oficial de documentos legales o jurídicos se escriben con mayúscula; las referencias genéricas no reciben esa mayúscula por jerarquía o respeto.",
+                "claim_type": "orthographic_rule",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-22T08:14:52.182Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-6CE8D51E8EDD4AE78A0B3B61",
+                "claim_id": "MLS-CLM-62B37C5AAD6646E5A635A17E",
+                "source_id": "MLS-SRC-A51B39B1F9F8AA4051D9",
+                "support_type": "primary_source",
+                "locator_json": "{\"page\":\"9\",\"section\":\"2.2.7\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-22T08:14:52.426Z"
+              },
+              {
+                "link_id": "MLS-LNK-D34F2254BA2088E383CC27A1",
+                "claim_id": "MLS-CLM-B4108626C18A208DDC66CC57",
+                "source_id": "MLS-SRC-A51B39B1F9F8AA4051D9",
+                "support_type": "primary_source",
+                "locator_json": "{\"page\":\"9\",\"section\":\"2.2.11\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-22T08:14:52.835Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "cac79a16cbbb72041a12b45ff260af7fee56986e5cd6fc68083feef74b84a881",
+          "verifiedAt": "2026-09-22T08:23:46.792Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-FAB94989771ADDFA218D568D",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V10-0027",
+            "article_generated_at": "2026-09-13T07:46:57.552Z",
+            "article_hash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 3,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-22T08:23:46.792Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-22T08:23:46.792Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-FAB94989771ADDFA218D568D",
+            "code": "MLS-V10-0027",
+            "article_generated_at": "2026-09-13T07:46:57.552Z",
+            "article_hash": "82becef3847a695fb2000c4644b675e1d43eb0387223ff2bcde0576a6d9f7dd5",
+            "evidence_version": "1.0",
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "cac79a16cbbb72041a12b45ff260af7fee56986e5cd6fc68083feef74b84a881",
+            "status_before": "VERIFIED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "MLS Farm reconciler",
+            "verification_method": "farm_source_backed_reconciliation",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Re-verification after shared RAE Source Registry metadata stabilized.",
+            "run_id": "MLS-FARM-PUBLISH-20260922-A",
+            "created_at": "2026-09-22T08:23:46.792Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 138,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:23:47.388Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "consumerEvidenceEntradaMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/consumer",
+        "response": {
+          "ok": true,
+          "evidence": {
+            "status": "VERIFIED",
+            "label": "Verificado con fuentes",
+            "disclosure": "Esta entrada fue contrastada con fuentes para su snapshot de Evidence vigente.",
+            "needsReview": false,
+            "hasProposedRevision": false,
+            "verifiedAt": "2026-09-22T08:23:46.792Z",
+            "reviewedAt": null
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 13,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 39,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 14,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:23:47.621Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "consumerEvidenceEntradaMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/consumer",
+        "response": {
+          "ok": true,
+          "evidence": {
+            "status": "VERIFIED",
+            "label": "Verificado con fuentes",
+            "disclosure": "Esta entrada fue contrastada con fuentes para su snapshot de Evidence vigente.",
+            "needsReview": false,
+            "hasProposedRevision": false,
+            "verifiedAt": "2026-09-22T08:23:46.060Z",
+            "reviewedAt": null
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 15,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 48,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 20,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:23:47.868Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "consumerEvidenceEntradaMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/consumer",
+        "response": {
+          "ok": true,
+          "evidence": {
+            "status": "SOURCED",
+            "label": "Fuentes identificadas",
+            "disclosure": "Esta entrada tiene fuentes identificadas, pero la verificación bibliográfica todavía no está completa.",
+            "needsReview": true,
+            "hasProposedRevision": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 6,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 24,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 10,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-22T08:23:48.022Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-22T08:23:48.022Z",
+  "commandFile": "mls chat bridge/commands/command 0297.json"
+}
