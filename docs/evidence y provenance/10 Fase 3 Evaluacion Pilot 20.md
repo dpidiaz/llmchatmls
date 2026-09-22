@@ -240,7 +240,9 @@ R32 siguió siendo legible y operativo; Evidence fue aditiva. Ninguna revisión 
 
 ## 4. Hallazgos bloqueantes para Gate 100
 
-### E1 — DOI identity scope
+### E1 — DOI identity scope — CLOSED LIVE
+
+**Correction Repeat:** PASS LIVE. Commands 0274–0279 demostraron URLs granulares distintas con el mismo DOI de contenedor y re-verificación posterior.
 
 Problema:
 
@@ -264,7 +266,9 @@ Regla objetivo:
 - una Source con `doiScope=container` debe disponer de canonical URL o identidad granular equivalente;
 - APA para una ficha granular no debe reemplazar su canonical URL por el DOI del contenedor.
 
-### E2 — Cross-entry Source reuse
+### E2 — Cross-entry Source reuse — CLOSED LIVE
+
+**Correction Repeat:** PASS LIVE. Commands 0269–0271 reutilizaron `MLS-SRC-13608E329726A3D4557A` entre artículos distintos y preservaron invalidación/re-verificación por snapshot.
 
 Debe demostrarse live que dos artículos distintos pueden referenciar el mismo Source ID sin:
 
@@ -272,7 +276,7 @@ Debe demostrarse live que dos artículos distintos pueden referenciar el mismo S
 - cambiar su metadata;
 - invalidar incorrectamente la otra entrada.
 
-### E3 — Human REVIEWED lifecycle
+### E3 — Human REVIEWED lifecycle — STILL BLOCKING
 
 Se requiere un review humano real.
 
@@ -280,7 +284,9 @@ No se autoriza crear `reviewerType=human` a partir de inferencia o de una instru
 
 El ejercicio debe usar una entrada VERIFIED y un humano que realmente haya revisado el material.
 
-### E4 — Control plane scaling
+### E4 — Control plane scaling — MITIGATED
+
+**Correction Repeat:** batch envelope live command 0280 procesó 3/3 operaciones con un command/result pair. Build watch path externo queda documentado como configuración recomendada, no como cambio aplicado por repositorio.
 
 Cloudflare Workers Builds observa por defecto cambios Git según Branch control / Build watch paths.
 
@@ -291,7 +297,9 @@ Corrección recomendada:
 - excluir `mls chat bridge/*` de Build watch paths, o
 - rediseñar el transporte de control para reducir commits/builds.
 
-### E5 — Consumer evidence contract
+### E5 — Consumer evidence contract — CODE + CI PASS
+
+**Correction Repeat:** contrato determinista implementado para UNSOURCED/SOURCED/VERIFIED/REVIEWED, needsReview y revisiones propuestas; Profesor IA lo recibe como system guidance y Virtuoso anota resultados después del reranking. PR #145 runs #337/#338 PASS; production deploy SKIPPED.
 
 Virtuoso y Profesor IA necesitan una capa de consumo read-only que prohíba frases equivalentes a “comprobado” cuando el estado no sea VERIFIED/REVIEWED.
 
@@ -335,15 +343,34 @@ Interpretación:
 
 Para reabrir la decisión:
 
-- [ ] DOI scope implementado y testeado.
-- [ ] Migración D1 aditiva/idempotente.
-- [ ] APA respeta DOI de contenedor vs recurso.
-- [ ] Cross-entry Source reuse demostrado live.
+- [x] DOI scope implementado y testeado.
+- [x] Migración D1 aditiva/idempotente.
+- [x] APA respeta DOI de contenedor vs recurso.
+- [x] Cross-entry Source reuse demostrado live.
 - [ ] REVIEWED humano demostrado live.
-- [ ] Consumer evidence contract testeado.
-- [ ] Control-plane builds mitigados o aceptados con configuración documentada.
-- [ ] Full regression verde.
-- [ ] FREE ONLY preservado.
-- [ ] R32 preservado.
+- [x] Consumer evidence contract testeado.
+- [x] Control-plane builds mitigados o aceptados con configuración documentada.
+- [x] Full regression verde.
+- [x] FREE ONLY preservado.
+- [x] R32 preservado.
 
 Solo entonces reevaluar GO hacia Gate 100.
+
+
+## 9. Correction Repeat — actualización 2026-09-22
+
+Documento detallado: `11 Correction Repeat E1 E2 E4 E5.md`.
+
+Estado:
+
+- E1: PASS LIVE;
+- E2: PASS LIVE;
+- E3: PENDING HUMAN;
+- E4: PASS / MITIGATED;
+- E5: CODE + CI PASS;
+- full regression: PASS runs #337 y #338;
+- production deploy en esos workflows: SKIPPED.
+
+La decisión general permanece **CORRECT AND REPEAT** porque E3 no puede ser sustituido por una simulación de review humano.
+
+Gate 100 continúa **NOT AUTHORIZED**.
