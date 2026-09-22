@@ -508,7 +508,7 @@ No se autoriza Gate 100 todavía.
 
 ## Correcciones E1–E5
 
-- [ ] **E1 DOI identity scope** — distinguir DOI de recurso específico de DOI de obra/contenedor.
+- [x] **E1 DOI identity scope** — implementado y certificado; live migration/repeat pendiente de runtime actualizado.
 - [ ] **E2 Cross-entry Source reuse** — demostrar live misma Source en dos artículos distintos.
 - [ ] **E3 Human REVIEWED lifecycle** — ejecutar al menos un review humano real; no fabricarlo.
 - [ ] **E4 Control-plane scaling** — mitigar o documentar definitivamente builds/commits innecesarios del Bridge.
@@ -759,6 +759,19 @@ No inventar números cuando no se hayan medido.
 - Lifecycle REVIEWED humano no fue ejercitado live.
 - Pilot 20 COMPLETE. Gate 100 NO autorizado hasta Fase 3.
 - Documento detallado: `09 Pilot 20 Checkpoint 17 a 20.md`.
+
+## 2026-09-21 / 2026-09-22 — E1 DOI scope implementado y certificado
+
+- Añadido `doiScope = resource | container`.
+- `resource`: DOI mantiene identidad primaria.
+- `container`: canonical URL granular identifica la Source; DOI se conserva como metadata.
+- `container` sin canonical URL falla cerrado.
+- Migración D1 aditiva/idempotente añade `doi_scope` y backfill histórico `resource`.
+- APA usa DOI únicamente cuando identifica el recurso; DOI de contenedor no sustituye URL granular.
+- Tests Foundation/Registry/APA/API cubren coexistencia de `mit` y `laut`, dedupe por DOI de recurso y migración legacy.
+- GitHub Actions run #329: SUCCESS.
+- Production deploy: SKIPPED.
+- E1 está cerrado en código; el repeat live debe ejecutarse después de actualizar el runtime.
 
 ## 2026-09-21 / 2026-09-22 — Fase 3 evaluada: CORRECT AND REPEAT
 
@@ -1076,11 +1089,13 @@ DONE:
 
 CURRENT:
 - Gate 100 blocked
-- Correction work E1–E5 required
+- E1 DOI identity scope implemented and certified
+- E2–E5 still required
+- E1 live repeat awaits runtime updated with merged code
 
 NEXT:
-- Merge Fase 3 evaluation documentation after CI
-- E1 implement DOI identity scope
+- Merge PR #143 after final HEAD certification
+- Update runtime with E1 before live repeat
 - E2 targeted cross-entry Source reuse repeat
 - E3 real human REVIEWED exercise
 - E4 control-plane scaling mitigation/documentation
@@ -1089,7 +1104,7 @@ NEXT:
 - Re-evaluate GO / CORRECT AND REPEAT / STOP
 
 BLOCKERS FOR GATE 100:
-- DOI resource vs container scope not modeled
+- DOI scope live behavior not yet exercised on updated runtime
 - cross-entry Source reuse not demonstrated live
 - human REVIEWED not demonstrated live
 - control-plane builds/commit noise not closed
