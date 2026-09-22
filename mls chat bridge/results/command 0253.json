@@ -1,0 +1,120 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "proponerEvidenceMLS",
+  "method": "POST",
+  "path": "/api/wiki/editorial/evidence/proposal",
+  "response": {
+    "ok": true,
+    "code": "MLS-V08-0875",
+    "article": {
+      "code": "MLS-V08-0875",
+      "articleGeneratedAt": "2026-09-19T09:18:32.683Z",
+      "articleHash": "5f0df8a2a4b27917f26e3e4a3e32ac6109436bbc673acff039594cb4a3111515",
+      "language": "coreano",
+      "languageName": "Coreano",
+      "title": "Conector académico 요약하면",
+      "level": "C1",
+      "part": "Discurso académico y conversación — 학술 담화와 회화",
+      "chapter": "Conectores académicos y organización del discurso — 학술 연결 표현과 담화 구성"
+    },
+    "state": {
+      "code": "MLS-V08-0875",
+      "article_generated_at": "2026-09-19T09:18:32.683Z",
+      "article_hash": "5f0df8a2a4b27917f26e3e4a3e32ac6109436bbc673acff039594cb4a3111515",
+      "evidence_version": "1.0",
+      "status": "SOURCED",
+      "claims_total": 3,
+      "claims_verified": 2,
+      "sources_total": 3,
+      "conflicts_total": 0,
+      "needs_review": 0,
+      "evidence_revision": 2,
+      "source_revision": 1,
+      "citation_style": "APA",
+      "citation_edition": 7,
+      "citation_profile": "URL-GT-2025",
+      "citation_renderer_version": "1.0",
+      "verified_at": null,
+      "reviewed_at": null,
+      "updated_at": "2026-09-22T01:41:37.492Z"
+    },
+    "evaluation": {
+      "status": "SOURCED",
+      "reasons": [
+        "unverified_substantial_claims"
+      ],
+      "claimsTotal": 3,
+      "claimsVerified": 2,
+      "sourcesTotal": 3,
+      "conflictsTotal": 0,
+      "citationReady": false
+    },
+    "mappings": {
+      "sources": {
+        "lee-2014-academic-korean": "MLS-SRC-22E4F1FA230153FAAE05"
+      },
+      "claims": {
+        "c-frequency-claim": "MLS-CLM-7B6E28088295616FBDB7AA64"
+      }
+    },
+    "links": [
+      "MLS-LNK-D9A1B77A976F8B42BFE220FF"
+    ],
+    "conflicts": [],
+    "operations": {
+      "sourcesCreated": 0,
+      "sourcesReused": 1,
+      "sourcesUpdated": 0,
+      "claimsCreated": 1,
+      "claimsReused": 0,
+      "linksCreated": 1,
+      "linksReused": 0,
+      "conflictsCreated": 0,
+      "conflictsReused": 0,
+      "sourceOperations": [
+        {
+          "clientId": "lee-2014-academic-korean",
+          "sourceId": "MLS-SRC-22E4F1FA230153FAAE05",
+          "created": false,
+          "updated": false,
+          "reused": true
+        }
+      ],
+      "claimOperations": [
+        {
+          "clientId": "c-frequency-claim",
+          "claimId": "MLS-CLM-7B6E28088295616FBDB7AA64",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "linkOperations": [
+        {
+          "linkId": "MLS-LNK-D9A1B77A976F8B42BFE220FF",
+          "created": true,
+          "reused": false
+        }
+      ],
+      "conflictOperations": []
+    },
+    "idempotentRetrySafe": true,
+    "telemetry": {
+      "d1": {
+        "queries": 24,
+        "batchCalls": 0,
+        "exactRowsRead": true,
+        "exactRowsWritten": true,
+        "d1RowsRead": 46,
+        "d1RowsWritten": 10,
+        "observedRowsRead": 24,
+        "observedRowsWritten": 3,
+        "missingReadMetaOperations": 0,
+        "missingWriteMetaOperations": 0,
+        "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+      }
+    }
+  },
+  "completedAt": "2026-09-22T01:41:38.285Z",
+  "commandFile": "mls chat bridge/commands/command 0253.json"
+}
