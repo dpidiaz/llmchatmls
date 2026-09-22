@@ -7,7 +7,7 @@ const pkg=require('../package.json');
 
 const evidenceFiles=[
   'evidence foundation.js','evidence policies.js','evidence registry.js','evidence claims.js',
-  'evidence apa.js','evidence reviews.js','evidence validator.js','evidence provenance.js','evidence api.js'
+  'evidence apa.js','evidence reviews.js','evidence validator.js','evidence provenance.js','evidence consumer.js','evidence api.js'
 ].map(x=>path.join('MLS R32 EDITORIAL',x));
 const evidenceText=evidenceFiles.map(file=>fs.readFileSync(file,'utf8')).join('\n');
 
