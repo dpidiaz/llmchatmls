@@ -1,0 +1,1999 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "GATE100-DE-VERSIONS-20260923-A",
+    "requested": 10,
+    "processed": 10,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0050",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 50,
+            "title": "Acento léxico en palabras simples",
+            "level": "A2",
+            "part": "Escritura, pronunciación y fundamentos — Schrift, Aussprache und Grundlagen",
+            "chapter": "Acento, composición y prosodia — Wortakzent, Komposition und Prosodie",
+            "article_markdown": "#### En pocas palabras\n\nCada palabra alemana de varias sílabas tiene normalmente una sílaba que recibe el **acento léxico principal**, es decir, la mayor prominencia dentro de la palabra. En palabras simples, la posición de ese acento forma parte de la pronunciación de la palabra y no siempre puede deducirse solo por la escritura.\n\n#### Cómo funciona\n\nEn muchas palabras tradicionales del alemán, el acento aparece en una sílaba inicial o cercana al inicio. **Mutter**, por ejemplo, se pronuncia /ˈmʊtɐ/, con el acento en **Mut-**.\n\nSin embargo, no todas las palabras siguen el mismo patrón. Los préstamos y otros grupos léxicos pueden presentar acento final o interior. Por eso, conocer las letras de una palabra no garantiza por sí solo conocer su acentuación.\n\n#### Ejemplos\n\n* **MUT**ter /ˈmʊtɐ/ — *madre*.\n* **FENS**ter /ˈfɛnstɐ/ — *ventana*.\n* Ho-**TEL** /hoˈtɛl/ — *hotel*.\n* Mu-**SIK** /muˈziːk/ — *música*.\n\nLas mayúsculas solo señalan aquí la sílaba con acento principal.\n\n#### Observación importante\n\nEl acento léxico pertenece a la palabra, pero puede interactuar con el ritmo y la entonación de una oración. Para aprender vocabulario con una pronunciación segura, conviene registrar también dónde cae el acento, sobre todo cuando no coincide con patrones frecuentes.\n\n#### Entradas relacionadas\n\n* [Acento en extranjerismos](#entry-49)\n* [Acento principal en verbos separables](#entry-51)\n* [Acento en compuestos nominales](#entry-48)\n* [Entonación de pregunta sí/no](#entry-52)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-9d25a30bf53b023ae7286c0b3f20fcdcaeff3aaafe33fe301d0191534ce18918",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:07:07.749Z"
+          },
+          "version": {
+            "code": "MLS-V05-0050",
+            "articleGeneratedAt": "2026-09-19T08:07:07.749Z",
+            "articleHash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Acento léxico en palabras simples",
+            "level": "A2",
+            "part": "Escritura, pronunciación y fundamentos — Schrift, Aussprache und Grundlagen",
+            "chapter": "Acento, composición y prosodia — Wortakzent, Komposition und Prosodie"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0050",
+            "articleVersion": {
+              "code": "MLS-V05-0050",
+              "articleGeneratedAt": "2026-09-19T08:07:07.749Z",
+              "articleHash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Acento léxico en palabras simples",
+              "level": "A2",
+              "part": "Escritura, pronunciación y fundamentos — Schrift, Aussprache und Grundlagen",
+              "chapter": "Acento, composición y prosodia — Wortakzent, Komposition und Prosodie"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-9d25a30bf53b023ae7286c0b3f20fcdcaeff3aaafe33fe301d0191534ce18918",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:07:07.749Z",
+              "articleHash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "e01dad19f16d7ae7e587198b08fe9db3ca88684bb05fd0e573f6414f6d4a7946",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:48.212Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0150",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 150,
+            "title": "Artículo definido dativo dem/der/dem/den",
+            "level": "A2",
+            "part": "Casos — Kasus",
+            "chapter": "Dativo — Dativ",
+            "article_markdown": "#### En pocas palabras\n\nLas formas del **artículo definido** en dativo son **dem, der, dem, den**: **dem** para masculino singular, **der** para femenino singular, **dem** para neutro singular y **den** para plural. Por ejemplo: **mit dem Mann, mit der Frau, mit dem Kind, mit den Kindern**.\n\n#### Cómo funciona\n\nEl dativo es un caso gramatical del grupo nominal. El artículo definido puede mostrar ese caso mediante su forma, pero el caso no pertenece únicamente al artículo.\n\nEn singular, masculino y neutro comparten **dem**: **dem Mann**, **dem Kind**. El femenino usa **der**: **der Frau**. En plural aparece **den**: **den Kindern**.\n\nEn dativo plural, muchos sustantivos añaden además **-n** cuando su plural no termina ya en **-n/-en** y normalmente tampoco cuando termina en **-s**. Por eso **Kinder** pasa a **Kindern**, mientras que **Frauen** permanece **Frauen**.\n\n#### Ejemplos\n\n* **Ich spreche mit dem Mann.** — *Hablo con el hombre.* **dem Mann** está en dativo masculino.\n* **Ich spreche mit der Frau.** — *Hablo con la mujer.* **der Frau** es dativo femenino.\n* **Ich spiele mit dem Kind.** — *Juego con el niño/la niña.* **dem Kind** es dativo neutro.\n* **Ich spiele mit den Kindern.** — *Juego con los niños.* **den Kindern** está en dativo plural.\n\n#### Observación importante\n\nLa forma **der** no significa por sí sola “femenino” ni “dativo”: también aparece en otros contextos gramaticales. Para identificar el caso hay que considerar género, número y construcción completa.\n\n#### Entradas relacionadas\n\n* [Entrada 149: Zu + dativo](#entry-149)\n* [Entrada 151: Artículo indefinido dativo](#entry-151)\n* [Entrada 148: Von + dativo](#entry-148)\n* [Entrada 152: Dativo receptor](#entry-152)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-64b298620ea735acbb30ae9b20e4a0c7c92132a87580da58cb92766f29a4015d",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:21:34.043Z"
+          },
+          "version": {
+            "code": "MLS-V05-0150",
+            "articleGeneratedAt": "2026-09-19T08:21:34.043Z",
+            "articleHash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Artículo definido dativo dem/der/dem/den",
+            "level": "A2",
+            "part": "Casos — Kasus",
+            "chapter": "Dativo — Dativ"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0150",
+            "articleVersion": {
+              "code": "MLS-V05-0150",
+              "articleGeneratedAt": "2026-09-19T08:21:34.043Z",
+              "articleHash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Artículo definido dativo dem/der/dem/den",
+              "level": "A2",
+              "part": "Casos — Kasus",
+              "chapter": "Dativo — Dativ"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-64b298620ea735acbb30ae9b20e4a0c7c92132a87580da58cb92766f29a4015d",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:21:34.043Z",
+              "articleHash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "444e1659f80f8cef529a8e7c9cf912d563c0cd50f2393c74a5c2936141dce4b3",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:49.096Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0251",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 251,
+            "title": "Superlativo am -sten",
+            "level": "A2",
+            "part": "Adjetivos y comparación — Adjektive und Komparation",
+            "chapter": "Comparación y grado — Komparation und Grad",
+            "article_markdown": "#### En pocas palabras\n\nEl superlativo predicativo o adverbial suele formarse con **am + adjetivo en -sten/-esten**: **schnell → am schnellsten**. Sirve para expresar el grado más alto dentro de un conjunto.\n\n#### Cómo funciona\n\nEn **Von allen läuft Lea am schnellsten**, la forma **am schnellsten** indica que Lea corre más rápido que todas las demás personas del grupo.\n\nMuchos adjetivos forman el superlativo con **-sten**: **klein → am kleinsten**, **schnell → am schnellsten**. En ciertos casos aparece **-esten**, especialmente cuando facilita la pronunciación: **alt → am ältesten**.\n\nAlgunos adjetivos muestran además cambios en la base, como umlaut o formas irregulares: **gut → am besten**.\n\n#### Ejemplos\n\n* **Lea läuft am schnellsten.** — *Lea corre más rápido que todos / es quien corre más rápido*.\n* **Dieses Zimmer ist am kleinsten.** — *Esta habitación es la más pequeña*.\n* **Paul ist am ältesten.** — *Paul es el mayor*.\n\n#### Observación importante\n\nEsta forma con **am** se usa sobre todo de manera predicativa o adverbial. Delante de un sustantivo se emplea una forma declinada con artículo, como **der schnellste Zug**.\n\n#### Entradas relacionadas\n\n* [Entrada 250: So ... wie](#entry-250)\n* [Entrada 249: Comparativos irregulares](#entry-249)\n* [Entrada 248: Comparativo -er](#entry-248)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-0e0390dd73019799228990f615584dddb359f22fd1822c6db5fe1cdaafa14b03",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:15:14.563Z"
+          },
+          "version": {
+            "code": "MLS-V05-0251",
+            "articleGeneratedAt": "2026-09-19T08:15:14.563Z",
+            "articleHash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Superlativo am -sten",
+            "level": "A2",
+            "part": "Adjetivos y comparación — Adjektive und Komparation",
+            "chapter": "Comparación y grado — Komparation und Grad"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0251",
+            "articleVersion": {
+              "code": "MLS-V05-0251",
+              "articleGeneratedAt": "2026-09-19T08:15:14.563Z",
+              "articleHash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Superlativo am -sten",
+              "level": "A2",
+              "part": "Adjetivos y comparación — Adjektive und Komparation",
+              "chapter": "Comparación y grado — Komparation und Grad"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-0e0390dd73019799228990f615584dddb359f22fd1822c6db5fe1cdaafa14b03",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:15:14.563Z",
+              "articleHash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "9365e68f8192cd646cc4823f98fe96e9d26e156a7572a577ceac7a92090b0e0b",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:49.973Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0351",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 351,
+            "title": "Modal wollen",
+            "level": "A1",
+            "part": "Prefijos y modalidad — Präfixverben und Modalität",
+            "chapter": "Verbos modales — Modalverben",
+            "article_markdown": "#### En pocas palabras\n\nEl modal **wollen** expresa principalmente **voluntad** o **intención**. En **Er will in Berlin studieren**, indica que él tiene la intención de estudiar en Berlín.\n\n#### Cómo funciona\n\nCuando **wollen** acompaña a otro verbo, el modal se conjuga y el verbo que expresa la acción queda normalmente en infinitivo sin **zu** al final: **Wir wollen morgen reisen**.\n\nEn presente aparecen **ich will, du willst, er/sie/es will, wir wollen, ihr wollt, sie/Sie wollen**.\n\nSegún el contexto, **wollen** puede expresar un plan, una decisión o un deseo bastante directo.\n\n#### Ejemplos\n\n* **Er will in Berlin studieren.** — Él quiere estudiar en Berlín.\n* **Ich will Deutsch lernen.** — Quiero aprender alemán.\n* **Willst du mitkommen?** — ¿Querés / quieres venir también?\n* **Wir wollen morgen früh losfahren.** — Queremos salir temprano mañana.\n\n#### Observación importante\n\n**Wollen** puede sonar más directo que **möchte** cuando se formula un deseo o una petición. Para pedir algo cortésmente, **möchte** suele ser la opción más suave.\n\n#### Entradas relacionadas\n\n* [Entrada 350: Modal sollen](#entry-350)\n* [Entrada 352: möchte como forma de cortesía](#entry-352)\n* [Entrada 353: Negación con modal](#entry-353)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-589589939cf96b325f01243ca31f8892df1c649b4d2af86ecde966a2f34a1943",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:29:10.071Z"
+          },
+          "version": {
+            "code": "MLS-V05-0351",
+            "articleGeneratedAt": "2026-09-19T08:29:10.071Z",
+            "articleHash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Modal wollen",
+            "level": "A1",
+            "part": "Prefijos y modalidad — Präfixverben und Modalität",
+            "chapter": "Verbos modales — Modalverben"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0351",
+            "articleVersion": {
+              "code": "MLS-V05-0351",
+              "articleGeneratedAt": "2026-09-19T08:29:10.071Z",
+              "articleHash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Modal wollen",
+              "level": "A1",
+              "part": "Prefijos y modalidad — Präfixverben und Modalität",
+              "chapter": "Verbos modales — Modalverben"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-589589939cf96b325f01243ca31f8892df1c649b4d2af86ecde966a2f34a1943",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:29:10.071Z",
+              "articleHash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "a02af227b93954213fa40ea272fec671132a2a6898054cefef137ede4caf7b88",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:50.864Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0451",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 451,
+            "title": "Präteritum haben hatte",
+            "level": "A2",
+            "part": "Pasado y futuro — Vergangenheit und Zukunft",
+            "chapter": "Präteritum y narración — Präteritum und Narration",
+            "article_markdown": "#### En pocas palabras\n\nEl **Präteritum** de **haben** se forma con la base **hatte-** y terminaciones personales: **ich hatte, du hattest, er/sie/es hatte, wir hatten, ihr hattet, sie/Sie hatten**.\n\n#### Cómo funciona\n\n**Haben** significa normalmente “tener”, pero también funciona como auxiliar en otros tiempos. En esta entrada, **hatte** es simplemente la forma de Präteritum de **haben**.\n\nLas terminaciones visibles son **-st** en **du hattest**, **-n** en **wir/sie hatten** y **-t** en **ihr hattet**. La primera y tercera persona singular comparten **hatte**.\n\nEn conversación, **hatte** es muy frecuente porque **haben** aparece a menudo en Präteritum incluso donde otros verbos léxicos prefieren Perfekt.\n\n#### Ejemplos\n\n* **Ich hatte keine Zeit.** — “No tenía tiempo”.\n* **Du hattest recht.** — “Tenías razón”.\n* **Wir hatten ein Problem.** — “Teníamos un problema”.\n\n#### Observación importante\n\nNo debe confundirse **hatte** con **hat**. **Hat** es presente de tercera persona singular; **hatte** es Präteritum.\n\nTampoco todo **hatte** es auxiliar: en **Ich hatte ein Auto**, **haben** conserva su significado léxico de posesión.\n\n#### Entradas relacionadas\n\n[Entrada 450: Präteritum en narración escrita](#entry-450) · [Entrada 452: Präteritum modales](#entry-452) · [Entrada 449: Preferencia conversacional Perfekt vs Präteritum](#entry-449) · [Entrada 453: Präteritum regular](#entry-453)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-3669c76a956a8d37e7539cb33d4ab9ca17747bba5e20ec0141a94d4495551665",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:15:37.518Z"
+          },
+          "version": {
+            "code": "MLS-V05-0451",
+            "articleGeneratedAt": "2026-09-19T08:15:37.518Z",
+            "articleHash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Präteritum haben hatte",
+            "level": "A2",
+            "part": "Pasado y futuro — Vergangenheit und Zukunft",
+            "chapter": "Präteritum y narración — Präteritum und Narration"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0451",
+            "articleVersion": {
+              "code": "MLS-V05-0451",
+              "articleGeneratedAt": "2026-09-19T08:15:37.518Z",
+              "articleHash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Präteritum haben hatte",
+              "level": "A2",
+              "part": "Pasado y futuro — Vergangenheit und Zukunft",
+              "chapter": "Präteritum y narración — Präteritum und Narration"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-3669c76a956a8d37e7539cb33d4ab9ca17747bba5e20ec0141a94d4495551665",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:15:37.518Z",
+              "articleHash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "25ef683267705a1207e044741afb92eea49dfee458a8dc983c89de6df1b9ac92",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:51.744Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0550",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 550,
+            "title": "Régimen warten auf + Akk",
+            "level": "B1",
+            "part": "Preposiciones y régimen — Präpositionen und Rektion",
+            "chapter": "Régimen verbal y preposicional — Verb- und Präpositionalrektion",
+            "article_markdown": "#### En pocas palabras\n\nLa construcción **warten auf + Akkusativ** significa “esperar” a una persona, una cosa o un acontecimiento. La preposición **auf** rige acusativo.\n\nEn **Ich warte auf meine Freundin**, el grupo **auf meine Freundin** está en acusativo.\n\n#### Cómo funciona\n\nLa preposición **auf** selecciona acusativo en esta construcción: **auf den Bus**, **auf die Antwort**, **auf das Ergebnis**, **auf die Gäste**.\n\nEl complemento con **auf** designa aquello cuya llegada, aparición o realización se espera. El caso procede del régimen de **warten auf**, no de una regla general sobre movimiento o dirección.\n\nCon pronombres aparecen formas como **auf mich**, **auf dich**, **auf ihn** y **darauf**, según el referente.\n\n#### Ejemplos\n\n* **Ich warte auf meine Freundin.** — complemento con **auf + Akkusativ**.\n* **Wir warten auf den Bus.** — masculino singular acusativo.\n* **Sie wartet auf die Antwort.** — femenino singular acusativo.\n* **Ich warte darauf.** — forma pronominal adverbial.\n\n#### Observación importante\n\n**Auf** es una preposición que puede regir acusativo o dativo en otros contextos. Con **warten auf**, el régimen establecido es acusativo.\n\nLa traducción española “esperar” puede aparecer sin preposición; esa diferencia no modifica la estructura alemana.\n\n#### Entradas relacionadas\n\n[Entrada 549: Régimen träumen von + Dat](#entry-549) · [Entrada 551: Régimen zweifeln an + Dat](#entry-551) · [Entrada 548: Régimen teilnehmen an + Dat](#entry-548)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-9ff4f0fa437f0e74f8685d1f1c5e45a8e5a8581d3bad0782312dc3410be823c3",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:32:35.816Z"
+          },
+          "version": {
+            "code": "MLS-V05-0550",
+            "articleGeneratedAt": "2026-09-19T08:32:35.816Z",
+            "articleHash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Régimen warten auf + Akk",
+            "level": "B1",
+            "part": "Preposiciones y régimen — Präpositionen und Rektion",
+            "chapter": "Régimen verbal y preposicional — Verb- und Präpositionalrektion"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0550",
+            "articleVersion": {
+              "code": "MLS-V05-0550",
+              "articleGeneratedAt": "2026-09-19T08:32:35.816Z",
+              "articleHash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Régimen warten auf + Akk",
+              "level": "B1",
+              "part": "Preposiciones y régimen — Präpositionen und Rektion",
+              "chapter": "Régimen verbal y preposicional — Verb- und Präpositionalrektion"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-9ff4f0fa437f0e74f8685d1f1c5e45a8e5a8581d3bad0782312dc3410be823c3",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:32:35.816Z",
+              "articleHash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "2b18b913d1fe26d70ff3d11a70ef36e1abd2becf4125e676395bdd90bcefe669",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:52.612Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0650",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 650,
+            "title": "Agente con von + dativo",
+            "level": "B1",
+            "part": "Voz y modos — Diathese und Modi",
+            "chapter": "Pasiva de proceso, estado y alternativas — Vorgangs-, Zustandspassiv und Alternativen",
+            "article_markdown": "#### En pocas palabras\n\nEn la pasiva alemana, la persona o entidad que realiza la acción puede mencionarse con **von + dativo**. Ese complemento expresa normalmente el **agente**, es decir, el participante responsable de la acción presentada en pasiva.\n\nPor ejemplo: **Das Bild wurde von meiner Schwester gemalt.** — “El cuadro fue pintado por mi hermana”. **Von meiner Schwester** identifica a quien realizó la acción.\n\n#### Cómo funciona\n\nLa preposición **von** rige **dativo**, por lo que todo su complemento aparece en ese caso. En **von meiner Schwester**, el posesivo **meiner** muestra el dativo femenino singular. Con masculino o neutro aparecen formas como **von dem Mann** o **von einem Kind**; en plural, **von den Studenten**.\n\nEl agente no tiene que aparecer. **Das Bild wurde gemalt** ya es una oración pasiva completa. Añadir **von meiner Schwester** sirve para identificar a la autora de la acción cuando esa información resulta relevante.\n\nLa estructura puede usarse con distintos tiempos del Vorgangspassiv: **Das Bild wird von ihr gemalt** y **Das Bild wurde von ihr gemalt**.\n\n#### Ejemplos\n\n* **Der Brief wurde von Anna geschrieben.** — La carta fue escrita por Anna.\n* **Das Haus wird von einer Firma renoviert.** — Una empresa realiza la renovación.\n* **Die Kinder wurden von ihrem Vater abgeholt.** — El padre fue quien los recogió.\n* **Das Problem wurde von den Technikern gelöst.** — Los técnicos resolvieron el problema.\n\n#### Observación importante\n\nNo todo complemento introducido por **von** es automáticamente un agente; **von** tiene otros usos en alemán. La interpretación depende de la construcción completa.\n\nAdemás, **von + dativo** no debe confundirse con **durch + acusativo**. En pasiva, **von** suele presentar al agente o fuente de la acción, mientras **durch** destaca con frecuencia una causa, un medio o un instrumento.\n\n#### Entradas relacionadas\n\n[Entrada 649: Zustandspassiv sein + Partizip II](#entry-649) · [Entrada 651: bekommen-Passiv](#entry-651) · [Entrada 648: Vorgangspassiv werden + Partizip II](#entry-648) · [Entrada 652: Causa/instrumento con durch + acusativo](#entry-652)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-3e09fd53bf9ed703550070f070652a269d6cafd34e65a6408ecac0c2ecc062ab",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:16:53.208Z"
+          },
+          "version": {
+            "code": "MLS-V05-0650",
+            "articleGeneratedAt": "2026-09-19T08:16:53.208Z",
+            "articleHash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Agente con von + dativo",
+            "level": "B1",
+            "part": "Voz y modos — Diathese und Modi",
+            "chapter": "Pasiva de proceso, estado y alternativas — Vorgangs-, Zustandspassiv und Alternativen"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0650",
+            "articleVersion": {
+              "code": "MLS-V05-0650",
+              "articleGeneratedAt": "2026-09-19T08:16:53.208Z",
+              "articleHash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Agente con von + dativo",
+              "level": "B1",
+              "part": "Voz y modos — Diathese und Modi",
+              "chapter": "Pasiva de proceso, estado y alternativas — Vorgangs-, Zustandspassiv und Alternativen"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-3e09fd53bf9ed703550070f070652a269d6cafd34e65a6408ecac0c2ecc062ab",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:16:53.208Z",
+              "articleHash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "58d0004e0367760c01674d18f27a96a8409e03aecabb33648a43e2e3233dc594",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:53.485Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0750",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 750,
+            "title": "Conversión a relativa",
+            "level": "C1",
+            "part": "Participios y formación de palabras — Partizipien und Wortbildung",
+            "chapter": "Participios atributivos y construcciones expandidas — Attributive Partizipien und erweiterte Konstruktionen",
+            "article_markdown": "#### En pocas palabras\n\nUna **construcción participial atributiva** es un grupo en el que un participio modifica directamente a un sustantivo, como un adjetivo. En alemán, estas construcciones pueden ser muy compactas y contener varios modificadores antes del nombre. Con frecuencia pueden reformularse como una **oración relativa**, que hace explícita la relación verbal.\n\nAsí, **die gestern veröffentlichte Studie** puede convertirse en **die Studie, die gestern veröffentlicht wurde**. El contenido básico se conserva: se habla de una estudio publicado ayer, pero la información pasa de un atributo situado antes del sustantivo a una cláusula relativa situada después.\n\n#### Cómo funciona\n\nEl primer paso consiste en localizar el **sustantivo núcleo**, normalmente situado a la derecha del grupo atributivo. En **die gestern veröffentlichte Studie**, el núcleo es **Studie**; **gestern veröffentlichte** lo modifica.\n\nAl formar la relativa, el sustantivo aparece fuera de la cláusula y se retoma mediante un pronombre relativo: **die Studie, die ...**. El pronombre relativo recibe el género y número del antecedente, mientras su caso depende de la función que desempeña dentro de la relativa.\n\nEl participio se reconstruye como una forma verbal adecuada. Con un **Partizip II** de lectura pasiva, como **veröffentlicht**, es natural una relativa pasiva: **die Studie, die gestern veröffentlicht wurde**. Con un **Partizip I**, la relativa suele tener lectura activa: **der vor der Tür wartende Mann → der Mann, der vor der Tür wartet**.\n\nLa conversión no es una sustitución mecánica palabra por palabra. Hay que recuperar voz, tiempo, sujeto implícito y complementos a partir del sentido de la construcción. Un Partizip II también puede expresar resultado o anterioridad, especialmente con verbos intransitivos, por lo que no siempre corresponde a una pasiva con **werden**.\n\n#### Ejemplos\n\n* **die gestern veröffentlichte Studie → die Studie, die gestern veröffentlicht wurde** — atributo participial pasivo convertido en relativa.\n* **der vor der Tür wartende Mann → der Mann, der vor der Tür wartet** — Partizip I con lectura activa.\n* **die in Berlin geborene Autorin → die Autorin, die in Berlin geboren wurde** — la relativa explicita la construcción verbal.\n* **die bereits angekommenen Gäste → die Gäste, die bereits angekommen sind** — con **ankommen**, la reformulación usa **sein**, no una pasiva.\n\n#### Observación importante\n\nLa relativa suele ser más explícita y puede resultar más fácil de procesar cuando el atributo es largo. La construcción participial, en cambio, permite una gran densidad informativa y es frecuente en registros formales, académicos y periodísticos.\n\nLa equivalencia es principalmente semántica, no morfológica: al reformular, desaparecen las terminaciones de declinación adjetival del participio y aparece una estructura verbal completa dentro de la relativa.\n\n#### Entradas relacionadas\n\n[Entrada 751: Declinación del participio-adjetivo](#entry-751) · [Entrada 752: Die gestern veröffentlichte Studie](#entry-752)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-f72eb2e55800ca0e170ed79109894966f292b900448f95f38a4033518d2d7338",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:34:43.534Z"
+          },
+          "version": {
+            "code": "MLS-V05-0750",
+            "articleGeneratedAt": "2026-09-19T08:34:43.534Z",
+            "articleHash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Conversión a relativa",
+            "level": "C1",
+            "part": "Participios y formación de palabras — Partizipien und Wortbildung",
+            "chapter": "Participios atributivos y construcciones expandidas — Attributive Partizipien und erweiterte Konstruktionen"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0750",
+            "articleVersion": {
+              "code": "MLS-V05-0750",
+              "articleGeneratedAt": "2026-09-19T08:34:43.534Z",
+              "articleHash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Conversión a relativa",
+              "level": "C1",
+              "part": "Participios y formación de palabras — Partizipien und Wortbildung",
+              "chapter": "Participios atributivos y construcciones expandidas — Attributive Partizipien und erweiterte Konstruktionen"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-f72eb2e55800ca0e170ed79109894966f292b900448f95f38a4033518d2d7338",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:34:43.534Z",
+              "articleHash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "8b88f0d52f6128b4a00d7886d1ce5322b6d5a0e8dfb23a8f521fe48cd4920a12",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:54.361Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0850",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 850,
+            "title": "Es presentativo en primera posición",
+            "level": "C1",
+            "part": "Partículas y es — Partikeln und es",
+            "chapter": "Funciones de es — Funktionen von es",
+            "article_markdown": "#### En pocas palabras\n\nEn algunas oraciones alemanas, **es** puede ocupar la primera posición sin referirse a ninguna entidad concreta. Su función es **presentativa**: llena el **Vorfeld**, el campo anterior al verbo conjugado, mientras el sujeto que aporta la información nueva aparece después.\n\nEn **Es kamen drei Gäste herein**, **es** no significa “eso”. El sujeto real de **kamen** es **drei Gäste**, que aparece después del verbo y se introduce como información nueva.\n\n#### Cómo funciona\n\nEn una oración principal alemana con orden V2, el verbo conjugado ocupa la segunda posición estructural. Si se quiere presentar un sujeto pospuesto, **es** puede ocupar el Vorfeld: **Es standen viele Leute vor der Tür**.\n\nEste **es** es puramente estructural y no controla la concordancia verbal. El verbo concuerda con el sujeto léxico: **Es kam ein Gast**, pero **Es kamen drei Gäste**. Esa diferencia muestra que **es** no es el sujeto gramatical en estas construcciones presentativas.\n\nSi otro constituyente pasa al Vorfeld, el **es** suele desaparecer: **Es kamen gestern drei Gäste → Gestern kamen drei Gäste**.\n\n#### Ejemplos\n\n* **Es kamen drei Gäste herein.** — “Entraron tres invitados”. **Drei Gäste** es el sujeto plural; **es** solo ocupa el Vorfeld.\n* **Es stand ein Auto vor dem Haus.** — “Había / estaba un carro frente a la casa”. El verbo singular concuerda con **ein Auto**.\n* **Es arbeiten heute viele Menschen zu Hause.** — “Hoy muchas personas trabajan desde casa”.\n* **Gestern kamen drei Gäste herein.** — Con **gestern** en el Vorfeld, el **es** presentativo ya no aparece.\n\n#### Observación importante\n\nEste patrón no debe confundirse con el **es** meteorológico de **Es regnet**. En la construcción meteorológica, **es** funciona como sujeto formal y permanece aunque otro elemento ocupe el Vorfeld: **Heute regnet es**.\n\nTampoco debe traducirse el **es** presentativo como “eso”. En español, el efecto de presentación suele expresarse mediante el orden de palabras o una construcción existencial, según el contexto.\n\n#### Entradas relacionadas\n\n[Es meteorológico](#entry-849) · [es como objeto formal en expresiones fijas](#entry-851) · [Es gibt + acusativo](#entry-848) · [es con hora/fecha](#entry-852)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-77427ee72f671560ea4f9cfe89eafa820d58fb5238107ec6cdfad6d5005f0384",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:21:49.627Z"
+          },
+          "version": {
+            "code": "MLS-V05-0850",
+            "articleGeneratedAt": "2026-09-19T08:21:49.627Z",
+            "articleHash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Es presentativo en primera posición",
+            "level": "C1",
+            "part": "Partículas y es — Partikeln und es",
+            "chapter": "Funciones de es — Funktionen von es"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0850",
+            "articleVersion": {
+              "code": "MLS-V05-0850",
+              "articleGeneratedAt": "2026-09-19T08:21:49.627Z",
+              "articleHash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Es presentativo en primera posición",
+              "level": "C1",
+              "part": "Partículas y es — Partikeln und es",
+              "chapter": "Funciones de es — Funktionen von es"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-77427ee72f671560ea4f9cfe89eafa820d58fb5238107ec6cdfad6d5005f0384",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:21:49.627Z",
+              "articleHash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "273a900de63c1d119dc6df74585daf0e98d6201b0097d7891977d101bfea3105",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:55.245Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0951",
+            "language": "aleman",
+            "language_name": "Alemán",
+            "n": 951,
+            "title": "Rechtssprache",
+            "level": "C1",
+            "part": "Alemán profesional y variación oral/escrita — Berufsdeutsch und mediale Variation",
+            "chapter": "Alemán profesional, administrativo y jurídico — Berufs-, Verwaltungs- und Rechtssprache",
+            "article_markdown": "#### En pocas palabras\n\nLa **Rechtssprache** es el lenguaje especializado del derecho. Incluye vocabulario técnico, fórmulas convencionales y patrones sintácticos usados en leyes, contratos, sentencias, resoluciones y otros textos jurídicos. Su objetivo principal es expresar relaciones normativas con precisión y permitir interpretaciones relativamente estables dentro de un sistema jurídico.\n\nEn **Der Vertrag tritt am 1. Januar in Kraft**, la expresión **in Kraft treten** significa que el contrato comienza a producir efectos jurídicos a partir de esa fecha.\n\n#### Cómo funciona\n\nEl lenguaje jurídico utiliza muchos términos cuyo significado especializado no coincide exactamente con el uso cotidiano. Palabras como **Anspruch**, **Bescheid**, **Verfügung**, **Frist** o **Verpflichtung** deben interpretarse dentro de la rama y el contexto jurídicos correspondientes.\n\nTambién son frecuentes nominalizaciones y grupos complejos: **die Erteilung einer Genehmigung**, **die Einhaltung der Frist**, **die Beendigung des Vertragsverhältnisses**. Estas estructuras permiten mantener terminología constante y vincular conceptos definidos en distintas partes de un documento.\n\nLa pasiva, las construcciones impersonales y ciertos verbos modales ayudan a formular obligaciones, permisos, posibilidades y procedimientos: **Der Antrag ist einzureichen**, **Die Frist kann verlängert werden**, **Die Zahlung muss erfolgen**. Sin embargo, la interpretación jurídica depende del texto completo y no solo de una forma gramatical aislada.\n\nOtro rasgo importante es la presencia de fórmulas lexicalizadas como **in Kraft treten**, **außer Kraft setzen**, **Anspruch haben auf** o **unter Vorbehalt**. Traducirlas palabra por palabra puede producir equivalencias engañosas.\n\n#### Ejemplos\n\n* **Der Vertrag tritt am 1. Januar in Kraft.** — “El contrato entra en vigor el 1 de enero”.\n* **Der Antrag ist innerhalb der Frist einzureichen.** — Formulación jurídica-administrativa de una obligación procedimental.\n* **Die Genehmigung kann widerrufen werden.** — “La autorización puede revocarse”.\n* **Ein Anspruch auf Erstattung besteht nur unter bestimmten Voraussetzungen.** — “Solo existe derecho al reembolso bajo determinadas condiciones”.\n\n#### Observación importante\n\nRechtssprache no significa simplemente “alemán muy formal”. Es una variedad especializada cuya interpretación puede depender de definiciones legales, jurisprudencia, tradición textual y ámbito normativo.\n\nPor eso, al aprenderla conviene distinguir entre comprender la estructura lingüística y establecer el efecto jurídico exacto de una formulación. Una explicación gramatical no sustituye la interpretación jurídica profesional cuando esta sea necesaria.\n\n#### Entradas relacionadas\n\n[Pasivas jurídicas](#entry-950) · [Nominalizaciones jurídicas](#entry-949) · [Mit freundlichen Grüßen](#entry-948)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-b5c258d0ee8a1c36dda018625b9db525fffe50a56b392060faf6c531a5292520",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T09:00:46.390Z"
+          },
+          "version": {
+            "code": "MLS-V05-0951",
+            "articleGeneratedAt": "2026-09-19T09:00:46.390Z",
+            "articleHash": "fe2f96d1de46d035a09fd79c64c7daba195ac7e66a299c151d975e8da67f0200",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Rechtssprache",
+            "level": "C1",
+            "part": "Alemán profesional y variación oral/escrita — Berufsdeutsch und mediale Variation",
+            "chapter": "Alemán profesional, administrativo y jurídico — Berufs-, Verwaltungs- und Rechtssprache"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V05-0951",
+            "articleVersion": {
+              "code": "MLS-V05-0951",
+              "articleGeneratedAt": "2026-09-19T09:00:46.390Z",
+              "articleHash": "fe2f96d1de46d035a09fd79c64c7daba195ac7e66a299c151d975e8da67f0200",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Rechtssprache",
+              "level": "C1",
+              "part": "Alemán profesional y variación oral/escrita — Berufsdeutsch und mediale Variation",
+              "chapter": "Alemán profesional, administrativo y jurídico — Berufs-, Verwaltungs- und Rechtssprache"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-b5c258d0ee8a1c36dda018625b9db525fffe50a56b392060faf6c531a5292520",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T09:00:46.390Z",
+              "articleHash": "fe2f96d1de46d035a09fd79c64c7daba195ac7e66a299c151d975e8da67f0200"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "0af824c341e8f661da3bd547b37a2e870db74cf9eca0efddbfebc95f592ab31b",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:56:56.113Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T09:56:56.114Z",
+  "commandFile": "mls chat bridge/commands/command 0317.json"
+}
