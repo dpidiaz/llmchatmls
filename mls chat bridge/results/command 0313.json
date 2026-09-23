@@ -1,0 +1,2411 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "GATE100-IT-REFRESH-20260923-A",
+    "requested": 10,
+    "processed": 10,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0041",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 41,
+            "title": "Dos puntos y punto y coma",
+            "level": "B1",
+            "part": "Escritura, pronunciación y fundamentos — Scrittura, pronuncia e fondamenti",
+            "chapter": "Ortografía y convenciones gráficas — Ortografia e convenzioni grafiche",
+            "article_markdown": "#### En pocas palabras\n\nLos **dos puntos** y el **punto y coma** organizan relaciones entre unidades mayores que una simple coma. Los dos puntos suelen introducir explicación, enumeración o consecuencia; el punto y coma separa segmentos relacionados con cierta autonomía.\n\nAmbos signos son recursos útiles en escritura expositiva.\n\n#### Cómo funciona\n\nLos dos puntos pueden anunciar una lista: **Ho comprato tre cose: pane, latte e riso**. También pueden introducir una explicación o conclusión.\n\nEl punto y coma conecta oraciones estrechamente relacionadas cuando un punto resultaría demasiado fuerte: **Era tardi; abbiamo deciso di tornare**.\n\n#### Ejemplos\n\n* **Ho una domanda: quando parti?**\n* **Servono tre cose: tempo, pazienza e pratica.**\n* **Era tardi; siamo tornati a casa.**\n* **Luca studia; Maria lavora.**\n\n#### Observación importante\n\nNo deben usarse como sustitutos decorativos de la coma. La elección depende de la relación lógica y del grado de independencia entre segmentos.\n\nEn estilos contemporáneos, el punto y coma puede ser menos frecuente que el punto, pero sigue siendo plenamente válido.\n\n#### Entradas relacionadas\n\n[0037. Punteggiatura di base](#entrada-37) · [0040. Virgola negli incisi](#entrada-40)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "staging-2c2cfb5ea13f8e1404cfdc549bb228e1c51d1663e604227143780791b1c87006",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T20:18:13.672Z"
+          },
+          "version": {
+            "code": "MLS-V03-0041",
+            "articleGeneratedAt": "2026-09-18T20:18:13.672Z",
+            "articleHash": "c80ac04c628bc9729ddfa5b3a065dbfc520bdd1ed34c5c59b5d08f61d9e8a41c",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Dos puntos y punto y coma",
+            "level": "B1",
+            "part": "Escritura, pronunciación y fundamentos — Scrittura, pronuncia e fondamenti",
+            "chapter": "Ortografía y convenciones gráficas — Ortografia e convenzioni grafiche"
+          },
+          "state": {
+            "code": "MLS-V03-0041",
+            "article_generated_at": "2026-09-18T20:18:13.672Z",
+            "article_hash": "c80ac04c628bc9729ddfa5b3a065dbfc520bdd1ed34c5c59b5d08f61d9e8a41c",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:08.250Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 2,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0041",
+            "articleVersion": {
+              "code": "MLS-V03-0041",
+              "articleGeneratedAt": "2026-09-18T20:18:13.672Z",
+              "articleHash": "c80ac04c628bc9729ddfa5b3a065dbfc520bdd1ed34c5c59b5d08f61d9e8a41c",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Dos puntos y punto y coma",
+              "level": "B1",
+              "part": "Escritura, pronunciación y fundamentos — Scrittura, pronuncia e fondamenti",
+              "chapter": "Ortografía y convenciones gráficas — Ortografia e convenzioni grafiche"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "staging-2c2cfb5ea13f8e1404cfdc549bb228e1c51d1663e604227143780791b1c87006",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T20:18:13.672Z",
+              "articleHash": "c80ac04c628bc9729ddfa5b3a065dbfc520bdd1ed34c5c59b5d08f61d9e8a41c"
+            },
+            "r32": {
+              "provenance": {
+                "code": "MLS-V03-0041",
+                "origin": "github-staging",
+                "standard": "MLS R32",
+                "prompt_version": "32.0",
+                "staging_run_id": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+                "snapshot_version": "32.0-4fc97a6b1b85-20260918161056",
+                "snapshot_commit": "261616058b18ac2e3c83b0059e5a7c095f260933",
+                "staged_at": "2026-09-18T20:18:13.672Z",
+                "integrated_at": "2026-09-18T20:46:33.765Z",
+                "source_audit_model": "staging-2c2cfb5ea13f8e1404cfdc549bb228e1c51d1663e604227143780791b1c87006",
+                "recorded_at": "2026-09-19T00:59:47.692Z"
+              },
+              "origin": "github-staging",
+              "stagingRunId": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+              "snapshotVersion": "32.0-4fc97a6b1b85-20260918161056",
+              "snapshotCommit": "261616058b18ac2e3c83b0059e5a7c095f260933",
+              "integratedAt": "2026-09-18T20:46:33.765Z"
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0041",
+                "article_generated_at": "2026-09-18T20:18:13.672Z",
+                "article_hash": "c80ac04c628bc9729ddfa5b3a065dbfc520bdd1ed34c5c59b5d08f61d9e8a41c",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 2,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:08.250Z"
+              },
+              "evidenceSnapshotHash": "f370fb4076cc9fad7d8da0113def9669269ebdcaf28a2b72a96dfbdb7365d919",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 30,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 158,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 29,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:42.820Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0123",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 123,
+            "title": "Artículo definido con países y regiones",
+            "level": "B1",
+            "part": "Artículos, determinantes y cuantificación — Articoli, determinanti e quantificazione",
+            "chapter": "Artículos definidos e indefinidos — Articoli determinativi e indeterminativi",
+            "article_markdown": "#### En pocas palabras\n\nLos nombres de **países y regiones** italianos suelen llevar artículo definido cuando funcionan como grupos nominales autónomos: **L’Italia è in Europa**, **La Toscana è famosa per il paesaggio**, **Gli Stati Uniti sono molto grandi**.\n\nSin embargo, con algunas preposiciones de lugar el artículo puede desaparecer o integrarse en una construcción específica: **vivo in Italia**, **vado in Toscana**.\n\n#### Cómo funciona\n\nMuchos países y regiones tienen género y número propios que determinan el artículo: **l’Italia, la Francia, il Brasile, il Giappone, la Sicilia, la Lombardia**. Los nombres plurales seleccionan un artículo plural: **gli Stati Uniti, i Paesi Bassi**.\n\nCon **in** para expresar permanencia o destino, es frecuente usar el topónimo sin artículo: **abito in Italia**, **vado in Francia**, **sono in Toscana**. En cambio, otras relaciones preposicionales pueden requerir una preposición articulada: **vengo dall’Italia**, **la cucina della Sicilia**.\n\nEl artículo también reaparece cuando el nombre está modificado: **l’Italia settentrionale**, **la Francia del Settecento**. La distribución depende, por tanto, del tipo de topónimo y de la construcción sintáctica.\n\n#### Ejemplos\n\n* **L’Italia è in Europa.** — el país funciona como sujeto y lleva artículo.\n* **Vivo in Italia.** — con **in**, el artículo se omite en esta construcción locativa.\n* **Vengo dall’Italia.** — **da + l’ = dall’**.\n* **La Toscana è una regione italiana.** — nombre de región con artículo.\n* **Gli Stati Uniti hanno cinquanta stati.** — topónimo plural.\n\n#### Observación importante\n\nNo todos los nombres geográficos siguen exactamente el mismo patrón. Ciudades como **Roma** suelen aparecer sin artículo, mientras países y regiones lo llevan con mucha más frecuencia fuera de ciertas construcciones preposicionales.\n\nPor eso no conviene aprender una regla única del tipo “los países siempre llevan artículo” o “después de una preposición nunca lo llevan”. La selección depende del topónimo y de la estructura concreta.\n\n#### Entradas relacionadas\n\n[0122. Articolo partitivo del/della/dei/degli/delle](#entrada-122) · [0124. Articolo zero](#entrada-124) · [0121. Articolo determinativo con giorni della settimana](#entrada-121) · [0104. Omissione dell'articolo con città](#entrada-104)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-350ba1ce79e1e5a5cc8a6ce8e6bd707a72fb39df0a9205cb230c40355141cbfd",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T05:10:09.289Z"
+          },
+          "version": {
+            "code": "MLS-V03-0123",
+            "articleGeneratedAt": "2026-09-19T05:10:09.289Z",
+            "articleHash": "6371fcd4813de2173d151685556da612bf461153ff69c1f5f43d9b6861f81a09",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Artículo definido con países y regiones",
+            "level": "B1",
+            "part": "Artículos, determinantes y cuantificación — Articoli, determinanti e quantificazione",
+            "chapter": "Artículos definidos e indefinidos — Articoli determinativi e indeterminativi"
+          },
+          "state": {
+            "code": "MLS-V03-0123",
+            "article_generated_at": "2026-09-19T05:10:09.289Z",
+            "article_hash": "6371fcd4813de2173d151685556da612bf461153ff69c1f5f43d9b6861f81a09",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:10.138Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0123",
+            "articleVersion": {
+              "code": "MLS-V03-0123",
+              "articleGeneratedAt": "2026-09-19T05:10:09.289Z",
+              "articleHash": "6371fcd4813de2173d151685556da612bf461153ff69c1f5f43d9b6861f81a09",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Artículo definido con países y regiones",
+              "level": "B1",
+              "part": "Artículos, determinantes y cuantificación — Articoli, determinanti e quantificazione",
+              "chapter": "Artículos definidos e indefinidos — Articoli determinativi e indeterminativi"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-350ba1ce79e1e5a5cc8a6ce8e6bd707a72fb39df0a9205cb230c40355141cbfd",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T05:10:09.289Z",
+              "articleHash": "6371fcd4813de2173d151685556da612bf461153ff69c1f5f43d9b6861f81a09"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0123",
+                "article_generated_at": "2026-09-19T05:10:09.289Z",
+                "article_hash": "6371fcd4813de2173d151685556da612bf461153ff69c1f5f43d9b6861f81a09",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:10.138Z"
+              },
+              "evidenceSnapshotHash": "3abc7dca12ba24e7a45c41b987067c6cbf17caf085be6cbb21957ecdcf507222",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:43.933Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0204",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 204,
+            "title": "Clítico con modal + infinitivo",
+            "level": "A2",
+            "part": "Pronombres y referencia — Pronomi e riferimento",
+            "chapter": "Pronombres de objeto y clíticos simples — Pronomi complemento e clitici semplici",
+            "article_markdown": "#### En pocas palabras\n\nCon un **verbo modal + infinitivo**, el clítico italiano puede aparecer en dos posiciones. En **Lo posso fare domani** está antes del modal **posso**; en **Posso farlo domani** está unido al infinitivo **fare**.\n\n#### Cómo funciona\n\nLa alternancia es frecuente con los modales **potere, dovere, volere**: **Ti devo chiamare / Devo chiamarti**, **Lo voglio comprare / Voglio comprarlo**, **Ci possono aiutare / Possono aiutarci**.\n\nCuando el clítico aparece delante del modal, se coloca como un clítico preverbal normal: **Lo posso fare**. Cuando se une al infinitivo, este pierde normalmente la **-e** final: **fare + lo → farlo**, **vedere + ti → vederti**.\n\nLa función sintáctica del clítico pertenece al infinitivo: en **Lo posso fare**, **lo** sigue siendo objeto de **fare**, aunque aparezca antes de **posso**. Este desplazamiento hacia el modal suele llamarse “subida del clítico”.\n\nLas dos posiciones son posibles en muchos contextos, pero la distribución exacta puede depender del verbo, de la construcción y del registro.\n\n#### Ejemplos\n\n* **Lo posso fare domani. / Posso farlo domani.** — las dos posiciones expresan el mismo vínculo básico con **fare**.\n* **Ti devo chiamare. / Devo chiamarti.** — **ti** es objeto de **chiamare**.\n* **Ci vogliono aiutare. / Vogliono aiutarci.** — **ci** permanece relacionado con **aiutare**.\n\n#### Observación importante\n\nNo conviene interpretar la posición preverbal como señal de que el clítico sea complemento del modal. En **Lo voglio vedere**, **lo** corresponde semántica y sintácticamente a **vedere**.\n\nTampoco toda secuencia verbo + infinitivo permite exactamente la misma alternancia; el patrón es especialmente característico de los verbos modales y de algunas construcciones relacionadas.\n\n#### Entradas relacionadas\n\n[0203. Clitico con infinito](#entrada-203) · [0205. Pronomi tonici me/te/lui/lei/noi/voi/loro](#entrada-205) · [0202. Posizione preverbale](#entrada-202) · [0206. Clitico unito all'imperativo affermativo](#entrada-206)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-4ebdd7b5b4bdc9b7940a578df36d1b48bf96736ac3380766106bcccb2d0412aa",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T05:14:11.783Z"
+          },
+          "version": {
+            "code": "MLS-V03-0204",
+            "articleGeneratedAt": "2026-09-19T05:14:11.783Z",
+            "articleHash": "772dc7a8171370d4de3480af91b04be2c85835c73f7e72ca5115cbbb32bf4775",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Clítico con modal + infinitivo",
+            "level": "A2",
+            "part": "Pronombres y referencia — Pronomi e riferimento",
+            "chapter": "Pronombres de objeto y clíticos simples — Pronomi complemento e clitici semplici"
+          },
+          "state": {
+            "code": "MLS-V03-0204",
+            "article_generated_at": "2026-09-19T05:14:11.783Z",
+            "article_hash": "772dc7a8171370d4de3480af91b04be2c85835c73f7e72ca5115cbbb32bf4775",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:11.964Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0204",
+            "articleVersion": {
+              "code": "MLS-V03-0204",
+              "articleGeneratedAt": "2026-09-19T05:14:11.783Z",
+              "articleHash": "772dc7a8171370d4de3480af91b04be2c85835c73f7e72ca5115cbbb32bf4775",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Clítico con modal + infinitivo",
+              "level": "A2",
+              "part": "Pronombres y referencia — Pronomi e riferimento",
+              "chapter": "Pronombres de objeto y clíticos simples — Pronomi complemento e clitici semplici"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-4ebdd7b5b4bdc9b7940a578df36d1b48bf96736ac3380766106bcccb2d0412aa",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T05:14:11.783Z",
+              "articleHash": "772dc7a8171370d4de3480af91b04be2c85835c73f7e72ca5115cbbb32bf4775"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0204",
+                "article_generated_at": "2026-09-19T05:14:11.783Z",
+                "article_hash": "772dc7a8171370d4de3480af91b04be2c85835c73f7e72ca5115cbbb32bf4775",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:11.964Z"
+              },
+              "evidenceSnapshotHash": "ade482a22c07ac8add7f152f2cd124e83619befef5714d88595b79c0240fe8c7",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:45.004Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0284",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 284,
+            "title": "Rimanere",
+            "level": "A2",
+            "part": "Sistema verbal: presente — Sistema verbale: presente",
+            "chapter": "Verbos irregulares, serviles y frecuentes — Verbi irregolari, servili e frequenti",
+            "article_markdown": "#### En pocas palabras\n\n**Rimanere** («quedarse», «permanecer») es un verbo frecuente y su presente es irregular: **rimango, rimani, rimane, rimaniamo, rimanete, rimangono**. En **Rimango a casa stasera**, **rimango** indica que el hablante permanece en casa.\n\nEl paradigma alterna las bases **riman-** y **rimang-**.\n\n#### Cómo funciona\n\nEl presente es **io rimango, tu rimani, lui/lei rimane, noi rimaniamo, voi rimanete, loro rimangono**. La consonante **g** aparece en primera persona singular y tercera plural.\n\n**Rimanere** puede expresar permanencia en un lugar: **rimanere a casa**, **rimanere in ufficio**. También aparece con estados o resultados: **rimanere calmo**, **rimanere aperto**, **rimanere senza parole**.\n\nEn el passato prossimo suele construirse con **essere**: **sono rimasto/rimasta**, **siamo rimasti/rimaste**, con concordancia del participio con el sujeto.\n\n#### Ejemplos\n\n* **Rimango a casa stasera.** — primera persona singular.\n* **Rimaniamo qui ancora un’ora.** — primera persona plural.\n* **Rimangono in silenzio.** — tercera persona plural.\n\n#### Observación importante\n\n**Rimanere** no expresa únicamente ubicación física: puede indicar que un estado continúa o que un resultado se mantiene.\n\nLa preposición o el complemento dependen de la construcción concreta y no forman una única regencia fija.\n\n#### Entradas relacionadas\n\n[0283. Bere](#entrada-283) · [0285. Scegliere](#entrada-285) · [0282. Uscire](#entrada-282) · [0286. Sapere vs conoscere](#entrada-286)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-7cb1297df85cb6f92a3995d08fdf729df7667ff9e0f7d4dd08d3aaa1565455b0",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T05:35:45.523Z"
+          },
+          "version": {
+            "code": "MLS-V03-0284",
+            "articleGeneratedAt": "2026-09-19T05:35:45.523Z",
+            "articleHash": "8ec1ab0a83c4cfb3e806b32c51d8626a468a4b4ab83675901a46c7f1a7c34931",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Rimanere",
+            "level": "A2",
+            "part": "Sistema verbal: presente — Sistema verbale: presente",
+            "chapter": "Verbos irregulares, serviles y frecuentes — Verbi irregolari, servili e frequenti"
+          },
+          "state": {
+            "code": "MLS-V03-0284",
+            "article_generated_at": "2026-09-19T05:35:45.523Z",
+            "article_hash": "8ec1ab0a83c4cfb3e806b32c51d8626a468a4b4ab83675901a46c7f1a7c34931",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:13.828Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0284",
+            "articleVersion": {
+              "code": "MLS-V03-0284",
+              "articleGeneratedAt": "2026-09-19T05:35:45.523Z",
+              "articleHash": "8ec1ab0a83c4cfb3e806b32c51d8626a468a4b4ab83675901a46c7f1a7c34931",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Rimanere",
+              "level": "A2",
+              "part": "Sistema verbal: presente — Sistema verbale: presente",
+              "chapter": "Verbos irregulares, serviles y frecuentes — Verbi irregolari, servili e frequenti"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-7cb1297df85cb6f92a3995d08fdf729df7667ff9e0f7d4dd08d3aaa1565455b0",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T05:35:45.523Z",
+              "articleHash": "8ec1ab0a83c4cfb3e806b32c51d8626a468a4b4ab83675901a46c7f1a7c34931"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0284",
+                "article_generated_at": "2026-09-19T05:35:45.523Z",
+                "article_hash": "8ec1ab0a83c4cfb3e806b32c51d8626a468a4b4ab83675901a46c7f1a7c34931",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:13.828Z"
+              },
+              "evidenceSnapshotHash": "cdd87645a77c6585ce69b2169bd8196923b8bf970bb6e82f052e097fa88c93b8",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:46.130Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0365",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 365,
+            "title": "Trapassato remoto",
+            "level": "C2",
+            "part": "Pasados y aspecto — Passati e aspetto",
+            "chapter": "Trapassato, passato remoto y contrastes del pasado — Trapassato, passato remoto e contrasti del passato",
+            "article_markdown": "#### En pocas palabras\n\nEl **trapassato remoto** presenta una situación como completada antes de otro acontecimiento pasado, normalmente dentro de una narración en **passato remoto**. En **Dopo che ebbe finito, uscì**, **ebbe finito** sitúa el final de una acción antes de **uscì**.\n\nEs un tiempo compuesto y hoy pertenece sobre todo a registros narrativos, históricos y literarios. En la conversación cotidiana contemporánea es mucho menos frecuente que el **trapassato prossimo**.\n\n#### Cómo funciona\n\nSe forma con el **passato remoto de avere o essere + participio pasado**. Con **avere** aparecen formas como **ebbi parlato, avesti visto, ebbe finito, avemmo deciso, aveste letto, ebbero capito**. Con **essere** aparecen **fui partito/a, fosti arrivato/a, fu uscito/a, fummo partiti/e, foste arrivati/e, furono usciti/e**.\n\nLa elección entre **avere** y **essere** sigue las reglas generales de los tiempos compuestos italianos. Con **essere**, el participio concuerda normalmente con el sujeto: **quando Maria fu arrivata**, **dopo che i ragazzi furono partiti**.\n\nEl trapassato remoto aparece especialmente en subordinadas temporales introducidas por expresiones como **dopo che, quando, appena, non appena**: **Appena ebbe letto la lettera, la bruciò**. El primer hecho queda presentado como completado antes del segundo.\n\nTradicionalmente se asocia con una anterioridad muy estrecha o inmediata, pero no conviene convertir ese matiz en una condición absoluta. Lo esencial es la relación de anterioridad completada dentro de una secuencia narrativa en pasado remoto.\n\nFrente a **aveva finito**, el trapassato prossimo, **ebbe finito** está más ligado a un estilo narrativo de passato remoto. El trapassato prossimo tiene una distribución mucho más amplia en italiano contemporáneo y puede relacionarse con distintos puntos de referencia pasados.\n\n#### Ejemplos\n\n* **Dopo che ebbe finito, uscì.** — terminar ocurre antes de salir.\n* **Quando furono arrivati tutti, il presidente aprì la seduta.** — **furono arrivati** marca anterioridad y concuerda en plural.\n* **Appena ebbi letto la notizia, telefonai a Marta.** — la lectura queda completada antes de la llamada.\n\n#### Observación importante\n\nEl trapassato remoto no significa simplemente “un pasado más antiguo”. Dos hechos pueden estar separados por pocos minutos; lo decisivo es su relación dentro de la narración.\n\nTampoco debe tratarse como equivalente libre de **aveva + participio**. En el italiano actual, **ebbe finito** es estilísticamente más marcado y se asocia fuertemente con narración escrita, histórica o literaria.\n\n#### Entradas relacionadas\n\n[0364. Contrasto imperfetto/passato prossimo/passato remoto](#entrada-364) · [0366. Quando ebbe finito...](#entrada-366) · [0363. Distribuzione regionale del passato remoto](#entrada-363) · [0367. Congiuntivo nei registri letterari](#entrada-367)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-679ba71e3878a82beadd3066a94b82484fec3f186aa86ac3672c0385071d6a1c",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T05:38:32.706Z"
+          },
+          "version": {
+            "code": "MLS-V03-0365",
+            "articleGeneratedAt": "2026-09-19T05:38:32.706Z",
+            "articleHash": "f748004c60283f0729d4ad877b901be5d60acc605bac97573e4fa7ccbdf04141",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Trapassato remoto",
+            "level": "C2",
+            "part": "Pasados y aspecto — Passati e aspetto",
+            "chapter": "Trapassato, passato remoto y contrastes del pasado — Trapassato, passato remoto e contrasti del passato"
+          },
+          "state": {
+            "code": "MLS-V03-0365",
+            "article_generated_at": "2026-09-19T05:38:32.706Z",
+            "article_hash": "f748004c60283f0729d4ad877b901be5d60acc605bac97573e4fa7ccbdf04141",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:15.631Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0365",
+            "articleVersion": {
+              "code": "MLS-V03-0365",
+              "articleGeneratedAt": "2026-09-19T05:38:32.706Z",
+              "articleHash": "f748004c60283f0729d4ad877b901be5d60acc605bac97573e4fa7ccbdf04141",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Trapassato remoto",
+              "level": "C2",
+              "part": "Pasados y aspecto — Passati e aspetto",
+              "chapter": "Trapassato, passato remoto y contrastes del pasado — Trapassato, passato remoto e contrasti del passato"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-679ba71e3878a82beadd3066a94b82484fec3f186aa86ac3672c0385071d6a1c",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T05:38:32.706Z",
+              "articleHash": "f748004c60283f0729d4ad877b901be5d60acc605bac97573e4fa7ccbdf04141"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0365",
+                "article_generated_at": "2026-09-19T05:38:32.706Z",
+                "article_hash": "f748004c60283f0729d4ad877b901be5d60acc605bac97573e4fa7ccbdf04141",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:15.631Z"
+              },
+              "evidenceSnapshotHash": "60745ce5f3306b1b579d49aed7a0cc0cb3855231063c267344f7df0058f1e044",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:47.291Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0446",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 446,
+            "title": "Andarsene en imperativo",
+            "level": "B1",
+            "part": "Imperativo y formas no personales — Imperativo e forme non finite",
+            "chapter": "Imperativo — Imperativo",
+            "article_markdown": "#### En pocas palabras\n\n**Andarsene** significa, según el contexto, “irse” o “marcharse”. Es un verbo pronominal que combina **andare** con los elementos pronominales **si + ne**. En imperativo, esos elementos cambian de forma y posición según la persona: **Vattene!**, **Andiamocene!**, **Andatevene!**.\n\nEn **Vattene!**, la forma completa expresa una orden o invitación dirigida a **tu** para que se marche.\n\n#### Cómo funciona\n\nCon **tu**, el imperativo breve **va’** se combina con **te + ne** y produce **vattene**. La consonante de **te** se duplica, como ocurre con ciertos clíticos unidos a imperativos breves: **va’ + te + ne → vattene**.\n\nCon **noi** y **voi**, los pronombres también se unen al imperativo afirmativo: **andiamocene** y **andatevene**. Antes de **ne**, **ci** y **vi** adoptan las formas **ce** y **ve**: **andiamo + ce + ne**, **andate + ve + ne**.\n\nEl tratamiento formal de **Lei** usa normalmente los pronombres antes del verbo: **Se ne vada!**. En el negativo de **tu** pueden aparecer **Non andartene!** y **Non te ne andare!**.\n\n#### Ejemplos\n\n* **Vattene!** — imperativo de **tu** de **andarsene**.\n* **Andiamocene.** — exhortación de **noi**: “vámonos”.\n* **Andatevene subito.** — imperativo dirigido a varias personas.\n* **Se ne vada, per favore.** — forma cortés de **Lei**.\n\n#### Observación importante\n\nEl ejemplo heredado **Me ne vado** muestra **andarsene** en presente de indicativo: “me voy”. No es un imperativo y, por tanto, no demuestra las formas específicas estudiadas aquí.\n\nAdemás, **ne** forma parte de la construcción lexicalizada **andarsene**; no conviene atribuirle aisladamente toda la traducción “irse”. El significado surge del verbo pronominal completo.\n\n#### Entradas relacionadas\n\n[0445. Dimmi/dammi/fammi](#entrada-445) · [0444. Clitici enclitici nell'affermativo](#entrada-444)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-9c1cfad619c53cdb7f02011ce70292c465f5b706e085c0bf47e052472104a641",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T05:38:17.523Z"
+          },
+          "version": {
+            "code": "MLS-V03-0446",
+            "articleGeneratedAt": "2026-09-19T05:38:17.523Z",
+            "articleHash": "80f539655167612d6059f5c04687c98c01057e4bfd1ac27598a78f9c42f2c564",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Andarsene en imperativo",
+            "level": "B1",
+            "part": "Imperativo y formas no personales — Imperativo e forme non finite",
+            "chapter": "Imperativo — Imperativo"
+          },
+          "state": {
+            "code": "MLS-V03-0446",
+            "article_generated_at": "2026-09-19T05:38:17.523Z",
+            "article_hash": "80f539655167612d6059f5c04687c98c01057e4bfd1ac27598a78f9c42f2c564",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:17.620Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 2,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0446",
+            "articleVersion": {
+              "code": "MLS-V03-0446",
+              "articleGeneratedAt": "2026-09-19T05:38:17.523Z",
+              "articleHash": "80f539655167612d6059f5c04687c98c01057e4bfd1ac27598a78f9c42f2c564",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Andarsene en imperativo",
+              "level": "B1",
+              "part": "Imperativo y formas no personales — Imperativo e forme non finite",
+              "chapter": "Imperativo — Imperativo"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-9c1cfad619c53cdb7f02011ce70292c465f5b706e085c0bf47e052472104a641",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T05:38:17.523Z",
+              "articleHash": "80f539655167612d6059f5c04687c98c01057e4bfd1ac27598a78f9c42f2c564"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0446",
+                "article_generated_at": "2026-09-19T05:38:17.523Z",
+                "article_hash": "80f539655167612d6059f5c04687c98c01057e4bfd1ac27598a78f9c42f2c564",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 2,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:17.620Z"
+              },
+              "evidenceSnapshotHash": "edbcd092d87cd249168ae6cedd6cb17693f4decfe936d0b48b7b36e465c2bb95",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 30,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 157,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 28,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:48.535Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0527",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 527,
+            "title": "Agente con da",
+            "level": "B2",
+            "part": "Voz e impersonalidad — Voce e impersonalità",
+            "chapter": "Voz pasiva y causativas — Voce passiva e costruzioni causative",
+            "article_markdown": "#### En pocas palabras\n\nEn una oración pasiva, **da** introduce normalmente al **agente**, es decir, a quien realiza la acción. En **La porta è stata chiusa dal custode**, **la porta** recibe la acción y **dal custode** indica quién la ejecutó.\n\n#### Cómo funciona\n\nLa preposición puede aparecer sola o articulada: **da Luca, dal custode, dalla direttrice, dai tecnici, dalle autorità**. El grupo con **da** no es el sujeto; el sujeto es el elemento que recibe la acción.\n\nLa relación se ve al comparar activa y pasiva: **Il custode ha chiuso la porta → La porta è stata chiusa dal custode**. El sujeto de la activa puede convertirse en agente de la pasiva.\n\nEl agente puede omitirse cuando es desconocido, irrelevante o evidente: **La strada è stata chiusa**. La pasiva sigue siendo completa sin expresar quién actuó.\n\nCon entidades no animadas, la gramática tradicional habla a menudo de **causa efficiente**: **La strada è stata bloccata dalla neve**. La estructura con **da** es paralela.\n\n#### Ejemplos\n\n* **La porta è stata chiusa dal custode.** — **dal custode** expresa el agente.\n* **Il progetto viene approvato dal consiglio.** — agente con pasiva en **venire**.\n* **La strada fu bloccata dalla neve.** — una causa no animada aparece introducida por **da**.\n\n#### Observación importante\n\nLa definición heredada sobre “unir una causa con lo que ocurre después” no describe este fenómeno. Aquí **da** introduce al participante responsable de una acción pasiva, no una relación causal entre proposiciones.\n\nTambién debe distinguirse este uso de **da** de otros valores de la preposición, como origen (**vengo da Roma**) o duración desde un punto inicial (**studio da due ore**).\n\n#### Entradas relacionadas\n\n[0526. Venire + participio](#entrada-526) · [0528. Accordo del participio](#entrada-528) · [0525. Essere + participio](#entrada-525) · [0529. Si passivante vs passiva perifrastica](#entrada-529)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-3e58396dd4489ab216ca6ad773ffbf746537902b2ffc1af950a694b4536086c6",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T06:53:32.295Z"
+          },
+          "version": {
+            "code": "MLS-V03-0527",
+            "articleGeneratedAt": "2026-09-19T06:53:32.295Z",
+            "articleHash": "9144f8a748a6321e2d19b70a3799156b0928e171dba403ae8b55be01c42b07b2",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Agente con da",
+            "level": "B2",
+            "part": "Voz e impersonalidad — Voce e impersonalità",
+            "chapter": "Voz pasiva y causativas — Voce passiva e costruzioni causative"
+          },
+          "state": {
+            "code": "MLS-V03-0527",
+            "article_generated_at": "2026-09-19T06:53:32.295Z",
+            "article_hash": "9144f8a748a6321e2d19b70a3799156b0928e171dba403ae8b55be01c42b07b2",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:19.550Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0527",
+            "articleVersion": {
+              "code": "MLS-V03-0527",
+              "articleGeneratedAt": "2026-09-19T06:53:32.295Z",
+              "articleHash": "9144f8a748a6321e2d19b70a3799156b0928e171dba403ae8b55be01c42b07b2",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Agente con da",
+              "level": "B2",
+              "part": "Voz e impersonalidad — Voce e impersonalità",
+              "chapter": "Voz pasiva y causativas — Voce passiva e costruzioni causative"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-3e58396dd4489ab216ca6ad773ffbf746537902b2ffc1af950a694b4536086c6",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T06:53:32.295Z",
+              "articleHash": "9144f8a748a6321e2d19b70a3799156b0928e171dba403ae8b55be01c42b07b2"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0527",
+                "article_generated_at": "2026-09-19T06:53:32.295Z",
+                "article_hash": "9144f8a748a6321e2d19b70a3799156b0928e171dba403ae8b55be01c42b07b2",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:19.550Z"
+              },
+              "evidenceSnapshotHash": "de1978fa87f2fb2b42879f227f2e48c7077cae8640f46b4c1fae899ce97158e1",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:49.727Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0608",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 608,
+            "title": "Il quale/la quale",
+            "level": "B1",
+            "part": "Subordinación — Subordinazione",
+            "chapter": "Oraciones relativas — Frasi relative",
+            "article_markdown": "#### En pocas palabras\n\n**Il quale, la quale, i quali** y **le quali** son pronombres relativos que retoman un antecedente y muestran de forma visible su género y número.\n\nEn **La strada lungo la quale camminiamo è chiusa**, **la quale** retoma **la strada** y aparece después de la preposición **lungo**.\n\n#### Cómo funciona\n\nLas formas concuerdan con el antecedente: **il quale** masculino singular, **la quale** femenino singular, **i quali** masculino plural y **le quali** femenino plural.\n\nSon especialmente frecuentes después de preposición y en registros formales: **con il quale, della quale, ai quali, nelle quali**. En muchos de estos contextos pueden alternar con **cui**: **la persona con cui parlo / la persona con la quale parlo**.\n\nLas preposiciones articuladas se forman de manera regular: **di + il quale → del quale**, **a + la quale → alla quale**, **in + i quali → nei quali**.\n\nTambién pueden aparecer en relativas explicativas para hacer más explícito el referente o evitar una posible ambigüedad. En contextos simples sin preposición, **che** suele ser más frecuente y natural.\n\n#### Ejemplos\n\n* **La strada lungo la quale camminiamo è chiusa.** — **la quale** retoma *la strada*.\n* **Il collega con il quale lavoro vive a Roma.** — variante formal de **con cui**.\n* **Le regole alle quali mi riferisco sono nuove.** — **alle quali** muestra femenino plural.\n\n#### Observación importante\n\n**Il quale/la quale** no sustituye libremente a **che** en cualquier relativa. La función sintáctica, la preposición, la claridad referencial y el registro condicionan la elección.\n\nAdemás, no debe confundirse esta serie con **il cui/la cui**, donde **cui** forma una construcción posesiva distinta.\n\n#### Entradas relacionadas\n\n[0607. Cui con con/per/in](#entrada-607) · [0609. Il cui: no estándar / cuyo con di cui](#entrada-609) · [0606. Cui con a](#entrada-606) · [0600. Il quale / la quale / i quali / le quali](#entrada-600)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-567ac2493d1d5cbaefcdef2f469500e196282589d89222e040a35765787bb645",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T06:54:37.956Z"
+          },
+          "version": {
+            "code": "MLS-V03-0608",
+            "articleGeneratedAt": "2026-09-19T06:54:37.956Z",
+            "articleHash": "16c614dc545387d279d7e6f4a65fe51feb67628c3434d724ce03709ee7c306ca",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Il quale/la quale",
+            "level": "B1",
+            "part": "Subordinación — Subordinazione",
+            "chapter": "Oraciones relativas — Frasi relative"
+          },
+          "state": {
+            "code": "MLS-V03-0608",
+            "article_generated_at": "2026-09-19T06:54:37.956Z",
+            "article_hash": "16c614dc545387d279d7e6f4a65fe51feb67628c3434d724ce03709ee7c306ca",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:21.358Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0608",
+            "articleVersion": {
+              "code": "MLS-V03-0608",
+              "articleGeneratedAt": "2026-09-19T06:54:37.956Z",
+              "articleHash": "16c614dc545387d279d7e6f4a65fe51feb67628c3434d724ce03709ee7c306ca",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Il quale/la quale",
+              "level": "B1",
+              "part": "Subordinación — Subordinazione",
+              "chapter": "Oraciones relativas — Frasi relative"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-567ac2493d1d5cbaefcdef2f469500e196282589d89222e040a35765787bb645",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T06:54:37.956Z",
+              "articleHash": "16c614dc545387d279d7e6f4a65fe51feb67628c3434d724ce03709ee7c306ca"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0608",
+                "article_generated_at": "2026-09-19T06:54:37.956Z",
+                "article_hash": "16c614dc545387d279d7e6f4a65fe51feb67628c3434d724ce03709ee7c306ca",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:21.358Z"
+              },
+              "evidenceSnapshotHash": "3dd67d401e1f23f159cccaa26ce792d5910d37fc0fac3635ecd6484fcb828ecb",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:50.878Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0689",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 689,
+            "title": "Catáfora",
+            "level": "C1",
+            "part": "Discurso y cohesión — Discorso e coesione",
+            "chapter": "Cohesión, marcadores discursivos y elipsis — Coesione, segnali discorsivi ed ellissi",
+            "article_markdown": "#### En pocas palabras\n\nLa **catafora** es un mecanismo de cohesión por el que una expresión remite a un referente que se identifica más adelante en el discurso. En **Quando lo vide, Marco salutò Luca**, el pronombre **lo** puede interpretarse como una anticipación de **Luca** si el contexto permite esa lectura.\n\nA diferencia de la anáfora, que recupera normalmente un elemento ya mencionado, la catafora orienta la interpretación hacia información que todavía no ha aparecido de forma explícita.\n\n#### Cómo funciona\n\nLa relación catafórica puede establecerse mediante pronombres, demostrativos u otras expresiones de referencia. El elemento inicial no se entiende de manera completamente autónoma: su referente se aclara después. Por ejemplo, en **Quando la incontrò, Gianni salutò Maria**, **la** puede anticipar a **Maria**.\n\nLa interpretación depende de la estructura sintáctica y del contexto. No todo pronombre situado antes de un nombre es automáticamente catafórico. Debe existir una relación de correferencia plausible entre ambos elementos.\n\nLa catafora aparece con frecuencia en estructuras subordinadas, especialmente cuando una cláusula inicial contiene un pronombre cuyo referente se introduce después en la principal. También puede usarse con fines discursivos para crear expectativa o retrasar la identificación de un referente.\n\nDesde el punto de vista cohesivo, la catafora contribuye a conectar segmentos del texto igual que la anáfora, pero en dirección inversa: el lector o interlocutor interpreta provisionalmente una forma y completa su referencia cuando aparece el elemento posterior.\n\n#### Ejemplos\n\n* **Quando lo vide, Marco salutò Luca.** — **lo** puede anticipar a **Luca** según la lectura contextual.\n* **Se la incontri, telefona subito a Maria.** — **la** puede interpretarse como catafórico respecto de **Maria**.\n* **Questo è ciò che voglio dire: dobbiamo partire.** — **questo** anticipa un contenido desarrollado después.\n\n#### Observación importante\n\nLa catafora no debe confundirse con cualquier anticipación semántica. Para hablar propiamente de catafora debe existir una relación referencial entre una expresión inicial y un elemento posterior.\n\nAdemás, ciertas configuraciones están limitadas por la sintaxis: la correferencia entre pronombres y grupos nominales no es libre. Por eso una lectura catafórica posible en un contexto puede resultar forzada o imposible en otro.\n\n#### Entradas relacionadas\n\n[0688. Peraltro](#entrada-688) · [0687. Elipsis](#entrada-687)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-073f1539f4d48e217481cdd16b681485947e7f408621a276efdf5e4c6612ffad",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T06:57:14.911Z"
+          },
+          "version": {
+            "code": "MLS-V03-0689",
+            "articleGeneratedAt": "2026-09-19T06:57:14.911Z",
+            "articleHash": "46726791118aeb0b159f23cac43802ce1e50f775b6479bf463f1305facd798bc",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Catáfora",
+            "level": "C1",
+            "part": "Discurso y cohesión — Discorso e coesione",
+            "chapter": "Cohesión, marcadores discursivos y elipsis — Coesione, segnali discorsivi ed ellissi"
+          },
+          "state": {
+            "code": "MLS-V03-0689",
+            "article_generated_at": "2026-09-19T06:57:14.911Z",
+            "article_hash": "46726791118aeb0b159f23cac43802ce1e50f775b6479bf463f1305facd798bc",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:23.188Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0689",
+            "articleVersion": {
+              "code": "MLS-V03-0689",
+              "articleGeneratedAt": "2026-09-19T06:57:14.911Z",
+              "articleHash": "46726791118aeb0b159f23cac43802ce1e50f775b6479bf463f1305facd798bc",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Catáfora",
+              "level": "C1",
+              "part": "Discurso y cohesión — Discorso e coesione",
+              "chapter": "Cohesión, marcadores discursivos y elipsis — Coesione, segnali discorsivi ed ellissi"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-073f1539f4d48e217481cdd16b681485947e7f408621a276efdf5e4c6612ffad",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T06:57:14.911Z",
+              "articleHash": "46726791118aeb0b159f23cac43802ce1e50f775b6479bf463f1305facd798bc"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0689",
+                "article_generated_at": "2026-09-19T06:57:14.911Z",
+                "article_hash": "46726791118aeb0b159f23cac43802ce1e50f775b6479bf463f1305facd798bc",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:23.188Z"
+              },
+              "evidenceSnapshotHash": "2f768258cca84cc782190072393bfc1d628802728642032fa64ec23bf54a310f",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:52.010Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0770",
+            "language": "italiano",
+            "language_name": "Italiano",
+            "n": 770,
+            "title": "Sujeto explícito en conversación",
+            "level": "B2",
+            "part": "Registro, conversación y variación — Registro, conversazione e variazione",
+            "chapter": "Italiano hablado y conversación — Italiano parlato e conversazione",
+            "article_markdown": "#### En pocas palabras\n\nEn italiano el sujeto puede omitirse porque la forma verbal suele indicar la persona. Por eso, en conversación, un pronombre sujeto como **io, tu, lui, lei** se expresa muchas veces cuando aporta contraste, énfasis, corrección o claridad. **Io non lo so** no significa simplemente “yo no lo sé”: según el contexto, **io** puede oponerse a otra persona implícita o explícita.\n\n#### Cómo funciona\n\nEn una frase neutra, **Non lo so** suele bastar para decir “no lo sé”. Añadir **io** cambia la organización informativa: **Io non lo so, ma forse Luca sì** destaca al hablante frente a Luca. Del mismo modo, **Tu che ne pensi?** hace explícito **tu** porque selecciona al interlocutor como participante relevante.\n\nEl sujeto también puede aparecer para evitar ambigüedad. Formas como **parla** pueden corresponder a **lui, lei** o a un tratamiento de cortesía **Lei**; el contexto suele resolverlo, pero el pronombre puede aclarar la referencia.\n\nEn el habla espontánea, la frecuencia del sujeto expreso depende de la persona, del tipo de interacción, de la prosodia y del registro. No debe interpretarse como una repetición innecesaria cada vez que aparece.\n\n#### Ejemplos\n\n* **Io non lo so.** — **io** puede marcar contraste: “yo, en cambio, no lo sé”.\n* **Tu vieni con noi?** — **tu** puede destacar al interlocutor o contrastarlo con otros.\n* **Lei cosa pensa?** — el pronombre puede señalar claramente el destinatario y, según el contexto, tratamiento formal.\n* **Marco viene, ma io resto qui.** — **io** se opone a **Marco**.\n\n#### Observación importante\n\nItaliano es una lengua **pro-drop**: puede omitir sujetos recuperables, pero eso no significa que el pronombre expreso sea excepcional o incorrecto. En conversación cumple funciones discursivas reales.\n\nTampoco todo sujeto expreso es enfático. A veces se usa simplemente para desambiguar, retomar un referente o organizar un turno de habla.\n\n#### Entradas relacionadas\n\n[0769. Riduzioni ed elisioni nel parlato](#entrada-769) · [0771. Pronomi combinati nel parlato spontaneo](#entrada-771) · [0772. Diciamo](#entrada-772) · [0796. Norma descrittiva e prescrittiva](#entrada-796)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-f856dc4e77e8f452518251c3c957e4cfadfc9bae3591f4afe36f106c7280b8c4",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T06:58:01.366Z"
+          },
+          "version": {
+            "code": "MLS-V03-0770",
+            "articleGeneratedAt": "2026-09-19T06:58:01.366Z",
+            "articleHash": "39eec5043813be0e4dd0c0280d6ccd3b341cd52e46cd5113d41fb76e86a33d3c",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Sujeto explícito en conversación",
+            "level": "B2",
+            "part": "Registro, conversación y variación — Registro, conversazione e variazione",
+            "chapter": "Italiano hablado y conversación — Italiano parlato e conversazione"
+          },
+          "state": {
+            "code": "MLS-V03-0770",
+            "article_generated_at": "2026-09-19T06:58:01.366Z",
+            "article_hash": "39eec5043813be0e4dd0c0280d6ccd3b341cd52e46cd5113d41fb76e86a33d3c",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:52:25.004Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 2,
+            "claimsVerified": 2,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": true,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V03-0770",
+            "articleVersion": {
+              "code": "MLS-V03-0770",
+              "articleGeneratedAt": "2026-09-19T06:58:01.366Z",
+              "articleHash": "39eec5043813be0e4dd0c0280d6ccd3b341cd52e46cd5113d41fb76e86a33d3c",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Sujeto explícito en conversación",
+              "level": "B2",
+              "part": "Registro, conversación y variación — Registro, conversazione e variazione",
+              "chapter": "Italiano hablado y conversación — Italiano parlato e conversazione"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-f856dc4e77e8f452518251c3c957e4cfadfc9bae3591f4afe36f106c7280b8c4",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T06:58:01.366Z",
+              "articleHash": "39eec5043813be0e4dd0c0280d6ccd3b341cd52e46cd5113d41fb76e86a33d3c"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "SOURCED",
+              "stateCurrent": true,
+              "state": {
+                "code": "MLS-V03-0770",
+                "article_generated_at": "2026-09-19T06:58:01.366Z",
+                "article_hash": "39eec5043813be0e4dd0c0280d6ccd3b341cd52e46cd5113d41fb76e86a33d3c",
+                "evidence_version": "1.0",
+                "status": "SOURCED",
+                "claims_total": 2,
+                "claims_verified": 2,
+                "sources_total": 1,
+                "conflicts_total": 0,
+                "needs_review": 0,
+                "evidence_revision": 1,
+                "source_revision": 1,
+                "citation_style": "APA",
+                "citation_edition": 7,
+                "citation_profile": "URL-GT-2025",
+                "citation_renderer_version": "1.0",
+                "verified_at": null,
+                "reviewed_at": null,
+                "updated_at": "2026-09-23T09:52:25.004Z"
+              },
+              "evidenceSnapshotHash": "95badcd20b03dd678cc67191377b08203f00e993a3daa509dcca481ff5a1aa0b",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 27,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 154,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 25,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:53:53.182Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T09:53:53.182Z",
+  "commandFile": "mls chat bridge/commands/command 0313.json"
+}
