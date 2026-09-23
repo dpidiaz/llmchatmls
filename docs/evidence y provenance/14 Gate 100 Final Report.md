@@ -337,3 +337,70 @@ Gate100:
   finalDecision: CORRECT_AND_REPEAT
   gate500Authorized: false
 ```
+
+
+## 15. Checkpoint de auditoría post-reporte
+
+**Auditado:** 2026-09-23 UTC  
+**Estado:** CONFIRMADO / PERSISTENTE
+
+Se recalcularon de forma independiente los resultados operativos a partir de los archivos del Bridge y se contrastaron contra este reporte.
+
+### Recalculo operativo `command 0298–0328`
+
+```yaml
+d1RowsRead: 134214
+d1RowsWritten: 2099
+proposalAttempts: 105
+proposalFailures: 10
+verificationAttempts: 101
+verificationFailures: 2
+sourceCreateOperations: 48
+sourceReuseOperations: 57
+sourceMetadataUpdateOperations: 7
+```
+
+Los valores coinciden exactamente con las cifras reportadas en las secciones 4 y 6.
+
+### Reporting `command 0329–0330`
+
+```yaml
+reportingRowsRead: 2504
+reportingRowsWritten: 0
+totalRowsReadIncludingReporting: 136718
+```
+
+### Triage inicial `command 0298`
+
+```yaml
+entries: 100
+alreadyComplete: 1
+needsEvidence: 99
+registryFirst: 47
+externalDiscoveryRequired: 52
+exceptions: 0
+```
+
+### Contraste Pilot 20
+
+Se verificaron contra `10 Fase 3 Evaluacion Pilot 20.md` los valores base usados en la comparación:
+
+```yaml
+pilotEntries: 20
+pilotVerified: 17
+pilotD1RowsReadPerEntry: 461.6
+pilotD1RowsWrittenPerEntry: 50
+pilotLogicalEvidenceBytesPerEntry: 8819.95
+pilotControlPlaneCommits: 197
+pilotControlPlaneCommitsPerEntry: 9.85
+```
+
+### Estado de continuidad
+
+- Gate 100 editorial: **PASS**.
+- Gate 100 integridad Evidence: **PASS**.
+- Gate 100 escalabilidad: **CORRECT AND REPEAT**.
+- Gate 500: **BLOQUEADO** hasta completar un Correction Repeat con menor read amplification y mejor proporción Registry-first.
+- Próximo trabajo autorizado por este checkpoint: diseñar y ejecutar el **Gate 100 Correction Repeat** sobre una muestra fresca y determinista, sin regenerar R32.
+
+Este checkpoint existe para permitir reanudación exacta del trabajo si la sesión de chat se interrumpe.
