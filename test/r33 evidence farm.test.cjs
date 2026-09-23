@@ -134,3 +134,13 @@ test('Protocol keeps Gate 500 blocked and requires namespaced Bridge paths',()=>
   assert.match(protocol,/r33-farm\/<poolId>\/<batchId>\/<workerId>/);
   assert.match(protocol,/R33 siguientes N/);
 });
+
+
+test('Explicit worker cancel wins over timeout-style expiry when reaped',()=>{
+  const pool=core.loadPool('.');
+  const state=core.makeBatchState({issueNumber:908,requestId:'request-12345678',workerId:'worker-12345678',pool,entries:[pool.entries[0]],now:'2026-09-23T10:00:00.000Z',token:'abc'});
+  const acknowledged=core.applyWorkerEvent(state,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-23T10:01:00.000Z',commentId:8});
+  const cancelled=core.applyWorkerEvent(acknowledged,{operation:'cancel',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-23T10:02:00.000Z',commentId:9});
+  assert.equal(core.isLeaseExpired(cancelled,Date.parse('2026-09-23T10:02:01.000Z')),true);
+  assert.equal(core.releaseReasonForBatch(cancelled,true),'WORKER_CANCELLED');
+});
