@@ -147,6 +147,11 @@ function isLeaseExpired(state,at=Date.now()){
   return expiry===null||Number(at)>expiry;
 }
 function pendingCodes(state){const done=new Set(Object.keys(state.results||{}));return (state.entries||[]).map(x=>x.code).filter(code=>!done.has(code));}
+function releaseReasonForBatch(state,expired=isLeaseExpired(state)){
+  if(state?.cancelRequested)return 'WORKER_CANCELLED';
+  if(expired)return !state?.acknowledgedAt&&state?.ackDeadlineAt?'ACK_TIMEOUT':'LEASE_TIMEOUT';
+  return null;
+}
 function validateLeaseEvent(state,event,createdAt){
   if(!state||state.kind!=='r33_evidence_batch')throw farmError('BATCH_NOT_FOUND','Batch Evidence Farm inválido.',409);
   if(state.status!=='leased'||state.readyToClose||state.cancelRequested)throw farmError('LEASE_NOT_ACTIVE','El lease ya no está activo.',409);
@@ -222,6 +227,6 @@ module.exports={
   EVIDENCE_FARM_VERSION,EVIDENCE_FARM_DEFAULT_BATCH,EVIDENCE_FARM_MAX_BATCH,EVIDENCE_FARM_CLAIM_TTL_MS,EVIDENCE_FARM_ACK_TTL_MS,EVIDENCE_FARM_LEASE_TTL_MS,
   EVIDENCE_FARM_COMMAND_MARKER,EVIDENCE_FARM_EVENT_MARKER,EVIDENCE_FARM_STATE_MARKER,EVIDENCE_FARM_LEDGER_MARKER,DEFAULT_POOL_PATH,
   farmError,iso,sha256,assertCode,safeSegment,renderMarked,renderCommandBody,parseCommand,parseWorkerEvent,parseFarmState,parseLedger,normalizePool,loadPool,poolDigest,
-  initialLedger,normalizeLedger,terminalCodesFromLedger,addTerminalToLedger,renderLedgerBody,makeBatchState,renderBatchBody,isClaimStale,isLeaseExpired,pendingCodes,
+  initialLedger,normalizeLedger,terminalCodesFromLedger,addTerminalToLedger,renderLedgerBody,makeBatchState,renderBatchBody,isClaimStale,isLeaseExpired,pendingCodes,releaseReasonForBatch,
   validateResultShape,resultDigest,applyWorkerEvent,protectedCodesFromBatches,selectNextEntries,farmProgress,bridgeNamespace,bridgeCommandPath,bridgeResultPrefix
 };

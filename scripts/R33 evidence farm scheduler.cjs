@@ -58,7 +58,7 @@ async function finalizeBatch(issue,state,ledgerItem,pool,nowMs){
   if(!shouldClose)return {closed:false,state};
   for(const [code,meta] of Object.entries(state.results||{}))mergeResult(ledgerItem,pool,code,meta);
   const finalStatus=state.readyToClose?'done':state.cancelRequested?'cancelled':expired?'expired':state.status;
-  const releaseReason=expired?(!state.acknowledgedAt&&state.ackDeadlineAt?'ACK_TIMEOUT':'LEASE_TIMEOUT'):state.cancelRequested?'WORKER_CANCELLED':null;
+  const releaseReason=core.releaseReasonForBatch(state,expired);
   const next={...state,status:finalStatus,closedAt:core.iso(nowMs),releasedCodes:state.readyToClose?[]:pending,releaseReason};
   await updateIssue(issue.number,{title:'[R33 Evidence Farm]['+finalStatus.toUpperCase()+'] '+state.batchId,body:core.renderBatchBody(next),state:'closed',state_reason:'completed'});
   return {closed:true,state:next,released:next.releasedCodes.length};
