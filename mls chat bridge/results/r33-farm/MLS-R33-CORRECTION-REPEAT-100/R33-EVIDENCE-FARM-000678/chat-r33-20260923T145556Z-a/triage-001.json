@@ -1,0 +1,3688 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "R33-678-TRIAGE-001",
+    "requested": 1,
+    "processed": 1,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "triageBatchEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/triage",
+        "response": {
+          "ok": true,
+          "version": "1.0",
+          "requested": 25,
+          "processed": 25,
+          "byLane": {
+            "complete": 0,
+            "exception": 0,
+            "resume_existing": 0,
+            "needs_evidence": 25
+          },
+          "byDiscovery": {
+            "none": 0,
+            "human_or_manual": 0,
+            "registry_first": 20,
+            "external_discovery": 5
+          },
+          "externalDiscoveryRequired": 5,
+          "registryFirst": 20,
+          "exceptions": 0,
+          "items": [
+            {
+              "code": "MLS-V10-0093",
+              "language": "espanol-guatemala",
+              "title": "Adonde, a donde, adónde y a dónde",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "adonde",
+                "donde",
+                "adónde",
+                "dónde",
+                "dudas",
+                "ortográficas",
+                "frecuentes",
+                "frequent",
+                "spelling",
+                "questions",
+                "fundamentos",
+                "escritura"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-D927DE78303BF80219B0",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/dpd/quehacer",
+                    "metadataHash": "b6e5828c2172f2cbe87a16e82b4cd385612b2594be6fe0814b873c298d711d27",
+                    "sourceType": "reference_entry",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "quehacer",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": "Diccionario panhispánico de dudas",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/dpd/quehacer",
+                    "language": "es",
+                    "topics": [
+                      "unión y separación de palabras"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:18:53.372Z",
+                    "updatedAt": "2026-09-22T08:18:53.372Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "dudas"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0186",
+              "language": "espanol-guatemala",
+              "title": "Clases de verbos atendiendo a la unión entre raíz y afijo",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "clases",
+                "verbos",
+                "atendiendo",
+                "unión",
+                "entre",
+                "raíz",
+                "afijo",
+                "derivación",
+                "verbal",
+                "verb",
+                "derivation",
+                "formación"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-A51B39B1F9F8AA4051D9",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "metadataHash": "cd7624f4ac465ccfc1eb53d862c88b569249c9fbde2726c57975d72823724ff6",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Ortografía",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "language": "es",
+                    "topics": [
+                      "pronombres enclíticos",
+                      "formas verbales",
+                      "acentuación",
+                      "voseo"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-21T17:07:54.469Z",
+                    "updatedAt": "2026-09-22T08:19:52.961Z"
+                  },
+                  "usage": {
+                    "entries": 19,
+                    "links": 39
+                  },
+                  "matchedTopics": [
+                    "verbal",
+                    "verb"
+                  ],
+                  "candidateScore": 111,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                    "identityKind": "isbn",
+                    "identityKey": "9788467032079",
+                    "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                    "sourceType": "book",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Nueva gramática de la lengua española",
+                    "authors": [
+                      "Real Academia Española",
+                      "Asociación de Academias de la Lengua Española"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2009,
+                    "publicationDate": null,
+                    "publisher": "Espasa",
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9788467032079",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                    "language": "es",
+                    "topics": [
+                      "español",
+                      "morfología",
+                      "sintaxis",
+                      "clíticos",
+                      "tiempo verbal",
+                      "adverbios",
+                      "régimen",
+                      "imperativo",
+                      "concesivas",
+                      "discurso"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T10:28:09.455Z",
+                    "updatedAt": "2026-09-23T10:28:09.455Z"
+                  },
+                  "usage": {
+                    "entries": 9,
+                    "links": 9
+                  },
+                  "matchedTopics": [
+                    "verbal",
+                    "verb"
+                  ],
+                  "candidateScore": 60,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-2E815E1488CD5C567594",
+                    "identityKind": "url",
+                    "identityKey": "https://dialnet.unirioja.es/descarga/articulo/4550202.pdf",
+                    "metadataHash": "1b88c5157684a5af1e6746344da843bebf2fca0263bb778f79eab35646035a31",
+                    "sourceType": "journal_article",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "La estructura funcional de las nominalizaciones deverbales de evento y resultado a partir de verbos de realización",
+                    "authors": [
+                      "Polakof, Ana Clara"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2013,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": "Anuari de Filologia. Estudis de Lingüística",
+                    "volume": "3",
+                    "issue": null,
+                    "pages": "113-144",
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": "2014-1408",
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dialnet.unirioja.es/descarga/articulo/4550202.pdf",
+                    "language": "es",
+                    "topics": [
+                      "nominalizaciones deverbales",
+                      "evento",
+                      "resultado",
+                      "morfología"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-21",
+                    "createdAt": "2026-09-21T17:12:01.268Z",
+                    "updatedAt": "2026-09-21T17:12:01.268Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "verbos",
+                    "verbal",
+                    "verb"
+                  ],
+                  "candidateScore": 38,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-D927DE78303BF80219B0",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/dpd/quehacer",
+                    "metadataHash": "b6e5828c2172f2cbe87a16e82b4cd385612b2594be6fe0814b873c298d711d27",
+                    "sourceType": "reference_entry",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "quehacer",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": "Diccionario panhispánico de dudas",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/dpd/quehacer",
+                    "language": "es",
+                    "topics": [
+                      "unión y separación de palabras"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:18:53.372Z",
+                    "updatedAt": "2026-09-22T08:18:53.372Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "unión"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 4,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0279",
+              "language": "espanol-guatemala",
+              "title": "Clases de adjetivos de relación",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "external_discovery",
+              "externalDiscoveryRequired": true,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "clases",
+                "adjetivos",
+                "relación",
+                "adjetivo",
+                "grupo",
+                "adjetival",
+                "adjective",
+                "phrase",
+                "sustantivo",
+                "noun"
+              ],
+              "sourceCandidates": [],
+              "sourceCandidateCount": 0,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0372",
+              "language": "espanol-guatemala",
+              "title": "El cuantificador todo en contextos no definidos",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "external_discovery",
+              "externalDiscoveryRequired": true,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "cuantificador",
+                "todo",
+                "contextos",
+                "definidos",
+                "cuantificadores",
+                "universales",
+                "indefinidos",
+                "universal",
+                "indefinite",
+                "quantifiers",
+                "cuantificación",
+                "numerales"
+              ],
+              "sourceCandidates": [],
+              "sourceCandidateCount": 0,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0465",
+              "language": "espanol-guatemala",
+              "title": "El infinitivo en las oraciones subordinadas sustantivas",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "infinitivo",
+                "oraciones",
+                "subordinadas",
+                "sustantivas",
+                "infinitive",
+                "formas",
+                "personales",
+                "perífrasis",
+                "finite",
+                "forms",
+                "periphrases"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-A51B39B1F9F8AA4051D9",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "metadataHash": "cd7624f4ac465ccfc1eb53d862c88b569249c9fbde2726c57975d72823724ff6",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Ortografía",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "language": "es",
+                    "topics": [
+                      "pronombres enclíticos",
+                      "formas verbales",
+                      "acentuación",
+                      "voseo"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-21T17:07:54.469Z",
+                    "updatedAt": "2026-09-22T08:19:52.961Z"
+                  },
+                  "usage": {
+                    "entries": 19,
+                    "links": 39
+                  },
+                  "matchedTopics": [
+                    "formas"
+                  ],
+                  "candidateScore": 101,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-12D254C9C11E4F214CBC",
+                    "identityKind": "url",
+                    "identityKey": "https://www.bipm.org/en/publications/si-brochure",
+                    "metadataHash": "647e5cf4ee4682446d3521699d470638b552daa717b0de4a270310b3b73c1645",
+                    "sourceType": "report",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "The International System of Units (SI Brochure)",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Bureau International des Poids et Mesures",
+                    "publicationYear": 2026,
+                    "publicationDate": null,
+                    "publisher": "Bureau International des Poids et Mesures",
+                    "edition": "9th edition",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+                    "language": "en",
+                    "topics": [
+                      "SI",
+                      "unit symbols",
+                      "quantity values"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:23:45.454Z",
+                    "updatedAt": "2026-09-22T08:23:45.454Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "perífrasis"
+                  ],
+                  "candidateScore": 19,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-C6E574E7A5E6165239DA",
+                    "identityKind": "doi",
+                    "identityKey": "10.59161/auez1291",
+                    "metadataHash": "53e5437db0c1e912c8efd7ba8237d697b4d68b64c5b668ace2427748843b12de",
+                    "sourceType": "standard",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "The International System of Units (SI Brochure)",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Bureau International des Poids et Mesures",
+                    "publicationYear": 2026,
+                    "publicationDate": null,
+                    "publisher": "Bureau International des Poids et Mesures",
+                    "edition": "9th edition",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": "10.59161/auez1291",
+                    "doiScope": "resource",
+                    "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+                    "language": "en",
+                    "topics": [
+                      "SI",
+                      "unit symbols",
+                      "quantity values"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:18:48.526Z",
+                    "updatedAt": "2026-09-22T08:18:48.526Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "perífrasis"
+                  ],
+                  "candidateScore": 19,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 3,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0558",
+              "language": "espanol-guatemala",
+              "title": "Clases de expresiones interjectivas expresivas",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "clases",
+                "expresiones",
+                "interjectivas",
+                "expresivas",
+                "interjecciones",
+                "interjections",
+                "preposiciones",
+                "adverbios",
+                "conjunciones",
+                "prepositions",
+                "adverbs",
+                "conjunctions"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                    "identityKind": "isbn",
+                    "identityKey": "9788467032079",
+                    "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                    "sourceType": "book",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Nueva gramática de la lengua española",
+                    "authors": [
+                      "Real Academia Española",
+                      "Asociación de Academias de la Lengua Española"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2009,
+                    "publicationDate": null,
+                    "publisher": "Espasa",
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9788467032079",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                    "language": "es",
+                    "topics": [
+                      "español",
+                      "morfología",
+                      "sintaxis",
+                      "clíticos",
+                      "tiempo verbal",
+                      "adverbios",
+                      "régimen",
+                      "imperativo",
+                      "concesivas",
+                      "discurso"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T10:28:09.455Z",
+                    "updatedAt": "2026-09-23T10:28:09.455Z"
+                  },
+                  "usage": {
+                    "entries": 9,
+                    "links": 9
+                  },
+                  "matchedTopics": [
+                    "adverbios"
+                  ],
+                  "candidateScore": 50,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-12D254C9C11E4F214CBC",
+                    "identityKind": "url",
+                    "identityKey": "https://www.bipm.org/en/publications/si-brochure",
+                    "metadataHash": "647e5cf4ee4682446d3521699d470638b552daa717b0de4a270310b3b73c1645",
+                    "sourceType": "report",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "The International System of Units (SI Brochure)",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Bureau International des Poids et Mesures",
+                    "publicationYear": 2026,
+                    "publicationDate": null,
+                    "publisher": "Bureau International des Poids et Mesures",
+                    "edition": "9th edition",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+                    "language": "en",
+                    "topics": [
+                      "SI",
+                      "unit symbols",
+                      "quantity values"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:23:45.454Z",
+                    "updatedAt": "2026-09-22T08:23:45.454Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "expresiones",
+                    "expresivas",
+                    "preposiciones",
+                    "prepositions"
+                  ],
+                  "candidateScore": 49,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-C6E574E7A5E6165239DA",
+                    "identityKind": "doi",
+                    "identityKey": "10.59161/auez1291",
+                    "metadataHash": "53e5437db0c1e912c8efd7ba8237d697b4d68b64c5b668ace2427748843b12de",
+                    "sourceType": "standard",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "The International System of Units (SI Brochure)",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Bureau International des Poids et Mesures",
+                    "publicationYear": 2026,
+                    "publicationDate": null,
+                    "publisher": "Bureau International des Poids et Mesures",
+                    "edition": "9th edition",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": "10.59161/auez1291",
+                    "doiScope": "resource",
+                    "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+                    "language": "en",
+                    "topics": [
+                      "SI",
+                      "unit symbols",
+                      "quantity values"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:18:48.526Z",
+                    "updatedAt": "2026-09-22T08:18:48.526Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "expresiones",
+                    "expresivas",
+                    "preposiciones",
+                    "prepositions"
+                  ],
+                  "candidateScore": 49,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 3,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0651",
+              "language": "espanol-guatemala",
+              "title": "Adjuntos de lugar y tiempo",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "adjuntos",
+                "lugar",
+                "tiempo",
+                "complementos",
+                "circunstanciales",
+                "adjuncts",
+                "adverbials",
+                "régimen",
+                "atributo",
+                "government",
+                "predicatives"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                    "identityKind": "isbn",
+                    "identityKey": "9788467032079",
+                    "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                    "sourceType": "book",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Nueva gramática de la lengua española",
+                    "authors": [
+                      "Real Academia Española",
+                      "Asociación de Academias de la Lengua Española"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2009,
+                    "publicationDate": null,
+                    "publisher": "Espasa",
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9788467032079",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                    "language": "es",
+                    "topics": [
+                      "español",
+                      "morfología",
+                      "sintaxis",
+                      "clíticos",
+                      "tiempo verbal",
+                      "adverbios",
+                      "régimen",
+                      "imperativo",
+                      "concesivas",
+                      "discurso"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T10:28:09.455Z",
+                    "updatedAt": "2026-09-23T10:28:09.455Z"
+                  },
+                  "usage": {
+                    "entries": 9,
+                    "links": 9
+                  },
+                  "matchedTopics": [
+                    "tiempo",
+                    "régimen"
+                  ],
+                  "candidateScore": 60,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0744",
+              "language": "espanol-guatemala",
+              "title": "Comparativas de núcleo coincidente",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "external_discovery",
+              "externalDiscoveryRequired": true,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "comparativas",
+                "núcleo",
+                "coincidente",
+                "construcciones",
+                "superlativas",
+                "comparative",
+                "superlative",
+                "constructions",
+                "comparación",
+                "causa",
+                "condición",
+                "negación"
+              ],
+              "sourceCandidates": [],
+              "sourceCandidateCount": 0,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0837",
+              "language": "espanol-guatemala",
+              "title": "Yeísmo guatemalteco",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "yeísmo",
+                "guatemalteco",
+                "gramática",
+                "español",
+                "grammar",
+                "guatemalan",
+                "spanish",
+                "sistema",
+                "tratamiento",
+                "guatemala",
+                "address",
+                "system"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-A51B39B1F9F8AA4051D9",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "metadataHash": "cd7624f4ac465ccfc1eb53d862c88b569249c9fbde2726c57975d72823724ff6",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Ortografía",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "language": "es",
+                    "topics": [
+                      "pronombres enclíticos",
+                      "formas verbales",
+                      "acentuación",
+                      "voseo"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-21T17:07:54.469Z",
+                    "updatedAt": "2026-09-22T08:19:52.961Z"
+                  },
+                  "usage": {
+                    "entries": 19,
+                    "links": 39
+                  },
+                  "matchedTopics": [
+                    "español"
+                  ],
+                  "candidateScore": 101,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                    "identityKind": "isbn",
+                    "identityKey": "9788467032079",
+                    "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                    "sourceType": "book",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Nueva gramática de la lengua española",
+                    "authors": [
+                      "Real Academia Española",
+                      "Asociación de Academias de la Lengua Española"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2009,
+                    "publicationDate": null,
+                    "publisher": "Espasa",
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9788467032079",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                    "language": "es",
+                    "topics": [
+                      "español",
+                      "morfología",
+                      "sintaxis",
+                      "clíticos",
+                      "tiempo verbal",
+                      "adverbios",
+                      "régimen",
+                      "imperativo",
+                      "concesivas",
+                      "discurso"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T10:28:09.455Z",
+                    "updatedAt": "2026-09-23T10:28:09.455Z"
+                  },
+                  "usage": {
+                    "entries": 9,
+                    "links": 9
+                  },
+                  "matchedTopics": [
+                    "gramática",
+                    "español"
+                  ],
+                  "candidateScore": 60,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-CDFCDC2A6847DE8A966B",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/ortograf%C3%ADa-b%C3%A1sica/uso-de-la-tilde/las-reglas-de-acentuaci%C3%B3n-gr%C3%A1fica/la-acentuaci%C3%B3n-gr%C3%A1fica-de-las-palabras-con-secuencias-voc%C3%A1licas",
+                    "metadataHash": "c4a4c5ea4df04305a0f6268301e678691beb9f902b53236a6de87c9f8f35fb07",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "La acentuación gráfica de las palabras con secuencias vocálicas",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": "Ortografía básica de la lengua española",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/ortograf%C3%ADa-b%C3%A1sica/uso-de-la-tilde/las-reglas-de-acentuaci%C3%B3n-gr%C3%A1fica/la-acentuaci%C3%B3n-gr%C3%A1fica-de-las-palabras-con-secuencias-voc%C3%A1licas",
+                    "language": "es",
+                    "topics": [
+                      "diptongo",
+                      "triptongo",
+                      "hiato",
+                      "acentuación"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:19:28.958Z",
+                    "updatedAt": "2026-09-22T08:19:28.958Z"
+                  },
+                  "usage": {
+                    "entries": 4,
+                    "links": 8
+                  },
+                  "matchedTopics": [
+                    "español"
+                  ],
+                  "candidateScore": 34,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-12D254C9C11E4F214CBC",
+                    "identityKind": "url",
+                    "identityKey": "https://www.bipm.org/en/publications/si-brochure",
+                    "metadataHash": "647e5cf4ee4682446d3521699d470638b552daa717b0de4a270310b3b73c1645",
+                    "sourceType": "report",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "The International System of Units (SI Brochure)",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Bureau International des Poids et Mesures",
+                    "publicationYear": 2026,
+                    "publicationDate": null,
+                    "publisher": "Bureau International des Poids et Mesures",
+                    "edition": "9th edition",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+                    "language": "en",
+                    "topics": [
+                      "SI",
+                      "unit symbols",
+                      "quantity values"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:23:45.454Z",
+                    "updatedAt": "2026-09-22T08:23:45.454Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "sistema",
+                    "system"
+                  ],
+                  "candidateScore": 29,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-C6E574E7A5E6165239DA",
+                    "identityKind": "doi",
+                    "identityKey": "10.59161/auez1291",
+                    "metadataHash": "53e5437db0c1e912c8efd7ba8237d697b4d68b64c5b668ace2427748843b12de",
+                    "sourceType": "standard",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "The International System of Units (SI Brochure)",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Bureau International des Poids et Mesures",
+                    "publicationYear": 2026,
+                    "publicationDate": null,
+                    "publisher": "Bureau International des Poids et Mesures",
+                    "edition": "9th edition",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": "10.59161/auez1291",
+                    "doiScope": "resource",
+                    "canonicalUrl": "https://www.bipm.org/en/publications/si-brochure",
+                    "language": "en",
+                    "topics": [
+                      "SI",
+                      "unit symbols",
+                      "quantity values"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:18:48.526Z",
+                    "updatedAt": "2026-09-22T08:18:48.526Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "sistema",
+                    "system"
+                  ],
+                  "candidateScore": 29,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-6920FD1F94D34FC83815",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/gram%C3%A1tica/sintaxis/interrogativos-y-exclamativos-iv-c%C3%B3mo-y-por-qu%C3%A9-locuciones-que-se-les-asimilan",
+                    "metadataHash": "47e74915329e64b935cede6655e01067d524fbe28ac63c83605c9328508e1d18",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Interrogativos y exclamativos (IV). Cómo y por qué. Locuciones que se les asimilan",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": "Nueva gramática de la lengua española",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/gram%C3%A1tica/sintaxis/interrogativos-y-exclamativos-iv-c%C3%B3mo-y-por-qu%C3%A9-locuciones-que-se-les-asimilan",
+                    "language": "es",
+                    "topics": [
+                      "por qué",
+                      "porque",
+                      "interrogativos"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:18:53.571Z",
+                    "updatedAt": "2026-09-22T08:18:53.571Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "gramática",
+                    "español"
+                  ],
+                  "candidateScore": 28,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-12EF4E5BEBCAAA0A4F99",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/sites/default/files/discurso_ingreso_paz_battaner.pdf",
+                    "metadataHash": "b8c59e8849bd70ab313894607619f6da2493308b7740dde2a22f32f8153132c7",
+                    "sourceType": "report",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Algunos pozos sin fondo en los diccionarios",
+                    "authors": [
+                      "Battaner Arias, María Paz"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española",
+                    "publicationYear": 2017,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/sites/default/files/discurso_ingreso_paz_battaner.pdf",
+                    "language": "es",
+                    "topics": [
+                      "morfología derivativa",
+                      "nominalización",
+                      "polisemia",
+                      "semántica léxica"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-21",
+                    "createdAt": "2026-09-21T17:12:01.080Z",
+                    "updatedAt": "2026-09-21T17:12:01.080Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "español"
+                  ],
+                  "candidateScore": 19,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-D666CD15DA8517F093F9",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/sites/default/files/2023-03/NdP_RAE_Nota%20informativa%20sobre%20la%20tilde%20en%20%C2%ABsolo%C2%BB.pdf",
+                    "metadataHash": "d711e602419a170f84b2f236860a5e3d8f1d228cab47ffa546d7eb28ab2416d2",
+                    "sourceType": "report",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Nota informativa sobre la tilde en «solo»",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española",
+                    "publicationYear": 2023,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/sites/default/files/2023-03/NdP_RAE_Nota%20informativa%20sobre%20la%20tilde%20en%20%C2%ABsolo%C2%BB.pdf",
+                    "language": "es",
+                    "topics": [
+                      "solo",
+                      "demostrativos",
+                      "tilde diacrítica",
+                      "ambigüedad"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:19:45.789Z",
+                    "updatedAt": "2026-09-22T08:19:45.789Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "español"
+                  ],
+                  "candidateScore": 19,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 8,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V10-0930",
+              "language": "espanol-guatemala",
+              "title": "Cómo consultar NGLE, DPD, DLE y Ortografía",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "cómo",
+                "consultar",
+                "ngle",
+                "ortografía",
+                "norma",
+                "variación",
+                "edición",
+                "conciencia",
+                "lingüística",
+                "norm",
+                "variation",
+                "editing"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-A51B39B1F9F8AA4051D9",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "metadataHash": "cd7624f4ac465ccfc1eb53d862c88b569249c9fbde2726c57975d72823724ff6",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Ortografía",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                    "language": "es",
+                    "topics": [
+                      "pronombres enclíticos",
+                      "formas verbales",
+                      "acentuación",
+                      "voseo"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-21T17:07:54.469Z",
+                    "updatedAt": "2026-09-22T08:19:52.961Z"
+                  },
+                  "usage": {
+                    "entries": 19,
+                    "links": 39
+                  },
+                  "matchedTopics": [
+                    "ortografía"
+                  ],
+                  "candidateScore": 101,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-CDFCDC2A6847DE8A966B",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/ortograf%C3%ADa-b%C3%A1sica/uso-de-la-tilde/las-reglas-de-acentuaci%C3%B3n-gr%C3%A1fica/la-acentuaci%C3%B3n-gr%C3%A1fica-de-las-palabras-con-secuencias-voc%C3%A1licas",
+                    "metadataHash": "c4a4c5ea4df04305a0f6268301e678691beb9f902b53236a6de87c9f8f35fb07",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "La acentuación gráfica de las palabras con secuencias vocálicas",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": "Ortografía básica de la lengua española",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/ortograf%C3%ADa-b%C3%A1sica/uso-de-la-tilde/las-reglas-de-acentuaci%C3%B3n-gr%C3%A1fica/la-acentuaci%C3%B3n-gr%C3%A1fica-de-las-palabras-con-secuencias-voc%C3%A1licas",
+                    "language": "es",
+                    "topics": [
+                      "diptongo",
+                      "triptongo",
+                      "hiato",
+                      "acentuación"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:19:28.958Z",
+                    "updatedAt": "2026-09-22T08:19:28.958Z"
+                  },
+                  "usage": {
+                    "entries": 4,
+                    "links": 8
+                  },
+                  "matchedTopics": [
+                    "ortografía"
+                  ],
+                  "candidateScore": 34,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-7C953D2D5FAB0F879F3F",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/buen-uso-espa%C3%B1ol/el-seseo-y-el-ceceo",
+                    "metadataHash": "a8badf9df357a73b483836f1494719530c825ffeaa756e6005c4796c90acbcf3",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "El seseo y el ceceo",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/buen-uso-espa%C3%B1ol/el-seseo-y-el-ceceo",
+                    "language": "es",
+                    "topics": [
+                      "seseo",
+                      "pronunciación",
+                      "ortografía",
+                      "variación regional"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-21",
+                    "createdAt": "2026-09-21T17:07:54.862Z",
+                    "updatedAt": "2026-09-21T17:07:54.862Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "ortografía",
+                    "variación"
+                  ],
+                  "candidateScore": 28,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-2E815E1488CD5C567594",
+                    "identityKind": "url",
+                    "identityKey": "https://dialnet.unirioja.es/descarga/articulo/4550202.pdf",
+                    "metadataHash": "1b88c5157684a5af1e6746344da843bebf2fca0263bb778f79eab35646035a31",
+                    "sourceType": "journal_article",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "La estructura funcional de las nominalizaciones deverbales de evento y resultado a partir de verbos de realización",
+                    "authors": [
+                      "Polakof, Ana Clara"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2013,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": "Anuari de Filologia. Estudis de Lingüística",
+                    "volume": "3",
+                    "issue": null,
+                    "pages": "113-144",
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": "2014-1408",
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dialnet.unirioja.es/descarga/articulo/4550202.pdf",
+                    "language": "es",
+                    "topics": [
+                      "nominalizaciones deverbales",
+                      "evento",
+                      "resultado",
+                      "morfología"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-21",
+                    "createdAt": "2026-09-21T17:12:01.268Z",
+                    "updatedAt": "2026-09-21T17:12:01.268Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "lingüística"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-6920FD1F94D34FC83815",
+                    "identityKind": "url",
+                    "identityKey": "https://www.rae.es/gram%C3%A1tica/sintaxis/interrogativos-y-exclamativos-iv-c%C3%B3mo-y-por-qu%C3%A9-locuciones-que-se-les-asimilan",
+                    "metadataHash": "47e74915329e64b935cede6655e01067d524fbe28ac63c83605c9328508e1d18",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "A",
+                    "status": "active",
+                    "title": "Interrogativos y exclamativos (IV). Cómo y por qué. Locuciones que se les asimilan",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Real Academia Española y Asociación de Academias de la Lengua Española",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": "Nueva gramática de la lengua española",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.rae.es/gram%C3%A1tica/sintaxis/interrogativos-y-exclamativos-iv-c%C3%B3mo-y-por-qu%C3%A9-locuciones-que-se-les-asimilan",
+                    "language": "es",
+                    "topics": [
+                      "por qué",
+                      "porque",
+                      "interrogativos"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-22",
+                    "createdAt": "2026-09-22T08:18:53.571Z",
+                    "updatedAt": "2026-09-22T08:18:53.571Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "cómo"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 5,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0077",
+              "language": "ingles",
+              "title": "Genitivo plural con apóstrofo",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "genitivo",
+                "plural",
+                "apóstrofo",
+                "posesión",
+                "relaciones",
+                "nominales",
+                "possession",
+                "nominal",
+                "relations",
+                "sustantivos",
+                "sintagma",
+                "nouns"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-44709F6B029822859FCC",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/have-got-and-have",
+                    "metadataHash": "024c865cbbfb514fa05f2e085da3408170dae2c21b655c9cadfada193ab2a816",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Have got and have",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/have-got-and-have",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "have got",
+                      "have",
+                      "possession",
+                      "register"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:38:04.425Z",
+                    "updatedAt": "2026-09-23T09:38:04.425Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "possession"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-C605C8F34AC027BD1245",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "metadataHash": "8e4f39dec70b49a78a6348140dbff5d6564e9d103bca92ee3cd9adb19d32ff67",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "It",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "anticipatory it",
+                      "extraposition",
+                      "clauses"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:58.679Z",
+                    "updatedAt": "2026-09-23T09:37:58.679Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "genitivo"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 2,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0153",
+              "language": "ingles",
+              "title": "none of",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "none",
+                "cuantificadores",
+                "quantifiers",
+                "artículos",
+                "determinantes",
+                "cuantificación",
+                "articles",
+                "determiners",
+                "quantification"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-6C7DC15B371322B1A80F",
+                    "identityKind": "isbn",
+                    "identityKey": "9780582045880",
+                    "metadataHash": "4f8f5ccb00e4f95daaaa00819a55c00061cee6672540d1345999f92f4f6ff036",
+                    "sourceType": "book",
+                    "authorityTier": "C",
+                    "status": "active",
+                    "title": "Longman English Grammar Practice",
+                    "authors": [
+                      "Alexander, L. G."
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 1990,
+                    "publicationDate": null,
+                    "publisher": "Longman",
+                    "edition": "Illustrated edition",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9780582045880",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": null,
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "articles",
+                      "zero article",
+                      "meals"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": null,
+                    "createdAt": "2026-09-21T21:36:18.187Z",
+                    "updatedAt": "2026-09-21T21:36:18.187Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "articles"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0230",
+              "language": "ingles",
+              "title": "Forma base",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "forma",
+                "base",
+                "morfología",
+                "verbal",
+                "verb",
+                "morphology",
+                "verbo",
+                "complementación",
+                "valencia",
+                "complementation",
+                "valency"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-320677CC12A3E34EB2F9",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/can-",
+                    "metadataHash": "730903df19917a63392bf0987b9a7b09830f356d5992d52bc083c530590a2afe",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Can",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/can-",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "modal verbs",
+                      "can",
+                      "ability"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:54.688Z",
+                    "updatedAt": "2026-09-23T09:37:54.688Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "verb"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0306",
+              "language": "ingles",
+              "title": "Adverbiales compatibles con cada tiempo",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "adverbiales",
+                "compatibles",
+                "cada",
+                "tiempo",
+                "perfecto",
+                "perfect",
+                "aspecto",
+                "referencia",
+                "temporal",
+                "tense",
+                "aspect",
+                "reference"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                    "identityKind": "isbn",
+                    "identityKey": "9780521848374",
+                    "metadataHash": "a3701713a8e03327f3d584ea654bf0085009457712676fb87553b5958e99f5ea",
+                    "sourceType": "book",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "A Student's Introduction to English Grammar",
+                    "authors": [
+                      "Huddleston, Rodney D.",
+                      "Pullum, Geoffrey K."
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2005,
+                    "publicationDate": null,
+                    "publisher": "Cambridge University Press",
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9780521848374",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": null,
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "reported speech",
+                      "backshift",
+                      "tense"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": null,
+                    "createdAt": "2026-09-21T21:39:42.690Z",
+                    "updatedAt": "2026-09-21T21:39:42.690Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "tense"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0383",
+              "language": "ingles",
+              "title": "Escalas de certeza y compromiso",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "escalas",
+                "certeza",
+                "compromiso",
+                "modalidad",
+                "modality",
+                "auxiliares",
+                "negación",
+                "modo",
+                "auxiliaries",
+                "negation",
+                "mood"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-C605C8F34AC027BD1245",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "metadataHash": "8e4f39dec70b49a78a6348140dbff5d6564e9d103bca92ee3cd9adb19d32ff67",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "It",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "anticipatory it",
+                      "extraposition",
+                      "clauses"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:58.679Z",
+                    "updatedAt": "2026-09-23T09:37:58.679Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "modality"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0460",
+              "language": "ingles",
+              "title": "Contraste categorial during/while",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "contraste",
+                "categorial",
+                "during",
+                "while",
+                "sistema",
+                "preposicional",
+                "prepositional",
+                "system",
+                "preposiciones",
+                "relaciones",
+                "espaciales",
+                "temporales"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-C605C8F34AC027BD1245",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "metadataHash": "8e4f39dec70b49a78a6348140dbff5d6564e9d103bca92ee3cd9adb19d32ff67",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "It",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "anticipatory it",
+                      "extraposition",
+                      "clauses"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:58.679Z",
+                    "updatedAt": "2026-09-23T09:37:58.679Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "prepositional"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0536",
+              "language": "ingles",
+              "title": "no + sustantivo",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "external_discovery",
+              "externalDiscoveryRequired": true,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "sustantivo",
+                "negación",
+                "negation",
+                "preguntas",
+                "respuestas",
+                "questions",
+                "answers"
+              ],
+              "sourceCandidates": [],
+              "sourceCandidateCount": 0,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0614",
+              "language": "ingles",
+              "title": "Cambio de pronombres",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "cambio",
+                "pronombres",
+                "estilo",
+                "indirecto",
+                "reported",
+                "speech",
+                "cita",
+                "evidencialidad",
+                "quotation",
+                "evidentiality"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                    "identityKind": "isbn",
+                    "identityKey": "9780521848374",
+                    "metadataHash": "a3701713a8e03327f3d584ea654bf0085009457712676fb87553b5958e99f5ea",
+                    "sourceType": "book",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "A Student's Introduction to English Grammar",
+                    "authors": [
+                      "Huddleston, Rodney D.",
+                      "Pullum, Geoffrey K."
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2005,
+                    "publicationDate": null,
+                    "publisher": "Cambridge University Press",
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9780521848374",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": null,
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "reported speech",
+                      "backshift",
+                      "tense"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": null,
+                    "createdAt": "2026-09-21T21:39:42.690Z",
+                    "updatedAt": "2026-09-21T21:39:42.690Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "reported",
+                    "speech"
+                  ],
+                  "candidateScore": 28,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-C605C8F34AC027BD1245",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "metadataHash": "8e4f39dec70b49a78a6348140dbff5d6564e9d103bca92ee3cd9adb19d32ff67",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "It",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/it",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "anticipatory it",
+                      "extraposition",
+                      "clauses"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:58.679Z",
+                    "updatedAt": "2026-09-23T09:37:58.679Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "cita",
+                    "evidentiality"
+                  ],
+                  "candidateScore": 27,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-17A874612878804D24BE",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+                    "metadataHash": "76a0e3407f4ef0512cb3cba77ce125e45c3da5fc640b842e1e736c8b2fa18145",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "C",
+                    "status": "active",
+                    "title": "Reported speech: indirect speech",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/reported-speech-indirect-speech",
+                    "language": "en",
+                    "topics": [
+                      "reported speech",
+                      "indirect speech",
+                      "backshift",
+                      "no backshift"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-21",
+                    "createdAt": "2026-09-21T21:39:42.885Z",
+                    "updatedAt": "2026-09-21T21:39:42.885Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "reported",
+                    "speech"
+                  ],
+                  "candidateScore": 26,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 3,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0689",
+              "language": "ingles",
+              "title": "Sufijos formadores de adjetivos",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "external_discovery",
+              "externalDiscoveryRequired": true,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "sufijos",
+                "formadores",
+                "adjetivos",
+                "derivación",
+                "derivation",
+                "formación",
+                "palabras",
+                "morfología",
+                "derivativa",
+                "word",
+                "formation",
+                "derivational"
+              ],
+              "sourceCandidates": [],
+              "sourceCandidateCount": 0,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V01-0766",
+              "language": "ingles",
+              "title": "Interfaz léxico–gramática y colocación gramatical",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "interfaz",
+                "léxico",
+                "gramática",
+                "colocación",
+                "gramatical",
+                "grammar",
+                "construcciones",
+                "avanzadas",
+                "fenómenos",
+                "excepcionales",
+                "advanced",
+                "constructions"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-33CE316B379897520E65",
+                    "identityKind": "url",
+                    "identityKey": "https://learnenglish.britishcouncil.org/free-resources/grammar/c1/participle-clauses",
+                    "metadataHash": "654965f9fb65653dadc0dce5d3b31504f388a943d154ce91bd53893815fcb832",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Participle clauses",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "British Council",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://learnenglish.britishcouncil.org/free-resources/grammar/c1/participle-clauses",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "participle clauses",
+                      "non-finite clauses"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:56.596Z",
+                    "updatedAt": "2026-09-23T09:37:56.596Z"
+                  },
+                  "usage": {
+                    "entries": 2,
+                    "links": 4
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 23,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                    "identityKind": "isbn",
+                    "identityKey": "9780521848374",
+                    "metadataHash": "a3701713a8e03327f3d584ea654bf0085009457712676fb87553b5958e99f5ea",
+                    "sourceType": "book",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "A Student's Introduction to English Grammar",
+                    "authors": [
+                      "Huddleston, Rodney D.",
+                      "Pullum, Geoffrey K."
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2005,
+                    "publicationDate": null,
+                    "publisher": "Cambridge University Press",
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9780521848374",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": null,
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "reported speech",
+                      "backshift",
+                      "tense"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": null,
+                    "createdAt": "2026-09-21T21:39:42.690Z",
+                    "updatedAt": "2026-09-21T21:39:42.690Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-320677CC12A3E34EB2F9",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/can-",
+                    "metadataHash": "730903df19917a63392bf0987b9a7b09830f356d5992d52bc083c530590a2afe",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Can",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/can-",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "modal verbs",
+                      "can",
+                      "ability"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:54.688Z",
+                    "updatedAt": "2026-09-23T09:37:54.688Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-3F8EC00D7EFB9C4606AD",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/sentence-types",
+                    "metadataHash": "0743d1ae6bec27572de2254b6883fa571b44e36c1ad360171dee7379c5c031a6",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Sentences",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/sentence-types",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "sentences",
+                      "clauses",
+                      "subordination"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:46.824Z",
+                    "updatedAt": "2026-09-23T09:37:46.824Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-699862EBDFC89596D5CF",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple",
+                    "metadataHash": "4a4e61185e1fc3a6126b22c191ddca5230aefba5b7b9a7e3fe046280898148e1",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Present simple (I work)",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/present-simple",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "present simple",
+                      "habit",
+                      "routine",
+                      "frequency"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:52.763Z",
+                    "updatedAt": "2026-09-23T09:37:52.763Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-7314283493F79B0E3C93",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/-ing-and-ed-adjectives",
+                    "metadataHash": "7bf80ced1d0defa63ff19ac735fa70da7c6a4386f318bd7c19db4540a6aa308c",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Adjectives: forms",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/-ing-and-ed-adjectives",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "adjectives",
+                      "participles",
+                      "-ing",
+                      "-ed"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:50.837Z",
+                    "updatedAt": "2026-09-23T09:37:50.837Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-9A07EFDEAED119B2FF34",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/by",
+                    "metadataHash": "7d2791033991335e7120973142717498343998de4e5306bfa8b41dddb9fb0288",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "By",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/by",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "prepositions",
+                      "transport",
+                      "zero article"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:37:48.854Z",
+                    "updatedAt": "2026-09-23T09:37:48.854Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-44709F6B029822859FCC",
+                    "identityKind": "url",
+                    "identityKey": "https://dictionary.cambridge.org/grammar/british-grammar/have-got-and-have",
+                    "metadataHash": "024c865cbbfb514fa05f2e085da3408170dae2c21b655c9cadfada193ab2a816",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Have got and have",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Cambridge University Press & Assessment",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://dictionary.cambridge.org/grammar/british-grammar/have-got-and-have",
+                    "language": "en",
+                    "topics": [
+                      "English grammar",
+                      "have got",
+                      "have",
+                      "possession",
+                      "register"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:38:04.425Z",
+                    "updatedAt": "2026-09-23T09:38:04.425Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "grammar"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 8,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V02-0120",
+              "language": "portugues",
+              "title": "Plurales dobles aceptados",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "plurales",
+                "dobles",
+                "aceptados",
+                "género",
+                "número",
+                "flexión",
+                "nominal",
+                "gênero",
+                "flexão",
+                "sustantivos",
+                "sintagma",
+                "substantivos"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-01CC51C7E48F1D081990",
+                    "identityKind": "url",
+                    "identityKey": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/mais-e-menos-com-substantivos-abstratos/31647#version:2012-10-19",
+                    "metadataHash": "a7a593ad91b374f640fd1f470f505d5efe973846ec72b0081e23d5cfe5f60bf4",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "C",
+                    "status": "active",
+                    "title": "Mais e menos com substantivos abstratos",
+                    "authors": [
+                      "Rocha, Carlos"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Ciberdúvidas da Língua Portuguesa",
+                    "publicationYear": 2012,
+                    "publicationDate": "2012-10-19",
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/mais-e-menos-com-substantivos-abstratos/31647",
+                    "language": "pt",
+                    "topics": [
+                      "mais",
+                      "menos",
+                      "quantificadores",
+                      "substantivos",
+                      "comparação"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-21",
+                    "createdAt": "2026-09-21T21:49:35.196Z",
+                    "updatedAt": "2026-09-21T21:49:35.196Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "substantivos"
+                  ],
+                  "candidateScore": 16,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V02-0240",
+              "language": "portugues",
+              "title": "Ambigüedad de seu/sua y uso de dele/dela",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "ambigüedad",
+                "dele",
+                "dela",
+                "pronombres",
+                "personales",
+                "formas",
+                "tratamiento",
+                "pronomes",
+                "pessoais",
+                "tratamento",
+                "referencia",
+                "pronominal"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-05FC4825A0C7C8C75F6F",
+                    "identityKind": "isbn",
+                    "identityKey": "9788520923184",
+                    "metadataHash": "433f86a18845766060224b6317ecf4b4dc09217a64691fc42da017353591be38",
+                    "sourceType": "book",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "Moderna gramática portuguesa",
+                    "authors": [
+                      "Bechara, Evanildo"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2009,
+                    "publicationDate": null,
+                    "publisher": "Nova Fronteira",
+                    "edition": "37. ed. rev., ampl. e atual.",
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": "9788520923184",
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": null,
+                    "language": "pt-BR",
+                    "topics": [
+                      "gramática do português",
+                      "pronomes indefinidos",
+                      "mais",
+                      "menos",
+                      "invariabilidade"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": null,
+                    "createdAt": "2026-09-21T21:49:35.052Z",
+                    "updatedAt": "2026-09-21T21:49:35.052Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "pronomes"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-9D6065C93CA8ED80DFAD",
+                    "identityKind": "url",
+                    "identityKey": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/o-predicado-e-o-predicativo-do-verbo-ser/34430",
+                    "metadataHash": "ccddbc131e52f7fb1647b66b496282644b921138c2fa8e55ced60671c586359a",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "O predicado e o predicativo do verbo ser",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Ciberdúvidas da Língua Portuguesa",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/o-predicado-e-o-predicativo-do-verbo-ser/34430",
+                    "language": "pt",
+                    "topics": [
+                      "português",
+                      "verbo ser",
+                      "predicativo do sujeito",
+                      "nomes"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:45:58.410Z",
+                    "updatedAt": "2026-09-23T09:45:58.410Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "pronomes"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 2,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V02-0360",
+              "language": "portugues",
+              "title": "Conjugación y usos del verbo medir",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "conjugación",
+                "usos",
+                "verbo",
+                "medir",
+                "verbos",
+                "irregulares",
+                "auxiliares",
+                "defectivos",
+                "morfología",
+                "irregularidad",
+                "morfologia",
+                "conjugação"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-0C4D5DBDDA1771C0F31C",
+                    "identityKind": "url",
+                    "identityKey": "https://www.infopedia.pt/dicionarios/verbos-portugueses/trazer",
+                    "metadataHash": "1f429c51311c0082dc589741caba5e13e393101b08c9f91146d9402ac5009b35",
+                    "sourceType": "reference_entry",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "trazer",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Infopédia — Porto Editora",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": "Porto Editora",
+                    "edition": null,
+                    "containerTitle": "Dicionário Infopédia de Verbos Portugueses",
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://www.infopedia.pt/dicionarios/verbos-portugueses/trazer",
+                    "language": "pt",
+                    "topics": [
+                      "português",
+                      "trazer",
+                      "conjugação verbal"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:46:02.029Z",
+                    "updatedAt": "2026-09-23T09:49:58.256Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "verbo",
+                    "verbos",
+                    "conjugação"
+                  ],
+                  "candidateScore": 38,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-9D6065C93CA8ED80DFAD",
+                    "identityKind": "url",
+                    "identityKey": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/o-predicado-e-o-predicativo-do-verbo-ser/34430",
+                    "metadataHash": "ccddbc131e52f7fb1647b66b496282644b921138c2fa8e55ced60671c586359a",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "O predicado e o predicativo do verbo ser",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Ciberdúvidas da Língua Portuguesa",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/o-predicado-e-o-predicativo-do-verbo-ser/34430",
+                    "language": "pt",
+                    "topics": [
+                      "português",
+                      "verbo ser",
+                      "predicativo do sujeito",
+                      "nomes"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:45:58.410Z",
+                    "updatedAt": "2026-09-23T09:45:58.410Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 2
+                  },
+                  "matchedTopics": [
+                    "verbo"
+                  ],
+                  "candidateScore": 18,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                },
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-AD8AB5633999509889AA",
+                    "identityKind": "url",
+                    "identityKey": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/a-formacao-do-futuro-do-conjuntivo-ainda-outra-vez/19778",
+                    "metadataHash": "9446812e51857be4553c42d60401f83be07a2afa22006a69603bc7a1366fa9ec",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "A formação do futuro do conjuntivo, ainda outra vez",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Ciberdúvidas da Língua Portuguesa",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/a-formacao-do-futuro-do-conjuntivo-ainda-outra-vez/19778",
+                    "language": "pt",
+                    "topics": [
+                      "português",
+                      "futuro do conjuntivo",
+                      "morfologia verbal"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:46:03.650Z",
+                    "updatedAt": "2026-09-23T09:46:03.650Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "morfologia"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 3,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V02-0480",
+              "language": "portugues",
+              "title": "Participio como adjetivo",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "participio",
+                "como",
+                "adjetivo",
+                "infinitivo",
+                "gerundio",
+                "gerúndio",
+                "particípio",
+                "subjuntivo",
+                "formas",
+                "finitas"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-3205658601ED2E0F605D",
+                    "identityKind": "doi",
+                    "identityKey": "10.1590/1981-5794-e18257",
+                    "metadataHash": "098874d075695acdf402e898229e3bee39554cdfdb01d565aa7f22d1a8aa4f89",
+                    "sourceType": "journal_article",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "As relações textuais como procedimentos para a atribuição de ações na interação",
+                    "authors": [
+                      "Cunha, Gustavo Ximenes"
+                    ],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": null,
+                    "publicationYear": 2024,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": "Alfa: Revista de Linguística",
+                    "volume": "68",
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": "e18257",
+                    "isbn": null,
+                    "issn": null,
+                    "doi": "10.1590/1981-5794-e18257",
+                    "doiScope": "resource",
+                    "canonicalUrl": "https://www.scielo.br/j/alfa/a/8LXWmxK5JFx8ntrcGCR7bvy",
+                    "language": "pt-BR",
+                    "topics": [
+                      "pragmática",
+                      "marcadores discursivos",
+                      "reformulação",
+                      "enfim"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-21",
+                    "createdAt": "2026-09-21T21:53:53.677Z",
+                    "updatedAt": "2026-09-21T21:55:15.740Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "como"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            },
+            {
+              "code": "MLS-V02-0600",
+              "language": "portugues",
+              "title": "Pra/pro en el habla",
+              "status": "UNSOURCED",
+              "lane": "needs_evidence",
+              "discoveryMode": "registry_first",
+              "externalDiscoveryRequired": false,
+              "needsReview": false,
+              "proposedRevisionCount": 0,
+              "topics": [
+                "habla",
+                "contracciones",
+                "preposicionales",
+                "crase",
+                "contrações",
+                "preposicionais",
+                "preposiciones",
+                "preposições"
+              ],
+              "sourceCandidates": [
+                {
+                  "source": {
+                    "sourceId": "MLS-SRC-5E87FB77334EA06C0BDA",
+                    "identityKind": "url",
+                    "identityKey": "https://ciberduvidas-ql.iscte-iul.pt/consultorio/perguntas/o-conceito-de-regencia-verbal/18389",
+                    "metadataHash": "808e8ee0f3ded8975e843596b59ea1f65ff1af9041ffba449f8d9ed72e6594f5",
+                    "sourceType": "institutional_webpage",
+                    "authorityTier": "B",
+                    "status": "active",
+                    "title": "O conceito de regência verbal",
+                    "authors": [],
+                    "editors": [],
+                    "contributors": [],
+                    "institution": "Ciberdúvidas da Língua Portuguesa",
+                    "publicationYear": null,
+                    "publicationDate": null,
+                    "publisher": null,
+                    "edition": null,
+                    "containerTitle": null,
+                    "journal": null,
+                    "volume": null,
+                    "issue": null,
+                    "pages": null,
+                    "articleNumber": null,
+                    "isbn": null,
+                    "issn": null,
+                    "doi": null,
+                    "doiScope": null,
+                    "canonicalUrl": "https://ciberduvidas-ql.iscte-iul.pt/consultorio/perguntas/o-conceito-de-regencia-verbal/18389",
+                    "language": "pt",
+                    "topics": [
+                      "português",
+                      "regência verbal",
+                      "complementos",
+                      "preposições"
+                    ],
+                    "resourceVersion": null,
+                    "supersedesSourceId": null,
+                    "accessedAt": "2026-09-23",
+                    "createdAt": "2026-09-23T09:46:05.721Z",
+                    "updatedAt": "2026-09-23T09:46:05.721Z"
+                  },
+                  "usage": {
+                    "entries": 1,
+                    "links": 1
+                  },
+                  "matchedTopics": [
+                    "preposições"
+                  ],
+                  "candidateScore": 17,
+                  "approved": false,
+                  "reuseStatus": "candidate_only",
+                  "requiresClaimSpecificVerification": true
+                }
+              ],
+              "sourceCandidateCount": 1,
+              "candidateContract": {
+                "approved": false,
+                "sourcePresenceIsNotVerification": true,
+                "externalDiscoveryMayStillBeRequired": true
+              }
+            }
+          ],
+          "gate100Authorized": false,
+          "telemetry": {
+            "d1": {
+              "queries": 175,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 29130,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 440,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:01:45.601Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T15:01:45.602Z",
+  "commandFile": "mls chat bridge/commands/r33-farm/MLS-R33-CORRECTION-REPEAT-100/R33-EVIDENCE-FARM-000678/chat-r33-20260923T145556Z-a/triage-001.json"
+}
