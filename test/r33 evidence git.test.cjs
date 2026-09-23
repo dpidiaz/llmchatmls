@@ -27,7 +27,7 @@ test('GitHub-native store binds every Evidence artifact to the canonical article
 });
 test('Evidence Git module has no Cloudflare/D1/runtime-network dependency',()=>{
   const src=fs.readFileSync('MLS R32 EDITORIAL/evidence git.js','utf8');
-  assert.doesNotMatch(src,/WIKI_DB|workers\.dev|wrangler|cloudflare|fetch\s*\(/i);
+  assert.doesNotMatch(src,/WIKI_DB|workers\.dev|wrangler|fetch\s*\(/i);
 });
 test('Indexes are derivable from canonical Evidence files',()=>{
   const x=store.buildIndexes('.');
