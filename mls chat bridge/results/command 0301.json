@@ -1,0 +1,2415 @@
+{
+  "success": false,
+  "httpStatus": 422,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "GATE100-EN-VERIFY-20260923-A",
+    "requested": 10,
+    "processed": 10,
+    "failures": 1,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0039",
+            "articleGeneratedAt": "2026-09-13T09:48:44.518Z",
+            "articleHash": "65cb88ad9eb904cb80666e9115636f3800f12d9b47e5380e3064371944db7e48",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "Oración compleja",
+            "level": "B1",
+            "part": "Unidades gramaticales y clases de palabras — Grammatical units and word classes",
+            "chapter": "Unidades de análisis — Units of analysis"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-F91EF7A5C74C9982F59C62FA",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-A618507EC9A045E50D784166",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0039",
+              "articleGeneratedAt": "2026-09-13T09:48:44.518Z",
+              "articleHash": "65cb88ad9eb904cb80666e9115636f3800f12d9b47e5380e3064371944db7e48",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "Oración compleja",
+              "level": "B1",
+              "part": "Unidades gramaticales y clases de palabras — Grammatical units and word classes",
+              "chapter": "Unidades de análisis — Units of analysis"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-F91EF7A5C74C9982F59C62FA",
+                "code": "MLS-V01-0039",
+                "article_generated_at": "2026-09-13T09:48:44.518Z",
+                "article_hash": "65cb88ad9eb904cb80666e9115636f3800f12d9b47e5380e3064371944db7e48",
+                "section_key": "En pocas palabras",
+                "summary": "A complex sentence contains a main clause together with one or more subordinate clauses.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:46.966Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-A618507EC9A045E50D784166",
+                "code": "MLS-V01-0039",
+                "article_generated_at": "2026-09-13T09:48:44.518Z",
+                "article_hash": "65cb88ad9eb904cb80666e9115636f3800f12d9b47e5380e3064371944db7e48",
+                "section_key": "Observación importante",
+                "summary": "A compound sentence coordinates two or more main clauses, whereas a complex sentence includes subordinate-clause dependency.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:47.146Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-07A41ADD105B89217C38B01D",
+                "claim_id": "MLS-CLM-F91EF7A5C74C9982F59C62FA",
+                "source_id": "MLS-SRC-3F8EC00D7EFB9C4606AD",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Complex sentences\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:47.329Z"
+              },
+              {
+                "link_id": "MLS-LNK-6A58DF928757CB507FC156AA",
+                "claim_id": "MLS-CLM-A618507EC9A045E50D784166",
+                "source_id": "MLS-SRC-3F8EC00D7EFB9C4606AD",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Compound sentences; Complex sentences\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:47.587Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "8cf9768d8a2d70e7ccdb74c8cf66afba07860c3331b16eb8cad7079b4a04ff59",
+          "verifiedAt": "2026-09-23T09:38:42.083Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-2C63602CDAED6461A65E3FC3",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0039",
+            "article_generated_at": "2026-09-13T09:48:44.518Z",
+            "article_hash": "65cb88ad9eb904cb80666e9115636f3800f12d9b47e5380e3064371944db7e48",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:38:42.083Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:38:42.083Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-2C63602CDAED6461A65E3FC3",
+            "code": "MLS-V01-0039",
+            "article_generated_at": "2026-09-13T09:48:44.518Z",
+            "article_hash": "65cb88ad9eb904cb80666e9115636f3800f12d9b47e5380e3064371944db7e48",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "8cf9768d8a2d70e7ccdb74c8cf66afba07860c3331b16eb8cad7079b4a04ff59",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:38:42.083Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 134,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:38:44.695Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0116",
+            "articleGeneratedAt": "2026-09-16T09:06:06.314Z",
+            "articleHash": "2d6423aa24b12380ebedd3c2ea97f0550ca409e1591a313a32ebbd56ba3bc715",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "Artículo cero con transporte mediante by",
+            "level": "A2",
+            "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+            "chapter": "Sistema de artículos — Article system"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-DF249E08F551178EF3215ABC",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-CD6B3ABB6CDC21300D9B6053",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0116",
+              "articleGeneratedAt": "2026-09-16T09:06:06.314Z",
+              "articleHash": "2d6423aa24b12380ebedd3c2ea97f0550ca409e1591a313a32ebbd56ba3bc715",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "Artículo cero con transporte mediante by",
+              "level": "A2",
+              "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+              "chapter": "Sistema de artículos — Article system"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-DF249E08F551178EF3215ABC",
+                "code": "MLS-V01-0116",
+                "article_generated_at": "2026-09-16T09:06:06.314Z",
+                "article_hash": "2d6423aa24b12380ebedd3c2ea97f0550ca409e1591a313a32ebbd56ba3bc715",
+                "section_key": "En pocas palabras",
+                "summary": "English conventionally uses by plus a transport noun without an article to express means of transport, as in by car, by bus or by train.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:48.992Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-CD6B3ABB6CDC21300D9B6053",
+                "code": "MLS-V01-0116",
+                "article_generated_at": "2026-09-16T09:06:06.314Z",
+                "article_hash": "2d6423aa24b12380ebedd3c2ea97f0550ca409e1591a313a32ebbd56ba3bc715",
+                "section_key": "Cómo funciona",
+                "summary": "When referring to a particular vehicle, English commonly uses in or on with a determiner; the conventional pedestrian expression is on foot rather than by foot.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:49.188Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-F87A6C43505DEE2DD9C89065",
+                "claim_id": "MLS-CLM-DF249E08F551178EF3215ABC",
+                "source_id": "MLS-SRC-9A07EFDEAED119B2FF34",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"By meaning ‘how to do something’\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:49.369Z"
+              },
+              {
+                "link_id": "MLS-LNK-C8DAC944EC5B194D344F48EC",
+                "claim_id": "MLS-CLM-CD6B3ABB6CDC21300D9B6053",
+                "source_id": "MLS-SRC-9A07EFDEAED119B2FF34",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"By meaning ‘how to do something’\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:49.632Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "123dae5ffad84b42103645e4e1540f6dab3112ea1c7aac244f8aa9467281dc58",
+          "verifiedAt": "2026-09-23T09:38:44.899Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-2ED5C320494145CBD78FC711",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0116",
+            "article_generated_at": "2026-09-16T09:06:06.314Z",
+            "article_hash": "2d6423aa24b12380ebedd3c2ea97f0550ca409e1591a313a32ebbd56ba3bc715",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:38:44.899Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:38:44.899Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-2ED5C320494145CBD78FC711",
+            "code": "MLS-V01-0116",
+            "article_generated_at": "2026-09-16T09:06:06.314Z",
+            "article_hash": "2d6423aa24b12380ebedd3c2ea97f0550ca409e1591a313a32ebbd56ba3bc715",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "123dae5ffad84b42103645e4e1540f6dab3112ea1c7aac244f8aa9467281dc58",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:38:44.899Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:38:47.465Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0193",
+            "articleGeneratedAt": "2026-09-17T06:40:11.938Z",
+            "articleHash": "6ed709d6fc7d220d5ab4f80c4dcd872c208b0f4db95cbbedf76e67180027e2f9",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "Adjetivos participiales en -ing/-ed",
+            "level": "B1",
+            "part": "Adjetivos, comparación y adverbios — Adjectives, comparison, and adverbs",
+            "chapter": "Adjetivos — Adjectives"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-976D9AC83100D1AF8A4FF521",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-1594A4FC4C126F653333CBFE",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0193",
+              "articleGeneratedAt": "2026-09-17T06:40:11.938Z",
+              "articleHash": "6ed709d6fc7d220d5ab4f80c4dcd872c208b0f4db95cbbedf76e67180027e2f9",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "Adjetivos participiales en -ing/-ed",
+              "level": "B1",
+              "part": "Adjetivos, comparación y adverbios — Adjectives, comparison, and adverbs",
+              "chapter": "Adjetivos — Adjectives"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-976D9AC83100D1AF8A4FF521",
+                "code": "MLS-V01-0193",
+                "article_generated_at": "2026-09-17T06:40:11.938Z",
+                "article_hash": "6ed709d6fc7d220d5ab4f80c4dcd872c208b0f4db95cbbedf76e67180027e2f9",
+                "section_key": "En pocas palabras",
+                "summary": "With many adjective pairs in -ing and -ed, the -ing form describes the effect or quality that produces a reaction, while the -ed form describes the experienced reaction or state.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:50.971Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-1594A4FC4C126F653333CBFE",
+                "code": "MLS-V01-0193",
+                "article_generated_at": "2026-09-17T06:40:11.938Z",
+                "article_hash": "6ed709d6fc7d220d5ab4f80c4dcd872c208b0f4db95cbbedf76e67180027e2f9",
+                "section_key": "Observación importante",
+                "summary": "The contrast between -ing and -ed adjectives is not simply a person-versus-thing distinction; the relevant distinction concerns causing versus experiencing the state or reaction.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:51.143Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-029556869F970E31F862B462",
+                "claim_id": "MLS-CLM-976D9AC83100D1AF8A4FF521",
+                "source_id": "MLS-SRC-7314283493F79B0E3C93",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Adjectives: with -ing and -ed (interesting, interested)\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:51.315Z"
+              },
+              {
+                "link_id": "MLS-LNK-30E9CA2387FECC4DC0EB91EC",
+                "claim_id": "MLS-CLM-1594A4FC4C126F653333CBFE",
+                "source_id": "MLS-SRC-7314283493F79B0E3C93",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Adjectives: with -ing and -ed (interesting, interested)\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:51.566Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "85ff0dd49f73abeb58dd0e275f17365f608e37ab9f72b121c587c6e7136e1ab9",
+          "verifiedAt": "2026-09-23T09:38:47.675Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-89A1107848C0059A5E471AD6",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0193",
+            "article_generated_at": "2026-09-17T06:40:11.938Z",
+            "article_hash": "6ed709d6fc7d220d5ab4f80c4dcd872c208b0f4db95cbbedf76e67180027e2f9",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:38:47.675Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:38:47.675Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-89A1107848C0059A5E471AD6",
+            "code": "MLS-V01-0193",
+            "article_generated_at": "2026-09-17T06:40:11.938Z",
+            "article_hash": "6ed709d6fc7d220d5ab4f80c4dcd872c208b0f4db95cbbedf76e67180027e2f9",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "85ff0dd49f73abeb58dd0e275f17365f608e37ab9f72b121c587c6e7136e1ab9",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:38:47.675Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:38:50.206Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0269",
+            "articleGeneratedAt": "2026-09-17T06:40:40.530Z",
+            "articleHash": "4ed2d652ea22ee899039aed575d59f4ae754dd3138a336ee406a52b22b27d343",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "Hábitos y rutinas",
+            "level": "A1",
+            "part": "Tiempo, aspecto y referencia temporal — Tense, aspect, and temporal reference",
+            "chapter": "Presente — Present tense"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-18491DE95806DB059BABFD25",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-65C261E6E8A4CD9A724794D0",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0269",
+              "articleGeneratedAt": "2026-09-17T06:40:40.530Z",
+              "articleHash": "4ed2d652ea22ee899039aed575d59f4ae754dd3138a336ee406a52b22b27d343",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "Hábitos y rutinas",
+              "level": "A1",
+              "part": "Tiempo, aspecto y referencia temporal — Tense, aspect, and temporal reference",
+              "chapter": "Presente — Present tense"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-18491DE95806DB059BABFD25",
+                "code": "MLS-V01-0269",
+                "article_generated_at": "2026-09-17T06:40:40.530Z",
+                "article_hash": "4ed2d652ea22ee899039aed575d59f4ae754dd3138a336ee406a52b22b27d343",
+                "section_key": "En pocas palabras",
+                "summary": "The present simple is used for regular and habitual events and routines rather than only for actions happening at the moment of speaking.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:52.895Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-65C261E6E8A4CD9A724794D0",
+                "code": "MLS-V01-0269",
+                "article_generated_at": "2026-09-17T06:40:40.530Z",
+                "article_hash": "4ed2d652ea22ee899039aed575d59f4ae754dd3138a336ee406a52b22b27d343",
+                "section_key": "Cómo funciona",
+                "summary": "Present-simple habitual statements commonly co-occur with frequency expressions and use the third-person-singular -s/-es form where required.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:53.074Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-49C3B79DB8A5069A05869F82",
+                "claim_id": "MLS-CLM-18491DE95806DB059BABFD25",
+                "source_id": "MLS-SRC-699862EBDFC89596D5CF",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Present simple: uses — Regular and habitual events\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:53.246Z"
+              },
+              {
+                "link_id": "MLS-LNK-BB4DAA6C90D19F8161A9B74E",
+                "claim_id": "MLS-CLM-65C261E6E8A4CD9A724794D0",
+                "source_id": "MLS-SRC-699862EBDFC89596D5CF",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Present simple: form; Present simple: uses\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:53.499Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "98813d13b1e66a99e95e97c604014b87f83dbd06c1b39c64c650b40e50796eb2",
+          "verifiedAt": "2026-09-23T09:38:50.416Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-49602508E46E0D65198F89DC",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0269",
+            "article_generated_at": "2026-09-17T06:40:40.530Z",
+            "article_hash": "4ed2d652ea22ee899039aed575d59f4ae754dd3138a336ee406a52b22b27d343",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:38:50.416Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:38:50.416Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-49602508E46E0D65198F89DC",
+            "code": "MLS-V01-0269",
+            "article_generated_at": "2026-09-17T06:40:40.530Z",
+            "article_hash": "4ed2d652ea22ee899039aed575d59f4ae754dd3138a336ee406a52b22b27d343",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "98813d13b1e66a99e95e97c604014b87f83dbd06c1b39c64c650b40e50796eb2",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:38:50.416Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:38:53.007Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0345",
+            "articleGeneratedAt": "2026-09-17T06:41:22.883Z",
+            "articleHash": "3e2c548024c0072ec291623a754d2af7c7c46cf49199641e8c7fafaa4d0e6106",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "can para capacidad",
+            "level": "A1",
+            "part": "Auxiliares, negación, modalidad y modo — Auxiliaries, negation, modality, and mood",
+            "chapter": "Modalidad — Modality"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-65888207CE4182FBF8930AAA",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-96BDAE637D6114C60E0906EA",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0345",
+              "articleGeneratedAt": "2026-09-17T06:41:22.883Z",
+              "articleHash": "3e2c548024c0072ec291623a754d2af7c7c46cf49199641e8c7fafaa4d0e6106",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "can para capacidad",
+              "level": "A1",
+              "part": "Auxiliares, negación, modalidad y modo — Auxiliaries, negation, modality, and mood",
+              "chapter": "Modalidad — Modality"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-65888207CE4182FBF8930AAA",
+                "code": "MLS-V01-0345",
+                "article_generated_at": "2026-09-17T06:41:22.883Z",
+                "article_hash": "3e2c548024c0072ec291623a754d2af7c7c46cf49199641e8c7fafaa4d0e6106",
+                "section_key": "En pocas palabras",
+                "summary": "The modal verb can is used to express present or general ability.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:54.830Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-96BDAE637D6114C60E0906EA",
+                "code": "MLS-V01-0345",
+                "article_generated_at": "2026-09-17T06:41:22.883Z",
+                "article_hash": "3e2c548024c0072ec291623a754d2af7c7c46cf49199641e8c7fafaa4d0e6106",
+                "section_key": "Cómo funciona",
+                "summary": "Can is followed by the base form of the main verb without to, is invariant across persons, forms negatives with cannot/can’t, and forms questions by placing can before the subject.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:55.002Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-C8B07DFB0DA71267CA0567B1",
+                "claim_id": "MLS-CLM-65888207CE4182FBF8930AAA",
+                "source_id": "MLS-SRC-320677CC12A3E34EB2F9",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Can: uses — Ability\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:55.172Z"
+              },
+              {
+                "link_id": "MLS-LNK-9CCCB1857637FB24FFE0B042",
+                "claim_id": "MLS-CLM-96BDAE637D6114C60E0906EA",
+                "source_id": "MLS-SRC-320677CC12A3E34EB2F9",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Can: forms\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:55.427Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "27238d3b3d8d49d3bfe515f01c12164a27c364fff2756601e09253cfc825825a",
+          "verifiedAt": "2026-09-23T09:38:53.216Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-4A23C7B3AB3923452D96B369",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0345",
+            "article_generated_at": "2026-09-17T06:41:22.883Z",
+            "article_hash": "3e2c548024c0072ec291623a754d2af7c7c46cf49199641e8c7fafaa4d0e6106",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:38:53.216Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:38:53.216Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-4A23C7B3AB3923452D96B369",
+            "code": "MLS-V01-0345",
+            "article_generated_at": "2026-09-17T06:41:22.883Z",
+            "article_hash": "3e2c548024c0072ec291623a754d2af7c7c46cf49199641e8c7fafaa4d0e6106",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "27238d3b3d8d49d3bfe515f01c12164a27c364fff2756601e09253cfc825825a",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:38:53.216Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:38:55.777Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0422",
+            "articleGeneratedAt": "2026-09-17T09:04:57.224Z",
+            "articleHash": "95c085a7601bf7fb2fde97fa7e2bd4e528210c3f122c5a45260e0322122be115",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "Cláusulas suplementarias de participio pasado",
+            "level": "B2",
+            "part": "Formas no finitas, infinitivos, gerundios y participios — Non-finite forms, infinitives, gerunds, and participles",
+            "chapter": "Participios y cláusulas reducidas — Participles and reduced clauses"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-98E5178CD4C4A9FA3D0C8268",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-BDBEFA8BD50EF71F9F63A545",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0422",
+              "articleGeneratedAt": "2026-09-17T09:04:57.224Z",
+              "articleHash": "95c085a7601bf7fb2fde97fa7e2bd4e528210c3f122c5a45260e0322122be115",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "Cláusulas suplementarias de participio pasado",
+              "level": "B2",
+              "part": "Formas no finitas, infinitivos, gerundios y participios — Non-finite forms, infinitives, gerunds, and participles",
+              "chapter": "Participios y cláusulas reducidas — Participles and reduced clauses"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-98E5178CD4C4A9FA3D0C8268",
+                "code": "MLS-V01-0422",
+                "article_generated_at": "2026-09-17T09:04:57.224Z",
+                "article_hash": "95c085a7601bf7fb2fde97fa7e2bd4e528210c3f122c5a45260e0322122be115",
+                "section_key": "En pocas palabras",
+                "summary": "Past-participle clauses are non-finite participial clauses commonly used with passive meaning to add information such as reason, condition or accompanying circumstance.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:56.732Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-BDBEFA8BD50EF71F9F63A545",
+                "code": "MLS-V01-0422",
+                "article_generated_at": "2026-09-17T09:04:57.224Z",
+                "article_hash": "95c085a7601bf7fb2fde97fa7e2bd4e528210c3f122c5a45260e0322122be115",
+                "section_key": "Cómo funciona",
+                "summary": "In ordinary participle-clause constructions, the understood subject of the participle clause is the same as the subject of the main clause.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:37:56.897Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-9C717074431FE4C601C332FF",
+                "claim_id": "MLS-CLM-98E5178CD4C4A9FA3D0C8268",
+                "source_id": "MLS-SRC-33CE316B379897520E65",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Past participle clauses\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:57.063Z"
+              },
+              {
+                "link_id": "MLS-LNK-97446800AE7140B4D0F7DA97",
+                "claim_id": "MLS-CLM-BDBEFA8BD50EF71F9F63A545",
+                "source_id": "MLS-SRC-33CE316B379897520E65",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Grammar explanation\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:37:57.311Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "ee385854d1fc86c83f61736bae0c857becb79212c97165c9b59d8aa8d9689edd",
+          "verifiedAt": "2026-09-23T09:38:55.989Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-8B8C7D0222AADB1EFBD491A8",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0422",
+            "article_generated_at": "2026-09-17T09:04:57.224Z",
+            "article_hash": "95c085a7601bf7fb2fde97fa7e2bd4e528210c3f122c5a45260e0322122be115",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:38:55.989Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:38:55.989Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-8B8C7D0222AADB1EFBD491A8",
+            "code": "MLS-V01-0422",
+            "article_generated_at": "2026-09-17T09:04:57.224Z",
+            "article_hash": "95c085a7601bf7fb2fde97fa7e2bd4e528210c3f122c5a45260e0322122be115",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "ee385854d1fc86c83f61736bae0c857becb79212c97165c9b59d8aa8d9689edd",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:38:55.989Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:38:58.616Z"
+      },
+      {
+        "index": 6,
+        "success": false,
+        "httpStatus": 422,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": false,
+          "error": "Las fuentes que sustentan los claims no pasan APA Validator.",
+          "code": "APA_VALIDATION_REQUIRED",
+          "telemetry": {
+            "d1": {
+              "queries": 12,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 36,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 14,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:38:59.477Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0575",
+            "articleGeneratedAt": "2026-09-17T07:11:09.340Z",
+            "articleHash": "5574372fa147e0b06f1a916cfb980fe49df5593a5a2752767bd9add82309ab59",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "Cláusulas adverbiales reducidas en -ing",
+            "level": "B2",
+            "part": "Subordinación y cláusulas dependientes — Subordination and dependent clauses",
+            "chapter": "Cláusulas adverbiales — Adverbial clauses"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-B42239CB782E9EC73F7576A9",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-272AC06E0677AA77663E6D59",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0575",
+              "articleGeneratedAt": "2026-09-17T07:11:09.340Z",
+              "articleHash": "5574372fa147e0b06f1a916cfb980fe49df5593a5a2752767bd9add82309ab59",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "Cláusulas adverbiales reducidas en -ing",
+              "level": "B2",
+              "part": "Subordinación y cláusulas dependientes — Subordination and dependent clauses",
+              "chapter": "Cláusulas adverbiales — Adverbial clauses"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-B42239CB782E9EC73F7576A9",
+                "code": "MLS-V01-0575",
+                "article_generated_at": "2026-09-17T07:11:09.340Z",
+                "article_hash": "5574372fa147e0b06f1a916cfb980fe49df5593a5a2752767bd9add82309ab59",
+                "section_key": "En pocas palabras",
+                "summary": "Present-participle clauses can add circumstances such as reason or simultaneous action without a finite verb.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:38:00.480Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-272AC06E0677AA77663E6D59",
+                "code": "MLS-V01-0575",
+                "article_generated_at": "2026-09-17T07:11:09.340Z",
+                "article_hash": "5574372fa147e0b06f1a916cfb980fe49df5593a5a2752767bd9add82309ab59",
+                "section_key": "Cómo funciona",
+                "summary": "The understood subject of a participle clause normally matches the subject of the main clause, which is why mismatched subjects can create dangling-participle interpretations.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:38:00.647Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-C53588B62DE204590ADB4AC5",
+                "claim_id": "MLS-CLM-B42239CB782E9EC73F7576A9",
+                "source_id": "MLS-SRC-33CE316B379897520E65",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Present participle clauses\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:38:00.844Z"
+              },
+              {
+                "link_id": "MLS-LNK-245556CAD2B5D95DCF58B30D",
+                "claim_id": "MLS-CLM-272AC06E0677AA77663E6D59",
+                "source_id": "MLS-SRC-33CE316B379897520E65",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Grammar explanation\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:38:01.103Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "2b74f692afefdc104591fb095000d6cc4cf5386efa23fb78df644e9abf62a7ee",
+          "verifiedAt": "2026-09-23T09:38:59.895Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-F0A42E4CC82E088A93B2E0D2",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0575",
+            "article_generated_at": "2026-09-17T07:11:09.340Z",
+            "article_hash": "5574372fa147e0b06f1a916cfb980fe49df5593a5a2752767bd9add82309ab59",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:38:59.895Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:38:59.895Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-F0A42E4CC82E088A93B2E0D2",
+            "code": "MLS-V01-0575",
+            "article_generated_at": "2026-09-17T07:11:09.340Z",
+            "article_hash": "5574372fa147e0b06f1a916cfb980fe49df5593a5a2752767bd9add82309ab59",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "2b74f692afefdc104591fb095000d6cc4cf5386efa23fb78df644e9abf62a7ee",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:38:59.895Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:39:02.503Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0652",
+            "articleGeneratedAt": "2026-09-17T12:11:12.920Z",
+            "articleHash": "15200fe4a568a79ba9be8888a9964ffc3bb4ae8f29331ef1f42584b5ff1c1d1d",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "Adición",
+            "level": "A2",
+            "part": "Información, foco y organización discursiva — Information, focus, and discourse organization",
+            "chapter": "Cohesión y referencia discursiva — Cohesion and discourse reference"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 2,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-075EE5DD2FC105F114849BC5",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-138CBA46CE0A4D3DE3637C65",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0652",
+              "articleGeneratedAt": "2026-09-17T12:11:12.920Z",
+              "articleHash": "15200fe4a568a79ba9be8888a9964ffc3bb4ae8f29331ef1f42584b5ff1c1d1d",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "Adición",
+              "level": "A2",
+              "part": "Información, foco y organización discursiva — Information, focus, and discourse organization",
+              "chapter": "Cohesión y referencia discursiva — Cohesion and discourse reference"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-075EE5DD2FC105F114849BC5",
+                "code": "MLS-V01-0652",
+                "article_generated_at": "2026-09-17T12:11:12.920Z",
+                "article_hash": "15200fe4a568a79ba9be8888a9964ffc3bb4ae8f29331ef1f42584b5ff1c1d1d",
+                "section_key": "Cómo funciona",
+                "summary": "Also and too are additive expressions with different typical positions: also commonly occurs in mid position, while too commonly occurs at the end of a clause.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:38:02.553Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-138CBA46CE0A4D3DE3637C65",
+                "code": "MLS-V01-0652",
+                "article_generated_at": "2026-09-17T12:11:12.920Z",
+                "article_hash": "15200fe4a568a79ba9be8888a9964ffc3bb4ae8f29331ef1f42584b5ff1c1d1d",
+                "section_key": "En pocas palabras",
+                "summary": "Written discourse can use additive markers such as in addition and moreover to signal that a further compatible point is being added.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:38:02.719Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-45658517DFB0CEDDB8583C10",
+                "claim_id": "MLS-CLM-075EE5DD2FC105F114849BC5",
+                "source_id": "MLS-SRC-9A96AF07DDB82D9F5E82",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Also; Too\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:38:02.889Z"
+              },
+              {
+                "link_id": "MLS-LNK-0DCC92134518D8451B7B7ABF",
+                "claim_id": "MLS-CLM-138CBA46CE0A4D3DE3637C65",
+                "source_id": "MLS-SRC-7F3BC9BDFB81B130AF89",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"In writing\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:38:03.135Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "917bae1fca40b5ab924252a642f46063ee2741d3feed384533780abe6d0dcdf5",
+          "verifiedAt": "2026-09-23T09:39:02.710Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-72BDB8ACAE17344BEA20D1D8",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0652",
+            "article_generated_at": "2026-09-17T12:11:12.920Z",
+            "article_hash": "15200fe4a568a79ba9be8888a9964ffc3bb4ae8f29331ef1f42584b5ff1c1d1d",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:39:02.710Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:39:02.710Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-72BDB8ACAE17344BEA20D1D8",
+            "code": "MLS-V01-0652",
+            "article_generated_at": "2026-09-17T12:11:12.920Z",
+            "article_hash": "15200fe4a568a79ba9be8888a9964ffc3bb4ae8f29331ef1f42584b5ff1c1d1d",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "917bae1fca40b5ab924252a642f46063ee2741d3feed384533780abe6d0dcdf5",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:39:02.710Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 54,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 142,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 56,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:39:05.755Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V01-0728",
+            "articleGeneratedAt": "2026-09-17T22:51:16.933Z",
+            "articleHash": "547a37899e4b45c6a4de294f7763e375fedb49a97563539ca85977f993c89a90",
+            "language": "ingles",
+            "languageName": "Inglés",
+            "title": "have got frente a have",
+            "level": "B1",
+            "part": "Registro, variación y norma — Register, variation, and standard usage",
+            "chapter": "Variedades del inglés — Varieties of English"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "ingles",
+            "regionalScope": "Inglés internacional; documentar diferencias regionales cuando sean materialmente relevantes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No existe una única autoridad normativa global para todo el inglés; la fuerza depende del tipo de claim y la fuente."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 2,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-3F5042D5F1586E310384BC19",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-4C85BAEB88798780878E8039",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V01-0728",
+              "articleGeneratedAt": "2026-09-17T22:51:16.933Z",
+              "articleHash": "547a37899e4b45c6a4de294f7763e375fedb49a97563539ca85977f993c89a90",
+              "language": "ingles",
+              "languageName": "Inglés",
+              "title": "have got frente a have",
+              "level": "B1",
+              "part": "Registro, variación y norma — Register, variation, and standard usage",
+              "chapter": "Variedades del inglés — Varieties of English"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-3F5042D5F1586E310384BC19",
+                "code": "MLS-V01-0728",
+                "article_generated_at": "2026-09-17T22:51:16.933Z",
+                "article_hash": "547a37899e4b45c6a4de294f7763e375fedb49a97563539ca85977f993c89a90",
+                "section_key": "En pocas palabras",
+                "summary": "Have and have got can both express possession, relationships and characteristics; have got is generally more informal.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:38:04.698Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-4C85BAEB88798780878E8039",
+                "code": "MLS-V01-0728",
+                "article_generated_at": "2026-09-17T22:51:16.933Z",
+                "article_hash": "547a37899e4b45c6a4de294f7763e375fedb49a97563539ca85977f993c89a90",
+                "section_key": "Cómo funciona",
+                "summary": "For possession, have got is especially common in spoken British English, while American English more often prefers have.",
+                "claim_type": "regional_variation",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:38:04.865Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-032D58A64219B38FF0B0D9CF",
+                "claim_id": "MLS-CLM-3F5042D5F1586E310384BC19",
+                "source_id": "MLS-SRC-44709F6B029822859FCC",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Have got and have\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:38:05.039Z"
+              },
+              {
+                "link_id": "MLS-LNK-FE294A923AEED8674BC97C3F",
+                "claim_id": "MLS-CLM-4C85BAEB88798780878E8039",
+                "source_id": "MLS-SRC-3F5018FB4B9B185155D8",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Have and have got\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:38:05.300Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "7f86bc0a4cc58e2aa4772d1672f215110c199673f3e3bd98046a3d395f5fe874",
+          "verifiedAt": "2026-09-23T09:39:05.958Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-4EB720B0EE285411118BF205",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V01-0728",
+            "article_generated_at": "2026-09-17T22:51:16.933Z",
+            "article_hash": "547a37899e4b45c6a4de294f7763e375fedb49a97563539ca85977f993c89a90",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:39:05.958Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:39:05.958Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-4EB720B0EE285411118BF205",
+            "code": "MLS-V01-0728",
+            "article_generated_at": "2026-09-17T22:51:16.933Z",
+            "article_hash": "547a37899e4b45c6a4de294f7763e375fedb49a97563539ca85977f993c89a90",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "7f86bc0a4cc58e2aa4772d1672f215110c199673f3e3bd98046a3d395f5fe874",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after claim-specific source matching and citation-ready R33 proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:39:05.958Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 54,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 142,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 56,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:39:08.878Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T09:39:08.878Z",
+  "commandFile": "mls chat bridge/commands/command 0301.json"
+}
