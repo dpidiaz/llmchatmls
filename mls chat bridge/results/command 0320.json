@@ -1,0 +1,152 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "GATE100-DE-0951-APA-FIX-20260923-A",
+    "requested": 1,
+    "processed": 1,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0951",
+          "article": {
+            "code": "MLS-V05-0951",
+            "articleGeneratedAt": "2026-09-19T09:00:46.390Z",
+            "articleHash": "fe2f96d1de46d035a09fd79c64c7daba195ac7e66a299c151d975e8da67f0200",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Rechtssprache",
+            "level": "C1",
+            "part": "Alemán profesional y variación oral/escrita — Berufsdeutsch und mediale Variation",
+            "chapter": "Alemán profesional, administrativo y jurídico — Berufs-, Verwaltungs- und Rechtssprache"
+          },
+          "state": {
+            "code": "MLS-V05-0951",
+            "article_generated_at": "2026-09-19T09:00:46.390Z",
+            "article_hash": "fe2f96d1de46d035a09fd79c64c7daba195ac7e66a299c151d975e8da67f0200",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:19:07.038Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "heidelberg-rechtssprache": "MLS-SRC-1E641B4EA36D9177EBD8"
+            },
+            "claims": {
+              "c1": "MLS-CLM-DCBFABAC3B1993309B243961",
+              "c2": "MLS-CLM-E6B70773B187FE12C2CEF189"
+            }
+          },
+          "links": [
+            "MLS-LNK-67999AE1586449405869D076",
+            "MLS-LNK-0C9C829DCAD2F6A1A2F1FDF7"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 1,
+            "claimsCreated": 0,
+            "claimsReused": 2,
+            "linksCreated": 0,
+            "linksReused": 2,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "heidelberg-rechtssprache",
+                "sourceId": "MLS-SRC-1E641B4EA36D9177EBD8",
+                "created": false,
+                "updated": true,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-DCBFABAC3B1993309B243961",
+                "created": false,
+                "reused": true
+              },
+              {
+                "clientId": "c2",
+                "claimId": "MLS-CLM-E6B70773B187FE12C2CEF189",
+                "created": false,
+                "reused": true
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-67999AE1586449405869D076",
+                "created": false,
+                "reused": true
+              },
+              {
+                "linkId": "MLS-LNK-0C9C829DCAD2F6A1A2F1FDF7",
+                "created": false,
+                "reused": true
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 32,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 59,
+              "d1RowsWritten": 4,
+              "observedRowsRead": 31,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:19:07.673Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T10:19:07.673Z",
+  "commandFile": "mls chat bridge/commands/command 0320.json"
+}
