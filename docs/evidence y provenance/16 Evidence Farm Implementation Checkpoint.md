@@ -1,83 +1,184 @@
 # R33 Evidence Farm R1 — Implementation Checkpoint
 
 **Fecha:** 2026-09-23 UTC  
-**Branch:** `r33-evidence-farm-r1`  
-**PR:** #669  
-**Estado:** IMPLEMENTADO / TESTS ESPECÍFICOS PASS / PENDIENTE CHECK GENERAL Y MERGE
+**Estado:** IMPLEMENTADO / MERGED / SMOKE TEST PASS  
+**PR principal:** #669  
+**Hotfix:** #674
 
-## Objetivo
+## Resultado
 
-Permitir que múltiples chats trabajen simultáneamente en Evidence/Provenance R33 sin duplicar entradas ni colisionar comandos del Bridge.
+R33 Evidence Farm R1 quedó implementado en `main` para permitir trabajo Evidence/Provenance concurrente desde múltiples chats.
 
-## Implementado
+Commit principal de merge:
 
-- Control plane mediante GitHub Issues con leases, inspirado en MLS Farm.
-- Comando natural previsto: `R33 siguientes N`.
-- Claim canónico con `requestId` y `workerId` únicos.
+`8272fb89a715d843462018358fdd4610b088a658`
+
+Hotfix de cancelación:
+
+`9fa0d986600e1b2bb03e59020674224c72f8105a`
+
+## Capacidades activas
+
+- Comando natural: `R33 siguientes N`.
+- Claim con `requestId` y `workerId` únicos.
 - Claim TTL: 90 s.
 - ACK deadline: 5 min.
-- Lease móvil tras ACK: 60 min.
-- Heartbeat, checkpoint, finish, cancel y reap.
+- Lease móvil después de ACK: 60 min.
+- Heartbeat.
 - Checkpoints idempotentes de 1–10 entradas.
-- Estados terminales del ledger: `verified` y `exception`.
+- `finish`.
+- `cancel`.
+- `reap`.
+- Ledger persistente por pool.
+- Protección contra solapamiento entre chats.
 - Protección contra `RESULT_HASH_CONFLICT`.
-- Prohibición explícita de fabricar `REVIEWED` humano.
-- Scheduler y worker-event handler GitHub-only; no usan D1.
-- Pool explícito/versionado; un claim nunca puede salir del pool activo.
-- Pool inicial: `MLS-R33-CORRECTION-REPEAT-100`, 100 entradas frescas, 10 por idioma.
-- Gate 500 permanece bloqueado (`gate500Authorized: false`).
-- Bridge commands namespaced:
-  `mls chat bridge/commands/r33-farm/<poolId>/<batchId>/<workerId>/<name>.json`
-- Bridge result path espejo requerido por cada checkpoint.
-- MLS Chat Bridge endurecido con hasta 4 intentos de fetch/rebase/push para resultados bajo concurrencia.
-- Protocol R1 documentado en `MLS R32 EDITORIAL/R33 Evidence Farm Protocol R1.md`.
+- Prohibición de fabricar `REVIEWED` humano.
+- Control plane GitHub-only: 0 interacción D1/Cloudflare.
+- Bridge commands namespaced por pool, batch y worker.
+- Bridge result path del propio namespace obligatorio para checkpoints.
+- MLS Chat Bridge endurecido con 4 intentos de fetch/rebase/push ante concurrencia.
 
-## Archivos principales
+## Pool activo
 
-- `MLS R32 EDITORIAL/evidence farm core.js`
-- `scripts/R33 evidence farm scheduler.cjs`
-- `scripts/R33 evidence farm worker.cjs`
-- `.github/workflows/R33 Evidence Farm Scheduler.yml`
-- `.github/workflows/R33 Evidence Farm Worker Events.yml`
-- `.github/workflows/R33 Evidence Farm Tests.yml`
-- `test/r33 evidence farm.test.cjs`
-- `docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json`
+`MLS-R33-CORRECTION-REPEAT-100`
 
-## Validación
+Manifiesto:
 
-PR #669 abrió la suite específica.
+`docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json`
 
-Primera corrida:
-- 11/12 PASS.
-- 1 fallo de test por fixture incorrecta: el batch de conflicto tenía una sola entrada y quedaba `readyToClose` antes del retry.
-- No fue fallo del core.
-
-Corrección:
-- fixture cambiada a dos entradas para mantener lease activo.
-
-Segunda corrida:
-- **12/12 PASS**.
-- Workflow `R33 Evidence Farm Tests`: **success**.
-
-## Seguridad del gate
-
-El Gate 100 Final Report mantiene:
+Propiedades:
 
 ```yaml
-Gate100:
-  editorial: PASS
-  scalability: CORRECT_AND_REPEAT
-  gate500Authorized: false
+entries: 100
+languages: 10
+entriesPerLanguage: 10
+freshVsPilot20: true
+freshVsGate100: true
+active: true
+gate500Authorized: false
 ```
 
-Por ello Evidence Farm activa únicamente el Correction Repeat. No existe ruta implícita desde `R33 siguientes N` hacia Gate 500.
+El pool ejecuta únicamente el Correction Repeat autorizado por el Gate 100 Final Report.
 
-## Siguiente paso
+**Gate 500 sigue bloqueado.**
 
-1. Confirmar workflow general del PR.
-2. Fusionar PR #669 si queda verde.
-3. Verificar workflows presentes en `main`.
-4. Ejecutar smoke test del control plane con claim pequeño/cancel o claim real del Correction Repeat.
-5. A partir de ahí múltiples chats pueden usar `R33 siguientes 25`.
+## Bridge namespace
 
-Este archivo es el punto de reanudación persistente si la sesión de chat se interrumpe.
+Cada worker debe crear comandos exclusivamente bajo:
+
+`mls chat bridge/commands/r33-farm/<poolId>/<batchId>/<workerId>/<name>.json`
+
+Resultado espejo:
+
+`mls chat bridge/results/r33-farm/<poolId>/<batchId>/<workerId>/<name>.json`
+
+Se elimina la necesidad de coordinar números globales como `command 0330.json`.
+
+## Pruebas
+
+Suite específica:
+
+`R33 Evidence Farm Tests`
+
+Resultado final antes del merge principal:
+
+- 12/12 PASS.
+
+Hotfix de cancelación añadió regresión adicional:
+
+- cancel explícito tiene precedencia sobre expiry al calcular `releaseReason`.
+- suite específica PASS.
+- check general del repositorio PASS.
+- `test:chat-editorial` PASS.
+- `test:evidence` PASS.
+- canonical tools PASS.
+- QA baseline PASS.
+- predeploy PASS.
+- recovery verify PASS.
+- deploy-contract PASS.
+- `npm run check` PASS.
+
+## Smoke test multi-chat real
+
+Claims simultáneos:
+
+- Issue #670 → `MLS-V10-0093`
+- Issue #671 → `MLS-V10-0186`
+
+Resultado:
+
+- códigos distintos;
+- 0 solapamiento;
+- ambos leases reconocidos por heartbeat;
+- ambos cancelados;
+- ambos códigos liberados;
+- ningún resultado terminal escrito.
+
+El primer smoke detectó una semántica incorrecta en `releaseReason`: cancelación quedaba etiquetada como `LEASE_TIMEOUT`. No afectaba la liberación ni el ledger, pero se corrigió en PR #674.
+
+## Smoke test post-hotfix
+
+Issue #675:
+
+- asignada: `MLS-V10-0093`;
+- heartbeat aceptado;
+- cancel aceptado;
+- reap: Issue #676.
+
+Resultado canónico:
+
+```yaml
+status: cancelled
+releaseReason: WORKER_CANCELLED
+releasedCodes:
+  - MLS-V10-0093
+```
+
+Estado final del pool tras smoke:
+
+```yaml
+total: 100
+terminal: 0
+verified: 0
+exceptions: 0
+leased: 0
+activeBatches: 0
+partialResults: 0
+pending: 100
+gate500Authorized: false
+```
+
+Ledger operativo: Issue #672.
+
+## Protocolo
+
+Contrato durable:
+
+`MLS R32 EDITORIAL/R33 Evidence Farm Protocol R1.md`
+
+Secuencia de cada chat:
+
+`claim → heartbeat → Evidence/Bridge namespaced → checkpoint(s) → finish`
+
+Si el chat no puede continuar:
+
+`cancel → reap`
+
+## Estado de continuidad
+
+La implementación está lista para uso real.
+
+Varios chats pueden abrir simultáneamente:
+
+`R33 siguientes 25`
+
+Cada chat debe recibir un lote distinto del pool Correction Repeat.
+
+La conversación no es fuente de verdad. Para reanudar desde cualquier chat se debe leer:
+
+1. manifiesto del pool;
+2. ledger Issue #672;
+3. batches activos `[R33 Evidence Farm][LEASED]`;
+4. resultados namespaced del Bridge.
+
+Este checkpoint permite reanudación exacta si cualquier chat se interrumpe.
