@@ -1,0 +1,3681 @@
+{
+  "success": false,
+  "httpStatus": 409,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "R33-680-ja-01",
+    "requested": 30,
+    "processed": 30,
+    "failures": 10,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:22.840Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0103",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:23.664Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0103",
+            "articleGeneratedAt": "2026-09-20T00:36:48.766Z",
+            "articleHash": "daac32d89f39fcdaa00bfc9cac4621269d961abe0b1252b79ca7678fa7576e41",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "へ dirección",
+            "level": "A1",
+            "part": "Partículas y relaciones — 助詞と関係",
+            "chapter": "Objeto y partículas centrales: を/に/で/へ — 目的語と主要助詞：を／に／で／へ"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-3E8648BEA07D2A395BFAED32",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0103",
+              "articleGeneratedAt": "2026-09-20T00:36:48.766Z",
+              "articleHash": "daac32d89f39fcdaa00bfc9cac4621269d961abe0b1252b79ca7678fa7576e41",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "へ dirección",
+              "level": "A1",
+              "part": "Partículas y relaciones — 助詞と関係",
+              "chapter": "Objeto y partículas centrales: を/に/で/へ — 目的語と主要助詞：を／に／で／へ"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-3E8648BEA07D2A395BFAED32",
+                "code": "MLS-V06-0103",
+                "article_generated_at": "2026-09-20T00:36:48.766Z",
+                "article_hash": "daac32d89f39fcdaa00bfc9cac4621269d961abe0b1252b79ca7678fa7576e41",
+                "section_key": "En pocas palabras",
+                "summary": "日本語の助詞へは、移動の向かう方向・行き先を示し、場所名詞などの後に置かれる。",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:26.652Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-8850C9056FF7F5A94FE65CB0",
+                "claim_id": "MLS-CLM-3E8648BEA07D2A395BFAED32",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:26.848Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "3820c0611f7ab856f459227d68a5c23d2ebb3a9d2e6b606fb4f6139a721b33f0",
+          "verifiedAt": "2026-09-23T15:16:27.827Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-D8163A2E20A8EF0D311F8D27",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0103",
+            "article_generated_at": "2026-09-20T00:36:48.766Z",
+            "article_hash": "daac32d89f39fcdaa00bfc9cac4621269d961abe0b1252b79ca7678fa7576e41",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:27.827Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:27.827Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-D8163A2E20A8EF0D311F8D27",
+            "code": "MLS-V06-0103",
+            "article_generated_at": "2026-09-20T00:36:48.766Z",
+            "article_hash": "daac32d89f39fcdaa00bfc9cac4621269d961abe0b1252b79ca7678fa7576e41",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "3820c0611f7ab856f459227d68a5c23d2ebb3a9d2e6b606fb4f6139a721b33f0",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:27.827Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:24.931Z"
+      },
+      {
+        "index": 3,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:25.264Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0205",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:26.115Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0205",
+            "articleGeneratedAt": "2026-09-19T09:21:34.470Z",
+            "articleHash": "2d041d992089d78b4daf36a2f5f6fe1adae1cdbc157fa426df831ebbfb750144",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "ところだ a punto/en medio/acaba de",
+            "level": "B2",
+            "part": "Partículas y relaciones — 助詞と関係",
+            "chapter": "Partículas relacionales: と/も/の/から/まで — 関係助詞：と／も／の／から／まで"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-9BE555D3EEF68B21B34D34FE",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0205",
+              "articleGeneratedAt": "2026-09-19T09:21:34.470Z",
+              "articleHash": "2d041d992089d78b4daf36a2f5f6fe1adae1cdbc157fa426df831ebbfb750144",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "ところだ a punto/en medio/acaba de",
+              "level": "B2",
+              "part": "Partículas y relaciones — 助詞と関係",
+              "chapter": "Partículas relacionales: と/も/の/から/まで — 関係助詞：と／も／の／から／まで"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-9BE555D3EEF68B21B34D34FE",
+                "code": "MLS-V06-0205",
+                "article_generated_at": "2026-09-19T09:21:34.470Z",
+                "article_hash": "2d041d992089d78b4daf36a2f5f6fe1adae1cdbc157fa426df831ebbfb750144",
+                "section_key": "En pocas palabras",
+                "summary": "〜ところだは直前の動詞形に応じて、動作の開始直前・進行中・終了直後という時間的段階を表す。",
+                "claim_type": "tense_aspect_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:28.251Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-14D8B882B257EF4C2A0623BC",
+                "claim_id": "MLS-CLM-9BE555D3EEF68B21B34D34FE",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:28.443Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "5528f184d33f1c8948e78973453e1f645c984aabe4b502b05a5fb32e056b2c02",
+          "verifiedAt": "2026-09-23T15:16:30.936Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-18AA31C0057FA1D1A6CBAF64",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0205",
+            "article_generated_at": "2026-09-19T09:21:34.470Z",
+            "article_hash": "2d041d992089d78b4daf36a2f5f6fe1adae1cdbc157fa426df831ebbfb750144",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:30.936Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:30.936Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-18AA31C0057FA1D1A6CBAF64",
+            "code": "MLS-V06-0205",
+            "article_generated_at": "2026-09-19T09:21:34.470Z",
+            "article_hash": "2d041d992089d78b4daf36a2f5f6fe1adae1cdbc157fa426df831ebbfb750144",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "5528f184d33f1c8948e78973453e1f645c984aabe4b502b05a5fb32e056b2c02",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:30.936Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:27.387Z"
+      },
+      {
+        "index": 6,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:27.722Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0308",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:28.549Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0308",
+            "articleGeneratedAt": "2026-09-19T09:13:59.926Z",
+            "articleHash": "b12389b370fdc662f148d403240569701cc0c8cbd50ac131dad8f8778ffe8ae6",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "い形容詞 predicativo",
+            "level": "A1",
+            "part": "Adjetivos — 形容詞",
+            "chapter": "Adjetivos い y な — い形容詞・な形容詞"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-56F5246472B911F963597318",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0308",
+              "articleGeneratedAt": "2026-09-19T09:13:59.926Z",
+              "articleHash": "b12389b370fdc662f148d403240569701cc0c8cbd50ac131dad8f8778ffe8ae6",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "い形容詞 predicativo",
+              "level": "A1",
+              "part": "Adjetivos — 形容詞",
+              "chapter": "Adjetivos い y な — い形容詞・な形容詞"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-56F5246472B911F963597318",
+                "code": "MLS-V06-0308",
+                "article_generated_at": "2026-09-19T09:13:59.926Z",
+                "article_hash": "b12389b370fdc662f148d403240569701cc0c8cbd50ac131dad8f8778ffe8ae6",
+                "section_key": "En pocas palabras",
+                "summary": "い形容詞は述語として用いることができ、普通体ではだを伴わず、丁寧体ではですを添えることができる。",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:29.746Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-D1DECD4A90D4C4A0B42E8744",
+                "claim_id": "MLS-CLM-56F5246472B911F963597318",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:29.947Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "d74988ee089466fb814a4b8e54d0608d7ec02575709b1e805adeaba8bdee8bd4",
+          "verifiedAt": "2026-09-23T15:16:33.905Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-B3C77536253B94F2425B9A2E",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0308",
+            "article_generated_at": "2026-09-19T09:13:59.926Z",
+            "article_hash": "b12389b370fdc662f148d403240569701cc0c8cbd50ac131dad8f8778ffe8ae6",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:33.905Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:33.905Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-B3C77536253B94F2425B9A2E",
+            "code": "MLS-V06-0308",
+            "article_generated_at": "2026-09-19T09:13:59.926Z",
+            "article_hash": "b12389b370fdc662f148d403240569701cc0c8cbd50ac131dad8f8778ffe8ae6",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "d74988ee089466fb814a4b8e54d0608d7ec02575709b1e805adeaba8bdee8bd4",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:33.905Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:29.839Z"
+      },
+      {
+        "index": 9,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:30.167Z"
+      },
+      {
+        "index": 10,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0411",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:30.981Z"
+      },
+      {
+        "index": 11,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0411",
+            "articleGeneratedAt": "2026-09-19T21:15:37.921Z",
+            "articleHash": "d1df3eb99bdc5acb9df1143dc92955349be6a8de3e1dae3aeac65f796af2cd6f",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "つ contador nativo",
+            "level": "A2",
+            "part": "Número y comparación — 数・比較",
+            "chapter": "Numerales, clasificadores y contadores — 数詞・助数詞"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-A670C2D9B3E15942E1CA1167",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0411",
+              "articleGeneratedAt": "2026-09-19T21:15:37.921Z",
+              "articleHash": "d1df3eb99bdc5acb9df1143dc92955349be6a8de3e1dae3aeac65f796af2cd6f",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "つ contador nativo",
+              "level": "A2",
+              "part": "Número y comparación — 数・比較",
+              "chapter": "Numerales, clasificadores y contadores — 数詞・助数詞"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-A670C2D9B3E15942E1CA1167",
+                "code": "MLS-V06-0411",
+                "article_generated_at": "2026-09-19T21:15:37.921Z",
+                "article_hash": "d1df3eb99bdc5acb9df1143dc92955349be6a8de3e1dae3aeac65f796af2cd6f",
+                "section_key": "En pocas palabras",
+                "summary": "〜つの和語系数詞は一つから九つまで物を一般的に数えるのに用いられ、十は通常「とお」となる。",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:31.195Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-28AC24311DB9E4E47D399944",
+                "claim_id": "MLS-CLM-A670C2D9B3E15942E1CA1167",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:31.386Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "0493d40c29b0aa5549053cf65dd7b9a72e72a2751e79d903eb27dd1ff67a6e33",
+          "verifiedAt": "2026-09-23T15:16:36.961Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-8918F5DA30B7BF2E4EB34BD7",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0411",
+            "article_generated_at": "2026-09-19T21:15:37.921Z",
+            "article_hash": "d1df3eb99bdc5acb9df1143dc92955349be6a8de3e1dae3aeac65f796af2cd6f",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:36.961Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:36.961Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-8918F5DA30B7BF2E4EB34BD7",
+            "code": "MLS-V06-0411",
+            "article_generated_at": "2026-09-19T21:15:37.921Z",
+            "article_hash": "d1df3eb99bdc5acb9df1143dc92955349be6a8de3e1dae3aeac65f796af2cd6f",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "0493d40c29b0aa5549053cf65dd7b9a72e72a2751e79d903eb27dd1ff67a6e33",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:36.961Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:32.296Z"
+      },
+      {
+        "index": 12,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:32.638Z"
+      },
+      {
+        "index": 13,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0514",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:33.451Z"
+      },
+      {
+        "index": 14,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0514",
+            "articleGeneratedAt": "2026-09-19T09:22:46.421Z",
+            "articleHash": "55b672cc5c2ba035ad757af2369424e0fb8d24413ac7d6d14be9723f6fb142e5",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "〜てくれる",
+            "level": "B1",
+            "part": "Condición y benefacción — 条件・授受",
+            "chapter": "Dar y recibir: あげる/くれる/もらう — 授受表現：あげる・くれる・もらう"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-22B8234687FFD38975167741",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0514",
+              "articleGeneratedAt": "2026-09-19T09:22:46.421Z",
+              "articleHash": "55b672cc5c2ba035ad757af2369424e0fb8d24413ac7d6d14be9723f6fb142e5",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "〜てくれる",
+              "level": "B1",
+              "part": "Condición y benefacción — 条件・授受",
+              "chapter": "Dar y recibir: あげる/くれる/もらう — 授受表現：あげる・くれる・もらう"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-22B8234687FFD38975167741",
+                "code": "MLS-V06-0514",
+                "article_generated_at": "2026-09-19T09:22:46.421Z",
+                "article_hash": "55b672cc5c2ba035ad757af2369424e0fb8d24413ac7d6d14be9723f6fb142e5",
+                "section_key": "En pocas palabras",
+                "summary": "〜てくれるは、話し手または話し手側の人物に利益をもたらす行為を、受益者側の視点から表す授受表現である。",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:32.730Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-865639AF7A95F5DD5AEDD939",
+                "claim_id": "MLS-CLM-22B8234687FFD38975167741",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:32.929Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "91e010b2d4bf3648d798ce81a2622b378d99a2d2b2009900894cd6055c84d67d",
+          "verifiedAt": "2026-09-23T15:16:39.955Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-923548E8AF8B7F92879BF855",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0514",
+            "article_generated_at": "2026-09-19T09:22:46.421Z",
+            "article_hash": "55b672cc5c2ba035ad757af2369424e0fb8d24413ac7d6d14be9723f6fb142e5",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:39.955Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:39.955Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-923548E8AF8B7F92879BF855",
+            "code": "MLS-V06-0514",
+            "article_generated_at": "2026-09-19T09:22:46.421Z",
+            "article_hash": "55b672cc5c2ba035ad757af2369424e0fb8d24413ac7d6d14be9723f6fb142e5",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "91e010b2d4bf3648d798ce81a2622b378d99a2d2b2009900894cd6055c84d67d",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:39.955Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:34.785Z"
+      },
+      {
+        "index": 15,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:35.124Z"
+      },
+      {
+        "index": 16,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0616",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:35.955Z"
+      },
+      {
+        "index": 17,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0616",
+            "articleGeneratedAt": "2026-09-20T00:19:55.607Z",
+            "articleHash": "507f6511ac00c0f06c5eefea4a5ed7ed4e29576205309265354770bad9be6d02",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "〜ながら simultaneidad",
+            "level": "B1",
+            "part": "Relaciones lógicas y temporales — 論理関係・時間関係",
+            "chapter": "Finalidad, manera y estado — 目的・様態・状態"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-238E36761E276ABE401669F1",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0616",
+              "articleGeneratedAt": "2026-09-20T00:19:55.607Z",
+              "articleHash": "507f6511ac00c0f06c5eefea4a5ed7ed4e29576205309265354770bad9be6d02",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "〜ながら simultaneidad",
+              "level": "B1",
+              "part": "Relaciones lógicas y temporales — 論理関係・時間関係",
+              "chapter": "Finalidad, manera y estado — 目的・様態・状態"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-238E36761E276ABE401669F1",
+                "code": "MLS-V06-0616",
+                "article_generated_at": "2026-09-20T00:19:55.607Z",
+                "article_hash": "507f6511ac00c0f06c5eefea4a5ed7ed4e29576205309265354770bad9be6d02",
+                "section_key": "En pocas palabras",
+                "summary": "動詞連用形+ながらは、通常同一主体による二つの動作の同時進行を表し、後件が主要な動作として解釈される。",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:34.225Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-593D15F711CF1D4B81B6C606",
+                "claim_id": "MLS-CLM-238E36761E276ABE401669F1",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:34.410Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "ffc94bf559c59b93011f93f8b4562b77976af531a9a6c269ac2f2b9e0d51b062",
+          "verifiedAt": "2026-09-23T15:16:42.944Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-D17CD77DB0FC211B47E821DC",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0616",
+            "article_generated_at": "2026-09-20T00:19:55.607Z",
+            "article_hash": "507f6511ac00c0f06c5eefea4a5ed7ed4e29576205309265354770bad9be6d02",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:42.944Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:42.944Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-D17CD77DB0FC211B47E821DC",
+            "code": "MLS-V06-0616",
+            "article_generated_at": "2026-09-20T00:19:55.607Z",
+            "article_hash": "507f6511ac00c0f06c5eefea4a5ed7ed4e29576205309265354770bad9be6d02",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "ffc94bf559c59b93011f93f8b4562b77976af531a9a6c269ac2f2b9e0d51b062",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:42.944Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:37.287Z"
+      },
+      {
+        "index": 18,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:37.628Z"
+      },
+      {
+        "index": 19,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0719",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:38.483Z"
+      },
+      {
+        "index": 20,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0719",
+            "articleGeneratedAt": "2026-09-19T09:26:42.373Z",
+            "articleHash": "8cd1daca72f1ab924fd0f626c3b8aad14cff907d1c4d91ecadaf182e40980bf8",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "〜てしまう",
+            "level": "B2",
+            "part": "Verbos compuestos y auxiliares — 複合動詞・補助動詞",
+            "chapter": "Verbos compuestos y construcciones auxiliares — 複合動詞・補助動詞"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-0537C66DBEE672BB703EF99A",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0719",
+              "articleGeneratedAt": "2026-09-19T09:26:42.373Z",
+              "articleHash": "8cd1daca72f1ab924fd0f626c3b8aad14cff907d1c4d91ecadaf182e40980bf8",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "〜てしまう",
+              "level": "B2",
+              "part": "Verbos compuestos y auxiliares — 複合動詞・補助動詞",
+              "chapter": "Verbos compuestos y construcciones auxiliares — 複合動詞・補助動詞"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-0537C66DBEE672BB703EF99A",
+                "code": "MLS-V06-0719",
+                "article_generated_at": "2026-09-19T09:26:42.373Z",
+                "article_hash": "8cd1daca72f1ab924fd0f626c3b8aad14cff907d1c4d91ecadaf182e40980bf8",
+                "section_key": "En pocas palabras",
+                "summary": "〜てしまうは動作の完了を表し、文脈によっては残念・不本意などの話し手の評価を伴う。",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:35.686Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-C3800ECC461E6626ED983519",
+                "claim_id": "MLS-CLM-0537C66DBEE672BB703EF99A",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:35.878Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "35470b7ba03678b2da2b04cd8415192bed69addc92c83ab67b25e370d5850b12",
+          "verifiedAt": "2026-09-23T15:16:45.964Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-8DFC01713BA876AD647C9184",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0719",
+            "article_generated_at": "2026-09-19T09:26:42.373Z",
+            "article_hash": "8cd1daca72f1ab924fd0f626c3b8aad14cff907d1c4d91ecadaf182e40980bf8",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:45.964Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:45.964Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-8DFC01713BA876AD647C9184",
+            "code": "MLS-V06-0719",
+            "article_generated_at": "2026-09-19T09:26:42.373Z",
+            "article_hash": "8cd1daca72f1ab924fd0f626c3b8aad14cff907d1c4d91ecadaf182e40980bf8",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "35470b7ba03678b2da2b04cd8415192bed69addc92c83ab67b25e370d5850b12",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:45.964Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:39.769Z"
+      },
+      {
+        "index": 21,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:40.100Z"
+      },
+      {
+        "index": 22,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0823",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:40.940Z"
+      },
+      {
+        "index": 23,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0823",
+            "articleGeneratedAt": "2026-09-19T09:13:21.041Z",
+            "articleHash": "b554e738628297396804df6bdca739123737f581f9d2b16a3dd86905bb0ddfe3",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "Participio conjuntivo formal 〜し",
+            "level": "C2",
+            "part": "Escritura y discurso avanzado — 文章語・談話",
+            "chapter": "Japonés escrito, formal y académico — 書き言葉・文章語・学術語"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-FBBDE6CC2F35A5D26408EFFB",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0823",
+              "articleGeneratedAt": "2026-09-19T09:13:21.041Z",
+              "articleHash": "b554e738628297396804df6bdca739123737f581f9d2b16a3dd86905bb0ddfe3",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "Participio conjuntivo formal 〜し",
+              "level": "C2",
+              "part": "Escritura y discurso avanzado — 文章語・談話",
+              "chapter": "Japonés escrito, formal y académico — 書き言葉・文章語・学術語"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-FBBDE6CC2F35A5D26408EFFB",
+                "code": "MLS-V06-0823",
+                "article_generated_at": "2026-09-19T09:13:21.041Z",
+                "article_hash": "b554e738628297396804df6bdca739123737f581f9d2b16a3dd86905bb0ddfe3",
+                "section_key": "En pocas palabras",
+                "summary": "接続助詞しは、理由・特徴・事実などを並列・累加し、しばしば他にも理由や項目がある含みを持つ。",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:37.242Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-B8D12484AC2EF91374ED4D72",
+                "claim_id": "MLS-CLM-FBBDE6CC2F35A5D26408EFFB",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:37.446Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "37b2baf24487e87806dd4dd4dfdb6b95c0e0ffe7a968ad79217297592382657b",
+          "verifiedAt": "2026-09-23T15:16:48.928Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-A9DEE9A1030C1550820AA1D7",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0823",
+            "article_generated_at": "2026-09-19T09:13:21.041Z",
+            "article_hash": "b554e738628297396804df6bdca739123737f581f9d2b16a3dd86905bb0ddfe3",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:48.928Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:48.928Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-A9DEE9A1030C1550820AA1D7",
+            "code": "MLS-V06-0823",
+            "article_generated_at": "2026-09-19T09:13:21.041Z",
+            "article_hash": "b554e738628297396804df6bdca739123737f581f9d2b16a3dd86905bb0ddfe3",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "37b2baf24487e87806dd4dd4dfdb6b95c0e0ffe7a968ad79217297592382657b",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:48.928Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:42.262Z"
+      },
+      {
+        "index": 24,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:42.600Z"
+      },
+      {
+        "index": 25,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0924",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B75C7411BD5205533657",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:0839f6c1314f0c8f82a331848e599d88b1ce521186c9124c4fad66ef2f59230b",
+                "metadataHash": "d9e92352bee295a01a924d7ca70ac38716316cf7921bac8975e48950091c136a",
+                "sourceType": "reference_entry",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "サービス",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": null,
+                "publicationDate": null,
+                "publisher": "小学館",
+                "edition": null,
+                "containerTitle": "デジタル大辞泉",
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "日本語",
+                  "サービス",
+                  "語義",
+                  "顧客対応",
+                  "値引き",
+                  "無償"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:38.718Z",
+                "updatedAt": "2026-09-23T15:11:38.718Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "サービス (s. f.).. In *デジタル大辞泉*. 小学館.",
+                "text": "サービス (s. f.).. In デジタル大辞泉. 小学館.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:43.460Z"
+      },
+      {
+        "index": 26,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0924",
+            "articleGeneratedAt": "2026-09-19T09:32:41.207Z",
+            "articleHash": "cb2a730d4ae559eb123a1a58b89cfc313dd021e8ba915a19c6179e45159f1e0f",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "サービス ≠ servicio en todos los usos",
+            "level": "B1",
+            "part": "Contraste Guatemala–Japón — グアテマラと日本語の対照",
+            "chapter": "Préstamos engañosos y equivalencias falsas — 紛らわしい外来語・偽の対応"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-1DF76213EB869343B222EC91",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0924",
+              "articleGeneratedAt": "2026-09-19T09:32:41.207Z",
+              "articleHash": "cb2a730d4ae559eb123a1a58b89cfc313dd021e8ba915a19c6179e45159f1e0f",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "サービス ≠ servicio en todos los usos",
+              "level": "B1",
+              "part": "Contraste Guatemala–Japón — グアテマラと日本語の対照",
+              "chapter": "Préstamos engañosos y equivalencias falsas — 紛らわしい外来語・偽の対応"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-1DF76213EB869343B222EC91",
+                "code": "MLS-V06-0924",
+                "article_generated_at": "2026-09-19T09:32:41.207Z",
+                "article_hash": "cb2a730d4ae559eb123a1a58b89cfc313dd021e8ba915a19c6179e45159f1e0f",
+                "section_key": "En pocas palabras",
+                "summary": "日本語のサービスは英語 service と完全な一対一対応ではなく、商業場面では値引き・便宜・客への特典などを表す用法がある。",
+                "claim_type": "lexical_semantics",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:38.868Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-35A8B46F8BD9997252FB7D47",
+                "claim_id": "MLS-CLM-1DF76213EB869343B222EC91",
+                "source_id": "MLS-SRC-B75C7411BD5205533657",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:39.055Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "6c893c0f258326749a700fef509800e4262ecf4389775dd8f0738748c6d1b6db",
+          "verifiedAt": "2026-09-23T15:16:51.890Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-7A62A8478C362981D87590CC",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0924",
+            "article_generated_at": "2026-09-19T09:32:41.207Z",
+            "article_hash": "cb2a730d4ae559eb123a1a58b89cfc313dd021e8ba915a19c6179e45159f1e0f",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:51.890Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:51.890Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-7A62A8478C362981D87590CC",
+            "code": "MLS-V06-0924",
+            "article_generated_at": "2026-09-19T09:32:41.207Z",
+            "article_hash": "cb2a730d4ae559eb123a1a58b89cfc313dd021e8ba915a19c6179e45159f1e0f",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "6c893c0f258326749a700fef509800e4262ecf4389775dd8f0738748c6d1b6db",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:51.890Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:44.776Z"
+      },
+      {
+        "index": 27,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": false,
+          "error": "EVIDENCE_REVISION_CONFLICT",
+          "code": "EVIDENCE_REVISION_CONFLICT",
+          "telemetry": {
+            "d1": {
+              "queries": 2,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 2,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 2,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:45.123Z"
+      },
+      {
+        "index": 28,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-1027",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:45.948Z"
+      },
+      {
+        "index": 29,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-1027",
+            "articleGeneratedAt": "2026-09-19T09:17:44.043Z",
+            "articleHash": "7ea6a725466c4e982078f65f9ef67c5bc73daef404a651b809870b83b8eec0fa",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "Variación legítima vs error",
+            "level": "C2",
+            "part": "Dominio avanzado — 高度な運用",
+            "chapter": "Norma, estilo y elección avanzada C2 — 規範・文体・高度な選択 C2"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-023F825674F5BAD5A61AA9DD",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-1027",
+              "articleGeneratedAt": "2026-09-19T09:17:44.043Z",
+              "articleHash": "7ea6a725466c4e982078f65f9ef67c5bc73daef404a651b809870b83b8eec0fa",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "Variación legítima vs error",
+              "level": "C2",
+              "part": "Dominio avanzado — 高度な運用",
+              "chapter": "Norma, estilo y elección avanzada C2 — 規範・文体・高度な選択 C2"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-023F825674F5BAD5A61AA9DD",
+                "code": "MLS-V06-1027",
+                "article_generated_at": "2026-09-19T09:17:44.043Z",
+                "article_hash": "7ea6a725466c4e982078f65f9ef67c5bc73daef404a651b809870b83b8eec0fa",
+                "section_key": "En pocas palabras",
+                "summary": "日本語には文体・場面・地域などに応じた体系的な変異があり、標準的な一形式との差だけで直ちに誤用とは判断できない。",
+                "claim_type": "regional_variation",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:40.362Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-FBA37B6D1FD144F735015F15",
+                "claim_id": "MLS-CLM-023F825674F5BAD5A61AA9DD",
+                "source_id": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:40.546Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "125c7149baadcf8c3c56dfaa3e59b31813a412fd7ec547d52fc3b4d51d7177ef",
+          "verifiedAt": "2026-09-23T15:16:54.949Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-ED0B6EFFC7148EBF01BD376C",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-1027",
+            "article_generated_at": "2026-09-19T09:17:44.043Z",
+            "article_hash": "7ea6a725466c4e982078f65f9ef67c5bc73daef404a651b809870b83b8eec0fa",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:16:54.949Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:16:54.949Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-ED0B6EFFC7148EBF01BD376C",
+            "code": "MLS-V06-1027",
+            "article_generated_at": "2026-09-19T09:17:44.043Z",
+            "article_hash": "7ea6a725466c4e982078f65f9ef67c5bc73daef404a651b809870b83b8eec0fa",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "125c7149baadcf8c3c56dfaa3e59b31813a412fd7ec547d52fc3b4d51d7177ef",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": null,
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": null,
+            "run_id": "R33-EVIDENCE-FARM-000680",
+            "created_at": "2026-09-23T15:16:54.949Z"
+          },
+          "reviewCreated": false,
+          "reused": true,
+          "telemetry": {
+            "d1": {
+              "queries": 20,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 42,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 15,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:23:47.349Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T15:23:47.349Z",
+  "commandFile": "mls chat bridge/commands/r33-farm/MLS-R33-CORRECTION-REPEAT-100/R33-EVIDENCE-FARM-000680/chatgpt-20260923-0854-a/japanese-propose-verify-01.json"
+}
