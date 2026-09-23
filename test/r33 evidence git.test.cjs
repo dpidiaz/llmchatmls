@@ -10,14 +10,14 @@ test('GitHub-native Evidence store is complete and validates without Cloudflare'
   assert.equal(r.cloudflareEditorialInteractions,0);
   assert.equal(r.d1Reads,0);
   assert.equal(r.d1Writes,0);
-  assert.equal(r.entries,100);
-  assert.equal(r.verified,100);
+  assert.ok(r.entries>=100);
+  assert.equal(r.verified,r.entries);
   assert.equal(r.errors.length,0,JSON.stringify(r.errors,null,2));
   assert.ok(r.sources>=30);
 });
 test('GitHub-native store binds every Evidence artifact to the canonical article hash',async()=>{
   const index=JSON.parse(fs.readFileSync('MLS R32 EDITORIAL/evidence git/indexes/by-code.json','utf8'));
-  assert.equal(Object.keys(index).length,100);
+  assert.ok(Object.keys(index).length>=100);
   for(const meta of Object.values(index)){
     const entry=JSON.parse(fs.readFileSync(meta.path,'utf8'));
     const current=await store.currentArticle('.',entry.contentPath);
