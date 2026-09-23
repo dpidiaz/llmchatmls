@@ -590,7 +590,7 @@ test('selection never silently reuses unresolved or preserved staging states', (
 test('workflow YAML has one deploy and one GitHub-native Evidence verification step', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
   assert.equal((workflow.match(/name: Desplegar en produccion/g)||[]).length,1);
-  assert.equal((workflow.match(/name: Verificar Evidence visible en produccion/g)||[]).length,1);
+  assert.equal((workflow.match(/name: Verificar Evidence GitHub-native en produccion/g)||[]).length,1);
   assert.equal((workflow.match(/name: Crear snapshot MLS Staging del deploy/g)||[]).length,0);
   assert.equal((workflow.match(/name: Verificar Action editorial sin crear lotes/g)||[]).length,0);
   assert.match(workflow,/\/data\/evidence\/by-code\/MLS-V10-0093\.json/);
