@@ -31,11 +31,9 @@ function topicMatches(source,topics){
 }
 function tierWeight(tier){return ({A:4,B:3,C:2,D:1})[String(tier||'').toUpperCase()]||0;}
 
-async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={}){
+async function reusableSourcePool(env,{language=''}={}){
   await registry.ensureEvidenceDb(env);
   const lang=clean(language).toLowerCase();
-  const wanted=normalizeTopics(topics);
-  const max=Math.max(1,Math.min(50,Number(limit)||12));
   const rows=await env.WIKI_DB.prepare(`
     SELECT s.*, COUNT(DISTINCT c.code) AS entry_usage, COUNT(DISTINCT l.link_id) AS link_usage
     FROM wiki_sources s
@@ -47,10 +45,22 @@ async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={})
     ORDER BY entry_usage DESC, link_usage DESC, s.updated_at DESC
     LIMIT 200
   `).bind(lang,lang).all();
-  const candidates=(rows.results||[]).map(row=>{
-    const source=registry.rowToSource(row);
+  return {
+    language:lang||null,
+    rows:(rows.results||[]).map(row=>({
+      source:registry.rowToSource(row),
+      usage:{entries:Number(row.entry_usage||0),links:Number(row.link_usage||0)}
+    }))
+  };
+}
+
+function reusableSourceCandidatesFromPool(pool,{topics=[],limit=12}={}){
+  const wanted=normalizeTopics(topics);
+  const max=Math.max(1,Math.min(50,Number(limit)||12));
+  const candidates=(pool?.rows||[]).map(item=>{
+    const source=item.source;
     const matchedTopics=topicMatches(source,wanted);
-    const entryUsage=Number(row.entry_usage||0),linkUsage=Number(row.link_usage||0);
+    const entryUsage=Number(item.usage?.entries||0),linkUsage=Number(item.usage?.links||0);
     const candidateScore=matchedTopics.length*10+Math.min(entryUsage,20)*3+Math.min(linkUsage,30)+tierWeight(source.authorityTier);
     return {
       source,
@@ -66,7 +76,7 @@ async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={})
     .slice(0,max);
   return {
     version:SCALE_PREP_VERSION,
-    language:lang||null,
+    language:pool?.language||null,
     requestedTopics:wanted,
     candidates,
     candidateCount:candidates.length,
@@ -78,7 +88,12 @@ async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={})
   };
 }
 
-async function triageEntry(env,{code,topics=[],candidateLimit=8}={}){
+async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={}){
+  const pool=await reusableSourcePool(env,{language});
+  return reusableSourceCandidatesFromPool(pool,{topics,limit});
+}
+
+async function triageEntryInternal(env,{code,topics=[],candidateLimit=8}={},sharedPools=null){
   const version=await claims.currentArticleVersion(env,code);
   const context=await consumer.contextForEntry(env,version.code);
   let lane='needs_evidence';
@@ -90,7 +105,17 @@ async function triageEntry(env,{code,topics=[],candidateLimit=8}={}){
   const queryTopics=effectiveTopics.length?effectiveTopics:inferredTopics(version);
   let pool={candidates:[],candidateCount:0,requestedTopics:queryTopics,contract:{approved:false}};
   if(lane==='needs_evidence'||lane==='resume_existing'){
-    pool=await reusableSourceCandidates(env,{language:version.language||'',topics:queryTopics,limit:candidateLimit});
+    if(sharedPools){
+      const languageKey=clean(version.language).toLowerCase();
+      let sourcePool=sharedPools.get(languageKey);
+      if(!sourcePool){
+        sourcePool=await reusableSourcePool(env,{language:version.language||''});
+        sharedPools.set(languageKey,sourcePool);
+      }
+      pool=reusableSourceCandidatesFromPool(sourcePool,{topics:queryTopics,limit:candidateLimit});
+    }else{
+      pool=await reusableSourceCandidates(env,{language:version.language||'',topics:queryTopics,limit:candidateLimit});
+    }
   }
   let discoveryMode='external_discovery';
   if(lane==='complete')discoveryMode='none';
@@ -114,15 +139,19 @@ async function triageEntry(env,{code,topics=[],candidateLimit=8}={}){
   };
 }
 
+async function triageEntry(env,input={}){
+  return triageEntryInternal(env,input,null);
+}
+
 async function batchTriage(env,{entries=[],candidateLimit=8}={}){
   if(!Array.isArray(entries)||entries.length<1||entries.length>50)scaleError('INVALID_TRIAGE_BATCH',422,'entries debe contener entre 1 y 50 elementos.');
-  const seen=new Set(),items=[];
+  const seen=new Set(),items=[],sharedPools=new Map();
   for(const raw of entries){
     const code=clean(raw?.code).toUpperCase();
     if(!/^MLS-V\d{2}-\d{4}$/.test(code))scaleError('INVALID_ENTRY_CODE',422,'Código MLS inválido en batch triage.');
     if(seen.has(code))scaleError('DUPLICATE_ENTRY_CODE',422,'Código duplicado en batch triage.');
     seen.add(code);
-    items.push(await triageEntry(env,{code,topics:raw?.topics,candidateLimit}));
+    items.push(await triageEntryInternal(env,{code,topics:raw?.topics,candidateLimit},sharedPools));
   }
   const byLane=Object.fromEntries(TRIAGE_LANES.map(x=>[x,items.filter(i=>i.lane===x).length]));
   const byDiscovery=Object.fromEntries(DISCOVERY_MODES.map(x=>[x,items.filter(i=>i.discoveryMode===x).length]));
@@ -146,6 +175,8 @@ module.exports={
   DISCOVERY_MODES,
   normalizeTopics,
   inferredTopics,
+  reusableSourcePool,
+  reusableSourceCandidatesFromPool,
   reusableSourceCandidates,
   triageEntry,
   batchTriage
