@@ -1,0 +1,808 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "GATE100-PT-VERIFY-FINAL-20260923-A",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0351",
+            "articleGeneratedAt": "2026-09-18T05:33:37.963Z",
+            "articleHash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Conjugación y usos del verbo trazer",
+            "level": "B1",
+            "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+            "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-4714F26851C9EE95E096AC81",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-04B81CE94ACDA370DD49C3C7",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-0351",
+              "articleGeneratedAt": "2026-09-18T05:33:37.963Z",
+              "articleHash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Conjugación y usos del verbo trazer",
+              "level": "B1",
+              "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+              "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-4714F26851C9EE95E096AC81",
+                "code": "MLS-V02-0351",
+                "article_generated_at": "2026-09-18T05:33:37.963Z",
+                "article_hash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+                "section_key": "En pocas palabras",
+                "summary": "O verbo trazer apresenta formas irregulares como trago no presente e trouxe/trouxeram no pretérito perfeito.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:46:02.156Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-04B81CE94ACDA370DD49C3C7",
+                "code": "MLS-V02-0351",
+                "article_generated_at": "2026-09-18T05:33:37.963Z",
+                "article_hash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+                "section_key": "Cómo funciona",
+                "summary": "O paradigma de trazer inclui traga no presente do conjuntivo e trouxer no futuro do conjuntivo.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:46:02.327Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-1703A1555C6312C15FA89F07",
+                "claim_id": "MLS-CLM-4714F26851C9EE95E096AC81",
+                "source_id": "MLS-SRC-0C4D5DBDDA1771C0F31C",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"TEMPOS SIMPLES — INDICATIVO\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:46:02.498Z"
+              },
+              {
+                "link_id": "MLS-LNK-9C161DF840DC8A6CFA10EFD5",
+                "claim_id": "MLS-CLM-04B81CE94ACDA370DD49C3C7",
+                "source_id": "MLS-SRC-0C4D5DBDDA1771C0F31C",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"CONJUNTIVO\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:46:02.739Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "633e9798815a530a2f3d29d7bf266672b62b448c543f0812aded22f5f17520bf",
+          "verifiedAt": "2026-09-23T09:50:51.361Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-88CD960A91BF6E645BB99B16",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-0351",
+            "article_generated_at": "2026-09-18T05:33:37.963Z",
+            "article_hash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 3,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:50:51.361Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:50:51.361Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-88CD960A91BF6E645BB99B16",
+            "code": "MLS-V02-0351",
+            "article_generated_at": "2026-09-18T05:33:37.963Z",
+            "article_hash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+            "evidence_version": "1.0",
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "633e9798815a530a2f3d29d7bf266672b62b448c543f0812aded22f5f17520bf",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after APA metadata correction.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:50:51.361Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:50:58.941Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0850",
+            "articleGeneratedAt": "2026-09-18T17:15:52.349Z",
+            "articleHash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Cambio de adverbios de lugar",
+            "level": "B1",
+            "part": "Relativas, condicionales y discurso referido — Relativas, condicionais e discurso relatado",
+            "chapter": "Discurso directo, indirecto y secuencia temporal — Discurso direto, indireto e sequência temporal"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 2,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-6D80F1EFD11987ABEF37AB29",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-145D574B7656A180CB41FAAB",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-0850",
+              "articleGeneratedAt": "2026-09-18T17:15:52.349Z",
+              "articleHash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Cambio de adverbios de lugar",
+              "level": "B1",
+              "part": "Relativas, condicionales y discurso referido — Relativas, condicionais e discurso relatado",
+              "chapter": "Discurso directo, indirecto y secuencia temporal — Discurso direto, indireto e sequência temporal"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-6D80F1EFD11987ABEF37AB29",
+                "code": "MLS-V02-0850",
+                "article_generated_at": "2026-09-18T17:15:52.349Z",
+                "article_hash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+                "section_key": "En pocas palabras",
+                "summary": "No português brasileiro, aqui, aí, ali e lá integram um sistema de dêixis espacial relacionado com a posição do falante e do interlocutor.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:46:11.661Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-145D574B7656A180CB41FAAB",
+                "code": "MLS-V02-0850",
+                "article_generated_at": "2026-09-18T17:15:52.349Z",
+                "article_hash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+                "section_key": "Cómo funciona",
+                "summary": "No discurso indireto, os dêiticos espaciais podem manter-se quando o centro espacial continua o mesmo e mudar quando o relato parte de outro lugar; não há uma transformação automática aqui → lá em todos os contextos.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:46:11.825Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-A2F66977C114B3C3F0899492",
+                "claim_id": "MLS-CLM-6D80F1EFD11987ABEF37AB29",
+                "source_id": "MLS-SRC-DE1630A2B756591D8E8B",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Abstract\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:46:12.013Z"
+              },
+              {
+                "link_id": "MLS-LNK-9BEAD021DDE2AD7C2189C37A",
+                "claim_id": "MLS-CLM-145D574B7656A180CB41FAAB",
+                "source_id": "MLS-SRC-541A47507041A560728A",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:46:12.254Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "8b3c821e57cf890959d8c840f473d6ef5d373568a65062047f590fbd5836776b",
+          "verifiedAt": "2026-09-23T09:50:59.606Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-F154EAAE0064C1B72C6750F2",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-0850",
+            "article_generated_at": "2026-09-18T17:15:52.349Z",
+            "article_hash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 3,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:50:59.606Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:50:59.606Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-F154EAAE0064C1B72C6750F2",
+            "code": "MLS-V02-0850",
+            "article_generated_at": "2026-09-18T17:15:52.349Z",
+            "article_hash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+            "evidence_version": "1.0",
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "8b3c821e57cf890959d8c840f473d6ef5d373568a65062047f590fbd5836776b",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 2,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after APA metadata correction.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:50:59.606Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 54,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 142,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 56,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:51:08.171Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0950",
+            "articleGeneratedAt": "2026-09-18T18:09:36.584Z",
+            "articleHash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Sabe? como marcador interpersonal",
+            "level": "B1",
+            "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+            "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-1E49801CD31EC20D17CE26F9",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-5A2C8E5C6B555E0BC1807469",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-0950",
+              "articleGeneratedAt": "2026-09-18T18:09:36.584Z",
+              "articleHash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Sabe? como marcador interpersonal",
+              "level": "B1",
+              "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+              "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-1E49801CD31EC20D17CE26F9",
+                "code": "MLS-V02-0950",
+                "article_generated_at": "2026-09-18T18:09:36.584Z",
+                "article_hash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+                "section_key": "En pocas palabras",
+                "summary": "Sabe pode funcionar no português brasileiro como marcador pragmático/interacional, não apenas como verbo lexical pleno.",
+                "claim_type": "pragmatic_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:46:13.322Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-5A2C8E5C6B555E0BC1807469",
+                "code": "MLS-V02-0950",
+                "article_generated_at": "2026-09-18T18:09:36.584Z",
+                "article_hash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+                "section_key": "Cómo funciona",
+                "summary": "O marcador pragmático sabe participa da gestão do common ground e do alinhamento intersubjetivo entre interlocutores, incluindo usos afiliativos de polidez positiva.",
+                "claim_type": "pragmatic_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T09:46:13.486Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-9D7D874CCD8F2CF409DAAE3B",
+                "claim_id": "MLS-CLM-1E49801CD31EC20D17CE26F9",
+                "source_id": "MLS-SRC-33A23F57E0BD02BE2AEE",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Resumo\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:46:13.660Z"
+              },
+              {
+                "link_id": "MLS-LNK-105B2C8807AFDC491C4541E2",
+                "claim_id": "MLS-CLM-5A2C8E5C6B555E0BC1807469",
+                "source_id": "MLS-SRC-33A23F57E0BD02BE2AEE",
+                "support_type": "supports",
+                "locator_json": "{\"section\":\"Resumo\"}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T09:46:13.902Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "873603896ad9c871c4086082adc67dbfc693005de9fe97dbe897508f91502416",
+          "verifiedAt": "2026-09-23T09:51:08.803Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-C8C90B2C81F285F5844E4F2F",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-0950",
+            "article_generated_at": "2026-09-18T18:09:36.584Z",
+            "article_hash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 3,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T09:51:08.803Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T09:51:08.803Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-C8C90B2C81F285F5844E4F2F",
+            "code": "MLS-V02-0950",
+            "article_generated_at": "2026-09-18T18:09:36.584Z",
+            "article_hash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+            "evidence_version": "1.0",
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "873603896ad9c871c4086082adc67dbfc693005de9fe97dbe897508f91502416",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification after APA metadata correction.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T09:51:08.803Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:51:16.255Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T09:51:16.255Z",
+  "commandFile": "mls chat bridge/commands/command 0310.json"
+}
