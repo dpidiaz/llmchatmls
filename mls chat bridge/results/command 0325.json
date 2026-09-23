@@ -1,0 +1,3529 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "GATE100-JA-VERIFY-KO-PROPOSE-20260923-A",
+    "requested": 20,
+    "processed": 20,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0051",
+            "articleGeneratedAt": "2026-09-19T09:18:27.860Z",
+            "articleHash": "bb9430ad92b9ed0c4a8c365b24753818b67551fbeb8a4be8f426394eab14017d",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "Radicales como ayuda de reconocimiento",
+            "level": "A1",
+            "part": "Escritura y pronunciación — 文字と発音",
+            "chapter": "Kanji, lecturas y okurigana — 漢字・読み方・送り仮名"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-3348E38AE4D7238EF5A907BB",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0051",
+              "articleGeneratedAt": "2026-09-19T09:18:27.860Z",
+              "articleHash": "bb9430ad92b9ed0c4a8c365b24753818b67551fbeb8a4be8f426394eab14017d",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "Radicales como ayuda de reconocimiento",
+              "level": "A1",
+              "part": "Escritura y pronunciación — 文字と発音",
+              "chapter": "Kanji, lecturas y okurigana — 漢字・読み方・送り仮名"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-3348E38AE4D7238EF5A907BB",
+                "code": "MLS-V06-0051",
+                "article_generated_at": "2026-09-19T09:18:27.860Z",
+                "article_hash": "bb9430ad92b9ed0c4a8c365b24753818b67551fbeb8a4be8f426394eab14017d",
+                "section_key": "En pocas palabras",
+                "summary": "Los radicales forman parte de sistemas de índice radical-trazo usados para localizar ideogramas Han, por lo que pueden servir como ayuda de reconocimiento y búsqueda.",
+                "claim_type": "orthographic_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:37.707Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-A22AF986C9F1E0C37E626054",
+                "claim_id": "MLS-CLM-3348E38AE4D7238EF5A907BB",
+                "source_id": "MLS-SRC-71BBB28E33A472832362",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:37.960Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "a69287844cc3db60588fc4749f8e3a854ff5bb95f11d75540138479ccc13a5ea",
+          "verifiedAt": "2026-09-23T10:24:47.527Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-353EBD024FE68CF9DE84F83F",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0051",
+            "article_generated_at": "2026-09-19T09:18:27.860Z",
+            "article_hash": "bb9430ad92b9ed0c4a8c365b24753818b67551fbeb8a4be8f426394eab14017d",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:24:47.527Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:24:47.527Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-353EBD024FE68CF9DE84F83F",
+            "code": "MLS-V06-0051",
+            "article_generated_at": "2026-09-19T09:18:27.860Z",
+            "article_hash": "bb9430ad92b9ed0c4a8c365b24753818b67551fbeb8a4be8f426394eab14017d",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "a69287844cc3db60588fc4749f8e3a854ff5bb95f11d75540138479ccc13a5ea",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:24:47.527Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:24:50.395Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0151",
+            "articleGeneratedAt": "2026-09-19T09:10:37.362Z",
+            "articleHash": "cb719eab04a978e6a05873318d260d96799f80de71f66ae68a76df0cdd24b079",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "は reemplazando を: topicalización contrastiva",
+            "level": "C1",
+            "part": "Partículas y relaciones — 助詞と関係",
+            "chapter": "Objeto y partículas centrales: を/に/で/へ — 目的語と主要助詞：を／に／で／へ"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-C6E3B8A1F97191868999667C",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0151",
+              "articleGeneratedAt": "2026-09-19T09:10:37.362Z",
+              "articleHash": "cb719eab04a978e6a05873318d260d96799f80de71f66ae68a76df0cdd24b079",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "は reemplazando を: topicalización contrastiva",
+              "level": "C1",
+              "part": "Partículas y relaciones — 助詞と関係",
+              "chapter": "Objeto y partículas centrales: を/に/で/へ — 目的語と主要助詞：を／に／で／へ"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-C6E3B8A1F97191868999667C",
+                "code": "MLS-V06-0151",
+                "article_generated_at": "2026-09-19T09:10:37.362Z",
+                "article_hash": "cb719eab04a978e6a05873318d260d96799f80de71f66ae68a76df0cdd24b079",
+                "section_key": "En pocas palabras",
+                "summary": "En japonés, は puede marcar como tópico o contraste un constituyente que en una formulación neutra llevaría を, con un cambio en la estructura informativa.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:39.838Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-39346AD327646CE31FAB215C",
+                "claim_id": "MLS-CLM-C6E3B8A1F97191868999667C",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:40.088Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "37d9b8aa54de35ed638a475cfe0dfe27c7719e8c16e7142d542b407196b58710",
+          "verifiedAt": "2026-09-23T10:24:50.623Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-58DEEDC5CDD64074CC41B184",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0151",
+            "article_generated_at": "2026-09-19T09:10:37.362Z",
+            "article_hash": "cb719eab04a978e6a05873318d260d96799f80de71f66ae68a76df0cdd24b079",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:24:50.623Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:24:50.623Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-58DEEDC5CDD64074CC41B184",
+            "code": "MLS-V06-0151",
+            "article_generated_at": "2026-09-19T09:10:37.362Z",
+            "article_hash": "cb719eab04a978e6a05873318d260d96799f80de71f66ae68a76df0cdd24b079",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "37d9b8aa54de35ed638a475cfe0dfe27c7719e8c16e7142d542b407196b58710",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:24:50.623Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:24:53.399Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0251",
+            "articleGeneratedAt": "2026-09-19T09:28:41.881Z",
+            "articleHash": "1b4b9fc4af0751abc7807c175d9f5defe5a1da1861b9800f1826e38595fbd1d2",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "Contracción される de させられる en grupo I",
+            "level": "B2",
+            "part": "Predicación nominal y verbal — 名詞述語・動詞述語",
+            "chapter": "Clases verbales y formas básica/cortés — 動詞グループと普通形・丁寧形"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-D16B242EE33B4E497B72FEF8",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0251",
+              "articleGeneratedAt": "2026-09-19T09:28:41.881Z",
+              "articleHash": "1b4b9fc4af0751abc7807c175d9f5defe5a1da1861b9800f1826e38595fbd1d2",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "Contracción される de させられる en grupo I",
+              "level": "B2",
+              "part": "Predicación nominal y verbal — 名詞述語・動詞述語",
+              "chapter": "Clases verbales y formas básica/cortés — 動詞グループと普通形・丁寧形"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-D16B242EE33B4E497B72FEF8",
+                "code": "MLS-V06-0251",
+                "article_generated_at": "2026-09-19T09:28:41.881Z",
+                "article_hash": "1b4b9fc4af0751abc7807c175d9f5defe5a1da1861b9800f1826e38595fbd1d2",
+                "section_key": "En pocas palabras",
+                "summary": "En verbos del grupo I, la causativo-pasiva larga en -せられる admite en el uso corriente contracciones del tipo 書かせられる → 書かされる.",
+                "claim_type": "morphological_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:41.781Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-0B2C03BDBB7889A6BC38D559",
+                "claim_id": "MLS-CLM-D16B242EE33B4E497B72FEF8",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:42.041Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "0cff893962a3e771ffefead07c088435915edf74effff2d1967d53a2084130a4",
+          "verifiedAt": "2026-09-23T10:24:53.618Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-494BD081110CDFE55B7FE097",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0251",
+            "article_generated_at": "2026-09-19T09:28:41.881Z",
+            "article_hash": "1b4b9fc4af0751abc7807c175d9f5defe5a1da1861b9800f1826e38595fbd1d2",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:24:53.618Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:24:53.618Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-494BD081110CDFE55B7FE097",
+            "code": "MLS-V06-0251",
+            "article_generated_at": "2026-09-19T09:28:41.881Z",
+            "article_hash": "1b4b9fc4af0751abc7807c175d9f5defe5a1da1861b9800f1826e38595fbd1d2",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "0cff893962a3e771ffefead07c088435915edf74effff2d1967d53a2084130a4",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:24:53.618Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:24:56.267Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0351",
+            "articleGeneratedAt": "2026-09-19T09:18:10.517Z",
+            "articleHash": "54dca59fac753c8dd8c078d850cc9ba87d12ff6928ea1e86aa3f211d00777ec7",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "てみせる demostración de voluntad",
+            "level": "A2",
+            "part": "Forma て y aspecto — て形とアスペクト",
+            "chapter": "Aspecto: ている/てある/ておく/てしまう — アスペクト：ている・てある・ておく・てしまう"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-F7AA8C5C982A46677F019C99",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0351",
+              "articleGeneratedAt": "2026-09-19T09:18:10.517Z",
+              "articleHash": "54dca59fac753c8dd8c078d850cc9ba87d12ff6928ea1e86aa3f211d00777ec7",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "てみせる demostración de voluntad",
+              "level": "A2",
+              "part": "Forma て y aspecto — て形とアスペクト",
+              "chapter": "Aspecto: ている/てある/ておく/てしまう — アスペクト：ている・てある・ておく・てしまう"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-F7AA8C5C982A46677F019C99",
+                "code": "MLS-V06-0351",
+                "article_generated_at": "2026-09-19T09:18:10.517Z",
+                "article_hash": "54dca59fac753c8dd8c078d850cc9ba87d12ff6928ea1e86aa3f211d00777ec7",
+                "section_key": "En pocas palabras",
+                "summary": "La construcción 〜てみせる puede expresar que el hablante realizará una acción para demostrar que puede hacerlo, y con frecuencia aporta determinación o voluntad.",
+                "claim_type": "usage_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:43.794Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-E903DDE2C7F5E6033004BEC1",
+                "claim_id": "MLS-CLM-F7AA8C5C982A46677F019C99",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:44.093Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "2e1a6478592a71701e1510118a960c0136b9ed0aab5a542f2a3b174d923f0d76",
+          "verifiedAt": "2026-09-23T10:24:56.482Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-470868B190C8A30465D71C6D",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0351",
+            "article_generated_at": "2026-09-19T09:18:10.517Z",
+            "article_hash": "54dca59fac753c8dd8c078d850cc9ba87d12ff6928ea1e86aa3f211d00777ec7",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:24:56.482Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:24:56.482Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-470868B190C8A30465D71C6D",
+            "code": "MLS-V06-0351",
+            "article_generated_at": "2026-09-19T09:18:10.517Z",
+            "article_hash": "54dca59fac753c8dd8c078d850cc9ba87d12ff6928ea1e86aa3f211d00777ec7",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "2e1a6478592a71701e1510118a960c0136b9ed0aab5a542f2a3b174d923f0d76",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:24:56.482Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:24:59.171Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0451",
+            "articleGeneratedAt": "2026-09-19T21:20:49.354Z",
+            "articleHash": "9ea50f37dc37f24a19e2ee41f9d299686875723201435a3ab45a0b260f9c375a",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "〜予定だ",
+            "level": "B1",
+            "part": "Volición y capacidad — 意志・可能",
+            "chapter": "Deseo, intención y volitivo — 希望・意志・意向形"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-3FE079EB3DBB5B47516144EA",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0451",
+              "articleGeneratedAt": "2026-09-19T21:20:49.354Z",
+              "articleHash": "9ea50f37dc37f24a19e2ee41f9d299686875723201435a3ab45a0b260f9c375a",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "〜予定だ",
+              "level": "B1",
+              "part": "Volición y capacidad — 意志・可能",
+              "chapter": "Deseo, intención y volitivo — 希望・意志・意向形"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-3FE079EB3DBB5B47516144EA",
+                "code": "MLS-V06-0451",
+                "article_generated_at": "2026-09-19T21:20:49.354Z",
+                "article_hash": "9ea50f37dc37f24a19e2ee41f9d299686875723201435a3ab45a0b260f9c375a",
+                "section_key": "En pocas palabras",
+                "summary": "予定だ presenta una acción o situación como prevista o planificada, no como mero deseo.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:45.960Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-8274AFEEB1C43BF3E05C6136",
+                "claim_id": "MLS-CLM-3FE079EB3DBB5B47516144EA",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:46.228Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "e0e8dadfebb02cd1ac01f8882b8b1f13771bddfba421673834a42de04d0d5782",
+          "verifiedAt": "2026-09-23T10:24:59.382Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-154F39386ABF751CD13F90AA",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0451",
+            "article_generated_at": "2026-09-19T21:20:49.354Z",
+            "article_hash": "9ea50f37dc37f24a19e2ee41f9d299686875723201435a3ab45a0b260f9c375a",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:24:59.382Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:24:59.382Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-154F39386ABF751CD13F90AA",
+            "code": "MLS-V06-0451",
+            "article_generated_at": "2026-09-19T21:20:49.354Z",
+            "article_hash": "9ea50f37dc37f24a19e2ee41f9d299686875723201435a3ab45a0b260f9c375a",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "e0e8dadfebb02cd1ac01f8882b8b1f13771bddfba421673834a42de04d0d5782",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:24:59.382Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:02.119Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0550",
+            "articleGeneratedAt": "2026-09-19T09:18:03.807Z",
+            "articleHash": "7d7caf672f8baa2760f452b87e409f0203fea101341848cc1c3752cbcbbca9c4",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "〜ということ",
+            "level": "B1",
+            "part": "Nominalización y modificación — 名詞化・連体修飾",
+            "chapter": "Nominalización con の/こと — の・ことによる名詞化"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-5AECA12470606A1129F91344",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0550",
+              "articleGeneratedAt": "2026-09-19T09:18:03.807Z",
+              "articleHash": "7d7caf672f8baa2760f452b87e409f0203fea101341848cc1c3752cbcbbca9c4",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "〜ということ",
+              "level": "B1",
+              "part": "Nominalización y modificación — 名詞化・連体修飾",
+              "chapter": "Nominalización con の/こと — の・ことによる名詞化"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-5AECA12470606A1129F91344",
+                "code": "MLS-V06-0550",
+                "article_generated_at": "2026-09-19T09:18:03.807Z",
+                "article_hash": "7d7caf672f8baa2760f452b87e409f0203fea101341848cc1c3752cbcbbca9c4",
+                "section_key": "En pocas palabras",
+                "summary": "〜ということ nominaliza o empaqueta una proposición como contenido identificable, comparable según el contexto con 'el hecho de que' o 'la idea de que'.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:47.996Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-EA44CF2DF27B2343DB7A42E6",
+                "claim_id": "MLS-CLM-5AECA12470606A1129F91344",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:48.272Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "2c9f41a77944e7ec52c9269757811bb108e7f6fee3e071ecb95a32d45cc2416a",
+          "verifiedAt": "2026-09-23T10:25:02.338Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-62B01E6B7D98E554ECB0E62D",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0550",
+            "article_generated_at": "2026-09-19T09:18:03.807Z",
+            "article_hash": "7d7caf672f8baa2760f452b87e409f0203fea101341848cc1c3752cbcbbca9c4",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:25:02.338Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:02.338Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-62B01E6B7D98E554ECB0E62D",
+            "code": "MLS-V06-0550",
+            "article_generated_at": "2026-09-19T09:18:03.807Z",
+            "article_hash": "7d7caf672f8baa2760f452b87e409f0203fea101341848cc1c3752cbcbbca9c4",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "2c9f41a77944e7ec52c9269757811bb108e7f6fee3e071ecb95a32d45cc2416a",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:25:02.338Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:05.145Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0650",
+            "articleGeneratedAt": "2026-09-20T00:25:01.302Z",
+            "articleHash": "e3832d76d0d6f0368d6dc84d389a1714571b26719bd4c03663100fc6215c4b62",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "伝聞そうだ",
+            "level": "B2",
+            "part": "Modalidad y evidencialidad — モダリティ・証拠性",
+            "chapter": "Evidencialidad y apariencia: そう/よう/らしい — 証拠性・様態：そう・よう・らしい"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-E347E6CB2583D911E2FD63EC",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0650",
+              "articleGeneratedAt": "2026-09-20T00:25:01.302Z",
+              "articleHash": "e3832d76d0d6f0368d6dc84d389a1714571b26719bd4c03663100fc6215c4b62",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "伝聞そうだ",
+              "level": "B2",
+              "part": "Modalidad y evidencialidad — モダリティ・証拠性",
+              "chapter": "Evidencialidad y apariencia: そう/よう/らしい — 証拠性・様態：そう・よう・らしい"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-E347E6CB2583D911E2FD63EC",
+                "code": "MLS-V06-0650",
+                "article_generated_at": "2026-09-20T00:25:01.302Z",
+                "article_hash": "e3832d76d0d6f0368d6dc84d389a1714571b26719bd4c03663100fc6215c4b62",
+                "section_key": "En pocas palabras",
+                "summary": "El そうだ de transmisión informa contenido recibido de otra fuente y se distingue del そうだ de apariencia o inferencia visual.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:50.025Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-1A472AE2942777BAF837109B",
+                "claim_id": "MLS-CLM-E347E6CB2583D911E2FD63EC",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:50.315Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "b357e15182b9d7b22828fc468b08f0e7824fbab59db68aba8a9ac4aa81bf15b4",
+          "verifiedAt": "2026-09-23T10:25:05.390Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-2C5C683B6C4892E87B434DC7",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0650",
+            "article_generated_at": "2026-09-20T00:25:01.302Z",
+            "article_hash": "e3832d76d0d6f0368d6dc84d389a1714571b26719bd4c03663100fc6215c4b62",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:25:05.390Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:05.390Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-2C5C683B6C4892E87B434DC7",
+            "code": "MLS-V06-0650",
+            "article_generated_at": "2026-09-20T00:25:01.302Z",
+            "article_hash": "e3832d76d0d6f0368d6dc84d389a1714571b26719bd4c03663100fc6215c4b62",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "b357e15182b9d7b22828fc468b08f0e7824fbab59db68aba8a9ac4aa81bf15b4",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:25:05.390Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:08.182Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0750",
+            "articleGeneratedAt": "2026-09-19T09:18:44.597Z",
+            "articleHash": "3ee2eeba30557c13a2b8887d43928137d29b5efb3f1929d1b17af4d2ca2543ff",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "Humilde いただく: introducción",
+            "level": "B1",
+            "part": "Registro y keigo — 待遇表現・敬語",
+            "chapter": "Kenjōgo: lenguaje humilde — 謙譲語"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-15E18CBD26ED54D8E9009354",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0750",
+              "articleGeneratedAt": "2026-09-19T09:18:44.597Z",
+              "articleHash": "3ee2eeba30557c13a2b8887d43928137d29b5efb3f1929d1b17af4d2ca2543ff",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "Humilde いただく: introducción",
+              "level": "B1",
+              "part": "Registro y keigo — 待遇表現・敬語",
+              "chapter": "Kenjōgo: lenguaje humilde — 謙譲語"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-15E18CBD26ED54D8E9009354",
+                "code": "MLS-V06-0750",
+                "article_generated_at": "2026-09-19T09:18:44.597Z",
+                "article_hash": "3ee2eeba30557c13a2b8887d43928137d29b5efb3f1929d1b17af4d2ca2543ff",
+                "section_key": "En pocas palabras",
+                "summary": "いただく funciona como forma humilde de recepción relacionada con もらう y expresa deferencia hacia la persona de quien se recibe algo.",
+                "claim_type": "register_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:51.999Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-CFDB91F87513C5F85B326587",
+                "claim_id": "MLS-CLM-15E18CBD26ED54D8E9009354",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:52.237Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "750c300fff85eb12e54a3477ec84646e529c314303be84ac206fe82799c3a924",
+          "verifiedAt": "2026-09-23T10:25:08.400Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-1E949057E6636FCCAE6B1E7E",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0750",
+            "article_generated_at": "2026-09-19T09:18:44.597Z",
+            "article_hash": "3ee2eeba30557c13a2b8887d43928137d29b5efb3f1929d1b17af4d2ca2543ff",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:25:08.400Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:08.400Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-1E949057E6636FCCAE6B1E7E",
+            "code": "MLS-V06-0750",
+            "article_generated_at": "2026-09-19T09:18:44.597Z",
+            "article_hash": "3ee2eeba30557c13a2b8887d43928137d29b5efb3f1929d1b17af4d2ca2543ff",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "750c300fff85eb12e54a3477ec84646e529c314303be84ac206fe82799c3a924",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:25:08.400Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:11.162Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0851",
+            "articleGeneratedAt": "2026-09-19T21:22:36.501Z",
+            "articleHash": "91349b2a0dbfb08123cfa4d5a63cb7175180fa764d5a4f0658b17fe1c1928121",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "Recuperación por contexto",
+            "level": "C1",
+            "part": "Información y elipsis — 情報構造・省略",
+            "chapter": "Elipsis, referencia y anáfora — 省略・指示・照応"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-01CCD6D97182C1233B049558",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0851",
+              "articleGeneratedAt": "2026-09-19T21:22:36.501Z",
+              "articleHash": "91349b2a0dbfb08123cfa4d5a63cb7175180fa764d5a4f0658b17fe1c1928121",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "Recuperación por contexto",
+              "level": "C1",
+              "part": "Información y elipsis — 情報構造・省略",
+              "chapter": "Elipsis, referencia y anáfora — 省略・指示・照応"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-01CCD6D97182C1233B049558",
+                "code": "MLS-V06-0851",
+                "article_generated_at": "2026-09-19T21:22:36.501Z",
+                "article_hash": "91349b2a0dbfb08123cfa4d5a63cb7175180fa764d5a4f0658b17fe1c1928121",
+                "section_key": "En pocas palabras",
+                "summary": "El japonés permite omitir material recuperable por contexto; la interpretación de elementos no expresados depende del discurso y del conocimiento compartido.",
+                "claim_type": "discourse_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:53.890Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-E25B2BC8D140221001EA1ED5",
+                "claim_id": "MLS-CLM-01CCD6D97182C1233B049558",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:54.131Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "870095bdeb1be7308329ebbf6feb64718bacdfa8fbb246c545f51766390149be",
+          "verifiedAt": "2026-09-23T10:25:11.389Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-A6D0D6716298B3B769A02690",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0851",
+            "article_generated_at": "2026-09-19T21:22:36.501Z",
+            "article_hash": "91349b2a0dbfb08123cfa4d5a63cb7175180fa764d5a4f0658b17fe1c1928121",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:25:11.389Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:11.389Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-A6D0D6716298B3B769A02690",
+            "code": "MLS-V06-0851",
+            "article_generated_at": "2026-09-19T21:22:36.501Z",
+            "article_hash": "91349b2a0dbfb08123cfa4d5a63cb7175180fa764d5a4f0658b17fe1c1928121",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "870095bdeb1be7308329ebbf6feb64718bacdfa8fbb246c545f51766390149be",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:25:11.389Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:14.087Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V06-0951",
+            "articleGeneratedAt": "2026-09-19T09:20:44.490Z",
+            "articleHash": "96aaad48f1ed69b1b835920b3deb92cadb9155534c53f051c468fa8c32824520",
+            "language": "japones",
+            "languageName": "Japonés",
+            "title": "Pregunta con か",
+            "level": "A1",
+            "part": "Dominio avanzado — 高度な運用",
+            "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "japones",
+            "regionalScope": "Japonés contemporáneo; conservar distinciones de escritura, registro y uso.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Claims de escritura y norma requieren evidencia fuerte; romanización no sustituye la escritura canónica."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-49055D310D4A769C3A34D2B5",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V06-0951",
+              "articleGeneratedAt": "2026-09-19T09:20:44.490Z",
+              "articleHash": "96aaad48f1ed69b1b835920b3deb92cadb9155534c53f051c468fa8c32824520",
+              "language": "japones",
+              "languageName": "Japonés",
+              "title": "Pregunta con か",
+              "level": "A1",
+              "part": "Dominio avanzado — 高度な運用",
+              "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-49055D310D4A769C3A34D2B5",
+                "code": "MLS-V06-0951",
+                "article_generated_at": "2026-09-19T09:20:44.490Z",
+                "article_hash": "96aaad48f1ed69b1b835920b3deb92cadb9155534c53f051c468fa8c32824520",
+                "section_key": "En pocas palabras",
+                "summary": "La partícula final か puede marcar una oración interrogativa y solicitar una respuesta del interlocutor.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:23:55.794Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-DB07091DBF62A0E728AB3968",
+                "claim_id": "MLS-CLM-49055D310D4A769C3A34D2B5",
+                "source_id": "MLS-SRC-4608594430FC406F401F",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:23:56.031Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "ec0175503cfd5d508cfa59c6924238b31af352273603999ec4b90911be9ffbd7",
+          "verifiedAt": "2026-09-23T10:25:14.302Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-3D1E4179379CE634215DA952",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V06-0951",
+            "article_generated_at": "2026-09-19T09:20:44.490Z",
+            "article_hash": "96aaad48f1ed69b1b835920b3deb92cadb9155534c53f051c468fa8c32824520",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:25:14.302Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:14.302Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-3D1E4179379CE634215DA952",
+            "code": "MLS-V06-0951",
+            "article_generated_at": "2026-09-19T09:20:44.490Z",
+            "article_hash": "96aaad48f1ed69b1b835920b3deb92cadb9155534c53f051c468fa8c32824520",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "ec0175503cfd5d508cfa59c6924238b31af352273603999ec4b90911be9ffbd7",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Unicode or Japanese: A Comprehensive Grammar, as mapped in the proposal.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:25:14.302Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:17.013Z"
+      },
+      {
+        "index": 10,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0051",
+          "article": {
+            "code": "MLS-V08-0051",
+            "articleGeneratedAt": "2026-09-19T22:34:29.343Z",
+            "articleHash": "0c160fcafa6cf568d3dd3caf2ff088aa80cf263c0493c5aaad83f36949ca49b9",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "Vocal ㅢ",
+            "level": "A1",
+            "part": "Hangul y pronunciación — 한글과 발음",
+            "chapter": "Vocales de hangul y combinaciones vocálicas — 한글 모음과 모음 결합"
+          },
+          "state": {
+            "code": "MLS-V08-0051",
+            "article_generated_at": "2026-09-19T22:34:29.343Z",
+            "article_hash": "0c160fcafa6cf568d3dd3caf2ff088aa80cf263c0493c5aaad83f36949ca49b9",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:18.158Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-667110FCC038C355946AE3DF"
+            }
+          },
+          "links": [
+            "MLS-LNK-CA76F88253129458570DBE9E"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 1,
+            "sourcesReused": 0,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": true,
+                "updated": false,
+                "reused": false
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-667110FCC038C355946AE3DF",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-CA76F88253129458570DBE9E",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 30,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 38,
+              "d1RowsWritten": 15,
+              "observedRowsRead": 17,
+              "observedRowsWritten": 4,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:19.006Z"
+      },
+      {
+        "index": 11,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0151",
+          "article": {
+            "code": "MLS-V08-0151",
+            "articleGeneratedAt": "2026-09-19T09:16:27.150Z",
+            "articleHash": "8c288ffc0a0f37f962e5fd2f5765a7dc997663704d6649b400b57e7fe95ee386",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "-(으)ㄹ 수 없다 incapacidad",
+            "level": "A2",
+            "part": "Predicación y partículas nucleares — 서술과 핵심 조사",
+            "chapter": "Cópula 이다, 아니다, 있다 y 없다 — 이다·아니다·있다·없다"
+          },
+          "state": {
+            "code": "MLS-V08-0151",
+            "article_generated_at": "2026-09-19T09:16:27.150Z",
+            "article_hash": "8c288ffc0a0f37f962e5fd2f5765a7dc997663704d6649b400b57e7fe95ee386",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:20.022Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-6C78D54DBFB2484908FC8E16"
+            }
+          },
+          "links": [
+            "MLS-LNK-473ADDD19EF3C5EDCAD3B444"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-6C78D54DBFB2484908FC8E16",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-473ADDD19EF3C5EDCAD3B444",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:20.871Z"
+      },
+      {
+        "index": 12,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0251",
+          "article": {
+            "code": "MLS-V08-0251",
+            "articleGeneratedAt": "2026-09-19T09:36:25.602Z",
+            "articleHash": "34fd86d3b4ee70966403076c013023c820b15ba1e26e298208774e095308aaff",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "르 irregular: 빠르다→빨라요",
+            "level": "A2",
+            "part": "Morfología verbal básica — 기본 용언 활용",
+            "chapter": "Conjugación e irregularidades — 활용과 불규칙"
+          },
+          "state": {
+            "code": "MLS-V08-0251",
+            "article_generated_at": "2026-09-19T09:36:25.602Z",
+            "article_hash": "34fd86d3b4ee70966403076c013023c820b15ba1e26e298208774e095308aaff",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:21.872Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-7947E5AB26C94347A981705E"
+            }
+          },
+          "links": [
+            "MLS-LNK-030795B4D9B8E0DFD9BB13CD"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-7947E5AB26C94347A981705E",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-030795B4D9B8E0DFD9BB13CD",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:22.807Z"
+      },
+      {
+        "index": 13,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0351",
+          "article": {
+            "code": "MLS-V08-0351",
+            "articleGeneratedAt": "2026-09-19T09:18:57.330Z",
+            "articleHash": "d621f6081e8f415dbb0b56303007c1bc1521746d1a644ce4f6ec7fde4ba8fe42",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "V-했어요",
+            "level": "A2",
+            "part": "Número y tiempo — 수와 시간",
+            "chapter": "Pasado, futuro y 겠- — 과거·미래와 겠-"
+          },
+          "state": {
+            "code": "MLS-V08-0351",
+            "article_generated_at": "2026-09-19T09:18:57.330Z",
+            "article_hash": "d621f6081e8f415dbb0b56303007c1bc1521746d1a644ce4f6ec7fde4ba8fe42",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:23.805Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-315CEBAC5709EAEF02DA0560"
+            }
+          },
+          "links": [
+            "MLS-LNK-38FE12B4F3B43E9703DE00D9"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-315CEBAC5709EAEF02DA0560",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-38FE12B4F3B43E9703DE00D9",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:24.670Z"
+      },
+      {
+        "index": 14,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0451",
+          "article": {
+            "code": "MLS-V08-0451",
+            "articleGeneratedAt": "2026-09-19T09:35:47.036Z",
+            "articleHash": "829efd94e8fe02ba81baff76bd2dda883b5f72e433ccb644c54e90e3b04a38cf",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "Relativa sin pronombre relativo",
+            "level": "B1",
+            "part": "Modificación nominal — 명사 수식",
+            "chapter": "Modificación nominal y oraciones relativas — 관형절과 명사 수식"
+          },
+          "state": {
+            "code": "MLS-V08-0451",
+            "article_generated_at": "2026-09-19T09:35:47.036Z",
+            "article_hash": "829efd94e8fe02ba81baff76bd2dda883b5f72e433ccb644c54e90e3b04a38cf",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:25.680Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-34D16CDD04E855804F3140DA"
+            }
+          },
+          "links": [
+            "MLS-LNK-50DBCD6A76E82C560697B4AB"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-34D16CDD04E855804F3140DA",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-50DBCD6A76E82C560697B4AB",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:26.510Z"
+      },
+      {
+        "index": 15,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0550",
+          "article": {
+            "code": "MLS-V08-0550",
+            "articleGeneratedAt": "2026-09-19T09:15:48.179Z",
+            "articleHash": "52e488413e2678b39980aae3b878c2a5978c72ad758dd888967005e46436c771",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "Evitar calcos pasivos innecesarios",
+            "level": "B2",
+            "part": "Nominalización y voz — 명사화와 태",
+            "chapter": "Voz pasiva — 피동"
+          },
+          "state": {
+            "code": "MLS-V08-0550",
+            "article_generated_at": "2026-09-19T09:15:48.179Z",
+            "article_hash": "52e488413e2678b39980aae3b878c2a5978c72ad758dd888967005e46436c771",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:27.504Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-0060EF19B7E44EA27996329B"
+            }
+          },
+          "links": [
+            "MLS-LNK-544063AFA3DBDD5E29B3F232"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-0060EF19B7E44EA27996329B",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-544063AFA3DBDD5E29B3F232",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:28.372Z"
+      },
+      {
+        "index": 16,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0650",
+          "article": {
+            "code": "MLS-V08-0650",
+            "articleGeneratedAt": "2026-09-19T09:36:02.978Z",
+            "articleHash": "5f9c2a14cbb796ab742a60ba01aa0f23cea20d61814fc4fa65ba8d8ff8264ee9",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "-아/어도 aunque",
+            "level": "B2",
+            "part": "Concesión y terminaciones finales — 양보와 종결 어미",
+            "chapter": "Concesión, fondo y contraste avanzado — 양보·배경·고급 대조"
+          },
+          "state": {
+            "code": "MLS-V08-0650",
+            "article_generated_at": "2026-09-19T09:36:02.978Z",
+            "article_hash": "5f9c2a14cbb796ab742a60ba01aa0f23cea20d61814fc4fa65ba8d8ff8264ee9",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:29.423Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-F573A5607EC45E95DB30135C"
+            }
+          },
+          "links": [
+            "MLS-LNK-A0368C43BF3C494302C8E8F8"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-F573A5607EC45E95DB30135C",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-A0368C43BF3C494302C8E8F8",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:30.298Z"
+      },
+      {
+        "index": 17,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0750",
+          "article": {
+            "code": "MLS-V08-0750",
+            "articleGeneratedAt": "2026-09-19T09:14:24.930Z",
+            "articleHash": "7dd8e02c687a0c3ed82b71c93d835515a05f11e0cd055a561a96f6ca3ef341a5",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "Honorífico/humilde 드시다",
+            "level": "C1",
+            "part": "Honorífico léxico y estilos avanzados — 어휘 높임과 고급 문체",
+            "chapter": "Léxico honorífico y humilde — 높임말과 겸양 표현"
+          },
+          "state": {
+            "code": "MLS-V08-0750",
+            "article_generated_at": "2026-09-19T09:14:24.930Z",
+            "article_hash": "7dd8e02c687a0c3ed82b71c93d835515a05f11e0cd055a561a96f6ca3ef341a5",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:31.396Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-4DD202430018363159C18725"
+            }
+          },
+          "links": [
+            "MLS-LNK-A1042DBB124FB0A48E486EA9"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-4DD202430018363159C18725",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-A1042DBB124FB0A48E486EA9",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:32.240Z"
+      },
+      {
+        "index": 18,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0850",
+          "article": {
+            "code": "MLS-V08-0850",
+            "articleGeneratedAt": "2026-09-19T09:34:56.543Z",
+            "articleHash": "62f3c6a10b19c9d601ab948a8ffa43effbb8c91507009d9cf8fd45a1279a0d22",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "에 있어서",
+            "level": "C1",
+            "part": "Referencia y escritura formal — 지시와 격식 문어",
+            "chapter": "Gramática escrita formal — 격식 문어 문법"
+          },
+          "state": {
+            "code": "MLS-V08-0850",
+            "article_generated_at": "2026-09-19T09:34:56.543Z",
+            "article_hash": "62f3c6a10b19c9d601ab948a8ffa43effbb8c91507009d9cf8fd45a1279a0d22",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:33.260Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-94A13A79247A1CC8FB1F2C6F"
+            }
+          },
+          "links": [
+            "MLS-LNK-EFB59C1A0BAEC5EE440FEBB1"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-94A13A79247A1CC8FB1F2C6F",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-EFB59C1A0BAEC5EE440FEBB1",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:34.121Z"
+      },
+      {
+        "index": 19,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "proponerEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/proposal",
+        "response": {
+          "ok": true,
+          "code": "MLS-V08-0951",
+          "article": {
+            "code": "MLS-V08-0951",
+            "articleGeneratedAt": "2026-09-19T09:15:31.703Z",
+            "articleHash": "551e70997d0aa248396bec6897ad87e01e2114b2987dd2161649b15f80824f29",
+            "language": "coreano",
+            "languageName": "Coreano",
+            "title": "우리 como posesivo colectivo",
+            "level": "C2",
+            "part": "Variación regional y social — 지역·사회 변이",
+            "chapter": "Tratamientos, parentesco y deixis social — 호칭·친족어·사회적 직시"
+          },
+          "state": {
+            "code": "MLS-V08-0951",
+            "article_generated_at": "2026-09-19T09:15:31.703Z",
+            "article_hash": "551e70997d0aa248396bec6897ad87e01e2114b2987dd2161649b15f80824f29",
+            "evidence_version": "1.0",
+            "status": "SOURCED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": null,
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:25:35.153Z"
+          },
+          "evaluation": {
+            "status": "SOURCED",
+            "reasons": [
+              "verification_event_missing"
+            ],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "citationReady": true
+          },
+          "mappings": {
+            "sources": {
+              "kr-grammar": "MLS-SRC-2020BA990ACD28E5D4F3"
+            },
+            "claims": {
+              "c1": "MLS-CLM-CB4D51D013A5E206B5AF04CE"
+            }
+          },
+          "links": [
+            "MLS-LNK-ADB51EF0AE465C7978AE99B2"
+          ],
+          "conflicts": [],
+          "operations": {
+            "sourcesCreated": 0,
+            "sourcesReused": 1,
+            "sourcesUpdated": 0,
+            "claimsCreated": 1,
+            "claimsReused": 0,
+            "linksCreated": 1,
+            "linksReused": 0,
+            "conflictsCreated": 0,
+            "conflictsReused": 0,
+            "sourceOperations": [
+              {
+                "clientId": "kr-grammar",
+                "sourceId": "MLS-SRC-2020BA990ACD28E5D4F3",
+                "created": false,
+                "updated": false,
+                "reused": true
+              }
+            ],
+            "claimOperations": [
+              {
+                "clientId": "c1",
+                "claimId": "MLS-CLM-CB4D51D013A5E206B5AF04CE",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "linkOperations": [
+              {
+                "linkId": "MLS-LNK-ADB51EF0AE465C7978AE99B2",
+                "created": true,
+                "reused": false
+              }
+            ],
+            "conflictOperations": []
+          },
+          "idempotentRetrySafe": true,
+          "telemetry": {
+            "d1": {
+              "queries": 28,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 37,
+              "d1RowsWritten": 11,
+              "observedRowsRead": 18,
+              "observedRowsWritten": 3,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:25:35.997Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T10:25:35.997Z",
+  "commandFile": "mls chat bridge/commands/command 0325.json"
+}
