@@ -1,0 +1,1999 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "GATE100-FR-VERSIONS-20260923-A",
+    "requested": 10,
+    "processed": 10,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0050",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 50,
+            "title": "Enchaînement consonántico",
+            "level": "A2",
+            "part": "Escritura, pronunciación y prosodia — Écriture, prononciation et prosodie",
+            "chapter": "Liaison, enchaînement, e caduc y prosodia — Liaison, enchaînement, e caduc et prosodie",
+            "article_markdown": "#### En pocas palabras\n\nEl **enchaînement consonántico** ocurre cuando una palabra termina en una consonante que **ya se pronuncia normalmente** y la palabra siguiente comienza por vocal. En el habla continua, esa consonante se une fonéticamente a la sílaba siguiente: **avec elle** puede pronunciarse /a.vɛ.kɛl/.\n\n#### Cómo funciona\n\nLa consonante final no aparece gracias al enlace; ya pertenece a la pronunciación habitual de la primera palabra. Lo que cambia es la división silábica en la cadena hablada.\n\nEn **avec elle**, la /k/ final de *avec* se pronuncia también cuando *avec* aparece ante consonante. Al seguir una vocal, esa /k/ se encadena con la vocal inicial de *elle*, de modo que el grupo se percibe como una secuencia fluida.\n\nEste fenómeno es frecuente porque el francés tiende a organizar el habla continua en sílabas que atraviesan los límites gráficos entre palabras.\n\n#### Ejemplos\n\n* **avec elle** /a.vɛ.kɛl/ — con ella.\n* **pour eux** — para ellos; la /ʁ/ final de *pour* se encadena con la vocal siguiente.\n* **une amie** — una amiga; la /n/ final de *une* enlaza silábicamente con *amie*.\n\nEn todos estos casos, la consonante ya era pronunciada antes de considerar la palabra siguiente.\n\n#### Observación importante\n\nEl enchaînement consonántico debe distinguirse de la **liaison**. En la liaison, aparece una consonante que normalmente es muda en otros contextos, como la /z/ de **les amis**. En el enchaînement, no aparece ningún sonido nuevo: una consonante ya pronunciada se redistribuye entre las sílabas del grupo.\n\nTambién es distinto de la elisión, que afecta a la forma escrita y puede suprimir una vocal, como en **l’ami**.\n\n#### Entradas relacionadas\n\n[Liaison facultativa](#entry-49) · [Enchaînement vocálico](#entry-51) · [Liaison prohibida](#entry-48) · [e caduc conservado](#entry-52)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-b25097dc3b29d02c56b7cbecdccbfaf3bb6444efb0215aa478d50c5d15d3b9ab",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:02:11.559Z"
+          },
+          "version": {
+            "code": "MLS-V04-0050",
+            "articleGeneratedAt": "2026-09-19T07:02:11.559Z",
+            "articleHash": "5281cc31f6763f607add61d5db789233f8cb04170b3aa5e3006a29aaa699d3f6",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Enchaînement consonántico",
+            "level": "A2",
+            "part": "Escritura, pronunciación y prosodia — Écriture, prononciation et prosodie",
+            "chapter": "Liaison, enchaînement, e caduc y prosodia — Liaison, enchaînement, e caduc et prosodie"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0050",
+            "articleVersion": {
+              "code": "MLS-V04-0050",
+              "articleGeneratedAt": "2026-09-19T07:02:11.559Z",
+              "articleHash": "5281cc31f6763f607add61d5db789233f8cb04170b3aa5e3006a29aaa699d3f6",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Enchaînement consonántico",
+              "level": "A2",
+              "part": "Escritura, pronunciación y prosodia — Écriture, prononciation et prosodie",
+              "chapter": "Liaison, enchaînement, e caduc y prosodia — Liaison, enchaînement, e caduc et prosodie"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-b25097dc3b29d02c56b7cbecdccbfaf3bb6444efb0215aa478d50c5d15d3b9ab",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:02:11.559Z",
+              "articleHash": "5281cc31f6763f607add61d5db789233f8cb04170b3aa5e3006a29aaa699d3f6"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "c069f0fd1da7cd1e031e2ff38ad297fa46e129ca8b103625f9312b4b849e6db4",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:45.404Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0150",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 150,
+            "title": "En con cantidad",
+            "level": "A2",
+            "part": "Determinación nominal — Détermination nominale",
+            "chapter": "Artículos partitivos, cantidad y de — Articles partitifs, quantité et de",
+            "article_markdown": "#### En pocas palabras\n\nCuando **en** sustituye un nombre acompañado por una cantidad, la cantidad suele conservarse fuera del pronombre. Así, **J’ai trois frères** puede convertirse en **J’en ai trois**: *en* recupera la idea de “hermanos” y **trois** mantiene el número.\n\nEste patrón también aparece con expresiones como **beaucoup**, **un peu** o **assez**.\n\n#### Cómo funciona\n\n**En** es un pronombre clítico: una forma breve que se coloca junto al verbo. Cuando reemplaza el nombre, no borra necesariamente la información de cantidad que lo acompañaba.\n\nPor ejemplo, **Je veux deux pommes** pasa a **J’en veux deux**. La cantidad **deux** permanece porque sigue aportando una información necesaria.\n\nCon cantidades no exactas ocurre lo mismo: **Elle boit beaucoup de café → Elle en boit beaucoup**. Aquí *en* recupera *de café* y **beaucoup** expresa cuánto.\n\n#### Ejemplos\n\n* **J’ai trois frères. → J’en ai trois.** — Tengo tres hermanos. → Tengo tres.\n* **Je veux deux pommes. → J’en veux deux.** — Quiero dos manzanas. → Quiero dos.\n* **Elle boit beaucoup de café. → Elle en boit beaucoup.** — Bebe mucho café. → Bebe mucho.\n* **Tu veux un peu d’eau ? — Oui, j’en veux un peu.** — ¿Quieres un poco de agua? — Sí, quiero un poco.\n\n#### Observación importante\n\nNo conviene interpretar **en** como una traducción fija de “de eso”. En estas construcciones, el pronombre recupera el contenido nominal, mientras la expresión de cantidad permanece visible.\n\nLa posición de la cantidad y la de **en** cumplen funciones distintas: **en** va normalmente antes del verbo conjugado y la cantidad aparece después del verbo en estos ejemplos.\n\n#### Entradas relacionadas\n\n[En partitivo](#entry-149) · [Partitivo con conceptos abstractos](#entry-148)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-712e3d52bbc8691f60bb980ba8bba8ee159c789c1b3765efa0bcaa8f18483e8e",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:17:35.043Z"
+          },
+          "version": {
+            "code": "MLS-V04-0150",
+            "articleGeneratedAt": "2026-09-19T07:17:35.043Z",
+            "articleHash": "606a7c6d3cdb83c48dc2c0e16408b440d57e9b891581f10ae050153482657adf",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "En con cantidad",
+            "level": "A2",
+            "part": "Determinación nominal — Détermination nominale",
+            "chapter": "Artículos partitivos, cantidad y de — Articles partitifs, quantité et de"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0150",
+            "articleVersion": {
+              "code": "MLS-V04-0150",
+              "articleGeneratedAt": "2026-09-19T07:17:35.043Z",
+              "articleHash": "606a7c6d3cdb83c48dc2c0e16408b440d57e9b891581f10ae050153482657adf",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "En con cantidad",
+              "level": "A2",
+              "part": "Determinación nominal — Détermination nominale",
+              "chapter": "Artículos partitivos, cantidad y de — Articles partitifs, quantité et de"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-712e3d52bbc8691f60bb980ba8bba8ee159c789c1b3765efa0bcaa8f18483e8e",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:17:35.043Z",
+              "articleHash": "606a7c6d3cdb83c48dc2c0e16408b440d57e9b891581f10ae050153482657adf"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "ad792bafbde156d193f9720c2b7d60f5680486c0800ceded3d9a9defac571411",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:46.650Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0251",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 251,
+            "title": "Verbos -er",
+            "level": "A1",
+            "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+            "chapter": "Presente del indicativo y conjugaciones — Présent de l'indicatif et conjugaisons",
+            "article_markdown": "#### En pocas palabras\n\nLos **verbos en -er** forman el grupo más numeroso de verbos franceses. Su infinitivo termina en **-er**, como **parler** (“hablar”), **aimer** (“gustar/amar”) o **travailler** (“trabajar”). Muchos siguen un modelo regular en presente.\n\n#### Cómo funciona\n\nPara conjugar un verbo regular en **-er**, se toma normalmente la base del infinitivo sin **-er** y se añaden terminaciones personales. Con **parler**, la base es **parl-**: **je parle, tu parles, il/elle parle, nous parlons, vous parlez, ils/elles parlent**.\n\nEstas terminaciones se escriben de manera distinta, aunque varias formas se pronuncian igual. Por ejemplo, **parle, parles, parlent** tienen normalmente la misma pronunciación en el francés estándar.\n\nNo todos los verbos terminados gráficamente en **-er** son completamente regulares. Algunos presentan cambios ortográficos o de base, como **manger** o **acheter**, aunque conservan muchas terminaciones del modelo.\n\n#### Ejemplos\n\n* **Je parle français.** — Hablo francés.\n* **Nous parlons avec Marie.** — Hablamos con Marie.\n* **Vous travaillez ici.** — Trabajan / trabajáis aquí.\n* **Ils aiment ce film.** — Les gusta esta película.\n\n#### Observación importante\n\nEl verbo **aller** termina en **-er**, pero es irregular y no sigue el modelo regular de **parler**. Por eso la terminación del infinitivo ayuda a clasificar verbos, pero no garantiza por sí sola una conjugación totalmente regular.\n\nTambién conviene separar ortografía y pronunciación: varias marcas personales escritas no se oyen de forma independiente.\n\n#### Entradas relacionadas\n\n[Verbos -ir regulares](#entry-252) · [Presente de verbos en -er](#entry-253)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-8dc3760d92643ef54d8aae0b6da4ce4f651ddadbc5f2bc110f5c2dab610194f5",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:31:17.428Z"
+          },
+          "version": {
+            "code": "MLS-V04-0251",
+            "articleGeneratedAt": "2026-09-19T07:31:17.428Z",
+            "articleHash": "3a6c57ca98cb570d8592e626737c80f0c3bc0ae4f572353f0fd0112092c4c37d",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Verbos -er",
+            "level": "A1",
+            "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+            "chapter": "Presente del indicativo y conjugaciones — Présent de l'indicatif et conjugaisons"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0251",
+            "articleVersion": {
+              "code": "MLS-V04-0251",
+              "articleGeneratedAt": "2026-09-19T07:31:17.428Z",
+              "articleHash": "3a6c57ca98cb570d8592e626737c80f0c3bc0ae4f572353f0fd0112092c4c37d",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Verbos -er",
+              "level": "A1",
+              "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+              "chapter": "Presente del indicativo y conjugaciones — Présent de l'indicatif et conjugaisons"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-8dc3760d92643ef54d8aae0b6da4ce4f651ddadbc5f2bc110f5c2dab610194f5",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:31:17.428Z",
+              "articleHash": "3a6c57ca98cb570d8592e626737c80f0c3bc0ae4f572353f0fd0112092c4c37d"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "7c84e78b584857649d558774336075cd5ee50763087c04bbab294b13df81bcde",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:47.866Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0351",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 351,
+            "title": "à",
+            "level": "A1",
+            "part": "Preposiciones y regencia — Prépositions et régime",
+            "chapter": "Preposiciones básicas y contracciones — Prépositions de base et contractions",
+            "article_markdown": "#### En pocas palabras\n\nLa preposición francesa **à** introduce varias relaciones, entre ellas destino, ubicación, destinatario y ciertos complementos exigidos por un verbo. En **Je vais à Paris**, **à Paris** indica el destino.\n\n#### Cómo funciona\n\n**À** aparece delante de nombres y grupos nominales: **à Paris**, **à la maison**, **à Marie**. La relación concreta depende de la construcción.\n\nDelante de los artículos definidos **le** y **les**, se contrae: **à + le → au** y **à + les → aux**. Con **la** y **l’**, no hay contracción: **à la gare**, **à l’école**.\n\nAlgunos verbos seleccionan un complemento introducido por **à**: **parler à quelqu’un**, **penser à quelque chose**, **répondre à une question**. En esos casos, **à** forma parte de la estructura del verbo.\n\nCon ciudades, **à** es frecuente para indicar destino o ubicación: **Je vais à Paris**, **J’habite à Lyon**.\n\n#### Ejemplos\n\n* **Je vais à Paris.** — **à** introduce el destino.\n* **Nous sommes au musée.** — **au** resulta de **à + le**.\n* **Elle parle à Marie.** — **à** introduce a la persona destinataria del habla.\n* **Ils répondent aux questions.** — **aux** resulta de **à + les**.\n\n#### Observación importante\n\n**À** no equivale siempre a la preposición española “a”. La preposición francesa depende de la construcción completa y puede corresponder a otras soluciones en español.\n\n#### Entradas relacionadas\n\n[de](#entry-352) · [dans](#entry-353) · [Sujeto omitido del español → sujeto expreso francés](#entry-1065)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-3b211f6ee2c8db2e820c2b43d594450a9c6a167e8520eb86de2b3b6f435fc5c8",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:46:45.986Z"
+          },
+          "version": {
+            "code": "MLS-V04-0351",
+            "articleGeneratedAt": "2026-09-19T07:46:45.986Z",
+            "articleHash": "95f2b630859d2fad793518d3b6933855e85e0427d301b232bc319dfbd1e940eb",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "à",
+            "level": "A1",
+            "part": "Preposiciones y regencia — Prépositions et régime",
+            "chapter": "Preposiciones básicas y contracciones — Prépositions de base et contractions"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0351",
+            "articleVersion": {
+              "code": "MLS-V04-0351",
+              "articleGeneratedAt": "2026-09-19T07:46:45.986Z",
+              "articleHash": "95f2b630859d2fad793518d3b6933855e85e0427d301b232bc319dfbd1e940eb",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "à",
+              "level": "A1",
+              "part": "Preposiciones y regencia — Prépositions et régime",
+              "chapter": "Preposiciones básicas y contracciones — Prépositions de base et contractions"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-3b211f6ee2c8db2e820c2b43d594450a9c6a167e8520eb86de2b3b6f435fc5c8",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:46:45.986Z",
+              "articleHash": "95f2b630859d2fad793518d3b6933855e85e0427d301b232bc319dfbd1e940eb"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "b9b105af54518f66e3ca7d71f0f43c7ab3a05a7f8e2adc628e36cce2c4d46425",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:49.036Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0451",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 451,
+            "title": "ne...plus",
+            "level": "A1",
+            "part": "Existencia, negación e interrogación — Existence, négation et interrogation",
+            "chapter": "Negación — Négation",
+            "article_markdown": "#### En pocas palabras\n\n**Ne...plus** significa normalmente **“ya no”**. En **Il ne travaille plus ici**, la frase indica que antes trabajaba aquí, pero ahora ya no.\n\n#### Cómo funciona\n\nCon un verbo simple, el patrón es **sujeto + ne + verbo + plus**: **Je ne fume plus**, **Nous ne vivons plus à Paris**.\n\nAnte una vocal o una **h** muda, **ne** se convierte en **n'**: **Il n'habite plus ici**.\n\nEn conversación es frecuente omitir **ne**: **Je travaille plus ici**, **On vient plus souvent**. El contexto y la pronunciación ayudan a distinguir el valor negativo de otros usos de **plus**.\n\n#### Ejemplos\n\n* **Il ne travaille plus ici.** — Ya no trabaja aquí.\n* **Je ne fume plus.** — Ya no fumo.\n* **Nous n'habitons plus à Lyon.** — Ya no vivimos en Lyon.\n* **Elle vient plus.** — forma coloquial: ya no viene.\n\n#### Observación importante\n\n**Plus** también puede significar “más” fuera de una negación. En **ne...plus**, su valor es negativo y marca el final de una situación anterior.\n\n#### Entradas relacionadas\n\n[0450. ne...jamais](#entry-450) · [0452. ne...rien](#entry-452) · [0449. ne...pas](#entry-449) · [0453. ne...personne](#entry-453)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-639e916565c508f4be8cc3c9c569bd11f816369978347009bfaa47414b7b4772",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:32:28.940Z"
+          },
+          "version": {
+            "code": "MLS-V04-0451",
+            "articleGeneratedAt": "2026-09-19T07:32:28.940Z",
+            "articleHash": "776d98648b4b8b14964a75f6e015357963e0d34b42bc7615151a1f8fe922a63b",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "ne...plus",
+            "level": "A1",
+            "part": "Existencia, negación e interrogación — Existence, négation et interrogation",
+            "chapter": "Negación — Négation"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0451",
+            "articleVersion": {
+              "code": "MLS-V04-0451",
+              "articleGeneratedAt": "2026-09-19T07:32:28.940Z",
+              "articleHash": "776d98648b4b8b14964a75f6e015357963e0d34b42bc7615151a1f8fe922a63b",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "ne...plus",
+              "level": "A1",
+              "part": "Existencia, negación e interrogación — Existence, négation et interrogation",
+              "chapter": "Negación — Négation"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-639e916565c508f4be8cc3c9c569bd11f816369978347009bfaa47414b7b4772",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:32:28.940Z",
+              "articleHash": "776d98648b4b8b14964a75f6e015357963e0d34b42bc7615151a1f8fe922a63b"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "90a966cff3e1d9b588a861d049f80e3e1cb6137e633d64a17540bf54d81618de",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:50.234Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0550",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 550,
+            "title": "Atenuación con imparfait/conditionnel",
+            "level": "C2",
+            "part": "Imparfait y anterioridad — Imparfait et antériorité",
+            "chapter": "Imparfait y contraste narrativo — Imparfait et contraste narratif",
+            "article_markdown": "#### En pocas palabras\n\nEl francés puede usar tanto el **imparfait** como el **conditionnel** para **atenuar** una petición, un deseo o una intervención. La atenuación consiste en formular el acto de habla de manera menos directa.\n\nCompare **Je voulais vous demander un renseignement** y **Je voudrais vous demander un renseignement**. Las dos formas pueden sonar corteses, pero no producen exactamente el mismo efecto.\n\n#### Cómo funciona\n\nCon el **imparfait**, el hablante desplaza la formulación hacia un marco menos inmediato: **Je voulais savoir si vous aviez une chambre libre**. El deseo puede seguir siendo actual; el tiempo pasado crea una distancia discursiva que reduce la brusquedad de una petición directa como **Je veux savoir...**.\n\nCon el **conditionnel**, la distancia se presenta de manera más hipotética o potencial: **Je voudrais un café**, **J’aimerais vous poser une question**, **Pourriez-vous m’aider ?**. Este uso es muy productivo en solicitudes corteses y no implica necesariamente una condición expresada con **si**.\n\nLos dos recursos pueden combinarse con otras estrategias de cortesía: elección de pronombres, fórmulas de tratamiento, interrogación, verbos modales y entonación. La cortesía no reside en una terminación verbal aislada.\n\nTambién hay diferencias de naturalidad. **Je voudrais vous parler** suele ser una petición o deseo cortés muy transparente; **Je voulais vous parler** puede ser una introducción atenuada de una intención actual, pero también puede referirse literalmente a una intención pasada. El contexto decide.\n\n#### Ejemplos\n\n* **Je voulais vous demander un service.** — imparfait de politesse; distancia discursiva.\n* **Je voudrais vous demander un service.** — conditionnel de politesse; petición atenuada.\n* **J’aimerais réserver une table.** — deseo formulado cortésmente.\n* **Pourriez-vous fermer la fenêtre ?** — pregunta cortés con conditionnel.\n\n#### Observación importante\n\nEl ejemplo heredado **Quand j’étais petit, je jouais dehors** expresa un hábito pasado y no demuestra atenuación.\n\nNo debe explicarse el conditionnel de politesse como un simple “futuro en el pasado”. Su valor aquí es pragmático: reduce la fuerza de la petición o presenta el deseo de manera menos categórica. Del mismo modo, el imparfait cortés no significa necesariamente que la intención ya haya terminado.\n\n#### Entradas relacionadas\n\n[0549. Reconnaissance du subjonctif imparfait](#entry-549) · [0548. Subjonctif imparfait](#entry-548) · [0541. Imparfait de politesse](#entry-541) · [0551. Plus-que-parfait : formation](#entry-551)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-37f76a7f93cae70a92794f746d84e79634c7b02c7a666adcb2a4a2a77cf13fc5",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:46:32.777Z"
+          },
+          "version": {
+            "code": "MLS-V04-0550",
+            "articleGeneratedAt": "2026-09-19T07:46:32.777Z",
+            "articleHash": "88e406aab10233baaa5255c84b072b753d577b739728798e208f5f836aacfabc",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Atenuación con imparfait/conditionnel",
+            "level": "C2",
+            "part": "Imparfait y anterioridad — Imparfait et antériorité",
+            "chapter": "Imparfait y contraste narrativo — Imparfait et contraste narratif"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0550",
+            "articleVersion": {
+              "code": "MLS-V04-0550",
+              "articleGeneratedAt": "2026-09-19T07:46:32.777Z",
+              "articleHash": "88e406aab10233baaa5255c84b072b753d577b739728798e208f5f836aacfabc",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Atenuación con imparfait/conditionnel",
+              "level": "C2",
+              "part": "Imparfait y anterioridad — Imparfait et antériorité",
+              "chapter": "Imparfait y contraste narrativo — Imparfait et contraste narratif"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-37f76a7f93cae70a92794f746d84e79634c7b02c7a666adcb2a4a2a77cf13fc5",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:46:32.777Z",
+              "articleHash": "88e406aab10233baaa5255c84b072b753d577b739728798e208f5f836aacfabc"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "3692112b3ed3ebacef0f4b1db6e07801ffe792932b09ece3b3fc745fa5b2c6df",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:51.480Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0650",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 650,
+            "title": "Pasiva être + participe passé",
+            "level": "B1",
+            "part": "Formas no personales y voz — Formes non personnelles et voix",
+            "chapter": "Voz pasiva, causativa y factitiva — Voix passive, causative et factitive",
+            "article_markdown": "#### En pocas palabras\n\nEl **passif avec être + participe passé** presenta como sujeto a quien o lo que recibe la acción. En **Le texte est écrit par Marie**, el texto ocupa la posición de sujeto de la oración pasiva, mientras **Marie** aparece como agente mediante **par**.\n\n#### Cómo funciona\n\nLa construcción se forma con **être** conjugado y el **participio pasado** del verbo: **est écrit**, **a été envoyé**, **sera publié**. El tiempo y el modo se expresan a través de **être**, y el participio pasado concuerda normalmente con el sujeto pasivo.\n\nAsí, se dice **La lettre est écrite**, **Les lettres sont écrites**. Si se quiere mencionar al agente, suele añadirse **par + groupe nominal**: **Le roman a été écrit par une autrice canadienne**.\n\nLa oración pasiva suele corresponder a una activa en la que el agente era sujeto: **Marie écrit le texte → Le texte est écrit par Marie**. La elección entre activa y pasiva depende del foco informativo y del contexto.\n\n#### Ejemplos\n\n* **Le texte est écrit par Marie.** — El texto es escrito por Marie.\n* **La lettre a été envoyée hier.** — La carta fue enviada ayer.\n* **Les résultats seront publiés demain.** — Los resultados serán publicados mañana.\n* **Ce bâtiment a été construit en 1998.** — Este edificio fue construido en 1998.\n\n#### Observación importante\n\nNo toda secuencia **être + participe passé** tiene necesariamente lectura pasiva. Un participio puede describir un estado: **La porte est fermée** puede interpretarse como “La puerta está cerrada” sin destacar una acción.\n\nAdemás, el agente puede omitirse cuando es desconocido, irrelevante o fácilmente inferible. La pasiva francesa tampoco exige una traducción pasiva literal al español.\n\n#### Entradas relacionadas\n\n[Agente con par](#entry-649) · [Complemento agente con par](#entry-651) · [Pasiva être + participio](#entry-648) · [Complemento agente con de en usos restringidos](#entry-652)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-f0b50f92487577c9161df2f61c3e481055db24743ad76c464697e472e9f53f56",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:49:27.019Z"
+          },
+          "version": {
+            "code": "MLS-V04-0650",
+            "articleGeneratedAt": "2026-09-19T07:49:27.019Z",
+            "articleHash": "3d2cdb4fbccfdf79b3e5acc9716933aa55fdcedbb98cdc7e46a4d256924f3c33",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Pasiva être + participe passé",
+            "level": "B1",
+            "part": "Formas no personales y voz — Formes non personnelles et voix",
+            "chapter": "Voz pasiva, causativa y factitiva — Voix passive, causative et factitive"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0650",
+            "articleVersion": {
+              "code": "MLS-V04-0650",
+              "articleGeneratedAt": "2026-09-19T07:49:27.019Z",
+              "articleHash": "3d2cdb4fbccfdf79b3e5acc9716933aa55fdcedbb98cdc7e46a4d256924f3c33",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Pasiva être + participe passé",
+              "level": "B1",
+              "part": "Formas no personales y voz — Formes non personnelles et voix",
+              "chapter": "Voz pasiva, causativa y factitiva — Voix passive, causative et factitive"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-f0b50f92487577c9161df2f61c3e481055db24743ad76c464697e472e9f53f56",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:49:27.019Z",
+              "articleHash": "3d2cdb4fbccfdf79b3e5acc9716933aa55fdcedbb98cdc7e46a4d256924f3c33"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "93c71d909b95d8059bd47397682738bb13539ebd0a7779aa724d9bbe31edbd95",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:52.745Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0750",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 750,
+            "title": "Ce qui",
+            "level": "B1",
+            "part": "Relativos y subordinación — Relatifs et subordination",
+            "chapter": "Pronombres relativos — Pronoms relatifs",
+            "article_markdown": "#### En pocas palabras\n\n**Ce qui** introduce una relativa sin antecedente nominal expreso y representa, dentro de esa relativa, el elemento que funciona como **sujeto**. En **Ce qui m’intéresse, c’est la langue**, la secuencia significa «Lo que me interesa es la lengua» y **ce qui** ocupa el lugar de aquello que interesa.\n\n#### Cómo funciona\n\n**Ce** aporta una referencia neutra: no señala una persona o cosa nombrada antes. **Qui** cumple la función de sujeto del verbo de la relativa. Por eso puede pensarse en una estructura como **quelque chose m’intéresse → ce qui m’intéresse**.\n\nLa relativa completa puede desempeñar después una función dentro de la oración principal. En el ejemplo de referencia, **Ce qui m’intéresse** constituye el primer término de una estructura explicativa con **c’est**.\n\n#### Ejemplos\n\n* **Ce qui m’intéresse, c’est la langue.** — Lo que me interesa es la lengua.\n* **Je comprends ce qui se passe.** — Entiendo lo que pasa.\n* **Ce qui manque, c’est du temps.** — Lo que falta es tiempo.\n* **Elle explique ce qui a changé.** — Ella explica lo que ha cambiado.\n\n#### Observación importante\n\n**Ce qui** y **ce que** no se eligen por traducción española, ya que ambos pueden corresponder a «lo que». La diferencia está en la función dentro de la relativa: **ce qui** funciona como sujeto; **ce que** funciona normalmente como objeto directo.\n\nSi la construcción exige una preposición, aparecen otras formas como **ce dont**, **ce à quoi** o **ce de quoi**.\n\n#### Entradas relacionadas\n\n[Dont = de + antecedente](#entry-749) · [Ce que](#entry-751) · [ce de quoi](#entry-748) · [Ce dont](#entry-752)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-a87cd851aa09824da4163ee637e33bfdf1b376d73862d5193b231128c1616313",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:04:14.655Z"
+          },
+          "version": {
+            "code": "MLS-V04-0750",
+            "articleGeneratedAt": "2026-09-19T08:04:14.655Z",
+            "articleHash": "9822fd54116b0609f904643cbc14effb4e67c8ee35b5336c91f4525df0a5b932",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Ce qui",
+            "level": "B1",
+            "part": "Relativos y subordinación — Relatifs et subordination",
+            "chapter": "Pronombres relativos — Pronoms relatifs"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0750",
+            "articleVersion": {
+              "code": "MLS-V04-0750",
+              "articleGeneratedAt": "2026-09-19T08:04:14.655Z",
+              "articleHash": "9822fd54116b0609f904643cbc14effb4e67c8ee35b5336c91f4525df0a5b932",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Ce qui",
+              "level": "B1",
+              "part": "Relativos y subordinación — Relatifs et subordination",
+              "chapter": "Pronombres relativos — Pronoms relatifs"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-a87cd851aa09824da4163ee637e33bfdf1b376d73862d5193b231128c1616313",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:04:14.655Z",
+              "articleHash": "9822fd54116b0609f904643cbc14effb4e67c8ee35b5336c91f4525df0a5b932"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "a3c193f9a0a9e8425841dec705d20f4bdf445a96334c21fe001bbe55b3f1f4a6",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:53.983Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0850",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 850,
+            "title": "Il reste",
+            "level": "A2",
+            "part": "Orden e información — Ordre et information",
+            "chapter": "C'est, il est, il y a y construcciones presentativas — C'est, il est, il y a et constructions présentatives",
+            "article_markdown": "#### En pocas palabras\n\n**Il reste** indica que algo **queda**, **permanece** o todavía está disponible después de que una parte haya desaparecido, se haya usado o haya cambiado. En **Il reste trois places**, significa “Quedan tres lugares”.\n\n#### Cómo funciona\n\nLa estructura frecuente es **il reste + groupe nominal**: **Il reste du pain**, **Il reste deux questions**. El pronombre **il** forma parte de una construcción impersonal y no representa a una persona concreta.\n\nEsta construcción presenta lo que todavía queda. Puede referirse a cantidades, tiempo, objetos, tareas o posibilidades: **Il reste dix minutes**, **Il reste un problème**.\n\nEl verbo permanece normalmente en tercera persona singular dentro de esta construcción: **Il reste trois places**.\n\n#### Ejemplos\n\n* **Il reste trois places.** — Quedan tres lugares.\n* **Il reste du café.** — Queda café.\n* **Il reste dix minutes.** — Quedan diez minutos.\n* **Il reste une question importante.** — Queda una pregunta importante.\n\n#### Observación importante\n\n**Il reste** no significa simplemente que algo existe. **Il existe plusieurs solutions** afirma existencia; **Il reste plusieurs solutions** sugiere que esas soluciones continúan disponibles o no se han eliminado.\n\nTambién puede aparecer con un sujeto léxico en otras estructuras: **Trois places restent disponibles**. Esta entrada se centra en la construcción presentativa impersonal **il reste**.\n\n#### Entradas relacionadas\n\n[Voici / voilà](#entry-849) · [Il manque](#entry-851) · [Il existe](#entry-848) · [C'est que explicativo](#entry-852)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-ad98621e64ca3032aebb37dc2c4267d6ae917b5e9e41261a8ad757ced2b54c50",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T07:53:27.211Z"
+          },
+          "version": {
+            "code": "MLS-V04-0850",
+            "articleGeneratedAt": "2026-09-19T07:53:27.211Z",
+            "articleHash": "00c61dced1c5847da4f85e5d5509f957bb28fbd0523afc95111b6cbeeb709a70",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Il reste",
+            "level": "A2",
+            "part": "Orden e información — Ordre et information",
+            "chapter": "C'est, il est, il y a y construcciones presentativas — C'est, il est, il y a et constructions présentatives"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0850",
+            "articleVersion": {
+              "code": "MLS-V04-0850",
+              "articleGeneratedAt": "2026-09-19T07:53:27.211Z",
+              "articleHash": "00c61dced1c5847da4f85e5d5509f957bb28fbd0523afc95111b6cbeeb709a70",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Il reste",
+              "level": "A2",
+              "part": "Orden e información — Ordre et information",
+              "chapter": "C'est, il est, il y a y construcciones presentativas — C'est, il est, il y a et constructions présentatives"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-ad98621e64ca3032aebb37dc2c4267d6ae917b5e9e41261a8ad757ced2b54c50",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T07:53:27.211Z",
+              "articleHash": "00c61dced1c5847da4f85e5d5509f957bb28fbd0523afc95111b6cbeeb709a70"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "5134eb75e01ed4573c6b5263c7286c9cbccd3240d9ac77b08b231eea0ef511e9",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:55.177Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0951",
+            "language": "frances",
+            "language_name": "Francés",
+            "n": 951,
+            "title": "Pouvoir de posibilidad",
+            "level": "B2",
+            "part": "Modalidad y pragmática — Modalité et pragmatique",
+            "chapter": "Modalidad, evidencialidad y actitud — Modalité, évidentialité et attitude",
+            "article_markdown": "#### En pocas palabras\n\nEl verbo **pouvoir** puede expresar **posibilidad**: presenta una situación como compatible con las circunstancias o con lo que el hablante considera posible. En **Il peut pleuvoir demain**, no se habla de capacidad ni de permiso; el sentido es «Puede llover mañana» o «Es posible que llueva mañana».\n\n#### Cómo funciona\n\nEn este uso, **pouvoir + infinitivo** indica que un acontecimiento puede producirse o que una explicación puede ser válida. Con sujetos no humanos resulta especialmente clara esta lectura: **Cette erreur peut venir du logiciel** significa que el programa es una posible causa del error.\n\nLa posibilidad puede ser práctica o epistémica. En **La route peut être fermée en hiver**, se presenta una posibilidad ligada a las condiciones; en **Il peut être chez lui**, el hablante puede formular una hipótesis sobre dónde está una persona. Los límites entre estos valores dependen del contexto y no siempre son nítidos.\n\nConviene distinguir este uso de la capacidad. **Elle peut courir dix kilomètres** puede describir una aptitud; **Elle peut arriver en retard** suele indicar que existe la posibilidad de que llegue tarde. El tipo de acción, la situación y el conocimiento compartido orientan la interpretación.\n\n#### Ejemplos\n\n* **Il peut pleuvoir demain.** — Puede llover mañana.\n* **Cette solution peut fonctionner.** — Esta solución puede funcionar.\n* **Le retard peut venir d’un problème technique.** — El retraso puede deberse a un problema técnico.\n* **Il peut être déjà parti.** — Puede que ya se haya ido.\n\n#### Observación importante\n\nUna misma oración con **pouvoir** puede ser ambigua. **Marie peut venir demain** puede significar que Marie tiene posibilidad práctica, disponibilidad o autorización para venir, pero también, en cierto contexto, que su llegada mañana es una hipótesis. No existe una forma verbal separada para cada interpretación.\n\nPor eso, «pouvoir = poder» es solo una correspondencia de traducción y no un análisis suficiente. Para identificar la posibilidad hay que observar qué relación modal expresa la oración. Frente a **devoir** epistémico, que suele presentar una inferencia fuerte, **pouvoir** deja normalmente abierta una posibilidad entre varias sin afirmar que sea la más probable.\n\n#### Entradas relacionadas\n\n[Pouvoir de capacidad](#entry-950) · [Il se peut que + subjonctif](#entry-952) · [Devoir de obligación](#entry-949) · [Il est probable que](#entry-953)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-27a47ce6f268ec382020332cbcca026753f8b0cc13fb639fedfb43ea8fe78003",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-19T08:11:41.654Z"
+          },
+          "version": {
+            "code": "MLS-V04-0951",
+            "articleGeneratedAt": "2026-09-19T08:11:41.654Z",
+            "articleHash": "d3c8bb68c3f77a552cc8bcd99f8a65df81fa563f5189f44710702efb6f9673e6",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Pouvoir de posibilidad",
+            "level": "B2",
+            "part": "Modalidad y pragmática — Modalité et pragmatique",
+            "chapter": "Modalidad, evidencialidad y actitud — Modalité, évidentialité et attitude"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V04-0951",
+            "articleVersion": {
+              "code": "MLS-V04-0951",
+              "articleGeneratedAt": "2026-09-19T08:11:41.654Z",
+              "articleHash": "d3c8bb68c3f77a552cc8bcd99f8a65df81fa563f5189f44710702efb6f9673e6",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Pouvoir de posibilidad",
+              "level": "B2",
+              "part": "Modalidad y pragmática — Modalité et pragmatique",
+              "chapter": "Modalidad, evidencialidad y actitud — Modalité, évidentialité et attitude"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-27a47ce6f268ec382020332cbcca026753f8b0cc13fb639fedfb43ea8fe78003",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-19T08:11:41.654Z",
+              "articleHash": "d3c8bb68c3f77a552cc8bcd99f8a65df81fa563f5189f44710702efb6f9673e6"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "4de3608ca57e2b7ac90d5f57eea2ecd6756d5c9d1dcb810eb1ee9fd632d18b2f",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:52:56.323Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T09:52:56.323Z",
+  "commandFile": "mls chat bridge/commands/command 0312.json"
+}
