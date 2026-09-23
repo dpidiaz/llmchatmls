@@ -1,0 +1,35 @@
+name: R33 Evidence Farm Tests
+
+on:
+  pull_request:
+    paths:
+      - 'MLS R32 EDITORIAL/evidence farm core.js'
+      - 'scripts/R33 evidence farm scheduler.cjs'
+      - 'scripts/R33 evidence farm worker.cjs'
+      - '.github/workflows/R33 Evidence Farm **'
+      - 'docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json'
+      - 'test/r33 evidence farm.test.cjs'
+  push:
+    branches:
+      - main
+    paths:
+      - 'MLS R32 EDITORIAL/evidence farm core.js'
+      - 'scripts/R33 evidence farm scheduler.cjs'
+      - 'scripts/R33 evidence farm worker.cjs'
+      - 'docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json'
+      - 'test/r33 evidence farm.test.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Ejecutar pruebas Evidence Farm
+        run: node --test 'test/r33 evidence farm.test.cjs'
