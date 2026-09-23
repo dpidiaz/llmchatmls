@@ -295,3 +295,10 @@ controlPlane:
 Hasta entonces, el estado correcto es:
 
 **PASS QUALITY / CORRECT AND REPEAT SCALE / GATE 500 BLOCKED.**
+
+
+## 14. Addendum — arquitectura GitHub-native
+
+Después de esta evaluación se adoptó una regla arquitectónica más estricta: Cloudflare/D1 ya no forman parte del proceso editorial. Por tanto, las métricas D1 de este reporte quedan como diagnóstico histórico del pipeline sustituido, no como KPI del próximo gate.
+
+El próximo benchmark debe certificar `0 D1 reads`, `0 D1 writes` y `0 interacciones Cloudflare editoriales`. Gate 500 permanece bloqueado hasta certificar el flujo GitHub-native.

@@ -1,6 +1,6 @@
 {
   "poolId": "MLS-R33-CORRECTION-REPEAT-100",
-  "manifestVersion": "1.0",
+  "manifestVersion": "2.0",
   "status": "authorized",
   "active": true,
   "system": "MLS",
@@ -9,14 +9,16 @@
   "evidenceVersion": "1.0",
   "citationStyle": "APA",
   "citationEdition": 7,
-  "purpose": "Gate 100 Correction Repeat autorizado por el checkpoint post-reporte de Gate 100; no autoriza Gate 500.",
+  "purpose": "Correction Repeat histórico ya materializado en GitHub; el pool se conserva como checkpoint. No autoriza Gate 500.",
   "gate500Authorized": false,
   "selectionMethod": "10 entradas por idioma en límites deciles, muestra fresca; exclusión explícita de Pilot 20 y Gate 100. Si un objetivo colisiona, se desplaza determinísticamente al código vecino más cercano no usado.",
   "execution": {
     "defaultClaimSize": 25,
     "maxClaimSize": 50,
     "chatOnly": true,
-    "bridgeNamespace": "mls chat bridge/commands/r33-farm/<poolId>/<batchId>/<workerId>/"
+    "evidenceRoot": "MLS R32 EDITORIAL/evidence git/",
+    "checkpointContract": "git-artifact+commit-sha",
+    "cloudflareEditorialInteractions": 0
   },
   "entries": [
     {
@@ -819,5 +821,9 @@
       "languageName": "Ruso",
       "contentPath": "content/ruso/MLS-V09-1031.json"
     }
-  ]
+  ],
+  "editorialArchitecture": "github-native",
+  "sourceOfTruth": "github",
+  "cloudflareEditorialAllowed": false,
+  "d1EditorialAllowed": false
 }

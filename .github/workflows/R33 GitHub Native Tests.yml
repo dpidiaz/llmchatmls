@@ -1,0 +1,38 @@
+name: R33 GitHub Native Tests
+
+on:
+  push:
+    branches:
+      - main
+      - r33-github-native
+    paths:
+      - 'MLS R32 EDITORIAL/evidence git.js'
+      - 'MLS R32 EDITORIAL/evidence git/**'
+      - 'MLS R32 EDITORIAL/evidence farm core.js'
+      - 'MLS R32 EDITORIAL/R33 Evidence Farm Protocol R2.md'
+      - 'scripts/R33 evidence **'
+      - 'test/r33 evidence **'
+      - 'docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json'
+      - '.github/workflows/R33 **'
+  pull_request:
+    paths:
+      - 'MLS R32 EDITORIAL/evidence git.js'
+      - 'MLS R32 EDITORIAL/evidence git/**'
+      - 'MLS R32 EDITORIAL/evidence farm core.js'
+      - 'scripts/R33 evidence **'
+      - 'test/r33 evidence **'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  github-native:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Certificar R33 GitHub-native
+        run: npm run test:r33-github-native

@@ -1,4 +1,6 @@
-# MLS R33 Evidence Farm Protocol R1
+# MLS R33 Evidence Farm Protocol R1 — SUPERSEDED
+
+> **SUPERSEDED BY R2.** Este documento se conserva únicamente como historial. El protocolo activo es `R33 Evidence Farm Protocol R2.md`, GitHub-native y sin MLS Chat Bridge/D1 para trabajo editorial.
 
 Este archivo es el contrato operativo durable para trabajo Evidence/Provenance R33 concurrente desde múltiples chats.
 
