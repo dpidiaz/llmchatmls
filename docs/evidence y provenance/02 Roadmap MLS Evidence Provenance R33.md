@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 3 — EVALUACIÓN / COMPLETE — GO**
+**Estado actual: FASE 4 — GATE 100 COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE**
 
 Progreso global inicial:
 
@@ -47,8 +47,8 @@ Progreso global inicial:
 | Fase 1 Foundation | COMPLETE | Foundation R33 certificada |
 | Fase 2 Piloto 20 | COMPLETE — PASS WITH FINDINGS | 20/20 procesadas; Fase 3 obligatoria |
 | Fase 3 Evaluación | COMPLETE — GO | E1–E5 cerrados; E3 REVIEWED humano live |
-| Fase 4 Gate 100 | READY — RUNTIME SCALE PREP NOT LIVE | Requiere runtime #146 disponible antes de ejecutar triage/reuse live |
-| Fase 5 Gate 500 | NOT STARTED | 500 estables |
+| Fase 4 Gate 100 | COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE | 100/100 VERIFIED; 0 excepciones; read amplification requiere corrección |
+| Fase 5 Gate 500 | BLOCKED / NOT AUTHORIZED | Requiere Gate 100 Correction Repeat favorable antes de iniciar 500 |
 | Fase 6 Gate 1000 | NOT STARTED | 1000 estables |
 | Fase 7 Escalamiento corpus | NOT STARTED | Viabilidad demostrada |
 | Source first para nuevas entradas | DEFERRED | Después de R33 estable |
@@ -535,35 +535,56 @@ Solo después del repeat se vuelve a emitir una decisión:
 
 # 10. FASE 4 — GATE 100
 
-**Estado: READY — SCALE RUNTIME DEPLOY PENDING**
+**Estado: COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE**
 
-Precondición: Fase 3 = GO. Cumplida. Antes de ejecutar Gate 100, el runtime que contiene #146 debe estar disponible en producción.
+Precondición Fase 3 = GO: cumplida.
 
-Objetivo: verificar estabilidad operacional y reuse del Source Registry.
+Manifest canónico: `13 Gate 100 Manifest.json`.
+Reporte final: `14 Gate 100 Final Report.md`.
 
-Manifest preparado: `13 Gate 100 Manifest.json` — 100 entradas exactas, 10 por idioma, selección determinista por cuantiles y exclusión del Pilot 20.
+Resultado certificado:
 
-Medir nuevamente todas las métricas.
+- 100/100 entradas completas;
+- 100/100 VERIFIED;
+- 0 excepciones finales;
+- 0 needs_evidence;
+- 0 external discovery pendiente;
+- 0 conflictos actuales;
+- 0 falsos REVIEWED humanos;
+- 149 claims;
+- 151 EvidenceLinks;
+- 401,507 logical Evidence bytes;
+- 134,214 D1 rows read durante ejecución;
+- 2,099 D1 rows written durante ejecución.
 
-Añadir especial atención a:
+Hallazgo de escala dominante:
 
-- dedupe cross entry;
-- source pools;
-- authority tiers;
-- language policy;
-- batch behavior;
-- D1 index efficiency;
-- revisions;
-- concurrency;
-- stale source handling.
+- D1 reads/entrada: 1,342.14 frente a 461.6 en Pilot 20;
+- Registry-first inicial: 47;
+- external discovery requerido inicialmente: 52;
+- control-plane commits/entrada: 0.64, mejora sustancial frente a Pilot 20.
+
+Decisión:
+
+`PASS QUALITY / CORRECT AND REPEAT SCALABILITY`
+
+Gate 500 no está autorizado todavía.
+
+Siguiente trabajo obligatorio:
+
+1. reducir read amplification de `triageBatchEvidenceMLS`;
+2. aumentar reuse efectivo Registry-first;
+3. robustecer guardado concurrente del control plane;
+4. ejecutar un Gate 100 Correction Repeat sobre muestra fresca y determinista;
+5. reevaluar GO / CORRECT AND REPEAT / STOP antes de Gate 500.
 
 ---
 
 # 11. FASE 5 — GATE 500
 
-**Estado: NOT STARTED**
+**Estado: BLOCKED / NOT AUTHORIZED**
 
-Precondición: 100 estable.
+Precondición: Gate 100 estable y Correction Repeat favorable.
 
 Objetivo: validar comportamiento a escala intermedia.
 
@@ -1073,53 +1094,60 @@ No inventar números cuando no se hayan medido.
 Actualizar este bloque al cerrar cada trabajo.
 
 ```
-STATUS: PHASE 3 COMPLETE — GO / GATE 100 READY — SCALE RUNTIME NOT LIVE
+STATUS: PHASE 4 GATE 100 COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE
 SYSTEM: MLS
 REPOSITORY: dpidiaz/llmchatmls
-MAIN BASE: e5ae776bb8a1e387d821690b4cc08f105aca17cc
-BRANCH: r33-phase3-go
+MAIN REPORT: docs/evidence y provenance/14 Gate 100 Final Report.md
+AUDIT COMMIT: 8ff2b7719258d79fda6ca46139991627646bf2f5
 
 DONE:
-- Pilot 20 complete: 20/20
-- E1 DOI scope PASS LIVE
-- E2 cross-entry Source reuse PASS LIVE
-- E3 human REVIEWED PASS LIVE
-- E4 Bridge batching PASS LIVE
-- E5 consumer contract PASS LIVE
-- MLS-V10-0020 status: REVIEWED
-- Human review command 0285: HTTP 200
-- Gate 100 scalability prep merged in PR #146
-- Full regression for #146 green
+- Farm complete: 10,133/10,133 terminal
+- Gate 100 manifest: 100 entries, 10 per language
+- Gate 100 final certification: 100/100 complete
+- Gate 100 final status: 100/100 VERIFIED
+- Final exceptions: 0
+- Final needs_evidence: 0
+- Final external discovery pending: 0
+- Claims current: 149
+- EvidenceLinks current: 151
+- Logical Evidence bytes: 401,507
+- D1 execution rows read: 134,214
+- D1 execution rows written: 2,099
+- Reporting rows read: 2,504
+- Source create operations: 48
+- Source reuse operations: 57
+- Source metadata updates: 7
+- Proposal attempts/failures: 105 / 10
+- Verification attempts/failures: 101 / 2
+- Control plane: 0.64 commits/entry
+- Post-report audit independently recalculated and persisted
 - FREE ONLY preserved
 - R32 preserved
 
 CURRENT:
-- Formal Phase 3 GO documentation
-- Gate 100 not yet executing because scale runtime endpoints from #146 are not live
+- Gate 100 closed
+- Scalability finding open: read amplification
+- Gate 500 blocked
 
 NEXT:
-- Gate 100 manifest prepared and blob-locked (100 entries, 10 per language)
-- Make scale runtime available through the normal authorized deployment path
-- Re-run one read-only scalability smoke
-- Start Gate 100 with batch triage, registry-first reuse and exception-first handling
-- Measure marginal cost against Pilot 20
+- Inspect and optimize triageBatchEvidenceMLS read path
+- Reduce repeated Source Registry scans/metadata reads
+- Increase Registry-first effectiveness
+- Harden concurrent result-file persistence if needed
+- Prepare fresh deterministic Gate 100 Correction Repeat manifest
+- Run Correction Repeat
+- Re-evaluate GO / CORRECT AND REPEAT / STOP
+- Only GO may authorize Gate 500
 
 BLOCKERS:
-- No Evidence/quality blocker remains in Phase 3
-- Operational blocker only: updated scale runtime not live yet
-
-HUMAN REVIEW:
-- entriesReviewedHuman: 1
-- MLS-V10-0020
-- evidenceRevision: 3
-- reviewerType: human
-- status: REVIEWED
-- reviewedAt: 2026-09-22T06:04:13.978Z
+- No quality/integrity blocker
+- Scale blocker: average D1 reads/entry 1342.14 vs Pilot 20 baseline 461.6
+- Discovery blocker: 52/99 new Evidence entries initially required external discovery
 
 DECISION:
-- GO
-- Gate 100 READY
-- Do not fall back to per-entry artisanal workflow
+- Gate 100 editorial: PASS
+- Gate 100 scalability: CORRECT AND REPEAT
+- Gate 500 authorized: false
 ```
 ---
 
@@ -1183,3 +1211,17 @@ El Roadmap es parte del sistema de control de cambios R33, no una nota opcional.
 - E1–E5 are now all PASS.
 - Phase 3 decision changes from CORRECT AND REPEAT to GO.
 - Gate 100 is READY, but the #146 scale-prep runtime endpoints are not yet live; command 0284 correctly exposed this operational gap with HTTP 404.
+
+
+## 2026-09-23 — Gate 100 closure and post-report audit
+
+- Gate 100 completed 100/100 entries across 10 languages.
+- Final certification: 100 complete, 100 VERIFIED, 0 exceptions, 0 needs_evidence, 0 external discovery pending.
+- Metrics commands 0329–0330 measured 149 claims, 151 EvidenceLinks and 401,507 logical Evidence bytes.
+- Independent audit recalculated commands 0298–0328: 134,214 D1 reads, 2,099 D1 writes, 105 proposal attempts / 10 recoverable failures, 101 verification attempts / 2 APA-blocked failures, 48 Source creates, 57 reuse operations and 7 metadata updates.
+- Reporting commands added 2,504 reads and 0 writes.
+- Initial triage: 1 already complete, 99 needed Evidence, 47 Registry-first, 52 external discovery.
+- Pilot 20 comparison baseline rechecked: 461.6 D1 reads/entry, 50 writes/entry, 8,819.95 logical bytes/entry and 197 control-plane commits.
+- Decision remains PASS QUALITY / CORRECT AND REPEAT SCALE.
+- Gate 500 remains blocked pending a successful Gate 100 Correction Repeat.
+- Audit checkpoint persisted in commit 8ff2b7719258d79fda6ca46139991627646bf2f5.
