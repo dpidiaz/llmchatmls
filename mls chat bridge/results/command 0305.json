@@ -1,0 +1,2023 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "GATE100-PT-VERSIONS-20260923-A",
+    "requested": 10,
+    "processed": 10,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0050",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 50,
+            "title": "Reducción vocálica en habla espontánea",
+            "level": "B1",
+            "part": "Sistema gráfico, pronunciación y fundamentos — Sistema gráfico, pronúncia e fundamentos",
+            "chapter": "Fonética, fonología y prosodia — Fonética, fonologia e prosódia",
+            "article_markdown": "#### En pocas palabras\n\nLa **reducción vocálica en el habla espontánea** ocurre cuando una vocal átona se pronuncia con menos contraste o con un timbre distinto del que tendría en una sílaba tónica. Es un rasgo normal del portugués brasileño conversacional y aumenta con frecuencia en habla rápida o poco enfática.\n\nPor ejemplo, la **e** final de *cidade* puede acercarse a [i] y la **o** final de *menino* a [u].\n\n#### Cómo funciona\n\nLa reducción es especialmente visible en sílabas sin acento. En gran parte de Brasil, las vocales finales **e** y **o** tienden a elevarse, mientras las vocales pretónicas pueden conservarse, elevarse o abrirse según la región y la palabra.\n\nEn conversación rápida, estos cambios pueden combinarse con otros procesos de habla conectada. Una vocal átona puede acortarse, centralizarse o integrarse más estrechamente con los sonidos vecinos. La magnitud del cambio depende de la velocidad, del foco y de la variedad regional.\n\nLa reducción no significa que la vocal “desaparezca” necesariamente. Puede seguir presente, pero con menor duración o con un timbre menos parecido al valor tónico esperado.\n\n#### Ejemplos\n\n* **cidade** — *(ciudad)*  \n  La **e** final átona puede pronunciarse próxima a [i].\n\n* **menino** — *(niño)*  \n  La **o** final átona suele elevarse hacia [u] en muchas variedades.\n\n* **telefone** — *(teléfono)*  \n  Las vocales átonas pueden mostrar realizaciones más reducidas en habla rápida que en una pronunciación lenta y enfática.\n\n#### Observación importante\n\nLa reducción vocálica es un fenómeno fonético, no un cambio ortográfico. Las palabras conservan su grafía aunque las vocales suenen diferentes en conversación.\n\nTampoco existe un único patrón nacional: posición silábica, región, velocidad y énfasis influyen en la realización.\n\n#### Entradas relacionadas\n\n[48. Entonação de perguntas](#entrada-48) · [49. Ligação entre palavras na fala](#entrada-49) · [51. Elisão e contração fonética](#entrada-51) · [52. Acento frasal e foco informacional](#entrada-52)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-4e1214b2c475e76dc3dbb266784c74bc5c0a4e1ce2d97b43c7b3d16a32aa1991",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-17T22:23:05.780Z"
+          },
+          "version": {
+            "code": "MLS-V02-0050",
+            "articleGeneratedAt": "2026-09-17T22:23:05.780Z",
+            "articleHash": "ebbb2e24416814c13f7322a0a7d8f49760bc6bd5ed0e092001f7ab7ffe8cba1b",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Reducción vocálica en habla espontánea",
+            "level": "B1",
+            "part": "Sistema gráfico, pronunciación y fundamentos — Sistema gráfico, pronúncia e fundamentos",
+            "chapter": "Fonética, fonología y prosodia — Fonética, fonologia e prosódia"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0050",
+            "articleVersion": {
+              "code": "MLS-V02-0050",
+              "articleGeneratedAt": "2026-09-17T22:23:05.780Z",
+              "articleHash": "ebbb2e24416814c13f7322a0a7d8f49760bc6bd5ed0e092001f7ab7ffe8cba1b",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Reducción vocálica en habla espontánea",
+              "level": "B1",
+              "part": "Sistema gráfico, pronunciación y fundamentos — Sistema gráfico, pronúncia e fundamentos",
+              "chapter": "Fonética, fonología y prosodia — Fonética, fonologia e prosódia"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-4e1214b2c475e76dc3dbb266784c74bc5c0a4e1ce2d97b43c7b3d16a32aa1991",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-17T22:23:05.780Z",
+              "articleHash": "ebbb2e24416814c13f7322a0a7d8f49760bc6bd5ed0e092001f7ab7ffe8cba1b"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "c806c859e3c32aead109637cdac47a32378697a995ede05c8d2b26f6ec360915",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:52.644Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0150",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 150,
+            "title": "Artículo cero con profesiones predicativas",
+            "level": "A1",
+            "part": "Artículos, determinantes y cuantificación — Artigos, determinantes e quantificação",
+            "chapter": "Sistema de artículos y referencia — Sistema de artigos e referência",
+            "article_markdown": "#### En pocas palabras\n\nCon nombres de profesión usados como **predicados** después de **ser**, el portugués suele emplear **artículo cero**, es decir, ningún artículo expreso.\n\nPor ejemplo, **Ela é médica** y **Ele é professor** presentan la profesión como una característica o clasificación del sujeto.\n\n#### Cómo funciona\n\nEn estas construcciones, el nombre profesional no identifica por sí mismo a una persona concreta; dice qué profesión tiene el sujeto. Por eso son naturales **Sou engenheiro**, **Minha irmã é professora**, **Eles são médicos**.\n\nEl patrón cambia cuando el nombre funciona como referente. **A médica chegou** identifica a una profesional concreta; **Uma médica telefonou** introduce una profesional nueva en el discurso.\n\nTambién pueden aparecer artículos cuando el grupo nominal incluye otros matices: **Ele é um excelente professor** presenta al sujeto como miembro de una clase y añade una evaluación.\n\n#### Ejemplos\n\n* **Ela é médica.**  \n  *Médica* funciona como profesión predicativa sin artículo.\n\n* **Meu pai é professor.**  \n  *Professor* clasifica al sujeto por su profesión.\n\n* **A professora chegou cedo.**  \n  Aquí el nombre es referencial y lleva artículo definido.\n\n#### Observación importante\n\nLa ausencia de artículo no es una regla aplicable a cualquier aparición de un nombre de profesión. Es especialmente característica del uso predicativo clasificatorio con **ser**.\n\nAdemás, modificadores y necesidades discursivas pueden favorecer un sintagma con artículo, como **um ótimo médico**.\n\n#### Entradas relacionadas\n\n[148. Artigo com topônimos](#entrada-148) · [149. Artigo zero com nomes próprios](#entrada-149) · [151. Artigo zero e referência genérica](#entrada-151) · [152. Contraste definido/indefinido](#entrada-152) · [108. Gênero de nomes de profissões](#entrada-108)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-d0bd6e04859fc443563af91b94e9f4506706389a3219a0fdac36f35c82653a51",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T05:28:45.604Z"
+          },
+          "version": {
+            "code": "MLS-V02-0150",
+            "articleGeneratedAt": "2026-09-18T05:28:45.604Z",
+            "articleHash": "1fc0cd918776298d44e15157fb7876ae14847b6639ad4cb41ac5ddc39684b7cc",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Artículo cero con profesiones predicativas",
+            "level": "A1",
+            "part": "Artículos, determinantes y cuantificación — Artigos, determinantes e quantificação",
+            "chapter": "Sistema de artículos y referencia — Sistema de artigos e referência"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0150",
+            "articleVersion": {
+              "code": "MLS-V02-0150",
+              "articleGeneratedAt": "2026-09-18T05:28:45.604Z",
+              "articleHash": "1fc0cd918776298d44e15157fb7876ae14847b6639ad4cb41ac5ddc39684b7cc",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Artículo cero con profesiones predicativas",
+              "level": "A1",
+              "part": "Artículos, determinantes y cuantificación — Artigos, determinantes e quantificação",
+              "chapter": "Sistema de artículos y referencia — Sistema de artigos e referência"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-d0bd6e04859fc443563af91b94e9f4506706389a3219a0fdac36f35c82653a51",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T05:28:45.604Z",
+              "articleHash": "1fc0cd918776298d44e15157fb7876ae14847b6639ad4cb41ac5ddc39684b7cc"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "12ed092456c1e55fbdd49da64d3bf81f2a6cfbcc7e850b2bbaed2e7ce25f72d5",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:53.459Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0251",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 251,
+            "title": "Todos y todas como pronombres",
+            "level": "A2",
+            "part": "Pronombres y referencia pronominal — Pronomes e referência pronominal",
+            "chapter": "Posesivos, demostrativos, indefinidos e interrogativos — Possessivos, demonstrativos, indefinidos e interrogativos",
+            "article_markdown": "#### En pocas palabras\n\n**Todos** y **todas** pueden funcionar como pronombres, es decir, representar directamente a un grupo sin que aparezca un sustantivo expreso. En **Todos chegaram cedo**, **todos** significa «todos ellos / todos los integrantes del grupo».\n\nLa forma elegida refleja género y número: **todos** para un grupo masculino o mixto en la concordancia tradicional y **todas** para un grupo femenino.\n\n#### Cómo funciona\n\nCuando acompañan a un sustantivo, aparecen construcciones como **todos os alunos** o **todas as alunas**. En el uso pronominal, el nombre puede omitirse si el contexto permite recuperarlo: **Os alunos chegaram? Sim, todos chegaram**.\n\nTambién pueden aparecer después de preposición: **Falei com todos**, **Trouxe um presente para todas**. En estos casos siguen representando a las personas o entidades ya identificables en el discurso.\n\nSe diferencian de **tudo**, que es invariable y presenta una totalidad de manera global. **Todos/todas** individualiza los miembros de un conjunto de forma más clara y conserva la concordancia de género.\n\n#### Ejemplos\n\n* **Todos chegaram cedo.** — «Todos llegaron temprano».\n* **As candidatas responderam, e todas concordaram.** — «Las candidatas respondieron y todas estuvieron de acuerdo».\n* **Eu falei com todos.** — «Hablé con todos».\n\n#### Observación importante\n\nEl sustantivo omitido debe ser recuperable por el contexto. Sin esa referencia, **todos/todas** puede resultar menos claro sobre qué grupo está siendo cuantificado.\n\nNo debe confundirse el uso pronominal con **todo/toda + sustantivo singular**, como **todo o livro** o **toda a casa**, que expresa la totalidad de una entidad.\n\n#### Entradas relacionadas\n\n[249. Nada como pronome indefinido](#entrada-249) · [250. Tudo](#entrada-250) · [252. Cada um/cada uma](#entrada-252) · [253. Qualquer um](#entrada-253) · [227. Pronomes tônicos depois de preposição](#entrada-227)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-2856b156037c7f1e4add9565becaa03fe4b948710761e1439d85c0613c0bc75d",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T05:31:17.650Z"
+          },
+          "version": {
+            "code": "MLS-V02-0251",
+            "articleGeneratedAt": "2026-09-18T05:31:17.650Z",
+            "articleHash": "cf4246ff869bc839815ec32c56c8891b1151e6fea7a3a3e73ba50a4648a0ea40",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Todos y todas como pronombres",
+            "level": "A2",
+            "part": "Pronombres y referencia pronominal — Pronomes e referência pronominal",
+            "chapter": "Posesivos, demostrativos, indefinidos e interrogativos — Possessivos, demonstrativos, indefinidos e interrogativos"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0251",
+            "articleVersion": {
+              "code": "MLS-V02-0251",
+              "articleGeneratedAt": "2026-09-18T05:31:17.650Z",
+              "articleHash": "cf4246ff869bc839815ec32c56c8891b1151e6fea7a3a3e73ba50a4648a0ea40",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Todos y todas como pronombres",
+              "level": "A2",
+              "part": "Pronombres y referencia pronominal — Pronomes e referência pronominal",
+              "chapter": "Posesivos, demostrativos, indefinidos e interrogativos — Possessivos, demonstrativos, indefinidos e interrogativos"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-2856b156037c7f1e4add9565becaa03fe4b948710761e1439d85c0613c0bc75d",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T05:31:17.650Z",
+              "articleHash": "cf4246ff869bc839815ec32c56c8891b1151e6fea7a3a3e73ba50a4648a0ea40"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "b5cecda0e68e60d3b612cafc64ac99ed9d94fc8cd5ca639801015a9816c53605",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:54.255Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0351",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 351,
+            "title": "Conjugación y usos del verbo trazer",
+            "level": "B1",
+            "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+            "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos",
+            "article_markdown": "#### En pocas palabras\n\n**Trazer** es un verbo irregular que significa normalmente “traer”: transportar o hacer llegar algo o alguien hacia el lugar del hablante, del interlocutor o de otro punto tomado como referencia.\n\nEn el presente aparecen **eu trago, você/ele/ela traz, nós trazemos, vocês/eles/elas trazem**.\n\n#### Cómo funciona\n\nEl verbo puede llevar directamente aquello que se transporta: **Eu trago os documentos amanhã**. Para indicar procedencia o destino aparecen expresiones como **trazer algo de casa** y **trazer o material para a escola**. También puede acompañarse de **com**: **Ela trouxe o irmão com ela**.\n\nSu conjugación cambia bastante. En el pretérito perfecto se usan **eu trouxe, você/ele/ela trouxe, nós trouxemos, eles trouxeram**. En el imperfecto aparecen **trazia, trazíamos, traziam**.\n\nEl presente de subjuntivo utiliza la base **trag-**: **que eu traga, que nós tragamos, que eles tragam**. En el futuro de subjuntivo aparece otra base: **quando eu trouxer, quando nós trouxermos, quando eles trouxerem**.\n\nEl significado de **trazer** también puede ser figurado. En **A mudança trouxe problemas**, no hay transporte físico: la construcción significa que la situación produjo o provocó problemas.\n\n#### Ejemplos\n\n* **Eu trago café para o escritório todos os dias.**  \n  *(Traigo café a la oficina todos los días.)*  \n  **Trago** es primera persona del presente.\n\n* **Ela trouxe os livros ontem.**  \n  *(Ella trajo los libros ayer.)*  \n  **Trouxe** es pretérito perfecto.\n\n* **Quando você trouxer o contrato, podemos assinar.**  \n  *(Cuando traigas el contrato, podemos firmar.)*  \n  **Trouxer** es futuro de subjuntivo.\n\n#### Observación importante\n\nEn una primera aproximación, **trazer** orienta el movimiento hacia el punto de referencia, mientras **levar** suele orientarlo desde ese punto hacia otro lugar: **Traga o livro aqui** frente a **Leve o livro para a sala ao lado**. La elección depende de la perspectiva adoptada en la situación.\n\nNo debe formarse el pasado como si el verbo fuera regular: las formas estándar son **trouxe, trouxemos, trouxeram**, no formas construidas directamente sobre *traz-*.\n\n#### Entradas relacionadas\n\n[349. Conjugação e usos do verbo dizer](#entrada-349) · [350. Conjugação e usos do verbo fazer](#entrada-350) · [352. Conjugação e usos do verbo ler](#entrada-352) · [353. Conjugação e usos do verbo crer](#entrada-353) · [325. Conjugação regular de decidir](#entrada-325)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-3098b5b5b28ac26933a43bac5320b79f3c4ac734b791907be5ede5f81b093879",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T05:33:37.963Z"
+          },
+          "version": {
+            "code": "MLS-V02-0351",
+            "articleGeneratedAt": "2026-09-18T05:33:37.963Z",
+            "articleHash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Conjugación y usos del verbo trazer",
+            "level": "B1",
+            "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+            "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0351",
+            "articleVersion": {
+              "code": "MLS-V02-0351",
+              "articleGeneratedAt": "2026-09-18T05:33:37.963Z",
+              "articleHash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Conjugación y usos del verbo trazer",
+              "level": "B1",
+              "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+              "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-3098b5b5b28ac26933a43bac5320b79f3c4ac734b791907be5ede5f81b093879",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T05:33:37.963Z",
+              "articleHash": "705a58eca532072eef05e39166e89d8f80ac7c0a575faf7725802b6a97ca48bf"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "ffe81c2cf4f5a24fac1136d1de92117a64914e396dc22c99d48a0f070e0a10a9",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:55.066Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0451",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 451,
+            "title": "Futuro de subjuntivo: formación",
+            "level": "B1",
+            "part": "Subjuntivo y formas no finitas — Subjuntivo e formas não finitas",
+            "chapter": "Sistema del subjuntivo — Sistema do subjuntivo",
+            "article_markdown": "#### En pocas palabras\n\nEl **futuro do subjuntivo** tiene formas como **falar, falares, falar, falarmos, falardes, falarem** y aparece sobre todo en ciertas subordinadas que se refieren a situaciones futuras todavía abiertas. En **Quando eu chegar, aviso você**, **chegar** es futuro de subjuntivo.\n\nNo debe confundirse con el futuro de indicativo, como **chegarei**. Aunque ambos pueden referirse al futuro, pertenecen a modos distintos y aparecen en construcciones diferentes.\n\n#### Cómo funciona\n\nUna regla productiva parte de la tercera persona plural del pretérito perfecto de indicativo. De **falaram** se elimina **-am** y queda **falar-**; a esa base se añaden **Ø, -es, Ø, -mos, -des, -em**: **eu falar, tu falares, você falar, nós falarmos, vós falardes, vocês falarem**.\n\nCon verbos regulares, varias formas coinciden gráficamente con el infinitivo: **quando eu comer**, **se você partir**, **quando nós falarmos**. La función se reconoce por la construcción y por la flexión del paradigma completo.\n\nLas irregularidades del pretérito perfecto se conservan: **fizeram → fizer**, **tiveram → tiver**, **vieram → vier**, **puderam → puder**, **disseram → disser**, **foram → for**. Por eso **se eu tiver** no se forma directamente a partir del infinitivo **ter**.\n\nEn portugués brasileño, **você/vocês** se combinan con formas de tercera persona: **quando você chegar**, **quando vocês chegarem**. **Tu** tiene la forma normativa **quando tu chegares**, aunque los patrones de concordancia varían regionalmente.\n\n#### Ejemplos\n\n* **Quando eu chegar, aviso você.**  \n  *(Cuando llegue, te aviso.)*  \n  **Chegar** es futuro de subjuntivo dentro de una referencia futura introducida por **quando**.\n\n* **Se nós tivermos tempo, vamos sair.**  \n  *(Si tenemos tiempo, vamos a salir.)*  \n  **Tivermos** conserva la base irregular **tiver-**, relacionada con **tiveram**.\n\n* **Quando eles fizerem isso, entenderão melhor.**  \n  *(Cuando hagan eso, entenderán mejor.)*  \n  **Fizerem** se forma sobre la base irregular **fizer-**.\n\n#### Observación importante\n\nEl ejemplo **Amanhã estudarei em casa** pertenece al **futuro do presente do indicativo**, no al futuro de subjuntivo. Para mostrar este último hace falta una estructura que realmente lo seleccione, como **quando eu estudar** o **se eu estudar**.\n\nAdemás, futuro de subjuntivo e infinitivo personal pueden coincidir en verbos regulares, pero no son la misma categoría. Verbos irregulares como **ter → tiver** ayudan a mostrar la diferencia con claridad.\n\n#### Entradas relacionadas\n\n[449. Pretérito imperfeito do subjuntivo em hipóteses](#entrada-449) · [450. Pretérito imperfeito depois de como se](#entrada-450) · [452. Futuro do subjuntivo depois de se](#entrada-452) · [453. Futuro do subjuntivo depois de quando](#entrada-453) · [428. Futuro do pretérito: formação](#entrada-428)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-240b3674e1a4e5b9c95e0af102820e7ee0905a78c0fd0c45e04fe5cd655d1e57",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T06:04:00.901Z"
+          },
+          "version": {
+            "code": "MLS-V02-0451",
+            "articleGeneratedAt": "2026-09-18T06:04:00.901Z",
+            "articleHash": "83b9ade04198648e717e406afc774c81890e7b96f7b812aeb009530fc638603a",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Futuro de subjuntivo: formación",
+            "level": "B1",
+            "part": "Subjuntivo y formas no finitas — Subjuntivo e formas não finitas",
+            "chapter": "Sistema del subjuntivo — Sistema do subjuntivo"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0451",
+            "articleVersion": {
+              "code": "MLS-V02-0451",
+              "articleGeneratedAt": "2026-09-18T06:04:00.901Z",
+              "articleHash": "83b9ade04198648e717e406afc774c81890e7b96f7b812aeb009530fc638603a",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Futuro de subjuntivo: formación",
+              "level": "B1",
+              "part": "Subjuntivo y formas no finitas — Subjuntivo e formas não finitas",
+              "chapter": "Sistema del subjuntivo — Sistema do subjuntivo"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-240b3674e1a4e5b9c95e0af102820e7ee0905a78c0fd0c45e04fe5cd655d1e57",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T06:04:00.901Z",
+              "articleHash": "83b9ade04198648e717e406afc774c81890e7b96f7b812aeb009530fc638603a"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "efbc01efffdf3f2a333306ef702a92ea4f08830220ee32fe23cae64e59f6d07c",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:55.920Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0550",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 550,
+            "title": "Verbos que seleccionan de",
+            "level": "B1",
+            "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+            "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal",
+            "article_markdown": "#### En pocas palabras\n\nAlgunos verbos portugueses seleccionan un complemento introducido por la preposición **de**. Esa selección forma parte de su **regencia verbal**, es decir, del patrón gramatical con el que el verbo construye sus complementos.\n\nEn **Ela gosta de música**, *gostar* selecciona **de** y el grupo **de música** completa la relación expresada por el verbo.\n\n#### Cómo funciona\n\nEntre los verbos frecuentes con **de** están **gostar de**, **precisar de** en determinados sentidos, **lembrar-se de**, **esquecer-se de** y **depender de**. La preposición introduce el complemento completo: **gostar de música brasileira**, **depender de boas condições**.\n\nLa forma concreta del complemento puede producir contracciones: **de + o → do**, **de + a → da**, **de + os → dos**, **de + as → das**. Así aparecen **gosto do livro** y **depende das circunstâncias**.\n\nLa regencia puede cambiar si cambia la construcción. **Lembrar algo** y **lembrar-se de algo**, por ejemplo, pertenecen a patrones diferentes. Por eso no basta memorizar una traducción aislada del verbo.\n\nTambién existe variación entre norma formal y uso brasileño real con algunos verbos. Conviene aprender cada verbo junto con su estructura y no transferir automáticamente la preposición usada en español.\n\n#### Ejemplos\n\n* **Ela gosta de música.**  \n  *(A ella le gusta la música.)*  \n  *Gostar* selecciona un complemento con **de**.\n\n* **Precisamos de mais tempo.**  \n  *(Necesitamos más tiempo.)*  \n  En este uso, *precisar* se construye con **de**.\n\n* **Tudo depende das circunstâncias.**  \n  *(Todo depende de las circunstancias.)*  \n  **Das** resulta de **de + as**.\n\n#### Observación importante\n\nNo todo grupo introducido por **de** es un argumento seleccionado por el verbo. **Ela trabalhou de manhã** contiene una expresión temporal; no forma parte de la regencia de *trabalhar* del mismo modo que **de música** con *gostar*.\n\nAdemás, la selección de **de** pertenece al verbo y a su significado concreto. Un cambio de sentido o de forma pronominal puede modificar la regencia.\n\n#### Entradas relacionadas\n\n[548. Objeto direto preposicionado](#entrada-548) · [549. Alternância dar algo a alguém / dar-lhe algo](#entrada-549) · [551. Verbos que selecionam em](#entrada-551) · [552. Verbos que selecionam a](#entrada-552) · [440. Presente do subjuntivo de verbos irregulares](#entrada-440)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-8956e899c20cde4c8974f64c4d51bbd54c44fa99624080beab53ee5c133ef42a",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T06:21:36.644Z"
+          },
+          "version": {
+            "code": "MLS-V02-0550",
+            "articleGeneratedAt": "2026-09-18T06:21:36.644Z",
+            "articleHash": "a655a25d4702f5c44ca5cab3554d0322d325f4ff0333cdd29b49e632be157c46",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Verbos que seleccionan de",
+            "level": "B1",
+            "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+            "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0550",
+            "articleVersion": {
+              "code": "MLS-V02-0550",
+              "articleGeneratedAt": "2026-09-18T06:21:36.644Z",
+              "articleHash": "a655a25d4702f5c44ca5cab3554d0322d325f4ff0333cdd29b49e632be157c46",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Verbos que seleccionan de",
+              "level": "B1",
+              "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+              "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-8956e899c20cde4c8974f64c4d51bbd54c44fa99624080beab53ee5c133ef42a",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T06:21:36.644Z",
+              "articleHash": "a655a25d4702f5c44ca5cab3554d0322d325f4ff0333cdd29b49e632be157c46"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "fded23eb1875a854f3409a2f3206caa1d0a3f061a371255919c4b712f1fdbd3d",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:56.746Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0650",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 650,
+            "title": "Conector nem",
+            "level": "A2",
+            "part": "Adverbios, conjunciones y conectores — Advérbios, conjunções e conectores",
+            "chapter": "Conjunciones, conectores y relaciones lógicas — Conjunções, conectores e relações lógicas",
+            "article_markdown": "#### En pocas palabras\n\n**Nem** es un conector negativo que sirve para añadir otro elemento, hecho o posibilidad dentro de una negación. En **Não tenho tempo nem dinheiro**, significa que faltan las dos cosas: tiempo y dinero.\n\nTambién puede equivaler a “ni” o, en ciertos contextos, a “tampoco”.\n\n#### Cómo funciona\n\nDespués de una negación, **nem** añade otro contenido negativo: **Ela não ligou nem mandou mensagem**. No es necesario repetir **não** delante del segundo verbo porque **nem** ya mantiene la coordinación negativa.\n\nTambién puede aparecer en estructuras repetidas: **Nem João nem Maria vieram**, donde se excluyen los dos participantes. En este patrón, **nem... nem...** coordina elementos con el mismo valor negativo.\n\nEn respuestas o comentarios breves, **nem eu** puede significar “yo tampoco”: **Eu não entendi. — Nem eu.**\n\n#### Ejemplos\n\n* **Não tenho tempo nem dinheiro.** — añade dos elementos bajo la misma negación.\n* **Ela não come carne nem peixe.** — ambos alimentos quedan negados.\n* **Nem Pedro nem Ana chegaram cedo.** — **nem... nem...** coordina dos sujetos dentro de una negación.\n\n#### Observación importante\n\n**Nem** no es simplemente una variante negativa de **e** en cualquier contexto. Su presencia introduce o continúa una relación negativa. Para una suma afirmativa se usan recursos como **e**, **também** o **além disso**, según la estructura.\n\n#### Entradas relacionadas\n\n[648. Conector além disso](#entrada-648) · [649. Conector também](#entrada-649) · [651. Conector ou... ou](#entrada-651) · [652. Conector ora... ora](#entrada-652) · [949. Daí como conector conversacional](#entrada-949)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-b7a0da0f14593f625d41fbd928af13995b9b9a98f5b418b4a162cc30b669f214",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T06:05:22.035Z"
+          },
+          "version": {
+            "code": "MLS-V02-0650",
+            "articleGeneratedAt": "2026-09-18T06:05:22.035Z",
+            "articleHash": "4444f70bfaa9597479b78ee3a2effe65e6b68c4657e9412eb767f1eb3de7cc23",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Conector nem",
+            "level": "A2",
+            "part": "Adverbios, conjunciones y conectores — Advérbios, conjunções e conectores",
+            "chapter": "Conjunciones, conectores y relaciones lógicas — Conjunções, conectores e relações lógicas"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0650",
+            "articleVersion": {
+              "code": "MLS-V02-0650",
+              "articleGeneratedAt": "2026-09-18T06:05:22.035Z",
+              "articleHash": "4444f70bfaa9597479b78ee3a2effe65e6b68c4657e9412eb767f1eb3de7cc23",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Conector nem",
+              "level": "A2",
+              "part": "Adverbios, conjunciones y conectores — Advérbios, conjunções e conectores",
+              "chapter": "Conjunciones, conectores y relaciones lógicas — Conjunções, conectores e relações lógicas"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-b7a0da0f14593f625d41fbd928af13995b9b9a98f5b418b4a162cc30b669f214",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T06:05:22.035Z",
+              "articleHash": "4444f70bfaa9597479b78ee3a2effe65e6b68c4657e9412eb767f1eb3de7cc23"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "c3265fe7679e5bab0764d156f1539c72ec18f33a3d1002ae1e8e317afb9aee7a",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:57.610Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0750",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 750,
+            "title": "Coordinación conclusiva con portanto",
+            "level": "A2",
+            "part": "Coordinación y subordinación — Coordenação e subordinação",
+            "chapter": "Coordinación — Coordenação",
+            "article_markdown": "#### En pocas palabras\n\n**Portanto** introduce una **conclusión o consecuencia lógica** a partir de una información anterior. En **Estava chovendo; portanto, ficamos em casa**, la segunda parte se presenta como resultado o conclusión de la primera.\n\nLa definición de referencia sobre dependencia no describe bien esta coordinación conclusiva.\n\n#### Cómo funciona\n\n**Portanto** conecta normalmente dos oraciones o enunciados relacionados. Puede aparecer al inicio del segundo miembro: **O prazo acabou; portanto, não podemos enviar o arquivo**.\n\nTambién puede ocupar una posición interna: **O prazo acabou; não podemos, portanto, enviar o arquivo**. La puntuación depende de la estructura, pero en escritura es frecuente aislar **portanto** con comas cuando aparece intercalado.\n\nSu valor es conclusivo: la segunda información se presenta como inferencia, resultado o consecuencia razonada de la primera.\n\n#### Ejemplos\n\n* **Estava chovendo; portanto, ficamos em casa.** — la segunda oración presenta una conclusión práctica.\n* **Ele estudou muito; portanto, estava preparado.** — la preparación se infiere del estudio.\n* **O documento está incompleto; não pode, portanto, ser aprovado.** — **portanto** aparece intercalado.\n\n#### Observación importante\n\n**Portanto** no expresa causa. La causa aparece antes; **portanto** introduce lo que se concluye a partir de ella.\n\nEn la conversación brasileña también son frecuentes alternativas como **então** y **por isso**, pero no son idénticas en todos los registros y estructuras.\n\n#### Entradas relacionadas\n\n[748. Coordenação adversativa com mas](#entrada-748) · [749. Coordenação alternativa com ou](#entrada-749) · [751. Coordenação explicativa com pois](#entrada-751) · [752. Coordenação de sintagmas nominais](#entrada-752) · [130. Coordenação dentro do sintagma nominal](#entrada-130)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "chat-draft-d1cc8adbf2e5f1b412e9a3ef7d7b95174af6be730e78dafc55a101c87d0bc368",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T06:45:14.931Z"
+          },
+          "version": {
+            "code": "MLS-V02-0750",
+            "articleGeneratedAt": "2026-09-18T06:45:14.931Z",
+            "articleHash": "ee725514279cbedb0cb2f290393490c338d7817de768e431fb2010adf3e4cd9d",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Coordinación conclusiva con portanto",
+            "level": "A2",
+            "part": "Coordinación y subordinación — Coordenação e subordinação",
+            "chapter": "Coordinación — Coordenação"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0750",
+            "articleVersion": {
+              "code": "MLS-V02-0750",
+              "articleGeneratedAt": "2026-09-18T06:45:14.931Z",
+              "articleHash": "ee725514279cbedb0cb2f290393490c338d7817de768e431fb2010adf3e4cd9d",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Coordinación conclusiva con portanto",
+              "level": "A2",
+              "part": "Coordinación y subordinación — Coordenação e subordinação",
+              "chapter": "Coordinación — Coordenação"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "chat-draft-d1cc8adbf2e5f1b412e9a3ef7d7b95174af6be730e78dafc55a101c87d0bc368",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T06:45:14.931Z",
+              "articleHash": "ee725514279cbedb0cb2f290393490c338d7817de768e431fb2010adf3e4cd9d"
+            },
+            "r32": {
+              "provenance": null,
+              "origin": "r32-canonical",
+              "stagingRunId": null,
+              "snapshotVersion": null,
+              "snapshotCommit": null,
+              "integratedAt": null
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "a4706e3f82e0d7a557931cd4fb52ae20c530aa5973e07d1a7d92ebe40a8c20e4",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 108,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 7,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:58.463Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0850",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 850,
+            "title": "Cambio de adverbios de lugar",
+            "level": "B1",
+            "part": "Relativas, condicionales y discurso referido — Relativas, condicionais e discurso relatado",
+            "chapter": "Discurso directo, indirecto y secuencia temporal — Discurso direto, indireto e sequência temporal",
+            "article_markdown": "#### En pocas palabras\n\nLos adverbios y expresiones de **lugar** pueden cambiar en discurso indirecto cuando el reporte se realiza desde otro sitio. **Aqui** se refiere al lugar del hablante; si ese punto cambia, puede ser necesario usar **ali, lá** o una descripción nominal.\n\nEn **“Estou aqui”**, el significado de **aqui** depende completamente de dónde habla la persona.\n\n#### Cómo funciona\n\nSi alguien dice en Recife **“Vou ficar aqui”** y después se reporta desde otra ciudad, puede decirse **Ele disse que ficaria lá em Recife**.\n\nPero si quien reporta permanece en el mismo lugar, **aqui** puede conservarse: **Ele disse que ficaria aqui até amanhã**.\n\nLa elección entre **aqui, aí, ali, lá** presenta variación regional y discursiva en el portugués brasileño. Lo esencial es reconstruir correctamente el espacio del mensaje.\n\n#### Ejemplos\n\n* **“Vou ficar aqui.” → Ele disse que ficaria lá.** — cambia el centro espacial.\n* **“Deixe a caixa aí.” → Ela pediu que deixássemos a caixa ali.**\n* **“Trabalho neste prédio.” → Disse que trabalhava naquele prédio.**\n* **Ele falou nesta sala e eu continuo aqui: “Espero aqui.” → Ele disse que esperaria aqui.** — el lugar se mantiene.\n\n#### Observación importante\n\nNo existe una equivalencia obligatoria **aqui → lá**. Si el punto espacial sigue siendo el mismo, mantener **aqui** es correcto.\n\nDemostrativos y adverbios de lugar forman parte de la deixis y deben interpretarse conjuntamente con la situación comunicativa.\n\n#### Entradas relacionadas\n\n[848. Mudança de demonstrativos](#entrada-848) · [849. Mudança de advérbios de tempo](#entrada-849)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "staging-f68e0ac6f5246e4606244a607295d3c07b22e6a43d5006c84b8d7c6490eb074e",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T17:15:52.349Z"
+          },
+          "version": {
+            "code": "MLS-V02-0850",
+            "articleGeneratedAt": "2026-09-18T17:15:52.349Z",
+            "articleHash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Cambio de adverbios de lugar",
+            "level": "B1",
+            "part": "Relativas, condicionales y discurso referido — Relativas, condicionais e discurso relatado",
+            "chapter": "Discurso directo, indirecto y secuencia temporal — Discurso direto, indireto e sequência temporal"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0850",
+            "articleVersion": {
+              "code": "MLS-V02-0850",
+              "articleGeneratedAt": "2026-09-18T17:15:52.349Z",
+              "articleHash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Cambio de adverbios de lugar",
+              "level": "B1",
+              "part": "Relativas, condicionales y discurso referido — Relativas, condicionais e discurso relatado",
+              "chapter": "Discurso directo, indirecto y secuencia temporal — Discurso direto, indireto e sequência temporal"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "staging-f68e0ac6f5246e4606244a607295d3c07b22e6a43d5006c84b8d7c6490eb074e",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T17:15:52.349Z",
+              "articleHash": "ca68b9f42f9bffb447bfd1cbac265f8831f1f96dae667b9af86917ee85b28069"
+            },
+            "r32": {
+              "provenance": {
+                "code": "MLS-V02-0850",
+                "origin": "github-staging",
+                "standard": "MLS R32",
+                "prompt_version": "32.0",
+                "staging_run_id": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+                "snapshot_version": "32.0-4fc97a6b1b85-20260918161056",
+                "snapshot_commit": "261616058b18ac2e3c83b0059e5a7c095f260933",
+                "staged_at": "2026-09-18T17:15:52.349Z",
+                "integrated_at": "2026-09-18T20:35:04.826Z",
+                "source_audit_model": "staging-f68e0ac6f5246e4606244a607295d3c07b22e6a43d5006c84b8d7c6490eb074e",
+                "recorded_at": "2026-09-19T00:56:05.237Z"
+              },
+              "origin": "github-staging",
+              "stagingRunId": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+              "snapshotVersion": "32.0-4fc97a6b1b85-20260918161056",
+              "snapshotCommit": "261616058b18ac2e3c83b0059e5a7c095f260933",
+              "integratedAt": "2026-09-18T20:35:04.826Z"
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "a1d05e12bb68ca87e8c744df50da99407ad2436eb83d231eb3bc52aad02bdba9",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 109,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:42:59.333Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "entradaEvidenceMLS",
+        "method": "GET",
+        "path": "/api/wiki/editorial/evidence/entry",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0950",
+            "language": "portugues",
+            "language_name": "Portugués brasileño",
+            "n": 950,
+            "title": "Sabe? como marcador interpersonal",
+            "level": "B1",
+            "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+            "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira",
+            "article_markdown": "#### En pocas palabras\n\n**Sabe?** puede funcionar como marcador interpersonal en conversación. No siempre pregunta literalmente si el interlocutor “sabe”; puede buscar complicidad, comprobar atención o introducir una explicación.\n\nEn **Foi muito estranho, sabe?**, el hablante invita al interlocutor a compartir su perspectiva.\n\n#### Cómo funciona\n\nPuede aparecer al final o en medio del turno: **Eu fiquei preocupado, sabe?**, **Ele é, sabe, meio reservado**.\n\nLa entonación determina si funciona como pregunta real o como marcador discursivo.\n\n#### Ejemplos\n\n* **Foi difícil, sabe?**\n* **Eu queria mudar, sabe, tentar outra coisa.**\n* **Você sabe onde fica?** — pregunta literal, para contraste.\n* **Ele não gostou, sabe?**\n\n#### Observación importante\n\nNo toda aparición de **sabe?** es un marcador discursivo. En **Você sabe a resposta?**, **saber** conserva su sentido léxico pleno.\n\nLa diferencia se reconoce por sintaxis, entonación y función interactiva.\n\n#### Entradas relacionadas\n\n[946. Né? como marcador de interação](#entrada-946) · [951. Viu? como marcador interpessoal](#entrada-951) · [953. Assim como marcador conversacional](#entrada-953)",
+            "provider": "mls-r32",
+            "model": "editorial-standard-32",
+            "audit_provider": "mls-r32-validator",
+            "audit_model": "staging-995e1bdc8fed3e0807b83e09fdd3f5061815f57cf4ef941f5468d93e9232d8fd",
+            "prompt_version": "32.0",
+            "generated_at": "2026-09-18T18:09:36.584Z"
+          },
+          "version": {
+            "code": "MLS-V02-0950",
+            "articleGeneratedAt": "2026-09-18T18:09:36.584Z",
+            "articleHash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Sabe? como marcador interpersonal",
+            "level": "B1",
+            "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+            "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira"
+          },
+          "state": null,
+          "evaluation": {
+            "status": "UNSOURCED",
+            "reasons": [
+              "insufficient_mapping"
+            ],
+            "claimsTotal": 0,
+            "claimsVerified": 0,
+            "sourcesTotal": 0,
+            "conflictsTotal": 0,
+            "needsReview": false,
+            "citationReady": false,
+            "verifiedAt": null,
+            "reviewedAt": null
+          },
+          "reviews": [],
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "provenance": {
+            "system": {
+              "system": "MLS",
+              "repository": "dpidiaz/llmchatmls",
+              "domain": "language"
+            },
+            "code": "MLS-V02-0950",
+            "articleVersion": {
+              "code": "MLS-V02-0950",
+              "articleGeneratedAt": "2026-09-18T18:09:36.584Z",
+              "articleHash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Sabe? como marcador interpersonal",
+              "level": "B1",
+              "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+              "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira"
+            },
+            "generation": {
+              "generatedWithAI": true,
+              "provider": "mls-r32",
+              "model": "editorial-standard-32",
+              "auditProvider": "mls-r32-validator",
+              "auditModel": "staging-995e1bdc8fed3e0807b83e09fdd3f5061815f57cf4ef941f5468d93e9232d8fd",
+              "promptVersion": "32.0",
+              "generatedAt": "2026-09-18T18:09:36.584Z",
+              "articleHash": "afaf050709f07afa3a41fd47533490a46268166d000ba2f57fad05decb589913"
+            },
+            "r32": {
+              "provenance": {
+                "code": "MLS-V02-0950",
+                "origin": "github-staging",
+                "standard": "MLS R32",
+                "prompt_version": "32.0",
+                "staging_run_id": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+                "snapshot_version": "32.0-4fc97a6b1b85-20260918161056",
+                "snapshot_commit": "261616058b18ac2e3c83b0059e5a7c095f260933",
+                "staged_at": "2026-09-18T18:09:36.584Z",
+                "integrated_at": "2026-09-18T20:37:15.240Z",
+                "source_audit_model": "staging-995e1bdc8fed3e0807b83e09fdd3f5061815f57cf4ef941f5468d93e9232d8fd",
+                "recorded_at": "2026-09-19T00:56:53.946Z"
+              },
+              "origin": "github-staging",
+              "stagingRunId": "bf889546-6dbf-4713-9418-d1bca315d7c4",
+              "snapshotVersion": "32.0-4fc97a6b1b85-20260918161056",
+              "snapshotCommit": "261616058b18ac2e3c83b0059e5a7c095f260933",
+              "integratedAt": "2026-09-18T20:37:15.240Z"
+            },
+            "r33": {
+              "evidenceVersion": "1.0",
+              "effectiveStatus": "UNSOURCED",
+              "stateCurrent": false,
+              "state": null,
+              "evidenceSnapshotHash": "bc8d94fc4af64fe0b1dd6196e6bf43f22cd474b12ee65927574b650c9e14daf2",
+              "verificationReviewId": null,
+              "editorialReviewId": null,
+              "verifiedAt": null,
+              "reviewedAt": null,
+              "revisions": []
+            }
+          },
+          "telemetry": {
+            "d1": {
+              "queries": 19,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 109,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T09:43:00.183Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T09:43:00.183Z",
+  "commandFile": "mls chat bridge/commands/command 0305.json"
+}
