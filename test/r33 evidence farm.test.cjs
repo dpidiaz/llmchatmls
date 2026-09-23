@@ -20,7 +20,7 @@ function resultFor(state,code,overrides={}){
 }
 test('Evidence Farm R2 is GitHub-native and Gate 500 remains blocked',()=>{
   const pool=core.loadPool('.');
-  assert.equal(pool.poolId,'MLS-R33-CORRECTION-REPEAT-100');
+  assert.equal(pool.poolId,'MLS-R33-GITHUB-NATIVE-BENCHMARK-100');
   assert.equal(pool.editorialArchitecture,'github-native');
   assert.equal(pool.sourceOfTruth,'github');
   assert.equal(pool.cloudflareEditorialAllowed,false);
@@ -28,10 +28,11 @@ test('Evidence Farm R2 is GitHub-native and Gate 500 remains blocked',()=>{
   assert.equal(pool.gate500Authorized,false);
   assert.equal(pool.entries.length,100);
 });
-test('Correction Repeat pool remains fresh versus Pilot 20 and Gate 100',()=>{
-  const pool=core.loadPool('.'),pilot=JSON.parse(fs.readFileSync('docs/evidence y provenance/04 Pilot 20 Manifest.json','utf8')),gate=JSON.parse(fs.readFileSync('docs/evidence y provenance/13 Gate 100 Manifest.json','utf8'));
-  const prior=new Set([...(pilot.entries||[]).map(x=>x.code),...(gate.entries||[]).map(x=>x.code)]);
+test('GitHub-native benchmark is fresh versus Pilot 20, Gate 100 and Correction Repeat',()=>{
+  const pool=core.loadPool('.'),pilot=JSON.parse(fs.readFileSync('docs/evidence y provenance/04 Pilot 20 Manifest.json','utf8')),gate=JSON.parse(fs.readFileSync('docs/evidence y provenance/13 Gate 100 Manifest.json','utf8')),repeat=JSON.parse(fs.readFileSync('docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json','utf8'));
+  const prior=new Set([...(pilot.entries||[]).map(x=>x.code),...(gate.entries||[]).map(x=>x.code),...(repeat.entries||[]).map(x=>x.code)]);
   assert.equal(pool.entries.some(x=>prior.has(x.code)),false);
+  assert.equal(pool.entries.every(x=>/^[a-f0-9]{40}$/.test(x.contentBlobSha||'')),true);
 });
 test('claim defaults to 25 and caps at 50',()=>{
   assert.equal(core.parseCommand(JSON.stringify({operation:'claim',requestId:'request-12345678',workerId:'worker-12345678'})).requested,25);

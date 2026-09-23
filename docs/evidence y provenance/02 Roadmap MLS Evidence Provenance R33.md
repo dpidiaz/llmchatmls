@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 4 — GATE 100 COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE**
+**Estado actual: FASE 4B — GITHUB-NATIVE BENCHMARK 100 READY / GATE 500 BLOCKED**
 
 Progreso global inicial:
 
@@ -48,7 +48,8 @@ Progreso global inicial:
 | Fase 2 Piloto 20 | COMPLETE — PASS WITH FINDINGS | 20/20 procesadas; Fase 3 obligatoria |
 | Fase 3 Evaluación | COMPLETE — GO | E1–E5 cerrados; E3 REVIEWED humano live |
 | Fase 4 Gate 100 | COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE | 100/100 VERIFIED; 0 excepciones; read amplification requiere corrección |
-| Fase 5 Gate 500 | BLOCKED / NOT AUTHORIZED | Requiere Gate 100 Correction Repeat favorable antes de iniciar 500 |
+| Fase 4B Benchmark GitHub-native 100 | READY / AUTHORIZED | 100 entradas frescas; R33 Farm R2; 0 D1/Cloudflare editorial obligatorio |
+| Fase 5 Gate 500 | BLOCKED / NOT AUTHORIZED | Requiere cierre favorable del benchmark GitHub-native 100 |
 | Fase 6 Gate 1000 | NOT STARTED | 1000 estables |
 | Fase 7 Escalamiento corpus | NOT STARTED | Viabilidad demostrada |
 | Source first para nuevas entradas | DEFERRED | Después de R33 estable |
@@ -162,8 +163,8 @@ Scripts actualmente presentes:
 | R33 D001 | Evidence es una capa distinta de AUTOOPT | LOCKED |
 | R33 D002 | Style references y evidence sources son conceptos distintos | LOCKED |
 | R33 D003 | R32 sigue usable con `UNSOURCED` | LOCKED |
-| R33 D004 | D1 guarda estado operativo de Evidence | LOCKED |
-| R33 D005 | GitHub conserva contratos/configuración/snapshots/staging, no runtime DB | LOCKED |
+| R33 D004 | GitHub guarda el estado editorial canónico de Evidence, Sources, provenance y coordinación | LOCKED |
+| R33 D005 | Cloudflare/D1 quedan fuera del proceso editorial; solo pueden consumir artefactos GitHub consolidados en deploy/serving | LOCKED |
 | R33 D006 | No un archivo Git por claim | LOCKED |
 | R33 D007 | Source Registry normalizado y deduplicado | LOCKED |
 | R33 D008 | VERIFIED requiere reglas backend deterministas | LOCKED |
@@ -579,6 +580,41 @@ Siguiente trabajo obligatorio:
 5. reevaluar GO / CORRECT AND REPEAT / STOP antes de Gate 500.
 
 ---
+
+## 10.1 BENCHMARK GITHUB-NATIVE R2 — 100 FRESCAS
+
+**Estado: READY / AUTHORIZED — GATE 500 AÚN BLOQUEADO**
+
+Motivo: el Correction Repeat histórico fue migrado a GitHub en PR #688, pero sus 100 artefactos conservan provenance `migratedFromD1Snapshot: true` y links con `locator: {}`. Esa migración valida compatibilidad, no una ejecución editorial fresca R2.
+
+Pool canónico activo:
+
+`docs/evidence y provenance/17 GitHub Native Benchmark 100 Pool.json`
+
+Reglas:
+
+- 100 entradas frescas, 10 por idioma;
+- 0 solapamiento con Pilot 20, Gate 100 y Correction Repeat;
+- selección determinista por cuantiles y blob SHA;
+- GitHub única fuente editorial;
+- 0 D1 reads/writes editoriales;
+- 0 Cloudflare/Bridge/Workers AI como dependencia editorial;
+- Evidence nuevo no puede declarar `migratedFromD1Snapshot`;
+- locator claim-specific cuando el recurso ofrece página/capítulo/sección/fragmento estable; si no aplica, debe quedar justificado explícitamente;
+- `REVIEWED` humano nunca se fabrica.
+
+Criterio para abrir Gate 500:
+
+```yaml
+verified: 100%
+exceptions: 0_or_controlled
+falseVerified: 0_after_audit
+cloudflareEditorialInteractions: 0
+d1EditorialInteractions: 0
+migratedFromD1Snapshot: 0
+controlPlaneLostUpdates: 0
+locatorPolicy: PASS
+```
 
 # 11. FASE 5 — GATE 500
 

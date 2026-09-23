@@ -14,7 +14,7 @@ const EVIDENCE_FARM_COMMAND_MARKER='R33_EVIDENCE_FARM_COMMAND';
 const EVIDENCE_FARM_EVENT_MARKER='R33_EVIDENCE_FARM_EVENT';
 const EVIDENCE_FARM_STATE_MARKER='R33_EVIDENCE_FARM_STATE';
 const EVIDENCE_FARM_LEDGER_MARKER='R33_EVIDENCE_FARM_LEDGER';
-const DEFAULT_POOL_PATH=path.join('docs','evidence y provenance','15 Evidence Farm Correction Repeat Pool.json');
+const DEFAULT_POOL_PATH=path.join('docs','evidence y provenance','17 GitHub Native Benchmark 100 Pool.json');
 
 function farmError(code,message,status=422){const e=new Error(message||code);e.code=code;e.status=status;return e;}
 function iso(value=Date.now()){return new Date(value).toISOString();}
