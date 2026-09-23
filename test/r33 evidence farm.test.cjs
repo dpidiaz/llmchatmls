@@ -58,7 +58,7 @@ test('verified checkpoint requires exact Git Evidence artifact contract',()=>{
   assert.throws(()=>core.validateResultShape(resultFor(state,code,{bridgeResultPath:'legacy.json'}),code,'verified',state),e=>e.code==='BRIDGE_RESULT_FORBIDDEN');
 });
 test('conflicting retries are rejected',()=>{
-  const pool=core.loadPool('.'),state=core.makeBatchState({issueNumber:905,requestId:'request-12345678',workerId:'worker-12345678',pool,entries:[pool.entries[0]],now:'2026-09-23T10:00:00.000Z',token:'abc'}),code=pool.entries[0].code;
+  const pool=core.loadPool('.'),state=core.makeBatchState({issueNumber:905,requestId:'request-12345678',workerId:'worker-12345678',pool,entries:[pool.entries[0],pool.entries[1]],now:'2026-09-23T10:00:00.000Z',token:'abc'}),code=pool.entries[0].code;
   const a=core.applyWorkerEvent(state,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code,leaseEpoch:905,status:'verified',result:resultFor(state,code)}]},{createdAt:'2026-09-23T10:02:00.000Z',commentId:4});
   assert.throws(()=>core.applyWorkerEvent(a,{operation:'checkpoint',batchId:state.batchId,leaseToken:'abc',entries:[{code,leaseEpoch:905,status:'verified',result:resultFor(state,code,{evidenceRevision:3})}]},{createdAt:'2026-09-23T10:03:00.000Z',commentId:5}),e=>e.code==='RESULT_HASH_CONFLICT');
 });
