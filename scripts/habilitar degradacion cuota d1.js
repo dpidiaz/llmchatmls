@@ -9,8 +9,11 @@ function patchD1QuotaGuard(source){
   source=String(source);
   if(source.includes(MARKER)) return source;
 
-  const pattern=/async function handleWikiApi\(request, env, url\) \{\n\s*await ensureWikiDb\(env\);/;
-  if(!pattern.test(source)) throw new Error('No se encontró handleWikiApi con bootstrap D1 para instalar degradación por cuota.');
+  const functionAnchor='async function handleWikiApi(request, env, url) {';
+  const functionIndex=source.indexOf(functionAnchor);
+  const dbAnchor='  await ensureWikiDb(env);';
+  const dbIndex=functionIndex>=0?source.indexOf(dbAnchor,functionIndex+functionAnchor.length):-1;
+  if(functionIndex<0||dbIndex<0) throw new Error('No se encontró handleWikiApi con bootstrap D1 para instalar degradación por cuota.');
 
   const helper=`
 ${MARKER}
@@ -62,16 +65,17 @@ async function d1QuotaResponse(env,url,quotaType="read") {
 __name(d1QuotaResponse, "d1QuotaResponse");
 `;
 
-  const replacement=`async function handleWikiApi(request, env, url) {
-  try{
+  source=source.slice(0,functionIndex)+helper+'\n'+source.slice(functionIndex);
+  const guardedFunctionIndex=source.indexOf(functionAnchor);
+  const guardedDbIndex=source.indexOf(dbAnchor,guardedFunctionIndex+functionAnchor.length);
+  const guardedBootstrap=`  try{
     await ensureWikiDb(env);
   }catch(error){
     const quotaType=d1DailyQuotaType(error);
     if(quotaType) return d1QuotaResponse(env,url,quotaType);
     throw error;
   }`;
-
-  source=source.replace(pattern,helper+'\n'+replacement);
+  source=source.slice(0,guardedDbIndex)+guardedBootstrap+source.slice(guardedDbIndex+dbAnchor.length);
 
   const chatFailurePattern=/(\s*)if\s*\(!error\.status\)\s*console\.error\((['"])mls-chat-failure\2,\s*error\.message\);/;
   const match=source.match(chatFailurePattern);
