@@ -5,11 +5,12 @@ const fs=require('node:fs');
 
 const reader=fs.readFileSync('MLS R32 OVERLAY/reader.js','utf8');
 
-test('native reader requests public Evidence for the active canonical code',()=>{
+test('native reader requests GitHub-derived static Evidence for the active canonical code',()=>{
   assert.ok(reader.includes('async function publicEvidence(code)'));
-  assert.ok(reader.includes("/api/wiki/evidence-public/"));
+  assert.ok(reader.includes("/data/evidence/by-code/"));
   assert.ok(reader.includes("cache:'no-store'"));
-  assert.ok(reader.includes('return payload?.evidence||null'));
+  assert.ok(reader.includes("payload?.sourceOfTruth==='github'?payload:null"));
+  assert.ok(!reader.includes('/api/wiki/evidence-public/'));
   assert.ok(!reader.includes('/api/wiki/article/'));
   assert.ok(!reader.includes('/api/wiki/materialize/'));
 });
@@ -23,8 +24,8 @@ test('native reader renders Evidence state and APA references in main article fl
   assert.ok(reader.includes('${evidenceHTML}'));
 });
 
-test('native reader degrades safely when Evidence is unavailable',()=>{
+test('native reader degrades safely when static Evidence is unavailable',()=>{
   assert.ok(reader.includes('if(!response.ok)return null'));
   assert.ok(reader.includes("console.warn('MLS Evidence public summary unavailable'"));
-  assert.ok(reader.includes("const evidenceHTML=evidence"));
+  assert.ok(reader.includes('const evidenceHTML=evidence'));
 });

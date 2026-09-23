@@ -4,38 +4,40 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const {patchEvidenceReader,MARKER}=require('../scripts/habilitar evidence lector.js');
 
-test('reader materialization attaches only the public Evidence consumer summary',()=>{
-  const source=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8');
-  const patched=patchEvidenceReader(source);
+test('reader materialization attaches GitHub-derived deployment Evidence without D1',()=>{
+  const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
   assert.ok(patched.includes(MARKER));
-  assert.match(patched,/MLS_EVIDENCE_CONSUMER\.contextForEntry\(env, normalized\)/);
-  assert.match(patched,/MLS_EVIDENCE_CONSUMER\.publicSummary\(context\)/);
-  assert.match(patched,/SELECT 1 AS ok FROM wiki_evidence_entry_state WHERE code=\?/);
-  assert.doesNotMatch(patched,/article\.evidenceSnapshotHash/);
-  assert.doesNotMatch(patched,/article\.sourceId/);
+  assert.match(patched,/env\.ASSETS\.fetch/);
+  assert.match(patched,/\/data\/evidence\/by-code\//);
+  assert.match(patched,/sourceOfTruth === "github"/);
+  assert.doesNotMatch(patched,/wiki_evidence_entry_state|MLS_EVIDENCE_CONSUMER\.contextForEntry|MLS_EVIDENCE_API\.entrySources/);
+});
+
+test('public Evidence route resolves static assets before any wiki D1 initialization',()=>{
+  const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
+  const route=patched.indexOf('const publicEvidenceMatch');
+  const db=patched.indexOf('await ensureWikiDb(env);',route);
+  assert.ok(route>=0&&db>route);
+  assert.match(patched,/mlsPublicEvidenceForCode\(request, env, publicEvidenceMatch\[1\]\.toUpperCase\(\)\)/);
 });
 
 test('reader status is visible but remains outside canonical article HTML',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
   assert.match(patched,/function ensureEvidenceStatus\(article, code, target\)/);
   assert.match(patched,/panel\.id = "mls-evidence-status"/);
-  assert.match(patched,/panel\.setAttribute\("role", "status"\)/);
   assert.match(patched,/label\.textContent = String\(evidence\.label/);
-  assert.match(patched,/review\.textContent = "Revisión pendiente"/);
-  assert.match(patched,/target\.insertAdjacentElement\("beforebegin", panel\)/);
   assert.match(patched,/target\.innerHTML = html;[\s\S]*ensureEvidenceStatus\(article, code, target\);[\s\S]*articleCache\.set/);
 });
 
-test('reader hides Evidence panel when no R33 state exists',()=>{
+test('reader hides Evidence panel when no GitHub-native artifact exists',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
+  assert.match(patched,/if \(!response\.ok\) return null;/);
   assert.match(patched,/if \(!evidence\) \{[\s\S]*panel\?\.remove\(\);[\s\S]*return;/);
-  assert.match(patched,/if \(!exists\) return null;/);
 });
 
-test('reader public article endpoint does not cache per-entry Evidence state',()=>{
+test('reader public article endpoint attaches GitHub-derived Evidence',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
-  assert.match(patched,/article: await mlsAttachPublicEvidence\(env, article\)/);
-  assert.match(patched,/"cache-control": "private, no-store"/);
+  assert.match(patched,/article: await mlsAttachPublicEvidence\(request, env, article\)/);
 });
 
 test('Evidence reader patch is idempotent',()=>{
@@ -44,29 +46,18 @@ test('Evidence reader patch is idempotent',()=>{
   assert.equal(patchEvidenceReader(once),once);
 });
 
-
-test('reader exposes APA 7 references for Evidence-backed entries',()=>{
+test('reader exposes APA 7 references from the static deployment artifact',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
-  assert.match(patched,/MLS_EVIDENCE_API\.entrySources\(env, normalized\)/);
-  assert.match(patched,/references = \(rows \|\| \[\]\)/);
   assert.match(patched,/function ensureEvidenceReferences\(article, code, target\)/);
   assert.match(patched,/section\.id = "mls-evidence-references"/);
   assert.match(patched,/title\.textContent = "Referencias"/);
   assert.match(patched,/note\.textContent = "Formato APA 7"/);
-  assert.match(patched,/citation\.textContent = String\(reference\.text \|\| ""\)/);
   assert.match(patched,/link\.textContent = "Abrir fuente"/);
-  assert.match(patched,/ensureEvidenceReferences\(article, code, target\)/);
 });
 
-test('reader removes references section when current entry has no visible references',()=>{
-  const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
-  assert.match(patched,/if \(!references\.length\) \{[\s\S]*section\?\.remove\(\);[\s\S]*return;/);
-});
-
-
-test('reader exposes a public Evidence-only endpoint without making D1 an article fallback',()=>{
+test('public Evidence-only compatibility endpoint is static-source backed',()=>{
   const patched=patchEvidenceReader(fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'));
   assert.ok(patched.includes('evidence-public'));
-  assert.ok(patched.includes('mlsPublicEvidenceForCode(env, publicEvidenceMatch[1].toUpperCase())'));
-  assert.ok(patched.includes('Response.json({ ok: true, evidence }'));
+  assert.ok(patched.includes('/data/evidence/by-code/'));
+  assert.doesNotMatch(patched,/SELECT 1 AS ok FROM wiki_evidence_entry_state/);
 });

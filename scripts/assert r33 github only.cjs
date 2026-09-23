@@ -6,6 +6,9 @@ const files=[
   'scripts/R33 evidence farm scheduler.cjs',
   'scripts/R33 evidence farm worker.cjs',
   'scripts/R33 evidence git validate.cjs',
+  'scripts/generar evidence runtime github.js',
+  'scripts/habilitar evidence lector.js',
+  'MLS R32 OVERLAY/reader.js',
   '.github/workflows/R33 Evidence Farm Scheduler.yml',
   '.github/workflows/R33 Evidence Farm Worker Events.yml',
   '.github/workflows/R33 GitHub Native Tests.yml'
