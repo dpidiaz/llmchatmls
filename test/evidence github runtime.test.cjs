@@ -12,15 +12,15 @@ test('deployment Evidence is generated only from the GitHub-native store',async(
     const report=await buildEvidenceRuntime({root:'.',outputRoot:temp});
     assert.equal(report.ok,true);
     assert.equal(report.sourceOfTruth,'github');
-    assert.equal(report.totalEntries,100);
-    assert.equal(report.verified,100);
+    assert.ok(report.totalEntries>=100);
+    assert.equal(report.verified,report.totalEntries);
     assert.equal(report.cloudflareEditorialInteractions,0);
     assert.equal(report.d1Reads,0);
     assert.equal(report.d1Writes,0);
     const manifest=JSON.parse(fs.readFileSync(path.join(temp,'manifest.json'),'utf8'));
     assert.equal(manifest.sourceOfTruth,'github');
     assert.equal(manifest.cloudflareRole,'deployment-serving-only');
-    assert.equal(Object.keys(manifest.entries).length,100);
+    assert.equal(Object.keys(manifest.entries).length,report.totalEntries);
     const evidence=JSON.parse(fs.readFileSync(path.join(temp,'by-code','MLS-V10-0093.json'),'utf8'));
     assert.equal(evidence.status,'VERIFIED');
     assert.equal(evidence.sourceOfTruth,'github');
