@@ -1,0 +1,2329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "R33-EVIDENCE-FARM-000679-VERIFY-001",
+    "requested": 10,
+    "processed": 10,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0719",
+            "articleGeneratedAt": "2026-09-18T06:28:27.923Z",
+            "articleHash": "3fcfe01a0ac07652a92e40d786b0ba58e5d75bd1b8c5f659be0396c8f1cb5eaa",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Aonde?",
+            "level": "A1",
+            "part": "Interrogación y negación — Interrogação e negação",
+            "chapter": "Preguntas y respuestas — Perguntas e respostas"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-E80DB250C3DAB42EE4653C1D",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-0719",
+              "articleGeneratedAt": "2026-09-18T06:28:27.923Z",
+              "articleHash": "3fcfe01a0ac07652a92e40d786b0ba58e5d75bd1b8c5f659be0396c8f1cb5eaa",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Aonde?",
+              "level": "A1",
+              "part": "Interrogación y negación — Interrogação e negação",
+              "chapter": "Preguntas y respuestas — Perguntas e respostas"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-E80DB250C3DAB42EE4653C1D",
+                "code": "MLS-V02-0719",
+                "article_generated_at": "2026-09-18T06:28:27.923Z",
+                "article_hash": "3fcfe01a0ac07652a92e40d786b0ba58e5d75bd1b8c5f659be0396c8f1cb5eaa",
+                "section_key": "En pocas palabras",
+                "summary": "A forma «aonde» resulta de «a + onde» e é usada em contextos de destino quando a construção admite a preposição «a»; no uso, «onde» também pode ocorrer com verbos de movimento.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:10:53.808Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-FFD4B41EA27D046BEA44760D",
+                "claim_id": "MLS-CLM-E80DB250C3DAB42EE4653C1D",
+                "source_id": "MLS-SRC-7753265EC02F89132F2C",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:10:54.007Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "ece319baf7549243696a8c9a3a571ee75d5adcb9a1bdf649a21c4afabb3f0ba6",
+          "verifiedAt": "2026-09-23T15:14:09.206Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-E647183B17FF4D8AF58B5F1F",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-0719",
+            "article_generated_at": "2026-09-18T06:28:27.923Z",
+            "article_hash": "3fcfe01a0ac07652a92e40d786b0ba58e5d75bd1b8c5f659be0396c8f1cb5eaa",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:09.206Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:09.206Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-E647183B17FF4D8AF58B5F1F",
+            "code": "MLS-V02-0719",
+            "article_generated_at": "2026-09-18T06:28:27.923Z",
+            "article_hash": "3fcfe01a0ac07652a92e40d786b0ba58e5d75bd1b8c5f659be0396c8f1cb5eaa",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "ece319baf7549243696a8c9a3a571ee75d5adcb9a1bdf649a21c4afabb3f0ba6",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:09.206Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:12.374Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0839",
+            "articleGeneratedAt": "2026-09-18T17:14:44.156Z",
+            "articleHash": "f77c5e34b9acd95430a6211f89847561d77269c636373173ae72d232ad01de39",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Discurso directo",
+            "level": "B1",
+            "part": "Relativas, condicionales y discurso referido — Relativas, condicionais e discurso relatado",
+            "chapter": "Discurso directo, indirecto y secuencia temporal — Discurso direto, indireto e sequência temporal"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-ACCFA708E9F3EDA1D17EF5AF",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-0839",
+              "articleGeneratedAt": "2026-09-18T17:14:44.156Z",
+              "articleHash": "f77c5e34b9acd95430a6211f89847561d77269c636373173ae72d232ad01de39",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Discurso directo",
+              "level": "B1",
+              "part": "Relativas, condicionales y discurso referido — Relativas, condicionais e discurso relatado",
+              "chapter": "Discurso directo, indirecto y secuencia temporal — Discurso direto, indireto e sequência temporal"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-ACCFA708E9F3EDA1D17EF5AF",
+                "code": "MLS-V02-0839",
+                "article_generated_at": "2026-09-18T17:14:44.156Z",
+                "article_hash": "f77c5e34b9acd95430a6211f89847561d77269c636373173ae72d232ad01de39",
+                "section_key": "En pocas palabras",
+                "summary": "No discurso direto, as palavras da personagem ou do falante são apresentadas como enunciado próprio, distinguindo-se da voz do narrador e preservando a perspetiva do enunciador citado.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:10:55.459Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-397F61B43CBCA8315375E25B",
+                "claim_id": "MLS-CLM-ACCFA708E9F3EDA1D17EF5AF",
+                "source_id": "MLS-SRC-331FF3B2CD6BA8202519",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:10:55.641Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "95f25bab6fc41fcea095b64478b8afd15b94f94bd9b6e851ff4af1d82b80ce91",
+          "verifiedAt": "2026-09-23T15:14:12.611Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-82D409866DD9DD5C452531F3",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-0839",
+            "article_generated_at": "2026-09-18T17:14:44.156Z",
+            "article_hash": "f77c5e34b9acd95430a6211f89847561d77269c636373173ae72d232ad01de39",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:12.611Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:12.611Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-82D409866DD9DD5C452531F3",
+            "code": "MLS-V02-0839",
+            "article_generated_at": "2026-09-18T17:14:44.156Z",
+            "article_hash": "f77c5e34b9acd95430a6211f89847561d77269c636373173ae72d232ad01de39",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "95f25bab6fc41fcea095b64478b8afd15b94f94bd9b6e851ff4af1d82b80ce91",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:12.611Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:15.577Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-0960",
+            "articleGeneratedAt": "2026-09-18T18:10:35.950Z",
+            "articleHash": "ffa943ff188c9f7afcae347b0633d1ce7aa956af9d354c88ae433e3dba66568e",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Pois é",
+            "level": "B1",
+            "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+            "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-9E0C2543BE70BDD1449F49D1",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-0960",
+              "articleGeneratedAt": "2026-09-18T18:10:35.950Z",
+              "articleHash": "ffa943ff188c9f7afcae347b0633d1ce7aa956af9d354c88ae433e3dba66568e",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Pois é",
+              "level": "B1",
+              "part": "Discurso, conversación y pragmática — Discurso, conversa e pragmática",
+              "chapter": "Gramática conversacional brasileña — Gramática conversacional brasileira"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-9E0C2543BE70BDD1449F49D1",
+                "code": "MLS-V02-0960",
+                "article_generated_at": "2026-09-18T18:10:35.950Z",
+                "article_hash": "ffa943ff188c9f7afcae347b0633d1ce7aa956af9d354c88ae433e3dba66568e",
+                "section_key": "En pocas palabras",
+                "summary": "«Pois é» funciona pragmaticamente como expressão conversacional de confirmação ou reconhecimento do que foi dito e pode constituir, por si só, uma resposta breve.",
+                "claim_type": "usage_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:10:57.054Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-9430D63C23F4DBB6B4077EE4",
+                "claim_id": "MLS-CLM-9E0C2543BE70BDD1449F49D1",
+                "source_id": "MLS-SRC-589A11BEAD5800146B97",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:10:57.241Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "c82d028d3c311a9d8c5956ca2bb3321d0dbf930d60888a2fd4bb4f3f7fdfc808",
+          "verifiedAt": "2026-09-23T15:14:15.818Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-835B55E598177824D218E8E4",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-0960",
+            "article_generated_at": "2026-09-18T18:10:35.950Z",
+            "article_hash": "ffa943ff188c9f7afcae347b0633d1ce7aa956af9d354c88ae433e3dba66568e",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:15.818Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:15.818Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-835B55E598177824D218E8E4",
+            "code": "MLS-V02-0960",
+            "article_generated_at": "2026-09-18T18:10:35.950Z",
+            "article_hash": "ffa943ff188c9f7afcae347b0633d1ce7aa956af9d354c88ae433e3dba66568e",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "c82d028d3c311a9d8c5956ca2bb3321d0dbf930d60888a2fd4bb4f3f7fdfc808",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:15.818Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:19.153Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-1079",
+            "articleGeneratedAt": "2026-09-18T18:52:57.848Z",
+            "articleHash": "f93f3f5174910f7f92a795fa534ed1de811d28a4c3ebeb734475bf35b1a7496f",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Nasalización regional",
+            "level": "C1",
+            "part": "Portugués brasileño real y variación — Português brasileiro real e variação",
+            "chapter": "Variación fonológica brasileña — Variação fonológica brasileira"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-83C359FB219FDCA68AD6EAAB",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-1079",
+              "articleGeneratedAt": "2026-09-18T18:52:57.848Z",
+              "articleHash": "f93f3f5174910f7f92a795fa534ed1de811d28a4c3ebeb734475bf35b1a7496f",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Nasalización regional",
+              "level": "C1",
+              "part": "Portugués brasileño real y variación — Português brasileiro real e variação",
+              "chapter": "Variación fonológica brasileña — Variação fonológica brasileira"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-83C359FB219FDCA68AD6EAAB",
+                "code": "MLS-V02-1079",
+                "article_generated_at": "2026-09-18T18:52:57.848Z",
+                "article_hash": "f93f3f5174910f7f92a795fa534ed1de811d28a4c3ebeb734475bf35b1a7496f",
+                "section_key": "En pocas palabras",
+                "summary": "A nasalização no português brasileiro apresenta processos fonológicos cuja realização pode variar entre variedades regionais, de modo que a descrição da nasalidade deve considerar a variedade analisada.",
+                "claim_type": "phonological_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:10:58.673Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-45DC979A5B21252145A32109",
+                "claim_id": "MLS-CLM-83C359FB219FDCA68AD6EAAB",
+                "source_id": "MLS-SRC-9694D029ACE971DD21CD",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:10:58.863Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "30ed2d912db20135a2a0b3148faea65a378b57ef7c1a21750393be1e044148a6",
+          "verifiedAt": "2026-09-23T15:14:19.398Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-0FC450BCB6D7941471CEDF0A",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-1079",
+            "article_generated_at": "2026-09-18T18:52:57.848Z",
+            "article_hash": "f93f3f5174910f7f92a795fa534ed1de811d28a4c3ebeb734475bf35b1a7496f",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:19.398Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:19.398Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-0FC450BCB6D7941471CEDF0A",
+            "code": "MLS-V02-1079",
+            "article_generated_at": "2026-09-18T18:52:57.848Z",
+            "article_hash": "f93f3f5174910f7f92a795fa534ed1de811d28a4c3ebeb734475bf35b1a7496f",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "30ed2d912db20135a2a0b3148faea65a378b57ef7c1a21750393be1e044148a6",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:19.398Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:22.412Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V02-1199",
+            "articleGeneratedAt": "2026-09-18T20:11:05.718Z",
+            "articleHash": "03ea8cca07335d6058b7394ea7de0c1f161b9562f011c36d8abc056bff7947ec",
+            "language": "portugues",
+            "languageName": "Portugués brasileño",
+            "title": "Prescripción frente a descripción en nivel C2",
+            "level": "C2",
+            "part": "Contraste Guatemala–Brasil y dominio avanzado C1–C2 — Contraste Guatemala–Brasil e domínio avançado C1–C2",
+            "chapter": "Fenómenos C2, construcciones marcadas e interfaz — Fenômenos C2, construções marcadas e interface"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "portugues",
+            "regionalScope": "Portugués de Brasil como variante objetivo principal de MLS; documentar otras variantes cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "No convertir diferencias Brasil/Portugal en contradicciones automáticas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-CAB41A592136B5E5084F3472",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V02-1199",
+              "articleGeneratedAt": "2026-09-18T20:11:05.718Z",
+              "articleHash": "03ea8cca07335d6058b7394ea7de0c1f161b9562f011c36d8abc056bff7947ec",
+              "language": "portugues",
+              "languageName": "Portugués brasileño",
+              "title": "Prescripción frente a descripción en nivel C2",
+              "level": "C2",
+              "part": "Contraste Guatemala–Brasil y dominio avanzado C1–C2 — Contraste Guatemala–Brasil e domínio avançado C1–C2",
+              "chapter": "Fenómenos C2, construcciones marcadas e interfaz — Fenômenos C2, construções marcadas e interface"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-CAB41A592136B5E5084F3472",
+                "code": "MLS-V02-1199",
+                "article_generated_at": "2026-09-18T20:11:05.718Z",
+                "article_hash": "03ea8cca07335d6058b7394ea7de0c1f161b9562f011c36d8abc056bff7947ec",
+                "section_key": "En pocas palabras",
+                "summary": "Uma descrição gramatical procura caracterizar estruturas efetivamente usadas pelos falantes, enquanto uma gramática prescritiva ou normativa seleciona e recomenda formas de uma variedade tomada como padrão.",
+                "claim_type": "register_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:00.324Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-BCDDD598B052D4D0F8F00FB1",
+                "claim_id": "MLS-CLM-CAB41A592136B5E5084F3472",
+                "source_id": "MLS-SRC-0828B28F76C2C663DE69",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:00.536Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "3876060c12142846e4a4cf2b770d1726d297a19da03eb634ae789f90fe71aff5",
+          "verifiedAt": "2026-09-23T15:14:22.652Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-D427C7C38C022E789BE542C9",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V02-1199",
+            "article_generated_at": "2026-09-18T20:11:05.718Z",
+            "article_hash": "03ea8cca07335d6058b7394ea7de0c1f161b9562f011c36d8abc056bff7947ec",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:22.652Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:22.652Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-D427C7C38C022E789BE542C9",
+            "code": "MLS-V02-1199",
+            "article_generated_at": "2026-09-18T20:11:05.718Z",
+            "article_hash": "03ea8cca07335d6058b7394ea7de0c1f161b9562f011c36d8abc056bff7947ec",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "3876060c12142846e4a4cf2b770d1726d297a19da03eb634ae789f90fe71aff5",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:22.652Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:25.638Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0081",
+            "articleGeneratedAt": "2026-09-19T05:11:08.780Z",
+            "articleHash": "3530d1daf277144c82d99f9887cab2f41a563ccd18347618bdcb7d4f9931d6f8",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Plural regular en -e",
+            "level": "A1",
+            "part": "Sustantivo y sintagma nominal — Nome e sintagma nominale",
+            "chapter": "Número y formación del plural — Numero e formazione del plurale"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-F25EBB06556C27FCBB1A75E2",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V03-0081",
+              "articleGeneratedAt": "2026-09-19T05:11:08.780Z",
+              "articleHash": "3530d1daf277144c82d99f9887cab2f41a563ccd18347618bdcb7d4f9931d6f8",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Plural regular en -e",
+              "level": "A1",
+              "part": "Sustantivo y sintagma nominal — Nome e sintagma nominale",
+              "chapter": "Número y formación del plural — Numero e formazione del plurale"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-F25EBB06556C27FCBB1A75E2",
+                "code": "MLS-V03-0081",
+                "article_generated_at": "2026-09-19T05:11:08.780Z",
+                "article_hash": "3530d1daf277144c82d99f9887cab2f41a563ccd18347618bdcb7d4f9931d6f8",
+                "section_key": "En pocas palabras",
+                "summary": "Molti nomi femminili della prima classe terminanti in -a formano regolarmente il plurale in -e, come «casa → case».",
+                "claim_type": "morphological_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:02.126Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-4F841A23C77AA8114C2115AB",
+                "claim_id": "MLS-CLM-F25EBB06556C27FCBB1A75E2",
+                "source_id": "MLS-SRC-BF98A6870C4419B6D178",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:02.316Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "66e53c3fe80de16c8c8b754fc42b5807ecbc664482b8b2554633a7996c285631",
+          "verifiedAt": "2026-09-23T15:14:25.867Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-9C7741ECB6EF5181C92DCD53",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V03-0081",
+            "article_generated_at": "2026-09-19T05:11:08.780Z",
+            "article_hash": "3530d1daf277144c82d99f9887cab2f41a563ccd18347618bdcb7d4f9931d6f8",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:25.867Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:25.867Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-9C7741ECB6EF5181C92DCD53",
+            "code": "MLS-V03-0081",
+            "article_generated_at": "2026-09-19T05:11:08.780Z",
+            "article_hash": "3530d1daf277144c82d99f9887cab2f41a563ccd18347618bdcb7d4f9931d6f8",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "66e53c3fe80de16c8c8b754fc42b5807ecbc664482b8b2554633a7996c285631",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:25.867Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:28.744Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0162",
+            "articleGeneratedAt": "2026-09-19T05:13:42.260Z",
+            "articleHash": "1e93c7cf70d7ea022560ba69041a0d3fc4b708c0a99f0d3acef08e59645343b1",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Adjetivos de color",
+            "level": "A2",
+            "part": "Adjetivos y comparación — Aggettivi e comparazione",
+            "chapter": "Adjetivos y concordancia — Aggettivi e accordo"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-32588CD98E49BB5B918FD3BB",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V03-0162",
+              "articleGeneratedAt": "2026-09-19T05:13:42.260Z",
+              "articleHash": "1e93c7cf70d7ea022560ba69041a0d3fc4b708c0a99f0d3acef08e59645343b1",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Adjetivos de color",
+              "level": "A2",
+              "part": "Adjetivos y comparación — Aggettivi e comparazione",
+              "chapter": "Adjetivos y concordancia — Aggettivi e accordo"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-32588CD98E49BB5B918FD3BB",
+                "code": "MLS-V03-0162",
+                "article_generated_at": "2026-09-19T05:13:42.260Z",
+                "article_hash": "1e93c7cf70d7ea022560ba69041a0d3fc4b708c0a99f0d3acef08e59645343b1",
+                "section_key": "Cómo funciona",
+                "summary": "Gli aggettivi italiani flessi concordano in genere e numero secondo la loro classe, mentre alcuni nomi di colore usati come aggettivi, come «blu», sono invariabili.",
+                "claim_type": "morphological_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:03.904Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-DA05CE924F759BA8A3364370",
+                "claim_id": "MLS-CLM-32588CD98E49BB5B918FD3BB",
+                "source_id": "MLS-SRC-7DD02A538AAC18C1C479",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:04.122Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "6b492ee9ca6248efec347ae743e845798b6608f98be9ba6d84c153ac49d4e1d3",
+          "verifiedAt": "2026-09-23T15:14:28.974Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-9A69475FA33426FE463E5ACE",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V03-0162",
+            "article_generated_at": "2026-09-19T05:13:42.260Z",
+            "article_hash": "1e93c7cf70d7ea022560ba69041a0d3fc4b708c0a99f0d3acef08e59645343b1",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:28.974Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:28.974Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-9A69475FA33426FE463E5ACE",
+            "code": "MLS-V03-0162",
+            "article_generated_at": "2026-09-19T05:13:42.260Z",
+            "article_hash": "1e93c7cf70d7ea022560ba69041a0d3fc4b708c0a99f0d3acef08e59645343b1",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "6b492ee9ca6248efec347ae743e845798b6608f98be9ba6d84c153ac49d4e1d3",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:28.974Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:31.974Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0243",
+            "articleGeneratedAt": "2026-09-19T05:14:02.868Z",
+            "articleHash": "880579f7aca7580e8ddfd4a9522bf27a7e40fd6dba2e0dfb5b1cc6f1937bb855",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "al/allo/alla/ai/agli/alle",
+            "level": "A1",
+            "part": "Preposiciones y regencia — Preposizioni e reggenza",
+            "chapter": "Preposiciones articuladas y regencia — Preposizioni articolate e reggenza"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-EFC87ADEB491B99FE9500912",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V03-0243",
+              "articleGeneratedAt": "2026-09-19T05:14:02.868Z",
+              "articleHash": "880579f7aca7580e8ddfd4a9522bf27a7e40fd6dba2e0dfb5b1cc6f1937bb855",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "al/allo/alla/ai/agli/alle",
+              "level": "A1",
+              "part": "Preposiciones y regencia — Preposizioni e reggenza",
+              "chapter": "Preposiciones articuladas y regencia — Preposizioni articolate e reggenza"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-EFC87ADEB491B99FE9500912",
+                "code": "MLS-V03-0243",
+                "article_generated_at": "2026-09-19T05:14:02.868Z",
+                "article_hash": "880579f7aca7580e8ddfd4a9522bf27a7e40fd6dba2e0dfb5b1cc6f1937bb855",
+                "section_key": "En pocas palabras",
+                "summary": "La preposizione «a» si fonde con l’articolo determinativo dando le forme articolate «al, allo, alla, ai, agli, alle» (e «all’» davanti a vocale).",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:05.637Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-CB58AB1E6DDBA256D32C9F6B",
+                "claim_id": "MLS-CLM-EFC87ADEB491B99FE9500912",
+                "source_id": "MLS-SRC-EE5AD39B1777B925A3CE",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:05.843Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "5c2ffd299a3e54993319943f5a039ef54b9ff8478f9a4de882a88d1392259efa",
+          "verifiedAt": "2026-09-23T15:14:32.216Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-0A14CD73379B09D7CEE05A32",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V03-0243",
+            "article_generated_at": "2026-09-19T05:14:02.868Z",
+            "article_hash": "880579f7aca7580e8ddfd4a9522bf27a7e40fd6dba2e0dfb5b1cc6f1937bb855",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:32.216Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:32.216Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-0A14CD73379B09D7CEE05A32",
+            "code": "MLS-V03-0243",
+            "article_generated_at": "2026-09-19T05:14:02.868Z",
+            "article_hash": "880579f7aca7580e8ddfd4a9522bf27a7e40fd6dba2e0dfb5b1cc6f1937bb855",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "5c2ffd299a3e54993319943f5a039ef54b9ff8478f9a4de882a88d1392259efa",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:32.216Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:35.244Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0324",
+            "articleGeneratedAt": "2026-09-19T05:36:42.006Z",
+            "articleHash": "c554f94b50c8287905ef90ca72591d220b0b99e959d47d8ba545b2906cd46d7e",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Verbos de movimiento: elección real del auxiliar",
+            "level": "B1",
+            "part": "Pasado compuesto y auxiliares — Passato composto e ausiliari",
+            "chapter": "Auxiliares y concordancia del participio — Ausiliari e accordo del participio"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-509266AB3648AA57490AD179",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V03-0324",
+              "articleGeneratedAt": "2026-09-19T05:36:42.006Z",
+              "articleHash": "c554f94b50c8287905ef90ca72591d220b0b99e959d47d8ba545b2906cd46d7e",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Verbos de movimiento: elección real del auxiliar",
+              "level": "B1",
+              "part": "Pasado compuesto y auxiliares — Passato composto e ausiliari",
+              "chapter": "Auxiliares y concordancia del participio — Ausiliari e accordo del participio"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-509266AB3648AA57490AD179",
+                "code": "MLS-V03-0324",
+                "article_generated_at": "2026-09-19T05:36:42.006Z",
+                "article_hash": "c554f94b50c8287905ef90ca72591d220b0b99e959d47d8ba545b2906cd46d7e",
+                "section_key": "En pocas palabras",
+                "summary": "La scelta dell’ausiliare nei verbi intransitivi non dipende da una regola semantica unica: molti verbi di movimento usano «essere», mentre altri verbi di movimento o attività possono richiedere «avere».",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:07.354Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-D2478CF36694E0699D7D5857",
+                "claim_id": "MLS-CLM-509266AB3648AA57490AD179",
+                "source_id": "MLS-SRC-69786D2BA2D055BF6CC3",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:07.560Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "7d6b777211b73ffa63c503d6a815a82917954321b201703b13d3245f02949366",
+          "verifiedAt": "2026-09-23T15:14:35.496Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-5BA8126E9F91F64265FCC18F",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V03-0324",
+            "article_generated_at": "2026-09-19T05:36:42.006Z",
+            "article_hash": "c554f94b50c8287905ef90ca72591d220b0b99e959d47d8ba545b2906cd46d7e",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:35.496Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:35.496Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-5BA8126E9F91F64265FCC18F",
+            "code": "MLS-V03-0324",
+            "article_generated_at": "2026-09-19T05:36:42.006Z",
+            "article_hash": "c554f94b50c8287905ef90ca72591d220b0b99e959d47d8ba545b2906cd46d7e",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "7d6b777211b73ffa63c503d6a815a82917954321b201703b13d3245f02949366",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:35.496Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:38.453Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V03-0405",
+            "articleGeneratedAt": "2026-09-19T05:38:31.165Z",
+            "articleHash": "0be300d39df8a424aa6574466e4040dad41ac0152befcce4401ce64474f6c7c5",
+            "language": "italiano",
+            "languageName": "Italiano",
+            "title": "Formación congiuntivo -are",
+            "level": "B1",
+            "part": "Congiuntivo y modo — Congiuntivo e modo",
+            "chapter": "Congiuntivo presente y passato — Congiuntivo presente e passato"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "italiano",
+            "regionalScope": "Italiano contemporáneo; preservar variación regional o de registro cuando sea pertinente.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Preferir evidencia institucional o académica para reglas normativas."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-E0DCF062524F65708AE11E47",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V03-0405",
+              "articleGeneratedAt": "2026-09-19T05:38:31.165Z",
+              "articleHash": "0be300d39df8a424aa6574466e4040dad41ac0152befcce4401ce64474f6c7c5",
+              "language": "italiano",
+              "languageName": "Italiano",
+              "title": "Formación congiuntivo -are",
+              "level": "B1",
+              "part": "Congiuntivo y modo — Congiuntivo e modo",
+              "chapter": "Congiuntivo presente y passato — Congiuntivo presente e passato"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-E0DCF062524F65708AE11E47",
+                "code": "MLS-V03-0405",
+                "article_generated_at": "2026-09-19T05:38:31.165Z",
+                "article_hash": "0be300d39df8a424aa6574466e4040dad41ac0152befcce4401ce64474f6c7c5",
+                "section_key": "En pocas palabras",
+                "summary": "Nel congiuntivo presente dei verbi regolari della prima coniugazione, le tre persone del singolare hanno la desinenza -i e la terza plurale -ino; «parlare» dà quindi «parli» e «parlino».",
+                "claim_type": "morphological_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:11:09.031Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-7F896D55A84832BB0421BE32",
+                "claim_id": "MLS-CLM-E0DCF062524F65708AE11E47",
+                "source_id": "MLS-SRC-2F9A2E27E80E77CF3F1E",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:11:09.220Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "74b827941bd2ff4c290e77f12793a85e3e6ccd5fd6c48a4a4e93c02901ca5fc4",
+          "verifiedAt": "2026-09-23T15:14:38.685Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-17990C6143D62A901D3489A9",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V03-0405",
+            "article_generated_at": "2026-09-19T05:38:31.165Z",
+            "article_hash": "0be300d39df8a424aa6574466e4040dad41ac0152befcce4401ce64474f6c7c5",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:14:38.685Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:14:38.685Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-17990C6143D62A901D3489A9",
+            "code": "MLS-V03-0405",
+            "article_generated_at": "2026-09-19T05:38:31.165Z",
+            "article_hash": "0be300d39df8a424aa6574466e4040dad41ac0152befcce4401ce64474f6c7c5",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "74b827941bd2ff4c290e77f12793a85e3e6ccd5fd6c48a4a4e93c02901ca5fc4",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:14:38.685Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:41.658Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T15:14:41.659Z",
+  "commandFile": "mls chat bridge/commands/r33-farm/MLS-R33-CORRECTION-REPEAT-100/R33-EVIDENCE-FARM-000679/chat-20260923-0855-s56-9f2c/verify-001.json"
+}

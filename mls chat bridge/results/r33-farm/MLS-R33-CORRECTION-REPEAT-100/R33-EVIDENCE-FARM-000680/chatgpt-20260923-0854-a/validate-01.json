@@ -1,0 +1,2605 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "R33-680-validate-01",
+    "requested": 25,
+    "processed": 25,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0110",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B48AD5F2D66DF4946431",
+                "identityKind": "isbn",
+                "identityKey": "9783411040506",
+                "metadataHash": "829d7c111b76a5b0e61fa85d72549e1096e78cbee8b9a4e2a69d664a086136c3",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Die Grammatik",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2022,
+                "publicationDate": null,
+                "publisher": "Dudenverlag",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411040506",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Grammatik",
+                  "Morphologie",
+                  "Syntax",
+                  "Wortbildung",
+                  "Stil",
+                  "Variation",
+                  "Sprachwandel"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:10.488Z",
+                "updatedAt": "2026-09-23T15:11:10.488Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Die Grammatik* (2022). (10). Dudenverlag.",
+                "text": "Duden – Die Grammatik (2022). (10). Dudenverlag.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:42.543Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0220",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B48AD5F2D66DF4946431",
+                "identityKind": "isbn",
+                "identityKey": "9783411040506",
+                "metadataHash": "829d7c111b76a5b0e61fa85d72549e1096e78cbee8b9a4e2a69d664a086136c3",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Die Grammatik",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2022,
+                "publicationDate": null,
+                "publisher": "Dudenverlag",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411040506",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Grammatik",
+                  "Morphologie",
+                  "Syntax",
+                  "Wortbildung",
+                  "Stil",
+                  "Variation",
+                  "Sprachwandel"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:10.488Z",
+                "updatedAt": "2026-09-23T15:11:10.488Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Die Grammatik* (2022). (10). Dudenverlag.",
+                "text": "Duden – Die Grammatik (2022). (10). Dudenverlag.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:43.422Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0330",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-312FB9DFDE96F88E468C",
+                "identityKind": "isbn",
+                "identityKey": "9783411055104",
+                "metadataHash": "52f7ee07b656d01330cc5f79a4e97b6a77b15bd8efd2bf40d373ec5f49170a79",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Deutsches Universalwörterbuch",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2023,
+                "publicationDate": null,
+                "publisher": "Cornelsen Verlag GmbH",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411055104",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Wortschatz",
+                  "Bedeutung",
+                  "Grammatik",
+                  "Stil",
+                  "Gebrauch"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:13.703Z",
+                "updatedAt": "2026-09-23T15:11:13.703Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Deutsches Universalwörterbuch* (2023). (10). Cornelsen Verlag GmbH.",
+                "text": "Duden – Deutsches Universalwörterbuch (2023). (10). Cornelsen Verlag GmbH.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:44.317Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0440",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B48AD5F2D66DF4946431",
+                "identityKind": "isbn",
+                "identityKey": "9783411040506",
+                "metadataHash": "829d7c111b76a5b0e61fa85d72549e1096e78cbee8b9a4e2a69d664a086136c3",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Die Grammatik",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2022,
+                "publicationDate": null,
+                "publisher": "Dudenverlag",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411040506",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Grammatik",
+                  "Morphologie",
+                  "Syntax",
+                  "Wortbildung",
+                  "Stil",
+                  "Variation",
+                  "Sprachwandel"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:10.488Z",
+                "updatedAt": "2026-09-23T15:11:10.488Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Die Grammatik* (2022). (10). Dudenverlag.",
+                "text": "Duden – Die Grammatik (2022). (10). Dudenverlag.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:45.197Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0551",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-312FB9DFDE96F88E468C",
+                "identityKind": "isbn",
+                "identityKey": "9783411055104",
+                "metadataHash": "52f7ee07b656d01330cc5f79a4e97b6a77b15bd8efd2bf40d373ec5f49170a79",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Deutsches Universalwörterbuch",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2023,
+                "publicationDate": null,
+                "publisher": "Cornelsen Verlag GmbH",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411055104",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Wortschatz",
+                  "Bedeutung",
+                  "Grammatik",
+                  "Stil",
+                  "Gebrauch"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:13.703Z",
+                "updatedAt": "2026-09-23T15:11:13.703Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Deutsches Universalwörterbuch* (2023). (10). Cornelsen Verlag GmbH.",
+                "text": "Duden – Deutsches Universalwörterbuch (2023). (10). Cornelsen Verlag GmbH.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:46.085Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0661",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B48AD5F2D66DF4946431",
+                "identityKind": "isbn",
+                "identityKey": "9783411040506",
+                "metadataHash": "829d7c111b76a5b0e61fa85d72549e1096e78cbee8b9a4e2a69d664a086136c3",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Die Grammatik",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2022,
+                "publicationDate": null,
+                "publisher": "Dudenverlag",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411040506",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Grammatik",
+                  "Morphologie",
+                  "Syntax",
+                  "Wortbildung",
+                  "Stil",
+                  "Variation",
+                  "Sprachwandel"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:10.488Z",
+                "updatedAt": "2026-09-23T15:11:10.488Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Die Grammatik* (2022). (10). Dudenverlag.",
+                "text": "Duden – Die Grammatik (2022). (10). Dudenverlag.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:46.945Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0771",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B48AD5F2D66DF4946431",
+                "identityKind": "isbn",
+                "identityKey": "9783411040506",
+                "metadataHash": "829d7c111b76a5b0e61fa85d72549e1096e78cbee8b9a4e2a69d664a086136c3",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Die Grammatik",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2022,
+                "publicationDate": null,
+                "publisher": "Dudenverlag",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411040506",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Grammatik",
+                  "Morphologie",
+                  "Syntax",
+                  "Wortbildung",
+                  "Stil",
+                  "Variation",
+                  "Sprachwandel"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:10.488Z",
+                "updatedAt": "2026-09-23T15:11:10.488Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Die Grammatik* (2022). (10). Dudenverlag.",
+                "text": "Duden – Die Grammatik (2022). (10). Dudenverlag.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:47.804Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0882",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-312FB9DFDE96F88E468C",
+                "identityKind": "isbn",
+                "identityKey": "9783411055104",
+                "metadataHash": "52f7ee07b656d01330cc5f79a4e97b6a77b15bd8efd2bf40d373ec5f49170a79",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Deutsches Universalwörterbuch",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2023,
+                "publicationDate": null,
+                "publisher": "Cornelsen Verlag GmbH",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411055104",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Wortschatz",
+                  "Bedeutung",
+                  "Grammatik",
+                  "Stil",
+                  "Gebrauch"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:13.703Z",
+                "updatedAt": "2026-09-23T15:11:13.703Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Deutsches Universalwörterbuch* (2023). (10). Cornelsen Verlag GmbH.",
+                "text": "Duden – Deutsches Universalwörterbuch (2023). (10). Cornelsen Verlag GmbH.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:48.676Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-0991",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B48AD5F2D66DF4946431",
+                "identityKind": "isbn",
+                "identityKey": "9783411040506",
+                "metadataHash": "829d7c111b76a5b0e61fa85d72549e1096e78cbee8b9a4e2a69d664a086136c3",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Die Grammatik",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2022,
+                "publicationDate": null,
+                "publisher": "Dudenverlag",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411040506",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Grammatik",
+                  "Morphologie",
+                  "Syntax",
+                  "Wortbildung",
+                  "Stil",
+                  "Variation",
+                  "Sprachwandel"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:10.488Z",
+                "updatedAt": "2026-09-23T15:11:10.488Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Die Grammatik* (2022). (10). Dudenverlag.",
+                "text": "Duden – Die Grammatik (2022). (10). Dudenverlag.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:49.652Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V05-1101",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B48AD5F2D66DF4946431",
+                "identityKind": "isbn",
+                "identityKey": "9783411040506",
+                "metadataHash": "829d7c111b76a5b0e61fa85d72549e1096e78cbee8b9a4e2a69d664a086136c3",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Duden – Die Grammatik",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2022,
+                "publicationDate": null,
+                "publisher": "Dudenverlag",
+                "edition": "10",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9783411040506",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Deutsch",
+                  "Grammatik",
+                  "Morphologie",
+                  "Syntax",
+                  "Wortbildung",
+                  "Stil",
+                  "Variation",
+                  "Sprachwandel"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:10.488Z",
+                "updatedAt": "2026-09-23T15:11:10.488Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "*Duden – Die Grammatik* (2022). (10). Dudenverlag.",
+                "text": "Duden – Die Grammatik (2022). (10). Dudenverlag.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:50.533Z"
+      },
+      {
+        "index": 10,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0103",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:51.411Z"
+      },
+      {
+        "index": 11,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0205",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:52.319Z"
+      },
+      {
+        "index": 12,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0308",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:53.366Z"
+      },
+      {
+        "index": 13,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0411",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:54.314Z"
+      },
+      {
+        "index": 14,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0514",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:55.203Z"
+      },
+      {
+        "index": 15,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0616",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:56.090Z"
+      },
+      {
+        "index": 16,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0719",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:56.984Z"
+      },
+      {
+        "index": 17,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0823",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:57.880Z"
+      },
+      {
+        "index": 18,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-0924",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-B75C7411BD5205533657",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:0839f6c1314f0c8f82a331848e599d88b1ce521186c9124c4fad66ef2f59230b",
+                "metadataHash": "d9e92352bee295a01a924d7ca70ac38716316cf7921bac8975e48950091c136a",
+                "sourceType": "reference_entry",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "サービス",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": null,
+                "publicationDate": null,
+                "publisher": "小学館",
+                "edition": null,
+                "containerTitle": "デジタル大辞泉",
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "日本語",
+                  "サービス",
+                  "語義",
+                  "顧客対応",
+                  "値引き",
+                  "無償"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:38.718Z",
+                "updatedAt": "2026-09-23T15:11:38.718Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "サービス (s. f.).. In *デジタル大辞泉*. 小学館.",
+                "text": "サービス (s. f.).. In デジタル大辞泉. 小学館.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:58.775Z"
+      },
+      {
+        "index": 19,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V06-1027",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+                "identityKind": "fingerprint",
+                "identityKey": "fp:7e8475a17d7cda7c695344b10ec9711bc86321be394867e3e5452e1db2b9e7e2",
+                "metadataHash": "3df4ecc1951aafdae87b1a0cec9dc0de64a570b9d0b390f7b9bb5ad340046862",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Japanese: A Comprehensive Grammar",
+                "authors": [
+                  "Kaiser, Stefan",
+                  "Ichikawa, Yasuko",
+                  "Kobayashi, Noriko",
+                  "Yamamoto, Hilofumi"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2013,
+                "publicationDate": null,
+                "publisher": "Routledge",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": null,
+                "topics": [
+                  "Japanese grammar",
+                  "particles",
+                  "aspect",
+                  "benefactives",
+                  "adjectives",
+                  "conjunctions",
+                  "counters",
+                  "modality",
+                  "variation"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": null,
+                "createdAt": "2026-09-23T15:11:26.503Z",
+                "updatedAt": "2026-09-23T15:11:26.503Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). *Japanese: A Comprehensive Grammar*. Routledge.",
+                "text": "Kaiser, S., Ichikawa, Y., Kobayashi, N., & Yamamoto, H. (2013). Japanese: A Comprehensive Grammar. Routledge.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:14:59.712Z"
+      },
+      {
+        "index": 20,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V07-0102",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
+                "identityKind": "doi",
+                "identityKey": "10.1525/9780520352858",
+                "metadataHash": "3e493dd6784e39db6b8f0bdec096e57fdcec92a16c1d3883aa7f0d21195464d5",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Mandarin Chinese: A Functional Reference Grammar",
+                "authors": [
+                  "Li, Charles N.",
+                  "Thompson, Sandra A."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 1981,
+                "publicationDate": null,
+                "publisher": "University of California Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": "10.1525/9780520352858",
+                "doiScope": "resource",
+                "canonicalUrl": "https://www.degruyterbrill.com/document/doi/10.1525/9780520352858/html",
+                "language": "en",
+                "topics": [
+                  "Mandarin Chinese",
+                  "aspect",
+                  "negation",
+                  "directionals",
+                  "resultatives",
+                  "sentence linking",
+                  "topics",
+                  "discourse"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:29:39.966Z",
+                "updatedAt": "2026-09-23T15:11:41.876Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Li, C. N., & Thompson, S. A. (1981). *Mandarin Chinese: A Functional Reference Grammar*. University of California Press. https://doi.org/10.1525/9780520352858",
+                "text": "Li, C. N., & Thompson, S. A. (1981). Mandarin Chinese: A Functional Reference Grammar. University of California Press. https://doi.org/10.1525/9780520352858",
+                "url": "https://doi.org/10.1525/9780520352858"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:00.686Z"
+      },
+      {
+        "index": 21,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V07-0203",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
+                "identityKind": "doi",
+                "identityKey": "10.1525/9780520352858",
+                "metadataHash": "3e493dd6784e39db6b8f0bdec096e57fdcec92a16c1d3883aa7f0d21195464d5",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Mandarin Chinese: A Functional Reference Grammar",
+                "authors": [
+                  "Li, Charles N.",
+                  "Thompson, Sandra A."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 1981,
+                "publicationDate": null,
+                "publisher": "University of California Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": "10.1525/9780520352858",
+                "doiScope": "resource",
+                "canonicalUrl": "https://www.degruyterbrill.com/document/doi/10.1525/9780520352858/html",
+                "language": "en",
+                "topics": [
+                  "Mandarin Chinese",
+                  "aspect",
+                  "negation",
+                  "directionals",
+                  "resultatives",
+                  "sentence linking",
+                  "topics",
+                  "discourse"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:29:39.966Z",
+                "updatedAt": "2026-09-23T15:11:41.876Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Li, C. N., & Thompson, S. A. (1981). *Mandarin Chinese: A Functional Reference Grammar*. University of California Press. https://doi.org/10.1525/9780520352858",
+                "text": "Li, C. N., & Thompson, S. A. (1981). Mandarin Chinese: A Functional Reference Grammar. University of California Press. https://doi.org/10.1525/9780520352858",
+                "url": "https://doi.org/10.1525/9780520352858"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:01.595Z"
+      },
+      {
+        "index": 22,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V07-0305",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
+                "identityKind": "doi",
+                "identityKey": "10.1525/9780520352858",
+                "metadataHash": "3e493dd6784e39db6b8f0bdec096e57fdcec92a16c1d3883aa7f0d21195464d5",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Mandarin Chinese: A Functional Reference Grammar",
+                "authors": [
+                  "Li, Charles N.",
+                  "Thompson, Sandra A."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 1981,
+                "publicationDate": null,
+                "publisher": "University of California Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": "10.1525/9780520352858",
+                "doiScope": "resource",
+                "canonicalUrl": "https://www.degruyterbrill.com/document/doi/10.1525/9780520352858/html",
+                "language": "en",
+                "topics": [
+                  "Mandarin Chinese",
+                  "aspect",
+                  "negation",
+                  "directionals",
+                  "resultatives",
+                  "sentence linking",
+                  "topics",
+                  "discourse"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:29:39.966Z",
+                "updatedAt": "2026-09-23T15:11:41.876Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Li, C. N., & Thompson, S. A. (1981). *Mandarin Chinese: A Functional Reference Grammar*. University of California Press. https://doi.org/10.1525/9780520352858",
+                "text": "Li, C. N., & Thompson, S. A. (1981). Mandarin Chinese: A Functional Reference Grammar. University of California Press. https://doi.org/10.1525/9780520352858",
+                "url": "https://doi.org/10.1525/9780520352858"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:02.550Z"
+      },
+      {
+        "index": 23,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V07-0406",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
+                "identityKind": "doi",
+                "identityKey": "10.1525/9780520352858",
+                "metadataHash": "3e493dd6784e39db6b8f0bdec096e57fdcec92a16c1d3883aa7f0d21195464d5",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Mandarin Chinese: A Functional Reference Grammar",
+                "authors": [
+                  "Li, Charles N.",
+                  "Thompson, Sandra A."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 1981,
+                "publicationDate": null,
+                "publisher": "University of California Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": "10.1525/9780520352858",
+                "doiScope": "resource",
+                "canonicalUrl": "https://www.degruyterbrill.com/document/doi/10.1525/9780520352858/html",
+                "language": "en",
+                "topics": [
+                  "Mandarin Chinese",
+                  "aspect",
+                  "negation",
+                  "directionals",
+                  "resultatives",
+                  "sentence linking",
+                  "topics",
+                  "discourse"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:29:39.966Z",
+                "updatedAt": "2026-09-23T15:11:41.876Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Li, C. N., & Thompson, S. A. (1981). *Mandarin Chinese: A Functional Reference Grammar*. University of California Press. https://doi.org/10.1525/9780520352858",
+                "text": "Li, C. N., & Thompson, S. A. (1981). Mandarin Chinese: A Functional Reference Grammar. University of California Press. https://doi.org/10.1525/9780520352858",
+                "url": "https://doi.org/10.1525/9780520352858"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:03.472Z"
+      },
+      {
+        "index": 24,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V07-0508",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
+                "identityKind": "doi",
+                "identityKey": "10.1525/9780520352858",
+                "metadataHash": "3e493dd6784e39db6b8f0bdec096e57fdcec92a16c1d3883aa7f0d21195464d5",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Mandarin Chinese: A Functional Reference Grammar",
+                "authors": [
+                  "Li, Charles N.",
+                  "Thompson, Sandra A."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 1981,
+                "publicationDate": null,
+                "publisher": "University of California Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": "10.1525/9780520352858",
+                "doiScope": "resource",
+                "canonicalUrl": "https://www.degruyterbrill.com/document/doi/10.1525/9780520352858/html",
+                "language": "en",
+                "topics": [
+                  "Mandarin Chinese",
+                  "aspect",
+                  "negation",
+                  "directionals",
+                  "resultatives",
+                  "sentence linking",
+                  "topics",
+                  "discourse"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:29:39.966Z",
+                "updatedAt": "2026-09-23T15:11:41.876Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Li, C. N., & Thompson, S. A. (1981). *Mandarin Chinese: A Functional Reference Grammar*. University of California Press. https://doi.org/10.1525/9780520352858",
+                "text": "Li, C. N., & Thompson, S. A. (1981). Mandarin Chinese: A Functional Reference Grammar. University of California Press. https://doi.org/10.1525/9780520352858",
+                "url": "https://doi.org/10.1525/9780520352858"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:04.374Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T15:15:04.374Z",
+  "commandFile": "mls chat bridge/commands/r33-farm/MLS-R33-CORRECTION-REPEAT-100/R33-EVIDENCE-FARM-000680/chatgpt-20260923-0854-a/validate-01.json"
+}
