@@ -1,3 +1,5 @@
+> **SUPERSEDED parcialmente por R33 Evidence Farm R2.** La coordinación GitHub-only se conserva, pero la dependencia editorial del MLS Chat Bridge fue retirada. Evidence canónico vive ahora en GitHub.
+
 # R33 Evidence Farm R1 — Implementation Checkpoint
 
 **Fecha:** 2026-09-23 UTC  
@@ -182,3 +184,8 @@ La conversación no es fuente de verdad. Para reanudar desde cualquier chat se d
 4. resultados namespaced del Bridge.
 
 Este checkpoint permite reanudación exacta si cualquier chat se interrumpe.
+
+
+## SUPERSEDED — control plane R1
+
+Las rutas Bridge descritas aquí son históricas. El protocolo activo es R2 y usa artefactos Evidence Git + commit SHA.

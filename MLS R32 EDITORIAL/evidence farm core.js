@@ -4,7 +4,7 @@ const crypto=require('node:crypto');
 const fs=require('node:fs');
 const path=require('node:path');
 
-const EVIDENCE_FARM_VERSION='1.0';
+const EVIDENCE_FARM_VERSION='2.0';
 const EVIDENCE_FARM_DEFAULT_BATCH=25;
 const EVIDENCE_FARM_MAX_BATCH=50;
 const EVIDENCE_FARM_CLAIM_TTL_MS=90*1000;
@@ -160,13 +160,10 @@ function validateLeaseEvent(state,event,createdAt){
   if(isLeaseExpired(state,when))throw farmError('LEASE_EXPIRED','El evento llegó después del vencimiento del lease.',409);
   return when;
 }
-function bridgeNamespace(state){
-  return ['r33-farm',safeSegment(state.poolId),safeSegment(state.batchId),safeSegment(state.workerId)].join('/');
+function evidenceEntryPath(assignment){
+  if(!assignment)throw farmError('ASSIGNMENT_NOT_FOUND','No existe asignación para la entrada.',409);
+  return ['MLS R32 EDITORIAL','evidence git','entries',safeSegment(assignment.language),assertCode(assignment.code)+'.json'].join('/');
 }
-function bridgeCommandPath(state,name='command'){
-  return 'mls chat bridge/commands/'+bridgeNamespace(state)+'/'+safeSegment(name,160)+'.json';
-}
-function bridgeResultPrefix(state){return 'mls chat bridge/results/'+bridgeNamespace(state)+'/';}
 function validateResultShape(result,code,status,state){
   if(!result||typeof result!=='object'||Array.isArray(result))throw farmError('INVALID_RESULT','Falta result estructurado para '+code);
   if(String(result.code||'').toUpperCase()!==code)throw farmError('RESULT_CODE_MISMATCH','result.code no coincide.');
@@ -174,14 +171,18 @@ function validateResultShape(result,code,status,state){
   if(!/^[a-f0-9]{64}$/i.test(String(result.articleHash||'')))throw farmError('RESULT_HASH_MISSING','Falta articleHash SHA-256 para '+code);
   if(!Number.isInteger(Number(result.evidenceRevision))||Number(result.evidenceRevision)<0)throw farmError('EVIDENCE_REVISION_MISSING','Falta evidenceRevision para '+code);
   const evidenceStatus=String(result.evidenceStatus||'').toUpperCase();
-  const resultPath=String(result.bridgeResultPath||'');
-  if(!resultPath.startsWith(bridgeResultPrefix(state)))throw farmError('BRIDGE_NAMESPACE_MISMATCH','bridgeResultPath no pertenece al namespace del batch.');
+  const assignment=(state.entries||[]).find(x=>x.code===code),expectedPath=evidenceEntryPath(assignment);
+  const artifactPath=String(result.evidenceArtifactPath||'');
+  if(artifactPath!==expectedPath)throw farmError('EVIDENCE_ARTIFACT_PATH_MISMATCH','evidenceArtifactPath no coincide con la entrada asignada.');
+  if(!/^[a-f0-9]{40}$/i.test(String(result.evidenceCommitSha||'')))throw farmError('EVIDENCE_COMMIT_MISSING','Falta evidenceCommitSha Git de 40 caracteres.');
+  if(!/^[a-f0-9]{64}$/i.test(String(result.evidenceArtifactHash||'')))throw farmError('EVIDENCE_ARTIFACT_HASH_MISSING','Falta evidenceArtifactHash SHA-256.');
   if(status==='verified'&&evidenceStatus!=='VERIFIED')throw farmError('NOT_VERIFIED','Un checkpoint verified requiere evidenceStatus VERIFIED.');
   if(status==='exception'){
     if(!String(result.errorCode||'').trim())throw farmError('EXCEPTION_CODE_MISSING','Una excepción requiere errorCode.');
     if(evidenceStatus==='REVIEWED')throw farmError('FALSE_HUMAN_REVIEW','Evidence Farm no puede fabricar estado REVIEWED humano.');
   }
   if(result.reviewedHuman===true)throw farmError('FALSE_HUMAN_REVIEW','Evidence Farm no puede declarar revisión humana.');
+  if('bridgeResultPath' in result)throw farmError('BRIDGE_RESULT_FORBIDDEN','R33 GitHub-native no acepta bridgeResultPath.');
   return true;
 }
 function resultDigest(result){return sha256(stableStringify(result));}
@@ -207,7 +208,7 @@ function applyWorkerEvent(state,event,{createdAt,commentId}){
       if(existing.hash!==hash){next.conflicts.push({code,type:'RESULT_HASH_CONFLICT',existingHash:existing.hash,incomingHash:hash,commentId:Number(commentId),at});throw farmError('RESULT_HASH_CONFLICT','Ya existe un resultado distinto para '+code,409);}
       continue;
     }
-    next.results[code]={status,hash,commentId:Number(commentId),receivedAt:at,evidenceStatus:String(raw.result.evidenceStatus||'').toUpperCase(),evidenceRevision:Number(raw.result.evidenceRevision),bridgeResultPath:String(raw.result.bridgeResultPath)};
+    next.results[code]={status,hash,commentId:Number(commentId),receivedAt:at,evidenceStatus:String(raw.result.evidenceStatus||'').toUpperCase(),evidenceRevision:Number(raw.result.evidenceRevision),evidenceArtifactPath:String(raw.result.evidenceArtifactPath),evidenceCommitSha:String(raw.result.evidenceCommitSha),evidenceArtifactHash:String(raw.result.evidenceArtifactHash)};
   }
   next.lastHeartbeatAt=at;next.expiresAt=plusMs(at,EVIDENCE_FARM_LEASE_TTL_MS);next.readyToClose=pendingCodes(next).length===0;return next;
 }
@@ -228,5 +229,5 @@ module.exports={
   EVIDENCE_FARM_COMMAND_MARKER,EVIDENCE_FARM_EVENT_MARKER,EVIDENCE_FARM_STATE_MARKER,EVIDENCE_FARM_LEDGER_MARKER,DEFAULT_POOL_PATH,
   farmError,iso,sha256,assertCode,safeSegment,renderMarked,renderCommandBody,parseCommand,parseWorkerEvent,parseFarmState,parseLedger,normalizePool,loadPool,poolDigest,
   initialLedger,normalizeLedger,terminalCodesFromLedger,addTerminalToLedger,renderLedgerBody,makeBatchState,renderBatchBody,isClaimStale,isLeaseExpired,pendingCodes,releaseReasonForBatch,
-  validateResultShape,resultDigest,applyWorkerEvent,protectedCodesFromBatches,selectNextEntries,farmProgress,bridgeNamespace,bridgeCommandPath,bridgeResultPrefix
+  validateResultShape,resultDigest,applyWorkerEvent,protectedCodesFromBatches,selectNextEntries,farmProgress,evidenceEntryPath
 };
