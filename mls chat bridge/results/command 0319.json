@@ -1,0 +1,2316 @@
+{
+  "success": false,
+  "httpStatus": 422,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "GATE100-DE-VERIFY-20260923-A",
+    "requested": 10,
+    "processed": 10,
+    "failures": 1,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0050",
+            "articleGeneratedAt": "2026-09-19T08:07:07.749Z",
+            "articleHash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Acento léxico en palabras simples",
+            "level": "A2",
+            "part": "Escritura, pronunciación y fundamentos — Schrift, Aussprache und Grundlagen",
+            "chapter": "Acento, composición y prosodia — Wortakzent, Komposition und Prosodie"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-296954556BBED37A77955342",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0050",
+              "articleGeneratedAt": "2026-09-19T08:07:07.749Z",
+              "articleHash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Acento léxico en palabras simples",
+              "level": "A2",
+              "part": "Escritura, pronunciación y fundamentos — Schrift, Aussprache und Grundlagen",
+              "chapter": "Acento, composición y prosodia — Wortakzent, Komposition und Prosodie"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-296954556BBED37A77955342",
+                "code": "MLS-V05-0050",
+                "article_generated_at": "2026-09-19T08:07:07.749Z",
+                "article_hash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+                "section_key": "En pocas palabras",
+                "summary": "Der deutsche Wortakzent hebt innerhalb eines Wortes eine Silbe hervor; seine Position ist lexikalisch festgelegt und nicht an eine einzige feste Silbenposition gebunden.",
+                "claim_type": "phonological_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:15:56.651Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-E98FD30CED016236138CDE73",
+                "code": "MLS-V05-0050",
+                "article_generated_at": "2026-09-19T08:07:07.749Z",
+                "article_hash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+                "section_key": "Observación importante",
+                "summary": "Im Deutschen trägt eine Wortform im Regelfall nur einen Hauptakzent, und nur wenige Wörter sind kontextabhängig unterschiedlich akzentuierbar.",
+                "claim_type": "phonological_description",
+                "materiality": "supporting",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:15:56.818Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-BBFACD54D050946FD9E4CF28",
+                "claim_id": "MLS-CLM-296954556BBED37A77955342",
+                "source_id": "MLS-SRC-9C7B621B03F616070E30",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:15:56.985Z"
+              },
+              {
+                "link_id": "MLS-LNK-C717E759E0C7862820AB82ED",
+                "claim_id": "MLS-CLM-E98FD30CED016236138CDE73",
+                "source_id": "MLS-SRC-9C7B621B03F616070E30",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:15:57.222Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "75a0edf7a7dd6b2d3423999fe3dbb42885871ea9fe8201ffbef5f52cbeb010a6",
+          "verifiedAt": "2026-09-23T10:16:49.706Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-167171A55AE5E9CD1C732247",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0050",
+            "article_generated_at": "2026-09-19T08:07:07.749Z",
+            "article_hash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:16:49.706Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:16:49.706Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-167171A55AE5E9CD1C732247",
+            "code": "MLS-V05-0050",
+            "article_generated_at": "2026-09-19T08:07:07.749Z",
+            "article_hash": "8e244b94c56bfc5b569f120c5c9d4bb9c78d9f2969c7061a3acabdb09b8a8d76",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "75a0edf7a7dd6b2d3423999fe3dbb42885871ea9fe8201ffbef5f52cbeb010a6",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against IDS grammis Wortakzent.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:16:49.706Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:16:51.560Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0150",
+            "articleGeneratedAt": "2026-09-19T08:21:34.043Z",
+            "articleHash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Artículo definido dativo dem/der/dem/den",
+            "level": "A2",
+            "part": "Casos — Kasus",
+            "chapter": "Dativo — Dativ"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-BE57D056324C838841D56F1D",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0150",
+              "articleGeneratedAt": "2026-09-19T08:21:34.043Z",
+              "articleHash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Artículo definido dativo dem/der/dem/den",
+              "level": "A2",
+              "part": "Casos — Kasus",
+              "chapter": "Dativo — Dativ"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-BE57D056324C838841D56F1D",
+                "code": "MLS-V05-0150",
+                "article_generated_at": "2026-09-19T08:21:34.043Z",
+                "article_hash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+                "section_key": "En pocas palabras",
+                "summary": "Der bestimmte Artikel hat im Dativ die Formen dem (Maskulinum), der (Femininum), dem (Neutrum) und den (Plural).",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:15:58.488Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-A0C861B3F88F7E2E340E594B",
+                "code": "MLS-V05-0150",
+                "article_generated_at": "2026-09-19T08:21:34.043Z",
+                "article_hash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+                "section_key": "Cómo funciona",
+                "summary": "Kasus, Numerus und Genus bestimmen die Flexionsform innerhalb der deutschen Nominalphrase.",
+                "claim_type": "grammatical_description",
+                "materiality": "supporting",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:15:58.636Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-A5FB7D3C9E40D3D0A59EE960",
+                "claim_id": "MLS-CLM-BE57D056324C838841D56F1D",
+                "source_id": "MLS-SRC-6BE31D9234BB99DEB003",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:15:58.798Z"
+              },
+              {
+                "link_id": "MLS-LNK-3A4A67C48DEBA5A2E16D423F",
+                "claim_id": "MLS-CLM-A0C861B3F88F7E2E340E594B",
+                "source_id": "MLS-SRC-6BE31D9234BB99DEB003",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:15:59.024Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "4d96cf9c906e332e2db2d33040cc8f71c47bd6cc3e53b57a6962e18fac192117",
+          "verifiedAt": "2026-09-23T10:16:51.711Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-CBD2105E5D898061420AB9F0",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0150",
+            "article_generated_at": "2026-09-19T08:21:34.043Z",
+            "article_hash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:16:51.711Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:16:51.711Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-CBD2105E5D898061420AB9F0",
+            "code": "MLS-V05-0150",
+            "article_generated_at": "2026-09-19T08:21:34.043Z",
+            "article_hash": "e89039bd2cfb0515d9dd4bd2d737ea192d6577220b1dae1542730eca5884dcd4",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "4d96cf9c906e332e2db2d33040cc8f71c47bd6cc3e53b57a6962e18fac192117",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against IDS grammis Kasusflexion in der Nominalphrase.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:16:51.711Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:16:53.552Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0251",
+            "articleGeneratedAt": "2026-09-19T08:15:14.563Z",
+            "articleHash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Superlativo am -sten",
+            "level": "A2",
+            "part": "Adjetivos y comparación — Adjektive und Komparation",
+            "chapter": "Comparación y grado — Komparation und Grad"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-11B3490CADD0B0CDBABC2138",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0251",
+              "articleGeneratedAt": "2026-09-19T08:15:14.563Z",
+              "articleHash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Superlativo am -sten",
+              "level": "A2",
+              "part": "Adjetivos y comparación — Adjektive und Komparation",
+              "chapter": "Comparación y grado — Komparation und Grad"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-11B3490CADD0B0CDBABC2138",
+                "code": "MLS-V05-0251",
+                "article_generated_at": "2026-09-19T08:15:14.563Z",
+                "article_hash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b",
+                "section_key": "En pocas palabras",
+                "summary": "Der Superlativ ist die höchste Steigerungsstufe; prädikativ oder adverbial erscheint er häufig in Formen wie am besten bzw. am schnellsten.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:00.229Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-1E4951EC06FE4F8782945019",
+                "claim_id": "MLS-CLM-11B3490CADD0B0CDBABC2138",
+                "source_id": "MLS-SRC-CEF08729B9BD60838496",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:00.387Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "5606e624cc6f16fabcb487063d4e871131cbad7e9b5cba42c1c1708cca49e3d8",
+          "verifiedAt": "2026-09-23T10:16:53.700Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-B56C93D53679DDF40DAE229E",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0251",
+            "article_generated_at": "2026-09-19T08:15:14.563Z",
+            "article_hash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:16:53.700Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:16:53.700Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-B56C93D53679DDF40DAE229E",
+            "code": "MLS-V05-0251",
+            "article_generated_at": "2026-09-19T08:15:14.563Z",
+            "article_hash": "c769c71dea6e68a229a7cff950a4880cc6c1154f3e326b5b661479b64e95cd1b",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "5606e624cc6f16fabcb487063d4e871131cbad7e9b5cba42c1c1708cca49e3d8",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Duden Superlativ.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:16:53.700Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:16:55.502Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0351",
+            "articleGeneratedAt": "2026-09-19T08:29:10.071Z",
+            "articleHash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Modal wollen",
+            "level": "A1",
+            "part": "Prefijos y modalidad — Präfixverben und Modalität",
+            "chapter": "Verbos modales — Modalverben"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-061E496A77544499ABAF700E",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0351",
+              "articleGeneratedAt": "2026-09-19T08:29:10.071Z",
+              "articleHash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Modal wollen",
+              "level": "A1",
+              "part": "Prefijos y modalidad — Präfixverben und Modalität",
+              "chapter": "Verbos modales — Modalverben"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-061E496A77544499ABAF700E",
+                "code": "MLS-V05-0351",
+                "article_generated_at": "2026-09-19T08:29:10.071Z",
+                "article_hash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+                "section_key": "En pocas palabras",
+                "summary": "Das Modalverb wollen kann Absicht, Wunsch oder Willen ausdrücken und wird mit einem Infinitiv verbunden.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:01.619Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-C693020AA84911AA4E9FB4BA",
+                "code": "MLS-V05-0351",
+                "article_generated_at": "2026-09-19T08:29:10.071Z",
+                "article_hash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+                "section_key": "Ejemplos",
+                "summary": "In Sätzen wie Er will ins Ausland gehen kennzeichnet wollen eine beabsichtigte Handlung.",
+                "claim_type": "usage_description",
+                "materiality": "supporting",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:01.788Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-BF2995266EFC6AD04B641363",
+                "claim_id": "MLS-CLM-061E496A77544499ABAF700E",
+                "source_id": "MLS-SRC-C4EDF1011717371C7023",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:01.953Z"
+              },
+              {
+                "link_id": "MLS-LNK-BE346DB4A75E7C7B66A34006",
+                "claim_id": "MLS-CLM-C693020AA84911AA4E9FB4BA",
+                "source_id": "MLS-SRC-C4EDF1011717371C7023",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:02.198Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "489a490372752bcada71a2c5b0f731cc78f9ee707e08e0a034cfcc6ebfd2b0c6",
+          "verifiedAt": "2026-09-23T10:16:55.652Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-5FD55542213AE49F709BFB56",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0351",
+            "article_generated_at": "2026-09-19T08:29:10.071Z",
+            "article_hash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:16:55.652Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:16:55.652Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-5FD55542213AE49F709BFB56",
+            "code": "MLS-V05-0351",
+            "article_generated_at": "2026-09-19T08:29:10.071Z",
+            "article_hash": "72b57312a6a1c230f772ca29b4624e5320659c4c24262ebce579b0e4a336732c",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "489a490372752bcada71a2c5b0f731cc78f9ee707e08e0a034cfcc6ebfd2b0c6",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Duden wollen.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:16:55.652Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:16:57.478Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0451",
+            "articleGeneratedAt": "2026-09-19T08:15:37.518Z",
+            "articleHash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Präteritum haben hatte",
+            "level": "A2",
+            "part": "Pasado y futuro — Vergangenheit und Zukunft",
+            "chapter": "Präteritum y narración — Präteritum und Narration"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-A4D64589940D516F366C62FC",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0451",
+              "articleGeneratedAt": "2026-09-19T08:15:37.518Z",
+              "articleHash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Präteritum haben hatte",
+              "level": "A2",
+              "part": "Pasado y futuro — Vergangenheit und Zukunft",
+              "chapter": "Präteritum y narración — Präteritum und Narration"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-A4D64589940D516F366C62FC",
+                "code": "MLS-V05-0451",
+                "article_generated_at": "2026-09-19T08:15:37.518Z",
+                "article_hash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c",
+                "section_key": "En pocas palabras",
+                "summary": "Das Präteritum von haben lautet ich hatte, du hattest, er/sie/es hatte, wir hatten, ihr hattet, sie/Sie hatten.",
+                "claim_type": "morphological_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:03.430Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-EA4D736F4A98462DFD4C4485",
+                "claim_id": "MLS-CLM-A4D64589940D516F366C62FC",
+                "source_id": "MLS-SRC-D1588CAC68421FEBFD50",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:03.587Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "1f76dfa16ea5084665b9ff69faae457033330526f0765b6eeea0d46c5156df4b",
+          "verifiedAt": "2026-09-23T10:16:57.627Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-D294712B71D5D5872091F0FA",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0451",
+            "article_generated_at": "2026-09-19T08:15:37.518Z",
+            "article_hash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:16:57.627Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:16:57.627Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-D294712B71D5D5872091F0FA",
+            "code": "MLS-V05-0451",
+            "article_generated_at": "2026-09-19T08:15:37.518Z",
+            "article_hash": "500de9e85cffda27d3209da5702c71b1948a45ac05eeb5aea4c264070d28c26c",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "1f76dfa16ea5084665b9ff69faae457033330526f0765b6eeea0d46c5156df4b",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Duden haben conjugation.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:16:57.627Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:16:59.445Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0550",
+            "articleGeneratedAt": "2026-09-19T08:32:35.816Z",
+            "articleHash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Régimen warten auf + Akk",
+            "level": "B1",
+            "part": "Preposiciones y régimen — Präpositionen und Rektion",
+            "chapter": "Régimen verbal y preposicional — Verb- und Präpositionalrektion"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-F0115D77F902AAEB3499D215",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-F827DF5E8B1DAA45BCBC5FD6",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0550",
+              "articleGeneratedAt": "2026-09-19T08:32:35.816Z",
+              "articleHash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Régimen warten auf + Akk",
+              "level": "B1",
+              "part": "Preposiciones y régimen — Präpositionen und Rektion",
+              "chapter": "Régimen verbal y preposicional — Verb- und Präpositionalrektion"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-F0115D77F902AAEB3499D215",
+                "code": "MLS-V05-0550",
+                "article_generated_at": "2026-09-19T08:32:35.816Z",
+                "article_hash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+                "section_key": "En pocas palabras",
+                "summary": "Das Verb warten verbindet sich in der Bedeutung des Erwartens regelmäßig mit auf, z. B. auf Post, auf eine Antwort oder auf den Bus warten.",
+                "claim_type": "valency_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:04.785Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-F827DF5E8B1DAA45BCBC5FD6",
+                "code": "MLS-V05-0550",
+                "article_generated_at": "2026-09-19T08:32:35.816Z",
+                "article_hash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+                "section_key": "Cómo funciona",
+                "summary": "In der Konstruktion warten auf steht die Ergänzung nach auf im Akkusativ.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:04.943Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-7FF50D5AD43963969D1A65CE",
+                "claim_id": "MLS-CLM-F0115D77F902AAEB3499D215",
+                "source_id": "MLS-SRC-F4149BD16E03793FA8A8",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:05.112Z"
+              },
+              {
+                "link_id": "MLS-LNK-3ED18C6C8D1315A33E60F003",
+                "claim_id": "MLS-CLM-F827DF5E8B1DAA45BCBC5FD6",
+                "source_id": "MLS-SRC-F4149BD16E03793FA8A8",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:05.333Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "b80fdab1d777e3061a514c3f93d73009bb9757615c3bebf20e105c2bbf8b1164",
+          "verifiedAt": "2026-09-23T10:16:59.600Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-CF3750B20023CBDAC9F566DE",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0550",
+            "article_generated_at": "2026-09-19T08:32:35.816Z",
+            "article_hash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:16:59.600Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:16:59.600Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-CF3750B20023CBDAC9F566DE",
+            "code": "MLS-V05-0550",
+            "article_generated_at": "2026-09-19T08:32:35.816Z",
+            "article_hash": "f0c7e2aa287b0edebaf493cd1f1e96066b0593c0ef195b5d91018917e8dc2df8",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "b80fdab1d777e3061a514c3f93d73009bb9757615c3bebf20e105c2bbf8b1164",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against Duden warten.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:16:59.600Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:17:01.451Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0650",
+            "articleGeneratedAt": "2026-09-19T08:16:53.208Z",
+            "articleHash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Agente con von + dativo",
+            "level": "B1",
+            "part": "Voz y modos — Diathese und Modi",
+            "chapter": "Pasiva de proceso, estado y alternativas — Vorgangs-, Zustandspassiv und Alternativen"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-BD7FD468DD0C625028B1020A",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0650",
+              "articleGeneratedAt": "2026-09-19T08:16:53.208Z",
+              "articleHash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Agente con von + dativo",
+              "level": "B1",
+              "part": "Voz y modos — Diathese und Modi",
+              "chapter": "Pasiva de proceso, estado y alternativas — Vorgangs-, Zustandspassiv und Alternativen"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-BD7FD468DD0C625028B1020A",
+                "code": "MLS-V05-0650",
+                "article_generated_at": "2026-09-19T08:16:53.208Z",
+                "article_hash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+                "section_key": "En pocas palabras",
+                "summary": "Das Subjekt eines Aktivsatzes kann im entsprechenden Passivsatz fakultativ als Präpositionalphrase mit von und Dativ realisiert werden.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:06.610Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-167D8ED0626ED01C525D53E3",
+                "code": "MLS-V05-0650",
+                "article_generated_at": "2026-09-19T08:16:53.208Z",
+                "article_hash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+                "section_key": "Ejemplos",
+                "summary": "Eine von-Phrase kann im Passiv das Agens ausdrücken, also den Handelnden der zugrunde liegenden Aktivkonstruktion.",
+                "claim_type": "grammatical_description",
+                "materiality": "supporting",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:06.809Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-91558E39A26A82ED442A2B3C",
+                "claim_id": "MLS-CLM-BD7FD468DD0C625028B1020A",
+                "source_id": "MLS-SRC-4CB838DBA051378CBBF3",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:06.971Z"
+              },
+              {
+                "link_id": "MLS-LNK-FCB24F698F8442E70CD93102",
+                "claim_id": "MLS-CLM-167D8ED0626ED01C525D53E3",
+                "source_id": "MLS-SRC-4CB838DBA051378CBBF3",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:07.206Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "51111b9404c351f92495084023a937393d5957bac03c23c8dcc90a27a80d3d27",
+          "verifiedAt": "2026-09-23T10:17:01.603Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-4411F8CD2358D13FA394EEA8",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0650",
+            "article_generated_at": "2026-09-19T08:16:53.208Z",
+            "article_hash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:17:01.603Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:17:01.603Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-4411F8CD2358D13FA394EEA8",
+            "code": "MLS-V05-0650",
+            "article_generated_at": "2026-09-19T08:16:53.208Z",
+            "article_hash": "d043c4b694d5e7cf4b70f094f19fcfc8a32cdd13745f39ba26746c9ceaaa3fef",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "51111b9404c351f92495084023a937393d5957bac03c23c8dcc90a27a80d3d27",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against IDS grammis Subjekt / passive von + Dativ.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:17:01.603Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:17:03.431Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0750",
+            "articleGeneratedAt": "2026-09-19T08:34:43.534Z",
+            "articleHash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Conversión a relativa",
+            "level": "C1",
+            "part": "Participios y formación de palabras — Partizipien und Wortbildung",
+            "chapter": "Participios atributivos y construcciones expandidas — Attributive Partizipien und erweiterte Konstruktionen"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-3A62D3F29EA0B61EE6CF6975",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0750",
+              "articleGeneratedAt": "2026-09-19T08:34:43.534Z",
+              "articleHash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Conversión a relativa",
+              "level": "C1",
+              "part": "Participios y formación de palabras — Partizipien und Wortbildung",
+              "chapter": "Participios atributivos y construcciones expandidas — Attributive Partizipien und erweiterte Konstruktionen"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-3A62D3F29EA0B61EE6CF6975",
+                "code": "MLS-V05-0750",
+                "article_generated_at": "2026-09-19T08:34:43.534Z",
+                "article_hash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+                "section_key": "En pocas palabras",
+                "summary": "Attributiv verwendete Partizipialphrasen können in vielen Fällen durch Relativsätze paraphrasiert bzw. übersetzt werden.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:08.446Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-B00F2E370346444AD46B15A1",
+                "code": "MLS-V05-0750",
+                "article_generated_at": "2026-09-19T08:34:43.534Z",
+                "article_hash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+                "section_key": "Cómo funciona",
+                "summary": "Partizipialphrasen verhalten sich syntaktisch und funktional in vieler Hinsicht wie Adjektivphrasen und können vor dem Bezugsnomen stehen.",
+                "claim_type": "grammatical_description",
+                "materiality": "supporting",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:08.605Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-7484AE7859E5929A94B43B50",
+                "claim_id": "MLS-CLM-3A62D3F29EA0B61EE6CF6975",
+                "source_id": "MLS-SRC-1FC0D9CF7A4244100340",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:08.752Z"
+              },
+              {
+                "link_id": "MLS-LNK-312CD1E33E4A92E287581A24",
+                "claim_id": "MLS-CLM-B00F2E370346444AD46B15A1",
+                "source_id": "MLS-SRC-1FC0D9CF7A4244100340",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:08.981Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "9ae22413c46c8f98c1c5d79665804d97f67c61b5003654350bd0f63706454aa5",
+          "verifiedAt": "2026-09-23T10:17:03.584Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-7F362B83E767DDAA1CC85EE3",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0750",
+            "article_generated_at": "2026-09-19T08:34:43.534Z",
+            "article_hash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:17:03.584Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:17:03.584Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-7F362B83E767DDAA1CC85EE3",
+            "code": "MLS-V05-0750",
+            "article_generated_at": "2026-09-19T08:34:43.534Z",
+            "article_hash": "be40d190ec564b29ca0b9c371bf2e28b394b75b2a42efdf7217a76049ec1e4e4",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "9ae22413c46c8f98c1c5d79665804d97f67c61b5003654350bd0f63706454aa5",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against IDS grammis Partizipialphrase.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:17:03.584Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:17:05.505Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V05-0850",
+            "articleGeneratedAt": "2026-09-19T08:21:49.627Z",
+            "articleHash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+            "language": "aleman",
+            "languageName": "Alemán",
+            "title": "Es presentativo en primera posición",
+            "level": "C1",
+            "part": "Partículas y es — Partikeln und es",
+            "chapter": "Funciones de es — Funktionen von es"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "aleman",
+            "regionalScope": "Alemán contemporáneo; documentar estándares nacionales/regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "La variación estándar entre regiones germanófonas no es contradicción automática."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 2,
+          "claimsVerified": 2,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-15755DD7744F1783C82789BD",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            },
+            {
+              "claimId": "MLS-CLM-6DD6F67A6852DE8F786796E3",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V05-0850",
+              "articleGeneratedAt": "2026-09-19T08:21:49.627Z",
+              "articleHash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+              "language": "aleman",
+              "languageName": "Alemán",
+              "title": "Es presentativo en primera posición",
+              "level": "C1",
+              "part": "Partículas y es — Partikeln und es",
+              "chapter": "Funciones de es — Funktionen von es"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-15755DD7744F1783C82789BD",
+                "code": "MLS-V05-0850",
+                "article_generated_at": "2026-09-19T08:21:49.627Z",
+                "article_hash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+                "section_key": "En pocas palabras",
+                "summary": "Expletives bzw. Platzhalter-es kann die Vorfeldposition eines Verbzweitsatzes besetzen, ohne selbst eine Komplementfunktion zu haben.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:10.261Z",
+                "verified_at": null,
+                "verification_revision": null
+              },
+              {
+                "claim_id": "MLS-CLM-6DD6F67A6852DE8F786796E3",
+                "code": "MLS-V05-0850",
+                "article_generated_at": "2026-09-19T08:21:49.627Z",
+                "article_hash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+                "section_key": "Observación importante",
+                "summary": "Wenn eine andere Einheit das Vorfeld besetzt, tritt dieses expletive es nicht mehr auf.",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T10:16:10.427Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-B338618A1759627B406261D3",
+                "claim_id": "MLS-CLM-15755DD7744F1783C82789BD",
+                "source_id": "MLS-SRC-A1BBEE0FC2818B068860",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:10.598Z"
+              },
+              {
+                "link_id": "MLS-LNK-93EBF8139F57C2878BEB5297",
+                "claim_id": "MLS-CLM-6DD6F67A6852DE8F786796E3",
+                "source_id": "MLS-SRC-A1BBEE0FC2818B068860",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T10:16:10.850Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "89e396203c679a7caea977a2756106e16761b8472bba51e131c4ef5ca756317f",
+          "verifiedAt": "2026-09-23T10:17:05.657Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-B94A3594D6EE34C010E531A0",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V05-0850",
+            "article_generated_at": "2026-09-19T08:21:49.627Z",
+            "article_hash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T10:17:05.657Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T10:17:05.657Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-B94A3594D6EE34C010E531A0",
+            "code": "MLS-V05-0850",
+            "article_generated_at": "2026-09-19T08:21:49.627Z",
+            "article_hash": "b05635bbb4d117c6f333bd45512db3be3b9244b3e174218ba3882caaf6a78906",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "89e396203c679a7caea977a2756106e16761b8472bba51e131c4ef5ca756317f",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 2,
+            "claims_verified": 2,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT Gate 100",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "Gate 100 verification against IDS grammis Platzhalter-es.",
+            "run_id": "MLS-R33-GATE100-20260923-A",
+            "created_at": "2026-09-23T10:17:05.657Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 135,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 49,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:17:07.512Z"
+      },
+      {
+        "index": 9,
+        "success": false,
+        "httpStatus": 422,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": false,
+          "error": "Las fuentes que sustentan los claims no pasan APA Validator.",
+          "code": "APA_VALIDATION_REQUIRED",
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 34,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 12,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T10:17:08.078Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T10:17:08.078Z",
+  "commandFile": "mls chat bridge/commands/command 0319.json"
+}
