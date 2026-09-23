@@ -138,7 +138,7 @@ function makeBatchState({issueNumber,pool,requestId,workerId,workerLogin=null,en
 }
 function renderBatchBody(state){
   const received=Object.keys(state.results||{}).length,pending=Math.max(0,(state.entries||[]).length-received);
-  return ['## R33 Evidence Farm batch','','**Pool:** `'+state.poolId+'`  ','**Batch:** `'+state.batchId+'`  ','**Estado:** `'+state.status+'`  ','**Asignadas:** '+state.entries.length+'  ','**Resultados recibidos:** '+received+'  ','**Pendientes:** '+pending+'  ','**Worker acknowledged:** '+(state.acknowledgedAt?'sí':'no')+'  ','**Ack deadline:** '+state.ackDeadlineAt+'  ','**Lease expira:** '+state.expiresAt+'  ','','Los comandos del MLS Chat Bridge para este batch deben usar la ruta namespaced indicada por el protocolo.','','No edites manualmente el bloque de control.','',renderMarked(EVIDENCE_FARM_STATE_MARKER,state)].join('\n');
+  return ['## R33 Evidence Farm batch','','**Pool:** `'+state.poolId+'`  ','**Batch:** `'+state.batchId+'`  ','**Estado:** `'+state.status+'`  ','**Asignadas:** '+state.entries.length+'  ','**Resultados recibidos:** '+received+'  ','**Pendientes:** '+pending+'  ','**Worker acknowledged:** '+(state.acknowledgedAt?'sí':'no')+'  ','**Ack deadline:** '+state.ackDeadlineAt+'  ','**Lease expira:** '+state.expiresAt+'  ','','Evidence canónico: GitHub. Cada checkpoint debe apuntar al artefacto Evidence Git de la entrada y al commit exacto que lo contiene.','','No edites manualmente el bloque de control.','',renderMarked(EVIDENCE_FARM_STATE_MARKER,state)].join('\n');
 }
 function isClaimStale(createdAt,at=Date.now()){const created=parseDate(createdAt);return created===null||Number(at)-created>EVIDENCE_FARM_CLAIM_TTL_MS;}
 function isLeaseExpired(state,at=Date.now()){
