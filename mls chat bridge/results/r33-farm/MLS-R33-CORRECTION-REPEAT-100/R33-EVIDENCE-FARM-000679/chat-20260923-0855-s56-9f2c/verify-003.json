@@ -1,0 +1,1174 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "R33-EVIDENCE-FARM-000679-VERIFY-003",
+    "requested": 5,
+    "processed": 5,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0695",
+            "articleGeneratedAt": "2026-09-19T07:52:55.727Z",
+            "articleHash": "c280c552ae110c66d13114ba9fc82b8e5f60d02309717ce4c7376024aa28b9f3",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "S'y connaître",
+            "level": "B1",
+            "part": "Clíticos y pronombres adverbiales — Clitiques et pronoms adverbiaux",
+            "chapter": "Pronombres y y en — Pronoms y et en"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-9A690D6B04A247F292EFB313",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V04-0695",
+              "articleGeneratedAt": "2026-09-19T07:52:55.727Z",
+              "articleHash": "c280c552ae110c66d13114ba9fc82b8e5f60d02309717ce4c7376024aa28b9f3",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "S'y connaître",
+              "level": "B1",
+              "part": "Clíticos y pronombres adverbiales — Clitiques et pronoms adverbiaux",
+              "chapter": "Pronombres y y en — Pronoms y et en"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-9A690D6B04A247F292EFB313",
+                "code": "MLS-V04-0695",
+                "article_generated_at": "2026-09-19T07:52:55.727Z",
+                "article_hash": "c280c552ae110c66d13114ba9fc82b8e5f60d02309717ce4c7376024aa28b9f3",
+                "section_key": "En pocas palabras",
+                "summary": "La construction «s’y connaître» signifie être compétent ou avoir de l’expérience dans un domaine; ce domaine peut être introduit notamment par «en».",
+                "claim_type": "usage_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:13:28.556Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-5B987EF46D1A8C4EBB14715A",
+                "claim_id": "MLS-CLM-9A690D6B04A247F292EFB313",
+                "source_id": "MLS-SRC-78ECE9E278D382AEFC7D",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:13:28.815Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "e956adf5cfd6a2cbf50bbffa200b87a4c1ab76758841633f41003ff12435512d",
+          "verifiedAt": "2026-09-23T15:15:29.898Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-811FE0955ACC024651EA1C61",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V04-0695",
+            "article_generated_at": "2026-09-19T07:52:55.727Z",
+            "article_hash": "c280c552ae110c66d13114ba9fc82b8e5f60d02309717ce4c7376024aa28b9f3",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:15:29.898Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:15:29.898Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-811FE0955ACC024651EA1C61",
+            "code": "MLS-V04-0695",
+            "article_generated_at": "2026-09-19T07:52:55.727Z",
+            "article_hash": "c280c552ae110c66d13114ba9fc82b8e5f60d02309717ce4c7376024aa28b9f3",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "e956adf5cfd6a2cbf50bbffa200b87a4c1ab76758841633f41003ff12435512d",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:15:29.898Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:30.814Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0811",
+            "articleGeneratedAt": "2026-09-19T07:53:16.237Z",
+            "articleHash": "2140206b35ea8b2ca7a7a286c1a28abe5cb60f4fabcedb7294a96cfcb5facb61",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "pire",
+            "level": "A2",
+            "part": "Comparación y estructura oracional — Comparaison et structure de la phrase",
+            "chapter": "Comparación, grado y superlativo — Comparaison, degré et superlatif"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-68BB8F17EB3450EFD72807A3",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V04-0811",
+              "articleGeneratedAt": "2026-09-19T07:53:16.237Z",
+              "articleHash": "2140206b35ea8b2ca7a7a286c1a28abe5cb60f4fabcedb7294a96cfcb5facb61",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "pire",
+              "level": "A2",
+              "part": "Comparación y estructura oracional — Comparaison et structure de la phrase",
+              "chapter": "Comparación, grado y superlativo — Comparaison, degré et superlatif"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-68BB8F17EB3450EFD72807A3",
+                "code": "MLS-V04-0811",
+                "article_generated_at": "2026-09-19T07:53:16.237Z",
+                "article_hash": "2140206b35ea8b2ca7a7a286c1a28abe5cb60f4fabcedb7294a96cfcb5facb61",
+                "section_key": "En pocas palabras",
+                "summary": "«Pire» est le comparatif de l’adjectif «mauvais» et signifie qu’une personne, une chose ou une situation est plus mauvaise ou plus défavorable que le terme de comparaison.",
+                "claim_type": "usage_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:13:30.771Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-86F979B7295D2BFA52BF276C",
+                "claim_id": "MLS-CLM-68BB8F17EB3450EFD72807A3",
+                "source_id": "MLS-SRC-E0A3A4A33263538DF7D6",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:13:31.027Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "2f1f0a3b67b993cf959e0012ea8457ae5ed7fab0a00cdc3549a18c585f68d0e6",
+          "verifiedAt": "2026-09-23T15:15:30.892Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-9D356DB690CA392B58176D9F",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V04-0811",
+            "article_generated_at": "2026-09-19T07:53:16.237Z",
+            "article_hash": "2140206b35ea8b2ca7a7a286c1a28abe5cb60f4fabcedb7294a96cfcb5facb61",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:15:30.892Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:15:30.892Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-9D356DB690CA392B58176D9F",
+            "code": "MLS-V04-0811",
+            "article_generated_at": "2026-09-19T07:53:16.237Z",
+            "article_hash": "2140206b35ea8b2ca7a7a286c1a28abe5cb60f4fabcedb7294a96cfcb5facb61",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "2f1f0a3b67b993cf959e0012ea8457ae5ed7fab0a00cdc3549a18c585f68d0e6",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:15:30.892Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:31.677Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-0928",
+            "articleGeneratedAt": "2026-09-19T07:56:31.899Z",
+            "articleHash": "17414ab89aada0b82ed141c8241318838fac0e04d3995b2ed87f62ef8f19e86e",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Conector en effet",
+            "level": "B1",
+            "part": "Morfología derivativa y cohesión — Morphologie dérivationnelle et cohésion",
+            "chapter": "Conectores, cohesión y organización textual — Connecteurs, cohésion et organisation textuelle"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-CD5E2956C5766CD33495FC42",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V04-0928",
+              "articleGeneratedAt": "2026-09-19T07:56:31.899Z",
+              "articleHash": "17414ab89aada0b82ed141c8241318838fac0e04d3995b2ed87f62ef8f19e86e",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Conector en effet",
+              "level": "B1",
+              "part": "Morfología derivativa y cohesión — Morphologie dérivationnelle et cohésion",
+              "chapter": "Conectores, cohesión y organización textual — Connecteurs, cohésion et organisation textuelle"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-CD5E2956C5766CD33495FC42",
+                "code": "MLS-V04-0928",
+                "article_generated_at": "2026-09-19T07:56:31.899Z",
+                "article_hash": "17414ab89aada0b82ed141c8241318838fac0e04d3995b2ed87f62ef8f19e86e",
+                "section_key": "En pocas palabras",
+                "summary": "«En effet» est une charnière textuelle qui peut introduire une explication ou confirmer et étayer l’énoncé précédent; il ne marque pas, par lui-même, une conséquence comme «donc».",
+                "claim_type": "grammatical_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:13:32.931Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-743DDE8B7129A4D955333FC6",
+                "claim_id": "MLS-CLM-CD5E2956C5766CD33495FC42",
+                "source_id": "MLS-SRC-AB2BFA2975D2865767EC",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:13:33.181Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "f9d553034efda772e70b7bde8c4e40e13fe535456c96185bbec641db22a87098",
+          "verifiedAt": "2026-09-23T15:15:31.746Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-02AB6E9BF3B32D963DEF642F",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V04-0928",
+            "article_generated_at": "2026-09-19T07:56:31.899Z",
+            "article_hash": "17414ab89aada0b82ed141c8241318838fac0e04d3995b2ed87f62ef8f19e86e",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:15:31.746Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:15:31.746Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-02AB6E9BF3B32D963DEF642F",
+            "code": "MLS-V04-0928",
+            "article_generated_at": "2026-09-19T07:56:31.899Z",
+            "article_hash": "17414ab89aada0b82ed141c8241318838fac0e04d3995b2ed87f62ef8f19e86e",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "f9d553034efda772e70b7bde8c4e40e13fe535456c96185bbec641db22a87098",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:15:31.746Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:32.476Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-1043",
+            "articleGeneratedAt": "2026-09-19T07:58:55.243Z",
+            "articleHash": "2828999778b14f4dde45f0c0f8ecc34a45effc1bd5f67a5969ef3ae9c7242700",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "septante",
+            "level": "C1",
+            "part": "Literatura, historia y francofonía — Littérature, histoire et francophonie",
+            "chapter": "Variación regional y francofonía — Variation régionale et francophonie"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-6167C33264F73A35E0986470",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V04-1043",
+              "articleGeneratedAt": "2026-09-19T07:58:55.243Z",
+              "articleHash": "2828999778b14f4dde45f0c0f8ecc34a45effc1bd5f67a5969ef3ae9c7242700",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "septante",
+              "level": "C1",
+              "part": "Literatura, historia y francofonía — Littérature, histoire et francophonie",
+              "chapter": "Variación regional y francofonía — Variation régionale et francophonie"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-6167C33264F73A35E0986470",
+                "code": "MLS-V04-1043",
+                "article_generated_at": "2026-09-19T07:58:55.243Z",
+                "article_hash": "2828999778b14f4dde45f0c0f8ecc34a45effc1bd5f67a5969ef3ae9c7242700",
+                "section_key": "En pocas palabras",
+                "summary": "«Septante» est un adjectif numéral cardinal employé en Belgique et en Suisse romande pour désigner le nombre soixante-dix.",
+                "claim_type": "regional_variation",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:13:35.110Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-231A807A87E94812F6E1F70C",
+                "claim_id": "MLS-CLM-6167C33264F73A35E0986470",
+                "source_id": "MLS-SRC-1E9E38885F4C1E87CC8A",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:13:35.365Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "577321343cd5f2af7832bfcaff6f6ded6f44b3fc4fe5d37178e489e817dda1dc",
+          "verifiedAt": "2026-09-23T15:15:32.549Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-FEF28BE5C5D31527E9B2EF17",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V04-1043",
+            "article_generated_at": "2026-09-19T07:58:55.243Z",
+            "article_hash": "2828999778b14f4dde45f0c0f8ecc34a45effc1bd5f67a5969ef3ae9c7242700",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:15:32.549Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:15:32.549Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-FEF28BE5C5D31527E9B2EF17",
+            "code": "MLS-V04-1043",
+            "article_generated_at": "2026-09-19T07:58:55.243Z",
+            "article_hash": "2828999778b14f4dde45f0c0f8ecc34a45effc1bd5f67a5969ef3ae9c7242700",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "577321343cd5f2af7832bfcaff6f6ded6f44b3fc4fe5d37178e489e817dda1dc",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:15:32.549Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:33.447Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "verificarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/verify",
+        "response": {
+          "ok": true,
+          "article": {
+            "code": "MLS-V04-1159",
+            "articleGeneratedAt": "2026-09-19T08:49:22.377Z",
+            "articleHash": "1b4c36bbcda620f27d62dd11fcf840005e440c2b7c7fb89a84ce9cccd528a458",
+            "language": "frances",
+            "languageName": "Francés",
+            "title": "Elección estilística",
+            "level": "C2",
+            "part": "Dominio C1–C2 — Maîtrise C1–C2",
+            "chapter": "Sintaxis, discurso y estilo C1–C2 — Syntaxe, discours et style C1–C2"
+          },
+          "policy": {
+            "version": "1.0",
+            "language": "frances",
+            "regionalScope": "Francés contemporáneo; documentar diferencias regionales cuando sean pertinentes.",
+            "defaultAllowedTiers": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "claimRules": {
+              "normative": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "orthography": {
+                "allowedTiers": [
+                  "A",
+                  "B"
+                ]
+              },
+              "quotation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C",
+                  "D"
+                ],
+                "requiresLocator": true
+              },
+              "regional_variation": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "preserveVariation": true
+              },
+              "historical": {
+                "allowedTiers": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            },
+            "preferredAuthorityKinds": [
+              "official_language_or_standards_institution",
+              "national_education_or_culture_authority",
+              "official_dictionary_or_normative_reference",
+              "institutional_corpus"
+            ],
+            "recommendedAcademicSourceKinds": [
+              "peer_reviewed_linguistics",
+              "university_press",
+              "academic_monograph",
+              "specialist_book_chapter",
+              "recognized_academic_corpus"
+            ],
+            "disallowedEvidenceKinds": [
+              "ai_output",
+              "unauthored_content",
+              "unknown_blog",
+              "aggregator",
+              "untraceable_content"
+            ],
+            "variation": {
+              "regional": true,
+              "standard": true,
+              "register": true,
+              "historical": true,
+              "doNotTreatAsConflictByDefault": true
+            },
+            "approvedSourcePool": [],
+            "notes": "Distinguir norma, uso y variación regional."
+          },
+          "status": "VERIFIED",
+          "reasons": [],
+          "claimsTotal": 1,
+          "claimsVerified": 1,
+          "sourcesTotal": 1,
+          "conflictsTotal": 0,
+          "needsReview": false,
+          "coverageComplete": true,
+          "citationReady": true,
+          "evaluation": [
+            {
+              "claimId": "MLS-CLM-E554509F1D1748A197AA2F2F",
+              "verified": true,
+              "qualifyingLinks": 1,
+              "citationReady": true,
+              "citationReadyLinks": 1
+            }
+          ],
+          "snapshot": {
+            "article": {
+              "code": "MLS-V04-1159",
+              "articleGeneratedAt": "2026-09-19T08:49:22.377Z",
+              "articleHash": "1b4c36bbcda620f27d62dd11fcf840005e440c2b7c7fb89a84ce9cccd528a458",
+              "language": "frances",
+              "languageName": "Francés",
+              "title": "Elección estilística",
+              "level": "C2",
+              "part": "Dominio C1–C2 — Maîtrise C1–C2",
+              "chapter": "Sintaxis, discurso y estilo C1–C2 — Syntaxe, discours et style C1–C2"
+            },
+            "claims": [
+              {
+                "claim_id": "MLS-CLM-E554509F1D1748A197AA2F2F",
+                "code": "MLS-V04-1159",
+                "article_generated_at": "2026-09-19T08:49:22.377Z",
+                "article_hash": "1b4c36bbcda620f27d62dd11fcf840005e440c2b7c7fb89a84ce9cccd528a458",
+                "section_key": "En pocas palabras",
+                "summary": "Le registre de langue varie selon la situation de communication et le degré de formalité; les choix lexicaux et syntaxiques participent à l’adaptation du discours au contexte.",
+                "claim_type": "register_description",
+                "materiality": "substantial",
+                "status": "unverified",
+                "created_at": "2026-09-23T15:13:37.325Z",
+                "verified_at": null,
+                "verification_revision": null
+              }
+            ],
+            "links": [
+              {
+                "link_id": "MLS-LNK-07D45E3909CF25BB40E76519",
+                "claim_id": "MLS-CLM-E554509F1D1748A197AA2F2F",
+                "source_id": "MLS-SRC-4A6BB8FF82B6BC93FA5E",
+                "support_type": "supports",
+                "locator_json": "{}",
+                "notes": null,
+                "verification_method": "manual_source_match",
+                "verified_at": null,
+                "created_at": "2026-09-23T15:13:37.588Z"
+              }
+            ],
+            "conflicts": []
+          },
+          "evidenceSnapshotHash": "4af5b1bc8833e475b1e249166f522f359a83af656d1e7f4a224a436ffc00b2e3",
+          "verifiedAt": "2026-09-23T15:15:33.537Z",
+          "reviewedAt": null,
+          "verificationReviewId": "MLS-REVW-E58C989D055403FB6F5C17CD",
+          "editorialReviewId": null,
+          "state": {
+            "code": "MLS-V04-1159",
+            "article_generated_at": "2026-09-19T08:49:22.377Z",
+            "article_hash": "1b4c36bbcda620f27d62dd11fcf840005e440c2b7c7fb89a84ce9cccd528a458",
+            "evidence_version": "1.0",
+            "status": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "needs_review": 0,
+            "evidence_revision": 2,
+            "source_revision": 1,
+            "citation_style": "APA",
+            "citation_edition": 7,
+            "citation_profile": "URL-GT-2025",
+            "citation_renderer_version": "1.0",
+            "verified_at": "2026-09-23T15:15:33.537Z",
+            "reviewed_at": null,
+            "updated_at": "2026-09-23T15:15:33.537Z"
+          },
+          "review": {
+            "review_id": "MLS-REVW-E58C989D055403FB6F5C17CD",
+            "code": "MLS-V04-1159",
+            "article_generated_at": "2026-09-19T08:49:22.377Z",
+            "article_hash": "1b4c36bbcda620f27d62dd11fcf840005e440c2b7c7fb89a84ce9cccd528a458",
+            "evidence_version": "1.0",
+            "evidence_revision": 1,
+            "source_revision": 1,
+            "review_kind": "verification",
+            "evidence_snapshot_hash": "4af5b1bc8833e475b1e249166f522f359a83af656d1e7f4a224a436ffc00b2e3",
+            "status_before": "SOURCED",
+            "status_after": "VERIFIED",
+            "claims_total": 1,
+            "claims_verified": 1,
+            "sources_total": 1,
+            "conflicts_total": 0,
+            "reviewer_type": "chatgpt",
+            "reviewer": "ChatGPT R33 Evidence Farm",
+            "verification_method": "manual_source_match",
+            "citation_renderer_version": "1.0",
+            "parent_review_id": null,
+            "article_revision_id": null,
+            "notes": "R33 Evidence Farm verification against the claim-specific source mapped in the accepted proposal.",
+            "run_id": "R33-EVIDENCE-FARM-000679",
+            "created_at": "2026-09-23T15:15:33.537Z"
+          },
+          "reviewCreated": true,
+          "reused": false,
+          "telemetry": {
+            "d1": {
+              "queries": 47,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 93,
+              "d1RowsWritten": 6,
+              "observedRowsRead": 35,
+              "observedRowsWritten": 2,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:15:34.324Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T15:15:34.324Z",
+  "commandFile": "mls chat bridge/commands/r33-farm/MLS-R33-CORRECTION-REPEAT-100/R33-EVIDENCE-FARM-000679/chat-20260923-0855-s56-9f2c/verify-003.json"
+}
