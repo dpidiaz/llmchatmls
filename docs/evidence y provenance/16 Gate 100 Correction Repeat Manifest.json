@@ -1,0 +1,886 @@
+{
+  "gateId": "MLS-R33-EVIDENCE-GATE100-CORRECTION-REPEAT",
+  "repeatId": "MLS-R33-EVIDENCE-GATE100-CORRECTION-REPEAT-20260923-A",
+  "manifestVersion": "1.0",
+  "status": "prepared",
+  "system": "MLS",
+  "repository": "dpidiaz/llmchatmls",
+  "domain": "language",
+  "selectionBaseCommit": "d728802b4f0f4f2e35c1b827beb80831be3255d3",
+  "evidenceVersion": "1.0",
+  "citationStyle": "APA",
+  "citationEdition": 7,
+  "citationProfile": "URL-GT-2025",
+  "sourcePolicyVersion": "1.0",
+  "selectionMethod": {
+    "type": "deterministic_stratified_quantiles_fresh_repeat",
+    "languages": 10,
+    "entriesPerLanguage": 10,
+    "quantilesPerLanguage": 10,
+    "eligibleNumericSuffixMax": 1000,
+    "exclusions": [
+      "Pilot 20 canonical entries",
+      "Gate 100 canonical entries"
+    ],
+    "rule": "Within each language at selectionBaseCommit, list canonical JSON filenames whose numeric code suffix is <= 1000, exclude Pilot 20 and Gate 100 codes, sort by filename, and for quantile slots 1..10 select zero-based index floor((slot - 0.5) * N / 10).",
+    "historicalGate100Reconstruction": "The explicit <=1000 eligibility window reproduces the historical Gate 100 manifest selection 100/100 and is made explicit here to remove ambiguity.",
+    "manualCherryPicking": false
+  },
+  "corpusBaseline": {
+    "totalEntries": 10133,
+    "promptVersion": "32.0"
+  },
+  "sampleBaseline": {
+    "entries": 100,
+    "languages": 10,
+    "entriesPerLanguage": 10,
+    "overlapPilot20": 0,
+    "overlapGate100": 0
+  },
+  "comparisonBaseline": {
+    "gate100AverageD1RowsReadPerEntry": 1342.14,
+    "pilot20AverageD1RowsReadPerEntry": 461.6,
+    "gate100InitialTriageRowsRead": 55427,
+    "gate100ExternalDiscoveryRequired": 52,
+    "gate100RegistryFirst": 47,
+    "gate100ControlPlaneCommitsPerEntry": 0.64,
+    "gate100LogicalEvidenceBytesPerEntry": 4015.07,
+    "gate100D1RowsWrittenPerEntry": 20.99
+  },
+  "execution": {
+    "started": false,
+    "runId": null,
+    "entriesProcessed": 0,
+    "triageBatchSize": 50,
+    "workflow": "optimized_batch_triage -> registry_first -> external_discovery_only_if_needed -> proposal -> verify -> final_certification",
+    "phaseA": "read-only optimized triage benchmark before any Evidence writes",
+    "phaseAStopRule": "Do not continue to proposal/verify if triage contract changes or read amplification is not materially reduced.",
+    "metadataHydration": "at_execution"
+  },
+  "successCriteria": {
+    "quality": {
+      "completePercent": 100,
+      "falseVerified": 0
+    },
+    "scale": {
+      "averageD1RowsReadPerEntryPreferredMax": 461.6,
+      "averageD1RowsReadPerEntryMustBeMateriallyBelow": 1342.14,
+      "externalDiscoveryRequiredPercentMaxExclusive": 50,
+      "controlPlaneCommitsPerEntryMax": 0.64,
+      "logicalEvidenceBytesPerEntry": "no_material_regression",
+      "d1RowsWrittenPerEntry": "no_material_regression"
+    }
+  },
+  "safety": {
+    "previousGateDecision": "PASS QUALITY / CORRECT AND REPEAT SCALABILITY",
+    "optimizationPullRequest": 668,
+    "optimizationLiveRequired": true,
+    "gate500Authorized": false,
+    "noPerEntryCI": true,
+    "sourceCandidatesNeverAutoApproved": true,
+    "noSyntheticHumanReviewed": true,
+    "freeOnly": true
+  },
+  "entries": [
+    {
+      "order": 1,
+      "quantileSlot": 1,
+      "code": "MLS-V01-0038",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0038.json",
+      "contentBlobSha": "d776f8ede47997f184406f76aca8ddc7fbd11205"
+    },
+    {
+      "order": 2,
+      "quantileSlot": 2,
+      "code": "MLS-V01-0117",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0117.json",
+      "contentBlobSha": "e769bc2888ff74caf23c156afe538d5b88deb4a2"
+    },
+    {
+      "order": 3,
+      "quantileSlot": 3,
+      "code": "MLS-V01-0192",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0192.json",
+      "contentBlobSha": "6b5df0c4a0581a99e3025146d4f92ac517cfe24d"
+    },
+    {
+      "order": 4,
+      "quantileSlot": 4,
+      "code": "MLS-V01-0268",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0268.json",
+      "contentBlobSha": "476a308268c916268070cce39a8f6035411670a1"
+    },
+    {
+      "order": 5,
+      "quantileSlot": 5,
+      "code": "MLS-V01-0346",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0346.json",
+      "contentBlobSha": "5cfdbdd3c12f029b3b3fe60f98bfda61e23f28da"
+    },
+    {
+      "order": 6,
+      "quantileSlot": 6,
+      "code": "MLS-V01-0421",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0421.json",
+      "contentBlobSha": "a37c29cc81478545efe0d7a51bdbcfa2bda9dca7"
+    },
+    {
+      "order": 7,
+      "quantileSlot": 7,
+      "code": "MLS-V01-0499",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0499.json",
+      "contentBlobSha": "220c05b9f0b26790b8125ff75ab7cfab36835044"
+    },
+    {
+      "order": 8,
+      "quantileSlot": 8,
+      "code": "MLS-V01-0574",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0574.json",
+      "contentBlobSha": "7970e8aad3750e09971358a35628147bf920266f"
+    },
+    {
+      "order": 9,
+      "quantileSlot": 9,
+      "code": "MLS-V01-0651",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0651.json",
+      "contentBlobSha": "6eafa9ecc6c6dcffa254cb9a6028e9a9149cbf05"
+    },
+    {
+      "order": 10,
+      "quantileSlot": 10,
+      "code": "MLS-V01-0729",
+      "language": "ingles",
+      "contentPath": "content/ingles/MLS-V01-0729.json",
+      "contentBlobSha": "72ff54a9fab2924bee987ca53f973a2e7fc6d753"
+    },
+    {
+      "order": 11,
+      "quantileSlot": 1,
+      "code": "MLS-V02-0051",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0051.json",
+      "contentBlobSha": "d9ecc43a1ec2e6e18f0d86740ed2b4aa87168684"
+    },
+    {
+      "order": 12,
+      "quantileSlot": 2,
+      "code": "MLS-V02-0151",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0151.json",
+      "contentBlobSha": "ab09d39477e0b61cc037c385d2506b05654b0301"
+    },
+    {
+      "order": 13,
+      "quantileSlot": 3,
+      "code": "MLS-V02-0252",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0252.json",
+      "contentBlobSha": "abcbbd4c7e1bface2b221930f46df7d3756ba64b"
+    },
+    {
+      "order": 14,
+      "quantileSlot": 4,
+      "code": "MLS-V02-0350",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0350.json",
+      "contentBlobSha": "4d026fb4901a4d2709da4b610342b5ed48afe925"
+    },
+    {
+      "order": 15,
+      "quantileSlot": 5,
+      "code": "MLS-V02-0450",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0450.json",
+      "contentBlobSha": "4fe5456500d7f26823fb8278a98487525c42f38e"
+    },
+    {
+      "order": 16,
+      "quantileSlot": 6,
+      "code": "MLS-V02-0551",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0551.json",
+      "contentBlobSha": "998f050ffa52583a4414aefcf80e4a5d2d47de71"
+    },
+    {
+      "order": 17,
+      "quantileSlot": 7,
+      "code": "MLS-V02-0651",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0651.json",
+      "contentBlobSha": "d8016f59eaccbb900ef12a8201f33ec8951d79fe"
+    },
+    {
+      "order": 18,
+      "quantileSlot": 8,
+      "code": "MLS-V02-0751",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0751.json",
+      "contentBlobSha": "46efb8957012a41ae444545571eb85c1ccf7b8a1"
+    },
+    {
+      "order": 19,
+      "quantileSlot": 9,
+      "code": "MLS-V02-0849",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0849.json",
+      "contentBlobSha": "ad6b6cad9d24f722da3094d4d6440cee5fb900b4"
+    },
+    {
+      "order": 20,
+      "quantileSlot": 10,
+      "code": "MLS-V02-0949",
+      "language": "portugues",
+      "contentPath": "content/portugues/MLS-V02-0949.json",
+      "contentBlobSha": "362784273399a1973466533bb9f238d70d4f9b7a"
+    },
+    {
+      "order": 21,
+      "quantileSlot": 1,
+      "code": "MLS-V03-0040",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0040.json",
+      "contentBlobSha": "5202cf0fdf083d1e409bcc4bd2a79108f4e97412"
+    },
+    {
+      "order": 22,
+      "quantileSlot": 2,
+      "code": "MLS-V03-0121",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0121.json",
+      "contentBlobSha": "87615060a938a2892b830f919751f3de75c0e9e8"
+    },
+    {
+      "order": 23,
+      "quantileSlot": 3,
+      "code": "MLS-V03-0203",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0203.json",
+      "contentBlobSha": "5ac18522cd7f82793e9f66e12065043c9713296b"
+    },
+    {
+      "order": 24,
+      "quantileSlot": 4,
+      "code": "MLS-V03-0285",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0285.json",
+      "contentBlobSha": "20cb0d60c19a46236bb4af6dcc24f27e686de7a9"
+    },
+    {
+      "order": 25,
+      "quantileSlot": 5,
+      "code": "MLS-V03-0366",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0366.json",
+      "contentBlobSha": "daf4e4a0b4490105f362b777222b180b3e0e1aa9"
+    },
+    {
+      "order": 26,
+      "quantileSlot": 6,
+      "code": "MLS-V03-0445",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0445.json",
+      "contentBlobSha": "34777ab8a47aece2e6645feae2dcc257bf3343d0"
+    },
+    {
+      "order": 27,
+      "quantileSlot": 7,
+      "code": "MLS-V03-0526",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0526.json",
+      "contentBlobSha": "625222c65b43a853bb100826472b7c9060f1e3c2"
+    },
+    {
+      "order": 28,
+      "quantileSlot": 8,
+      "code": "MLS-V03-0607",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0607.json",
+      "contentBlobSha": "7a345891abc74468fea83cccbfd96d39b117b701"
+    },
+    {
+      "order": 29,
+      "quantileSlot": 9,
+      "code": "MLS-V03-0690",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0690.json",
+      "contentBlobSha": "7efce9c6acc6bd75ef7a590cc902735e10932702"
+    },
+    {
+      "order": 30,
+      "quantileSlot": 10,
+      "code": "MLS-V03-0771",
+      "language": "italiano",
+      "contentPath": "content/italiano/MLS-V03-0771.json",
+      "contentBlobSha": "d5f1e94ef334eab2c30a1e914d3e79382525e93b"
+    },
+    {
+      "order": 31,
+      "quantileSlot": 1,
+      "code": "MLS-V04-0051",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0051.json",
+      "contentBlobSha": "f4f4d22a41bee3a930b9cd086eabf9475e7b2200"
+    },
+    {
+      "order": 32,
+      "quantileSlot": 2,
+      "code": "MLS-V04-0151",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0151.json",
+      "contentBlobSha": "ce87e867eecb2894a90e028669a04b9d17ffd568"
+    },
+    {
+      "order": 33,
+      "quantileSlot": 3,
+      "code": "MLS-V04-0252",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0252.json",
+      "contentBlobSha": "41a2468bc1b0a8831590c0c34c4a6f1adb21edd0"
+    },
+    {
+      "order": 34,
+      "quantileSlot": 4,
+      "code": "MLS-V04-0350",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0350.json",
+      "contentBlobSha": "3a87b28fee150cb2d40289070da5972818c2cb19"
+    },
+    {
+      "order": 35,
+      "quantileSlot": 5,
+      "code": "MLS-V04-0450",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0450.json",
+      "contentBlobSha": "fca6bab73ffea7ab6a5ce57593e045c3071b31f6"
+    },
+    {
+      "order": 36,
+      "quantileSlot": 6,
+      "code": "MLS-V04-0551",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0551.json",
+      "contentBlobSha": "a981d449e1c1eb52f4368d8998a07d57612e61e2"
+    },
+    {
+      "order": 37,
+      "quantileSlot": 7,
+      "code": "MLS-V04-0651",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0651.json",
+      "contentBlobSha": "c70f1263fdd058490dc81317a842087aac2c0512"
+    },
+    {
+      "order": 38,
+      "quantileSlot": 8,
+      "code": "MLS-V04-0751",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0751.json",
+      "contentBlobSha": "2c0d7d452d30b3a72fe665d3629a2ea7be22f108"
+    },
+    {
+      "order": 39,
+      "quantileSlot": 9,
+      "code": "MLS-V04-0849",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0849.json",
+      "contentBlobSha": "0e56054b99dfc4de0b81b49296a0a56b45b9f557"
+    },
+    {
+      "order": 40,
+      "quantileSlot": 10,
+      "code": "MLS-V04-0950",
+      "language": "frances",
+      "contentPath": "content/frances/MLS-V04-0950.json",
+      "contentBlobSha": "99df97145b0d5f53c33dd352cad17cc6bb5d8709"
+    },
+    {
+      "order": 41,
+      "quantileSlot": 1,
+      "code": "MLS-V05-0051",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0051.json",
+      "contentBlobSha": "9fee80842da9b2417610766b3f4aa761071d6ec4"
+    },
+    {
+      "order": 42,
+      "quantileSlot": 2,
+      "code": "MLS-V05-0151",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0151.json",
+      "contentBlobSha": "036d16c9310d7ed7ed5046e1874d2942e7b684ea"
+    },
+    {
+      "order": 43,
+      "quantileSlot": 3,
+      "code": "MLS-V05-0252",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0252.json",
+      "contentBlobSha": "3e2db18e99ad4076df4d14d6df877a03e912a164"
+    },
+    {
+      "order": 44,
+      "quantileSlot": 4,
+      "code": "MLS-V05-0350",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0350.json",
+      "contentBlobSha": "b51627b0764147f9f83332168d067f8d099ddbce"
+    },
+    {
+      "order": 45,
+      "quantileSlot": 5,
+      "code": "MLS-V05-0450",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0450.json",
+      "contentBlobSha": "e56842451f3ceb49762aafa9976a82e36da7090e"
+    },
+    {
+      "order": 46,
+      "quantileSlot": 6,
+      "code": "MLS-V05-0551",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0551.json",
+      "contentBlobSha": "52b7b774ce6714611bd4193ed4493706d5e25d65"
+    },
+    {
+      "order": 47,
+      "quantileSlot": 7,
+      "code": "MLS-V05-0651",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0651.json",
+      "contentBlobSha": "e69484f0c3b30f1e90bc8e43a1ea1f70304f7049"
+    },
+    {
+      "order": 48,
+      "quantileSlot": 8,
+      "code": "MLS-V05-0751",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0751.json",
+      "contentBlobSha": "5ed1e6fe3f0027fbcd71b6e60ef3ffb557696cfb"
+    },
+    {
+      "order": 49,
+      "quantileSlot": 9,
+      "code": "MLS-V05-0849",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0849.json",
+      "contentBlobSha": "9ff3409a0ee8d4c6df9778797e22aa37d756dcb1"
+    },
+    {
+      "order": 50,
+      "quantileSlot": 10,
+      "code": "MLS-V05-0950",
+      "language": "aleman",
+      "contentPath": "content/aleman/MLS-V05-0950.json",
+      "contentBlobSha": "45ca7a34609588a4d30b194715f3ec0c5f353a38"
+    },
+    {
+      "order": 51,
+      "quantileSlot": 1,
+      "code": "MLS-V06-0052",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0052.json",
+      "contentBlobSha": "00c4e8e37fa1be36e30974c36f895d5b5887f3a4"
+    },
+    {
+      "order": 52,
+      "quantileSlot": 2,
+      "code": "MLS-V06-0152",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0152.json",
+      "contentBlobSha": "7752ea635870419d5d6adfec5fa3d75a7838ce1d"
+    },
+    {
+      "order": 53,
+      "quantileSlot": 3,
+      "code": "MLS-V06-0252",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0252.json",
+      "contentBlobSha": "664d270e38fa7944e29cbfc6ca84b0a68b38029c"
+    },
+    {
+      "order": 54,
+      "quantileSlot": 4,
+      "code": "MLS-V06-0350",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0350.json",
+      "contentBlobSha": "dfa550e444fd5bb53cf89f9637edd0b20f414e44"
+    },
+    {
+      "order": 55,
+      "quantileSlot": 5,
+      "code": "MLS-V06-0450",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0450.json",
+      "contentBlobSha": "7da0336b6b616f6d106b74fcf129d47f861cf2f7"
+    },
+    {
+      "order": 56,
+      "quantileSlot": 6,
+      "code": "MLS-V06-0551",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0551.json",
+      "contentBlobSha": "81c1ad88d2e18c67635e81587ad99dd8e4db19bc"
+    },
+    {
+      "order": 57,
+      "quantileSlot": 7,
+      "code": "MLS-V06-0651",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0651.json",
+      "contentBlobSha": "7bbad76bdc58bb3e488a2b488d94ddaa45b295cd"
+    },
+    {
+      "order": 58,
+      "quantileSlot": 8,
+      "code": "MLS-V06-0751",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0751.json",
+      "contentBlobSha": "0fa14bc1e30d2194ca71329e4d3413579a314435"
+    },
+    {
+      "order": 59,
+      "quantileSlot": 9,
+      "code": "MLS-V06-0850",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0850.json",
+      "contentBlobSha": "746aed9f14c030760e3f2a887ae1a671f59b6db0"
+    },
+    {
+      "order": 60,
+      "quantileSlot": 10,
+      "code": "MLS-V06-0950",
+      "language": "japones",
+      "contentPath": "content/japones/MLS-V06-0950.json",
+      "contentBlobSha": "1052eec1b47ae7d6c7388910e16613c4dd3874bc"
+    },
+    {
+      "order": 61,
+      "quantileSlot": 1,
+      "code": "MLS-V07-0051",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0051.json",
+      "contentBlobSha": "7e685960b2635aadf1d97f838a53026a9d056e76"
+    },
+    {
+      "order": 62,
+      "quantileSlot": 2,
+      "code": "MLS-V07-0151",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0151.json",
+      "contentBlobSha": "2d9bf4ebea580ea7c9a9881f9ef64b6d62da536b"
+    },
+    {
+      "order": 63,
+      "quantileSlot": 3,
+      "code": "MLS-V07-0252",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0252.json",
+      "contentBlobSha": "0bf205e39f0da4d0d691af19f18308053d6489a8"
+    },
+    {
+      "order": 64,
+      "quantileSlot": 4,
+      "code": "MLS-V07-0350",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0350.json",
+      "contentBlobSha": "fba535acbc081ea9649d36d1ad7572929626a76f"
+    },
+    {
+      "order": 65,
+      "quantileSlot": 5,
+      "code": "MLS-V07-0450",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0450.json",
+      "contentBlobSha": "1cae867df4bb7f35ab4eddee66a2027f5e495914"
+    },
+    {
+      "order": 66,
+      "quantileSlot": 6,
+      "code": "MLS-V07-0551",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0551.json",
+      "contentBlobSha": "53994f3102e288744340746173d397be4de5f08d"
+    },
+    {
+      "order": 67,
+      "quantileSlot": 7,
+      "code": "MLS-V07-0651",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0651.json",
+      "contentBlobSha": "cbf1cc8146974662e53af1db0822cfe24f4b2ab9"
+    },
+    {
+      "order": 68,
+      "quantileSlot": 8,
+      "code": "MLS-V07-0751",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0751.json",
+      "contentBlobSha": "4b004f750d79a330194db1e035660f01e68e9a48"
+    },
+    {
+      "order": 69,
+      "quantileSlot": 9,
+      "code": "MLS-V07-0850",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0850.json",
+      "contentBlobSha": "dd9900849e9190deb1348d07db8d35eb03bc43e6"
+    },
+    {
+      "order": 70,
+      "quantileSlot": 10,
+      "code": "MLS-V07-0950",
+      "language": "chino-taiwan",
+      "contentPath": "content/chino-taiwan/MLS-V07-0950.json",
+      "contentBlobSha": "009215974c69de2387018950eb05d75b3131b087"
+    },
+    {
+      "order": 71,
+      "quantileSlot": 1,
+      "code": "MLS-V08-0052",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0052.json",
+      "contentBlobSha": "e411651e447f699093fea152275d6cfc01dab6ff"
+    },
+    {
+      "order": 72,
+      "quantileSlot": 2,
+      "code": "MLS-V08-0152",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0152.json",
+      "contentBlobSha": "39f9ab90dfab6028a06dee68ecac02fe48770606"
+    },
+    {
+      "order": 73,
+      "quantileSlot": 3,
+      "code": "MLS-V08-0252",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0252.json",
+      "contentBlobSha": "f9ad8dddd953ea64f50f6d8de86b6352115a77fe"
+    },
+    {
+      "order": 74,
+      "quantileSlot": 4,
+      "code": "MLS-V08-0350",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0350.json",
+      "contentBlobSha": "f8f8f157bbe2225318424313c18de74f5f21b221"
+    },
+    {
+      "order": 75,
+      "quantileSlot": 5,
+      "code": "MLS-V08-0450",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0450.json",
+      "contentBlobSha": "05ce8128f5cfbef5064ce7bc9f082ef1836a7cd7"
+    },
+    {
+      "order": 76,
+      "quantileSlot": 6,
+      "code": "MLS-V08-0551",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0551.json",
+      "contentBlobSha": "6bcbde7645354863723c7e615314d42b9e445c9f"
+    },
+    {
+      "order": 77,
+      "quantileSlot": 7,
+      "code": "MLS-V08-0651",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0651.json",
+      "contentBlobSha": "be968fdfaf37009d7927ecbef28c4c5b0e230b91"
+    },
+    {
+      "order": 78,
+      "quantileSlot": 8,
+      "code": "MLS-V08-0751",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0751.json",
+      "contentBlobSha": "5564b4939d68f105c8d983f44802a0ec10021dcc"
+    },
+    {
+      "order": 79,
+      "quantileSlot": 9,
+      "code": "MLS-V08-0849",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0849.json",
+      "contentBlobSha": "d38ac2de8357cb21bbdb4786ceea431d6d59b306"
+    },
+    {
+      "order": 80,
+      "quantileSlot": 10,
+      "code": "MLS-V08-0950",
+      "language": "coreano",
+      "contentPath": "content/coreano/MLS-V08-0950.json",
+      "contentBlobSha": "8957bcc40f23f940978b51b32d154d143d5650f7"
+    },
+    {
+      "order": 81,
+      "quantileSlot": 1,
+      "code": "MLS-V09-0051",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0051.json",
+      "contentBlobSha": "ad935051cafc997caf2cdeeac3cf3c156a85aefa"
+    },
+    {
+      "order": 82,
+      "quantileSlot": 2,
+      "code": "MLS-V09-0151",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0151.json",
+      "contentBlobSha": "7493f85a7f811358f7b70985a0273fddb0f2abad"
+    },
+    {
+      "order": 83,
+      "quantileSlot": 3,
+      "code": "MLS-V09-0252",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0252.json",
+      "contentBlobSha": "f9826dc047116f0f9bba6fc6a41c8b2b2c80ed8a"
+    },
+    {
+      "order": 84,
+      "quantileSlot": 4,
+      "code": "MLS-V09-0350",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0350.json",
+      "contentBlobSha": "06e51c4d8f113c6edc73a88329f38ce494abd3d6"
+    },
+    {
+      "order": 85,
+      "quantileSlot": 5,
+      "code": "MLS-V09-0450",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0450.json",
+      "contentBlobSha": "9d49687b40271f8b4ad776d0982ee9c2814af901"
+    },
+    {
+      "order": 86,
+      "quantileSlot": 6,
+      "code": "MLS-V09-0551",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0551.json",
+      "contentBlobSha": "c2123f73965749044531818b2ac36b7200ea5376"
+    },
+    {
+      "order": 87,
+      "quantileSlot": 7,
+      "code": "MLS-V09-0651",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0651.json",
+      "contentBlobSha": "750edc62e12c2d4ae5b33000f72b76f95c26470a"
+    },
+    {
+      "order": 88,
+      "quantileSlot": 8,
+      "code": "MLS-V09-0751",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0751.json",
+      "contentBlobSha": "44f71c44be753150643c4ec33aa465edf3cf8b9b"
+    },
+    {
+      "order": 89,
+      "quantileSlot": 9,
+      "code": "MLS-V09-0850",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0850.json",
+      "contentBlobSha": "d6bade5389ede4664bc091bf63a43ffa4c2a8793"
+    },
+    {
+      "order": 90,
+      "quantileSlot": 10,
+      "code": "MLS-V09-0950",
+      "language": "ruso",
+      "contentPath": "content/ruso/MLS-V09-0950.json",
+      "contentBlobSha": "54836240a3aa925c087eaee4751f605c04f3dc75"
+    },
+    {
+      "order": 91,
+      "quantileSlot": 1,
+      "code": "MLS-V10-0047",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0047.json",
+      "contentBlobSha": "3ab6feba941aca8c558a011873c5721ac573f681"
+    },
+    {
+      "order": 92,
+      "quantileSlot": 2,
+      "code": "MLS-V10-0141",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0141.json",
+      "contentBlobSha": "672b91e1fc8b8c63b8b17c1e05b1f122c5286daa"
+    },
+    {
+      "order": 93,
+      "quantileSlot": 3,
+      "code": "MLS-V10-0234",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0234.json",
+      "contentBlobSha": "57585b264d7dbb18b56851b1e1605635a0e4a0bb"
+    },
+    {
+      "order": 94,
+      "quantileSlot": 4,
+      "code": "MLS-V10-0328",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0328.json",
+      "contentBlobSha": "f93ae74ff5aae11049934d2957030a1aeccf3679"
+    },
+    {
+      "order": 95,
+      "quantileSlot": 5,
+      "code": "MLS-V10-0421",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0421.json",
+      "contentBlobSha": "5d0d83cd2312d5b02c98f01cd246d4706300a0e0"
+    },
+    {
+      "order": 96,
+      "quantileSlot": 6,
+      "code": "MLS-V10-0512",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0512.json",
+      "contentBlobSha": "579467aa11313c9b1cea3f51db111ff2f45427fd"
+    },
+    {
+      "order": 97,
+      "quantileSlot": 7,
+      "code": "MLS-V10-0605",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0605.json",
+      "contentBlobSha": "8d5ec022a2beac9193dd745997a92531df1dd573"
+    },
+    {
+      "order": 98,
+      "quantileSlot": 8,
+      "code": "MLS-V10-0698",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0698.json",
+      "contentBlobSha": "52560d965b3b5e222b2f3e1f547d81734183d777"
+    },
+    {
+      "order": 99,
+      "quantileSlot": 9,
+      "code": "MLS-V10-0792",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0792.json",
+      "contentBlobSha": "b07ac56fd9c02ac154c002219f91e125053752d7"
+    },
+    {
+      "order": 100,
+      "quantileSlot": 10,
+      "code": "MLS-V10-0885",
+      "language": "espanol-guatemala",
+      "contentPath": "content/espanol-guatemala/MLS-V10-0885.json",
+      "contentBlobSha": "a0e24e6ff445649e0e2fd9d139e95b4f1706b844"
+    }
+  ]
+}

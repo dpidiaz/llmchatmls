@@ -92,3 +92,6 @@ Antes de implementar cualquier cambio R33:
 5. actualizar el Roadmap al cerrar el checkpoint.
 
 La documentación no autoriza por sí sola un despliegue remoto ni una migración masiva.
+
+- `15 Gate 100 Correction Repeat Plan.md` — plan de corrección de escalabilidad posterior a Gate 100.
+- `16 Gate 100 Correction Repeat Manifest.json` — muestra fresca determinista de 100 entradas para el repeat.
