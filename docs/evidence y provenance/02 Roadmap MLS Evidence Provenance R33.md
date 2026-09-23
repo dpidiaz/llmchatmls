@@ -4,7 +4,7 @@ Estado del documento: VIVO
 Repositorio: `dpidiaz/llmchatmls`  
 Base funcional: MLS R32  
 Programa: Evidence & Provenance R33  
-Última actualización: 2026-09-21  
+Última actualización: 2026-09-23  
 Responsable operativo: implementación chat native sobre el repositorio real
 
 ---
@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 3 — EVALUACIÓN / COMPLETE — GO**
+**Estado actual: FASE 4 — GATE 100 / COMPLETE — CORRECT AND REPEAT**
 
 Progreso global inicial:
 
@@ -47,8 +47,8 @@ Progreso global inicial:
 | Fase 1 Foundation | COMPLETE | Foundation R33 certificada |
 | Fase 2 Piloto 20 | COMPLETE — PASS WITH FINDINGS | 20/20 procesadas; Fase 3 obligatoria |
 | Fase 3 Evaluación | COMPLETE — GO | E1–E5 cerrados; E3 REVIEWED humano live |
-| Fase 4 Gate 100 | READY — RUNTIME SCALE PREP NOT LIVE | Requiere runtime #146 disponible antes de ejecutar triage/reuse live |
-| Fase 5 Gate 500 | NOT STARTED | 500 estables |
+| Fase 4 Gate 100 | COMPLETE — CORRECT AND REPEAT | 100/100 VERIFIED; corregir N+1 de triage D1 antes de Gate 500 |
+| Fase 5 Gate 500 | BLOCKED | Requiere repeat dirigido de Gate 100 tras R33-G100-C1 |
 | Fase 6 Gate 1000 | NOT STARTED | 1000 estables |
 | Fase 7 Escalamiento corpus | NOT STARTED | Viabilidad demostrada |
 | Source first para nuevas entradas | DEFERRED | Después de R33 estable |
@@ -535,11 +535,15 @@ Solo después del repeat se vuelve a emitir una decisión:
 
 # 10. FASE 4 — GATE 100
 
-**Estado: READY — SCALE RUNTIME DEPLOY PENDING**
+**Estado: COMPLETE — CORRECT AND REPEAT**
 
-Precondición: Fase 3 = GO. Cumplida. Antes de ejecutar Gate 100, el runtime que contiene #146 debe estar disponible en producción.
+Precondición: Fase 3 = GO. Cumplida. Runtime de escalabilidad disponible y Gate 100 ejecutado.
 
-Objetivo: verificar estabilidad operacional y reuse del Source Registry.
+Resultado: 100/100 VERIFIED; certificación final 100 complete, 0 excepciones, 0 needs_evidence. Closeout: `14 Gate 100 Closeout.md`.
+
+Decisión: `CORRECT AND REPEAT` antes de Gate 500. El storage lógico y los writes D1 bajaron frente al Pilot 20, pero los reads totales aumentaron por un N+1 en `batchTriage`/`reusableSourceCandidates`. Corrección R33-G100-C1: cachear/prefetchear el pool base de Sources una vez por idioma por batch y repetir triage con medición exacta.
+
+Objetivo original: verificar estabilidad operacional y reuse del Source Registry.
 
 Manifest preparado: `13 Gate 100 Manifest.json` — 100 entradas exactas, 10 por idioma, selección determinista por cuantiles y exclusión del Pilot 20.
 
@@ -561,9 +565,9 @@ Añadir especial atención a:
 
 # 11. FASE 5 — GATE 500
 
-**Estado: NOT STARTED**
+**Estado: BLOCKED**
 
-Precondición: 100 estable.
+Precondición: Gate 100 estable y repeat dirigido de R33-G100-C1 en PASS.
 
 Objetivo: validar comportamiento a escala intermedia.
 
