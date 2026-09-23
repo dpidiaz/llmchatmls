@@ -31,11 +31,9 @@ function topicMatches(source,topics){
 }
 function tierWeight(tier){return ({A:4,B:3,C:2,D:1})[String(tier||'').toUpperCase()]||0;}
 
-async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={}){
+async function reusableSourceRows(env,{language=''}={}){
   await registry.ensureEvidenceDb(env);
   const lang=clean(language).toLowerCase();
-  const wanted=normalizeTopics(topics);
-  const max=Math.max(1,Math.min(50,Number(limit)||12));
   const rows=await env.WIKI_DB.prepare(`
     SELECT s.*, COUNT(DISTINCT c.code) AS entry_usage, COUNT(DISTINCT l.link_id) AS link_usage
     FROM wiki_sources s
@@ -47,7 +45,13 @@ async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={})
     ORDER BY entry_usage DESC, link_usage DESC, s.updated_at DESC
     LIMIT 200
   `).bind(lang,lang).all();
-  const candidates=(rows.results||[]).map(row=>{
+  return {language:lang,rows:rows.results||[]};
+}
+function candidatePoolFromRows(rows,{language='',topics=[],limit=12}={}){
+  const lang=clean(language).toLowerCase();
+  const wanted=normalizeTopics(topics);
+  const max=Math.max(1,Math.min(50,Number(limit)||12));
+  const candidates=(Array.isArray(rows)?rows:[]).map(row=>{
     const source=registry.rowToSource(row);
     const matchedTopics=topicMatches(source,wanted);
     const entryUsage=Number(row.entry_usage||0),linkUsage=Number(row.link_usage||0);
@@ -77,8 +81,12 @@ async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={})
     }
   };
 }
+async function reusableSourceCandidates(env,{language='',topics=[],limit=12}={}){
+  const loaded=await reusableSourceRows(env,{language});
+  return candidatePoolFromRows(loaded.rows,{language:loaded.language,topics,limit});
+}
 
-async function triageEntry(env,{code,topics=[],candidateLimit=8}={}){
+async function triageEntry(env,{code,topics=[],candidateLimit=8,candidateRowsByLanguage=null}={}){
   const version=await claims.currentArticleVersion(env,code);
   const context=await consumer.contextForEntry(env,version.code);
   let lane='needs_evidence';
@@ -90,7 +98,16 @@ async function triageEntry(env,{code,topics=[],candidateLimit=8}={}){
   const queryTopics=effectiveTopics.length?effectiveTopics:inferredTopics(version);
   let pool={candidates:[],candidateCount:0,requestedTopics:queryTopics,contract:{approved:false}};
   if(lane==='needs_evidence'||lane==='resume_existing'){
-    pool=await reusableSourceCandidates(env,{language:version.language||'',topics:queryTopics,limit:candidateLimit});
+    const lang=clean(version.language).toLowerCase();
+    if(candidateRowsByLanguage instanceof Map){
+      if(!candidateRowsByLanguage.has(lang)){
+        const loaded=await reusableSourceRows(env,{language:lang});
+        candidateRowsByLanguage.set(lang,loaded.rows);
+      }
+      pool=candidatePoolFromRows(candidateRowsByLanguage.get(lang),{language:lang,topics:queryTopics,limit:candidateLimit});
+    } else {
+      pool=await reusableSourceCandidates(env,{language:lang,topics:queryTopics,limit:candidateLimit});
+    }
   }
   let discoveryMode='external_discovery';
   if(lane==='complete')discoveryMode='none';
@@ -116,13 +133,13 @@ async function triageEntry(env,{code,topics=[],candidateLimit=8}={}){
 
 async function batchTriage(env,{entries=[],candidateLimit=8}={}){
   if(!Array.isArray(entries)||entries.length<1||entries.length>50)scaleError('INVALID_TRIAGE_BATCH',422,'entries debe contener entre 1 y 50 elementos.');
-  const seen=new Set(),items=[];
+  const seen=new Set(),items=[],candidateRowsByLanguage=new Map();
   for(const raw of entries){
     const code=clean(raw?.code).toUpperCase();
     if(!/^MLS-V\d{2}-\d{4}$/.test(code))scaleError('INVALID_ENTRY_CODE',422,'Código MLS inválido en batch triage.');
     if(seen.has(code))scaleError('DUPLICATE_ENTRY_CODE',422,'Código duplicado en batch triage.');
     seen.add(code);
-    items.push(await triageEntry(env,{code,topics:raw?.topics,candidateLimit}));
+    items.push(await triageEntry(env,{code,topics:raw?.topics,candidateLimit,candidateRowsByLanguage}));
   }
   const byLane=Object.fromEntries(TRIAGE_LANES.map(x=>[x,items.filter(i=>i.lane===x).length]));
   const byDiscovery=Object.fromEntries(DISCOVERY_MODES.map(x=>[x,items.filter(i=>i.discoveryMode===x).length]));
@@ -146,6 +163,8 @@ module.exports={
   DISCOVERY_MODES,
   normalizeTopics,
   inferredTopics,
+  reusableSourceRows,
+  candidatePoolFromRows,
   reusableSourceCandidates,
   triageEntry,
   batchTriage
