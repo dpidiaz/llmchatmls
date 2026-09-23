@@ -1,6 +1,6 @@
 # MLS R33 — Arquitectura editorial GitHub-native
 
-**Estado:** IMPLEMENTADA EN MIGRACIÓN  
+**Estado:** IMPLEMENTADA  
 **Fecha:** 2026-09-23 UTC
 
 ## Regla canónica
@@ -52,3 +52,11 @@ Sigue bloqueado. La siguiente certificación debe medir el pipeline GitHub-nativ
 - checkpoints respaldados por artefacto Git + commit SHA;
 - ausencia de lost updates en coordinación;
 - auditoría Source ↔ Claim satisfactoria.
+
+## Capa de despliegue derivada
+
+El deploy genera `public/data/evidence/` exclusivamente desde `MLS R32 EDITORIAL/evidence git/` mediante `scripts/generar evidence runtime github.js`.
+
+El lector canónico carga artículos desde `/data/canonical/` y Evidence desde `/data/evidence/by-code/`. La ruta de compatibilidad `/api/wiki/evidence-public/<code>` sirve el mismo artefacto estático mediante el binding de Assets y no consulta D1.
+
+Los snapshots editoriales Cloudflare posteriores al deploy quedaron retirados del workflow de producción. Cloudflare recibe y sirve artefactos derivados; no crea ni decide estado editorial.

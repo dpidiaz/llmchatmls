@@ -105,5 +105,4 @@ test('workflow sincroniza credenciales Analytics dedicadas sin convertir el toke
   assert.match(workflow,/wrangler secret put D1_ANALYTICS_ACCOUNT_ID/);
   assert.match(workflow,/secrets\.CLOUDFLARE_API_TOKEN/);
   assert.doesNotMatch(workflow,/D1_ANALYTICS_TOKEN:\s*\$\{\{\s*secrets\.CLOUDFLARE_API_TOKEN\s*\}\}/);
-  assert.match(workflow,/daily row \(read\|write\) limit/);
 });

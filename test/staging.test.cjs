@@ -408,11 +408,11 @@ test('D1 QUOTA — deployment verifier accepts only explicit D1 quota degradatio
   assert.match(verify,/must return 200 unless D1 quota is explicitly exhausted/);
 });
 
-test('D1 QUOTA — deploy snapshot treats exhausted read or write quota as deferred warning', () => {
+test('production deploy no longer creates a Cloudflare editorial staging snapshot', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
-  assert.match(workflow,/daily row \(read\|write\) limit/);
-  assert.match(workflow,/Snapshot MLS Staging diferido/);
-  assert.match(workflow,/deploy de producción sí quedó activo/);
+  assert.doesNotMatch(workflow,/Crear snapshot MLS Staging del deploy/);
+  assert.doesNotMatch(workflow,/\/api\/wiki\/editorial\/staging\/snapshot/);
+  assert.doesNotMatch(workflow,/Snapshot MLS Staging diferido/);
 });
 
 test('PROVENANCE — schema bootstrap is isolated from core ensureWikiDb and snapshot', () => {
@@ -587,12 +587,14 @@ test('selection never silently reuses unresolved or preserved staging states', (
   assert.doesNotMatch(select,/\['reserved','drafting','validated','staged','integrated','deployed'\]/);
 });
 
-test('workflow YAML has one production, snapshot and verification step only', () => {
+test('workflow YAML has one deploy and one GitHub-native Evidence verification step', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
   assert.equal((workflow.match(/name: Desplegar en produccion/g)||[]).length,1);
-  assert.equal((workflow.match(/name: Crear snapshot MLS Staging del deploy/g)||[]).length,1);
-  assert.equal((workflow.match(/name: Verificar Action editorial sin crear lotes/g)||[]).length,1);
-  assert.doesNotMatch(workflow,/response%|\\\\n%\{http_code\}/);
+  assert.equal((workflow.match(/name: Verificar Evidence visible en produccion/g)||[]).length,1);
+  assert.equal((workflow.match(/name: Crear snapshot MLS Staging del deploy/g)||[]).length,0);
+  assert.equal((workflow.match(/name: Verificar Action editorial sin crear lotes/g)||[]).length,0);
+  assert.match(workflow,/\/data\/evidence\/by-code\/MLS-V10-0093\.json/);
+  assert.match(workflow,/sourceOfTruth/);
 });
 
 test('Status reports exact codes and range formatting preserves gaps', () => {
@@ -1021,12 +1023,12 @@ test('production workflow deploy steps are restricted to certified main pushes o
   assert.match(workflow,/push:\s*\n\s*branches:\s*\n\s*- main/);
 });
 
-test('production workflow captures a versioned snapshot after deploy', () => {
+test('production workflow verifies deployed Evidence derived from GitHub and never snapshots editorial state to Cloudflare', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
-  assert.match(workflow,/Crear snapshot MLS Staging del deploy/);
-  assert.match(workflow,/\/api\/wiki\/editorial\/staging\/snapshot/);
-  assert.match(workflow,/sourceCommit/);
-  assert.match(workflow,/GITHUB_SHA/);
+  assert.match(workflow,/\/data\/evidence\/by-code\/MLS-V10-0093\.json/);
+  assert.match(workflow,/"sourceOfTruth":"github"/);
+  assert.doesNotMatch(workflow,/\/api\/wiki\/editorial\/staging\/snapshot/);
+  assert.doesNotMatch(workflow,/MLS_EDITORIAL_CHAT_KEY/);
 });
 
 test('staging.js parses as standalone JavaScript', () => {

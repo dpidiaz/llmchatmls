@@ -2,44 +2,32 @@
 const fs=require('node:fs');
 
 const TARGET='src/index.js';
-const MARKER='// MLS R33 EVIDENCE READER VISIBILITY 1.0';
+const MARKER='// MLS R33 EVIDENCE READER VISIBILITY 2.0';
 
 const SERVER_HELPER=`
-async function mlsPublicEvidenceForCode(env, code) {
-  if (typeof MLS_EVIDENCE_CONSUMER === "undefined") return null;
+async function mlsPublicEvidenceForCode(request, env, code) {
   try {
     const normalized = String(code || "").toUpperCase();
-    if (!normalized) return null;
-    const exists = await env.WIKI_DB.prepare("SELECT 1 AS ok FROM wiki_evidence_entry_state WHERE code=? LIMIT 1").bind(normalized).first();
-    if (!exists) return null;
-    const context = await MLS_EVIDENCE_CONSUMER.contextForEntry(env, normalized);
-    const summary = MLS_EVIDENCE_CONSUMER.publicSummary(context);
-    let references = [];
-    if (typeof MLS_EVIDENCE_API !== "undefined" && typeof MLS_EVIDENCE_API.entrySources === "function") {
-      const rows = await MLS_EVIDENCE_API.entrySources(env, normalized);
-      references = (rows || [])
-        .filter(item => item?.citation?.citationReady)
-        .map(item => ({
-          sourceId: item.source?.sourceId || null,
-          authorityTier: item.source?.authorityTier || null,
-          text: item.citation?.text || "",
-          markdown: item.citation?.markdown || "",
-          url: item.citation?.url || null
-        }))
-        .filter(item => item.text)
-        .sort((a, b) => a.text.localeCompare(b.text, "es"));
-    }
-    return { ...summary, references };
+    if (!/^MLS-V\\d{2}-\\d{4}$/.test(normalized)) return null;
+    if (!env.ASSETS || typeof env.ASSETS.fetch !== "function") return null;
+    const assetUrl = new URL("/data/evidence/by-code/" + encodeURIComponent(normalized) + ".json", request.url);
+    const response = await env.ASSETS.fetch(new Request(assetUrl.toString(), {
+      method: "GET",
+      headers: { accept: "application/json" }
+    }));
+    if (!response.ok) return null;
+    const evidence = await response.json();
+    return evidence?.sourceOfTruth === "github" ? evidence : null;
   } catch (error) {
-    console.warn("MLS Evidence public summary unavailable:", code, error);
+    console.warn("MLS GitHub Evidence public summary unavailable:", code, error);
     return null;
   }
 }
 __name(mlsPublicEvidenceForCode, "mlsPublicEvidenceForCode");
 
-async function mlsAttachPublicEvidence(env, article) {
+async function mlsAttachPublicEvidence(request, env, article) {
   if (!article) return article;
-  const evidence = await mlsPublicEvidenceForCode(env, article.code);
+  const evidence = await mlsPublicEvidenceForCode(request, env, article.code);
   return { ...article, evidence };
 }
 __name(mlsAttachPublicEvidence, "mlsAttachPublicEvidence");
@@ -179,25 +167,25 @@ function patchEvidenceReader(source){
   const wikiApiAnchor='async function handleWikiApi(request, env, url) {\n  await ensureWikiDb(env);';
   if(!source.includes(wikiApiAnchor))throw new Error('No se encontró handleWikiApi para Evidence pública.');
   const publicEvidenceRoute=`async function handleWikiApi(request, env, url) {
-  await ensureWikiDb(env);
   const publicEvidenceMatch = url.pathname.match(/^\\/api\\/wiki\\/evidence-public\\/(MLS-V\\d{2}-\\d{4})$/i);
   if (publicEvidenceMatch) {
     if (request.method !== "GET") {
       return new Response("Method not allowed", { status: 405, headers: { allow: "GET" } });
     }
-    const evidence = await mlsPublicEvidenceForCode(env, publicEvidenceMatch[1].toUpperCase());
-    return Response.json({ ok: true, evidence }, { headers: { "cache-control": "private, no-store" } });
-  }`;
+    const evidence = await mlsPublicEvidenceForCode(request, env, publicEvidenceMatch[1].toUpperCase());
+    return Response.json({ ok: true, evidence }, { headers: { "cache-control": "public, max-age=300" } });
+  }
+  await ensureWikiDb(env);`;
   source=source.replace(wikiApiAnchor,publicEvidenceRoute);
 
   const materializedPattern=/flag: "materialized",\n\s+article\n/g;
   const count=(source.match(materializedPattern)||[]).length;
   if(count<3)throw new Error('Se esperaban al menos tres respuestas materialized con article.');
-  source=source.replace(materializedPattern,'flag: "materialized",\n      article: await mlsAttachPublicEvidence(env, article)\n');
+  source=source.replace(materializedPattern,'flag: "materialized",\n      article: await mlsAttachPublicEvidence(request, env, article)\n');
 
   const articleRoute='return Response.json({ found: true, article }, { headers: { "cache-control": "public, max-age=3600" } });';
   if(!source.includes(articleRoute))throw new Error('No se encontró la respuesta pública /api/wiki/article.');
-  source=source.replace(articleRoute,'return Response.json({ found: true, article: await mlsAttachPublicEvidence(env, article) }, { headers: { "cache-control": "private, no-store" } });');
+  source=source.replace(articleRoute,'return Response.json({ found: true, article: await mlsAttachPublicEvidence(request, env, article) }, { headers: { "cache-control": "private, no-store" } });');
 
   const clientAnchor='  function replaceVisibleArticle(article, code) {';
   if(!source.includes(clientAnchor))throw new Error('No se encontró replaceVisibleArticle.');
