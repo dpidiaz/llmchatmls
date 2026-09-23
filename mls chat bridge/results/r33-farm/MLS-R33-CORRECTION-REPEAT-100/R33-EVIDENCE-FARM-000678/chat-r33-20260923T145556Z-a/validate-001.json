@@ -1,0 +1,2570 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "R33-678-VALIDATE-001",
+    "requested": 25,
+    "processed": 25,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0093",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:47.446Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0186",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:48.287Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0279",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:49.082Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0372",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:49.931Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0465",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:50.766Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0558",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:51.581Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0651",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:52.439Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0744",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:53.278Z"
+      },
+      {
+        "index": 8,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0837",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-A51B39B1F9F8AA4051D9",
+                "identityKind": "url",
+                "identityKey": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                "metadataHash": "b29d8e8624a76d2de239953dccf4778e493ed391ef88d98ad893c8648b8b1ff5",
+                "sourceType": "institutional_webpage",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Ortografía",
+                "authors": [],
+                "editors": [],
+                "contributors": [],
+                "institution": "Real Academia Española",
+                "publicationYear": null,
+                "publicationDate": null,
+                "publisher": null,
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": null,
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                "language": "es",
+                "topics": [
+                  "pronombres enclíticos",
+                  "formas verbales",
+                  "acentuación",
+                  "voseo"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T17:07:54.469Z",
+                "updatedAt": "2026-09-23T15:05:14.270Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española. (s. f.). *Ortografía*. https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                "text": "Real Academia Española. (s. f.). Ortografía. https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf",
+                "url": "https://www.rae.es/diccionario-estudiante/docs/ortografia.pdf"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:54.076Z"
+      },
+      {
+        "index": 9,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V10-0930",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+                "identityKind": "isbn",
+                "identityKey": "9788467032079",
+                "metadataHash": "030dabc237ee4e0daec7704d2b3be22651a254d92b5ae551abc85bcb39b139fa",
+                "sourceType": "book",
+                "authorityTier": "A",
+                "status": "active",
+                "title": "Nueva gramática de la lengua española",
+                "authors": [
+                  "Real Academia Española",
+                  "Asociación de Academias de la Lengua Española"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Espasa",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788467032079",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "language": "es",
+                "topics": [
+                  "español",
+                  "morfología",
+                  "sintaxis",
+                  "clíticos",
+                  "tiempo verbal",
+                  "adverbios",
+                  "régimen",
+                  "imperativo",
+                  "concesivas",
+                  "discurso"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-23T10:28:09.455Z",
+                "updatedAt": "2026-09-23T10:28:09.455Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). *Nueva gramática de la lengua española*. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "text": "Real Academia Española, & Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis",
+                "url": "https://www.asale.org/obras-academicas/gramatica/nueva-gramatica-morfologia-y-sintaxis"
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 18,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:55.019Z"
+      },
+      {
+        "index": 10,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0077",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:55.830Z"
+      },
+      {
+        "index": 11,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0153",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:56.623Z"
+      },
+      {
+        "index": 12,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0230",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:57.442Z"
+      },
+      {
+        "index": 13,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0306",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:58.271Z"
+      },
+      {
+        "index": 14,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0383",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:59.079Z"
+      },
+      {
+        "index": 15,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0460",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:06:59.939Z"
+      },
+      {
+        "index": 16,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0536",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:00.750Z"
+      },
+      {
+        "index": 17,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0614",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:01.534Z"
+      },
+      {
+        "index": 18,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0689",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:02.313Z"
+      },
+      {
+        "index": 19,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V01-0766",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-013B8A9FFC2ABAB53A03",
+                "identityKind": "isbn",
+                "identityKey": "9780521848374",
+                "metadataHash": "48d7d7a7f42b1310ddd25404866b6c5500db94d93b451c6a3f3ec4355147f894",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "A Student's Introduction to English Grammar",
+                "authors": [
+                  "Huddleston, Rodney D.",
+                  "Pullum, Geoffrey K."
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2005,
+                "publicationDate": null,
+                "publisher": "Cambridge University Press",
+                "edition": null,
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9780521848374",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "en",
+                "topics": [
+                  "English grammar",
+                  "reported speech",
+                  "backshift",
+                  "tense"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:39:42.690Z",
+                "updatedAt": "2026-09-23T15:05:18.384Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Huddleston, R. D., & Pullum, G. K. (2005). *A Student's Introduction to English Grammar*. Cambridge University Press.",
+                "text": "Huddleston, R. D., & Pullum, G. K. (2005). A Student's Introduction to English Grammar. Cambridge University Press.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:03.158Z"
+      },
+      {
+        "index": 20,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V02-0120",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-05FC4825A0C7C8C75F6F",
+                "identityKind": "isbn",
+                "identityKey": "9788520923184",
+                "metadataHash": "940fa7e11ce955ada6dd876a4e62a9035f63093ab3d71d0a4542bc278b4169bc",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Moderna gramática portuguesa",
+                "authors": [
+                  "Bechara, Evanildo"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Nova Fronteira",
+                "edition": "37. ed. rev., ampl. e atual.",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788520923184",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "pt-BR",
+                "topics": [
+                  "gramática do português",
+                  "pronomes indefinidos",
+                  "mais",
+                  "menos",
+                  "invariabilidade"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:49:35.052Z",
+                "updatedAt": "2026-09-23T15:05:38.534Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Bechara, E. (2009). *Moderna gramática portuguesa* (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "text": "Bechara, E. (2009). Moderna gramática portuguesa (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:03.968Z"
+      },
+      {
+        "index": 21,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V02-0240",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-05FC4825A0C7C8C75F6F",
+                "identityKind": "isbn",
+                "identityKey": "9788520923184",
+                "metadataHash": "940fa7e11ce955ada6dd876a4e62a9035f63093ab3d71d0a4542bc278b4169bc",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Moderna gramática portuguesa",
+                "authors": [
+                  "Bechara, Evanildo"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Nova Fronteira",
+                "edition": "37. ed. rev., ampl. e atual.",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788520923184",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "pt-BR",
+                "topics": [
+                  "gramática do português",
+                  "pronomes indefinidos",
+                  "mais",
+                  "menos",
+                  "invariabilidade"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:49:35.052Z",
+                "updatedAt": "2026-09-23T15:05:38.534Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Bechara, E. (2009). *Moderna gramática portuguesa* (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "text": "Bechara, E. (2009). Moderna gramática portuguesa (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:04.803Z"
+      },
+      {
+        "index": 22,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V02-0360",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-05FC4825A0C7C8C75F6F",
+                "identityKind": "isbn",
+                "identityKey": "9788520923184",
+                "metadataHash": "940fa7e11ce955ada6dd876a4e62a9035f63093ab3d71d0a4542bc278b4169bc",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Moderna gramática portuguesa",
+                "authors": [
+                  "Bechara, Evanildo"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Nova Fronteira",
+                "edition": "37. ed. rev., ampl. e atual.",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788520923184",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "pt-BR",
+                "topics": [
+                  "gramática do português",
+                  "pronomes indefinidos",
+                  "mais",
+                  "menos",
+                  "invariabilidade"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:49:35.052Z",
+                "updatedAt": "2026-09-23T15:05:38.534Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Bechara, E. (2009). *Moderna gramática portuguesa* (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "text": "Bechara, E. (2009). Moderna gramática portuguesa (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:05.604Z"
+      },
+      {
+        "index": 23,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V02-0480",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-05FC4825A0C7C8C75F6F",
+                "identityKind": "isbn",
+                "identityKey": "9788520923184",
+                "metadataHash": "940fa7e11ce955ada6dd876a4e62a9035f63093ab3d71d0a4542bc278b4169bc",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Moderna gramática portuguesa",
+                "authors": [
+                  "Bechara, Evanildo"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Nova Fronteira",
+                "edition": "37. ed. rev., ampl. e atual.",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788520923184",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "pt-BR",
+                "topics": [
+                  "gramática do português",
+                  "pronomes indefinidos",
+                  "mais",
+                  "menos",
+                  "invariabilidade"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:49:35.052Z",
+                "updatedAt": "2026-09-23T15:05:38.534Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Bechara, E. (2009). *Moderna gramática portuguesa* (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "text": "Bechara, E. (2009). Moderna gramática portuguesa (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:06.418Z"
+      },
+      {
+        "index": 24,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "validarEvidenceMLS",
+        "method": "POST",
+        "path": "/api/wiki/editorial/evidence/validate",
+        "response": {
+          "ok": true,
+          "code": "MLS-V02-0600",
+          "canVerify": true,
+          "assessment": {
+            "status": "SOURCED",
+            "reasons": [],
+            "claimsTotal": 1,
+            "claimsVerified": 1,
+            "sourcesTotal": 1,
+            "conflictsTotal": 0,
+            "coverageComplete": true,
+            "citationReady": true
+          },
+          "sources": [
+            {
+              "source": {
+                "sourceId": "MLS-SRC-05FC4825A0C7C8C75F6F",
+                "identityKind": "isbn",
+                "identityKey": "9788520923184",
+                "metadataHash": "940fa7e11ce955ada6dd876a4e62a9035f63093ab3d71d0a4542bc278b4169bc",
+                "sourceType": "book",
+                "authorityTier": "B",
+                "status": "active",
+                "title": "Moderna gramática portuguesa",
+                "authors": [
+                  "Bechara, Evanildo"
+                ],
+                "editors": [],
+                "contributors": [],
+                "institution": null,
+                "publicationYear": 2009,
+                "publicationDate": null,
+                "publisher": "Nova Fronteira",
+                "edition": "37. ed. rev., ampl. e atual.",
+                "containerTitle": null,
+                "journal": null,
+                "volume": null,
+                "issue": null,
+                "pages": null,
+                "articleNumber": null,
+                "isbn": "9788520923184",
+                "issn": null,
+                "doi": null,
+                "doiScope": null,
+                "canonicalUrl": null,
+                "language": "pt-BR",
+                "topics": [
+                  "gramática do português",
+                  "pronomes indefinidos",
+                  "mais",
+                  "menos",
+                  "invariabilidade"
+                ],
+                "resourceVersion": null,
+                "supersedesSourceId": null,
+                "accessedAt": "2026-09-23",
+                "createdAt": "2026-09-21T21:49:35.052Z",
+                "updatedAt": "2026-09-23T15:05:38.534Z"
+              },
+              "citation": {
+                "valid": true,
+                "citationReady": true,
+                "errors": [],
+                "warnings": [],
+                "style": "APA",
+                "edition": 7,
+                "profile": "URL-GT-2025",
+                "rendererVersion": "1.0",
+                "markdown": "Bechara, E. (2009). *Moderna gramática portuguesa* (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "text": "Bechara, E. (2009). Moderna gramática portuguesa (37. ed. rev., ampl. e atual.). Nova Fronteira.",
+                "url": null
+              }
+            }
+          ],
+          "telemetry": {
+            "d1": {
+              "queries": 10,
+              "batchCalls": 0,
+              "exactRowsRead": true,
+              "exactRowsWritten": true,
+              "d1RowsRead": 22,
+              "d1RowsWritten": 0,
+              "observedRowsRead": 8,
+              "observedRowsWritten": 0,
+              "missingReadMetaOperations": 0,
+              "missingWriteMetaOperations": 0,
+              "source": "D1 result meta when available; observed rows are a separate fallback and are not billed-row estimates"
+            }
+          }
+        },
+        "completedAt": "2026-09-23T15:07:07.271Z"
+      }
+    ]
+  },
+  "completedAt": "2026-09-23T15:07:07.272Z",
+  "commandFile": "mls chat bridge/commands/r33-farm/MLS-R33-CORRECTION-REPEAT-100/R33-EVIDENCE-FARM-000678/chat-r33-20260923T145556Z-a/validate-001.json"
+}
