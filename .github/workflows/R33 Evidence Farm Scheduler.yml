@@ -1,0 +1,33 @@
+name: R33 Evidence Farm Scheduler
+
+on:
+  issues:
+    types:
+      - opened
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: r33-evidence-farm-scheduler
+  cancel-in-progress: false
+
+jobs:
+  scheduler:
+    if: ${{ github.event_name != 'issues' || startsWith(github.event.issue.title, '[R33 Evidence Farm]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Ejecutar R33 Evidence Farm Scheduler
+        run: node 'scripts/R33 evidence farm scheduler.cjs'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
