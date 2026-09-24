@@ -102,6 +102,10 @@ async function drainPendingCommands(pool,ledgerItem){
         await updateIssue(issue.number,{title:'[R33 Evidence Farm][BLOCKED] pool inactivo',body:renderResponse('R33 Evidence Farm blocked',{ok:false,error:'POOL_NOT_AUTHORIZED',poolId:pool.poolId,status:pool.status,active:pool.active}),state:'closed',state_reason:'not_planned'});
         drained.push({issueNumber:issue.number,status:'blocked',assigned:0});continue;
       }
+      if(pool.dispatcherOnly===true){
+        await updateIssue(issue.number,{title:'[R33 Evidence Farm][BLOCKED] usar Global Dispatcher',body:renderResponse('R33 Evidence Farm blocked',{ok:false,error:'GLOBAL_DISPATCHER_REQUIRED',poolId:pool.poolId,message:'Este pool solo permite ownership mediante MLS Global Dispatcher.'}),state:'closed',state_reason:'not_planned'});
+        drained.push({issueNumber:issue.number,status:'blocked_dispatcher_only',assigned:0});continue;
+      }
       if(core.isClaimStale(issue.created_at,now)){
         await closeStale(issue,{error:'STALE_CLAIM',message:'El claim excedió el TTL antes de convertirse en lease.',requestId:command.requestId,requested:command.requested,claimTtlMs:core.EVIDENCE_FARM_CLAIM_TTL_MS,createdAt:issue.created_at||null});
         drained.push({issueNumber:issue.number,status:'stale_claim',assigned:0});continue;
