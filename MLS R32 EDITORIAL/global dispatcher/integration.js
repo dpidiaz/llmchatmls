@@ -43,6 +43,19 @@ function checkMap(checks){
 }
 function successState(value){return ['success','successful','passed','pass'].includes(clean(value).toLowerCase());}
 
+function assignmentPrSpec(policy,{prNumber,expectedHeadSha}={}){
+  if(!policy||String(policy.mode||'')!=='assignment-pr')throw integrationError('INTEGRATION_POLICY_INVALID','Policy assignment-pr requerida.');
+  return normalizeSpec({
+    prNumber,
+    base:policy.base||'main',
+    expectedHeadSha,
+    mergeMethod:policy.mergeMethod||'merge',
+    requiredChecks:policy.requiredChecks,
+    postMergeChecks:Array.isArray(policy.postMergeChecks)?policy.postMergeChecks:policy.requiredChecks,
+    certifiedByWorkId:null
+  });
+}
+
 function evaluatePreMerge(specRaw,snapshot){
   const spec=normalizeSpec(specRaw);
   const pr=snapshot?.pr||{};
@@ -111,4 +124,4 @@ function validateMergedCheckpoint(specRaw,{pr,commitSha,mainContainsCommit=false
   return {ok:true,mergeCommitSha:sha};
 }
 
-module.exports={normalizeSpec,evaluatePreMerge,evaluatePostMerge,validateMergedCheckpoint,integrationError};
+module.exports={normalizeSpec,assignmentPrSpec,evaluatePreMerge,evaluatePostMerge,validateMergedCheckpoint,integrationError};

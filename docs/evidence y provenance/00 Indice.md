@@ -95,3 +95,6 @@ Antes de implementar cualquier cambio R33:
 5. actualizar el Roadmap al cerrar el checkpoint.
 
 La documentación no autoriza por sí sola un despliegue remoto ni una migración masiva.
+
+12. [22 R33 Gate 500 Preparation R1](./22%20R33%20Gate%20500%20Preparation%20R1.md)  
+   Hardening previo a Gate 500: pool candidato 500, selector activo, dispatcher-only, waves de 50, rebuild serializado de índices y activación fail-closed.

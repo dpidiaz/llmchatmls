@@ -15,6 +15,7 @@ const EVIDENCE_FARM_EVENT_MARKER='R33_EVIDENCE_FARM_EVENT';
 const EVIDENCE_FARM_STATE_MARKER='R33_EVIDENCE_FARM_STATE';
 const EVIDENCE_FARM_LEDGER_MARKER='R33_EVIDENCE_FARM_LEDGER';
 const DEFAULT_POOL_PATH=path.join('docs','evidence y provenance','17 GitHub Native Benchmark 100 Pool.json');
+const POOL_CONTROL_PATH=path.join('docs','evidence y provenance','21 R33 Active Pool Control.json');
 
 function farmError(code,message,status=422){const e=new Error(message||code);e.code=code;e.status=status;return e;}
 function iso(value=Date.now()){return new Date(value).toISOString();}
@@ -72,9 +73,32 @@ function normalizePool(raw){
     entries
   };
 }
-function loadPool(root='.',poolPath=DEFAULT_POOL_PATH){
-  const full=path.join(root,poolPath);if(!fs.existsSync(full))throw farmError('POOL_NOT_FOUND','No existe el manifiesto Evidence Farm: '+poolPath,500);
-  return normalizePool(JSON.parse(fs.readFileSync(full,'utf8')));
+function normalizePoolPath(value){
+  const p=String(value||'').trim().replace(/\\/g,'/');
+  if(!p||p.startsWith('/')||p.includes('..'))throw farmError('INVALID_POOL_PATH','Ruta de pool R33 inválida.',500);
+  return p;
+}
+function resolvePoolPath(root='.',poolPath=null){
+  if(poolPath)return normalizePoolPath(poolPath);
+  const controlFull=path.join(root,POOL_CONTROL_PATH);
+  if(!fs.existsSync(controlFull))return DEFAULT_POOL_PATH;
+  let control;try{control=JSON.parse(fs.readFileSync(controlFull,'utf8'));}catch{throw farmError('POOL_CONTROL_INVALID','Control de pool R33 inválido.',500);}
+  const activePoolPath=normalizePoolPath(control.activePoolPath);
+  if(control.activePoolId&&typeof control.activePoolId!=='string')throw farmError('POOL_CONTROL_INVALID','activePoolId inválido.',500);
+  return activePoolPath;
+}
+function loadPool(root='.',poolPath=null){
+  const resolved=resolvePoolPath(root,poolPath);
+  const full=path.join(root,resolved);if(!fs.existsSync(full))throw farmError('POOL_NOT_FOUND','No existe el manifiesto Evidence Farm: '+resolved,500);
+  const pool=normalizePool(JSON.parse(fs.readFileSync(full,'utf8')));
+  if(poolPath==null){
+    const controlFull=path.join(root,POOL_CONTROL_PATH);
+    if(fs.existsSync(controlFull)){
+      const control=JSON.parse(fs.readFileSync(controlFull,'utf8'));
+      if(control.activePoolId&&String(control.activePoolId)!==pool.poolId)throw farmError('POOL_CONTROL_ID_MISMATCH','activePoolId no coincide con el manifiesto seleccionado.',500);
+    }
+  }
+  return pool;
 }
 function poolDigest(pool){return sha256({poolId:pool.poolId,manifestVersion:pool.manifestVersion,entries:pool.entries.map(x=>({code:x.code,contentPath:x.contentPath,order:x.order}))});}
 
@@ -226,8 +250,8 @@ function farmProgress({pool,ledger,batches}){
 
 module.exports={
   EVIDENCE_FARM_VERSION,EVIDENCE_FARM_DEFAULT_BATCH,EVIDENCE_FARM_MAX_BATCH,EVIDENCE_FARM_CLAIM_TTL_MS,EVIDENCE_FARM_ACK_TTL_MS,EVIDENCE_FARM_LEASE_TTL_MS,
-  EVIDENCE_FARM_COMMAND_MARKER,EVIDENCE_FARM_EVENT_MARKER,EVIDENCE_FARM_STATE_MARKER,EVIDENCE_FARM_LEDGER_MARKER,DEFAULT_POOL_PATH,
-  farmError,iso,sha256,assertCode,safeSegment,renderMarked,renderCommandBody,parseCommand,parseWorkerEvent,parseFarmState,parseLedger,normalizePool,loadPool,poolDigest,
+  EVIDENCE_FARM_COMMAND_MARKER,EVIDENCE_FARM_EVENT_MARKER,EVIDENCE_FARM_STATE_MARKER,EVIDENCE_FARM_LEDGER_MARKER,DEFAULT_POOL_PATH,POOL_CONTROL_PATH,
+  farmError,iso,sha256,assertCode,safeSegment,renderMarked,renderCommandBody,parseCommand,parseWorkerEvent,parseFarmState,parseLedger,normalizePool,normalizePoolPath,resolvePoolPath,loadPool,poolDigest,
   initialLedger,normalizeLedger,terminalCodesFromLedger,addTerminalToLedger,renderLedgerBody,makeBatchState,renderBatchBody,isClaimStale,isLeaseExpired,pendingCodes,releaseReasonForBatch,
   validateResultShape,resultDigest,applyWorkerEvent,protectedCodesFromBatches,selectNextEntries,farmProgress,evidenceEntryPath
 };

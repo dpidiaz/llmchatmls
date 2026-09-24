@@ -79,6 +79,16 @@ test('registry exposes PR #699 integration spec with global main lock',()=>{
   assert.deepEqual(spec.requiredChecks,['R33 GitHub Native Tests']);
 });
 
+test('assignment-pr policy becomes a fixed head-pinned integration spec',()=>{
+  const policy={mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests']};
+  const dynamic=integration.assignmentPrSpec(policy,{prNumber:812,expectedHeadSha:'3'.repeat(40)});
+  assert.equal(dynamic.prNumber,812);
+  assert.equal(dynamic.expectedHeadSha,'3'.repeat(40));
+  assert.equal(dynamic.base,'main');
+  assert.deepEqual(dynamic.requiredChecks,['R33 GitHub Native Tests']);
+  assert.throws(()=>integration.assignmentPrSpec({...policy,mode:'wrong'},{prNumber:812,expectedHeadSha:'3'.repeat(40)}),e=>e.code==='INTEGRATION_POLICY_INVALID');
+});
+
 test('merged checkpoint validates PR/head/merge/main without branch scope',()=>{
   const pr={number:699,base:'main',headSha:head,merged:true,mergeCommitSha:merge};
   const ok=integration.validateMergedCheckpoint(spec,{pr,commitSha:merge,mainContainsCommit:true});
@@ -94,4 +104,10 @@ test('worker routes integration checkpoints through merged-PR verifier',()=>{
   assert.match(source,/state\.workType==='integration'/);
   assert.match(source,/verifyIntegrationCheckpoint/);
   assert.match(source,/validateMergedCheckpoint/);
+  assert.match(source,/assignmentPrSpec/);
+  assert.match(source,/integrationPrNumber/);
+  assert.match(source,/integrationHeadSha/);
+  assert.match(source,/integrationStage/);
+  assert.match(source,/INTEGRATION_PREMERGE_CHECKPOINT_REQUIRED/);
+  assert.match(source,/CHECKPOINT_SCOPE_VIOLATION/);
 });
