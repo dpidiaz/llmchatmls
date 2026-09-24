@@ -51,16 +51,17 @@ test('R33 provider projects Global terminal + active ownership and keeps Gate 50
   assert.equal(globalCore.normalizeWorkItem(work).provider,'r33-farm');
 });
 
-test('dynamic recoveries are rehydrated while static Gate 500 stays blocked',()=>{
+test('dynamic recoveries are rehydrated while authorized Gate 500 activation stays ready',()=>{
   const base=globalCore.loadRegistry('.');
   const gateBefore=base.items.find(x=>x.workId==='gate500');
-  assert.equal(gateBefore.status,'blocked');
+  assert.equal(gateBefore.status,'ready');
+  assert.equal(gateBefore.authorization?.authorized,true);
   const recoveryItem={workId:'mls-farm:MLS-V10-0001:MLS-V10-0001:1',version:1,title:'recover',workType:'editorial_batch',status:'ready',priority:30,createdAt:'2026-09-24T04:00:00.000Z',provider:'mls-farm',resourceLocks:['entry:MLS-V10-0001'],allowedPaths:['content/espanol-guatemala/MLS-V10-0001.json'],dependsOn:[],validation:[],instructions:'recover',completion:{requiresCommit:true,requiresValidation:false}};
   const globalLedger={recoveries:{[recoveryItem.workId]:{workItem:recoveryItem}},terminal:{}};
   const registry=integration.extendRegistry(base,{items:[],globalLedger});
   assert.ok(registry.items.some(x=>x.workId===recoveryItem.workId));
-  assert.equal(registry.items.find(x=>x.workId==='gate500').status,'blocked');
-  assert.equal(base.items.find(x=>x.workId==='gate500').status,'blocked','base registry must not be mutated');
+  assert.equal(registry.items.find(x=>x.workId==='gate500').status,'ready');
+  assert.equal(base.items.find(x=>x.workId==='gate500').status,'ready','base registry must not be mutated');
 });
 
 test('R33 index integration waits for a full wave and materializes exact source refs',()=>{
