@@ -183,12 +183,9 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const indexItem=r33IndexIntegrationWork({pool:snapshot.pool,globalLedger,root});
     if(indexItem)items.push(globalCore.normalizeWorkItem(indexItem));
-    const integrationActive=activeProviderAssignments(globalAssignments,'r33-index-integration').length>0;
-    if(!integrationActive){
-      const candidate=r33Provider.materializeCandidate(snapshot,{now});
-      const item=r33CandidateToWork(candidate,now);
-      if(item)items.push(globalCore.normalizeWorkItem(item));
-    }
+    const candidate=r33Provider.materializeCandidate(snapshot,{now});
+    const item=r33CandidateToWork(candidate,now);
+    if(item)items.push(globalCore.normalizeWorkItem(item));
   }catch(error){diagnostics.push({provider:'r33-farm',status:'blocked',error:error.code||'R33_PROVIDER_ERROR',message:error.message});}
   return {items,diagnostics};
 }

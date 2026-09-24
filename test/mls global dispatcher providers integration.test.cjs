@@ -108,6 +108,18 @@ test('R33 provider bootstraps from a synthetic empty ledger while MLS Farm still
   assert.deepEqual(snapshot.ledger.verified,[]);
 });
 
+test('R33 editorial work remains materializable while index integration is active',()=>{
+  const result=integration.materializeProviderItems({
+    issues:[],
+    root:'.',
+    now:NOW,
+    globalLedger:{terminal:{},recoveries:{}},
+    globalAssignments:[activeGlobal('r33-index-integration','MLS-GLOBAL-INTEGRATION',[])]
+  });
+  assert.ok(result.items.some(x=>x.provider==='r33-farm'));
+  assert.equal(result.diagnostics.some(x=>x.provider==='r33-farm'),false);
+});
+
 test('scheduler integrates providers through snapshots only and never issues nested Farm commands',()=>{
   const scheduler=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
   assert.match(scheduler,/providers\/integration\.js/);
