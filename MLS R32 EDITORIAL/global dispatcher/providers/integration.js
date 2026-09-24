@@ -63,8 +63,9 @@ function collectR33Snapshot(issues,root='.'){
     const ledger=r33Core.parseLedger(body);if(ledger&&String(ledger.poolId||'')===pool.poolId)ledgers.push(ledger);
     const batch=r33Core.parseFarmState(body);if(batch&&String(batch.poolId||'')===pool.poolId)batches.push(batch);
   }
-  if(ledgers.length!==1)throw integrationError('R33_LEDGER_CARDINALITY','R33 provider requiere exactamente un ledger activo para '+pool.poolId+'.',503);
-  return {pool,ledger:ledgers[0],batches};
+  if(ledgers.length>1)throw integrationError('R33_LEDGER_CARDINALITY','R33 provider requiere como máximo un ledger activo para '+pool.poolId+'.',503);
+  const ledger=ledgers.length===1?ledgers[0]:r33Core.initialLedger(pool);
+  return {pool,ledger,batches,ledgerSynthetic:ledgers.length===0};
 }
 function projectMlsSnapshot(snapshot,{globalLedger,globalAssignments}={}){
   const corpusCodes=new Set((snapshot.corpus||[]).map(x=>String(x.code)));
