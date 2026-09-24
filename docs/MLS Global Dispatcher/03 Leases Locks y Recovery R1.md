@@ -24,24 +24,24 @@ Todos estos casos deben ser recuperables o rechazados de forma segura.
 Fases:
 
 ### Unacknowledged
-Desde \`claimedAt\` hasta \`ackDeadlineAt\`.
+Desde `claimedAt` hasta `ackDeadlineAt`.
 
 Duración: 5 minutos.
 
 ### Acknowledged
 Después del primer evento válido.
 
-\`expiresAt = lastAcceptedEventAt + 10 minutos\`
+`expiresAt = lastAcceptedEventAt + 10 minutos`
 
 Heartbeat/checkpoint/finish válido renueva el lease según corresponda.
 
 ## 3. Epoch
 
-Cada nueva propiedad de un work item incrementa \`leaseEpoch\`.
+Cada nueva propiedad de un work item incrementa `leaseEpoch`.
 
 La combinación efectiva es:
 
-\`assignmentId + leaseToken + leaseEpoch\`
+`assignmentId + leaseToken + leaseEpoch`
 
 Un evento con epoch viejo jamás puede mutar estado vigente.
 
@@ -59,12 +59,12 @@ Los locks representan exclusión lógica, no solo archivos.
 
 Ejemplos:
 
-\`\`\`text
+```text
 entry:MLS-V06-0101
 path:data/evidence/by-code
 system:public-evidence-generator
 deployment:production
-\`\`\`
+```
 
 Un assignment puede poseer múltiples locks.
 
@@ -115,11 +115,11 @@ Nada después del checkpoint se considera perdido automáticamente; puede existi
 
 Definición:
 
-\`branchHead != lastCheckpointCommit\`
+`branchHead != lastCheckpointCommit`
 
 y los commits posteriores pertenecen al assignment.
 
-El reaper clasifica ese estado como \`RECOVERY_REQUIRED\`.
+El reaper clasifica ese estado como `RECOVERY_REQUIRED`.
 
 No debe:
 
@@ -136,7 +136,7 @@ Nuevo worker:
 
 1. adquiere locks con epoch nuevo;
 2. lee work item;
-3. lee \`lastCheckpointCommit\`;
+3. lee `lastCheckpointCommit`;
 4. lee orphan head;
 5. inspecciona diff limitado al assignment;
 6. ejecuta validaciones obligatorias;
@@ -152,15 +152,15 @@ Nuevo worker:
 
 Ejemplo:
 
-\`\`\`text
+```text
 10:00 heartbeat
 10:10 lease expira
 10:12 reaper libera
 10:13 Chat B obtiene epoch 8
 10:15 Chat A vuelve con epoch 7
-\`\`\`
+```
 
-El evento de Chat A debe rechazarse con \`LEASE_EPOCH_MISMATCH\` o \`LEASE_EXPIRED\`.
+El evento de Chat A debe rechazarse con `LEASE_EPOCH_MISMATCH` o `LEASE_EXPIRED`.
 
 Nunca renovar un lease histórico por actividad tardía.
 
@@ -206,7 +206,7 @@ Worker Events debe:
 
 ## 15. Protección de main
 
-Un worker muerto jamás debe dejar \`main\` a medias porque workers normales no escriben a \`main\`.
+Un worker muerto jamás debe dejar `main` a medias porque workers normales no escriben a `main`.
 
 Main cambia solo por integración controlada/certificada.
 
@@ -233,6 +233,6 @@ Si todos los chats activos desaparecen al mismo tiempo:
 - ramas conservan commits;
 - checkpoints conservan progreso confirmado;
 - reaper libera ownership muerto;
-- nuevos chats pueden continuar mediante \`MLS siguiente\`.
+- nuevos chats pueden continuar mediante `MLS siguiente`.
 
 No debe requerirse reconstruir manualmente qué estaba haciendo cada chat.

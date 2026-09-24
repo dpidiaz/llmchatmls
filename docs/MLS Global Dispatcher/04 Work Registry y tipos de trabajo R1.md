@@ -4,17 +4,17 @@
 
 El Work Registry define **qué puede asignar** el Global Dispatcher.
 
-El chat no crea trabajo arbitrario al ejecutar \`MLS siguiente\`; solicita uno de los work items ya declarados o generados por un provider autorizado.
+El chat no crea trabajo arbitrario al ejecutar `MLS siguiente`; solicita uno de los work items ya declarados o generados por un provider autorizado.
 
 Ruta propuesta de implementación:
 
-\`MLS R32 EDITORIAL/global dispatcher/work registry.json\`
+`MLS R32 EDITORIAL/global dispatcher/work registry.json`
 
 Los estados operativos volátiles pueden vivir en GitHub Issues; la definición durable del trabajo vive en Git.
 
 ## 2. Esquema mínimo
 
-\`\`\`json
+```json
 {
   "workId": "public-evidence-generator",
   "version": 1,
@@ -49,7 +49,7 @@ Los estados operativos volátiles pueden vivir en GitHub Issues; la definición 
     "requiresValidation": true
   }
 }
-\`\`\`
+```
 
 ## 3. Campos
 
@@ -68,13 +68,13 @@ Uno de los tipos autorizados.
 ### status
 Definición durable de elegibilidad:
 
-- \`draft\`
-- \`blocked\`
-- \`ready\`
-- \`active\`
-- \`recovery_required\`
-- \`done\`
-- \`cancelled\`
+- `draft`
+- `blocked`
+- `ready`
+- `active`
+- `recovery_required`
+- `done`
+- `cancelled`
 
 El assignment state es separado del work state.
 
@@ -96,12 +96,12 @@ Cómo crear/reusar rama.
 ### provider
 Origen del trabajo:
 
-- \`global\`
-- \`mls-farm\`
-- \`r33-farm\`
-- \`qa\`
-- \`integration\`
-- \`deployment\`
+- `global`
+- `mls-farm`
+- `r33-farm`
+- `qa`
+- `integration`
+- `deployment`
 
 ### instructions
 Contrato específico del assignment.
@@ -120,13 +120,13 @@ Para unidades independientes de contenido/Evidence.
 
 Campos adicionales sugeridos:
 
-\`\`\`json
+```json
 {
   "provider": "r33-farm",
   "units": ["MLS-V06-0101", "MLS-V06-0102"],
   "checkpointSizeMax": 10
 }
-\`\`\`
+```
 
 Locks por entrada o batch.
 
@@ -164,7 +164,7 @@ Debe declarar refs exactos y criterios de merge.
 
 Debe declarar:
 
-\`\`\`json
+```json
 {
   "runtimeAccess": {
     "cloudflare": true,
@@ -172,7 +172,7 @@ Debe declarar:
     "editorialWritesToCloudflare": false
   }
 }
-\`\`\`
+```
 
 ### recovery
 
@@ -182,7 +182,7 @@ Referencia assignment anterior y commits huérfanos.
 
 ## 5. Ejemplo de cola paralela
 
-\`\`\`json
+```json
 [
   {
     "workId": "r33-batch-ja-001",
@@ -203,19 +203,19 @@ Referencia assignment anterior y commits huérfanos.
     "resourceLocks": ["system:public-evidence-generator", "path:data/evidence/by-code"]
   }
 ]
-\`\`\`
+```
 
 Los tres pueden ejecutarse simultáneamente porque no comparten locks.
 
 ## 6. Ejemplo de conflicto
 
-\`\`\`text
+```text
 Work A:
   path:data/evidence/by-code
 
 Work B:
   path:data/evidence/by-code/MLS-V06-0101.json
-\`\`\`
+```
 
 R1 considera conflicto jerárquico.
 
@@ -223,7 +223,7 @@ Work B permanece ready y el Dispatcher selecciona otro trabajo para ese chat.
 
 ## 7. Dependency example
 
-\`\`\`text
+```text
 public-evidence-generator
         ↓
 reader-static-evidence
@@ -231,7 +231,7 @@ reader-static-evidence
 e2e-evidence-certification
         ↓
 deployment-evidence
-\`\`\`
+```
 
 Los batches R33 independientes pueden seguir ejecutándose en paralelo si no dependen de esa cadena.
 
@@ -243,7 +243,7 @@ No lo edita.
 
 Registra:
 
-\`scope_extension_required\`
+`scope_extension_required`
 
 El Scheduler/maintainer puede:
 
@@ -269,13 +269,13 @@ La implementación debe evitar doble lease. Preferencia R1: **un solo ownership 
 
 ## 10. Terminalidad
 
-Un work item no queda \`done\` solo porque un chat diga “terminé”.
+Un work item no queda `done` solo porque un chat diga “terminé”.
 
-Debe cumplirse \`completion\`.
+Debe cumplirse `completion`.
 
 Ejemplo:
 
-\`\`\`json
+```json
 {
   "completion": {
     "requiresCommit": true,
@@ -286,7 +286,7 @@ Ejemplo:
     ]
   }
 }
-\`\`\`
+```
 
 ## 11. Historial
 
@@ -295,12 +295,12 @@ Nunca reescribir silenciosamente un work item terminal para reutilizar su ID.
 Si se requiere una nueva iteración:
 
 - incrementar versión cuando sea misma unidad lógica compatible; o
-- crear nuevo \`workId\` si cambia el objetivo.
+- crear nuevo `workId` si cambia el objetivo.
 
 Assignments conservan referencia a la versión exacta.
 
 ## 12. Gate 500
 
-El Work Registry puede representar un futuro trabajo Gate 500, pero debe permanecer \`blocked\` hasta autorización explícita y criterios previos satisfechos.
+El Work Registry puede representar un futuro trabajo Gate 500, pero debe permanecer `blocked` hasta autorización explícita y criterios previos satisfechos.
 
-El simple hecho de ejecutar \`MLS siguiente\` no constituye autorización de Gate 500.
+El simple hecho de ejecutar `MLS siguiente` no constituye autorización de Gate 500.

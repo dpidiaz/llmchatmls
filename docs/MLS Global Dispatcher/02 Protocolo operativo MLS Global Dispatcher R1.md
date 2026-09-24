@@ -5,7 +5,7 @@ Estado: especificación previa a implementación.
 
 ## 1. Arquitectura
 
-\`\`\`text
+```text
 Chat A ─┐
 Chat B ─┼── MLS siguiente
 Chat C ─┘
@@ -24,7 +24,7 @@ Chat C ─┘
                        │
                        ▼
                     GitHub
-\`\`\`
+```
 
 GitHub es autoridad sobre asignación, ownership y progreso durable.
 
@@ -52,22 +52,22 @@ MLS Farm, R33 Evidence Farm y futuras colas especializadas pueden entregar unida
 
 Entrada universal:
 
-\`MLS siguiente\`
+`MLS siguiente`
 
 No recibe workstream ni cantidad como requisito.
 
-El chat crea un claim marcado \`MLS_GLOBAL_DISPATCH_COMMAND\`.
+El chat crea un claim marcado `MLS_GLOBAL_DISPATCH_COMMAND`.
 
 ## 4. Claim lifecycle
 
 Estado:
 
-\`pending → assigned | no_work | stale | rejected\`
+`pending → assigned | no_work | stale | rejected`
 
 Requisitos:
 
-- \`requestId\` único;
-- \`workerId\` único por chat;
+- `requestId` único;
+- `workerId` único por chat;
 - issue timestamp autoritativo;
 - claim TTL corto;
 - el Scheduler debe drenar claims pendientes en orden determinista.
@@ -78,11 +78,11 @@ No convertir un claim stale en assignment.
 
 Workflow conceptual:
 
-\`\`\`yaml
+```yaml
 concurrency:
   group: mls-global-dispatcher
   cancel-in-progress: false
-\`\`\`
+```
 
 Antes de cada adjudicación:
 
@@ -102,14 +102,14 @@ No calcular varios leases sobre un snapshot viejo en paralelo.
 Orden obligatorio:
 
 1. recovery del mismo trabajo si existe progreso huérfano válido;
-2. work item \`ready\`;
+2. work item `ready`;
 3. dependencias satisfechas;
 4. sin owner/lease válido;
 5. sin lock conflict;
 6. worker capabilities compatibles;
 7. prioridad efectiva;
 8. createdAt más antiguo;
-9. \`workId\` lexicográfico como desempate.
+9. `workId` lexicográfico como desempate.
 
 La prioridad no puede saltarse dependencias ni locks.
 
@@ -125,35 +125,35 @@ Ejemplo:
 - 40: validación no bloqueante;
 - 50: mantenimiento.
 
-El registry puede añadir \`aging\` para evitar starvation, pero debe ser determinista.
+El registry puede añadir `aging` para evitar starvation, pero debe ser determinista.
 
 ## 8. Dependencias
 
 Un work item puede declarar:
 
-\`\`\`json
+```json
 {
   "dependsOn": [
     "public-evidence-generator",
     "reader-static-evidence"
   ]
 }
-\`\`\`
+```
 
-Solo es elegible cuando los dependencies requeridos alcanzan el estado definido, normalmente \`done\` o \`certified\`.
+Solo es elegible cuando los dependencies requeridos alcanzan el estado definido, normalmente `done` o `certified`.
 
 ## 9. Assignment state machine
 
-\`\`\`text
+```text
 leased
   ├── done
   ├── cancelled
   ├── expired
   ├── recovery_required
   └── failed_closed
-\`\`\`
+```
 
-\`recovery_required\` conserva ownership histórico pero libera el worker anterior.
+`recovery_required` conserva ownership histórico pero libera el worker anterior.
 
 ## 10. Timing
 
@@ -173,41 +173,41 @@ Los locks son strings normalizados y jerárquicos.
 
 Clases mínimas:
 
-- \`entry:<code>\`
-- \`path:<repo-path>\`
-- \`branch:<branch>\`
-- \`system:<subsystem>\`
-- \`deployment:<target>\`
+- `entry:<code>`
+- `path:<repo-path>`
+- `branch:<branch>`
+- `system:<subsystem>`
+- `deployment:<target>`
 
 Reglas:
 
 - mismo lock exacto = conflicto;
-- un \`path:a/b\` bloquea descendientes \`path:a/b/c\`;
+- un `path:a/b` bloquea descendientes `path:a/b/c`;
 - un lock exclusivo de sistema bloquea subtrabajos declarados dentro de ese sistema;
 - locks read-only pueden añadirse en una versión posterior; R1 debe preferir locks exclusivos simples.
 
 ## 12. Allowed paths
 
-Los locks definen exclusión. \`allowedPaths\` define el perímetro de escritura.
+Los locks definen exclusión. `allowedPaths` define el perímetro de escritura.
 
-Un worker puede leer dependencias necesarias, pero no debe escribir fuera de \`allowedPaths\`.
+Un worker puede leer dependencias necesarias, pero no debe escribir fuera de `allowedPaths`.
 
 Si descubre que necesita modificar otro recurso:
 
 1. checkpoint;
 2. no editar el recurso;
-3. marcar \`scope_extension_required\`;
+3. marcar `scope_extension_required`;
 4. Dispatcher crea/actualiza work item apropiado.
 
 ## 13. Ramas
 
 Patrón recomendado:
 
-\`worker/<workId>/<assignmentEpoch>\`
+`worker/<workId>/<assignmentEpoch>`
 
 o rama fija del workstream si el registry lo exige.
 
-Nunca escribir directamente a \`main\`.
+Nunca escribir directamente a `main`.
 
 Un assignment recuperado puede continuar la misma rama si es seguro y el epoch nuevo queda registrado.
 
@@ -215,7 +215,7 @@ Un assignment recuperado puede continuar la misma rama si es seguro y el epoch n
 
 Regla de orden:
 
-\`commit → validate → checkpoint\`
+`commit → validate → checkpoint`
 
 Checkpoint debe apuntar al commit exacto.
 
@@ -239,16 +239,16 @@ Cada barrido:
    - invalida token/epoch;
    - preserva checkpoints;
    - inspecciona branch head;
-   - compara con \`lastCheckpointCommit\`;
-   - clasifica \`clean_expiry\` o \`orphan_progress\`;
+   - compara con `lastCheckpointCommit`;
+   - clasifica `clean_expiry` o `orphan_progress`;
    - libera locks;
    - actualiza work item.
 
 ### clean_expiry
-No existen commits posteriores al checkpoint. Trabajo pendiente vuelve a \`ready\`.
+No existen commits posteriores al checkpoint. Trabajo pendiente vuelve a `ready`.
 
 ### orphan_progress
-Existen commits posteriores. Work item pasa a \`RECOVERY_REQUIRED\`.
+Existen commits posteriores. Work item pasa a `RECOVERY_REQUIRED`.
 
 ## 16. Recovery assignment
 
@@ -266,19 +266,19 @@ El recovery worker no debe regenerar todo de cero.
 
 ## 17. Specialized Farms
 
-Para un \`editorial_batch\`, el Dispatcher puede delegar allocation interno a MLS Farm/R33 Farm.
+Para un `editorial_batch`, el Dispatcher puede delegar allocation interno a MLS Farm/R33 Farm.
 
 El ownership externo debe mapearse al lease especializado sin crear dobles propietarios.
 
 Ejemplo:
 
-\`\`\`text
+```text
 Global assignment
     ↓
 provider=R33 Evidence Farm
     ↓
 batchId + leaseToken especializado
-\`\`\`
+```
 
 Al expirar cualquiera de las capas, la liberación debe ser consistente y fail-closed.
 
@@ -296,13 +296,13 @@ La implementación puede optar por usar directamente el lease especializado como
 
 Eventos de cada assignment deben serializarse por assignment:
 
-\`mls-global-assignment-<assignmentId>\`
+`mls-global-assignment-<assignmentId>`
 
 Assignments diferentes pueden procesarse en paralelo.
 
 ## 20. Integración
 
-Un work item de tipo \`integration\`:
+Un work item de tipo `integration`:
 
 1. toma refs certificados;
 2. confirma base actual;
@@ -319,7 +319,7 @@ No usar integración automática si faltan checks requeridos.
 
 Deployment está separado del trabajo editorial.
 
-Un assignment \`deployment\` puede:
+Un assignment `deployment` puede:
 
 - generar bundles desde GitHub;
 - ejecutar build;
@@ -361,7 +361,7 @@ Registrar al menos:
 
 ## 24. Criterio de certificación R1
 
-Antes de activar \`MLS siguiente\` como comando productivo:
+Antes de activar `MLS siguiente` como comando productivo:
 
 1. test de claims simultáneos;
 2. test de locks solapados;

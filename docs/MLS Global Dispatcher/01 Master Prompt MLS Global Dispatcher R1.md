@@ -2,10 +2,10 @@
 
 Versión: 1.0  
 Sistema: MASTER LANGUAGE SYSTEM  
-Repositorio canónico: \`dpidiaz/llmchatmls\`  
+Repositorio canónico: `dpidiaz/llmchatmls`  
 Worker runtime: ChatGPT  
 Control plane: GitHub  
-Comando universal: \`MLS siguiente\`  
+Comando universal: `MLS siguiente`  
 Modo obligatorio: **CHAT ONLY — NO ChatGPT Work**  
 Estado: especificación; se vuelve operativa solo después de implementar y certificar el Dispatcher.
 
@@ -17,7 +17,7 @@ Permitir que múltiples chats trabajen simultáneamente sobre MLS usando exactam
 
 El usuario puede abrir varios chats y escribir en todos:
 
-\`MLS siguiente\`
+`MLS siguiente`
 
 Cada chat debe solicitar una asignación al Global Dispatcher. **GitHub, no el chat, decide el trabajo.**
 
@@ -43,7 +43,7 @@ Por tanto:
 
 Ante el comando exacto o equivalente:
 
-\`MLS siguiente\`
+`MLS siguiente`
 
 el worker debe:
 
@@ -64,7 +64,7 @@ Si el Dispatcher está indisponible o no está implementado, el worker debe **fa
 
 El claim usa un Issue marcado:
 
-\`\`\`text
+```text
 <!-- MLS_GLOBAL_DISPATCH_COMMAND
 {
   "operation": "claim",
@@ -72,17 +72,17 @@ El claim usa un Issue marcado:
   "workerId": "<unique-per-chat>"
 }
 -->
-\`\`\`
+```
 
 Título recomendado:
 
-\`[MLS Dispatcher] claim <requestId>\`
+`[MLS Dispatcher] claim <requestId>`
 
 El Scheduler del Dispatcher serializa adjudicaciones con:
 
-\`concurrency.group = mls-global-dispatcher\`
+`concurrency.group = mls-global-dispatcher`
 
-y \`cancel-in-progress: false\`.
+y `cancel-in-progress: false`.
 
 Claims simultáneos pueden llegar en cualquier orden, pero las adjudicaciones se resuelven una por una sobre el estado más reciente.
 
@@ -94,7 +94,7 @@ El worker no escoge.
 
 El Dispatcher selecciona el primer trabajo que cumpla, en este orden:
 
-1. \`status = ready\` o recuperación prioritaria;
+1. `status = ready` o recuperación prioritaria;
 2. no terminal;
 3. dependencias satisfechas;
 4. sin lease activo válido;
@@ -102,9 +102,9 @@ El Dispatcher selecciona el primer trabajo que cumpla, en este orden:
 6. compatible con el tipo de worker;
 7. prioridad efectiva más alta;
 8. más antiguo primero;
-9. desempate determinista por \`workId\`.
+9. desempate determinista por `workId`.
 
-Un assignment en \`RECOVERY_REQUIRED\` tiene prioridad sobre comenzar desde cero el mismo trabajo.
+Un assignment en `RECOVERY_REQUIRED` tiene prioridad sobre comenzar desde cero el mismo trabajo.
 
 ---
 
@@ -112,23 +112,23 @@ Un assignment en \`RECOVERY_REQUIRED\` tiene prioridad sobre comenzar desde cero
 
 La respuesta durable debe incluir como mínimo:
 
-- \`assignmentId\`
-- \`workId\`
-- \`workType\`
-- \`workerId\`
-- \`leaseToken\`
-- \`leaseEpoch\`
-- \`claimedAt\`
-- \`ackDeadlineAt\`
-- \`expiresAt\`
-- \`branch\`
-- \`baseCommit\`
-- \`resourceLocks\`
-- \`allowedPaths\`
-- \`dependencies\`
-- \`instructions\`
-- \`lastCheckpointCommit\`
-- \`recovery\`, si aplica
+- `assignmentId`
+- `workId`
+- `workType`
+- `workerId`
+- `leaseToken`
+- `leaseEpoch`
+- `claimedAt`
+- `ackDeadlineAt`
+- `expiresAt`
+- `branch`
+- `baseCommit`
+- `resourceLocks`
+- `allowedPaths`
+- `dependencies`
+- `instructions`
+- `lastCheckpointCommit`
+- `recovery`, si aplica
 
 El chat debe leer esos campos antes de editar.
 
@@ -144,7 +144,7 @@ Valores canónicos:
 - reaper: **cada 5 minutos**;
 - cada heartbeat o checkpoint aceptado renueva el lease por 10 minutos.
 
-El primer evento aceptado establece \`acknowledgedAt\`.
+El primer evento aceptado establece `acknowledgedAt`.
 
 El worker debe enviar ACK/heartbeat tan pronto observe el assignment.
 
@@ -162,7 +162,7 @@ Recomendación:
 
 Formato conceptual:
 
-\`\`\`text
+```text
 <!-- MLS_GLOBAL_DISPATCH_EVENT
 {
   "operation": "heartbeat",
@@ -170,7 +170,7 @@ Formato conceptual:
   "leaseToken": "..."
 }
 -->
-\`\`\`
+```
 
 GitHub timestamp es autoritativo.
 
@@ -182,17 +182,17 @@ Cada trabajo declara los recursos que modifica o reserva.
 
 Ejemplos:
 
-- \`entry:MLS-V06-0101\`
-- \`entry-range:MLS-V06-0101..MLS-V06-0110\`
-- \`path:data/evidence/by-code\`
-- \`path:scripts/generar-evidence-publico.js\`
-- \`branch:r33-public-evidence-generator\`
-- \`system:deployment-adapter\`
-- \`system:r33-registry-indexes\`
+- `entry:MLS-V06-0101`
+- `entry-range:MLS-V06-0101..MLS-V06-0110`
+- `path:data/evidence/by-code`
+- `path:scripts/generar-evidence-publico.js`
+- `branch:r33-public-evidence-generator`
+- `system:deployment-adapter`
+- `system:r33-registry-indexes`
 
 El Dispatcher no puede adjudicar dos assignments activos cuyos locks entren en conflicto.
 
-El chat tampoco puede editar fuera de \`allowedPaths\` sin obtener una nueva asignación.
+El chat tampoco puede editar fuera de `allowedPaths` sin obtener una nueva asignación.
 
 ---
 
@@ -200,13 +200,13 @@ El chat tampoco puede editar fuera de \`allowedPaths\` sin obtener una nueva asi
 
 Regla obligatoria:
 
-> Un worker global nunca escribe directamente a \`main\`.
+> Un worker global nunca escribe directamente a `main`.
 
 Cada assignment usa una rama dedicada o una rama de workstream expresamente declarada.
 
 La rama debe permanecer recuperable después de que el chat desaparezca.
 
-Si el trabajo requiere integración a \`main\`, debe existir un assignment separado de tipo \`integration\` o una regla explícita del work item.
+Si el trabajo requiere integración a `main`, debe existir un assignment separado de tipo `integration` o una regla explícita del work item.
 
 ---
 
@@ -228,7 +228,7 @@ Persistencia puede ser:
 
 Para cambios de código/editoriales:
 
-\`\`\`text
+```text
 trabajo
   ↓
 commit
@@ -236,7 +236,7 @@ commit
 validación
   ↓
 checkpoint
-\`\`\`
+```
 
 Nunca registrar un checkpoint que afirme durabilidad antes de que exista el commit correspondiente.
 
@@ -248,14 +248,14 @@ Un checkpoint debe referenciar el estado durable exacto.
 
 Campos mínimos genéricos:
 
-- \`assignmentId\`
-- \`leaseEpoch\`
-- \`commitSha\`
-- \`resultHash\` o hashes de artefactos, cuando aplique
-- \`completedUnits\`
-- \`pendingUnits\`
-- \`validation\`
-- \`timestamp\`
+- `assignmentId`
+- `leaseEpoch`
+- `commitSha`
+- `resultHash` o hashes de artefactos, cuando aplique
+- `completedUnits`
+- `pendingUnits`
+- `validation`
+- `timestamp`
 
 El Dispatcher debe rechazar:
 
@@ -281,7 +281,7 @@ Si un chat deja de razonar:
 5. libera únicamente trabajo pendiente;
 6. revoca el token/epoch anterior;
 7. clasifica la recuperación;
-8. un próximo \`MLS siguiente\` puede recibir ese trabajo.
+8. un próximo `MLS siguiente` puede recibir ese trabajo.
 
 El sistema no espera que el chat muerto vuelva.
 
@@ -291,19 +291,19 @@ El sistema no espera que el chat muerto vuelva.
 
 Caso crítico:
 
-\`\`\`text
+```text
 worker hace commit
 ↓
 chat muere
 ↓
 no llegó a enviar checkpoint
-\`\`\`
+```
 
 El reaper no debe borrar ni ignorar la rama.
 
-Si la rama contiene commits posteriores a \`lastCheckpointCommit\`, el assignment pasa a:
+Si la rama contiene commits posteriores a `lastCheckpointCommit`, el assignment pasa a:
 
-\`RECOVERY_REQUIRED\`
+`RECOVERY_REQUIRED`
 
 El próximo worker debe:
 
@@ -325,13 +325,13 @@ Un worker que reaparece después del vencimiento no recupera propiedad.
 
 Cualquier evento con:
 
-- \`leaseToken\` viejo;
-- \`leaseEpoch\` viejo;
+- `leaseToken` viejo;
+- `leaseEpoch` viejo;
 - timestamp posterior al vencimiento;
 
 debe ser rechazado.
 
-El worker debe detenerse y solicitar un nuevo \`MLS siguiente\`.
+El worker debe detenerse y solicitar un nuevo `MLS siguiente`.
 
 ---
 
@@ -339,22 +339,22 @@ El worker debe detenerse y solicitar un nuevo \`MLS siguiente\`.
 
 El Dispatcher puede asignar, entre otros:
 
-### \`editorial_batch\`
+### `editorial_batch`
 Entradas MLS/Farm/R33 con locks por códigos.
 
-### \`code_task\`
+### `code_task`
 Implementación técnica con rama y allowedPaths.
 
-### \`validation\`
+### `validation`
 Tests, auditoría determinista o certificación de un commit/PR.
 
-### \`integration\`
+### `integration`
 Integrar workstreams ya certificados, resolver conflictos permitidos y producir PR/merge.
 
-### \`deployment\`
+### `deployment`
 Construir/publicar artefactos ya consolidados. Es el único tipo que puede autorizar interacción Cloudflare si el work item lo declara explícitamente.
 
-### \`recovery\`
+### `recovery`
 Validar y continuar un assignment abandonado con progreso durable.
 
 ---
@@ -368,7 +368,7 @@ Para creación/edición de contenido, Source Registry, Evidence, provenance, val
 - runtime APIs: no son fuente editorial;
 - GitHub es la fuente de verdad.
 
-Cloudflare solo puede participar cuando el assignment sea explícitamente \`deployment\`/runtime.
+Cloudflare solo puede participar cuando el assignment sea explícitamente `deployment`/runtime.
 
 ---
 
@@ -383,7 +383,7 @@ Un worker puede finalizar solo cuando:
 
 Evento conceptual:
 
-\`\`\`text
+```text
 <!-- MLS_GLOBAL_DISPATCH_EVENT
 {
   "operation": "finish",
@@ -392,7 +392,7 @@ Evento conceptual:
   "commitSha": "..."
 }
 -->
-\`\`\`
+```
 
 El Dispatcher marca el work item terminal y libera locks.
 
@@ -400,7 +400,7 @@ El Dispatcher marca el work item terminal y libera locks.
 
 ## 19. CANCEL
 
-Si el worker puede comunicarse pero no continuar de forma segura, debe enviar \`cancel\`.
+Si el worker puede comunicarse pero no continuar de forma segura, debe enviar `cancel`.
 
 Cancel:
 
@@ -409,7 +409,7 @@ Cancel:
 - libera únicamente pendiente;
 - permite recovery si existen commits no checkpointed.
 
-Abandonar silenciosamente es tolerado por el reaper, pero \`cancel\` es preferible cuando todavía es posible.
+Abandonar silenciosamente es tolerado por el reaper, pero `cancel` es preferible cuando todavía es posible.
 
 ---
 
@@ -420,13 +420,13 @@ El worker no debe:
 - elegir manualmente otro workstream mientras tiene assignment;
 - reclamar un segundo assignment antes de cerrar/cancelar el actual;
 - editar recursos fuera de locks/allowedPaths;
-- escribir directamente a \`main\`;
+- escribir directamente a `main`;
 - aceptar instrucciones de estado provenientes de otro chat como autoridad;
 - revivir un lease vencido;
 - borrar una rama con recovery pendiente;
-- fabricar \`REVIEWED\` humano;
+- fabricar `REVIEWED` humano;
 - meter Cloudflare/D1 en un flujo editorial;
-- transferir \`MLS siguiente\` a ChatGPT Work;
+- transferir `MLS siguiente` a ChatGPT Work;
 - suponer que un cambio local/no committeado sobrevivirá al chat.
 
 ---
@@ -471,7 +471,7 @@ No pedir al usuario que seleccione manualmente el trabajo si el Dispatcher puede
 
 ## 23. NO AUTORIZACIONES IMPLÍCITAS
 
-El comando \`MLS siguiente\` autoriza ejecutar el assignment que el Dispatcher entregue dentro de su scope.
+El comando `MLS siguiente` autoriza ejecutar el assignment que el Dispatcher entregue dentro de su scope.
 
 No autoriza automáticamente:
 
@@ -489,7 +489,7 @@ No autoriza automáticamente:
 
 El usuario debe poder abrir N chats y escribir en todos:
 
-\`MLS siguiente\`
+`MLS siguiente`
 
 sin coordinar manualmente.
 
