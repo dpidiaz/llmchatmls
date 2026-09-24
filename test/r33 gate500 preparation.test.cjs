@@ -9,20 +9,32 @@ const store=require('../MLS R32 EDITORIAL/evidence git.js');
 const GATE='docs/evidence y provenance/20 R33 Gate 500 Pool.json';
 const CONTROL='docs/evidence y provenance/21 R33 Active Pool Control.json';
 
-test('active pool control stays pinned to Benchmark 100 until explicit Gate 500 authorization',()=>{
+test('active pool control allows only prepared Benchmark-100 state or authorized Gate-500 state',()=>{
   const control=JSON.parse(fs.readFileSync(CONTROL,'utf8'));
-  assert.equal(core.resolvePoolPath('.'),'docs/evidence y provenance/17 GitHub Native Benchmark 100 Pool.json');
-  assert.equal(control.activePoolId,'MLS-R33-GITHUB-NATIVE-BENCHMARK-100');
+  const gate=core.loadPool('.',GATE);
   assert.equal(control.candidatePoolId,'MLS-R33-GITHUB-NATIVE-GATE-500');
-  assert.equal(control.gate500Authorized,false);
+  if(gate.active===true){
+    assert.equal(gate.status,'authorized');
+    assert.equal(gate.gate500Authorized,true);
+    assert.equal(control.activePoolId,'MLS-R33-GITHUB-NATIVE-GATE-500');
+    assert.equal(control.activePoolPath,GATE);
+    assert.equal(control.gate500Authorized,true);
+    assert.equal(control.activationState,'authorized');
+    assert.equal(core.resolvePoolPath('.'),GATE);
+  }else{
+    assert.equal(gate.status,'prepared');
+    assert.equal(gate.gate500Authorized,false);
+    assert.equal(control.activePoolId,'MLS-R33-GITHUB-NATIVE-BENCHMARK-100');
+    assert.equal(control.gate500Authorized,false);
+    assert.equal(control.activationState,'prepared_not_authorized');
+    assert.equal(core.resolvePoolPath('.'),'docs/evidence y provenance/17 GitHub Native Benchmark 100 Pool.json');
+  }
 });
 
-test('Gate 500 candidate is deterministic, fresh, GitHub-only and not executable yet',()=>{
+test('Gate 500 pool is deterministic, fresh, GitHub-only and lifecycle-consistent',()=>{
   const pool=core.loadPool('.',GATE);
   assert.equal(pool.poolId,'MLS-R33-GITHUB-NATIVE-GATE-500');
-  assert.equal(pool.status,'prepared');
-  assert.equal(pool.active,false);
-  assert.equal(pool.gate500Authorized,false);
+  assert.ok((pool.status==='prepared'&&pool.active===false&&pool.gate500Authorized===false)||(pool.status==='authorized'&&pool.active===true&&pool.gate500Authorized===true));
   assert.equal(pool.dispatcherOnly,true);
   assert.equal(pool.sourceOfTruth,'github');
   assert.equal(pool.cloudflareEditorialAllowed,false);
@@ -42,7 +54,7 @@ test('Gate 500 candidate is deterministic, fresh, GitHub-only and not executable
   assert.equal(used.size,320);
 });
 
-test('committed Evidence indexes are exactly derivable before Gate 500 starts',()=>{
+test('committed Evidence indexes remain exactly derivable across Gate 500 lifecycle',()=>{
   const x=store.buildIndexes('.');
   assert.deepEqual(JSON.parse(fs.readFileSync('MLS R32 EDITORIAL/evidence git/indexes/by-code.json','utf8')),x.byCode);
   assert.deepEqual(JSON.parse(fs.readFileSync('MLS R32 EDITORIAL/evidence git/indexes/by-language.json','utf8')),x.byLanguage);
