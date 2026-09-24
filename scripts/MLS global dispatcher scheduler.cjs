@@ -2,6 +2,7 @@
 
 const path=require('node:path');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
+const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
 
 const token=process.env.GITHUB_TOKEN||'';
 const repository=process.env.GITHUB_REPOSITORY||'';
@@ -63,6 +64,7 @@ function touchRequest(ledgerItem,requestId,patch){
 function setTerminal(ledgerItem,state,status='done'){
   ledgerItem.ledger.terminal[state.workId]={
     status,workVersion:state.workVersion,assignmentId:state.assignmentId,commitSha:state.finalCommitSha||state.lastCheckpointCommit||null,
+    provider:state.provider||'global',completedUnits:providerIntegration.completedUnitsForState(state),
     branch:state.branch,completedAt:core.iso()
   };
   delete ledgerItem.ledger.recoveries[state.workId];
@@ -87,6 +89,13 @@ async function finalizeAssignment(issue,state,ledgerItem,nowMs){
   const reason=core.releaseReasonForAssignment(state,expired);
   let finalStatus=state.cancelRequested?'cancelled':'expired';
   if(recovery){
+    recovery.workItem={
+      workId:state.workId,version:state.workVersion,title:state.title,workType:state.workType,status:'recovery_required',priority:0,
+      createdAt:state.claimedAt,dependsOn:state.dependencies||[],resourceLocks:state.resourceLocks||[],allowedPaths:state.allowedPaths||[],
+      validation:state.validationRequired||[],provider:state.provider||'global',instructions:state.instructions||'',completion:state.completion||{requiresCommit:true,requiresValidation:true},
+      branchPolicy:{mode:'assignment',prefix:String(state.branch||('worker/'+state.workId)).replace(/\/\d{6}$/,'')}
+    };
+    recovery.completedUnits=providerIntegration.completedUnitsForState(state);
     ledgerItem.ledger.recoveries[state.workId]=recovery;
     ledgerItem.dirty=true;
     finalStatus='recovery_required';
@@ -121,20 +130,28 @@ function duplicateAssignment(command,activeStates,ledger){
   return ledger.requests?.[command.requestId]||null;
 }
 
-async function drainPendingCommands(registry,ledgerItem){
-  const now=Date.now(),s=await sweep(registry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
-  const issues=(await allIssues('open')).filter(x=>dispatcherIssue(x)&&!hasAssignmentState(x)&&hasCommandMarker(x)).sort((a,b)=>Number(a.number)-Number(b.number));
+async function drainPendingCommands(baseRegistry,ledgerItem){
+  const now=Date.now(),s=await sweep(baseRegistry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
+  const providerIssues=await allIssues('open');
+  function runtimeRegistry(){
+    const dynamic=providerIntegration.materializeProviderItems({issues:providerIssues,root,now,globalLedger:ledgerItem.ledger,globalAssignments:activeStates});
+    if(dynamic.diagnostics.length)console.warn(JSON.stringify({providerDiagnostics:dynamic.diagnostics}));
+    return providerIntegration.extendRegistry(baseRegistry,{items:dynamic.items,globalLedger:ledgerItem.ledger});
+  }
+  const issues=providerIssues.filter(x=>dispatcherIssue(x)&&!hasAssignmentState(x)&&hasCommandMarker(x)).sort((a,b)=>Number(a.number)-Number(b.number));
   const drained=[];
   let mainSha=null;
   for(const issue of issues){
     let command;
     try{command=core.parseCommand(issue.body||'');}catch(error){await reject(issue,error);drained.push({issueNumber:issue.number,status:'rejected'});continue;}
     if(command.operation==='status_global'){
+      const registry=runtimeRegistry();
       const progress=core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now);
       await closeCommand(issue,'[MLS Dispatcher][STATUS] global',{ok:true,progress,reaped:s.closed});
       drained.push({issueNumber:issue.number,status:'status'});continue;
     }
     if(command.operation==='reap'){
+      const registry=runtimeRegistry();
       const progress=core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now);
       await closeCommand(issue,'[MLS Dispatcher][REAP] complete',{ok:true,reaped:s.closed,progress});
       drained.push({issueNumber:issue.number,status:'reap'});continue;
@@ -149,6 +166,7 @@ async function drainPendingCommands(registry,ledgerItem){
       await closeCommand(issue,'[MLS Dispatcher][STALE] '+command.requestId,{ok:false,error:'STALE_CLAIM',requestId:command.requestId,claimTtlMs:core.CLAIM_TTL_MS,createdAt:issue.created_at},'not_planned');
       drained.push({issueNumber:issue.number,status:'stale'});continue;
     }
+    const registry=runtimeRegistry();
     const selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
     if(!selected){
       touchRequest(ledgerItem,command.requestId,{status:'no_work',issueNumber:issue.number});
@@ -179,6 +197,7 @@ async function drainPendingCommands(registry,ledgerItem){
       issueNumber:issue.number,item,requestId:command.requestId,workerId:command.workerId,workerLogin:issue.user?.login||null,
       baseCommit,branch,recovery,now:core.iso(now)
     });
+    if(recovery?.completedUnits?.length)state.recoveredCompletedUnits=[...new Set(recovery.completedUnits.map(String))];
     await updateIssue(issue.number,{title:'[MLS Dispatcher][LEASED] '+state.assignmentId+' '+item.workId,body:core.renderAssignmentBody(state)});
     ledgerItem.ledger.epochs[item.workId]=Number(state.leaseEpoch);
     delete ledgerItem.ledger.recoveries[item.workId];
@@ -192,7 +211,7 @@ async function drainPendingCommands(registry,ledgerItem){
 }
 
 async function main(){
-  const registry=core.loadRegistry(root),ledgerItem=await ensureLedger(registry),result=await drainPendingCommands(registry,ledgerItem);
+  const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
   if(result.drained.length||result.reaped.length)console.log(JSON.stringify({ok:true,...result}));
 }
 main().catch(error=>{console.error(error);process.exitCode=1});
