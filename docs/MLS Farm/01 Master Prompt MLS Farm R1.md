@@ -27,8 +27,8 @@ Ese chat debe encargarse del lote completo sin intervención humana adicional.
 1. GitHub Issues es el plano de control.
 2. Cloudflare, D1 y Workers no participan en Farm.
 3. Un worker posee temporalmente un lease, nunca los datos canónicos.
-4. Cada lease vence tras 60 minutos sin progreso aceptado.
-5. Heartbeat o checkpoint válido renueva otros 60 minutos.
+4. Tras ACK, cada lease vence tras 10 minutos sin progreso aceptado.
+5. Heartbeat o checkpoint válido renueva otros 10 minutos.
 6. Trabajo terminal recibido nunca vuelve a la cola.
 7. Solo trabajo pendiente de un lease vencido se libera.
 8. Un worker zombi no puede revivir un lease vencido.
@@ -141,12 +141,12 @@ El worker debe abandonar esa entrada.
 
 ## 5. HEARTBEAT
 
-No deben pasar más de 60 minutos sin actividad aceptada.
+No deben pasar más de 10 minutos sin actividad aceptada.
 
 Recomendación operativa:
 
 - checkpoint cada 1–5 entradas;
-- heartbeat si pasan ~20 minutos sin checkpoint.
+- heartbeat si pasan ~3–5 minutos sin checkpoint.
 
 Formato de comentario:
 
@@ -250,7 +250,7 @@ Si faltan resultados, finish no cierra el lote.
 
 ## 9. REAPER
 
-GitHub Actions ejecuta el reaper cada 15 minutos.
+GitHub Actions ejecuta el reaper cada 5 minutos.
 
 Además, cada nuevo claim hace lazy reaping antes de reservar.
 
@@ -337,3 +337,11 @@ El sistema está diseñado para que el usuario pueda abrir cientos de chats y pe
 sin coordinar manualmente los lotes.
 
 GitHub resuelve exclusión, leases, expiración y acumulación.
+
+---
+
+## 15. RELACIÓN CON GLOBAL DISPATCHER
+
+Este Master Prompt sigue siendo válido para el comando directo `MLS Farm siguientes N`.
+
+La coordinación automática de distintos workstreams se define en `docs/MLS Global Dispatcher/`. Cuando el Global Dispatcher esté implementado y certificado, el usuario podrá usar `MLS siguiente` y GitHub decidirá automáticamente qué trabajo libre asignar sin colisiones.
