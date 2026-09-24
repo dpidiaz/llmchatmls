@@ -49,6 +49,7 @@ test('R33 provider projects Global terminal + active ownership and keeps Gate 50
   assert.equal(candidate.gate500Authorized,false);
   const work=integration.r33CandidateToWork(candidate,NOW);
   assert.equal(globalCore.normalizeWorkItem(work).provider,'r33-farm');
+  assert.deepEqual(work.validation,['R33 Editorial Batch Tests']);
 });
 
 test('dynamic recoveries are rehydrated while authorized Gate 500 activation stays ready',()=>{
@@ -71,9 +72,15 @@ test('R33 index integration waits for a full wave and materializes exact source 
   }};
   assert.equal(integration.r33IndexIntegrationWork({pool,globalLedger:partialLedger,waveSize:2,verifiedCodes:[]}),null);
 
-  const fullLedger={terminal:{
+  const almostFullLedger={terminal:{
     a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/r33/1',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:00:00.000Z'},
     b:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/r33/2',commitSha:'2'.repeat(40),completedAt:'2026-09-24T05:01:00.000Z'}
+  }};
+  assert.equal(integration.r33IndexIntegrationWork({pool,globalLedger:almostFullLedger,waveSize:2,verifiedCodes:[]}),null,'index integration must wait until the editorial pool is terminal');
+
+  const fullLedger={terminal:{
+    ...almostFullLedger.terminal,
+    c:{provider:'r33-farm',completedUnits:['MLS-V01-0003'],branch:'worker/r33/3',commitSha:'3'.repeat(40),completedAt:'2026-09-24T05:02:00.000Z'}
   }};
   const work=integration.r33IndexIntegrationWork({pool,globalLedger:fullLedger,waveSize:2,verifiedCodes:[]});
   assert.equal(work.provider,'r33-index-integration');

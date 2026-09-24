@@ -1,0 +1,42 @@
+name: R33 Editorial Batch Tests
+
+on:
+  push:
+    branches:
+      - 'worker/r33-farm/**'
+    paths:
+      - 'MLS R32 EDITORIAL/evidence git/entries/**'
+      - 'MLS R32 EDITORIAL/evidence git.js'
+      - 'MLS R32 EDITORIAL/evidence foundation.js'
+      - 'MLS R32 EDITORIAL/evidence policies.js'
+      - 'MLS R32 EDITORIAL/evidence apa.js'
+      - 'test/r33 evidence editorial batch.test.cjs'
+      - 'test/r33 evidence farm.test.cjs'
+      - 'test/r33 gate500 preparation.test.cjs'
+      - '.github/workflows/R33 Editorial Batch Tests.yml'
+  pull_request:
+    paths:
+      - 'MLS R32 EDITORIAL/evidence git/entries/**'
+      - 'MLS R32 EDITORIAL/evidence git.js'
+      - 'MLS R32 EDITORIAL/evidence foundation.js'
+      - 'MLS R32 EDITORIAL/evidence policies.js'
+      - 'MLS R32 EDITORIAL/evidence apa.js'
+      - 'MLS R32 EDITORIAL/global dispatcher/providers/integration.js'
+      - 'test/r33 evidence editorial batch.test.cjs'
+      - 'test/mls global dispatcher providers integration.test.cjs'
+      - '.github/workflows/R33 Editorial Batch Tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editorial-batch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate R33 editorial batch without index integration
+        run: node --test 'test/r33 evidence editorial batch.test.cjs' 'test/r33 evidence farm.test.cjs' 'test/r33 gate500 preparation.test.cjs'
