@@ -7,7 +7,7 @@ Worker runtime: ChatGPT
 Control plane: GitHub  
 Comando universal: `MLS siguiente`  
 Modo obligatorio: **CHAT ONLY — NO ChatGPT Work**  
-Estado: especificación; se vuelve operativa solo después de implementar y certificar el Dispatcher.
+Estado: implementación R1 certificada en CI; operativa cuando estos workflows estén presentes en `main`.
 
 ---
 
