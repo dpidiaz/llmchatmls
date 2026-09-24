@@ -112,7 +112,7 @@ function r33CandidateToWork(candidate,now=Date.now()){
     workType:'editorial_batch',status:'ready',priority:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
     providerVersion:candidate.providerVersion,ownershipMode:'global-single-lease',units:codes,checkpointSizeMax:candidate.checkpointSizeMax,
     resourceLocks:candidate.resourceLocks,allowedPaths:candidate.allowedPaths,dependsOn:[],
-    validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
+    validation:['R33 Editorial Batch Tests'],
     instructions:'Procesa exclusivamente estas entradas R33. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-farm'},completion:{requiresCommit:true,requiresValidation:true},
     providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
@@ -142,8 +142,7 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=50,verifie
   const sources=r33TerminalSourceMap(globalLedger,pool),integrated=r33IntegratedCodes(root,verifiedCodes);
   const pending=pool.entries.filter(x=>sources.has(x.code)&&!integrated.has(x.code));
   const remainingEditorial=pool.entries.filter(x=>!sources.has(x.code)).length;
-  if(!pending.length)return null;
-  if(pending.length<waveSize&&remainingEditorial>0)return null;
+  if(!pending.length||remainingEditorial>0)return null;
   const units=pending.slice(0,waveSize),codes=units.map(x=>x.code),first=codes[0],last=codes.at(-1);
   const sourceRefs=units.map(x=>({...sources.get(x.code),evidenceArtifactPath:r33Provider.evidenceArtifactPath(x)}));
   const indexRoot='MLS R32 EDITORIAL/evidence git/indexes';
