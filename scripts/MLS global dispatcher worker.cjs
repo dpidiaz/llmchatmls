@@ -26,9 +26,19 @@ async function branchHead(branch){
   const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+encodeRef(branch));
   return String(ref?.object?.sha||'').toLowerCase();
 }
-async function verifyIntegrationCheckpoint(state,commitSha){
-  const spec=state.integration;
-  if(!spec)throw core.dispatchError('INTEGRATION_SPEC_REQUIRED','Assignment integration sin spec.',409);
+async function verifyIntegrationCheckpoint(state,commitSha,event={}){
+  const policy=state.integration;
+  if(!policy)throw core.dispatchError('INTEGRATION_SPEC_REQUIRED','Assignment integration sin spec/policy.',409);
+  let spec=policy;
+  if(String(policy.mode||'')==='assignment-pr'){
+    const prNumber=Number(event.integrationPrNumber);
+    const expectedHeadSha=String(event.integrationHeadSha||'').toLowerCase();
+    if(!Number.isInteger(prNumber)||prNumber<1)throw core.dispatchError('INTEGRATION_PR_REQUIRED','checkpoint assignment-pr requiere integrationPrNumber.',409);
+    if(!/^[a-f0-9]{40}$/.test(expectedHeadSha))throw core.dispatchError('INTEGRATION_HEAD_REQUIRED','checkpoint assignment-pr requiere integrationHeadSha.',409);
+    const assignedHead=await branchHead(state.branch);
+    if(assignedHead!==expectedHeadSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','integrationHeadSha no coincide con HEAD de la rama asignada.',409);
+    spec=integration.assignmentPrSpec(policy,{prNumber,expectedHeadSha});
+  }
   const pr=await gh('GET','/repos/'+owner+'/'+repo+'/pulls/'+Number(spec.prNumber));
   const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
   const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
@@ -53,7 +63,7 @@ async function verifyCommitScope(state,event){
   if(!['checkpoint','finish'].includes(event.operation))return;
   const commitSha=String(event.commitSha||state.lastCheckpointCommit||'').toLowerCase();
   if(!/^[a-f0-9]{40}$/.test(commitSha))throw core.dispatchError('COMMIT_SHA_INVALID','Evento requiere commit SHA válido.',409);
-  if(state.workType==='integration'){await verifyIntegrationCheckpoint(state,commitSha);return;}
+  if(state.workType==='integration'){await verifyIntegrationCheckpoint(state,commitSha,event);return;}
   const head=await branchHead(state.branch);
   if(head!==commitSha)throw core.dispatchError('BRANCH_HEAD_MISMATCH','El checkpoint/final debe apuntar al HEAD exacto de la rama asignada.',409);
   if(event.operation==='finish')return;
