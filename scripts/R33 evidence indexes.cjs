@@ -12,7 +12,12 @@ const files={
   bySource:'MLS R32 EDITORIAL/evidence git/indexes/by-source.json',
   verified:'MLS R32 EDITORIAL/evidence git/indexes/verified.json'
 };
-function stableText(value){return JSON.stringify(value,null,2)+'\n';}
+function stable(value){
+  if(Array.isArray(value))return value.map(stable);
+  if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(k=>[k,stable(value[k])]));
+  return value;
+}
+function sameJson(a,b){return JSON.stringify(stable(a))===JSON.stringify(stable(b));}
 function readJson(rel){return JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));}
 
 (async()=>{
@@ -20,7 +25,7 @@ function readJson(rel){return JSON.parse(fs.readFileSync(path.join(root,rel),'ut
   const drift=[];
   for(const [key,rel] of Object.entries(files)){
     const actual=readJson(rel);
-    if(JSON.stringify(actual)!==JSON.stringify(canonical[key]))drift.push(rel);
+    if(!sameJson(actual,canonical[key]))drift.push(rel);
   }
   if(mode==='write'){
     store.writeIndexes(root);
