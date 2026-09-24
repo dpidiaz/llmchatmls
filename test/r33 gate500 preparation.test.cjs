@@ -50,11 +50,12 @@ test('committed Evidence indexes are exactly derivable before Gate 500 starts',(
   assert.deepEqual(JSON.parse(fs.readFileSync('MLS R32 EDITORIAL/evidence git/indexes/verified.json','utf8')),x.verified);
 });
 
-test('Gate 500 registry item is activation-only and remains blocked',()=>{
+test('Gate 500 registry item is activation-only and ready after explicit authorization',()=>{
   const registry=JSON.parse(fs.readFileSync('MLS R32 EDITORIAL/global dispatcher/work registry.json','utf8'));
   const gate=registry.items.find(x=>x.workId==='gate500');
   assert.equal(gate.version,2);
-  assert.equal(gate.status,'blocked');
+  assert.equal(gate.status,'ready');
+  assert.equal(gate.authorization?.authorized,true);
   assert.equal(gate.workType,'validation');
   assert.equal(gate.provider,'global');
   assert.ok(gate.allowedPaths.includes(GATE));
