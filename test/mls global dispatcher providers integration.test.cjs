@@ -74,11 +74,15 @@ test('completed units survive multiple checkpoints and recovery generations',()=
   assert.deepEqual(integration.completedUnitsForState(state),['MLS-V01-0001','MLS-V01-0002','MLS-V01-0003','MLS-V01-0004']);
 });
 
-test('integration fails provider-closed instead of fabricating work when specialized ledgers are absent',()=>{
+test('R33 provider bootstraps from a synthetic empty ledger while MLS Farm still fails closed without ledgers',()=>{
   const result=integration.materializeProviderItems({issues:[],root:'.',now:NOW,globalLedger:{terminal:{},recoveries:{}},globalAssignments:[]});
-  assert.deepEqual(result.items,[]);
+  assert.ok(result.items.some(x=>x.provider==='r33-farm'));
   assert.ok(result.diagnostics.some(x=>x.provider==='mls-farm'));
-  assert.ok(result.diagnostics.some(x=>x.provider==='r33-farm'));
+  assert.equal(result.diagnostics.some(x=>x.provider==='r33-farm'),false);
+  const snapshot=integration.collectR33Snapshot([],'.');
+  assert.equal(snapshot.ledgerSynthetic,true);
+  assert.equal(snapshot.ledger.poolId,snapshot.pool.poolId);
+  assert.deepEqual(snapshot.ledger.verified,[]);
 });
 
 test('scheduler integrates providers through snapshots only and never issues nested Farm commands',()=>{
