@@ -73,3 +73,4 @@ test('Gate 500 registry item is activation-only and ready after explicit authori
   assert.ok(gate.allowedPaths.includes(GATE));
   assert.ok(gate.allowedPaths.includes(CONTROL));
 });
+// Validation-only trigger for MLS-GLOBAL-000821; branch is never merged.
