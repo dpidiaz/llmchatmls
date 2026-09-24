@@ -29,16 +29,42 @@ async function branchHead(branch){
 async function verifyIntegrationCheckpoint(state,commitSha,event={}){
   const policy=state.integration;
   if(!policy)throw core.dispatchError('INTEGRATION_SPEC_REQUIRED','Assignment integration sin spec/policy.',409);
-  let spec=policy;
   if(String(policy.mode||'')==='assignment-pr'){
+    const stage=String(event.integrationStage||'').toLowerCase();
+    if(stage==='premerge'){
+      const head=await branchHead(state.branch);
+      if(head!==commitSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','Premerge commit no coincide con HEAD de la rama asignada.',409);
+      const base=String(state.baseCommit||'').toLowerCase();
+      if(!/^[a-f0-9]{40}$/.test(base))throw core.dispatchError('BASE_COMMIT_INVALID','Assignment integration sin base válido.',409);
+      const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+base+'...'+commitSha);
+      if(!['ahead','identical'].includes(String(comparison?.status||'')))throw core.dispatchError('CHECKPOINT_NOT_DESCENDANT','Head integration no desciende del base asignado.',409);
+      const files=Array.isArray(comparison?.files)?comparison.files:[];
+      if(!files.length)throw core.dispatchError('CHECKPOINT_NO_CHANGES','Integration premerge no contiene cambios.',409);
+      const disallowed=files.map(x=>String(x.filename||'')).filter(file=>!core.pathAllowed(file,state.allowedPaths||[]));
+      if(disallowed.length)throw core.dispatchError('CHECKPOINT_SCOPE_VIOLATION','Cambios integration fuera de allowedPaths: '+disallowed.slice(0,10).join(', '),409);
+      return;
+    }
+    if(stage!=='postmerge')throw core.dispatchError('INTEGRATION_STAGE_REQUIRED','assignment-pr requiere integrationStage premerge/postmerge.',409);
     const prNumber=Number(event.integrationPrNumber);
     const expectedHeadSha=String(event.integrationHeadSha||'').toLowerCase();
     if(!Number.isInteger(prNumber)||prNumber<1)throw core.dispatchError('INTEGRATION_PR_REQUIRED','checkpoint assignment-pr requiere integrationPrNumber.',409);
     if(!/^[a-f0-9]{40}$/.test(expectedHeadSha))throw core.dispatchError('INTEGRATION_HEAD_REQUIRED','checkpoint assignment-pr requiere integrationHeadSha.',409);
     const assignedHead=await branchHead(state.branch);
     if(assignedHead!==expectedHeadSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','integrationHeadSha no coincide con HEAD de la rama asignada.',409);
-    spec=integration.assignmentPrSpec(policy,{prNumber,expectedHeadSha});
+    if(!(state.checkpoints||[]).some(cp=>String(cp.commitSha||'').toLowerCase()===expectedHeadSha))throw core.dispatchError('INTEGRATION_PREMERGE_CHECKPOINT_REQUIRED','Falta checkpoint premerge del head exacto.',409);
+    const spec=integration.assignmentPrSpec(policy,{prNumber,expectedHeadSha});
+    const pr=await gh('GET','/repos/'+owner+'/'+repo+'/pulls/'+prNumber);
+    const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
+    const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
+    let mainContainsCommit=mainSha===commitSha;
+    if(!mainContainsCommit){
+      const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+commitSha+'...'+mainSha);
+      mainContainsCommit=['ahead','identical'].includes(String(comparison?.status||''));
+    }
+    integration.validateMergedCheckpoint(spec,{pr:{number:pr?.number,base:pr?.base?.ref,headSha:pr?.head?.sha,merged:pr?.merged===true,mergeCommitSha:pr?.merge_commit_sha},commitSha,mainContainsCommit});
+    return;
   }
+  const spec=policy;
   const pr=await gh('GET','/repos/'+owner+'/'+repo+'/pulls/'+Number(spec.prNumber));
   const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
   const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
@@ -47,17 +73,7 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
     const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+commitSha+'...'+mainSha);
     mainContainsCommit=['ahead','identical'].includes(String(comparison?.status||''));
   }
-  integration.validateMergedCheckpoint(spec,{
-    pr:{
-      number:pr?.number,
-      base:pr?.base?.ref,
-      headSha:pr?.head?.sha,
-      merged:pr?.merged===true,
-      mergeCommitSha:pr?.merge_commit_sha
-    },
-    commitSha,
-    mainContainsCommit
-  });
+  integration.validateMergedCheckpoint(spec,{pr:{number:pr?.number,base:pr?.base?.ref,headSha:pr?.head?.sha,merged:pr?.merged===true,mergeCommitSha:pr?.merge_commit_sha},commitSha,mainContainsCommit});
 }
 async function verifyCommitScope(state,event){
   if(!['checkpoint','finish'].includes(event.operation))return;
