@@ -62,10 +62,9 @@ function touchRequest(ledgerItem,requestId,patch){
   ledgerItem.dirty=true;
 }
 function setTerminal(ledgerItem,state,status='done'){
-  const lastCheckpoint=(state.checkpoints||[]).at(-1)||null;
   ledgerItem.ledger.terminal[state.workId]={
     status,workVersion:state.workVersion,assignmentId:state.assignmentId,commitSha:state.finalCommitSha||state.lastCheckpointCommit||null,
-    provider:state.provider||'global',completedUnits:lastCheckpoint?.completedUnits||[],
+    provider:state.provider||'global',completedUnits:providerIntegration.completedUnitsForState(state),
     branch:state.branch,completedAt:core.iso()
   };
   delete ledgerItem.ledger.recoveries[state.workId];
@@ -96,6 +95,7 @@ async function finalizeAssignment(issue,state,ledgerItem,nowMs){
       validation:state.validationRequired||[],provider:state.provider||'global',instructions:state.instructions||'',completion:state.completion||{requiresCommit:true,requiresValidation:true},
       branchPolicy:{mode:'assignment',prefix:String(state.branch||('worker/'+state.workId)).replace(/\/\d{6}$/,'')}
     };
+    recovery.completedUnits=providerIntegration.completedUnitsForState(state);
     ledgerItem.ledger.recoveries[state.workId]=recovery;
     ledgerItem.dirty=true;
     finalStatus='recovery_required';
@@ -197,6 +197,7 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       issueNumber:issue.number,item,requestId:command.requestId,workerId:command.workerId,workerLogin:issue.user?.login||null,
       baseCommit,branch,recovery,now:core.iso(now)
     });
+    if(recovery?.completedUnits?.length)state.recoveredCompletedUnits=[...new Set(recovery.completedUnits.map(String))];
     await updateIssue(issue.number,{title:'[MLS Dispatcher][LEASED] '+state.assignmentId+' '+item.workId,body:core.renderAssignmentBody(state)});
     ledgerItem.ledger.epochs[item.workId]=Number(state.leaseEpoch);
     delete ledgerItem.ledger.recoveries[item.workId];
