@@ -1,12 +1,14 @@
 'use strict';
 
+const fs=require('node:fs');
+const path=require('node:path');
 const globalCore=require('../core.js');
 const mlsCore=require('../../farm core.js');
 const r33Core=require('../../evidence farm core.js');
 const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
 
-const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm']);
+const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-integration']);
 
 function integrationError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -116,6 +118,51 @@ function r33CandidateToWork(candidate,now=Date.now()){
     providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
   };
 }
+function r33TerminalSourceMap(globalLedger,pool){
+  const allowed=new Set((pool?.entries||[]).map(x=>String(x.code||'').toUpperCase())),out=new Map();
+  for(const entry of Object.values(globalLedger?.terminal||{})){
+    if(String(entry?.provider||'')!=='r33-farm')continue;
+    for(const raw of Array.isArray(entry?.completedUnits)?entry.completedUnits:[]){
+      const code=String(raw||'').toUpperCase();
+      if(!allowed.has(code))continue;
+      out.set(code,{code,branch:String(entry.branch||''),commitSha:String(entry.commitSha||''),completedAt:String(entry.completedAt||'')});
+    }
+  }
+  return out;
+}
+function r33IntegratedCodes(root='.',verifiedCodes=null){
+  if(Array.isArray(verifiedCodes))return new Set(verifiedCodes.map(x=>String(x).toUpperCase()));
+  const p=path.join(root,'MLS R32 EDITORIAL','evidence git','indexes','verified.json');
+  if(!fs.existsSync(p))return new Set();
+  const values=JSON.parse(fs.readFileSync(p,'utf8'));
+  return new Set((Array.isArray(values)?values:[]).map(x=>String(x).toUpperCase()));
+}
+function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=50,verifiedCodes=null}={}){
+  if(!pool||!Array.isArray(pool.entries))return null;
+  const sources=r33TerminalSourceMap(globalLedger,pool),integrated=r33IntegratedCodes(root,verifiedCodes);
+  const pending=pool.entries.filter(x=>sources.has(x.code)&&!integrated.has(x.code));
+  const remainingEditorial=pool.entries.filter(x=>!sources.has(x.code)).length;
+  if(!pending.length)return null;
+  if(pending.length<waveSize&&remainingEditorial>0)return null;
+  const units=pending.slice(0,waveSize),codes=units.map(x=>x.code),first=codes[0],last=codes.at(-1);
+  const sourceRefs=units.map(x=>({...sources.get(x.code),evidenceArtifactPath:r33Provider.evidenceArtifactPath(x)}));
+  const indexRoot='MLS R32 EDITORIAL/evidence git/indexes';
+  return {
+    workId:'r33-index-integration:'+pool.poolId+':'+first+':'+last+':'+codes.length,
+    version:1,
+    title:'R33 index integration '+first+'..'+last,
+    workType:'integration',status:'ready',priority:10,createdAt:new Date().toISOString(),provider:'r33-index-integration',
+    units:codes,sourceRefs,dependsOn:[],
+    resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...codes.map(code=>'entry:'+code)],
+    allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
+    validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
+    instructions:'Integra exactamente los Evidence blobs de sourceRefs en una rama desde main, ejecuta npm run r33:indexes:write, valida npm run test:r33-github-native, abre PR a main, exige checks verdes, mergea con expected_head_sha del head exacto y verifica main antes de checkpoint/finish. No modifiques Sources ni contenido canónico.',
+    branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
+    completion:{requiresCommit:true,requiresValidation:true},
+    integration:{mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests'],sourceRefs}
+  };
+}
+
 function recoveryItems(globalLedger){
   const items=[];
   for(const recovery of Object.values(globalLedger?.recoveries||{})){
@@ -134,9 +181,14 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   }catch(error){diagnostics.push({provider:'mls-farm',status:'blocked',error:error.code||'MLS_FARM_PROVIDER_ERROR',message:error.message});}
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
-    const candidate=r33Provider.materializeCandidate(snapshot,{now});
-    const item=r33CandidateToWork(candidate,now);
-    if(item)items.push(globalCore.normalizeWorkItem(item));
+    const indexItem=r33IndexIntegrationWork({pool:snapshot.pool,globalLedger,root});
+    if(indexItem)items.push(globalCore.normalizeWorkItem(indexItem));
+    const integrationActive=activeProviderAssignments(globalAssignments,'r33-index-integration').length>0;
+    if(!integrationActive){
+      const candidate=r33Provider.materializeCandidate(snapshot,{now});
+      const item=r33CandidateToWork(candidate,now);
+      if(item)items.push(globalCore.normalizeWorkItem(item));
+    }
   }catch(error){diagnostics.push({provider:'r33-farm',status:'blocked',error:error.code||'R33_PROVIDER_ERROR',message:error.message});}
   return {items,diagnostics};
 }
@@ -155,6 +207,6 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 
 module.exports={
   DYNAMIC_PROVIDERS,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
-  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,
+  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33IntegratedCodes,r33IndexIntegrationWork,
   recoveryItems,materializeProviderItems,extendRegistry
 };
