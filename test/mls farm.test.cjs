@@ -20,7 +20,7 @@ test('Farm claim parser defaults to 25 and caps at 100',()=>{
   assert.throws(()=>core.parseCommand(JSON.stringify({operation:'claim',requested:101,requestId:'request-12345678',workerId:'worker-12345678'})),/1 y 100/);
 });
 
-test('Farm lease requires acknowledgement before the rolling 5-minute lease begins',()=>{
+test('Farm lease requires acknowledgement before the rolling 10-minute lease begins',()=>{
   const state=core.makeBatchState({issueNumber:55,requestId:'request-12345678',workerId:'worker-12345678',entries:[{code:'MLS-V10-0001',language:'espanol-guatemala',n:1,path:'x'}],now:'2026-09-22T06:00:00.000Z',token:'abc'});
   assert.equal(state.acknowledgedAt,null);
   assert.equal(state.ackDeadlineAt,'2026-09-22T06:05:00.000Z');
@@ -28,7 +28,7 @@ test('Farm lease requires acknowledgement before the rolling 5-minute lease begi
   const next=core.applyWorkerEvent(state,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-22T06:02:00.000Z',commentId:1});
   assert.equal(next.acknowledgedAt,'2026-09-22T06:02:00.000Z');
   assert.equal(next.lastHeartbeatAt,'2026-09-22T06:02:00.000Z');
-  assert.equal(next.expiresAt,'2026-09-22T06:07:00.000Z');
+  assert.equal(next.expiresAt,'2026-09-22T06:12:00.000Z');
 });
 
 test('Farm releases an unacknowledged lease after five minutes',()=>{

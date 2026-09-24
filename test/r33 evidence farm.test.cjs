@@ -39,10 +39,10 @@ test('claim defaults to 25 and caps at 50',()=>{
   assert.equal(core.parseCommand(JSON.stringify({operation:'claim',requested:50,requestId:'request-12345678',workerId:'worker-12345678'})).requested,50);
   assert.throws(()=>core.parseCommand(JSON.stringify({operation:'claim',requested:51,requestId:'request-12345678',workerId:'worker-12345678'})),/1 y 50/);
 });
-test('lease ACK switches to rolling five-minute TTL',()=>{
+test('lease ACK switches to rolling ten-minute TTL',()=>{
   const pool=core.loadPool('.'),state=core.makeBatchState({issueNumber:900,requestId:'request-12345678',workerId:'worker-12345678',pool,entries:[pool.entries[0]],now:'2026-09-23T10:00:00.000Z',token:'abc'});
   const next=core.applyWorkerEvent(state,{operation:'heartbeat',batchId:state.batchId,leaseToken:'abc'},{createdAt:'2026-09-23T10:02:00.000Z',commentId:1});
-  assert.equal(next.expiresAt,'2026-09-23T10:07:00.000Z');
+  assert.equal(next.expiresAt,'2026-09-23T10:12:00.000Z');
 });
 test('active leases never overlap',()=>{
   const pool=core.loadPool('.'),ledger=core.initialLedger(pool),terminal=core.terminalCodesFromLedger(ledger,pool),first=core.selectNextEntries(pool,terminal,new Set(),25);
