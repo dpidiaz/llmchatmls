@@ -63,6 +63,17 @@ test('dynamic recoveries are rehydrated while static Gate 500 stays blocked',()=
   assert.equal(base.items.find(x=>x.workId==='gate500').status,'blocked','base registry must not be mutated');
 });
 
+test('completed units survive multiple checkpoints and recovery generations',()=>{
+  const state={
+    recoveredCompletedUnits:['MLS-V01-0001'],
+    checkpoints:[
+      {completedUnits:['MLS-V01-0002','MLS-V01-0003']},
+      {completedUnits:['MLS-V01-0003','MLS-V01-0004']}
+    ]
+  };
+  assert.deepEqual(integration.completedUnitsForState(state),['MLS-V01-0001','MLS-V01-0002','MLS-V01-0003','MLS-V01-0004']);
+});
+
 test('integration fails provider-closed instead of fabricating work when specialized ledgers are absent',()=>{
   const result=integration.materializeProviderItems({issues:[],root:'.',now:NOW,globalLedger:{terminal:{},recoveries:{}},globalAssignments:[]});
   assert.deepEqual(result.items,[]);
