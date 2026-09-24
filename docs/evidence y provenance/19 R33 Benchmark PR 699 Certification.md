@@ -168,3 +168,45 @@ El PR #699 cumple el alcance de esta certificación:
 **NO MERGE en este assignment.**
 
 La integración del PR requiere un work item de integración separado y no está autorizada por esta certificación.
+
+
+## Addendum de recovery — MLS-GLOBAL-000730
+
+Se reanudó esta certificación desde el checkpoint `2a08e8fc4c0e2a61168f301456c999576ad002ac` para completar el segundo requisito de validación declarado por el Global Dispatcher.
+
+### R33 Evidence Farm Tests sobre el head exacto
+
+Head certificado: `7b261c8a77239738172f2141db4fb7bace95a9e0`.
+
+El PR #699 no disparó automáticamente `R33 Evidence Farm Tests` porque sus cambios no afectan los paths configurados como trigger de ese workflow. Para evitar atribuir un check inexistente, se ejecutaron directamente las 11 invariantes del suite usando los blobs exactos de ese head.
+
+Resultado:
+
+- Suite: `R33 Evidence Farm Tests`
+- Tests: **11**
+- Pass: **11**
+- Fail: **0**
+- Test blob: `b9ecb61e8ad687d3124a8bc32db5d73a19c390e4`
+- Core blob: `b7466d4504de53d9c65060c1073db2342e20aba3`
+
+Se confirmaron, entre otras, estas invariantes:
+
+- Evidence Farm R2 permanece GitHub-native.
+- Gate 500 permanece bloqueado/no autorizado.
+- El benchmark sigue fresco respecto de Pilot 20, Gate 100 y Correction Repeat.
+- Los leases activos no solapan entradas.
+- VERIFIED exige el contrato exacto del Evidence artifact Git.
+- Los retries conflictivos fallan cerrado.
+- Farm no fabrica REVIEWED humano.
+- Cancel preserva checkpoints aceptados.
+- El control plane editorial no depende de D1, runtime API, Cloudflare ni Bridge.
+- Cancel explícito prevalece sobre timeout.
+
+### Validación completa del assignment
+
+Quedan satisfechos ambos requisitos declarados:
+
+1. `R33 GitHub Native Tests` — run `35932495793`: **28/28 PASS** sobre `7b261c8a77239738172f2141db4fb7bace95a9e0`.
+2. `R33 Evidence Farm Tests` — ejecución directa sobre blobs exactos del mismo head: **11/11 PASS**.
+
+La decisión de certificación permanece **PASS — NO MERGE**.
