@@ -258,3 +258,16 @@ Gate 500 está listo para autorización solamente cuando:
 - recoveries globales = 0.
 
 Hasta entonces no cambiar `gate500Authorized`.
+
+
+## 14. Preflight PR
+
+La preparación se integra únicamente si PR CI confirma:
+
+- Global Dispatcher Tests;
+- R33 GitHub Native Tests;
+- R33 Evidence Farm Tests;
+- pool candidato 500 sin drift;
+- Gate 500 todavía no autorizado.
+
+Un PR sin runs esperados no se considera certificado.
