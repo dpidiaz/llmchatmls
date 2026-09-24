@@ -63,6 +63,28 @@ test('dynamic recoveries are rehydrated while static Gate 500 stays blocked',()=
   assert.equal(base.items.find(x=>x.workId==='gate500').status,'blocked','base registry must not be mutated');
 });
 
+test('R33 index integration waits for a full wave and materializes exact source refs',()=>{
+  const pool=r33Pool();
+  const partialLedger={terminal:{
+    a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/r33/1',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:00:00.000Z'}
+  }};
+  assert.equal(integration.r33IndexIntegrationWork({pool,globalLedger:partialLedger,waveSize:2,verifiedCodes:[]}),null);
+
+  const fullLedger={terminal:{
+    a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/r33/1',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:00:00.000Z'},
+    b:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/r33/2',commitSha:'2'.repeat(40),completedAt:'2026-09-24T05:01:00.000Z'}
+  }};
+  const work=integration.r33IndexIntegrationWork({pool,globalLedger:fullLedger,waveSize:2,verifiedCodes:[]});
+  assert.equal(work.provider,'r33-index-integration');
+  assert.equal(work.workType,'integration');
+  assert.deepEqual(work.units,['MLS-V01-0001','MLS-V01-0002']);
+  assert.equal(work.sourceRefs.length,2);
+  assert.ok(work.resourceLocks.includes('system:r33-index-integration'));
+  assert.ok(work.resourceLocks.includes('system:main-integration'));
+  assert.ok(work.allowedPaths.includes('MLS R32 EDITORIAL/evidence git/indexes/verified.json'));
+  assert.equal(work.integration.mode,'assignment-pr');
+});
+
 test('completed units survive multiple checkpoints and recovery generations',()=>{
   const state={
     recoveredCompletedUnits:['MLS-V01-0001'],
