@@ -34,6 +34,18 @@ function codesFromTerminal(ledger,provider){
 function activeProviderAssignments(states,provider){
   return (Array.isArray(states)?states:[]).filter(state=>state&&state.status==='leased'&&!state.readyToClose&&!state.cancelRequested&&String(state.provider||'')===provider);
 }
+function completedUnitsForState(state){
+  const out=[];
+  for(const raw of Array.isArray(state?.recoveredCompletedUnits)?state.recoveredCompletedUnits:[]){
+    const value=String(raw||'').trim();if(value&&!out.includes(value))out.push(value);
+  }
+  for(const checkpoint of Array.isArray(state?.checkpoints)?state.checkpoints:[]){
+    for(const raw of Array.isArray(checkpoint?.completedUnits)?checkpoint.completedUnits:[]){
+      const value=String(raw||'').trim();if(value&&!out.includes(value))out.push(value);
+    }
+  }
+  return out;
+}
 function collectMlsSnapshot(issues,root='.'){
   const ledgers=[],batches=[];
   for(const issue of Array.isArray(issues)?issues:[]){
@@ -141,7 +153,7 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 }
 
 module.exports={
-  DYNAMIC_PROVIDERS,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,
+  DYNAMIC_PROVIDERS,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
   collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,
   recoveryItems,materializeProviderItems,extendRegistry
 };
