@@ -34,7 +34,7 @@ A newly created lease starts in an unacknowledged phase.
 - Acknowledgement deadline: 5 minutes after `claimedAt`.
 - Until acknowledgement, `expiresAt` is the acknowledgement deadline.
 - The first accepted `heartbeat`, `checkpoint`, `finish`, or `cancel` event sets `acknowledgedAt`.
-- After acknowledgement, the normal rolling lease TTL is 5 minutes from the last accepted worker event.
+- After acknowledgement, the normal rolling lease TTL is 10 minutes from the last accepted worker event.
 - An unacknowledged lease that times out is expired and all non-terminal assigned codes are released.
 
 The worker should send a heartbeat immediately after it observes a valid lease.
