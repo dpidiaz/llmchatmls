@@ -63,3 +63,18 @@ test('post-merge exige SHA verificable, main contiene merge y checks verdes',()=
   const post=integration.evaluatePostMerge(spec,{pre,mergeResult:{merged:true,sha:merge},prAfter,mainContainsMerge:true,postChecks:[{name:'R33 GitHub Native Tests',conclusion:'success'}]});
   assert.equal(post.ok,true);assert.equal(post.mergeCommitSha,merge);
 });
+
+const fs=require('node:fs');
+const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
+
+test('registry exposes PR #699 integration spec with global main lock',()=>{
+  const registry=core.loadRegistry('.');
+  const item=registry.items.find(x=>x.workId==='r33-benchmark-pr-699-integration');
+  assert.equal(item.status,'ready');
+  assert.equal(item.priority,5);
+  assert.ok(item.resourceLocks.includes('system:main-integration'));
+  const spec=integration.normalizeSpec(item.integration);
+  assert.equal(spec.prNumber,699);
+  assert.equal(spec.expectedHeadSha,head);
+  assert.deepEqual(spec.requiredChecks,['R33 GitHub Native Tests']);
+});
