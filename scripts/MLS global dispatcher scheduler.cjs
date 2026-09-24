@@ -31,8 +31,9 @@ function hasCommandMarker(issue){return /<!--\s*MLS_GLOBAL_DISPATCH_COMMAND\b/.t
 function hasAssignmentState(issue){return Boolean(core.parseAssignmentState(issue?.body||''));}
 function renderResponse(title,payload){return '## '+title+'\n\n'+JSON.stringify(payload,null,2)+'\n';}
 async function getMainSha(){const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');return String(ref?.object?.sha||'');}
+function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
 async function tryBranchHead(branch){
-  try{const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+encodeURIComponent(branch));return String(ref?.object?.sha||'');}
+  try{const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+encodeRef(branch));return String(ref?.object?.sha||'');}
   catch(error){if(error.status===404)return null;throw error;}
 }
 async function createBranch(branch,sha){
