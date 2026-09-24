@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "dispatcherVersion": "1.0",
   "sourceOfTruth": "github",
-  "updatedAt": "2026-09-24T09:55:00-06:00",
+  "updatedAt": "2026-09-24T05:17:00-06:00",
   "items": [
     {
       "workId": "evidence-runtime-e2e-certification",
@@ -212,7 +212,7 @@
       "version": 2,
       "title": "Autorizar y activar R33 Gate 500",
       "workType": "validation",
-      "status": "blocked",
+      "status": "ready",
       "priority": 100,
       "createdAt": "2026-09-23T21:41:00-06:00",
       "dependsOn": [
@@ -232,7 +232,7 @@
         "prefix": "worker/r33-gate500-activation"
       },
       "provider": "global",
-      "instructions": "ACTIVACIÓN SOLAMENTE. No produzcas Evidence. Requiere autorización explícita posterior. Tras autorización: valida el pool Gate 500, cambia el manifiesto a status=authorized/active=true/gate500Authorized=true y apunta Active Pool Control al Gate 500. Mantén dispatcherOnly=true, GitHub-only y Cloudflare/D1 editorial=false.",
+      "instructions": "AUTORIZADO explícitamente el 2026-09-24. ACTIVACIÓN SOLAMENTE. No produzcas Evidence. Ejecuta el preflight Gate 500; si pasa, cambia el manifiesto a status=authorized/active=true/gate500Authorized=true y apunta Active Pool Control al Gate 500. Mantén dispatcherOnly=true, GitHub-only y Cloudflare/D1 editorial=false.",
       "validation": [
         "R33 Gate 500 Preparation Tests",
         "R33 GitHub Native Tests"
@@ -240,6 +240,12 @@
       "completion": {
         "requiresCommit": true,
         "requiresValidation": true
+      },
+      "authorization": {
+        "authorized": true,
+        "authorizedAt": "2026-09-24T11:17:00.000Z",
+        "authorizedBy": "maintainer-explicit-chat-authorization",
+        "scope": "activate Gate 500 only; execution remains Global Dispatcher controlled"
       }
     }
   ]
