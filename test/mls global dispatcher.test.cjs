@@ -68,6 +68,35 @@ test('recovery outranks normal work regardless of normal priority',()=>{
   assert.ok(selected.recovery);
 });
 
+test('unacknowledged assignment expires after five-minute ACK deadline',()=>{
+  const r=registry(),s=assignment(r.items[0],106);
+  assert.equal(core.isLeaseExpired(s,Date.parse('2026-09-23T10:05:00.000Z')),false);
+  assert.equal(core.isLeaseExpired(s,Date.parse('2026-09-23T10:05:00.001Z')),true);
+  assert.equal(core.releaseReasonForAssignment(s,true),'ACK_TIMEOUT');
+});
+
+test('recovery classifier preserves orphan commits and checkpoint progress',()=>{
+  const r=registry(),s=assignment(r.items[0],107);
+  assert.equal(core.classifyRecoveryState(s,'a'.repeat(40),'2026-09-23T10:06:00.000Z'),null);
+
+  const orphan=core.classifyRecoveryState(s,'b'.repeat(40),'2026-09-23T10:06:00.000Z');
+  assert.equal(orphan.kind,'orphan_progress');
+  assert.equal(orphan.lastCheckpointCommit,null);
+  assert.equal(orphan.orphanHeadSha,'b'.repeat(40));
+  assert.equal(orphan.resumeCommit,'b'.repeat(40));
+
+  const checkpointed={...s,lastCheckpointCommit:'b'.repeat(40)};
+  const cp=core.classifyRecoveryState(checkpointed,'b'.repeat(40),'2026-09-23T10:06:00.000Z');
+  assert.equal(cp.kind,'checkpoint_progress');
+  assert.equal(cp.orphanHeadSha,null);
+  assert.equal(cp.resumeCommit,'b'.repeat(40));
+
+  const later=core.classifyRecoveryState(checkpointed,'c'.repeat(40),'2026-09-23T10:06:00.000Z');
+  assert.equal(later.kind,'orphan_progress');
+  assert.equal(later.orphanHeadSha,'c'.repeat(40));
+  assert.equal(later.resumeCommit,'c'.repeat(40));
+});
+
 test('zombie event is rejected after lease expiry',()=>{
   const r=registry(),s=assignment(r.items[0],103);
   const ack=core.applyWorkerEvent(s,{operation:'heartbeat',assignmentId:s.assignmentId,leaseToken:s.leaseToken,leaseEpoch:s.leaseEpoch},{createdAt:'2026-09-23T10:01:00.000Z',commentId:2});
@@ -121,6 +150,8 @@ test('worker refetches live issue and verifies branch head plus allowed paths',(
   assert.match(source,/CHECKPOINT_SCOPE_VIOLATION/);
   assert.match(source,/core\.pathAllowed/);
   assert.match(source,/compare\//);
+  const schedulerSource=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
+  assert.match(schedulerSource,/core\.classifyRecoveryState/);
 });
 
 test('dispatcher editorial control plane contains no Cloudflare or D1 dependency',()=>{
