@@ -156,7 +156,7 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=50,verifie
     resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...codes.map(code=>'entry:'+code)],
     allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
     validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-    instructions:'Integra exactamente los Evidence blobs de sourceRefs en una rama desde main, ejecuta npm run r33:indexes:write, valida npm run test:r33-github-native, abre PR a main, exige checks verdes, mergea con expected_head_sha del head exacto y verifica main antes de checkpoint/finish. No modifiques Sources ni contenido canónico.',
+    instructions:'Integra exactamente los Evidence blobs de sourceRefs en una rama desde main, ejecuta npm run r33:indexes:write y npm run test:r33-github-native. Abre PR a main y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con el HEAD exacto para certificar scope. Luego mergea con expected_head_sha, verifica main y envía checkpoint integrationStage=postmerge con integrationPrNumber, integrationHeadSha y merge SHA; finish repite esos campos. No modifiques Sources ni contenido canónico.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
     completion:{requiresCommit:true,requiresValidation:true},
     integration:{mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests'],sourceRefs}
