@@ -374,6 +374,6 @@ Antes de activar `MLS siguiente` como comando productivo:
 9. test de dependency ordering;
 10. test de no escritura directa a main;
 11. guard editorial GitHub-only;
-12. prueba con al menos 4 workers concurrentes sobre work types distintos.
+12. prueba con al menos 4 workers concurrentes sobre work items distintos y resource locks compatibles.
 
 Hasta pasar esta certificación, el Dispatcher permanece en estado de especificación.

@@ -72,19 +72,7 @@ function setTerminal(ledgerItem,state,status='done'){
 }
 async function recoveryFor(state){
   const head=await tryBranchHead(state.branch);
-  const base=String(state.baseCommit||'');
-  const checkpoint=String(state.lastCheckpointCommit||'');
-  const hasBranchProgress=Boolean(head&&base&&head!==base);
-  const hasCheckpointProgress=Boolean(checkpoint&&checkpoint!==base);
-  const orphan=Boolean(head&&head!==(checkpoint||base));
-  if(!hasBranchProgress&&!hasCheckpointProgress)return null;
-  return {
-    kind:orphan?'orphan_progress':'checkpoint_progress',
-    workId:state.workId,workVersion:state.workVersion,branch:state.branch,baseCommit:base,
-    lastCheckpointCommit:checkpoint||null,orphanHeadSha:orphan?head:null,resumeCommit:head||checkpoint||base,
-    previousAssignmentId:state.assignmentId,previousEpoch:state.leaseEpoch,resourceLocks:state.resourceLocks||[],
-    allowedPaths:state.allowedPaths||[],capturedAt:core.iso()
-  };
+  return core.classifyRecoveryState(state,head);
 }
 async function finalizeAssignment(issue,state,ledgerItem,nowMs){
   const expired=core.isLeaseExpired(state,nowMs);
