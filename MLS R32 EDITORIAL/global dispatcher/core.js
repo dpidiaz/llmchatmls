@@ -228,6 +228,31 @@ function releaseReasonForAssignment(state,expired=isLeaseExpired(state)){
   if(expired)return !state?.acknowledgedAt&&state?.ackDeadlineAt?'ACK_TIMEOUT':'LEASE_TIMEOUT';
   return null;
 }
+function classifyRecoveryState(state,branchHead,capturedAt=iso()){
+  if(!state)throw dispatchError('ASSIGNMENT_NOT_FOUND','Assignment inválido.',409);
+  const head=String(branchHead||'');
+  const base=String(state.baseCommit||'');
+  const checkpoint=String(state.lastCheckpointCommit||'');
+  const hasBranchProgress=Boolean(head&&base&&head!==base);
+  const hasCheckpointProgress=Boolean(checkpoint&&checkpoint!==base);
+  const orphan=Boolean(head&&head!==(checkpoint||base));
+  if(!hasBranchProgress&&!hasCheckpointProgress)return null;
+  return {
+    kind:orphan?'orphan_progress':'checkpoint_progress',
+    workId:state.workId,
+    workVersion:state.workVersion,
+    branch:state.branch,
+    baseCommit:base,
+    lastCheckpointCommit:checkpoint||null,
+    orphanHeadSha:orphan?head:null,
+    resumeCommit:head||checkpoint||base,
+    previousAssignmentId:state.assignmentId,
+    previousEpoch:state.leaseEpoch,
+    resourceLocks:state.resourceLocks||[],
+    allowedPaths:state.allowedPaths||[],
+    capturedAt:iso(capturedAt)
+  };
+}
 function pathAllowed(file,allowedPaths){
   const f=String(file||'').replace(/^\/+/,'');
   return (allowedPaths||[]).some(raw=>{
@@ -249,5 +274,5 @@ module.exports={
   dispatchError,iso,parseDate,plusMs,sha256,safeSegment,renderMarked,renderCommandBody,parseCommand,parseWorkerEvent,parseAssignmentState,parseLedger,
   normalizeWorkItem,normalizeRegistry,loadRegistry,registryDigest,initialLedger,normalizeLedger,renderLedgerBody,isClaimStale,isLeaseExpired,
   normalizeLock,locksConflict,lockSetsConflict,activeAssignments,activeLocks,terminalStatus,dependenciesSatisfied,workIsActive,selectNextWork,assignmentBranch,
-  makeAssignmentState,renderAssignmentBody,validateLeaseEvent,checkpointPayload,checkpointDigest,applyWorkerEvent,releaseReasonForAssignment,pathAllowed,dispatchProgress
+  makeAssignmentState,renderAssignmentBody,validateLeaseEvent,checkpointPayload,checkpointDigest,applyWorkerEvent,releaseReasonForAssignment,classifyRecoveryState,pathAllowed,dispatchProgress
 };
