@@ -169,13 +169,14 @@
       "version": 1,
       "title": "Integrar PR #699 después de certificación",
       "workType": "integration",
-      "status": "blocked",
-      "priority": 40,
+      "status": "ready",
+      "priority": 5,
       "createdAt": "2026-09-23T21:41:00-06:00",
       "dependsOn": [
         "r33-benchmark-pr-699-certification"
       ],
       "resourceLocks": [
+        "system:main-integration",
         "system:r33-benchmark-pr-699-integration"
       ],
       "allowedPaths": [],
@@ -184,13 +185,26 @@
         "prefix": "worker/r33-benchmark-pr-699-integration"
       },
       "provider": "integration",
-      "instructions": "Bloqueado hasta certificar semántica de assignments de integración a main. No se asigna en R1 inicial.",
+      "instructions": "Integra exclusivamente PR #699 si conserva head exacto certificado 7b261c8a77239738172f2141db4fb7bace95a9e0. Verifica R33 GitHub Native Tests verde, usa expected_head_sha, valida que main contenga el merge SHA y que el check post-merge quede verde. Si el PR ya fue merged, converge idempotentemente. No autoriza Gate 500.",
       "validation": [
         "R33 GitHub Native Tests"
       ],
       "completion": {
         "requiresCommit": false,
         "requiresValidation": true
+      },
+      "integration": {
+        "prNumber": 699,
+        "base": "main",
+        "expectedHeadSha": "7b261c8a77239738172f2141db4fb7bace95a9e0",
+        "mergeMethod": "merge",
+        "requiredChecks": [
+          "R33 GitHub Native Tests"
+        ],
+        "postMergeChecks": [
+          "R33 GitHub Native Tests"
+        ],
+        "certifiedByWorkId": "r33-benchmark-pr-699-certification"
       }
     },
     {
