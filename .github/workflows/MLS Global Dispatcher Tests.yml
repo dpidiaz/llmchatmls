@@ -31,4 +31,12 @@ jobs:
         with:
           node-version: 24
       - name: Test Global Dispatcher
-        run: node --test 'test/mls global dispatcher.test.cjs'
+        shell: bash
+        run: |
+          mapfile -d '' files < <(find test -maxdepth 1 -type f -name 'mls global dispatcher*.test.cjs' -print0)
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo 'No Global Dispatcher tests found' >&2
+            exit 1
+          fi
+          printf 'Running %s Global Dispatcher test files\n' "${#files[@]}"
+          node --test "${files[@]}"

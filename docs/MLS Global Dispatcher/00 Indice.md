@@ -67,3 +67,4 @@ Global Dispatcher
 ```
 
 Hasta que el workflow del Global Dispatcher sea implementado y certificado, los comandos directos de Farm continúan siendo operativos de forma independiente.
+\n- `06 Integration to main R1.md` — contrato fail-closed para integrar PRs certificados a `main`.\n

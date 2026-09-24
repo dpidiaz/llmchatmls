@@ -170,7 +170,7 @@ function makeAssignmentState({issueNumber,item,requestId,workerId,workerLogin=nu
     issueNumber:Number(issueNumber),requestId,workerId,workerLogin:workerLogin?String(workerLogin):null,
     workId:item.workId,workVersion:item.version,workType:item.workType,title:item.title,provider:item.provider,
     instructions:item.instructions,dependencies:item.dependsOn,resourceLocks:item.resourceLocks,allowedPaths:item.allowedPaths,
-    validationRequired:item.validation,completion:item.completion,branch,baseCommit:String(baseCommit||''),leaseToken:token,leaseEpoch:epoch,
+    validationRequired:item.validation,completion:item.completion,integration:item.integration&&typeof item.integration==='object'?structuredClone(item.integration):null,branch,baseCommit:String(baseCommit||''),leaseToken:token,leaseEpoch:epoch,
     status:'leased',claimedAt,acknowledgedAt:null,ackDeadlineAt,lastHeartbeatAt:null,expiresAt:ackDeadlineAt,
     checkpoints:[],lastCheckpointCommit:recovery?.lastCheckpointCommit||null,lastCheckpointHash:null,
     recovery:recovery||null,readyToClose:false,cancelRequested:false,finalCommitSha:null,lastRejectedEvent:null,closedAt:null
@@ -178,7 +178,13 @@ function makeAssignmentState({issueNumber,item,requestId,workerId,workerLogin=nu
 }
 function renderAssignmentBody(state){
   const recovery=state.recovery?'\n**Recovery:** `'+String(state.recovery.kind||'recovery')+'`  ':'';
-  return ['## MLS Global Dispatcher assignment','','**Assignment:** `'+state.assignmentId+'`  ','**Work:** `'+state.workId+'` — '+state.title+'  ','**Tipo:** `'+state.workType+'`  ','**Branch:** `'+state.branch+'`  ','**Estado:** `'+state.status+'`  ','**ACK deadline:** '+state.ackDeadlineAt+'  ','**Lease expira:** '+state.expiresAt+'  ',recovery,'','### Instrucciones','',state.instructions||'Ejecuta el work item dentro del scope asignado.','','### Perímetro de escritura','',...(state.allowedPaths||[]).map(x=>'- `'+x+'`'),'','### Locks','',...(state.resourceLocks||[]).map(x=>'- `'+x+'`'),'','Regla: commit → validate → checkpoint. No escribas directamente a `main`.','','No edites manualmente el bloque de control.','',renderMarked(ASSIGNMENT_MARKER,state)].join('\n');
+  const integrationBlock=state.workType==='integration'&&state.integration
+    ?['','### Integration target','', '```json',JSON.stringify(state.integration,null,2),'```',''].join('\n')
+    :'';
+  const rule=state.workType==='integration'
+    ?'Regla integration: preflight exacto → merge con expected_head_sha → verificar main → checkpoint merge SHA.'
+    :'Regla: commit → validate → checkpoint. No escribas directamente a `main`.';
+  return ['## MLS Global Dispatcher assignment','','**Assignment:** `'+state.assignmentId+'`  ','**Work:** `'+state.workId+'` — '+state.title+'  ','**Tipo:** `'+state.workType+'`  ','**Branch:** `'+state.branch+'`  ','**Estado:** `'+state.status+'`  ','**ACK deadline:** '+state.ackDeadlineAt+'  ','**Lease expira:** '+state.expiresAt+'  ',recovery,'','### Instrucciones','',state.instructions||'Ejecuta el work item dentro del scope asignado.','','### Perímetro de escritura','',...(state.allowedPaths||[]).map(x=>'- `'+x+'`'),'','### Locks','',...(state.resourceLocks||[]).map(x=>'- `'+x+'`'),integrationBlock,rule,'','No edites manualmente el bloque de control.','',renderMarked(ASSIGNMENT_MARKER,state)].join('\n');
 }
 function validateLeaseEvent(state,event,createdAt){
   if(!state||state.kind!=='mls_global_assignment')throw dispatchError('ASSIGNMENT_NOT_FOUND','Assignment inválido.',409);
