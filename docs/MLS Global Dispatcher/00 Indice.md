@@ -1,7 +1,7 @@
 # MLS Global Dispatcher R1 — Índice
 
 Versión: 1.0  
-Estado: **implementación R1 completa en PR #707; certificación CI verde; activación al fusionar a `main`**  
+Estado: **ACTIVE / CERTIFIED R1**  
 Repositorio canónico: `dpidiaz/llmchatmls`
 
 El Global Dispatcher define un único comando de entrada:
@@ -23,6 +23,9 @@ Todos los chats pueden usar exactamente el mismo comando. GitHub decide automát
 
 4. [Work Registry y tipos de trabajo R1](./04%20Work%20Registry%20y%20tipos%20de%20trabajo%20R1.md)  
    Esquema durable de workstreams, locks, ramas, dependencias y tipos de assignment.
+
+5. [Implementación y certificación R1](./05%20Implementacion%20y%20certificacion%20R1.md)  
+   Merge, CI, smoke tests reales, concurrencia de 4 workers y estado operativo.
 
 ## Invariantes
 
