@@ -27,8 +27,9 @@ Cloudflare no forma parte de este flujo.
 - corpus: 10,133 entradas;
 - batch: 1–100;
 - default: 25;
-- lease: 60 minutos desde último progreso válido;
-- reaper: cada 15 minutos;
+- ACK: 5 minutos;
+- lease móvil: 10 minutos desde último progreso válido;
+- reaper: cada 5 minutos;
 - checkpoint: 1–10 entradas;
 - workers simultáneos: limitados por GitHub/ChatGPT, no por un lock editorial global.
 
@@ -81,3 +82,7 @@ Durante Farm:
 - Workers AI neurons = 0
 
 La publicación a runtime es una fase independiente.
+
+## Global Dispatcher
+
+MLS Farm puede operar como proveedor especializado del futuro MLS Global Dispatcher. La especificación está en `docs/MLS Global Dispatcher/`. Hasta su implementación/certificación, este protocolo sigue gobernando los comandos directos de Farm.
