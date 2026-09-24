@@ -47,10 +47,10 @@ test('hierarchical path locks prevent overlapping assignments',()=>{
   assert.equal(first.item.workId,'alpha-child');
   const active=assignment(first.item,101);
   const second=core.selectNextWork(r,ledger,[active],Date.parse('2026-09-23T10:01:00Z'));
-  assert.equal(second.item.workId,'alpha-work');
+  assert.equal(second.item.workId,'beta-work');
   const active2=assignment(second.item,102);
   const third=core.selectNextWork(r,ledger,[active,active2],Date.parse('2026-09-23T10:01:00Z'));
-  assert.equal(third.item.workId,'beta-work');
+  assert.equal(third,null);
 });
 
 test('dependencies block work until terminal dependency exists',()=>{
