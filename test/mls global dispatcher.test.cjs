@@ -20,13 +20,14 @@ function assignment(item,issueNumber,now='2026-09-23T10:00:00.000Z'){
   return core.makeAssignmentState({issueNumber,item,requestId:'request-'+String(issueNumber).padStart(8,'0'),workerId:'worker-'+String(issueNumber).padStart(8,'0'),baseCommit:'a'.repeat(40),branch:'worker/'+item.workId+'/'+issueNumber,now,token:'token-'+issueNumber});
 }
 
-test('canonical registry is GitHub-only and Gate 500 remains blocked',()=>{
+test('canonical registry is GitHub-only and Gate 500 activation is explicitly authorized',()=>{
   const r=core.loadRegistry('.');
   assert.equal(r.sourceOfTruth,'github');
   assert.ok(r.items.length>=5);
   const gate=r.items.find(x=>x.workId==='gate500');
   assert.ok(gate);
-  assert.equal(gate.status,'blocked');
+  assert.equal(gate.status,'ready');
+  assert.equal(gate.authorization?.authorized,true);
 });
 
 test('timing is ACK 5m, rolling lease 10m, reaper 5m',()=>{
