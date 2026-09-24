@@ -40,6 +40,9 @@ R33 es aditivo. Las entradas R32 continúan siendo utilizables aunque su estado 
 10. [13 Gate 100 Manifest](./13%20Gate%20100%20Manifest.json)  
    Muestra determinista de 100 entradas: 10 por idioma, cuantiles canónicos, exclusión del Pilot 20 y bloqueo por blob SHA.
 
+11. [19 GitHub Native Benchmark 100 Final Report](./19%20GitHub%20Native%20Benchmark%20100%20Final%20Report.md)  
+   Cierre persistente del Benchmark 100 GitHub-native: 100/100 VERIFIED, validación 28/28 PASS, Cloudflare/D1 editorial = 0 y Gate 500 todavía bloqueado.
+
 ## Contexto R32 inspeccionado al crear esta documentación
 
 Repositorio: `dpidiaz/llmchatmls`  
