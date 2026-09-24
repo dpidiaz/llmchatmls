@@ -33,7 +33,7 @@ crea un claim con `requestId` y `workerId`. Default 25; máximo 50.
 
 - claim TTL: 90 s;
 - ACK: 5 min;
-- lease móvil tras ACK: 60 min;
+- lease móvil tras ACK: 5 min;
 - heartbeat, checkpoint, finish, cancel y reap se conservan.
 
 ## Secuencia por entrada
