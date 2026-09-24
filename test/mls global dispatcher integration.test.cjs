@@ -78,3 +78,20 @@ test('registry exposes PR #699 integration spec with global main lock',()=>{
   assert.equal(spec.expectedHeadSha,head);
   assert.deepEqual(spec.requiredChecks,['R33 GitHub Native Tests']);
 });
+
+test('merged checkpoint validates PR/head/merge/main without branch scope',()=>{
+  const pr={number:699,base:'main',headSha:head,merged:true,mergeCommitSha:merge};
+  const ok=integration.validateMergedCheckpoint(spec,{pr,commitSha:merge,mainContainsCommit:true});
+  assert.equal(ok.ok,true);
+  assert.equal(ok.mergeCommitSha,merge);
+  assert.throws(()=>integration.validateMergedCheckpoint(spec,{pr:{...pr,headSha:'2'.repeat(40)},commitSha:merge,mainContainsCommit:true}),e=>e.code==='INTEGRATION_HEAD_DRIFT');
+  assert.throws(()=>integration.validateMergedCheckpoint(spec,{pr,commitSha:'2'.repeat(40),mainContainsCommit:true}),e=>e.code==='INTEGRATION_MERGE_SHA_MISMATCH');
+  assert.throws(()=>integration.validateMergedCheckpoint(spec,{pr,commitSha:merge,mainContainsCommit:false}),e=>e.code==='INTEGRATION_MAIN_NOT_VERIFIED');
+});
+
+test('worker routes integration checkpoints through merged-PR verifier',()=>{
+  const source=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
+  assert.match(source,/state\.workType==='integration'/);
+  assert.match(source,/verifyIntegrationCheckpoint/);
+  assert.match(source,/validateMergedCheckpoint/);
+});

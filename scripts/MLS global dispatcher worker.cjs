@@ -2,6 +2,7 @@
 
 const fs=require('node:fs');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
+const integration=require('../MLS R32 EDITORIAL/global dispatcher/integration.js');
 
 const token=process.env.GITHUB_TOKEN||'';
 const repository=process.env.GITHUB_REPOSITORY||'';
@@ -25,10 +26,34 @@ async function branchHead(branch){
   const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+encodeRef(branch));
   return String(ref?.object?.sha||'').toLowerCase();
 }
+async function verifyIntegrationCheckpoint(state,commitSha){
+  const spec=state.integration;
+  if(!spec)throw core.dispatchError('INTEGRATION_SPEC_REQUIRED','Assignment integration sin spec.',409);
+  const pr=await gh('GET','/repos/'+owner+'/'+repo+'/pulls/'+Number(spec.prNumber));
+  const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
+  const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
+  let mainContainsCommit=mainSha===commitSha;
+  if(!mainContainsCommit){
+    const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+commitSha+'...'+mainSha);
+    mainContainsCommit=['ahead','identical'].includes(String(comparison?.status||''));
+  }
+  integration.validateMergedCheckpoint(spec,{
+    pr:{
+      number:pr?.number,
+      base:pr?.base?.ref,
+      headSha:pr?.head?.sha,
+      merged:pr?.merged===true,
+      mergeCommitSha:pr?.merge_commit_sha
+    },
+    commitSha,
+    mainContainsCommit
+  });
+}
 async function verifyCommitScope(state,event){
   if(!['checkpoint','finish'].includes(event.operation))return;
   const commitSha=String(event.commitSha||state.lastCheckpointCommit||'').toLowerCase();
   if(!/^[a-f0-9]{40}$/.test(commitSha))throw core.dispatchError('COMMIT_SHA_INVALID','Evento requiere commit SHA válido.',409);
+  if(state.workType==='integration'){await verifyIntegrationCheckpoint(state,commitSha);return;}
   const head=await branchHead(state.branch);
   if(head!==commitSha)throw core.dispatchError('BRANCH_HEAD_MISMATCH','El checkpoint/final debe apuntar al HEAD exacto de la rama asignada.',409);
   if(event.operation==='finish')return;

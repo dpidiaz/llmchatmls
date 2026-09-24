@@ -92,4 +92,23 @@ function evaluatePostMerge(specRaw,{pre,mergeResult,prAfter,mainContainsMerge=fa
   return {ok:true,mergeCommitSha:mergeSha,idempotent:Boolean(pre.alreadyMerged)};
 }
 
-module.exports={normalizeSpec,evaluatePreMerge,evaluatePostMerge,integrationError};
+
+function validateMergedCheckpoint(specRaw,{pr,commitSha,mainContainsCommit=false}={}){
+  const spec=normalizeSpec(specRaw);
+  const sha=clean(commitSha).toLowerCase();
+  if(!SHA40.test(sha))throw integrationError('INTEGRATION_CHECKPOINT_SHA_INVALID','commitSha de integración debe ser SHA-40.');
+  const p=pr||{};
+  const number=Number(p.number);
+  const base=clean(p.base?.ref||p.base);
+  const headSha=clean(p.headSha||p.head_sha||p.head?.sha).toLowerCase();
+  const mergeSha=clean(p.mergeCommitSha||p.merge_commit_sha).toLowerCase();
+  if(number!==spec.prNumber)throw integrationError('INTEGRATION_PR_MISMATCH','PR no coincide con el spec.');
+  if(base!==spec.base)throw integrationError('INTEGRATION_BASE_MISMATCH','Base del PR cambió.');
+  if(headSha!==spec.expectedHeadSha)throw integrationError('INTEGRATION_HEAD_DRIFT','El head del PR cambió respecto del SHA certificado.');
+  if(p.merged!==true)throw integrationError('INTEGRATION_NOT_MERGED','PR aún no está merged.');
+  if(!SHA40.test(mergeSha)||mergeSha!==sha)throw integrationError('INTEGRATION_MERGE_SHA_MISMATCH','commitSha no coincide con el merge SHA del PR.');
+  if(!mainContainsCommit)throw integrationError('INTEGRATION_MAIN_NOT_VERIFIED','main no contiene el merge SHA.');
+  return {ok:true,mergeCommitSha:sha};
+}
+
+module.exports={normalizeSpec,evaluatePreMerge,evaluatePostMerge,validateMergedCheckpoint,integrationError};

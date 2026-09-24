@@ -1,6 +1,6 @@
 # MLS Global Dispatcher — Integration-to-main R1
 
-Estado: **contrato operativo R1**
+Estado: **contrato operativo R1.1**
 
 ## Objetivo
 
@@ -31,9 +31,10 @@ Todo integration work item ejecutable debe fijar:
 8. capturar merge SHA;
 9. verificar que `main` contiene el merge SHA;
 10. verificar checks post-merge;
-11. checkpoint usando el merge SHA;
-12. finish;
-13. reap.
+11. Worker Events valida el checkpoint de integración contra PR merged + head certificado + merge SHA + ancestry en `main` (no contra `allowedPaths` de la rama worker);
+12. checkpoint usando el merge SHA;
+13. finish;
+14. reap.
 
 ## Head drift
 
@@ -90,3 +91,19 @@ La lógica pura vive en:
 Los tests contractuales viven en:
 
 `test/mls global dispatcher integration.test.cjs`
+
+
+## Semántica especial de checkpoint de integración
+
+Los work items `integration` no producen el diff del PR dentro de la rama worker. Por tanto, aplicarles la regla normal `branch HEAD + allowedPaths` produce falsos `BRANCH_HEAD_MISMATCH` / `CHECKPOINT_SCOPE_VIOLATION`.
+
+R1.1 exige que Worker Events valide un checkpoint de integración mediante estado GitHub durable:
+
+- PR exacto del spec;
+- `base: main`;
+- head del PR idéntico a `expectedHeadSha`;
+- PR efectivamente merged;
+- `commitSha` idéntico a `merge_commit_sha`;
+- `main` igual o descendiente de ese merge SHA.
+
+La validación de branch/scope permanece sin cambios para `code_task`, `validation`, `editorial_batch`, `deployment` y `recovery`.
