@@ -1,7 +1,7 @@
 # MLS Global Dispatcher R1 — Índice
 
 Versión: 1.0  
-Estado: **especificación aprobada; implementación pendiente de workflow/código y certificación**  
+Estado: **implementación R1 completa en PR #707; certificación CI verde; activación al fusionar a `main`**  
 Repositorio canónico: `dpidiaz/llmchatmls`
 
 El Global Dispatcher define un único comando de entrada:

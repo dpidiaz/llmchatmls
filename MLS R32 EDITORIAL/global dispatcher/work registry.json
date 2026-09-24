@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "dispatcherVersion": "1.0",
+  "sourceOfTruth": "github",
+  "updatedAt": "2026-09-23T21:41:00-06:00",
+  "items": [
+    {
+      "workId": "evidence-runtime-e2e-certification",
+      "version": 1,
+      "title": "Certificar Evidence público GitHub-native end-to-end",
+      "workType": "validation",
+      "status": "ready",
+      "priority": 20,
+      "createdAt": "2026-09-23T21:41:00-06:00",
+      "dependsOn": [],
+      "resourceLocks": [
+        "system:evidence-runtime-certification",
+        "path:docs/evidence y provenance/18 Evidence Runtime E2E Certification.md"
+      ],
+      "allowedPaths": [
+        "docs/evidence y provenance/18 Evidence Runtime E2E Certification.md"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/evidence-runtime-e2e-certification"
+      },
+      "provider": "global",
+      "instructions": "Verifica de extremo a extremo GitHub Evidence → scripts/generar evidence runtime github.js → public/data/evidence/by-code → lector. Ejecuta los tests GitHub-native relevantes, comprueba referencias APA/URLs y 0 D1/Cloudflare editorial. Persiste un reporte en `docs/evidence y provenance/18 Evidence Runtime E2E Certification.md`. No despliegues ni modifiques contenido Evidence.",
+      "validation": [
+        "R33 GitHub Native Tests",
+        "Evidence reader/runtime tests"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      }
+    },
+    {
+      "workId": "r33-benchmark-pr-699-certification",
+      "version": 1,
+      "title": "Certificar PR #699 del benchmark R33",
+      "workType": "validation",
+      "status": "ready",
+      "priority": 25,
+      "createdAt": "2026-09-23T21:41:00-06:00",
+      "dependsOn": [],
+      "resourceLocks": [
+        "system:r33-benchmark-pr-699-certification",
+        "path:docs/evidence y provenance/19 R33 Benchmark PR 699 Certification.md"
+      ],
+      "allowedPaths": [
+        "docs/evidence y provenance/19 R33 Benchmark PR 699 Certification.md"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/r33-benchmark-pr-699-certification"
+      },
+      "provider": "global",
+      "instructions": "Inspecciona PR #699 y su head exacto. Verifica que las 25 entradas declaradas estén GitHub-native/VERIFIED, que no exista REVIEWED humano fabricado y que los checks relevantes sean verdes. No merges el PR. Persiste el resultado en `docs/evidence y provenance/19 R33 Benchmark PR 699 Certification.md`.",
+      "validation": [
+        "R33 GitHub Native Tests",
+        "R33 Evidence Farm Tests"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      }
+    },
+    {
+      "workId": "dispatcher-provider-r33",
+      "version": 1,
+      "title": "Adaptador R33 Evidence Farm para Global Dispatcher",
+      "workType": "code_task",
+      "status": "ready",
+      "priority": 30,
+      "createdAt": "2026-09-23T21:41:00-06:00",
+      "dependsOn": [],
+      "resourceLocks": [
+        "path:MLS R32 EDITORIAL/global dispatcher/providers/r33.js",
+        "path:test/mls global dispatcher provider r33.test.cjs"
+      ],
+      "allowedPaths": [
+        "MLS R32 EDITORIAL/global dispatcher/providers/r33.js",
+        "test/mls global dispatcher provider r33.test.cjs"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/dispatcher-provider-r33"
+      },
+      "provider": "global",
+      "instructions": "Implementa un adaptador puro para exponer trabajo elegible de R33 Evidence Farm al Global Dispatcher sin crear doble ownership. No modifiques scheduler/core. Añade tests unitarios del contrato y fail-closed.",
+      "validation": [
+        "node --test test/mls global dispatcher provider r33.test.cjs"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      }
+    },
+    {
+      "workId": "dispatcher-provider-mls-farm",
+      "version": 1,
+      "title": "Adaptador MLS Farm para Global Dispatcher",
+      "workType": "code_task",
+      "status": "ready",
+      "priority": 30,
+      "createdAt": "2026-09-23T21:41:00-06:00",
+      "dependsOn": [],
+      "resourceLocks": [
+        "path:MLS R32 EDITORIAL/global dispatcher/providers/mls farm.js",
+        "path:test/mls global dispatcher provider mls farm.test.cjs"
+      ],
+      "allowedPaths": [
+        "MLS R32 EDITORIAL/global dispatcher/providers/mls farm.js",
+        "test/mls global dispatcher provider mls farm.test.cjs"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/dispatcher-provider-mls-farm"
+      },
+      "provider": "global",
+      "instructions": "Implementa un adaptador puro para exponer trabajo elegible de MLS Farm al Global Dispatcher sin crear doble ownership. No modifiques scheduler/core. Añade tests unitarios del contrato y fail-closed.",
+      "validation": [
+        "node --test test/mls global dispatcher provider mls farm.test.cjs"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      }
+    },
+    {
+      "workId": "dispatcher-provider-integration",
+      "version": 1,
+      "title": "Integrar providers Farm al Global Dispatcher",
+      "workType": "code_task",
+      "status": "ready",
+      "priority": 35,
+      "createdAt": "2026-09-23T21:41:00-06:00",
+      "dependsOn": [
+        "dispatcher-provider-r33",
+        "dispatcher-provider-mls-farm"
+      ],
+      "resourceLocks": [
+        "system:global-dispatcher-provider-integration",
+        "path:scripts/MLS global dispatcher scheduler.cjs",
+        "path:test/mls global dispatcher providers integration.test.cjs"
+      ],
+      "allowedPaths": [
+        "scripts/MLS global dispatcher scheduler.cjs",
+        "test/mls global dispatcher providers integration.test.cjs",
+        "MLS R32 EDITORIAL/global dispatcher/"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/dispatcher-provider-integration"
+      },
+      "provider": "global",
+      "instructions": "Integra los dos adapters certificados al Scheduler sin nested/double leases. Mantén single-writer, locks y recovery. Añade tests de integración y no alteres Gate 500.",
+      "validation": [
+        "Global Dispatcher Tests"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      }
+    },
+    {
+      "workId": "r33-benchmark-pr-699-integration",
+      "version": 1,
+      "title": "Integrar PR #699 después de certificación",
+      "workType": "integration",
+      "status": "blocked",
+      "priority": 40,
+      "createdAt": "2026-09-23T21:41:00-06:00",
+      "dependsOn": [
+        "r33-benchmark-pr-699-certification"
+      ],
+      "resourceLocks": [
+        "system:r33-benchmark-pr-699-integration"
+      ],
+      "allowedPaths": [],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/r33-benchmark-pr-699-integration"
+      },
+      "provider": "integration",
+      "instructions": "Bloqueado hasta certificar semántica de assignments de integración a main. No se asigna en R1 inicial.",
+      "validation": [
+        "R33 GitHub Native Tests"
+      ],
+      "completion": {
+        "requiresCommit": false,
+        "requiresValidation": true
+      }
+    },
+    {
+      "workId": "gate500",
+      "version": 1,
+      "title": "R33 Gate 500",
+      "workType": "editorial_batch",
+      "status": "blocked",
+      "priority": 100,
+      "createdAt": "2026-09-23T21:41:00-06:00",
+      "dependsOn": [
+        "evidence-runtime-e2e-certification"
+      ],
+      "resourceLocks": [
+        "system:r33-gate500"
+      ],
+      "allowedPaths": [],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/r33-gate500"
+      },
+      "provider": "r33-farm",
+      "instructions": "NO AUTORIZADO. Requiere autorización explícita posterior.",
+      "validation": [],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      }
+    }
+  ]
+}
