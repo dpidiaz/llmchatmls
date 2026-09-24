@@ -129,3 +129,36 @@ La integración de providers depende de los dos adaptadores.
 El sistema puede recuperar trabajo que haya llegado a GitHub mediante commit/checkpoint. El razonamiento que solo exista dentro de un chat y nunca haya sido persistido no puede recuperarse.
 
 Por eso sigue vigente la regla: no acumular más de 2–3 operaciones significativas sin persistir estado durable.
+
+## Smoke test concurrente de 4 workers
+
+Se crearon casi simultáneamente cuatro claims independientes:
+
+- #711 → `evidence-runtime-e2e-certification`;
+- #712 → `r33-benchmark-pr-699-certification`;
+- #713 → `dispatcher-provider-mls-farm`;
+- #714 → `dispatcher-provider-r33`.
+
+Resultado de adjudicación:
+
+- cuatro workIds distintos;
+- cuatro ramas exclusivas;
+- cuatro leaseEpoch distintos;
+- ningún resource lock colisionó;
+- un único scheduler activo drenó los claims;
+- runs redundantes pendientes del mismo concurrency group pudieron cancelarse sin pérdida de trabajo, porque el scheduler activo drena todos los comandos pendientes.
+
+Los cuatro assignments recibieron `cancel` válido y fueron reconocidos por Worker Events.
+
+Issue #715 ejecutó el reap final.
+
+Resultado:
+
+- 4 assignments cerrados como `CANCELLED`;
+- 0 recoveries;
+- 0 assignments activos;
+- 4 work items nuevamente `ready`;
+- 0 D1 editorial reads/writes;
+- 0 Cloudflare editorial interactions.
+
+Esta prueba valida el objetivo operativo de varios chats ejecutando el mismo comando sin seleccionar manualmente workstream y sin adjudicación duplicada.
