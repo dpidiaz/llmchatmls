@@ -18,19 +18,32 @@ function resultFor(state,code,overrides={}){
     ...overrides
   };
 }
-test('Evidence Farm R2 is GitHub-native and Gate 500 remains blocked',()=>{
+test('Evidence Farm R2 active pool is GitHub-native in Benchmark-100 or Gate-500 lifecycle state',()=>{
   const pool=core.loadPool('.');
-  assert.equal(pool.poolId,'MLS-R33-GITHUB-NATIVE-BENCHMARK-100');
   assert.equal(pool.editorialArchitecture,'github-native');
   assert.equal(pool.sourceOfTruth,'github');
   assert.equal(pool.cloudflareEditorialAllowed,false);
   assert.equal(pool.d1EditorialAllowed,false);
-  assert.equal(pool.gate500Authorized,false);
-  assert.equal(pool.entries.length,100);
+  if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-500'){
+    assert.equal(pool.status,'authorized');
+    assert.equal(pool.active,true);
+    assert.equal(pool.gate500Authorized,true);
+    assert.equal(pool.dispatcherOnly,true);
+    assert.equal(pool.entries.length,500);
+  }else{
+    assert.equal(pool.poolId,'MLS-R33-GITHUB-NATIVE-BENCHMARK-100');
+    assert.equal(pool.gate500Authorized,false);
+    assert.equal(pool.entries.length,100);
+  }
 });
-test('GitHub-native benchmark is fresh versus Pilot 20, Gate 100 and Correction Repeat',()=>{
+test('active R33 pool is fresh versus all earlier cohorts',()=>{
   const pool=core.loadPool('.'),pilot=JSON.parse(fs.readFileSync('docs/evidence y provenance/04 Pilot 20 Manifest.json','utf8')),gate=JSON.parse(fs.readFileSync('docs/evidence y provenance/13 Gate 100 Manifest.json','utf8')),repeat=JSON.parse(fs.readFileSync('docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json','utf8'));
   const prior=new Set([...(pilot.entries||[]).map(x=>x.code),...(gate.entries||[]).map(x=>x.code),...(repeat.entries||[]).map(x=>x.code)]);
+  if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-500'){
+    const benchmark=JSON.parse(fs.readFileSync('docs/evidence y provenance/17 GitHub Native Benchmark 100 Pool.json','utf8'));
+    for(const e of benchmark.entries||[])prior.add(e.code);
+    assert.equal(prior.size,320);
+  }
   assert.equal(pool.entries.some(x=>prior.has(x.code)),false);
   assert.equal(pool.entries.every(x=>/^[a-f0-9]{40}$/.test(x.contentBlobSha||'')),true);
 });
