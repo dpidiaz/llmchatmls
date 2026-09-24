@@ -1,7 +1,7 @@
 # MLS Global Dispatcher R1 — Protocolo operativo
 
 Versión: 1.0  
-Estado: implementación R1 certificada en CI; operativa cuando se fusione a `main`.
+Estado: **ACTIVE / CERTIFIED R1** en `main`.
 
 ## 1. Arquitectura
 
