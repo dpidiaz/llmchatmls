@@ -107,4 +107,7 @@ test('worker routes integration checkpoints through merged-PR verifier',()=>{
   assert.match(source,/assignmentPrSpec/);
   assert.match(source,/integrationPrNumber/);
   assert.match(source,/integrationHeadSha/);
+  assert.match(source,/integrationStage/);
+  assert.match(source,/INTEGRATION_PREMERGE_CHECKPOINT_REQUIRED/);
+  assert.match(source,/CHECKPOINT_SCOPE_VIOLATION/);
 });
