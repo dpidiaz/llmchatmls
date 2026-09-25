@@ -4,7 +4,7 @@ Estado del documento: VIVO
 Repositorio: `dpidiaz/llmchatmls`  
 Base funcional: MLS R32  
 Programa: Evidence & Provenance R33  
-Última actualización: 2026-09-21  
+Última actualización: 2026-09-25  
 Responsable operativo: implementación chat native sobre el repositorio real
 
 ---
@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 4B — GITHUB-NATIVE BENCHMARK 100 READY / GATE 500 BLOCKED**
+**Estado actual: FASE 6 — GATE 1000 PREPARED / NOT AUTHORIZED**
 
 Progreso global inicial:
 
@@ -48,9 +48,9 @@ Progreso global inicial:
 | Fase 2 Piloto 20 | COMPLETE — PASS WITH FINDINGS | 20/20 procesadas; Fase 3 obligatoria |
 | Fase 3 Evaluación | COMPLETE — GO | E1–E5 cerrados; E3 REVIEWED humano live |
 | Fase 4 Gate 100 | COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE | 100/100 VERIFIED; 0 excepciones; read amplification requiere corrección |
-| Fase 4B Benchmark GitHub-native 100 | READY / AUTHORIZED | 100 entradas frescas; R33 Farm R2; 0 D1/Cloudflare editorial obligatorio |
-| Fase 5 Gate 500 | BLOCKED / NOT AUTHORIZED | Requiere cierre favorable del benchmark GitHub-native 100 |
-| Fase 6 Gate 1000 | NOT STARTED | 1000 estables |
+| Fase 4B Benchmark GitHub-native 100 | COMPLETE | 100/100 VERIFIED; integración y certificación cerradas |
+| Fase 5 Gate 500 | COMPLETE — CERTIFIED | 500/500 del pool VERIFIED; 50×10; Evidence global 700/700 |
+| Fase 6 Gate 1000 | PREPARED / NOT AUTHORIZED | Pool candidato 1000 = 100×10; 820 exclusiones; Gate 500 sigue activo |
 | Fase 7 Escalamiento corpus | NOT STARTED | Viabilidad demostrada |
 | Source first para nuevas entradas | DEFERRED | Después de R33 estable |
 | AUTOOPT Evidence metrics | DEFERRED | Después de R33 estable |
@@ -618,11 +618,13 @@ locatorPolicy: PASS
 
 # 11. FASE 5 — GATE 500
 
-**Estado: BLOCKED / NOT AUTHORIZED**
+**Estado: COMPLETE — CERTIFIED**
 
 Precondición: Gate 100 estable y Correction Repeat favorable.
 
 Objetivo: validar comportamiento a escala intermedia.
+
+Cierre 2026-09-25: 500/500 entradas del pool VERIFIED, 50 por cada uno de 10 idiomas, Evidence global 700/700 VERIFIED, REVIEWED fabricado = 0 y Cloudflare/D1 editorial = 0. Certificación persistida en `22 R33 Gate 500 Final Certification.md`.
 
 No aceptar crecimiento accidental de:
 
@@ -637,13 +639,15 @@ No aceptar crecimiento accidental de:
 
 # 12. FASE 6 — GATE 1000
 
-**Estado: NOT STARTED**
+**Estado: PREPARED / NOT AUTHORIZED**
 
 Precondición: 500 estable.
 
 Objetivo: probar que arquitectura, costos y operación chat native son sostenibles antes del resto del corpus.
 
 En este gate debe existir suficiente evidencia para estimar el costo total de las 10,133 entradas.
+
+Preparación R1: pool candidato de 1,000 entradas, 100 por idioma, selección cuantílica discreta determinista, 820 códigos previos excluidos, contentBlobSha fijado y Gate 500 conservado como activePool. Gate 1000 permanece inactive/unauthorized hasta autorización explícita posterior.
 
 ---
 
