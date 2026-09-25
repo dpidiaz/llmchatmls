@@ -5,6 +5,7 @@ const PROVIDER_VERSION='1.0';
 const DEFAULT_REQUESTED=25;
 const MAX_REQUESTED=50;
 const CHECKPOINT_SIZE_MAX=10;
+const PREFETCH_MAX=100;
 
 function providerError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -136,7 +137,27 @@ function materializeCandidate(snapshot,options={}){
   };
 }
 
+function normalizePrefetchCount(value){
+  const count=Number(value??50);
+  if(!Number.isInteger(count)||count<1||count>PREFETCH_MAX)throw providerError('INVALID_PREFETCH_COUNT','count debe estar entre 1 y '+PREFETCH_MAX+'.');
+  return count;
+}
+function materializeCandidates(snapshot,options={}){
+  const count=normalizePrefetchCount(options.count),nowMs=options.now==null?Date.now():Number(options.now);
+  if(!Number.isFinite(nowMs))throw providerError('INVALID_NOW','now inválido.');
+  const batches=Array.isArray(snapshot?.batches)?snapshot.batches.map(x=>structuredClone(x)):Array.isArray(snapshot?.activeBatches)?snapshot.activeBatches.map(x=>structuredClone(x)):[];
+  const out=[];
+  for(let index=0;index<count;index++){
+    const candidate=materializeCandidate({...snapshot,batches},{...options,now:nowMs});
+    if(!candidate.eligible)break;
+    out.push(candidate);
+    const acknowledgedAt=new Date(nowMs).toISOString(),expiresAt=new Date(nowMs+60*60*1000).toISOString();
+    batches.push({poolId:candidate.poolId,batchId:'GLOBAL-PREFETCH-'+String(index+1).padStart(3,'0'),status:'leased',acknowledgedAt,ackDeadlineAt:expiresAt,expiresAt,entries:candidate.units.map(unit=>({code:unit.code}))});
+  }
+  return out;
+}
+
 module.exports={
-  PROVIDER_ID,PROVIDER_VERSION,DEFAULT_REQUESTED,MAX_REQUESTED,CHECKPOINT_SIZE_MAX,
-  providerError,assertCode,batchActive,evidenceArtifactPath,materializeCandidate
+  PROVIDER_ID,PROVIDER_VERSION,DEFAULT_REQUESTED,MAX_REQUESTED,CHECKPOINT_SIZE_MAX,PREFETCH_MAX,
+  providerError,assertCode,batchActive,evidenceArtifactPath,materializeCandidate,materializeCandidates
 };
