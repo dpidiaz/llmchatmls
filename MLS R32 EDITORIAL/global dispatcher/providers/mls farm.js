@@ -5,6 +5,7 @@ const farm=require('../../farm core.js');
 const PROVIDER_ID='mls-farm';
 const PROVIDER_VERSION='1.0';
 const CHECKPOINT_SIZE_MAX=10;
+const PREFETCH_MAX=100;
 
 function providerError(code,message,status=409){
   const error=new Error(message||code);
@@ -153,8 +154,27 @@ function materializeFarmWork({corpus,ledgers,batches,requested=farm.FARM_DEFAULT
   };
 }
 
+function normalizePrefetchCount(value){
+  const count=Number(value??50);
+  if(!Number.isInteger(count)||count<1||count>PREFETCH_MAX)throw providerError('INVALID_PREFETCH_COUNT','count debe estar entre 1 y '+PREFETCH_MAX+'.');
+  return count;
+}
+function materializeFarmWorks({corpus,ledgers,batches,requested=farm.FARM_DEFAULT_BATCH,count=50,at}){
+  const limit=normalizePrefetchCount(count),atMs=normalizeAt(at);
+  const workingBatches=Array.isArray(batches)?batches.map(x=>structuredClone(x)):[];
+  const out=[];
+  for(let index=0;index<limit;index++){
+    const work=materializeFarmWork({corpus,ledgers,batches:workingBatches,requested,at:atMs});
+    if(!work)break;
+    out.push(work);
+    const acknowledgedAt=new Date(atMs).toISOString(),expiresAt=new Date(atMs+60*60*1000).toISOString();
+    workingBatches.push({kind:'batch',batchId:'GLOBAL-PREFETCH-'+String(index+1).padStart(3,'0'),status:'leased',acknowledgedAt,ackDeadlineAt:expiresAt,expiresAt,entries:work.units.map(code=>({code}))});
+  }
+  return out;
+}
+
 module.exports={
-  PROVIDER_ID,PROVIDER_VERSION,CHECKPOINT_SIZE_MAX,
+  PROVIDER_ID,PROVIDER_VERSION,CHECKPOINT_SIZE_MAX,PREFETCH_MAX,
   providerError,normalizeAt,normalizeRequested,normalizeCorpus,normalizeLedgers,normalizeBatches,
-  inspectFarmSnapshot,eligibleFarmEntries,materializeFarmWork
+  inspectFarmSnapshot,eligibleFarmEntries,materializeFarmWork,materializeFarmWorks
 };
