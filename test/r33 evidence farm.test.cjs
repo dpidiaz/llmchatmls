@@ -18,13 +18,19 @@ function resultFor(state,code,overrides={}){
     ...overrides
   };
 }
-test('Evidence Farm R2 active pool is GitHub-native in Benchmark-100 or Gate-500 lifecycle state',()=>{
+test('Evidence Farm R2 active pool is GitHub-native across Benchmark-100, Gate-500 or Gate-1000 lifecycle state',()=>{
   const pool=core.loadPool('.');
   assert.equal(pool.editorialArchitecture,'github-native');
   assert.equal(pool.sourceOfTruth,'github');
   assert.equal(pool.cloudflareEditorialAllowed,false);
   assert.equal(pool.d1EditorialAllowed,false);
-  if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-500'){
+  if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-1000'){
+    assert.equal(pool.status,'authorized');
+    assert.equal(pool.active,true);
+    assert.equal(pool.gate1000Authorized,true);
+    assert.equal(pool.dispatcherOnly,true);
+    assert.equal(pool.entries.length,1000);
+  }else if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-500'){
     assert.equal(pool.status,'authorized');
     assert.equal(pool.active,true);
     assert.equal(pool.gate500Authorized,true);
@@ -39,10 +45,14 @@ test('Evidence Farm R2 active pool is GitHub-native in Benchmark-100 or Gate-500
 test('active R33 pool is fresh versus all earlier cohorts',()=>{
   const pool=core.loadPool('.'),pilot=JSON.parse(fs.readFileSync('docs/evidence y provenance/04 Pilot 20 Manifest.json','utf8')),gate=JSON.parse(fs.readFileSync('docs/evidence y provenance/13 Gate 100 Manifest.json','utf8')),repeat=JSON.parse(fs.readFileSync('docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json','utf8'));
   const prior=new Set([...(pilot.entries||[]).map(x=>x.code),...(gate.entries||[]).map(x=>x.code),...(repeat.entries||[]).map(x=>x.code)]);
-  if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-500'){
+  if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-500'||pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-1000'){
     const benchmark=JSON.parse(fs.readFileSync('docs/evidence y provenance/17 GitHub Native Benchmark 100 Pool.json','utf8'));
     for(const e of benchmark.entries||[])prior.add(e.code);
-    assert.equal(prior.size,320);
+    if(pool.poolId==='MLS-R33-GITHUB-NATIVE-GATE-1000'){
+      const gate500=JSON.parse(fs.readFileSync('docs/evidence y provenance/20 R33 Gate 500 Pool.json','utf8'));
+      for(const e of gate500.entries||[])prior.add(e.code);
+      assert.equal(prior.size,820);
+    }else assert.equal(prior.size,320);
   }
   assert.equal(pool.entries.some(x=>prior.has(x.code)),false);
   assert.equal(pool.entries.every(x=>/^[a-f0-9]{40}$/.test(x.contentBlobSha||'')),true);

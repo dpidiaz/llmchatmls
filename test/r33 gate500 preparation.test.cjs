@@ -9,25 +9,34 @@ const store=require('../MLS R32 EDITORIAL/evidence git.js');
 const GATE='docs/evidence y provenance/20 R33 Gate 500 Pool.json';
 const CONTROL='docs/evidence y provenance/21 R33 Active Pool Control.json';
 
-test('active pool control allows only prepared Benchmark-100 state or authorized Gate-500 state',()=>{
+test('active pool control allows Benchmark-100, Gate-500 or Gate-1000 lifecycle state',()=>{
   const control=JSON.parse(fs.readFileSync(CONTROL,'utf8'));
   const gate=core.loadPool('.',GATE);
-  assert.equal(control.candidatePoolId,'MLS-R33-GITHUB-NATIVE-GATE-500');
-  if(gate.active===true){
+  if(control.activePoolId==='MLS-R33-GITHUB-NATIVE-GATE-1000'){
+    assert.equal(control.activePoolPath,'docs/evidence y provenance/23 R33 Gate 1000 Pool.json');
+    assert.equal(control.gate1000Authorized,true);
+    assert.equal(control.activationState,'authorized');
+    assert.equal(core.resolvePoolPath('.'),'docs/evidence y provenance/23 R33 Gate 1000 Pool.json');
     assert.equal(gate.status,'authorized');
     assert.equal(gate.gate500Authorized,true);
-    assert.equal(control.activePoolId,'MLS-R33-GITHUB-NATIVE-GATE-500');
-    assert.equal(control.activePoolPath,GATE);
-    assert.equal(control.gate500Authorized,true);
-    assert.equal(control.activationState,'authorized');
-    assert.equal(core.resolvePoolPath('.'),GATE);
   }else{
-    assert.equal(gate.status,'prepared');
-    assert.equal(gate.gate500Authorized,false);
-    assert.equal(control.activePoolId,'MLS-R33-GITHUB-NATIVE-BENCHMARK-100');
-    assert.equal(control.gate500Authorized,false);
-    assert.equal(control.activationState,'prepared_not_authorized');
-    assert.equal(core.resolvePoolPath('.'),'docs/evidence y provenance/17 GitHub Native Benchmark 100 Pool.json');
+    assert.equal(control.candidatePoolId,'MLS-R33-GITHUB-NATIVE-GATE-500');
+    if(gate.active===true){
+      assert.equal(gate.status,'authorized');
+      assert.equal(gate.gate500Authorized,true);
+      assert.equal(control.activePoolId,'MLS-R33-GITHUB-NATIVE-GATE-500');
+      assert.equal(control.activePoolPath,GATE);
+      assert.equal(control.gate500Authorized,true);
+      assert.equal(control.activationState,'authorized');
+      assert.equal(core.resolvePoolPath('.'),GATE);
+    }else{
+      assert.equal(gate.status,'prepared');
+      assert.equal(gate.gate500Authorized,false);
+      assert.equal(control.activePoolId,'MLS-R33-GITHUB-NATIVE-BENCHMARK-100');
+      assert.equal(control.gate500Authorized,false);
+      assert.equal(control.activationState,'prepared_not_authorized');
+      assert.equal(core.resolvePoolPath('.'),'docs/evidence y provenance/17 GitHub Native Benchmark 100 Pool.json');
+    }
   }
 });
 
