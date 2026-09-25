@@ -5,7 +5,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 
 const DISPATCH_VERSION='1.0';
-const CLAIM_TTL_MS=90*1000;
+const CLAIM_TTL_MS=10*60*1000;
 const ACK_TTL_MS=5*60*1000;
 const LEASE_TTL_MS=10*60*1000;
 const REAPER_CADENCE_MINUTES=5;
@@ -272,7 +272,7 @@ function dispatchProgress(registry,ledger,states,at=Date.now()){
   const active=activeAssignments(states,at);
   const terminal=Object.keys(ledger.terminal||{}).length,recoveries=Object.keys(ledger.recoveries||{}).length;
   const ready=registry.items.filter(x=>!terminalStatus(ledger,x.workId)&&!workIsActive(x.workId,states,at)&&dependenciesSatisfied(x,ledger)&&(x.status==='ready'||ledger.recoveries?.[x.workId])).length;
-  return {version:DISPATCH_VERSION,totalWorkItems:registry.items.length,terminal,activeAssignments:active.length,recoveries,ready,cloudflareEditorialInteractions:0,d1EditorialReads:0,d1EditorialWrites:0};
+  return {version:DISPATCH_VERSION,totalWorkItems:registry.items.length,terminal,activeAssignments:active.length,recoveries,ready,readyQueue:ready,cloudflareEditorialInteractions:0,d1EditorialReads:0,d1EditorialWrites:0};
 }
 
 module.exports={
