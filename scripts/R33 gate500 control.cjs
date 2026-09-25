@@ -7,6 +7,7 @@ const crypto=require('node:crypto');
 const ROOT=process.cwd();
 const GATE='docs/evidence y provenance/20 R33 Gate 500 Pool.json';
 const CONTROL='docs/evidence y provenance/21 R33 Active Pool Control.json';
+const GATE1000='docs/evidence y provenance/23 R33 Gate 1000 Pool.json';
 const PRIOR=[
   'docs/evidence y provenance/04 Pilot 20 Manifest.json',
   'docs/evidence y provenance/13 Gate 100 Manifest.json',
@@ -43,7 +44,10 @@ function validate(){
   if(overlap.length)fail('PRIOR_OVERLAP','Gate 500 contiene códigos usados previamente: '+overlap.slice(0,10).join(', '));
   if(prior.size!==320)fail('PRIOR_CARDINALITY','Se esperaban 320 códigos previos, hay '+prior.size+'.');
   if(drift.length)fail('CONTENT_BLOB_DRIFT','Cambió contenido canónico de '+drift.length+' entradas Gate 500.');
-  if(control.candidatePoolPath!==GATE||control.candidatePoolId!==pool.poolId)fail('CONTROL_CANDIDATE','Active Pool Control no apunta al candidato Gate 500.');
+  if(control.activePoolId==='MLS-R33-GITHUB-NATIVE-GATE-1000'){
+    if(control.activePoolPath!==GATE1000||control.candidatePoolPath!==GATE1000||control.candidatePoolId!=='MLS-R33-GITHUB-NATIVE-GATE-1000')fail('GATE1000_CONTROL','Active Pool Control Gate 1000 inconsistente.');
+    if(control.gate1000Authorized!==true||control.gate500Authorized!==true||control.activationState!=='authorized')fail('GATE1000_AUTH','Gate 1000/Gate 500 authorization flags inconsistentes.');
+  }else if(control.candidatePoolPath!==GATE||control.candidatePoolId!==pool.poolId)fail('CONTROL_CANDIDATE','Active Pool Control no apunta al candidato Gate 500.');
   return {pool,control,counts,priorCodes:prior.size,blobDrift:drift.length};
 }
 const mode=process.argv.includes('--activate')?'activate':'check';
