@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "dispatcherVersion": "1.0",
   "sourceOfTruth": "github",
-  "updatedAt": "2026-09-24T05:17:00-06:00",
+  "updatedAt": "2026-09-25T12:19:00-06:00",
   "items": [
     {
       "workId": "evidence-runtime-e2e-certification",
@@ -246,6 +246,39 @@
         "authorizedAt": "2026-09-24T11:17:00.000Z",
         "authorizedBy": "maintainer-explicit-chat-authorization",
         "scope": "activate Gate 500 only; execution remains Global Dispatcher controlled"
+      }
+    },
+    {
+      "workId": "gate500-final-certification",
+      "version": 1,
+      "title": "Certificar cierre final R33 Gate 500",
+      "workType": "validation",
+      "status": "ready",
+      "priority": 120,
+      "createdAt": "2026-09-25T12:19:00-06:00",
+      "dependsOn": [
+        "gate500"
+      ],
+      "resourceLocks": [
+        "system:r33-gate500-final-certification",
+        "path:docs/evidence y provenance/22 R33 Gate 500 Final Certification.md"
+      ],
+      "allowedPaths": [
+        "docs/evidence y provenance/22 R33 Gate 500 Final Certification.md"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/r33-gate500-final-certification"
+      },
+      "provider": "global",
+      "instructions": "Certifica el cierre final del R33 Gate 500 sobre main después de completar todas las integraciones del pool. Verifica exactamente 500/500 entradas del pool presentes en Evidence, status VERIFIED, distribución 50 por cada uno de 10 idiomas, índices derivables y 700/700 VERIFIED globales, sin REVIEWED humano fabricado, sin drift del pool, con R33 Gate 500 Preparation Tests y R33 GitHub Native Tests verdes. Confirma Cloudflare/D1 editorial en cero. Persiste el reporte en `docs/evidence y provenance/22 R33 Gate 500 Final Certification.md`. No modifiques Evidence, Sources ni contenido canónico.",
+      "validation": [
+        "R33 Gate 500 Preparation Tests",
+        "R33 GitHub Native Tests"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
       }
     }
   ]
