@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "dispatcherVersion": "1.0",
   "sourceOfTruth": "github",
-  "updatedAt": "2026-09-25T12:19:00-06:00",
+  "updatedAt": "2026-09-25T12:28:00-06:00",
   "items": [
     {
       "workId": "evidence-runtime-e2e-certification",
@@ -274,6 +274,48 @@
       "instructions": "Certifica el cierre final del R33 Gate 500 sobre main después de completar todas las integraciones del pool. Verifica exactamente 500/500 entradas del pool presentes en Evidence, status VERIFIED, distribución 50 por cada uno de 10 idiomas, índices derivables y 700/700 VERIFIED globales, sin REVIEWED humano fabricado, sin drift del pool, con R33 Gate 500 Preparation Tests y R33 GitHub Native Tests verdes. Confirma Cloudflare/D1 editorial en cero. Persiste el reporte en `docs/evidence y provenance/22 R33 Gate 500 Final Certification.md`. No modifiques Evidence, Sources ni contenido canónico.",
       "validation": [
         "R33 Gate 500 Preparation Tests",
+        "R33 GitHub Native Tests"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      }
+    },
+    {
+      "workId": "gate1000-preparation-r1",
+      "version": 1,
+      "title": "Preparar R33 Gate 1000 R1",
+      "workType": "code_task",
+      "status": "ready",
+      "priority": 130,
+      "createdAt": "2026-09-25T12:28:00-06:00",
+      "dependsOn": [
+        "gate500-final-certification"
+      ],
+      "resourceLocks": [
+        "system:r33-gate1000-preparation",
+        "path:docs/evidence y provenance/23 R33 Gate 1000 Pool.json",
+        "path:docs/evidence y provenance/24 R33 Gate 1000 Preparation R1.md",
+        "path:scripts/R33 gate1000 control.cjs",
+        "path:test/r33 gate1000 preparation.test.cjs"
+      ],
+      "allowedPaths": [
+        "docs/evidence y provenance/00 Indice.md",
+        "docs/evidence y provenance/02 Roadmap MLS Evidence Provenance R33.md",
+        "docs/evidence y provenance/23 R33 Gate 1000 Pool.json",
+        "docs/evidence y provenance/24 R33 Gate 1000 Preparation R1.md",
+        "scripts/R33 gate1000 control.cjs",
+        "test/r33 gate1000 preparation.test.cjs",
+        "package.json"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/r33-gate1000-preparation"
+      },
+      "provider": "global",
+      "instructions": "PREPARACIÓN SOLAMENTE. Construye Gate 1000 R1 como pool GitHub-native de exactamente 1000 entradas, 100 por cada uno de 10 idiomas, mediante selección determinista estratificada por cuantiles sobre content/manifest.json. Excluye todos los códigos usados en Pilot 20, Gate 100, Correction Repeat, GitHub-native Benchmark 100 y Gate 500; fija contentBlobSha por entrada; status=prepared, active=false, gate1000Authorized=false, dispatcherOnly=true, Cloudflare/D1 editorial=false. Gate 500 debe permanecer activePool. Añade control/test fail-closed, integra el test en test:r33-github-native, actualiza índice/roadmap y persiste documento de preparación. No produzcas Evidence ni actives Gate 1000.",
+      "validation": [
+        "R33 Gate 1000 Preparation Tests",
         "R33 GitHub Native Tests"
       ],
       "completion": {
