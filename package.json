@@ -55,12 +55,13 @@
     "translator:packs": "node 'scripts/generar paquetes traductor.js'",
     "test:evidence": "node --test 'test/evidence foundation.test.cjs' 'test/evidence registry.test.cjs' 'test/evidence claims.test.cjs' 'test/evidence validator.test.cjs' 'test/evidence apa.test.cjs' 'test/evidence reviews.test.cjs' 'test/evidence api.test.cjs' 'test/evidence runtime integration.test.cjs' 'test/evidence certification contract.test.cjs' 'test/evidence policies provenance.test.cjs' 'test/evidence boundaries.test.cjs' 'test/evidence pilot 20 manifest.test.cjs' 'test/evidence telemetry.test.cjs' 'test/evidence consumer.test.cjs' 'test/evidence consumers integration.test.cjs' 'test/chat bridge batch.test.cjs' 'test/evidence scale.test.cjs' 'test/evidence gate100 manifest.test.cjs' 'test/evidence reader integration.test.cjs' 'test/evidence native reader.test.cjs' 'test/evidence github runtime.test.cjs' 'test/r33 evidence git.test.cjs' 'test/r33 evidence farm.test.cjs'",
     "test:farm": "node --test 'test/mls farm.test.cjs'",
-    "test:r33-github-native": "node --test 'test/r33 evidence git.test.cjs' 'test/r33 evidence farm.test.cjs' 'test/r33 gate500 preparation.test.cjs' 'test/evidence github runtime.test.cjs' 'test/evidence reader integration.test.cjs' 'test/evidence native reader.test.cjs' && node 'scripts/R33 evidence git validate.cjs' && node 'scripts/R33 evidence indexes.cjs' --check && node 'scripts/R33 gate500 control.cjs' --check && node 'scripts/assert r33 github only.cjs'",
+    "test:r33-github-native": "node --test 'test/r33 evidence git.test.cjs' 'test/r33 evidence farm.test.cjs' 'test/r33 gate500 preparation.test.cjs' 'test/r33 gate1000 preparation.test.cjs' 'test/evidence github runtime.test.cjs' 'test/evidence reader integration.test.cjs' 'test/evidence native reader.test.cjs' && node 'scripts/R33 evidence git validate.cjs' && node 'scripts/R33 evidence indexes.cjs' --check && node 'scripts/R33 gate500 control.cjs' --check && node 'scripts/assert r33 github only.cjs'",
     "evidence:runtime": "node 'scripts/generar evidence runtime github.js'",
     "test:global-dispatcher": "node --test 'test/mls global dispatcher.test.cjs'",
     "r33:indexes:check": "node 'scripts/R33 evidence indexes.cjs' --check",
     "r33:indexes:write": "node 'scripts/R33 evidence indexes.cjs' --write",
-    "r33:gate500:check": "node 'scripts/R33 gate500 control.cjs' --check"
+    "r33:gate500:check": "node 'scripts/R33 gate500 control.cjs' --check",
+    "r33:gate1000:check": "node 'scripts/R33 gate1000 control.cjs' --check"
   },
   "repository": {
     "type": "git",
