@@ -98,3 +98,13 @@ La documentación no autoriza por sí sola un despliegue remoto ni una migració
 
 12. [22 R33 Gate 500 Preparation R1](./22%20R33%20Gate%20500%20Preparation%20R1.md)  
    Hardening previo a Gate 500: pool candidato 500, selector activo, dispatcher-only, waves de 50, rebuild serializado de índices y activación fail-closed.
+
+13. [22 R33 Gate 500 Final Certification](./22%20R33%20Gate%20500%20Final%20Certification.md)  
+   Certificación de cierre Gate 500: 500/500 entradas del pool VERIFIED, 50×10 idiomas, 700/700 VERIFIED globales y Cloudflare/D1 editorial = 0.
+
+14. [23 R33 Gate 1000 Pool](./23%20R33%20Gate%201000%20Pool.json)  
+   Pool candidato preparado de 1,000 entradas: 100 por idioma, 820 códigos previos excluidos, contentBlobSha fijado, inactive/unauthorized.
+
+15. [24 R33 Gate 1000 Preparation R1](./24%20R33%20Gate%201000%20Preparation%20R1.md)  
+   Contrato de preparación Gate 1000: selector cuantílico discreto, preflight fail-closed, Gate 500 permanece activo y Gate 1000 no se ejecuta sin autorización explícita.
+
