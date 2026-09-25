@@ -36,7 +36,7 @@ No utilizar la memoria conversacional como única fuente de estado.
 
 ## 2. ESTADO GLOBAL
 
-**Estado actual: FASE 6 — GATE 1000 PREPARED / NOT AUTHORIZED**
+**Estado actual: FASE 6 — GATE 1000 AUTHORIZED / ACTIVE**
 
 Progreso global inicial:
 
@@ -50,7 +50,7 @@ Progreso global inicial:
 | Fase 4 Gate 100 | COMPLETE — PASS QUALITY / CORRECT AND REPEAT SCALE | 100/100 VERIFIED; 0 excepciones; read amplification requiere corrección |
 | Fase 4B Benchmark GitHub-native 100 | COMPLETE | 100/100 VERIFIED; integración y certificación cerradas |
 | Fase 5 Gate 500 | COMPLETE — CERTIFIED | 500/500 del pool VERIFIED; 50×10; Evidence global 700/700 |
-| Fase 6 Gate 1000 | PREPARED / NOT AUTHORIZED | Pool candidato 1000 = 100×10; 820 exclusiones; Gate 500 sigue activo |
+| Fase 6 Gate 1000 | AUTHORIZED / ACTIVE | 1,000 = 100×10; 820 exclusiones; ejecución G5 vía Global Dispatcher |
 | Fase 7 Escalamiento corpus | NOT STARTED | Viabilidad demostrada |
 | Source first para nuevas entradas | DEFERRED | Después de R33 estable |
 | AUTOOPT Evidence metrics | DEFERRED | Después de R33 estable |
@@ -639,7 +639,7 @@ No aceptar crecimiento accidental de:
 
 # 12. FASE 6 — GATE 1000
 
-**Estado: PREPARED / NOT AUTHORIZED**
+**Estado: AUTHORIZED / ACTIVE**
 
 Precondición: 500 estable.
 
@@ -647,7 +647,7 @@ Objetivo: probar que arquitectura, costos y operación chat native son sostenibl
 
 En este gate debe existir suficiente evidencia para estimar el costo total de las 10,133 entradas.
 
-Preparación R1: pool candidato de 1,000 entradas, 100 por idioma, selección cuantílica discreta determinista, 820 códigos previos excluidos, contentBlobSha fijado y Gate 500 conservado como activePool. Gate 1000 permanece inactive/unauthorized hasta autorización explícita posterior.
+Preparación R1: pool candidato de 1,000 entradas, 100 por idioma, selección cuantílica discreta determinista, 820 códigos previos excluidos y contentBlobSha fijado.\n\nActivación 2026-09-25: autorización explícita registrada; `MLS-GLOBAL-000879` completado; PR #880 mergeado como `10cfa7ceedb36f3297279af127bf8d37b974922f`; Active Pool Control apunta a Gate 1000; pre/post CI R33 GitHub Native y Evidence Farm PASS; Cloudflare/D1 editorial = 0. G5 queda habilitado vía Global Dispatcher.
 
 ---
 
@@ -1265,3 +1265,16 @@ El Roadmap es parte del sistema de control de cambios R33, no una nota opcional.
 - Decision remains PASS QUALITY / CORRECT AND REPEAT SCALE.
 - Gate 500 remains blocked pending a successful Gate 100 Correction Repeat.
 - Audit checkpoint persisted in commit 8ff2b7719258d79fda6ca46139991627646bf2f5.
+
+## 2026-09-25 — Gate 1000 AUTHORIZED / ACTIVE
+
+- Gate 500 certificado y cerrado antes de abrir Fase 6.
+- Gate 1000 preparado con 1,000 entradas, 100×10 idiomas, 820 exclusiones y blob drift 0.
+- Autorización explícita del mantenedor registrada en roadmap issue #872.
+- Activación completada por `MLS-GLOBAL-000879` y PR #880.
+- Merge de activación: `10cfa7ceedb36f3297279af127bf8d37b974922f`.
+- Contratos legacy actualizados en PR #881 y PR #882.
+- Pre/post merge R33 GitHub Native y R33 Evidence Farm: PASS.
+- Cloudflare editorial = 0; D1 reads/writes = 0.
+- Siguiente fase: G5, ejecución controlada de las 1,000 entradas mediante Global Dispatcher.
+
