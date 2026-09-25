@@ -9,6 +9,7 @@ const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-integration']);
+const READY_QUEUE_TARGET=50;
 
 function integrationError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -171,22 +172,24 @@ function recoveryItems(globalLedger){
   }
   return items;
 }
-function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedger=null,globalAssignments=[]}={}){
+function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedger=null,globalAssignments=[],queueTarget=READY_QUEUE_TARGET}={}){
   const items=[],diagnostics=[];
   try{
     const snapshot=projectMlsSnapshot(collectMlsSnapshot(issues,root),{globalLedger,globalAssignments});
-    const item=mlsProvider.materializeFarmWork({...snapshot,at:now});
-    if(item)items.push(globalCore.normalizeWorkItem(item));
+    const works=mlsProvider.materializeFarmWorks({...snapshot,at:now,count:queueTarget});
+    for(const item of works)items.push(globalCore.normalizeWorkItem(item));
   }catch(error){diagnostics.push({provider:'mls-farm',status:'blocked',error:error.code||'MLS_FARM_PROVIDER_ERROR',message:error.message});}
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const indexItem=r33IndexIntegrationWork({pool:snapshot.pool,globalLedger,root});
     if(indexItem)items.push(globalCore.normalizeWorkItem(indexItem));
-    const candidate=r33Provider.materializeCandidate(snapshot,{now});
-    const item=r33CandidateToWork(candidate,now);
-    if(item)items.push(globalCore.normalizeWorkItem(item));
+    const candidates=r33Provider.materializeCandidates(snapshot,{now,count:queueTarget});
+    for(const candidate of candidates){
+      const item=r33CandidateToWork(candidate,now);
+      if(item)items.push(globalCore.normalizeWorkItem(item));
+    }
   }catch(error){diagnostics.push({provider:'r33-farm',status:'blocked',error:error.code||'R33_PROVIDER_ERROR',message:error.message});}
-  return {items,diagnostics};
+  return {items,diagnostics,queueTarget};
 }
 function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
   const base=globalCore.normalizeRegistry(baseRegistry),combined=[],seen=new Set(base.items.map(x=>x.workId));
@@ -202,7 +205,7 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 }
 
 module.exports={
-  DYNAMIC_PROVIDERS,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
+  DYNAMIC_PROVIDERS,READY_QUEUE_TARGET,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
   collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33IntegratedCodes,r33IndexIntegrationWork,
   recoveryItems,materializeProviderItems,extendRegistry
 };
