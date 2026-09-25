@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "dispatcherVersion": "1.0",
   "sourceOfTruth": "github",
-  "updatedAt": "2026-09-25T12:28:00-06:00",
+  "updatedAt": "2026-09-25T18:44:00.000Z",
   "items": [
     {
       "workId": "evidence-runtime-e2e-certification",
@@ -321,6 +321,47 @@
       "completion": {
         "requiresCommit": true,
         "requiresValidation": true
+      }
+    },
+    {
+      "workId": "gate1000",
+      "version": 1,
+      "title": "Autorizar y activar R33 Gate 1000",
+      "workType": "validation",
+      "status": "ready",
+      "priority": 105,
+      "createdAt": "2026-09-25T12:44:00-06:00",
+      "dependsOn": [
+        "gate1000-preparation-r1"
+      ],
+      "resourceLocks": [
+        "system:r33-gate1000-activation",
+        "path:docs/evidence y provenance/23 R33 Gate 1000 Pool.json",
+        "path:docs/evidence y provenance/21 R33 Active Pool Control.json"
+      ],
+      "allowedPaths": [
+        "docs/evidence y provenance/23 R33 Gate 1000 Pool.json",
+        "docs/evidence y provenance/21 R33 Active Pool Control.json"
+      ],
+      "branchPolicy": {
+        "mode": "assignment",
+        "prefix": "worker/r33-gate1000-activation"
+      },
+      "provider": "global",
+      "instructions": "AUTORIZADO explícitamente el 2026-09-25. ACTIVACIÓN SOLAMENTE. No produzcas Evidence. Ejecuta el preflight Gate 1000; si pasa, ejecuta `node 'scripts/R33 gate1000 control.cjs' --activate --confirm=GATE1000`, cambia el manifiesto a status=authorized/active=true/gate1000Authorized=true y apunta Active Pool Control a Gate 1000. Mantén dispatcherOnly=true, GitHub-only y Cloudflare/D1 editorial=false.",
+      "validation": [
+        "R33 Gate 1000 Preparation Tests",
+        "R33 GitHub Native Tests"
+      ],
+      "completion": {
+        "requiresCommit": true,
+        "requiresValidation": true
+      },
+      "authorization": {
+        "authorized": true,
+        "authorizedAt": "2026-09-25T18:44:00.000Z",
+        "authorizedBy": "maintainer-explicit-chat-authorization",
+        "scope": "activate Gate 1000 only; execution remains Global Dispatcher controlled"
       }
     }
   ]
