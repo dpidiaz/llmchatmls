@@ -162,3 +162,30 @@ test('dispatcher editorial control plane contains no Cloudflare or D1 dependency
     assert.doesNotMatch(source,/workers\.dev|wrangler|WIKI_DB|\/api\/wiki\/editorial/i,file);
   }
 });
+
+
+test('burst claims have a ten-minute queue window while ACK and rolling lease remain bounded',()=>{
+  assert.equal(core.CLAIM_TTL_MS,10*60*1000);
+  assert.equal(core.ACK_TTL_MS,5*60*1000);
+  assert.equal(core.LEASE_TTL_MS,10*60*1000);
+});
+
+test('a new recovery generation fences a revived stale worker',()=>{
+  const r=registry(),item=r.items[0];
+  const oldState=assignment(item,201,'2026-09-23T10:00:00.000Z');
+  const newState=assignment(item,202,'2026-09-23T10:06:00.000Z');
+  const zombie={operation:'heartbeat',assignmentId:oldState.assignmentId,leaseToken:oldState.leaseToken,leaseEpoch:oldState.leaseEpoch};
+  assert.throws(()=>core.applyWorkerEvent(newState,zombie,{createdAt:'2026-09-23T10:07:00.000Z',commentId:20}),e=>e.code==='LEASE_TOKEN_MISMATCH');
+  assert.notEqual(oldState.branch,newState.branch);
+});
+
+test('scheduler caches a hot queue and recovery creates a fresh generational branch',()=>{
+  const source=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
+  assert.match(source,/let cachedRegistry=null/);
+  assert.match(source,/runtimeRegistry\(refresh=false\)/);
+  assert.match(source,/runtimeRegistry\(true\)/);
+  assert.match(source,/recoveryResume\(recovery,item\)/);
+  assert.match(source,/previousBranch/);
+  assert.match(source,/recoveryBranch:branch/);
+  assert.doesNotMatch(source,/branch=String\(recovery\.branch/);
+});

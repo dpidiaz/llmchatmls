@@ -68,3 +68,21 @@ test('no materializa trabajo cuando todo es terminal o protegido',()=>{
   assert.deepEqual(out.units,[]);
   assert.deepEqual(out.resourceLocks,[]);
 });
+
+
+test('prefetch materializes 30 disjoint R33 candidates for a burst of workers',()=>{
+  const entries=Array.from({length:40},(_,i)=>({
+    order:i+1,
+    code:'MLS-V01-'+String(i+1).padStart(4,'0'),
+    language:'ingles',
+    contentPath:'content/ingles/MLS-V01-'+String(i+1).padStart(4,'0')+'.json'
+  }));
+  const p={...pool(),entries,execution:{defaultClaimSize:1,maxClaimSize:50}};
+  const l={...ledger(),poolId:p.poolId};
+  const candidates=provider.materializeCandidates({pool:p,ledger:l,batches:[]},{now:NOW,requested:1,count:30});
+  assert.equal(candidates.length,30);
+  const codes=candidates.flatMap(candidate=>candidate.units.map(unit=>unit.code));
+  assert.equal(codes.length,30);
+  assert.equal(new Set(codes).size,30);
+  assert.equal(candidates.every(candidate=>candidate.ownership.nestedLease===false),true);
+});

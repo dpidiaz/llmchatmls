@@ -76,6 +76,20 @@ async function recoveryFor(state){
   const head=await tryBranchHead(state.branch);
   return core.classifyRecoveryState(state,head);
 }
+async function recoveryResume(recovery,item){
+  const checkpoint=String(recovery?.lastCheckpointCommit||recovery?.baseCommit||'');
+  const orphan=String(recovery?.orphanHeadSha||'');
+  if(!checkpoint)throw core.dispatchError('RECOVERY_BASE_MISSING','Recovery sin commit base para '+item.workId,409);
+  if(!orphan)return {resumeCommit:checkpoint,orphanReused:false,orphanScopeValidated:false};
+  const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+checkpoint+'...'+orphan);
+  const files=Array.isArray(comparison?.files)?comparison.files.map(x=>String(x.filename||'')):[];
+  const ancestryOk=['ahead','identical'].includes(String(comparison?.status||''));
+  const scopeOk=files.every(file=>core.pathAllowed(file,item.allowedPaths||[]));
+  if(!ancestryOk||!scopeOk){
+    return {resumeCommit:checkpoint,orphanReused:false,orphanScopeValidated:true,orphanRejectedReason:!ancestryOk?'ORPHAN_NOT_DESCENDANT':'ORPHAN_SCOPE_VIOLATION'};
+  }
+  return {resumeCommit:orphan,orphanReused:true,orphanScopeValidated:true,orphanFileCount:files.length};
+}
 async function finalizeAssignment(issue,state,ledgerItem,nowMs){
   const expired=core.isLeaseExpired(state,nowMs);
   if(state.readyToClose){
@@ -133,10 +147,16 @@ function duplicateAssignment(command,activeStates,ledger){
 async function drainPendingCommands(baseRegistry,ledgerItem){
   const now=Date.now(),s=await sweep(baseRegistry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
   const providerIssues=await allIssues('open');
-  function runtimeRegistry(){
+  let cachedRegistry=null;
+  function runtimeRegistry(refresh=false){
+    if(cachedRegistry&&!refresh)return cachedRegistry;
     const dynamic=providerIntegration.materializeProviderItems({issues:providerIssues,root,now,globalLedger:ledgerItem.ledger,globalAssignments:activeStates});
     if(dynamic.diagnostics.length)console.warn(JSON.stringify({providerDiagnostics:dynamic.diagnostics}));
-    return providerIntegration.extendRegistry(baseRegistry,{items:dynamic.items,globalLedger:ledgerItem.ledger});
+    cachedRegistry=providerIntegration.extendRegistry(baseRegistry,{items:dynamic.items,globalLedger:ledgerItem.ledger});
+    return cachedRegistry;
+  }
+  function progressFor(registry){
+    return {...core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now),queueTarget:providerIntegration.READY_QUEUE_TARGET};
   }
   const issues=providerIssues.filter(x=>dispatcherIssue(x)&&!hasAssignmentState(x)&&hasCommandMarker(x)).sort((a,b)=>Number(a.number)-Number(b.number));
   const drained=[];
@@ -146,13 +166,13 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     try{command=core.parseCommand(issue.body||'');}catch(error){await reject(issue,error);drained.push({issueNumber:issue.number,status:'rejected'});continue;}
     if(command.operation==='status_global'){
       const registry=runtimeRegistry();
-      const progress=core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now);
+      const progress=progressFor(registry);
       await closeCommand(issue,'[MLS Dispatcher][STATUS] global',{ok:true,progress,reaped:s.closed});
       drained.push({issueNumber:issue.number,status:'status'});continue;
     }
     if(command.operation==='reap'){
       const registry=runtimeRegistry();
-      const progress=core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now);
+      const progress=progressFor(registry);
       await closeCommand(issue,'[MLS Dispatcher][REAP] complete',{ok:true,reaped:s.closed,progress});
       drained.push({issueNumber:issue.number,status:'reap'});continue;
     }
@@ -166,23 +186,36 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       await closeCommand(issue,'[MLS Dispatcher][STALE] '+command.requestId,{ok:false,error:'STALE_CLAIM',requestId:command.requestId,claimTtlMs:core.CLAIM_TTL_MS,createdAt:issue.created_at},'not_planned');
       drained.push({issueNumber:issue.number,status:'stale'});continue;
     }
-    const registry=runtimeRegistry();
-    const selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
+    let registry=runtimeRegistry();
+    let selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
+    if(!selected){
+      registry=runtimeRegistry(true);
+      selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
+    }
     if(!selected){
       touchRequest(ledgerItem,command.requestId,{status:'no_work',issueNumber:issue.number});
-      const progress=core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now);
+      const progress=progressFor(registry);
       await closeCommand(issue,'[MLS Dispatcher][NO_WORK] '+command.requestId,{ok:true,assigned:false,requestId:command.requestId,progress});
       drained.push({issueNumber:issue.number,status:'no_work'});continue;
     }
-    const {item,recovery}=selected;
-    let branch,baseCommit;
+    const item=selected.item;
+    let recovery=selected.recovery,branch,baseCommit;
     if(recovery){
-      branch=String(recovery.branch||'');baseCommit=String(recovery.baseCommit||'');
-      const head=branch?await tryBranchHead(branch):null;
-      if(!branch||!head){
+      const previousBranch=String(recovery.branch||''),previousHead=previousBranch?await tryBranchHead(previousBranch):null;
+      if(!previousBranch||!previousHead){
         const error=core.dispatchError('RECOVERY_BRANCH_MISSING','Recovery sin rama accesible para '+item.workId,409);
         await reject(issue,error);drained.push({issueNumber:issue.number,status:'recovery_blocked',workId:item.workId});continue;
       }
+      const resume=await recoveryResume(recovery,item);
+      baseCommit=resume.resumeCommit;
+      branch=core.assignmentBranch(item,issue.number);
+      const existing=await tryBranchHead(branch);
+      if(existing){
+        const error=core.dispatchError('ASSIGNMENT_BRANCH_EXISTS','La rama generacional de recovery ya existe: '+branch,409);
+        await reject(issue,error);drained.push({issueNumber:issue.number,status:'branch_exists',workId:item.workId});continue;
+      }
+      await createBranch(branch,baseCommit);
+      recovery={...recovery,...resume,previousBranch,recoveryBranch:branch};
     }else{
       if(!mainSha)mainSha=await getMainSha();
       baseCommit=mainSha;branch=core.assignmentBranch(item,issue.number);

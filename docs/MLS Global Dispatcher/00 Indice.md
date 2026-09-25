@@ -1,4 +1,4 @@
-# MLS Global Dispatcher R1 — Índice
+# MLS Global Dispatcher — Índice R1/R2
 
 Versión: 1.0  
 Estado: **ACTIVE / CERTIFIED R1**  
@@ -26,6 +26,12 @@ Todos los chats pueden usar exactamente el mismo comando. GitHub decide automát
 
 5. [Implementación y certificación R1](./05%20Implementacion%20y%20certificacion%20R1.md)  
    Evidencia de CI, smoke tests reales, recovery y concurrencia de 4 workers.
+
+6. [Integration to main R1](./06%20Integration%20to%20main%20R1.md)  
+   Contrato fail-closed para integrar PRs certificados a `main`.
+
+7. [Ready Queue y Recovery Generacional R2](./07%20Ready%20Queue%20y%20Recovery%20Generacional%20R2.md)  
+   Prefetch de trabajo para 20–30 chats, claim burst y recuperación aislada por generaciones.
 
 ## Invariantes
 
@@ -67,4 +73,3 @@ Global Dispatcher
 ```
 
 Hasta que el workflow del Global Dispatcher sea implementado y certificado, los comandos directos de Farm continúan siendo operativos de forma independiente.
-\n- `06 Integration to main R1.md` — contrato fail-closed para integrar PRs certificados a `main`.\n

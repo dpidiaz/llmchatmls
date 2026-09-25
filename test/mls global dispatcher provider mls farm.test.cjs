@@ -81,3 +81,14 @@ test('MLS Farm provider honors Farm batch bounds',()=>{
   assert.equal(work.units.length,1);
   assert.equal(work.checkpointSizeMax,10);
 });
+
+
+test('prefetch materializes 30 disjoint MLS Farm works for a burst of workers',()=>{
+  const corpus=Array.from({length:40},(_,i)=>entry(i+1));
+  const works=provider.materializeFarmWorks({corpus,ledgers:[ledger()],batches:[],requested:1,count:30,at:AT});
+  assert.equal(works.length,30);
+  const codes=works.flatMap(work=>work.units);
+  assert.equal(codes.length,30);
+  assert.equal(new Set(codes).size,30);
+  assert.equal(works.every(work=>work.ownershipMode==='global-single-lease'),true);
+});
