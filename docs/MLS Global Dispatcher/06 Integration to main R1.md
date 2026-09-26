@@ -72,6 +72,23 @@ Además puede conservar locks específicos del subsistema.
 
 Solo un merge controlado a main puede estar activo bajo este contrato.
 
+## Preparación paralela R33 Gate 1000
+
+Cuando el pool activo declare `execution.parallelIntegrationPreparation: true`, la integración R33 se divide en dos fases:
+
+1. **Preparación paralela** (`r33-index-preparation`): cada ola integra sus Evidence blobs exactos en una rama independiente, regenera los cuatro índices derivados, ejecuta validación y abre un PR a `main` **sin mergearlo**. Estas preparaciones no poseen `system:main-integration` ni `system:r33-index-integration`, por lo que olas disjuntas pueden coexistir.
+2. **Integración final serial** (`r33-index-integration`): consume únicamente una preparación terminal y certificada a la vez, parte del `main` vigente, vuelve a derivar los índices contra ese estado, ejecuta checks, usa `expected_head_sha`, mergea y verifica post-merge.
+
+Los cuatro índices globales continúan siendo monolíticos; por eso la fase final conserva:
+
+`system:main-integration`
+
+`system:r33-index-integration`
+
+La preparación paralela no relaja provenance: el work item conserva los `sourceRefs` del Farm y la integración final conserva además un `preparedRef` con branch + commit SHA de la preparación que consumió.
+
+El orden de prioridad favorece llenar primero la cola de preparaciones; cuando ya no quedan preparaciones sin reclamar, las integraciones finales avanzan serialmente. Un pool que no habilite `parallelIntegrationPreparation` conserva el comportamiento R1 serial anterior.
+
 ## Seguridad editorial
 
 Este contrato no autoriza:
