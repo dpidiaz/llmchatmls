@@ -104,3 +104,30 @@ test('crash before premerge checkpoint preserves original base for new certifica
   assert.equal(state.checkpoints.length,0);
   await assert.rejects(worker(state).verify(),/checkpoint/);
 });
+test('scheduler reconciles dropped old recovery once without reviving terminal work',async()=>{
+  const origin=initial(),broken=await recovered(origin);
+  broken.integration=null;broken.checkpoints=[];broken.status='cancelled';
+  const file=path.resolve('scripts/MLS global dispatcher scheduler.cjs');
+  const context=vm.createContext({require:createRequire(file),__dirname:path.dirname(file),structuredClone,process:{env:{GITHUB_TOKEN:'test',GITHUB_REPOSITORY:'owner/repo'}},console});
+  vm.runInContext(fs.readFileSync(file,'utf8').replace(/main\(\)\.catch\([\s\S]*$/,''),context);
+  let reads=0;
+  context.ghMock=async(method,url)=>{
+    if(method==='PATCH')return {};
+    if(url.includes('/issues?'))return [];
+    if(url.includes('/git/ref/'))return {object:{sha:head}};
+    reads++;
+    return {body:core.renderAssignmentBody(url.endsWith('/101')?broken:origin)};
+  };
+  vm.runInContext('gh=ghMock',context);
+  const ledger={issue:{number:709},ledger:{terminal:{},recoveries:{},epochs:{},requests:{old:{workId:item.workId,issueNumber:101,status:'cancelled'}}},dirty:false};
+  await context.sweep({},ledger);
+  assert.equal(ledger.ledger.recoveries[item.workId].integration.mode,'assignment-pr');
+  assert.equal(ledger.ledger.recoveries[item.workId].checkpoints[0].commitSha,head);
+  const firstReads=reads;
+  await context.sweep({},ledger);
+  assert.equal(reads,firstReads);
+  delete ledger.ledger.recoveries[item.workId];ledger.ledger.terminal[item.workId]={status:'done'};
+  await context.sweep({},ledger);
+  assert.equal(reads,firstReads);
+  assert.equal(ledger.ledger.recoveries[item.workId],undefined);
+});
