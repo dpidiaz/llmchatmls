@@ -18,6 +18,11 @@ test('Gate 1000 lifecycle is prepared-or-authorized and always GitHub-only',()=>
   assert.equal(pool.editorialArchitecture,'github-native');
   assert.equal(pool.cloudflareEditorialAllowed,false);
   assert.equal(pool.d1EditorialAllowed,false);
+  assert.equal(pool.execution.integrationWaveSize,50);
+  assert.equal(pool.execution.serializedIndexIntegrationRequired,true);
+  assert.equal(pool.execution.parallelIntegrationPreparation,true);
+  assert.equal(pool.execution.parallelPreparedPrs,true);
+  assert.equal(pool.execution.finalMergeSerialized,true);
   assert.equal(pool.entries.length,1000);
   assert.equal(new Set(pool.entries.map(x=>x.code)).size,1000);
   assert.equal(pool.entries.every(x=>/^[a-f0-9]{40}$/.test(x.contentBlobSha||'')),true);
