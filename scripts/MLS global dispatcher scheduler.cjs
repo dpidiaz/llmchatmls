@@ -131,6 +131,26 @@ async function sweep(registry,ledgerItem,nowMs=Date.now()){
     if(result.closed)closed.push({issueNumber:issue.number,assignmentId:state.assignmentId,workId:state.workId,status:result.state.status,recovery:result.recovery});
     else active.push({issue,state});
   }
+  // Older schedulers discarded unchanged recovery generations on cancellation/expiry.
+  // Rebuild only the latest inactive integration generation with durable recovery history.
+  const latest=new Map();
+  for(const request of Object.values(ledgerItem.ledger.requests||{})){
+    if(request.workId&&(!latest.has(request.workId)||Number(request.issueNumber)>Number(latest.get(request.workId).issueNumber)))latest.set(request.workId,request);
+  }
+  for(const [workId,request] of latest){
+    if(!['cancelled','expired','recovery_required'].includes(request.status)||ledgerItem.ledger.terminal[workId]||ledgerItem.ledger.recoveries[workId]||active.some(x=>x.state.workId===workId))continue;
+    const historicalIssue=await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+Number(request.issueNumber));
+    const state=core.parseAssignmentState(historicalIssue.body||'');
+    if(!state||state.workType!=='integration'||!state.recovery||state.workId!==workId||state.issueNumber!==Number(request.issueNumber)||!['cancelled','expired','recovery_required'].includes(state.status))continue;
+    const captured=await recoveryFor(state);
+    if(!captured)continue;
+    const item=core.normalizeWorkItem({workId,version:state.workVersion,title:state.title,workType:state.workType,status:'recovery_required',priority:0,createdAt:state.claimedAt,dependsOn:state.dependencies||[],resourceLocks:state.resourceLocks,allowedPaths:state.allowedPaths,validation:state.validationRequired||[],provider:state.provider,instructions:state.instructions,completion:state.completion,branchPolicy:{mode:'assignment',prefix:String(state.branch).replace(/\/\d{6}$/,'')}});
+    const restored=await recoveryContext.restore(captured,item,async number=>core.parseAssignmentState((await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+number)).body||''));
+    restored.workItem={...item,integration:restored.integration};
+    restored.completedUnits=providerIntegration.completedUnitsForState(state);
+    ledgerItem.ledger.recoveries[workId]=restored;
+    ledgerItem.dirty=true;
+  }
   await saveLedger(ledgerItem);
   return {active,closed};
 }
