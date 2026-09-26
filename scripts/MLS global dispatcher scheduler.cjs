@@ -3,6 +3,7 @@
 const path=require('node:path');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
+const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
 
 const token=process.env.GITHUB_TOKEN||'';
 const repository=process.env.GITHUB_REPOSITORY||'';
@@ -107,6 +108,7 @@ async function finalizeAssignment(issue,state,ledgerItem,nowMs){
       workId:state.workId,version:state.workVersion,title:state.title,workType:state.workType,status:'recovery_required',priority:0,
       createdAt:state.claimedAt,dependsOn:state.dependencies||[],resourceLocks:state.resourceLocks||[],allowedPaths:state.allowedPaths||[],
       validation:state.validationRequired||[],provider:state.provider||'global',instructions:state.instructions||'',completion:state.completion||{requiresCommit:true,requiresValidation:true},
+      integration:state.integration?structuredClone(state.integration):null,
       branchPolicy:{mode:'assignment',prefix:String(state.branch||('worker/'+state.workId)).replace(/\/\d{6}$/,'')}
     };
     recovery.completedUnits=providerIntegration.completedUnitsForState(state);
@@ -198,9 +200,18 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       await closeCommand(issue,'[MLS Dispatcher][NO_WORK] '+command.requestId,{ok:true,assigned:false,requestId:command.requestId,progress});
       drained.push({issueNumber:issue.number,status:'no_work'});continue;
     }
-    const item=selected.item;
+    let item=selected.item;
     let recovery=selected.recovery,branch,baseCommit;
     if(recovery){
+      if(item.workType==='integration'){
+        try{
+          recovery=await recoveryContext.restore(recovery,item,async number=>{
+            const issue=await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+number);
+            return core.parseAssignmentState(issue.body||'');
+          });
+          item={...item,integration:recovery.integration};
+        }catch(error){await reject(issue,error);drained.push({issueNumber:issue.number,status:'recovery_blocked',workId:item.workId});continue;}
+      }
       const previousBranch=String(recovery.branch||''),previousHead=previousBranch?await tryBranchHead(previousBranch):null;
       if(!previousBranch||!previousHead){
         const error=core.dispatchError('RECOVERY_BRANCH_MISSING','Recovery sin rama accesible para '+item.workId,409);
