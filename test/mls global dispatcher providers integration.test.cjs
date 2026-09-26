@@ -93,6 +93,51 @@ test('R33 index integration waits for a full wave and materializes exact source 
   assert.equal(work.integration.mode,'assignment-pr');
 });
 
+test('R33 parallel preparation materializes independent waves while final integration keeps the global merge lock',()=>{
+  const pool={...r33Pool(),execution:{...r33Pool().execution,parallelIntegrationPreparation:true,integrationWaveSize:1}};
+  const globalLedger={terminal:{
+    a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/r33/1',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:00:00.000Z'},
+    b:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/r33/2',commitSha:'2'.repeat(40),completedAt:'2026-09-24T05:01:00.000Z'},
+    c:{provider:'r33-farm',completedUnits:['MLS-V01-0003'],branch:'worker/r33/3',commitSha:'3'.repeat(40),completedAt:'2026-09-24T05:02:00.000Z'}
+  },recoveries:{}};
+  const preparations=integration.r33IndexPreparationWorks({pool,globalLedger,waveSize:1,verifiedCodes:[]});
+  assert.equal(preparations.length,3);
+  assert.ok(preparations.every(x=>x.provider==='r33-index-preparation'&&x.workType==='code_task'));
+  assert.ok(preparations.every(x=>!x.resourceLocks.includes('system:main-integration')&&!x.resourceLocks.includes('system:r33-index-integration')));
+  assert.equal(globalCore.lockSetsConflict(preparations[0].resourceLocks,preparations[1].resourceLocks),false);
+  assert.ok(preparations[0].allowedPaths.includes('MLS R32 EDITORIAL/evidence git/indexes/verified.json'));
+
+  const first=preparations[0];
+  globalLedger.terminal[first.workId]={
+    status:'done',provider:'r33-index-preparation',completedUnits:first.units,
+    branch:'worker/r33-index-preparation/001000',commitSha:'a'.repeat(40),completedAt:'2026-09-24T05:10:00.000Z'
+  };
+  const finalWork=integration.r33PreparedIndexIntegrationWork({pool,globalLedger,waveSize:1,verifiedCodes:[]});
+  assert.equal(finalWork.provider,'r33-index-integration');
+  assert.equal(finalWork.workType,'integration');
+  assert.deepEqual(finalWork.units,['MLS-V01-0001']);
+  assert.ok(finalWork.resourceLocks.includes('system:main-integration'));
+  assert.ok(finalWork.resourceLocks.includes('system:r33-index-integration'));
+  assert.equal(finalWork.integration.preparedRef.workId,first.workId);
+  assert.equal(finalWork.integration.preparedRef.commitSha,'a'.repeat(40));
+  assert.equal(finalWork.priority>first.priority,true,'preparations must be claimable before serialized final integration');
+});
+
+test('R33 prepared integration rejects terminal preparation metadata that does not match the exact wave',()=>{
+  const pool={...r33Pool(),execution:{...r33Pool().execution,parallelIntegrationPreparation:true,integrationWaveSize:1}};
+  const globalLedger={terminal:{
+    a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/r33/1',commitSha:'1'.repeat(40)},
+    b:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/r33/2',commitSha:'2'.repeat(40)},
+    c:{provider:'r33-farm',completedUnits:['MLS-V01-0003'],branch:'worker/r33/3',commitSha:'3'.repeat(40)}
+  },recoveries:{}};
+  const first=integration.r33IndexPreparationWorks({pool,globalLedger,waveSize:1,verifiedCodes:[]})[0];
+  globalLedger.terminal[first.workId]={
+    status:'done',provider:'r33-index-preparation',completedUnits:['MLS-V01-0002'],
+    branch:'worker/r33-index-preparation/001000',commitSha:'a'.repeat(40)
+  };
+  assert.equal(integration.r33PreparedIndexIntegrationWork({pool,globalLedger,waveSize:1,verifiedCodes:[]}),null);
+});
+
 test('completed units survive multiple checkpoints and recovery generations',()=>{
   const state={
     recoveredCompletedUnits:['MLS-V01-0001'],
