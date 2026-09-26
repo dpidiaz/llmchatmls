@@ -182,12 +182,14 @@ function r33IndexPreparationWorks({pool,globalLedger,root='.',waveSize=50,verifi
 }
 function r33PreparedIndexIntegrationWork({pool,globalLedger,root='.',waveSize=50,verifiedCodes=null}={}){
   if(pool?.execution?.parallelIntegrationPreparation!==true)return null;
-  const waves=r33IntegrationWaves({pool,globalLedger,root,waveSize,verifiedCodes);
+  const waves=r33IntegrationWaves({pool,globalLedger,root,waveSize,verifiedCodes});
   const terminal=globalLedger?.terminal||{};
   for(const wave of waves){
     const preparationWorkId=r33IndexPreparationWorkId(pool.poolId,wave);
     const prepared=terminal[preparationWorkId];
     if(!prepared||String(prepared.status||'').toLowerCase()!=='done'||String(prepared.provider||'')!=='r33-index-preparation')continue;
+    const preparedCodes=(Array.isArray(prepared.completedUnits)?prepared.completedUnits:[]).map(x=>String(x).toUpperCase());
+    if(preparedCodes.length!==wave.codes.length||wave.codes.some((code,index)=>preparedCodes[index]!==code))continue;
     const preparedCommitSha=String(prepared.commitSha||'').toLowerCase(),preparedBranch=String(prepared.branch||'');
     if(!/^[a-f0-9]{40}$/.test(preparedCommitSha)||!preparedBranch)continue;
     const indexRoot='MLS R32 EDITORIAL/evidence git/indexes';
