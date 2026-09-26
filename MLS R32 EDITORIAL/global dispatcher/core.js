@@ -172,7 +172,7 @@ function makeAssignmentState({issueNumber,item,requestId,workerId,workerLogin=nu
     instructions:item.instructions,dependencies:item.dependsOn,resourceLocks:item.resourceLocks,allowedPaths:item.allowedPaths,
     validationRequired:item.validation,completion:item.completion,integration:item.integration&&typeof item.integration==='object'?structuredClone(item.integration):null,branch,baseCommit:String(baseCommit||''),leaseToken:token,leaseEpoch:epoch,
     status:'leased',claimedAt,acknowledgedAt:null,ackDeadlineAt,lastHeartbeatAt:null,expiresAt:ackDeadlineAt,
-    checkpoints:[],lastCheckpointCommit:recovery?.lastCheckpointCommit||null,lastCheckpointHash:null,
+    checkpoints:structuredClone(recovery?.checkpoints||[]),lastCheckpointCommit:recovery?.lastCheckpointCommit||null,lastCheckpointHash:recovery?.checkpoints?.at(-1)?.hash||null,
     recovery:recovery||null,readyToClose:false,cancelRequested:false,finalCommitSha:null,lastRejectedEvent:null,closedAt:null
   };
 }
@@ -202,7 +202,9 @@ function checkpointPayload(event){
   const status=String(validation.status||'not_run').toLowerCase();
   if(!['passed','failed','not_run'].includes(status))throw dispatchError('INVALID_VALIDATION_STATUS','validation.status inválido.');
   const completedUnits=normalizeStringArray(event.completedUnits||[],'completedUnits'),pendingUnits=normalizeStringArray(event.pendingUnits||[],'pendingUnits');
-  return {commitSha,validation:{...validation,status},completedUnits,pendingUnits,notes:String(event.notes||'').trim()};
+  const payload={commitSha,validation:{...validation,status},completedUnits,pendingUnits,notes:String(event.notes||'').trim()};
+  if(event.integrationStage)Object.assign(payload,{integrationStage:event.integrationStage,integrationPrNumber:event.integrationPrNumber||null,integrationHeadSha:event.integrationHeadSha||null});
+  return payload;
 }
 function checkpointDigest(cp){return sha256(cp);}
 function applyWorkerEvent(state,event,{createdAt,commentId}){
@@ -242,7 +244,7 @@ function classifyRecoveryState(state,branchHead,capturedAt=iso()){
   const hasBranchProgress=Boolean(head&&base&&head!==base);
   const hasCheckpointProgress=Boolean(checkpoint&&checkpoint!==base);
   const orphan=Boolean(head&&head!==(checkpoint||base));
-  if(!hasBranchProgress&&!hasCheckpointProgress)return null;
+  if(!hasBranchProgress&&!hasCheckpointProgress&&!state.recovery)return null;
   return {
     kind:orphan?'orphan_progress':'checkpoint_progress',
     workId:state.workId,
@@ -256,6 +258,9 @@ function classifyRecoveryState(state,branchHead,capturedAt=iso()){
     previousEpoch:state.leaseEpoch,
     resourceLocks:state.resourceLocks||[],
     allowedPaths:state.allowedPaths||[],
+    integration:state.integration?structuredClone(state.integration):null,
+    integrationBaseCommit:state.recovery?.integrationBaseCommit||state.baseCommit,
+    checkpoints:structuredClone(state.checkpoints||[]),
     capturedAt:iso(capturedAt)
   };
 }

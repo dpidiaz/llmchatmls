@@ -3,6 +3,7 @@
 const fs=require('node:fs');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const integration=require('../MLS R32 EDITORIAL/global dispatcher/integration.js');
+const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
 
 const token=process.env.GITHUB_TOKEN||'';
 const repository=process.env.GITHUB_REPOSITORY||'';
@@ -34,7 +35,7 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
     if(stage==='premerge'){
       const head=await branchHead(state.branch);
       if(head!==commitSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','Premerge commit no coincide con HEAD de la rama asignada.',409);
-      const base=String(state.baseCommit||'').toLowerCase();
+      const base=String(state.recovery?.integrationBaseCommit||state.baseCommit||'').toLowerCase();
       if(!/^[a-f0-9]{40}$/.test(base))throw core.dispatchError('BASE_COMMIT_INVALID','Assignment integration sin base válido.',409);
       const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+base+'...'+commitSha);
       if(!['ahead','identical'].includes(String(comparison?.status||'')))throw core.dispatchError('CHECKPOINT_NOT_DESCENDANT','Head integration no desciende del base asignado.',409);
@@ -50,8 +51,14 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
     if(!Number.isInteger(prNumber)||prNumber<1)throw core.dispatchError('INTEGRATION_PR_REQUIRED','checkpoint assignment-pr requiere integrationPrNumber.',409);
     if(!/^[a-f0-9]{40}$/.test(expectedHeadSha))throw core.dispatchError('INTEGRATION_HEAD_REQUIRED','checkpoint assignment-pr requiere integrationHeadSha.',409);
     const assignedHead=await branchHead(state.branch);
-    if(assignedHead!==expectedHeadSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','integrationHeadSha no coincide con HEAD de la rama asignada.',409);
-    if(!(state.checkpoints||[]).some(cp=>String(cp.commitSha||'').toLowerCase()===expectedHeadSha))throw core.dispatchError('INTEGRATION_PREMERGE_CHECKPOINT_REQUIRED','Falta checkpoint premerge del head exacto.',409);
+    if(!recoveryContext.branchMatches(state,assignedHead,expectedHeadSha,commitSha,prNumber))throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','integrationHeadSha no coincide con HEAD de la rama asignada.',409);
+    if(!recoveryContext.acceptedHead(state,expectedHeadSha))throw core.dispatchError('INTEGRATION_PREMERGE_CHECKPOINT_REQUIRED','Falta checkpoint premerge del head exacto.',409);
+    if(state.recovery){
+      const base=state.recovery.integrationBaseCommit;
+      if(!/^[a-f0-9]{40}$/.test(String(base||'')))throw core.dispatchError('BASE_COMMIT_INVALID','Recovery sin base original.',409);
+      const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+base+'...'+expectedHeadSha);
+      if(comparison.status!=='ahead'||!comparison.files?.length||comparison.files.length>=300||comparison.files.some(f=>!core.pathAllowed(f.filename,state.allowedPaths||[])))throw core.dispatchError('CHECKPOINT_SCOPE_VIOLATION','Recovery ancestry/scope inválido o incompleto.',409);
+    }
     const spec=integration.assignmentPrSpec(policy,{prNumber,expectedHeadSha});
     const pr=await gh('GET','/repos/'+owner+'/'+repo+'/pulls/'+prNumber);
     const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
