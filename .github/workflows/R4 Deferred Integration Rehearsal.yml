@@ -1,0 +1,39 @@
+name: R4 Deferred Integration Rehearsal
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: r4-staging-rehearsal
+  cancel-in-progress: true
+
+jobs:
+  rehearsal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Materialize certified staging without publishing main
+        run: node 'scripts/R4 staging rehearsal.cjs'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate candidate indexes
+        run: node 'scripts/R33 evidence indexes.cjs' --check
+      - name: Run R33 GitHub-native suite
+        run: npm run test:r33-github-native
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r4-rehearsal-manifest
+          path: artifacts/r4-rehearsal-manifest.json
+          if-no-files-found: error

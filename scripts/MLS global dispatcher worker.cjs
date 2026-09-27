@@ -22,6 +22,17 @@ async function gh(method,endpoint,body){
 }
 async function getIssue(number){return gh('GET','/repos/'+owner+'/'+repo+'/issues/'+number);}
 async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
+async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});}
+async function wakeScheduler(){
+  return gh('POST','/repos/'+owner+'/'+repo+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{ref:'main'});
+}
+function autoPullRequest(state,comment){
+  const workerId=String(state.workerId||'').trim();
+  if(!/^[A-Za-z0-9._:-]{8,160}$/.test(workerId))return null;
+  const seed=String(state.assignmentId||state.issueNumber||'assignment').replace(/[^A-Za-z0-9._:-]+/g,'-').slice(-70);
+  const requestId=('autopull:'+seed+':'+String(comment.id)).slice(0,120);
+  return {operation:'claim',requestId,workerId,capabilities:['chat','github','r4-autopull']};
+}
 function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
 async function branchHead(branch){
   const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+encodeRef(branch));
@@ -115,7 +126,22 @@ async function main(){
     issue=await getIssue(eventIssue.number);
     if(!String(issue.title||'').startsWith('[MLS Dispatcher][LEASED]'))return;
     state=core.parseAssignmentState(issue.body||'');if(!state)return;
-    const next=core.applyWorkerEvent(state,workerEvent,{createdAt:comment.created_at,commentId:comment.id});
+    let next=core.applyWorkerEvent(state,workerEvent,{createdAt:comment.created_at,commentId:comment.id});
+    let chainedClaim=null;
+    if(workerEvent.operation==='finish'&&next.readyToClose===true&&next.provider==='r33-farm'){
+      const command=autoPullRequest(next,comment);
+      if(command){
+        chainedClaim=await createIssue('[MLS Dispatcher][CLAIM] '+command.requestId,core.renderCommandBody(command));
+        await wakeScheduler();
+        next={...next,autoPull:{
+          enabled:true,
+          requestId:command.requestId,
+          issueNumber:Number(chainedClaim.number),
+          createdAt:comment.created_at,
+          policy:'continue-until-preempted'
+        }};
+      }
+    }
     await updateIssue(issue.number,{body:core.renderAssignmentBody(next)});
   }catch(error){
     issue=await getIssue(eventIssue.number);

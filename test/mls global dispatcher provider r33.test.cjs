@@ -29,7 +29,7 @@ test('expone FIFO elegible y deja ownership exclusivamente al Global Dispatcher'
   assert.equal(out.eligible,true);
   assert.deepEqual(out.units.map(x=>x.code),['MLS-V01-0003','MLS-V01-0004']);
   assert.deepEqual(out.ownership,{mode:'global-single-owner',nestedLease:false,reservationCreated:false});
-  assert.equal(out.checkpointSizeMax,10);
+  assert.equal(out.checkpointSizeMax,1);
   assert.equal(out.cloudflareEditorialInteractions,0);
   assert.equal(out.d1EditorialReads,0);
   assert.equal(out.d1EditorialWrites,0);
@@ -70,19 +70,38 @@ test('no materializa trabajo cuando todo es terminal o protegido',()=>{
 });
 
 
-test('prefetch materializes 30 disjoint R33 candidates for a burst of workers',()=>{
-  const entries=Array.from({length:40},(_,i)=>({
+for(const burstSize of [30,80,100]){
+  test('prefetch materializes '+burstSize+' disjoint R33 candidates without starvation',()=>{
+    const entries=Array.from({length:burstSize+10},(_,i)=>({
+      order:i+1,
+      code:'MLS-V02-'+String(i+1).padStart(4,'0'),
+      language:'portugues-brasil',
+      contentPath:'content/portugues-brasil/MLS-V02-'+String(i+1).padStart(4,'0')+'.json'
+    }));
+    const p={...pool(),entries,execution:{defaultClaimSize:1,maxClaimSize:10}};
+    const l={...ledger(),poolId:p.poolId};
+    const candidates=provider.materializeCandidates({pool:p,ledger:l,batches:[]},{now:NOW,requested:1,count:burstSize});
+    assert.equal(candidates.length,burstSize);
+    const codes=candidates.flatMap(candidate=>candidate.units.map(unit=>unit.code));
+    assert.equal(codes.length,burstSize);
+    assert.equal(new Set(codes).size,burstSize);
+    assert.equal(candidates.every(candidate=>candidate.reason==='READY'),true);
+  });
+}
+
+test('prefetch materializes 128 disjoint R33 candidates for a burst of workers',()=>{
+  const entries=Array.from({length:140},(_,i)=>({
     order:i+1,
     code:'MLS-V01-'+String(i+1).padStart(4,'0'),
     language:'ingles',
     contentPath:'content/ingles/MLS-V01-'+String(i+1).padStart(4,'0')+'.json'
   }));
-  const p={...pool(),entries,execution:{defaultClaimSize:1,maxClaimSize:50}};
+  const p={...pool(),entries,execution:{defaultClaimSize:1,maxClaimSize:10}};
   const l={...ledger(),poolId:p.poolId};
-  const candidates=provider.materializeCandidates({pool:p,ledger:l,batches:[]},{now:NOW,requested:1,count:30});
-  assert.equal(candidates.length,30);
+  const candidates=provider.materializeCandidates({pool:p,ledger:l,batches:[]},{now:NOW,requested:1,count:128});
+  assert.equal(candidates.length,128);
   const codes=candidates.flatMap(candidate=>candidate.units.map(unit=>unit.code));
-  assert.equal(codes.length,30);
-  assert.equal(new Set(codes).size,30);
+  assert.equal(codes.length,128);
+  assert.equal(new Set(codes).size,128);
   assert.equal(candidates.every(candidate=>candidate.ownership.nestedLease===false),true);
 });

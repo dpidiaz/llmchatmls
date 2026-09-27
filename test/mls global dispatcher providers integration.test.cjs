@@ -135,7 +135,7 @@ test('R33 prepared integration rejects terminal preparation metadata that does n
   assert.equal(integration.r33PreparedIndexIntegrationWork({pool,globalLedger,waveSize:1,verifiedCodes:[]}),null);
 });
 
-test('R33 full-corpus continuation excludes integrated codes and applies the 10x50/500 pipeline',()=>{
+test('R33 full-corpus continuation applies the R4 128-way microclaim pipeline',()=>{
   const base={...r33Pool(),gate1000Authorized:true,execution:{...r33Pool().execution,continuationAfterActivePool:true}};
   const corpus=[
     {code:'MLS-V01-0001',language:'ingles',path:'content/ingles/MLS-V01-0001.json'},
@@ -149,15 +149,43 @@ test('R33 full-corpus continuation excludes integrated codes and applies the 10x
   assert.equal(pool.active,true);
   assert.equal(pool.continuationOf,base.poolId);
   assert.deepEqual(pool.entries.map(x=>x.code),['MLS-V01-0002','MLS-V01-0004']);
-  assert.equal(pool.execution.defaultClaimSize,50);
-  assert.equal(pool.execution.maxClaimSize,50);
-  assert.equal(pool.execution.workerBatchSize,50);
-  assert.equal(pool.execution.parallelWorkerLimit,10);
+  assert.equal(pool.execution.defaultClaimSize,5);
+  assert.equal(pool.execution.maxClaimSize,10);
+  assert.equal(pool.execution.workerBatchSize,5);
+  assert.equal(pool.execution.parallelWorkerLimit,128);
+  assert.equal(pool.execution.maxConcurrentWorkers,128);
+  assert.equal(pool.execution.checkpointSizeMax,1);
   assert.equal(pool.execution.integrationWaveSize,500);
-  assert.equal(pool.execution.directWaveIntegration,true);
+  assert.equal(pool.execution.deferredIntegration,true);
+  assert.equal(pool.execution.directWaveIntegration,false);
   assert.equal(pool.execution.parallelIntegrationPreparation,false);
   assert.equal(pool.execution.finalMergeSerialized,true);
   assert.equal(integration.r33ContinuationPool({basePool:base,verifiedCodes:corpus.map(x=>x.code),corpusEntries:corpus}),null);
+});
+
+test('R4 deferred integration materializes Evidence workers but no index integration work',()=>{
+  const result=integration.materializeProviderItems({
+    issues:[],root:'.',now:NOW,
+    globalLedger:{terminal:{},recoveries:{}},globalAssignments:[],queueTarget:128
+  });
+  assert.ok(result.items.some(x=>x.provider==='r33-farm'));
+  assert.equal(result.items.some(x=>x.provider==='r33-index-integration'),false);
+  assert.equal(result.items.some(x=>x.provider==='r33-index-preparation'),false);
+  assert.equal(result.queueTarget,128);
+});
+
+test('R4 staging manifest is deterministic and rejects conflicting certified commits',()=>{
+  const ledger={terminal:{
+    b:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/b',commitSha:'2'.repeat(40),completedAt:'2026-09-24T05:02:00.000Z'},
+    a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/a',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:01:00.000Z'}
+  }};
+  const one=integration.r33StagingManifest(ledger,{createdAt:'2026-09-24T06:00:00.000Z'});
+  const two=integration.r33StagingManifest({terminal:{a:ledger.terminal.a,b:ledger.terminal.b}},{createdAt:'2026-09-24T06:01:00.000Z'});
+  assert.equal(one.entryCount,2);
+  assert.deepEqual(one.entries.map(x=>x.code),['MLS-V01-0001','MLS-V01-0002']);
+  assert.equal(one.snapshotHash,two.snapshotHash);
+  const conflict={terminal:{...ledger.terminal,c:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/c',commitSha:'3'.repeat(40)}}};
+  assert.throws(()=>integration.r33StagingManifest(conflict),error=>error.code==='R4_STAGING_CONFLICT');
 });
 
 test('completed units survive multiple checkpoints and recovery generations',()=>{
@@ -192,6 +220,24 @@ test('R33 editorial work remains materializable while index integration is activ
   });
   assert.ok(result.items.some(x=>x.provider==='r33-farm'));
   assert.equal(result.diagnostics.some(x=>x.provider==='r33-farm'),false);
+});
+
+test('R4 finish auto-pulls the next claim and explicitly wakes the scheduler',()=>{
+  const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
+  const workflow=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
+  assert.match(worker,/operation==='finish'&&next\.readyToClose===true&&next\.provider==='r33-farm'/);
+  assert.match(worker,/\[MLS Dispatcher\]\[CLAIM\]/);
+  assert.match(worker,/wakeScheduler\(\)/);
+  assert.match(worker,/continue-until-preempted/);
+  assert.match(workflow,/actions:\s*write/);
+});
+
+test('R4 scheduler distinguishes temporary saturation from true NO_WORK',()=>{
+  const scheduler=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
+  assert.match(scheduler,/CAPACITY_BUSY/);
+  assert.match(scheduler,/WORK_TEMPORARILY_LEASED/);
+  assert.match(scheduler,/CORPUS_EXHAUSTED_OR_NO_ELIGIBLE_BACKLOG/);
+  assert.match(scheduler,/activeR33>0/);
 });
 
 test('scheduler integrates providers through snapshots only and never issues nested Farm commands',()=>{

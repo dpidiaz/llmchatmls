@@ -1,0 +1,48 @@
+name: R4 Final Corpus Publication
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: write
+
+concurrency:
+  group: r4-final-publication
+  cancel-in-progress: false
+
+jobs:
+  publish-candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Materialize immutable certified staging
+        run: node 'scripts/R4 staging rehearsal.cjs'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate candidate indexes
+        run: node 'scripts/R33 evidence indexes.cjs' --check
+      - name: Require complete corpus
+        run: node 'scripts/R4 final publication readiness.cjs'
+      - name: Full R33 certification
+        run: npm run test:r33-github-native
+      - name: Publish prepared snapshot branch and PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          branch="r4-final-corpus-snapshot-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add 'MLS R32 EDITORIAL/evidence git/entries' 'MLS R32 EDITORIAL/evidence git/indexes'
+          git commit -m "R4: publish final certified corpus snapshot"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" --title "R4: final certified corpus publication" --body "Prepared automatically from immutable certified staging after full-corpus readiness and R33 validation. This PR is the deferred final publication; no periodic production merge is involved."

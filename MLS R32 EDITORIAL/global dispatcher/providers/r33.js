@@ -2,10 +2,10 @@
 
 const PROVIDER_ID='r33-farm';
 const PROVIDER_VERSION='1.0';
-const DEFAULT_REQUESTED=25;
-const MAX_REQUESTED=50;
-const CHECKPOINT_SIZE_MAX=10;
-const PREFETCH_MAX=100;
+const DEFAULT_REQUESTED=5;
+const MAX_REQUESTED=10;
+const CHECKPOINT_SIZE_MAX=1;
+const PREFETCH_MAX=128;
 
 function providerError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -138,7 +138,7 @@ function materializeCandidate(snapshot,options={}){
 }
 
 function normalizePrefetchCount(value){
-  const count=Number(value??50);
+  const count=Number(value??128);
   if(!Number.isInteger(count)||count<1||count>PREFETCH_MAX)throw providerError('INVALID_PREFETCH_COUNT','count debe estar entre 1 y '+PREFETCH_MAX+'.');
   return count;
 }

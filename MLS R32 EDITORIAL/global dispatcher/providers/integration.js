@@ -9,7 +9,7 @@ const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
-const READY_QUEUE_TARGET=50;
+const READY_QUEUE_TARGET=128;
 
 function integrationError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -120,7 +120,7 @@ function r33CandidateToWork(candidate,now=Date.now()){
     providerVersion:candidate.providerVersion,ownershipMode:'global-single-lease',units:codes,checkpointSizeMax:candidate.checkpointSizeMax,
     resourceLocks:candidate.resourceLocks,allowedPaths:candidate.allowedPaths,dependsOn:[],
     validation:['R33 Editorial Batch Tests'],
-    instructions:'Procesa exclusivamente estas entradas R33. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado.',
+    instructions:'R4 EPHEMERAL WORKER / CONTINUE-UNTIL-PREEMPTED: procesa exclusivamente estas entradas R33. Persiste y valida CADA entrada por separado; después de cada entrada crea commit/checkpoint durable antes de iniciar la siguiente. checkpointSizeMax=1. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado. Al emitir FINISH del microclaim, Worker Events crea automáticamente un claim encadenado (autoPull.requestId/issueNumber). Si la sesión sigue razonando, sigue ese claim, espera su lease y procesa el siguiente microclaim. Repite FINISH → autoPull → siguiente lease indefinidamente mientras exista trabajo. No termines voluntariamente por haber acabado un microclaim. La finalización involuntaria del razonamiento es preemption normal: no intentes evitarla ni dependas de memoria conversacional; el progreso ya checkpointed debe sobrevivir y cualquier claim/lease sembrado debe poder expirar y ser reapeado.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-farm'},completion:{requiresCommit:true,requiresValidation:true},
     providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
   };
@@ -137,6 +137,38 @@ function r33TerminalSourceMap(globalLedger,pool){
   }
   return out;
 }
+function r33StagingManifest(globalLedger,{createdAt=null}={}){
+  const rows=[];
+  for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
+    if(!terminal||terminal.provider!=='r33-farm'||!Array.isArray(terminal.completedUnits))continue;
+    for(const code of terminal.completedUnits){
+      rows.push({
+        code:String(code).toUpperCase(),
+        workId,
+        branch:String(terminal.branch||''),
+        commitSha:String(terminal.commitSha||''),
+        completedAt:terminal.completedAt||null
+      });
+    }
+  }
+  rows.sort((a,b)=>a.code.localeCompare(b.code)||a.workId.localeCompare(b.workId));
+  const byCode=new Map();
+  for(const row of rows){
+    const prior=byCode.get(row.code);
+    if(prior&&prior.commitSha!==row.commitSha)throw integrationError('R4_STAGING_CONFLICT','Más de un commit certificado para '+row.code+'.',409);
+    byCode.set(row.code,row);
+  }
+  const entries=[...byCode.values()];
+  const digest=globalCore.sha256(JSON.stringify(entries.map(({code,workId,branch,commitSha})=>({code,workId,branch,commitSha}))));
+  return {
+    kind:'r33_staging_manifest',version:1,
+    createdAt:createdAt||new Date().toISOString(),
+    entryCount:entries.length,
+    snapshotHash:digest,
+    entries
+  };
+}
+
 function r33IntegratedCodes(root='.',verifiedCodes=null){
   if(Array.isArray(verifiedCodes))return new Set(verifiedCodes.map(x=>String(x).toUpperCase()));
   const p=path.join(root,'MLS R32 EDITORIAL','evidence git','indexes','verified.json');
@@ -159,12 +191,15 @@ function r33ContinuationPool({root='.',basePool,verifiedCodes=null,corpusEntries
   if(!entries.length)return null;
   const execution={...(basePool.execution||{})};
   Object.assign(execution,{
-    defaultClaimSize:50,
-    maxClaimSize:50,
-    workerBatchSize:50,
+    defaultClaimSize:5,
+    maxClaimSize:10,
+    workerBatchSize:5,
     integrationWaveSize:500,
-    parallelWorkerLimit:10,
-    directWaveIntegration:true,
+    parallelWorkerLimit:128,
+    maxConcurrentWorkers:128,
+    checkpointSizeMax:1,
+    deferredIntegration:true,
+    directWaveIntegration:false,
     continuationAfterActivePool:true,
     parallelIntegrationPreparation:false,
     parallelPreparedPrs:false,
@@ -321,7 +356,9 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const execution=snapshot.pool?.execution||{};
-    if(execution.directWaveIntegration===true){
+    if(execution.deferredIntegration===true){
+      // R4: certified Evidence accumulates outside main. Integration is rehearsed/published separately.
+    }else if(execution.directWaveIntegration===true){
       const indexItem=r33IndexIntegrationWork({
         pool:snapshot.pool,
         globalLedger,
@@ -365,7 +402,7 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 
 module.exports={
   DYNAMIC_PROVIDERS,READY_QUEUE_TARGET,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
-  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33IntegratedCodes,r33ContinuationPool,
+  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33StagingManifest,r33IntegratedCodes,r33ContinuationPool,
   r33IntegrationWaves,r33IndexPreparationWorkId,r33IndexPreparationWorks,r33PreparedIndexIntegrationWork,r33IndexIntegrationWork,
   recoveryItems,materializeProviderItems,extendRegistry
 };

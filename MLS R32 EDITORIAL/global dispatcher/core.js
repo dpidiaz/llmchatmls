@@ -275,9 +275,19 @@ function pathAllowed(file,allowedPaths){
 }
 function dispatchProgress(registry,ledger,states,at=Date.now()){
   const active=activeAssignments(states,at);
-  const terminal=Object.keys(ledger.terminal||{}).length,recoveries=Object.keys(ledger.recoveries||{}).length;
+  const terminalEntries=Object.values(ledger.terminal||{});
+  const terminal=terminalEntries.length,recoveries=Object.keys(ledger.recoveries||{}).length;
   const ready=registry.items.filter(x=>!terminalStatus(ledger,x.workId)&&!workIsActive(x.workId,states,at)&&dependenciesSatisfied(x,ledger)&&(x.status==='ready'||ledger.recoveries?.[x.workId])).length;
-  return {version:DISPATCH_VERSION,totalWorkItems:registry.items.length,terminal,activeAssignments:active.length,recoveries,ready,readyQueue:ready,cloudflareEditorialInteractions:0,d1EditorialReads:0,d1EditorialWrites:0};
+  const uniqueUnits=provider=>new Set(terminalEntries.filter(x=>x&&x.provider===provider).flatMap(x=>Array.isArray(x.completedUnits)?x.completedUnits:[])).size;
+  const activeByProvider={};
+  for(const state of active)activeByProvider[state.provider||'global']=(activeByProvider[state.provider||'global']||0)+1;
+  return {
+    version:DISPATCH_VERSION,totalWorkItems:registry.items.length,terminal,activeAssignments:active.length,recoveries,ready,readyQueue:ready,
+    productionProgress:{certifiedR33Units:uniqueUnits('r33-farm'),activeR33Workers:activeByProvider['r33-farm']||0},
+    mainIntegrationProgress:{integratedR33Units:uniqueUnits('r33-index-integration'),deferred:true},
+    activeByProvider,
+    cloudflareEditorialInteractions:0,d1EditorialReads:0,d1EditorialWrites:0
+  };
 }
 
 module.exports={
