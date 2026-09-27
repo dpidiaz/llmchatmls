@@ -174,6 +174,20 @@ test('R4 deferred integration materializes Evidence workers but no index integra
   assert.equal(result.queueTarget,128);
 });
 
+test('R4 staging manifest is deterministic and rejects conflicting certified commits',()=>{
+  const ledger={terminal:{
+    b:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/b',commitSha:'2'.repeat(40),completedAt:'2026-09-24T05:02:00.000Z'},
+    a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/a',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:01:00.000Z'}
+  }};
+  const one=integration.r33StagingManifest(ledger,{createdAt:'2026-09-24T06:00:00.000Z'});
+  const two=integration.r33StagingManifest({terminal:{a:ledger.terminal.a,b:ledger.terminal.b}},{createdAt:'2026-09-24T06:01:00.000Z'});
+  assert.equal(one.entryCount,2);
+  assert.deepEqual(one.entries.map(x=>x.code),['MLS-V01-0001','MLS-V01-0002']);
+  assert.equal(one.snapshotHash,two.snapshotHash);
+  const conflict={terminal:{...ledger.terminal,c:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/c',commitSha:'3'.repeat(40)}}};
+  assert.throws(()=>integration.r33StagingManifest(conflict),error=>error.code==='R4_STAGING_CONFLICT');
+});
+
 test('completed units survive multiple checkpoints and recovery generations',()=>{
   const state={
     recoveredCompletedUnits:['MLS-V01-0001'],
