@@ -137,6 +137,38 @@ function r33TerminalSourceMap(globalLedger,pool){
   }
   return out;
 }
+function r33StagingManifest(globalLedger,{createdAt=null}={}){
+  const rows=[];
+  for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
+    if(!terminal||terminal.provider!=='r33-farm'||!Array.isArray(terminal.completedUnits))continue;
+    for(const code of terminal.completedUnits){
+      rows.push({
+        code:String(code).toUpperCase(),
+        workId,
+        branch:String(terminal.branch||''),
+        commitSha:String(terminal.commitSha||''),
+        completedAt:terminal.completedAt||null
+      });
+    }
+  }
+  rows.sort((a,b)=>a.code.localeCompare(b.code)||a.workId.localeCompare(b.workId));
+  const byCode=new Map();
+  for(const row of rows){
+    const prior=byCode.get(row.code);
+    if(prior&&prior.commitSha!==row.commitSha)throw integrationError('R4_STAGING_CONFLICT','Más de un commit certificado para '+row.code+'.',409);
+    byCode.set(row.code,row);
+  }
+  const entries=[...byCode.values()];
+  const digest=globalCore.sha256(JSON.stringify(entries.map(({code,workId,branch,commitSha})=>({code,workId,branch,commitSha}))));
+  return {
+    kind:'r33_staging_manifest',version:1,
+    createdAt:createdAt||new Date().toISOString(),
+    entryCount:entries.length,
+    snapshotHash:digest,
+    entries
+  };
+}
+
 function r33IntegratedCodes(root='.',verifiedCodes=null){
   if(Array.isArray(verifiedCodes))return new Set(verifiedCodes.map(x=>String(x).toUpperCase()));
   const p=path.join(root,'MLS R32 EDITORIAL','evidence git','indexes','verified.json');
@@ -370,7 +402,7 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 
 module.exports={
   DYNAMIC_PROVIDERS,READY_QUEUE_TARGET,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
-  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33IntegratedCodes,r33ContinuationPool,
+  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33StagingManifest,r33IntegratedCodes,r33ContinuationPool,
   r33IntegrationWaves,r33IndexPreparationWorkId,r33IndexPreparationWorks,r33PreparedIndexIntegrationWork,r33IndexIntegrationWork,
   recoveryItems,materializeProviderItems,extendRegistry
 };
