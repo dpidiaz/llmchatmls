@@ -33,6 +33,7 @@ jobs:
       - name: Syntax-check R4 automation
         run: |
           node --check 'scripts/R4 staging rehearsal.cjs'
+          node --check 'scripts/R4 evidence preflight.cjs'
           node --check 'scripts/R4 final publication readiness.cjs'
       - name: Burst and dispatcher tests
         run: |
