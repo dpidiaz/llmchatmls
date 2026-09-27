@@ -268,8 +268,12 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       }
       await createBranch(branch,baseCommit);
     }
+    const issueLogin=String(issue.user?.login||'').trim();
+    const delegatedLogin=String(command.workerLogin||'').trim();
+    const trustedAutoPull=issueLogin==='github-actions[bot]'&&String(command.requestId||'').startsWith('autopull:');
+    const workerLogin=trustedAutoPull&&delegatedLogin?delegatedLogin:(issueLogin||null);
     const state=core.makeAssignmentState({
-      issueNumber:issue.number,item,requestId:command.requestId,workerId:command.workerId,workerLogin:issue.user?.login||null,
+      issueNumber:issue.number,item,requestId:command.requestId,workerId:command.workerId,workerLogin,
       baseCommit,branch,recovery,now:core.iso(now)
     });
     if(recovery?.completedUnits?.length)state.recoveredCompletedUnits=[...new Set(recovery.completedUnits.map(String))];
