@@ -178,7 +178,12 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     return cachedRegistry;
   }
   function progressFor(registry){
-    return {...core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now),queueTarget:providerIntegration.READY_QUEUE_TARGET};
+    const staging=providerIntegration.r33StagingManifest(ledgerItem.ledger,{createdAt:core.iso(now)});
+    return {
+      ...core.dispatchProgress(registry,ledgerItem.ledger,activeStates,now),
+      queueTarget:providerIntegration.READY_QUEUE_TARGET,
+      staging:{entryCount:staging.entryCount,snapshotHash:staging.snapshotHash}
+    };
   }
   const issues=providerIssues.filter(x=>dispatcherIssue(x)&&!hasAssignmentState(x)&&hasCommandMarker(x)).sort((a,b)=>Number(a.number)-Number(b.number));
   const drained=[];
