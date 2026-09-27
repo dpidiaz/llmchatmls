@@ -208,6 +208,14 @@ test('R33 editorial work remains materializable while index integration is activ
   assert.equal(result.diagnostics.some(x=>x.provider==='r33-farm'),false);
 });
 
+test('R4 scheduler distinguishes temporary saturation from true NO_WORK',()=>{
+  const scheduler=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
+  assert.match(scheduler,/CAPACITY_BUSY/);
+  assert.match(scheduler,/WORK_TEMPORARILY_LEASED/);
+  assert.match(scheduler,/CORPUS_EXHAUSTED_OR_NO_ELIGIBLE_BACKLOG/);
+  assert.match(scheduler,/activeR33>0/);
+});
+
 test('scheduler integrates providers through snapshots only and never issues nested Farm commands',()=>{
   const scheduler=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
   assert.match(scheduler,/providers\/integration\.js/);
