@@ -31,7 +31,8 @@ function autoPullRequest(state,comment){
   if(!/^[A-Za-z0-9._:-]{8,160}$/.test(workerId))return null;
   const seed=String(state.assignmentId||state.issueNumber||'assignment').replace(/[^A-Za-z0-9._:-]+/g,'-').slice(-70);
   const requestId=('autopull:'+seed+':'+String(comment.id)).slice(0,120);
-  return {operation:'claim',requestId,workerId,capabilities:['chat','github','r4-autopull']};
+  const workerLogin=String(state.workerLogin||'').trim();
+  return {operation:'claim',requestId,workerId,workerLogin:workerLogin||null,capabilities:['chat','github','r4-autopull']};
 }
 function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
 async function branchHead(branch){
