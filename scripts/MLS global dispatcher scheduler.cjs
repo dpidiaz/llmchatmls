@@ -215,9 +215,15 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
     }
     if(!selected){
-      touchRequest(ledgerItem,command.requestId,{status:'no_work',issueNumber:issue.number});
       const progress=progressFor(registry);
-      await closeCommand(issue,'[MLS Dispatcher][NO_WORK] '+command.requestId,{ok:true,assigned:false,requestId:command.requestId,progress});
+      const activeR33=activeStates.filter(state=>state&&state.status==='leased'&&!state.readyToClose&&!state.cancelRequested&&state.provider==='r33-farm').length;
+      if(activeR33>0){
+        touchRequest(ledgerItem,command.requestId,{status:'capacity_busy',issueNumber:issue.number});
+        await closeCommand(issue,'[MLS Dispatcher][CAPACITY_BUSY] '+command.requestId,{ok:true,assigned:false,retryable:true,reason:'WORK_TEMPORARILY_LEASED',requestId:command.requestId,activeR33,progress});
+        drained.push({issueNumber:issue.number,status:'capacity_busy'});continue;
+      }
+      touchRequest(ledgerItem,command.requestId,{status:'no_work',issueNumber:issue.number});
+      await closeCommand(issue,'[MLS Dispatcher][NO_WORK] '+command.requestId,{ok:true,assigned:false,requestId:command.requestId,reason:'CORPUS_EXHAUSTED_OR_NO_ELIGIBLE_BACKLOG',progress});
       drained.push({issueNumber:issue.number,status:'no_work'});continue;
     }
     let item=selected.item;
