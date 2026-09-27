@@ -65,24 +65,18 @@ test('dynamic recoveries are rehydrated while authorized Gate 500 activation sta
   assert.equal(base.items.find(x=>x.workId==='gate500').status,'ready','base registry must not be mutated');
 });
 
-test('R33 index integration waits for a full wave and materializes exact source refs',()=>{
+test('R33 direct wave integration opens when the first full wave is certified without waiting for the rest of the pool',()=>{
   const pool=r33Pool();
   const partialLedger={terminal:{
     a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/r33/1',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:00:00.000Z'}
   }};
   assert.equal(integration.r33IndexIntegrationWork({pool,globalLedger:partialLedger,waveSize:2,verifiedCodes:[]}),null);
 
-  const almostFullLedger={terminal:{
+  const firstWaveLedger={terminal:{
     a:{provider:'r33-farm',completedUnits:['MLS-V01-0001'],branch:'worker/r33/1',commitSha:'1'.repeat(40),completedAt:'2026-09-24T05:00:00.000Z'},
     b:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/r33/2',commitSha:'2'.repeat(40),completedAt:'2026-09-24T05:01:00.000Z'}
   }};
-  assert.equal(integration.r33IndexIntegrationWork({pool,globalLedger:almostFullLedger,waveSize:2,verifiedCodes:[]}),null,'index integration must wait until the editorial pool is terminal');
-
-  const fullLedger={terminal:{
-    ...almostFullLedger.terminal,
-    c:{provider:'r33-farm',completedUnits:['MLS-V01-0003'],branch:'worker/r33/3',commitSha:'3'.repeat(40),completedAt:'2026-09-24T05:02:00.000Z'}
-  }};
-  const work=integration.r33IndexIntegrationWork({pool,globalLedger:fullLedger,waveSize:2,verifiedCodes:[]});
+  const work=integration.r33IndexIntegrationWork({pool,globalLedger:firstWaveLedger,waveSize:2,verifiedCodes:[]});
   assert.equal(work.provider,'r33-index-integration');
   assert.equal(work.workType,'integration');
   assert.deepEqual(work.units,['MLS-V01-0001','MLS-V01-0002']);
@@ -91,6 +85,9 @@ test('R33 index integration waits for a full wave and materializes exact source 
   assert.ok(work.resourceLocks.includes('system:main-integration'));
   assert.ok(work.allowedPaths.includes('MLS R32 EDITORIAL/evidence git/indexes/verified.json'));
   assert.equal(work.integration.mode,'assignment-pr');
+  assert.equal(work.integration.waveMode,'aggregate-certified-workers');
+  assert.equal(work.integration.waveSize,2);
+  assert.deepEqual(work.integration.sourceWorkerCommits,['1'.repeat(40),'2'.repeat(40)]);
 });
 
 test('R33 parallel preparation materializes independent waves while final integration keeps the global merge lock',()=>{
@@ -136,6 +133,31 @@ test('R33 prepared integration rejects terminal preparation metadata that does n
     branch:'worker/r33-index-preparation/001000',commitSha:'a'.repeat(40)
   };
   assert.equal(integration.r33PreparedIndexIntegrationWork({pool,globalLedger,waveSize:1,verifiedCodes:[]}),null);
+});
+
+test('R33 full-corpus continuation excludes integrated codes and applies the 10x50/500 pipeline',()=>{
+  const base={...r33Pool(),gate1000Authorized:true,execution:{...r33Pool().execution,continuationAfterActivePool:true}};
+  const corpus=[
+    {code:'MLS-V01-0001',language:'ingles',path:'content/ingles/MLS-V01-0001.json'},
+    {code:'MLS-V01-0002',language:'ingles',path:'content/ingles/MLS-V01-0002.json'},
+    {code:'MLS-V01-0003',language:'ingles',path:'content/ingles/MLS-V01-0003.json'},
+    {code:'MLS-V01-0004',language:'ingles',path:'content/ingles/MLS-V01-0004.json'}
+  ];
+  const pool=integration.r33ContinuationPool({basePool:base,verifiedCodes:['MLS-V01-0001','MLS-V01-0003'],corpusEntries:corpus});
+  assert.equal(pool.poolId,'MLS-R33-FULL-CORPUS-CONTINUATION');
+  assert.equal(pool.status,'authorized');
+  assert.equal(pool.active,true);
+  assert.equal(pool.continuationOf,base.poolId);
+  assert.deepEqual(pool.entries.map(x=>x.code),['MLS-V01-0002','MLS-V01-0004']);
+  assert.equal(pool.execution.defaultClaimSize,50);
+  assert.equal(pool.execution.maxClaimSize,50);
+  assert.equal(pool.execution.workerBatchSize,50);
+  assert.equal(pool.execution.parallelWorkerLimit,10);
+  assert.equal(pool.execution.integrationWaveSize,500);
+  assert.equal(pool.execution.directWaveIntegration,true);
+  assert.equal(pool.execution.parallelIntegrationPreparation,false);
+  assert.equal(pool.execution.finalMergeSerialized,true);
+  assert.equal(integration.r33ContinuationPool({basePool:base,verifiedCodes:corpus.map(x=>x.code),corpusEntries:corpus}),null);
 });
 
 test('completed units survive multiple checkpoints and recovery generations',()=>{
