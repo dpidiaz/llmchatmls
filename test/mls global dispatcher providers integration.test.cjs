@@ -222,13 +222,17 @@ test('R33 editorial work remains materializable while index integration is activ
   assert.equal(result.diagnostics.some(x=>x.provider==='r33-farm'),false);
 });
 
-test('R4 finish auto-pulls the next claim and explicitly wakes the scheduler',()=>{
+test('R4 finish auto-pulls the next claim, preserves worker identity, and explicitly wakes the scheduler',()=>{
   const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
+  const scheduler=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
   assert.match(worker,/operation==='finish'&&next\.readyToClose===true&&next\.provider==='r33-farm'/);
   assert.match(worker,/\[MLS Dispatcher\]\[CLAIM\]/);
+  assert.match(worker,/workerLogin:workerLogin\|\|null/);
   assert.match(worker,/wakeScheduler\(\)/);
   assert.match(worker,/continue-until-preempted/);
+  assert.match(scheduler,/trustedAutoPull=issueLogin==='github-actions\[bot\]'/);
+  assert.match(scheduler,/trustedAutoPull&&delegatedLogin\?delegatedLogin/);
   assert.match(workflow,/actions:\s*write/);
 });
 
