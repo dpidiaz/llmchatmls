@@ -23,6 +23,9 @@ async function gh(method,endpoint,body){
 async function getIssue(number){return gh('GET','/repos/'+owner+'/'+repo+'/issues/'+number);}
 async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
 async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});}
+async function wakeScheduler(){
+  return gh('POST','/repos/'+owner+'/'+repo+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{ref:'main'});
+}
 function autoPullRequest(state,comment){
   const workerId=String(state.workerId||'').trim();
   if(!/^[A-Za-z0-9._:-]{8,160}$/.test(workerId))return null;
@@ -129,6 +132,7 @@ async function main(){
       const command=autoPullRequest(next,comment);
       if(command){
         chainedClaim=await createIssue('[MLS Dispatcher][CLAIM] '+command.requestId,core.renderCommandBody(command));
+        await wakeScheduler();
         next={...next,autoPull:{
           enabled:true,
           requestId:command.requestId,
