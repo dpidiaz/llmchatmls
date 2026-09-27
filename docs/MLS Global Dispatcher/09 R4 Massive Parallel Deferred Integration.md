@@ -41,6 +41,19 @@ Integration rehearsals must prove that staged Evidence can form a valid candidat
 
 A worker processes only its leased microclaim. After every completed entry it commits and checkpoints before starting the next. If the session remains healthy after the microclaim, it should immediately request another claim. If it dies, durable completed units remain; pending units become recoverable after lease expiry/reap.
 
+## Continue until preempted
+
+Finishing a microclaim is not a worker termination condition. A valid R33 `finish` event automatically creates the next Dispatcher claim with the same worker identity, records the chain in `autoPull`, and explicitly dispatches the Scheduler. A still-running chat follows the chained claim and continues with the next microclaim.
+
+This converts runtime termination into ordinary preemption:
+
+- completed entries are already durable;
+- a partially completed microclaim is recovered at entry granularity;
+- a seeded claim or lease left behind by a dead chat is allowed to expire and is reaped;
+- another worker can reclaim the remaining corpus without conversational context.
+
+The system never attempts to keep a ChatGPT reasoning process alive. It makes worker death cheap and expected.
+
 ## Capacity semantics
 
 - `assigned`: useful work leased.
