@@ -120,7 +120,7 @@ function r33CandidateToWork(candidate,now=Date.now()){
     providerVersion:candidate.providerVersion,ownershipMode:'global-single-lease',units:codes,checkpointSizeMax:candidate.checkpointSizeMax,
     resourceLocks:candidate.resourceLocks,allowedPaths:candidate.allowedPaths,dependsOn:[],
     validation:['R33 Editorial Batch Tests'],
-    instructions:'Procesa exclusivamente estas entradas R33. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado.',
+    instructions:'R4 EPHEMERAL WORKER: procesa exclusivamente estas entradas R33. Persiste y valida CADA entrada por separado; después de cada entrada crea commit/checkpoint durable antes de iniciar la siguiente. checkpointSizeMax=1. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado. Si completas el microclaim y la sesión sigue sana, solicita inmediatamente otro MLS siguiente/claim y continúa; no esperes intervención humana.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-farm'},completion:{requiresCommit:true,requiresValidation:true},
     providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
   };
