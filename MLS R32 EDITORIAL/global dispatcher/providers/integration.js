@@ -60,7 +60,13 @@ function collectMlsSnapshot(issues,root='.'){
   return {corpus:mlsCore.corpusEntries(root),ledgers,batches};
 }
 function collectR33Snapshot(issues,root='.'){
-  const pool=r33Core.loadPool(root),ledgers=[],batches=[];
+  const configuredPool=r33Core.loadPool(root);
+  const integrated=r33IntegratedCodes(root);
+  const configuredComplete=(configuredPool.entries||[]).every(x=>integrated.has(String(x.code||'').toUpperCase()));
+  const continuation=configuredComplete&&configuredPool?.execution?.continuationAfterActivePool===true
+    ? r33ContinuationPool({root,basePool:configuredPool,verifiedCodes:[...integrated]})
+    : null;
+  const pool=continuation||configuredPool,ledgers=[],batches=[];
   for(const issue of Array.isArray(issues)?issues:[]){
     const body=String(issue?.body||'');
     const ledger=r33Core.parseLedger(body);if(ledger&&String(ledger.poolId||'')===pool.poolId)ledgers.push(ledger);
@@ -68,7 +74,7 @@ function collectR33Snapshot(issues,root='.'){
   }
   if(ledgers.length>1)throw integrationError('R33_LEDGER_CARDINALITY','R33 provider requiere como máximo un ledger activo para '+pool.poolId+'.',503);
   const ledger=ledgers.length===1?ledgers[0]:r33Core.initialLedger(pool);
-  return {pool,ledger,batches,ledgerSynthetic:ledgers.length===0};
+  return {pool,ledger,batches,ledgerSynthetic:ledgers.length===0,continuationActive:Boolean(continuation),configuredPoolId:configuredPool.poolId};
 }
 function projectMlsSnapshot(snapshot,{globalLedger,globalAssignments}={}){
   const corpusCodes=new Set((snapshot.corpus||[]).map(x=>String(x.code)));
@@ -137,6 +143,53 @@ function r33IntegratedCodes(root='.',verifiedCodes=null){
   if(!fs.existsSync(p))return new Set();
   const values=JSON.parse(fs.readFileSync(p,'utf8'));
   return new Set((Array.isArray(values)?values:[]).map(x=>String(x).toUpperCase()));
+}
+function r33ContinuationPool({root='.',basePool,verifiedCodes=null,corpusEntries=null}={}){
+  if(!basePool||basePool?.execution?.continuationAfterActivePool!==true)return null;
+  const integrated=r33IntegratedCodes(root,verifiedCodes);
+  const corpus=Array.isArray(corpusEntries)?corpusEntries:mlsCore.corpusEntries(root);
+  const entries=corpus
+    .filter(entry=>!integrated.has(String(entry.code||'').toUpperCase()))
+    .map((entry,index)=>({
+      order:index+1,
+      code:String(entry.code||'').toUpperCase(),
+      language:String(entry.language||''),
+      contentPath:String(entry.path||entry.contentPath||'')
+    }));
+  if(!entries.length)return null;
+  const execution={...(basePool.execution||{})};
+  Object.assign(execution,{
+    defaultClaimSize:50,
+    maxClaimSize:50,
+    workerBatchSize:50,
+    integrationWaveSize:500,
+    parallelWorkerLimit:10,
+    directWaveIntegration:true,
+    continuationAfterActivePool:true,
+    parallelIntegrationPreparation:false,
+    parallelPreparedPrs:false,
+    finalMergeSerialized:true,
+    serializedIndexIntegrationRequired:true,
+    chatOnly:true,
+    cloudflareEditorialInteractions:0,
+    d1EditorialInteractions:0
+  });
+  return {
+    poolId:'MLS-R33-FULL-CORPUS-CONTINUATION',
+    manifestVersion:'1.0',
+    status:'authorized',
+    active:true,
+    dispatcherOnly:true,
+    sourceOfTruth:'github',
+    editorialArchitecture:'github-native',
+    cloudflareEditorialAllowed:false,
+    d1EditorialAllowed:false,
+    gate500Authorized:Boolean(basePool.gate500Authorized),
+    gate1000Authorized:Boolean(basePool.gate1000Authorized),
+    continuationOf:basePool.poolId,
+    execution,
+    entries
+  };
 }
 function r33IntegrationWaves({pool,globalLedger,root='.',waveSize=50,verifiedCodes=null}={}){
   if(!pool||!Array.isArray(pool.entries))return [];
@@ -211,28 +264,41 @@ function r33PreparedIndexIntegrationWork({pool,globalLedger,root='.',waveSize=50
   return null;
 }
 
-function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=50,verifiedCodes=null}={}){
+function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verifiedCodes=null}={}){
   if(!pool||!Array.isArray(pool.entries))return null;
+  const size=Number(waveSize??pool?.execution?.integrationWaveSize??50);
+  if(!Number.isInteger(size)||size<1)throw integrationError('R33_INTEGRATION_WAVE_INVALID','waveSize inválido para R33 integration.',500);
   const sources=r33TerminalSourceMap(globalLedger,pool),integrated=r33IntegratedCodes(root,verifiedCodes);
-  const pending=pool.entries.filter(x=>sources.has(x.code)&&!integrated.has(x.code));
-  const remainingEditorial=pool.entries.filter(x=>!sources.has(x.code)).length;
-  if(!pending.length||remainingEditorial>0)return null;
-  const units=pending.slice(0,waveSize),codes=units.map(x=>x.code),first=codes[0],last=codes.at(-1);
-  const sourceRefs=units.map(x=>({...sources.get(x.code),evidenceArtifactPath:r33Provider.evidenceArtifactPath(x)}));
+  const remaining=pool.entries.filter(x=>!integrated.has(String(x.code||'').toUpperCase()));
+  if(!remaining.length)return null;
+  const units=remaining.slice(0,size);
+  if(!units.length||units.some(x=>!sources.has(String(x.code||'').toUpperCase())))return null;
+  const codes=units.map(x=>String(x.code).toUpperCase()),first=codes[0],last=codes.at(-1);
+  const sourceRefs=units.map(x=>({...sources.get(String(x.code).toUpperCase()),evidenceArtifactPath:r33Provider.evidenceArtifactPath(x)}));
   const indexRoot='MLS R32 EDITORIAL/evidence git/indexes';
   return {
     workId:'r33-index-integration:'+pool.poolId+':'+first+':'+last+':'+codes.length,
-    version:1,
-    title:'R33 index integration '+first+'..'+last,
-    workType:'integration',status:'ready',priority:10,createdAt:new Date().toISOString(),provider:'r33-index-integration',
+    version:3,
+    title:'R33 wave integration '+first+'..'+last,
+    workType:'integration',status:'ready',priority:12,createdAt:new Date().toISOString(),provider:'r33-index-integration',
     units:codes,sourceRefs,dependsOn:[],
     resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...codes.map(code=>'entry:'+code)],
     allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
     validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-    instructions:'Integra exactamente los Evidence blobs de sourceRefs en una rama desde main, ejecuta npm run r33:indexes:write y npm run test:r33-github-native. Abre PR a main y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con el HEAD exacto para certificar scope. Luego mergea con expected_head_sha, verifica main y envía checkpoint integrationStage=postmerge con integrationPrNumber, integrationHeadSha y merge SHA; finish repite esos campos. No modifiques Sources ni contenido canónico.',
+    instructions:'WAVE FINAL PHASE: construye la rama asignada desde el main vigente y agrega exactamente los Evidence blobs certificados por sourceRefs, aunque provengan de múltiples workers/commits. No regeneres índices por worker: copia todos los Evidence de la wave y ejecuta npm run r33:indexes:write una sola vez al final. Ejecuta npm run test:r33-github-native, abre/usa un único PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. No modifiques Sources ni contenido canónico.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
     completion:{requiresCommit:true,requiresValidation:true},
-    integration:{mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests'],sourceRefs}
+    integration:{
+      mode:'assignment-pr',
+      waveMode:'aggregate-certified-workers',
+      base:'main',
+      mergeMethod:'merge',
+      requiredChecks:['R33 GitHub Native Tests'],
+      postMergeChecks:['R33 GitHub Native Tests'],
+      sourceRefs,
+      waveSize:size,
+      sourceWorkerCommits:[...new Set(sourceRefs.map(x=>x.commitSha).filter(Boolean))]
+    }
   };
 }
 
@@ -254,16 +320,29 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   }catch(error){diagnostics.push({provider:'mls-farm',status:'blocked',error:error.code||'MLS_FARM_PROVIDER_ERROR',message:error.message});}
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
-    if(snapshot.pool?.execution?.parallelIntegrationPreparation===true){
-      const preparationItems=r33IndexPreparationWorks({pool:snapshot.pool,globalLedger,root,waveSize:Number(snapshot.pool.execution.integrationWaveSize||50)});
+    const execution=snapshot.pool?.execution||{};
+    if(execution.directWaveIntegration===true){
+      const indexItem=r33IndexIntegrationWork({
+        pool:snapshot.pool,
+        globalLedger,
+        root,
+        waveSize:Number(execution.integrationWaveSize||500)
+      });
+      if(indexItem)items.push(globalCore.normalizeWorkItem(indexItem));
+    }else if(execution.parallelIntegrationPreparation===true){
+      const preparationItems=r33IndexPreparationWorks({pool:snapshot.pool,globalLedger,root,waveSize:Number(execution.integrationWaveSize||50)});
       for(const item of preparationItems)items.push(globalCore.normalizeWorkItem(item));
-      const indexItem=r33PreparedIndexIntegrationWork({pool:snapshot.pool,globalLedger,root,waveSize:Number(snapshot.pool.execution.integrationWaveSize||50)});
+      const indexItem=r33PreparedIndexIntegrationWork({pool:snapshot.pool,globalLedger,root,waveSize:Number(execution.integrationWaveSize||50)});
       if(indexItem)items.push(globalCore.normalizeWorkItem(indexItem));
     }else{
-      const indexItem=r33IndexIntegrationWork({pool:snapshot.pool,globalLedger,root});
+      const indexItem=r33IndexIntegrationWork({pool:snapshot.pool,globalLedger,root,waveSize:Number(execution.integrationWaveSize||50)});
       if(indexItem)items.push(globalCore.normalizeWorkItem(indexItem));
     }
-    const candidates=r33Provider.materializeCandidates(snapshot,{now,count:queueTarget});
+    const activeR33=activeProviderAssignments(globalAssignments,'r33-farm').length;
+    const configuredLimit=Number(execution.parallelWorkerLimit??queueTarget);
+    const parallelLimit=Number.isInteger(configuredLimit)&&configuredLimit>0?Math.min(queueTarget,configuredLimit):queueTarget;
+    const available=Math.max(0,parallelLimit-activeR33);
+    const candidates=available>0?r33Provider.materializeCandidates(snapshot,{now,count:available}):[];
     for(const candidate of candidates){
       const item=r33CandidateToWork(candidate,now);
       if(item)items.push(globalCore.normalizeWorkItem(item));
@@ -286,7 +365,7 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 
 module.exports={
   DYNAMIC_PROVIDERS,READY_QUEUE_TARGET,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
-  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33IntegratedCodes,
+  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33IntegratedCodes,r33ContinuationPool,
   r33IntegrationWaves,r33IndexPreparationWorkId,r33IndexPreparationWorks,r33PreparedIndexIntegrationWork,r33IndexIntegrationWork,
   recoveryItems,materializeProviderItems,extendRegistry
 };
