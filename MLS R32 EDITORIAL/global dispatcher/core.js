@@ -97,7 +97,9 @@ function parseCommand(body){
     const requestId=String(x.requestId||'').trim(),workerId=String(x.workerId||'').trim();
     if(!/^[A-Za-z0-9._:-]{8,120}$/.test(requestId))throw dispatchError('INVALID_REQUEST_ID','requestId inválido.');
     if(!/^[A-Za-z0-9._:-]{8,160}$/.test(workerId))throw dispatchError('INVALID_WORKER_ID','workerId inválido.');
-    return {operation,requestId,workerId,capabilities:normalizeStringArray(x.capabilities||['chat','github'],'capabilities')};
+    const workerLogin=String(x.workerLogin||'').trim();
+    if(workerLogin&&!/^[A-Za-z0-9][A-Za-z0-9-]*(?:\\[bot\\])?$/.test(workerLogin))throw dispatchError('INVALID_WORKER_LOGIN','workerLogin inválido.');
+    return {operation,requestId,workerId,workerLogin:workerLogin||null,capabilities:normalizeStringArray(x.capabilities||['chat','github'],'capabilities')};
   }
   return {operation};
 }
