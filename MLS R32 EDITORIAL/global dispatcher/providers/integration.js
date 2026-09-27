@@ -9,7 +9,7 @@ const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
-const READY_QUEUE_TARGET=50;
+const READY_QUEUE_TARGET=128;
 
 function integrationError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -159,12 +159,15 @@ function r33ContinuationPool({root='.',basePool,verifiedCodes=null,corpusEntries
   if(!entries.length)return null;
   const execution={...(basePool.execution||{})};
   Object.assign(execution,{
-    defaultClaimSize:50,
-    maxClaimSize:50,
-    workerBatchSize:50,
+    defaultClaimSize:5,
+    maxClaimSize:10,
+    workerBatchSize:5,
     integrationWaveSize:500,
-    parallelWorkerLimit:10,
-    directWaveIntegration:true,
+    parallelWorkerLimit:128,
+    maxConcurrentWorkers:128,
+    checkpointSizeMax:1,
+    deferredIntegration:true,
+    directWaveIntegration:false,
     continuationAfterActivePool:true,
     parallelIntegrationPreparation:false,
     parallelPreparedPrs:false,
@@ -321,7 +324,9 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const execution=snapshot.pool?.execution||{};
-    if(execution.directWaveIntegration===true){
+    if(execution.deferredIntegration===true){
+      // R4: certified Evidence accumulates outside main. Integration is rehearsed/published separately.
+    }else if(execution.directWaveIntegration===true){
       const indexItem=r33IndexIntegrationWork({
         pool:snapshot.pool,
         globalLedger,
