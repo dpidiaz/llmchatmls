@@ -36,6 +36,6 @@ jobs:
           node --check 'scripts/R4 final publication readiness.cjs'
       - name: Burst and dispatcher tests
         run: |
-          node --test 'test/mls global dispatcher provider r33.test.cjs' 'test/mls global dispatcher providers integration.test.cjs'
+          node --test 'test/mls global dispatcher.test.cjs' 'test/mls global dispatcher provider r33.test.cjs' 'test/mls global dispatcher providers integration.test.cjs'
       - name: Gate R4 contract
         run: node --test 'test/r33 gate1000 preparation.test.cjs'
