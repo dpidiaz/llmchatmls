@@ -1,0 +1,41 @@
+name: R4 Burst Resilience Tests
+
+on:
+  pull_request:
+    paths:
+      - 'MLS R32 EDITORIAL/global dispatcher/**'
+      - 'scripts/R4 **'
+      - 'test/mls global dispatcher**'
+      - 'docs/evidence y provenance/23 R33 Gate 1000 Pool.json'
+      - '.github/workflows/R4 **'
+  push:
+    branches:
+      - main
+    paths:
+      - 'MLS R32 EDITORIAL/global dispatcher/**'
+      - 'scripts/R4 **'
+      - 'test/mls global dispatcher**'
+      - 'docs/evidence y provenance/23 R33 Gate 1000 Pool.json'
+      - '.github/workflows/R4 **'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  r4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Syntax-check R4 automation
+        run: |
+          node --check 'scripts/R4 staging rehearsal.cjs'
+          node --check 'scripts/R4 final publication readiness.cjs'
+      - name: Burst and dispatcher tests
+        run: |
+          node --test 'test/mls global dispatcher provider r33.test.cjs' 'test/mls global dispatcher providers integration.test.cjs'
+      - name: Gate R4 contract
+        run: node --test 'test/r33 gate1000 preparation.test.cjs'
