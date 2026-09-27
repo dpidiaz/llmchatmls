@@ -18,10 +18,15 @@ test('Gate 1000 lifecycle is prepared-or-authorized and always GitHub-only',()=>
   assert.equal(pool.editorialArchitecture,'github-native');
   assert.equal(pool.cloudflareEditorialAllowed,false);
   assert.equal(pool.d1EditorialAllowed,false);
-  assert.equal(pool.execution.workerBatchSize,50);
+  assert.equal(pool.execution.workerBatchSize,5);
+  assert.equal(pool.execution.defaultClaimSize,5);
+  assert.equal(pool.execution.maxClaimSize,10);
+  assert.equal(pool.execution.checkpointSizeMax,1);
   assert.equal(pool.execution.integrationWaveSize,500);
-  assert.equal(pool.execution.parallelWorkerLimit,10);
-  assert.equal(pool.execution.directWaveIntegration,true);
+  assert.equal(pool.execution.parallelWorkerLimit,128);
+  assert.equal(pool.execution.maxConcurrentWorkers,128);
+  assert.equal(pool.execution.directWaveIntegration,false);
+  assert.equal(pool.execution.deferredIntegration,true);
   assert.equal(pool.execution.continuationAfterActivePool,true);
   assert.equal(pool.execution.serializedIndexIntegrationRequired,true);
   assert.equal(pool.execution.parallelIntegrationPreparation,false);
