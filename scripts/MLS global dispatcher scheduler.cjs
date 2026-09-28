@@ -127,7 +127,7 @@ async function recoveryResume(recovery,item){
   return {resumeCommit:orphan,orphanReused:true,orphanScopeValidated:true,orphanFileCount:files.length};
 }
 async function finalizeAssignment(issue,state,ledgerItem,nowMs){
-  const prior=ledgerItem.ledger.terminal[state.workId];
+  const prior=ledgerItem.ledger.terminal?.[state.workId];
   if(prior&&['done','certified'].includes(prior.status)&&prior.assignmentId!==state.assignmentId){
     // Duplicate generation must never overwrite a prior terminal or create a recovery.
     const next={...state,status:'cancelled',closedAt:core.iso(nowMs),releaseReason:'DUPLICATE_TERMINAL',cancelRequested:true};
