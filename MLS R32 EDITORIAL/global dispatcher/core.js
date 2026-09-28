@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto=require('node:crypto');
+const zlib=require('node:zlib');
 const fs=require('node:fs');
 const path=require('node:path');
 
@@ -13,6 +14,10 @@ const COMMAND_MARKER='MLS_GLOBAL_DISPATCH_COMMAND';
 const EVENT_MARKER='MLS_GLOBAL_DISPATCH_EVENT';
 const ASSIGNMENT_MARKER='MLS_GLOBAL_DISPATCH_ASSIGNMENT';
 const LEDGER_MARKER='MLS_GLOBAL_DISPATCH_LEDGER';
+// GitHub issue bodies cap at 262,144 bytes. Keep a safety margin and never drop durable keys.
+const MAX_LEDGER_BODY_BYTES=240*1024;
+const MAX_LEDGER_JSON_BYTES=16*1024*1024;
+const LEDGER_STORAGE='deflate-raw-base64';
 const DEFAULT_REGISTRY_PATH=path.join('MLS R32 EDITORIAL','global dispatcher','work registry.json');
 
 function dispatchError(code,message,status=422){const e=new Error(message||code);e.code=code;e.status=status;return e;}
@@ -109,7 +114,21 @@ function parseWorkerEvent(body){
   return {...x,operation};
 }
 function parseAssignmentState(body){try{const x=extractMarkedJson(body,ASSIGNMENT_MARKER);return x?.kind==='mls_global_assignment'?x:null;}catch{return null;}}
-function parseLedger(body){try{const x=extractMarkedJson(body,LEDGER_MARKER);return x?.kind==='mls_global_dispatch_ledger'?x:null;}catch{return null;}}
+function parseLedger(body){
+  try{
+    const marker=extractMarkedJson(body,LEDGER_MARKER);
+    if(marker?.kind!=='mls_global_dispatch_ledger')return null;
+    // Backward-compatible with the existing full-JSON ledger in issue #709.
+    if(marker.storage===undefined)return marker;
+    if(marker.storage!==LEDGER_STORAGE||typeof marker.payload!=='string'||typeof marker.payloadHash!=='string')return null;
+    if(!/^[A-Za-z0-9+/]+={0,2}$/.test(marker.payload))return null;
+    const decoded=zlib.inflateRawSync(Buffer.from(marker.payload,'base64'),{maxOutputLength:MAX_LEDGER_JSON_BYTES});
+    const json=decoded.toString('utf8');
+    if(sha256(json)!==marker.payloadHash)return null;
+    const expanded=JSON.parse(json);
+    return expanded?.kind==='mls_global_dispatch_ledger'&&expanded.storage===undefined?expanded:null;
+  }catch{return null;}
+}
 
 function initialLedger(registry){
   return {kind:'mls_global_dispatch_ledger',version:DISPATCH_VERSION,registryDigest:registryDigest(registry),terminal:{},recoveries:{},requests:{},epochs:{},updatedAt:iso()};
@@ -120,8 +139,14 @@ function normalizeLedger(raw,registry){
 }
 function renderLedgerBody(ledger){
   const terminalCount=Object.keys(ledger.terminal||{}).length,recoveryCount=Object.keys(ledger.recoveries||{}).length;
-  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(ledger)+'\n-->';
-  return ['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','','No edites manualmente el bloque de control.','',compactMarker].join('\n');
+  const json=JSON.stringify(ledger);
+  if(Buffer.byteLength(json,'utf8')>MAX_LEDGER_JSON_BYTES)throw dispatchError('LEDGER_JSON_TOO_LARGE','Ledger excede el límite seguro de descompresión.',503);
+  const payload=zlib.deflateRawSync(Buffer.from(json,'utf8'),{level:9}).toString('base64');
+  const envelope={kind:'mls_global_dispatch_ledger',storage:LEDGER_STORAGE,payloadHash:sha256(json),payload};
+  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(envelope)+'\n-->';
+  const body=['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','**Almacenamiento:** comprimido, íntegro y reversible  ','','No edites manualmente el bloque de control.','',compactMarker].join('\n');
+  if(Buffer.byteLength(body,'utf8')>MAX_LEDGER_BODY_BYTES)throw dispatchError('LEDGER_BODY_TOO_LARGE','Ledger excede el margen seguro del límite de GitHub.',503);
+  return body;
 }
 
 function isClaimStale(createdAt,at=Date.now()){const created=parseDate(createdAt);return created===null||Number(at)-created>CLAIM_TTL_MS;}
