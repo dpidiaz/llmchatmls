@@ -155,7 +155,7 @@ async function reconcileClosedDone(ledgerItem){
   for(const {issue,state} of history){
     const commitSha=state.finalCommitSha||state.lastCheckpointCommit||null;
     const previous=ledgerItem.ledger.terminal[state.workId]||null;
-    const priorIssue=Number(String(previous?.assignmentId||'').match(/\\d+$/)?.[0]||0);
+    const priorIssue=Number(String(previous?.assignmentId||'').match(/\d+$/)?.[0]||0);
     const preferEarlier=previous?.status==='done'&&priorIssue>Number(issue.number);
     if(!previous||preferEarlier){
       if(previous&&previous.commitSha!==commitSha)conflicts.push({workId:state.workId,canonical:state.assignmentId,duplicate:previous.assignmentId,canonicalCommit:commitSha,duplicateCommit:previous.commitSha});
