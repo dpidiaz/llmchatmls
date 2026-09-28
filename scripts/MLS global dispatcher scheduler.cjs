@@ -45,17 +45,52 @@ async function createBranch(branch,sha){
 async function ensureLedger(registry){
   const issues=await allIssues('open');
   for(const issue of issues.filter(ledgerIssue)){
-    const raw=core.parseLedger(issue.body||'');if(raw)return {issue,ledger:core.normalizeLedger(raw,registry),dirty:false};
+    const raw=core.parseLedger(issue.body||'');
+    // A corrupt or truncated ledger is never permission to create an empty one.
+    if(!raw)throw core.dispatchError('LEDGER_CORRUPT','Ledger #'+issue.number+' inválido: deteniendo adjudicaciones.',503);
+    return {issue,ledger:core.normalizeLedger(raw,registry),dirty:false,baselineHash:core.sha256(issue.body||'')};
   }
   const ledger=core.initialLedger(registry);
   const issue=await createIssue('[MLS Dispatcher Ledger]',core.renderLedgerBody(ledger));
-  return {issue,ledger,dirty:false};
+  return {issue,ledger,dirty:false,baselineHash:core.sha256(issue.body||'')};
 }
 async function saveLedger(item){
   if(!item.dirty)return;
+  // The workflow is serialized, but verify GitHub persistence and refuse stale writes.
+  const before=await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+item.issue.number);
+  if(core.sha256(before.body||'')!==item.baselineHash)throw core.dispatchError('LEDGER_WRITE_CONFLICT','El ledger cambió desde la lectura inicial.',409);
   item.ledger.updatedAt=core.iso();
-  await updateIssue(item.issue.number,{body:core.renderLedgerBody(item.ledger)});
+  const body=core.renderLedgerBody(item.ledger); // Size-checked before PATCH.
+  await updateIssue(item.issue.number,{body});
+  const after=await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+item.issue.number);
+  const persisted=core.parseLedger(after.body||'');
+  if(!persisted||core.sha256(persisted)!==core.sha256(item.ledger))
+    throw core.dispatchError('LEDGER_WRITE_NOT_PERSISTED','GitHub no persistió exactamente el ledger. Detener adjudicaciones.',503);
+  item.issue=after;item.baselineHash=core.sha256(after.body||'');
   item.dirty=false;
+}
+async function reconcileCompletedIssues(item){
+  const saved=core.parseDate(item.ledger.updatedAt);
+  if(saved===null)throw core.dispatchError('LEDGER_TIMESTAMP_INVALID','Ledger sin updatedAt verificable.',503);
+  // Re-read authoritative closed DONE issues, including items lost from saturated ledger #709.
+  const since=encodeURIComponent(core.iso(Math.max(0,saved-10*60*1000))),done=[];
+  let exhausted=false;
+  for(let page=1;page<=30;page++){
+    const rows=await gh('GET','/repos/'+owner+'/'+repo+'/issues?state=closed&sort=updated&direction=asc&since='+since+'&per_page=100&page='+page);
+    if(!Array.isArray(rows))throw core.dispatchError('DONE_SCAN_INVALID','Respuesta no verificable al reconciliar DONE.',503);
+    for(const issue of rows){
+      if(issue.pull_request||!String(issue.title||'').startsWith('[MLS Dispatcher][DONE]'))continue;
+      const state=core.parseAssignmentState(issue.body||'');
+      if(!state||state.status!=='done'||state.issueNumber!==issue.number)
+        throw core.dispatchError('DONE_STATE_INVALID','Issue DONE #'+issue.number+' sin bloque durable válido.',503);
+      done.push(state);
+    }
+    if(rows.length<100){exhausted=true;break;}
+  }
+  if(!exhausted)throw core.dispatchError('DONE_SCAN_INCOMPLETE','Más de 3000 issues actualizados; sin adjudicaciones hasta reconciliar.',503);
+  const changed=core.reconcileDurableDone(item.ledger,done,providerIntegration.completedUnitsForState);
+  if(changed){item.dirty=true;await saveLedger(item);}
+  return {examined:done.length,reconciled:changed};
 }
 function touchRequest(ledgerItem,requestId,patch){
   if(!requestId)return;
@@ -92,6 +127,14 @@ async function recoveryResume(recovery,item){
   return {resumeCommit:orphan,orphanReused:true,orphanScopeValidated:true,orphanFileCount:files.length};
 }
 async function finalizeAssignment(issue,state,ledgerItem,nowMs){
+  const prior=ledgerItem.ledger.terminal?.[state.workId];
+  if(prior&&['done','certified'].includes(prior.status)&&prior.assignmentId!==state.assignmentId){
+    // Duplicate generation must never overwrite a prior terminal or create a recovery.
+    const next={...state,status:'cancelled',closedAt:core.iso(nowMs),releaseReason:'DUPLICATE_TERMINAL',cancelRequested:true};
+    touchRequest(ledgerItem,state.requestId,{status:'duplicate',workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber});
+    await updateIssue(issue.number,{title:'[MLS Dispatcher][DUPLICATE] '+state.assignmentId+' '+state.workId,body:core.renderAssignmentBody(next),state:'closed',state_reason:'not_planned'});
+    return {closed:true,state:next,recovery:false};
+  }
   const expired=core.isLeaseExpired(state,nowMs);
   if(state.readyToClose){
     const next={...state,status:'done',closedAt:core.iso(nowMs),releaseReason:null};
@@ -167,6 +210,8 @@ function duplicateAssignment(command,activeStates,ledger){
 }
 
 async function drainPendingCommands(baseRegistry,ledgerItem){
+  // Repair stale ledger before any reaper, queue materialization, or new lease.
+  const reconciliation=await reconcileCompletedIssues(ledgerItem);
   const now=Date.now(),s=await sweep(baseRegistry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
   const providerIssues=await allIssues('open');
   let cachedRegistry=null;
@@ -286,7 +331,7 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     drained.push({issueNumber:issue.number,status:'assigned',workId:item.workId,assignmentId:state.assignmentId,branch,ackDeadlineAt:state.ackDeadlineAt,recovery:Boolean(recovery)});
   }
   await saveLedger(ledgerItem);
-  return {drained,reaped:s.closed};
+  return {drained,reaped:s.closed,reconciliation};
 }
 
 async function main(){

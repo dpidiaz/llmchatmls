@@ -202,3 +202,60 @@ test('ledger rendering uses compact marker JSON and round-trips at scale',()=>{
   assert.deepEqual(core.parseLedger(body),ledger);
   assert.ok(body.length<JSON.stringify(ledger,null,2).length);
 });
+
+
+test('legacy saturated ledger upgrades losslessly to a compressed, checksummed marker',()=>{
+  const r=registry(),ledger=core.initialLedger(r);
+  for(let i=0;i<550;i++){
+    const id='r33-farm:MLS-R33-FULL-CORPUS-CONTINUATION:MLS-V01-'+String(i).padStart(4,'0')+':MLS-V01-'+String(i+4).padStart(4,'0')+':5';
+    ledger.terminal[id]={status:'done',provider:'r33-farm',workVersion:1,assignmentId:'MLS-GLOBAL-'+i,
+      commitSha:String(i).padStart(40,'a'),completedUnits:['MLS-V01-'+String(i).padStart(4,'0')],
+      branch:'worker/r33-farm/'+i,completedAt:'2026-09-28T16:00:00.000Z'};
+    ledger.requests['autopull:MLS-GLOBAL-'+i+':'+i]={status:'done',workId:id,assignmentId:'MLS-GLOBAL-'+i,
+      issueNumber:i,updatedAt:'2026-09-28T16:00:00.000Z'};
+    ledger.epochs[id]=i;
+  }
+  ledger.recoveries['pending-work']={kind:'checkpoint_progress',workId:'pending-work',checkpoints:[{hash:'b'.repeat(64)}]};
+  const legacy='<!-- MLS_GLOBAL_DISPATCH_LEDGER\\n'+JSON.stringify(ledger)+'\\n-->';
+  assert.deepEqual(core.parseLedger(legacy),ledger);
+  const rendered=core.renderLedgerBody(core.normalizeLedger(core.parseLedger(legacy),r));
+  assert.match(rendered,/mls_global_dispatch_ledger_blob/);
+  assert.ok(Buffer.byteLength(rendered,'utf8')<core.LEDGER_BODY_MAX_BYTES);
+  assert.deepEqual(core.parseLedger(rendered),ledger);
+  const broken=rendered.replace(/"sha256":"[a-f0-9]{64}"/,'"sha256":"'+('0'.repeat(64))+'"');
+  assert.equal(core.parseLedger(broken),null,'corrupt payload must never become an empty ledger');
+});
+
+test('durable DONE reconciliation prevents duplicate finish/autopull/scheduler assignments',()=>{
+  const id='r33-farm:MLS-R33-FULL-CORPUS-CONTINUATION:MLS-V01-0251:MLS-V01-0257:5';
+  const r=core.normalizeRegistry({items:[{workId:id,workType:'editorial_batch',status:'ready',priority:10,
+    resourceLocks:['entry:MLS-V01-0251'],allowedPaths:['entries/'],dependsOn:[],validation:[]}]});
+  const ledger=core.initialLedger(r);
+  const state={kind:'mls_global_assignment',status:'done',issueNumber:1694,assignmentId:'MLS-GLOBAL-001694',
+    workId:id,workVersion:1,requestId:'autopull:old-1694',leaseEpoch:1694,provider:'r33-farm',
+    finalCommitSha:'9a1ba39db8451cb025f1ad5aff03f835b75b8483',branch:'worker/r33-farm/001694',
+    checkpoints:[{validation:{status:'passed'},completedUnits:['MLS-V01-0251','MLS-V01-0253','MLS-V01-0254','MLS-V01-0255','MLS-V01-0257']}],
+    closedAt:'2026-09-28T16:28:23.308Z'};
+  const duplicated={...state,issueNumber:1702,assignmentId:'MLS-GLOBAL-001702',
+    finalCommitSha:'43794f9ff935a2d1ed2b8d0a080995275936b8f8',closedAt:'2026-09-28T16:39:33.520Z'};
+  const units=s=>s.checkpoints.at(-1).completedUnits;
+  assert.ok(core.selectNextWork(r,ledger,[],Date.parse('2026-09-28T16:40:00Z')));
+  assert.equal(core.reconcileDurableDone(ledger,[duplicated,state],units),1);
+  assert.equal(ledger.terminal[id].assignmentId,'MLS-GLOBAL-001694','earliest durable DONE wins');
+  assert.deepEqual(ledger.terminal[id].completedUnits,units(state));
+  assert.equal(core.reconcileDurableDone(ledger,[state,duplicated],units),0,'idempotent during concurrent autopull/reaper');
+  assert.equal(core.selectNextWork(r,ledger,[],Date.parse('2026-09-28T16:41:00Z')),null);
+  assert.equal(ledger.epochs[id],1694);
+  assert.equal(ledger.requests[state.requestId].status,'done');
+});
+
+test('scheduler fails closed on stale or unpersisted ledger before creating new lease',()=>{
+  const s=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
+  assert.match(s,/await reconcileCompletedIssues\(ledgerItem\)/);
+  assert.ok(s.indexOf('await reconcileCompletedIssues(ledgerItem)')<s.indexOf('await sweep(baseRegistry,ledgerItem,now)'));
+  assert.match(s,/LEDGER_WRITE_CONFLICT/);
+  assert.match(s,/LEDGER_WRITE_NOT_PERSISTED/);
+  assert.match(s,/DONE_SCAN_INCOMPLETE/);
+  assert.match(s,/DUPLICATE_TERMINAL/);
+  assert.match(s,/LEDGER_CORRUPT/);
+});
