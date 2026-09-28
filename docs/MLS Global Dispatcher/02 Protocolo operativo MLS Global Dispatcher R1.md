@@ -1,3 +1,5 @@
+> Cola y leases: [MLS-LEASE-001](03%20MLS-LEASE-001%20Durable%20Queue.md) sustituye las reglas anteriores de caducidad del claim, cierre por capacidad y escritura directa del estado.
+
 # MLS Global Dispatcher R1 — Protocolo operativo
 
 Versión: 1.0  

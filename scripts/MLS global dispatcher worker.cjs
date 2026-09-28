@@ -1,6 +1,5 @@
 'use strict';
 
-const fs=require('node:fs');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const integration=require('../MLS R32 EDITORIAL/global dispatcher/integration.js');
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
@@ -10,16 +9,8 @@ const repository=process.env.GITHUB_REPOSITORY||'';
 if(!token||!/^[^/]+\/[^/]+$/.test(repository))throw new Error('GITHUB_TOKEN/GITHUB_REPOSITORY faltante.');
 const [owner,repo]=repository.split('/');
 
-async function gh(method,endpoint,body){
-  const response=await fetch('https://api.github.com'+endpoint,{
-    method,
-    headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-worker-r1'},
-    body:body===undefined?undefined:JSON.stringify(body)
-  });
-  const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-  if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;throw e;}
-  return data;
-}
+const durable=require('../MLS R32 EDITORIAL/global dispatcher/durable.js');
+let gh=durable.githubClient({token,repository});
 async function getIssue(number){return gh('GET','/repos/'+owner+'/'+repo+'/issues/'+number);}
 async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
 async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});}
@@ -113,27 +104,31 @@ async function verifyCommitScope(state,event){
   const disallowed=files.map(x=>String(x.filename||'')).filter(file=>!core.pathAllowed(file,state.allowedPaths||[]));
   if(disallowed.length)throw core.dispatchError('CHECKPOINT_SCOPE_VIOLATION','Cambios fuera de allowedPaths: '+disallowed.slice(0,10).join(', '),409);
 }
-async function main(){
-  const payload=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')),eventIssue=payload.issue,comment=payload.comment;
+async function processComment(eventIssue,comment){
   if(!eventIssue||!comment)return;
   let issue=await getIssue(eventIssue.number);
   if(!String(issue.title||'').startsWith('[MLS Dispatcher][LEASED]'))return;
   let state=core.parseAssignmentState(issue.body||'');if(!state)return;
+  if(Number(state.lastProcessedComment||0)>=Number(comment.id))return;
   if(state.workerLogin&&String(comment.user?.login||'')!==String(state.workerLogin))return;
   try{
     const workerEvent=core.parseWorkerEvent(comment.body||'');
     core.validateLeaseEvent(state,workerEvent,comment.created_at);
-    await verifyCommitScope(state,workerEvent);
+    if(workerEvent.operation!=='backoff')await verifyCommitScope(state,workerEvent);
     issue=await getIssue(eventIssue.number);
     if(!String(issue.title||'').startsWith('[MLS Dispatcher][LEASED]'))return;
     state=core.parseAssignmentState(issue.body||'');if(!state)return;
     let next=core.applyWorkerEvent(state,workerEvent,{createdAt:comment.created_at,commentId:comment.id});
+    // A comment durably received within its lease remains valid after API downtime.
+    // Renew from processing time as well; never reap it immediately after replay.
+    if(!next.cancelRequested)next.expiresAt=core.iso(Math.max(Date.parse(next.expiresAt),Date.now()+core.LEASE_TTL_MS));
+    next.lastProcessedComment=Number(comment.id);
     let chainedClaim=null;
     if(workerEvent.operation==='finish'&&next.readyToClose===true&&next.provider==='r33-farm'){
       const command=autoPullRequest(next,comment);
       if(command){
         chainedClaim=await createIssue('[MLS Dispatcher][CLAIM] '+command.requestId,core.renderCommandBody(command));
-        await wakeScheduler();
+        // The same durable scheduler pass releases capacity and drains the queue.
         next={...next,autoPull:{
           enabled:true,
           requestId:command.requestId,
@@ -145,12 +140,23 @@ async function main(){
     }
     await updateIssue(issue.number,{body:core.renderAssignmentBody(next)});
   }catch(error){
+    if(error.code==='GITHUB_BACKOFF'||!error.code||!error.status||error.status>=500)throw error;
     issue=await getIssue(eventIssue.number);
     state=core.parseAssignmentState(issue.body||'');
     if(!state||state.status!=='leased')return;
-    const next={...state,lastRejectedEvent:{operation:'comment',commentId:Number(comment.id),reason:error.code||'DISPATCH_EVENT_REJECTED',message:error.message,at:comment.created_at}};
+    const next={...state,lastProcessedComment:Number(comment.id),lastRejectedEvent:{operation:'comment',commentId:Number(comment.id),reason:error.code||'DISPATCH_EVENT_REJECTED',message:error.message,at:comment.created_at}};
     await updateIssue(issue.number,{body:core.renderAssignmentBody(next)});
     if(error.status>=500)throw error;
   }
 }
-main().catch(error=>{console.error(error);process.exitCode=1});
+async function replay(api,issues){
+  gh=api;
+  for(const issue of issues){
+    const state=core.parseAssignmentState(issue.body||'');
+    if(!state||state.status!=='leased'||state.readyToClose||state.cancelRequested)continue;
+    const comments=await durable.pages(gh,'/repos/'+repository+'/issues/'+issue.number+'/comments');
+    for(const comment of comments.sort((a,b)=>Number(a.id)-Number(b.id)))await processComment(issue,comment);
+  }
+}
+module.exports={replay,processComment};
+if(require.main===module)wakeScheduler().catch(error=>{console.error(error);process.exitCode=1});

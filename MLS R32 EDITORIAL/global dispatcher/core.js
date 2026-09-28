@@ -5,7 +5,7 @@ const fs=require('node:fs');
 const path=require('node:path');
 
 const DISPATCH_VERSION='1.0';
-const CLAIM_TTL_MS=10*60*1000;
+const CLAIM_TTL_MS=Infinity; // Durable QUEUED requests do not age out.
 const ACK_TTL_MS=5*60*1000;
 const LEASE_TTL_MS=10*60*1000;
 const REAPER_CADENCE_MINUTES=5;
@@ -105,7 +105,7 @@ function parseCommand(body){
 }
 function parseWorkerEvent(body){
   const x=extractMarkedJson(body,EVENT_MARKER),operation=String(x.operation||'').trim().toLowerCase();
-  if(!['heartbeat','checkpoint','finish','cancel'].includes(operation))throw dispatchError('INVALID_WORKER_EVENT','Evento Global Dispatcher inválido.');
+  if(!['heartbeat','checkpoint','finish','cancel','backoff'].includes(operation))throw dispatchError('INVALID_WORKER_EVENT','Evento Global Dispatcher inválido.');
   return {...x,operation};
 }
 function parseAssignmentState(body){try{const x=extractMarkedJson(body,ASSIGNMENT_MARKER);return x?.kind==='mls_global_assignment'?x:null;}catch{return null;}}
@@ -127,6 +127,7 @@ function renderLedgerBody(ledger){
 function isClaimStale(createdAt,at=Date.now()){const created=parseDate(createdAt);return created===null||Number(at)-created>CLAIM_TTL_MS;}
 function isLeaseExpired(state,at=Date.now()){
   if(!state||state.status!=='leased')return true;
+  if(state.publicationPending)return false;
   const expiry=!state.acknowledgedAt&&state.ackDeadlineAt?parseDate(state.ackDeadlineAt):parseDate(state.expiresAt);
   return expiry===null||Number(at)>expiry;
 }
@@ -147,13 +148,16 @@ function dependenciesSatisfied(item,ledger){
   return item.dependsOn.every(id=>['done','certified'].includes(String(terminalStatus(ledger,id)||'').toLowerCase()));
 }
 function workIsActive(workId,states,at=Date.now()){return activeAssignments(states,at).some(x=>x.workId===workId);}
-function selectNextWork(registry,ledger,states,at=Date.now()){
+function selectNextWork(registry,ledger,states,at=Date.now(),requestId=null){
   const locks=activeLocks(states,at);
   const candidates=[];
   for(const item of registry.items){
+    if(Object.values(ledger.recoveries||{}).some(r=>r.ownerRequestId===requestId&&r.workId!==item.workId))continue;
     if(terminalStatus(ledger,item.workId))continue;
     if(workIsActive(item.workId,states,at))continue;
     const recovery=ledger.recoveries?.[item.workId]||null;
+    if(recovery?.ownerRequestId&&recovery.ownerRequestId!==requestId)continue;
+    if(Object.values(ledger.recoveries||{}).some(r=>r.ownerRequestId&&r.ownerRequestId!==requestId&&lockSetsConflict(item.resourceLocks,r.resourceLocks||r.workItem?.resourceLocks||[])))continue;
     if(!recovery&&item.status!=='ready')continue;
     if(!dependenciesSatisfied(item,ledger))continue;
     if(lockSetsConflict(item.resourceLocks,locks))continue;
@@ -166,8 +170,8 @@ function assignmentBranch(item,issueNumber){
   const prefix=String(item.branchPolicy?.prefix||('worker/'+safeSegment(item.workId))).replace(/^\/+|\/+$/g,'');
   return prefix+'/'+String(Number(issueNumber)).padStart(6,'0');
 }
-function makeAssignmentState({issueNumber,item,requestId,workerId,workerLogin=null,baseCommit,branch,recovery=null,now=iso(),token=randomToken()}){
-  const claimedAt=iso(now),ackDeadlineAt=plusMs(claimedAt,ACK_TTL_MS),epoch=Number(issueNumber);
+function makeAssignmentState({issueNumber,item,requestId,workerId,workerLogin=null,baseCommit,branch,recovery=null,now=iso(),token=randomToken(),epoch=Number(issueNumber)}){
+  const claimedAt=iso(now),ackDeadlineAt=plusMs(claimedAt,ACK_TTL_MS);
   return {
     kind:'mls_global_assignment',version:DISPATCH_VERSION,assignmentId:'MLS-GLOBAL-'+String(issueNumber).padStart(6,'0'),
     issueNumber:Number(issueNumber),requestId,workerId,workerLogin:workerLogin?String(workerLogin):null,
@@ -214,6 +218,13 @@ function applyWorkerEvent(state,event,{createdAt,commentId}){
   const next=structuredClone(state),when=validateLeaseEvent(next,event,createdAt),at=iso(when);
   if(!next.acknowledgedAt)next.acknowledgedAt=at;
   if(event.operation==='cancel'){next.cancelRequested=true;next.lastHeartbeatAt=at;next.expiresAt=at;return next;}
+  if(event.operation==='backoff'){
+    const retry=parseDate(event.retryAt);
+    if(retry===null||retry<when||retry>when+24*60*60*1000)throw dispatchError('INVALID_BACKOFF','retryAt must be within 24 hours.',409);
+    next.backoff={reason:'GITHUB_SECONDARY_RATE_LIMIT',retryAt:iso(retry)};
+    next.lastHeartbeatAt=at;next.expiresAt=plusMs(iso(retry),LEASE_TTL_MS);return next;
+  }
+  next.backoff=null;
   if(event.operation==='heartbeat'){next.lastHeartbeatAt=at;next.expiresAt=plusMs(at,LEASE_TTL_MS);return next;}
   if(event.operation==='checkpoint'){
     const cp=checkpointPayload(event),hash=checkpointDigest(cp);

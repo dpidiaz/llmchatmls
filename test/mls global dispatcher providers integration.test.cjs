@@ -236,12 +236,12 @@ test('R4 finish auto-pulls the next claim, preserves worker identity, and explic
   assert.match(workflow,/actions:\s*write/);
 });
 
-test('R4 scheduler distinguishes temporary saturation from true NO_WORK',()=>{
+test('MLS-LEASE-001 retains saturation and requires proof of corpus completion',()=>{
   const scheduler=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
-  assert.match(scheduler,/CAPACITY_BUSY/);
-  assert.match(scheduler,/WORK_TEMPORARILY_LEASED/);
-  assert.match(scheduler,/CORPUS_EXHAUSTED_OR_NO_ELIGIBLE_BACKLOG/);
-  assert.match(scheduler,/activeR33>0/);
+  assert.doesNotMatch(scheduler,/CAPACITY_BUSY|NO_WORK|STALE_CLAIM/);
+  assert.match(scheduler,/\[QUEUED\]/);
+  assert.match(scheduler,/providerIntegration\.corpusComplete/);
+  assert.match(scheduler,/CORPUS_COMPLETE/);
 });
 
 test('scheduler integrates providers through snapshots only and never issues nested Farm commands',()=>{

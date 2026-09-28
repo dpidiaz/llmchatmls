@@ -134,13 +134,13 @@ test('assignment branch is never main and uses unique issue number',()=>{
   assert.match(branch,/000777$/);
 });
 
-test('workflow is single-writer and worker events are serialized per assignment issue',()=>{
+test('workflow is single-writer and worker events share the dispatcher projection serializer',()=>{
   const scheduler=fs.readFileSync('.github/workflows/MLS Global Dispatcher Scheduler.yml','utf8');
   const worker=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
   assert.match(scheduler,/group: mls-global-dispatcher/);
   assert.match(scheduler,/cron: '\*\/5 \* \* \* \*'/);
   assert.match(scheduler,/contents: write/);
-  assert.match(worker,/group: mls-global-assignment-\$\{\{ github\.event\.issue\.number \}\}/);
+  assert.match(worker,/group: mls-global-dispatcher/);
   assert.match(worker,/contents: read/);
 });
 
@@ -164,8 +164,8 @@ test('dispatcher editorial control plane contains no Cloudflare or D1 dependency
 });
 
 
-test('burst claims have a ten-minute queue window while ACK and rolling lease remain bounded',()=>{
-  assert.equal(core.CLAIM_TTL_MS,10*60*1000);
+test('queued claims do not age out while ACK and rolling lease remain bounded',()=>{
+  assert.equal(core.CLAIM_TTL_MS,Infinity);
   assert.equal(core.ACK_TTL_MS,5*60*1000);
   assert.equal(core.LEASE_TTL_MS,10*60*1000);
 });
