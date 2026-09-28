@@ -6,6 +6,7 @@ on:
       - 'MLS R32 EDITORIAL/global dispatcher/**'
       - 'scripts/MLS global dispatcher **'
       - 'test/mls global dispatcher**'
+      - 'test/r4 dispatcher ledger durability.test.cjs'
       - '.github/workflows/MLS Global Dispatcher **'
       - 'docs/MLS Global Dispatcher/**'
       - 'package.json'
@@ -16,6 +17,7 @@ on:
       - 'MLS R32 EDITORIAL/global dispatcher/**'
       - 'scripts/MLS global dispatcher **'
       - 'test/mls global dispatcher**'
+      - 'test/r4 dispatcher ledger durability.test.cjs'
       - '.github/workflows/MLS Global Dispatcher **'
   workflow_dispatch:
 
@@ -33,7 +35,7 @@ jobs:
       - name: Test Global Dispatcher
         shell: bash
         run: |
-          mapfile -d '' files < <(find test -maxdepth 1 -type f -name 'mls global dispatcher*.test.cjs' -print0)
+          mapfile -d '' files < <(find test -maxdepth 1 -type f \( -name 'mls global dispatcher*.test.cjs' -o -name 'r4 dispatcher ledger durability.test.cjs' \) -print0)
           if [ "${#files[@]}" -eq 0 ]; then
             echo 'No Global Dispatcher tests found' >&2
             exit 1
