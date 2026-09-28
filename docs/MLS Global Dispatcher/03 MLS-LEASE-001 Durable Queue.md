@@ -75,6 +75,8 @@ Si hay un fallo operativo, pausar el scheduler y conservar rama, Issues y coment
 
 ## Evidencia de validación
 
+El [informe de implementación y evidencia](04%20MLS-LEASE-001%20Implementation%20Report.md) registra el commit validado, los archivos modificados, los resultados locales y de CI, los límites de la garantía y el estado observado de producción.
+
 `npm run test:global-dispatcher` ejecuta todos los archivos de pruebas del dispatcher; CI también los descubre automáticamente. Las pruebas durables usan el scheduler/worker reales con un API simulado y almacenamiento CAS, incluyendo bursts 10/25/50/100, cuatro schedulers concurrentes, FIFO, exclusión, idempotencia, expiración/checkpoint, token antiguo, reinicios antes de commit/publicación, avance de main, 403, cancelación explícita, agotamiento y paginación. Una prueba adicional ejercita el adaptador Git con commits hermanos y rechazo de avance no fast-forward.
 
 Validación local del cambio sobre base `8bdbde3b2d3b7c680a6401693f495ca48c83ed24`: 88/88 pruebas del dispatcher; 38/38 pruebas R33 GitHub Native; validadores de Evidence, índices, Gate 500, Gate 1000 y guard GitHub-only aprobados. Los Gates conservaron cero drift. En Windows se usó `--test-isolation=none`; la validación editorial se ejecutó sobre una exportación del índice de Git con LF, porque el checkout CRLF altera hashes de blobs y patrones del lector. No se cambió contenido para corregir esos fallos ambientales.
