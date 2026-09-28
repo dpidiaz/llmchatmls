@@ -111,7 +111,15 @@ test('scheduler reconciles dropped old recovery once without reviving terminal w
   const context=vm.createContext({require:createRequire(file),__dirname:path.dirname(file),structuredClone,process:{env:{GITHUB_TOKEN:'test',GITHUB_REPOSITORY:'owner/repo'}},console});
   vm.runInContext(fs.readFileSync(file,'utf8').replace(/main\(\)\.catch\([\s\S]*$/,''),context);
   let reads=0;
-  context.ghMock=async(method,url)=>{
+  // Emulate GitHub's observable issue body, including the verified ledger PATCH.
+  const ledgerState={...core.initialLedger(core.normalizeRegistry({items:[item]})),
+    terminal:{},recoveries:{},epochs:{},requests:{old:{workId:item.workId,issueNumber:101,status:'cancelled'}}};
+  let persistedLedgerBody=core.renderLedgerBody(ledgerState);
+  context.ghMock=async(method,url,patch)=>{
+    if(url.endsWith('/issues/709')){
+      if(method==='PATCH'){persistedLedgerBody=patch.body;return {body:persistedLedgerBody};}
+      return {body:persistedLedgerBody};
+    }
     if(method==='PATCH')return {};
     if(url.includes('/issues?'))return [];
     if(url.includes('/git/ref/'))return {object:{sha:head}};
@@ -119,7 +127,8 @@ test('scheduler reconciles dropped old recovery once without reviving terminal w
     return {body:core.renderAssignmentBody(url.endsWith('/101')?broken:origin)};
   };
   vm.runInContext('gh=ghMock',context);
-  const ledger={issue:{number:709},ledger:{terminal:{},recoveries:{},epochs:{},requests:{old:{workId:item.workId,issueNumber:101,status:'cancelled'}}},dirty:false};
+  const ledger={issue:{number:709,body:persistedLedgerBody},ledger:ledgerState,dirty:false,
+    baselineHash:core.sha256(persistedLedgerBody)};
   await context.sweep({},ledger);
   assert.equal(ledger.ledger.recoveries[item.workId].integration.mode,'assignment-pr');
   assert.equal(ledger.ledger.recoveries[item.workId].checkpoints[0].commitSha,head);
