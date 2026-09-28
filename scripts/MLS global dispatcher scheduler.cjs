@@ -22,9 +22,21 @@ async function gh(method,endpoint,body){
   return data;
 }
 async function pages(endpoint){
-  const out=[];for(let page=1;page<=20;page++){const join=endpoint.includes('?')?'&':'?';const rows=await gh('GET',endpoint+join+'per_page=100&page='+page);if(!Array.isArray(rows))break;out.push(...rows);if(rows.length<100)break;}return out;
+  const out=[];
+  for(let page=1;page<=100;page++){
+    const join=endpoint.includes('?')?'&':'?';
+    const rows=await gh('GET',endpoint+join+'per_page=100&page='+page);
+    if(!Array.isArray(rows))throw core.dispatchError('ISSUE_PAGINATION_INVALID','Issue listing no devolvió un array.',409);
+    out.push(...rows);
+    if(rows.length<100)return out;
+  }
+  // A partial issue history is unsafe as a duplicate-work fence.
+  throw core.dispatchError('ISSUE_HISTORY_TRUNCATED','Más de 100 páginas de issues; abortar sin asignar.',409);
 }
-async function allIssues(state='open'){return (await pages('/repos/'+owner+'/'+repo+'/issues?state='+state)).filter(x=>!x.pull_request);}
+async function allIssues(state='open',since=null){
+  const filter=since?'&since='+encodeURIComponent(since):'';
+  return (await pages('/repos/'+owner+'/'+repo+'/issues?state='+state+filter)).filter(x=>!x.pull_request);
+}
 async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
 async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});}
 function dispatcherIssue(issue){return issue&&!issue.pull_request&&String(issue.title||'').startsWith('[MLS Dispatcher]');}
@@ -44,8 +56,12 @@ async function createBranch(branch,sha){
 
 async function ensureLedger(registry){
   const issues=await allIssues('open');
-  for(const issue of issues.filter(ledgerIssue)){
-    const raw=core.parseLedger(issue.body||'');if(raw)return {issue,ledger:core.normalizeLedger(raw,registry),dirty:false};
+  const found=issues.filter(ledgerIssue);
+  if(found.length>1)throw core.dispatchError('MULTIPLE_LEDGERS','Hay múltiples ledgers; detener sin adjudicar.',409);
+  if(found.length){
+    const issue=found[0],raw=core.parseLedger(issue.body||'');
+    if(!raw)throw core.dispatchError('LEDGER_CORRUPT','Ledger existente ilegible: nunca inicializar uno vacío.',409);
+    return {issue,ledger:core.normalizeLedger(raw,registry),dirty:false};
   }
   const ledger=core.initialLedger(registry);
   const issue=await createIssue('[MLS Dispatcher Ledger]',core.renderLedgerBody(ledger));
@@ -53,8 +69,24 @@ async function ensureLedger(registry){
 }
 async function saveLedger(item){
   if(!item.dirty)return;
+  if(!item.issue?.number)throw core.dispatchError('LEDGER_ISSUE_MISSING','No existe issue durable del ledger.',409);
+  const previousUpdatedAt=item.ledger.updatedAt;
   item.ledger.updatedAt=core.iso();
-  await updateIssue(item.issue.number,{body:core.renderLedgerBody(item.ledger)});
+  const body=core.renderLedgerBody(item.ledger);
+  if(Buffer.byteLength(body,'utf8')>240000){
+    item.ledger.updatedAt=previousUpdatedAt;
+    throw core.dispatchError('LEDGER_SHARDING_REQUIRED','Ledger excede umbral seguro; detener antes de PATCH.',409);
+  }
+  // Scheduler workflows have a repository-wide concurrency group. Refetch to
+  // reject external edits, and verify a complete persisted round trip after PATCH.
+  const endpoint='/repos/'+owner+'/'+repo+'/issues/'+item.issue.number;
+  const before=await gh('GET',endpoint);
+  if(before.body!==item.issue.body)throw core.dispatchError('LEDGER_CONCURRENT_UPDATE','El ledger cambió fuera del scheduler.',409);
+  const saved=await updateIssue(item.issue.number,{body});
+  if(saved?.body!==body)throw core.dispatchError('LEDGER_PATCH_MISMATCH','GitHub no devolvió el body íntegro.',409);
+  const readBack=await gh('GET',endpoint);
+  if(readBack.body!==body||!core.parseLedger(readBack.body))throw core.dispatchError('LEDGER_PERSISTENCE_MISMATCH','Lectura posterior al PATCH no coincide.',409);
+  item.issue=readBack;
   item.dirty=false;
 }
 function touchRequest(ledgerItem,requestId,patch){
@@ -72,6 +104,43 @@ function setTerminal(ledgerItem,state,status='done'){
   ledgerItem.ledger.epochs[state.workId]=Math.max(Number(ledgerItem.ledger.epochs[state.workId]||0),Number(state.leaseEpoch||0));
   touchRequest(ledgerItem,state.requestId,{status,workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber});
   ledgerItem.dirty=true;
+}
+async function reconcileDurableClosures(ledgerItem){
+  // Never trust the bounded ledger as the sole DONE record: a prior scheduler
+  // could close the assignment immediately before its ledger write failed.
+  const time=Date.parse(String(ledgerItem.ledger.updatedAt||''));
+  const since=core.iso(Number.isFinite(time)?Math.max(0,time-10*60*1000):0);
+  const closed=(await allIssues('closed',since)).filter(dispatcherIssue)
+    .sort((a,b)=>Date.parse(a.closed_at||a.updated_at||0)-Date.parse(b.closed_at||b.updated_at||0));
+  for(const issue of closed){
+    if(!/^\[MLS Dispatcher\]\[(DONE|RECOVERY_REQUIRED|EXPIRED|CANCELLED)\]/.test(String(issue.title||'')))continue;
+    const state=core.parseAssignmentState(issue.body||'');
+    if(!state||Number(state.issueNumber)!==Number(issue.number)||state.assignmentId!=='MLS-GLOBAL-'+String(issue.number).padStart(6,'0'))continue;
+    if(!['done','recovery_required','expired','cancelled'].includes(state.status))continue;
+    const oldRequest=ledgerItem.ledger.requests[state.requestId];
+    if(state.requestId&&(!oldRequest||Number(oldRequest.issueNumber)!==Number(issue.number)||oldRequest.status!==state.status)){
+      touchRequest(ledgerItem,state.requestId,{status:state.status,workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber});
+    }
+    const previousEpoch=Number(ledgerItem.ledger.epochs[state.workId]||0);
+    if(Number(state.leaseEpoch)>previousEpoch){
+      ledgerItem.ledger.epochs[state.workId]=Number(state.leaseEpoch);
+      ledgerItem.dirty=true;
+    }
+    if(state.status==='done'){
+      if(!state.readyToClose||!/^[a-f0-9]{40}$/.test(String(state.finalCommitSha||''))||
+        !Array.isArray(state.checkpoints)||!state.checkpoints.some(cp=>cp.commitSha===state.finalCommitSha&&cp.validation?.status==='passed')){
+        throw core.dispatchError('DURABLE_DONE_INVALID','Assignment DONE carece de checkpoint validado: '+issue.number,409);
+      }
+      // Earliest durable DONE wins. In particular, a later duplicate must not
+      // replace the first completed assignment or increment production units.
+      if(!ledgerItem.ledger.terminal[state.workId])setTerminal(ledgerItem,state,'done');
+    }else if(state.status==='recovery_required'&&state.recoveryCaptured&&!ledgerItem.ledger.terminal[state.workId]&&
+      Number(state.leaseEpoch)>=previousEpoch){
+      ledgerItem.ledger.recoveries[state.workId]=state.recoveryCaptured;
+      ledgerItem.dirty=true;
+    }
+  }
+  await saveLedger(ledgerItem);
 }
 async function recoveryFor(state){
   const head=await tryBranchHead(state.branch);
@@ -93,9 +162,26 @@ async function recoveryResume(recovery,item){
 }
 async function finalizeAssignment(issue,state,ledgerItem,nowMs){
   const expired=core.isLeaseExpired(state,nowMs);
+  const terminal=ledgerItem.ledger.terminal[state.workId];
+  if(terminal&&terminal.assignmentId!==state.assignmentId){
+    // An already completed workId must not be re-executed. A branch with new
+    // content is preserved for manual recovery rather than silently cancelled.
+    const head=await tryBranchHead(state.branch);
+    if(state.readyToClose||(state.checkpoints||[]).length||state.lastCheckpointCommit||
+      !state.baseCommit||head!==state.baseCommit){
+      throw core.dispatchError('DUPLICATE_TERMINAL_WITH_PROGRESS','Assignment duplicado con progreso potencial: '+state.assignmentId,409);
+    }
+    const next={...state,status:'cancelled',cancelRequested:true,closedAt:core.iso(nowMs),releaseReason:'DUPLICATE_TERMINAL'};
+    touchRequest(ledgerItem,state.requestId,{status:'cancelled',workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber});
+    if(ledgerItem.issue?.number)await saveLedger(ledgerItem);
+    await updateIssue(issue.number,{title:'[MLS Dispatcher][CANCELLED] '+state.assignmentId+' '+state.workId,body:core.renderAssignmentBody(next),state:'closed',state_reason:'not_planned'});
+    return {closed:true,state:next,recovery:false};
+  }
   if(state.readyToClose){
     const next={...state,status:'done',closedAt:core.iso(nowMs),releaseReason:null};
     setTerminal(ledgerItem,next,'done');
+    // Persist the terminal before closing the sole active assignment.
+    if(ledgerItem.issue?.number)await saveLedger(ledgerItem);
     await updateIssue(issue.number,{title:'[MLS Dispatcher][DONE] '+state.assignmentId+' '+state.workId,body:core.renderAssignmentBody(next),state:'closed',state_reason:'completed'});
     return {closed:true,state:next,recovery:false};
   }
@@ -119,10 +205,13 @@ async function finalizeAssignment(issue,state,ledgerItem,nowMs){
   ledgerItem.ledger.epochs[state.workId]=Math.max(Number(ledgerItem.ledger.epochs[state.workId]||0),Number(state.leaseEpoch||0));
   touchRequest(ledgerItem,state.requestId,{status:finalStatus,workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber});
   const next={...state,status:finalStatus,closedAt:core.iso(nowMs),releaseReason:reason,recoveryCaptured:recovery||null};
+  // Preserve checkpoint recovery and epoch durably before the assignment closes.
+  if(ledgerItem.issue?.number)await saveLedger(ledgerItem);
   await updateIssue(issue.number,{title:'[MLS Dispatcher]['+finalStatus.toUpperCase()+'] '+state.assignmentId+' '+state.workId,body:core.renderAssignmentBody(next),state:'closed',state_reason:'completed'});
   return {closed:true,state:next,recovery:Boolean(recovery)};
 }
 async function sweep(registry,ledgerItem,nowMs=Date.now()){
+  await reconcileDurableClosures(ledgerItem);
   const issues=await allIssues('open'),active=[],closed=[];
   for(const issue of issues){
     if(!dispatcherIssue(issue))continue;
