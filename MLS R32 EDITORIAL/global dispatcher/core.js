@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto=require('node:crypto');
+const zlib=require('node:zlib');
 const fs=require('node:fs');
 const path=require('node:path');
 
@@ -109,7 +110,17 @@ function parseWorkerEvent(body){
   return {...x,operation};
 }
 function parseAssignmentState(body){try{const x=extractMarkedJson(body,ASSIGNMENT_MARKER);return x?.kind==='mls_global_assignment'?x:null;}catch{return null;}}
-function parseLedger(body){try{const x=extractMarkedJson(body,LEDGER_MARKER);return x?.kind==='mls_global_dispatch_ledger'?x:null;}catch{return null;}}
+function parseLedger(body){
+  try{
+    const x=extractMarkedJson(body,LEDGER_MARKER);
+    if(x?.kind==='mls_global_dispatch_ledger')return x; // Backward-compatible original ledger.
+    if(x?.kind!=='mls_global_dispatch_ledger_packed'||x.encoding!=='deflateRaw-base64'||typeof x.payload!=='string')return null;
+    const raw=zlib.inflateRawSync(Buffer.from(x.payload,'base64'),{maxOutputLength:16*1024*1024}).toString('utf8');
+    if(sha256(raw)!==x.sha256)return null;
+    const ledger=JSON.parse(raw);
+    return ledger?.kind==='mls_global_dispatch_ledger'?ledger:null;
+  }catch{return null;} // Invalid/corrupted ledger must cause the scheduler to fail closed.
+}
 
 function initialLedger(registry){
   return {kind:'mls_global_dispatch_ledger',version:DISPATCH_VERSION,registryDigest:registryDigest(registry),terminal:{},recoveries:{},requests:{},epochs:{},updatedAt:iso()};
@@ -120,8 +131,53 @@ function normalizeLedger(raw,registry){
 }
 function renderLedgerBody(ledger){
   const terminalCount=Object.keys(ledger.terminal||{}).length,recoveryCount=Object.keys(ledger.recoveries||{}).length;
-  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(ledger)+'\n-->';
+  const original=JSON.stringify(ledger);
+  // Preserve every terminal/recovery/request/epoch. The old plain body reached the GitHub issue limit.
+  const representation=original.length>180000
+    ? JSON.stringify({kind:'mls_global_dispatch_ledger_packed',version:'1.0',encoding:'deflateRaw-base64',sha256:sha256(original),payload:zlib.deflateRawSync(Buffer.from(original,'utf8'),{level:9}).toString('base64')})
+    : original;
+  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+representation+'\n-->';
   return ['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','','No edites manualmente el bloque de control.','',compactMarker].join('\n');
+}
+
+/** Replay closed assignment markers after the most recent *durably verified* ledger write.
+ * The first DONE for a workId remains canonical; a later duplicated DONE cannot replace it.
+ */
+function reconcileClosedAssignmentStates(ledger,closedStates){
+  const states=(closedStates||[]).filter(x=>x?.kind==='mls_global_assignment'&&x.closedAt&&x.workId)
+    .sort((a,b)=>String(a.closedAt).localeCompare(String(b.closedAt))||Number(a.issueNumber)-Number(b.issueNumber));
+  let changed=0;const conflicts=[];
+  for(const state of states){
+    const workId=String(state.workId),status=String(state.status||'');
+    if(status==='done'){
+      const existing=ledger.terminal[workId];
+      if(existing){
+        if(existing.status==='done'&&existing.assignmentId!==state.assignmentId){
+          conflicts.push({workId,canonical:existing.assignmentId,duplicate:state.assignmentId});
+        }
+        continue;
+      }
+      ledger.terminal[workId]={
+        status:'done',workVersion:state.workVersion,assignmentId:state.assignmentId,
+        commitSha:state.finalCommitSha||state.lastCheckpointCommit||null,provider:state.provider||'global',
+        completedUnits:[...new Set((state.checkpoints||[]).flatMap(cp=>cp.completedUnits||[]).map(String))],
+        branch:state.branch,completedAt:state.closedAt
+      };
+      delete ledger.recoveries[workId];changed++;
+    }else if(status==='recovery_required'&&state.recoveryCaptured&&!ledger.terminal[workId]){
+      const old=ledger.recoveries[workId];
+      if(!old||Date.parse(old.capturedAt||0)<=Date.parse(state.recoveryCaptured.capturedAt||0)){
+        ledger.recoveries[workId]=state.recoveryCaptured;changed++;
+      }
+    }else continue;
+    const oldEpoch=Number(ledger.epochs[workId]||0),newEpoch=Number(state.leaseEpoch||0);
+    if(newEpoch>oldEpoch)ledger.epochs[workId]=newEpoch;
+    if(state.requestId){
+      ledger.requests[state.requestId]={...(ledger.requests[state.requestId]||{}),
+        status,workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber,updatedAt:state.closedAt};
+    }
+  }
+  return {changed,conflicts};
 }
 
 function isClaimStale(createdAt,at=Date.now()){const created=parseDate(createdAt);return created===null||Number(at)-created>CLAIM_TTL_MS;}
@@ -296,7 +352,7 @@ function dispatchProgress(registry,ledger,states,at=Date.now()){
 module.exports={
   DISPATCH_VERSION,CLAIM_TTL_MS,ACK_TTL_MS,LEASE_TTL_MS,REAPER_CADENCE_MINUTES,COMMAND_MARKER,EVENT_MARKER,ASSIGNMENT_MARKER,LEDGER_MARKER,DEFAULT_REGISTRY_PATH,
   dispatchError,iso,parseDate,plusMs,sha256,safeSegment,renderMarked,renderCommandBody,parseCommand,parseWorkerEvent,parseAssignmentState,parseLedger,
-  normalizeWorkItem,normalizeRegistry,loadRegistry,registryDigest,initialLedger,normalizeLedger,renderLedgerBody,isClaimStale,isLeaseExpired,
+  normalizeWorkItem,normalizeRegistry,loadRegistry,registryDigest,initialLedger,normalizeLedger,renderLedgerBody,reconcileClosedAssignmentStates,isClaimStale,isLeaseExpired,
   normalizeLock,locksConflict,lockSetsConflict,activeAssignments,activeLocks,terminalStatus,dependenciesSatisfied,workIsActive,selectNextWork,assignmentBranch,
   makeAssignmentState,renderAssignmentBody,validateLeaseEvent,checkpointPayload,checkpointDigest,applyWorkerEvent,releaseReasonForAssignment,classifyRecoveryState,pathAllowed,dispatchProgress
 };
