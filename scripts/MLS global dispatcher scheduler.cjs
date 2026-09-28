@@ -146,7 +146,12 @@ async function finalizeAssignment(issue,state,ledgerItem,nowMs){
 async function reconcileClosedDone(ledgerItem){
   // Closed assignment issues are durable independent evidence when issue #709 lags behind.
   // Oldest DONE wins on a duplicate workId; newer divergent commits are quarantined/logged.
-  const closed=await allIssues('closed');
+  const sinceMs=core.parseDate(ledgerItem.ledger.updatedAt);
+  if(sinceMs===null)throw core.dispatchError('LEDGER_REPLAY_CURSOR_INVALID','Ledger sin updatedAt válido: no adjudicar.',503);
+  const since=encodeURIComponent(new Date(Math.max(0,sinceMs-15*60*1000)).toISOString());
+  // GitHub's since filter uses issue.updated_at, so a failed ledger PATCH remains replayable.
+  // Fifteen minutes of overlap covers in-flight finish/autoPull/scheduler interleavings.
+  const closed=(await pages('/repos/'+owner+'/'+repo+'/issues?state=closed&since='+since)).filter(x=>!x.pull_request);
   const history=closed.filter(issue=>String(issue.title||'').startsWith('[MLS Dispatcher][DONE]'))
     .map(issue=>({issue,state:core.parseAssignmentState(issue.body||'')}))
     .filter(({state})=>state&&state.status==='done'&&state.workId&&state.assignmentId)
