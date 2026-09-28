@@ -1,6 +1,7 @@
 'use strict';
 
 const path=require('node:path');
+const {Buffer}=require('node:buffer');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
@@ -123,7 +124,7 @@ async function recoveryResume(recovery,item){
   return {resumeCommit:orphan,orphanReused:true,orphanScopeValidated:true,orphanFileCount:files.length};
 }
 async function finalizeAssignment(issue,state,ledgerItem,nowMs){
-  const terminal=ledgerItem.ledger.terminal[state.workId];
+  const terminal=ledgerItem.ledger.terminal?.[state.workId];
   if(terminal&&['done','certified'].includes(String(terminal.status||'').toLowerCase())){
     const next={...state,status:'cancelled',cancelRequested:true,closedAt:core.iso(nowMs),releaseReason:'DUPLICATE_TERMINAL_WORK'};
     touchRequest(ledgerItem,state.requestId,{status:'duplicate_done',workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber});
