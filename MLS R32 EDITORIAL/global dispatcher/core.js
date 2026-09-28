@@ -3,6 +3,7 @@
 const crypto=require('node:crypto');
 const fs=require('node:fs');
 const path=require('node:path');
+const zlib=require('node:zlib');
 
 const DISPATCH_VERSION='1.0';
 const CLAIM_TTL_MS=10*60*1000;
@@ -13,6 +14,8 @@ const COMMAND_MARKER='MLS_GLOBAL_DISPATCH_COMMAND';
 const EVENT_MARKER='MLS_GLOBAL_DISPATCH_EVENT';
 const ASSIGNMENT_MARKER='MLS_GLOBAL_DISPATCH_ASSIGNMENT';
 const LEDGER_MARKER='MLS_GLOBAL_DISPATCH_LEDGER';
+const LEDGER_BODY_MAX_BYTES=240000;
+const LEDGER_RAW_MAX_BYTES=32*1024*1024;
 const DEFAULT_REGISTRY_PATH=path.join('MLS R32 EDITORIAL','global dispatcher','work registry.json');
 
 function dispatchError(code,message,status=422){const e=new Error(message||code);e.code=code;e.status=status;return e;}
@@ -109,7 +112,20 @@ function parseWorkerEvent(body){
   return {...x,operation};
 }
 function parseAssignmentState(body){try{const x=extractMarkedJson(body,ASSIGNMENT_MARKER);return x?.kind==='mls_global_assignment'?x:null;}catch{return null;}}
-function parseLedger(body){try{const x=extractMarkedJson(body,LEDGER_MARKER);return x?.kind==='mls_global_dispatch_ledger'?x:null;}catch{return null;}}
+function parseLedger(body){
+  try{
+    const x=extractMarkedJson(body,LEDGER_MARKER);
+    if(x?.kind==='mls_global_dispatch_ledger')return x; // Historical uncompressed marker.
+    if(x?.kind!=='mls_global_dispatch_ledger_blob'||x.version!==1||x.encoding!=='deflate-raw-base64')return null;
+    if(!/^[A-Za-z0-9+/]+={0,2}$/.test(x.data||'')||!Number.isSafeInteger(x.rawBytes)||x.rawBytes<1||x.rawBytes>LEDGER_RAW_MAX_BYTES)return null;
+    const compressed=Buffer.from(x.data,'base64');
+    if(compressed.toString('base64')!==x.data)return null;
+    const raw=zlib.inflateRawSync(compressed,{maxOutputLength:LEDGER_RAW_MAX_BYTES});
+    if(raw.length!==x.rawBytes||sha256(raw.toString('utf8'))!==x.sha256)return null;
+    const ledger=JSON.parse(raw.toString('utf8'));
+    return ledger?.kind==='mls_global_dispatch_ledger'?ledger:null;
+  }catch{return null;}
+}
 
 function initialLedger(registry){
   return {kind:'mls_global_dispatch_ledger',version:DISPATCH_VERSION,registryDigest:registryDigest(registry),terminal:{},recoveries:{},requests:{},epochs:{},updatedAt:iso()};
@@ -120,8 +136,39 @@ function normalizeLedger(raw,registry){
 }
 function renderLedgerBody(ledger){
   const terminalCount=Object.keys(ledger.terminal||{}).length,recoveryCount=Object.keys(ledger.recoveries||{}).length;
-  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(ledger)+'\n-->';
-  return ['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','','No edites manualmente el bloque de control.','',compactMarker].join('\n');
+  const raw=JSON.stringify(ledger),bytes=Buffer.byteLength(raw,'utf8');
+  if(bytes>LEDGER_RAW_MAX_BYTES)throw dispatchError('LEDGER_RAW_LIMIT','Ledger excede el máximo seguro sin compresión.',507);
+  // Store the complete ledger losslessly: terminal, requests, recoveries and epochs.
+  const payload={kind:'mls_global_dispatch_ledger_blob',version:1,encoding:'deflate-raw-base64',rawBytes:bytes,sha256:sha256(raw),data:zlib.deflateRawSync(Buffer.from(raw,'utf8'),{level:9}).toString('base64')};
+  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(payload)+'\n-->';
+  const body=['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','','No edites manualmente el bloque de control.','',compactMarker].join('\n');
+  if(Buffer.byteLength(body,'utf8')>LEDGER_BODY_MAX_BYTES)throw dispatchError('LEDGER_BODY_LIMIT','Ledger comprimido excede el límite de publicación: detener antes de crear assignments.',507);
+  return body;
+}
+
+function reconcileDurableDone(ledger,states,completedUnitsForState){
+  // Historical DONE assignment issues are the durable authority when #709 is stale.
+  if(typeof completedUnitsForState!=='function')throw dispatchError('LEDGER_RECONCILE_INVALID','Falta resolver unidades completadas.',500);
+  let changes=0;
+  const done=(states||[]).filter(x=>x?.kind==='mls_global_assignment'&&x.status==='done'&&x.workId&&x.closedAt)
+    .sort((a,b)=>String(a.closedAt).localeCompare(String(b.closedAt))||Number(a.issueNumber)-Number(b.issueNumber));
+  for(const state of done){
+    const prior=ledger.terminal[state.workId];
+    if(prior&&['done','certified'].includes(prior.status)&&
+       (!prior.completedAt||String(prior.completedAt)<=String(state.closedAt)))continue;
+    if(prior?.status==='certified')continue;
+    ledger.terminal[state.workId]={
+      status:'done',workVersion:state.workVersion,assignmentId:state.assignmentId,
+      commitSha:state.finalCommitSha||state.lastCheckpointCommit||null,provider:state.provider||'global',
+      completedUnits:completedUnitsForState(state),branch:state.branch,completedAt:state.closedAt
+    };
+    delete ledger.recoveries[state.workId];
+    ledger.epochs[state.workId]=Math.max(Number(ledger.epochs[state.workId]||0),Number(state.leaseEpoch||0));
+    if(state.requestId)ledger.requests[state.requestId]={...(ledger.requests[state.requestId]||{}),
+      status:'done',workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber,updatedAt:state.closedAt};
+    changes++;
+  }
+  return changes;
 }
 
 function isClaimStale(createdAt,at=Date.now()){const created=parseDate(createdAt);return created===null||Number(at)-created>CLAIM_TTL_MS;}
@@ -294,9 +341,9 @@ function dispatchProgress(registry,ledger,states,at=Date.now()){
 }
 
 module.exports={
-  DISPATCH_VERSION,CLAIM_TTL_MS,ACK_TTL_MS,LEASE_TTL_MS,REAPER_CADENCE_MINUTES,COMMAND_MARKER,EVENT_MARKER,ASSIGNMENT_MARKER,LEDGER_MARKER,DEFAULT_REGISTRY_PATH,
+  DISPATCH_VERSION,CLAIM_TTL_MS,ACK_TTL_MS,LEASE_TTL_MS,REAPER_CADENCE_MINUTES,COMMAND_MARKER,EVENT_MARKER,ASSIGNMENT_MARKER,LEDGER_MARKER,LEDGER_BODY_MAX_BYTES,DEFAULT_REGISTRY_PATH,
   dispatchError,iso,parseDate,plusMs,sha256,safeSegment,renderMarked,renderCommandBody,parseCommand,parseWorkerEvent,parseAssignmentState,parseLedger,
-  normalizeWorkItem,normalizeRegistry,loadRegistry,registryDigest,initialLedger,normalizeLedger,renderLedgerBody,isClaimStale,isLeaseExpired,
+  normalizeWorkItem,normalizeRegistry,loadRegistry,registryDigest,initialLedger,normalizeLedger,renderLedgerBody,reconcileDurableDone,isClaimStale,isLeaseExpired,
   normalizeLock,locksConflict,lockSetsConflict,activeAssignments,activeLocks,terminalStatus,dependenciesSatisfied,workIsActive,selectNextWork,assignmentBranch,
   makeAssignmentState,renderAssignmentBody,validateLeaseEvent,checkpointPayload,checkpointDigest,applyWorkerEvent,releaseReasonForAssignment,classifyRecoveryState,pathAllowed,dispatchProgress
 };
