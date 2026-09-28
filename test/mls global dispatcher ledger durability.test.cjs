@@ -60,7 +60,8 @@ test('a restored durable DONE terminal excludes the workId even when provider sn
 test('scheduler reconciles closed DONE before dispatch and saves a reservation before publishing lease',()=>{
   const source=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
   assert.match(source,/async function reconcileClosedDone\(ledgerItem\)/);
-  assert.match(source,/allIssues\('closed'\)/);
+  assert.match(source,/issues\?state=closed&since=/);
+  assert.match(source,/sinceMs-15\*60\*1000/);
   assert.match(source,/sort\(\(a,b\)=>Number\(a\.issue\.number\)-Number\(b\.issue\.number\)\)/);
   assert.match(source,/const history=await reconcileClosedDone\(ledgerItem\);[\s\S]*?await sweep/);
   assert.match(source,/await saveLedger\(ledgerItem\);\s*await updateIssue\(issue\.number,\{title:'\[MLS Dispatcher\]\[LEASED\]/);
