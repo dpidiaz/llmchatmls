@@ -57,7 +57,7 @@
     "test:farm": "node --test 'test/mls farm.test.cjs'",
     "test:r33-github-native": "node --test 'test/r33 evidence git.test.cjs' 'test/r33 evidence farm.test.cjs' 'test/r33 gate500 preparation.test.cjs' 'test/r33 gate1000 preparation.test.cjs' 'test/evidence github runtime.test.cjs' 'test/evidence reader integration.test.cjs' 'test/evidence native reader.test.cjs' && node 'scripts/R33 evidence git validate.cjs' && node 'scripts/R33 evidence indexes.cjs' --check && node 'scripts/R33 gate500 control.cjs' --check && node 'scripts/R33 gate1000 control.cjs' --check && node 'scripts/assert r33 github only.cjs'",
     "evidence:runtime": "node 'scripts/generar evidence runtime github.js'",
-    "test:global-dispatcher": "node --test 'test/mls global dispatcher.test.cjs'",
+    "test:global-dispatcher": "node --test \"test/mls global dispatcher*.test.cjs\"",
     "r33:indexes:check": "node 'scripts/R33 evidence indexes.cjs' --check",
     "r33:indexes:write": "node 'scripts/R33 evidence indexes.cjs' --write",
     "r33:gate500:check": "node 'scripts/R33 gate500 control.cjs' --check",

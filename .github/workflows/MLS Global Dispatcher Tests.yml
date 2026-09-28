@@ -31,6 +31,7 @@ jobs:
         with:
           node-version: 24
       - name: Test Global Dispatcher
+        timeout-minutes: 10
         shell: bash
         run: |
           mapfile -d '' files < <(find test -maxdepth 1 -type f -name 'mls global dispatcher*.test.cjs' -print0)

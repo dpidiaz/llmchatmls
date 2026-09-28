@@ -4,6 +4,8 @@ const path=require('node:path');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
+const durable=require('../MLS R32 EDITORIAL/global dispatcher/durable.js');
+let transaction=null;
 
 const token=process.env.GITHUB_TOKEN||'';
 const repository=process.env.GITHUB_REPOSITORY||'';
@@ -11,20 +13,9 @@ if(!token||!/^[^/]+\/[^/]+$/.test(repository))throw new Error('GITHUB_TOKEN/GITH
 const [owner,repo]=repository.split('/');
 const root=path.resolve(__dirname,'..');
 
-async function gh(method,endpoint,body){
-  const response=await fetch('https://api.github.com'+endpoint,{
-    method,
-    headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-r1'},
-    body:body===undefined?undefined:JSON.stringify(body)
-  });
-  const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-  if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;throw e;}
-  return data;
-}
-async function pages(endpoint){
-  const out=[];for(let page=1;page<=20;page++){const join=endpoint.includes('?')?'&':'?';const rows=await gh('GET',endpoint+join+'per_page=100&page='+page);if(!Array.isArray(rows))break;out.push(...rows);if(rows.length<100)break;}return out;
-}
-async function allIssues(state='open'){return (await pages('/repos/'+owner+'/'+repo+'/issues?state='+state)).filter(x=>!x.pull_request);}
+const remote=durable.githubClient({token,repository});
+async function gh(method,endpoint,body){return transaction?transaction.call(method,endpoint,body):remote(method,endpoint,body);}
+async function allIssues(){return transaction?transaction.issues(repository):(await durable.pages(gh,'/repos/'+repository+'/issues?state=open')).filter(x=>!x.pull_request);}
 async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
 async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});}
 function dispatcherIssue(issue){return issue&&!issue.pull_request&&String(issue.title||'').startsWith('[MLS Dispatcher]');}
@@ -39,17 +30,18 @@ async function tryBranchHead(branch){
   catch(error){if(error.status===404)return null;throw error;}
 }
 async function createBranch(branch,sha){
-  return gh('POST','/repos/'+owner+'/'+repo+'/git/refs',{ref:'refs/heads/'+branch,sha});
+  try{return await gh('POST','/repos/'+owner+'/'+repo+'/git/refs',{ref:'refs/heads/'+branch,sha});}
+  catch(error){if(error.status===422&&await tryBranchHead(branch)===sha)return;throw error;}
 }
 
 async function ensureLedger(registry){
   const issues=await allIssues('open');
-  for(const issue of issues.filter(ledgerIssue)){
+  const ledgers=issues.filter(ledgerIssue);
+  if(ledgers.length!==1)throw new Error('Exactly one existing dispatcher ledger required');
+  for(const issue of ledgers){
     const raw=core.parseLedger(issue.body||'');if(raw)return {issue,ledger:core.normalizeLedger(raw,registry),dirty:false};
   }
-  const ledger=core.initialLedger(registry);
-  const issue=await createIssue('[MLS Dispatcher Ledger]',core.renderLedgerBody(ledger));
-  return {issue,ledger,dirty:false};
+  throw new Error('Existing dispatcher ledger required for safe migration');
 }
 async function saveLedger(item){
   if(!item.dirty)return;
@@ -59,7 +51,9 @@ async function saveLedger(item){
 }
 function touchRequest(ledgerItem,requestId,patch){
   if(!requestId)return;
-  ledgerItem.ledger.requests[requestId]={...(ledgerItem.ledger.requests[requestId]||{}),...patch,updatedAt:core.iso()};
+  const previous=ledgerItem.ledger.requests[requestId]||{};
+  if(Object.entries(patch).every(([k,v])=>JSON.stringify(previous[k])===JSON.stringify(v)))return;
+  ledgerItem.ledger.requests[requestId]={...previous,...patch,updatedAt:core.iso()};
   ledgerItem.dirty=true;
 }
 function setTerminal(ledgerItem,state,status='done'){
@@ -86,7 +80,7 @@ async function recoveryResume(recovery,item){
   const files=Array.isArray(comparison?.files)?comparison.files.map(x=>String(x.filename||'')):[];
   const ancestryOk=['ahead','identical'].includes(String(comparison?.status||''));
   const scopeOk=files.every(file=>core.pathAllowed(file,item.allowedPaths||[]));
-  if(!ancestryOk||!scopeOk){
+  if(!ancestryOk||!scopeOk||files.length>=300){
     return {resumeCommit:checkpoint,orphanReused:false,orphanScopeValidated:true,orphanRejectedReason:!ancestryOk?'ORPHAN_NOT_DESCENDANT':'ORPHAN_SCOPE_VIOLATION'};
   }
   return {resumeCommit:orphan,orphanReused:true,orphanScopeValidated:true,orphanFileCount:files.length};
@@ -100,7 +94,11 @@ async function finalizeAssignment(issue,state,ledgerItem,nowMs){
     return {closed:true,state:next,recovery:false};
   }
   if(!state.cancelRequested&&!expired&&state.status==='leased')return {closed:false,state};
-  const recovery=await recoveryFor(state);
+  const recovery=await recoveryFor(state)||{
+    kind:'unchanged',workId:state.workId,workVersion:state.workVersion,branch:state.branch,baseCommit:state.baseCommit,
+    previousAssignmentId:state.assignmentId,previousEpoch:state.leaseEpoch,lastCheckpointCommit:state.lastCheckpointCommit,
+    checkpoints:state.checkpoints||[],integration:state.integration,integrationBaseCommit:state.recovery?.integrationBaseCommit||state.baseCommit
+  };
   const reason=core.releaseReasonForAssignment(state,expired);
   let finalStatus=state.cancelRequested?'cancelled':'expired';
   if(recovery){
@@ -109,14 +107,24 @@ async function finalizeAssignment(issue,state,ledgerItem,nowMs){
       createdAt:state.claimedAt,dependsOn:state.dependencies||[],resourceLocks:state.resourceLocks||[],allowedPaths:state.allowedPaths||[],
       validation:state.validationRequired||[],provider:state.provider||'global',instructions:state.instructions||'',completion:state.completion||{requiresCommit:true,requiresValidation:true},
       integration:state.integration?structuredClone(state.integration):null,
-      branchPolicy:{mode:'assignment',prefix:String(state.branch||('worker/'+state.workId)).replace(/\/\d{6}$/,'')}
+      branchPolicy:{mode:'assignment',prefix:String(state.branch||('worker/'+state.workId)).replace(/\/\d{6}(?:\/epoch-\d+(?:-[a-f0-9]+)?)?$/,'')}
     };
     recovery.completedUnits=providerIntegration.completedUnitsForState(state);
+    recovery.ownerRequestId=state.cancelRequested?null:state.requestId;
+    recovery.durableLineage=true;
     ledgerItem.ledger.recoveries[state.workId]=recovery;
     ledgerItem.dirty=true;
     finalStatus='recovery_required';
   }
   ledgerItem.ledger.epochs[state.workId]=Math.max(Number(ledgerItem.ledger.epochs[state.workId]||0),Number(state.leaseEpoch||0));
+  if(!state.cancelRequested){
+    const previous=ledgerItem.ledger.requests[state.requestId]||{};
+    const command=previous.command||{operation:'claim',requestId:state.requestId,workerId:state.workerId};
+    touchRequest(ledgerItem,state.requestId,{status:'queued',command,workId:state.workId,issueNumber:state.issueNumber,generation:Number(state.leaseEpoch)+1,previousAssignment:state});
+    await updateIssue(issue.number,{title:'[MLS Dispatcher][QUEUED] '+state.requestId,body:core.renderCommandBody(command),state:'open'});
+    return {closed:true,state:{...state,status:'requeued'},recovery:true};
+  }
+  finalStatus='cancelled';
   touchRequest(ledgerItem,state.requestId,{status:finalStatus,workId:state.workId,assignmentId:state.assignmentId,issueNumber:state.issueNumber});
   const next={...state,status:finalStatus,closedAt:core.iso(nowMs),releaseReason:reason,recoveryCaptured:recovery||null};
   await updateIssue(issue.number,{title:'[MLS Dispatcher]['+finalStatus.toUpperCase()+'] '+state.assignmentId+' '+state.workId,body:core.renderAssignmentBody(next),state:'closed',state_reason:'completed'});
@@ -204,69 +212,79 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       drained.push({issueNumber:issue.number,status:'reap'});continue;
     }
     const duplicate=duplicateAssignment(command,activeStates,ledgerItem.ledger);
-    if(duplicate){
+    if(duplicate&&!(duplicate.status==='queued'&&Number(duplicate.issueNumber)===Number(issue.number))){
       await closeCommand(issue,'[MLS Dispatcher][DUPLICATE] '+command.requestId,{ok:true,duplicate:true,requestId:command.requestId,...duplicate});
       drained.push({issueNumber:issue.number,status:'duplicate'});continue;
     }
-    if(core.isClaimStale(issue.created_at,now)){
-      touchRequest(ledgerItem,command.requestId,{status:'stale',issueNumber:issue.number});
-      await closeCommand(issue,'[MLS Dispatcher][STALE] '+command.requestId,{ok:false,error:'STALE_CLAIM',requestId:command.requestId,claimTtlMs:core.CLAIM_TTL_MS,createdAt:issue.created_at},'not_planned');
-      drained.push({issueNumber:issue.number,status:'stale'});continue;
+    touchRequest(ledgerItem,command.requestId,{status:'queued',command,issueNumber:issue.number});
+    await updateIssue(issue.number,{title:'[MLS Dispatcher][QUEUED] '+command.requestId});
+    const comments=await durable.pages(gh,'/repos/'+repository+'/issues/'+issue.number+'/comments');
+    const cancellation=comments.find(c=>{
+      if(c.user?.login!==issue.user?.login)return false;
+      try{const e=core.parseWorkerEvent(c.body);return e.operation==='cancel'&&e.requestId===command.requestId;}catch{return false;}
+    });
+    if(cancellation){
+      touchRequest(ledgerItem,command.requestId,{status:'cancelled',cancelCommentId:cancellation.id});
+      for(const r of Object.values(ledgerItem.ledger.recoveries))if(r.ownerRequestId===command.requestId)r.ownerRequestId=null;
+      await closeCommand(issue,'[MLS Dispatcher][CANCELLED] '+command.requestId,{requestId:command.requestId,explicitCancelCommentId:cancellation.id},'not_planned');
+      continue;
     }
     let registry=runtimeRegistry();
-    let selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
+    let selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now,command.requestId);
     if(!selected){
       registry=runtimeRegistry(true);
-      selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
+      selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now,command.requestId);
     }
     if(!selected){
       const progress=progressFor(registry);
-      const activeR33=activeStates.filter(state=>state&&state.status==='leased'&&!state.readyToClose&&!state.cancelRequested&&state.provider==='r33-farm').length;
-      if(activeR33>0){
-        touchRequest(ledgerItem,command.requestId,{status:'capacity_busy',issueNumber:issue.number});
-        await closeCommand(issue,'[MLS Dispatcher][CAPACITY_BUSY] '+command.requestId,{ok:true,assigned:false,retryable:true,reason:'WORK_TEMPORARILY_LEASED',requestId:command.requestId,activeR33,progress});
-        drained.push({issueNumber:issue.number,status:'capacity_busy'});continue;
+      // A missing candidate is not proof of corpus exhaustion (locks, capacity, provider failure).
+      const complete=providerIntegration.corpusComplete({root,issues:providerIssues,registry,ledger:ledgerItem.ledger,states:activeStates});
+      if(complete){
+        touchRequest(ledgerItem,command.requestId,{status:'corpus_complete'});
+        await closeCommand(issue,'[MLS Dispatcher][CORPUS_COMPLETE] '+command.requestId,{ok:true,requestId:command.requestId,progress});
       }
-      touchRequest(ledgerItem,command.requestId,{status:'no_work',issueNumber:issue.number});
-      await closeCommand(issue,'[MLS Dispatcher][NO_WORK] '+command.requestId,{ok:true,assigned:false,requestId:command.requestId,reason:'CORPUS_EXHAUSTED_OR_NO_ELIGIBLE_BACKLOG',progress});
-      drained.push({issueNumber:issue.number,status:'no_work'});continue;
+      drained.push({issueNumber:issue.number,status:complete?'corpus_complete':'queued'});continue;
     }
     let item=selected.item;
     let recovery=selected.recovery,branch,baseCommit;
+    const request=ledgerItem.ledger.requests[command.requestId];
+    const epoch=Math.max(Number(request.generation||issue.number),Number(ledgerItem.ledger.epochs[item.workId]||0)+1);
+    const branchName=()=>core.assignmentBranch(item,issue.number)+'/epoch-'+epoch+'-'+baseCommit.slice(0,12);
     if(recovery){
       if(item.workType==='integration'){
         try{
-          recovery=await recoveryContext.restore(recovery,item,async number=>{
+          // New generations retain their full accepted lineage in the atomic ledger.
+          if(!recovery.durableLineage)recovery=await recoveryContext.restore(recovery,item,async number=>{
             const issue=await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+number);
             return core.parseAssignmentState(issue.body||'');
           });
           item={...item,integration:recovery.integration};
-        }catch(error){await reject(issue,error);drained.push({issueNumber:issue.number,status:'recovery_blocked',workId:item.workId});continue;}
+        }catch(error){touchRequest(ledgerItem,command.requestId,{blockedReason:error.code});drained.push({issueNumber:issue.number,status:'recovery_blocked',workId:item.workId});continue;}
       }
       const previousBranch=String(recovery.branch||''),previousHead=previousBranch?await tryBranchHead(previousBranch):null;
       if(!previousBranch||!previousHead){
         const error=core.dispatchError('RECOVERY_BRANCH_MISSING','Recovery sin rama accesible para '+item.workId,409);
-        await reject(issue,error);drained.push({issueNumber:issue.number,status:'recovery_blocked',workId:item.workId});continue;
+        touchRequest(ledgerItem,command.requestId,{blockedReason:error.code});drained.push({issueNumber:issue.number,status:'recovery_blocked',workId:item.workId});continue;
       }
       const resume=await recoveryResume(recovery,item);
       baseCommit=resume.resumeCommit;
-      branch=core.assignmentBranch(item,issue.number);
+      branch=branchName();
       const existing=await tryBranchHead(branch);
-      if(existing){
+      if(existing&&existing!==baseCommit){
         const error=core.dispatchError('ASSIGNMENT_BRANCH_EXISTS','La rama generacional de recovery ya existe: '+branch,409);
-        await reject(issue,error);drained.push({issueNumber:issue.number,status:'branch_exists',workId:item.workId});continue;
+        touchRequest(ledgerItem,command.requestId,{blockedReason:error.code});drained.push({issueNumber:issue.number,status:'branch_exists',workId:item.workId});continue;
       }
-      await createBranch(branch,baseCommit);
+      if(!existing)await createBranch(branch,baseCommit);
       recovery={...recovery,...resume,previousBranch,recoveryBranch:branch};
     }else{
       if(!mainSha)mainSha=await getMainSha();
-      baseCommit=mainSha;branch=core.assignmentBranch(item,issue.number);
+      baseCommit=mainSha;branch=branchName();
       const existing=await tryBranchHead(branch);
-      if(existing){
+      if(existing&&existing!==baseCommit){
         const error=core.dispatchError('ASSIGNMENT_BRANCH_EXISTS','La rama del assignment ya existe: '+branch,409);
-        await reject(issue,error);drained.push({issueNumber:issue.number,status:'branch_exists',workId:item.workId});continue;
+        touchRequest(ledgerItem,command.requestId,{blockedReason:error.code});drained.push({issueNumber:issue.number,status:'branch_exists',workId:item.workId});continue;
       }
-      await createBranch(branch,baseCommit);
+      if(!existing)await createBranch(branch,baseCommit);
     }
     const issueLogin=String(issue.user?.login||'').trim();
     const delegatedLogin=String(command.workerLogin||'').trim();
@@ -274,8 +292,9 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     const workerLogin=trustedAutoPull&&delegatedLogin?delegatedLogin:(issueLogin||null);
     const state=core.makeAssignmentState({
       issueNumber:issue.number,item,requestId:command.requestId,workerId:command.workerId,workerLogin,
-      baseCommit,branch,recovery,now:core.iso(now)
+      baseCommit,branch,recovery,now:core.iso(),epoch
     });
+    state.publicationPending=true;
     if(recovery?.completedUnits?.length)state.recoveredCompletedUnits=[...new Set(recovery.completedUnits.map(String))];
     await updateIssue(issue.number,{title:'[MLS Dispatcher][LEASED] '+state.assignmentId+' '+item.workId,body:core.renderAssignmentBody(state)});
     ledgerItem.ledger.epochs[item.workId]=Number(state.leaseEpoch);
@@ -290,7 +309,20 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
 }
 
 async function main(){
-  const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
-  if(result.drained.length||result.reaped.length)console.log(JSON.stringify({ok:true,...result}));
+  const store=new durable.GitStore(remote,repository);
+  // Repair publication before reaping. Unpublished leases retain their reservation.
+  await durable.project(store,remote,repository);
+  const result=await durable.transact(store,remote,async tx=>{
+    transaction=tx;
+    // Replay every durable worker comment before considering expiry, including after a restart/403.
+    const worker=require('./MLS global dispatcher worker.cjs');
+    await worker.replay(gh,await allIssues());
+    const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry);
+    return drainPendingCommands(baseRegistry,ledgerItem);
+  });
+  transaction=null;
+  await durable.project(store,remote,repository);
+  console.log(JSON.stringify({ok:true,...result}));
 }
-main().catch(error=>{console.error(error);process.exitCode=1});
+module.exports={main};
+if(require.main===module)main().catch(error=>{console.error(error);process.exitCode=1});

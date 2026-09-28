@@ -20,7 +20,7 @@ async function recovered(original=initial(),branchHead=head){
 function worker(state,{assignedHead=head,merged=true,prHead=head,contains=true,files=[{filename:'evidence/a.json'}]}={}){
   const file=path.resolve('scripts/MLS global dispatcher worker.cjs');
   const context=vm.createContext({require:createRequire(file),process:{env:{GITHUB_TOKEN:'test',GITHUB_REPOSITORY:'owner/repo'}},console});
-  vm.runInContext(fs.readFileSync(file,'utf8').replace(/main\(\)\.catch\([\s\S]*$/,''),context);
+  vm.runInContext(fs.readFileSync(file,'utf8').replace(/module\.exports=[\s\S]*$/,''),context);
   context.ghMock=async(method,url)=>{
     if(url.includes('/git/ref/heads/main'))return {object:{sha:contains?merge:'d'.repeat(40)}};
     if(url.includes('/git/ref/heads/'))return {object:{sha:assignedHead}};
@@ -76,12 +76,12 @@ test('recovered postmerge fails closed on head drift, absent checkpoint, scope a
 test('scheduler expiration persists integration context and a second recovery remains resumable',async()=>{
   const file=path.resolve('scripts/MLS global dispatcher scheduler.cjs');
   const context=vm.createContext({require:createRequire(file),__dirname:path.dirname(file),structuredClone,process:{env:{GITHUB_TOKEN:'test',GITHUB_REPOSITORY:'owner/repo'}},console});
-  vm.runInContext(fs.readFileSync(file,'utf8').replace(/main\(\)\.catch\([\s\S]*$/,''),context);
+  vm.runInContext(fs.readFileSync(file,'utf8').replace(/module\.exports=[\s\S]*$/,''),context);
   context.ghMock=async(method,url)=>method==='GET'?{object:{sha:head}}:{};
   vm.runInContext('gh=ghMock',context);
   const state=initial(),ledger={ledger:{recoveries:{},epochs:{},requests:{}},dirty:false};
   const result=await context.finalizeAssignment({number:100},state,ledger,Date.parse('2026-09-26T01:00:00Z'));
-  assert.equal(result.state.status,'recovery_required');
+  assert.equal(result.state.status,'requeued');
   const captured=ledger.ledger.recoveries[item.workId];
   assert.equal(JSON.stringify(captured.workItem.integration),JSON.stringify(item.integration));
   assert.equal(captured.checkpoints[0].hash,state.checkpoints[0].hash);
@@ -109,7 +109,7 @@ test('scheduler reconciles dropped old recovery once without reviving terminal w
   broken.integration=null;broken.checkpoints=[];broken.status='cancelled';
   const file=path.resolve('scripts/MLS global dispatcher scheduler.cjs');
   const context=vm.createContext({require:createRequire(file),__dirname:path.dirname(file),structuredClone,process:{env:{GITHUB_TOKEN:'test',GITHUB_REPOSITORY:'owner/repo'}},console});
-  vm.runInContext(fs.readFileSync(file,'utf8').replace(/main\(\)\.catch\([\s\S]*$/,''),context);
+  vm.runInContext(fs.readFileSync(file,'utf8').replace(/module\.exports=[\s\S]*$/,''),context);
   let reads=0;
   context.ghMock=async(method,url)=>{
     if(method==='PATCH')return {};

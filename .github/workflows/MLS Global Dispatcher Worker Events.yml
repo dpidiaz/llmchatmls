@@ -11,12 +11,12 @@ permissions:
   actions: write
 
 concurrency:
-  group: mls-global-assignment-${{ github.event.issue.number }}
+  group: mls-global-dispatcher
   cancel-in-progress: false
 
 jobs:
   worker-event:
-    if: ${{ startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') }}
+    if: ${{ startsWith(github.event.issue.title, '[MLS Dispatcher]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

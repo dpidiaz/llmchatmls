@@ -400,7 +400,21 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
   return globalCore.normalizeRegistry({...base,items:combined});
 }
 
-module.exports={
+function corpusComplete({root='.',issues=[],registry,ledger,states=[]}){
+  if(states.length||Object.keys(ledger.recoveries||{}).length)return false;
+  if(registry.items.some(x=>!['done','cancelled'].includes(x.status)&&!ledger.terminal[x.workId]))return false;
+  try{
+    // Positive evidence for both providers; absence of candidates is never sufficient.
+    const mls=projectMlsSnapshot(collectMlsSnapshot(issues,root),{globalLedger:ledger,globalAssignments:[]});
+    const mlsDone=mlsCore.terminalCodesFromLedgers(mls.ledgers);
+    if(mls.corpus.some(x=>!mlsDone.has(x.code)))return false;
+    const r33=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger:ledger,globalAssignments:[]});
+    const done=new Set([...(r33.ledger.verified||[]),...(r33.ledger.exceptions||[]),...r33IntegratedCodes(root)]);
+    const scope=r33.pool.execution?.continuationAfterActivePool?mls.corpus:r33.pool.entries;
+    return scope.every(x=>done.has(x.code));
+  }catch{return false;}
+}
+module.exports={corpusComplete,
   DYNAMIC_PROVIDERS,READY_QUEUE_TARGET,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
   collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33StagingManifest,r33IntegratedCodes,r33ContinuationPool,
   r33IntegrationWaves,r33IndexPreparationWorkId,r33IndexPreparationWorks,r33PreparedIndexIntegrationWork,r33IndexIntegrationWork,
