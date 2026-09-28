@@ -3,6 +3,7 @@
 const crypto=require('node:crypto');
 const fs=require('node:fs');
 const path=require('node:path');
+const zlib=require('node:zlib');
 
 const DISPATCH_VERSION='1.0';
 const CLAIM_TTL_MS=10*60*1000;
@@ -109,7 +110,21 @@ function parseWorkerEvent(body){
   return {...x,operation};
 }
 function parseAssignmentState(body){try{const x=extractMarkedJson(body,ASSIGNMENT_MARKER);return x?.kind==='mls_global_assignment'?x:null;}catch{return null;}}
-function parseLedger(body){try{const x=extractMarkedJson(body,LEDGER_MARKER);return x?.kind==='mls_global_dispatch_ledger'?x:null;}catch{return null;}}
+function parseLedger(body){
+  try{
+    const x=extractMarkedJson(body,LEDGER_MARKER);
+    if(x?.kind!=='mls_global_dispatch_ledger')return null;
+    // Legacy plain-JSON ledger remains readable; the compressed envelope is lossless.
+    if(!x.storage)return x;
+    if(x.storage!=='br-base64-v1'||typeof x.payload!=='string'||!x.sha256)return null;
+    const compressed=Buffer.from(x.payload,'base64');
+    if(compressed.toString('base64')!==x.payload)return null;
+    const raw=zlib.brotliDecompressSync(compressed,{maxOutputLength:16*1024*1024}).toString('utf8');
+    if(sha256(raw)!==x.sha256)return null;
+    const ledger=JSON.parse(raw);
+    return ledger?.kind==='mls_global_dispatch_ledger'?ledger:null;
+  }catch{return null;}
+}
 
 function initialLedger(registry){
   return {kind:'mls_global_dispatch_ledger',version:DISPATCH_VERSION,registryDigest:registryDigest(registry),terminal:{},recoveries:{},requests:{},epochs:{},updatedAt:iso()};
@@ -120,7 +135,14 @@ function normalizeLedger(raw,registry){
 }
 function renderLedgerBody(ledger){
   const terminalCount=Object.keys(ledger.terminal||{}).length,recoveryCount=Object.keys(ledger.recoveries||{}).length;
-  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(ledger)+'\n-->';
+  const raw=JSON.stringify(ledger);
+  const envelope={
+    kind:'mls_global_dispatch_ledger',storage:'br-base64-v1',sha256:sha256(raw),
+    payload:zlib.brotliCompressSync(Buffer.from(raw,'utf8'),{
+      params:{[zlib.constants.BROTLI_PARAM_QUALITY]:5}
+    }).toString('base64')
+  };
+  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(envelope)+'\n-->';
   return ['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','','No edites manualmente el bloque de control.','',compactMarker].join('\n');
 }
 
