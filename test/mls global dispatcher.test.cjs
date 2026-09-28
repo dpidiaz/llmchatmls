@@ -189,3 +189,16 @@ test('scheduler caches a hot queue and recovery creates a fresh generational bra
   assert.match(source,/recoveryBranch:branch/);
   assert.doesNotMatch(source,/branch=String\(recovery\.branch/);
 });
+
+
+test('ledger rendering uses compact marker JSON and round-trips at scale',()=>{
+  const r=registry(),ledger=core.initialLedger(r);
+  for(let i=0;i<400;i++)ledger.requests['request-'+i]={
+    status:'done',workId:'work-'+i,assignmentId:'assignment-'+i,issueNumber:1000+i,updatedAt:'2026-09-28T05:00:00.000Z'
+  };
+  const body=core.renderLedgerBody(ledger);
+  assert.ok(body.includes('<!-- MLS_GLOBAL_DISPATCH_LEDGER\n{"kind":'));
+  assert.equal(body.includes('\n  "kind"'),false);
+  assert.deepEqual(core.parseLedger(body),ledger);
+  assert.ok(body.length<JSON.stringify(ledger,null,2).length);
+});
