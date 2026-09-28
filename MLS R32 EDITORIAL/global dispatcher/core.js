@@ -120,7 +120,8 @@ function normalizeLedger(raw,registry){
 }
 function renderLedgerBody(ledger){
   const terminalCount=Object.keys(ledger.terminal||{}).length,recoveryCount=Object.keys(ledger.recoveries||{}).length;
-  return ['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','','No edites manualmente el bloque de control.','',renderMarked(LEDGER_MARKER,ledger)].join('\n');
+  const compactMarker='<!-- '+LEDGER_MARKER+'\n'+JSON.stringify(ledger)+'\n-->';
+  return ['## MLS Global Dispatcher ledger','','**Terminales:** '+terminalCount+'  ','**Recoveries pendientes:** '+recoveryCount+'  ','**Actualizado:** '+ledger.updatedAt+'  ','','No edites manualmente el bloque de control.','',compactMarker].join('\n');
 }
 
 function isClaimStale(createdAt,at=Date.now()){const created=parseDate(createdAt);return created===null||Number(at)-created>CLAIM_TTL_MS;}
