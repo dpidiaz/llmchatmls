@@ -183,6 +183,15 @@ async function sweep(registry,ledgerItem,nowMs=Date.now()){
   for(const issue of issues){
     if(!dispatcherIssue(issue))continue;
     const state=core.parseAssignmentState(issue.body||'');if(!state)continue;
+    const completed=ledgerItem.ledger.terminal[state.workId];
+    if(completed?.status==='done'&&completed.assignmentId!==state.assignmentId){
+      // An existing lease created against stale issue #709 must never write already-DONE units.
+      const next={...state,status:'cancelled',cancelRequested:true,closedAt:core.iso(nowMs),releaseReason:'WORKID_ALREADY_DONE'};
+      await updateIssue(issue.number,{title:'[MLS Dispatcher][DUPLICATE_DONE] '+state.assignmentId+' '+state.workId,body:core.renderAssignmentBody(next),state:'closed',state_reason:'not_planned'});
+      touchRequest(ledgerItem,state.requestId,{status:'duplicate_done',workId:state.workId,assignmentId:state.assignmentId,issueNumber:issue.number});
+      closed.push({issueNumber:issue.number,assignmentId:state.assignmentId,workId:state.workId,status:'duplicate_done',recovery:false});
+      continue;
+    }
     const result=await finalizeAssignment(issue,state,ledgerItem,nowMs);
     if(result.closed)closed.push({issueNumber:issue.number,assignmentId:state.assignmentId,workId:state.workId,status:result.state.status,recovery:result.recovery});
     else active.push({issue,state});
