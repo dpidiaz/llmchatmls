@@ -273,6 +273,8 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
   const stagedResults=await bufferedFinalize.reconcile({issues:providerIssues,ledgerItem,
     get:endpoint=>gh('GET','/repos/'+owner+'/'+repo+endpoint),
     patchIssue:(number,patch)=>updateIssue(number,patch),saveLedger:()=>saveLedger(ledgerItem)});
+  const bufferedCleanup=await bufferedFinalize.cleanupSyncRequests({issues:providerIssues,ledgerItem,
+    patchIssue:(number,patch)=>updateIssue(number,patch)});
   let cachedRegistry=null;
   function runtimeRegistry(refresh=false){
     if(cachedRegistry&&!refresh)return cachedRegistry;
@@ -390,12 +392,12 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     drained.push({issueNumber:issue.number,status:'assigned',workId:item.workId,assignmentId:state.assignmentId,branch,ackDeadlineAt:state.ackDeadlineAt,recovery:Boolean(recovery)});
   }
   await saveLedger(ledgerItem);
-  return {drained,reaped:s.closed,reconciliation,buffered:bufferedResults,bufferedStaged:stagedResults};
+  return {drained,reaped:s.closed,reconciliation,buffered:bufferedResults,bufferedStaged:stagedResults,bufferedCleanup};
 }
 
 async function main(){
   const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
-  if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length)console.log(JSON.stringify({ok:true,...result}));
+  if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length||result.bufferedCleanup.length)console.log(JSON.stringify({ok:true,...result}));
   return result;
 }
 main().catch(error=>{console.error(error);process.exitCode=1});
