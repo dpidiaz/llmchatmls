@@ -72,3 +72,29 @@ test('academic source report does not claim human REVIEWED certification',()=>{
  assert.match(report,/no constituye aprobación por una persona revisora/i);
  assert.equal(rec.finalIntegration.approvedForPublication,false);
 });
+
+test('approved final wave includes exact pinned v3 Evidence and four additional article/source assets',()=>{
+ const os=require('node:os'),tmp=fs.mkdtempSync(path.join(os.tmpdir(),'r41-supersession-'));
+ try{
+  const dir=path.join(tmp,'MLS R32 EDITORIAL','evidence git');
+  fs.mkdirSync(dir,{recursive:true});
+  const raw=require('../MLS R32 EDITORIAL/evidence git/staging-supersessions.json');
+  const originalHolds=require('../MLS R32 EDITORIAL/evidence git/quality-holds.json');
+  const revised=structuredClone(originalHolds);
+  const h=revised.holds.find(x=>x.workId===rec.workId);
+  h.status='resolved';
+  h.replacementApproval={revisionId:rec.revisionId,commitSha:rec.replacement.commitSha,
+   reviewer:'Independent qualified editor',independentAcademicReview:true,reviewedAt:'2026-09-30T12:00:00Z'};
+  fs.writeFileSync(path.join(dir,'staging-supersessions.json'),JSON.stringify(raw));
+  fs.writeFileSync(path.join(dir,'quality-holds.json'),JSON.stringify(revised));
+  const wave=integration.r33IndexIntegrationWork({pool,globalLedger:ledger,root:tmp,waveSize:10,verifiedCodes:[]});
+  assert.ok(wave);
+  assert.equal(wave.sourceRefs.length,10);
+  assert.ok(wave.sourceRefs.every(x=>x.commitSha===rec.replacement.commitSha));
+  assert.equal(wave.integration.revisionAssets.length,4);
+  for(const asset of rec.materializationAssets){
+   assert.ok(wave.allowedPaths.includes(asset));
+   assert.ok(wave.integration.revisionAssets.some(x=>x.path===asset&&x.commitSha===rec.replacement.commitSha));
+  }
+ }finally{fs.rmSync(tmp,{recursive:true,force:true});}
+});
