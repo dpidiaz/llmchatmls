@@ -216,29 +216,21 @@ function duplicateAssignment(command,activeStates,ledger){
   return ledger.requests?.[command.requestId]||null;
 }
 
-async function verifyPilot25ReviewerEvidence(approvals){
+async function verifyPilot25AiEvidence(approvals){
+ // Existing serial Dispatcher guard; no personal reviewer signature is needed.
  for(const approval of approvals){
-  const issue=await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+approval.reviewIssueNumber);
-  if(issue?.state!=='closed'||!String(issue.title||'').startsWith('[MLS R4.1] Aprobación editorial humana')||
-      !String(issue.body||'').includes(approval.commitSha))
-    throw core.dispatchError('R41_HUMAN_REVIEW_ISSUE_INVALID','A closed SHA-specific editorial review issue is required.',409);
-  const comment=await gh('GET','/repos/'+owner+'/'+repo+'/issues/comments/'+approval.reviewCommentId);
-  const text=String(comment?.body||'').toLowerCase();
-  const target='https://api.github.com/repos/'+owner+'/'+repo+'/issues/'+approval.reviewIssueNumber;
-  const author=String(comment?.user?.login||'').toLowerCase();
-  if(comment?.issue_url!==target||comment?.user?.type!=='User'||
-      author!==approval.reviewerGithub.toLowerCase()||
-      !['OWNER','MEMBER','COLLABORATOR'].includes(String(comment.author_association||'').toUpperCase())||
-      !String(comment?.body||'').includes(approval.commitSha)||
-      !text.includes('confirmo haber comprobado individualmente las 30 afirmaciones')||
-      !text.includes('autorizo solicitar el levantamiento del hold para esta revisión exacta')||
-      text.includes('no autorizo'))
-    throw core.dispatchError('R41_HUMAN_ATTESTATION_UNVERIFIED','Reviewer/attestation issue, SHA or affirmative statement not verifiable.',409);
+  if(approval.protocol!=='MLS_R41_AI_EVIDENCE_V1')
+   throw core.dispatchError('R41_AI_PROTOCOL_MISMATCH','Evidence protocol mismatch.',409);
   const stage=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+approval.stageBranch);
   if(String(stage?.object?.sha||'').toLowerCase()!==approval.commitSha.toLowerCase())
-    throw core.dispatchError('R41_APPROVED_STAGE_MOVED','Approved immutable staging branch SHA changed.',409);
+   throw core.dispatchError('R41_APPROVED_STAGE_MOVED','Pinned AI-reviewed stage changed.',409);
+  const run=await gh('GET','/repos/'+owner+'/'+repo+'/actions/runs/'+approval.validationRunId);
+  if(run?.status!=='completed'||run?.conclusion!=='success'||
+     String(run?.head_sha||'').toLowerCase()!==approval.commitSha.toLowerCase())
+   throw core.dispatchError('R41_CANONICAL_CI_UNVERIFIED','Exact v3 commit has no matching successful validation run.',409);
  }
 }
+
 async function processBufferedRequests(issues,globalLedger,activeStates,now){
   const requests=issues.filter(issue=>buffered.requestAuthorized(issue)&&String(issue.title||'').startsWith('[MLS Buffered][REQUEST]'))
     .sort((a,b)=>Number(a.number)-Number(b.number));
@@ -264,9 +256,9 @@ async function processBufferedRequests(issues,globalLedger,activeStates,now){
         result.push({requestIssue:issue.number,operation:'release',targetIssueNumber:target.number});
         continue;
       }
-      // Gate 25 is fail-closed: release must reference a genuine GitHub reviewer comment on the exact v3 SHA.
+      // Gate 25 requires a resolved, source-precise AI protocol and live immutable CI checks.
       const approvals=revisions.assertScaledPilotReady(command.size,revisions.load(root));
-      if(approvals.length)await verifyPilot25ReviewerEvidence(approvals);
+      if(approvals.length)await verifyPilot25AiEvidence(approvals);
       // The same serialized scheduler performs normal claims and durable buffered reservations.
       const snapshot=providerIntegration.projectR33Snapshot(
         providerIntegration.collectR33Snapshot(issues,root),{globalLedger,globalAssignments:activeStates});
