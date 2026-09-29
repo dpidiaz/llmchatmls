@@ -89,6 +89,10 @@ test('successful independent workflow run finalizes ledger and closes reservatio
  const a=assign(),r=reservation(a),s=allocation.stage(r,{branch:'r41/staged/8801',commitSha:'c'.repeat(40),
   packageHash:'d'.repeat(64),checksPassed:true,workflowRunId:5555,syncRequestIssueNumber:9901});
  const i={...issue(s),title:'[MLS Buffered][STAGED] '+a.assignmentId};
+ const syncIssue={number:9901,title:'[MLS Buffered][SYNC] pack-8801',author_association:'OWNER',state:'open',
+  body:'<!-- MLS_BUFFERED_SYNC_REQUEST\n'+JSON.stringify({kind:'mls_buffer_sync_request',version:1,
+   reservationIssueNumber:8801,inboxBranch:'r41/inbox/8801'})+'\n-->'};
+ const issued=[i,syncIssue];
  const ledgerItem={ledger:{terminal:{},recoveries:{},epochs:{}},dirty:false},closed=[];
  const get=async p=>{
   if(p.startsWith('/actions/runs/'))return {name:'R4.1 Buffered Sync',status:'completed',conclusion:'success',event:'issues'};
@@ -98,12 +102,16 @@ test('successful independent workflow run finalizes ledger and closes reservatio
   if(p.startsWith('/compare/'))return {status:'identical'};
   throw Error(p);
  };
- const out=await finalize.reconcile({issues:[i],ledgerItem,get,
+ const out=await finalize.reconcile({issues:issued,ledgerItem,get,
   patchIssue:async(n,x)=>closed.push({n,...x}),saveLedger:async()=>{ledgerItem.dirty=false;}});
  assert.equal(out[0].status,'CERTIFIED_STAGED');
  const terminal=ledgerItem.ledger.terminal['r33-buffer:'+a.assignmentId];
  assert.equal(terminal.provider,'r33-farm');assert.equal(terminal.completedUnits.length,10);
  assert.equal(closed[0].state,'closed');
+ const cleaned=await finalize.cleanupSyncRequests({issues:issued,ledgerItem,patchIssue:async(n,p)=>closed.push({n,...p})});
+ assert.equal(cleaned[0].status,'SYNC_REQUEST_CLOSED');
+ assert.equal(closed[1].n,9901);
+ assert.equal(closed[1].state,'closed');
 });
 test('failed CI is quarantined without clearing durable ownership',async()=>{
  const a=assign(),r=reservation(a),s=allocation.stage(r,{branch:'r41/staged/8801',commitSha:'c'.repeat(40),
