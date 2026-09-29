@@ -190,8 +190,28 @@ async function consolidate(api,res,root){
  const [m,p,k,s]=await Promise.all([
   remoteFile(api,rootDir+'manifest.json',head),remoteFile(api,rootDir+'progress.json',head),
   remoteFile(api,rootDir+'bcr/context-pack.json',head),remoteFile(api,rootDir+'bcr/source-index.json',head)]);
- requireOk(m.value.allocationHash===res.allocationHash&&p.value.checkpointed===0&&
-  k.value.completedCodes.length===0&&!Object.keys(s.value.sources).length,'CONSOLIDATION_ALREADY_MODIFIED');
+ requireOk(m.value.allocationHash===res.allocationHash,'CONSOLIDATION_ALLOCATION_CHANGED');
+ // Crash-safe replay: branch may already have the exact grouped join commit
+ // while the terminal Issue PATCH failed/was rate limited. Reconcile immutable
+ // audit + parent, never regenerate or overwrite 25 valid checkpoints.
+ if(p.value.checkpointed===25){
+  const audit=(await remoteFile(api,rootDir+'bcr/elastic-join-audit.json',head)).value;
+  const commit=await api.get('/git/commits/'+head);
+  const expected=res.elastic.blocks.map(x=>({block:x.block,sha:x.commitSha,chunkHash:x.chunkHash}));
+  requireOk(audit.schema==='MLS-R4.2-JOIN-1'&&audit.reservationId===res.allocation.assignmentId&&
+   audit.count===25&&core.hash(audit.blockCommits)===core.hash(expected)&&
+   commit.parents?.length===1&&commit.parents[0].sha===audit.originalHead&&
+   k.value.completedCodes.length===25&&!k.value.pendingCodes.length&&
+   k.value.checkpointRefs.length===25,'REPLAY_JOIN_CONFLICT');
+  const recovered={...res,elastic:{...res.elastic,consolidatedSha:head,
+   status:'JOINED_AWAITING_CANONICAL_R33_GATE',
+   consolidatedAt:new Date().toISOString(),replayedAfterRemoteReadback:true}};
+  recovered.recordHash=buffered.recordHash(recovered);
+  await saveReservation(api,recovered,res.recordHash);
+  return {reservation:res.issueNumber,head,checkpointed:25,gatePending:true,replayed:true};
+ }
+ requireOk(p.value.checkpointed===0&&k.value.completedCodes.length===0&&
+  !Object.keys(s.value.sources).length,'CONSOLIDATION_ALREADY_MODIFIED');
  let pack=k.value,index=s.value,progress=p.value;
  const all=new Map(),sources={};
  const b=res.elastic.blocks;
