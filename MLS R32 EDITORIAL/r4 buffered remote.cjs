@@ -37,13 +37,13 @@ async function markStaged(dir,root,issueNumber,branch,commitSha,client,workflowR
   const r=approved.reservation;
   if(r.status==='staged'&&r.stage.commitSha===actual&&r.stage.packageHash===approved.packageHash&&
      r.stage.workflowRunId===workflowRunId)
-    return {replayed:true,commitSha:actual,packageHash:approved.packageHash};
+    return {replayed:true,commitSha:actual,packageHash:approved.packageHash,remoteRestCalls:client.counts().httpCalls};
   const staged=allocation.stage(r,{branch,commitSha:actual,packageHash:approved.packageHash,
     checksPassed:true,workflowRunId});
   await client.patch('/issues/'+issueNumber,{
     title:'[MLS Buffered][STAGED] '+staged.allocation.assignmentId,
     body:allocation.renderReservation(staged)});
   return {staged:true,commitSha:actual,packageHash:approved.packageHash,
-    status:'STAGED_AWAITING_COMPLETED_WORKFLOW_AND_DISPATCHER_RECONCILIATION'};
+    status:'STAGED_AWAITING_COMPLETED_WORKFLOW_AND_DISPATCHER_RECONCILIATION',remoteRestCalls:client.counts().httpCalls};
 }
 module.exports={prepare,markStaged};
