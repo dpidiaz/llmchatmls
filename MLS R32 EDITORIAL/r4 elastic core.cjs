@@ -8,7 +8,8 @@ const dispatcherCore=require('./global dispatcher/core.js');
 const REQUEST_MARKER='MLS_BCR_ELASTIC_COMMAND';
 const STATUS_MARKER='MLS_BCR_ELASTIC_CLAIM';
 const VERSION=1;
-const BLOCK_SIZE=5, BLOCKS=5, MAX_ACTIVE=10, MAX_REQUESTS_PER_TICK=5;
+// One chat writer plus the serialized Actions writer: at most two cooperating writers.
+const BLOCK_SIZE=5, BLOCKS=5, MAX_ACTIVE=1, MAX_REQUESTS_PER_TICK=5;
 const TTL_MS=5*60*1000;
 function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;throw e;}
 function assert(ok,code){if(!ok)fail(code);}
@@ -28,14 +29,14 @@ function command(issue){
   assert(title.startsWith('[MLS Dispatcher][BCR][RENEW]') &&
    Number.isSafeInteger(x.claimIssueNumber)&&x.claimIssueNumber>0 &&
    Number.isSafeInteger(x.reservationIssueNumber)&&x.reservationIssueNumber>0 &&
-   Number.isSafeInteger(x.block)&&x.block>=1&&x.block<=BLOCKS,
+   Number.isSafeInteger(x.block)&&((x.task==='repair'&&x.block===0)||(!x.task&&x.block>=1&&x.block<=BLOCKS)),
    'R42_RENEW_INVALID');
  }
  else if(x.action==='complete'){
   assert(title.startsWith('[MLS Dispatcher][BCR][COMPLETE]') &&
    Number.isSafeInteger(x.claimIssueNumber)&&x.claimIssueNumber>0 &&
    Number.isSafeInteger(x.reservationIssueNumber)&&x.reservationIssueNumber>0 &&
-   Number.isSafeInteger(x.block)&&x.block>=1&&x.block<=BLOCKS &&
+   Number.isSafeInteger(x.block)&&((x.task==='repair'&&x.block===0)||(!x.task&&x.block>=1&&x.block<=BLOCKS)) &&
    /^[a-f0-9]{40}$/.test(x.headSha||''),'R42_COMPLETE_INVALID');
  }else fail('R42_ACTION_UNSUPPORTED');
  return x;
@@ -103,7 +104,8 @@ function blocks(res){
  if(res.elastic){
   assert(res.elastic.schema==='MLS-R4.2-ELASTIC-1'&&Array.isArray(res.elastic.blocks)&&
    res.elastic.blocks.length===5&&res.elastic.blocks.every((b,i)=>b.block===i+1 &&
-    ['pending','leased','done'].includes(b.status)),'R42_STATE_INVALID');
+    ['pending','leased','done'].includes(b.status)&&
+    core.hash(b.codes)===core.hash(res.allocation.units.slice(i*5,i*5+5).map(u=>u.code))),'R42_STATE_INVALID');
   return structuredClone(res.elastic.blocks);
  }
  return Array.from({length:5},(_,i)=>({block:i+1,status:'pending',epoch:0,
@@ -119,15 +121,16 @@ function activeCount(reservations,now=Date.now()){
   b.status==='leased'&&Date.parse(b.expiresAt)>now).length;
 }
 function freeBlock(reservations,now=Date.now()){
+ const candidates=[];
  for(const res of reservations.slice().sort((a,b)=>a.issueNumber-b.issueNumber)){
   if(res.status!=='reserved'||res.stage||res.elastic?.consolidatedSha)continue;
   for(const block of blocks(res)){
    if(block.status==='pending'||(block.status==='leased'&&Date.parse(block.expiresAt)<=now)){
-    return {reservation:res,block,recovery:block.status==='leased'};
+    candidates.push({reservation:res,block,recovery:Boolean(block.recovery)||block.status==='leased'});
    }
   }
  }
- return null;
+ return candidates.find(x=>x.recovery)||candidates[0]||null;
 }
 function lease(res,block,issue,{branch,baseSha,now=Date.now(),workerLogin=null}){
  assert(block.status==='pending'||(block.status==='leased'&&Date.parse(block.expiresAt)<=now),
@@ -136,6 +139,9 @@ function lease(res,block,issue,{branch,baseSha,now=Date.now(),workerLogin=null})
   branch==='r42/work/'+res.issueNumber+'/'+String(block.block).padStart(2,'0')+'/'+issue.number,
   'R42_LEASE_BRANCH');
  const rows=blocks(res),previous=rows[block.block-1];
+ assert(previous&&previous.epoch===block.epoch&&previous.status===block.status&&
+  (previous.status==='pending'||(previous.status==='leased'&&Date.parse(previous.expiresAt)<=now)),
+  'R42_BLOCK_ALREADY_LEASED');
  const record={...previous,status:'leased',epoch:issue.number,claimIssueNumber:issue.number,
   workerLogin:String(workerLogin||issue.user?.login||''),requestId:command(issue).requestId,
   branch,baseSha,leasedAt:new Date(now).toISOString(),expiresAt:new Date(now+TTL_MS).toISOString(),

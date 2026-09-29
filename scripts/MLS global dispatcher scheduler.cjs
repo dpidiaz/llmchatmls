@@ -9,6 +9,7 @@ const bufferedFinalize=require('../MLS R32 EDITORIAL/r4 buffered finalize.cjs');
 const elasticScheduler=require('../MLS R32 EDITORIAL/r4 elastic scheduler.cjs');
 const revisions=require('../MLS R32 EDITORIAL/r4 staging supersession.cjs');
 const child=require('node:child_process');
+const backoff=require('../MLS R32 EDITORIAL/r4 github backoff.cjs');
 
 const token=process.env.GITHUB_TOKEN||'';
 const repository=process.env.GITHUB_REPOSITORY||'';
@@ -19,6 +20,7 @@ const root=path.resolve(__dirname,'..');
 const githubApiCounts={GET:0,POST:0,PATCH:0,PUT:0,DELETE:0};
 if(typeof process.on==='function')process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'scheduler',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
 async function gh(method,endpoint,body){
+  backoff.check(process.env.MLS_GITHUB_COOLDOWN_FILE);
   if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
   const response=await fetch('https://api.github.com'+endpoint,{
     method,
@@ -26,11 +28,15 @@ async function gh(method,endpoint,body){
     body:body===undefined?undefined:JSON.stringify(body)
   });
   const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-  if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;throw e;}
+  if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;
+    if([403,429].includes(response.status))e.cooldown=backoff.record(process.env.MLS_GITHUB_COOLDOWN_FILE,response);
+    throw e;}
   return data;
 }
 async function pages(endpoint){
-  const out=[];for(let page=1;page<=20;page++){const join=endpoint.includes('?')?'&':'?';const rows=await gh('GET',endpoint+join+'per_page=100&page='+page);if(!Array.isArray(rows))break;out.push(...rows);if(rows.length<100)break;}return out;
+  const out=[];for(let page=1;page<=20;page++){const join=endpoint.includes('?')?'&':'?';const rows=await gh('GET',endpoint+join+'per_page=100&page='+page);
+    if(!Array.isArray(rows))throw core.dispatchError('GITHUB_PAGE_INVALID');out.push(...rows);if(rows.length<100)return out;}
+  throw core.dispatchError('GITHUB_PAGE_LIMIT','Incomplete inventory: no allocation allowed.',503);
 }
 async function allIssues(state='open'){return (await pages('/repos/'+owner+'/'+repo+'/issues?state='+state)).filter(x=>!x.pull_request);}
 async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
@@ -52,6 +58,7 @@ async function createBranch(branch,sha){
 
 async function ensureLedger(registry){
   const issues=await allIssues('open');
+  if(issues.filter(ledgerIssue).length!==1)throw core.dispatchError('GLOBAL_LEDGER_CARDINALITY','Exactly one canonical ledger is required; never mint a replacement automatically.',503);
   for(const issue of issues.filter(ledgerIssue)){
     const raw=core.parseLedger(issue.body||'');
     // A corrupt or truncated ledger is never permission to create an empty one.
@@ -299,10 +306,10 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
   const bufferedCleanup=await bufferedFinalize.cleanupSyncRequests({issues:providerIssues,ledgerItem,
     patchIssue:(number,patch)=>updateIssue(number,patch)});
   // Additive R4.2: process disposable block workers under this SAME serialized
-  // Dispatcher mutex. Max 5 commands/tick and 10 live block leases. No nested R33 lease.
+  // Dispatcher mutex. Max 5 commands/tick, one chat writer + this serial writer.
   const repoPath='/repos/'+owner+'/'+repo;
   const elasticResults=await elasticScheduler.drain({issues:providerIssues,root,
-    globalLedger:ledgerItem.ledger,activeStates,now,
+    globalLedger:ledgerItem.ledger,activeStates,now,technical:true,
     api:{get:route=>gh('GET',repoPath+route),post:(route,body)=>gh('POST',repoPath+route,body),
       patch:(route,body)=>gh('PATCH',repoPath+route,body)}});
   let cachedRegistry=null;

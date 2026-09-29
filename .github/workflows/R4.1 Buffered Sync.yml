@@ -1,8 +1,15 @@
 name: R4.1 Buffered Sync
+run-name: 'MLS buffer sync #${{ inputs.request_issue || github.event.issue.number }}'
 
 on:
   issues:
     types: [opened]
+  workflow_dispatch:
+    inputs:
+      request_issue:
+        description: Existing authorized SYNC issue; revalidated by the script
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -16,18 +23,27 @@ concurrency:
 
 jobs:
   buffered-sync:
-    if: ${{ startsWith(github.event.issue.title, '[MLS Buffered][SYNC]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) }}
+    if: ${{ github.event_name == 'workflow_dispatch' || (startsWith(github.event.issue.title, '[MLS Buffered][SYNC]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)) }}
     runs-on: ubuntu-latest
+    env:
+      MLS_GITHUB_COOLDOWN_FILE: ${{ runner.temp }}/mls-github-cooldown.json
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
+      - uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: mls-github-cooldown-
       - uses: actions/setup-node@v4
         with:
           node-version: 24
       - name: Parse and authenticate sync request
         id: request
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/R4-1-buffered-remote.cjs request "$GITHUB_EVENT_PATH" >> "$GITHUB_OUTPUT"
       - name: Recover immutable inbox bundle and prepare isolated staging branch
         shell: bash
@@ -87,3 +103,9 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           ISSUE: ${{ steps.request.outputs.issueNumber }}
         run: node scripts/R4-1-buffered-remote.cjs mark "$RUNNER_TEMP/r41-buffer" . "$ISSUE" "$TARGET_BRANCH" "$STAGED_SHA"
+      - name: Preserve GitHub cooldown after interruption
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}

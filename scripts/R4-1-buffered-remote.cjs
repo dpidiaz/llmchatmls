@@ -8,10 +8,18 @@ const verify=require('../MLS R32 EDITORIAL/r4 buffered verify.cjs');
 const transport=require('../MLS R32 EDITORIAL/r4 buffered transport.cjs');
 const remote=require('../MLS R32 EDITORIAL/r4 buffered remote.cjs');
 const api=()=>verify.api(process.env.GITHUB_REPOSITORY,process.env.GITHUB_TOKEN);
+async function eventIssue(event){
+  if(process.env.GITHUB_EVENT_NAME!=='workflow_dispatch')return event.issue;
+  const id=String(event.inputs?.request_issue||'');
+  if(!/^[1-9][0-9]{0,9}$/.test(id))core.error('SYNC_DISPATCH_ISSUE_INVALID');
+  const issue=await api().get('/issues/'+id);
+  if(issue.state!=='open')core.error('SYNC_DISPATCH_ISSUE_CLOSED');
+  return issue;
+}
 async function run([mode,...args]){
   if(mode==='request'){
     const event=JSON.parse(fs.readFileSync(args[0]||process.env.GITHUB_EVENT_PATH,'utf8'));
-    const request=verify.requestFromIssue(event.issue);
+    const request=verify.requestFromIssue(await eventIssue(event));
     return 'issueNumber='+request.issueNumber+'\ninboxBranch='+request.inboxBranch+'\n';
   }
   if(mode==='unpack')return transport.importFrom(args[0],args[1]);
@@ -31,7 +39,7 @@ async function run([mode,...args]){
   }
   if(mode==='mark'){
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-    const request=verify.requestFromIssue(event.issue);
+    const request=verify.requestFromIssue(await eventIssue(event));
     if(request.issueNumber!==Number(args[2]))core.error('SYNC_REQUEST_RESERVATION_MISMATCH');
     return remote.markStaged(args[0],args[1],Number(args[2]),args[3],args[4],api(),Number(process.env.GITHUB_RUN_ID),request.requestIssueNumber,{canonicalRoot:process.env.MLS_R41_CANONICAL_ROOT||args[1]});
   }
