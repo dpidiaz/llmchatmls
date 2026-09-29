@@ -5,6 +5,7 @@ const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
+const bufferedFinalize=require('../MLS R32 EDITORIAL/r4 buffered finalize.cjs');
 const child=require('node:child_process');
 
 const token=process.env.GITHUB_TOKEN||'';
@@ -266,6 +267,9 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
   const now=Date.now(),s=await sweep(baseRegistry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
   const providerIssues=await allIssues('open');
   const bufferedResults=await processBufferedRequests(providerIssues,ledgerItem.ledger,activeStates,now);
+  const stagedResults=await bufferedFinalize.reconcile({issues:providerIssues,ledgerItem,
+    get:endpoint=>gh('GET','/repos/'+owner+'/'+repo+endpoint),
+    patchIssue:(number,patch)=>updateIssue(number,patch),saveLedger:()=>saveLedger(ledgerItem)});
   let cachedRegistry=null;
   function runtimeRegistry(refresh=false){
     if(cachedRegistry&&!refresh)return cachedRegistry;
@@ -383,11 +387,11 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     drained.push({issueNumber:issue.number,status:'assigned',workId:item.workId,assignmentId:state.assignmentId,branch,ackDeadlineAt:state.ackDeadlineAt,recovery:Boolean(recovery)});
   }
   await saveLedger(ledgerItem);
-  return {drained,reaped:s.closed,reconciliation,buffered:bufferedResults};
+  return {drained,reaped:s.closed,reconciliation,buffered:bufferedResults,bufferedStaged:stagedResults};
 }
 
 async function main(){
   const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
-  if(result.drained.length||result.reaped.length||result.buffered.length)console.log(JSON.stringify({ok:true,...result}));
+  if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length)console.log(JSON.stringify({ok:true,...result}));
 }
 main().catch(error=>{console.error(error);process.exitCode=1});
