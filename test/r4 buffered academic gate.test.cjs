@@ -38,3 +38,9 @@ test('R4.1 sync executes academic gate before grouped write',()=>{
  assert.ok(gate>0&&commit>gate);
  assert.match(y,/scripts\/R4-1-buffered-academic-check\.cjs/);
 });
+
+test('deferred R4 rehearsal discloses pilot hold instead of implying full academic clearance',()=>{
+ const rehearsal=fs.readFileSync(path.join(root,'scripts/R4 staging rehearsal.cjs'),'utf8');
+ assert.match(rehearsal,/academicHoldCount:activeHolds\.length/);
+ assert.match(rehearsal,/STRUCTURAL_PASS_ACADEMIC_HOLD/);
+});
