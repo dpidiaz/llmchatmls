@@ -107,7 +107,7 @@ test('T06 partial crash cannot erase existing completed checkpoints',()=>{
  const x=started(),damaged=chunk(x,2,{partial:true});
  assert.throws(()=>bcr.advance({manifest:x.manifest,pack:x.initial.pack,
  index:x.initial.index,progress:x.initial.progress,chunk:damaged,sourceRegistry:x.sourceRegistry,
- expectedParentCommit:sha('d')}),/BCR_CHUNK_INCOMPLETE/);
+ expectedParentCommit:sha('d')}),e=>e.code==='BCR_CHUNK_INCOMPLETE');
  assert.equal(x.initial.pack.completedCodes.length,5);assert.equal(x.initial.progress.checkpointed,5);
 });
 test('T07 one HTTP 403 stops without retry and flags local export as unconfirmed',async()=>{
@@ -124,17 +124,17 @@ test('T08 optimistic concurrency rejects a changed ref before any write',async()
  const x=started();let writes=0;
  await assert.rejects(bcr.commitOptimistic({expectedHead:sha('d'),
  readHead:async()=>sha('e'),files:second(x).files,
- writeGrouped:async()=>{writes++;return {sha:sha('f')};}}),/BCR_CONCURRENT_REMOTE_EDIT/);
+ writeGrouped:async()=>{writes++;return {sha:sha('f')};}}),e=>e.code==='BCR_CONCURRENT_REMOTE_EDIT');
  assert.equal(writes,0);
 });
 test('T09 recipe/schema and source registry changes invalidate context',()=>{
  const x=started(),p=structuredClone(x.initial.pack);
  p.recipeHash=sha('a');p.stateHash=bcr.packHash(p);
  assert.throws(()=>bcr.verifyState({pack:p,index:x.initial.index,manifest:x.manifest,
- progress:x.initial.progress,sourceRegistry:x.sourceRegistry}),/BCR_EDITORIAL_RECIPE_STALE/);
+ progress:x.initial.progress,sourceRegistry:x.sourceRegistry}),e=>e.code==='BCR_EDITORIAL_RECIPE_STALE');
  const altered=structuredClone(x.sourceRegistry);altered[id].metadata.publisher='Changed publisher';
  assert.throws(()=>bcr.verifyState({pack:x.initial.pack,index:x.initial.index,manifest:x.manifest,
- progress:x.initial.progress,sourceRegistry:altered}),/BCR_SOURCE_CONTEXT_STALE/);
+ progress:x.initial.progress,sourceRegistry:altered}),e=>e.code==='BCR_SOURCE_CONTEXT_STALE');
 });
 test('T10 cannot seal an incomplete batch or 25 without individually passed canonical R33',()=>{
  const x=started(),p=x.initial.pack;
@@ -182,5 +182,5 @@ test('T14 an exportable package is not claimed as GitHub-persisted until ref rea
  let count=0;
  await assert.rejects(bcr.commitOptimistic({expectedHead:sha('d'),files:r.files,
  readHead:async()=>{count++;return count===1?sha('d'):sha('f');},
- writeGrouped:async()=>({sha:sha('e')})}),/BCR_REMOTE_READBACK_NOT_CONFIRMED/);
+ writeGrouped:async()=>({sha:sha('e')})}),e=>e.code==='BCR_REMOTE_READBACK_NOT_CONFIRMED');
 });
