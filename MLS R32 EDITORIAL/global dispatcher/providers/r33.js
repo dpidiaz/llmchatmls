@@ -112,6 +112,14 @@ function materializeCandidate(snapshot,options={}){
   const requested=normalizeRequested(options.requested??input.requested,pool);
   const terminal=new Set([...ledger.verified,...ledger.exceptions]);
   const protectedState=collectProtectedCodes(input.batches??input.activeBatches??[],pool,terminal,nowMs);
+  // Durable buffered reservations do not expire with short-lived chat leases.
+  // A terminal or leased overlap is a conflict, not permission to regenerate.
+  for(const raw of input.reservedCodes||[]){
+    const code=assertCode(raw);
+    if(terminal.has(code))throw providerError('BUFFER_TERMINAL_CONFLICT','Reserved unit already terminal: '+code);
+    if(protectedState.codes.has(code))throw providerError('BUFFER_DOUBLE_OWNER','Buffered unit already leased: '+code);
+    protectedState.codes.add(code);
+  }
   const units=pool.entries.filter(entry=>!terminal.has(entry.code)&&!protectedState.codes.has(entry.code)).slice(0,requested).map(entry=>({
     code:entry.code,language:entry.language,contentPath:entry.contentPath,order:entry.order,evidenceArtifactPath:evidenceArtifactPath(entry)
   }));

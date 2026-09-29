@@ -7,6 +7,7 @@ const mlsCore=require('../../farm core.js');
 const r33Core=require('../../evidence farm core.js');
 const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
+const buffered=require('../../r4 buffered allocation.cjs');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
 const READY_QUEUE_TARGET=128;
@@ -74,7 +75,9 @@ function collectR33Snapshot(issues,root='.'){
   }
   if(ledgers.length>1)throw integrationError('R33_LEDGER_CARDINALITY','R33 provider requiere como máximo un ledger activo para '+pool.poolId+'.',503);
   const ledger=ledgers.length===1?ledgers[0]:r33Core.initialLedger(pool);
-  return {pool,ledger,batches,ledgerSynthetic:ledgers.length===0,continuationActive:Boolean(continuation),configuredPoolId:configuredPool.poolId};
+  // Every open reservation Issue is a durable exclusion, independent of chat TTL.
+  const bufferedReservations=buffered.reservations(issues);
+  return {pool,ledger,batches,bufferedReservations,ledgerSynthetic:ledgers.length===0,continuationActive:Boolean(continuation),configuredPoolId:configuredPool.poolId};
 }
 function projectMlsSnapshot(snapshot,{globalLedger,globalAssignments}={}){
   const corpusCodes=new Set((snapshot.corpus||[]).map(x=>String(x.code)));
@@ -107,7 +110,13 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
     if(!entries.length)continue;
     batches.push({poolId:snapshot.pool.poolId,batchId:'GLOBAL-'+state.assignmentId,status:'leased',acknowledgedAt:state.acknowledgedAt||null,ackDeadlineAt:state.ackDeadlineAt,expiresAt:state.expiresAt,entries});
   }
-  return {...snapshot,ledger,batches};
+  // Include unresolved R4 orphan/recovery claims: the allocator must not silently regenerate them.
+  const recoveryCodes=Object.values(globalLedger?.recoveries||{})
+    .filter(r=>r?.workItem?.provider==='r33-farm')
+    .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
+  const reservedCodes=[...new Set([...(snapshot.bufferedReservations||[])
+    .flatMap(r=>r.allocation.units.map(u=>u.code)),...recoveryCodes].filter(code=>poolCodes.has(code)))];
+  return {...snapshot,ledger,batches,reservedCodes};
 }
 function r33CandidateToWork(candidate,now=Date.now()){
   if(!candidate?.eligible)return null;

@@ -4,6 +4,9 @@ const path=require('node:path');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
+const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
+const bufferedFinalize=require('../MLS R32 EDITORIAL/r4 buffered finalize.cjs');
+const child=require('node:child_process');
 
 const token=process.env.GITHUB_TOKEN||'';
 const repository=process.env.GITHUB_REPOSITORY||'';
@@ -11,7 +14,10 @@ if(!token||!/^[^/]+\/[^/]+$/.test(repository))throw new Error('GITHUB_TOKEN/GITH
 const [owner,repo]=repository.split('/');
 const root=path.resolve(__dirname,'..');
 
+const githubApiCounts={GET:0,POST:0,PATCH:0,PUT:0,DELETE:0};
+if(typeof process.on==='function')process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'scheduler',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
 async function gh(method,endpoint,body){
+  if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
   const response=await fetch('https://api.github.com'+endpoint,{
     method,
     headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-r1'},
@@ -209,11 +215,69 @@ function duplicateAssignment(command,activeStates,ledger){
   return ledger.requests?.[command.requestId]||null;
 }
 
+async function processBufferedRequests(issues,globalLedger,activeStates,now){
+  const requests=issues.filter(issue=>buffered.requestAuthorized(issue)&&String(issue.title||'').startsWith('[MLS Buffered][REQUEST]'))
+    .sort((a,b)=>Number(a.number)-Number(b.number));
+  const result=[];
+  for(const issue of requests){
+    try{
+      if(!buffered.requestAuthorized(issue))throw core.dispatchError('BUFFER_AUTHOR_UNAUTHORIZED','Only repository owner/member/collaborator can reserve units.',403);
+      const command=buffered.parseRequest(issue);
+      if(command.mode==='release'){
+        const target=issues.find(row=>Number(row.number)===command.targetIssueNumber);
+        if(!target||target.state!=='open')throw core.dispatchError('BUFFER_RELEASE_TARGET_MISSING','No open reservation with this issue number.',409);
+        const old=buffered.parseReservation(target);
+        // A successfully staged commit must first complete the immutable CI/ledger reconciliation.
+        if(old.status==='staged')throw core.dispatchError('STAGED_RELEASE_REQUIRES_RECONCILIATION',
+          'Do not release an in-flight STAGED batch before the serial finalizer has persisted its outcome.',409);
+        const nextTitle='[MLS Buffered][RELEASED] '+old.allocation.assignmentId;
+        const detail=buffered.renderReservation(old)+'\n\n## Explicit release / recovery review\n'+
+          JSON.stringify({requestIssue:issue.number,reason:command.reason,recoveryReviewed:true,releasedAt:core.iso(now)},null,2)+'\n';
+        await updateIssue(target.number,{title:nextTitle,body:detail,state:'closed',state_reason:'not_planned'});
+        target.title=nextTitle;target.state='closed';target.body=detail;
+        await updateIssue(issue.number,{title:'[MLS Buffered][COMPLETED] release '+command.requestId,
+          body:renderResponse('Buffer release accepted',{targetIssueNumber:target.number,requestId:command.requestId}),state:'closed',state_reason:'completed'});
+        result.push({requestIssue:issue.number,operation:'release',targetIssueNumber:target.number});
+        continue;
+      }
+      // The same serialized scheduler performs normal claims and durable buffered reservations.
+      const snapshot=providerIntegration.projectR33Snapshot(
+        providerIntegration.collectR33Snapshot(issues,root),{globalLedger,globalAssignments:activeStates});
+      const checkoutHead=child.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();
+      const mainHead=await getMainSha();
+      if(checkoutHead!==mainHead)throw core.dispatchError('BUFFER_CHECKOUT_STALE','Refresh main checkout before granting reservation.',409);
+      const contentManifestBlobSha=child.execFileSync('git',['rev-parse','HEAD:content/manifest.json'],{cwd:root,encoding:'utf8'}).trim();
+      const reservation=buffered.allocate(snapshot,{size:command.size,issueNumber:issue.number,
+        requestId:command.requestId,baseCommit:mainHead,contentManifestBlobSha,now});
+      const title='[MLS Buffered][RESERVED] '+reservation.allocation.assignmentId;
+      const body=buffered.renderReservation(reservation);
+      await updateIssue(issue.number,{title,body});
+      issue.title=title;issue.body=body;issue.state='open';
+      result.push({requestIssue:issue.number,operation:'reserve',assignmentId:reservation.allocation.assignmentId,
+        count:reservation.allocation.units.length,allocationHash:reservation.allocationHash});
+    }catch(error){
+      if([403,429].includes(error.status)&&!String(error.code||'').startsWith('BUFFER_AUTHOR_'))throw error;
+      const title='[MLS Buffered][REJECTED] '+String(issue.number);
+      await updateIssue(issue.number,{title,body:renderResponse('Buffer request rejected',{
+        ok:false,reason:error.code||'BUFFER_REQUEST_ERROR',message:error.message}),state:'closed',state_reason:'not_planned'});
+      issue.title=title;issue.state='closed';
+      result.push({requestIssue:issue.number,status:'rejected',reason:error.code||'BUFFER_REQUEST_ERROR'});
+    }
+  }
+  return result;
+}
+
 async function drainPendingCommands(baseRegistry,ledgerItem){
   // Repair stale ledger before any reaper, queue materialization, or new lease.
   const reconciliation=await reconcileCompletedIssues(ledgerItem);
   const now=Date.now(),s=await sweep(baseRegistry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
   const providerIssues=await allIssues('open');
+  const bufferedResults=await processBufferedRequests(providerIssues,ledgerItem.ledger,activeStates,now);
+  const stagedResults=await bufferedFinalize.reconcile({issues:providerIssues,ledgerItem,
+    get:endpoint=>gh('GET','/repos/'+owner+'/'+repo+endpoint),
+    patchIssue:(number,patch)=>updateIssue(number,patch),saveLedger:()=>saveLedger(ledgerItem)});
+  const bufferedCleanup=await bufferedFinalize.cleanupSyncRequests({issues:providerIssues,ledgerItem,
+    patchIssue:(number,patch)=>updateIssue(number,patch)});
   let cachedRegistry=null;
   function runtimeRegistry(refresh=false){
     if(cachedRegistry&&!refresh)return cachedRegistry;
@@ -331,11 +395,12 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     drained.push({issueNumber:issue.number,status:'assigned',workId:item.workId,assignmentId:state.assignmentId,branch,ackDeadlineAt:state.ackDeadlineAt,recovery:Boolean(recovery)});
   }
   await saveLedger(ledgerItem);
-  return {drained,reaped:s.closed,reconciliation};
+  return {drained,reaped:s.closed,reconciliation,buffered:bufferedResults,bufferedStaged:stagedResults,bufferedCleanup};
 }
 
 async function main(){
   const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
-  if(result.drained.length||result.reaped.length)console.log(JSON.stringify({ok:true,...result}));
+  if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length||result.bufferedCleanup.length)console.log(JSON.stringify({ok:true,...result}));
+  return result;
 }
 main().catch(error=>{console.error(error);process.exitCode=1});

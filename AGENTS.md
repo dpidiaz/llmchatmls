@@ -45,3 +45,20 @@ Important invariants:
 - do not leave a live claim or lease behind when the chat turn ends;
 - preserve ledger terminal states and active lease overlap protection;
 - `MLS Farm siguientes N` is explicitly **chat-only**: execute the complete Farm lifecycle in the current ChatGPT conversation and **never hand off, redirect, or suggest ChatGPT Work** for this command unless the user explicitly overrides this rule in that same request.
+
+## MLS R4.1 Buffered Farm commands (experimental, opt-in)
+
+For a user request explicitly invoking `MLS Buffered`, `MLS R4.1`, `Buffered Evidence Farm`, or `MLS sincronizar`, read:
+
+`docs/MLS Global Dispatcher/10 R4.1 Buffered Evidence Farm.md`
+
+Mandatory guardrails:
+
+- R4.1 is an opt-in experimental route; **do not silently reinterpret ordinary `MLS siguiente`** or mutate the existing Dispatcher/production pathway before separately approved activation.
+- `MLS Buffered` allocations originate from valid, collaborator-authored `[MLS Buffered][REQUEST]` Issues handled by the serialized Global Dispatcher Scheduler. No chat can mint authoritative assignment IDs, fabricate GitHub lease events or claim a unit from conversational memory.
+- Per-entry editorial checkpoints are persisted in explicit local files; only sealed exportable bundles survive transfer between independent ChatGPT conversations. Never state that session memory is a durable transaction store.
+- A buffer `VERIFIED` or `REVIEWED` claim requires canonical R33 validation with sources and identity hashes. Staging/push alone is not certification, integration to main or deployment.
+- Only an authorized `[MLS Buffered][SYNC]` Issue may request the bounded, single-writer grouped GitHub sync. On HTTP 403/429 respect remote limits and preserve the buffer/reservation; never launch mass retries from workers.
+- Do not use ChatGPT Work, OpenAI API, other paid AI APIs (including latent options/feature flags), Cloudflare/D1 editorial writes or deployment by default. FREE ONLY is non-negotiable.
+- Branch `feat/mls-r4-1-buffered-farm` and PR #1860 remain Draft; do not merge to `main`, migrate existing claims or deploy Cloudflare without explicit separate authorization.
+

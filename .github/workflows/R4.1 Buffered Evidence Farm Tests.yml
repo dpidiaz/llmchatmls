@@ -1,0 +1,48 @@
+name: R4.1 Buffered Evidence Farm Tests
+
+on:
+  pull_request:
+    paths:
+      - 'MLS R32 EDITORIAL/r4 buffered **'
+      - 'scripts/R4-1-buffered-farm.cjs'
+      - 'scripts/R4-1-buffered-remote.cjs'
+      - '.github/workflows/R4.1 Buffered Sync.yml'
+      - 'scripts/MLS global dispatcher scheduler.cjs'
+      - 'scripts/MLS global dispatcher worker.cjs'
+      - 'MLS R32 EDITORIAL/global dispatcher/providers/**'
+      - '.github/workflows/MLS Global Dispatcher Scheduler.yml'
+      - 'test/r4 buffered *.test.cjs'
+      - 'docs/MLS Global Dispatcher/10 R4.1 Buffered Evidence Farm.md'
+      - '.github/workflows/R4.1 Buffered Evidence Farm Tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  buffered-farm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Syntax validation
+        run: |
+          node --check 'MLS R32 EDITORIAL/r4 buffered core.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered sync.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered allocation.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered transport.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered verify.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered remote.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered finalize.cjs'
+          node --check 'scripts/R4-1-buffered-remote.cjs'
+          node --check 'scripts/MLS global dispatcher scheduler.cjs'
+          node --check 'scripts/MLS global dispatcher worker.cjs'
+          node --check 'scripts/R4-1-buffered-farm.cjs'
+      - name: Buffered Farm transport and safety tests
+        run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs' 'test/r4 buffered scheduler integration.test.cjs' 'test/r4 buffered workflow contract.test.cjs'
+      - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
+        run: node --test 'test/r4 buffered real evidence pilot.test.cjs'
+      - name: Existing R33 provider regression
+        run: node --test 'test/mls global dispatcher provider r33.test.cjs' 'test/evidence certification contract.test.cjs'
