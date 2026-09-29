@@ -6,7 +6,7 @@ const bcr=require('../MLS R32 EDITORIAL/r4 buffered context.cjs');
 const elastic=require('../MLS R32 EDITORIAL/r4 elastic core.cjs');
 const engine=require('../MLS R32 EDITORIAL/r4 elastic scheduler.cjs');
 const dispatcher=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
-const PIN='a'.repeat(40),CONTENT='b'.repeat(40),SRC='MLS-SRC-'+('C'.repeat(20));
+const PIN='a'.repeat(40),CONTENT='b'.repeat(40),SRC='MLS-SRC-4FD19E7F1FE011BD0049';
 function fixture(issueNumber,start=4000){
  const allocation={allocatedBy:'global-dispatcher',
   assignmentId:'MLS-BUFFER-'+String(issueNumber).padStart(6,'0'),
@@ -175,4 +175,95 @@ test('bot can own only canonical durable reservation, never forge a REQUEST',()=
  assert.equal(alloc.requestAuthorized(r),true);
  const fake={...r,title:'[MLS Buffered][REQUEST] from bot'};
  assert.equal(alloc.requestAuthorized(fake),false);
+});
+
+test('automatic overflow creates one trusted durable 25-unit reservation and preblock branch',async()=>{
+ const cp=require('node:child_process');
+ const root=process.cwd(),head=cp.execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();
+ const placeholder={number:9900,user:{login:'github-actions[bot]',type:'Bot'},author_association:'NONE',
+  title:'[MLS Buffered][ALLOCATING] R4.2 elastic',state:'open',body:''};
+ const refs={main:head},writes={};
+ const api={
+  async get(route){
+   if(route==='/git/ref/heads/main')return {object:{sha:head}};
+   if(route.startsWith('/git/ref/heads/')){const name=route.slice('/git/ref/heads/'.length);
+    if(!refs[name]){const e=Error('404');e.status=404;throw e;}return {object:{sha:refs[name]}};}
+   if(route==='/issues/9900')return placeholder;
+   if(route==='/git/commits/'+head)return {tree:{sha:'a'.repeat(40)}};
+   throw Error('Unmocked reserve GET '+route);
+  },
+  async post(route,body){
+   if(route==='/issues')return placeholder;
+   if(route==='/git/trees'){writes.tree=body.tree;return {sha:'b'.repeat(40)};}
+   if(route==='/git/commits'){writes.commit=body;return {sha:'c'.repeat(40)};}
+   if(route==='/git/refs'){refs[body.ref.slice('refs/heads/'.length)]=body.sha;return {object:{sha:body.sha}};}
+   throw Error('Unmocked reserve POST '+route);
+  },
+  async patch(route,body){
+   if(route==='/issues/9900'){Object.assign(placeholder,body);return placeholder;}
+   throw Error('Unmocked reserve PATCH '+route);
+  }
+ };
+ const r=await engine.createReservation(api,root,[],{terminal:{},recoveries:{}},[],Date.now());
+ assert.equal(r.issueNumber,9900);
+ assert.equal(r.allocation.units.length,25);
+ assert.equal(r.allocation.baseCommit,head);
+ assert.equal(r.elastic.blocks.length,5);
+ assert.equal(alloc.requestAuthorized(placeholder),true);
+ assert.equal(alloc.reservations([placeholder]).length,1);
+ assert.equal(refs['r41/buffer/9900'],'c'.repeat(40));
+ assert.equal(writes.tree.length,8);
+ assert.ok(writes.tree.every(e=>e.path.startsWith('r41-buffer/9900/')));
+ assert.equal(writes.commit.parents[0],head);
+});
+test('five independent chunks consolidate with original bcr.advance in one group; no package/seal or main write',async()=>{
+ const f=fixture(1881),initial=elastic.preblock(f,bcr.RECIPE,PIN);
+ const chunks=Array.from({length:5},(_,i)=>makeChunk(f,i+1));
+ const commits=Array.from({length:5},(_,i)=>String(i+1).repeat(40));
+ const state=elastic.withBlocks(f,elastic.blocks(f).map((b,i)=>({...b,status:'done',
+  claimIssueNumber:3000+i,commitSha:commits[i],chunkHash:chunks[i].chunkHash})));
+ const ownerIssue=issue(state);let reservationIssue=ownerIssue,head='d'.repeat(40),tree=[],writes=0;
+ const contents=new Map([
+  ['manifest.json',initial.manifest],['progress.json',initial.progress],
+  ['bcr/context-pack.json',initial.pack],['bcr/source-index.json',initial.index]
+ ]);
+ for(let n=1;n<=5;n++)contents.set('blocks/'+String(n).padStart(2,'0')+
+  '/chunk-'+String(n).padStart(2,'0')+'-of-05.json',chunks[n-1]);
+ const api={
+  async get(route){
+   if(route==='/git/ref/heads/r41/buffer/1881')return {object:{sha:head}};
+   if(route==='/issues/1881')return reservationIssue;
+   if(route==='/git/commits/'+'d'.repeat(40))return {tree:{sha:'e'.repeat(40)}};
+   if(route.startsWith('/contents/')){
+    const p=route.slice('/contents/'.length).split('?ref=')[0];
+    const name=p.startsWith('r41-buffer/1881/')?p.slice('r41-buffer/1881/'.length):
+      p.startsWith('r42-buffer/1881/')?p.slice('r42-buffer/1881/'.length):null;
+    if(!contents.has(name))throw Error('Unmocked consolidation contents '+p);
+    const value=contents.get(name);
+    return {encoding:'base64',content:Buffer.from(JSON.stringify(value)).toString('base64'),
+     sha:elastic.gitBlobJson(value)};
+   }
+   throw Error('Unmocked consolidation GET '+route);
+  },
+  async post(route,body){
+   if(route==='/git/trees'){tree=body.tree;return {sha:'7'.repeat(40)};}
+   if(route==='/git/commits'){writes++;assert.deepEqual(body.parents,['d'.repeat(40)]);return {sha:'8'.repeat(40)};}
+   throw Error('Unmocked consolidation POST '+route);
+  },
+  async patch(route,body){
+   if(route==='/git/refs/heads/r41/buffer/1881'){assert.equal(body.force,false);head=body.sha;return {};}
+   if(route==='/issues/1881'){Object.assign(reservationIssue,body);return reservationIssue;}
+   throw Error('Unmocked consolidation PATCH '+route);
+  }
+ };
+ const j=await engine.consolidate(api,state,process.cwd());
+ assert.equal(j.checkpointed,25);
+ assert.equal(j.gatePending,true);
+ assert.equal(writes,1);
+ assert.equal(head,'8'.repeat(40));
+ assert.equal(tree.length,66);
+ assert.equal(tree.filter(f=>/\/entries\/MLS-V10-/.test(f.path)).length,25);
+ assert.equal(tree.filter(f=>/\/checkpoints\/MLS-V10-/.test(f.path)).length,25);
+ assert.equal(tree.some(f=>/package\.json$/.test(f.path)),false);
+ assert.equal(alloc.parseReservation(reservationIssue).elastic.consolidatedSha,head);
 });
