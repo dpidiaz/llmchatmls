@@ -29,7 +29,12 @@ async function run([mode,...args]){
     if(actual.some(p=>!paths.includes(p)))core.error('UNEXPECTED_STAGED_FILE');
     return {stagedFiles:actual.length,assignmentId:m.allocation.assignmentId};
   }
-  if(mode==='mark')return remote.markStaged(args[0],args[1],Number(args[2]),args[3],args[4],api(),Number(process.env.GITHUB_RUN_ID));
+  if(mode==='mark'){
+    const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
+    const request=verify.requestFromIssue(event.issue);
+    if(request.issueNumber!==Number(args[2]))core.error('SYNC_REQUEST_RESERVATION_MISMATCH');
+    return remote.markStaged(args[0],args[1],Number(args[2]),args[3],args[4],api(),Number(process.env.GITHUB_RUN_ID),request.requestIssueNumber);
+  }
   core.error('REMOTE_USAGE','Usage: request <event.json> | unpack <buffer> <bundle.json> | prepare <buffer> <checkout> <issue> | stage-local <buffer> <checkout> | mark <buffer> <checkout> <issue> <branch> <commitSHA>');
 }
 run(process.argv.slice(2)).then(x=>process.stdout.write(typeof x==='string'?x:JSON.stringify(x,null,2)+'\n'))
