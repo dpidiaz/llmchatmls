@@ -8,6 +8,7 @@ const r33Core=require('../../evidence farm core.js');
 const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
 const buffered=require('../../r4 buffered allocation.cjs');
+const revisions=require('../../r4 staging supersession.cjs');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
 const READY_QUEUE_TARGET=128;
@@ -134,48 +135,52 @@ function r33CandidateToWork(candidate,now=Date.now()){
     providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
   };
 }
-function r33TerminalSourceMap(globalLedger,pool){
-  const allowed=new Set((pool?.entries||[]).map(x=>String(x.code||'').toUpperCase())),out=new Map();
-  for(const entry of Object.values(globalLedger?.terminal||{})){
-    if(String(entry?.provider||'')!=='r33-farm')continue;
-    for(const raw of Array.isArray(entry?.completedUnits)?entry.completedUnits:[]){
-      const code=String(raw||'').toUpperCase();
-      if(!allowed.has(code))continue;
-      out.set(code,{code,branch:String(entry.branch||''),commitSha:String(entry.commitSha||''),completedAt:String(entry.completedAt||'')});
-    }
+function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
+ const allowed=new Set((pool?.entries||[]).map(x=>String(x.code||'').toUpperCase()));
+ const selector=revisions.load(root),out=new Map();
+ for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
+  if(terminal?.provider!=='r33-farm')continue;
+  const chosen=revisions.choose(workId,terminal,selector,{mode:'integration'});
+  if(chosen.blocked)continue; // Never fall back to an obsolete historical Evidence SHA.
+  for(const raw of terminal.completedUnits||[]){
+   const code=String(raw).toUpperCase();
+   if(!allowed.has(code)||selector.activeHeldCodes.has(code))continue;
+   out.set(code,{code,workId,branch:chosen.branch,commitSha:chosen.commitSha,
+     supersessionRevisionId:chosen.revisionId,completedAt:String(terminal.completedAt||'')});
   }
-  return out;
+ }
+ return out;
 }
-function r33StagingManifest(globalLedger,{createdAt=null}={}){
-  const rows=[];
-  for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
-    if(!terminal||terminal.provider!=='r33-farm'||!Array.isArray(terminal.completedUnits))continue;
-    for(const code of terminal.completedUnits){
-      rows.push({
-        code:String(code).toUpperCase(),
-        workId,
-        branch:String(terminal.branch||''),
-        commitSha:String(terminal.commitSha||''),
-        completedAt:terminal.completedAt||null
-      });
-    }
+function r33StagingManifest(globalLedger,{createdAt=null,root='.'}={}){
+ const selector=revisions.load(root),rows=[],assets=new Map(),revisionSelections=[];
+ for(const [workId,t] of Object.entries(globalLedger?.terminal||{})){
+  if(t?.provider!=='r33-farm'||!Array.isArray(t.completedUnits))continue;
+  const s=revisions.choose(workId,t,selector,{mode:'rehearsal'});
+  if(s.revisionId){
+   revisionSelections.push({workId,revisionId:s.revisionId,branch:s.branch,
+     commitSha:s.commitSha,originalCommitSha:s.originalCommitSha,academicHold:s.academicHold});
+   for(const asset of s.assets){
+    const previous=assets.get(asset.path);
+    if(previous&&previous.commitSha!==asset.commitSha)throw integrationError('R4_REVISION_ASSET_CONFLICT',asset.path,409);
+    assets.set(asset.path,asset);
+   }
   }
-  rows.sort((a,b)=>a.code.localeCompare(b.code)||a.workId.localeCompare(b.workId));
-  const byCode=new Map();
-  for(const row of rows){
-    const prior=byCode.get(row.code);
-    if(prior&&prior.commitSha!==row.commitSha)throw integrationError('R4_STAGING_CONFLICT','Más de un commit certificado para '+row.code+'.',409);
-    byCode.set(row.code,row);
-  }
-  const entries=[...byCode.values()];
-  const digest=globalCore.sha256(JSON.stringify(entries.map(({code,workId,branch,commitSha})=>({code,workId,branch,commitSha}))));
-  return {
-    kind:'r33_staging_manifest',version:1,
-    createdAt:createdAt||new Date().toISOString(),
-    entryCount:entries.length,
-    snapshotHash:digest,
-    entries
-  };
+  for(const code of t.completedUnits)rows.push({code:String(code).toUpperCase(),workId,
+    branch:s.branch,commitSha:s.commitSha,completedAt:t.completedAt||null,
+    supersessionRevisionId:s.revisionId,academicHold:s.academicHold});
+ }
+ rows.sort((a,b)=>a.code.localeCompare(b.code)||a.workId.localeCompare(b.workId));
+ const byCode=new Map();
+ for(const row of rows){
+  const prior=byCode.get(row.code);
+  if(prior&&prior.commitSha!==row.commitSha)throw integrationError('R4_STAGING_CONFLICT',row.code,409);
+  byCode.set(row.code,row);
+ }
+ const entries=[...byCode.values()];
+ const digest=globalCore.sha256(JSON.stringify(entries.map(({code,workId,branch,commitSha})=>({code,workId,branch,commitSha}))));
+ return {kind:'r33_staging_manifest',version:1,createdAt:createdAt||new Date().toISOString(),
+  entryCount:entries.length,snapshotHash:digest,entries,revisionSelections,
+  assetRefs:[...assets.values()].sort((a,b)=>a.path.localeCompare(b.path))};
 }
 
 function r33IntegratedCodes(root='.',verifiedCodes=null){
@@ -239,8 +244,8 @@ function r33IntegrationWaves({pool,globalLedger,root='.',waveSize=50,verifiedCod
   if(!pool||!Array.isArray(pool.entries))return [];
   const size=Number(waveSize);
   if(!Number.isInteger(size)||size<1)throw integrationError('R33_INTEGRATION_WAVE_INVALID','waveSize inválido para R33 integration.',500);
-  const sources=r33TerminalSourceMap(globalLedger,pool),integrated=r33IntegratedCodes(root,verifiedCodes);
-  const remaining=pool.entries.filter(x=>!integrated.has(x.code)),waves=[];
+  const sources=r33TerminalSourceMap(globalLedger,pool,{root}),integrated=r33IntegratedCodes(root,verifiedCodes),held=revisions.load(root).activeHeldCodes;
+  const remaining=pool.entries.filter(x=>!integrated.has(x.code)&&!held.has(x.code)),waves=[];
   for(let offset=0;offset<remaining.length;offset+=size){
     const units=remaining.slice(offset,offset+size);
     if(!units.length||units.some(x=>!sources.has(x.code)))continue;
@@ -312,8 +317,8 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
   if(!pool||!Array.isArray(pool.entries))return null;
   const size=Number(waveSize??pool?.execution?.integrationWaveSize??50);
   if(!Number.isInteger(size)||size<1)throw integrationError('R33_INTEGRATION_WAVE_INVALID','waveSize inválido para R33 integration.',500);
-  const sources=r33TerminalSourceMap(globalLedger,pool),integrated=r33IntegratedCodes(root,verifiedCodes);
-  const remaining=pool.entries.filter(x=>!integrated.has(String(x.code||'').toUpperCase()));
+  const sources=r33TerminalSourceMap(globalLedger,pool,{root}),integrated=r33IntegratedCodes(root,verifiedCodes),held=revisions.load(root).activeHeldCodes;
+  const remaining=pool.entries.filter(x=>!integrated.has(String(x.code||'').toUpperCase())&&!held.has(String(x.code||'').toUpperCase()));
   if(!remaining.length)return null;
   const units=remaining.slice(0,size);
   if(!units.length||units.some(x=>!sources.has(String(x.code||'').toUpperCase())))return null;
