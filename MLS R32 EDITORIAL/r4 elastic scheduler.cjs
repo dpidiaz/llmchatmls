@@ -332,9 +332,26 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
    await publishNewBranch(api,branch,source);
    const issued=elastic.lease(res,block,issue,{branch,baseSha:source,now,workerLogin:issue.user?.login});
    reservations[at]=await saveReservation(api,issued.reservation,res.recordHash);
+   const guide=[
+    '## MLS R4.2 — TRABAJO AUTOSUFICIENTE PARA ESTE CHAT',
+    'No busqués otra conversación. La única titularidad válida está en el marcador de este Issue y la reserva #'+res.issueNumber+'.',
+    'Contrato completo: docs/MLS Global Dispatcher/18 R4.2 Elastic BCR.md (en GitHub main).',
+    '1. Verificá RESERVATION RESERVED, leaseEpoch, expiresAt y HEAD remoto == baseSha antes de cada escritura.',
+    '2. Recuperá exactamente los cinco artículos contentPath del manifiesto fijado. Hacé R33 académico AI-only por separado.',
+    '3. Persistí dentro de r42-buffer/'+res.issueNumber+'/blocks/'+String(block.block).padStart(2,'0')+
+      '/, sin tocar el Context Pack central. Se admiten checkpoints por entrada con commits agrupados pequeños para tolerar caídas.',
+    '4. Finalizá con exactamente cinco entradas, cinco checkpoints, chunk-'+String(block.block).padStart(2,'0')+
+      '-of-05.json; el diff final respecto a la rama maestra debe tener solo once archivos y pasar bcr.verifyChunk.',
+    '5. Leé HEAD remoto. Abrí un nuevo Issue [MLS Dispatcher][BCR][COMPLETE] con marcador MLS_BCR_ELASTIC_COMMAND:',
+    '   {kind:"mls_bcr_elastic_command",version:1,action:"complete",requestId:<nonce unico>,'+
+      'claimIssueNumber:'+issue.number+',reservationIssueNumber:'+res.issueNumber+',block:'+block.block+',headSha:<SHA real>}.',
+    'Si necesitás más tiempo, abrí [MLS Dispatcher][BCR][RENEW] con la misma estructura, action:"renew", sin headSha, ANTES de expiresAt.',
+    'El Dispatcher certifica únicamente estructura/identidad del bloque; el Gate académico R33 de 25/25 sigue separado.',
+    'Sin Work, OpenAI API, APIs pagadas, SYNC, main, sellado prematuro ni Cloudflare.'
+   ].join('\n')+'\n\n';
    await api.patch('/issues/'+issue.number,{
     title:'[MLS Dispatcher][BCR][LEASED] '+res.allocation.assignmentId+' block-'+String(block.block).padStart(2,'0'),
-    body:'## MLS R4.2 elastic block lease\n\n'+dispatcherCore.renderMarked(elastic.STATUS_MARKER,issued.claim)});
+    body:guide+dispatcherCore.renderMarked(elastic.STATUS_MARKER,issued.claim)});
    leased.push({issue:issue.number,reservation:res.issueNumber,block:block.block,
     branch,expiresAt:issued.claim.expiresAt,codes:issued.claim.codes,recovered:Boolean(block.recovery)});
   }catch(e){
