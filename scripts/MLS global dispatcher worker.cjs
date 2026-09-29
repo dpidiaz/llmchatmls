@@ -10,7 +10,10 @@ const repository=process.env.GITHUB_REPOSITORY||'';
 if(!token||!/^[^/]+\/[^/]+$/.test(repository))throw new Error('GITHUB_TOKEN/GITHUB_REPOSITORY faltante.');
 const [owner,repo]=repository.split('/');
 
+const githubApiCounts={GET:0,POST:0,PATCH:0,PUT:0,DELETE:0};
+process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'worker-events',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
 async function gh(method,endpoint,body){
+  if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
   const response=await fetch('https://api.github.com'+endpoint,{
     method,
     headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-worker-r1'},
