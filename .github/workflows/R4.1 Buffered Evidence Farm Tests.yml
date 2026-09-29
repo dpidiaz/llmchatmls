@@ -8,6 +8,7 @@ on:
       - 'scripts/R4-1-buffered-remote.cjs'
       - 'scripts/R4-1-buffered-academic-check.cjs'
       - 'scripts/R4-1-bcr.cjs'
+      - 'scripts/R4-1-bcr-canonical-gate.cjs'
       - 'MLS R32 EDITORIAL/r4 buffered context.cjs'
       - 'test/r4 buffered bcr.test.cjs'
       - 'docs/MLS Global Dispatcher/17 R4.1 BCR v1.md'
@@ -51,6 +52,7 @@ jobs:
           node --check 'scripts/R4-1-buffered-academic-check.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered context.cjs'
           node --check 'scripts/R4-1-bcr.cjs'
+          node --check 'scripts/R4-1-bcr-canonical-gate.cjs'
           node --check 'scripts/R4 final publication readiness.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered sync.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered allocation.cjs'
@@ -76,3 +78,42 @@ jobs:
         run: node --test 'test/r4 staging supersession.test.cjs'
       - name: Existing R33 provider regression
         run: node --test 'test/mls global dispatcher provider r33.test.cjs' 'test/evidence certification contract.test.cjs'
+
+  canonical-gate-1872:
+    if: github.event_name == 'pull_request' && github.head_ref == 'audit/r41-1872-canonical-gate'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Recover pinned buffer without mutating canonical content
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin '+refs/heads/r41/buffer/1872:refs/remotes/origin/r41-bcr-1872'
+          pin='8c612b789d117c8cfecfd5e835b1227543cda546'
+          test "$(git rev-parse refs/remotes/origin/r41-bcr-1872)" = "$pin"
+          mkdir -p "$RUNNER_TEMP/r41-gate-1872"
+          git archive "$pin" r41-buffer/1872 | tar -xf - -C "$RUNNER_TEMP/r41-gate-1872"
+          test ! -e "$RUNNER_TEMP/r41-gate-1872/r41-buffer/1872/package.json"
+      - name: ACTUAL canonical R33 and academic R4.1 on all 25
+        shell: bash
+        env:
+          MLS_BCR_GATE_REPORT: /tmp/r41-1872-canonical-report.json
+        run: |
+          set -euo pipefail
+          node --check scripts/R4-1-bcr-canonical-gate.cjs
+          node scripts/R4-1-bcr-canonical-gate.cjs . \
+            "$RUNNER_TEMP/r41-gate-1872/r41-buffer/1872" \
+            8c612b789d117c8cfecfd5e835b1227543cda546
+      - name: Preserve gate report whether PASS or blocked
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mls-1872-r33-r41-gate
+          path: /tmp/r41-1872-canonical-report.json
+          if-no-files-found: warn
+          retention-days: 30
