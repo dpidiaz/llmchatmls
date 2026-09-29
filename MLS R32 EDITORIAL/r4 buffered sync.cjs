@@ -58,6 +58,7 @@ function gitState(repoRoot){
 }
 async function plan(dir,repoRoot,{assess=canonicalAssessment,state=gitState}={}){
   const m=core.manifest(dir),i=core.inspect(dir);
+  if(m.allocation.pilotOnly)core.error('OFFLINE_PILOT_CANNOT_SYNC');
   if(!i.sealed||i.invalid.length||i.orphans.length||i.missing.length)core.error('PACKAGE_NOT_READY');
   const pkg=core.read(core.pf(dir)),g=state(repoRoot);
   if(!g.branch||['main','master'].includes(g.branch))core.error('PROTECTED_BRANCH','Do not synchronize directly to production.');
