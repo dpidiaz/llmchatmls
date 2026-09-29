@@ -30,7 +30,13 @@ function parseRequest(issue){
   return x;
 }
 function requestAuthorized(issue){
-  return ['OWNER','MEMBER','COLLABORATOR'].includes(String(issue?.author_association||'').toUpperCase());
+  if(['OWNER','MEMBER','COLLABORATOR'].includes(String(issue?.author_association||'').toUpperCase()))return true;
+  // R4.2's serialized scheduler may create additional immutable 25-unit reserves.
+  // Trust only GitHub's real Actions bot identity and the RESERVED marker. This
+  // does NOT grant a bot-authored [REQUEST] the ability to allocate user work.
+  return issue?.user?.login==='github-actions[bot]' &&
+    /^\[MLS Buffered\]\[(RESERVED|STAGED|QUARANTINED)\]/.test(String(issue.title||'')) &&
+    /<!--\s*MLS_BUFFERED_RESERVATION\b/.test(String(issue.body||''));
 }
 function normalizeAllocation(raw){
   if(raw?.allocatedBy!=='global-dispatcher'||!String(raw.assignmentId||'').startsWith('MLS-BUFFER-'))fail('BUFFER_ALLOCATION_ORIGIN');

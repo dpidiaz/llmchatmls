@@ -6,6 +6,7 @@ const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/provid
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
 const bufferedFinalize=require('../MLS R32 EDITORIAL/r4 buffered finalize.cjs');
+const elasticScheduler=require('../MLS R32 EDITORIAL/r4 elastic scheduler.cjs');
 const revisions=require('../MLS R32 EDITORIAL/r4 staging supersession.cjs');
 const child=require('node:child_process');
 
@@ -297,6 +298,13 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     patchIssue:(number,patch)=>updateIssue(number,patch),saveLedger:()=>saveLedger(ledgerItem)});
   const bufferedCleanup=await bufferedFinalize.cleanupSyncRequests({issues:providerIssues,ledgerItem,
     patchIssue:(number,patch)=>updateIssue(number,patch)});
+  // Additive R4.2: process disposable block workers under this SAME serialized
+  // Dispatcher mutex. Max 5 commands/tick and 10 live block leases. No nested R33 lease.
+  const repoPath='/repos/'+owner+'/'+repo;
+  const elasticResults=await elasticScheduler.drain({issues:providerIssues,root,
+    globalLedger:ledgerItem.ledger,activeStates,now,
+    api:{get:route=>gh('GET',repoPath+route),post:(route,body)=>gh('POST',repoPath+route,body),
+      patch:(route,body)=>gh('PATCH',repoPath+route,body)}});
   let cachedRegistry=null;
   function runtimeRegistry(refresh=false){
     if(cachedRegistry&&!refresh)return cachedRegistry;
@@ -414,12 +422,12 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     drained.push({issueNumber:issue.number,status:'assigned',workId:item.workId,assignmentId:state.assignmentId,branch,ackDeadlineAt:state.ackDeadlineAt,recovery:Boolean(recovery)});
   }
   await saveLedger(ledgerItem);
-  return {drained,reaped:s.closed,reconciliation,buffered:bufferedResults,bufferedStaged:stagedResults,bufferedCleanup};
+  return {drained,reaped:s.closed,reconciliation,buffered:bufferedResults,bufferedStaged:stagedResults,bufferedCleanup,elastic:elasticResults};
 }
 
 async function main(){
   const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
-  if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length||result.bufferedCleanup.length)console.log(JSON.stringify({ok:true,...result}));
+  if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length||result.bufferedCleanup.length||Object.values(result.elastic||{}).some(v=>Array.isArray(v)&&v.length))console.log(JSON.stringify({ok:true,...result}));
   return result;
 }
 main().catch(error=>{console.error(error);process.exitCode=1});

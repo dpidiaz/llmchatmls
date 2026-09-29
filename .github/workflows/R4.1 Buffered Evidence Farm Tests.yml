@@ -8,6 +8,9 @@ on:
       - 'scripts/R4-1-buffered-remote.cjs'
       - 'scripts/R4-1-buffered-academic-check.cjs'
       - 'scripts/R4-1-bcr.cjs'
+      - 'MLS R32 EDITORIAL/r4 elastic *.cjs'
+      - 'test/r4 elastic bcr.test.cjs'
+      - 'docs/MLS Global Dispatcher/18 R4.2 Elastic BCR.md'
       - 'scripts/R4-1-bcr-canonical-gate.cjs'
       - 'MLS R32 EDITORIAL/r4 buffered context.cjs'
       - 'test/r4 buffered bcr.test.cjs'
@@ -48,6 +51,8 @@ jobs:
       - name: Syntax validation
         run: |
           node --check 'MLS R32 EDITORIAL/r4 buffered core.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 elastic core.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 elastic scheduler.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered academic.cjs'
           node --check 'scripts/R4-1-buffered-academic-check.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered context.cjs'
@@ -68,6 +73,8 @@ jobs:
         run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs' 'test/r4 buffered scheduler integration.test.cjs' 'test/r4 buffered workflow contract.test.cjs'
       - name: BCR 14-case compact context and recovery contract
         run: node --test 'test/r4 buffered bcr.test.cjs'
+      - name: R4.2 elastic disposable chat workers, isolation, queue and recovery
+        run: node --test 'test/r4 elastic bcr.test.cjs'
       - name: R4.1 academic traceability and final publication hold
         run: node --test 'test/r4 buffered academic gate.test.cjs'
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
