@@ -29,13 +29,15 @@ async function reconcile({issues,ledgerItem,get,patchIssue,saveLedger}){
     const ref=await get('/git/ref/heads/'+expectedBranch.split('/').map(encodeURIComponent).join('/'));
     if(String(ref?.object?.sha||'').toLowerCase()!==r.stage.commitSha)throw core.dispatchError('STAGE_HEAD_CHANGED','Staging branch diverged.',409);
     const commit=await get('/commits/'+r.stage.commitSha);
-    const files=Array.isArray(commit?.files)?commit.files:[],allowed=r.allocation.units.map(u=>u.evidenceArtifactPath).sort();
-    const paths=files.map(x=>String(x.filename||'')).sort();
-    if(!commit?.parents||commit.parents.length!==1||files.length!==allowed.length||
-      paths.some((p,i)=>p!==allowed[i])||files.some(x=>!['added','modified'].includes(x.status)))
-      throw core.dispatchError('STAGE_COMMIT_SCOPE_INVALID','Grouped commit does not match allocated Evidence paths.',409);
+    const files=commit?.files,allowed=new Set(r.allocation.units.map(u=>u.evidenceArtifactPath));
+    // A subset is valid when some assigned Evidence paths already existed byte-identically on main.
+    // An all-identical first import still creates its own empty, traceable batch commit.
+    if(!Array.isArray(files)||!commit?.parents||commit.parents.length!==1||
+      commit.commit?.message!=='evidence(r4.1): stage immutable buffer '+r.issueNumber||
+      files.length>allowed.size||files.some(x=>!allowed.has(String(x.filename||''))||!['added','modified'].includes(x.status)))
+      throw core.dispatchError('STAGE_COMMIT_SCOPE_INVALID','Commit identity or changed Evidence paths do not match assigned batch.',409);
     const parent=String(commit.parents[0].sha||'');
-    if(!sha40(parent))throw core.dispatchError('STAGE_PARENT_INVALID');
+    if(!sha40(parent)||parent.toLowerCase()===r.stage.commitSha)throw core.dispatchError('STAGE_PARENT_INVALID');
     const ancestry=await get('/compare/'+r.allocation.baseCommit+'...'+parent);
     if(!['ahead','identical'].includes(ancestry?.status))throw core.dispatchError('STAGE_LINEAGE_CONFLICT','Staged commit not descended from reservation base.',409);
     const codes=r.allocation.units.map(u=>u.code),workId='r33-buffer:'+r.allocation.assignmentId;
