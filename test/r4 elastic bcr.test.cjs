@@ -73,8 +73,8 @@ test('preblock creates an independently validated zero-checkpoint Context Pack f
 test('5 independent blocks never share a writer; sixth disposable chat requires a second 25-unit reservation',()=>{
  let list=[fixture(1881)],received=[];
  for(let k=0;k<6;k++){
-  if(!elastic.freeBlock(list))list.push(fixture(1882,4120));
-  const f=elastic.freeBlock(list),i=request(2000+k);
+  if(!elastic.freeBlock(list,1e12))list.push(fixture(1882,4120));
+  const f=elastic.freeBlock(list,1e12),i=request(2000+k);
   const branch='r42/work/'+f.reservation.issueNumber+'/'+String(f.block.block).padStart(2,'0')+'/'+i.number;
   const next=elastic.lease(f.reservation,f.block,i,{branch,baseSha:PIN,now:1e12,workerLogin:'owner'});
   list[list.findIndex(r=>r.issueNumber===f.reservation.issueNumber)]=next.reservation;
@@ -168,7 +168,7 @@ test('serialized R4.2 worker issue request creates one exclusive branch and pers
  assert.equal(alloc.parseReservation(reservationIssue).elastic.blocks[0].claimIssueNumber,1882);
  assert.match(requestIssue.title,/\[LEASED\]/);
  assert.equal(calls.filter(x=>x.method==='POST').length,1);
- assert.equal(calls.filter(x=>x.method==='PATCH').length,2);
+ assert.equal(calls.filter(x=>x.method==='PATCH').length,3); // preblock adoption, claim reservation and lease issue
 });
 test('bot can own only canonical durable reservation, never forge a REQUEST',()=>{
  const res=fixture(1883),r=issue(res);r.user.login='github-actions[bot]';r.author_association='NONE';
