@@ -39,7 +39,7 @@ jobs:
           node --check 'scripts/MLS global dispatcher scheduler.cjs'
           node --check 'scripts/R4-1-buffered-farm.cjs'
       - name: Buffered Farm transport and safety tests
-        run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs'
+        run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs' 'test/r4 buffered scheduler integration.test.cjs'
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
         run: node --test 'test/r4 buffered real evidence pilot.test.cjs'
       - name: Existing R33 provider regression
