@@ -8,6 +8,7 @@ const r33Core=require('../../evidence farm core.js');
 const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
 const buffered=require('../../r4 buffered allocation.cjs');
+const revisions=require('../../r4 staging supersession.cjs');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
 const READY_QUEUE_TARGET=128;
@@ -134,48 +135,53 @@ function r33CandidateToWork(candidate,now=Date.now()){
     providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
   };
 }
-function r33TerminalSourceMap(globalLedger,pool){
-  const allowed=new Set((pool?.entries||[]).map(x=>String(x.code||'').toUpperCase())),out=new Map();
-  for(const entry of Object.values(globalLedger?.terminal||{})){
-    if(String(entry?.provider||'')!=='r33-farm')continue;
-    for(const raw of Array.isArray(entry?.completedUnits)?entry.completedUnits:[]){
-      const code=String(raw||'').toUpperCase();
-      if(!allowed.has(code))continue;
-      out.set(code,{code,branch:String(entry.branch||''),commitSha:String(entry.commitSha||''),completedAt:String(entry.completedAt||'')});
-    }
+function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
+ const allowed=new Set((pool?.entries||[]).map(x=>String(x.code||'').toUpperCase()));
+ const selector=revisions.load(root),out=new Map();
+ for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
+  if(terminal?.provider!=='r33-farm')continue;
+  const chosen=revisions.choose(workId,terminal,selector,{mode:'integration'});
+  if(chosen.blocked)continue; // Never fall back to an obsolete historical Evidence SHA.
+  for(const raw of terminal.completedUnits||[]){
+   const code=String(raw).toUpperCase();
+   if(!allowed.has(code)||selector.activeHeldCodes.has(code))continue;
+   out.set(code,{code,workId,branch:chosen.branch,commitSha:chosen.commitSha,
+     supersessionRevisionId:chosen.revisionId,revisionAssets:chosen.assets||[],
+     completedAt:String(terminal.completedAt||'')});
   }
-  return out;
+ }
+ return out;
 }
-function r33StagingManifest(globalLedger,{createdAt=null}={}){
-  const rows=[];
-  for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
-    if(!terminal||terminal.provider!=='r33-farm'||!Array.isArray(terminal.completedUnits))continue;
-    for(const code of terminal.completedUnits){
-      rows.push({
-        code:String(code).toUpperCase(),
-        workId,
-        branch:String(terminal.branch||''),
-        commitSha:String(terminal.commitSha||''),
-        completedAt:terminal.completedAt||null
-      });
-    }
+function r33StagingManifest(globalLedger,{createdAt=null,root='.'}={}){
+ const selector=revisions.load(root),rows=[],assets=new Map(),revisionSelections=[];
+ for(const [workId,t] of Object.entries(globalLedger?.terminal||{})){
+  if(t?.provider!=='r33-farm'||!Array.isArray(t.completedUnits))continue;
+  const s=revisions.choose(workId,t,selector,{mode:'rehearsal'});
+  if(s.revisionId){
+   revisionSelections.push({workId,revisionId:s.revisionId,branch:s.branch,
+     commitSha:s.commitSha,originalCommitSha:s.originalCommitSha,academicHold:s.academicHold});
+   for(const asset of s.assets){
+    const previous=assets.get(asset.path);
+    if(previous&&previous.commitSha!==asset.commitSha)throw integrationError('R4_REVISION_ASSET_CONFLICT',asset.path,409);
+    assets.set(asset.path,asset);
+   }
   }
-  rows.sort((a,b)=>a.code.localeCompare(b.code)||a.workId.localeCompare(b.workId));
-  const byCode=new Map();
-  for(const row of rows){
-    const prior=byCode.get(row.code);
-    if(prior&&prior.commitSha!==row.commitSha)throw integrationError('R4_STAGING_CONFLICT','Más de un commit certificado para '+row.code+'.',409);
-    byCode.set(row.code,row);
-  }
-  const entries=[...byCode.values()];
-  const digest=globalCore.sha256(JSON.stringify(entries.map(({code,workId,branch,commitSha})=>({code,workId,branch,commitSha}))));
-  return {
-    kind:'r33_staging_manifest',version:1,
-    createdAt:createdAt||new Date().toISOString(),
-    entryCount:entries.length,
-    snapshotHash:digest,
-    entries
-  };
+  for(const code of t.completedUnits)rows.push({code:String(code).toUpperCase(),workId,
+    branch:s.branch,commitSha:s.commitSha,completedAt:t.completedAt||null,
+    supersessionRevisionId:s.revisionId,academicHold:s.academicHold});
+ }
+ rows.sort((a,b)=>a.code.localeCompare(b.code)||a.workId.localeCompare(b.workId));
+ const byCode=new Map();
+ for(const row of rows){
+  const prior=byCode.get(row.code);
+  if(prior&&prior.commitSha!==row.commitSha)throw integrationError('R4_STAGING_CONFLICT',row.code,409);
+  byCode.set(row.code,row);
+ }
+ const entries=[...byCode.values()];
+ const digest=globalCore.sha256(JSON.stringify(entries.map(({code,workId,branch,commitSha})=>({code,workId,branch,commitSha}))));
+ return {kind:'r33_staging_manifest',version:1,createdAt:createdAt||new Date().toISOString(),
+  entryCount:entries.length,snapshotHash:digest,entries,revisionSelections,
+  assetRefs:[...assets.values()].sort((a,b)=>a.path.localeCompare(b.path))};
 }
 
 function r33IntegratedCodes(root='.',verifiedCodes=null){
@@ -235,12 +241,21 @@ function r33ContinuationPool({root='.',basePool,verifiedCodes=null,corpusEntries
     entries
   };
 }
+function r33RevisionAssets(sourceRefs){
+ const byPath=new Map();
+ for(const ref of sourceRefs||[])for(const asset of ref.revisionAssets||[]){
+  const prior=byPath.get(asset.path);
+  if(prior&&prior.commitSha!==asset.commitSha)throw integrationError('R4_REVISION_ASSET_CONFLICT',asset.path,409);
+  byPath.set(asset.path,asset);
+ }
+ return [...byPath.values()].sort((a,b)=>a.path.localeCompare(b.path));
+}
 function r33IntegrationWaves({pool,globalLedger,root='.',waveSize=50,verifiedCodes=null}={}){
   if(!pool||!Array.isArray(pool.entries))return [];
   const size=Number(waveSize);
   if(!Number.isInteger(size)||size<1)throw integrationError('R33_INTEGRATION_WAVE_INVALID','waveSize inválido para R33 integration.',500);
-  const sources=r33TerminalSourceMap(globalLedger,pool),integrated=r33IntegratedCodes(root,verifiedCodes);
-  const remaining=pool.entries.filter(x=>!integrated.has(x.code)),waves=[];
+  const sources=r33TerminalSourceMap(globalLedger,pool,{root}),integrated=r33IntegratedCodes(root,verifiedCodes),held=revisions.load(root).activeHeldCodes;
+  const remaining=pool.entries.filter(x=>!integrated.has(x.code)&&!held.has(x.code)),waves=[];
   for(let offset=0;offset<remaining.length;offset+=size){
     const units=remaining.slice(offset,offset+size);
     if(!units.length||units.some(x=>!sources.has(x.code)))continue;
@@ -268,12 +283,12 @@ function r33IndexPreparationWorks({pool,globalLedger,root='.',waveSize=50,verifi
       workType:'code_task',status:'ready',priority:8,createdAt:new Date().toISOString(),provider:'r33-index-preparation',
       units:wave.codes,sourceRefs:wave.sourceRefs,dependsOn:[],
       resourceLocks:['system:r33-index-preparation:'+wave.first+':'+wave.last,...wave.codes.map(code=>'entry:'+code)],
-      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
+      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),...r33RevisionAssets(wave.sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
       validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-      instructions:'PREPARATION ONLY: integra exactamente los Evidence blobs de sourceRefs en la rama asignada desde main; regenera los 4 índices con npm run r33:indexes:write; ejecuta npm run test:r33-github-native; abre un PR a main y déjalo sin mergear. Esta fase no posee system:main-integration y puede coexistir con otras preparaciones. Checkpoint/finish deben apuntar al HEAD exacto y validation debe registrar el PR preparado. sourceRefs='+sourceRefsJson,
+      instructions:'PREPARATION ONLY: integra los Evidence blobs de sourceRefs y todos los revisionAssets fijados por SHA en la rama asignada desde main; regenera los 4 índices con npm run r33:indexes:write; ejecuta npm run test:r33-github-native; abre un PR a main y déjalo sin mergear. Esta fase no posee system:main-integration y puede coexistir con otras preparaciones. Checkpoint/finish deben apuntar al HEAD exacto y validation debe registrar el PR preparado. sourceRefs='+sourceRefsJson,
       branchPolicy:{mode:'assignment',prefix:'worker/r33-index-preparation'},
       completion:{requiresCommit:true,requiresValidation:true},
-      preparation:{mode:'parallel-pr',base:'main',merge:false,sourceRefs:wave.sourceRefs}
+      preparation:{mode:'parallel-pr',base:'main',merge:false,sourceRefs:wave.sourceRefs,revisionAssets:r33RevisionAssets(wave.sourceRefs)}
     };
   });
 }
@@ -297,12 +312,12 @@ function r33PreparedIndexIntegrationWork({pool,globalLedger,root='.',waveSize=50
       workType:'integration',status:'ready',priority:12,createdAt:new Date().toISOString(),provider:'r33-index-integration',
       units:wave.codes,sourceRefs:wave.sourceRefs,dependsOn:[],
       resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...wave.codes.map(code=>'entry:'+code)],
-      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
+      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),...r33RevisionAssets(wave.sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
       validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-      instructions:'FINAL SERIAL PHASE: usa preparedRef como artefacto certificado, pero construye la rama asignada desde el main vigente. Copia exactamente los 50 Evidence blobs preparados, regenera los 4 índices contra ese main, ejecuta npm run test:r33-github-native, abre/usa el PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Tras el merge, cierra el PR de preparación si sigue abierto. No modifiques Sources ni contenido canónico.',
+      instructions:'FINAL SERIAL PHASE: usa preparedRef como artefacto certificado, pero construye la rama asignada desde el main vigente. Copia exactamente los 50 Evidence blobs preparados, regenera los 4 índices contra ese main, ejecuta npm run test:r33-github-native, abre/usa el PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Tras el merge, cierra el PR de preparación si sigue abierto. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
       branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
       completion:{requiresCommit:true,requiresValidation:true},
-      integration:{mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests'],sourceRefs:wave.sourceRefs,preparedRef:{workId:preparationWorkId,branch:preparedBranch,commitSha:preparedCommitSha}}
+      integration:{mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests'],sourceRefs:wave.sourceRefs,revisionAssets:r33RevisionAssets(wave.sourceRefs),preparedRef:{workId:preparationWorkId,branch:preparedBranch,commitSha:preparedCommitSha}}
     };
   }
   return null;
@@ -312,8 +327,8 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
   if(!pool||!Array.isArray(pool.entries))return null;
   const size=Number(waveSize??pool?.execution?.integrationWaveSize??50);
   if(!Number.isInteger(size)||size<1)throw integrationError('R33_INTEGRATION_WAVE_INVALID','waveSize inválido para R33 integration.',500);
-  const sources=r33TerminalSourceMap(globalLedger,pool),integrated=r33IntegratedCodes(root,verifiedCodes);
-  const remaining=pool.entries.filter(x=>!integrated.has(String(x.code||'').toUpperCase()));
+  const sources=r33TerminalSourceMap(globalLedger,pool,{root}),integrated=r33IntegratedCodes(root,verifiedCodes),held=revisions.load(root).activeHeldCodes;
+  const remaining=pool.entries.filter(x=>!integrated.has(String(x.code||'').toUpperCase())&&!held.has(String(x.code||'').toUpperCase()));
   if(!remaining.length)return null;
   const units=remaining.slice(0,size);
   if(!units.length||units.some(x=>!sources.has(String(x.code||'').toUpperCase())))return null;
@@ -327,9 +342,9 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
     workType:'integration',status:'ready',priority:12,createdAt:new Date().toISOString(),provider:'r33-index-integration',
     units:codes,sourceRefs,dependsOn:[],
     resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...codes.map(code=>'entry:'+code)],
-    allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
+    allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),...r33RevisionAssets(sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
     validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-    instructions:'WAVE FINAL PHASE: construye la rama asignada desde el main vigente y agrega exactamente los Evidence blobs certificados por sourceRefs, aunque provengan de múltiples workers/commits. No regeneres índices por worker: copia todos los Evidence de la wave y ejecuta npm run r33:indexes:write una sola vez al final. Ejecuta npm run test:r33-github-native, abre/usa un único PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. No modifiques Sources ni contenido canónico.',
+    instructions:'WAVE FINAL PHASE: construye la rama asignada desde el main vigente y agrega exactamente los Evidence blobs certificados por sourceRefs y sus revisionAssets, aunque provengan de múltiples workers/commits. No regeneres índices por worker: copia todos los Evidence de la wave y ejecuta npm run r33:indexes:write una sola vez al final. Ejecuta npm run test:r33-github-native, abre/usa un único PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
     completion:{requiresCommit:true,requiresValidation:true},
     integration:{
@@ -339,7 +354,7 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
       mergeMethod:'merge',
       requiredChecks:['R33 GitHub Native Tests'],
       postMergeChecks:['R33 GitHub Native Tests'],
-      sourceRefs,
+      sourceRefs,revisionAssets:r33RevisionAssets(sourceRefs),
       waveSize:size,
       sourceWorkerCommits:[...new Set(sourceRefs.map(x=>x.commitSha).filter(Boolean))]
     }
