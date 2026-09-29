@@ -78,14 +78,15 @@ async function cleanupSyncRequests({issues,ledgerItem,patchIssue}){
     let request;try{request=verifier.requestFromIssue(issue);}catch{continue;}
     const workId='r33-buffer:MLS-BUFFER-'+String(request.issueNumber).padStart(6,'0');
     const terminal=ledgerItem.ledger.terminal?.[workId];
-    if(!terminal||terminal.status!=='certified'||terminal.syncRequestIssueNumber!==request.requestIssueNumber)continue;
-    const title='[MLS Buffered][SYNCED] '+terminal.assignmentId;
-    const body='## R4.1 Buffer synchronization completed\n\n'+JSON.stringify({
+    if(!terminal||terminal.status!=='certified')continue;
+    const superseded=terminal.syncRequestIssueNumber!==request.requestIssueNumber;
+    const title='[MLS Buffered]'+(superseded?'[SUPERSEDED] ':'[SYNCED] ')+terminal.assignmentId;
+    const body='## R4.1 Buffer synchronization '+(superseded?'superseded by another certified request':'completed')+'\n\n'+JSON.stringify({
       reservationIssueNumber:request.issueNumber,requestIssueNumber:request.requestIssueNumber,
       commitSha:terminal.commitSha,packageHash:terminal.bufferPackageHash,confirmedAt:core.iso()},null,2)+'\n';
     await patchIssue(issue.number,{title,body,state:'closed',state_reason:'completed'});
     issue.title=title;issue.body=body;issue.state='closed';
-    result.push({issue:issue.number,status:'SYNC_REQUEST_CLOSED'});
+    result.push({issue:issue.number,status:superseded?'SUPERSEDED_SYNC_REQUEST':'SYNC_REQUEST_CLOSED'});
   }
   return result;
 }
