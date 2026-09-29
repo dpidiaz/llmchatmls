@@ -25,7 +25,7 @@ function request(number,requestId='elastic-request-'+number,action='next',rest={
  const payload={kind:'mls_bcr_elastic_command',version:1,action,requestId,...rest};
  return {number,state:'open',author_association:'OWNER',user:{login:'owner'},
   created_at:new Date(when).toISOString(),
-  title:'[MLS Dispatcher][BCR]['+action.toUpperCase()+'] '+requestId,
+  title:'[MLS Dispatcher][BCR]['+(action==='next'?'REQUEST':action.toUpperCase())+'] '+requestId,
   body:elastic.renderCommand(payload)};
 }
 function issue(res){
