@@ -148,7 +148,7 @@ async function reconcileExpired(api,reservations,now){
    const latest=await refHead(api,b.branch);
    requireOk(latest,'EXPIRED_BRANCH_MISSING');
    if(latest!==b.baseSha){
-    const diff=await api.get('/compare/'+res.allocation.baseCommit+'...'+latest);
+    const diff=await api.get('/compare/'+b.baseSha+'...'+latest);
     const prefix=PREFIX+res.issueNumber+'/blocks/'+String(b.block).padStart(2,'0')+'/';
     // Never silently recover content written outside the isolated block scope.
     requireOk(['ahead','identical'].includes(diff.status)&&
@@ -319,7 +319,7 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
    if(block.recovery){
     source=await refHead(api,block.recovery.branch);
     requireOk(source&&source===block.recovery.headSha,'RECOVERY_BRANCH_DRIFT');
-    const compare=await api.get('/compare/'+res.allocation.baseCommit+'...'+source);
+    const compare=await api.get('/compare/'+block.recovery.originalBaseSha+'...'+source);
     const prefix=PREFIX+res.issueNumber+'/blocks/'+String(block.block).padStart(2,'0')+'/';
     requireOk(['ahead','identical'].includes(compare.status)&&
      (compare.files||[]).every(f=>f.filename.startsWith(prefix)),'RECOVERY_SCOPE_REJECTED');
