@@ -227,6 +227,9 @@ async function processBufferedRequests(issues,globalLedger,activeStates,now){
         const target=issues.find(row=>Number(row.number)===command.targetIssueNumber);
         if(!target||target.state!=='open')throw core.dispatchError('BUFFER_RELEASE_TARGET_MISSING','No open reservation with this issue number.',409);
         const old=buffered.parseReservation(target);
+        // A successfully staged commit must first complete the immutable CI/ledger reconciliation.
+        if(old.status==='staged')throw core.dispatchError('STAGED_RELEASE_REQUIRES_RECONCILIATION',
+          'Do not release an in-flight STAGED batch before the serial finalizer has persisted its outcome.',409);
         const nextTitle='[MLS Buffered][RELEASED] '+old.allocation.assignmentId;
         const detail=buffered.renderReservation(old)+'\n\n## Explicit release / recovery review\n'+
           JSON.stringify({requestIssue:issue.number,reason:command.reason,recoveryReviewed:true,releasedAt:core.iso(now)},null,2)+'\n';
