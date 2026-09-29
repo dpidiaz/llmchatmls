@@ -119,10 +119,15 @@ async function verifyClaimCompletion(api,res,block,command,issue,now){
   String(claim?.title||'').startsWith('[MLS Dispatcher][BCR][LEASED]'),'CLAIM_NOT_OWNER');
  const sha=await refHead(api,block.branch);
  requireOk(sha===command.headSha&&sha!==block.baseSha,'REMOTE_BLOCK_NOT_COMMITTED');
- const compare=await api.get('/compare/'+res.allocation.baseCommit+'...'+sha);
- requireOk(['ahead','identical'].includes(compare.status),'BLOCK_NOT_DESCENDANT');
- requireOk((compare.files||[]).every(f=>f.filename.startsWith('r41-buffer/'+res.issueNumber+'/')||
-   f.filename.startsWith(PREFIX+res.issueNumber+'/blocks/'+String(block.block).padStart(2,'0')+'/')),
+ const master=await refHead(api,'r41/buffer/'+res.issueNumber);
+ requireOk(master,'BLOCK_MASTER_MISSING');
+ // Compare against the immutable zero-checkpoint master buffer, not main.
+ // Any worker modification to a manifest, checkpoint outside its block, or
+ // another reservation is rejected even if its chunk looks valid.
+ const compare=await api.get('/compare/'+master+'...'+sha);
+ requireOk(compare.status==='ahead','BLOCK_NOT_DESCENDANT');
+ requireOk((compare.files||[]).every(f=>f.filename.startsWith(
+   PREFIX+res.issueNumber+'/blocks/'+String(block.block).padStart(2,'0')+'/')),
    'BLOCK_FOREIGN_PATH');
  const filePath=PREFIX+res.issueNumber+'/blocks/'+String(block.block).padStart(2,'0')+
   '/chunk-'+String(block.block).padStart(2,'0')+'-of-05.json';
