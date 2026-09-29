@@ -4,6 +4,9 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const cp=require('node:child_process');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const {createRequire}=require('node:module');
 const path=require('node:path');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
@@ -20,8 +23,7 @@ test('one authenticated buffer Issue reserves ten disjoint units and replay caus
  const rows=[ledgerIssue,issue],calls=[];
  function response(data){return {status:200,ok:true,headers:{get:()=>null},
   text:async()=>JSON.stringify(data)};}
- const original=global.fetch,previousToken=process.env.GITHUB_TOKEN,previousRepo=process.env.GITHUB_REPOSITORY;
- global.fetch=async(url,opts={})=>{
+ const fakeFetch=async(url,opts={})=>{
   const u=new URL(url),method=opts.method||'GET',p=u.pathname,c={method,path:p,query:u.search};
   calls.push(c);
   assert.equal(u.host,'api.github.com');
@@ -33,24 +35,21 @@ test('one authenticated buffer Issue reserves ten disjoint units and replay caus
   }
   throw Error('Unexpected GitHub call '+JSON.stringify(c));
  };
- process.env.GITHUB_TOKEN='mock-only-not-a-credential';
- process.env.GITHUB_REPOSITORY='test/r41';
- try{
-   // This script now exports main() only when imported; it does not start an uncontrolled task.
-   const scheduler=require('../scripts/MLS global dispatcher scheduler.cjs');
-   const first=await scheduler.main();
+ const schedulerFile=path.resolve(root,'scripts/MLS global dispatcher scheduler.cjs');
+ const source=fs.readFileSync(schedulerFile,'utf8').replace(/main\(\)\.catch\([\s\S]*$/,'');
+ const sandbox=vm.createContext({require:createRequire(schedulerFile),__dirname:path.dirname(schedulerFile),
+   structuredClone,fetch:fakeFetch,process:{env:{GITHUB_TOKEN:'mock-only-not-a-credential',GITHUB_REPOSITORY:'test/r41'}},console});
+ vm.runInContext(source,sandbox);
+ {
+   const first=await sandbox.main();
    assert.equal(first.buffered.length,1);
    assert.equal(first.buffered[0].count,10);
    const reservation=buffered.parseReservation(issue);
    assert.equal(reservation.allocation.units.length,10);
    assert.equal(reservation.allocation.baseCommit,head);
    assert.equal(calls.filter(x=>x.method==='PATCH').length,1);
-   const second=await scheduler.main();
+   const second=await sandbox.main();
    assert.equal(second.buffered.length,0);
    assert.equal(calls.filter(x=>x.method==='PATCH').length,1,'Replay must not write the same reservation twice.');
- }finally{
-   global.fetch=original;
-   if(previousToken===undefined)delete process.env.GITHUB_TOKEN;else process.env.GITHUB_TOKEN=previousToken;
-   if(previousRepo===undefined)delete process.env.GITHUB_REPOSITORY;else process.env.GITHUB_REPOSITORY=previousRepo;
  }
 });
