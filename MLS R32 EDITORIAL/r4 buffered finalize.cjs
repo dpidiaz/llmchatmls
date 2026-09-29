@@ -3,6 +3,7 @@
 const allocation=require('./r4 buffered allocation.cjs');
 const core=require('./global dispatcher/core.js');
 const providers=require('./global dispatcher/providers/integration.js');
+const verifier=require('./r4 buffered verify.cjs');
 const sha40=x=>/^[a-f0-9]{40}$/i.test(String(x||''));
 function codesFromRecovery(r){return [...(r.completedUnits||[]),...providers.codesFromLocks(r.resourceLocks||r.workItem?.resourceLocks||[])];}
 function conflicting(a,b){const set=new Set(a);return b.some(x=>set.has(x));}
@@ -53,7 +54,7 @@ async function reconcile({issues,ledgerItem,get,patchIssue,saveLedger}){
     }else{
       ledger.terminal[workId]={status:'certified',workVersion:1,assignmentId:r.allocation.assignmentId,
         commitSha:r.stage.commitSha,branch:r.stage.branch,provider:'r33-farm',completedUnits:codes,
-        bufferPackageHash:r.stage.packageHash,completedAt:core.iso()};
+        bufferPackageHash:r.stage.packageHash,syncRequestIssueNumber:r.stage.syncRequestIssueNumber,completedAt:core.iso()};
       ledger.epochs[workId]=Math.max(Number(ledger.epochs[workId]||0),r.allocation.leaseEpoch);
       ledgerItem.dirty=true;
       await saveLedger();
@@ -68,4 +69,22 @@ async function reconcile({issues,ledgerItem,get,patchIssue,saveLedger}){
   }
   return outcome;
 }
-module.exports={reconcile};
+async function cleanupSyncRequests({issues,ledgerItem,patchIssue}){
+  const result=[];
+  for(const issue of issues||[]){
+    if(!String(issue?.title||'').startsWith('[MLS Buffered][SYNC]'))continue;
+    let request;try{request=verifier.requestFromIssue(issue);}catch{continue;}
+    const workId='r33-buffer:MLS-BUFFER-'+String(request.issueNumber).padStart(6,'0');
+    const terminal=ledgerItem.ledger.terminal?.[workId];
+    if(!terminal||terminal.status!=='certified'||terminal.syncRequestIssueNumber!==request.requestIssueNumber)continue;
+    const title='[MLS Buffered][SYNCED] '+terminal.assignmentId;
+    const body='## R4.1 Buffer synchronization completed\n\n'+JSON.stringify({
+      reservationIssueNumber:request.issueNumber,requestIssueNumber:request.requestIssueNumber,
+      commitSha:terminal.commitSha,packageHash:terminal.bufferPackageHash,confirmedAt:core.iso()},null,2)+'\n';
+    await patchIssue(issue.number,{title,body,state:'closed',state_reason:'completed'});
+    issue.title=title;issue.body=body;issue.state='closed';
+    result.push({issue:issue.number,status:'SYNC_REQUEST_CLOSED'});
+  }
+  return result;
+}
+module.exports={reconcile,cleanupSyncRequests};
