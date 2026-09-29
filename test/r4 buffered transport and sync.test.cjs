@@ -98,6 +98,7 @@ test('successful independent workflow run finalizes ledger and closes reservatio
   if(p.startsWith('/actions/runs/'))return {name:'R4.1 Buffered Sync',status:'completed',conclusion:'success',event:'issues'};
   if(p.startsWith('/git/ref/'))return {object:{sha:'c'.repeat(40)}};
   if(p.startsWith('/commits/'))return {parents:[{sha:'a'.repeat(40)}],
+   commit:{message:'evidence(r4.1): stage immutable buffer 8801'},
    files:a.units.map(u=>({filename:u.evidenceArtifactPath,status:'added'}))};
   if(p.startsWith('/compare/'))return {status:'identical'};
   throw Error(p);
