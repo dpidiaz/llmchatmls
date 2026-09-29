@@ -8,6 +8,9 @@ const REQUEST_MARKER='MLS_BUFFERED_REQUEST';
 const RESERVATION_MARKER='MLS_BUFFERED_RESERVATION';
 const BUFFERED_TITLE='[MLS Buffered]';
 const LIVE=new Set(['reserved','staged','quarantined']);
+// Durable production ceiling. Larger campaigns must use independent reservations.
+const ALLOWED_NEW_BATCH_SIZES=Object.freeze([10,25]);
+const MAX_NEW_BATCH_SIZE=25;
 function fail(code,message){throw core.dispatchError(code,message||code,409);}
 function marker(text,name){
   const body=String(text||'');
@@ -21,7 +24,7 @@ function parseRequest(issue){
   if(x?.kind!=='mls_buffer_request'||x.version!==1)fail('BUFFER_REQUEST_SCHEMA');
   if(!/^[A-Za-z0-9._:-]{8,120}$/.test(String(x.requestId||'')))fail('BUFFER_REQUEST_ID');
   if(!['reserve','release'].includes(x.mode))fail('BUFFER_REQUEST_MODE');
-  if(x.mode==='reserve'&&![10,25,50,100].includes(x.size))fail('BUFFER_REQUEST_SIZE','Size must be 10, 25, 50 or 100.');
+  if(x.mode==='reserve'&&!ALLOWED_NEW_BATCH_SIZES.includes(x.size))fail('BUFFER_REQUEST_SIZE','Maximum 25 per reservation (supported: 10 or 25); split larger campaigns into independently verified lots.');
   if(x.mode==='release'&&(!Number.isSafeInteger(x.targetIssueNumber)||x.targetIssueNumber<1||x.recoveryReviewed!==true||String(x.reason||'').trim().length<12))
     fail('BUFFER_RELEASE_REVIEW_REQUIRED','Release requires issue, explicit recovery review and reason.');
   return x;
@@ -109,7 +112,7 @@ function reservations(issues){
   return result;
 }
 function allocate(snapshot,{size,issueNumber,requestId,baseCommit,contentManifestBlobSha,now=Date.now()}){
-  if(![10,25,50,100].includes(size)||!Number.isSafeInteger(issueNumber)||issueNumber<1)fail('BUFFER_REQUEST_INVALID');
+  if(!ALLOWED_NEW_BATCH_SIZES.includes(size)||size>MAX_NEW_BATCH_SIZE||!Number.isSafeInteger(issueNumber)||issueNumber<1)fail('BUFFER_REQUEST_INVALID');
   const c=r33.materializeCandidates(snapshot,{now,count:size,requested:1});
   if(c.length!==size)fail('BUFFER_CAPACITY_BUSY','Only '+c.length+' of '+size+' eligible unowned units.');
   const units=c.flatMap(x=>x.units).map(u=>({code:u.code,language:u.language,contentPath:u.contentPath,evidenceArtifactPath:u.evidenceArtifactPath}));
@@ -136,5 +139,5 @@ function quarantine(r,reason){
   const next={...r,status:'quarantined',quarantine:{reason:String(reason).slice(0,180),at:core.iso()}};
   return {...next,recordHash:recordHash(next)};
 }
-module.exports={REQUEST_MARKER,RESERVATION_MARKER,BUFFERED_TITLE,parseRequest,requestAuthorized,normalizeAllocation,
+module.exports={REQUEST_MARKER,RESERVATION_MARKER,BUFFERED_TITLE,ALLOWED_NEW_BATCH_SIZES,MAX_NEW_BATCH_SIZE,parseRequest,requestAuthorized,normalizeAllocation,
   reservation,renderReservation,parseReservation,reservations,allocate,stage,quarantine,recordHash};

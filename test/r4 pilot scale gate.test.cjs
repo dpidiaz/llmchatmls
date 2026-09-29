@@ -48,9 +48,9 @@ test('missing SHA/run, primary source coverage, altered scope or false human lab
  const drift=signed();drift.entries.get(workId).hold.replacementApproval.commitSha='1'.repeat(40);
  assert.throws(()=>s.assertScaledPilotReady(25,drift),/R41_AI_EVIDENCE_APPROVAL_INVALID/);
 });
-test('Gate 50/100 still disabled after pilot 10, even with AI verification',()=>{
- assert.throws(()=>s.assertScaledPilotReady(50,signed()),/R41_SCALE_GATE_NOT_CERTIFIED/);
- assert.throws(()=>s.assertScaledPilotReady(100,signed()),/R41_SCALE_GATE_NOT_CERTIFIED/);
+test('permanent 25-entry maximum: Gate 50/100 cannot be enabled even with AI verification',()=>{
+ for(const size of [26,50,100])
+  assert.throws(()=>s.assertScaledPilotReady(size,signed()),/R41_BATCH_SIZE_LIMIT_25/);
 });
 test('serial Scheduler validates exact existing stage SHA and GitHub Action success, not a human comment',()=>{
  const txt=fs.readFileSync(path.join(root,'scripts/MLS global dispatcher scheduler.cjs'),'utf8');
