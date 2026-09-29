@@ -27,7 +27,9 @@ async function exclusive(dir,fn){
   try{return await fn();}finally{fs.rmdirSync(lock);}
 }
 function normalizeAssignment(a){
-  if(a?.allocatedBy!=='global-dispatcher')error('DISPATCHER_EXPORT_REQUIRED','Never synthesize a lease offline.');
+  const pilot=a?.allocatedBy==='offline-pilot'&&a.pilotOnly===true;
+  if(!pilot&&a?.allocatedBy!=='global-dispatcher')error('DISPATCHER_EXPORT_REQUIRED','Never synthesize a live lease offline.');
+  if(pilot&&!String(a.assignmentId||'').startsWith('MLS-PILOT-'))error('PILOT_ID_REQUIRED');
   if(!/^[A-Za-z0-9._:-]{8,160}$/.test(String(a.assignmentId||'')))error('INVALID_ASSIGNMENT_ID');
   if(!Number.isSafeInteger(a.assignmentIssueNumber)||a.assignmentIssueNumber<1||!Number.isSafeInteger(a.leaseEpoch)||a.leaseEpoch<1)error('INVALID_ASSIGNMENT_EPOCH');
   for(const field of ['baseCommit','contentManifestBlobSha'])if(!/^[a-f0-9]{40}$/i.test(String(a[field]||'')))error('INVALID_SHA',field);
@@ -42,7 +44,7 @@ function normalizeAssignment(a){
     if(u.evidenceArtifactPath&&u.evidenceArtifactPath!==evidenceArtifactPath)error('ENTRY_PATH_MISMATCH');
     return {code,language,contentPath,evidenceArtifactPath};
   });
-  return {allocatedBy:'global-dispatcher',assignmentId:a.assignmentId,assignmentIssueNumber:a.assignmentIssueNumber,leaseEpoch:a.leaseEpoch,
+  return {...(pilot?{pilotOnly:true}:{}),allocatedBy:pilot?'offline-pilot':'global-dispatcher',assignmentId:a.assignmentId,assignmentIssueNumber:a.assignmentIssueNumber,leaseEpoch:a.leaseEpoch,
     poolId:String(a.poolId),manifestVersion:String(a.manifestVersion),baseCommit:String(a.baseCommit).toLowerCase(),
     contentManifestBlobSha:String(a.contentManifestBlobSha).toLowerCase(),units};
 }
