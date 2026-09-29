@@ -182,3 +182,19 @@ test('live verifier never derives R33 eligibility from staged checkout',async t=
  assert.equal(observedRoot,canonical);
  assert.equal(out.codes.length,10);
 });
+
+test('duplicate sync requests are retired after one certified package; prior pending run cannot retain live Issue',async()=>{
+ const makeIssue=n=>({number:n,title:'[MLS Buffered][SYNC] retry',author_association:'OWNER',state:'open',
+   body:'<!-- MLS_BUFFERED_SYNC_REQUEST\n'+JSON.stringify({
+    kind:'mls_buffer_sync_request',version:1,reservationIssueNumber:8801,inboxBranch:'r41/inbox/8801'
+   })+'\n-->'});
+ const issues=[makeIssue(9900),makeIssue(9901)],patches=[];
+ const ledgerItem={ledger:{terminal:{'r33-buffer:MLS-BUFFER-008801':{
+   status:'certified',assignmentId:'MLS-BUFFER-008801',syncRequestIssueNumber:9901,
+   commitSha:'c'.repeat(40),bufferPackageHash:'d'.repeat(64)}}}};
+ const result=await finalize.cleanupSyncRequests({issues,ledgerItem,
+   patchIssue:async(number,patch)=>patches.push({number,...patch})});
+ assert.deepEqual(result.map(x=>x.status),['SUPERSEDED_SYNC_REQUEST','SYNC_REQUEST_CLOSED']);
+ assert.equal(patches.length,2);
+ assert.equal(issues.every(x=>x.state==='closed'),true);
+});
