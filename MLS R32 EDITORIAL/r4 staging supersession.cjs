@@ -15,6 +15,28 @@ function safeAsset(p,codes){
  }
  return /^MLS R32 EDITORIAL\/evidence git\/registry\/sources\/MLS-SRC-[A-F0-9]{16,32}\.json$/.test(p);
 }
+
+/*
+ * AI-only editorial evidence protocol. VERIFIED means an AI-assisted source
+ * cross-check and canonical validations were recorded; never human REVIEWED.
+ * No paid API, no named-person attestation, no automatic production deploy.
+ */
+const AI_PROTOCOL='MLS_R41_AI_EVIDENCE_V1';
+function assertAiApproval(r,approval){
+ const a=approval||{},second=r.academicSecondPass||{},replacement=r.replacement||{};
+ assert(a.protocol===AI_PROTOCOL&&a.revisionId===r.revisionId&&a.commitSha===replacement.commitSha&&
+   a.stageBranch===replacement.branch&&a.generatedWithAI===true&&a.humanReviewed===false&&
+   a.reviewerType==='ai'&&a.sourceReviewMode==='primary_source_text_and_exact_sections'&&
+   a.entriesChecked===r.codes.length&&a.claimsChecked===second.checkedClaims&&
+   a.sourceLinksChecked===second.sourceLinks&&a.reportPath===second.reportPath&&
+   a.validationRunId===replacement.ciRunId&&
+   a.pdfVisualStatus==='not_verified_text_passages_checked'&&
+   typeof a.verifiedAt==='string'&&!Number.isNaN(Date.parse(a.verifiedAt))&&
+   a.limitsAcknowledged===true,
+   'R41_AI_EVIDENCE_APPROVAL_INVALID',r.workId);
+ return a;
+}
+
 function parseRegistry(reg,inventory){
  if(!reg)return {entries:new Map(),activeHeldCodes:new Set()};
  assert(reg.kind==='mls_r33_staging_supersessions'&&reg.schemaVersion==='1.0'&&Array.isArray(reg.entries),
@@ -51,6 +73,7 @@ function parseRegistry(reg,inventory){
   assert(!!hold&&hold.commitSha===original.commitSha&&hold.packageHash===original.packageHash&&
     equalCodes(hold.codes,r.codes),'SUPERSESSION_ORIGINAL_HOLD_MISMATCH',workId);
   assert(['active','resolved'].includes(hold.status),'SUPERSESSION_UNKNOWN_HOLD_STATE',workId);
+  if(hold.status==='resolved')assertAiApproval(r,hold.replacementApproval);
   entries.set(workId,{record:r,hold});
  }
  return {entries,activeHeldCodes};
@@ -75,12 +98,8 @@ function choose(workId,terminal,selection,{mode='rehearsal'}={}){
   if(mode==='integration')return {blocked:true,academicHold:true,revisionId:r.revisionId,
    originalCommitSha:r.original.commitSha,branch:r.replacement.branch,commitSha:r.replacement.commitSha};
  }else{
-  // Only an explicit reviewed release on the exact revision SHA can enable final integration.
-  const approval=hold.replacementApproval||{};
-  assert(approval.revisionId===r.revisionId&&approval.commitSha===r.replacement.commitSha&&
-   typeof approval.reviewer==='string'&&approval.reviewer.trim().length>2&&
-   typeof approval.reviewedAt==='string'&&!Number.isNaN(Date.parse(approval.reviewedAt))&&
-   approval.independentAcademicReview===true,'SUPERSESSION_EXPLICIT_APPROVAL_REQUIRED',workId);
+  // Source-precise AI verification may clear the quality hold without claiming human REVIEWED.
+  assertAiApproval(r,hold.replacementApproval);
  }
  return {blocked:false,branch:r.replacement.branch,commitSha:r.replacement.commitSha,
   revisionId:r.revisionId,originalCommitSha:r.original.commitSha,academicHold:hold.status==='active',
@@ -89,29 +108,22 @@ function choose(workId,terminal,selection,{mode='rehearsal'}={}){
 }
 
 /**
- * Gate for opt-in expansion beyond the original ten. This only validates a
- * recorded human attestation; the Scheduler authenticates its GitHub comment.
- * Gate 50/100 requires a separate measured/certified Gate 25 first.
+ * First expansion is allowed by immutable AI academic evidence, NOT a human
+ * sign-off. Gate 50/100 must be separately enabled after Gate 25 validation.
+ * Runtime Scheduler re-checks the pinned stage ref and successful Actions run.
  */
 function assertScaledPilotReady(size,selection){
  if(size===10)return [];
- assert(size===25,'R41_SCALE_GATE_NOT_CERTIFIED','Only Gate 25 may follow pilot 10.');
+ assert(size===25,'R41_SCALE_GATE_NOT_CERTIFIED','Gate 50/100 need their own pilot.');
  assert(selection?.entries instanceof Map&&selection.entries.size>0,'R41_PILOT_HISTORY_MISSING');
  const out=[];
  for(const [workId,data] of selection.entries){
-  const {record:r,hold}=data,approval=hold?.replacementApproval||{};
-  assert(hold.status==='resolved','R41_ACADEMIC_HOLD_ACTIVE',workId);
-  assert(approval.independentAcademicReview===true&&approval.revisionId===r.revisionId&&
-   approval.commitSha===r.replacement.commitSha&&typeof approval.reviewer==='string'&&approval.reviewer.trim().length>2&&
-   typeof approval.reviewerGithub==='string'&&/^[a-z\d](?:[a-z\d-]{0,37}[a-z\d])?$/i.test(approval.reviewerGithub)&&
-   typeof approval.reviewedAt==='string'&&!Number.isNaN(Date.parse(approval.reviewedAt))&&
-   Number.isSafeInteger(approval.reviewIssueNumber)&&approval.reviewIssueNumber>0&&
-   Number.isSafeInteger(approval.reviewCommentId)&&approval.reviewCommentId>0,
-   'R41_HUMAN_ATTESTATION_MISSING',workId);
-  out.push({workId,commitSha:r.replacement.commitSha,reviewerGithub:approval.reviewerGithub,
-    reviewIssueNumber:approval.reviewIssueNumber,reviewCommentId:approval.reviewCommentId,
-    stageBranch:r.replacement.branch});
+  const {record:r,hold}=data;
+  assert(hold?.status==='resolved','R41_ACADEMIC_HOLD_ACTIVE',workId);
+  const a=assertAiApproval(r,hold.replacementApproval);
+  out.push({workId,commitSha:a.commitSha,stageBranch:a.stageBranch,
+   validationRunId:a.validationRunId,reportPath:a.reportPath,protocol:a.protocol});
  }
  return out;
 }
-module.exports={REGISTRY,HOLD,parseRegistry,load,choose,equalCodes,safeAsset,assertScaledPilotReady};
+module.exports={REGISTRY,HOLD,AI_PROTOCOL,parseRegistry,load,choose,equalCodes,safeAsset,assertAiApproval,assertScaledPilotReady};

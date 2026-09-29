@@ -12,6 +12,18 @@ const terminal={provider:'r33-farm',status:'certified',assignmentId:rec.assignme
 const ledger={kind:'mls_global_dispatch_ledger',terminal:{[rec.workId]:terminal},recoveries:{}};
 const pool={entries:rec.codes.map((code,i)=>({code,order:i+1,language:'espanol-guatemala'})),
  execution:{integrationWaveSize:10}};
+
+function aiApproval(){
+ return {protocol:selector.AI_PROTOCOL,revisionId:rec.revisionId,
+  commitSha:rec.replacement.commitSha,stageBranch:rec.replacement.branch,
+  generatedWithAI:true,humanReviewed:false,reviewerType:'ai',
+  sourceReviewMode:'primary_source_text_and_exact_sections',entriesChecked:rec.codes.length,
+  claimsChecked:rec.academicSecondPass.checkedClaims,sourceLinksChecked:rec.academicSecondPass.sourceLinks,
+  reportPath:rec.academicSecondPass.reportPath,validationRunId:rec.replacement.ciRunId,
+  pdfVisualStatus:'not_verified_text_passages_checked',verifiedAt:'2026-09-29T12:00:00Z',
+  limitsAcknowledged:true};
+}
+
 test('source registry pins exact v3 commit and matches original quality hold',()=>{
  assert.equal(state.entries.size,1);
  assert.equal(hold.status,'active');
@@ -52,11 +64,10 @@ test('wrong original terminal, altered hold and duplicate ownership fail closed'
  const repeated=structuredClone(raw);repeated.entries.push(structuredClone(repeated.entries[0]));
  assert.throws(()=>selector.parseRegistry(repeated,holds),/SUPERSESSION_WORK_ID/);
 });
-test('after independent editorial hold release, exact v3 is selected—not the old SHA',()=>{
+test('after AI evidence protocol resolves the hold, exact v3 is selected—not the old SHA',()=>{
  const approve=structuredClone(hold);
  approve.status='resolved';
- approve.replacementApproval={revisionId:rec.revisionId,commitSha:rec.replacement.commitSha,
-   reviewer:'Independent academic editor',reviewedAt:'2026-09-30T12:00:00Z',independentAcademicReview:true};
+ approve.replacementApproval=aiApproval();
  const stateApproved={entries:new Map([[rec.workId,{record:rec,hold:approve}]]),activeHeldCodes:new Set()};
  const s=selector.choose(rec.workId,terminal,stateApproved,{mode:'integration'});
  assert.equal(s.blocked,false);assert.equal(s.commitSha,rec.replacement.commitSha);
@@ -64,7 +75,7 @@ test('after independent editorial hold release, exact v3 is selected—not the o
  const noApproval=structuredClone(approve);delete noApproval.replacementApproval;
  assert.throws(()=>selector.choose(rec.workId,terminal,
   {entries:new Map([[rec.workId,{record:rec,hold:noApproval}]]),activeHeldCodes:new Set()},{mode:'integration'}),
-  /SUPERSESSION_EXPLICIT_APPROVAL_REQUIRED/);
+  /R41_AI_EVIDENCE_APPROVAL_INVALID/);
 });
 test('academic source report does not claim human REVIEWED certification',()=>{
  const report=fs.readFileSync(path.join(root,rec.replacement.academicReportPath),'utf8');
@@ -83,8 +94,7 @@ test('approved final wave includes exact pinned v3 Evidence and four additional 
   const revised=structuredClone(originalHolds);
   const h=revised.holds.find(x=>x.workId===rec.workId);
   h.status='resolved';
-  h.replacementApproval={revisionId:rec.revisionId,commitSha:rec.replacement.commitSha,
-   reviewer:'Independent qualified editor',independentAcademicReview:true,reviewedAt:'2026-09-30T12:00:00Z'};
+  h.replacementApproval=aiApproval();
   fs.writeFileSync(path.join(dir,'staging-supersessions.json'),JSON.stringify(raw));
   fs.writeFileSync(path.join(dir,'quality-holds.json'),JSON.stringify(revised));
   const wave=integration.r33IndexIntegrationWork({pool,globalLedger:ledger,root:tmp,waveSize:10,verifiedCodes:[]});
