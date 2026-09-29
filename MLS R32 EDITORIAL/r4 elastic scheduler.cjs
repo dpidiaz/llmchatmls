@@ -342,10 +342,18 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
       '/, sin tocar el Context Pack central. Se admiten checkpoints por entrada con commits agrupados pequeños para tolerar caídas.',
     '4. Finalizá con exactamente cinco entradas, cinco checkpoints, chunk-'+String(block.block).padStart(2,'0')+
       '-of-05.json; el diff final respecto a la rama maestra debe tener solo once archivos y pasar bcr.verifyChunk.',
-    '5. Leé HEAD remoto. Abrí un nuevo Issue [MLS Dispatcher][BCR][COMPLETE] con marcador MLS_BCR_ELASTIC_COMMAND:',
-    '   {kind:"mls_bcr_elastic_command",version:1,action:"complete",requestId:<nonce unico>,'+
-      'claimIssueNumber:'+issue.number+',reservationIssueNumber:'+res.issueNumber+',block:'+block.block+',headSha:<SHA real>}.',
-    'Si necesitás más tiempo, abrí [MLS Dispatcher][BCR][RENEW] con la misma estructura, action:"renew", sin headSha, ANTES de expiresAt.',
+    '5. Leé HEAD remoto. Abrí un nuevo Issue [MLS Dispatcher][BCR][COMPLETE] con este marcador (REEMPLAZÁ headSha):',
+    '<!-- '+elastic.REQUEST_MARKER,
+    JSON.stringify({kind:'mls_bcr_elastic_command',version:1,action:'complete',
+      requestId:'bcr-complete-'+issue.number+'-nonce',claimIssueNumber:issue.number,
+      reservationIssueNumber:res.issueNumber,block:block.block,headSha:'REEMPLAZAR_SHA_REMOTO_40_HEX'}),
+    '-->',
+    'Si necesitás más tiempo, antes del vencimiento abrí [MLS Dispatcher][BCR][RENEW] con:',
+    '<!-- '+elastic.REQUEST_MARKER,
+    JSON.stringify({kind:'mls_bcr_elastic_command',version:1,action:'renew',
+      requestId:'bcr-renew-'+issue.number+'-nonce',claimIssueNumber:issue.number,
+      reservationIssueNumber:res.issueNumber,block:block.block}),
+    '-->',
     'El Dispatcher certifica únicamente estructura/identidad del bloque; el Gate académico R33 de 25/25 sigue separado.',
     'Sin Work, OpenAI API, APIs pagadas, SYNC, main, sellado prematuro ni Cloudflare.'
    ].join('\n')+'\n\n';
