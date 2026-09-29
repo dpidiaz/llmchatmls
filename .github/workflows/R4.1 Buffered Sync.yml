@@ -1,0 +1,79 @@
+name: R4.1 Buffered Sync
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+# Exactly the SAME critical section as the Global Dispatcher scheduler.
+# Never overlap allocation and publication reconciliation.
+concurrency:
+  group: mls-global-dispatcher
+  cancel-in-progress: false
+
+jobs:
+  buffered-sync:
+    if: ${{ startsWith(github.event.issue.title, '[MLS Buffered][SYNC]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Parse and authenticate sync request
+        id: request
+        run: node scripts/R4-1-buffered-remote.cjs request "$GITHUB_EVENT_PATH" >> "$GITHUB_OUTPUT"
+      - name: Recover immutable inbox bundle and prepare isolated staging branch
+        shell: bash
+        env:
+          INBOX: ${{ steps.request.outputs.inboxBranch }}
+          ISSUE: ${{ steps.request.outputs.issueNumber }}
+        run: |
+          set -euo pipefail
+          git fetch origin "+refs/heads/$INBOX:refs/remotes/origin/r41-inbox"
+          git show "refs/remotes/origin/r41-inbox:r41-package.json" > "$RUNNER_TEMP/r41-package.json"
+          node scripts/R4-1-buffered-remote.cjs unpack "$RUNNER_TEMP/r41-buffer" "$RUNNER_TEMP/r41-package.json"
+          target="r41/staged/$ISSUE"
+          remote="$(git ls-remote --heads origin "refs/heads/$target")"
+          if [ -n "$remote" ]; then
+            git fetch origin "+refs/heads/$target:refs/remotes/origin/r41-target"
+            git switch -c "$target" "refs/remotes/origin/r41-target"
+          else
+            git switch -c "$target" main
+          fi
+          echo "TARGET_BRANCH=$target" >> "$GITHUB_ENV"
+      - name: Reconcile live ownership and prepare exact Evidence files
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ISSUE: ${{ steps.request.outputs.issueNumber }}
+        run: node scripts/R4-1-buffered-remote.cjs prepare "$RUNNER_TEMP/r41-buffer" . "$ISSUE"
+      - name: Canonical R33 certification before grouped write
+        run: |
+          node scripts/R33\ evidence\ git\ validate.cjs
+          node --test 'test/r33 evidence editorial batch.test.cjs' 'test/r33 evidence farm.test.cjs'
+      - name: Single grouped commit and non-force push
+        shell: bash
+        env:
+          ISSUE: ${{ steps.request.outputs.issueNumber }}
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          node scripts/R4-1-buffered-remote.cjs stage-local "$RUNNER_TEMP/r41-buffer" .
+          if ! git diff --cached --quiet; then
+            git commit -m "evidence(r4.1): stage immutable buffer $ISSUE"
+          fi
+          sha="$(git rev-parse HEAD)"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+          echo "STAGED_SHA=$sha" >> "$GITHUB_ENV"
+      - name: Confirm exact remote SHA and mark reservation STAGED
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          ISSUE: ${{ steps.request.outputs.issueNumber }}
+        run: node scripts/R4-1-buffered-remote.cjs mark "$RUNNER_TEMP/r41-buffer" . "$ISSUE" "$TARGET_BRANCH" "$STAGED_SHA"
