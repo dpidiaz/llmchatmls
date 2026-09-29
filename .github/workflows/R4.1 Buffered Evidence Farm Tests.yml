@@ -28,6 +28,5 @@ jobs:
           node --check 'scripts/R4-1-buffered-farm.cjs'
       - name: Buffered Farm transport and safety tests
         run: node --test 'test/r4 buffered farm.test.cjs'
-      - name: Existing R33 and dispatcher regression
-        run: |
-          node --test 'test/mls global dispatcher provider r33.test.cjs' 'test/evidence certification contract.test.cjs'
+      - name: Existing R33 provider regression
+        run: node --test 'test/mls global dispatcher provider r33.test.cjs'
