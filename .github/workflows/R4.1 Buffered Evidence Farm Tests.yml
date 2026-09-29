@@ -52,6 +52,8 @@ jobs:
         run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs' 'test/r4 buffered scheduler integration.test.cjs' 'test/r4 buffered workflow contract.test.cjs'
       - name: R4.1 academic traceability and final publication hold
         run: node --test 'test/r4 buffered academic gate.test.cjs'
+      - name: Ten versioned source-located correction checks for #1861
+        run: node --test 'test/r4 buffered pilot 1861 v3.test.cjs'
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
         run: node --test 'test/r4 buffered real evidence pilot.test.cjs'
       - name: Existing R33 provider regression
