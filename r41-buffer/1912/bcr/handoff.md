@@ -1,8 +1,12 @@
-# MLS R4.2 elastic BCR handoff
+# MLS R4.1 BCR handoff
 
-Reserva: #1912; estado inicial 0/25, sin Evidence heredado.
-AllocationHash: 7dff0671e98899445b18a509454235b1fdae2d804a02742683d75f6933c5d10d
-ContextHash: 1825cb182afe6beec3fc7b2ab72e96a96dd9aea3c43e68094953c09f93d19430
-Los chats son descartables: usar siempre MLS BCR siguiente. El Dispatcher adjudica un bloque exclusivo.
-Los cinco bloques pertenecen a ramas independientes; ningún worker edita el Context Pack central.
-Gate R33 individual, APA7, source references reales, FREE ONLY, no OpenAI API, sin Cloudflare.
+Reserva: #1912 | Bloque persistido: 5/5 | Total: 25/25.
+Context Pack: bcr/context-pack.json | SHA256 lógico: 7fa2aa4b614ca0718e3d49e10d7d95a013a8d259495966480cf9e72d7787d7c4
+Source Index: bcr/source-index.json | hash: 6a1de130f2074e3ee84c07eba9c751006f00babded3c2b4046f4c2c5c33c34f8
+Último delta: bcr/deltas/block-05.json | hash: e36a3ee1575474ed677261268d37a09f42981cc35da5bbf977d8bc5f311b87b8
+Commit padre comprobado antes de escribir: f56944e44d3ba3f15491240089ee52f30ef8f1a8
+**Commit ACTUAL:** verificar SHA de la referencia remota de la rama tras publicar; no se puede inscribir su propio SHA dentro del commit.
+Evidence completos: entries/<code>.json; checkpoints: checkpoints/<code>.json.
+Advertencias: Claimed VERIFIED in a partial chunk is NOT final canonical R33 certification.
+Pendientes siguientes: Ninguno; ejecutar validación completa 25/25.
+Siguiente comando: MLS R4.1 continuar reserva #1912 — bloque cierre/05 con BCR. Recuperar solo el último Context Pack, Source Index, Delta, y los 5 artículos nuevos. SIN nueva reserva, sin sync anticipada.
