@@ -6,6 +6,7 @@ const cp=require('node:child_process');
 const core=require('./r4 buffered core.cjs');
 const store=require('./evidence git.js');
 const foundation=require('./evidence foundation.js');
+const transport=require('./r4 buffered transport.cjs');
 
 async function canonicalAssessment(root,entry){
   const a=await store.assessEntry(root,entry);
@@ -93,6 +94,8 @@ async function cli(argv){
   if(operation==='inspect')return core.inspect(dir);
   if(operation==='seal')return seal(dir,arg);
   if(operation==='plan')return plan(dir,arg);
-  core.error('USAGE','node scripts/R4-1-buffered-farm.cjs init <buffer> <assignment.json> | checkpoint <buffer> <entry.json> | inspect <buffer> | seal <buffer> <checkout> | plan <buffer> <checkout>');
+  if(operation==='export')return transport.exportTo(dir,arg);
+  if(operation==='import')return transport.importFrom(dir,arg);
+  core.error('USAGE','node scripts/R4-1-buffered-farm.cjs init <buffer> <assignment.json> | checkpoint <buffer> <entry.json> | inspect <buffer> | seal <buffer> <checkout> | plan <buffer> <checkout> | export <buffer> <bundle.json> | import <buffer> <bundle.json>');
 }
 module.exports={canonicalAssessment,seal,plan,gitState,cli};
