@@ -344,3 +344,75 @@ test('expired lease preserves own-scope committed branch as immutable recovery p
  assert.equal(nextClaim.claim.leaseEpoch,2171);
  assert.notEqual(nextClaim.claim.leaseEpoch,lease.claim.leaseEpoch);
 });
+
+test('RENEW received before expiry survives a short serialized GitHub queue delay without a double lease',async()=>{
+ const baseMs=1e12,f=fixture(1881),owner=request(4000,'renew-initial-4000','next',{},baseMs);
+ const lease=elastic.lease(f,elastic.blocks(f)[0],owner,{branch:'r42/work/1881/01/4000',
+  baseSha:'d'.repeat(40),now:baseMs,workerLogin:'owner'});
+ let reservation=issue(lease.reservation);
+ const due=baseMs+elastic.TTL_MS;
+ const renew=request(4001,'renew-ticket-4001','renew',
+  {claimIssueNumber:4000,reservationIssueNumber:1881,block:1},due-1000);
+ const api={
+  async get(route){
+   if(route==='/issues/1881')return reservation;
+   throw Error('Unexpected renewal GET '+route);
+  },
+  async patch(route,body){
+   if(route==='/issues/1881'){Object.assign(reservation,body);return reservation;}
+   if(route==='/issues/4001'){Object.assign(renew,body);return renew;}
+   throw Error('Unexpected renewal PATCH '+route);
+  }
+ };
+ const result=await engine.drain({api,root:process.cwd(),issues:[reservation,renew],
+  globalLedger:{terminal:{},recoveries:{}},activeStates:[],now:due+30000});
+ assert.equal(result.renewed.length,1);
+ assert.equal(result.reaped.length,0);
+ assert.equal(Date.parse(alloc.parseReservation(reservation).elastic.blocks[0].expiresAt),due+30000+elastic.TTL_MS);
+ assert.equal(renew.state,'closed');
+});
+test('consolidation replays exact immutable join if the remote commit succeeded but terminal Issue PATCH was lost',async()=>{
+ const f=fixture(1881),pre=elastic.preblock(f,bcr.RECIPE,PIN);
+ const commits=Array.from({length:5},(_,i)=>String(i+1).repeat(40));
+ const chunks=Array.from({length:5},(_,i)=>makeChunk(f,i+1));
+ const r=elastic.withBlocks(f,elastic.blocks(f).map((b,i)=>({...b,status:'done',
+  claimIssueNumber:5000+i,commitSha:commits[i],chunkHash:chunks[i].chunkHash})));
+ let reservation=issue(r);
+ const joined='8'.repeat(40),prior='d'.repeat(40);
+ const status=structuredClone(pre.progress);status.checkpointed=25;
+ const pack=structuredClone(pre.pack);
+ pack.completedCodes=f.allocation.units.map(x=>x.code);
+ pack.pendingCodes=[];pack.checkpointRefs=f.allocation.units.map(x=>({code:x.code,entrySha:'f'.repeat(64)}));
+ const audit={schema:'MLS-R4.2-JOIN-1',reservationId:r.allocation.assignmentId,originalHead:prior,
+  blockCommits:r.elastic.blocks.map(x=>({block:x.block,sha:x.commitSha,chunkHash:x.chunkHash})),
+  count:25,verifiedInherited:0,canonicalGatePassed:false,packageSealed:false,synced:false};
+ const files=new Map([['manifest.json',pre.manifest],['progress.json',status],
+  ['bcr/context-pack.json',pack],['bcr/source-index.json',pre.index],
+  ['bcr/elastic-join-audit.json',audit]]);
+ let writes=0;
+ const api={
+  async get(route){
+   if(route==='/git/ref/heads/r41/buffer/1881')return {object:{sha:joined}};
+   if(route==='/git/commits/'+joined)return {parents:[{sha:prior}]};
+   if(route==='/issues/1881')return reservation;
+   if(route.startsWith('/contents/')){
+    const name=route.slice('/contents/r41-buffer/1881/'.length).split('?ref=')[0];
+    assert.ok(files.has(name),'Unmocked remote immutable file '+name);
+    const value=files.get(name);
+    return {sha:elastic.gitBlobJson(value),encoding:'base64',
+     content:Buffer.from(JSON.stringify(value)).toString('base64')};
+   }
+   throw Error('Unmocked join replay GET '+route);
+  },
+  async patch(route,body){
+   if(route==='/issues/1881'){writes++;Object.assign(reservation,body);return reservation;}
+   throw Error('Unexpected join replay PATCH '+route);
+  },
+  async post(){throw Error('Replayed join must never write a second Git commit');}
+ };
+ const result=await engine.consolidate(api,r,process.cwd());
+ assert.equal(result.replayed,true);
+ assert.equal(result.head,joined);
+ assert.equal(writes,1);
+ assert.equal(alloc.parseReservation(reservation).elastic.consolidatedSha,joined);
+});
