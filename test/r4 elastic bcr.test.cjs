@@ -267,3 +267,80 @@ test('five independent chunks consolidate with original bcr.advance in one group
  assert.equal(tree.some(f=>/package\.json$/.test(f.path)),false);
  assert.equal(alloc.parseReservation(reservationIssue).elastic.consolidatedSha,head);
 });
+
+test('COMPLETE authorizes exactly 11 block blobs against master buffer, never a forged manifest change',async()=>{
+ const f=fixture(1881),rq=request(2080),master='d'.repeat(40),commit='e'.repeat(40);
+ const bran='r42/work/1881/01/2080';
+ const leased=elastic.lease(f,elastic.blocks(f)[0],rq,{branch:bran,baseSha:master,now:Date.now(),workerLogin:'owner'});
+ const res=leased.reservation,claimIssue={...rq,title:'[MLS Dispatcher][BCR][LEASED] MLS-BUFFER-001881 block-01'};
+ const complete=request(2081,'complete-2081','complete',{claimIssueNumber:2080,reservationIssueNumber:1881,block:1,headSha:commit});
+ const chunk=makeChunk(f,1),manifest=elastic.preblock(f,bcr.RECIPE,PIN).manifest;
+ const root='r42-buffer/1881/blocks/01/';
+ const files=[{filename:root+'chunk-01-of-05.json',sha:elastic.gitBlobJson(chunk),status:'added'}];
+ for(const code of leased.claim.codes){
+  files.push({filename:root+'entries/'+code+'.json',sha:elastic.gitBlobJson(chunk.entries[code]),status:'added'});
+  files.push({filename:root+'checkpoints/'+code+'.json',sha:elastic.gitBlobJson(chunk.checkpoints[code]),status:'added'});
+ }
+ let extra=false,compares=[];
+ const api={
+  async get(route){
+   if(route==='/git/ref/heads/'+bran)return {object:{sha:commit}};
+   if(route==='/git/ref/heads/r41/buffer/1881')return {object:{sha:master}};
+   if(route==='/issues/2080')return claimIssue;
+   if(route==='/compare/'+master+'...'+commit){compares.push(route);return {status:'ahead',files:extra?
+     [...files,{filename:'r41-buffer/1881/manifest.json',sha:'b'.repeat(40),status:'modified'}]:files};}
+   if(route.startsWith('/contents/')){
+    const value=route.includes('chunk-01-of-05.json')?chunk:manifest;
+    return {encoding:'base64',sha:elastic.gitBlobJson(value),
+     content:Buffer.from(JSON.stringify(value,null,2)+'\n').toString('base64')};
+   }
+   throw Error('Unexpected COMPLETE GET '+route);
+  }
+ };
+ const v=await engine.verifyClaimCompletion(api,res,elastic.blocks(res)[0],
+  elastic.command(complete),complete,Date.now());
+ assert.equal(v.chunkHash,chunk.chunkHash);
+ assert.deepEqual(v.codes,leased.claim.codes);
+ assert.deepEqual(compares,['/compare/'+master+'...'+commit]);
+ extra=true;
+ await assert.rejects(()=>engine.verifyClaimCompletion(api,res,elastic.blocks(res)[0],
+  elastic.command(complete),complete,Date.now()),/R42_BLOCK_FOREIGN_PATH/);
+});
+test('expired lease preserves own-scope committed branch as immutable recovery parent and invalidates old epoch',async()=>{
+ const f=fixture(1881),oldIssue=request(2170),master='d'.repeat(40),progress='e'.repeat(40);
+ const lease=elastic.lease(f,elastic.blocks(f)[0],oldIssue,{branch:'r42/work/1881/01/2170',
+  baseSha:master,now:1e12,workerLogin:'owner'});
+ let reservationIssue=issue(lease.reservation),
+  claimIssue={...oldIssue,title:'[MLS Dispatcher][BCR][LEASED] MLS-BUFFER-001881 block-01'};
+ let compared=[];
+ const api={
+  async get(route){
+   if(route==='/git/ref/heads/r42/work/1881/01/2170')return {object:{sha:progress}};
+   if(route==='/compare/'+master+'...'+progress){
+    compared.push(route);return {status:'ahead',files:[{filename:'r42-buffer/1881/blocks/01/entries/MLS-V10-4000.json',status:'added'}]};}
+   if(route==='/issues/1881')return reservationIssue;
+   if(route==='/issues/2170')return claimIssue;
+   throw Error('Unexpected recovery GET '+route);
+  },
+  async patch(route,body){
+   if(route==='/issues/1881'){Object.assign(reservationIssue,body);return reservationIssue;}
+   if(route==='/issues/2170'){Object.assign(claimIssue,body);return claimIssue;}
+   throw Error('Unexpected recovery PATCH '+route);
+  }
+ };
+ const reservations=[lease.reservation];
+ const done=await engine.reconcileExpired(api,reservations,1e12+elastic.TTL_MS+1);
+ assert.equal(done.length,1);
+ assert.deepEqual(compared,['/compare/'+master+'...'+progress]);
+ const updated=alloc.parseReservation(reservationIssue),block=elastic.blocks(updated)[0];
+ assert.equal(block.status,'pending');
+ assert.equal(block.recovery.headSha,progress);
+ assert.equal(block.recovery.originalBaseSha,master);
+ assert.match(claimIssue.title,/\[EXPIRED\]/);
+ assert.equal(claimIssue.state,'closed');
+ const next=request(2171),newBranch='r42/work/1881/01/2171';
+ const nextClaim=elastic.lease(updated,block,next,{branch:newBranch,baseSha:progress,
+  now:1e12+elastic.TTL_MS+2,workerLogin:'owner'});
+ assert.equal(nextClaim.claim.leaseEpoch,2171);
+ assert.notEqual(nextClaim.claim.leaseEpoch,lease.claim.leaseEpoch);
+});
