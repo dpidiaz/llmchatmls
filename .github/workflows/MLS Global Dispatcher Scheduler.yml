@@ -22,7 +22,7 @@ jobs:
     if: ${{ github.event_name != 'issues' || startsWith(github.event.issue.title, '[MLS Dispatcher]') || (startsWith(github.event.issue.title, '[MLS Buffered][REQUEST]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)) }}
     runs-on: ubuntu-latest
     env:
-      MLS_GITHUB_COOLDOWN_FILE: ${{ runner.temp }}/mls-github-cooldown.json
+      MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,3 +46,4 @@ jobs:
         with:
           path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
           key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}
+
