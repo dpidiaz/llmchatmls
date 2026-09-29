@@ -7,6 +7,7 @@ const integration=require('../MLS R32 EDITORIAL/global dispatcher/providers/inte
 const r33=require('../MLS R32 EDITORIAL/global dispatcher/providers/r33.js');
 const mls=require('../MLS R32 EDITORIAL/farm core.js');
 const store=require('../MLS R32 EDITORIAL/evidence git.js');
+const revision=require('../MLS R32 EDITORIAL/r4 staging supersession.cjs');
 
 function die(message){throw new Error(message);}
 async function gh(url,token){
@@ -37,9 +38,21 @@ async function main(){
   if(!token||!repository)die('GITHUB_TOKEN/GITHUB_REPOSITORY required.');
   const api='https://api.github.com/repos/'+repository;
   const ledger=await ledgerFromIssues(api,token);
-  const manifest=integration.r33StagingManifest(ledger);
+  const manifest=integration.r33StagingManifest(ledger,{root:'.'});
   const corpus=mls.corpusEntries('.');
   const byCode=new Map(corpus.map(entry=>[String(entry.code).toUpperCase(),entry]));
+  // Pinned supplemental assets only; this workflow works in an ephemeral rehearsal checkout.
+  let supplementalAssets=0;
+  for(const asset of manifest.assetRefs||[]){
+    if(!revision.safeAsset(asset.path,manifest.entries.map(e=>e.code))||
+       !/^[a-f0-9]{40}$/i.test(asset.commitSha))die('INVALID_REVISION_ASSET: '+asset.path);
+    const contents=await fetchText(api,token,asset.commitSha,asset.path);
+    JSON.parse(contents);
+    const destination=path.join('.',asset.path);
+    fs.mkdirSync(path.dirname(destination),{recursive:true});
+    fs.writeFileSync(destination,contents.endsWith('\n')?contents:contents+'\n');
+    supplementalAssets++;
+  }
   let materialized=0;
   for(const row of manifest.entries){
     const entry=byCode.get(row.code);
@@ -63,11 +76,11 @@ async function main(){
   if(holdInventory&&(holdInventory.schemaVersion!=='1.0'||holdInventory.kind!=='mls_r33_publication_quality_holds'||!Array.isArray(holdInventory.holds)))
     die('R4_ACADEMIC_HOLD_INVENTORY_INVALID');
   const activeHolds=(holdInventory?.holds||[]).filter(h=>h.status==='active');
-  const output={...manifest,materialized,indexedVerified:Array.isArray(indexes.verified)?indexes.verified.length:null,
+  const output={...manifest,materialized,supplementalAssets,indexedVerified:Array.isArray(indexes.verified)?indexes.verified.length:null,
     academicHoldCount:activeHolds.length,academicHoldWorkIds:activeHolds.map(h=>h.workId),
     rehearsal:activeHolds.length?'STRUCTURAL_PASS_ACADEMIC_HOLD':'PASS'};
   fs.mkdirSync('artifacts',{recursive:true});
   fs.writeFileSync('artifacts/r4-rehearsal-manifest.json',JSON.stringify(output,null,2)+'\n');
-  process.stdout.write(JSON.stringify({ok:true,entryCount:manifest.entryCount,snapshotHash:manifest.snapshotHash,materialized,academicHoldCount:activeHolds.length})+'\n');
+  process.stdout.write(JSON.stringify({ok:true,entryCount:manifest.entryCount,snapshotHash:manifest.snapshotHash,materialized,supplementalAssets,academicHoldCount:activeHolds.length})+'\n');
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});
