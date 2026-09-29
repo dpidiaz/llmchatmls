@@ -16,7 +16,10 @@ async function reconcile({issues,ledgerItem,get,patchIssue,saveLedger}){
     if(run?.status!=='completed'){
       outcome.push({issue:r.issueNumber,status:'WAITING_FOR_CI'});continue;
     }
-    if(run.conclusion!=='success'||run.name!=='R4.1 Buffered Sync'||run.event!=='issues'){
+    const dispatched=run.event==='workflow_dispatch'&&
+      run.path==='.github/workflows/R4.1 Buffered Sync.yml'&&
+      run.display_title==='MLS buffer sync #'+r.stage.syncRequestIssueNumber;
+    if(run.conclusion!=='success'||run.name!=='R4.1 Buffered Sync'||(run.event!=='issues'&&!dispatched)){
       const q=allocation.quarantine(r,'SYNC_WORKFLOW_NOT_CERTIFIED');
       const title='[MLS Buffered][QUARANTINED] '+r.allocation.assignmentId;
       const body=allocation.renderReservation(q);

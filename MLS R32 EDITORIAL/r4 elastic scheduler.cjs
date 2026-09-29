@@ -8,6 +8,7 @@ const core=require('./r4 buffered core.cjs');
 const dispatcherCore=require('./global dispatcher/core.js');
 const provider=require('./global dispatcher/providers/integration.js');
 const elastic=require('./r4 elastic core.cjs');
+const universal=require('./r4 universal scheduler.cjs');
 const PREFIX='r42-buffer/';
 function fail(code){core.error('R42_'+code);}
 function requireOk(cond,code){if(!cond)fail(code);}
@@ -52,7 +53,7 @@ async function saveReservation(api,res,expectedRecordHash=null){
  if(expectedRecordHash!==null)requireOk(prior.recordHash===expectedRecordHash,'CONCURRENT_RESERVATION');
  requireOk(res.allocationHash===prior.allocationHash,'ALLOCATION_CHANGED');
  await api.patch('/issues/'+res.issueNumber,{
-  title:'[MLS Buffered][RESERVED] '+res.allocation.assignmentId,
+  title:'[MLS Buffered]['+res.status.toUpperCase()+'] '+res.allocation.assignmentId,
   body:buffered.renderReservation(res)});
  const check=buffered.parseReservation(await api.get('/issues/'+res.issueNumber));
  requireOk(check.recordHash===res.recordHash,'RESERVATION_READBACK');
@@ -155,8 +156,8 @@ async function reconcileExpired(api,reservations,now){
   let rows=elastic.blocks(res),changed=false;
   for(let j=0;j<rows.length;j++){
    const b=rows[j];if(b.status!=='leased'||Date.parse(b.expiresAt)>now)continue;
-   const latest=await refHead(api,b.branch);
-   requireOk(latest,'EXPIRED_BRANCH_MISSING');
+   let latest=await refHead(api,b.branch);
+   if(!latest){await publishNewBranch(api,b.branch,b.baseSha);latest=b.baseSha;}
    if(latest!==b.baseSha){
     const diff=await api.get('/compare/'+b.baseSha+'...'+latest);
     const prefix=PREFIX+res.issueNumber+'/blocks/'+String(b.block).padStart(2,'0')+'/';
@@ -255,17 +256,23 @@ async function consolidate(api,res,root){
  await saveReservation(api,next,res.recordHash);
  return {reservation:res.issueNumber,head:commit,checkpointed:25,gatePending:true};
 }
-async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()}){
+async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),technical=false}){
+ // Keep this tick's inventory current after each confirmed write.
+ const upstream=api;
+ api={...upstream,patch:async(route,body)=>{const value=await upstream.patch(route,body);
+  const id=/^\/issues\/(\d+)$/.exec(route);if(id){const row=issues.find(x=>x.number===Number(id[1]));if(row)Object.assign(row,body);}
+  return value;}};
  const commands=issues.filter(i=>!i.pull_request&&buffered.requestAuthorized(i));
- let reservations=asReservations(issues).filter(r=>r.status==='reserved');
+ let reservations=asReservations(issues);
  const done=[],renewed=[],created=[],leased=[],busy=[],reaped=[];
  // Confirm and reconcile worker submissions before freeing any capacity.
- for(const issue of sortedCommands(commands,'COMPLETE').slice(0,elastic.MAX_REQUESTS_PER_TICK)){
+ for(const issue of sortedCommands(commands,'COMPLETE').filter(i=>!i.body.includes('"task":"repair"')&&!/"task"\s*:\s*"repair"/.test(i.body)).slice(0,elastic.MAX_REQUESTS_PER_TICK)){
   try{
    const cmd=elastic.command(issue),at=reservations.findIndex(r=>r.issueNumber===cmd.reservationIssueNumber);
    requireOk(at>=0,'RESERVATION_NOT_FOUND');
    const res=reservations[at],block=elastic.blocks(res)[cmd.block-1];
    if(block.status==='done'&&block.commitSha===cmd.headSha&&block.claimIssueNumber===cmd.claimIssueNumber){
+    await api.patch('/issues/'+cmd.claimIssueNumber,{title:'[MLS Dispatcher][BCR][DONE] '+cmd.claimIssueNumber,state:'closed',state_reason:'completed'});
     await finishRequest(api,issue,'REPLAY',{ok:true,commitSha:block.commitSha});continue;
    }
    const verified=await verifyClaimCompletion(api,res,block,cmd,issue,now);
@@ -276,11 +283,11 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
    await finishRequest(api,issue,'COMPLETED',{ok:true,verified});
    done.push({issue:cmd.claimIssueNumber,reservation:res.issueNumber,block:cmd.block,sha:verified.commitSha});
   }catch(e){
-   if([403,429].includes(e.status))throw e;
+   if([403,429].includes(e.status)||e.status>=500)throw e;
    await finishRequest(api,issue,'REJECTED',{ok:false,error:e.code||'R42_COMPLETE_ERROR',message:e.message});
   }
  }
- for(const issue of sortedCommands(commands,'RENEW').slice(0,elastic.MAX_REQUESTS_PER_TICK)){
+ for(const issue of sortedCommands(commands,'RENEW').filter(i=>!/"task"\s*:\s*"repair"/.test(i.body)).slice(0,elastic.MAX_REQUESTS_PER_TICK)){
   try{
    const cmd=elastic.command(issue),at=reservations.findIndex(r=>r.issueNumber===cmd.reservationIssueNumber);
    requireOk(at>=0,'RENEW_RESERVATION_MISSING');
@@ -290,11 +297,13 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
      Number.isFinite(Date.parse(issue.created_at||0))&&Date.parse(issue.created_at)<=now&&
      Date.parse(issue.created_at)<=Date.parse(b.expiresAt)&&
      now-Date.parse(issue.created_at)<=2*60*1000,'RENEW_NOT_OWNER_OR_EXPIRED');
-   blocks[cmd.block-1]={...b,expiresAt:new Date(now+elastic.TTL_MS).toISOString()};
-   reservations[at]=await saveReservation(api,elastic.withBlocks(res,blocks),res.recordHash);
+   if(b.lastRenewal!==issue.number){
+    blocks[cmd.block-1]={...b,lastRenewal:issue.number,expiresAt:new Date(now+elastic.TTL_MS).toISOString()};
+    reservations[at]=await saveReservation(api,elastic.withBlocks(res,blocks),res.recordHash);
+   }
    await finishRequest(api,issue,'RENEWED',{ok:true,expiresAt:blocks[cmd.block-1].expiresAt});
    renewed.push({reservation:res.issueNumber,block:cmd.block});
-  }catch(e){if([403,429].includes(e.status))throw e;
+  }catch(e){if([403,429].includes(e.status)||e.status>=500)throw e;
    await finishRequest(api,issue,'REJECTED',{ok:false,error:e.code||'R42_RENEW_ERROR'});}
  }
  reaped.push(...await reconcileExpired(api,reservations,now));
@@ -309,20 +318,43 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
   }
  }
  let minted=0;
- const incoming=sortedCommands(commands,'REQUEST');
+ const lifecycle=await universal.drain({api,io:module.exports,root,reservations,issues,now,technical,activeStates});
+ const incoming=sortedCommands(commands,'REQUEST').filter(i=>i.state!=='closed'&&!lifecycle.consumed.has(i.number));
  for(const issue of incoming.slice(0,elastic.MAX_REQUESTS_PER_TICK)){
   try{
    const cmd=elastic.command(issue);
+   const oldReceipt=reservations.find(r=>r.elastic?.requestReceipts?.[cmd.requestId]);
+   if(oldReceipt&&!oldReceipt.elastic.blocks.some(b=>b.requestId===cmd.requestId)){
+    await finishRequest(api,issue,'REPLAY',oldReceipt.elastic.requestReceipts[cmd.requestId]);continue;
+   }
+   const receipt=reservations.flatMap(r=>(r.elastic?.blocks||[]).map(b=>({r,b})))
+    .find(x=>x.b.requestId===cmd.requestId);
+   if(receipt){
+    const {r,b}=receipt;
+    if(b.claimIssueNumber===issue.number&&b.status==='leased'&&Date.parse(b.expiresAt)>now){
+     const current=await refHead(api,b.branch);
+     if(!current)await publishNewBranch(api,b.branch,b.baseSha);
+     const out=elastic.lease({...r,elastic:{...r.elastic,blocks:r.elastic.blocks.map(x=>x.block===b.block?{...x,status:'pending'}:x)}},
+      {...b,status:'pending'},issue,{branch:b.branch,baseSha:b.baseSha,now:Date.parse(b.leasedAt),workerLogin:b.workerLogin});
+     out.claim.expiresAt=b.expiresAt;
+     await api.patch('/issues/'+issue.number,{title:'[MLS Dispatcher][BCR][LEASED] '+r.allocation.assignmentId,
+      body:'Recovered original durable claim. Read docs/MLS Global Dispatcher/19 Comando universal BCR.md.\n'+dispatcherCore.renderMarked(elastic.STATUS_MARKER,out.claim)});
+    }else await finishRequest(api,issue,'REPLAY',{claimIssueNumber:b.claimIssueNumber,reservation:r.issueNumber,status:b.status});
+    continue;
+   }
    if(requestAge(issue,now)>2*60*1000){
     await finishRequest(api,issue,'STALE',{ok:false,retryable:true,reason:'DISPOSABLE_CHAT_REQUEST_TIMED_OUT'});
     continue;
    }
    requireOk(!reservations.some(r=>(r.elastic?.blocks||[]).some(b=>b.requestId===cmd.requestId&&b.status==='leased')),
     'DUPLICATE_WORKER_REQUEST');
-   if(elastic.activeCount(reservations,now)>=elastic.MAX_ACTIVE){
+   if(elastic.activeCount(reservations,now)+reservations.filter(r=>universal.active(r,now)).length+(activeStates||[]).length>=elastic.MAX_ACTIVE){
     await finishRequest(api,issue,'CAPACITY_BUSY',{ok:true,assigned:false,retryable:true,
      reason:'SAFE_GLOBAL_ACTIVE_BLOCK_CEILING',capacity:elastic.MAX_ACTIVE});
     busy.push(issue.number);continue;
+   }
+   if(reservations.some(r=>r.elastic?.consolidatedSha&&!r.universal?.sync&&!r.universal?.lease)){
+    await finishRequest(api,issue,'CAPACITY_BUSY',{ok:true,assigned:false,retryable:true,reason:'PENDING_GATE_REPAIR_SEAL_SYNC_FIRST'});continue;
    }
    let free=elastic.freeBlock(reservations,now);
    if(!free){
@@ -357,9 +389,11 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
     requireOk(['ahead','identical'].includes(compare.status)&&
      (compare.files||[]).every(f=>f.filename.startsWith(prefix)),'RECOVERY_SCOPE_REJECTED');
    }
-   await publishNewBranch(api,branch,source);
    const issued=elastic.lease(res,block,issue,{branch,baseSha:source,now,workerLogin:issue.user?.login});
+   issued.reservation=elastic.withBlocks(issued.reservation,issued.reservation.elastic.blocks,{
+    requestReceipts:{...res.elastic?.requestReceipts,[cmd.requestId]:{issue:issue.number,reservation:res.issueNumber,block:block.block}}});
    reservations[at]=await saveReservation(api,issued.reservation,res.recordHash);
+   await publishNewBranch(api,branch,source);
    const guide=[
     '## MLS R4.2 — TRABAJO AUTOSUFICIENTE PARA ESTE CHAT',
     'No busqués otra conversación. La única titularidad válida está en el marcador de este Issue y la reserva #'+res.issueNumber+'.',
@@ -391,12 +425,13 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
    leased.push({issue:issue.number,reservation:res.issueNumber,block:block.block,
     branch,expiresAt:issued.claim.expiresAt,codes:issued.claim.codes,recovered:Boolean(block.recovery)});
   }catch(e){
-   if([403,429].includes(e.status))throw e;
+   if([403,429].includes(e.status)||e.status>=500)throw e;
+   if(reservations.some(r=>r.elastic?.blocks?.some(b=>b.claimIssueNumber===issue.number&&b.status==='leased')))throw e;
    await finishRequest(api,issue,'REJECTED',{ok:false,error:e.code||'R42_REQUEST_ERROR',
     message:e.message});
   }
  }
- return {leased,created,busy,done,renewed,reaped,joined,pending:Math.max(0,incoming.length-elastic.MAX_REQUESTS_PER_TICK),
+ return {leased,created,busy,done,renewed,reaped,joined,universal:lifecycle.events,pending:Math.max(0,incoming.length-elastic.MAX_REQUESTS_PER_TICK),
   maxActive:elastic.MAX_ACTIVE,maxRequestsPerTick:elastic.MAX_REQUESTS_PER_TICK};
 }
 module.exports={drain,refHead,remoteFile,groupedCommit,publishNewBranch,moveBranch,

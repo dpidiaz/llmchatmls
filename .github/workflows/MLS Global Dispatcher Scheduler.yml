@@ -11,6 +11,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: write
 
 concurrency:
   group: mls-global-dispatcher
@@ -20,10 +21,18 @@ jobs:
   scheduler:
     if: ${{ github.event_name != 'issues' || startsWith(github.event.issue.title, '[MLS Dispatcher]') || (startsWith(github.event.issue.title, '[MLS Buffered][REQUEST]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)) }}
     runs-on: ubuntu-latest
+    env:
+      MLS_GITHUB_COOLDOWN_FILE: ${{ runner.temp }}/mls-github-cooldown.json
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
+      - uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: mls-github-cooldown-
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -31,3 +40,9 @@ jobs:
         run: node 'scripts/MLS global dispatcher scheduler.cjs'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Preserve GitHub cooldown after interruption
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}

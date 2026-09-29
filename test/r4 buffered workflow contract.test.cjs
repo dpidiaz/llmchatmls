@@ -15,7 +15,9 @@ test('R4.1 Issue writer and allocator remain in the same serialized critical sec
   assert.match(sync,/github\.event\.issue\.author_association/);
   assert.match(scheduler,/github\.event\.issue\.author_association/);
   assert.match(sync,/ref:\s*main/);
-  assert.doesNotMatch(sync,/workflow_dispatch:|pull_request:|\b(push|schedule):/);
+  assert.doesNotMatch(sync,/pull_request:|\b(push|schedule):/);
+  assert.match(sync,/workflow_dispatch:\s*\n\s*inputs:\s*\n\s*request_issue:/);
+  assert.match(read('scripts/R4-1-buffered-remote.cjs'),/verify\.requestFromIssue\(await eventIssue\(event\)\)/);
 });
 test('R4.1 batch sync requires canonical R33 before a non-force grouped git push',()=>{
   const sync=yaml('R4.1 Buffered Sync.yml');

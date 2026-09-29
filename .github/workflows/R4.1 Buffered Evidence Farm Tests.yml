@@ -74,7 +74,7 @@ jobs:
       - name: BCR 14-case compact context and recovery contract
         run: node --test 'test/r4 buffered bcr.test.cjs'
       - name: R4.2 elastic disposable chat workers, isolation, queue and recovery
-        run: node --test 'test/r4 elastic bcr.test.cjs'
+        run: node --test 'test/r4 elastic bcr.test.cjs' 'test/r4 universal bcr.test.cjs'
       - name: R4.1 academic traceability and final publication hold
         run: node --test 'test/r4 buffered academic gate.test.cjs'
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries

@@ -1,5 +1,19 @@
 # Agent instructions for MASTER LANGUAGE SYSTEM
 
+## MLS BCR universal command (R4.2)
+
+For `MLS BCR siguiente`, read `docs/MLS Global Dispatcher/19 Comando universal BCR.md`.
+This is the sole user-facing BCR command. Create one authenticated NEXT request;
+recover the authoritative receipt and perform the assigned production or repair
+in the current disposable chat. Renew and complete internally using the documented
+envelopes. Never send the user back to the original conversation. Actions performs
+deterministic Gate, seal and sync; academic source-to-claim review requires an
+actual AI chat consultation, never an invented PASS. One active BCR chat writer
+plus the serialized Actions writer, five-minute fenced leases, durable checkpoints,
+FREE ONLY, no Work handoff, no paid API and no Cloudflare deployment.
+Infrastructure changes are reviewed on a separate branch/PR; this command does
+not authorize merging infrastructure or deploying production.
+
 This repository is the canonical source for MLS project contracts and operational documentation.
 
 ## MLS Watchdog commands

@@ -8,10 +8,12 @@ const r33Core=require('./evidence farm core.js');
 const providers=require('./global dispatcher/providers/integration.js');
 const transport=require('./r4 buffered transport.cjs');
 const sync=require('./r4 buffered sync.cjs');
+const backoff=require('./r4 github backoff.cjs');
 function api(repo,token,request=fetch){
   if(!/^[^/]+\/[^/]+$/.test(String(repo||''))||!token)core.error('GITHUB_CREDENTIALS_REQUIRED');
   let calls=0;
   async function send(method,endpoint,body){
+    backoff.check(process.env.MLS_GITHUB_COOLDOWN_FILE);
     calls++;
     const response=await request('https://api.github.com/repos/'+repo+endpoint,{
       method,headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json',
@@ -20,6 +22,7 @@ function api(repo,token,request=fetch){
       body:body===undefined?undefined:JSON.stringify(body)});
     const raw=await response.text();let data;try{data=raw?JSON.parse(raw):null;}catch{data=raw;}
     if(response.status===403||response.status===429){
+      backoff.record(process.env.MLS_GITHUB_COOLDOWN_FILE,response);
       const e=new Error('GitHub '+response.status+': '+(data?.message||'Remote sync blocked')+
         '; do not retry automatically. Retry-After: '+(response.headers.get('retry-after')||'not supplied'));
       e.code='SYNC_BLOCKED';e.status=response.status;e.retryAfter=response.headers.get('retry-after')||null;throw e;
