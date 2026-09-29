@@ -37,6 +37,8 @@ async function seal(dir,repoRoot,{assess=canonicalAssessment}={}){
     const entries=[];
     for(const u of m.allocation.units){
       const e=core.read(core.ef(dir,u.code)),a=await assess(repoRoot,e);
+      if(!a.ok||!['VERIFIED','REVIEWED'].includes(a.derivedStatus)||a.derivedStatus!==e.status)
+        core.error('R33_CERTIFICATION_REQUIRED','Uncertified Evidence: '+u.code);
       entries.push({code:u.code,entrySha:core.hash(e),derivedStatus:a.derivedStatus,articleHash:a.article?.articleHash||null,
         claimsVerified:a.claimsVerified,sourcesTotal:a.sourcesTotal});
     }
@@ -63,6 +65,8 @@ async function plan(dir,repoRoot,{assess=canonicalAssessment,state=gitState}={})
   const toCreate=[],alreadyPresent=[];
   for(const u of m.allocation.units){
     const e=core.read(core.ef(dir,u.code)),a=await assess(repoRoot,e);
+    if(!a.ok||!['VERIFIED','REVIEWED'].includes(a.derivedStatus)||a.derivedStatus!==e.status)
+      core.error('R33_REVALIDATION_FAILED','Uncertified Evidence: '+u.code);
     const sealed=pkg.entries.find(x=>x.code===u.code);
     if(!sealed||sealed.entrySha!==core.hash(e)||sealed.derivedStatus!==a.derivedStatus||sealed.articleHash!==(a.article?.articleHash||null))
       core.error('PACKAGE_VALIDATION_CONFLICT',u.code);
@@ -83,7 +87,7 @@ async function plan(dir,repoRoot,{assess=canonicalAssessment,state=gitState}={})
       'record integration only when GitHub confirms exact commit SHA']};
 }
 async function cli(argv){
-  const [operation,dir,arg,checkout]=argv;
+  const [operation,dir,arg]=argv;
   if(operation==='init')return core.init(dir,core.read(arg));
   if(operation==='checkpoint')return core.checkpoint(dir,core.read(arg));
   if(operation==='inspect')return core.inspect(dir);
