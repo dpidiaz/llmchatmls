@@ -44,8 +44,10 @@ jobs:
           if [ -n "$remote" ]; then
             git fetch origin "+refs/heads/$target:refs/remotes/origin/r41-target"
             git switch -c "$target" "refs/remotes/origin/r41-target"
+            echo "STAGE_BRANCH_EXISTED=1" >> "$GITHUB_ENV"
           else
             git switch -c "$target" main
+            echo "STAGE_BRANCH_EXISTED=0" >> "$GITHUB_ENV"
           fi
           echo "TARGET_BRANCH=$target" >> "$GITHUB_ENV"
       - name: Reconcile live ownership and prepare exact Evidence files
@@ -68,6 +70,9 @@ jobs:
           node scripts/R4-1-buffered-remote.cjs stage-local "$RUNNER_TEMP/r41-buffer" .
           if ! git diff --cached --quiet; then
             git commit -m "evidence(r4.1): stage immutable buffer $ISSUE"
+          elif [ "$STAGE_BRANCH_EXISTED" = "0" ]; then
+            # All assigned files already byte-identical: still create an auditable per-batch commit.
+            git commit --allow-empty -m "evidence(r4.1): stage immutable buffer $ISSUE"
           fi
           sha="$(git rev-parse HEAD)"
           git push origin "HEAD:refs/heads/$TARGET_BRANCH"
