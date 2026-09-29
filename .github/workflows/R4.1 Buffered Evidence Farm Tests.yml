@@ -43,4 +43,4 @@ jobs:
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
         run: node --test 'test/r4 buffered real evidence pilot.test.cjs'
       - name: Existing R33 provider regression
-        run: node --test 'test/mls global dispatcher provider r33.test.cjs'
+        run: node --test 'test/mls global dispatcher provider r33.test.cjs' 'test/evidence certification contract.test.cjs'
