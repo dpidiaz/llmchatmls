@@ -110,8 +110,12 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
     if(!entries.length)continue;
     batches.push({poolId:snapshot.pool.poolId,batchId:'GLOBAL-'+state.assignmentId,status:'leased',acknowledgedAt:state.acknowledgedAt||null,ackDeadlineAt:state.ackDeadlineAt,expiresAt:state.expiresAt,entries});
   }
-  const reservedCodes=[...new Set((snapshot.bufferedReservations||[])
-    .flatMap(r=>r.allocation.units.map(u=>u.code)).filter(code=>poolCodes.has(code)))];
+  // Include unresolved R4 orphan/recovery claims: the allocator must not silently regenerate them.
+  const recoveryCodes=Object.values(globalLedger?.recoveries||{})
+    .filter(r=>r?.workItem?.provider==='r33-farm')
+    .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
+  const reservedCodes=[...new Set([...(snapshot.bufferedReservations||[])
+    .flatMap(r=>r.allocation.units.map(u=>u.code)),...recoveryCodes].filter(code=>poolCodes.has(code)))];
   return {...snapshot,ledger,batches,reservedCodes};
 }
 function r33CandidateToWork(candidate,now=Date.now()){
