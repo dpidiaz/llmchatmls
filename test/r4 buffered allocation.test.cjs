@@ -54,6 +54,17 @@ test('only valid requested sizes and reviewed releases accepted',()=>{
  const i={title:'[MLS Buffered][REQUEST] pilot',author_association:'OWNER',
  body:'<!-- MLS_BUFFERED_REQUEST\n'+JSON.stringify({kind:'mls_buffer_request',version:1,requestId:'test-r41-request',mode:'reserve',size:10})+'\n-->'};
  assert.equal(buffered.parseRequest(i).size,10);
+ assert.deepEqual(buffered.ALLOWED_NEW_BATCH_SIZES,[10,25]);
+ assert.equal(buffered.MAX_NEW_BATCH_SIZE,25);
+ const i25={...i,body:i.body.replace('"size":10','"size":25')};
+ assert.equal(buffered.parseRequest(i25).size,25);
+ for(const size of [26,50,100]){
+  const rejected={...i,body:i.body.replace('"size":10','"size":'+size)};
+  assert.throws(()=>buffered.parseRequest(rejected),e=>e.code==='BUFFER_REQUEST_SIZE');
+  assert.throws(()=>buffered.allocate({pool:pool(),ledger,batches:[]},args(2234,size)),e=>e.code==='BUFFER_REQUEST_INVALID');
+ }
+ const twentyFive=buffered.allocate({pool:pool(),ledger,batches:[]},args(2234,25));
+ assert.equal(twentyFive.allocation.units.length,25);
  assert.throws(()=>buffered.parseRequest({...i,body:i.body.replace('"size":10','"size":11')}),e=>e.code==='BUFFER_REQUEST_SIZE');
  assert.throws(()=>buffered.parseRequest({...i,body:i.body.replace('"mode":"reserve","size":10','"mode":"release","targetIssueNumber":1234')}),e=>e.code==='BUFFER_RELEASE_REVIEW_REQUIRED');
 });

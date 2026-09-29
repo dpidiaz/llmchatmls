@@ -109,12 +109,13 @@ function choose(workId,terminal,selection,{mode='rehearsal'}={}){
 
 /**
  * First expansion is allowed by immutable AI academic evidence, NOT a human
- * sign-off. Gate 50/100 must be separately enabled after Gate 25 validation.
+ * sign-off. Gate 50/100 are permanently discontinued: larger campaigns are
+ * composed of separate 10/25-entry batches with separate ownership and seals.
  * Runtime Scheduler re-checks the pinned stage ref and successful Actions run.
  */
 function assertScaledPilotReady(size,selection){
  if(size===10)return [];
- assert(size===25,'R41_SCALE_GATE_NOT_CERTIFIED','Gate 50/100 need their own pilot.');
+ assert(size===25,'R41_BATCH_SIZE_LIMIT_25','Single batches above 25 are prohibited; split campaigns into independent reservations.');
  assert(selection?.entries instanceof Map&&selection.entries.size>0,'R41_PILOT_HISTORY_MISSING');
  const out=[];
  for(const [workId,data] of selection.entries){
