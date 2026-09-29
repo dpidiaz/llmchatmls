@@ -5,6 +5,8 @@ on:
     paths:
       - 'MLS R32 EDITORIAL/r4 buffered **'
       - 'scripts/R4-1-buffered-farm.cjs'
+      - 'scripts/R4-1-buffered-remote.cjs'
+      - '.github/workflows/R4.1 Buffered Sync.yml'
       - 'scripts/MLS global dispatcher scheduler.cjs'
       - 'MLS R32 EDITORIAL/global dispatcher/providers/**'
       - '.github/workflows/MLS Global Dispatcher Scheduler.yml'
@@ -29,9 +31,14 @@ jobs:
           node --check 'MLS R32 EDITORIAL/r4 buffered core.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered sync.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered allocation.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered transport.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered verify.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered remote.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered finalize.cjs'
+          node --check 'scripts/R4-1-buffered-remote.cjs'
           node --check 'scripts/MLS global dispatcher scheduler.cjs'
           node --check 'scripts/R4-1-buffered-farm.cjs'
       - name: Buffered Farm transport and safety tests
-        run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs'
+        run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs'
       - name: Existing R33 provider regression
         run: node --test 'test/mls global dispatcher provider r33.test.cjs'
