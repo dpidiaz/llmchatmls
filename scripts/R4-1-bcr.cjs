@@ -23,7 +23,7 @@ function registryFromFile(filename){const r=core.read(filename);
  if(!r||typeof r!=='object'||Array.isArray(r))core.error('BCR_REGISTRY_INVALID');
  return r;
 }
-async function run([op,dir,extra,sha]){
+async function run([op,dir,extra,sha,chunkFile]){
  if(!op||!dir)core.error('BCR_USAGE','bootstrap|advance|next|verify');
  const manifest=core.manifest(dir),progress=read(dir,'progress.json');
  if(op==='bootstrap'){
@@ -50,8 +50,8 @@ async function run([op,dir,extra,sha]){
  if(op==='verify')return {ok:true,packHash:pack.stateHash,lastPersistedBlock:pack.lastPersistedBlock,
   sourceCount:Object.keys(index.sources).length,next:bcr.next(pack,index)};
  if(op==='advance'){
-  if(!/^[a-f0-9]{40}$/.test(sha||''))core.error('BCR_PARENT_SHA_REQUIRED');
-  const out=bcr.advance({manifest,pack,index,progress,chunk:core.read(op==='advance'?process.argv[5]:extra),
+  if(!/^[a-f0-9]{40}$/.test(sha||'')||!chunkFile)core.error('BCR_PARENT_AND_CHUNK_REQUIRED');
+  const out=bcr.advance({manifest,pack,index,progress,chunk:core.read(chunkFile),
     sourceRegistry:registry,expectedParentCommit:sha});
   if(out.replayed)return {replayed:true,packHash:pack.stateHash};
   await core.exclusive(dir,async()=>persist(dir,out.files));

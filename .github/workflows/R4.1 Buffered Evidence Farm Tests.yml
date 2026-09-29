@@ -7,6 +7,10 @@ on:
       - 'scripts/R4-1-buffered-farm.cjs'
       - 'scripts/R4-1-buffered-remote.cjs'
       - 'scripts/R4-1-buffered-academic-check.cjs'
+      - 'scripts/R4-1-bcr.cjs'
+      - 'MLS R32 EDITORIAL/r4 buffered context.cjs'
+      - 'test/r4 buffered bcr.test.cjs'
+      - 'docs/MLS Global Dispatcher/17 R4.1 BCR v1.md'
       - 'scripts/R4 staging rehearsal.cjs'
       - 'MLS R32 EDITORIAL/r4 staging supersession.cjs'
       - 'MLS R32 EDITORIAL/evidence git/staging-supersessions.json'
@@ -45,6 +49,8 @@ jobs:
           node --check 'MLS R32 EDITORIAL/r4 buffered core.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered academic.cjs'
           node --check 'scripts/R4-1-buffered-academic-check.cjs'
+          node --check 'MLS R32 EDITORIAL/r4 buffered context.cjs'
+          node --check 'scripts/R4-1-bcr.cjs'
           node --check 'scripts/R4 final publication readiness.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered sync.cjs'
           node --check 'MLS R32 EDITORIAL/r4 buffered allocation.cjs'
@@ -58,6 +64,8 @@ jobs:
           node --check 'scripts/R4-1-buffered-farm.cjs'
       - name: Buffered Farm transport and safety tests
         run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs' 'test/r4 buffered scheduler integration.test.cjs' 'test/r4 buffered workflow contract.test.cjs'
+      - name: BCR 14-case compact context and recovery contract
+        run: node --test 'test/r4 buffered bcr.test.cjs'
       - name: R4.1 academic traceability and final publication hold
         run: node --test 'test/r4 buffered academic gate.test.cjs'
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
