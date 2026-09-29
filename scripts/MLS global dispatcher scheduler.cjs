@@ -212,7 +212,7 @@ function duplicateAssignment(command,activeStates,ledger){
 }
 
 async function processBufferedRequests(issues,globalLedger,activeStates,now){
-  const requests=issues.filter(issue=>String(issue.title||'').startsWith('[MLS Buffered][REQUEST]'))
+  const requests=issues.filter(issue=>buffered.requestAuthorized(issue)&&String(issue.title||'').startsWith('[MLS Buffered][REQUEST]'))
     .sort((a,b)=>Number(a.number)-Number(b.number));
   const result=[];
   for(const issue of requests){
