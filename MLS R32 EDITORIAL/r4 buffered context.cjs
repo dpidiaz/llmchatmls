@@ -27,8 +27,8 @@ function same(a,b){return core.hash(a)===core.hash(b);}
 function allocation(manifest){
  assert(manifest?.schema===core.SCHEMA&&manifest.allocationHash===core.hash(manifest.allocation),'MANIFEST_TAMPERED');
  const a=manifest.allocation;
- assert(a?.allocatedBy==='global-dispatcher'&&a.units?.length===25&&a.assignmentIssueNumber===1872&&
-   a.assignmentId==='MLS-BUFFER-001872','NOT_ACTIVE_RESERVATION');
+ assert(a?.allocatedBy==='global-dispatcher'&&a.units?.length===25&&Number.isSafeInteger(a.assignmentIssueNumber)&&
+   a.assignmentIssueNumber>0&&a.assignmentId==='MLS-BUFFER-'+String(a.assignmentIssueNumber).padStart(6,'0'),'NOT_ACTIVE_RESERVATION');
  assert(unique(a.units.map(u=>u.code)).length===25&&a.units.every(u=>isCode(u.code)),'ASSIGNED_CODES_INVALID');
  assert(validSha(a.baseCommit)&&validSha(a.contentManifestBlobSha),'BASE_SHA_INVALID');
  return a;
@@ -134,7 +134,7 @@ function makeProgress(manifest,chunks,previous=null){
   all=a.units.map(u=>u.code);
  assert(same(complete,all.slice(0,complete.length)),'PROGRESS_NOT_PREFIX');
  const checkpoints=chunks.flatMap(c=>Object.values(c.checkpoints).map(x=>({code:x.code,entrySha:x.entrySha})));
- const p={...(previous||{}),schema:'MLS-R4.1-PROGRESS-1',issueNumber:1872,assignmentId:a.assignmentId,
+ const p={...(previous||{}),schema:'MLS-R4.1-PROGRESS-1',issueNumber:a.assignmentIssueNumber,assignmentId:a.assignmentId,
   allocationHash:manifest.allocationHash,chunk:chunks.length,totalChunks:5,assigned:25,
   checkpointed:complete.length,completedCodes:complete,pendingCodes:all.slice(complete.length),
   checkpointHashes:checkpoints,chunkHash:chunks[chunks.length-1].chunkHash,
@@ -145,7 +145,7 @@ function makeProgress(manifest,chunks,previous=null){
 function context({manifest,progress,index,priorHash=null,priorCommit,chunk}){
  const a=allocation(manifest),done=progress.completedCodes;
  assert(validSha(priorCommit),'PREVIOUS_COMMIT_REQUIRED');
- const pack={schemaVersion:PACK_SCHEMA,reservationId:a.assignmentId,issueNumber:1872,batchSize:25,
+ const pack={schemaVersion:PACK_SCHEMA,reservationId:a.assignmentId,issueNumber:a.assignmentIssueNumber,batchSize:25,
   blockSize:5,recipeVersion:VERSION,recipeHash:RECIPE_HASH,
   allocationRef:'manifest.json',allocationHash:manifest.allocationHash,
   allocationBaseCommit:a.baseCommit,contentManifestBlobSha:a.contentManifestBlobSha,
@@ -195,7 +195,7 @@ function handoff(pack,delta){
   'Evidence completos: entries/<code>.json; checkpoints: checkpoints/<code>.json.',
   'Advertencias: '+p.warnings.join(' '),
   'Pendientes siguientes: '+(codes.length?codes.join(', '):'Ninguno; ejecutar validación completa 25/25.'),
-  'Siguiente comando: MLS R4.1 continuar reserva #1872 — bloque '+(p.nextBlock||'cierre')+'/05 con BCR. Recuperar solo el último Context Pack, Source Index, Delta, y los 5 artículos nuevos. SIN nueva reserva, sin sync anticipada.'
+  'Siguiente comando: MLS R4.1 continuar reserva #'+p.issueNumber+' — bloque '+(p.nextBlock||'cierre')+'/05 con BCR. Recuperar solo el último Context Pack, Source Index, Delta, y los 5 artículos nuevos. SIN nueva reserva, sin sync anticipada.'
  ].join('\n')+'\n';
 }
 function bootstrap({manifest,chunk,progress,sourceRegistry,parentCommit}){
