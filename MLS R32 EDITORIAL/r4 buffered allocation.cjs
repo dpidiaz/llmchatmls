@@ -7,7 +7,7 @@ const r33=require('./global dispatcher/providers/r33.js');
 const REQUEST_MARKER='MLS_BUFFERED_REQUEST';
 const RESERVATION_MARKER='MLS_BUFFERED_RESERVATION';
 const BUFFERED_TITLE='[MLS Buffered]';
-const LIVE=new Set(['reserved','staged']);
+const LIVE=new Set(['reserved','staged','quarantined']);
 function fail(code,message){throw core.dispatchError(code,message||code,409);}
 function marker(text,name){
   const body=String(text||'');
@@ -70,7 +70,8 @@ function renderReservation(r){
 }
 function parseReservation(issue){
   const title=String(issue?.title||'');
-  if(!title.startsWith(BUFFERED_TITLE+'[RESERVED]')&&!title.startsWith(BUFFERED_TITLE+'[STAGED]'))
+  if(!title.startsWith(BUFFERED_TITLE+'[RESERVED]')&&!title.startsWith(BUFFERED_TITLE+'[STAGED]')&&
+     !title.startsWith(BUFFERED_TITLE+'[QUARANTINED]'))
     fail('BUFFER_RESERVATION_TITLE');
   if(issue.state&&issue.state!=='open')fail('BUFFER_RESERVATION_NOT_OPEN');
   const r=marker(issue.body,RESERVATION_MARKER);
@@ -80,8 +81,9 @@ function parseReservation(issue){
   const a=normalizeAllocation(r.allocation);
   if(a.assignmentIssueNumber!==r.issueNumber||core.sha256(a)!==r.allocationHash)fail('BUFFER_RESERVATION_TAMPERED');
   if(r.status==='reserved'&&!title.startsWith(BUFFERED_TITLE+'[RESERVED]'))fail('BUFFER_TITLE_STATUS_MISMATCH');
-  if(r.status==='staged'){
-    if(!title.startsWith(BUFFERED_TITLE+'[STAGED]')||!/^[a-f0-9]{40}$/i.test(r.stage?.commitSha||'')||
+  if(r.status==='staged'||r.status==='quarantined'){
+    if(!title.startsWith(BUFFERED_TITLE+(r.status==='staged'?'[STAGED]':'[QUARANTINED]'))||
+      !/^[a-f0-9]{40}$/i.test(r.stage?.commitSha||'')||
       !/^[a-f0-9]{64}$/i.test(r.stage?.packageHash||'')||
       !String(r.stage?.branch||'').startsWith('r41/staged/')||
       r.stage?.checksPassed!==true||!Number.isSafeInteger(r.stage?.workflowRunId)||r.stage.workflowRunId<1)fail('BUFFER_STAGING_INVALID');
@@ -94,7 +96,8 @@ function reservations(issues){
     // Public repositories must not let unauthorized, user-created Issues block R33 allocation.
     if(!requestAuthorized(issue))continue;
     if(!String(issue?.title||'').startsWith(BUFFERED_TITLE+'[RESERVED]')&&
-       !String(issue?.title||'').startsWith(BUFFERED_TITLE+'[STAGED]'))continue;
+       !String(issue?.title||'').startsWith(BUFFERED_TITLE+'[STAGED]')&&
+       !String(issue?.title||'').startsWith(BUFFERED_TITLE+'[QUARANTINED]'))continue;
     const r=parseReservation(issue);
     for(const u of r.allocation.units){
       if(codes.has(u.code))fail('DOUBLE_BUFFERED_OWNERSHIP',u.code);
@@ -116,12 +119,20 @@ function allocate(snapshot,{size,issueNumber,requestId,baseCommit,contentManifes
   return reservation({allocation:a,requestId,createdAt:core.iso(now)});
 }
 function stage(r,{branch,commitSha,packageHash,checksPassed,workflowRunId}){
-  if(r.status!=='reserved'||checksPassed!==true||!/^r41\/staged\/[0-9]+$/.test(String(branch||''))||
+  if(!LIVE.has(r.status)||checksPassed!==true||!/^r41\/staged\/[0-9]+$/.test(String(branch||''))||
     !/^[a-f0-9]{40}$/i.test(String(commitSha||''))||!/^[a-f0-9]{64}$/i.test(String(packageHash||''))||
     !Number.isSafeInteger(workflowRunId)||workflowRunId<1)
     fail('BUFFER_STAGE_INVALID');
+  if(r.stage&&(r.stage.branch!==branch||r.stage.commitSha!==commitSha.toLowerCase()||r.stage.packageHash!==packageHash.toLowerCase()))
+    fail('BUFFER_RESTAGE_CONFLICT');
   const next={...r,status:'staged',stage:{branch,commitSha:commitSha.toLowerCase(),packageHash:packageHash.toLowerCase(),checksPassed:true,workflowRunId,stagedAt:core.iso()}};
+  delete next.quarantine;
+  return {...next,recordHash:recordHash(next)};
+}
+function quarantine(r,reason){
+  if(r.status!=='staged'||!r.stage||!String(reason||'').trim())fail('BUFFER_QUARANTINE_INVALID');
+  const next={...r,status:'quarantined',quarantine:{reason:String(reason).slice(0,180),at:core.iso()}};
   return {...next,recordHash:recordHash(next)};
 }
 module.exports={REQUEST_MARKER,RESERVATION_MARKER,BUFFERED_TITLE,parseRequest,requestAuthorized,normalizeAllocation,
-  reservation,renderReservation,parseReservation,reservations,allocate,stage,recordHash};
+  reservation,renderReservation,parseReservation,reservations,allocate,stage,quarantine,recordHash};
