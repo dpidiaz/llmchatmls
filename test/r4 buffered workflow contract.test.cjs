@@ -36,3 +36,13 @@ test('ordinary MLS siguiente, main deployment and FREE ONLY retain separate exis
   assert.match(production,/github\.ref == 'refs\/heads\/main'/);
   assert.doesNotMatch(yaml('R4.1 Buffered Sync.yml'),/npm run predeploy|npm run deploy/);
 });
+
+test('R4.1 retries isolate staged Evidence from canonical pool',()=>{
+  const sync=yaml('R4.1 Buffered Sync.yml');
+  const remote=read('scripts/R4-1-buffered-remote.cjs');
+  const verifier=read('MLS R32 EDITORIAL/r4 buffered verify.cjs');
+  assert.match(sync,/git worktree add --detach "\\$RUNNER_TEMP\\/r41-canonical" main/);
+  assert.match(sync,/MLS_R41_CANONICAL_ROOT=/);
+  assert.match(remote,/canonicalRoot:process\\.env\\.MLS_R41_CANONICAL_ROOT/);
+  assert.match(verifier,/snapshot=collect\\(issues,canonicalRoot\\)/);
+});
