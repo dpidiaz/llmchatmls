@@ -86,7 +86,8 @@ function parseReservation(issue){
       !/^[a-f0-9]{40}$/i.test(r.stage?.commitSha||'')||
       !/^[a-f0-9]{64}$/i.test(r.stage?.packageHash||'')||
       !String(r.stage?.branch||'').startsWith('r41/staged/')||
-      r.stage?.checksPassed!==true||!Number.isSafeInteger(r.stage?.workflowRunId)||r.stage.workflowRunId<1)fail('BUFFER_STAGING_INVALID');
+      r.stage?.checksPassed!==true||!Number.isSafeInteger(r.stage?.workflowRunId)||r.stage.workflowRunId<1||
+      !Number.isSafeInteger(r.stage?.syncRequestIssueNumber)||r.stage.syncRequestIssueNumber<1)fail('BUFFER_STAGING_INVALID');
   }
   return r;
 }
@@ -118,14 +119,15 @@ function allocate(snapshot,{size,issueNumber,requestId,baseCommit,contentManifes
     baseCommit,contentManifestBlobSha,units});
   return reservation({allocation:a,requestId,createdAt:core.iso(now)});
 }
-function stage(r,{branch,commitSha,packageHash,checksPassed,workflowRunId}){
+function stage(r,{branch,commitSha,packageHash,checksPassed,workflowRunId,syncRequestIssueNumber}){
   if(!LIVE.has(r.status)||checksPassed!==true||!/^r41\/staged\/[0-9]+$/.test(String(branch||''))||
     !/^[a-f0-9]{40}$/i.test(String(commitSha||''))||!/^[a-f0-9]{64}$/i.test(String(packageHash||''))||
-    !Number.isSafeInteger(workflowRunId)||workflowRunId<1)
+    !Number.isSafeInteger(workflowRunId)||workflowRunId<1||
+    !Number.isSafeInteger(syncRequestIssueNumber)||syncRequestIssueNumber<1)
     fail('BUFFER_STAGE_INVALID');
   if(r.stage&&(r.stage.branch!==branch||r.stage.commitSha!==commitSha.toLowerCase()||r.stage.packageHash!==packageHash.toLowerCase()))
     fail('BUFFER_RESTAGE_CONFLICT');
-  const next={...r,status:'staged',stage:{branch,commitSha:commitSha.toLowerCase(),packageHash:packageHash.toLowerCase(),checksPassed:true,workflowRunId,stagedAt:core.iso()}};
+  const next={...r,status:'staged',stage:{branch,commitSha:commitSha.toLowerCase(),packageHash:packageHash.toLowerCase(),checksPassed:true,workflowRunId,syncRequestIssueNumber,stagedAt:core.iso()}};
   delete next.quarantine;
   return {...next,recordHash:recordHash(next)};
 }
