@@ -87,7 +87,7 @@ test('secondary rate-limit is reported once without any retry',async()=>{
 });
 test('successful independent workflow run finalizes ledger and closes reservation',async()=>{
  const a=assign(),r=reservation(a),s=allocation.stage(r,{branch:'r41/staged/8801',commitSha:'c'.repeat(40),
-  packageHash:'d'.repeat(64),checksPassed:true,workflowRunId:5555});
+  packageHash:'d'.repeat(64),checksPassed:true,workflowRunId:5555,syncRequestIssueNumber:9901});
  const i={...issue(s),title:'[MLS Buffered][STAGED] '+a.assignmentId};
  const ledgerItem={ledger:{terminal:{},recoveries:{},epochs:{}},dirty:false},closed=[];
  const get=async p=>{
@@ -107,7 +107,7 @@ test('successful independent workflow run finalizes ledger and closes reservatio
 });
 test('failed CI is quarantined without clearing durable ownership',async()=>{
  const a=assign(),r=reservation(a),s=allocation.stage(r,{branch:'r41/staged/8801',commitSha:'c'.repeat(40),
-  packageHash:'d'.repeat(64),checksPassed:true,workflowRunId:5555});
+  packageHash:'d'.repeat(64),checksPassed:true,workflowRunId:5555,syncRequestIssueNumber:9901});
  const issueRow={...issue(s),title:'[MLS Buffered][STAGED] '+a.assignmentId},patches=[];
  const ledgerItem={ledger:{terminal:{},recoveries:{},epochs:{}},dirty:false};
  const result=await finalize.reconcile({issues:[issueRow],ledgerItem,
