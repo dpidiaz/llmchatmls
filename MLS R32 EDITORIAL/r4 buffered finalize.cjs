@@ -24,7 +24,7 @@ async function reconcile({issues,ledgerItem,get,patchIssue,saveLedger}){
       outcome.push({issue:r.issueNumber,status:'QUARANTINED'});continue;
     }
     const expectedBranch='r41/staged/'+r.issueNumber;
-    if(r.stage.branch!==expectedBranch||!sha40(r.stage.commitSha))core.dispatchError('STAGE_BRANCH_INVALID');
+    if(r.stage.branch!==expectedBranch||!sha40(r.stage.commitSha))throw core.dispatchError('STAGE_BRANCH_INVALID','Invalid staged branch.',409);
     const ref=await get('/git/ref/heads/'+expectedBranch.split('/').map(encodeURIComponent).join('/'));
     if(String(ref?.object?.sha||'').toLowerCase()!==r.stage.commitSha)throw core.dispatchError('STAGE_HEAD_CHANGED','Staging branch diverged.',409);
     const commit=await get('/commits/'+r.stage.commitSha);
