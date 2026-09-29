@@ -87,4 +87,31 @@ function choose(workId,terminal,selection,{mode='rehearsal'}={}){
   assets:r.materializationAssets.map(p=>({path:p,commitSha:r.replacement.commitSha})),
   selectionStatus:hold.status==='active'?'PINNED_V3_REHEARSAL_ONLY':'PINNED_V3_APPROVED_FOR_INTEGRATION'};
 }
-module.exports={REGISTRY,HOLD,parseRegistry,load,choose,equalCodes,safeAsset};
+
+/**
+ * Gate for opt-in expansion beyond the original ten. This only validates a
+ * recorded human attestation; the Scheduler authenticates its GitHub comment.
+ * Gate 50/100 requires a separate measured/certified Gate 25 first.
+ */
+function assertScaledPilotReady(size,selection){
+ if(size===10)return [];
+ assert(size===25,'R41_SCALE_GATE_NOT_CERTIFIED','Only Gate 25 may follow pilot 10.');
+ assert(selection?.entries instanceof Map&&selection.entries.size>0,'R41_PILOT_HISTORY_MISSING');
+ const out=[];
+ for(const [workId,data] of selection.entries){
+  const {record:r,hold}=data,approval=hold?.replacementApproval||{};
+  assert(hold.status==='resolved','R41_ACADEMIC_HOLD_ACTIVE',workId);
+  assert(approval.independentAcademicReview===true&&approval.revisionId===r.revisionId&&
+   approval.commitSha===r.replacement.commitSha&&typeof approval.reviewer==='string'&&approval.reviewer.trim().length>2&&
+   typeof approval.reviewerGithub==='string'&&/^[a-z\d](?:[a-z\d-]{0,37}[a-z\d])?$/i.test(approval.reviewerGithub)&&
+   typeof approval.reviewedAt==='string'&&!Number.isNaN(Date.parse(approval.reviewedAt))&&
+   Number.isSafeInteger(approval.reviewIssueNumber)&&approval.reviewIssueNumber>0&&
+   Number.isSafeInteger(approval.reviewCommentId)&&approval.reviewCommentId>0,
+   'R41_HUMAN_ATTESTATION_MISSING',workId);
+  out.push({workId,commitSha:r.replacement.commitSha,reviewerGithub:approval.reviewerGithub,
+    reviewIssueNumber:approval.reviewIssueNumber,reviewCommentId:approval.reviewCommentId,
+    stageBranch:r.replacement.branch});
+ }
+ return out;
+}
+module.exports={REGISTRY,HOLD,parseRegistry,load,choose,equalCodes,safeAsset,assertScaledPilotReady};

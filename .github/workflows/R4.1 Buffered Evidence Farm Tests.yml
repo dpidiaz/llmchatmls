@@ -12,6 +12,7 @@ on:
       - 'MLS R32 EDITORIAL/evidence git/staging-supersessions.json'
       - 'docs/MLS Global Dispatcher/14 R4.1 Piloto 1861 revision bibliografica independiente.md'
       - 'test/r4 staging supersession.test.cjs'
+      - 'test/r4 pilot scale gate.test.cjs'
       - 'MLS R32 EDITORIAL/r4 buffered academic.cjs'
       - 'MLS R32 EDITORIAL/evidence git/quality-holds.json'
       - 'scripts/R4 final publication readiness.cjs'
@@ -59,6 +60,8 @@ jobs:
         run: node --test 'test/r4 buffered academic gate.test.cjs'
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
         run: node --test 'test/r4 buffered real evidence pilot.test.cjs'
+      - name: Human editorial attestation gate for first pilot 25
+        run: node --test 'test/r4 pilot scale gate.test.cjs'
       - name: Pinned revision staging, academic hold and no historical fallback
         run: node --test 'test/r4 staging supersession.test.cjs'
       - name: Existing R33 provider regression

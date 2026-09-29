@@ -6,6 +6,7 @@ const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/provid
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
 const bufferedFinalize=require('../MLS R32 EDITORIAL/r4 buffered finalize.cjs');
+const revisions=require('../MLS R32 EDITORIAL/r4 staging supersession.cjs');
 const child=require('node:child_process');
 
 const token=process.env.GITHUB_TOKEN||'';
@@ -215,6 +216,29 @@ function duplicateAssignment(command,activeStates,ledger){
   return ledger.requests?.[command.requestId]||null;
 }
 
+async function verifyPilot25ReviewerEvidence(approvals){
+ for(const approval of approvals){
+  const issue=await gh('GET','/repos/'+owner+'/'+repo+'/issues/'+approval.reviewIssueNumber);
+  if(issue?.state!=='closed'||!String(issue.title||'').startsWith('[MLS R4.1] Aprobación editorial humana')||
+      !String(issue.body||'').includes(approval.commitSha))
+    throw core.dispatchError('R41_HUMAN_REVIEW_ISSUE_INVALID','A closed SHA-specific editorial review issue is required.',409);
+  const comment=await gh('GET','/repos/'+owner+'/'+repo+'/issues/comments/'+approval.reviewCommentId);
+  const text=String(comment?.body||'').toLowerCase();
+  const target='https://api.github.com/repos/'+owner+'/'+repo+'/issues/'+approval.reviewIssueNumber;
+  const author=String(comment?.user?.login||'').toLowerCase();
+  if(comment?.issue_url!==target||comment?.user?.type!=='User'||
+      author!==approval.reviewerGithub.toLowerCase()||
+      !['OWNER','MEMBER','COLLABORATOR'].includes(String(comment.author_association||'').toUpperCase())||
+      !String(comment?.body||'').includes(approval.commitSha)||
+      !text.includes('confirmo haber comprobado individualmente las 30 afirmaciones')||
+      !text.includes('autorizo solicitar el levantamiento del hold para esta revisión exacta')||
+      text.includes('no autorizo'))
+    throw core.dispatchError('R41_HUMAN_ATTESTATION_UNVERIFIED','Reviewer/attestation issue, SHA or affirmative statement not verifiable.',409);
+  const stage=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+approval.stageBranch);
+  if(String(stage?.object?.sha||'').toLowerCase()!==approval.commitSha.toLowerCase())
+    throw core.dispatchError('R41_APPROVED_STAGE_MOVED','Approved immutable staging branch SHA changed.',409);
+ }
+}
 async function processBufferedRequests(issues,globalLedger,activeStates,now){
   const requests=issues.filter(issue=>buffered.requestAuthorized(issue)&&String(issue.title||'').startsWith('[MLS Buffered][REQUEST]'))
     .sort((a,b)=>Number(a.number)-Number(b.number));
@@ -240,6 +264,9 @@ async function processBufferedRequests(issues,globalLedger,activeStates,now){
         result.push({requestIssue:issue.number,operation:'release',targetIssueNumber:target.number});
         continue;
       }
+      // Gate 25 is fail-closed: release must reference a genuine GitHub reviewer comment on the exact v3 SHA.
+      const approvals=revisions.assertScaledPilotReady(command.size,revisions.load(root));
+      if(approvals.length)await verifyPilot25ReviewerEvidence(approvals);
       // The same serialized scheduler performs normal claims and durable buffered reservations.
       const snapshot=providerIntegration.projectR33Snapshot(
         providerIntegration.collectR33Snapshot(issues,root),{globalLedger,globalAssignments:activeStates});
