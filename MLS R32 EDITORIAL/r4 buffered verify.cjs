@@ -43,6 +43,7 @@ function overlap(codes,units){return units.some(x=>codes.has(typeof x==='string'
 function checkpointCodes(state){return providers.completedUnitsForState(state);}
 async function verifyLive(dir,root,issueNumber,client,{plan=sync.plan,collect=providers.collectR33Snapshot}={}){
   const m=core.manifest(dir),bundle=transport.assemble(dir);
+  if(m.allocation.pilotOnly||m.allocation.allocatedBy!=='global-dispatcher')core.error('OFFLINE_PILOT_CANNOT_SYNC');
   if(!Number.isSafeInteger(issueNumber)||issueNumber<1||m.allocation.assignmentIssueNumber!==issueNumber)
     core.error('RESERVATION_ISSUE_MISMATCH');
   const issues=await listAll(client,'/issues?state=open');
