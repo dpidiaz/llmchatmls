@@ -393,5 +393,7 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
 async function main(){
   const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
   if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length)console.log(JSON.stringify({ok:true,...result}));
+  return result;
 }
-main().catch(error=>{console.error(error);process.exitCode=1});
+if(require.main===module)main().catch(error=>{console.error(error);process.exitCode=1});
+module.exports={main,processBufferedRequests};
