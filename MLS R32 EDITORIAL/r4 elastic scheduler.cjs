@@ -113,7 +113,12 @@ async function verifyClaimCompletion(api,res,block,command,issue,now){
  requireOk(block.status==='leased'&&block.claimIssueNumber===command.claimIssueNumber &&
   block.block===command.block&&res.issueNumber===command.reservationIssueNumber,'STALE_LEASE');
  requireOk(block.workerLogin===issue.user?.login,'CLAIM_OWNER_MISMATCH');
- requireOk(Date.parse(block.expiresAt)>now,'LEASE_EXPIRED_RECLAIM');
+ const submittedAt=Date.parse(issue.created_at||0),expiry=Date.parse(block.expiresAt);
+ // A GitHub Issue created BEFORE lease expiry is legitimate even if the
+ // serialized Scheduler picks it up shortly after expiry (up to 2min queue).
+ // No claim is ever accepted after the reaper has changed the block epoch.
+ requireOk(Number.isFinite(submittedAt)&&submittedAt<=now&&submittedAt<=expiry&&
+  now-submittedAt<=2*60*1000,'LEASE_EXPIRED_RECLAIM');
  const claim=await api.get('/issues/'+block.claimIssueNumber);
  requireOk(claim?.user?.login===issue.user?.login &&
   String(claim?.title||'').startsWith('[MLS Dispatcher][BCR][LEASED]'),'CLAIM_NOT_OWNER');
@@ -261,7 +266,10 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now()})
    requireOk(at>=0,'RENEW_RESERVATION_MISSING');
    const res=reservations[at],blocks=elastic.blocks(res),b=blocks[cmd.block-1];
    requireOk(b.status==='leased'&&b.claimIssueNumber===cmd.claimIssueNumber&&
-    b.workerLogin===issue.user?.login&&Date.parse(b.expiresAt)>now,'RENEW_NOT_OWNER_OR_EXPIRED');
+    b.workerLogin===issue.user?.login&&
+     Number.isFinite(Date.parse(issue.created_at||0))&&Date.parse(issue.created_at)<=now&&
+     Date.parse(issue.created_at)<=Date.parse(b.expiresAt)&&
+     now-Date.parse(issue.created_at)<=2*60*1000,'RENEW_NOT_OWNER_OR_EXPIRED');
    blocks[cmd.block-1]={...b,expiresAt:new Date(now+elastic.TTL_MS).toISOString()};
    reservations[at]=await saveReservation(api,elastic.withBlocks(res,blocks),res.recordHash);
    await finishRequest(api,issue,'RENEWED',{ok:true,expiresAt:blocks[cmd.block-1].expiresAt});
