@@ -25,7 +25,7 @@ async function prepare(dir,root,issueNumber,client){
     imported:approved.plan.toCreate.length,alreadyPresent:approved.plan.alreadyPresent.length,
     remoteReadCalls:approved.remoteReads,status:'LOCAL_FILES_PREPARED_NOT_PUSHED'};
 }
-async function markStaged(dir,root,issueNumber,branch,commitSha,client,workflowRunId){
+async function markStaged(dir,root,issueNumber,branch,commitSha,client,workflowRunId,syncRequestIssueNumber){
   const approved=await verify.verifyLive(dir,root,issueNumber,client);
   const expected='r41/staged/'+issueNumber;
   if(branch!==expected||approved.plan.branch!==branch||!Number.isSafeInteger(workflowRunId)||workflowRunId<1)
@@ -39,7 +39,7 @@ async function markStaged(dir,root,issueNumber,branch,commitSha,client,workflowR
      r.stage.workflowRunId===workflowRunId)
     return {replayed:true,commitSha:actual,packageHash:approved.packageHash,remoteRestCalls:client.counts().httpCalls};
   const staged=allocation.stage(r,{branch,commitSha:actual,packageHash:approved.packageHash,
-    checksPassed:true,workflowRunId});
+    checksPassed:true,workflowRunId,syncRequestIssueNumber});
   await client.patch('/issues/'+issueNumber,{
     title:'[MLS Buffered][STAGED] '+staged.allocation.assignmentId,
     body:allocation.renderReservation(staged)});
