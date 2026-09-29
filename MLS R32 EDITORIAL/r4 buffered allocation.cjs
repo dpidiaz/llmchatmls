@@ -91,6 +91,8 @@ function parseReservation(issue){
 function reservations(issues){
   const result=[],codes=new Set();
   for(const issue of issues||[]){
+    // Public repositories must not let unauthorized, user-created Issues block R33 allocation.
+    if(!requestAuthorized(issue))continue;
     if(!String(issue?.title||'').startsWith(BUFFERED_TITLE+'[RESERVED]')&&
        !String(issue?.title||'').startsWith(BUFFERED_TITLE+'[STAGED]'))continue;
     const r=parseReservation(issue);
