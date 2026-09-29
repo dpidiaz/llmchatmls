@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 996772378572b931d60d6dac3e78c405f1f07d55
+          ref: 89e8e13b6a69fc2d7c8af9a42261079f5aac69ae
           fetch-depth: 1
       - name: Preflight FREE ONLY - commit, index and existing Cloudflare token
         shell: bash
@@ -27,8 +27,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = '996772378572b931d60d6dac3e78c405f1f07d55'
-          test "$(git ls-remote origin refs/heads/main | cut -f1)" = '996772378572b931d60d6dac3e78c405f1f07d55'
+          test "$(git rev-parse HEAD)" = '89e8e13b6a69fc2d7c8af9a42261079f5aac69ae'
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = '89e8e13b6a69fc2d7c8af9a42261079f5aac69ae'
           test -n "${CLOUDFLARE_API_TOKEN:-}" || { echo '::error::Existing Cloudflare deploy token missing. No deployment.'; exit 1; }
           node - <<'NODE'
           const fs=require('node:fs');
@@ -47,7 +47,7 @@ jobs:
       - run: npm run test:evidence
       - run: npm run test:canonical-tools
       - run: npm run qa:baseline
-      - run: GITHUB_SHA=996772378572b931d60d6dac3e78c405f1f07d55 npm run predeploy
+      - run: GITHUB_SHA=89e8e13b6a69fc2d7c8af9a42261079f5aac69ae npm run predeploy
       - name: Confirm generated Evidence runtime before production deploy
         shell: bash
         run: |
@@ -57,7 +57,7 @@ jobs:
           const p='public/data/evidence/manifest.json';
           const m=JSON.parse(fs.readFileSync(p,'utf8'));
           const h=JSON.parse(fs.readFileSync('public/data/evidence/health.json','utf8'));
-          const expected='996772378572b931d60d6dac3e78c405f1f07d55';
+          const expected='89e8e13b6a69fc2d7c8af9a42261079f5aac69ae';
           const ids=['MLS-V10-0361','MLS-V10-0398','MLS-V10-0409'];
           if(m.totalEntries!==1725||m.verified!==1725||m.sourceCommit!==expected||h.totalEntries!==1725||h.verified!==1725||
              ids.some(id=>m.entries?.[id]?.status!=='VERIFIED'))throw Error('PREDEPLOY_R33_SNAPSHOT_MISMATCH');
@@ -71,9 +71,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = '996772378572b931d60d6dac3e78c405f1f07d55'
-          test "$(git ls-remote origin refs/heads/main | cut -f1)" = '996772378572b931d60d6dac3e78c405f1f07d55'
-          GITHUB_SHA=996772378572b931d60d6dac3e78c405f1f07d55 npm run deploy
+          test "$(git rev-parse HEAD)" = '89e8e13b6a69fc2d7c8af9a42261079f5aac69ae'
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = '89e8e13b6a69fc2d7c8af9a42261079f5aac69ae'
+          GITHUB_SHA=89e8e13b6a69fc2d7c8af9a42261079f5aac69ae npm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       - name: Verificar Evidence visible en produccion
@@ -111,7 +111,7 @@ jobs:
           const fs=require('node:fs');
           const m=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
           const ids=['MLS-V10-0361','MLS-V10-0398','MLS-V10-0409'];
-          const ok=m.totalEntries===1725&&m.verified===1725&&m.sourceCommit==='996772378572b931d60d6dac3e78c405f1f07d55'&&m.buildId===process.argv[3]&&
+          const ok=m.totalEntries===1725&&m.verified===1725&&m.sourceCommit==='89e8e13b6a69fc2d7c8af9a42261079f5aac69ae'&&m.buildId===process.argv[3]&&
                    ids.every(c=>m.entries?.[c]?.status==='VERIFIED');
           if(!ok)process.exit(1);
           console.log('LIVE_MANIFEST_1725_PASS',m.buildId,m.sourceCommit);
@@ -127,7 +127,7 @@ jobs:
           const fs=require('node:fs');
           const e=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
           if(e.code!==process.argv[3]||e.status!=='VERIFIED'||e.sourceOfTruth!=='github'||!e.references?.length||
-             e.provenance?.deploymentSourceCommit!=='996772378572b931d60d6dac3e78c405f1f07d55')throw Error('PUBLIC_EVIDENCE_MISMATCH:'+process.argv[3]);
+             e.provenance?.deploymentSourceCommit!=='89e8e13b6a69fc2d7c8af9a42261079f5aac69ae')throw Error('PUBLIC_EVIDENCE_MISMATCH:'+process.argv[3]);
           console.log('LIVE_EVIDENCE_PASS',e.code,e.status);
           NODE
           done
