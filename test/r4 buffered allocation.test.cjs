@@ -64,3 +64,12 @@ test('staged marker can only be derived from full validated reservation',()=>{
  assert.equal(buffered.parseReservation(stagedIssue).stage.commitSha,'c'.repeat(40));
  assert.throws(()=>buffered.stage(r,{branch:'r41/staged/1234',commitSha:'c'.repeat(40),packageHash:'d'.repeat(64),workflowRunId:12345,checksPassed:false}),e=>e.code==='BUFFER_STAGE_INVALID');
 });
+
+test('unresolved R4 orphan recovery codes remain protected despite expired leases',()=>{
+ const snapshot=providers.projectR33Snapshot({pool:pool(),ledger,batches:[],bufferedReservations:[]},{
+  globalLedger:{terminal:{},recoveries:{'orphan-work':{workItem:{provider:'r33-farm',resourceLocks:['entry:'+code(1)]},
+   resourceLocks:['entry:'+code(1)]}}},globalAssignments:[]});
+ assert.deepEqual(snapshot.reservedCodes,[code(1)]);
+ const result=r33.materializeCandidate(snapshot,{now:epoch,requested:1});
+ assert.deepEqual(result.units.map(u=>u.code),[code(2)]);
+});
