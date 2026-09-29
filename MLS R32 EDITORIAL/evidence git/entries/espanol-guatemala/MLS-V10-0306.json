@@ -7,8 +7,8 @@
   "contentPath": "content/espanol-guatemala/MLS-V10-0306.json",
   "article": {
     "code": "MLS-V10-0306",
-    "articleGeneratedAt": "2026-09-14T06:48:06.009Z",
-    "articleHash": "5e2d88f215ccf8e3cf6bbe022dc65ad6c3d70a838f601c493aa70f1566efe601",
+    "articleGeneratedAt": "2026-09-29T05:25:00.000Z",
+    "articleHash": "9a60d77252adecb755e833c883e794dbe72268f46cabd657103d3b5d3243cee0",
     "language": "espanol-guatemala",
     "languageName": "Español de Guatemala",
     "title": "Artículo indefinido y primera mención",
@@ -17,44 +17,89 @@
     "chapter": "El artículo indefinido y la definitud / The indefinite article and definiteness"
   },
   "evidenceVersion": "1.0",
-  "evidenceRevision": 2,
+  "evidenceRevision": 3,
   "status": "VERIFIED",
   "claims": [
     {
-      "claimId": "MLS-CLM-9224E16FB0883D34B356F5B1",
+      "claimId": "MLS-CLM-6C04428E281E8611BF425899",
       "sectionKey": "En pocas palabras",
-      "summary": "El artículo indefinido (un, una, unos, unas) presenta referentes nuevos en el discurso y estos pueden retomarse después con una expresión definida.",
+      "summary": "La primera mención con artículo indefinido puede introducir un referente nuevo para el interlocutor.",
+      "claimType": "grammatical_description",
+      "materiality": "substantial"
+    },
+    {
+      "claimId": "MLS-CLM-68D3445A178F45EF4C78CE93",
+      "sectionKey": "Cómo funciona",
+      "summary": "Un referente presentado inicialmente con indefinido puede retomarse con artículo definido cuando pasa a ser identificable en el discurso.",
+      "claimType": "grammatical_description",
+      "materiality": "substantial"
+    },
+    {
+      "claimId": "MLS-CLM-9A601CB293DD126AEC8D946F",
+      "sectionKey": "Observación importante",
+      "summary": "La primera mención y la identificación de un referente dependen del conocimiento compartido, no únicamente de si el hablante conoce ese objeto.",
       "claimType": "grammatical_description",
       "materiality": "substantial"
     }
   ],
   "links": [
     {
-      "linkId": "MLS-LNK-CE181F794FF738E05F1481A4",
-      "claimId": "MLS-CLM-9224E16FB0883D34B356F5B1",
+      "linkId": "MLS-LNK-01D9FEEEBCB666F5365F43B0",
+      "claimId": "MLS-CLM-6C04428E281E8611BF425899",
       "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
       "supportType": "supports",
-      "locator": {},
-      "notes": "NGLE: valores del artículo indefinido y primera mención; RAE/ASALE (2009). No se atribuye paginación no consultada.",
-      "verificationMethod": "manual_source_match"
+      "locator": {
+        "section": "15.4a–c",
+        "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/an%C3%A1fora-y-primera-menci%C3%B3n"
+      },
+      "notes": "NGLE (2009), apartado identificado en el recurso RAE en línea; sin atribuir páginas impresas inexistentes.",
+      "verificationMethod": "source_passage_located_by_chatgpt"
+    },
+    {
+      "linkId": "MLS-LNK-0291EA4B06765304A10135F0",
+      "claimId": "MLS-CLM-68D3445A178F45EF4C78CE93",
+      "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+      "supportType": "supports",
+      "locator": {
+        "section": "15.4c–e",
+        "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/an%C3%A1fora-y-primera-menci%C3%B3n"
+      },
+      "notes": "NGLE (2009), apartado identificado en el recurso RAE en línea; sin atribuir páginas impresas inexistentes.",
+      "verificationMethod": "source_passage_located_by_chatgpt"
+    },
+    {
+      "linkId": "MLS-LNK-23CFDFE295729E854A2B8BD8",
+      "claimId": "MLS-CLM-9A601CB293DD126AEC8D946F",
+      "sourceId": "MLS-SRC-4FD19E7F1FE011BD0049",
+      "supportType": "supports",
+      "locator": {
+        "section": "15.4a–c",
+        "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/an%C3%A1fora-y-primera-menci%C3%B3n"
+      },
+      "notes": "NGLE (2009), apartado identificado en el recurso RAE en línea; sin atribuir páginas impresas inexistentes.",
+      "verificationMethod": "source_passage_located_by_chatgpt"
     }
   ],
   "conflicts": [],
   "verification": {
-    "verifiedAt": "2026-09-29T04:57:28.769Z",
+    "verifiedAt": "2026-09-29T05:25:00.000Z",
     "reviewerType": "chatgpt",
-    "reviewer": "ChatGPT R33 Buffered Pilot #1861",
-    "verificationMethod": "manual_source_match",
-    "evidenceSnapshotHash": "16bc49536fe1292df35108002b8aeec4de7f06bc4ce2a1375df49b02d0ec57a3",
-    "runId": "MLS-BUFFER-001861"
+    "reviewer": "ChatGPT, R4.1 pilot #1861 correction v3",
+    "verificationMethod": "source_passage_located_by_chatgpt",
+    "evidenceSnapshotHash": "90169765820fae72c911eb2904ea229d70855e21b3fbeeb706ef7a38474e0855",
+    "runId": "MLS-R41-1861-REV3"
   },
   "review": null,
   "provenance": {
     "generatedWithAI": true,
     "model": "GPT-5.6 Sol",
-    "promptVersion": "R33",
-    "runId": "MLS-BUFFER-001861",
+    "promptVersion": "R33-R4.1-source-traceability",
+    "runId": "MLS-R41-1861-REV3",
     "sourceOfTruth": "github",
-    "updatedAt": "2026-09-29T04:57:28.769Z"
+    "updatedAt": "2026-09-29T05:25:00.000Z",
+    "parentStageCommit": "b6de10a6cd9d2a0682a9a162606a6d09e2bea839",
+    "parentEntryHash": "07f1d3310f529f87322fcaa1b5a713d51ef1cf0eeb500b1b19730744dee261da",
+    "auditScope": "AI passage check; NOT human REVIEWED",
+    "publicationStatus": "QUALITY_HOLD_UNTIL_RECONCILIATION"
   }
 }
