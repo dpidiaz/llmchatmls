@@ -15,7 +15,7 @@ async function run([mode,...args]){
     return 'issueNumber='+request.issueNumber+'\ninboxBranch='+request.inboxBranch+'\n';
   }
   if(mode==='unpack')return transport.importFrom(args[0],args[1]);
-  if(mode==='prepare')return remote.prepare(args[0],args[1],Number(args[2]),api());
+  if(mode==='prepare')return remote.prepare(args[0],args[1],Number(args[2]),api(),{canonicalRoot:process.env.MLS_R41_CANONICAL_ROOT||args[1]});
   if(mode==='stage-local'){
     const m=core.manifest(args[0]),base=args[1],paths=m.allocation.units.map(u=>u.evidenceArtifactPath);
     for(const p of paths){
@@ -33,7 +33,7 @@ async function run([mode,...args]){
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
     const request=verify.requestFromIssue(event.issue);
     if(request.issueNumber!==Number(args[2]))core.error('SYNC_REQUEST_RESERVATION_MISMATCH');
-    return remote.markStaged(args[0],args[1],Number(args[2]),args[3],args[4],api(),Number(process.env.GITHUB_RUN_ID),request.requestIssueNumber);
+    return remote.markStaged(args[0],args[1],Number(args[2]),args[3],args[4],api(),Number(process.env.GITHUB_RUN_ID),request.requestIssueNumber,{canonicalRoot:process.env.MLS_R41_CANONICAL_ROOT||args[1]});
   }
   core.error('REMOTE_USAGE','Usage: request <event.json> | unpack <buffer> <bundle.json> | prepare <buffer> <checkout> <issue> | stage-local <buffer> <checkout> | mark <buffer> <checkout> <issue> <branch> <commitSHA>');
 }

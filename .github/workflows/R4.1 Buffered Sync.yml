@@ -36,6 +36,9 @@ jobs:
           ISSUE: ${{ steps.request.outputs.issueNumber }}
         run: |
           set -euo pipefail
+          # Keep an independent, read-only canonical main snapshot; staged Evidence must not change pool eligibility.
+          git worktree add --detach "$RUNNER_TEMP/r41-canonical" main
+          echo "MLS_R41_CANONICAL_ROOT=$RUNNER_TEMP/r41-canonical" >> "$GITHUB_ENV"
           git fetch origin "+refs/heads/$INBOX:refs/remotes/origin/r41-inbox"
           git show "refs/remotes/origin/r41-inbox:r41-package.json" > "$RUNNER_TEMP/r41-package.json"
           node scripts/R4-1-buffered-remote.cjs unpack "$RUNNER_TEMP/r41-buffer" "$RUNNER_TEMP/r41-package.json"

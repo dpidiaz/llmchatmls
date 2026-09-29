@@ -165,3 +165,20 @@ test('already-identical assigned files allow 0/subset changed paths, but never f
     e=>e.code==='STAGE_COMMIT_SCOPE_INVALID');
   assert.equal(Object.keys(ledgerItem.ledger.terminal).length,0);
 });
+
+test('live verifier never derives R33 eligibility from staged checkout',async t=>{
+ const {d,a}=await pack(t),r=reservation(a),client=fakeApi([issue(r)]);
+ const canonical=path.join(tmp(t),'canonical'),staged=path.join(tmp(t),'staged');
+ let observedRoot=null;
+ const out=await verifier.verifyLive(d,staged,8801,client,{
+   canonicalRoot:canonical,
+   plan:async()=>({branch:'r41/staged/8801',toCreate:[],alreadyPresent:a.units.map(x=>x.code)}),
+   collect:(_issues,root)=>{
+     observedRoot=root;
+     if(root!==canonical)throw Error('staged Evidence incorrectly altered pool eligibility');
+     return snapshot(a);
+   }
+ });
+ assert.equal(observedRoot,canonical);
+ assert.equal(out.codes.length,10);
+});

@@ -41,7 +41,7 @@ async function listAll(client,path,maxPages=30){
 }
 function overlap(codes,units){return units.some(x=>codes.has(typeof x==='string'?x:x.code));}
 function checkpointCodes(state){return providers.completedUnitsForState(state);}
-async function verifyLive(dir,root,issueNumber,client,{plan=sync.plan,collect=providers.collectR33Snapshot}={}){
+async function verifyLive(dir,root,issueNumber,client,{plan=sync.plan,collect=providers.collectR33Snapshot,canonicalRoot=root}={}){
   const m=core.manifest(dir),bundle=transport.assemble(dir);
   if(m.allocation.pilotOnly||m.allocation.allocatedBy!=='global-dispatcher')core.error('OFFLINE_PILOT_CANNOT_SYNC');
   if(!Number.isSafeInteger(issueNumber)||issueNumber<1||m.allocation.assignmentIssueNumber!==issueNumber)
@@ -74,7 +74,8 @@ async function verifyLive(dir,root,issueNumber,client,{plan=sync.plan,collect=pr
     if(overlap(codes,[...providers.codesFromLocks(state.resourceLocks||[]),...checkpointCodes(state)]))
       core.error('ACTIVE_OR_UNREAPED_CLAIM_CONFLICT');
   }
-  const snapshot=collect(issues,root);
+  // The staged checkout may already contain this package. Eligibility must reflect canonical main, never staged Evidence.
+  const snapshot=collect(issues,canonicalRoot);
   if(snapshot.pool.poolId!==r.allocation.poolId||snapshot.pool.manifestVersion!==r.allocation.manifestVersion)
     core.error('POOL_VERSION_CHANGED');
   if(overlap(codes,[...snapshot.ledger.verified,...snapshot.ledger.exceptions]))core.error('R33_LEDGER_TERMINAL_CONFLICT');

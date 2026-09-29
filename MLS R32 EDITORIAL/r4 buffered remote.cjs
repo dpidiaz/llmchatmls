@@ -7,8 +7,8 @@ const sync=require('./r4 buffered sync.cjs');
 const verify=require('./r4 buffered verify.cjs');
 const allocation=require('./r4 buffered allocation.cjs');
 
-async function prepare(dir,root,issueNumber,client){
-  const approved=await verify.verifyLive(dir,root,issueNumber,client);
+async function prepare(dir,root,issueNumber,client,{canonicalRoot=root}={}){
+  const approved=await verify.verifyLive(dir,root,issueNumber,client,{canonicalRoot});
   for(const item of approved.plan.toCreate){
     const entry=core.read(core.ef(dir,item.code));
     if(core.hash(entry)!==item.sha256)core.error('ENTRY_HASH_CHANGED',item.code);
@@ -25,8 +25,8 @@ async function prepare(dir,root,issueNumber,client){
     imported:approved.plan.toCreate.length,alreadyPresent:approved.plan.alreadyPresent.length,
     remoteReadCalls:approved.remoteReads,status:'LOCAL_FILES_PREPARED_NOT_PUSHED'};
 }
-async function markStaged(dir,root,issueNumber,branch,commitSha,client,workflowRunId,syncRequestIssueNumber){
-  const approved=await verify.verifyLive(dir,root,issueNumber,client);
+async function markStaged(dir,root,issueNumber,branch,commitSha,client,workflowRunId,syncRequestIssueNumber,{canonicalRoot=root}={}){
+  const approved=await verify.verifyLive(dir,root,issueNumber,client,{canonicalRoot});
   const expected='r41/staged/'+issueNumber;
   if(branch!==expected||approved.plan.branch!==branch||!Number.isSafeInteger(workflowRunId)||workflowRunId<1)
     core.error('STAGE_BRANCH_OR_RUN_MISMATCH');
