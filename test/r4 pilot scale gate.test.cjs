@@ -16,9 +16,18 @@ function signed(){
   limitsAcknowledged:true};
  return {entries:new Map([[id,data]]),activeHeldCodes:new Set()};
 }
-test('AI-only: ten-entry opt-in unchanged, current historic hold blocks 25',()=>{
+test('AI-only: pilot 10 unchanged, v3 AI-verified historical hold permits 25',()=>{
  assert.deepEqual(s.assertScaledPilotReady(10,current),[]);
- assert.throws(()=>s.assertScaledPilotReady(25,current),/R41_ACADEMIC_HOLD_ACTIVE/);
+ const a=s.assertScaledPilotReady(25,current);
+ assert.equal(a.length,1);
+ assert.equal(a[0].commitSha,'8df7762dd540a31da2fe7bfe68075f7a1217cc1a');
+ assert.equal(current.entries.get(workId).hold.status,'resolved');
+ assert.equal(current.entries.get(workId).hold.replacementApproval.humanReviewed,false);
+});
+test('a reactivated academic hold still blocks Gate 25',()=>{
+ const blocked=signed(),pair=blocked.entries.get(workId);
+ pair.hold.status='active';delete pair.hold.replacementApproval;
+ assert.throws(()=>s.assertScaledPilotReady(25,blocked),/R41_ACADEMIC_HOLD_ACTIVE/);
 });
 test('verified AI record explicitly has humanReviewed false and passes Gate 25 structure',()=>{
  const approved=signed();

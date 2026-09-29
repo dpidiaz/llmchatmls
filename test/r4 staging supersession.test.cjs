@@ -26,27 +26,34 @@ function aiApproval(){
 
 test('source registry pins exact v3 commit and matches original quality hold',()=>{
  assert.equal(state.entries.size,1);
- assert.equal(hold.status,'active');
+ assert.equal(hold.status,'resolved');
+ assert.equal(hold.replacementApproval.protocol,selector.AI_PROTOCOL);
+ assert.equal(hold.replacementApproval.humanReviewed,false);
  assert.equal(rec.replacement.branch,'r41/staged/1861-v3');
  assert.equal(rec.replacement.commitSha,'8df7762dd540a31da2fe7bfe68075f7a1217cc1a');
  assert.equal(rec.original.commitSha,'b6de10a6cd9d2a0682a9a162606a6d09e2bea839');
  assert.equal(rec.academicSecondPass.checkedClaims,30);
  assert.equal(rec.academicSecondPass.humanReviewed,false);
 });
-test('a held final integration has no old-SHA fallback and will not schedule these ten codes',()=>{
+test('AI-resolved exact v3 is eligible; reverting to active hold blocks final integration without old fallback',()=>{
  const choice=selector.choose(rec.workId,terminal,state,{mode:'integration'});
- assert.equal(choice.blocked,true);
+ assert.equal(choice.blocked,false);
  assert.equal(choice.commitSha,rec.replacement.commitSha);
- const available=integration.r33TerminalSourceMap(ledger,pool,{root});
- assert.equal(available.size,0);
- const work=integration.r33IndexIntegrationWork({pool,globalLedger:ledger,root,waveSize:10,verifiedCodes:[]});
- assert.equal(work,null);
+ const selected=integration.r33TerminalSourceMap(ledger,pool,{root});
+ assert.equal(selected.size,10);
+ assert.ok([...selected.values()].every(x=>x.commitSha===rec.replacement.commitSha));
+ const held={...hold,status:'active',replacementApproval:undefined};
+ const blocked={entries:new Map([[rec.workId,{record:rec,hold:held}]]),activeHeldCodes:new Set(rec.codes)};
+ const choiceBlocked=selector.choose(rec.workId,terminal,blocked,{mode:'integration'});
+ assert.equal(choiceBlocked.blocked,true);
+ assert.equal(choiceBlocked.commitSha,rec.replacement.commitSha);
+ assert.notEqual(choiceBlocked.commitSha,rec.original.commitSha);
 });
 test('rehearsal uses *only* v3 and pins the two article + two source supplement assets',()=>{
  const manifest=integration.r33StagingManifest(ledger,{createdAt:'2026-09-29T06:00:00Z',root});
  assert.equal(manifest.entryCount,10);
  assert.ok(manifest.entries.every(e=>e.commitSha===rec.replacement.commitSha));
- assert.ok(manifest.entries.every(e=>e.branch===rec.replacement.branch&&e.academicHold===true));
+ assert.ok(manifest.entries.every(e=>e.branch===rec.replacement.branch&&e.academicHold===false));
  assert.equal(manifest.assetRefs.length,4);
  assert.ok(manifest.assetRefs.every(a=>a.commitSha===rec.replacement.commitSha&&selector.safeAsset(a.path,rec.codes)));
  assert.equal(manifest.revisionSelections[0].originalCommitSha,rec.original.commitSha);
@@ -64,17 +71,18 @@ test('wrong original terminal, altered hold and duplicate ownership fail closed'
  const repeated=structuredClone(raw);repeated.entries.push(structuredClone(repeated.entries[0]));
  assert.throws(()=>selector.parseRegistry(repeated,holds),/SUPERSESSION_WORK_ID/);
 });
-test('after AI evidence protocol resolves the hold, exact v3 is selected—not the old SHA',()=>{
- const approve=structuredClone(hold);
- approve.status='resolved';
- approve.replacementApproval=aiApproval();
- const stateApproved={entries:new Map([[rec.workId,{record:rec,hold:approve}]]),activeHeldCodes:new Set()};
- const s=selector.choose(rec.workId,terminal,stateApproved,{mode:'integration'});
- assert.equal(s.blocked,false);assert.equal(s.commitSha,rec.replacement.commitSha);
+test('actual AI-only release selects the exact v3 SHA; false or incomplete approval is rejected',()=>{
+ const s=selector.choose(rec.workId,terminal,state,{mode:'integration'});
+ assert.equal(s.blocked,false);
+ assert.equal(s.commitSha,rec.replacement.commitSha);
  assert.notEqual(s.commitSha,rec.original.commitSha);
- const noApproval=structuredClone(approve);delete noApproval.replacementApproval;
+ const noApproval=structuredClone(hold);delete noApproval.replacementApproval;
  assert.throws(()=>selector.choose(rec.workId,terminal,
   {entries:new Map([[rec.workId,{record:rec,hold:noApproval}]]),activeHeldCodes:new Set()},{mode:'integration'}),
+  /R41_AI_EVIDENCE_APPROVAL_INVALID/);
+ const bad=structuredClone(hold);bad.replacementApproval.humanReviewed=true;
+ assert.throws(()=>selector.choose(rec.workId,terminal,
+  {entries:new Map([[rec.workId,{record:rec,hold:bad}]]),activeHeldCodes:new Set()},{mode:'integration'}),
   /R41_AI_EVIDENCE_APPROVAL_INVALID/);
 });
 test('academic source report does not claim human REVIEWED certification',()=>{
