@@ -50,7 +50,7 @@ async function verifyLive(dir,root,issueNumber,client){
   if(!original||!allocation.requestAuthorized(original))core.error('RESERVATION_NOT_OPEN_OR_AUTHORIZED');
   const r=allocation.parseReservation(original);
   if(r.allocationHash!==m.allocationHash||core.hash(r.allocation)!==m.allocationHash)core.error('RESERVATION_NOT_EQUAL_TO_BUNDLE');
-  if(r.status==='staged'&&r.stage.packageHash!==bundle.package.packageHash)core.error('STAGED_PACKAGE_CONFLICT');
+  if(['staged','quarantined'].includes(r.status)&&r.stage.packageHash!==bundle.package.packageHash)core.error('STAGED_PACKAGE_CONFLICT');
   const other=allocation.reservations(issues).filter(x=>x.issueNumber!==issueNumber);
   const codes=new Set(m.allocation.units.map(x=>x.code));
   if(other.some(x=>overlap(codes,x.allocation.units)))core.error('OTHER_BUFFER_OWNS_CODE');
