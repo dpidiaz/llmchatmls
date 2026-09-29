@@ -22,15 +22,21 @@ test('material sections with checkable locators pass only structural traceabilit
  assert.equal(r.independentSourceMeaningCheck,'REQUIRED_SEPARATELY');
  assert.equal(ac.inspect({...e,links:e.links.map(x=>({...x,locator:{url:'https://rae.es/'}}))},article).ok,false);
 });
-test('immutable #1861 hold blocks final publication',()=>{
+test('immutable historical #1861 stage is AI-resolved only for exact verified v3; corpus readiness stays independent',()=>{
  const holds=JSON.parse(fs.readFileSync(path.join(root,'MLS R32 EDITORIAL/evidence git/quality-holds.json'),'utf8'));
  const h=holds.holds.find(x=>x.workId==='r33-buffer:MLS-BUFFER-001861');
- assert.equal(h.status,'active');assert.equal(h.codes.length,10);
+ assert.equal(h.status,'resolved');assert.equal(h.codes.length,10);
+ assert.equal(h.replacementApproval.protocol,'MLS_R41_AI_EVIDENCE_V1');
+ assert.equal(h.replacementApproval.humanReviewed,false);
+ assert.equal(h.replacementApproval.entriesChecked,10);
+ assert.equal(h.replacementApproval.claimsChecked,30);
  assert.equal(h.commitSha,'b6de10a6cd9d2a0682a9a162606a6d09e2bea839');
  const out=cp.spawnSync(process.execPath,['scripts/R4 final publication readiness.cjs'],{cwd:root,encoding:'utf8'});
- assert.equal(out.status,2,out.stderr);
  const result=JSON.parse(out.stdout.trim());
- assert.equal(result.ready,false);assert.equal(result.academicHolds,1);assert.equal(result.heldCodes.length,10);
+ assert.equal(result.academicHolds,0);
+ assert.equal(result.heldCodes.length,0);
+ assert.equal(result.ready,result.missing===0&&result.extra===0);
+ assert.equal(out.status,result.ready?0:2);
 });
 test('R4.1 sync executes academic gate before grouped write',()=>{
  const y=fs.readFileSync(path.join(root,'.github/workflows/R4.1 Buffered Sync.yml'),'utf8');
