@@ -15,7 +15,7 @@ const [owner,repo]=repository.split('/');
 const root=path.resolve(__dirname,'..');
 
 const githubApiCounts={GET:0,POST:0,PATCH:0,PUT:0,DELETE:0};
-process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'scheduler',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
+if(typeof process.on==='function')process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'scheduler',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
 async function gh(method,endpoint,body){
   if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
   const response=await fetch('https://api.github.com'+endpoint,{
@@ -398,5 +398,4 @@ async function main(){
   if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length)console.log(JSON.stringify({ok:true,...result}));
   return result;
 }
-if(require.main===module)main().catch(error=>{console.error(error);process.exitCode=1});
-module.exports={main,processBufferedRequests};
+main().catch(error=>{console.error(error);process.exitCode=1});
