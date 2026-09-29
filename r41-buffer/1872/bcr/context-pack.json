@@ -30,18 +30,17 @@
     "MLS-V10-0399",
     "MLS-V10-0401",
     "MLS-V10-0402",
-    "MLS-V10-0403"
-  ],
-  "pendingCodes": [
+    "MLS-V10-0403",
     "MLS-V10-0404",
     "MLS-V10-0406",
     "MLS-V10-0407",
     "MLS-V10-0408",
     "MLS-V10-0409"
   ],
-  "currentBlock": 4,
-  "lastPersistedBlock": 4,
-  "nextBlock": 5,
+  "pendingCodes": [],
+  "currentBlock": 5,
+  "lastPersistedBlock": 5,
+  "nextBlock": null,
   "checkpointRefs": [
     {
       "code": "MLS-V10-0361",
@@ -162,17 +161,47 @@
       "entrySha": "a1e468daf707953e2e897da05d2001e654b924d0c8a8a37ad1121b85f6413bec",
       "path": "checkpoints/MLS-V10-0403.json",
       "assessment": "PENDING_CANONICAL_R33_VALIDATION"
+    },
+    {
+      "code": "MLS-V10-0404",
+      "entrySha": "fc84aba3847c9aaf40f62f016ad8c09ddd9117d8ac1fdb50a467ec928ea11a74",
+      "path": "checkpoints/MLS-V10-0404.json",
+      "assessment": "PENDING_CANONICAL_R33_VALIDATION"
+    },
+    {
+      "code": "MLS-V10-0406",
+      "entrySha": "28e33bf5a4e82b11438dbf7e3b1f07f1788317bbed1dfaf3bd3db8c683e15029",
+      "path": "checkpoints/MLS-V10-0406.json",
+      "assessment": "PENDING_CANONICAL_R33_VALIDATION"
+    },
+    {
+      "code": "MLS-V10-0407",
+      "entrySha": "1253c70a921f33e99875aa5c30caa6afcdaeb329f049ed8b0a38135d1f33a7d7",
+      "path": "checkpoints/MLS-V10-0407.json",
+      "assessment": "PENDING_CANONICAL_R33_VALIDATION"
+    },
+    {
+      "code": "MLS-V10-0408",
+      "entrySha": "18be44e186c43b4143f1c6b5b857de830daebf15d80d8392806570b20f19c0ff",
+      "path": "checkpoints/MLS-V10-0408.json",
+      "assessment": "PENDING_CANONICAL_R33_VALIDATION"
+    },
+    {
+      "code": "MLS-V10-0409",
+      "entrySha": "af791eb53c284dfef6a3ab921cc6ca04dd45cbe9928922db4c7ea7dec74b6b65",
+      "path": "checkpoints/MLS-V10-0409.json",
+      "assessment": "PENDING_CANONICAL_R33_VALIDATION"
     }
   ],
   "progressRef": "progress.json",
-  "progressHash": "46a4b198208d080e8e660111b468c23eddede102d8367e97f899d298010b7afe",
+  "progressHash": "19a282a38737b0bce8f23259e1002e0260b9545b5a3eae6e8b1d8772da87d6ca",
   "sourceIndexRef": "bcr/source-index.json",
-  "sourceIndexHash": "8e424a4929a5dd391f98fa1881c4e71d775a158939eedb8bc95b0e991a2bfcec",
-  "lastDeltaRef": "bcr/deltas/block-04.json",
-  "previousContextHash": "f9dd43fc505cfb6aff4b6cdb3faf57cb67133e44617d7d8da2ee9c960259f51e",
-  "previousConfirmedCommit": "8cbb6aa4721a8f9243472388e3e6d5fc0f377d05",
+  "sourceIndexHash": "47f01e17e2891b1a0182af690f41343864f1a357b020db1e7a09618b968c8b41",
+  "lastDeltaRef": "bcr/deltas/block-05.json",
+  "previousContextHash": "3e1caece8ecf3ad86588a40fe3fb0e398510b2ba140cb5e1895696ada538cee4",
+  "previousConfirmedCommit": "868ed08bbeff69dd9de8f8ca012fe3afa922196c",
   "commitConfirmation": "REQUIRES_REMOTE_REF_READBACK",
-  "lastChunkHash": "2aceabbcb600441dd390857a4ce0d36cb4de53bbbbb5d2832c115304ee96381f",
+  "lastChunkHash": "357f17f09c93efe6cbcc63d39a7765fe7cae53b4fad8210b19fe77f0e9f0de84",
   "conventions": [
     "R33+APA7 per-entry",
     "context is hints, not verification",
@@ -184,14 +213,14 @@
     "Claimed VERIFIED in a partial chunk is NOT final canonical R33 certification."
   ],
   "openTasks": [
-    "Produce next 5 only",
-    "Canonical R33 independently for each entry"
+    "Run canonical R33 on all 25",
+    "Verify 25 immutable checkpoint hashes before seal"
   ],
   "metrics": {
-    "checkpointed": 20,
+    "checkpointed": 25,
     "sourceRegistryItems": 1,
     "contextReused": true,
     "fullArticleBodiesInPack": 0
   },
-  "stateHash": "3e1caece8ecf3ad86588a40fe3fb0e398510b2ba140cb5e1895696ada538cee4"
+  "stateHash": "da83d2c6f69eb3402506cf6b7bf202290ccac628734a33260909e00110c3dd91"
 }

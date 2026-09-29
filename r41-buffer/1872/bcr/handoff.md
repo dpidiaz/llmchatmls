@@ -1,12 +1,12 @@
 # MLS R4.1 BCR handoff
 
-Reserva: #1872 | Bloque persistido: 4/5 | Total: 20/25.
-Context Pack: bcr/context-pack.json | SHA256 lógico: 3e1caece8ecf3ad86588a40fe3fb0e398510b2ba140cb5e1895696ada538cee4
-Source Index: bcr/source-index.json | hash: 8e424a4929a5dd391f98fa1881c4e71d775a158939eedb8bc95b0e991a2bfcec
-Último delta: bcr/deltas/block-04.json | hash: f03a259e232bdea915190790be3bb82a0ce9d79c5b28a332e35ad899f5517370
-Commit padre comprobado antes de escribir: 8cbb6aa4721a8f9243472388e3e6d5fc0f377d05
-**Commit ACTUAL:** verificar HEAD remoto tras publicar; no introducir el SHA propio circular en este commit.
-Evidence completos: entries/<code>.json; checkpoints: checkpoints/<code>.json; informe: bcr/source-review-block-04.json.
-Advertencias: Claimed VERIFIED in a partial chunk is NOT final canonical R33 certification.
-Pendientes siguientes: MLS-V10-0404, MLS-V10-0406, MLS-V10-0407, MLS-V10-0408, MLS-V10-0409
-Siguiente comando: MLS R4.1-BCR continuar reserva #1872 — bloque 05/05 desde HEAD confirmado. Producir solo los cinco restantes con evaluación académica R33 AI-only individual; no sellar ni sincronizar sin 25 checkpoints íntegros y gate canónico completo.
+Reserva #1872 | Bloque 05/05 · 25/25 checkpoints draft.
+Context Pack bcr/context-pack.json | logical stateHash da83d2c6f69eb3402506cf6b7bf202290ccac628734a33260909e00110c3dd91
+Source Index bcr/source-index.json | hash 47f01e17e2891b1a0182af690f41343864f1a357b020db1e7a09618b968c8b41
+Delta 05 bcr/deltas/block-05.json | hash 49a252a123409fd92c49db57969cbc4caa377fc4201e7be41a4ac4ea9e501a9d
+Integrity bcr/integrity-25.json | 25 unique allocated codes, 25 entry hashes, five chunks.
+Previous confirmed commit: 868ed08bbeff69dd9de8f8ca012fe3afa922196c
+Actual commit SHA: must be obtained from REMOTE branch readback after grouped push (cannot include own SHA inside its files).
+All checkpoints still PENDING_CANONICAL_R33_VALIDATION. HumanReviewed:false. No inherited VERIFIED, no full academic canonical CI yet.
+NEXT: Execute real canonical R33/R4.1 validation 25/25 on this exact remote branch; handle any failures through versioned correction. NO seal, SYNC, main integration or Cloudflare before green evidence and explicit authorization.
+SOLO CHAT · FREE ONLY · no Work / paid API / editorial D1.
