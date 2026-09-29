@@ -62,6 +62,8 @@ jobs:
         run: |
           node scripts/R33\ evidence\ git\ validate.cjs
           node --test 'test/r33 evidence editorial batch.test.cjs' 'test/r33 evidence farm.test.cjs'
+      - name: R4.1 academic traceability before grouped write
+        run: node scripts/R4-1-buffered-academic-check.cjs "$RUNNER_TEMP/r41-buffer" .
       - name: Single grouped commit and non-force push
         shell: bash
         env:

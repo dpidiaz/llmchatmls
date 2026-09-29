@@ -56,9 +56,18 @@ async function main(){
   const validation=await store.validateStore('.');
   if(validation&&validation.ok===false)die('R33 rehearsal validation failed.');
   const indexes=store.writeIndexes('.');
-  const output={...manifest,materialized,indexedVerified:Array.isArray(indexes.verified)?indexes.verified.length:null,rehearsal:'PASS'};
+  // Report unresolved academic holds transparently. This rehearsal remains structural;
+  // publication readiness separately blocks final release while any hold is active.
+  const holdsFile='MLS R32 EDITORIAL/evidence git/quality-holds.json';
+  const holdInventory=fs.existsSync(holdsFile)?JSON.parse(fs.readFileSync(holdsFile,'utf8')):null;
+  if(holdInventory&&(holdInventory.schemaVersion!=='1.0'||holdInventory.kind!=='mls_r33_publication_quality_holds'||!Array.isArray(holdInventory.holds)))
+    die('R4_ACADEMIC_HOLD_INVENTORY_INVALID');
+  const activeHolds=(holdInventory?.holds||[]).filter(h=>h.status==='active');
+  const output={...manifest,materialized,indexedVerified:Array.isArray(indexes.verified)?indexes.verified.length:null,
+    academicHoldCount:activeHolds.length,academicHoldWorkIds:activeHolds.map(h=>h.workId),
+    rehearsal:activeHolds.length?'STRUCTURAL_PASS_ACADEMIC_HOLD':'PASS'};
   fs.mkdirSync('artifacts',{recursive:true});
   fs.writeFileSync('artifacts/r4-rehearsal-manifest.json',JSON.stringify(output,null,2)+'\n');
-  process.stdout.write(JSON.stringify({ok:true,entryCount:manifest.entryCount,snapshotHash:manifest.snapshotHash,materialized})+'\n');
+  process.stdout.write(JSON.stringify({ok:true,entryCount:manifest.entryCount,snapshotHash:manifest.snapshotHash,materialized,academicHoldCount:activeHolds.length})+'\n');
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});
