@@ -59,8 +59,8 @@ test('only valid requested sizes and reviewed releases accepted',()=>{
 });
 test('staged marker can only be derived from full validated reservation',()=>{
  const r=buffered.allocate({pool:pool(),ledger,batches:[]},args(1234));
- const stage=buffered.stage(r,{branch:'r41/staged/1234',commitSha:'c'.repeat(40),packageHash:'d'.repeat(64),checksPassed:true});
+ const stage=buffered.stage(r,{branch:'r41/staged/1234',commitSha:'c'.repeat(40),packageHash:'d'.repeat(64),workflowRunId:12345,checksPassed:true});
  const stagedIssue={...issue(stage),title:'[MLS Buffered][STAGED] '+r.allocation.assignmentId};
  assert.equal(buffered.parseReservation(stagedIssue).stage.commitSha,'c'.repeat(40));
- assert.throws(()=>buffered.stage(r,{branch:'r41/staged/1234',commitSha:'c'.repeat(40),packageHash:'d'.repeat(64),checksPassed:false}),e=>e.code==='BUFFER_STAGE_INVALID');
+ assert.throws(()=>buffered.stage(r,{branch:'r41/staged/1234',commitSha:'c'.repeat(40),packageHash:'d'.repeat(64),workflowRunId:12345,checksPassed:false}),e=>e.code==='BUFFER_STAGE_INVALID');
 });
