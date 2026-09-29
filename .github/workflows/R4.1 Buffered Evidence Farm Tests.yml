@@ -7,6 +7,8 @@ on:
       - 'scripts/R4-1-buffered-farm.cjs'
       - 'scripts/R4-1-buffered-remote.cjs'
       - 'scripts/R4-1-buffered-academic-check.cjs'
+      - 'scripts/R4-1-revision-stage-certify.cjs'
+      - 'docs/MLS Global Dispatcher/13 R4.1 Piloto 1861 staged revision v3.json'
       - 'MLS R32 EDITORIAL/r4 buffered academic.cjs'
       - 'MLS R32 EDITORIAL/evidence git/quality-holds.json'
       - 'scripts/R4 final publication readiness.cjs'
@@ -23,12 +25,15 @@ on:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   buffered-farm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -48,6 +53,7 @@ jobs:
           node --check 'scripts/MLS global dispatcher scheduler.cjs'
           node --check 'scripts/MLS global dispatcher worker.cjs'
           node --check 'scripts/R4-1-buffered-farm.cjs'
+          node --check 'scripts/R4-1-revision-stage-certify.cjs'
       - name: Buffered Farm transport and safety tests
         run: node --test 'test/r4 buffered farm.test.cjs' 'test/r4 buffered allocation.test.cjs' 'test/r4 buffered transport and sync.test.cjs' 'test/r4 buffered scheduler integration.test.cjs' 'test/r4 buffered workflow contract.test.cjs'
       - name: R4.1 academic traceability and final publication hold
@@ -56,5 +62,12 @@ jobs:
         run: node --test 'test/r4 buffered pilot 1861 v3.test.cjs'
       - name: Offline academic pilot with ten already VERIFIED canonical Evidence entries
         run: node --test 'test/r4 buffered real evidence pilot.test.cjs'
+      - name: Immutable revision stage and collision tests
+        run: node --test 'test/r4 buffered revision stage 1861.test.cjs'
+      - name: Live, read-only original Dispatcher ledger reconciliation
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: dpidiaz/llmchatmls
+        run: node scripts/R4-1-revision-stage-certify.cjs
       - name: Existing R33 provider regression
         run: node --test 'test/mls global dispatcher provider r33.test.cjs' 'test/evidence certification contract.test.cjs'
