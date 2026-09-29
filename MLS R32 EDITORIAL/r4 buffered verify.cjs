@@ -41,7 +41,7 @@ async function listAll(client,path,maxPages=30){
 }
 function overlap(codes,units){return units.some(x=>codes.has(typeof x==='string'?x:x.code));}
 function checkpointCodes(state){return providers.completedUnitsForState(state);}
-async function verifyLive(dir,root,issueNumber,client){
+async function verifyLive(dir,root,issueNumber,client,{plan=sync.plan,collect=providers.collectR33Snapshot}={}){
   const m=core.manifest(dir),bundle=transport.assemble(dir);
   if(!Number.isSafeInteger(issueNumber)||issueNumber<1||m.allocation.assignmentIssueNumber!==issueNumber)
     core.error('RESERVATION_ISSUE_MISMATCH');
@@ -73,7 +73,7 @@ async function verifyLive(dir,root,issueNumber,client){
     if(overlap(codes,[...providers.codesFromLocks(state.resourceLocks||[]),...checkpointCodes(state)]))
       core.error('ACTIVE_OR_UNREAPED_CLAIM_CONFLICT');
   }
-  const snapshot=providers.collectR33Snapshot(issues,root);
+  const snapshot=collect(issues,root);
   if(snapshot.pool.poolId!==r.allocation.poolId||snapshot.pool.manifestVersion!==r.allocation.manifestVersion)
     core.error('POOL_VERSION_CHANGED');
   if(overlap(codes,[...snapshot.ledger.verified,...snapshot.ledger.exceptions]))core.error('R33_LEDGER_TERMINAL_CONFLICT');
@@ -94,8 +94,8 @@ async function verifyLive(dir,root,issueNumber,client){
     if(!state||state.status!=='done')core.error('DONE_ISSUE_CORRUPT');
     if(state.provider==='r33-farm'&&overlap(codes,checkpointCodes(state)))core.error('RECENT_DONE_COLLISION');
   }
-  const plan=await sync.plan(dir,root);
-  return {reservation:r,plan,packageHash:bundle.package.packageHash,bundleHash:bundle.bundleHash,
+  const preparedPlan=await plan(dir,root);
+  return {reservation:r,plan:preparedPlan,packageHash:bundle.package.packageHash,bundleHash:bundle.bundleHash,
     codes:[...codes],remoteReads:client.counts().httpCalls};
 }
 function requestFromIssue(issue){
