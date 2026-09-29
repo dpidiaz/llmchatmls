@@ -1016,11 +1016,12 @@ test('bootstrap workflow installs staging credentials once and only from main', 
   assert.match(workflow,/verify-chat-deployment\.cjs/);
 });
 
-test('production workflow deploy steps are restricted to certified main pushes or main dispatches', () => {
+test('production workflow deploy steps require an explicit main workflow_dispatch', () => {
   const workflow=fs.readFileSync(path.join(process.cwd(),'.github','workflows','produccion.yml'),'utf8');
-  const guard="(github.event_name == 'workflow_dispatch' || github.event_name == 'push') && github.ref == 'refs/heads/main'";
+  const guard="github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'";
   assert.ok(workflow.split(guard).length-1>=3);
-  assert.match(workflow,/push:\s*\n\s*branches:\s*\n\s*- main/);
+  assert.match(workflow,/workflow_dispatch:/);
+  assert.doesNotMatch(workflow,/push:\s*\n\s*branches:/);
 });
 
 test('production workflow verifies deployed Evidence derived from GitHub and never snapshots editorial state to Cloudflare', () => {
