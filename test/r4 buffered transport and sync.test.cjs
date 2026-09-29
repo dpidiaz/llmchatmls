@@ -126,3 +126,42 @@ test('failed CI is quarantined without clearing durable ownership',async()=>{
  assert.equal(patches[0].title,'[MLS Buffered][QUARANTINED] '+a.assignmentId);
  assert.equal(allocation.reservations([issueRow]).length,1);
 });
+
+test('already-identical assigned files allow 0/subset changed paths, but never foreign file commits',async()=>{
+  for(const count of [0,3]){
+    const a=assign(),r=reservation(a),s=allocation.stage(r,{branch:'r41/staged/8801',
+      commitSha:'c'.repeat(40),packageHash:'d'.repeat(64),checksPassed:true,
+      workflowRunId:5555,syncRequestIssueNumber:9901});
+    const issueRow={...issue(s),title:'[MLS Buffered][STAGED] '+a.assignmentId};
+    const ledgerItem={ledger:{terminal:{},recoveries:{},epochs:{}},dirty:false};
+    const get=async p=>{
+      if(p.startsWith('/actions/runs/'))return {name:'R4.1 Buffered Sync',event:'issues',status:'completed',conclusion:'success'};
+      if(p.startsWith('/git/ref/'))return {object:{sha:'c'.repeat(40)}};
+      if(p.startsWith('/compare/'))return {status:'identical'};
+      if(p.startsWith('/commits/'))return {parents:[{sha:'a'.repeat(40)}],
+        commit:{message:'evidence(r4.1): stage immutable buffer 8801'},
+        files:a.units.slice(0,count).map(u=>({filename:u.evidenceArtifactPath,status:'added'}))};
+      throw Error('Unknown request '+p);
+    };
+    const result=await finalize.reconcile({issues:[issueRow],ledgerItem,get,
+      patchIssue:async()=>{},saveLedger:async()=>{ledgerItem.dirty=false;}});
+    assert.equal(result[0].status,'CERTIFIED_STAGED');
+    assert.equal(result[0].entries,10);
+  }
+  const a=assign(),r=reservation(a),s=allocation.stage(r,{branch:'r41/staged/8801',
+    commitSha:'c'.repeat(40),packageHash:'d'.repeat(64),checksPassed:true,
+    workflowRunId:5555,syncRequestIssueNumber:9901});
+  const i={...issue(s),title:'[MLS Buffered][STAGED] '+a.assignmentId};
+  const ledgerItem={ledger:{terminal:{},recoveries:{},epochs:{}},dirty:false};
+  const get=async p=>{
+    if(p.startsWith('/actions/runs/'))return {name:'R4.1 Buffered Sync',event:'issues',status:'completed',conclusion:'success'};
+    if(p.startsWith('/git/ref/'))return {object:{sha:'c'.repeat(40)}};
+    if(p.startsWith('/commits/'))return {parents:[{sha:'a'.repeat(40)}],
+      commit:{message:'evidence(r4.1): stage immutable buffer 8801'},
+      files:[{filename:'unrelated/unsafe.json',status:'added'}]};
+    throw Error('Unknown request '+p);
+  };
+  await assert.rejects(finalize.reconcile({issues:[i],ledgerItem,get,patchIssue:async()=>{},saveLedger:async()=>{}}),
+    e=>e.code==='STAGE_COMMIT_SCOPE_INVALID');
+  assert.equal(Object.keys(ledgerItem.ledger.terminal).length,0);
+});
