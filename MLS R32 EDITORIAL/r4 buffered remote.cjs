@@ -35,11 +35,9 @@ async function markStaged(dir,root,issueNumber,branch,commitSha,client,workflowR
   const remote=await client.get('/git/ref/heads/'+branch.split('/').map(encodeURIComponent).join('/'));
   if(String(remote?.object?.sha||'').toLowerCase()!==actual)core.error('REMOTE_REF_NOT_CONFIRMED');
   const r=approved.reservation;
-  if(r.status==='staged'){
-    if(r.stage.commitSha!==actual||r.stage.packageHash!==approved.packageHash||
-       r.stage.workflowRunId!==workflowRunId)core.error('STAGED_REPLAY_CONFLICT');
+  if(r.status==='staged'&&r.stage.commitSha===actual&&r.stage.packageHash===approved.packageHash&&
+     r.stage.workflowRunId===workflowRunId)
     return {replayed:true,commitSha:actual,packageHash:approved.packageHash};
-  }
   const staged=allocation.stage(r,{branch,commitSha:actual,packageHash:approved.packageHash,
     checksPassed:true,workflowRunId});
   await client.patch('/issues/'+issueNumber,{
