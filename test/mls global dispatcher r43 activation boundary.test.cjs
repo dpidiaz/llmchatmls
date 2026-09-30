@@ -48,7 +48,9 @@ test('R4.3 activation workflows remain serialized with the existing dispatcher',
  const boot=fs.readFileSync(bootstrap,'utf8');
  const flow=fs.readFileSync(scheduler,'utf8');
  for(const text of [boot,flow]){
-  assert.match(text,/group: mls-global-dispatcher/);
+  assert.match(text,/mls-global-dispatcher/);
+  assert.match(text,/mls-global-dispatcher-skip-\{0\}/);
+  assert.match(text,/github\.run_id/);
   assert.match(text,/cancel-in-progress: false/);
   assert.match(text,/mls-github-cooldown-/);
  }
