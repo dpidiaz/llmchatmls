@@ -31,14 +31,14 @@ function reservationIssue(r){
  return {number:r.issueNumber,state:'open',title:'[MLS Buffered][RESERVED] '+r.allocation.assignmentId,
   author_association:'OWNER',user:{login:'github-actions[bot]'},body:buffered.renderReservation(r)};
 }
-function fixture({waveId='BCR-R43-COMMAND',waveIssueNumber=12002,start=2000}={}){
+function fixture({waveId='BCR-R43-COMMAND',waveIssueNumber=12002,reservationIssueNumber=12001,start=2000}={}){
  const composed=reservations.compose(source(20,start),{
-  reservationIssueNumbers:[12001],baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  reservationIssueNumbers:[reservationIssueNumber],baseCommit:BASE,contentManifestBlobSha:CONTENT,
   now:Date.parse('2026-09-30T07:00:00.000Z'),waveId,workerCount:2,shardSize:5,
   createdAt:'2026-09-30T07:00:00.000Z'
  });
  const record=waveIssue.create({
-  waveIssueNumber,reservationIssueNumbers:[12001],
+  waveIssueNumber,reservationIssueNumbers:[reservationIssueNumber],
   snapshot:composed.snapshot,wave:composed.wave,
   createdAt:'2026-09-30T07:01:00.000Z',route:'remote'
  });
@@ -153,18 +153,46 @@ test('result submission is fenced to assigned shard and retry sees already-submi
  assert.equal(state.deltaHash,delta.deltaHash);
 });
 
-test('multiple authoritative live waves fail closed instead of choosing one',()=>{
- const a=fixture({waveId:'BCR-R43-CARD-A',waveIssueNumber:12100,start:2100});
- const record2=waveIssue.create({
-  waveIssueNumber:12101,reservationIssueNumbers:[12001],
-  snapshot:a.composed.snapshot,wave:a.composed.wave,
-  createdAt:'2026-09-30T07:05:00.000Z',route:'remote'
+test('multiple authoritative live waves route deterministically without blocking newer capacity',()=>{
+ const a=fixture({
+  waveId:'BCR-R43-MULTI-A',waveIssueNumber:12100,
+  reservationIssueNumber:12090,start:2100
  });
- const second={number:12101,state:'open',user:{login:'github-actions[bot]'},
-  title:waveIssue.title(record2),body:waveIssue.render(record2)};
- assert.throws(()=>command.route([a.issues[0],a.control,second]),{
-  code:'R43_COMMAND_WAVE_CARDINALITY'
+ const b=fixture({
+  waveId:'BCR-R43-MULTI-B',waveIssueNumber:12101,
+  reservationIssueNumber:12091,start:2200
  });
+ const reqA=remoteAdmission.createRequest(a.composed.wave,{
+  waveIssueNumber:12100,
+  requestId:'chat-multi-a-0001',
+  createdAt:'2026-09-30T07:05:00.000Z'
+ });
+ const reqIssueA={
+  number:12110,state:'open',author_association:'OWNER',user:{login:'owner'},
+  title:'[MLS BCR R4.3][REQUEST] chat-multi-a-0001',
+  body:remoteAdmission.renderRequestBody(reqA)
+ };
+ const issues=[a.issues[0],a.control,b.issues[0],b.control,reqIssueA];
+
+ const fresh=command.route(issues,{now:'2026-09-30T07:06:00.000Z'});
+ assert.equal(fresh.action,'create_request');
+ assert.equal(fresh.waveIssueNumber,12101);
+ assert.equal(fresh.waveId,'BCR-R43-MULTI-B');
+
+ const affinity=command.route(issues,{
+  requestId:'chat-multi-a-0001',
+  requestIssueNumber:12110,
+  now:'2026-09-30T07:06:00.000Z'
+ });
+ assert.equal(affinity.action,'await_admission');
+ assert.equal(affinity.waveIssueNumber,12100);
+
+ const envelope=command.createRequestEnvelope(issues,{
+  requestId:'chat-multi-b-0001',
+  waveIssueNumber:fresh.waveIssueNumber,
+  createdAt:'2026-09-30T07:06:01.000Z'
+ });
+ assert.equal(envelope.request.waveIssueNumber,12101);
 });
 
 
