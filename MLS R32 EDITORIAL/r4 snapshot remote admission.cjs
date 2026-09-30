@@ -56,6 +56,7 @@ function sealAdmission(wave,issues,{sealedAt,waveIssueNumber=null}={}){
  assert(wave?.schema===farm.WAVE_SCHEMA,'R43_REMOTE_WAVE');
  assert(wave.workerCount<=MAX_REMOTE_WORKERS,'R43_REMOTE_WORKER_CAP');
  assert(!Number.isNaN(Date.parse(String(sealedAt||''))),'R43_REMOTE_SEALED_AT');
+ assert(Number.isSafeInteger(waveIssueNumber)&&waveIssueNumber>0,'R43_REMOTE_WAVE_ISSUE');
  const seen=new Set(),rows=[];
  for(const issue of [...issues].sort((a,b)=>Number(a.number)-Number(b.number))){
   let r;try{r=parseRequest(issue,wave,waveIssueNumber);}catch{continue;}
@@ -66,7 +67,7 @@ function sealAdmission(wave,issues,{sealedAt,waveIssueNumber=null}={}){
  }
  assert(rows.length===wave.workerCount,'R43_REMOTE_ADMISSION_INCOMPLETE');
  const assignments=rows.map((row,i)=>({...row,shardId:wave.shards[i].shardId,codes:[...wave.shards[i].codes]}));
- const unsigned={schema:ADMISSION_SCHEMA,version:1,waveId:wave.waveId,
+ const unsigned={schema:ADMISSION_SCHEMA,version:1,waveIssueNumber,waveId:wave.waveId,
   waveHash:wave.waveHash,sealedAt,assignments};
  return {...unsigned,admissionHash:hash(unsigned)};
 }
@@ -75,6 +76,7 @@ function validateAdmission(admission,wave){
  const unsigned={...admission};delete unsigned.admissionHash;
  assert(admission.admissionHash===hash(unsigned),'R43_REMOTE_ADMISSION_HASH');
  assert(admission.waveId===wave.waveId&&admission.waveHash===wave.waveHash,'R43_REMOTE_ADMISSION_WAVE');
+ assert(Number.isSafeInteger(admission.waveIssueNumber)&&admission.waveIssueNumber>0,'R43_REMOTE_ADMISSION_WAVE_ISSUE');
  assert(admission.assignments.length===wave.workerCount,'R43_REMOTE_ADMISSION_COUNT');
  for(let i=0;i<admission.assignments.length;i++){
   assert(admission.assignments[i].shardId===wave.shards[i].shardId,'R43_REMOTE_ADMISSION_ORDER');
