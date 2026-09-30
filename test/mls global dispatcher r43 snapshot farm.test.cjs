@@ -10,6 +10,8 @@ const allocator=require('../MLS R32 EDITORIAL/r4 chat allocator.cjs');
 const sync=require('../MLS R32 EDITORIAL/r4 snapshot sync.cjs');
 const reservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
 const metrics=require('../MLS R32 EDITORIAL/r4 snapshot metrics.cjs');
+const remoteAdmission=require('../MLS R32 EDITORIAL/r4 snapshot remote admission.cjs');
+const remoteResult=require('../MLS R32 EDITORIAL/r4 snapshot remote result.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -467,4 +469,100 @@ test('pilot metrics block scale-up on any quality loss, worker GitHub write or u
   'GITHUB_WORKER_HOT_PATH_WRITE','R33_VALIDATOR_BYPASS',
   'BASE_CONFLICT_OVERWRITTEN','UNRESOLVED_R33_FAILURE','R33_ACCOUNTING_INCOMPLETE'
  ])assert.ok(report.blockers.includes(code));
+});
+
+
+function remoteIssue(number,wave,requestId){
+ const request=remoteAdmission.createRequest(wave,{
+  requestId,createdAt:new Date(Date.parse('2026-09-30T03:00:00.000Z')+number*10).toISOString()
+ });
+ return {
+  number,state:'open',author_association:'OWNER',user:{login:'owner'},
+  title:'[MLS BCR R4.3][REQUEST] '+requestId,
+  body:remoteAdmission.renderRequestBody(request)
+ };
+}
+
+test('remote fallback seals 20 one-shot requests into 20 stable unique shard assignments',()=>{
+ const s=snapshot(100);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-REMOTE-20',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T03:01:00.000Z'
+ });
+ const issues=Array.from({length:20},(_,i)=>remoteIssue(5001+i,wave,'remote-'+String(i+1).padStart(4,'0')));
+ const admission=remoteAdmission.sealAdmission(wave,issues,{sealedAt:'2026-09-30T03:02:00.000Z'});
+ assert.equal(remoteAdmission.validateAdmission(admission,wave),true);
+ assert.equal(admission.assignments.length,20);
+ assert.equal(new Set(admission.assignments.map(x=>x.shardId)).size,20);
+ assert.equal(new Set(admission.assignments.flatMap(x=>x.codes)).size,100);
+ assert.deepEqual(admission.assignments.map(x=>x.shardId),wave.shards.map(x=>x.shardId));
+});
+
+test('remote fallback assignment is FIFO by immutable GitHub issue number, not chat clock',()=>{
+ const s=snapshot(10);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-REMOTE-FIFO',workerCount:2,shardSize:5,
+  createdAt:'2026-09-30T03:03:00.000Z'
+ });
+ const lateNumber=remoteIssue(6002,wave,'remote-fifo-B');
+ const earlyNumber=remoteIssue(6001,wave,'remote-fifo-A');
+ const admission=remoteAdmission.sealAdmission(wave,[lateNumber,earlyNumber],{
+  sealedAt:'2026-09-30T03:04:00.000Z'
+ });
+ assert.equal(remoteAdmission.assignmentFor(admission,'remote-fifo-A').shardId,'W0001');
+ assert.equal(remoteAdmission.assignmentFor(admission,'remote-fifo-B').shardId,'W0002');
+});
+
+test('remote result compresses one 5-entry delta into one bounded issue body and round-trips exactly',()=>{
+ const s=snapshot(5);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-REMOTE-RESULT',workerCount:1,shardSize:5,
+  createdAt:'2026-09-30T03:05:00.000Z'
+ });
+ const issue=remoteIssue(7001,wave,'remote-result-0001');
+ const admission=remoteAdmission.sealAdmission(wave,[issue],{sealedAt:'2026-09-30T03:06:00.000Z'});
+ const p=payload(wave,'W0001');
+ for(const code of wave.shards[0].codes){
+  p.entries[code].article={summary:'Detailed grammatical evidence '.repeat(80)};
+  p.reviews[code].rationale='Specific source support '.repeat(80);
+ }
+ const delta=farm.createDelta(wave,{
+  shardId:'W0001',...p,completedAt:'2026-09-30T03:07:00.000Z'
+ });
+ const envelope=remoteResult.encodeDelta(wave,delta);
+ const body=remoteResult.renderResultBody(envelope);
+ assert.ok(Buffer.byteLength(body,'utf8')<=remoteResult.MAX_RESULT_BODY_BYTES);
+ const resultIssue={...issue,body};
+ assert.deepEqual(remoteResult.decodeResult(resultIssue,wave,admission),delta);
+ const collected=remoteResult.collectResults([resultIssue],wave,admission);
+ assert.equal(collected.missing.length,0);
+ assert.equal(collected.reconciliation.complete,true);
+});
+
+test('remote result cannot be submitted from another admitted worker issue',()=>{
+ const s=snapshot(10);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-REMOTE-OWNER',workerCount:2,shardSize:5,
+  createdAt:'2026-09-30T03:08:00.000Z'
+ });
+ const issues=[remoteIssue(8001,wave,'remote-owner-A'),remoteIssue(8002,wave,'remote-owner-B')];
+ const admission=remoteAdmission.sealAdmission(wave,issues,{sealedAt:'2026-09-30T03:09:00.000Z'});
+ const delta=farm.createDelta(wave,{
+  shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T03:10:00.000Z'
+ });
+ const body=remoteResult.renderResultBody(remoteResult.encodeDelta(wave,delta));
+ assert.throws(()=>remoteResult.decodeResult({...issues[1],body},wave,admission),{
+  code:'R43_REMOTE_RESULT_NOT_OWNER'
+ });
+});
+
+test('remote fallback deliberately refuses a 100-worker wave to protect GitHub secondary limits',()=>{
+ const s=snapshot(500);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-REMOTE-100-REFUSED',workerCount:100,shardSize:5,
+  createdAt:'2026-09-30T03:11:00.000Z'
+ });
+ assert.throws(()=>remoteAdmission.createRequest(wave,{
+  requestId:'remote-refused-0001',createdAt:'2026-09-30T03:12:00.000Z'
+ }),{code:'R43_REMOTE_WORKER_CAP'});
 });
