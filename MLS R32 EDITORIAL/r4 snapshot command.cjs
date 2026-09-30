@@ -10,6 +10,7 @@ const farm=require('./r4 snapshot farm.cjs');
 const remoteAdmission=require('./r4 snapshot remote admission.cjs');
 const remoteResult=require('./r4 snapshot remote result.cjs');
 const remoteScheduler=require('./r4 snapshot remote scheduler.cjs');
+const takeover=require('./r4 snapshot takeover.cjs');
 const waveIssue=require('./r4 snapshot wave issue.cjs');
 
 const ACTIVE=new Set(['collecting','sealed']);
@@ -62,7 +63,11 @@ function resultRow(issues,wave,admission,requestIssueNumber){
  return {issue,delta};
 }
 
-function route(issues,{requestId=null,requestIssueNumber=null}={}){
+function route(issues,{
+ requestId=null,requestIssueNumber=null,
+ takeoverId=null,takeoverIssueNumber=null,
+ now=new Date().toISOString()
+}={}){
  const live=activeWave(issues);
  if(!live)return {
   backend:'r43',
@@ -71,7 +76,7 @@ function route(issues,{requestId=null,requestIssueNumber=null}={}){
  };
 
  assert(live.record.route==='remote','R43_COMMAND_ROUTE_NOT_LIVE',
-  'Only the certified remote pilot route can handle the universal command.');
+  'Only the certified remote pilot route can handle MLS R43 siguiente.');
  const {snapshot,wave}=reconstruct(live,issues);
  const base={
   backend:'r43',
@@ -83,13 +88,10 @@ function route(issues,{requestId=null,requestIssueNumber=null}={}){
   guide:'docs/MLS Global Dispatcher/22 R4.3 Worker Command.md'
  };
 
- if(!requestId){
-  if(live.record.status==='sealed')return {...base,action:'pilot_capacity_full'};
-  return {...base,action:'create_request'};
- }
- assert(/^[A-Za-z0-9._:-]{8,160}$/.test(requestId),'R43_COMMAND_REQUEST_ID');
-
  if(live.record.status==='collecting'){
+  if(takeoverId)return {...base,action:'takeover_not_available'};
+  if(!requestId)return {...base,action:'create_request'};
+  assert(/^[A-Za-z0-9._:-]{8,160}$/.test(requestId),'R43_COMMAND_REQUEST_ID');
   const requests=requestRows(issues,wave,live.record.waveIssueNumber,requestId);
   assert(requests.length<=1,'R43_COMMAND_REQUEST_DUPLICATE');
   if(!requests.length)return {...base,action:'create_request',requestId};
@@ -103,21 +105,101 @@ function route(issues,{requestId=null,requestIssueNumber=null}={}){
  }
 
  remoteAdmission.validateAdmission(live.record.admission,wave);
- const assignment=live.record.admission.assignments.find(x=>x.requestId===requestId);
+ const admission=live.record.admission;
+ const winners=takeover.activeWinners(issues,wave,admission,now);
+ const completed=new Set();
+ for(const row of admission.assignments){
+  if(resultRow(issues,wave,admission,row.issueNumber))completed.add(row.shardId);
+ }
+
+ if(!requestId&&!takeoverId){
+  const available=admission.assignments.find(row=>
+   !completed.has(row.shardId)&&!winners.has(row.shardId));
+  if(!available){
+   if(completed.size===admission.assignments.length)
+    return {...base,action:'await_reconciliation'};
+   return {...base,action:'takeover_capacity_full'};
+  }
+  return {
+   ...base,action:'create_takeover',
+   targetShardId:available.shardId,
+   targetRequestIssueNumber:Number(available.issueNumber),
+   takeoverTtlMs:takeover.DEFAULT_TTL_MS
+  };
+ }
+
+ if(takeoverId){
+  assert(/^[A-Za-z0-9._:-]{8,160}$/.test(takeoverId),'R43_COMMAND_TAKEOVER_ID');
+  const claimRow=takeover.rowForId(issues,wave,admission,takeoverId);
+  if(!claimRow){
+   const available=admission.assignments.find(row=>
+    !completed.has(row.shardId)&&!winners.has(row.shardId));
+   if(!available)return {...base,action:'takeover_capacity_full',takeoverId};
+   return {
+    ...base,action:'create_takeover',takeoverId,
+    targetShardId:available.shardId,
+    targetRequestIssueNumber:Number(available.issueNumber),
+    takeoverTtlMs:takeover.DEFAULT_TTL_MS
+   };
+  }
+  if(takeoverIssueNumber!=null)assert(Number(claimRow.issue.number)===Number(takeoverIssueNumber),
+   'R43_COMMAND_TAKEOVER_ISSUE_MISMATCH');
+  if(Date.parse(claimRow.claim.expiresAt)<=Date.parse(now))return {
+   ...base,action:'takeover_expired',takeoverId,
+   takeoverIssueNumber:Number(claimRow.issue.number),
+   shardId:claimRow.claim.targetShardId
+  };
+  const winner=winners.get(claimRow.claim.targetShardId);
+  if(!winner||Number(winner.issue.number)!==Number(claimRow.issue.number))return {
+   ...base,action:'takeover_retry',takeoverId,
+   takeoverIssueNumber:Number(claimRow.issue.number),
+   shardId:claimRow.claim.targetShardId
+  };
+  const assignment=admission.assignments.find(x=>x.shardId===claimRow.claim.targetShardId);
+  assert(assignment,'R43_COMMAND_TAKEOVER_ASSIGNMENT');
+  const submitted=resultRow(issues,wave,admission,assignment.issueNumber);
+  if(submitted)return {
+   ...base,action:'result_already_submitted',
+   requestId:assignment.requestId,
+   requestIssueNumber:Number(assignment.issueNumber),
+   takeoverId,takeoverIssueNumber:Number(claimRow.issue.number),
+   shardId:assignment.shardId,deltaHash:submitted.delta.deltaHash
+  };
+  const context=farm.createWorkerContext(snapshot,wave,assignment.shardId);
+  farm.validateWorkerContext(snapshot,wave,context);
+  return {
+   ...base,action:'produce_shard',
+   requestId:assignment.requestId,
+   requestIssueNumber:Number(assignment.issueNumber),
+   takeoverId,takeoverIssueNumber:Number(claimRow.issue.number),
+   takeoverExpiresAt:claimRow.claim.expiresAt,
+   assignment:structuredClone(assignment),
+   workerContext:context
+  };
+ }
+
+ assert(/^[A-Za-z0-9._:-]{8,160}$/.test(requestId),'R43_COMMAND_REQUEST_ID');
+ const assignment=admission.assignments.find(x=>x.requestId===requestId);
  if(!assignment)return {...base,action:'request_not_admitted',requestId};
  if(requestIssueNumber!=null)assert(Number(assignment.issueNumber)===Number(requestIssueNumber),
   'R43_COMMAND_REQUEST_ISSUE_MISMATCH');
  const requestIssue=(issues||[]).find(i=>Number(i.number)===Number(assignment.issueNumber));
  assert(requestIssue,'R43_COMMAND_REQUEST_ISSUE_MISSING');
- const submitted=resultRow(issues,wave,live.record.admission,assignment.issueNumber);
+ const submitted=resultRow(issues,wave,admission,assignment.issueNumber);
  if(submitted)return {
   ...base,action:'result_already_submitted',requestId,
   requestIssueNumber:Number(assignment.issueNumber),
   shardId:assignment.shardId,
   deltaHash:submitted.delta.deltaHash
  };
- // Before production, the original request marker must still authenticate the
- // same request/Issue pair recorded by the immutable admission.
+ const takeoverWinner=winners.get(assignment.shardId);
+ if(takeoverWinner)return {
+  ...base,action:'superseded_by_takeover',requestId,
+  requestIssueNumber:Number(assignment.issueNumber),
+  shardId:assignment.shardId,
+  takeoverIssueNumber:Number(takeoverWinner.issue.number),
+  takeoverExpiresAt:takeoverWinner.claim.expiresAt
+ };
  const original=remoteAdmission.parseRequest(requestIssue,wave,live.record.waveIssueNumber);
  assert(original.requestId===requestId,'R43_COMMAND_ADMISSION_REQUEST_DRIFT');
 
@@ -146,8 +228,30 @@ function createRequestEnvelope(issues,{requestId,createdAt}){
  };
 }
 
-function createResultEnvelope(issues,{requestId,requestIssueNumber,delta}){
- const state=route(issues,{requestId,requestIssueNumber});
+function createTakeoverEnvelope(issues,{takeoverId,claimedAt,now=claimedAt}){
+ const state=route(issues,{takeoverId,now});
+ assert(state.action==='create_takeover','R43_COMMAND_TAKEOVER_NOT_READY');
+ const live=activeWave(issues),{wave}=reconstruct(live,issues);
+ const claim=takeover.create(wave,live.record.admission,{
+  waveIssueNumber:state.waveIssueNumber,
+  takeoverId,
+  targetShardId:state.targetShardId,
+  targetRequestIssueNumber:state.targetRequestIssueNumber,
+  claimedAt
+ });
+ return {
+  title:'[MLS BCR R4.3][TAKEOVER] '+takeoverId,
+  body:takeover.renderBody(claim),
+  claim
+ };
+}
+
+function createResultEnvelope(issues,{
+ requestId=null,requestIssueNumber=null,
+ takeoverId=null,takeoverIssueNumber=null,
+ delta,now=new Date().toISOString()
+}){
+ const state=route(issues,{requestId,requestIssueNumber,takeoverId,takeoverIssueNumber,now});
  assert(state.action==='produce_shard','R43_COMMAND_RESULT_NOT_READY');
  assert(delta?.shardId===state.assignment.shardId,'R43_COMMAND_RESULT_WRONG_SHARD');
  const live=activeWave(issues),{wave}=reconstruct(live,issues);
@@ -155,7 +259,7 @@ function createResultEnvelope(issues,{requestId,requestIssueNumber,delta}){
  const result=remoteResult.encodeDelta(wave,delta,{waveIssueNumber:state.waveIssueNumber});
  return {
   issueNumber:state.requestIssueNumber,
-  title:'[MLS BCR R4.3][RESULT] '+requestId,
+  title:'[MLS BCR R4.3][RESULT] '+state.requestId,
   body:remoteResult.renderResultBody(result),
   result
  };
@@ -163,5 +267,5 @@ function createResultEnvelope(issues,{requestId,requestIssueNumber,delta}){
 
 module.exports={
  ACTIVE,authorizedWaveIssues,activeWave,route,
- createRequestEnvelope,createResultEnvelope
+ createRequestEnvelope,createTakeoverEnvelope,createResultEnvelope
 };
