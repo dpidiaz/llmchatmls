@@ -117,7 +117,8 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
     .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
   const handoffReservations=(snapshot.bufferedReservations||[]).filter(r=>
     r?.snapshotFarm?.ownershipOnly===true&&
-    r?.snapshotFarm?.r33Handoff?.status==='active');
+    r?.snapshotFarm?.r33Handoff?.status==='active'&&
+    (r?.allocation?.units||[]).some(u=>poolCodes.has(String(u?.code||''))&&!terminal.has(String(u?.code||''))));
   const handoffKeys=[...new Set(handoffReservations.map(r=>{
     const h=r.snapshotFarm.r33Handoff;
     return [h.waveIssueNumber,h.waveId,h.waveHash,h.reconciliationHash].join(':');
