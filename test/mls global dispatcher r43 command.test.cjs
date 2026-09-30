@@ -102,7 +102,7 @@ test('collecting wave routes same command to one R4.3 request and recovers it id
  assert.equal(state.requestIssueNumber,12010);
 });
 
-test('sealed admission gives exact worker context and never silently spills extra chats into R4.2',()=>{
+test('sealed admission gives exact worker context and fresh chats receive takeover work instead of R4.2',()=>{
  const f=fixture();
  const a=requestIssue(f,12010,'chat-command-0001');
  const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
@@ -116,9 +116,11 @@ test('sealed admission gives exact worker context and never silently spills extr
  assert.deepEqual(state.workerContext.codes,sealed.composed.wave.shards[0].codes);
  assert.equal(state.workerContext.policy.remoteWritesDuringProduction,false);
 
- const extra=command.route(sealed.issues);
+ const extra=command.route(sealed.issues,{now:'2026-09-30T07:04:00.000Z'});
  assert.equal(extra.backend,'r43');
- assert.equal(extra.action,'pilot_capacity_full');
+ assert.equal(extra.action,'create_takeover');
+ assert.equal(extra.targetShardId,'W0001');
+ assert.equal(extra.targetRequestIssueNumber,12010);
 });
 
 test('result submission is fenced to assigned shard and retry sees already-submitted delta',()=>{
@@ -163,4 +165,126 @@ test('multiple authoritative live waves fail closed instead of choosing one',()=
  assert.throws(()=>command.route([a.issues[0],a.control,second]),{
   code:'R43_COMMAND_WAVE_CARDINALITY'
  });
+});
+
+
+test('fresh chat takeover can produce an admitted shard and supersedes the lost original chat',()=>{
+ const f=fixture();
+ const a=requestIssue(f,12010,'chat-command-0001');
+ const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
+ const sealed=seal(f,[a,b]);
+
+ const env=command.createTakeoverEnvelope(sealed.issues,{
+  takeoverId:'takeover-fresh-0001',
+  claimedAt:'2026-09-30T07:05:00.000Z'
+ });
+ assert.equal(env.claim.targetShardId,'W0001');
+ assert.equal(env.claim.targetRequestIssueNumber,12010);
+ const takeoverIssue={
+  number:12020,state:'open',author_association:'OWNER',user:{login:'owner'},
+  title:env.title,body:env.body
+ };
+ const issues=[...sealed.issues,takeoverIssue];
+
+ const state=command.route(issues,{
+  takeoverId:'takeover-fresh-0001',takeoverIssueNumber:12020,
+  now:'2026-09-30T07:06:00.000Z'
+ });
+ assert.equal(state.action,'produce_shard');
+ assert.equal(state.shardId,undefined);
+ assert.equal(state.assignment.shardId,'W0001');
+ assert.equal(state.requestIssueNumber,12010);
+ assert.equal(state.takeoverIssueNumber,12020);
+ assert.deepEqual(state.workerContext.codes,sealed.composed.wave.shards[0].codes);
+
+ const original=command.route(issues,{
+  requestId:'chat-command-0001',requestIssueNumber:12010,
+  now:'2026-09-30T07:06:00.000Z'
+ });
+ assert.equal(original.action,'superseded_by_takeover');
+ assert.equal(original.takeoverIssueNumber,12020);
+});
+
+test('simultaneous fresh chats racing for one shard resolve by lower takeover Issue number',()=>{
+ const f=fixture();
+ const a=requestIssue(f,12010,'chat-command-0001');
+ const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
+ const sealed=seal(f,[a,b]);
+
+ // Both envelopes are created from the same stale view, so both target W0001.
+ const ea=command.createTakeoverEnvelope(sealed.issues,{
+  takeoverId:'takeover-race-0001',claimedAt:'2026-09-30T07:05:00.000Z'
+ });
+ const eb=command.createTakeoverEnvelope(sealed.issues,{
+  takeoverId:'takeover-race-0002',claimedAt:'2026-09-30T07:05:00.100Z'
+ });
+ assert.equal(ea.claim.targetShardId,'W0001');
+ assert.equal(eb.claim.targetShardId,'W0001');
+
+ const ia={number:12020,state:'open',author_association:'OWNER',user:{login:'owner'},title:ea.title,body:ea.body};
+ const ib={number:12021,state:'open',author_association:'OWNER',user:{login:'owner'},title:eb.title,body:eb.body};
+ const issues=[...sealed.issues,ia,ib];
+
+ const winner=command.route(issues,{
+  takeoverId:'takeover-race-0001',takeoverIssueNumber:12020,
+  now:'2026-09-30T07:06:00.000Z'
+ });
+ const loser=command.route(issues,{
+  takeoverId:'takeover-race-0002',takeoverIssueNumber:12021,
+  now:'2026-09-30T07:06:00.000Z'
+ });
+ assert.equal(winner.action,'produce_shard');
+ assert.equal(winner.assignment.shardId,'W0001');
+ assert.equal(loser.action,'takeover_retry');
+ assert.equal(loser.shardId,'W0001');
+
+ const next=command.route(issues,{now:'2026-09-30T07:06:00.000Z'});
+ assert.equal(next.action,'create_takeover');
+ assert.equal(next.targetShardId,'W0002');
+});
+
+test('expired takeover releases the shard for another fresh chat without renew traffic',()=>{
+ const f=fixture();
+ const a=requestIssue(f,12010,'chat-command-0001');
+ const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
+ const sealed=seal(f,[a,b]);
+ const env=command.createTakeoverEnvelope(sealed.issues,{
+  takeoverId:'takeover-expire-0001',claimedAt:'2026-09-30T07:05:00.000Z'
+ });
+ const claimIssue={number:12020,state:'open',author_association:'OWNER',user:{login:'owner'},title:env.title,body:env.body};
+ const issues=[...sealed.issues,claimIssue];
+
+ const expired=command.route(issues,{
+  takeoverId:'takeover-expire-0001',takeoverIssueNumber:12020,
+  now:'2026-09-30T07:36:00.000Z'
+ });
+ assert.equal(expired.action,'takeover_expired');
+ assert.equal(expired.shardId,'W0001');
+
+ const recovered=command.route(issues,{now:'2026-09-30T07:36:00.000Z'});
+ assert.equal(recovered.action,'create_takeover');
+ assert.equal(recovered.targetShardId,'W0001');
+});
+
+test('fresh-chat takeover publishes its result to the original admitted request Issue',()=>{
+ const f=fixture();
+ const a=requestIssue(f,12010,'chat-command-0001');
+ const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
+ const sealed=seal(f,[a,b]);
+ const env=command.createTakeoverEnvelope(sealed.issues,{
+  takeoverId:'takeover-result-0001',claimedAt:'2026-09-30T07:05:00.000Z'
+ });
+ const claimIssue={number:12020,state:'open',author_association:'OWNER',user:{login:'owner'},title:env.title,body:env.body};
+ const issues=[...sealed.issues,claimIssue];
+ const wave=sealed.composed.wave;
+ const delta=farm.createDelta(wave,{
+  shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T07:10:00.000Z'
+ });
+
+ const result=command.createResultEnvelope(issues,{
+  takeoverId:'takeover-result-0001',takeoverIssueNumber:12020,
+  delta,now:'2026-09-30T07:10:00.000Z'
+ });
+ assert.equal(result.issueNumber,12010);
+ assert.equal(result.title,'[MLS BCR R4.3][RESULT] chat-command-0001');
 });
