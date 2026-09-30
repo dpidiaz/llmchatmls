@@ -16,13 +16,17 @@ test('R4.3 command adapter points to an existing durable worker guide',()=>{
 test('R4.3 worker guide preserves every universal-command state and zero-write production rule',()=>{
  const text=fs.readFileSync(guide,'utf8');
  for(const state of [
-  'create_request','await_admission','produce_shard',
-  'result_already_submitted','pilot_capacity_full','request_not_admitted','no_active_r43_wave'
+  'create_request','await_admission','create_takeover','takeover_retry',
+  'takeover_expired','superseded_by_takeover','takeover_capacity_full',
+  'await_reconciliation','produce_shard','result_already_submitted',
+  'request_not_admitted','no_active_r43_wave'
  ])assert.match(text,new RegExp('`'+state+'`'));
  assert.match(text,/remoteWritesDuringProduction=false/);
  assert.match(text,/0 escrituras GitHub durante producción/);
  assert.match(text,/actualizar \*\*ese mismo request Issue una sola vez\*\*/i);
- assert.match(text,/no abrir R4\.2 en paralelo/i);
+ assert.match(text,/No buscar ni regresar al chat viejo/i);
+ assert.match(text,/TTL por defecto: 30 minutos/);
+ assert.match(text,/sin renew, heartbeat ni checkpoint/i);
  assert.match(text,/`MLS R43 siguiente`/);
  assert.match(text,/`MLS BCR siguiente` pertenece a R4\.2/);
  assert.match(text,/No abrir R4\.2, no crear un Issue R4\.2 y no reinterpretar el comando/);
