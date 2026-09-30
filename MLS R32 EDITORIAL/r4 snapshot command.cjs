@@ -89,36 +89,37 @@ function route(issues,{requestId=null,requestIssueNumber=null}={}){
  }
  assert(/^[A-Za-z0-9._:-]{8,160}$/.test(requestId),'R43_COMMAND_REQUEST_ID');
 
- const requests=requestRows(issues,wave,live.record.waveIssueNumber,requestId);
- assert(requests.length<=1,'R43_COMMAND_REQUEST_DUPLICATE');
- if(!requests.length){
-  if(live.record.status==='sealed')return {...base,action:'request_not_admitted'};
-  return {...base,action:'create_request',requestId};
+ if(live.record.status==='collecting'){
+  const requests=requestRows(issues,wave,live.record.waveIssueNumber,requestId);
+  assert(requests.length<=1,'R43_COMMAND_REQUEST_DUPLICATE');
+  if(!requests.length)return {...base,action:'create_request',requestId};
+  const request=requests[0];
+  if(requestIssueNumber!=null)assert(Number(request.issue.number)===Number(requestIssueNumber),
+   'R43_COMMAND_REQUEST_ISSUE_MISMATCH');
+  return {
+   ...base,action:'await_admission',requestId,
+   requestIssueNumber:Number(request.issue.number)
+  };
  }
- const request=requests[0];
- if(requestIssueNumber!=null)assert(Number(request.issue.number)===Number(requestIssueNumber),
-  'R43_COMMAND_REQUEST_ISSUE_MISMATCH');
-
- if(live.record.status==='collecting')return {
-  ...base,action:'await_admission',requestId,
-  requestIssueNumber:Number(request.issue.number)
- };
 
  remoteAdmission.validateAdmission(live.record.admission,wave);
- const assignment=live.record.admission.assignments.find(x=>
-  x.requestId===requestId&&Number(x.issueNumber)===Number(request.issue.number));
- if(!assignment)return {
-  ...base,action:'request_not_admitted',requestId,
-  requestIssueNumber:Number(request.issue.number)
- };
-
- const submitted=resultRow(issues,wave,live.record.admission,request.issue.number);
+ const assignment=live.record.admission.assignments.find(x=>x.requestId===requestId);
+ if(!assignment)return {...base,action:'request_not_admitted',requestId};
+ if(requestIssueNumber!=null)assert(Number(assignment.issueNumber)===Number(requestIssueNumber),
+  'R43_COMMAND_REQUEST_ISSUE_MISMATCH');
+ const requestIssue=(issues||[]).find(i=>Number(i.number)===Number(assignment.issueNumber));
+ assert(requestIssue,'R43_COMMAND_REQUEST_ISSUE_MISSING');
+ const submitted=resultRow(issues,wave,live.record.admission,assignment.issueNumber);
  if(submitted)return {
   ...base,action:'result_already_submitted',requestId,
-  requestIssueNumber:Number(request.issue.number),
+  requestIssueNumber:Number(assignment.issueNumber),
   shardId:assignment.shardId,
   deltaHash:submitted.delta.deltaHash
  };
+ // Before production, the original request marker must still authenticate the
+ // same request/Issue pair recorded by the immutable admission.
+ const original=remoteAdmission.parseRequest(requestIssue,wave,live.record.waveIssueNumber);
+ assert(original.requestId===requestId,'R43_COMMAND_ADMISSION_REQUEST_DRIFT');
 
  const context=farm.createWorkerContext(snapshot,wave,assignment.shardId);
  farm.validateWorkerContext(snapshot,wave,context);
