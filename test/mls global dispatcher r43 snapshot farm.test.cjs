@@ -1,7 +1,12 @@
 'use strict';
 const test=require('node:test');
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const os=require('node:os');
+const path=require('node:path');
 const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
+const store=require('../MLS R32 EDITORIAL/r4 snapshot local store.cjs');
+const allocator=require('../MLS R32 EDITORIAL/r4 chat allocator.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -162,4 +167,145 @@ test('sync conflict planner quarantines only paths changed since the frozen base
  assert.equal(blocked.collisions[0].code,target.code);
  assert.equal(blocked.collisions[0].shardId,'W0002');
  assert.deepEqual(blocked.collisions[0].paths,[target.evidenceArtifactPath]);
+});
+
+
+test('chat-local store persists worker context and deltas without GitHub and replays idempotently',()=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'mls-r43-'));
+ try{
+  const s=snapshot(10);
+  const wave=farm.createWave(s,{
+   waveId:'BCR-R43-LOCAL',workerCount:2,shardSize:5,
+   createdAt:'2026-09-30T02:11:00.000Z'
+  });
+  const context=farm.createWorkerContext(s,wave,'W0001');
+  const first=store.saveWorkerContext(root,s,wave,context);
+  assert.equal(first.created,true);
+  assert.deepEqual(store.loadWorkerContext(root,wave.waveId,'W0001'),context);
+  const replay=store.saveWorkerContext(root,s,wave,context);
+  assert.equal(replay.created,false);
+
+  const delta=farm.createDelta(wave,{
+   shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T02:12:00.000Z'
+  });
+  const saved=store.saveDelta(root,wave,delta);
+  assert.equal(saved.created,true);
+  assert.equal(store.saveDelta(root,wave,delta).created,false);
+  assert.equal(store.loadDeltas(root,wave).length,1);
+
+  const rec=store.reconcileToDisk(root,wave);
+  assert.equal(rec.reconciliation.complete,false);
+  assert.deepEqual(rec.reconciliation.missingShards,['W0002']);
+ }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+test('chat-local immutable store refuses conflicting overwrite for the same shard',()=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'mls-r43-conflict-'));
+ try{
+  const s=snapshot(5);
+  const wave=farm.createWave(s,{
+   waveId:'BCR-R43-LOCAL-CONFLICT',workerCount:1,shardSize:5,
+   createdAt:'2026-09-30T02:13:00.000Z'
+  });
+  const delta=farm.createDelta(wave,{
+   shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T02:14:00.000Z'
+  });
+  store.saveDelta(root,wave,delta);
+  const file=store.paths(root,wave.waveId,'W0001').delta;
+  const changed=structuredClone(delta);
+  changed.entries[changed.codes[0]].status='TAMPERED';
+  fs.writeFileSync(file,JSON.stringify(changed,null,2)+'\n');
+  assert.throws(()=>store.saveDelta(root,wave,delta),{code:'R43_LOCAL_IMMUTABLE_CONFLICT'});
+ }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+test('allocator claims 100 shards exactly once using revision fences',()=>{
+ const s=snapshot(500);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-ALLOC-100',workerCount:100,shardSize:5,
+  createdAt:'2026-09-30T02:15:00.000Z'
+ });
+ let state=allocator.createAllocator(wave,{
+  createdAt:'2026-09-30T02:15:01.000Z',claimTtlMs:30*60*1000
+ });
+ const claimed=[];
+ for(let i=0;i<100;i++){
+  const out=allocator.claimNext(state,wave,{
+   expectedRevision:state.revision,
+   claimId:'chat-'+String(i+1).padStart(4,'0')+'-claim',
+   claimedAt:new Date(Date.parse('2026-09-30T02:16:00.000Z')+i*1000).toISOString()
+  });
+  assert.ok(out.claim);claimed.push(out.claim.shardId);state=out.state;
+ }
+ assert.equal(new Set(claimed).size,100);
+ assert.deepEqual(claimed,wave.shards.map(x=>x.shardId));
+ const empty=allocator.claimNext(state,wave,{
+  expectedRevision:state.revision,claimId:'chat-overflow-claim',
+  claimedAt:'2026-09-30T02:20:00.000Z'
+ });
+ assert.equal(empty.claim,null);
+});
+
+test('allocator rejects stale concurrent CAS readers instead of duplicating a shard',()=>{
+ const s=snapshot(10);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-CAS',workerCount:2,shardSize:5,
+  createdAt:'2026-09-30T02:21:00.000Z'
+ });
+ const state0=allocator.createAllocator(wave,{createdAt:'2026-09-30T02:21:01.000Z'});
+ const a=allocator.claimNext(state0,wave,{
+  expectedRevision:0,claimId:'chat-A-claim',claimedAt:'2026-09-30T02:22:00.000Z'
+ });
+ assert.equal(a.claim.shardId,'W0001');
+ assert.throws(()=>allocator.claimNext(a.state,wave,{
+  expectedRevision:0,claimId:'chat-B-claim',claimedAt:'2026-09-30T02:22:00.500Z'
+ }),{code:'R43_ALLOC_STALE_REVISION'});
+ const b=allocator.claimNext(a.state,wave,{
+  expectedRevision:a.state.revision,claimId:'chat-B-claim',
+  claimedAt:'2026-09-30T02:22:01.000Z'
+ });
+ assert.equal(b.claim.shardId,'W0002');
+});
+
+test('allocator completion is fenced to the exact live claimant and delta',()=>{
+ const s=snapshot(5);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-COMPLETE',workerCount:1,shardSize:5,
+  createdAt:'2026-09-30T02:23:00.000Z'
+ });
+ let state=allocator.createAllocator(wave,{createdAt:'2026-09-30T02:23:01.000Z'});
+ const out=allocator.claimNext(state,wave,{
+  expectedRevision:state.revision,claimId:'chat-owner-claim',
+  claimedAt:'2026-09-30T02:24:00.000Z'
+ });
+ state=out.state;
+ assert.throws(()=>allocator.complete(state,wave,{
+  expectedRevision:state.revision,shardId:'W0001',claimId:'chat-foreign-claim',
+  deltaHash:'d'.repeat(64),completedAt:'2026-09-30T02:25:00.000Z'
+ }),{code:'R43_ALLOC_NOT_OWNER'});
+ const done=allocator.complete(state,wave,{
+  expectedRevision:state.revision,shardId:'W0001',claimId:'chat-owner-claim',
+  deltaHash:'d'.repeat(64),completedAt:'2026-09-30T02:25:00.000Z'
+ });
+ assert.equal(done.shards[0].status,'completed');
+ assert.equal(done.shards[0].claim.deltaHash,'d'.repeat(64));
+});
+
+test('expired chat claim is reaped locally and becomes recoverable without GitHub',()=>{
+ const s=snapshot(5);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-REAP',workerCount:1,shardSize:5,
+  createdAt:'2026-09-30T02:26:00.000Z'
+ });
+ let state=allocator.createAllocator(wave,{
+  createdAt:'2026-09-30T02:26:01.000Z',claimTtlMs:5*60*1000
+ });
+ state=allocator.claimNext(state,wave,{
+  expectedRevision:state.revision,claimId:'chat-expiring-claim',
+  claimedAt:'2026-09-30T02:27:00.000Z'
+ }).state;
+ const reaped=allocator.reap(state,wave,'2026-09-30T02:32:00.000Z');
+ assert.equal(reaped.shards[0].status,'free');
+ assert.equal(reaped.shards[0].claim,null);
+ assert.equal(reaped.revision,state.revision+1);
 });
