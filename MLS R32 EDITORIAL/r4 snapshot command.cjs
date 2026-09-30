@@ -4,7 +4,9 @@
  * MLS R4.3 dedicated-command router.
  *
  * Pure decision layer for the user-visible command "MLS R43 siguiente".
- * It never writes to GitHub. The chat performs the returned action.
+ * It never writes to GitHub. Multiple authoritative waves may coexist; routing
+ * preserves worker affinity and otherwise chooses the wave with most actionable
+ * capacity so stragglers do not block newer waves.
  */
 const farm=require('./r4 snapshot farm.cjs');
 const remoteAdmission=require('./r4 snapshot remote admission.cjs');
@@ -104,6 +106,11 @@ function affinityWave(rows,issues,{requestId,requestIssueNumber,takeoverId,takeo
 function activeWave(issues,options={}){
  const rows=authorizedWaveIssues(issues);
  if(!rows.length)return null;
+ if(options.waveIssueNumber!=null){
+  const exact=rows.filter(x=>Number(x.issue.number)===Number(options.waveIssueNumber));
+  assert(exact.length<=1,'R43_COMMAND_WAVE_ISSUE_DUP');
+  if(exact.length)return exact[0];
+ }
  const affinity=affinityWave(rows,issues,options);
  if(affinity)return affinity;
  const now=options.now||new Date().toISOString();
@@ -142,9 +149,10 @@ function resultRow(issues,wave,admission,requestIssueNumber){
 function route(issues,{
  requestId=null,requestIssueNumber=null,
  takeoverId=null,takeoverIssueNumber=null,
+ waveIssueNumber=null,
  now=new Date().toISOString()
 }={}){
- const live=activeWave(issues,{requestId,requestIssueNumber,takeoverId,takeoverIssueNumber,now});
+ const live=activeWave(issues,{requestId,requestIssueNumber,takeoverId,takeoverIssueNumber,waveIssueNumber,now});
  if(!live)return {
   backend:'r43',
   action:'no_active_r43_wave',
@@ -152,7 +160,7 @@ function route(issues,{
  };
 
  assert(live.record.route==='remote','R43_COMMAND_ROUTE_NOT_LIVE',
-  'Only the certified remote pilot route can handle MLS R43 siguiente.');
+  'Only the certified remote wave route can handle MLS R43 siguiente.');
  const {snapshot,wave}=reconstruct(live,issues);
  const base={
   backend:'r43',
@@ -297,8 +305,8 @@ function route(issues,{
  };
 }
 
-function createRequestEnvelope(issues,{requestId,createdAt}){
- const live=activeWave(issues,{now:createdAt});
+function createRequestEnvelope(issues,{requestId,createdAt,waveIssueNumber=null}){
+ const live=activeWave(issues,{waveIssueNumber,now:createdAt});
  assert(live,'R43_COMMAND_NO_ACTIVE_WAVE');
  assert(live.record.status==='collecting','R43_COMMAND_ADMISSION_CLOSED');
  const {wave}=reconstruct(live,issues);
