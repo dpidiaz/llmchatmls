@@ -31,11 +31,87 @@ function authorizedWaveIssues(issues){
  return out.sort((a,b)=>Number(a.issue.number)-Number(b.issue.number));
 }
 
-function activeWave(issues){
+function waveRuntime(row,issues,now){
+ const reconstructed=reconstruct(row,issues);
+ const {snapshot,wave}=reconstructed;
+ if(row.record.status==='collecting'){
+  const unique=new Set();
+  for(const issue of issues||[]){
+   if(!String(issue?.body||'').includes(remoteAdmission.REQUEST_MARKER))continue;
+   try{
+    const req=remoteAdmission.parseRequest(issue,wave,row.record.waveIssueNumber);
+    unique.add(req.requestId);
+   }catch{}
+  }
+  return {
+   row,snapshot,wave,
+   demand:Math.max(0,row.record.workerCount-unique.size),
+   requestCount:unique.size,
+   completedCount:0,
+   actionableCount:Math.max(0,row.record.workerCount-unique.size)
+  };
+ }
+ remoteAdmission.validateAdmission(row.record.admission,wave);
+ const completed=new Set();
+ for(const assignment of row.record.admission.assignments){
+  if(resultRow(issues,wave,row.record.admission,assignment.issueNumber))completed.add(assignment.shardId);
+ }
+ const winners=takeover.activeWinners(issues,wave,row.record.admission,now);
+ const actionable=row.record.admission.assignments.filter(a=>
+  !completed.has(a.shardId)&&!winners.has(a.shardId)).length;
+ return {
+  row,snapshot,wave,
+  demand:actionable,
+  requestCount:row.record.admission.assignments.length,
+  completedCount:completed.size,
+  actionableCount:actionable
+ };
+}
+function affinityWave(rows,issues,{requestId,requestIssueNumber,takeoverId,takeoverIssueNumber,now}={}){
+ const matched=[];
+ for(const row of rows){
+  const {wave}=reconstruct(row,issues);
+  let hit=false;
+  if(requestId||requestIssueNumber!=null){
+   if(row.record.status==='collecting'){
+    for(const issue of issues||[]){
+     if(requestIssueNumber!=null&&Number(issue.number)!==Number(requestIssueNumber))continue;
+     if(!String(issue?.body||'').includes(remoteAdmission.REQUEST_MARKER))continue;
+     try{
+      const req=remoteAdmission.parseRequest(issue,wave,row.record.waveIssueNumber);
+      if((!requestId||req.requestId===requestId)&&
+         (requestIssueNumber==null||Number(issue.number)===Number(requestIssueNumber)))hit=true;
+     }catch{}
+    }
+   }else{
+    const a=row.record.admission?.assignments||[];
+    if(a.some(x=>(!requestId||x.requestId===requestId)&&
+      (requestIssueNumber==null||Number(x.issueNumber)===Number(requestIssueNumber))))hit=true;
+   }
+  }
+  if((takeoverId||takeoverIssueNumber!=null)&&row.record.status==='sealed'){
+   for(const t of takeover.rows(issues,wave,row.record.admission)){
+    if((!takeoverId||t.claim.takeoverId===takeoverId)&&
+       (takeoverIssueNumber==null||Number(t.issue.number)===Number(takeoverIssueNumber)))hit=true;
+   }
+  }
+  if(hit)matched.push(row);
+ }
+ assert(matched.length<=1,'R43_COMMAND_WAVE_AFFINITY',
+  'Worker identity matches more than one authoritative R4.3 wave.');
+ return matched[0]||null;
+}
+function activeWave(issues,options={}){
  const rows=authorizedWaveIssues(issues);
- assert(rows.length<=1,'R43_COMMAND_WAVE_CARDINALITY',
-  'More than one authoritative R4.3 wave is active.');
- return rows[0]||null;
+ if(!rows.length)return null;
+ const affinity=affinityWave(rows,issues,options);
+ if(affinity)return affinity;
+ const now=options.now||new Date().toISOString();
+ const runtime=rows.map(row=>waveRuntime(row,issues,now));
+ runtime.sort((a,b)=>
+  b.demand-a.demand ||
+  Number(a.row.issue.number)-Number(b.row.issue.number));
+ return runtime[0]?.row||null;
 }
 
 function reconstruct(row,issues){
@@ -68,7 +144,7 @@ function route(issues,{
  takeoverId=null,takeoverIssueNumber=null,
  now=new Date().toISOString()
 }={}){
- const live=activeWave(issues);
+ const live=activeWave(issues,{requestId,requestIssueNumber,takeoverId,takeoverIssueNumber,now});
  if(!live)return {
   backend:'r43',
   action:'no_active_r43_wave',
@@ -222,7 +298,7 @@ function route(issues,{
 }
 
 function createRequestEnvelope(issues,{requestId,createdAt}){
- const live=activeWave(issues);
+ const live=activeWave(issues,{now:createdAt});
  assert(live,'R43_COMMAND_NO_ACTIVE_WAVE');
  assert(live.record.status==='collecting','R43_COMMAND_ADMISSION_CLOSED');
  const {wave}=reconstruct(live,issues);
@@ -239,7 +315,9 @@ function createRequestEnvelope(issues,{requestId,createdAt}){
 function createTakeoverEnvelope(issues,{takeoverId,claimedAt,now=claimedAt}){
  const state=route(issues,{takeoverId,now});
  assert(state.action==='create_takeover','R43_COMMAND_TAKEOVER_NOT_READY');
- const live=activeWave(issues),{wave}=reconstruct(live,issues);
+ const live=authorizedWaveIssues(issues).find(x=>Number(x.issue.number)===Number(state.waveIssueNumber));
+ assert(live,'R43_COMMAND_WAVE_NOT_FOUND');
+ const {wave}=reconstruct(live,issues);
  const claim=takeover.create(wave,live.record.admission,{
   waveIssueNumber:state.waveIssueNumber,
   takeoverId,
@@ -262,7 +340,9 @@ function createResultEnvelope(issues,{
  const state=route(issues,{requestId,requestIssueNumber,takeoverId,takeoverIssueNumber,now});
  assert(state.action==='produce_shard','R43_COMMAND_RESULT_NOT_READY');
  assert(delta?.shardId===state.assignment.shardId,'R43_COMMAND_RESULT_WRONG_SHARD');
- const live=activeWave(issues),{wave}=reconstruct(live,issues);
+ const live=authorizedWaveIssues(issues).find(x=>Number(x.issue.number)===Number(state.waveIssueNumber));
+ assert(live,'R43_COMMAND_WAVE_NOT_FOUND');
+ const {wave}=reconstruct(live,issues);
  farm.validateDelta(wave,delta);
  const result=remoteResult.encodeDelta(wave,delta,{waveIssueNumber:state.waveIssueNumber});
  return {
