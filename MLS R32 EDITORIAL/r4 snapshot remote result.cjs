@@ -55,7 +55,7 @@ function decodeResult(issue,wave,admission){
  const unsigned={...r};delete unsigned.resultHash;
  assert(r.resultHash===hash(unsigned),'R43_REMOTE_RESULT_HASH');
  assert(r.waveId===wave.waveId&&r.waveHash===wave.waveHash,'R43_REMOTE_RESULT_WAVE');
- assert(r.waveIssueNumber===admission.assignments[0]?.waveIssueNumber || Number.isSafeInteger(r.waveIssueNumber),'R43_REMOTE_RESULT_WAVE_ISSUE');
+ assert(r.waveIssueNumber===admission.waveIssueNumber,'R43_REMOTE_RESULT_WAVE_ISSUE');
  assert(r.encoding==='deflate-raw-base64','R43_REMOTE_RESULT_ENCODING');
  const assigned=admission.assignments.find(x=>x.issueNumber===Number(issue.number));
  assert(assigned&&assigned.shardId===r.shardId,'R43_REMOTE_RESULT_NOT_OWNER');
