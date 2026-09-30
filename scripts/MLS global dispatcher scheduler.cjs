@@ -7,6 +7,7 @@ const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.j
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
 const bufferedFinalize=require('../MLS R32 EDITORIAL/r4 buffered finalize.cjs');
 const elasticScheduler=require('../MLS R32 EDITORIAL/r4 elastic scheduler.cjs');
+const elasticCore=require('../MLS R32 EDITORIAL/r4 elastic core.cjs');
 const revisions=require('../MLS R32 EDITORIAL/r4 staging supersession.cjs');
 const child=require('node:child_process');
 const backoff=require('../MLS R32 EDITORIAL/r4 github backoff.cjs');
@@ -440,9 +441,14 @@ async function main(){
   // dispatch after a productive partial drain prevents a large burst from
   // depending on dozens of coalesced Issue-opened workflow events or cron.
   // Never spin if no lease was actually admitted or if GitHub cooldown blocks.
-  if(result.elastic?.pending>0&&result.elastic?.leased?.length>0){
+  if(elasticCore.shouldRequeue({pending:result.elastic?.pending,
+    leased:result.elastic?.leased?.length,
+    pendingSettlements:result.elastic?.pendingSettlements,
+    settlementProgress:result.elastic?.settlementProgress})){
     await gh('POST','/repos/'+owner+'/'+repo+'/actions/workflows/MLS%20Global%20Dispatcher%20Scheduler.yml/dispatches',{ref:'main'});
-    console.log('MLS_BCR_BACKLOG_REQUEUED '+JSON.stringify({pending:result.elastic.pending,leased:result.elastic.leased.length}));
+    console.log('MLS_BCR_BACKLOG_REQUEUED '+JSON.stringify({pending:result.elastic.pending,
+      leased:result.elastic.leased.length,pendingSettlements:result.elastic.pendingSettlements,
+      settlementProgress:result.elastic.settlementProgress}));
   }
   return result;
 }

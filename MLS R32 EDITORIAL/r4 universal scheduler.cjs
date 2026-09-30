@@ -50,7 +50,8 @@ function checkScope(files,lease){
 async function validateCompletion({api,io,root,res,lease,command,issue,now}){
  assert(lease?.status==='leased'&&lease.issue===command.claimIssueNumber&&lease.workerLogin===issue.user?.login,'REPAIR_STALE_OWNER');
  const submitted=Date.parse(issue.created_at||'');
- assert(submitted<=Date.parse(lease.expiresAt)&&submitted<=now&&now-submitted<=120000,'REPAIR_EXPIRED');
+ assert(submitted<=Date.parse(lease.expiresAt)&&submitted<=now&&
+  now-submitted<=elastic.MAX_SETTLEMENT_QUEUE_DELAY_MS,'REPAIR_EXPIRED');
  assert(await io.refHead(api,lease.branch)===command.headSha,'REPAIR_HEAD_DRIFT');
  const compare=await api.get('/compare/'+lease.scopeBase+'...'+command.headSha);
  assert(compare.status==='ahead','REPAIR_NOT_DESCENDANT');checkScope(compare.files,lease);
@@ -148,7 +149,8 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
    if(command.action==='renew'){
     const t=Date.parse(issue.created_at||'');
     assert(lease?.status==='leased'&&lease.issue===command.claimIssueNumber&&lease.workerLogin===issue.user?.login&&
-     t<=Date.parse(lease.expiresAt)&&t<=now&&now-t<=120000,'REPAIR_RENEW_STALE');
+     t<=Date.parse(lease.expiresAt)&&t<=now&&
+     now-t<=elastic.MAX_SETTLEMENT_QUEUE_DELAY_MS,'REPAIR_RENEW_STALE');
     // Replay the exact renewal, rather than extending forever on a failed reply.
     if(lease.lastRenewal!==issue.number)res=await save(index,changed(res,{lease:{...lease,lastRenewal:issue.number,
      expiresAt:new Date(now+elastic.TTL_MS).toISOString()}}));
@@ -165,7 +167,8 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
  }
  for(let index=0;index<reservations.length;index++){
   let res=reservations[index],lease=res.universal?.lease;
-  if(!lease||active(res,now))continue;
+  if(!lease||active(res,now)||
+   elastic.pendingForLease(issues,lease,res.issueNumber,0,now))continue;
   let head=await io.refHead(api,lease.branch);
   if(!head){await io.publishNewBranch(api,lease.branch,lease.baseSha);head=lease.baseSha;}
   const compare=await api.get('/compare/'+lease.scopeBase+'...'+head);
@@ -237,6 +240,7 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
   // to elastic production even when another reservation is gated or syncing.
   if(maintenanceAdmitted>=elastic.MAX_MAINTENANCE_PER_TICK)continue;
   index=reservations.findIndex(r=>r.elastic?.consolidatedSha&&!r.universal?.sync&&!active(r,now)&&
+   !elastic.pendingForLease(issues,r.universal?.lease,r.issueNumber,0,now)&&
    (r.universal?.bundle||r.universal?.gate?.failedCodes?.length));
   if(index<0)continue;
   consumed.add(issue.number);let res=reservations[index];
@@ -247,7 +251,8 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
    maintenanceAdmitted++;
    continue;
   }
-  const live=elastic.activeCount(reservations,now)+reservations.filter(r=>active(r,now)).length+activeStates.length;
+  const live=elastic.activeCount(reservations,now,issues)+reservations.filter(r=>active(r,now)||
+   elastic.pendingForLease(issues,r.universal?.lease,r.issueNumber,0,now)).length+activeStates.length;
   if(live>=elastic.MAX_ACTIVE){await finish(api,issue,'CAPACITY_BUSY',{retryAfterSeconds:60,reason:'GLOBAL_WRITER_LIMIT'});continue;}
   const recovery=res.universal.recovery;
   const codes=recovery?.codes||res.universal.gate.failedCodes.slice(0,5);

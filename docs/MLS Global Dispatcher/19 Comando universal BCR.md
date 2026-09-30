@@ -32,7 +32,7 @@ si no recibió lease; el siguiente chat vuelve a usar el mismo comando universal
 Prioridad: reconciliar completions/heartbeats; preservar y recuperar leases
 vencidos; Gate de reservas consolidadas; corrección/revisión selectiva; sellado y
 sync; recuperar bloques de producción; bloques nuevos; reserva nueva de 25.
-Se ejecuta como máximo un Gate y se inspeccionan hasta **50 solicitudes NEXT por tick**. Se conceden como máximo **15 leases nuevos por tick** (incluidas hasta dos reparaciones), con un máximo de tres reservas nuevas de 25 entradas por tick. Los tickets sobrantes permanecen REQUEST, en orden FIFO y sujetos al límite vigente de dos minutos: no se convierten silenciosamente en leases sin un chat vivo. Tras un ciclo que adjudicó leases y dejó cola, el Scheduler solicita otra ejecución serializada mediante workflow_dispatch. La reparación de una reserva no bloquea globalmente a las demás. Las
+Se ejecuta como máximo un Gate y se inspeccionan hasta **50 solicitudes NEXT por tick**. Una ráfaga lógica apunta a **50 trabajadores**, atendidos mediante microciclos serializados: como máximo **15 leases nuevos por ejecución física** (incluidas hasta dos reparaciones), con un máximo de tres reservas nuevas de 25 entradas. No se fuerzan 50 escrituras GitHub simultáneas. Los tickets sobrantes permanecen REQUEST, en orden FIFO y sujetos al límite vigente de dos minutos: no se convierten silenciosamente en leases sin un chat vivo. Tras un ciclo que adjudicó leases y dejó cola, el Scheduler solicita otra ejecución serializada mediante workflow_dispatch. La reparación de una reserva no bloquea globalmente a las demás. Las
 recuperaciones R4 anteriores conservan sus locks y su propio proveedor; no se
 convierten ni se certifican como BCR por inferencia.
 
@@ -96,7 +96,7 @@ de vencer y COMPLETE con el SHA remoto confirmado. Usar los mismos marcadores de
 documento 18; en reparación añadir `task:"repair"` y `block:0`. No pedir estos
 comandos técnicos al usuario. Cada mensaje tiene un requestId único.
 
-El Scheduler acepta mensajes enviados antes del vencimiento con hasta dos minutos
+El Scheduler acepta mensajes de renovación y finalización enviados antes del vencimiento con hasta diez minutos
 de espera, siempre que el epoch aún pertenezca al claim. Una renovación repetida
 no extiende otra vez el TTL. Un worker viejo no puede completar el lease nuevo.
 Al vencer, se conserva la rama y su HEAD comprobado; el chat siguiente recibe una
@@ -137,6 +137,8 @@ Otro `MLS BCR siguiente` puede reabrir ese presupuesto después del backoff.
 colaborador con permisos GitHub escriba por fuera del protocolo; las validaciones
 rechazan contenido ajeno o ownership desplazado. Los leases heredados se conservan
 y cuentan para no admitir otro chat BCR mientras estén activos.
+
+Un RENEW/COMPLETE auténtico enviado antes del vencimiento protege su claim contra reap y reasignación durante hasta diez minutos de cola. El Dispatcher vuelve a programar otra ejecución serializada cuando avanzó en una cola de completions o renovaciones. La protección no extiende el TTL por sí sola ni adjudica trabajo a chats ausentes. Las solicitudes NEXT conservan la ventana estricta de dos minutos para evitar adjudicaciones ocultas a chats abandonados.
 
 Ante 403/429 se detienen las llamadas de esa ejecución. El cooldown guarda
 Retry-After, reset de cuota primaria y backoff exponencial con jitter (base un
