@@ -133,8 +133,7 @@ Otro `MLS BCR siguiente` puede reabrir ese presupuesto después del backoff.
 
 ## Capacidad, coste y límites reales
 
-Un solo chat BCR activo y un solo escritor de Actions: como máximo dos escritores
-BCR cooperantes. Las llamadas de escritura de Actions son secuenciales. Noventa
+Hasta cinco chats BCR activos, uno por bloque exclusivo de una reserva, y un solo escritor de Actions serializado: como máximo seis escritores cooperantes. Las llamadas de escritura de Actions son secuenciales. Noventa
 chats son noventa solicitudes, no noventa leases. No se puede impedir que un
 colaborador con permisos GitHub escriba por fuera del protocolo; las validaciones
 rechazan contenido ajeno o ownership desplazado. Los leases heredados se conservan
@@ -180,3 +179,4 @@ Validación: `node --test 'test/r4 universal bcr.test.cjs' 'test/r4 elastic bcr.
 Las pruebas de 90 chats simulan llegadas concurrentes a la cola serializada; no son
 90 chats reales ni una prueba de carga contra GitHub. Las fixtures de revisión
 académica son sintéticas y están marcadas como tales; no certifican contenido nuevo.
+
