@@ -81,12 +81,14 @@ function slotOf(r){
  const m=re.exec(String(r.requestId||''));
  return m?Number(m[1]):null;
 }
-async function createReservation(projected,slot,baseCommit,contentManifestBlobSha,now){
+async function createReservation(projected,slot,baseCommit,contentManifestBlobSha,now,existingPlaceholder=null){
  const requestId='r43-wave-'+waveId+'-'+String(slot).padStart(2,'0');
- const placeholder=await gh('POST','/repos/'+owner+'/'+repo+'/issues',{
-  title:'[MLS Buffered][ALLOCATING] R4.3 '+waveId+' '+String(slot).padStart(2,'0'),
+ const allocatingTitle='[MLS Buffered][ALLOCATING] R4.3 '+waveId+' '+String(slot).padStart(2,'0');
+ const placeholder=existingPlaceholder||await gh('POST','/repos/'+owner+'/'+repo+'/issues',{
+  title:allocatingTitle,
   body:'R4.3 Snapshot Farm ownership reservation allocation in progress.'
  });
+ if(String(placeholder.title||'')!==allocatingTitle)throw new Error('Reservation placeholder title mismatch.');
  if(placeholder?.user?.login!=='github-actions[bot]')throw new Error('Unexpected reservation creator.');
  const allocated=buffered.allocate(projected,{
   size:25,issueNumber:placeholder.number,requestId,
@@ -148,7 +150,10 @@ async function main(){
  const now=Date.now();
  for(let slot=1;slot<=4;slot++){
   if(bySlot.has(slot))continue;
-  const made=await createReservation(projected,slot,mainSha,manifestSha,now+slot);
+  const allocatingTitle='[MLS Buffered][ALLOCATING] R4.3 '+waveId+' '+String(slot).padStart(2,'0');
+  const placeholders=issues.filter(i=>String(i.title||'')===allocatingTitle);
+  if(placeholders.length>1)throw new Error('Duplicate R4.3 reservation placeholders for slot '+slot);
+  const made=await createReservation(projected,slot,mainSha,manifestSha,now+slot,placeholders[0]||null);
   bySlot.set(slot,{slot,...made});
   const codes=made.reservation.allocation.units.map(x=>x.code);
   projected={...projected,reservedCodes:[...(projected.reservedCodes||[]),...codes]};
