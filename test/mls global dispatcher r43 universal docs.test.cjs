@@ -6,22 +6,22 @@ const path=require('node:path');
 
 const doc=path.join(process.cwd(),'docs','MLS Global Dispatcher','19 Comando universal BCR.md');
 
-test('universal BCR documentation preserves R4.3-first routing with R4.2 fallback',()=>{
+test('MLS BCR siguiente is reserved exclusively for R4.2',()=>{
  const text=fs.readFileSync(doc,'utf8');
- assert.match(text,/contrato universal R4\.3 \/ R4\.2/);
- assert.match(text,/r4 snapshot command\.cjs/);
- assert.match(text,/estado `collecting`/);
- assert.match(text,/Wave está `sealed`/);
- assert.match(text,/responder `pilot_capacity_full`/);
- assert.match(text,/R4\.2 vuelve a ser fallback cuando no exista una Wave R4\.3 activa/);
- assert.match(text,/dos Waves R4\.3 activas/);
- assert.match(text,/no escribe GitHub/);
+ assert.match(text,/contrato R4\.2/);
+ assert.match(text,/define exclusivamente el comando/);
+ assert.match(text,/`MLS BCR siguiente`/);
+ assert.match(text,/R4\.3 usa un comando distinto/);
+ assert.match(text,/`MLS R43 siguiente`/);
+ assert.match(text,/Un chat que recibe `MLS BCR siguiente` no debe buscar, reclamar ni producir una\s+Wave R4\.3/);
+ assert.match(text,/Un chat que recibe `MLS R43 siguiente` no debe caer a R4\.2/);
 });
 
-test('universal BCR documentation keeps R4.3 out of the R4.2 lease loop',()=>{
+test('R4.2 document no longer advertises R4.3 routing behind MLS BCR siguiente',()=>{
  const text=fs.readFileSync(doc,'utf8');
- assert.match(text,/Cuando el router eligió \*\*R4\.2\*\*/);
- assert.match(text,/Cuando eligió R4\.3, no se usa este lease loop/);
- assert.match(text,/una sola asignación\s+de cinco entradas/);
- assert.match(text,/un único delta durable al final/);
+ assert.doesNotMatch(text,/Routing del comando único/);
+ assert.doesNotMatch(text,/Ruta R4\.3 collecting/);
+ assert.doesNotMatch(text,/Cuando eligió R4\.3/);
+ assert.match(text,/Ruta R4\.2/);
+ assert.match(text,/`MLS BCR siguiente` inicia un \*\*bucle de\s+producción R4\.2/);
 });
