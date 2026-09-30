@@ -184,7 +184,10 @@ As of the first R4.3 branch changes:
 - Append-only delta contract: implemented.
 - Reconciliation of complete/missing/duplicate shards: implemented.
 - Concurrency/identity injection for the single-command UX: not yet activated.
+- Worker Context autosuficiente: implemented; binds one shard to exact snapshot/wave hashes and forbids GitHub hot-path writes.
+- Sync conflict planner: implemented; maps paths changed since the frozen base to exact codes/shards for quarantine.
 - Chat-local persistence adapter: pending.
+- Shared single-command allocator inside ChatGPT: candidate identified, atomic behavior not yet proven; do not activate by assumption.
 - GitHub grouped sync adapter: pending.
 - Pilot: pending.
 
