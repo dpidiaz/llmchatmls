@@ -111,17 +111,25 @@ function route(issues,{
  for(const row of admission.assignments){
   if(resultRow(issues,wave,admission,row.issueNumber))completed.add(row.shardId);
  }
+ const sealedBase={
+  ...base,
+  admissionCount:admission.assignments.length,
+  durableResultCount:completed.size,
+  missingShardIds:admission.assignments
+   .filter(row=>!completed.has(row.shardId))
+   .map(row=>row.shardId)
+ };
 
  if(!requestId&&!takeoverId){
   const available=admission.assignments.find(row=>
    !completed.has(row.shardId)&&!winners.has(row.shardId));
   if(!available){
    if(completed.size===admission.assignments.length)
-    return {...base,action:'await_reconciliation'};
-   return {...base,action:'takeover_capacity_full'};
+    return {...sealedBase,action:'await_reconciliation'};
+   return {...sealedBase,action:'takeover_capacity_full'};
   }
   return {
-   ...base,action:'create_takeover',
+   ...sealedBase,action:'create_takeover',
    targetShardId:available.shardId,
    targetRequestIssueNumber:Number(available.issueNumber),
    takeoverTtlMs:takeover.DEFAULT_TTL_MS
@@ -134,9 +142,9 @@ function route(issues,{
   if(!claimRow){
    const available=admission.assignments.find(row=>
     !completed.has(row.shardId)&&!winners.has(row.shardId));
-   if(!available)return {...base,action:'takeover_capacity_full',takeoverId};
+   if(!available)return {...sealedBase,action:'takeover_capacity_full',takeoverId};
    return {
-    ...base,action:'create_takeover',takeoverId,
+    ...sealedBase,action:'create_takeover',takeoverId,
     targetShardId:available.shardId,
     targetRequestIssueNumber:Number(available.issueNumber),
     takeoverTtlMs:takeover.DEFAULT_TTL_MS
@@ -145,13 +153,13 @@ function route(issues,{
   if(takeoverIssueNumber!=null)assert(Number(claimRow.issue.number)===Number(takeoverIssueNumber),
    'R43_COMMAND_TAKEOVER_ISSUE_MISMATCH');
   if(Date.parse(claimRow.claim.expiresAt)<=Date.parse(now))return {
-   ...base,action:'takeover_expired',takeoverId,
+   ...sealedBase,action:'takeover_expired',takeoverId,
    takeoverIssueNumber:Number(claimRow.issue.number),
    shardId:claimRow.claim.targetShardId
   };
   const winner=winners.get(claimRow.claim.targetShardId);
   if(!winner||Number(winner.issue.number)!==Number(claimRow.issue.number))return {
-   ...base,action:'takeover_retry',takeoverId,
+   ...sealedBase,action:'takeover_retry',takeoverId,
    takeoverIssueNumber:Number(claimRow.issue.number),
    shardId:claimRow.claim.targetShardId
   };
@@ -159,7 +167,7 @@ function route(issues,{
   assert(assignment,'R43_COMMAND_TAKEOVER_ASSIGNMENT');
   const submitted=resultRow(issues,wave,admission,assignment.issueNumber);
   if(submitted)return {
-   ...base,action:'result_already_submitted',
+   ...sealedBase,action:'result_already_submitted',
    requestId:assignment.requestId,
    requestIssueNumber:Number(assignment.issueNumber),
    takeoverId,takeoverIssueNumber:Number(claimRow.issue.number),
@@ -168,7 +176,7 @@ function route(issues,{
   const context=farm.createWorkerContext(snapshot,wave,assignment.shardId);
   farm.validateWorkerContext(snapshot,wave,context);
   return {
-   ...base,action:'produce_shard',
+   ...sealedBase,action:'produce_shard',
    requestId:assignment.requestId,
    requestIssueNumber:Number(assignment.issueNumber),
    takeoverId,takeoverIssueNumber:Number(claimRow.issue.number),
@@ -180,21 +188,21 @@ function route(issues,{
 
  assert(/^[A-Za-z0-9._:-]{8,160}$/.test(requestId),'R43_COMMAND_REQUEST_ID');
  const assignment=admission.assignments.find(x=>x.requestId===requestId);
- if(!assignment)return {...base,action:'request_not_admitted',requestId};
+ if(!assignment)return {...sealedBase,action:'request_not_admitted',requestId};
  if(requestIssueNumber!=null)assert(Number(assignment.issueNumber)===Number(requestIssueNumber),
   'R43_COMMAND_REQUEST_ISSUE_MISMATCH');
  const requestIssue=(issues||[]).find(i=>Number(i.number)===Number(assignment.issueNumber));
  assert(requestIssue,'R43_COMMAND_REQUEST_ISSUE_MISSING');
  const submitted=resultRow(issues,wave,admission,assignment.issueNumber);
  if(submitted)return {
-  ...base,action:'result_already_submitted',requestId,
+  ...sealedBase,action:'result_already_submitted',requestId,
   requestIssueNumber:Number(assignment.issueNumber),
   shardId:assignment.shardId,
   deltaHash:submitted.delta.deltaHash
  };
  const takeoverWinner=winners.get(assignment.shardId);
  if(takeoverWinner)return {
-  ...base,action:'superseded_by_takeover',requestId,
+  ...sealedBase,action:'superseded_by_takeover',requestId,
   requestIssueNumber:Number(assignment.issueNumber),
   shardId:assignment.shardId,
   takeoverIssueNumber:Number(takeoverWinner.issue.number),
@@ -206,7 +214,7 @@ function route(issues,{
  const context=farm.createWorkerContext(snapshot,wave,assignment.shardId);
  farm.validateWorkerContext(snapshot,wave,context);
  return {
-  ...base,action:'produce_shard',requestId,
+  ...sealedBase,action:'produce_shard',requestId,
   requestIssueNumber:Number(requestIssue.number),
   assignment:structuredClone(assignment),
   workerContext:context
