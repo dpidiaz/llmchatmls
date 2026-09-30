@@ -15,8 +15,9 @@ concurrency:
 jobs:
   scheduler:
     if: >-
-      contains(github.event.issue.body || '', 'MLS_BCR_R43_REQUEST') ||
-      contains(github.event.issue.body || '', 'MLS_BCR_R43_RESULT')
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+      (contains(github.event.issue.body || '', 'MLS_BCR_R43_REQUEST') ||
+       contains(github.event.issue.body || '', 'MLS_BCR_R43_RESULT'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
