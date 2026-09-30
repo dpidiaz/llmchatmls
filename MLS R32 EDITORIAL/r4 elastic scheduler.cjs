@@ -116,10 +116,10 @@ async function verifyClaimCompletion(api,res,block,command,issue,now){
  requireOk(block.workerLogin===issue.user?.login,'CLAIM_OWNER_MISMATCH');
  const submittedAt=Date.parse(issue.created_at||0),expiry=Date.parse(block.expiresAt);
  // A GitHub Issue created BEFORE lease expiry is legitimate even if the
- // serialized Scheduler picks it up shortly after expiry (up to 2min queue).
+ // serialized Scheduler picks it up after expiry (bounded protected queue).
  // No claim is ever accepted after the reaper has changed the block epoch.
  requireOk(Number.isFinite(submittedAt)&&submittedAt<=now&&submittedAt<=expiry&&
-  now-submittedAt<=2*60*1000,'LEASE_EXPIRED_RECLAIM');
+  now-submittedAt<=elastic.MAX_SETTLEMENT_QUEUE_DELAY_MS,'LEASE_EXPIRED_RECLAIM');
  const claim=await api.get('/issues/'+block.claimIssueNumber);
  requireOk(claim?.user?.login===issue.user?.login &&
   String(claim?.title||'').startsWith('[MLS Dispatcher][BCR][LEASED]'),'CLAIM_NOT_OWNER');
@@ -149,13 +149,14 @@ async function verifyClaimCompletion(api,res,block,command,issue,now){
  requireOk(source.blobSha===elastic.gitBlobJson(source.value),'CHUNK_BLOB_DRIFT');
  return {chunkHash:checked.chunkHash,commitSha:sha,codes:checked.codes};
 }
-async function reconcileExpired(api,reservations,now){
+async function reconcileExpired(api,reservations,now,issues=[]){
  const result=[];
  for(let i=0;i<reservations.length;i++){
   const res=reservations[i];if(res.status!=='reserved'||!res.elastic)continue;
   let rows=elastic.blocks(res),changed=false;
   for(let j=0;j<rows.length;j++){
-   const b=rows[j];if(b.status!=='leased'||Date.parse(b.expiresAt)>now)continue;
+   const b=rows[j];if(b.status!=='leased'||Date.parse(b.expiresAt)>now||
+    elastic.pendingForLease(issues,b,res.issueNumber,b.block,now))continue;
    let latest=await refHead(api,b.branch);
    if(!latest){await publishNewBranch(api,b.branch,b.baseSha);latest=b.baseSha;}
    if(latest!==b.baseSha){
@@ -265,6 +266,7 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
  const commands=issues.filter(i=>!i.pull_request&&buffered.requestAuthorized(i));
  let reservations=asReservations(issues);
  const done=[],renewed=[],created=[],leased=[],busy=[],reaped=[];
+ const initialSettlementCount=issues.filter(elastic.settlementIssue).length;
  // Confirm and reconcile worker submissions before freeing any capacity.
  for(const issue of sortedCommands(commands,'COMPLETE').filter(i=>!i.body.includes('"task":"repair"')&&!/"task"\s*:\s*"repair"/.test(i.body)).slice(0,elastic.MAX_SETTLEMENTS_PER_TICK)){
   try{
@@ -296,7 +298,7 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
     b.workerLogin===issue.user?.login&&
      Number.isFinite(Date.parse(issue.created_at||0))&&Date.parse(issue.created_at)<=now&&
      Date.parse(issue.created_at)<=Date.parse(b.expiresAt)&&
-     now-Date.parse(issue.created_at)<=2*60*1000,'RENEW_NOT_OWNER_OR_EXPIRED');
+     now-Date.parse(issue.created_at)<=elastic.MAX_SETTLEMENT_QUEUE_DELAY_MS,'RENEW_NOT_OWNER_OR_EXPIRED');
    if(b.lastRenewal!==issue.number){
     blocks[cmd.block-1]={...b,lastRenewal:issue.number,expiresAt:new Date(now+elastic.TTL_MS).toISOString()};
     reservations[at]=await saveReservation(api,elastic.withBlocks(res,blocks),res.recordHash);
@@ -306,7 +308,7 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
   }catch(e){if([403,429].includes(e.status)||e.status>=500)throw e;
    await finishRequest(api,issue,'REJECTED',{ok:false,error:e.code||'R42_RENEW_ERROR'});}
  }
- reaped.push(...await reconcileExpired(api,reservations,now));
+ reaped.push(...await reconcileExpired(api,reservations,now,issues));
  // A completed batch is consolidated once, serially, without academic promotion,
  // package seal, canonical main writes, SYNC or Cloudflare.
  const joined=[];
@@ -353,14 +355,16 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
    }
    requireOk(!reservations.some(r=>(r.elastic?.blocks||[]).some(b=>b.requestId===cmd.requestId&&b.status==='leased')),
     'DUPLICATE_WORKER_REQUEST');
-   if(elastic.activeCount(reservations,now)+reservations.filter(r=>universal.active(r,now)).length+(activeStates||[]).length>=elastic.MAX_ACTIVE){
+   if(elastic.activeCount(reservations,now,issues)+reservations.filter(r=>universal.active(r,now)||
+      elastic.pendingForLease(issues,r.universal?.lease,r.issueNumber,0,now)).length+
+      (activeStates||[]).length>=elastic.MAX_ACTIVE){
     await finishRequest(api,issue,'CAPACITY_BUSY',{ok:true,assigned:false,retryable:true,
      reason:'SAFE_GLOBAL_ACTIVE_BLOCK_CEILING',capacity:elastic.MAX_ACTIVE});
     busy.push(issue.number);continue;
    }
    // Academic maintenance owns its reservation, not the entire production pool.
    // universal.drain has already admitted its bounded repair share on this tick.
-   let free=elastic.freeBlock(reservations,now);
+   let free=elastic.freeBlock(reservations,now,issues);
    if(!free){
     if(minted>=elastic.MAX_NEW_RESERVATIONS_PER_TICK){
      // A future serialized tick may create the next canonical reservation.
@@ -369,7 +373,7 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
     }
     const fresh=await createReservation(api,root,issues,globalLedger,activeStates,now);
     reservations.push(fresh);created.push(fresh.issueNumber);minted++;
-    free=elastic.freeBlock(reservations,now);
+    free=elastic.freeBlock(reservations,now,issues);
    }
    requireOk(free,'NO_ELIGIBLE_BLOCK');
    const at=reservations.findIndex(r=>r.issueNumber===free.reservation.issueNumber);
@@ -435,10 +439,13 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
     message:e.message});
   }
  }
+ const pendingSettlements=issues.filter(elastic.settlementIssue).length;
  return {leased,created,busy,done,renewed,reaped,joined,universal:lifecycle.events,
   pending:incoming.filter(i=>i.state!=='closed'&&String(i.title).startsWith('[MLS Dispatcher][BCR][REQUEST]')).length,
+  pendingSettlements,settlementProgress:Math.max(0,initialSettlementCount-pendingSettlements),
   maxActive:elastic.MAX_ACTIVE,maxRequestsPerTick:elastic.MAX_REQUESTS_PER_TICK,
-  maxLeaseAdmissionsPerTick:elastic.MAX_LEASE_ADMISSIONS_PER_TICK};
+  maxLeaseAdmissionsPerTick:elastic.MAX_LEASE_ADMISSIONS_PER_TICK,
+  maxLeaseAdmissionsPerBurst:elastic.MAX_LEASE_ADMISSIONS_PER_BURST};
 }
 module.exports={drain,refHead,remoteFile,groupedCommit,publishNewBranch,moveBranch,
  saveReservation,createReservation,baseBranch,verifyClaimCompletion,reconcileExpired,consolidate};

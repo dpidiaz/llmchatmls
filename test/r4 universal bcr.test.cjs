@@ -105,6 +105,23 @@ test('heartbeat extends five minutes only once, even if result reply is lost',as
  await assert.rejects(()=>tick(db,NOW+1000),/lost response/); // Preserve ambiguous response; no false rejection.
  assert.equal(Date.parse(db.current().universal.lease.expiresAt),NOW+1000+elastic.TTL_MS);
 });
+test('fifty-worker settlement burst does not reap a repair whose pre-expiry RENEW waits behind ten events',async()=>{
+ const db=backend(fixture(),[request(3000)]);await tick(db);
+ const sent=NOW+elastic.TTL_MS-1000,overdue=NOW+elastic.TTL_MS+3*60*1000;
+ for(let n=0;n<10;n++)db.issues.push(request(3001+n,'renew',{
+  task:'repair',block:0,reservationIssueNumber:1881,claimIssueNumber:999999},sent));
+ const real=request(3011,'renew',{task:'repair',block:0,reservationIssueNumber:1881,claimIssueNumber:3000},sent);
+ db.issues.push(real);
+ await tick(db,overdue);
+ assert.equal(db.current().universal.lease.issue,3000);
+ assert.equal(real.state,'open');
+ assert.match(real.title,/\[RENEW\]/);
+ assert.equal(db.issues.filter(i=>/\[REJECTED\]/.test(i.title)).length,10);
+ await tick(db,overdue+1000);
+ assert.equal(db.current().universal.lease.issue,3000);
+ assert.equal(db.current().universal.lease.expiresAt,new Date(overdue+1000+elastic.TTL_MS).toISOString());
+ assert.match(real.title,/\[RENEWED\]/);
+});
 test('same requestId on another issue receives receipt, not ownership',async()=>{
  const db=backend(fixture(),[request(3000)]);await tick(db);
  const duplicate=request(3001);duplicate.body=db.issues[1].body; // Restore original command, same key.

@@ -163,6 +163,32 @@ test('burst of 50 NEXT requests leases 15 per tick in FIFO order without discard
  assert.equal(rows.filter(x=>x.title.includes('[STALE]')||x.title.includes('[CAPACITY_BUSY]')).length,0);
  assert.equal(rows.filter(x=>x.title.startsWith('[MLS Dispatcher][BCR][LEASED]')).length,50);
 });
+test('pre-expiry renewal protects its exact claim against a slow serialized queue, not foreign claims',async()=>{
+ const t=1e12,f=fixture(1881),worker=request(8100,'worker-8100','next',{},t);
+ const branch='r42/work/1881/01/8100';
+ const leased=elastic.lease(f,elastic.blocks(f)[0],worker,{branch,baseSha:PIN,now:t,workerLogin:'owner'});
+ const renewed=request(8101,'renew-8101','renew',{claimIssueNumber:8100,reservationIssueNumber:1881,block:1},t+elastic.TTL_MS-1000);
+ const overdue=t+elastic.TTL_MS+3*60*1000;
+ assert.equal(elastic.pendingForLease([renewed],elastic.blocks(leased.reservation)[0],1881,1,overdue),true);
+ assert.equal(elastic.activeCount([leased.reservation],overdue,[renewed]),1);
+ assert.equal(elastic.freeBlock([leased.reservation],overdue,[renewed]).block.block,2);
+ const api={get:async()=>{throw Error('Must not reap a valid queued renewal');},
+  patch:async()=>{throw Error('Must not change a protected lease');}};
+ assert.deepEqual(await engine.reconcileExpired(api,[leased.reservation],overdue,[renewed]),[]);
+ assert.equal(elastic.activeCount([leased.reservation],overdue,[]),0);
+ const foreign={...renewed,user:{login:'outsider'}};
+ assert.equal(elastic.pendingForLease([foreign],elastic.blocks(leased.reservation)[0],1881,1,overdue),false);
+ assert.equal(elastic.pendingForLease([renewed],elastic.blocks(leased.reservation)[0],1881,1,
+  t+elastic.TTL_MS+elastic.MAX_SETTLEMENT_QUEUE_DELAY_MS),false);
+});
+test('burst logical target 50 drains pending renewals even when there is no NEXT backlog',()=>{
+ assert.equal(elastic.MAX_LEASE_ADMISSIONS_PER_BURST,50);
+ assert.equal(elastic.MAX_LEASE_ADMISSIONS_PER_TICK,15);
+ assert.equal(elastic.shouldRequeue({pending:35,leased:15}),true);
+ assert.equal(elastic.shouldRequeue({pendingSettlements:40,settlementProgress:10}),true);
+ assert.equal(elastic.shouldRequeue({pendingSettlements:40,settlementProgress:0}),false);
+ assert.equal(elastic.shouldRequeue({pending:35,leased:0}),false);
+});
 test('lease has a five-minute epoch; stale worker cannot finalize somebody else’s block',()=>{
  const f=fixture(1881),i=request(2002);
  const b=elastic.blocks(f)[0],route='r42/work/1881/01/'+i.number;

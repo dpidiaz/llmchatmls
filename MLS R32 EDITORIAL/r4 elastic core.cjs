@@ -14,6 +14,9 @@ const VERSION=1;
 const BLOCK_SIZE=5, BLOCKS=5, MAX_ACTIVE=50, MAX_REQUESTS_PER_TICK=50;
 const MAX_LEASE_ADMISSIONS_PER_TICK=15, MAX_SETTLEMENTS_PER_TICK=10;
 const MAX_NEW_RESERVATIONS_PER_TICK=3, MAX_MAINTENANCE_PER_TICK=2;
+// A logical burst targets fifty workers across serial, rate-bounded microcycles.
+// Submitted-before-expiry settlements retain exclusive ownership while queued.
+const MAX_LEASE_ADMISSIONS_PER_BURST=50, MAX_SETTLEMENT_QUEUE_DELAY_MS=10*60*1000;
 const TTL_MS=5*60*1000;
 function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;throw e;}
 function assert(ok,code){if(!ok)fail(code);}
@@ -46,6 +49,31 @@ function command(issue){
  return x;
 }
 function renderCommand(command){return dispatcherCore.renderMarked(REQUEST_MARKER,command);}
+function settlementIssue(issue){
+ return issue?.state!=='closed'&&buffered.requestAuthorized(issue)&&
+  /^\[MLS Dispatcher\]\[BCR\]\[(COMPLETE|RENEW)\]/.test(String(issue.title||''));
+}
+// A queued message preserves the SAME claim only if its original owner sent it
+// before expiry. The bounded delay does not create or extend a lease.
+function pendingForLease(issues,lease,reservationIssueNumber,block,now=Date.now()){
+ if(!lease)return false;
+ const expiry=Date.parse(lease.expiresAt||'');
+ if(!Number.isFinite(expiry))return false;
+ return (issues||[]).some(issue=>{
+  if(!settlementIssue(issue)||issue.user?.login!==lease.workerLogin)return false;
+  const submitted=Date.parse(issue.created_at||'');
+  if(!Number.isFinite(submitted)||submitted>expiry||submitted>now||
+   now-submitted>MAX_SETTLEMENT_QUEUE_DELAY_MS)return false;
+  let cmd;try{cmd=command(issue);}catch{return false;}
+  return (cmd.action==='renew'||cmd.action==='complete')&&
+   cmd.claimIssueNumber===(lease.claimIssueNumber??lease.issue)&&
+   cmd.reservationIssueNumber===reservationIssueNumber&&cmd.block===block&&
+   Boolean(cmd.task==='repair')===(block===0);
+ });
+}
+function shouldRequeue({pending=0,leased=0,pendingSettlements=0,settlementProgress=0}={}){
+ return (pending>0&&leased>0)||(pendingSettlements>0&&settlementProgress>0);
+}
 function preblock(res,recipe,rootSha){
  const allocation=res.allocation,codes=allocation.units.map(u=>u.code);
  assert(codes.length===25&&new Set(codes).size===25&&allocation.baseCommit===rootSha,
@@ -120,16 +148,18 @@ function withBlocks(res,rows,patch={}){
   ...(res.elastic||{}),blocks:rows,...patch}};
  return {...next,recordHash:buffered.recordHash(next)};
 }
-function activeCount(reservations,now=Date.now()){
- return reservations.flatMap(r=>r.elastic?.blocks||[]).filter(b=>
-  b.status==='leased'&&Date.parse(b.expiresAt)>now).length;
+function activeCount(reservations,now=Date.now(),issues=[]){
+ return reservations.flatMap(r=>(r.elastic?.blocks||[]).map(b=>({r,b}))).filter(({r,b})=>
+  b.status==='leased'&&(Date.parse(b.expiresAt)>now||
+   pendingForLease(issues,b,r.issueNumber,b.block,now))).length;
 }
-function freeBlock(reservations,now=Date.now()){
+function freeBlock(reservations,now=Date.now(),issues=[]){
  const candidates=[];
  for(const res of reservations.slice().sort((a,b)=>a.issueNumber-b.issueNumber)){
   if(res.status!=='reserved'||res.stage||res.elastic?.consolidatedSha)continue;
   for(const block of blocks(res)){
-   if(block.status==='pending'||(block.status==='leased'&&Date.parse(block.expiresAt)<=now)){
+   if(block.status==='pending'||(block.status==='leased'&&Date.parse(block.expiresAt)<=now&&
+    !pendingForLease(issues,block,res.issueNumber,block.block,now))){
     candidates.push({reservation:res,block,recovery:Boolean(block.recovery)||block.status==='leased'});
    }
   }
@@ -196,8 +226,9 @@ function validateChunkSubmission({manifest,block,chunk,changedFiles}){
  return {codes:block.codes,chunkHash:chunk.chunkHash,files:expected.size};
 }
 module.exports={VERSION,BLOCK_SIZE,BLOCKS,MAX_ACTIVE,MAX_REQUESTS_PER_TICK,
- MAX_LEASE_ADMISSIONS_PER_TICK,MAX_SETTLEMENTS_PER_TICK,
- MAX_NEW_RESERVATIONS_PER_TICK,MAX_MAINTENANCE_PER_TICK,TTL_MS,
+ MAX_LEASE_ADMISSIONS_PER_TICK,MAX_LEASE_ADMISSIONS_PER_BURST,MAX_SETTLEMENTS_PER_TICK,
+ MAX_SETTLEMENT_QUEUE_DELAY_MS,MAX_NEW_RESERVATIONS_PER_TICK,MAX_MAINTENANCE_PER_TICK,TTL_MS,
+ pendingForLease,settlementIssue,shouldRequeue,
  REQUEST_MARKER,STATUS_MARKER,command,renderCommand,preblock,blocks,withBlocks,
  activeCount,freeBlock,lease,markDone,gitBlobJson,validateChunkSubmission};
 
