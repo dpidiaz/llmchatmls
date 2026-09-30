@@ -13,6 +13,7 @@ const metrics=require('../MLS R32 EDITORIAL/r4 snapshot metrics.cjs');
 const remoteAdmission=require('../MLS R32 EDITORIAL/r4 snapshot remote admission.cjs');
 const remoteResult=require('../MLS R32 EDITORIAL/r4 snapshot remote result.cjs');
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
+const remoteScheduler=require('../MLS R32 EDITORIAL/r4 snapshot remote scheduler.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -631,4 +632,120 @@ test('wave control issue reaches reconciled only after all 20 deltas are complet
  assert.equal(done.status,'reconciled');
  assert.equal(done.reconciliation.completedShards.length,20);
  assert.equal(waveIssue.validate(done,composed.snapshot,composed.wave),true);
+});
+
+
+test('remote scheduler performs zero wave writes at 19/20 and exactly one seal patch at 20/20',()=>{
+ const source=r33Snapshot(100);
+ const composed=reservations.compose(source,{
+  reservationIssueNumbers:[9701,9702,9703,9704],
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T03:21:00.000Z'),
+  waveId:'BCR-R43-SCHED-SEAL',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T03:21:00.000Z'
+ });
+ const record=waveIssue.create({
+  waveIssueNumber:9800,reservationIssueNumbers:[9701,9702,9703,9704],
+  snapshot:composed.snapshot,wave:composed.wave,
+  createdAt:'2026-09-30T03:22:00.000Z',route:'remote'
+ });
+ const control={number:9800,state:'open',title:waveIssue.title(record),body:waveIssue.render(record)};
+ const reservationIssues=composed.reservations.map(issue);
+ const requests=Array.from({length:20},(_,i)=>remoteIssue(
+  9810+i,composed.wave,'sched-seal-'+String(i+1).padStart(4,'0'),9800
+ ));
+ const waiting=remoteScheduler.sealIfReady({
+  waveControlIssue:control,reservationIssues,requestIssues:requests.slice(0,19),
+  now:'2026-09-30T03:23:00.000Z'
+ });
+ assert.equal(waiting.changed,false);
+ assert.equal(waiting.reason,'WAITING_REQUESTS');
+ assert.equal(waiting.validRequests,19);
+ assert.equal(waiting.patch,undefined);
+
+ const sealed=remoteScheduler.sealIfReady({
+  waveControlIssue:control,reservationIssues,requestIssues:requests,
+  now:'2026-09-30T03:24:00.000Z'
+ });
+ assert.equal(sealed.changed,true);
+ assert.equal(sealed.reason,'SEALED');
+ assert.equal(sealed.record.admission.assignments.length,20);
+ assert.equal(sealed.patch.title,'[MLS BCR R4.3][WAVE][SEALED] BCR-R43-SCHED-SEAL');
+ assert.ok(sealed.patch.body.includes(waveIssue.MARKER));
+});
+
+test('remote scheduler ignores a request bound to another wave issue instead of shifting assignment order',()=>{
+ const source=r33Snapshot(10);
+ const composed=reservations.compose(source,{
+  reservationIssueNumbers:[9901],
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T03:25:00.000Z'),
+  waveId:'BCR-R43-SCHED-BIND',workerCount:2,shardSize:5,
+  createdAt:'2026-09-30T03:25:00.000Z'
+ });
+ const record=waveIssue.create({
+  waveIssueNumber:9910,reservationIssueNumbers:[9901],
+  snapshot:composed.snapshot,wave:composed.wave,
+  createdAt:'2026-09-30T03:26:00.000Z',route:'remote'
+ });
+ const control={number:9910,state:'open',title:waveIssue.title(record),body:waveIssue.render(record)};
+ const requests=[
+  remoteIssue(9920,composed.wave,'wrong-wave-request',9999),
+  remoteIssue(9921,composed.wave,'right-wave-0001',9910),
+  remoteIssue(9922,composed.wave,'right-wave-0002',9910)
+ ];
+ const out=remoteScheduler.sealIfReady({
+  waveControlIssue:control,reservationIssues:composed.reservations.map(issue),
+  requestIssues:requests,now:'2026-09-30T03:27:00.000Z'
+ });
+ assert.equal(out.changed,true);
+ assert.deepEqual(out.record.admission.assignments.map(x=>x.issueNumber),[9921,9922]);
+});
+
+test('remote scheduler reconciles only after every admitted result is durably present',()=>{
+ const source=r33Snapshot(100);
+ const composed=reservations.compose(source,{
+  reservationIssueNumbers:[10001,10002,10003,10004],
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T03:28:00.000Z'),
+  waveId:'BCR-R43-SCHED-RESULTS',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T03:28:00.000Z'
+ });
+ let record=waveIssue.create({
+  waveIssueNumber:10010,reservationIssueNumbers:[10001,10002,10003,10004],
+  snapshot:composed.snapshot,wave:composed.wave,
+  createdAt:'2026-09-30T03:29:00.000Z',route:'remote'
+ });
+ const requests=Array.from({length:20},(_,i)=>remoteIssue(
+  10020+i,composed.wave,'sched-result-'+String(i+1).padStart(4,'0'),10010
+ ));
+ const admission=remoteAdmission.sealAdmission(composed.wave,requests,{
+  sealedAt:'2026-09-30T03:30:00.000Z',waveIssueNumber:10010
+ });
+ record=waveIssue.seal(record,composed.snapshot,composed.wave,admission,'2026-09-30T03:30:00.000Z');
+ const sealedControl={number:10010,state:'open',title:waveIssue.title(record),body:waveIssue.render(record)};
+ const results=requests.map((req,i)=>{
+  const shard=composed.wave.shards[i];
+  const delta=farm.createDelta(composed.wave,{
+   shardId:shard.shardId,...payload(composed.wave,shard.shardId),
+   completedAt:new Date(Date.parse('2026-09-30T03:31:00.000Z')+i*1000).toISOString()
+  });
+  return {...req,body:remoteResult.renderResultBody(remoteResult.encodeDelta(composed.wave,delta))};
+ });
+ const waiting=remoteScheduler.reconcileIfComplete({
+  waveControlIssue:sealedControl,reservationIssues:composed.reservations.map(issue),
+  resultIssues:results.slice(0,19),now:'2026-09-30T03:32:00.000Z'
+ });
+ assert.equal(waiting.changed,false);
+ assert.equal(waiting.reason,'WAITING_RESULTS');
+ assert.deepEqual(waiting.missing,['W0020']);
+
+ const done=remoteScheduler.reconcileIfComplete({
+  waveControlIssue:sealedControl,reservationIssues:composed.reservations.map(issue),
+  resultIssues:results,now:'2026-09-30T03:33:00.000Z'
+ });
+ assert.equal(done.changed,true);
+ assert.equal(done.reason,'RECONCILED');
+ assert.equal(done.record.status,'reconciled');
+ assert.equal(done.reconciliation.completedShards.length,20);
 });
