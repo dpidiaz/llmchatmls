@@ -359,10 +359,10 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       drained.push({issueNumber:issue.number,status:'stale'});continue;
     }
     let registry=runtimeRegistry();
-    let selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
+    let selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now,command.provider||null,command.workPrefix||null);
     if(!selected){
       registry=runtimeRegistry(true);
-      selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now);
+      selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now,command.provider||null,command.workPrefix||null);
     }
     if(!selected){
       const progress=progressFor(registry);

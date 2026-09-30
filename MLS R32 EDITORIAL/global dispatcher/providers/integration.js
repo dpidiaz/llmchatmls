@@ -145,11 +145,13 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
 function r33CandidateToWork(candidate,now=Date.now()){
   if(!candidate?.eligible)return null;
   const codes=candidate.units.map(x=>x.code),first=codes[0],last=codes.at(-1);
+  const handoff=candidate.ownership?.r43Handoff||null;
+  const workPrefix=handoff?'r33-handoff:'+String(handoff.waveIssueNumber)+':':'r33-farm:';
   return {
-    workId:'r33-farm:'+candidate.poolId+':'+first+':'+last+':'+codes.length,
+    workId:workPrefix+candidate.poolId+':'+first+':'+last+':'+codes.length,
     version:1,
-    title:'R33 Evidence Farm '+first+'..'+last,
-    workType:'editorial_batch',status:'ready',priority:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
+    title:(handoff?'R43→R33 Gate #'+handoff.waveIssueNumber+' ':'R33 Evidence Farm ')+first+'..'+last,
+    workType:'editorial_batch',status:'ready',priority:handoff?0:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
     providerVersion:candidate.providerVersion,ownershipMode:'global-single-lease',units:codes,checkpointSizeMax:candidate.checkpointSizeMax,
     resourceLocks:candidate.resourceLocks,allowedPaths:candidate.allowedPaths,dependsOn:[],
     validation:['R33 Editorial Batch Tests'],
