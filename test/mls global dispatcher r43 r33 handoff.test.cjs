@@ -1,6 +1,8 @@
 'use strict';
 const test=require('node:test');
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
 
 const reservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
 const integration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
@@ -101,4 +103,13 @@ test('multiple R4.3 handoff identities fail closed',()=>{
  assert.throws(()=>integration.projectR33Snapshot({...src,bufferedReservations:[a.reservation,b.reservation]},{}),{
   code:'R43_R33_HANDOFF_CARDINALITY'
  });
+});
+
+
+test('R33 handoff auto-pull preserves provider and exact wave workPrefix',()=>{
+ const source=fs.readFileSync(path.join(process.cwd(),'scripts','MLS global dispatcher worker.cjs'),'utf8');
+ assert.equal(source.includes("const handoffScope=/^r33-handoff:\\d+:/"),true);
+ assert.equal(source.includes("const handoffScope=/^r33-handoff:\\\\d+:/"),false);
+ assert.match(source,/provider:'r33-farm'/);
+ assert.match(source,/workPrefix:handoffScope\[0\]/);
 });
