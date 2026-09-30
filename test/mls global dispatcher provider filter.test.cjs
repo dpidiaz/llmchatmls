@@ -109,7 +109,8 @@ test('invalid workPrefix fails closed',()=>{
 test('R33 handoff worker auto-pull source preserves provider and wave workPrefix',()=>{
  const fs=require('node:fs'),path=require('node:path');
  const source=fs.readFileSync(path.join(process.cwd(),'scripts','MLS global dispatcher worker.cjs'),'utf8');
- assert.match(source,/\^r33-handoff:\\\\d\+:/);
+ assert.match(source,/\^r33-handoff:\\d\+:/);
+ assert.doesNotMatch(source,/\^r33-handoff:\\\\d\+:/);
  assert.match(source,/provider:'r33-farm'/);
  assert.match(source,/workPrefix:handoffScope\[0\]/);
 });
