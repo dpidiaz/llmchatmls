@@ -1,10 +1,10 @@
-name: MLS R4.3 Snapshot Pilot Bootstrap
+name: MLS R4.3 Snapshot Wave Bootstrap
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: Plan only or apply the guarded 20x5 pilot bootstrap
+        description: Plan only or apply a guarded R4.3 remote wave
         required: true
         default: plan
         type: choice
@@ -12,12 +12,17 @@ on:
           - plan
           - apply
       wave_id:
-        description: Immutable R4.3 pilot wave id
+        description: Immutable R4.3 wave id
         required: true
-        default: BCR-R43-PILOT-20X5
+        default: BCR-R43-WAVE-50X5
+        type: string
+      worker_count:
+        description: Remote workers (max 50; each worker owns 5 entries)
+        required: true
+        default: '50'
         type: string
       confirm:
-        description: Required only for apply; exact token is APPLY_R43_PILOT_20X5
+        description: For apply use APPLY_R43_WAVE_<workers>X5
         required: false
         default: ''
         type: string
@@ -30,7 +35,7 @@ permissions:
 
 # Deliberately the SAME mutex as the existing Global Dispatcher.
 concurrency:
-  group: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'issues' && github.event.action == 'opened' && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) && github.event.issue.title == '[MLS R4.3][BOOTSTRAP][APPLY] BCR-R43-PILOT-20X5' && contains(github.event.issue.body || '', 'MLS_R43_BOOTSTRAP_APPLY_V1') && contains(github.event.issue.body || '', 'APPLY_R43_PILOT_20X5'))) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
+  group: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'issues' && github.event.action == 'opened' && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) && github.event.issue.title == '[MLS R4.3][BOOTSTRAP][APPLY] 50X5' && contains(github.event.issue.body || '', 'MLS_R43_BOOTSTRAP_APPLY_V2') && contains(github.event.issue.body || '', 'APPLY_R43_WAVE_50X5'))) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
   cancel-in-progress: false
 
 jobs:
@@ -40,15 +45,16 @@ jobs:
       (github.event_name == 'issues' &&
        github.event.action == 'opened' &&
        contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
-       github.event.issue.title == '[MLS R4.3][BOOTSTRAP][APPLY] BCR-R43-PILOT-20X5' &&
-       contains(github.event.issue.body || '', 'MLS_R43_BOOTSTRAP_APPLY_V1') &&
-       contains(github.event.issue.body || '', 'APPLY_R43_PILOT_20X5'))
+       github.event.issue.title == '[MLS R4.3][BOOTSTRAP][APPLY] 50X5' &&
+       contains(github.event.issue.body || '', 'MLS_R43_BOOTSTRAP_APPLY_V2') &&
+       contains(github.event.issue.body || '', 'APPLY_R43_WAVE_50X5'))
     runs-on: ubuntu-latest
     env:
       MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
       MLS_R43_BOOTSTRAP_MODE: ${{ github.event_name == 'issues' && 'apply' || inputs.mode }}
-      MLS_R43_WAVE_ID: ${{ github.event_name == 'issues' && 'BCR-R43-PILOT-20X5' || inputs.wave_id }}
-      MLS_R43_CONFIRM: ${{ github.event_name == 'issues' && 'APPLY_R43_PILOT_20X5' || inputs.confirm }}
+      MLS_R43_WAVE_ID: ${{ github.event_name == 'issues' && format('BCR-R43-WAVE-50X5-{0}', github.event.issue.number) || inputs.wave_id }}
+      MLS_R43_WORKER_COUNT: ${{ github.event_name == 'issues' && '50' || inputs.worker_count }}
+      MLS_R43_CONFIRM: ${{ github.event_name == 'issues' && 'APPLY_R43_WAVE_50X5' || inputs.confirm }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -68,7 +74,7 @@ jobs:
       - name: Validate guarded bootstrap syntax
         run: node --check 'scripts/MLS R4.3 Snapshot Pilot Bootstrap.cjs'
 
-      - name: Plan or apply R4.3 pilot bootstrap
+      - name: Plan or apply R4.3 wave bootstrap
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node 'scripts/MLS R4.3 Snapshot Pilot Bootstrap.cjs'
