@@ -811,33 +811,38 @@ test('R4.2 cannot lease or synthesize blocks from R4.3 ownership-only reservatio
 });
 
 
-test('pilot initializer is syntactically valid, bounded and reuses partial placeholders',()=>{
- const script=path.join(process.cwd(),'scripts','MLS R4.3 Snapshot Pilot Init.cjs');
+test('canonical pilot bootstrap is syntactically valid, bounded and crash-resumable',()=>{
+ const script=path.join(process.cwd(),'scripts','MLS R4.3 Snapshot Pilot Bootstrap.cjs');
  cp.execFileSync(process.execPath,['--check',script],{stdio:'pipe'});
  const source=fs.readFileSync(script,'utf8');
  assert.match(source,/for\(let slot=1;slot<=4;slot\+\+\)/);
  assert.match(source,/snapshotReservations\.markSnapshotReservation/);
- assert.match(source,/provider\.collectR33Snapshot/);
- assert.match(source,/provider\.projectR33Snapshot/);
- assert.match(source,/writes\.POST\+writes\.PATCH>10/);
- assert.match(source,/placeholders\[0\]\|\|null/);
- assert.match(source,/Existing R4\.3 reservation base drift/);
- assert.match(source,/Checkout is not current main/);
+ assert.match(source,/integration\.collectR33Snapshot/);
+ assert.match(source,/integration\.projectR33Snapshot/);
+ assert.match(source,/writeCount<=10/);
+ assert.match(source,/createOrReusePlaceholder/);
+ assert.match(source,/R43_BOOT_RESERVATION_BASE_DRIFT/);
+ assert.match(source,/R43_BOOT_CHECKOUT_STALE/);
+ assert.match(source,/idempotent:true/);
+ assert.match(source,/backoff\.check/);
  assert.doesNotMatch(source,/\/git\/refs|\/git\/trees|\/git\/commits/);
  assert.doesNotMatch(source,/Cloudflare|D1|OPENAI|api\.openai/i);
 });
 
-test('pilot initializer workflow is manual, serialized with dispatcher and minimally permissioned',()=>{
- const file=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot Pilot Init.yml');
+test('canonical pilot bootstrap workflow supports plan\/apply and shares the dispatcher mutex',()=>{
+ const file=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot Pilot Bootstrap.yml');
  const source=fs.readFileSync(file,'utf8');
  assert.match(source,/workflow_dispatch:/);
- assert.match(source,/inputs\.confirm == 'PILOT20'/);
+ assert.match(source,/options:\s*\n\s*- plan\s*\n\s*- apply/);
+ assert.match(source,/APPLY_R43_PILOT_20X5/);
  assert.match(source,/contents: read/);
  assert.match(source,/issues: write/);
  assert.match(source,/group: mls-global-dispatcher/);
  assert.match(source,/cancel-in-progress: false/);
  assert.match(source,/ref: main/);
+ assert.match(source,/MLS_R43_BOOTSTRAP_MODE/);
  assert.match(source,/MLS_R43_WAVE_ID/);
+ assert.match(source,/MLS_GITHUB_COOLDOWN_FILE/);
  assert.doesNotMatch(source,/contents: write|actions: write|pull-requests: write/);
  assert.doesNotMatch(source,/schedule:|issues:\s*\n\s*types:/);
 });
