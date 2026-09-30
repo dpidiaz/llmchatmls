@@ -1,0 +1,71 @@
+name: MLS R4.3 Snapshot Pilot Bootstrap
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Plan only or apply the guarded 20x5 pilot bootstrap
+        required: true
+        default: plan
+        type: choice
+        options:
+          - plan
+          - apply
+      wave_id:
+        description: Immutable R4.3 pilot wave id
+        required: true
+        default: BCR-R43-PILOT-20X5
+        type: string
+      confirm:
+        description: Required only for apply; exact token is APPLY_R43_PILOT_20X5
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+# Deliberately the SAME mutex as the existing Global Dispatcher.
+concurrency:
+  group: mls-global-dispatcher
+  cancel-in-progress: false
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    env:
+      MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
+      MLS_R43_BOOTSTRAP_MODE: ${{ inputs.mode }}
+      MLS_R43_WAVE_ID: ${{ inputs.wave_id }}
+      MLS_R43_CONFIRM: ${{ inputs.confirm }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: mls-github-cooldown-
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Validate guarded bootstrap syntax
+        run: node --check 'scripts/MLS R4.3 Snapshot Pilot Bootstrap.cjs'
+
+      - name: Plan or apply R4.3 pilot bootstrap
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node 'scripts/MLS R4.3 Snapshot Pilot Bootstrap.cjs'
+
+      - name: Preserve GitHub cooldown
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}
