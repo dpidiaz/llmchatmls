@@ -12,6 +12,7 @@ const reservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
 const metrics=require('../MLS R32 EDITORIAL/r4 snapshot metrics.cjs');
 const remoteAdmission=require('../MLS R32 EDITORIAL/r4 snapshot remote admission.cjs');
 const remoteResult=require('../MLS R32 EDITORIAL/r4 snapshot remote result.cjs');
+const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -472,9 +473,9 @@ test('pilot metrics block scale-up on any quality loss, worker GitHub write or u
 });
 
 
-function remoteIssue(number,wave,requestId){
+function remoteIssue(number,wave,requestId,waveIssueNumber=9000){
  const request=remoteAdmission.createRequest(wave,{
-  requestId,createdAt:new Date(Date.parse('2026-09-30T03:00:00.000Z')+number*10).toISOString()
+  waveIssueNumber,requestId,createdAt:new Date(Date.parse('2026-09-30T03:00:00.000Z')+number*10).toISOString()
  });
  return {
   number,state:'open',author_association:'OWNER',user:{login:'owner'},
@@ -490,7 +491,7 @@ test('remote fallback seals 20 one-shot requests into 20 stable unique shard ass
   createdAt:'2026-09-30T03:01:00.000Z'
  });
  const issues=Array.from({length:20},(_,i)=>remoteIssue(5001+i,wave,'remote-'+String(i+1).padStart(4,'0')));
- const admission=remoteAdmission.sealAdmission(wave,issues,{sealedAt:'2026-09-30T03:02:00.000Z'});
+ const admission=remoteAdmission.sealAdmission(wave,issues,{sealedAt:'2026-09-30T03:02:00.000Z',waveIssueNumber:9000});
  assert.equal(remoteAdmission.validateAdmission(admission,wave),true);
  assert.equal(admission.assignments.length,20);
  assert.equal(new Set(admission.assignments.map(x=>x.shardId)).size,20);
@@ -507,7 +508,7 @@ test('remote fallback assignment is FIFO by immutable GitHub issue number, not c
  const lateNumber=remoteIssue(6002,wave,'remote-fifo-B');
  const earlyNumber=remoteIssue(6001,wave,'remote-fifo-A');
  const admission=remoteAdmission.sealAdmission(wave,[lateNumber,earlyNumber],{
-  sealedAt:'2026-09-30T03:04:00.000Z'
+  sealedAt:'2026-09-30T03:04:00.000Z',waveIssueNumber:9000
  });
  assert.equal(remoteAdmission.assignmentFor(admission,'remote-fifo-A').shardId,'W0001');
  assert.equal(remoteAdmission.assignmentFor(admission,'remote-fifo-B').shardId,'W0002');
@@ -520,7 +521,7 @@ test('remote result compresses one 5-entry delta into one bounded issue body and
   createdAt:'2026-09-30T03:05:00.000Z'
  });
  const issue=remoteIssue(7001,wave,'remote-result-0001');
- const admission=remoteAdmission.sealAdmission(wave,[issue],{sealedAt:'2026-09-30T03:06:00.000Z'});
+ const admission=remoteAdmission.sealAdmission(wave,[issue],{sealedAt:'2026-09-30T03:06:00.000Z',waveIssueNumber:9000});
  const p=payload(wave,'W0001');
  for(const code of wave.shards[0].codes){
   p.entries[code].article={summary:'Detailed grammatical evidence '.repeat(80)};
@@ -546,7 +547,7 @@ test('remote result cannot be submitted from another admitted worker issue',()=>
   createdAt:'2026-09-30T03:08:00.000Z'
  });
  const issues=[remoteIssue(8001,wave,'remote-owner-A'),remoteIssue(8002,wave,'remote-owner-B')];
- const admission=remoteAdmission.sealAdmission(wave,issues,{sealedAt:'2026-09-30T03:09:00.000Z'});
+ const admission=remoteAdmission.sealAdmission(wave,issues,{sealedAt:'2026-09-30T03:09:00.000Z',waveIssueNumber:9000});
  const delta=farm.createDelta(wave,{
   shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T03:10:00.000Z'
  });
@@ -563,6 +564,71 @@ test('remote fallback deliberately refuses a 100-worker wave to protect GitHub s
   createdAt:'2026-09-30T03:11:00.000Z'
  });
  assert.throws(()=>remoteAdmission.createRequest(wave,{
-  requestId:'remote-refused-0001',createdAt:'2026-09-30T03:12:00.000Z'
+  waveIssueNumber:9000,requestId:'remote-refused-0001',createdAt:'2026-09-30T03:12:00.000Z'
  }),{code:'R43_REMOTE_WORKER_CAP'});
+});
+
+
+test('wave control issue binds snapshot, reservations and remote admission immutably',()=>{
+ const source=r33Snapshot(100);
+ const composed=reservations.compose(source,{
+  reservationIssueNumbers:[9101,9102,9103,9104],
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T03:13:00.000Z'),
+  waveId:'BCR-R43-WAVE-ISSUE',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T03:13:00.000Z'
+ });
+ const record=waveIssue.create({
+  waveIssueNumber:9200,
+  reservationIssueNumbers:[9101,9102,9103,9104],
+  snapshot:composed.snapshot,wave:composed.wave,
+  createdAt:'2026-09-30T03:14:00.000Z',route:'remote'
+ });
+ assert.equal(waveIssue.validate(record,composed.snapshot,composed.wave),true);
+ const rendered={number:9200,title:waveIssue.title(record),body:waveIssue.render(record)};
+ assert.deepEqual(waveIssue.parse(rendered),record);
+
+ const issues=Array.from({length:20},(_,i)=>remoteIssue(
+  9301+i,composed.wave,'wave-bound-'+String(i+1).padStart(4,'0'),9200
+ ));
+ const admission=remoteAdmission.sealAdmission(composed.wave,issues,{
+  sealedAt:'2026-09-30T03:15:00.000Z',waveIssueNumber:9200
+ });
+ const sealed=waveIssue.seal(record,composed.snapshot,composed.wave,admission,'2026-09-30T03:15:00.000Z');
+ assert.equal(sealed.status,'sealed');
+ assert.equal(waveIssue.validate(sealed,composed.snapshot,composed.wave),true);
+ assert.equal(sealed.admission.assignments.length,20);
+});
+
+test('wave control issue reaches reconciled only after all 20 deltas are complete',()=>{
+ const source=r33Snapshot(100);
+ const composed=reservations.compose(source,{
+  reservationIssueNumbers:[9401,9402,9403,9404],
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T03:16:00.000Z'),
+  waveId:'BCR-R43-WAVE-RECONCILE',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T03:16:00.000Z'
+ });
+ let record=waveIssue.create({
+  waveIssueNumber:9500,reservationIssueNumbers:[9401,9402,9403,9404],
+  snapshot:composed.snapshot,wave:composed.wave,
+  createdAt:'2026-09-30T03:17:00.000Z',route:'remote'
+ });
+ const requests=Array.from({length:20},(_,i)=>remoteIssue(
+  9601+i,composed.wave,'reconcile-'+String(i+1).padStart(4,'0'),9500
+ ));
+ const admission=remoteAdmission.sealAdmission(composed.wave,requests,{
+  sealedAt:'2026-09-30T03:18:00.000Z',waveIssueNumber:9500
+ });
+ record=waveIssue.seal(record,composed.snapshot,composed.wave,admission,'2026-09-30T03:18:00.000Z');
+ const deltas=composed.wave.shards.map((shard,i)=>farm.createDelta(composed.wave,{
+  shardId:shard.shardId,...payload(composed.wave,shard.shardId),
+  completedAt:new Date(Date.parse('2026-09-30T03:19:00.000Z')+i*1000).toISOString()
+ }));
+ const reconciliation=farm.reconcileWave(composed.wave,deltas);
+ assert.equal(reconciliation.complete,true);
+ const done=waveIssue.reconcile(record,composed.snapshot,composed.wave,reconciliation,'2026-09-30T03:20:00.000Z');
+ assert.equal(done.status,'reconciled');
+ assert.equal(done.reconciliation.completedShards.length,20);
+ assert.equal(waveIssue.validate(done,composed.snapshot,composed.wave),true);
 });
