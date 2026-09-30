@@ -1,10 +1,29 @@
-# MLS BCR siguiente — contrato universal R4.2
+# MLS BCR siguiente — contrato universal R4.3 / R4.2
 
 Este documento sustituye las instrucciones de continuación manual de BCR de los
 documentos 17 y 18. El único comando que escribe el usuario es **MLS BCR siguiente**,
 en cualquier chat disponible. El chat tramita los mensajes técnicos sin pedir al
-usuario reserva, bloque, SHA ni volver al productor. El comando ordinario
+usuario reserva, bloque, SHA, Wave Issue ni volver al productor. El comando ordinario
 `MLS siguiente` conserva su contrato R4 separado.
+
+## Routing del comando único
+
+El comando visible no cambia entre R4.3 y R4.2. Antes de crear una solicitud, el
+chat lee los Issues canónicos y aplica `r4 universal bcr router.cjs`:
+
+- si no existe Wave R4.3 activa, usar R4.2;
+- si existe exactamente una Wave R4.3 en estado `collecting`, crear una solicitud
+  de admisión R4.3 ligada a su `waveIssueNumber`;
+- si la Wave está `sealed` y este mismo intento ya posee un request Issue incluido
+  en `admission.assignments`, reanudar exclusivamente el shard asignado;
+- si la Wave está `sealed` pero el chat no posee una admisión previa verificable,
+  no intentar entrar tarde: usar R4.2 sobre trabajo no reservado por R4.3;
+- si aparecen dos Waves R4.3 activas, detener la adjudicación. No escoger una por
+  fecha, memoria conversacional o conveniencia.
+
+La Wave Issue, sus hashes y la admisión durable son autoridad. El historial del chat
+no es un lock. El router es una capa pura: no escribe GitHub ni convierte
+`produced` en `VERIFIED`.
 
 ## Autoridad, alcance y admisión
 
@@ -14,7 +33,14 @@ memoria. El Scheduler continúa excluyendo los terminales, recoveries, reservas 
 leases del circuito anterior al crear nuevas reservas. Un inventario truncado,
 ledger duplicado o corrupto detiene la adjudicación.
 
-El chat abre un Issue OWNER/MEMBER/COLLABORATOR con título
+**Ruta R4.3 collecting.** El chat abre una única solicitud
+`[MLS BCR R4.3][REQUEST] <requestId>` usando el contrato
+`MLS-BCR-R43-REQUEST-1`, con `waveIssueNumber`, `waveId` y `waveHash`
+exactos de la Wave activa. No crea lease, renew, heartbeat ni checkpoint en
+GitHub. La admisión queda sellada FIFO por número de Issue cuando se completa la
+Wave.
+
+**Ruta R4.2 fallback.** El chat abre un Issue OWNER/MEMBER/COLLABORATOR con título
 `[MLS Dispatcher][BCR][REQUEST] <nonce>` y este marcador:
 
 ```text
@@ -38,10 +64,14 @@ Se ejecuta como máximo un Gate y se inspeccionan hasta **50 solicitudes NEXT po
 recuperaciones R4 anteriores conservan sus locks y su propio proveedor; no se
 convierten ni se certifican como BCR por inferencia.
 
-## Continuación automática en el mismo chat (multi-pull)
+## Continuación automática R4.2 en el mismo chat (multi-pull)
 
-`MLS BCR siguiente` inicia un **bucle de producción dentro de la misma ejecución
-del chat**, no únicamente un bloque. Tras recibir un `LEASED` válido:
+Cuando el router eligió **R4.2**, `MLS BCR siguiente` inicia un **bucle de
+producción dentro de la misma ejecución del chat**, no únicamente un bloque.
+Cuando eligió R4.3, no se usa este lease loop: el worker procesa una sola asignación
+de cinco entradas y publica un único delta durable al final.
+
+En R4.2, tras recibir un `LEASED` válido:
 
 1. Procesar únicamente el claim vigente; hacer checkpoints reales, comprobar el
    HEAD remoto, renovar antes de que expire y enviar el `COMPLETE` correspondiente.
