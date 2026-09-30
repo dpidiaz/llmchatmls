@@ -780,7 +780,11 @@ test('pilot scheduler workflow is serialized, issue-scoped and minimally permiss
  assert.match(source,/issues:\s*\n\s*types: \[opened, edited\]/);
  assert.match(source,/contents: read/);
  assert.match(source,/issues: write/);
- assert.match(source,/group: mls-r43-snapshot-pilot/);
+ assert.match(source,/group: mls-global-dispatcher/);
+ assert.match(source,/MLS_GITHUB_COOLDOWN_FILE/);
+ assert.match(source,/actions\/cache\/restore@v4/);
+ assert.match(source,/actions\/cache\/save@v4/);
+ assert.match(source,/restore-keys: mls-github-cooldown-/);
  assert.match(source,/cancel-in-progress: false/);
  assert.match(source,/MLS_BCR_R43_REQUEST/);
  assert.match(source,/MLS_BCR_R43_RESULT/);
