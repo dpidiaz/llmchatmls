@@ -14,6 +14,7 @@ const remoteAdmission=require('../MLS R32 EDITORIAL/r4 snapshot remote admission
 const remoteResult=require('../MLS R32 EDITORIAL/r4 snapshot remote result.cjs');
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
 const remoteScheduler=require('../MLS R32 EDITORIAL/r4 snapshot remote scheduler.cjs');
+const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -53,6 +54,14 @@ function r33Snapshot(n=500,start=753){
    manifestVersion:'1.0',verified:[],exceptions:[]
   },
   batches:[],reservedCodes:[]
+ };
+}
+function reservationIssue(r){
+ return {
+  number:r.issueNumber,state:'open',
+  title:'[MLS Buffered][RESERVED] '+r.allocation.assignmentId,
+  author_association:'OWNER',user:{login:'owner'},
+  body:buffered.renderReservation(r)
  };
 }
 function payload(wave,shardId){
@@ -650,7 +659,7 @@ test('remote scheduler performs zero wave writes at 19/20 and exactly one seal p
   createdAt:'2026-09-30T03:22:00.000Z',route:'remote'
  });
  const control={number:9800,state:'open',title:waveIssue.title(record),body:waveIssue.render(record)};
- const reservationIssues=composed.reservations.map(issue);
+ const reservationIssues=composed.reservations.map(reservationIssue);
  const requests=Array.from({length:20},(_,i)=>remoteIssue(
   9810+i,composed.wave,'sched-seal-'+String(i+1).padStart(4,'0'),9800
  ));
@@ -695,7 +704,7 @@ test('remote scheduler ignores a request bound to another wave issue instead of 
   remoteIssue(9922,composed.wave,'right-wave-0002',9910)
  ];
  const out=remoteScheduler.sealIfReady({
-  waveControlIssue:control,reservationIssues:composed.reservations.map(issue),
+  waveControlIssue:control,reservationIssues:composed.reservations.map(reservationIssue),
   requestIssues:requests,now:'2026-09-30T03:27:00.000Z'
  });
  assert.equal(out.changed,true);
@@ -733,7 +742,7 @@ test('remote scheduler reconciles only after every admitted result is durably pr
   return {...req,body:remoteResult.renderResultBody(remoteResult.encodeDelta(composed.wave,delta))};
  });
  const waiting=remoteScheduler.reconcileIfComplete({
-  waveControlIssue:sealedControl,reservationIssues:composed.reservations.map(issue),
+  waveControlIssue:sealedControl,reservationIssues:composed.reservations.map(reservationIssue),
   resultIssues:results.slice(0,19),now:'2026-09-30T03:32:00.000Z'
  });
  assert.equal(waiting.changed,false);
@@ -741,7 +750,7 @@ test('remote scheduler reconciles only after every admitted result is durably pr
  assert.deepEqual(waiting.missing,['W0020']);
 
  const done=remoteScheduler.reconcileIfComplete({
-  waveControlIssue:sealedControl,reservationIssues:composed.reservations.map(issue),
+  waveControlIssue:sealedControl,reservationIssues:composed.reservations.map(reservationIssue),
   resultIssues:results,now:'2026-09-30T03:33:00.000Z'
  });
  assert.equal(done.changed,true);
