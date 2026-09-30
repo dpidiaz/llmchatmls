@@ -288,3 +288,48 @@ test('fresh-chat takeover publishes its result to the original admitted request 
  assert.equal(result.issueNumber,12010);
  assert.equal(result.title,'[MLS BCR R4.3][RESULT] chat-command-0001');
 });
+
+
+test('sealed status reports admission and durable-result counts separately',()=>{
+ const f=fixture();
+ const a=requestIssue(f,12010,'chat-command-0001');
+ const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
+ const sealed=seal(f,[a,b]);
+ const wave=sealed.composed.wave;
+
+ const zero=command.route(sealed.issues,{now:'2026-09-30T07:04:00.000Z'});
+ assert.equal(zero.status,'sealed');
+ assert.equal(zero.admissionCount,2);
+ assert.equal(zero.durableResultCount,0);
+ assert.deepEqual(zero.missingShardIds,['W0001','W0002']);
+ assert.equal(zero.action,'create_takeover');
+
+ const d1=farm.createDelta(wave,{
+  shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T07:05:00.000Z'
+ });
+ const e1=command.createResultEnvelope(sealed.issues,{
+  requestId:'chat-command-0001',requestIssueNumber:12010,delta:d1
+ });
+ const i1={...a,title:e1.title,body:e1.body};
+ const oneIssues=sealed.issues.map(i=>i.number===12010?i1:i);
+ const one=command.route(oneIssues,{now:'2026-09-30T07:06:00.000Z'});
+ assert.equal(one.admissionCount,2);
+ assert.equal(one.durableResultCount,1);
+ assert.deepEqual(one.missingShardIds,['W0002']);
+ assert.equal(one.action,'create_takeover');
+ assert.equal(one.targetShardId,'W0002');
+
+ const d2=farm.createDelta(wave,{
+  shardId:'W0002',...payload(wave,'W0002'),completedAt:'2026-09-30T07:07:00.000Z'
+ });
+ const e2=command.createResultEnvelope(oneIssues,{
+  requestId:'chat-command-0002',requestIssueNumber:12011,delta:d2
+ });
+ const i2={...b,title:e2.title,body:e2.body};
+ const twoIssues=oneIssues.map(i=>i.number===12011?i2:i);
+ const two=command.route(twoIssues,{now:'2026-09-30T07:08:00.000Z'});
+ assert.equal(two.admissionCount,2);
+ assert.equal(two.durableResultCount,2);
+ assert.deepEqual(two.missingShardIds,[]);
+ assert.equal(two.action,'await_reconciliation');
+});

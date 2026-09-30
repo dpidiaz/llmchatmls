@@ -26,6 +26,11 @@ test('R4.3 worker guide preserves every universal-command state and zero-write p
  assert.match(text,/actualizar \*\*ese mismo request Issue una sola vez\*\*/i);
  assert.match(text,/No buscar ni regresar al chat viejo/i);
  assert.match(text,/TTL por defecto: 30 minutos/);
+ assert.match(text,/20\/20.*únicamente.*20 admisiones/i);
+ assert.match(text,/admissionCount/);
+ assert.match(text,/durableResultCount/);
+ assert.match(text,/missingShardIds/);
+ assert.match(text,/durableResultCount === admissionCount/);
  assert.match(text,/sin renew, heartbeat ni checkpoint/i);
  assert.match(text,/`MLS R43 siguiente`/);
  assert.match(text,/`MLS BCR siguiente` pertenece a R4\.2/);
