@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * MLS R4.3 Snapshot Pilot Bootstrap
+ * MLS R4.3 Snapshot Wave Bootstrap
  *
- * PLAN is read-only. APPLY is restricted to the 20x5 remote pilot, requires
- * explicit confirmation, and is crash-resumable by waveId. The workflow shares
- * the mls-global-dispatcher mutex with R4.2.
+ * PLAN is read-only. APPLY supports remote waves up to the canonical admission
+ * ceiling (50 workers) with a fixed shard size of 5 entries. The bootstrap is
+ * crash-resumable by waveId and shares the mls-global-dispatcher mutex with R4.2.
  */
 const path=require('node:path');
 const child=require('node:child_process');
@@ -16,9 +16,13 @@ const bootstrap=require('../MLS R32 EDITORIAL/r4 snapshot bootstrap.cjs');
 const snapshotReservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
 const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
+const remoteAdmission=require('../MLS R32 EDITORIAL/r4 snapshot remote admission.cjs');
 const backoff=require('../MLS R32 EDITORIAL/r4 github backoff.cjs');
 
-const CONFIRM='APPLY_R43_PILOT_20X5';
+const SHARD_SIZE=5;
+const MAX_WORKERS=remoteAdmission.MAX_REMOTE_WORKERS;
+const MAX_UNRECONCILED_WAVES=2;
+
 function fail(code,msg,status=409){const e=new Error(msg||code);e.code=code;e.status=status;throw e;}
 function assert(ok,code,msg){if(!ok)fail(code,msg);}
 function repoParts(){
@@ -27,6 +31,15 @@ function repoParts(){
  return repo.split('/');
 }
 function root(){return path.resolve(__dirname,'..');}
+function confirmToken(workerCount){return 'APPLY_R43_WAVE_'+workerCount+'X'+SHARD_SIZE;}
+function normalizeWorkerCount(value=MAX_WORKERS){
+ const n=Number(value);
+ assert(Number.isInteger(n)&&n>0&&n<=MAX_WORKERS,'R43_BOOT_WORKER_COUNT',
+  'workerCount must be an integer between 1 and '+MAX_WORKERS+'.');
+ // Durable reservations only support totals decomposable into 10/25 units.
+ snapshotReservations.batchSizes(n*SHARD_SIZE);
+ return n;
+}
 
 const counts={GET:0,POST:0,PATCH:0};
 async function api(method,route,body){
@@ -91,13 +104,16 @@ function localHead(){
 function manifestSha(){
  return child.execFileSync('git',['rev-parse','HEAD:content/manifest.json'],{cwd:root(),encoding:'utf8'}).trim();
 }
-function virtualNumbers(){
- return {reservations:[900000001,900000002,900000003,900000004],wave:900000005};
+function virtualNumbers(reservationCount){
+ return {
+  reservations:Array.from({length:reservationCount},(_,i)=>900000001+i),
+  wave:900000001+reservationCount
+ };
 }
-async function computePlan({issues,numbers,waveId,createdAt,baseCommit}){
+async function computePlan({issues,numbers,waveId,workerCount,createdAt,baseCommit}){
  const projected=projectedSnapshot(issues,Date.parse(createdAt));
  return bootstrap.plan(projected,{
-  waveId,workerCount:20,shardSize:5,
+  waveId,workerCount,shardSize:SHARD_SIZE,
   reservationIssueNumbers:numbers.reservations,
   waveIssueNumber:numbers.wave,
   baseCommit,
@@ -106,14 +122,19 @@ async function computePlan({issues,numbers,waveId,createdAt,baseCommit}){
   route:'remote'
  });
 }
-async function planOnly({waveId,createdAt}){
+async function planOnly({waveId,workerCount,createdAt}){
+ const sizes=snapshotReservations.batchSizes(workerCount*SHARD_SIZE);
  const issues=await allOpenIssues();
  const main=await mainHead();
  assert(localHead()===main,'R43_BOOT_CHECKOUT_STALE');
- const plan=await computePlan({issues,numbers:virtualNumbers(),waveId,createdAt,baseCommit:main});
+ const plan=await computePlan({
+  issues,numbers:virtualNumbers(sizes.length),waveId,workerCount,createdAt,baseCommit:main
+ });
  return {
   ok:true,mode:'PLAN_ONLY',noRemoteWrites:true,
-  waveId:plan.waveId,totalUnits:plan.totalUnits,
+  waveId:plan.waveId,workerCount:plan.workerCount,shardSize:plan.shardSize,
+  totalUnits:plan.totalUnits,reservationCount:plan.reservations.length,
+  reservationSizes:plan.reservations.map(x=>x.allocation.units.length),
   firstCode:plan.protectedCodes[0],lastCode:plan.protectedCodes.at(-1),
   snapshotHash:plan.snapshotHash,waveHash:plan.waveHash,
   protectedCodes:plan.protectedCodes,writeBudget:plan.writeBudget,
@@ -147,13 +168,16 @@ async function createOrReusePlaceholder(issues,title,body){
  issues.push(created);
  return created;
 }
-async function persistReservation({issues,projected,waveId,slot,baseCommit,contentManifestBlobSha,now}){
- const title='[MLS R4.3][BOOTSTRAP][PENDING] '+waveId+' reservation '+String(slot).padStart(2,'0')+'/4';
+async function persistReservation({
+ issues,projected,waveId,slot,totalSlots,size,baseCommit,contentManifestBlobSha,now
+}){
+ const label=String(slot).padStart(2,'0')+'/'+String(totalSlots).padStart(2,'0');
+ const title='[MLS R4.3][BOOTSTRAP][PENDING] '+waveId+' reservation '+label;
  const placeholder=await createOrReusePlaceholder(
   issues,title,'R4.3 bootstrap placeholder. Not an ownership record until finalized.'
  );
  const allocated=buffered.allocate(projected,{
-  size:25,
+  size,
   issueNumber:Number(placeholder.number),
   requestId:'r43-wave-'+waveId+'-'+String(slot).padStart(2,'0'),
   baseCommit,
@@ -169,16 +193,20 @@ async function persistReservation({issues,projected,waveId,slot,baseCommit,conte
  assert(parsed.recordHash===tagged.recordHash,'R43_BOOT_RESERVATION_PERSIST');
  return {issue:patched,reservation:parsed};
 }
-async function apply({waveId,createdAt,confirm}){
- assert(confirm===CONFIRM,'R43_BOOT_CONFIRMATION',
-  'Apply requires exact confirmation token '+CONFIRM);
+async function apply({waveId,workerCount,createdAt,confirm}){
+ const expectedConfirm=confirmToken(workerCount);
+ assert(confirm===expectedConfirm,'R43_BOOT_CONFIRMATION',
+  'Apply requires exact confirmation token '+expectedConfirm);
  let issues=await allOpenIssues();
 
  const existingWave=liveWaveIssue(issues,waveId);
  if(existingWave){
   const record=waveIssue.parse(existingWave);
+  assert(record.workerCount===workerCount&&record.shardSize===SHARD_SIZE,
+   'R43_BOOT_EXISTING_WAVE_SCOPE');
   return {
    ok:true,mode:'APPLIED',idempotent:true,waveId,
+   workerCount:record.workerCount,shardSize:record.shardSize,
    waveIssueNumber:Number(existingWave.number),
    reservationIssueNumbers:[...record.reservationIssueNumbers],
    snapshotHash:record.snapshotHash,waveHash:record.waveHash,
@@ -186,45 +214,51 @@ async function apply({waveId,createdAt,confirm}){
   };
  }
  const otherLive=issues.filter(i=>/^\[MLS BCR R4\.3\]\[WAVE\]\[(COLLECTING|SEALED)\]/.test(String(i.title||'')));
- assert(otherLive.length===0,'R43_BOOT_OTHER_WAVE_LIVE');
+ assert(otherLive.length<MAX_UNRECONCILED_WAVES,'R43_BOOT_WAVE_PIPELINE_FULL',
+  'At most '+MAX_UNRECONCILED_WAVES+' unreconciled R4.3 waves may coexist.');
 
  const main=await mainHead();
  assert(localHead()===main,'R43_BOOT_CHECKOUT_STALE');
  const manifest=manifestSha();
  assert(/^[a-f0-9]{40}$/.test(manifest),'R43_BOOT_MANIFEST_SHA');
 
+ const sizes=snapshotReservations.batchSizes(workerCount*SHARD_SIZE);
+ const reservationCount=sizes.length;
  let projected=projectedSnapshot(issues,Date.parse(createdAt));
  const existingBySlot=new Map();
  for(const issue of issues){
   const r=taggedReservation(issue,waveId);
   if(!r)continue;
   const slot=reservationSlot(r,waveId);
-  assert(Number.isInteger(slot)&&slot>=1&&slot<=4,'R43_BOOT_RESERVATION_SLOT');
+  assert(Number.isInteger(slot)&&slot>=1&&slot<=reservationCount,'R43_BOOT_RESERVATION_SLOT');
   assert(!existingBySlot.has(slot),'R43_BOOT_RESERVATION_SLOT_DUP');
   assert(r.allocation.baseCommit===main,'R43_BOOT_RESERVATION_BASE_DRIFT');
   assert(r.allocation.contentManifestBlobSha===manifest,'R43_BOOT_RESERVATION_MANIFEST_DRIFT');
+  assert(r.allocation.units.length===sizes[slot-1],'R43_BOOT_RESERVATION_SIZE_DRIFT');
   existingBySlot.set(slot,{issue,reservation:r});
  }
  const now=Date.parse(createdAt);
- for(let slot=1;slot<=4;slot++){
+ for(let slot=1;slot<=reservationCount;slot++){
   if(existingBySlot.has(slot))continue;
   const made=await persistReservation({
-   issues,projected,waveId,slot,baseCommit:main,
-   contentManifestBlobSha:manifest,now:now+slot
+   issues,projected,waveId,slot,totalSlots:reservationCount,size:sizes[slot-1],
+   baseCommit:main,contentManifestBlobSha:manifest,now:now+slot
   });
   existingBySlot.set(slot,made);
   const codes=made.reservation.allocation.units.map(x=>x.code);
   projected={...projected,reservedCodes:[...(projected.reservedCodes||[]),...codes]};
  }
- const ordered=[1,2,3,4].map(slot=>existingBySlot.get(slot));
+ const ordered=Array.from({length:reservationCount},(_,i)=>existingBySlot.get(i+1));
  const units=ordered.flatMap(x=>x.reservation.allocation.units);
- assert(units.length===100&&new Set(units.map(x=>x.code)).size===100,'R43_BOOT_UNIT_SET');
+ const totalUnits=workerCount*SHARD_SIZE;
+ assert(units.length===totalUnits&&new Set(units.map(x=>x.code)).size===totalUnits,
+  'R43_BOOT_UNIT_SET');
  const frozenAt=ordered.map(x=>x.reservation.createdAt).sort()[0];
  const snapshot=farm.createSnapshot({
   baseCommit:main,contentManifestBlobSha:manifest,units,createdAt:frozenAt,source:'github'
  });
  const wave=farm.createWave(snapshot,{
-  waveId,workerCount:20,shardSize:5,createdAt:frozenAt
+  waveId,workerCount,shardSize:SHARD_SIZE,createdAt:frozenAt
  });
 
  const wavePendingTitle='[MLS R4.3][BOOTSTRAP][PENDING] '+waveId+' wave';
@@ -244,25 +278,29 @@ async function apply({waveId,createdAt,confirm}){
  const parsedWave=waveIssue.parse(wavePatched);
  waveIssue.validate(parsedWave,snapshot,wave);
  const writeCount=counts.POST+counts.PATCH;
- assert(writeCount<=10,'R43_BOOT_WRITE_BUDGET');
+ const writeBudget=reservationCount*2+2;
+ assert(writeCount<=writeBudget,'R43_BOOT_WRITE_BUDGET');
 
  return {
-  ok:true,mode:'APPLIED',idempotent:false,waveId,totalUnits:wave.totalUnits,
+  ok:true,mode:'APPLIED',idempotent:false,waveId,
+  workerCount:wave.workerCount,shardSize:wave.shardSize,totalUnits:wave.totalUnits,
+  reservationCount,reservationSizes:sizes,
   waveIssueNumber:Number(wavePatched.number),
   reservationIssueNumbers:ordered.map(x=>x.reservation.issueNumber),
   firstCode:units[0].code,lastCode:units.at(-1).code,
   snapshotHash:snapshot.snapshotHash,waveHash:wave.waveHash,
   protectedCodes:units.map(x=>x.code),
-  actualApiCounts:{...counts},contentWriteCount:writeCount
+  actualApiCounts:{...counts},contentWriteCount:writeCount,contentWriteBudget:writeBudget
  };
 }
 async function run(){
  const mode=String(process.env.MLS_R43_BOOTSTRAP_MODE||'plan').toLowerCase();
- const waveId=String(process.env.MLS_R43_WAVE_ID||'BCR-R43-PILOT-20X5');
+ const workerCount=normalizeWorkerCount(process.env.MLS_R43_WORKER_COUNT||MAX_WORKERS);
+ const waveId=String(process.env.MLS_R43_WAVE_ID||'BCR-R43-WAVE-50X5');
  const createdAt=new Date().toISOString();
- if(mode==='plan')return planOnly({waveId,createdAt});
+ if(mode==='plan')return planOnly({waveId,workerCount,createdAt});
  if(mode==='apply')return apply({
-  waveId,createdAt,confirm:String(process.env.MLS_R43_CONFIRM||'')
+  waveId,workerCount,createdAt,confirm:String(process.env.MLS_R43_CONFIRM||'')
  });
  fail('R43_BOOT_MODE','mode must be plan or apply');
 }
@@ -270,4 +308,7 @@ if(require.main===module){
  run().then(x=>process.stdout.write(JSON.stringify(x,null,2)+'\n'))
   .catch(e=>{console.error(e.code||'R43_BOOT_FAILED',e.message);process.exitCode=2;});
 }
-module.exports={CONFIRM,planOnly,apply,run,reservationSlot,taggedReservation,liveWaveIssue};
+module.exports={
+ SHARD_SIZE,MAX_WORKERS,MAX_UNRECONCILED_WAVES,confirmToken,normalizeWorkerCount,
+ planOnly,apply,run,reservationSlot,taggedReservation,liveWaveIssue
+};

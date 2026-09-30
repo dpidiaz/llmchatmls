@@ -96,12 +96,47 @@ test('active handoff never falls through to unrelated backlog when all handoff c
  assert.deepEqual(candidate.units,[]);
 });
 
-test('multiple R4.3 handoff identities fail closed',()=>{
+
+test('completed R4.3 handoff retires from active scope and no longer blocks next-wave backlog',()=>{
+ const src=source();
+ const x=handoffReservation();
+ const completed={...src,ledger:{...src.ledger,verified:[...x.codes]}};
+ const projected=integration.projectR33Snapshot({...completed,bufferedReservations:[x.reservation]},{});
+ assert.equal(projected.r43Handoff,null);
+ assert.deepEqual(projected.handoffCodes,[]);
+ const candidate=r33.materializeCandidate(projected,{
+  requested:5,now:Date.parse('2026-09-30T10:07:00.000Z')
+ });
+ assert.equal(candidate.eligible,true);
+ assert.equal(candidate.reason,'READY');
+ assert.ok(candidate.units.every(unit=>!x.codes.includes(unit.code)));
+});
+
+test('multiple R4.3 handoff identities coexist as isolated R33 scopes',()=>{
  const a=handoffReservation({waveId:'BCR-R43-HANDOFF-A',issueNumber:5001,waveIssueNumber:6001,start:754});
  const b=handoffReservation({waveId:'BCR-R43-HANDOFF-B',issueNumber:5002,waveIssueNumber:6002,start:800});
  const src=source(100,754);
+ const projected=integration.projectR33Snapshot({...src,bufferedReservations:[a.reservation,b.reservation]},{});
+ assert.equal(projected.r43Handoff,null);
+ assert.deepEqual(projected.handoffCodes,[]);
+ assert.equal(projected.r43Handoffs.length,2);
+ assert.deepEqual(projected.r43Handoffs.map(x=>x.waveIssueNumber),[6001,6002]);
+ const views=integration.r33HandoffSnapshots(projected);
+ assert.equal(views.length,2);
+ const ca=r33.materializeCandidate(views[0],{requested:5,now:Date.parse('2026-09-30T10:06:00.000Z')});
+ const cb=r33.materializeCandidate(views[1],{requested:5,now:Date.parse('2026-09-30T10:06:00.000Z')});
+ assert.deepEqual(ca.units.map(x=>x.code),a.codes.slice(0,5));
+ assert.deepEqual(cb.units.map(x=>x.code),b.codes.slice(0,5));
+ assert.equal(ca.ownership.r43Handoff.waveIssueNumber,6001);
+ assert.equal(cb.ownership.r43Handoff.waveIssueNumber,6002);
+});
+
+test('overlapping R4.3 handoff identities still fail closed',()=>{
+ const a=handoffReservation({waveId:'BCR-R43-HANDOFF-A',issueNumber:5001,waveIssueNumber:6001,start:754});
+ const b=handoffReservation({waveId:'BCR-R43-HANDOFF-B',issueNumber:5002,waveIssueNumber:6002,start:754});
+ const src=source(40,754);
  assert.throws(()=>integration.projectR33Snapshot({...src,bufferedReservations:[a.reservation,b.reservation]},{}),{
-  code:'R43_R33_HANDOFF_CARDINALITY'
+  code:'R43_R33_HANDOFF_OVERLAP'
  });
 });
 

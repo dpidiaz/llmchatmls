@@ -17,7 +17,7 @@ test('R4.3 bootstrap activation remains explicit and has no automatic push/sched
  assert.doesNotMatch(onBlock,/\n\s*schedule:/);
 });
 
-test('Issue-triggered bootstrap is fixed to the authorized 20x5 apply command',()=>{
+test('Issue-triggered bootstrap is fixed to the authorized 50x5 apply command',()=>{
  const boot=fs.readFileSync(bootstrap,'utf8');
  assert.match(boot,/github\.event_name == 'issues'/);
  assert.match(boot,/github\.event\.action == 'opened'/);
@@ -25,12 +25,13 @@ test('Issue-triggered bootstrap is fixed to the authorized 20x5 apply command',(
  assert.match(boot,/MEMBER/);
  assert.match(boot,/COLLABORATOR/);
  assert.match(boot,/github\.event\.issue\.author_association/);
- assert.match(boot,/\[MLS R4\.3\]\[BOOTSTRAP\]\[APPLY\] BCR-R43-PILOT-20X5/);
- assert.match(boot,/MLS_R43_BOOTSTRAP_APPLY_V1/);
- assert.match(boot,/APPLY_R43_PILOT_20X5/);
+ assert.match(boot,/\[MLS R4\.3\]\[BOOTSTRAP\]\[APPLY\] 50X5/);
+ assert.match(boot,/MLS_R43_BOOTSTRAP_APPLY_V2/);
+ assert.match(boot,/APPLY_R43_WAVE_50X5/);
  assert.match(boot,/github\.event_name == 'issues' && 'apply' \|\| inputs\.mode/);
- assert.match(boot,/github\.event_name == 'issues' && 'BCR-R43-PILOT-20X5' \|\| inputs\.wave_id/);
- assert.match(boot,/github\.event_name == 'issues' && 'APPLY_R43_PILOT_20X5' \|\| inputs\.confirm/);
+ assert.match(boot,/format\('BCR-R43-WAVE-50X5-\{0\}', github\.event\.issue\.number\)/);
+ assert.match(boot,/github\.event_name == 'issues' && '50' \|\| inputs\.worker_count/);
+ assert.match(boot,/github\.event_name == 'issues' && 'APPLY_R43_WAVE_50X5' \|\| inputs\.confirm/);
 });
 
 test('R4.3 scheduler cannot bootstrap ownership and only reacts to authenticated protocol markers',()=>{
