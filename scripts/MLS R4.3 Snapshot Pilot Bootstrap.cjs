@@ -3,9 +3,9 @@
 /**
  * MLS R4.3 Snapshot Pilot Bootstrap
  *
- * PLAN is read-only. APPLY is restricted to the 20x5 remote pilot and requires
- * an explicit confirmation token. The workflow must share the
- * mls-global-dispatcher concurrency group with R4.2.
+ * PLAN is read-only. APPLY is restricted to the 20x5 remote pilot, requires
+ * explicit confirmation, and is crash-resumable by waveId. The workflow shares
+ * the mls-global-dispatcher mutex with R4.2.
  */
 const path=require('node:path');
 const child=require('node:child_process');
@@ -13,6 +13,8 @@ const dispatcher=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const integration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
 const bootstrap=require('../MLS R32 EDITORIAL/r4 snapshot bootstrap.cjs');
+const snapshotReservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
+const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
 const backoff=require('../MLS R32 EDITORIAL/r4 github backoff.cjs');
 
@@ -90,10 +92,7 @@ function manifestSha(){
  return child.execFileSync('git',['rev-parse','HEAD:content/manifest.json'],{cwd:root(),encoding:'utf8'}).trim();
 }
 function virtualNumbers(){
- return {
-  reservations:[900000001,900000002,900000003,900000004],
-  wave:900000005
- };
+ return {reservations:[900000001,900000002,900000003,900000004],wave:900000005};
 }
 async function computePlan({issues,numbers,waveId,createdAt,baseCommit}){
  const projected=projectedSnapshot(issues,Date.parse(createdAt));
@@ -121,68 +120,140 @@ async function planOnly({waveId,createdAt}){
   apiCounts:{...counts}
  };
 }
-async function createPlaceholder(title,body){
- return api('POST','/issues',{title,body});
+function reservationSlot(record,waveId){
+ const prefix='r43-wave-'+waveId+'-';
+ const id=String(record?.requestId||'');
+ if(!id.startsWith(prefix))return null;
+ const suffix=id.slice(prefix.length);
+ return /^\d{2}$/.test(suffix)?Number(suffix):null;
+}
+function taggedReservation(issue,waveId){
+ try{
+  const r=buffered.parseReservation(issue);
+  return r.snapshotFarm?.schema===snapshotReservations.RESERVATION_SCHEMA&&
+    r.snapshotFarm?.waveId===waveId?r:null;
+ }catch{return null;}
+}
+function liveWaveIssue(issues,waveId){
+ return issues.find(i=>String(i.title||'').startsWith('[MLS BCR R4.3][WAVE][')&&
+  String(i.title||'').endsWith(' '+waveId)&&String(i.body||'').includes(waveIssue.MARKER))||null;
+}
+async function createOrReusePlaceholder(issues,title,body){
+ const existing=issues.filter(i=>String(i.title||'')===title);
+ assert(existing.length<=1,'R43_BOOT_PLACEHOLDER_DUP');
+ if(existing.length)return existing[0];
+ const created=await api('POST','/issues',{title,body});
+ assert(created?.user?.login==='github-actions[bot]','R43_BOOT_PLACEHOLDER_OWNER');
+ issues.push(created);
+ return created;
+}
+async function persistReservation({issues,projected,waveId,slot,baseCommit,contentManifestBlobSha,now}){
+ const title='[MLS R4.3][BOOTSTRAP][PENDING] '+waveId+' reservation '+String(slot).padStart(2,'0')+'/4';
+ const placeholder=await createOrReusePlaceholder(
+  issues,title,'R4.3 bootstrap placeholder. Not an ownership record until finalized.'
+ );
+ const allocated=buffered.allocate(projected,{
+  size:25,
+  issueNumber:Number(placeholder.number),
+  requestId:'r43-wave-'+waveId+'-'+String(slot).padStart(2,'0'),
+  baseCommit,
+  contentManifestBlobSha,
+  now
+ });
+ const tagged=snapshotReservations.markSnapshotReservation(allocated,waveId);
+ const patched=await api('PATCH','/issues/'+placeholder.number,{
+  title:'[MLS Buffered][RESERVED] '+tagged.allocation.assignmentId,
+  body:buffered.renderReservation(tagged)
+ });
+ const parsed=buffered.parseReservation(patched);
+ assert(parsed.recordHash===tagged.recordHash,'R43_BOOT_RESERVATION_PERSIST');
+ return {issue:patched,reservation:parsed};
 }
 async function apply({waveId,createdAt,confirm}){
  assert(confirm===CONFIRM,'R43_BOOT_CONFIRMATION',
   'Apply requires exact confirmation token '+CONFIRM);
- const issues=await allOpenIssues();
+ let issues=await allOpenIssues();
+
+ const existingWave=liveWaveIssue(issues,waveId);
+ if(existingWave){
+  const record=waveIssue.parse(existingWave);
+  return {
+   ok:true,mode:'APPLIED',idempotent:true,waveId,
+   waveIssueNumber:Number(existingWave.number),
+   reservationIssueNumbers:[...record.reservationIssueNumbers],
+   snapshotHash:record.snapshotHash,waveHash:record.waveHash,
+   totalUnits:record.totalUnits,actualApiCounts:{...counts}
+  };
+ }
+ const otherLive=issues.filter(i=>/^\[MLS BCR R4\.3\]\[WAVE\]\[(COLLECTING|SEALED)\]/.test(String(i.title||'')));
+ assert(otherLive.length===0,'R43_BOOT_OTHER_WAVE_LIVE');
+
  const main=await mainHead();
  assert(localHead()===main,'R43_BOOT_CHECKOUT_STALE');
+ const manifest=manifestSha();
+ assert(/^[a-f0-9]{40}$/.test(manifest),'R43_BOOT_MANIFEST_SHA');
 
- // Compute the exact candidate set before creating anything.
- const preview=await computePlan({issues,numbers:virtualNumbers(),waveId,createdAt,baseCommit:main});
-
- const reservationIssues=[];
- for(let i=0;i<4;i++){
-  reservationIssues.push(await createPlaceholder(
-   '[MLS R4.3][BOOTSTRAP][PENDING] '+waveId+' reservation '+String(i+1)+'/4',
-   'R4.3 bootstrap placeholder. Not an ownership record until finalized.'
-  ));
+ let projected=projectedSnapshot(issues,Date.parse(createdAt));
+ const existingBySlot=new Map();
+ for(const issue of issues){
+  const r=taggedReservation(issue,waveId);
+  if(!r)continue;
+  const slot=reservationSlot(r,waveId);
+  assert(Number.isInteger(slot)&&slot>=1&&slot<=4,'R43_BOOT_RESERVATION_SLOT');
+  assert(!existingBySlot.has(slot),'R43_BOOT_RESERVATION_SLOT_DUP');
+  assert(r.allocation.baseCommit===main,'R43_BOOT_RESERVATION_BASE_DRIFT');
+  assert(r.allocation.contentManifestBlobSha===manifest,'R43_BOOT_RESERVATION_MANIFEST_DRIFT');
+  existingBySlot.set(slot,{issue,reservation:r});
  }
- const wavePlaceholder=await createPlaceholder(
-  '[MLS R4.3][BOOTSTRAP][PENDING] '+waveId+' wave',
-  'R4.3 bootstrap placeholder. Not active until finalized.'
- );
- const numbers={
-  reservations:reservationIssues.map(x=>Number(x.number)),
-  wave:Number(wavePlaceholder.number)
- };
+ const now=Date.parse(createdAt);
+ for(let slot=1;slot<=4;slot++){
+  if(existingBySlot.has(slot))continue;
+  const made=await persistReservation({
+   issues,projected,waveId,slot,baseCommit:main,
+   contentManifestBlobSha:manifest,now:now+slot
+  });
+  existingBySlot.set(slot,made);
+  const codes=made.reservation.allocation.units.map(x=>x.code);
+  projected={...projected,reservedCodes:[...(projected.reservedCodes||[]),...codes]};
+ }
+ const ordered=[1,2,3,4].map(slot=>existingBySlot.get(slot));
+ const units=ordered.flatMap(x=>x.reservation.allocation.units);
+ assert(units.length===100&&new Set(units.map(x=>x.code)).size===100,'R43_BOOT_UNIT_SET');
+ const frozenAt=ordered.map(x=>x.reservation.createdAt).sort()[0];
+ const snapshot=farm.createSnapshot({
+  baseCommit:main,contentManifestBlobSha:manifest,units,createdAt:frozenAt,source:'github'
+ });
+ const wave=farm.createWave(snapshot,{
+  waveId,workerCount:20,shardSize:5,createdAt:frozenAt
+ });
 
- // The shared Global Dispatcher mutex prevents R4.2 from allocating concurrently.
- // Still verify main did not move for any external reason.
+ const wavePendingTitle='[MLS R4.3][BOOTSTRAP][PENDING] '+waveId+' wave';
+ const wavePlaceholder=await createOrReusePlaceholder(
+  issues,wavePendingTitle,'R4.3 bootstrap placeholder. Not active until finalized.'
+ );
  const mainAfter=await mainHead();
  assert(mainAfter===main,'R43_BOOT_MAIN_DRIFT');
-
- const currentIssues=await allOpenIssues();
- const actual=await computePlan({issues:currentIssues,numbers,waveId,createdAt,baseCommit:main});
- assert(JSON.stringify(actual.protectedCodes)===JSON.stringify(preview.protectedCodes),
-  'R43_BOOT_PREVIEW_DRIFT');
-
- for(let i=0;i<actual.reservations.length;i++){
-  const r=actual.reservations[i];
-  const patched=await api('PATCH','/issues/'+numbers.reservations[i],{
-   title:'[MLS Buffered][RESERVED] '+r.allocation.assignmentId,
-   body:buffered.renderReservation(r)
-  });
-  const parsed=buffered.parseReservation(patched);
-  assert(parsed.recordHash===r.recordHash,'R43_BOOT_RESERVATION_PERSIST');
- }
- const wavePatched=await api('PATCH','/issues/'+numbers.wave,{
-  title:waveIssue.title(actual.waveControl),
-  body:waveIssue.render(actual.waveControl)
+ const control=waveIssue.create({
+  waveIssueNumber:Number(wavePlaceholder.number),
+  reservationIssueNumbers:ordered.map(x=>x.reservation.issueNumber),
+  snapshot,wave,createdAt:String(wavePlaceholder.created_at||createdAt),route:'remote'
+ });
+ const wavePatched=await api('PATCH','/issues/'+wavePlaceholder.number,{
+  title:waveIssue.title(control),body:waveIssue.render(control)
  });
  const parsedWave=waveIssue.parse(wavePatched);
- assert(parsedWave.recordHash===actual.waveControl.recordHash,'R43_BOOT_WAVE_PERSIST');
+ waveIssue.validate(parsedWave,snapshot,wave);
+ const writeCount=counts.POST+counts.PATCH;
+ assert(writeCount<=10,'R43_BOOT_WRITE_BUDGET');
 
  return {
-  ok:true,mode:'APPLIED',waveId,totalUnits:actual.totalUnits,
-  waveIssueNumber:numbers.wave,reservationIssueNumbers:numbers.reservations,
-  firstCode:actual.protectedCodes[0],lastCode:actual.protectedCodes.at(-1),
-  snapshotHash:actual.snapshotHash,waveHash:actual.waveHash,
-  protectedCodes:actual.protectedCodes,writeBudget:actual.writeBudget,
-  actualApiCounts:{...counts}
+  ok:true,mode:'APPLIED',idempotent:false,waveId,totalUnits:wave.totalUnits,
+  waveIssueNumber:Number(wavePatched.number),
+  reservationIssueNumbers:ordered.map(x=>x.reservation.issueNumber),
+  firstCode:units[0].code,lastCode:units.at(-1).code,
+  snapshotHash:snapshot.snapshotHash,waveHash:wave.waveHash,
+  protectedCodes:units.map(x=>x.code),
+  actualApiCounts:{...counts},contentWriteCount:writeCount
  };
 }
 async function run(){
@@ -199,4 +270,4 @@ if(require.main===module){
  run().then(x=>process.stdout.write(JSON.stringify(x,null,2)+'\n'))
   .catch(e=>{console.error(e.code||'R43_BOOT_FAILED',e.message);process.exitCode=2;});
 }
-module.exports={CONFIRM,planOnly,apply,run};
+module.exports={CONFIRM,planOnly,apply,run,reservationSlot,taggedReservation,liveWaveIssue};
