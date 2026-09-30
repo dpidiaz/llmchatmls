@@ -266,7 +266,7 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
  let reservations=asReservations(issues);
  const done=[],renewed=[],created=[],leased=[],busy=[],reaped=[];
  // Confirm and reconcile worker submissions before freeing any capacity.
- for(const issue of sortedCommands(commands,'COMPLETE').filter(i=>!i.body.includes('"task":"repair"')&&!/"task"\s*:\s*"repair"/.test(i.body)).slice(0,elastic.MAX_REQUESTS_PER_TICK)){
+ for(const issue of sortedCommands(commands,'COMPLETE').filter(i=>!i.body.includes('"task":"repair"')&&!/"task"\s*:\s*"repair"/.test(i.body)).slice(0,elastic.MAX_SETTLEMENTS_PER_TICK)){
   try{
    const cmd=elastic.command(issue),at=reservations.findIndex(r=>r.issueNumber===cmd.reservationIssueNumber);
    requireOk(at>=0,'RESERVATION_NOT_FOUND');
@@ -287,7 +287,7 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
    await finishRequest(api,issue,'REJECTED',{ok:false,error:e.code||'R42_COMPLETE_ERROR',message:e.message});
   }
  }
- for(const issue of sortedCommands(commands,'RENEW').filter(i=>!/"task"\s*:\s*"repair"/.test(i.body)).slice(0,elastic.MAX_REQUESTS_PER_TICK)){
+ for(const issue of sortedCommands(commands,'RENEW').filter(i=>!/"task"\s*:\s*"repair"/.test(i.body)).slice(0,elastic.MAX_SETTLEMENTS_PER_TICK)){
   try{
    const cmd=elastic.command(issue),at=reservations.findIndex(r=>r.issueNumber===cmd.reservationIssueNumber);
    requireOk(at>=0,'RENEW_RESERVATION_MISSING');
@@ -320,7 +320,12 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
  let minted=0;
  const lifecycle=await universal.drain({api,io:module.exports,root,reservations,issues,now,technical,activeStates});
  const incoming=sortedCommands(commands,'REQUEST').filter(i=>i.state!=='closed'&&!lifecycle.consumed.has(i.number));
+ const repairsLeased=lifecycle.events.filter(event=>Array.isArray(event.repair)).length;
+ const productionBudget=Math.max(0,elastic.MAX_LEASE_ADMISSIONS_PER_TICK-repairsLeased);
  for(const issue of incoming.slice(0,elastic.MAX_REQUESTS_PER_TICK)){
+  // Leave overflow REQUESTs open in FIFO order. Never issue an unattended lease
+  // after admission budget is spent, or turn temporary pacing into CAPACITY_BUSY.
+  if(leased.length>=productionBudget)break;
   try{
    const cmd=elastic.command(issue);
    const oldReceipt=reservations.find(r=>r.elastic?.requestReceipts?.[cmd.requestId]);
@@ -358,9 +363,9 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
    let free=elastic.freeBlock(reservations,now);
    if(!free){
     if(minted>=elastic.MAX_NEW_RESERVATIONS_PER_TICK){
-     await finishRequest(api,issue,'CAPACITY_BUSY',{ok:true,assigned:false,retryable:true,
-      reason:'RESERVATION_BOOTSTRAP_PACED',maxNewReservationsPerTick:elastic.MAX_NEW_RESERVATIONS_PER_TICK});
-     busy.push(issue.number);continue;
+     // A future serialized tick may create the next canonical reservation.
+     // Keep this request pending rather than falsely marking capacity exhausted.
+     break;
     }
     const fresh=await createReservation(api,root,issues,globalLedger,activeStates,now);
     reservations.push(fresh);created.push(fresh.issueNumber);minted++;
@@ -430,8 +435,10 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
     message:e.message});
   }
  }
- return {leased,created,busy,done,renewed,reaped,joined,universal:lifecycle.events,pending:Math.max(0,incoming.length-elastic.MAX_REQUESTS_PER_TICK),
-  maxActive:elastic.MAX_ACTIVE,maxRequestsPerTick:elastic.MAX_REQUESTS_PER_TICK};
+ return {leased,created,busy,done,renewed,reaped,joined,universal:lifecycle.events,
+  pending:incoming.filter(i=>i.state!=='closed'&&String(i.title).startsWith('[MLS Dispatcher][BCR][REQUEST]')).length,
+  maxActive:elastic.MAX_ACTIVE,maxRequestsPerTick:elastic.MAX_REQUESTS_PER_TICK,
+  maxLeaseAdmissionsPerTick:elastic.MAX_LEASE_ADMISSIONS_PER_TICK};
 }
 module.exports={drain,refHead,remoteFile,groupedCommit,publishNewBranch,moveBranch,
  saveReservation,createReservation,baseBranch,verifyClaimCompletion,reconcileExpired,consolidate};
