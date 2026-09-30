@@ -125,7 +125,7 @@ function route(issues,{requestId=null,requestIssueNumber=null}={}){
  farm.validateWorkerContext(snapshot,wave,context);
  return {
   ...base,action:'produce_shard',requestId,
-  requestIssueNumber:Number(request.issue.number),
+  requestIssueNumber:Number(requestIssue.number),
   assignment:structuredClone(assignment),
   workerContext:context
  };
