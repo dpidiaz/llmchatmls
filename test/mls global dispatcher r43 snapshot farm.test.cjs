@@ -861,6 +861,7 @@ test('canonical wave bootstrap is syntactically valid, capped at 50x5 and crash-
  const module=require('../scripts/MLS R4.3 Snapshot Pilot Bootstrap.cjs');
  assert.equal(module.MAX_WORKERS,50);
  assert.equal(module.SHARD_SIZE,5);
+ assert.equal(module.MAX_UNRECONCILED_WAVES,2);
  assert.equal(module.normalizeWorkerCount(50),50);
  assert.throws(()=>module.normalizeWorkerCount(51),{code:'R43_BOOT_WORKER_COUNT'});
  assert.equal(module.confirmToken(50),'APPLY_R43_WAVE_50X5');
@@ -871,7 +872,9 @@ test('canonical wave bootstrap is syntactically valid, capped at 50x5 and crash-
  assert.match(source,/snapshotReservations\.markSnapshotReservation/);
  assert.match(source,/integration\.collectR33Snapshot/);
  assert.match(source,/integration\.projectR33Snapshot/);
- assert.match(source,/R43_BOOT_PREVIOUS_HANDOFF_ACTIVE/);
+ assert.match(source,/R43_BOOT_WAVE_PIPELINE_FULL/);
+ assert.match(source,/otherLive\.length<MAX_UNRECONCILED_WAVES/);
+ assert.doesNotMatch(source,/R43_BOOT_PREVIOUS_HANDOFF_ACTIVE|R43_BOOT_OTHER_WAVE_LIVE/);
  assert.match(source,/createOrReusePlaceholder/);
  assert.match(source,/R43_BOOT_RESERVATION_BASE_DRIFT/);
  assert.match(source,/R43_BOOT_CHECKOUT_STALE/);
