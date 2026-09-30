@@ -8,8 +8,10 @@ const dispatcherCore=require('./global dispatcher/core.js');
 const REQUEST_MARKER='MLS_BCR_ELASTIC_COMMAND';
 const STATUS_MARKER='MLS_BCR_ELASTIC_CLAIM';
 const VERSION=1;
-// Up to five isolated chat leases (one per reservation block) plus the serialized Actions writer.
-const BLOCK_SIZE=5, BLOCKS=5, MAX_ACTIVE=5, MAX_REQUESTS_PER_TICK=5;
+// Fifty isolated BCR leases across independent 25-entry reservations; Actions stays serialized.
+// Bound each scheduler tick and reserve creation separately to avoid burst writes.
+const BLOCK_SIZE=5, BLOCKS=5, MAX_ACTIVE=50, MAX_REQUESTS_PER_TICK=10;
+const MAX_NEW_RESERVATIONS_PER_TICK=2, MAX_MAINTENANCE_PER_TICK=2;
 const TTL_MS=5*60*1000;
 function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;throw e;}
 function assert(ok,code){if(!ok)fail(code);}
@@ -191,7 +193,8 @@ function validateChunkSubmission({manifest,block,chunk,changedFiles}){
   'R42_COMMIT_PATH_OR_BLOB_DRIFT');
  return {codes:block.codes,chunkHash:chunk.chunkHash,files:expected.size};
 }
-module.exports={VERSION,BLOCK_SIZE,BLOCKS,MAX_ACTIVE,MAX_REQUESTS_PER_TICK,TTL_MS,
+module.exports={VERSION,BLOCK_SIZE,BLOCKS,MAX_ACTIVE,MAX_REQUESTS_PER_TICK,
+ MAX_NEW_RESERVATIONS_PER_TICK,MAX_MAINTENANCE_PER_TICK,TTL_MS,
  REQUEST_MARKER,STATUS_MARKER,command,renderCommand,preblock,blocks,withBlocks,
  activeCount,freeBlock,lease,markDone,gitBlobJson,validateChunkSubmission};
 

@@ -306,7 +306,8 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
   const bufferedCleanup=await bufferedFinalize.cleanupSyncRequests({issues:providerIssues,ledgerItem,
     patchIssue:(number,patch)=>updateIssue(number,patch)});
   // Additive R4.2: process disposable block workers under this SAME serialized
-  // Dispatcher mutex. Max 5 commands/tick, one chat writer + this serial writer.
+  // Dispatcher mutex. R4.2 may admit up to 10 NEXT/tick (2 for maintenance),
+  // with up to 50 isolated leases; GitHub Actions remains one serial writer.
   const repoPath='/repos/'+owner+'/'+repo;
   const elasticResults=await elasticScheduler.drain({issues:providerIssues,root,
     globalLedger:ledgerItem.ledger,activeStates,now,technical:true,

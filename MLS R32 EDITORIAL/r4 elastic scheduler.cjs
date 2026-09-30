@@ -353,14 +353,13 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
      reason:'SAFE_GLOBAL_ACTIVE_BLOCK_CEILING',capacity:elastic.MAX_ACTIVE});
     busy.push(issue.number);continue;
    }
-   if(reservations.some(r=>r.elastic?.consolidatedSha&&!r.universal?.sync&&!r.universal?.lease)){
-    await finishRequest(api,issue,'CAPACITY_BUSY',{ok:true,assigned:false,retryable:true,reason:'PENDING_GATE_REPAIR_SEAL_SYNC_FIRST'});continue;
-   }
+   // Academic maintenance owns its reservation, not the entire production pool.
+   // universal.drain has already admitted its bounded repair share on this tick.
    let free=elastic.freeBlock(reservations,now);
    if(!free){
-    if(minted>=1){
+    if(minted>=elastic.MAX_NEW_RESERVATIONS_PER_TICK){
      await finishRequest(api,issue,'CAPACITY_BUSY',{ok:true,assigned:false,retryable:true,
-      reason:'ONE_NEW_RESERVATION_PER_SCHEDULER_TICK'});
+      reason:'RESERVATION_BOOTSTRAP_PACED',maxNewReservationsPerTick:elastic.MAX_NEW_RESERVATIONS_PER_TICK});
      busy.push(issue.number);continue;
     }
     const fresh=await createReservation(api,root,issues,globalLedger,activeStates,now);
