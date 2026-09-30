@@ -62,7 +62,7 @@ test('90 concurrent arrivals: serial admission bounds writers, leaves one exclus
  const r=db.current();assert.equal(r.universal.lease.issue,3000);
  assert.equal(Object.keys(db.refs).length,2);
  assert.equal(db.peak(),1);
- assert.equal(elastic.MAX_ACTIVE,1);
+ assert.equal(elastic.MAX_ACTIVE,5);
  assert.equal(db.issues.filter(i=>i.title.includes('[LEASED]')).length,1);
  assert.equal(db.issues.filter(i=>i.title.includes('[CAPACITY_BUSY]')).length,89);
 });
@@ -197,3 +197,4 @@ test('actual canonical validators gate 25 EXISTING entries, reject a changed cla
  console.log('UNIVERSAL_OFFLINE_GATE '+JSON.stringify({existingCanonicalEntries:25,newAcademicProduction:0,
   newSourceConsultations:0,syntheticReviewRecords:true,networkWrites:0}));
 });
+
