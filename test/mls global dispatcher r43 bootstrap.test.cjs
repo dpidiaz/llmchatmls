@@ -75,7 +75,8 @@ test('bootstrap write budget makes the Route B cost explicit and keeps lease cha
  assert.deepEqual(p.writeBudget,{
   bootstrapReservationCreates:4,
   bootstrapReservationPatches:4,
-  waveControlCreates:1,
+  waveControlInitialCreates:1,
+  waveControlFinalizePatches:1,
   workerAdmissionCreates:20,
   workerResultPatches:20,
   waveTransitionPatches:2,
