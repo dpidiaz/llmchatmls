@@ -26,8 +26,10 @@ El chat abre un Issue OWNER/MEMBER/COLLABORATOR con título
 Conservar el mismo requestId al recuperar un envío incierto. No crear varias
 solicitudes para el mismo intento. La respuesta será un claim, su recibo anterior,
 una tarea técnica automática pendiente, STALE o CAPACITY_BUSY. Las solicitudes
-sin atender durante dos minutos no reciben trabajo a escondidas. Un chat termina
-si no recibió lease; el siguiente chat vuelve a usar el mismo comando universal.
+sin atender durante dos minutos no reciben trabajo a escondidas. Un chat detiene
+el bucle si no recibió lease. Cuando un trabajo termina correctamente y este mismo
+chat todavía puede trabajar, aplica la continuación intrachat descrita abajo,
+sin esperar otro mensaje del usuario.
 
 Prioridad: reconciliar completions/heartbeats; preservar y recuperar leases
 vencidos; Gate de reservas consolidadas; corrección/revisión selectiva; sellado y
@@ -35,6 +37,35 @@ sync; recuperar bloques de producción; bloques nuevos; reserva nueva de 25.
 Se ejecuta como máximo un Gate y se inspeccionan hasta **50 solicitudes NEXT por tick**. Una ráfaga lógica apunta a **50 trabajadores**, atendidos mediante microciclos serializados: como máximo **15 leases nuevos por ejecución física** (incluidas hasta dos reparaciones), con un máximo de tres reservas nuevas de 25 entradas. No se fuerzan 50 escrituras GitHub simultáneas. Los tickets sobrantes permanecen REQUEST, en orden FIFO y sujetos al límite vigente de dos minutos: no se convierten silenciosamente en leases sin un chat vivo. Tras un ciclo que adjudicó leases y dejó cola, el Scheduler solicita otra ejecución serializada mediante workflow_dispatch. La reparación de una reserva no bloquea globalmente a las demás. Las
 recuperaciones R4 anteriores conservan sus locks y su propio proveedor; no se
 convierten ni se certifican como BCR por inferencia.
+
+## Continuación automática en el mismo chat (multi-pull)
+
+`MLS BCR siguiente` inicia un **bucle de producción dentro de la misma ejecución
+del chat**, no únicamente un bloque. Tras recibir un `LEASED` válido:
+
+1. Procesar únicamente el claim vigente; hacer checkpoints reales, comprobar el
+   HEAD remoto, renovar antes de que expire y enviar el `COMPLETE` correspondiente.
+2. Esperar y leer el Issue `COMPLETE` hasta recibir `COMPLETED` confirmado por
+   el Dispatcher; también vale la repetición inequívoca de un `DONE` ya confirmado.
+   No interpretar un Issue `COMPLETE` abierto ni un commit local como éxito.
+3. **Si el mismo chat continúa activo y puede razonablemente completar otro
+   bloque**, crear por sí mismo un NUEVO Issue autorizado
+   `[MLS Dispatcher][BCR][REQUEST] <nonce-nuevo>` con un
+   `requestId` diferente y `action:"next"`; esperar su lease y repetir el ciclo.
+   No pedir `MLS BCR siguiente` nuevamente al usuario en ese mismo turno.
+4. Continuar hasta que el chat esté próximo a sus límites, no haya trabajo
+   adjudicable, la solicitud caduque, se alcance `CAPACITY_BUSY`, el cooldown
+   403/429 esté activo o exista un resultado técnico que impida continuar.
+   Ante incertidumbre sobre `COMPLETE`, reconciliar el recibo original usando
+   su mismo identificador; **nunca** pedir otro claim antes de confirmar DONE.
+
+**Una sesión posee como máximo un lease activo.** No anticipar NEXT, no crear
+solicitudes masivas por adelantado, no adjudicar al bot en nombre de un chat que
+ya terminó y no arrancar otra conversación automáticamente. Este bucle solamente
+opera mientras ChatGPT siga ejecutando el turno presente; si termina por sus
+propios límites, los checkpoints y reservas guardados permanecen en GitHub y
+la recuperación es responsabilidad del Dispatcher. No existe trabajo en segundo
+plano ni continuación garantizada después de cerrar la respuesta.
 
 ## Dos clases de claim; mismo comando
 

@@ -49,6 +49,18 @@ function command(issue){
  return x;
 }
 function renderCommand(command){return dispatcherCore.renderMarked(REQUEST_MARKER,command);}
+// Receipt is only advisory to the SAME still-active chat. The dispatcher must
+// never mint an unattended NEXT or a second lease on behalf of a former worker.
+function completionResponse(status,response){
+ if(status!=='COMPLETED')return response;
+ return {...response,continuation:{
+  kind:'mls_bcr_same_chat_continuation',version:1,action:'next',
+  onlyIfChatStillActive:true,requiresPreviousDone:true,requiresFreshRequestId:true,
+  oneActiveLeasePerChat:true,dispatcherCreatesNextRequest:false,
+  backgroundExecution:false,
+  guide:'docs/MLS Global Dispatcher/19 Comando universal BCR.md'
+ }};
+}
 function settlementIssue(issue){
  return issue?.state!=='closed'&&buffered.requestAuthorized(issue)&&
   /^\[MLS Dispatcher\]\[BCR\]\[(COMPLETE|RENEW)\]/.test(String(issue.title||''));
@@ -229,6 +241,6 @@ module.exports={VERSION,BLOCK_SIZE,BLOCKS,MAX_ACTIVE,MAX_REQUESTS_PER_TICK,
  MAX_LEASE_ADMISSIONS_PER_TICK,MAX_LEASE_ADMISSIONS_PER_BURST,MAX_SETTLEMENTS_PER_TICK,
  MAX_SETTLEMENT_QUEUE_DELAY_MS,MAX_NEW_RESERVATIONS_PER_TICK,MAX_MAINTENANCE_PER_TICK,TTL_MS,
  pendingForLease,settlementIssue,shouldRequeue,
- REQUEST_MARKER,STATUS_MARKER,command,renderCommand,preblock,blocks,withBlocks,
+ REQUEST_MARKER,STATUS_MARKER,command,renderCommand,completionResponse,preblock,blocks,withBlocks,
  activeCount,freeBlock,lease,markDone,gitBlobJson,validateChunkSubmission};
 

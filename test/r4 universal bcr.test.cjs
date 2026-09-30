@@ -55,6 +55,17 @@ async function tick(db,now=NOW){
  const reservations=[db.current()];
  return universal.drain({api:db.api,io:engine,root:process.cwd(),reservations,issues:db.issues,now,technical:false});
 }
+test('repair lease instructs continued SAME-CHAT multi-pull only after confirmed completion',()=>{
+ const f=fixture(),l={issue:3000,branch:'r42/repair/1881/3000',
+  baseSha:SHA,expiresAt:new Date(NOW+elastic.TTL_MS).toISOString(),
+  codes:f.universal.gate.failedCodes.slice(0,5),path:'r42-repair/1881/3000/',
+  workerLogin:'owner'};
+ const body=universal.claimBody(f,l);
+ assert.match(body,/MULTI-PULL EN ESTE MISMO CHAT/);
+ assert.match(body,/claim=DONE/);
+ assert.match(body,/requestId NUEVO/);
+ assert.match(body,/El Dispatcher no crea chats ni leases desatendidos/);
+});
 test('90 concurrent arrivals: one exclusive repair does not consume 89 production candidates',async()=>{
  const db=backend(fixture(),Array.from({length:90},(_,i)=>request(3000+i)));
  // GitHub's workflow mutex drains simultaneous arrival inventory serially.

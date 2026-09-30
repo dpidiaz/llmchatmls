@@ -31,7 +31,8 @@ function claimBody(res,lease){
   'Persistir solo entries/<code>.json + checkpoints/<code>.json + reviews/<code>.json dentro de outputPrefix.',
   'Conservar entradas ya correctas. No inventar verificación: el informe contiene errores reales de R33.',
   'Renovar antes de 5 minutos con RENEW, task:"repair", block:0; completar con COMPLETE y headSha confirmado.',
-  'FREE ONLY. La automatización posterior ejecuta Gate, sellado y sync; no integra main ni despliega.',
+  'MULTI-PULL EN ESTE MISMO CHAT: tras comprobar COMPLETE=COMPLETED y claim=DONE, si sigue activa la misma ejecución y tenés margen para otro bloque, creá vos mismo un NUEVO Issue [MLS Dispatcher][BCR][REQUEST] con action next y requestId NUEVO, esperá LEASED y repetí. Nunca anticipar NEXT ni mantener dos leases. Ante falta de margen, busy, stale o cooldown, no crees NEXT.',
+  'El Dispatcher no crea chats ni leases desatendidos. FREE ONLY. Gate y sync automáticos; no integra main ni despliega.',
   dispatcher.renderMarked(elastic.STATUS_MARKER,record)].join('\n\n');
 }
 async function reply(api,res,lease){
@@ -40,7 +41,7 @@ async function reply(api,res,lease){
 }
 async function finish(api,issue,status,data){
  await api.patch('/issues/'+issue.number,{title:'[MLS Dispatcher][BCR]['+status+'] '+issue.number,
-  body:JSON.stringify(data,null,2),state:'closed',state_reason:status==='REJECTED'?'not_planned':'completed'});
+  body:JSON.stringify(elastic.completionResponse(status,data),null,2),state:'closed',state_reason:status==='REJECTED'?'not_planned':'completed'});
 }
 function checkScope(files,lease){
  const allowed=new Set(lease.codes.flatMap(c=>['entries','checkpoints','reviews'].map(d=>lease.path+d+'/'+c+'.json')));
