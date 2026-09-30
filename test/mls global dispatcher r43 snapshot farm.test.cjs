@@ -780,7 +780,8 @@ test('pilot scheduler workflow is serialized, issue-scoped and minimally permiss
  assert.match(source,/issues:\s*\n\s*types: \[opened, edited\]/);
  assert.match(source,/contents: read/);
  assert.match(source,/issues: write/);
- assert.match(source,/group: mls-global-dispatcher/);
+ assert.match(source,/mls-global-dispatcher/);
+ assert.match(source,/mls-global-dispatcher-skip-\{0\}/);
  assert.match(source,/MLS_GITHUB_COOLDOWN_FILE/);
  assert.match(source,/actions\/cache\/restore@v4/);
  assert.match(source,/actions\/cache\/save@v4/);
@@ -843,7 +844,8 @@ test('canonical pilot bootstrap workflow supports plan\/apply and shares the dis
  assert.match(source,/APPLY_R43_PILOT_20X5/);
  assert.match(source,/contents: read/);
  assert.match(source,/issues: write/);
- assert.match(source,/group: mls-global-dispatcher/);
+ assert.match(source,/mls-global-dispatcher/);
+ assert.match(source,/mls-global-dispatcher-skip-\{0\}/);
  assert.match(source,/cancel-in-progress: false/);
  assert.match(source,/ref: main/);
  assert.match(source,/MLS_R43_BOOTSTRAP_MODE/);
