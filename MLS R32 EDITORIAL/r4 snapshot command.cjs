@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * MLS BCR R4.3 universal-command router.
+ * MLS R4.3 dedicated-command router.
  *
- * Pure decision layer for the user-visible command "MLS BCR siguiente".
+ * Pure decision layer for the user-visible command "MLS R43 siguiente".
  * It never writes to GitHub. The chat performs the returned action.
  */
 const farm=require('./r4 snapshot farm.cjs');
@@ -65,9 +65,9 @@ function resultRow(issues,wave,admission,requestIssueNumber){
 function route(issues,{requestId=null,requestIssueNumber=null}={}){
  const live=activeWave(issues);
  if(!live)return {
-  backend:'r42',
-  action:'use_r42',
-  guide:'docs/MLS Global Dispatcher/19 Comando universal BCR.md'
+  backend:'r43',
+  action:'no_active_r43_wave',
+  guide:'docs/MLS Global Dispatcher/22 R4.3 Worker Command.md'
  };
 
  assert(live.record.route==='remote','R43_COMMAND_ROUTE_NOT_LIVE',
