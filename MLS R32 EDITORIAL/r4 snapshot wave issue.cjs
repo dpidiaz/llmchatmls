@@ -37,6 +37,7 @@ function create({waveIssueNumber,reservationIssueNumbers,snapshot,wave,createdAt
   waveIssueNumber,waveId:wave.waveId,waveHash:wave.waveHash,
   snapshotHash:snapshot.snapshotHash,baseCommit:snapshot.baseCommit,
   contentManifestBlobSha:snapshot.contentManifestBlobSha,
+  snapshotCreatedAt:snapshot.createdAt,waveCreatedAt:wave.createdAt,
   workerCount:wave.workerCount,shardSize:wave.shardSize,totalUnits:wave.totalUnits,
   reservationIssueNumbers:[...reservationIssueNumbers],
   route,createdAt,admission:null,reconciliation:null
@@ -51,6 +52,7 @@ function validate(record,snapshot,wave){
  assert(record.waveId===wave.waveId&&record.waveHash===wave.waveHash,'R43_WAVE_IDENTITY');
  assert(record.snapshotHash===snapshot.snapshotHash,'R43_WAVE_SNAPSHOT');
  assert(record.baseCommit===snapshot.baseCommit,'R43_WAVE_BASE');
+ assert(record.snapshotCreatedAt===snapshot.createdAt&&record.waveCreatedAt===wave.createdAt,'R43_WAVE_TIMES');
  assert(record.workerCount===wave.workerCount&&record.totalUnits===wave.totalUnits,'R43_WAVE_COUNTS');
  assert(['collecting','sealed','reconciled','blocked'].includes(record.status),'R43_WAVE_STATUS');
  if(record.status==='sealed'||record.status==='reconciled'){
