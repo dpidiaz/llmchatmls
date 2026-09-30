@@ -115,9 +115,32 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
   const recoveryCodes=Object.values(globalLedger?.recoveries||{})
     .filter(r=>r?.workItem?.provider==='r33-farm')
     .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
+  const handoffReservations=(snapshot.bufferedReservations||[]).filter(r=>
+    r?.snapshotFarm?.ownershipOnly===true&&
+    r?.snapshotFarm?.r33Handoff?.status==='active');
+  const handoffKeys=[...new Set(handoffReservations.map(r=>{
+    const h=r.snapshotFarm.r33Handoff;
+    return [h.waveIssueNumber,h.waveId,h.waveHash,h.reconciliationHash].join(':');
+  }))];
+  if(handoffKeys.length>1)throw integrationError('R43_R33_HANDOFF_CARDINALITY',
+    'Más de una identidad R4.3→R33 activa en reservas buffered.',503);
+  const handoffCodes=[...new Set(handoffReservations
+    .flatMap(r=>r.allocation.units.map(u=>u.code))
+    .filter(code=>poolCodes.has(code)&&!terminal.has(code)))];
+  const handoffSet=new Set(handoffCodes);
   const reservedCodes=[...new Set([...(snapshot.bufferedReservations||[])
-    .flatMap(r=>r.allocation.units.map(u=>u.code)),...recoveryCodes].filter(code=>poolCodes.has(code)))];
-  return {...snapshot,ledger,batches,reservedCodes};
+    .filter(r=>!r?.snapshotFarm?.r33Handoff||r.snapshotFarm.r33Handoff.status!=='active')
+    .flatMap(r=>r.allocation.units.map(u=>u.code)),...recoveryCodes]
+    .filter(code=>poolCodes.has(code)&&!handoffSet.has(code)))];
+  const r43Handoff=handoffKeys.length?{
+    key:handoffKeys[0],
+    waveIssueNumber:Number(handoffReservations[0].snapshotFarm.r33Handoff.waveIssueNumber),
+    waveId:String(handoffReservations[0].snapshotFarm.r33Handoff.waveId),
+    waveHash:String(handoffReservations[0].snapshotFarm.r33Handoff.waveHash),
+    reconciliationHash:String(handoffReservations[0].snapshotFarm.r33Handoff.reconciliationHash),
+    pendingCodes:[...handoffCodes]
+  }:null;
+  return {...snapshot,ledger,batches,reservedCodes,handoffCodes,r43Handoff};
 }
 function r33CandidateToWork(candidate,now=Date.now()){
   if(!candidate?.eligible)return null;
