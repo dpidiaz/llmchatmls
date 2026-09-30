@@ -436,6 +436,14 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
 async function main(){
   const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
   if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length||result.bufferedCleanup.length||Object.values(result.elastic||{}).some(v=>Array.isArray(v)&&v.length))console.log(JSON.stringify({ok:true,...result}));
+  // GitHub concurrency retains one pending workflow at most. An explicit NEXT
+  // dispatch after a productive partial drain prevents a large burst from
+  // depending on dozens of coalesced Issue-opened workflow events or cron.
+  // Never spin if no lease was actually admitted or if GitHub cooldown blocks.
+  if(result.elastic?.pending>0&&result.elastic?.leased?.length>0){
+    await gh('POST','/repos/'+owner+'/'+repo+'/actions/workflows/MLS%20Global%20Dispatcher%20Scheduler.yml/dispatches',{ref:'main'});
+    console.log('MLS_BCR_BACKLOG_REQUEUED '+JSON.stringify({pending:result.elastic.pending,leased:result.elastic.leased.length}));
+  }
   return result;
 }
 main().catch(error=>{console.error(error);process.exitCode=1});

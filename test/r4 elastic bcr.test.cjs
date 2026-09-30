@@ -104,11 +104,64 @@ test('90 incoming chats are bounded by active capacity rather than 90 simultaneo
  assert.equal(observed.length,elastic.MAX_ACTIVE);
  assert.equal(busy,90-elastic.MAX_ACTIVE);
  assert.equal(activePeak,elastic.MAX_ACTIVE);
- assert.equal(elastic.MAX_REQUESTS_PER_TICK,10);
- assert.equal(elastic.MAX_NEW_RESERVATIONS_PER_TICK,2);
+ assert.equal(elastic.MAX_REQUESTS_PER_TICK,50);
+ assert.equal(elastic.MAX_LEASE_ADMISSIONS_PER_TICK,15);
+ assert.equal(elastic.MAX_SETTLEMENTS_PER_TICK,10);
+ assert.equal(elastic.MAX_NEW_RESERVATIONS_PER_TICK,3);
  assert.equal(elastic.MAX_MAINTENANCE_PER_TICK,2);
  assert.equal(new Set(observed.map(w=>w.reservationIssueNumber)).size,10);
  assert.equal(new Set(observed.map(w=>w.branch)).size,observed.length);
+});
+test('burst of 50 NEXT requests leases 15 per tick in FIFO order without discarding overflow',async()=>{
+ const now=Date.now(),reservations=Array.from({length:10},(_,i)=>{
+  const r=fixture(1881+i,4400+25*i);
+  return elastic.withBlocks(r,elastic.blocks(r));
+ });
+ const requests=Array.from({length:50},(_,i)=>request(5000+i,'burst-'+(5000+i),'next',{},now));
+ const rows=[...reservations.map(issue),...requests];
+ const refs=Object.fromEntries(reservations.map(r=>['r41/buffer/'+r.issueNumber,PIN]));
+ const api={
+  async get(route){
+   if(route.startsWith('/issues/')){
+    const target=rows.find(x=>x.number===Number(route.split('/')[2]));
+    assert.ok(target);return structuredClone(target);
+   }
+   if(route.startsWith('/git/ref/heads/')){
+    const head=refs[route.slice('/git/ref/heads/'.length)];
+    if(!head){const e=Error('missing');e.status=404;throw e;}
+    return {object:{sha:head}};
+   }
+   throw Error('Unexpected GET '+route);
+  },
+  async post(route,body){
+   assert.equal(route,'/git/refs');
+   const name=body.ref.slice('refs/heads/'.length);
+   assert.equal(refs[name],undefined);refs[name]=body.sha;
+   return {ref:body.ref};
+  },
+  async patch(route,body){
+   assert.ok(route.startsWith('/issues/'));
+   const target=rows.find(x=>x.number===Number(route.split('/')[2]));
+   assert.ok(target);Object.assign(target,body);return structuredClone(target);
+  }
+ };
+ const expected=[15,15,15,5],remaining=[35,20,5,0],all=[];
+ for(let cycle=0;cycle<4;cycle++){
+  const out=await engine.drain({api,root:'.',issues:rows,globalLedger:{},activeStates:[],
+   now:now+cycle*1000,technical:false});
+  assert.equal(out.leased.length,expected[cycle]);
+  assert.equal(out.pending,remaining[cycle]);
+  assert.equal(out.busy.length,0);
+  assert.equal(out.maxRequestsPerTick,50);
+  assert.equal(out.maxLeaseAdmissionsPerTick,15);
+  all.push(...out.leased);
+  assert.deepEqual(all.map(x=>x.issue),Array.from({length:all.length},(_,i)=>5000+i));
+ }
+ assert.equal(all.length,50);
+ assert.equal(new Set(all.map(x=>x.branch)).size,50);
+ assert.equal(new Set(all.flatMap(x=>x.codes)).size,250);
+ assert.equal(rows.filter(x=>x.title.includes('[STALE]')||x.title.includes('[CAPACITY_BUSY]')).length,0);
+ assert.equal(rows.filter(x=>x.title.startsWith('[MLS Dispatcher][BCR][LEASED]')).length,50);
 });
 test('lease has a five-minute epoch; stale worker cannot finalize somebody else’s block',()=>{
  const f=fixture(1881),i=request(2002);

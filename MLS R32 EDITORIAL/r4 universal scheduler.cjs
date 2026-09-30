@@ -137,7 +137,7 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
  const consumed=new Set(),events=[];
  const save=async(index,next)=>{const saved=await io.saveReservation(api,next,reservations[index].recordHash);reservations[index]=saved;return saved;};
  // Completion and heartbeat before reaping. All are fenced by reservation epoch.
- for(const issue of issues.filter(x=>x.state!=='closed'&&alloc.requestAuthorized(x)&&/\[BCR\]\[(COMPLETE|RENEW)\]/.test(x.title||'')).slice(0,elastic.MAX_REQUESTS_PER_TICK)){
+ for(const issue of issues.filter(x=>x.state!=='closed'&&alloc.requestAuthorized(x)&&/\[BCR\]\[(COMPLETE|RENEW)\]/.test(x.title||'')).slice(0,elastic.MAX_SETTLEMENTS_PER_TICK)){
   let command;try{command=elastic.command(issue);}catch{continue;}
   if(command.task!=='repair')continue;consumed.add(issue.number);
   const index=reservations.findIndex(r=>r.issueNumber===command.reservationIssueNumber);
