@@ -152,7 +152,7 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
   const activeHandoffCodes=new Set(seenHandoffCodes.keys());
   const reservedCodes=[...new Set([...(snapshot.bufferedReservations||[])
     .flatMap(r=>r.allocation.units.map(u=>u.code)),...recoveryCodes]
-    .filter(code=>poolCodes.has(code)&&!activeHandoffCodes.has(code)))];
+    .filter(code=>poolCodes.has(code)&&!terminal.has(code)&&!activeHandoffCodes.has(code)))];
 
   // Backward-compatible singular fields remain populated only when exactly one
   // active handoff exists. Multi-wave scheduling uses r43Handoffs explicitly.
