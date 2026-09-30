@@ -18,7 +18,7 @@ permissions:
 # Exactly the SAME critical section as the Global Dispatcher scheduler.
 # Never overlap allocation and publication reconciliation.
 concurrency:
-  group: mls-global-dispatcher
+  group: ${{ (github.event_name == 'workflow_dispatch' || (startsWith(github.event.issue.title, '[MLS Buffered][SYNC]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association))) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
   cancel-in-progress: false
 
 jobs:
