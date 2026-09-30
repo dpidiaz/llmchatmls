@@ -9,7 +9,7 @@ const doc=path.join(process.cwd(),'docs','MLS Global Dispatcher','19 Comando uni
 test('universal BCR documentation preserves R4.3-first routing with R4.2 fallback',()=>{
  const text=fs.readFileSync(doc,'utf8');
  assert.match(text,/contrato universal R4\.3 \/ R4\.2/);
- assert.match(text,/r4 snapshot command\\.cjs/);
+ assert.match(text,/r4 snapshot command\.cjs/);
  assert.match(text,/estado `collecting`/);
  assert.match(text,/Wave está `sealed`/);
  assert.match(text,/responder `pilot_capacity_full`/);
