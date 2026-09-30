@@ -143,8 +143,10 @@ function materializeCandidate(snapshot,options={}){
     resourceLocks:units.flatMap(unit=>['entry:'+unit.code,'path:'+unit.evidenceArtifactPath]),
     allowedPaths:units.map(unit=>unit.evidenceArtifactPath),
     checkpointSizeMax:CHECKPOINT_SIZE_MAX,
-    ownership:{mode:'global-single-owner',nestedLease:false,reservationCreated:false,
-      r43Handoff:handoffActive?structuredClone(input.r43Handoff):null},
+    ownership:handoffActive
+      ?{mode:'global-single-owner',nestedLease:false,reservationCreated:false,
+        r43Handoff:structuredClone(input.r43Handoff)}
+      :{mode:'global-single-owner',nestedLease:false,reservationCreated:false},
     snapshot:{terminal:terminal.size,protected:protectedState.codes.size,pending:Math.max(0,remaining),
       activeBatchIds:protectedState.batchIds.slice().sort(),r43HandoffPending:handoffActive?remaining:null},
     gate500Authorized:Boolean(pool.gate500Authorized),
