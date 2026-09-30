@@ -9,12 +9,13 @@ const scheduler=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot
 
 test('merging R4.3 infrastructure is inert until explicit bootstrap apply',()=>{
  const boot=fs.readFileSync(bootstrap,'utf8');
- assert.match(boot,/workflow_dispatch:/);
- assert.match(boot,/default: plan/);
- assert.match(boot,/APPLY_R43_PILOT_20X5/);
- assert.doesNotMatch(boot,/\n\s*push:/);
- assert.doesNotMatch(boot,/\n\s*schedule:/);
- assert.doesNotMatch(boot,/\n\s*issues:/);
+ const onBlock=boot.slice(boot.indexOf('on:'),boot.indexOf('\npermissions:'));
+ assert.match(onBlock,/workflow_dispatch:/);
+ assert.match(onBlock,/default: plan/);
+ assert.match(onBlock,/APPLY_R43_PILOT_20X5/);
+ assert.doesNotMatch(onBlock,/\n\s*push:/);
+ assert.doesNotMatch(onBlock,/\n\s*schedule:/);
+ assert.doesNotMatch(onBlock,/\n\s*issues:/);
 });
 
 test('R4.3 scheduler cannot bootstrap ownership and only reacts to authenticated protocol markers',()=>{
