@@ -421,6 +421,25 @@ test('pilot 20x5 composes four existing 25-entry durable reservations with no ov
  assert.deepEqual(out.reservations.map(x=>x.issueNumber),issueNumbers);
 });
 
+test('50-worker remote wave composes ten 25-entry durable reservations for 250 entries',()=>{
+ const source=r33Snapshot(300);
+ const issueNumbers=Array.from({length:10},(_,i)=>3501+i);
+ const out=reservations.compose(source,{
+  reservationIssueNumbers:issueNumbers,
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T02:39:00.000Z'),
+  waveId:'BCR-R43-WAVE-50X5',
+  workerCount:50,shardSize:5,
+  createdAt:'2026-09-30T02:39:00.000Z'
+ });
+ assert.equal(out.sizes.length,10);
+ assert.ok(out.sizes.every(x=>x===25));
+ assert.equal(out.protectedCodes.length,250);
+ assert.equal(new Set(out.protectedCodes).size,250);
+ assert.equal(out.wave.shards.length,50);
+ assert.equal(out.wave.totalUnits,250);
+});
+
 test('100-worker wave composes twenty 25-entry durable reservations and preserves uniqueness',()=>{
  const source=r33Snapshot(550);
  const issueNumbers=Array.from({length:20},(_,i)=>4001+i);
@@ -567,6 +586,23 @@ test('remote result cannot be submitted from another admitted worker issue',()=>
  assert.throws(()=>remoteResult.decodeResult({...issues[1],body},wave,admission),{
   code:'R43_REMOTE_RESULT_NOT_OWNER'
  });
+});
+
+test('remote fallback admits exactly 50 workers and rejects 51',()=>{
+ const accepted=farm.createWave(snapshot(250),{
+  waveId:'BCR-R43-REMOTE-50',workerCount:50,shardSize:5,
+  createdAt:'2026-09-30T03:10:00.000Z'
+ });
+ assert.doesNotThrow(()=>remoteAdmission.createRequest(accepted,{
+  waveIssueNumber:9000,requestId:'remote-max-50-0001',createdAt:'2026-09-30T03:10:30.000Z'
+ }));
+ const refused=farm.createWave(snapshot(255),{
+  waveId:'BCR-R43-REMOTE-51',workerCount:51,shardSize:5,
+  createdAt:'2026-09-30T03:10:31.000Z'
+ });
+ assert.throws(()=>remoteAdmission.createRequest(refused,{
+  waveIssueNumber:9000,requestId:'remote-over-51-0001',createdAt:'2026-09-30T03:10:32.000Z'
+ }),{code:'R43_REMOTE_WORKER_CAP'});
 });
 
 test('remote fallback deliberately refuses a 100-worker wave to protect GitHub secondary limits',()=>{
@@ -818,30 +854,44 @@ test('R4.2 cannot lease or synthesize blocks from R4.3 ownership-only reservatio
 });
 
 
-test('canonical pilot bootstrap is syntactically valid, bounded and crash-resumable',()=>{
+test('canonical wave bootstrap is syntactically valid, capped at 50x5 and crash-resumable',()=>{
  const script=path.join(process.cwd(),'scripts','MLS R4.3 Snapshot Pilot Bootstrap.cjs');
  cp.execFileSync(process.execPath,['--check',script],{stdio:'pipe'});
  const source=fs.readFileSync(script,'utf8');
- assert.match(source,/for\(let slot=1;slot<=4;slot\+\+\)/);
+ const module=require('../scripts/MLS R4.3 Snapshot Pilot Bootstrap.cjs');
+ assert.equal(module.MAX_WORKERS,50);
+ assert.equal(module.SHARD_SIZE,5);
+ assert.equal(module.normalizeWorkerCount(50),50);
+ assert.throws(()=>module.normalizeWorkerCount(51),{code:'R43_BOOT_WORKER_COUNT'});
+ assert.equal(module.confirmToken(50),'APPLY_R43_WAVE_50X5');
+ assert.match(source,/reservationCount=sizes\.length/);
+ assert.match(source,/for\(let slot=1;slot<=reservationCount;slot\+\+\)/);
+ assert.match(source,/size:sizes\[slot-1\]/);
+ assert.match(source,/writeBudget=reservationCount\*2\+2/);
  assert.match(source,/snapshotReservations\.markSnapshotReservation/);
  assert.match(source,/integration\.collectR33Snapshot/);
  assert.match(source,/integration\.projectR33Snapshot/);
- assert.match(source,/writeCount<=10/);
+ assert.match(source,/R43_BOOT_PREVIOUS_HANDOFF_ACTIVE/);
  assert.match(source,/createOrReusePlaceholder/);
  assert.match(source,/R43_BOOT_RESERVATION_BASE_DRIFT/);
  assert.match(source,/R43_BOOT_CHECKOUT_STALE/);
  assert.match(source,/idempotent:true/);
  assert.match(source,/backoff\.check/);
+ assert.doesNotMatch(source,/for\(let slot=1;slot<=4|writeCount<=10|APPLY_R43_PILOT_20X5/);
  assert.doesNotMatch(source,/\/git\/refs|\/git\/trees|\/git\/commits/);
  assert.doesNotMatch(source,/Cloudflare|D1|OPENAI|api\.openai/i);
 });
 
-test('canonical pilot bootstrap workflow supports plan\/apply and shares the dispatcher mutex',()=>{
+test('canonical wave bootstrap workflow defaults to 50x5 and shares the dispatcher mutex',()=>{
  const file=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot Pilot Bootstrap.yml');
  const source=fs.readFileSync(file,'utf8');
  assert.match(source,/workflow_dispatch:/);
  assert.match(source,/options:\s*\n\s*- plan\s*\n\s*- apply/);
- assert.match(source,/APPLY_R43_PILOT_20X5/);
+ assert.match(source,/worker_count:/);
+ assert.match(source,/default: '50'/);
+ assert.match(source,/APPLY_R43_WAVE_50X5/);
+ assert.match(source,/\[MLS R4\.3\]\[BOOTSTRAP\]\[APPLY\] 50X5/);
+ assert.match(source,/BCR-R43-WAVE-50X5-\{0\}/);
  assert.match(source,/contents: read/);
  assert.match(source,/issues: write/);
  assert.match(source,/mls-global-dispatcher/);
@@ -850,8 +900,9 @@ test('canonical pilot bootstrap workflow supports plan\/apply and shares the dis
  assert.match(source,/ref: main/);
  assert.match(source,/MLS_R43_BOOTSTRAP_MODE/);
  assert.match(source,/MLS_R43_WAVE_ID/);
+ assert.match(source,/MLS_R43_WORKER_COUNT/);
  assert.match(source,/MLS_GITHUB_COOLDOWN_FILE/);
  assert.doesNotMatch(source,/contents: write|actions: write|pull-requests: write/);
  assert.match(source,/issues:\s*\n\s*types: \[opened\]/);
- assert.doesNotMatch(source,/schedule:/);
+ assert.doesNotMatch(source,/schedule:|APPLY_R43_PILOT_20X5/);
 });
