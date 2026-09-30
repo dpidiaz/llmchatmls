@@ -120,15 +120,22 @@ function materializeCandidate(snapshot,options={}){
     if(protectedState.codes.has(code))throw providerError('BUFFER_DOUBLE_OWNER','Buffered unit already leased: '+code);
     protectedState.codes.add(code);
   }
-  const units=pool.entries.filter(entry=>!terminal.has(entry.code)&&!protectedState.codes.has(entry.code)).slice(0,requested).map(entry=>({
+  const handoffActive=Boolean(input.r43Handoff);
+  const handoffCodes=handoffActive?(Array.isArray(input.handoffCodes)?input.handoffCodes.map(assertCode):[]):[];
+  const handoffSet=new Set(handoffCodes);
+  for(const code of handoffSet)if(!pool.entries.some(x=>x.code===code))
+    throw providerError('R43_R33_HANDOFF_CODE_NOT_IN_POOL','Código handoff fuera del pool: '+code);
+  const candidateEntries=handoffActive?pool.entries.filter(entry=>handoffSet.has(entry.code)):pool.entries;
+  const eligibleEntries=candidateEntries.filter(entry=>!terminal.has(entry.code)&&!protectedState.codes.has(entry.code));
+  const units=eligibleEntries.slice(0,requested).map(entry=>({
     code:entry.code,language:entry.language,contentPath:entry.contentPath,order:entry.order,evidenceArtifactPath:evidenceArtifactPath(entry)
   }));
-  const remaining=pool.entries.length-terminal.size-protectedState.codes.size;
+  const remaining=eligibleEntries.length;
   return {
     provider:PROVIDER_ID,
     providerVersion:PROVIDER_VERSION,
     eligible:units.length>0,
-    reason:units.length?'READY':'NO_WORK',
+    reason:units.length?(handoffActive?'R43_R33_HANDOFF_READY':'READY'):(handoffActive?'R43_R33_HANDOFF_WAITING_OR_COMPLETE':'NO_WORK'),
     poolId:pool.poolId,
     manifestVersion:pool.manifestVersion,
     requested,
@@ -136,8 +143,10 @@ function materializeCandidate(snapshot,options={}){
     resourceLocks:units.flatMap(unit=>['entry:'+unit.code,'path:'+unit.evidenceArtifactPath]),
     allowedPaths:units.map(unit=>unit.evidenceArtifactPath),
     checkpointSizeMax:CHECKPOINT_SIZE_MAX,
-    ownership:{mode:'global-single-owner',nestedLease:false,reservationCreated:false},
-    snapshot:{terminal:terminal.size,protected:protectedState.codes.size,pending:Math.max(0,remaining),activeBatchIds:protectedState.batchIds.slice().sort()},
+    ownership:{mode:'global-single-owner',nestedLease:false,reservationCreated:false,
+      r43Handoff:handoffActive?structuredClone(input.r43Handoff):null},
+    snapshot:{terminal:terminal.size,protected:protectedState.codes.size,pending:Math.max(0,remaining),
+      activeBatchIds:protectedState.batchIds.slice().sort(),r43HandoffPending:handoffActive?remaining:null},
     gate500Authorized:Boolean(pool.gate500Authorized),
     cloudflareEditorialInteractions:0,
     d1EditorialReads:0,
