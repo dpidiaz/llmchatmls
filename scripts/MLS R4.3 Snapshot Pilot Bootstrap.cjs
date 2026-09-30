@@ -21,6 +21,7 @@ const backoff=require('../MLS R32 EDITORIAL/r4 github backoff.cjs');
 
 const SHARD_SIZE=5;
 const MAX_WORKERS=remoteAdmission.MAX_REMOTE_WORKERS;
+const MAX_UNRECONCILED_WAVES=2;
 
 function fail(code,msg,status=409){const e=new Error(msg||code);e.code=code;e.status=status;throw e;}
 function assert(ok,code,msg){if(!ok)fail(code,msg);}
@@ -86,13 +87,10 @@ function projectedSnapshot(issues,now){
  const globalLedger=dispatcher.normalizeLedger(raw,registry);
  const states=issues.map(x=>dispatcher.parseAssignmentState(x.body||'')).filter(Boolean);
  const active=dispatcher.activeAssignments(states,now);
- const projected=integration.projectR33Snapshot(
+ return integration.projectR33Snapshot(
   integration.collectR33Snapshot(issues,root()),
   {globalLedger,globalAssignments:active}
  );
- assert(!projected.r43Handoff,'R43_BOOT_PREVIOUS_HANDOFF_ACTIVE',
-  'A prior R4.3→R33 handoff still has pending non-terminal codes.');
- return projected;
 }
 async function mainHead(){
  const ref=await api('GET','/git/ref/heads/main');
@@ -216,7 +214,8 @@ async function apply({waveId,workerCount,createdAt,confirm}){
   };
  }
  const otherLive=issues.filter(i=>/^\[MLS BCR R4\.3\]\[WAVE\]\[(COLLECTING|SEALED)\]/.test(String(i.title||'')));
- assert(otherLive.length===0,'R43_BOOT_OTHER_WAVE_LIVE');
+ assert(otherLive.length<MAX_UNRECONCILED_WAVES,'R43_BOOT_WAVE_PIPELINE_FULL',
+  'At most '+MAX_UNRECONCILED_WAVES+' unreconciled R4.3 waves may coexist.');
 
  const main=await mainHead();
  assert(localHead()===main,'R43_BOOT_CHECKOUT_STALE');
@@ -310,6 +309,6 @@ if(require.main===module){
   .catch(e=>{console.error(e.code||'R43_BOOT_FAILED',e.message);process.exitCode=2;});
 }
 module.exports={
- SHARD_SIZE,MAX_WORKERS,confirmToken,normalizeWorkerCount,
+ SHARD_SIZE,MAX_WORKERS,MAX_UNRECONCILED_WAVES,confirmToken,normalizeWorkerCount,
  planOnly,apply,run,reservationSlot,taggedReservation,liveWaveIssue
 };
