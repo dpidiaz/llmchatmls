@@ -55,16 +55,18 @@ async function tick(db,now=NOW){
  const reservations=[db.current()];
  return universal.drain({api:db.api,io:engine,root:process.cwd(),reservations,issues:db.issues,now,technical:false});
 }
-test('90 concurrent arrivals: serial admission bounds writers, leaves one exclusive repair claim and persists busy outcomes',async()=>{
+test('90 concurrent arrivals: one exclusive repair does not consume 89 production candidates',async()=>{
  const db=backend(fixture(),Array.from({length:90},(_,i)=>request(3000+i)));
  // GitHub's workflow mutex drains simultaneous arrival inventory serially.
  for(let i=0;i<18;i++)await tick(db);
  const r=db.current();assert.equal(r.universal.lease.issue,3000);
  assert.equal(Object.keys(db.refs).length,2);
  assert.equal(db.peak(),1);
- assert.equal(elastic.MAX_ACTIVE,5);
+ assert.equal(elastic.MAX_ACTIVE,50);
  assert.equal(db.issues.filter(i=>i.title.includes('[LEASED]')).length,1);
- assert.equal(db.issues.filter(i=>i.title.includes('[CAPACITY_BUSY]')).length,89);
+ // The other requests remain eligible for independent elastic production.
+ assert.equal(db.issues.filter(i=>i.title.includes('[REQUEST]')).length,89);
+ assert.equal(db.issues.filter(i=>i.title.includes('[CAPACITY_BUSY]')).length,0);
 });
 test('lost branch response replays same durable lease without a second branch or claim',async()=>{
  const db=backend(fixture(),[request(3000)]);db.failWhen(route=>route==='/git/refs');

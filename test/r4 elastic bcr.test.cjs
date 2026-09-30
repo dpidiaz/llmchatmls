@@ -104,7 +104,10 @@ test('90 incoming chats are bounded by active capacity rather than 90 simultaneo
  assert.equal(observed.length,elastic.MAX_ACTIVE);
  assert.equal(busy,90-elastic.MAX_ACTIVE);
  assert.equal(activePeak,elastic.MAX_ACTIVE);
- assert.equal(elastic.MAX_REQUESTS_PER_TICK,5);
+ assert.equal(elastic.MAX_REQUESTS_PER_TICK,10);
+ assert.equal(elastic.MAX_NEW_RESERVATIONS_PER_TICK,2);
+ assert.equal(elastic.MAX_MAINTENANCE_PER_TICK,2);
+ assert.equal(new Set(observed.map(w=>w.reservationIssueNumber)).size,10);
  assert.equal(new Set(observed.map(w=>w.branch)).size,observed.length);
 });
 test('lease has a five-minute epoch; stale worker cannot finalize somebody else’s block',()=>{

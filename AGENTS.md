@@ -8,8 +8,9 @@ recover the authoritative receipt and perform the assigned production or repair
 in the current disposable chat. Renew and complete internally using the documented
 envelopes. Never send the user back to the original conversation. Actions performs
 deterministic Gate, seal and sync; academic source-to-claim review requires an
-actual AI chat consultation, never an invented PASS. One active BCR chat writer
-plus the serialized Actions writer, five-minute fenced leases, durable checkpoints,
+actual AI chat consultation, never an invented PASS. Up to 50 exclusive
+BCR chat leases plus one serialized Actions dispatcher, five-minute fenced epochs,
+durable checkpoints,
 FREE ONLY, no Work handoff, no paid API and no Cloudflare deployment.
 Infrastructure changes are reviewed on a separate branch/PR; this command does
 not authorize merging infrastructure or deploying production.

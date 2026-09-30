@@ -173,8 +173,9 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
   res=await save(index,changed(res,{lease:null,recovery:{...lease,headSha:head}}));
   await finish(api,{number:lease.issue},'EXPIRED',{recoveryHead:head,checkpointsPreserved:true});
  }
- // At most one local gate/seal job per tick; no unbounded API burst for 90 chats.
+ // At most one local gate/seal job per tick; do not burst remote writes.
  const incoming=issues.filter(x=>x.state!=='closed'&&alloc.requestAuthorized(x)&&String(x.title).startsWith('[MLS Dispatcher][BCR][REQUEST]')).sort((a,b)=>a.number-b.number);
+ let maintenanceAdmitted=0;
  let analyzed=false;
  const canonicalSha=technical?gate.git(root,'rev-parse','HEAD'):null;
  for(let index=0;index<reservations.length;index++){
@@ -220,29 +221,30 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
    continue;
   }
   if(now-Date.parse(issue.created_at)>120000)continue;
-  const awaiting=reservations.findIndex(r=>r.universal?.sync);
-  if(awaiting>=0){
+  // Sync remains single-writer but no longer captures unrelated NEXT requests.
+  // A user-authored NEXT may re-arm one exhausted automatic sync budget.
+  const awaiting=reservations.findIndex(r=>r.universal?.sync&&
+   (r.universal.sync.attempts||0)>=3&&r.status!=='staged');
+  if(awaiting>=0&&maintenanceAdmitted<elastic.MAX_MAINTENANCE_PER_TICK){
    consumed.add(issue.number);let pending=reservations[awaiting];
-   if((pending.universal.sync.attempts||0)>=3&&pending.status!=='staged'){
-    pending=await save(awaiting,changed(pending,{sync:{...pending.universal.sync,attempts:0,nextAttemptAt:null}}));
-    if(technical)reservations[awaiting]=await dispatchSync({api,io,res:pending,issues,now});
-   }
+   pending=await save(awaiting,changed(pending,{sync:{...pending.universal.sync,attempts:0,nextAttemptAt:null}}));
+   if(technical)reservations[awaiting]=await dispatchSync({api,io,res:pending,issues,now});
+   maintenanceAdmitted++;
    await finish(api,issue,'TECHNICAL_PENDING',{reservation:pending.issueNumber,stage:pending.status,
     syncRequest:pending.universal.sync.issue,automatic:true});continue;
   }
+  // Reserve at most two admission slots for repair; other requests pass through
+  // to elastic production even when another reservation is gated or syncing.
+  if(maintenanceAdmitted>=elastic.MAX_MAINTENANCE_PER_TICK)continue;
   index=reservations.findIndex(r=>r.elastic?.consolidatedSha&&!r.universal?.sync&&!active(r,now)&&
    (r.universal?.bundle||r.universal?.gate?.failedCodes?.length));
-  if(index<0){
-   if(reservations.some(r=>r.elastic?.consolidatedSha&&!r.universal?.sync)){
-    consumed.add(issue.number);await finish(api,issue,'CAPACITY_BUSY',{reason:'PENDING_MAINTENANCE_FIRST',retryAfterSeconds:60});
-   }
-   continue;
-  }
+  if(index<0)continue;
   consumed.add(issue.number);let res=reservations[index];
   if(res.universal.bundle){
    res=await save(index,changed(res,{sync:{issue:issue.number,workerLogin:issue.user.login,attempts:0},
     requests:{...res.universal.requests,[command.requestId]:{issue:issue.number,status:'SYNC',reservation:res.issueNumber}}}));
    if(technical)reservations[index]=await dispatchSync({api,io,res,issues,now});
+   maintenanceAdmitted++;
    continue;
   }
   const live=elastic.activeCount(reservations,now)+reservations.filter(r=>active(r,now)).length+activeStates.length;
@@ -262,7 +264,8 @@ async function drain({api,io,root,reservations,issues,now,technical=true,activeS
   const existing=await io.refHead(api,lease.branch);
   if(!existing)await io.publishNewBranch(api,lease.branch,source);
   else assert(existing===source,'REPAIR_GENERATIONAL_BRANCH_CONFLICT');
-  await reply(api,res,lease);events.push({reservation:res.issueNumber,repair:codes,issue:issue.number});
+  await reply(api,res,lease);maintenanceAdmitted++;
+  events.push({reservation:res.issueNumber,repair:codes,issue:issue.number});
  }
  return {consumed,events};
 }

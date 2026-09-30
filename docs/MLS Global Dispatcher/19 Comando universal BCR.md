@@ -32,7 +32,7 @@ si no recibió lease; el siguiente chat vuelve a usar el mismo comando universal
 Prioridad: reconciliar completions/heartbeats; preservar y recuperar leases
 vencidos; Gate de reservas consolidadas; corrección/revisión selectiva; sellado y
 sync; recuperar bloques de producción; bloques nuevos; reserva nueva de 25.
-Se procesa como máximo un Gate y cinco solicitudes de admisión por tick. Las
+Se procesa como máximo un Gate y diez solicitudes NEXT por tick; hasta dos son para mantenimiento selectivo. Las demás pueden continuar como producción en otras reservas. La reparación de una reserva no bloquea globalmente a las demás. Las
 recuperaciones R4 anteriores conservan sus locks y su propio proveedor; no se
 convierten ni se certifican como BCR por inferencia.
 
@@ -133,8 +133,7 @@ Otro `MLS BCR siguiente` puede reabrir ese presupuesto después del backoff.
 
 ## Capacidad, coste y límites reales
 
-Hasta cinco chats BCR activos, uno por bloque exclusivo de una reserva, y un solo escritor de Actions serializado: como máximo seis escritores cooperantes. Las llamadas de escritura de Actions son secuenciales. Noventa
-chats son noventa solicitudes, no noventa leases. No se puede impedir que un
+**Techo propuesto R4.2-50:** hasta 50 leases BCR activos sobre al menos diez reservas independientes de 25 entradas (cinco bloques por reserva). En cada tick se admiten hasta diez NEXT y se crean como máximo dos reservas nuevas, con no más de dos solicitudes destinadas al mantenimiento. El escritor de GitHub Actions permanece serializado; los chats tienen ramas exclusivas. Esto no significa 50 escritores GitHub ilimitados ni garantiza 50 adjudicaciones instantáneas. Noventa chats son noventa solicitudes, no noventa leases. No se puede impedir que un
 colaborador con permisos GitHub escriba por fuera del protocolo; las validaciones
 rechazan contenido ajeno o ownership desplazado. Los leases heredados se conservan
 y cuentan para no admitir otro chat BCR mientras estén activos.
