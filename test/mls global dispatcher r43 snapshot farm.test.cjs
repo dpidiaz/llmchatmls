@@ -129,3 +129,37 @@ test('a delta cannot write outside its preassigned shard',()=>{
   shardId:'W0001',...data,completedAt:'2026-09-30T02:08:00.000Z'
  }),{code:'R43_DELTA_ENTRIES_SCOPE'});
 });
+
+test('worker context is self-contained and forbids GitHub hot-path writes',()=>{
+ const s=snapshot(20);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-WORKER',workerCount:4,shardSize:5,
+  createdAt:'2026-09-30T02:09:00.000Z'
+ });
+ const context=farm.createWorkerContext(s,wave,'W0003');
+ assert.equal(farm.validateWorkerContext(s,wave,context),true);
+ assert.deepEqual(context.codes,wave.shards[2].codes);
+ assert.equal(context.policy.githubHotPath,false);
+ assert.equal(context.policy.remoteWritesDuringProduction,false);
+ assert.equal(context.policy.r33Required,true);
+ assert.equal(context.policy.producedIsVerified,false);
+ const tampered=structuredClone(context);tampered.codes[0]='MLS-V10-9999';
+ assert.throws(()=>farm.validateWorkerContext(s,wave,tampered),{code:'R43_WORKER_HASH'});
+});
+
+test('sync conflict planner quarantines only paths changed since the frozen base',()=>{
+ const s=snapshot(10);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-SYNC',workerCount:2,shardSize:5,
+  createdAt:'2026-09-30T02:10:00.000Z'
+ });
+ const clean=farm.planSyncConflicts(wave,['README.md']);
+ assert.equal(clean.safe,true);assert.deepEqual(clean.collisions,[]);
+ const target=wave.shards[1].units[2];
+ const blocked=farm.planSyncConflicts(wave,[target.evidenceArtifactPath,'docs/other.md']);
+ assert.equal(blocked.safe,false);
+ assert.equal(blocked.collisions.length,1);
+ assert.equal(blocked.collisions[0].code,target.code);
+ assert.equal(blocked.collisions[0].shardId,'W0002');
+ assert.deepEqual(blocked.collisions[0].paths,[target.evidenceArtifactPath]);
+});
