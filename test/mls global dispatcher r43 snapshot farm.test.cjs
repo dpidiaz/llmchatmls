@@ -540,7 +540,7 @@ test('remote result compresses one 5-entry delta into one bounded issue body and
  const delta=farm.createDelta(wave,{
   shardId:'W0001',...p,completedAt:'2026-09-30T03:07:00.000Z'
  });
- const envelope=remoteResult.encodeDelta(wave,delta);
+ const envelope=remoteResult.encodeDelta(wave,delta,{waveIssueNumber:9000});
  const body=remoteResult.renderResultBody(envelope);
  assert.ok(Buffer.byteLength(body,'utf8')<=remoteResult.MAX_RESULT_BODY_BYTES);
  const resultIssue={...issue,body};
@@ -561,7 +561,7 @@ test('remote result cannot be submitted from another admitted worker issue',()=>
  const delta=farm.createDelta(wave,{
   shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T03:10:00.000Z'
  });
- const body=remoteResult.renderResultBody(remoteResult.encodeDelta(wave,delta));
+ const body=remoteResult.renderResultBody(remoteResult.encodeDelta(wave,delta,{waveIssueNumber:9000}));
  assert.throws(()=>remoteResult.decodeResult({...issues[1],body},wave,admission),{
   code:'R43_REMOTE_RESULT_NOT_OWNER'
  });
@@ -739,7 +739,7 @@ test('remote scheduler reconciles only after every admitted result is durably pr
    shardId:shard.shardId,...payload(composed.wave,shard.shardId),
    completedAt:new Date(Date.parse('2026-09-30T03:31:00.000Z')+i*1000).toISOString()
   });
-  return {...req,body:remoteResult.renderResultBody(remoteResult.encodeDelta(composed.wave,delta))};
+  return {...req,body:remoteResult.renderResultBody(remoteResult.encodeDelta(composed.wave,delta,{waveIssueNumber:10010}))};
  });
  const waiting=remoteScheduler.reconcileIfComplete({
   waveControlIssue:sealedControl,reservationIssues:composed.reservations.map(reservationIssue),
