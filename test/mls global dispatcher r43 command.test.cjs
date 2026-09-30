@@ -72,17 +72,19 @@ function payload(wave,shardId){
  return {entries,checkpoints,reviews};
 }
 
-test('universal command falls back to R4.2 when no authoritative R4.3 wave exists',()=>{
+test('MLS R43 siguiente never falls back to R4.2 when no authoritative wave exists',()=>{
  assert.deepEqual(command.route([]),{
-  backend:'r42',action:'use_r42',
-  guide:'docs/MLS Global Dispatcher/19 Comando universal BCR.md'
+  backend:'r43',action:'no_active_r43_wave',
+  guide:'docs/MLS Global Dispatcher/22 R4.3 Worker Command.md'
  });
 });
 
-test('user-authored spoof wave cannot hijack the universal command',()=>{
+test('user-authored spoof wave cannot hijack MLS R43 siguiente or force R4.2',()=>{
  const f=fixture();
  const spoof={...f.control,user:{login:'attacker'},author_association:'OWNER'};
- assert.equal(command.route([f.issues[0],spoof]).backend,'r42');
+ const state=command.route([f.issues[0],spoof]);
+ assert.equal(state.backend,'r43');
+ assert.equal(state.action,'no_active_r43_wave');
 });
 
 test('collecting wave routes same command to one R4.3 request and recovers it idempotently',()=>{
