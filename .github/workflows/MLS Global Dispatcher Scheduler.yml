@@ -14,7 +14,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: mls-global-dispatcher
+  group: ${{ (github.event_name != 'issues' || startsWith(github.event.issue.title, '[MLS Dispatcher]') || (startsWith(github.event.issue.title, '[MLS Buffered][REQUEST]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association))) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
   cancel-in-progress: false
 
 jobs:

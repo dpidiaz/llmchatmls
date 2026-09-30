@@ -14,6 +14,8 @@ test('only Bootstrap remains as the authorized R4.3 pilot initializer',()=>{
  assert.match(newSource,/name: MLS R4\.3 Snapshot Pilot Bootstrap/);
  assert.match(newSource,/default: plan/);
  assert.match(newSource,/options:\s*\n\s*- plan\s*\n\s*- apply/);
- assert.match(newSource,/group: mls-global-dispatcher/);
+ assert.match(newSource,/mls-global-dispatcher/);
+ assert.match(newSource,/mls-global-dispatcher-skip-\{0\}/);
+ assert.match(newSource,/github\.run_id/);
  assert.match(newSource,/APPLY_R43_PILOT_20X5/);
 });

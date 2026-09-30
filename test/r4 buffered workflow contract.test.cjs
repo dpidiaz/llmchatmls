@@ -9,8 +9,10 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 test('R4.1 Issue writer and allocator remain in the same serialized critical section',()=>{
   const sync=yaml('R4.1 Buffered Sync.yml'),scheduler=yaml('MLS Global Dispatcher Scheduler.yml');
-  assert.match(sync,/concurrency:\s*\n\s*group:\s*mls-global-dispatcher/);
-  assert.match(scheduler,/concurrency:\s*\n\s*group:\s*mls-global-dispatcher/);
+  assert.match(sync,/mls-global-dispatcher/);
+  assert.match(sync,/mls-global-dispatcher-skip-\{0\}/);
+  assert.match(scheduler,/mls-global-dispatcher/);
+  assert.match(scheduler,/mls-global-dispatcher-skip-\{0\}/);
   assert.match(sync,/types:\s*\[opened\]/);
   assert.match(sync,/github\.event\.issue\.author_association/);
   assert.match(scheduler,/github\.event\.issue\.author_association/);

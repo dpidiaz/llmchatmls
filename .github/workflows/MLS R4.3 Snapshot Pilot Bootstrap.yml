@@ -30,7 +30,7 @@ permissions:
 
 # Deliberately the SAME mutex as the existing Global Dispatcher.
 concurrency:
-  group: mls-global-dispatcher
+  group: ${{ (github.event_name == 'workflow_dispatch' || (github.event_name == 'issues' && github.event.action == 'opened' && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) && github.event.issue.title == '[MLS R4.3][BOOTSTRAP][APPLY] BCR-R43-PILOT-20X5' && contains(github.event.issue.body || '', 'MLS_R43_BOOTSTRAP_APPLY_V1') && contains(github.event.issue.body || '', 'APPLY_R43_PILOT_20X5'))) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
   cancel-in-progress: false
 
 jobs:

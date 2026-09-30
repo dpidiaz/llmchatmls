@@ -137,7 +137,8 @@ test('assignment branch is never main and uses unique issue number',()=>{
 test('workflow is single-writer and worker events are serialized per assignment issue',()=>{
   const scheduler=fs.readFileSync('.github/workflows/MLS Global Dispatcher Scheduler.yml','utf8');
   const worker=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
-  assert.match(scheduler,/group: mls-global-dispatcher/);
+  assert.match(scheduler,/mls-global-dispatcher/);
+  assert.match(scheduler,/mls-global-dispatcher-skip-\{0\}/);
   assert.match(scheduler,/cron: '\*\/5 \* \* \* \*'/);
   assert.match(scheduler,/contents: write/);
   assert.match(worker,/group: mls-global-assignment-\$\{\{ github\.event\.issue\.number \}\}/);
