@@ -768,7 +768,9 @@ test('pilot scheduler script is syntactically valid and has one Wave Issue PATCH
  const source=fs.readFileSync(script,'utf8');
  assert.equal((source.match(/api\('PATCH'/g)||[]).length,1);
  assert.match(source,/recordHash!==record\.recordHash/);
- assert.match(source,/for\(let page=1;page<=5;page\+\+\)/);
+ assert.match(source,/maxPages=20/);
+ assert.match(source,/for\(let page=1;page<=maxPages;page\+\+\)/);
+ assert.match(source,/Issue inventory exceeds safe pagination bound/);
  assert.doesNotMatch(source,/setInterval|setTimeout|while\s*\(true\)/);
 });
 
