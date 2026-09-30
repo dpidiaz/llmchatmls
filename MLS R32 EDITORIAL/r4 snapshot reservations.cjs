@@ -15,6 +15,7 @@ function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;th
 function assert(ok,code,msg){if(!ok)fail(code,msg);}
 
 const RESERVATION_SCHEMA='MLS-R4.3-SNAPSHOT-RESERVATION-1';
+const R33_HANDOFF_SCHEMA='MLS-R4.3-R33-HANDOFF-1';
 function markSnapshotReservation(res,waveId){
  assert(res?.status==='reserved'&&res.allocation,'R43_RESERVE_RECORD');
  assert(typeof waveId==='string'&&/^[A-Za-z0-9._:-]{3,120}$/.test(waveId),'R43_RESERVE_WAVE_ID');
@@ -24,6 +25,42 @@ function markSnapshotReservation(res,waveId){
  }};
  return {...next,recordHash:buffered.recordHash(next)};
 }
+
+function markR33Handoff(res,{
+ waveIssueNumber,waveId,waveHash,reconciliationHash,at
+}={}){
+ assert(res?.status==='reserved'&&res.allocation,'R43_R33_HANDOFF_RECORD');
+ assert(res.snapshotFarm?.schema===RESERVATION_SCHEMA&&
+  res.snapshotFarm?.ownershipOnly===true&&res.snapshotFarm?.r42BlocksAllowed===false,
+  'R43_R33_HANDOFF_NOT_SNAPSHOT_RESERVATION');
+ assert(Number.isSafeInteger(Number(waveIssueNumber))&&Number(waveIssueNumber)>0,
+  'R43_R33_HANDOFF_WAVE_ISSUE');
+ assert(String(waveId||'')===String(res.snapshotFarm.waveId||''),
+  'R43_R33_HANDOFF_WAVE_ID');
+ assert(/^[a-f0-9]{64}$/i.test(String(waveHash||'')),'R43_R33_HANDOFF_WAVE_HASH');
+ assert(/^[a-f0-9]{64}$/i.test(String(reconciliationHash||'')),
+  'R43_R33_HANDOFF_RECONCILIATION_HASH');
+ assert(!Number.isNaN(Date.parse(String(at||''))),'R43_R33_HANDOFF_AT');
+ const handoff={
+  schema:R33_HANDOFF_SCHEMA,version:1,status:'active',
+  waveIssueNumber:Number(waveIssueNumber),waveId:String(waveId),
+  waveHash:String(waveHash).toLowerCase(),
+  reconciliationHash:String(reconciliationHash).toLowerCase(),
+  activatedAt:String(at)
+ };
+ const prior=res.snapshotFarm.r33Handoff||null;
+ if(prior){
+  const same=prior.schema===R33_HANDOFF_SCHEMA&&prior.version===1&&prior.status==='active'&&
+   Number(prior.waveIssueNumber)===handoff.waveIssueNumber&&prior.waveId===handoff.waveId&&
+   String(prior.waveHash).toLowerCase()===handoff.waveHash&&
+   String(prior.reconciliationHash).toLowerCase()===handoff.reconciliationHash;
+  assert(same,'R43_R33_HANDOFF_CONFLICT');
+  return res;
+ }
+ const next={...res,snapshotFarm:{...res.snapshotFarm,r33Handoff:handoff}};
+ return {...next,recordHash:buffered.recordHash(next)};
+}
+
 function batchSizes(total){
  assert(Number.isInteger(total)&&total>0&&total<=500,'R43_RESERVE_TOTAL');
  const out=[];let n=total;
@@ -67,4 +104,4 @@ function compose(snapshot,{
  return {sizes,reservations,snapshot:snap,wave,protectedCodes:units.map(x=>x.code)};
 }
 
-module.exports={RESERVATION_SCHEMA,markSnapshotReservation,batchSizes,compose};
+module.exports={RESERVATION_SCHEMA,R33_HANDOFF_SCHEMA,markSnapshotReservation,markR33Handoff,batchSizes,compose};
