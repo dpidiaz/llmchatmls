@@ -33,3 +33,13 @@ test('R4.3 pilot scheduler never reconciles from a silently truncated issue inve
  assert.match(text,/Issue inventory exceeds safe pagination bound/);
  assert.doesNotMatch(text,/page<=5/);
 });
+
+test('R4.3 pilot scheduler shares GitHub cooldown and fails closed on 403/429',()=>{
+ const text=fs.readFileSync(script,'utf8');
+ assert.match(text,/r4 github backoff\.cjs/);
+ assert.match(text,/backoff\.check\(process\.env\.MLS_GITHUB_COOLDOWN_FILE\)/);
+ assert.match(text,/\[403,429\]\.includes\(res\.status\)/);
+ assert.match(text,/backoff\.record\(process\.env\.MLS_GITHUB_COOLDOWN_FILE,res\)/);
+ assert.doesNotMatch(text,/for\s*\([^\n]*(403|429)/);
+ assert.doesNotMatch(text,/while\s*\([^\n]*(403|429)/);
+});
