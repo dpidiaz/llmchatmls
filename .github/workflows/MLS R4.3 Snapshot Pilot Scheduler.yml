@@ -39,6 +39,11 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: node 'scripts/MLS R4.3 Snapshot Pilot Scheduler.cjs'
 
+      - name: Auto-handoff reconciled R4.3 wave to R33
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node 'scripts/MLS R4.3 R33 Handoff.cjs'
+
       - name: Preserve GitHub cooldown
         if: always()
         uses: actions/cache/save@v4

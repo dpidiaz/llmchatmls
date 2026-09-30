@@ -1,32 +1,32 @@
 name: MLS R4.3 R33 Handoff
 
 on:
-  issues:
-    types: [opened]
+  workflow_dispatch:
+    inputs:
+      wave_issue:
+        description: Reconciled R4.3 wave issue number
+        required: true
+        type: string
 
 permissions:
   contents: read
   issues: write
 
 concurrency:
-  group: ${{ (contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) && github.event.issue.title == '[MLS R4.3][R33][HANDOFF] 2208' && contains(github.event.issue.body || '', 'MLS_R43_R33_HANDOFF_V1') && contains(github.event.issue.body || '', 'APPLY_R43_R33_HANDOFF_2208')) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
+  group: mls-global-dispatcher
   cancel-in-progress: false
 
 jobs:
   handoff:
-    if: >-
-      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
-      github.event.issue.title == '[MLS R4.3][R33][HANDOFF] 2208' &&
-      contains(github.event.issue.body || '', 'MLS_R43_R33_HANDOFF_V1') &&
-      contains(github.event.issue.body || '', 'APPLY_R43_R33_HANDOFF_2208')
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
-      MLS_R43_R33_HANDOFF_WAVE_ISSUE: '2208'
-      MLS_R43_R33_HANDOFF_CONFIRM: APPLY_R43_R33_HANDOFF_2208
+      MLS_R43_R33_HANDOFF_WAVE_ISSUE: ${{ inputs.wave_issue }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/cache/restore@v4
         with:
           path: .mls-github-cooldown.json
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Activate exact R4.3 to R33 ownership handoff
+      - name: Recover R4.3 to R33 ownership handoff
         run: node 'scripts/MLS R4.3 R33 Handoff.cjs'
       - name: Preserve GitHub cooldown
         if: always()
