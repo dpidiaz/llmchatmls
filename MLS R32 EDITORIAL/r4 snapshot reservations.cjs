@@ -14,6 +14,16 @@ const farm=require('./r4 snapshot farm.cjs');
 function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;throw e;}
 function assert(ok,code,msg){if(!ok)fail(code,msg);}
 
+const RESERVATION_SCHEMA='MLS-R4.3-SNAPSHOT-RESERVATION-1';
+function markSnapshotReservation(res,waveId){
+ assert(res?.status==='reserved'&&res.allocation,'R43_RESERVE_RECORD');
+ assert(typeof waveId==='string'&&/^[A-Za-z0-9._:-]{3,120}$/.test(waveId),'R43_RESERVE_WAVE_ID');
+ const next={...res,snapshotFarm:{
+  schema:RESERVATION_SCHEMA,version:1,waveId,
+  ownershipOnly:true,r42BlocksAllowed:false,workerHotPath:false
+ }};
+ return {...next,recordHash:buffered.recordHash(next)};
+}
 function batchSizes(total){
  assert(Number.isInteger(total)&&total>0&&total<=500,'R43_RESERVE_TOTAL');
  const out=[];let n=total;
@@ -37,11 +47,12 @@ function compose(snapshot,{
  const reservations=[],units=[];
  for(let i=0;i<sizes.length;i++){
   const issueNumber=reservationIssueNumbers[i];
-  const r=buffered.allocate(projected,{
+  const allocated=buffered.allocate(projected,{
    size:sizes[i],issueNumber,
    requestId:'r43-wave-'+waveId+'-'+String(i+1).padStart(2,'0'),
    baseCommit,contentManifestBlobSha,now:now+i
   });
+  const r=markSnapshotReservation(allocated,waveId);
   reservations.push(r);
   const codes=r.allocation.units.map(x=>x.code);
   units.push(...r.allocation.units);
@@ -56,4 +67,4 @@ function compose(snapshot,{
  return {sizes,reservations,snapshot:snap,wave,protectedCodes:units.map(x=>x.code)};
 }
 
-module.exports={batchSizes,compose};
+module.exports={RESERVATION_SCHEMA,markSnapshotReservation,batchSizes,compose};
