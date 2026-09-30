@@ -7,6 +7,7 @@ const path=require('node:path');
 const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
 const store=require('../MLS R32 EDITORIAL/r4 snapshot local store.cjs');
 const allocator=require('../MLS R32 EDITORIAL/r4 chat allocator.cjs');
+const sync=require('../MLS R32 EDITORIAL/r4 snapshot sync.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -308,4 +309,55 @@ test('expired chat claim is reaped locally and becomes recoverable without GitHu
  assert.equal(reaped.shards[0].status,'free');
  assert.equal(reaped.shards[0].claim,null);
  assert.equal(reaped.revision,state.revision+1);
+});
+
+
+test('grouped sync emits one immutable 20x5 batch after complete reconciliation',()=>{
+ const s=snapshot(100);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-GROUPED-SYNC',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T02:33:00.000Z'
+ });
+ const deltas=wave.shards.map((shard,i)=>farm.createDelta(wave,{
+  shardId:shard.shardId,...payload(wave,shard.shardId),
+  completedAt:new Date(Date.parse('2026-09-30T02:34:00.000Z')+i*1000).toISOString()
+ }));
+ const bundle=sync.buildGroupedSync(wave,deltas,{
+  changedPaths:['README.md'],currentHead:'c'.repeat(40)
+ });
+ assert.equal(sync.validateGroupedSync(wave,bundle),true);
+ assert.equal(bundle.totalRecords,100);
+ assert.equal(bundle.records.length,100);
+ assert.equal(bundle.expectedBaseCommit,BASE);
+ assert.equal(bundle.observedCurrentHead,'c'.repeat(40));
+ assert.equal(new Set(bundle.records.map(x=>x.code)).size,100);
+});
+
+test('grouped sync fails closed when one target path changed since snapshot',()=>{
+ const s=snapshot(10);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-SYNC-CONFLICT',workerCount:2,shardSize:5,
+  createdAt:'2026-09-30T02:35:00.000Z'
+ });
+ const deltas=wave.shards.map((shard,i)=>farm.createDelta(wave,{
+  shardId:shard.shardId,...payload(wave,shard.shardId),
+  completedAt:new Date(Date.parse('2026-09-30T02:36:00.000Z')+i*1000).toISOString()
+ }));
+ assert.throws(()=>sync.buildGroupedSync(wave,deltas,{
+  changedPaths:[wave.shards[0].units[0].contentPath],currentHead:'c'.repeat(40)
+ }),{code:'R43_SYNC_BASE_CONFLICT'});
+});
+
+test('grouped sync refuses partial waves even when changed paths are clean',()=>{
+ const s=snapshot(10);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-SYNC-PARTIAL',workerCount:2,shardSize:5,
+  createdAt:'2026-09-30T02:37:00.000Z'
+ });
+ const delta=farm.createDelta(wave,{
+  shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T02:38:00.000Z'
+ });
+ assert.throws(()=>sync.buildGroupedSync(wave,[delta],{
+  changedPaths:[],currentHead:'c'.repeat(40)
+ }),{code:'R43_SYNC_WAVE_INCOMPLETE'});
 });
