@@ -96,6 +96,22 @@ test('active handoff never falls through to unrelated backlog when all handoff c
  assert.deepEqual(candidate.units,[]);
 });
 
+
+test('completed R4.3 handoff retires from active scope and no longer blocks next-wave backlog',()=>{
+ const src=source();
+ const x=handoffReservation();
+ const completed={...src,ledger:{...src.ledger,verified:[...x.codes]}};
+ const projected=integration.projectR33Snapshot({...completed,bufferedReservations:[x.reservation]},{});
+ assert.equal(projected.r43Handoff,null);
+ assert.deepEqual(projected.handoffCodes,[]);
+ const candidate=r33.materializeCandidate(projected,{
+  requested:5,now:Date.parse('2026-09-30T10:07:00.000Z')
+ });
+ assert.equal(candidate.eligible,true);
+ assert.equal(candidate.reason,'READY');
+ assert.ok(candidate.units.every(unit=>!x.codes.includes(unit.code)));
+});
+
 test('multiple R4.3 handoff identities fail closed',()=>{
  const a=handoffReservation({waveId:'BCR-R43-HANDOFF-A',issueNumber:5001,waveIssueNumber:6001,start:754});
  const b=handoffReservation({waveId:'BCR-R43-HANDOFF-B',issueNumber:5002,waveIssueNumber:6002,start:800});
