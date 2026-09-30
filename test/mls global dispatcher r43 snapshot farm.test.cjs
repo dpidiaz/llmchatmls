@@ -9,6 +9,7 @@ const store=require('../MLS R32 EDITORIAL/r4 snapshot local store.cjs');
 const allocator=require('../MLS R32 EDITORIAL/r4 chat allocator.cjs');
 const sync=require('../MLS R32 EDITORIAL/r4 snapshot sync.cjs');
 const reservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
+const metrics=require('../MLS R32 EDITORIAL/r4 snapshot metrics.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -422,4 +423,48 @@ test('100-worker wave composes twenty 25-entry durable reservations and preserve
  assert.equal(new Set(out.protectedCodes).size,500);
  assert.equal(out.wave.shards.length,100);
  assert.equal(out.wave.totalUnits,500);
+});
+
+
+test('pilot metrics allow advancement only when quality and hot-path safety gates are clean',()=>{
+ const s=snapshot(100);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-METRICS-PASS',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T02:41:00.000Z'
+ });
+ const report=metrics.evaluate(wave,{
+  entriesAttempted:100,durableDeltas:100,
+  acceptedDuplicateOwnership:0,allocatorCasConflicts:7,lostAcceptedDeltas:0,
+  r33FirstPassSuccesses:91,r33Repairs:9,unresolvedR33Failures:0,
+  githubWritesDuringProduction:0,githubInitializationWrites:4,githubSyncWrites:3,
+  r33ValidatorBypasses:0,overwrittenBaseConflicts:0,
+  shardDurationsSeconds:Array.from({length:20},(_,i)=>100+i)
+ });
+ assert.equal(report.advancementAllowed,true);
+ assert.deepEqual(report.blockers,[]);
+ assert.equal(report.r33.firstPassRatePct,91);
+ assert.equal(report.r33.repairRatePct,9);
+ assert.equal(report.github.workerProductionWrites,0);
+ assert.equal(report.timing.observedShards,20);
+});
+
+test('pilot metrics block scale-up on any quality loss, worker GitHub write or unresolved R33 failure',()=>{
+ const s=snapshot(100);
+ const wave=farm.createWave(s,{
+  waveId:'BCR-R43-METRICS-BLOCK',workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T02:42:00.000Z'
+ });
+ const report=metrics.evaluate(wave,{
+  entriesAttempted:100,durableDeltas:99,
+  acceptedDuplicateOwnership:1,lostAcceptedDeltas:1,
+  r33FirstPassSuccesses:90,r33Repairs:9,unresolvedR33Failures:1,
+  githubWritesDuringProduction:1,githubInitializationWrites:4,githubSyncWrites:3,
+  r33ValidatorBypasses:1,overwrittenBaseConflicts:1
+ });
+ assert.equal(report.advancementAllowed,false);
+ for(const code of [
+  'INCOMPLETE_DURABLE_COUNT','DUPLICATE_OWNERSHIP_ACCEPTED','LOST_ACCEPTED_DELTA',
+  'GITHUB_WORKER_HOT_PATH_WRITE','R33_VALIDATOR_BYPASS',
+  'BASE_CONFLICT_OVERWRITTEN','UNRESOLVED_R33_FAILURE','R33_ACCOUNTING_INCOMPLETE'
+ ])assert.ok(report.blockers.includes(code));
 });
