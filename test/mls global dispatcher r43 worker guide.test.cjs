@@ -26,7 +26,11 @@ test('R4.3 worker guide preserves every universal-command state and zero-write p
  assert.match(text,/actualizar \*\*ese mismo request Issue una sola vez\*\*/i);
  assert.match(text,/No buscar ni regresar al chat viejo/i);
  assert.match(text,/TTL por defecto: 30 minutos/);
- assert.match(text,/20\/20.*únicamente.*20 admisiones/i);
+ assert.match(text,/50\/50.*50 admisiones/i);
+ assert.match(text,/hasta \*\*50 shards de 5 entradas\*\*/i);
+ assert.match(text,/hasta \*\*2 waves no reconciliadas\*\*/i);
+ assert.match(text,/afinidad estricta/i);
+ assert.match(text,/más capacidad accionable/i);
  assert.match(text,/admissionCount/);
  assert.match(text,/durableResultCount/);
  assert.match(text,/missingShardIds/);
