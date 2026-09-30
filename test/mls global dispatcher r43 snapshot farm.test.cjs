@@ -809,3 +809,35 @@ test('R4.2 cannot lease or synthesize blocks from R4.3 ownership-only reservatio
  assert.equal(chosen.reservation.issueNumber,11002);
  assert.equal(chosen.block.block,1);
 });
+
+
+test('pilot initializer is syntactically valid, bounded and reuses partial placeholders',()=>{
+ const script=path.join(process.cwd(),'scripts','MLS R4.3 Snapshot Pilot Init.cjs');
+ cp.execFileSync(process.execPath,['--check',script],{stdio:'pipe'});
+ const source=fs.readFileSync(script,'utf8');
+ assert.match(source,/for\(let slot=1;slot<=4;slot\+\+\)/);
+ assert.match(source,/snapshotReservations\.markSnapshotReservation/);
+ assert.match(source,/provider\.collectR33Snapshot/);
+ assert.match(source,/provider\.projectR33Snapshot/);
+ assert.match(source,/writes\.POST\+writes\.PATCH>10/);
+ assert.match(source,/placeholders\[0\]\|\|null/);
+ assert.match(source,/Existing R4\.3 reservation base drift/);
+ assert.match(source,/Checkout is not current main/);
+ assert.doesNotMatch(source,/\/git\/refs|\/git\/trees|\/git\/commits/);
+ assert.doesNotMatch(source,/Cloudflare|D1|OPENAI|api\.openai/i);
+});
+
+test('pilot initializer workflow is manual, serialized with dispatcher and minimally permissioned',()=>{
+ const file=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot Pilot Init.yml');
+ const source=fs.readFileSync(file,'utf8');
+ assert.match(source,/workflow_dispatch:/);
+ assert.match(source,/inputs\.confirm == 'PILOT20'/);
+ assert.match(source,/contents: read/);
+ assert.match(source,/issues: write/);
+ assert.match(source,/group: mls-global-dispatcher/);
+ assert.match(source,/cancel-in-progress: false/);
+ assert.match(source,/ref: main/);
+ assert.match(source,/MLS_R43_WAVE_ID/);
+ assert.doesNotMatch(source,/contents: write|actions: write|pull-requests: write/);
+ assert.doesNotMatch(source,/schedule:|issues:\s*\n\s*types:/);
+});
