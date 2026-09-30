@@ -4,6 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const os=require('node:os');
 const path=require('node:path');
+const cp=require('node:child_process');
 const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
 const store=require('../MLS R32 EDITORIAL/r4 snapshot local store.cjs');
 const allocator=require('../MLS R32 EDITORIAL/r4 chat allocator.cjs');
@@ -757,4 +758,28 @@ test('remote scheduler reconciles only after every admitted result is durably pr
  assert.equal(done.reason,'RECONCILED');
  assert.equal(done.record.status,'reconciled');
  assert.equal(done.reconciliation.completedShards.length,20);
+});
+
+
+test('pilot scheduler script is syntactically valid and has one Wave Issue PATCH point',()=>{
+ const script=path.join(process.cwd(),'scripts','MLS R4.3 Snapshot Pilot Scheduler.cjs');
+ cp.execFileSync(process.execPath,['--check',script],{stdio:'pipe'});
+ const source=fs.readFileSync(script,'utf8');
+ assert.equal((source.match(/api\('PATCH'/g)||[]).length,1);
+ assert.match(source,/recordHash!==record\.recordHash/);
+ assert.match(source,/for\(let page=1;page<=5;page\+\+\)/);
+ assert.doesNotMatch(source,/setInterval|setTimeout|while\s*\(true\)/);
+});
+
+test('pilot scheduler workflow is serialized, issue-scoped and minimally permissioned',()=>{
+ const file=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot Pilot Scheduler.yml');
+ const source=fs.readFileSync(file,'utf8');
+ assert.match(source,/issues:\s*\n\s*types: \[opened, edited\]/);
+ assert.match(source,/contents: read/);
+ assert.match(source,/issues: write/);
+ assert.match(source,/group: mls-r43-snapshot-pilot/);
+ assert.match(source,/cancel-in-progress: false/);
+ assert.match(source,/MLS_BCR_R43_REQUEST/);
+ assert.match(source,/MLS_BCR_R43_RESULT/);
+ assert.doesNotMatch(source,/pull-requests: write|contents: write|actions: write/);
 });
