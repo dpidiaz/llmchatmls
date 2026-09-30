@@ -25,11 +25,11 @@ test('all shared writers keep the real mutex and route ignored Issue runs to uni
  }
 });
 
-test('bootstrap command owns the writer mutex only for the fixed authorized apply Issue',()=>{
+test('bootstrap command owns the writer mutex only for the fixed authorized 50x5 apply Issue',()=>{
  const text=files.bootstrap;
- assert.match(text,/\[MLS R4\.3\]\[BOOTSTRAP\]\[APPLY\] BCR-R43-PILOT-20X5/);
- assert.match(text,/MLS_R43_BOOTSTRAP_APPLY_V1/);
- assert.match(text,/APPLY_R43_PILOT_20X5/);
+ assert.match(text,/\[MLS R4\.3\]\[BOOTSTRAP\]\[APPLY\] 50X5/);
+ assert.match(text,/MLS_R43_BOOTSTRAP_APPLY_V2/);
+ assert.match(text,/APPLY_R43_WAVE_50X5/);
  assert.match(text,/OWNER/);
  assert.match(text,/MEMBER/);
  assert.match(text,/COLLABORATOR/);
@@ -44,7 +44,7 @@ test('other shared workflows route by their own protocol markers instead of ever
 });
 
 test('R4.3 bootstrap command Issue no longer matches the writer-path selectors of peer workflows',()=>{
- const title='[MLS R4.3][BOOTSTRAP][APPLY] BCR-R43-PILOT-20X5';
+ const title='[MLS R4.3][BOOTSTRAP][APPLY] 50X5';
  assert.equal(title.startsWith('[MLS Dispatcher]'),false);
  assert.equal(title.startsWith('[MLS Buffered][REQUEST]'),false);
  assert.equal(title.startsWith('[MLS Buffered][SYNC]'),false);
