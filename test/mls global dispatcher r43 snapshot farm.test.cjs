@@ -850,5 +850,6 @@ test('canonical pilot bootstrap workflow supports plan\/apply and shares the dis
  assert.match(source,/MLS_R43_WAVE_ID/);
  assert.match(source,/MLS_GITHUB_COOLDOWN_FILE/);
  assert.doesNotMatch(source,/contents: write|actions: write|pull-requests: write/);
- assert.doesNotMatch(source,/schedule:|issues:\s*\n\s*types:/);
+ assert.match(source,/issues:\s*\n\s*types: \[opened\]/);
+ assert.doesNotMatch(source,/schedule:/);
 });

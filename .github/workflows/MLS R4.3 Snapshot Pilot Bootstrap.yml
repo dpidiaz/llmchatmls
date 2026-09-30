@@ -21,6 +21,8 @@ on:
         required: false
         default: ''
         type: string
+  issues:
+    types: [opened]
 
 permissions:
   contents: read
@@ -33,12 +35,20 @@ concurrency:
 
 jobs:
   bootstrap:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' &&
+       github.event.action == 'opened' &&
+       contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+       github.event.issue.title == '[MLS R4.3][BOOTSTRAP][APPLY] BCR-R43-PILOT-20X5' &&
+       contains(github.event.issue.body || '', 'MLS_R43_BOOTSTRAP_APPLY_V1') &&
+       contains(github.event.issue.body || '', 'APPLY_R43_PILOT_20X5'))
     runs-on: ubuntu-latest
     env:
       MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
-      MLS_R43_BOOTSTRAP_MODE: ${{ inputs.mode }}
-      MLS_R43_WAVE_ID: ${{ inputs.wave_id }}
-      MLS_R43_CONFIRM: ${{ inputs.confirm }}
+      MLS_R43_BOOTSTRAP_MODE: ${{ github.event_name == 'issues' && 'apply' || inputs.mode }}
+      MLS_R43_WAVE_ID: ${{ github.event_name == 'issues' && 'BCR-R43-PILOT-20X5' || inputs.wave_id }}
+      MLS_R43_CONFIRM: ${{ github.event_name == 'issues' && 'APPLY_R43_PILOT_20X5' || inputs.confirm }}
     steps:
       - uses: actions/checkout@v4
         with:
