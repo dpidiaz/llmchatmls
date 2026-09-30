@@ -18,6 +18,7 @@ const VERSION=1;
 const SNAPSHOT_SCHEMA='MLS-BCR-SNAPSHOT-1';
 const WAVE_SCHEMA='MLS-BCR-WAVE-1';
 const DELTA_SCHEMA='MLS-BCR-DELTA-1';
+const WORKER_SCHEMA='MLS-BCR-WORKER-CONTEXT-1';
 
 function fail(code,msg){
  const e=new Error(msg||code);e.code=code;e.status=409;throw e;
@@ -142,6 +143,71 @@ function validateWave(snapshot,wave){
  return true;
 }
 
+function createWorkerContext(snapshot,wave,shardId){
+ validateWave(snapshot,wave);
+ const shard=wave.shards.find(x=>x.shardId===shardId);
+ assert(shard,'R43_SHARD_UNKNOWN');
+ const unsigned={
+  schema:WORKER_SCHEMA,
+  version:VERSION,
+  snapshotHash:snapshot.snapshotHash,
+  waveId:wave.waveId,
+  waveHash:wave.waveHash,
+  baseCommit:wave.baseCommit,
+  contentManifestBlobSha:wave.contentManifestBlobSha,
+  shardId:shard.shardId,
+  codes:[...shard.codes],
+  units:shard.units.map(x=>({...x})),
+  policy:{
+   githubHotPath:false,
+   remoteWritesDuringProduction:false,
+   r33Required:true,
+   producedIsVerified:false
+  }
+ };
+ return {...unsigned,contextHash:stableHash(unsigned)};
+}
+
+function validateWorkerContext(snapshot,wave,context){
+ validateWave(snapshot,wave);
+ assert(context?.schema===WORKER_SCHEMA&&context.version===VERSION,'R43_WORKER_SCHEMA');
+ const unsigned={...context};delete unsigned.contextHash;
+ assert(context.contextHash===stableHash(unsigned),'R43_WORKER_HASH');
+ assert(context.snapshotHash===snapshot.snapshotHash,'R43_WORKER_SNAPSHOT');
+ assert(context.waveId===wave.waveId&&context.waveHash===wave.waveHash,'R43_WORKER_WAVE');
+ const shard=wave.shards.find(x=>x.shardId===context.shardId);
+ assert(shard,'R43_SHARD_UNKNOWN');
+ assert(JSON.stringify(context.codes)===JSON.stringify(shard.codes),'R43_WORKER_CODES');
+ assert(JSON.stringify(context.units)===JSON.stringify(shard.units),'R43_WORKER_UNITS');
+ assert(context.policy?.githubHotPath===false&&
+  context.policy?.remoteWritesDuringProduction===false&&
+  context.policy?.r33Required===true&&
+  context.policy?.producedIsVerified===false,'R43_WORKER_POLICY');
+ return true;
+}
+
+function planSyncConflicts(wave,changedPaths){
+ assert(wave?.schema===WAVE_SCHEMA,'R43_WAVE_REQUIRED');
+ assert(Array.isArray(changedPaths)&&changedPaths.every(x=>typeof x==='string'),'R43_CHANGED_PATHS');
+ const changed=new Set(changedPaths);
+ const collisions=[];
+ for(const shard of wave.shards){
+  for(const unit of shard.units){
+   const paths=[unit.contentPath,unit.evidenceArtifactPath];
+   const hit=paths.filter(p=>changed.has(p));
+   if(hit.length)collisions.push({code:unit.code,shardId:shard.shardId,paths:hit});
+  }
+ }
+ return {
+  schema:'MLS-BCR-SYNC-CONFLICT-PLAN-1',
+  waveId:wave.waveId,
+  waveHash:wave.waveHash,
+  safe:collisions.length===0,
+  collisions,
+  changedPathCount:changed.size
+ };
+}
+
 function createDelta(wave,{shardId,entries,checkpoints,reviews,completedAt}){
  assert(wave?.schema===WAVE_SCHEMA,'R43_WAVE_REQUIRED');
  const shard=wave.shards?.find(x=>x.shardId===shardId);
@@ -221,7 +287,8 @@ function reconcileWave(wave,deltas){
 }
 
 module.exports={
- VERSION,SNAPSHOT_SCHEMA,WAVE_SCHEMA,DELTA_SCHEMA,
+ VERSION,SNAPSHOT_SCHEMA,WAVE_SCHEMA,DELTA_SCHEMA,WORKER_SCHEMA,
  createSnapshot,validateSnapshot,createWave,validateWave,
+ createWorkerContext,validateWorkerContext,planSyncConflicts,
  createDelta,validateDelta,reconcileWave
 };
