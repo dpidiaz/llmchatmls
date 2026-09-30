@@ -4,6 +4,7 @@ const remoteAdmission=require('../MLS R32 EDITORIAL/r4 snapshot remote admission
 const remoteResult=require('../MLS R32 EDITORIAL/r4 snapshot remote result.cjs');
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
 const scheduler=require('../MLS R32 EDITORIAL/r4 snapshot remote scheduler.cjs');
+const backoff=require('../MLS R32 EDITORIAL/r4 github backoff.cjs');
 
 const AUTHORIZED_ASSOCIATIONS=new Set(['OWNER','MEMBER','COLLABORATOR']);
 
@@ -35,6 +36,7 @@ async function main(){
  }
  const [owner,repo]=repository.split('/');
  async function api(method,path,body){
+  backoff.check(process.env.MLS_GITHUB_COOLDOWN_FILE);
   const res=await fetch('https://api.github.com/repos/'+owner+'/'+repo+path,{
    method,headers:{
     Accept:'application/vnd.github+json',
@@ -47,7 +49,9 @@ async function main(){
   if(!res.ok){
    const text=await res.text();
    const e=new Error('GitHub '+method+' '+path+' '+res.status+' '+text.slice(0,500));
-   e.status=res.status;throw e;
+   e.status=res.status;
+   if([403,429].includes(res.status))e.cooldown=backoff.record(process.env.MLS_GITHUB_COOLDOWN_FILE,res);
+   throw e;
   }
   if(res.status===204)return null;
   return res.json();
