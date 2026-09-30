@@ -50,7 +50,11 @@ function markR33Handoff(res,{
  };
  const prior=res.snapshotFarm.r33Handoff||null;
  if(prior){
-  assert(JSON.stringify(prior)===JSON.stringify(handoff),'R43_R33_HANDOFF_CONFLICT');
+  const same=prior.schema===R33_HANDOFF_SCHEMA&&prior.version===1&&prior.status==='active'&&
+   Number(prior.waveIssueNumber)===handoff.waveIssueNumber&&prior.waveId===handoff.waveId&&
+   String(prior.waveHash).toLowerCase()===handoff.waveHash&&
+   String(prior.reconciliationHash).toLowerCase()===handoff.reconciliationHash;
+  assert(same,'R43_R33_HANDOFF_CONFLICT');
   return res;
  }
  const next={...res,snapshotFarm:{...res.snapshotFarm,r33Handoff:handoff}};
