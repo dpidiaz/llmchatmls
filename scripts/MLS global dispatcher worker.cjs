@@ -35,7 +35,7 @@ function autoPullRequest(state,comment){
   const seed=String(state.assignmentId||state.issueNumber||'assignment').replace(/[^A-Za-z0-9._:-]+/g,'-').slice(-70);
   const requestId=('autopull:'+seed+':'+String(comment.id)).slice(0,120);
   const workerLogin=String(state.workerLogin||'').trim();
-  const handoffScope=/^r33-handoff:\\d+:/.exec(String(state.workId||''));
+  const handoffScope=/^r33-handoff:\d+:/.exec(String(state.workId||''));
   return {
     operation:'claim',requestId,workerId,workerLogin:workerLogin||null,
     capabilities:['chat','github','r4-autopull'],
