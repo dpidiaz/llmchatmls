@@ -18,7 +18,11 @@ test('guarded bootstrap runner is syntactically valid and apply requires the exa
  assert.match(source,/if\(mode==='plan'\)/);
  assert.match(source,/if\(mode==='apply'\)/);
  assert.match(source,/R43_BOOT_MAIN_DRIFT/);
- assert.match(source,/R43_BOOT_PREVIEW_DRIFT/);
+ assert.match(source,/R43_BOOT_RESERVATION_BASE_DRIFT/);
+ assert.match(source,/R43_BOOT_RESERVATION_MANIFEST_DRIFT/);
+ assert.match(source,/R43_BOOT_WRITE_BUDGET/);
+ assert.match(source,/createOrReusePlaceholder/);
+ assert.match(source,/idempotent:true/);
  assert.match(source,/\[403,429\]/);
  assert.doesNotMatch(source,/while\s*\([^)]*(403|429)/);
 });
@@ -34,15 +38,19 @@ test('bootstrap and Global Dispatcher share exactly the same repository-wide con
  assert.match(boot,/cancel-in-progress: false/);
 });
 
-test('bootstrap apply finalizes placeholders only after rechecking live main and preview identity',()=>{
+test('bootstrap apply reuses partial reservations and refuses to seal a wave after main drift',()=>{
  const source=fs.readFileSync(script,'utf8');
- const placeholderIndex=source.indexOf("createPlaceholder(");
- const mainAfterIndex=source.indexOf("const mainAfter=await mainHead()");
- const actualPlanIndex=source.indexOf("const actual=await computePlan");
- const firstPatchIndex=source.indexOf("await api('PATCH'");
- assert.ok(placeholderIndex>=0);
- assert.ok(mainAfterIndex>placeholderIndex);
- assert.ok(actualPlanIndex>mainAfterIndex);
- assert.ok(firstPatchIndex>actualPlanIndex);
- assert.match(source,/JSON\.stringify\(actual\.protectedCodes\)===JSON\.stringify\(preview\.protectedCodes\)/);
+ const reservationIndex=source.indexOf('async function persistReservation');
+ const mainAfterIndex=source.indexOf('const mainAfter=await mainHead()');
+ const controlIndex=source.indexOf('const control=waveIssue.create');
+ const wavePatchIndex=source.indexOf("await api('PATCH','/issues/'+wavePlaceholder.number");
+ assert.ok(reservationIndex>=0);
+ assert.ok(mainAfterIndex>reservationIndex);
+ assert.ok(controlIndex>mainAfterIndex);
+ assert.ok(wavePatchIndex>controlIndex);
+ assert.match(source,/existingBySlot/);
+ assert.match(source,/R43_BOOT_RESERVATION_BASE_DRIFT/);
+ assert.match(source,/R43_BOOT_RESERVATION_MANIFEST_DRIFT/);
+ assert.match(source,/assert\(mainAfter===main,'R43_BOOT_MAIN_DRIFT'\)/);
+ assert.match(source,/assert\(writeCount<=10,'R43_BOOT_WRITE_BUDGET'\)/);
 });
