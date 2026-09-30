@@ -1,0 +1,26 @@
+name: MLS R4.3 R33 Gate Audit
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  audit:
+    if: >-
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+      github.event.issue.title == '[MLS R4.3][R33][AUDIT] 2208'
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MLS_R43_R33_AUDIT_WAVE_ISSUE: '2208'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Audit reconciled R4.3 payload for canonical R33 gate
+        run: node 'scripts/MLS R4.3 R33 Gate Audit.cjs'
