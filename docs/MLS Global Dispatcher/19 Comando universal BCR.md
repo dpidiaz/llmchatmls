@@ -9,7 +9,7 @@ usuario reserva, bloque, SHA, Wave Issue ni volver al productor. El comando ordi
 ## Routing del comando único
 
 El comando visible no cambia entre R4.3 y R4.2. Antes de crear una solicitud, el
-chat lee los Issues canónicos y aplica `r4 universal bcr router.cjs`:
+chat lee los Issues canónicos y aplica `r4 snapshot command.cjs`:
 
 - si no existe Wave R4.3 activa, usar R4.2;
 - si existe exactamente una Wave R4.3 en estado `collecting`, crear una solicitud
@@ -17,7 +17,8 @@ chat lee los Issues canónicos y aplica `r4 universal bcr router.cjs`:
 - si la Wave está `sealed` y este mismo intento ya posee un request Issue incluido
   en `admission.assignments`, reanudar exclusivamente el shard asignado;
 - si la Wave está `sealed` pero el chat no posee una admisión previa verificable,
-  no intentar entrar tarde: usar R4.2 sobre trabajo no reservado por R4.3;
+  no intentar entrar tarde ni abrir R4.2 en paralelo: responder `pilot_capacity_full`;
+  R4.2 vuelve a ser fallback cuando no exista una Wave R4.3 activa;
 - si aparecen dos Waves R4.3 activas, detener la adjudicación. No escoger una por
   fecha, memoria conversacional o conveniencia.
 
