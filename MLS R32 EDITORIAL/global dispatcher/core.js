@@ -102,9 +102,12 @@ function parseCommand(body){
     if(!/^[A-Za-z0-9._:-]{8,160}$/.test(workerId))throw dispatchError('INVALID_WORKER_ID','workerId inválido.');
     const workerLogin=String(x.workerLogin||'').trim();
     if(workerLogin&&!/^[A-Za-z0-9][A-Za-z0-9-]*(?:\\[bot\\])?$/.test(workerLogin))throw dispatchError('INVALID_WORKER_LOGIN','workerLogin inválido.');
-    const provider=String(x.provider||'').trim();
+    const provider=String(x.provider||'').trim(),workPrefix=String(x.workPrefix||'').trim();
     if(provider&&!/^[A-Za-z0-9._:-]{2,80}$/.test(provider))throw dispatchError('INVALID_PROVIDER_FILTER','provider inválido.');
-    return {operation,requestId,workerId,workerLogin:workerLogin||null,capabilities:normalizeStringArray(x.capabilities||['chat','github'],'capabilities'),...(provider?{provider}: {})};
+    if(workPrefix&&!/^[A-Za-z0-9._:-]{4,120}$/.test(workPrefix))throw dispatchError('INVALID_WORK_PREFIX','workPrefix inválido.');
+    return {operation,requestId,workerId,workerLogin:workerLogin||null,
+      capabilities:normalizeStringArray(x.capabilities||['chat','github'],'capabilities'),
+      ...(provider?{provider}: {}),...(workPrefix?{workPrefix}: {})};
   }
   return {operation};
 }
@@ -196,12 +199,13 @@ function dependenciesSatisfied(item,ledger){
   return item.dependsOn.every(id=>['done','certified'].includes(String(terminalStatus(ledger,id)||'').toLowerCase()));
 }
 function workIsActive(workId,states,at=Date.now()){return activeAssignments(states,at).some(x=>x.workId===workId);}
-function selectNextWork(registry,ledger,states,at=Date.now(),provider=null){
+function selectNextWork(registry,ledger,states,at=Date.now(),provider=null,workPrefix=null){
   const locks=activeLocks(states,at);
-  const filter=String(provider||'').trim();
+  const filter=String(provider||'').trim(),prefix=String(workPrefix||'').trim();
   const candidates=[];
   for(const item of registry.items){
     if(filter&&String(item.provider||'')!==filter)continue;
+    if(prefix&&!String(item.workId||'').startsWith(prefix))continue;
     if(terminalStatus(ledger,item.workId))continue;
     if(workIsActive(item.workId,states,at))continue;
     const recovery=ledger.recoveries?.[item.workId]||null;
