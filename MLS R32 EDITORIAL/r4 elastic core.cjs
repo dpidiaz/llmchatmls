@@ -145,6 +145,7 @@ function preblock(res,recipe,rootSha){
 }
 function blocks(res){
  assert(res.status==='reserved'&&!res.stage,'R42_RESERVATION_NOT_PENDING');
+ if(res.snapshotFarm?.ownershipOnly===true)return [];
  if(res.elastic){
   assert(res.elastic.schema==='MLS-R4.2-ELASTIC-1'&&Array.isArray(res.elastic.blocks)&&
    res.elastic.blocks.length===5&&res.elastic.blocks.every((b,i)=>b.block===i+1 &&
@@ -168,7 +169,7 @@ function activeCount(reservations,now=Date.now(),issues=[]){
 function freeBlock(reservations,now=Date.now(),issues=[]){
  const candidates=[];
  for(const res of reservations.slice().sort((a,b)=>a.issueNumber-b.issueNumber)){
-  if(res.status!=='reserved'||res.stage||res.elastic?.consolidatedSha)continue;
+  if(res.status!=='reserved'||res.stage||res.elastic?.consolidatedSha||res.snapshotFarm?.ownershipOnly===true)continue;
   for(const block of blocks(res)){
    if(block.status==='pending'||(block.status==='leased'&&Date.parse(block.expiresAt)<=now&&
     !pendingForLease(issues,block,res.issueNumber,block.block,now))){
