@@ -26,12 +26,13 @@ function marker(text,key){
 }
 function renderMarker(key,value){return '<!-- '+key+'\n'+JSON.stringify(value)+'\n-->';}
 
-function createRequest(wave,{requestId,createdAt}){
+function createRequest(wave,{waveIssueNumber,requestId,createdAt}){
  assert(wave?.schema===farm.WAVE_SCHEMA,'R43_REMOTE_WAVE');
  assert(wave.workerCount<=MAX_REMOTE_WORKERS,'R43_REMOTE_WORKER_CAP');
+ assert(Number.isSafeInteger(waveIssueNumber)&&waveIssueNumber>0,'R43_REMOTE_WAVE_ISSUE');
  assert(/^[A-Za-z0-9._:-]{8,160}$/.test(String(requestId||'')),'R43_REMOTE_REQUEST_ID');
  assert(!Number.isNaN(Date.parse(String(createdAt||''))),'R43_REMOTE_CREATED_AT');
- const unsigned={schema:REQUEST_SCHEMA,version:1,waveId:wave.waveId,
+ const unsigned={schema:REQUEST_SCHEMA,version:1,waveIssueNumber,waveId:wave.waveId,
   waveHash:wave.waveHash,requestId,createdAt};
  return {...unsigned,requestHash:hash(unsigned)};
 }
@@ -40,7 +41,7 @@ function renderRequestBody(request){
   'One-shot admission only. No lease renewal/checkpoint lifecycle.','',
   renderMarker(REQUEST_MARKER,request)].join('\n');
 }
-function parseRequest(issue,wave){
+function parseRequest(issue,wave,waveIssueNumber=null){
  assert(authorized(issue),'R43_REMOTE_OWNER');
  assert(String(issue?.title||'').startsWith('[MLS BCR R4.3][REQUEST] '),'R43_REMOTE_TITLE');
  const r=marker(issue.body,REQUEST_MARKER);
@@ -48,15 +49,16 @@ function parseRequest(issue,wave){
  const unsigned={...r};delete unsigned.requestHash;
  assert(r.requestHash===hash(unsigned),'R43_REMOTE_REQUEST_HASH');
  assert(r.waveId===wave.waveId&&r.waveHash===wave.waveHash,'R43_REMOTE_REQUEST_WAVE');
+ if(waveIssueNumber!=null)assert(r.waveIssueNumber===waveIssueNumber,'R43_REMOTE_REQUEST_WAVE_ISSUE');
  return r;
 }
-function sealAdmission(wave,issues,{sealedAt}){
+function sealAdmission(wave,issues,{sealedAt,waveIssueNumber=null}={}){
  assert(wave?.schema===farm.WAVE_SCHEMA,'R43_REMOTE_WAVE');
  assert(wave.workerCount<=MAX_REMOTE_WORKERS,'R43_REMOTE_WORKER_CAP');
  assert(!Number.isNaN(Date.parse(String(sealedAt||''))),'R43_REMOTE_SEALED_AT');
  const seen=new Set(),rows=[];
  for(const issue of [...issues].sort((a,b)=>Number(a.number)-Number(b.number))){
-  let r;try{r=parseRequest(issue,wave);}catch{continue;}
+  let r;try{r=parseRequest(issue,wave,waveIssueNumber);}catch{continue;}
   if(seen.has(r.requestId))continue;
   seen.add(r.requestId);
   rows.push({issueNumber:Number(issue.number),requestId:r.requestId,requestHash:r.requestHash});
