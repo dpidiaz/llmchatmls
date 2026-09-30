@@ -1,0 +1,47 @@
+name: MLS R4.3 Snapshot Pilot Scheduler
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: mls-global-dispatcher
+  cancel-in-progress: false
+
+jobs:
+  scheduler:
+    if: >-
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+      (contains(github.event.issue.body || '', 'MLS_BCR_R43_REQUEST') ||
+       contains(github.event.issue.body || '', 'MLS_BCR_R43_RESULT'))
+    runs-on: ubuntu-latest
+    env:
+      MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: mls-github-cooldown-
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Reconcile R4.3 pilot wave
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node 'scripts/MLS R4.3 Snapshot Pilot Scheduler.cjs'
+
+      - name: Preserve GitHub cooldown
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
+          key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}

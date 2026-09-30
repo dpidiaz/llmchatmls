@@ -1,0 +1,167 @@
+'use strict';
+
+/**
+ * MLS BCR R4.3 universal-command router.
+ *
+ * Pure decision layer for the user-visible command "MLS BCR siguiente".
+ * It never writes to GitHub. The chat performs the returned action.
+ */
+const farm=require('./r4 snapshot farm.cjs');
+const remoteAdmission=require('./r4 snapshot remote admission.cjs');
+const remoteResult=require('./r4 snapshot remote result.cjs');
+const remoteScheduler=require('./r4 snapshot remote scheduler.cjs');
+const waveIssue=require('./r4 snapshot wave issue.cjs');
+
+const ACTIVE=new Set(['collecting','sealed']);
+
+function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;throw e;}
+function assert(ok,code,msg){if(!ok)fail(code,msg);}
+
+function authorizedWaveIssues(issues){
+ const out=[];
+ for(const issue of issues||[]){
+  if(issue?.state&&issue.state!=='open')continue;
+  if(issue?.user?.login!=='github-actions[bot]')continue;
+  if(!String(issue.title||'').startsWith('[MLS BCR R4.3][WAVE]['))continue;
+  if(!String(issue.body||'').includes(waveIssue.MARKER))continue;
+  const record=waveIssue.parse(issue);
+  if(ACTIVE.has(record.status))out.push({issue,record});
+ }
+ return out.sort((a,b)=>Number(a.issue.number)-Number(b.issue.number));
+}
+
+function activeWave(issues){
+ const rows=authorizedWaveIssues(issues);
+ assert(rows.length<=1,'R43_COMMAND_WAVE_CARDINALITY',
+  'More than one authoritative R4.3 wave is active.');
+ return rows[0]||null;
+}
+
+function reconstruct(row,issues){
+ const needed=new Set(row.record.reservationIssueNumbers.map(Number));
+ const reservationIssues=(issues||[]).filter(i=>needed.has(Number(i.number)));
+ assert(reservationIssues.length===needed.size,'R43_COMMAND_RESERVATIONS_INCOMPLETE');
+ return remoteScheduler.reconstruct(row.record,reservationIssues);
+}
+
+function requestRows(issues,wave,waveIssueNumber,requestId){
+ const rows=[];
+ for(const issue of issues||[]){
+  if(!String(issue?.body||'').includes(remoteAdmission.REQUEST_MARKER))continue;
+  let request;try{request=remoteAdmission.parseRequest(issue,wave,waveIssueNumber);}catch{continue;}
+  if(request.requestId===requestId)rows.push({issue,request});
+ }
+ rows.sort((a,b)=>Number(a.issue.number)-Number(b.issue.number));
+ return rows;
+}
+
+function resultRow(issues,wave,admission,requestIssueNumber){
+ const issue=(issues||[]).find(i=>Number(i.number)===Number(requestIssueNumber));
+ if(!issue||!String(issue.body||'').includes(remoteResult.RESULT_MARKER))return null;
+ const delta=remoteResult.decodeResult(issue,wave,admission);
+ return {issue,delta};
+}
+
+function route(issues,{requestId=null,requestIssueNumber=null}={}){
+ const live=activeWave(issues);
+ if(!live)return {
+  backend:'r42',
+  action:'use_r42',
+  guide:'docs/MLS Global Dispatcher/19 Comando universal BCR.md'
+ };
+
+ assert(live.record.route==='remote','R43_COMMAND_ROUTE_NOT_LIVE',
+  'Only the certified remote pilot route can handle the universal command.');
+ const {snapshot,wave}=reconstruct(live,issues);
+ const base={
+  backend:'r43',
+  waveIssueNumber:Number(live.issue.number),
+  waveId:wave.waveId,
+  waveHash:wave.waveHash,
+  snapshotHash:snapshot.snapshotHash,
+  status:live.record.status,
+  guide:'docs/MLS Global Dispatcher/22 R4.3 Worker Command.md'
+ };
+
+ if(!requestId){
+  if(live.record.status==='sealed')return {...base,action:'pilot_capacity_full'};
+  return {...base,action:'create_request'};
+ }
+ assert(/^[A-Za-z0-9._:-]{8,160}$/.test(requestId),'R43_COMMAND_REQUEST_ID');
+
+ if(live.record.status==='collecting'){
+  const requests=requestRows(issues,wave,live.record.waveIssueNumber,requestId);
+  assert(requests.length<=1,'R43_COMMAND_REQUEST_DUPLICATE');
+  if(!requests.length)return {...base,action:'create_request',requestId};
+  const request=requests[0];
+  if(requestIssueNumber!=null)assert(Number(request.issue.number)===Number(requestIssueNumber),
+   'R43_COMMAND_REQUEST_ISSUE_MISMATCH');
+  return {
+   ...base,action:'await_admission',requestId,
+   requestIssueNumber:Number(request.issue.number)
+  };
+ }
+
+ remoteAdmission.validateAdmission(live.record.admission,wave);
+ const assignment=live.record.admission.assignments.find(x=>x.requestId===requestId);
+ if(!assignment)return {...base,action:'request_not_admitted',requestId};
+ if(requestIssueNumber!=null)assert(Number(assignment.issueNumber)===Number(requestIssueNumber),
+  'R43_COMMAND_REQUEST_ISSUE_MISMATCH');
+ const requestIssue=(issues||[]).find(i=>Number(i.number)===Number(assignment.issueNumber));
+ assert(requestIssue,'R43_COMMAND_REQUEST_ISSUE_MISSING');
+ const submitted=resultRow(issues,wave,live.record.admission,assignment.issueNumber);
+ if(submitted)return {
+  ...base,action:'result_already_submitted',requestId,
+  requestIssueNumber:Number(assignment.issueNumber),
+  shardId:assignment.shardId,
+  deltaHash:submitted.delta.deltaHash
+ };
+ // Before production, the original request marker must still authenticate the
+ // same request/Issue pair recorded by the immutable admission.
+ const original=remoteAdmission.parseRequest(requestIssue,wave,live.record.waveIssueNumber);
+ assert(original.requestId===requestId,'R43_COMMAND_ADMISSION_REQUEST_DRIFT');
+
+ const context=farm.createWorkerContext(snapshot,wave,assignment.shardId);
+ farm.validateWorkerContext(snapshot,wave,context);
+ return {
+  ...base,action:'produce_shard',requestId,
+  requestIssueNumber:Number(requestIssue.number),
+  assignment:structuredClone(assignment),
+  workerContext:context
+ };
+}
+
+function createRequestEnvelope(issues,{requestId,createdAt}){
+ const live=activeWave(issues);
+ assert(live,'R43_COMMAND_NO_ACTIVE_WAVE');
+ assert(live.record.status==='collecting','R43_COMMAND_ADMISSION_CLOSED');
+ const {wave}=reconstruct(live,issues);
+ const request=remoteAdmission.createRequest(wave,{
+  waveIssueNumber:Number(live.issue.number),requestId,createdAt
+ });
+ return {
+  title:'[MLS BCR R4.3][REQUEST] '+requestId,
+  body:remoteAdmission.renderRequestBody(request),
+  request
+ };
+}
+
+function createResultEnvelope(issues,{requestId,requestIssueNumber,delta}){
+ const state=route(issues,{requestId,requestIssueNumber});
+ assert(state.action==='produce_shard','R43_COMMAND_RESULT_NOT_READY');
+ assert(delta?.shardId===state.assignment.shardId,'R43_COMMAND_RESULT_WRONG_SHARD');
+ const live=activeWave(issues),{wave}=reconstruct(live,issues);
+ farm.validateDelta(wave,delta);
+ const result=remoteResult.encodeDelta(wave,delta,{waveIssueNumber:state.waveIssueNumber});
+ return {
+  issueNumber:state.requestIssueNumber,
+  title:'[MLS BCR R4.3][RESULT] '+requestId,
+  body:remoteResult.renderResultBody(result),
+  result
+ };
+}
+
+module.exports={
+ ACTIVE,authorizedWaveIssues,activeWave,route,
+ createRequestEnvelope,createResultEnvelope
+};
