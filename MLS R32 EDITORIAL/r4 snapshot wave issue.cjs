@@ -85,7 +85,7 @@ function render(record){
   '**Entradas:** '+record.totalUnits+'  ',
   '**Route:** '+record.route+'  ','',
   'Snapshot and wave identities are immutable. Produced is not VERIFIED.','',
-  '<!-- '+MARKER+'\\n'+JSON.stringify(record)+'\\n-->'].join('\\n');
+  '<!-- '+MARKER+'\n'+JSON.stringify(record)+'\n-->'].join('\n');
 }
 function parse(issue){
  assert(Number(issue?.number)>0,'R43_WAVE_ISSUE');
