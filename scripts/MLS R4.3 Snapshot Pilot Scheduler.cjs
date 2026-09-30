@@ -5,6 +5,8 @@ const remoteResult=require('../MLS R32 EDITORIAL/r4 snapshot remote result.cjs')
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
 const scheduler=require('../MLS R32 EDITORIAL/r4 snapshot remote scheduler.cjs');
 
+const AUTHORIZED_ASSOCIATIONS=new Set(['OWNER','MEMBER','COLLABORATOR']);
+
 function die(msg){throw new Error(msg);}
 function extractMarker(body,key){
  const re=new RegExp('<!--\\s*'+key+'\\s*\\n([\\s\\S]*?)\\n-->','g');
@@ -24,6 +26,8 @@ async function main(){
  if(!eventPath||!token||!repository)die('Missing GitHub Actions environment.');
  const event=JSON.parse(fs.readFileSync(eventPath,'utf8')),trigger=event.issue;
  if(!trigger||trigger.pull_request)return;
+ if(!AUTHORIZED_ASSOCIATIONS.has(String(trigger.author_association||'').toUpperCase()))
+  die('R4.3 trigger Issue is not authorized.');
  const waveNumber=waveIssueNumberFromBody(trigger.body);
  if(!waveNumber){
   console.log('Not an R4.3 worker request/result; no action.');
@@ -49,6 +53,7 @@ async function main(){
   return res.json();
  }
  const control=await api('GET','/issues/'+waveNumber);
+ if(control?.user?.login!=='github-actions[bot]')die('R4.3 Wave control Issue is not authoritative.');
  if(control.state!=='open'){
   console.log('Wave control Issue is closed; no action.');
   return;
@@ -60,13 +65,14 @@ async function main(){
  }
  const reservationIssues=await Promise.all(record.reservationIssueNumbers.map(n=>api('GET','/issues/'+n)));
  async function recentIssues(){
-  const out=[],since=encodeURIComponent(record.createdAt);
-  for(let page=1;page<=5;page++){
+  const out=[],since=encodeURIComponent(record.createdAt),maxPages=20;
+  for(let page=1;page<=maxPages;page++){
    const rows=await api('GET','/issues?state=open&since='+since+'&per_page=100&page='+page+'&sort=updated&direction=asc');
+   if(!Array.isArray(rows))die('R4.3 Issue inventory response is invalid.');
    for(const row of rows)if(!row.pull_request)out.push(row);
-   if(rows.length<100)break;
+   if(rows.length<100)return out;
   }
-  return out;
+  die('R4.3 Issue inventory exceeds safe pagination bound; refusing truncated reconciliation.');
  }
  const candidates=await recentIssues();
  const now=new Date().toISOString();
