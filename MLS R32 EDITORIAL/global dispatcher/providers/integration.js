@@ -115,33 +115,59 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
   const recoveryCodes=Object.values(globalLedger?.recoveries||{})
     .filter(r=>r?.workItem?.provider==='r33-farm')
     .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
-  const handoffReservations=(snapshot.bufferedReservations||[]).filter(r=>
-    r?.snapshotFarm?.ownershipOnly===true&&
-    r?.snapshotFarm?.r33Handoff?.status==='active'&&
-    (r?.allocation?.units||[]).some(u=>poolCodes.has(String(u?.code||''))&&!terminal.has(String(u?.code||''))));
-  const handoffKeys=[...new Set(handoffReservations.map(r=>{
+
+  // Multiple reconciled R4.3 waves may hand off concurrently. Group by immutable
+  // handoff identity and preserve disjoint ownership instead of collapsing them.
+  const handoffGroups=new Map();
+  for(const r of snapshot.bufferedReservations||[]){
+    if(r?.snapshotFarm?.ownershipOnly!==true||r?.snapshotFarm?.r33Handoff?.status!=='active')continue;
     const h=r.snapshotFarm.r33Handoff;
-    return [h.waveIssueNumber,h.waveId,h.waveHash,h.reconciliationHash].join(':');
-  }))];
-  if(handoffKeys.length>1)throw integrationError('R43_R33_HANDOFF_CARDINALITY',
-    'Más de una identidad R4.3→R33 activa en reservas buffered.',503);
-  const handoffCodes=[...new Set(handoffReservations
-    .flatMap(r=>r.allocation.units.map(u=>u.code))
-    .filter(code=>poolCodes.has(code)&&!terminal.has(code)))];
-  const handoffSet=new Set(handoffCodes);
+    const pending=(r?.allocation?.units||[])
+      .map(u=>String(u?.code||''))
+      .filter(code=>poolCodes.has(code)&&!terminal.has(code));
+    if(!pending.length)continue;
+    const key=[h.waveIssueNumber,h.waveId,h.waveHash,h.reconciliationHash].join(':');
+    if(!handoffGroups.has(key))handoffGroups.set(key,{
+      key,
+      waveIssueNumber:Number(h.waveIssueNumber),
+      waveId:String(h.waveId),
+      waveHash:String(h.waveHash),
+      reconciliationHash:String(h.reconciliationHash),
+      pendingCodes:[]
+    });
+    handoffGroups.get(key).pendingCodes.push(...pending);
+  }
+  const seenHandoffCodes=new Map();
+  const r43Handoffs=[...handoffGroups.values()]
+    .map(h=>({...h,pendingCodes:[...new Set(h.pendingCodes)]}))
+    .sort((a,b)=>a.waveIssueNumber-b.waveIssueNumber||a.waveId.localeCompare(b.waveId));
+  for(const h of r43Handoffs){
+    for(const code of h.pendingCodes){
+      const prior=seenHandoffCodes.get(code);
+      if(prior&&prior!==h.key)throw integrationError('R43_R33_HANDOFF_OVERLAP',
+        'Código '+code+' pertenece a más de una wave R4.3 activa.',503);
+      seenHandoffCodes.set(code,h.key);
+    }
+  }
+  const activeHandoffCodes=new Set(seenHandoffCodes.keys());
   const reservedCodes=[...new Set([...(snapshot.bufferedReservations||[])
-    .filter(r=>!r?.snapshotFarm?.r33Handoff||r.snapshotFarm.r33Handoff.status!=='active')
     .flatMap(r=>r.allocation.units.map(u=>u.code)),...recoveryCodes]
-    .filter(code=>poolCodes.has(code)&&!handoffSet.has(code)))];
-  const r43Handoff=handoffKeys.length?{
-    key:handoffKeys[0],
-    waveIssueNumber:Number(handoffReservations[0].snapshotFarm.r33Handoff.waveIssueNumber),
-    waveId:String(handoffReservations[0].snapshotFarm.r33Handoff.waveId),
-    waveHash:String(handoffReservations[0].snapshotFarm.r33Handoff.waveHash),
-    reconciliationHash:String(handoffReservations[0].snapshotFarm.r33Handoff.reconciliationHash),
-    pendingCodes:[...handoffCodes]
-  }:null;
-  return {...snapshot,ledger,batches,reservedCodes,handoffCodes,r43Handoff};
+    .filter(code=>poolCodes.has(code)&&!activeHandoffCodes.has(code)))];
+
+  // Backward-compatible singular fields remain populated only when exactly one
+  // active handoff exists. Multi-wave scheduling uses r43Handoffs explicitly.
+  const r43Handoff=r43Handoffs.length===1?structuredClone(r43Handoffs[0]):null;
+  const handoffCodes=r43Handoffs.length===1?[...r43Handoffs[0].pendingCodes]:[];
+  return {...snapshot,ledger,batches,reservedCodes,handoffCodes,r43Handoff,r43Handoffs};
+}
+function r33HandoffSnapshots(snapshot){
+  const waves=Array.isArray(snapshot?.r43Handoffs)?snapshot.r43Handoffs:[];
+  if(!waves.length)return [];
+  return waves.map(h=>({
+    ...snapshot,
+    r43Handoff:structuredClone(h),
+    handoffCodes:[...h.pendingCodes]
+  }));
 }
 function r33CandidateToWork(candidate,now=Date.now()){
   if(!candidate?.eligible)return null;
@@ -429,7 +455,37 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
     const configuredLimit=Number(execution.parallelWorkerLimit??queueTarget);
     const parallelLimit=Number.isInteger(configuredLimit)&&configuredLimit>0?Math.min(queueTarget,configuredLimit):queueTarget;
     const available=Math.max(0,parallelLimit-activeR33);
-    const candidates=available>0?r33Provider.materializeCandidates(snapshot,{now,count:available}):[];
+    const candidates=[];
+    if(available>0){
+      const handoffSnapshots=r33HandoffSnapshots(snapshot);
+      if(handoffSnapshots.length){
+        // Round-robin across active handoff waves so one large wave cannot
+        // monopolize every ready slot while newer waves wait behind it.
+        const scoped=handoffSnapshots.map(x=>({...x,batches:(x.batches||[]).map(b=>structuredClone(b))}));
+        let progressed=true;
+        while(candidates.length<available&&progressed){
+          progressed=false;
+          for(const view of scoped){
+            if(candidates.length>=available)break;
+            const candidate=r33Provider.materializeCandidate(view,{now,requested:5});
+            if(!candidate.eligible)continue;
+            candidates.push(candidate);progressed=true;
+            const acknowledgedAt=new Date(now).toISOString();
+            view.batches.push({
+              poolId:candidate.poolId,
+              batchId:'GLOBAL-MULTIWAVE-'+String(candidates.length).padStart(3,'0'),
+              status:'leased',
+              acknowledgedAt,
+              ackDeadlineAt:new Date(Number(now)+60*60*1000).toISOString(),
+              expiresAt:new Date(Number(now)+60*60*1000).toISOString(),
+              entries:candidate.units.map(unit=>({code:unit.code}))
+            });
+          }
+        }
+      }else{
+        candidates.push(...r33Provider.materializeCandidates(snapshot,{now,count:available}));
+      }
+    }
     for(const candidate of candidates){
       const item=r33CandidateToWork(candidate,now);
       if(item)items.push(globalCore.normalizeWorkItem(item));
@@ -452,7 +508,7 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 
 module.exports={
   DYNAMIC_PROVIDERS,READY_QUEUE_TARGET,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
-  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33CandidateToWork,r33TerminalSourceMap,r33StagingManifest,r33IntegratedCodes,r33ContinuationPool,
+  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33HandoffSnapshots,r33CandidateToWork,r33TerminalSourceMap,r33StagingManifest,r33IntegratedCodes,r33ContinuationPool,
   r33IntegrationWaves,r33IndexPreparationWorkId,r33IndexPreparationWorks,r33PreparedIndexIntegrationWork,r33IndexIntegrationWork,
   recoveryItems,materializeProviderItems,extendRegistry
 };
