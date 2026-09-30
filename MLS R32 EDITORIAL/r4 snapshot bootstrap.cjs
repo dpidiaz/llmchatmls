@@ -88,7 +88,8 @@ function plan(projectedR33Snapshot,{
   writeBudget:{
    bootstrapReservationCreates:expectedReservationCount,
    bootstrapReservationPatches:expectedReservationCount,
-   waveControlCreates:1,
+   waveControlInitialCreates:1,
+   waveControlFinalizePatches:1,
    workerAdmissionCreates:route==='remote'?workerCount:0,
    workerResultPatches:route==='remote'?workerCount:0,
    waveTransitionPatches:route==='remote'?2:0,
