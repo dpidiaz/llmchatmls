@@ -85,7 +85,7 @@ function sortedCommands(issues,action){
 }
 async function finishRequest(api,issue,status,response){
  await api.patch('/issues/'+issue.number,{title:'[MLS Dispatcher][BCR]['+status+'] '+issue.number,
-  body:'## MLS R4.2 — '+status+'\n\n'+JSON.stringify(response,null,2)+'\n',state:'closed',state_reason:status==='REJECTED'||status==='STALE'?'not_planned':'completed'});
+  body:'## MLS R4.2 — '+status+'\n\n'+JSON.stringify(elastic.completionResponse(status,response),null,2)+'\n',state:'closed',state_reason:status==='REJECTED'||status==='STALE'?'not_planned':'completed'});
 }
 async function createReservation(api,root,issues,globalLedger,activeStates,now){
  const ref=await api.get('/git/ref/heads/main'),main=ref?.object?.sha;
@@ -424,6 +424,8 @@ async function drain({api,root,issues,globalLedger,activeStates,now=Date.now(),t
       requestId:'bcr-renew-'+issue.number+'-nonce',claimIssueNumber:issue.number,
       reservationIssueNumber:res.issueNumber,block:block.block}),
     '-->',
+    '6. MULTI-PULL EN ESTE MISMO CHAT: después de verificar que COMPLETE cerró como COMPLETED y este claim quedó DONE, si todavía tenés margen real para otro bloque, abrí vos mismo un NUEVO Issue [MLS Dispatcher][BCR][REQUEST] con action next y requestId distinto, esperá LEASED y repetí 1–6 SIN pedir otra orden al usuario. Nunca anticipés NEXT, ni retengás dos leases.',
+    'Si el chat se acerca a su límite, hay CAPACITY_BUSY, STALE o cooldown, no pidas otro bloque: conservá los checkpoints. El Dispatcher no lanza otros chats ni trabaja en segundo plano.',
     'El Dispatcher certifica únicamente estructura/identidad del bloque; el Gate académico R33 de 25/25 sigue separado.',
     'Sin Work, OpenAI API, APIs pagadas, SYNC, main, sellado prematuro ni Cloudflare.'
    ].join('\n')+'\n\n';

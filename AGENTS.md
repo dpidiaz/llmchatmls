@@ -3,10 +3,21 @@
 ## MLS BCR universal command (R4.2)
 
 For `MLS BCR siguiente`, read `docs/MLS Global Dispatcher/19 Comando universal BCR.md`.
-This is the sole user-facing BCR command. Create one authenticated NEXT request;
-recover the authoritative receipt and perform the assigned production or repair
-in the current disposable chat. Renew and complete internally using the documented
-envelopes. Never send the user back to the original conversation. Actions performs
+This is the sole user-facing BCR command and enables SAME-CHAT CONTINUOUS MULTI-PULL.
+Create one authenticated NEXT request; recover the authoritative receipt and
+perform the assigned production or repair in the current disposable chat. Renew
+and complete internally using the documented envelopes. When COMPLETE is confirmed
+COMPLETED (or idempotently confirmed DONE), if THIS SAME CHAT is still executing and
+has enough remaining capacity to own another complete work unit, immediately
+create a fresh OWNER-authored NEXT with a NEW requestId. Re-read the independent
+lease, process it, renew as needed, COMPLETE and repeat without requiring the user
+to type the command again. Never open the NEXT before the previous claim is
+confirmed DONE. Never prefetch or hold two active leases for one chat. On
+CAPACITY_BUSY, STALE, NO_WORK, cooldown, insufficient execution budget or
+uncertain completion, stop creating NEXT; preserve any committed checkpoints,
+explain the last confirmed state, and let the Dispatcher recover outstanding work.
+This is an IN-CHAT loop only, NEVER autonomous background execution, never bot-
+minted work or another conversation. Never send the user back to the original conversation. Actions performs
 deterministic Gate, seal and sync; academic source-to-claim review requires an
 actual AI chat consultation, never an invented PASS. Up to 50 exclusive
 BCR chat leases plus one serialized Actions dispatcher, five-minute fenced epochs,

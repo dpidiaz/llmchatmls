@@ -59,6 +59,21 @@ function makeChunk(f,n){
   policy:{complete:false,sealAllowed:false}};
  return {...unsigned,chunkHash:base.hash(unsigned)};
 }
+test('completion receipt authorizes fresh NEXT only for an active chat after confirmed DONE',()=>{
+ const original={ok:true,verified:{commitSha:PIN}};
+ const done=elastic.completionResponse('COMPLETED',original);
+ assert.equal(done.continuation.kind,'mls_bcr_same_chat_continuation');
+ assert.equal(done.continuation.action,'next');
+ assert.equal(done.continuation.onlyIfChatStillActive,true);
+ assert.equal(done.continuation.requiresPreviousDone,true);
+ assert.equal(done.continuation.requiresFreshRequestId,true);
+ assert.equal(done.continuation.oneActiveLeasePerChat,true);
+ assert.equal(done.continuation.dispatcherCreatesNextRequest,false);
+ assert.equal(done.continuation.backgroundExecution,false);
+ assert.equal(elastic.completionResponse('REJECTED',original),original);
+ assert.equal(elastic.completionResponse('RENEWED',original),original);
+ assert.equal(elastic.completionResponse('CAPACITY_BUSY',original),original);
+});
 test('preblock creates an independently validated zero-checkpoint Context Pack for any canonical allocation',()=>{
  const f=fixture(1881),s=elastic.preblock(f,bcr.RECIPE,PIN);
  assert.equal(s.files.length,8);
@@ -249,6 +264,8 @@ test('serialized R4.2 worker issue request creates one exclusive branch and pers
  assert.equal(refs[branch],master);
  assert.equal(alloc.parseReservation(reservationIssue).elastic.blocks[0].claimIssueNumber,1882);
  assert.match(requestIssue.title,/\[LEASED\]/);
+ assert.match(requestIssue.body,/MULTI-PULL EN ESTE MISMO CHAT/);
+ assert.match(requestIssue.body,/requestId distinto/);
  assert.equal(calls.filter(x=>x.method==='POST').length,1);
  assert.equal(calls.filter(x=>x.method==='PATCH').length,3); // preblock adoption, claim reservation and lease issue
 });
