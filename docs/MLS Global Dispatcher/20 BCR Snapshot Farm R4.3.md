@@ -198,3 +198,41 @@ As of the first R4.3 branch changes:
 
 This document is the authoritative roadmap for the R4.3 implementation branch
 until activation is explicitly merged to main.
+
+
+## GitHub operation budget
+
+R4.3 does not promise literally zero GitHub operations for an entire campaign.
+It removes GitHub from the **worker hot path**.
+
+For a 20-worker x 5-entry pilot (100 entries):
+
+- 4 durable 25-entry reservations at wave start;
+- snapshot/wave publication or equivalent frozen boundary;
+- **0 REQUEST / LEASE / RENEW / COMPLETE GitHub transactions per worker**;
+- grouped synchronization only after complete reconciliation and R33 gates.
+
+For a 100-worker x 5-entry wave (500 entries):
+
+- 20 durable 25-entry reservations at wave start;
+- 0 per-worker GitHub lease lifecycle operations during production;
+- one logical grouped synchronization stage, which may require multiple bounded Git
+  object writes but remains serialized.
+
+The reservation count is an initialization cost, not a per-worker heartbeat cost.
+
+## CAS allocator boundary
+
+The allocator state machine is storage-agnostic and uses a monotonically increasing
+`revision`. The intended ChatGPT-only adapter is a versioned Library file:
+
+1. read allocator file and its Library `current_version_number`;
+2. compute `claimNext` using the matching internal revision;
+3. replace the allocator file only with `expected_current_version` equal to the
+   version that was read;
+4. if replacement conflicts, discard the speculative claim, reread, and retry;
+5. after a delta is durably persisted, perform the same CAS cycle for `complete`.
+
+This prevents two simultaneous chats from both committing the same allocator state.
+Until a real multi-chat Library pilot proves these semantics end-to-end, the
+allocator remains an implementation candidate, not an activated guarantee.
