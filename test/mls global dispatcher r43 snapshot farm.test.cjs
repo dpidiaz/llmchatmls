@@ -16,6 +16,7 @@ const remoteResult=require('../MLS R32 EDITORIAL/r4 snapshot remote result.cjs')
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
 const remoteScheduler=require('../MLS R32 EDITORIAL/r4 snapshot remote scheduler.cjs');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
+const elasticR42=require('../MLS R32 EDITORIAL/r4 elastic core.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -782,4 +783,29 @@ test('pilot scheduler workflow is serialized, issue-scoped and minimally permiss
  assert.match(source,/MLS_BCR_R43_REQUEST/);
  assert.match(source,/MLS_BCR_R43_RESULT/);
  assert.doesNotMatch(source,/pull-requests: write|contents: write|actions: write/);
+});
+
+
+test('R4.2 cannot lease or synthesize blocks from R4.3 ownership-only reservations',()=>{
+ const source=r33Snapshot(50);
+ const tagged=reservations.compose(source,{
+  reservationIssueNumbers:[11001],
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T03:34:00.000Z'),
+  waveId:'BCR-R43-OWNERSHIP-FENCE',workerCount:5,shardSize:5,
+  createdAt:'2026-09-30T03:34:00.000Z'
+ }).reservations[0];
+ assert.equal(tagged.snapshotFarm.schema,reservations.RESERVATION_SCHEMA);
+ assert.equal(tagged.snapshotFarm.ownershipOnly,true);
+ assert.deepEqual(elasticR42.blocks(tagged),[]);
+ assert.equal(elasticR42.freeBlock([tagged],Date.parse('2026-09-30T03:35:00.000Z')),null);
+
+ const normal=buffered.allocate(source,{
+  size:25,issueNumber:11002,requestId:'normal-r42-reservation',
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T03:34:01.000Z')
+ });
+ const chosen=elasticR42.freeBlock([tagged,normal],Date.parse('2026-09-30T03:35:00.000Z'));
+ assert.equal(chosen.reservation.issueNumber,11002);
+ assert.equal(chosen.block.block,1);
 });
