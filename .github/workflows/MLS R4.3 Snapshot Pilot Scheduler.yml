@@ -1,0 +1,31 @@
+name: MLS R4.3 Snapshot Pilot Scheduler
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: mls-r43-snapshot-pilot
+  cancel-in-progress: false
+
+jobs:
+  scheduler:
+    if: >-
+      contains(github.event.issue.body || '', 'MLS_BCR_R43_REQUEST') ||
+      contains(github.event.issue.body || '', 'MLS_BCR_R43_RESULT')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Reconcile R4.3 pilot wave
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node 'scripts/MLS R4.3 Snapshot Pilot Scheduler.cjs'
