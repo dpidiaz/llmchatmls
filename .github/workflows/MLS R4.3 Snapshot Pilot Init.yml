@@ -1,4 +1,4 @@
-name: MLS R4.3 Snapshot Pilot Init
+name: MLS R4.3 Snapshot Pilot Init (Deprecated)
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   init:
-    if: ${{ inputs.confirm == 'PILOT20' }}
+    if: ${{ false && inputs.confirm == 'PILOT20' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: 24
 
-      - name: Initialize R4.3 20x5 snapshot pilot
+      - name: Deprecated initializer (blocked; use Snapshot Pilot Bootstrap)
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MLS_R43_WAVE_ID: ${{ inputs.wave_id }}
