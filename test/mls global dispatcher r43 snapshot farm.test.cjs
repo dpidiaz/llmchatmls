@@ -8,6 +8,7 @@ const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
 const store=require('../MLS R32 EDITORIAL/r4 snapshot local store.cjs');
 const allocator=require('../MLS R32 EDITORIAL/r4 chat allocator.cjs');
 const sync=require('../MLS R32 EDITORIAL/r4 snapshot sync.cjs');
+const reservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
 
 const BASE='a'.repeat(40),CONTENT='b'.repeat(40);
 function units(n=500,start=753){
@@ -28,6 +29,26 @@ function snapshot(n=500){
   units:units(n),
   createdAt:'2026-09-30T02:00:00.000Z'
  });
+}
+function r33Snapshot(n=500,start=753){
+ const entries=units(n,start).map((u,i)=>({
+  code:u.code,language:u.language,contentPath:u.contentPath,order:i+1
+ }));
+ return {
+  pool:{
+   poolId:'MLS-R33-FULL-CORPUS-CONTINUATION',
+   manifestVersion:'1.0',
+   status:'authorized',active:true,sourceOfTruth:'github',
+   cloudflareEditorialAllowed:false,d1EditorialAllowed:false,
+   execution:{defaultClaimSize:5,maxClaimSize:10},
+   entries
+  },
+  ledger:{
+   poolId:'MLS-R33-FULL-CORPUS-CONTINUATION',
+   manifestVersion:'1.0',verified:[],exceptions:[]
+  },
+  batches:[],reservedCodes:[]
+ };
 }
 function payload(wave,shardId){
  const shard=wave.shards.find(x=>x.shardId===shardId);
@@ -360,4 +381,45 @@ test('grouped sync refuses partial waves even when changed paths are clean',()=>
  assert.throws(()=>sync.buildGroupedSync(wave,[delta],{
   changedPaths:[],currentHead:'c'.repeat(40)
  }),{code:'R43_SYNC_WAVE_INCOMPLETE'});
+});
+
+
+test('pilot 20x5 composes four existing 25-entry durable reservations with no overlap',()=>{
+ const source=r33Snapshot(150);
+ const issueNumbers=[3001,3002,3003,3004];
+ const out=reservations.compose(source,{
+  reservationIssueNumbers:issueNumbers,
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T02:39:00.000Z'),
+  waveId:'BCR-R43-PILOT-20-REAL',
+  workerCount:20,shardSize:5,
+  createdAt:'2026-09-30T02:39:00.000Z'
+ });
+ assert.deepEqual(out.sizes,[25,25,25,25]);
+ assert.equal(out.reservations.length,4);
+ assert.equal(out.protectedCodes.length,100);
+ assert.equal(new Set(out.protectedCodes).size,100);
+ assert.equal(out.wave.workerCount,20);
+ assert.equal(out.wave.totalUnits,100);
+ assert.equal(out.snapshot.units.length,100);
+ assert.deepEqual(out.reservations.map(x=>x.issueNumber),issueNumbers);
+});
+
+test('100-worker wave composes twenty 25-entry durable reservations and preserves uniqueness',()=>{
+ const source=r33Snapshot(550);
+ const issueNumbers=Array.from({length:20},(_,i)=>4001+i);
+ const out=reservations.compose(source,{
+  reservationIssueNumbers:issueNumbers,
+  baseCommit:BASE,contentManifestBlobSha:CONTENT,
+  now:Date.parse('2026-09-30T02:40:00.000Z'),
+  waveId:'BCR-R43-WAVE-100',
+  workerCount:100,shardSize:5,
+  createdAt:'2026-09-30T02:40:00.000Z'
+ });
+ assert.equal(out.sizes.length,20);
+ assert.ok(out.sizes.every(x=>x===25));
+ assert.equal(out.protectedCodes.length,500);
+ assert.equal(new Set(out.protectedCodes).size,500);
+ assert.equal(out.wave.shards.length,100);
+ assert.equal(out.wave.totalUnits,500);
 });
