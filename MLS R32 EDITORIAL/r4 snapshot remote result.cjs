@@ -27,12 +27,13 @@ function marker(text,key){
 }
 function renderMarker(key,value){return '<!-- '+key+'\n'+JSON.stringify(value)+'\n-->';}
 
-function encodeDelta(wave,delta){
+function encodeDelta(wave,delta,{waveIssueNumber}={}){
  farm.validateDelta(wave,delta);
+ assert(Number.isSafeInteger(waveIssueNumber)&&waveIssueNumber>0,'R43_REMOTE_WAVE_ISSUE');
  const raw=Buffer.from(JSON.stringify(delta),'utf8');
  const compressed=zlib.deflateRawSync(raw,{level:9});
  const unsigned={
-  schema:RESULT_SCHEMA,version:1,waveId:wave.waveId,waveHash:wave.waveHash,
+  schema:RESULT_SCHEMA,version:1,waveIssueNumber,waveId:wave.waveId,waveHash:wave.waveHash,
   shardId:delta.shardId,deltaHash:delta.deltaHash,
   encoding:'deflate-raw-base64',rawBytes:raw.length,
   compressedBytes:compressed.length,data:compressed.toString('base64')
@@ -54,6 +55,7 @@ function decodeResult(issue,wave,admission){
  const unsigned={...r};delete unsigned.resultHash;
  assert(r.resultHash===hash(unsigned),'R43_REMOTE_RESULT_HASH');
  assert(r.waveId===wave.waveId&&r.waveHash===wave.waveHash,'R43_REMOTE_RESULT_WAVE');
+ assert(r.waveIssueNumber===admission.assignments[0]?.waveIssueNumber || Number.isSafeInteger(r.waveIssueNumber),'R43_REMOTE_RESULT_WAVE_ISSUE');
  assert(r.encoding==='deflate-raw-base64','R43_REMOTE_RESULT_ENCODING');
  const assigned=admission.assignments.find(x=>x.issueNumber===Number(issue.number));
  assert(assigned&&assigned.shardId===r.shardId,'R43_REMOTE_RESULT_NOT_OWNER');
