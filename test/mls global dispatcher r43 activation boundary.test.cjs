@@ -9,7 +9,7 @@ const scheduler=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot
 
 test('R4.3 bootstrap activation remains explicit and has no automatic push/schedule trigger',()=>{
  const boot=fs.readFileSync(bootstrap,'utf8');
- const onBlock=boot.slice(boot.indexOf('on:'),boot.indexOf('github\.event_name == 'issues' && format\('BCR-R43-WAVE-50X5-\{0\}', github\.event\.issue\.number\) \|\| inputs\.wave_idnpermissions:'));
+ const onBlock=boot.slice(boot.indexOf('on:'),boot.indexOf('\npermissions:'));
  assert.match(onBlock,/workflow_dispatch:/);
  assert.match(onBlock,/default: plan/);
  assert.match(onBlock,/issues:\s*\n\s*types: \[opened\]/);
@@ -29,7 +29,7 @@ test('Issue-triggered bootstrap is fixed to the authorized 50x5 apply command',(
  assert.match(boot,/MLS_R43_BOOTSTRAP_APPLY_V2/);
  assert.match(boot,/APPLY_R43_WAVE_50X5/);
  assert.match(boot,/github\.event_name == 'issues' && 'apply' \|\| inputs\.mode/);
- assert.match(boot,/github\.event_name == 'issues' && 'BCR-R43-PILOT-20X5' \|\| inputs\.wave_id/);
+ assert.match(boot,/format\('BCR-R43-WAVE-50X5-\{0\}', github\.event\.issue\.number\)/);
  assert.match(boot,/github\.event_name == 'issues' && '50' \|\| inputs\.worker_count/);
  assert.match(boot,/github\.event_name == 'issues' && 'APPLY_R43_WAVE_50X5' \|\| inputs\.confirm/);
 });
