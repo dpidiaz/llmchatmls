@@ -148,25 +148,15 @@ function baseState(live,state){
   guide:'docs/MLS Global Dispatcher/22 R4.3 Worker Command.md'
  };
 }
-function takeoverDecision(base,state,{takeoverId=null,takeoverIssueNumber=null,now}={}){
- const {wave,admission,completed,winners}=state;
- if(!takeoverId){
-  const available=state.recoverable[0]||(
-   admission.assignments.length===wave.workerCount
-    ?admission.assignments.find(row=>!completed.has(row.shardId)&&!winners.has(row.shardId))
-    :null
-  );
-  if(!available)return null;
-  return {
-   ...base,action:'create_takeover',
-   targetShardId:available.shardId,
-   targetRequestIssueNumber:Number(available.issueNumber),
-   takeoverTtlMs:takeover.DEFAULT_TTL_MS
-  };
- }
- assert(/^[A-Za-z0-9._:-]{8,160}$/.test(takeoverId),'R43_COMMAND_TAKEOVER_ID');
- const claimRow=takeover.rowForId([],wave,admission,takeoverId);
- return claimRow;
+function takeoverDecision(base,state){
+ const available=state.recoverable[0]||null;
+ if(!available)return null;
+ return {
+  ...base,action:'create_takeover',
+  targetShardId:available.shardId,
+  targetRequestIssueNumber:Number(available.issueNumber),
+  takeoverTtlMs:takeover.DEFAULT_TTL_MS
+ };
 }
 function route(issues,{
  requestId=null,requestIssueNumber=null,
@@ -188,7 +178,7 @@ function route(issues,{
  const base=baseState(live,state);
 
  if(!requestId&&!takeoverId){
-  const recovery=takeoverDecision(base,state,{now});
+  const recovery=takeoverDecision(base,state);
   if(recovery)return recovery;
   if(live.record.status==='collecting'&&admission.assignments.length<wave.workerCount)
    return {...base,action:'create_request'};
@@ -206,7 +196,7 @@ function route(issues,{
   assert(/^[A-Za-z0-9._:-]{8,160}$/.test(takeoverId),'R43_COMMAND_TAKEOVER_ID');
   const claimRow=takeover.rowForId(issues,wave,admission,takeoverId);
   if(!claimRow){
-   const recovery=takeoverDecision(base,state,{now});
+   const recovery=takeoverDecision(base,state);
    if(recovery)return {...recovery,takeoverId};
    return {...base,action:'takeover_capacity_full',takeoverId};
   }
