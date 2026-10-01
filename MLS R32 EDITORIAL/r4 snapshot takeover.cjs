@@ -29,7 +29,7 @@ function create(wave,admission,{
  waveIssueNumber,takeoverId,targetShardId,targetRequestIssueNumber,
  claimedAt,ttlMs=DEFAULT_TTL_MS
 }={}){
- admissionCore.validateAdmission(admission,wave);
+ admissionCore.validateAdmission(admission,wave,{allowPartial:admission?.assignments?.length<wave.workerCount});
  assert(Number.isSafeInteger(waveIssueNumber)&&waveIssueNumber===admission.waveIssueNumber,
   'R43_TAKEOVER_WAVE_ISSUE');
  assert(/^[A-Za-z0-9._:-]{8,160}$/.test(String(takeoverId||'')),'R43_TAKEOVER_ID');
