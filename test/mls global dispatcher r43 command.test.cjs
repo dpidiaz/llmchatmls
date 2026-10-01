@@ -424,3 +424,39 @@ test('sealed status reports admission and durable-result counts separately',()=>
  assert.deepEqual(two.missingShardIds,[]);
  assert.equal(two.action,'await_reconciliation');
 });
+
+
+test('emergencyAudit yields five corpus codes with zero GitHub-write requirement',()=>{
+ const a=command.emergencyAudit('chat-emergency-test-0001');
+ const b=command.emergencyAudit('chat-emergency-test-0001');
+ assert.equal(a.action,'emergency_audit');
+ assert.equal(a.codes.length,5);
+ assert.deepEqual(a.codes,b.codes);
+ assert.equal(a.emergencyTaskId,b.emergencyTaskId);
+ assert.equal(a.policy.githubWritesRequired,false);
+ assert.equal(a.policy.readOnlyAudit,true);
+ for(const code of a.codes)assert.match(code,/^MLS-V\d{2}-\d{4}$/);
+});
+
+test('routeOrEmergency converts idle control-plane outcomes instead of returning no work',()=>{
+ const noWave=command.routeOrEmergency([],{
+  emergencyId:'chat-emergency-nowave-0001',
+  now:'2026-10-01T04:20:00.000Z'
+ });
+ assert.equal(noWave.action,'emergency_audit');
+ assert.equal(noWave.primaryAction,'no_active_r43_wave');
+ assert.equal(noWave.codes.length,5);
+ assert.equal(noWave.policy.githubWritesRequired,false);
+
+ const f=fixture();
+ const a=requestIssue(f,12010,'chat-emergency-capacity-0001');
+ const b=requestIssue(f,12011,'chat-emergency-capacity-0002','2026-09-30T07:02:01.000Z');
+ const sealed=seal(f,[a,b]);
+ const full=command.routeOrEmergency(sealed.issues,{
+  emergencyId:'chat-emergency-capacity-0003',
+  now:'2026-09-30T07:04:00.000Z'
+ });
+ assert.equal(full.action,'emergency_audit');
+ assert.equal(full.primaryAction,'takeover_capacity_full');
+ assert.equal(full.codes.length,5);
+});
