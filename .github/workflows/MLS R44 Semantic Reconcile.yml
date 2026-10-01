@@ -1,0 +1,110 @@
+name: MLS R44 Semantic Reconcile
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/MLS R44 Semantic Reconcile.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mls-r44-semantic-reconcile
+  cancel-in-progress: false
+
+jobs:
+  reconcile-spanish-semantic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate canonical corpus before semantic work
+        run: node 'scripts/validar corpus canonico.js'
+      - name: Regenerate only espanol-guatemala and reconcile unchanged languages
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+          const crypto = require('node:crypto');
+          const {
+            LANGUAGES
+          } = require('./scripts/exportar corpus canonico.js');
+          const {
+            discoverAccountId,
+            generateLanguage,
+            buildManifest
+          } = require('./scripts/generar indice semantico.js');
+
+          const sha = value => crypto.createHash('sha256').update(value).digest('hex');
+          const buildId = sha(fs.readFileSync('content/manifest.json'));
+          const token = process.env.CLOUDFLARE_API_TOKEN;
+          if (!token) throw new Error('Falta CLOUDFLARE_API_TOKEN.');
+
+          (async () => {
+            const accountId = await discoverAccountId(token);
+            const spanish = LANGUAGES.find(x => x.slug === 'espanol-guatemala');
+            if (!spanish) throw new Error('Idioma espanol-guatemala no encontrado.');
+
+            const regenerated = await generateLanguage(spanish, {
+              token,
+              accountId,
+              force: true
+            });
+            console.log('R44_SPANISH_REGENERATED', JSON.stringify(regenerated));
+
+            for (const language of LANGUAGES) {
+              if (language.slug === 'espanol-guatemala') continue;
+              const metaPath = 'semantic/' + language.slug + '.json';
+              const binPath = 'semantic/' + language.slug + '.bin';
+              const meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
+              const binary = fs.readFileSync(binPath);
+              if (meta.binarySha256 !== sha(binary)) {
+                throw new Error(language.slug + ': binary hash inválido; no se tocará provenance.');
+              }
+              meta.corpusBuildId = buildId;
+              fs.writeFileSync(metaPath, JSON.stringify(meta) + '\n', 'utf8');
+            }
+
+            const manifest = buildManifest();
+            if (!manifest || manifest.corpusBuildId !== buildId || manifest.totalEntries !== 10133) {
+              throw new Error('Manifest semántico reconciliado inválido.');
+            }
+            console.log('R44_SEMANTIC_RECONCILED', JSON.stringify({
+              corpusBuildId: manifest.corpusBuildId,
+              totalEntries: manifest.totalEntries,
+              totalChunks: manifest.totalChunks
+            }));
+          })().catch(error => {
+            console.error(error);
+            process.exitCode = 1;
+          });
+          NODE
+      - name: Validate reconciled semantic source
+        run: |
+          node 'scripts/publicar indice semantico.js'
+          npm run test:canonical-tools
+      - name: Commit reconciled semantic artifacts once
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add semantic
+          if git diff --cached --quiet; then
+            echo 'No semantic changes to commit.'
+            exit 0
+          fi
+          git commit -m 'r44: reconcile semantic index after canonical repairs'
+          git push origin HEAD:main
