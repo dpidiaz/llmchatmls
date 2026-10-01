@@ -15,13 +15,19 @@ const files={
  buffered:workflow('R4.1 Buffered Sync.yml')
 };
 
-test('all shared writers keep the real mutex and route ignored Issue runs to unique skip groups',()=>{
+test('all shared writers keep the real mutex; only Issue-routed fallbacks need skip groups',()=>{
  for(const [name,text] of Object.entries(files)){
-  assert.match(text,/['"]mls-global-dispatcher['"]/,
+  assert.match(text,/mls-global-dispatcher/,
    name+' must still select the repository-wide writer mutex');
-  assert.match(text,/format\('mls-global-dispatcher-skip-\{0\}', github\.run_id\)/,
-   name+' must isolate ignored Issue runs');
   assert.match(text,/cancel-in-progress: false/);
+ }
+ for(const name of ['bootstrap','buffered']){
+  assert.match(files[name],/format\('mls-global-dispatcher-skip-\{0\}', github\.run_id\)/,
+   name+' must isolate ignored Issue runs');
+ }
+ for(const name of ['dispatcher','r43']){
+  assert.doesNotMatch(files[name],/mls-global-dispatcher-skip-\{0\}/);
+  assert.match(files[name],/workflow_dispatch:/);
  }
 });
 
@@ -35,11 +41,10 @@ test('bootstrap command owns the writer mutex only for the fixed authorized 50x5
  assert.match(text,/COLLABORATOR/);
 });
 
-test('other shared workflows route by their own protocol markers instead of every Issue event',()=>{
- assert.match(files.dispatcher,/startsWith\(github\.event\.issue\.title, '\[MLS Dispatcher\]'/);
- assert.match(files.dispatcher,/\[MLS Buffered\]\[REQUEST\]/);
- assert.match(files.r43,/MLS_BCR_R43_REQUEST/);
- assert.match(files.r43,/MLS_BCR_R43_RESULT/);
+test('automatic Issue routing remains only on explicit legacy Issue fallbacks',()=>{
+ assert.doesNotMatch(files.dispatcher,/github\.event\.issue/);
+ assert.doesNotMatch(files.r43,/github\.event\.issue/);
+ assert.match(files.bootstrap,/\[MLS R4\.3\]\[BOOTSTRAP\]\[APPLY\] 50X5/);
  assert.match(files.buffered,/\[MLS Buffered\]\[SYNC\]/);
 });
 
