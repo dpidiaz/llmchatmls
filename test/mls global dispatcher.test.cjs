@@ -138,7 +138,7 @@ test('legacy dispatcher scheduler is manual-only after R44 while worker events r
   const scheduler=fs.readFileSync('.github/workflows/MLS Global Dispatcher Scheduler.yml','utf8');
   const worker=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
   assert.match(scheduler,/workflow_dispatch:/);
-  assert.match(scheduler,/group: mls-global-dispatcher-legacy-manual/);
+  assert.match(scheduler,/group: mls-global-dispatcher/);
   assert.doesNotMatch(scheduler,/cron:/);
   assert.doesNotMatch(scheduler,/issues:\s*\n\s*types:/);
   assert.match(scheduler,/contents: write/);

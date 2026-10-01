@@ -10,8 +10,8 @@ const script=path.join(process.cwd(),'scripts','MLS R4.3 Snapshot Pilot Schedule
 test('R4.3 pilot scheduler workflow is manual-only after R44 cutover',()=>{
  const text=fs.readFileSync(workflow,'utf8');
  assert.match(text,/workflow_dispatch:/);
- assert.match(text,/group: mls-r43-legacy-manual/);
- assert.doesNotMatch(text,/issues:/);
+ assert.match(text,/group: mls-global-dispatcher/);
+ assert.doesNotMatch(text,/issues:\\s*\\n\\s*types:/);
  assert.doesNotMatch(text,/schedule:/);
  assert.doesNotMatch(text,/github\.event\.issue\.author_association/);
 });

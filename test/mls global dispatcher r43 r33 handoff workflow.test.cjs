@@ -29,7 +29,7 @@ test('R4.3 R33 handoff is generic, reconciled-wave bound and 5-entry shard safe'
  assert.doesNotMatch(script,/waveIssueNumber===2208|APPLY_R43_R33_HANDOFF_2208/);
 });
 
-test('R4.3 scheduler performs automatic handoff in the same serialized workflow',()=>{
+test('R4.3 legacy manual scheduler preserves serialized reconciliation and handoff',()=>{
  assert.match(schedulerFlow,/Reconcile R4\.3 pilot wave/);
  assert.match(schedulerFlow,/Auto-handoff reconciled R4\.3 wave to R33/);
  assert.match(schedulerFlow,/MLS R4\.3 R33 Handoff\.cjs/);
