@@ -20,3 +20,11 @@ test("R44 runtime keeps workers off GitHub writes and results noncanonical", () 
   assert.match(RUNTIME, /AUDITED_DURABLE/);
   assert.match(RUNTIME, /r44_preview_articles/);
 });
+
+
+test("R44 submission persists atomically and supports durable retries", () => {
+  assert.match(RUNTIME, /const priorByLease = await env\.WIKI_DB\.prepare/);
+  assert.match(RUNTIME, /const statements = \[/);
+  assert.match(RUNTIME, /await env\.WIKI_DB\.batch\(statements\)/);
+  assert.match(RUNTIME, /RESULT_ALREADY_SUBMITTED/);
+});
