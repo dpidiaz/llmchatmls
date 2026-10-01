@@ -246,6 +246,31 @@ function r44WorkerPage() {
 async function handleR44(request, env, url) {
   try {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": "*", "access-control-allow-methods": "GET,POST,OPTIONS", "access-control-allow-headers": "content-type" } });
+    if (url.pathname === "/r44-worker" && request.method === "GET" && url.searchParams.get("bridge")) {
+      const bridge = url.searchParams.get("bridge");
+      if (bridge === "claim") {
+        const workerId = r44WorkerId(url.searchParams.get("worker"));
+        const claim = await r44Claim(env, workerId);
+        if (claim.ticket && claim.ticket.entries_json) claim.ticket.entries = JSON.parse(claim.ticket.entries_json);
+        const leaseToken = claim.ticket && claim.ticket.lease_token || "";
+        if (claim.ticket) delete claim.ticket.entries_json;
+        const context = leaseToken ? await r44Context(env, leaseToken) : null;
+        return r44Json({ bridge: "claim", claim, context });
+      }
+      if (bridge === "renew") {
+        const leaseToken = String(url.searchParams.get("lease") || "");
+        const renewed = await r44Renew(env, leaseToken);
+        return renewed ? r44Json({ bridge: "renew", status: "RENEWED", ...renewed }) : r44Json({ bridge: "renew", error: "LEASE_INVALID_OR_EXPIRED" }, 409);
+      }
+      if (bridge === "submit") {
+        const leaseToken = String(url.searchParams.get("lease") || "");
+        let payload;
+        try { payload = JSON.parse(String(url.searchParams.get("payload") || "")); } catch (_) { return r44Json({ bridge: "submit", error: "INVALID_BRIDGE_PAYLOAD" }, 400); }
+        const synthetic = new Request(request.url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ leaseToken, payload }) });
+        return r44Submit(synthetic, env);
+      }
+      return r44Json({ error: "R44_BRIDGE_MODE_INVALID" }, 400);
+    }
     if (url.pathname === "/r44-worker") return new Response(r44WorkerPage(), { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" } });
     if (url.pathname === "/api/r44/status" && request.method === "GET") return r44Json(await r44Status(env));
     if (url.pathname === "/api/r44/claim" && request.method === "POST") {
