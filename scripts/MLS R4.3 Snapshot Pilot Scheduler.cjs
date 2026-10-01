@@ -94,7 +94,8 @@ async function main(){
   waveIssueNumber:waveNumber,status:record.status,
   decision:decision.reason,changed:decision.changed,
   validRequests:decision.validRequests,
-  missing:decision.missing
+  missing:decision.missing,
+  invalid:decision.invalid
  }));
  if(!decision.changed)return;
  // concurrency at workflow level makes this the sole writer. Re-read before patch
