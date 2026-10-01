@@ -87,7 +87,7 @@ test('user-authored spoof wave cannot hijack MLS R43 siguiente or force R4.2',()
  assert.equal(state.action,'no_active_r43_wave');
 });
 
-test('collecting wave routes same command to one R4.3 request and recovers it idempotently',()=>{
+test('collecting wave activates the first request immediately on its shard',()=>{
  const f=fixture();
  const first=command.route(f.issues);
  assert.equal(first.backend,'r43');
@@ -98,8 +98,11 @@ test('collecting wave routes same command to one R4.3 request and recovers it id
  const state=command.route([...f.issues,req],{
   requestId:'chat-command-0001',requestIssueNumber:12010
  });
- assert.equal(state.action,'await_admission');
+ assert.equal(state.action,'produce_shard');
  assert.equal(state.requestIssueNumber,12010);
+ assert.equal(state.assignment.shardId,'W0001');
+ assert.deepEqual(state.workerContext.codes,f.composed.wave.shards[0].codes);
+ assert.ok(state.productionClaimExpiresAt);
 });
 
 test('sealed admission gives exact worker context and fresh chats receive takeover work instead of R4.2',()=>{
@@ -116,8 +119,11 @@ test('sealed admission gives exact worker context and fresh chats receive takeov
  assert.deepEqual(state.workerContext.codes,sealed.composed.wave.shards[0].codes);
  assert.equal(state.workerContext.policy.remoteWritesDuringProduction,false);
 
- const extra=command.route(sealed.issues,{now:'2026-09-30T07:04:00.000Z'});
- assert.equal(extra.backend,'r43');
+ const protectedState=command.route(sealed.issues,{now:'2026-09-30T07:04:00.000Z'});
+ assert.equal(protectedState.backend,'r43');
+ assert.equal(protectedState.action,'takeover_capacity_full');
+
+ const extra=command.route(sealed.issues,{now:'2026-09-30T07:40:00.000Z'});
  assert.equal(extra.action,'create_takeover');
  assert.equal(extra.targetShardId,'W0001');
  assert.equal(extra.targetRequestIssueNumber,12010);
@@ -174,7 +180,7 @@ test('multiple authoritative live waves route deterministically without blocking
  };
  const issues=[a.issues[0],a.control,b.issues[0],b.control,reqIssueA];
 
- const fresh=command.route(issues,{now:'2026-09-30T07:06:00.000Z'});
+ const fresh=command.route(issues,{now:'2026-09-30T07:41:00.000Z'});
  assert.equal(fresh.action,'create_request');
  assert.equal(fresh.waveIssueNumber,12101);
  assert.equal(fresh.waveId,'BCR-R43-MULTI-B');
@@ -182,10 +188,11 @@ test('multiple authoritative live waves route deterministically without blocking
  const affinity=command.route(issues,{
   requestId:'chat-multi-a-0001',
   requestIssueNumber:12110,
-  now:'2026-09-30T07:06:00.000Z'
+  now:'2026-09-30T07:41:00.000Z'
  });
- assert.equal(affinity.action,'await_admission');
+ assert.equal(affinity.action,'produce_shard');
  assert.equal(affinity.waveIssueNumber,12100);
+ assert.equal(affinity.assignment.shardId,'W0001');
 
  const envelope=command.createRequestEnvelope(issues,{
   requestId:'chat-multi-b-0001',
@@ -204,7 +211,7 @@ test('fresh chat takeover can produce an admitted shard and supersedes the lost 
 
  const env=command.createTakeoverEnvelope(sealed.issues,{
   takeoverId:'takeover-fresh-0001',
-  claimedAt:'2026-09-30T07:05:00.000Z'
+  claimedAt:'2026-09-30T07:40:00.000Z'
  });
  assert.equal(env.claim.targetShardId,'W0001');
  assert.equal(env.claim.targetRequestIssueNumber,12010);
@@ -216,7 +223,7 @@ test('fresh chat takeover can produce an admitted shard and supersedes the lost 
 
  const state=command.route(issues,{
   takeoverId:'takeover-fresh-0001',takeoverIssueNumber:12020,
-  now:'2026-09-30T07:06:00.000Z'
+  now:'2026-09-30T07:41:00.000Z'
  });
  assert.equal(state.action,'produce_shard');
  assert.equal(state.shardId,undefined);
@@ -227,7 +234,7 @@ test('fresh chat takeover can produce an admitted shard and supersedes the lost 
 
  const original=command.route(issues,{
   requestId:'chat-command-0001',requestIssueNumber:12010,
-  now:'2026-09-30T07:06:00.000Z'
+  now:'2026-09-30T07:41:00.000Z'
  });
  assert.equal(original.action,'superseded_by_takeover');
  assert.equal(original.takeoverIssueNumber,12020);
@@ -241,10 +248,10 @@ test('simultaneous fresh chats racing for one shard resolve by lower takeover Is
 
  // Both envelopes are created from the same stale view, so both target W0001.
  const ea=command.createTakeoverEnvelope(sealed.issues,{
-  takeoverId:'takeover-race-0001',claimedAt:'2026-09-30T07:05:00.000Z'
+  takeoverId:'takeover-race-0001',claimedAt:'2026-09-30T07:40:00.000Z'
  });
  const eb=command.createTakeoverEnvelope(sealed.issues,{
-  takeoverId:'takeover-race-0002',claimedAt:'2026-09-30T07:05:00.100Z'
+  takeoverId:'takeover-race-0002',claimedAt:'2026-09-30T07:40:00.100Z'
  });
  assert.equal(ea.claim.targetShardId,'W0001');
  assert.equal(eb.claim.targetShardId,'W0001');
@@ -255,18 +262,18 @@ test('simultaneous fresh chats racing for one shard resolve by lower takeover Is
 
  const winner=command.route(issues,{
   takeoverId:'takeover-race-0001',takeoverIssueNumber:12020,
-  now:'2026-09-30T07:06:00.000Z'
+  now:'2026-09-30T07:41:00.000Z'
  });
  const loser=command.route(issues,{
   takeoverId:'takeover-race-0002',takeoverIssueNumber:12021,
-  now:'2026-09-30T07:06:00.000Z'
+  now:'2026-09-30T07:41:00.000Z'
  });
  assert.equal(winner.action,'produce_shard');
  assert.equal(winner.assignment.shardId,'W0001');
  assert.equal(loser.action,'takeover_retry');
  assert.equal(loser.shardId,'W0001');
 
- const next=command.route(issues,{now:'2026-09-30T07:06:00.000Z'});
+ const next=command.route(issues,{now:'2026-09-30T07:41:00.000Z'});
  assert.equal(next.action,'create_takeover');
  assert.equal(next.targetShardId,'W0002');
 });
@@ -277,19 +284,19 @@ test('expired takeover releases the shard for another fresh chat without renew t
  const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
  const sealed=seal(f,[a,b]);
  const env=command.createTakeoverEnvelope(sealed.issues,{
-  takeoverId:'takeover-expire-0001',claimedAt:'2026-09-30T07:05:00.000Z'
+  takeoverId:'takeover-expire-0001',claimedAt:'2026-09-30T07:40:00.000Z'
  });
  const claimIssue={number:12020,state:'open',author_association:'OWNER',user:{login:'owner'},title:env.title,body:env.body};
  const issues=[...sealed.issues,claimIssue];
 
  const expired=command.route(issues,{
   takeoverId:'takeover-expire-0001',takeoverIssueNumber:12020,
-  now:'2026-09-30T07:36:00.000Z'
+  now:'2026-09-30T08:11:00.000Z'
  });
  assert.equal(expired.action,'takeover_expired');
  assert.equal(expired.shardId,'W0001');
 
- const recovered=command.route(issues,{now:'2026-09-30T07:36:00.000Z'});
+ const recovered=command.route(issues,{now:'2026-09-30T08:11:00.000Z'});
  assert.equal(recovered.action,'create_takeover');
  assert.equal(recovered.targetShardId,'W0001');
 });
@@ -300,7 +307,7 @@ test('fresh-chat takeover publishes its result to the original admitted request 
  const b=requestIssue(f,12011,'chat-command-0002','2026-09-30T07:02:01.000Z');
  const sealed=seal(f,[a,b]);
  const env=command.createTakeoverEnvelope(sealed.issues,{
-  takeoverId:'takeover-result-0001',claimedAt:'2026-09-30T07:05:00.000Z'
+  takeoverId:'takeover-result-0001',claimedAt:'2026-09-30T07:40:00.000Z'
  });
  const claimIssue={number:12020,state:'open',author_association:'OWNER',user:{login:'owner'},title:env.title,body:env.body};
  const issues=[...sealed.issues,claimIssue];
@@ -314,7 +321,9 @@ test('fresh-chat takeover publishes its result to the original admitted request 
   delta,now:'2026-09-30T07:10:00.000Z'
  });
  assert.equal(result.issueNumber,12010);
- assert.equal(result.title,'[MLS BCR R4.3][RESULT] chat-command-0001');
+ assert.equal(result.title,'[MLS BCR R4.3][REQUEST] chat-command-0001');
+ assert.match(result.body,/MLS_BCR_R43_REQUEST/);
+ assert.match(result.body,/MLS_BCR_R43_RESULT/);
 });
 
 
@@ -330,7 +339,11 @@ test('sealed status reports admission and durable-result counts separately',()=>
  assert.equal(zero.admissionCount,2);
  assert.equal(zero.durableResultCount,0);
  assert.deepEqual(zero.missingShardIds,['W0001','W0002']);
- assert.equal(zero.action,'create_takeover');
+ assert.equal(zero.action,'takeover_capacity_full');
+
+ const recoverable=command.route(sealed.issues,{now:'2026-09-30T07:40:00.000Z'});
+ assert.equal(recoverable.action,'create_takeover');
+ assert.equal(recoverable.targetShardId,'W0001');
 
  const d1=farm.createDelta(wave,{
   shardId:'W0001',...payload(wave,'W0001'),completedAt:'2026-09-30T07:05:00.000Z'
@@ -340,7 +353,7 @@ test('sealed status reports admission and durable-result counts separately',()=>
  });
  const i1={...a,title:e1.title,body:e1.body};
  const oneIssues=sealed.issues.map(i=>i.number===12010?i1:i);
- const one=command.route(oneIssues,{now:'2026-09-30T07:06:00.000Z'});
+ const one=command.route(oneIssues,{now:'2026-09-30T07:41:00.000Z'});
  assert.equal(one.admissionCount,2);
  assert.equal(one.durableResultCount,1);
  assert.deepEqual(one.missingShardIds,['W0002']);
