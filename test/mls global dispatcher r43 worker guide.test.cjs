@@ -16,7 +16,7 @@ test('R4.3 command adapter points to an existing durable worker guide',()=>{
 test('R4.3 worker guide preserves every universal-command state and zero-write production rule',()=>{
  const text=fs.readFileSync(guide,'utf8');
  for(const state of [
-  'create_request','await_admission','create_takeover','takeover_retry',
+  'create_request','await_seal','create_takeover','takeover_retry',
   'takeover_expired','superseded_by_takeover','takeover_capacity_full',
   'await_reconciliation','produce_shard','result_already_submitted',
   'request_not_admitted','no_active_r43_wave'
@@ -26,7 +26,11 @@ test('R4.3 worker guide preserves every universal-command state and zero-write p
  assert.match(text,/actualizar \*\*ese mismo request Issue una sola vez\*\*/i);
  assert.match(text,/No buscar ni regresar al chat viejo/i);
  assert.match(text,/TTL por defecto: 30 minutos/);
- assert.match(text,/50\/50.*50 admisiones/i);
+ assert.match(text,/50\/50/i);
+ assert.match(text,/inmediatamente.*siguiente shard FIFO/i);
+ assert.match(text,/no espera.*49 chats/i);
+ assert.match(text,/30 minutos/i);
+ assert.match(text,/no se espera 50\/50 para producir/i);
  assert.match(text,/hasta \*\*50 shards de 5 entradas\*\*/i);
  assert.match(text,/hasta \*\*2 waves no reconciliadas\*\*/i);
  assert.match(text,/afinidad estricta/i);
