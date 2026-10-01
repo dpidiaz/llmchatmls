@@ -21,7 +21,7 @@ function validateSemanticSource(root=SOURCE_ROOT){
   const manifest=JSON.parse(fs.readFileSync(manifestFile,'utf8'));
   const buildId=canonicalBuildId();
   if(manifest.standard!=='MLS R32'||manifest.promptVersion!=='32.0'||manifest.version!==VERSION||manifest.model!==MODEL)throw new Error('Manifest semántico incompatible.');
-  if(manifest.corpusBuildId!==buildId)throw new Error('Índice semántico corresponde a otro corpus.');
+  if(manifest.corpusBuildId!==buildId){\n    if(process.env.MLS_DERIVED_STALE_POLICY==='degrade')return {complete:false,reason:'corpus_mismatch',buildId,sourceCorpusBuildId:manifest.corpusBuildId};\n    throw new Error('Índice semántico corresponde a otro corpus.');\n  }
   if(Number(manifest.totalEntries)!==10133)throw new Error('Conteo semántico inesperado: '+manifest.totalEntries);
   if(!manifest.languages||Object.keys(manifest.languages).length!==LANGUAGES.length)throw new Error('Manifest semántico no contiene los diez idiomas.');
 

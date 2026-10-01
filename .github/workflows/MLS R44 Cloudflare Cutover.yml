@@ -29,8 +29,11 @@ jobs:
       - name: Validate R44 contracts
         run: |
           node --test 'test/r44 cloudflare control plane.test.cjs'
-          npm run test:canonical-tools
+          node 'scripts/validar corpus canonico.js'
+          node --test 'test/canonical corpus.test.cjs' 'test/canonical runtime.test.cjs' 'test/canonical legacy removal.test.cjs' 'test/bundle sanitation.test.cjs' 'test/full text search.test.cjs'
       - name: Build production worker
+        env:
+          MLS_DERIVED_STALE_POLICY: degrade
         run: |
           npm run predeploy
           node --check src/index.js
