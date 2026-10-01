@@ -6,7 +6,6 @@ const command=require('../MLS R32 EDITORIAL/r4 snapshot command.cjs');
 const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
 const reservations=require('../MLS R32 EDITORIAL/r4 snapshot reservations.cjs');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
-const remoteAdmission=require('../MLS R32 EDITORIAL/r4 snapshot remote admission.cjs');
 const remoteScheduler=require('../MLS R32 EDITORIAL/r4 snapshot remote scheduler.cjs');
 const waveIssue=require('../MLS R32 EDITORIAL/r4 snapshot wave issue.cjs');
 
@@ -42,7 +41,7 @@ function payload(context){
  return {entries,checkpoints,reviews};
 }
 
-test('universal MLS BCR command completes a full 20x5 Snapshot Farm lifecycle without leases',()=>{
+test('MLS R43 siguiente starts every worker immediately before the wave seals',()=>{
  const composed=reservations.compose(source(),{
   reservationIssueNumbers:[13001,13002,13003,13004],
   baseCommit:BASE,contentManifestBlobSha:CONTENT,
@@ -58,50 +57,52 @@ test('universal MLS BCR command completes a full 20x5 Snapshot Farm lifecycle wi
  const reservationIssues=composed.reservations.map(reservationIssue);
  const collectingControl={number:13005,state:'open',user:{login:'github-actions[bot]'},
   title:waveIssue.title(record),body:waveIssue.render(record)};
- const collectingIssues=[...reservationIssues,collectingControl];
+ let issues=[...reservationIssues,collectingControl];
 
- const requests=[];
+ const contexts=[];
  for(let i=0;i<20;i++){
   const requestId='e2e-worker-'+String(i+1).padStart(4,'0');
-  const envelope=command.createRequestEnvelope(collectingIssues,{
-   requestId,createdAt:new Date(Date.parse('2026-09-30T08:02:00.000Z')+i*1000).toISOString()
+  const createdAt=new Date(Date.parse('2026-09-30T08:02:00.000Z')+i*1000).toISOString();
+
+  const fresh=command.route(issues,{now:createdAt});
+  assert.equal(fresh.action,'create_request');
+  assert.equal(fresh.waveIssueNumber,13005);
+
+  const requestEnvelope=command.createRequestEnvelope(issues,{
+   requestId,waveIssueNumber:fresh.waveIssueNumber,createdAt
   });
-  requests.push({
+  const requestIssue={
    number:13010+i,state:'open',author_association:'OWNER',user:{login:'owner'},
-   title:envelope.title,body:envelope.body,requestId
-  });
- }
- assert.equal(new Set(requests.map(x=>x.requestId)).size,20);
+   title:requestEnvelope.title,body:requestEnvelope.body,requestId
+  };
+  issues.push(requestIssue);
 
- const admission=remoteAdmission.sealAdmission(composed.wave,requests,{
-  sealedAt:'2026-09-30T08:03:00.000Z',waveIssueNumber:13005
- });
- const sealedRecord=waveIssue.seal(
-  record,composed.snapshot,composed.wave,admission,'2026-09-30T08:03:00.000Z'
- );
- const sealedControl={...collectingControl,
-  title:waveIssue.title(sealedRecord),body:waveIssue.render(sealedRecord)};
- const sealedIssues=[...reservationIssues,sealedControl,...requests];
-
- const contexts=[],resultIssues=[];
- for(const req of requests){
-  const state=command.route(sealedIssues,{
-   requestId:req.requestId,requestIssueNumber:req.number
+  const admitted=command.route(issues,{
+   requestId,requestIssueNumber:requestIssue.number,
+   now:new Date(Date.parse(createdAt)+1000).toISOString()
   });
-  assert.equal(state.action,'produce_shard');
-  assert.equal(state.workerContext.policy.remoteWritesDuringProduction,false);
-  assert.equal(state.workerContext.codes.length,5);
-  contexts.push(state.workerContext);
+  assert.equal(admitted.status,'collecting');
+  assert.equal(admitted.action,'produce_shard');
+  assert.equal(admitted.workerContext.shardId,composed.wave.shards[i].shardId);
+  assert.equal(admitted.workerContext.policy.remoteWritesDuringProduction,false);
+  assert.equal(admitted.workerContext.codes.length,5);
+  contexts.push(admitted.workerContext);
 
   const delta=farm.createDelta(composed.wave,{
-   shardId:state.workerContext.shardId,
-   ...payload(state.workerContext),
-   completedAt:'2026-09-30T08:04:00.000Z'
+   shardId:admitted.workerContext.shardId,
+   ...payload(admitted.workerContext),
+   completedAt:new Date(Date.parse(createdAt)+2000).toISOString()
   });
-  const envelope=command.createResultEnvelope(sealedIssues,{
-   requestId:req.requestId,requestIssueNumber:req.number,delta
+  const resultEnvelope=command.createResultEnvelope(issues,{
+   requestId,requestIssueNumber:requestIssue.number,delta,
+   now:new Date(Date.parse(createdAt)+2000).toISOString()
   });
-  resultIssues.push({...req,title:envelope.title,body:envelope.body});
+  assert.equal(resultEnvelope.title,requestEnvelope.title);
+  assert.match(resultEnvelope.body,/MLS_BCR_R43_REQUEST/);
+  assert.match(resultEnvelope.body,/MLS_BCR_R43_RESULT/);
+  issues=issues.map(x=>x.number===requestIssue.number
+   ?{...requestIssue,title:resultEnvelope.title,body:resultEnvelope.body}
+   :x);
  }
 
  assert.equal(new Set(contexts.map(x=>x.shardId)).size,20);
@@ -110,9 +111,26 @@ test('universal MLS BCR command completes a full 20x5 Snapshot Farm lifecycle wi
  assert.equal(new Set(allCodes).size,100);
  assert.deepEqual(contexts.map(x=>x.shardId),composed.wave.shards.map(x=>x.shardId));
 
+ // Every worker may finish before sealing; preserving REQUEST markers lets the
+ // scheduler still materialize the same deterministic admission afterwards.
+ const sealed=remoteScheduler.sealIfReady({
+  waveControlIssue:collectingControl,
+  reservationIssues,
+  requestIssues:issues,
+  now:'2026-09-30T08:23:00.000Z'
+ });
+ assert.equal(sealed.changed,true);
+ assert.equal(sealed.reason,'SEALED');
+ assert.equal(sealed.record.admission.assignments.length,20);
+ assert.deepEqual(
+  sealed.record.admission.assignments.map(x=>x.issueNumber),
+  Array.from({length:20},(_,i)=>13010+i)
+ );
+
+ const sealedControl={...collectingControl,title:sealed.patch.title,body:sealed.patch.body};
  const reconciled=remoteScheduler.reconcileIfComplete({
-  waveControlIssue:sealedControl,reservationIssues,resultIssues,
-  now:'2026-09-30T08:05:00.000Z'
+  waveControlIssue:sealedControl,reservationIssues,resultIssues:issues,
+  now:'2026-09-30T08:24:00.000Z'
  });
  assert.equal(reconciled.changed,true);
  assert.equal(reconciled.reason,'RECONCILED');

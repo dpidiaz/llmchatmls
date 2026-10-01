@@ -29,7 +29,7 @@ function create(wave,admission,{
  waveIssueNumber,takeoverId,targetShardId,targetRequestIssueNumber,
  claimedAt,ttlMs=DEFAULT_TTL_MS
 }={}){
- admissionCore.validateAdmission(admission,wave);
+ admissionCore.validateAdmission(admission,wave,{allowPartial:admission?.assignments?.length<wave.workerCount});
  assert(Number.isSafeInteger(waveIssueNumber)&&waveIssueNumber===admission.waveIssueNumber,
   'R43_TAKEOVER_WAVE_ISSUE');
  assert(/^[A-Za-z0-9._:-]{8,160}$/.test(String(takeoverId||'')),'R43_TAKEOVER_ID');
@@ -54,7 +54,7 @@ function renderBody(claim){
 function parse(issue,wave,admission){
  assert(authorized(issue),'R43_TAKEOVER_OWNER');
  assert(String(issue?.title||'').startsWith('[MLS BCR R4.3][TAKEOVER] '),'R43_TAKEOVER_TITLE');
- admissionCore.validateAdmission(admission,wave);
+ admissionCore.validateAdmission(admission,wave,{allowPartial:admission?.assignments?.length<wave.workerCount});
  const claim=marker(issue.body);
  assert(claim?.schema===SCHEMA&&claim.version===1,'R43_TAKEOVER_SCHEMA');
  const unsigned={...claim};delete unsigned.claimHash;
