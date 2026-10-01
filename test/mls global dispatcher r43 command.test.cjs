@@ -1,6 +1,7 @@
 'use strict';
 const test=require('node:test');
 const assert=require('node:assert/strict');
+const crypto=require('node:crypto');
 
 const command=require('../MLS R32 EDITORIAL/r4 snapshot command.cjs');
 const farm=require('../MLS R32 EDITORIAL/r4 snapshot farm.cjs');
@@ -27,6 +28,27 @@ function source(n=20,start=2000){
   batches:[],reservedCodes:[]
  };
 }
+function stable(x){
+ if(Array.isArray(x))return '['+x.map(stable).join(',')+']';
+ if(x&&typeof x==='object')return '{'+Object.keys(x).sort().map(k=>JSON.stringify(k)+':'+stable(x[k])).join(',')+'}';
+ return JSON.stringify(x);
+}
+function hash(x){return crypto.createHash('sha256').update(stable(x)).digest('hex');}
+function legacyRequestIssue(base,number,requestId,at='2026-09-30T07:02:00.000Z'){
+ const unsigned={
+  schema:remoteAdmission.REQUEST_SCHEMA,version:1,
+  waveIssueNumber:base.record.waveIssueNumber,
+  waveId:base.composed.wave.waveId,waveHash:base.composed.wave.waveHash,
+  requestId,createdAt:at
+ };
+ const request={...unsigned,requestHash:hash(unsigned)};
+ return {
+  number,state:'open',author_association:'OWNER',user:{login:'owner'},
+  title:'[MLS BCR R4.3][REQUEST] '+requestId,
+  body:remoteAdmission.renderRequestBody(request)
+ };
+}
+
 function reservationIssue(r){
  return {number:r.issueNumber,state:'open',title:'[MLS Buffered][RESERVED] '+r.allocation.assignmentId,
   author_association:'OWNER',user:{login:'github-actions[bot]'},body:buffered.renderReservation(r)};
@@ -103,6 +125,34 @@ test('collecting wave activates the first request immediately on its shard',()=>
  assert.equal(state.assignment.shardId,'W0001');
  assert.deepEqual(state.workerContext.codes,f.composed.wave.shards[0].codes);
  assert.ok(state.productionClaimExpiresAt);
+});
+
+test('legacy v1 await-admission request is recoverable immediately without waiting for 50/50',()=>{
+ const f=fixture();
+ const legacy=legacyRequestIssue(f,12010,'legacy-await-0001');
+ const issues=[...f.issues,legacy];
+
+ const fresh=command.route(issues,{now:'2026-09-30T07:03:00.000Z'});
+ assert.equal(fresh.action,'create_takeover');
+ assert.equal(fresh.waveIssueNumber,12002);
+ assert.equal(fresh.targetShardId,'W0001');
+ assert.equal(fresh.targetRequestIssueNumber,12010);
+
+ const env=command.createTakeoverEnvelope(issues,{
+  takeoverId:'legacy-takeover-0001',
+  claimedAt:'2026-09-30T07:03:01.000Z'
+ });
+ const takeoverIssue={
+  number:12020,state:'open',author_association:'OWNER',user:{login:'owner'},
+  title:env.title,body:env.body
+ };
+ const state=command.route([...issues,takeoverIssue],{
+  takeoverId:'legacy-takeover-0001',takeoverIssueNumber:12020,
+  now:'2026-09-30T07:03:02.000Z'
+ });
+ assert.equal(state.action,'produce_shard');
+ assert.equal(state.assignment.shardId,'W0001');
+ assert.deepEqual(state.workerContext.codes,f.composed.wave.shards[0].codes);
 });
 
 test('sealed admission gives exact worker context and fresh chats receive takeover work instead of R4.2',()=>{
