@@ -1,0 +1,54 @@
+name: MLS R44 Cloudflare Cutover
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'MLS R32 EDITORIAL/r44/CUTOVER_REQUEST.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mls-r44-cloudflare-cutover
+  cancel-in-progress: false
+
+jobs:
+  verify-deploy-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate R44 contracts
+        run: |
+          node --test 'test/r44 cloudflare control plane.test.cjs'
+          npm run test:canonical-tools
+      - name: Build production worker
+        run: |
+          npm run predeploy
+          node --check src/index.js
+          npm run check
+      - name: Deploy R44 to Cloudflare
+        run: npx wrangler deploy --keep-vars
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Bootstrap D1 and verify R44
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          status="$(curl -fsSL --retry 5 --retry-delay 3 "$base/api/r44/status")"
+          printf '%s\n' "$status"
+          printf '%s' "$status" | grep -F '"status":"ACTIVE"'
+          printf '%s' "$status" | grep -F '"controlPlane":"CLOUDFLARE_D1"'
+          printf '%s' "$status" | grep -F '"pool_schema":"MLS-R44-CLOUDFLARE-POOL-1"'
+          printf '%s' "$status" | grep -F '"audited":1'
+          curl -fsSL "$base/r44-worker" | grep -F 'MLS R44 Cloudflare Worker'
+          echo 'R44_CLOUDFLARE_CUTOVER_OK'
