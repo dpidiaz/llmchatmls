@@ -33,7 +33,10 @@ function validateRelatedSource(root=SOURCE_ROOT,canonicalRoot=CANONICAL_ROOT){
     manifest.source!=='semantic-neighbors'||
     manifest.semanticModel!==MODEL
   )throw new Error('Manifest de relacionados incompatible.');
-  if(manifest.corpusBuildId!==buildId){\n    if(process.env.MLS_DERIVED_STALE_POLICY==='degrade')return {complete:false,reason:'corpus_mismatch',buildId,sourceCorpusBuildId:manifest.corpusBuildId};\n    throw new Error('Relacionados corresponden a otro corpus.');\n  }
+  if(manifest.corpusBuildId!==buildId){
+    if(process.env.MLS_DERIVED_STALE_POLICY==='degrade')return {complete:false,reason:'corpus_mismatch',buildId,sourceCorpusBuildId:manifest.corpusBuildId};
+    throw new Error('Relacionados corresponden a otro corpus.');
+  }
   const descriptors=manifest.languages||{};
   if(Object.keys(descriptors).length!==EXPECTED_LANGUAGES)throw new Error('Manifest de relacionados no contiene los diez idiomas.');
 
