@@ -180,7 +180,7 @@ test('multiple authoritative live waves route deterministically without blocking
  };
  const issues=[a.issues[0],a.control,b.issues[0],b.control,reqIssueA];
 
- const fresh=command.route(issues,{now:'2026-09-30T07:41:00.000Z'});
+ const fresh=command.route(issues,{now:'2026-09-30T07:06:00.000Z'});
  assert.equal(fresh.action,'create_request');
  assert.equal(fresh.waveIssueNumber,12101);
  assert.equal(fresh.waveId,'BCR-R43-MULTI-B');
@@ -188,7 +188,7 @@ test('multiple authoritative live waves route deterministically without blocking
  const affinity=command.route(issues,{
   requestId:'chat-multi-a-0001',
   requestIssueNumber:12110,
-  now:'2026-09-30T07:41:00.000Z'
+  now:'2026-09-30T07:06:00.000Z'
  });
  assert.equal(affinity.action,'produce_shard');
  assert.equal(affinity.waveIssueNumber,12100);
