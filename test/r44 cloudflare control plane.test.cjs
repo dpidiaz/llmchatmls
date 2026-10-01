@@ -50,3 +50,15 @@ test("R44 bootstrap respects D1 bound-parameter and free-invocation limits", () 
   assert.doesNotMatch(RUNTIME, /\.bind\(\.\.\.params\)/);
   assert.match(RUNTIME, /i \+= 50/);
 });
+
+
+test("R44 disposable worker exposes an idempotent chat auto bridge", () => {
+  assert.match(RUNTIME, /new URLSearchParams\(location\.search\)/);
+  assert.match(RUNTIME, /params\.get\("worker"\)/);
+  assert.match(RUNTIME, /params\.get\("lease"\)/);
+  assert.match(RUNTIME, /mode==="claim"/);
+  assert.match(RUNTIME, /mode==="renew"/);
+  assert.match(RUNTIME, /mode==="submit"/);
+  assert.match(RUNTIME, /params\.get\("payload"\)/);
+  assert.match(RUNTIME, /async function submitPayload/);
+});
