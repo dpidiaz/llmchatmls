@@ -1,23 +1,19 @@
 name: MLS R4.3 Snapshot Pilot Scheduler
 
+
 on:
-  issues:
-    types: [opened, edited]
+  workflow_dispatch:
 
 permissions:
   contents: read
   issues: write
 
 concurrency:
-  group: ${{ (contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) && (contains(github.event.issue.body || '', 'MLS_BCR_R43_REQUEST') || contains(github.event.issue.body || '', 'MLS_BCR_R43_RESULT'))) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
+  group: mls-r43-legacy-manual
   cancel-in-progress: false
 
 jobs:
   scheduler:
-    if: >-
-      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
-      (contains(github.event.issue.body || '', 'MLS_BCR_R43_REQUEST') ||
-       contains(github.event.issue.body || '', 'MLS_BCR_R43_RESULT'))
     runs-on: ubuntu-latest
     env:
       MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
