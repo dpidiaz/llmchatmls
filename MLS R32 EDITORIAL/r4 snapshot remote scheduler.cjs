@@ -89,6 +89,7 @@ function reconcileIfComplete({waveControlIssue,reservationIssues,resultIssues,no
   return {
    changed:false,reason:'WAITING_RESULTS',
    missing:[...collected.missing],
+   invalid:[...(collected.invalid||[])],
    record,snapshot,wave,reconciliation:collected.reconciliation
   };
  }
