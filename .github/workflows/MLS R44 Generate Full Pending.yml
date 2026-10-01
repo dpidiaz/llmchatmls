@@ -1,0 +1,32 @@
+name: MLS R44 Generate Full Pending
+on:
+  push:
+    branches: [feat/r44-full-pending-corpus]
+    paths:
+      - 'scripts/r44 full pending corpus.cjs'
+      - '.github/workflows/MLS R44 Generate Full Pending.yml'
+permissions:
+  contents: write
+jobs:
+  append-frozen-remainder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Derive and validate exact append-only POOL-2
+        run: |
+          node 'scripts/r44 full pending corpus.cjs' --write
+          node --test 'test/r44 cloudflare control plane.test.cjs' 'test/r44 full pending corpus.test.cjs'
+      - name: Commit only the validated generated pool on this feature branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 'MLS R32 EDITORIAL/r44/pool-manifest.json'
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: append validated frozen R44 pending remainder'
+            git push origin HEAD:feat/r44-full-pending-corpus
+          fi

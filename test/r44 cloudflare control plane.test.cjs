@@ -23,6 +23,8 @@ test("R44 runtime keeps workers off GitHub writes and results noncanonical", () 
 
 
 test("R44 submission persists atomically and supports durable retries", () => {
+  assert.match(RUNTIME, /payload.entries.length !== expected.length/);
+  assert.doesNotMatch(RUNTIME, /payload.entries.length !== 5/);
   assert.match(RUNTIME, /const priorByLease = await env\.WIKI_DB\.prepare/);
   assert.match(RUNTIME, /const statements = \[/);
   assert.match(RUNTIME, /await env\.WIKI_DB\.batch\(statements\)/);
