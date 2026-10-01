@@ -62,3 +62,13 @@ test("R44 disposable worker exposes an idempotent chat auto bridge", () => {
   assert.match(RUNTIME, /params\.get\("payload"\)/);
   assert.match(RUNTIME, /async function submitPayload/);
 });
+
+
+test("R44 server bridge lets read-only chat fetchers drive the D1 hot path", () => {
+  assert.match(RUNTIME, /url\.searchParams\.get\("bridge"\)/);
+  assert.match(RUNTIME, /bridge === "claim"/);
+  assert.match(RUNTIME, /bridge === "renew"/);
+  assert.match(RUNTIME, /bridge === "submit"/);
+  assert.match(RUNTIME, /const synthetic = new Request/);
+  assert.doesNotMatch(RUNTIME, /api\.github\.com\/repos/);
+});
