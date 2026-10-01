@@ -28,3 +28,15 @@ test("R44 submission persists atomically and supports durable retries", () => {
   assert.match(RUNTIME, /await env\.WIKI_DB\.batch\(statements\)/);
   assert.match(RUNTIME, /RESULT_ALREADY_SUBMITTED/);
 });
+
+test("R44 production hot path is explicitly parallel across disposable chats", () => {
+  assert.match(RUNTIME, /R44_MAX_ACTIVE = 128/);
+  assert.match(RUNTIME, /R44_CONCURRENCY_MODE = \"PARALLEL_HOT_PATH\"/);
+  assert.match(RUNTIME, /R44_GITHUB_HOT_PATH_WRITES = false/);
+  assert.match(RUNTIME, /function r44WorkerShard/);
+  assert.match(RUNTIME, /ORDER BY CASE WHEN ordinal_start >= \? THEN 0 ELSE 1 END, ordinal_start LIMIT 1/);
+  assert.match(RUNTIME, /Promise\.all\(entries\.map\(\(entry\) => r44LoadEntry\(env, entry\)\)\)/);
+  assert.match(RUNTIME, /globalProductionMutex: false/);
+  assert.match(RUNTIME, /githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES/);
+  assert.doesNotMatch(RUNTIME, /mls-global-dispatcher|BEGIN EXCLUSIVE|r44_global_lock/);
+});

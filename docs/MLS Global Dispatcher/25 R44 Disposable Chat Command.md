@@ -4,6 +4,18 @@ Visible command:
 
 `MLS R44 siguiente`
 
+## Parallel production contract
+
+R44 production is **not globally serialized**. Up to 128 disposable chats may hold active leases at the same time and work on different five-entry tickets independently.
+
+- A worker does not wait for another worker to finish before claiming work.
+- Claims are atomically protected per ticket in D1, but worker IDs are deterministically dispersed across the 800-ticket pool so simultaneous chats do not all contend for the first queued row.
+- Context loading for the five assigned entries runs in parallel.
+- Result persistence is transactional per ticket; there is no repository-wide production mutex.
+- GitHub is not in the claim, renew, context, submit, recovery, or preview hot path.
+- Canonical GitHub publication happens later in grouped batches and must never pause Cloudflare/D1 production.
+- CAPACITY_BUSY means the 128-active-lease ceiling is temporarily full; it is not a global serialization lock.
+
 ## Worker contract
 
 SOLO CHAT. FREE ONLY. No GitHub writes. No Work.

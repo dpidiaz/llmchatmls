@@ -13,6 +13,11 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "canonical manifests reconciled; stale semantic/related assets degrade safely to lexical fallbacks",
-  "retryGeneration": 2
+  "retryReason": "parallel hot path hardened; claims dispersed across pool; GitHub remains outside worker production path",
+  "retryGeneration": 3,
+  "productionMode": "PARALLEL_HOT_PATH",
+  "maxConcurrentWorkers": 128,
+  "globalProductionMutex": false,
+  "githubHotPathWrites": false,
+  "claimDistribution": "deterministic-worker-shard-with-wraparound"
 }
