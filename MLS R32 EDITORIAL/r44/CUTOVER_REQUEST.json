@@ -2,10 +2,10 @@
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
   "requestedAt": "2026-10-01T10:38:00Z",
   "controlPlane": "CLOUDFLARE_D1",
-  "poolSchema": "MLS-R44-CLOUDFLARE-POOL-1",
+  "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
   "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
-  "expectedTickets": 800,
-  "expectedEntries": 4000,
+  "expectedTickets": 1682,
+  "expectedEntries": 8408,
   "importedAuditedTickets": [
     "R43-EMERGENCY-0293"
   ],
@@ -13,12 +13,12 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "parallel hot path and D1 bootstrap implementation unchanged; corrected bootstrap contract test escaping",
-  "retryGeneration": 6,
+  "retryReason": "Full pending corpus append-only migration; dynamic ticket sharding; variable-size exact submit",
+  "retryGeneration": 7,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
   "githubHotPathWrites": false,
   "claimDistribution": "deterministic-worker-shard-with-wraparound",
-  "bootstrapStrategy": "50-ticket static escaped INSERT batches; zero bound parameters for pool seed"
+  "bootstrapStrategy": "Resumable INSERT OR IGNORE: at most 10 static escaped batches of 50 missing tickets; verify exact D1 universe before POOL-2 sentinel"
 }
