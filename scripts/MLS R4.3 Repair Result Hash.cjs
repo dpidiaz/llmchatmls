@@ -75,13 +75,15 @@ async function main(){
  const raw=zlib.inflateRawSync(compressed,{maxOutputLength:8*1024*1024});
  if(raw.length!==result.rawBytes)die('Raw byte count mismatch.');
  const delta=JSON.parse(raw.toString('utf8'));
- if(delta?.schema!=='MLS-BCR-DELTA-1'||delta.version!==1)die('Invalid delta schema.');
+ const legacyDeltaSchema=delta?.schema==='MLS-BCR-R43-DELTA-1';
+ if((delta?.schema!=='MLS-BCR-DELTA-1'&&!legacyDeltaSchema)||delta.version!==1)die('Invalid delta schema.');
+ if(legacyDeltaSchema)delta.schema='MLS-BCR-DELTA-1';
  if(delta.waveId!==result.waveId||delta.waveHash!==result.waveHash||delta.shardId!==result.shardId)die('Delta/result identity mismatch.');
 
  const unsignedDelta={...delta};
  delete unsignedDelta.deltaHash;
  const correctedDeltaHash=hash(unsignedDelta);
- if(delta.deltaHash===correctedDeltaHash){
+ if(delta.deltaHash===correctedDeltaHash&&!legacyDeltaSchema){
   console.log(JSON.stringify({targetIssueNumber,changed:false,reason:'DELTA_HASH_ALREADY_VALID',deltaHash:correctedDeltaHash}));
   return;
  }
