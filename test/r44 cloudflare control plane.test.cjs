@@ -40,3 +40,11 @@ test("R44 production hot path is explicitly parallel across disposable chats", (
   assert.match(RUNTIME, /githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES/);
   assert.doesNotMatch(RUNTIME, /mls-global-dispatcher|BEGIN EXCLUSIVE|r44_global_lock/);
 });
+
+test("R44 bootstrap respects D1 bound-parameter and free-invocation limits", () => {
+  assert.match(RUNTIME, /function r44SqlText/);
+  assert.match(RUNTIME, /const statement = \\"INSERT OR IGNORE INTO r44_tickets/);
+  assert.match(RUNTIME, /statement\.length > 95000/);
+  assert.doesNotMatch(RUNTIME, /\.bind\(\.\.\.params\)/);
+  assert.match(RUNTIME, /i \+= 50/);
+});
