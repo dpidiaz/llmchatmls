@@ -47,9 +47,9 @@ function renderResultBody(result){
  assert(Buffer.byteLength(body,'utf8')<=MAX_RESULT_BODY_BYTES,'R43_REMOTE_RESULT_TOO_LARGE');
  return body;
 }
-function decodeResult(issue,wave,admission){
+function decodeResult(issue,wave,admission,{allowPartial=false}={}){
  assert(authorized(issue),'R43_REMOTE_OWNER');
- admissionCore.validateAdmission(admission,wave);
+ admissionCore.validateAdmission(admission,wave,{allowPartial});
  const r=marker(issue.body,RESULT_MARKER);
  assert(r?.schema===RESULT_SCHEMA&&r.version===1,'R43_REMOTE_RESULT_SCHEMA');
  const unsigned={...r};delete unsigned.resultHash;
