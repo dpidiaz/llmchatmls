@@ -67,13 +67,22 @@ function decodeResult(issue,wave,admission,{allowPartial=false}={}){
  return delta;
 }
 function collectResults(issues,wave,admission){
- const byIssue=new Map((issues||[]).map(i=>[Number(i.number),i])),deltas=[],missing=[];
+ const byIssue=new Map((issues||[]).map(i=>[Number(i.number),i])),deltas=[],missing=[],invalid=[];
  for(const row of admission.assignments){
   const issue=byIssue.get(row.issueNumber);
   if(!issue||!String(issue.body||'').includes(RESULT_MARKER)){missing.push(row.shardId);continue;}
-  deltas.push(decodeResult(issue,wave,admission));
+  try{
+   deltas.push(decodeResult(issue,wave,admission));
+  }catch(err){
+   missing.push(row.shardId);
+   invalid.push({
+    shardId:row.shardId,
+    issueNumber:row.issueNumber,
+    code:String(err?.code||err?.message||'R43_REMOTE_RESULT_INVALID').slice(0,160)
+   });
+  }
  }
- return {deltas,missing,reconciliation:farm.reconcileWave(wave,deltas)};
+ return {deltas,missing,invalid,reconciliation:farm.reconcileWave(wave,deltas)};
 }
 
 module.exports={
