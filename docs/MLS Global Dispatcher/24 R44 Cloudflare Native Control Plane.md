@@ -34,9 +34,9 @@ ChatGPT Library state imported:
 Endpoints:
 
 - `GET /api/r44/status`
-- `GET /api/r44/claim?worker=<opaque>`
+- `POST /api/r44/claim?worker=<opaque>`
 - `GET /api/r44/context/<leaseToken>`
-- `GET /api/r44/renew?lease=<leaseToken>`
+- `POST /api/r44/renew?lease=<leaseToken>`
 - `POST /api/r44/submit`
 - `GET /api/r44/export?limit=50`
 - `GET /api/r44/preview/<MLS-code>`
