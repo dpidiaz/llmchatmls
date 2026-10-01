@@ -1,4 +1,5 @@
 'use strict';
+const crypto=require('node:crypto');
 
 /**
  * MLS R4.3 dedicated-command router.
@@ -16,6 +17,50 @@ const takeover=require('./r4 snapshot takeover.cjs');
 const waveIssue=require('./r4 snapshot wave issue.cjs');
 
 const ACTIVE=new Set(['collecting','sealed']);
+
+const EMERGENCY_GUIDE='docs/MLS Global Dispatcher/22 R4.3 Worker Command.md#emergency-anti-idle-fallback';
+const EMERGENCY_TICKET_SIZE=5;
+const EMERGENCY_CORPUS=Object.freeze([
+ {prefix:'MLS-V01',count:766},{prefix:'MLS-V02',count:1199},
+ {prefix:'MLS-V03',count:810},{prefix:'MLS-V04',count:1159},
+ {prefix:'MLS-V05',count:1101},{prefix:'MLS-V06',count:1027},
+ {prefix:'MLS-V07',count:1016},{prefix:'MLS-V08',count:1094},
+ {prefix:'MLS-V09',count:1031},{prefix:'MLS-V10',count:930}
+]);
+const EMERGENCY_TOTAL=EMERGENCY_CORPUS.reduce((n,x)=>n+x.count,0);
+const EMERGENCY_IDLE_ACTIONS=new Set([
+ 'no_active_r43_wave','await_seal','takeover_capacity_full','await_reconciliation',
+ 'request_not_admitted','takeover_retry','takeover_expired','superseded_by_takeover'
+]);
+
+function emergencyCodeAt(index){
+ let n=((Number(index)%EMERGENCY_TOTAL)+EMERGENCY_TOTAL)%EMERGENCY_TOTAL;
+ for(const row of EMERGENCY_CORPUS){
+  if(n<row.count)return row.prefix+'-'+String(n+1).padStart(4,'0');
+  n-=row.count;
+ }
+ throw new Error('R43_EMERGENCY_CORPUS_INDEX');
+}
+function emergencyAudit(seed,{reason='github_control_plane_unavailable'}={}){
+ const value=String(seed||crypto.randomUUID());
+ const digest=crypto.createHash('sha256').update(value).digest();
+ const start=digest.readUInt32BE(0)%EMERGENCY_TOTAL;
+ const codes=Array.from({length:EMERGENCY_TICKET_SIZE},(_,i)=>emergencyCodeAt(start+i));
+ return {
+  backend:'r43',action:'emergency_audit',emergency:true,
+  fallbackFrom:reason,
+  emergencyTaskId:'R43-AUDIT-'+digest.toString('hex').slice(0,20),
+  codes,
+  guide:EMERGENCY_GUIDE,
+  libraryPool:'/MLS BCR R43/emergency/mls_r43_emergency_pool.zip',
+  policy:{
+   githubWritesRequired:false,githubCanonical:true,readOnlyAudit:true,
+   cloudflareEditorial:false,d1Editorial:false,paidApis:false,
+   producedDoesNotMeanVerified:true
+  }
+ };
+}
+
 
 function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;throw e;}
 function assert(ok,code,msg){if(!ok)fail(code,msg);}
@@ -336,7 +381,17 @@ function createResultEnvelope(issues,{
  };
 }
 
+function routeOrEmergency(issues,options={}){
+ const primary=route(issues,options);
+ if(!EMERGENCY_IDLE_ACTIONS.has(primary.action))return primary;
+ const seed=options.emergencyId||options.requestId||options.takeoverId||
+  [primary.waveId||'no-wave',options.now||new Date().toISOString(),crypto.randomUUID()].join(':');
+ return {...primary,...emergencyAudit(seed,{reason:primary.action}),
+  primaryAction:primary.action};
+}
+
 module.exports={
- ACTIVE,authorizedWaveIssues,activeWave,route,
+ ACTIVE,EMERGENCY_GUIDE,EMERGENCY_TICKET_SIZE,EMERGENCY_TOTAL,
+ authorizedWaveIssues,activeWave,route,routeOrEmergency,emergencyAudit,
  createRequestEnvelope,createTakeoverEnvelope,createResultEnvelope
 };
