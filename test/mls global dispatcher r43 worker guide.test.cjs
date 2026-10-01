@@ -28,7 +28,7 @@ test('R4.3 worker guide preserves every universal-command state and zero-write p
  assert.match(text,/TTL por defecto: 30 minutos/);
  assert.match(text,/50\/50/i);
  assert.match(text,/inmediatamente.*siguiente shard FIFO/i);
- assert.match(text,/no espera[\\s\\S]*49 chats/i);
+ assert.match(text,/no espera[\s\S]*49 chats/i);
  assert.match(text,/30 minutos/i);
  assert.match(text,/no se espera 50\/50 para producir/i);
  assert.match(text,/hasta \*\*50 shards de 5 entradas\*\*/i);
