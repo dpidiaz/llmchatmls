@@ -1,0 +1,31 @@
+name: MLS R4.3 Result Hash Repair
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: ${{ contains(github.event.issue.body || '', 'MLS_BCR_R43_REPAIR_RESULT_HASH') && format('mls-r43-result-hash-repair-{0}', github.event.issue.number) || format('mls-r43-result-hash-repair-skip-{0}', github.run_id) }}
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    if: >-
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association) &&
+      contains(github.event.issue.body || '', 'MLS_BCR_R43_REPAIR_RESULT_HASH')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Repair R4.3 result delta hash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node 'scripts/MLS R4.3 Repair Result Hash.cjs'
