@@ -96,12 +96,13 @@ test('Farm preserved Pilot 20 entries are discoverable without Cloudflare',()=>{
   assert.ok(preserved.includes('MLS-V10-0020'));
 });
 
-test('Farm workflows use GitHub Issues, per-batch concurrency and scheduled 15-minute reaping',()=>{
+test('Farm legacy scheduler is manual-only after R44 cutover while fallback worker stays intact',()=>{
   const scheduler=fs.readFileSync('.github/workflows/MLS Farm Scheduler.yml','utf8');
   const worker=fs.readFileSync('.github/workflows/MLS Farm Worker Events.yml','utf8');
-  assert.match(scheduler,/issues:\s*\n\s*types:/);
-  assert.match(scheduler,/cron: '\*\/5 \* \* \* \*'/);
-  assert.match(scheduler,/group: mls-farm-scheduler/);
+  assert.match(scheduler,/workflow_dispatch:/);
+  assert.doesNotMatch(scheduler,/issues:\s*\n\s*types:/);
+  assert.doesNotMatch(scheduler,/cron:/);
+  assert.match(scheduler,/group: mls-farm-legacy-manual/);
   assert.match(worker,/issue_comment:/);
   assert.match(worker,/group: mls-farm-batch-\$\{\{ github\.event\.issue\.number \}\}/);
   const schedulerSource=fs.readFileSync('scripts/MLS farm scheduler.cjs','utf8');

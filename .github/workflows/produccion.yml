@@ -16,6 +16,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node --test 'test/r44 cloudflare control plane.test.cjs'
       - run: npm run test:chat-editorial
       - run: npm run test:evidence
       - run: npm run test:canonical-tools
@@ -52,6 +53,19 @@ jobs:
           grep -F 'Formato APA 7' "$reader"
           grep -F 'Abrir fuente' "$reader"
           echo 'LIVE_EVIDENCE_READER_OK'
+
+      - name: Verificar R44 Cloudflare control plane
+        if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          status="$(curl -fsSL --retry 3 --retry-delay 2 "$base/api/r44/status")"
+          printf '%s\n' "$status"
+          printf '%s' "$status" | grep -F '"status":"ACTIVE"'
+          printf '%s' "$status" | grep -F '"controlPlane":"CLOUDFLARE_D1"'
+          printf '%s' "$status" | grep -F '"pool_schema":"MLS-R44-CLOUDFLARE-POOL-1"'
+          echo 'R44_CONTROL_PLANE_OK'
 
       - name: Sincronizar credenciales D1 Analytics
         if: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}

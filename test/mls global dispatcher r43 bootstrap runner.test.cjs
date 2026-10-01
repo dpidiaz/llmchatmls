@@ -29,13 +29,14 @@ test('guarded bootstrap runner is syntactically valid and apply derives the exac
  assert.doesNotMatch(source,/while\s*\([^)]*(403|429)/);
 });
 
-test('bootstrap and Global Dispatcher share exactly the same repository-wide concurrency group',()=>{
+test('bootstrap and manual Global Dispatcher share the repository-wide writer mutex',()=>{
  const boot=fs.readFileSync(workflow,'utf8');
  const dispatcher=fs.readFileSync(dispatcherWorkflow,'utf8');
  assert.match(boot,/mls-global-dispatcher/);
  assert.match(boot,/mls-global-dispatcher-skip-\{0\}/);
- assert.match(dispatcher,/mls-global-dispatcher/);
- assert.match(dispatcher,/mls-global-dispatcher-skip-\{0\}/);
+ assert.match(dispatcher,/group: mls-global-dispatcher/);
+ assert.doesNotMatch(dispatcher,/mls-global-dispatcher-skip-\{0\}/);
+ assert.match(dispatcher,/workflow_dispatch:/);
  assert.match(boot,/default: plan/);
  assert.match(boot,/APPLY_R43_WAVE_50X5/);
  assert.match(boot,/ref: main/);

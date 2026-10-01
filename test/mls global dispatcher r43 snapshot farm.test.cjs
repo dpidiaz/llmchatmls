@@ -810,21 +810,20 @@ test('pilot scheduler script is syntactically valid and has one Wave Issue PATCH
  assert.doesNotMatch(source,/setInterval|setTimeout|while\s*\(true\)/);
 });
 
-test('pilot scheduler workflow is serialized, issue-scoped and minimally permissioned',()=>{
+test('pilot scheduler legacy fallback is manual, serialized and minimally permissioned',()=>{
  const file=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot Pilot Scheduler.yml');
  const source=fs.readFileSync(file,'utf8');
- assert.match(source,/issues:\s*\n\s*types: \[opened, edited\]/);
+ assert.match(source,/workflow_dispatch:/);
+ assert.doesNotMatch(source,/issues:\s*\n\s*types:/);
+ assert.doesNotMatch(source,/schedule:/);
  assert.match(source,/contents: read/);
  assert.match(source,/issues: write/);
- assert.match(source,/mls-global-dispatcher/);
- assert.match(source,/mls-global-dispatcher-skip-\{0\}/);
+ assert.match(source,/group: mls-global-dispatcher/);
  assert.match(source,/MLS_GITHUB_COOLDOWN_FILE/);
  assert.match(source,/actions\/cache\/restore@v4/);
  assert.match(source,/actions\/cache\/save@v4/);
  assert.match(source,/restore-keys: mls-github-cooldown-/);
  assert.match(source,/cancel-in-progress: false/);
- assert.match(source,/MLS_BCR_R43_REQUEST/);
- assert.match(source,/MLS_BCR_R43_RESULT/);
  assert.doesNotMatch(source,/pull-requests: write|contents: write|actions: write/);
 });
 

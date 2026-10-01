@@ -11,11 +11,12 @@ test('R4.1 Issue writer and allocator remain in the same serialized critical sec
   const sync=yaml('R4.1 Buffered Sync.yml'),scheduler=yaml('MLS Global Dispatcher Scheduler.yml');
   assert.match(sync,/mls-global-dispatcher/);
   assert.match(sync,/mls-global-dispatcher-skip-\{0\}/);
-  assert.match(scheduler,/mls-global-dispatcher/);
-  assert.match(scheduler,/mls-global-dispatcher-skip-\{0\}/);
+  assert.match(scheduler,/group: mls-global-dispatcher/);
+  assert.doesNotMatch(scheduler,/mls-global-dispatcher-skip-\{0\}/);
+  assert.match(scheduler,/workflow_dispatch:/);
   assert.match(sync,/types:\s*\[opened\]/);
   assert.match(sync,/github\.event\.issue\.author_association/);
-  assert.match(scheduler,/github\.event\.issue\.author_association/);
+  assert.doesNotMatch(scheduler,/github\.event\.issue\.author_association/);
   assert.match(sync,/ref:\s*main/);
   assert.doesNotMatch(sync,/pull_request:|\b(push|schedule):/);
   assert.match(sync,/workflow_dispatch:\s*\n\s*inputs:\s*\n\s*request_issue:/);

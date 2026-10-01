@@ -1,11 +1,7 @@
 name: MLS Global Dispatcher Scheduler
 
+
 on:
-  issues:
-    types:
-      - opened
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -14,12 +10,11 @@ permissions:
   actions: write
 
 concurrency:
-  group: ${{ (github.event_name != 'issues' || startsWith(github.event.issue.title, '[MLS Dispatcher]') || (startsWith(github.event.issue.title, '[MLS Buffered][REQUEST]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association))) && 'mls-global-dispatcher' || format('mls-global-dispatcher-skip-{0}', github.run_id) }}
+  group: mls-global-dispatcher
   cancel-in-progress: false
 
 jobs:
   scheduler:
-    if: ${{ github.event_name != 'issues' || startsWith(github.event.issue.title, '[MLS Dispatcher]') || (startsWith(github.event.issue.title, '[MLS Buffered][REQUEST]') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)) }}
     runs-on: ubuntu-latest
     env:
       MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json

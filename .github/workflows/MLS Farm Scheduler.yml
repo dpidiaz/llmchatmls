@@ -1,11 +1,7 @@
 name: MLS Farm Scheduler
 
+
 on:
-  issues:
-    types:
-      - opened
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -13,12 +9,11 @@ permissions:
   issues: write
 
 concurrency:
-  group: mls-farm-scheduler
+  group: mls-farm-legacy-manual
   cancel-in-progress: false
 
 jobs:
   scheduler:
-    if: ${{ github.event_name != 'issues' || startsWith(github.event.issue.title, '[MLS Farm]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
