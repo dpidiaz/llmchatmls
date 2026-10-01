@@ -7,14 +7,13 @@ const path=require('node:path');
 const workflow=path.join(process.cwd(),'.github','workflows','MLS R4.3 Snapshot Pilot Scheduler.yml');
 const script=path.join(process.cwd(),'scripts','MLS R4.3 Snapshot Pilot Scheduler.cjs');
 
-test('R4.3 pilot scheduler workflow only wakes for authorized issue authors',()=>{
+test('R4.3 pilot scheduler workflow is manual-only after R44 cutover',()=>{
  const text=fs.readFileSync(workflow,'utf8');
- assert.match(text,/OWNER/);
- assert.match(text,/MEMBER/);
- assert.match(text,/COLLABORATOR/);
- assert.match(text,/github\.event\.issue\.author_association/);
- assert.match(text,/MLS_BCR_R43_REQUEST/);
- assert.match(text,/MLS_BCR_R43_RESULT/);
+ assert.match(text,/workflow_dispatch:/);
+ assert.match(text,/group: mls-r43-legacy-manual/);
+ assert.doesNotMatch(text,/issues:/);
+ assert.doesNotMatch(text,/schedule:/);
+ assert.doesNotMatch(text,/github\.event\.issue\.author_association/);
 });
 
 test('R4.3 pilot scheduler script requires bot-owned wave authority',()=>{
