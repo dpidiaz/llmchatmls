@@ -103,3 +103,28 @@ test("R44 MCP validates modern stateless protocol headers", () => {
   assert.match(RUNTIME, /HeaderMismatch/);
   assert.match(RUNTIME, /UnsupportedProtocolVersion/);
 });
+
+
+test("R44 free chat bridge keeps lease token server-side and requires editorial auth", () => {
+  assert.match(RUNTIME, /r44_chat_bridge_sessions/);
+  assert.match(RUNTIME, /MLS_EDITORIAL_CHAT_KEY/);
+  assert.match(RUNTIME, /R44_CHAT_BRIDGE_AUTH_REQUIRED/);
+  assert.match(RUNTIME, /bridgeSessionId/);
+  assert.match(RUNTIME, /delete ticket\.lease_token/);
+  assert.match(RUNTIME, /delete safeContext\.leaseToken/);
+  assert.match(RUNTIME, /TICKET_SESSION_MISMATCH/);
+  assert.match(RUNTIME, /GITHUB_ACTIONS_FREE_BRIDGE/);
+  assert.match(RUNTIME, /receipt: \{ algorithm: "sha256", sha256: value\.sha256 \}/);
+});
+
+
+test("R44 MCP mutating tools require the editorial bearer secret", () => {
+  assert.match(RUNTIME, /body\.method === "tools\/call"[\s\S]*r44ChatBridgeAuthorize\(request, env\)/);
+  assert.match(RUNTIME, /-32001, "Unauthorized"/);
+});
+
+test("R44 chat bridge exposes an authenticated non-mutating status probe", () => {
+  assert.match(RUNTIME, /async function r44ChatBridgeStatus/);
+  assert.match(RUNTIME, /\/api\/r44\/chat-bridge\/status/);
+  assert.match(RUNTIME, /authenticated: true/);
+});

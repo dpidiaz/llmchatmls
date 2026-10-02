@@ -52,6 +52,8 @@ jobs:
       - name: Bootstrap D1 and verify R44
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
         run: |
           set -euo pipefail
           base='https://llmchatmls.dpidiaz.workers.dev'
@@ -77,4 +79,11 @@ jobs:
             --data '{"jsonrpc":"2.0","id":"tools","method":"tools/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"r44-ci","version":"1"},"io.modelcontextprotocol/clientCapabilities":{}}}}')"
           printf '%s' "$tools" | grep -F '"name":"r44_claim"'
           printf '%s' "$tools" | grep -F '"name":"r44_submit"'
+          bridge_status="$(curl -fsSL -X POST "$base/api/r44/chat-bridge/status" \
+            -H 'content-type: application/json' \
+            -H "authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
+            --data '{}')"
+          printf '%s\n' "$bridge_status"
+          printf '%s' "$bridge_status" | grep -F '"transport":"GITHUB_ACTIONS_FREE_BRIDGE"'
+          printf '%s' "$bridge_status" | grep -F '"authenticated":true'
           echo 'R44_CLOUDFLARE_CUTOVER_OK'

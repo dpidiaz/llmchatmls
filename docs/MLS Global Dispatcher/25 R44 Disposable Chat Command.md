@@ -22,6 +22,8 @@ SOLO CHAT. FREE ONLY. No GitHub writes. No Work. No paid browser transport.
 
 Primary transport: MCP Streamable HTTP at `https://llmchatmls.dpidiaz.workers.dev/mcp`.
 
+Mutating MCP calls (`tools/call`) require `Authorization: Bearer <MLS_EDITORIAL_CHAT_KEY>`. Discovery and `tools/list` remain non-mutating and may be read without claiming a ticket.
+
 1. Call MCP tool `r44_claim` with one stable opaque `workerId` for the chat.
 2. D1 atomically assigns one ticket and returns its exact entries (normally 5; the final ticket can contain fewer), frozen content, `ticketId`, `leaseToken`, and a five-minute lease.
 3. Audit/correct exactly the assigned entries using R33 evidence standards and APA 7.
@@ -33,6 +35,19 @@ Primary transport: MCP Streamable HTTP at `https://llmchatmls.dpidiaz.workers.de
 9. `AUDITED_DURABLE` and Cloudflare preview are not R33 VERIFIED.
 
 The existing `/r44-worker` page and `?bridge=claim|renew|submit` routes remain compatibility paths, not the default ChatGPT transport.
+
+### FREE fallback for ChatGPT clients without writable custom MCP
+
+If the current ChatGPT plan/client cannot call write-capable custom MCP tools, use the repository's existing **MLS Chat Bridge** on branch `mlschatcontrol` as a transport-only fallback:
+
+- `r44StatusChat` -> authenticated POST `/api/r44/chat-bridge/status` (non-mutating connectivity/status probe)
+- `r44ClaimChat` -> authenticated POST `/api/r44/chat-bridge/claim`
+- `r44RenewChat` -> authenticated POST `/api/r44/chat-bridge/renew`
+- `r44SubmitChat` -> authenticated POST `/api/r44/chat-bridge/submit`
+
+GitHub Actions supplies the already-provisioned `MLS_EDITORIAL_CHAT_KEY`. The response committed to the public control branch contains only a `bridgeSessionId`; the R44 `leaseToken` stays in D1 and is never written to GitHub. D1 remains authoritative for claim, lease fencing and durable submit.
+
+This fallback is **FREE ONLY** and may be used only while standard GitHub-hosted runners for this public repository remain unbilled. Never substitute TinyFish or another paid runner.
 
 Example result shape:
 
