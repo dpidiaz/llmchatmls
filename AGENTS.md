@@ -28,6 +28,22 @@ not authorize merging infrastructure or deploying production.
 
 This repository is the canonical source for MLS project contracts and operational documentation.
 
+
+## MLS R44 commands
+
+For `MLS R44 siguiente`, read:
+
+`docs/MLS Global Dispatcher/25 R44 Disposable Chat Command.md`
+
+Mandatory transport rules:
+
+- **FREE ONLY**: never use TinyFish, a paid browser runner, a paid API, or an automatic paid fallback.
+- Prefer the deployed Direct MCP endpoint `https://llmchatmls.dpidiaz.workers.dev/mcp` when the current ChatGPT client exposes custom MCP tools with write capability.
+- D1 remains authoritative for claim, lease fencing and durable submit; GitHub is not the R44 claim/submit hot path.
+- Never claim a ticket through a transport that the current chat cannot also use to submit the audited result.
+- If the current ChatGPT plan/client does not expose writable custom MCP, stop before claiming and report `CLIENT_TRANSPORT_UNAVAILABLE_FREE_ONLY`. Do not substitute a paid transport.
+- A ticket is complete only after `AUDITED_DURABLE` (or idempotent `RESULT_ALREADY_SUBMITTED`) with a SHA-256 receipt. `AUDITED` is not R33 `VERIFIED`.
+
 ## MLS Watchdog commands
 
 When the user issues any command beginning with `MLS` and containing `watchdogs` or `watchdog group`, read and follow:
