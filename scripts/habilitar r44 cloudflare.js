@@ -11,7 +11,10 @@ const ROUTE = [
 const RUNTIME_MARKER = "// MLS R44 CLOUDFLARE CONTROL PLANE END";
 const poolBytes = fs.readFileSync(require("node:path").join(__dirname, "../MLS R32 EDITORIAL/r44/pool-manifest.json"));
 const poolSha = require("node:crypto").createHash("sha256").update(poolBytes).digest("hex");
-const RUNTIME = `var R44_POOL_SHA256 = "${poolSha}";\n` + fs.readFileSync(require("node:path").join(__dirname, "r44 runtime.js"), "utf8").replace('pool-manifest.json"', `pool-manifest.json?sha256=${poolSha}"`);
+const durableSql = fs.readFileSync(require("node:path").join(__dirname,"../migrations/0044_entry_checkpoints.sql"),"utf8").split('-- statement boundary').map(s=>s.trim()).filter(Boolean);
+const durableSource = fs.readFileSync(require("node:path").join(__dirname,"r44 durable.js"),"utf8");
+const clientSource = fs.readFileSync(require("node:path").join(__dirname,"r44 client.js"),"utf8");
+const RUNTIME = 'var R44_DURABLE_SQL = '+JSON.stringify(durableSql)+';\nvar R44_CLIENT_SOURCE = '+JSON.stringify(clientSource)+';\n'+durableSource+'\n'+`var R44_POOL_SHA256 = "${poolSha}";\n` + fs.readFileSync(require("node:path").join(__dirname, "r44 runtime.js"), "utf8").replace('pool-manifest.json"', `pool-manifest.json?sha256=${poolSha}"`);
 
 function injectR44(code) {
   let next = String(code);
@@ -22,7 +25,13 @@ function injectR44(code) {
     if (!next.includes(ROUTE_MARKER)) throw new Error("R44 route marker not found");
     next = next.replace(ROUTE_MARKER, ROUTE);
   }
-  if (!next.includes(RUNTIME_MARKER)) next += "\n\n" + RUNTIME + "\n";
+  const start = next.indexOf('var R44_DURABLE_SQL =');
+  const legacyStart = next.indexOf('var R44_POOL_SHA256 =');
+  const begin = start >= 0 ? start : legacyStart;
+  const end = next.indexOf(RUNTIME_MARKER);
+  if (begin >= 0 && end >= begin) next = next.slice(0,begin) + RUNTIME.trimEnd() + next.slice(end+RUNTIME_MARKER.length);
+  else if (!next.includes(RUNTIME_MARKER)) next += "\n\n" + RUNTIME + "\n";
+
   return next;
 }
 if (require.main === module) {
