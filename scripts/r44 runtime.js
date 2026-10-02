@@ -152,41 +152,15 @@ function r44SameCodes(expected, submitted) {
   const b = submitted.map((x) => String(x && x.code || "").toUpperCase()).sort();
   return a.length === b.length && a.every((x, i) => x === b[i]);
 }
-async function r44Renew(env, token) {
-  await r44PoolSeed(env);
-  const now = Date.now();
-  const expires = now + R44_LEASE_MS;
-  const result = await env.WIKI_DB.prepare("UPDATE r44_tickets SET lease_expires_at=?,updated_at=? WHERE state='leased' AND lease_token=? AND lease_expires_at>? RETURNING ticket_id,worker_id,lease_expires_at")
-    .bind(expires, new Date(now).toISOString(), token, now).first();
-  if (!result) return null;
-  return result;
-}
-function r44SameCodes(expected, submitted) {
-  const a = expected.map((x) => String(x.code).toUpperCase()).sort();
-  const b = submitted.map((x) => String(x && x.code || "").toUpperCase()).sort();
-  return a.length === b.length && a.every((x, i) => x === b[i]);
-}
 async function r44Submit(request, env) { return r44DurableSubmit(request,env); }
 async function r44Status(env) {
   await r44DurableReady(env);
   const counts = await r44Counts(env);
   const durableCounts = (await env.WIKI_DB.prepare("SELECT state,COUNT(*) AS n FROM r44_ticket_progress GROUP BY state").all()).results;
   const metaRows = await env.WIKI_DB.prepare("SELECT key,value FROM r44_meta").all();
-  return { status: "ACTIVE", controlPlane: "CLOUDFLARE_D1", productionMode: R44_CONCURRENCY_MODE, globalProductionMutex: false, githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES, leaseTtlSeconds: 300, maxActiveLeases: R44_MAX_ACTIVE, counts, durableCounts, meta: Object.fromEntries((metaRows.results || []).map((r) => [r.key, r.value])) };
-}
-async function r44Status(env) {
-  await r44PoolSeed(env);
-  const counts = await r44Counts(env);
-  const metaRows = await env.WIKI_DB.prepare("SELECT key,value FROM r44_meta").all();
-  return { status: "ACTIVE", controlPlane: "CLOUDFLARE_D1", productionMode: R44_CONCURRENCY_MODE, globalProductionMutex: false, githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES, leaseTtlSeconds: 300, maxActiveLeases: R44_MAX_ACTIVE, mcpEndpoint: "/mcp", mcpProtocol: R44_MCP_PROTOCOL, counts, meta: Object.fromEntries((metaRows.results || []).map((r) => [r.key, r.value])) };
+  return { status: "ACTIVE", controlPlane: "CLOUDFLARE_D1", productionMode: R44_CONCURRENCY_MODE, globalProductionMutex: false, githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES, leaseTtlSeconds: 300, maxActiveLeases: R44_MAX_ACTIVE, mcpEndpoint: "/mcp", mcpProtocol: R44_MCP_PROTOCOL, counts, durableCounts, meta: Object.fromEntries((metaRows.results || []).map((r) => [r.key, r.value])) };
 }
 async function r44Export(env, limit) { return r44DurableExport(env,limit); }
-async function r44Preview(env, code) {
-  await r44PoolSeed(env);
-  const row = await env.WIKI_DB.prepare("SELECT code,ticket_id,payload_json,result_sha256,updated_at FROM r44_preview_articles WHERE code=?").bind(code).first();
-  if (!row) return null;
-  return { code: row.code, ticketId: row.ticket_id, resultSha256: row.result_sha256, updatedAt: row.updated_at, entry: JSON.parse(row.payload_json) };
-}
 async function r44Preview(env, code) {
   await r44PoolSeed(env);
   const row = await env.WIKI_DB.prepare("SELECT code,ticket_id,payload_json,result_sha256,updated_at FROM r44_preview_articles WHERE code=?").bind(code).first();
