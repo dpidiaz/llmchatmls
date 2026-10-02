@@ -20,7 +20,7 @@ jobs:
       - name: Derive and validate exact append-only POOL-2
         run: |
           node 'scripts/r44 full pending corpus.cjs' --write
-          node --test 'test/r44 cloudflare control plane.test.cjs' 'test/r44 full pending corpus.test.cjs'
+          npm run test:r44
       - name: Commit only the validated generated pool on this feature branch
         run: |
           git config user.name 'github-actions[bot]'
