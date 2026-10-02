@@ -4,7 +4,7 @@ const TARGET = "src/index.js";
 const ROUTE_MARKER = "    const url = new URL(request.url);";
 const ROUTE = [
   ROUTE_MARKER,
-  '    if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/")) {',
+  '    if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/") || url.pathname === "/mcp") {',
   "      return handleR44(request, env, url);",
   "    }"
 ].join("\n");
@@ -15,6 +15,9 @@ const RUNTIME = `var R44_POOL_SHA256 = "${poolSha}";\n` + fs.readFileSync(requir
 
 function injectR44(code) {
   let next = String(code);
+  if (next.includes('if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/")) {') && !next.includes('url.pathname === "/mcp"')) {
+    next = next.replace('if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/")) {', 'if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/") || url.pathname === "/mcp") {');
+  }
   if (!next.includes('url.pathname.startsWith("/api/r44/")')) {
     if (!next.includes(ROUTE_MARKER)) throw new Error("R44 route marker not found");
     next = next.replace(ROUTE_MARKER, ROUTE);
