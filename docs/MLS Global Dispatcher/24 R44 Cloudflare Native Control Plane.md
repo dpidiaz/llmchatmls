@@ -48,7 +48,7 @@ D1 tables are bootstrapped lazily in the existing `WIKI_DB` binding. The pool is
 
 ## Editorial boundary
 
-A submitted ticket becomes `audited`, never automatically `VERIFIED`. Results are durable in D1 and entry payloads are immediately available through the Cloudflare preview endpoint. Canonical R33 validation and grouped GitHub publication remain a later bounded step.
+A checkpoint makes one entry durable. Once every entry is durable, the server marks the ticket COMPLETE (legacy projection: `audited`), never automatically VERIFIED. Only CORRECTED results rewrite noncanonical previews; PASS_NO_CHANGE retains existing content. Canonical R33 validation and grouped GitHub publication remain a later bounded step. See [R44 durable checkpoints](26%20R44%20Durable%20Entry%20Checkpoints.md) for the normalized migration, recovery routes and updated client contract.
 
 ## GitHub traffic policy
 
