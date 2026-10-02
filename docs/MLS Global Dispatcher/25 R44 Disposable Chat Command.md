@@ -34,6 +34,18 @@ Primary transport: MCP Streamable HTTP at `https://llmchatmls.dpidiaz.workers.de
 
 The existing `/r44-worker` page and `?bridge=claim|renew|submit` routes remain compatibility paths, not the default ChatGPT transport.
 
+### FREE fallback for ChatGPT clients without writable custom MCP
+
+If the current ChatGPT plan/client cannot call write-capable custom MCP tools, use the repository's existing **MLS Chat Bridge** on branch `mlschatcontrol` as a transport-only fallback:
+
+- `r44ClaimChat` -> authenticated POST `/api/r44/chat-bridge/claim`
+- `r44RenewChat` -> authenticated POST `/api/r44/chat-bridge/renew`
+- `r44SubmitChat` -> authenticated POST `/api/r44/chat-bridge/submit`
+
+GitHub Actions supplies the already-provisioned `MLS_EDITORIAL_CHAT_KEY`. The response committed to the public control branch contains only a `bridgeSessionId`; the R44 `leaseToken` stays in D1 and is never written to GitHub. D1 remains authoritative for claim, lease fencing and durable submit.
+
+This fallback is **FREE ONLY** and may be used only while standard GitHub-hosted runners for this public repository remain unbilled. Never substitute TinyFish or another paid runner.
+
 Example result shape:
 
 ```json
