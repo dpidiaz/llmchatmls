@@ -20,7 +20,8 @@ async function r44EnsureSchema(env) {
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS r44_results (ticket_id TEXT PRIMARY KEY, lease_token TEXT, worker_id TEXT, stage TEXT NOT NULL, editorial_status TEXT NOT NULL, payload TEXT NOT NULL, sha256 TEXT NOT NULL, source TEXT NOT NULL DEFAULT 'cloudflare-chat', created_at TEXT NOT NULL)"),
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS r44_entry_cache (code TEXT PRIMARY KEY, sha256 TEXT NOT NULL, content_json TEXT NOT NULL, fetched_at TEXT NOT NULL)"),
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS r44_preview_articles (code TEXT PRIMARY KEY, ticket_id TEXT NOT NULL, payload_json TEXT NOT NULL, result_sha256 TEXT NOT NULL, updated_at TEXT NOT NULL)"),
-    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS r44_events (id INTEGER PRIMARY KEY AUTOINCREMENT, ticket_id TEXT, event_type TEXT NOT NULL, worker_id TEXT, lease_token TEXT, detail TEXT, created_at TEXT NOT NULL)")
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS r44_events (id INTEGER PRIMARY KEY AUTOINCREMENT, ticket_id TEXT, event_type TEXT NOT NULL, worker_id TEXT, lease_token TEXT, detail TEXT, created_at TEXT NOT NULL)"),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS r44_chat_bridge_sessions (session_id TEXT PRIMARY KEY, ticket_id TEXT NOT NULL, worker_id TEXT NOT NULL, lease_token TEXT NOT NULL UNIQUE, created_at TEXT NOT NULL, updated_at TEXT NOT NULL)")
   ]);
 }
 async function r44PoolSeed(env) {
@@ -244,6 +245,115 @@ function r44WorkerPage() {
   return '<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MLS R44 Worker</title><style>body{font:16px system-ui;max-width:1100px;margin:24px auto;padding:0 16px}button{padding:10px 14px;margin:4px}pre,textarea{width:100%;box-sizing:border-box;background:#f5f5f5;border:1px solid #ccc;padding:12px;white-space:pre-wrap}textarea{min-height:320px}code{font-family:ui-monospace,monospace}</style></head><body><h1>MLS R44 Cloudflare Worker</h1><p>Claim atómico en D1. TTL 5 min con heartbeat automático. Resultado queda AUDITED/PENDING_CANONICAL_R33_VALIDATION.</p><button id="claim">Claim siguiente</button><button id="reload">Recargar contexto</button><div id="state"></div><h2>Contexto congelado</h2><pre id="ctx">Sin claim.</pre><h2>Resultado JSON</h2><p>Debe contener <code>{"entries":[{"code":"MLS-..."} ... ]}</code>. Incluya exactamente las entradas asignadas al ticket (normalmente 5; el ticket final puede contener menos). Cada entrada puede incluir correctedContent, evidence, sources y notes.</p><textarea id="result"></textarea><br><button id="submit">Guardar resultado</button><pre id="out"></pre><script>const params=new URLSearchParams(location.search),state=document.getElementById("state"),ctx=document.getElementById("ctx"),out=document.getElementById("out"),ta=document.getElementById("result");let lease=params.get("lease")||localStorage.getItem("mls-r44-lease")||"";let worker=params.get("worker")||localStorage.getItem("mls-r44-worker")||("r44-"+crypto.randomUUID().replaceAll("-",""));localStorage.setItem("mls-r44-worker",worker);if(lease)localStorage.setItem("mls-r44-lease",lease);async function context(){if(!lease)return;let r=await fetch("/api/r44/context/"+encodeURIComponent(lease),{cache:"no-store"});let j=await r.json();ctx.textContent=JSON.stringify(j,null,2);state.textContent=j.ticketId?("Ticket "+j.ticketId+" — worker "+worker):JSON.stringify(j);return j}async function claim(){let r=await fetch("/api/r44/claim?worker="+encodeURIComponent(worker),{method:"POST",cache:"no-store"});let j=await r.json();out.textContent=JSON.stringify(j,null,2);if(j.ticket&&j.ticket.lease_token){lease=j.ticket.lease_token;localStorage.setItem("mls-r44-lease",lease);await context()}return j}document.getElementById("claim").onclick=claim;document.getElementById("reload").onclick=context;async function submitPayload(payload){if(!lease)return {error:"NO_LEASE"};let r=await fetch("/api/r44/submit",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({leaseToken:lease,payload})});let j=await r.json();out.textContent=JSON.stringify(j,null,2);if(r.ok&&j.status==="AUDITED_DURABLE"){localStorage.removeItem("mls-r44-lease");lease=""}return j}document.getElementById("submit").onclick=async()=>{if(!lease)return alert("Sin lease");let payload;try{payload=JSON.parse(ta.value)}catch(e){return alert("JSON inválido")};await submitPayload(payload)};async function renew(){if(!lease)return {error:"NO_LEASE"};let r=await fetch("/api/r44/renew?lease="+encodeURIComponent(lease),{method:"POST",cache:"no-store"});let j=await r.json();out.textContent=JSON.stringify(j,null,2);return j}async function autoMode(){let mode=params.get("auto")||"";if(mode==="claim"){await claim();return}if(mode==="renew"){await renew();return}if(mode==="submit"){let payload;try{payload=JSON.parse(params.get("payload")||"")}catch(e){out.textContent=JSON.stringify({error:"INVALID_AUTO_PAYLOAD"},null,2);return}await submitPayload(payload);return}await context()}setInterval(async()=>{if(lease)await fetch("/api/r44/renew?lease="+encodeURIComponent(lease),{method:"POST",cache:"no-store"}).catch(()=>{})},120000);autoMode();</script></body></html>';
 }
 
+
+async function r44ChatBridgeAuthorize(request, env) {
+  const secret = String(env.MLS_EDITORIAL_CHAT_KEY || "");
+  if (secret.length < 32) return { ok: false, status: 503, error: "R44_CHAT_BRIDGE_AUTH_NOT_CONFIGURED" };
+  const auth = String(request.headers.get("authorization") || "");
+  if (!auth.startsWith("Bearer ") || auth.length > 1024) return { ok: false, status: 401, error: "R44_CHAT_BRIDGE_AUTH_REQUIRED" };
+  const a = await r44Sha256Text(auth.slice(7));
+  const b = await r44Sha256Text(secret);
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff ? { ok: false, status: 401, error: "R44_CHAT_BRIDGE_AUTH_INVALID" } : { ok: true };
+}
+async function r44ChatBridgeBody(request) {
+  const length = Number(request.headers.get("content-length") || 0);
+  if (length > R44_MAX_RESULT_BYTES) throw new Error("R44_CHAT_BRIDGE_BODY_TOO_LARGE");
+  try {
+    const value = await request.json();
+    return value && typeof value === "object" && !Array.isArray(value) ? value : {};
+  } catch (_) {
+    throw new Error("R44_CHAT_BRIDGE_JSON_INVALID");
+  }
+}
+async function r44ChatBridgeClaim(request, env) {
+  const auth = await r44ChatBridgeAuthorize(request, env);
+  if (!auth.ok) return r44Json({ error: auth.error }, auth.status);
+  const body = await r44ChatBridgeBody(request);
+  const workerId = r44WorkerId(body.workerId);
+  const claim = await r44Claim(env, workerId);
+  if (!claim.ticket || !claim.ticket.lease_token) {
+    return r44Json({ status: claim.status, workerId, counts: claim.counts || null, maxActive: claim.maxActive || null }, claim.status === "CAPACITY_BUSY" ? 429 : 200);
+  }
+  const leaseToken = claim.ticket.lease_token;
+  const context = await r44Context(env, leaseToken);
+  if (!context) return r44Json({ error: "LEASE_INVALID_OR_EXPIRED" }, 409);
+  const prior = await env.WIKI_DB.prepare("SELECT session_id FROM r44_chat_bridge_sessions WHERE lease_token=?").bind(leaseToken).first();
+  const bridgeSessionId = prior && prior.session_id || ("r44b-" + crypto.randomUUID());
+  const stamp = new Date().toISOString();
+  if (!prior) {
+    await env.WIKI_DB.prepare("INSERT INTO r44_chat_bridge_sessions(session_id,ticket_id,worker_id,lease_token,created_at,updated_at) VALUES(?,?,?,?,?,?)")
+      .bind(bridgeSessionId, context.ticketId, workerId, leaseToken, stamp, stamp).run();
+  } else {
+    await env.WIKI_DB.prepare("UPDATE r44_chat_bridge_sessions SET updated_at=? WHERE session_id=?").bind(stamp, bridgeSessionId).run();
+  }
+  const ticket = { ...claim.ticket };
+  delete ticket.lease_token;
+  const safeContext = { ...context };
+  delete safeContext.leaseToken;
+  return r44Json({
+    status: claim.status,
+    transport: "GITHUB_ACTIONS_FREE_BRIDGE",
+    bridgeSessionId,
+    workerId,
+    ticket,
+    context: safeContext,
+    leaseTtlSeconds: 300
+  });
+}
+async function r44ChatBridgeSession(env, sessionId) {
+  const clean = String(sessionId || "");
+  if (!/^r44b-[A-Za-z0-9-]{20,80}$/.test(clean)) return null;
+  return env.WIKI_DB.prepare("SELECT session_id,ticket_id,worker_id,lease_token FROM r44_chat_bridge_sessions WHERE session_id=?").bind(clean).first();
+}
+async function r44ChatBridgeRenew(request, env) {
+  const auth = await r44ChatBridgeAuthorize(request, env);
+  if (!auth.ok) return r44Json({ error: auth.error }, auth.status);
+  const body = await r44ChatBridgeBody(request);
+  const session = await r44ChatBridgeSession(env, body.bridgeSessionId);
+  if (!session) return r44Json({ error: "R44_CHAT_BRIDGE_SESSION_NOT_FOUND" }, 404);
+  const renewed = await r44Renew(env, session.lease_token);
+  if (!renewed) return r44Json({ error: "LEASE_INVALID_OR_EXPIRED", bridgeSessionId: session.session_id, ticketId: session.ticket_id }, 409);
+  await env.WIKI_DB.prepare("UPDATE r44_chat_bridge_sessions SET updated_at=? WHERE session_id=?").bind(new Date().toISOString(), session.session_id).run();
+  return r44Json({ status: "RENEWED", bridgeSessionId: session.session_id, ticketId: session.ticket_id, leaseExpiresAt: renewed.lease_expires_at });
+}
+async function r44ChatBridgeSubmit(request, env) {
+  const auth = await r44ChatBridgeAuthorize(request, env);
+  if (!auth.ok) return r44Json({ error: auth.error }, auth.status);
+  const body = await r44ChatBridgeBody(request);
+  const session = await r44ChatBridgeSession(env, body.bridgeSessionId);
+  if (!session) return r44Json({ error: "R44_CHAT_BRIDGE_SESSION_NOT_FOUND" }, 404);
+  const ticketId = String(body.ticketId || "");
+  const entries = body.entries;
+  if (!ticketId || ticketId !== session.ticket_id) return r44Json({ error: "TICKET_SESSION_MISMATCH", ticketId: session.ticket_id }, 409);
+  if (!Array.isArray(entries)) return r44Json({ error: "INVALID_RESULT_PAYLOAD" }, 400);
+
+  // If the nominal five-minute window elapsed but nobody reclaimed the exact
+  // fenced lease, safely revive that same lease before submit. This never
+  // steals a ticket whose lease token has already changed.
+  const now = Date.now();
+  const active = await env.WIKI_DB.prepare("SELECT lease_expires_at FROM r44_tickets WHERE state='leased' AND ticket_id=? AND lease_token=?").bind(ticketId, session.lease_token).first();
+  if (active && Number(active.lease_expires_at || 0) <= now) {
+    await env.WIKI_DB.prepare("UPDATE r44_tickets SET lease_expires_at=?,updated_at=? WHERE state='leased' AND ticket_id=? AND lease_token=?")
+      .bind(now + R44_LEASE_MS, new Date(now).toISOString(), ticketId, session.lease_token).run();
+  }
+
+  const synthetic = new Request("https://r44.internal/api/r44/submit", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ leaseToken: session.lease_token, payload: { entries } })
+  });
+  const response = await r44Submit(synthetic, env);
+  const value = await response.json();
+  const durable = (value.status === "AUDITED_DURABLE" || value.status === "RESULT_ALREADY_SUBMITTED") && Boolean(value.sha256);
+  if (durable) {
+    await env.WIKI_DB.prepare("DELETE FROM r44_chat_bridge_sessions WHERE session_id=?").bind(session.session_id).run();
+    return r44Json({ ...value, durable: true, bridgeSessionId: session.session_id, receipt: { algorithm: "sha256", sha256: value.sha256 } }, response.status);
+  }
+  return r44Json({ ...value, durable: false, bridgeSessionId: session.session_id }, response.status);
+}
+
 var R44_MCP_PROTOCOL = "2026-07-28";
 var R44_MCP_LEGACY_PROTOCOL = "2025-11-25";
 var R44_MCP_SERVER_INFO = { name: "mls-r44", version: "44.0" };
@@ -461,6 +571,9 @@ async function handleR44(request, env, url) {
   try {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": "*", "access-control-allow-methods": "GET,POST,OPTIONS", "access-control-allow-headers": "content-type,accept,mcp-protocol-version,mcp-method,mcp-name,authorization" } });
     if (url.pathname === "/mcp") return r44McpHandle(request, env);
+    if (url.pathname === "/api/r44/chat-bridge/claim" && request.method === "POST") return r44ChatBridgeClaim(request, env);
+    if (url.pathname === "/api/r44/chat-bridge/renew" && request.method === "POST") return r44ChatBridgeRenew(request, env);
+    if (url.pathname === "/api/r44/chat-bridge/submit" && request.method === "POST") return r44ChatBridgeSubmit(request, env);
     if (url.pathname === "/r44-worker" && request.method === "GET" && url.searchParams.get("bridge")) {
       const bridge = url.searchParams.get("bridge");
       if (bridge === "claim") {
