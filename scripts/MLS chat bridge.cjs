@@ -6,6 +6,11 @@ const path = require('node:path');
 const MLS_CHAT_BRIDGE_BASE_URL = 'https://llmchatmls.dpidiaz.workers.dev';
 
 const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
+  r44StatusChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/status',
+    input: 'body'
+  },
   r44ClaimChat: {
     method: 'POST',
     pathname: '/api/r44/chat-bridge/claim',
