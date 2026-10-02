@@ -96,19 +96,24 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/wiki/editorial/evidence/revision/propose',
     input: 'body'
   },
-  r44Claim: {
-    method: 'GET',
-    pathname: '/r44-worker',
-    input: 'r44Claim'
-  },
-  r44Renew: {
+  r44StatusChat: {
     method: 'POST',
-    pathname: '/api/r44/renew',
-    input: 'r44Renew'
+    pathname: '/api/r44/chat-bridge/status',
+    input: 'body'
   },
-  r44Submit: {
+  r44ClaimChat: {
     method: 'POST',
-    pathname: '/api/r44/submit',
+    pathname: '/api/r44/chat-bridge/claim',
+    input: 'body'
+  },
+  r44RenewChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/renew',
+    input: 'body'
+  },
+  r44SubmitChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/submit',
     input: 'body'
   }
 });
