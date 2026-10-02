@@ -116,3 +116,15 @@ test("R44 free chat bridge keeps lease token server-side and requires editorial 
   assert.match(RUNTIME, /GITHUB_ACTIONS_FREE_BRIDGE/);
   assert.match(RUNTIME, /receipt: \{ algorithm: "sha256", sha256: value\.sha256 \}/);
 });
+
+
+test("R44 MCP mutating tools require the editorial bearer secret", () => {
+  assert.match(RUNTIME, /body\.method === "tools\/call"[\s\S]*r44ChatBridgeAuthorize\(request, env\)/);
+  assert.match(RUNTIME, /-32001, "Unauthorized"/);
+});
+
+test("R44 chat bridge exposes an authenticated non-mutating status probe", () => {
+  assert.match(RUNTIME, /async function r44ChatBridgeStatus/);
+  assert.match(RUNTIME, /\/api\/r44\/chat-bridge\/status/);
+  assert.match(RUNTIME, /authenticated: true/);
+});
