@@ -5,9 +5,9 @@ const {Miniflare}=require('miniflare');
 const {RUNTIME}=require('../../scripts/habilitar r44 cloudflare.js');
 
 test('D1 engine: migration, checkpoint 1-3, new runtime rebind, stale generation and rollback',async()=>{
- const mf=new Miniflare({modules:true,script:'export default {fetch(){return new Response("fixture")}}',d1Databases:['WIKI_DB'],compatibilityDate:'2026-09-08'});
+ const mf=new Miniflare({workers:[{name:'r44-fixture',modules:true,script:'export default {fetch(){return new Response("fixture")}}',d1Databases:['WIKI_DB'],compatibilityDate:'2026-09-08'}]});
  try {
-  const env={WIKI_DB:await mf.getD1Database('WIKI_DB')};
+  const env={WIKI_DB:await mf.getD1Database('WIKI_DB','r44-fixture')};
   const runtime=()=>{const r=vm.createContext({crypto,TextEncoder,Response,Request,Date,Map,Set,JSON,fetch});vm.runInContext(RUNTIME,r);return r;};
   let r=runtime();await r.r44EnsureSchema(env);
   await env.WIKI_DB.prepare("INSERT INTO r44_meta VALUES('pool_schema','MLS-R44-CLOUDFLARE-POOL-2'),('pool_ticket_count','1'),('pool_ticket_size','5')").run();
