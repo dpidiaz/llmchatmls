@@ -8,6 +8,7 @@ test("R44 injector adds route and is idempotent", () => {
   const twice = injectR44(once);
   assert.equal(once, twice);
   assert.match(once, /\/api\/r44\//);
+  assert.match(once, /url\.pathname === "\/mcp"/);
   assert.match(once, /handleR44\(request, env, url\)/);
   assert.match(once, /CREATE TABLE IF NOT EXISTS r44_tickets/);
   assert.match(once, /R44_LEASE_MS = 5 \* 60 \* 1000/);
@@ -71,4 +72,34 @@ test("R44 server bridge lets read-only chat fetchers drive the D1 hot path", () 
   assert.match(RUNTIME, /bridge === "submit"/);
   assert.match(RUNTIME, /const synthetic = new Request/);
   assert.doesNotMatch(RUNTIME, /api\.github\.com\/repos/);
+});
+
+
+test("R44 exposes direct MCP without paid browser transport", () => {
+  assert.match(RUNTIME, /R44_MCP_PROTOCOL = "2026-07-28"/);
+  assert.match(RUNTIME, /R44_MCP_LEGACY_PROTOCOL = "2025-11-25"/);
+  assert.match(RUNTIME, /body\.method === "server\/discover"/);
+  assert.match(RUNTIME, /body\.method === "tools\/list"/);
+  assert.match(RUNTIME, /body\.method === "tools\/call"/);
+  assert.match(RUNTIME, /name: "r44_claim"/);
+  assert.match(RUNTIME, /name: "r44_submit"/);
+  assert.match(RUNTIME, /return r44McpHandle\(request, env\)/);
+  assert.doesNotMatch(RUNTIME, /TinyFish/i);
+});
+
+test("R44 MCP submit requires ticket fencing and returns durable SHA-256 receipt", () => {
+  assert.match(RUNTIME, /TICKET_LEASE_MISMATCH/);
+  assert.match(RUNTIME, /payload: \{ entries \}/);
+  assert.match(RUNTIME, /value\.status === "AUDITED_DURABLE"/);
+  assert.match(RUNTIME, /value\.status === "RESULT_ALREADY_SUBMITTED"/);
+  assert.match(RUNTIME, /receipt: \{ algorithm: "sha256", sha256: value\.sha256 \}/);
+  assert.match(RUNTIME, /Do not report completion without a SHA-256 durable receipt/);
+});
+
+test("R44 MCP validates modern stateless protocol headers", () => {
+  assert.match(RUNTIME, /MCP-Protocol-Version/);
+  assert.match(RUNTIME, /Mcp-Method/);
+  assert.match(RUNTIME, /Mcp-Name/);
+  assert.match(RUNTIME, /HeaderMismatch/);
+  assert.match(RUNTIME, /UnsupportedProtocolVersion/);
 });

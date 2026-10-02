@@ -226,7 +226,7 @@ async function r44Status(env) {
   await r44PoolSeed(env);
   const counts = await r44Counts(env);
   const metaRows = await env.WIKI_DB.prepare("SELECT key,value FROM r44_meta").all();
-  return { status: "ACTIVE", controlPlane: "CLOUDFLARE_D1", productionMode: R44_CONCURRENCY_MODE, globalProductionMutex: false, githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES, leaseTtlSeconds: 300, maxActiveLeases: R44_MAX_ACTIVE, counts, meta: Object.fromEntries((metaRows.results || []).map((r) => [r.key, r.value])) };
+  return { status: "ACTIVE", controlPlane: "CLOUDFLARE_D1", productionMode: R44_CONCURRENCY_MODE, globalProductionMutex: false, githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES, leaseTtlSeconds: 300, maxActiveLeases: R44_MAX_ACTIVE, mcpEndpoint: "/mcp", mcpProtocol: R44_MCP_PROTOCOL, counts, meta: Object.fromEntries((metaRows.results || []).map((r) => [r.key, r.value])) };
 }
 async function r44Export(env, limit) {
   await r44PoolSeed(env);
@@ -243,9 +243,224 @@ async function r44Preview(env, code) {
 function r44WorkerPage() {
   return '<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MLS R44 Worker</title><style>body{font:16px system-ui;max-width:1100px;margin:24px auto;padding:0 16px}button{padding:10px 14px;margin:4px}pre,textarea{width:100%;box-sizing:border-box;background:#f5f5f5;border:1px solid #ccc;padding:12px;white-space:pre-wrap}textarea{min-height:320px}code{font-family:ui-monospace,monospace}</style></head><body><h1>MLS R44 Cloudflare Worker</h1><p>Claim atómico en D1. TTL 5 min con heartbeat automático. Resultado queda AUDITED/PENDING_CANONICAL_R33_VALIDATION.</p><button id="claim">Claim siguiente</button><button id="reload">Recargar contexto</button><div id="state"></div><h2>Contexto congelado</h2><pre id="ctx">Sin claim.</pre><h2>Resultado JSON</h2><p>Debe contener <code>{"entries":[{"code":"MLS-..."} ... ]}</code>. Incluya exactamente las entradas asignadas al ticket (normalmente 5; el ticket final puede contener menos). Cada entrada puede incluir correctedContent, evidence, sources y notes.</p><textarea id="result"></textarea><br><button id="submit">Guardar resultado</button><pre id="out"></pre><script>const params=new URLSearchParams(location.search),state=document.getElementById("state"),ctx=document.getElementById("ctx"),out=document.getElementById("out"),ta=document.getElementById("result");let lease=params.get("lease")||localStorage.getItem("mls-r44-lease")||"";let worker=params.get("worker")||localStorage.getItem("mls-r44-worker")||("r44-"+crypto.randomUUID().replaceAll("-",""));localStorage.setItem("mls-r44-worker",worker);if(lease)localStorage.setItem("mls-r44-lease",lease);async function context(){if(!lease)return;let r=await fetch("/api/r44/context/"+encodeURIComponent(lease),{cache:"no-store"});let j=await r.json();ctx.textContent=JSON.stringify(j,null,2);state.textContent=j.ticketId?("Ticket "+j.ticketId+" — worker "+worker):JSON.stringify(j);return j}async function claim(){let r=await fetch("/api/r44/claim?worker="+encodeURIComponent(worker),{method:"POST",cache:"no-store"});let j=await r.json();out.textContent=JSON.stringify(j,null,2);if(j.ticket&&j.ticket.lease_token){lease=j.ticket.lease_token;localStorage.setItem("mls-r44-lease",lease);await context()}return j}document.getElementById("claim").onclick=claim;document.getElementById("reload").onclick=context;async function submitPayload(payload){if(!lease)return {error:"NO_LEASE"};let r=await fetch("/api/r44/submit",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({leaseToken:lease,payload})});let j=await r.json();out.textContent=JSON.stringify(j,null,2);if(r.ok&&j.status==="AUDITED_DURABLE"){localStorage.removeItem("mls-r44-lease");lease=""}return j}document.getElementById("submit").onclick=async()=>{if(!lease)return alert("Sin lease");let payload;try{payload=JSON.parse(ta.value)}catch(e){return alert("JSON inválido")};await submitPayload(payload)};async function renew(){if(!lease)return {error:"NO_LEASE"};let r=await fetch("/api/r44/renew?lease="+encodeURIComponent(lease),{method:"POST",cache:"no-store"});let j=await r.json();out.textContent=JSON.stringify(j,null,2);return j}async function autoMode(){let mode=params.get("auto")||"";if(mode==="claim"){await claim();return}if(mode==="renew"){await renew();return}if(mode==="submit"){let payload;try{payload=JSON.parse(params.get("payload")||"")}catch(e){out.textContent=JSON.stringify({error:"INVALID_AUTO_PAYLOAD"},null,2);return}await submitPayload(payload);return}await context()}setInterval(async()=>{if(lease)await fetch("/api/r44/renew?lease="+encodeURIComponent(lease),{method:"POST",cache:"no-store"}).catch(()=>{})},120000);autoMode();</script></body></html>';
 }
+
+var R44_MCP_PROTOCOL = "2026-07-28";
+var R44_MCP_LEGACY_PROTOCOL = "2025-11-25";
+var R44_MCP_SERVER_INFO = { name: "mls-r44", version: "44.0" };
+var R44_MCP_TOOLS = [
+  {
+    name: "r44_claim",
+    title: "Claim next MLS R44 ticket",
+    description: "Atomically claim the next R44 ticket in Cloudflare D1 and return its frozen entry context. A ticket normally contains five entries and the lease lasts 300 seconds.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        workerId: { type: "string", description: "Optional stable opaque worker id for this chat." }
+      },
+      additionalProperties: false
+    }
+  },
+  {
+    name: "r44_submit",
+    title: "Submit audited MLS R44 ticket",
+    description: "Persist the audited result for exactly the entries assigned to one R44 lease. Success is durable only when the response contains AUDITED_DURABLE or RESULT_ALREADY_SUBMITTED plus a SHA-256 receipt.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        leaseToken: { type: "string" },
+        ticketId: { type: "string" },
+        entries: {
+          type: "array",
+          minItems: 1,
+          maxItems: 5,
+          items: {
+            type: "object",
+            properties: { code: { type: "string" } },
+            required: ["code"],
+            additionalProperties: true
+          }
+        }
+      },
+      required: ["leaseToken", "ticketId", "entries"],
+      additionalProperties: false
+    }
+  }
+];
+
+function r44McpHeaders(extra = {}) {
+  return {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "no-store",
+    "access-control-allow-origin": "*",
+    ...extra
+  };
+}
+function r44McpResponse(value, status = 200, extraHeaders = {}) {
+  return new Response(JSON.stringify(value), { status, headers: r44McpHeaders(extraHeaders) });
+}
+function r44McpError(id, code, message, data, status = 400) {
+  const error = { code, message };
+  if (data !== undefined) error.data = data;
+  return r44McpResponse({ jsonrpc: "2.0", id: id ?? null, error }, status);
+}
+function r44McpMeta() {
+  return { "io.modelcontextprotocol/serverInfo": R44_MCP_SERVER_INFO };
+}
+function r44McpResult(id, result) {
+  return r44McpResponse({ jsonrpc: "2.0", id, result });
+}
+function r44McpToolResult(value, modern, isError = false) {
+  const result = {
+    content: [{ type: "text", text: JSON.stringify(value) }],
+    structuredContent: value
+  };
+  if (isError) result.isError = true;
+  if (modern) {
+    result.resultType = "complete";
+    result._meta = r44McpMeta();
+  }
+  return result;
+}
+function r44McpModernMeta(body) {
+  const meta = body && body.params && body.params._meta;
+  return meta && typeof meta === "object" ? meta : {};
+}
+function r44McpValidateModernHeaders(request, body) {
+  const meta = r44McpModernMeta(body);
+  const version = String(meta["io.modelcontextprotocol/protocolVersion"] || "");
+  const headerVersion = String(request.headers.get("MCP-Protocol-Version") || "");
+  const headerMethod = String(request.headers.get("Mcp-Method") || "");
+  if (version !== R44_MCP_PROTOCOL || headerVersion !== R44_MCP_PROTOCOL || headerMethod !== body.method) {
+    return { ok: false, message: "MCP modern headers or protocol metadata do not match the request body." };
+  }
+  if (body.method === "tools/call") {
+    const expectedName = String(body.params && body.params.name || "");
+    const headerName = String(request.headers.get("Mcp-Name") || "");
+    if (!expectedName || headerName !== expectedName) {
+      return { ok: false, message: "Mcp-Name must match params.name for tools/call." };
+    }
+  }
+  return { ok: true };
+}
+async function r44McpCallTool(name, args, env, modern) {
+  if (name === "r44_claim") {
+    const workerId = r44WorkerId(args && args.workerId);
+    const claim = await r44Claim(env, workerId);
+    if (claim.ticket && claim.ticket.entries_json) claim.ticket.entries = JSON.parse(claim.ticket.entries_json);
+    const leaseToken = claim.ticket && claim.ticket.lease_token || "";
+    if (claim.ticket) delete claim.ticket.entries_json;
+    const context = leaseToken ? await r44Context(env, leaseToken) : null;
+    return r44McpToolResult({ status: claim.status, claim, context }, modern, claim.status === "CLAIM_RETRY");
+  }
+  if (name === "r44_submit") {
+    const leaseToken = String(args && args.leaseToken || "");
+    const ticketId = String(args && args.ticketId || "");
+    const entries = args && args.entries;
+    if (!leaseToken || !ticketId || !Array.isArray(entries)) {
+      return r44McpToolResult({ error: "INVALID_RESULT_PAYLOAD" }, modern, true);
+    }
+    const prior = await env.WIKI_DB.prepare("SELECT ticket_id,sha256 FROM r44_results WHERE lease_token=?").bind(leaseToken).first();
+    if (prior && prior.ticket_id !== ticketId) {
+      return r44McpToolResult({ error: "TICKET_LEASE_MISMATCH", ticketId: prior.ticket_id }, modern, true);
+    }
+    if (!prior) {
+      const active = await env.WIKI_DB.prepare("SELECT ticket_id FROM r44_tickets WHERE state='leased' AND lease_token=?").bind(leaseToken).first();
+      if (active && active.ticket_id !== ticketId) {
+        return r44McpToolResult({ error: "TICKET_LEASE_MISMATCH", ticketId: active.ticket_id }, modern, true);
+      }
+    }
+    const synthetic = new Request("https://r44.internal/api/r44/submit", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ leaseToken, payload: { entries } })
+    });
+    const response = await r44Submit(synthetic, env);
+    const value = await response.json();
+    const durable = (value.status === "AUDITED_DURABLE" || value.status === "RESULT_ALREADY_SUBMITTED") && Boolean(value.sha256);
+    const result = durable
+      ? { ...value, durable: true, receipt: { algorithm: "sha256", sha256: value.sha256 } }
+      : { ...value, durable: false };
+    return r44McpToolResult(result, modern, !durable);
+  }
+  return null;
+}
+async function r44McpHandle(request, env) {
+  if (request.method !== "POST") {
+    return r44McpResponse({ error: "MCP_POST_REQUIRED" }, 405, { allow: "POST, OPTIONS" });
+  }
+  let body;
+  try {
+    body = await request.json();
+  } catch (_) {
+    return r44McpError(null, -32700, "Parse error", undefined, 400);
+  }
+  if (!body || Array.isArray(body) || body.jsonrpc !== "2.0" || typeof body.method !== "string") {
+    return r44McpError(body && body.id, -32600, "Invalid Request", undefined, 400);
+  }
+  const id = Object.prototype.hasOwnProperty.call(body, "id") ? body.id : null;
+  const meta = r44McpModernMeta(body);
+  const bodyVersion = String(meta["io.modelcontextprotocol/protocolVersion"] || "");
+  const headerVersion = String(request.headers.get("MCP-Protocol-Version") || "");
+  const modern = body.method === "server/discover" || bodyVersion === R44_MCP_PROTOCOL || headerVersion === R44_MCP_PROTOCOL;
+
+  if (modern) {
+    const valid = r44McpValidateModernHeaders(request, body);
+    if (!valid.ok) return r44McpError(id, -32020, "HeaderMismatch", { detail: valid.message }, 400);
+  } else if (body.method !== "initialize" && headerVersion && headerVersion !== R44_MCP_LEGACY_PROTOCOL) {
+    return r44McpError(id, -32022, "UnsupportedProtocolVersion", { supportedVersions: [R44_MCP_PROTOCOL, R44_MCP_LEGACY_PROTOCOL] }, 400);
+  }
+
+  if (body.method === "server/discover") {
+    return r44McpResult(id, {
+      resultType: "complete",
+      supportedVersions: [R44_MCP_PROTOCOL, R44_MCP_LEGACY_PROTOCOL],
+      capabilities: { tools: {} },
+      instructions: "Use r44_claim to obtain one D1-fenced R44 ticket, audit exactly its assigned entries, then call r44_submit with the returned ticketId and leaseToken. Do not report completion without a SHA-256 durable receipt.",
+      ttlMs: 300000,
+      cacheScope: "public",
+      _meta: r44McpMeta()
+    });
+  }
+  if (body.method === "initialize") {
+    const requested = String(body.params && body.params.protocolVersion || R44_MCP_LEGACY_PROTOCOL);
+    const negotiated = requested === R44_MCP_LEGACY_PROTOCOL ? requested : R44_MCP_LEGACY_PROTOCOL;
+    return r44McpResult(id, {
+      protocolVersion: negotiated,
+      capabilities: { tools: { listChanged: false } },
+      serverInfo: R44_MCP_SERVER_INFO,
+      instructions: "Claim with r44_claim and submit with r44_submit. D1 is authoritative."
+    });
+  }
+  if (body.method === "notifications/initialized") {
+    return new Response(null, { status: 202, headers: { "cache-control": "no-store", "access-control-allow-origin": "*" } });
+  }
+  if (body.method === "tools/list") {
+    const result = { tools: R44_MCP_TOOLS };
+    if (modern) {
+      result.resultType = "complete";
+      result.ttlMs = 300000;
+      result.cacheScope = "public";
+      result._meta = r44McpMeta();
+    }
+    return r44McpResult(id, result);
+  }
+  if (body.method === "tools/call") {
+    const name = String(body.params && body.params.name || "");
+    const args = body.params && body.params.arguments || {};
+    const result = await r44McpCallTool(name, args, env, modern);
+    if (!result) return r44McpError(id, -32602, "Unknown tool", { name }, 400);
+    return r44McpResult(id, result);
+  }
+  if (id === null) {
+    return new Response(null, { status: 202, headers: { "cache-control": "no-store", "access-control-allow-origin": "*" } });
+  }
+  return r44McpError(id, -32601, "Method not found", { method: body.method }, 404);
+}
+
 async function handleR44(request, env, url) {
   try {
-    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": "*", "access-control-allow-methods": "GET,POST,OPTIONS", "access-control-allow-headers": "content-type" } });
+    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": "*", "access-control-allow-methods": "GET,POST,OPTIONS", "access-control-allow-headers": "content-type,accept,mcp-protocol-version,mcp-method,mcp-name,authorization" } });
+    if (url.pathname === "/mcp") return r44McpHandle(request, env);
     if (url.pathname === "/r44-worker" && request.method === "GET" && url.searchParams.get("bridge")) {
       const bridge = url.searchParams.get("bridge");
       if (bridge === "claim") {

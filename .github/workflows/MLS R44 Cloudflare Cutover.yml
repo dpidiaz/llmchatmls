@@ -61,4 +61,20 @@ jobs:
           printf '%s' "$status" | grep -F '"controlPlane":"CLOUDFLARE_D1"'
           printf '%s' "$status" | node 'scripts/r44 verify status.cjs'
           curl -fsSL "$base/r44-worker" | grep -F 'MLS R44 Cloudflare Worker'
+          discover="$(curl -fsSL -X POST "$base/mcp" \
+            -H 'content-type: application/json' \
+            -H 'accept: application/json, text/event-stream' \
+            -H 'MCP-Protocol-Version: 2026-07-28' \
+            -H 'Mcp-Method: server/discover' \
+            --data '{"jsonrpc":"2.0","id":"discover","method":"server/discover","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"r44-ci","version":"1"},"io.modelcontextprotocol/clientCapabilities":{}}}}')"
+          printf '%s\n' "$discover"
+          printf '%s' "$discover" | grep -F '"supportedVersions":["2026-07-28","2025-11-25"]'
+          tools="$(curl -fsSL -X POST "$base/mcp" \
+            -H 'content-type: application/json' \
+            -H 'accept: application/json, text/event-stream' \
+            -H 'MCP-Protocol-Version: 2026-07-28' \
+            -H 'Mcp-Method: tools/list' \
+            --data '{"jsonrpc":"2.0","id":"tools","method":"tools/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"r44-ci","version":"1"},"io.modelcontextprotocol/clientCapabilities":{}}}}')"
+          printf '%s' "$tools" | grep -F '"name":"r44_claim"'
+          printf '%s' "$tools" | grep -F '"name":"r44_submit"'
           echo 'R44_CLOUDFLARE_CUTOVER_OK'
