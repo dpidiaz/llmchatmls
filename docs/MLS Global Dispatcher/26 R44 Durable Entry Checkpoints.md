@@ -5,6 +5,62 @@ The acceptance boundary is a database receipt, never a success message from a
 session, browser, workflow or chat. R44 always returns
 `PENDING_CANONICAL_R33_VALIDATION`; it does not certify or publish R33 content.
 
+## Production deployment record — 2026-10-02
+
+R44 44.1 was deployed and verified on 2026-10-02.
+
+- Implementation: [PR #2741](https://github.com/dpidiaz/llmchatmls/pull/2741).
+- Merged commit: [e021774c3eb0cc60af597a80d0d50e29d0dd5517](https://github.com/dpidiaz/llmchatmls/commit/e021774c3eb0cc60af597a80d0d50e29d0dd5517).
+- Successful deployment: [Cloudflare Cutover run 37071794913, attempt 2](https://github.com/dpidiaz/llmchatmls/actions/runs/37071794913/attempts/2).
+- Worker version: `a3770ecd-ad0f-4e57-b6e8-17863b2929c9`.
+- Target: [llmchatmls.dpidiaz.workers.dev](https://llmchatmls.dpidiaz.workers.dev).
+- Final verification at approximately 22:26 UTC recorded
+  `R44_DURABLE_ENTRY_STATUS_VERIFIED` and `R44_CLOUDFLARE_CUTOVER_OK`.
+- Production status confirmed `ACTIVE`, `durable_entry_schema=1`, 300-second
+  leases and the 128-worker ceiling. MCP discovery/tool listing and the
+  authenticated bridge status probe passed.
+
+The first post-upload check still received the previous runtime during
+propagation and failed the new schema assertion. A subsequent direct production
+read confirmed the new runtime and completed migration. Attempt 2 finished
+successfully, including the authenticated smoke checks.
+
+### Historical migration snapshot and outstanding work
+
+At the deployment verification, the normalized snapshot contained **1,682
+tickets**: 1,365 CLAIMABLE, 71 LEASED and **246 QUARANTINED**. All 71 recorded
+leases were expired/recoverable at that observation; LEASED is a progress state,
+not proof of currently valid ownership. These are historical counts, not live
+metrics.
+
+The 246 quarantined tickets retained their original audited results and global
+receipts. Their normalized quarantine means individual entry receipts still
+require administrative reconciliation; it does not mean their old results
+were deleted or that new work is blocked. Do not reissue or fabricate receipts
+for those tickets. No historical reconciliation was performed by this deployment.
+
+Canonical `content/`, the frozen pool and the R33 ledger were not changed.
+The normal production build regenerated derived site assets from canonical
+sources. R44 results remain `PENDING_CANONICAL_R33_VALIDATION`.
+
+### Implementation map
+
+| Files | Responsibility |
+| --- | --- |
+| `scripts/r44 durable.js` | Normalized checkpoints, claim idempotency, reconciliation, rebind and authenticated bridge recovery |
+| `scripts/r44 client.js` | Persistent binding/outbox, receipt verification and bounded retry |
+| `scripts/r44 runtime.js` | Existing route compatibility, MCP tools, bridge integration and worker UI |
+| `scripts/habilitar r44 cloudflare.js` | Build injection of runtime, SQL and client; replacement of prior injected code |
+| `migrations/0044_entry_checkpoints.sql` | Additive tables, uniqueness constraints, fencing and atomic receipt triggers |
+| `scripts/r44 verify status.cjs` | Production schema and normalized-count assertions |
+| `test/r44 durable checkpoints.test.cjs` | Crash/restart, concurrency, recovery and bridge tests |
+| `test/r44 cloudflare control plane.test.cjs`, `test/r44 full pending corpus.test.cjs` | Existing-contract and frozen-pool regression tests |
+| `test/integration/r44-d1.test.cjs` | D1 engine test through Wrangler's platform proxy |
+| `package.json` | `test:r44` command |
+| `.github/workflows/MLS R44 Cloudflare Cutover.yml`, `.github/workflows/MLS R44 Generate Full Pending.yml` | Validation and deployment checks |
+| `MLS R32 EDITORIAL/r44/CUTOVER_REQUEST.json` | Explicit production cutover request |
+| Dispatcher documents 24, 25 and this document | Editorial boundary, transport protocol and durable-entry contract |
+
 ## API
 
 Existing `/api/r44/status`, `/claim`, `/context/:leaseToken`, `/renew`, `/submit`,
@@ -19,6 +75,30 @@ Existing `/api/r44/status`, `/claim`, `/context/:leaseToken`, `/renew`, `/submit
 | GET `/receipt?receiptId=R` | Receipt identity | Persisted receipt and SHA-256 |
 | POST `/entry-state` | ticketId, workerId, leaseToken, leaseGeneration, code, state | Fenced PENDING, IN_PROGRESS, FAILED_RETRYABLE or QUARANTINED transition |
 | POST `/renew?lease=L&leaseGeneration=G` | Current token and generation | Five-minute extension; old clients may omit generation because tokens are unique per generation |
+
+### Authenticated MCP and bridge
+
+Existing MCP and bridge authentication was preserved when integrating with
+current main. MCP now exposes `r44_checkpoint`, `r44_rebind` and
+`r44_reconcile`, alongside compatible `r44_claim` and `r44_submit`.
+MCP tool calls continue to require the configured editorial bearer credential.
+
+The authenticated backend also provides:
+
+- POST `/api/r44/chat-bridge/rebind`: workerId and ticketId recover the existing
+  assignment and, when ownership is still valid, restore a bridgeSessionId.
+  This operation never claims or revives expired work.
+- POST `/api/r44/chat-bridge/checkpoint`: bridgeSessionId, ticketId,
+  leaseGeneration, idempotencyKey and entry persist one entry. The backend
+  resolves the lease token; it must not be copied to a public control branch.
+- Existing bridge submit retains its binding after success, allowing retry after
+  response loss. It no longer revives an expired lease.
+
+Public reconciliation/rebind responses omit the lease token. Bridge context
+also removes the nested lease token. External bridge callers must adopt these
+new operations to obtain per-entry persistence; the legacy full-ticket operation
+remains supported. The external `mlschatcontrol` repository was not changed by
+PR #2741.
 
 Checkpoint example:
 
@@ -96,8 +176,10 @@ The next-ticket action is explicit and requires confirmed COMPLETE.
 
 Never emit AUDITED_DURABLE without a matching verified receipt. On ambiguous
 transport failures emit EXECUTION_UNCONFIRMED and preserve the outbox. This does
-not mean previously confirmed entries were lost. A bridge must implement session
-creation/reuse itself; the direct HTTP client avoids that dependency entirely.
+not mean previously confirmed entries were lost. The authenticated backend can
+restore a bridge binding through its rebind route; external transport adapters
+must call that route while preserving worker/ticket identity. The direct HTTP
+client avoids the session dependency entirely.
 
 ## Migration and compatibility
 
@@ -144,10 +226,24 @@ The critical crash-3/5 test asserts remaining codes 4 and 5 after reopen/rebind.
 An offline frozen-source directory may be supplied through R44_FROZEN_DIR; the
 existing validator checks the Git blob hashes before accepting those files.
 
-Local SQLite and mocked HTTP are not a live Cloudflare/bridge integration test.
-Before production rollout, verify migration cost/quotas and SQLite trigger/JSON
-behavior in a staging D1 database. No deployment, production migration, corpus
-write or R33 certification is part of this change. The existing endpoint trust
-model remains in place; worker IDs and receipt hashes are not authentication.
+The released revision passed **50 R44 tests**, plus the additional D1 engine
+integration test through Wrangler's platform proxy. The D1 test applies the
+migration to a disposable fixture, commits entries 1–3, creates a new runtime,
+asserts remaining [4,5], rejects a stale generation after reassignment, and
+checks rollback after a forced preview failure. R33 and Global Dispatcher CI
+checks also passed; the deployment workflow validated canonical data and built
+the production worker.
+
+Production verification covered the migrated status, normalized counts, worker
+page, MCP discovery/tool listing and authenticated bridge status. It did not
+claim or submit a production ticket for testing. The D1 fixture test is an
+emulated engine test, not a separately provisioned remote staging database.
+
+Remaining limitations: the 246 historical ticket-only results need individual
+reconciliation; external callers must use checkpoint/rebind to benefit from
+incremental progress; and mixed old/new writers or application-only rollback
+are unsafe. Keep the additive tables and fences. Worker IDs and receipt hashes
+are not authentication or digital signatures, and no R33 certification is
+implied by R44 durability.
 
 D1 transaction semantics: https://developers.cloudflare.com/d1/worker-api/d1-database/#batch
