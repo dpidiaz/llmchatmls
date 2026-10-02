@@ -103,3 +103,16 @@ test("R44 MCP validates modern stateless protocol headers", () => {
   assert.match(RUNTIME, /HeaderMismatch/);
   assert.match(RUNTIME, /UnsupportedProtocolVersion/);
 });
+
+
+test("R44 free chat bridge keeps lease token server-side and requires editorial auth", () => {
+  assert.match(RUNTIME, /r44_chat_bridge_sessions/);
+  assert.match(RUNTIME, /MLS_EDITORIAL_CHAT_KEY/);
+  assert.match(RUNTIME, /R44_CHAT_BRIDGE_AUTH_REQUIRED/);
+  assert.match(RUNTIME, /bridgeSessionId/);
+  assert.match(RUNTIME, /delete ticket\.lease_token/);
+  assert.match(RUNTIME, /delete safeContext\.leaseToken/);
+  assert.match(RUNTIME, /TICKET_SESSION_MISMATCH/);
+  assert.match(RUNTIME, /GITHUB_ACTIONS_FREE_BRIDGE/);
+  assert.match(RUNTIME, /receipt: \{ algorithm: "sha256", sha256: value\.sha256 \}/);
+});
