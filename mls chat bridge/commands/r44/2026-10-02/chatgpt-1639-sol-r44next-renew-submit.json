@@ -1,0 +1,243 @@
+{
+  "batchId": "r44-20261002-1639-sol-r44next-renew-submit",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-77445f0a-613c-4d96-9901-2a72ca9ca885"
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-77445f0a-613c-4d96-9901-2a72ca9ca885",
+        "ticketId": "R43-EMERGENCY-0676",
+        "entries": [
+          {
+            "code": "MLS-V06-0978",
+            "audit": {
+              "outcome": "PASS"
+            },
+            "evidence": [
+              {
+                "claim": "ございます es una forma más cortés de あります y でございます una forma más cortés de です.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-GOZAIMASU",
+                  "BUNKA-KEIGO-BASIC"
+                ]
+              },
+              {
+                "claim": "（で）ございます pertenece al ámbito de 丁寧語 y aumenta la cortesía dirigida al interlocutor.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "BUNKA-KEIGO-BASIC"
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "id": "JPF-GOZAIMASU",
+                "author": "The Japan Foundation",
+                "title": "ございます",
+                "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00093/ja/render.do",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (n.d.). ございます. みんなの教材サイト."
+              },
+              {
+                "id": "BUNKA-KEIGO-BASIC",
+                "author": "文化庁",
+                "title": "第二話「敬語の基本」理解度チェックの解答",
+                "url": "https://www.bunka.go.jp/seisaku/kokugo_nihongo/kokugo_shisaku/keigo/chapter2/detail.html",
+                "tier": "A",
+                "apa7": "文化庁. (n.d.). 第二話「敬語の基本」理解度チェックの解答."
+              }
+            ],
+            "notes": "PASS. La distinción entre ございます／でございます y su caracterización como cortesía dirigida al interlocutor están respaldadas por fuentes institucionales."
+          },
+          {
+            "code": "MLS-V06-0979",
+            "audit": {
+              "outcome": "CORRECTED",
+              "severity": "minor"
+            },
+            "correctedContent": {
+              "articleMarkdown": "#### En pocas palabras\n\nEn japonés, **は** puede aparecer en un lugar donde, en una oración neutra, esperaríamos **が**. Esto no significa que **は** y **が** sean intercambiables: el cambio modifica cómo se organiza la información. **が** marca al participante presentado o identificado dentro del enunciado, mientras que **は** convierte ese elemento en tópico o le añade contraste.\n\nEn **田中さんが来ました。** se presenta o identifica a Tanaka como quien vino. En cambio, **田中さんは来ました。** significa aproximadamente “Tanaka sí vino / en cuanto a Tanaka, vino” y puede sugerir contraste con otras personas.\n\n#### Cómo funciona\n\nEl patrón relevante no es una sustitución puramente mecánica de partículas. Cuando un constituyente que en una oración neutra estaría marcado por **が** pasa a **は**, el hablante reorganiza la información: lo presenta como tema ya establecido o lo contrasta con otras posibilidades.\n\nLa diferencia también afecta al foco. **だれが来ましたか。— 田中さんが来ました。** usa **が** porque la respuesta identifica directamente quién vino. **田中さんは来ました。** sería natural en un contexto donde Tanaka ya es el tema o donde se lo contrasta con alguien más.\n\nTambién conviene distinguir este fenómeno de combinaciones como **には** o **では**. En **私にはこの問題が分かりません。**, por ejemplo, **は** se superpone a un constituyente marcado por **に** para tematizarlo o contrastarlo; no es un caso de reemplazo de **が**.\n\n#### Ejemplos\n\n* **猫が庭にいます。** — Hay un gato en el jardín; **が** presenta al gato como participante de la situación.\n* **猫は庭にいます。** — En cuanto al gato, está en el jardín; **は** lo convierte en tópico y puede implicar contraste.\n* **山田さんが担当します。** — Yamada se encargará; se identifica quién asumirá la tarea.\n* **山田さんは担当します。** — Yamada sí se encargará / en cuanto a Yamada, se encargará; el contexto puede contrastarlo con otros.\n\n#### Observación importante\n\nNo conviene enseñar la oposición como “**が = sujeto**” y “**は = tema**” sin más. **が** también interviene en la presentación y el foco de información, y **は** puede combinarse con elementos que no son sujetos. Además, al pasar de **が** a **は** puede cambiar la interpretación informativa de toda la oración, incluso cuando la referencia básica permanece igual.\n\nPor eso, ante un cambio de **が** a **は**, hay que preguntar qué información ya está establecida, qué se contrasta y qué elemento recibe el foco principal.\n\n#### Entradas relacionadas\n\n[Entrada 145: には](#entry-145) · [Entrada 149: に対して](#entry-149) · [Entrada 150: に関して](#entry-150) · [Entrada 151: は reemplazando を: topicalización contrastiva](#entry-151)"
+            },
+            "evidence": [
+              {
+                "claim": "が funciona como marcador de sujeto en patrones básicos y は organiza un elemento como tópico; no son sustitutos mecánicos.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-PARTICLES",
+                  "JPF-IRODORI"
+                ]
+              },
+              {
+                "claim": "Una secuencia como には combina は con un constituyente en に y no ejemplifica por sí sola un reemplazo de が.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-IRODORI"
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "id": "JPF-PARTICLES",
+                "author": "The Japan Foundation",
+                "title": "資料 助詞のまとめ",
+                "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BTS00005/ja/render.do",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (n.d.). 資料 助詞のまとめ. みんなの教材サイト."
+              },
+              {
+                "id": "JPF-IRODORI",
+                "author": "The Japan Foundation",
+                "title": "Irodori: Japanese for Life in Japan — Grammar Notes",
+                "url": "https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (n.d.). Irodori: Japanese for Life in Japan — Grammar Notes."
+              }
+            ],
+            "notes": "CORRECTED. Se elimina como ejemplo principal de が→は la oración 私にはこの問題が分かりません, porque には tematiza/contrasta un constituyente en に; se conserva la explicación válida con pares directos が/は."
+          },
+          {
+            "code": "MLS-V06-0980",
+            "audit": {
+              "outcome": "PASS"
+            },
+            "evidence": [
+              {
+                "claim": "Sものだ puede presentar el contenido como general, esperable, normal o de sentido común.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-MONODA"
+                ]
+              },
+              {
+                "claim": "ものだ puede adquirir valor normativo o admonitorio según el contexto.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-MONODA",
+                  "JPF-MONO-1"
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "id": "JPF-MONODA",
+                "author": "The Japan Foundation",
+                "title": "ものだ/ものではない",
+                "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00021/ja/render.do",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (n.d.). ものだ/ものではない. みんなの教材サイト."
+              },
+              {
+                "id": "JPF-MONO-1",
+                "author": "The Japan Foundation",
+                "title": "日本語教育通信 文法を楽しく「もの」（1）",
+                "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201206.html",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (2012). 日本語教育通信 文法を楽しく「もの」（1）."
+              }
+            ],
+            "notes": "PASS. La generalización y el posible matiz normativo descritos coinciden con las explicaciones de The Japan Foundation."
+          },
+          {
+            "code": "MLS-V06-0982",
+            "audit": {
+              "outcome": "PASS"
+            },
+            "evidence": [
+              {
+                "claim": "S1もののS2 expresa que S2 difiere de lo esperado a partir de S1.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-MONONO"
+                ]
+              },
+              {
+                "claim": "ものの tiene tendencia escrita/formal frente a alternativas concesivas más conversacionales.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-MONO-2",
+                  "JPF-GYAKUSETSU"
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "id": "JPF-MONONO",
+                "author": "The Japan Foundation",
+                "title": "ものの",
+                "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00058/ja/render.do",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (n.d.). ものの. みんなの教材サイト."
+              },
+              {
+                "id": "JPF-MONO-2",
+                "author": "The Japan Foundation",
+                "title": "日本語教育通信 文法を楽しく「もの」（2）",
+                "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201209.html",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (2012). 日本語教育通信 文法を楽しく「もの」（2）."
+              },
+              {
+                "id": "JPF-GYAKUSETSU",
+                "author": "The Japan Foundation",
+                "title": "日本語教育通信 文法を楽しく「表現意図 -逆接-」",
+                "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201703.html",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (2017). 日本語教育通信 文法を楽しく「表現意図 -逆接-」."
+              }
+            ],
+            "notes": "PASS. La estructura concesiva, la relación contraexpectativa y el carácter relativamente escrito están respaldados por fuentes institucionales."
+          },
+          {
+            "code": "MLS-V06-0983",
+            "audit": {
+              "outcome": "PASS"
+            },
+            "evidence": [
+              {
+                "claim": "わけだ expresa una conclusión o explicación lógica derivada de hechos ya disponibles.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-WAKEDA-REASON",
+                  "JPF-WAKEDA-COMPARE"
+                ]
+              },
+              {
+                "claim": "わけだ se distingue de はずだ porque se apoya en hechos o asuntos ya ocurridos/disponibles, no simplemente en una expectativa del hablante.",
+                "support": "SUPPORTED",
+                "sourceIds": [
+                  "JPF-WAKEDA-COMPARE"
+                ]
+              }
+            ],
+            "sources": [
+              {
+                "id": "JPF-WAKEDA-REASON",
+                "author": "The Japan Foundation",
+                "title": "日本語教育通信 文法を楽しく「表現意図 -理由-」",
+                "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201612.html",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (2016). 日本語教育通信 文法を楽しく「表現意図 -理由-」."
+              },
+              {
+                "id": "JPF-WAKEDA-COMPARE",
+                "author": "The Japan Foundation",
+                "title": "日本語教育通信 文法を楽しく「そうだ／ようだ／らしい」（2）",
+                "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201103.html",
+                "tier": "A",
+                "apa7": "The Japan Foundation. (2011). 日本語教育通信 文法を楽しく「そうだ／ようだ／らしい」（2）."
+              }
+            ],
+            "notes": "PASS. La lectura inferencial y la distinción frente a una mera expresión causal o una expectativa están respaldadas por The Japan Foundation."
+          }
+        ]
+      }
+    }
+  ]
+}
