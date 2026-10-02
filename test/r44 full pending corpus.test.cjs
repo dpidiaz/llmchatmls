@@ -86,7 +86,9 @@ test('new and final tickets claimable; exact three-entry submit durable and idem
   const normal=pool.tickets[800].entries.map(e=>({code:e.code}));
   const normalResult=await h.r.r44Submit(new Request('https://test/api/r44/submit',{method:'POST',body:JSON.stringify({leaseToken:first.ticket.lease_token,payload:{entries:normal}})}),h.env);
   assert.equal(normalResult.status,200);
-  assert.equal(h.db.prepare("SELECT count(*) n FROM r44_preview_articles WHERE ticket_id='R44-CORPUS-1682'").get().n,3);
-  const wrapped=await h.r.r44Claim(h.env,finalWorker);assert.equal(wrapped.ticket.ordinal_start,1);
+  assert.equal(h.db.prepare("SELECT count(*) n FROM r44_preview_articles WHERE ticket_id='R44-CORPUS-1682'").get().n,0);
+  assert.equal(h.db.prepare("SELECT count(*) n FROM r44_receipts WHERE ticket_id='R44-CORPUS-1682'").get().n,3);
+  assert.equal((await h.r.r44Claim(h.env,finalWorker)).status,'CLAIM_ALREADY_RESOLVED');
+  const wrapped=await h.r.r44Claim(h.env,finalWorker,'explicit-next');assert.equal(wrapped.ticket.entries[0].code,pool.tickets[0].entries[0].code);
   const status=await h.r.r44Status(h.env);assert.equal(status.leaseTtlSeconds,300);assert.equal(status.maxActiveLeases,128);assert.equal(status.globalProductionMutex,false);assert.equal(status.githubHotPathWrites,false);assert.equal(status.productionMode,'PARALLEL_HOT_PATH');
 });

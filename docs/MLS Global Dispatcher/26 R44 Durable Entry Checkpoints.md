@@ -1,0 +1,153 @@
+# R44: durable entry checkpoints
+
+R44 persists one entry at a time. Session loss does not undo a committed entry.
+The acceptance boundary is a database receipt, never a success message from a
+session, browser, workflow or chat. R44 always returns
+`PENDING_CANONICAL_R33_VALIDATION`; it does not certify or publish R33 content.
+
+## API
+
+Existing `/api/r44/status`, `/claim`, `/context/:leaseToken`, `/renew`, `/submit`,
+`/export`, `/preview/:code` and `/r44-worker` remain available.
+
+| Operation | Request | Result |
+| --- | --- | --- |
+| POST `/claim?worker=W&idempotencyKey=K` | Stable worker and claim key, saved before sending | Same allocation for every replay of K, including after completion/expiry |
+| POST `/checkpoint` | ticketId, workerId, leaseToken, leaseGeneration, idempotencyKey, entry | AUDITED_DURABLE or ALREADY_DURABLE with receipt and receiptSha256 |
+| GET `/reconcile?ticketId=T` | Ticket identity | Single-statement authoritative snapshot, entries, receipts, lease and remaining codes |
+| POST `/rebind` | workerId, ticketId; optional previous leaseToken | LEASE_REUSED, COMPLETE, LEASE_LOST or NO_BINDING; never acquires/renews a lease |
+| GET `/receipt?receiptId=R` | Receipt identity | Persisted receipt and SHA-256 |
+| POST `/entry-state` | ticketId, workerId, leaseToken, leaseGeneration, code, state | Fenced PENDING, IN_PROGRESS, FAILED_RETRYABLE or QUARANTINED transition |
+| POST `/renew?lease=L&leaseGeneration=G` | Current token and generation | Five-minute extension; old clients may omit generation because tokens are unique per generation |
+
+Checkpoint example:
+
+```json
+{
+  "ticketId": "ticket-from-claim",
+  "workerId": "stable-worker",
+  "leaseToken": "token-from-claim",
+  "leaseGeneration": 1,
+  "idempotencyKey": "stable-entry-attempt-key",
+  "entry": {"code": "MLS-V01-0001", "outcome": "PASS_NO_CHANGE", "notes": "review evidence"}
+}
+```
+
+`CORRECTED` requires an object in `correctedContent`. `PASS_NO_CHANGE` rejects
+correctedContent and stores audit metadata/receipt without rewriting the source,
+cache or preview. Payload object keys are canonicalized before hashing.
+Duplicate content for an already durable entry returns its original receipt,
+including its original key; changed content or a key used by a different entry
+returns RESULT_CONFLICT. A durable entry is immutable through these APIs.
+
+The receipt identifies ticket, code, original source hash, normalized payload
+hash, outcome, worker, generation, idempotency key and server timestamp. Hash its
+recursively key-sorted JSON using SHA-256 and compare receiptSha256. The bundled
+client verifies both receipt integrity and the submitted payload hash before
+showing success. These are integrity hashes, not digital signatures or R33 seals.
+
+## State and transaction model
+
+`r44_ticket_progress` is the normalized ticket state authority:
+CLAIMABLE / LEASED / PARTIAL_DURABLE / COMPLETE / QUARANTINED.
+`r44_entries` stores PENDING / IN_PROGRESS / AUDITED_DURABLE /
+FAILED_RETRYABLE / QUARANTINED. Leases, claims and receipts have separate tables.
+The old `r44_tickets` table retains frozen pool identity and legacy projections.
+
+SQLite constraints enforce one entry code across the pool, one receipt per entry,
+one receipt key per ticket, one claim key per worker and one lease per ticket.
+Claim selection and its trigger execute as one statement. Live leases for a
+worker are reused even if it sends two different claim keys concurrently.
+The 128-live-lease ceiling is checked in that same statement.
+
+Each checkpoint uses D1 batch with a receipt insertion. Its BEFORE trigger checks
+token, worker, generation, DB-clock expiry, source identity and writable entry
+state **inside** the transaction. Its AFTER trigger commits the entry, optional
+corrected preview, event, renewed five-minute lease, and derived ticket state.
+Any failure rolls all these changes back. The server marks COMPLETE only when
+all entries are AUDITED_DURABLE. It never needs a client finalize request.
+
+An expired lease may retain LEASED/PARTIAL_DURABLE as its persisted progress state;
+`lease.active=false` is authoritative for ownership. A new explicit claim may
+reassign the unfinished ticket with an incremented generation. Rebind never
+revives expired ownership. QUARANTINED requires administrative resolution and
+is not eligible for automatic claim or recovery writes.
+
+## Recovery and messaging
+
+The bundled HTTP client persists worker, claim key, ticket, token, generation and
+the exact pending checkpoint in localStorage before sending. Its hot path has
+no GitHub writes and creates no sessions or workflows. The state can also be
+preserved by a bridge in its durable task storage when no browser is used.
+
+On SESSION_NOT_FOUND, TooManyActiveSessions, timeout, 5xx or workflow interruption:
+
+1. Preserve the binding, entry payload and keys. Do not claim new work.
+2. Restore transport/session if the caller uses one, then rebind the same ticket.
+3. Read the authoritative receipts and remaining list. Verify receipts.
+4. Replay only the exact unconfirmed checkpoint, with the same key, if the lease
+   remains valid. A repeated committed checkpoint is a read-only acknowledgement.
+5. On LEASE_LOST stop writes. Only explicit allocation can establish new ownership.
+
+Retries are bounded to five attempts with exponential jitter and Retry-After
+support for 429/5xx. HTTP conflicts are not retried. An interrupted claim can be
+explicitly replayed with the saved claim key; recover() never performs a claim.
+The next-ticket action is explicit and requires confirmed COMPLETE.
+
+Never emit AUDITED_DURABLE without a matching verified receipt. On ambiguous
+transport failures emit EXECUTION_UNCONFIRMED and preserve the outbox. This does
+not mean previously confirmed entries were lost. A bridge must implement session
+creation/reuse itself; the direct HTTP client avoids that dependency entirely.
+
+## Migration and compatibility
+
+`migrations/0044_entry_checkpoints.sql` is additive and idempotent. The injector
+embeds its statement list; the runtime applies it transactionally after the
+legacy schema and frozen pool are ready. `r44_meta.durable_entry_schema=1` records
+completion in the same batch. Normal requests then need only a version read.
+On an existing ready installation it can alternatively be applied as a reviewed
+D1 migration before switching traffic. Do not apply it to an empty database
+before the legacy schema and pool have been initialized.
+
+Existing queued entries become PENDING. Active legacy tokens are preserved as
+generation 1, and unfinished tickets retain ownership. Historical audited or
+verified tickets keep their original legacy rows, exports and global receipts;
+their normalized state is QUARANTINED with
+LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION. They are not reissued and no
+entry receipts are fabricated. Review the old evidence separately before any
+administrative conversion to per-entry receipts. No corpus or R33 ledger is changed.
+
+The legacy full-ticket submit still requires the exact assigned code set. It
+checkpoints entries individually, preserving progress if the submit stops midway.
+Replaying the full payload skips entries already saved. Full envelope metadata
+and its original JSON digest are retained in r44_results after completion; an
+interruption of that compatibility projection is repaired by replaying submit.
+The exporter can reconstruct a completed ticket from receipts even before that
+projection exists. Partial tickets never appear as completed exports.
+
+Legacy calls without a claim key use `legacy-worker:<workerId>` as a stable key.
+After that allocation is complete they return CLAIM_ALREADY_RESOLVED, not a new
+ticket. Clients must provide a fresh explicit key to advance. This deliberate
+recovery-safety change prevents old retry behavior from allocating unrelated work.
+
+Switch all writers to the new runtime together. Do not run an old writer or roll
+back only the application: old code does not enforce normalized fences. Preserve
+the additive tables and investigate/reconcile any interrupted rollout before
+enabling writes. There is no destructive down-migration.
+
+## Validation and remaining limits
+
+Run `npm run test:r44` with Node 24+. Tests execute the actual injected runtime
+against SQLite, including persistent database reopen, transaction rollback,
+claim races, receipt conflicts, client recovery and legacy pool preservation.
+The critical crash-3/5 test asserts remaining codes 4 and 5 after reopen/rebind.
+An offline frozen-source directory may be supplied through R44_FROZEN_DIR; the
+existing validator checks the Git blob hashes before accepting those files.
+
+Local SQLite and mocked HTTP are not a live Cloudflare/bridge integration test.
+Before production rollout, verify migration cost/quotas and SQLite trigger/JSON
+behavior in a staging D1 database. No deployment, production migration, corpus
+write or R33 certification is part of this change. The existing endpoint trust
+model remains in place; worker IDs and receipt hashes are not authentication.
+
+D1 transaction semantics: https://developers.cloudflare.com/d1/worker-api/d1-database/#batch

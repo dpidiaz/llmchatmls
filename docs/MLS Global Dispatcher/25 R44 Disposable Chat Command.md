@@ -68,3 +68,8 @@ Example result shape:
 ```
 
 The array must contain all assigned codes exactly once.
+
+
+## Durable entry protocol (44.1)
+
+Checkpoint every completed entry using r44_checkpoint (MCP) or POST /api/r44/chat-bridge/checkpoint (authenticated bridge). Keep worker, ticket, generation and idempotency keys. SESSION_NOT_FOUND requires rebind/reconcile of the same ticket; recovery never claims new work. Only confirmed receipts authorize AUDITED_DURABLE. Full-ticket submit remains a compatibility operation. See [durable checkpoints](26%20R44%20Durable%20Entry%20Checkpoints.md).
