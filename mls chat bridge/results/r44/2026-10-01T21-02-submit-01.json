@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "R44-CORPUS-1622-RENEW-SUBMIT",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44Renew",
+        "method": "POST",
+        "path": "/api/r44/renew",
+        "response": {
+          "status": "RENEWED",
+          "ticket_id": "R44-CORPUS-1622",
+          "worker_id": "chat-r44-20261001-2102-01",
+          "lease_expires_at": 1790910783415
+        },
+        "completedAt": "2026-10-02T03:08:03.530Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44Submit",
+        "method": "POST",
+        "path": "/api/r44/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1622",
+          "sha256": "a85d00adc55e2eb6e9063d15af443eff8e8d58235eccd0c4c3079dbcf5e9cc78",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-02T03:08:03.938Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-02T03:08:03.938Z",
+  "commandFile": "mls chat bridge/commands/r44/2026-10-01T21-02-submit-01.json"
+}
