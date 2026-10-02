@@ -76,7 +76,8 @@ test('bridge: Gate 100 read-only scalability operations are allowlisted', async(
 
 
 test('MLS Chat Bridge exposes R44 authenticated FREE bridge operations',()=>{
-  for(const id of ['r44ClaimChat','r44RenewChat','r44SubmitChat']) assert.ok(bridge.MLS_CHAT_BRIDGE_OPERATIONS[id],id);
+  for(const id of ['r44StatusChat','r44ClaimChat','r44RenewChat','r44SubmitChat']) assert.ok(bridge.MLS_CHAT_BRIDGE_OPERATIONS[id],id);
+  assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.r44StatusChat.pathname,'/api/r44/chat-bridge/status');
   assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.r44ClaimChat.pathname,'/api/r44/chat-bridge/claim');
   assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.r44RenewChat.pathname,'/api/r44/chat-bridge/renew');
   assert.equal(bridge.MLS_CHAT_BRIDGE_OPERATIONS.r44SubmitChat.pathname,'/api/r44/chat-bridge/submit');
