@@ -1,0 +1,31 @@
+{
+  "success": false,
+  "httpStatus": 404,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-0869-renew-submit-20261002T1800Z",
+    "requested": 2,
+    "processed": 1,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": false,
+        "httpStatus": 404,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "error": "R44_CHAT_BRIDGE_SESSION_NOT_FOUND"
+        },
+        "completedAt": "2026-10-02T18:03:25.860Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-02T18:03:25.860Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/chatgpt-sol-20261002T1800Z-r44-renew-submit.json"
+}
