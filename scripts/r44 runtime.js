@@ -267,6 +267,12 @@ async function r44ChatBridgeBody(request) {
     throw new Error("R44_CHAT_BRIDGE_JSON_INVALID");
   }
 }
+async function r44ChatBridgeStatus(request, env) {
+  const auth = await r44ChatBridgeAuthorize(request, env);
+  if (!auth.ok) return r44Json({ error: auth.error }, auth.status);
+  const status = await r44Status(env);
+  return r44Json({ ...status, transport: "GITHUB_ACTIONS_FREE_BRIDGE", authenticated: true });
+}
 async function r44ChatBridgeClaim(request, env) {
   const auth = await r44ChatBridgeAuthorize(request, env);
   if (!auth.ok) return r44Json({ error: auth.error }, auth.status);
@@ -555,6 +561,8 @@ async function r44McpHandle(request, env) {
     return r44McpResult(id, result);
   }
   if (body.method === "tools/call") {
+    const auth = await r44ChatBridgeAuthorize(request, env);
+    if (!auth.ok) return r44McpError(id, -32001, "Unauthorized", { detail: auth.error }, auth.status);
     const name = String(body.params && body.params.name || "");
     const args = body.params && body.params.arguments || {};
     const result = await r44McpCallTool(name, args, env, modern);
@@ -571,6 +579,7 @@ async function handleR44(request, env, url) {
   try {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: { "access-control-allow-origin": "*", "access-control-allow-methods": "GET,POST,OPTIONS", "access-control-allow-headers": "content-type,accept,mcp-protocol-version,mcp-method,mcp-name,authorization" } });
     if (url.pathname === "/mcp") return r44McpHandle(request, env);
+    if (url.pathname === "/api/r44/chat-bridge/status" && request.method === "POST") return r44ChatBridgeStatus(request, env);
     if (url.pathname === "/api/r44/chat-bridge/claim" && request.method === "POST") return r44ChatBridgeClaim(request, env);
     if (url.pathname === "/api/r44/chat-bridge/renew" && request.method === "POST") return r44ChatBridgeRenew(request, env);
     if (url.pathname === "/api/r44/chat-bridge/submit" && request.method === "POST") return r44ChatBridgeSubmit(request, env);
