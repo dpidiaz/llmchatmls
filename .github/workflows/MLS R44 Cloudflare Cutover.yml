@@ -80,6 +80,9 @@ jobs:
             --data '{"jsonrpc":"2.0","id":"tools","method":"tools/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientInfo":{"name":"r44-ci","version":"1"},"io.modelcontextprotocol/clientCapabilities":{}}}}')"
           printf '%s' "$tools" | grep -F '"name":"r44_claim"'
           printf '%s' "$tools" | grep -F '"name":"r44_submit"'
+          printf '%s' "$tools" | grep -F '"name":"r44_checkpoint"'
+          printf '%s' "$tools" | grep -F '"name":"r44_rebind"'
+          printf '%s' "$tools" | grep -F '"name":"r44_reconcile"'
           bridge_status="$(curl -fsSL -X POST "$base/api/r44/chat-bridge/status" \
             -H 'content-type: application/json' \
             -H "authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
