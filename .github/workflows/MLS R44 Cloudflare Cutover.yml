@@ -34,7 +34,8 @@ jobs:
       - name: Validate R44 contracts
         run: |
           node 'scripts/r44 full pending corpus.cjs'
-          node --test 'test/r44 cloudflare control plane.test.cjs' 'test/r44 full pending corpus.test.cjs'
+          npm run test:r44
+          node --test 'test/integration/r44-d1.test.cjs'
           node 'scripts/validar corpus canonico.js'
           node --test 'test/canonical corpus.test.cjs' 'test/canonical runtime.test.cjs' 'test/canonical legacy removal.test.cjs' 'test/bundle sanitation.test.cjs' 'test/full text search.test.cjs'
       - name: Build production worker
