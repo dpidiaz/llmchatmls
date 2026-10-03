@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-ccx482-step5",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-00d3a8d0-0d72-4f5f-954c-010280f2c59e",
+          "ticketId": "R43-EMERGENCY-0502",
+          "leaseExpiresAt": 1790997239336
+        },
+        "completedAt": "2026-10-03T03:08:59.515Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0502",
+          "sha256": "df327aa924027b45f4e74c5c9a7a5d737938cfa5393e16382005875f92a3a962",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0502",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "90ebf2c7-41c2-4e0c-9fc7-dc58bca154ed",
+                "ticketId": "R43-EMERGENCY-0502",
+                "code": "MLS-V05-1036",
+                "idempotencyKey": "R43-EMERGENCY-0502:MLS-V05-1036:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ace720de6f39f19c3cbf681567b4d4f7578c74ecbfec86a845666863e3843e87",
+                "sourceSha256": "8c8bfb18225b58ad4086c774295f273651e49b314925d36563e7b78bb0cc5af0",
+                "committedMs": 1790996939898,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0572e69d93902b309fa6d0e789b80ec80e0e89106207ab559b3b037ca8c68db1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0502",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "582ec611-7d6b-40f7-bbd4-397ce43b4951",
+                "ticketId": "R43-EMERGENCY-0502",
+                "code": "MLS-V05-1037",
+                "idempotencyKey": "R43-EMERGENCY-0502:MLS-V05-1037:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "33b3fdb52f8ef93995939bda4a0f2aade53cdd30fc6fe7b068da0fd5a66082a6",
+                "sourceSha256": "18f32e66cdb02eea916ac0545fa4a888a437e139cf1c2289ff7bedae77bae3e9",
+                "committedMs": 1790996940130,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "bfdba00b191fbdec539aaaa3427af844dd005e7e50414cea4338ec4669845535",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0502",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ee43f61c-ab5a-4e6f-8d62-cda1140db6bd",
+                "ticketId": "R43-EMERGENCY-0502",
+                "code": "MLS-V05-1038",
+                "idempotencyKey": "R43-EMERGENCY-0502:MLS-V05-1038:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "20d505043c18fc3b7b01be3de7b6f72dea5eab7583b6159f9540b755e0637973",
+                "sourceSha256": "4ad8af9ba626e86802cfba3c365fc91cda7d9ee0f302687fa3b7d5f25d394152",
+                "committedMs": 1790996940347,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7a9c723a29c788a79f3980dbff1fdc03067c3a0eb6e8b1cca99acd0479dbb76f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0502",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "4843f14f-5c70-4782-90eb-087a52387c25",
+                "ticketId": "R43-EMERGENCY-0502",
+                "code": "MLS-V05-1039",
+                "idempotencyKey": "R43-EMERGENCY-0502:MLS-V05-1039:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "77c2c6b753370f86389c601d9222bdb919b4033836bee67d56bc4e5ac30176e2",
+                "sourceSha256": "a6393aefb0b24daabf0641c7cea4a4c757e19fba5f9f8f234cb73e142f00baa6",
+                "committedMs": 1790996940560,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0c59402668c9f98f005126a47396e2599db9e807ff8cc0117ebaf67f628daee5",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0502",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6d91b587-cf3e-40af-8a21-c191ad3c0eae",
+                "ticketId": "R43-EMERGENCY-0502",
+                "code": "MLS-V05-1041",
+                "idempotencyKey": "R43-EMERGENCY-0502:MLS-V05-1041:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6dcb5fe56dbcaba24f7fb1f8bfd6784fbd56730840adcf6ab2262f570058cd8f",
+                "sourceSha256": "884fdbef472088fea99ca7e42f150916766e53d83cd93dbdd05d3dc75a8005ad",
+                "committedMs": 1790996940788,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "91d6d7ab87ee29b397ce4185f3b1ca9ac177e43bd9c743ad719cf2f998686121",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-00d3a8d0-0d72-4f5f-954c-010280f2c59e",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "df327aa924027b45f4e74c5c9a7a5d737938cfa5393e16382005875f92a3a962"
+          }
+        },
+        "completedAt": "2026-10-03T03:09:01.090Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-e6592913-92bf-4f27-b8a7-2a1fc3b24aac",
+          "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0505",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997241136,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V05-1055",
+                "path": "aleman/MLS-V05-1055.json",
+                "sha256": "24e66ad9f564a34b07be6b9fb2bbe5bc8c1d5a1ca9bf81670285245a3ef71178"
+              },
+              {
+                "code": "MLS-V05-1056",
+                "path": "aleman/MLS-V05-1056.json",
+                "sha256": "bb35bef5eefb1eb6028fb2e5a54affed282f4e6c52c871254f88079d2bb2e942"
+              },
+              {
+                "code": "MLS-V05-1057",
+                "path": "aleman/MLS-V05-1057.json",
+                "sha256": "62fe273e6fb497a8cdbb54955e49c1e416b0b01509b4bb730c9cfe533ac1e846"
+              },
+              {
+                "code": "MLS-V05-1058",
+                "path": "aleman/MLS-V05-1058.json",
+                "sha256": "c3007ce77a5df65c599682a74a1f8ece76304363494b2118819b5304164a5730"
+              },
+              {
+                "code": "MLS-V05-1059",
+                "path": "aleman/MLS-V05-1059.json",
+                "sha256": "3fc526be9ab196aba1edd00cf4da541fa79bb28bdc518b270aa82325e27922cf"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0505",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V05-1055",
+                "path": "aleman/MLS-V05-1055.json",
+                "sha256": "24e66ad9f564a34b07be6b9fb2bbe5bc8c1d5a1ca9bf81670285245a3ef71178"
+              },
+              {
+                "code": "MLS-V05-1056",
+                "path": "aleman/MLS-V05-1056.json",
+                "sha256": "bb35bef5eefb1eb6028fb2e5a54affed282f4e6c52c871254f88079d2bb2e942"
+              },
+              {
+                "code": "MLS-V05-1057",
+                "path": "aleman/MLS-V05-1057.json",
+                "sha256": "62fe273e6fb497a8cdbb54955e49c1e416b0b01509b4bb730c9cfe533ac1e846"
+              },
+              {
+                "code": "MLS-V05-1058",
+                "path": "aleman/MLS-V05-1058.json",
+                "sha256": "c3007ce77a5df65c599682a74a1f8ece76304363494b2118819b5304164a5730"
+              },
+              {
+                "code": "MLS-V05-1059",
+                "path": "aleman/MLS-V05-1059.json",
+                "sha256": "3fc526be9ab196aba1edd00cf4da541fa79bb28bdc518b270aa82325e27922cf"
+              }
+            ],
+            "remaining": [
+              "MLS-V05-1055",
+              "MLS-V05-1056",
+              "MLS-V05-1057",
+              "MLS-V05-1058",
+              "MLS-V05-1059"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997241136,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997241136,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V05-1055",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1055,
+                "title": "Rat ≠ rata",
+                "level": "B1",
+                "part": "Contraste con español de Guatemala — Kontrast mit guatemaltekischem Spanisch",
+                "chapter": "Falsos amigos y equivalencias engañosas — Falsche Freunde und trügerische Entsprechungen",
+                "articleMarkdown": "#### En pocas palabras\n\nEl alemán **Rat** significa normalmente **consejo** o **asesoramiento**, no «rata». En **Ich brauche deinen Rat**, la frase significa «Necesito tu consejo».\n\n#### Cómo funciona\n\n**Rat** es un sustantivo masculino: **der Rat**. Puede referirse a una recomendación dada a alguien: **jemandem einen Rat geben** significa «darle un consejo a alguien».\n\nLa palabra también aparece en compuestos y títulos como **Stadtrat** («concejo municipal / concejal», según contexto) o **Ratgeber** («guía, consejero»).\n\nPara el animal «rata», el alemán usa **die Ratte**. Por eso **Rat** y «rata» son falsos amigos.\n\n#### Ejemplos\n\n* **Ich brauche deinen Rat.** — Necesito tu consejo.\n* **Sie gab mir einen guten Rat.** — Me dio un buen consejo.\n* **Er fragt seinen Arzt um Rat.** — Pide consejo a su médico.\n* **Die Ratte läuft über den Hof.** — La rata corre por el patio.\n\n#### Observación importante\n\nEl plural de **Rat** depende del sentido. Para «consejos» aparece **Ratschläge**, no un plural simple *Rate* con el mismo significado. En cambio, ciertos usos institucionales tienen otras formaciones.\n\nLa semejanza con «rata» no debe trasladarse al significado.\n\n#### Entradas relacionadas\n\n[Protokoll ≠ protocolo solamente](#entry-1054) · [Note ≠ nota en todos los usos](#entry-1053) · [Mappe ≠ mapa](#entry-1052)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3dde2e403056e23089ac7ba19967c4b390f4978c6e1f6cbafd68913891ec35df",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:04:40.413Z"
+              },
+              {
+                "code": "MLS-V05-1056",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1056,
+                "title": "Roman ≠ romano",
+                "level": "B1",
+                "part": "Contraste con español de Guatemala — Kontrast mit guatemaltekischem Spanisch",
+                "chapter": "Falsos amigos y equivalencias engañosas — Falsche Freunde und trügerische Entsprechungen",
+                "articleMarkdown": "#### En pocas palabras\n\nEl alemán **Roman** significa **novela**, no «romano». En **Ich lese einen historischen Roman**, la frase significa «Leo una novela histórica».\n\n#### Cómo funciona\n\n**Roman** es un sustantivo masculino: **der Roman**. Designa una obra narrativa extensa, normalmente de ficción. Su plural es **die Romane**.\n\nPara expresar «romano» en relación con la antigua Roma, el alemán usa normalmente el adjetivo **römisch**: **eine römische Straße**. Para una persona romana puede aparecer **der Römer** o **die Römerin**.\n\nPor eso el parecido entre **Roman** y «romano» no corresponde a una equivalencia de significado.\n\n#### Ejemplos\n\n* **Ich lese einen historischen Roman.** — Leo una novela histórica.\n* **Der Roman ist sehr bekannt.** — La novela es muy conocida.\n* **Sie schreibt einen neuen Roman.** — Escribe una novela nueva.\n* **Das ist eine römische Straße.** — Es una vía romana.\n\n#### Observación importante\n\nEl género y la flexión pertenecen al sustantivo alemán: **der Roman, einen Roman, die Romane**. La palabra no se usa normalmente para expresar nacionalidad, origen romano ni relación con Roma.\n\nPara esos sentidos se emplean formas como **römisch** y **Römer**, según la función de la palabra en la oración.\n\n#### Entradas relacionadas\n\n[Rat ≠ rata](#entry-1055) · [Protokoll ≠ protocolo solamente](#entry-1054) · [Note ≠ nota en todos los usos](#entry-1053)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e718a92988c7ca5a3b13aa83afd192a07753efecc4a40357dddc66ac8f053a43",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:05:49.129Z"
+              },
+              {
+                "code": "MLS-V05-1057",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1057,
+                "title": "sensibel ≠ sensible exactamente",
+                "level": "B1",
+                "part": "Contraste con español de Guatemala — Kontrast mit guatemaltekischem Spanisch",
+                "chapter": "Falsos amigos y equivalencias engañosas — Falsche Freunde und trügerische Entsprechungen",
+                "articleMarkdown": "#### En pocas palabras\n\nEl alemán **sensibel** puede traducirse como **sensible**, pero la equivalencia no es exacta en todos los contextos. Suele describir a una persona o reacción especialmente receptiva a estímulos, emociones, críticas o cambios.\n\nEn **Er ist sehr sensibel für Kritik**, significa «Es muy sensible a la crítica».\n\n#### Cómo funciona\n\n**Sensibel** es un adjetivo. Puede referirse a sensibilidad emocional: **ein sensibles Kind**, o a una reacción delicada ante determinados factores: **sensibel auf Lärm reagieren**.\n\nTambién aparece en contextos técnicos con sentidos como «delicado» o «sensible»: **sensible Daten** son datos que requieren especial protección. La traducción española depende, por tanto, del ámbito.\n\nNo todos los usos de «sensible» en español corresponden automáticamente a **sensibel**.\n\n#### Ejemplos\n\n* **Er ist sehr sensibel für Kritik.** — Es muy sensible a la crítica.\n* **Sie reagiert sensibel auf Veränderungen.** — Reacciona con sensibilidad a los cambios.\n* **Das ist ein sensibles Thema.** — Es un tema delicado.\n* **Sensible Daten müssen geschützt werden.** — Los datos sensibles deben protegerse.\n\n#### Observación importante\n\nEl adjetivo puede expresar sensibilidad emocional, vulnerabilidad o necesidad de especial cuidado según el sustantivo y el contexto.\n\nPor eso «sensible» es una traducción frecuente, pero no una equivalencia mecánica válida para todos los usos.\n\n#### Entradas relacionadas\n\n[Roman ≠ romano](#entry-1056) · [Rat ≠ rata](#entry-1055) · [Protokoll ≠ protocolo solamente](#entry-1054)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c6603e2c322df45b503e0f069f7dd620a2e1adc63b85ae17b66d0079893e1212",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:06:30.836Z"
+              },
+              {
+                "code": "MLS-V05-1058",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1058,
+                "title": "spenden ≠ expender",
+                "level": "B1",
+                "part": "Contraste con español de Guatemala — Kontrast mit guatemaltekischem Spanisch",
+                "chapter": "Falsos amigos y equivalencias engañosas — Falsche Freunde und trügerische Entsprechungen",
+                "articleMarkdown": "#### En pocas palabras\n\nEl alemán **spenden** significa principalmente **donar**, no «expender». En **Sie spendet jeden Monat Blut**, la frase significa «Dona sangre cada mes».\n\n#### Cómo funciona\n\n**Spenden** es un verbo que se usa cuando alguien entrega voluntariamente dinero, sangre, órganos u otros recursos con un fin de ayuda o beneficio común.\n\nPuede aparecer con un objeto directo: **Geld spenden**, **Blut spenden**, **Kleidung spenden**. El sustantivo relacionado es **die Spende**, «donación».\n\nPara «expender» en el sentido de vender o suministrar productos, el alemán utiliza otros verbos, como **verkaufen** o **ausgeben**, según el contexto.\n\n#### Ejemplos\n\n* **Sie spendet jeden Monat Blut.** — Dona sangre cada mes.\n* **Viele Menschen spenden Geld.** — Muchas personas donan dinero.\n* **Wir spenden alte Kleidung.** — Donamos ropa usada.\n* **Der Automat gibt Fahrkarten aus.** — La máquina expende boletos.\n\n#### Observación importante\n\nEl parecido formal entre **spenden** y «expender» no corresponde a un significado compartido. **Spenden** se relaciona con la idea de donar, mientras «expender» suele implicar vender, entregar o distribuir un producto.\n\nLa traducción concreta de «expender» depende del objeto y de la situación.\n\n#### Entradas relacionadas\n\n[sensibel ≠ sensible exactamente](#entry-1057) · [Roman ≠ romano](#entry-1056) · [Rat ≠ rata](#entry-1055)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e8a62c314740cb763fe1ca43db9b110abf481249e44bb3e2287737c7f9d2d53b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:07:15.333Z"
+              },
+              {
+                "code": "MLS-V05-1059",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1059,
+                "title": "studieren ≠ estudiar en cualquier nivel",
+                "level": "B1",
+                "part": "Contraste con español de Guatemala — Kontrast mit guatemaltekischem Spanisch",
+                "chapter": "Falsos amigos y equivalencias engañosas — Falsche Freunde und trügerische Entsprechungen",
+                "articleMarkdown": "#### En pocas palabras\n\nEl alemán **studieren** significa normalmente **cursar estudios superiores**, especialmente en una universidad u otra institución de educación superior. No equivale a «estudiar» en cualquier nivel educativo.\n\nEn **Er studiert Medizin an der Universität**, la frase significa «Estudia medicina en la universidad».\n\n#### Cómo funciona\n\n**Studieren** se usa para hablar de una carrera o programa de nivel superior: **Medizin studieren**, **Jura studieren**, **an einer Universität studieren**.\n\nPara «estudiar» o «aprender» en sentidos más generales, el alemán suele usar **lernen**. Así, **Ich lerne Deutsch** significa «Estudio / aprendo alemán», sin implicar que la persona curse una carrera universitaria.\n\nPor eso la semejanza entre **studieren** y «estudiar» solo corresponde en ciertos contextos académicos.\n\n#### Ejemplos\n\n* **Er studiert Medizin an der Universität.** — Estudia medicina en la universidad.\n* **Sie studiert Informatik in Berlin.** — Estudia informática en Berlín.\n* **Ich lerne Deutsch.** — Estudio / aprendo alemán.\n* **Die Kinder lernen in der Schule Deutsch.** — Los niños aprenden alemán en la escuela.\n\n#### Observación importante\n\n**Studieren** no se usa normalmente para cualquier actividad de aprendizaje escolar o personal. En esos contextos, **lernen** suele ser la opción adecuada.\n\nEn español de Guatemala, «estudiar» puede abarcar tanto estudios universitarios como aprendizaje escolar o personal; el alemán distingue estos usos con más frecuencia.\n\n#### Entradas relacionadas\n\n[Termin ≠ término](#entry-1060) · [spenden ≠ expender](#entry-1058) · [sensibel ≠ sensible exactamente](#entry-1057)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-710b199d9c576e650391f4dc073a80bd4d32a19cb95547078e56fc2f9d3b6f44",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:24:27.450Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:09:01.888Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:09:01.888Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0245-sol-ccx482/09-submit4-claim5.json"
+}

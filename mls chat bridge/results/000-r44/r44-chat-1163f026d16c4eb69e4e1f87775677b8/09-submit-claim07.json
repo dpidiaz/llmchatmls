@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-t06-complete-claim07",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-431e9e32-a896-445c-90dd-57d56870ce07",
+          "ticketId": "R43-EMERGENCY-0722",
+          "leaseExpiresAt": 1790997225226
+        },
+        "completedAt": "2026-10-03T03:08:45.375Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0722",
+          "sha256": "46f6f9a811ac4f494ee252fd6e6dfd46d8c23f7d3384df8b2dfa32c23f9db0b9",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0722",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d95e913b-8980-4dac-994e-82e4847c7ee2",
+                "ticketId": "R43-EMERGENCY-0722",
+                "code": "MLS-V07-0226",
+                "idempotencyKey": "R43-EMERGENCY-0722:MLS-V07-0226:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b6b803e8fbe9a73900f35bea3efa8139224be01eddfd91f44cd3d70a420e364a",
+                "sourceSha256": "5154de9fa45dfe899f6163ddbdadc812d258bcb19a11eab71174268925db5fb5",
+                "committedMs": 1790996925785,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "fadcc9e149bfde78f721625073b58ad2a668b61cde91473d81a7f15fdc35d6c7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0722",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b4aa151a-ae62-48cd-8c8b-49c4e9c0045b",
+                "ticketId": "R43-EMERGENCY-0722",
+                "code": "MLS-V07-0227",
+                "idempotencyKey": "R43-EMERGENCY-0722:MLS-V07-0227:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bb9b1ad11f309c62b917d7ecbe4689c41a902f4705623adee48a99c167087598",
+                "sourceSha256": "b3eaa44ea3691d404a4033a3b466b0d9d9058ddda87867f47cb1cbd880fa2858",
+                "committedMs": 1790996925996,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "02a1ab7b60b299bd69a57281fcf99bd8e8dd381c964c4eaf533445bf0e05e19b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0722",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "16c6b762-da72-4bd7-9586-b7ad15946b7b",
+                "ticketId": "R43-EMERGENCY-0722",
+                "code": "MLS-V07-0229",
+                "idempotencyKey": "R43-EMERGENCY-0722:MLS-V07-0229:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "49a6a6fdf755186ff220eaf6b5bdea7da929970f0384964f85faaae1c7736cbf",
+                "sourceSha256": "d7b17461c07eda624aba9091525edc63912fc54b169af5dc649b074fbb8921c8",
+                "committedMs": 1790996926208,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8c939e79643c50a321e27e86b1af8a9267b241f8a0bf97e244537d952c92252c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0722",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6472f308-baca-46ef-92b8-304c9e4bd0ff",
+                "ticketId": "R43-EMERGENCY-0722",
+                "code": "MLS-V07-0230",
+                "idempotencyKey": "R43-EMERGENCY-0722:MLS-V07-0230:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b47d0768b832dc87e8e5ae1e20dd06b91ad0db26cdf4351920c629c572e287ec",
+                "sourceSha256": "71c78eed75ae5d5f9dc88f61bebd93c6b9446ca9b06029817b97ebb58e698c91",
+                "committedMs": 1790996926423,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "197328f27c6d32b0d4b4883c9b7bd329feb22a4aacdad4bfb23c45b04ac86212",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0722",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "dede01c7-61d3-41d8-a95d-b3dbac0e17d1",
+                "ticketId": "R43-EMERGENCY-0722",
+                "code": "MLS-V07-0231",
+                "idempotencyKey": "R43-EMERGENCY-0722:MLS-V07-0231:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "836297efb2793c6ffb75bfdab1780e1aebc00452c853fd8932086f8d82c1365b",
+                "sourceSha256": "c804758963c483a474d377f48111aaf10e52ffa8661db4fb31492a0b2cdd0026",
+                "committedMs": 1790996926639,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f40845159f85042bc7cc4bbacc85b985e5e3d557c6ca061f619ca7d7bfbe5769",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-431e9e32-a896-445c-90dd-57d56870ce07",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "46f6f9a811ac4f494ee252fd6e6dfd46d8c23f7d3384df8b2dfa32c23f9db0b9"
+          }
+        },
+        "completedAt": "2026-10-03T03:08:46.940Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-0fb7a6ec-e379-47b7-b1c2-36d1b4bad63a",
+          "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0725",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997226988,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0244",
+                "path": "chino-taiwan/MLS-V07-0244.json",
+                "sha256": "e69d9fe8e908b537b4fbe1afa0cfc59a45e7afd3b82f2f95d70308e2f2458c95"
+              },
+              {
+                "code": "MLS-V07-0245",
+                "path": "chino-taiwan/MLS-V07-0245.json",
+                "sha256": "a489a1fa60a03824941e60601625a5c664e5823a427f1bb906b60fc01fe5eb50"
+              },
+              {
+                "code": "MLS-V07-0246",
+                "path": "chino-taiwan/MLS-V07-0246.json",
+                "sha256": "5c675c11fed36f6f2042ba0821275f753ceabdbc13214dd82665632087f02f7f"
+              },
+              {
+                "code": "MLS-V07-0247",
+                "path": "chino-taiwan/MLS-V07-0247.json",
+                "sha256": "9830a9588e0e7bf3c5dd27928aa851789e651e6ff557440f4e9485cea060ff2d"
+              },
+              {
+                "code": "MLS-V07-0249",
+                "path": "chino-taiwan/MLS-V07-0249.json",
+                "sha256": "cadfd9a78d3490f9ae9ed6b412849f4f07e6a5ba9f6bf33ed5cab78d7c222aae"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0725",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0244",
+                "path": "chino-taiwan/MLS-V07-0244.json",
+                "sha256": "e69d9fe8e908b537b4fbe1afa0cfc59a45e7afd3b82f2f95d70308e2f2458c95"
+              },
+              {
+                "code": "MLS-V07-0245",
+                "path": "chino-taiwan/MLS-V07-0245.json",
+                "sha256": "a489a1fa60a03824941e60601625a5c664e5823a427f1bb906b60fc01fe5eb50"
+              },
+              {
+                "code": "MLS-V07-0246",
+                "path": "chino-taiwan/MLS-V07-0246.json",
+                "sha256": "5c675c11fed36f6f2042ba0821275f753ceabdbc13214dd82665632087f02f7f"
+              },
+              {
+                "code": "MLS-V07-0247",
+                "path": "chino-taiwan/MLS-V07-0247.json",
+                "sha256": "9830a9588e0e7bf3c5dd27928aa851789e651e6ff557440f4e9485cea060ff2d"
+              },
+              {
+                "code": "MLS-V07-0249",
+                "path": "chino-taiwan/MLS-V07-0249.json",
+                "sha256": "cadfd9a78d3490f9ae9ed6b412849f4f07e6a5ba9f6bf33ed5cab78d7c222aae"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0244",
+              "MLS-V07-0245",
+              "MLS-V07-0246",
+              "MLS-V07-0247",
+              "MLS-V07-0249"
+            ],
+            "lease": {
+              "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997226988,
+              "active": true
+            },
+            "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997226988,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0244",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 244,
+                "title": "應該",
+                "level": "A2",
+                "part": "Modalidad básica — 基本情態",
+                "chapter": "Verbos modales básicos — 基本情態動詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**應該 (yīnggāi)** suele expresar que algo **debería** hacerse o que una situación **probablemente debería ser así** según una norma, expectativa o razonamiento. Su significado exacto depende del contexto.\n\n#### Cómo funciona\n\nCuando se refiere a una acción, **應該** puede dar una recomendación o señalar una obligación moderada: **你應該休息。** (*Nǐ yīnggāi xiūxí.*) — «Deberías descansar».\n\nTambién puede expresar una conclusión probable: **他應該到了。** (*Tā yīnggāi dào le.*) — «Ya debería haber llegado / probablemente ya llegó». Aquí no se ordena nada; el hablante deduce lo que espera que sea cierto.\n\n#### Ejemplos\n\n- **我們應該早一點出發。** (*Wǒmen yīnggāi zǎo yìdiǎn chūfā.*) — Deberíamos salir un poco antes.\n- **這家店應該還開著。** (*Zhè jiā diàn yīnggāi hái kāizhe.*) — Esta tienda probablemente todavía está abierta.\n- **你不應該這樣說。** (*Nǐ bù yīnggāi zhèyàng shuō.*) — No deberías decir eso así.\n\n#### Observación importante\n\n**應該** no tiene una única traducción fija. Frente a **得 (děi)**, que a menudo presenta una necesidad más directa («tener que»), **應該** suele dejar más espacio para una recomendación, una expectativa o una inferencia.\n\nTampoco equivale exactamente a **可能**, porque **可能** expresa posibilidad sin implicar necesariamente que el resultado sea el esperado.\n\n#### Entradas relacionadas\n\n- [Entrada 243: 想 para deseo/intención — 「想」表想法／意願](#entry-243)\n- [Entrada 245: 最好 — 「最好」](#entry-245)\n- [Entrada 242: 恐怕 — 「恐怕」](#entry-242)\n- [Entrada 246: 會 para futuro/probabilidad — 「會」表未來／可能](#entry-246)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c295c6658cfaaa1f3b5c944803a89a9679a08632615a829c3dcc667f58b90b45",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:13:31.148Z"
+              },
+              {
+                "code": "MLS-V07-0245",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 245,
+                "title": "最好",
+                "level": "A2",
+                "part": "Modalidad básica — 基本情態",
+                "chapter": "Verbos modales básicos — 基本情態動詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**最好 (zuìhǎo)** puede usarse para dar una **recomendación fuerte**: equivale a «sería mejor que…», «más vale…» o «lo mejor es…» según el contexto.\n\n#### Cómo funciona\n\nEn este uso, **最好** suele aparecer antes de una acción: **最好 + verbo o frase verbal**. Por ejemplo, **你最好先打電話。** (*Nǐ zuìhǎo xiān dǎ diànhuà.*) significa «Será mejor que llames primero».\n\nLa frase presenta una acción como la opción más conveniente. No expresa necesariamente una obligación absoluta; el hablante aconseja esa conducta porque considera que evitará problemas o dará un mejor resultado.\n\n#### Ejemplos\n\n- **我們最好早一點出發。** (*Wǒmen zuìhǎo zǎo yìdiǎn chūfā.*) — Será mejor que salgamos un poco antes.\n- **你最好帶雨傘。** (*Nǐ zuìhǎo dài yǔsǎn.*) — Más vale que lleves paraguas.\n- **最好不要太晚回家。** (*Zuìhǎo bú yào tài wǎn huíjiā.*) — Es mejor no volver a casa demasiado tarde.\n\n#### Observación importante\n\n**最好** también puede ser el superlativo de **好**, como en **這個最好** («este es el mejor»). Ese uso describe una comparación; el de esta entrada recomienda una acción.\n\nFrente a **應該**, **最好** suele presentar una opción como especialmente aconsejable, mientras que **應該** puede expresar recomendación, deber o expectativa probable según el contexto.\n\n#### Entradas relacionadas\n\n- [Entrada 244: 應該 — 「應該」（基本情態動詞）](#entry-244)\n- [Entrada 246: 會 para futuro/probabilidad — 「會」表未來／可能](#entry-246)\n- [Entrada 243: 想 para deseo/intención — 「想」表想法／意願](#entry-243)\n- [Entrada 247: 會 para habilidad aprendida — 「會」表習得能力](#entry-247)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1aeca6ef0c7f058b29b6a2920b71a6667abd53580a0b75e28af862ee9e8f0764",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:14:12.573Z"
+              },
+              {
+                "code": "MLS-V07-0246",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 246,
+                "title": "會 para futuro/probabilidad",
+                "level": "A2",
+                "part": "Modalidad básica — 基本情態",
+                "chapter": "Verbos modales básicos — 基本情態動詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**會 (huì)** puede indicar que algo **ocurrirá o probablemente ocurrirá**, además de su conocido uso para habilidades aprendidas. En esta entrada el foco está en ese valor de **futuro o probabilidad**.\n\n#### Cómo funciona\n\nCuando **會** aparece antes de un verbo o predicado, el contexto puede mostrar que el hablante espera un resultado futuro o considera probable una situación.\n\nPor ejemplo, **明天會下雨。** (*Míngtiān huì xiàyǔ.*) significa «Mañana lloverá / probablemente llueva mañana». Aquí **會** no expresa una habilidad; presenta la lluvia como un acontecimiento esperado.\n\n#### Ejemplos\n\n- **他晚一點會來。** (*Tā wǎn yìdiǎn huì lái.*) — Vendrá un poco más tarde.\n- **這樣做會有問題。** (*Zhèyàng zuò huì yǒu wèntí.*) — Hacerlo así puede causar problemas.\n- **冬天這裡會很冷。** (*Dōngtiān zhèlǐ huì hěn lěng.*) — Aquí suele / puede hacer mucho frío en invierno.\n\nLa interpretación precisa depende del contexto: puede ser una predicción concreta, una consecuencia esperada o una tendencia probable.\n\n#### Observación importante\n\nEl ejemplo **我會說中文。** (*Wǒ huì shuō Zhōngwén.*) significa «Sé hablar chino» y pertenece al uso de **會** para una **habilidad aprendida**, no al valor focal de esta entrada.\n\nPor eso no conviene traducir **會** siempre como «saber» ni siempre como futuro. El resto de la oración y la situación comunicativa determinan su lectura.\n\n#### Entradas relacionadas\n\n- [Entrada 245: 最好 — 「最好」](#entry-245)\n- [Entrada 247: 會 para habilidad aprendida — 「會」表習得能力](#entry-247)\n- [Entrada 244: 應該 — 「應該」（基本情態動詞）](#entry-244)\n- [Entrada 248: 能 para capacidad circunstancial — 「能」表條件能力](#entry-248)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-020713d0e4bf53cd9dadf6911c3b3d8d7cd7ecd08b081cfa229053f526cc2496",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:14:56.292Z"
+              },
+              {
+                "code": "MLS-V07-0247",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 247,
+                "title": "會 para habilidad aprendida",
+                "level": "A2",
+                "part": "Modalidad básica — 基本情態",
+                "chapter": "Verbos modales básicos — 基本情態動詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**會 (huì)** se usa con frecuencia para expresar una **habilidad aprendida**: algo que una persona sabe hacer porque lo ha aprendido o practicado.\n\n#### Cómo funciona\n\nLa estructura básica es **persona + 會 + verbo**. Por ejemplo, **我會說中文。** (*Wǒ huì shuō Zhōngwén.*) significa «Sé hablar chino». Aquí **會** indica que hablar chino es una capacidad adquirida, no una predicción sobre el futuro.\n\nEste uso aparece con actividades como hablar un idioma, nadar, conducir, cocinar o tocar un instrumento cuando se presentan como destrezas aprendidas.\n\n#### Ejemplos\n\n- **她會開車。** (*Tā huì kāichē.*) — Ella sabe conducir.\n- **你會游泳嗎？** (*Nǐ huì yóuyǒng ma?*) — ¿Sabes nadar?\n- **我不會彈鋼琴。** (*Wǒ bú huì tán gāngqín.*) — No sé tocar el piano.\n\nEn la negación se usa normalmente **不會 (bú huì)** para indicar que alguien no posee esa habilidad.\n\n#### Observación importante\n\n**會** no es un equivalente único del español «poder». Para una capacidad dependiente de condiciones físicas o circunstancias concretas suele aparecer **能 (néng)**. Por ejemplo, alguien puede **會游泳** «saber nadar» pero no **能游泳** «poder nadar» en cierto momento por una lesión.\n\nAdemás, **會** también expresa futuro o probabilidad en otros contextos: **明天會下雨** «mañana lloverá / probablemente llueva».\n\n#### Entradas relacionadas\n\n- [Entrada 246: 會 para futuro/probabilidad — 「會」表未來／可能](#entry-246)\n- [Entrada 248: 能 para capacidad circunstancial — 「能」表條件能力](#entry-248)\n- [Entrada 245: 最好 — 「最好」](#entry-245)\n- [Entrada 249: 要 para intención — 「要」表意願](#entry-249)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e204aef53f4a5b4ed51a287fef8bdfcdc30267ffa6d76078f7da5b1c15f6bafa",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:15:43.186Z"
+              },
+              {
+                "code": "MLS-V07-0249",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 249,
+                "title": "要 para intención",
+                "level": "A2",
+                "part": "Modalidad básica — 基本情態",
+                "chapter": "Verbos modales básicos — 基本情態動詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**要 (yào)** puede expresar una **intención o decisión**: indica que alguien piensa hacer algo, especialmente cuando el plan se presenta como relativamente firme.\n\n#### Cómo funciona\n\nEn este uso, **要** aparece antes de un verbo: **persona + 要 + acción**. Por ejemplo, **我明天要去臺北。** (*Wǒ míngtiān yào qù Táiběi.*) significa «Mañana voy a ir a Taipéi / pienso ir a Taipéi».\n\nLa frase presenta el viaje como un plan decidido. El contexto permite distinguir este valor de otros usos de **要**, como necesidad, obligación o «querer» algo.\n\n#### Ejemplos\n\n- **我要回家了。** (*Wǒ yào huíjiā le.*) — Ya me voy a casa / voy a regresar a casa.\n- **她下個月要換工作。** (*Tā xià ge yuè yào huàn gōngzuò.*) — El próximo mes va a cambiar de trabajo.\n- **我們週末要去看電影。** (*Wǒmen zhōumò yào qù kàn diànyǐng.*) — El fin de semana vamos a ir al cine.\n\n#### Observación importante\n\n**要** y **想 (xiǎng)** pueden relacionarse con intención, pero no son idénticos. **想去** suele presentar «querer ir» o contemplar la idea; **要去** puede sonar más decidido o indicar un plan ya establecido.\n\nAdemás, **要** tiene otros valores. En **你要小心**, por ejemplo, puede expresar necesidad o recomendación. La construcción completa determina la interpretación.\n\n#### Entradas relacionadas\n\n- [Entrada 248: 能 para capacidad circunstancial — 「能」表條件能力](#entry-248)\n- [Entrada 250: 要 para obligación/necesidad — 「要」表必要](#entry-250)\n- [Entrada 247: 會 para habilidad aprendida — 「會」表習得能力](#entry-247)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e7e8f245ae2324ac377c4a07b78b8146025d5227d3c71b176e45d7be8adb2834",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:17:13.367Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:08:47.752Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:08:47.752Z",
+  "commandFile": "mls chat bridge/commands/000-r44/r44-chat-1163f026d16c4eb69e4e1f87775677b8/09-submit-claim07.json"
+}

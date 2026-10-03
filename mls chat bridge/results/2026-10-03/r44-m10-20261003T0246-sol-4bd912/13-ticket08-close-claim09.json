@@ -1,0 +1,512 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-4bd912-ticket08-close-claim09",
+    "requested": 8,
+    "processed": 8,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-b63c0aeb-71ec-4198-8bf7-8ce6ad80219e",
+          "ticketId": "R43-EMERGENCY-0592",
+          "leaseExpiresAt": 1790997241969
+        },
+        "completedAt": "2026-10-03T03:09:02.100Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0592",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "34f3a2db-f5c3-43fe-a877-65474a4331cc",
+            "ticketId": "R43-EMERGENCY-0592",
+            "code": "MLS-V06-0474",
+            "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0474-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "bd460e88c34bdc2f3dabde71564c14b9c089a4dac1b862e44d671a98cd3cf9af",
+            "sourceSha256": "fc9e681fff862aef5de5a8b6a6a51b62468c34c74052f352ab0fb9e335324a98",
+            "committedMs": 1790996942294,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "e5e32092abe72c61b3a7451f486482a246fae07f82ff432234e5a94845d5c91e",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:09:02.378Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0592",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "17c4c7b1-082d-4f94-a154-585a58bca5b8",
+            "ticketId": "R43-EMERGENCY-0592",
+            "code": "MLS-V06-0475",
+            "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0475-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "f39de1ccc1861078af3df94ea927ab6ff4e953d8e5e0fda46bf306f5b746d851",
+            "sourceSha256": "9913aad294cd2c3cf408b7082152309445ac6b5ff046f80a848a4d8d157cdc5c",
+            "committedMs": 1790996942570,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "5789b1757a74c181d278aaa65e31d66f6d731624d5741039d33cae2853431931",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:09:02.651Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0592",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "85271c8e-4457-48cb-852a-7bc37a013568",
+            "ticketId": "R43-EMERGENCY-0592",
+            "code": "MLS-V06-0476",
+            "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0476-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "9176019a89cf88409fa077cc2a97f2704251826d875a4d4b2170b16f3e42cca9",
+            "sourceSha256": "3048efce474440d3b9fb1ea97c8e170fafa4b85ff44abc17a3f6b483d1f23913",
+            "committedMs": 1790996942844,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "a02de8e131b8197b6a741195ff8059b840f7ab50943f53371020083dae3ea6b9",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:09:02.924Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0592",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "a1826f40-01a5-4c14-ad30-8a939573ab5f",
+            "ticketId": "R43-EMERGENCY-0592",
+            "code": "MLS-V06-0478",
+            "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0478-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "55ac21f6ed548c7767ebb405fe3c5f02efb26be41dec570b1e585976667137bf",
+            "sourceSha256": "ce5a05f1b6e87b153c12d2261d5e0d62900767cafba91eb673b001730b456267",
+            "committedMs": 1790996943115,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "b4feea037ee43a2307e5a438119a6d90e3fbd409e3e27b674624461adf5322b8",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:09:03.195Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0592",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "755ec7c5-0f94-4bdb-bad3-6f3f070e9683",
+            "ticketId": "R43-EMERGENCY-0592",
+            "code": "MLS-V06-0479",
+            "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0479-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "1e2c7ec867a116cb21496beeb81a1c8f5d72b18f720caa4b44f7db932e871e3f",
+            "sourceSha256": "e63ef7a22b8c7822f7d61473b206b8dd4f4b98bde124a117e4f2b2151763822f",
+            "committedMs": 1790996943397,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "f658e3630cd6ac58be19f71d45fc5abf460cea4c3ae791de7759a81d1371ec70",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:09:03.475Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RebindChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/rebind",
+        "response": {
+          "ticketId": "R43-EMERGENCY-0592",
+          "state": "COMPLETE",
+          "migrationNote": null,
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "entries": [
+            {
+              "code": "MLS-V06-0474",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0474",
+                "path": "japones/MLS-V06-0474.json",
+                "sha256": "fc9e681fff862aef5de5a8b6a6a51b62468c34c74052f352ab0fb9e335324a98"
+              },
+              "receipt": {
+                "code": "MLS-V06-0474",
+                "committedMs": 1790996942294,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0474-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bd460e88c34bdc2f3dabde71564c14b9c089a4dac1b862e44d671a98cd3cf9af",
+                "receiptId": "34f3a2db-f5c3-43fe-a877-65474a4331cc",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "fc9e681fff862aef5de5a8b6a6a51b62468c34c74052f352ab0fb9e335324a98",
+                "ticketId": "R43-EMERGENCY-0592",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "e5e32092abe72c61b3a7451f486482a246fae07f82ff432234e5a94845d5c91e"
+            },
+            {
+              "code": "MLS-V06-0475",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0475",
+                "path": "japones/MLS-V06-0475.json",
+                "sha256": "9913aad294cd2c3cf408b7082152309445ac6b5ff046f80a848a4d8d157cdc5c"
+              },
+              "receipt": {
+                "code": "MLS-V06-0475",
+                "committedMs": 1790996942570,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0475-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f39de1ccc1861078af3df94ea927ab6ff4e953d8e5e0fda46bf306f5b746d851",
+                "receiptId": "17c4c7b1-082d-4f94-a154-585a58bca5b8",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "9913aad294cd2c3cf408b7082152309445ac6b5ff046f80a848a4d8d157cdc5c",
+                "ticketId": "R43-EMERGENCY-0592",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "5789b1757a74c181d278aaa65e31d66f6d731624d5741039d33cae2853431931"
+            },
+            {
+              "code": "MLS-V06-0476",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0476",
+                "path": "japones/MLS-V06-0476.json",
+                "sha256": "3048efce474440d3b9fb1ea97c8e170fafa4b85ff44abc17a3f6b483d1f23913"
+              },
+              "receipt": {
+                "code": "MLS-V06-0476",
+                "committedMs": 1790996942844,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0476-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9176019a89cf88409fa077cc2a97f2704251826d875a4d4b2170b16f3e42cca9",
+                "receiptId": "85271c8e-4457-48cb-852a-7bc37a013568",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "3048efce474440d3b9fb1ea97c8e170fafa4b85ff44abc17a3f6b483d1f23913",
+                "ticketId": "R43-EMERGENCY-0592",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "a02de8e131b8197b6a741195ff8059b840f7ab50943f53371020083dae3ea6b9"
+            },
+            {
+              "code": "MLS-V06-0478",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0478",
+                "path": "japones/MLS-V06-0478.json",
+                "sha256": "ce5a05f1b6e87b153c12d2261d5e0d62900767cafba91eb673b001730b456267"
+              },
+              "receipt": {
+                "code": "MLS-V06-0478",
+                "committedMs": 1790996943115,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0478-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "55ac21f6ed548c7767ebb405fe3c5f02efb26be41dec570b1e585976667137bf",
+                "receiptId": "a1826f40-01a5-4c14-ad30-8a939573ab5f",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "ce5a05f1b6e87b153c12d2261d5e0d62900767cafba91eb673b001730b456267",
+                "ticketId": "R43-EMERGENCY-0592",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "b4feea037ee43a2307e5a438119a6d90e3fbd409e3e27b674624461adf5322b8"
+            },
+            {
+              "code": "MLS-V06-0479",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0479",
+                "path": "japones/MLS-V06-0479.json",
+                "sha256": "e63ef7a22b8c7822f7d61473b206b8dd4f4b98bde124a117e4f2b2151763822f"
+              },
+              "receipt": {
+                "code": "MLS-V06-0479",
+                "committedMs": 1790996943397,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0592-MLS-V06-0479-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1e2c7ec867a116cb21496beeb81a1c8f5d72b18f720caa4b44f7db932e871e3f",
+                "receiptId": "755ec7c5-0f94-4bdb-bad3-6f3f070e9683",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "e63ef7a22b8c7822f7d61473b206b8dd4f4b98bde124a117e4f2b2151763822f",
+                "ticketId": "R43-EMERGENCY-0592",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "f658e3630cd6ac58be19f71d45fc5abf460cea4c3ae791de7759a81d1371ec70"
+            }
+          ],
+          "remaining": [],
+          "lease": {
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790997243397,
+            "active": false
+          },
+          "status": "COMPLETE",
+          "bridgeSessionId": null,
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE"
+        },
+        "completedAt": "2026-10-03T03:09:03.603Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-9c6c3dfe-21d2-4a8b-b461-4ea496c4ed4c",
+          "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0593",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997243648,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0480",
+                "path": "japones/MLS-V06-0480.json",
+                "sha256": "32fd12ade55b908e2fa68f2e25e22e5b176ba6b2e51d5ecd0c063a960c5f0366"
+              },
+              {
+                "code": "MLS-V06-0481",
+                "path": "japones/MLS-V06-0481.json",
+                "sha256": "a1162bf70de0c33babe8148d7d3e615904cd8ad13e4bb11339e104cc80360764"
+              },
+              {
+                "code": "MLS-V06-0483",
+                "path": "japones/MLS-V06-0483.json",
+                "sha256": "950ee4683d801ddb5754b7dd227e428616db0e73d92fdd748dc01b2225d8f9c9"
+              },
+              {
+                "code": "MLS-V06-0484",
+                "path": "japones/MLS-V06-0484.json",
+                "sha256": "30e05fa8cf93376c6421bc893619a2516d2e5cdb42ada78dc935dbcddacef3b8"
+              },
+              {
+                "code": "MLS-V06-0485",
+                "path": "japones/MLS-V06-0485.json",
+                "sha256": "f74a85a9e84c06723d6fd39e4cb9b0b68c0b11bde24cce0cbaffb00ff2ba92dd"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0593",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0480",
+                "path": "japones/MLS-V06-0480.json",
+                "sha256": "32fd12ade55b908e2fa68f2e25e22e5b176ba6b2e51d5ecd0c063a960c5f0366"
+              },
+              {
+                "code": "MLS-V06-0481",
+                "path": "japones/MLS-V06-0481.json",
+                "sha256": "a1162bf70de0c33babe8148d7d3e615904cd8ad13e4bb11339e104cc80360764"
+              },
+              {
+                "code": "MLS-V06-0483",
+                "path": "japones/MLS-V06-0483.json",
+                "sha256": "950ee4683d801ddb5754b7dd227e428616db0e73d92fdd748dc01b2225d8f9c9"
+              },
+              {
+                "code": "MLS-V06-0484",
+                "path": "japones/MLS-V06-0484.json",
+                "sha256": "30e05fa8cf93376c6421bc893619a2516d2e5cdb42ada78dc935dbcddacef3b8"
+              },
+              {
+                "code": "MLS-V06-0485",
+                "path": "japones/MLS-V06-0485.json",
+                "sha256": "f74a85a9e84c06723d6fd39e4cb9b0b68c0b11bde24cce0cbaffb00ff2ba92dd"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0480",
+              "MLS-V06-0481",
+              "MLS-V06-0483",
+              "MLS-V06-0484",
+              "MLS-V06-0485"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997243648,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997243648,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0480",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 480,
+                "title": "〜たほうがいい",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Peticiones, órdenes y sugerencias — 依頼・命令・勧誘",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜たほうがいい** se usa para dar un **consejo o recomendación**: presenta una acción como una opción que sería mejor realizar.\n\n**少し休んだほうがいい。** significa “Sería mejor que descansaras un poco”.\n\n#### Cómo funciona\n\nLa construcción suele combinar la forma pasada llana del verbo, en **〜た**, con **ほうがいい**: **行く → 行ったほうがいい**, **食べる → 食べたほうがいい**, **休む → 休んだほうがいい**.\n\nAunque aparece una forma en **〜た**, el consejo puede referirse al presente o al futuro. Aquí esa forma es parte de la construcción y no significa necesariamente que la acción ya haya ocurrido.\n\nLa forma cortés termina en **〜ほうがいいです**.\n\n#### Ejemplos\n\n* **少し休んだほうがいい。** — Sería mejor que descansaras un poco.\n* **早く寝たほうがいいです。** — Sería mejor acostarse temprano.\n* **先生に聞いたほうがいい。** — Sería mejor preguntarle al profesor.\n* **予約したほうがいいですよ。** — Sería mejor hacer una reserva.\n\n#### Observación importante\n\nLa definición heredada mezcla permiso, obligación y capacidad. **〜たほうがいい** expresa principalmente **consejo o recomendación**.\n\nPuede sonar más o menos insistente según el contexto y la relación entre interlocutores, pero no equivale por sí misma a una obligación formal.\n\n#### Entradas relacionadas\n\n[Entrada 481: 〜ていただけますか — 「〜ていただけますか」](#entry-481) · [Entrada 482: 〜てください — 「〜てください」](#entry-482)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-10ca7e278d1e1d4b80fed36e928004a9f5d89b9bab96835739c0a4fa31da5020",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:54.912Z"
+              },
+              {
+                "code": "MLS-V06-0481",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 481,
+                "title": "〜ていただけますか",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Peticiones, órdenes y sugerencias — 依頼・命令・勧誘",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜ていただけますか** sirve para hacer una **petición muy cortés**. Presenta la acción solicitada como un favor que la otra persona podría realizar.\n\n**もう一度説明していただけますか。** significa “¿Podría explicarlo otra vez?”.\n\n#### Cómo funciona\n\nLa construcción combina la **forma て** del verbo con **いただけますか**: **説明する → 説明していただけますか**, **見る → 見ていただけますか**, **待つ → 待っていただけますか**.\n\n**いただく** es una forma humilde relacionada con recibir una acción o favor. En **〜ていただけますか**, la forma potencial y la pregunta suavizan la solicitud y muestran consideración hacia el interlocutor.\n\nSe usa especialmente cuando existe distancia social, una situación formal o deseo de expresar mucha cortesía.\n\n#### Ejemplos\n\n* **もう一度説明していただけますか。** — ¿Podría explicarlo otra vez?\n* **少し待っていただけますか。** — ¿Podría esperar un momento?\n* **こちらに名前を書いていただけますか。** — ¿Podría escribir su nombre aquí?\n* **この資料を確認していただけますか。** — ¿Podría revisar este material?\n\n#### Observación importante\n\nLa definición heredada mezcla permiso, obligación y capacidad. **〜ていただけますか** funciona aquí como una **petición cortés**, no como expresión general de esas tres modalidades.\n\nFrente a **〜てください**, suele resultar más indirecta y deferente. El grado adecuado de cortesía depende de la relación y de la situación.\n\n#### Entradas relacionadas\n\n[Entrada 480: 〜たほうがいい — 「〜たほうがいい」](#entry-480) · [Entrada 482: 〜てください — 「〜てください」](#entry-482) · [Entrada 483: 〜てくれますか — 「〜てくれますか」](#entry-483)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-bb748fd16fbb9127a192a36473b925ffd631a56500ff035d3f2eb06795aee05d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:27:44.362Z"
+              },
+              {
+                "code": "MLS-V06-0483",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 483,
+                "title": "〜てくれますか",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Peticiones, órdenes y sugerencias — 依頼・命令・勧誘",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜てくれますか** se usa para hacer una **petición al interlocutor**: pregunta si esa persona realizará una acción en beneficio o interés del hablante.\n\n**窓を開けてくれますか。** significa “¿Puedes abrir la ventana?”.\n\n#### Cómo funciona\n\nLa construcción combina la **forma て** del verbo con **くれますか**: **開ける → 開けてくれますか**, **待つ → 待ってくれますか**, **手伝う → 手伝ってくれますか**.\n\n**くれる** describe, entre otros usos, una acción realizada por otra persona hacia el hablante o alguien de su esfera. En forma interrogativa cortés, **〜てくれますか** funciona habitualmente como petición.\n\nSu grado de deferencia es menor que el de **〜ていただけますか** y depende de la relación entre los interlocutores.\n\n#### Ejemplos\n\n* **窓を開けてくれますか。** — ¿Puedes abrir la ventana?\n* **少し待ってくれますか。** — ¿Puedes esperar un momento?\n* **これを見てくれますか。** — ¿Puedes mirar esto?\n* **荷物を持ってくれますか。** — ¿Puedes llevar el equipaje?\n\n#### Observación importante\n\nLa definición heredada mezcla permiso, obligación y capacidad. **〜てくれますか** funciona aquí principalmente como una **petición**.\n\nNo debe analizarse como una traducción literal de “dar”. El valor surge de la construcción con **くれる** y de la perspectiva interpersonal propia de este verbo.\n\n#### Entradas relacionadas\n\n[Entrada 482: 〜てください — 「〜てください」](#entry-482) · [Entrada 484: 〜てもらえますか — 「〜てもらえますか」](#entry-484) · [Entrada 481: 〜ていただけますか — 「〜ていただけますか」](#entry-481) · [Entrada 485: 〜ないでください — 「〜ないでください」](#entry-485)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-8bdc4137c96906cbf160a66442db7cba5752aa203905106f4f517ae2bb210c4c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:29:54.199Z"
+              },
+              {
+                "code": "MLS-V06-0484",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 484,
+                "title": "〜てもらえますか",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Peticiones, órdenes y sugerencias — 依頼・命令・勧誘",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜てもらえますか** se usa para hacer una **petición** presentando la acción como un favor que el hablante recibe de otra persona.\n\n**これを見てもらえますか。** significa “¿Podrías mirar esto?”.\n\n#### Cómo funciona\n\nLa construcción combina la **forma て** del verbo con **もらえますか**: **見る → 見てもらえますか**, **手伝う → 手伝ってもらえますか**, **書く → 書いてもらえますか**.\n\n**もらう** significa recibir y, con un verbo en forma て, puede presentar una acción ajena como algo que beneficia o afecta al receptor. La forma potencial interrogativa **もらえますか** convierte esta perspectiva en una petición cortés.\n\nSu grado de cortesía es habitual y depende de la relación y de la situación.\n\n#### Ejemplos\n\n* **これを見てもらえますか。** — ¿Podrías mirar esto?\n* **少し手伝ってもらえますか。** — ¿Podrías ayudarme un poco?\n* **名前を書いてもらえますか。** — ¿Podrías escribir tu nombre?\n* **もう一度言ってもらえますか。** — ¿Podrías decirlo otra vez?\n\n#### Observación importante\n\nLa definición heredada mezcla permiso, obligación y capacidad. **〜てもらえますか** funciona aquí principalmente como una **petición**.\n\nFrente a **〜ていただけますか**, suele ser menos deferente. Frente a **〜てくれますか**, cambia la perspectiva gramatical: se presenta la acción como algo recibido.\n\n#### Entradas relacionadas\n\n[Entrada 483: 〜てくれますか — 「〜てくれますか」](#entry-483) · [Entrada 485: 〜ないでください — 「〜ないでください」](#entry-485) · [Entrada 482: 〜てください — 「〜てください」](#entry-482) · [Entrada 486: 〜なさい — 「〜なさい」](#entry-486)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-56135aabe13afca565abbb9f03f68e6430a4d732d49eddef51035811babfe194",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:30:49.538Z"
+              },
+              {
+                "code": "MLS-V06-0485",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 485,
+                "title": "〜ないでください",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Peticiones, órdenes y sugerencias — 依頼・命令・勧誘",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜ないでください** se usa para pedir de manera cortés que alguien **no realice una acción**. Puede traducirse como “por favor, no…” o “no …, por favor”.\n\n**ここで走らないでください。** significa “Por favor, no corra aquí”.\n\n#### Cómo funciona\n\nLa construcción combina la forma negativa en **〜ない** con **でください**: **走る → 走らないでください**, **触る → 触らないでください**, **入る → 入らないでください**.\n\nEn este patrón, **〜ないで** presenta la acción que se solicita evitar y **ください** aporta una petición cortés. El significado pertenece al conjunto, no a una traducción palabra por palabra.\n\nSegún el contexto, puede funcionar como petición, indicación o prohibición cortés.\n\n#### Ejemplos\n\n* **ここで走らないでください。** — Por favor, no corra aquí.\n* **このボタンに触らないでください。** — Por favor, no toque este botón.\n* **まだ入らないでください。** — Por favor, no entre todavía.\n* **心配しないでください。** — Por favor, no se preocupe.\n\n#### Observación importante\n\nLa definición heredada mezcla permiso, obligación y capacidad. **〜ないでください** expresa una **petición negativa**.\n\nSe relaciona con **〜てください**, pero cambia la polaridad: en lugar de solicitar que se haga algo, solicita que no se haga.\n\n#### Entradas relacionadas\n\n[Entrada 484: 〜てもらえますか — 「〜てもらえますか」](#entry-484) · [Entrada 486: 〜なさい — 「〜なさい」](#entry-486) · [Entrada 483: 〜てくれますか — 「〜てくれますか」](#entry-483) · [Entrada 487: 〜ましょうか — 「〜ましょうか」](#entry-487)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2d90810882aaab6331f64bc73526b23cb11d9f64abbd4e99de8c252937697a37",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:31:42.839Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:09:04.442Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:09:04.442Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0246-sol-4bd912/13-ticket08-close-claim09.json"
+}
