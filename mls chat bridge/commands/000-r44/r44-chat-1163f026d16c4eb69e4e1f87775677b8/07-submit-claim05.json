@@ -1,0 +1,48 @@
+{
+  "batchId": "r44-t04-complete-claim05",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-c4aa663f-bde0-4955-a08d-1dfdedde2261"
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-c4aa663f-bde0-4955-a08d-1dfdedde2261",
+        "ticketId": "R43-EMERGENCY-0713",
+        "entries": [
+          {
+            "code": "MLS-V07-0172",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V07-0174",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V07-0175",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V07-0176",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V07-0177",
+            "outcome": "PASS_NO_CHANGE"
+          }
+        ]
+      }
+    },
+    {
+      "operationId": "r44ClaimChat",
+      "input": {
+        "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+        "idempotencyKey": "c518ecdd-b6ac-44f0-85cb-72ec6081dde5"
+      }
+    }
+  ]
+}
