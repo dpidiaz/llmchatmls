@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-z6-ticket06-submit-claim7",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-f947b22e-dac3-4e65-9ffa-a6cb8f32bf77",
+          "ticketId": "R43-EMERGENCY-0795",
+          "leaseExpiresAt": 1790997688050
+        },
+        "completedAt": "2026-10-03T03:16:28.178Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0795",
+          "sha256": "165d43e3716a6d6a2a52453eecee58501188a64dd07e214519e481a41b0ceea5",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0795",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "61ffd8d0-75bd-44fe-8a60-36080f2222d9",
+                "ticketId": "R43-EMERGENCY-0795",
+                "code": "MLS-V07-0665",
+                "idempotencyKey": "R43-EMERGENCY-0795:MLS-V07-0665:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8d6ca71ec33714441089f3e02701dfe9de4e94971e77fc84d8a480ee50f7b8e0",
+                "sourceSha256": "9201753b0bc1c3a517cdadf115086a6336ad56720cef701bb20d05d156cf7ffb",
+                "committedMs": 1790997388571,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "32d539064f7c70924902637e409b6e76a12101b7dfc1ae8aeee9d592cf688934",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0795",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "962267ef-ee3b-4f8c-a69a-1cf1c5f60a0d",
+                "ticketId": "R43-EMERGENCY-0795",
+                "code": "MLS-V07-0667",
+                "idempotencyKey": "R43-EMERGENCY-0795:MLS-V07-0667:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2c2f2ff33b81615044d3428b4ae6c869b3f98821410e744ac37d0adc512616eb",
+                "sourceSha256": "0994122f2afcd857b3a4acf615cca0affb7f07d4c6bd1ba997cf71a787d913b6",
+                "committedMs": 1790997388783,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "29462c03a857b9036a248e450ceb3bfd8b47ffce7de11093c9ef320bd5bf1820",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0795",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "124a47c5-4664-4125-929c-6a2d4f5895f2",
+                "ticketId": "R43-EMERGENCY-0795",
+                "code": "MLS-V07-0668",
+                "idempotencyKey": "R43-EMERGENCY-0795:MLS-V07-0668:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7278a4b542dd69d2faafb40ffdac8f868ef083222e822250bb9ecd9e00cede89",
+                "sourceSha256": "176619a00151d92a553f8218b4216b59528dd09f7d4ced1f8d2948674254034c",
+                "committedMs": 1790997388994,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f2d2e176b4cb897e05de8a4c1c8eef5051120a1e0006718d990604608bae952f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0795",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "cd1dd274-e5ba-4788-a96f-096b43ae8a95",
+                "ticketId": "R43-EMERGENCY-0795",
+                "code": "MLS-V07-0669",
+                "idempotencyKey": "R43-EMERGENCY-0795:MLS-V07-0669:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "faf8b708335b0874a56ef2c5949f1efcb0f424475dafe18d0f6e6a2379946530",
+                "sourceSha256": "b7f3dd281ca1fc48cd0bfb785cad2abbc10317fe8ebfbba141d7e320df7ffcf3",
+                "committedMs": 1790997389256,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c573b88331f54d8bc37f619a599b1c758904b5ba6d8233fdc62f270cb1210232",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0795",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a648ef8e-bbdc-4a3d-98bc-3bd0d4086ebf",
+                "ticketId": "R43-EMERGENCY-0795",
+                "code": "MLS-V07-0670",
+                "idempotencyKey": "R43-EMERGENCY-0795:MLS-V07-0670:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2da76bbecb473df54eeef03e54eacacc5ded1ab3ea3ec1ec07b301f3ae3fee5a",
+                "sourceSha256": "0df93b580167f3a19670cbeffe03813cfa749801bd3217c47c9637f631a3c7a2",
+                "committedMs": 1790997389469,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "00c0ff922e12603eeee2150f08d24a8f3a9160dc9f14cfd1c5b73441eee0c63a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-f947b22e-dac3-4e65-9ffa-a6cb8f32bf77",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "165d43e3716a6d6a2a52453eecee58501188a64dd07e214519e481a41b0ceea5"
+          }
+        },
+        "completedAt": "2026-10-03T03:16:29.756Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-25d22701-5b46-41fd-bd38-924a22f9048a",
+          "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0796",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997689799,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0671",
+                "path": "chino-taiwan/MLS-V07-0671.json",
+                "sha256": "0595276c374720b6cebf85951f04100fdea7e96e3b2d1d69c2872577965ec7e5"
+              },
+              {
+                "code": "MLS-V07-0672",
+                "path": "chino-taiwan/MLS-V07-0672.json",
+                "sha256": "983b62a8c0722f15f5858735882e45131c1309d57e37e757c697b81461b6588a"
+              },
+              {
+                "code": "MLS-V07-0673",
+                "path": "chino-taiwan/MLS-V07-0673.json",
+                "sha256": "c0a628dd7adb5b7702aeb43da10ee8595442f98f648867ba99eb900fb3167724"
+              },
+              {
+                "code": "MLS-V07-0674",
+                "path": "chino-taiwan/MLS-V07-0674.json",
+                "sha256": "7bb073f6216974034fdbec9a0b00df4a0d2fbef740024a2cdd70cf3aa117da5a"
+              },
+              {
+                "code": "MLS-V07-0676",
+                "path": "chino-taiwan/MLS-V07-0676.json",
+                "sha256": "1b3af942bc1eb70fa8cbe695c14d0f7a88a731a788ad266b8e2b4ed4da432ed8"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0796",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0671",
+                "path": "chino-taiwan/MLS-V07-0671.json",
+                "sha256": "0595276c374720b6cebf85951f04100fdea7e96e3b2d1d69c2872577965ec7e5"
+              },
+              {
+                "code": "MLS-V07-0672",
+                "path": "chino-taiwan/MLS-V07-0672.json",
+                "sha256": "983b62a8c0722f15f5858735882e45131c1309d57e37e757c697b81461b6588a"
+              },
+              {
+                "code": "MLS-V07-0673",
+                "path": "chino-taiwan/MLS-V07-0673.json",
+                "sha256": "c0a628dd7adb5b7702aeb43da10ee8595442f98f648867ba99eb900fb3167724"
+              },
+              {
+                "code": "MLS-V07-0674",
+                "path": "chino-taiwan/MLS-V07-0674.json",
+                "sha256": "7bb073f6216974034fdbec9a0b00df4a0d2fbef740024a2cdd70cf3aa117da5a"
+              },
+              {
+                "code": "MLS-V07-0676",
+                "path": "chino-taiwan/MLS-V07-0676.json",
+                "sha256": "1b3af942bc1eb70fa8cbe695c14d0f7a88a731a788ad266b8e2b4ed4da432ed8"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0671",
+              "MLS-V07-0672",
+              "MLS-V07-0673",
+              "MLS-V07-0674",
+              "MLS-V07-0676"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997689799,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997689799,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0671",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 671,
+                "title": "Conector 首先",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**首先 (shǒuxiān)** introduce el **primer punto** de una secuencia, explicación o argumentación. En español suele corresponder a «primero», «en primer lugar» o «antes que nada».\n\nPor ejemplo, **首先，我們需要確認資料是否完整。** — «En primer lugar, necesitamos confirmar si los datos están completos». La expresión sitúa esta consideración al comienzo de una serie.\n\n#### Cómo funciona\n\n**首先** aparece con frecuencia al inicio de una cláusula u oración. Puede ordenar pasos, razones, criterios o apartados del discurso. A menudo se combina después con formas como **其次、再來、最後**, aunque no exige una secuencia fija.\n\nTambién puede tener un valor temporal próximo a «primero»: **首先處理最重要的問題。** — «Primero se atiende el problema más importante».\n\nEn textos expositivos, su función principal es hacer visible la organización del contenido y señalar cuál es el punto inicial.\n\n#### Ejemplos\n\n- **首先要了解問題的原因，其次再考慮解決方法。** — Primero hay que entender la causa del problema y después considerar soluciones.\n- **首先，成本必須控制在預算內。** — En primer lugar, el costo debe mantenerse dentro del presupuesto.\n- **我們首先比較兩組資料，最後再整理結論。** — Primero comparamos los dos conjuntos de datos y al final organizamos las conclusiones.\n\n#### Observación importante\n\n**首先** marca el inicio de una secuencia. No equivale a **至於**, que introduce otro tema, ni a **關於**, que establece el asunto del que se habla.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **首先**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 關於 — 連接語「關於」](#entry-670)\n- [Conector 至於 — 連接語「至於」](#entry-669)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1d5491e4d3d6d5b1a13ec58c15508803113ecb12b56586ae6a515207c20dcf5f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:37:56.249Z"
+              },
+              {
+                "code": "MLS-V07-0672",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 672,
+                "title": "並且",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**並且 (bìngqiě)** es un conector aditivo frecuente en la escritura formal y expositiva. Une dos acciones, propiedades o afirmaciones estrechamente relacionadas y suele corresponder a «y además», «asimismo» o simplemente «y».\n\nEn **本研究分析語料，並且比較不同地區的用法。** — «Este estudio analiza datos y además compara los usos de distintas regiones»—, **並且** enlaza dos acciones que forman parte de una misma descripción metodológica.\n\n#### Cómo funciona\n\n**並且** suele aparecer entre dos predicados o cláusulas coordinadas: **A，並且 B**. La segunda parte añade información que continúa la misma línea argumentativa o descriptiva.\n\nTambién puede reforzar una acumulación de propiedades: **這個方法簡單，並且具有高度彈性。** — «Este método es sencillo y además presenta una gran flexibilidad».\n\nEn muchos contextos, **並且** se aproxima a **而且**, pero **並且** suele sentirse más propio de prosa escrita, técnica o administrativa. La diferencia es de registro y distribución, no una oposición absoluta de significado.\n\n#### Registro y estilo\n\nEn conversación cotidiana son frecuentes **而且、也、還** o una coordinación más simple. **並且** resulta especialmente natural en informes, artículos académicos, reglamentos y exposiciones formales donde se desea marcar con claridad que dos afirmaciones pertenecen al mismo bloque lógico.\n\nNo es obligatorio usarlo para toda coordinación formal. Si la relación entre dos partes ya es evidente, una redacción más simple puede ser más natural.\n\n#### Ejemplos\n\n- **系統會自動儲存資料，並且建立備份。** — El sistema guarda los datos automáticamente y además crea una copia de seguridad.\n- **本政策降低行政成本，並且提高處理效率。** — Esta política reduce los costos administrativos y aumenta la eficiencia de gestión.\n- **研究者收集問卷，並且進行訪談。** — Los investigadores recopilan cuestionarios y también realizan entrevistas.\n\n#### Observación importante\n\n**並且** expresa adición coordinada; no introduce por sí mismo contraste, causa o consecuencia. Tampoco debe tratarse como una versión obligatoriamente «más correcta» de **而且**. La elección depende del género textual, del ritmo y del grado de formalidad.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0ba1a9868814bf03be472cfc63a910f8e873e1993f8438e0fce37d6c8b6c7edf",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:38:59.486Z"
+              },
+              {
+                "code": "MLS-V07-0673",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 673,
+                "title": "乃",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**乃 (nǎi)** es una forma de registro escrito y relativamente solemne que aparece en prosa formal para establecer identidad, conclusión o relación lógica. En muchos contextos puede corresponder a «es», «constituye», «resulta ser» o «por tanto», pero no tiene una traducción fija.\n\nEn **此乃本研究的主要結論。** — «Esta es la conclusión principal del estudio»—, **乃** relaciona **此** «esto» con **本研究的主要結論** «la conclusión principal del estudio». La construcción suena más formal y literaria que una oración cotidiana con **是**.\n\n#### Cómo funciona\n\nUno de los usos más transparentes de **乃** es copulativo o identificativo en prosa escrita: **A 乃 B** presenta A como B. Aparece con frecuencia en definiciones, declaraciones y formulaciones solemnes.\n\nTambién puede encontrarse en secuencias donde introduce una consecuencia o una caracterización derivada del contexto previo. En esos casos, la interpretación depende de la estructura completa y del género textual.\n\nNo conviene analizar **乃** como sustituto universal de **是**. Aunque ambos pueden relacionar dos elementos, su distribución y registro son diferentes.\n\n#### Registro y estilo\n\nEn mandarín cotidiano, **乃** suele sonar arcaizante, literario o deliberadamente formal. Es más natural en documentos, ensayos de estilo elevado, textos jurídicos o prosa influida por el chino clásico.\n\nPor ejemplo, **此乃必要措施。** «Esta constituye una medida necesaria» resulta mucho más solemne que **這是必要的措施。** En textos modernos, la elección de **乃** puede aportar concisión, pero también rigidez si se usa en exceso.\n\n#### Ejemplos\n\n- **此乃事實，不容忽視。** — Esto es un hecho y no puede ignorarse.\n- **該決定乃基於現有資料。** — Esa decisión se basa en los datos disponibles.\n- **此種差異乃長期累積的結果。** — Esta diferencia es el resultado de una acumulación prolongada.\n\n#### Observación importante\n\n**乃** pertenece a un registro marcado y no debe presentarse como forma neutral del mandarín moderno. Su análisis depende del contexto: puede ser identificativo, explicativo o participar en relaciones lógicas propias de la prosa formal. La traducción al español debe conservar la relación expresada sin intentar reproducir mecánicamente una sola palabra.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c9bd4465e7e34c61666797c5394c6449eb9c2a8314c43f6378037d9be3e87dc1",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:40:02.241Z"
+              },
+              {
+                "code": "MLS-V07-0674",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 674,
+                "title": "之 posesivo/formal",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**之 (zhī)** aparece en chino escrito formal como un recurso que puede establecer una relación entre dos elementos nominales, con un valor que en muchos contextos corresponde a una relación posesiva o asociativa. En español puede traducirse mediante «de», un posesivo u otra construcción natural según el contexto.\n\nEn **研究之目的在於比較兩種方法。** — «El objetivo de la investigación consiste en comparar dos métodos»—, **之** enlaza **研究** «investigación» y **目的** «objetivo». La relación se parece a la que en mandarín moderno cotidiano suele expresarse con **的**.\n\n#### Cómo funciona\n\nUna estructura frecuente es **A 之 B**, donde A especifica o determina a B. Según el significado de los nombres, la relación puede ser posesiva, clasificatoria o asociativa.\n\n- **政策之影響** — el impacto de la política.\n- **研究之結果** — los resultados de la investigación.\n- **制度之改革** — la reforma del sistema.\n\nEn muchos casos, una versión menos formal emplearía **的**: **研究的結果**. Sin embargo, **之** no debe considerarse simplemente un reemplazo mecánico de **的**, porque su distribución está más ligada a ciertos géneros escritos y construcciones lexicalizadas.\n\n#### Registro y estilo\n\n**之** es frecuente en documentos jurídicos, textos administrativos, títulos, ensayos académicos y prosa de estilo solemne o conciso. En conversación cotidiana suele sonar arcaizante o marcadamente escrito.\n\nSu uso permite formar cadenas nominales compactas, como **研究之目的與方法** «el objetivo y el método de la investigación». Esa concisión puede ser útil en prosa formal, pero una acumulación excesiva de estructuras con **之** puede volver el texto denso.\n\n#### Ejemplos\n\n- **本計畫之目的在於改善服務品質。** — El objetivo de este proyecto consiste en mejorar la calidad del servicio.\n- **上述措施之效果仍待評估。** — Los efectos de las medidas mencionadas todavía deben evaluarse.\n- **資料之完整性將影響研究結果。** — La integridad de los datos afectará los resultados de la investigación.\n\n#### Observación importante\n\nNo todo **之** del chino formal tiene este valor posesivo o asociativo; también aparece en otras construcciones de origen clásico. Esta entrada se centra en el patrón nominal **A 之 B**. La traducción no debe copiar literalmente la estructura china, sino expresar en español la relación concreta entre ambos nombres.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-50f09d53718d23412f0ba422ea3da080f221392248262083a362f5abd45566d3",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:41:03.358Z"
+              },
+              {
+                "code": "MLS-V07-0676",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 676,
+                "title": "以 instrumento/método",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**以 (yǐ)** es una forma frecuente del chino escrito formal que puede introducir el **medio, instrumento, método o criterio** mediante el cual se realiza una acción. En español puede corresponder a «con», «mediante», «por medio de» o «a partir de», según la estructura.\n\nPor ejemplo, **本研究以問卷蒐集資料。** — «Este estudio recopila datos mediante cuestionarios»—, **以問卷** expresa el método utilizado para obtener la información.\n\n#### Cómo funciona\n\nUna estructura común es **以＋medio/método＋verbo**. El elemento introducido por **以** indica cómo, con qué o sobre qué base se lleva a cabo la acción.\n\n- **以電子郵件通知** — notificar por correo electrónico.\n- **以統計方法分析資料** — analizar los datos mediante métodos estadísticos.\n- **以現有資料為基礎** — tomar los datos existentes como base.\n\nEl valor concreto depende de la construcción completa. **以** no debe traducirse siempre con una misma preposición española.\n\n#### Registro y estilo\n\nEn conversación cotidiana suelen preferirse formas como **用** «usar/con» o construcciones más explícitas. **以** resulta especialmente natural en informes, artículos académicos, instrucciones administrativas, reglamentos y prosa expositiva.\n\nPor ejemplo, **用手機付款** «pagar con el teléfono» es muy natural en conversación, mientras que **以手機付款** puede aparecer en textos informativos o formales. No obstante, la elección depende del contexto y del estilo, no de una oposición entre correcto e incorrecto.\n\n#### Ejemplos\n\n- **本研究以訪談方式蒐集資料。** — Este estudio recopila datos mediante entrevistas.\n- **系統將以電子郵件寄送通知。** — El sistema enviará la notificación por correo electrónico.\n- **研究者以三項指標評估成效。** — Los investigadores evalúan los resultados mediante tres indicadores.\n\n#### Observación importante\n\n**以** aparece también en construcciones como **以…為…**, donde participa en una relación más compleja de consideración, función o base. Ese patrón merece un análisis propio y no debe reducirse al uso instrumental explicado aquí.\n\nEl ejemplo de referencia proporcionado no contiene **以**, por lo que no demuestra directamente la forma objetivo. La descripción más sólida debe basarse en ejemplos donde **以** sí introduzca un medio, método o criterio real.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b0d3ae0ee8520dba36c46acfe9bcccaee95e3fa09e88db4d08761b9c9ed1ad53",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:43:06.044Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:16:30.567Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:16:30.567Z",
+  "commandFile": "mls chat bridge/commands/r44/z6-ticket06-submit-claim7.json"
+}

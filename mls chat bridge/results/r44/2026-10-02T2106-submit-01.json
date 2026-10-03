@@ -1,0 +1,37 @@
+{
+  "success": false,
+  "httpStatus": 400,
+  "operationId": "r44SubmitChat",
+  "method": "POST",
+  "path": "/api/r44/chat-bridge/submit",
+  "response": {
+    "http": 400,
+    "error": "INVALID_OUTCOME",
+    "receipts": [
+      {
+        "status": "ALREADY_DURABLE",
+        "ticketId": "R43-EMERGENCY-0457",
+        "receipt": {
+          "code": "MLS-V05-0770",
+          "committedMs": 1790997305392,
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "idempotencyKey": "R43-EMERGENCY-0457:MLS-V05-0770:legacy-v1",
+          "leaseGeneration": 1,
+          "outcome": "PASS_NO_CHANGE",
+          "payloadSha256": "e948545ea7d8b474d99876762e0c5d8330f986c49f2dbcd66688f71bd2a2967d",
+          "receiptId": "fff30bf3-620f-4859-8b7b-ceea01987124",
+          "schema": "MLS-R44-ENTRY-RECEIPT-1",
+          "sourceSha256": "a22e3868730bd9b74c642dcde33473342a3a1630acc61dffd28c5336d00933f6",
+          "ticketId": "R43-EMERGENCY-0457",
+          "workerId": "chatgpt-r44-20261002T2106-01"
+        },
+        "receiptSha256": "b116a2da79b75aa476602d1286b499220196c682e4670f92acaa4e7c0a1c857d",
+        "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+      }
+    ],
+    "durable": false,
+    "bridgeSessionId": "r44b-7187ca85-5fa1-457a-866d-252efbadd64d"
+  },
+  "completedAt": "2026-10-03T03:16:22.315Z",
+  "commandFile": "mls chat bridge/commands/r44/2026-10-02T2106-submit-01.json"
+}

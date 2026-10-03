@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261003-0245-sol-5f2a9-t08-close-next09",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1018",
+          "sha256": "cdaa9bcefc7fd6ee4719a5411e33408cdd5606cc162d49b8b116ec097981f277",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1018",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "dad059df-2ecd-428f-8546-823b1d571268",
+                "ticketId": "R44-CORPUS-1018",
+                "code": "MLS-V02-0571",
+                "idempotencyKey": "R44-CORPUS-1018:MLS-V02-0571:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "CORRECTED",
+                "payloadSha256": "6c9a37e774f641142e612255cc09484fb777a2899495ba39c1d7f794eef2a2c5",
+                "sourceSha256": "0ad9f19e4b6c31379a84c624c2169ae500e52f9e6b050f3be5b42bdf8ece46b9",
+                "committedMs": 1790997367242,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "82a7362bd9e9c01c4dcbc8eca6daea657393354d9abe31c26024bd2b8bfaa694",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1018",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "43cb8feb-cec2-4c11-aaed-de36775bbfb5",
+                "ticketId": "R44-CORPUS-1018",
+                "code": "MLS-V02-0572",
+                "idempotencyKey": "R44-CORPUS-1018:MLS-V02-0572:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8e0269dd7fec2e3db97f01b82f54b38ca8e5ac6f150873c1e5e766f211c3e802",
+                "sourceSha256": "03311743232a7f63f23e846221fc3e5bb6d09a5b35cfa9ab8d1d9ac1b772cf60",
+                "committedMs": 1790997367464,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "755c0fc8c7a90adf33839d81ab4b7f2c092489480beb4fc42f3a7fd26049cab6",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1018",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1eeb0b48-973b-42f8-b2c8-441c7769fbe9",
+                "ticketId": "R44-CORPUS-1018",
+                "code": "MLS-V02-0573",
+                "idempotencyKey": "R44-CORPUS-1018:MLS-V02-0573:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7b9d7e7e79f5e4288fea85cbd098187092ceb38cb016418e5498d85554be93cd",
+                "sourceSha256": "0d900cedd59404732246af47c8748e4f017d885f5a14511243b6318c55ab2b0e",
+                "committedMs": 1790997367688,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7c6079dd18dd1eeef9714b193045f6f04b310138f09ef945389db3d803b1d45a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1018",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "78cabd8e-cb74-49e7-98c6-97c3690e859f",
+                "ticketId": "R44-CORPUS-1018",
+                "code": "MLS-V02-0574",
+                "idempotencyKey": "R44-CORPUS-1018:MLS-V02-0574:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "442121aecd6bb32f4e94b3342356047aa884c2eafd69ca7b275a44e32a89279f",
+                "sourceSha256": "a3db0e6808112c5e74228685760a7254f6009f3daeb9358207aa48672a2779d1",
+                "committedMs": 1790997367920,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "5bbd87847bd91ae41de5ac7150e72865b8e1c777879ca126f658063902ddd381",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1018",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ac58befe-5390-4a8e-8350-0ad3ab6859d6",
+                "ticketId": "R44-CORPUS-1018",
+                "code": "MLS-V02-0575",
+                "idempotencyKey": "R44-CORPUS-1018:MLS-V02-0575:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "4503f65396c509dcfd6c5fba85dc5298636a05efa587e0a393842c20347542e4",
+                "sourceSha256": "c4b1fba36d58aae1d361ba4c2de97cffe385da161e6a109956dc3834672f4e1b",
+                "committedMs": 1790997368137,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "96e1d6ddaedad5071a5eb03d78687e485565e67d0da42119ae820b6344d9ae03",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-e6e8d50c-0026-4e44-8ec1-7515c89097a5",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "cdaa9bcefc7fd6ee4719a5411e33408cdd5606cc162d49b8b116ec097981f277"
+          }
+        },
+        "completedAt": "2026-10-03T03:16:08.434Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-35be7eb5-6bdf-4ff1-993c-e8032cd41b0b",
+          "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1019",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997668478,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0576",
+                "path": "portugues/MLS-V02-0576.json",
+                "sha256": "c55dd1df8f6b3597ddadc653f06c38c92613820417f6c3fb652aff2e68a14141"
+              },
+              {
+                "code": "MLS-V02-0577",
+                "path": "portugues/MLS-V02-0577.json",
+                "sha256": "e465a618f247feaa7ec3636f9cb2c71d15991215105806ad17382be518944764"
+              },
+              {
+                "code": "MLS-V02-0578",
+                "path": "portugues/MLS-V02-0578.json",
+                "sha256": "dd6e8887b305f8881f632ebeebb95c1cc9613a627b34b5df49ef195038967696"
+              },
+              {
+                "code": "MLS-V02-0579",
+                "path": "portugues/MLS-V02-0579.json",
+                "sha256": "94a758c1568ba672bf0fbc14f7e3916f1d72d1ccd668e32d3eb7fc6d0f4573df"
+              },
+              {
+                "code": "MLS-V02-0580",
+                "path": "portugues/MLS-V02-0580.json",
+                "sha256": "8c6277fa691b2665b3708a85bc02d73252cce7fb5e44ac8e69f979d72d78926e"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1019",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0576",
+                "path": "portugues/MLS-V02-0576.json",
+                "sha256": "c55dd1df8f6b3597ddadc653f06c38c92613820417f6c3fb652aff2e68a14141"
+              },
+              {
+                "code": "MLS-V02-0577",
+                "path": "portugues/MLS-V02-0577.json",
+                "sha256": "e465a618f247feaa7ec3636f9cb2c71d15991215105806ad17382be518944764"
+              },
+              {
+                "code": "MLS-V02-0578",
+                "path": "portugues/MLS-V02-0578.json",
+                "sha256": "dd6e8887b305f8881f632ebeebb95c1cc9613a627b34b5df49ef195038967696"
+              },
+              {
+                "code": "MLS-V02-0579",
+                "path": "portugues/MLS-V02-0579.json",
+                "sha256": "94a758c1568ba672bf0fbc14f7e3916f1d72d1ccd668e32d3eb7fc6d0f4573df"
+              },
+              {
+                "code": "MLS-V02-0580",
+                "path": "portugues/MLS-V02-0580.json",
+                "sha256": "8c6277fa691b2665b3708a85bc02d73252cce7fb5e44ac8e69f979d72d78926e"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0576",
+              "MLS-V02-0577",
+              "MLS-V02-0578",
+              "MLS-V02-0579",
+              "MLS-V02-0580"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997668478,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997668478,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0576",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 576,
+                "title": "Locución prepositiva fora de",
+                "level": "A2",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa locución prepositiva **fora de** expresa que algo está **en el exterior de un espacio, conjunto o límite**. En **O carro ficou fora da garagem**, el carro no está dentro de la garagem.\n\nTambién posee usos figurados relacionados con exclusión o falta de adecuación.\n\n#### Cómo funciona\n\nCon lugares, **fora de** introduce aquello respecto de lo cual una entidad está en el exterior: **fora da casa**, **fora do prédio**, **fora da cidade**. La preposición **de** se contrae normalmente con artículos: **do, da, dos, das**.\n\nEn usos abstractos aparece en expresiones como **fora do orçamento**, **fora das regras** y **fora de perigo**. En estos casos, la relación ya no es estrictamente espacial: se indica que algo queda fuera de un límite, categoría o situación.\n\n**Fora** puede usarse sin complemento cuando la referencia está clara: **As crianças estão fora**. Con un punto de referencia explícito, se emplea **fora de**.\n\n#### Ejemplos\n\n* **O carro ficou fora da garagem.**  \n  *(El carro quedó fuera del garaje.)*  \n  **Fora da** expresa exterioridad espacial.\n\n* **A despesa ficou fora do orçamento.**  \n  *(El gasto quedó fuera del presupuesto.)*  \n  El límite es abstracto.\n\n* **O paciente está fora de perigo.**  \n  *(El paciente está fuera de peligro.)*  \n  La locución expresa exclusión de una situación de riesgo.\n\n#### Observación importante\n\n**Fora de** y **dentro de** suelen expresar relaciones opuestas de exterior e interior, pero ambas tienen también extensiones figuradas propias.\n\nAdemás, **fora** puede desempeñar otras funciones en expresiones diferentes; esta entrada se centra en la construcción **fora de + complemento**.\n\n#### Entradas relacionadas\n\n[574. Locução prepositiva longe de](#entrada-574) · [575. Locução prepositiva dentro de](#entrada-575) · [577. Locução prepositiva em frente a](#entrada-577) · [578. Locução prepositiva atrás de](#entrada-578)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6229dc535db0e5c72d2c6b5db8c4449adfee6bc6dbf9b70f905a1ca4c742e587",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:09:54.679Z"
+              },
+              {
+                "code": "MLS-V02-0577",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 577,
+                "title": "Locución prepositiva em frente a",
+                "level": "A2",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa locución prepositiva **em frente a** expresa que algo está **delante de un punto de referencia**. En **O ônibus parou em frente à escola**, la escuela sirve como referencia para localizar el lugar donde se detuvo el autobús.\n\nEn español suele corresponder a “frente a” o “delante de”.\n\n#### Cómo funciona\n\nLa locución termina en la preposición **a**. Por eso, delante de un nombre masculino con artículo aparecen formas como **em frente ao banco**; delante de un femenino definido puede aparecer crase: **em frente à escola**.\n\nCon nombres sin artículo, no se produce esa fusión: **em frente a casa** puede aparecer en variedades o contextos donde *casa* no lleva artículo, aunque la presencia del artículo depende del uso nominal concreto.\n\nEn conversación brasileña también es muy frecuente **na frente de**, especialmente para relaciones espaciales: **O carro está na frente da casa**. Las dos construcciones se superponen, pero su distribución no es idéntica en todos los contextos.\n\n#### Ejemplos\n\n* **O ônibus parou em frente à escola.**  \n  *(El autobús paró frente a la escuela.)*  \n  **À** resulta de la preposición **a** más el artículo femenino **a**.\n\n* **Há uma farmácia em frente ao banco.**  \n  *(Hay una farmacia frente al banco.)*  \n  **Ao** resulta de **a + o**.\n\n* **Eles esperaram em frente ao prédio.**  \n  *(Esperaron delante del edificio.)*  \n  La locución expresa posición frontal.\n\n#### Observación importante\n\nLa crase no aparece porque el sustantivo sea femenino por sí solo. En **em frente à escola**, surge porque coinciden la preposición **a** de la locución y el artículo femenino **a**.\n\nTambién conviene distinguir la ubicación **em frente a** de expresiones figuradas con **frente**, que pueden seguir otras estructuras.\n\n#### Entradas relacionadas\n\n[575. Locução prepositiva dentro de](#entrada-575) · [576. Locução prepositiva fora de](#entrada-576) · [578. Locução prepositiva atrás de](#entrada-578) · [579. Locução prepositiva ao lado de](#entrada-579)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-d2c1e1ece89b1c0260b506cec8362e1011edba247c42b2612cb5f00cb5242d6d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:10:39.820Z"
+              },
+              {
+                "code": "MLS-V02-0578",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 578,
+                "title": "Locución prepositiva atrás de",
+                "level": "A2",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa locución prepositiva **atrás de** expresa que algo está **en una posición posterior respecto de otro punto de referencia**. En **O carro está atrás do prédio**, el edificio sirve como referencia para localizar el carro.\n\nEn español suele corresponder a “detrás de”.\n\n#### Cómo funciona\n\n**Atrás de** introduce aquello respecto de lo cual una entidad está situada más atrás: **atrás da porta**, **atrás do sofá**, **atrás dos outros carros**. La preposición **de** se contrae normalmente con los artículos: **do, da, dos, das**.\n\nLa locución puede aparecer con verbos de posición o movimiento: **ficar atrás de**, **parar atrás de**, **andar atrás de alguém**. En esta última construcción, según el contexto, también puede surgir un sentido figurado de buscar o perseguir algo o a alguien.\n\nCuando no se expresa el punto de referencia, **atrás** puede aparecer solo: **O carro ficou atrás**.\n\n#### Ejemplos\n\n* **O carro está atrás do prédio.**  \n  *(El carro está detrás del edificio.)*  \n  **Atrás do** expresa posición posterior.\n\n* **A mochila ficou atrás da porta.**  \n  *(La mochila quedó detrás de la puerta.)*  \n  **Da** resulta de **de + a**.\n\n* **Ele passou o dia atrás de uma solução.**  \n  *(Pasó el día buscando una solución.)*  \n  Aquí la construcción tiene un sentido figurado.\n\n#### Observación importante\n\nEn el portugués brasileño actual, **atrás de** es una forma muy natural para expresar posición posterior. Esto contrasta con **trás de** aislado, que resulta mucho menos corriente.\n\nTambién conviene distinguir **atrás de** de **em frente a**, que normalmente expresa una relación espacial opuesta.\n\n#### Entradas relacionadas\n\n[576. Locução prepositiva fora de](#entrada-576) · [577. Locução prepositiva em frente a](#entrada-577) · [579. Locução prepositiva ao lado de](#entrada-579) · [580. Locução prepositiva por causa de](#entrada-580)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2ec7153b2a54d1d9401a8ed603048af14959cd5bb73bf76c99f558b7b6629c66",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:11:16.299Z"
+              },
+              {
+                "code": "MLS-V02-0579",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 579,
+                "title": "Locución prepositiva ao lado de",
+                "level": "A2",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa locución prepositiva **ao lado de** expresa que algo está **junto a otro punto de referencia, normalmente en una posición lateral**. En **A farmácia fica ao lado do banco**, el banco sirve como referencia para localizar la farmacia.\n\nEn español suele corresponder a “al lado de” o “junto a”.\n\n#### Cómo funciona\n\nLa locución completa es **ao lado de + complemento**. La parte final **de** se combina normalmente con artículos: **ao lado do banco**, **ao lado da escola**, **ao lado dos prédios**, **ao lado das lojas**. Con pronombres aparecen formas como **ao lado dele** y **ao lado dela**.\n\nAdemás del sentido espacial, puede expresar acompañamiento o apoyo: **Ela ficou ao lado da família durante o momento difícil**. Aquí la relación no es solamente física; también puede indicar cercanía o solidaridad.\n\nEn el portugués brasileño cotidiano, **do lado de** es también muy frecuente y puede coincidir con **ao lado de** en varios usos espaciales: **A padaria fica do lado da farmácia**.\n\n#### Ejemplos\n\n* **A farmácia fica ao lado do banco.**  \n  *(La farmacia queda al lado del banco.)*  \n  **Ao lado do** expresa proximidad lateral.\n\n* **O estacionamento fica ao lado da escola.**  \n  *(El estacionamiento queda al lado de la escuela.)*  \n  **Da** resulta de **de + a**.\n\n* **Ela permaneceu ao lado da irmã durante o tratamento.**  \n  *(Ella permaneció al lado de su hermana durante el tratamiento.)*  \n  La locución puede expresar acompañamiento y apoyo.\n\n#### Observación importante\n\nEl **ao** inicial forma parte de la expresión **ao lado de**; el complemento que sigue se introduce mediante **de**. Por eso se dice **ao lado da escola**, no *ao lado à escola*.\n\nTambién conviene distinguir **ao lado de** de **em frente a** y **atrás de**, que sitúan una entidad según otras relaciones espaciales.\n\n#### Entradas relacionadas\n\n[577. Locução prepositiva em frente a](#entrada-577) · [578. Locução prepositiva atrás de](#entrada-578) · [580. Locução prepositiva por causa de](#entrada-580) · [581. Locução prepositiva a respeito de](#entrada-581)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-4f6d1068f56c92cef5258a04d100c86b093f7f5007d59001416840c2a37a64ae",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:12:35.436Z"
+              },
+              {
+                "code": "MLS-V02-0580",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 580,
+                "title": "Locución prepositiva por causa de",
+                "level": "A2",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa locución prepositiva **por causa de** expresa **causa o motivo**. En **Ficamos em casa por causa da chuva**, la lluvia explica por qué las personas se quedaron en casa.\n\nEn español suele corresponder a “a causa de” o “por”.\n\n#### Cómo funciona\n\n**Por causa de** introduce el hecho, situación o entidad que provoca otra situación: **por causa do trânsito**, **por causa da chuva**, **por causa dos atrasos**. La preposición **de** se contrae normalmente con los artículos: **do, da, dos, das**.\n\nPuede referirse a causas concretas o abstractas: **O voo atrasou por causa do mau tempo**; **Eles discutiram por causa de um mal-entendido**.\n\nEn registros más formales también aparece **devido a**, aunque su distribución y sus reglas de concordancia no son idénticas. **Por causa de** es muy frecuente y natural en el portugués brasileño cotidiano.\n\n#### Ejemplos\n\n* **Ficamos em casa por causa da chuva.**  \n  *(Nos quedamos en casa por causa de la lluvia.)*  \n  **Por causa da** introduce el motivo.\n\n* **O ônibus atrasou por causa do trânsito.**  \n  *(El autobús se retrasó por el tráfico.)*  \n  **Do** resulta de **de + o**.\n\n* **A reunião foi cancelada por causa de um problema técnico.**  \n  *(La reunión fue cancelada por un problema técnico.)*  \n  La locución introduce la causa del hecho.\n\n#### Observación importante\n\n**Por causa de** no equivale a **para**: expresa motivo, no finalidad. **Ele saiu por causa do barulho** explica la causa de la salida; **ele saiu para trabalhar** expresa una finalidad.\n\nTambién conviene distinguir la locución de **porque**, que introduce normalmente una oración con verbo conjugado.\n\n#### Entradas relacionadas\n\n[578. Locução prepositiva atrás de](#entrada-578) · [579. Locução prepositiva ao lado de](#entrada-579) · [581. Locução prepositiva a respeito de](#entrada-581) · [582. Locução prepositiva em vez de](#entrada-582) · [933. Conectores de causa](#entrada-933)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-254c139b2967bef2c7de65b88b064be87fe7d5bc93bb8288a5c0683c981938d3",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:13:13.006Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:16:09.272Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:16:09.272Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261003-0245-sol-5f2a9/08-submit-next09.json"
+}
