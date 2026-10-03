@@ -530,12 +530,12 @@ async function unifiedRunnerControl(request, env) {
   if (!auth.ok) return r44Json({error:auth.error},auth.status);
   const body = await r44ChatBridgeBody(request);
   const action = String(body.action || "").toLowerCase();
-  const map = {start:"RUNNING",resume:"RUNNING",pause:"PAUSED",stop:"STOPPED"};
+  const map = {start:"RUNNING",resume:"RUNNING",pause:"PAUSED",stop:"STOPPED",complete:"COMPLETE"};
   const next = map[action];
   if (!next) return r44Json({error:"UNIFIED_RUNNER_ACTION_INVALID"},400);
   await unifiedRunnerEnsure(env);
   const now = new Date().toISOString();
-  await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state=?, started_at=CASE WHEN ?='RUNNING' AND started_at IS NULL THEN ? ELSE started_at END, updated_at=?, last_error=CASE WHEN ?='RUNNING' THEN NULL ELSE last_error END WHERE id=1")
+  await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state=?, started_at=CASE WHEN ?='RUNNING' AND started_at IS NULL THEN ? ELSE started_at END, updated_at=?, last_error=CASE WHEN ? IN ('RUNNING','COMPLETE') THEN NULL ELSE last_error END WHERE id=1")
     .bind(next,next,now,now,next).run();
   return r44Json({ok:true,action,state:next,runner:await unifiedRunnerRead(env)});
 }
