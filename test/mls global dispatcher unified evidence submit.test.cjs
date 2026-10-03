@@ -44,3 +44,22 @@ test('Evidence writer does not append a literal backslash-n after JSON',()=>{
   assert.match(source,/String\.fromCharCode\(10\)/);
   assert.doesNotMatch(source,/JSON\.stringify\(bundle\.evidence,null,2\)\+'\\\\n'/);
 });
+
+
+test('Unified auto-checkpoint remains fenced to bot, assignment and branch head',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  const submit=fs.readFileSync('scripts/MLS unified r33 evidence submit.cjs','utf8');
+  const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
+  const workerWorkflow=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
+  assert.match(workflow,/issues: write/);
+  assert.match(workflow,/checkpoint "\$BUNDLE_PATH" "\$COMMIT_SHA" "\$GITHUB_RUN_ID"/);
+  assert.ok(workflow.indexOf('git push origin')<workflow.indexOf('Publish fenced durable checkpoint'));
+  assert.match(submit,/UNIFIED_EVIDENCE_CHECKPOINT_STATE_MISMATCH/);
+  assert.match(submit,/UNIFIED_EVIDENCE_CHECKPOINT_HEAD_MISMATCH/);
+  assert.match(submit,/MLS_UNIFIED_R33_AUTOCHECKPOINT/);
+  assert.match(submit,/completed=\[\.\.\.new Set\(\[\.\.\.previous,bundle\.code\]\)\]/);
+  assert.match(worker,/commentLogin==='github-actions\[bot\]'/);
+  assert.match(worker,/MLS_UNIFIED_R33_AUTOCHECKPOINT/);
+  assert.match(worker,/state\.provider==='r33-farm'/);
+  assert.match(workerWorkflow,/contains\(github\.event\.comment\.body, 'MLS_GLOBAL_DISPATCH_EVENT'\)/);
+});
