@@ -21,7 +21,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: mls-unified-r33-evidence-${{ github.event.issue.number }}
+  group: mls-unified-r33-evidence-${{ github.event.issue.number || github.event.inputs.issue_number }}
   cancel-in-progress: false
 
 jobs:
