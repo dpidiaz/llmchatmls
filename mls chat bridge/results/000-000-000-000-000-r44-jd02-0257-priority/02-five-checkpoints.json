@@ -1,0 +1,33 @@
+{
+  "success": false,
+  "httpStatus": 409,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-jd02-emergency-0257-five-checkpoints-v1",
+    "requested": 6,
+    "processed": 1,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "error": "LEASE_INVALID_OR_EXPIRED",
+          "bridgeSessionId": "r44b-46d663b2-d136-4d81-b516-fb23433da2aa",
+          "ticketId": "R43-EMERGENCY-0257"
+        },
+        "completedAt": "2026-10-03T03:57:28.261Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:57:28.261Z",
+  "commandFile": "mls chat bridge/commands/000-000-000-000-000-r44-jd02-0257-priority/02-five-checkpoints.json"
+}

@@ -1,0 +1,32 @@
+{
+  "success": false,
+  "httpStatus": 409,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-1545-audit5-6f2d9a1c",
+    "requested": 5,
+    "processed": 1,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "http": 409,
+          "error": "LEASE_INVALID_OR_EXPIRED"
+        },
+        "completedAt": "2026-10-03T03:57:34.411Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:57:34.411Z",
+  "commandFile": "mls chat bridge/commands/r44/2026-10-02/checkpoint-1545-5-6f2d9a1c.json"
+}
