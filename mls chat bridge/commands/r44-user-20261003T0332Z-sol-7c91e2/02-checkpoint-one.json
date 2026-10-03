@@ -1,0 +1,53 @@
+{
+  "batchId": "r44-user-20261003T0332Z-sol-7c91e2-checkpoint-one",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-c2c57901-c81a-4be5-93df-325544fc7043"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-c2c57901-c81a-4be5-93df-325544fc7043",
+        "ticketId": "R44-CORPUS-1141",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R44-CORPUS-1141:MLS-V07-0791:audit-20261003T0334Z-sol-7c91e2",
+        "entry": {
+          "code": "MLS-V07-0791",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "id": "MOE-NENG",
+              "citation": "教育部. (2021). 能. 《重編國語辭典修訂本》.",
+              "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=3007&la=0&powerMode=0"
+            },
+            {
+              "id": "MOE-MAFAN",
+              "citation": "教育部. (2021). 麻煩. 《重編國語辭典修訂本》.",
+              "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=26734&la=0&powerMode=0"
+            },
+            {
+              "id": "MOE-NIN",
+              "citation": "教育部. (2021). 您. 《重編國語辭典修訂本》.",
+              "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=3112&la=0&powerMode=0"
+            }
+          ],
+          "claims": [
+            {
+              "claim": "能 puede funcionar con el sentido de «poder/ser posible» y la propia entrada oficial ejemplifica el patrón interrogativo 能不能, por lo que 能不能 introduce adecuadamente una pregunta sobre posibilidad o disposición.",
+              "support": "MOE-NENG"
+            },
+            {
+              "claim": "麻煩 incluye el sentido de «molestar/causar inconveniencia», y 您 es la forma honorífica de segunda persona; su combinación en 麻煩您 aporta el componente deferente de la petición descrita.",
+              "support": "MOE-MAFAN; MOE-NIN"
+            }
+          ],
+          "notes": "Auditoría R44: la explicación de 能不能麻煩您… como petición indirecta y deferente es coherente con los valores documentados de 能/能不能, 麻煩 y 您; los ejemplos mantienen correctamente la estructura 能不能麻煩您 + acción solicitada. No se detecta error sustantivo. PASS_NO_CHANGE; R33 canónico pendiente."
+        }
+      }
+    }
+  ]
+}
