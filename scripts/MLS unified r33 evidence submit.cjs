@@ -33,10 +33,12 @@ async function gh(endpoint,{method='GET',body}={}){
 }
 function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
 function validate(issue,comment,payload){
-  if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase()))fail('UNIFIED_EVIDENCE_AUTHOR_UNAUTHORIZED');
   if(!String(issue?.title||'').startsWith('[MLS Dispatcher][LEASED]'))fail('UNIFIED_EVIDENCE_NOT_LEASED');
   const state=core.parseAssignmentState(issue?.body||'');
   if(!state||state.status!=='leased')fail('UNIFIED_EVIDENCE_STATE_INVALID');
+  const login=String(comment?.user?.login||'');
+  const botAuthorized=login==='github-actions[bot]'&&state.workerLogin===login&&state.provider==='r33-farm'&&String(state.workId||'').startsWith('r33-unified:');
+  if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase())&&!botAuthorized)fail('UNIFIED_EVIDENCE_AUTHOR_UNAUTHORIZED');
   if(state.provider!=='r33-farm'||!String(state.workId||'').startsWith('r33-unified:'))fail('UNIFIED_EVIDENCE_SCOPE_INVALID');
   if(!String(state.branch||'').startsWith('worker/r33-unified/'))fail('UNIFIED_EVIDENCE_BRANCH_INVALID');
   if(state.workerLogin&&String(comment?.user?.login||'')!==String(state.workerLogin))fail('UNIFIED_EVIDENCE_WORKER_LOGIN_MISMATCH');
@@ -53,9 +55,16 @@ function validate(issue,comment,payload){
   if(!evidencePath)fail('UNIFIED_EVIDENCE_PATH_MISSING');
   const contentPath=String(evidence.contentPath||'');
   if(!contentPath||(state.allowedPaths||[]).includes(contentPath)===false||!contentPath.startsWith('content/'))fail('UNIFIED_EVIDENCE_CONTENT_PATH_INVALID');
+  const content=payload?.content??null;
+  if(content!==null){
+    if(!content||typeof content!=='object'||Array.isArray(content))fail('UNIFIED_EVIDENCE_CONTENT_INVALID');
+    if(String(content.code||'').toUpperCase()!==code)fail('UNIFIED_EVIDENCE_CONTENT_CODE_MISMATCH');
+    if(String(content.language||'')!==String(evidence.language||''))fail('UNIFIED_EVIDENCE_CONTENT_LANGUAGE_MISMATCH');
+    if(typeof content.articleMarkdown!=='string'||!content.articleMarkdown.trim())fail('UNIFIED_EVIDENCE_CONTENT_MARKDOWN_MISSING');
+  }
   const expires=Date.parse(String(state.expiresAt||''));
   if(!Number.isFinite(expires)||Date.now()>expires)fail('UNIFIED_EVIDENCE_LEASE_EXPIRED');
-  return {state,code,evidencePath,contentPath,evidence};
+  return {state,code,evidencePath,contentPath,evidence,content};
 }
 function appendOutput(name,value){
   const out=process.env.GITHUB_OUTPUT;
@@ -79,22 +88,33 @@ async function prepare(){
     code:validated.code,
     evidencePath:validated.evidencePath,
     contentPath:validated.contentPath,
-    evidence:validated.evidence
+    evidence:validated.evidence,
+    content:validated.content
   },null,2)+'\n');
   appendOutput('branch',validated.state.branch);
   appendOutput('code',validated.code);
   appendOutput('evidence_path',validated.evidencePath);
+  appendOutput('content_path',validated.contentPath);
   appendOutput('bundle_path',bundlePath);
+}
+function safeTarget(repoPath,code){
+  const target=path.resolve(workspace,String(repoPath||''));
+  const root=path.resolve(workspace)+path.sep;
+  if(!target.startsWith(root))fail(code);
+  return target;
 }
 function apply(){
   const bundlePath=process.argv[3]||path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-evidence-submit.json');
   const bundle=JSON.parse(fs.readFileSync(bundlePath,'utf8'));
-  const target=path.resolve(workspace,bundle.evidencePath);
-  const root=path.resolve(workspace)+path.sep;
-  if(!target.startsWith(root))fail('UNIFIED_EVIDENCE_TARGET_ESCAPE');
+  if(bundle.content){
+    const contentTarget=safeTarget(bundle.contentPath,'UNIFIED_EVIDENCE_CONTENT_TARGET_ESCAPE');
+    fs.mkdirSync(path.dirname(contentTarget),{recursive:true});
+    fs.writeFileSync(contentTarget,JSON.stringify(bundle.content,null,2)+String.fromCharCode(10));
+  }
+  const target=safeTarget(bundle.evidencePath,'UNIFIED_EVIDENCE_TARGET_ESCAPE');
   fs.mkdirSync(path.dirname(target),{recursive:true});
   fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+String.fromCharCode(10));
-  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath})+'\n');
+  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath,contentPath:bundle.content?bundle.contentPath:null})+'\n');
 }
 function syntheticEventPath(kind){
   return path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-'+kind+'-event.json');
