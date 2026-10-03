@@ -199,12 +199,13 @@ async function r44DurableSubmit(request,env) {
     ticketId:lease.ticket_id,sha256:envelopeSha,receipts,
     editorialStatus:'PENDING_CANONICAL_R33_VALIDATION',state:(await r44Reconcile(env,lease.ticket_id)).state});
 }
-async function r44DurableExport(env,limit) {
+async function r44DurableExport(env,limit,afterOrdinal=0) {
   await r44DurableReady(env);
   const n=Math.max(1,Math.min(200,Number(limit)||50));
+  const after=Number.isSafeInteger(Number(afterOrdinal))&&Number(afterOrdinal)>=0?Number(afterOrdinal):0;
   const rows=await env.WIKI_DB.prepare(`SELECT t.*,r.worker_id AS result_worker,r.stage,r.editorial_status,r.payload,r.sha256,r.source,r.created_at,p.state AS durable_state
     FROM r44_tickets t LEFT JOIN r44_results r USING(ticket_id) JOIN r44_ticket_progress p USING(ticket_id)
-    WHERE t.state='audited' ORDER BY t.ordinal_start LIMIT ?`).bind(n).all();
+    WHERE t.state='audited' AND t.ordinal_start>? ORDER BY t.ordinal_start LIMIT ?`).bind(after,n).all();
   for(const row of rows.results) {
     if(row.durable_state==='COMPLETE' && !row.payload) {
       const entries=await env.WIKI_DB.prepare('SELECT r.payload_json,r.committed_ms FROM r44_receipts r JOIN r44_entries e USING(ticket_id,code) WHERE r.ticket_id=? ORDER BY e.ordinal').bind(row.ticket_id).all();
