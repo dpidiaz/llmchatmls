@@ -522,11 +522,24 @@ async function unifiedRunnerRead(env) {
   await unifiedRunnerEnsure(env);
   return env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner WHERE id=1").first();
 }
-async function unifiedRunnerAuthorize(request, env) {
-  return r44ChatBridgeAuthorize(request, env);
+async function unifiedRunnerAuthorize(request, env, ctx) {
+  const bearer = String(request.headers.get("authorization") || "").trim();
+  if (bearer) return r44ChatBridgeAuthorize(request, env);
+  if (ctx && ctx.access) {
+    let identity = null;
+    try { identity = await ctx.access.getIdentity(); } catch (_) {}
+    return {
+      ok:true,
+      status:200,
+      auth:"cloudflare-access",
+      aud:String(ctx.access.aud || ""),
+      email:String(identity && identity.email || "")
+    };
+  }
+  return {ok:false,status:401,error:"UNIFIED_RUNNER_ACCESS_REQUIRED"};
 }
-async function unifiedRunnerControl(request, env) {
-  const auth = await unifiedRunnerAuthorize(request, env);
+async function unifiedRunnerControl(request, env, ctx) {
+  const auth = await unifiedRunnerAuthorize(request, env, ctx);
   if (!auth.ok) return r44Json({error:auth.error},auth.status);
   const body = await r44ChatBridgeBody(request);
   const action = String(body.action || "").toLowerCase();
@@ -539,8 +552,8 @@ async function unifiedRunnerControl(request, env) {
     .bind(next,next,now,now,next).run();
   return r44Json({ok:true,action,state:next,runner:await unifiedRunnerRead(env)});
 }
-async function unifiedRunnerStatus(request, env) {
-  const auth = await unifiedRunnerAuthorize(request, env);
+async function unifiedRunnerStatus(request, env, ctx) {
+  const auth = await unifiedRunnerAuthorize(request, env, ctx);
   if (!auth.ok) return r44Json({error:auth.error},auth.status);
   const runner = await unifiedRunnerRead(env);
   const r44 = await r44Status(env);
@@ -548,7 +561,7 @@ async function unifiedRunnerStatus(request, env) {
   try { budget = await wikiStore(env).getCloudflareBudget(); } catch (_) {}
   const laneRows=await env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner_lane ORDER BY stage").all();
   const lanes=Object.fromEntries((laneRows.results||[]).map(row=>[row.stage,{...row,detail:(()=>{try{return row.detail_json?JSON.parse(row.detail_json):null}catch{return null}})()}]));
-  return r44Json({ok:true,runner,r44,budget,lanes,freeOnly:true,chatCompatible:true,canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
+  return r44Json({ok:true,runner,r44,budget,lanes,freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
 }
 function unifiedRunnerSeed(article) {
   return {
@@ -703,8 +716,8 @@ async function unifiedRunnerStep(env, stepKey) {
     await release().catch(function(){});
   }
 }
-async function unifiedRunnerStepRequest(request, env) {
-  const auth = await unifiedRunnerAuthorize(request, env);
+async function unifiedRunnerStepRequest(request, env, ctx) {
+  const auth = await unifiedRunnerAuthorize(request, env, ctx);
   if (!auth.ok) return r44Json({error:auth.error},auth.status);
   const body = await r44ChatBridgeBody(request);
   const result = await unifiedRunnerStep(env,String(body.stepKey || ""));
@@ -731,8 +744,8 @@ async function unifiedRunnerScheduled(env) {
   }
 }
 
-async function unifiedRunnerReport(request,env) {
-  const auth=await unifiedRunnerAuthorize(request,env);
+async function unifiedRunnerReport(request,env,ctx) {
+  const auth=await unifiedRunnerAuthorize(request,env,ctx);
   if(!auth.ok) return r44Json({error:auth.error},auth.status);
   const body=await r44ChatBridgeBody(request);
   const stage=String(body.stage||"").toLowerCase();
@@ -756,17 +769,17 @@ async function unifiedRunnerReport(request,env) {
   return r44Json({ok:true,stage,state,runner:await unifiedRunnerRead(env)});
 }
 
-async function handleUnifiedRunner(request, env, url) {
-  if (url.pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env);
-  if (url.pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env);
-  if (url.pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env);
-  if (url.pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env);
-  if (url.pathname === "/api/unified-runner/report" && request.method === "POST") return unifiedRunnerReport(request,env);
+async function handleUnifiedRunner(request, env, url, ctx) {
+  if (url.pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env,ctx);
+  if (url.pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env,ctx);
+  if (url.pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env,ctx);
+  if (url.pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env,ctx);
+  if (url.pathname === "/api/unified-runner/report" && request.method === "POST") return unifiedRunnerReport(request,env,ctx);
   return r44Json({error:"UNIFIED_RUNNER_ROUTE_NOT_FOUND"},404);
 }
 
-async function handleR44(request, env, url) {
-  if (url.pathname.startsWith("/api/unified-runner/")) return handleUnifiedRunner(request, env, url);
+async function handleR44(request, env, url, ctx) {
+  if (url.pathname.startsWith("/api/unified-runner/")) return handleUnifiedRunner(request, env, url, ctx);
   try {
     const durable = await r44DurableRoute(request, env, url);
     if (durable) return durable;
