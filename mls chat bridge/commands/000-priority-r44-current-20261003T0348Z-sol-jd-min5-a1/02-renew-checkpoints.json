@@ -1,0 +1,138 @@
+{
+  "batchId": "r44-sol-jd-min5-a1-0520-checkpoints-v1",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-a0f9be86-8f0d-456f-9598-5bb8803c1861"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-a0f9be86-8f0d-456f-9598-5bb8803c1861",
+        "ticketId": "R43-EMERGENCY-0520",
+        "leaseGeneration": 2,
+        "idempotencyKey": "sol-jd-min5-a1:R43-EMERGENCY-0520:MLS-V06-0042:v1",
+        "entry": {
+          "code": "MLS-V06-0042",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "title": "Kanji y morfemas léxicos",
+            "articleMarkdown": "#### En pocas palabras\n\nLos **kanji** son caracteres de escritura, no morfemas por definición. En japonés suelen representar palabras o elementos léxicos con contenido semántico, y en muchos casos un carácter coincide aproximadamente con un morfema; sin embargo, la relación no es siempre uno a uno.\n\n#### Cómo funciona\n\nUn mismo kanji puede aparecer en palabras distintas y tener varias lecturas. Conviene aprender cada palabra con su escritura, lectura y significado. Por eso no debe deducirse el significado moderno de un compuesto sumando traducciones aisladas de sus caracteres.\n\n#### Ejemplos\n\n* **日本語（にほんご, nihongo）** — japonés / idioma japonés. **日本** es el nombre lexicalizado de Japón y **語** significa ‘lengua/idioma’ en numerosos compuestos. Es más útil aprender **日本語 = にほんご** como palabra que interpretarla literalmente como «lengua del origen del sol».\n* **勉強（べんきょう, benkyō）** — estudio; estudiar. Es un compuesto establecido cuyo significado actual se aprende como unidad léxica. Las glosas aisladas de **勉** y **強** pueden ayudar a reconocer los caracteres, pero no sustituyen el significado de la palabra completa.\n\n#### Observación importante\n\nCarácter, morfema, palabra y lectura son niveles distintos. Un kanji puede corresponder a varias lecturas o participar en palabras cuyo significado no se obtiene de una suma mecánica de sus partes.\n\n#### Entradas relacionadas\n- [Entrada 41: Jukujikun — 熟字訓](#entry-41)\n- [Entrada 43: Kanji compuesto 熟語 — 熟語](#entry-43)\n- [Entrada 40: Furigana — 振り仮名](#entry-40)\n- [Entrada 44: Kanji de días y meses — 日付・月の漢字](#entry-44)"
+          },
+          "sources": [
+            "国立国語研究所. (2022). ひらがな、カタカナ、漢字、ローマ字のように、複数の文字を使うのは日本語だけですか. ことば研究館. https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-155/",
+            "国立国語研究所. (2019). 同じ漢字なのに、日本語と中国語とで発音が違うのはなぜですか. ことば研究館. https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-58/",
+            "国際交流基金マドリード日本文化センター. (2018). Gramática de japonés A1. https://md.jpf.go.jp/userfiles/file/2018/Lengua%20Japonesa/Gramatica/A1-JP_rev.pdf"
+          ],
+          "claims": [
+            "Kanji es una categoría de caracteres de escritura y no equivale por definición a «morfema».",
+            "Un mismo kanji puede presentar múltiples lecturas según la palabra.",
+            "Los compuestos lexicalizados deben aprenderse como vocabulario y no mediante una suma literal obligatoria."
+          ],
+          "notes": "Auditoría R44/R33: se corrige la equivalencia categórica «kanji = morfema léxico» y la descomposición literal presentada como significado sincrónico. CORRECTED."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-a0f9be86-8f0d-456f-9598-5bb8803c1861",
+        "ticketId": "R43-EMERGENCY-0520",
+        "leaseGeneration": 2,
+        "idempotencyKey": "sol-jd-min5-a1:R43-EMERGENCY-0520:MLS-V06-0043:v1",
+        "entry": {
+          "code": "MLS-V06-0043",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            "国際交流基金. (s. f.). 『まるごと 日本のことばと文化』中級2 教師用リソース. https://marugoto.jpf.go.jp/assets/docs/teacher/resource/intermediate2/intermediate2_teaching_topic.pdf",
+            "国立国語研究所. (2019). 同じ漢字なのに、日本語と中国語とで発音が違うのはなぜですか. ことば研究館. https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-58/"
+          ],
+          "claims": [
+            "熟語 puede tratarse pedagógicamente como vocabulario compuesto por varios kanji.",
+            "Las lecturas no se obtienen siempre sumando mecánicamente una lectura aislada por carácter.",
+            "Distinguir 熟語 de lecturas especiales como 熟字訓 es válido."
+          ],
+          "notes": "Auditoría R44/R33: definición, advertencia sobre lectura y ejemplos son adecuados. PASS_NO_CHANGE."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-a0f9be86-8f0d-456f-9598-5bb8803c1861",
+        "ticketId": "R43-EMERGENCY-0520",
+        "leaseGeneration": 2,
+        "idempotencyKey": "sol-jd-min5-a1:R43-EMERGENCY-0520:MLS-V06-0044:v1",
+        "entry": {
+          "code": "MLS-V06-0044",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            "国際交流基金. (s. f.). 日にち・曜日・月の言い方. みんなの教材サイト. https://www.kyozai.jpf.go.jp/kyozai/material/BTS00008/ja/render.do",
+            "文化庁. (s. f.). 常用漢字表の音訓索引. https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/joyokanjisakuin/index.html"
+          ],
+          "claims": [
+            "Los meses se expresan regularmente con número + 月（がつ）, con lecturas establecidas.",
+            "Varios días del mes presentan lecturas especiales y no se reducen a número + にち.",
+            "一日 como primer día del mes se lee ついたち."
+          ],
+          "notes": "Auditoría R44/R33: lecturas y ejemplos calendáricos coinciden con Japan Foundation. PASS_NO_CHANGE."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-a0f9be86-8f0d-456f-9598-5bb8803c1861",
+        "ticketId": "R43-EMERGENCY-0520",
+        "leaseGeneration": 2,
+        "idempotencyKey": "sol-jd-min5-a1:R43-EMERGENCY-0520:MLS-V06-0046:v1",
+        "entry": {
+          "code": "MLS-V06-0046",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            "国際交流基金. (2014). 日本語教育通信 文法を楽しく「～てください」. https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201412.html",
+            "国際交流基金. (s. f.). Nをください. みんなの教材サイト. https://www.kyozai.jpf.go.jp/kyozai/material/BTS00157/ja/render.do",
+            "国立国語研究所. (s. f.). ください：下さい・ください. 日本語基本語データベース. https://mmsrv.ninjal.ac.jp/kamus/data/item1887.html"
+          ],
+          "claims": [
+            "ください es habitual en hiragana en construcciones de petición como ～てください.",
+            "下さい y ください coexisten y su selección depende del uso y convenciones ortográficas.",
+            "Más kanji no equivale automáticamente a mayor corrección."
+          ],
+          "notes": "Auditoría R44/R33: explicación de alternancia kanji/kana y tratamiento de ください son correctos. PASS_NO_CHANGE."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-a0f9be86-8f0d-456f-9598-5bb8803c1861",
+        "ticketId": "R43-EMERGENCY-0520",
+        "leaseGeneration": 2,
+        "idempotencyKey": "sol-jd-min5-a1:R43-EMERGENCY-0520:MLS-V06-0047:v1",
+        "entry": {
+          "code": "MLS-V06-0047",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "title": "Kanji y contexto para desambiguar la lectura",
+            "articleMarkdown": "#### En pocas palabras\n\nUn mismo kanji puede tener varias lecturas. Para saber cómo se pronuncia, normalmente hay que aprender **la palabra completa** y considerar su contexto, no asignar una única lectura fija al carácter.\n\nPor ejemplo, **日** aparece en **日本（にほん／にっぽん）**, **日曜日（にちようび）** y **一日（ついたち）**, pero estas lecturas no deben segmentarse siempre carácter por carácter de manera mecánica.\n\n#### Cómo funciona\n\nLos kanji pueden tener lecturas **音読み（おんよみ）** y **訓読み（くんよみ）**, además de lecturas especiales o lexicalizadas en determinadas palabras. La combinación de caracteres y la palabra establecida determinan la lectura; el contexto ayuda cuando una misma grafía puede corresponder a palabras distintas.\n\nAprender cada término junto con su lectura en kana suele ser más fiable que intentar deducirla a partir de un kanji aislado.\n\n#### Ejemplos\n\n* **日本（にほん／にっぽん）** — Japón. Son lecturas establecidas de la palabra; no conviene describirla como si **日** tuviera por sí solo la lectura *に*.\n* **日曜日（にちようび）** — domingo; aquí **日** aparece con la lectura *にち*.\n* **一日（ついたち）** — primer día del mes; lectura especial de la expresión completa en este uso.\n* **生** aparece con lecturas distintas en **学生（がくせい）** y **生きる（いきる）**.\n\n#### Observación importante\n\nLectura, carácter y significado no son lo mismo. Algunas combinaciones tienen pronunciaciones lexicalizadas que no se obtienen sumando lecturas aisladas. Las palabras establecidas deben aprenderse como vocabulario.\n\n#### Entradas relacionadas\n\n[Kanji vs kana como elección estilística](#entry-46) · [Kun'yomi](#entry-48) · [Kanji compuesto 熟語](#entry-43)"
+          },
+          "sources": [
+            "文化庁. (s. f.). 常用漢字表の音訓索引. https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/joyokanjisakuin/index.html",
+            "国立国語研究所. (2019). 同じ漢字なのに、日本語と中国語とで発音が違うのはなぜですか. ことば研究館. https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-58/",
+            "国立国語研究所. (2009). 日本語基本語辞書. https://repository.ninjal.ac.jp/record/2000336/files/kihongojisho_s_200902.pdf"
+          ],
+          "claims": [
+            "日 tiene múltiples lecturas, pero に no debe enseñarse como lectura general aislada de 日.",
+            "日本 posee las lecturas lexicalizadas にほん y にっぽん a nivel de palabra.",
+            "Las lecturas deben aprenderse dentro de palabras y construcciones reales."
+          ],
+          "notes": "Auditoría R44/R33: se corrige el ejemplo que segmentaba 日本 como si 日 se leyera に por sí solo. CORRECTED."
+        }
+      }
+    }
+  ]
+}
