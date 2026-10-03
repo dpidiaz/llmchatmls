@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-next10-c91d-05",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-448bd058-b544-45b7-b6f1-585ee3227916",
+          "ticketId": "R44-CORPUS-0984",
+          "leaseExpiresAt": 1790997173959
+        },
+        "completedAt": "2026-10-03T03:07:54.104Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0984",
+          "sha256": "6310e393dedff510ccb622f7f59b808f1d6ec25ea9aa6140797ca2abf6bcdc9f",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0984",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f27c45aa-63cc-4427-a26a-aa03f2ca4384",
+                "ticketId": "R44-CORPUS-0984",
+                "code": "MLS-V02-0372",
+                "idempotencyKey": "R44-CORPUS-0984:MLS-V02-0372:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8f6ea0a288cad673d0b2bb2f7f8c2dee5d1357ca24dbe3cfc5756e09f2b18892",
+                "sourceSha256": "7891ba19de7abf68bbf9100a3492566f6c60fb4b3f9b6a2dd45ff123b05402a1",
+                "committedMs": 1790996874464,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b19ff31256442e3360a82aa96275892d02ba088e5d048d7469e8c989a0fff2e8",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0984",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1401c31a-8f41-41f4-9157-8ed00576ea1a",
+                "ticketId": "R44-CORPUS-0984",
+                "code": "MLS-V02-0374",
+                "idempotencyKey": "R44-CORPUS-0984:MLS-V02-0374:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b90ee118e507bdb71ba45821fd25622ba58e2b020513c4e67cf44e34fdbb495d",
+                "sourceSha256": "8a8587ef856ed47ea20de9737cb0032b44b6b1a1ae927cb65f6de69694b3a7f4",
+                "committedMs": 1790996874681,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "986243f46cbc00bc2bcd4a4f216ee74ccb81c79f447dbacb2c8637ab6fc1e2a3",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0984",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "fb145581-fce2-4787-9ce4-4bfc38e0c3d3",
+                "ticketId": "R44-CORPUS-0984",
+                "code": "MLS-V02-0375",
+                "idempotencyKey": "R44-CORPUS-0984:MLS-V02-0375:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "790dc119b8553e9d99313624bfcc2084798b0b1e644dda80c952d66e0520deef",
+                "sourceSha256": "da8dce124aaa844d58075c607810cbceed3e35e76942a9e58e56e7366cc79f24",
+                "committedMs": 1790996874884,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7f9bfff087d8a1dfb611c98f739f234762cd8f4e72cb2a066ad0f6182a6dd6e0",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0984",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "80d935a1-f4eb-4037-89b4-9b06951341fe",
+                "ticketId": "R44-CORPUS-0984",
+                "code": "MLS-V02-0376",
+                "idempotencyKey": "R44-CORPUS-0984:MLS-V02-0376:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "718a27f0ca4100f48c5b32e7b414171156887d6e7103b4d38647715a95f64fcd",
+                "sourceSha256": "87225b24187a72b06511a05cc6817c38cf8cfdb86944268158540449128e82ba",
+                "committedMs": 1790996875087,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "a67a3b9190b592841591166b379f47e28c49729a1928350c82093aa4bc854ff3",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0984",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8e0c387d-fa39-48f2-b6e7-e6c9cc8cfe38",
+                "ticketId": "R44-CORPUS-0984",
+                "code": "MLS-V02-0377",
+                "idempotencyKey": "R44-CORPUS-0984:MLS-V02-0377:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6a16758cf097d2406c22bb5b44e0607f27272d4a56ede75b3cd5be9a8de5514f",
+                "sourceSha256": "05bfe725dcf8769075c820b86c1746cdf7d778476dea8b49d35f68715410d4b2",
+                "committedMs": 1790996875313,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8fec7d7d70f69588d7b2184d7f9f946427c27295c73688a8e4b9b611e3367caf",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-448bd058-b544-45b7-b6f1-585ee3227916",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "6310e393dedff510ccb622f7f59b808f1d6ec25ea9aa6140797ca2abf6bcdc9f"
+          }
+        },
+        "completedAt": "2026-10-03T03:07:55.615Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-d782cbc4-a526-4974-bcc4-821934b428a2",
+          "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0985",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997175659,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0378",
+                "path": "portugues/MLS-V02-0378.json",
+                "sha256": "baf3b67640038a4e381c51d30bea332e28e55f117d501076522a0e844ecc288b"
+              },
+              {
+                "code": "MLS-V02-0380",
+                "path": "portugues/MLS-V02-0380.json",
+                "sha256": "e84f0ca4b3177da5adf799b6b049bf65b1b5b4959c4b567c7bf08050fa6ce331"
+              },
+              {
+                "code": "MLS-V02-0381",
+                "path": "portugues/MLS-V02-0381.json",
+                "sha256": "9dc88107589dd176d92eb0bc28883fbb4adb03fee43ff0092880099d22918acb"
+              },
+              {
+                "code": "MLS-V02-0382",
+                "path": "portugues/MLS-V02-0382.json",
+                "sha256": "72c0987fc35594ba02e0a4f6b5d5aab949f53aeb612d0e6b156695b572be3b05"
+              },
+              {
+                "code": "MLS-V02-0383",
+                "path": "portugues/MLS-V02-0383.json",
+                "sha256": "324ac696ed8e0bf9796ca45f06df11adda75a17fb1bc8a11e5bce37257cb1697"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0985",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0378",
+                "path": "portugues/MLS-V02-0378.json",
+                "sha256": "baf3b67640038a4e381c51d30bea332e28e55f117d501076522a0e844ecc288b"
+              },
+              {
+                "code": "MLS-V02-0380",
+                "path": "portugues/MLS-V02-0380.json",
+                "sha256": "e84f0ca4b3177da5adf799b6b049bf65b1b5b4959c4b567c7bf08050fa6ce331"
+              },
+              {
+                "code": "MLS-V02-0381",
+                "path": "portugues/MLS-V02-0381.json",
+                "sha256": "9dc88107589dd176d92eb0bc28883fbb4adb03fee43ff0092880099d22918acb"
+              },
+              {
+                "code": "MLS-V02-0382",
+                "path": "portugues/MLS-V02-0382.json",
+                "sha256": "72c0987fc35594ba02e0a4f6b5d5aab949f53aeb612d0e6b156695b572be3b05"
+              },
+              {
+                "code": "MLS-V02-0383",
+                "path": "portugues/MLS-V02-0383.json",
+                "sha256": "324ac696ed8e0bf9796ca45f06df11adda75a17fb1bc8a11e5bce37257cb1697"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0378",
+              "MLS-V02-0380",
+              "MLS-V02-0381",
+              "MLS-V02-0382",
+              "MLS-V02-0383"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997175659,
+              "active": true
+            },
+            "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997175659,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0378",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 378,
+                "title": "Auxiliar estar",
+                "level": "B2",
+                "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+                "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos",
+                "articleMarkdown": "#### En pocas palabras\n\n**Estar** funciona como auxiliar aspectual cuando se combina con gerundio para presentar una situación como en desarrollo: **Ela está trabalhando agora**. El gerundio es la forma terminada normalmente en **-ando, -endo, -indo**, como **falando, fazendo, dormindo**.\n\nEn portugués brasileño, **estar + gerúndio** es una construcción central para acciones en curso: **estou estudando**, **estávamos esperando**, **estarão viajando**. El auxiliar **estar** lleva la información de persona, número, tiempo y modo; el gerundio permanece invariable.\n\n#### Cómo funciona\n\nEn **Eu estou lendo**, **estou** indica primera persona y presente, mientras **lendo** presenta la actividad de leer como internamente en desarrollo. Al cambiar el tiempo del auxiliar cambia la localización temporal: **eu estava lendo** sitúa el proceso en el pasado y **eu estarei lendo** lo sitúa en un marco futuro.\n\nLa perífrasis no significa simplemente “presente”. Puede combinarse con distintos tiempos y también con otros auxiliares: **ela tem estado trabalhando muito**. Lo importante es que **estar + gerundio** aporta una perspectiva progresiva o durativa sobre la situación.\n\nEn portugués brasileño esta estructura es mucho más característica que **estar a + infinitivo**, construcción asociada especialmente al portugués europeo. Esa diferencia es de variedad y no debe presentarse como si una de las dos fuera universal para todo el portugués.\n\n#### Ejemplos\n\n* **Ela está trabalhando agora.**  \n  *(Ella está trabajando ahora.)*  \n  **Está trabalhando** presenta la actividad como en curso en el momento de referencia.\n\n* **Nós estávamos esperando o ônibus.**  \n  *(Estábamos esperando el autobús.)*  \n  El imperfecto **estávamos** sitúa el proceso en un marco pasado.\n\n* **Amanhã, a esta hora, eles estarão viajando.**  \n  *(Mañana, a esta hora, estarán viajando.)*  \n  **Estarão viajando** combina futuro con perspectiva progresiva.\n\n#### Observación importante\n\nNo todo **estar** seguido de una forma no finita tiene exactamente la misma función. En **A porta está fechada**, **fechada** es un participio con valor resultativo o adjetival y concuerda con **a porta**; la oración describe principalmente un estado. En **A porta está fechando**, el gerundio presenta un proceso en desarrollo.\n\nAdemás, una acción expresada con presente simple puede ser natural aunque esté ocurriendo ahora, según el verbo y el contexto. **Estou trabalhando** destaca el desarrollo de la actividad; no es una sustitución obligatoria de todo presente simple.\n\n#### Entradas relacionadas\n\n[376. Auxiliar haver em tempos compostos](#entrada-376) · [377. Auxiliar ser](#entrada-377) · [379. Auxiliar ir](#entrada-379) · [386. Estar + gerúndio](#entrada-386) · [293. Clítico entre auxiliar e infinitivo/gerúndio](#entrada-293)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-8ba1a6d29bc5f89334cf00cfdef528edb1357b6f9ba545c83d588673d9b9c159",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:19:22.529Z"
+              },
+              {
+                "code": "MLS-V02-0380",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 380,
+                "title": "Presente del indicativo: formación",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **presente do indicativo** se usa, entre otras cosas, para hablar de estados actuales, hábitos y hechos que se presentan como válidos. La forma del verbo cambia según la persona.\n\nEn los verbos regulares, las terminaciones dependen de si el infinitivo acaba en **-ar, -er** o **-ir**: **falar, comer, abrir**.\n\n#### Cómo funciona\n\nCon **falar**, se usan **eu falo, você/ele/ela fala, nós falamos, vocês/eles/elas falam**. Se elimina **-ar** y se añaden las terminaciones correspondientes.\n\nCon **comer** aparecen **eu como, você come, nós comemos, vocês comem**. Con **abrir**: **eu abro, você abre, nós abrimos, vocês abrem**.\n\n**Você** y **vocês** se combinan normalmente con formas de tercera persona: **você fala**, **vocês falam**. Los verbos irregulares pueden apartarse de estos modelos y deben aprenderse con sus propios cambios.\n\n#### Ejemplos\n\n* **Eu falo português todos os dias.** — **falo** es primera persona singular de *falar*.\n* **Você come cedo.** — **come** es la forma usada con **você**.\n* **Nós abrimos a loja às oito.** — **abrimos** es primera persona plural de *abrir*.\n\n#### Observación importante\n\nEl presente simple no significa únicamente “ahora mismo”. **Eu trabalho de segunda a sexta** expresa un hábito, mientras **Eu moro em Brasília** describe un estado actual.\n\nPara destacar una acción que está en desarrollo en este momento, el portugués brasileño usa con frecuencia **estar + gerúndio**: **Estou trabalhando agora**.\n\n#### Entradas relacionadas\n\n[381. Presente para estados atuais](#entrada-381) · [382. Presente para hábitos](#entrada-382) · [422. Futuro do presente: formação](#entrada-422) · [438. Presente do subjuntivo: formação](#entrada-438) · [398. Pretérito perfeito: formação regular](#entrada-398)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-09e67185355b25d08b758ceb133dfe0d323185d57af469313605121a46bf0ce6",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:20:29.686Z"
+              },
+              {
+                "code": "MLS-V02-0381",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 381,
+                "title": "Presente para estados actuales",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **presente do indicativo** puede describir un estado que es válido en el momento actual. Un estado es una situación, condición o relación, no necesariamente una acción que está ocurriendo paso a paso.\n\nPor ejemplo, **Eu moro em Recife** presenta como actual el lugar donde vive la persona.\n\n#### Cómo funciona\n\nSe usa el verbo en presente: **moro, estou, tenho, gosto**. El contexto indica que la situación pertenece al período actual.\n\nAlgunos estados pueden ser relativamente estables: **Ela trabalha numa escola** o **Nós moramos no Brasil**. Otros pueden ser temporales: **Estou cansado hoje**.\n\nEl presente también tiene otros usos, como hábitos y hechos generales. Por eso el tiempo verbal por sí solo no dice qué tipo de situación se expresa.\n\n#### Ejemplos\n\n* **Eu moro em Recife.** — **moro** describe una situación actual de residencia.\n* **Ela está cansada.** — **está** presenta un estado actual y temporal.\n* **Nós temos dois filhos.** — **temos** expresa una relación válida en el presente.\n\n#### Observación importante\n\nHablar de un estado actual no exige **estar**. Muchos verbos pueden expresar estados en presente: **morar, ter, gostar, saber** y otros.\n\nTampoco debe confundirse **Ela está cansada** con **Ela está trabalhando**. En la primera oración, **está** describe un estado con el adjetivo **cansada**; en la segunda, **estar + gerúndio** presenta una actividad en desarrollo.\n\n#### Entradas relacionadas\n\n[380. Presente do indicativo: formação](#entrada-380) · [382. Presente para hábitos](#entrada-382) · [383. Presente para fatos gerais](#entrada-383) · [23. Acentos diferenciais atuais](#entrada-23) · [403. Pretérito imperfeito para estados passados](#entrada-403)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2be353f404ce12772ffc90fdcc73229a930dfb7d56a71e28dafb574f54f95dcc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:20:59.964Z"
+              },
+              {
+                "code": "MLS-V02-0382",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 382,
+                "title": "Presente para hábitos",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **presente do indicativo** se usa para hablar de hábitos: acciones que una persona realiza de manera repetida o habitual.\n\nPor ejemplo, **Eu tomo café todas as manhãs** no describe solo este momento; expresa una costumbre.\n\n#### Cómo funciona\n\nSe usa el verbo en presente y, con frecuencia, aparecen expresiones de frecuencia como **sempre, geralmente, todos os dias, às vezes** o **aos domingos**.\n\nLa repetición también puede entenderse sin una expresión explícita. **Ela trabalha de casa** puede describir una rutina habitual según el contexto.\n\nEl presente para hábitos contrasta con un hecho terminado del pasado: **Eu caminho todos os dias** expresa una costumbre actual; **Eu caminhei ontem** habla de una ocasión pasada concreta.\n\n#### Ejemplos\n\n* **Eu tomo café todas as manhãs.** — **tomo** expresa un hábito repetido.\n* **Nós estudamos à noite.** — el contexto presenta **estudamos** como una rutina.\n* **Ela sempre liga para a mãe aos domingos.** — **sempre** y **aos domingos** hacen explícita la frecuencia.\n\n#### Observación importante\n\nEl presente habitual no significa que la acción esté ocurriendo exactamente ahora. Una persona puede decir **Eu trabalho de manhã** incluso si habla por la noche.\n\nPara destacar una acción en desarrollo en el momento de referencia, el portugués brasileño suele usar **estar + gerúndio**: **Estou trabalhando agora**. Son usos distintos del presente.\n\n#### Entradas relacionadas\n\n[380. Presente do indicativo: formação](#entrada-380) · [381. Presente para estados atuais](#entrada-381) · [383. Presente para fatos gerais](#entrada-383) · [384. Presente histórico](#entrada-384) · [402. Pretérito imperfeito para hábitos passados](#entrada-402)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2c992550914c704e0e41b6e9ea0d26e1e2f438037adf49c7443f37754c206180",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:21:31.410Z"
+              },
+              {
+                "code": "MLS-V02-0383",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 383,
+                "title": "Presente para hechos generales",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **presente do indicativo** puede expresar hechos generales: afirmaciones que se presentan como válidas de manera habitual, estable o general, no solo en este instante.\n\nPor ejemplo, **A água ferve a 100 °C ao nível do mar** presenta una relación general bajo esas condiciones.\n\n#### Cómo funciona\n\nEste uso aparece mucho en definiciones, explicaciones, descripciones de propiedades y conocimientos generales. Se emplea la forma normal del presente.\n\nTambién puede describir características de grupos o sistemas: **O Brasil fica na América do Sul** o **As plantas precisam de água**.\n\nLa palabra “general” no significa “sin excepciones”. Una afirmación puede requerir condiciones precisas para ser verdadera, y esas condiciones deben mantenerse en la explicación.\n\n#### Ejemplos\n\n* **A Terra gira em torno do Sol.** — **gira** presenta un hecho general.\n* **O gelo derrete com o calor.** — **derrete** describe un proceso general bajo condiciones apropiadas.\n* **As plantas precisam de água.** — **precisam** expresa una característica general.\n\n#### Observación importante\n\nEste uso se diferencia del presente habitual. **Eu corro todas as manhãs** habla de una costumbre personal; **A água congela a 0 °C em condições determinadas** formula una generalización.\n\nTambién se diferencia de un estado individual actual, como **Estou cansado hoje**. El mismo tiempo verbal puede tener valores distintos según el verbo, el sujeto y el contexto.\n\n#### Entradas relacionadas\n\n[381. Presente para estados atuais](#entrada-381) · [382. Presente para hábitos](#entrada-382) · [384. Presente histórico](#entrada-384) · [385. Presente com valor futuro no uso cotidiano](#entrada-385) · [422. Futuro do presente: formação](#entrada-422)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9060bcf629598f1cc33a5f4fcec196f81f27a3bcd97b5d47e842de326f55417c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:21:57.893Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:07:56.461Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:07:56.461Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-jdp-c91d/05-renew-submit-0984-claim04.json"
+}

@@ -1,0 +1,33 @@
+{
+  "success": false,
+  "httpStatus": 409,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-20261003T0305Z-4f2d9c71-close",
+    "requested": 2,
+    "processed": 1,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "error": "LEASE_INVALID_OR_EXPIRED",
+          "bridgeSessionId": "r44b-51521de3-7d18-4c9b-a1f6-d44ceecf3b65",
+          "ticketId": "R43-EMERGENCY-0537"
+        },
+        "completedAt": "2026-10-03T03:08:08.959Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:08:08.959Z",
+  "commandFile": "mls chat bridge/commands/r44-20261003T0305Z-4f2d9c71-close.json"
+}

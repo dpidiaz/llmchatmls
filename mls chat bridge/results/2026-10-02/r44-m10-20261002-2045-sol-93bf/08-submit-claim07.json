@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-93bf-ticket06-next07",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-63b63ac0-4b22-4122-bec4-b00a851ff2d7",
+          "ticketId": "R44-CORPUS-0826",
+          "leaseExpiresAt": 1790997179783
+        },
+        "completedAt": "2026-10-03T03:07:59.920Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0826",
+          "sha256": "845375a1d9e81b86f7e61627aeeef4d73be48ca5b830e40d434037bc8840499c",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0826",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d0a7da5c-16e9-4936-a167-889bff4b6abf",
+                "ticketId": "R44-CORPUS-0826",
+                "code": "MLS-V01-0162",
+                "idempotencyKey": "R44-CORPUS-0826:MLS-V01-0162:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e959e51d8009175bbd7bf37c4f85e2888f7acdbcea3c5ae7489ebcdda0499d32",
+                "sourceSha256": "a42442998b949cf46c34f3a284913892412b038c3899425bb14582d01fa76dbe",
+                "committedMs": 1790996880325,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7e33f8cde3a1d9bc720b6a9e4431d11671946b008dc9a57a27b241bf8930ebf5",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0826",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "9801f654-559f-4538-8810-bc001f2e4941",
+                "ticketId": "R44-CORPUS-0826",
+                "code": "MLS-V01-0163",
+                "idempotencyKey": "R44-CORPUS-0826:MLS-V01-0163:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0409696009dbe97dd0789777a72ea4d9402fb03ad8a89e6ce5728a6c658eba62",
+                "sourceSha256": "fd5952950d8c70cbfb8ce8fc84fb229778bd1011cd3e5dec10e4c30f2caeafb3",
+                "committedMs": 1790996880552,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "fd49b8e949ef669b5916db3a09977f35d900235b744c781e268b6aa9cee1b628",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0826",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "3ddb4953-93a9-4c80-8e10-58fb2bab2bfb",
+                "ticketId": "R44-CORPUS-0826",
+                "code": "MLS-V01-0164",
+                "idempotencyKey": "R44-CORPUS-0826:MLS-V01-0164:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "fa4ea952fe5ad090cce13785e9dec9d1255d4df0c6866f2d2de0be0d90de0fa0",
+                "sourceSha256": "dd1dbd566e4f971abeebc295fade7696712dc0b917023e3cfe29a1cff4588ac1",
+                "committedMs": 1790996880768,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8ed4dafb377c064fbb583c9082fe7b2143c8c8a9c0df70fffe0a85fe10b64eea",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0826",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a67c0c22-71c3-47b2-add3-a9a57ad8880b",
+                "ticketId": "R44-CORPUS-0826",
+                "code": "MLS-V01-0166",
+                "idempotencyKey": "R44-CORPUS-0826:MLS-V01-0166:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6ccdd2900d31051b9dea989751377cbc3411d6268409dc9453daa01d70d1f0b2",
+                "sourceSha256": "3823662b9ac833722a299192970dd4854990630749f6c198b4d77b09597c62c7",
+                "committedMs": 1790996880990,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "39da611335cfa8c784150f708e5fc6e8510bed9fac5eb63c5b75badbd42db0aa",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0826",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "cff2128a-da1d-4c58-84f0-1b2f6fc6c6b6",
+                "ticketId": "R44-CORPUS-0826",
+                "code": "MLS-V01-0167",
+                "idempotencyKey": "R44-CORPUS-0826:MLS-V01-0167:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "CORRECTED",
+                "payloadSha256": "072554b9d05c743fddf9118a550825e2a7503b9746c925d77c4642f7299dea8c",
+                "sourceSha256": "b299cbd9e06f3284ee37d20dcd194e971d6162e90c4d09dffa1037bcc2f7f97e",
+                "committedMs": 1790996881218,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "fb4c410270a0021fb1f2351fda61a3d35d92d7864da9254335c7eb2d779b369d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-63b63ac0-4b22-4122-bec4-b00a851ff2d7",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "845375a1d9e81b86f7e61627aeeef4d73be48ca5b830e40d434037bc8840499c"
+          }
+        },
+        "completedAt": "2026-10-03T03:08:01.520Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-d254a9b3-2e28-4978-99aa-b633d4eb7fe5",
+          "workerId": "r44-m10-20261002-2045-sol-93bf",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0827",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997181565,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0168",
+                "path": "ingles/MLS-V01-0168.json",
+                "sha256": "7861ac055e3e6569a306c60e97028778cecc32c0e4f446d4368c4313540fd94f"
+              },
+              {
+                "code": "MLS-V01-0169",
+                "path": "ingles/MLS-V01-0169.json",
+                "sha256": "12821c00d0373b64946ca175742d01ee35872657ff3a3090b26d83e07683a60b"
+              },
+              {
+                "code": "MLS-V01-0170",
+                "path": "ingles/MLS-V01-0170.json",
+                "sha256": "3e09f865c0ec9674320dc3508aee70fe0152c13baca4bc6bd06906bd6386ed60"
+              },
+              {
+                "code": "MLS-V01-0171",
+                "path": "ingles/MLS-V01-0171.json",
+                "sha256": "f1a3cd4802b99a6821bd10d284b75e23f6392c795093faab51ef3fd668e84430"
+              },
+              {
+                "code": "MLS-V01-0173",
+                "path": "ingles/MLS-V01-0173.json",
+                "sha256": "1f8998c025a1894b020a54164d1a939ff46bc36b11358b1459c94b6ea9e40958"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0827",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0168",
+                "path": "ingles/MLS-V01-0168.json",
+                "sha256": "7861ac055e3e6569a306c60e97028778cecc32c0e4f446d4368c4313540fd94f"
+              },
+              {
+                "code": "MLS-V01-0169",
+                "path": "ingles/MLS-V01-0169.json",
+                "sha256": "12821c00d0373b64946ca175742d01ee35872657ff3a3090b26d83e07683a60b"
+              },
+              {
+                "code": "MLS-V01-0170",
+                "path": "ingles/MLS-V01-0170.json",
+                "sha256": "3e09f865c0ec9674320dc3508aee70fe0152c13baca4bc6bd06906bd6386ed60"
+              },
+              {
+                "code": "MLS-V01-0171",
+                "path": "ingles/MLS-V01-0171.json",
+                "sha256": "f1a3cd4802b99a6821bd10d284b75e23f6392c795093faab51ef3fd668e84430"
+              },
+              {
+                "code": "MLS-V01-0173",
+                "path": "ingles/MLS-V01-0173.json",
+                "sha256": "1f8998c025a1894b020a54164d1a939ff46bc36b11358b1459c94b6ea9e40958"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0168",
+              "MLS-V01-0169",
+              "MLS-V01-0170",
+              "MLS-V01-0171",
+              "MLS-V01-0173"
+            ],
+            "lease": {
+              "workerId": "r44-m10-20261002-2045-sol-93bf",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997181565,
+              "active": true
+            },
+            "workerId": "r44-m10-20261002-2045-sol-93bf",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997181565,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0168",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 168,
+                "title": "mine/yours/his/hers/ours/theirs",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Posesivos, reflexivos y recíprocos — Possessives, reflexives, and reciprocals",
+                "articleMarkdown": "#### En pocas palabras\nLos pronombres posesivos (*mine, yours, his, hers, ours, theirs*) se utilizan para indicar a quién pertenece algo sin tener que repetir el nombre del objeto. Su función es reemplazar a todo el grupo de palabras que incluye al poseedor y al objeto (lo que en gramática llamamos sintagma nominal).\n\n#### Cómo funciona\nEn inglés, cuando ya se sabe de qué objeto estamos hablando, usamos estos pronombres para evitar la redundancia. \n\nEs fundamental distinguirlos de los **adjetivos posesivos** (como *my, your, her*). La diferencia principal es su posición:\n*   El **adjetivo posesivo** siempre debe ir acompañado de un sustantivo (ej. *my car*).\n*   El **pronombre posesivo** funciona de forma independiente y **nunca** lleva un sustantivo después (ej. *it is mine*).\n\n#### Ejemplos\n*   **\"This phone is mine.\"**\n    (Este teléfono es mío).\n    *Aquí, **mine** reemplaza a \"my phone\" para no repetir la palabra \"phone\".*\n*   **\"Your house is big, but ours is small.\"**\n    (Tu casa es grande, pero la nuestra es pequeña).\n    *Aquí, **ours** reemplaza a \"our house\".*\n*   **\"I found a jacket. Is it yours?\"**\n    (Encontré una chaqueta. ¿Es tuya?).\n    *Aquí, **yours** reemplaza a \"your jacket\".*\n\n#### Observación importante\nUn error frecuente es intentar usar el sustantivo después del pronombre. \n*   **Incorrecto:** ~~*That is mine book.*~~\n*   **Correcto:** *That is my book* (usando el adjetivo) o *That book is mine* (usando el pronombre).\n\n#### Entradas relacionadas\n*   [Adjetivos posesivos](#) (para entender la diferencia de estructura).\n*   [Pronombres reflexivos](#) (para no confundirlos con formas como *myself*).",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:38:11.488Z"
+              },
+              {
+                "code": "MLS-V01-0169",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 169,
+                "title": "Pronombre posesivo independiente",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Posesivos, reflexivos y recíprocos — Possessives, reflexives, and reciprocals",
+                "articleMarkdown": "#### En pocas palabras\nLos pronombres posesivos independientes son palabras que sustituyen a un grupo de palabras que indican posesión (un determinante posesivo seguido de un sustantivo). Su función principal es evitar la repetición innecesaria de un objeto cuando ya se sabe de qué se está hablando.\n\n#### Cómo funciona\nPara entender estos pronombres, es necesario distinguirlos de los **determinantes posesivos**:\n\n1.  **Determinante posesivo:** Siempre debe ir acompañado de un sustantivo (el nombre de la cosa o persona).\n    *   Ejemplo: *My* **book** (Mi libro).\n2.  **Pronombre posesivo independiente:** Funciona solo. No puede llevar un sustantivo después, porque el pronombre ya contiene la idea del objeto.\n    *   Ejemplo: *Mine* (El mío).\n\nSi dices \"*Mine book*\", estarías cometiendo un error, ya que el pronombre ya está reemplazando a la frase \"my book\".\n\n#### Ejemplos\n\n*   \"Is this your umbrella? No, it is **mine**.\"\n    (¿Es este tu paraguas? No, es el mío).\n    *Explicación:* **Mine** sustituye a la frase \"*my umbrella*\" para no repetirla.\n\n*   \"Our house is small, but **theirs** is huge.\"\n    (Nuestra casa es pequeña, pero la de ellos es enorme).\n    *Explicación:* **Theirs** sustituye a \"*their house*\".\n\n*   \"I found a jacket. Is it **hers**?\"\n    (Encontré una chaqueta. ¿Es de ella?).\n    *Explicación:* **Hers** sustituye a \"*her jacket*\".\n\n#### Observación importante\nTen especial cuidado con la palabra **his**. En inglés, la forma es idéntica tanto si funciona como determinante como si funciona como pronombre:\n*   Como determinante: \"*It is **his** car*\" (Es su carro).\n*   Como pronombre: \"*The car is **his***\" (El carro es suyo).\n\nLa diferencia la marca la presencia o ausencia del sustantivo (*car*) después de la palabra.\n\n#### Entradas relacionadas\n- [Determinantes posesivos](#) (my, your, his, her, its, our, their)\n- [Pronombres reflexivos](#) (myself, yourself, himself...)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:38:40.915Z"
+              },
+              {
+                "code": "MLS-V01-0170",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 170,
+                "title": "myself/yourself/himself…",
+                "level": "A2",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Posesivos, reflexivos y recíprocos — Possessives, reflexives, and reciprocals",
+                "articleMarkdown": "#### En pocas palabras\n\nLos pronombres reflexivos se utilizan cuando la persona que realiza la acción (el sujeto) es la misma que la recibe (el objeto). En inglés, estas formas se construyen añadiendo el sufijo **-self** para el singular y **-selves** para el plural.\n\n#### Cómo funciona\n\nSu función principal es indicar que la acción del verbo \"refleja\" hacia el sujeto. \n\n**Formas singulares:** *myself, yourself, himself, herself, itself.*\n**Formas plurales:** *ourselves, yourselves, themselves.*\n\nAdemás de su uso reflexivo, estos pronombres pueden funcionar como **pronombres enfáticos**. En este caso, se utilizan para resaltar que el sujeto realizó la acción por sí mismo, sin ayuda o para dar énfasis a su identidad.\n\n#### Ejemplos\n\n1. **I cut myself while cooking.**\n   (Me corté mientras cocinaba).\n   *Explicación:* El sujeto (*I*) y el objeto (*myself*) son la misma persona; la acción de cortar recae sobre el emisor.\n\n2. **She looked at herself in the mirror.**\n   (Ella se miró en el espejo).\n   *Explicación:* La persona que realiza la acción de mirar es la misma que es observada.\n\n3. **They built the house themselves.**\n   (Ellos mismos construyeron la casa).\n   *Explicación:* Aquí el pronombre tiene un valor enfático. No es que la casa sea el objeto de la reflexión, sino que se resalta que ellos hicieron el trabajo sin ayuda externa.\n\n#### Observación importante\n\nUn error común es usar un pronombre reflexivo cuando el sujeto y el objeto son personas distintas, a menudo intentando sonar más formal. Si el sujeto y el objeto no coinciden, se debe usar un pronombre de objeto (*me, you, him, her, us, them*).\n\n* **Incorrecto:** *Please contact myself.*\n* **Correcto:** *Please contact me.* (El sujeto es \"tú\", implícito en el imperativo, y el objeto es \"yo\").\n\n#### Entradas relacionadas\n\n* [Reflexivo obligatorio](#entry-171)\n* [Reflexivo enfático](#entry-172)\n* [Uso de \"by\" + reflexivo](#entry-173)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:39:15.792Z"
+              },
+              {
+                "code": "MLS-V01-0171",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 171,
+                "title": "Reflexivo obligatorio",
+                "level": "B1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Posesivos, reflexivos y recíprocos — Possessives, reflexives, and reciprocals",
+                "articleMarkdown": "#### En pocas palabras\n\nSe utiliza cuando la persona o cosa que realiza la acción (el **sujeto**) es la misma que la recibe (el **objeto**). En inglés, en ciertos contextos, es gramaticalmente necesario usar un pronombre reflexivo (*myself, yourself, himself, herself, itself, ourselves, yourselves, themselves*) para indicar que el sujeto y el objeto son la misma entidad.\n\nA diferencia de lo que podría sugerir su nombre, \"obligatorio\" no se refiere a una obligación moral o de deber (como \"tienes que hacer algo\"), sino a una necesidad gramatical: si no se usa el pronombre reflexivo, la oración es incorrecta o cambia de significado.\n\n#### Cómo funciona\n\nEn una estructura básica, el sujeto realiza una acción sobre alguien o algo distinto a él:\n*   *I saw him* (Yo lo vi a él).\n\nSin embargo, cuando la acción recae sobre el propio sujeto, el inglés exige el uso de la forma reflexiva para marcar esa **correferencia** (cuando dos palabras en una oración se refieren a la misma persona o cosa):\n*   *I saw myself* (Me vi a mí mismo).\n\n#### Ejemplos\n\n1. **He cut himself shaving.**\n   (Él se cortó mientras se afeitaba).\n   *   **Sujeto:** *He* (Él).\n   *   **Objeto:** *himself* (a sí mismo).\n   *   **Explicación:** Como la persona que realiza la acción de cortar es la misma que recibe el corte, el uso de *himself* es obligatorio para que la frase tenga sentido.\n\n2. **The cat cleans itself.**\n   (El gato se limpia).\n   *   **Sujeto:** *The cat* (El gato).\n   *   **Objeto:** *itself* (a sí mismo).\n   *   **Explicación:** El sujeto y el objeto coinciden en identidad.\n\n3. **They enjoyed themselves at the party.**\n   (Ellos se divirtieron en la fiesta).\n   *   **Sujeto:** *They* (Ellos).\n   *   **Objeto:** *themselves* (a sí mismos).\n   *   **Explicación:** En inglés, ciertos verbos como *enjoy* requieren un objeto. Si el sujeto es quien experimenta el disfrute, se debe usar el reflexivo.\n\n#### Observación importante\n\nEs fundamental no confundir el **reflexivo obligatorio** con el **reflexivo enfático**. \n\n*   En el **reflexivo obligatorio**, el pronombre funciona como el objeto de la oración y es indispensable para la estructura (*She looked at herself*).\n*   En el **reflexivo enfático**, el pronombre se añade solo para dar importancia al sujeto, pero la oración funcionaría sin él (*She did it herself* / Ella misma lo hizo).\n\n#### Entradas relacionadas\n\n*   [Entrada 170: myself/yourself/himself…](#entry-170)\n*   [Entrada 172: Reflexivo enfático](#entry-172)\n*   [Entrada 173: by + reflexivo](#entry-173)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:41:37.369Z"
+              },
+              {
+                "code": "MLS-V01-0173",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 173,
+                "title": "by + reflexivo",
+                "level": "A2",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Posesivos, reflexivos y recíprocos — Possessives, reflexives, and reciprocals",
+                "articleMarkdown": "#### En pocas palabras\n\nLa construcción **by + pronombre reflexivo** (como *myself, yourself, himself*, etc.) se utiliza para expresar que una persona realiza una acción **sola**, **sin compañía** o **sin ayuda de nadie**.\n\n#### Cómo funciona\n\nEn esta estructura, la preposición *by* acompaña al pronombre reflexivo para añadir un matiz de independencia o soledad. \n\nNormalmente, un pronombre reflexivo se usa cuando la acción de un verbo recae sobre el mismo sujeto que la realiza (por ejemplo, \"él se mira a sí mismo\"). Sin embargo, cuando añadimos la preposición *by*, el significado se desplaza hacia la circunstancia de la acción: ya no solo nos dice quién la hace, sino que enfatiza que se hace de forma autónoma o sin otros presentes.\n\n#### Ejemplos\n\n* **She travelled by herself.**\n  (Ella viajó sola / sin compañía).\n  *Aquí, \"by herself\" indica que no había nadie más con ella durante el viaje.*\n\n* **I finished the project by myself.**\n  (Terminé el proyecto yo solo / sin ayuda).\n  *En este caso, la expresión enfatiza que no recibí asistencia de otra persona para completarlo.*\n\n* **Did they live by themselves?**\n  (¿Vivían ellos solos / sin compañía?).\n  *Se pregunta si vivían sin la presencia de otras personas en su hogar.*\n\n#### Observación importante\n\nEs fundamental no confundir este uso con otros dos usos comunes de los pronombres reflexivos:\n\n1.  **Reflexivo obligatorio:** Cuando la estructura del verbo exige el reflexivo porque la acción recae directamente sobre el sujeto (ej. *He cut himself* / Él se cortó).\n2.  **Reflexivo enfático:** Cuando el pronombre se usa solo para dar importancia al sujeto, sin la preposición *by* (ej. *I did it myself* / Yo mismo lo hice).\n\nLa presencia de **by** es lo que marca específicamente la idea de \"sin ayuda\" o \"sin compañía\".\n\n#### Entradas relacionadas\n\n- [Entrada 170: myself/yourself/himself…](#entry-170)\n- [Entrada 171: Reflexivo obligatorio](#entry-171)\n- [Entrada 172: Reflexivo enfático](#entry-172)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:42:42.366Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:08:02.443Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:08:02.443Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-m10-20261002-2045-sol-93bf/08-submit-claim07.json"
+}

@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-sol-seq-close07-claim08",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-9df359e7-3b77-44b7-8c15-4ce4b1a5cd74",
+          "ticketId": "R44-CORPUS-1440",
+          "leaseExpiresAt": 1790997171364
+        },
+        "completedAt": "2026-10-03T03:07:51.505Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1440",
+          "sha256": "c41bf0558434b289d67f43c724f1a44969991cb33ba50e88cbbadd645c35acf8",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1440",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "dc037dd2-e5bc-4c35-87b7-31fe3ab35911",
+                "ticketId": "R44-CORPUS-1440",
+                "code": "MLS-V09-0459",
+                "idempotencyKey": "R44-CORPUS-1440:MLS-V09-0459:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b51e8ade1c74a444e8ad9446b27b4e4dd0fd6445288e02fae2b12aca254966de",
+                "sourceSha256": "7390394871158b990e5946b157e22d93abe706f71c114e5ee488643109af744b",
+                "committedMs": 1790996871892,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c6a2f7408c4c11f3cac1abace53204658f9cb733ac5441d4700354dd9ca4cdff",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1440",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "eaaaff36-9e32-4fa0-a568-1173b37124c6",
+                "ticketId": "R44-CORPUS-1440",
+                "code": "MLS-V09-0460",
+                "idempotencyKey": "R44-CORPUS-1440:MLS-V09-0460:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "17906aab6e8d4e96d357729e15bd93dfe1b2d1cc2eb07cdb9f94e2a98d7e3243",
+                "sourceSha256": "0da760e5b06a5261ca5459559065c5c7dfb2f2b43cb8bd875dec044e23ff1a63",
+                "committedMs": 1790996872111,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "df913f0c58bba6561dc4086e4f673b93b1c2649d9f072ed0c9658e783cde63ee",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1440",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c2e48291-122d-4f0a-80ae-5672ea2ab386",
+                "ticketId": "R44-CORPUS-1440",
+                "code": "MLS-V09-0461",
+                "idempotencyKey": "R44-CORPUS-1440:MLS-V09-0461:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "c98b2cab6c79d6b0807c93136e8eb8fa5747ae5a1eb53ece43b0119ab03c1106",
+                "sourceSha256": "3c45d5f3ac2516d637832c03b2bc5ecc7a5aae58ca394459e29f4137399c170c",
+                "committedMs": 1790996872337,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "366dec6fcc588a467226bf0248e457e4f5f0e76ccf445da50228c7466b37cc42",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1440",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "385bc95a-b48f-4459-973d-98020a29faaf",
+                "ticketId": "R44-CORPUS-1440",
+                "code": "MLS-V09-0462",
+                "idempotencyKey": "R44-CORPUS-1440:MLS-V09-0462:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "aefb3ba035b2d8e6ccaab3bcff3d619364f6764bcb2d93fdb11b848759b4cc6f",
+                "sourceSha256": "497ef3964a4275acea1727edd527e07b258af44f29de43e65d60e1000f0f66bf",
+                "committedMs": 1790996872547,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3e3102919d4ec9b0d543e467ed119cc35f47bd7864545478f5678a15386f3a9b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1440",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e02a7bad-1aac-4a1d-ba29-69ebe56b0031",
+                "ticketId": "R44-CORPUS-1440",
+                "code": "MLS-V09-0465",
+                "idempotencyKey": "R44-CORPUS-1440:MLS-V09-0465:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "cc73d228651d496ba955ec0b80f18e180b20dc756c83f73c58968ceb07206b88",
+                "sourceSha256": "14d84bf1e9399b64b7cd0b08d241229ac3fd05aa87ce2de52051d604901c27de",
+                "committedMs": 1790996872759,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c530fb8d32167ef68d25f569dec4d2a44e26006017d50c75ae05266a1a6b1186",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-9df359e7-3b77-44b7-8c15-4ce4b1a5cd74",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "c41bf0558434b289d67f43c724f1a44969991cb33ba50e88cbbadd645c35acf8"
+          }
+        },
+        "completedAt": "2026-10-03T03:07:53.056Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-3fc94383-aab3-47eb-bf61-5600ebcd9a2d",
+          "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1441",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997173096,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V09-0466",
+                "path": "ruso/MLS-V09-0466.json",
+                "sha256": "5d1c1d19ca7b04bd5cf51101a7bbcd1c40b36365cd491c1be84d9e2fb7642b47"
+              },
+              {
+                "code": "MLS-V09-0467",
+                "path": "ruso/MLS-V09-0467.json",
+                "sha256": "e3c79a83a64690f80560abbf21f51b1220f6200134286e060b6e6cc8fb807d4a"
+              },
+              {
+                "code": "MLS-V09-0468",
+                "path": "ruso/MLS-V09-0468.json",
+                "sha256": "53bbfdda6dc15bf454407ee922809ddcf105285493680ef1bf554889e06fe6e8"
+              },
+              {
+                "code": "MLS-V09-0469",
+                "path": "ruso/MLS-V09-0469.json",
+                "sha256": "d4bd113fa5f2a25d2492446b33fd89aafdecc5684f8849ac39965e4a96996903"
+              },
+              {
+                "code": "MLS-V09-0471",
+                "path": "ruso/MLS-V09-0471.json",
+                "sha256": "073cc4be8d70bfa0133ccb66f92ec593a760e1186d9a96142b8b266b600988e4"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1441",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V09-0466",
+                "path": "ruso/MLS-V09-0466.json",
+                "sha256": "5d1c1d19ca7b04bd5cf51101a7bbcd1c40b36365cd491c1be84d9e2fb7642b47"
+              },
+              {
+                "code": "MLS-V09-0467",
+                "path": "ruso/MLS-V09-0467.json",
+                "sha256": "e3c79a83a64690f80560abbf21f51b1220f6200134286e060b6e6cc8fb807d4a"
+              },
+              {
+                "code": "MLS-V09-0468",
+                "path": "ruso/MLS-V09-0468.json",
+                "sha256": "53bbfdda6dc15bf454407ee922809ddcf105285493680ef1bf554889e06fe6e8"
+              },
+              {
+                "code": "MLS-V09-0469",
+                "path": "ruso/MLS-V09-0469.json",
+                "sha256": "d4bd113fa5f2a25d2492446b33fd89aafdecc5684f8849ac39965e4a96996903"
+              },
+              {
+                "code": "MLS-V09-0471",
+                "path": "ruso/MLS-V09-0471.json",
+                "sha256": "073cc4be8d70bfa0133ccb66f92ec593a760e1186d9a96142b8b266b600988e4"
+              }
+            ],
+            "remaining": [
+              "MLS-V09-0466",
+              "MLS-V09-0467",
+              "MLS-V09-0468",
+              "MLS-V09-0469",
+              "MLS-V09-0471"
+            ],
+            "lease": {
+              "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997173096,
+              "active": true
+            },
+            "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997173096,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V09-0466",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 466,
+                "title": "приехать vs приезжать",
+                "level": "B2",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\n**приехать** y **приезжать** expresan **llegada mediante transporte**, pero se diferencian principalmente por el **aspecto verbal**, es decir, por cómo se presenta la acción.\n\n**приехать** es perfectivo: suele presentar una llegada concreta como un evento delimitado. **приезжать** es imperfectivo: puede describir llegadas repetidas, habituales, en curso según el contexto o simplemente el hecho de que ese tipo de llegada ocurre.\n\n#### Cómo funciona\n\nAmbos verbos contienen el prefijo **при-**, que aporta la idea de llegada, y pertenecen a la serie de verbos de movimiento relacionados con **ехать / ездить**, es decir, desplazamiento conceptualizado mediante transporte.\n\nLa diferencia no es «pasado frente a presente». El aspecto es una categoría distinta del tiempo. **приехать** puede aparecer en pasado, como **он приехал**, o en una forma morfológicamente presente con interpretación futura, como **он приедет**. **приезжать**, por su parte, puede aparecer en presente, pasado o futuro perifrástico.\n\n#### Ejemplos\n\n- **Он приехал вчера.** — Llegó ayer. **приехал** presenta una llegada concreta y completada.\n- **Он часто приезжает по пятницам.** — Suele llegar / viene a menudo los viernes. **приезжает** expresa repetición habitual.\n- **Когда мы приезжали в Москву, мы всегда останавливались у друзей.** — Cuando íbamos/llegábamos a Moscú, siempre nos quedábamos con amigos. Aquí el imperfectivo presenta una situación repetida en el pasado.\n\n#### Observación importante\n\nNo conviene identificar **приезжать** simplemente con «venir» ni **приехать** con «llegó». La traducción depende del tiempo, del contexto y del punto de vista. Lo estable es que ambos expresan llegada vinculada a transporte y que el contraste central es aspectual.\n\nAdemás, el imperfectivo no significa necesariamente «incompleto». Puede describir repetición, hábito, proceso o hecho general sin destacar un límite final.\n\n#### Entradas relacionadas\n\nConviene comparar este par con **прийти / приходить**, que expresa llegada a pie, y con **уехать / уезжать**, que presenta salida o alejamiento mediante transporte. Así se distinguen tanto el tipo de movimiento como la perspectiva aspectual.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-89dd3538cdf79af170e88117199477b705b87c35bde3166773a0be6ebcae6d2d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:18:42.834Z"
+              },
+              {
+                "code": "MLS-V09-0467",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 467,
+                "title": "прийти vs приходить",
+                "level": "B2",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\n**прийти** y **приходить** expresan **llegada a pie** o llegada concebida con la serie de movimiento **идти / ходить**, pero se diferencian principalmente por el **aspecto verbal**.\n\n**прийти** es perfectivo: suele presentar una llegada concreta como un evento delimitado. **приходить** es imperfectivo: puede expresar llegadas habituales o repetidas, el proceso de llegar en ciertos contextos o el hecho general de que alguien llega.\n\n#### Cómo funciona\n\nAmbos verbos contienen el prefijo **при-**, que aporta la idea de llegada. La diferencia entre ellos no es simplemente de tiempo. **прийти** puede aparecer en pasado, como **она пришла**, o en una forma morfológicamente presente con interpretación futura, como **она придёт**. **приходить** puede aparecer en presente, pasado o futuro perifrástico.\n\nEl contraste también conserva la relación con los verbos de movimiento sin prefijo: **идти** presenta típicamente un trayecto unidireccional concreto y **ходить** movimiento habitual, repetido o no presentado como un único trayecto actual.\n\n#### Ejemplos\n\n- **Она пришла в восемь.** — Llegó a las ocho. **пришла** presenta una llegada puntual y completada.\n- **Она обычно приходит рано.** — Normalmente llega temprano. **приходит** expresa hábito.\n- **Когда он приходил к нам, мы долго разговаривали.** — Cuando venía a visitarnos, conversábamos durante mucho tiempo. **приходил** presenta una situación repetida en el pasado.\n\n#### Observación importante\n\nNo conviene traducir **приходить** automáticamente como «venir» ni **прийти** como «llegó». La traducción depende del tiempo y del contexto. Lo estable es la idea de llegada y el contraste aspectual.\n\nTampoco debe confundirse con **приехать / приезжать**, que expresa llegada mediante transporte. La elección entre ambas series depende de cómo se conceptualiza el desplazamiento.\n\n#### Entradas relacionadas\n\nConviene comparar **прийти / приходить** con **приехать / приезжать** para llegada en transporte y con **уйти / уходить** para salida o alejamiento a pie. Así se separan con claridad modo de movimiento, prefijo y aspecto.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1a026f87d789e47ad821bf0ec5e15b814436bb9f99ab446b1ee728a65ae8033a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:19:34.303Z"
+              },
+              {
+                "code": "MLS-V09-0468",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 468,
+                "title": "уехать vs уезжать",
+                "level": "B2",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\n**уехать** y **уезжать** expresan **salida o alejamiento mediante transporte**, pero se distinguen principalmente por el **aspecto verbal**.\n\n**уехать** es perfectivo: suele presentar una salida concreta como un evento delimitado. **уезжать** es imperfectivo: puede describir una salida en proceso, una acción habitual o repetida, o el hecho general de marcharse en transporte.\n\n#### Cómo funciona\n\nAmbos verbos contienen el prefijo **у-**, que aporta la idea de abandonar un lugar o alejarse de él, y pertenecen a la serie relacionada con **ехать / ездить**, es decir, movimiento conceptualizado mediante transporte.\n\nLa diferencia no es simplemente «pasado frente a presente». **уехать** puede aparecer en pasado, como **он уехал**, o en una forma morfológicamente presente con interpretación futura, como **он уедет**. **уезжать** puede aparecer en presente, pasado o futuro perifrástico.\n\n#### Ejemplos\n\n- **Он уехал вчера.** — Se fue ayer. **уехал** presenta una salida concreta y completada mediante transporte.\n- **Он часто уезжает на выходные.** — Se va a menudo los fines de semana. **уезжает** expresa repetición habitual.\n- **Когда поезд уезжал со станции, начался дождь.** — Cuando el tren estaba saliendo de la estación, empezó a llover. Aquí el imperfectivo presenta el proceso de salida.\n\n#### Observación importante\n\nNo conviene traducir **уехать** siempre como «irse» y **уезжать** como «soler irse». La traducción cambia según el tiempo y el contexto. Lo estable es la idea de salida mediante transporte y el contraste aspectual.\n\nAdemás, el imperfectivo no equivale necesariamente a «acción incompleta»: puede expresar proceso, repetición, hábito o hecho general.\n\n#### Entradas relacionadas\n\nConviene comparar **уехать / уезжать** con **уйти / уходить**, que presenta salida a pie, y con **приехать / приезжать**, que expresa llegada mediante transporte. Así se distinguen dirección, modo de movimiento y aspecto.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b6778057f08ff2dd6b3c0a66d7647c810f1d5e1a9321ffd6815f28bfd78e7d8f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:20:22.884Z"
+              },
+              {
+                "code": "MLS-V09-0469",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 469,
+                "title": "уйти vs уходить",
+                "level": "B2",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\n**уйти** y **уходить** expresan **salida o alejamiento a pie** —o movimiento concebido con la serie **идти / ходить**—, pero se diferencian principalmente por el **aspecto verbal**.\n\n**уйти** es perfectivo: suele presentar una partida concreta como un evento delimitado. **уходить** es imperfectivo: puede describir una salida en proceso, una acción habitual o repetida, o el hecho general de marcharse.\n\n#### Cómo funciona\n\nAmbos verbos contienen el prefijo **у-**, que aporta la idea de abandonar un lugar o alejarse. La diferencia entre ellos no es simplemente temporal. **уйти** puede aparecer en pasado, como **она ушла**, o en una forma morfológicamente presente con interpretación futura, como **она уйдёт**. **уходить** puede aparecer en presente, pasado o futuro perifrástico.\n\nLa relación con **идти / ходить** ayuda a entender el contraste: las formas imperfectivas prefijadas conservan posibilidades de proceso, repetición y hábito, mientras que la forma perfectiva presenta normalmente la salida como delimitada.\n\n#### Ejemplos\n\n- **Она ушла после обеда.** — Se fue después del almuerzo. **ушла** presenta una partida concreta y completada.\n- **Она обычно уходит в шесть.** — Normalmente se va a las seis. **уходит** expresa hábito.\n- **Когда он уходил из дома, зазвонил телефон.** — Cuando estaba saliendo de casa, sonó el teléfono. Aquí **уходил** enfoca el proceso de salida.\n\n#### Observación importante\n\nNo conviene traducir **уйти** siempre como «irse» y **уходить** como «soler irse». La traducción depende del contexto y del tiempo verbal. Lo estable es la idea de salida y el contraste aspectual.\n\nTampoco debe confundirse con **уехать / уезжать**, que presenta la salida mediante transporte. La elección entre ambas series depende de cómo se conceptualiza el desplazamiento.\n\n#### Entradas relacionadas\n\nConviene comparar **уйти / уходить** con **уехать / уезжать** para salida en transporte y con **прийти / приходить** para llegada a pie. Así se distinguen dirección espacial, modo de movimiento y aspecto.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1bab8ec75b258052e9ca4c43a6347b8e88e5aac24f3a0f8ccd76176b0227d798",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:21:13.177Z"
+              },
+              {
+                "code": "MLS-V09-0471",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 471,
+                "title": "Pasivo con -ся",
+                "level": "B1",
+                "part": "-ся e interacción — -ся и взаимодействие",
+                "chapter": "Verbos en -ся: reflexividad, medio y pasiva — Глаголы на -ся",
+                "articleMarkdown": "#### En pocas palabras\n\nEn ruso, **-ся** puede participar en una construcción pasiva: la entidad que recibe o experimenta la acción pasa a ocupar la posición de sujeto gramatical, mientras que quien realiza la acción queda en segundo plano y puede incluso no mencionarse.\n\nPor ejemplo, **Дом строится рабочими** significa «La casa es construida por obreros / La casa está siendo construida por obreros». La casa recibe la acción de construir, pero aparece como sujeto de la oración.\n\n#### Cómo funciona\n\nCompárese la construcción activa **Рабочие строят дом** — «Los obreros construyen la casa». Aquí **рабочие** está en nominativo y funciona como sujeto que realiza la acción; **дом** está en acusativo y es la entidad construida.\n\nEn la pasiva **Дом строится рабочими**, **дом** pasa a nominativo y sigue siendo, desde el punto de vista semántico, la entidad afectada. El agente puede expresarse con instrumental: **рабочими** «por los obreros». Sin embargo, con frecuencia se omite cuando no interesa identificarlo: **Дом строится** — «La casa se está construyendo / está en construcción».\n\nEste uso es especialmente natural con verbos imperfectivos, cuando se presenta una acción en desarrollo, habitual o general. El valor pasivo no depende únicamente de la terminación **-ся**, sino de la relación entre el verbo, sus participantes y el contexto.\n\n#### Ejemplos\n\n- **Документы проверяются комиссией.** — Los documentos son revisados por una comisión. **документы** es la entidad afectada y **комиссией** expresa el agente en instrumental.\n- **Эта проблема часто обсуждается на встречах.** — Este problema se discute a menudo en las reuniones. El agente no se menciona.\n- **Дом строится рабочими.** — La casa está siendo construida por obreros. La construcción permite poner el foco en **дом**.\n\n#### Observación importante\n\nNo todo verbo en **-ся** es pasivo. **Я умываюсь** es reflexivo; **Книга читается легко** puede tener valor medio; y en otros verbos **-ся** forma parte del lexema. Por eso, la interpretación pasiva se reconoce por la construcción completa, no por el sufijo aislado.\n\nTampoco existe una correspondencia automática entre **-ся** y el español **se**: algunas pasivas rusas se traducen mejor con una pasiva perifrástica y otras con construcciones de «se».\n\n#### Entradas relacionadas\n\nConviene comparar este uso con el valor medio o intransitivizador de **-ся**, con el reflexivo directo y con las construcciones pasivas mediante participios cortos. La posición formal de **-ся / -сь** constituye un tema separado.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e2a79f290609720f34ac7dfb95d53a0f7c724f10efd09135a372c45251ed9f6a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:22:40.174Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:07:53.885Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:07:53.885Z",
+  "commandFile": "mls chat bridge/commands/000-000-r44-sol-recover/04-close07-claim08.json"
+}

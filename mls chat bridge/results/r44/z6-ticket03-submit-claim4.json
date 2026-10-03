@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-z6-ticket03-submit-claim4",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-1c9c8b3a-6dd7-4768-91de-975992d22aed",
+          "ticketId": "R43-EMERGENCY-0789",
+          "leaseExpiresAt": 1790997208741
+        },
+        "completedAt": "2026-10-03T03:08:28.878Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0789",
+          "sha256": "895b85387c0b66008db9dc5c1e00770599360a51715fd74e20fa0ab80889447e",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0789",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "0b3decd7-7e4a-4bd0-90f3-5eb8fc0243aa",
+                "ticketId": "R43-EMERGENCY-0789",
+                "code": "MLS-V07-0629",
+                "idempotencyKey": "R43-EMERGENCY-0789:MLS-V07-0629:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "4868d59c2621fd8f00411f4f731f5d397d78b280d4de346efd21a9af73d786d4",
+                "sourceSha256": "adec609b2d4ddcaf764c79dfd7f2122ae94b48cbce0502e4b86a3b50fbcbff54",
+                "committedMs": 1790996909270,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9e3fc83c317256d0b91aa7d45a1daa65d45f3c48f02ce7a4ae868a5dc1b3ae8f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0789",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "4c0425f5-eda9-4052-ac98-4fc4d95145fe",
+                "ticketId": "R43-EMERGENCY-0789",
+                "code": "MLS-V07-0630",
+                "idempotencyKey": "R43-EMERGENCY-0789:MLS-V07-0630:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "52696b29a94b9d7110aeb3a0847bcea88a591d919922e1cd25ee3d8561b01f07",
+                "sourceSha256": "895527ba97126f54c714f43cf416ecdcba10e136c5cbac3a6d5da6c455f6d2cf",
+                "committedMs": 1790996909553,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8fbe06d153d5c893f3d7beeec3a240ee8cf67d7eb63ed5f4149585af3cc7b9cf",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0789",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a72cc26e-c6b8-4ad0-a11a-1db7a8db1968",
+                "ticketId": "R43-EMERGENCY-0789",
+                "code": "MLS-V07-0631",
+                "idempotencyKey": "R43-EMERGENCY-0789:MLS-V07-0631:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9132338abdf3155d4da9e08b2d858ccc1669047746592214514bc55aff8bef84",
+                "sourceSha256": "bebc175f8b4239b66f3a13c3631e1606554f664893cbacb8523dc3eba977cf16",
+                "committedMs": 1790996909788,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "cac3d8837cc44faf773e8f0bd925b55a0e0b26a33f0a2ce790ffd7124155dbd2",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0789",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "9ba7c2d4-fe82-4894-a0f1-876cc2c594e7",
+                "ticketId": "R43-EMERGENCY-0789",
+                "code": "MLS-V07-0632",
+                "idempotencyKey": "R43-EMERGENCY-0789:MLS-V07-0632:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "fac1d58fbb2f516875982aa8b3b0e77b316b444c7fb90ebe8c2a3a68cc58612e",
+                "sourceSha256": "23f0c255e952373a4aa341801a0092124c71a22b76d8bd83619be819da02932c",
+                "committedMs": 1790996910021,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "a44eb4377e4b4a9fac6dbacc8b91cfca2994227b5ed2691d42a3e9d68c2a6c66",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0789",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "4654001d-7dd5-44d8-910f-6e0e4f1d5fb7",
+                "ticketId": "R43-EMERGENCY-0789",
+                "code": "MLS-V07-0633",
+                "idempotencyKey": "R43-EMERGENCY-0789:MLS-V07-0633:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a6a34fb5508cda6b19c17dba9eb05a2942091cf4a0d201f3e83e4ee4aa5c0c9b",
+                "sourceSha256": "6d6ad1f4ff49cf4157f67d94ae1b4eaf34a6af4ace617d3e76d923472775bbe8",
+                "committedMs": 1790996910245,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "601cb66313d359eb6315e5435dddaf9b6e99aa92ef51d3879ccc91f75130e8d8",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-1c9c8b3a-6dd7-4768-91de-975992d22aed",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "895b85387c0b66008db9dc5c1e00770599360a51715fd74e20fa0ab80889447e"
+          }
+        },
+        "completedAt": "2026-10-03T03:08:30.531Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-58c1504a-31c6-49da-90ea-b37abea4e4d0",
+          "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0790",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997210582,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0635",
+                "path": "chino-taiwan/MLS-V07-0635.json",
+                "sha256": "e6a563e677c93266da7154c7adc636738424f0c41920e7a5ec8b574ddf92b09a"
+              },
+              {
+                "code": "MLS-V07-0636",
+                "path": "chino-taiwan/MLS-V07-0636.json",
+                "sha256": "e85d99928b2e1a48a46d476d556292aa7c33ee52fafcaffc252fb4567fb0a5d0"
+              },
+              {
+                "code": "MLS-V07-0637",
+                "path": "chino-taiwan/MLS-V07-0637.json",
+                "sha256": "5d6c8a1d46f91490c58d562897a96a428a37747f462f32491774a6529b5c897b"
+              },
+              {
+                "code": "MLS-V07-0638",
+                "path": "chino-taiwan/MLS-V07-0638.json",
+                "sha256": "8e74475e7255bca6f03b5c05052a597d26f9ccfde643d56157d16ed8525da722"
+              },
+              {
+                "code": "MLS-V07-0640",
+                "path": "chino-taiwan/MLS-V07-0640.json",
+                "sha256": "748d8b7ce74ecee4863f6cdf34c057ef1fc15820e7c5487daa8db6e6bbbe36b0"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0790",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0635",
+                "path": "chino-taiwan/MLS-V07-0635.json",
+                "sha256": "e6a563e677c93266da7154c7adc636738424f0c41920e7a5ec8b574ddf92b09a"
+              },
+              {
+                "code": "MLS-V07-0636",
+                "path": "chino-taiwan/MLS-V07-0636.json",
+                "sha256": "e85d99928b2e1a48a46d476d556292aa7c33ee52fafcaffc252fb4567fb0a5d0"
+              },
+              {
+                "code": "MLS-V07-0637",
+                "path": "chino-taiwan/MLS-V07-0637.json",
+                "sha256": "5d6c8a1d46f91490c58d562897a96a428a37747f462f32491774a6529b5c897b"
+              },
+              {
+                "code": "MLS-V07-0638",
+                "path": "chino-taiwan/MLS-V07-0638.json",
+                "sha256": "8e74475e7255bca6f03b5c05052a597d26f9ccfde643d56157d16ed8525da722"
+              },
+              {
+                "code": "MLS-V07-0640",
+                "path": "chino-taiwan/MLS-V07-0640.json",
+                "sha256": "748d8b7ce74ecee4863f6cdf34c057ef1fc15820e7c5487daa8db6e6bbbe36b0"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0635",
+              "MLS-V07-0636",
+              "MLS-V07-0637",
+              "MLS-V07-0638",
+              "MLS-V07-0640"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997210582,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997210582,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0635",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 635,
+                "title": "Aspecto y clase léxica verbal",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "Aspecto avanzado y combinaciones de marcadores — 進階體貌與標記組合",
+                "articleMarkdown": "#### En pocas palabras\n\nLos marcadores aspectuales del mandarín no se combinan de manera idéntica con todos los verbos. Parte de la diferencia depende del **tipo de situación** que expresa el predicado: una actividad prolongable, un cambio puntual, un estado o un proceso que conduce a un resultado.\n\nCompare **他跑了三個小時。** *Tā pǎo le sān ge xiǎoshí.* — «Corrió durante tres horas»— con **他到了。** *Tā dào le.* — «Llegó». **跑** describe una actividad que puede prolongarse; **到** expresa un cambio que culmina al alcanzar un punto.\n\n#### Cómo funciona\n\nLa llamada **clase aspectual léxica** o **tipo de situación** describe propiedades internas del predicado: si tiene duración, si posee un límite natural y si implica un cambio de estado.\n\nEstas propiedades interactúan con marcadores como **了、過、著**, con expresiones de duración y con construcciones progresivas. El marcador no aporta todo el significado por sí solo: se combina con la estructura léxica del evento.\n\n#### Actividades y duración\n\nVerbos o predicados de actividad, como **跑步、工作、聊天**, pueden desarrollarse durante un intervalo sin exigir un final inherente. Por eso aceptan con naturalidad expresiones como **跑了三個小時** «correr durante tres horas».\n\nEl **了** delimita aquí una realización concreta de la actividad, pero no convierte automáticamente al verbo en un logro puntual.\n\n#### Cambios y logros\n\nPredicados como **到、死、找到** pueden presentar un cambio o un punto de culminación. En **他到了**, lo importante es que se alcanza el estado de «haber llegado».\n\nCuando se combinan con duración, la interpretación suele medir el tiempo previo al logro o exigir otra estructura: **他找了三個小時才找到** «buscó durante tres horas y solo entonces lo encontró» distingue la actividad de buscar del resultado logrado.\n\n#### Estados y progresión\n\nLos estados, como **知道、喜歡、像**, no siempre admiten con naturalidad los mismos marcadores progresivos que una actividad dinámica. **正在跑步** es normal porque correr se desarrolla internamente; **正在知道** resulta extraña en el uso ordinario porque «saber» no suele conceptualizarse como proceso en curso.\n\nEl contexto puede reinterpretar ciertos predicados, por lo que estas tendencias no son reglas absolutas.\n\n#### Contraste útil\n\nCompare **他在跑步** «está corriendo» con **他到了** «llegó». La primera construcción enfoca una fase interna de un evento dinámico; la segunda presenta un límite alcanzado.\n\nTambién **他跑過馬拉松** «ha corrido maratones alguna vez» usa **過** para experiencia previa, mientras que **他跑了三個小時** delimita una actividad concreta. El tipo de verbo y el marcador contribuyen juntos a la lectura.\n\n#### Observación importante\n\nNo conviene asignar una clase aspectual fija a un verbo aislado sin considerar sus complementos. **吃** «comer» puede expresar una actividad en **吃飯**, pero **吃完一碗麵** incluye un resultado y un límite claro.\n\nPor eso el análisis más preciso se hace sobre el predicado completo. El aspecto gramatical y el tipo léxico de situación son distintos, pero interactúan de forma constante.\n\n#### Entradas relacionadas\n\n- **V著V著…** — 「V著V著…」.\n- **一直…著** — 「一直…著」.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-bbf19be2200929d55d5b68974f4fd77e8baf82eb725993cf88021dcda5d10014",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:42:39.549Z"
+              },
+              {
+                "code": "MLS-V07-0636",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 636,
+                "title": "V著V著…",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "Aspecto avanzado y combinaciones de marcadores — 進階體貌與標記組合",
+                "articleMarkdown": "#### En pocas palabras\n\nLa construcción **V著V著…** presenta una acción como **en desarrollo durante cierto intervalo** y luego introduce otro acontecimiento que surge dentro de ese marco. En español suele traducirse con expresiones como «mientras…», «de tanto…» o «cuando llevaba un rato…», según el contexto.\n\nEn **走著走著，下雨了。** *Zǒuzhe zǒuzhe, xiàyǔ le.* — «Mientras caminábamos, empezó a llover»—, la repetición **走著走著** establece el proceso de caminar como trasfondo y **下雨了** introduce un nuevo cambio de situación.\n\n#### Cómo funciona\n\nLa forma típica repite el mismo verbo con **著**: **V著V著**. La repetición no expresa simplemente «dos veces». Presenta la actividad extendida internamente, como si el hablante se situara dentro de su desarrollo.\n\nDespués suele aparecer un evento nuevo, una reacción o un cambio inesperado: **聊著聊著，他突然哭了。** *Liáozhe liáozhe, tā tūrán kū le.* — «Mientras conversaban, de pronto se puso a llorar».\n\n#### Valor aspectual\n\n**著** contribuye aquí a una lectura continuativa. La acción inicial sirve de marco temporal y discursivo, no de evento cerrado visto desde fuera.\n\nLa segunda cláusula suele contener un cambio delimitado, a menudo con **了**, **突然** u otra señal contextual. Así se crea un contraste entre proceso en curso y acontecimiento emergente.\n\n#### Tipos de verbos\n\nLa construcción aparece con naturalidad con actividades dinámicas que pueden prolongarse: **走、聊、看、想、等**. Por ejemplo, **看著看著，我睡著了。** — «Mientras miraba, me quedé dormido».\n\nCon predicados que expresan estados estables o cambios puntuales, la construcción puede resultar menos natural si el contexto no permite reinterpretarlos como procesos prolongados.\n\n#### Contraste útil\n\nCompare **我走著路** con **走著走著，下雨了**. En la segunda, la repetición crea un marco narrativo más fuerte y prepara la llegada de otro evento.\n\nTampoco equivale a **一直走著**, que destaca continuidad sostenida. **V著V著…** suele avanzar narrativamente hacia un cambio o suceso posterior.\n\n#### Observación importante\n\nLa construcción no indica tiempo pasado por sí misma. El momento cronológico depende del contexto narrativo. **著** marca continuidad, mientras que la secuencia completa organiza la relación entre un proceso y lo que ocurre durante él.\n\nNo debe confundirse la repetición con aspecto habitual: **走著走著** no significa «caminar repetidamente» en el sentido de una costumbre.\n\n#### Entradas relacionadas\n\n- Aspecto y clase léxica verbal — 體貌與動詞情狀類型.\n- **一直…著** — 「一直…著」.\n- **了** y **過**: contraste — 「了」與「過」對比.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7291cb2807bb906d90dedbeb20f80ea0fd3c57650528e608e0945744f27fc90a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:43:43.349Z"
+              },
+              {
+                "code": "MLS-V07-0637",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 637,
+                "title": "一直…著",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "Aspecto avanzado y combinaciones de marcadores — 進階體貌與標記組合",
+                "articleMarkdown": "#### En pocas palabras\n\nLa construcción **一直…著** presenta una situación como **mantenida de forma continua durante un intervalo**. **一直 yìzhí** aporta la idea de «todo el tiempo / de manera continua», mientras **著 zhe** puede marcar que cierto estado o postura sigue vigente.\n\nEn **燈一直亮著。** *Dēng yìzhí liàngzhe.* — «La luz ha permanecido encendida / sigue encendida»—, **亮著** describe el estado continuado de estar encendida y **一直** extiende esa continuidad a lo largo del intervalo relevante.\n\n#### Cómo funciona\n\nUna estructura frecuente es **sujeto + 一直 + predicado + 著**. La construcción resulta especialmente natural cuando el predicado puede describirse como un estado mantenido, una postura o una situación que permanece sin interrupción relevante.\n\nPor ejemplo, **門一直開著。** *Mén yìzhí kāizhe.* — «La puerta ha estado abierta todo el tiempo»— presenta **開著** como estado vigente y **一直** subraya su persistencia.\n\n#### Estados y posturas continuadas\n\nCon verbos de postura aparecen ejemplos como **他一直站著。** *Tā yìzhí zhànzhe.* — «Ha permanecido de pie / sigue de pie». Aquí no se destaca el inicio de ponerse de pie, sino la continuación de esa postura.\n\nTambién puede aparecer con procesos compatibles con una lectura sostenida: **外面一直下著雨。** *Wàimiàn yìzhí xiàzhe yǔ.* — «Afuera ha estado lloviendo continuamente».\n\n#### Contraste con 正在\n\n**正在** suele enfocar una acción como en desarrollo en un momento de referencia: **外面正在下雨。** — «Afuera está lloviendo ahora». **一直…著** añade la idea de persistencia a lo largo de un intervalo: **外面一直下著雨** — «ha estado lloviendo todo el tiempo».\n\nPor eso ambas construcciones pueden relacionarse con continuidad, pero no expresan exactamente la misma perspectiva aspectual.\n\n#### Contraste con V著V著\n\n**V著V著…** suele establecer un proceso de fondo y después introducir otro acontecimiento: **走著走著，下雨了** «mientras caminábamos, empezó a llover».\n\n**一直…著**, en cambio, no necesita conducir a un cambio narrativo. Su función principal es presentar la situación como sostenida: **燈一直亮著**.\n\n#### Tiempo y límites\n\nLa construcción no indica por sí misma pasado, presente o futuro. El intervalo temporal depende del contexto: **昨天燈一直亮著** «ayer la luz estuvo encendida todo el tiempo» y **到晚上十點，燈會一直亮著** «hasta las diez de la noche, la luz permanecerá encendida» sitúan la continuidad en momentos distintos.\n\nTampoco **一直** especifica necesariamente cuándo empezó la situación; solo destaca su continuidad dentro del intervalo relevante.\n\n#### Observación importante\n\n**著** no equivale universalmente a «estar + gerundio». En ejemplos como **門開著** o **燈亮著**, puede presentar un estado mantenido, no simplemente una acción dinámica en progreso.\n\nLa naturalidad de **一直…著** depende del predicado completo y de que admita una interpretación continuativa. No todos los verbos se combinan del mismo modo con esta estructura.\n\n#### Entradas relacionadas\n\n- **V著V著…** — 「V著V著…」.\n- **了** y **過**: contraste — 「了」與「過」對比.\n- Aspecto y clase léxica verbal — 體貌與動詞情狀類型.\n- **在V + 了**: límites — 「在V＋了」限制.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0406d959c2bf4080a1fe221dc5f10d713c48778d8880971a5f6ea50e9e24fe92",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:45:11.625Z"
+              },
+              {
+                "code": "MLS-V07-0638",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 638,
+                "title": "了 + 過 contraste",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "Aspecto avanzado y combinaciones de marcadores — 進階體貌與標記組合",
+                "articleMarkdown": "#### En pocas palabras\n\n**了 le** y **過 guo** pueden aparecer con acciones anteriores, pero no expresan la misma perspectiva. **了** suele presentar un evento como realizado o delimitado dentro de una situación concreta; **過** presenta una acción como **experiencia previa**, sin centrar necesariamente la atención en una ocasión específica.\n\nCompare **我去年去了日本。** *Wǒ qùnián qù le Rìběn.* — «Fui a Japón el año pasado»— con **我去過日本。** *Wǒ qùguo Rìběn.* — «He estado en Japón / he ido alguna vez a Japón». La primera localiza un viaje concreto; la segunda afirma que esa experiencia forma parte de la historia de la persona.\n\n#### Cómo funciona\n\nCon **了** aspectual, el hablante suele presentar una realización determinada del evento. Expresiones temporales como **去年、昨天、三點** pueden situarlo con precisión: **我昨天看了那部電影。** — «Ayer vi esa película».\n\nCon **過**, la pregunta central suele ser si la experiencia ocurrió alguna vez antes del punto de referencia: **我看過那部電影。** — «He visto esa película alguna vez».\n\n#### Evento delimitado y experiencia\n\n**了** puede combinarse con cantidades o duraciones que delimitan una realización: **他在台北住了三年。** *Tā zài Táiběi zhù le sān nián.* — «Vivió tres años en Taipéi». La frase perfila un intervalo concreto.\n\n**過** no se limita a contar una ocasión específica: **他在台北住過。** *Tā zài Táiběi zhùguo.* — «Ha vivido en Taipéi alguna vez»— afirma experiencia previa sin especificar cuánto duró.\n\n#### Relación con el tiempo\n\nNi **了** ni **過** son terminaciones de pasado. El tiempo cronológico se obtiene del contexto y de expresiones temporales. **明天吃了飯再走** puede presentar una acción completada antes de otra dentro de un marco futuro: «mañana, después de comer, nos vamos».\n\nPor su parte, **過** relaciona una experiencia con un punto de referencia anterior o actual; no equivale automáticamente al pretérito perfecto español.\n\n#### Contraste útil\n\nCompare **我吃了牛肉麵。** «Comí fideos con res» con **我吃過牛肉麵。** «He comido fideos con res alguna vez». La primera habla de una realización concreta; la segunda clasifica la experiencia como existente.\n\nEn preguntas, **你吃了嗎？** suele preguntar si ya ocurrió una acción concreta pertinente al contexto, mientras **你吃過嗎？** pregunta si alguna vez se ha tenido esa experiencia.\n\n#### Negación\n\nLa negación también muestra la diferencia. Para negar una experiencia se usa normalmente **沒(有)…過**: **我沒去過日本。** — «Nunca he estado en Japón».\n\nPara negar que un evento concreto se haya realizado, **沒(有)** suele aparecer sin **了** aspectual: **我昨天沒去。** — «Ayer no fui». Esto confirma que **了** y **過** no son simples marcas intercambiables de anterioridad.\n\n#### Observación importante\n\nEl carácter **了** cumple más de una función en mandarín, incluido un uso final de oración relacionado con cambio o nueva situación. No toda aparición de **了** debe analizarse exactamente como el **了** aspectual posterior al verbo.\n\nDel mismo modo, el significado de **過** depende de la construcción completa. El contraste básico entre evento delimitado y experiencia es útil, pero el análisis final debe considerar el verbo, los complementos y el contexto.\n\n#### Entradas relacionadas\n\n- **一直…著** — 「一直…著」.\n- **在V + 了**: límites — 「在V＋了」限制.\n- **V著V著…** — 「V著V著…」.\n- **就要…了** — 「就要…了」.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-5fd5d75f5c2a7326180a5cd1443a63d7ec5bcce01e25d71a34004e3d65a4c521",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:46:19.850Z"
+              },
+              {
+                "code": "MLS-V07-0640",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 640,
+                "title": "就要…了",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "Aspecto avanzado y combinaciones de marcadores — 進階體貌與標記組合",
+                "articleMarkdown": "#### En pocas palabras\n\n**就要…了 (jiù yào…le)** indica que una situación o acción está **a punto de ocurrir**. Presenta el evento como muy próximo respecto del momento relevante del discurso. En español suele corresponder a «estar a punto de…», «ya casi…» o, según el contexto, «pronto va a…».\n\nNo expresa por sí solo pasado, presente o futuro como una conjugación verbal. En mandarín, la cercanía temporal surge de toda la construcción: **就要** anuncia la inminencia y el **了** final señala que se aproxima un nuevo estado de cosas.\n\n#### Cómo funciona\n\nLa estructura más característica es **sujeto + 就要 + verbo o predicado + 了**.\n\nEn **電影就要開始了。** *Diànyǐng jiù yào kāishǐ le.* — «La película está a punto de empezar», **開始** es «empezar» y **就要…了** sitúa ese comienzo como inminente. El **了** aparece al final de la oración; aquí no conviene interpretarlo simplemente como una marca de acción completada.\n\nLa construcción puede referirse al futuro inmediato desde el momento presente:\n\n- **火車就要到了。** *Huǒchē jiù yào dào le.* — El tren está a punto de llegar.\n- **我們就要出發了。** *Wǒmen jiù yào chūfā le.* — Estamos a punto de salir.\n\nTambién puede aparecer dentro de una narración situada en otro momento. Lo esencial no es que el evento sea «futuro» en sentido absoluto, sino que esté muy próximo al punto temporal que sirve de referencia.\n\n#### El papel de 就要 y 了\n\n**要** puede expresar, entre otros valores, intención, necesidad o futuro previsto. Con **就**, la expresión **就要** adquiere fácilmente el sentido de «ya casi / en breve». El **了** final refuerza la idea de que la situación está entrando en una nueva fase: antes el evento todavía no ocurría; ahora su inicio se percibe como inminente.\n\nPor eso, **就要…了** no debe analizarse como si **了** fuera una terminación de futuro. Es una combinación de elementos con funciones distintas que, juntos, producen una lectura de cambio próximo.\n\n#### Contrastes útiles\n\n**就要…了** se diferencia de **已經…了**, que normalmente presenta una situación como ya realizada o ya vigente:\n\n- **電影就要開始了。** — La película está a punto de empezar.\n- **電影已經開始了。** — La película ya ha empezado.\n\nLa oposición es clara: en la primera oración el comienzo todavía no se ha producido, pero es inminente; en la segunda, ya ocurrió.\n\nTambién puede compararse con **快要…了**, otra construcción frecuente de inminencia. Ambas pueden traducirse como «estar a punto de…», aunque **就要…了** suele encajar especialmente bien cuando el hablante presenta el evento como próximo dentro de una secuencia, un horario o una expectativa contextual.\n\n#### Observación importante\n\nNo todo **要** seguido de **了** forma automáticamente esta construcción. Hay que interpretar la oración completa. Por ejemplo, **我要走了。** puede significar «ya me voy / tengo que irme», donde **要** está estrechamente relacionado con la intención o la necesidad del hablante. En cambio, **比賽就要結束了。** «El partido está a punto de terminar» muestra de forma clara la construcción de inminencia.\n\n#### Entradas relacionadas\n\n- [在V + 了: límites — 「在V＋了」限制](#entry-639)\n- [已經…了 — 「已經…了」](#entry-641)\n- [了 + 過 contraste — 「了」與「過」對比](#entry-638)\n- [有V到 taiwanés: reconocimiento — 臺灣口語「有V到」認識](#entry-642)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-155df79dc49f1f90f6feaaa157bca968a6f15c8a841511cfce0ab298bdda9a9b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:11:09.749Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:08:31.446Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:08:31.446Z",
+  "commandFile": "mls chat bridge/commands/r44/z6-ticket03-submit-claim4.json"
+}

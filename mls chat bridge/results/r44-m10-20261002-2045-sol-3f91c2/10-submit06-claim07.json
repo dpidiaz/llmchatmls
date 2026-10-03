@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-3f91c2-t06-submit-claim07",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0605",
+          "sha256": "27f2325d1771cb50ff180b3d18d06d83a2da5b1fae888c37aa885eeb6e0fb7b1",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0605",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8845e0d1-6b49-4154-bffc-e10286f1ee8a",
+                "ticketId": "R43-EMERGENCY-0605",
+                "code": "MLS-V06-0552",
+                "idempotencyKey": "R43-EMERGENCY-0605:MLS-V06-0552:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e0890f9157b5ce971f98bd96d296900c0be56abcaa0a241a90afda6c9c979b1d",
+                "sourceSha256": "ff710c2e31f4fb1d15c9dd5344841da08d8cbcbf1cb3a4ecd35ccdd453e0d592",
+                "committedMs": 1790996889402,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7887c9c90224eecf5f89aa821ec38063ed7f34d71296c35b890ca74dd88da20f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0605",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8eec95bc-6c2d-496d-ae65-609117d384f1",
+                "ticketId": "R43-EMERGENCY-0605",
+                "code": "MLS-V06-0553",
+                "idempotencyKey": "R43-EMERGENCY-0605:MLS-V06-0553:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "3fa12873c9b2ef66e34c215a06bb36aecbe2328c9956a4a656fcd805bd4de3f4",
+                "sourceSha256": "f6e30f1f9debf8f170c595a5d73553f3a0246080ef6291abceda4f23840dcaa9",
+                "committedMs": 1790996889651,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "94c3adf45a62e311173921a03cb80969c5e0c7ffa9cb6158d14c9d6e3c5e5137",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0605",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "0d32ece1-319d-4515-b395-ba591de991f3",
+                "ticketId": "R43-EMERGENCY-0605",
+                "code": "MLS-V06-0554",
+                "idempotencyKey": "R43-EMERGENCY-0605:MLS-V06-0554:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "24c224fd9167c1e0df32443d49592be8fef6e84f2459142e26a61d844975d846",
+                "sourceSha256": "11eb922bb521a6f49ce1865e8f6ff9a78b5909d236b2ee1795fad9d1add33af9",
+                "committedMs": 1790996889884,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9df967ed0e20b7a0045268220913e49534cf118b2a33d267ea8b7ea5f115e86e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0605",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "13832ae1-9d64-49dc-a30a-9bd9ccb46086",
+                "ticketId": "R43-EMERGENCY-0605",
+                "code": "MLS-V06-0555",
+                "idempotencyKey": "R43-EMERGENCY-0605:MLS-V06-0555:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1ae743e06672964dc8da2fe595fb0eab37f111c407559ce3f20cf50e3747475a",
+                "sourceSha256": "cb00c632a2e70957c8a58d2bc8227aff1b70adbd1a1394fedcd6002353ed8524",
+                "committedMs": 1790996890125,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e084ebc4bff786333aea7f5f2ca5f0933e2e69f72ab0e5285dc4f149fe516b7b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0605",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "59f14b5d-7eb2-4847-b5af-4e97be9d514b",
+                "ticketId": "R43-EMERGENCY-0605",
+                "code": "MLS-V06-0556",
+                "idempotencyKey": "R43-EMERGENCY-0605:MLS-V06-0556:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "5d7e3f76c768a487e18d50c53c60a1d8deeaad0cd8e9ebea29bec123d04e32d5",
+                "sourceSha256": "143b6b67a64d56421d307c2c2164d7551abc9bf497871053aaf8123f206afd5a",
+                "committedMs": 1790996890348,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "2cfa7b4c8fdc3a2c30ea19abeb6a2b92e3ded6d8e9efa5ee911ce40f2af1e22d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-29f9c3d4-a658-4910-b592-63c55985d1a9",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "27f2325d1771cb50ff180b3d18d06d83a2da5b1fae888c37aa885eeb6e0fb7b1"
+          }
+        },
+        "completedAt": "2026-10-03T03:08:10.734Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-6da86273-4bf6-485c-ac84-242bd9651b45",
+          "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0606",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997190784,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0557",
+                "path": "japones/MLS-V06-0557.json",
+                "sha256": "f1a4c2b67ea61fd76989e06ed87ea15511d23a00a07847eeac58306ac9705875"
+              },
+              {
+                "code": "MLS-V06-0558",
+                "path": "japones/MLS-V06-0558.json",
+                "sha256": "9c0cc0eaf984480befd470b24aa7fef25867562a180f4b5aa06aac706bbe95ef"
+              },
+              {
+                "code": "MLS-V06-0560",
+                "path": "japones/MLS-V06-0560.json",
+                "sha256": "df19be1edfd147c5f1dd1aecebe8cfb169f0a256bd6a52253c8bf2d0e59d67a1"
+              },
+              {
+                "code": "MLS-V06-0561",
+                "path": "japones/MLS-V06-0561.json",
+                "sha256": "82c2b8485f811b301629a7cc2081172a7578a58a4b691aef16cdd5d095ace473"
+              },
+              {
+                "code": "MLS-V06-0562",
+                "path": "japones/MLS-V06-0562.json",
+                "sha256": "4b2ccbe93b037a479d17036028e7a4b1a8b6ae76e5c77e66f0a75c067d9d417c"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0606",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0557",
+                "path": "japones/MLS-V06-0557.json",
+                "sha256": "f1a4c2b67ea61fd76989e06ed87ea15511d23a00a07847eeac58306ac9705875"
+              },
+              {
+                "code": "MLS-V06-0558",
+                "path": "japones/MLS-V06-0558.json",
+                "sha256": "9c0cc0eaf984480befd470b24aa7fef25867562a180f4b5aa06aac706bbe95ef"
+              },
+              {
+                "code": "MLS-V06-0560",
+                "path": "japones/MLS-V06-0560.json",
+                "sha256": "df19be1edfd147c5f1dd1aecebe8cfb169f0a256bd6a52253c8bf2d0e59d67a1"
+              },
+              {
+                "code": "MLS-V06-0561",
+                "path": "japones/MLS-V06-0561.json",
+                "sha256": "82c2b8485f811b301629a7cc2081172a7578a58a4b691aef16cdd5d095ace473"
+              },
+              {
+                "code": "MLS-V06-0562",
+                "path": "japones/MLS-V06-0562.json",
+                "sha256": "4b2ccbe93b037a479d17036028e7a4b1a8b6ae76e5c77e66f0a75c067d9d417c"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0557",
+              "MLS-V06-0558",
+              "MLS-V06-0560",
+              "MLS-V06-0561",
+              "MLS-V06-0562"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997190784,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997190784,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0557",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 557,
+                "title": "Relativa de lugar/tiempo",
+                "level": "B1",
+                "part": "Nominalización y modificación — 名詞化・連体修飾",
+                "chapter": "Modificación nominal y relativas prenominales — 連体修飾・関係節",
+                "articleMarkdown": "#### En pocas palabras\n\nEn japonés, una cláusula puede colocarse **antes de un nombre de lugar o tiempo** para especificar qué lugar o qué momento se quiere identificar. No aparece un pronombre relativo equivalente a “donde” o “cuando”: la relación se interpreta a partir del nombre y del contenido de la cláusula.\n\n#### Cómo funciona\n\nEn **私が生まれた町**, literalmente aparece “yo nací + pueblo”, y la interpretación natural es “el pueblo donde nací”. Dentro de la cláusula **私が生まれた**, el lugar correspondiente a **町** no se expresa con una partícula porque ese papel se recupera al relacionar la cláusula con el nombre modificado.\n\nCon nombres temporales ocurre algo semejante: **日本へ行った日** significa “el día en que fui a Japón”. La cláusula **日本へ行った** precede a **日** y delimita cuál día se menciona.\n\nLa forma verbal de la relativa expresa sus propios contrastes de pasado, negación o aspecto: **住んでいた町** “el pueblo donde vivía”, **会わなかった日** “el día en que no nos vimos”. El nombre completo puede después recibir una partícula según su función en la oración principal.\n\n#### Ejemplos\n\n* **私が生まれた町は小さいです。** — El pueblo donde nací es pequeño.\n* **初めて会った日を覚えています。** — Recuerdo el día en que nos conocimos por primera vez.\n* **子どものころ住んでいた家を見ました。** — Vi la casa donde vivía de niño/a.\n* **雨が降った日に出発しました。** — Salimos el día en que llovió.\n\n#### Observación importante\n\nEl español suele hacer explícita la relación mediante “donde”, “cuando” o “en que”; el japonés no necesita un elemento equivalente dentro de la relativa. Esto no significa que se haya omitido una palabra japonesa concreta: es una diferencia estructural entre las lenguas.\n\nEl ejemplo heredado **日本語を勉強することは楽しいです** es una nominalización con **こと** y no contiene una relativa que modifique un nombre de lugar o tiempo.\n\n#### Entradas relacionadas\n\n[Entrada 556: Relativa con な — な：連体修飾・関係節](#entry-556) · [Entrada 558: Relativa de objeto — 関係節 de objeto](#entry-558) · [Entrada 559: Relativa de sujeto — 関係節 de sujeto](#entry-559)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-01786f67fc1b303a1b7f00507450a3704e42b86eeeaa6970a61286b7863891b6",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:24:31.388Z"
+              },
+              {
+                "code": "MLS-V06-0558",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 558,
+                "title": "Relativa de objeto",
+                "level": "B1",
+                "part": "Nominalización y modificación — 名詞化・連体修飾",
+                "chapter": "Modificación nominal y relativas prenominales — 連体修飾・関係節",
+                "articleMarkdown": "#### En pocas palabras\n\nEn una **relativa de objeto**, el nombre que aparece después de la cláusula corresponde al participante que funciona como objeto dentro de esa cláusula. En japonés ese nombre no se repite dentro de la relativa ni aparece un pronombre equivalente a “que”.\n\nAsí, **私が昨日買った本** significa “el libro que compré ayer”. Dentro de **私が昨日買った**, el objeto de **買った** “compré” se recupera al relacionar la cláusula con el nombre **本**.\n\n#### Cómo funciona\n\nLas cláusulas relativas japonesas preceden al nombre que modifican. En una oración independiente podría decirse **私は昨日その本を買った** — “Ayer compré ese libro”, donde **その本を** es el objeto. Al convertirlo en relativa, aparece **私が昨日買った本**: el nombre **本** queda fuera de la cláusula y la marca **を** no se conserva en su posición interna.\n\nEl grupo nominal completo puede después recibir una partícula según su función en la oración principal: **私が買った本を読みました。** — “Leí el libro que compré”. Aquí el **を** visible pertenece a **本** respecto de **読みました**, no a **買った**.\n\nLa relativa conserva tiempo, aspecto y otros elementos propios: **読んでいる本** “el libro que estoy leyendo”, **買った本** “el libro que compré”.\n\n#### Ejemplos\n\n* **私が昨日買った本は面白いです。** — El libro que compré ayer es interesante.\n* **母が作った料理を食べました。** — Comí la comida que preparó mi madre.\n* **今読んでいる小説は長いです。** — La novela que estoy leyendo ahora es larga.\n* **友だちが撮った写真を見せてもらいました。** — Me enseñaron las fotos que tomó mi amigo/a.\n\n#### Observación importante\n\nNo debe añadirse dentro de la relativa una partícula o pronombre equivalente al español **que**. La relación entre el verbo y el nombre núcleo se establece estructuralmente.\n\nTambién conviene distinguir la función interna del nombre respecto de la relativa y su función externa en la oración principal: pueden ser diferentes y llevar marcas distintas.\n\n#### Entradas relacionadas\n\n[Entrada 557: Relativa de lugar/tiempo — 関係節 de lugar/tiempo](#entry-557) · [Entrada 559: Relativa de sujeto — 関係節 de sujeto](#entry-559) · [Entrada 556: Relativa con な — な：連体修飾・関係節](#entry-556) · [Entrada 560: Relativa negativa — 関係節 negativa](#entry-560)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e57479a655d379ca480a47de353d0d82685c12a57d4d98243524d8e7b1331c37",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:25:23.971Z"
+              },
+              {
+                "code": "MLS-V06-0560",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 560,
+                "title": "Relativa negativa",
+                "level": "B1",
+                "part": "Nominalización y modificación — 名詞化・連体修飾",
+                "chapter": "Modificación nominal y relativas prenominales — 連体修飾・関係節",
+                "articleMarkdown": "#### En pocas palabras\n\nUna **relativa negativa** es una cláusula que modifica a un nombre y cuyo predicado está negado. La negación forma parte de la cláusula situada antes del nombre: **来ない人** significa “la persona que no viene” y **読まなかった本** “el libro que no leí”.\n\n#### Cómo funciona\n\nLa estructura relativa japonesa no cambia por ser negativa. Se mantiene el orden **cláusula + nombre**, pero el verbo o predicado adopta la forma negativa que corresponda: **来る → 来ない**, **食べた → 食べなかった**, **高い → 高くない**.\n\nEn **私が読まなかった本**, el nombre **本** corresponde al objeto de **読まなかった** aunque no aparezca dentro de la cláusula. En **昨日来なかった学生**, **学生** corresponde al participante que no realizó la acción de venir. Por tanto, la negación y la relación relativa son dos aspectos distintos de la misma estructura.\n\nEl grupo nominal completo recibe después las partículas necesarias en la oración principal: **昨日来なかった学生に電話しました。** — “Llamé al estudiante que no vino ayer”.\n\n#### Ejemplos\n\n* **昨日来なかった学生に連絡しました。** — Me comuniqué con el estudiante que no vino ayer.\n* **まだ読んでいない本が三冊あります。** — Hay tres libros que todavía no he leído.\n* **肉を食べない人のための料理です。** — Es un plato para personas que no comen carne.\n* **あまり高くない店を探しています。** — Busco un restaurante que no sea muy caro.\n\n#### Observación importante\n\nNo existe una partícula relativa especial para la negación. La forma negativa pertenece al predicado de la cláusula y el nombre modificado continúa apareciendo después de ella, sin un elemento equivalente al español **que**.\n\nEl ejemplo heredado **日本語を勉強することは楽しいです** no contiene una relativa ni un predicado negativo, por lo que no demuestra el fenómeno de esta entrada.\n\n#### Entradas relacionadas\n\n[Entrada 559: Relativa de sujeto — 関係節 de sujeto](#entry-559) · [Entrada 561: Adjetivo + nombre — 形容詞＋名詞](#entry-561) · [Entrada 558: Relativa de objeto — 関係節 de objeto](#entry-558) · [Entrada 562: Cláusula + nombre — 節＋名詞](#entry-562)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-4307cfccb4ba2d34799cb81d468e459f10f721f9c1fc2ef6bf9a842829e1082b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:27:17.975Z"
+              },
+              {
+                "code": "MLS-V06-0561",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 561,
+                "title": "Adjetivo + nombre",
+                "level": "B1",
+                "part": "Nominalización y modificación — 名詞化・連体修飾",
+                "chapter": "Modificación nominal y relativas prenominales — 連体修飾・関係節",
+                "articleMarkdown": "#### En pocas palabras\n\nEn japonés, los adjetivos pueden aparecer **directamente antes de un nombre** para describirlo. Con los **い-adjetivos**, la forma no pasada afirmativa termina normalmente en **い** y se une al nombre sin una palabra equivalente a “que”: **高い山** significa “montaña alta”.\n\n#### Cómo funciona\n\nEn **高い山を見ました**, **高い** modifica directamente a **山**. La unidad **高い山** funciona después como grupo nominal y recibe **を** porque es el objeto de **見ました**.\n\nLos い-adjetivos conservan su propia flexión delante del nombre. Así aparecen **高くない山** “una montaña que no es alta / una montaña no muy alta” y **高かった山** “una montaña que era alta”. La modificación atributiva forma parte de la gramática del adjetivo; no es necesario introducir un pronombre relativo.\n\nLos **な-adjetivos** siguen otro patrón: **静かな町** “pueblo tranquilo”, con **な** delante del nombre. Por eso no conviene reunir todas las palabras descriptivas bajo una única regla morfológica.\n\nLa modificación adjetival puede combinarse con otros modificadores: **昨日見た高い山** — “la montaña alta que vi ayer”. Aquí **昨日見た** y **高い** describen al mismo nombre **山** mediante estructuras distintas.\n\n#### Ejemplos\n\n* **高い山を見ました。** — Vi una montaña alta.\n* **新しい本を買いました。** — Compré un libro nuevo.\n* **あまり高くない店を探しています。** — Busco un restaurante que no sea muy caro.\n* **昨日見た赤い車は父のです。** — El carro rojo que vi ayer es de mi padre.\n\n#### Observación importante\n\nUna secuencia como **高い山** no es por sí misma una cláusula relativa del mismo tipo que **私が買った本**. Ambas son formas de modificación prenominal, pero la primera contiene un adjetivo atributivo y la segunda una cláusula.\n\nEn español puede ser natural traducir ciertas formas negativas con “que no…”, pero eso no implica que el japonés contenga un pronombre relativo oculto.\n\n#### Entradas relacionadas\n\n[Entrada 560: Relativa negativa — 関係節 negativa](#entry-560) · [Entrada 562: Cláusula + nombre — 節＋名詞](#entry-562) · [Entrada 559: Relativa de sujeto — 関係節 de sujeto](#entry-559) · [Entrada 563: Lugar/tiempo como relación contextual — 場所・時間の関係節](#entry-563)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-106012ceb04a21c83c66e971d516b8d487acce5e2d4ca0bdac7738f44a3d4268",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:28:12.444Z"
+              },
+              {
+                "code": "MLS-V06-0562",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 562,
+                "title": "Cláusula + nombre",
+                "level": "B1",
+                "part": "Nominalización y modificación — 名詞化・連体修飾",
+                "chapter": "Modificación nominal y relativas prenominales — 連体修飾・関係節",
+                "articleMarkdown": "#### En pocas palabras\n\nEn japonés, una **cláusula completa puede colocarse directamente antes de un nombre** para identificarlo o describirlo. Este patrón aparece en expresiones como **私が昨日買った本**, “el libro que compré ayer”, donde **私が昨日買った** modifica a **本**.\n\nA diferencia del español, no hace falta una palabra equivalente a **que**, **quien** o **el cual** entre la cláusula y el nombre.\n\n#### Cómo funciona\n\nLa estructura general es **cláusula + nombre**. El predicado de la cláusula aparece en una forma no cortés apropiada al significado: **読む本** “el libro que leo/leeré”, **読んだ本** “el libro que leí”, **読んでいる本** “el libro que estoy leyendo” y **読まない本** “el libro que no leo”.\n\nEl nombre final es el **núcleo**, es decir, la palabra principal del grupo nominal. Su relación con la cláusula se interpreta semánticamente. En **私が買った本**, **本** corresponde al objeto de **買った**; en **昨日来た人**, **人** corresponde a quien realizó la acción de venir.\n\nUna vez formado, todo el grupo puede recibir partículas según su función en la oración principal: **私が買った本を読みました。** Aquí el **を** visible marca a todo **私が買った本** como objeto de **読みました**.\n\n#### Ejemplos\n\n* **私が昨日買った本は面白いです。** — El libro que compré ayer es interesante.\n* **駅で待っている人は姉です。** — La persona que espera en la estación es mi hermana mayor.\n* **父が作った料理を食べました。** — Comí la comida que preparó mi padre.\n* **来週使う資料を準備しました。** — Preparé los materiales que usaré la próxima semana.\n\n#### Observación importante\n\nNo toda modificación prenominal es una cláusula. **高い山** contiene un い-adjetivo y **静かな町** un な-adjetivo; **私が見た山**, en cambio, contiene una cláusula con predicado verbal.\n\nEl ejemplo heredado **日本語を勉強することは楽しいです** usa **こと** para nominalizar una cláusula, pero no muestra una cláusula que modifique directamente a un nombre léxico.\n\n#### Entradas relacionadas\n\n[Entrada 561: Adjetivo + nombre — 形容詞＋名詞](#entry-561) · [Entrada 563: Lugar/tiempo como relación contextual — 場所・時間の関係節](#entry-563) · [Entrada 560: Relativa negativa — 関係節 negativa](#entry-560) · [Entrada 564: Nombre + の + nombre — 名詞＋の＋名詞](#entry-564)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1518d123a8cd1ab789f536efa60de6b36d02ec51ee8227c85362e306a01861d4",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:29:28.949Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:08:11.565Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:08:11.565Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-sol-3f91c2/10-submit06-claim07.json"
+}
