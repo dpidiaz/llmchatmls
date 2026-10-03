@@ -48,7 +48,7 @@ function desiredApplication(){
     app_launcher_visible:false,
     destinations:[
       {type:'public',uri:HOST+'/runner.html'},
-      {type:'public',uri:HOST+'/api/unified-runner/*'}
+      {type:'public',uri:HOST+'/api/unified-runner/browser/*'}
     ]
   };
 }
@@ -69,7 +69,7 @@ async function main(){
   const account=await findAccount();
   const appsResult=await cf('/accounts/'+encodeURIComponent(account.id)+'/access/apps?per_page=100');
   const apps=Array.isArray(appsResult)?appsResult:[];
-  const runnerUri=HOST+'/runner.html',apiUri=HOST+'/api/unified-runner/*';
+  const runnerUri=HOST+'/runner.html',apiUri=HOST+'/api/unified-runner/browser/*';
   let app=apps.find(x=>String(x.name||'')===APP_NAME);
   if(!app) app=apps.find(x=>{const u=destinationUris(x);return u.has(runnerUri)||u.has(apiUri)});
   if(CHECK_ONLY){

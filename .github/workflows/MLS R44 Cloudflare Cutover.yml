@@ -68,6 +68,8 @@ jobs:
       - name: Verify MLS Unified Access protection
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
         run: |
           set -euo pipefail
           base='https://llmchatmls.dpidiaz.workers.dev'
@@ -82,8 +84,15 @@ jobs:
             esac
           }
           check_protected '/runner.html' GET
-          check_protected '/api/unified-runner/status' POST
+          check_protected '/api/unified-runner/browser/status' POST
           echo 'MLS_UNIFIED_ACCESS_PROTECTED'
+          machine_code="$(curl -sS -o "$RUNNER_TEMP/unified-machine-status.json" -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
+            -H 'Content-Type: application/json' \
+            --data '{}' "$base/api/unified-runner/status")"
+          test "$machine_code" = "200"
+          grep -q '"ok":true' "$RUNNER_TEMP/unified-machine-status.json"
+          echo 'MLS_UNIFIED_MACHINE_BEARER_OK'
 
       - name: Bootstrap D1 and verify R44
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
