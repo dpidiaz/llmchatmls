@@ -16,7 +16,7 @@ test('R4.1 Issue writer and allocator remain in the same serialized critical sec
   assert.match(scheduler,/workflow_dispatch:/);
   assert.match(sync,/types:\s*\[opened\]/);
   assert.match(sync,/github\.event\.issue\.author_association/);
-  assert.doesNotMatch(scheduler,/github\.event\.issue\.author_association/);
+  assert.match(scheduler,/github\.event\.issue\.author_association/);
   assert.match(sync,/ref:\s*main/);
   assert.doesNotMatch(sync,/pull_request:|\b(push|schedule):/);
   assert.match(sync,/workflow_dispatch:\s*\n\s*inputs:\s*\n\s*request_issue:/);
