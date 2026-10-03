@@ -1,0 +1,57 @@
+'use strict';
+
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const child=require('node:child_process');
+
+test('Unified web orchestrator advances through canonical Dispatcher instead of direct GitHub writes',()=>{
+  const source=fs.readFileSync('scripts/MLS unified web runner.cjs','utf8');
+  assert.match(source,/mls-unified-web-integration/);
+  assert.match(source,/mls-unified-web-r33/);
+  assert.match(source,/unified\.createClaim/);
+  assert.match(source,/MLS Global Dispatcher Scheduler\.yml/);
+  assert.match(source,/MLS_GLOBAL_DISPATCH_EVENT/);
+  assert.match(source,/MLS_UNIFIED_R33_EVIDENCE_SUBMIT/);
+  assert.match(source,/MLS_UNIFIED_R33_INTEGRATION_EXECUTE/);
+  assert.match(source,/\/api\/unified-runner\/r33-evidence/);
+  assert.match(source,/\/api\/unified-runner\/report/);
+  assert.match(source,/REVIEW_REQUIRED/);
+  assert.match(source,/pauseRunner:true/);
+  assert.doesNotMatch(source,/\/contents\/.*method:'PUT'/);
+  child.execFileSync(process.execPath,['--check','scripts/MLS unified web runner.cjs'],{stdio:'pipe'});
+  child.execFileSync(process.execPath,['--check','scripts/unified runner r33 runtime.js'],{stdio:'pipe'});
+});
+
+test('Web runner is page-controlled, recurring, and re-enters after canonical workflows finish',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified Web Runner.yml','utf8');
+  assert.match(workflow,/schedule:/);
+  assert.match(workflow,/cron: '\*\/5 \* \* \* \*'/);
+  assert.match(workflow,/workflow_run:/);
+  assert.match(workflow,/MLS Global Dispatcher Scheduler/);
+  assert.match(workflow,/MLS Unified R33 Evidence Submit/);
+  assert.match(workflow,/MLS Unified R33 Integration Execute/);
+  assert.match(workflow,/MLS_EDITORIAL_CHAT_KEY/);
+  assert.match(workflow,/actions: write/);
+});
+
+test('Bot submissions remain fenced and use explicit workflow_dispatch, not recursive comment events',()=>{
+  const evidence=fs.readFileSync('scripts/MLS unified r33 evidence submit.cjs','utf8');
+  const evidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  const integration=fs.readFileSync('scripts/MLS unified r33 integration execute.cjs','utf8');
+  const integrationWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Integration Execute.yml','utf8');
+  assert.match(evidence,/botAuthorized=login==='github-actions\[bot\]'/);
+  assert.match(evidence,/state\.workerLogin===login/);
+  assert.match(evidence,/content:validated\.content/);
+  assert.match(evidence,/UNIFIED_EVIDENCE_CONTENT_CODE_MISMATCH/);
+  assert.match(evidenceWorkflow,/workflow_dispatch:/);
+  assert.match(evidenceWorkflow,/MLS_UNIFIED_ISSUE_NUMBER/);
+  assert.match(evidenceWorkflow,/CONTENT_PATH/);
+  assert.match(evidenceWorkflow,/git add -- "\$EVIDENCE_PATH" "\$CONTENT_PATH"/);
+  assert.match(integration,/botAuthorized=login==='github-actions\[bot\]'/);
+  assert.match(integration,/state\.workerLogin===login/);
+  assert.match(integrationWorkflow,/workflow_dispatch:/);
+  assert.match(integrationWorkflow,/actions: write/);
+  child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence submit.cjs'],{stdio:'pipe'});
+  child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 integration execute.cjs'],{stdio:'pipe'});
+});
