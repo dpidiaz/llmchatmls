@@ -1,0 +1,271 @@
+{
+  "batchId": "r44-1254-five-checkpoints-rebind-sol-jd-b1",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-e1a6cc01-7fe4-4df4-9fd1-9463b2c763a2"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-e1a6cc01-7fe4-4df4-9fd1-9463b2c763a2",
+        "ticketId": "R44-CORPUS-1254",
+        "leaseGeneration": 2,
+        "idempotencyKey": "R44-CORPUS-1254:MLS-V08-0447:sol-jd-b1-v1",
+        "entry": {
+          "code": "MLS-V08-0447",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### En pocas palabras\n\nEl sufijo `-는` forma una expresión adnominal con muchos **verbos de acción** y permite que la acción modifique directamente a un sustantivo. En español suele corresponder a una oración relativa, como «el amigo **que vive** en Corea». En este uso puede describir una acción presente, en desarrollo o habitual, según el contexto.\n\n#### Cómo funciona\n\nLa forma básica es **tema verbal + -는 + sustantivo**. Sin embargo, la combinación puede producir cambios de forma regulares. En particular, si el tema termina en **ㄹ**, ese **ㄹ** desaparece delante de `-는`: **살다 → 살- → 사는**, no *살는*.\n\n**Estructura general:**\n[forma adnominal verbal con -는] + sustantivo\n\nEl bloque completo funciona como modificador del sustantivo que sigue.\n\n#### Ejemplos\n\n1. **한국에 사는 친구**\n   * **Traducción:** Un amigo que vive en Corea.\n   * **Análisis:** `살다` «vivir» pierde la consonante final **ㄹ** ante `-는`: **살- + -는 → 사는**.\n\n2. **지금 책을 읽는 학생**\n   * **Traducción:** El estudiante que está leyendo un libro ahora.\n   * **Análisis:** `읽다` «leer» forma **읽는** y la expresión modifica a `학생` «estudiante».\n\n3. **매일 운동하는 사람**\n   * **Traducción:** Una persona que hace ejercicio todos los días.\n   * **Análisis:** `운동하다` forma **운동하는**; aquí el contexto da una lectura habitual.\n\n#### Observación importante\n\nCon los **verbos descriptivos/adjetivos**, la modificación nominal presente se forma normalmente con `-(으)ㄴ`, como **작다 → 작은** «pequeño» o **예쁘다 → 예쁜** «bonito». Por eso no conviene aplicar mecánicamente `-는` a todos los predicados.\n\nHay, sin embargo, formas descriptivas cuyo paradigma debe aprenderse específicamente. Por ejemplo, **있다** es un adjetivo en el diccionario y presenta la forma adnominal **있는**. La distinción útil para el estudiante es, por tanto, «`-는` como patrón central de los verbos de acción» frente a «`-(으)ㄴ` como patrón central de los descriptivos», sin convertirla en una regla sin excepciones.\n\n#### Entradas relacionadas\n\n* [Entrada 446: Futuro/hipotético -(으)ㄹ + N](#entry-446)\n* [Entrada 445: Adjetivo presente -(으)ㄴ + N](#entry-445)\n* [Entrada 448: Relativa de lugar](#entry-448)\n* [Entrada 449: Relativa de objeto](#entry-449)"
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "Se corrigió la regla de formación de -는: los temas terminados en ㄹ pierden esa consonante ante -는 (살다 → 사는), y se matizó la oposición con verbos descriptivos para no presentarla como absoluta, ya que formas como 있다 → 있는 son normativas.",
+            "changes": [
+              "Se añadió explícitamente la caída de ㄹ ante -는 y se corrigió el análisis de 살다 → 사는.",
+              "Se sustituyó la regla absoluta sobre verbos descriptivos por una formulación general con excepciones léxicas como 있다 → 있는."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "-는 convierte una cláusula verbal en modificador adnominal y expresa típicamente acción presente o habitual.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Los temas verbales terminados en ㄹ pierden ㄹ delante de -는; por eso 살다 forma 사는.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Los adjetivos suelen usar -(으)ㄴ en presente, pero 있다 presenta la forma adnominal 있는.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "National Institute of Korean Language. (s. f.). «-는²». Korean Basic Dictionary.",
+              "url": "https://krdict.korean.go.kr/eng/dicMarinerSearch/search?mainSearchWord=-%EB%8A%94",
+              "role": "Define -는 como terminación que convierte la expresión precedente en modificador adnominal y marca acción presente."
+            },
+            {
+              "citation": "National Institute of Korean Language. (2026, 27 de abril). «어간의 ㄹ 탈락에서 뒤에 관형사형 어미가 올 때». 온라인가나다.",
+              "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=261&pageIndex=1&qna_seq=330143",
+              "role": "Confirma que ㄹ se elimina ante -는 y da 살다 → 사는."
+            },
+            {
+              "citation": "National Institute of Korean Language. (s. f.). «있다²». Korean Basic Dictionary.",
+              "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=68797&nation=eng",
+              "role": "Registra 있다 como adjetivo y su forma de aplicación 있는."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-e1a6cc01-7fe4-4df4-9fd1-9463b2c763a2",
+        "ticketId": "R44-CORPUS-1254",
+        "leaseGeneration": 2,
+        "idempotencyKey": "R44-CORPUS-1254:MLS-V08-0449:sol-jd-b1-v1",
+        "entry": {
+          "code": "MLS-V08-0449",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada describe correctamente una relativa de objeto: la cláusula precede al nombre, el núcleo nominal corresponde al objeto entendido de la cláusula y su función en la oración principal se marca sobre el grupo nominal completo. Los contrastes 읽은/보는/읽을 son coherentes con las formas adnominales.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "Las cláusulas adnominales coreanas preceden al sustantivo que modifican.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "En una relativa de relación puede quedar sin expresión interna un argumento recuperado por el sustantivo modificado, incluido un objeto.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Las formas -ㄴ/-은, -는 y -ㄹ/-을 distinguen valores pasados/completados, presentes y prospectivos en la modificación verbal.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "National Institute of Korean Language. (2025). «2025년 한국어 구조 분석 및 무형 대용어 복원 말뭉치 구축 연구 결과보고서».",
+              "url": "https://www.korean.go.kr/common/download.do?c_file_name=35c6ff74-7598-438d-ab4c-a7d91a5908d9.pdf&file_path=reportData",
+              "role": "Documenta la recuperación de argumentos omitidos en 관계 관형절 y distingue sujeto/objeto mediante sus marcadores."
+            },
+            {
+              "citation": "National Institute of Korean Language. (s. f.). «-ㄴ³». Korean Basic Dictionary.",
+              "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=78634",
+              "role": "Documenta -ㄴ como terminación adnominal para acciones pasadas o completadas."
+            },
+            {
+              "citation": "National Institute of Korean Language. (s. f.). «-는²». Korean Basic Dictionary.",
+              "url": "https://krdict.korean.go.kr/eng/dicMarinerSearch/search?mainSearchWord=-%EB%8A%94",
+              "role": "Documenta -는 como terminación adnominal para acciones presentes."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-e1a6cc01-7fe4-4df4-9fd1-9463b2c763a2",
+        "ticketId": "R44-CORPUS-1254",
+        "leaseGeneration": 2,
+        "idempotencyKey": "R44-CORPUS-1254:MLS-V08-0450:sol-jd-b1-v1",
+        "entry": {
+          "code": "MLS-V08-0450",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La explicación de la relativa de sujeto es correcta: el núcleo nominal puede corresponder al sujeto no expresado dentro de la cláusula adnominal, mientras su función y partícula en la oración principal son independientes. Los ejemplos 책을 읽는 학생, 어제 온 사람 y 내일 발표할 학생 son adecuados.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "Una 관계 관형절 puede contener un argumento sujeto omitido que se recupera mediante el sustantivo modificado.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La cláusula adnominal precede al nombre que modifica.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La función del grupo nominal en la oración principal puede diferir de la función recuperada dentro de la relativa.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "National Institute of Korean Language. (2025). «2025년 한국어 구조 분석 및 무형 대용어 복원 말뭉치 구축 연구 결과보고서».",
+              "url": "https://www.korean.go.kr/common/download.do?c_file_name=35c6ff74-7598-438d-ab4c-a7d91a5908d9.pdf&file_path=reportData",
+              "role": "Describe la recuperación de sujetos, objetos y otros argumentos omitidos y su correferencia con el 피수식어 de las 관계 관형절."
+            },
+            {
+              "citation": "National Institute of Korean Language. (2020). «구문 및 무형 대용어 복원 말뭉치 연구 분석».",
+              "url": "https://www.korean.go.kr/common/download.do?c_file_name=d0d8ab58-23ac-41ce-9bd5-405970002d1c.pdf&file_path=reportData",
+              "role": "Identifica ejemplos como 내가 좋아하는 꽃은 들국화다 como 관계 관형절 y analiza la función modificadora de la cláusula."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-e1a6cc01-7fe4-4df4-9fd1-9463b2c763a2",
+        "ticketId": "R44-CORPUS-1254",
+        "leaseGeneration": 2,
+        "idempotencyKey": "R44-CORPUS-1254:MLS-V08-0451:sol-jd-b1-v1",
+        "entry": {
+          "code": "MLS-V08-0451",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada caracteriza correctamente la relativa coreana como cláusula prenominal: el modificador aparece antes del nombre y la relación con el núcleo se interpreta sin necesitar un pronombre relativo productivo equivalente a «que/quien». Los ejemplos de sujeto, objeto y lugar son compatibles con el análisis de 관계 관형절.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "En coreano la cláusula relativa/adnominal se sitúa antes del sustantivo modificado.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Las 관계 관형절 permiten recuperar un argumento no expresado a partir del sustantivo modificado, sin requerir un pronombre relativo independiente.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "National Institute of Korean Language. (2006). «알면 쉬워지는 우리말». 새국어생활.",
+              "url": "https://www.korean.go.kr/nkview/nklife/2006_1/2006_0113.pdf",
+              "role": "Explica que los modificadores coreanos preceden al elemento modificado y ejemplifica 내가 읽은 책 frente al orden posnominal de lenguas europeas."
+            },
+            {
+              "citation": "National Institute of Korean Language. (2025). «2025년 한국어 구조 분석 및 무형 대용어 복원 말뭉치 구축 연구 결과보고서».",
+              "url": "https://www.korean.go.kr/common/download.do?c_file_name=35c6ff74-7598-438d-ab4c-a7d91a5908d9.pdf&file_path=reportData",
+              "role": "Documenta explícitamente la recuperación de elementos omitidos en 관계 관형절 a partir del 피수식어."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-e1a6cc01-7fe4-4df4-9fd1-9463b2c763a2",
+        "ticketId": "R44-CORPUS-1254",
+        "leaseGeneration": 2,
+        "idempotencyKey": "R44-CORPUS-1254:MLS-V08-0452:sol-jd-b1-v1",
+        "entry": {
+          "code": "MLS-V08-0452",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada explica correctamente 밖에 como partícula restrictiva equivalente a «excepto/solo» que exige después una expresión negativa o interrogativa. Los ejemplos con 없다, 안 y 못 son normativos y el contraste con 만, que admite predicados afirmativos o negativos, está bien establecido.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "밖에 significa aproximadamente «excepto eso / aparte de eso» y se combina obligatoriamente con una expresión negativa o una interrogativa.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "En el uso restrictivo, 밖에 aparece naturalmente con 없다, 안 V y 못 V.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "만 puede combinarse con afirmación o negación, mientras 밖에 exige negación en este patrón.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "National Institute of Korean Language. (s. f.). «밖에». Korean Basic Dictionary.",
+              "url": "https://krdict.korean.go.kr/m/eng/searchResultView?ParaWordNo=70070&currentPage=1&mainSearchWord=%EB%B0%96&nation=eng&nationCode=6&searchType=W",
+              "role": "Define 밖에 y señala expresamente que debe ir seguido de una expresión negativa o interrogativa; incluye ejemplos con 못 y 없다."
+            },
+            {
+              "citation": "National Institute of Korean Language. (2024, 5 de diciembre). «조사 '-만'과 '-밖에'의 사용». 온라인가나다 / 한국어 교수 학습 센터.",
+              "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&qna_seq=307180",
+              "role": "Contrasta 밖에 con 만: 밖에 exige negación y 만 admite tanto afirmación como negación."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44RebindChat",
+      "input": {
+        "workerId": "r44-chat-20261003T0357Z-sol-jd-5fresh-b1",
+        "ticketId": "R44-CORPUS-1254"
+      }
+    }
+  ]
+}
