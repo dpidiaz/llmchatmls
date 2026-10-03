@@ -1,0 +1,158 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-next-20261002T2122-sol-jd-r44next-01-renew-submit",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-13a31dc2-2d89-497d-926e-c70d5390c086",
+          "ticketId": "R44-CORPUS-1277",
+          "leaseExpiresAt": 1790998509491
+        },
+        "completedAt": "2026-10-03T03:30:09.682Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1277",
+          "sha256": "e95435368675801caece36fff1d22a11835db6b507909a42f8230c85f7110b11",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1277",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6314d7e2-796d-4fa5-8ab5-4b4376007b4b",
+                "ticketId": "R44-CORPUS-1277",
+                "code": "MLS-V08-0583",
+                "idempotencyKey": "R44-CORPUS-1277:MLS-V08-0583:legacy-v1",
+                "workerId": "chat-r44-next-20261002T2122-sol-jd-r44next-01",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ff9c7d4ea986c98d383dfa7cef06249a22436bb8bf4c0cbe3e0b703cc58cf897",
+                "sourceSha256": "f57c22904686ad76053eaae45089502e37b7d4e676c0c5a0dc9347f6566c1c71",
+                "committedMs": 1790998210290,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "00b3ba679ed7408e69d59a99ccc8675b9fd24d05f6c1a56261b4f445efef8140",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1277",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "77efc622-cc46-47de-b2b1-c4f32728ee47",
+                "ticketId": "R44-CORPUS-1277",
+                "code": "MLS-V08-0584",
+                "idempotencyKey": "R44-CORPUS-1277:MLS-V08-0584:legacy-v1",
+                "workerId": "chat-r44-next-20261002T2122-sol-jd-r44next-01",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d74c6c9b9a62b7ecf86c168aec3d0fb1225e6fe6e390609e528b70c0bd706eca",
+                "sourceSha256": "2a519d46d4d1f6eb3d31cc4c38081a69349b16bb963c2172c790d69ac99a14da",
+                "committedMs": 1790998210615,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7d537d81dd3df4bec6478365e78adc15b93529215cf4cdd003db2384880c5110",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1277",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "bc0b501b-8b0f-41ee-8193-c6fabf40cf32",
+                "ticketId": "R44-CORPUS-1277",
+                "code": "MLS-V08-0586",
+                "idempotencyKey": "R44-CORPUS-1277:MLS-V08-0586:legacy-v1",
+                "workerId": "chat-r44-next-20261002T2122-sol-jd-r44next-01",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1c149fb7bf7fa68744a1d8e828da0629c7ce1e74839b6942cd82e0e30e48fcda",
+                "sourceSha256": "db4a0eda6317738a0c67a7e0998f125128ee7c9963f6f0df737474f11393d3da",
+                "committedMs": 1790998210944,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "08a3d12d86c06d97d4aa0d06e9d075533268a72f466874dba63b53ba76b5b494",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1277",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1b21c1c5-760e-4a1c-a202-47a0dfbda5d1",
+                "ticketId": "R44-CORPUS-1277",
+                "code": "MLS-V08-0587",
+                "idempotencyKey": "R44-CORPUS-1277:MLS-V08-0587:legacy-v1",
+                "workerId": "chat-r44-next-20261002T2122-sol-jd-r44next-01",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a8896685b84cefa91fa1d0e0d7c21cde8d63571d40a817548e72766281c1b18f",
+                "sourceSha256": "28639e3c860183c9605f19fc767c7853fe2a5355d7bee89e7bc15c2e194be6c6",
+                "committedMs": 1790998211274,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "837ab392bad6304bc5cf6ec03faabded9ff83e806f5b96725bf25e7acd636f9a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1277",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "9d3ed081-682e-4755-a8d2-b726da5827eb",
+                "ticketId": "R44-CORPUS-1277",
+                "code": "MLS-V08-0588",
+                "idempotencyKey": "R44-CORPUS-1277:MLS-V08-0588:legacy-v1",
+                "workerId": "chat-r44-next-20261002T2122-sol-jd-r44next-01",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7747d10a5b7725b8a291c93a74bd81de32381c9f880617614980c954bf957b97",
+                "sourceSha256": "575bea42677219bb9542f4ae1f71e6b58ee0d8552b787998ee399c2c55b5f21a",
+                "committedMs": 1790998211593,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "34132cd7c3ec9ab32474743b6c96b409485878d21c8ab7499fefee26189fe01a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-13a31dc2-2d89-497d-926e-c70d5390c086",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "e95435368675801caece36fff1d22a11835db6b507909a42f8230c85f7110b11"
+          }
+        },
+        "completedAt": "2026-10-03T03:30:12.078Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:30:12.078Z",
+  "commandFile": "mls chat bridge/commands/000-000-000-000-r44-sol-jd-20261002T2122/02-renew-submit.json"
+}
