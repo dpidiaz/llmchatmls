@@ -1,0 +1,21 @@
+name: Diagnose R44 Production Status
+on:
+  push:
+    branches:
+      - diag/r44-status-500
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read production R44 status response
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://llmchatmls.dpidiaz.workers.dev/api/r44/status'
+          code="$(curl -sS -D "$RUNNER_TEMP/headers.txt" -o "$RUNNER_TEMP/body.txt" -w '%{http_code}' "$url")"
+          echo "HTTP_STATUS=$code"
+          sed -n '1,40p' "$RUNNER_TEMP/headers.txt"
+          echo '--- BODY ---'
+          cat "$RUNNER_TEMP/body.txt"
