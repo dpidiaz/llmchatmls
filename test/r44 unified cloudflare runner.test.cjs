@@ -53,6 +53,23 @@ test('Unified Cloudflare runner injects one syntactically valid scheduled contro
   checkJs(built,'.mjs');
 });
 
+test('Unified runner uses Cloudflare Access with no browser secret',()=>{
+  const runtime=fs.readFileSync(path.join(root,'scripts','r44 runtime.js'),'utf8');
+  const r33=fs.readFileSync(path.join(root,'scripts','unified runner r33 runtime.js'),'utf8');
+  const setup=fs.readFileSync(path.join(root,'scripts','configurar unified access.cjs'),'utf8');
+  const workflow=fs.readFileSync(path.join(root,'.github','workflows','MLS R44 Cloudflare Cutover.yml'),'utf8');
+  assert.match(runtime,/ctx && ctx\.access/);
+  assert.match(runtime,/ctx\.access\.getIdentity\(\)/);
+  assert.match(runtime,/UNIFIED_RUNNER_ACCESS_REQUIRED/);
+  assert.match(r33,/unifiedRunnerAuthorize\(request,env,ctx\)/);
+  assert.match(setup,/cloudflare_account_member/);
+  assert.match(setup,/\/runner\.html/);
+  assert.match(setup,/\/api\/unified-runner\/\*/);
+  assert.match(workflow,/Configure MLS Unified Cloudflare Access/);
+  assert.match(workflow,/MLS_UNIFIED_ACCESS_PROTECTED/);
+  child.execFileSync(process.execPath,['--check',path.join(root,'scripts','configurar unified access.cjs')],{stdio:'pipe'});
+});
+
 test('Unified runner page preserves corpus runner and parses all inline scripts',()=>{
   const html=fs.readFileSync(path.join(root,'public','runner.html'),'utf8');
   assert.match(html,/id="corpusPanel"/);
