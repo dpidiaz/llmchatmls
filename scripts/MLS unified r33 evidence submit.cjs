@@ -96,7 +96,24 @@ function apply(){
   fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+String.fromCharCode(10));
   process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath})+'\n');
 }
-async function checkpoint(){
+function syntheticEventPath(kind){
+  return path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-'+kind+'-event.json');
+}
+function writeSyntheticEvent(kind,issueNumber,commentBody,commentId){
+  const eventPath=syntheticEventPath(kind);
+  fs.writeFileSync(eventPath,JSON.stringify({
+    issue:{number:Number(issueNumber)},
+    comment:{
+      id:Number(commentId),
+      body:commentBody,
+      created_at:new Date().toISOString(),
+      user:{login:'github-actions[bot]'}
+    }
+  },null,2)+String.fromCharCode(10));
+  appendOutput('event_path',eventPath);
+  return eventPath;
+}
+async function checkpointEvent(){
   const bundlePath=process.argv[3];
   const commitSha=String(process.argv[4]||'').toLowerCase();
   const runId=Number(process.argv[5]||0);
@@ -124,19 +141,50 @@ async function checkpoint(){
     validation:{status:'passed',workflow:'MLS Unified R33 Evidence Submit',runId},
     completedUnits:completed,
     pendingUnits:pending,
-    notes:'Unified auto-checkpoint after canonical preflight and R33 tests.'
+    notes:'Unified inline auto-checkpoint after canonical preflight and R33 tests.'
   };
-  const comment='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId})+'\\n-->\\n\\n'+
-    '<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
-  await gh('/repos/'+repository+'/issues/'+Number(bundle.issueNumber)+'/comments',{method:'POST',body:{body:comment}});
-  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,commitSha,completedUnits:completed,pendingUnits:pending})+String.fromCharCode(10));
+  const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'checkpoint'})+'\\n-->';
+  const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
+  const eventPath=writeSyntheticEvent('checkpoint',bundle.issueNumber,body,runId*10+1);
+  process.stdout.write(JSON.stringify({ok:true,eventPath,code:bundle.code,commitSha,completedUnits:completed,pendingUnits:pending})+String.fromCharCode(10));
 }
-
+async function finishEvent(){
+  const bundlePath=process.argv[3];
+  const commitSha=String(process.argv[4]||'').toLowerCase();
+  const runId=Number(process.argv[5]||0);
+  if(!bundlePath||!/^[a-f0-9]{40}$/.test(commitSha)||!Number.isInteger(runId)||runId<1)fail('UNIFIED_EVIDENCE_FINISH_ARGS');
+  const bundle=JSON.parse(fs.readFileSync(bundlePath,'utf8'));
+  const {repository}=githubContext();
+  const issue=await gh('/repos/'+repository+'/issues/'+Number(bundle.issueNumber));
+  const state=core.parseAssignmentState(issue?.body||'');
+  if(!state||state.status!=='leased'||state.assignmentId!==bundle.assignmentId||Number(state.leaseEpoch)!==Number(bundle.leaseEpoch))
+    fail('UNIFIED_EVIDENCE_FINISH_STATE_MISMATCH');
+  const last=(state.checkpoints||[]).at(-1);
+  const pending=last?.pendingUnits||[];
+  if(String(state.lastCheckpointCommit||'').toLowerCase()!==commitSha||pending.length){
+    appendOutput('finish_needed','false');
+    process.stdout.write(JSON.stringify({ok:true,finishNeeded:false,pendingUnits:pending})+String.fromCharCode(10));
+    return;
+  }
+  const event={
+    operation:'finish',
+    assignmentId:state.assignmentId,
+    leaseToken:state.leaseToken,
+    leaseEpoch:state.leaseEpoch,
+    commitSha
+  };
+  const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'finish'})+'\\n-->';
+  const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
+  const eventPath=writeSyntheticEvent('finish',bundle.issueNumber,body,runId*10+2);
+  appendOutput('finish_needed','true');
+  process.stdout.write(JSON.stringify({ok:true,finishNeeded:true,eventPath,commitSha})+String.fromCharCode(10));
+}
 async function main(){
   const mode=String(process.argv[2]||'');
   if(mode==='prepare')return prepare();
   if(mode==='apply')return apply();
-  if(mode==='checkpoint')return checkpoint();
+  if(mode==='checkpoint-event')return checkpointEvent();
+  if(mode==='finish-event')return finishEvent();
   fail('UNIFIED_EVIDENCE_MODE_INVALID');
 }
 if(require.main===module)main().catch(error=>{console.error(error.code||'UNIFIED_EVIDENCE_SUBMIT_ERROR',error.message);process.exitCode=2});

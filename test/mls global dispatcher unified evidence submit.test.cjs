@@ -52,8 +52,8 @@ test('Unified auto-checkpoint remains fenced to bot, assignment and branch head'
   const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
   const workerWorkflow=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
   assert.match(workflow,/issues: write/);
-  assert.match(workflow,/checkpoint "\$BUNDLE_PATH" "\$COMMIT_SHA" "\$GITHUB_RUN_ID"/);
-  assert.ok(workflow.indexOf('git push origin')<workflow.indexOf('Publish fenced durable checkpoint'));
+  assert.match(workflow,/checkpoint-event "\$BUNDLE_PATH" "\$COMMIT_SHA" "\$GITHUB_RUN_ID"/);
+  assert.ok(workflow.indexOf('git push origin')<workflow.indexOf('Prepare fenced durable checkpoint event'));
   assert.match(submit,/UNIFIED_EVIDENCE_CHECKPOINT_STATE_MISMATCH/);
   assert.match(submit,/UNIFIED_EVIDENCE_CHECKPOINT_HEAD_MISMATCH/);
   assert.match(submit,/MLS_UNIFIED_R33_AUTOCHECKPOINT/);
@@ -62,4 +62,27 @@ test('Unified auto-checkpoint remains fenced to bot, assignment and branch head'
   assert.match(worker,/MLS_UNIFIED_R33_AUTOCHECKPOINT/);
   assert.match(worker,/state\.provider==='r33-farm'/);
   assert.match(workerWorkflow,/contains\(github\.event\.comment\.body, 'MLS_GLOBAL_DISPATCH_EVENT'\)/);
+});
+
+
+test('Unified Evidence workflow applies checkpoint and finish through canonical Worker Events handler inline',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  const submit=fs.readFileSync('scripts/MLS unified r33 evidence submit.cjs','utf8');
+  assert.match(workflow,/actions: write/);
+  assert.match(workflow,/git checkout --detach origin\/main/);
+  assert.match(workflow,/node 'scripts\/MLS global dispatcher worker\.cjs'/);
+  assert.match(workflow,/finish-event "\$BUNDLE_PATH" "\$COMMIT_SHA" "\$GITHUB_RUN_ID"/);
+  assert.match(workflow,/finish_needed == 'true'/);
+  assert.match(submit,/function writeSyntheticEvent/);
+  assert.match(submit,/checkpointEvent/);
+  assert.match(submit,/finishEvent/);
+  assert.match(submit,/UNIFIED_EVIDENCE_FINISH_STATE_MISMATCH/);
+  assert.doesNotMatch(submit,/issues\/.*\/comments.*method:'POST'/);
+});
+
+test('Unified Evidence submit supports idempotent preflight replay without a second commit',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  assert.match(workflow,/no_change=true/);
+  assert.match(workflow,/NO_CHANGE:/);
+  assert.match(workflow,/if \[ "\$NO_CHANGE" != "true" \]/);
 });

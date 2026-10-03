@@ -8,6 +8,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: write
 
 concurrency:
   group: mls-unified-r33-evidence-${{ github.event.issue.number }}
@@ -46,6 +47,7 @@ jobs:
           git fetch --no-tags origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
           git checkout -B unified-evidence-submit "refs/remotes/origin/$BRANCH"
       - name: Apply draft and run canonical preflight before commit
+        id: stage
         env:
           EVIDENCE_PATH: ${{ steps.prep.outputs.evidence_path }}
           BUNDLE_PATH: ${{ steps.prep.outputs.bundle_path }}
@@ -55,7 +57,11 @@ jobs:
           node scripts/R4-evidence-preflight.cjs "$EVIDENCE_PATH"
           git add -- "$EVIDENCE_PATH"
           mapfile -t staged < <(git diff --cached --name-only)
-          if [ "${#staged[@]}" -ne 1 ] || [ "${staged[0]}" != "$EVIDENCE_PATH" ]; then
+          if [ "${#staged[@]}" -eq 0 ]; then
+            echo "no_change=true" >> "$GITHUB_OUTPUT"
+          elif [ "${#staged[@]}" -eq 1 ] && [ "${staged[0]}" = "$EVIDENCE_PATH" ]; then
+            echo "no_change=false" >> "$GITHUB_OUTPUT"
+          else
             printf 'Unexpected staged paths: %s\n' "${staged[*]}" >&2
             exit 1
           fi
@@ -63,11 +69,14 @@ jobs:
         id: commit
         env:
           CODE: ${{ steps.prep.outputs.code }}
+          NO_CHANGE: ${{ steps.stage.outputs.no_change }}
         shell: bash
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "r33(unified): verify $CODE"
+          if [ "$NO_CHANGE" != "true" ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m "r33(unified): verify $CODE"
+          fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Validate committed R33 Evidence
         shell: bash
@@ -80,11 +89,37 @@ jobs:
         run: |
           git push origin "HEAD:refs/heads/$BRANCH"
           echo "MLS_UNIFIED_R33_EVIDENCE_COMMIT ${{ steps.commit.outputs.sha }}"
-      - name: Publish fenced durable checkpoint
+      - name: Prepare fenced durable checkpoint event
+        id: checkpoint
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BUNDLE_PATH: ${{ steps.prep.outputs.bundle_path }}
           COMMIT_SHA: ${{ steps.commit.outputs.sha }}
         shell: bash
         run: |
-          node "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" checkpoint "$BUNDLE_PATH" "$COMMIT_SHA" "$GITHUB_RUN_ID"
+          node "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" checkpoint-event "$BUNDLE_PATH" "$COMMIT_SHA" "$GITHUB_RUN_ID"
+      - name: Apply checkpoint through canonical Worker Events handler
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ steps.checkpoint.outputs.event_path }}
+        shell: bash
+        run: |
+          git fetch --no-tags origin main
+          git checkout --detach origin/main
+          node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Prepare finish event when microclaim is complete
+        id: finish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUNDLE_PATH: ${{ steps.prep.outputs.bundle_path }}
+          COMMIT_SHA: ${{ steps.commit.outputs.sha }}
+        shell: bash
+        run: |
+          node 'scripts/MLS unified r33 evidence submit.cjs' finish-event "$BUNDLE_PATH" "$COMMIT_SHA" "$GITHUB_RUN_ID"
+      - name: Finish completed Unified microclaim through canonical handler
+        if: ${{ steps.finish.outputs.finish_needed == 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
+        shell: bash
+        run: node 'scripts/MLS global dispatcher worker.cjs'
