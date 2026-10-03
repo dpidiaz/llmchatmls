@@ -1,0 +1,82 @@
+name: MLS Unified R33 Evidence Submit
+
+on:
+  issue_comment:
+    types:
+      - created
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: mls-unified-r33-evidence-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    if: >-
+      ${{ startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') &&
+          contains(github.event.comment.body, 'MLS_UNIFIED_R33_EVIDENCE_SUBMIT') &&
+          (github.event.comment.author_association == 'OWNER' ||
+           github.event.comment.author_association == 'MEMBER' ||
+           github.event.comment.author_association == 'COLLABORATOR') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate authorized Unified Evidence submission
+        id: prep
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          cp 'scripts/MLS unified r33 evidence submit.cjs' "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs"
+          node "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" prepare
+      - name: Checkout exact assignment branch
+        env:
+          BRANCH: ${{ steps.prep.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch --no-tags origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+          git checkout -B unified-evidence-submit "refs/remotes/origin/$BRANCH"
+      - name: Apply draft and run canonical preflight before commit
+        env:
+          EVIDENCE_PATH: ${{ steps.prep.outputs.evidence_path }}
+          BUNDLE_PATH: ${{ steps.prep.outputs.bundle_path }}
+        shell: bash
+        run: |
+          node "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" apply "$BUNDLE_PATH"
+          node scripts/R4-evidence-preflight.cjs "$EVIDENCE_PATH"
+          git add -- "$EVIDENCE_PATH"
+          mapfile -t staged < <(git diff --cached --name-only)
+          if [ "${#staged[@]}" -ne 1 ] || [ "${staged[0]}" != "$EVIDENCE_PATH" ]; then
+            printf 'Unexpected staged paths: %s\n' "${staged[*]}" >&2
+            exit 1
+          fi
+      - name: Commit preflighted Evidence
+        id: commit
+        env:
+          CODE: ${{ steps.prep.outputs.code }}
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "r33(unified): verify $CODE"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Validate committed R33 Evidence
+        shell: bash
+        run: |
+          node --test 'test/r33 evidence editorial batch.test.cjs' 'test/r33 evidence farm.test.cjs'
+      - name: Publish validated assignment commit
+        env:
+          BRANCH: ${{ steps.prep.outputs.branch }}
+        shell: bash
+        run: |
+          git push origin "HEAD:refs/heads/$BRANCH"
+          echo "MLS_UNIFIED_R33_EVIDENCE_COMMIT ${{ steps.commit.outputs.sha }}"
