@@ -1,0 +1,75 @@
+{
+  "batchId": "r44-chatgpt-20261002T2140-g56s-7c3a9-renew-checkpoint-0233",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-9f185a32-e054-494b-8a8b-1d26b86243a1"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-9f185a32-e054-494b-8a8b-1d26b86243a1",
+        "ticketId": "R43-EMERGENCY-0366",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-20261002-2140-g56s-7c3a9-MLS-V05-0233-pass-v1",
+        "entry": {
+          "code": "MLS-V05-0233",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "R44 audit: la explicación del genitivo con determinantes del tipo ein/kein y posesivos es correcta. En genitivo singular masculino y neutro, y en femenino, los ejemplos con artículo indefinido/kein muestran el adjetivo en -en (p. ej., eines netten Mannes, einer netten Frau); los posesivos siguen el mismo patrón de declinación. También es correcta la distinción entre la terminación adjetival -en y la marca genitiva nominal de masculino/neutro, así como el ejemplo wegen eines starken Regens. No se detectó una corrección necesaria. PASS_NO_CHANGE. La validación canónica R33 permanece pendiente.",
+          "sources": [
+            {
+              "id": "IDS-GRAMMIS-ADJ",
+              "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). Adjektive. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/progr%40mm/6895",
+              "role": "Tabla de declinación con ein/kein: genitivo eines netten Mannes/Kindes, einer netten Frau, keiner netten Leute; indica que los posesivos siguen el mismo patrón."
+            },
+            {
+              "id": "DUDEN-ARTIKELWOERTER",
+              "citation": "Duden. (s. f.). Artikelwörter – da werden selbst Adjektive schwach.",
+              "url": "https://www.duden.de/sprachwissen/sprachratgeber/Artikelw%C3%B6rter-Da-werden-selbst-Adjektive-schwach",
+              "role": "Confirma el comportamiento del adjetivo tras ein, kein y posesivos y las excepciones de terminación fuerte fuera del genitivo."
+            },
+            {
+              "id": "IDS-GRAMMIS-WEGEN",
+              "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). Wegen dem Regen oder wegen des Regens — Dativ oder Genitiv? Grammatik in Fragen und Antworten.",
+              "url": "https://grammis.ids-mannheim.de/fragen/67",
+              "role": "Confirma el uso estándar de wegen con genitivo en ejemplos como wegen des Regens y wegen eines Unfalls."
+            }
+          ],
+          "claims": [
+            {
+              "claim": "Tras ein/kein en genitivo, el adjetivo atributivo lleva -en en masculino, neutro y femenino; los posesivos siguen el mismo patrón.",
+              "assessment": "SUPPORTED",
+              "sourceRefs": [
+                "IDS-GRAMMIS-ADJ",
+                "DUDEN-ARTIKELWOERTER"
+              ]
+            },
+            {
+              "claim": "En masculino y neutro singular, el sustantivo puede llevar además una marca genitiva propia, distinta de la terminación -en del adjetivo.",
+              "assessment": "SUPPORTED",
+              "sourceRefs": [
+                "IDS-GRAMMIS-ADJ"
+              ]
+            },
+            {
+              "claim": "Wegen admite el genitivo estándar, por lo que wegen eines starken Regens es una construcción correcta.",
+              "assessment": "SUPPORTED",
+              "sourceRefs": [
+                "IDS-GRAMMIS-WEGEN"
+              ]
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION",
+            "standard": "R33 evidence-aware editorial review; APA 7-style source metadata",
+            "reviewedOn": "2026-10-02"
+          }
+        }
+      }
+    }
+  ]
+}
