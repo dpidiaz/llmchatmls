@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   worker-event:
-    if: ${{ startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') }}
+    if: ${{ startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') && contains(github.event.comment.body, 'MLS_GLOBAL_DISPATCH_EVENT') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -130,7 +130,11 @@ async function main(){
   let issue=await getIssue(eventIssue.number);
   if(!String(issue.title||'').startsWith('[MLS Dispatcher][LEASED]'))return;
   let state=core.parseAssignmentState(issue.body||'');if(!state)return;
-  if(state.workerLogin&&String(comment.user?.login||'')!==String(state.workerLogin))return;
+  const commentLogin=String(comment.user?.login||'');
+  const trustedUnifiedBot=commentLogin==='github-actions[bot]'&&
+    /<!--\s*MLS_UNIFIED_R33_AUTOCHECKPOINT\b/.test(String(comment.body||''))&&
+    state.provider==='r33-farm'&&String(state.workId||'').startsWith('r33-unified:');
+  if(state.workerLogin&&commentLogin!==String(state.workerLogin)&&!trustedUnifiedBot)return;
   try{
     const workerEvent=core.parseWorkerEvent(comment.body||'');
     core.validateLeaseEvent(state,workerEvent,comment.created_at);
