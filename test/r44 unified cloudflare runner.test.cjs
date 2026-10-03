@@ -59,6 +59,10 @@ test('Unified runner uses Cloudflare Access with no browser secret',()=>{
   const setup=fs.readFileSync(path.join(root,'scripts','configurar unified access.cjs'),'utf8');
   const workflow=fs.readFileSync(path.join(root,'.github','workflows','MLS R44 Cloudflare Cutover.yml'),'utf8');
   assert.match(runtime,/ctx && ctx\.access/);
+  assert.match(runtime,/cf-access-jwt-assertion/);
+  assert.match(runtime,/crypto\.subtle\.verify/);
+  assert.match(runtime,/MLS_UNIFIED_ACCESS_AUD/);
+  assert.match(runtime,/\/cdn-cgi\/access\/certs/);
   assert.match(runtime,/ctx\.access\.getIdentity\(\)/);
   assert.match(runtime,/UNIFIED_RUNNER_ACCESS_REQUIRED/);
   assert.match(runtime,/\/api\/unified-runner\/browser\//);
@@ -66,6 +70,7 @@ test('Unified runner uses Cloudflare Access with no browser secret',()=>{
   assert.match(setup,/cloudflare_account_member/);
   assert.match(setup,/\/runner\.html/);
   assert.match(setup,/\/api\/unified-runner\/browser\/\*/);
+  assert.match(setup,/path_cookie_attribute:false/);
   assert.match(workflow,/Configure MLS Unified Cloudflare Access/);
   assert.match(workflow,/MLS_UNIFIED_ACCESS_PROTECTED/);
   child.execFileSync(process.execPath,['--check',path.join(root,'scripts','configurar unified access.cjs')],{stdio:'pipe'});
@@ -84,6 +89,8 @@ test('Unified runner page preserves corpus runner and parses all inline scripts'
   assert.match(html,/Sesión segura de Cloudflare/);
   assert.match(html,/credentials:'same-origin'/);
   assert.match(html,/\/api\/unified-runner\/browser\//);
+  assert.match(html,/mlsUnifiedAccessRecovery/);
+  assert.match(html,/\/api\/unified-runner\/browser\/session/);
   assert.doesNotMatch(html,/mlsUnifiedRunnerKey|unifiedKey|MLS_EDITORIAL_CHAT_KEY|authorization':'Bearer /);
   assert.doesNotMatch(html,/GITHUB_TOKEN|api\.github\.com/);
   const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(x=>x[1]).filter(Boolean);

@@ -522,6 +522,47 @@ async function unifiedRunnerRead(env) {
   await unifiedRunnerEnsure(env);
   return env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner WHERE id=1").first();
 }
+var MLS_UNIFIED_ACCESS_TEAM_ORIGIN = "https://flat-wave-7385.cloudflareaccess.com";
+var MLS_UNIFIED_ACCESS_AUD = "2e8cca974ae20d4a4812a6259207e203154b294c1587b32babe93031e1177dd6";
+
+function unifiedRunnerBase64UrlBytes(value) {
+  const normalized=String(value||"").replace(/-/g,"+").replace(/_/g,"/");
+  const padded=normalized+"=".repeat((4-normalized.length%4)%4);
+  const binary=atob(padded);
+  return Uint8Array.from(binary,function(ch){return ch.charCodeAt(0)});
+}
+function unifiedRunnerBase64UrlJson(value) {
+  return JSON.parse(new TextDecoder().decode(unifiedRunnerBase64UrlBytes(value)));
+}
+async function unifiedRunnerAccessJwtAuthorize(request) {
+  const token=String(request.headers.get("cf-access-jwt-assertion")||"").trim();
+  if(!token)return null;
+  try{
+    const parts=token.split(".");
+    if(parts.length!==3)return null;
+    const header=unifiedRunnerBase64UrlJson(parts[0]);
+    const payload=unifiedRunnerBase64UrlJson(parts[1]);
+    if(header.alg!=="RS256"||!header.kid)return null;
+    const aud=Array.isArray(payload.aud)?payload.aud:[payload.aud];
+    if(!aud.includes(MLS_UNIFIED_ACCESS_AUD))return null;
+    const issuer=String(payload.iss||"").replace(/\/$/,"");
+    if(issuer!==MLS_UNIFIED_ACCESS_TEAM_ORIGIN)return null;
+    const now=Math.floor(Date.now()/1000);
+    if(!Number.isFinite(Number(payload.exp))||Number(payload.exp)<=now)return null;
+    if(payload.nbf!=null&&Number(payload.nbf)>now+60)return null;
+    const response=await fetch(MLS_UNIFIED_ACCESS_TEAM_ORIGIN+"/cdn-cgi/access/certs",{cf:{cacheEverything:true,cacheTtl:3600}});
+    if(!response.ok)return null;
+    const jwks=await response.json();
+    const jwk=(jwks.keys||[]).find(function(key){return key.kid===header.kid});
+    if(!jwk)return null;
+    const key=await crypto.subtle.importKey("jwk",jwk,{name:"RSASSA-PKCS1-v1_5",hash:"SHA-256"},false,["verify"]);
+    const signed=new TextEncoder().encode(parts[0]+"."+parts[1]);
+    const signature=unifiedRunnerBase64UrlBytes(parts[2]);
+    const valid=await crypto.subtle.verify("RSASSA-PKCS1-v1_5",key,signature,signed);
+    if(!valid)return null;
+    return {ok:true,status:200,auth:"cloudflare-access-jwt",aud:MLS_UNIFIED_ACCESS_AUD,email:String(payload.email||"")};
+  }catch(_){return null}
+}
 async function unifiedRunnerAuthorize(request, env, ctx) {
   const bearer = String(request.headers.get("authorization") || "").trim();
   if (bearer) return r44ChatBridgeAuthorize(request, env);
@@ -536,6 +577,8 @@ async function unifiedRunnerAuthorize(request, env, ctx) {
       email:String(identity && identity.email || "")
     };
   }
+  const jwtAuth=await unifiedRunnerAccessJwtAuthorize(request);
+  if(jwtAuth)return jwtAuth;
   return {ok:false,status:401,error:"UNIFIED_RUNNER_ACCESS_REQUIRED"};
 }
 async function unifiedRunnerControl(request, env, ctx) {
@@ -770,9 +813,15 @@ async function unifiedRunnerReport(request,env,ctx) {
 }
 
 async function handleUnifiedRunner(request, env, url, ctx) {
-  const pathname = url.pathname.startsWith("/api/unified-runner/browser/")
+  const browserPath=url.pathname.startsWith("/api/unified-runner/browser/");
+  const pathname = browserPath
     ? url.pathname.replace("/api/unified-runner/browser/","/api/unified-runner/")
     : url.pathname;
+  if(browserPath && pathname==="/api/unified-runner/session" && request.method==="GET"){
+    const auth=await unifiedRunnerAuthorize(request,env,ctx);
+    if(!auth.ok)return r44Json({error:auth.error},auth.status);
+    return Response.redirect(new URL("/runner.html#unified",request.url).toString(),302);
+  }
   if (pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env,ctx);
   if (pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env,ctx);
   if (pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env,ctx);

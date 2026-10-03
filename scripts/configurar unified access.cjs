@@ -45,6 +45,8 @@ function desiredApplication(){
     type:'self_hosted',
     domain:HOST+'/runner.html',
     session_duration:'24h',
+    path_cookie_attribute:false,
+    http_only_cookie_attribute:true,
     app_launcher_visible:false,
     destinations:[
       {type:'public',uri:HOST+'/runner.html'},
