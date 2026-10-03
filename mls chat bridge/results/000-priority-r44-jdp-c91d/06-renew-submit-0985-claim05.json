@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-next10-c91d-06",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-d782cbc4-a526-4974-bcc4-821934b428a2",
+          "ticketId": "R44-CORPUS-0985",
+          "leaseExpiresAt": 1790997322175
+        },
+        "completedAt": "2026-10-03T03:10:22.330Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0985",
+          "sha256": "efb208cbca02faa875f759ca64a283d4ce1946b703528c3145d21cf207597ed1",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0985",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "4913857b-a6e5-48fa-bbb5-4c4dac44516c",
+                "ticketId": "R44-CORPUS-0985",
+                "code": "MLS-V02-0378",
+                "idempotencyKey": "R44-CORPUS-0985:MLS-V02-0378:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "87aaaf70441658c0cfc6b0fe4ebc95a67a182be1736ff785af59519139a35c4d",
+                "sourceSha256": "baf3b67640038a4e381c51d30bea332e28e55f117d501076522a0e844ecc288b",
+                "committedMs": 1790997022715,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e257afabea9261cfd87f3587edd10427634a881ca547c7e200867d28b918bb06",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0985",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1c525e06-7204-46cb-94f7-9f205f98f8ca",
+                "ticketId": "R44-CORPUS-0985",
+                "code": "MLS-V02-0380",
+                "idempotencyKey": "R44-CORPUS-0985:MLS-V02-0380:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ce779befab80aa35456e0b631b3756b44818a6eeb2fbacedf3aa76d52f6540b5",
+                "sourceSha256": "e84f0ca4b3177da5adf799b6b049bf65b1b5b4959c4b567c7bf08050fa6ce331",
+                "committedMs": 1790997022941,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "45b48e20f7868a8a7429ca2ea3c01561987a5f10c9955e5ca99e7bb4fb969ce8",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0985",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "525db29a-3b0b-44d9-a895-6604d18b86ac",
+                "ticketId": "R44-CORPUS-0985",
+                "code": "MLS-V02-0381",
+                "idempotencyKey": "R44-CORPUS-0985:MLS-V02-0381:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6480d0fada679d16a3ad43a95889b83f4dd9bdea7f89a4df661f6b5d8b702449",
+                "sourceSha256": "9dc88107589dd176d92eb0bc28883fbb4adb03fee43ff0092880099d22918acb",
+                "committedMs": 1790997023153,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "6c9560fa41b879292457866b9155827ee290e588af8463eadff956e1891e7653",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0985",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5071e0e9-85c5-425e-89a1-b49508df23e4",
+                "ticketId": "R44-CORPUS-0985",
+                "code": "MLS-V02-0382",
+                "idempotencyKey": "R44-CORPUS-0985:MLS-V02-0382:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e6e32e9d94804aba23d3681e135af6dff27f702d96a8c47b9f283ecc998edb1e",
+                "sourceSha256": "72c0987fc35594ba02e0a4f6b5d5aab949f53aeb612d0e6b156695b572be3b05",
+                "committedMs": 1790997023370,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8b2435c6a54d2613731c54e126525dda1cdbe98afe3375ddbca9f325c131f692",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0985",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "aa019d44-14d9-47ee-a307-5ab956f73ce7",
+                "ticketId": "R44-CORPUS-0985",
+                "code": "MLS-V02-0383",
+                "idempotencyKey": "R44-CORPUS-0985:MLS-V02-0383:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e5396bd33a5a3ed78552b104c70856ff86490263e66b6b338ff5606a16fb5221",
+                "sourceSha256": "324ac696ed8e0bf9796ca45f06df11adda75a17fb1bc8a11e5bce37257cb1697",
+                "committedMs": 1790997023585,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f7b471df2a671b94e89cce6737fedafac956dbe499a600f2a65af27b0a17a045",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-d782cbc4-a526-4974-bcc4-821934b428a2",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "efb208cbca02faa875f759ca64a283d4ce1946b703528c3145d21cf207597ed1"
+          }
+        },
+        "completedAt": "2026-10-03T03:10:23.881Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-a585e614-d2fa-4793-85a2-2b936528e2bc",
+          "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0986",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997323924,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0384",
+                "path": "portugues/MLS-V02-0384.json",
+                "sha256": "a759170760ccc58327c8af7041be32b6288dd20415f8ee38cc00809e6b9e749a"
+              },
+              {
+                "code": "MLS-V02-0385",
+                "path": "portugues/MLS-V02-0385.json",
+                "sha256": "35c42a689b9d14d4299a78e1102fe0c1ab76d4847bf802523075b943a4b43a35"
+              },
+              {
+                "code": "MLS-V02-0386",
+                "path": "portugues/MLS-V02-0386.json",
+                "sha256": "af6e68f0b020b52913f5cd438299620d118ade901b669390f918bea771bef94e"
+              },
+              {
+                "code": "MLS-V02-0387",
+                "path": "portugues/MLS-V02-0387.json",
+                "sha256": "f8ed6102d43a088e4764a55b5b8193fd0aa4022401eb53cfddf0a63415704e1a"
+              },
+              {
+                "code": "MLS-V02-0388",
+                "path": "portugues/MLS-V02-0388.json",
+                "sha256": "78eefe17603401fecfd1a79502b6b392adff94cd5f3df521cdabba0a4dc311e9"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0986",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0384",
+                "path": "portugues/MLS-V02-0384.json",
+                "sha256": "a759170760ccc58327c8af7041be32b6288dd20415f8ee38cc00809e6b9e749a"
+              },
+              {
+                "code": "MLS-V02-0385",
+                "path": "portugues/MLS-V02-0385.json",
+                "sha256": "35c42a689b9d14d4299a78e1102fe0c1ab76d4847bf802523075b943a4b43a35"
+              },
+              {
+                "code": "MLS-V02-0386",
+                "path": "portugues/MLS-V02-0386.json",
+                "sha256": "af6e68f0b020b52913f5cd438299620d118ade901b669390f918bea771bef94e"
+              },
+              {
+                "code": "MLS-V02-0387",
+                "path": "portugues/MLS-V02-0387.json",
+                "sha256": "f8ed6102d43a088e4764a55b5b8193fd0aa4022401eb53cfddf0a63415704e1a"
+              },
+              {
+                "code": "MLS-V02-0388",
+                "path": "portugues/MLS-V02-0388.json",
+                "sha256": "78eefe17603401fecfd1a79502b6b392adff94cd5f3df521cdabba0a4dc311e9"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0384",
+              "MLS-V02-0385",
+              "MLS-V02-0386",
+              "MLS-V02-0387",
+              "MLS-V02-0388"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997323924,
+              "active": true
+            },
+            "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997323924,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0384",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 384,
+                "title": "Presente histórico",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **presente histórico** usa formas del presente para contar hechos que ocurrieron en el pasado. El tiempo real del hecho se entiende por el contexto, una fecha o la secuencia de la narración.\n\nPor ejemplo, **Em 1822, Dom Pedro proclama a independência** habla de un acontecimiento pasado aunque **proclama** tenga forma de presente.\n\n#### Cómo funciona\n\nEste uso puede hacer una narración más inmediata. Aparece en relatos históricos, resúmenes, cronologías y explicaciones de acontecimientos.\n\nLas expresiones de tiempo son importantes: en **Em 1960, Brasília se torna a capital do Brasil**, **em 1960** sitúa claramente el hecho en el pasado.\n\nEl presente histórico alterna con tiempos pasados. Una misma narración puede decir **Em 1822, Dom Pedro proclamou...** o usar el presente histórico según el estilo elegido.\n\n#### Ejemplos\n\n* **Em 1822, Dom Pedro proclama a independência.** — **proclama** narra un hecho pasado.\n* **Em 1960, Brasília se torna a capital do Brasil.** — la fecha fija la referencia histórica.\n* **O personagem abre a porta e encontra uma carta.** — en un resumen narrativo, el presente cuenta una secuencia de hechos.\n\n#### Observación importante\n\nEl presente histórico no significa que el acontecimiento esté ocurriendo ahora. Es un recurso narrativo: la referencia temporal sigue siendo pasada.\n\nPor eso no debe confundirse con el presente de un estado actual, un hábito o un hecho general. El contexto permite reconocer cada uso.\n\n#### Entradas relacionadas\n\n[382. Presente para hábitos](#entrada-382) · [383. Presente para fatos gerais](#entrada-383) · [385. Presente com valor futuro no uso cotidiano](#entrada-385) · [386. Estar + gerúndio](#entrada-386) · [422. Futuro do presente: formação](#entrada-422)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6a0427219f5919088a1da0c155c6add9ef321f49eebc9865c4dd90cccda724a0",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:22:28.257Z"
+              },
+              {
+                "code": "MLS-V02-0385",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 385,
+                "title": "Presente con valor futuro en el uso cotidiano",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEn el portugués brasileño cotidiano, el **presente do indicativo** puede referirse a una acción futura cuando el contexto deja claro que ocurrirá después del momento de habla.\n\nPor ejemplo, **Amanhã eu trabalho até as seis** usa **trabalho** en presente, pero **amanhã** sitúa la situación en el futuro.\n\n#### Cómo funciona\n\nEste uso es común con planes, horarios, compromisos y situaciones previstas. Expresiones como **amanhã, depois, na próxima semana** o una fecha ayudan a indicar la referencia futura.\n\nTambién puede aparecer sin una expresión explícita si el contexto ya establece el momento: **Então a gente se encontra na entrada** puede hablar de un encuentro posterior acordado.\n\nEl presente con valor futuro convive con **ir + infinitivo** y con el futuro simple: **viajo amanhã**, **vou viajar amanhã**, **viajarei amanhã**. La elección depende del contexto y del registro.\n\n#### Ejemplos\n\n* **Amanhã eu trabalho de casa.** — **amanhã** da valor futuro al presente **trabalho**.\n* **O ônibus sai às oito.** — **sai** puede referirse a un horario futuro establecido.\n* **A gente se fala depois.** — en contexto, **se fala** puede señalar una conversación posterior.\n\n#### Observación importante\n\nLa forma verbal sigue siendo presente. El valor futuro surge de la combinación entre el verbo, las expresiones temporales y la situación comunicativa.\n\nPor eso una frase como **Eu viajo** puede necesitar contexto para saberse si describe un hábito o un plan futuro. **Eu viajo amanhã** elimina normalmente esa ambigüedad.\n\n#### Entradas relacionadas\n\n[383. Presente para fatos gerais](#entrada-383) · [384. Presente histórico](#entrada-384) · [386. Estar + gerúndio](#entrada-386) · [387. Andar + gerúndio no presente](#entrada-387) · [422. Futuro do presente: formação](#entrada-422)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-bc85d12bd5d46f5beca7d43fef8eb8c53d2c8060e44754314ae4833b02aaae24",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:22:57.070Z"
+              },
+              {
+                "code": "MLS-V02-0386",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 386,
+                "title": "Estar + gerundio",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\n**Estar + gerúndio** se usa para presentar una acción como en desarrollo alrededor de un momento de referencia. En portugués brasileño es una construcción muy frecuente: **Estou estudando agora**.\n\nEl gerundio termina normalmente en **-ando, -endo** o **-indo**, como **falando, comendo** y **dormindo**.\n\n#### Cómo funciona\n\nSe conjuga **estar** según la persona y se mantiene el gerundio sin cambios: **eu estou estudando, você está lendo, nós estamos trabalhando, eles estão dormindo**.\n\nEl tiempo depende de **estar**. **Eu estava estudando** presenta una actividad en desarrollo en el pasado; **eu estarei trabalhando** puede situarla en el futuro.\n\nEl presente simple también puede ser natural en muchos contextos, pero **estar + gerúndio** destaca especialmente que la actividad está en curso.\n\n#### Ejemplos\n\n* **Estou estudando agora.** — **estou estudando** presenta la acción como en progreso en este momento.\n* **As crianças estão brincando no quintal.** — **estão brincando** describe una actividad que está ocurriendo.\n* **Nós estamos esperando o ônibus.** — **estamos esperando** enfoca el proceso de esperar.\n\n#### Observación importante\n\nEn portugués brasileño, **estar + gerúndio** es la forma progresiva habitual. En portugués europeo es común **estar a + infinitivo**, como **está a estudar**. Son patrones de variedades distintas del portugués.\n\nNo todo uso de **estar** expresa una acción progresiva. En **Ela está cansada**, **está** se combina con un adjetivo y describe un estado, no una actividad en desarrollo.\n\n#### Entradas relacionadas\n\n[384. Presente histórico](#entrada-384) · [385. Presente com valor futuro no uso cotidiano](#entrada-385) · [387. Andar + gerúndio no presente](#entrada-387) · [388. Viver + gerúndio no presente](#entrada-388) · [1049. Gerúndio brasileiro frente a estar a + infinitivo europeu](#entrada-1049)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6f7cc65f1d487e15d0787d3b141cd13c95021221472b865764e58ef07deb19da",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:23:42.344Z"
+              },
+              {
+                "code": "MLS-V02-0387",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 387,
+                "title": "Andar + gerundio en el presente",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\n**Andar + gerúndio** puede presentar una actividad como repetida, prolongada o frecuente durante un período. En **Ando pensando muito nisso**, la persona indica que ha estado pensando en el asunto de manera recurrente.\n\nAquí **andar** no expresa necesariamente desplazamiento físico: funciona como auxiliar junto al gerundio.\n\n#### Cómo funciona\n\nEn presente se conjuga **andar** y el gerundio permanece invariable: **eu ando pensando, você anda procurando, nós andamos estudando, eles andam falando**.\n\nLa construcción suele abarcar un período más amplio que **estar + gerúndio**. **Estou pensando nisso agora** enfoca este momento; **ando pensando nisso** puede sugerir que ese pensamiento se repite últimamente.\n\nEl contexto determina si la idea principal es repetición, continuidad o una actividad que ocurre con frecuencia durante cierto período.\n\n#### Ejemplos\n\n* **Ando pensando muito nisso.** — **ando pensando** presenta un pensamiento recurrente durante un período reciente.\n* **Ela anda procurando um apartamento.** — la búsqueda se desarrolla o se repite durante cierto tiempo.\n* **Nós andamos trabalhando bastante.** — **andamos trabalhando** indica una actividad frecuente o prolongada.\n\n#### Observación importante\n\nNo toda secuencia con **andar** expresa este valor. En **Ele anda no parque**, **andar** es el verbo principal y significa desplazarse a pie.\n\nTampoco **andar + gerúndio** es idéntico a **estar + gerúndio**. La segunda construcción suele enfocar con más facilidad una acción en curso en un momento concreto; **andar + gerúndio** favorece una lectura extendida o reiterada.\n\n#### Entradas relacionadas\n\n[385. Presente com valor futuro no uso cotidiano](#entrada-385) · [386. Estar + gerúndio](#entrada-386) · [388. Viver + gerúndio no presente](#entrada-388) · [389. Imperativo afirmativo com você](#entrada-389) · [489. Perífrase aspectual andar + gerúndio](#entrada-489)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f9bee78257f7ca1d3e7a3fe660cfcea3edae0bcad406385afc8fab199d46841d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:24:11.755Z"
+              },
+              {
+                "code": "MLS-V02-0388",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 388,
+                "title": "Viver + gerundio en el presente",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\n**Viver + gerúndio** puede expresar una conducta o actividad que se repite con mucha frecuencia. En **Ele vive reclamando do trânsito**, la idea es que esa persona reclama repetidamente, no que lo hace solo en este instante.\n\nAquí **viver** funciona como auxiliar y no significa simplemente “estar vivo” o “residir”.\n\n#### Cómo funciona\n\nEn presente se conjuga **viver** y el gerundio permanece invariable: **eu vivo dizendo, você vive perguntando, nós vivemos procurando, eles vivem reclamando**.\n\nLa construcción suele destacar repetición frecuente o persistencia durante un período. Según las palabras y el contexto, puede transmitir molestia o crítica, pero ese matiz no es obligatorio.\n\nSe diferencia de **estar + gerúndio**, que puede enfocar una acción en curso en un momento concreto: **Ele está reclamando agora** frente a **Ele vive reclamando**.\n\n#### Ejemplos\n\n* **Ele vive reclamando do trânsito.** — la queja se presenta como una conducta frecuente.\n* **Ela vive perguntando sobre o projeto.** — **vive perguntando** indica preguntas repetidas.\n* **Nós vivemos procurando maneiras de melhorar.** — la búsqueda se presenta como recurrente o persistente.\n\n#### Observación importante\n\nNo toda forma de **viver** seguida de otra información pertenece a esta perífrasis. En **Ela vive em Salvador**, **viver** es el verbo principal y significa residir o vivir.\n\n**Viver + gerúndio** y **andar + gerúndio** pueden acercarse en algunos contextos, pero no son siempre intercambiables. **Viver + gerúndio** suele resaltar especialmente la frecuencia repetida de una conducta.\n\n#### Entradas relacionadas\n\n[386. Estar + gerúndio](#entrada-386) · [387. Andar + gerúndio no presente](#entrada-387) · [389. Imperativo afirmativo com você](#entrada-389) · [390. Imperativo afirmativo com vocês](#entrada-390) · [490. Perífrase aspectual viver + gerúndio](#entrada-490)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-00f7e8d9bcc45b58ef0140b1930c145948f9d33d3001f3545ef4d2fe7d34e1d7",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:24:40.065Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:10:24.698Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:10:24.698Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-jdp-c91d/06-renew-submit-0985-claim05.json"
+}

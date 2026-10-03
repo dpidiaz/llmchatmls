@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-ccx482-step6",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-e6592913-92bf-4f27-b8a7-2a1fc3b24aac",
+          "ticketId": "R43-EMERGENCY-0505",
+          "leaseExpiresAt": 1790997331259
+        },
+        "completedAt": "2026-10-03T03:10:31.390Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0505",
+          "sha256": "76de4b2a74f090763dcafe157ecf20cf29b7e981d90f068ab4b219473c117e04",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0505",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2ccfa101-3e91-4022-8486-130f32226b7a",
+                "ticketId": "R43-EMERGENCY-0505",
+                "code": "MLS-V05-1055",
+                "idempotencyKey": "R43-EMERGENCY-0505:MLS-V05-1055:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7663c19f4f295f7eddbf4ebbc29d36bf8077ccea6468c0003a7f074037938806",
+                "sourceSha256": "24e66ad9f564a34b07be6b9fb2bbe5bc8c1d5a1ca9bf81670285245a3ef71178",
+                "committedMs": 1790997031761,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "42d92bf16777b98bd03584aeed80a5b9bcb3655814a65da042a8a82925181011",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0505",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "57d90860-b47b-4523-b874-9adf93c9f1af",
+                "ticketId": "R43-EMERGENCY-0505",
+                "code": "MLS-V05-1056",
+                "idempotencyKey": "R43-EMERGENCY-0505:MLS-V05-1056:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "62ea312a2b6d0629bbb4729f69be9663fee4254d851f7501ae71206b79703854",
+                "sourceSha256": "bb35bef5eefb1eb6028fb2e5a54affed282f4e6c52c871254f88079d2bb2e942",
+                "committedMs": 1790997031972,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e7840e5915b908effafcf88d072c467d7093a11537acb5ce0bbe2f1dad45a9a2",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0505",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "cd3184cc-f435-41c0-9f1f-8c4d2792c6c7",
+                "ticketId": "R43-EMERGENCY-0505",
+                "code": "MLS-V05-1057",
+                "idempotencyKey": "R43-EMERGENCY-0505:MLS-V05-1057:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "57160593f2c8eb2a7b206cc53c73e51878417ee2571b104212155847d6a1f39c",
+                "sourceSha256": "62fe273e6fb497a8cdbb54955e49c1e416b0b01509b4bb730c9cfe533ac1e846",
+                "committedMs": 1790997032186,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "861c2d30b66373a39eec87d63f21358dd94f74fdf8c6eabcfb53dc6ec61b0dff",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0505",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b9ebc8a6-be5d-407b-93e4-1477f2fb18d3",
+                "ticketId": "R43-EMERGENCY-0505",
+                "code": "MLS-V05-1058",
+                "idempotencyKey": "R43-EMERGENCY-0505:MLS-V05-1058:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0725b4a7e0ada75669b5f697acf8bbd17de729eebffbc14301432493f0d131ba",
+                "sourceSha256": "c3007ce77a5df65c599682a74a1f8ece76304363494b2118819b5304164a5730",
+                "committedMs": 1790997032408,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "68f05cd2c9389c47fecc2b1a1058079d2ecc9e2d111faa4ca06e6c1094e906dd",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0505",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5f295212-338e-43b9-9734-77e9e8f753c0",
+                "ticketId": "R43-EMERGENCY-0505",
+                "code": "MLS-V05-1059",
+                "idempotencyKey": "R43-EMERGENCY-0505:MLS-V05-1059:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "59a52a31bfcef50c4b56b5daa097de7a95d740141624a513f2f76538a184be6e",
+                "sourceSha256": "3fc526be9ab196aba1edd00cf4da541fa79bb28bdc518b270aa82325e27922cf",
+                "committedMs": 1790997032626,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3065f5c4576131215d4b8fd51aaff673d24e22e8eb860c887461d9b515c8418e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-e6592913-92bf-4f27-b8a7-2a1fc3b24aac",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "76de4b2a74f090763dcafe157ecf20cf29b7e981d90f068ab4b219473c117e04"
+          }
+        },
+        "completedAt": "2026-10-03T03:10:32.923Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-044ccae3-6ffe-4329-a8cc-965a3fb8694b",
+          "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0506",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997332966,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V05-1060",
+                "path": "aleman/MLS-V05-1060.json",
+                "sha256": "179c1becabf38613b174caac76202c3fefa6b066868ff5134e5d7dd8f74a7496"
+              },
+              {
+                "code": "MLS-V05-1061",
+                "path": "aleman/MLS-V05-1061.json",
+                "sha256": "0b53467d993504f5b7914239d510555a6a0bc55c828fb58b583750898491ee7d"
+              },
+              {
+                "code": "MLS-V05-1063",
+                "path": "aleman/MLS-V05-1063.json",
+                "sha256": "08802e21e6987b925bd154c38411279eda15c08a33e64b3443b7c8ffea19d845"
+              },
+              {
+                "code": "MLS-V05-1064",
+                "path": "aleman/MLS-V05-1064.json",
+                "sha256": "f90bf643c7691adeaf9628b71cf2f0b117dd004c0782647e3b5dc3c30fe2e9b8"
+              },
+              {
+                "code": "MLS-V05-1065",
+                "path": "aleman/MLS-V05-1065.json",
+                "sha256": "ff64fc5d024611cb73cb8ade2b483c8da5de7030cf02028406843aeb5b7447ae"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0506",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V05-1060",
+                "path": "aleman/MLS-V05-1060.json",
+                "sha256": "179c1becabf38613b174caac76202c3fefa6b066868ff5134e5d7dd8f74a7496"
+              },
+              {
+                "code": "MLS-V05-1061",
+                "path": "aleman/MLS-V05-1061.json",
+                "sha256": "0b53467d993504f5b7914239d510555a6a0bc55c828fb58b583750898491ee7d"
+              },
+              {
+                "code": "MLS-V05-1063",
+                "path": "aleman/MLS-V05-1063.json",
+                "sha256": "08802e21e6987b925bd154c38411279eda15c08a33e64b3443b7c8ffea19d845"
+              },
+              {
+                "code": "MLS-V05-1064",
+                "path": "aleman/MLS-V05-1064.json",
+                "sha256": "f90bf643c7691adeaf9628b71cf2f0b117dd004c0782647e3b5dc3c30fe2e9b8"
+              },
+              {
+                "code": "MLS-V05-1065",
+                "path": "aleman/MLS-V05-1065.json",
+                "sha256": "ff64fc5d024611cb73cb8ade2b483c8da5de7030cf02028406843aeb5b7447ae"
+              }
+            ],
+            "remaining": [
+              "MLS-V05-1060",
+              "MLS-V05-1061",
+              "MLS-V05-1063",
+              "MLS-V05-1064",
+              "MLS-V05-1065"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997332966,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997332966,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V05-1060",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1060,
+                "title": "Termin ≠ término",
+                "level": "B1",
+                "part": "Contraste con español de Guatemala — Kontrast mit guatemaltekischem Spanisch",
+                "chapter": "Falsos amigos y equivalencias engañosas — Falsche Freunde und trügerische Entsprechungen",
+                "articleMarkdown": "#### En pocas palabras\n\nEl alemán **Termin** significa normalmente **cita, fecha acordada o compromiso programado**, no «término». En **Ich habe morgen einen Termin beim Arzt**, la frase significa «Tengo una cita con el médico mañana».\n\n#### Cómo funciona\n\n**Termin** es un sustantivo masculino: **der Termin**. Puede referirse a una cita médica, una reunión concertada o una fecha fijada para una actividad: **einen Termin vereinbaren**, **einen Termin verschieben**.\n\nPara «término» en sentidos lingüísticos o conceptuales, el alemán usa palabras como **Begriff** o **Ausdruck**. Para un plazo o fecha límite puede aparecer **Frist**, según el contexto.\n\nPor eso la semejanza entre **Termin** y «término» no implica equivalencia general.\n\n#### Ejemplos\n\n* **Ich habe morgen einen Termin beim Arzt.** — Tengo una cita con el médico mañana.\n* **Wir haben um zehn Uhr einen Termin.** — Tenemos una cita a las diez.\n* **Der Termin wurde verschoben.** — La fecha / cita fue aplazada.\n* **Dieser Begriff ist schwer zu übersetzen.** — Este término es difícil de traducir.\n\n#### Observación importante\n\nLa traducción de **Termin** depende del tipo de programación: puede ser «cita», «fecha» o «compromiso». No suele designar una palabra especializada ni un concepto técnico.\n\nPara esos sentidos, **Begriff**, **Ausdruck** o **Fachbegriff** son opciones frecuentes.\n\n#### Entradas relacionadas\n\n[spenden ≠ expender](#entry-1058) · [sensibel ≠ sensible exactamente](#entry-1057) · [Roman ≠ romano](#entry-1056)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-137cae3a3d12f7814d1b28039cd3668ad64cdf6de3f01d96eeac9cf4583fdd1c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:09:15.671Z"
+              },
+              {
+                "code": "MLS-V05-1061",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1061,
+                "title": "Ellipsis",
+                "level": "C1",
+                "part": "Dominio C1–C2 — Beherrschung C1–C2",
+                "chapter": "Modelo de campos y sintaxis C1–C2 — Feldermodell und Syntax C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **elipsis** (*Ellipse*) es la omisión de material lingüístico que no necesita aparecer porque puede recuperarse con suficiente claridad a partir del contexto. En **A: Kommst du morgen? – B: Ja, wahrscheinlich**, la respuesta no contiene una oración completa como **Ja, ich komme morgen wahrscheinlich**, pero el contenido omitido se entiende por la pregunta anterior.\n\nLa elipsis no es simplemente una frase “incompleta” o incorrecta. En alemán hablado y escrito puede ser una estrategia normal de economía discursiva cuando la información omitida ya está activa y no genera ambigüedad relevante.\n\n#### Cómo funciona\n\nLa estructura elíptica conserva solo los elementos necesarios para que el interlocutor reconstruya el contenido. Pueden quedar respuestas breves como **Vielleicht**, **Noch nicht**, **Keine Ahnung** o grupos que dependen de una pregunta precedente.\n\nEl análisis debe distinguir la elipsis de una oración plenamente formada pero breve. **Es regnet** es una oración completa; **Wahrscheinlich** como respuesta a **Kommt er morgen?** depende del contexto para recuperar el contenido proposicional omitido.\n\nDentro del **Feldermodell**, la elipsis puede hacer que no aparezcan todos los campos que tendría una oración completa. Eso no significa que el orden alemán deje de tener estructura; simplemente parte del material esperado no se realiza fonéticamente o gráficamente.\n\nLa posibilidad de omitir depende de la recuperabilidad. Cuanto más claro sea el antecedente discursivo, más natural puede resultar una forma reducida. En contextos formales, técnicos o con varios referentes posibles, la expansión completa suele favorecer la claridad.\n\n#### Ejemplos\n\n* **A: Kommst du morgen? – B: Ja, wahrscheinlich.** — “¿Venís / vienes mañana? — Sí, probablemente”. Se recupera el contenido «vendré mañana».\n* **A: Wer kommt mit? – B: Paul und Anna.** — La respuesta omite una forma verbal equivalente a **Paul und Anna kommen mit**.\n* **A: Hast du den Bericht schon gelesen? – B: Noch nicht.** — “¿Ya leíste el informe? — Todavía no”. El verbo y su complemento se recuperan del turno anterior.\n* **Je früher, desto besser.** — “Cuanto antes, mejor”. La construcción contiene una reducción convencional y no necesita desplegar dos proposiciones completas para ser interpretable.\n\n#### Observación importante\n\nNo toda omisión es una elipsis aceptable. Si el material ausente no puede reconstruirse de forma suficientemente estable, la secuencia puede resultar ambigua o simplemente agramatical.\n\nAdemás, las elipsis varían según género textual, registro y situación comunicativa. Son especialmente frecuentes en diálogo, titulares, notas y coordinaciones, pero también aparecen en prosa formal cuando la relación entre los elementos es inequívoca.\n\n#### Entradas relacionadas\n\n[Feldermodell completo](#entry-1062) · [Linke Klammer](#entry-1063) · [Cadena referencial](#entry-1074)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b48fbd4180a7edf33bc9a17d1ade9f0cd1917e73c5ce1f4ca68b94ecc53b8011",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:10:06.138Z"
+              },
+              {
+                "code": "MLS-V05-1063",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1063,
+                "title": "Linke Klammer",
+                "level": "C1",
+                "part": "Dominio C1–C2 — Beherrschung C1–C2",
+                "chapter": "Modelo de campos y sintaxis C1–C2 — Feldermodell und Syntax C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **linke Klammer** es la posición izquierda de la **Satzklammer**, el marco verbal del alemán. En una oración principal como **Heute hat der Student das Buch gelesen**, la forma finita **hat** ocupa la linke Klammer y el participio **gelesen** aparece en la rechte Klammer.\n\nEsta posición ayuda a describir el orden verbal sin confundirlo con funciones como sujeto u objeto. La linke Klammer es un lugar estructural dentro del Feldermodell.\n\n#### Cómo funciona\n\nEn una oración principal declarativa V2, la linke Klammer suele contener el **verbo finito**, es decir, la forma verbal que expresa persona y número y, según el verbo, tiempo o modo: **Heute kommt Paul**, **Morgen muss er arbeiten**, **Gestern hat sie angerufen**.\n\nEl material anterior forma el **Vorfeld**. Entre la linke y la rechte Klammer se encuentra el **Mittelfeld**. Cuando existe una parte verbal separada, esta aparece en la rechte Klammer: **hat ... gelesen**, **muss ... arbeiten**, **ruft ... an**.\n\nEn preguntas totales y otras estructuras V1, el verbo finito puede aparecer al inicio de la oración: **Kommt Paul morgen?**. En ese análisis sigue ocupando la posición verbal izquierda, aunque no haya un Vorfeld realizado.\n\nEn subordinadas introducidas por conjunciones como **dass** o **weil**, el modelo se organiza de otra manera: la conjunción ocupa la zona izquierda del marco y el complejo verbal aparece hacia la derecha. Por eso la identificación de la linke Klammer depende del tipo de cláusula.\n\n#### Ejemplos\n\n* **Heute | hat | der Student das Buch | gelesen.** — **hat** ocupa la linke Klammer; **gelesen**, la rechte Klammer.\n* **Morgen | muss | Paul länger | arbeiten.** — El modal finito **muss** abre la Satzklammer.\n* **Jetzt | ruft | sie ihren Bruder | an.** — **ruft** está a la izquierda y el prefijo **an** a la derecha.\n* **Kommt | Paul morgen | — ?** — En una pregunta V1 no hay Vorfeld realizado; **kommt** ocupa la posición verbal izquierda.\n\n#### Observación importante\n\nLa linke Klammer no significa “primer verbo de la oración” en cualquier estructura. En subordinadas, infinitivos y otras construcciones, la distribución verbal es diferente y debe analizarse dentro del tipo de cláusula correspondiente.\n\nTampoco debe confundirse la posición estructural con una función sintáctica. **Hat**, **muss** o **ruft** ocupan la linke Klammer por su papel verbal finito, no porque sean sujeto, predicado completo u objeto.\n\n#### Entradas relacionadas\n\n[Feldermodell completo](#entry-1062) · [Mehrfachbesetzung scheinbar im Vorfeld](#entry-1064) · [Ellipsis](#entry-1061) · [Nebensatzverschachtelung](#entry-1065)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3e9bddd2bb106a4747ff9575cb42bfe6c61c5c020f4d709aeb0b2ddcb0e69250",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:11:34.797Z"
+              },
+              {
+                "code": "MLS-V05-1064",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1064,
+                "title": "Mehrfachbesetzung scheinbar im Vorfeld",
+                "level": "C1",
+                "part": "Dominio C1–C2 — Beherrschung C1–C2",
+                "chapter": "Modelo de campos y sintaxis C1–C2 — Feldermodell und Syntax C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **aparente ocupación múltiple del Vorfeld** describe construcciones en las que antes del verbo finito parece haber más de un elemento independiente, aunque el material inicial puede analizarse como una sola unidad sintáctica compleja. En **[Den Kindern die Bücher geben], das wollte er nicht**, toda la secuencia entre corchetes funciona como un bloque topicalizado.\n\nEl fenómeno es importante porque la regla V2 del alemán no exige que el Vorfeld contenga una sola palabra, sino normalmente **un solo constituyente**. Ese constituyente puede ser internamente complejo.\n\n#### Cómo funciona\n\nEn una oración principal V2, el verbo finito ocupa la linke Klammer y el material anterior forma el Vorfeld. Una secuencia como **Den Kindern die Bücher geben** contiene internamente un complemento en dativo, otro en acusativo y un infinitivo, pero esos elementos pueden desplazarse juntos como una unidad verbal no finita.\n\nPor eso la impresión de “varios elementos” en el Vorfeld no demuestra necesariamente una violación del patrón V2. El análisis depende de si los componentes iniciales forman una estructura conjunta o si realmente pertenecen a constituyentes separados.\n\nTambién existen construcciones marcadas cuya clasificación es discutida y depende del marco teórico. En algunos casos se habla de **Mehrfachbesetzung des Vorfelds**; en otros, de estructuras parentéticas, dislocaciones o constituyentes complejos. La etiqueta “aparente” evita convertir una observación superficial del orden lineal en una regla sintáctica absoluta.\n\nLa prosodia y el contexto pueden aportar información adicional: una pausa fuerte, una retomada pronominal o una interpretación parentética pueden favorecer un análisis distinto del de una única frase compleja.\n\n#### Ejemplos\n\n* **[Den Kindern die Bücher geben], das wollte er nicht.** — “Darles los libros a los niños, eso no quería hacerlo”. El grupo inicial puede analizarse como una unidad topicalizada.\n* **[Noch heute erledigen] wollte er die Aufgabe.** — La secuencia infinitiva inicial ocupa conjuntamente la posición previa al verbo finito.\n* **[Mit großer Sorgfalt arbeiten] muss man hier.** — El grupo preposicional y el infinitivo forman parte de una estructura no finita desplazada.\n* **Dieses Buch, das habe ich schon gelesen.** — La coma y la retomada con **das** favorecen un análisis de dislocación, no simplemente de Vorfeld complejo.\n\n#### Observación importante\n\nEl Vorfeld no se cuenta por número de palabras ni por número de grupos visibles de manera intuitiva. La cuestión central es cuántos **constituyentes sintácticos independientes** ocupan esa zona y cómo se relacionan entre sí.\n\nPor eso conviene distinguir entre un constituyente complejo, una dislocación y una verdadera Mehrfachbesetzung. Las fronteras no son idénticas en todos los análisis gramaticales, especialmente en ejemplos marcados o coloquiales.\n\n#### Entradas relacionadas\n\n[Linke Klammer](#entry-1063) · [Feldermodell completo](#entry-1062) · [Nebensatzverschachtelung](#entry-1065) · [Ellipsis](#entry-1061)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1900c923617bc43aeb073a7aa7073ba7c7e1ca7a69890619b0cf5ac26618de60",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:12:28.312Z"
+              },
+              {
+                "code": "MLS-V05-1065",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1065,
+                "title": "Nebensatzverschachtelung",
+                "level": "C1",
+                "part": "Dominio C1–C2 — Beherrschung C1–C2",
+                "chapter": "Modelo de campos y sintaxis C1–C2 — Feldermodell und Syntax C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **Nebensatzverschachtelung** es el encadenamiento de subordinadas dentro de otras subordinadas. En **Ich weiß, dass er sagt, dass sie kommt**, la oración introducida por el primer **dass** contiene otra subordinada introducida por un segundo **dass**.\n\nLa estructura permite integrar varios niveles de información, por ejemplo una afirmación dentro de otra. Cada subordinada conserva su propia relación sintáctica con la cláusula que la contiene.\n\n#### Cómo funciona\n\nEn **Ich weiß, dass er sagt, dass sie kommt**, la oración principal es **Ich weiß**. Su complemento es **dass er sagt, dass sie kommt**. Dentro de ese complemento, **dass sie kommt** depende a su vez de **sagt**.\n\nLa posición verbal se determina en cada nivel. En una subordinada prototípica introducida por **dass**, el verbo finito aparece hacia el final: **dass er sagt**, **dass sie kommt**. La existencia de varios niveles no crea una sola oración con todos los verbos acumulados al final; cada cláusula tiene su propia estructura.\n\nLa subordinación puede combinar distintos tipos de cláusula: relativas, causales, condicionales, interrogativas indirectas o completivas. Por ejemplo, **Ich weiß, dass der Mann, der dort steht, unser Lehrer ist** contiene una relativa dentro de una subordinada con **dass**.\n\nCuantos más niveles se acumulan, mayor puede ser la carga de procesamiento. En prosa administrativa o académica la anidación es posible y gramatical, pero una cadena extensa puede dificultar identificar qué verbo y qué complemento pertenecen a cada cláusula.\n\n#### Ejemplos\n\n* **Ich weiß, dass er sagt, dass sie kommt.** — “Sé que él dice que ella viene”. Hay dos niveles de subordinación con **dass**.\n* **Sie glaubt, dass der Mann, der dort wartet, ihr Bruder ist.** — Una relativa **der dort wartet** aparece dentro de la subordinada completiva.\n* **Er fragte, ob sie komme, weil er wissen wollte, wann die Sitzung beginnt.** — Se combinan interrogación indirecta, causal y otra interrogativa indirecta.\n* **Wir hoffen, dass alles klappt, obwohl wir wissen, dass es schwierig wird.** — Dos relaciones subordinadas se integran en una estructura mayor.\n\n#### Observación importante\n\nLa anidación no cambia automáticamente las reglas de cada tipo de subordinada. Cada cláusula mantiene sus propias dependencias, su verbo y su relación con la cláusula superior.\n\nAdemás, una estructura profundamente anidada puede ser correcta y al mismo tiempo poco transparente. La complejidad sintáctica y la claridad estilística son dimensiones distintas.\n\n#### Entradas relacionadas\n\n[Mehrfachbesetzung scheinbar im Vorfeld](#entry-1064) · [Linke Klammer](#entry-1063) · [Feldermodell completo](#entry-1062) · [Cadena referencial](#entry-1074)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-d99d455766ccf71dddb59f579cc8db01e8a0c431b5de6b643ec0a33b5bab7f9b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:13:15.577Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:10:33.723Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:10:33.723Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0245-sol-ccx482/10-submit5-claim6.json"
+}

@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-t07-complete-claim08",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-0fb7a6ec-e379-47b7-b1c2-36d1b4bad63a",
+          "ticketId": "R43-EMERGENCY-0725",
+          "leaseExpiresAt": 1790997324775
+        },
+        "completedAt": "2026-10-03T03:10:24.906Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0725",
+          "sha256": "71cf915f2efa5ecd1a20ce7618a27d95b9712e6c7ed45551467a7cb821ef1e65",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0725",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8f123f7f-88db-475f-a706-2caf042dd346",
+                "ticketId": "R43-EMERGENCY-0725",
+                "code": "MLS-V07-0244",
+                "idempotencyKey": "R43-EMERGENCY-0725:MLS-V07-0244:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7bfd94d895099ab6bd7f3cf7806052953b8d6ce9e1e52794d92743c80050fb51",
+                "sourceSha256": "e69d9fe8e908b537b4fbe1afa0cfc59a45e7afd3b82f2f95d70308e2f2458c95",
+                "committedMs": 1790997025289,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b67bb1f589fafb480904984b588c46a8a950d46f7da69d5b1d403e54582d651b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0725",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "04870f58-1d2a-4106-bcdd-0521c2700891",
+                "ticketId": "R43-EMERGENCY-0725",
+                "code": "MLS-V07-0245",
+                "idempotencyKey": "R43-EMERGENCY-0725:MLS-V07-0245:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e9a5a134142442da89587cde863a4ba0f7cb223790324a6bec5f18ea8bffaba6",
+                "sourceSha256": "a489a1fa60a03824941e60601625a5c664e5823a427f1bb906b60fc01fe5eb50",
+                "committedMs": 1790997025508,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "91eb967a02e7c08145ea532e346e3ed832b6572fd8d76a15173a47fde02bce55",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0725",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "890d7a12-2d3a-4002-a99c-c99a5ba2c03b",
+                "ticketId": "R43-EMERGENCY-0725",
+                "code": "MLS-V07-0246",
+                "idempotencyKey": "R43-EMERGENCY-0725:MLS-V07-0246:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e3fe7abc1acf7e6d0abd240b933cc2ec82b00bb07b2aab73bb8539308f39354b",
+                "sourceSha256": "5c675c11fed36f6f2042ba0821275f753ceabdbc13214dd82665632087f02f7f",
+                "committedMs": 1790997025722,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "acf50cf01c8e30564adf0b52209f15b973ada22fcebb3466ecea8a047e4283a0",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0725",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "890bebd5-96fd-445a-8232-a89aeaa8bfff",
+                "ticketId": "R43-EMERGENCY-0725",
+                "code": "MLS-V07-0247",
+                "idempotencyKey": "R43-EMERGENCY-0725:MLS-V07-0247:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "af832c843cb545d87ddeedfc565e60be9b9755a84f7a76f30ccdc9142cda8125",
+                "sourceSha256": "9830a9588e0e7bf3c5dd27928aa851789e651e6ff557440f4e9485cea060ff2d",
+                "committedMs": 1790997025939,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "853a88b8b59a334e9d94b1042d7fa76e0489b1a6b0fab71d6db5ef430859b3fd",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0725",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "adf8e751-b6c1-4036-ad93-7fdbd949b803",
+                "ticketId": "R43-EMERGENCY-0725",
+                "code": "MLS-V07-0249",
+                "idempotencyKey": "R43-EMERGENCY-0725:MLS-V07-0249:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "694a7dea20c297c5e120254613042df776bd3b0ab4800d41c941537ca37d58e9",
+                "sourceSha256": "cadfd9a78d3490f9ae9ed6b412849f4f07e6a5ba9f6bf33ed5cab78d7c222aae",
+                "committedMs": 1790997026158,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c68547e9ae9bdf685ff53d5be0c3516717c32daed8d25de5265a4926e98756b6",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-0fb7a6ec-e379-47b7-b1c2-36d1b4bad63a",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "71cf915f2efa5ecd1a20ce7618a27d95b9712e6c7ed45551467a7cb821ef1e65"
+          }
+        },
+        "completedAt": "2026-10-03T03:10:26.450Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-96dd2bf7-d3de-402d-8609-4ae75d5e9a4a",
+          "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0727",
+            "leaseGeneration": 2,
+            "lease_expires_at": 1790997326492,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0257",
+                "path": "chino-taiwan/MLS-V07-0257.json",
+                "sha256": "09b860ce257a35abeda61807104a2b640c4bedc123c3e8dfda5f9f0e4940768d"
+              },
+              {
+                "code": "MLS-V07-0258",
+                "path": "chino-taiwan/MLS-V07-0258.json",
+                "sha256": "c4f470fed4059daa28d4312994626ef1f37eadcebee42cee9cd5ecb6eb104e8c"
+              },
+              {
+                "code": "MLS-V07-0259",
+                "path": "chino-taiwan/MLS-V07-0259.json",
+                "sha256": "ef26d12fd195ee208334c6e9dc3ba5f0dc16eecbd7dc65b8be5a7bf0e63f1ccf"
+              },
+              {
+                "code": "MLS-V07-0261",
+                "path": "chino-taiwan/MLS-V07-0261.json",
+                "sha256": "2c77a58b598cb5da05c6983f192d5fee474bc4e95894beb116a7a526259e86e9"
+              },
+              {
+                "code": "MLS-V07-0262",
+                "path": "chino-taiwan/MLS-V07-0262.json",
+                "sha256": "89972488016b301e2d3b78b0c05afd8b6086aa642f36416a07eddda162a24098"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0727",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0257",
+                "path": "chino-taiwan/MLS-V07-0257.json",
+                "sha256": "09b860ce257a35abeda61807104a2b640c4bedc123c3e8dfda5f9f0e4940768d"
+              },
+              {
+                "code": "MLS-V07-0258",
+                "path": "chino-taiwan/MLS-V07-0258.json",
+                "sha256": "c4f470fed4059daa28d4312994626ef1f37eadcebee42cee9cd5ecb6eb104e8c"
+              },
+              {
+                "code": "MLS-V07-0259",
+                "path": "chino-taiwan/MLS-V07-0259.json",
+                "sha256": "ef26d12fd195ee208334c6e9dc3ba5f0dc16eecbd7dc65b8be5a7bf0e63f1ccf"
+              },
+              {
+                "code": "MLS-V07-0261",
+                "path": "chino-taiwan/MLS-V07-0261.json",
+                "sha256": "2c77a58b598cb5da05c6983f192d5fee474bc4e95894beb116a7a526259e86e9"
+              },
+              {
+                "code": "MLS-V07-0262",
+                "path": "chino-taiwan/MLS-V07-0262.json",
+                "sha256": "89972488016b301e2d3b78b0c05afd8b6086aa642f36416a07eddda162a24098"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0257",
+              "MLS-V07-0258",
+              "MLS-V07-0259",
+              "MLS-V07-0261",
+              "MLS-V07-0262"
+            ],
+            "lease": {
+              "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+              "leaseGeneration": 2,
+              "leaseExpiresAt": 1790997326492,
+              "active": true
+            },
+            "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790997326492,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0257",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 257,
+                "title": "了 con objeto cuantificado",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 aspectual — 體貌助詞「了」",
+                "articleMarkdown": "#### En pocas palabras\n\nEn la estructura **V了 + objeto cuantificado**, una cantidad concreta ayuda a presentar la acción como un **evento delimitado**. El objeto indica cuánto se compró, bebió, escribió o realizó, y **了** marca el evento como realizado en ese marco.\n\n#### Cómo funciona\n\nEn **我買了兩本書。** (*Wǒ mǎi le liǎng běn shū.*) — «Compré dos libros», **兩本書** contiene una cantidad y el clasificador **本**, usado con libros. Esa cantidad proporciona un límite claro a la acción de comprar.\n\nLa estructura no significa que **了** sea una terminación de pasado; el tiempo se establece por el contexto.\n\n#### Ejemplos\n\n- **她喝了三杯水。** (*Tā hē le sān bēi shuǐ.*) — Bebió tres vasos de agua.\n- **我寫了兩封信。** (*Wǒ xiě le liǎng fēng xìn.*) — Escribí dos cartas.\n- **他買了五張票。** (*Tā mǎi le wǔ zhāng piào.*) — Compró cinco boletos.\n\nLos clasificadores **杯、封、張** forman parte de la cuantificación nominal y dependen del tipo de sustantivo.\n\n#### Observación importante\n\nLa cantidad no es un detalle decorativo: contribuye a definir los límites del evento. Por eso estas construcciones resultan especialmente claras para observar el valor aspectual de **了**.\n\nSin embargo, **了** también aparece en otras estructuras donde la delimitación proviene de un resultado, un objeto definido o el contexto. No debe reducirse a una única fórmula con cantidades.\n\n#### Entradas relacionadas\n\n- [Entrada 256: 了 como evento delimitado — 「了」表事件完成／界定](#entry-256)\n- [Entrada 258: 了 con verbos atélicos: límites — 「了」與非終結動詞](#entry-258)\n- [Entrada 255: V了以後 — 「V了以後」](#entry-255)\n- [Entrada 259: 了 después del verbo — 動詞後「了」](#entry-259)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6ad4320e96060dd52db79119e08e990641015039bc7a463a20899c29347a2921",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:24:40.325Z"
+              },
+              {
+                "code": "MLS-V07-0258",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 258,
+                "title": "了 con verbos atélicos: límites",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 aspectual — 體貌助詞「了」",
+                "articleMarkdown": "#### En pocas palabras\n\nAlgunos verbos describen situaciones que **no tienen un final inherente**, como vivir, esperar o estudiar. Con ellos, **了** puede aparecer cuando el contexto añade un límite, por ejemplo una duración determinada.\n\n#### Cómo funciona\n\nEn **我在臺北住了三年。** (*Wǒ zài Táiběi zhù le sān nián.*) — «Viví tres años en Taipéi», **住** por sí mismo no indica cuándo termina la situación. La expresión **三年** establece un tramo medido y permite presentar ese período como delimitado.\n\nEsto no significa automáticamente que la persona ya no viva allí; esa conclusión depende de la construcción completa y del contexto.\n\n#### Ejemplos\n\n- **我等了半個小時。** (*Wǒ děng le bàn ge xiǎoshí.*) — Esperé media hora.\n- **她學了兩年中文。** (*Tā xué le liǎng nián Zhōngwén.*) — Estudió chino durante dos años.\n- **他在這裡工作了五年。** (*Tā zài zhèlǐ gōngzuò le wǔ nián.*) — Trabajó / ha trabajado aquí cinco años.\n\nLa traducción española puede variar según si la situación continúa o ya terminó.\n\n#### Observación importante\n\n«Atélico» significa que la situación no contiene por sí sola un punto final necesario. Una duración, cantidad u otra expresión puede imponer un límite relevante al hablar.\n\nPor eso **了** no debe interpretarse mecánicamente como «acción terminada» ni como pasado. La presencia de un límite y el contexto determinan qué aspecto de la situación se presenta.\n\n#### Entradas relacionadas\n\n- [Entrada 257: 了 con objeto cuantificado — 「V了＋數量賓語」](#entry-257)\n- [Entrada 259: 了 después del verbo — 動詞後「了」](#entry-259)\n- [Entrada 256: 了 como evento delimitado — 「了」表事件完成／界定](#entry-256)\n- [Entrada 260: 了 y marcador temporal — 「了」與時間詞](#entry-260)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-68234c5a3caea7180513260844dbe2c7f3c30040c5b4436e357ea2ad13ff72cc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:25:31.078Z"
+              },
+              {
+                "code": "MLS-V07-0259",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 259,
+                "title": "了 después del verbo",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 aspectual — 體貌助詞「了」",
+                "articleMarkdown": "#### En pocas palabras\n\nCuando **了 (le)** aparece **después del verbo**, suele marcar aspecto: presenta la acción como un evento realizado o delimitado dentro del contexto. Por eso se habla de **了 posverbal** o **了 aspectual**.\n\n#### Cómo funciona\n\nEn **我吃了飯。** (*Wǒ chī le fàn.*) — «Comí / he comido», **了** aparece inmediatamente después de **吃** y antes del objeto **飯**. La construcción presenta el acto de comer como un evento concreto.\n\nLa traducción española depende del contexto; **了** no equivale por sí solo a una forma verbal de pasado.\n\n#### Ejemplos\n\n- **她買了新手機。** (*Tā mǎi le xīn shǒujī.*) — Compró un teléfono nuevo.\n- **我們看了那部電影。** (*Wǒmen kàn le nà bù diànyǐng.*) — Vimos esa película.\n- **他寫了三封信。** (*Tā xiě le sān fēng xìn.*) — Escribió tres cartas.\n\nLos objetos, las cantidades y el contexto pueden contribuir a delimitar la acción.\n\n#### Observación importante\n\nEl **了** posverbal debe distinguirse del **了** al final de la oración, que puede señalar un cambio de situación o un nuevo estado relevante para la conversación. A veces ambos valores aparecen en construcciones cercanas, pero no deben suponerse idénticos automáticamente.\n\nPara interpretar una frase con **了**, importa la posición de la partícula, el tipo de verbo, sus complementos y el contexto temporal.\n\n#### Entradas relacionadas\n\n- [Entrada 258: 了 con verbos atélicos: límites — 「了」與非終結動詞](#entry-258)\n- [Entrada 260: 了 y marcador temporal — 「了」與時間詞](#entry-260)\n- [Entrada 257: 了 con objeto cuantificado — 「V了＋數量賓語」](#entry-257)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-164efe2195df36d49ff90e6e972ae46c069a6d1a8594ee9b12e53e1536ec3c9a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:27.842Z"
+              },
+              {
+                "code": "MLS-V07-0261",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 261,
+                "title": "Doble 了",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 final y cambio de estado — 句末「了」與狀態變化",
+                "articleMarkdown": "#### En pocas palabras\n\nEn algunas frases aparecen **dos 了 (le)** con funciones relacionadas pero distintas. Uno va después del verbo y ayuda a delimitar la actividad; el otro aparece al final de la oración y presenta la situación resultante o vigente como relevante ahora.\n\n#### Cómo funciona\n\nEn **我學中文學了三年了。** (*Wǒ xué Zhōngwén xué le sān nián le.*) — «Llevo tres años estudiando chino», el primer **了** aparece tras **學** y delimita un período de **三年**. El segundo **了** señala que esa duración ha alcanzado el punto actual.\n\nPor eso la frase suele implicar que el estudio continúa en el momento de referencia.\n\n#### Ejemplos\n\n- **我在這裡住了五年了。** (*Wǒ zài zhèlǐ zhù le wǔ nián le.*) — Llevo cinco años viviendo aquí.\n- **他工作了兩個小時了。** (*Tā gōngzuò le liǎng ge xiǎoshí le.*) — Lleva dos horas trabajando.\n- **我們等了半個小時了。** (*Wǒmen děng le bàn ge xiǎoshí le.*) — Llevamos media hora esperando.\n\n#### Observación importante\n\nLos dos **了** no son una repetición sin función. El primero está ligado a la estructura verbal y a la duración delimitada; el segundo afecta a la oración completa y conecta esa duración con la situación actual.\n\nLa interpretación exacta depende del contexto, y ninguno de los dos debe entenderse como una simple terminación de pasado.\n\n#### Entradas relacionadas\n\n- [Entrada 262: Verb-了 vs sentence-final 了 — 動詞後「了」與句末「了」](#entry-262)\n- [Entrada 263: 下雨了 — 「下雨了」](#entry-263)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7eb12fe8d4edfaef9a45bec018dd7e08cf688276324db6d0b0e882ed2074c83e",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:28:16.038Z"
+              },
+              {
+                "code": "MLS-V07-0262",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 262,
+                "title": "Verb-了 vs sentence-final 了",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 final y cambio de estado — 句末「了」與狀態變化",
+                "articleMarkdown": "#### En pocas palabras\n\nEl mandarín tiene usos de **了 (le)** que conviene distinguir por su posición. El **了 después del verbo** suele presentar un evento como delimitado o realizado; el **了 al final de la oración** suele señalar una situación nueva o un cambio relevante.\n\n#### Cómo funciona\n\nCompare **我吃了飯。** (*Wǒ chī le fàn.*) — «Comí / he comido» con **下雨了。** (*Xiàyǔ le.*) — «Empezó a llover / está lloviendo ahora».\n\nEn la primera frase, **了** está unido a la estructura verbal **吃了**. En la segunda, aparece al final y comunica que la situación ha cambiado: ahora llueve.\n\n#### Ejemplos\n\n- **她買了書。** (*Tā mǎi le shū.*) — Compró libros.\n- **天冷了。** (*Tiān lěng le.*) — Ahora hace frío / se puso frío.\n- **我看了那部電影。** (*Wǒ kàn le nà bù diànyǐng.*) — Vi esa película.\n\nLa posición ayuda a identificar la función, aunque siempre hay que considerar la construcción completa.\n\n#### Observación importante\n\nNo es correcto llamar al primer **了** «pasado» y al segundo simplemente «ahora». Ambos expresan relaciones aspectuales o discursivas que dependen del contexto.\n\nAdemás, ciertas frases pueden contener dos **了**, uno posverbal y otro final. En esos casos cada uno aporta una función distinta dentro de la misma oración.\n\n#### Entradas relacionadas\n\n- [Entrada 261: Doble 了 — 雙「了」](#entry-261)\n- [Entrada 263: 下雨了 — 「下雨了」](#entry-263)\n- [Entrada 264: 了 final de cambio de estado — 句末「了」表狀態變化](#entry-264)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-566ec124ee30b9602f05165cb65c75a47dabb28a60d090ef10f33c5315b90bf2",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:29:13.804Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:10:27.072Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:10:27.072Z",
+  "commandFile": "mls chat bridge/commands/000-r44/r44-chat-1163f026d16c4eb69e4e1f87775677b8/10-submit-claim08.json"
+}

@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-z6-ticket04-submit-claim5",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-58c1504a-31c6-49da-90ea-b37abea4e4d0",
+          "ticketId": "R43-EMERGENCY-0790",
+          "leaseExpiresAt": 1790997348886
+        },
+        "completedAt": "2026-10-03T03:10:49.020Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0790",
+          "sha256": "0c5cc03a49b4b785dcd0d0c3b4e0d13c7c43dd448dad38cffa266aa70dec2daa",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0790",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2ad72d62-520a-4a32-93f0-b738441a3638",
+                "ticketId": "R43-EMERGENCY-0790",
+                "code": "MLS-V07-0635",
+                "idempotencyKey": "R43-EMERGENCY-0790:MLS-V07-0635:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e8c89747e5069f21a533ca01f0f98c700fbb5a958393ee58f15b708940dd47a0",
+                "sourceSha256": "e6a563e677c93266da7154c7adc636738424f0c41920e7a5ec8b574ddf92b09a",
+                "committedMs": 1790997049415,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "2d9f7a243c0c74e140dfb2242d6fe9d46b8e54456df32347d5740d60dc1470cd",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0790",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ed66ac64-de93-4673-8925-e0fa8dd80bee",
+                "ticketId": "R43-EMERGENCY-0790",
+                "code": "MLS-V07-0636",
+                "idempotencyKey": "R43-EMERGENCY-0790:MLS-V07-0636:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f24c90b7c451844d1eb40a64585ecfee9c2bed0ffba3f8f8f5db7db0506127d5",
+                "sourceSha256": "e85d99928b2e1a48a46d476d556292aa7c33ee52fafcaffc252fb4567fb0a5d0",
+                "committedMs": 1790997049631,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "009b6e0adff5965dbfa62b7d4f57f86b84d5cd4f8ae13a7996c4a294890d6257",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0790",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "abb575f9-e991-4233-b88e-a440f6373739",
+                "ticketId": "R43-EMERGENCY-0790",
+                "code": "MLS-V07-0637",
+                "idempotencyKey": "R43-EMERGENCY-0790:MLS-V07-0637:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "37d8028b55626b1c6bfa14061977c1bf721fb2a9bbe991ee176ccc22ff94f9e2",
+                "sourceSha256": "5d6c8a1d46f91490c58d562897a96a428a37747f462f32491774a6529b5c897b",
+                "committedMs": 1790997049846,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "67ae1022c0b1b808f24a1ad09bc6c54a41dd0c0cbd4f0eff26f5f3e3ab824357",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0790",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "bbbe602d-90ac-46e9-9232-aab654af62cd",
+                "ticketId": "R43-EMERGENCY-0790",
+                "code": "MLS-V07-0638",
+                "idempotencyKey": "R43-EMERGENCY-0790:MLS-V07-0638:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e9e31f9acf26a216855760967cf215a6c9c728212793bba7eac4bbeccf2bc90d",
+                "sourceSha256": "8e74475e7255bca6f03b5c05052a597d26f9ccfde643d56157d16ed8525da722",
+                "committedMs": 1790997050066,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7cec5020d719d81f96007366c22517e36dbe13243390dffe8eadda503cad3bc1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0790",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6f2cddb8-3530-401b-92de-ed32f42fe193",
+                "ticketId": "R43-EMERGENCY-0790",
+                "code": "MLS-V07-0640",
+                "idempotencyKey": "R43-EMERGENCY-0790:MLS-V07-0640:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f1e65aedac1ab17ed6299de1fdbc2edffd94a134b88c59c9834f31263957b981",
+                "sourceSha256": "748d8b7ce74ecee4863f6cdf34c057ef1fc15820e7c5487daa8db6e6bbbe36b0",
+                "committedMs": 1790997050288,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e44dfa64cd1cd687f840ff2baa794ee22281b8486232d478c524fe8f7b968098",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-58c1504a-31c6-49da-90ea-b37abea4e4d0",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "0c5cc03a49b4b785dcd0d0c3b4e0d13c7c43dd448dad38cffa266aa70dec2daa"
+          }
+        },
+        "completedAt": "2026-10-03T03:10:50.598Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-f20f3a7f-928d-41d0-b139-9d7cefa370ee",
+          "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0794",
+            "leaseGeneration": 2,
+            "lease_expires_at": 1790997350642,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0658",
+                "path": "chino-taiwan/MLS-V07-0658.json",
+                "sha256": "7f7e961a4bc072bd2e6922521841600f19491cc8fdf2a2ccfd89f4b0ee38dbd5"
+              },
+              {
+                "code": "MLS-V07-0661",
+                "path": "chino-taiwan/MLS-V07-0661.json",
+                "sha256": "67d727351b7638300fb3219baa96e93345915162d1ab2b78ba0780ec9173b9af"
+              },
+              {
+                "code": "MLS-V07-0662",
+                "path": "chino-taiwan/MLS-V07-0662.json",
+                "sha256": "9be29127f3ce826210b70dc64f0f10b5cf124a53692ce9d661d480a6f442494a"
+              },
+              {
+                "code": "MLS-V07-0663",
+                "path": "chino-taiwan/MLS-V07-0663.json",
+                "sha256": "b0bbda7668614a37b1bf6022755bc0de169eb2f2d740e5cb1158f57cce1f8aed"
+              },
+              {
+                "code": "MLS-V07-0664",
+                "path": "chino-taiwan/MLS-V07-0664.json",
+                "sha256": "ff61ccee79642e5492034f10fa1dac926fc8ad0cb9cb592cce1ce6692430aaa6"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0794",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0658",
+                "path": "chino-taiwan/MLS-V07-0658.json",
+                "sha256": "7f7e961a4bc072bd2e6922521841600f19491cc8fdf2a2ccfd89f4b0ee38dbd5"
+              },
+              {
+                "code": "MLS-V07-0661",
+                "path": "chino-taiwan/MLS-V07-0661.json",
+                "sha256": "67d727351b7638300fb3219baa96e93345915162d1ab2b78ba0780ec9173b9af"
+              },
+              {
+                "code": "MLS-V07-0662",
+                "path": "chino-taiwan/MLS-V07-0662.json",
+                "sha256": "9be29127f3ce826210b70dc64f0f10b5cf124a53692ce9d661d480a6f442494a"
+              },
+              {
+                "code": "MLS-V07-0663",
+                "path": "chino-taiwan/MLS-V07-0663.json",
+                "sha256": "b0bbda7668614a37b1bf6022755bc0de169eb2f2d740e5cb1158f57cce1f8aed"
+              },
+              {
+                "code": "MLS-V07-0664",
+                "path": "chino-taiwan/MLS-V07-0664.json",
+                "sha256": "ff61ccee79642e5492034f10fa1dac926fc8ad0cb9cb592cce1ce6692430aaa6"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0658",
+              "MLS-V07-0661",
+              "MLS-V07-0662",
+              "MLS-V07-0663",
+              "MLS-V07-0664"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+              "leaseGeneration": 2,
+              "leaseExpiresAt": 1790997350642,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790997350642,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0658",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 658,
+                "title": "Conector 尤其",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**尤其 (yóuqí)** destaca un elemento como **especialmente importante o representativo** dentro de un conjunto. En español suele corresponder a «especialmente», «sobre todo» o «en particular».\n\nPor ejemplo, **我喜歡台灣小吃，尤其是牛肉麵。** — «Me gusta la comida popular de Taiwán, especialmente los fideos con res». Primero se menciona una categoría amplia y después **尤其** señala el miembro que recibe mayor énfasis.\n\n#### Cómo funciona\n\n**尤其** puede preceder directamente al elemento destacado: **這裡冬天很冷，尤其是一月。** — «Aquí hace mucho frío en invierno, especialmente en enero». Es frecuente la secuencia **尤其是 + sustantivo o expresión nominal**.\n\nTambién puede introducir una cláusula completa: **交通尖峰時間很塞車，尤其下雨的時候更嚴重。** — «En las horas pico hay mucho tráfico, y sobre todo cuando llueve es todavía peor».\n\nEl contenido destacado normalmente pertenece a un marco más general mencionado o inferible en el contexto. Por eso, **尤其** no funciona simplemente como una forma de añadir cualquier dato nuevo.\n\n#### Ejemplos\n\n- **這個地區夏天很熱，尤其是七、八月。** — Esta zona es muy calurosa en verano, sobre todo en julio y agosto.\n- **她喜歡閱讀，尤其喜歡歷史小說。** — Le gusta leer, especialmente novelas históricas.\n- **新規定影響很多產業，尤其是小型企業。** — La nueva normativa afecta a muchos sectores, en particular a las pequeñas empresas.\n\n#### Observación importante\n\n**尤其** expresa énfasis selectivo. **另外** añade otro punto y **同時** presenta aspectos conjuntamente relevantes; ninguna de esas funciones implica por sí sola que un elemento sobresalga dentro de un conjunto.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **尤其**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 因此 — 連接語「因此」](#entry-657)\n- [Conector 所以 — 連接語「所以」](#entry-659)\n- [Conector 同時 — 連接語「同時」](#entry-656)\n- [Conector 換句話說 — 連接語「換句話說」](#entry-660)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-11ef06fcac9b0b7935c387d9127eb6c370507c627d55497f53394c80d6e31f14",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:28:02.746Z"
+              },
+              {
+                "code": "MLS-V07-0661",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 661,
+                "title": "Conector 最後",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**最後 (zuìhòu)** señala el **último elemento** de una secuencia o la fase final de un proceso, exposición o relato. En español suele corresponder a «por último», «finalmente» o «al final», según el contexto.\n\nPor ejemplo, **首先確認資料，其次分析結果，最後提出建議。** — «Primero se verifican los datos, después se analizan los resultados y, por último, se presentan recomendaciones». **最後** marca el cierre de una serie ordenada.\n\n#### Cómo funciona\n\nComo conector discursivo, **最後** suele aparecer al inicio de la parte final de una enumeración: **最後，我們再看成本問題。** — «Por último, examinamos la cuestión de los costos». Puede cerrar una lista de argumentos, etapas o aspectos.\n\nTambién tiene un uso temporal más literal: **他最後還是決定留下來。** — «Al final decidió quedarse». Aquí no solo organiza el texto, sino que presenta el desenlace alcanzado después de un proceso previo.\n\nLa interpretación depende por tanto de si **最後** ordena el discurso o describe el resultado final de una secuencia de acontecimientos.\n\n#### Ejemplos\n\n- **第一部分介紹背景，第二部分分析資料，最後討論結論。** — La primera parte presenta el contexto, la segunda analiza los datos y, finalmente, se discuten las conclusiones.\n- **我們比較了三個方案，最後選了成本最低的。** — Comparamos tres planes y al final elegimos el de menor costo.\n- **先確認時間，再安排地點，最後通知所有人。** — Primero se confirma la hora, después se organiza el lugar y por último se avisa a todos.\n\n#### Observación importante\n\n**最後** no equivale a **然後**. **然後** enlaza etapas sucesivas sin indicar necesariamente que se haya llegado al cierre; **最後** marca específicamente el elemento o desenlace final dentro del marco considerado.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **最後**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 換句話說 — 連接語「換句話說」](#entry-660)\n- [Conector 此外 — 連接語「此外」](#entry-662)\n- [Conector 所以 — 連接語「所以」](#entry-659)\n- [Conector 然後 — 連接語「然後」](#entry-663)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9b4a46c1429c5992f5b443a0ef71b6854efe0a081dc9f9f465a1cba64e2f1ea8",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:30:52.277Z"
+              },
+              {
+                "code": "MLS-V07-0662",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 662,
+                "title": "Conector 此外",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**此外 (cǐwài)** introduce **información adicional** que se suma a lo anterior. En español suele corresponder a «además», «asimismo» o «aparte de eso». Es especialmente frecuente en registros escritos y expositivos.\n\nPor ejemplo, **這個方案成本較低；此外，執行時間也比較短。** — «Este plan tiene un costo menor; además, el tiempo de ejecución también es más corto». La segunda parte aporta otra característica relevante del mismo asunto.\n\n#### Cómo funciona\n\n**此外** suele aparecer al inicio de una cláusula u oración. Su significado literal se relaciona con «fuera de esto», pero como conector discursivo funciona principalmente para añadir otro punto: **此外，我們還需要考慮人力問題。** — «Además, todavía tenemos que considerar la cuestión del personal».\n\nPuede enlazar argumentos, datos, ventajas, condiciones o cualquier otra información adicional. No establece por sí mismo una relación de contraste ni una secuencia temporal.\n\nFrente a **另外**, **此外** suele asociarse más con la escritura formal o expositiva, aunque ambas formas pueden solaparse en muchos contextos.\n\n#### Ejemplos\n\n- **研究顯示成本下降；此外，效率也有所提升。** — El estudio muestra que los costos disminuyeron; además, la eficiencia también mejoró.\n- **這家飯店離車站很近；此外，附近有很多餐廳。** — Este hotel está muy cerca de la estación; asimismo, hay muchos restaurantes en los alrededores.\n- **新制度簡化了流程；此外，也減少了紙本文件。** — El nuevo sistema simplificó el proceso; además, redujo la documentación en papel.\n\n#### Observación importante\n\n**此外** expresa adición. No equivale a **最後**, que marca el cierre de una secuencia, ni a **然而**, que introduce contraste. Su diferencia con **另外** es principalmente de distribución y registro, no una oposición rígida de significado.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **此外**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 最後 — 連接語「最後」](#entry-661)\n- [Conector 然後 — 連接語「然後」](#entry-663)\n- [Conector 換句話說 — 連接語「換句話說」](#entry-660)\n- [Conector 然而 — 連接語「然而」](#entry-664)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f58cb604c92b11e23e937f8e2bfe7eac964d3f0d25b3fceb96dfd24277942a9b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:32:12.417Z"
+              },
+              {
+                "code": "MLS-V07-0663",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 663,
+                "title": "Conector 然後",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**然後 (ránhòu)** enlaza acontecimientos, acciones o etapas que se presentan **uno después de otro**. En español suele corresponder a «después», «luego» o «entonces».\n\nPor ejemplo, **我們先確認資料，然後開始分析。** — «Primero verificamos los datos y después comenzamos el análisis». La segunda acción se sitúa como posterior a la primera dentro de una secuencia.\n\n#### Cómo funciona\n\nUna estructura frecuente es **A，然後 B**. La relación entre A y B suele ser temporal o procedimental: primero ocurre una situación y luego otra. **然後** puede enlazar acciones de una misma persona o etapas más amplias de un relato.\n\nTambién puede aparecer al comienzo de una nueva oración cuando la secuencia ya está establecida: **然後，他們決定改變計畫。** — «Después, decidieron cambiar el plan».\n\nEn conversación, **然後** también puede servir para hacer avanzar una narración, incluso cuando el intervalo temporal exacto no es importante. Su función sigue siendo presentar lo siguiente como continuación de una secuencia.\n\n#### Ejemplos\n\n- **先把資料整理好，然後再寄出去。** — Primero se organizan los datos y después se envían.\n- **他到了台北，然後轉車去宜蘭。** — Llegó a Taipéi y luego hizo transbordo para ir a Yilan.\n- **我們討論了幾個方案，然後決定採用第二個。** — Hablamos de varios planes y después decidimos adoptar el segundo.\n\n#### Observación importante\n\n**然後** no significa «finalmente». Puede aparecer en cualquier punto intermedio de una secuencia. **最後** marca el último elemento o desenlace, mientras que **然後** simplemente enlaza una etapa con la siguiente.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **然後**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 此外 — 連接語「此外」](#entry-662)\n- [Conector 然而 — 連接語「然而」](#entry-664)\n- [Conector 最後 — 連接語「最後」](#entry-661)\n- [Conector 相反地 — 連接語「相反地」](#entry-665)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-74ece1bdd59c4f00be5bbeebde37c027e6ae519ce22dfa429ef9eaec2761ef88",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:33:07.387Z"
+              },
+              {
+                "code": "MLS-V07-0664",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 664,
+                "title": "Conector 然而",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**然而 (rán'ér)** introduce un **contraste** entre dos ideas, con un tono frecuente en la escritura formal o expositiva. En español suele corresponder a «sin embargo», «no obstante» o «pero».\n\nPor ejemplo, **這個方法看起來很簡單；然而，實際執行並不容易。** — «Este método parece sencillo; sin embargo, llevarlo a la práctica no es fácil». La segunda parte se opone a la expectativa creada por la primera.\n\n#### Cómo funciona\n\n**然而** aparece habitualmente al inicio de una cláusula u oración contrastiva. Puede enlazar afirmaciones, resultados, expectativas o evaluaciones: **資料很多，然而真正有用的資訊有限。** — «Hay muchos datos; sin embargo, la información realmente útil es limitada».\n\nSu función se acerca a la de **但是** y **不過**, pero **然而** suele asociarse más claramente con textos escritos, argumentativos o formales. Esta diferencia es de tendencia de registro y no una frontera absoluta.\n\nEl contraste introducido puede ser fuerte o simplemente limitar una generalización anterior.\n\n#### Ejemplos\n\n- **成本已經下降；然而，價格仍然偏高。** — Los costos ya han bajado; sin embargo, el precio sigue siendo alto.\n- **多數人支持這個方案，然而也有人提出疑慮。** — La mayoría apoya este plan; no obstante, algunas personas han expresado dudas.\n- **研究結果相當一致；然而，樣本數仍然有限。** — Los resultados del estudio son bastante consistentes; sin embargo, el tamaño de la muestra sigue siendo limitado.\n\n#### Observación importante\n\n**然而** no expresa secuencia temporal como **然後**. Aunque ambas palabras comienzan con **然**, sus funciones discursivas son distintas: **然而** marca contraste; **然後** presenta continuación o posterioridad.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **然而**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 然後 — 連接語「然後」](#entry-663)\n- [Conector 相反地 — 連接語「相反地」](#entry-665)\n- [Conector 此外 — 連接語「此外」](#entry-662)\n- [Conector 結果 — 連接語「結果」](#entry-666)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7dbfa0b19ee78df1740b61ea0f424b526550744588ec73dcbcd5f64d4aaa9bfb",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:34:03.748Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:10:51.232Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:10:51.232Z",
+  "commandFile": "mls chat bridge/commands/r44/z6-ticket04-submit-claim5.json"
+}
