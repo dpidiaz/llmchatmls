@@ -104,6 +104,9 @@ async function createClaim(stage){
   const claim=unified.createClaim({stage,requestId,workerId:WORKERS[stage],workerLogin:BOT});
   const issue=await gh('/repos/'+REPOSITORY+'/issues',{method:'POST',body:{title:claim.title,body:claim.body}});
   await report(stage,'CLAIM_PENDING',{issueNumber:Number(issue.number),detail:{requestId,workerId:WORKERS[stage]}});
+  await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
+    method:'POST',body:{ref:'main'}
+  });
   return issue;
 }
 async function laneIssue(stage,lane){
