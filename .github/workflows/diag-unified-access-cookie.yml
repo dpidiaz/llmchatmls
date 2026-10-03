@@ -1,0 +1,20 @@
+name: Diagnose Unified Access Cookie
+on:
+  push:
+    branches:
+      - diag/unified-access-cookie
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect Access application cookie settings
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          account='7ca8428acd1e83f8c7b03427c249a56d'
+          apps="$(curl -fsSL -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$account/access/apps?per_page=100")"
+          printf '%s' "$apps" | jq -c '.result[] | select(.name=="MLS Unified Runner") | {id,name,domain,aud,destinations,session_duration,path_cookie_attribute,http_only_cookie_attribute,same_site_cookie_attribute,enable_binding_cookie,eager_redirect_to_identity}'
