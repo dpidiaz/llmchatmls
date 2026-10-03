@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-sol-current-5f2d9-ticket-0631-one-entry-0708",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-6060e4ad-f1b0-4d0e-a1aa-502ce2b2a081",
+          "ticketId": "R43-EMERGENCY-0631",
+          "leaseExpiresAt": 1790999359633
+        },
+        "completedAt": "2026-10-03T03:44:19.813Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0631",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "8b98e966-40b2-4927-9d5e-e947e383c935",
+            "ticketId": "R43-EMERGENCY-0631",
+            "code": "MLS-V06-0708",
+            "idempotencyKey": "sol-5f2d9:R43-EMERGENCY-0631:MLS-V06-0708:v1",
+            "workerId": "r44-sol-chat-20261003T0340Z-5f2d9",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "a4b2dd9939d03b3c0d2c5d036c609189d405e332a97625cd1ec04735ca8a5ca0",
+            "sourceSha256": "f66fe5b1d6c7fc0fc0c8d17f08b790609528ac1f0e8808ead958fa9187371f2e",
+            "committedMs": 1790999060093,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "bf4ec9ce2b385cf4df1d28ca50441c6c8e1208fc3513ad110f5b888641b4057e",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:44:20.197Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:44:20.197Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-sol-20261002T2140-current-5f2d9/02-renew-checkpoint-0708.json"
+}
