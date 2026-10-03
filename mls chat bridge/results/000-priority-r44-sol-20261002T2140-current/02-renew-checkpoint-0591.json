@@ -1,0 +1,47 @@
+{
+  "success": false,
+  "httpStatus": 409,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-single-sol-current-MLS-V09-0591-20261003T0345Z",
+    "requested": 2,
+    "processed": 2,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-5222cc9d-662d-4ac1-aea9-e5d57aec786f",
+          "ticketId": "R44-CORPUS-1462",
+          "leaseExpiresAt": 1790999432120
+        },
+        "completedAt": "2026-10-03T03:45:32.260Z"
+      },
+      {
+        "index": 1,
+        "success": false,
+        "httpStatus": 409,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "http": 409,
+          "error": "RESULT_CONFLICT"
+        },
+        "completedAt": "2026-10-03T03:45:32.486Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:45:32.486Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-sol-20261002T2140-current/02-renew-checkpoint-0591.json"
+}
