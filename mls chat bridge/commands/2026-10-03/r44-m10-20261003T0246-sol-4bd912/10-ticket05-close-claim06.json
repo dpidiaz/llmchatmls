@@ -1,0 +1,96 @@
+{
+  "batchId": "r44-m10-4bd912-ticket05-close-claim06",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-7d65d685-438a-4516-8af1-dccb1b79a417"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7d65d685-438a-4516-8af1-dccb1b79a417",
+        "ticketId": "R43-EMERGENCY-0587",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0444-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0444",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 〜たい expresa prototípicamente deseo del hablante; preguntas permiten deseo del interlocutor y para tercera persona se usan con frecuencia 〜たがる o cita. La entrada evita la falsa regla absoluta de primera persona. Sin corrección."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7d65d685-438a-4516-8af1-dccb1b79a417",
+        "ticketId": "R43-EMERGENCY-0587",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0445-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0445",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 〜たいと思う presenta deseo/intención como pensamiento y puede atenuar la expresión; no equivale a capacidad. Ejemplos y contraste son correctos."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7d65d685-438a-4516-8af1-dccb1b79a417",
+        "ticketId": "R43-EMERGENCY-0587",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0447-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0447",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: forma volitiva + と思う expresa intención; 〜ようと思っている puede presentar una intención mantenida. El contraste con 〜たいと思う es pedagógicamente correcto."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7d65d685-438a-4516-8af1-dccb1b79a417",
+        "ticketId": "R43-EMERGENCY-0587",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0448-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0448",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: formación de 意向形 correcta para 五段, 一段, する y 来る; usos de propuesta y decisión interna, y contraste con potencial, son correctos."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7d65d685-438a-4516-8af1-dccb1b79a417",
+        "ticketId": "R43-EMERGENCY-0587",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0449-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0449",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 欲しい expresa deseo respecto de un referente nominal, se comporta como adjetivo い, contrasta con 〜たい y para tercera persona puede aparecer 欲しがっている/cita. Sin corrección."
+        }
+      }
+    },
+    {
+      "operationId": "r44RebindChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "ticketId": "R43-EMERGENCY-0587"
+      }
+    },
+    {
+      "operationId": "r44ClaimChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "idempotencyKey": "claim-20261003T0246Z-4bd912-06"
+      }
+    }
+  ]
+}
