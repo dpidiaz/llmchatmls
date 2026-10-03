@@ -1,0 +1,48 @@
+{
+  "batchId": "r44-single-sol-current-MLS-V09-0591-20261003T0345Z",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-5222cc9d-662d-4ac1-aea9-e5d57aec786f"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-5222cc9d-662d-4ac1-aea9-e5d57aec786f",
+        "ticketId": "R44-CORPUS-1462",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R44-CORPUS-1462:MLS-V09-0591:audit-20261003T0345Z-sol-current",
+        "entry": {
+          "code": "MLS-V09-0591",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "id": "RUSLANG-ANTONYM-NESMOTRYA-NA",
+              "citation": "Институт русского языка им. В. В. Виноградова РАН. (2026). «Несмотря на». Словарь антонимов русского языка.",
+              "url": "https://ruslang.ru/sites/default/files/doc/normativnyje_slovari/Slovar_antonimov.pdf"
+            },
+            {
+              "id": "RUSLANG-AKADEMOS-NESMOTRYA",
+              "citation": "Институт русского языка им. В. В. Виноградова РАН. (2026). «несмотря на». АКАДЕМОС.",
+              "url": "https://orfo.ruslang.ru/abc/part/en?end=88171&start=87871"
+            }
+          ],
+          "claims": [
+            {
+              "claim": "«Несмотря на» es una preposición rusa de valor concesivo que rige acusativo; la fuente académica la glosa como equivalente a «вопреки чему-либо» y la marca explícitamente «предлог с вин. п.».",
+              "support": "RUSLANG-ANTONYM-NESMOTRYA-NA"
+            },
+            {
+              "claim": "La norma ortográfica distingue «несмотря на» (preposición, escrito junto) de «не смотря» (gerundio con не, escrito separado), exactamente como explica la entrada auditada.",
+              "support": "RUSLANG-AKADEMOS-NESMOTRYA"
+            }
+          ],
+          "notes": "Auditoría R44 de MLS-V09-0591: la explicación central es correcta. «Несмотря на» expresa concesión y rige acusativo; los ejemplos плохую погоду, дождь y трудности son compatibles con ese régimen, teniendo en cuenta las coincidencias morfológicas del acusativo con nominativo en inanimados. También es correcta la distinción ortográfica y funcional entre la preposición несмотря на y el gerundio literal не смотря. No se detecta error sustantivo que requiera edición. PASS_NO_CHANGE; R33 canónico sigue pendiente."
+        }
+      }
+    }
+  ]
+}
