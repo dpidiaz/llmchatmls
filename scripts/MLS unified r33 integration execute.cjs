@@ -123,10 +123,10 @@ function applySources(){
 function validateStaged(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));
   const files=run('git',['diff','--cached','--name-only'],{capture:true}).split(/\r?\n/).filter(Boolean);
-  if(!files.length)fail('UNIFIED_INTEGRATION_NO_STAGED_CHANGES');
   const bad=files.filter(file=>!core.pathAllowed(file,bundle.allowedPaths||[]));
   if(bad.length)fail('UNIFIED_INTEGRATION_SCOPE_VIOLATION',bad.join(', '));
-  process.stdout.write(JSON.stringify({ok:true,files})+'\n');
+  output('has_changes',files.length?'true':'false');
+  process.stdout.write(JSON.stringify({ok:true,hasChanges:files.length>0,files})+'\n');
 }
 async function openPr(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),headSha=String(process.argv[4]||'').toLowerCase();
@@ -165,6 +165,34 @@ function writeEvent(kind,bundle,event,commentId){
     id:Number(commentId),body,created_at:new Date().toISOString(),user:{login:bundle.commentLogin}
   }},null,2)+'\n');
   output('event_path',p);return p;
+}
+async function noopCheckpointEvent(){
+  const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),runId=Number(process.argv[4]);
+  const {repository}=githubContext();
+  const issue=await gh('/repos/'+repository+'/issues/'+bundle.issueNumber);
+  const state=core.parseAssignmentState(issue.body||'');
+  if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased')fail('UNIFIED_INTEGRATION_NOOP_STATE_INVALID');
+  const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
+  const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
+  if(!/^[a-f0-9]{40}$/.test(mainSha))fail('UNIFIED_INTEGRATION_NOOP_MAIN_INVALID');
+  const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
+  const branchSha=String(branchRef?.object?.sha||'').toLowerCase();
+  if(branchSha!==mainSha)fail('UNIFIED_INTEGRATION_NOOP_MAIN_MOVED','No-op requires assignment branch HEAD to equal current main HEAD.');
+  writeEvent('noop-checkpoint',bundle,{operation:'checkpoint',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
+    commitSha:mainSha,integrationStage:'noop',
+    validation:{status:'passed',workflow:'MLS Unified R33 Integration Execute',runId},
+    completedUnits:state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6)),pendingUnits:[],
+    notes:'Unified idempotent no-op integration: pinned sources and regenerated indexes already match canonical main.'},runId*10+4);
+}
+async function noopFinishEvent(){
+  const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),runId=Number(process.argv[4]);
+  const {repository}=githubContext();
+  const issue=await gh('/repos/'+repository+'/issues/'+bundle.issueNumber);
+  const state=core.parseAssignmentState(issue.body||'');
+  if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased'||String(state.lastCheckpointCommit||'').toLowerCase()!==String(state.baseCommit||'').toLowerCase())
+    fail('UNIFIED_INTEGRATION_NOOP_FINISH_STATE_INVALID');
+  writeEvent('noop-finish',bundle,{operation:'finish',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
+    commitSha:String(state.lastCheckpointCommit).toLowerCase(),integrationStage:'noop'},runId*10+5);
 }
 async function premergeEvent(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),headSha=String(process.argv[4]||'').toLowerCase();
@@ -214,6 +242,8 @@ async function main(){
   if(mode==='validate-staged')return validateStaged();
   if(mode==='open-pr')return openPr();
   if(mode==='wait-check')return waitCheck();
+  if(mode==='noop-checkpoint-event')return noopCheckpointEvent();
+  if(mode==='noop-finish-event')return noopFinishEvent();
   if(mode==='premerge-event')return premergeEvent();
   if(mode==='merge-pr')return mergePr();
   if(mode==='postmerge-event')return postmergeEvent();
