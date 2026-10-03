@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-93bf-ticket05-next06",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-d578d7ba-83dc-4078-b413-724068d97a98",
+          "ticketId": "R44-CORPUS-0825",
+          "leaseExpiresAt": 1790996949497
+        },
+        "completedAt": "2026-10-03T03:04:09.582Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0825",
+          "sha256": "b1cce2f0f704323c1412aac63f725bad7c2dbe5c5571cb1e5cc28b576156b7b0",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0825",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "71b50cef-7504-4321-aa39-e81261ca910e",
+                "ticketId": "R44-CORPUS-0825",
+                "code": "MLS-V01-0155",
+                "idempotencyKey": "R44-CORPUS-0825:MLS-V01-0155:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "52b6e2ec21bb19e1384da9a7b0f9dc3e907f0a527479cecf34be7d63436dc2d4",
+                "sourceSha256": "468238f50300c3bbb02453b7a4e2d81390cea1b0b2c3347c7ac85b2f7675d173",
+                "committedMs": 1790996649688,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d726d568d72e827ff82768fb0c0cf43d5040b4e708077b6a5c685035d702a93c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0825",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e4e73db7-62bd-409f-a226-27bb97c170f7",
+                "ticketId": "R44-CORPUS-0825",
+                "code": "MLS-V01-0156",
+                "idempotencyKey": "R44-CORPUS-0825:MLS-V01-0156:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2f4ced24551df485b293891fc8f87ce8f1418ae71fa24a09b9295069c5601f00",
+                "sourceSha256": "3f2707bf8817b30e33c49952608fd7da843071ab109b9ef193231f2b9f6fa182",
+                "committedMs": 1790996649762,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c8245c4028cc3c9f2a01acaf755769737c3584921c0775fddf6833074bc2cb58",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0825",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2d1fa03a-8768-4562-9d47-90a97e405262",
+                "ticketId": "R44-CORPUS-0825",
+                "code": "MLS-V01-0158",
+                "idempotencyKey": "R44-CORPUS-0825:MLS-V01-0158:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "5c0d46137171bf4dda6cca71dc1750b5246c4801022350c71472e99b37c4a51e",
+                "sourceSha256": "85c12f318314b1003ad722f869dd0a09722b157a95ca54dca5fabc90a0c5b859",
+                "committedMs": 1790996649844,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "fa06f22316a50ab55e58bbe3b0d9be42401eb6fa68bc79cd106b915d4d6d33b7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0825",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d30dd2e9-0ac7-4a4f-80c8-591ccadd79aa",
+                "ticketId": "R44-CORPUS-0825",
+                "code": "MLS-V01-0159",
+                "idempotencyKey": "R44-CORPUS-0825:MLS-V01-0159:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ecd8577658c1e8f2305bcb84c2cc821b5d846ec26f91063c2fd62e78457716ba",
+                "sourceSha256": "39eabd7be02189cd08731049ad0a6e80b0649b13ecb9bb7db815739ca29556b1",
+                "committedMs": 1790996649915,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0cd613769afcc338708a73dcc1211e4aa60ea07053c5ca7d7c6743e35f551fb8",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0825",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d6213f0e-0290-44e2-a49e-d018018cfe92",
+                "ticketId": "R44-CORPUS-0825",
+                "code": "MLS-V01-0160",
+                "idempotencyKey": "R44-CORPUS-0825:MLS-V01-0160:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a781d7d8cc57f70e5a99d0dcc39295cbcf5cc07d1ea2a7642497b2f041d95f62",
+                "sourceSha256": "fc15f3ca3923f9605474f00aa040b6ea44b238a6257a2d9214b8ebdb73c9a852",
+                "committedMs": 1790996649991,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f5f26d168c357b2a7d77003876d1fd572f8538ccddb6116b5d9cbc6e3ce8303c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-d578d7ba-83dc-4078-b413-724068d97a98",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "b1cce2f0f704323c1412aac63f725bad7c2dbe5c5571cb1e5cc28b576156b7b0"
+          }
+        },
+        "completedAt": "2026-10-03T03:04:10.176Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-63b63ac0-4b22-4122-bec4-b00a851ff2d7",
+          "workerId": "r44-m10-20261002-2045-sol-93bf",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0826",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996950201,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0162",
+                "path": "ingles/MLS-V01-0162.json",
+                "sha256": "a42442998b949cf46c34f3a284913892412b038c3899425bb14582d01fa76dbe"
+              },
+              {
+                "code": "MLS-V01-0163",
+                "path": "ingles/MLS-V01-0163.json",
+                "sha256": "fd5952950d8c70cbfb8ce8fc84fb229778bd1011cd3e5dec10e4c30f2caeafb3"
+              },
+              {
+                "code": "MLS-V01-0164",
+                "path": "ingles/MLS-V01-0164.json",
+                "sha256": "dd1dbd566e4f971abeebc295fade7696712dc0b917023e3cfe29a1cff4588ac1"
+              },
+              {
+                "code": "MLS-V01-0166",
+                "path": "ingles/MLS-V01-0166.json",
+                "sha256": "3823662b9ac833722a299192970dd4854990630749f6c198b4d77b09597c62c7"
+              },
+              {
+                "code": "MLS-V01-0167",
+                "path": "ingles/MLS-V01-0167.json",
+                "sha256": "b299cbd9e06f3284ee37d20dcd194e971d6162e90c4d09dffa1037bcc2f7f97e"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0826",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0162",
+                "path": "ingles/MLS-V01-0162.json",
+                "sha256": "a42442998b949cf46c34f3a284913892412b038c3899425bb14582d01fa76dbe"
+              },
+              {
+                "code": "MLS-V01-0163",
+                "path": "ingles/MLS-V01-0163.json",
+                "sha256": "fd5952950d8c70cbfb8ce8fc84fb229778bd1011cd3e5dec10e4c30f2caeafb3"
+              },
+              {
+                "code": "MLS-V01-0164",
+                "path": "ingles/MLS-V01-0164.json",
+                "sha256": "dd1dbd566e4f971abeebc295fade7696712dc0b917023e3cfe29a1cff4588ac1"
+              },
+              {
+                "code": "MLS-V01-0166",
+                "path": "ingles/MLS-V01-0166.json",
+                "sha256": "3823662b9ac833722a299192970dd4854990630749f6c198b4d77b09597c62c7"
+              },
+              {
+                "code": "MLS-V01-0167",
+                "path": "ingles/MLS-V01-0167.json",
+                "sha256": "b299cbd9e06f3284ee37d20dcd194e971d6162e90c4d09dffa1037bcc2f7f97e"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0162",
+              "MLS-V01-0163",
+              "MLS-V01-0164",
+              "MLS-V01-0166",
+              "MLS-V01-0167"
+            ],
+            "lease": {
+              "workerId": "r44-m10-20261002-2045-sol-93bf",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996950201,
+              "active": true
+            },
+            "workerId": "r44-m10-20261002-2045-sol-93bf",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996950201,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0162",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 162,
+                "title": "Singular they como pronombre de referencia no binaria o indefinida",
+                "level": "A2",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\n**Singular they** usa **they** para referirse a una sola persona. Es común cuando el género de esa persona no se conoce o no importa, y también cuando una persona no binaria usa **they** como pronombre. Aunque el referente sea singular, el verbo conserva las formas asociadas con **they**: **they are**, **they have**, **they do**.\n\n#### Cómo funciona\n\nUn uso frecuente aparece con referentes indefinidos como **someone, anyone, everyone** o **a person**:\n\n**Someone left their phone. They may come back for it.**\n\nAquí **someone** habla de una persona, y **they/their** permite continuar la referencia sin asignarle género.\n\nTambién puede referirse a una persona concreta cuando **they** es su pronombre: **Alex said they are ready**. El nombre **Alex** designa a una sola persona, pero la concordancia sigue siendo **they are**, no *they is*.\n\nEl paradigma incluye **they** como sujeto, **them** como forma objetiva, **their** como determinante posesivo y **theirs** como pronombre posesivo.\n\n#### Ejemplos\n\n- **Someone left their umbrella.** — Alguien dejó su paraguas.\n- **If a student has a question, they can ask.** — Si un estudiante tiene una pregunta, puede preguntar.\n- **Alex said they are ready.** — Alex dijo que está listo/lista para comenzar.\n- **I sent them the message.** — Le envié el mensaje.\n\n#### Observación importante\n\nEl uso singular de **they** no convierte el verbo en singular morfológico. La concordancia estándar es **they are** y **they have**, incluso cuando se habla de una sola persona.\n\nLa traducción al español depende del contexto y no siempre necesita mostrar explícitamente el género del referente.\n\n#### Entradas relacionadas\n\n- [Entrada 161: he/she/it](#entry-161)\n- [Entrada 163: Pronombres para animales y personificación](#entry-163)\n- [Entrada 156: Pronombres de sujeto](#entry-156)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e153ea4ef5b26fdd5998fa2652ad0cb90259a0d4c2d67f39bc4a0a6c3310bd6a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:48:28.551Z"
+              },
+              {
+                "code": "MLS-V01-0163",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 163,
+                "title": "Pronombres para animales y personificación",
+                "level": "B2",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\nEn inglés, los animales pueden recibir **it, he** o **she** según cómo se presente el referente. **It** es frecuente cuando el sexo o la identidad individual del animal no son relevantes; **he** o **she** son naturales cuando se conoce el sexo, se habla de un animal individual o el discurso lo trata de manera más personal.\n\n#### Cómo funciona\n\nCon un animal mencionado como miembro de una especie o sin información individual, **it** es habitual: **A bird landed on the fence. It stayed there for a minute.** Aquí el pronombre mantiene la referencia sin atribuir género.\n\nCon mascotas, animales nombrados o individuos cuyo sexo es conocido, pueden usarse **he** y **she**: **Our dog is called Max. He loves water.** La elección no depende exclusivamente del afecto; también intervienen el conocimiento del animal, su sexo y la forma en que el hablante lo conceptualiza.\n\nLa **personificación** consiste en presentar un animal, objeto o entidad como si tuviera rasgos humanos. En cuentos y otros textos literarios, por ejemplo, un zorro puede ser **he** o **she** porque funciona como personaje. Históricamente también se ha usado **she** para barcos, países u otras entidades, pero ese uso es estilísticamente marcado y hoy el pronombre neutral **it** es frecuente fuera de contextos personificados.\n\n#### Ejemplos\n\n- **A cat crossed the road. It disappeared quickly.** — Un gato cruzó la calle. Desapareció rápidamente.\n- **Luna is our cat. She sleeps on my desk.** — Luna es nuestra gata. Duerme sobre mi escritorio.\n- **The fox knew he had been tricked.** — El zorro sabía que lo habían engañado. — Personificación narrativa.\n- **The ship left port. It reached the island at dawn.** — El barco salió del puerto. Llegó a la isla al amanecer.\n\n#### Observación importante\n\nNo existe una regla que obligue a usar **it** con todos los animales ni **he/she** con todas las mascotas. La referencia depende del conocimiento disponible y de cómo se construye discursivamente la entidad.\n\nLa elección pronominal puede comunicar perspectiva además de información gramatical, por lo que conviene interpretarla dentro de su contexto.\n\n#### Entradas relacionadas\n\n- [Entrada 162: Singular they como pronombre de referencia no binaria o indefinida](#entry-162)\n- [Entrada 161: he/she/it](#entry-161)\n- [Entrada 156: Pronombres de sujeto](#entry-156)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-04d2121a6bd0f7e7cbb0735d3e6abb907eb391641a96a9c108c119fcd8cf2709",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:49:00.191Z"
+              },
+              {
+                "code": "MLS-V01-0164",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 164,
+                "title": "it expletivo meteorológico",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\nEn expresiones meteorológicas, el inglés suele usar **it** como sujeto aunque **it** no se refiera a una persona, objeto o situación concreta. A este uso se le llama **it expletivo** o **dummy it**. En **It was cold yesterday**, **it** ocupa la posición de sujeto que la oración inglesa necesita.\n\n#### Cómo funciona\n\nEl patrón básico es:\n\n**it + weather predicate**\n\nUn **predicado meteorológico** es la parte que expresa el estado o fenómeno del tiempo. Puede contener un verbo, como **It is raining** o **It snowed**, o una construcción con **be + adjective**, como **It is cold**, **It was windy** y **It will be sunny**.\n\nEn estos casos, **it** no sustituye a un nombre mencionado antes. Por ejemplo, en **It is raining**, no hay una entidad concreta que «sea it». Su función principal es satisfacer la estructura de la cláusula, porque el inglés normalmente requiere un sujeto expreso en las oraciones finitas.\n\nEl tiempo verbal cambia según el momento descrito: **It is raining now**, **It rained yesterday**, **It will be cold tomorrow**.\n\n#### Ejemplos\n\n- **It was cold yesterday.** — Ayer hacía frío.\n- **It is raining now.** — Está lloviendo ahora.\n- **It snowed last night.** — Anoche nevó.\n- **It will be sunny tomorrow.** — Mañana estará soleado.\n\n#### Observación importante\n\nEste **it** no debe traducirse necesariamente como «ello» o «eso». El español puede expresar el mismo contenido sin un pronombre visible: **Está lloviendo**, **Hace frío**, **Nevó**.\n\nTambién existe **it** expletivo en expresiones de tiempo y distancia, pero esas construcciones se estudian por separado.\n\n#### Entradas relacionadas\n\n- [Entrada 165: it expletivo de tiempo y distancia](#entry-165)\n- [Entrada 166: it anticipatorio](#entry-166)\n- [Entrada 167: there existencial como sujeto gramatical](#entry-167)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f45d8cbeeb955ed116060220e0c777fee87a718e84b3c5470b6244f4e6d28f12",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:49:52.456Z"
+              },
+              {
+                "code": "MLS-V01-0166",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 166,
+                "title": "it anticipatorio",
+                "level": "B1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### it anticipatorio (Anticipatory it)\n\n#### En pocas palabras\nEl *it anticipatorio* es un pronombre que funciona como un \"sujeto de relleno\" o marcador de posición. Se utiliza para evitar que una oración comience con un sujeto demasiado largo o complejo, moviendo esa información al final de la frase para que la lectura sea más fluida.\n\n#### Cómo funciona\nEn inglés, la mayoría de las oraciones requieren un sujeto explícito. Sin embargo, cuando el sujeto real es una idea extensa —como una frase que empieza con un infinitivo (*to* + verbo) o una cláusula que empieza con *that*—, la oración puede resultar pesada o difícil de procesar si se coloca al principio.\n\nPara solucionar esto, el inglés utiliza el pronombre **it** para ocupar la posición de sujeto gramatical al inicio de la oración. El contenido real de la idea (el sujeto lógico) se desplaza hacia el final. A este proceso de mover la información se le llama *extraposición*.\n\n#### Ejemplos\n\n**1. Con frases de infinitivo:**\n*   *It is difficult to learn Japanese.*\n*   (Es difícil aprender japonés).\n    *   **Sujeto gramatical:** *It* (ocupa el lugar del sujeto).\n    *   **Sujeto real/lógico:** *to learn Japanese* (la idea que realmente es \"difícil\").\n\n**2. Con cláusulas con *that*:**\n*   *It is obvious that she is happy.*\n*   (Es obvio que ella es feliz).\n    *   **Sujeto gramatical:** *It*.\n    *   **Sujeto real/lógico:** *that she is happy*.\n\n#### Observación importante\nEs común que los hablantes de español intenten omitir el sujeto en estas estructuras, ya que en nuestro idioma es natural decir simplemente \"Es difícil...\" o \"Es obvio...\". Sin embargo, en inglés **no se puede omitir el sujeto**. Decir \"*Is difficult to learn Japanese*\" es un error gramatical; siempre se debe incluir el *it* para cumplir con la estructura de la lengua.\n\nNo confunda este uso con el *it* que se usa para referirse a algo mencionado anteriormente (referencia anafórica). El *it anticipatorio* no \"recoge\" información pasada, sino que \"anuncia\" la información que vendrá después.\n\n#### Entradas relacionadas\n*   [Entrada 164: it expletivo meteorológico — Weather dummy it](#entry-164) (Uso de *it* para el clima).\n*   [Entrada 165: it expletivo de tiempo y distancia — Dummy it for time and distance](#entry-165) (Uso de *it* para expresiones temporales o de medida).\n*   [Entrada 167: there existencial como sujeto gramatical — Existential there as grammatical subject](#entry-167) (Uso de *there* para indicar existencia).",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:37:10.644Z"
+              },
+              {
+                "code": "MLS-V01-0167",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 167,
+                "title": "there existencial como sujeto gramatical",
+                "level": "A2",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\nEl *there* existencial se utiliza para indicar que algo existe o que algo está presente en un lugar. En español, su función principal es equivaler a la forma impersonal del verbo haber (**hay**, **hubo**, **habrá**).\n\n#### Cómo funciona\n\nA diferencia del español, donde podemos decir simplemente \"Hay un libro\" sin necesidad de un sujeto explícito, el inglés requiere que casi todas las oraciones tengan un sujeto. En este caso, la palabra *there* funciona como un **sujeto gramatical** (también llamado sujeto expletivo o \"dummy subject\"). \n\nEsto significa que *there* no tiene un significado propio de lugar (no significa \"allí\" en este contexto), sino que su única función es ocupar la posición del sujeto para permitir que la información real —el sustantivo que se presenta— aparezca después del verbo.\n\nEl patrón básico es: `there + verbo be (conjugado) + sintagma nominal`.\n\n#### Ejemplos\n\n*   **There is a car in the street.** (Hay un carro en la calle).\n    *   Aquí, *there* es el sujeto gramatical y el verbo *is* se usa porque el sustantivo que sigue (*a car*) es singular.\n*   **There are many people here.** (Hay mucha gente aquí).\n    *   El verbo cambia a *are* para concordar con el sustantivo plural (*people*).\n*   **There was a mistake in the report.** (Hubo un error en el informe).\n    *   El uso de *there* permite introducir el error en tiempo pasado.\n\n#### Observación importante\n\nUn error frecuente es intentar traducir la estructura del español omitiendo el sujeto o confundiendo la concordancia. Es fundamental recordar que el verbo *to be* debe concordar en número (singular o plural) con el sustantivo que se introduce, no con la palabra *there*. Por ejemplo, si el objeto es plural, es obligatorio usar *there are* y no *there is*.\n\n#### Entradas relacionadas\n\n*   [Entrada 166: it anticipatorio](#entry-166)\n*   [Entrada 165: it expletivo de tiempo y distancia](#entry-165)\n*   [Entrada 164: it expletivo meteorológico](#entry-164)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:37:43.284Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:04:10.623Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:04:10.623Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-m10-20261002-2045-sol-93bf/07-submit-claim06.json"
+}

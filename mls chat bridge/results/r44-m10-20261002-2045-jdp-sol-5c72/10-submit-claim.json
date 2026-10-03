@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-5c72-ticket06-close-next",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0679",
+          "sha256": "01b40086a35f01901af942f33cbe0a393e324b7506e62887b635d7293f9158bb",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0679",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2163c93d-fea8-47dd-b63e-a26f4a9c5596",
+                "ticketId": "R43-EMERGENCY-0679",
+                "code": "MLS-V06-0995",
+                "idempotencyKey": "R43-EMERGENCY-0679:MLS-V06-0995:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "dfe93a9d5b7bca4387595cb4287c2f579f6006002c9d7019c54b2eae60d19ad5",
+                "sourceSha256": "24d73921d3475c188d754bd24e59bd9baa1837c8b980c47c401762745fcc90b4",
+                "committedMs": 1790996654395,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "af3aae6fef4ebaf320bd65431bdcce09a79b7c31bdb9cf6ae0e1377551650648",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0679",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8dfc4da3-3aa1-4331-a8af-68cd24fa9077",
+                "ticketId": "R43-EMERGENCY-0679",
+                "code": "MLS-V06-0997",
+                "idempotencyKey": "R43-EMERGENCY-0679:MLS-V06-0997:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "312c7e7ef86e1c97b09fcdbd8bc09b3a2dcffc51f8e055a8128096ce12dcab5f",
+                "sourceSha256": "6c9e52ccea23ff77a736d64ce651821372ec2d2421c18b170dda3e93a0397fc5",
+                "committedMs": 1790996654466,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3ef2fd078dbcb007a01a068defc57661629ec0d503ce771706f038aaf1050b69",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0679",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "55ee47be-a094-488f-a575-928d96fe6946",
+                "ticketId": "R43-EMERGENCY-0679",
+                "code": "MLS-V06-0998",
+                "idempotencyKey": "R43-EMERGENCY-0679:MLS-V06-0998:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0d6e7bf5384c8e8322724daaa6d593244f8403944d5694a58bd5b6dda1d5633d",
+                "sourceSha256": "fe086cb55b5941e43c4c41231cc5f0dad791a0cc4c3a40b7405a6070f2e6bc14",
+                "committedMs": 1790996654542,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "444074eb126f2fb490a2d1b5606e91983a948c21b7ce4586c1beba39cebe0ef6",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0679",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f344c7d0-9074-442a-ba50-ceb5d8c6e5c2",
+                "ticketId": "R43-EMERGENCY-0679",
+                "code": "MLS-V06-0999",
+                "idempotencyKey": "R43-EMERGENCY-0679:MLS-V06-0999:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7fb8d01a0aa7a41abd990c008b37e1ba72b56bd858b3d939ea528cc5a6a2db35",
+                "sourceSha256": "b2b4b98cb2800e2c6a08c8e4f36bc3e6d9015ae28816e6597f3aed788448142e",
+                "committedMs": 1790996654615,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7feb6ccfefa0d562cc815c4859e20e65a92f237aad28138f8a0f3ed9b3f8b044",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0679",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b7b2d1d5-2618-417a-8531-a0bd0605aea7",
+                "ticketId": "R43-EMERGENCY-0679",
+                "code": "MLS-V06-1000",
+                "idempotencyKey": "R43-EMERGENCY-0679:MLS-V06-1000:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9be6586afbe428b2fcdba8c223b284597f31300111ec44aa186931bcdbceb0f6",
+                "sourceSha256": "8e77b707c00cf3207be75f282feb61b257ebbba56eafa8316524a0ab085e78e3",
+                "committedMs": 1790996654692,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8de3639054e4d182e7288f5f9e92ef9f7d10b3a3a1ec9b5f9ff9d0db407c6b3b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-a40d2a09-e90d-4ab5-8761-697cb68bfd70",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "01b40086a35f01901af942f33cbe0a393e324b7506e62887b635d7293f9158bb"
+          }
+        },
+        "completedAt": "2026-10-03T03:04:14.887Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-8bab9a3e-b4f0-44f2-9712-4287f4030985",
+          "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0680",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996954910,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-1002",
+                "path": "japones/MLS-V06-1002.json",
+                "sha256": "35a6e30959e93b2bff43abe9c4db045f5b284b7e8899d104e2e5cd5fc3990dc1"
+              },
+              {
+                "code": "MLS-V06-1003",
+                "path": "japones/MLS-V06-1003.json",
+                "sha256": "b22585d3fc3209d62f886a7618a5800f782ccf5b5bb7d25532d12e8c5d77af0f"
+              },
+              {
+                "code": "MLS-V06-1004",
+                "path": "japones/MLS-V06-1004.json",
+                "sha256": "008e249a000e19707accf3054a782a43eb70c4ce59fed052c277d4f75c32e4df"
+              },
+              {
+                "code": "MLS-V06-1005",
+                "path": "japones/MLS-V06-1005.json",
+                "sha256": "ad2e4bf60f6494d4a66336c7a3440c3d0eb210601d0b32896b1867671633865d"
+              },
+              {
+                "code": "MLS-V06-1006",
+                "path": "japones/MLS-V06-1006.json",
+                "sha256": "b371025f53cc362bb6c2e342a7bb3e16b3c4fc080484652495e70cceceb5a85a"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0680",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-1002",
+                "path": "japones/MLS-V06-1002.json",
+                "sha256": "35a6e30959e93b2bff43abe9c4db045f5b284b7e8899d104e2e5cd5fc3990dc1"
+              },
+              {
+                "code": "MLS-V06-1003",
+                "path": "japones/MLS-V06-1003.json",
+                "sha256": "b22585d3fc3209d62f886a7618a5800f782ccf5b5bb7d25532d12e8c5d77af0f"
+              },
+              {
+                "code": "MLS-V06-1004",
+                "path": "japones/MLS-V06-1004.json",
+                "sha256": "008e249a000e19707accf3054a782a43eb70c4ce59fed052c277d4f75c32e4df"
+              },
+              {
+                "code": "MLS-V06-1005",
+                "path": "japones/MLS-V06-1005.json",
+                "sha256": "ad2e4bf60f6494d4a66336c7a3440c3d0eb210601d0b32896b1867671633865d"
+              },
+              {
+                "code": "MLS-V06-1006",
+                "path": "japones/MLS-V06-1006.json",
+                "sha256": "b371025f53cc362bb6c2e342a7bb3e16b3c4fc080484652495e70cceceb5a85a"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-1002",
+              "MLS-V06-1003",
+              "MLS-V06-1004",
+              "MLS-V06-1005",
+              "MLS-V06-1006"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996954910,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996954910,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-1002",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1002,
+                "title": "Ironía contextual",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **ironía contextual** aparece cuando el significado que el hablante pretende comunicar contrasta con la evaluación literal de sus palabras. La interpretación depende de información compartida, expectativas y situación discursiva; no existe una forma gramatical japonesa que convierta por sí sola cualquier oración en irónica.\n\nEn **さすが「時間に正確」ですね、また遅刻ですか。** “Qué puntual, ¿otra vez tarde?”, la expresión elogiosa **時間に正確** “puntual” entra en conflicto con **また遅刻** “otra vez tarde”. Ese choque contextual hace que el elogio se interprete irónicamente.\n\n#### Cómo funciona\n\nLa ironía suele apoyarse en una discrepancia reconocible entre lo dicho y los hechos disponibles. Una valoración positiva puede aplicarse a una situación claramente negativa, o una formulación aparentemente neutral puede adquirir una intención crítica por el contexto y la entonación.\n\nElementos como **さすが**, partículas finales, comillas, pausas o una prosodia marcada pueden contribuir a la lectura, pero ninguno constituye una marca universal de ironía. **さすが** normalmente expresa reconocimiento acorde con una expectativa: **さすが先生ですね。** “Como era de esperar de un profesor”. Solo en un contexto incompatible puede adquirir un efecto irónico.\n\nLa interpretación requiere además atribuir una postura al hablante. El oyente reconoce que la evaluación literal no encaja con la situación y reconstruye una intención distinta, a menudo crítica, humorística o burlona.\n\nEn escritura, las comillas pueden señalar distancia respecto de una expresión, aunque también cumplen otras funciones. El contexto anterior y posterior sigue siendo decisivo.\n\n#### Ejemplos\n\n* **さすが「時間に正確」ですね、また遅刻ですか。** — “Qué puntual”, ¿otra vez tarde?\n* **本当にすばらしい天気ですね。** — “Qué tiempo tan maravilloso”, dicho bajo una lluvia intensa puede ser irónico.\n* **さすがプロですね。こんな初歩的なミスをするなんて。** — “Como era de esperar de un profesional”, después de un error elemental; lectura irónica por contradicción contextual.\n* **ずいぶん早かったですね。** — “Sí que llegó temprano”, dicho a alguien que llegó muy tarde puede invertir la evaluación literal.\n\n#### Observación importante\n\nUna oración no es irónica fuera de contexto solo porque contenga elogio, exageración o comillas. La ironía es una interpretación pragmática sustentada por una incompatibilidad relevante entre el contenido literal y la situación compartida.\n\nTampoco toda contradicción contextual produce ironía. Puede tratarse de un error, desconocimiento o cambio de circunstancias. La lectura irónica se vuelve plausible cuando existe evidencia de que el hablante conoce la discrepancia y la utiliza deliberadamente como parte del mensaje.\n\n#### Entradas relacionadas\n\n[Entrada 1000: Scrambling y foco](#entry-1000) · [Entrada 1001: Tópicos múltiples](#entry-1001) · [Entrada 1003: Noun-modifying 〜たる: reconocimiento](#entry-1003) · [Entrada 1004: Rechazo elíptico](#entry-1004)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-55cd35d42b5cec84a4f852fde8cc0521a4f7a07025df17cc8c42ea39ebf175f1",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:33:21.822Z"
+              },
+              {
+                "code": "MLS-V06-1003",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1003,
+                "title": "Noun-modifying 〜たる: reconocimiento",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜たる** es una forma de registro elevado que aparece después de ciertos sustantivos para modificar otro nombre o para caracterizar a alguien según la condición, función o identidad expresada por el primer sustantivo. En construcciones como **学生たる者**, presenta esa condición como base de una expectativa normativa o definitoria.\n\nEn **学生たる者、学ぶ姿勢を忘れてはならない。** “Quien es estudiante no debe olvidar la disposición a aprender”, **学生たる** modifica **者** y equivale aproximadamente a “quien tiene la condición de estudiante”. El tono es solemne, escrito y normativo.\n\n#### Cómo funciona\n\nHistóricamente, **たる** está relacionado con la cópula clásica y conserva hoy un uso restringido en expresiones formales. El patrón **NたるN** vincula un sustantivo con otro: **指導者たる者** “quien es dirigente”, **専門家たる人** “una persona en calidad de especialista”.\n\nUn esquema frecuente es **Nたる者**, donde **者** “persona” recibe una caracterización basada en un rol o estatus. Esta construcción suele introducir deberes, cualidades esperadas o principios asociados con esa condición: **指導者たる者、責任を負うべきだ。** “Quien es dirigente debe asumir responsabilidad”.\n\nTambién aparece en fórmulas como **〜たるもの**, especialmente en prosa argumentativa o solemne. El significado no se reduce a una simple cópula “ser”: la forma aporta una perspectiva categorial y un registro marcado.\n\nEn japonés contemporáneo corriente, expresiones con **である**, **としての** o una relativa ordinaria suelen resultar menos ceremoniosas.\n\n#### Ejemplos\n\n* **学生たる者、学ぶ姿勢を忘れてはならない。** — Quien es estudiante no debe olvidar la disposición a aprender.\n* **指導者たる者、責任を自覚すべきだ。** — Quien ocupa el papel de dirigente debe ser consciente de su responsabilidad.\n* **専門家たる者、根拠を示す必要がある。** — Quien es especialista debe mostrar fundamentos.\n* **公人たる者の発言には重みがある。** — Las palabras de quien tiene condición de figura pública tienen peso.\n\n#### Observación importante\n\n**〜たる** no es una forma productiva neutral que pueda sustituir libremente a **である** o **としての**. Su distribución está ligada a estilos elevados, retóricos, jurídicos, institucionales o deliberadamente solemnes, y puede sonar afectada en conversación cotidiana.\n\nAdemás, el valor normativo frecuente de **Nたる者** procede de la construcción y del tipo de predicado que suele acompañarla; **たる** por sí mismo no significa “deber”. Su aporte central es caracterizar al nombre siguiente mediante una condición o categoría expresada por el sustantivo anterior.\n\n#### Entradas relacionadas\n\n[Entrada 1001: Tópicos múltiples](#entry-1001) · [Entrada 1002: Ironía contextual](#entry-1002) · [Entrada 1004: Rechazo elíptico](#entry-1004) · [Entrada 1005: Tema-rema](#entry-1005)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-43fb255b579ef5900d0a8310d5c68fb9d4c84f93a55d605942d6d30af1a418b6",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:34:23.700Z"
+              },
+              {
+                "code": "MLS-V06-1004",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1004,
+                "title": "Rechazo elíptico",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **rechazo elíptico** consiste en dejar sin expresar una negativa que el contexto permite recuperar. En japonés, esta estrategia es frecuente cuando una respuesta directa podría resultar demasiado tajante: el hablante ofrece una señal suficiente y deja que el interlocutor infiera la conclusión.\n\nEn **A: 今夜どう？ B: 今日はちょっと…。** “¿Qué tal esta noche?” — “Hoy, pues…”, **ちょっと** no significa literalmente “no” ni contiene por sí solo una fórmula de rechazo. La pausa y el contexto permiten interpretar que aceptar resulta difícil o inconveniente.\n\n#### Cómo funciona\n\nLa elipsis es la ausencia de material que puede reconstruirse a partir de la situación discursiva. En un rechazo, pueden omitirse expresiones como **難しいです**, **行けません** o **都合が悪いです** porque la respuesta ya orienta suficientemente al interlocutor hacia una lectura negativa.\n\n**ちょっと** significa normalmente “un poco”, pero en respuestas suspendidas como **今日はちょっと…** funciona como señal de dificultad o reserva. El efecto surge de la construcción completa, la entonación y las expectativas conversacionales, no de un significado léxico fijo de “rechazo”.\n\nOtras fórmulas pueden quedar igualmente incompletas: **その日は…** “ese día…” o **今回は…** “esta vez…”. El tópico seguido de una pausa permite evitar una negativa explícita cuando el contexto hace evidente la continuación.\n\nEsta estrategia participa en la gestión interpersonal: reduce la explicitud del desacuerdo sin eliminar el contenido negativo que el interlocutor debe inferir.\n\n#### Ejemplos\n\n* **A: 今夜どう？ B: 今日はちょっと…。** — “¿Qué tal esta noche?” — “Hoy, pues…”; se infiere un rechazo.\n* **A: 明日来られますか。 B: 明日は少し…。** — “¿Puede venir mañana?” — “Mañana está un poco…”; la continuación negativa queda omitida.\n* **A: この案で進めましょうか。 B: それは…。** — “¿Seguimos con esta propuesta?” — “Eso…”; la suspensión puede expresar reserva o rechazo.\n* **A: 今回も参加しますか。 B: 今回は…。** — “¿Participará también esta vez?” — “Esta vez…”; el contexto completa la negativa.\n\n#### Observación importante\n\nUna respuesta incompleta no es automáticamente un rechazo. Las mismas formas pueden expresar vacilación, búsqueda de palabras, sorpresa u otra actitud. La interpretación negativa requiere un contexto donde exista una propuesta, invitación, solicitud o alternativa susceptible de ser rechazada.\n\nAsimismo, el rechazo elíptico no debe describirse simplemente como “cortesía japonesa”. Su frecuencia se relaciona con convenciones pragmáticas de indirectitud y relación interpersonal, pero la elección concreta depende de situación, confianza, jerarquía y género discursivo.\n\n#### Entradas relacionadas\n\n[Entrada 1002: Ironía contextual](#entry-1002) · [Entrada 1003: Noun-modifying 〜たる: reconocimiento](#entry-1003) · [Entrada 1005: Tema-rema](#entry-1005) · [Entrada 1006: 〜ざる](#entry-1006)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-091d84590bec4557a8622721e63855fded8ecbaa549586214ddf26149487500a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:35:28.399Z"
+              },
+              {
+                "code": "MLS-V06-1005",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1005,
+                "title": "Tema-rema",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa distinción **tema–rema** describe cómo se organiza la información dentro de un enunciado. El **tema** es aquello que se toma como punto de partida del mensaje; el **rema** aporta la información que se dice acerca de ese tema. En japonés, **は** marca con frecuencia el tema, aunque no todo tema lleva **は** ni todo **は** corresponde a un único análisis discursivo.\n\nEn **この本は、内容が面白いです。** “En cuanto a este libro, el contenido es interesante”, **この本は** establece el tema y **内容が面白いです** constituye el comentario o rema.\n\n#### Cómo funciona\n\nLa organización tema–rema pertenece a la **estructura informativa**, es decir, a la manera en que el hablante distribuye información conocida, accesible, contrastada o nueva. No coincide necesariamente con funciones sintácticas como sujeto u objeto.\n\nEn **この本は、内容が面白いです**, **この本** no es el sujeto de **面白い**. El elemento directamente relacionado con el predicado es **内容が** “el contenido”, mientras **この本は** delimita el marco del que se habla.\n\nEl tema puede ser una entidad, un lugar, un período o una situación más amplia: **日本では、春に桜が咲く。** “En Japón, los cerezos florecen en primavera”. Aquí **日本では** establece un marco temático y la proposición posterior aporta la información principal.\n\nEl rema tampoco equivale siempre a “información completamente nueva”. Puede contener elementos ya conocidos; lo decisivo es que constituye lo que se predica o se aporta respecto del marco establecido.\n\n#### Ejemplos\n\n* **この本は、内容が面白いです。** — En cuanto a este libro, el contenido es interesante.\n* **田中さんは、今日は休みです。** — En cuanto a Tanaka, hoy descansa / hoy no trabaja.\n* **この町では、夏に祭りがあります。** — En esta ciudad, en verano hay un festival.\n* **象は鼻が長い。** — En cuanto al elefante, la trompa es larga.\n\n#### Observación importante\n\nTema–rema no debe confundirse automáticamente con “viejo–nuevo” ni con “sujeto–predicado”. Son dimensiones relacionadas, pero no idénticas. Un tema puede introducirse por primera vez y un rema puede contener material previamente mencionado.\n\nAdemás, **は** puede expresar contraste además de tema. En **英語は話せます。** “Inglés sí hablo”, la partícula puede presentar **英語** como tema y, al mismo tiempo, contrastarlo con otras lenguas. La interpretación exacta depende del contexto.\n\n#### Entradas relacionadas\n\n[Entrada 1001: Tópicos múltiples](#entry-1001) · [Entrada 1003: Noun-modifying 〜たる: reconocimiento](#entry-1003) · [Entrada 1004: Rechazo elíptico](#entry-1004) · [Entrada 1006: 〜ざる](#entry-1006)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a07d0a5242969bc25876eb5ec9a9c6a0a1762a28d09850bfcc5f20e8bce36a04",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:19:10.401Z"
+              },
+              {
+                "code": "MLS-V06-1006",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1006,
+                "title": "〜ざる",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜ざる** es una forma negativa de origen clásico que sobrevive en japonés moderno sobre todo en expresiones fijadas, estilo literario y registros formales. Se relaciona con **〜ず** y aparece especialmente cuando la forma negativa modifica a un sustantivo o entra en construcciones establecidas.\n\nEn **知られざる事実** “un hecho desconocido”, **知られざる** significa aproximadamente “que no es conocido”. El matiz es más elevado o literario que una alternativa corriente como **知られていない事実**.\n\n#### Cómo funciona\n\nHistóricamente, **ざる** corresponde a una forma atributiva de la negación clásica **ず**. En japonés contemporáneo no funciona como la negación cotidiana productiva de los verbos, sino como una forma marcada que se conserva en ciertos patrones y estilos.\n\nCon muchos verbos se forma a partir de la base negativa: **行かざる**, **知らざる**, **認めざる**. El verbo **する** presenta la forma irregular **せざる**, visible en expresiones como **せざるを得ない** “no tener más remedio que hacer”.\n\nUna construcción muy frecuente es **〜ざるを得ない**, que expresa que, dadas las circunstancias, no queda alternativa práctica: **計画を変更せざるを得ない。** “No hay más remedio que cambiar el plan”. Aquí el valor modal procede de toda la construcción, no de **ざる** aislado.\n\nTambién aparece como modificador nominal en prosa solemne o retórica: **語られざる歴史** “una historia no contada”.\n\n#### Ejemplos\n\n* **知られざる事実** — un hecho desconocido.\n* **語られざる歴史** — una historia no contada.\n* **計画を変更せざるを得ない。** — No hay más remedio que cambiar el plan.\n* **見ざる、言わざる、聞かざる。** — No ver, no decir, no oír; fórmula tradicional de registro fijo.\n\n#### Observación importante\n\n**〜ざる** no debe presentarse como sustituto general de **〜ない**. En conversación ordinaria, formas como **行かない** o **知らない** son las negativas normales; **行かざる** o **知らざる** suenan literarias, arcaizantes o propias de expresiones establecidas.\n\nAdemás, **ざる** y **ず** están históricamente relacionados pero no son intercambiables en todos los entornos modernos. La distribución actual depende de construcciones lexicalizadas y del estilo. En particular, **〜ざるを得ない** es productiva y frecuente incluso en prosa contemporánea formal, pese al origen clásico de **ざる**.\n\n#### Entradas relacionadas\n\n[Entrada 1004: Rechazo elíptico](#entry-1004) · [Entrada 1005: Tema-rema](#entry-1005) · [Entrada 1007: 〜ん arcaico: reconocimiento](#entry-1007) · [Entrada 1008: ものか rechazo retórico](#entry-1008)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-ecdfbd5a3a8acf97d4d53d070d8ab190b947c45d568c39f938851b9cb9146099",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:20:13.720Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:04:15.346Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:04:15.346Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-jdp-sol-5c72/10-submit-claim.json"
+}

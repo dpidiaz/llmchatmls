@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-3f91c2-t04-submit-claim05",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0601",
+          "sha256": "442db095c4168aed4af6fd3bab3d40a8313f4f1b45c2cdf497f473081cd02ab9",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0601",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "3189ffda-bb31-4d00-9b96-7d9216dd6188",
+                "ticketId": "R43-EMERGENCY-0601",
+                "code": "MLS-V06-0529",
+                "idempotencyKey": "R43-EMERGENCY-0601:MLS-V06-0529:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8de3166ab9895d55507334d6e7a73f744b869c04a9c006fe9b9308d6d3cba995",
+                "sourceSha256": "2ebcd304fda9c75b8fd105b520b0f06eb94e4fd08aba50ca68784df060079239",
+                "committedMs": 1790996655455,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "76863c301f6ae6a2722e5e20c836f26201a94601c0b363dad5780754a452d1c3",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0601",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "928a414a-5a02-4389-988e-e2da5869ef39",
+                "ticketId": "R43-EMERGENCY-0601",
+                "code": "MLS-V06-0530",
+                "idempotencyKey": "R43-EMERGENCY-0601:MLS-V06-0530:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f17f3cd0ddcb6ce4c6ccbe116630ed7a8a08e53164a1d278bba48897056ed675",
+                "sourceSha256": "8f3ebabaaf73e03a29cc8013cc37fd73e5d39b4d048266fc146c88d13a491ce4",
+                "committedMs": 1790996655529,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9ecc2cf5999308f749ad9351681352b193f30d23ec37f5f44fd6a586dfd4224b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0601",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "49a219c7-ffd3-4e31-86d7-3b861df06c12",
+                "ticketId": "R43-EMERGENCY-0601",
+                "code": "MLS-V06-0531",
+                "idempotencyKey": "R43-EMERGENCY-0601:MLS-V06-0531:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "479c46b894f3ced700e4ed2c8f495cc3beab93d699a100133e4ae59feb807792",
+                "sourceSha256": "613269594b2dbf4255c1d2899f5b2ce10717233a4f1f57b3212e3b23ef94520a",
+                "committedMs": 1790996655604,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b0666ad0062a7c1f11846386b44b79c74e19ca190d81d38dbe3f43dfbb3d26bd",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0601",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e05f4812-5903-40c7-beed-54f27f1b3c00",
+                "ticketId": "R43-EMERGENCY-0601",
+                "code": "MLS-V06-0532",
+                "idempotencyKey": "R43-EMERGENCY-0601:MLS-V06-0532:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a4ad71868fdbd0d4c851809664e112b8055b19e63f011df5011c55cea8a51bce",
+                "sourceSha256": "798d86b5cd41d8bbe38058eec3400115d6d47c37aebf338c1e4f2f51db0c025e",
+                "committedMs": 1790996655682,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "eadedf6be21764fd791b7becdeb4f10c3c81dc73e01cf89c47afe4fd7a495b5c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0601",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8209826d-f654-4eb7-9945-56029fac521e",
+                "ticketId": "R43-EMERGENCY-0601",
+                "code": "MLS-V06-0533",
+                "idempotencyKey": "R43-EMERGENCY-0601:MLS-V06-0533:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2b5a0059ee2ac595cd5e20e58894be7fe595caf9d9d97d1a7b2b876b1fb977cc",
+                "sourceSha256": "462d7a762546d564b754c5c78624640f02b8e1c5f95cb254838d2a45063271c2",
+                "committedMs": 1790996655763,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b0162a72480c194ef30076d2274ac1aeeb1ba77b5eca27387df38c11c0d27695",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-c2c081ba-5485-4434-a314-f137fc430749",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "442db095c4168aed4af6fd3bab3d40a8313f4f1b45c2cdf497f473081cd02ab9"
+          }
+        },
+        "completedAt": "2026-10-03T03:04:15.937Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-ca548de4-1877-4210-976d-d0a6ea0d4c6f",
+          "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0603",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996955967,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0540",
+                "path": "japones/MLS-V06-0540.json",
+                "sha256": "9a664fbe9903c2f696c39d00abe7caaf0575e85a79e6b82d93c0e261811bbff6"
+              },
+              {
+                "code": "MLS-V06-0541",
+                "path": "japones/MLS-V06-0541.json",
+                "sha256": "8a1d1c28b74fd12e66555bae51efc8f2f75d544040e525d6767fcba250f436d4"
+              },
+              {
+                "code": "MLS-V06-0542",
+                "path": "japones/MLS-V06-0542.json",
+                "sha256": "8ddbb18774118b13e28cf7fe98704cc95ea88c7ac3560652b346cd40fb5d49b0"
+              },
+              {
+                "code": "MLS-V06-0544",
+                "path": "japones/MLS-V06-0544.json",
+                "sha256": "6e879a0d2f085d3a5e772b61a93a9afab368709653c2193009a23f73f52be42a"
+              },
+              {
+                "code": "MLS-V06-0545",
+                "path": "japones/MLS-V06-0545.json",
+                "sha256": "d7fcc704db65f0850794548d68ed96de7430c3db8464946c31361896bae183ab"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0603",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0540",
+                "path": "japones/MLS-V06-0540.json",
+                "sha256": "9a664fbe9903c2f696c39d00abe7caaf0575e85a79e6b82d93c0e261811bbff6"
+              },
+              {
+                "code": "MLS-V06-0541",
+                "path": "japones/MLS-V06-0541.json",
+                "sha256": "8a1d1c28b74fd12e66555bae51efc8f2f75d544040e525d6767fcba250f436d4"
+              },
+              {
+                "code": "MLS-V06-0542",
+                "path": "japones/MLS-V06-0542.json",
+                "sha256": "8ddbb18774118b13e28cf7fe98704cc95ea88c7ac3560652b346cd40fb5d49b0"
+              },
+              {
+                "code": "MLS-V06-0544",
+                "path": "japones/MLS-V06-0544.json",
+                "sha256": "6e879a0d2f085d3a5e772b61a93a9afab368709653c2193009a23f73f52be42a"
+              },
+              {
+                "code": "MLS-V06-0545",
+                "path": "japones/MLS-V06-0545.json",
+                "sha256": "d7fcc704db65f0850794548d68ed96de7430c3db8464946c31361896bae183ab"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0540",
+              "MLS-V06-0541",
+              "MLS-V06-0542",
+              "MLS-V06-0544",
+              "MLS-V06-0545"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996955967,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-sol-3f91c2",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996955967,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0540",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 540,
+                "title": "来させる",
+                "level": "B2",
+                "part": "Voz — ヴォイス",
+                "chapter": "Causativa — 使役",
+                "articleMarkdown": "#### En pocas palabras\n\n**来させる（こさせる）** es la forma causativa de **来る（くる）**, “venir”. Expresa que alguien hace que otra persona venga o le permite venir. Según el contexto, puede traducirse como “hacer venir”, “mandar venir”, “hacer que venga” o “dejar que venga”.\n\n#### Cómo funciona\n\n**来る** es un verbo irregular, por lo que su causativa no se forma mediante una regla productiva aplicada a una raíz regular. La forma establecida es **来る → 来させる**, con lectura **くる → こさせる**.\n\nEn una oración causativa, conviene distinguir a quien provoca o autoriza la acción —el **causante**— de la persona que efectivamente viene. Esta segunda persona suele marcarse con **に** en construcciones como **先生は学生に来させた**, donde el profesor causa que el estudiante venga.\n\nLa causativa no especifica por sí sola si existe obligación, instrucción o permiso. Esa interpretación depende de la relación entre las personas, el verbo y la situación.\n\n#### Ejemplos\n\n* **先生は学生に職員室へ来させました。** — El profesor hizo que el estudiante viniera a la sala de profesores. **学生** es quien realiza la acción de venir.\n* **母は弟をパーティーに来させた。** — Mi madre dejó/hizo que mi hermano menor viniera a la fiesta. El contexto decide si se entiende como permiso o imposición.\n* **部長は田中さんに早く来させました。** — El jefe hizo que Tanaka viniera temprano.\n\n#### Observación importante\n\nNo debe confundirse **来させる（こさせる）** con **来られる（こられる）**, que puede expresar potencial “poder venir” y, en otros contextos, pasiva o respeto. La presencia de **させる** es la marca propia de la causativa en este verbo.\n\n#### Entradas relacionadas\n\n[Entrada 539: させる — させる：使役](#entry-539) · [Entrada 538: Causativa permitir — 使役 permitir](#entry-538)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-948a0f677e72bdfbad19e246f19b92dd4ef7ed3921f2be126fa01cc01b85beeb",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:10:08.706Z"
+              },
+              {
+                "code": "MLS-V06-0541",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 541,
+                "title": "Ambigüedad potencial/pasiva en られる",
+                "level": "B2",
+                "part": "Voz — ヴォイス",
+                "chapter": "Causativo-pasiva y voz avanzada — 使役受身とヴォイス",
+                "articleMarkdown": "#### En pocas palabras\n\nLa terminación **〜られる** puede ser ambigua porque, según el verbo y el contexto, puede expresar **potencial** (“poder hacer”), **pasiva** (“ser afectado por una acción”), respeto y otros valores. Por eso no conviene traducirla automáticamente de una sola manera.\n\n#### Cómo funciona\n\nCon verbos ichidan, formas como **食べられる** pueden tener al menos dos lecturas frecuentes. Como potencial, significa “poder comer”: **私は生魚が食べられます。** — “Puedo comer pescado crudo”. Como pasiva, puede significar “ser comido”: **魚が猫に食べられた。** — “El pescado fue comido por el gato”.\n\nLa estructura de la oración ayuda a decidir la lectura. En la pasiva suele aparecer un participante afectado y, cuando se expresa, un agente marcado a menudo con **に** o **によって**. En el potencial, en cambio, la oración presenta una acción como posible o realizable para alguien.\n\n#### Ejemplos\n\n* **私はこの料理が食べられます。** — Puedo comer este plato. Aquí **食べられる** es potencial.\n* **ケーキは弟に食べられました。** — El pastel fue comido por mi hermano menor. Aquí la presencia del agente **弟に** favorece la lectura pasiva.\n* **田中さんは明日来られます。** — Tanaka puede venir mañana / Tanaka vendrá, en una formulación respetuosa. El contexto decide entre potencial y valor honorífico.\n\n#### Observación importante\n\nEl ejemplo heredado **母は子供に野菜を食べさせました。** contiene **食べさせました**, una causativa, no una forma en **〜られる**; por tanto, no demuestra esta ambigüedad.\n\nAdemás, en muchos verbos godan el potencial moderno se distingue formalmente de la pasiva, como **書ける** “poder escribir” frente a **書かれる** “ser escrito”. La ambigüedad es especialmente visible con verbos ichidan y ciertos irregulares.\n\n#### Entradas relacionadas\n\n[Entrada 542: Causativo-pasiva godan — 五段動詞の使役受身](#entry-542) · [Entrada 543: Causativo-pasiva ichidan — 一段動詞の使役受身](#entry-543)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e3e1fe2ee0be423586de4ac9bd40b973cd88bb693b8813f3cdc7f6e05aec2709",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:10:49.507Z"
+              },
+              {
+                "code": "MLS-V06-0542",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 542,
+                "title": "Causativo-pasiva godan",
+                "level": "B2",
+                "part": "Voz — ヴォイス",
+                "chapter": "Causativo-pasiva y voz avanzada — 使役受身とヴォイス",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **causativo-pasiva** combina dos ideas: alguien hace que otra persona realice una acción y esa segunda persona se presenta como afectada por la imposición. Con verbos godan, una forma como **働かせられる** puede expresar “ser obligado a trabajar”.\n\n#### Cómo funciona\n\nLa construcción se obtiene a partir de la causativa y después se aplica la pasiva. En un verbo godan como **働く**, la secuencia es **働く → 働かせる → 働かせられる**. La persona obligada suele aparecer como tópico o participante principal de la oración, mientras que quien impone la acción puede marcarse con **に**.\n\nAsí, **私は上司に休日にも働かせられました。** significa “Mi jefe me hizo trabajar incluso en mi día libre” o, más literalmente, “Fui hecho trabajar por mi jefe”. En japonés esta construcción suele destacar que la acción fue sufrida o impuesta, aunque el grado de molestia depende del contexto.\n\n#### Ejemplos\n\n* **私は休日にも働かせられました。** — Me hicieron trabajar incluso en mi día libre.\n* **学生は先生に作文を書かせられた。** — El estudiante fue obligado por el profesor a escribir una redacción.\n* **子どもは父親に毎朝走らせられた。** — El niño fue obligado por su padre a correr cada mañana.\n\n#### Observación importante\n\nNo debe analizarse **〜させられる** simplemente como una forma potencial por contener **られる**. En esta construcción, **させる** aporta la causativa y **られる** la pasiva: el participante principal recibe una imposición para ejecutar la acción.\n\nEn el habla existen además formas contraídas para ciertos verbos godan, como **書かされる** por **書かせられる**. Esa contracción es un patrón relacionado, pero conviene distinguirla de la forma completa.\n\n#### Entradas relacionadas\n\n[Entrada 541: Ambigüedad potencial/pasiva en られる — 「られる」の可能・受身の曖昧性](#entry-541) · [Entrada 543: Causativo-pasiva ichidan — 一段動詞の使役受身](#entry-543) · [Entrada 544: Forma contraída godan 〜される — 五段使役受身の縮約「〜される」](#entry-544)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-300ae71785a73efcd08e35ca09f7a865f9a7df51c52acf87cbf7e1e7335872e1",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:11:34.396Z"
+              },
+              {
+                "code": "MLS-V06-0544",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 544,
+                "title": "Forma contraída godan 〜される",
+                "level": "B2",
+                "part": "Voz — ヴォイス",
+                "chapter": "Causativo-pasiva y voz avanzada — 使役受身とヴォイス",
+                "articleMarkdown": "#### En pocas palabras\n\nEn muchos verbos godan, la causativo-pasiva completa puede aparecer en una forma **contraída**. Así, **書かせられる** puede reducirse a **書かされる**. Ambas expresan que una persona es obligada o inducida a realizar la acción, pero la forma contraída es frecuente en el habla cotidiana.\n\n#### Cómo funciona\n\nLa forma completa se construye como causativa + pasiva: **書く → 書かせる → 書かせられる**. En la contracción, la secuencia **せら** se reduce y aparece **さ** antes de **れる**: **書かせられる → 書かされる**, **待たせられる → 待たされる**, **飲ませられる → 飲まされる**.\n\nLa persona que sufre la imposición suele aparecer como participante principal, y quien la impone puede marcarse con **に**. Por ejemplo, **私は先生に作文を書かされました。** significa “El profesor me obligó a escribir una redacción”.\n\n#### Ejemplos\n\n* **私は先生に作文を書かされました。** — El profesor me obligó a escribir una redacción.\n* **彼は上司に酒を飲まされた。** — Su jefe lo obligó a beber alcohol.\n* **子どもは長い時間待たされた。** — Al niño lo hicieron esperar durante mucho tiempo.\n\n#### Observación importante\n\nEsta contracción corresponde a determinados verbos **godan** y no debe generalizarse mecánicamente a los ichidan. En un verbo ichidan como **食べる**, la forma normal es **食べさせられる**, no *食べさされる*.\n\nEl ejemplo heredado **母は子供に野菜を食べさせました。** es una causativa simple y, además, contiene un verbo ichidan; por ello no demuestra la contracción godan tratada aquí.\n\n#### Entradas relacionadas\n\n[Entrada 543: Causativo-pasiva ichidan — 一段動詞の使役受身](#entry-543) · [Entrada 545: Sentido de obligación sufrida — 被強制の意味](#entry-545) · [Entrada 542: Causativo-pasiva godan — 五段動詞の使役受身](#entry-542) · [Entrada 546: 〜させられる — 「〜させられる」](#entry-546)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c0968cd1830037a91cd9a7f6fb6f76ea7eaaf51488f9055f55210548d911bb91",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:12:58.240Z"
+              },
+              {
+                "code": "MLS-V06-0545",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 545,
+                "title": "Sentido de obligación sufrida",
+                "level": "B2",
+                "part": "Voz — ヴォイス",
+                "chapter": "Causativo-pasiva y voz avanzada — 使役受身とヴォイス",
+                "articleMarkdown": "#### En pocas palabras\n\nLa causativo-pasiva japonesa suele expresar que una persona **sufre una obligación impuesta por otra**. En lugar de presentar simplemente “A hace que B haga algo”, la oración se organiza desde la perspectiva de B, la persona que tuvo que realizar la acción.\n\n#### Cómo funciona\n\nUna causativa como **母は子どもに野菜を食べさせた** significa “La madre hizo que el niño comiera verduras”. Si se presenta la situación desde el punto de vista del niño, puede usarse **子どもは母に野菜を食べさせられた** — “El niño fue obligado por su madre a comer verduras”.\n\nLa construcción combina causación y pasiva. Por eso suele aparecer un participante afectado como tema o sujeto de la oración y el causante puede marcarse con **に**. El matiz de “sufrir” no procede de una palabra independiente, sino de la perspectiva que crea toda la construcción y del contexto.\n\n#### Ejemplos\n\n* **私は上司に休日出勤させられました。** — Mi jefe me obligó a trabajar en mi día libre.\n* **子どもは母親に野菜を食べさせられた。** — El niño fue obligado por su madre a comer verduras.\n* **学生たちは先生に長い作文を書かされた。** — El profesor obligó a los estudiantes a escribir una redacción larga; aquí aparece la forma godan contraída.\n\n#### Observación importante\n\nLa causativo-pasiva no equivale simplemente a una expresión general de “deber”. Formas como **〜なければならない** también expresan obligación, pero describen necesidad o deber de otra manera. La causativo-pasiva destaca que **otra persona o fuerza causante hace que el participante ejecute la acción**.\n\nAdemás, aunque el sentido adversativo o molesto es frecuente, la intensidad de la coerción depende del contexto y no debe exagerarse automáticamente.\n\n#### Entradas relacionadas\n\n[Entrada 544: Forma contraída godan 〜される — 五段使役受身の縮約「〜される」](#entry-544) · [Entrada 546: 〜させられる — 「〜させられる」](#entry-546) · [Entrada 543: Causativo-pasiva ichidan — 一段動詞の使役受身](#entry-543)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e6a22074c997ca18f510efa06de74889273d8b3dea7bca1ea50a4296e48148f0",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:13:41.930Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:04:16.378Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:04:16.378Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-sol-3f91c2/08-submit04-claim05.json"
+}
