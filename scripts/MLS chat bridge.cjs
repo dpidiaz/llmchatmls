@@ -26,6 +26,16 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/r44/chat-bridge/submit',
     input: 'body'
   },
+  r44RebindChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/rebind',
+    input: 'body'
+  },
+  r44CheckpointChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/checkpoint',
+    input: 'body'
+  },
   iniciarLoteStagingMLS: {
     method: 'POST',
     pathname: '/api/wiki/editorial/staging/start',
