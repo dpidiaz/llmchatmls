@@ -12,6 +12,50 @@ const revisions=require('../../r4 staging supersession.cjs');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
 const READY_QUEUE_TARGET=128;
+const R44_R33_HANDOFF_INDEX=path.join('MLS R32 EDITORIAL','r44','r33-handoff','index.json');
+const R44_R33_HANDOFF_SCHEMA='MLS-R44-R33-HANDOFF-1';
+
+function loadR44R33Handoffs(root='.'){
+  const full=path.join(root,R44_R33_HANDOFF_INDEX);
+  if(!fs.existsSync(full))return new Map();
+  const raw=JSON.parse(fs.readFileSync(full,'utf8'));
+  if(raw?.schema!==R44_R33_HANDOFF_SCHEMA||!Array.isArray(raw.entries))throw integrationError('R44_R33_HANDOFF_INVALID','Índice R44→R33 inválido.',503);
+  const out=new Map();
+  for(const item of raw.entries){
+    const code=String(item?.code||'').toUpperCase();
+    if(!/^MLS-V\d{2}-\d{4}$/.test(code)||out.has(code))throw integrationError('R44_R33_HANDOFF_CODE_INVALID','Código R44→R33 inválido/duplicado: '+code,503);
+    if(!['PASS_NO_CHANGE','CORRECTED'].includes(String(item.outcome||'')))throw integrationError('R44_R33_HANDOFF_OUTCOME_INVALID','Outcome R44→R33 inválido: '+code,503);
+    const handoffPath=String(item.handoffPath||'').replace(/\\/g,'/');
+    if(!handoffPath||handoffPath.startsWith('/')||handoffPath.includes('..'))throw integrationError('R44_R33_HANDOFF_PATH_INVALID','handoffPath inválido: '+code,503);
+    out.set(code,{...item,code,handoffPath});
+  }
+  return out;
+}
+function r33UnifiedSnapshot(snapshot,handoffs){
+  const available=new Map();
+  for(const entry of snapshot.pool?.entries||[]){
+    const h=handoffs.get(String(entry.code||'').toUpperCase());
+    if(h)available.set(h.code,{...entry,r44Handoff:h});
+  }
+  if(!available.size)return null;
+  const allowed=new Set(available.keys());
+  const pool={...snapshot.pool,entries:[...available.values()]};
+  const ledger={...snapshot.ledger,
+    verified:(snapshot.ledger?.verified||[]).filter(code=>allowed.has(String(code).toUpperCase())),
+    exceptions:(snapshot.ledger?.exceptions||[]).filter(code=>allowed.has(String(code).toUpperCase()))};
+  const batches=(snapshot.batches||[]).map(batch=>({...batch,entries:(batch.entries||[]).filter(e=>allowed.has(String(e?.code||'').toUpperCase()))})).filter(batch=>batch.entries.length);
+  const reservedCodes=(snapshot.reservedCodes||[]).filter(code=>allowed.has(String(code).toUpperCase()));
+  return {...snapshot,pool,ledger,batches,reservedCodes,r43Handoff:null,r43Handoffs:[],handoffCodes:[],r44UnifiedHandoffs:handoffs};
+}
+function protectCandidateCodes(snapshot,candidates,now){
+  const batches=(snapshot.batches||[]).map(x=>structuredClone(x));
+  for(const [index,candidate] of candidates.entries()){
+    batches.push({poolId:snapshot.pool.poolId,batchId:'GLOBAL-UNIFIED-PROTECT-'+String(index+1).padStart(3,'0'),status:'leased',
+      acknowledgedAt:new Date(now).toISOString(),ackDeadlineAt:new Date(Number(now)+60*60*1000).toISOString(),
+      expiresAt:new Date(Number(now)+60*60*1000).toISOString(),entries:candidate.units.map(unit=>({code:unit.code}))});
+  }
+  return {...snapshot,batches};
+}
 
 function integrationError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -78,7 +122,7 @@ function collectR33Snapshot(issues,root='.'){
   const ledger=ledgers.length===1?ledgers[0]:r33Core.initialLedger(pool);
   // Every open reservation Issue is a durable exclusion, independent of chat TTL.
   const bufferedReservations=buffered.reservations(issues);
-  return {pool,ledger,batches,bufferedReservations,ledgerSynthetic:ledgers.length===0,continuationActive:Boolean(continuation),configuredPoolId:configuredPool.poolId};
+  return {pool,ledger,batches,bufferedReservations,r44Handoffs:loadR44R33Handoffs(root),ledgerSynthetic:ledgers.length===0,continuationActive:Boolean(continuation),configuredPoolId:configuredPool.poolId};
 }
 function projectMlsSnapshot(snapshot,{globalLedger,globalAssignments}={}){
   const corpusCodes=new Set((snapshot.corpus||[]).map(x=>String(x.code)));
