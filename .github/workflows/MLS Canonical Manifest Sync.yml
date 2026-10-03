@@ -1,0 +1,44 @@
+name: MLS Canonical Manifest Sync
+
+on:
+  push:
+    branches:
+      - feat/unified-cloudflare-runner
+    paths:
+      - 'scripts/sincronizar manifest canonico.js'
+      - '.github/workflows/MLS Canonical Manifest Sync.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mls-canonical-manifest-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/unified-cloudflare-runner
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Reconcile all canonical hashes and byte counts
+        run: node 'scripts/sincronizar manifest canonico.js' --write
+      - name: Validate reconciled corpus
+        run: node 'scripts/validar corpus canonico.js'
+      - name: Commit repaired manifest when needed
+        shell: bash
+        run: |
+          if git diff --quiet -- content/manifest.json; then
+            echo 'Manifest already synchronized.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- content/manifest.json
+          git commit -m 'fix(corpus): reconcile canonical manifest hashes'
+          git push origin HEAD:feat/unified-cloudflare-runner
