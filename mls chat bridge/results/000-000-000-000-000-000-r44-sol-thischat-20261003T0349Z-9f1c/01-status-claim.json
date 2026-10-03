@@ -1,0 +1,269 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-sol-thischat-20261003T0349Z-9f1c-status-claim",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44StatusChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/status",
+        "response": {
+          "status": "ACTIVE",
+          "controlPlane": "CLOUDFLARE_D1",
+          "productionMode": "PARALLEL_HOT_PATH",
+          "globalProductionMutex": false,
+          "githubHotPathWrites": false,
+          "leaseTtlSeconds": 300,
+          "maxActiveLeases": 128,
+          "mcpEndpoint": "/mcp",
+          "mcpProtocol": "2026-07-28",
+          "counts": {
+            "queued": 763,
+            "leased": 163,
+            "audited": 756,
+            "verified": 0,
+            "quarantined": 0,
+            "recoverable": 116
+          },
+          "durableCounts": [
+            {
+              "state": "CLAIMABLE",
+              "n": 763
+            },
+            {
+              "state": "COMPLETE",
+              "n": 510
+            },
+            {
+              "state": "LEASED",
+              "n": 143
+            },
+            {
+              "state": "PARTIAL_DURABLE",
+              "n": 20
+            },
+            {
+              "state": "QUARANTINED",
+              "n": 246
+            }
+          ],
+          "meta": {
+            "pool_schema": "MLS-R44-CLOUDFLARE-POOL-2",
+            "pool_generated_at": "2026-10-01T09:50:08.936233Z",
+            "base_commit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+            "pool_ticket_count": "1682",
+            "pool_entry_count": "8408",
+            "pool_ticket_size": "5",
+            "pool_manifest_sha256": "28153404f333669c2d1d7219aae45972387c1d49ff913b5ff75175c009eee47d",
+            "content_manifest_blob": "643b3c9cab84a0372f9e52127fe78ad0e9fab938",
+            "cutover_mode": "cloudflare-d1",
+            "durable_entry_schema": "1"
+          },
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "authenticated": true
+        },
+        "completedAt": "2026-10-03T03:52:50.628Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-45546c7d-a284-414e-b12f-0ba6fb93e46c",
+          "workerId": "r44-chat-20261003T0349Z-sol-9f1c",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1449",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790999870677,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V09-0513",
+                "path": "ruso/MLS-V09-0513.json",
+                "sha256": "b1ae35bfeb09d4ee0ddcf561e574eb215af91f964174f3f70ef5cbeba99df253"
+              },
+              {
+                "code": "MLS-V09-0514",
+                "path": "ruso/MLS-V09-0514.json",
+                "sha256": "a7a95e76019b77aa17ef84fb7cbd0bc4f19f89cfaae2ec3f1eca6e7f31547cd6"
+              },
+              {
+                "code": "MLS-V09-0515",
+                "path": "ruso/MLS-V09-0515.json",
+                "sha256": "fdd45111d04bad7f8b7289fecb854b57a2e26df72dd48c49e54c7d66b347c7ac"
+              },
+              {
+                "code": "MLS-V09-0517",
+                "path": "ruso/MLS-V09-0517.json",
+                "sha256": "201cd8012e785ad326190a544f004d07941439600258f639df248be320acc6ee"
+              },
+              {
+                "code": "MLS-V09-0518",
+                "path": "ruso/MLS-V09-0518.json",
+                "sha256": "b59b8cee9f5857637d940ab4277ad0ca826496f0aa243e52acfaff3dde5c5e82"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1449",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V09-0513",
+                "path": "ruso/MLS-V09-0513.json",
+                "sha256": "b1ae35bfeb09d4ee0ddcf561e574eb215af91f964174f3f70ef5cbeba99df253"
+              },
+              {
+                "code": "MLS-V09-0514",
+                "path": "ruso/MLS-V09-0514.json",
+                "sha256": "a7a95e76019b77aa17ef84fb7cbd0bc4f19f89cfaae2ec3f1eca6e7f31547cd6"
+              },
+              {
+                "code": "MLS-V09-0515",
+                "path": "ruso/MLS-V09-0515.json",
+                "sha256": "fdd45111d04bad7f8b7289fecb854b57a2e26df72dd48c49e54c7d66b347c7ac"
+              },
+              {
+                "code": "MLS-V09-0517",
+                "path": "ruso/MLS-V09-0517.json",
+                "sha256": "201cd8012e785ad326190a544f004d07941439600258f639df248be320acc6ee"
+              },
+              {
+                "code": "MLS-V09-0518",
+                "path": "ruso/MLS-V09-0518.json",
+                "sha256": "b59b8cee9f5857637d940ab4277ad0ca826496f0aa243e52acfaff3dde5c5e82"
+              }
+            ],
+            "remaining": [
+              "MLS-V09-0513",
+              "MLS-V09-0514",
+              "MLS-V09-0515",
+              "MLS-V09-0517",
+              "MLS-V09-0518"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261003T0349Z-sol-9f1c",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790999870677,
+              "active": true
+            },
+            "workerId": "r44-chat-20261003T0349Z-sol-9f1c",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790999870677,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V09-0513",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 513,
+                "title": "где/куда/откуда relativas locativas",
+                "level": "B1",
+                "part": "Condicionalidad y relativas — Условность и относительные конструкции",
+                "chapter": "Oraciones relativas con который — Относительные предложения с который",
+                "articleMarkdown": "#### где/куда/откуда relativas locativas\n\n#### En pocas palabras\n\nEn ruso, **где**, **куда** y **откуда** pueden introducir oraciones relativas de sentido locativo. Se refieren a un lugar mencionado antes y expresan relaciones diferentes: **где** indica ubicación, **куда** destino o dirección hacia un lugar y **откуда** procedencia.\n\nPor ejemplo, **Это город, где я родился** significa «Esta es la ciudad donde nací». La palabra **где** remite a **город** y presenta ese lugar como escenario de la acción.\n\n#### Cómo funciona\n\n**где** responde a la idea de «¿dónde?»: **Дом, где мы живём** — «La casa donde vivimos». No expresa movimiento hacia el lugar, sino ubicación de la situación descrita.\n\n**куда** se usa cuando la subordinada presenta movimiento o dirección hacia un destino: **Город, куда мы едем, находится далеко** — «La ciudad adonde vamos está lejos». La elección de **куда** depende del sentido direccional de la subordinada.\n\n**откуда** marca procedencia u origen: **Деревня, откуда он приехал, очень маленькая** — «El pueblo de donde vino es muy pequeño». Aquí la relación espacial es de movimiento desde el lugar mencionado.\n\nEstas palabras pueden evitar una construcción con **который** y preposición cuando el antecedente es claramente locativo. Por ejemplo, **дом, где я живу** y **дом, в котором я живу** pueden expresar «la casa en la que vivo», aunque la estructura gramatical sea diferente.\n\n#### Ejemplos\n\n- **Вот кафе, где мы встретились.** — Aquí está el café donde nos encontramos.\n- **Я знаю место, куда они поехали.** — Conozco el lugar adonde fueron.\n- **Это страна, откуда приехала Анна.** — Este es el país de donde vino Anna.\n\n#### Observación importante\n\nNo conviene elegir entre **где**, **куда** y **откуда** únicamente por el sustantivo antecedente. La diferencia depende de la relación espacial expresada dentro de la subordinada: ubicación, dirección hacia un destino o procedencia.\n\nTampoco son sustitutos universales de **который**. Con antecedentes no locativos, o cuando se necesita expresar otra relación gramatical, puede ser necesaria una forma declinada de **который** con o sin preposición.\n\n#### Entradas relacionadas\n\n- Caso de **который** por función interna.\n- **что** como relativo coloquial limitado.\n- Preposiciones de lugar y movimiento.\n- **где / куда / откуда** como adverbios interrogativos.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-86dc1edecb2625a754b10ddf816a3dc7396a5086b95081f2f4ae6da687b1759d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:24:44.032Z"
+              },
+              {
+                "code": "MLS-V09-0514",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 514,
+                "title": "что como relativo coloquial limitado: reconocimiento",
+                "level": "B1",
+                "part": "Condicionalidad y relativas — Условность и относительные конструкции",
+                "chapter": "Oraciones relativas con который — Относительные предложения с который",
+                "articleMarkdown": "#### что como relativo coloquial limitado: reconocimiento\n\n#### En pocas palabras\n\nEn el ruso coloquial, **что** puede aparecer en algunas construcciones relativas donde el ruso estándar más neutro o formal usaría **который**. Este uso debe reconocerse, pero no conviene tratar **что** como sustituto general de **который**.\n\nPor ejemplo, en habla coloquial puede oírse una estructura como **Дом, что стоит у реки, очень старый** — «La casa que está junto al río es muy antigua». Aquí **что** introduce una relativa y remite a **дом**.\n\n#### Cómo funciona\n\nA diferencia de **который**, **что** no cambia de género, número ni caso. Por eso no muestra mediante su forma qué función desempeña dentro de la subordinada. Su interpretación depende de la estructura completa y del uso convencional.\n\nEste relativo es más característico de ciertos registros coloquiales, populares, literarios o estilizados. En prosa neutral contemporánea, especialmente cuando la función interna requiere una preposición o una marca de caso clara, **который** suele ser la opción más transparente.\n\nCompare **Книга, которую я читаю, интересная** — «El libro que estoy leyendo es interesante». Aquí **которую** muestra femenino singular y acusativo. Sustituir mecánicamente esa forma por **что** no reproduce todas las posibilidades gramaticales de **который**.\n\n#### Ejemplos\n\n- **Дом, что стоит на углу, продаётся.** — La casa que está en la esquina está en venta. Uso relativo de tono menos neutro.\n- **Человек, который мне помог, уже ушёл.** — La persona que me ayudó ya se fue. En estilo neutral, **который** es una opción clara y productiva.\n- **Друг, с которым я говорил, живёт здесь.** — El amigo con quien hablé vive aquí. La preposición **с** y el instrumental hacen natural la construcción con **которым**.\n\n#### Observación importante\n\nEl hecho de que **что** pueda funcionar como relativo en determinados contextos no significa que tenga el mismo comportamiento gramatical que **который**. No se declina ni combina productivamente con preposiciones del mismo modo.\n\nPara un estudiante de nivel B1, lo más útil es reconocer este **что** cuando aparezca y mantener **который** como forma general para construir relativas que necesiten concordancia y caso explícitos.\n\n#### Entradas relacionadas\n\n- Caso de **который** por función interna.\n- Género y número de **который** por antecedente.\n- Relativas locativas con **где / куда / откуда**.\n- Registro coloquial y variación.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-451054d2b60dbb55b8f31f33a1e406b0f12245a134e4db55a97be0badd992e27",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:25:38.291Z"
+              },
+              {
+                "code": "MLS-V09-0515",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 515,
+                "title": "Caso de который por función interna",
+                "level": "B1",
+                "part": "Condicionalidad y relativas — Условность и относительные конструкции",
+                "chapter": "Oraciones relativas con который — Относительные предложения с который",
+                "articleMarkdown": "#### Caso de который por función interna\n\n#### En pocas palabras\n\nEl pronombre relativo ruso **который** concuerda con su antecedente en **género y número**, pero su **caso** se decide por la función que desempeña dentro de la oración relativa. No se copia automáticamente el caso que tenga el antecedente en la oración principal.\n\nPor ejemplo, **Это книга, которую я читаю** significa «Este es el libro que leo». **которую** es femenino singular por **книга**, pero está en acusativo porque dentro de la relativa es el complemento de **читаю**.\n\n#### Cómo funciona\n\nPara elegir la forma correcta, conviene separar mentalmente la subordinada. En **Это человек, который работает здесь**, la relativa es **который работает здесь**: который es quien realiza la acción, por eso está en nominativo.\n\nEn **Это человек, которого я знаю**, la relativa es **которого я знаю**. Ahora **я** es el sujeto y который representa a la persona conocida. Al ser masculino singular animado en acusativo, aparece la forma **которого**.\n\nSi hay una preposición, hay que respetar su régimen. **Это коллега, с которым я работаю** — «Este es el colega con quien trabajo». La preposición **с** con sentido de compañía rige instrumental, de modo que se usa **которым**.\n\n#### Ejemplos\n\n- **Вот девушка, которой я написал.** — Aquí está la chica a quien escribí. **которой** está en dativo porque **писать кому?** selecciona ese complemento.\n- **Это дом, в котором мы живём.** — Esta es la casa en la que vivimos. **в** con ubicación rige prepositivo: **котором**.\n- **Я встретил друга, о котором ты говорил.** — Encontré al amigo del que hablabas. **о** rige prepositivo: **котором**.\n\n#### Observación importante\n\nEl caso es una categoría morfológica del relativo, mientras que funciones como sujeto o complemento pertenecen a la estructura sintáctica. Una función puede corresponder a distintos casos según el verbo o la preposición que gobierne la construcción.\n\nAdemás, algunas formas son iguales entre casos. Por eso no basta con reconocer una terminación: hay que analizar qué exige la subordinada.\n\n#### Entradas relacionadas\n\n- Género y número de **который** por antecedente.\n- Caso por función interna.\n- Relativas locativas con **где / куда / откуда**.\n- Animacidad en el acusativo.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-5cee5f5365e8708439c76ffc253cb4fc57166fa33b695d6a60af0c7f1f5f7f4a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:35.114Z"
+              },
+              {
+                "code": "MLS-V09-0517",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 517,
+                "title": "где/куда/откуда relativos",
+                "level": "B1",
+                "part": "Condicionalidad y relativas — Условность и относительные конструкции",
+                "chapter": "Oraciones relativas con который — Относительные предложения с который",
+                "articleMarkdown": "#### где/куда/откуда relativos\n\n#### En pocas palabras\n\nLos adverbios **где**, **куда** y **откуда** pueden introducir oraciones relativas cuando el antecedente designa un lugar. Los tres añaden información locativa, pero expresan relaciones distintas: **где** indica ubicación, **куда** dirección o destino y **откуда** origen o procedencia.\n\nPor ejemplo, **Город, где я живу, очень большой** significa «La ciudad donde vivo es muy grande». La relativa **где я живу** describe el lugar sin expresar movimiento hacia él ni desde él.\n\n#### Cómo funciona\n\nSe usa **где** cuando la acción ocurre o la situación existe en un lugar: **кафе, где мы встретились** — «el café donde nos encontramos».\n\nSe usa **куда** cuando la subordinada contiene una idea de desplazamiento hacia un destino: **место, куда мы едем** — «el lugar adonde vamos». No basta con que el antecedente sea un lugar; la propia subordinada debe expresar dirección hacia él.\n\nSe usa **откуда** cuando se expresa procedencia: **дом, откуда он вышел** — «la casa de donde salió». Aquí el movimiento parte del lugar mencionado.\n\nCon ciertos antecedentes locativos, estas construcciones alternan con **который** más una preposición: **город, где я живу** y **город, в котором я живу**. Ambas pueden ser naturales, pero no tienen la misma estructura morfológica: **где** es invariable, mientras que **который** se declina.\n\n#### Ejemplos\n\n- **Это парк, где мы гуляем по вечерам.** — Este es el parque donde paseamos por las tardes.\n- **Покажи мне улицу, куда нам нужно идти.** — Muéstrame la calle hacia la que tenemos que ir.\n- **Я помню станцию, откуда отправлялся поезд.** — Recuerdo la estación de donde salía el tren.\n\n#### Observación importante\n\nNo hay que escoger **где**, **куда** o **откуда** por traducción automática de «donde». El ruso distingue explícitamente ubicación, destino y origen, por lo que el significado del verbo y de toda la subordinada es decisivo.\n\nAdemás, estas formas no sustituyen a **который** en relaciones no locativas. Para personas, objetos o complementos regidos por otras preposiciones, suele necesitarse otra construcción relativa.\n\n#### Entradas relacionadas\n\n- Género y número de **который**.\n- **который** en acusativo.\n- Caso de **который** por función interna.\n- Verbos y expresiones de movimiento.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a90126b9e9ee74763d31a9965091c04482f2bdabffef05de2ab80623c2e4772a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:28:21.558Z"
+              },
+              {
+                "code": "MLS-V09-0518",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 518,
+                "title": "который en acusativo",
+                "level": "B1",
+                "part": "Condicionalidad y relativas — Условность и относительные конструкции",
+                "chapter": "Oraciones relativas con который — Относительные предложения с который",
+                "articleMarkdown": "#### который en acusativo\n\n#### En pocas palabras\n\n**Который** aparece en **acusativo** cuando la función que cumple dentro de la oración relativa exige ese caso. Esto ocurre con frecuencia cuando representa el complemento directo de un verbo transitivo, pero el acusativo no debe definirse únicamente por esa función.\n\nPor ejemplo, **Это книга, которую я читаю** significa «Este es el libro que leo». **которую** concuerda en femenino singular con **книга** y está en acusativo porque dentro de la relativa **я читаю которую** el verbo presenta ese elemento como su complemento directo.\n\n#### Cómo funciona\n\nLa forma concreta depende de género, número y animacidad. En femenino singular, el acusativo de **которая** es **которую**: **женщина, которую я видел** — «la mujer que vi».\n\nEn masculino singular inanimado, el acusativo suele coincidir con el nominativo: **фильм, который мы посмотрели** — «la película que vimos». Aunque la forma visible sea **который**, su caso dentro de la relativa es acusativo.\n\nCon un antecedente masculino animado aparece una forma coincidente con el genitivo: **человек, которого я встретил** — «la persona a quien encontré». En plural también interviene la animacidad: **книги, которые я купил** frente a **люди, которых я встретил**.\n\n#### Ejemplos\n\n- **Вот письмо, которое я получил вчера.** — Aquí está la carta que recibí ayer. **которое** es neutro singular acusativo, igual en forma al nominativo.\n- **Это девушка, которую мы пригласили.** — Esta es la chica que invitamos. **которую** es femenino singular acusativo.\n- **Вот друзья, которых я давно знаю.** — Aquí están los amigos que conozco desde hace tiempo. **которых** refleja plural animado en acusativo.\n\n#### Observación importante\n\nNo conviene identificar el caso solo por la terminación. El acusativo puede ser **sincrético**, es decir, tener la misma forma que otro caso: nominativo para numerosos inanimados y genitivo para ciertos animados.\n\nAdemás, el antecedente puede estar en cualquier caso en la oración principal. El caso de **который** se decide únicamente por su papel dentro de la subordinada.\n\n#### Entradas relacionadas\n\n- **который** en dativo.\n- Género y número de **который**.\n- Caso de **который** por función interna.\n- Animacidad en el acusativo.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2ffaac2f1fd5776be092ad2ecfe6f92c67d8c94cd9b843a8183c3ced28a7ecb8",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:29:16.486Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:52:51.435Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:52:51.435Z",
+  "commandFile": "mls chat bridge/commands/000-000-000-000-000-000-r44-sol-thischat-20261003T0349Z-9f1c/01-status-claim.json"
+}
