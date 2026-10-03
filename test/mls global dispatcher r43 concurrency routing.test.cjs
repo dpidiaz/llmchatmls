@@ -41,8 +41,10 @@ test('bootstrap command owns the writer mutex only for the fixed authorized 50x5
  assert.match(text,/COLLABORATOR/);
 });
 
-test('automatic Issue routing remains only on explicit legacy Issue fallbacks',()=>{
- assert.doesNotMatch(files.dispatcher,/github\.event\.issue/);
+test('automatic Issue routing is explicit and namespace-scoped for each authorized writer path',()=>{
+ assert.match(files.dispatcher,/startsWith\(github\.event\.issue\.title, '\[MLS Dispatcher\]'/);
+ assert.match(files.dispatcher,/MLS_GLOBAL_DISPATCH_COMMAND/);
+ assert.match(files.dispatcher,/github\.event\.issue\.author_association/);
  assert.doesNotMatch(files.r43,/github\.event\.issue/);
  assert.match(files.bootstrap,/\[MLS R4\.3\]\[BOOTSTRAP\]\[APPLY\] 50X5/);
  assert.match(files.buffered,/\[MLS Buffered\]\[SYNC\]/);
