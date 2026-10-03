@@ -73,15 +73,22 @@ function appendOutput(name,value){
 }
 async function prepare(){
   const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-  if(!event.issue||!event.comment)fail('UNIFIED_EVIDENCE_EVENT_INVALID');
   const repository=process.env.GITHUB_REPOSITORY;
-  const issue=await gh('/repos/'+repository+'/issues/'+event.issue.number);
-  const payload=extractMarked(event.comment.body||'');
-  const validated=validate(issue,event.comment,payload);
+  let eventIssue=event.issue||null,eventComment=event.comment||null;
+  if(!eventIssue||!eventComment){
+    const issueNumber=Number(process.env.MLS_UNIFIED_ISSUE_NUMBER||0);
+    const commentId=Number(process.env.MLS_UNIFIED_COMMENT_ID||0);
+    if(!Number.isInteger(issueNumber)||issueNumber<1||!Number.isInteger(commentId)||commentId<1)fail('UNIFIED_EVIDENCE_EVENT_INVALID');
+    eventIssue={number:issueNumber};
+    eventComment=await gh('/repos/'+repository+'/issues/comments/'+commentId);
+  }
+  const issue=await gh('/repos/'+repository+'/issues/'+eventIssue.number);
+  const payload=extractMarked(eventComment.body||'');
+  const validated=validate(issue,eventComment,payload);
   const bundlePath=path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-evidence-submit.json');
   fs.writeFileSync(bundlePath,JSON.stringify({
     issueNumber:Number(issue.number),
-    commentId:Number(event.comment.id),
+    commentId:Number(eventComment.id),
     branch:validated.state.branch,
     assignmentId:validated.state.assignmentId,
     leaseEpoch:validated.state.leaseEpoch,
