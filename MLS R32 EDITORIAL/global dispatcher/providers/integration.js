@@ -31,21 +31,60 @@ function loadR44R33Handoffs(root='.'){
   }
   return out;
 }
-function r33UnifiedSnapshot(snapshot,handoffs){
-  const available=new Map();
-  for(const entry of snapshot.pool?.entries||[]){
-    const h=handoffs.get(String(entry.code||'').toUpperCase());
-    if(h)available.set(h.code,{...entry,r44Handoff:h});
+function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,globalAssignments=[]}={}){
+  if(!(handoffs instanceof Map)||!handoffs.size)return null;
+  const integrated=r33IntegratedCodes(root);
+  const corpus=mlsCore.corpusEntries(root);
+  const entries=corpus
+    .map((entry,index)=>{
+      const code=String(entry.code||'').toUpperCase(),h=handoffs.get(code);
+      if(!h||integrated.has(code))return null;
+      return {
+        order:Number(h.ordinal||index+1),
+        code,
+        language:String(entry.language||''),
+        contentPath:String(entry.path||entry.contentPath||''),
+        r44Handoff:h
+      };
+    })
+    .filter(Boolean)
+    .sort((a,b)=>a.order-b.order||a.code.localeCompare(b.code));
+  if(!entries.length)return null;
+  const allowed=new Set(entries.map(x=>x.code));
+  const execution={...(snapshot.pool?.execution||{}),
+    defaultClaimSize:5,maxClaimSize:10,workerBatchSize:5,parallelWorkerLimit:128,maxConcurrentWorkers:128,
+    checkpointSizeMax:1,chatOnly:true,cloudflareEditorialInteractions:0,d1EditorialInteractions:0};
+  const pool={
+    ...(snapshot.pool||{}),
+    poolId:'MLS-R33-R44-UNIFIED-CONTINUATION',
+    manifestVersion:'1.0',
+    status:'authorized',
+    active:true,
+    dispatcherOnly:true,
+    sourceOfTruth:'github',
+    editorialArchitecture:'github-native',
+    cloudflareEditorialAllowed:false,
+    d1EditorialAllowed:false,
+    continuationOf:snapshot.pool?.poolId||null,
+    execution,
+    entries
+  };
+  const terminalCodes=codesFromTerminal(globalLedger,'r33-farm').filter(code=>allowed.has(code));
+  const ledger={...r33Core.initialLedger(pool),verified:terminalCodes,exceptions:[]};
+  const batches=[];
+  for(const state of activeProviderAssignments(globalAssignments,'r33-farm')){
+    const activeEntries=codesFromLocks(state.resourceLocks).filter(code=>allowed.has(code)).map(code=>({code}));
+    if(!activeEntries.length)continue;
+    batches.push({poolId:pool.poolId,batchId:'GLOBAL-UNIFIED-'+state.assignmentId,status:'leased',
+      acknowledgedAt:state.acknowledgedAt||null,ackDeadlineAt:state.ackDeadlineAt,expiresAt:state.expiresAt,entries:activeEntries});
   }
-  if(!available.size)return null;
-  const allowed=new Set(available.keys());
-  const pool={...snapshot.pool,entries:[...available.values()]};
-  const ledger={...snapshot.ledger,
-    verified:(snapshot.ledger?.verified||[]).filter(code=>allowed.has(String(code).toUpperCase())),
-    exceptions:(snapshot.ledger?.exceptions||[]).filter(code=>allowed.has(String(code).toUpperCase()))};
-  const batches=(snapshot.batches||[]).map(batch=>({...batch,entries:(batch.entries||[]).filter(e=>allowed.has(String(e?.code||'').toUpperCase()))})).filter(batch=>batch.entries.length);
-  const reservedCodes=(snapshot.reservedCodes||[]).filter(code=>allowed.has(String(code).toUpperCase()));
-  return {...snapshot,pool,ledger,batches,reservedCodes,r43Handoff:null,r43Handoffs:[],handoffCodes:[],r44UnifiedHandoffs:handoffs};
+  const recoveryCodes=Object.values(globalLedger?.recoveries||{})
+    .filter(r=>r?.workItem?.provider==='r33-farm')
+    .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
+  const bufferedCodes=(snapshot.bufferedReservations||[]).flatMap(r=>(r?.allocation?.units||[]).map(u=>String(u?.code||'').toUpperCase()));
+  const reservedCodes=[...new Set([...recoveryCodes,...bufferedCodes].filter(code=>allowed.has(code)&&!terminalCodes.includes(code)))];
+  return {...snapshot,pool,ledger,batches,reservedCodes,r43Handoff:null,r43Handoffs:[],handoffCodes:[],
+    r44UnifiedHandoffs:handoffs,unifiedFullCorpus:true};
 }
 function protectCandidateCodes(snapshot,candidates,now){
   const batches=(snapshot.batches||[]).map(x=>structuredClone(x));
@@ -495,11 +534,10 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const execution=snapshot.pool?.execution||{};
-    const unifiedViewForIntegration=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map());
+    const unifiedViewForIntegration=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments});
     if(unifiedViewForIntegration){
-      const unifiedPool={...unifiedViewForIntegration.pool,poolId:String(snapshot.pool.poolId)+'-R44-UNIFIED'};
       const unifiedIndexItem=r33IndexIntegrationWork({
-        pool:unifiedPool,
+        pool:unifiedViewForIntegration.pool,
         globalLedger,
         root,
         waveSize:50,
@@ -566,7 +604,7 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
         // handoff are eligible. The general R33 lane sees those codes as
         // protected during this same materialization, preventing duplicate work.
         let working=snapshot;
-        const unifiedView=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map());
+        const unifiedView=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments});
         if(unifiedView){
           const unifiedCandidates=r33Provider.materializeCandidates(unifiedView,{now,count:available});
           for(const candidate of unifiedCandidates){
