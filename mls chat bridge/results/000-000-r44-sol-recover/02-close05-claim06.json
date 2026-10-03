@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-sol-seq-close05-claim06",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-b1583640-4da1-4a4f-bf0f-5be3f6bff8ae",
+          "ticketId": "R44-CORPUS-1437",
+          "leaseExpiresAt": 1790996945652
+        },
+        "completedAt": "2026-10-03T03:04:05.751Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1437",
+          "sha256": "3124d809a4a9fbe5bdaeb56bfacd992c81d282636c61debc7ffbc3b83cf64d9c",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1437",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "92144b35-d522-484c-9c97-2ca1b67b20bf",
+                "ticketId": "R44-CORPUS-1437",
+                "code": "MLS-V09-0441",
+                "idempotencyKey": "R44-CORPUS-1437:MLS-V09-0441:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "66dfdb7b199dda21ef1db393534be5e28459438cfae6897c160a629dabde482c",
+                "sourceSha256": "ad7bd3d8496822ed2bd1c59c282466b0f166dbd94bc0c6556f775c043572cda4",
+                "committedMs": 1790996645861,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "424fd9ca11ef5f99059303ea192c7f468d193d48c1d5814cffddc2cb69612bf1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1437",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a2695a6c-3e01-405a-9b32-646c7775bec2",
+                "ticketId": "R44-CORPUS-1437",
+                "code": "MLS-V09-0443",
+                "idempotencyKey": "R44-CORPUS-1437:MLS-V09-0443:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "617ba1e9288c870553cd2cb0cca45f56c4f038e349d4646cf0d85e48e7ea0f7e",
+                "sourceSha256": "209ae3821839b52d4f10255cbdd867872c775d9f026c49033c9280d4ddbeeb11",
+                "committedMs": 1790996645930,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9f07e0f433639ecabd2e01adeace62179a0b06ec10dc254652d474915d08385a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1437",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a5c9eae3-e59d-498f-a291-5fd9d190cd23",
+                "ticketId": "R44-CORPUS-1437",
+                "code": "MLS-V09-0444",
+                "idempotencyKey": "R44-CORPUS-1437:MLS-V09-0444:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "46ad8938db31a233a50d2d3173100e322ea621a199b4c79d282fe5d5c9cc19bf",
+                "sourceSha256": "68eba2f7398946e97fbe5895e4f2a9fad1d5d37c51928596197f73a82eb1d35b",
+                "committedMs": 1790996646000,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f4286072884c490bf22946f40c5c058bcf26d67bb2b32cc6aa18c12a679d2d2b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1437",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b04784a2-c2c7-4743-ba7b-48f5d877367e",
+                "ticketId": "R44-CORPUS-1437",
+                "code": "MLS-V09-0445",
+                "idempotencyKey": "R44-CORPUS-1437:MLS-V09-0445:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b238e4fb7a524ac612ebc4cc372399b0071506f68fb3e382645cfd9d05772ce0",
+                "sourceSha256": "18e6639397e51ae0a74c7bc367eef46629f354d63e0c6552d14bb3f06c8af9d9",
+                "committedMs": 1790996646069,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d3add669fa4b0862b9f1df722fd2745fbb22512b367c262a13fc1e446b40ac59",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1437",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1f35d790-3df8-4d86-9664-890eaad7d7dd",
+                "ticketId": "R44-CORPUS-1437",
+                "code": "MLS-V09-0446",
+                "idempotencyKey": "R44-CORPUS-1437:MLS-V09-0446:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "91e37d1d43cc062561b6e99ad9e2a771bea5b02ecedbeff610649d7ea1da5795",
+                "sourceSha256": "b3aac4600b912f835b6b40524feea2d46e53dd3e3fb671e624483534ad277875",
+                "committedMs": 1790996646142,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ef6d3c621068dc8af7bb1fb79a9dbde7923544f7467699180bbe04c9a8340078",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-b1583640-4da1-4a4f-bf0f-5be3f6bff8ae",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "3124d809a4a9fbe5bdaeb56bfacd992c81d282636c61debc7ffbc3b83cf64d9c"
+          }
+        },
+        "completedAt": "2026-10-03T03:04:06.317Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-4094ff64-bc30-4fff-b67e-6797292e1bf5",
+          "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1439",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996946341,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V09-0453",
+                "path": "ruso/MLS-V09-0453.json",
+                "sha256": "382697f1dbb28e3996e813fc017818a46cc0fad2b51184b2a0bdb3c2f88096a9"
+              },
+              {
+                "code": "MLS-V09-0454",
+                "path": "ruso/MLS-V09-0454.json",
+                "sha256": "f201fb8bb8c52abc034c0efeb30d69ea988512ae6c87adc0ea18182d92040d55"
+              },
+              {
+                "code": "MLS-V09-0455",
+                "path": "ruso/MLS-V09-0455.json",
+                "sha256": "faaed11188d2b609b1b21ca2785611dd2e32542659642149b64a6e80c692fbc8"
+              },
+              {
+                "code": "MLS-V09-0456",
+                "path": "ruso/MLS-V09-0456.json",
+                "sha256": "ea4ab9df5f26515d62ca2817b1757ab3f4b6e7a136ebf80531140fc95d194d6f"
+              },
+              {
+                "code": "MLS-V09-0457",
+                "path": "ruso/MLS-V09-0457.json",
+                "sha256": "842ec00126ea0b75bb061f77cb2b7834488c47dea4242911c3e36a7dd5d526b7"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1439",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V09-0453",
+                "path": "ruso/MLS-V09-0453.json",
+                "sha256": "382697f1dbb28e3996e813fc017818a46cc0fad2b51184b2a0bdb3c2f88096a9"
+              },
+              {
+                "code": "MLS-V09-0454",
+                "path": "ruso/MLS-V09-0454.json",
+                "sha256": "f201fb8bb8c52abc034c0efeb30d69ea988512ae6c87adc0ea18182d92040d55"
+              },
+              {
+                "code": "MLS-V09-0455",
+                "path": "ruso/MLS-V09-0455.json",
+                "sha256": "faaed11188d2b609b1b21ca2785611dd2e32542659642149b64a6e80c692fbc8"
+              },
+              {
+                "code": "MLS-V09-0456",
+                "path": "ruso/MLS-V09-0456.json",
+                "sha256": "ea4ab9df5f26515d62ca2817b1757ab3f4b6e7a136ebf80531140fc95d194d6f"
+              },
+              {
+                "code": "MLS-V09-0457",
+                "path": "ruso/MLS-V09-0457.json",
+                "sha256": "842ec00126ea0b75bb061f77cb2b7834488c47dea4242911c3e36a7dd5d526b7"
+              }
+            ],
+            "remaining": [
+              "MLS-V09-0453",
+              "MLS-V09-0454",
+              "MLS-V09-0455",
+              "MLS-V09-0456",
+              "MLS-V09-0457"
+            ],
+            "lease": {
+              "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996946341,
+              "active": true
+            },
+            "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996946341,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V09-0453",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 453,
+                "title": "Movimiento prefijado в-/во-: entrada",
+                "level": "B1",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\nEl prefijo ruso **в-/во-** expresa normalmente **entrada en un espacio**. Unido a un verbo de movimiento, presenta el paso desde fuera hacia dentro y conserva la información del verbo base sobre la manera de desplazarse.\n\nPor ejemplo, **Он вошёл в дом** significa «Entró en la casa». **вошёл** combina movimiento a pie con la idea de entrada.\n\n#### Cómo funciona\n\nCon desplazamiento a pie aparecen **войти / входить**; con transporte, **въехать / въезжать**. La variante **во-** se debe a condiciones fonéticas y morfológicas y no representa un significado diferente de **в-**.\n\nTambién importa el aspecto. **войти** y **въехать** son perfectivos y suelen presentar la entrada como un evento delimitado. Los imperfectivos **входить** y **въезжать** pueden describir el proceso, una entrada repetida o una situación habitual.\n\nEl destino interior se expresa con frecuencia mediante **в + acusativo**, como **войти в комнату** «entrar en la habitación». El prefijo verbal y la preposición pueden aparecer juntos, pero cumplen funciones distintas: el prefijo forma parte del verbo y la preposición introduce el complemento espacial.\n\n#### Ejemplos\n\n- **Она вошла в кабинет.** — Ella entró en el despacho. **вошла** presenta una entrada a pie completada.\n- **Машина въехала во двор.** — El coche entró en el patio. **въехала** conserva la idea de transporte.\n- **Посетители входили в зал по одному.** — Los visitantes iban entrando en la sala uno por uno. El imperfectivo destaca el proceso o una serie de entradas.\n\n#### Observación importante\n\nLa elección entre formas perfectivas e imperfectivas no depende de una traducción española única. Importan el resultado, el desarrollo del movimiento, la repetición y la perspectiva discursiva.\n\nAdemás, **в-/во-** no debe confundirse con **за-**, que en ciertos verbos de movimiento puede añadir la idea de pasar brevemente por un lugar, ni con **при-**, que destaca la llegada más que la entrada.\n\n#### Entradas relacionadas\n\nConviene compararlo con **вы-** para salida hacia fuera, **до-** para llegada hasta un límite, **при-** para llegada y **у-** para partida. El verbo base, el aspecto, el complemento y el contexto determinan la interpretación concreta.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-de5beead28ecc887febd570c99b29fadfc2ed2a1988812ee7660d1ca9324682f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:17:38.804Z"
+              },
+              {
+                "code": "MLS-V09-0454",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 454,
+                "title": "Movimiento prefijado вы-: salida hacia fuera",
+                "level": "B1",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\nEl prefijo ruso **вы-** expresa normalmente **salida hacia fuera desde un interior, recinto o espacio delimitado**. Unido a un verbo de movimiento, presenta el paso desde dentro hacia fuera y conserva la información del verbo base sobre la manera de desplazarse.\n\nPor ejemplo, **Дети выбежали из школы** significa «Los niños salieron corriendo de la escuela». **выбежали** combina la idea de correr con la salida hacia fuera.\n\n#### Cómo funciona\n\nCon desplazamiento a pie aparecen **выйти / выходить**; con transporte, **выехать / выезжать**; con carrera, **выбежать / выбегать**. El prefijo **вы-** aporta la relación espacial de salida desde un interior o espacio tomado como origen.\n\nTambién importa el aspecto. **выйти**, **выехать** y **выбежать** son perfectivos y suelen presentar la salida como un evento delimitado. Los imperfectivos correspondientes pueden describir el proceso, salidas repetidas o situaciones habituales.\n\nEl punto de origen se expresa con frecuencia mediante **из + genitivo**, como **выйти из комнаты** «salir de la habitación». La preposición independiente **из** rige ese grupo nominal; el prefijo verbal no determina por sí solo el caso.\n\n#### Ejemplos\n\n- **Она вышла из дома.** — Ella salió de la casa. **вышла** presenta una salida a pie completada.\n- **Автобус выехал из гаража.** — El autobús salió del garaje. **выехал** conserva la idea de transporte.\n- **Дети выбегали из школы после уроков.** — Los niños salían corriendo de la escuela después de las clases. El imperfectivo presenta una situación repetida.\n\n#### Observación importante\n\n**вы-** no es idéntico a **у-**. **вы-** enfoca la transición desde el interior hacia fuera, mientras que **у-** presenta de manera más general la partida o el alejamiento del lugar de referencia.\n\nLa elección entre perfectivo e imperfectivo depende del resultado, del desarrollo, de la repetición y del contexto discursivo; no puede deducirse únicamente de la traducción española «salir».\n\n#### Entradas relacionadas\n\nConviene compararlo con **в-/во-** para entrada, **у-** para partida, **до-** para llegada hasta un límite y **за-** para una entrada o paso breve. El verbo base, el aspecto y los complementos precisan el significado final.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-68127ea13adaca70a2bcedb8300b78ac223f33f6d03561164455df90f661177f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:18:29.880Z"
+              },
+              {
+                "code": "MLS-V09-0455",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 455,
+                "title": "Movimiento prefijado до-: llegada hasta",
+                "level": "B1",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\nEl prefijo ruso **до-** expresa normalmente que un movimiento **alcanza un límite o punto final**. Unido a un verbo de movimiento, presenta el recorrido como llegando hasta el lugar tomado como meta o frontera.\n\nPor ejemplo, **Мы доехали до аэропорта** significa «Llegamos hasta el aeropuerto». **доехали** combina desplazamiento en transporte con la idea de alcanzar ese destino límite.\n\n#### Cómo funciona\n\nCon desplazamiento a pie aparecen **дойти / доходить**; con transporte, **доехать / доезжать**. El prefijo **до-** aporta la idea de alcanzar el punto de referencia, mientras que el verbo base conserva la manera de desplazarse.\n\nTambién importa el aspecto. **дойти** y **доехать** son perfectivos y suelen presentar el límite como alcanzado. Los imperfectivos **доходить** y **доезжать** pueden describir el proceso, acciones repetidas o recorridos habituales hasta ese punto.\n\nEl destino límite se expresa con frecuencia mediante **до + genitivo**, como **дойти до станции** «llegar hasta la estación». La preposición independiente **до** rige ese grupo nominal; el prefijo verbal y la preposición pueden coincidir formalmente, pero cumplen funciones distintas.\n\n#### Ejemplos\n\n- **Мы дошли до реки.** — Llegamos hasta el río a pie. **дошли** presenta el límite como alcanzado.\n- **Мы доехали до аэропорта.** — Llegamos hasta el aeropuerto en transporte. **доехали** conserva la idea de vehículo.\n- **Этот автобус доезжает до центра.** — Este autobús llega hasta el centro. El imperfectivo puede describir una ruta habitual.\n\n#### Observación importante\n\n**до-** no es idéntico a **при-**. Ambos pueden aparecer en contextos traducidos como «llegar», pero **до-** destaca especialmente el hecho de alcanzar un límite o punto del recorrido, mientras que **при-** presenta la llegada desde la perspectiva del arribo.\n\nLa elección entre perfectivo e imperfectivo depende del resultado, del proceso, de la repetición y del contexto discursivo, no de una equivalencia fija en español.\n\n#### Entradas relacionadas\n\nConviene compararlo con **вы-** para salida hacia fuera, **за-** para paso breve, **при-** para llegada y **пере-** para cruce. El verbo base, el aspecto y los complementos precisan la interpretación final.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6a27a12befcd1e81d3da3b932b9ca05ea64e4a7c0da5ba0b1d8f6caacbb07311",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:19:22.839Z"
+              },
+              {
+                "code": "MLS-V09-0456",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 456,
+                "title": "Movimiento prefijado за-: paso breve",
+                "level": "B1",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\nEl prefijo ruso **за-** puede expresar que alguien **pasa brevemente por un lugar, entra un momento o hace una visita corta** durante un recorrido. En los verbos de movimiento, este valor suele presentar una parada incidental antes de continuar.\n\nPor ejemplo, **Она зашла к подруге на десять минут** significa «Pasó a ver a una amiga durante diez minutos». **зашла** presenta una visita breve realizada a pie o sin destacar transporte.\n\n#### Cómo funciona\n\nCon desplazamiento a pie aparecen **зайти / заходить**; con transporte, **заехать / заезжать**. El prefijo **за-** puede añadir la idea de desviarse, entrar o pasar por un punto de manera limitada dentro de un recorrido más amplio.\n\nTambién importa el aspecto. **зайти** y **заехать** son perfectivos y suelen presentar la visita o parada como un evento delimitado. Los imperfectivos **заходить** y **заезжать** pueden describir el proceso, acciones repetidas o visitas habituales.\n\nLa persona visitada se expresa con frecuencia mediante **к + dativo**, como **зайти к другу** «pasar a ver a un amigo». Para entrar en un lugar son frecuentes construcciones con **в + acusativo**, como **зайти в магазин**. La regencia depende de la preposición y de la construcción completa.\n\n#### Ejemplos\n\n- **Она зашла к подруге на десять минут.** — Pasó a ver a una amiga durante diez minutos. **зашла** expresa una visita breve.\n- **Мы заехали в магазин по дороге домой.** — Pasamos en coche por una tienda de camino a casa. **заехали** conserva la idea de transporte.\n- **Он часто заходит к соседу.** — Él suele pasar a ver al vecino. El imperfectivo presenta una acción repetida.\n\n#### Observación importante\n\n**за-** tiene otros valores en ruso y no significa siempre «pasar brevemente». En esta entrada el foco está en el uso propio de verbos de movimiento cuando hay una parada, visita o entrada incidental.\n\nConviene distinguirlo de **в-/во-**, que expresa entrada sin añadir necesariamente la idea de brevedad, y de **до-**, que destaca alcanzar un límite o destino.\n\n#### Entradas relacionadas\n\nConviene compararlo con **до-** para llegada hasta un límite, **об-/обо-** para rodear, **в-/во-** para entrada y **от-** para alejamiento. El verbo base, el aspecto y los complementos determinan la interpretación concreta.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-67ba7d9123c53cb8a8db57646746edfe2d916a0c4396dd9d1bec3ef2c7626d4a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:20:16.017Z"
+              },
+              {
+                "code": "MLS-V09-0457",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 457,
+                "title": "Movimiento prefijado об-/обо-: rodear",
+                "level": "B1",
+                "part": "Movimiento — Глаголы движения",
+                "chapter": "Verbos de movimiento con prefijos — Приставочные глаголы движения",
+                "articleMarkdown": "#### En pocas palabras\n\nEl prefijo ruso **об-/обо-** puede expresar que un movimiento **rodea, bordea o pasa alrededor de un punto de referencia**. Unido a un verbo de movimiento, presenta un recorrido que evita atravesar directamente el obstáculo o espacio tomado como centro.\n\nPor ejemplo, **Туристы обошли площадь** significa «Los turistas rodearon la plaza». **обошли** combina movimiento a pie con la idea de recorrido alrededor.\n\n#### Cómo funciona\n\nCon desplazamiento a pie aparecen **обойти / обходить**; con transporte, **объехать / объезжать**. La variante **обо-** aparece en determinados entornos fonéticos y morfológicos y no representa un significado distinto de **об-**.\n\nTambién importa el aspecto. **обойти** y **объехать** son perfectivos y suelen presentar el rodeo como un evento delimitado. Los imperfectivos **обходить** y **объезжать** pueden describir el proceso, recorridos repetidos o una ruta habitual.\n\nEl elemento rodeado puede aparecer como complemento directo, como en **обойти дом** «rodear la casa». En otras construcciones pueden intervenir preposiciones que precisan la trayectoria. El caso y la estructura dependen de la construcción completa, no del prefijo aislado.\n\n#### Ejemplos\n\n- **Туристы обошли площадь.** — Los turistas rodearon la plaza a pie. **обошли** presenta el recorrido como completado.\n- **Машина объехала яму.** — El coche rodeó el bache. **объехала** conserva la idea de transporte.\n- **Автобусы объезжают этот участок дороги.** — Los autobuses rodean este tramo de carretera. El imperfectivo puede describir una ruta habitual.\n\n#### Observación importante\n\n**об-/обо-** no exige necesariamente una vuelta completa de 360 grados. Puede bastar con pasar alrededor de un obstáculo o evitar atravesarlo directamente. La interpretación concreta depende del verbo y del contexto.\n\nConviene distinguirlo de **пере-**, que suele enfocar el paso de un lado al otro, y de **про-**, que puede presentar el paso por, delante de o a través de un lugar.\n\n#### Entradas relacionadas\n\nConviene compararlo con **за-** para paso breve, **от-** para alejamiento, **пере-** para cruce y **про-** para recorrido o paso. El verbo base, el aspecto y los complementos precisan el significado final.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-858d66c6d4c331ff96de6942794036ce48c815f67bd9bb496fd46ff1e102214f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:21:08.859Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:04:06.852Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:04:06.853Z",
+  "commandFile": "mls chat bridge/commands/000-000-r44-sol-recover/02-close05-claim06.json"
+}

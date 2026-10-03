@@ -1,0 +1,512 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-4bd912-ticket05-close-claim06",
+    "requested": 8,
+    "processed": 8,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-7d65d685-438a-4516-8af1-dccb1b79a417",
+          "ticketId": "R43-EMERGENCY-0587",
+          "leaseExpiresAt": 1790996951952
+        },
+        "completedAt": "2026-10-03T03:04:12.033Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0587",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "4784b0b2-fa10-480f-8962-18d610eea513",
+            "ticketId": "R43-EMERGENCY-0587",
+            "code": "MLS-V06-0444",
+            "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0444-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "392723672fb85cf3f2bf21bd63649fbe622a3f63d01ce9beffcb77da47b1fa5c",
+            "sourceSha256": "f30644ae349b156883649b37eacbcc8923b06c021e909c854e416afdfe6e6bde",
+            "committedMs": 1790996652097,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "2da397c4d9ed4d431c07f0318e4d84893a23c5b52df5cdd6f96f16661b99a06f",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:04:12.217Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0587",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "d15f7b92-8741-4bdc-bd22-9cac04781fa7",
+            "ticketId": "R43-EMERGENCY-0587",
+            "code": "MLS-V06-0445",
+            "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0445-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "1706a8ca9b79a47c5b237318dd4c06ef4f086cc07f7f68850f3c9bef5a41c556",
+            "sourceSha256": "ea8e4d373076ce6fc845a3795cef088730cc4996c3338b4fc70bf389438c2324",
+            "committedMs": 1790996652275,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "8c14d34d058fd0228b3d8a849cc9732bb8f59f24ac51f12f1f93435b2e249c03",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:04:12.333Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0587",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "f0a19457-a90c-4d40-b83c-586d5d93e58e",
+            "ticketId": "R43-EMERGENCY-0587",
+            "code": "MLS-V06-0447",
+            "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0447-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "586513ac4c914827d25c898cb04be7505173d2cf9c3a0b6ebebd788f0170198c",
+            "sourceSha256": "25ffce3403c1e24a1e7d282de39e2ec8f3c4c847106352119a9026c70324e4e2",
+            "committedMs": 1790996652391,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "e88749d8c4d64518084e75cfa542fdced445947f2127a8eb36eb0210fa30749f",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:04:12.447Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0587",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "cff64f11-6029-4ff2-b416-04833cf59481",
+            "ticketId": "R43-EMERGENCY-0587",
+            "code": "MLS-V06-0448",
+            "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0448-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "663e37a42b20c2d0facea2f213c96b5e2b5eb5d2a7d0e39d413d6613be3c7cb0",
+            "sourceSha256": "3749f8a36b3befad21d7e579d3ee70296610d3a83d679a0ad9fba62a24597b91",
+            "committedMs": 1790996652500,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "bf9d61ab4efe2fa117fd782a5561332086206c650df9f96ebf033441b40be679",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:04:12.562Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0587",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "ba544e96-6fd5-42db-8c34-ad57cdb7df6d",
+            "ticketId": "R43-EMERGENCY-0587",
+            "code": "MLS-V06-0449",
+            "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0449-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "062ef6a6eb820a2f313f1a59455bd92dfa7977df9ca8ae9c4db0aeb2fe9195e1",
+            "sourceSha256": "fd4f73757040be79202f934b8b67b62b2a7c00ba4fac2d9dc04017766a9b6aa3",
+            "committedMs": 1790996652621,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "cb815fcfb5a3c2b10e3456ad406637168d1b05619685159aa1060b814574ed9c",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:04:12.682Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RebindChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/rebind",
+        "response": {
+          "ticketId": "R43-EMERGENCY-0587",
+          "state": "COMPLETE",
+          "migrationNote": null,
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "entries": [
+            {
+              "code": "MLS-V06-0444",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0444",
+                "path": "japones/MLS-V06-0444.json",
+                "sha256": "f30644ae349b156883649b37eacbcc8923b06c021e909c854e416afdfe6e6bde"
+              },
+              "receipt": {
+                "code": "MLS-V06-0444",
+                "committedMs": 1790996652097,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0444-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "392723672fb85cf3f2bf21bd63649fbe622a3f63d01ce9beffcb77da47b1fa5c",
+                "receiptId": "4784b0b2-fa10-480f-8962-18d610eea513",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "f30644ae349b156883649b37eacbcc8923b06c021e909c854e416afdfe6e6bde",
+                "ticketId": "R43-EMERGENCY-0587",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "2da397c4d9ed4d431c07f0318e4d84893a23c5b52df5cdd6f96f16661b99a06f"
+            },
+            {
+              "code": "MLS-V06-0445",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0445",
+                "path": "japones/MLS-V06-0445.json",
+                "sha256": "ea8e4d373076ce6fc845a3795cef088730cc4996c3338b4fc70bf389438c2324"
+              },
+              "receipt": {
+                "code": "MLS-V06-0445",
+                "committedMs": 1790996652275,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0445-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1706a8ca9b79a47c5b237318dd4c06ef4f086cc07f7f68850f3c9bef5a41c556",
+                "receiptId": "d15f7b92-8741-4bdc-bd22-9cac04781fa7",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "ea8e4d373076ce6fc845a3795cef088730cc4996c3338b4fc70bf389438c2324",
+                "ticketId": "R43-EMERGENCY-0587",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "8c14d34d058fd0228b3d8a849cc9732bb8f59f24ac51f12f1f93435b2e249c03"
+            },
+            {
+              "code": "MLS-V06-0447",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0447",
+                "path": "japones/MLS-V06-0447.json",
+                "sha256": "25ffce3403c1e24a1e7d282de39e2ec8f3c4c847106352119a9026c70324e4e2"
+              },
+              "receipt": {
+                "code": "MLS-V06-0447",
+                "committedMs": 1790996652391,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0447-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "586513ac4c914827d25c898cb04be7505173d2cf9c3a0b6ebebd788f0170198c",
+                "receiptId": "f0a19457-a90c-4d40-b83c-586d5d93e58e",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "25ffce3403c1e24a1e7d282de39e2ec8f3c4c847106352119a9026c70324e4e2",
+                "ticketId": "R43-EMERGENCY-0587",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "e88749d8c4d64518084e75cfa542fdced445947f2127a8eb36eb0210fa30749f"
+            },
+            {
+              "code": "MLS-V06-0448",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0448",
+                "path": "japones/MLS-V06-0448.json",
+                "sha256": "3749f8a36b3befad21d7e579d3ee70296610d3a83d679a0ad9fba62a24597b91"
+              },
+              "receipt": {
+                "code": "MLS-V06-0448",
+                "committedMs": 1790996652500,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0448-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "663e37a42b20c2d0facea2f213c96b5e2b5eb5d2a7d0e39d413d6613be3c7cb0",
+                "receiptId": "cff64f11-6029-4ff2-b416-04833cf59481",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "3749f8a36b3befad21d7e579d3ee70296610d3a83d679a0ad9fba62a24597b91",
+                "ticketId": "R43-EMERGENCY-0587",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "bf9d61ab4efe2fa117fd782a5561332086206c650df9f96ebf033441b40be679"
+            },
+            {
+              "code": "MLS-V06-0449",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0449",
+                "path": "japones/MLS-V06-0449.json",
+                "sha256": "fd4f73757040be79202f934b8b67b62b2a7c00ba4fac2d9dc04017766a9b6aa3"
+              },
+              "receipt": {
+                "code": "MLS-V06-0449",
+                "committedMs": 1790996652621,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0587-MLS-V06-0449-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "062ef6a6eb820a2f313f1a59455bd92dfa7977df9ca8ae9c4db0aeb2fe9195e1",
+                "receiptId": "ba544e96-6fd5-42db-8c34-ad57cdb7df6d",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "fd4f73757040be79202f934b8b67b62b2a7c00ba4fac2d9dc04017766a9b6aa3",
+                "ticketId": "R43-EMERGENCY-0587",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "cb815fcfb5a3c2b10e3456ad406637168d1b05619685159aa1060b814574ed9c"
+            }
+          ],
+          "remaining": [],
+          "lease": {
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996952621,
+            "active": false
+          },
+          "status": "COMPLETE",
+          "bridgeSessionId": null,
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE"
+        },
+        "completedAt": "2026-10-03T03:04:12.763Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-e4ee91cf-3803-423c-b912-c29f8c8b64b6",
+          "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0589",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996952786,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0455",
+                "path": "japones/MLS-V06-0455.json",
+                "sha256": "bcf6833e8b06debe0114495ef8afbff451690c01d8b212e677b6694c5b33a76d"
+              },
+              {
+                "code": "MLS-V06-0457",
+                "path": "japones/MLS-V06-0457.json",
+                "sha256": "715c16775310f0d34e68d2b04d8fb184ddce2ae1317c27aeb990aa0ad7114ccb"
+              },
+              {
+                "code": "MLS-V06-0458",
+                "path": "japones/MLS-V06-0458.json",
+                "sha256": "a39215cbafc1dda17f578878e5855c94011a21b60a39715013249b2f935a55c0"
+              },
+              {
+                "code": "MLS-V06-0459",
+                "path": "japones/MLS-V06-0459.json",
+                "sha256": "14b55b1954d0e9e03632a31dc046aa37b17b0ee8c720e0ec8c90254219892c10"
+              },
+              {
+                "code": "MLS-V06-0460",
+                "path": "japones/MLS-V06-0460.json",
+                "sha256": "ea27ba4b4f4b36cf06d2700870f75b2c0eb79ade286872280376ee41a7fe5e68"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0589",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0455",
+                "path": "japones/MLS-V06-0455.json",
+                "sha256": "bcf6833e8b06debe0114495ef8afbff451690c01d8b212e677b6694c5b33a76d"
+              },
+              {
+                "code": "MLS-V06-0457",
+                "path": "japones/MLS-V06-0457.json",
+                "sha256": "715c16775310f0d34e68d2b04d8fb184ddce2ae1317c27aeb990aa0ad7114ccb"
+              },
+              {
+                "code": "MLS-V06-0458",
+                "path": "japones/MLS-V06-0458.json",
+                "sha256": "a39215cbafc1dda17f578878e5855c94011a21b60a39715013249b2f935a55c0"
+              },
+              {
+                "code": "MLS-V06-0459",
+                "path": "japones/MLS-V06-0459.json",
+                "sha256": "14b55b1954d0e9e03632a31dc046aa37b17b0ee8c720e0ec8c90254219892c10"
+              },
+              {
+                "code": "MLS-V06-0460",
+                "path": "japones/MLS-V06-0460.json",
+                "sha256": "ea27ba4b4f4b36cf06d2700870f75b2c0eb79ade286872280376ee41a7fe5e68"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0455",
+              "MLS-V06-0457",
+              "MLS-V06-0458",
+              "MLS-V06-0459",
+              "MLS-V06-0460"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996952786,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996952786,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0455",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 455,
+                "title": "Objeto potencial con が",
+                "level": "A2",
+                "part": "Volición y capacidad — 意志・可能",
+                "chapter": "Capacidad y potencial — 可能表現",
+                "articleMarkdown": "#### En pocas palabras\n\nEn muchas construcciones potenciales, el elemento sobre el que recae la capacidad puede aparecer marcado con **が**. En **私は漢字が読めます。** significa “Puedo leer kanji”; **漢字が** identifica aquello que resulta legible para el hablante.\n\n#### Cómo funciona\n\nCon un verbo no potencial, es frecuente encontrar **を**: **漢字を読みます** “leo kanji”. Al pasar a una construcción potencial, puede aparecer **が**: **漢字が読めます** “puedo leer kanji”.\n\nEste patrón es común con formas como **話せる, 読める, 食べられる, 使える**: **英語が話せる**, **この漢字が読める**, **辛い物が食べられる**.\n\nNo conviene describir **が** simplemente como “partícula del sujeto” ni afirmar que todo **を** se transforma obligatoriamente en **が**. En japonés moderno también aparece **を** con potenciales, según el verbo, el foco, el registro y la estructura de la oración.\n\n#### Ejemplos\n\n* **私は漢字が読めます。** — Puedo leer kanji.\n* **このパソコンが使えます。** — Puedo usar esta computadora.\n* **魚が食べられません。** — No puedo comer pescado.\n\n#### Observación importante\n\n**が** no significa por sí solo “poder”. La lectura de capacidad surge de la construcción potencial completa.\n\nAdemás, la alternancia **が／を** es un fenómeno de la gramática japonesa contemporánea, no una equivalencia palabra por palabra con el español.\n\n#### Entradas relacionadas\n\n[Entrada 454: Forma potencial: introducción — 形 可能形: introducción](#entry-454) · [Entrada 456: Objeto potencial con を en japonés moderno — 可能表現の対象「を」](#entry-456) · [Entrada 457: Potencial godan -える — 五段動詞の可能形「〜える」](#entry-457)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-4adcf4a2c1fa909d9785f18af5ee2b1e96fa50574eed1672a639d139dad4c738",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:25:29.913Z"
+              },
+              {
+                "code": "MLS-V06-0457",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 457,
+                "title": "Potencial godan -える",
+                "level": "A2",
+                "part": "Volición y capacidad — 意志・可能",
+                "chapter": "Capacidad y potencial — 可能表現",
+                "articleMarkdown": "#### En pocas palabras\n\nLos verbos **五段（ごだん）** forman normalmente el potencial cambiando la sílaba final de la forma de diccionario a la fila **e** y añadiendo **る**. Así, **書く → 書ける** significa “poder escribir”.\n\n#### Cómo funciona\n\nEl cambio sigue la consonante final del verbo: **話す → 話せる**, **読む → 読める**, **泳ぐ → 泳げる**, **待つ → 待てる**, **買う → 買える**.\n\nLa nueva forma se conjuga como un verbo 一段 en muchos de sus patrones posteriores: **書ける → 書けない** “no poder escribir”, **書けた** “pude escribir”.\n\nLa forma potencial expresa capacidad o posibilidad, no deseo ni voluntad. **行ける** significa “poder ir”; **行こう** es volitivo y expresa una propuesta o decisión.\n\nEn muchas construcciones, aquello sobre lo que recae la capacidad puede aparecer con **が**, aunque **を** también se encuentra en japonés moderno según la estructura y el contexto.\n\n#### Ejemplos\n\n* **書く → 書ける。** — poder escribir.\n* **日本語が話せます。** — Puedo hablar japonés.\n* **今日は早く帰れません。** — Hoy no puedo volver temprano.\n\n#### Observación importante\n\nNo todos los verbos japoneses siguen este patrón: los verbos 一段 forman normalmente el potencial con **〜られる**, y **する／来る** tienen formas propias.\n\nTampoco debe confundirse la terminación potencial con otras formas verbales que puedan parecerse superficialmente.\n\n#### Entradas relacionadas\n\n[Entrada 456: Objeto potencial con を en japonés moderno — 可能表現の対象「を」](#entry-456) · [Entrada 458: Potencial ichidan -られる — 一段動詞の可能形「〜られる」](#entry-458) · [Entrada 455: Objeto potencial con が — 可能表現の対象「が」](#entry-455) · [Entrada 459: 〜ことができる — 「〜ことができる」](#entry-459)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-5e814869ed94b0a852c7a1a480ff4ae3acc7fd2dbdcc68d870bf7eeca24fb0bd",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:28:28.571Z"
+              },
+              {
+                "code": "MLS-V06-0458",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 458,
+                "title": "Potencial ichidan -られる",
+                "level": "A2",
+                "part": "Volición y capacidad — 意志・可能",
+                "chapter": "Capacidad y potencial — 可能表現",
+                "articleMarkdown": "#### En pocas palabras\n\nLos verbos **一段（いちだん）** forman normalmente el potencial añadiendo **〜られる** a la base verbal. Así, **食べる → 食べられる** significa “poder comer” y **見る → 見られる** puede significar “poder ver”.\n\n#### Cómo funciona\n\nPara formar el potencial estándar, se elimina el **る** final y se añade **られる**: **食べる → 食べられる**, **起きる → 起きられる**, **見る → 見られる**.\n\nLa forma resultante expresa capacidad o posibilidad: **今日は早く帰れない** “hoy no puedo volver temprano” pertenece a otro patrón verbal; con 一段, por ejemplo, **今日は来られない** usa el irregular **来る**, mientras **全部食べられない** significa “no puedo comerlo todo”.\n\nCon verbos 一段, **〜られる** coincide formalmente con construcciones pasivas y, en ciertos contextos, honoríficas. Por eso **見られる** puede interpretarse como “poder ver” o con otro valor según la oración completa.\n\nEn el japonés coloquial se encuentran formas llamadas **ら抜き言葉**, como **食べれる** o **見れる**, donde se omite **ら**. Son muy extendidas en el habla, pero la forma **食べられる／見られる** sigue siendo la referencia estándar en registros cuidados.\n\n#### Ejemplos\n\n* **食べる → 食べられる。** — poder comer.\n* **この映画はオンラインで見られます。** — Esta película se puede ver en línea.\n* **今日はあまり食べられません。** — Hoy no puedo comer mucho.\n\n#### Observación importante\n\nEl potencial de los verbos 一段 no sigue el patrón de los verbos 五段 en **〜える**. **食べる → 食べられる**, mientras **書く → 書ける**.\n\nTambién existe **〜ことができる**, una construcción analítica de capacidad que no depende de esta morfología potencial.\n\n#### Entradas relacionadas\n\n[Entrada 457: Potencial godan -える — 五段動詞の可能形「〜える」](#entry-457) · [Entrada 459: 〜ことができる — 「〜ことができる」](#entry-459) · [Entrada 456: Objeto potencial con を en japonés moderno — 可能表現の対象「を」](#entry-456) · [Entrada 460: する→できる — 「する→できる」](#entry-460)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b50141453ef72648085da70000b2f774fb537d6701348d035ef11806323d3c8f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:29:37.506Z"
+              },
+              {
+                "code": "MLS-V06-0459",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 459,
+                "title": "〜ことができる",
+                "level": "A2",
+                "part": "Volición y capacidad — 意志・可能",
+                "chapter": "Capacidad y potencial — 可能表現",
+                "articleMarkdown": "#### En pocas palabras\n\nLa construcción **〜ことができる** sirve para expresar **capacidad o posibilidad de realizar una acción**. Se forma con un verbo en forma de diccionario + **ことができる**: **泳ぐことができる** significa “poder nadar”.\n\nEn estilo cortés, **できる** pasa a **できます**: **日本語を話すことができます。** — “Puedo hablar japonés”.\n\n#### Cómo funciona\n\nPrimero se expresa la acción con un verbo en forma llana no pasada, como **読む** “leer”, **行く** “ir” o **料理する** “cocinar”. Después se añade **ことができる**.\n\nAsí, **本を読むことができます。** significa “Puedo leer libros”. **こと** convierte la acción anterior en una unidad nominal y **できる** expresa que esa acción es posible o realizable.\n\nLa capacidad también puede expresarse con la **forma potencial** del verbo, por ejemplo **話せる** “poder hablar”. En muchos contextos, **日本語を話すことができる** y **日本語が話せる** comunican una idea muy parecida, aunque la forma potencial suele ser más compacta.\n\n#### Ejemplos\n\n* **泳ぐことができます。** — Puedo nadar.\n* **漢字を読むことができます。** — Puedo leer kanji.\n* **ここで写真を撮ることができます。** — Aquí se pueden tomar fotos.\n* **明日は来ることができません。** — Mañana no puedo venir.\n\n#### Observación importante\n\n**〜ことができる** no expresa deseo. Para “quiero hacer algo” se usan otras construcciones, como **〜たい**. Tampoco debe confundirse con **〜たことがある**, que habla de experiencias pasadas.\n\nLa frase heredada **日本語が話せます** es correcta como ejemplo de capacidad, pero usa la forma potencial **話せます**, no la construcción específica **〜ことができる**.\n\n#### Entradas relacionadas\n\n[Entrada 458: Potencial ichidan -られる — 一段動詞の可能形「〜られる」](#entry-458) · [Entrada 460: する→できる — 「する→できる」](#entry-460) · [Entrada 457: Potencial godan -える — 五段動詞の可能形「〜える」](#entry-457) · [Entrada 461: 分かる como capacidad/comprensión — 「分かる」](#entry-461)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-5c14d1b21bc8b3d7f74e0e66433d782e512ef59caf6991b7ca4c104b48c352ee",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:09:22.181Z"
+              },
+              {
+                "code": "MLS-V06-0460",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 460,
+                "title": "する→できる",
+                "level": "A2",
+                "part": "Volición y capacidad — 意志・可能",
+                "chapter": "Capacidad y potencial — 可能表現",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo **する** significa “hacer” y aparece también en muchos verbos formados con un nombre, como **勉強する** “estudiar”. Para expresar capacidad, **する** tiene una forma potencial irregular: **できる**.\n\nPor eso, **勉強する → 勉強できる** significa “estudiar → poder estudiar”.\n\n#### Cómo funciona\n\nCon verbos en **〜する**, se sustituye **する** por **できる**: **料理する → 料理できる** “poder cocinar”, **運転する → 運転できる** “poder conducir”.\n\nEn estilo cortés se usa **できます**: **日本語で説明できます。** — “Puedo explicar en japonés”. La forma negativa es **できない** o, en estilo cortés, **できません**.\n\nEste cambio pertenece a la expresión de **potencial**, es decir, indica que una acción es posible o que alguien tiene capacidad para realizarla.\n\n#### Ejemplos\n\n* **勉強できます。** — Puedo estudiar.\n* **車を運転できます。** — Puedo conducir un automóvil.\n* **今日は残業できません。** — Hoy no puedo hacer horas extra.\n* **ここでコピーできます。** — Aquí se pueden hacer copias.\n\n#### Observación importante\n\n**できる** también puede funcionar como verbo independiente con sentidos como “poder hacerse”, “estar terminado” o “surgir”, según el contexto. En esta entrada interesa específicamente su uso como forma potencial correspondiente a **する**.\n\nTambién existe la construcción **〜ことができる**, como **勉強することができる**. Expresa capacidad de manera más analítica, mientras que **勉強できる** es la forma potencial compacta.\n\n#### Entradas relacionadas\n\n[Entrada 459: 〜ことができる — 「〜ことができる」](#entry-459) · [Entrada 461: 分かる como capacidad/comprensión — 「分かる」](#entry-461) · [Entrada 458: Potencial ichidan -られる — 一段動詞の可能形「〜られる」](#entry-458) · [Entrada 462: 聞こえる — 「聞こえる」](#entry-462)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f5301350745dccad44b7609e2a5aaa1df28f30ea4916e8433d3f33545d4783b9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:10:03.901Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:04:13.176Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:04:13.176Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0246-sol-4bd912/10-ticket05-close-claim06.json"
+}
