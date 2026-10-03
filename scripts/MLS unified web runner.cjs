@@ -66,6 +66,13 @@ async function cf(pathname,body={}){
 async function report(stage,state,extra={}){
   return cf('/api/unified-runner/report',{stage,state,...extra});
 }
+function durableCount(r44,state){
+  const row=(r44?.durableCounts||[]).find(x=>String(x.state||'')===state);
+  return row?Number(row.n||0):0;
+}
+function r44Drained(r44){
+  return ['CLAIMABLE','LEASED','PARTIAL_DURABLE','QUARANTINED'].every(state=>durableCount(r44,state)===0);
+}
 function parseAssignment(issue){
   try{return core.parseAssignmentState(issue?.body||'')}catch{return null}
 }
@@ -373,6 +380,11 @@ async function run(){
   if(r33.kind==='leased'){
     await dispatchR33(r33.issue,r33.state);
     console.log(JSON.stringify({ok:true,status:'R33_DISPATCHED',issueNumber:r33.issue.number}));
+    return;
+  }
+  if(integration.kind==='no_work'&&r33.kind==='no_work'&&r44Drained(refreshed.r44)){
+    const completed=await cf('/api/unified-runner/control',{action:'complete'});
+    console.log(JSON.stringify({ok:true,status:'COMPLETE',runnerState:completed.state||'COMPLETE'}));
     return;
   }
   console.log(JSON.stringify({ok:true,status:'NO_AUTOMATIC_ASSIGNMENT',integration:integration.kind,r33:r33.kind}));
