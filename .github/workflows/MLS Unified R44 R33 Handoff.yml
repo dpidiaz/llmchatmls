@@ -2,6 +2,10 @@ name: MLS Unified R44 R33 Handoff
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'MLS R32 EDITORIAL/r44/r33-handoff/SYNC_REQUEST.json'
   schedule:
     - cron: '*/5 * * * *'
 
