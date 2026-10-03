@@ -138,3 +138,10 @@ test('R44 handoff sync is grouped, paged and never writes per worker',()=>{
   assert.match(workflow,/Commit grouped handoff snapshot/);
   assert.doesNotMatch(script,/api\.github\.com|GITHUB_TOKEN/);
 });
+
+
+test('R33 Editorial Batch Tests accepts Unified worker branches',()=>{
+  const workflow=fs.readFileSync('.github/workflows/R33 Editorial Batch Tests.yml','utf8');
+  assert.match(workflow,/worker\/r33-farm\/\*\*/);
+  assert.match(workflow,/worker\/r33-unified\/\*\*/);
+});
