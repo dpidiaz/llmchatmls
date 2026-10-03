@@ -1,0 +1,294 @@
+{
+  "batchId": "r44-20261003-0323-sol-g56s-final",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-12967268-826c-4bea-ae8f-1eb3ff49f81b"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-12967268-826c-4bea-ae8f-1eb3ff49f81b",
+        "ticketId": "R43-EMERGENCY-0323",
+        "leaseGeneration": 2,
+        "idempotencyKey": "chatgpt-r44-20261003-0323-sol-g56s-MLS-V04-1137-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V04-1137",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada distingue correctamente anáfora, antecedente, retomada nominal, deixis y catáfora; los ejemplos franceses y las observaciones sobre ambigüedad referencial son adecuados.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-12967268-826c-4bea-ae8f-1eb3ff49f81b",
+        "ticketId": "R43-EMERGENCY-0323",
+        "leaseGeneration": 2,
+        "idempotencyKey": "chatgpt-r44-20261003-0323-sol-g56s-MLS-V04-1138-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V04-1138",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada describe correctamente la referencia catafórica y la distingue de anáfora y deixis; los ejemplos de pronombre anticipatorio y ceci prospectivo son lingüísticamente adecuados.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-12967268-826c-4bea-ae8f-1eb3ff49f81b",
+        "ticketId": "R43-EMERGENCY-0323",
+        "leaseGeneration": 2,
+        "idempotencyKey": "chatgpt-r44-20261003-0323-sol-g56s-MLS-V04-1139-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V04-1139",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada caracteriza correctamente la elipsis, las respuestas fragmentarias y el gapping en coordinación, y distingue apropiadamente elipsis de anáfora.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-12967268-826c-4bea-ae8f-1eb3ff49f81b",
+        "ticketId": "R43-EMERGENCY-0323",
+        "leaseGeneration": 2,
+        "idempotencyKey": "chatgpt-r44-20261003-0323-sol-g56s-MLS-V04-1140-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V04-1140",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### En pocas palabras\n\nLa **ambigüedad de alcance** aparece cuando una oración contiene dos o más elementos —por ejemplo, negación, cuantificadores o expresiones modales— y no queda completamente claro cuál de ellos tiene alcance semántico sobre el otro. El **alcance** es el dominio sobre el que opera una expresión.\n\nEn **Tous les étudiants n’ont pas réussi**, la combinación de **tous** y la negación puede inducir más de una lectura. La interpretación habitual es «no todos los estudiantes aprobaron»: formalmente, la negación tiene alcance amplio sobre el cuantificador universal (**¬∀**). Una lectura más fuerte, «ningún estudiante aprobó», correspondería al universal con alcance sobre la negación (**∀¬**), aunque en francés esa lectura suele expresarse de manera más clara con **Aucun étudiant n’a réussi**.\n\n#### Cómo funciona\n\nCuando varios operadores aparecen en una misma oración, el orden lineal no siempre basta para determinar su relación semántica. En términos simples, hay que preguntar qué elemento se interpreta dentro del dominio del otro. Con cuantificadores y negación, pequeñas diferencias de formulación pueden cambiar el sentido.\n\nCompare **Tous les étudiants ne sont pas venus** con **Aucun étudiant n’est venu**. La primera oración suele entenderse como «No vinieron todos los estudiantes»; la segunda afirma claramente que no vino ninguno. La lengua natural no reproduce de manera mecánica el orden de símbolos de la lógica formal, por lo que contexto, prosodia y convenciones de uso influyen en la interpretación.\n\nLa ambigüedad de alcance también puede aparecer con expresiones modales. **Il ne doit pas partir** suele interpretarse como «no debe irse» —prohibición—, mientras que otras combinaciones entre modalidad y negación pueden admitir lecturas en las que se niega la necesidad. Para evitar equívocos, el francés dispone de reformulaciones más explícitas.\n\n#### Ejemplos\n\n* **Tous les étudiants n’ont pas réussi.** — No todos los estudiantes aprobaron. La lectura habitual corresponde a **¬∀**: se niega que la totalidad haya aprobado.\n* **Aucun étudiant n’a réussi.** — Ningún estudiante aprobó. Esta formulación expresa inequívocamente ausencia total de aprobados.\n* **Je ne veux pas toujours travailler seul.** — No quiero trabajar siempre solo. Puede oponerse a la idea de hacerlo en todas las ocasiones; el contexto debe precisar qué se niega.\n* **Il est possible que tout le monde ne vienne pas.** — Es posible que no venga todo el mundo. La modalidad, la totalidad y la negación interactúan en la interpretación.\n\n#### Observación importante\n\nNo toda oración con negación y cuantificadores es realmente ambigua para los hablantes. Muchas combinaciones tienen una interpretación preferida por convención, contexto o prosodia, aunque otra lectura sea lógicamente concebible. Por eso conviene distinguir **ambigüedad estructural potencial** de **ambigüedad efectiva en uso**.\n\nAdemás, el análisis del alcance no debe reducirse a traducir palabra por palabra al español. El francés y el español pueden favorecer distintas reformulaciones para hacer explícita una lectura. En textos jurídicos, técnicos o administrativos, donde una diferencia de alcance puede tener consecuencias importantes, suele preferirse una formulación inequívoca.\n\nUna estrategia estilística frecuente consiste en sustituir una estructura potencialmente ambigua por expresiones como **pas tous**, **aucun**, **seulement certains**, **il n’est pas nécessaire de** o construcciones equivalentes que indiquen con mayor precisión qué elemento queda negado o cuantificado.\n\n#### Entradas relacionadas\n\nLa ambigüedad de alcance se relaciona con **alcance de la negación**, **cuantificación**, **modalidad**, **foco** y **estructura informativa**. Estas nociones permiten explicar por qué dos oraciones con vocabulario semejante pueden diferir en las relaciones semánticas que establecen entre sus componentes."
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "Se corrigió la dirección lógica de las dos lecturas de alcance entre negación y cuantificador universal: ¬∀ corresponde a «no todos» y ∀¬ a «ninguno».",
+            "changes": [
+              "Se explicitó que la lectura habitual «no todos» corresponde a negación con alcance sobre el universal (¬∀).",
+              "Se explicitó que la lectura fuerte «ninguno» corresponde al universal con alcance sobre la negación (∀¬).",
+              "Se ajustaron los ejemplos para evitar una descripción lógica invertida."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "La lectura «no todos aprobaron» se representa como ¬∀x P(x), mientras que «ninguno aprobó» corresponde a ∀x ¬P(x).",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Las construcciones de francés con cuantificador universal y negación pueden mostrar preferencias de alcance sensibles a alternativas estructurales y contexto.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "WIMS/CNRS. (s. f.). Raisonnements — Quantificateurs.",
+              "url": "https://wims.math.cnrs.fr/wims/fr_U1~logic~doclogic.fr.html",
+              "role": "Referencia formal para el comportamiento de cuantificadores y negación."
+            },
+            {
+              "citation": "Hemforth, B., & Konieczny, L. (2019). When all linguists did not go to the workshop, none of the Germans but some of the French did: The role of alternative constructions for quantifier scope.",
+              "url": "https://cv.hal.science/barbara-hemforth",
+              "role": "Referencia sobre interacción entre cuantificador universal, negación y alternativas de alcance."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-12967268-826c-4bea-ae8f-1eb3ff49f81b",
+        "ticketId": "R43-EMERGENCY-0323",
+        "leaseGeneration": 2,
+        "idempotencyKey": "chatgpt-r44-20261003-0323-sol-g56s-MLS-V04-1142-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V04-1142",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### En pocas palabras\n\nLa **portée des quantificateurs** describe cómo expresiones de cantidad como **un**, **chaque**, **tous**, **plusieurs** o **aucun** interactúan cuando aparecen en una misma oración. El alcance determina qué cuantificador se interpreta como más amplio y, por tanto, qué relaciones entre individuos o conjuntos expresa la frase.\n\nEn **Tous les étudiants ont lu un livre**, pueden distinguirse dos lecturas relevantes: puede tratarse de un mismo libro leído por todos, o de una lectura distributiva en la que cada estudiante leyó algún libro, posiblemente distinto. El contexto y la interpretación del indefinido **un livre** ayudan a decidir entre ellas.\n\n#### Cómo funciona\n\nCuando hay más de un cuantificador, su orden lineal no garantiza por sí solo una única relación semántica. Si **un livre** recibe alcance amplio o una lectura específica, se entiende que existe un libro concreto que todos los estudiantes leyeron. Si el indefinido se interpreta dentro del alcance del cuantificador universal, el libro puede variar de un estudiante a otro.\n\nEsta diferencia se puede hacer más explícita mediante reformulación. **Tous les étudiants ont lu le même livre** indica claramente una lectura de libro único compartido. **Chaque étudiant a lu un livre de son choix** favorece la lectura distributiva en la que los libros pueden variar.\n\nEl fenómeno no se limita a **un** y **tous**. Cuantificadores universales, existenciales y negativos pueden combinarse entre sí y con negación o modalidad. Por eso el análisis de alcance es especialmente importante en textos técnicos, jurídicos o científicos, donde una lectura distinta puede cambiar una condición o una conclusión.\n\n#### Ejemplos\n\n* **Tous les étudiants ont lu un livre.** — Todos los estudiantes leyeron un libro. Según el contexto, puede ser el mismo libro o libros potencialmente distintos.\n* **Tous les étudiants ont lu le même livre.** — Todos los estudiantes leyeron el mismo libro. **Le même livre** elimina la variación entre estudiantes.\n* **Chaque étudiant a lu un livre de son choix.** — Cada estudiante leyó un libro de su elección. La formulación favorece libros posiblemente distintos.\n* **Tous les chercheurs ont analysé plusieurs échantillons.** — Todos los investigadores analizaron varias muestras. Sin contexto adicional, puede importar si se habla de las mismas muestras o de conjuntos diferentes.\n\n#### Observación importante\n\nNo toda combinación de cuantificadores produce una ambigüedad real en la comunicación. El conocimiento del mundo, el contexto discursivo y ciertas preferencias de interpretación suelen descartar lecturas teóricamente posibles. Por ello conviene distinguir entre posibilidades semánticas y lecturas efectivamente disponibles para los hablantes en una situación concreta.\n\nTampoco debe suponerse que el francés y el español resuelven siempre estas relaciones con las mismas preferencias. Una traducción puede necesitar hacer explícito **el mismo**, **distinto**, **cada uno**, **al menos uno** u otra relación que el original deja implícita.\n\nEn escritura donde la precisión sea prioritaria, es preferible reformular antes que confiar en que el lector reconstruya el alcance deseado a partir de una secuencia potencialmente ambigua.\n\n#### Entradas relacionadas\n\nEl alcance de los cuantificadores se relaciona con **ambigüedad de alcance**, **alcance de la negación**, **distributividad**, **cuantificación existencial y universal** y **modalidad**. Estas nociones permiten describir con precisión cómo una oración distribuye propiedades o relaciones entre conjuntos de referentes."
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "Se sustituyó el ejemplo pasivo con el indefinido en posición inicial por una construcción francesa que sí ilustra de forma pedagógicamente segura la interacción de alcance entre un cuantificador universal y un indefinido.",
+            "changes": [
+              "Se reemplazó «Un livre a été lu par chaque étudiant» por «Tous les étudiants ont lu un livre».",
+              "Se explicitaron las lecturas de un mismo libro frente a libros potencialmente distintos.",
+              "Se mantuvieron las reformulaciones con le même livre y un livre de son choix para desambiguar."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "En francés, un indefinido como un livre puede interactuar en alcance con un cuantificador universal en ejemplos del tipo Tous les participants ont lu un livre.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La lectura distributiva de un indefinido depende de que pueda interpretarse dentro del alcance del cuantificador universal; si el indefinido toma alcance amplio, se favorece una lectura de un único individuo.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Société de Linguistique de Paris/CNRS. (2026). Du/des NPs in French.",
+              "url": "https://www.sfl.cnrs.fr/sites/default/files/images/gr34_ws_keynote_carlier_0.pdf",
+              "role": "Presenta explícitamente la ambigüedad de alcance frente a cuantificadores y el ejemplo Tous les participants du workshop ont lu un livre de statistique."
+            },
+            {
+              "citation": "CSSP/CNRS. (s. f.). EMPIRICAL [proceedings PDF], sección sobre scope y distributivity.",
+              "url": "https://www.cssp.cnrs.fr/eiss8/eiss8.pdf",
+              "role": "Discute ejemplos franceses con chaque y une femme y relaciona lectura distributiva con el alcance del indefinido respecto del cuantificador universal."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-12967268-826c-4bea-ae8f-1eb3ff49f81b",
+        "ticketId": "R43-EMERGENCY-0323",
+        "entries": [
+          {
+            "code": "MLS-V04-1137",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada distingue correctamente anáfora, antecedente, retomada nominal, deixis y catáfora; los ejemplos franceses y las observaciones sobre ambigüedad referencial son adecuados.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V04-1138",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada describe correctamente la referencia catafórica y la distingue de anáfora y deixis; los ejemplos de pronombre anticipatorio y ceci prospectivo son lingüísticamente adecuados.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V04-1139",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada caracteriza correctamente la elipsis, las respuestas fragmentarias y el gapping en coordinación, y distingue apropiadamente elipsis de anáfora.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V04-1140",
+            "outcome": "CORRECTED",
+            "correctedContent": {
+              "articleMarkdown": "#### En pocas palabras\n\nLa **ambigüedad de alcance** aparece cuando una oración contiene dos o más elementos —por ejemplo, negación, cuantificadores o expresiones modales— y no queda completamente claro cuál de ellos tiene alcance semántico sobre el otro. El **alcance** es el dominio sobre el que opera una expresión.\n\nEn **Tous les étudiants n’ont pas réussi**, la combinación de **tous** y la negación puede inducir más de una lectura. La interpretación habitual es «no todos los estudiantes aprobaron»: formalmente, la negación tiene alcance amplio sobre el cuantificador universal (**¬∀**). Una lectura más fuerte, «ningún estudiante aprobó», correspondería al universal con alcance sobre la negación (**∀¬**), aunque en francés esa lectura suele expresarse de manera más clara con **Aucun étudiant n’a réussi**.\n\n#### Cómo funciona\n\nCuando varios operadores aparecen en una misma oración, el orden lineal no siempre basta para determinar su relación semántica. En términos simples, hay que preguntar qué elemento se interpreta dentro del dominio del otro. Con cuantificadores y negación, pequeñas diferencias de formulación pueden cambiar el sentido.\n\nCompare **Tous les étudiants ne sont pas venus** con **Aucun étudiant n’est venu**. La primera oración suele entenderse como «No vinieron todos los estudiantes»; la segunda afirma claramente que no vino ninguno. La lengua natural no reproduce de manera mecánica el orden de símbolos de la lógica formal, por lo que contexto, prosodia y convenciones de uso influyen en la interpretación.\n\nLa ambigüedad de alcance también puede aparecer con expresiones modales. **Il ne doit pas partir** suele interpretarse como «no debe irse» —prohibición—, mientras que otras combinaciones entre modalidad y negación pueden admitir lecturas en las que se niega la necesidad. Para evitar equívocos, el francés dispone de reformulaciones más explícitas.\n\n#### Ejemplos\n\n* **Tous les étudiants n’ont pas réussi.** — No todos los estudiantes aprobaron. La lectura habitual corresponde a **¬∀**: se niega que la totalidad haya aprobado.\n* **Aucun étudiant n’a réussi.** — Ningún estudiante aprobó. Esta formulación expresa inequívocamente ausencia total de aprobados.\n* **Je ne veux pas toujours travailler seul.** — No quiero trabajar siempre solo. Puede oponerse a la idea de hacerlo en todas las ocasiones; el contexto debe precisar qué se niega.\n* **Il est possible que tout le monde ne vienne pas.** — Es posible que no venga todo el mundo. La modalidad, la totalidad y la negación interactúan en la interpretación.\n\n#### Observación importante\n\nNo toda oración con negación y cuantificadores es realmente ambigua para los hablantes. Muchas combinaciones tienen una interpretación preferida por convención, contexto o prosodia, aunque otra lectura sea lógicamente concebible. Por eso conviene distinguir **ambigüedad estructural potencial** de **ambigüedad efectiva en uso**.\n\nAdemás, el análisis del alcance no debe reducirse a traducir palabra por palabra al español. El francés y el español pueden favorecer distintas reformulaciones para hacer explícita una lectura. En textos jurídicos, técnicos o administrativos, donde una diferencia de alcance puede tener consecuencias importantes, suele preferirse una formulación inequívoca.\n\nUna estrategia estilística frecuente consiste en sustituir una estructura potencialmente ambigua por expresiones como **pas tous**, **aucun**, **seulement certains**, **il n’est pas nécessaire de** o construcciones equivalentes que indiquen con mayor precisión qué elemento queda negado o cuantificado.\n\n#### Entradas relacionadas\n\nLa ambigüedad de alcance se relaciona con **alcance de la negación**, **cuantificación**, **modalidad**, **foco** y **estructura informativa**. Estas nociones permiten explicar por qué dos oraciones con vocabulario semejante pueden diferir en las relaciones semánticas que establecen entre sus componentes."
+            },
+            "notes": {
+              "auditStatus": "CORRECTED",
+              "summary": "Se corrigió la dirección lógica de las dos lecturas de alcance entre negación y cuantificador universal: ¬∀ corresponde a «no todos» y ∀¬ a «ninguno».",
+              "changes": [
+                "Se explicitó que la lectura habitual «no todos» corresponde a negación con alcance sobre el universal (¬∀).",
+                "Se explicitó que la lectura fuerte «ninguno» corresponde al universal con alcance sobre la negación (∀¬).",
+                "Se ajustaron los ejemplos para evitar una descripción lógica invertida."
+              ],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "La lectura «no todos aprobaron» se representa como ¬∀x P(x), mientras que «ninguno aprobó» corresponde a ∀x ¬P(x).",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Las construcciones de francés con cuantificador universal y negación pueden mostrar preferencias de alcance sensibles a alternativas estructurales y contexto.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "WIMS/CNRS. (s. f.). Raisonnements — Quantificateurs.",
+                "url": "https://wims.math.cnrs.fr/wims/fr_U1~logic~doclogic.fr.html",
+                "role": "Referencia formal para el comportamiento de cuantificadores y negación."
+              },
+              {
+                "citation": "Hemforth, B., & Konieczny, L. (2019). When all linguists did not go to the workshop, none of the Germans but some of the French did: The role of alternative constructions for quantifier scope.",
+                "url": "https://cv.hal.science/barbara-hemforth",
+                "role": "Referencia sobre interacción entre cuantificador universal, negación y alternativas de alcance."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V04-1142",
+            "outcome": "CORRECTED",
+            "correctedContent": {
+              "articleMarkdown": "#### En pocas palabras\n\nLa **portée des quantificateurs** describe cómo expresiones de cantidad como **un**, **chaque**, **tous**, **plusieurs** o **aucun** interactúan cuando aparecen en una misma oración. El alcance determina qué cuantificador se interpreta como más amplio y, por tanto, qué relaciones entre individuos o conjuntos expresa la frase.\n\nEn **Tous les étudiants ont lu un livre**, pueden distinguirse dos lecturas relevantes: puede tratarse de un mismo libro leído por todos, o de una lectura distributiva en la que cada estudiante leyó algún libro, posiblemente distinto. El contexto y la interpretación del indefinido **un livre** ayudan a decidir entre ellas.\n\n#### Cómo funciona\n\nCuando hay más de un cuantificador, su orden lineal no garantiza por sí solo una única relación semántica. Si **un livre** recibe alcance amplio o una lectura específica, se entiende que existe un libro concreto que todos los estudiantes leyeron. Si el indefinido se interpreta dentro del alcance del cuantificador universal, el libro puede variar de un estudiante a otro.\n\nEsta diferencia se puede hacer más explícita mediante reformulación. **Tous les étudiants ont lu le même livre** indica claramente una lectura de libro único compartido. **Chaque étudiant a lu un livre de son choix** favorece la lectura distributiva en la que los libros pueden variar.\n\nEl fenómeno no se limita a **un** y **tous**. Cuantificadores universales, existenciales y negativos pueden combinarse entre sí y con negación o modalidad. Por eso el análisis de alcance es especialmente importante en textos técnicos, jurídicos o científicos, donde una lectura distinta puede cambiar una condición o una conclusión.\n\n#### Ejemplos\n\n* **Tous les étudiants ont lu un livre.** — Todos los estudiantes leyeron un libro. Según el contexto, puede ser el mismo libro o libros potencialmente distintos.\n* **Tous les étudiants ont lu le même livre.** — Todos los estudiantes leyeron el mismo libro. **Le même livre** elimina la variación entre estudiantes.\n* **Chaque étudiant a lu un livre de son choix.** — Cada estudiante leyó un libro de su elección. La formulación favorece libros posiblemente distintos.\n* **Tous les chercheurs ont analysé plusieurs échantillons.** — Todos los investigadores analizaron varias muestras. Sin contexto adicional, puede importar si se habla de las mismas muestras o de conjuntos diferentes.\n\n#### Observación importante\n\nNo toda combinación de cuantificadores produce una ambigüedad real en la comunicación. El conocimiento del mundo, el contexto discursivo y ciertas preferencias de interpretación suelen descartar lecturas teóricamente posibles. Por ello conviene distinguir entre posibilidades semánticas y lecturas efectivamente disponibles para los hablantes en una situación concreta.\n\nTampoco debe suponerse que el francés y el español resuelven siempre estas relaciones con las mismas preferencias. Una traducción puede necesitar hacer explícito **el mismo**, **distinto**, **cada uno**, **al menos uno** u otra relación que el original deja implícita.\n\nEn escritura donde la precisión sea prioritaria, es preferible reformular antes que confiar en que el lector reconstruya el alcance deseado a partir de una secuencia potencialmente ambigua.\n\n#### Entradas relacionadas\n\nEl alcance de los cuantificadores se relaciona con **ambigüedad de alcance**, **alcance de la negación**, **distributividad**, **cuantificación existencial y universal** y **modalidad**. Estas nociones permiten describir con precisión cómo una oración distribuye propiedades o relaciones entre conjuntos de referentes."
+            },
+            "notes": {
+              "auditStatus": "CORRECTED",
+              "summary": "Se sustituyó el ejemplo pasivo con el indefinido en posición inicial por una construcción francesa que sí ilustra de forma pedagógicamente segura la interacción de alcance entre un cuantificador universal y un indefinido.",
+              "changes": [
+                "Se reemplazó «Un livre a été lu par chaque étudiant» por «Tous les étudiants ont lu un livre».",
+                "Se explicitaron las lecturas de un mismo libro frente a libros potencialmente distintos.",
+                "Se mantuvieron las reformulaciones con le même livre y un livre de son choix para desambiguar."
+              ],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En francés, un indefinido como un livre puede interactuar en alcance con un cuantificador universal en ejemplos del tipo Tous les participants ont lu un livre.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "La lectura distributiva de un indefinido depende de que pueda interpretarse dentro del alcance del cuantificador universal; si el indefinido toma alcance amplio, se favorece una lectura de un único individuo.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Société de Linguistique de Paris/CNRS. (2026). Du/des NPs in French.",
+                "url": "https://www.sfl.cnrs.fr/sites/default/files/images/gr34_ws_keynote_carlier_0.pdf",
+                "role": "Presenta explícitamente la ambigüedad de alcance frente a cuantificadores y el ejemplo Tous les participants du workshop ont lu un livre de statistique."
+              },
+              {
+                "citation": "CSSP/CNRS. (s. f.). EMPIRICAL [proceedings PDF], sección sobre scope y distributivity.",
+                "url": "https://www.cssp.cnrs.fr/eiss8/eiss8.pdf",
+                "role": "Discute ejemplos franceses con chaque y une femme y relaciona lectura distributiva con el alcance del indefinido respecto del cuantificador universal."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
