@@ -1,0 +1,434 @@
+{
+  "batchId": "r44-0914-sol02-renew-checkpoints-submit-v1",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-39776520-4f61-4409-bb87-a74e11cba169"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-39776520-4f61-4409-bb87-a74e11cba169",
+        "ticketId": "R44-CORPUS-0914",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-0914-sol02-MLS-V01-0728-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V01-0728",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada distingue adecuadamente have y have got en posesión, relaciones y estados, presenta have got como más informal y más frecuente en BrE hablado, y explica correctamente los patrones interrogativos/negativos. La advertencia de no usar have got para rutinas como have breakfast es pedagógicamente adecuada.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "Have y have got pueden expresar posesión, relaciones, características y estados; have got es más informal y es especialmente frecuente en BrE hablado.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Las preguntas y negaciones con have suelen usar do-support, mientras have got forma Have you got...? / haven't got...",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Cambridge Dictionary. English Grammar Today: Have got and have.",
+              "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/have-got-and-have",
+              "role": "Referencia gramatical sobre significado, registro y estructura de have/have got."
+            },
+            {
+              "citation": "British Council LearnEnglish. Present simple: 'have got'.",
+              "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/present-simple-have-got",
+              "role": "Referencia pedagógica sobre usos de have/has got y diferencia de formalidad."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-39776520-4f61-4409-bb87-a74e11cba169",
+        "ticketId": "R44-CORPUS-0914",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-0914-sol02-MLS-V01-0729-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V01-0729",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### En pocas palabras\n\nLa concordancia con sustantivos colectivos se refiere a la relación entre un sustantivo que nombra a un grupo —como *team*, *family* o *staff*— y el verbo que lo acompaña. En términos generales, el inglés estadounidense (AmE) favorece el singular cuando el grupo se presenta como una unidad, mientras que el inglés británico (BrE) admite con mucha más frecuencia singular o plural según se conceptualice al grupo como unidad o como conjunto de individuos.\n\n#### Cómo funciona\n\nUn **sustantivo colectivo** tiene forma singular pero puede referirse a varias personas o cosas. La concordancia muestra tendencias regionales:\n\n1. **Inglés estadounidense (AmE):** con colectivos como *team*, *family* o *crew*, el verbo singular es normalmente la opción no marcada cuando el grupo se trata como una entidad.\n2. **Inglés británico (BrE):** son posibles el singular y el plural. El singular presenta al grupo como unidad; el plural destaca a sus miembros.\n\nEstas son tendencias de uso, no una regla que permita clasificar automáticamente toda concordancia plural como un error en cualquier contexto estadounidense. Algunos sustantivos y géneros muestran variación, y palabras como *police* se comportan de manera distinta y llevan concordancia plural.\n\n#### Ejemplos\n\n* *The team **is** playing well.* — El equipo se presenta como una unidad; esta opción es normal tanto en AmE como en BrE.\n* *The staff **are** unhappy with the new rules.* — El plural es característico de BrE cuando se enfocan los miembros individuales. En AmE, con un colectivo de este tipo, suele preferirse el singular en el inglés general editado.\n* *The government **has** announced a new policy.* — El gobierno se presenta como institución.\n* *The government **have** different opinions on the matter.* — En BrE, el plural puede destacar que los miembros del gobierno discrepan.\n\n#### Observación importante\n\nNo conviene presentar la diferencia como «correcto frente a incorrecto» sin especificar variedad y contexto. La concordancia con colectivos combina gramática, significado y convención regional. En BrE, *The family are ...* puede ser una elección normal cuando se piensa en los miembros; en AmE, *The family is ...* es la opción general más esperable.\n\nEn exámenes, escritura académica o textos profesionales conviene mantener coherencia con la variedad de inglés elegida y seguir la guía de estilo pertinente.\n\n#### Entradas relacionadas\n\n* **Concordancia nocional — Notional agreement**\n* **Concordancia con nombres colectivos — Agreement with collective nouns**"
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "Se corrigió una formulación demasiado absoluta que presentaba la concordancia plural con colectivos en AmE como error categórico. La nueva versión conserva la tendencia AmE singular / BrE singular o plural, pero la formula como patrón regional y contextual.",
+            "changes": [
+              "Se sustituyó la afirmación categórica de que staff are sería un error en AmE por una descripción de preferencia general por singular.",
+              "Se añadió que la concordancia depende del sustantivo, el género y la conceptualización del grupo.",
+              "Se mantuvo la distinción entre concordancia gramatical y nocional sin convertirla en una regla universal."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "En BrE, los sustantivos colectivos pueden concordar en singular o plural según se conceptualice el grupo como unidad o como individuos.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "En AmE, el singular es la opción general preferida con colectivos como family, team y crew.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "British Council LearnEnglish. British English and American English.",
+              "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/british-english-american-english",
+              "role": "Referencia que documenta singular/plural en BrE y preferencia por singular en AmE con sustantivos colectivos."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-39776520-4f61-4409-bb87-a74e11cba169",
+        "ticketId": "R44-CORPUS-0914",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-0914-sol02-MLS-V01-0730-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V01-0730",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada describe correctamente la diferencia dialectal entre got y gotten: BrE usa got como participio ordinario, mientras AmE conserva gotten en muchos sentidos de cambio o adquisición; have got permanece como construcción de posesión/necesidad.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "En BrE, el participio de get es normalmente got; en AmE, gotten es estándar en numerosos usos del participio.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La construcción have got de posesión o necesidad usa got, no gotten.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Cambridge Dictionary. English Grammar Today: British and American English — Get; Have and have got.",
+              "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/british-english-and-american-english",
+              "role": "Referencia gramatical sobre got/gotten y have got."
+            },
+            {
+              "citation": "British Council LearnEnglish. British English and American English.",
+              "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/british-english-american-english",
+              "role": "Referencia pedagógica sobre got/gotten en BrE y AmE."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-39776520-4f61-4409-bb87-a74e11cba169",
+        "ticketId": "R44-CORPUS-0914",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-0914-sol02-MLS-V01-0731-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V01-0731",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### En pocas palabras\n\nEl inglés británico (BrE) y el inglés estadounidense (AmE) presentan diferencias convencionales en algunas preposiciones temporales y en la forma habitual de escribir fechas. Estas diferencias son variación regional estándar, no simples errores.\n\n#### Cómo funciona\n\nAlgunas expresiones temporales prefieren preposiciones distintas según la variedad:\n\n* **BrE:** *at the weekend* es una forma característica.\n* **AmE:** *on the weekend* y *on weekends* son formas características.\n\nTambién existen convenciones distintas para las fechas. En muchos contextos británicos se favorece el orden **día–mes**, mientras que en Estados Unidos se favorece **mes–día**. La puntuación, el año y el uso de ordinales dependen además de la guía de estilo y del tipo de texto.\n\nPor eso, para enseñar la diferencia conviene usar ejemplos como **1 May** (BrE) y **May 1** (AmE), sin convertir estas preferencias en una prohibición universal de otras variantes gráficas.\n\n#### Ejemplos\n\n**1. Preposiciones con *weekend***\n\n* **BrE:** *What are you doing **at the weekend**?*\n* **AmE:** *What are you doing **on the weekend**?*\n* **AmE frecuente:** *I work **on weekends**.*\n\n**2. Fechas**\n\n* **BrE frecuente:** *1 May 2026*\n* **AmE frecuente:** *May 1, 2026*\n\nEn el habla pueden aparecer formas ordinales como *the first of May* o *May the first*; la escritura formal suele seguir las convenciones de la guía de estilo correspondiente.\n\n#### Observación importante\n\nLa variación debe describirse con precisión. *At the weekend* y *on the weekend* son un contraste bien documentado entre BrE y AmE. En cambio, no conviene afirmar que una forma distinta es «incorrecta en cualquier variedad» solo porque no sea la opción estándar de los dos modelos comparados: otras variedades regionales pueden tener patrones diferentes.\n\nPara textos internacionales, formularios o documentos donde una fecha numérica pueda ser ambigua, escribir el mes con letras puede evitar confusión: **1 May 2026** o **May 1, 2026**.\n\n#### Entradas relacionadas\n\n* **Sintagmas preposicionales — Prepositional phrases**\n* **Preposiciones temporales**\n* **Variación entre inglés británico y estadounidense**"
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "Se corrigieron dos simplificaciones: la presentación rígida de las fechas con ordinales y la afirmación de que in the weekend sería incorrecto en cualquier variedad. Se conservó el contraste documentado at the weekend (BrE) / on the weekend (AmE) y se formularon las fechas como convenciones de estilo.",
+            "changes": [
+              "Se cambió May 1st / 1st May por ejemplos formales más neutrales May 1 / 1 May.",
+              "Se aclaró que el orden de fecha y la puntuación dependen de variedad y guía de estilo.",
+              "Se sustituyó la prohibición universal de formas no BrE/AmE por una nota que reconoce otras variedades regionales."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "BrE prefiere at the weekend, mientras AmE prefiere on the weekend/on weekends.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Las convenciones de fecha suelen favorecer día–mes en BrE y mes–día en AmE, con variación adicional de estilo.",
+              "supportType": "descriptive"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Cambridge Dictionary. English Grammar Today: British and American English — At the weekend/on the weekend.",
+              "url": "https://dictionary.cambridge.org/grammar/british-grammar/british-and-american-",
+              "role": "Referencia gramatical sobre la diferencia de preposición con weekend."
+            },
+            {
+              "citation": "British Council LearnEnglish. Prepositions of time: at, in, on.",
+              "url": "https://learnenglish.britishcouncil.org/grammar/a1-a2-grammar/prepositions-of-time-at-in-on",
+              "role": "Referencia que documenta at the weekend y on weekends/on the weekend como uso más común en AmE."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-39776520-4f61-4409-bb87-a74e11cba169",
+        "ticketId": "R44-CORPUS-0914",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-0914-sol02-MLS-V01-0733-checkpoint-v1",
+        "entry": {
+          "code": "MLS-V01-0733",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada caracteriza correctamente los dobles/múltiples modales como construcciones dialectales sistemáticas, especialmente documentadas en variedades del sur de Estados Unidos y también en Escocia, y distingue su legitimidad dialectal de la norma escrita estándar.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "Construcciones como might could están documentadas sistemáticamente en variedades del sur de Estados Unidos.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Los dobles modales también están documentados en Escocia y otras áreas británicas, aunque son infrecuentes y proscritos en el habla estándar.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Yale Grammatical Diversity Project. Multiple modals.",
+              "url": "https://ygdp.yale.edu/phenomena/multiple-modals",
+              "role": "Referencia académica sobre distribución y sintaxis de múltiples modales en variedades de Estados Unidos."
+            },
+            {
+              "citation": "Coats, S. (2023). Double modals in contemporary British and Irish speech. English Language & Linguistics, 27(4), 693–718.",
+              "url": "https://www.cambridge.org/core/journals/english-language-and-linguistics/article/double-modals-in-contemporary-british-and-irish-speech/159D82DE6CC3FB78B0645AAEF2ABE8FF",
+              "role": "Estudio académico reciente sobre dobles modales en Escocia y otras regiones británicas/irlandesas."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-39776520-4f61-4409-bb87-a74e11cba169",
+        "ticketId": "R44-CORPUS-0914",
+        "entries": [
+          {
+            "code": "MLS-V01-0728",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada distingue adecuadamente have y have got en posesión, relaciones y estados, presenta have got como más informal y más frecuente en BrE hablado, y explica correctamente los patrones interrogativos/negativos. La advertencia de no usar have got para rutinas como have breakfast es pedagógicamente adecuada.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "Have y have got pueden expresar posesión, relaciones, características y estados; have got es más informal y es especialmente frecuente en BrE hablado.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Las preguntas y negaciones con have suelen usar do-support, mientras have got forma Have you got...? / haven't got...",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Cambridge Dictionary. English Grammar Today: Have got and have.",
+                "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/have-got-and-have",
+                "role": "Referencia gramatical sobre significado, registro y estructura de have/have got."
+              },
+              {
+                "citation": "British Council LearnEnglish. Present simple: 'have got'.",
+                "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2/present-simple-have-got",
+                "role": "Referencia pedagógica sobre usos de have/has got y diferencia de formalidad."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V01-0729",
+            "outcome": "CORRECTED",
+            "correctedContent": {
+              "articleMarkdown": "#### En pocas palabras\n\nLa concordancia con sustantivos colectivos se refiere a la relación entre un sustantivo que nombra a un grupo —como *team*, *family* o *staff*— y el verbo que lo acompaña. En términos generales, el inglés estadounidense (AmE) favorece el singular cuando el grupo se presenta como una unidad, mientras que el inglés británico (BrE) admite con mucha más frecuencia singular o plural según se conceptualice al grupo como unidad o como conjunto de individuos.\n\n#### Cómo funciona\n\nUn **sustantivo colectivo** tiene forma singular pero puede referirse a varias personas o cosas. La concordancia muestra tendencias regionales:\n\n1. **Inglés estadounidense (AmE):** con colectivos como *team*, *family* o *crew*, el verbo singular es normalmente la opción no marcada cuando el grupo se trata como una entidad.\n2. **Inglés británico (BrE):** son posibles el singular y el plural. El singular presenta al grupo como unidad; el plural destaca a sus miembros.\n\nEstas son tendencias de uso, no una regla que permita clasificar automáticamente toda concordancia plural como un error en cualquier contexto estadounidense. Algunos sustantivos y géneros muestran variación, y palabras como *police* se comportan de manera distinta y llevan concordancia plural.\n\n#### Ejemplos\n\n* *The team **is** playing well.* — El equipo se presenta como una unidad; esta opción es normal tanto en AmE como en BrE.\n* *The staff **are** unhappy with the new rules.* — El plural es característico de BrE cuando se enfocan los miembros individuales. En AmE, con un colectivo de este tipo, suele preferirse el singular en el inglés general editado.\n* *The government **has** announced a new policy.* — El gobierno se presenta como institución.\n* *The government **have** different opinions on the matter.* — En BrE, el plural puede destacar que los miembros del gobierno discrepan.\n\n#### Observación importante\n\nNo conviene presentar la diferencia como «correcto frente a incorrecto» sin especificar variedad y contexto. La concordancia con colectivos combina gramática, significado y convención regional. En BrE, *The family are ...* puede ser una elección normal cuando se piensa en los miembros; en AmE, *The family is ...* es la opción general más esperable.\n\nEn exámenes, escritura académica o textos profesionales conviene mantener coherencia con la variedad de inglés elegida y seguir la guía de estilo pertinente.\n\n#### Entradas relacionadas\n\n* **Concordancia nocional — Notional agreement**\n* **Concordancia con nombres colectivos — Agreement with collective nouns**"
+            },
+            "notes": {
+              "auditStatus": "CORRECTED",
+              "summary": "Se corrigió una formulación demasiado absoluta que presentaba la concordancia plural con colectivos en AmE como error categórico. La nueva versión conserva la tendencia AmE singular / BrE singular o plural, pero la formula como patrón regional y contextual.",
+              "changes": [
+                "Se sustituyó la afirmación categórica de que staff are sería un error en AmE por una descripción de preferencia general por singular.",
+                "Se añadió que la concordancia depende del sustantivo, el género y la conceptualización del grupo.",
+                "Se mantuvo la distinción entre concordancia gramatical y nocional sin convertirla en una regla universal."
+              ],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En BrE, los sustantivos colectivos pueden concordar en singular o plural según se conceptualice el grupo como unidad o como individuos.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "En AmE, el singular es la opción general preferida con colectivos como family, team y crew.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "British Council LearnEnglish. British English and American English.",
+                "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/british-english-american-english",
+                "role": "Referencia que documenta singular/plural en BrE y preferencia por singular en AmE con sustantivos colectivos."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V01-0730",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada describe correctamente la diferencia dialectal entre got y gotten: BrE usa got como participio ordinario, mientras AmE conserva gotten en muchos sentidos de cambio o adquisición; have got permanece como construcción de posesión/necesidad.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En BrE, el participio de get es normalmente got; en AmE, gotten es estándar en numerosos usos del participio.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "La construcción have got de posesión o necesidad usa got, no gotten.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Cambridge Dictionary. English Grammar Today: British and American English — Get; Have and have got.",
+                "url": "https://dictionary.cambridge.org/us/grammar/british-grammar/british-english-and-american-english",
+                "role": "Referencia gramatical sobre got/gotten y have got."
+              },
+              {
+                "citation": "British Council LearnEnglish. British English and American English.",
+                "url": "https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2/british-english-american-english",
+                "role": "Referencia pedagógica sobre got/gotten en BrE y AmE."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V01-0731",
+            "outcome": "CORRECTED",
+            "correctedContent": {
+              "articleMarkdown": "#### En pocas palabras\n\nEl inglés británico (BrE) y el inglés estadounidense (AmE) presentan diferencias convencionales en algunas preposiciones temporales y en la forma habitual de escribir fechas. Estas diferencias son variación regional estándar, no simples errores.\n\n#### Cómo funciona\n\nAlgunas expresiones temporales prefieren preposiciones distintas según la variedad:\n\n* **BrE:** *at the weekend* es una forma característica.\n* **AmE:** *on the weekend* y *on weekends* son formas características.\n\nTambién existen convenciones distintas para las fechas. En muchos contextos británicos se favorece el orden **día–mes**, mientras que en Estados Unidos se favorece **mes–día**. La puntuación, el año y el uso de ordinales dependen además de la guía de estilo y del tipo de texto.\n\nPor eso, para enseñar la diferencia conviene usar ejemplos como **1 May** (BrE) y **May 1** (AmE), sin convertir estas preferencias en una prohibición universal de otras variantes gráficas.\n\n#### Ejemplos\n\n**1. Preposiciones con *weekend***\n\n* **BrE:** *What are you doing **at the weekend**?*\n* **AmE:** *What are you doing **on the weekend**?*\n* **AmE frecuente:** *I work **on weekends**.*\n\n**2. Fechas**\n\n* **BrE frecuente:** *1 May 2026*\n* **AmE frecuente:** *May 1, 2026*\n\nEn el habla pueden aparecer formas ordinales como *the first of May* o *May the first*; la escritura formal suele seguir las convenciones de la guía de estilo correspondiente.\n\n#### Observación importante\n\nLa variación debe describirse con precisión. *At the weekend* y *on the weekend* son un contraste bien documentado entre BrE y AmE. En cambio, no conviene afirmar que una forma distinta es «incorrecta en cualquier variedad» solo porque no sea la opción estándar de los dos modelos comparados: otras variedades regionales pueden tener patrones diferentes.\n\nPara textos internacionales, formularios o documentos donde una fecha numérica pueda ser ambigua, escribir el mes con letras puede evitar confusión: **1 May 2026** o **May 1, 2026**.\n\n#### Entradas relacionadas\n\n* **Sintagmas preposicionales — Prepositional phrases**\n* **Preposiciones temporales**\n* **Variación entre inglés británico y estadounidense**"
+            },
+            "notes": {
+              "auditStatus": "CORRECTED",
+              "summary": "Se corrigieron dos simplificaciones: la presentación rígida de las fechas con ordinales y la afirmación de que in the weekend sería incorrecto en cualquier variedad. Se conservó el contraste documentado at the weekend (BrE) / on the weekend (AmE) y se formularon las fechas como convenciones de estilo.",
+              "changes": [
+                "Se cambió May 1st / 1st May por ejemplos formales más neutrales May 1 / 1 May.",
+                "Se aclaró que el orden de fecha y la puntuación dependen de variedad y guía de estilo.",
+                "Se sustituyó la prohibición universal de formas no BrE/AmE por una nota que reconoce otras variedades regionales."
+              ],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "BrE prefiere at the weekend, mientras AmE prefiere on the weekend/on weekends.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Las convenciones de fecha suelen favorecer día–mes en BrE y mes–día en AmE, con variación adicional de estilo.",
+                "supportType": "descriptive"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Cambridge Dictionary. English Grammar Today: British and American English — At the weekend/on the weekend.",
+                "url": "https://dictionary.cambridge.org/grammar/british-grammar/british-and-american-",
+                "role": "Referencia gramatical sobre la diferencia de preposición con weekend."
+              },
+              {
+                "citation": "British Council LearnEnglish. Prepositions of time: at, in, on.",
+                "url": "https://learnenglish.britishcouncil.org/grammar/a1-a2-grammar/prepositions-of-time-at-in-on",
+                "role": "Referencia que documenta at the weekend y on weekends/on the weekend como uso más común en AmE."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V01-0733",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada caracteriza correctamente los dobles/múltiples modales como construcciones dialectales sistemáticas, especialmente documentadas en variedades del sur de Estados Unidos y también en Escocia, y distingue su legitimidad dialectal de la norma escrita estándar.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "Construcciones como might could están documentadas sistemáticamente en variedades del sur de Estados Unidos.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Los dobles modales también están documentados en Escocia y otras áreas británicas, aunque son infrecuentes y proscritos en el habla estándar.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Yale Grammatical Diversity Project. Multiple modals.",
+                "url": "https://ygdp.yale.edu/phenomena/multiple-modals",
+                "role": "Referencia académica sobre distribución y sintaxis de múltiples modales en variedades de Estados Unidos."
+              },
+              {
+                "citation": "Coats, S. (2023). Double modals in contemporary British and Irish speech. English Language & Linguistics, 27(4), 693–718.",
+                "url": "https://www.cambridge.org/core/journals/english-language-and-linguistics/article/double-modals-in-contemporary-british-and-irish-speech/159D82DE6CC3FB78B0645AAEF2ABE8FF",
+                "role": "Estudio académico reciente sobre dobles modales en Escocia y otras regiones británicas/irlandesas."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
