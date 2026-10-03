@@ -145,3 +145,39 @@ test('R33 Editorial Batch Tests accepts Unified worker branches',()=>{
   assert.match(workflow,/worker\/r33-farm\/\*\*/);
   assert.match(workflow,/worker\/r33-unified\/\*\*/);
 });
+
+
+test('Gate 100 materializes 100 disjoint Unified workers under the 128-worker ceiling',()=>{
+  const corpus=unverifiedCorpusEntries(520);
+  assert.ok(corpus.length>=500,'Need at least 500 unverified corpus entries for Gate 100.');
+  const handoffs=new Map(corpus.map((entry,index)=>[
+    String(entry.code).toUpperCase(),
+    handoffFor(entry,10000+index)
+  ]));
+  const view=integration.r33UnifiedSnapshot(
+    baseSnapshot(),
+    handoffs,
+    {root:'.',globalLedger:{terminal:{},recoveries:{}},globalAssignments:[]}
+  );
+  assert(view);
+  assert.equal(view.pool.execution.parallelWorkerLimit,128);
+  const candidates=r33Provider.materializeCandidates(view,{now:NOW,count:100,requested:5});
+  assert.equal(candidates.length,100);
+
+  const allCodes=candidates.flatMap(candidate=>candidate.units.map(unit=>unit.code));
+  assert.equal(allCodes.length,500);
+  assert.equal(new Set(allCodes).size,500);
+
+  const works=candidates.map(candidate=>{
+    candidate.r44Unified=candidate.units.map(unit=>handoffs.get(unit.code));
+    return integration.r33CandidateToWork(candidate,NOW);
+  });
+  assert.equal(new Set(works.map(work=>work.workId)).size,100);
+  assert.ok(works.every(work=>work.workId.startsWith('r33-unified:')));
+  assert.ok(works.every(work=>work.provider==='r33-farm'));
+  assert.ok(works.every(work=>work.units.length===5));
+
+  const locks=works.flatMap(work=>work.resourceLocks.filter(lock=>lock.startsWith('entry:')));
+  assert.equal(locks.length,500);
+  assert.equal(new Set(locks).size,500);
+});
