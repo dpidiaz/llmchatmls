@@ -6,6 +6,26 @@ const path = require('node:path');
 const MLS_CHAT_BRIDGE_BASE_URL = 'https://llmchatmls.dpidiaz.workers.dev';
 
 const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
+  r44StatusChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/status',
+    input: 'body'
+  },
+  r44ClaimChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/claim',
+    input: 'body'
+  },
+  r44RenewChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/renew',
+    input: 'body'
+  },
+  r44SubmitChat: {
+    method: 'POST',
+    pathname: '/api/r44/chat-bridge/submit',
+    input: 'body'
+  },
   iniciarLoteStagingMLS: {
     method: 'POST',
     pathname: '/api/wiki/editorial/staging/start',
@@ -94,36 +114,6 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
   proponerRevisionEvidenceMLS: {
     method: 'POST',
     pathname: '/api/wiki/editorial/evidence/revision/propose',
-    input: 'body'
-  },
-  r44StatusChat: {
-    method: 'POST',
-    pathname: '/api/r44/chat-bridge/status',
-    input: 'body'
-  },
-  r44ClaimChat: {
-    method: 'POST',
-    pathname: '/api/r44/chat-bridge/claim',
-    input: 'body'
-  },
-  r44RenewChat: {
-    method: 'POST',
-    pathname: '/api/r44/chat-bridge/renew',
-    input: 'body'
-  },
-  r44SubmitChat: {
-    method: 'POST',
-    pathname: '/api/r44/chat-bridge/submit',
-    input: 'body'
-  },
-  r44RebindChat: {
-    method: 'POST',
-    pathname: '/api/r44/chat-bridge/rebind',
-    input: 'body'
-  },
-  r44CheckpointChat: {
-    method: 'POST',
-    pathname: '/api/r44/chat-bridge/checkpoint',
     input: 'body'
   }
 });
@@ -256,16 +246,7 @@ async function executeRemoteOperation(operationId, input, options = {}) {
     }
   };
 
-  if (operation.input === 'r44Claim') {
-    const worker = String(input?.worker || '').trim();
-    if (!worker) throw new Error('worker es obligatorio.');
-    url.searchParams.set('bridge', 'claim');
-    url.searchParams.set('worker', worker);
-  } else if (operation.input === 'r44Renew') {
-    const lease = String(input?.lease || '').trim();
-    if (!lease) throw new Error('lease es obligatorio.');
-    url.searchParams.set('lease', lease);
-  } else if (operation.input === 'runId') {
+  if (operation.input === 'runId') {
     const runId = String(input?.runId || '').trim();
     if (!runId) throw new Error('runId es obligatorio.');
     url.searchParams.set('runId', runId);
