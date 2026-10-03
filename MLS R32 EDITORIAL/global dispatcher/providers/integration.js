@@ -489,8 +489,12 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
   const sources=r33TerminalSourceMap(globalLedger,pool,{root}),integrated=r33IntegratedCodes(root,verifiedCodes),held=revisions.load(root).activeHeldCodes;
   const remaining=pool.entries.filter(x=>!integrated.has(String(x.code||'').toUpperCase())&&!held.has(String(x.code||'').toUpperCase()));
   if(!remaining.length)return null;
-  const units=remaining.slice(0,size);
-  if(!units.length||units.some(x=>!sources.has(String(x.code||'').toUpperCase())))return null;
+  const unifiedCertifiedSubset=String(workPrefix||'').startsWith('r33-unified-integration:');
+  const units=(unifiedCertifiedSubset
+    ? remaining.filter(x=>sources.has(String(x.code||'').toUpperCase()))
+    : remaining
+  ).slice(0,size);
+  if(!units.length||(!unifiedCertifiedSubset&&units.some(x=>!sources.has(String(x.code||'').toUpperCase()))))return null;
   const codes=units.map(x=>String(x.code).toUpperCase()),first=codes[0],last=codes.at(-1);
   const sourceRefs=units.map(x=>({...sources.get(String(x.code).toUpperCase()),evidenceArtifactPath:r33Provider.evidenceArtifactPath(x)}));
   const indexRoot='MLS R32 EDITORIAL/evidence git/indexes';
