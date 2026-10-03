@@ -86,7 +86,7 @@ function apply(){
   const root=path.resolve(workspace)+path.sep;
   if(!target.startsWith(root))fail('UNIFIED_EVIDENCE_TARGET_ESCAPE');
   fs.mkdirSync(path.dirname(target),{recursive:true});
-  fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+'\\n');
+  fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+String.fromCharCode(10));
   process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath})+'\n');
 }
 async function main(){
