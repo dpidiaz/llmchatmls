@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-b10a-ticket09-recovered-next10",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-60b8578c-2388-4155-8501-0c7d4ec7e862",
+          "ticketId": "R44-CORPUS-0896",
+          "leaseExpiresAt": 1790997969286
+        },
+        "completedAt": "2026-10-03T03:21:09.471Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0896",
+          "sha256": "52caf89ac4d01b8190c44a6ce49bf0953b06ef2c492c9596433d8116204b33ad",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0896",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5475c2ae-4775-4c67-9f28-e9c926933561",
+                "ticketId": "R44-CORPUS-0896",
+                "code": "MLS-V01-0611",
+                "idempotencyKey": "R44-CORPUS-0896:MLS-V01-0611:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "606534f6e5be666d78fc1b9ac84e6dfb6422466bab7813b2a79d93bcc3d9ea67",
+                "sourceSha256": "7fe25b921c32cd76ebb63d3f546ace0e27d15b636ade6f176c08f0e3fa505b66",
+                "committedMs": 1790997669865,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "10d0afc2f7071fb6a978e0400bf46871f8622acb559a5e2b8521c8922857e45a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0896",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c582c12b-c900-4435-8bea-d4b0c61fab04",
+                "ticketId": "R44-CORPUS-0896",
+                "code": "MLS-V01-0612",
+                "idempotencyKey": "R44-CORPUS-0896:MLS-V01-0612:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "27f8f969a74cff5153c8e5c24b1cde574c166725ce8fb97e463f619bf8402385",
+                "sourceSha256": "3cd8cef1f96f9d391209e97e712b63919c6609b5513b462cebf7c1f2c8323461",
+                "committedMs": 1790997670092,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8bd086578c673e9fe29f40489fff827689f6276b96a164b93d2ad7055ada4868",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0896",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f0af0827-1c77-4269-87bb-78140d88e648",
+                "ticketId": "R44-CORPUS-0896",
+                "code": "MLS-V01-0613",
+                "idempotencyKey": "R44-CORPUS-0896:MLS-V01-0613:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "4df684198032a58e3b570b49fa15e828ea617d6137c0c98085c0e87a86549e35",
+                "sourceSha256": "889bcea77e661f10f8075d1fa655132ee9968e2d0a1886eaff2b3b7cd27dde81",
+                "committedMs": 1790997670325,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8096d3824d8b0ef6f8c268629916972d73ceebc6d771605812179acf919b3e4b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0896",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c5992d32-5e27-4460-811f-df44bb02fadd",
+                "ticketId": "R44-CORPUS-0896",
+                "code": "MLS-V01-0615",
+                "idempotencyKey": "R44-CORPUS-0896:MLS-V01-0615:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9921d69cacb20eeac83664426b22aa69b4b8319087ed7375f4c61ea03fb29ecf",
+                "sourceSha256": "0e4b06c457e86a05887974f426547d029815177f822e198af0f134413999ad86",
+                "committedMs": 1790997670552,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7ee50423f73e8e2cf0c4a6589d3d1ccff51edf86d6b9c7df9c5618c59be8aab6",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0896",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d24f94fc-2476-4e8a-af5e-5cc5d7810636",
+                "ticketId": "R44-CORPUS-0896",
+                "code": "MLS-V01-0616",
+                "idempotencyKey": "R44-CORPUS-0896:MLS-V01-0616:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d011e9f53f9681236759a9f7166e332f3db6e04499285865940a637c7b012bb2",
+                "sourceSha256": "f517710c4fa518e8381c3c04a9e9cedb25fad1db5ebc47c681fe35e30b697f1f",
+                "committedMs": 1790997670779,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "cc41474c2708dbf0831245f6f1f8a84914328fb3fbfa717753335a91a9ca0450",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-60b8578c-2388-4155-8501-0c7d4ec7e862",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "52caf89ac4d01b8190c44a6ce49bf0953b06ef2c492c9596433d8116204b33ad"
+          }
+        },
+        "completedAt": "2026-10-03T03:21:11.129Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-b4583df1-5738-4ce9-81b9-b817e65270d5",
+          "workerId": "r44-chat-20261002-2045-sol-b10a",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0897",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997971176,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0618",
+                "path": "ingles/MLS-V01-0618.json",
+                "sha256": "42b2d3abe5eb263999e78f1618ea723264ae99ad65d8e6ea9aa86a4359282e8e"
+              },
+              {
+                "code": "MLS-V01-0619",
+                "path": "ingles/MLS-V01-0619.json",
+                "sha256": "55d05f445432679dd627a88b02af32fb7f0842469c845108915ea8a1519f4f61"
+              },
+              {
+                "code": "MLS-V01-0621",
+                "path": "ingles/MLS-V01-0621.json",
+                "sha256": "3a6b10cf540b9520707ba195561dfbc993236b739e1d3c14c3ae04e4a333e494"
+              },
+              {
+                "code": "MLS-V01-0622",
+                "path": "ingles/MLS-V01-0622.json",
+                "sha256": "a668586e0500a812a2587798445ee0a8b6f2dffc10f0e7f6b649e9bb30c4c08a"
+              },
+              {
+                "code": "MLS-V01-0623",
+                "path": "ingles/MLS-V01-0623.json",
+                "sha256": "eea0fc446cb7e69e04b921492a8bc34e0f565e9bb0d64fd69a004817525faac2"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0897",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0618",
+                "path": "ingles/MLS-V01-0618.json",
+                "sha256": "42b2d3abe5eb263999e78f1618ea723264ae99ad65d8e6ea9aa86a4359282e8e"
+              },
+              {
+                "code": "MLS-V01-0619",
+                "path": "ingles/MLS-V01-0619.json",
+                "sha256": "55d05f445432679dd627a88b02af32fb7f0842469c845108915ea8a1519f4f61"
+              },
+              {
+                "code": "MLS-V01-0621",
+                "path": "ingles/MLS-V01-0621.json",
+                "sha256": "3a6b10cf540b9520707ba195561dfbc993236b739e1d3c14c3ae04e4a333e494"
+              },
+              {
+                "code": "MLS-V01-0622",
+                "path": "ingles/MLS-V01-0622.json",
+                "sha256": "a668586e0500a812a2587798445ee0a8b6f2dffc10f0e7f6b649e9bb30c4c08a"
+              },
+              {
+                "code": "MLS-V01-0623",
+                "path": "ingles/MLS-V01-0623.json",
+                "sha256": "eea0fc446cb7e69e04b921492a8bc34e0f565e9bb0d64fd69a004817525faac2"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0618",
+              "MLS-V01-0619",
+              "MLS-V01-0621",
+              "MLS-V01-0622",
+              "MLS-V01-0623"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261002-2045-sol-b10a",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997971176,
+              "active": true
+            },
+            "workerId": "r44-chat-20261002-2045-sol-b10a",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997971176,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0618",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 618,
+                "title": "Órdenes reportadas con tell/ask + to",
+                "level": "B1",
+                "part": "Estilo indirecto, cita y evidencialidad — Reported speech, quotation, and evidentiality",
+                "chapter": "Estilo indirecto — Reported speech",
+                "articleMarkdown": "#### En pocas palabras\n\nLas **órdenes e instrucciones reportadas** suelen expresarse en inglés con un verbo de reporte seguido de la persona destinataria y un **infinitivo con *to***. Son frecuentes patrones como `tell/order + persona + to + verbo`.\n\nPor ejemplo, *“Close the door,” she said to me* puede reportarse como *She told me to close the door*. Para una orden negativa, se usa normalmente **not to**: *She told me not to open the window*.\n\n#### Cómo funciona\n\nEl patrón básico es `verbo de reporte + objeto + (not) to-infinitive`. El **objeto** identifica a la persona que debe realizar o evitar la acción: *The teacher told us to wait*.\n\n**Tell** es común para instrucciones y órdenes; **order** expresa una autoridad más fuerte. **Ask + persona + to-infinitive** también tiene esta estructura, pero suele presentar la acción como una petición y no necesariamente como una orden estricta.\n\nLa forma imperativa original no se conserva literalmente: el verbo pasa al infinitivo con *to* y el destinatario se hace explícito en la construcción reportada.\n\n#### Ejemplos\n\n* **Directo:** *“Sit down,” the teacher said to Tom.*  \n  **Indirecto:** **The teacher told Tom to sit down.**  \n  *(El profesor le dijo a Tom que se sentara).*  \n  La orden imperativa *sit down* se expresa mediante *Tom + to sit down*.\n\n* **Directo:** *“Do not enter,” the officer said to us.*  \n  **Indirecto:** **The officer ordered us not to enter.**  \n  *(El agente nos ordenó que no entráramos).*  \n  La negación se coloca antes de *to*: **not to enter**.\n\n* **Directo:** *“Please wait outside,” she said to me.*  \n  **Indirecto:** **She asked me to wait outside.**  \n  *(Me pidió que esperara afuera).*  \n  El verbo *asked* refleja que el enunciado original funciona como petición cortés.\n\n#### Observación importante\n\nNo se usa normalmente `tell + to-infinitive` sin expresar a quién va dirigida la instrucción: se dice *She told **me** to wait*, no *She told to wait*. Esto coincide con el comportamiento habitual de *tell* cuando introduce un destinatario.\n\nTampoco debe aplicarse **backshift** al infinitivo como si fuera un tiempo verbal finito. En *told me to leave*, *to leave* no cambia a una forma “más pasada”; la relación temporal se interpreta a partir del verbo de reporte y del contexto.\n\nLa elección entre *tell, order, ask, advise, warn* y otros verbos añade información sobre el tipo de acto comunicativo. Por eso reportar una frase no consiste solo en transformar su gramática: también importa conservar su función.\n\n#### Entradas relacionadas\n\n* [Entrada 617: Preguntas wh- en estilo indirecto — Reported wh-questions](#entry-617)\n* [Entrada 619: Peticiones en estilo indirecto — Reported requests](#entry-619)\n* [Entrada 616: Preguntas de sí/no en estilo indirecto — Reported yes/no questions](#entry-616)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e587084c722e786013b2f284ca3e8f6304b05c9d68ec2006508de826530a5664",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:34:10.849Z"
+              },
+              {
+                "code": "MLS-V01-0619",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 619,
+                "title": "Peticiones en estilo indirecto",
+                "level": "B1",
+                "part": "Estilo indirecto, cita y evidencialidad — Reported speech, quotation, and evidentiality",
+                "chapter": "Estilo indirecto — Reported speech",
+                "articleMarkdown": "#### En pocas palabras\n\nLas **peticiones en estilo indirecto** cuentan que una persona pidió a otra hacer o no hacer algo sin repetir sus palabras exactas. Una estructura muy frecuente es **ask + persona + to-infinitive**.\n\nAsí, *“Please sit down,” she said to me* puede convertirse en *She asked me to sit down*. Lo importante es conservar la función del mensaje: aquí no se reporta simplemente una afirmación, sino una petición dirigida a otra persona.\n\n#### Cómo funciona\n\nEl patrón más común es `ask + objeto + (not) to-infinitive`. El objeto identifica a la persona a quien se dirige la petición: *They asked us to wait*. Para una petición negativa se usa **not to**: *She asked him not to leave*.\n\nOtros verbos pueden expresar matices distintos. **Beg** presenta una petición intensa o suplicante: *He begged her to stay*. **Request** pertenece a registros más formales y puede aparecer en construcciones como *They requested that everyone remain seated*.\n\nLa forma original no tiene que ser un imperativo. Una pregunta cortés como *Could you close the window?* puede funcionar pragmáticamente como petición y reportarse como *He asked me to close the window*.\n\n#### Ejemplos\n\n* **Directo:** *“Please sit down,” she said to me.*  \n  **Indirecto:** **She asked me to sit down.**  \n  *(Me pidió que me sentara).*  \n  *Asked me to sit down* expresa el contenido de la petición y su destinatario.\n\n* **Directo:** *“Please don’t tell anyone,” Marta said to Luis.*  \n  **Indirecto:** **Marta asked Luis not to tell anyone.**  \n  *(Marta le pidió a Luis que no se lo dijera a nadie).*  \n  La negación se coloca antes de *to*: **not to tell**.\n\n* **Directo:** *“Could you send me the file?” Ana said to Tom.*  \n  **Indirecto:** **Ana asked Tom to send her the file.**  \n  *(Ana le pidió a Tom que le enviara el archivo).*  \n  Aunque la forma directa es interrogativa, su función en este contexto es pedir una acción; además, *me* cambia a *her* según los referentes.\n\n#### Observación importante\n\n**Ask** también puede introducir preguntas reportadas: *She asked if I was ready* o *She asked where I lived*. La estructura permite distinguir los usos: `ask + persona + to-infinitive` suele reportar una petición, mientras que `ask + if/whether` o `ask + wh-word` reporta una pregunta.\n\nNo toda frase con *please* es idéntica en fuerza interpersonal, y la elección del verbo de reporte puede añadir información: *ask* suele ser neutral, *beg* intensifica la súplica y *request* puede sonar más formal. Por eso conviene preservar la función comunicativa, no transformar palabras de manera mecánica.\n\nEl infinitivo de *asked me to leave* no recibe **backshift** como una forma verbal finita. Los pronombres y expresiones de tiempo o lugar sí pueden ajustarse si cambia la perspectiva del reporte.\n\n#### Entradas relacionadas\n\n* [Entrada 618: Órdenes reportadas con tell/ask + to — Reported commands with tell/ask + to](#entry-618)\n* [Entrada 617: Preguntas wh- en estilo indirecto — Reported wh-questions](#entry-617)\n* [Entrada 616: Preguntas de sí/no en estilo indirecto — Reported yes/no questions](#entry-616)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-4a67e0e8b7ffdc91f76ee9a61ea508071621be02294ca0b477f06ed33d1f5294",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:35:01.346Z"
+              },
+              {
+                "code": "MLS-V01-0621",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 621,
+                "title": "Verbo + infinitivo con to",
+                "level": "B2",
+                "part": "Estilo indirecto, cita y evidencialidad — Reported speech, quotation, and evidentiality",
+                "chapter": "Estilo indirecto — Reported speech",
+                "articleMarkdown": "#### En pocas palabras\n\nAlgunos **verbos de reporte** se construyen directamente con un **infinitivo con *to***. En este patrón, el sujeto del verbo principal suele ser también la persona que realiza la acción expresada por el infinitivo.\n\nPor ejemplo, **He agreed to help** significa “Aceptó ayudar”. La misma persona que *agreed* es quien se compromete a *help*. Esta relación ayuda a distinguir el patrón de construcciones que incluyen un objeto entre ambos verbos.\n\n#### Cómo funciona\n\nEl patrón general es `reporting verb + to-infinitive`. Entre los verbos que aparecen con frecuencia en esta estructura se encuentran **agree, promise, offer, refuse** y **threaten**, aunque cada uno aporta un significado propio.\n\nEl infinitivo con *to* no es una cláusula finita: no lleva por sí mismo marcas de tiempo como *helped* o *will help*. Su referencia temporal se interpreta en relación con el verbo principal y el contexto. En *She promised to call later*, la llamada se entiende como posterior a la promesa.\n\n#### Ejemplos\n\n* **He agreed to help.**\n  *(Aceptó ayudar).*  \n  *Agree* presenta la acción de ayudar como algo aceptado por el mismo sujeto.\n\n* **She promised to call the next day.**\n  *(Prometió llamar al día siguiente).*  \n  *Promise* atribuye al sujeto un compromiso respecto de una acción posterior.\n\n* **They refused to answer the question.**\n  *(Se negaron a responder la pregunta).*  \n  *Refuse* presenta la acción del infinitivo como algo que el sujeto rechaza realizar.\n\n#### Observación importante\n\nNo todos los verbos de reporte admiten este patrón. La selección del complemento forma parte del comportamiento gramatical de cada verbo. Por ejemplo, *say* no se construye normalmente como **say to do**, y *tell* suele requerir una persona antes del infinitivo: *She told me to wait*.\n\nEl sujeto implícito del infinitivo suele interpretarse como el mismo sujeto del verbo principal en ejemplos como *He agreed to help*. Cuando aparece una persona explícita entre el verbo de reporte y el infinitivo, se trata de otro patrón: `verbo + objeto + to-infinitive`.\n\nTampoco se aplica **backshift** al infinitivo como si tuviera un tiempo verbal finito. La estructura *promised to call* conserva el infinitivo; los cambios de perspectiva temporal se expresan mediante el verbo principal, elementos deícticos y el contexto.\n\n#### Entradas relacionadas\n\n* [Entrada 620: Verbo + cláusula con that — Verb + that-clause](#entry-620)\n* [Entrada 622: Verbo + objeto + infinitivo con to — Verb + object + to-infinitive](#entry-622)\n* [Entrada 623: Verbo + preposición + -ing — Verb + preposition + -ing](#entry-623)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3487365fa23b88f01e44524c81d24eab4410815bade7b02d97a0079d48b02f62",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:36:08.171Z"
+              },
+              {
+                "code": "MLS-V01-0622",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 622,
+                "title": "Verbo + objeto + infinitivo con to",
+                "level": "B2",
+                "part": "Estilo indirecto, cita y evidencialidad — Reported speech, quotation, and evidentiality",
+                "chapter": "Estilo indirecto — Reported speech",
+                "articleMarkdown": "#### En pocas palabras\n\nAlgunos **verbos de reporte** se construyen con una persona u otro objeto seguido de un **infinitivo con *to***. Este patrón es frecuente al reportar consejos, órdenes, peticiones, advertencias o intentos de persuasión.\n\nEn **They advised us to wait** (“Nos aconsejaron esperar”), *us* identifica a quienes reciben el consejo y son también quienes realizarían la acción de *wait*.\n\n#### Cómo funciona\n\nEl patrón general es `reporting verb + object + to-infinitive`. Entre los verbos frecuentes se encuentran **advise, ask, tell, order, persuade, remind, encourage** y **warn**, aunque su significado y sus posibilidades de construcción no son idénticos.\n\nEl objeto situado antes del infinitivo suele corresponder a la persona interpretada como sujeto de la acción subordinada: *She persuaded him to apply* significa que **him** es quien presenta la solicitud. En las formas negativas, ciertos verbos permiten `object + not to-infinitive`: *They warned us not to touch it*.\n\n#### Ejemplos\n\n* **They advised us to wait.**\n  *(Nos aconsejaron esperar).*  \n  *Us* recibe el consejo y se interpreta como quien debe esperar.\n\n* **She persuaded him to apply for the job.**\n  *(Lo convenció de solicitar el puesto).*  \n  *Persuade* añade la idea de que una persona influye sobre otra para que realice la acción.\n\n* **The guard warned us not to enter.**\n  *(El guardia nos advirtió que no entráramos).*  \n  La negación afecta al infinitivo mediante **not to enter**, y *us* identifica a quienes no deben entrar.\n\n#### Observación importante\n\nLa presencia de un objeto distingue este patrón de construcciones como **He agreed to help**, donde el sujeto del verbo principal suele ser también quien realiza la acción del infinitivo. En **They advised us to wait**, en cambio, quienes aconsejan y quienes esperan son participantes diferentes.\n\nLos verbos tampoco son intercambiables. **Tell** suele expresar una instrucción o mandato; **advise**, un consejo; **persuade**, un cambio conseguido mediante influencia; **warn**, una advertencia. La estructura compartida no elimina esas diferencias de significado.\n\nEl infinitivo no recibe **backshift** como una forma verbal finita. Además, algunos de estos verbos admiten otras construcciones en contextos determinados, por lo que el patrón `objeto + to-infinitive` describe una posibilidad de selección verbal y no una regla universal para todos los verbos de reporte.\n\n#### Entradas relacionadas\n\n* [Entrada 621: Verbo + infinitivo con to — Verb + to-infinitive](#entry-621)\n* [Entrada 623: Verbo + preposición + -ing — Verb + preposition + -ing](#entry-623)\n* [Entrada 620: Verbo + cláusula con that — Verb + that-clause](#entry-620)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9f5acadd830b6192fe475f05b40f9ff4af1a388d5b083cf6d04cc42883739a73",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:36:29.852Z"
+              },
+              {
+                "code": "MLS-V01-0623",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 623,
+                "title": "Verbo + preposición + -ing",
+                "level": "C1",
+                "part": "Estilo indirecto, cita y evidencialidad — Reported speech, quotation, and evidentiality",
+                "chapter": "Estilo indirecto — Reported speech",
+                "articleMarkdown": "#### En pocas palabras\n\nAlgunos **verbos de reporte y expresiones relacionadas** se combinan con una **preposición** seguida de una forma verbal en **-ing**. La preposición forma parte del patrón seleccionado por el verbo o la expresión y conecta el acto comunicativo con la acción reportada.\n\nEn **He apologized for arriving late** (“Se disculpó por llegar tarde”), *apologized* se construye con **for** y la acción que motiva la disculpa aparece como *arriving late*.\n\n#### Cómo funciona\n\nEl patrón general es `reporting verb/expression + preposition + V-ing`. Son frecuentes combinaciones como **apologize for**, **insist on**, **complain about**, **object to** y **admit to**, seguidas de una forma en *-ing* cuando el complemento expresa una acción.\n\nLa preposición no puede eliminarse ni sustituirse libremente, porque su selección depende de la construcción léxica. Además, en secuencias como **object to doing** o **admit to doing**, *to* es una **preposición**, no el marcador del infinitivo. Por ello aparece *doing*, no el infinitivo *do*.\n\nLa forma en *-ing* de estas construcciones funciona como complemento de la preposición. No todas las formas terminadas en *-ing* tienen el mismo análisis gramatical en inglés; aquí su función se determina por la estructura completa.\n\n#### Ejemplos\n\n* **He apologized for arriving late.**\n  *(Se disculpó por llegar tarde).*  \n  *For* introduce el hecho que da lugar a la disculpa.\n\n* **She insisted on paying for dinner.**\n  *(Insistió en pagar la cena).*  \n  *Insist on* presenta una acción que la persona sostiene o exige realizar.\n\n* **They complained about having to wait so long.**\n  *(Se quejaron de tener que esperar tanto).*  \n  *About* introduce el contenido o motivo de la queja; *having to wait* funciona como su complemento.\n\n* **He admitted to taking the documents.**\n  *(Admitió haber tomado los documentos).*  \n  En este patrón, *to* es preposición. *Admit* también admite otras construcciones, como *He admitted that he had taken the documents*.\n\n#### Observación importante\n\nLa existencia de este patrón no significa que todos los verbos de reporte seleccionen una preposición seguida de *-ing*. **Agree** aparece normalmente con *to-infinitive* en *agree to help*; **advise** puede aparecer con objeto + *to-infinitive* en *advise us to wait*; **admit** permite tanto *admit to doing* como una cláusula de contenido en contextos apropiados.\n\nAlgunas construcciones incluyen además un objeto antes de la preposición, como **accuse someone of doing something**. En *They accused him of lying*, *him* identifica a la persona acusada y *of lying* expresa la conducta atribuida.\n\nEstas formas no reciben **backshift** de la misma manera que una cláusula finita. Las relaciones temporales se interpretan mediante el verbo principal, formas perfectas como *having done* cuando corresponden y el contexto discursivo.\n\n#### Entradas relacionadas\n\n* [Entrada 622: Verbo + objeto + infinitivo con to — Verb + object + to-infinitive](#entry-622)\n* [Entrada 621: Verbo + infinitivo con to — Verb + to-infinitive](#entry-621)\n* [Entrada 620: Verbo + cláusula con that — Verb + that-clause](#entry-620)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6bbf7df543b4bffa553c1510a5f126345eddc9f158b15a3ef2289c3b8677fa9c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:36:55.470Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:21:12.040Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:21:12.040Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-chat-20261002-2045-sol-b10a-ticket09-recovered-next10.json"
+}
