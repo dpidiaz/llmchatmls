@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-sol-seq-close08-claim09",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-3fc94383-aab3-47eb-bf61-5600ebcd9a2d",
+          "ticketId": "R44-CORPUS-1441",
+          "leaseExpiresAt": 1790997280363
+        },
+        "completedAt": "2026-10-03T03:09:40.510Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1441",
+          "sha256": "9aadbfe8453a4bb2ae0da9131115e1a99cc72c23699f3873e690551cb312b99b",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1441",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "dcb39c34-94ce-4091-80eb-0d9aeb8fba85",
+                "ticketId": "R44-CORPUS-1441",
+                "code": "MLS-V09-0466",
+                "idempotencyKey": "R44-CORPUS-1441:MLS-V09-0466:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "eb7690ab0277f1e78ef67e2b61614e313046e713cde2a99aa8039fab7c86822d",
+                "sourceSha256": "5d1c1d19ca7b04bd5cf51101a7bbcd1c40b36365cd491c1be84d9e2fb7642b47",
+                "committedMs": 1790996980914,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "866c479299823b427ba920b31379e97afd0d5b736226624b99f90036de7e4246",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1441",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "22900822-ac39-4708-a34a-c129e6c44d00",
+                "ticketId": "R44-CORPUS-1441",
+                "code": "MLS-V09-0467",
+                "idempotencyKey": "R44-CORPUS-1441:MLS-V09-0467:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9ebda4858bc432b81e9764c037e166509021e9ce941e6fd93317675dbacd95b7",
+                "sourceSha256": "e3c79a83a64690f80560abbf21f51b1220f6200134286e060b6e6cc8fb807d4a",
+                "committedMs": 1790996981130,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9e2921097383eb6c110c14ed56e6a52aff65e93fd9ee6e4bc489a39bcc44aae3",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1441",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "de53d524-ab9f-4f70-81bd-8e1b14bc7011",
+                "ticketId": "R44-CORPUS-1441",
+                "code": "MLS-V09-0468",
+                "idempotencyKey": "R44-CORPUS-1441:MLS-V09-0468:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "977338d6cfe09e6edec4a4221abe22663fdd0ae41276b3c55baa3f1b7bc1bc6c",
+                "sourceSha256": "53bbfdda6dc15bf454407ee922809ddcf105285493680ef1bf554889e06fe6e8",
+                "committedMs": 1790996981343,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d81249a8ed069852f74ec4a8a30474d2f9515de994ed34b280e6bb996d1e1081",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1441",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "7e4f9eb4-cd65-403c-8734-8252fc8fe481",
+                "ticketId": "R44-CORPUS-1441",
+                "code": "MLS-V09-0469",
+                "idempotencyKey": "R44-CORPUS-1441:MLS-V09-0469:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8871aa71b2e9d7b99602dc0e1c372b3c1bdd241468c1f3502901609509abccd9",
+                "sourceSha256": "d4bd113fa5f2a25d2492446b33fd89aafdecc5684f8849ac39965e4a96996903",
+                "committedMs": 1790996981598,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "1eb644c42754af331dbfe67955335d5aee2145c14ad13b8c3694b8e2dab93956",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1441",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d7a8a64c-35e0-486c-b9d8-5fd2840a741f",
+                "ticketId": "R44-CORPUS-1441",
+                "code": "MLS-V09-0471",
+                "idempotencyKey": "R44-CORPUS-1441:MLS-V09-0471:legacy-v1",
+                "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9afca82f75d46a6ac2e9b3b06e0cb1e6f02e088df8528a8b8bda6a52b539e06f",
+                "sourceSha256": "073cc4be8d70bfa0133ccb66f92ec593a760e1186d9a96142b8b266b600988e4",
+                "committedMs": 1790996981818,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d8763c02f74e05bd56d3a6591b37d0f566b9390b4649f3ca866cc05344592f2a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-3fc94383-aab3-47eb-bf61-5600ebcd9a2d",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "9aadbfe8453a4bb2ae0da9131115e1a99cc72c23699f3873e690551cb312b99b"
+          }
+        },
+        "completedAt": "2026-10-03T03:09:42.100Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-de4d550c-460c-4f1f-b632-d85714a7dac2",
+          "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1442",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997282144,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V09-0472",
+                "path": "ruso/MLS-V09-0472.json",
+                "sha256": "39e9112cd054097ea51a740242faac64e3f23df4dd4d4813240a3e19ad7bdba3"
+              },
+              {
+                "code": "MLS-V09-0473",
+                "path": "ruso/MLS-V09-0473.json",
+                "sha256": "c4d2f02431037aee358c2ed26d21c5d94540637d06d09d91af37d12ad3c8d6b1"
+              },
+              {
+                "code": "MLS-V09-0474",
+                "path": "ruso/MLS-V09-0474.json",
+                "sha256": "0cdfab5afd7724d69064823948b211806c9dc48c3f467dcf34e7bcbc5bb8a930"
+              },
+              {
+                "code": "MLS-V09-0475",
+                "path": "ruso/MLS-V09-0475.json",
+                "sha256": "d4c959f4f880e20f5db6072d702b957c70e66d0f6855fa2f72d1e3a09d2dbfef"
+              },
+              {
+                "code": "MLS-V09-0476",
+                "path": "ruso/MLS-V09-0476.json",
+                "sha256": "2716e94ad97860fef378cd4f01ec13d23a47dd6373aa8576a89c14968dac3e55"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1442",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V09-0472",
+                "path": "ruso/MLS-V09-0472.json",
+                "sha256": "39e9112cd054097ea51a740242faac64e3f23df4dd4d4813240a3e19ad7bdba3"
+              },
+              {
+                "code": "MLS-V09-0473",
+                "path": "ruso/MLS-V09-0473.json",
+                "sha256": "c4d2f02431037aee358c2ed26d21c5d94540637d06d09d91af37d12ad3c8d6b1"
+              },
+              {
+                "code": "MLS-V09-0474",
+                "path": "ruso/MLS-V09-0474.json",
+                "sha256": "0cdfab5afd7724d69064823948b211806c9dc48c3f467dcf34e7bcbc5bb8a930"
+              },
+              {
+                "code": "MLS-V09-0475",
+                "path": "ruso/MLS-V09-0475.json",
+                "sha256": "d4c959f4f880e20f5db6072d702b957c70e66d0f6855fa2f72d1e3a09d2dbfef"
+              },
+              {
+                "code": "MLS-V09-0476",
+                "path": "ruso/MLS-V09-0476.json",
+                "sha256": "2716e94ad97860fef378cd4f01ec13d23a47dd6373aa8576a89c14968dac3e55"
+              }
+            ],
+            "remaining": [
+              "MLS-V09-0472",
+              "MLS-V09-0473",
+              "MLS-V09-0474",
+              "MLS-V09-0475",
+              "MLS-V09-0476"
+            ],
+            "lease": {
+              "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997282144,
+              "active": true
+            },
+            "workerId": "r44-e2c65b38ad1f41b2b184cf6c166e3c2e",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997282144,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V09-0472",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 472,
+                "title": "Posición -ся/-сь",
+                "level": "B1",
+                "part": "-ся e interacción — -ся и взаимодействие",
+                "chapter": "Verbos en -ся: reflexividad, medio y pasiva — Глаголы на -ся",
+                "articleMarkdown": "#### En pocas palabras\n\nEn los verbos rusos en **-ся**, la forma visible puede ser **-ся** o **-сь**. La elección es principalmente fonológica y depende de cómo termina la forma verbal: **-ся** aparece normalmente después de consonante, mientras que **-сь** suele aparecer después de vocal.\n\nAsí, el infinitivo **учиться** termina en **-ся**, pero la primera persona **учусь** termina en **-сь**.\n\n#### Cómo funciona\n\n**-ся / -сь** es un elemento pospuesto al verbo. No cambia de posición como un pronombre independiente: permanece unido a la forma verbal después de las terminaciones correspondientes.\n\nTras consonante se usa normalmente **-ся**: **учится** «estudia / aprende», **моется** «se lava». Tras vocal aparece habitualmente **-сь**: **учусь** «estudio», **моюсь** «me lavo», **учились** «estudiaban / estudiaron» conserva **-сь** después de la vocal de la terminación.\n\nLa alternancia entre **-ся** y **-сь** no crea por sí misma una diferencia de significado. Son variantes formales del mismo elemento. El valor semántico depende del verbo y de la construcción: puede ser reflexivo, recíproco, medio, pasivo o formar parte estable del lexema.\n\n#### Ejemplos\n\n- **Я учусь в университете.** — Estudio en la universidad. La forma **учусь** lleva **-сь** después de vocal.\n- **Он учится в университете.** — Él estudia en la universidad. **учится** lleva **-ся** después de consonante.\n- **Мы встретились вчера.** — Nos encontramos ayer. En **встретились**, **-сь** sigue a una vocal; el significado recíproco pertenece a la construcción completa.\n\n#### Observación importante\n\nLa definición de **-ся** no puede reducirse a «la acción vuelve a la misma persona». Esa descripción solo corresponde a algunos usos reflexivos. En **Дом строится**, por ejemplo, puede haber valor pasivo; en **Книга читается легко**, valor medio; y ciertos verbos incorporan **-ся** como parte de su forma léxica.\n\nTampoco hay correspondencia automática con el español **se**. Lo importante en esta entrada es la distribución formal **-ся / -сь**, no asignarles significados distintos.\n\n#### Entradas relacionadas\n\nConviene relacionar esta alternancia con el reflexivo directo, el valor medio o intransitivizador y la pasiva con **-ся**. En todos ellos, la forma superficial sigue la misma alternancia, aunque la función de la construcción sea diferente.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-dd7606ee0ad38a30642ff951ddac1317277aadd70115005f38bea1bbfe413204",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:23:37.666Z"
+              },
+              {
+                "code": "MLS-V09-0473",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 473,
+                "title": "Reflexivo directo",
+                "level": "B1",
+                "part": "-ся e interacción — -ся и взаимодействие",
+                "chapter": "Verbos en -ся: reflexividad, medio y pasiva — Глаголы на -ся",
+                "articleMarkdown": "#### En pocas palabras\n\nEn un **reflexivo directo**, la persona o entidad que realiza la acción es también quien la recibe. En ruso, este significado puede expresarse mediante un verbo en **-ся / -сь**.\n\nPor ejemplo, **Он умывается** significa «Él se lava». El sujeto **он** realiza la acción de lavar y esa misma persona es la afectada por la acción.\n\n#### Cómo funciona\n\nPuede compararse un verbo transitivo con su forma reflexiva. En **Мать умывает ребёнка** — «La madre lava al niño»—, **мать** realiza la acción y **ребёнка** es el participante afectado. En **Ребёнок умывается** — «El niño se lava»—, el participante que actúa y el afectado coinciden.\n\nEn este uso, **-ся** absorbe la relación que en la construcción no reflexiva correspondería al objeto directo; por eso el verbo reflexivo ya no lleva normalmente otro objeto directo que designe a la misma entidad afectada. El sujeto permanece en nominativo.\n\nLa forma superficial puede ser **-ся** o **-сь** según la terminación verbal, pero esa alternancia no cambia el significado reflexivo.\n\n#### Ejemplos\n\n- **Он умывается каждое утро.** — Se lava cada mañana. El sujeto realiza y recibe la acción.\n- **Она причёсывается перед зеркалом.** — Se peina frente al espejo. **она** es tanto agente como entidad afectada.\n- **Я одеваюсь быстро.** — Me visto rápido. La acción se orienta hacia el propio sujeto.\n\n#### Observación importante\n\nNo todos los verbos en **-ся** son reflexivos directos. **Дом строится** puede tener valor pasivo, **Книга читается легко** puede ser medio y verbos como **бояться** contienen **-ся** como parte estable del lexema. Por eso, la coincidencia entre quien actúa y quien recibe la acción debe establecerse a partir del verbo y del contexto.\n\nTampoco debe asumirse que todo **se** del español corresponde automáticamente a **-ся** en ruso. Las dos lenguas distribuyen los valores reflexivos, medios y pasivos de manera diferente.\n\n#### Entradas relacionadas\n\nEste uso se relaciona con la posición **-ся / -сь**, el reflexivo con otros participantes expresados en casos oblicuos, el valor medio y la pasiva con **-ся**. Compararlos permite separar la forma visible de su función en cada construcción.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-d7b6f7f7e37a93242312c46accac030cf6ed304fdcc7eb4cc80af61608e88081",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:24:37.323Z"
+              },
+              {
+                "code": "MLS-V09-0474",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 474,
+                "title": "Reflexivo y caso oblicuo",
+                "level": "B1",
+                "part": "-ся e interacción — -ся и взаимодействие",
+                "chapter": "Verbos en -ся: reflexividad, medio y pasiva — Глаголы на -ся",
+                "articleMarkdown": "#### En pocas palabras\n\nLa reflexividad en ruso no se expresa únicamente mediante **-ся / -сь**. Cuando un verbo requiere un complemento en un caso distinto del acusativo directo, puede aparecer el pronombre reflexivo **себя** en la forma exigida por ese verbo o por una preposición.\n\nPor ejemplo, **Она гордится собой** significa «Está orgullosa de sí misma». Aquí **собой** es la forma instrumental del pronombre reflexivo **себя** y remite al mismo referente que el sujeto **она**.\n\n#### Cómo funciona\n\nEl pronombre reflexivo **себя** no tiene forma nominativa: no funciona como sujeto independiente. Sus formas se usan en casos oblicuos, es decir, casos distintos del nominativo, según la regencia de la construcción: **себя** en genitivo o acusativo, **себе** en dativo o prepositivo y **собой / собою** en instrumental.\n\nEn **Она гордится собой**, el verbo **гордиться** rige instrumental para aquello de lo que alguien se siente orgulloso. Por eso aparece **собой**, no porque el instrumental signifique por sí mismo «a sí misma», sino porque el verbo exige ese caso.\n\nAdemás, **гордиться** es un verbo léxico en **-ся**: no conviene analizar su **-ся** como si por sí solo aportara la reflexividad de **собой**.\n\n#### Ejemplos\n\n- **Она гордится собой.** — Está orgullosa de sí misma. **собой** está en instrumental.\n- **Он купил себе книгу.** — Se compró un libro / compró un libro para sí. **себе** está en dativo y expresa al beneficiario correferente con el sujeto.\n- **Она рассказала о себе.** — Habló de sí misma. La preposición **о** rige aquí prepositivo: **о себе**.\n\n#### Observación importante\n\nEl término «reflexivo» cubre estructuras distintas. En **Он умывается**, **-ся** participa en un reflexivo directo; en **Он купил себе книгу**, la correferencia se expresa con **себе**; y en **Она гордится собой**, el verbo ya contiene **-ся** y además lleva un complemento reflexivo en instrumental.\n\nPor eso no debe eliminarse **-ся** ni sustituirse automáticamente **себя** por **-ся**. Cada verbo conserva su propia estructura de complementos.\n\n#### Entradas relacionadas\n\nEste tema se conecta con el reflexivo directo, la alternancia **-ся / -сь** y los verbos léxicos en **-ся**. La clave es separar la forma verbal de la función del pronombre reflexivo y del caso exigido por cada construcción.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-383bd1581da0da023be9b8605891ba6af96850667b2fec71f0ef770da45a11ea",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:25:29.071Z"
+              },
+              {
+                "code": "MLS-V09-0475",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 475,
+                "title": "Verbos léxicos бояться/надеяться",
+                "level": "B1",
+                "part": "-ся e interacción — -ся и взаимодействие",
+                "chapter": "Verbos en -ся: reflexividad, medio y pasiva — Глаголы на -ся",
+                "articleMarkdown": "#### En pocas palabras\n\nAlgunos verbos rusos terminan en **-ся / -сь** porque esa terminación forma parte estable de su **lexema**, es decir, de la forma con la que el verbo pertenece al vocabulario. En estos casos no es correcto interpretar **-ся** como «a sí mismo».\n\nDos ejemplos frecuentes son **бояться** «temer» y **надеяться** «esperar / tener esperanza». Se aprenden y usan como verbos en **-ся**.\n\n#### Cómo funciona\n\nEn un reflexivo directo como **умываться** «lavarse», puede reconocerse una relación clara con **умывать** «lavar a alguien». En cambio, **бояться** y **надеяться** tienen estructuras léxicas propias y sus complementos siguen la regencia de cada verbo.\n\n**бояться** suele combinarse con genitivo para la entidad temida: **бояться собак** «tener miedo de los perros». En determinados contextos también puede aparecer acusativo, especialmente con referentes concretos, pero el genitivo es central en su régimen.\n\n**надеяться** se construye normalmente con **на + acusativo** para aquello que se espera: **надеяться на лучшее** «esperar lo mejor». También puede introducir una proposición con **что**.\n\n#### Ejemplos\n\n- **Я боюсь собак.** — Tengo miedo de los perros. **собак** está en genitivo plural.\n- **Она надеется на помощь друзей.** — Ella espera la ayuda de sus amigos. **на помощь** lleva acusativo regido por **на**.\n- **Мы надеемся, что всё будет хорошо.** — Esperamos que todo salga bien. Aquí el contenido de la esperanza se expresa mediante una proposición.\n\n#### Observación importante\n\nLa presencia de **-ся** no significa automáticamente reflexividad, reciprocidad ni pasiva. En **бояться** y **надеяться**, eliminar **-ся** no produce simplemente la misma idea sin reflexividad: son verbos cuya forma léxica incluye este elemento.\n\nTampoco debe deducirse el caso del complemento a partir de **-ся**. El caso depende de la regencia del verbo o de la preposición correspondiente. Por eso **бояться собак** y **надеяться на лучшее** presentan estructuras diferentes.\n\n#### Entradas relacionadas\n\nConviene comparar estos verbos léxicos con el reflexivo directo, el pronombre **себя** en casos oblicuos y pares como **учиться / учить**. La comparación muestra que una misma terminación formal puede participar en relaciones gramaticales y léxicas distintas.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c3c16cb5e07a699fbb2d4e3dbdcd93aeef945705446570767e403a7b55194ad7",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:24.699Z"
+              },
+              {
+                "code": "MLS-V09-0476",
+                "language": "ruso",
+                "languageName": "Ruso",
+                "n": 476,
+                "title": "Учиться vs учить",
+                "level": "B1",
+                "part": "-ся e interacción — -ся и взаимодействие",
+                "chapter": "Verbos en -ся: reflexividad, medio y pasiva — Глаголы на -ся",
+                "articleMarkdown": "#### En pocas palabras\n\n**учиться** y **учить** están relacionados con aprender y estudiar, pero no son intercambiables. **учиться** es un verbo en **-ся** que suele describir el proceso de estudiar, aprender o estar cursando estudios. **учить** puede significar «estudiar / aprender» algo concreto y también «enseñar», según la estructura.\n\nAsí, **Я учусь в университете** significa «Estudio en la universidad», mientras que **Я учу русский язык** significa «Estudio / aprendo ruso».\n\n#### Cómo funciona\n\nCon **учиться**, el foco suele estar en la actividad del estudiante. El lugar de estudios puede expresarse con **в + prepositivo**, como **в университете**. También puede aparecer aquello que se aprende mediante otras construcciones, por ejemplo **учиться русскому языку**, donde **русскому языку** está en dativo.\n\n**учить** es transitivo en usos como **учить русский язык**: aquello que se estudia aparece normalmente en acusativo. El mismo verbo puede significar «enseñar»: **учить детей русскому языку** — «enseñar ruso a los niños». Aquí **детей** es acusativo y **русскому языку** dativo.\n\nPor eso la diferencia no puede reducirse a que **-ся** signifique «a sí mismo». **учиться** posee una estructura y un significado propios.\n\n#### Ejemplos\n\n- **Я учусь в университете.** — Estudio en la universidad. Se describe la situación o actividad de estudiar.\n- **Я учу русский язык.** — Estudio / aprendo ruso. **русский язык** está en acusativo como contenido estudiado.\n- **Она учит детей математике.** — Ella enseña matemáticas a los niños. **детей** está en acusativo y **математике** en dativo.\n\n#### Observación importante\n\nEn español, «estudiar» puede corresponder tanto a **учиться** como a **учить**, de modo que la traducción aislada no basta para elegir. Importa la construcción: estudiar en una institución, estudiar una materia concreta o enseñar a alguien.\n\nAdemás, **учить** también puede significar «memorizar» en contextos como **учить слова** «aprender/memorizar palabras». El significado preciso depende de sus complementos.\n\n#### Entradas relacionadas\n\nEste contraste se relaciona con los verbos léxicos en **-ся** y con la regencia de casos. También conviene separarlo de los usos reflexivos directos: en **учиться**, **-ся** no equivale simplemente al pronombre español «se».",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-90288167f00c12fd55321146af421617ca384cb6d114b4315c781075f011de82",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:27:21.319Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:09:42.880Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:09:42.880Z",
+  "commandFile": "mls chat bridge/commands/000-000-r44-sol-recover/05-close08-claim09.json"
+}

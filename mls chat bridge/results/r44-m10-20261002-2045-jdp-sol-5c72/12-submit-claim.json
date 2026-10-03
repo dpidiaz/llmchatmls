@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-5c72-ticket08-close-next",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0681",
+          "sha256": "60ffd345d7b99d6fdef10cdbfc9235fd817686fb2910e621e933e35df091f25a",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0681",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1d785059-d2b9-456e-8144-23ffb5678ebe",
+                "ticketId": "R43-EMERGENCY-0681",
+                "code": "MLS-V06-1007",
+                "idempotencyKey": "R43-EMERGENCY-0681:MLS-V06-1007:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "84d3721ec61c17b767e67c1efc8948a9f36c9b64b4fdaa701e074110c93ecd59",
+                "sourceSha256": "e1fc1ef0aea065264d4d18e8d97a760ae946795db9c8976df6dad5a5b50b5696",
+                "committedMs": 1790996992952,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "58c354fc2f191d5781536dc6e2d050075a7eb883b86ed17fc5f0dc8d3308539e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0681",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "26cfcf4b-3c5f-4c75-b74b-86bf6529d0dd",
+                "ticketId": "R43-EMERGENCY-0681",
+                "code": "MLS-V06-1008",
+                "idempotencyKey": "R43-EMERGENCY-0681:MLS-V06-1008:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2d813a7971f0fa914fea900b90d1448d01f3fd9f2f637b99da45d9d45ac780a9",
+                "sourceSha256": "e56047640f0e68a92f14327207dc88922b69beb813ab13fbd2829ff9e2b3b7a9",
+                "committedMs": 1790996993163,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e3fbc61c407a294d0bd07d6a6decc3195cd2ebd9796db7273571448e79b4bb43",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0681",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e281b2fd-1a2a-4d69-9ee8-4c53a5569748",
+                "ticketId": "R43-EMERGENCY-0681",
+                "code": "MLS-V06-1009",
+                "idempotencyKey": "R43-EMERGENCY-0681:MLS-V06-1009:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ecebce6a7cd74f0f9fa95be45a3e10a9650a952f8a2c8235b88cfc58e1125e2f",
+                "sourceSha256": "653b26857da747923e8d367a5d06b1795c003eecafd8ee581662d2ac9282fef8",
+                "committedMs": 1790996993380,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9828426ac08110a6e1cc6e365e0016b936f0cb2dbdf75037d7acd55370910304",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0681",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "865d6c2b-91d4-4a19-acf5-c976e66ca66a",
+                "ticketId": "R43-EMERGENCY-0681",
+                "code": "MLS-V06-1010",
+                "idempotencyKey": "R43-EMERGENCY-0681:MLS-V06-1010:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9e72f80626872537d80e130e70ec1449b0dbf1f7377897834b2e4574cb0ef638",
+                "sourceSha256": "148229fea3b485fe833f71675840562994f280b4102e3f76a26411d455941671",
+                "committedMs": 1790996993594,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8899a2ba199007a5822b309b28a008646029b85af6518545e0582a019ddb3def",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0681",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "9db0d7db-6ac9-44d9-ae89-9437456b9b76",
+                "ticketId": "R43-EMERGENCY-0681",
+                "code": "MLS-V06-1012",
+                "idempotencyKey": "R43-EMERGENCY-0681:MLS-V06-1012:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "378225c736aca92618b7fe3cd2282402b9cdb5d0b4cafe2684dd23f0b8d8e1f4",
+                "sourceSha256": "1f38fbbf35ac7dbd92b5a18ad1c92f76f35da42732deb6f877836a969e970829",
+                "committedMs": 1790996993806,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3f43cb6ed0a46d722e78bc1bf0b1a0d0d32b511030e8f1af40867cfff3232d8c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-a10083cf-ef17-44fc-9a13-8513de0f7fb2",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "60ffd345d7b99d6fdef10cdbfc9235fd817686fb2910e621e933e35df091f25a"
+          }
+        },
+        "completedAt": "2026-10-03T03:09:54.087Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-f03a8e31-1e4d-4d40-a313-3b56c1d32fb5",
+          "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0684",
+            "leaseGeneration": 2,
+            "lease_expires_at": 1790997294133,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-1025",
+                "path": "japones/MLS-V06-1025.json",
+                "sha256": "c974fdc89d2360eaed3ea914126f2a5a05b14cac59b53ef0292a0ed909e07549"
+              },
+              {
+                "code": "MLS-V06-1026",
+                "path": "japones/MLS-V06-1026.json",
+                "sha256": "9a946bc792ebde37d66c414583346c82e8ae9ac544442c6c22960524e4c77664"
+              },
+              {
+                "code": "MLS-V07-0001",
+                "path": "chino-taiwan/MLS-V07-0001.json",
+                "sha256": "d59abc962a6c7388255d4bac5a091c494347544f7e71395a0bce22646f841965"
+              },
+              {
+                "code": "MLS-V07-0002",
+                "path": "chino-taiwan/MLS-V07-0002.json",
+                "sha256": "983dd112e7d03be615af36087c44a4fcdc26bee47a224916215fbf2b18828a3c"
+              },
+              {
+                "code": "MLS-V07-0003",
+                "path": "chino-taiwan/MLS-V07-0003.json",
+                "sha256": "e477953393051110976c3cfc96cf3ac2f417e6233d9e4b70d840935ea036320b"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0684",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-1025",
+                "path": "japones/MLS-V06-1025.json",
+                "sha256": "c974fdc89d2360eaed3ea914126f2a5a05b14cac59b53ef0292a0ed909e07549"
+              },
+              {
+                "code": "MLS-V06-1026",
+                "path": "japones/MLS-V06-1026.json",
+                "sha256": "9a946bc792ebde37d66c414583346c82e8ae9ac544442c6c22960524e4c77664"
+              },
+              {
+                "code": "MLS-V07-0001",
+                "path": "chino-taiwan/MLS-V07-0001.json",
+                "sha256": "d59abc962a6c7388255d4bac5a091c494347544f7e71395a0bce22646f841965"
+              },
+              {
+                "code": "MLS-V07-0002",
+                "path": "chino-taiwan/MLS-V07-0002.json",
+                "sha256": "983dd112e7d03be615af36087c44a4fcdc26bee47a224916215fbf2b18828a3c"
+              },
+              {
+                "code": "MLS-V07-0003",
+                "path": "chino-taiwan/MLS-V07-0003.json",
+                "sha256": "e477953393051110976c3cfc96cf3ac2f417e6233d9e4b70d840935ea036320b"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-1025",
+              "MLS-V06-1026",
+              "MLS-V07-0001",
+              "MLS-V07-0002",
+              "MLS-V07-0003"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+              "leaseGeneration": 2,
+              "leaseExpiresAt": 1790997294133,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790997294133,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-1025",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1025,
+                "title": "Registro coloquial",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Norma, estilo y elección avanzada C2 — 規範・文体・高度な選択 C2",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **registro coloquial** japonés reúne formas típicas de la conversación cotidiana y de situaciones con menor distancia social. Se caracteriza no solo por finales llanos, sino también por contracciones, elipsis, partículas finales, vocabulario conversacional y una fuerte dependencia del contexto compartido.\n\n“Coloquial” no significa necesariamente “descuidado” ni “incorrecto”. Muchas formas coloquiales son plenamente regulares y naturales en su entorno, aunque no sean apropiadas para una tesis, un informe administrativo o una interacción que exige especial deferencia.\n\n#### Cómo funciona\n\nEn conversación, el japonés omite con frecuencia participantes que ya son identificables. Así, **もう食べた？** — “¿Ya comiste?” — puede funcionar sin pronombre ni sujeto expresado. La forma llana **食べた** y la entonación interrogativa encajan con una interacción familiar.\n\nTambién son frecuentes las contracciones. **〜ている** puede reducirse a **〜てる**, como en **何してる？** — “¿Qué estás haciendo?”. En habla informal aparecen asimismo formas como **〜ちゃう**, procedente de **〜てしまう**; el matiz concreto depende de la construcción y del contexto.\n\nLas partículas finales contribuyen a expresar actitud y relación interpersonal. **ね**, **よ**, **な**, **さ** y otras pueden señalar búsqueda de acuerdo, énfasis o diferentes matices estilísticos. Su distribución varía según región, generación, situación e identidad social, de modo que no forman un inventario de equivalencias fijas con el español.\n\n#### Ejemplos\n\n* **今日、行く？** — “¿Vas hoy?”. La interrogación informal puede apoyarse en la entonación sin **か**.\n* **もう帰ったよ。** — “Ya se fue / ya regresó”. **よ** añade un valor discursivo de presentación o énfasis informativo.\n* **何してるの？** — “¿Qué estás haciendo?”. **してる** es una contracción conversacional de **している**.\n* **それ、ちょっと難しいかも。** — “Eso quizá sea un poco difícil”. **かも** es una reducción coloquial de **かもしれない**.\n\n#### Observación importante\n\nEl registro coloquial no es una sola variedad homogénea. Una conversación entre amistades, una charla familiar y un intercambio entre colegas pueden mostrar grados distintos de cortesía. Además, una forma coloquial del estándar y una forma dialectal pertenecen a dimensiones diferentes, aunque ambas puedan aparecer principalmente en la lengua hablada.\n\n**口語レジスター** se entiende mejor como una selección contextual de recursos: forma llana o cortés, elipsis, contracciones, partículas y vocabulario conversacional. Su naturalidad depende de quién habla con quién, del medio y de la situación, no de una oposición simple entre “correcto” e “incorrecto”.\n\n#### Entradas relacionadas\n\n[Entrada 1024: Registro académico — 学術レジスター](#entry-1024) · [Entrada 1026: Registro formal — フォーマル・レジスター](#entry-1026) · [Entrada 1023: Norma estándar contemporánea — 現代共通語の規範](#entry-1023) · [Entrada 1027: Variación legítima vs error — 正当な変異と誤用](#entry-1027)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c53896d088b61fecabc8927b8ee7e5a41cc150f14d27918085029c58d4c59ccc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:16:00.735Z"
+              },
+              {
+                "code": "MLS-V06-1026",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1026,
+                "title": "Registro formal",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Norma, estilo y elección avanzada C2 — 規範・文体・高度な選択 C2",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **registro formal** japonés comprende elecciones lingüísticas usadas cuando existe mayor distancia social, responsabilidad institucional o necesidad de mantener una imagen profesional. Puede incluir formas corteses, keigo, vocabulario menos coloquial y construcciones propias de la escritura formal, pero no constituye una única “forma formal” uniforme.\n\nLa elección depende de quién habla, a quién se dirige, en qué medio y con qué propósito. Una reunión empresarial, una ceremonia, una carta administrativa y un informe escrito pueden ser formales de maneras diferentes.\n\n#### Cómo funciona\n\nEn muchos contextos formales aparece **です・ます体**, que mantiene finales corteses como **説明します** o **重要です**. Cuando la relación social exige deferencia adicional, pueden intervenir **尊敬語** para elevar a otra persona y **謙譲語** para presentar humildemente acciones propias o del propio grupo.\n\nEl registro formal escrito también puede emplear **である体**, especialmente en informes, documentos técnicos o textos expositivos. Esta forma es formal por convención discursiva, pero no expresa por sí misma cortesía interpersonal del mismo modo que **です・ます体**. Por eso “formal” y “cortés” no son categorías idénticas.\n\nEl léxico y la organización del discurso también cuentan. Expresiones como **恐れ入りますが** “disculpe la molestia, pero…”, **ご確認ください** “por favor, confirme/revise” o conectores propios de textos institucionales contribuyen al registro junto con las terminaciones gramaticales.\n\n#### Ejemplos\n\n* **こちらをご確認ください。** — “Por favor, revise esto”. La construcción es cortés y adecuada en numerosos contextos profesionales.\n* **部長はただいま席を外しております。** — “El jefe de departamento no se encuentra en su puesto en este momento”. **おります** presenta humildemente la situación del propio grupo ante un interlocutor externo.\n* **本報告書では、調査結果を以下に示す。** — “En este informe se presentan a continuación los resultados de la investigación”. El estilo escrito formal no necesita terminar en **です・ます**.\n* **恐れ入りますが、もう一度お名前をお願いいたします。** — “Disculpe la molestia; ¿podría indicarme nuevamente su nombre?”. La formalidad se construye mediante varias elecciones coherentes.\n\n#### Observación importante\n\nUn registro formal no exige acumular honoríficos. El exceso de marcas puede resultar recargado o producir combinaciones normativamente discutidas. Tampoco una forma llana es automáticamente informal: **である体** usa terminaciones llanas y puede pertenecer a un registro académico o institucional muy formal.\n\n**フォーマル・レジスター** abarca, por tanto, una combinación de cortesía interpersonal, vocabulario, género textual y convenciones sociales. Su descripción requiere distinguir formalidad, keigo y estilo escrito en vez de tratarlos como una sola escala.\n\n#### Entradas relacionadas\n\n[Entrada 1025: Registro coloquial — 口語レジスター](#entry-1025) · [Entrada 1027: Variación legítima vs error — 正当な変異と誤用](#entry-1027) · [Entrada 1024: Registro académico — 学術レジスター](#entry-1024)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3b743e8d96768ea7c7a2dae6c3edb9cf7baadf6ea673b6cac00ca283292573c5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:16:52.527Z"
+              },
+              {
+                "code": "MLS-V07-0001",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 1,
+                "title": "Caracteres de variante tradicional",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 書寫與發音",
+                "chapter": "Caracteres tradicionales y principios de escritura — 繁體字與書寫原則",
+                "articleMarkdown": "#### En pocas palabras\n\nLos caracteres de variante tradicional (繁體異體字, *fántǐ yìtǐzì*) son distintas formas de escribir un mismo carácter o palabra. Aunque su apariencia visual sea diferente, su significado y su pronunciación permanecen idénticos.\n\n#### Cómo funciona\n\nEn el sistema de escritura de Taiwán, un mismo concepto puede representarse mediante caracteres con estructuras ligeramente distintas. Esto sucede debido a la evolución histórica de la escritura, a diferentes estilos de caligrafía o a la combinación de distintos componentes para representar el mismo sonido y sentido.\n\nAunque el Ministerio de Educación de Taiwán establece formas estándar para la enseñanza y los documentos oficiales, las variantes son muy comunes en la literatura, los nombres propios y el uso cotidiano. Es importante entender que, aunque veas una forma distinta a la que has estudiado, el concepto no ha cambiado.\n\n#### Ejemplos\n\n1. **臺 (tái) / 台 (tái)**: Ambas formas significan \"plataforma\" o \"terraza\". 臺 es la forma tradicional más completa, mientras que 台 es una variante muy frecuente y aceptada en Taiwán.\n2. **裡 (lǐ) / 裏 (lǐ)**: Ambas significan \"dentro\" o \"interior\". La diferencia radica únicamente en la estructura de sus componentes internos, pero su uso es intercambiable en muchos contextos.\n\n#### Observación importante\n\nNo confunda una variante con un carácter distinto. En una variante, el cambio es puramente ortográfico (de forma); el concepto y el sonido no varían. Si el significado o la pronunciación cambian, ya no estamos ante una variante, sino ante caracteres diferentes.\n\n#### Entradas relacionadas\n\n- [Caracteres pictográficos — 象形字](#entry-3)\n- [Caracteres ideográficos — 指事字](#entry-2)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T10:20:33.383Z"
+              },
+              {
+                "code": "MLS-V07-0002",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 2,
+                "title": "Caracteres ideográficos",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 書寫與發音",
+                "chapter": "Caracteres tradicionales y principios de escritura — 繁體字與書寫原則",
+                "articleMarkdown": "#### 指事字 (Caracteres indicativos)\n\n#### En pocas palabras\nLos **指事字** (*zhǐshìzì*) son caracteres que utilizan trazos o marcas abstractas para representar conceptos o ideas que no se pueden dibujar fácilmente como un objeto físico. En lugar de ser un \"dibujo\" de algo real, funcionan como símbolos que señalan una posición, una dirección o una idea lógica.\n\n#### Cómo funciona\nA diferencia de los caracteres que parecen dibujos de objetos, los caracteres indicativos emplean marcas (como un punto o una línea adicional) para añadir un significado conceptual a una estructura básica.\n\n#### Ejemplos\n* **上** (*shàng*): Arriba. Utiliza una marca sobre una línea para indicar la posición de \"encima\".\n* **下** (*xià*): Abajo. Utiliza una marca debajo de una línea para indicar la posición de \"debajo\".\n* **本** (*běn*): Raíz o base (también significa \"libro\"). Este carácter toma la forma del árbol (**木**, *mù*) y le añade una marca en la parte inferior para señalar específicamente la raíz o el origen.\n\n#### Observación importante\nEs común confundir los **指事字** con los **象形字** (*xiàngxíngzì* o pictogramas). La diferencia clave es la siguiente:\n1. El **pictograma** es una representación visual de un objeto (por ejemplo, un dibujo simplificado de un sol).\n2. El **carácter indicativo** es una abstracción que usa marcas para representar algo que no tiene una forma física constante, como \"arriba\" o \"el origen\".\n\n#### Entradas relacionadas\n* [象形字 (Caracteres pictográficos)](#entry-3)\n* [繁體字與簡體字 (Caracteres tradicionales vs. simplificados)](#entry-4)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T11:39:56.293Z"
+              },
+              {
+                "code": "MLS-V07-0003",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 3,
+                "title": "Caracteres pictográficos",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 書寫與發音",
+                "chapter": "Caracteres tradicionales y principios de escritura — 繁體字與書寫原則",
+                "articleMarkdown": "#### 象形字 (Caracteres pictográficos)\n\n#### En pocas palabras\nLos **象形字** (*xiàngxíngzì*) son caracteres que nacieron como dibujos simplificados de objetos reales. A diferencia del alfabeto que usamos en Guatemala, donde las letras representan sonidos, estos caracteres utilizan la forma visual para representar directamente el significado de una cosa, un animal o un elemento de la naturaleza.\n\n#### Cómo funciona\nOriginalmente, estos caracteres eran representaciones gráficas casi literales de la realidad. Con el paso de los siglos, esos dibujos se fueron estilizando, simplificando y estandarizando hasta convertirse en los trazos precisos que vemos hoy en el sistema de escritura tradicional. Aunque ya no parecen dibujos exactos, su estructura todavía conserva la esencia de la forma original.\n\n#### Ejemplos\n| Carácter | Pinyin | Significado | Descripción visual |\n| :--- | :--- | :--- | :--- |\n| **山** | *shān* | montaña | Representa los picos de una cordillera. |\n| **木** | *mù* | árbol / madera | Muestra un tronco central con ramas y raíces. |\n| **日** | *rì* | sol | Evolucionó de un círculo con un punto central. |\n| **人** | *rén* | persona | Representa la silueta de alguien caminando o de pie. |\n| **口** | *kǒu* | boca | Representa la forma de una abertura o boca abierta. |\n\n#### Observación importante\nEs un error común pensar que todos los caracteres chinos son dibujos. Los **象形字** son solo la base más antigua del sistema. La gran mayoría de los caracteres actuales son combinaciones de otros tipos de elementos (como componentes que indican el sonido o conceptos abstractos) y no se pueden entender simplemente \"viendo el dibujo\".\n\n#### Entradas relacionadas\n- [Caracteres ideográficos — 指事字](#entry-2)\n- [Caracteres tradicionales vs simplificados — 繁體字與簡體字](#entry-4)\n- [Caracteres de variante tradicional — 繁體異體字](#entry-1)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T11:40:18.021Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:09:54.733Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:09:54.733Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-jdp-sol-5c72/12-submit-claim.json"
+}

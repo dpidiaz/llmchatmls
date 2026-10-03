@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-sol56c-step12",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-4b9a2ee8-f19b-4e38-865b-cffa58784369",
+          "ticketId": "R44-CORPUS-1300",
+          "leaseExpiresAt": 1790997282966
+        },
+        "completedAt": "2026-10-03T03:09:43.093Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1300",
+          "sha256": "a25a131b60c66c1a6da9127560b4761c5ef45aff22cad64a59d29e03fc6163d5",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1300",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d55fa0ea-825e-41cc-895d-ba850cd80aec",
+                "ticketId": "R44-CORPUS-1300",
+                "code": "MLS-V08-0720",
+                "idempotencyKey": "R44-CORPUS-1300:MLS-V08-0720:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2046-sol56c",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a2120fb6eef8e0cbc6157922c899c4fa5c49ed06f7e7a0e6564ebf6e2f21d46c",
+                "sourceSha256": "e6779440c660e8d4c0d86c4bf60a2686d8eef3877be34f475e9bb50511af463a",
+                "committedMs": 1790996983484,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0d2e6bff057cb8d7211070890d927eac2e1dd8a6c9a93b5f8c2a5210cb0e4051",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1300",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "790d380c-f53f-4d7a-8568-7acb1ea492fa",
+                "ticketId": "R44-CORPUS-1300",
+                "code": "MLS-V08-0721",
+                "idempotencyKey": "R44-CORPUS-1300:MLS-V08-0721:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2046-sol56c",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f407c72e242616fd72f8ed3c566416bfb7f7e9ce264fff11a6636837183b4119",
+                "sourceSha256": "45f479d9ff2d0c83ce859a720db4e72fbdae51aa9f6e4cc3b36772cd51fdf08c",
+                "committedMs": 1790996983696,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f6ea49d58f7a9a2c67adb90f72ac8ba1040e1e81cf9fe9c8fca45fdf2dbc78b1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1300",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "04c841ff-efd9-460e-8d16-067fd45df2ea",
+                "ticketId": "R44-CORPUS-1300",
+                "code": "MLS-V08-0722",
+                "idempotencyKey": "R44-CORPUS-1300:MLS-V08-0722:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2046-sol56c",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ef756d7be154d6906d019bec25c9467e5b5ba24fa2bc8236ec6e9d703d6053ac",
+                "sourceSha256": "9f89262cf0314be04ead6317f74db1913437e6a84c847d7587103231ab952356",
+                "committedMs": 1790996983912,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ecb8738fc939ba01e9b423afd04c42f9d1b706755e2c72f21d2f5e6adae6990b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1300",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5b56e904-7935-48fa-8f23-c5d0aab3ef51",
+                "ticketId": "R44-CORPUS-1300",
+                "code": "MLS-V08-0723",
+                "idempotencyKey": "R44-CORPUS-1300:MLS-V08-0723:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2046-sol56c",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e8b0efac33a722905222b01d4ddf2a52d136da15c40b11f1845d99f20352bd8e",
+                "sourceSha256": "6aa2ea4c868af7870229139ad2b5103553145dd79ecd132a6ac27847f630c9c0",
+                "committedMs": 1790996984128,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9eaf39b63347457e53d088b245eec3ec210ff9f830495e417c0ceeea0789b95e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1300",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "58c34166-3371-4768-827e-563cfd49b2ec",
+                "ticketId": "R44-CORPUS-1300",
+                "code": "MLS-V08-0724",
+                "idempotencyKey": "R44-CORPUS-1300:MLS-V08-0724:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2046-sol56c",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8d5403d63ccb88de20af9edb970cacaa5cf2b72ca1e34bc8143b03a3926df6e2",
+                "sourceSha256": "3c0fa33f8154c5b38c411e5c95b4395b393716656ea941e1ae8a739fbe8cd462",
+                "committedMs": 1790996984341,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b2e076c57c3bea2a427f2254f0d3104c9abc4a9f86ecf8b4370e22283159ba20",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-4b9a2ee8-f19b-4e38-865b-cffa58784369",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "a25a131b60c66c1a6da9127560b4761c5ef45aff22cad64a59d29e03fc6163d5"
+          }
+        },
+        "completedAt": "2026-10-03T03:09:44.633Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-f423b032-dc58-4b8a-8301-82950cdbd4c8",
+          "workerId": "chat-r44-m10-20261002-2046-sol56c",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1301",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997284679,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V08-0725",
+                "path": "coreano/MLS-V08-0725.json",
+                "sha256": "0e904da0060dc29b56481579b862bd6751ecb02caf029e9eefa68dcde50e101a"
+              },
+              {
+                "code": "MLS-V08-0726",
+                "path": "coreano/MLS-V08-0726.json",
+                "sha256": "9d105a512145c8dda7533a5618412d89981d81b50a247379b3424f6abcb65e2e"
+              },
+              {
+                "code": "MLS-V08-0728",
+                "path": "coreano/MLS-V08-0728.json",
+                "sha256": "0b15a744fc68b1b2190c935c2ebb3609daa88de013a073af19dc956ec0c97ef7"
+              },
+              {
+                "code": "MLS-V08-0729",
+                "path": "coreano/MLS-V08-0729.json",
+                "sha256": "756c2d9532092bf6f434ec97d3090cb19067f25d6a8144ed6adbb22e1c15dd40"
+              },
+              {
+                "code": "MLS-V08-0730",
+                "path": "coreano/MLS-V08-0730.json",
+                "sha256": "6d43a279b003eecf0dfa64cce604a1ea1f65cdf79d3698439b281dc235c3b1d8"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1301",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V08-0725",
+                "path": "coreano/MLS-V08-0725.json",
+                "sha256": "0e904da0060dc29b56481579b862bd6751ecb02caf029e9eefa68dcde50e101a"
+              },
+              {
+                "code": "MLS-V08-0726",
+                "path": "coreano/MLS-V08-0726.json",
+                "sha256": "9d105a512145c8dda7533a5618412d89981d81b50a247379b3424f6abcb65e2e"
+              },
+              {
+                "code": "MLS-V08-0728",
+                "path": "coreano/MLS-V08-0728.json",
+                "sha256": "0b15a744fc68b1b2190c935c2ebb3609daa88de013a073af19dc956ec0c97ef7"
+              },
+              {
+                "code": "MLS-V08-0729",
+                "path": "coreano/MLS-V08-0729.json",
+                "sha256": "756c2d9532092bf6f434ec97d3090cb19067f25d6a8144ed6adbb22e1c15dd40"
+              },
+              {
+                "code": "MLS-V08-0730",
+                "path": "coreano/MLS-V08-0730.json",
+                "sha256": "6d43a279b003eecf0dfa64cce604a1ea1f65cdf79d3698439b281dc235c3b1d8"
+              }
+            ],
+            "remaining": [
+              "MLS-V08-0725",
+              "MLS-V08-0726",
+              "MLS-V08-0728",
+              "MLS-V08-0729",
+              "MLS-V08-0730"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2046-sol56c",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997284679,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2046-sol56c",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997284679,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V08-0725",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 725,
+                "title": "마다 cada",
+                "level": "B1",
+                "part": "Foco y partículas avanzadas — 초점과 고급 조사",
+                "chapter": "Partículas relacionales, rol y distribución — 관계 조사·자격·분배",
+                "articleMarkdown": "#### En pocas palabras\n\nLa partícula **마다** se utiliza para indicar que una acción, un estado o una característica se aplica a todos los elementos de un grupo o a cada unidad de un tiempo determinado. En español, su función equivale a decir \"cada\" o \"todos los/as\".\n\n#### Cómo funciona\n\n**마다** es una partícula que se añade directamente al sustantivo (sin dejar espacio) para distribuir una idea entre todos los miembros de una categoría o entre todos los intervalos de un ciclo. \n\nA diferencia de otras partículas, **마다** es muy sencilla de usar porque no cambia su forma: se añade igual si el sustantivo termina en vocal o en consonante (batchim). Puede aplicarse a:\n1. **Personas o seres:** para indicar que algo les sucede a todos individualmente.\n2. **Objetos o lugares:** para indicar que una característica es común a cada unidad.\n3. **Unidades de tiempo:** para indicar una repetición constante (cada lunes, cada mes, etc.).\n\n#### Ejemplos\n\n**1. 학생마다 책을 받았어요.**\n*Traducción:* Cada estudiante recibió un libro.\n*Explicación:* La partícula se une al sustantivo \"estudiante\" (학생) para señalar que la acción de recibir el libro se distribuye entre cada uno de los miembros del grupo de estudiantes.\n\n**2. 월요일마다 운동해요.**\n*Traducción:* Hago ejercicio todos los lunes (o cada lunes).\n*Explicación:* Aquí, **마다** se aplica a una unidad de tiempo (\"lunes\"). Indica que la acción de hacer ejercicio se repite en cada instancia de ese día.\n\n**3. 나라마다 문화가 달라요.**\n*Traducción:* Cada país tiene una cultura diferente.\n*Explicación:* La partícula indica que la diferencia cultural se manifiesta en cada uno de los países considerados, sin excepción.\n\n#### Observación importante\n\nEs fundamental no confundir **마다** con la partícula **씩**. Aunque ambas tienen un matiz distributivo, su enfoque es distinto:\n* **마다** se centra en la **identidad** de los elementos (cada uno de ellos).\n* **씩** se centra en la **cantidad o medida** que se reparte (por ejemplo, \"dos por cada uno\" o \"un poco por cada uno\").\n\nAdemás, no intente traducir **마다** como una preposición fija; su función es marcar el sustantivo al que se refiere para establecer esa relación de totalidad o repetición.\n\n#### Entradas relacionadas\n\n- [Entrada 724: 로/으로 rol/calidad](#entry-724)\n- [Entrada 726: 씩 cada uno/distributivo](#entry-726)\n- [Entrada 723: 로/으로 medio](#entry-723)\n- [Entrada 727: (으)로 dirección](#entry-727)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T23:28:53.374Z"
+              },
+              {
+                "code": "MLS-V08-0726",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 726,
+                "title": "씩 cada uno/distributivo",
+                "level": "B1",
+                "part": "Foco y partículas avanzadas — 초점과 고급 조사",
+                "chapter": "Partículas relacionales, rol y distribución — 관계 조사·자격·분배",
+                "articleMarkdown": "#### En pocas palabras\n\n**씩** expresa distribución por cantidades, porciones o intervalos. Suele corresponder a expresiones como **“cada uno”**, **“de dos en dos”**, **“por persona”** o **“a razón de…”**, según la construcción.\n\nEn **사과를 두 개씩 나눠 줬어요**, “repartí dos manzanas a cada uno”, **두 개씩** indica que la cantidad distribuida por unidad es de dos manzanas.\n\n#### Cómo funciona\n\n**씩** aparece después de una expresión cuantitativa o nominal y señala cuánto corresponde repetidamente a cada miembro, grupo, turno o intervalo. Son frecuentes formas como **한 명씩** “una persona cada vez”, **두 개씩** “dos por cada uno” y **조금씩** “poco a poco / en pequeñas cantidades”.\n\nLa unidad receptora puede aparecer explícita o recuperarse del contexto. El valor distributivo pertenece a la relación completa entre la cantidad marcada y el conjunto sobre el que se reparte.\n\n#### Ejemplos\n\n* **사과를 두 개씩 나눠 줬어요.** — Repartí dos manzanas a cada uno. La porción es de dos unidades.\n* **한 명씩 들어왔어요.** — Entraron de uno en uno. **한 명씩** distribuye el ingreso por persona.\n* **매일 한 시간씩 읽어요.** — Leo una hora cada día. La duración se distribuye por día.\n* **조금씩 좋아지고 있어요.** — Está mejorando poco a poco. La progresión se presenta en incrementos pequeños.\n\n#### Observación importante\n\n**씩** y **마다** son distributivos, pero no enfocan lo mismo. **마다** marca las unidades del conjunto, mientras que **씩** suele marcar la cantidad o porción repetida respecto de esas unidades.\n\nPueden coexistir: una expresión con **학생마다 한 권씩** identifica tanto “cada estudiante” como la cantidad “un ejemplar por estudiante”.\n\n#### Entradas relacionadas\n\n* **마다**: distribución por miembros o intervalos.\n* **로/으로 rol/calidad**: función o condición.\n* **(으)로 dirección**: orientación del movimiento.\n* **(으)로 instrumento**: herramienta empleada en una acción.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-4b08197ccefbb8c346a5aa96ba22bccc9fd0a228e8ce85d8c979a1bcc783af8f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:30:04.225Z"
+              },
+              {
+                "code": "MLS-V08-0728",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 728,
+                "title": "(으)로 instrumento",
+                "level": "B1",
+                "part": "Foco y partículas avanzadas — 초점과 고급 조사",
+                "chapter": "Partículas relacionales, rol y distribución — 관계 조사·자격·분배",
+                "articleMarkdown": "#### En pocas palabras\n\n**-(으)로** puede señalar el instrumento utilizado para realizar una acción. En español suele aparecer como **“con”** u otra expresión instrumental equivalente.\n\nEn **연필로 이름을 써요**, “escribo el nombre con lápiz”, **연필로** identifica el lápiz como herramienta de escritura.\n\n#### Cómo funciona\n\nSe usa **로** después de vocal y después de un sustantivo terminado en **ㄹ**; se usa **으로** después de otras consonantes. Así aparecen **연필로**, **칼로** y **붓으로**.\n\nEl valor instrumental surge cuando el sustantivo marcado designa una herramienta o recurso empleado directamente en la acción. El predicado y el tipo de entidad permiten distinguir este uso de otros valores de la misma partícula.\n\n#### Ejemplos\n\n* **연필로 이름을 써요.** — Escribo el nombre con lápiz. El lápiz funciona como instrumento.\n* **칼로 사과를 잘랐어요.** — Corté la manzana con un cuchillo. **칼로** marca la herramienta de corte.\n* **붓으로 그림을 그렸어요.** — Pinté el dibujo con un pincel. El pincel es el instrumento empleado.\n* **열쇠로 문을 열었어요.** — Abrí la puerta con una llave. **열쇠로** expresa el recurso material usado.\n\n#### Observación importante\n\nEl valor instrumental puede acercarse al de medio, pero la distinción resulta clara en muchos casos: una herramienta como **칼** se manipula directamente, mientras que un vehículo o canal suele analizarse como medio.\n\n**-(으)로** también posee valores de dirección y rol. Por ello, no equivale de manera fija a la preposición española “con”.\n\n#### Entradas relacionadas\n\n* **(으)로 dirección**: rumbo del movimiento.\n* **(으)로 medio**: vehículo o canal.\n* **(으)로 rol/calidad**: función o condición.\n* **씩**: distribución por cantidades.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9e566a53ee12b0c6432c4d98d2c050466395a49474e4ce353fd81a32a2488c6a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:31:53.964Z"
+              },
+              {
+                "code": "MLS-V08-0729",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 729,
+                "title": "(으)로 medio",
+                "level": "B1",
+                "part": "Foco y partículas avanzadas — 초점과 고급 조사",
+                "chapter": "Partículas relacionales, rol y distribución — 관계 조사·자격·분배",
+                "articleMarkdown": "#### En pocas palabras\n\n**-(으)로** puede marcar el **medio** por el que se realiza una acción, especialmente un medio de transporte, comunicación o transmisión. En español suele expresarse con **“en”**, **“por”**, **“mediante”** o una formulación equivalente.\n\nEn **이메일로 자료를 보냈어요**, “envié los materiales por correo electrónico”, **이메일로** presenta el correo electrónico como canal de envío.\n\n#### Cómo funciona\n\nSe usa **로** después de vocal y después de un sustantivo terminado en **ㄹ**; aparece **으로** después de otras consonantes. Son frecuentes formas como **버스로**, **전화로** y **인터넷으로**.\n\nEn este valor, el sustantivo marcado designa el vehículo, canal o procedimiento por el cual se desarrolla la acción. El contexto permite distinguirlo de una herramienta manipulada directamente, que corresponde al uso instrumental.\n\n#### Ejemplos\n\n* **이메일로 자료를 보냈어요.** — Envié los materiales por correo electrónico. El correo electrónico funciona como canal de transmisión.\n* **버스로 회사에 갔어요.** — Fui al trabajo en autobús. **버스로** marca el medio de transporte.\n* **전화로 예약했어요.** — Hice la reserva por teléfono. El teléfono funciona como medio de comunicación.\n* **인터넷으로 신청했어요.** — Presenté la solicitud por internet. **인터넷으로** indica el canal empleado.\n\n#### Observación importante\n\nLa frontera entre **medio** e **instrumento** puede variar según el análisis. Una herramienta como **칼** “cuchillo” representa claramente un instrumento; un autobús, un teléfono o internet suelen presentarse como medios o canales.\n\n**-(으)로** también expresa dirección y rol. Por ello, su traducción depende de la relación completa de la oración y no de una equivalencia española fija.\n\n#### Entradas relacionadas\n\n* **(으)로 instrumento**: herramienta empleada directamente.\n* **(으)로 dirección**: orientación de un movimiento.\n* **(으)로 rol/calidad**: función o condición atribuida.\n* **같이**: expresión de compañía o semejanza en otros contextos.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-15d1624114dacf16f59040c2fdedc393970fe7632a7aa274a5c89f0e33d0f3ef",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:33:09.048Z"
+              },
+              {
+                "code": "MLS-V08-0730",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 730,
+                "title": "(으)로 rol/calidad",
+                "level": "B1",
+                "part": "Foco y partículas avanzadas — 초점과 고급 조사",
+                "chapter": "Partículas relacionales, rol y distribución — 관계 조사·자격·분배",
+                "articleMarkdown": "#### En pocas palabras\n\n**-(으)로** puede indicar la **función, condición o papel** en que una persona o entidad participa en una situación. En español suele corresponder a **“como”**, **“en calidad de”** o una expresión equivalente.\n\nEn **통역사로 일하고 있어요**, “trabajo como intérprete”, **통역사로** presenta “intérprete” como la función desempeñada.\n\n#### Cómo funciona\n\nSe usa **로** después de vocal y después de un sustantivo terminado en **ㄹ**; aparece **으로** después de otras consonantes. En este valor, el sustantivo marcado identifica el papel, uso o condición atribuidos a alguien o algo.\n\nEl sentido se reconoce por su relación con predicados como trabajar, elegir, usar, nombrar o considerar. No se trata de dirección ni del instrumento con que se realiza una acción.\n\n#### Ejemplos\n\n* **통역사로 일하고 있어요.** — Trabajo como intérprete. **통역사로** expresa la profesión o función desempeñada.\n* **대표로 참석했어요.** — Asistí como representante. El sustantivo marcado indica el papel asumido.\n* **이 방을 사무실로 사용해요.** — Usamos esta habitación como oficina. **사무실로** marca la función asignada al espacio.\n* **그를 팀장으로 뽑았어요.** — Lo eligieron como jefe de equipo. **팀장으로** indica el cargo para el que fue seleccionado.\n\n#### Observación importante\n\nEste valor puede acercarse a ideas de clasificación, nombramiento o transformación funcional. La traducción española no contiene necesariamente “como”; depende del verbo y de la relación completa de la oración.\n\nEl mismo **-(으)로** también expresa medio, instrumento y dirección, por lo que su función debe identificarse a partir del contexto.\n\n#### Entradas relacionadas\n\n* **(으)로 medio**: vehículo, canal o procedimiento.\n* **(으)로 instrumento**: herramienta utilizada directamente.\n* **(으)로 dirección**: orientación del movimiento.\n* **같이**: compañía o semejanza en otros contextos.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-983ab1ff813bbda3545a1b096f0ca2276afc59de19acec7d9d4036f48961a1f1",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:34:04.427Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:09:45.426Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:09:45.426Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-sol56c/12-renew05-submit05-claim06.json"
+}

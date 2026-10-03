@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-93bf-ticket07-next08",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-d254a9b3-2e28-4978-99aa-b633d4eb7fe5",
+          "ticketId": "R44-CORPUS-0827",
+          "leaseExpiresAt": 1790997289021
+        },
+        "completedAt": "2026-10-03T03:09:49.153Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0827",
+          "sha256": "4fa35757ca3b3a45dbd8ebaf38ee7d241e34e7ffe655393b6064e7c761a7a291",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0827",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e42c6796-7cdd-4d71-96eb-2941993c6027",
+                "ticketId": "R44-CORPUS-0827",
+                "code": "MLS-V01-0168",
+                "idempotencyKey": "R44-CORPUS-0827:MLS-V01-0168:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "53214d1f3186eea605e6e4c5551efe770159056de0dac5fe5718fa1473f4c876",
+                "sourceSha256": "7861ac055e3e6569a306c60e97028778cecc32c0e4f446d4368c4313540fd94f",
+                "committedMs": 1790996989534,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c100bf05cbcc1630b343a4076281b4aa82ee9c0052869df4cbcd746af77883da",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0827",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "20332838-1228-4c7f-ab83-724641f47690",
+                "ticketId": "R44-CORPUS-0827",
+                "code": "MLS-V01-0169",
+                "idempotencyKey": "R44-CORPUS-0827:MLS-V01-0169:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "4b7dd146831483301795486326fc7fe961152ee54b9b6dd99d2c846ed35c9075",
+                "sourceSha256": "12821c00d0373b64946ca175742d01ee35872657ff3a3090b26d83e07683a60b",
+                "committedMs": 1790996989743,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b4153c8ebd9ec01532ff273afbc7991bc03bcbaf1567b8e642610e17d3b67c61",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0827",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "05eb68ee-3265-43e2-a6af-126f46f2e492",
+                "ticketId": "R44-CORPUS-0827",
+                "code": "MLS-V01-0170",
+                "idempotencyKey": "R44-CORPUS-0827:MLS-V01-0170:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "CORRECTED",
+                "payloadSha256": "b8dbbfafc296fc928649355f1fae1bffa64394b1448eb22d5da4112ce95a6fbc",
+                "sourceSha256": "3e09f865c0ec9674320dc3508aee70fe0152c13baca4bc6bd06906bd6386ed60",
+                "committedMs": 1790996989955,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8c45ec389b0ec7667c93f70719f16c1550b2075b3e34d3cb8c47c83f82778580",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0827",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "7b61690a-d301-43b3-aaea-cfbd9e2630a6",
+                "ticketId": "R44-CORPUS-0827",
+                "code": "MLS-V01-0171",
+                "idempotencyKey": "R44-CORPUS-0827:MLS-V01-0171:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2c4a1bc5776a836c6cb49694cb8dda9f75130bc9fcb1a361a3c7b1040e1329e1",
+                "sourceSha256": "f1a3cd4802b99a6821bd10d284b75e23f6392c795093faab51ef3fd668e84430",
+                "committedMs": 1790996990169,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d0fed234e8900d97efa18d74687ae73a01ba7ed1a51b5fe051c8bf2370c78672",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0827",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "88876540-f17d-4b1c-a50e-1053683b77da",
+                "ticketId": "R44-CORPUS-0827",
+                "code": "MLS-V01-0173",
+                "idempotencyKey": "R44-CORPUS-0827:MLS-V01-0173:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "40d8d3cc81b78e33b334ac0b335e515adc6e01e87fbb69557bca6b6a0dfa7725",
+                "sourceSha256": "1f8998c025a1894b020a54164d1a939ff46bc36b11358b1459c94b6ea9e40958",
+                "committedMs": 1790996990390,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "72c05b1eedb0f6a0f09858bc61a822817a85d692fcb17863bec5b929be132651",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-d254a9b3-2e28-4978-99aa-b633d4eb7fe5",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "4fa35757ca3b3a45dbd8ebaf38ee7d241e34e7ffe655393b6064e7c761a7a291"
+          }
+        },
+        "completedAt": "2026-10-03T03:09:50.682Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-767be9ad-ebce-4f2f-9a03-d6e918b3add9",
+          "workerId": "r44-m10-20261002-2045-sol-93bf",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0828",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997290727,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0174",
+                "path": "ingles/MLS-V01-0174.json",
+                "sha256": "921e5047c16c76556d56a75f3187e54b25a9a048c96199cc79bf61ff2da1f7e3"
+              },
+              {
+                "code": "MLS-V01-0175",
+                "path": "ingles/MLS-V01-0175.json",
+                "sha256": "d74d56317fc4aad4592a98f1aa6dd107ccb0653ba1fdddb42b1501f2f25f2f06"
+              },
+              {
+                "code": "MLS-V01-0177",
+                "path": "ingles/MLS-V01-0177.json",
+                "sha256": "f11b41e504e900d4bc27d7112644c08f8f82d2e3d953d67028c95ce5192f05fb"
+              },
+              {
+                "code": "MLS-V01-0178",
+                "path": "ingles/MLS-V01-0178.json",
+                "sha256": "308fae611c025fc1a3c82d5119f90d766bcf122b963b4736c75ef306d996f15d"
+              },
+              {
+                "code": "MLS-V01-0179",
+                "path": "ingles/MLS-V01-0179.json",
+                "sha256": "f980b47d501e58bb5f7aa8d555f8935f40b04a385238f4126511f3b675982592"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0828",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0174",
+                "path": "ingles/MLS-V01-0174.json",
+                "sha256": "921e5047c16c76556d56a75f3187e54b25a9a048c96199cc79bf61ff2da1f7e3"
+              },
+              {
+                "code": "MLS-V01-0175",
+                "path": "ingles/MLS-V01-0175.json",
+                "sha256": "d74d56317fc4aad4592a98f1aa6dd107ccb0653ba1fdddb42b1501f2f25f2f06"
+              },
+              {
+                "code": "MLS-V01-0177",
+                "path": "ingles/MLS-V01-0177.json",
+                "sha256": "f11b41e504e900d4bc27d7112644c08f8f82d2e3d953d67028c95ce5192f05fb"
+              },
+              {
+                "code": "MLS-V01-0178",
+                "path": "ingles/MLS-V01-0178.json",
+                "sha256": "308fae611c025fc1a3c82d5119f90d766bcf122b963b4736c75ef306d996f15d"
+              },
+              {
+                "code": "MLS-V01-0179",
+                "path": "ingles/MLS-V01-0179.json",
+                "sha256": "f980b47d501e58bb5f7aa8d555f8935f40b04a385238f4126511f3b675982592"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0174",
+              "MLS-V01-0175",
+              "MLS-V01-0177",
+              "MLS-V01-0178",
+              "MLS-V01-0179"
+            ],
+            "lease": {
+              "workerId": "r44-m10-20261002-2045-sol-93bf",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997290727,
+              "active": true
+            },
+            "workerId": "r44-m10-20261002-2045-sol-93bf",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997290727,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0174",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 174,
+                "title": "each other",
+                "level": "A2",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Posesivos, reflexivos y recíprocos — Possessives, reflexives, and reciprocals",
+                "articleMarkdown": "#### En pocas palabras\n**each other** es un pronombre recíproco. Se utiliza para indicar que dos o más personas realizan la misma acción de manera mutua; es decir, que la acción es intercambiable entre los participantes.\n\n#### Cómo funciona\nEn una oración, **each other** funciona como el objeto (la parte que recibe la acción del verbo o que sigue a una preposición). Se emplea para expresar que la acción fluye en ambos sentidos entre los sujetos, evitando tener que describir la acción dos veces.\n\nPor ejemplo, en lugar de decir que \"Juan saluda a María y María saluda a Juan\", se utiliza **each other** para indicar que el saludo es mutuo.\n\n#### Ejemplos\n* **They help each other.**\n  (Ellos se ayudan mutuamente / el uno al otro).\n* **We see each other at school.**\n  (Nos vemos en la escuela).\n* **They are talking to each other.**\n  (Ellos están hablando entre sí / el uno con el otro).\n\n#### Observación importante\nPara indicar posesión (que algo pertenece a la otra persona), se debe añadir un apóstrofo y una \"s\" (**each other's**). \n\n* **They held each other's hands.**\n  (Ellos se tomaron de las manos / sostuvieron las manos del otro).\n\nEs importante no confundirlo con los pronombres reflexivos (como *themselves*). Mientras que un reflexivo indica que la acción vuelve al mismo sujeto, **each other** requiere que la acción sea compartida o intercambiada entre personas distintas.\n\n#### Entradas relacionadas\n* Pronombres recíprocos\n* Pronombres de objeto",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:43:14.465Z"
+              },
+              {
+                "code": "MLS-V01-0175",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 175,
+                "title": "one another",
+                "level": "B1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Posesivos, reflexivos y recíprocos — Possessives, reflexives, and reciprocals",
+                "articleMarkdown": "#### En pocas palabras\n\n**one another** es un pronombre recíproco. Se utiliza para indicar que dos o más personas o cosas realizan una acción de manera mutua; es decir, que la acción que realiza un sujeto recae sobre los demás participantes y viceversa.\n\n#### Cómo funciona\n\nUn pronombre recíproco es una palabra que expresa que una acción es compartida o intercambiada entre los miembros de un grupo. Para usar **one another**, es necesario que en la oración existan al menos dos sujetos que interactúen entre sí.\n\nGramaticalmente, **one another** suele cumplir la función de objeto (ya sea directo o indirecto) dentro de la oración, recibiendo la acción del verbo.\n\n#### Ejemplos\n\n* **The students helped one another with the project.**\n  (Los estudiantes se ayudaron unos a otros con el proyecto).\n  *En este caso, la acción de \"ayudar\" es mutua: el estudiante A ayuda al B, y el B ayuda al A.*\n\n* **They looked at one another in surprise.**\n  (Se miraron unos a otros con sorpresa).\n  *La acción de \"mirar\" ocurre de forma recíproca entre los participantes.*\n\n* **We should support one another during difficult times.**\n  (Deberíamos apoyarnos unos a otros durante los tiempos difíciles).\n  *Indica una relación de apoyo mutuo entre los miembros del grupo.*\n\n#### Observación importante\n\nEn el inglés contemporáneo, **one another** es prácticamente intercambiable con **each other**. Sin embargo, existen dos matices que conviene conocer:\n\n1. **Distinción tradicional:** Antiguamente, la gramática normativa dictaba que *each other* debía usarse para dos personas y *one another* para tres o más. En la práctica actual, esta regla ha perdido casi toda su fuerza y la mayoría de los hablantes los usan indistintamente para cualquier número de participantes.\n2. **Registro:** **One another** suele percibirse como ligeramente más formal que *each other*, siendo más común en la escritura académica o en discursos oficiales.\n\n#### Entradas relacionadas\n\n* [each other](#entry-174)\n* [Genitivo recíproco](#entry-176)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:43:41.615Z"
+              },
+              {
+                "code": "MLS-V01-0177",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 177,
+                "title": "someone/somebody/something",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres indefinidos y sustitución nominal — Indefinite pronouns and nominal substitution",
+                "articleMarkdown": "#### En pocas palabras\n\nSe utilizan para referirse a personas o cosas de manera imprecisa, cuando no sabemos exactamente quién o qué es, o cuando no es necesario identificarlo con precisión.\n\n#### Cómo funciona\n\nEstos pronombres se eligen según lo que se quiera mencionar:\n\n*   **someone / somebody**: se refieren a personas (alguien).\n*   **something**: se refiere a objetos, ideas o conceptos (algo).\n\n**Regla de concordancia:**\nAunque en español a veces el concepto de \"alguien\" pueda parecer vago, en inglés estos pronombres siempre funcionan gramaticalmente como **singulares**. Esto significa que el verbo que los acompaña debe estar en su forma singular (por ejemplo, se usa *is* y no *are*).\n\n#### Ejemplos\n\n*   *Someone is at the door.* (Alguien está en la puerta).\n    *   *Someone* es el sujeto y requiere el verbo *is* (singular).\n*   *I have something for you.* (Tengo algo para ti).\n    *   *Something* sustituye a un objeto que no se nombra específicamente.\n*   *Somebody left an umbrella here.* (Alguien dejó un paraguas aquí).\n    *   *Somebody* y *someone* son intercambiables; su significado es el mismo.\n\n#### Observación importante\n\nEstos pronombres se utilizan principalmente en **oraciones afirmativas**. Cuando queremos hablar de alguien o algo en una oración negativa o en una pregunta, lo más común es cambiar a las formas con *any-* (*anyone/anybody/anything*).\n\n#### Entradas relacionadas\n\n*   [anyone/anybody/anything](#entry-178)\n*   [no one/nobody/nothing](#entry-179)\n*   [everyone/everybody/everything](#entry-180)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:44:29.805Z"
+              },
+              {
+                "code": "MLS-V01-0178",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 178,
+                "title": "anyone/anybody/anything",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres indefinidos y sustitución nominal — Indefinite pronouns and nominal substitution",
+                "articleMarkdown": "#### En pocas palabras\n\n`anyone`, `anybody` y `anything` son pronombres que se utilizan para referirse a personas o cosas de manera indefinida. Se emplean cuando no sabemos con precisión quién o qué es el sujeto, o cuando su identidad exacta no es relevante para la comunicación.\n\n#### Cómo funciona\n\nLa elección del pronombre depende de si nos referimos a personas o a objetos, y el significado varía ligeramente según el tipo de oración:\n\n1.  **Referencia a personas:** Se usan `anyone` o `anybody` (ambos son intercambiables).\n2.  **Referencia a cosas:** Se usa `anything`.\n\n**Contextos de uso:**\n\n*   **Preguntas:** Para preguntar si existe alguien o algo.\n*   **Oraciones negativas:** Para indicar la ausencia de personas o cosas (siempre acompañados de un auxiliar negativo como *don't*, *can't* o *isn't*).\n*   **Oraciones afirmativas:** En este caso, el significado cambia a \"cualquiera\" o \"cualquier cosa\", indicando que la identidad no importa.\n\n#### Ejemplos\n\n*   **Is anybody there?** — ¿Hay alguien ahí?\n    *(Uso en pregunta para referirse a una persona no identificada).*\n*   **I don't have anything to say.** — No tengo nada que decir.\n    *(Uso en negación para referirse a una cosa o idea).*\n*   **Anyone can learn English.** — Cualquiera puede aprender inglés.\n    *(Uso en afirmativa donde el pronombre significa \"no importa quién\").*\n\n#### Observación importante\n\nAunque estos pronombres puedan referirse a un grupo de personas o cosas en un sentido general, gramaticalmente siempre se tratan como **singulares**. Por lo tanto, el verbo que los acompaña debe estar conjugado en tercera persona del singular (por ejemplo: *anyone **is***, no *anyone are*).\n\n#### Entradas relacionadas\n\n*   [someone/somebody/something](#entry-177)\n*   [no one/nobody/nothing](#entry-179)\n*   [everyone/everybody/everything](#entry-180)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:45:01.522Z"
+              },
+              {
+                "code": "MLS-V01-0179",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 179,
+                "title": "no one/nobody/nothing",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres indefinidos y sustitución nominal — Indefinite pronouns and nominal substitution",
+                "articleMarkdown": "#### En pocas palabras\n*No one*, *nobody* y *nothing* son pronombres indefinidos que se utilizan para referirse a la ausencia total de personas o de cosas. En español, equivalen a \"nadie\" o \"nada\".\n\n#### Cómo funciona\nEn el inglés estándar, estos pronombres ya contienen una carga negativa. Por esta razón, el verbo que los acompaña debe utilizarse en su **forma afirmativa**.\n\nEs fundamental distinguir este uso de la estructura del español: mientras que en español es gramaticalmente correcto y común usar una doble negación (por ejemplo: \"**No** vi a **nadie**\"), en inglés la negación no debe repetirse en el verbo si ya se ha empleado uno de estos pronombres.\n\n#### Ejemplos\n* **Nobody called me.** (Nadie me llamó).\n  * *Nobody* (pronombre para personas) + *called* (verbo en forma afirmativa).\n* **No one is here.** (Nadie está aquí).\n  * *No one* y *nobody* son sinónimos para referirse a personas.\n* **Nothing happened.** (No pasó nada).\n  * *Nothing* se utiliza exclusivamente para referirse a objetos, ideas o situaciones (cosas).\n\n#### Observación importante\nUn error frecuente es intentar aplicar la lógica de la doble negación del español al inglés. Decir \"*I didn't see nobody*\" es incorrecto en el inglés estándar. Para expresar esa idea, debe elegir una de estas dos estructuras:\n1. Pronombre negativo + verbo afirmativo: ***I saw nobody***.\n2. Verbo negativo + pronombre *any*: ***I didn't see anybody***.\n\n#### Entradas relacionadas\n* [Entrada 177: someone/somebody/something](#entry-177)\n* [Entrada 178: anyone/anybody/anything](#entry-178)\n* [Entrada 180: everyone/everybody/everything](#entry-180)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:45:35.639Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:09:51.468Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:09:51.468Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-m10-20261002-2045-sol-93bf/09-submit-claim08.json"
+}
