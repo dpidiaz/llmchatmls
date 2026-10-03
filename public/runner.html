@@ -464,7 +464,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
   tabCorpus.onclick=()=>show('corpus'); tabUnified.onclick=()=>show('unified');
   function write(msg){log.textContent+='\\n['+new Date().toLocaleTimeString()+'] '+msg;log.scrollTop=log.scrollHeight}
   async function unifiedApi(path,body={}){
-    const r=await fetch('/api/unified-runner/'+path,{
+    const r=await fetch('/api/unified-runner/browser/'+path,{
       method:'POST',
       headers:{'content-type':'application/json'},
       credentials:'same-origin',
