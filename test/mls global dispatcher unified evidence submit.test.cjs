@@ -86,3 +86,12 @@ test('Unified Evidence submit supports idempotent preflight replay without a sec
   assert.match(workflow,/NO_CHANGE:/);
   assert.match(workflow,/if \[ "\$NO_CHANGE" != "true" \]/);
 });
+
+
+test('Unified inline handler binds synthetic events only to the worker subprocess',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.checkpoint\.outputs\.event_path \}\}/);
+  assert.match(workflow,/GITHUB_EVENT_PATH="\$SYNTHETIC_EVENT_PATH" node 'scripts\/MLS global dispatcher worker\.cjs'/);
+  assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.finish\.outputs\.event_path \}\}/);
+  assert.doesNotMatch(workflow,/\n\s+GITHUB_EVENT_PATH: \$\{\{ steps\.(?:checkpoint|finish)\.outputs\.event_path \}\}/);
+});
