@@ -1,0 +1,54 @@
+{
+  "batchId": "r44-20261002-2129-sol-417010-renew-checkpoint-01",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-937ce36c-2239-42af-b5b7-d5ad073991c8"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-937ce36c-2239-42af-b5b7-d5ad073991c8",
+        "ticketId": "R43-EMERGENCY-0011",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-20261002-2129-sol-417010-MLS-V03-0064-audit-v1",
+        "entry": {
+          "code": "MLS-V03-0064",
+          "outcome": "PASS_NO_CHANGE",
+          "claims": [
+            "En italiano, las interjecciones son formas invariabili que suelen carecer de vínculo sintáctico con el resto de la oración y pueden expresar estados, reacciones, llamadas, órdenes o solicitudes.",
+            "Interjecciones propias como ah, oh, ehi y uffa pueden aparecer autónomamente; su interpretación depende de la entonación y del contexto.",
+            "Palabras de otras categorías como bravo, forza y basta pueden emplearse como interjecciones secundarias o impropias."
+          ],
+          "sources": [
+            {
+              "type": "institutional",
+              "tier": "A",
+              "publisher": "Istituto della Enciclopedia Italiana Treccani",
+              "title": "Interiezioni — La grammatica italiana",
+              "url": "https://www.treccani.it/enciclopedia/interiezioni_%28La-grammatica-italiana%29/"
+            },
+            {
+              "type": "institutional",
+              "tier": "A",
+              "publisher": "Accademia della Crusca",
+              "title": "L'interiezione",
+              "url": "https://accademiadellacrusca.it/it/consulenza/linteriezione/113"
+            },
+            {
+              "type": "institutional",
+              "tier": "A",
+              "publisher": "Istituto della Enciclopedia Italiana Treccani",
+              "title": "Interiezioni secondarie — La grammatica italiana",
+              "url": "https://www.treccani.it/enciclopedia/interiezioni-secondarie_%28La-grammatica-italiana%29/"
+            }
+          ],
+          "notes": "R44 audit: la entrada define correctamente la interiezione, su independencia sintáctica habitual, la dependencia de entonación/contexto y la distinción entre interjecciones propias e impropias. Los ejemplos ah, oh, uffa, ehi, bravo, forza y basta son compatibles con Treccani y Accademia della Crusca. PASS_NO_CHANGE. Validación canónica R33 pendiente."
+        }
+      }
+    }
+  ]
+}
