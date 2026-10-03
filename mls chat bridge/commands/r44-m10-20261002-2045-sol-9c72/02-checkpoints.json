@@ -1,0 +1,185 @@
+{
+  "batchId": "r44-m10-20261002-2045-sol-9c72-ticket01-checkpoints",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-22a43021-405d-47d0-8112-e5242f3d4109"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-22a43021-405d-47d0-8112-e5242f3d4109",
+        "ticketId": "R43-EMERGENCY-0455",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-m10-20261002-2045-sol-9c72-R43-EMERGENCY-0455-MLS-V05-0758-v1",
+        "entry": {
+          "code": "MLS-V05-0758",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Partizipialphrase. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/terminologie/639"
+            },
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Partizipien. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/sgt/2240"
+            }
+          ],
+          "claims": [
+            "German attributive Partizip I and Partizip II constructions can be expanded before a noun while retaining verbal valency relations and adverbials.",
+            "A corresponding relative clause can make the underlying verbal dependencies explicit."
+          ],
+          "evidence": [
+            "IDS grammis defines participial phrases as adjectival phrases headed by Partizip I/II and notes that their expansions reflect the valency properties of the underlying verb.",
+            "The article's examples and parsing match that structure."
+          ],
+          "notes": "Audit passed. No factual correction required."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-22a43021-405d-47d0-8112-e5242f3d4109",
+        "ticketId": "R43-EMERGENCY-0455",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-m10-20261002-2045-sol-9c72-R43-EMERGENCY-0455-MLS-V05-0760-v1",
+        "entry": {
+          "code": "MLS-V05-0760",
+          "outcome": "CORRECTED",
+          "sources": [
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Partizipialphrase. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/terminologie/639"
+            },
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Partizipien. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/sgt/2240"
+            }
+          ],
+          "claims": [
+            "Attributive participles can retain prepositional complements licensed by the underlying verbal or adjectival construction.",
+            "The example with abhängen requires the Partizip I form abhängend, yielding 'die von dieser Entscheidung abhängenden Folgen'; 'abhängigen' is adjectival and was misleading in a participle-focused example."
+          ],
+          "evidence": [
+            "IDS grammis states that extensions of participial attributes reflect the valency of the underlying verb.",
+            "The correction changes only the problematic form/example and explicitly identifies abhängend as Partizip I."
+          ],
+          "notes": "Corrected a category mismatch: 'abhängigen Folgen' was an adjective example; replaced with participial 'abhängenden Folgen' and clarified the explanation.",
+          "correctedContent": {
+            "articleMarkdown": "#### En pocas palabras\n\nUn participio atributivo puede conservar un **complemento preposicional** que pertenece a la construcción del verbo base. En **der an moderner Kunst interessierte Student**, el grupo **an moderner Kunst** completa la relación expresada por **interessiert**.\n\nLa preposición y el caso del complemento no aparecen porque el participio sea atributivo, sino porque forman parte de la estructura léxica o sintáctica de la construcción verbal correspondiente.\n\n#### Cómo funciona\n\nMuchos verbos alemanes se combinan regularmente con una preposición determinada: **warten auf + Akkusativ**, **denken an + Akkusativ**, **teilnehmen an + Dativ**, **abhängen von + Dativ**. Cuando estos verbos aparecen como participios atributivos, esa regencia puede conservarse.\n\nAsí, **der auf eine Antwort wartende Kunde** contiene **auf eine Antwort**, complemento de **warten auf**. La forma atributiva **wartende** recibe una terminación adjetival, pero el complemento mantiene la preposición **auf** y el acusativo exigido por la construcción.\n\nCon Partizip II ocurre algo comparable: **die an dem Projekt beteiligten Personen** conserva **an + Dativ** en la construcción **an etwas beteiligt sein**. La relación preposicional queda integrada delante del participio y del sustantivo núcleo.\n\nConviene distinguir estos complementos de los adverbiales más libres. **Gestern** en **die gestern eröffnete Ausstellung** añade una circunstancia temporal; **auf eine Antwort** en **der auf eine Antwort wartende Kunde** está más estrechamente ligado al verbo **warten**.\n\nLa reformulación como relativa permite comprobar la estructura: **der Kunde, der auf eine Antwort wartet**; **die Personen, die an dem Projekt beteiligt sind**. La preposición se conserva porque pertenece a la misma relación verbal.\n\n#### Ejemplos\n\n* **der an moderner Kunst interessierte Student** — **an moderner Kunst** complementa a **interessiert**.\n* **der auf eine Antwort wartende Kunde** — **auf + Akkusativ** se conserva desde **warten auf**.\n* **die an dem Projekt beteiligten Personen** — complemento preposicional con dativo.\n* **die von dieser Entscheidung abhängenden Folgen** — el Partizip I **abhängend** conserva **von + Dativ** de **abhängen von**.\n* **der Kunde, der auf eine Antwort wartet** — relativa equivalente.\n\n#### Observación importante\n\nNo debe analizarse la preposición como una simple palabra añadida delante del participio. La relación pertenece a la construcción verbal o adjetival de origen y rige un complemento completo con el caso correspondiente.\n\nTampoco todo grupo preposicional es necesariamente un complemento seleccionado: algunos son adverbiales de lugar, tiempo, causa o modo. La diferencia depende de la relación con el verbo base.\n\n#### Entradas relacionadas\n\n[Entrada 759: Participios con adverbiales](#entry-759) · [Entrada 761: Participios con objeto acusativo](#entry-761) · [Entrada 758: Participio expandido antes del sustantivo](#entry-758)"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-22a43021-405d-47d0-8112-e5242f3d4109",
+        "ticketId": "R43-EMERGENCY-0455",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-m10-20261002-2045-sol-9c72-R43-EMERGENCY-0455-MLS-V05-0761-v1",
+        "entry": {
+          "code": "MLS-V05-0761",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Partizipialphrase. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/terminologie/639"
+            },
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Partizipien. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/sgt/2240"
+            }
+          ],
+          "claims": [
+            "Partizip I used attributively can retain an accusative object selected by its underlying transitive verb.",
+            "The accusative case is licensed by the verb, not by the linear position before the participle."
+          ],
+          "evidence": [
+            "IDS grammis describes extensions of attributive Partizip I as preserving complements licensed by the corresponding verbal complex.",
+            "Examples such as 'die einen historischen Roman lesende Studentin' conform to this analysis."
+          ],
+          "notes": "Audit passed. No factual correction required."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-22a43021-405d-47d0-8112-e5242f3d4109",
+        "ticketId": "R43-EMERGENCY-0455",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-m10-20261002-2045-sol-9c72-R43-EMERGENCY-0455-MLS-V05-0762-v1",
+        "entry": {
+          "code": "MLS-V05-0762",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Bildung des Partizips II. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/kontrastive-grammatik/3769"
+            },
+            {
+              "type": "dictionary",
+              "apa": "Dudenredaktion. (n.d.). be-. Duden.",
+              "url": "https://www.duden.de/rechtschreibung/be_"
+            }
+          ],
+          "claims": [
+            "The German prefix be- is normally unstressed/inseparable and verbs with be- form Partizip II without an added ge-.",
+            "be- often affects valency/transitivity, but this is not a universal compositional rule and many formations are lexicalized."
+          ],
+          "evidence": [
+            "IDS grammis lists be- among prefixes that exclude ge- in Partizip II formation.",
+            "Duden documents be- as a verbal prefix with transitivizing/valency effects in many formations."
+          ],
+          "notes": "Audit passed. The article appropriately avoids treating transitivization as an absolute rule."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-22a43021-405d-47d0-8112-e5242f3d4109",
+        "ticketId": "R43-EMERGENCY-0455",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-m10-20261002-2045-sol-9c72-R43-EMERGENCY-0455-MLS-V05-0763-v1",
+        "entry": {
+          "code": "MLS-V05-0763",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "type": "institutional-grammar",
+              "apa": "Leibniz-Institut für Deutsche Sprache. (n.d.). Bildung des Partizips II. Grammatisches Informationssystem grammis.",
+              "url": "https://grammis.ids-mannheim.de/kontrastive-grammatik/3769"
+            },
+            {
+              "type": "dictionary",
+              "apa": "Dudenredaktion. (n.d.). ent-. Duden.",
+              "url": "https://www.duden.de/rechtschreibung/ent__befreien_von"
+            }
+          ],
+          "claims": [
+            "The German prefix ent- is normally inseparable and blocks added ge- in Partizip II.",
+            "ent- has recurring meanings such as removal/separation or onset/process, but many formations are lexicalized and cannot be decoded by one fixed gloss."
+          ],
+          "evidence": [
+            "IDS grammis lists ent- among prefixes that exclude ge- in Partizip II formation.",
+            "Duden records recurring semantic functions for ent- and lexicalized verbs consistent with the article's examples."
+          ],
+          "notes": "Audit passed. No factual correction required."
+        }
+      }
+    }
+  ]
+}
