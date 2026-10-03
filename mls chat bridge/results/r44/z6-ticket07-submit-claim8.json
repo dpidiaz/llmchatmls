@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-z6-ticket07-submit-claim8",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-25d22701-5b46-41fd-bd38-924a22f9048a",
+          "ticketId": "R43-EMERGENCY-0796",
+          "leaseExpiresAt": 1790997757718
+        },
+        "completedAt": "2026-10-03T03:17:37.849Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0796",
+          "sha256": "546065c29354c598a3bc099df2665a4266f6f2e381a695291e2239e02c699d3c",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0796",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "42f1bd24-9259-4668-9bc1-bab0f6fa1a04",
+                "ticketId": "R43-EMERGENCY-0796",
+                "code": "MLS-V07-0671",
+                "idempotencyKey": "R43-EMERGENCY-0796:MLS-V07-0671:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ae1719d850bdd7f35224e93ecf1c5b735191915e46acfb6c758ebc97c8cb72bf",
+                "sourceSha256": "0595276c374720b6cebf85951f04100fdea7e96e3b2d1d69c2872577965ec7e5",
+                "committedMs": 1790997458226,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8ea0f2e6b118ec8ecce2f473bec2c427cb396d39e9a464b0ea69abfb887e51c0",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0796",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "7bb2acd2-45d6-4b01-9c2f-4a72c53f9e66",
+                "ticketId": "R43-EMERGENCY-0796",
+                "code": "MLS-V07-0672",
+                "idempotencyKey": "R43-EMERGENCY-0796:MLS-V07-0672:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "06e125c63210697e7554d86f33ea6ac84a7dea2b144f508453388e06480192c9",
+                "sourceSha256": "983b62a8c0722f15f5858735882e45131c1309d57e37e757c697b81461b6588a",
+                "committedMs": 1790997458445,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "af11ab88e53e8b2904ab18f33ff40ebff0a6abdc7c17415f0654d8666579f9c7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0796",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "591a7530-e588-4ecc-bdbb-7dd691854922",
+                "ticketId": "R43-EMERGENCY-0796",
+                "code": "MLS-V07-0673",
+                "idempotencyKey": "R43-EMERGENCY-0796:MLS-V07-0673:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0380a8e05d581e71af3d3cd04cdf3a444ed2300033cd68b379886137b6d6b73f",
+                "sourceSha256": "c0a628dd7adb5b7702aeb43da10ee8595442f98f648867ba99eb900fb3167724",
+                "committedMs": 1790997458662,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "2d5b80c8b905e01acfab6b712a80f13974c7c5fead7f051b95829b210bfe145f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0796",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6877e13f-187d-49db-95a1-f3150264b39f",
+                "ticketId": "R43-EMERGENCY-0796",
+                "code": "MLS-V07-0674",
+                "idempotencyKey": "R43-EMERGENCY-0796:MLS-V07-0674:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "28be7154ca3a512d7d4e91df0163fd09a36b60478e347c6cdeb895c98e936c09",
+                "sourceSha256": "7bb073f6216974034fdbec9a0b00df4a0d2fbef740024a2cdd70cf3aa117da5a",
+                "committedMs": 1790997458874,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8da1bd004ac62f99ec33670094002c86bb2d1a0f3b12f2414a214736d0b17dfc",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0796",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "71dd507c-4df3-48ca-9847-b11ec3c24c60",
+                "ticketId": "R43-EMERGENCY-0796",
+                "code": "MLS-V07-0676",
+                "idempotencyKey": "R43-EMERGENCY-0796:MLS-V07-0676:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "eca79cfec9cbc2f891632695ff993a615e7485553adb92ecda4d8c8e6d1a9ec9",
+                "sourceSha256": "1b3af942bc1eb70fa8cbe695c14d0f7a88a731a788ad266b8e2b4ed4da432ed8",
+                "committedMs": 1790997459086,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "a9c293242dbda6d0f1e56a41cdb6df3151155dadd3fc2b5f49d96c5bd3477c3a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-25d22701-5b46-41fd-bd38-924a22f9048a",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "546065c29354c598a3bc099df2665a4266f6f2e381a695291e2239e02c699d3c"
+          }
+        },
+        "completedAt": "2026-10-03T03:17:39.377Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-8423c977-7d4e-4a65-829e-01ec78eb99bb",
+          "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0799",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997759416,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0689",
+                "path": "chino-taiwan/MLS-V07-0689.json",
+                "sha256": "9369e4f3a47c33727e961006e2e6960b18fbb5da24bb0f54b21ab8bd5c755a72"
+              },
+              {
+                "code": "MLS-V07-0690",
+                "path": "chino-taiwan/MLS-V07-0690.json",
+                "sha256": "8dcebbaaaae377f7ab2a786621e03c50fea75fcbf01ebd528beaaae66baf512f"
+              },
+              {
+                "code": "MLS-V07-0691",
+                "path": "chino-taiwan/MLS-V07-0691.json",
+                "sha256": "61e7518b6c6b5d9dbb22516c8c2cc2a1754ef2afc9f134817972c6b0cc6467e7"
+              },
+              {
+                "code": "MLS-V07-0692",
+                "path": "chino-taiwan/MLS-V07-0692.json",
+                "sha256": "f4ad7d2c49dedc787ec2e3413e1512d3d62039d9aad3c4f0ad440e7b1781c4a3"
+              },
+              {
+                "code": "MLS-V07-0693",
+                "path": "chino-taiwan/MLS-V07-0693.json",
+                "sha256": "ab18bb3030a348b2f1acf093bd1b118627f5b0c4335ef717e45857679d82f2cf"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0799",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0689",
+                "path": "chino-taiwan/MLS-V07-0689.json",
+                "sha256": "9369e4f3a47c33727e961006e2e6960b18fbb5da24bb0f54b21ab8bd5c755a72"
+              },
+              {
+                "code": "MLS-V07-0690",
+                "path": "chino-taiwan/MLS-V07-0690.json",
+                "sha256": "8dcebbaaaae377f7ab2a786621e03c50fea75fcbf01ebd528beaaae66baf512f"
+              },
+              {
+                "code": "MLS-V07-0691",
+                "path": "chino-taiwan/MLS-V07-0691.json",
+                "sha256": "61e7518b6c6b5d9dbb22516c8c2cc2a1754ef2afc9f134817972c6b0cc6467e7"
+              },
+              {
+                "code": "MLS-V07-0692",
+                "path": "chino-taiwan/MLS-V07-0692.json",
+                "sha256": "f4ad7d2c49dedc787ec2e3413e1512d3d62039d9aad3c4f0ad440e7b1781c4a3"
+              },
+              {
+                "code": "MLS-V07-0693",
+                "path": "chino-taiwan/MLS-V07-0693.json",
+                "sha256": "ab18bb3030a348b2f1acf093bd1b118627f5b0c4335ef717e45857679d82f2cf"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0689",
+              "MLS-V07-0690",
+              "MLS-V07-0691",
+              "MLS-V07-0692",
+              "MLS-V07-0693"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997759416,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997759416,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0689",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 689,
+                "title": "然而",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**然而 (rán'ér)** es un conector de contraste característico de la escritura formal. Introduce una idea que se opone, limita o corrige una expectativa creada por lo anterior. Según el contexto, puede traducirse como «sin embargo», «no obstante» o «pero».\n\nEn **然而，目前的證據仍不足。** — «Sin embargo, la evidencia disponible todavía es insuficiente»—, **然而** señala que la nueva afirmación contrasta con una idea previa que podía llevar a esperar una conclusión más favorable.\n\n#### Cómo funciona\n\n**然而** suele aparecer al comienzo de una oración o cláusula. Conecta dos segmentos cuyos contenidos presentan una tensión lógica o argumentativa:\n\n- **方法簡單，然而效果有限。** — El método es sencillo; sin embargo, sus efectos son limitados.\n- **多數受訪者表示支持，然而實際參與率並不高。** — La mayoría de los entrevistados expresó apoyo; sin embargo, la participación real no fue alta.\n\nEl contraste no tiene que ser una contradicción absoluta. Basta con que la segunda parte introduzca una reserva, excepción o resultado inesperado frente a la primera.\n\n#### Registro y estilo\n\nEn conversación cotidiana es muy frecuente **但是** y también **可是**, según el contexto. **然而** suele sonar más expositivo, ensayístico o académico. Puede aparecer en habla preparada, pero es especialmente natural en textos escritos.\n\nSu función es distinta de **此外**, que añade información, y de **因此**, que introduce una consecuencia. Elegir el conector adecuado depende de la relación real entre las ideas.\n\n#### Ejemplos\n\n- **研究樣本數有所增加，然而代表性仍受到限制。** — El tamaño de la muestra aumentó; sin embargo, su representatividad sigue siendo limitada.\n- **該政策短期內降低了成本，然而長期效果尚不明確。** — La política redujo los costos a corto plazo; no obstante, sus efectos a largo plazo todavía no están claros.\n- **系統已完成更新，然而部分舊版裝置仍無法使用新功能。** — El sistema ya fue actualizado; sin embargo, algunos dispositivos antiguos todavía no pueden utilizar las nuevas funciones.\n\nEn todos los casos, la segunda parte limita o contrasta con la primera.\n\n#### Observación importante\n\nNo conviene usar **然而** simplemente porque empieza un nuevo párrafo. Debe existir una relación contrastiva identificable. Si el texto solo agrega otro argumento, **此外** puede ser más apropiado; si expresa una consecuencia, convienen conectores como **因此**.\n\nTampoco tiene que traducirse siempre por «sin embargo». En español natural puede corresponder a «no obstante», «pero», «aun así» u otra solución, siempre que se conserve el contraste discursivo.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e81ef8b619faf89f86e1b26ba674e688057ceb55401034c860b008a6a8ae5228",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:18:28.368Z"
+              },
+              {
+                "code": "MLS-V07-0690",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 690,
+                "title": "由於",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**由於 (yóuyú)** introduce la causa o el motivo de una situación. En escritura formal suele equivaler, según el contexto, a «debido a que», «puesto que», «como» o «a causa de». Es frecuente en informes, ensayos, textos académicos y documentos administrativos.\n\nEn **由於樣本有限，本結果應審慎解讀。** — «Debido a que la muestra es limitada, estos resultados deben interpretarse con cautela»—, **由於樣本有限** presenta la razón que explica la recomendación de la segunda parte.\n\n#### Cómo funciona\n\nUna estructura muy común es **由於 A，B**: primero se presenta la causa y después la situación que se deriva de ella.\n\n- **由於資料不足，目前無法作出確切結論。** — Debido a que los datos son insuficientes, por ahora no es posible formular una conclusión precisa.\n- **由於需求增加，公司決定擴大產能。** — Debido al aumento de la demanda, la empresa decidió ampliar su capacidad de producción.\n\nEl segmento introducido por **由於** puede ser una cláusula completa o un grupo nominal. La traducción española cambia en consecuencia: **由於天氣惡劣** puede traducirse como «debido al mal tiempo», mientras que **由於天氣突然惡化** puede ser «debido a que el tiempo empeoró repentinamente».\n\n#### Registro y estilo\n\nEn conversación cotidiana es muy frecuente **因為**. **由於** suele sonar más expositivo y formal, aunque no está limitado exclusivamente a la escritura. En textos académicos y administrativos permite presentar la relación causal de manera compacta.\n\nLa consecuencia puede aparecer sin un conector adicional, pero también es posible encontrar combinaciones como **由於 A，因此 B** o, en registros menos formales, **由於 A，所以 B**. La presencia de **因此** o **所以** no es obligatoria: depende de la estructura y del énfasis discursivo.\n\n#### Ejemplos\n\n- **由於研究時間有限，部分變項未能納入分析。** — Debido al tiempo limitado de investigación, algunas variables no pudieron incluirse en el análisis.\n- **由於系統正在維護，部分服務暫時無法使用。** — Debido a que el sistema está en mantenimiento, algunos servicios no están disponibles temporalmente.\n- **由於法規有所調整，相關程序也必須更新。** — Puesto que la normativa fue modificada, los procedimientos correspondientes también deben actualizarse.\n\nEn todos estos casos, **由於** identifica la causa que sirve de marco para interpretar la proposición principal.\n\n#### Observación importante\n\n**由於** no expresa por sí mismo la consecuencia; introduce la causa. Por eso no debe confundirse con **因此**, que normalmente señala el resultado o la conclusión derivada de lo anterior.\n\nTampoco conviene traducirlo siempre con una misma fórmula. En español natural pueden funcionar «debido a», «debido a que», «como», «puesto que» u otras opciones. Lo esencial es conservar la relación causal y el nivel de formalidad del texto.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7287fcba1cc15ac82e70e62f5ed6f6e86681dab93c4a4bf671f81e37f176fcda",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:19:45.951Z"
+              },
+              {
+                "code": "MLS-V07-0691",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 691,
+                "title": "者 nominalizador humano/clase",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**者 (zhě)** es una forma muy común del chino escrito que puede convertir una descripción, acción o propiedad en una expresión referida a una persona o clase de personas. En documentos, avisos, textos académicos y prosa administrativa aparece en palabras como **申請者** «solicitante», **研究者** «investigador» o **使用者** «usuario».\n\nEn **申請者須於週五前提交文件。** — «Los solicitantes deben presentar los documentos antes del viernes»—, **者** se combina con **申請** «solicitar» para formar un nombre que designa a quien realiza esa acción.\n\n#### Cómo funciona\n\nUn patrón frecuente es **verbo o descripción＋者**, con el sentido general de «persona que…» o «quien…».\n\n- **申請者** — quien solicita / solicitante.\n- **參與者** — quien participa / participante.\n- **研究者** — quien investiga / investigador.\n- **違規者** — quien infringe una norma / infractor.\n\nEn algunos contextos, **者** no designa a una persona individual concreta, sino a una categoría definida por una propiedad. Por ejemplo, **年長者** significa «personas de mayor edad» y **前者／後者** significan «el primero / el segundo de los elementos mencionados», donde el referente puede no ser humano.\n\n#### Registro y estilo\n\nMuchas formaciones con **者** están plenamente lexicalizadas y son normales también fuera de textos muy solemnes, como **記者** «periodista» o **讀者** «lector». Sin embargo, el uso productivo de **X＋者** para clasificar participantes es especialmente frecuente en escritura formal.\n\nEn conversación cotidiana, según el caso, pueden preferirse construcciones con **的人**, como **申請的人** «la persona que solicita». La forma con **者** suele ser más breve, categorial e institucional.\n\n#### Ejemplos\n\n- **參與者須先完成線上登記。** — Los participantes deben completar primero el registro en línea.\n- **研究者應說明資料的蒐集方式。** — Los investigadores deben explicar cómo se recopilaron los datos.\n- **違反規定者將依程序處理。** — Quienes infrinjan las normas serán tratados conforme al procedimiento establecido.\n- **前者著重效率，後者則重視公平。** — El primero pone el énfasis en la eficiencia; el segundo, en la equidad.\n\nLos tres primeros ejemplos clasifican personas según una acción o condición; el último muestra un uso referencial distinto de **者**.\n\n#### Observación importante\n\nNo conviene definir **者** simplemente como un «sufijo de persona». Su distribución es más amplia y algunas palabras que lo contienen son unidades léxicas establecidas. Además, formas como **前者** y **後者** pueden referirse a ideas, métodos u objetos, no solo a seres humanos.\n\nPor eso, al analizar **者**, conviene distinguir entre una formación productiva del tipo «quien hace X», una palabra lexicalizada y expresiones referenciales establecidas.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-18a3c3924a9a17e4f834e85f53ca77d4f2f34d1a522feddb2d8a1f167375826a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:20:41.119Z"
+              },
+              {
+                "code": "MLS-V07-0692",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 692,
+                "title": "該",
+                "level": "C1",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**該 (gāi)** se usa en chino formal para señalar una persona, entidad, documento, medida u objeto que ya ha sido identificado en el contexto. En español suele corresponder a «dicho/a», «el/la mencionado/a», «ese/a» o simplemente al artículo definido, según el estilo de la traducción.\n\nEn **該計畫將於下月開始。** — «Dicho proyecto comenzará el próximo mes»—, **該** indica que el proyecto ya es conocido por el lector o ha sido mencionado antes.\n\n#### Cómo funciona\n\nEl patrón más frecuente es **該＋nombre**:\n\n- **該計畫** — dicho proyecto.\n- **該公司** — la empresa mencionada / dicha empresa.\n- **該規定** — dicha disposición.\n- **該研究** — el estudio mencionado.\n\nA diferencia de un demostrativo usado para señalar físicamente algo cercano o lejano, **該** suele funcionar como referencia interna del texto: recupera un referente ya establecido y permite continuar hablando de él sin repetir una descripción completa.\n\n#### Registro y estilo\n\n**該** es especialmente frecuente en documentos administrativos, textos jurídicos, noticias, informes y escritura académica. En conversación cotidiana suelen preferirse **那個**, **這個**, el nombre propio o simplemente una referencia que el contexto haga evidente.\n\nPor ejemplo, un informe puede decir **該公司已完成改善措施。** — «La empresa mencionada ya completó las medidas correctivas». En una conversación sería más natural usar el nombre de la empresa o un demostrativo contextual.\n\n#### Ejemplos\n\n- **該研究共納入兩百名參與者。** — El estudio mencionado incluyó a doscientos participantes.\n- **該規定自下月起生效。** — Dicha disposición entrará en vigor a partir del próximo mes.\n- **主管機關已要求該公司提出說明。** — La autoridad competente ya solicitó a la empresa mencionada que presentara una explicación.\n- **若該資料有誤，應立即更正。** — Si dichos datos contienen errores, deben corregirse de inmediato.\n\nEn todos estos ejemplos, **該** remite a un referente identificable dentro del discurso.\n\n#### Observación importante\n\nNo conviene traducir **該** automáticamente como «ese» en todos los casos. En español formal, «dicho», «mencionado» o incluso un simple artículo definido pueden resultar más naturales. La elección depende de cuánto necesite explicitarse la referencia previa.\n\nTampoco debe confundirse este uso demostrativo con **應該**, palabra que expresa valores como «deber» o «ser probable» según el contexto. Aunque comparten el carácter **該**, se trata de construcciones distintas y deben analizarse por separado.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1cd7c8191da0067c5e6865f457a22b194fd31e3e0cde7b8bcce92c756e4eac86",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:21:35.579Z"
+              },
+              {
+                "code": "MLS-V07-0693",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 693,
+                "title": "乃至",
+                "level": "C2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Registro escrito formal: 之、者、所、於、以 — 正式書面語：「之」、「者」、「所」、「於」、「以」",
+                "articleMarkdown": "#### En pocas palabras\n\n**乃至 (nǎizhì)** es un conector de registro escrito que amplía una serie hasta un punto más extremo, amplio o inesperado. Según el contexto, puede traducirse como «e incluso», «hasta», «e inclusive» o «y aun». Es frecuente en ensayos, textos académicos y argumentación formal.\n\nEn **影響遍及家庭、學校乃至整個社會。** — «El impacto alcanza a la familia, la escuela e incluso a toda la sociedad»—, **乃至** introduce el último elemento como una extensión de mayor alcance respecto de los anteriores.\n\n#### Cómo funciona\n\nLa estructura típica presenta uno o varios elementos y luego usa **乃至** para añadir otro que representa un grado posterior dentro de una escala conceptual:\n\n- **個人、家庭乃至社會** — el individuo, la familia e incluso la sociedad.\n- **短期、中期乃至長期影響** — efectos a corto, mediano e incluso largo plazo.\n- **地方、全國乃至國際層面** — el nivel local, nacional e incluso internacional.\n\nLa relación no siempre es una escala cuantitativa. También puede tratarse de una progresión argumentativa en la que el último elemento amplía significativamente el alcance de lo dicho.\n\n#### Registro y estilo\n\n**乃至** tiene un tono claramente escrito y suele aparecer en prosa expositiva, académica o ensayística. En conversación cotidiana pueden resultar más naturales **甚至**, **連…都…** u otras construcciones, según la sintaxis y el énfasis.\n\n**乃至** y **甚至** pueden coincidir en algunas traducciones, pero no son intercambiables en todos los contextos. **乃至** se adapta especialmente bien a enumeraciones y progresiones formales, mientras que **甚至** puede introducir con mayor libertad un caso extremo dentro de una oración.\n\n#### Ejemplos\n\n- **此項改革將影響學生、教師乃至整個教育體系。** — Esta reforma afectará a los estudiantes, los docentes e incluso a todo el sistema educativo.\n- **研究結果可應用於醫療、公共衛生乃至政策制定。** — Los resultados pueden aplicarse a la atención médica, la salud pública e incluso a la formulación de políticas.\n- **問題可能延伸至經濟、文化乃至國家安全層面。** — El problema puede extenderse al ámbito económico, cultural e incluso al de la seguridad nacional.\n\nEn cada caso, **乃至** lleva la enumeración hacia un elemento de alcance más amplio o marcado.\n\n#### Observación importante\n\nNo conviene usar **乃至** como simple equivalente elegante de «y». Para que resulte natural debe existir una relación de progresión, ampliación o culminación entre los elementos conectados.\n\nTampoco es necesario que el último elemento sea objetivamente «más importante». Lo decisivo es que el texto lo presente como una extensión adicional dentro de la escala argumentativa construida.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-add1e78c7838eddd83b04335f62f67519c906e334b3718dc4f1c63fe98b447a6",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:22:30.897Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:17:40.157Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:17:40.157Z",
+  "commandFile": "mls chat bridge/commands/r44/z6-ticket07-submit-claim8.json"
+}
