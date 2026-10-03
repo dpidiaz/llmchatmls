@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261003-0245-sol-5f2a9-t03-close-next04",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1011",
+          "sha256": "3b63586fde618ad4caeb482819320892c13f4c40d14dfee9200ad87c4f32a6ed",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1011",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f030b344-f427-40af-b06f-839dfd26d7f4",
+                "ticketId": "R44-CORPUS-1011",
+                "code": "MLS-V02-0529",
+                "idempotencyKey": "R44-CORPUS-1011:MLS-V02-0529:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1909b6f87e33af561ddac55b16c25e8b3158a736cd3040eb66ac3b0f0e5a3af1",
+                "sourceSha256": "f3c73ffbf727d049ca4b242b8a3a956f561c97d995d9396a31e4eedef6c070ca",
+                "committedMs": 1790996605680,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "68524746b4b43eb086374740b46d7701139c53bf66ab226e3cc958668158fd9a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1011",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "48ba0efd-6bde-4816-9ca8-8135cd2f0241",
+                "ticketId": "R44-CORPUS-1011",
+                "code": "MLS-V02-0530",
+                "idempotencyKey": "R44-CORPUS-1011:MLS-V02-0530:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ae14917bed701ef7612b2d10ff9352cee83ea39f90b61cf00ba247029818fc26",
+                "sourceSha256": "2860cc573615864145824cf165f3a5ad9ddef12a337a81c9d1446f33d86f567e",
+                "committedMs": 1790996605892,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d7e387b66da03337bbe2faadff9a726bd66b8a40c88a96ff91589c81978c2cc1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1011",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "716b6cb7-95a2-4eef-8970-9b5a9428cc4a",
+                "ticketId": "R44-CORPUS-1011",
+                "code": "MLS-V02-0531",
+                "idempotencyKey": "R44-CORPUS-1011:MLS-V02-0531:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f14e025a6101c37686000307e8a02b111259f74a4f14394fecc45341e5ba30b7",
+                "sourceSha256": "fb6d855b16c55f6f4b5ff5dd7bee9285fd37633b0f29619921306e3dad26c5ba",
+                "committedMs": 1790996606106,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "be4bc673749630a1daabbde72e76819f89f95969d6c3580534ca538c6a461f85",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1011",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b6397b4b-b711-4798-b674-7ca63b21bedd",
+                "ticketId": "R44-CORPUS-1011",
+                "code": "MLS-V02-0532",
+                "idempotencyKey": "R44-CORPUS-1011:MLS-V02-0532:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "42bb12d3c256e653c5e8aeabb454c5c5edb920c22fec281015c2fa0637f7729c",
+                "sourceSha256": "81673f22edf56f0937cde111bac12661f34aa45f0ec6a78109d078392fe436a7",
+                "committedMs": 1790996606319,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0b3e8541536e92ea80cd84c3b1ce952af67807f854ed4edaeb6ae8b0abf98a2c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1011",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "63c3dcfe-beb7-49d9-8e6e-97a7082fbda4",
+                "ticketId": "R44-CORPUS-1011",
+                "code": "MLS-V02-0534",
+                "idempotencyKey": "R44-CORPUS-1011:MLS-V02-0534:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2dcd0a28b65b2b9a8c4eb171ca9cf6cd836c5f6ad0e2e48de8bedcaeb76593fc",
+                "sourceSha256": "25ef71b6b5970119e31134ba19681390f4bc08377bb756c31c93c0fff8b5af13",
+                "committedMs": 1790996606553,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "5b047631604e8c6dac445c836ad946f551f31700dbec3995390d9eeb7ef18f0b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-14d91b5e-f84b-4e60-968f-9817475f80cb",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "3b63586fde618ad4caeb482819320892c13f4c40d14dfee9200ad87c4f32a6ed"
+          }
+        },
+        "completedAt": "2026-10-03T03:03:26.848Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-959c8cec-5459-4fef-a351-bc686d61083f",
+          "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1012",
+            "leaseGeneration": 2,
+            "lease_expires_at": 1790996906894,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0535",
+                "path": "portugues/MLS-V02-0535.json",
+                "sha256": "f1951aba035b0ac319e71599d90d31e564e8820163c561cfcaf25384970383f9"
+              },
+              {
+                "code": "MLS-V02-0536",
+                "path": "portugues/MLS-V02-0536.json",
+                "sha256": "6f2ece3bf95e40d4e709428693751902abe6109ac371db50ef5f4866cabb45fd"
+              },
+              {
+                "code": "MLS-V02-0537",
+                "path": "portugues/MLS-V02-0537.json",
+                "sha256": "b032ec6da7f03d06153ed6ebef8874fce821f6fb789dd6c7ee427544a233ab00"
+              },
+              {
+                "code": "MLS-V02-0538",
+                "path": "portugues/MLS-V02-0538.json",
+                "sha256": "83da0765199f181a1eb18a44dc48acc7c34740411c22b3998ae2cc8410438f58"
+              },
+              {
+                "code": "MLS-V02-0541",
+                "path": "portugues/MLS-V02-0541.json",
+                "sha256": "650d735f1662db19198480c2ab2c93be65263ad11d70f669167dea5926598b7c"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1012",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0535",
+                "path": "portugues/MLS-V02-0535.json",
+                "sha256": "f1951aba035b0ac319e71599d90d31e564e8820163c561cfcaf25384970383f9"
+              },
+              {
+                "code": "MLS-V02-0536",
+                "path": "portugues/MLS-V02-0536.json",
+                "sha256": "6f2ece3bf95e40d4e709428693751902abe6109ac371db50ef5f4866cabb45fd"
+              },
+              {
+                "code": "MLS-V02-0537",
+                "path": "portugues/MLS-V02-0537.json",
+                "sha256": "b032ec6da7f03d06153ed6ebef8874fce821f6fb789dd6c7ee427544a233ab00"
+              },
+              {
+                "code": "MLS-V02-0538",
+                "path": "portugues/MLS-V02-0538.json",
+                "sha256": "83da0765199f181a1eb18a44dc48acc7c34740411c22b3998ae2cc8410438f58"
+              },
+              {
+                "code": "MLS-V02-0541",
+                "path": "portugues/MLS-V02-0541.json",
+                "sha256": "650d735f1662db19198480c2ab2c93be65263ad11d70f669167dea5926598b7c"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0535",
+              "MLS-V02-0536",
+              "MLS-V02-0537",
+              "MLS-V02-0538",
+              "MLS-V02-0541"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+              "leaseGeneration": 2,
+              "leaseExpiresAt": 1790996906894,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790996906894,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0535",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 535,
+                "title": "Restricciones semánticas de la pasiva",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Voz pasiva y construcciones con se — Voz passiva e construções com se",
+                "articleMarkdown": "#### En pocas palabras\n\nLa voz pasiva no depende solo de que una oración tenga un objeto directo. El **significado del verbo** y la relación entre sus participantes también influyen en que una pasiva resulte natural o útil.\n\nPor ejemplo, **A equipe construiu a ponte → A ponte foi construída pela equipe** forma una alternancia muy natural porque *a ponte* es una entidad claramente afectada por la acción.\n\n#### Cómo funciona\n\nLas pasivas son especialmente naturales con verbos que describen acciones en las que un participante actúa sobre otro: **construir, aprovar, escrever, fechar, reparar**. El objeto de la activa puede convertirse fácilmente en sujeto paciente de la pasiva.\n\nCon otros verbos transitivos, la pasiva puede ser gramatical pero poco frecuente o extraña fuera de un contexto especial. Verbos que expresan posesión, medida, relación o estados mentales no siempre presentan un paciente claramente afectado.\n\nPor ejemplo, **João tem dois carros** no suele convertirse naturalmente en *Dois carros são tidos por João* con el mismo sentido cotidiano de posesión. La estructura y el significado de **ter** hacen que esa pasiva no sea la alternativa normal.\n\nEl contexto puede volver aceptable una pasiva que aislada parece rara, especialmente en usos técnicos, jurídicos o lexicalizados.\n\n#### Ejemplos\n\n* **A empresa construiu a ponte. → A ponte foi construída pela empresa.**  \n  La entidad afectada pasa naturalmente a sujeto pasivo.\n\n* **O conselho aprovou a proposta. → A proposta foi aprovada pelo conselho.**  \n  La alternancia conserva una relación clara entre agente y paciente.\n\n* **João tem dois carros.**  \n  La pasiva equivalente no es la forma normal para expresar posesión cotidiana.\n\n#### Observación importante\n\nNo conviene formular la regla como “todo verbo con objeto directo admite pasiva”. La transitividad es importante, pero la **semántica léxica**, el tipo de evento y la función discursiva también cuentan.\n\nAsimismo, una pasiva formalmente posible puede ser poco idiomática. La aceptabilidad debe evaluarse dentro de una construcción y un contexto concretos.\n\n#### Entradas relacionadas\n\n[533. Construção impessoal com ser temporal](#entrada-533) · [534. Alternância ativa/passiva e foco](#entrada-534) · [481. Concordância do particípio na passiva](#entrada-481) · [479. Particípio na passiva](#entrada-479) · [703. Agente da passiva](#entrada-703)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c3151f28383db97fd9ab377598283516a83de836754dc4e56b47c8699447ccc9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:10:15.666Z"
+              },
+              {
+                "code": "MLS-V02-0536",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 536,
+                "title": "Verbos intransitivos",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal",
+                "articleMarkdown": "#### En pocas palabras\n\nUn **verbo intransitivo** no selecciona un **objeto directo**, es decir, no necesita una entidad que reciba directamente la acción para completar su estructura básica.\n\nEn **A criança dormiu**, el verbo *dormir* forma una oración completa con su sujeto y no exige un objeto directo.\n\n#### Cómo funciona\n\nLa intransitividad describe la **valencia** del verbo, es decir, qué participantes y complementos admite o necesita. Verbos como **dormir, chegar, nascer, morrer** suelen usarse intransitivamente.\n\nQue un verbo sea intransitivo no significa que deba aparecer solo. Puede combinarse con expresiones de tiempo, lugar, modo u otras circunstancias: **A criança dormiu cedo**, **Eles chegaram à estação**, **Ela nasceu em Recife**.\n\nEstos grupos añaden información, pero no funcionan como objeto directo del verbo. Por ejemplo, en **Eles chegaram à estação**, *à estação* expresa destino y está introducido por una preposición.\n\nAlgunos verbos pueden ser intransitivos en un uso y transitivos en otro. La clasificación debe aplicarse a la construcción concreta y no siempre a la palabra aislada.\n\n#### Ejemplos\n\n* **A criança dormiu.**  \n  *(El niño/la niña durmió.)*  \n  *Dormir* no selecciona objeto directo.\n\n* **Os convidados chegaram tarde.**  \n  *(Los invitados llegaron tarde.)*  \n  *Tarde* añade información temporal, pero no es objeto directo.\n\n* **Ela nasceu em Salvador.**  \n  *(Ella nació en Salvador.)*  \n  El grupo preposicional indica lugar.\n\n#### Observación importante\n\n“Intransitivo” no significa “verbo sin complemento de ningún tipo”. Un verbo intransitivo puede llevar modificadores y complementos preposicionados compatibles con su significado.\n\nTampoco debe suponerse que una traducción al español determina automáticamente la transitividad en portugués. La selección de complementos pertenece a cada lengua y a cada uso verbal.\n\n#### Entradas relacionadas\n\n[537. Verbos transitivos diretos](#entrada-537) · [538. Verbos transitivos indiretos](#entrada-538) · [440. Presente do subjuntivo de verbos irregulares](#entrada-440) · [439. Presente do subjuntivo de verbos regulares](#entrada-439) · [373. Verbos defectivos de uso formal](#entrada-373)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-5b10373777957e467f3496e336ba3c28133577f50d673866d4a0d831ed69a975",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:10:53.905Z"
+              },
+              {
+                "code": "MLS-V02-0537",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 537,
+                "title": "Verbos transitivos directos",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal",
+                "articleMarkdown": "#### En pocas palabras\n\nUn **verbo transitivo directo** selecciona un **objeto directo**, es decir, un complemento que se integra directamente con el verbo y que normalmente no lleva una preposición exigida por ese verbo.\n\nEn **Ela comprou um livro**, *ela* es el sujeto, *comprou* es el verbo y **um livro** funciona como objeto directo.\n\n#### Cómo funciona\n\nLa transitividad directa describe la **valencia** del verbo: qué participantes necesita o admite en una construcción. Verbos como **comprar, ler, fechar, aprovar** aparecen con frecuencia con un objeto directo: **comprar um livro**, **ler o relatório**, **fechar a porta**.\n\nEl objeto directo es una **función sintáctica**, no un significado fijo. Puede representar algo afectado, creado, percibido o simplemente relacionado con la acción, según el verbo. Por eso no debe definirse únicamente como “quien recibe la acción”.\n\nEn la norma formal, un objeto directo definido puede retomarse mediante clíticos como **o, a, os, as**: **Ela comprou o livro → Ela o comprou**. En el portugués brasileño real existen además otras estrategias, cuya distribución depende del registro y del contexto.\n\nMuchos verbos transitivos directos permiten formar una pasiva: **Ela comprou o livro → O livro foi comprado por ela**. Sin embargo, la presencia de objeto directo no garantiza que toda pasiva resulte igualmente natural.\n\n#### Ejemplos\n\n* **Ela comprou um livro.**  \n  *(Ella compró un libro.)*  \n  **Um livro** es objeto directo de *comprou*.\n\n* **O técnico consertou o computador.**  \n  *(El técnico reparó la computadora.)*  \n  *O computador* completa directamente el verbo *consertar*.\n\n* **Nós lemos o relatório.**  \n  *(Leímos el informe.)*  \n  *O relatório* funciona como objeto directo de *lemos*.\n\n#### Observación importante\n\n“Directo” no significa que el objeto tenga siempre el mismo papel semántico ni que nunca pueda aparecer con preposición en construcciones especiales. La regla básica es que el verbo no selecciona obligatoriamente una preposición para ese complemento.\n\nAdemás, algunos verbos cambian de transitividad según el uso. Conviene analizar la construcción concreta y no clasificar la palabra aislada de manera absoluta.\n\n#### Entradas relacionadas\n\n[536. Verbos intransitivos](#entrada-536) · [538. Verbos transitivos indiretos](#entrada-538) · [539. Verbos transitivos diretos e indiretos](#entrada-539) · [535. Restrições semânticas da passiva](#entrada-535) · [703. Agente da passiva](#entrada-703)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-55809f3972fcc94d0c4c800860b18d1e38b7bcd22cb8cd6090c712d779949364",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:12:24.040Z"
+              },
+              {
+                "code": "MLS-V02-0538",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 538,
+                "title": "Verbos transitivos indirectos",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal",
+                "articleMarkdown": "#### En pocas palabras\n\nUn **verbo transitivo indirecto** selecciona un complemento introducido por una **preposición exigida por el verbo**. En la terminología escolar tradicional, ese complemento suele llamarse **objeto indirecto**.\n\nEn **Ela gosta de música**, el verbo *gostar* selecciona **de** y el grupo **de música** completa su significado.\n\n#### Cómo funciona\n\nLa transitividad indirecta forma parte de la **regencia verbal**, es decir, del patrón que determina qué tipo de complemento admite el verbo y qué preposición lo introduce. Algunos ejemplos frecuentes son **gostar de**, **precisar de** en ciertos sentidos, **confiar em** y **obedecer a** en la norma formal.\n\nLa preposición rige el complemento completo: en **Ela gosta de música brasileira**, **de** introduce el grupo nominal *música brasileira*. No debe explicarse como una marca que afecta únicamente a la palabra siguiente.\n\nUn complemento preposicionado no es automáticamente objeto indirecto. Los verbos intransitivos también pueden combinarse con grupos de lugar, tiempo o dirección: **Ela mora em Recife**. Por eso hay que observar si el verbo selecciona ese complemento como parte de su valencia.\n\nLa regencia puede presentar variación entre registros y variedades del portugués brasileño, por lo que no conviene trasladar mecánicamente las preposiciones del español.\n\n#### Ejemplos\n\n* **Ela gosta de música.**  \n  *(A ella le gusta la música.)*  \n  *Gostar* selecciona el complemento con **de**.\n\n* **Precisamos de ajuda.**  \n  *(Necesitamos ayuda.)*  \n  En este uso, *precisar* se construye con **de**.\n\n* **Eles confiam no médico.**  \n  *(Confían en el médico.)*  \n  **No** resulta de *em + o* y forma parte del complemento seleccionado por *confiar*.\n\n#### Observación importante\n\n“Indirecto” no significa simplemente “con preposición”. Lo decisivo es la relación estructural entre el verbo y el complemento seleccionado.\n\nAdemás, la regencia puede variar según el significado del verbo. Un mismo verbo puede presentar construcciones diferentes en usos distintos, de modo que conviene analizar cada patrón concreto.\n\n#### Entradas relacionadas\n\n[536. Verbos intransitivos](#entrada-536) · [537. Verbos transitivos diretos](#entrada-537) · [539. Verbos transitivos diretos e indiretos](#entrada-539) · [540. Verbos de ligação](#entrada-540) · [498. Regência verbal](#entrada-498)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-4fa7556c8d56b56eae4d3141df73c44b8de5b2571a717754f6b6fb8405c0a4a9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:13:04.552Z"
+              },
+              {
+                "code": "MLS-V02-0541",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 541,
+                "title": "Objeto directo",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **objeto directo** es un complemento seleccionado por un verbo transitivo directo. Normalmente se integra con el verbo sin una preposición exigida por este.\n\nEn **Ela comprou um livro**, **um livro** es el objeto directo de *comprou*.\n\n#### Cómo funciona\n\nEl objeto directo es una **función sintáctica**, no un papel semántico único. Puede representar una entidad afectada —**fechou a porta**—, creada —**escreveu uma carta**—, percibida —**vi o filme**— u otras relaciones determinadas por el verbo.\n\nEn la norma formal, un objeto directo de tercera persona puede retomarse con los clíticos **o, a, os, as**: **Ela comprou o livro → Ela o comprou**. En portugués brasileño cotidiano existen además otras estrategias, como pronombres tónicos en determinados contextos o la omisión cuando el referente es recuperable.\n\nCon muchos verbos, el objeto directo de la activa puede convertirse en sujeto de una pasiva: **A equipe aprovou a proposta → A proposta foi aprovada pela equipe**. Esta prueba es útil, aunque la naturalidad de la pasiva depende también del significado del verbo.\n\n#### Ejemplos\n\n* **Ela comprou um livro.**  \n  *(Ella compró un libro.)*  \n  *Um livro* funciona como objeto directo.\n\n* **O técnico consertou o computador.**  \n  *(El técnico reparó la computadora.)*  \n  *O computador* es el complemento directo de *consertou*.\n\n* **Nós vimos o filme ontem.**  \n  *(Vimos la película ayer.)*  \n  *O filme* es objeto directo; *ontem* es una expresión temporal.\n\n#### Observación importante\n\nNo debe identificarse el objeto directo únicamente preguntando “¿qué?” o “¿a quién?”. Esas preguntas pueden orientar, pero el análisis depende de la estructura y de la selección del verbo.\n\nAdemás, “directo” no significa que jamás pueda aparecer una preposición en construcciones especiales. Lo central es que el verbo no selecciona obligatoriamente una preposición para esa función.\n\n#### Entradas relacionadas\n\n[539. Verbos transitivos diretos e indiretos](#entrada-539) · [540. Verbos de ligação](#entrada-540) · [542. Objeto indireto](#entrada-542) · [543. Complemento oblíquo](#entrada-543) · [698. Objeto direto nominal](#entrada-698)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c441170f22f6cd29b31b893c17f39c6171b7ef826ddb0e173dd0296f46499573",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:14:58.859Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:03:27.498Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:03:27.498Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261003-0245-sol-5f2a9/03-submit-next04.json"
+}

@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-z6-ticket02-submit-claim3",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-126e9504-e1cc-4b0c-b864-9f705e3d6e8e",
+          "ticketId": "R43-EMERGENCY-0788",
+          "leaseExpiresAt": 1790996910874
+        },
+        "completedAt": "2026-10-03T03:03:31.004Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0788",
+          "sha256": "3c064655409985c10507ab517a96b52ebb44c72a9ede766058c5e2887e90f6f6",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0788",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1112e168-8917-4c83-8d4d-2b7aec35b473",
+                "ticketId": "R43-EMERGENCY-0788",
+                "code": "MLS-V07-0623",
+                "idempotencyKey": "R43-EMERGENCY-0788:MLS-V07-0623:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "cce833dcd0c194917caee5aee9452b83ce33fccb32992c05456beaa660e0faa5",
+                "sourceSha256": "dd621d8d3956b5d7e176f7a1c56d12526e6150587e156af60dc94d571e4b2be3",
+                "committedMs": 1790996611374,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "953359daf80a789f6146a89abd2372a84e0a97563f3f1dde2762a020d7a0b64a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0788",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ee2c1042-d067-4f36-b3ab-886f8f39baa0",
+                "ticketId": "R43-EMERGENCY-0788",
+                "code": "MLS-V07-0625",
+                "idempotencyKey": "R43-EMERGENCY-0788:MLS-V07-0625:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a5d1432cc625d77e382fc14bd637ee06404e14e30d33da6356a98be6f5419579",
+                "sourceSha256": "7c295d24fd5450488bd2fc0a02c46e9b84d747da9cf2e21e5adc97f7f43dc6ae",
+                "committedMs": 1790996611580,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "4db05824ddeb57645900a58a1c07c59512f71ca8cfc8585139d3e5f76e2d6cf7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0788",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "25a3bb96-279d-41b2-803a-ac9c75835df0",
+                "ticketId": "R43-EMERGENCY-0788",
+                "code": "MLS-V07-0626",
+                "idempotencyKey": "R43-EMERGENCY-0788:MLS-V07-0626:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7c6ea69585495ca45708d97e66ba0105baf7c3478d50a8bfe25420e09b15c474",
+                "sourceSha256": "7ab6cd513a805b0f42839dafda7836d0113d1299fcf916bb33035276e7b5ae4c",
+                "committedMs": 1790996611791,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3683cb9d97b245ff8f3e9297abc890376907d76c886b9a7157c9ab5e302a4dc5",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0788",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b7ea3423-546c-4b53-aa03-1d39ece7df17",
+                "ticketId": "R43-EMERGENCY-0788",
+                "code": "MLS-V07-0627",
+                "idempotencyKey": "R43-EMERGENCY-0788:MLS-V07-0627:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1a6c16b1ab7afd3cc95185b8b8b1b81590c51d3a1fbdd70c97009ca28b49051d",
+                "sourceSha256": "f85f96c1019e94520faec97a3bc21ed6a68b3bf23c450329693b7d540ba451ac",
+                "committedMs": 1790996612005,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "295570a2ddbf7d7745dd9031f131db16c907c7a51390cb6bc0c4a89195fc1157",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0788",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "580dcf88-7f69-4941-bc62-2f5e936b1dc4",
+                "ticketId": "R43-EMERGENCY-0788",
+                "code": "MLS-V07-0628",
+                "idempotencyKey": "R43-EMERGENCY-0788:MLS-V07-0628:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "3220696968d1ee97ec1a470335d7e842bee4f4912d11ee72c2a71f2ac11f3560",
+                "sourceSha256": "d8cbbf0a478823e0419be2b43893f03d6f0d764fa86f6c4f1fb48eac2f69ae25",
+                "committedMs": 1790996612268,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e6f0cb9fbb49607a61c60cdd153c0bd2f3d6046855f7246875107a2d6b3211f5",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-126e9504-e1cc-4b0c-b864-9f705e3d6e8e",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "3c064655409985c10507ab517a96b52ebb44c72a9ede766058c5e2887e90f6f6"
+          }
+        },
+        "completedAt": "2026-10-03T03:03:32.574Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-1c9c8b3a-6dd7-4768-91de-975992d22aed",
+          "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0789",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996912618,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0629",
+                "path": "chino-taiwan/MLS-V07-0629.json",
+                "sha256": "adec609b2d4ddcaf764c79dfd7f2122ae94b48cbce0502e4b86a3b50fbcbff54"
+              },
+              {
+                "code": "MLS-V07-0630",
+                "path": "chino-taiwan/MLS-V07-0630.json",
+                "sha256": "895527ba97126f54c714f43cf416ecdcba10e136c5cbac3a6d5da6c455f6d2cf"
+              },
+              {
+                "code": "MLS-V07-0631",
+                "path": "chino-taiwan/MLS-V07-0631.json",
+                "sha256": "bebc175f8b4239b66f3a13c3631e1606554f664893cbacb8523dc3eba977cf16"
+              },
+              {
+                "code": "MLS-V07-0632",
+                "path": "chino-taiwan/MLS-V07-0632.json",
+                "sha256": "23f0c255e952373a4aa341801a0092124c71a22b76d8bd83619be819da02932c"
+              },
+              {
+                "code": "MLS-V07-0633",
+                "path": "chino-taiwan/MLS-V07-0633.json",
+                "sha256": "6d6ad1f4ff49cf4157f67d94ae1b4eaf34a6af4ace617d3e76d923472775bbe8"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0789",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0629",
+                "path": "chino-taiwan/MLS-V07-0629.json",
+                "sha256": "adec609b2d4ddcaf764c79dfd7f2122ae94b48cbce0502e4b86a3b50fbcbff54"
+              },
+              {
+                "code": "MLS-V07-0630",
+                "path": "chino-taiwan/MLS-V07-0630.json",
+                "sha256": "895527ba97126f54c714f43cf416ecdcba10e136c5cbac3a6d5da6c455f6d2cf"
+              },
+              {
+                "code": "MLS-V07-0631",
+                "path": "chino-taiwan/MLS-V07-0631.json",
+                "sha256": "bebc175f8b4239b66f3a13c3631e1606554f664893cbacb8523dc3eba977cf16"
+              },
+              {
+                "code": "MLS-V07-0632",
+                "path": "chino-taiwan/MLS-V07-0632.json",
+                "sha256": "23f0c255e952373a4aa341801a0092124c71a22b76d8bd83619be819da02932c"
+              },
+              {
+                "code": "MLS-V07-0633",
+                "path": "chino-taiwan/MLS-V07-0633.json",
+                "sha256": "6d6ad1f4ff49cf4157f67d94ae1b4eaf34a6af4ace617d3e76d923472775bbe8"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0629",
+              "MLS-V07-0630",
+              "MLS-V07-0631",
+              "MLS-V07-0632",
+              "MLS-V07-0633"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996912618,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996912618,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0629",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 629,
+                "title": "把 con topic chain",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "把/被 avanzadas y estructura informativa — 進階把字句／被字句與信息結構",
+                "articleMarkdown": "#### En pocas palabras\n\nUna **cadena de tópicos** organiza varias oraciones alrededor de un tema que ya está establecido. Dentro de esa cadena, una **把字句** puede introducir uno de los objetos relevantes y decir qué cambio, resultado o acción se realiza sobre él.\n\nEn **這份報告，我把第一部分改完了，第二部分明天再改。** *Zhè fèn bàogào, wǒ bǎ dì-yī bùfen gǎiwán le, dì-èr bùfen míngtiān zài gǎi.* — «En cuanto a este informe, ya terminé de corregir la primera parte; la segunda la corregiré mañana»—, **這份報告** funciona como tópico general. Después, **第一部分** y **第二部分** se interpretan como subpartes de ese mismo referente.\n\n#### Cómo funciona\n\nEl mandarín permite mantener un tópico activo durante varias cláusulas sin repetirlo en cada una. El tópico establece el marco discursivo y las cláusulas siguientes desarrollan información relacionada con él.\n\nEn el ejemplo, **這份報告** no es el objeto directo del verbo **改** en la primera cláusula. El objeto introducido por **把** es **第一部分** «la primera parte». La relación entre ambos se recupera del contexto: la primera parte pertenece al informe ya presentado como tópico.\n\n#### 把 dentro de la cadena\n\nLa 把字句 ayuda a perfilar uno de los elementos internos del tópico y a presentar qué le ocurre. **我把第一部分改完了** muestra que esa parte alcanza un resultado: queda terminada su revisión.\n\nLa cláusula siguiente, **第二部分明天再改**, cambia el subtema local a **第二部分**, pero conserva como marco general **這份報告**. No hace falta repetir **這份報告的** antes de cada sección porque la relación ya está activa en el discurso.\n\n#### Jerarquía informativa\n\nUna cadena de tópicos puede contener varios niveles. El tópico general puede ser un documento, un proyecto, una situación o una persona; después pueden aparecer subpartes o aspectos relacionados.\n\nPor ejemplo, **這間房子，客廳我已經整理好了，廚房我明天再整理。** «En cuanto a esta casa, la sala ya la ordené; la cocina la ordenaré mañana». La casa es el marco global y **客廳、廚房** son tópicos locales derivados de ese marco.\n\n#### Contraste útil\n\nCompare **我把第一部分改完了** con **第一部分我改完了**. Ambas pueden referirse a la misma parte del informe, pero la primera presenta el objeto mediante **把** y destaca el resultado **改完**; la segunda organiza directamente **第一部分** como tópico local.\n\nLa elección depende de cómo se quiera estructurar la información. **把** no es obligatorio por el simple hecho de que exista un tópico anterior.\n\n#### Observación importante\n\nUna cadena de tópicos no equivale a una cadena de sujetos. El tópico sirve como marco sobre el cual se organiza el discurso y puede no desempeñar directamente una función sintáctica dentro de cada cláusula posterior.\n\nAdemás, la relación entre el tópico general y los elementos siguientes debe ser recuperable y coherente. No basta con colocar varios nombres al inicio: el oyente debe poder entender cómo se conectan dentro del mismo marco discursivo.\n\n#### Entradas relacionadas\n\n- **把** con complementos direccionales complejos — 複雜趨向補語把字句.\n- **把** vs orden SVO — 把字句與一般 SVO.\n- **把** con cantidad y cambio — 帶數量變化的把字句.\n- **被** con agente no humano — 非人施事被字句.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-37930302aaebb6c3f6ec842101c9c37bbecfe50f9e601e93aa761cf98a5de590",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:35:58.928Z"
+              },
+              {
+                "code": "MLS-V07-0630",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 630,
+                "title": "把 vs orden SVO",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "把/被 avanzadas y estructura informativa — 進階把字句／被字句與信息結構",
+                "articleMarkdown": "#### En pocas palabras\n\nEl mandarín puede expresar un mismo evento con **orden SVO** —sujeto, verbo, objeto— o con una **把字句**, pero las dos opciones no siempre organizan la información del mismo modo. La 把字句 coloca antes del verbo un objeto ya suficientemente identificado y suele presentar después qué resultado, cambio o disposición alcanza.\n\nCompare **我看完了那本書** y **我把那本書看完了**. Ambas significan aproximadamente «terminé de leer ese libro», pero la segunda destaca más claramente qué ocurrió con **那本書** como objeto ya establecido.\n\n#### Cómo funciona\n\nEn **我看完了那本書。** *Wǒ kànwán le nà běn shū.* el verbo resultativo **看完** aparece antes del objeto. La oración mantiene un orden verbal más cercano al patrón SVO y presenta el evento completo como una unidad.\n\nEn **我把那本書看完了。** *Wǒ bǎ nà běn shū kànwán le.* el objeto se adelanta mediante **把**, y el predicado **看完了** informa del resultado alcanzado: ese libro quedó completamente leído.\n\n#### Resultado y afectación\n\nLa 把字句 es especialmente natural cuando el predicado expresa una consecuencia clara para el objeto: **把門關上、把文章改好、把飯吃完**. En estos casos, el objeto no aparece simplemente como participante del verbo, sino como entidad cuyo estado o situación cambia de manera relevante.\n\nEl orden SVO también puede admitir complementos resultativos: **我關上了門** «cerré la puerta», **我改好了文章** «terminé de corregir el texto». Por eso la presencia de resultado no obliga automáticamente a usar **把**.\n\n#### Estado informativo del objeto\n\nCon **把**, el objeto suele ser identificable, específico o recuperable del contexto. **那本書** «ese libro» encaja muy bien porque el interlocutor puede saber de cuál se habla.\n\nEn cambio, cuando el objeto introduce información nueva e indefinida, el orden SVO suele resultar más natural. Por ejemplo, **我買了一本書。** *Wǒ mǎi le yì běn shū.* — «Compré un libro»— presenta **一本書** como entidad nueva. Una 把字句 exigiría un contexto que delimite mejor ese referente.\n\n#### Contraste útil\n\nCompare **我吃完了飯** con **我把飯吃完了**. La primera puede responder simplemente a «¿qué hiciste?». La segunda encaja especialmente bien cuando **飯** ya está presente en el contexto y el punto informativo es que se terminó por completo.\n\nLa diferencia no es una traducción distinta palabra por palabra, sino una diferencia de estructura informativa y de perspectiva sobre el objeto.\n\n#### Foco y orden\n\nAl adelantar el objeto, **把** deja la posición posverbal disponible para resultado, cantidad, dirección u otra información relevante. Esto puede favorecer que el foco discursivo recaiga sobre elementos como **完、好、在桌上、三遍**.\n\nCon SVO, el objeto puede ocupar la posición final y asumir parte del peso informativo. Por ello, la elección entre ambas construcciones depende también de qué información es nueva, contrastiva o relevante en el contexto.\n\n#### Observación importante\n\nNo existe una equivalencia mecánica según la cual toda oración SVO transitiva pueda transformarse en 把字句. El verbo, la delimitación del objeto, el tipo de predicado y la relación resultativa deben permitir la construcción.\n\nTampoco debe interpretarse **把** como una simple señal de énfasis. Su uso modifica el orden sintáctico y la organización informativa, y normalmente presenta al objeto como entidad afectada por un predicado suficientemente desarrollado.\n\n#### Entradas relacionadas\n\n- **把** con topic chain — 把字句與主題鏈.\n- **被** con agente no humano — 非人施事被字句.\n- **把** con complementos direccionales complejos — 複雜趨向補語把字句.\n- **被** sin sentido adversativo — 中性被字句.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-06e8faf57a86ab18873820cd13f535f174d58cf6a200879ee90e1a6c4fd21d48",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:37:05.033Z"
+              },
+              {
+                "code": "MLS-V07-0631",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 631,
+                "title": "被 con agente no humano",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "把/被 avanzadas y estructura informativa — 進階把字句／被字句與信息結構",
+                "articleMarkdown": "#### En pocas palabras\n\nEn una **被字句** (oración con **被 bèi**), la entidad que causa la acción no tiene que ser una persona. También puede ser una fuerza natural, un objeto, una situación u otra causa no humana, siempre que el predicado presente de forma clara qué le ocurre al referente afectado.\n\nEn **窗戶被風吹開了。** *Chuānghù bèi fēng chuī kāi le.* — «La ventana fue abierta por el viento / el viento abrió la ventana»—, **窗戶** es la entidad afectada y **風** «viento» funciona como agente o causa del evento.\n\n#### Cómo funciona\n\nLa estructura típica es **entidad afectada + 被 + agente o causa + predicado**. En el ejemplo, **吹開** combina **吹** «soplar» con **開**, que expresa el resultado de quedar abierta.\n\nEl papel de **風** no depende de que sea animado. Lo importante es que se interprete como la causa que produce el cambio descrito por el predicado.\n\n#### Agentes no humanos\n\nSon naturales ejemplos como **樹被颱風吹倒了。** *Shù bèi táifēng chuīdǎo le.* — «El árbol fue derribado por el tifón»— y **路被大雨淹了。** *Lù bèi dàyǔ yān le.* — «La carretera quedó inundada por la fuerte lluvia».\n\nEn ambos casos, el referente inicial recibe el efecto de una causa no humana. La construcción organiza el enunciado desde la perspectiva de la entidad afectada.\n\n#### Resultado y cambio\n\nLas 被字句 aparecen con mucha naturalidad cuando el predicado expresa un resultado claro: **吹開、吹倒、弄壞、淹沒**. El cambio sufrido por el sujeto afectado ayuda a establecer la lectura pasiva.\n\nNo obstante, **被** no exige siempre un complemento resultativo formal. La relación pasiva puede estar suficientemente clara por el verbo y el contexto.\n\n#### Contraste útil\n\nCompare **風吹開了窗戶** con **窗戶被風吹開了**. La primera oración presenta **風** como punto de partida y describe lo que hizo; la segunda toma **窗戶** como tema principal y describe el efecto sufrido.\n\nEl hecho básico puede ser el mismo, pero cambia la organización informativa y la perspectiva desde la que se presenta el evento.\n\n#### Neutralidad y adversidad\n\nAunque históricamente y en muchos contextos **被** puede asociarse con acontecimientos desfavorables, una 被字句 no tiene que expresar necesariamente perjuicio. La interpretación depende del verbo, del contexto y de la valoración discursiva.\n\nPor ejemplo, una fuerza natural puede producir un resultado negativo, neutro o incluso favorable. La presencia de un agente no humano no determina por sí sola ningún matiz evaluativo.\n\n#### Observación importante\n\nNo debe traducirse automáticamente toda pasiva española con **被**. El mandarín también permite pasivas sin marcador explícito y otras construcciones resultativas. Del mismo modo, una 被字句 puede traducirse al español con una pasiva de **ser**, con **se** o con una activa natural, según el contexto.\n\nAdemás, «agente» se usa aquí en sentido amplio para la entidad o causa que desencadena el evento; con fenómenos naturales puede hablarse también de causa, según el análisis semántico adoptado.\n\n#### Entradas relacionadas\n\n- **把** vs orden SVO — 把字句與一般 SVO.\n- **被** sin sentido adversativo — 中性被字句.\n- **把** con topic chain — 把字句與主題鏈.\n- **被** vs topicalización — 被字句與主題化.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-fd1a7c5312e184c5cc3469759339c622616668985ae248e2f8a1d69cc6653090",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:38:11.237Z"
+              },
+              {
+                "code": "MLS-V07-0632",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 632,
+                "title": "被 sin sentido adversativo",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "把/被 avanzadas y estructura informativa — 進階把字句／被字句與信息結構",
+                "articleMarkdown": "#### En pocas palabras\n\nUna **被字句** no tiene que expresar daño, molestia ni una consecuencia negativa. En mandarín moderno, **被 bèi** puede marcar una relación pasiva también en situaciones neutrales o favorables.\n\nEn **她被選為代表。** *Tā bèi xuǎn wéi dàibiǎo.* — «Fue elegida representante»—, **她** es la persona sobre la que recae la acción de elegir y **選為代表** expresa el resultado de esa selección. No hay sentido adversativo inherente.\n\n#### Cómo funciona\n\nLa estructura básica presenta primero a la entidad afectada y después introduce con **被** la acción que recae sobre ella. El agente puede aparecer explícitamente o quedar omitido si no es relevante.\n\nEn **她被選為代表**, no se menciona quién la eligió. El foco está en el resultado: ella pasa a ocupar la función de representante.\n\n#### Usos neutrales y favorables\n\nSon naturales expresiones como **這篇文章被翻譯成三種語言。** *Zhè piān wénzhāng bèi fānyì chéng sān zhǒng yǔyán.* — «Este artículo fue traducido a tres idiomas»— o **他被大家選為隊長。** *Tā bèi dàjiā xuǎn wéi duìzhǎng.* — «Fue elegido capitán por todos».\n\nLa valoración puede ser neutral, positiva o negativa según el contenido del predicado y el contexto. **被** por sí solo no determina esa evaluación.\n\n#### Origen del matiz adversativo\n\nEn etapas históricas y en numerosos usos cotidianos, las construcciones con **被** se asociaron con acontecimientos desfavorables, como **被偷、被打、被騙** «ser robado, golpeado, engañado». Esa asociación explica por qué a veces se enseña primero un matiz adversativo.\n\nSin embargo, en el mandarín contemporáneo la distribución es más amplia, especialmente en registros escritos, informativos, administrativos y formales.\n\n#### Contraste útil\n\nCompare **他被公司錄取了** «fue contratado/admitido por la empresa» con **他被公司開除了** «fue despedido por la empresa». La misma construcción pasiva aparece en un resultado potencialmente favorable y en otro desfavorable.\n\nLa diferencia evaluativa proviene principalmente de **錄取** y **開除**, no de **被**.\n\n#### Agente expreso u omitido\n\nUna 被字句 puede incluir al agente: **她被老師推薦為代表。** *Tā bèi lǎoshī tuījiàn wéi dàibiǎo.* — «Fue recomendada como representante por el profesor». También puede omitirlo: **她被推薦為代表。** — «Fue recomendada como representante».\n\nLa elección depende de si el agente aporta información relevante. La pasividad no desaparece cuando ese participante se omite.\n\n#### Observación importante\n\nNo conviene traducir automáticamente toda pasiva española con **被**, porque el mandarín también usa pasivas sin marcador explícito y construcciones resultativas. A la inversa, una 被字句 puede corresponder en español a una pasiva con **ser**, una construcción con **se** o incluso una formulación activa más natural.\n\nEl análisis debe basarse en la estructura del mandarín y en la perspectiva informativa de la oración, no únicamente en la traducción.\n\n#### Entradas relacionadas\n\n- **被** con agente no humano — 非人施事被字句.\n- **被** vs topicalización — 被字句與主題化.\n- **把** vs orden SVO — 把字句與一般 SVO.\n- **讓／叫／給** pasivo coloquial — 口語「讓／叫／給」被動.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-52bbefc9260e48ba8e8a542f99026aed69748a376f9b632132305e5516518a4a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:39:16.488Z"
+              },
+              {
+                "code": "MLS-V07-0633",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 633,
+                "title": "被 vs topicalización",
+                "level": "C1",
+                "part": "Sintaxis avanzada de 把/被 y aspecto — 進階把／被與體貌",
+                "chapter": "把/被 avanzadas y estructura informativa — 進階把字句／被字句與信息結構",
+                "articleMarkdown": "#### En pocas palabras\n\n**Topicalizar** significa colocar al inicio el elemento sobre el que se quiere hablar. Una **被字句**, en cambio, no solo coloca primero a una entidad afectada: también marca explícitamente una relación pasiva mediante **被 bèi**.\n\nCompare **這本書，我看完了。** *Zhè běn shū, wǒ kànwán le.* — «Este libro, ya lo terminé de leer»— con **這本書被我看完了。** *Zhè běn shū bèi wǒ kànwán le.* — «Este libro fue terminado de leer por mí / yo terminé de leer este libro». Las dos empiezan con **這本書**, pero su estructura es diferente.\n\n#### Cómo funciona\n\nEn la primera oración, **這本書** funciona como tópico. La cláusula **我看完了** comenta ese tópico y el objeto se recupera por el contexto. No aparece ninguna marca pasiva.\n\nEn la segunda, **這本書** es la entidad afectada dentro de una 被字句. **我** aparece después de **被** como agente y **看完** expresa el resultado de completar la lectura.\n\n#### Tópico y función sintáctica\n\nUn tópico no tiene que corresponder siempre al sujeto ni al objeto gramatical de la cláusula posterior. Su función principal es establecer el marco de lo que se va a decir.\n\nPor ejemplo, **這件事，我不想再談了。** «Sobre este asunto, no quiero hablar más» presenta **這件事** como tópico, sin necesidad de una relación pasiva.\n\n#### La 被字句 sí codifica pasividad\n\nEn una 被字句, la entidad inicial se presenta como afectada por el evento. El agente puede aparecer: **這本書被我看完了**, o quedar omitido: **這本書被看完了**.\n\nLa construcción cambia la perspectiva del evento y relaciona de manera explícita al referente inicial con una acción que recae sobre él.\n\n#### Contraste útil\n\nCompare **這道菜，我吃完了** con **這道菜被我吃完了**. La primera puede sonar como una estructura tópico-comentario muy natural en conversación: «Este plato, me lo terminé». La segunda enfatiza más claramente el hecho de que el plato fue consumido por el agente mencionado.\n\nEl contenido básico puede ser parecido, pero no son simples variantes de orden.\n\n#### Organización informativa\n\nLa topicalización suele depender mucho de qué referente ya está activo en el discurso. La 被字句 también puede comenzar con información conocida, pero además impone una relación pasiva concreta.\n\nPor eso no toda oración topicalizada puede transformarse directamente en 被字句. El verbo debe permitir una interpretación en la que el tópico sea realmente la entidad afectada por el evento.\n\n#### Observación importante\n\nNo conviene identificar «aparece primero» con «es sujeto» ni con «es pasivo». El mandarín permite que tópicos, sujetos y entidades afectadas coincidan en ciertos casos, pero son conceptos distintos.\n\nLa traducción al español también puede ocultar esa diferencia: tanto una topicalización como una pasiva pueden traducirse de varias maneras según el contexto. El análisis debe partir de la estructura china.\n\n#### Entradas relacionadas\n\n- **被** sin sentido adversativo — 中性被字句.\n- **讓／叫／給** pasivo coloquial — 口語「讓／叫／給」被動.\n- **被** con agente no humano — 非人施事被字句.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-39c45c7b59525e9984aac868b1bb6563305ded0c766cad6958f3554e3fdd2062",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:40:23.546Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:03:33.389Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:03:33.389Z",
+  "commandFile": "mls chat bridge/commands/r44/z6-ticket02-submit-claim3.json"
+}
