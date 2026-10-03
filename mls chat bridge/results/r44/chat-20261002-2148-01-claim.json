@@ -1,0 +1,269 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-chat-20261002-2148-01",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44StatusChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/status",
+        "response": {
+          "status": "ACTIVE",
+          "controlPlane": "CLOUDFLARE_D1",
+          "productionMode": "PARALLEL_HOT_PATH",
+          "globalProductionMutex": false,
+          "githubHotPathWrites": false,
+          "leaseTtlSeconds": 300,
+          "maxActiveLeases": 128,
+          "mcpEndpoint": "/mcp",
+          "mcpProtocol": "2026-07-28",
+          "counts": {
+            "queued": 766,
+            "leased": 160,
+            "audited": 756,
+            "verified": 0,
+            "quarantined": 0,
+            "recoverable": 116
+          },
+          "durableCounts": [
+            {
+              "state": "CLAIMABLE",
+              "n": 766
+            },
+            {
+              "state": "COMPLETE",
+              "n": 510
+            },
+            {
+              "state": "LEASED",
+              "n": 140
+            },
+            {
+              "state": "PARTIAL_DURABLE",
+              "n": 20
+            },
+            {
+              "state": "QUARANTINED",
+              "n": 246
+            }
+          ],
+          "meta": {
+            "pool_schema": "MLS-R44-CLOUDFLARE-POOL-2",
+            "pool_generated_at": "2026-10-01T09:50:08.936233Z",
+            "base_commit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+            "pool_ticket_count": "1682",
+            "pool_entry_count": "8408",
+            "pool_ticket_size": "5",
+            "pool_manifest_sha256": "28153404f333669c2d1d7219aae45972387c1d49ff913b5ff75175c009eee47d",
+            "content_manifest_blob": "643b3c9cab84a0372f9e52127fe78ad0e9fab938",
+            "cutover_mode": "cloudflare-d1",
+            "durable_entry_schema": "1"
+          },
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "authenticated": true
+        },
+        "completedAt": "2026-10-03T03:52:33.849Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-58f3fd41-fd7a-4919-a29a-c21f95b33244",
+          "workerId": "chat-r44-20261002-2148-01",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1221",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790999853891,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V08-0251",
+                "path": "coreano/MLS-V08-0251.json",
+                "sha256": "80900f21e9b4822424e1496705107a342944ed50b04988bf12413252e23bc226"
+              },
+              {
+                "code": "MLS-V08-0253",
+                "path": "coreano/MLS-V08-0253.json",
+                "sha256": "7771fd97fd4b3e891a882b3b08f111a93f056724a70797e8864e26e3c0e39264"
+              },
+              {
+                "code": "MLS-V08-0254",
+                "path": "coreano/MLS-V08-0254.json",
+                "sha256": "bfc9c980eacf6e214caa59c33cad9f893461c19a92d1711d033b758bc45cb3ec"
+              },
+              {
+                "code": "MLS-V08-0255",
+                "path": "coreano/MLS-V08-0255.json",
+                "sha256": "a7fbabb545bc59cc1ab84e803e283fce4f4f538b39c75b502fe40509f42fe60b"
+              },
+              {
+                "code": "MLS-V08-0256",
+                "path": "coreano/MLS-V08-0256.json",
+                "sha256": "2b16631c282884190ee9edb91a86186d4190002ae417911112586b026f3b86b8"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1221",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V08-0251",
+                "path": "coreano/MLS-V08-0251.json",
+                "sha256": "80900f21e9b4822424e1496705107a342944ed50b04988bf12413252e23bc226"
+              },
+              {
+                "code": "MLS-V08-0253",
+                "path": "coreano/MLS-V08-0253.json",
+                "sha256": "7771fd97fd4b3e891a882b3b08f111a93f056724a70797e8864e26e3c0e39264"
+              },
+              {
+                "code": "MLS-V08-0254",
+                "path": "coreano/MLS-V08-0254.json",
+                "sha256": "bfc9c980eacf6e214caa59c33cad9f893461c19a92d1711d033b758bc45cb3ec"
+              },
+              {
+                "code": "MLS-V08-0255",
+                "path": "coreano/MLS-V08-0255.json",
+                "sha256": "a7fbabb545bc59cc1ab84e803e283fce4f4f538b39c75b502fe40509f42fe60b"
+              },
+              {
+                "code": "MLS-V08-0256",
+                "path": "coreano/MLS-V08-0256.json",
+                "sha256": "2b16631c282884190ee9edb91a86186d4190002ae417911112586b026f3b86b8"
+              }
+            ],
+            "remaining": [
+              "MLS-V08-0251",
+              "MLS-V08-0253",
+              "MLS-V08-0254",
+              "MLS-V08-0255",
+              "MLS-V08-0256"
+            ],
+            "lease": {
+              "workerId": "chat-r44-20261002-2148-01",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790999853891,
+              "active": true
+            },
+            "workerId": "chat-r44-20261002-2148-01",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790999853891,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V08-0251",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 251,
+                "title": "르 irregular: 빠르다→빨라요",
+                "level": "A2",
+                "part": "Morfología verbal básica — 기본 용언 활용",
+                "chapter": "Conjugación e irregularidades — 활용과 불규칙",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo descriptivo **빠르다** «ser rápido» sigue el patrón **르 irregular**. Al combinar la raíz **빠르-** con **-아/어**, 르 cambia y aparece ㄹ al final de la sílaba anterior. Por eso la forma cortés es **빨라요**.\n\n#### Cómo funciona\n\nAnte **-아요**, la sílaba **르** pierde ㅡ y su ㄹ se redistribuye: la sílaba anterior pasa de **빠** a **빨**, mientras que la siguiente comienza con ㄹ. El resultado es **빠르- + -아요 → 빨라요**.\n\nEl mismo cambio se ve en **빨라서** «porque es rápido» y **빨랐어요** «era / fue rápido». Ante una terminación que no activa este patrón, 르 permanece: **빠르고** «es rápido y…».\n\n#### Ejemplos\n\n* **이 기차는 빨라요.** — Este tren es rápido.\n* **인터넷이 빨라서 편해요.** — Es cómodo porque el internet es rápido.\n* **생각보다 빨랐어요.** — Fue más rápido de lo que pensaba.\n* **빠르고 편리해요.** — Es rápido y práctico.\n\nEn las tres primeras formas aparece la alternancia 르; **빠르고** conserva la raíz **빠르-**.\n\n#### Observación importante\n\nEl patrón es el mismo tipo general que en **모르다 → 몰라요**, aunque la vocal de la sílaba precedente determina si aparece **-라-** o **-러-** en la forma resultante.\n\nLa expresión «duplicación de ㄹ» resume el aspecto visible, pero el proceso afecta a la estructura de las sílabas y a la vocal ㅡ de 르. No es una simple repetición ortográfica.\n\n#### Entradas relacionadas\n\n* [르 irregular: 모르다→몰라요](#entry-250)\n* [보다→봐요](#entry-252)\n* [되다→돼요](#entry-249)\n* [오다→와요](#entry-253)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9bf5d33f373b16ce23e5402441bfa3711fead734e52b5dca934f58404f38274d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:36:25.602Z"
+              },
+              {
+                "code": "MLS-V08-0253",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 253,
+                "title": "오다→와요",
+                "level": "A2",
+                "part": "Morfología verbal básica — 기본 용언 활용",
+                "chapter": "Conjugación e irregularidades — 활용과 불규칙",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo **오다** «venir» forma **와요** en el estilo cortés 해요체. El cambio se debe a una contracción vocálica: la raíz **오-** se combina con **-아요**, y **오아요** se reduce a **와요**.\n\n#### Cómo funciona\n\nLa forma de diccionario se analiza como **오- + -다**. Al quitar **-다** y añadir **-아요**, aparece **오아요**. En coreano moderno, la combinación **오 + 아** se contrae a **와**, de modo que **오아요 → 와요**.\n\nEl mismo patrón aparece en otras formas: **오아서 → 와서** «al venir / porque viene» y **오았어요 → 왔어요** «vino / vine», con la misma base contraída.\n\n#### Ejemplos\n\n* **친구가 집에 와요.** — Mi amigo viene a casa.\n* **매일 여기 와요.** — Vengo aquí todos los días.\n* **일찍 와서 기다렸어요.** — Vine temprano y esperé.\n* **어제 손님이 왔어요.** — Ayer vino un invitado.\n\nEn **와요**, **와서** y **왔어요** se observa la contracción **오아 → 와**; ante otras terminaciones, la raíz permanece como **오-**, por ejemplo en **오고** «viene y…».\n\n#### Observación importante\n\n**오다 → 와요** no es una irregularidad consonántica. La raíz sigue siendo **오-** y el cambio surge de la contracción entre dos vocales.\n\nEl patrón es paralelo a **보다 → 봐요**: en ambos casos, **오 + 아** produce **와**, aunque cada verbo conserva su propio significado y distribución.\n\n#### Entradas relacionadas\n\n* [보다→봐요](#entry-252)\n* [으 deletion: 쓰다→써요](#entry-254)\n* [르 irregular: 빠르다→빨라요](#entry-251)\n* [으 deletion: 크다→커요](#entry-255)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-eb243a537e81014d5b06011faabd65c24259fe91ef9d9df2a2d380c43dab6115",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:15:10.336Z"
+              },
+              {
+                "code": "MLS-V08-0254",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 254,
+                "title": "으 deletion: 쓰다→써요",
+                "level": "A2",
+                "part": "Morfología verbal básica — 기본 용언 활용",
+                "chapter": "Conjugación e irregularidades — 활용과 불규칙",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo **쓰다** «escribir» forma **써요** en el estilo cortés 해요체. El cambio pertenece al patrón llamado **elisión de ㅡ**: la vocal ㅡ de la raíz desaparece al combinarse con una terminación que empieza por **-아/어**.\n\n#### Cómo funciona\n\nLa raíz es **쓰-**. Al añadirse **-어요**, la vocal **ㅡ** se elimina y queda una base que se combina con **어**, dando **써요**. De forma esquemática: **쓰- + -어요 → 써요**.\n\nEl mismo patrón aparece en **써서** «escribiendo / porque escribe» y **썼어요** «escribió / escribí». Ante terminaciones que no comienzan con -아/어, la raíz mantiene ㅡ: **쓰고** «escribe y…».\n\n#### Ejemplos\n\n* **편지를 써요.** — Escribo una carta.\n* **이름을 써서 주세요.** — Escriba el nombre y entréguelo.\n* **어제 일기를 썼어요.** — Ayer escribí un diario.\n* **메모를 쓰고 있어요.** — Estoy escribiendo una nota.\n\nEn **써요**, **써서** y **썼어요** desaparece ㅡ; en **쓰고**, la raíz **쓰-** permanece.\n\n#### Observación importante\n\nLa elisión de ㅡ no significa que todos los verbos con esa vocal produzcan exactamente la misma forma superficial. La vocal de la terminación resultante depende del entorno morfológico y de la vocal anterior cuando la hay.\n\nPor eso este patrón se distingue de contracciones como **오다 → 와요**, donde las dos vocales se fusionan sin que la raíz pertenezca al grupo de elisión de ㅡ.\n\n#### Entradas relacionadas\n\n* [오다→와요](#entry-253)\n* [으 deletion: 크다→커요](#entry-255)\n* [보다→봐요](#entry-252)\n* [주다→줘요](#entry-256)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-12abbbffb7dfaeaa4f430793b9b066e3b16b8cb2818022e2870b415026d06da5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:16:04.566Z"
+              },
+              {
+                "code": "MLS-V08-0255",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 255,
+                "title": "으 deletion: 크다→커요",
+                "level": "A2",
+                "part": "Morfología verbal básica — 기본 용언 활용",
+                "chapter": "Conjugación e irregularidades — 활용과 불규칙",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo descriptivo **크다** «ser grande» forma **커요** en el estilo cortés 해요체. El cambio pertenece al patrón de **elisión de ㅡ**: la vocal ㅡ de la raíz desaparece cuando se combina con una terminación iniciada en **-아/어**.\n\n#### Cómo funciona\n\nLa raíz es **크-**. Al añadirse **-어요**, la vocal **ㅡ** se elimina y la base resultante se combina con **어**, dando **커요**. De forma esquemática: **크- + -어요 → 커요**.\n\nEl mismo cambio aparece en **커서** «porque es grande» y **컸어요** «era / fue grande». Ante terminaciones que no comienzan con -아/어, la raíz conserva ㅡ: **크고** «es grande y…».\n\n#### Ejemplos\n\n* **집이 커요.** — La casa es grande.\n* **방이 커서 좋아요.** — Me gusta porque la habitación es grande.\n* **예전에는 더 컸어요.** — Antes era más grande.\n* **크고 밝은 방이에요.** — Es una habitación grande y luminosa.\n\nEn **커요**, **커서** y **컸어요** desaparece ㅡ; en **크고**, la raíz **크-** se mantiene.\n\n#### Observación importante\n\nLa elisión de ㅡ no produce siempre la misma vocal final en todos los verbos. La forma resultante depende de la vocal precedente y de la terminación que sigue.\n\nPor eso **크다 → 커요** comparte el mecanismo general con **쓰다 → 써요**, aunque las formas superficiales no sean idénticas.\n\n#### Entradas relacionadas\n\n* [으 deletion: 쓰다→써요](#entry-254)\n* [주다→줘요](#entry-256)\n* [오다→와요](#entry-253)\n* [하다 contraction: 하여→해](#entry-257)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-8603be28711fc3ad0050a7366b1853726d984b3bf64322f8a29a789b28f9cdb9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:16:58.664Z"
+              },
+              {
+                "code": "MLS-V08-0256",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 256,
+                "title": "주다→줘요",
+                "level": "A2",
+                "part": "Morfología verbal básica — 기본 용언 활용",
+                "chapter": "Conjugación e irregularidades — 활용과 불규칙",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo **주다** «dar» forma **줘요** en el estilo cortés 해요체. El cambio se debe a una contracción vocálica: la raíz **주-** se combina con **-어요**, y **주어요** se reduce a **줘요**.\n\n#### Cómo funciona\n\nLa forma de diccionario se analiza como **주- + -다**. Al quitar **-다** y añadir **-어요**, aparece **주어요**. En coreano moderno, la combinación **우 + 어** se contrae a **워**, de modo que **주어요 → 줘요**.\n\nEl mismo patrón aparece en **주어서 → 줘서** «dando / porque da» y **주었어요 → 줬어요** «dio / di». Ante otras terminaciones, la raíz permanece como **주-**, por ejemplo en **주고** «da y…».\n\n#### Ejemplos\n\n* **친구에게 책을 줘요.** — Le doy un libro a un amigo.\n* **물을 좀 줘요.** — Deme un poco de agua / Da un poco de agua, según el contexto.\n* **선물을 줘서 고마워요.** — Gracias por darme el regalo.\n* **어제 책을 줬어요.** — Ayer di un libro.\n\nEn **줘요**, **줘서** y **줬어요** se observa la contracción **주어 → 줘**.\n\n#### Observación importante\n\n**주다 → 줘요** no pertenece al patrón de elisión de ㅡ. La vocal de la raíz es **ㅜ**, y el cambio surge de la contracción **우 + 어 → 워**.\n\nEste patrón es paralelo a otras contracciones vocálicas frecuentes, pero debe distinguirse de cambios como **쓰다 → 써요** o **크다 → 커요**, donde desaparece ㅡ.\n\n#### Entradas relacionadas\n\n* [으 deletion: 크다→커요](#entry-255)\n* [하다 contraction: 하여→해](#entry-257)\n* [으 deletion: 쓰다→써요](#entry-254)\n* [Diccionario → raíz](#entry-258)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e2d3cb30c52435a05dc7a6ab3177d386df52a8ace5763a80eddfa7e35536d631",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T10:17:58.171Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:52:34.611Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:52:34.611Z",
+  "commandFile": "mls chat bridge/commands/r44/chat-20261002-2148-01-claim.json"
+}
