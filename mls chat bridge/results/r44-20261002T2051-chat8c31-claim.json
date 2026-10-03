@@ -1,0 +1,265 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-20261002T2051-chat8c31-claim",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44StatusChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/status",
+        "response": {
+          "status": "ACTIVE",
+          "controlPlane": "CLOUDFLARE_D1",
+          "productionMode": "PARALLEL_HOT_PATH",
+          "globalProductionMutex": false,
+          "githubHotPathWrites": false,
+          "leaseTtlSeconds": 300,
+          "maxActiveLeases": 128,
+          "mcpEndpoint": "/mcp",
+          "mcpProtocol": "2026-07-28",
+          "counts": {
+            "queued": 1191,
+            "leased": 124,
+            "audited": 367,
+            "verified": 0,
+            "quarantined": 0,
+            "recoverable": 88
+          },
+          "durableCounts": [
+            {
+              "state": "CLAIMABLE",
+              "n": 1191
+            },
+            {
+              "state": "COMPLETE",
+              "n": 121
+            },
+            {
+              "state": "LEASED",
+              "n": 124
+            },
+            {
+              "state": "QUARANTINED",
+              "n": 246
+            }
+          ],
+          "meta": {
+            "pool_schema": "MLS-R44-CLOUDFLARE-POOL-2",
+            "pool_generated_at": "2026-10-01T09:50:08.936233Z",
+            "base_commit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+            "pool_ticket_count": "1682",
+            "pool_entry_count": "8408",
+            "pool_ticket_size": "5",
+            "pool_manifest_sha256": "28153404f333669c2d1d7219aae45972387c1d49ff913b5ff75175c009eee47d",
+            "content_manifest_blob": "643b3c9cab84a0372f9e52127fe78ad0e9fab938",
+            "cutover_mode": "cloudflare-d1",
+            "durable_entry_schema": "1"
+          },
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "authenticated": true
+        },
+        "completedAt": "2026-10-03T02:55:42.858Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-32640854-f3ed-48e4-9102-b988d026fdc5",
+          "workerId": "r44-chat8c31",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1290",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996442879,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V08-0660",
+                "path": "coreano/MLS-V08-0660.json",
+                "sha256": "e2861049356d528e6f4103867fa8286a812563ac92f650c050f89eec4c7b4387"
+              },
+              {
+                "code": "MLS-V08-0661",
+                "path": "coreano/MLS-V08-0661.json",
+                "sha256": "b1e014b6f97e16b05fab558738a17825419d7649d7e17eb3b471a7ae586d66a7"
+              },
+              {
+                "code": "MLS-V08-0663",
+                "path": "coreano/MLS-V08-0663.json",
+                "sha256": "29881fe946600a59e394f4e220a165972c790c9a5ee278330a378f09e5c6543e"
+              },
+              {
+                "code": "MLS-V08-0664",
+                "path": "coreano/MLS-V08-0664.json",
+                "sha256": "b67268c39d64c0bb4d81ac66ba3c9c0c4206af43fa2681d07ff0690a9c617c77"
+              },
+              {
+                "code": "MLS-V08-0665",
+                "path": "coreano/MLS-V08-0665.json",
+                "sha256": "41cf057c015753b6a7d85f3195e38b429278c618eb9efe6f48585c300086201d"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1290",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V08-0660",
+                "path": "coreano/MLS-V08-0660.json",
+                "sha256": "e2861049356d528e6f4103867fa8286a812563ac92f650c050f89eec4c7b4387"
+              },
+              {
+                "code": "MLS-V08-0661",
+                "path": "coreano/MLS-V08-0661.json",
+                "sha256": "b1e014b6f97e16b05fab558738a17825419d7649d7e17eb3b471a7ae586d66a7"
+              },
+              {
+                "code": "MLS-V08-0663",
+                "path": "coreano/MLS-V08-0663.json",
+                "sha256": "29881fe946600a59e394f4e220a165972c790c9a5ee278330a378f09e5c6543e"
+              },
+              {
+                "code": "MLS-V08-0664",
+                "path": "coreano/MLS-V08-0664.json",
+                "sha256": "b67268c39d64c0bb4d81ac66ba3c9c0c4206af43fa2681d07ff0690a9c617c77"
+              },
+              {
+                "code": "MLS-V08-0665",
+                "path": "coreano/MLS-V08-0665.json",
+                "sha256": "41cf057c015753b6a7d85f3195e38b429278c618eb9efe6f48585c300086201d"
+              }
+            ],
+            "remaining": [
+              "MLS-V08-0660",
+              "MLS-V08-0661",
+              "MLS-V08-0663",
+              "MLS-V08-0664",
+              "MLS-V08-0665"
+            ],
+            "lease": {
+              "workerId": "r44-chat8c31",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996442879,
+              "active": true
+            },
+            "workerId": "r44-chat8c31",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996442879,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V08-0660",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 660,
+                "title": "-는 반면에",
+                "level": "B2",
+                "part": "Concesión y terminaciones finales — 양보와 종결 어미",
+                "chapter": "Concesión, fondo y contraste avanzado — 양보·배경·고급 대조",
+                "articleMarkdown": "#### -는 반면에\n\n#### En pocas palabras\n\n**-는 반면에** presenta un contraste entre dos acciones, tendencias o situaciones. En español suele corresponder a «mientras que», «en cambio» o «por otra parte».\n\n#### Cómo funciona\n\nCon verbos de acción, **-는** modifica **반면에**: **일하다 → 일하는 반면에**, **늘다 → 느는 반면에**. La construcción pone dos contenidos en paralelo para destacar una diferencia.\n\nCon verbos descriptivos son frecuentes formas como **-(으)ㄴ 반면에**, por lo que la forma exacta depende del tipo de predicado.\n\n#### Ejemplos\n\n**형은 조용한 반면에 동생은 활발해요.** — «El hermano mayor es tranquilo, mientras que el menor es activo». Aquí aparece la variante descriptiva **-ㄴ 반면에**.\n\n**도시는 인구가 느는 반면에 농촌은 줄고 있어요.** — «Mientras la población urbana aumenta, la rural disminuye».\n\n**민수는 아침에 일하는 반면에 지수는 밤에 일해요.** — «Minsu trabaja por la mañana, mientras que Jisu trabaja de noche».\n\n#### Observación importante\n\nEl título **-는 반면에** corresponde específicamente al patrón con verbos de acción. El ejemplo heredado usa **조용한 반면에**, una variante con verbo descriptivo, por lo que ilustra la construcción general **반면에**, pero no la morfología exacta del título.\n\n#### Entradas relacionadas\n\n- **반면에**: contraste general.\n- **-는 대신에**: sustitución o compensación.\n- **-는데**: trasfondo o contraste discursivo.\n- **-기는 하지만**: reconocimiento seguido de contraste.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a324b219a17faa7eddf18e75ca776eacf2800b4d88b77a356febf8ec0e93b5a2",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:45:18.767Z"
+              },
+              {
+                "code": "MLS-V08-0661",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 661,
+                "title": "-는데",
+                "level": "B2",
+                "part": "Concesión y terminaciones finales — 양보와 종결 어미",
+                "chapter": "Concesión, fondo y contraste avanzado — 양보·배경·고급 대조",
+                "articleMarkdown": "#### -는데\n\n#### En pocas palabras\n\n**-는데** introduce trasfondo, contraste o una circunstancia relevante para lo que sigue. En español puede corresponder a «pero», «y», «resulta que…» o no tener una traducción fija.\n\n#### Cómo funciona\n\nCon verbos de acción en presente aparece como **raíz + -는데**: **오다 → 오는데**, **가다 → 가는데**. La cláusula suele preparar una pregunta, explicar una situación o establecer un contraste.\n\n#### Ejemplos\n\n**비가 오는데 나갈 거예요?** — «Está lloviendo; ¿vas a salir?».\n\n**지금 바쁜데 나중에 전화할게요.** — «Ahora estoy ocupado; te llamaré después».\n\n**열심히 공부하는데 성적이 잘 안 올라요.** — «Estudia mucho, pero las notas no mejoran».\n\n#### Observación importante\n\n**-는데** no significa siempre «aunque». La lectura depende de la relación discursiva entre las cláusulas. Con verbos descriptivos aparecen formas relacionadas como **-(으)ㄴ데**.\n\n#### Entradas relacionadas\n\n- **-(으)ㄴ데**: variante con verbos descriptivos.\n- **-는 반면에**: contraste explícito.\n- **-더라도**: concesión.\n- **-는 대신에**: sustitución o compensación.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6c64e5ebe1e68bccb26b60bb648756135aa5a27643b5e80d4b6e0dfe46185cdf",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:46:17.260Z"
+              },
+              {
+                "code": "MLS-V08-0663",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 663,
+                "title": "-뿐만 아니라",
+                "level": "B2",
+                "part": "Concesión y terminaciones finales — 양보와 종결 어미",
+                "chapter": "Concesión, fondo y contraste avanzado — 양보·배경·고급 대조",
+                "articleMarkdown": "#### -뿐만 아니라\n\n#### En pocas palabras\n\n**-뿐만 아니라** expresa adición enfática. Presenta una primera propiedad o acción y añade otra, con un sentido equivalente a «no solo…, sino también…».\n\n#### Cómo funciona\n\nLa construcción combina una forma modificadora con **뿐만 아니라**. Según el predicado pueden aparecer formas como **-는**, **-(으)ㄴ** o **-(으)ㄹ** antes de **뿐만 아니라**. La segunda parte contiene con frecuencia **도** «también».\n\n#### Ejemplos\n\n**이 도시는 아름다울 뿐만 아니라 안전해요.** — «Esta ciudad no solo es bonita, sino también segura».\n\n**민수는 공부를 열심히 할 뿐만 아니라 운동도 꾸준히 해요.** — «Minsu no solo estudia mucho, sino que además hace ejercicio con constancia».\n\n**이 제품은 가벼울 뿐만 아니라 튼튼해요.** — «Este producto no solo es ligero, sino también resistente».\n\n#### Observación importante\n\n**-뿐만 아니라** no expresa concesión. A diferencia de **-더라도**, no presenta una dificultad que se supera; añade dos contenidos que se consideran válidos.\n\n#### Entradas relacionadas\n\n- **뿐만 아니라**: patrón aditivo general.\n- **-더라도**: concesión.\n- **-는 반면에**: contraste.\n- **-(으)ㄴ/는 대신에**: sustitución o compensación.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6b23e8d31cecc329511de066b47bf2023febe6be25c7e3421fdd2d662864fe0d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:48:35.825Z"
+              },
+              {
+                "code": "MLS-V08-0664",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 664,
+                "title": "-아/어도",
+                "level": "B2",
+                "part": "Concesión y terminaciones finales — 양보와 종결 어미",
+                "chapter": "Concesión, fondo y contraste avanzado — 양보·배경·고급 대조",
+                "articleMarkdown": "#### -아/어도\n\n#### En pocas palabras\n\n**-아/어도** expresa concesión: una circunstancia se presenta como insuficiente para cambiar el resultado principal. En español suele corresponder a «aunque», «incluso si» o «aun cuando».\n\n#### Cómo funciona\n\nLa forma sigue la alternancia habitual de **-아/어-**: **가다 → 가도**, **먹다 → 먹어도**, **피곤하다 → 피곤해도**. Puede aparecer con verbos de acción y descriptivos.\n\nFrente a **-더라도**, suele ser más neutral y frecuente en el uso general.\n\n#### Ejemplos\n\n**피곤해도 공부해요.** — «Estudio aunque esté cansado».\n\n**비가 와도 갈 거예요.** — «Iré aunque llueva».\n\n**조금 비싸도 이 제품을 살 거예요.** — «Aunque sea un poco caro, compraré este producto».\n\n#### Observación importante\n\n**-아/어도** expresa concesión de forma más directa que **-는데**, que también puede funcionar simplemente como trasfondo o contraste. El ejemplo heredado representa correctamente la forma objetivo.\n\n#### Entradas relacionadas\n\n- **-더라도**: concesión más enfática.\n- **-(으)ㄹ지라도**: concesión más formal.\n- **-는데**: fondo o contraste discursivo.\n- **-(으)ㄴ/는 대신에**: sustitución o compensación.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-631c71c86b94bd5bb2bd015e255766078912de1f8db7591d824510e240c9a0bc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:49:38.665Z"
+              },
+              {
+                "code": "MLS-V08-0665",
+                "language": "coreano",
+                "languageName": "Coreano",
+                "n": 665,
+                "title": "-(으)ㄴ/는 대신에",
+                "level": "C1",
+                "part": "Concesión y terminaciones finales — 양보와 종결 어미",
+                "chapter": "Concesión, fondo y contraste avanzado — 양보·배경·고급 대조",
+                "articleMarkdown": "#### -(으)ㄴ/는 대신에\n\n#### En pocas palabras\n\n**-(으)ㄴ/는 대신에** expresa sustitución, alternativa o compensación. Presenta una acción, estado o propiedad en relación con otra que ocupa su lugar o funciona como contrapartida. En español puede corresponder a «en vez de…», «a cambio de…» o «pero a cambio…».\n\n#### Cómo funciona\n\nCon verbos de acción en presente aparece **-는 대신에**: **가다 → 가는 대신에**. Con verbos descriptivos se emplea normalmente **-(으)ㄴ 대신에**: **작다 → 작은 대신에**. También pueden aparecer formas temporales adecuadas al contexto.\n\nLa segunda cláusula puede indicar una sustitución directa o una compensación entre ventajas y desventajas.\n\n#### Ejemplos\n\n**직접 가는 대신에 전화했어요.** — «En lugar de ir personalmente, llamé».\n\n**제가 요리하는 대신에 민수가 설거지해요.** — «A cambio de que yo cocine, Minsu lava los platos».\n\n**이 집은 작은 대신에 교통이 편리해요.** — «Esta casa es pequeña, pero a cambio tiene buenas conexiones de transporte».\n\n#### Observación importante\n\n**-(으)ㄴ/는 대신에** no equivale a **-(으)ㄴ/는 반면에**. La primera establece sustitución o compensación; la segunda contrasta dos lados sin implicar necesariamente intercambio.\n\n#### Entradas relacionadas\n\n- **대신에**: patrón general de sustitución o compensación.\n- **-는 대신에**: variante con verbos de acción.\n- **-(으)ㄴ/는 반면에**: contraste entre dos aspectos.\n- **-뿐만 아니라**: adición enfática.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-edc28ecce395cd9d4785c08e2550ffcbdfac864d593f2d55dcc57f5fb1c1145f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:50:40.498Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:55:43.275Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:55:43.275Z",
+  "commandFile": "mls chat bridge/commands/r44-20261002T2051-chat8c31-claim.json"
+}

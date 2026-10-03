@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-b-step-04",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0303",
+          "sha256": "deaa7cd14b321d2fab5aae1b87fdf940cdb4a1b2f431f57dd0caeb7696603195",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0303",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c6704fc5-f906-4265-8d4d-034183fe33bd",
+                "ticketId": "R43-EMERGENCY-0303",
+                "code": "MLS-V04-1020",
+                "idempotencyKey": "R43-EMERGENCY-0303:MLS-V04-1020:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1588864ea85a7d950bfe2793e158a9966ca449035964618f1c17e10d7072cea1",
+                "sourceSha256": "8e9098bb0ddbaa4080919759a36e5f16e03144dc1169deb092302bb02e0a171c",
+                "committedMs": 1790996143801,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7e7c5644c06bebc656748666a0a71c885740fbc47dc4d8c7b9cae4c7774c29bc",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0303",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "7c600864-20c8-44cb-9cda-a49a78f0e00c",
+                "ticketId": "R43-EMERGENCY-0303",
+                "code": "MLS-V04-1021",
+                "idempotencyKey": "R43-EMERGENCY-0303:MLS-V04-1021:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "c3ce0b214cefaa2722804171244321f917281ad15a915cbe30af422f7b642af8",
+                "sourceSha256": "0e5180351078faee745dfef89d380116edafb8d628c391867e29475585c19bd5",
+                "committedMs": 1790996143867,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "96f31bb7fc5c80bd845361c1950e539db26a90810c29a3ff55ce29afa15a4dd0",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0303",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d6d3e492-cc33-4f50-9fd6-36247df9dbae",
+                "ticketId": "R43-EMERGENCY-0303",
+                "code": "MLS-V04-1022",
+                "idempotencyKey": "R43-EMERGENCY-0303:MLS-V04-1022:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "72dac3b8fbd91c2921a71ff1d0ab6496fcde2ef8e5a8d53bb79cced594232442",
+                "sourceSha256": "0c02665054651cc050f9a20e81e12918faf26a73968a0ed9f29b391d8601e8c6",
+                "committedMs": 1790996143936,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "378643d98c68f282ae33bf027f3889f9c447f067fe1279dec57bd1d2ccd66c1d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0303",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "31f93d68-d66f-44d0-9a1a-53a263a02b9b",
+                "ticketId": "R43-EMERGENCY-0303",
+                "code": "MLS-V04-1023",
+                "idempotencyKey": "R43-EMERGENCY-0303:MLS-V04-1023:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "746019d7d18d50596e8eb48e4dd07f2b99be76791c6bfa0bccc7a8d0033c86f4",
+                "sourceSha256": "f6142f808748e7799e6f4627ca8093bfeb8781c95d62c9aedb69fdbad2efeb7b",
+                "committedMs": 1790996143997,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ad2f5eaf8174b862db2d58f9715e3291ca061aa8ee2c3329d51016e7d8a9ce3f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0303",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "29a2ec1c-9265-4d22-b1eb-251faa597d0f",
+                "ticketId": "R43-EMERGENCY-0303",
+                "code": "MLS-V04-1024",
+                "idempotencyKey": "R43-EMERGENCY-0303:MLS-V04-1024:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "aaa94861ca710bd0d21152305d5555791340ab93e2cbce2ada12d247826f3a2f",
+                "sourceSha256": "2b2ee3e5df4802e62562bc462689619db25cf722808b1303369c5159ebc3b294",
+                "committedMs": 1790996144066,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "256d96ec2036aef0d9d5c23e30c08b8a16551969716b2cfbadfffe2b3b9527ac",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-1561c340-06b0-46ea-b681-6c7c2eed2e9a",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "deaa7cd14b321d2fab5aae1b87fdf940cdb4a1b2f431f57dd0caeb7696603195"
+          }
+        },
+        "completedAt": "2026-10-03T02:55:44.230Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-4073d38c-19c3-48e7-88eb-bde255ab0109",
+          "workerId": "chat-r44-m10-20261002-2045-b",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0304",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996444252,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V04-1025",
+                "path": "frances/MLS-V04-1025.json",
+                "sha256": "c322ae7b13e308d7a14cdce94870382be4a56fc08ba57b91a754183edae4a4ba"
+              },
+              {
+                "code": "MLS-V04-1027",
+                "path": "frances/MLS-V04-1027.json",
+                "sha256": "67a3b5b421b448455bd2d383691d7d868f2ee31ca79e2a03db0b386ea33b1fe7"
+              },
+              {
+                "code": "MLS-V04-1028",
+                "path": "frances/MLS-V04-1028.json",
+                "sha256": "4f0af38170ddc568745879abb12bede12d860b135808980243429b9963f636b0"
+              },
+              {
+                "code": "MLS-V04-1029",
+                "path": "frances/MLS-V04-1029.json",
+                "sha256": "41664a80b203e716f3edfc7af40d63b894d37485ccd7b5f56c874cd3c758940b"
+              },
+              {
+                "code": "MLS-V04-1030",
+                "path": "frances/MLS-V04-1030.json",
+                "sha256": "d302474ceb4cf3b948cb4ffd4d32250e30b59fb30b108acafb9f9f0ddc67ca11"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0304",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V04-1025",
+                "path": "frances/MLS-V04-1025.json",
+                "sha256": "c322ae7b13e308d7a14cdce94870382be4a56fc08ba57b91a754183edae4a4ba"
+              },
+              {
+                "code": "MLS-V04-1027",
+                "path": "frances/MLS-V04-1027.json",
+                "sha256": "67a3b5b421b448455bd2d383691d7d868f2ee31ca79e2a03db0b386ea33b1fe7"
+              },
+              {
+                "code": "MLS-V04-1028",
+                "path": "frances/MLS-V04-1028.json",
+                "sha256": "4f0af38170ddc568745879abb12bede12d860b135808980243429b9963f636b0"
+              },
+              {
+                "code": "MLS-V04-1029",
+                "path": "frances/MLS-V04-1029.json",
+                "sha256": "41664a80b203e716f3edfc7af40d63b894d37485ccd7b5f56c874cd3c758940b"
+              },
+              {
+                "code": "MLS-V04-1030",
+                "path": "frances/MLS-V04-1030.json",
+                "sha256": "d302474ceb4cf3b948cb4ffd4d32250e30b59fb30b108acafb9f9f0ddc67ca11"
+              }
+            ],
+            "remaining": [
+              "MLS-V04-1025",
+              "MLS-V04-1027",
+              "MLS-V04-1028",
+              "MLS-V04-1029",
+              "MLS-V04-1030"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-b",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996444252,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-b",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996444252,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V04-1025",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1025,
+                "title": "Passé simple -er",
+                "level": "C2",
+                "part": "Literatura, historia y francofonía — Littérature, histoire et francophonie",
+                "chapter": "Tiempos literarios y registros históricos — Temps littéraires et registres historiques",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **passé simple** es un tiempo verbal del pasado que aparece sobre todo en narración escrita, literatura, historiografía y ciertos registros formales. Con los verbos regulares en **-er**, sus terminaciones características son **-ai, -as, -a, -âmes, -âtes, -èrent**: **je parlai, tu parlas, il parla, nous parlâmes, vous parlâtes, ils parlèrent**.\n\nNo debe entenderse simplemente como «un pasado más antiguo» ni como equivalente automático de un único tiempo español. Su función depende del género y de la organización narrativa del texto.\n\n#### Cómo funciona\n\nPara un verbo regular como **arriver**, se toma la base **arriv-** y se añaden las terminaciones del passé simple: **j’arrivai, tu arrivas, il/elle arriva, nous arrivâmes, vous arrivâtes, ils/elles arrivèrent**. Las formas de primera y segunda persona plural llevan acento circunflejo en **-âmes** y **-âtes**.\n\nEn narración, el passé simple suele presentar acontecimientos delimitados que hacen avanzar la secuencia: **Il entra, regarda autour de lui et referma la porte**. El **imparfait**, en cambio, puede proporcionar marco, descripción o circunstancias: **La pièce était sombre quand il entra**. Esta oposición es discursiva y aspectual, no una regla mecánica de «acción corta frente a acción larga».\n\nEn el francés contemporáneo hablado, el **passé composé** ocupa normalmente funciones que en ciertos textos escritos desempeña el passé simple. Por eso **Il est arrivé hier** es natural en conversación, mientras que **Il arriva hier** evoca con facilidad un relato escrito o un estilo deliberadamente literario.\n\n#### Ejemplos\n\n* **Il entra dans la salle et salua les invités.** — Entró en la sala y saludó a los invitados.\n* **Elle regarda la lettre, hésita puis répondit.** — Miró la carta, dudó y luego respondió.\n* **Nous arrivâmes avant la tombée de la nuit.** — Llegamos antes del anochecer.\n* **Ils parlèrent longtemps de cette affaire.** — Hablaron largo rato de aquel asunto.\n\n#### Observación importante\n\nLas formas del passé simple siguen siendo plenamente comprensibles y productivas en determinados géneros escritos, pero no son la opción neutral de la conversación cotidiana en la mayoría de variedades francófonas actuales. Su frecuencia concreta varía según género, época, autor y comunidad.\n\nAdemás, las terminaciones de los verbos en **-er** no sirven como modelo para todos los verbos: otros grupos presentan series diferentes y numerosos verbos frecuentes tienen bases específicas. Al comparar con el español, conviene atender al texto completo y no equiparar automáticamente el passé simple francés con el pretérito español en todos los contextos.\n\n#### Entradas relacionadas\n\n[Passé simple verbos frecuentes](#entry-1026) · [Passé antérieur](#entry-1027) · [Norma escrita vs oralidad](#entry-986) · [Enfin](#entry-948)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-74f49c436caa04e2e527a30026f158ce7a1684aaa861d4487f37ede4fa192678",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:12:36.828Z"
+              },
+              {
+                "code": "MLS-V04-1027",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1027,
+                "title": "Passé antérieur",
+                "level": "C2",
+                "part": "Literatura, historia y francofonía — Littérature, histoire et francophonie",
+                "chapter": "Tiempos literarios y registros históricos — Temps littéraires et registres historiques",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **passé antérieur** es un tiempo compuesto del pasado, característico sobre todo de la narración literaria, histórica y de ciertos registros escritos formales. Se forma con **avoir** o **être** en **passé simple** más el participio pasado: **il eut terminé**, **elle fut arrivée**, **ils eurent compris**.\n\nSu función principal es presentar un hecho ya completado antes de otro acontecimiento pasado que sirve como punto de referencia. Aparece con especial frecuencia en subordinadas temporales: **Quand il eut terminé son discours, il quitta la salle**.\n\n#### Cómo funciona\n\nCon **avoir**, se combinan formas como **eus, eut, eûmes, eurent** con el participio: **j’eus compris**, **il eut parlé**, **ils eurent décidé**. Con verbos que forman los tiempos compuestos con **être**, se usa el passé simple de este auxiliar: **elle fut partie**, **ils furent arrivés**. Las reglas de concordancia del participio siguen las del auxiliar correspondiente.\n\nEl passé antérieur aparece a menudo después de **quand, lorsque, dès que, aussitôt que** o **après que**, mientras la oración principal lleva passé simple: **Dès qu’elle fut arrivée, la séance commença**. Esta combinación organiza dos acontecimientos sucesivos y presenta el primero como cerrado antes del segundo.\n\nEsa sucesión puede ser muy rápida, pero «inmediatamente después» no forma parte obligatoria del significado del tiempo. Lo esencial es la anterioridad de un hecho completado dentro de una narración de pasado. El contexto y el conector precisan la relación temporal.\n\nFrente al **plus-que-parfait**, que también expresa anterioridad, el passé antérieur está más estrechamente asociado con el eje narrativo del passé simple y con acontecimientos delimitados. El plus-que-parfait tiene una distribución mucho más amplia y puede proporcionar antecedentes, estados o circunstancias previas.\n\n#### Ejemplos\n\n* **Quand il eut terminé son discours, il quitta la salle.** — Cuando terminó su discurso, salió de la sala.\n* **Dès qu’elle fut arrivée, la réunion commença.** — En cuanto llegó, comenzó la reunión.\n* **Lorsqu’ils eurent signé le contrat, ils célébrèrent l’accord.** — Cuando hubieron firmado el contrato, celebraron el acuerdo.\n* **Après qu’il eut reçu la lettre, il changea d’avis.** — Después de recibir la carta, cambió de opinión.\n\n#### Observación importante\n\nEl passé antérieur pertenece al **indicatif**. Esto resulta especialmente visible con **après que**, construcción que en la norma cuidada selecciona indicativo, aunque en el uso contemporáneo también se documentan otras elecciones. **Après qu’il eut reçu…** es, por tanto, una construcción plenamente regular.\n\nEn la conversación cotidiana actual, el passé antérieur no es la opción neutral de la mayoría de hablantes. Las relaciones temporales equivalentes suelen expresarse mediante otros tiempos y construcciones, según el contexto. Sin embargo, sigue siendo importante para comprender literatura, historia y narraciones de registro elevado; describirlo simplemente como «arcaico» sería demasiado impreciso.\n\n#### Entradas relacionadas\n\n[Passé simple verbos frecuentes](#entry-1026) · [Passé simple -er](#entry-1025) · [Concordancia literaria de tiempos](#entry-1028) · [Norma escrita vs oralidad](#entry-986)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6f18b31fa95eb1a14751d47e6be125a4d08f4826230aa02dda0d6b34b4001324",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:14:27.973Z"
+              },
+              {
+                "code": "MLS-V04-1028",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1028,
+                "title": "Concordancia literaria de tiempos",
+                "level": "C2",
+                "part": "Literatura, historia y francofonía — Littérature, histoire et francophonie",
+                "chapter": "Tiempos literarios y registros históricos — Temps littéraires et registres historiques",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **concordancia de tiempos** describe cómo se relacionan los tiempos verbales cuando una oración depende de otra y ambas se sitúan respecto de un mismo punto temporal. En narración literaria francesa, esta relación puede incluir tiempos hoy poco frecuentes en conversación, como **passé simple**, **passé antérieur**, **conditionnel** y, en determinados contextos, formas históricas del subjuntivo.\n\nEn **Il déclara qu’il viendrait dès qu’il aurait terminé**, el verbo principal **déclara** sitúa el acto de decir en el pasado; **viendrait** presenta una acción posterior a ese punto pasado, y **aurait terminé** presenta otra acción que debe completarse antes de la llegada.\n\n#### Cómo funciona\n\nCuando un verbo introductorio está en pasado, una acción simultánea puede expresarse con **imparfait**: **Il déclara qu’il était prêt**. Una acción anterior puede aparecer con **plus-que-parfait**: **Il déclara qu’il avait terminé**. Una acción posterior se expresa típicamente mediante **conditionnel présent**: **Il déclara qu’il viendrait**.\n\nSi esa acción futura respecto del pasado debe estar ya completada antes de otra, aparece el **conditionnel passé**: **Il déclara qu’il viendrait dès qu’il aurait terminé**. Estas relaciones suelen llamarse simultaneidad, anterioridad y posterioridad, pero no constituyen una simple tabla mecánica: el significado del verbo, el aspecto y la perspectiva narrativa también intervienen.\n\nEn textos literarios, el sistema puede combinarse con passé simple y passé antérieur: **Lorsqu’il eut terminé, il annonça qu’il partirait**. Aquí **eut terminé** precede inmediatamente en la organización narrativa a **annonça**, mientras que **partirait** es posterior al anuncio.\n\nLa concordancia tampoco obliga siempre a desplazar un presente a pasado. Una afirmación que el narrador presenta como todavía válida puede conservar el presente en ciertos contextos: **Il expliqua que la Terre tourne autour du Soleil**. La elección depende de si la proposición se ancla al momento pasado o se presenta como válida independientemente de él.\n\n#### Ejemplos\n\n* **Il déclara qu’il était prêt.** — Declaró que estaba listo.\n* **Elle expliqua qu’elle avait déjà envoyé la lettre.** — Explicó que ya había enviado la carta.\n* **Il promit qu’il reviendrait le lendemain.** — Prometió que volvería al día siguiente.\n* **Il déclara qu’il viendrait dès qu’il aurait terminé.** — Declaró que vendría en cuanto hubiera terminado.\n\n#### Observación importante\n\n«Concordancia de tiempos» no significa que exista una única transformación obligatoria para cada tiempo verbal. El francés distingue relaciones temporales respecto del punto de vista adoptado por el hablante o narrador, y el discurso indirecto puede conservar ciertos tiempos cuando el contenido sigue siendo válido o cuando el estilo lo justifica.\n\nEn literatura histórica también pueden aparecer combinaciones hoy marcadas o raras en el habla, pero no por ello deben clasificarse automáticamente como errores o formas muertas. Para interpretar correctamente una secuencia, conviene identificar primero el tiempo del verbo principal y luego preguntar si cada acción subordinada es anterior, simultánea o posterior respecto de ese punto.\n\n#### Entradas relacionadas\n\n[Passé antérieur](#entry-1027) · [Passé simple verbos frecuentes](#entry-1026) · [Passé simple -er](#entry-1025) · [Norma escrita vs oralidad](#entry-986)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3f5cfaaec43f00959e5606b10b441737eee81dd1421f79473248fbfd4a790ca5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:15:13.634Z"
+              },
+              {
+                "code": "MLS-V04-1029",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1029,
+                "title": "Uso narrativo del passé simple",
+                "level": "C2",
+                "part": "Literatura, historia y francofonía — Littérature, histoire et francophonie",
+                "chapter": "Tiempos literarios y registros históricos — Temps littéraires et registres historiques",
+                "articleMarkdown": "#### En pocas palabras\n\nEn la narración escrita, el **passé simple** sirve con frecuencia para presentar acontecimientos delimitados que hacen avanzar la historia. En una secuencia como **Il ouvrit la lettre, la lut et quitta la pièce**, cada verbo introduce un nuevo hecho en el primer plano narrativo.\n\nSu valor no consiste simplemente en indicar que algo «pasó antes». El tiempo contribuye a organizar el relato: sitúa una serie de acontecimientos en un pasado desligado del momento de enunciación y los presenta como unidades completas dentro de la progresión narrativa.\n\n#### Cómo funciona\n\nEn relatos literarios e históricos, el passé simple contrasta a menudo con **imparfait**. Este último puede proporcionar descripciones, circunstancias, estados o procesos en curso, mientras el passé simple introduce acontecimientos que modifican la situación: **La pluie tombait encore lorsqu’il ouvrit la porte et sortit**.\n\nEsta oposición suele describirse como **primer plano** frente a **trasfondo**, pero es una herramienta de análisis, no una regla absoluta. Un verbo en imparfait puede adquirir efectos narrativos particulares, y un passé simple no tiene que expresar necesariamente una acción breve. Lo decisivo es cómo el texto presenta el desarrollo del acontecimiento.\n\nEl passé simple también puede encadenar acciones sucesivas: **Elle entra, posa son sac, regarda autour d’elle et s’assit**. La sucesión se interpreta por el orden de las proposiciones, el significado de los verbos y el contexto; el tiempo verbal por sí solo no codifica cada relación temporal imaginable.\n\nCon subordinadas temporales, puede combinarse con **passé antérieur** para marcar que una acción se completa antes de otra: **Quand il eut fini, il sortit**. Con **plus-que-parfait**, el narrador puede retroceder hacia un antecedente: **Il comprit alors ce qu’il avait oublié**.\n\n#### Ejemplos\n\n* **Il ouvrit la lettre, la lut et quitta la pièce.** — Abrió la carta, la leyó y salió de la habitación.\n* **La ville dormait encore quand le train arriva.** — La ciudad todavía dormía cuando llegó el tren.\n* **Elle entra, posa son sac et s’assit près de la fenêtre.** — Entró, dejó su bolso y se sentó junto a la ventana.\n* **Quand il eut terminé son travail, il rentra chez lui.** — Cuando terminó su trabajo, regresó a casa.\n\n#### Observación importante\n\nNo conviene reducir el contraste **passé simple / imparfait** a «acción corta / acción larga». Una acción duradera puede presentarse globalmente en passé simple, y una acción momentánea puede aparecer en imparfait si el narrador la contempla de otra manera. La diferencia implica aspecto y organización del discurso, además de tiempo.\n\nEn el francés contemporáneo, este uso narrativo se conserva especialmente en literatura, biografías, historia y otros géneros escritos. En conversación y en numerosos textos no literarios, el **passé composé** suele ocupar el lugar que tendría el passé simple, pero la distribución exacta depende del género, del estilo y de la comunidad francófona.\n\n#### Entradas relacionadas\n\n[Concordancia literaria de tiempos](#entry-1028) · [Passé antérieur](#entry-1027) · [Passé simple verbos frecuentes](#entry-1026) · [Passé simple -er](#entry-1025)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b9cee1d9124fc863dfb80c70e7879df47b8c52c481ecfbab7ec748fd11e3dd6a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:16:03.529Z"
+              },
+              {
+                "code": "MLS-V04-1030",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1030,
+                "title": "Passé simple",
+                "level": "C2",
+                "part": "Literatura, historia y francofonía — Littérature, histoire et francophonie",
+                "chapter": "Tiempos literarios y registros históricos — Temps littéraires et registres historiques",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **passé simple** es un tiempo simple del indicativo francés especializado hoy, sobre todo, en determinados géneros escritos: narración literaria, historia, biografía y estilos formales. Presenta acontecimientos pasados como unidades delimitadas dentro del relato: **Il entra, regarda autour de lui et s’assit**.\n\nNo es simplemente una variante «más antigua» del **passé composé**. Ambos pueden referirse a hechos pasados, pero su distribución depende del medio, del género y de la manera en que el hablante o narrador organiza el discurso.\n\n#### Cómo funciona\n\nMorfológicamente, el passé simple posee varias series. Los verbos regulares en **-er** presentan terminaciones como **-ai, -as, -a, -âmes, -âtes, -èrent**: **je parlai, il parla, ils parlèrent**. Otros verbos usan series en **-i-**, **-u-** o bases particulares: **il finit, il fit, il eut, il vint, il prit**.\n\nEn narración, el tiempo suele introducir acontecimientos que hacen avanzar la secuencia. Puede contrastar con **imparfait**, empleado frecuentemente para marco, descripción o procesos vistos desde dentro: **La rue était déserte lorsqu’il arriva**. Esta oposición es aspectual y discursiva; no se reduce a «acción breve frente a acción larga».\n\nEl passé simple puede combinarse con otros tiempos del sistema narrativo. El **passé antérieur** marca con frecuencia anterioridad respecto de un acontecimiento en passé simple: **Quand il eut fini, il sortit**. El **plus-que-parfait** puede introducir antecedentes anteriores al punto narrativo: **Il comprit ce qu’il avait oublié**.\n\nEn francés hablado contemporáneo, el passé composé ocupa generalmente el espacio narrativo que el passé simple conserva en ciertos textos escritos: **Il est entré, il a regardé autour de lui et il s’est assis**. Esto no significa que las dos formas sean intercambiables en cualquier texto: cambiar de una a otra puede modificar el registro y el estilo global.\n\n#### Ejemplos\n\n* **Il entra dans la maison et referma la porte.** — Entró en la casa y cerró la puerta.\n* **Elle prit la lettre et la lut en silence.** — Tomó la carta y la leyó en silencio.\n* **La foule attendait lorsque le président arriva.** — La multitud esperaba cuando llegó el presidente.\n* **Quand ils eurent terminé, ils quittèrent la salle.** — Cuando terminaron, salieron de la sala.\n\n#### Observación importante\n\nEl passé simple sigue perteneciendo a la gramática del francés contemporáneo, aunque su uso productivo esté concentrado en determinados géneros. Etiquetarlo sin más como «arcaico» oculta que continúa siendo normal y esperado en mucha literatura, historiografía y narración escrita.\n\nTambién conviene separar reconocimiento y producción. Un lector avanzado necesita identificar formas como **fut, eut, fit, vint, prit** o **virent**, aunque no las emplee al conversar. La frecuencia exacta del tiempo cambia según época, autor, género y comunidad francófona, por lo que la descripción debe atender al contexto y no a una única variedad nacional.\n\n#### Entradas relacionadas\n\n[Uso narrativo del passé simple](#entry-1029) · [Concordancia literaria de tiempos](#entry-1028) · [Passé antérieur](#entry-1027) · [Passé simple verbos frecuentes](#entry-1026)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0a0c025af36038fe58497efb74f0f25ab02823fa352d32082db74612c11296cf",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:16:45.075Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:55:44.696Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:55:44.696Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-b/04-submit-claim.json"
+}
