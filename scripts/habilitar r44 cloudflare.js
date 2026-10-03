@@ -21,13 +21,19 @@ function injectR44(code) {
   if (next.includes('if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/")) {') && !next.includes('url.pathname === "/mcp"')) {
     next = next.replace('if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/")) {', 'if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/") || url.pathname === "/mcp") {');
   }
+  if (next.includes('url.pathname.startsWith("/api/r44/")') && !next.includes('url.pathname.startsWith("/api/unified-runner/")')) {
+    next = next.replace(
+      'url.pathname.startsWith("/api/r44/") || url.pathname === "/mcp"',
+      'url.pathname.startsWith("/api/r44/") || url.pathname.startsWith("/api/unified-runner/") || url.pathname === "/mcp"'
+    );
+  }
   if (!next.includes('url.pathname.startsWith("/api/r44/")')) {
     if (!next.includes(ROUTE_MARKER)) throw new Error("R44 route marker not found");
     next = next.replace(ROUTE_MARKER, ROUTE);
   }
   if (!next.includes("MLS Unified scheduled runner")) {
-    const fetchMarker = "var index_default = {\\n  async fetch(request, env, _ctx) {";
-    const scheduled = "var index_default = {\\n  // MLS Unified scheduled runner\\n  async scheduled(_controller, env, ctx) {\\n    ctx.waitUntil(unifiedRunnerScheduled(env));\\n  },\\n  async fetch(request, env, _ctx) {";
+    const fetchMarker = "var index_default = {\n  async fetch(request, env, _ctx) {";
+    const scheduled = "var index_default = {\n  // MLS Unified scheduled runner\n  async scheduled(_controller, env, ctx) {\n    ctx.waitUntil(unifiedRunnerScheduled(env));\n  },\n  async fetch(request, env, _ctx) {";
     if (!next.includes(fetchMarker)) throw new Error("Unified scheduled hook marker not found");
     next = next.replace(fetchMarker, scheduled);
   }
