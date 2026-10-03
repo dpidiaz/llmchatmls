@@ -217,22 +217,35 @@ function r33CandidateToWork(candidate,now=Date.now()){
   if(!candidate?.eligible)return null;
   const codes=candidate.units.map(x=>x.code),first=codes[0],last=codes.at(-1);
   const handoff=candidate.ownership?.r43Handoff||null;
-  const workPrefix=handoff?'r33-handoff:'+String(handoff.waveIssueNumber)+':':'r33-farm:';
+  const unified=Array.isArray(candidate.r44Unified)&&candidate.r44Unified.length>0;
+  const workPrefix=handoff?'r33-handoff:'+String(handoff.waveIssueNumber)+':':unified?'r33-unified:':'r33-farm:';
+  const unifiedByCode=new Map((candidate.r44Unified||[]).map(x=>[String(x.code).toUpperCase(),x]));
+  const contentPaths=unified?candidate.units.map(x=>x.contentPath).filter(Boolean):[];
+  const handoffPaths=unified?[...new Set((candidate.r44Unified||[]).map(x=>x.handoffPath).filter(Boolean))]:[];
+  const unifiedContext=unified?candidate.units.map(unit=>{
+    const h=unifiedByCode.get(unit.code)||{};
+    return {code:unit.code,contentPath:unit.contentPath,handoffPath:h.handoffPath,outcome:h.outcome,resultSha256:h.resultSha256,sourceSha256:h.sourceSha256};
+  }):[];
+  const baseInstructions='R4 EPHEMERAL WORKER / CONTINUE-UNTIL-PREEMPTED: procesa exclusivamente estas entradas R33. Persiste y valida CADA entrada por separado; ANTES de cada commit ejecuta node scripts/R4-evidence-preflight.cjs <ruta-evidence>; este preflight recalcula articleHash, claimId, linkId y evidenceSnapshotHash con las funciones canónicas y debe terminar ok. Solo entonces crea el commit/checkpoint durable y continúa. No uses un push fallido como mecanismo normal de validación. checkpointSizeMax=1. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado. Al emitir FINISH del microclaim, Worker Events crea automáticamente un claim encadenado (autoPull.requestId/issueNumber). Si la sesión sigue razonando, sigue ese claim, espera su lease y procesa el siguiente microclaim. Repite FINISH → autoPull → siguiente lease indefinidamente mientras exista trabajo. No termines voluntariamente por haber acabado un microclaim. La finalización involuntaria del razonamiento es preemption normal: no intentes evitarla ni dependas de memoria conversacional; el progreso ya checkpointed debe sobrevivir y cualquier claim/lease sembrado debe poder expirar y ser reapeado.';
+  const unifiedInstructions=unified?' UNIFIED R44→R33: estas entradas tienen handoff durable R44. Lee cada handoffPath antes de editar. Si outcome=CORRECTED, reconcilia correctedContent del handoff contra el artículo en contentPath y deja en contentPath la versión final que será certificada; no copies ciegamente un objeto parcial. Si outcome=PASS_NO_CHANGE, no alteres contentPath salvo que la validación R33 detecte un error real. Evidence debe calcularse contra el contenido final en la misma rama. El checkpoint puede incluir contentPath + evidenceArtifactPath y ambos quedan ligados al mismo commit. Contexto R44='+JSON.stringify(unifiedContext):'';
   return {
     workId:workPrefix+candidate.poolId+':'+first+':'+last+':'+codes.length,
-    version:1,
-    title:(handoff?'R43→R33 Gate #'+handoff.waveIssueNumber+' ':'R33 Evidence Farm ')+first+'..'+last,
-    workType:'editorial_batch',status:'ready',priority:handoff?0:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
+    version:unified?2:1,
+    title:handoff?'R43→R33 Gate #'+handoff.waveIssueNumber+' '+first+'..'+last:unified?'R44→R33 Unified '+first+'..'+last:'R33 Evidence Farm '+first+'..'+last,
+    workType:'editorial_batch',status:'ready',priority:handoff?0:unified?2:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
     providerVersion:candidate.providerVersion,ownershipMode:'global-single-lease',units:codes,checkpointSizeMax:candidate.checkpointSizeMax,
-    resourceLocks:candidate.resourceLocks,allowedPaths:candidate.allowedPaths,dependsOn:[],
-    validation:['R33 Editorial Batch Tests'],
-    instructions:'R4 EPHEMERAL WORKER / CONTINUE-UNTIL-PREEMPTED: procesa exclusivamente estas entradas R33. Persiste y valida CADA entrada por separado; ANTES de cada commit ejecuta node scripts/R4-evidence-preflight.cjs <ruta-evidence>; este preflight recalcula articleHash, claimId, linkId y evidenceSnapshotHash con las funciones canónicas y debe terminar ok. Solo entonces crea el commit/checkpoint durable y continúa. No uses un push fallido como mecanismo normal de validación. checkpointSizeMax=1. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado. Al emitir FINISH del microclaim, Worker Events crea automáticamente un claim encadenado (autoPull.requestId/issueNumber). Si la sesión sigue razonando, sigue ese claim, espera su lease y procesa el siguiente microclaim. Repite FINISH → autoPull → siguiente lease indefinidamente mientras exista trabajo. No termines voluntariamente por haber acabado un microclaim. La finalización involuntaria del razonamiento es preemption normal: no intentes evitarla ni dependas de memoria conversacional; el progreso ya checkpointed debe sobrevivir y cualquier claim/lease sembrado debe poder expirar y ser reapeado.',
-    branchPolicy:{mode:'assignment',prefix:'worker/r33-farm'},completion:{requiresCommit:true,requiresValidation:true},
-    providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
+    resourceLocks:[...candidate.resourceLocks,...contentPaths.map(x=>'path:'+x)],
+    allowedPaths:[...candidate.allowedPaths,...contentPaths],
+    dependsOn:[],validation:['R33 Editorial Batch Tests'],
+    instructions:baseInstructions+unifiedInstructions,
+    branchPolicy:{mode:'assignment',prefix:unified?'worker/r33-unified':'worker/r33-farm'},completion:{requiresCommit:true,requiresValidation:true},
+    providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized,
+    ...(unified?{r44Unified:unifiedContext,handoffPaths}: {})
   };
 }
 function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
- const allowed=new Set((pool?.entries||[]).map(x=>String(x.code||'').toUpperCase()));
+ const entriesByCode=new Map((pool?.entries||[]).map(x=>[String(x.code||'').toUpperCase(),x]));
+ const allowed=new Set(entriesByCode.keys());
  const selector=revisions.load(root),out=new Map();
  for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
   if(terminal?.provider!=='r33-farm')continue;
@@ -241,8 +254,11 @@ function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
   for(const raw of terminal.completedUnits||[]){
    const code=String(raw).toUpperCase();
    if(!allowed.has(code)||selector.activeHeldCodes.has(code))continue;
+   const unified=String(workId).startsWith('r33-unified:');
+   const poolEntry=entriesByCode.get(code)||{};
    out.set(code,{code,workId,branch:chosen.branch,commitSha:chosen.commitSha,
      supersessionRevisionId:chosen.revisionId,revisionAssets:chosen.assets||[],
+     ...(unified&&poolEntry.contentPath?{contentPath:poolEntry.contentPath}:{}),
      completedAt:String(terminal.completedAt||'')});
   }
  }
