@@ -1,0 +1,35 @@
+{
+  "success": false,
+  "httpStatus": 400,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-m10-c7f9-step05",
+    "requested": 2,
+    "processed": 1,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": false,
+        "httpStatus": 400,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "http": 400,
+          "error": "INVALID_OUTCOME",
+          "receipts": [],
+          "durable": false,
+          "bridgeSessionId": "r44b-1922cdd7-86cf-4f09-b09e-6aa98d16b774"
+        },
+        "completedAt": "2026-10-03T02:59:59.489Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:59:59.489Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-c7f9/05-submit04-claim05.json"
+}

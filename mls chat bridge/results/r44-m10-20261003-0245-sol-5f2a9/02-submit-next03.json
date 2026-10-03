@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261003-0245-sol-5f2a9-t02-close-next03",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1009",
+          "sha256": "a4682f706fd9359867ad5af1a855278b590d1b18133a934f10fc101f44ada106",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1009",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d7f33bfa-8e4d-4109-b4cb-ed6c1a3b2d09",
+                "ticketId": "R44-CORPUS-1009",
+                "code": "MLS-V02-0518",
+                "idempotencyKey": "R44-CORPUS-1009:MLS-V02-0518:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "359c52ecafc9d56f05dd3891e8285fa3e6468c40c803321f84f2e933ea84a107",
+                "sourceSha256": "f11251f738acee9c002f5c4656a447f8530eebf4ce05368d8a3ecc31ff23e519",
+                "committedMs": 1790996437365,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "660008b46c881cfd3744f6685d3d671b51fda73a8144e278a7bbfc2586a385d1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1009",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e48b053d-588c-49f0-a0ef-9a3036efc253",
+                "ticketId": "R44-CORPUS-1009",
+                "code": "MLS-V02-0519",
+                "idempotencyKey": "R44-CORPUS-1009:MLS-V02-0519:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "fba692e5083e0ef5de54e40f25a936401374c396c452ed59eb5ba1ab479aeb38",
+                "sourceSha256": "982101b72f2ea3a5e525eb4f7a6bdb901d913f2dfb13e7ae0b811770dae6e771",
+                "committedMs": 1790996437607,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "cfd2db1c8a2ea147860cf5f35f6b6dec143b830c7a153daa582b2bf3fce82711",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1009",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "7018b86f-cb26-40ae-8e63-85325f7692cf",
+                "ticketId": "R44-CORPUS-1009",
+                "code": "MLS-V02-0520",
+                "idempotencyKey": "R44-CORPUS-1009:MLS-V02-0520:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "21a1c509e02d4af7039eb90264d8a9a272b8e06cb3d81e756010ccdffdb26d9d",
+                "sourceSha256": "b73f15f19eaaa4362826a16ab453776e5eca7140e569cf3d2b8e1c43b6159aa0",
+                "committedMs": 1790996437855,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e4d957d4afd9591be246070d8e1ac4b3d7fd51d7099cd8857af01c061609d674",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1009",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f5721723-163d-4252-8616-b16284564319",
+                "ticketId": "R44-CORPUS-1009",
+                "code": "MLS-V02-0521",
+                "idempotencyKey": "R44-CORPUS-1009:MLS-V02-0521:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "918ed995c750ed158c655217861f0b8d4366b28036cef4a5feeae135b08b23b1",
+                "sourceSha256": "6eb6bc5eb44e5b992bc4534698f53a1e12ff6a3fd4dda11653bc304a76042300",
+                "committedMs": 1790996438087,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "5fa9bf4bb0c0ad85aa14dec61975d0c852301768c180a79eb53300ccf106341e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1009",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "25ba9f12-477e-45d2-a2f8-2efb20100479",
+                "ticketId": "R44-CORPUS-1009",
+                "code": "MLS-V02-0523",
+                "idempotencyKey": "R44-CORPUS-1009:MLS-V02-0523:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bc7e5d199a98b3c5b025a2d26aff794527068ab11daf1051d12aa548da06868e",
+                "sourceSha256": "dcdbd5e228819ad89c3443adb978863dd27bd20dd57c5f0c9c8a668748ab9f6d",
+                "committedMs": 1790996438433,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "05b2d4e3200bcdaeff156642242d5ccaa93208da2746da18d4cda16ad2042fdf",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-9906263c-dc32-4ab9-add4-00794dfb4bd6",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "a4682f706fd9359867ad5af1a855278b590d1b18133a934f10fc101f44ada106"
+          }
+        },
+        "completedAt": "2026-10-03T03:00:38.752Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-14d91b5e-f84b-4e60-968f-9817475f80cb",
+          "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1011",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996738820,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0529",
+                "path": "portugues/MLS-V02-0529.json",
+                "sha256": "f3c73ffbf727d049ca4b242b8a3a956f561c97d995d9396a31e4eedef6c070ca"
+              },
+              {
+                "code": "MLS-V02-0530",
+                "path": "portugues/MLS-V02-0530.json",
+                "sha256": "2860cc573615864145824cf165f3a5ad9ddef12a337a81c9d1446f33d86f567e"
+              },
+              {
+                "code": "MLS-V02-0531",
+                "path": "portugues/MLS-V02-0531.json",
+                "sha256": "fb6d855b16c55f6f4b5ff5dd7bee9285fd37633b0f29619921306e3dad26c5ba"
+              },
+              {
+                "code": "MLS-V02-0532",
+                "path": "portugues/MLS-V02-0532.json",
+                "sha256": "81673f22edf56f0937cde111bac12661f34aa45f0ec6a78109d078392fe436a7"
+              },
+              {
+                "code": "MLS-V02-0534",
+                "path": "portugues/MLS-V02-0534.json",
+                "sha256": "25ef71b6b5970119e31134ba19681390f4bc08377bb756c31c93c0fff8b5af13"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1011",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0529",
+                "path": "portugues/MLS-V02-0529.json",
+                "sha256": "f3c73ffbf727d049ca4b242b8a3a956f561c97d995d9396a31e4eedef6c070ca"
+              },
+              {
+                "code": "MLS-V02-0530",
+                "path": "portugues/MLS-V02-0530.json",
+                "sha256": "2860cc573615864145824cf165f3a5ad9ddef12a337a81c9d1446f33d86f567e"
+              },
+              {
+                "code": "MLS-V02-0531",
+                "path": "portugues/MLS-V02-0531.json",
+                "sha256": "fb6d855b16c55f6f4b5ff5dd7bee9285fd37633b0f29619921306e3dad26c5ba"
+              },
+              {
+                "code": "MLS-V02-0532",
+                "path": "portugues/MLS-V02-0532.json",
+                "sha256": "81673f22edf56f0937cde111bac12661f34aa45f0ec6a78109d078392fe436a7"
+              },
+              {
+                "code": "MLS-V02-0534",
+                "path": "portugues/MLS-V02-0534.json",
+                "sha256": "25ef71b6b5970119e31134ba19681390f4bc08377bb756c31c93c0fff8b5af13"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0529",
+              "MLS-V02-0530",
+              "MLS-V02-0531",
+              "MLS-V02-0532",
+              "MLS-V02-0534"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996738820,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996738820,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0529",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 529,
+                "title": "Se apassivador vs. índice de indeterminación",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Voz pasiva y construcciones con se — Voz passiva e construções com se",
+                "articleMarkdown": "#### En pocas palabras\n\nLa forma **se** puede cumplir funciones diferentes. Como **se apassivador**, forma una pasiva sintética; como **índice de indeterminação do sujeito**, deja sin identificar quién realiza la acción.\n\nCompare **Vendem-se casas** con **Precisa-se de funcionários**. En la primera, *casas* es sujeto paciente y el verbo concuerda en plural. En la segunda, *de funcionários* es complemento preposicionado y el verbo permanece singular.\n\n#### Cómo funciona\n\nEl **se apassivador** aparece prototípicamente con verbos transitivos directos. La construcción admite una paráfrasis con **ser + participio**: **Vendem-se casas → Casas são vendidas**. El grupo nominal afectado funciona como sujeto y determina la concordancia.\n\nEl **índice de indeterminação** aparece con verbos intransitivos, transitivos indirectos o de enlace: **Vive-se bem**, **Precisa-se de ajuda**, **Era-se mais paciente**. No hay un sujeto léxico identificado y, en la norma formal, el verbo queda en tercera persona singular.\n\nUna prueba práctica es observar la preposición y la posibilidad de pasiva analítica. **Funcionários são precisados** no corresponde al uso normal de *precisar de*; por eso **de funcionários** no es sujeto pasivo.\n\n#### Ejemplos\n\n* **Vendem-se apartamentos.**  \n  *(Se venden apartamentos.)*  \n  **Se** es apasivador y el verbo concuerda con *apartamentos*.\n\n* **Precisa-se de funcionários.**  \n  *(Se necesitan empleados.)*  \n  **Se** indetermina al sujeto; *de funcionários* es complemento.\n\n* **Vive-se bem aqui.**  \n  *(Se vive bien aquí.)*  \n  Con el verbo intransitivo *viver*, **se** no forma una pasiva.\n\n#### Observación importante\n\nLa misma grafía **se** no garantiza el mismo análisis. Hay que observar el tipo de verbo, la presencia de preposición, la concordancia y la función de los participantes.\n\nAdemás, el portugués brasileño real presenta usos sin concordancia como **vende-se apartamentos**. En la norma formal, sin embargo, la distinción estructural mantiene **vendem-se apartamentos** frente a **precisa-se de funcionários**.\n\n#### Entradas relacionadas\n\n[527. Se recíproco](#entrada-527) · [528. Se parte de verbo pronominal](#entrada-528) · [530. Sujeito indeterminado com terceira pessoa do plural](#entrada-530) · [531. Construção impessoal com haver](#entrada-531)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c546d1796e53cf15236bafab2fdc2928a0adebf05740f8be4c0206d85c06affc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:06:03.877Z"
+              },
+              {
+                "code": "MLS-V02-0530",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 530,
+                "title": "Sujeto indeterminado con tercera persona plural",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Voz pasiva y construcciones con se — Voz passiva e construções com se",
+                "articleMarkdown": "#### En pocas palabras\n\nEl portugués puede dejar **indeterminado el sujeto** usando un verbo en **tercera persona del plural** sin expresar quién realiza la acción.\n\nEn **Disseram que a loja vai fechar**, el verbo *disseram* indica que algunas personas dijeron algo, pero no se identifica quiénes fueron.\n\n#### Cómo funciona\n\nLa forma verbal aparece en tercera persona plural: **disseram, chamaram, roubaram, bateram**. No hay un pronombre como **eles** con referencia concreta; el plural sirve para presentar a los responsables como no identificados o irrelevantes.\n\nEste recurso es frecuente cuando el hablante no sabe quién realizó la acción, no quiere mencionarlo o considera innecesario identificarlo: **Roubaram meu carro**, **Bateram na porta**.\n\nAunque la forma verbal sea plural, la construcción no afirma necesariamente que haya varios agentes. Puede referirse a una o más personas desconocidas; lo central es la indeterminación.\n\n#### Ejemplos\n\n* **Disseram que a loja vai fechar.**  \n  *(Dijeron que la tienda va a cerrar.)*  \n  No se identifica quién transmitió la información.\n\n* **Roubaram meu carro ontem.**  \n  *(Me robaron el carro ayer.)*  \n  El responsable o los responsables quedan indeterminados.\n\n* **Bateram na porta.**  \n  *(Llamaron/golpearon a la puerta.)*  \n  La forma plural no tiene un sujeto léxico expreso.\n\n#### Observación importante\n\nNo debe confundirse esta construcción con una oración cuyo sujeto **eles/elas** se omite porque ya está claramente establecido en el contexto. En **Os vizinhos chegaram. Depois bateram na porta**, *bateram* puede recuperar a *os vizinhos* y no tener sujeto indeterminado.\n\nTampoco es equivalente al **se** indeterminador, aunque ambos eviten identificar al agente. Son estrategias gramaticales diferentes y su frecuencia depende del registro y del contexto.\n\n#### Entradas relacionadas\n\n[528. Se parte de verbo pronominal](#entrada-528) · [529. Se apassivador vs. índice de indeterminação](#entrada-529) · [531. Construção impessoal com haver](#entrada-531) · [532. Construção impessoal com fazer temporal](#entrada-532) · [242. Possessivo de terceira pessoa com dele/dela](#entrada-242)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6d95e971bc562b8e528c449cecc437c0acb5d95732a2faceaa69182c93041996",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:06:41.834Z"
+              },
+              {
+                "code": "MLS-V02-0531",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 531,
+                "title": "Construcción impersonal con haver",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Voz pasiva y construcciones con se — Voz passiva e construções com se",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo **haver** puede funcionar de manera **impersonal** con el sentido de “existir” o “haber”. En este uso no tiene un sujeto gramatical y se mantiene normalmente en **tercera persona singular**.\n\nPor eso se dice **Há muitos problemas**, no *hão muitos problemas* en la norma formal.\n\n#### Cómo funciona\n\nEl sustantivo que sigue a **haver** no funciona como sujeto. En **Há duas pessoas na sala**, *duas pessoas* expresa aquello que existe, pero no hace concordar al verbo.\n\nLa impersonalidad se mantiene en distintos tiempos: **havia muitas pessoas**, **houve problemas**, **haverá mudanças**, **pode haver dúvidas**. Incluso cuando el grupo posterior es plural, la forma de *haver* permanece singular.\n\nEn locuciones verbales, el auxiliar también suele quedar singular: **Deve haver soluções**, no *devem haver soluções* en la norma formal, porque la construcción continúa siendo impersonal.\n\nEn el portugués brasileño hablado, **ter** existencial es muy frecuente: **Tem muita gente aqui**. La norma formal escrita suele preferir **Há muita gente aqui** en contextos cuidados.\n\n#### Ejemplos\n\n* **Há muitos problemas para resolver.**  \n  *(Hay muchos problemas por resolver.)*  \n  **Há** permanece singular.\n\n* **Havia três pessoas na sala.**  \n  *(Había tres personas en la sala.)*  \n  El plural posterior no provoca concordancia.\n\n* **Pode haver mudanças no plano.**  \n  *(Puede haber cambios en el plan.)*  \n  La locución conserva el valor impersonal.\n\n#### Observación importante\n\nEl **haver** existencial se distingue del verbo **haver** personal en construcciones como **hei de voltar**, donde sí hay flexión de persona. También se diferencia de verbos como **existir**, que sí concuerdan con su sujeto: **Existem muitos problemas**.\n\nEn el uso brasileño real, **ter** existencial no debe describirse como inexistente o incomprensible; es una opción muy extendida en la conversación, aunque el registro formal pueda favorecer **haver**.\n\n#### Entradas relacionadas\n\n[529. Se apassivador vs. índice de indeterminação](#entrada-529) · [530. Sujeito indeterminado com terceira pessoa do plural](#entrada-530) · [532. Construção impessoal com fazer temporal](#entrada-532) · [533. Construção impessoal com ser temporal](#entrada-533) · [871. Haver impessoal no singular](#entrada-871)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3565e63aa3c01292c433981a107c34181a603e6c1c3f9eba97ec70b07a33f4c9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:07:30.241Z"
+              },
+              {
+                "code": "MLS-V02-0532",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 532,
+                "title": "Construcción impersonal con fazer temporal",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Voz pasiva y construcciones con se — Voz passiva e construções com se",
+                "articleMarkdown": "#### En pocas palabras\n\nEl verbo **fazer** puede usarse de manera **impersonal** para expresar tiempo transcurrido. En este uso no tiene sujeto y permanece normalmente en **tercera persona singular**.\n\nEn **Faz dois anos que moro aqui**, *faz dois anos* indica cuánto tiempo ha transcurrido desde el inicio de la situación.\n\n#### Cómo funciona\n\nLa construcción puede aparecer con una cantidad de tiempo seguida de **que + oración**: **Faz três meses que ela começou o curso**. También puede funcionar con un complemento temporal sin *que*: **Não o vejo faz dois anos**.\n\nComo **fazer** es impersonal en este uso, el grupo temporal no provoca concordancia. La norma formal mantiene **Faz dois anos**, **Fazia cinco meses**, no *fazem dois anos* ni *faziam cinco meses*.\n\nEl tiempo verbal de **fazer** sitúa el punto de referencia: **faz** conecta el intervalo con el presente; **fazia** lo relaciona con un momento pasado: **Fazia dois anos que eles moravam ali**.\n\nEn locuciones, el auxiliar también suele permanecer singular: **Deve fazer três anos que nos conhecemos**.\n\n#### Ejemplos\n\n* **Faz dois anos que moro aqui.**  \n  *(Hace dos años que vivo aquí.)*  \n  **Faz** expresa tiempo transcurrido y permanece singular.\n\n* **Fazia meses que não chovia.**  \n  *(Hacía meses que no llovía.)*  \n  La referencia temporal está situada en el pasado.\n\n* **Deve fazer uma semana que ela viajou.**  \n  *(Debe de hacer una semana que viajó.)*  \n  La construcción impersonal se mantiene dentro de una locución.\n\n#### Observación importante\n\nEste **fazer** temporal se diferencia del verbo personal de **Ela faz o jantar**, donde *ela* es sujeto y el verbo concuerda normalmente.\n\nEn el portugués brasileño real pueden oírse concordancias plurales por analogía, pero la norma formal trata el **fazer** temporal como impersonal y singular.\n\n#### Entradas relacionadas\n\n[530. Sujeito indeterminado com terceira pessoa do plural](#entrada-530) · [531. Construção impessoal com haver](#entrada-531) · [533. Construção impessoal com ser temporal](#entrada-533) · [534. Alternância ativa/passiva e foco](#entrada-534) · [872. Fazer temporal impessoal](#entrada-872)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-35e527b89d809c9b27e0ce4959799321fce06c5d07a0c7e4678603a07a021418",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:08:12.230Z"
+              },
+              {
+                "code": "MLS-V02-0534",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 534,
+                "title": "Alternancia activa/pasiva y foco",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Voz pasiva y construcciones con se — Voz passiva e construções com se",
+                "articleMarkdown": "#### En pocas palabras\n\nUna oración **activa** y su correspondiente **pasiva** pueden presentar un mismo acontecimiento, pero organizan de manera distinta qué participante ocupa el centro gramatical y discursivo.\n\nCompare **A equipe aprovou o projeto** con **O projeto foi aprovado pela equipe**. La primera comienza con quien realiza la acción; la segunda comienza con aquello que la recibe.\n\n#### Cómo funciona\n\nEn la activa, el agente suele funcionar como sujeto: **A diretoria publicou o relatório**. El elemento afectado aparece como objeto directo: *o relatório*.\n\nEn la pasiva analítica, ese objeto pasa a sujeto: **O relatório foi publicado pela diretoria**. El antiguo sujeto puede expresarse como agente con **por** o quedar omitido: **O relatório foi publicado ontem**.\n\nEsta alternancia permite adaptar la oración al **foco discursivo**, es decir, a qué información se quiere presentar como punto de partida o mantener como tema. Si el texto trata principalmente del informe, la pasiva puede facilitar la continuidad temática.\n\nLa elección también depende del género textual. Las pasivas son frecuentes cuando el agente es desconocido, irrelevante o menos importante que el resultado.\n\n#### Ejemplos\n\n* **A equipe aprovou o projeto.**  \n  *(El equipo aprobó el proyecto.)*  \n  La activa coloca al agente como sujeto.\n\n* **O projeto foi aprovado pela equipe.**  \n  *(El proyecto fue aprobado por el equipo.)*  \n  La pasiva coloca al paciente como sujeto.\n\n* **Os resultados foram divulgados ontem.**  \n  *(Los resultados fueron divulgados ayer.)*  \n  El agente se omite porque el texto destaca los resultados.\n\n#### Observación importante\n\nActiva y pasiva no son siempre intercambiables sin cambios de estilo, naturalidad o énfasis. La pasiva modifica la estructura informativa y puede hacer innecesaria la mención del agente.\n\nAdemás, no todos los verbos admiten una pasiva natural. La posibilidad de alternancia depende de la estructura argumental y del significado del verbo.\n\n#### Entradas relacionadas\n\n[532. Construção impessoal com fazer temporal](#entrada-532) · [533. Construção impessoal com ser temporal](#entrada-533) · [535. Restrições semânticas da passiva](#entrada-535) · [481. Concordância do particípio na passiva](#entrada-481) · [479. Particípio na passiva](#entrada-479)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f1b24194a22b5f575a9f4251c80f585478b5d9681f2ea191a2127ad604437316",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:09:38.053Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:00:39.709Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:00:39.709Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261003-0245-sol-5f2a9/02-submit-next03.json"
+}

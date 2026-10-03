@@ -1,0 +1,512 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-4bd912-ticket03-close-claim04",
+    "requested": 8,
+    "processed": 8,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-cf0ca3b1-2bf7-402c-a997-30bebaffffab",
+          "ticketId": "R43-EMERGENCY-0582",
+          "leaseExpiresAt": 1790996718103
+        },
+        "completedAt": "2026-10-03T03:00:18.247Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0582",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "c55d6fa9-bed5-4778-8123-233d8371731b",
+            "ticketId": "R43-EMERGENCY-0582",
+            "code": "MLS-V06-0414",
+            "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0414-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "bbaea4c010291d496b40dba01e11674269fe1ad378f0346798bb4b241fb91e0d",
+            "sourceSha256": "9a9885def99d77d08afe4a75171913ee2ea1c59180497539037d004201a0a4dc",
+            "committedMs": 1790996418475,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "a7312dc471f77546ac820f33561cc0562f9a7e0214f8eb7b05c3e3447f7a48f1",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:00:18.567Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0582",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "d20b9165-1534-482a-b0cf-f394178c278a",
+            "ticketId": "R43-EMERGENCY-0582",
+            "code": "MLS-V06-0415",
+            "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0415-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "2eda519602f9177aa7c14bb7be53e83ce728b4b91ecfcdeae7c4f337cddaa59d",
+            "sourceSha256": "39f8e3557482d297027760dafc26386c5ad14acd4c80d642be94f43f9ccd264f",
+            "committedMs": 1790996418822,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "24e64b48e345b09b263d7bf42dacc572af207ff2f9ba1c034eae82dcde1ecb11",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:00:18.916Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0582",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "86ab62fd-4663-4a3d-8299-6c8707b5d2d5",
+            "ticketId": "R43-EMERGENCY-0582",
+            "code": "MLS-V06-0417",
+            "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0417-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "f1e0f7a16ac8df72202f826629f6203a3095692b43ccc6306d47e64ee5efcdbb",
+            "sourceSha256": "3abee50fa3cb8a62c7fa1ea978333350c060c658168dee365f33066ec405860f",
+            "committedMs": 1790996419145,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "56063f2c049c1e50479a080d6306d5547b0c8578a444c41e7f38423b8a8c9dc7",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:00:19.246Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0582",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "6ca79536-ffbe-4127-94cc-bd078cc0aee8",
+            "ticketId": "R43-EMERGENCY-0582",
+            "code": "MLS-V06-0418",
+            "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0418-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "f97139b978dca23cdc8610f7fc1f0431219cec02bd6fa68767d479dd4f2905e0",
+            "sourceSha256": "46febe14bd04623070c7dd3a00457744b37312c126f163278306b7eb1c931931",
+            "committedMs": 1790996419471,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "40ec1966d535c71fc8e378d33d7ad50baab76ca96d61a84ee105729b71e703f2",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:00:19.565Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0582",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "a4aa8ca2-dc97-4ddc-bfbc-d36223681fc5",
+            "ticketId": "R43-EMERGENCY-0582",
+            "code": "MLS-V06-0419",
+            "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0419-g1-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "b06ddec633c7017c30140047ad1f63805901ce3bd7cefb59b8a01c6b5f3838cc",
+            "sourceSha256": "bf4fc653864bcc57dc8c30e13a0a596822c1d0c224e17eb3dd7486d481021f1d",
+            "committedMs": 1790996419786,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "fb8c282bbbf8aa8bd96715258fbe9e6fa949352c580796d05ab2c705e5da0a23",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:00:19.881Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RebindChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/rebind",
+        "response": {
+          "ticketId": "R43-EMERGENCY-0582",
+          "state": "COMPLETE",
+          "migrationNote": null,
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "entries": [
+            {
+              "code": "MLS-V06-0414",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0414",
+                "path": "japones/MLS-V06-0414.json",
+                "sha256": "9a9885def99d77d08afe4a75171913ee2ea1c59180497539037d004201a0a4dc"
+              },
+              "receipt": {
+                "code": "MLS-V06-0414",
+                "committedMs": 1790996418475,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0414-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bbaea4c010291d496b40dba01e11674269fe1ad378f0346798bb4b241fb91e0d",
+                "receiptId": "c55d6fa9-bed5-4778-8123-233d8371731b",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "9a9885def99d77d08afe4a75171913ee2ea1c59180497539037d004201a0a4dc",
+                "ticketId": "R43-EMERGENCY-0582",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "a7312dc471f77546ac820f33561cc0562f9a7e0214f8eb7b05c3e3447f7a48f1"
+            },
+            {
+              "code": "MLS-V06-0415",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0415",
+                "path": "japones/MLS-V06-0415.json",
+                "sha256": "39f8e3557482d297027760dafc26386c5ad14acd4c80d642be94f43f9ccd264f"
+              },
+              "receipt": {
+                "code": "MLS-V06-0415",
+                "committedMs": 1790996418822,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0415-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2eda519602f9177aa7c14bb7be53e83ce728b4b91ecfcdeae7c4f337cddaa59d",
+                "receiptId": "d20b9165-1534-482a-b0cf-f394178c278a",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "39f8e3557482d297027760dafc26386c5ad14acd4c80d642be94f43f9ccd264f",
+                "ticketId": "R43-EMERGENCY-0582",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "24e64b48e345b09b263d7bf42dacc572af207ff2f9ba1c034eae82dcde1ecb11"
+            },
+            {
+              "code": "MLS-V06-0417",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0417",
+                "path": "japones/MLS-V06-0417.json",
+                "sha256": "3abee50fa3cb8a62c7fa1ea978333350c060c658168dee365f33066ec405860f"
+              },
+              "receipt": {
+                "code": "MLS-V06-0417",
+                "committedMs": 1790996419145,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0417-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f1e0f7a16ac8df72202f826629f6203a3095692b43ccc6306d47e64ee5efcdbb",
+                "receiptId": "86ab62fd-4663-4a3d-8299-6c8707b5d2d5",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "3abee50fa3cb8a62c7fa1ea978333350c060c658168dee365f33066ec405860f",
+                "ticketId": "R43-EMERGENCY-0582",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "56063f2c049c1e50479a080d6306d5547b0c8578a444c41e7f38423b8a8c9dc7"
+            },
+            {
+              "code": "MLS-V06-0418",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0418",
+                "path": "japones/MLS-V06-0418.json",
+                "sha256": "46febe14bd04623070c7dd3a00457744b37312c126f163278306b7eb1c931931"
+              },
+              "receipt": {
+                "code": "MLS-V06-0418",
+                "committedMs": 1790996419471,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0418-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f97139b978dca23cdc8610f7fc1f0431219cec02bd6fa68767d479dd4f2905e0",
+                "receiptId": "6ca79536-ffbe-4127-94cc-bd078cc0aee8",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "46febe14bd04623070c7dd3a00457744b37312c126f163278306b7eb1c931931",
+                "ticketId": "R43-EMERGENCY-0582",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "40ec1966d535c71fc8e378d33d7ad50baab76ca96d61a84ee105729b71e703f2"
+            },
+            {
+              "code": "MLS-V06-0419",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0419",
+                "path": "japones/MLS-V06-0419.json",
+                "sha256": "bf4fc653864bcc57dc8c30e13a0a596822c1d0c224e17eb3dd7486d481021f1d"
+              },
+              "receipt": {
+                "code": "MLS-V06-0419",
+                "committedMs": 1790996419786,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0419-g1-4bd912",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b06ddec633c7017c30140047ad1f63805901ce3bd7cefb59b8a01c6b5f3838cc",
+                "receiptId": "a4aa8ca2-dc97-4ddc-bfbc-d36223681fc5",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "bf4fc653864bcc57dc8c30e13a0a596822c1d0c224e17eb3dd7486d481021f1d",
+                "ticketId": "R43-EMERGENCY-0582",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "fb8c282bbbf8aa8bd96715258fbe9e6fa949352c580796d05ab2c705e5da0a23"
+            }
+          ],
+          "remaining": [],
+          "lease": {
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996719786,
+            "active": false
+          },
+          "status": "COMPLETE",
+          "bridgeSessionId": null,
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE"
+        },
+        "completedAt": "2026-10-03T03:00:20.038Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-0c7fae3f-152e-4f61-95d7-d27b9e7555da",
+          "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0583",
+            "leaseGeneration": 2,
+            "lease_expires_at": 1790996720092,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0420",
+                "path": "japones/MLS-V06-0420.json",
+                "sha256": "b0c76756f006d48ef111ead74be5e5efa421699597d3ab8de6eaee991f054be9"
+              },
+              {
+                "code": "MLS-V06-0422",
+                "path": "japones/MLS-V06-0422.json",
+                "sha256": "06c9e3af7765f54cc53df99b3002b02a67e6c33cb18899561c166dbf879b7bac"
+              },
+              {
+                "code": "MLS-V06-0423",
+                "path": "japones/MLS-V06-0423.json",
+                "sha256": "d500d084003d6a0fd2eb9ed4f359f17c6464943788983243b0eb291f9af9b20a"
+              },
+              {
+                "code": "MLS-V06-0424",
+                "path": "japones/MLS-V06-0424.json",
+                "sha256": "69bfc374d3ff898a08b553b2c00738c9a995dcb7fc1ef325ef404c1fed75cb59"
+              },
+              {
+                "code": "MLS-V06-0425",
+                "path": "japones/MLS-V06-0425.json",
+                "sha256": "29ba8ae6859596787fe6531ccfb90b99746704449e969c1f9b8a5ca4eacac830"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0583",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0420",
+                "path": "japones/MLS-V06-0420.json",
+                "sha256": "b0c76756f006d48ef111ead74be5e5efa421699597d3ab8de6eaee991f054be9"
+              },
+              {
+                "code": "MLS-V06-0422",
+                "path": "japones/MLS-V06-0422.json",
+                "sha256": "06c9e3af7765f54cc53df99b3002b02a67e6c33cb18899561c166dbf879b7bac"
+              },
+              {
+                "code": "MLS-V06-0423",
+                "path": "japones/MLS-V06-0423.json",
+                "sha256": "d500d084003d6a0fd2eb9ed4f359f17c6464943788983243b0eb291f9af9b20a"
+              },
+              {
+                "code": "MLS-V06-0424",
+                "path": "japones/MLS-V06-0424.json",
+                "sha256": "69bfc374d3ff898a08b553b2c00738c9a995dcb7fc1ef325ef404c1fed75cb59"
+              },
+              {
+                "code": "MLS-V06-0425",
+                "path": "japones/MLS-V06-0425.json",
+                "sha256": "29ba8ae6859596787fe6531ccfb90b99746704449e969c1f9b8a5ca4eacac830"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0420",
+              "MLS-V06-0422",
+              "MLS-V06-0423",
+              "MLS-V06-0424",
+              "MLS-V06-0425"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+              "leaseGeneration": 2,
+              "leaseExpiresAt": 1790996720092,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790996720092,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0420",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 420,
+                "title": "時 horas",
+                "level": "A2",
+                "part": "Número y comparación — 数・比較",
+                "chapter": "Numerales, clasificadores y contadores — 数詞・助数詞",
+                "articleMarkdown": "#### En pocas palabras\n\nEl sufijo **時（じ）** se usa para indicar **la hora del reloj**. Por ejemplo, **三時（さんじ）** significa “las tres” y **七時（しちじ）** “las siete”.\n\n#### Cómo funciona\n\nLa estructura básica es **número + 時**: **一時 いちじ, 二時 にじ, 三時 さんじ, 五時 ごじ, 六時 ろくじ, 八時 はちじ, 十時 じゅうじ**.\n\nHay lecturas que conviene memorizar: **四時** se lee **よじ**, no *よんじ*; **九時** se lee **くじ**, no *きゅうじ*. **七時** se lee normalmente **しちじ**; en ciertos contextos puede oírse **ななじ** para evitar confusión acústica.\n\nPara añadir minutos se combina con **分**: **三時十分（さんじじゅっぷん）** “3:10”. La hora puede ir acompañada de expresiones como **午前** “a. m.” y **午後** “p. m.”.\n\n#### Ejemplos\n\n* **今、三時です。** — Ahora son las tres.\n* **会議は四時です。** — La reunión es a las cuatro; **四時** se lee **よじ**.\n* **九時に寝ます。** — Me acuesto a las nueve; **九時** se lee **くじ**.\n\n#### Observación importante\n\nEl ejemplo heredado con **二冊** usa el contador **冊** para libros y no demuestra **時**.\n\nAdemás, **時** indica una hora del reloj. Para duración se usa normalmente **時間**: **三時間（さんじかん）** significa “tres horas”.\n\n#### Entradas relacionadas\n\n[Entrada 419: 日 días/fechas — 日付・日数の「日」](#entry-419) · [Entrada 421: 月 meses — 月の数え方](#entry-421) · [Entrada 418: 年 años — 年の数え方](#entry-418) · [Entrada 422: 本 para objetos largos — 助数詞「本」](#entry-422)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-82960c17b35fae74569551ed9762f3bd3f3cc909e06a38db64741cf39f5d640b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:09:18.184Z"
+              },
+              {
+                "code": "MLS-V06-0422",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 422,
+                "title": "本 para objetos largos",
+                "level": "A2",
+                "part": "Número y comparación — 数・比較",
+                "chapter": "Numerales, clasificadores y contadores — 数詞・助数詞",
+                "articleMarkdown": "#### En pocas palabras\n\nEl contador **本** se usa prototípicamente para objetos largos y relativamente cilíndricos, como botellas, lápices, paraguas o árboles. Por ejemplo, **ペンを三本買いました。** significa “Compré tres bolígrafos”.\n\n#### Cómo funciona\n\nLas lecturas cambian según el número. Son frecuentes **一本 いっぽん**, **二本 にほん**, **三本 さんぼん**, **四本 よんほん**, **五本 ごほん**, **六本 ろっぽん**, **七本 ななほん**, **八本 はっぽん** y **九本 きゅうほん**.\n\nEstos cambios entre **ほん・ぼん・ぽん** son ajustes fonológicos propios de la combinación número + contador; no cambian el tipo de objeto contado.\n\nLa cantidad puede aparecer junto al nombre: **水を二本買いました。** — “Compré dos botellas de agua”, cuando el contexto permite entender recipientes contables.\n\n#### Ejemplos\n\n* **ペンを三本買いました。** — Compré tres bolígrafos; **三本** se lee **さんぼん**.\n* **傘が一本あります。** — Hay un paraguas; **一本** se lee **いっぽん**.\n* **木を六本植えました。** — Planté seis árboles; **六本** se lee **ろっぽん**.\n\n#### Observación importante\n\nEn el ejemplo heredado **本を二冊買いました**, el primer **本** significa “libro” y **冊** es el contador. Los libros no se cuentan normalmente con el contador **本**.\n\n#### Entradas relacionadas\n\n[Entrada 421: 月 meses — 月の数え方](#entry-421) · [Entrada 423: 杯 recipientes/bebidas — 助数詞「杯」](#entry-423) · [Entrada 420: 時 horas — 時刻の「時」](#entry-420) · [Entrada 424: 枚 para objetos planos — 助数詞「枚」](#entry-424)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a6d01655411cf6fe3f69544c9eec302186a396d176630fa33db1d7826f81dc7a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:10:52.197Z"
+              },
+              {
+                "code": "MLS-V06-0423",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 423,
+                "title": "杯 recipientes/bebidas",
+                "level": "A2",
+                "part": "Número y comparación — 数・比較",
+                "chapter": "Numerales, clasificadores y contadores — 数詞・助数詞",
+                "articleMarkdown": "#### En pocas palabras\n\nEl contador **杯** se usa para contar vasos, tazas, copas o porciones servidas en recipientes semejantes. En **コーヒーを二杯飲みました。**, **二杯（にはい）** significa “dos tazas de café”.\n\n#### Cómo funciona\n\nLa lectura cambia según el número. Son frecuentes **一杯 いっぱい**, **二杯 にはい**, **三杯 さんばい**, **四杯 よんはい**, **五杯 ごはい**, **六杯 ろっぱい**, **七杯 ななはい**, **八杯 はっぱい** y **九杯 きゅうはい**.\n\nLos cambios entre **はい・ばい・ぱい** son ajustes fonológicos de la combinación numeral + contador.\n\n**杯** cuenta la unidad servida, no necesariamente un recipiente vacío. Por eso **水を三杯飲みました** significa “bebí tres vasos/tazas de agua”, según el tipo de recipiente entendido por el contexto.\n\n#### Ejemplos\n\n* **コーヒーを二杯飲みました。** — Bebí dos tazas de café.\n* **水を一杯ください。** — Un vaso de agua, por favor; **一杯** se lee **いっぱい**.\n* **ビールを三杯飲みました。** — Bebí tres vasos/copas de cerveza; **三杯** se lee **さんばい**.\n\n#### Observación importante\n\nEl ejemplo heredado con **二冊** cuenta libros y no demuestra **杯**.\n\nAdemás, **いっぱい** también puede aparecer con otros significados, como “lleno”, según la escritura y el contexto; aquí interesa específicamente **一杯** como cantidad contada.\n\n#### Entradas relacionadas\n\n[Entrada 422: 本 para objetos largos — 助数詞「本」](#entry-422) · [Entrada 424: 枚 para objetos planos — 助数詞「枚」](#entry-424) · [Entrada 421: 月 meses — 月の数え方](#entry-421) · [Entrada 425: 頭 para animales grandes — 助数詞「頭」](#entry-425)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7cdbb4500c58811a4eea0b2355c4746481a39ad1bc8bcf94459dfde0d836e1e2",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:11:38.208Z"
+              },
+              {
+                "code": "MLS-V06-0424",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 424,
+                "title": "枚 para objetos planos",
+                "level": "A2",
+                "part": "Número y comparación — 数・比較",
+                "chapter": "Numerales, clasificadores y contadores — 数詞・助数詞",
+                "articleMarkdown": "#### En pocas palabras\n\nEl contador **枚（まい）** se usa para objetos planos o delgados, como hojas de papel, fotografías, boletos, platos y algunas prendas. Por ejemplo, **紙を三枚ください。** significa “Deme tres hojas de papel”.\n\n#### Cómo funciona\n\nLa lectura del contador se mantiene estable: **一枚 いちまい, 二枚 にまい, 三枚 さんまい, 四枚 よんまい, 五枚 ごまい** y así sucesivamente.\n\nA diferencia de contadores como **本** o **杯**, **枚** no presenta alternancias de consonante del tipo **ほん・ぼん・ぽん** o **はい・ばい・ぱい**.\n\nEl tipo de objeto contado depende de cómo se conceptualiza su forma. Por eso **シャツを二枚** cuenta dos camisas como prendas planas, mientras otros objetos requieren contadores diferentes.\n\n#### Ejemplos\n\n* **紙を三枚ください。** — Tres hojas de papel, por favor.\n* **切符を二枚買いました。** — Compré dos boletos.\n* **写真が五枚あります。** — Hay cinco fotografías.\n\n#### Observación importante\n\nEl ejemplo heredado con **二冊** cuenta libros y no demuestra el uso de **枚**.\n\nLos contadores japoneses forman parte de la estructura cuantitativa: no basta con añadir un número directamente al sustantivo en todos los casos.\n\n#### Entradas relacionadas\n\n[Entrada 423: 杯 recipientes/bebidas — 助数詞「杯」](#entry-423) · [Entrada 425: 頭 para animales grandes — 助数詞「頭」](#entry-425) · [Entrada 422: 本 para objetos largos — 助数詞「本」](#entry-422) · [Entrada 426: 自分 como pronombre — 自分：数詞・助数詞](#entry-426)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e702df471a5c829f51fd889106260064a68dde77eae3b3b11126dcbb0a501f80",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:12:28.291Z"
+              },
+              {
+                "code": "MLS-V06-0425",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 425,
+                "title": "頭 para animales grandes",
+                "level": "A2",
+                "part": "Número y comparación — 数・比較",
+                "chapter": "Numerales, clasificadores y contadores — 数詞・助数詞",
+                "articleMarkdown": "#### En pocas palabras\n\nEl contador **頭（とう）** se usa para contar animales relativamente grandes, como caballos, vacas, elefantes o animales de zoológico de gran tamaño. Por ejemplo, **馬が三頭います。** significa “Hay tres caballos”.\n\n#### Cómo funciona\n\nLa estructura es número + **頭**: **一頭 いっとう, 二頭 にとう, 三頭 さんとう, 四頭 よんとう, 五頭 ごとう**.\n\nEn algunas combinaciones aparece una consonante geminada, representada con **っ**: **一頭 いっとう**, **八頭 はっとう** y, según la pronunciación, formas como **十頭 じゅっとう**.\n\nLa elección del contador depende del tipo de animal y de la convención de uso. Para muchos animales pequeños se emplea **匹（ひき）**, no **頭**.\n\n#### Ejemplos\n\n* **馬が三頭います。** — Hay tres caballos.\n* **牛を二頭飼っています。** — Crían/tienen dos vacas.\n* **象が一頭見えます。** — Se ve un elefante; **一頭** se lee **いっとう**.\n\n#### Observación importante\n\nEl ejemplo heredado con **二冊** cuenta libros y no demuestra **頭**.\n\n“Animal grande” es una guía útil, no una clasificación biológica exacta: el contador depende también de usos lexicalizados y convenciones del japonés.\n\n#### Entradas relacionadas\n\n[Entrada 424: 枚 para objetos planos — 助数詞「枚」](#entry-424) · [Entrada 426: 自分 como pronombre — 自分：数詞・助数詞](#entry-426) · [Entrada 423: 杯 recipientes/bebidas — 助数詞「杯」](#entry-423)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-8232aa88465ff8a366d57f83feb45c9c576601c38e6002343fc32493b696f55a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:13:12.154Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:00:20.735Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:00:20.735Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0246-sol-4bd912/08-ticket03-close-claim04.json"
+}

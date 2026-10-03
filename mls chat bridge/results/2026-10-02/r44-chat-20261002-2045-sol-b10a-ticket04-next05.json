@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-b10a-ticket04-next05",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0891",
+          "sha256": "392c74b1e808bca847a0aae0cb14b717593064a672ba7ae941a158ce8282ee1f",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0891",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "46212018-2084-413c-948e-fcebbd1035ff",
+                "ticketId": "R44-CORPUS-0891",
+                "code": "MLS-V01-0580",
+                "idempotencyKey": "R44-CORPUS-0891:MLS-V01-0580:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d4366d363e3d707ab8088db3f3daea94eb9321cbe1e373f05463710ae0423811",
+                "sourceSha256": "9a6da7780cdb49347721d8a3a08414848c530a83e4c23704b9aa9d76deac9fa3",
+                "committedMs": 1790996401994,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "52dda43a3ebb45181537190622ddde5c028b78bd9b5b822d44c07bd229bada49",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0891",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "510a015b-ebd3-4c0c-a67f-74d08c749858",
+                "ticketId": "R44-CORPUS-0891",
+                "code": "MLS-V01-0581",
+                "idempotencyKey": "R44-CORPUS-0891:MLS-V01-0581:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a05e1cd8ee3783990438e0daa706d4833886f5117f943b202fb0d78cc2e6b2c5",
+                "sourceSha256": "b6cc486167b3fb7184ddcb574367ee5de7d53df44bf9d953961959c6df4b3c83",
+                "committedMs": 1790996402241,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "4499aea435f0c5f870c8235bfcc0fefb2ebff5b1731f62ab47f892520c0eb474",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0891",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "27b45b85-8220-4054-9163-167a08a082e6",
+                "ticketId": "R44-CORPUS-0891",
+                "code": "MLS-V01-0582",
+                "idempotencyKey": "R44-CORPUS-0891:MLS-V01-0582:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "73f95de5190b2495a6b347b93fb07529d6dd29d86ad5b1f66d4568646149dddd",
+                "sourceSha256": "4d8f1fadadb264d328c935c6f9e10b0b9401eac2b9ddff7901797d6f7ea5f135",
+                "committedMs": 1790996402505,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "47cca94fb01501ddf468f96632e0600ade30f10655c3cb9c39d195975dbbebda",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0891",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5dcacfb8-cbe1-4e8f-ba62-9934e04f459d",
+                "ticketId": "R44-CORPUS-0891",
+                "code": "MLS-V01-0583",
+                "idempotencyKey": "R44-CORPUS-0891:MLS-V01-0583:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d134f5e0d7dfe82b0bdd70c2709513e7014de82f0f36002242d8053c24eca35d",
+                "sourceSha256": "6b892d8b82e3ca84ef5b396ade7fa9c375d6257ee39faf1337214560cbdf06ed",
+                "committedMs": 1790996402752,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "03f1bddc0bba0c55cd822f2e5dd8d3d5e2a61c18f4c2fe7cf758801fa13ebfb2",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0891",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ea9f2144-1d34-4df8-8614-931b5fb56a62",
+                "ticketId": "R44-CORPUS-0891",
+                "code": "MLS-V01-0584",
+                "idempotencyKey": "R44-CORPUS-0891:MLS-V01-0584:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "3ad1bf7c1b63a270e033f7593c3720cd434945924c03bd4a9984d3fc83384783",
+                "sourceSha256": "17b6e19143e819382f8c6ed2d895b16fa05ed3a94121a27d926eddd4044ec10f",
+                "committedMs": 1790996402996,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "23ae447d450c219e45421761dd8872289d7d3d7e2ef61df6dec6617f85145a9d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-0d75eebf-571b-410a-8d7e-fd5af30fe8cf",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "392c74b1e808bca847a0aae0cb14b717593064a672ba7ae941a158ce8282ee1f"
+          }
+        },
+        "completedAt": "2026-10-03T03:00:03.326Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-d215bb7b-f058-4674-9549-92cb4be16d91",
+          "workerId": "r44-chat-20261002-2045-sol-b10a",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0892",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996703386,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0586",
+                "path": "ingles/MLS-V01-0586.json",
+                "sha256": "a1df6b648f3a793032c01a62565119ead634bc2f0a9e16debbaeacf6be378d88"
+              },
+              {
+                "code": "MLS-V01-0587",
+                "path": "ingles/MLS-V01-0587.json",
+                "sha256": "280b0b12bc5a39436727cfbea18d8bac15e2c56710c76e470d623b9cd1c7262f"
+              },
+              {
+                "code": "MLS-V01-0588",
+                "path": "ingles/MLS-V01-0588.json",
+                "sha256": "a465c2251098ed03031ede500035bdcb87c540e4d2c3bad7d1376e03069d4426"
+              },
+              {
+                "code": "MLS-V01-0590",
+                "path": "ingles/MLS-V01-0590.json",
+                "sha256": "2c9a9b47071d8135e9457fbbc2c97064de6b4e996da6658ab6cc53903e72d57f"
+              },
+              {
+                "code": "MLS-V01-0591",
+                "path": "ingles/MLS-V01-0591.json",
+                "sha256": "435b851b9a247ee1073e5de0446dabcd1c51d90adba3422fd25fde47c24a2714"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0892",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0586",
+                "path": "ingles/MLS-V01-0586.json",
+                "sha256": "a1df6b648f3a793032c01a62565119ead634bc2f0a9e16debbaeacf6be378d88"
+              },
+              {
+                "code": "MLS-V01-0587",
+                "path": "ingles/MLS-V01-0587.json",
+                "sha256": "280b0b12bc5a39436727cfbea18d8bac15e2c56710c76e470d623b9cd1c7262f"
+              },
+              {
+                "code": "MLS-V01-0588",
+                "path": "ingles/MLS-V01-0588.json",
+                "sha256": "a465c2251098ed03031ede500035bdcb87c540e4d2c3bad7d1376e03069d4426"
+              },
+              {
+                "code": "MLS-V01-0590",
+                "path": "ingles/MLS-V01-0590.json",
+                "sha256": "2c9a9b47071d8135e9457fbbc2c97064de6b4e996da6658ab6cc53903e72d57f"
+              },
+              {
+                "code": "MLS-V01-0591",
+                "path": "ingles/MLS-V01-0591.json",
+                "sha256": "435b851b9a247ee1073e5de0446dabcd1c51d90adba3422fd25fde47c24a2714"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0586",
+              "MLS-V01-0587",
+              "MLS-V01-0588",
+              "MLS-V01-0590",
+              "MLS-V01-0591"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261002-2045-sol-b10a",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996703386,
+              "active": true
+            },
+            "workerId": "r44-chat-20261002-2045-sol-b10a",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996703386,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0586",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 586,
+                "title": "which oracional",
+                "level": "C1",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nEl *sentential which* es un uso especial de la palabra *which* en el que la cláusula relativa no describe a un sustantivo específico (como un objeto o una persona), sino que se refiere a toda la idea o situación expresada en la oración anterior. En español, solemos traducirlo como \"lo cual\" o \"lo que\".\n\n#### Cómo funciona\n\nEn una cláusula relativa estándar, el **antecedente** (la palabra a la que la cláusula se refiere) es un sustantivo. Por ejemplo, en \"*The car, which is red...*\", el antecedente es \"*the car*\".\n\nEn el caso del *sentential which*, el antecedente no es una sola palabra, sino la **cláusula completa** (la oración entera) que se acaba de decir. La función de esta estructura es añadir un comentario, una consecuencia o una evaluación sobre el hecho mencionado.\n\nPara que esta estructura sea gramaticalmente correcta, debe cumplir dos condiciones:\n1. **Uso de coma:** Siempre debe ir precedida por una coma, ya que funciona como una cláusula **no restrictiva** (o suplementaria); es decir, aporta información extra que no es esencial para identificar de qué estamos hablando, sino para comentar lo dicho.\n2. **Uso de *which*:** Es la única partícula relativa que puede realizar esta función de referirse a una oración completa.\n\n#### Ejemplos\n\n**1. Para añadir un comentario o juicio:**\n*   *He missed the train, which was unfortunate.*\n*   Perdió el tren, lo cual fue desafortunado.\n*   **Explicación:** El adjetivo *unfortunate* no describe al \"tren\", sino al hecho de que él perdiera el tren.\n\n**2. Para expresar una consecuencia:**\n*   *She won the lottery, which changed her life forever.*\n*   Ella ganó la lotería, lo que cambió su vida para siempre.\n*   **Explicación:** Lo que cambió su vida no fue solo el objeto \"lotería\", sino el evento completo de haber ganado.\n\n**3. Para añadir información adicional sobre una situación:**\n*   *They decided to move to Italy, which was a very big decision.*\n*   Decidieron mudarse a Italia, lo cual fue una decisión muy importante.\n*   **Explicación:** El comentario se refiere a la acción de decidir mudarse, no a \"Italia\" ni a la \"decisión\" como palabra aislada.\n\n#### Observación importante\n\nEs fundamental no confundir este uso con las cláusulas relativas que describen un sustantivo, y especialmente, **nunca utilizar *that*** para este propósito.\n\n*   **Correcto:** *It rained all night, which was annoying.* (Llovió toda la noche, lo cual fue molesto).\n*   **Incorrecto:** *It rained all night, ~~that~~ was annoying.*\n\nEn inglés, la palabra *that* solo puede usarse en cláusulas **restrictivas** (aquellas que son esenciales para identificar al sustantivo y que no llevan coma). Como el *sentential which* es por definición una cláusula suplementaria que requiere coma, el uso de *that* queda descartado.\n\n#### Entradas relacionadas\n\n*   [Entrada 585: Comas en relativas no restrictivas — Commas in non-defining relatives](#entry-585)\n*   [Entrada 584: who/which en relativas no restrictivas — Non-defining who/which](#entry-584)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:56:16.224Z"
+              },
+              {
+                "code": "MLS-V01-0587",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 587,
+                "title": "Preposición al final en relativas",
+                "level": "B1",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nEn inglés, cuando una cláusula relativa (una frase que describe a un sustantivo) incluye una preposición, esta puede quedarse al final de la cláusula. A este fenómeno se le llama *preposition stranding* (dejar la preposición \"varada\" o \"suelta\" al final). Es la forma más común y natural de hablar en contextos cotidianos y neutros.\n\n#### Cómo funciona\n\nNormalmente, una preposición acompaña a un verbo o a un sustantivo para establecer una relación (por ejemplo, *listen **to***, *talk **with***, *sit **on***). Cuando convertimos esa idea en una descripción de algo, tenemos dos opciones de estructura:\n\n1.  **Registro informal/neutro (*Stranding*):** La preposición se mantiene al final de la cláusula. En este caso, el pronombre relativo (*who, which, that*) es opcional y suele omitirse en el habla diaria.\n2.  **Registro formal (*Pied-piping*):** La preposición se mueve al principio de la cláusula, justo antes del pronombre relativo. En este caso, el pronombre es obligatorio y debe ser *whom* (para personas) o *which* (para cosas).\n\n#### Ejemplos\n\n**1. El objeto de una acción**\n*   *The house I live **in**.*\n*   (La casa en la que vivo).\n*   **Análisis:** El antecedente es *the house*. La preposición *in* se queda al final de la cláusula. El pronombre relativo (*that* o *which*) se ha omitido, lo cual es correcto en este registro.\n\n**2. Una persona con la que se interactúa**\n*   *The person I was talking **to**.*\n*   (La persona con la que estaba hablando).\n*   **Análisis:** La preposición *to* cierra la cláusula relativa. Es la forma estándar en una conversación normal.\n\n**3. Un propósito o motivo**\n*   *The reason she left **for**.*\n*   (La razón por la que se fue).\n*   **Análisis:** La preposición *for* queda al final, conectando la idea de la salida con el antecedente *the reason*.\n\n#### Observación importante: El registro y la gramática\n\nEs vital no confundir la libertad del registro informal con la rigidez del formal. Si decides mover la preposición al principio para sonar más elegante o académico, las reglas cambian estrictamente:\n\n*   **Correcto (Informal):** *The man I work **with**.*\n*   **Correcto (Formal):** *The man **with whom** I work.*\n*   **Incorrecto:** *The man **with that** I work.* (Nunca se usa *that* si la preposición va delante).\n*   **Incorrecto:** *The man **with** I work.* (Si mueves la preposición, el pronombre es obligatorio).\n\n#### Entradas relacionadas\n\n*   [Entrada 588: Anteposición de preposición en cláusulas relativas — Pied-piping in relative clauses](#entry-588)\n*   [Entrada 578: who — who](#entry-578)\n*   [Entrada 579: which — which](#entry-579)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:56:45.714Z"
+              },
+              {
+                "code": "MLS-V01-0588",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 588,
+                "title": "Anteposición de preposición en cláusulas relativas",
+                "level": "C1",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### Anteposición de preposición en cláusulas relativas (Pied-piping)\n\n#### En pocas palabras\nEn inglés, cuando una cláusula relativa (una frase que añade información sobre un sustantivo) incluye una preposición, esta puede colocarse en dos lugares distintos. La **anteposición de preposición** ocurre cuando la preposición se mueve al principio de la cláusula, justo antes del pronombre relativo. \n\nEste fenómeno se conoce técnicamente como *pied-piping* (literalmente, \"el arrastre del flautista\"), porque la preposición parece \"guiar\" o \"arrastrar\" al pronombre relativo hacia adelante, tal como el personaje del cuento del Flautista de Hamelín guiaba a sus seguidores.\n\n#### Cómo funciona\nEn el uso cotidiano y menos formal, es muy común dejar la preposición al final de la cláusula (un fenómeno llamado *preposition stranding*). Sin embargo, en registros formales, académicos o literarios, se prefiere mover la preposición al frente.\n\nPara que esta anteposición sea gramaticalmente correcta, deben cumplirse ciertas reglas estrictas sobre qué palabras se pueden usar:\n\n1.  **Para personas:** Se debe utilizar obligatoriamente el pronombre **whom**. No es posible usar *who* ni *that* si la preposición va delante.\n2.  **Para cosas o animales:** Se debe utilizar el pronombre **which**. No es posible usar *that* si la preposición va delante.\n3.  **Registro:** Esta estructura es marcadamente formal. Su uso en una conversación casual puede sonar excesivamente rígido o anticuado.\n\n#### Ejemplos\n\n**1. Referencia a una persona**\n*   **Formal (*Pied-piping*):** *The colleague **to whom** I sent the email.*\n*   **Informal (*Stranding*):** *The colleague **who/that** I sent the email **to**.*\n*   **Explicación:** En la versión formal, la preposición *to* se antepone al pronombre *whom*. En la versión informal, la preposición se queda al final de la cláusula y el pronombre puede ser *who* o *that*.\n\n**2. Referencia a un objeto**\n*   **Formal (*Pied-piping*):** *The chair **on which** I sat was broken.*\n*   **Informal (*Stranding*):** *The chair **that** I sat **on** was broken.*\n*   **Explicación:** Aquí, la preposición *on* encabeza la cláusula relativa junto a *which*. En la versión informal, la preposición se desplaza al final, permitiendo el uso de *that*.\n\n**3. En cláusulas no restrictivas (con comas)**\n*   **Formal:** *My professor, **with whom** I have worked for years, is retiring.*\n*   **Explicación:** En este caso, la información es adicional (no esencial para identificar al profesor). La anteposición es la forma estándar y elegante de manejar estas cláusulas en la escritura académica.\n\n#### Observación importante\nUn error frecuente es intentar usar el pronombre **that** con una preposición delante. En inglés, **that** es un pronombre relativo que nunca puede ir precedido por una preposición. \n\n*   **Incorrecto:** *The house in that I live.*\n*   **Correcto (Formal):** *The house **in which** I live.*\n*   **Correcto (Informal):** *The house **that** I live **in**.*\n\nAsimismo, aunque en el habla común se usa *who* para personas, la anteposición de preposición exige el uso de la forma de objeto **whom**. Usar *who* en esta posición (*the person to who...*) se considera un error gramatical en registros formales.\n\n#### Entradas relacionadas\n*   [Entrada 587: Preposición al final en relativas — Preposition stranding in relatives](#entry-587)\n*   [Entrada 578: who — who](#entry-578)\n*   [Entrada 579: which — which](#entry-579)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:57:18.632Z"
+              },
+              {
+                "code": "MLS-V01-0590",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 590,
+                "title": "whoever/whatever/whichever",
+                "level": "C1",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nEn inglés, las palabras *whoever*, *whatever* y *whichever* se utilizan para introducir lo que se conoce como **cláusulas relativas libres** (o fusionadas). \n\nEn una cláusula relativa común, la palabra que conecta la información (el relativo, como *who* o *which*) necesita un sustantivo previo al que referirse, llamado **antecedente** (por ejemplo: *the man **who**...*). En las cláusulas relativas libres, la palabra (*whoever*, *whatever*, *whichever*) actúa como el conector y como el antecedente al mismo tiempo. Es decir, no necesitan un sustantivo antes de ellas porque ya contienen el significado de \"la persona que\", \"la cosa que\" o \"el elemento que\".\n\n#### Cómo funciona\n\nLa elección entre estas tres formas depende de qué tipo de referente se esté introduciendo y de si las opciones son limitadas o no:\n\n*   **Whoever**: Se refiere a personas. Equivale a \"quienquiera que\" o \"cualquiera que\". Se usa cuando no sabemos exactamente de quién hablamos o cuando no importa quién sea la persona.\n*   **Whatever**: Se refiere a cosas, ideas o acciones. Equivale a \"lo que sea\" o \"cualquier cosa que\". Se usa para indicar que no hay límites en la elección o en la acción.\n*   **Whichever**: Se refiere a personas o cosas, pero con una distinción crucial: se usa cuando hay un **grupo limitado de opciones** entre las cuales elegir. Equivale a \"el que sea\" o \"cualquiera de estos\".\n\n#### Ejemplos\n\n**1. Uso de *whoever* (personas)**\n*   *Whoever arrives first gets the best seat.*\n*   (Quienquiera que llegue primero se lleva el mejor asiento).\n*   **Análisis:** *Whoever* funciona como el **sujeto** (quien realiza la acción) de la cláusula *whoever arrives first*. La cláusula completa actúa como el sujeto de la oración principal.\n\n**2. Uso de *whatever* (cosas/acciones sin límite)**\n*   *You can eat whatever you want.*\n*   (Puedes comer lo que quieras / cualquier cosa que quieras).\n*   **Análisis:** Aquí, *whatever* introduce una cláusula que funciona como el **objeto** (lo que recibe la acción) del verbo *eat*. No hay un límite establecido de comida.\n\n**3. Uso de *whichever* (elección entre opciones limitadas)**\n*   *There are two cakes; take whichever one you prefer.*\n*   (Hay dos pasteles; toma el que prefieras / cualquiera de los dos que prefieras).\n*   **Análisis:** A diferencia de *whatever*, el uso de *whichever* indica que la elección está restringida a los dos pasteles mencionados.\n\n#### Observación importante\n\nEs común confundir *whatever* con *whichever*. La diferencia es de **alcance**:\n*   Si dices *\"Do whatever you want\"*, la persona tiene libertad total, sin restricciones.\n*   Si dices *\"Do whichever you want\"*, se sobreentiende que hay un grupo de opciones específicas (por ejemplo, dos tareas o dos caminos) y la persona debe elegir una de ellas.\n\nAsimismo, en registros muy formales, se puede encontrar **whomever** para referirse a personas cuando estas cumplen la función de **objeto** (quien recibe la acción) en la cláusula, aunque en el inglés moderno hablado, *whoever* suele usarse para ambos casos.\n\n#### Entradas relacionadas\n\n*   [Entrada 589: Cláusulas con *what*](#entry-589)\n*   [Entrada 578: *who*](#entry-578)\n*   [Entrada 579: *which*](#entry-579)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:59:01.210Z"
+              },
+              {
+                "code": "MLS-V01-0591",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 591,
+                "title": "Relativa reducida de participio presente",
+                "level": "B2",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### Relativa reducida de participio presente (Present-participial reduced relative)\n\n#### En pocas palabras\nEs una forma de acortar una descripción de un sustantivo (llamado antecedente) eliminando el pronombre relativo (*who, which, that*) y el verbo auxiliar (*be*). En su lugar, se utiliza directamente la forma en **-ing** (el participio presente) para transmitir la misma información de manera más directa y fluida.\n\n#### Cómo funciona\nPara entender esta reducción, primero debemos ver la cláusula completa y luego cómo se simplifica. Esta estructura solo es posible cuando la cláusula original tiene un **sentido activo** (es decir, el sustantivo es quien realiza la acción).\n\n1. **Cláusula completa:** *The man **who is standing** by the door.* (El hombre que está junto a la puerta).\n2. **Reducción:** Se elimina el pronombre (*who*) y el auxiliar (*is*).\n3. **Resultado:** *The man **standing** by the door.* (El hombre junto a la puerta / El hombre que está junto a la puerta).\n\nEste proceso se usa tanto para describir acciones que están ocurriendo en ese momento (aspecto progresivo) como para describir características habituales de alguien o algo.\n\n#### Ejemplos\n\n* **The girl playing the piano is my cousin.**\n  * *Traducción:* La niña que toca el piano es mi prima.\n  * *Explicación:* La cláusula original sería *The girl who is playing...*. Se reduce para describir qué está haciendo la niña.\n\n* **I saw a dog running in the park.**\n  * *Traducción:* Vi a un perro corriendo en el parque.\n  * *Explicación:* Aquí, *running* modifica al sustantivo *dog*, indicando la acción que realizaba el animal.\n\n* **People living in large cities often face more stress.**\n  * *Traducción:* Las personas que viven en ciudades grandes suelen enfrentar más estrés.\n  * *Explicación:* En este caso, la reducción describe una situación general o característica de las personas, no necesariamente algo que ocurre en este preciso instante.\n\n#### Observación importante\nEs fundamental no confundir esta estructura con la **relativa reducida de participio pasado**. \n\n* Si el sustantivo **realiza** la acción, usamos **-ing** (participio presente): *The man **calling** you* (El hombre que te está llamando).\n* Si el sustantivo **recibe** la acción, usamos la forma de participio pasado (generalmente terminada en *-ed* o formas irregulares): *The man **called** by you* (El hombre llamado por ti).\n\n#### Entradas relacionadas\n* [Entrada 592: Relativa reducida de participio pasado — Past-participial reduced relative](#entry-592)\n* [Entrada 593: Relativa de infinitivo con to — To-infinitival relative](#entry-593)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:59:32.126Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:00:04.316Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:00:04.316Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-chat-20261002-2045-sol-b10a-ticket04-next05.json"
+}

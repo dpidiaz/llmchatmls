@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-5c72-ticket04-close-next",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0677",
+          "sha256": "bbf3879858a08d10fe02569d97677f3e2e98ad83f3d917682f7b3061116143f5",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0677",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1161977d-318b-44f6-b361-44c3ec9c950a",
+                "ticketId": "R43-EMERGENCY-0677",
+                "code": "MLS-V06-0984",
+                "idempotencyKey": "R43-EMERGENCY-0677:MLS-V06-0984:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6a9790367e6ffd1f6eab2e5c396dbfe410a1ccf94b0430fe0ceb86a1cc8c26ac",
+                "sourceSha256": "0cbd3508b000bf7917726f8cc074548dfaf1fc7daaf825c3ab9491a0c2474ed9",
+                "committedMs": 1790996425074,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "facb7343c435c09acf2863b7038cf8d4d98b3c09cd08ba155a94387395801055",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0677",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6f167128-4586-45aa-8bde-ad23a7f0a24f",
+                "ticketId": "R43-EMERGENCY-0677",
+                "code": "MLS-V06-0985",
+                "idempotencyKey": "R43-EMERGENCY-0677:MLS-V06-0985:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8ba8bf4e9e3905849d5bb933f43270c57365adb0fc72dec322fbc9a720c8daa1",
+                "sourceSha256": "79480f1fbb5595a3b74c9de7be3da7231cb95faa05f6df5d6772cbce81ff1f19",
+                "committedMs": 1790996425311,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0488d50f911bd79b783319c3d5bff95dcfc28ae5b592eca6802dfac49a549561",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0677",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d599c79b-9093-45db-a914-c04a6d031041",
+                "ticketId": "R43-EMERGENCY-0677",
+                "code": "MLS-V06-0986",
+                "idempotencyKey": "R43-EMERGENCY-0677:MLS-V06-0986:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "128a32a919459e73b0fa36de48943868d958353aaaab0834ddeb2434e89210c4",
+                "sourceSha256": "9d03026ec14d9572899789157018cbaef6ee64f21a7a7e8afd1f354752d5e8bd",
+                "committedMs": 1790996425553,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "cb7c034fd7fdfd2e2e5cfe008b42203f9ae4224664f5c2dfe33b0bb86e03a203",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0677",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "690969f1-dc9d-43e7-ba89-a73cb3350002",
+                "ticketId": "R43-EMERGENCY-0677",
+                "code": "MLS-V06-0987",
+                "idempotencyKey": "R43-EMERGENCY-0677:MLS-V06-0987:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "58140876ca5799e6124f3b2d05e860edec806d930d9294ef923cfff6df0698d0",
+                "sourceSha256": "75aa3d6d6d85748a56cff2fff83f5c00aae4c2731a27ef55d2f884060b854994",
+                "committedMs": 1790996425791,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7ec2743e32783cad602ad08012c901cb8606277d6fdb90ea106614563bba031f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0677",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "bad9e12e-7b0d-4995-88ee-62dc6f95d6e1",
+                "ticketId": "R43-EMERGENCY-0677",
+                "code": "MLS-V06-0988",
+                "idempotencyKey": "R43-EMERGENCY-0677:MLS-V06-0988:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e8155e62bccffcc73f367850eb31f68328df352f313b5118ddb8b88a00077f6f",
+                "sourceSha256": "894fa2cc064d64d97af70866a0a470c954caef89b85bae1630b55270bf6be3cb",
+                "committedMs": 1790996426046,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f30cf2355363d925e997d466d91cdbbeaa39a6506b3ede246d7575c76234ff63",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-5ee172d8-b8db-4242-86ee-ab87f91a0359",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "bbf3879858a08d10fe02569d97677f3e2e98ad83f3d917682f7b3061116143f5"
+          }
+        },
+        "completedAt": "2026-10-03T03:00:26.368Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-facb35cb-eeb7-412e-bacf-8645589cda00",
+          "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0678",
+            "leaseGeneration": 2,
+            "lease_expires_at": 1790996726420,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0989",
+                "path": "japones/MLS-V06-0989.json",
+                "sha256": "cc609f7a557e7fcf57719aa59f568e3d0539b48f1ed67b6bf6557e0c4668cfda"
+              },
+              {
+                "code": "MLS-V06-0990",
+                "path": "japones/MLS-V06-0990.json",
+                "sha256": "7c8866309e471d988ae572712468f34891368c181900d64a9983fff735e4b4e2"
+              },
+              {
+                "code": "MLS-V06-0992",
+                "path": "japones/MLS-V06-0992.json",
+                "sha256": "78dfdf8a21f0960871ad2d4a0ed5b0dcdffc2108cadb5678bfba33708239f04f"
+              },
+              {
+                "code": "MLS-V06-0993",
+                "path": "japones/MLS-V06-0993.json",
+                "sha256": "db4d1c154965108ee49cfde703e1a2f438aa4921cb37d89ae63713b0720b95a1"
+              },
+              {
+                "code": "MLS-V06-0994",
+                "path": "japones/MLS-V06-0994.json",
+                "sha256": "02f1c6b3c2728e2e283656786e1bbcb3c851451de8efcd618b7d37a0a412c469"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0678",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0989",
+                "path": "japones/MLS-V06-0989.json",
+                "sha256": "cc609f7a557e7fcf57719aa59f568e3d0539b48f1ed67b6bf6557e0c4668cfda"
+              },
+              {
+                "code": "MLS-V06-0990",
+                "path": "japones/MLS-V06-0990.json",
+                "sha256": "7c8866309e471d988ae572712468f34891368c181900d64a9983fff735e4b4e2"
+              },
+              {
+                "code": "MLS-V06-0992",
+                "path": "japones/MLS-V06-0992.json",
+                "sha256": "78dfdf8a21f0960871ad2d4a0ed5b0dcdffc2108cadb5678bfba33708239f04f"
+              },
+              {
+                "code": "MLS-V06-0993",
+                "path": "japones/MLS-V06-0993.json",
+                "sha256": "db4d1c154965108ee49cfde703e1a2f438aa4921cb37d89ae63713b0720b95a1"
+              },
+              {
+                "code": "MLS-V06-0994",
+                "path": "japones/MLS-V06-0994.json",
+                "sha256": "02f1c6b3c2728e2e283656786e1bbcb3c851451de8efcd618b7d37a0a412c469"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0989",
+              "MLS-V06-0990",
+              "MLS-V06-0992",
+              "MLS-V06-0993",
+              "MLS-V06-0994"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+              "leaseGeneration": 2,
+              "leaseExpiresAt": 1790996726420,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790996726420,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0989",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 989,
+                "title": "Cláusulas relativas de gap implícito",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLas cláusulas relativas japonesas modifican directamente a un sustantivo y no necesitan un pronombre relativo equivalente a “que”, “quien” o “el cual”. En **私が読んだ本**, “el libro que leí”, la secuencia **私が読んだ** modifica a **本**. Dentro de esa cláusula no aparece **本を**: el papel de **本** como aquello que fue leído se recupera por la estructura y el significado del verbo.\n\nA esa posición no expresada se la llama a menudo **空所（くうしょ）**, “hueco” o *gap*, como herramienta de análisis.\n\n#### Cómo funciona\n\nEl patrón básico es **[cláusula modificadora] + sustantivo**. La cláusula aparece antes del nombre al que describe: **昨日買ったカメラ** “la cámara que compré ayer”, **田中さんが書いた記事** “el artículo que escribió Tanaka”.\n\nEn **私が読んだ本**, **私が** identifica a quien realizó la lectura y **読んだ** expresa la acción. El sustantivo externo **本** se interpreta como el participante que correspondería al objeto de **読む**, aunque dentro de la cláusula no aparezca **本を** ni un pronombre que lo sustituya.\n\nEl papel recuperado no tiene que ser siempre el de objeto. En **私が住んでいる町**, “la ciudad donde vivo”, **町** se relaciona con el lugar de **住んでいる**. La traducción española usa “donde”, pero el japonés mantiene el mismo patrón general de cláusula anterior más sustantivo.\n\nLa interpretación depende del predicado y del contexto. Por eso no conviene suponer que siempre se ha “borrado” mecánicamente una partícula concreta.\n\n#### Ejemplos\n\n* **私が読んだ本** — el libro que leí.\n* **昨日買ったカメラ** — la cámara que compré ayer.\n* **田中さんが書いた記事** — el artículo que escribió Tanaka.\n* **私が住んでいる町** — la ciudad donde vivo.\n\nEn todos estos casos, el sustantivo final recibe información de la cláusula anterior y su relación interna con el predicado se recupera sin pronombre relativo explícito.\n\n#### Observación importante\n\nEl “hueco” es una manera de describir la relación sintáctica; no significa que exista necesariamente un pronombre invisible dentro de la oración japonesa. Además, no todas las construcciones que modifican a un sustantivo admiten un análisis simple de argumento omitido. Algunas relaciones entre cláusula y nombre se establecen de manera más amplia por el significado y el contexto.\n\nTambién conviene distinguir estas cláusulas relativas de las cláusulas nominalizadas con **こと** o **の**. En **私が読んだ本**, la cláusula modifica a **本**; en una nominalización, la propia cláusula se convierte en una unidad nominal.\n\n#### Entradas relacionadas\n\n[Entrada 986: Ambigüedad de が](#entry-986) · [Entrada 987: Cadenas de subordinación](#entry-987) · [Entrada 988: Cláusulas adverbiales nominalizadas](#entry-988) · [Entrada 990: Empatía y dirección de くれる/あげる](#entry-990)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-85a2ec9b1cc49c4a99c4ef6d9550c12a7f34e72670d86351529e04b14a087fc7",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:18:50.171Z"
+              },
+              {
+                "code": "MLS-V06-0990",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 990,
+                "title": "Empatía y dirección de くれる/あげる",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\n**くれる** y **あげる** describen actos de dar, pero también codifican desde qué lado se organiza la escena. En **友達が私に本をくれた。** “Un amigo me dio un libro”, **くれる** presenta el acto como dirigido hacia el hablante o hacia alguien perteneciente a su esfera de empatía. En **私が友達に本をあげた。** “Le di un libro a un amigo”, **あげる** presenta la transferencia desde el hablante hacia otra persona.\n\nEsta diferencia de perspectiva también aparece cuando funcionan como verbos auxiliares después de una forma en **て**.\n\n#### Cómo funciona\n\nCon objetos materiales, el esquema básico de **くれる** es “alguien da algo al hablante o a una persona cercana al hablante”. En cambio, **あげる** presenta al dador como punto de partida y al receptor como alguien distinto de ese centro deíctico.\n\nLa noción de **empatía** aquí se refiere al participante con cuya perspectiva se alinea el hablante al presentar el evento. No significa necesariamente afecto personal. Por ejemplo, **先生が弟に本をくれた。** puede usar **くれる** porque el hermano menor pertenece a la esfera del hablante, aunque el hablante no sea el receptor directo.\n\nEn construcciones auxiliares, **〜てくれる** presenta una acción realizada por otra persona como dirigida beneficiosamente hacia el hablante o su grupo: **友達が手伝ってくれた。** “Un amigo me ayudó”. **〜てあげる** presenta una acción realizada en beneficio de otra persona: **私は友達を手伝ってあげた。** “Ayudé a un amigo”.\n\nLa elección, por tanto, combina dirección de beneficio, relaciones entre participantes y punto de vista discursivo.\n\n#### Ejemplos\n\n* **友達が私に本をくれた。** — Un amigo me dio un libro.\n* **私が友達に本をあげた。** — Le di un libro a un amigo.\n* **先生が弟に本をくれた。** — El profesor le dio un libro a mi hermano menor.\n* **友達が手伝ってくれた。** — Un amigo me ayudó / tuvo la amabilidad de ayudarme.\n\n#### Observación importante\n\n**あげる** no debe entenderse simplemente como “dar” neutral en cualquier situación. Cuando se usa como auxiliar para describir un favor propio, puede destacar que el hablante hizo algo por otra persona y, según el contexto, sonar innecesariamente autoenfático. La elección pragmática depende de la relación social y de cómo se presenta el beneficio.\n\nTampoco conviene traducir **くれる** siempre con “darme”. El receptor puede ser otra persona vinculada al hablante, y en **〜てくれる** el español suele expresar la perspectiva mediante pronombres, contexto o fórmulas como “hacer algo por mí”.\n\n#### Entradas relacionadas\n\n[Entrada 988: Cláusulas adverbiales nominalizadas](#entry-988) · [Entrada 989: Cláusulas relativas de gap implícito](#entry-989) · [Entrada 991: Evidencialidad y compromiso](#entry-991) · [Entrada 992: Logoforicidad de 自分](#entry-992)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a1054088af0c4732afece8aa5479072d9c5c7096781ac998debb8e512b1042e0",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:19:46.712Z"
+              },
+              {
+                "code": "MLS-V06-0992",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 992,
+                "title": "Logoforicidad de 自分",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\n**自分（じぶん）** puede corresponder a “uno mismo”, pero su referencia no depende únicamente de la oración más cercana. En ciertos contextos refleja la perspectiva de una persona cuyo pensamiento, habla o conciencia se está representando. Esta propiedad se describe como **logoforicidad**: una expresión se interpreta con relación al centro de perspectiva del discurso.\n\nEn **彼は自分が正しいと思っている。** “Él piensa que él mismo tiene razón”, **自分** se interpreta naturalmente como referido a **彼**, porque la cláusula subordinada expresa el contenido de su pensamiento.\n\n#### Cómo funciona\n\nEn usos reflexivos sencillos, **自分** puede remitir al participante relevante de la misma situación: **田中さんは自分を責めた。** “Tanaka se culpó a sí mismo”. Sin embargo, en estructuras de pensamiento, percepción o discurso, la referencia puede extenderse a través de una cláusula subordinada.\n\nAsí, en **田中さんは自分が正しいと思っている**, el sujeto de **思っている**, Tanaka, funciona como centro de conciencia. La expresión **自分が正しい** se interpreta desde esa perspectiva y **自分** remite naturalmente a Tanaka, aunque aparezca dentro de la cláusula citada indirectamente.\n\nEsta relación no es una simple concordancia morfológica: **自分** no muestra persona ni género. El contexto sintáctico, la semántica del predicado y la perspectiva discursiva ayudan a determinar el antecedente.\n\nCon varios participantes posibles, puede surgir ambigüedad. Predicados que expresan pensamiento, habla, sentimiento o percepción favorecen determinadas lecturas, pero el contexto completo sigue siendo decisivo.\n\n#### Ejemplos\n\n* **田中さんは自分を責めた。** — Tanaka se culpó a sí mismo.\n* **彼は自分が正しいと思っている。** — Él piensa que él mismo tiene razón.\n* **田中さんは佐藤さんに自分の案を説明した。** — Tanaka le explicó a Sato su propio plan; el referente de **自分** depende de la perspectiva y del contexto.\n* **彼女は自分ならできると言った。** — Ella dijo que, si fuera ella, podría hacerlo / que ella misma podría hacerlo.\n\n#### Observación importante\n\nNo conviene formular una regla absoluta del tipo “**自分** siempre se refiere al sujeto”. En algunas construcciones el antecedente favorecido está relacionado con el sujeto o agente, pero la perspectiva discursiva puede intervenir y existen casos ambiguos o sensibles al contexto.\n\nTampoco debe equipararse sin más con el español “sí mismo”. Los pronombres reflexivos españoles y **自分** tienen distribuciones distintas. El concepto de logoforicidad permite explicar por qué **自分** puede conservar la perspectiva de una persona a través de límites oracionales donde una traducción literal resulta insuficiente.\n\n#### Entradas relacionadas\n\n[Entrada 990: Empatía y dirección de くれる/あげる](#entry-990) · [Entrada 991: Evidencialidad y compromiso](#entry-991) · [Entrada 993: Modalidad de oración vs proposicional](#entry-993) · [Entrada 994: Nominalización y stance](#entry-994)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-48adf0e76b9e697dec4c984319f29b083e3748f136705f702693947d403f87c5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:21:37.078Z"
+              },
+              {
+                "code": "MLS-V06-0993",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 993,
+                "title": "Modalidad de oración vs proposicional",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nPara analizar muchas oraciones japonesas conviene separar el **contenido proposicional** de la **modalidad oracional**. El contenido proposicional describe, de manera aproximada, la situación de la que se habla; la modalidad muestra cómo el hablante presenta esa situación: como conjetura, obligación, posibilidad, intención, juicio u otra postura.\n\nEn **彼は来る。** “Él vendrá / viene”, se afirma el evento. En **彼は来るだろう。** “Probablemente vendrá”, la situación básica de “él venir” se mantiene, mientras **だろう** añade una evaluación conjetural del hablante.\n\n#### Cómo funciona\n\nEsta distinción es analítica, no una división absoluta de cada oración en dos bloques independientes. Elementos como los participantes, el predicado y parte de la información temporal o aspectual contribuyen al contenido descrito; expresiones modales sitúan ese contenido con respecto al juicio, la actitud o la interacción del hablante.\n\nAsí, **彼は来るかもしれない。** presenta la venida como posible, mientras **彼は来なければならない。** la presenta como necesaria u obligatoria. El evento relevante sigue siendo la venida de esa persona, pero cambia la manera en que se evalúa.\n\nLa modalidad puede expresarse con auxiliares, construcciones complejas, partículas finales y otros recursos. Además, algunas expresiones combinan modalidad con evidencialidad, cortesía o fuerza comunicativa, de modo que no siempre existe una correspondencia uno a uno entre una forma y una sola categoría.\n\nSeparar ambos niveles ayuda a explicar por qué dos oraciones pueden compartir gran parte de su contenido y, aun así, comunicar posturas muy distintas.\n\n#### Ejemplos\n\n* **彼は来る。** — Él vendrá / viene.\n* **彼は来るだろう。** — Probablemente vendrá.\n* **彼は来るかもしれない。** — Puede que venga.\n* **彼は来なければならない。** — Tiene que venir.\n\nEn los cuatro ejemplos, la situación central implica la venida de **彼**, pero cada construcción modifica la postura con la que se presenta.\n\n#### Observación importante\n\n“Contenido proposicional” no debe confundirse con una traducción española fija. El japonés organiza tiempo, aspecto, sujetos omitidos y relaciones discursivas de manera propia; una traducción natural puede redistribuir esa información.\n\nTampoco toda diferencia formal pertenece a la modalidad. Cambios de tiempo/aspecto, negación, voz o estructura argumental pueden alterar directamente el contenido descrito, aunque también interactúen con la postura del hablante. Por eso el análisis avanzado debe identificar primero el predicado y sus participantes y, después, determinar qué capas de tiempo, aspecto, modalidad, evidencialidad y registro se añaden.\n\n#### Entradas relacionadas\n\n[Entrada 991: Evidencialidad y compromiso](#entry-991) · [Entrada 992: Logoforicidad de 自分](#entry-992) · [Entrada 994: Nominalización y stance](#entry-994) · [Entrada 995: Perspectiva en benefactivos](#entry-995)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9a45f45a092284b036f19baa4503c465be81af3df229e6f8e8e6d9cef89cccee",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:22:33.885Z"
+              },
+              {
+                "code": "MLS-V06-0994",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 994,
+                "title": "Nominalización y stance",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **nominalización** convierte una proposición en una unidad con comportamiento nominal. En japonés, formas como **こと** y **の** permiten integrar un evento o estado dentro de otra estructura. Cuando la estructura principal contiene una evaluación, esa nominalización puede servir como contenido sobre el cual se expresa una postura o **stance**.\n\nEn **彼が来ないことが残念だ。** “Es una pena que no venga”, **彼が来ない** constituye el contenido nominalizado por **こと** y **残念だ** expresa la valoración asociada con ese contenido.\n\n#### Cómo funciona\n\nUna cláusula seguida de **こと** o **の** puede combinarse con partículas nominales. Así, **彼が来たことが問題だ。** “El hecho de que viniera es un problema” contiene una proposición nominalizada que funciona como tema de evaluación dentro de una estructura mayor.\n\nEl stance no procede de **こと** o **の** por sí mismos. Surge de predicados y construcciones que expresan valoración, emoción, certeza, relevancia u otras actitudes. **彼が来たことは確かだ。** “Es seguro que vino” presenta el contenido bajo una evaluación epistémica; **彼が来たことが残念だ。** lo presenta bajo una evaluación afectiva.\n\n**こと** suele asociarse con contenidos concebidos de manera relativamente abstracta o proposicional. **の** aparece ampliamente en nominalizaciones vinculadas con percepción y experiencia. La distribución exacta depende de la construcción y no puede reducirse a una oposición única de registro.\n\nLa persona a quien corresponde la postura se determina por el predicado, los participantes expresados y el contexto discursivo.\n\n#### Ejemplos\n\n* **彼が来ないことが残念だ。** — Es una pena que no venga.\n* **彼が来たことは確かだ。** — Es seguro que vino.\n* **事故が起きたことは重大だ。** — El hecho de que ocurriera un accidente es grave.\n* **鳥が飛ぶのが見えた。** — Se vio a un pájaro volar.\n\nLos tres primeros ejemplos integran un contenido proposicional en una estructura de valoración; el último muestra una nominalización con **の** ligada a percepción.\n\n#### Observación importante\n\nNominalización y stance son fenómenos distintos aunque puedan coincidir. **彼が来たことを確認した。** “Se confirmó que vino” contiene una nominalización, pero no obliga a interpretar una emoción o valoración afectiva. La construcción principal determina qué postura, si alguna, se proyecta sobre el contenido.\n\nAsimismo, **こと** y **の** no son variantes libres. Hay contextos donde ambas formas son posibles con diferencias de matiz y otros donde una construcción favorece o exige una de ellas.\n\n#### Entradas relacionadas\n\n[Entrada 992: Logoforicidad de 自分](#entry-992) · [Entrada 993: Modalidad de oración vs proposicional](#entry-993) · [Entrada 995: Perspectiva en benefactivos](#entry-995) · [Entrada 996: Politeness as grammar-pragmatics interface](#entry-996)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-8f5600b9ca801ef1fb5ffb9db1385a7a3d4f45994aa88798f9e7642668f40731",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:24:48.380Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:00:27.049Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:00:27.049Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-jdp-sol-5c72/08-submit-claim.json"
+}

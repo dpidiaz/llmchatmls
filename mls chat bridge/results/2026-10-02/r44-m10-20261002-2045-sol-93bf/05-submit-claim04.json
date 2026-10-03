@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-93bf-ticket03-next04",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-42bc18e3-9fd4-4098-afa1-23588938d929",
+          "ticketId": "R44-CORPUS-0823",
+          "leaseExpiresAt": 1790996707309
+        },
+        "completedAt": "2026-10-03T03:00:07.462Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0823",
+          "sha256": "3ff76c4c523759c9c12db99c9fdc63f690d3d3e247eca214662af2317a132b1c",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0823",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8b2a7e98-0f7d-4d0a-a8ea-ab903d649675",
+                "ticketId": "R44-CORPUS-0823",
+                "code": "MLS-V01-0142",
+                "idempotencyKey": "R44-CORPUS-0823:MLS-V01-0142:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2f5a5102230ed41e156c6e7ead14820029f4be397171ec3eea2309be23f49e06",
+                "sourceSha256": "e7e5026bcabba56fa8228558949763b388594cffa655fd8a73afe37e61a59437",
+                "committedMs": 1790996407908,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "78bb4146f87e15151b2caa1ed1e1efd16bda3c100f58a464989ff31786fa76ec",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0823",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "44d31be7-3f94-443d-b65c-be8a03833436",
+                "ticketId": "R44-CORPUS-0823",
+                "code": "MLS-V01-0143",
+                "idempotencyKey": "R44-CORPUS-0823:MLS-V01-0143:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "c24fe690164e9b06bff2f89674b3d7b782a9b8df1bba04254a0f75d2cd59dfdf",
+                "sourceSha256": "3154f362959f2e3999db6bb386a76c6f18bb16c7483ac736cdc698e7ff90bf17",
+                "committedMs": 1790996408153,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "726d16bfe092c21764bd881cf576f7f81e651fd7cca2d0dab12557f0e58c13c0",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0823",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "9c34bdee-1543-4e44-a18a-d5ba3e66118f",
+                "ticketId": "R44-CORPUS-0823",
+                "code": "MLS-V01-0144",
+                "idempotencyKey": "R44-CORPUS-0823:MLS-V01-0144:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e8e4ea15e46826fa04a7655efd498eba2ba5d7816ab97921ce8c019fa120ed9b",
+                "sourceSha256": "bff9e0d9f242938e1d209087e681b6d671e709635faa0f4a147259b57e788817",
+                "committedMs": 1790996408390,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "dfd50b8fb5b4ecdfc1e1e3c76a828926117149d6e4054ec04d8de484fb04b97a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0823",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "362dad3d-6b86-4d9d-bb0f-b3fc9d1f4590",
+                "ticketId": "R44-CORPUS-0823",
+                "code": "MLS-V01-0146",
+                "idempotencyKey": "R44-CORPUS-0823:MLS-V01-0146:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "fd0a7f5dad7570b0c94d72093a799ccc0b87269d9b205f9afe169403d1ac8843",
+                "sourceSha256": "9778779513c189b553c433958d8f7625629e5036282c85b3f013c3b6e6af0898",
+                "committedMs": 1790996408635,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "06e4914912264f539db0d5924ab46271811895eefd273325a1a6251fdf11365e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0823",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "72b7a5c6-66a8-44ce-8b30-f28090085e13",
+                "ticketId": "R44-CORPUS-0823",
+                "code": "MLS-V01-0147",
+                "idempotencyKey": "R44-CORPUS-0823:MLS-V01-0147:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1eae21937dd45881410f541bdcbc01f795b5461109d5de654c3c4a8f25d67872",
+                "sourceSha256": "4ef27bbb4d01e221b8904201a4c23b461a57c90145ecb3edb4761fb5b85bb23d",
+                "committedMs": 1790996408864,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "12e476ab76f69bf80b3e110a46204154d54b0d8ee61c0a568c2912ad0195cb1c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-42bc18e3-9fd4-4098-afa1-23588938d929",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "3ff76c4c523759c9c12db99c9fdc63f690d3d3e247eca214662af2317a132b1c"
+          }
+        },
+        "completedAt": "2026-10-03T03:00:09.178Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-ad531307-4f64-4ed7-b32d-f290f84d69a6",
+          "workerId": "r44-m10-20261002-2045-sol-93bf",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0824",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996709233,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0148",
+                "path": "ingles/MLS-V01-0148.json",
+                "sha256": "3858ced7be755a8c9dba19ff2f7477055df9f94e07195f546aaf146c05f39d12"
+              },
+              {
+                "code": "MLS-V01-0150",
+                "path": "ingles/MLS-V01-0150.json",
+                "sha256": "8d3de3cad35e628bfe2781e7d3bab8072b942a43789a40583138d34ab9d6ba9c"
+              },
+              {
+                "code": "MLS-V01-0151",
+                "path": "ingles/MLS-V01-0151.json",
+                "sha256": "b950099851a97589d594ea6d8c4d7d090898ccf4cfa81a7f53cb01c127daf069"
+              },
+              {
+                "code": "MLS-V01-0152",
+                "path": "ingles/MLS-V01-0152.json",
+                "sha256": "20eee067c576e02c40d3044e10c678ea9ada09350c3234db0a67e28a3158aad4"
+              },
+              {
+                "code": "MLS-V01-0154",
+                "path": "ingles/MLS-V01-0154.json",
+                "sha256": "8f945e99ab79bac9e14c86089255e412bffb78da344fefefd3e2512e6e86e763"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0824",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0148",
+                "path": "ingles/MLS-V01-0148.json",
+                "sha256": "3858ced7be755a8c9dba19ff2f7477055df9f94e07195f546aaf146c05f39d12"
+              },
+              {
+                "code": "MLS-V01-0150",
+                "path": "ingles/MLS-V01-0150.json",
+                "sha256": "8d3de3cad35e628bfe2781e7d3bab8072b942a43789a40583138d34ab9d6ba9c"
+              },
+              {
+                "code": "MLS-V01-0151",
+                "path": "ingles/MLS-V01-0151.json",
+                "sha256": "b950099851a97589d594ea6d8c4d7d090898ccf4cfa81a7f53cb01c127daf069"
+              },
+              {
+                "code": "MLS-V01-0152",
+                "path": "ingles/MLS-V01-0152.json",
+                "sha256": "20eee067c576e02c40d3044e10c678ea9ada09350c3234db0a67e28a3158aad4"
+              },
+              {
+                "code": "MLS-V01-0154",
+                "path": "ingles/MLS-V01-0154.json",
+                "sha256": "8f945e99ab79bac9e14c86089255e412bffb78da344fefefd3e2512e6e86e763"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0148",
+              "MLS-V01-0150",
+              "MLS-V01-0151",
+              "MLS-V01-0152",
+              "MLS-V01-0154"
+            ],
+            "lease": {
+              "workerId": "r44-m10-20261002-2045-sol-93bf",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996709233,
+              "active": true
+            },
+            "workerId": "r44-m10-20261002-2045-sol-93bf",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996709233,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0148",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 148,
+                "title": "each frente a every",
+                "level": "B1",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**Each** y **every** pueden traducirse como «cada», pero enfocan el conjunto de manera distinta. **Each** destaca más fácilmente a los miembros uno por uno; **every** presenta la propiedad como válida para todos los miembros de un conjunto, manteniendo una perspectiva distributiva.\n\n#### Cómo funciona\n\nAmbos suelen ir delante de un sustantivo contable singular:\n\n**each + singular noun**\n\n**every + singular noun**\n\nCompare **Each child received a different gift** con **Every child received a gift**. La primera frase favorece una lectura en la que se consideran individualmente los niños y puede destacar diferencias entre ellos. La segunda afirma de forma general que ningún niño del conjunto quedó fuera.\n\n**Each** es natural con grupos de dos: **Each hand has five fingers**. **Every** suele asociarse con conjuntos más amplios y resulta menos natural cuando se quiere hablar específicamente de solo dos miembros.\n\nAdemás, **each** admite **each of + plural noun phrase/pronoun**: **each of the students**, **each of them**. **Every** no forma normalmente *every of them*; se usa **every one of them**.\n\n#### Ejemplos\n\n- **Each child received a different gift.** — Cada niño recibió un regalo diferente.\n- **Every child received a gift.** — Cada niño recibió un regalo.\n- **Each of the doors has a lock.** — Cada una de las puertas tiene cerradura.\n- **I checked every page.** — Revisé todas y cada una de las páginas.\n\n#### Observación importante\n\nLa diferencia entre **each** y **every** no implica que una forma sea siempre individual y la otra siempre colectiva: ambas son distributivas. El contraste es principalmente de perspectiva y de posibilidades gramaticales.\n\nTambién difieren en posición: **They each received a key** es normal, mientras *They every received a key* no lo es.\n\n#### Entradas relacionadas\n\n- [Entrada 147: neither](#entry-147)\n- [Entrada 149: all frente a whole](#entry-149)\n- [Entrada 146: either](#entry-146)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0a9e973d4026b04c8874150b82c6e9711b38eca3f6c41e66cec74119bfb462d4",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:41:54.188Z"
+              },
+              {
+                "code": "MLS-V01-0150",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 150,
+                "title": "a piece of / a bit of / an item of",
+                "level": "A2",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\nExpresiones como **a piece of**, **a bit of** y **an item of** permiten delimitar o contar algo que normalmente se expresa con un sustantivo no contable. La palabra contable de la expresión aporta la unidad: una pieza, una porción o un elemento.\n\n#### Cómo funciona\n\nEl patrón general es:\n\n**countable unit + of + mass noun**\n\nPor ejemplo: **a piece of information**, **a bit of advice**, **an item of furniture**. El sustantivo después de **of** mantiene normalmente su forma no contable: se dice **two pieces of information**, no *two informations*, y **two items of furniture**, no *two furnitures* en el uso estándar.\n\nLa unidad puede cambiar según el significado. **A piece of** es muy flexible: **a piece of paper**, **a piece of news**, **a piece of advice**. **A bit of** suele indicar una cantidad pequeña y es frecuente en registro informal: **a bit of time**, **a bit of luck**. **An item of** presenta algo como un elemento individual de un conjunto, como **an item of clothing**.\n\n#### Ejemplos\n\n- **She gave me a piece of advice.** — Me dio un consejo.\n- **We need two pieces of information.** — Necesitamos dos datos.\n- **I need a bit of time.** — Necesito un poco de tiempo.\n- **They bought two items of furniture.** — Compraron dos muebles.\n\n#### Observación importante\n\nEstas expresiones no son intercambiables en todos los contextos. La elección depende de cómo se conceptualiza el sustantivo y de las combinaciones habituales del idioma: **a piece of advice** es normal, mientras *an item of advice* es mucho menos natural en la conversación corriente.\n\nLa concordancia y el número se marcan en la unidad contable: **one piece is**, **two pieces are**.\n\n#### Entradas relacionadas\n\n- [Entrada 151: one of + plural](#entry-151)\n- [Entrada 152: most frente a most of](#entry-152)\n- [Entrada 153: none of](#entry-153)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-14c832370e7ffec5fa61979624300e985a958a423de0aaf207cfc96c0db12917",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:42:40.022Z"
+              },
+              {
+                "code": "MLS-V01-0151",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 151,
+                "title": "one of + plural",
+                "level": "A2",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**One of + plural** selecciona un solo miembro de un conjunto que contiene dos o más miembros. Por eso **one** es singular, pero el sustantivo después de **of** aparece en plural: **one of my friends**, **one of these books**.\n\n#### Cómo funciona\n\nEl patrón básico es:\n\n**one of + determiner/pronoun + plural noun**\n\nEn **One of my friends lives in Brazil**, **my friends** designa el conjunto y **one** selecciona a una persona de ese conjunto. Como el núcleo de toda la expresión es **one**, cuando funciona como sujeto el verbo suele ir en singular: **One of my friends lives**, no *live*.\n\nDespués de **of** suelen aparecer grupos ya identificados mediante **the**, un posesivo o un demostrativo: **one of the students**, **one of our neighbors**, **one of these options**. También puede usarse un pronombre: **one of them**.\n\nLa estructura no significa simplemente «uno o más». Indica exactamente un miembro seleccionado de un conjunto plural.\n\n#### Ejemplos\n\n- **One of my friends lives in Brazil.** — Uno de mis amigos vive en Brasil.\n- **One of the windows is broken.** — Una de las ventanas está rota.\n- **Choose one of these colors.** — Elige uno de estos colores.\n- **One of them called me.** — Uno de ellos me llamó.\n\n#### Observación importante\n\nEl sustantivo que expresa el conjunto va en plural: **one of the books**, no *one of the book*. Esto se debe a que hay varios miembros posibles de los cuales se selecciona uno.\n\nLa concordancia del verbo principal se determina por **one** cuando toda la expresión es el sujeto: **One of the answers is correct**. El plural interno **answers** no convierte automáticamente el sujeto completo en plural.\n\n#### Entradas relacionadas\n\n- [Entrada 150: a piece of / a bit of / an item of](#entry-150)\n- [Entrada 152: most frente a most of](#entry-152)\n- [Entrada 153: none of](#entry-153)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-bf92da4c5da064e95f35d34750550102331895c54e7ec87961b6161268fc725a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:43:06.843Z"
+              },
+              {
+                "code": "MLS-V01-0152",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 152,
+                "title": "most frente a most of",
+                "level": "B1",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**Most** y **most of** expresan que se habla de la mayor parte de un grupo o cantidad, pero no se construyen igual. **Most** suele introducir una generalización sobre una clase; **most of** se refiere normalmente a la mayoría de un conjunto ya identificado o expresado mediante un pronombre.\n\n#### Cómo funciona\n\nLos patrones principales son:\n\n**most + plural count noun / mass noun**\n\n**most of + determiner/pronoun**\n\nAsí, **Most people need sleep** habla de las personas en general, mientras **Most of the people in this room are students** selecciona la mayoría de un grupo concreto. Con sustantivos no contables ocurre algo parecido: **Most water on Earth is salty**, pero **Most of the water in this bottle is cold**.\n\nDespués de **most of** suelen aparecer **the**, un posesivo, un demostrativo o un pronombre: **most of the students**, **most of my friends**, **most of these books**, **most of them**. Para una generalización se dice normalmente **most people**, no *most of people*.\n\nLa concordancia depende del sustantivo cuantificado: **Most students are ready**, pero **Most information is useful**.\n\n#### Ejemplos\n\n- **Most people need sleep.** — La mayoría de las personas necesita dormir.\n- **Most of the students passed.** — La mayoría de los estudiantes aprobó.\n- **Most of my time is spent at work.** — Paso la mayor parte de mi tiempo en el trabajo.\n- **Most of them agreed.** — La mayoría estuvo de acuerdo.\n\n#### Observación importante\n\n**Most** como cuantificador no debe confundirse con el superlativo **the most**, como en **the most expensive option** («la opción más cara»). En **Most students passed**, **most** significa «la mayoría de», no «los más».\n\nLa diferencia entre **most** y **most of** depende sobre todo de si se habla de una clase en general o de un conjunto delimitado por el contexto.\n\n#### Entradas relacionadas\n\n- [Entrada 151: one of + plural](#entry-151)\n- [Entrada 153: none of](#entry-153)\n- [Entrada 150: a piece of / a bit of / an item of](#entry-150)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f50246bb74ef229c4c9d5cb2a02216b6dfa16a4003d172b52221906abaef5cfc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:43:48.373Z"
+              },
+              {
+                "code": "MLS-V01-0154",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 154,
+                "title": "a number of frente a the number of",
+                "level": "B2",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**A number of** y **the number of** contienen las mismas palabras principales, pero no expresan lo mismo ni controlan la concordancia de la misma manera. **A number of** funciona como una expresión cuantificadora equivalente aproximadamente a «varios» o «un cierto número de»; **the number of** se refiere al número o cantidad como una cifra o magnitud.\n\n#### Cómo funciona\n\nLos patrones habituales son:\n\n**a number of + plural noun + plural verb**\n\n**the number of + plural noun + singular verb**\n\nEn **A number of students are absent**, el sujeto se interpreta como un grupo de varios estudiantes, por lo que el verbo aparece normalmente en plural. En cambio, en **The number of students is increasing**, aquello que aumenta es **the number**, es decir, la cantidad de estudiantes; por eso el verbo es singular.\n\n**A number of** se combina con sustantivos contables plurales: **a number of problems**, **a number of reasons**, **a number of changes**. Puede modificarse con adjetivos como **large** o **small**: **a large number of applicants have responded**. Con **the number of**, esos mismos sustantivos forman el conjunto cuya cantidad se mide: **the number of applicants has increased**.\n\n#### Ejemplos\n\n- **A number of students are absent.** — Varios estudiantes están ausentes.\n- **The number of students is increasing.** — El número de estudiantes está aumentando.\n- **A large number of people have complained.** — Un gran número de personas se ha quejado.\n- **The number of complaints has fallen.** — El número de quejas ha disminuido.\n\n#### Observación importante\n\nLa diferencia no depende simplemente del artículo **a** frente a **the**: cambia la estructura semántica completa. En **a number of students**, la expresión cuantifica a **students**; en **the number of students**, **number** es el elemento que se cuenta o describe como magnitud.\n\nPor eso copiar la concordancia del sustantivo plural después de **of** produce errores en **the number of**: se dice **The number of cases is high**, no *are high* en el análisis estándar.\n\n#### Entradas relacionadas\n\n- [Entrada 153: none of](#entry-153)\n- [Entrada 155: Fracciones y porcentajes + concordancia](#entry-155)\n- [Entrada 152: most frente a most of](#entry-152)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-815596d9b66bf5dfe2e728a760e20d3cab20d009e95e6e7869887bbe289502e9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:44:46.223Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:00:10.189Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:00:10.189Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-m10-20261002-2045-sol-93bf/05-submit-claim04.json"
+}
