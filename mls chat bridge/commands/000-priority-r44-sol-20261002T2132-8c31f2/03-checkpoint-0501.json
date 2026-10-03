@@ -1,0 +1,35 @@
+{
+  "batchId": "r44-single-sol-8c31f2-0501",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-1d33987f-4e0d-43b1-8c92-32e50f985379"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-1d33987f-4e0d-43b1-8c92-32e50f985379",
+        "ticketId": "R44-CORPUS-1263",
+        "leaseGeneration": 1,
+        "idempotencyKey": "sol-8c31f2:R44-CORPUS-1263:MLS-V08-0501:v1",
+        "entry": {
+          "code": "MLS-V08-0501",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            "국립국어원. (2026, 16 enero). '-고' / '-고 나서' 차이. 온라인가나다. https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=326465",
+            "국립국어원. (s. f.). -고¹. 한국어기초사전. https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=78583"
+          ],
+          "claims": [
+            "La terminación -고 puede expresar que dos hechos ocurren en secuencia.",
+            "En -고 나서, el auxiliar 나다 en la construcción -고 나다 aporta la finalización de la acción precedente antes del hecho posterior.",
+            "La construcción admite contextos en los que los sujetos gramaticales de las dos partes no coinciden, como el ejemplo oficial con 비가 ... 경기는."
+          ],
+          "notes": "Auditoría R44/R33 de MLS-V08-0501: la explicación pedagógica de -고 나서, su contraste con -고, la finalización previa y los ejemplos son coherentes con NIKL. El ejemplo oficial «경기는 비가 그치고 나서 다시 시작하겠습니다» respalda que no es obligatorio compartir sujeto gramatical. PASS_NO_CHANGE."
+        }
+      }
+    }
+  ]
+}
