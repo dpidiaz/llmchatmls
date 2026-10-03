@@ -1,0 +1,71 @@
+{
+  "success": false,
+  "httpStatus": 400,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-k4m7-one-entry",
+    "requested": 2,
+    "processed": 2,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-23341df4-fcc9-4439-bba7-52db62f21fe4",
+          "ticketId": "R44-CORPUS-1333",
+          "leaseExpiresAt": 1790998886214
+        },
+        "completedAt": "2026-10-03T03:36:26.345Z"
+      },
+      {
+        "index": 1,
+        "success": false,
+        "httpStatus": 400,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "http": 400,
+          "error": "INVALID_OUTCOME",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1333",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "0323360d-c750-403f-b194-29c891a6526b",
+                "ticketId": "R44-CORPUS-1333",
+                "code": "MLS-V08-0915",
+                "idempotencyKey": "R44-CORPUS-1333:MLS-V08-0915:legacy-v1",
+                "workerId": "r44-chat-sol-20261003T0329Z-k4m7",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "4d7d65b01d292a19aa0719cabe03aa67ab8e2bbf3b1d52a2b0fb63e63d05ea7e",
+                "sourceSha256": "7be5f7162da77d01c161719af1ec13a997c25d8c95e13c5aba77b422f302b22f",
+                "committedMs": 1790998586748,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b7c8f7c5d509fa3c0082d13ddc3aa45dfa38729b9b0f9c3fb74166454217997a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "durable": false,
+          "bridgeSessionId": "r44b-23341df4-fcc9-4439-bba7-52db62f21fe4"
+        },
+        "completedAt": "2026-10-03T03:36:26.954Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:36:26.954Z",
+  "commandFile": "mls chat bridge/commands/r44/20261003T0335Z-k4m7-one-entry.json"
+}
