@@ -14,17 +14,24 @@ function extractMarked(text){
   if(!m)fail('UNIFIED_EVIDENCE_MARKER_MISSING');
   try{return JSON.parse(m[1].trim())}catch{fail('UNIFIED_EVIDENCE_JSON_INVALID')}
 }
-async function gh(endpoint){
+function githubContext(){
   const token=process.env.GITHUB_TOKEN||'';
   const repository=process.env.GITHUB_REPOSITORY||'';
   if(!token||repository.split('/').length!==2||repository.startsWith('/')||repository.endsWith('/'))fail('GITHUB_CONTEXT_MISSING');
-  const response=await fetch('https://api.github.com'+endpoint,{
-    headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','x-github-api-version':'2022-11-28','user-agent':'mls-unified-r33-evidence-submit'}
-  });
-  const body=await response.json();
-  if(!response.ok)fail('GITHUB_'+response.status,body?.message||'GitHub request failed');
-  return body;
+  return {token,repository};
 }
+async function gh(endpoint,{method='GET',body}={}){
+  const {token}=githubContext();
+  const response=await fetch('https://api.github.com'+endpoint,{
+    method,
+    headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-unified-r33-evidence-submit'},
+    body:body===undefined?undefined:JSON.stringify(body)
+  });
+  const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
+  if(!response.ok)fail('GITHUB_'+response.status,data?.message||text||'GitHub request failed');
+  return data;
+}
+function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
 function validate(issue,comment,payload){
   if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase()))fail('UNIFIED_EVIDENCE_AUTHOR_UNAUTHORIZED');
   if(!String(issue?.title||'').startsWith('[MLS Dispatcher][LEASED]'))fail('UNIFIED_EVIDENCE_NOT_LEASED');
@@ -89,10 +96,47 @@ function apply(){
   fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+String.fromCharCode(10));
   process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath})+'\n');
 }
+async function checkpoint(){
+  const bundlePath=process.argv[3];
+  const commitSha=String(process.argv[4]||'').toLowerCase();
+  const runId=Number(process.argv[5]||0);
+  if(!bundlePath||!/^[a-f0-9]{40}$/.test(commitSha)||!Number.isInteger(runId)||runId<1)fail('UNIFIED_EVIDENCE_CHECKPOINT_ARGS');
+  const bundle=JSON.parse(fs.readFileSync(bundlePath,'utf8'));
+  const {repository}=githubContext();
+  const issue=await gh('/repos/'+repository+'/issues/'+Number(bundle.issueNumber));
+  const state=core.parseAssignmentState(issue?.body||'');
+  if(!state||state.status!=='leased'||state.assignmentId!==bundle.assignmentId||Number(state.leaseEpoch)!==Number(bundle.leaseEpoch))
+    fail('UNIFIED_EVIDENCE_CHECKPOINT_STATE_MISMATCH');
+  if(state.provider!=='r33-farm'||!String(state.workId||'').startsWith('r33-unified:')||state.branch!==bundle.branch)
+    fail('UNIFIED_EVIDENCE_CHECKPOINT_SCOPE_MISMATCH');
+  const ref=await gh('/repos/'+repository+'/git/ref/heads/'+encodeRef(state.branch));
+  if(String(ref?.object?.sha||'').toLowerCase()!==commitSha)fail('UNIFIED_EVIDENCE_CHECKPOINT_HEAD_MISMATCH');
+  const assignedCodes=(state.resourceLocks||[]).filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6));
+  const previous=(state.checkpoints||[]).at(-1)?.completedUnits||[];
+  const completed=[...new Set([...previous,bundle.code])].filter(code=>assignedCodes.includes(code));
+  const pending=assignedCodes.filter(code=>!completed.includes(code));
+  const event={
+    operation:'checkpoint',
+    assignmentId:state.assignmentId,
+    leaseToken:state.leaseToken,
+    leaseEpoch:state.leaseEpoch,
+    commitSha,
+    validation:{status:'passed',workflow:'MLS Unified R33 Evidence Submit',runId},
+    completedUnits:completed,
+    pendingUnits:pending,
+    notes:'Unified auto-checkpoint after canonical preflight and R33 tests.'
+  };
+  const comment='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId})+'\\n-->\\n\\n'+
+    '<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
+  await gh('/repos/'+repository+'/issues/'+Number(bundle.issueNumber)+'/comments',{method:'POST',body:{body:comment}});
+  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,commitSha,completedUnits:completed,pendingUnits:pending})+String.fromCharCode(10));
+}
+
 async function main(){
   const mode=String(process.argv[2]||'');
   if(mode==='prepare')return prepare();
   if(mode==='apply')return apply();
+  if(mode==='checkpoint')return checkpoint();
   fail('UNIFIED_EVIDENCE_MODE_INVALID');
 }
 if(require.main===module)main().catch(error=>{console.error(error.code||'UNIFIED_EVIDENCE_SUBMIT_ERROR',error.message);process.exitCode=2});
