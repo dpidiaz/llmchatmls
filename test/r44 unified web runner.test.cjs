@@ -50,6 +50,12 @@ test('Bot submissions remain fenced and use explicit workflow_dispatch, not recu
   assert.match(evidenceWorkflow,/git add -- "\$EVIDENCE_PATH" "\$CONTENT_PATH"/);
   assert.match(integration,/botAuthorized=login==='github-actions\[bot\]'/);
   assert.match(integration,/state\.workerLogin===login/);
+  assert.match(integration,/syncCanonicalManifest/);
+  assert.match(integration,/content\/manifest\.json/);
+  assert.match(integration,/item\.sha256=nextHash/);
+  const dispatcherWorker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
+  assert.match(dispatcherWorker,/unifiedIntegrationPathAllowed/);
+  assert.match(dispatcherWorker,/content\/manifest\.json/);
   assert.match(integrationWorkflow,/workflow_dispatch:/);
   assert.match(integrationWorkflow,/actions: write/);
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence submit.cjs'],{stdio:'pipe'});
