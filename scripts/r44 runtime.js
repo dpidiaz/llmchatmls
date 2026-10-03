@@ -770,11 +770,14 @@ async function unifiedRunnerReport(request,env,ctx) {
 }
 
 async function handleUnifiedRunner(request, env, url, ctx) {
-  if (url.pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env,ctx);
-  if (url.pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env,ctx);
-  if (url.pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env,ctx);
-  if (url.pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env,ctx);
-  if (url.pathname === "/api/unified-runner/report" && request.method === "POST") return unifiedRunnerReport(request,env,ctx);
+  const pathname = url.pathname.startsWith("/api/unified-runner/browser/")
+    ? url.pathname.replace("/api/unified-runner/browser/","/api/unified-runner/")
+    : url.pathname;
+  if (pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env,ctx);
+  if (pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env,ctx);
+  if (pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env,ctx);
+  if (pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env,ctx);
+  if (pathname === "/api/unified-runner/report" && request.method === "POST") return unifiedRunnerReport(request,env,ctx);
   return r44Json({error:"UNIFIED_RUNNER_ROUTE_NOT_FOUND"},404);
 }
 
