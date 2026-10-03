@@ -3,6 +3,8 @@ name: MLS Global Dispatcher Scheduler
 
 on:
   workflow_dispatch:
+  issues:
+    types: [opened]
 
 permissions:
   contents: write
@@ -15,6 +17,7 @@ concurrency:
 
 jobs:
   scheduler:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.issue.title, '[MLS Dispatcher][CLAIM]')
     runs-on: ubuntu-latest
     env:
       MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
