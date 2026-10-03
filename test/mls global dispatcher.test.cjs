@@ -134,13 +134,19 @@ test('assignment branch is never main and uses unique issue number',()=>{
   assert.match(branch,/000777$/);
 });
 
-test('legacy dispatcher scheduler is manual-only after R44 while worker events remain serialized',()=>{
+test('dispatcher scheduler accepts authorized command Issues and keeps one serial writer',()=>{
   const scheduler=fs.readFileSync('.github/workflows/MLS Global Dispatcher Scheduler.yml','utf8');
   const worker=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
   assert.match(scheduler,/workflow_dispatch:/);
+  assert.match(scheduler,/issues:\s*\n\s*types:\s*\n\s*- opened/);
+  assert.match(scheduler,/startsWith\(github\.event\.issue\.title, '\[MLS Dispatcher\]'/);
+  assert.match(scheduler,/MLS_GLOBAL_DISPATCH_COMMAND/);
+  assert.match(scheduler,/author_association == 'OWNER'/);
+  assert.match(scheduler,/author_association == 'MEMBER'/);
+  assert.match(scheduler,/author_association == 'COLLABORATOR'/);
+  assert.match(scheduler,/github-actions\[bot\]/);
   assert.match(scheduler,/group: mls-global-dispatcher/);
   assert.doesNotMatch(scheduler,/cron:/);
-  assert.doesNotMatch(scheduler,/issues:\s*\n\s*types:/);
   assert.match(scheduler,/contents: write/);
   assert.match(worker,/group: mls-global-assignment-\$\{\{ github\.event\.issue\.number \}\}/);
   assert.match(worker,/contents: read/);
@@ -260,4 +266,15 @@ test('scheduler fails closed on stale or unpersisted ledger before creating new 
   assert.match(s,/DONE_SCAN_INCOMPLETE/);
   assert.match(s,/DUPLICATE_TERMINAL/);
   assert.match(s,/LEDGER_CORRUPT/);
+});
+
+
+test('dispatcher issue-trigger authorization is enforced again inside the scheduler',()=>{
+  const source=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
+  assert.match(source,/DISPATCH_AUTHORIZED_ASSOCIATIONS=new Set\(\['OWNER','MEMBER','COLLABORATOR'\]\)/);
+  assert.match(source,/dispatcherCommandAuthorized\(issue,command\)/);
+  assert.match(source,/login==='github-actions\[bot\]'/);
+  assert.match(source,/command\?\.operation==='claim'/);
+  assert.match(source,/startsWith\('autopull:'\)/);
+  assert.match(source,/DISPATCH_AUTHOR_UNAUTHORIZED/);
 });
