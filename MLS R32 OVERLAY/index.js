@@ -21,6 +21,7 @@ var WIKI_TOTAL_ENTRIES = WIKI_LANGUAGE_ORDER.reduce((sum, item) => sum + item.to
 
 // src/wiki-store.ts
 import { DurableObject } from "cloudflare:workers";
+import { fetchUnifiedStatus } from "./unified-status.mjs";
 function utcDate(now = Date.now()) {
   return new Date(now).toISOString().slice(0, 10);
 }
@@ -2426,6 +2427,37 @@ load().catch(err => {
         }, {
           status: 500,
           headers: { "cache-control": "no-store" }
+        });
+      }
+    }
+    if (url.pathname === "/api/unified/status") {
+      if (request.method !== "GET" && request.method !== "HEAD") {
+        return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } });
+      }
+      try {
+        const status = await fetchUnifiedStatus(fetch);
+        const headers = {
+          "content-type": "application/json; charset=utf-8",
+          "cache-control": "public, max-age=15, s-maxage=30",
+          "x-content-type-options": "nosniff"
+        };
+        if (request.method === "HEAD") return new Response(null, { status: 200, headers });
+        return new Response(JSON.stringify(status), { status: 200, headers });
+      } catch (error) {
+        const payload = {
+          ok: false,
+          schema: "MLS-UNIFIED-STATUS-1",
+          sourceOfTruth: "github-main-verified-index",
+          error: error instanceof Error ? error.message : String(error)
+        };
+        return new Response(request.method === "HEAD" ? null : JSON.stringify(payload), {
+          status: 503,
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+            "cache-control": "no-store",
+            "retry-after": "30",
+            "x-content-type-options": "nosniff"
+          }
         });
       }
     }
