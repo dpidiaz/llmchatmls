@@ -1,0 +1,96 @@
+{
+  "batchId": "r44-m10-4bd912-ticket04-close-claim05",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-0c7fae3f-152e-4f61-95d7-d27b9e7555da"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-0c7fae3f-152e-4f61-95d7-d27b9e7555da",
+        "ticketId": "R43-EMERGENCY-0583",
+        "leaseGeneration": 2,
+        "idempotencyKey": "cp-R43-EMERGENCY-0583-MLS-V06-0420-g2-4bd912",
+        "entry": {
+          "code": "MLS-V06-0420",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 時 para hora del reloj; 四時=よじ, 九時=くじ, 七時 normalmente しちじ y posible ななじ para desambiguación acústica están correctamente matizados. Sin corrección necesaria."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-0c7fae3f-152e-4f61-95d7-d27b9e7555da",
+        "ticketId": "R43-EMERGENCY-0583",
+        "leaseGeneration": 2,
+        "idempotencyKey": "cp-R43-EMERGENCY-0583-MLS-V06-0422-g2-4bd912",
+        "entry": {
+          "code": "MLS-V06-0422",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 本 como contador de objetos largos/cilíndricos; 一本=いっぽん, 三本=さんぼん, 六本=ろっぽん y contraste entre 本 'libro' y contador 本 son correctos."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-0c7fae3f-152e-4f61-95d7-d27b9e7555da",
+        "ticketId": "R43-EMERGENCY-0583",
+        "leaseGeneration": 2,
+        "idempotencyKey": "cp-R43-EMERGENCY-0583-MLS-V06-0423-g2-4bd912",
+        "entry": {
+          "code": "MLS-V06-0423",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 杯 para vasos/tazas/copas o porciones servidas; alternancias はい・ばい・ぱい y lecturas 一杯=いっぱい, 三杯=さんばい, 六杯=ろっぱい, 八杯=はっぱい son correctas."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-0c7fae3f-152e-4f61-95d7-d27b9e7555da",
+        "ticketId": "R43-EMERGENCY-0583",
+        "leaseGeneration": 2,
+        "idempotencyKey": "cp-R43-EMERGENCY-0583-MLS-V06-0424-g2-4bd912",
+        "entry": {
+          "code": "MLS-V06-0424",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 枚 para objetos planos/delgados y algunas prendas; lectura まい estable y ejemplos correctos. Sin corrección factual necesaria."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-0c7fae3f-152e-4f61-95d7-d27b9e7555da",
+        "ticketId": "R43-EMERGENCY-0583",
+        "leaseGeneration": 2,
+        "idempotencyKey": "cp-R43-EMERGENCY-0583-MLS-V06-0425-g2-4bd912",
+        "entry": {
+          "code": "MLS-V06-0425",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 頭 para animales relativamente grandes; 一頭=いっとう, 八頭=はっとう y 十頭=じゅっとう como forma común son adecuados; la nota sobre convención de uso evita sobregeneralización."
+        }
+      }
+    },
+    {
+      "operationId": "r44RebindChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "ticketId": "R43-EMERGENCY-0583"
+      }
+    },
+    {
+      "operationId": "r44ClaimChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "idempotencyKey": "claim-20261003T0246Z-4bd912-05"
+      }
+    }
+  ]
+}
