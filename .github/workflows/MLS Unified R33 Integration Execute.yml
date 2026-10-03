@@ -1,0 +1,117 @@
+name: MLS Unified R33 Integration Execute
+
+on:
+  issue_comment:
+    types:
+      - created
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: read
+
+concurrency:
+  group: mls-unified-r33-integration
+  cancel-in-progress: false
+
+jobs:
+  integrate:
+    if: >-
+      ${{ startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') &&
+          contains(github.event.comment.body, 'MLS_UNIFIED_R33_INTEGRATION_EXECUTE') &&
+          (github.event.comment.author_association == 'OWNER' ||
+           github.event.comment.author_association == 'MEMBER' ||
+           github.event.comment.author_association == 'COLLABORATOR') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate leased Unified integration
+        id: prep
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cp 'scripts/MLS unified r33 integration execute.cjs' "$RUNNER_TEMP/mls-unified-r33-integration.cjs"
+          node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" prepare
+      - name: Checkout exact assignment branch
+        env:
+          BRANCH: ${{ steps.prep.outputs.branch }}
+        run: |
+          git fetch --no-tags origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+          git checkout -B unified-integration "refs/remotes/origin/$BRANCH"
+      - name: Materialize pinned certified sources
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" apply-sources "${{ steps.prep.outputs.bundle_path }}"
+      - name: Regenerate canonical R33 indexes
+        run: npm run r33:indexes:write
+      - name: Stage and validate exact integration scope
+        run: |
+          git add -- 'MLS R32 EDITORIAL/evidence git/entries' 'MLS R32 EDITORIAL/evidence git/indexes' content
+          node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" validate-staged "${{ steps.prep.outputs.bundle_path }}"
+      - name: Run R33 integration tests
+        run: |
+          npm run test:r33-github-native
+          node --test 'test/r33 evidence farm.test.cjs'
+      - name: Commit and push integration branch
+        id: commit
+        env:
+          BRANCH: ${{ steps.prep.outputs.branch }}
+          ASSIGNMENT: ${{ steps.prep.outputs.assignment_id }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "r33(unified): integrate $ASSIGNMENT"
+          HEAD_SHA="$(git rev-parse HEAD)"
+          git push origin "HEAD:refs/heads/$BRANCH"
+          echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+      - name: Open serialized integration PR
+        id: pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" open-pr "${{ steps.prep.outputs.bundle_path }}" "${{ steps.commit.outputs.head_sha }}"
+      - name: Wait for required R33 PR check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" wait-check "${{ steps.commit.outputs.head_sha }}"
+      - name: Record premerge checkpoint
+        id: premerge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" premerge-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.commit.outputs.head_sha }}" "${{ steps.pr.outputs.pr_number }}" "${{ github.run_id }}"
+      - name: Apply premerge event through canonical Dispatcher worker
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ steps.premerge.outputs.event_path }}
+        run: node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Merge with expected head SHA
+        id: merge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" merge-pr "${{ steps.prep.outputs.bundle_path }}" "${{ steps.pr.outputs.pr_number }}" "${{ steps.commit.outputs.head_sha }}"
+      - name: Record postmerge checkpoint
+        id: postmerge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" postmerge-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.merge.outputs.merge_sha }}" "${{ steps.pr.outputs.pr_number }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
+      - name: Apply postmerge event through canonical Dispatcher worker
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ steps.postmerge.outputs.event_path }}
+        run: node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Record finish event
+        id: finish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" finish-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.merge.outputs.merge_sha }}" "${{ steps.pr.outputs.pr_number }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
+      - name: Finish through canonical Dispatcher worker
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
+        run: node 'scripts/MLS global dispatcher worker.cjs'
