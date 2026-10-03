@@ -294,10 +294,15 @@ function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
    const code=String(raw).toUpperCase();
    if(!allowed.has(code)||selector.activeHeldCodes.has(code))continue;
    const unified=String(workId).startsWith('r33-unified:');
-   const poolEntry=entriesByCode.get(code)||{};
+   const poolEntry=entriesByCode.get(code)||{},r44=poolEntry.r44Handoff||null;
    out.set(code,{code,workId,branch:chosen.branch,commitSha:chosen.commitSha,
      supersessionRevisionId:chosen.revisionId,revisionAssets:chosen.assets||[],
-     ...(unified&&poolEntry.contentPath?{contentPath:poolEntry.contentPath}:{}),
+     ...(unified&&poolEntry.contentPath?{
+       contentPath:poolEntry.contentPath,
+       r44Outcome:String(r44?.outcome||''),
+       r44SourceSha256:String(r44?.sourceSha256||''),
+       r44ResultSha256:String(r44?.resultSha256||'')
+     }:{}),
      completedAt:String(terminal.completedAt||'')});
   }
  }
@@ -498,7 +503,7 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
     resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...codes.map(code=>'entry:'+code)],
     allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),...r33ContentPaths(sourceRefs),...r33RevisionAssets(sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
     validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-    instructions:'WAVE FINAL PHASE: construye la rama asignada desde el main vigente y agrega exactamente los Evidence blobs certificados por sourceRefs, cualquier contentPath certificado presente en esos mismos sourceRefs y sus revisionAssets, aunque provengan de múltiples workers/commits. Para contentPath usa exactamente el archivo del mismo commitSha que certificó su Evidence; no mezcles contenido de otro commit. No regeneres índices por worker: copia todos los Evidence/contenido de la wave y ejecuta npm run r33:indexes:write una sola vez al final. Ejecuta npm run test:r33-github-native, abre/usa un único PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
+    instructions:'WAVE FINAL PHASE: construye la rama asignada desde el main vigente y agrega exactamente los Evidence blobs certificados por sourceRefs, cualquier contentPath certificado presente en esos mismos sourceRefs y sus revisionAssets, aunque provengan de múltiples workers/commits. Para cada contentPath aplica reconciliación de tres vías usando r44SourceSha256: compara el archivo actual de main, el archivo del source commit y el hash original R44. Si main coincide con el original y el source commit difiere, aplica el source certificado; si main ya coincide con el source, no reescribas; si main divergió de ambos, detén la integración como conflicto y exige recertificación. Nunca sobrescribas silenciosamente una edición concurrente. El Evidence y cualquier contenido aplicado deben provenir del mismo commitSha. No regeneres índices por worker: copia todos los Evidence/contenido de la wave y ejecuta npm run r33:indexes:write una sola vez al final. Ejecuta npm run test:r33-github-native, abre/usa un único PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
     completion:{requiresCommit:true,requiresValidation:true},
     integration:{
