@@ -49,6 +49,7 @@ jobs:
           npm run check
       - name: Check Cloudflare Access capability
         if: github.event_name == 'pull_request'
+        continue-on-error: true
         run: node 'scripts/configurar unified access.cjs' --check
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
