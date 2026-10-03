@@ -731,6 +731,7 @@ async function handleUnifiedRunner(request, env, url) {
   if (url.pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env);
   if (url.pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env);
   if (url.pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env);
+  if (url.pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env);
   return r44Json({error:"UNIFIED_RUNNER_ROUTE_NOT_FOUND"},404);
 }
 
