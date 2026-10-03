@@ -42,7 +42,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
 <body>
 <main>
 <h1>MLS Editorial Runner</h1>
-<p>Panel de ejecución editorial del Master Language System. El runner de corpus original se conserva y MLS Unified usa el control plane Cloudflare/D1.</p>\n<div class="actions" id="runnerTabs" style="grid-template-columns:1fr 1fr;max-width:520px"><button class="secondary" id="tabCorpus">Corpus</button><button class="primary" id="tabUnified">MLS Unified</button></div>
+<p>Panel de ejecución editorial del Master Language System. El runner de corpus original se conserva y MLS Unified usa el control plane Cloudflare/D1.</p>
+<div class="actions" id="runnerTabs" style="grid-template-columns:1fr 1fr;max-width:520px"><button class="secondary" id="tabCorpus">Corpus</button><button class="primary" id="tabUnified">MLS Unified</button></div>
 
 <section class="panel" id="corpusPanel">
 <div class="grid">
@@ -101,6 +102,62 @@ button:disabled{opacity:.48;cursor:not-allowed}
 
 <div class="log" id="log">Runner listo.</div>
 <p class="note">Pausar o detener se aplica entre entradas: una generación que ya comenzó se deja terminar para no desperdiciar trabajo ni dejar una entrada a medias. El proveedor real usado por cada artículo se muestra al terminar.</p>
+</section>
+
+<section class="panel" id="unifiedPanel" hidden>
+<h2 style="margin-top:0">MLS Unified Runner</h2>
+<p>Controla el runner persistente del MLS. R44 se ejecuta en Cloudflare; R33 e integración usan los leases, branches, preflight, tests y checkpoints del Global Dispatcher. Cerrar esta página no detiene la ejecución.</p>
+
+<div class="grid">
+<div>
+<label for="unifiedKey">Clave editorial</label>
+<input id="unifiedKey" type="password" autocomplete="current-password" placeholder="MLS_EDITORIAL_CHAT_KEY">
+</div>
+<div>
+<label for="unifiedState">Estado global</label>
+<input id="unifiedState" value="—" readonly>
+</div>
+<div>
+<label for="unifiedLast">Última entrada R44</label>
+<input id="unifiedLast" value="—" readonly>
+</div>
+</div>
+
+<div class="actions" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<button class="primary" id="unifiedStart">Iniciar</button>
+<button class="secondary" id="unifiedPause">Pausar</button>
+<button class="secondary" id="unifiedResume">Reanudar</button>
+<button class="danger" id="unifiedStop">Detener</button>
+</div>
+<div class="actions" style="grid-template-columns:1fr 1fr">
+<button class="secondary" id="unifiedRefresh">Actualizar</button>
+<button class="secondary" id="unifiedStep">Procesar un ticket R44 ahora</button>
+</div>
+
+<div class="statusline"><span class="dot" id="unifiedDot"></span><span id="unifiedStatusText">Sin consultar</span></div>
+<div class="progress"><div class="bar" id="unifiedBar"></div></div>
+
+<div class="stats">
+<div class="stat"><span>R44 procesadas</span><strong id="unifiedProcessed">0</strong></div>
+<div class="stat"><span>R44 corregidas</span><strong id="unifiedCorrected">0</strong></div>
+<div class="stat"><span>Errores</span><strong id="unifiedErrors">0</strong></div>
+<div class="stat"><span>R44 COMPLETE</span><strong id="unifiedComplete">—</strong></div>
+</div>
+<div class="stats">
+<div class="stat"><span>R44 Claimable</span><strong id="unifiedClaimable">—</strong></div>
+<div class="stat"><span>R44 Parcial</span><strong id="unifiedPartial">—</strong></div>
+<div class="stat"><span>Leases R44 máx.</span><strong id="unifiedMaxLeases">—</strong></div>
+<div class="stat"><span>FREE only</span><strong id="unifiedFree">Sí</strong></div>
+</div>
+<div class="stats">
+<div class="stat"><span>R33 automático</span><strong id="unifiedR33Lane">—</strong></div>
+<div class="stat"><span>Integración</span><strong id="unifiedIntegrationLane">—</strong></div>
+<div class="stat"><span>VERIFIED canónico</span><strong id="unifiedVerified">—</strong></div>
+<div class="stat"><span>Pendientes canónicos</span><strong id="unifiedRemaining">—</strong></div>
+</div>
+
+<div class="log" id="unifiedLog">Unified listo.</div>
+<p class="note">Si una entrada no puede justificarse con una fuente R33 registrada, el runner marca REVIEW_REQUIRED y se pausa antes de fabricar Evidence. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
 </section>
 </main>
 
@@ -417,8 +474,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
   }
   function n(v){return Number(v||0)}
   function durableCount(list,state){const row=(list||[]).find(x=>x.state===state);return row?Number(row.n||0):0}
-  function render(data){
-    const r=data.runner||{}, r44=data.r44||{};
+  function render(data,canonical={}){
+    const r=data.runner||{}, r44=data.r44||{}, lanes=data.lanes||{};
     q('unifiedState').value=r.state||'—';
     q('unifiedLast').value=[r.last_ticket,r.last_code].filter(Boolean).join(' · ')||'—';
     q('unifiedProcessed').textContent=n(r.processed_entries);
@@ -429,12 +486,26 @@ button:disabled{opacity:.48;cursor:not-allowed}
     q('unifiedPartial').textContent=durableCount(r44.durableCounts,'PARTIAL_DURABLE');
     q('unifiedMaxLeases').textContent=r44.maxActiveLeases??'—';
     q('unifiedFree').textContent=data.freeOnly===true?'Sí':'—';
+    q('unifiedR33Lane').textContent=lanes.r33?.state||'—';
+    q('unifiedIntegrationLane').textContent=lanes.integration?.state||'—';
+    q('unifiedVerified').textContent=canonical.verifiedCount??'—';
+    q('unifiedRemaining').textContent=canonical.remaining??'—';
     statusText.textContent=r.last_error ? (r.state+' · '+r.last_error) : (r.state||'Listo');
-    dot.className='dot '+(r.state==='RUNNING'?'running':r.state==='PAUSED'||r.state==='QUOTA_PAUSED'?'paused':r.state==='ERROR'?'error':'');
+    const pauseStates=new Set(['PAUSED','QUOTA_PAUSED','POLICY_PAUSED','REVIEW_PAUSED']);
+    dot.className='dot '+(r.state==='RUNNING'?'running':pauseStates.has(r.state)?'paused':r.state==='ERROR'?'error':'');
     const total=durableCount(r44.durableCounts,'COMPLETE')+durableCount(r44.durableCounts,'CLAIMABLE')+durableCount(r44.durableCounts,'LEASED')+durableCount(r44.durableCounts,'PARTIAL_DURABLE')+durableCount(r44.durableCounts,'QUARANTINED');
     q('unifiedBar').style.width=total?Math.min(100,Math.round(durableCount(r44.durableCounts,'COMPLETE')/total*100))+'%':'0%';
   }
-  async function refresh(){const data=await unifiedApi('status');render(data);return data}
+  async function refresh(){
+    const data=await unifiedApi('status');
+    let canonical={};
+    try{
+      const response=await fetch('/api/unified/status',{cache:'no-store'});
+      if(response.ok)canonical=await response.json();
+    }catch(_){}
+    render(data,canonical);
+    return {data,canonical};
+  }
   async function control(action){write(action+' solicitado.');const data=await unifiedApi('control',{action});write('Estado: '+data.state);await refresh()}
   q('unifiedStart').onclick=()=>control('start').catch(e=>write('ERROR — '+e.message));
   q('unifiedPause').onclick=()=>control('pause').catch(e=>write('ERROR — '+e.message));
