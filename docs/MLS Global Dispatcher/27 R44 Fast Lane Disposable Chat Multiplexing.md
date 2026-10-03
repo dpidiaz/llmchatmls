@@ -1,8 +1,8 @@
 # MLS R44 — Fast Lane disposable chat multiplexing
 
-Status: **PLANNED / NOT IMPLEMENTED**
+Status: **IMPLEMENTATION IN PROGRESS / NOT DEPLOYED**
 
-This document is a design and rollout plan only. It does **not** authorize implementation, deployment, cutover, runtime changes, workflow changes, D1 mutations, corpus changes, R33 promotion, or production-state changes.
+This document defines the design and rollout contract. Implementation on an isolated feature branch is now authorized. It does **not** by itself authorize production cutover, deployment, D1 data mutation, corpus changes, R33 promotion, or production-state changes.
 
 ## Purpose
 
