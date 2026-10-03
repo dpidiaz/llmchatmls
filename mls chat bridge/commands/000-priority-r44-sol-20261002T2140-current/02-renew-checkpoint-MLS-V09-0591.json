@@ -1,0 +1,75 @@
+{
+  "batchId": "r44-sol-20261002T2140-renew-checkpoint-0591",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-5222cc9d-662d-4ac1-aea9-e5d57aec786f"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-5222cc9d-662d-4ac1-aea9-e5d57aec786f",
+        "ticketId": "R44-CORPUS-1462",
+        "leaseGeneration": 1,
+        "idempotencyKey": "r44-20261002-2140-sol-current-MLS-V09-0591-pass-v1",
+        "entry": {
+          "code": "MLS-V09-0591",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "R44 audit: la entrada describe correctamente несмотря на como preposición concesiva equivalente a «a pesar de / pese a» y su régimen con acusativo. Los ejemplos плохую погоду, дождь y трудности son compatibles con ese régimen, teniendo en cuenta el sincretismo formal del acusativo con el nominativo en sustantivos inanimados masculinos singulares y plurales. También es correcta la distinción ortográfica y gramatical entre la preposición несмотря на, escrita junta, y el gerundio/deepričastie не смотря, escrito separado con sentido literal «sin mirar». PASS_NO_CHANGE. Validación canónica R33 permanece pendiente.",
+          "sources": [
+            {
+              "id": "GRAMOTA-PREDLOG",
+              "citation": "Грамота.ру. (s. f.). Предлог. Русский язык: краткий теоретический курс для школьников.",
+              "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/predlog",
+              "role": "Confirma que несмотря на rige винительный падеж (acusativo) y lo contrasta con не смотря."
+            },
+            {
+              "id": "GRAMOTA-202729",
+              "citation": "Грамота.ру. (2006, 8 августа). Ответ справочной службы на вопрос № 202729.",
+              "url": "https://gramota.ru/spravka/vopros/202729",
+              "role": "Confirma la escritura conjunta de la preposición несмотря на y separada del deepričastie не смотря."
+            },
+            {
+              "id": "GRAMOTA-PUNCT",
+              "citation": "Пахомов, В. М., Свинцов, В. В., & Филатова, И. В. (s. f.). Несмотря на (что). Справочник по пунктуации. Грамота.ру.",
+              "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/nesmotrya-na-chto",
+              "role": "Confirma el uso preposicional concesivo de несмотря на en construcciones circunstanciales."
+            }
+          ],
+          "claims": [
+            {
+              "claim": "Несмотря на funciona como preposición y rige acusativo.",
+              "assessment": "SUPPORTED",
+              "sourceRefs": [
+                "GRAMOTA-PREDLOG"
+              ]
+            },
+            {
+              "claim": "La preposición несмотря на se escribe junta, mientras que el deepričastie literal не смотря se escribe separado.",
+              "assessment": "SUPPORTED",
+              "sourceRefs": [
+                "GRAMOTA-PREDLOG",
+                "GRAMOTA-202729"
+              ]
+            },
+            {
+              "claim": "Несмотря на introduce una relación concesiva comparable a «a pesar de».",
+              "assessment": "SUPPORTED",
+              "sourceRefs": [
+                "GRAMOTA-PUNCT"
+              ]
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION",
+            "standard": "R33 evidence-aware editorial review; APA 7-style source metadata",
+            "reviewedOn": "2026-10-02"
+          }
+        }
+      }
+    }
+  ]
+}
