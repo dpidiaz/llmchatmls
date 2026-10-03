@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-next10-c91d-07",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-a585e614-d2fa-4793-85a2-2b936528e2bc",
+          "ticketId": "R44-CORPUS-0986",
+          "leaseExpiresAt": 1790997440536
+        },
+        "completedAt": "2026-10-03T03:12:20.670Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0986",
+          "sha256": "45dae5712ec46307a5f46e80bd880a2a2a6e223f95294169d118ea72e50fc96c",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0986",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "84f60700-62dc-4f55-9f5b-46dd3683b4ba",
+                "ticketId": "R44-CORPUS-0986",
+                "code": "MLS-V02-0384",
+                "idempotencyKey": "R44-CORPUS-0986:MLS-V02-0384:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "944cb5def54610c58a37b019c568877a6f5d85d29bff10cb471005a504876b0b",
+                "sourceSha256": "a759170760ccc58327c8af7041be32b6288dd20415f8ee38cc00809e6b9e749a",
+                "committedMs": 1790997141049,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f3036c4955d72050c98a6b0eb270dd26bb34796f48336fc9df77a8b3c82f6242",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0986",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "4000ca7c-f04f-48ff-b1cc-ccce410f2a95",
+                "ticketId": "R44-CORPUS-0986",
+                "code": "MLS-V02-0385",
+                "idempotencyKey": "R44-CORPUS-0986:MLS-V02-0385:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d28381f51afdcc8098d8a26b93d535b25083bc49afe732e5d93546bc30360f51",
+                "sourceSha256": "35c42a689b9d14d4299a78e1102fe0c1ab76d4847bf802523075b943a4b43a35",
+                "committedMs": 1790997141263,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "bd0d8b84180d1592d41a96cd95961d5d6cddb9ea75874464a60df7aeabbd5709",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0986",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b73108d1-1dd8-4f88-8338-94b99dccfb33",
+                "ticketId": "R44-CORPUS-0986",
+                "code": "MLS-V02-0386",
+                "idempotencyKey": "R44-CORPUS-0986:MLS-V02-0386:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "cdc199885f5baf80619225679075daf2695995dcc604fdc16e79e2b6da8f8aa4",
+                "sourceSha256": "af6e68f0b020b52913f5cd438299620d118ade901b669390f918bea771bef94e",
+                "committedMs": 1790997141474,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "82088e0f881a48eea929ba50c6dbd2ca47b3562ead087bc1c1e9b3577569b76b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0986",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6935abbe-1488-435e-ad70-00459289cd4f",
+                "ticketId": "R44-CORPUS-0986",
+                "code": "MLS-V02-0387",
+                "idempotencyKey": "R44-CORPUS-0986:MLS-V02-0387:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "4baf3507f1853813770012a7f5565225e730fe41fc82253b2e40e966df713d44",
+                "sourceSha256": "f8ed6102d43a088e4764a55b5b8193fd0aa4022401eb53cfddf0a63415704e1a",
+                "committedMs": 1790997141692,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "fbe5ae3cb7a212cd9c4f59f6d6814920056445dbdbac3f737028b142e3902488",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0986",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ffd054bb-54e8-4b0c-a3f8-a0bf722e07c5",
+                "ticketId": "R44-CORPUS-0986",
+                "code": "MLS-V02-0388",
+                "idempotencyKey": "R44-CORPUS-0986:MLS-V02-0388:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "47256db707cdf9122b95d2b5908398e44694ac0e85f9a5037f9628a16bd9e304",
+                "sourceSha256": "78eefe17603401fecfd1a79502b6b392adff94cd5f3df521cdabba0a4dc311e9",
+                "committedMs": 1790997141905,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ad0a085f98111d1999fab33078958cf30adaebb7f18f1b0edba111ae0879c89c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-a585e614-d2fa-4793-85a2-2b936528e2bc",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "45dae5712ec46307a5f46e80bd880a2a2a6e223f95294169d118ea72e50fc96c"
+          }
+        },
+        "completedAt": "2026-10-03T03:12:22.196Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-f60ccc1c-1fb4-4a35-9e16-e5e58af1d0d0",
+          "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0987",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997442237,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0389",
+                "path": "portugues/MLS-V02-0389.json",
+                "sha256": "a4327f713980883017670e8264fda4ad4f9525ed7f1813232876e1935c1666df"
+              },
+              {
+                "code": "MLS-V02-0391",
+                "path": "portugues/MLS-V02-0391.json",
+                "sha256": "8ced9e5710e29933244ed172a684a999a68f0f045fe182450918d9e9acc6f4f2"
+              },
+              {
+                "code": "MLS-V02-0392",
+                "path": "portugues/MLS-V02-0392.json",
+                "sha256": "c069bc93fcca2fc0d6797739ead878c315846bb63f7ce3baea01d8d65bfce90a"
+              },
+              {
+                "code": "MLS-V02-0393",
+                "path": "portugues/MLS-V02-0393.json",
+                "sha256": "13e04cc2fa5294566c74636ae8381d02fc89617171813591e70d44462d0a93b2"
+              },
+              {
+                "code": "MLS-V02-0394",
+                "path": "portugues/MLS-V02-0394.json",
+                "sha256": "e6c87957045079c90d1edbe3d67d820b9f97b57a812e5f25188711655d09634e"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0987",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0389",
+                "path": "portugues/MLS-V02-0389.json",
+                "sha256": "a4327f713980883017670e8264fda4ad4f9525ed7f1813232876e1935c1666df"
+              },
+              {
+                "code": "MLS-V02-0391",
+                "path": "portugues/MLS-V02-0391.json",
+                "sha256": "8ced9e5710e29933244ed172a684a999a68f0f045fe182450918d9e9acc6f4f2"
+              },
+              {
+                "code": "MLS-V02-0392",
+                "path": "portugues/MLS-V02-0392.json",
+                "sha256": "c069bc93fcca2fc0d6797739ead878c315846bb63f7ce3baea01d8d65bfce90a"
+              },
+              {
+                "code": "MLS-V02-0393",
+                "path": "portugues/MLS-V02-0393.json",
+                "sha256": "13e04cc2fa5294566c74636ae8381d02fc89617171813591e70d44462d0a93b2"
+              },
+              {
+                "code": "MLS-V02-0394",
+                "path": "portugues/MLS-V02-0394.json",
+                "sha256": "e6c87957045079c90d1edbe3d67d820b9f97b57a812e5f25188711655d09634e"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0389",
+              "MLS-V02-0391",
+              "MLS-V02-0392",
+              "MLS-V02-0393",
+              "MLS-V02-0394"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997442237,
+              "active": true
+            },
+            "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997442237,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0389",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 389,
+                "title": "Imperativo afirmativo con você",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **imperativo afirmativo com você** se usa para dar una instrucción, hacer una petición o invitar a una persona tratada como **você** a realizar una acción.\n\nEjemplos básicos son **Fale mais devagar**, **Coma alguma coisa** y **Abra a janela**.\n\n#### Cómo funciona\n\nPara **você**, las formas del imperativo afirmativo coinciden normalmente con las del presente de subjuntivo: **falar → fale**, **comer → coma**, **abrir → abra**.\n\nEsto también se observa en verbos irregulares: **ser → seja**, **ir → vá**, **fazer → faça**, **dizer → diga**. El pronombre **você** puede aparecer, pero muchas veces se omite porque el contexto deja claro a quién se dirige la instrucción.\n\nEl tono depende de la situación. La misma forma puede expresar orden, consejo, petición o invitación según las palabras y la entonación.\n\n#### Ejemplos\n\n* **Fale mais devagar, por favor.** — **fale** dirige una petición a **você**.\n* **Abra a porta.** — **abra** da una instrucción a una persona.\n* **Seja paciente.** — **seja** es el imperativo afirmativo irregular de **ser** con **você**.\n\n#### Observación importante\n\nEl imperativo con **você** no se forma copiando la tercera persona del presente de indicativo: se dice **fale**, no *fala*, dentro de este patrón normativo.\n\nCon pronombres átonos, la colocación varía según norma y uso. La escritura formal favorece formas como **sente-se** en imperativo afirmativo; en el portugués brasileño cotidiano también son frecuentes colocaciones proclíticas en distintos contextos.\n\n#### Entradas relacionadas\n\n[387. Andar + gerúndio no presente](#entrada-387) · [388. Viver + gerúndio no presente](#entrada-388) · [390. Imperativo afirmativo com vocês](#entrada-390) · [391. Imperativo afirmativo com tu](#entrada-391) · [288. Ênclise com imperativo afirmativo](#entrada-288)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1d1fdf9c8514650b52c404569324c37455de9c79c4d36cdb05dbab46f15b5fd5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:25:14.681Z"
+              },
+              {
+                "code": "MLS-V02-0391",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 391,
+                "title": "Imperativo afirmativo con tu",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **imperativo afirmativo com tu** se usa para pedir, ordenar, aconsejar o invitar a una persona tratada como **tu** a hacer algo.\n\nEn el patrón normativo tradicional aparecen formas como **Fala**, **Come** y **Abre**: **Entra, por favor** es un ejemplo sencillo.\n\n#### Cómo funciona\n\nPara verbos regulares, la forma afirmativa de **tu** suele coincidir con el presente de indicativo de **tu** sin la **-s** final: **falas → fala**, **comes → come**, **abres → abre**.\n\nHay formas irregulares frecuentes que conviene aprender directamente: **ser → sê**, **ir → vai**, **fazer → faz**, **dizer → diz**, **vir → vem**.\n\nEl pronombre **tu** suele omitirse en la instrucción porque el destinatario ya está claro: **Fecha a porta**, por ejemplo.\n\n#### Ejemplos\n\n* **Entra, por favor.** — **entra** es el imperativo afirmativo de **tu** de *entrar*.\n* **Come devagar.** — **come** dirige una recomendación a una persona tratada como **tu**.\n* **Vai com cuidado.** — **vai** es una forma irregular frecuente de **ir**.\n\n#### Observación importante\n\nEn Brasil, **tu** tiene distribuciones regionales diversas. En algunas variedades aparece con formas verbales de tercera persona en el habla cotidiana, y el imperativo también muestra variación. No debe suponerse un único patrón coloquial para todo el país.\n\nLa formación aquí descrita corresponde al paradigma normativo de **tu**. Con **você**, el patrón es diferente: **fala** frente a **fale**, por ejemplo.\n\n#### Entradas relacionadas\n\n[389. Imperativo afirmativo com você](#entrada-389) · [390. Imperativo afirmativo com vocês](#entrada-390) · [392. Imperativo negativo](#entrada-392) · [393. Imperativo com pronomes](#entrada-393) · [288. Ênclise com imperativo afirmativo](#entrada-288)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-59659741125a2abdc6aad2a104da6a83503701e98cd64d83f32a5c223f490c70",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:26:16.297Z"
+              },
+              {
+                "code": "MLS-V02-0392",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 392,
+                "title": "Imperativo negativo",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **imperativo negativo** se usa para pedir u ordenar que una acción no se realice: **Não fale tão alto**, “no hable tan alto”.\n\nLa palabra **não** aparece antes del verbo y la forma verbal corresponde, en el paradigma normativo, al presente de subjuntivo.\n\n#### Cómo funciona\n\nCon **você** se usan formas como **não fale, não coma, não abra**; con **vocês**, **não falem, não comam, não abram**. Para **tu**, el patrón normativo tiene **não fales, não comas, não abras**.\n\nLos verbos irregulares conservan las formas correspondientes del subjuntivo: **não seja**, **não vá**, **não faça**, **não diga**.\n\nEl valor comunicativo puede ser prohibición, advertencia, consejo o petición. **Não corra!** puede ser una orden o una advertencia según la situación.\n\n#### Ejemplos\n\n* **Não fale tão alto.** — **não fale** dirige un mandato negativo a **você**.\n* **Não abram a porta.** — **não abram** se dirige a **vocês**.\n* **Não faças isso.** — **não faças** corresponde al paradigma normativo de **tu**.\n\n#### Observación importante\n\nEl imperativo negativo de **tu** no sigue la formación del afirmativo: **fala** es afirmativo, pero **não fales** es el patrón negativo normativo. En el habla brasileña hay variación regional, especialmente en el uso de **tu**.\n\nCuando aparece un pronombre átono, **não** favorece la próclise: **Não se preocupe**, **Não me diga isso**. Esta colocación es distinta de la énclisis tradicionalmente asociada al imperativo afirmativo formal.\n\n#### Entradas relacionadas\n\n[390. Imperativo afirmativo com vocês](#entrada-390) · [391. Imperativo afirmativo com tu](#entrada-391) · [393. Imperativo com pronomes](#entrada-393) · [394. Vamos + infinitivo como exortação](#entrada-394) · [288. Ênclise com imperativo afirmativo](#entrada-288)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-8a15a0c6088b83bb80fd51d644cea9168dffeebcbb0d6336a3679d71a57c26d9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:26:46.904Z"
+              },
+              {
+                "code": "MLS-V02-0393",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 393,
+                "title": "Imperativo con pronombres",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\nLos **pronombres átonos** pueden acompañar al imperativo para representar participantes de la acción: **Diga-me a verdade**, **Sente-se**, **Não me diga isso**. Son pronombres breves como **me, se, nos, o, a**.\n\nSu posición respecto del verbo depende de la estructura, del registro y de la variedad de portugués.\n\n#### Cómo funciona\n\nEn la norma escrita, el imperativo afirmativo sin una palabra que atraiga el pronombre favorece la **ênclise**, es decir, el pronombre después del verbo: **diga-me**, **sente-se**, **ajudem-nos**.\n\nEn el imperativo negativo, **não** provoca normalmente **próclise**, con el pronombre antes del verbo: **não me diga**, **não se preocupe**, **não nos esperem**.\n\nEn el portugués brasileño cotidiano, la próclise es muy frecuente también en contextos donde la norma escrita tradicional prefiere énclisis. Por eso pueden encontrarse diferencias claras entre conversación y escritura formal.\n\n#### Ejemplos\n\n* **Diga-me a verdade.** — registro formal con pronombre pospuesto al imperativo afirmativo.\n* **Sente-se, por favor.** — **se** aparece unido al verbo en una instrucción afirmativa formal.\n* **Não me diga isso.** — **não** sitúa **me** antes del verbo.\n\n#### Observación importante\n\nLa posición del pronombre no cambia por sí sola quién recibe la instrucción. **Diga-me** se dirige a una persona y **me** representa a quien recibe lo dicho.\n\nNo conviene presentar la énclisis como la única colocación existente en Brasil. La norma formal y el habla cotidiana tienen distribuciones diferentes, y ambas deben distinguirse al describir el uso real.\n\n#### Entradas relacionadas\n\n[391. Imperativo afirmativo com tu](#entrada-391) · [392. Imperativo negativo](#entrada-392) · [394. Vamos + infinitivo como exortação](#entrada-394) · [395. Que + subjuntivo como ordem ou desejo](#entrada-395) · [280. Próclise com pronomes indefinidos](#entrada-280)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-bd30055746a9ea9e428d208eb7cc20426cf1c8cf036d4b2f5c30921b79791ee8",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:27:13.085Z"
+              },
+              {
+                "code": "MLS-V02-0394",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 394,
+                "title": "Vamos + infinitivo como exhortación",
+                "level": "A1",
+                "part": "Indicativo: presente, pasado y futuro — Indicativo: presente, passado e futuro",
+                "chapter": "Presente, presente progresivo e imperativo — Presente, presente progressivo e imperativo",
+                "articleMarkdown": "#### En pocas palabras\n\n**Vamos + infinitivo** puede usarse como una exhortación: el hablante propone que él y otras personas hagan algo juntos. **Vamos estudar** puede entenderse como “estudiemos” o “vamos a estudiar”.\n\nLa construcción es muy frecuente en el portugués brasileño cotidiano.\n\n#### Cómo funciona\n\nSe usa **vamos**, forma de **ir** asociada a **nós**, seguida directamente de un infinitivo: **vamos estudar, vamos comer, vamos começar**.\n\nEn este uso, **vamos** no describe necesariamente un desplazamiento. Sirve para proponer, animar o iniciar una acción compartida: **Vamos conversar sobre isso**.\n\nEl tono puede cambiar con el contexto. **Vamos começar!** puede ser una invitación amable o una indicación firme para que el grupo empiece.\n\n#### Ejemplos\n\n* **Vamos estudar agora.** — el hablante propone estudiar junto con otras personas.\n* **Vamos começar a reunião.** — **vamos começar** invita al grupo a iniciar la reunión.\n* **Vamos conversar depois do almoço.** — la construcción propone una conversación posterior compartida.\n\n#### Observación importante\n\nEn portugués, el infinitivo sigue directamente a **vamos** en esta construcción: **vamos estudar**. No se introduce automáticamente la preposición **a** como en el español **vamos a estudiar**.\n\nTampoco toda forma **vamos** tiene valor exhortativo. En **Vamos ao parque de ônibus**, **ir** conserva claramente el sentido de desplazamiento; la estructura completa permite distinguir los usos.\n\n#### Entradas relacionadas\n\n[392. Imperativo negativo](#entrada-392) · [393. Imperativo com pronomes](#entrada-393) · [395. Que + subjuntivo como ordem ou desejo](#entrada-395) · [396. Presente progressivo frente ao presente simples](#entrada-396) · [415. Acabar de + infinitivo no passado](#entrada-415)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-68d93224fc795092efd79b8d065680d25098398189d9a9d8a8d2f6cef0974c64",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:27:45.631Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:12:23.000Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:12:23.000Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-jdp-c91d/07-renew-submit-0986-claim06.json"
+}

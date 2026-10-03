@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-z6-ticket05-submit-claim6",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-f20f3a7f-928d-41d0-b139-9d7cefa370ee",
+          "ticketId": "R43-EMERGENCY-0794",
+          "leaseExpiresAt": 1790997488501
+        },
+        "completedAt": "2026-10-03T03:13:08.644Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0794",
+          "sha256": "8a01bff4bd3cd296e3eb9a676821f48a4cbdfab7c5dafe9d09f48eeaf41f6166",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0794",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8091b6d1-1daf-4fc9-bb11-6d409db27c51",
+                "ticketId": "R43-EMERGENCY-0794",
+                "code": "MLS-V07-0658",
+                "idempotencyKey": "R43-EMERGENCY-0794:MLS-V07-0658:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f6150280b2df4f9258eb8f1caa6aaa5d9c75d7bd34e77018e3816b7115f3e27f",
+                "sourceSha256": "7f7e961a4bc072bd2e6922521841600f19491cc8fdf2a2ccfd89f4b0ee38dbd5",
+                "committedMs": 1790997189018,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "5d1a6ebc8f78d71f5fdc52198e58e486a7b15c9ab43d9e80be326d9c6f994632",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0794",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8a2d237a-42f6-4c78-9b91-e585c0933d60",
+                "ticketId": "R43-EMERGENCY-0794",
+                "code": "MLS-V07-0661",
+                "idempotencyKey": "R43-EMERGENCY-0794:MLS-V07-0661:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9ad6500b0421d1a3e92a3935dbe25e432ab8715a4756b19df96bc9b6376b500e",
+                "sourceSha256": "67d727351b7638300fb3219baa96e93345915162d1ab2b78ba0780ec9173b9af",
+                "committedMs": 1790997189231,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "1e26c21025f5952fd9e3819232a57fa41f67c3b20ae3d2c22c0570e701bc56db",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0794",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8aa4defd-79f1-46f1-84df-0c228f1642a5",
+                "ticketId": "R43-EMERGENCY-0794",
+                "code": "MLS-V07-0662",
+                "idempotencyKey": "R43-EMERGENCY-0794:MLS-V07-0662:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "436a46cb6c4453ff3c30276d7fef28a1c4a794cc437b125c6fdbb1f858b802cd",
+                "sourceSha256": "9be29127f3ce826210b70dc64f0f10b5cf124a53692ce9d661d480a6f442494a",
+                "committedMs": 1790997189450,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9bb1a53e3cb334d16c6548c7cc7ba01700c73c18364f7480a98e516e94e70506",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0794",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "af342527-f16d-49a4-a5e4-a9946950df47",
+                "ticketId": "R43-EMERGENCY-0794",
+                "code": "MLS-V07-0663",
+                "idempotencyKey": "R43-EMERGENCY-0794:MLS-V07-0663:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "67b071ad6c17a52c5cb65fde0fc679d1c2e9a83a51a2fad388f982c9a0a2e6df",
+                "sourceSha256": "b0bbda7668614a37b1bf6022755bc0de169eb2f2d740e5cb1158f57cce1f8aed",
+                "committedMs": 1790997189673,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "eb93283af81d89fd0b7e0d5f0d2603f1308f3c6e4f42c1e50eb6e378604e4d7d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0794",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "4c8bbf87-45a4-4eca-bbcb-93434da36f6c",
+                "ticketId": "R43-EMERGENCY-0794",
+                "code": "MLS-V07-0664",
+                "idempotencyKey": "R43-EMERGENCY-0794:MLS-V07-0664:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "44d0a139e7a9289b5a1c2f4a28d0732570dd385f43248c88b60e4ac413f930f6",
+                "sourceSha256": "ff61ccee79642e5492034f10fa1dac926fc8ad0cb9cb592cce1ce6692430aaa6",
+                "committedMs": 1790997189897,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "4eca7208af8f9ae674a24a150c18d72fe2d54480c6ec1e26a6e2133a7a7872ff",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-f20f3a7f-928d-41d0-b139-9d7cefa370ee",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "8a01bff4bd3cd296e3eb9a676821f48a4cbdfab7c5dafe9d09f48eeaf41f6166"
+          }
+        },
+        "completedAt": "2026-10-03T03:13:10.192Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-f947b22e-dac3-4e65-9ffa-a6cb8f32bf77",
+          "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0795",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997490237,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0665",
+                "path": "chino-taiwan/MLS-V07-0665.json",
+                "sha256": "9201753b0bc1c3a517cdadf115086a6336ad56720cef701bb20d05d156cf7ffb"
+              },
+              {
+                "code": "MLS-V07-0667",
+                "path": "chino-taiwan/MLS-V07-0667.json",
+                "sha256": "0994122f2afcd857b3a4acf615cca0affb7f07d4c6bd1ba997cf71a787d913b6"
+              },
+              {
+                "code": "MLS-V07-0668",
+                "path": "chino-taiwan/MLS-V07-0668.json",
+                "sha256": "176619a00151d92a553f8218b4216b59528dd09f7d4ced1f8d2948674254034c"
+              },
+              {
+                "code": "MLS-V07-0669",
+                "path": "chino-taiwan/MLS-V07-0669.json",
+                "sha256": "b7f3dd281ca1fc48cd0bfb785cad2abbc10317fe8ebfbba141d7e320df7ffcf3"
+              },
+              {
+                "code": "MLS-V07-0670",
+                "path": "chino-taiwan/MLS-V07-0670.json",
+                "sha256": "0df93b580167f3a19670cbeffe03813cfa749801bd3217c47c9637f631a3c7a2"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0795",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0665",
+                "path": "chino-taiwan/MLS-V07-0665.json",
+                "sha256": "9201753b0bc1c3a517cdadf115086a6336ad56720cef701bb20d05d156cf7ffb"
+              },
+              {
+                "code": "MLS-V07-0667",
+                "path": "chino-taiwan/MLS-V07-0667.json",
+                "sha256": "0994122f2afcd857b3a4acf615cca0affb7f07d4c6bd1ba997cf71a787d913b6"
+              },
+              {
+                "code": "MLS-V07-0668",
+                "path": "chino-taiwan/MLS-V07-0668.json",
+                "sha256": "176619a00151d92a553f8218b4216b59528dd09f7d4ced1f8d2948674254034c"
+              },
+              {
+                "code": "MLS-V07-0669",
+                "path": "chino-taiwan/MLS-V07-0669.json",
+                "sha256": "b7f3dd281ca1fc48cd0bfb785cad2abbc10317fe8ebfbba141d7e320df7ffcf3"
+              },
+              {
+                "code": "MLS-V07-0670",
+                "path": "chino-taiwan/MLS-V07-0670.json",
+                "sha256": "0df93b580167f3a19670cbeffe03813cfa749801bd3217c47c9637f631a3c7a2"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0665",
+              "MLS-V07-0667",
+              "MLS-V07-0668",
+              "MLS-V07-0669",
+              "MLS-V07-0670"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997490237,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997490237,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0665",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 665,
+                "title": "Conector 相反地",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**相反地 (xiāngfǎn de)** introduce una idea que se presenta como **opuesta** a otra mencionada antes. En español suele corresponder a «por el contrario», «al contrario» o «en cambio».\n\nPor ejemplo, **有些人喜歡熱鬧的環境；相反地，另一些人比較喜歡安靜。** — «A algunas personas les gustan los ambientes animados; por el contrario, otras prefieren la tranquilidad». La segunda parte expresa una preferencia opuesta a la primera.\n\n#### Cómo funciona\n\n**相反地** suele aparecer al comienzo de una cláusula u oración y establece una oposición relativamente clara entre dos situaciones, tendencias o afirmaciones. El contraste suele ser más fuerte que una simple reserva.\n\nEn **第一組的數據增加了；相反地，第二組卻下降了。** — «Los datos del primer grupo aumentaron; en cambio, los del segundo disminuyeron»—, las dos tendencias se presentan en direcciones opuestas.\n\nLa forma **相反** también puede aparecer con otros valores sintácticos, como en **結果正好相反** «el resultado es justamente lo contrario». El **地** de **相反地** contribuye aquí a su uso adverbial o conectivo.\n\n#### Ejemplos\n\n- **北部今天下雨；相反地，南部天氣很好。** — Hoy llueve en el norte; en cambio, en el sur hace buen tiempo.\n- **這個方法降低了成本；相反地，另一個方案增加了支出。** — Este método redujo los costos; por el contrario, el otro plan aumentó los gastos.\n- **他沒有拒絕；相反地，他表示願意合作。** — No se negó; al contrario, manifestó que estaba dispuesto a colaborar.\n\n#### Observación importante\n\n**相反地** no es idéntico a **然而**. **然而** introduce contraste o una reserva, mientras que **相反地** suele presentar una oposición más directa entre dos contenidos.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **相反地**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 然而 — 連接語「然而」](#entry-664)\n- [Conector 結果 — 連接語「結果」](#entry-666)\n- [Conector 然後 — 連接語「然後」](#entry-663)\n- [Conector 總之 — 連接語「總之」](#entry-667)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-76c696ada971755077081419130df10762270fb1fa4e65bd80851748c316f49b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:35:00.020Z"
+              },
+              {
+                "code": "MLS-V07-0667",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 667,
+                "title": "Conector 總之",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**總之 (zǒngzhī)** introduce una **síntesis o conclusión breve** de lo dicho antes. En español suele corresponder a «en resumen», «en definitiva», «en suma» o «en cualquier caso», según el contexto.\n\nPor ejemplo, **前面的問題很多，總之，我們需要重新規劃。** — «Hay muchos problemas en lo anterior; en resumen, necesitamos replantearlo». La segunda parte condensa el contenido previo en una conclusión general.\n\n#### Cómo funciona\n\n**總之** suele aparecer al comienzo de una cláusula u oración que resume una explicación, una serie de argumentos o varias circunstancias. No introduce normalmente un dato completamente nuevo, sino una formulación global de lo ya expuesto.\n\nTambién puede usarse para cerrar una discusión práctica: **總之，這個方案目前不適合執行。** — «En definitiva, este plan no es adecuado para aplicarse por ahora». Aquí funciona como cierre discursivo y presenta la valoración final.\n\nEn conversación, **總之** puede tener además un matiz de «sea como sea» cuando el hablante deja de lado detalles intermedios y pasa a la conclusión principal.\n\n#### Ejemplos\n\n- **成本太高，時間也不夠；總之，現在不是好時機。** — Los costos son demasiado altos y tampoco hay suficiente tiempo; en definitiva, ahora no es un buen momento.\n- **我們比較了幾個方案，總之，第二個最符合目前需求。** — Comparamos varios planes; en suma, el segundo es el que mejor responde a las necesidades actuales.\n- **細節還可以再討論，總之，方向已經確定了。** — Los detalles todavía pueden discutirse; en cualquier caso, la dirección general ya está definida.\n\n#### Observación importante\n\n**總之** resume o cierra. No equivale a **結果**, que introduce el desenlace efectivo de una situación, ni a **所以**, que presenta una consecuencia derivada de una causa.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **總之**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 結果 — 連接語「結果」](#entry-666)\n- [Conector 而且 — 連接語「而且」](#entry-668)\n- [Conector 相反地 — 連接語「相反地」](#entry-665)\n- [Conector 至於 — 連接語「至於」](#entry-669)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1624112b6060a65127042ca43fa936e2a70960d426ed1a538a07ffc05c1ad056",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:33:57.137Z"
+              },
+              {
+                "code": "MLS-V07-0668",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 668,
+                "title": "Conector 而且",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**而且 (érqiě)** añade una segunda idea que **refuerza o amplía** la primera. En español suele corresponder a «además», «y además» o «encima», según el tono.\n\nPor ejemplo, **這家餐廳不但便宜，而且很好吃。** — «Este restaurante no solo es barato, sino que además se come muy bien». La segunda cualidad se suma a la primera y la refuerza.\n\n#### Cómo funciona\n\n**而且** enlaza dos propiedades, acciones o argumentos relacionados. Puede aparecer solo como conector aditivo o dentro del patrón **不但…而且…**, donde la segunda parte intensifica o completa la primera.\n\nTambién es común en estructuras como **A，而且 B**: **他很有經驗，而且做事很細心。** — «Tiene mucha experiencia y además trabaja con mucho cuidado».\n\nA diferencia de una simple yuxtaposición con **也**, **而且** hace más visible la relación discursiva entre los dos contenidos y suele sugerir acumulación o refuerzo.\n\n#### Ejemplos\n\n- **這個方法速度快，而且成本低。** — Este método es rápido y además tiene un costo bajo.\n- **她會說中文，而且也會說日文。** — Habla chino y además habla japonés.\n- **今天很冷，而且還下雨。** — Hoy hace mucho frío y, encima, llueve.\n\n#### Observación importante\n\n**而且** expresa adición reforzada. No equivale a **此外**, que introduce otro punto con un perfil más expositivo, ni a **但是**, que marca contraste.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **而且**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 總之 — 連接語「總之」](#entry-667)\n- [Conector 至於 — 連接語「至於」](#entry-669)\n- [Conector 結果 — 連接語「結果」](#entry-666)\n- [Conector 關於 — 連接語「關於」](#entry-670)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-420152e9217d40f904098405154b1d35094a6cdea4add513be3a6a08593b55b5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:34:59.354Z"
+              },
+              {
+                "code": "MLS-V07-0669",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 669,
+                "title": "Conector 至於",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**至於 (zhìyú)** introduce un tema relacionado que se trata **aparte o a continuación**. En español suele corresponder a «en cuanto a», «por lo que respecta a» o «respecto de».\n\nPor ejemplo, **預算已經確定了；至於時間，我們明天再討論。** — «El presupuesto ya está decidido; en cuanto al calendario, lo discutiremos mañana». La expresión cambia el foco hacia otro aspecto del mismo asunto.\n\n#### Cómo funciona\n\n**至於** suele preceder a un sustantivo, grupo nominal o tema: **至於價格，目前還沒有決定。** — «En cuanto al precio, todavía no se ha decidido». Lo que sigue establece ese elemento como nuevo tópico del discurso.\n\nTambién puede introducir una consideración que se deja para después o que se distingue de lo ya tratado. Por ello es frecuente en exposiciones donde varios aspectos se organizan por separado.\n\nNo siempre implica contraste. Su función principal es marcar una transición temática relacionada.\n\n#### Ejemplos\n\n- **住宿已經安排好了；至於交通，還需要確認。** — El alojamiento ya está organizado; en cuanto al transporte, todavía hay que confirmarlo.\n- **大方向沒有問題，至於細節，可以之後再談。** — La orientación general no presenta problemas; respecto de los detalles, pueden tratarse después.\n- **他會參加會議；至於會不會發言，目前不清楚。** — Participará en la reunión; en cuanto a si hablará o no, todavía no está claro.\n\n#### Observación importante\n\n**至於** introduce un nuevo foco temático. No equivale a **關於**, que suele formar una expresión del tipo «sobre/acerca de X» dentro de una oración y no necesariamente marca transición entre temas.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **至於**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 而且 — 連接語「而且」](#entry-668)\n- [Conector 關於 — 連接語「關於」](#entry-670)\n- [Conector 總之 — 連接語「總之」](#entry-667)\n- [Conector 首先 — 連接語「首先」](#entry-671)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1653119b5a63eb0688d1f60d6a8b39e7deb098e30f4d4cd68249327e8946223b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:35:58.470Z"
+              },
+              {
+                "code": "MLS-V07-0670",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 670,
+                "title": "Conector 關於",
+                "level": "B2",
+                "part": "Cohesión y escritura formal — 篇章銜接與正式書面語",
+                "chapter": "Conectores y cohesión discursiva — 連接詞與篇章銜接",
+                "articleMarkdown": "#### En pocas palabras\n\n**關於 (guānyú)** introduce el **tema del que se habla**. En español suele corresponder a «sobre», «acerca de», «respecto de» o «en relación con».\n\nPor ejemplo, **關於這個問題，我們還需要更多資料。** — «Sobre este problema, todavía necesitamos más datos». **關於這個問題** establece el ámbito temático de la oración.\n\n#### Cómo funciona\n\n**關於** suele preceder a un sustantivo, grupo nominal o asunto: **關於預算的討論** «la discusión sobre el presupuesto». Puede aparecer al comienzo de la oración o dentro de un grupo nominal.\n\nEn posición inicial, la expresión funciona con frecuencia como marco temático: **關於明年的計畫，公司下週會公布。** — «En cuanto al plan del próximo año, la empresa lo anunciará la próxima semana».\n\nTambién puede combinarse con **的** para modificar un nombre: **關於環境保護的報告** — «un informe sobre la protección ambiental».\n\n#### Ejemplos\n\n- **關於這項規定，我有兩個問題。** — Sobre esta norma, tengo dos preguntas.\n- **他寫了一篇關於台灣歷史的文章。** — Escribió un artículo sobre la historia de Taiwán.\n- **關於會議時間，目前還沒有決定。** — Respecto de la hora de la reunión, todavía no hay una decisión.\n\n#### Observación importante\n\n**關於** presenta el asunto tratado. **至於** suele marcar una transición hacia otro tema relacionado dentro del discurso. Por eso pueden traducirse de manera parecida en ciertos casos, pero no tienen exactamente la misma función.\n\nEl ejemplo de referencia **敬請於週五前回覆。** no contiene **關於**, por lo que no demuestra este conector.\n\n#### Entradas relacionadas\n\n- [Conector 至於 — 連接語「至於」](#entry-669)\n- [Conector 首先 — 連接語「首先」](#entry-671)\n- [Conector 而且 — 連接語「而且」](#entry-668)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-139bada70864f844234ae8704a133062994a304b2f67dfe29416e6a8344fe908",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T22:36:57.572Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:13:10.991Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:13:10.991Z",
+  "commandFile": "mls chat bridge/commands/r44/z6-ticket05-submit-claim6.json"
+}

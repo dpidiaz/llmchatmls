@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-ccx482-step7",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-044ccae3-6ffe-4329-a8cc-965a3fb8694b",
+          "ticketId": "R43-EMERGENCY-0506",
+          "leaseExpiresAt": 1790997461533
+        },
+        "completedAt": "2026-10-03T03:12:41.663Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0506",
+          "sha256": "39577d417c1c9f7c33bc315c72ea46e912d8cad1054a8ddca7184084fe55ae6c",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0506",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ecd91a04-7de1-41f7-82c3-ffc658a7160e",
+                "ticketId": "R43-EMERGENCY-0506",
+                "code": "MLS-V05-1060",
+                "idempotencyKey": "R43-EMERGENCY-0506:MLS-V05-1060:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2dec0ee520c15eb6f0375418a23f0fe40073688e21ae04272ac1121c01001631",
+                "sourceSha256": "179c1becabf38613b174caac76202c3fefa6b066868ff5134e5d7dd8f74a7496",
+                "committedMs": 1790997162048,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b4b90599232e39433daf99491d5d80f52835d331a50a0b434ad59ab54b08c0b1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0506",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "54958012-386e-42f7-a6a1-e67f4fddbddd",
+                "ticketId": "R43-EMERGENCY-0506",
+                "code": "MLS-V05-1061",
+                "idempotencyKey": "R43-EMERGENCY-0506:MLS-V05-1061:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b860f9d74cb7296bd074ffb3e3932e7686d41ccc25932f572a8ac40746564ee4",
+                "sourceSha256": "0b53467d993504f5b7914239d510555a6a0bc55c828fb58b583750898491ee7d",
+                "committedMs": 1790997162256,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "dfb506cf4103a22d8e9ed88cb35b629aaf5d7b16fc648bb9ac273662db0f094e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0506",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2a25ba38-05dc-42d3-9d73-26f31ba2555c",
+                "ticketId": "R43-EMERGENCY-0506",
+                "code": "MLS-V05-1063",
+                "idempotencyKey": "R43-EMERGENCY-0506:MLS-V05-1063:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9d973cce86bb46ed2165aaf7a49ee298ac70d87602c1d02b113479b8e58fb44a",
+                "sourceSha256": "08802e21e6987b925bd154c38411279eda15c08a33e64b3443b7c8ffea19d845",
+                "committedMs": 1790997162479,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9b81fc4682e8bef54d0bfb59d8ddc6535e97fce6f8826750513fded84a599175",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0506",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "20e903f2-02e9-4254-9bbd-88b8c6e4bf5b",
+                "ticketId": "R43-EMERGENCY-0506",
+                "code": "MLS-V05-1064",
+                "idempotencyKey": "R43-EMERGENCY-0506:MLS-V05-1064:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "12de616fa43a492ab922c547e9d2a02c22b3d773585ebbef47170dd3050eb72c",
+                "sourceSha256": "f90bf643c7691adeaf9628b71cf2f0b117dd004c0782647e3b5dc3c30fe2e9b8",
+                "committedMs": 1790997162697,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "66e49ad908c1d1747628c8ce330841e7969af5c261a2f7351696cd2b3df74b31",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0506",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ad6b2179-4938-42ae-85d9-49f11e25709e",
+                "ticketId": "R43-EMERGENCY-0506",
+                "code": "MLS-V05-1065",
+                "idempotencyKey": "R43-EMERGENCY-0506:MLS-V05-1065:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "369570025099ccafe1721348ce2391249fb2ee1ac6c36b390374f1556b24b402",
+                "sourceSha256": "ff64fc5d024611cb73cb8ade2b483c8da5de7030cf02028406843aeb5b7447ae",
+                "committedMs": 1790997162912,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "5b6f6f6aa15e5dc22121c226a3f984b758cf2b650dcd890a446b9fee4dfb8413",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-044ccae3-6ffe-4329-a8cc-965a3fb8694b",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "39577d417c1c9f7c33bc315c72ea46e912d8cad1054a8ddca7184084fe55ae6c"
+          }
+        },
+        "completedAt": "2026-10-03T03:12:43.201Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-ad38c915-5c7e-4086-a4d7-e4d8230edd25",
+          "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0513",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997463244,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0001",
+                "path": "japones/MLS-V06-0001.json",
+                "sha256": "dd2fa7ff18ef79082256804efae8cac95dce239627cfc2838cd4f1ac9aba5b33"
+              },
+              {
+                "code": "MLS-V06-0002",
+                "path": "japones/MLS-V06-0002.json",
+                "sha256": "5c49af705ad0a9aa9ac421057eefb1fdc99f37b0726c2211ddc1ab9ec39b6dee"
+              },
+              {
+                "code": "MLS-V06-0003",
+                "path": "japones/MLS-V06-0003.json",
+                "sha256": "4f3bee9cd4d9f43f8327ac11387d7028ff5305ae2f1bbe98afc11112927677b0"
+              },
+              {
+                "code": "MLS-V06-0004",
+                "path": "japones/MLS-V06-0004.json",
+                "sha256": "9d8051ab1bffb710e2a8d428ddf95342219a14124a3d18181e84356ab6f242ab"
+              },
+              {
+                "code": "MLS-V06-0006",
+                "path": "japones/MLS-V06-0006.json",
+                "sha256": "318eba1905a737c17e99f697d8d6ffe836e6d0eda7d3602a8a9cdc9428226592"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0513",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0001",
+                "path": "japones/MLS-V06-0001.json",
+                "sha256": "dd2fa7ff18ef79082256804efae8cac95dce239627cfc2838cd4f1ac9aba5b33"
+              },
+              {
+                "code": "MLS-V06-0002",
+                "path": "japones/MLS-V06-0002.json",
+                "sha256": "5c49af705ad0a9aa9ac421057eefb1fdc99f37b0726c2211ddc1ab9ec39b6dee"
+              },
+              {
+                "code": "MLS-V06-0003",
+                "path": "japones/MLS-V06-0003.json",
+                "sha256": "4f3bee9cd4d9f43f8327ac11387d7028ff5305ae2f1bbe98afc11112927677b0"
+              },
+              {
+                "code": "MLS-V06-0004",
+                "path": "japones/MLS-V06-0004.json",
+                "sha256": "9d8051ab1bffb710e2a8d428ddf95342219a14124a3d18181e84356ab6f242ab"
+              },
+              {
+                "code": "MLS-V06-0006",
+                "path": "japones/MLS-V06-0006.json",
+                "sha256": "318eba1905a737c17e99f697d8d6ffe836e6d0eda7d3602a8a9cdc9428226592"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0001",
+              "MLS-V06-0002",
+              "MLS-V06-0003",
+              "MLS-V06-0004",
+              "MLS-V06-0006"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997463244,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997463244,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0001",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1,
+                "title": "Dakuten が/ざ/だ/ば",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 文字と発音",
+                "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **dakuten** (濁点) es el signo **゛**, formado por dos pequeñas rayas, que se añade a ciertos kana para cambiar su lectura. En hiragana, por ejemplo, **か** (*ka*) se convierte en **が** (*ga*).\n\nLos grupos básicos afectados son las filas de **か, さ, た** y **は**. Al añadir dakuten aparecen las series **が, ざ, だ** y **ば**.\n\n#### Cómo funciona\n\nEl signo se escribe en la parte superior derecha del kana. Los cambios principales son:\n\n- **か → が**: *ka → ga*; la serie か・き・く・け・こ pasa a が・ぎ・ぐ・げ・ご.\n- **さ → ざ**: *sa → za*; en esta serie, **し → じ** se lee normalmente *ji*.\n- **た → だ**: *ta → da*; aparecen formas como **ち → ぢ** y **つ → づ**, cuyas lecturas modernas se acercan a *ji* y *zu* en el japonés estándar.\n- **は → ば**: *ha → ba*; la serie は・ひ・ふ・へ・ほ pasa a ば・び・ぶ・べ・ぼ.\n\nEl dakuten forma parte de la escritura del kana: **か** y **が** no representan la misma lectura.\n\n#### Ejemplos\n\n- **か → が** — *ka → ga*.\n- **さけ** (*sake*) frente a **ざ** en palabras de la serie sonora correspondiente.\n- **かぎ** (*kagi*) — llave; **ぎ** contiene dakuten.\n- **ごはん** (*gohan*) — comida/arroz cocido; **ご** es la forma con dakuten de **こ**.\n- **ばしょ** (*basho*) — lugar; **ば** procede de **は** con dakuten.\n\n#### Observación importante\n\nEl dakuten no debe confundirse con el **handakuten** (半濁点) **゜**. El handakuten se usa con la fila de は para formar **ぱ・ぴ・ぷ・ぺ・ぽ** (*pa, pi, pu, pe, po*), mientras que el dakuten forma **ば・び・ぶ・べ・ぼ**.\n\nEl mismo principio gráfico también aparece en katakana, por ejemplo **カ → ガ**, aunque esta entrada se centra en el hiragana.\n\n#### Entradas relacionadas\n\n- [Entrada 2: Handakuten ぱ — 半濁点「ぱ」](#entry-2)\n- [Entrada 3: Partícula は pronunciada わ — 助詞「は」の発音「わ」](#entry-3)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-5b9f3e33a6660903710f01b58a4bcf189308d09cf4ee87b87b98adc155bde5bc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:15:02.238Z"
+              },
+              {
+                "code": "MLS-V06-0002",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 2,
+                "title": "Handakuten ぱ",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 文字と発音",
+                "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **handakuten** (半濁点) es el pequeño círculo **゜** que se añade a los kana de la fila de **は** para cambiar su lectura. Por ejemplo, **は** (*ha*) se convierte en **ぱ** (*pa*).\n\nCon este signo se forma la serie **ぱ・ぴ・ぷ・ぺ・ぽ**, leída *pa, pi, pu, pe, po*.\n\n#### Cómo funciona\n\nEl handakuten se escribe en la parte superior derecha del kana. Solo se aplica de manera regular a la fila de **は**:\n\n- **は → ぱ** — *ha → pa*\n- **ひ → ぴ** — *hi → pi*\n- **ふ → ぷ** — *fu → pu*\n- **へ → ぺ** — *he → pe*\n- **ほ → ぽ** — *ho → po*\n\nEl círculo forma parte de la escritura del kana y modifica su lectura. Por ello, **は**, **ば** y **ぱ** son formas distintas: la primera no lleva marca, **ば** lleva dakuten **゛** y **ぱ** lleva handakuten **゜**.\n\n#### Ejemplos\n\n- **は → ぱ** — *ha → pa*.\n- **ぱん** (*pan*) — pan.\n- **ぴかぴか** (*pikapika*) — brillante, reluciente.\n- **ぷらす** (*purasu*) — «plus», cuando se escribe fonéticamente en hiragana.\n- **ぽつぽつ** (*potsupotsu*) — poco a poco / en puntos dispersos, según el contexto.\n\n#### Observación importante\n\nEl handakuten no es lo mismo que el **dakuten**. En la fila de は, el dakuten produce **ば・び・ぶ・べ・ぼ** (*ba, bi, bu, be, bo*), mientras que el handakuten produce **ぱ・ぴ・ぷ・ぺ・ぽ**.\n\nEl mismo signo también se utiliza con katakana: **ハ → パ**, **ヒ → ピ**, **フ → プ**, **ヘ → ペ**, **ホ → ポ**. Esta entrada se centra en su uso con hiragana.\n\n#### Entradas relacionadas\n\n- [Entrada 1: Dakuten が/ざ/だ/ば — 濁点「が・ざ・だ・ば」](#entry-1)\n- [Entrada 3: Partícula は pronunciada わ — 助詞「は」の発音「わ」](#entry-3)\n- [Entrada 4: Partícula へ pronunciada え — 助詞「へ」の発音「え」](#entry-4)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-344460f300b6270e784a4452a034a403a2d4ff0427cd2480c99d6e43a9a419f9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:15:26.423Z"
+              },
+              {
+                "code": "MLS-V06-0003",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 3,
+                "title": "Partícula は pronunciada わ",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 文字と発音",
+                "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み",
+                "articleMarkdown": "#### En pocas palabras\n\nEn el sistema de escritura japonés, el carácter **は** se pronuncia normalmente como \"ha\". Sin embargo, cuando este carácter funciona como una **partícula** (una palabra pequeña que indica la función gramatical de lo que la precede), su pronunciación cambia a **\"wa\"**.\n\n#### Cómo funciona\n\nEsta partícula se utiliza principalmente para marcar el **tópico** de la oración; es decir, para señalar de qué o de quién se está hablando. Aunque el sonido que escuchamos es \"wa\", la norma ortográfica exige que se escriba siempre con el grafema **は**.\n\nEs un error común intentar escribir este sonido usando el carácter **わ** (wa). Debes recordar que **わ** es un carácter independiente con sus propios usos, mientras que **は** solo se pronuncia \"wa\" cuando cumple su función de marcador de tópico.\n\n#### Ejemplos\n\n1. **私は学生です。**\n   *Watashi **wa** gakusei desu.*\n   (Yo soy estudiante).\n   * **Explicación:** El carácter **は** sigue al pronombre *watashi* (yo) para indicar que \"yo\" es el tema de la oración. Se escribe **は**, pero se pronuncia **wa**.\n\n2. **今日は暑いです。**\n   *Kyō **wa** atsui desu.*\n   (Hoy hace calor).\n   * **Explicación:** Aquí, **は** marca que el tema de la conversación es \"hoy\" (*kyō*). Nuevamente, la escritura es **は** y la pronunciación es **wa**.\n\n#### Observación importante\n\nNo todas las palabras que suenan \"wa\" se escriben con **は**. Si el sonido \"wa\" es parte integral de una palabra (como un sustantivo o un adjetivo), se debe utilizar el carácter **わ**. La excepción de pronunciación de **は** es exclusiva de su uso como partícula gramatical.\n\n#### Entradas relacionadas\n\n- [Partícula へ pronunciada え — 助詞「へ」の発音「え」](#entry-4)\n- [Partícula を pronunciada お — 助詞「を」の発音「お」](#entry-5)\n- [Dakuten が/ざ/だ/ば — 濁点「が・ざ・だ・ば」](#entry-1)\n- [Handakuten ぱ — 半濁点「ぱ」](#entry-2)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:18:30.644Z"
+              },
+              {
+                "code": "MLS-V06-0004",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 4,
+                "title": "Partícula へ pronunciada え",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 文字と発音",
+                "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み",
+                "articleMarkdown": "#### Partícula へ (pronunciada *e*)\n\n#### En pocas palabras\nLa partícula へ es un marcador gramatical (una palabra pequeña que se añade a un sustantivo para indicar su función) que señala la dirección o el destino hacia el cual se dirige un movimiento. Aunque se escribe con el carácter hiragana へ (que normalmente se lee *he*), cuando cumple la función de partícula, su pronunciación cambia a *e*.\n\n#### Cómo funciona\nSe coloca inmediatamente después del sustantivo que representa el lugar o la dirección. Su función es conectar ese sustantivo con un verbo de movimiento (como ir, venir o regresar). Mientras que otras partículas pueden indicar un punto de llegada estático, へ pone un énfasis especial en la dirección o el trayecto hacia ese punto.\n\n#### Ejemplos\n* **学校へ行きます** (*Gakkou e ikimasu*)\n  Voy a la escuela.\n  (El sustantivo 学校 *gakkou* es el destino, y la partícula へ indica la dirección del movimiento).\n* **日本へ来ました** (*Nihon e kimashita*)\n  Vine a Japón.\n  (Indica que el movimiento realizado tuvo como dirección el país de Japón).\n* **空へ飛びます** (*Sora e tobimasu*)\n  Vuela hacia el cielo.\n  (Marca la dirección hacia la cual se dirige la acción de volar).\n\n#### Observación importante\nEs fundamental distinguir entre el uso de este carácter como partícula y su uso dentro de una palabra común:\n1. **Como partícula de dirección:** Se pronuncia **e** (ej. 学校へ — *gakkou e*).\n2. **Como parte de un vocabulario:** Se pronuncia **he** (ej. へや — *heya*, que significa \"habitación\").\n\n#### Entradas relacionadas\n* [Partícula は pronunciada わ](#entry-3)\n* [Partícula を pronunciada お](#entry-5)\n* [Handakuten ぱ](#entry-2)\n* [Sokuon っ](#entry-6)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:19:05.536Z"
+              },
+              {
+                "code": "MLS-V06-0006",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 6,
+                "title": "Sokuon っ",
+                "level": "A1",
+                "part": "Escritura y pronunciación — 文字と発音",
+                "chapter": "Hiragana: escritura y lectura — ひらがな：表記と読み",
+                "articleMarkdown": "#### En pocas palabras\nEl *sokuon* (促音) es el carácter **っ** (un *tsu* pequeño) que se utiliza en el sistema de escritura hiragana para indicar una consonante geminada, es decir, una consonante que se duplica o se alarga.\n\n#### Cómo funciona\nA diferencia de las demás letras, el **っ** no tiene un sonido propio. Su función es actuar como una marca de pausa o un \"tope\" en la pronunciación justo antes de la consonante que le sigue. \n\nAl leerlo, se debe producir un breve silencio o una retención del aire en la posición de la siguiente consonante. Este fenómeno ocurre principalmente con las consonantes **k, s, t** y **p**. Visualmente, es importante notar que el *sokuon* es más pequeño que el carácter *tsu* normal (**つ**).\n\n#### Ejemplos\n* **がっこう** (*gakkō*) — escuela.\n  El **っ** duplica la **k**, creando una breve pausa antes de la sílaba *kō*.\n* **きって** (*kitte*) — sello.\n  El **っ** duplica la **t**.\n* **ざっし** (*zasshi*) — revista.\n  El **っ** duplica la **s**.\n* **いっぱい** (*ippai*) — mucho / lleno.\n  El **っ** duplica la **p**.\n\n#### Observación importante\nEs vital distinguir entre el *tsu* grande (**つ**) y el *sokuon* pequeño (**っ**). Si se escribe el carácter del tamaño normal, se estará añadiendo una sílaba completa con sonido, lo que cambiará totalmente el significado de la palabra. Por ejemplo, la diferencia entre una palabra con pausa y una con una sílaba extra es fundamental para la comprensión.\n\n#### Entradas relacionadas\n* Hiragana\n* Pronunciación japonesa",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:19:48.181Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:12:44.017Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:12:44.017Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0245-sol-ccx482/11-submit6-claim7.json"
+}

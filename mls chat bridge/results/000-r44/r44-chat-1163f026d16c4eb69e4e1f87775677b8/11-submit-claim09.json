@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-t08-complete-claim09",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-96dd2bf7-d3de-402d-8609-4ae75d5e9a4a",
+          "ticketId": "R43-EMERGENCY-0727",
+          "leaseExpiresAt": 1790997444244
+        },
+        "completedAt": "2026-10-03T03:12:24.407Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0727",
+          "sha256": "233a75fd123da670a2796b14912605ddca7828d6c814598d4bd10f7c7bcaf752",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0727",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f5c6a392-eb12-4790-b0a7-bb960bac300c",
+                "ticketId": "R43-EMERGENCY-0727",
+                "code": "MLS-V07-0257",
+                "idempotencyKey": "R43-EMERGENCY-0727:MLS-V07-0257:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9f0763c47ca6a3518d52ad4215c5ffa8def72b9ab9fa96b58e687e548b6c098d",
+                "sourceSha256": "09b860ce257a35abeda61807104a2b640c4bedc123c3e8dfda5f9f0e4940768d",
+                "committedMs": 1790997144803,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7df0bba3804620e2c6155a8e472db377f743e21214c321830a2a096aaeb73003",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0727",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d46ea66c-164d-42bc-ac32-f66099650a15",
+                "ticketId": "R43-EMERGENCY-0727",
+                "code": "MLS-V07-0258",
+                "idempotencyKey": "R43-EMERGENCY-0727:MLS-V07-0258:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "245edc3a91a2fdd3c80882ece6aab5105fec70865411b226e7f8bc779a7f0fb7",
+                "sourceSha256": "c4f470fed4059daa28d4312994626ef1f37eadcebee42cee9cd5ecb6eb104e8c",
+                "committedMs": 1790997145015,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "06dc0c9c357d77d97f5f438718077bcaeb08fd0aa4510b6d1e9a5330eb1e4cb5",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0727",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1a1a9659-9850-4fcc-98bd-18264fa3ed16",
+                "ticketId": "R43-EMERGENCY-0727",
+                "code": "MLS-V07-0259",
+                "idempotencyKey": "R43-EMERGENCY-0727:MLS-V07-0259:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "82311b2936743297e0fad191988a53631945003389ecd867bb2f62e7ed605ee0",
+                "sourceSha256": "ef26d12fd195ee208334c6e9dc3ba5f0dc16eecbd7dc65b8be5a7bf0e63f1ccf",
+                "committedMs": 1790997145231,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "19e9ec3ed4bcf4e0026e4b9d67cee268e2e980731ab2bb00a1309818e877b14c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0727",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "44800f31-0065-44a3-ae63-d87d8c213e7b",
+                "ticketId": "R43-EMERGENCY-0727",
+                "code": "MLS-V07-0261",
+                "idempotencyKey": "R43-EMERGENCY-0727:MLS-V07-0261:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "14ce70a8e4338f6bef10496bf4d94270af725d7b85bce869fa0934f83e4eef03",
+                "sourceSha256": "2c77a58b598cb5da05c6983f192d5fee474bc4e95894beb116a7a526259e86e9",
+                "committedMs": 1790997145452,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "94529114a64beed92ec3f9bd748d2c75b45add5ae20fa2bcdb665caf6703adbc",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0727",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "810cbed8-f11e-4c33-a93a-415e591d268d",
+                "ticketId": "R43-EMERGENCY-0727",
+                "code": "MLS-V07-0262",
+                "idempotencyKey": "R43-EMERGENCY-0727:MLS-V07-0262:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0ac31070c399153f03d4a5daa45ad15acae880910e2034deb7d3ff6dded50d55",
+                "sourceSha256": "89972488016b301e2d3b78b0c05afd8b6086aa642f36416a07eddda162a24098",
+                "committedMs": 1790997145668,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "840e911a9bd0f88be9640604808706fde06adbdad5c6d6ba5f17982152c88247",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-96dd2bf7-d3de-402d-8609-4ae75d5e9a4a",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "233a75fd123da670a2796b14912605ddca7828d6c814598d4bd10f7c7bcaf752"
+          }
+        },
+        "completedAt": "2026-10-03T03:12:25.960Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-b396db81-980a-49b3-8d3c-034a3342b124",
+          "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0728",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997446002,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0263",
+                "path": "chino-taiwan/MLS-V07-0263.json",
+                "sha256": "836d7118ab39dbfa5ccca1ca9276646eadb6ce1c73fcfc056ebb571fe24ec0e6"
+              },
+              {
+                "code": "MLS-V07-0264",
+                "path": "chino-taiwan/MLS-V07-0264.json",
+                "sha256": "b9acb11208ffd74bbf398084b0fdf17becf174086a8056147ca14dbe32efce4e"
+              },
+              {
+                "code": "MLS-V07-0265",
+                "path": "chino-taiwan/MLS-V07-0265.json",
+                "sha256": "36fcb49e6888be5592b8d076155b2ed29983c3ad68098698426d85afc48ccdd6"
+              },
+              {
+                "code": "MLS-V07-0266",
+                "path": "chino-taiwan/MLS-V07-0266.json",
+                "sha256": "cf5e15c49f7813d536fdb13e770f1a9c7507dbf54350ea8b67705edb1aa866cd"
+              },
+              {
+                "code": "MLS-V07-0267",
+                "path": "chino-taiwan/MLS-V07-0267.json",
+                "sha256": "ddfe6e0aae3da0dc414a62c406ba82638681a05dcee2623e1d4a89178fbcd6b7"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0728",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0263",
+                "path": "chino-taiwan/MLS-V07-0263.json",
+                "sha256": "836d7118ab39dbfa5ccca1ca9276646eadb6ce1c73fcfc056ebb571fe24ec0e6"
+              },
+              {
+                "code": "MLS-V07-0264",
+                "path": "chino-taiwan/MLS-V07-0264.json",
+                "sha256": "b9acb11208ffd74bbf398084b0fdf17becf174086a8056147ca14dbe32efce4e"
+              },
+              {
+                "code": "MLS-V07-0265",
+                "path": "chino-taiwan/MLS-V07-0265.json",
+                "sha256": "36fcb49e6888be5592b8d076155b2ed29983c3ad68098698426d85afc48ccdd6"
+              },
+              {
+                "code": "MLS-V07-0266",
+                "path": "chino-taiwan/MLS-V07-0266.json",
+                "sha256": "cf5e15c49f7813d536fdb13e770f1a9c7507dbf54350ea8b67705edb1aa866cd"
+              },
+              {
+                "code": "MLS-V07-0267",
+                "path": "chino-taiwan/MLS-V07-0267.json",
+                "sha256": "ddfe6e0aae3da0dc414a62c406ba82638681a05dcee2623e1d4a89178fbcd6b7"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0263",
+              "MLS-V07-0264",
+              "MLS-V07-0265",
+              "MLS-V07-0266",
+              "MLS-V07-0267"
+            ],
+            "lease": {
+              "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997446002,
+              "active": true
+            },
+            "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997446002,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0263",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 263,
+                "title": "下雨了",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 final y cambio de estado — 句末「了」與狀態變化",
+                "articleMarkdown": "#### En pocas palabras\n\n**下雨了 (xiàyǔ le)** suele indicar que **la situación ha cambiado y ahora llueve** o que la lluvia acaba de empezar. El **了** aparece al final de la oración y presenta ese nuevo estado como relevante para la conversación.\n\n#### Cómo funciona\n\n**下雨** significa «llover». Al decir **下雨了**, el hablante no añade simplemente una marca de pasado: comunica que, frente a la situación anterior, ahora hay lluvia.\n\nPor ejemplo, **下雨了，帶傘吧。** (*Xiàyǔ le, dài sǎn ba.*) puede traducirse como «Está empezando a llover; lleva paraguas». La recomendación tiene sentido precisamente porque la situación acaba de cambiar.\n\n#### Ejemplos\n\n- **下雨了，我們回家吧。** (*Xiàyǔ le, wǒmen huíjiā ba.*) — Ya está lloviendo; volvamos a casa.\n- **天黑了。** (*Tiān hēi le.*) — Ya oscureció / ahora está oscuro.\n- **他回來了。** (*Tā huílái le.*) — Ya regresó / ha vuelto.\n\nEn cada caso, el **了** final dirige la atención hacia una situación nueva respecto de un estado anterior.\n\n#### Observación importante\n\nEl **了** final no equivale automáticamente a «ahora», «ya» ni a un tiempo verbal español. Esas traducciones pueden resultar naturales, pero el valor gramatical depende de la oración completa y del contexto.\n\nTambién debe distinguirse del **了** que aparece inmediatamente después de un verbo para delimitar un evento.\n\n#### Entradas relacionadas\n\n- [Entrada 262: Verb-了 vs sentence-final 了 — 動詞後「了」與句末「了」](#entry-262)\n- [Entrada 264: 了 final de cambio de estado — 句末「了」表狀態變化](#entry-264)\n- [Entrada 261: Doble 了 — 雙「了」](#entry-261)\n- [Entrada 265: 別說了 — 「別說了」](#entry-265)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e2c119145112ae58c7ae4814fe1ea4e865fa2ffb9d7e71517af1bd7b3fcbdbc5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:30:34.361Z"
+              },
+              {
+                "code": "MLS-V07-0264",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 264,
+                "title": "了 final de cambio de estado",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 final y cambio de estado — 句末「了」與狀態變化",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **了 (le) al final de la oración** puede señalar que una situación **ha cambiado** o que existe un nuevo estado relevante para el hablante. Este uso se conoce con frecuencia como **了 final de cambio de estado**.\n\n#### Cómo funciona\n\nEn **天冷了。** (*Tiān lěng le.*) — «Ahora hace frío / se puso frío», el **了** final indica que la situación ya no es como antes: ha llegado el frío.\n\nDe manera similar, **我餓了。** (*Wǒ è le.*) puede expresar «Ahora tengo hambre / me dio hambre». Lo importante no es un tiempo verbal de pasado, sino el contraste con un estado anterior.\n\n#### Ejemplos\n\n- **他回家了。** (*Tā huíjiā le.*) — Ya se fue a casa / ahora está de regreso en casa, según el contexto.\n- **雨停了。** (*Yǔ tíng le.*) — Ya dejó de llover.\n- **孩子長大了。** (*Háizi zhǎngdà le.*) — El niño ya creció / se ha hecho mayor.\n\n#### Observación importante\n\nEl **了** final no debe confundirse automáticamente con el **了** posverbal, que suele delimitar un evento dentro de la estructura verbal. Tampoco equivale a **過 (guo)**, que en muchos contextos expresa experiencia previa.\n\nLa traducción española puede usar «ya», «ahora», un perfecto u otra forma, pero esas palabras reflejan el contexto y no constituyen una traducción fija de **了**.\n\n#### Entradas relacionadas\n\n- [Entrada 263: 下雨了 — 「下雨了」](#entry-263)\n- [Entrada 265: 別說了 — 「別說了」](#entry-265)\n- [Entrada 262: Verb-了 vs sentence-final 了 — 動詞後「了」與句末「了」](#entry-262)\n- [Entrada 266: 天冷了 — 「天冷了」](#entry-266)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-13ce07b4496c30c9ce2e7487cffac9616e933bff799fe449c60465e7d8254039",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:31:29.095Z"
+              },
+              {
+                "code": "MLS-V07-0265",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 265,
+                "title": "別說了",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 final y cambio de estado — 句末「了」與狀態變化",
+                "articleMarkdown": "#### En pocas palabras\n\n**別說了 (bié shuō le)** significa normalmente **«deja de hablar», «ya no digas más»** o «no sigas hablando». **別** introduce la prohibición y el **了** final ayuda a presentar como necesario un cambio respecto de la situación actual.\n\n#### Cómo funciona\n\nSi alguien está hablando y otra persona dice **別說了**, no se limita a expresar «no hables» de manera general. En ese contexto, la frase suele pedir que **cese una acción que ya está ocurriendo**.\n\nPor ejemplo, **別說了，我知道了。** (*Bié shuō le, wǒ zhīdào le.*) puede traducirse como «Ya no hables; ya entendí / ya lo sé».\n\n#### Ejemplos\n\n- **別哭了。** (*Bié kū le.*) — Ya no llores / deja de llorar.\n- **別等了，我們走吧。** (*Bié děng le, wǒmen zǒu ba.*) — No esperes más; vámonos.\n- **別生氣了。** (*Bié shēngqì le.*) — Ya no te enojes / deja de estar enojado.\n\nEn estos casos, **了** contribuye a marcar el cambio desde una situación presente hacia su cese.\n\n#### Observación importante\n\nEl significado de «dejar de» surge de la construcción completa **別 + expresión + 了**, no de **了** por sí solo. Sin contexto, **別** ya puede formar prohibiciones, mientras que el **了** final añade el matiz de cambio o cese relevante.\n\nEste **了** final tampoco es una terminación de pasado.\n\n#### Entradas relacionadas\n\n- [Entrada 264: 了 final de cambio de estado — 句末「了」表狀態變化](#entry-264)\n- [Entrada 266: 天冷了 — 「天冷了」](#entry-266)\n- [Entrada 263: 下雨了 — 「下雨了」](#entry-263)\n- [Entrada 267: 太…了 evaluativo — 「太…了」（句末「了」與狀態變化）](#entry-267)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0ddc63cae7f7c2b7392854c5c204e1feb2943b8c723162a2c293b378acbef956",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:32:21.752Z"
+              },
+              {
+                "code": "MLS-V07-0266",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 266,
+                "title": "天冷了",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 final y cambio de estado — 句末「了」與狀態變化",
+                "articleMarkdown": "#### En pocas palabras\n\n**天冷了 (tiān lěng le)** significa que **ahora hace frío** o que **el tiempo se ha vuelto frío**. El **了** al final presenta el frío como una situación nueva respecto de lo que ocurría antes.\n\n#### Cómo funciona\n\nEn mandarín, **冷 (lěng)** «frío» puede funcionar directamente como predicado: no necesita **是** delante. Así, **天冷** describe que el tiempo hace frío, mientras que **天冷了** destaca que se ha producido un cambio.\n\nPor ejemplo, **天冷了，要穿外套。** (*Tiān lěng le, yào chuān wàitào.*) significa «Ya hace frío; hay que ponerse abrigo». La segunda parte responde a la nueva situación.\n\n#### Ejemplos\n\n- **天熱了。** (*Tiān rè le.*) — Ahora hace calor / se puso caluroso.\n- **晚上變冷了。** (*Wǎnshang biàn lěng le.*) — Por la noche se puso más frío.\n- **水涼了。** (*Shuǐ liáng le.*) — El agua ya se enfrió / ahora está fresca.\n\n#### Observación importante\n\nEl **了** final no significa por sí mismo «ya» ni marca un pasado verbal. Esas traducciones son maneras naturales de expresar en español que existe un cambio relevante.\n\nTambién conviene distinguir esta construcción del **了** posverbal, que suele presentar un evento como delimitado. En **天冷了**, el foco está en el nuevo estado de la situación completa.\n\n#### Entradas relacionadas\n\n- [Entrada 265: 別說了 — 「別說了」](#entry-265)\n- [Entrada 267: 太…了 evaluativo — 「太…了」（句末「了」與狀態變化）](#entry-267)\n- [Entrada 264: 了 final de cambio de estado — 句末「了」表狀態變化](#entry-264)\n- [Entrada 268: 快…了 — 「快…了」](#entry-268)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6d0d6ac9b02607db4a6d78bd6e9cb856079980e3e75f964cd6d50d09c22b0040",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:33:14.682Z"
+              },
+              {
+                "code": "MLS-V07-0267",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 267,
+                "title": "太…了 evaluativo",
+                "level": "A2",
+                "part": "Aspecto — 體貌",
+                "chapter": "了 final y cambio de estado — 句末「了」與狀態變化",
+                "articleMarkdown": "#### En pocas palabras\n\nLa construcción **太…了 (tài…le)** expresa un **grado muy alto** y suele comunicar una reacción o evaluación del hablante. Según el contexto puede equivaler a «demasiado…» o a expresiones exclamativas como «¡qué…!».\n\n#### Cómo funciona\n\n**太** aparece antes de un adjetivo o expresión descriptiva y **了** suele cerrar la oración. Por ejemplo, **太好了！** (*Tài hǎo le!*) significa «¡Qué bien!» o «¡Excelente!». La frase no describe simplemente que algo sea bueno: presenta una evaluación intensa.\n\nEn otros contextos, el mismo patrón puede expresar exceso: **太貴了。** (*Tài guì le.*) — «Es demasiado caro».\n\n#### Ejemplos\n\n- **今天太冷了。** (*Jīntiān tài lěng le.*) — Hoy hace demasiado frío.\n- **這個蛋糕太好吃了！** (*Zhège dàngāo tài hǎochī le!*) — ¡Este pastel está riquísimo!\n- **你走得太快了。** (*Nǐ zǒu de tài kuài le.*) — Caminas demasiado rápido.\n\n#### Observación importante\n\nNo conviene atribuir todo el significado a **了**. La intensidad proviene principalmente de **太**, mientras que el **了** final forma parte de la construcción evaluativa y presenta esa valoración como relevante en la situación.\n\nEste uso tampoco convierte **了** en una marca de pasado, ni debe confundirse con el **了** posverbal que delimita un evento.\n\n#### Entradas relacionadas\n\n- [Entrada 266: 天冷了 — 「天冷了」](#entry-266)\n- [Entrada 268: 快…了 — 「快…了」](#entry-268)\n- [Entrada 265: 別說了 — 「別說了」](#entry-265)\n- [Entrada 269: 快要…了 — 「快要…了」](#entry-269)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-65a98f2d7a71437be8ef484271d07b261bb86154457801eb3f839cf4b0c4f510",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:34:12.209Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:12:26.770Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:12:26.770Z",
+  "commandFile": "mls chat bridge/commands/000-r44/r44-chat-1163f026d16c4eb69e4e1f87775677b8/11-submit-claim09.json"
+}
