@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-next10-c91d-04",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-f397b239-7582-4022-b2b1-c315250869fe",
+          "ticketId": "R44-CORPUS-0983",
+          "leaseExpiresAt": 1790997059128
+        },
+        "completedAt": "2026-10-03T03:05:59.266Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0983",
+          "sha256": "9b92d6a22b0f8c92e0d9bcdab0c7a70104d8c5fec435ef11f88f6301b0ed94db",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0983",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "66f5bf6f-f137-40e3-9728-25c883f1c066",
+                "ticketId": "R44-CORPUS-0983",
+                "code": "MLS-V02-0366",
+                "idempotencyKey": "R44-CORPUS-0983:MLS-V02-0366:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "33b0425deb396d2cb5dfdb36424f6ce1e095cdeb1f106f536deee466fd5b51ea",
+                "sourceSha256": "a5dccf15fb01cc23e46310c7a194de803706f6d6948c43e9dfd13612aef11bd7",
+                "committedMs": 1790996759705,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e208d76be6a785bececbce9ac4b4a3fa1c6d7a83067f75c1040055f2fadd1fc7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0983",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "70774adc-efa4-4ad4-b8fc-d0a98ba03ee5",
+                "ticketId": "R44-CORPUS-0983",
+                "code": "MLS-V02-0368",
+                "idempotencyKey": "R44-CORPUS-0983:MLS-V02-0368:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "32b8f8a3f7b2dca25e9a9afdab2c3c3b990eddbf26e8d128dc57c69822f45197",
+                "sourceSha256": "2de6ad7e9f4c1d42819419378100173b7055c441334baec7f97d72d21094655b",
+                "committedMs": 1790996759936,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "4f584920619c43ea0e3a3bb04d275d195ddcfc0c7cf1945bc1dd9fd8f58d56ff",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0983",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d2e3a49b-f361-40ab-aa99-7685080646ea",
+                "ticketId": "R44-CORPUS-0983",
+                "code": "MLS-V02-0369",
+                "idempotencyKey": "R44-CORPUS-0983:MLS-V02-0369:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "01ba1398563829aec26c8a3db368f9bbea7fdd71cfe4b47cfd98f6871054f3e2",
+                "sourceSha256": "576dcad2623ecb7137d76ea7e1532fdf0668937830b74dcca8137e874f3d28c5",
+                "committedMs": 1790996760176,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "05f80eb243572caab755d14acb6d6b42ce91e604f353f7695fbf96a474b87313",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0983",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "bc69daf9-c277-4a40-a441-1c2960540d4e",
+                "ticketId": "R44-CORPUS-0983",
+                "code": "MLS-V02-0370",
+                "idempotencyKey": "R44-CORPUS-0983:MLS-V02-0370:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "CORRECTED",
+                "payloadSha256": "d5e75e6d85296e4f765d8a9ad38861599a7b6b83146ce4711426723c4b53992f",
+                "sourceSha256": "4773f71c6d1c50dab0c1fe724f6722149d3fa75d0ca48f51f9b234bea6ad8b98",
+                "committedMs": 1790996760417,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b06fddfb6729ade5c50d2ba8143f9311f2cd9514acece67fb3820fc8bedf9e16",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0983",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "dceff279-8c71-4d8a-8e48-a8e8e63e5521",
+                "ticketId": "R44-CORPUS-0983",
+                "code": "MLS-V02-0371",
+                "idempotencyKey": "R44-CORPUS-0983:MLS-V02-0371:legacy-v1",
+                "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "60263d9410ce299db0d386289e05be6af14011129ff46a0291e8b4079bad1cca",
+                "sourceSha256": "b90daf6537d701af27ff17d711956871b45a6ae5ded353690fcd699786342f8a",
+                "committedMs": 1790996760651,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "39caf0b82f1f312969d93378314f662a00aed3d829784ff7168b18c8f82d6334",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-f397b239-7582-4022-b2b1-c315250869fe",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "9b92d6a22b0f8c92e0d9bcdab0c7a70104d8c5fec435ef11f88f6301b0ed94db"
+          }
+        },
+        "completedAt": "2026-10-03T03:06:00.979Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-448bd058-b544-45b7-b6f1-585ee3227916",
+          "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0984",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997061034,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0372",
+                "path": "portugues/MLS-V02-0372.json",
+                "sha256": "7891ba19de7abf68bbf9100a3492566f6c60fb4b3f9b6a2dd45ff123b05402a1"
+              },
+              {
+                "code": "MLS-V02-0374",
+                "path": "portugues/MLS-V02-0374.json",
+                "sha256": "8a8587ef856ed47ea20de9737cb0032b44b6b1a1ae927cb65f6de69694b3a7f4"
+              },
+              {
+                "code": "MLS-V02-0375",
+                "path": "portugues/MLS-V02-0375.json",
+                "sha256": "da8dce124aaa844d58075c607810cbceed3e35e76942a9e58e56e7366cc79f24"
+              },
+              {
+                "code": "MLS-V02-0376",
+                "path": "portugues/MLS-V02-0376.json",
+                "sha256": "87225b24187a72b06511a05cc6817c38cf8cfdb86944268158540449128e82ba"
+              },
+              {
+                "code": "MLS-V02-0377",
+                "path": "portugues/MLS-V02-0377.json",
+                "sha256": "05bfe725dcf8769075c820b86c1746cdf7d778476dea8b49d35f68715410d4b2"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0984",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0372",
+                "path": "portugues/MLS-V02-0372.json",
+                "sha256": "7891ba19de7abf68bbf9100a3492566f6c60fb4b3f9b6a2dd45ff123b05402a1"
+              },
+              {
+                "code": "MLS-V02-0374",
+                "path": "portugues/MLS-V02-0374.json",
+                "sha256": "8a8587ef856ed47ea20de9737cb0032b44b6b1a1ae927cb65f6de69694b3a7f4"
+              },
+              {
+                "code": "MLS-V02-0375",
+                "path": "portugues/MLS-V02-0375.json",
+                "sha256": "da8dce124aaa844d58075c607810cbceed3e35e76942a9e58e56e7366cc79f24"
+              },
+              {
+                "code": "MLS-V02-0376",
+                "path": "portugues/MLS-V02-0376.json",
+                "sha256": "87225b24187a72b06511a05cc6817c38cf8cfdb86944268158540449128e82ba"
+              },
+              {
+                "code": "MLS-V02-0377",
+                "path": "portugues/MLS-V02-0377.json",
+                "sha256": "05bfe725dcf8769075c820b86c1746cdf7d778476dea8b49d35f68715410d4b2"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0372",
+              "MLS-V02-0374",
+              "MLS-V02-0375",
+              "MLS-V02-0376",
+              "MLS-V02-0377"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997061034,
+              "active": true
+            },
+            "workerId": "r44-chat-20261003T0255-sol-jdp-c91d",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997061034,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0372",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 372,
+                "title": "Conjugación y usos del verbo obter",
+                "level": "B1",
+                "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+                "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos",
+                "articleMarkdown": "#### En pocas palabras\n\n**Obter** significa “obtener”, “conseguir” o “lograr disponer de algo”. Es un verbo irregular relacionado con **ter**, y conserva buena parte de sus cambios: **eu obtenho**, **ele obtém**, **nós obtemos**, **eles obtêm**.\n\nSuele llevar directamente aquello que se obtiene: **obter informações**, **obter autorização**, **obter um resultado**. En muchos contextos cotidianos puede alternar semánticamente con **conseguir**, aunque **obter** es frecuente en registros administrativos, académicos y formales.\n\n#### Cómo funciona\n\nEn el presente de indicativo aparecen **eu obtenho, você/ele/ela obtém, nós obtemos, vocês/eles/elas obtêm**. El singular **obtém** y el plural **obtêm** se distinguen gráficamente mediante el acento, igual que otras formas derivadas de **ter**.\n\nEl presente de subjuntivo presenta **que eu obtenha, que você obtenha, que nós obtenhamos, que eles obtenham**. En el futuro de subjuntivo se usan formas como **quando eu obtiver** y **quando eles obtiverem**.\n\nEn el pretérito perfecto aparecen **eu obtive, ela obteve, nós obtivemos, eles obtiveram**. El imperfecto es **obtinha** y el participio es **obtido**, como en **tem obtido bons resultados**.\n\n#### Ejemplos\n\n* **Eu obtenho os dados diretamente do sistema.**  \n  *(Obtengo los datos directamente del sistema.)*  \n  **Obtenho** es la primera persona del presente.\n\n* **A equipe obteve autorização para iniciar o projeto.**  \n  *(El equipo obtuvo autorización para iniciar el proyecto.)*  \n  **Obteve** expresa una acción terminada en el pasado.\n\n* **Se você obtiver mais informações, avise-me.**  \n  *(Si obtiene más información, avíseme.)*  \n  **Obtiver** es futuro de subjuntivo después de **se**, referido a una condición futura.\n\n#### Observación importante\n\nLa relación con **ter** explica varias formas: **tenho → obtenho**, **teve → obteve**, **tiver → obtiver**. Por eso son incorrectas regularizaciones como *obteu* o *obterá* cuando lo que se quiere expresar es pasado; **obterá** sí existe, pero es futuro de indicativo.\n\nAunque **obter** y **conseguir** pueden traducirse a veces de manera parecida, no son completamente intercambiables en todos los contextos. **Conseguir** también puede expresar capacidad o éxito en realizar una acción: **consegui abrir a porta**, mientras **obter** suele enfocarse en adquirir un resultado, permiso, dato o recurso.\n\n#### Entradas relacionadas\n\n[370. Conjugação e usos do verbo intervir](#entrada-370) · [371. Conjugação e usos do verbo manter](#entrada-371) · [373. Verbos defectivos de uso formal](#entrada-373) · [374. Particípios abundantes e escolha de auxiliar](#entrada-374) · [325. Conjugação regular de decidir](#entrada-325)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-345f435f7a363ccb222f41f382ada484d1ad41764d170385523e8fe4a3d2420c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:15:31.498Z"
+              },
+              {
+                "code": "MLS-V02-0374",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 374,
+                "title": "Participios abundantes y elección de auxiliar",
+                "level": "B2",
+                "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+                "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos",
+                "articleMarkdown": "#### En pocas palabras\n\nAlgunos verbos portugueses tienen **más de un participio**, normalmente una forma regular y otra corta o irregular: **aceitado/aceito**, **pagado/pago**, **ganhado/ganho**. Por eso se llaman tradicionalmente **verbos abundantes** en el participio.\n\nEl participio aparece tanto en tiempos compuestos con **ter** o **haver** como en construcciones pasivas con **ser** y en usos próximos al adjetivo. La elección entre las dos formas depende del verbo, del auxiliar, del registro y del uso real.\n\n#### Cómo funciona\n\nUna regla escolar tradicional recomienda el participio regular con **ter/haver** —**tinha aceitado**— y el corto con **ser/estar** —**foi aceito**, **estava aceito**—. Esa pauta ayuda como primera aproximación, pero no describe toda la variación del portugués brasileño contemporáneo.\n\nCon varios verbos, las formas cortas son normales también después de **ter**: **tinha pago**, **tinha ganho**, **tinha gasto** son construcciones ampliamente usadas. En otros casos, la distribución puede ser más conservadora o variar entre hablantes y registros. Por eso no conviene aplicar una fórmula mecánica a todos los verbos abundantes.\n\nHay además una diferencia de concordancia. Después de **ter/haver**, el participio normalmente permanece invariable: **elas tinham aceitado a proposta**. En una pasiva con **ser**, el participio concuerda con el sujeto: **a proposta foi aceita**; **os pedidos foram aceitos**.\n\n#### Ejemplos\n\n* **Eu tinha aceitado o convite.**  \n  *(Yo había aceptado la invitación.)*  \n  **Aceitado** es el participio regular en un tiempo compuesto con **ter**.\n\n* **O convite foi aceito ontem.**  \n  *(La invitación fue aceptada ayer.)*  \n  **Aceito** aparece en una pasiva y concuerda en género y número cuando corresponde.\n\n* **Eles já tinham pago a conta.**  \n  *(Ellos ya habían pagado la cuenta.)*  \n  **Pago** muestra que una forma corta también puede combinarse naturalmente con **ter** en el uso brasileño.\n\n#### Observación importante\n\nNo todos los pares tienen la misma vitalidad. Una forma puede ser común, rara, especializada o incluso haber desplazado casi por completo a su alternativa. La elección debe aprenderse verbo por verbo y comprobarse en el registro pertinente.\n\nTambién conviene distinguir un participio verbal de un adjetivo lexicalizado. Una forma como **aberto** puede participar en una pasiva —**a porta foi aberta**— o describir un estado —**a porta está aberta**—, y la construcción completa determina su función.\n\n#### Entradas relacionadas\n\n[372. Conjugação e usos do verbo obter](#entrada-372) · [373. Verbos defectivos de uso formal](#entrada-373) · [375. Auxiliar ter](#entrada-375) · [376. Auxiliar haver em tempos compostos](#entrada-376) · [315. Verbos abundantes](#entrada-315)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-fb25eb1cd1ca8154a341dc6985d988a9f6b157320d79c3e260cdb58309c77388",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:16:42.694Z"
+              },
+              {
+                "code": "MLS-V02-0375",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 375,
+                "title": "Auxiliar ter",
+                "level": "B2",
+                "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+                "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos",
+                "articleMarkdown": "#### En pocas palabras\n\n**Ter** funciona como verbo auxiliar cuando acompaña a un participio para formar un tiempo compuesto: **tinha estudado**, **terá terminado**, **teria chegado**, **tenho lido**. En estas construcciones, **ter** aporta la persona, el tiempo y el modo, mientras el participio expresa el contenido principal de la acción.\n\nEsto debe distinguirse de otros usos de **ter**. En **Tenho três irmãos**, significa posesión y no es auxiliar. En el portugués brasileño hablado también es frecuente el **ter** existencial de **Tem muita gente aqui**, que tampoco forma un tiempo compuesto.\n\n#### Cómo funciona\n\nEn **Ela tinha estudado antes da prova**, **tinha** está en imperfecto y **estudado** es el participio de *estudar*. El conjunto sitúa el estudio antes de otro punto del pasado. De manera semejante, **terá terminado** presenta una acción como anterior a un punto futuro, y **teria chegado** la sitúa dentro de una relación condicional o hipotética.\n\nDespués de **ter**, el participio normalmente permanece invariable: **ela tinha estudado**, **elas tinham estudado**. La concordancia de persona y número aparece en el auxiliar: **tinha/tinham**, no en el participio.\n\nEl **pretérito perfeito composto** con presente de *ter*, como **tenho estudado**, merece atención especial. En portugués brasileño suele expresar una actividad repetida, continuada o recurrente durante un período que llega hasta el presente. Por eso no equivale automáticamente al perfecto español ni al *present perfect* inglés usado para un único hecho terminado.\n\n#### Ejemplos\n\n* **Quando liguei, ela já tinha saído.**  \n  *(Cuando llamé, ella ya había salido.)*  \n  **Tinha saído** presenta la salida como anterior a la llamada.\n\n* **Tenho lido muito sobre o assunto ultimamente.**  \n  *(Últimamente he estado leyendo mucho sobre el tema.)*  \n  La construcción sugiere una actividad repetida o continuada en un período reciente.\n\n* **Elas tinham pago a conta antes de sair.**  \n  *(Ellas habían pagado la cuenta antes de salir.)*  \n  **Pago** permanece invariable aunque el sujeto sea plural.\n\n#### Observación importante\n\nCon participios que poseen más de una forma, la elección no puede reducirse a una regla absoluta del tipo “forma regular con **ter**”. En el uso brasileño son naturales construcciones como **tinha pago**, y la distribución depende del verbo y del registro.\n\nAdemás, **Tem muita gente aqui** es muy frecuente en Brasil con sentido existencial. En escritura formal puede preferirse **Há muita gente aqui**. En ese uso, **ter** no es auxiliar porque no está construyendo un tiempo compuesto con participio.\n\n#### Entradas relacionadas\n\n[373. Verbos defectivos de uso formal](#entrada-373) · [374. Particípios abundantes e escolha de auxiliar](#entrada-374) · [376. Auxiliar haver em tempos compostos](#entrada-376) · [377. Auxiliar ser](#entrada-377) · [293. Clítico entre auxiliar e infinitivo/gerúndio](#entrada-293)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e3c2de6c5a7714a7ba267fd2d54ee954ccd9922642630e2dffe40bdf65e32872",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:17:36.227Z"
+              },
+              {
+                "code": "MLS-V02-0376",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 376,
+                "title": "Auxiliar haver en tiempos compuestos",
+                "level": "B2",
+                "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+                "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos",
+                "articleMarkdown": "#### En pocas palabras\n\n**Haver** puede funcionar como verbo auxiliar seguido de participio para formar tiempos compuestos: **havia terminado**, **havia chegado**, **haverá concluído**. En este uso se parece a **ter**, aunque en el portugués brasileño contemporáneo **ter + participio** es generalmente mucho más frecuente, sobre todo en la conversación.\n\nCuando **haver** es auxiliar, aporta persona, número, tiempo y modo; el participio expresa el contenido léxico principal. Este uso debe distinguirse del **haver** existencial de **há muitos problemas**, que es impersonal.\n\n#### Cómo funciona\n\nEn **Ela havia terminado o trabalho**, **havia** está en imperfecto y **terminado** es el participio. El conjunto presenta el final del trabajo como anterior a otro punto del pasado. La construcción equivale funcionalmente a **ela tinha terminado**, opción muy habitual en Brasil.\n\nComo auxiliar, **haver** puede concordar con el sujeto: **eu havia saído**, **eles haviam saído**. El participio normalmente permanece invariable: **elas haviam terminado a tarefa**, no cambia por género o número del sujeto.\n\nTambién aparecen formas como **haverá terminado** y **haveria acontecido**, especialmente en registros escritos o formales. En muchos contextos brasileños, las correspondientes construcciones con **ter** —**terá terminado**, **teria acontecido**— resultan más corrientes.\n\n#### Ejemplos\n\n* **Havia terminado o trabalho antes das oito.**  \n  *(Había terminado el trabajo antes de las ocho.)*  \n  **Havia terminado** forma un tiempo compuesto con valor de anterioridad en el pasado.\n\n* **Os técnicos haviam identificado o problema.**  \n  *(Los técnicos habían identificado el problema.)*  \n  **Haviam** concuerda con el sujeto plural porque aquí **haver** es auxiliar.\n\n* **Quando chegamos, o evento já havia começado.**  \n  *(Cuando llegamos, el evento ya había comenzado.)*  \n  La acción de comenzar es anterior a la llegada.\n\n#### Observación importante\n\nLa concordancia permite ver una diferencia importante entre dos usos. En **Os técnicos haviam terminado**, **haver** es auxiliar y aparece en plural. En **Havia muitos técnicos na sala**, el verbo es existencial y, en la norma formal, permanece en tercera persona singular.\n\nEl carácter más formal de **haver + participio** no significa que sea incorrecto ni exclusivo de textos antiguos. Sigue siendo una construcción gramatical y se encuentra en escritura contemporánea, aunque **ter** ocupa gran parte de su espacio en el portugués brasileño común.\n\n#### Entradas relacionadas\n\n[374. Particípios abundantes e escolha de auxiliar](#entrada-374) · [375. Auxiliar ter](#entrada-375) · [377. Auxiliar ser](#entrada-377) · [378. Auxiliar estar](#entrada-378) · [478. Particípio em tempos compostos](#entrada-478)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2d39b71448718064878c6355b225ce1e6387dc98122e5fe4d8353904dceb474a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:18:09.266Z"
+              },
+              {
+                "code": "MLS-V02-0377",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 377,
+                "title": "Auxiliar ser",
+                "level": "B2",
+                "part": "El verbo: morfología, conjugación e irregularidad — O verbo: morfologia, conjugação e irregularidade",
+                "chapter": "Verbos irregulares, auxiliares y defectivos — Verbos irregulares, auxiliares e defectivos",
+                "articleMarkdown": "#### En pocas palabras\n\n**Ser** funciona como auxiliar principalmente en la **voz pasiva**, una construcción que presenta como sujeto aquello que recibe o experimenta la acción: **A carta foi enviada ontem**. Aquí **foi** es una forma de *ser* y **enviada** es el participio de *enviar*.\n\nEl auxiliar **ser** lleva la información de tiempo, modo, persona y número, mientras el participio identifica la acción. En la pasiva, el participio concuerda normalmente en género y número con el sujeto: **o documento foi enviado**, **as cartas foram enviadas**.\n\n#### Cómo funciona\n\nUna oración activa como **A empresa publicou o relatório** puede corresponder a la pasiva **O relatório foi publicado pela empresa**. El elemento que era objeto directo en la activa pasa a ser sujeto de la pasiva, y el agente puede expresarse con **por** —**pela empresa**— o quedar sin mencionar.\n\nEl tiempo de la construcción depende de **ser**: **é publicado** puede referirse al presente; **foi publicado**, a un hecho pasado; **será publicado**, a uno futuro; **tinha sido publicado** combina auxiliares para indicar anterioridad en el pasado.\n\nNo cualquier verbo produce naturalmente una pasiva con **ser**. La construcción se asocia sobre todo con verbos que admiten un objeto directo en la correspondiente oración activa. Además, la frecuencia de la pasiva depende del género discursivo y de lo que el hablante quiera destacar.\n\n#### Ejemplos\n\n* **A carta foi enviada ontem.**  \n  *(La carta fue enviada ayer.)*  \n  **Foi enviada** forma una pasiva; **enviada** concuerda con **a carta**.\n\n* **Os resultados serão divulgados amanhã.**  \n  *(Los resultados serán divulgados mañana.)*  \n  **Serão** marca futuro y plural; **divulgados** concuerda con el sujeto masculino plural.\n\n* **O projeto foi aprovado pela comissão.**  \n  *(El proyecto fue aprobado por la comisión.)*  \n  **Pela comissão** expresa el agente de la acción.\n\n#### Observación importante\n\n**Ser + participio** no debe confundirse con todos los usos de **ser**. En **Ela é médica**, *ser* funciona como verbo copulativo y no hay pasiva. La estructura y el significado de la oración determinan su función.\n\nTambién conviene distinguir **ser** y **estar** con participio. **A porta foi fechada às oito** presenta normalmente el acto de cerrarla; **A porta estava fechada às oito** describe su estado en ese momento. La diferencia no se reduce a una traducción literal y depende de la construcción completa.\n\n#### Entradas relacionadas\n\n[375. Auxiliar ter](#entrada-375) · [376. Auxiliar haver em tempos compostos](#entrada-376) · [378. Auxiliar estar](#entrada-378) · [379. Auxiliar ir](#entrada-379) · [293. Clítico entre auxiliar e infinitivo/gerúndio](#entrada-293)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-df84eb189a9156e871ef2b4768d33fb871f8a59f7915e9767b4b3148684fa8ae",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:18:43.618Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:06:01.918Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:06:01.918Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-jdp-c91d/04-renew-submit-0983-claim03.json"
+}
