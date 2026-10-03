@@ -1,0 +1,42 @@
+{
+  "batchId": "r44-m10-5c72-ticket08-close-next",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-a10083cf-ef17-44fc-9a13-8513de0f7fb2",
+        "ticketId": "R43-EMERGENCY-0681",
+        "entries": [
+          {
+            "code": "MLS-V06-1007",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V06-1008",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V06-1009",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V06-1010",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V06-1012",
+            "outcome": "PASS_NO_CHANGE"
+          }
+        ]
+      }
+    },
+    {
+      "operationId": "r44ClaimChat",
+      "input": {
+        "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+        "idempotencyKey": "r44-m10-20261002-2045-jdp-sol-5c72-claim-09"
+      }
+    }
+  ]
+}
