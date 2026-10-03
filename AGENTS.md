@@ -31,9 +31,13 @@ This repository is the canonical source for MLS project contracts and operationa
 
 ## MLS R44 commands
 
-For `MLS R44 siguiente`, read:
+For `MLS R44 siguiente` or `MLS R44 siguientes 10`, read:
 
 `docs/MLS Global Dispatcher/25 R44 Disposable Chat Command.md`
+
+`MLS R44 siguiente` remains the single-ticket compatibility command.
+
+`MLS R44 siguientes 10` is the preferred optimized same-chat command. Execute up to 10 complete R44 tickets sequentially in the current chat. Never prefetch tickets and never hold more than one active lease for the chat. Claim the next ticket only after the previous ticket is confirmed COMPLETE with durable entry receipts / AUDITED_DURABLE (or an idempotent already-durable acknowledgement). Stop the loop immediately on NO_WORK, CAPACITY_BUSY, LEASE_LOST, QUARANTINED, CLIENT_TRANSPORT_UNAVAILABLE_FREE_ONLY, ambiguous unconfirmed completion, or insufficient remaining execution capacity. Preserve every already-confirmed durable checkpoint and never replace recovery of the current ticket with a fresh claim.
 
 Mandatory transport rules:
 

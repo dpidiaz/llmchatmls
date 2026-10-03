@@ -1,8 +1,10 @@
 # MLS R44 — disposable chat command
 
-Visible command:
+Visible commands:
 
-`MLS R44 siguiente`
+`MLS R44 siguiente` — process exactly one ticket.
+
+`MLS R44 siguientes 10` — preferred optimized mode; process up to 10 tickets sequentially in this same chat.
 
 ## Parallel production contract
 
@@ -15,6 +17,30 @@ R44 production is **not globally serialized**. Up to 128 disposable chats may ho
 - GitHub is not in the claim, renew, context, submit, recovery, or preview hot path.
 - Canonical GitHub publication happens later in grouped batches and must never pause Cloudflare/D1 production.
 - CAPACITY_BUSY means the 128-active-lease ceiling is temporarily full; it is not a global serialization lock.
+
+## Same-chat sequential multi-pull (10 tickets)
+
+For `MLS R44 siguientes 10`, run a bounded in-chat loop of at most 10 complete tickets.
+
+1. Claim exactly one ticket.
+2. Audit/checkpoint all assigned entries and recover/retry that same ticket as required.
+3. Confirm the ticket is COMPLETE and every durable write has a verified receipt. A full-ticket compatibility submit may finish with `AUDITED_DURABLE` or `RESULT_ALREADY_SUBMITTED`; entry-checkpoint mode may finish through the normalized COMPLETE state with all entry receipts durable.
+4. Only then clear the completed binding and create the next explicit claim with a fresh claim/idempotency key.
+5. Repeat until 10 tickets are complete or a stop condition is reached.
+
+Invariants:
+
+- Never prefetch the next ticket.
+- Never hold two active leases for one chat.
+- Never open a fresh claim to recover an interrupted or ambiguous current ticket.
+- Use renew only for the currently owned ticket and only when needed.
+- Preserve already-confirmed entry checkpoints if the chat or transport is interrupted.
+- Stop immediately on `NO_WORK`, `CAPACITY_BUSY`, `LEASE_LOST`, `QUARANTINED`, `CLIENT_TRANSPORT_UNAVAILABLE_FREE_ONLY`, an unconfirmed ambiguous completion that cannot be reconciled safely, or insufficient remaining execution capacity to finish another ticket.
+- A stop after fewer than 10 tickets is a successful bounded run, not a reason to pre-claim work.
+- This loop is synchronous inside the current ChatGPT turn/conversation only. It is never background execution and never ChatGPT Work.
+- The singular `MLS R44 siguiente` command remains one-ticket behavior for backward compatibility.
+
+The bundled client already enforces the key ownership transition: `next()` first calls `recover()`, requires `state === "COMPLETE"`, clears only the completed binding, and then issues a fresh claim. The optimized command must preserve that ordering.
 
 ## Worker contract
 
