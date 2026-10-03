@@ -1,0 +1,512 @@
+{
+  "batchId": "r44-0331-audit-close-20261003T0352Z-sol-jd-r44next",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-7c447238-93a6-417b-b16c-468a7f32f5d3"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7c447238-93a6-417b-b16c-468a7f32f5d3",
+        "ticketId": "R43-EMERGENCY-0331",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R43-EMERGENCY-0331:MLS-V05-0025:audit-20261003T0352Z-sol-jd-r44next-v1",
+        "entry": {
+          "code": "MLS-V05-0025",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### Umlaut ü /ʏ, yː/\n\n#### En pocas palabras\nLa letra **ü** puede representar dos vocales anteriores redondeadas en alemán: una **corta [ʏ]** y una **larga [yː]**. Para un hispanohablante, ambas requieren mantener la lengua en una posición parecida a la de **i** mientras se redondean los labios.\n\n#### Cómo funciona\nLa duración vocálica en alemán no se puede deducir con una regla absoluta del tipo «una consonante = larga, dos consonantes = corta». La ortografía sí ofrece pistas útiles:\n\n1. **Vocal corta:** cuando una vocal tónica corta va seguida en el radical por un solo sonido consonántico, la escritura suele marcar la brevedad duplicando la consonante, como en **müssen**. También hay contextos con varios sonidos consonánticos en los que la vocal es corta.\n2. **Vocal larga:** puede aparecer sin una marca especial o con señales ortográficas de longitud. Si después de la vocal aparece una sola consonante, la vocal puede ser corta **o** larga; la pronunciación concreta forma parte de la palabra y debe aprenderse con ella.\n\n#### Ejemplos\n* **müssen** /ˈmʏsən/ (tener que): la **ü** es corta.\n* **Tür** /tyːɐ̯/ (puerta): la **ü** es larga; no debe explicarse como consecuencia automática de que haya una sola consonante.\n* **Glück** /ɡlʏk/ (suerte): la **ü** es corta.\n* **über** /ˈyːbɐ/ (sobre/encima de): la **ü** es larga.\n\n#### Observación importante\nPara aproximar la articulación, coloca la lengua como para una **i** española y, sin moverla hacia atrás, redondea los labios como para una **u**. La diferencia entre [ʏ] y [yː] no es solo «decir lo mismo durante más tiempo»: en la pronunciación estándar también intervienen diferencias de calidad vocálica, además de la duración.\n\n#### Entradas relacionadas\n* [Umlaut ö /œ, øː/](#entry-24)\n* [Umlaut ä /ɛː/ y variantes](#entry-23)\n* [Vocal corta /a/](#entry-26)\n* [Vocal corta /ɛ/](#entry-27)"
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "Se corrige la regla demasiado absoluta sobre la consonante siguiente y la afirmación de que Tür tiene ü larga porque la sílaba sería abierta. La normativa ortográfica alemana indica que con una sola consonante posterior la vocal puede ser corta o larga; se mantienen los valores [ʏ] y [yː] y los ejemplos.",
+            "changes": [
+              "Se elimina la equivalencia incorrecta «una consonante = vocal larga».",
+              "Se corrige la explicación de Tür: su vocal larga es léxica y no deriva de una supuesta sílaba abierta.",
+              "Se precisa que [ʏ] y [yː] difieren también en calidad, no solo en duración."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "En alemán, ü representa tanto un valor corto [ʏ] como un valor largo [yː].",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Cuando a una vocal tónica le sigue un solo sonido consonántico, la vocal puede ser corta o larga; la duplicación consonántica es una marca ortográfica de brevedad en los casos regulados.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. Amtliches Regelwerk, 1 Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+            },
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.2 Besondere Kennzeichnung der kurzen Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6173"
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7c447238-93a6-417b-b16c-468a7f32f5d3",
+        "ticketId": "R43-EMERGENCY-0331",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R43-EMERGENCY-0331:MLS-V05-0027:audit-20261003T0352Z-sol-jd-r44next-v1",
+        "entry": {
+          "code": "MLS-V05-0027",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada identifica correctamente la /ɛ/ breve, usa ejemplos adecuados con e antes de consonante duplicada y contrasta de forma pedagógicamente válida /ɛ/ con /eː/. La formulación sobre grupos consonánticos es simplificada, pero no introduce un error sustantivo.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "La e breve del alemán puede realizarse como [ɛ], y la ortografía alemana marca muchos casos de vocal tónica breve mediante duplicación de la consonante siguiente.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Formas como betten muestran [ɛ] breve y el sistema alemán distingue vocales breves y largas de manera léxicamente relevante.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+            },
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.2 Besondere Kennzeichnung der kurzen Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6173"
+            },
+            {
+              "type": "dictionary",
+              "tier": "A",
+              "citation": "Duden. betten — Lautschrift [ˈbɛtn̩].",
+              "url": "https://www.duden.de/rechtschreibung/betten"
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7c447238-93a6-417b-b16c-468a7f32f5d3",
+        "ticketId": "R43-EMERGENCY-0331",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R43-EMERGENCY-0331:MLS-V05-0028:audit-20261003T0352Z-sol-jd-r44next-v1",
+        "entry": {
+          "code": "MLS-V05-0028",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La descripción de /aː/ como vocal larga, los ejemplos Tag, Name y Bahn y la función del Dehnungs-h en Bahn son compatibles con las reglas y referencias normativas. La entrada presenta patrones frecuentes sin afirmar que agoten todos los casos.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "El alemán posee una vocal larga [aː] escrita con a en palabras nativas y de otros orígenes.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "Los vocales largos pueden aparecer sin marca gráfica especial o con Dehnungs-h; Bahn es un ejemplo canónico de longitud marcada con h.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+            },
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.3 Besondere Kennzeichnung der langen Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6174"
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7c447238-93a6-417b-b16c-468a7f32f5d3",
+        "ticketId": "R43-EMERGENCY-0331",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R43-EMERGENCY-0331:MLS-V05-0029:audit-20261003T0352Z-sol-jd-r44next-v1",
+        "entry": {
+          "code": "MLS-V05-0029",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### Langes /eː/\n\n#### En pocas palabras\nLa vocal larga **/eː/** es una vocal anterior no redondeada del alemán. Se articula con la lengua más alta que la **/ɛ/** breve y, en la pronunciación estándar, contrasta con ella tanto por duración como por calidad.\n\n#### Cómo funciona\nLa escritura alemana ofrece varias pistas para reconocer una **e** larga, pero ninguna regla simple cubre todas las palabras:\n\n1. **e simple:** una **e** puede ser larga sin una marca especial, como en **leben** /ˈleːbən/.\n2. **ee:** la duplicación de la vocal puede señalar longitud, como en **See** /zeː/.\n3. **Dehnungs-h:** en determinadas palabras una **h** no pronunciada marca que la vocal anterior es larga, como en **zehn** /tseːn/.\n4. **h separadora de sílabas:** en palabras como **sehen** /ˈzeːən/, la **h** separa dos vocales pertenecientes a sílabas distintas; no conviene describirla simplemente como una Dehnungs-h.\n\n#### Ejemplos\n* **leben** /ˈleːbən/ (vivir): la primera **e** es larga.\n* **See** /zeː/ (lago/mar): **ee** representa una vocal larga.\n* **sehen** /ˈzeːən/ (ver): la primera **e** es larga y la **h** funciona como separadora silábica entre vocales.\n* **Beet** /beːt/ (parterre/lecho de cultivo) frente a **Bett** /bɛt/ (cama): el contraste muestra que /eː/ y /ɛ/ distinguen palabras.\n\n#### Observación importante\nPara un hispanohablante, no basta con alargar una **e** española. La **/eː/** alemana estándar es más cerrada que **/ɛ/**. Conviene aprender cada palabra junto con su pronunciación y usar las señales ortográficas como ayudas, no como reglas absolutas.\n\n#### Entradas relacionadas\n* [Vocal corta /ɛ/ — Kurzes /ɛ/](#entry-27)\n* [Vocal larga /aː/ — Langes /aː/](#entry-28)\n* [Vocal larga /iː/ — Langes /iː/](#entry-30)"
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "La entrada estaba truncada a mitad del ejemplo Beet /beːt/. Se completa íntegramente y se corrige además la caracterización de la h de sehen: es una h separadora de sílabas, no simplemente una marca de alargamiento.",
+            "changes": [
+              "Se completa el artículo que terminaba abruptamente en «Beet /beːt/».",
+              "Se distingue e simple, ee, Dehnungs-h y h separadora de sílabas.",
+              "Se conserva el contraste pedagógico /eː/ frente a /ɛ/ y se completa Beet/Bett."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "El alemán estándar distingue una vocal larga [eː] de la vocal breve [ɛ].",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La longitud puede representarse con e simple, ee o Dehnungs-h; en sehen la h es separadora de sílabas y no debe tratarse sin más como Dehnungs-h.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+            },
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.3 Besondere Kennzeichnung der langen Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6174"
+            },
+            {
+              "type": "dictionary",
+              "tier": "A",
+              "citation": "Duden. See — Lautschrift [zeː].",
+              "url": "https://www.duden.de/rechtschreibung/See_Meer"
+            },
+            {
+              "type": "dictionary",
+              "tier": "A",
+              "citation": "Duden. betten — Lautschrift [ˈbɛtn̩].",
+              "url": "https://www.duden.de/rechtschreibung/betten"
+            },
+            {
+              "type": "didactic_rule",
+              "tier": "A",
+              "citation": "Duden. Wissen–Üben–Testen Deutsch 3. Klasse: silbentrennendes h, Beispiel se-hen.",
+              "url": "https://shop.duden.de/media/cf/95/2d/1687426964/Leseprobe_9783411772025_Wissen_%E2%80%93_%C3%9Cben_%E2%80%93_Testen_Deutsch_3_Klasse.pdf?ts=1687426964"
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-7c447238-93a6-417b-b16c-468a7f32f5d3",
+        "ticketId": "R43-EMERGENCY-0331",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R43-EMERGENCY-0331:MLS-V05-0030:audit-20261003T0352Z-sol-jd-r44next-v1",
+        "entry": {
+          "code": "MLS-V05-0030",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada presenta correctamente /iː/ y el patrón ortográfico ie, con Liebe, sieben y hier como ejemplos apropiados. La frase «casi siempre» es una simplificación pedagógica aceptable porque el propio sistema ortográfico también admite i, ih e ieh en ciertos vocablos.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "En palabras alemanas nativas, [iː] se representa de forma muy frecuente mediante ie.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La normativa también reconoce otras grafías para [iː], por lo que ie es un patrón predominante y no una regla sin excepciones.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "type": "official_rule",
+              "tier": "A",
+              "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+              "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+            },
+            {
+              "type": "didactic_rule",
+              "tier": "A",
+              "citation": "Duden. 222 Rechtschreibübungen — Das lange i wird in deutschen Wörtern meist durch ie wiedergegeben; se documentan excepciones con i, ih e ieh.",
+              "url": "https://www.duden.de/222-rechtschreibuebungen"
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-7c447238-93a6-417b-b16c-468a7f32f5d3",
+        "ticketId": "R43-EMERGENCY-0331",
+        "entries": [
+          {
+            "code": "MLS-V05-0025",
+            "outcome": "CORRECTED",
+            "correctedContent": {
+              "articleMarkdown": "#### Umlaut ü /ʏ, yː/\n\n#### En pocas palabras\nLa letra **ü** puede representar dos vocales anteriores redondeadas en alemán: una **corta [ʏ]** y una **larga [yː]**. Para un hispanohablante, ambas requieren mantener la lengua en una posición parecida a la de **i** mientras se redondean los labios.\n\n#### Cómo funciona\nLa duración vocálica en alemán no se puede deducir con una regla absoluta del tipo «una consonante = larga, dos consonantes = corta». La ortografía sí ofrece pistas útiles:\n\n1. **Vocal corta:** cuando una vocal tónica corta va seguida en el radical por un solo sonido consonántico, la escritura suele marcar la brevedad duplicando la consonante, como en **müssen**. También hay contextos con varios sonidos consonánticos en los que la vocal es corta.\n2. **Vocal larga:** puede aparecer sin una marca especial o con señales ortográficas de longitud. Si después de la vocal aparece una sola consonante, la vocal puede ser corta **o** larga; la pronunciación concreta forma parte de la palabra y debe aprenderse con ella.\n\n#### Ejemplos\n* **müssen** /ˈmʏsən/ (tener que): la **ü** es corta.\n* **Tür** /tyːɐ̯/ (puerta): la **ü** es larga; no debe explicarse como consecuencia automática de que haya una sola consonante.\n* **Glück** /ɡlʏk/ (suerte): la **ü** es corta.\n* **über** /ˈyːbɐ/ (sobre/encima de): la **ü** es larga.\n\n#### Observación importante\nPara aproximar la articulación, coloca la lengua como para una **i** española y, sin moverla hacia atrás, redondea los labios como para una **u**. La diferencia entre [ʏ] y [yː] no es solo «decir lo mismo durante más tiempo»: en la pronunciación estándar también intervienen diferencias de calidad vocálica, además de la duración.\n\n#### Entradas relacionadas\n* [Umlaut ö /œ, øː/](#entry-24)\n* [Umlaut ä /ɛː/ y variantes](#entry-23)\n* [Vocal corta /a/](#entry-26)\n* [Vocal corta /ɛ/](#entry-27)"
+            },
+            "notes": {
+              "auditStatus": "CORRECTED",
+              "summary": "Se corrige la regla demasiado absoluta sobre la consonante siguiente y la afirmación de que Tür tiene ü larga porque la sílaba sería abierta. La normativa ortográfica alemana indica que con una sola consonante posterior la vocal puede ser corta o larga; se mantienen los valores [ʏ] y [yː] y los ejemplos.",
+              "changes": [
+                "Se elimina la equivalencia incorrecta «una consonante = vocal larga».",
+                "Se corrige la explicación de Tür: su vocal larga es léxica y no deriva de una supuesta sílaba abierta.",
+                "Se precisa que [ʏ] y [yː] difieren también en calidad, no solo en duración."
+              ],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En alemán, ü representa tanto un valor corto [ʏ] como un valor largo [yː].",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Cuando a una vocal tónica le sigue un solo sonido consonántico, la vocal puede ser corta o larga; la duplicación consonántica es una marca ortográfica de brevedad en los casos regulados.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. Amtliches Regelwerk, 1 Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+              },
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.2 Besondere Kennzeichnung der kurzen Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6173"
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0027",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada identifica correctamente la /ɛ/ breve, usa ejemplos adecuados con e antes de consonante duplicada y contrasta de forma pedagógicamente válida /ɛ/ con /eː/. La formulación sobre grupos consonánticos es simplificada, pero no introduce un error sustantivo.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "La e breve del alemán puede realizarse como [ɛ], y la ortografía alemana marca muchos casos de vocal tónica breve mediante duplicación de la consonante siguiente.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Formas como betten muestran [ɛ] breve y el sistema alemán distingue vocales breves y largas de manera léxicamente relevante.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+              },
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.2 Besondere Kennzeichnung der kurzen Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6173"
+              },
+              {
+                "type": "dictionary",
+                "tier": "A",
+                "citation": "Duden. betten — Lautschrift [ˈbɛtn̩].",
+                "url": "https://www.duden.de/rechtschreibung/betten"
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0028",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La descripción de /aː/ como vocal larga, los ejemplos Tag, Name y Bahn y la función del Dehnungs-h en Bahn son compatibles con las reglas y referencias normativas. La entrada presenta patrones frecuentes sin afirmar que agoten todos los casos.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "El alemán posee una vocal larga [aː] escrita con a en palabras nativas y de otros orígenes.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Los vocales largos pueden aparecer sin marca gráfica especial o con Dehnungs-h; Bahn es un ejemplo canónico de longitud marcada con h.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+              },
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.3 Besondere Kennzeichnung der langen Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6174"
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0029",
+            "outcome": "CORRECTED",
+            "correctedContent": {
+              "articleMarkdown": "#### Langes /eː/\n\n#### En pocas palabras\nLa vocal larga **/eː/** es una vocal anterior no redondeada del alemán. Se articula con la lengua más alta que la **/ɛ/** breve y, en la pronunciación estándar, contrasta con ella tanto por duración como por calidad.\n\n#### Cómo funciona\nLa escritura alemana ofrece varias pistas para reconocer una **e** larga, pero ninguna regla simple cubre todas las palabras:\n\n1. **e simple:** una **e** puede ser larga sin una marca especial, como en **leben** /ˈleːbən/.\n2. **ee:** la duplicación de la vocal puede señalar longitud, como en **See** /zeː/.\n3. **Dehnungs-h:** en determinadas palabras una **h** no pronunciada marca que la vocal anterior es larga, como en **zehn** /tseːn/.\n4. **h separadora de sílabas:** en palabras como **sehen** /ˈzeːən/, la **h** separa dos vocales pertenecientes a sílabas distintas; no conviene describirla simplemente como una Dehnungs-h.\n\n#### Ejemplos\n* **leben** /ˈleːbən/ (vivir): la primera **e** es larga.\n* **See** /zeː/ (lago/mar): **ee** representa una vocal larga.\n* **sehen** /ˈzeːən/ (ver): la primera **e** es larga y la **h** funciona como separadora silábica entre vocales.\n* **Beet** /beːt/ (parterre/lecho de cultivo) frente a **Bett** /bɛt/ (cama): el contraste muestra que /eː/ y /ɛ/ distinguen palabras.\n\n#### Observación importante\nPara un hispanohablante, no basta con alargar una **e** española. La **/eː/** alemana estándar es más cerrada que **/ɛ/**. Conviene aprender cada palabra junto con su pronunciación y usar las señales ortográficas como ayudas, no como reglas absolutas.\n\n#### Entradas relacionadas\n* [Vocal corta /ɛ/ — Kurzes /ɛ/](#entry-27)\n* [Vocal larga /aː/ — Langes /aː/](#entry-28)\n* [Vocal larga /iː/ — Langes /iː/](#entry-30)"
+            },
+            "notes": {
+              "auditStatus": "CORRECTED",
+              "summary": "La entrada estaba truncada a mitad del ejemplo Beet /beːt/. Se completa íntegramente y se corrige además la caracterización de la h de sehen: es una h separadora de sílabas, no simplemente una marca de alargamiento.",
+              "changes": [
+                "Se completa el artículo que terminaba abruptamente en «Beet /beːt/».",
+                "Se distingue e simple, ee, Dehnungs-h y h separadora de sílabas.",
+                "Se conserva el contraste pedagógico /eː/ frente a /ɛ/ y se completa Beet/Bett."
+              ],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "El alemán estándar distingue una vocal larga [eː] de la vocal breve [ɛ].",
+                "supportType": "direct"
+              },
+              {
+                "claim": "La longitud puede representarse con e simple, ee o Dehnungs-h; en sehen la h es separadora de sílabas y no debe tratarse sin más como Dehnungs-h.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+              },
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1.3 Besondere Kennzeichnung der langen Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6174"
+              },
+              {
+                "type": "dictionary",
+                "tier": "A",
+                "citation": "Duden. See — Lautschrift [zeː].",
+                "url": "https://www.duden.de/rechtschreibung/See_Meer"
+              },
+              {
+                "type": "dictionary",
+                "tier": "A",
+                "citation": "Duden. betten — Lautschrift [ˈbɛtn̩].",
+                "url": "https://www.duden.de/rechtschreibung/betten"
+              },
+              {
+                "type": "didactic_rule",
+                "tier": "A",
+                "citation": "Duden. Wissen–Üben–Testen Deutsch 3. Klasse: silbentrennendes h, Beispiel se-hen.",
+                "url": "https://shop.duden.de/media/cf/95/2d/1687426964/Leseprobe_9783411772025_Wissen_%E2%80%93_%C3%9Cben_%E2%80%93_Testen_Deutsch_3_Klasse.pdf?ts=1687426964"
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0030",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada presenta correctamente /iː/ y el patrón ortográfico ie, con Liebe, sieben y hier como ejemplos apropiados. La frase «casi siempre» es una simplificación pedagógica aceptable porque el propio sistema ortográfico también admite i, ih e ieh en ciertos vocablos.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En palabras alemanas nativas, [iː] se representa de forma muy frecuente mediante ie.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "La normativa también reconoce otras grafías para [iː], por lo que ie es un patrón predominante y no una regla sin excepciones.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "type": "official_rule",
+                "tier": "A",
+                "citation": "Rat für deutsche Rechtschreibung / IDS Mannheim. 1 Vokale.",
+                "url": "https://grammis.ids-mannheim.de/rechtschreibung/6145"
+              },
+              {
+                "type": "didactic_rule",
+                "tier": "A",
+                "citation": "Duden. 222 Rechtschreibübungen — Das lange i wird in deutschen Wörtern meist durch ie wiedergegeben; se documentan excepciones con i, ih e ieh.",
+                "url": "https://www.duden.de/222-rechtschreibuebungen"
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
