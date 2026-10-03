@@ -1,0 +1,48 @@
+{
+  "batchId": "r44-m10-ccx482-step3",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-db1d9567-4211-43ad-89a0-1d1b23c13267"
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-db1d9567-4211-43ad-89a0-1d1b23c13267",
+        "ticketId": "R43-EMERGENCY-0496",
+        "entries": [
+          {
+            "code": "MLS-V05-1001",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V05-1002",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V05-1004",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V05-1005",
+            "outcome": "PASS_NO_CHANGE"
+          },
+          {
+            "code": "MLS-V05-1006",
+            "outcome": "PASS_NO_CHANGE"
+          }
+        ]
+      }
+    },
+    {
+      "operationId": "r44ClaimChat",
+      "input": {
+        "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+        "idempotencyKey": "r44-m10-ccx482-claim-03"
+      }
+    }
+  ]
+}
