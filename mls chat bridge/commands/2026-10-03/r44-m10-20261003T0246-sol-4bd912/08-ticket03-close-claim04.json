@@ -1,0 +1,96 @@
+{
+  "batchId": "r44-m10-4bd912-ticket03-close-claim04",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-cf0ca3b1-2bf7-402c-a997-30bebaffffab"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-cf0ca3b1-2bf7-402c-a997-30bebaffffab",
+        "ticketId": "R43-EMERGENCY-0582",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0414-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0414",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 分 para minutos, alternancia ふん/ぷん y lecturas 一分=いっぷん, 六分=ろっぷん, 八分=はっぷん, 十分=じゅっぷん son coherentes; diferencia con 十分=じゅうぶん bien señalada."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-cf0ca3b1-2bf7-402c-a997-30bebaffffab",
+        "ticketId": "R43-EMERGENCY-0582",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0415-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0415",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 匹 para animales pequeños/medianos y alternancias ひき・びき・ぴき correctamente descritas. Sin corrección factual necesaria."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-cf0ca3b1-2bf7-402c-a997-30bebaffffab",
+        "ticketId": "R43-EMERGENCY-0582",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0417-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0417",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 回 expresa número de ocurrencias/frecuencia; 一回=いっかい, 六回=ろっかい, 八回=はっかい, 十回=じゅっかい y ejemplos son correctos."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-cf0ca3b1-2bf7-402c-a997-30bebaffffab",
+        "ticketId": "R43-EMERGENCY-0582",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0418-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0418",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 年 expresa años en fechas y duración; 四年=よねん y contraste con 歳 para edad son correctos. Sin corrección factual necesaria."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-cf0ca3b1-2bf7-402c-a997-30bebaffffab",
+        "ticketId": "R43-EMERGENCY-0582",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0582-MLS-V06-0419-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0419",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: lecturas especiales de 日 para fechas/duración (ついたち, ふつか…とおか, じゅうよっか, はつか, にじゅうよっか) y contraste 一日 ついたち/いちにち son correctos."
+        }
+      }
+    },
+    {
+      "operationId": "r44RebindChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "ticketId": "R43-EMERGENCY-0582"
+      }
+    },
+    {
+      "operationId": "r44ClaimChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "idempotencyKey": "claim-20261003T0246Z-4bd912-04"
+      }
+    }
+  ]
+}
