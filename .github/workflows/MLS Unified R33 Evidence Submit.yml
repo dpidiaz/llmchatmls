@@ -101,12 +101,12 @@ jobs:
       - name: Apply checkpoint through canonical Worker Events handler
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_PATH: ${{ steps.checkpoint.outputs.event_path }}
+          SYNTHETIC_EVENT_PATH: ${{ steps.checkpoint.outputs.event_path }}
         shell: bash
         run: |
           git fetch --no-tags origin main
           git checkout --detach origin/main
-          node 'scripts/MLS global dispatcher worker.cjs'
+          GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
       - name: Prepare finish event when microclaim is complete
         id: finish
         env:
@@ -120,6 +120,6 @@ jobs:
         if: ${{ steps.finish.outputs.finish_needed == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
+          SYNTHETIC_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
         shell: bash
-        run: node 'scripts/MLS global dispatcher worker.cjs'
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
