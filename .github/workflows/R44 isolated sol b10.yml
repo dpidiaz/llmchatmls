@@ -24,15 +24,13 @@ jobs:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
         run: |
           set -euo pipefail
-          mapfile -t files < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^mls chat bridge isolated/commands/.*\.json$' || true)
-          if [ "${#files[@]}" -eq 0 ]; then
+          command_file="$(find 'mls chat bridge isolated/commands' -type f -name '*.json' -print | LC_ALL=C sort | tail -n 1)"
+          if [ -z "$command_file" ]; then
             echo "No isolated command found."
-            exit 0
+            exit 1
           fi
-          for command_file in "${files[@]}"; do
-            node 'scripts/MLS chat bridge.cjs' "$command_file"
-            result_file="${command_file/\/commands\//\/results\/}"
-            echo "=== R44_RESULT_BEGIN ${result_file} ==="
-            cat "$result_file"
-            echo "=== R44_RESULT_END ${result_file} ==="
-          done
+          node 'scripts/MLS chat bridge.cjs' "$command_file"
+          result_file="${command_file/\/commands\//\/results\/}"
+          echo "=== R44_RESULT_BEGIN ${result_file} ==="
+          cat "$result_file"
+          echo "=== R44_RESULT_END ${result_file} ==="
