@@ -124,8 +124,8 @@ test('Unified final integration carries certified contentPath beside Evidence an
 test('Unified auto-pull remains scoped to r33-unified',()=>{
   const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
   assert.match(worker,/unifiedScope=workId\.startsWith\('r33-unified:'\)\?'r33-unified:'/);
-  assert.match(worker,/scopedPrefix=handoffScope\?\.\[0\]\|\|unifiedScope/);
-  assert.match(worker,/provider:'r33-farm',workPrefix:scopedPrefix/);
+  assert.match(worker,/handoffScope\?\{provider:'r33-farm',workPrefix:handoffScope\[0\]\}/);
+  assert.match(worker,/unifiedScope\?\{provider:'r33-farm',workPrefix:unifiedScope\}/);
 });
 
 test('R44 handoff sync is grouped, paged and never writes per worker',()=>{
@@ -134,7 +134,7 @@ test('R44 handoff sync is grouped, paged and never writes per worker',()=>{
   assert.match(script,/afterOrdinal=/);
   assert.match(script,/limit=200/);
   assert.match(script,/MLS-R44-R33-HANDOFF-1/);
-  assert.match(workflow,/cron: '\*\/10 \* \* \* \*'/);
+  assert.match(workflow,/cron: '\*\/5 \* \* \* \*'/);
   assert.match(workflow,/Commit grouped handoff snapshot/);
   assert.doesNotMatch(script,/api\.github\.com|GITHUB_TOKEN/);
 });
