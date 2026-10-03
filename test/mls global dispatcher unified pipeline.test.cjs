@@ -138,3 +138,11 @@ test('R44 handoff sync is grouped, paged and never writes per worker',()=>{
   assert.match(workflow,/Commit grouped handoff snapshot/);
   assert.doesNotMatch(script,/api\.github\.com|GITHUB_TOKEN/);
 });
+
+
+test('Unified claim issues automatically wake the Dispatcher without changing manual dispatch',()=>{
+  const scheduler=fs.readFileSync('.github/workflows/MLS Global Dispatcher Scheduler.yml','utf8');
+  assert.match(scheduler,/workflow_dispatch:/);
+  assert.match(scheduler,/issues:\s*\n\s*types: \[opened\]/);
+  assert.match(scheduler,/startsWith\(github\.event\.issue\.title, '\[MLS Dispatcher\]\[CLAIM\]'\)/);
+});
