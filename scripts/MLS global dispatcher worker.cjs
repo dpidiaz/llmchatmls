@@ -50,6 +50,11 @@ async function branchHead(branch){
   const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/'+encodeRef(branch));
   return String(ref?.object?.sha||'').toLowerCase();
 }
+function unifiedIntegrationPathAllowed(file,state){
+  if(core.pathAllowed(file,state.allowedPaths||[]))return true;
+  return file==='content/manifest.json'&&state.provider==='r33-index-integration'&&String(state.workId||'').startsWith('r33-unified-integration:')&&
+    (state.allowedPaths||[]).some(p=>String(p).startsWith('content/')&&String(p)!=='content/manifest.json');
+}
 async function verifyIntegrationCheckpoint(state,commitSha,event={}){
   const policy=state.integration;
   if(!policy)throw core.dispatchError('INTEGRATION_SPEC_REQUIRED','Assignment integration sin spec/policy.',409);
@@ -72,7 +77,7 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
       if(!['ahead','identical'].includes(String(comparison?.status||'')))throw core.dispatchError('CHECKPOINT_NOT_DESCENDANT','Head integration no desciende del base asignado.',409);
       const files=Array.isArray(comparison?.files)?comparison.files:[];
       if(!files.length)throw core.dispatchError('CHECKPOINT_NO_CHANGES','Integration premerge no contiene cambios.',409);
-      const disallowed=files.map(x=>String(x.filename||'')).filter(file=>!core.pathAllowed(file,state.allowedPaths||[]));
+      const disallowed=files.map(x=>String(x.filename||'')).filter(file=>!unifiedIntegrationPathAllowed(file,state));
       if(disallowed.length)throw core.dispatchError('CHECKPOINT_SCOPE_VIOLATION','Cambios integration fuera de allowedPaths: '+disallowed.slice(0,10).join(', '),409);
       return;
     }
@@ -88,7 +93,7 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
       const base=state.recovery.integrationBaseCommit;
       if(!/^[a-f0-9]{40}$/.test(String(base||'')))throw core.dispatchError('BASE_COMMIT_INVALID','Recovery sin base original.',409);
       const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+base+'...'+expectedHeadSha);
-      if(comparison.status!=='ahead'||!comparison.files?.length||comparison.files.length>=300||comparison.files.some(f=>!core.pathAllowed(f.filename,state.allowedPaths||[])))throw core.dispatchError('CHECKPOINT_SCOPE_VIOLATION','Recovery ancestry/scope inválido o incompleto.',409);
+      if(comparison.status!=='ahead'||!comparison.files?.length||comparison.files.length>=300||comparison.files.some(f=>!unifiedIntegrationPathAllowed(f.filename,state)))throw core.dispatchError('CHECKPOINT_SCOPE_VIOLATION','Recovery ancestry/scope inválido o incompleto.',409);
     }
     const spec=integration.assignmentPrSpec(policy,{prNumber,expectedHeadSha});
     const pr=await gh('GET','/repos/'+owner+'/'+repo+'/pulls/'+prNumber);
