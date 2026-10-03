@@ -36,7 +36,7 @@ test('Unified Cloudflare runner injects one syntactically valid scheduled contro
   assert.match(built,/\/api\/unified-runner\/report/);
   assert.match(built,/CREATE TABLE IF NOT EXISTS mls_unified_runner_lane/);
   assert.match(built,/MLS_R33_SOURCE_CATALOG/);
-  assert.match(built,/R33-Unified-CF-1/);
+  assert.match(built,/R33-Unified-CF-2/);
   assert.match(built,/NEEDS_CHAT_REVIEW/);
   assert.match(built,/r44ChatBridgeAuthorize\(request, env\)/);
   assert.match(built,/@cf\/ibm-granite\/granite-4\.0-h-micro/);
