@@ -48,9 +48,9 @@ Mandatory transport rules:
 - If the current ChatGPT plan/client does not expose writable custom MCP, use the authenticated `MLS Chat Bridge` fallback (`r44ClaimChat` / `r44RenewChat` / `r44SubmitChat`) on `mlschatcontrol`. The lease token must remain server-side in D1; only `bridgeSessionId` may cross the public control branch. If that free bridge is unavailable, stop before claiming and report `CLIENT_TRANSPORT_UNAVAILABLE_FREE_ONLY`. Never substitute a paid transport.
 - A ticket is complete only after `AUDITED_DURABLE` (or idempotent `RESULT_ALREADY_SUBMITTED`) with a SHA-256 receipt. `AUDITED` is not R33 `VERIFIED`.
 
-## MLS R44 Fast Lane development command
+## MLS R44 Fast Lane command
 
-For the exact development command `MLS R44 Fast Lane siguiente`, read:
+For the exact deployed command `MLS R44 Fast Lane siguiente`, read:
 
 `docs/MLS Global Dispatcher/27 R44 Fast Lane Disposable Chat Multiplexing.md`
 
@@ -67,7 +67,7 @@ Execute a bounded same-chat sequential loop of **up to 10 complete tickets**:
 
 Never prefetch. Never hold two active leases for one chat. Never replace recovery of an interrupted ticket with a new claim. R44 results remain PENDING_CANONICAL_R33_VALIDATION and must never be reported as VERIFIED.
 
-This command is the certification path for Fast Lane. Until an explicit production cutover is separately completed, ordinary `MLS R44 siguiente` keeps its existing one-ticket compatibility semantics.
+Fast Lane production cutover is complete. `MLS R44 Fast Lane siguiente` is an active production command. Ordinary `MLS R44 siguiente` keeps its existing one-ticket compatibility semantics unless separately changed.
 
 ## MLS Watchdog commands
 
