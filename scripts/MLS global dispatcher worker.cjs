@@ -55,6 +55,14 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
   if(!policy)throw core.dispatchError('INTEGRATION_SPEC_REQUIRED','Assignment integration sin spec/policy.',409);
   if(String(policy.mode||'')==='assignment-pr'){
     const stage=String(event.integrationStage||'').toLowerCase();
+    if(stage==='noop'){
+      const assignedHead=await branchHead(state.branch);
+      const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
+      const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
+      if(assignedHead!==commitSha||mainSha!==commitSha)
+        throw core.dispatchError('INTEGRATION_NOOP_MAIN_MISMATCH','No-op integration requires assignment branch HEAD and current main HEAD to equal commitSha.',409);
+      return;
+    }
     if(stage==='premerge'){
       const head=await branchHead(state.branch);
       if(head!==commitSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','Premerge commit no coincide con HEAD de la rama asignada.',409);
