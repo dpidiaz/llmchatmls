@@ -1,0 +1,77 @@
+{
+  "batchId": "r44-t01-durable-priority",
+  "stopOnError": false,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-68717d53-4188-4794-ba15-d1df76783c32"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-68717d53-4188-4794-ba15-d1df76783c32",
+        "ticketId": "R43-EMERGENCY-0710",
+        "leaseGeneration": 1,
+        "idempotencyKey": "08badc26-f4d9-4af9-bf9d-e6db389ae9a3",
+        "entry": {
+          "code": "MLS-V07-0155",
+          "outcome": "PASS_NO_CHANGE"
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-68717d53-4188-4794-ba15-d1df76783c32",
+        "ticketId": "R43-EMERGENCY-0710",
+        "leaseGeneration": 1,
+        "idempotencyKey": "0dc286d4-d06a-418b-9da5-31072d2ad722",
+        "entry": {
+          "code": "MLS-V07-0156",
+          "outcome": "PASS_NO_CHANGE"
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-68717d53-4188-4794-ba15-d1df76783c32",
+        "ticketId": "R43-EMERGENCY-0710",
+        "leaseGeneration": 1,
+        "idempotencyKey": "2eb10e40-9e4d-474d-ae62-a1781415b0ae",
+        "entry": {
+          "code": "MLS-V07-0157",
+          "outcome": "PASS_NO_CHANGE"
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-68717d53-4188-4794-ba15-d1df76783c32",
+        "ticketId": "R43-EMERGENCY-0710",
+        "leaseGeneration": 1,
+        "idempotencyKey": "0e7178c4-da4e-4e4e-a511-798ce9965110",
+        "entry": {
+          "code": "MLS-V07-0158",
+          "outcome": "PASS_NO_CHANGE"
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-68717d53-4188-4794-ba15-d1df76783c32",
+        "ticketId": "R43-EMERGENCY-0710",
+        "leaseGeneration": 1,
+        "idempotencyKey": "66350c2a-3ca0-449f-923c-380a15eb7b3a",
+        "entry": {
+          "code": "MLS-V07-0160",
+          "outcome": "PASS_NO_CHANGE"
+        }
+      }
+    }
+  ]
+}
