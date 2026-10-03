@@ -1,0 +1,40 @@
+name: MLS Unified Web Runner
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_run:
+    workflows:
+      - MLS Global Dispatcher Scheduler
+      - MLS Unified R33 Evidence Submit
+      - MLS Unified R33 Integration Execute
+    types:
+      - completed
+
+permissions:
+  contents: read
+  issues: write
+  actions: write
+
+concurrency:
+  group: mls-unified-web-runner
+  cancel-in-progress: false
+
+jobs:
+  advance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Advance canonical MLS Unified lanes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+          MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
+        run: node 'scripts/MLS unified web runner.cjs'

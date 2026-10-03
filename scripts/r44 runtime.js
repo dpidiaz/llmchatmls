@@ -507,7 +507,266 @@ async function r44McpHandle(request, env) {
   return r44McpError(id, -32601, "Method not found", { method: body.method }, 404);
 }
 
+
+var MLS_UNIFIED_RUNNER_SCHEMA = "1";
+var MLS_UNIFIED_RUNNER_WORKER = "mls-unified-web-runner-v1";
+
+async function unifiedRunnerEnsure(env) {
+  await env.WIKI_DB.batch([
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, worker_id TEXT NOT NULL, started_at TEXT, updated_at TEXT NOT NULL, processed_entries INTEGER NOT NULL DEFAULT 0, corrected_entries INTEGER NOT NULL DEFAULT 0, error_count INTEGER NOT NULL DEFAULT 0, last_ticket TEXT, last_code TEXT, last_error TEXT, last_step_at TEXT, step_token TEXT, busy_until INTEGER, schema_version TEXT NOT NULL)"),
+    env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner(id,state,worker_id,updated_at,schema_version) VALUES(1,'STOPPED',?,?,?)").bind(MLS_UNIFIED_RUNNER_WORKER,new Date().toISOString(),MLS_UNIFIED_RUNNER_SCHEMA),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_lane (stage TEXT PRIMARY KEY CHECK(stage IN ('r33','integration')), state TEXT NOT NULL, issue_number INTEGER, assignment_id TEXT, last_code TEXT, last_error TEXT, detail_json TEXT, updated_at TEXT NOT NULL)")
+  ]);
+}
+async function unifiedRunnerRead(env) {
+  await unifiedRunnerEnsure(env);
+  return env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner WHERE id=1").first();
+}
+async function unifiedRunnerAuthorize(request, env) {
+  return r44ChatBridgeAuthorize(request, env);
+}
+async function unifiedRunnerControl(request, env) {
+  const auth = await unifiedRunnerAuthorize(request, env);
+  if (!auth.ok) return r44Json({error:auth.error},auth.status);
+  const body = await r44ChatBridgeBody(request);
+  const action = String(body.action || "").toLowerCase();
+  const map = {start:"RUNNING",resume:"RUNNING",pause:"PAUSED",stop:"STOPPED",complete:"COMPLETE"};
+  const next = map[action];
+  if (!next) return r44Json({error:"UNIFIED_RUNNER_ACTION_INVALID"},400);
+  await unifiedRunnerEnsure(env);
+  const now = new Date().toISOString();
+  await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state=?, started_at=CASE WHEN ?='RUNNING' AND started_at IS NULL THEN ? ELSE started_at END, updated_at=?, last_error=CASE WHEN ? IN ('RUNNING','COMPLETE') THEN NULL ELSE last_error END WHERE id=1")
+    .bind(next,next,now,now,next).run();
+  return r44Json({ok:true,action,state:next,runner:await unifiedRunnerRead(env)});
+}
+async function unifiedRunnerStatus(request, env) {
+  const auth = await unifiedRunnerAuthorize(request, env);
+  if (!auth.ok) return r44Json({error:auth.error},auth.status);
+  const runner = await unifiedRunnerRead(env);
+  const r44 = await r44Status(env);
+  let budget = null;
+  try { budget = await wikiStore(env).getCloudflareBudget(); } catch (_) {}
+  const laneRows=await env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner_lane ORDER BY stage").all();
+  const lanes=Object.fromEntries((laneRows.results||[]).map(row=>[row.stage,{...row,detail:(()=>{try{return row.detail_json?JSON.parse(row.detail_json):null}catch{return null}})()}]));
+  return r44Json({ok:true,runner,r44,budget,lanes,freeOnly:true,chatCompatible:true,canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
+}
+function unifiedRunnerSeed(article) {
+  return {
+    code:String(article.code || "").toUpperCase(),
+    language:String(article.language || ""),
+    languageName:String(article.languageName || article.language || ""),
+    level:String(article.level || ""),
+    part:String(article.part || ""),
+    chapter:String(article.chapter || ""),
+    title:String(article.title || ""),
+    target:String(article.target || ""),
+    definition:String(article.definition || ""),
+    example:String(article.example || ""),
+    notes:String(article.notes || "")
+  };
+}
+async function unifiedRunnerAuditMarkdown(env, article, markdown, suffix) {
+  const seed = unifiedRunnerSeed(article);
+  const deterministic = basicArticleValidation(markdown);
+  const messages = [
+    {role:"system",content:WIKI_COMPACT_AUDIT_PROMPT},
+    {role:"system",content:"CONTROL DEL IDIOMA\n\n"+(LANGUAGE_MODULES[seed.language] || "")},
+    {role:"user",content:"ENTRADA:\n"+wikiSeedAsText(seed)+"\n\nARTÍCULO:\n"+markdown+"\n\nPROBLEMAS DETERMINISTAS DETECTADOS:\n"+(deterministic.join("\n") || "ninguno")}
+  ];
+  const provider = {id:"cloudflare-auditor",kind:"cloudflare",model:"@cf/ibm-granite/granite-4.0-h-micro"};
+  const result = await runCloudflareProvider(env,provider,messages,600,0.02);
+  const decision = parseAuditDecision(result.text);
+  if (deterministic.length) {
+    decision.status = "FIX";
+    decision.risk = Math.max(decision.risk,0.7);
+    decision.issues = Array.from(new Set(deterministic.concat(decision.issues || []))).slice(0,8);
+  }
+  return {seed,decision,result,suffix};
+}
+async function unifiedRunnerAuditEntry(env, article) {
+  if (!article || typeof article !== "object" || Array.isArray(article)) throw new Error("UNIFIED_R44_ARTICLE_INVALID");
+  const code = String(article.code || "").toUpperCase();
+  const original = String(article.articleMarkdown || "").trim();
+  if (!/^MLS-V\d{2}-\d{4}$/.test(code) || !original) throw new Error("UNIFIED_R44_ARTICLE_SHAPE_INVALID_"+code);
+  const first = await unifiedRunnerAuditMarkdown(env,article,original,"initial");
+  if (first.decision.status !== "FIX") {
+    return {
+      code,
+      outcome:"PASS_NO_CHANGE",
+      evidence:{auditRisk:first.decision.risk,issues:first.decision.issues,auditProvider:first.result.provider,auditModel:first.result.model},
+      notes:["Cloudflare Unified R44 automatic audit passed without content change."]
+    };
+  }
+  const correctionMessages = [
+    {role:"system",content:WIKI_CORRECTION_PROMPT},
+    {role:"system",content:"MÓDULO DEL IDIOMA ACTUAL\n\n"+(LANGUAGE_MODULES[first.seed.language] || "")},
+    {role:"user",content:"SEMILLA:\n"+wikiSeedAsText(first.seed)+"\n\nARTÍCULO ORIGINAL:\n"+original+"\n\nCORRECCIONES NECESARIAS:\n"+first.decision.issues.map(function(x,i){return String(i+1)+". "+x;}).join("\n")}
+  ];
+  const correctionProvider = {id:"cloudflare",kind:"cloudflare",model:MODEL_ID};
+  const correction = await runCloudflareProvider(env,correctionProvider,correctionMessages,3600,0.05);
+  const corrected = String(correction.text || "").trim();
+  if (!corrected) throw new Error("UNIFIED_R44_CORRECTION_EMPTY_"+code);
+  const second = await unifiedRunnerAuditMarkdown(env,article,corrected,"post-correction");
+  if (second.decision.status === "FIX") {
+    throw new Error("UNIFIED_R44_CORRECTION_REJECTED_"+code+"_"+second.decision.issues.join(" | ").slice(0,700));
+  }
+  return {
+    code,
+    outcome:"CORRECTED",
+    correctedContent:Object.assign({},article,{articleMarkdown:corrected}),
+    evidence:{
+      initialRisk:first.decision.risk,
+      initialIssues:first.decision.issues,
+      auditProvider:first.result.provider,
+      auditModel:first.result.model,
+      correctionProvider:correction.provider,
+      correctionModel:correction.model,
+      postCorrectionRisk:second.decision.risk
+    },
+    notes:["Cloudflare Unified R44 automatic audit corrected the article and passed a second audit."]
+  };
+}
+async function unifiedRunnerApplyMark(env, patch) {
+  await unifiedRunnerEnsure(env);
+  const fields = [], values = [];
+  for (const key of ["state","last_ticket","last_code","last_error","last_step_at"]) {
+    if (Object.prototype.hasOwnProperty.call(patch,key)) { fields.push(key+"=?"); values.push(patch[key]); }
+  }
+  if (patch.processedDelta) fields.push("processed_entries=processed_entries+"+Math.max(0,Number(patch.processedDelta)||0));
+  if (patch.correctedDelta) fields.push("corrected_entries=corrected_entries+"+Math.max(0,Number(patch.correctedDelta)||0));
+  if (patch.errorDelta) fields.push("error_count=error_count+"+Math.max(0,Number(patch.errorDelta)||0));
+  fields.push("updated_at=?"); values.push(new Date().toISOString());
+  values.push(1);
+  const stmt = env.WIKI_DB.prepare("UPDATE mls_unified_runner SET "+fields.join(", ")+" WHERE id=?");
+  await stmt.bind.apply(stmt,values).run();
+}
+async function unifiedRunnerStep(env, stepKey) {
+  const runner = await unifiedRunnerRead(env);
+  if (runner.state !== "RUNNING") return {status:"RUNNER_NOT_RUNNING",state:runner.state};
+  const key = String(stepKey || "");
+  if (!/^[A-Za-z0-9._:-]{8,120}$/.test(key)) return {status:"INVALID_STEP_KEY"};
+  const now = Date.now(), stepToken = crypto.randomUUID();
+  const locked = await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET step_token=?,busy_until=?,updated_at=? WHERE id=1 AND state='RUNNING' AND (busy_until IS NULL OR busy_until<=?) RETURNING worker_id")
+    .bind(stepToken,now+14*60*1000,new Date(now).toISOString(),now).first();
+  if (!locked) return {status:"RUNNER_BUSY"};
+  const release = async()=>env.WIKI_DB.prepare("UPDATE mls_unified_runner SET step_token=NULL,busy_until=NULL,updated_at=? WHERE id=1 AND step_token=?").bind(new Date().toISOString(),stepToken).run();
+  let context = null;
+  const receipts = [];
+  try {
+    const claim = await r44DurableClaim(env,locked.worker_id,"unified:"+key);
+    if (!claim.ticket || !claim.ticket.lease_token) {
+      await unifiedRunnerApplyMark(env,{last_step_at:new Date().toISOString(),last_error:null});
+      return {status:claim.status || "NO_WORK",claim};
+    }
+    const token = claim.ticket.lease_token;
+    context = await r44Context(env,token);
+    if (!context) throw new Error("UNIFIED_R44_CONTEXT_MISSING");
+    const entries = Array.isArray(context.entries) ? context.entries : [];
+    const content = Array.isArray(context.content) ? context.content : [];
+    if (content.length !== entries.length) throw new Error("UNIFIED_R44_CONTEXT_ALIGNMENT");
+    for (let i=0;i<entries.length;i++) {
+      const source = entries[i];
+      const article = content[i];
+      await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET busy_until=? WHERE id=1 AND step_token=?").bind(Date.now()+14*60*1000,stepToken).run();
+      const renewed = await r44Renew(env,token,context.leaseGeneration);
+      if (!renewed) throw new Error("UNIFIED_R44_LEASE_RENEW_FAILED");
+      const result = await unifiedRunnerAuditEntry(env,article);
+      const checkpoint = await r44Checkpoint(env,{
+        ticketId:context.ticketId,
+        workerId:context.workerId,
+        leaseToken:token,
+        leaseGeneration:context.leaseGeneration,
+        idempotencyKey:"unified:"+key+":"+String(source.code || result.code),
+        entry:result
+      },false);
+      if (checkpoint.error) throw new Error("UNIFIED_R44_CHECKPOINT_"+checkpoint.error);
+      receipts.push(checkpoint);
+      await unifiedRunnerApplyMark(env,{
+        last_ticket:context.ticketId,
+        last_code:result.code,
+        last_step_at:new Date().toISOString(),
+        last_error:null,
+        processedDelta:1,
+        correctedDelta:result.outcome === "CORRECTED" ? 1 : 0
+      });
+    }
+    const finalState = await r44Reconcile(env,context.ticketId);
+    return {status:"TICKET_COMPLETE",ticketId:context.ticketId,entries:entries.length,receipts,state:finalState && finalState.state};
+  } catch (error) {
+    const message = wikiErrorMessage(error);
+    const quota = (typeof WorkersQuotaExceededError !== "undefined" && error instanceof WorkersQuotaExceededError) || workersAiFailureKind(message) === "quota";
+    const paid = (typeof ZeroCostPolicyError !== "undefined" && error instanceof ZeroCostPolicyError) || workersAiFailureKind(message) === "paid";
+    const pauseState = quota ? "QUOTA_PAUSED" : paid ? "POLICY_PAUSED" : "ERROR";
+    await unifiedRunnerApplyMark(env,{state:pauseState,last_error:message,last_step_at:new Date().toISOString(),errorDelta:1});
+    return {status:pauseState,ticketId:context && context.ticketId || null,error:message,receipts};
+  } finally {
+    await release().catch(function(){});
+  }
+}
+async function unifiedRunnerStepRequest(request, env) {
+  const auth = await unifiedRunnerAuthorize(request, env);
+  if (!auth.ok) return r44Json({error:auth.error},auth.status);
+  const body = await r44ChatBridgeBody(request);
+  const result = await unifiedRunnerStep(env,String(body.stepKey || ""));
+  const status = result.status === "ERROR" ? 500 : result.status === "QUOTA_PAUSED" ? 429 : 200;
+  return r44Json(result,status);
+}
+async function unifiedRunnerScheduled(env) {
+  try {
+    let runner = await unifiedRunnerRead(env);
+    if (runner.state === "QUOTA_PAUSED") {
+      const pausedDay = String(runner.updated_at || "").slice(0,10);
+      const today = new Date().toISOString().slice(0,10);
+      if (pausedDay && pausedDay !== today) {
+        await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state='RUNNING',last_error=NULL,updated_at=? WHERE id=1 AND state='QUOTA_PAUSED'").bind(new Date().toISOString()).run();
+        runner = await unifiedRunnerRead(env);
+      }
+    }
+    if (runner.state !== "RUNNING") return {status:"SKIPPED",state:runner.state};
+    const bucket = Math.floor(Date.now()/300000);
+    return await unifiedRunnerStep(env,"cron:"+bucket);
+  } catch (error) {
+    await unifiedRunnerApplyMark(env,{state:"ERROR",last_error:wikiErrorMessage(error),last_step_at:new Date().toISOString(),errorDelta:1}).catch(function(){});
+    throw error;
+  }
+}
+
+async function unifiedRunnerReport(request,env) {
+  const auth=await unifiedRunnerAuthorize(request,env);
+  if(!auth.ok) return r44Json({error:auth.error},auth.status);
+  const body=await r44ChatBridgeBody(request);
+  const stage=String(body.stage||"").toLowerCase();
+  if(stage!=="r33"&&stage!=="integration") return r44Json({error:"UNIFIED_RUNNER_REPORT_STAGE_INVALID"},400);
+  const state=String(body.state||"").toUpperCase().slice(0,80);
+  if(!state) return r44Json({error:"UNIFIED_RUNNER_REPORT_STATE_REQUIRED"},400);
+  const issueNumber=body.issueNumber==null?null:Number(body.issueNumber);
+  if(issueNumber!==null&&(!Number.isInteger(issueNumber)||issueNumber<1)) return r44Json({error:"UNIFIED_RUNNER_REPORT_ISSUE_INVALID"},400);
+  const assignmentId=body.assignmentId==null?null:String(body.assignmentId).slice(0,120);
+  const lastCode=body.code==null?null:String(body.code).toUpperCase().slice(0,40);
+  const lastError=body.error==null?null:String(body.error).slice(0,2000);
+  const detail=body.detail==null?null:JSON.stringify(body.detail).slice(0,12000);
+  const now=new Date().toISOString();
+  await unifiedRunnerEnsure(env);
+  await env.WIKI_DB.prepare("INSERT INTO mls_unified_runner_lane(stage,state,issue_number,assignment_id,last_code,last_error,detail_json,updated_at) VALUES(?,?,?,?,?,?,?,?) ON CONFLICT(stage) DO UPDATE SET state=excluded.state,issue_number=excluded.issue_number,assignment_id=excluded.assignment_id,last_code=excluded.last_code,last_error=excluded.last_error,detail_json=excluded.detail_json,updated_at=excluded.updated_at")
+    .bind(stage,state,issueNumber,assignmentId,lastCode,lastError,detail,now).run();
+  if(body.pauseRunner===true){
+    await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state='REVIEW_PAUSED',last_error=?,updated_at=? WHERE id=1 AND state='RUNNING'")
+      .bind(lastError||("R33 review required"+(lastCode?" for "+lastCode:"")),now).run();
+  }
+  return r44Json({ok:true,stage,state,runner:await unifiedRunnerRead(env)});
+}
+
+async function handleUnifiedRunner(request, env, url) {
+  if (url.pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env);
+  if (url.pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env);
+  if (url.pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env);
+  if (url.pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env);
+  if (url.pathname === "/api/unified-runner/report" && request.method === "POST") return unifiedRunnerReport(request,env);
+  return r44Json({error:"UNIFIED_RUNNER_ROUTE_NOT_FOUND"},404);
+}
+
 async function handleR44(request, env, url) {
+  if (url.pathname.startsWith("/api/unified-runner/")) return handleUnifiedRunner(request, env, url);
   try {
     const durable = await r44DurableRoute(request, env, url);
     if (durable) return durable;

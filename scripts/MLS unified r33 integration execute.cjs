@@ -49,10 +49,12 @@ function safeRepoPath(raw){
   return {p,full};
 }
 function validateState(issue,comment,payload){
-  if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase()))fail('UNIFIED_INTEGRATION_AUTHOR_UNAUTHORIZED');
   if(!String(issue?.title||'').startsWith('[MLS Dispatcher][LEASED]'))fail('UNIFIED_INTEGRATION_NOT_LEASED');
   const state=core.parseAssignmentState(issue?.body||'');
   if(!state||state.status!=='leased'||state.cancelRequested||state.readyToClose)fail('UNIFIED_INTEGRATION_STATE_INVALID');
+  const login=String(comment?.user?.login||'');
+  const botAuthorized=login==='github-actions[bot]'&&state.workerLogin===login&&state.provider==='r33-index-integration'&&String(state.workId||'').startsWith('r33-unified-integration:');
+  if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase())&&!botAuthorized)fail('UNIFIED_INTEGRATION_AUTHOR_UNAUTHORIZED');
   if(state.provider!=='r33-index-integration'||!String(state.workId||'').startsWith('r33-unified-integration:'))fail('UNIFIED_INTEGRATION_SCOPE_INVALID');
   if(!String(state.branch||'').startsWith('worker/r33-index-integration/'))fail('UNIFIED_INTEGRATION_BRANCH_INVALID');
   if(state.workerLogin&&String(comment?.user?.login||'')!==String(state.workerLogin))fail('UNIFIED_INTEGRATION_WORKER_LOGIN_MISMATCH');
@@ -64,14 +66,21 @@ function validateState(issue,comment,payload){
 }
 async function prepare(){
   const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-  if(!event.issue||!event.comment)fail('UNIFIED_INTEGRATION_EVENT_INVALID');
   const {repository}=githubContext();
-  const issue=await gh('/repos/'+repository+'/issues/'+event.issue.number);
-  const payload=extractMarked(event.comment.body||'');
-  const state=validateState(issue,event.comment,payload);
+  let eventIssue=event.issue||null,eventComment=event.comment||null;
+  if(!eventIssue||!eventComment){
+    const issueNumber=Number(process.env.MLS_UNIFIED_ISSUE_NUMBER||0);
+    const commentId=Number(process.env.MLS_UNIFIED_COMMENT_ID||0);
+    if(!Number.isInteger(issueNumber)||issueNumber<1||!Number.isInteger(commentId)||commentId<1)fail('UNIFIED_INTEGRATION_EVENT_INVALID');
+    eventIssue={number:issueNumber};
+    eventComment=await gh('/repos/'+repository+'/issues/comments/'+commentId);
+  }
+  const issue=await gh('/repos/'+repository+'/issues/'+eventIssue.number);
+  const payload=extractMarked(eventComment.body||'');
+  const state=validateState(issue,eventComment,payload);
   const bundlePath=path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-integration.json');
   fs.writeFileSync(bundlePath,JSON.stringify({
-    issueNumber:Number(issue.number),commentId:Number(event.comment.id),commentLogin:String(event.comment.user?.login||''),
+    issueNumber:Number(issue.number),commentId:Number(eventComment.id),commentLogin:String(eventComment.user?.login||''),
     assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,branch:state.branch,baseCommit:state.baseCommit,
     workId:state.workId,allowedPaths:state.allowedPaths||[],integration:state.integration
   },null,2)+'\n');
@@ -96,6 +105,35 @@ function copyExact(commit,repoPath){
   const {full}=safeRepoPath(repoPath),data=blobAt(commit,repoPath);
   fs.mkdirSync(path.dirname(full),{recursive:true});fs.writeFileSync(full,data);
 }
+function syncCanonicalManifest(sourceRefs){
+  const manifestPath='content/manifest.json';
+  const {full}=safeRepoPath(manifestPath);
+  const manifest=JSON.parse(fs.readFileSync(full,'utf8'));
+  if(!Array.isArray(manifest.entries))fail('UNIFIED_INTEGRATION_MANIFEST_INVALID');
+  let changed=0;
+  for(const ref of sourceRefs||[]){
+    if(!ref.contentPath)continue;
+    const contentPath=String(ref.contentPath).replace(/\\/g,'/');
+    if(!contentPath.startsWith('content/'))fail('UNIFIED_INTEGRATION_MANIFEST_CONTENT_PATH_INVALID',ref.code);
+    const relative=contentPath.slice('content/'.length);
+    const {full:contentFull}=safeRepoPath(contentPath);
+    const raw=fs.readFileSync(contentFull);
+    const code=String(ref.code||'').toUpperCase();
+    const item=manifest.entries.find(x=>String(x.code||'').toUpperCase()===code);
+    if(!item)fail('UNIFIED_INTEGRATION_MANIFEST_ENTRY_MISSING',code);
+    if(String(item.path||'')!==relative)fail('UNIFIED_INTEGRATION_MANIFEST_PATH_MISMATCH',code);
+    const nextHash=sha256(raw),nextBytes=raw.length;
+    if(item.sha256!==nextHash||Number(item.bytes)!==nextBytes){
+      item.sha256=nextHash;item.bytes=nextBytes;changed++;
+    }
+  }
+  if(changed)fs.writeFileSync(full,JSON.stringify(manifest,null,2)+'\n');
+  return changed;
+}
+function integrationPathAllowed(file,allowedPaths){
+  if(core.pathAllowed(file,allowedPaths||[]))return true;
+  return file==='content/manifest.json'&&(allowedPaths||[]).some(p=>String(p).startsWith('content/')&&String(p)!=='content/manifest.json');
+}
 function applySources(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),spec=bundle.integration;
   const fetched=new Set();
@@ -118,12 +156,13 @@ function applySources(){
       copyExact(assetCommit,asset.path);
     }
   }
-  process.stdout.write(JSON.stringify({ok:true,sourceRefs:spec.sourceRefs.length})+'\n');
+  const manifestUpdates=syncCanonicalManifest(spec.sourceRefs);
+  process.stdout.write(JSON.stringify({ok:true,sourceRefs:spec.sourceRefs.length,manifestUpdates})+'\n');
 }
 function validateStaged(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));
   const files=run('git',['diff','--cached','--name-only'],{capture:true}).split(/\r?\n/).filter(Boolean);
-  const bad=files.filter(file=>!core.pathAllowed(file,bundle.allowedPaths||[]));
+  const bad=files.filter(file=>!integrationPathAllowed(file,bundle.allowedPaths||[]));
   if(bad.length)fail('UNIFIED_INTEGRATION_SCOPE_VIOLATION',bad.join(', '));
   output('has_changes',files.length?'true':'false');
   process.stdout.write(JSON.stringify({ok:true,hasChanges:files.length>0,files})+'\n');

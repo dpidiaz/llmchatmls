@@ -1,6 +1,16 @@
 name: MLS Unified R33 Evidence Submit
 
 on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Canonical Dispatcher assignment issue
+        required: true
+        type: string
+      comment_id:
+        description: Auditable Evidence submission comment
+        required: true
+        type: string
   issue_comment:
     types:
       - created
@@ -11,17 +21,19 @@ permissions:
   actions: write
 
 concurrency:
-  group: mls-unified-r33-evidence-${{ github.event.issue.number }}
+  group: mls-unified-r33-evidence-${{ github.event.issue.number || github.event.inputs.issue_number }}
   cancel-in-progress: false
 
 jobs:
   submit:
     if: >-
-      ${{ startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') &&
+      ${{ github.event_name == 'workflow_dispatch' ||
+          (startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') &&
           contains(github.event.comment.body, 'MLS_UNIFIED_R33_EVIDENCE_SUBMIT') &&
           (github.event.comment.author_association == 'OWNER' ||
            github.event.comment.author_association == 'MEMBER' ||
-           github.event.comment.author_association == 'COLLABORATOR') }}
+           github.event.comment.author_association == 'COLLABORATOR' ||
+           github.event.comment.user.login == 'github-actions[bot]')) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,6 +47,8 @@ jobs:
         id: prep
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MLS_UNIFIED_ISSUE_NUMBER: ${{ github.event.inputs.issue_number || '' }}
+          MLS_UNIFIED_COMMENT_ID: ${{ github.event.inputs.comment_id || '' }}
         shell: bash
         run: |
           cp 'scripts/MLS unified r33 evidence submit.cjs' "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs"
@@ -50,20 +64,28 @@ jobs:
         id: stage
         env:
           EVIDENCE_PATH: ${{ steps.prep.outputs.evidence_path }}
+          CONTENT_PATH: ${{ steps.prep.outputs.content_path }}
           BUNDLE_PATH: ${{ steps.prep.outputs.bundle_path }}
         shell: bash
         run: |
           node "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" apply "$BUNDLE_PATH"
           node scripts/R4-evidence-preflight.cjs "$EVIDENCE_PATH"
-          git add -- "$EVIDENCE_PATH"
+          git add -- "$EVIDENCE_PATH" "$CONTENT_PATH"
           mapfile -t staged < <(git diff --cached --name-only)
+          bad=()
+          for file in "${staged[@]}"; do
+            if [ "$file" != "$EVIDENCE_PATH" ] && [ "$file" != "$CONTENT_PATH" ]; then
+              bad+=("$file")
+            fi
+          done
+          if [ "${#bad[@]}" -gt 0 ]; then
+            printf 'Unexpected staged paths: %s\n' "${bad[*]}" >&2
+            exit 1
+          fi
           if [ "${#staged[@]}" -eq 0 ]; then
             echo "no_change=true" >> "$GITHUB_OUTPUT"
-          elif [ "${#staged[@]}" -eq 1 ] && [ "${staged[0]}" = "$EVIDENCE_PATH" ]; then
-            echo "no_change=false" >> "$GITHUB_OUTPUT"
           else
-            printf 'Unexpected staged paths: %s\n' "${staged[*]}" >&2
-            exit 1
+            echo "no_change=false" >> "$GITHUB_OUTPUT"
           fi
       - name: Commit preflighted Evidence
         id: commit

@@ -1,6 +1,16 @@
 name: MLS Unified R33 Integration Execute
 
 on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Canonical Dispatcher integration issue
+        required: true
+        type: string
+      comment_id:
+        description: Auditable integration execute comment
+        required: true
+        type: string
   issue_comment:
     types:
       - created
@@ -9,7 +19,7 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
-  actions: read
+  actions: write
 
 concurrency:
   group: mls-unified-r33-integration
@@ -18,11 +28,13 @@ concurrency:
 jobs:
   integrate:
     if: >-
-      ${{ startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') &&
+      ${{ github.event_name == 'workflow_dispatch' ||
+          (startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') &&
           contains(github.event.comment.body, 'MLS_UNIFIED_R33_INTEGRATION_EXECUTE') &&
           (github.event.comment.author_association == 'OWNER' ||
            github.event.comment.author_association == 'MEMBER' ||
-           github.event.comment.author_association == 'COLLABORATOR') }}
+           github.event.comment.author_association == 'COLLABORATOR' ||
+           github.event.comment.user.login == 'github-actions[bot]')) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +48,8 @@ jobs:
         id: prep
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MLS_UNIFIED_ISSUE_NUMBER: ${{ github.event.inputs.issue_number || '' }}
+          MLS_UNIFIED_COMMENT_ID: ${{ github.event.inputs.comment_id || '' }}
         run: |
           cp 'scripts/MLS unified r33 integration execute.cjs' "$RUNNER_TEMP/mls-unified-r33-integration.cjs"
           node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" prepare

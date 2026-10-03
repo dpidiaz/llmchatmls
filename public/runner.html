@@ -42,9 +42,10 @@ button:disabled{opacity:.48;cursor:not-allowed}
 <body>
 <main>
 <h1>MLS Editorial Runner</h1>
-<p>Procesa entradas pendientes de un idioma de forma secuencial. El Runner toma una entrada, espera a que la generación editorial termine y quede guardada, y solo entonces pasa a la siguiente.</p>
+<p>Panel de ejecución editorial del Master Language System. El runner de corpus original se conserva y MLS Unified usa el control plane Cloudflare/D1.</p>
+<div class="actions" id="runnerTabs" style="grid-template-columns:1fr 1fr;max-width:520px"><button class="secondary" id="tabCorpus">Corpus</button><button class="primary" id="tabUnified">MLS Unified</button></div>
 
-<section class="panel">
+<section class="panel" id="corpusPanel">
 <div class="grid">
 <div>
 <label for="mode">Origen</label>
@@ -101,6 +102,62 @@ button:disabled{opacity:.48;cursor:not-allowed}
 
 <div class="log" id="log">Runner listo.</div>
 <p class="note">Pausar o detener se aplica entre entradas: una generación que ya comenzó se deja terminar para no desperdiciar trabajo ni dejar una entrada a medias. El proveedor real usado por cada artículo se muestra al terminar.</p>
+</section>
+
+<section class="panel" id="unifiedPanel" hidden>
+<h2 style="margin-top:0">MLS Unified Runner</h2>
+<p>Controla el runner persistente del MLS. R44 se ejecuta en Cloudflare; R33 e integración usan los leases, branches, preflight, tests y checkpoints del Global Dispatcher. Cerrar esta página no detiene la ejecución.</p>
+
+<div class="grid">
+<div>
+<label for="unifiedKey">Clave editorial</label>
+<input id="unifiedKey" type="password" autocomplete="current-password" placeholder="MLS_EDITORIAL_CHAT_KEY">
+</div>
+<div>
+<label for="unifiedState">Estado global</label>
+<input id="unifiedState" value="—" readonly>
+</div>
+<div>
+<label for="unifiedLast">Última entrada R44</label>
+<input id="unifiedLast" value="—" readonly>
+</div>
+</div>
+
+<div class="actions" style="grid-template-columns:1fr 1fr 1fr 1fr">
+<button class="primary" id="unifiedStart">Iniciar</button>
+<button class="secondary" id="unifiedPause">Pausar</button>
+<button class="secondary" id="unifiedResume">Reanudar</button>
+<button class="danger" id="unifiedStop">Detener</button>
+</div>
+<div class="actions" style="grid-template-columns:1fr 1fr">
+<button class="secondary" id="unifiedRefresh">Actualizar</button>
+<button class="secondary" id="unifiedStep">Procesar un ticket R44 ahora</button>
+</div>
+
+<div class="statusline"><span class="dot" id="unifiedDot"></span><span id="unifiedStatusText">Sin consultar</span></div>
+<div class="progress"><div class="bar" id="unifiedBar"></div></div>
+
+<div class="stats">
+<div class="stat"><span>R44 procesadas</span><strong id="unifiedProcessed">0</strong></div>
+<div class="stat"><span>R44 corregidas</span><strong id="unifiedCorrected">0</strong></div>
+<div class="stat"><span>Errores</span><strong id="unifiedErrors">0</strong></div>
+<div class="stat"><span>R44 COMPLETE</span><strong id="unifiedComplete">—</strong></div>
+</div>
+<div class="stats">
+<div class="stat"><span>R44 Claimable</span><strong id="unifiedClaimable">—</strong></div>
+<div class="stat"><span>R44 Parcial</span><strong id="unifiedPartial">—</strong></div>
+<div class="stat"><span>Leases R44 máx.</span><strong id="unifiedMaxLeases">—</strong></div>
+<div class="stat"><span>FREE only</span><strong id="unifiedFree">Sí</strong></div>
+</div>
+<div class="stats">
+<div class="stat"><span>R33 automático</span><strong id="unifiedR33Lane">—</strong></div>
+<div class="stat"><span>Integración</span><strong id="unifiedIntegrationLane">—</strong></div>
+<div class="stat"><span>VERIFIED canónico</span><strong id="unifiedVerified">—</strong></div>
+<div class="stat"><span>Pendientes canónicos</span><strong id="unifiedRemaining">—</strong></div>
+</div>
+
+<div class="log" id="unifiedLog">Unified listo.</div>
+<p class="note">Si una entrada no puede justificarse con una fuente R33 registrada, el runner marca REVIEW_REQUIRED y se pausa antes de fabricar Evidence. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
 </section>
 </main>
 
@@ -389,6 +446,82 @@ button:disabled{opacity:.48;cursor:not-allowed}
   if (savedLimit && [...limit.options].some((o) => o.value === savedLimit)) limit.value = savedLimit;
   updateProgress();
   refreshCounts().catch((error) => log(`No se pudo leer la cola todavía: ${error.message || error}`));
+})();
+</script>
+
+<script>
+(() => {
+  const q=(id)=>document.getElementById(id);
+  const corpus=q('corpusPanel'), unified=q('unifiedPanel');
+  const tabCorpus=q('tabCorpus'), tabUnified=q('tabUnified');
+  const key=q('unifiedKey'), log=q('unifiedLog'), dot=q('unifiedDot'), statusText=q('unifiedStatusText');
+  const saved=localStorage.getItem('mlsUnifiedRunnerKey')||''; if(saved) key.value=saved;
+  function show(which){
+    const u=which==='unified'; corpus.hidden=u; unified.hidden=!u;
+    tabUnified.className=u?'primary':'secondary'; tabCorpus.className=u?'secondary':'primary';
+    localStorage.setItem('mlsRunnerTab',u?'unified':'corpus');
+    if(u) refresh().catch(()=>{});
+  }
+  tabCorpus.onclick=()=>show('corpus'); tabUnified.onclick=()=>show('unified');
+  key.addEventListener('change',()=>localStorage.setItem('mlsUnifiedRunnerKey',key.value));
+  function write(msg){log.textContent+='\\n['+new Date().toLocaleTimeString()+'] '+msg;log.scrollTop=log.scrollHeight}
+  function auth(){const value=key.value.trim(); if(!value) throw new Error('Ingresá la clave editorial.'); localStorage.setItem('mlsUnifiedRunnerKey',value); return {'authorization':'Bearer '+value,'content-type':'application/json'};}
+  async function unifiedApi(path,body={}){
+    const r=await fetch('/api/unified-runner/'+path,{method:'POST',headers:auth(),body:JSON.stringify(body),cache:'no-store'});
+    const j=await r.json().catch(()=>({error:'Respuesta no JSON'}));
+    if(!r.ok) throw new Error(j.message||j.error||('HTTP '+r.status));
+    return j;
+  }
+  function n(v){return Number(v||0)}
+  function durableCount(list,state){const row=(list||[]).find(x=>x.state===state);return row?Number(row.n||0):0}
+  function render(data,canonical={}){
+    const r=data.runner||{}, r44=data.r44||{}, lanes=data.lanes||{};
+    q('unifiedState').value=r.state||'—';
+    q('unifiedLast').value=[r.last_ticket,r.last_code].filter(Boolean).join(' · ')||'—';
+    q('unifiedProcessed').textContent=n(r.processed_entries);
+    q('unifiedCorrected').textContent=n(r.corrected_entries);
+    q('unifiedErrors').textContent=n(r.error_count);
+    q('unifiedComplete').textContent=durableCount(r44.durableCounts,'COMPLETE');
+    q('unifiedClaimable').textContent=durableCount(r44.durableCounts,'CLAIMABLE');
+    q('unifiedPartial').textContent=durableCount(r44.durableCounts,'PARTIAL_DURABLE');
+    q('unifiedMaxLeases').textContent=r44.maxActiveLeases??'—';
+    q('unifiedFree').textContent=data.freeOnly===true?'Sí':'—';
+    q('unifiedR33Lane').textContent=lanes.r33?.state||'—';
+    q('unifiedIntegrationLane').textContent=lanes.integration?.state||'—';
+    q('unifiedVerified').textContent=canonical.verifiedCount??'—';
+    q('unifiedRemaining').textContent=canonical.remaining??'—';
+    statusText.textContent=r.last_error ? (r.state+' · '+r.last_error) : (r.state||'Listo');
+    const pauseStates=new Set(['PAUSED','QUOTA_PAUSED','POLICY_PAUSED','REVIEW_PAUSED']);
+    dot.className='dot '+(r.state==='RUNNING'?'running':pauseStates.has(r.state)?'paused':r.state==='ERROR'?'error':'');
+    const total=durableCount(r44.durableCounts,'COMPLETE')+durableCount(r44.durableCounts,'CLAIMABLE')+durableCount(r44.durableCounts,'LEASED')+durableCount(r44.durableCounts,'PARTIAL_DURABLE')+durableCount(r44.durableCounts,'QUARANTINED');
+    q('unifiedBar').style.width=total?Math.min(100,Math.round(durableCount(r44.durableCounts,'COMPLETE')/total*100))+'%':'0%';
+  }
+  async function refresh(){
+    const data=await unifiedApi('status');
+    let canonical={};
+    try{
+      const response=await fetch('/api/unified/status',{cache:'no-store'});
+      if(response.ok)canonical=await response.json();
+    }catch(_){}
+    render(data,canonical);
+    return {data,canonical};
+  }
+  async function control(action){write(action+' solicitado.');const data=await unifiedApi('control',{action});write('Estado: '+data.state);await refresh()}
+  q('unifiedStart').onclick=()=>control('start').catch(e=>write('ERROR — '+e.message));
+  q('unifiedPause').onclick=()=>control('pause').catch(e=>write('ERROR — '+e.message));
+  q('unifiedResume').onclick=()=>control('resume').catch(e=>write('ERROR — '+e.message));
+  q('unifiedStop').onclick=()=>control('stop').catch(e=>write('ERROR — '+e.message));
+  q('unifiedRefresh').onclick=()=>refresh().then(()=>write('Estado actualizado.')).catch(e=>write('ERROR — '+e.message));
+  q('unifiedStep').onclick=async()=>{
+    try{
+      write('Ticket manual iniciado.');
+      const result=await unifiedApi('step',{stepKey:'web:'+crypto.randomUUID()});
+      write(JSON.stringify(result));
+      await refresh();
+    }catch(e){write('ERROR — '+e.message)}
+  };
+  setInterval(()=>{if(!unified.hidden&&key.value.trim())refresh().catch(()=>{})},15000);
+  show(localStorage.getItem('mlsRunnerTab')==='unified'?'unified':'corpus');
 })();
 </script>
 </body>
