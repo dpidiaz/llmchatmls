@@ -90,6 +90,24 @@ test('R33 direct wave integration opens when the first full wave is certified wi
   assert.deepEqual(work.integration.sourceWorkerCommits,['1'.repeat(40),'2'.repeat(40)]);
 });
 
+test('Unified integration publishes only certified R33 units even when earlier handoff units are not ready',()=>{
+  const pool=r33Pool();
+  const ledger={terminal:{
+    later:{provider:'r33-farm',completedUnits:['MLS-V01-0002'],branch:'worker/r33-unified/2',commitSha:'2'.repeat(40),completedAt:'2026-10-03T07:41:00.000Z'}
+  }};
+  assert.equal(integration.r33IndexIntegrationWork({pool,globalLedger:ledger,waveSize:2,verifiedCodes:[]}),null,
+    'historical R33 integration keeps the full-wave contract');
+  const work=integration.r33IndexIntegrationWork({
+    pool,globalLedger:ledger,waveSize:2,verifiedCodes:[],workPrefix:'r33-unified-integration:'
+  });
+  assert.ok(work);
+  assert.deepEqual(work.units,['MLS-V01-0002']);
+  assert.match(work.workId,/^r33-unified-integration:/);
+  assert.equal(work.sourceRefs.length,1);
+  assert.equal(work.sourceRefs[0].code,'MLS-V01-0002');
+  assert.ok(!work.resourceLocks.includes('entry:MLS-V01-0001'));
+});
+
 test('R33 parallel preparation materializes independent waves while final integration keeps the global merge lock',()=>{
   const pool={...r33Pool(),execution:{...r33Pool().execution,parallelIntegrationPreparation:true,integrationWaveSize:1}};
   const globalLedger={terminal:{
