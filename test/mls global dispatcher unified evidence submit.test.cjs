@@ -1,0 +1,33 @@
+'use strict';
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+
+test('Unified R33 Evidence submit is issue-scoped, authorized and preflights before commit',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  assert.match(workflow,/issue_comment:/);
+  assert.match(workflow,/\[MLS Dispatcher\]\[LEASED\]/);
+  assert.match(workflow,/MLS_UNIFIED_R33_EVIDENCE_SUBMIT/);
+  assert.match(workflow,/author_association == 'OWNER'/);
+  assert.match(workflow,/author_association == 'MEMBER'/);
+  assert.match(workflow,/author_association == 'COLLABORATOR'/);
+  assert.match(workflow,/node scripts\/R4-evidence-preflight\.cjs "\$EVIDENCE_PATH"/);
+  const preflight=workflow.indexOf('R4-evidence-preflight.cjs');
+  const commit=workflow.indexOf('git commit -m');
+  const validate=workflow.indexOf("node --test 'test/r33 evidence editorial batch.test.cjs'");
+  const push=workflow.indexOf('git push origin');
+  assert.ok(preflight>0&&commit>preflight&&validate>commit&&push>validate);
+  assert.match(workflow,/git diff --cached --name-only/);
+});
+
+test('Unified Evidence submit script fails closed on assignment scope and lease',()=>{
+  const source=fs.readFileSync('scripts/MLS unified r33 evidence submit.cjs','utf8');
+  assert.match(source,/AUTHORIZED=new Set\(\['OWNER','MEMBER','COLLABORATOR'\]\)/);
+  assert.match(source,/state\.provider!=='r33-farm'/);
+  assert.match(source,/startsWith\('r33-unified:'\)/);
+  assert.match(source,/startsWith\('worker\/r33-unified\/'\)/);
+  assert.match(source,/UNIFIED_EVIDENCE_CODE_OUT_OF_SCOPE/);
+  assert.match(source,/UNIFIED_EVIDENCE_CONTENT_PATH_INVALID/);
+  assert.match(source,/UNIFIED_EVIDENCE_LEASE_EXPIRED/);
+  assert.doesNotMatch(source,/eval\(|Function\(/);
+});
