@@ -279,7 +279,7 @@ test('Fast Lane stops fail-closed when processor leaves current ticket incomplet
  h.close();
 });
 
-for(const workers of [5,15])test(`Fast Lane concurrency gate ${workers}: distinct tickets and durable completion`,async()=>{
+for(const workers of [5,15,30,60,100])test(`Fast Lane concurrency gate ${workers}: distinct tickets and durable completion`,async()=>{
  const h=harness();await seed(h,workers);const ticketIds=[];
  const clients=Array.from({length:workers},()=>{
   const fetch=async(url,init)=>{const req=new Request('https://fixture'+url,init);return h.r.handleR44(req,h.env,new URL(req.url));};
