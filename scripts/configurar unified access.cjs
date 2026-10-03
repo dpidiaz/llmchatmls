@@ -18,7 +18,11 @@ async function cf(path,options={}){
   const text=await response.text();
   let data=null;try{data=text?JSON.parse(text):null}catch{data={success:false,errors:[{message:text}]}}
   if(!response.ok||data?.success===false){
-    const message=(data?.errors||[]).map(x=>x.message||x.code).filter(Boolean).join(' | ')||('HTTP '+response.status);
+    const errors=Array.isArray(data?.errors)?data.errors:[];
+    const forbidden=errors.some(x=>Number(x&&x.code)===1010||String(x&&x.message||'').toLowerCase()==='auth.forbidden');
+    const message=forbidden
+      ? 'CLOUDFLARE_ACCESS_TOKEN_PERMISSION_REQUIRED: add Account > Access: Apps and Policies > Edit to the API token used by GitHub Actions'
+      : (errors.map(x=>x.message||x.code).filter(Boolean).join(' | ')||('HTTP '+response.status));
     const e=new Error(message);e.status=response.status;e.data=data;throw e;
   }
   return data?.result??data;
