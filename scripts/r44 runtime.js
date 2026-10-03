@@ -647,24 +647,26 @@ async function unifiedRunnerStep(env, stepKey) {
     .bind(stepToken,now+14*60*1000,new Date(now).toISOString(),now).first();
   if (!locked) return {status:"RUNNER_BUSY"};
   const release = async()=>env.WIKI_DB.prepare("UPDATE mls_unified_runner SET step_token=NULL,busy_until=NULL,updated_at=? WHERE id=1 AND step_token=?").bind(new Date().toISOString(),stepToken).run();
-  const claim = await r44DurableClaim(env,locked.worker_id,"unified:"+key);
-  if (!claim.ticket || !claim.ticket.lease_token) {
-    await unifiedRunnerApplyMark(env,{last_step_at:new Date().toISOString(),last_error:null});
-    await release();
-    return {status:claim.status || "NO_WORK",claim};
-  }
-  const token = claim.ticket.lease_token;
-  const context = await r44Context(env,token);
-  if (!context) throw new Error("UNIFIED_R44_CONTEXT_MISSING");
-  const entries = Array.isArray(context.entries) ? context.entries : [];
-  const content = Array.isArray(context.content) ? context.content : [];
+  let context = null;
   const receipts = [];
   try {
+    const claim = await r44DurableClaim(env,locked.worker_id,"unified:"+key);
+    if (!claim.ticket || !claim.ticket.lease_token) {
+      await unifiedRunnerApplyMark(env,{last_step_at:new Date().toISOString(),last_error:null});
+      return {status:claim.status || "NO_WORK",claim};
+    }
+    const token = claim.ticket.lease_token;
+    context = await r44Context(env,token);
+    if (!context) throw new Error("UNIFIED_R44_CONTEXT_MISSING");
+    const entries = Array.isArray(context.entries) ? context.entries : [];
+    const content = Array.isArray(context.content) ? context.content : [];
+    if (content.length !== entries.length) throw new Error("UNIFIED_R44_CONTEXT_ALIGNMENT");
     for (let i=0;i<entries.length;i++) {
       const source = entries[i];
       const article = content[i];
       await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET busy_until=? WHERE id=1 AND step_token=?").bind(Date.now()+14*60*1000,stepToken).run();
-      await r44Renew(env,token,context.leaseGeneration);
+      const renewed = await r44Renew(env,token,context.leaseGeneration);
+      if (!renewed) throw new Error("UNIFIED_R44_LEASE_RENEW_FAILED");
       const result = await unifiedRunnerAuditEntry(env,article);
       const checkpoint = await r44Checkpoint(env,{
         ticketId:context.ticketId,
@@ -686,7 +688,6 @@ async function unifiedRunnerStep(env, stepKey) {
       });
     }
     const finalState = await r44Reconcile(env,context.ticketId);
-    await release();
     return {status:"TICKET_COMPLETE",ticketId:context.ticketId,entries:entries.length,receipts,state:finalState && finalState.state};
   } catch (error) {
     const message = wikiErrorMessage(error);
@@ -694,8 +695,9 @@ async function unifiedRunnerStep(env, stepKey) {
     const paid = (typeof ZeroCostPolicyError !== "undefined" && error instanceof ZeroCostPolicyError) || workersAiFailureKind(message) === "paid";
     const pauseState = quota ? "QUOTA_PAUSED" : paid ? "POLICY_PAUSED" : "ERROR";
     await unifiedRunnerApplyMark(env,{state:pauseState,last_error:message,last_step_at:new Date().toISOString(),errorDelta:1});
-    await release();
-    return {status:pauseState,ticketId:context.ticketId,error:message,receipts};
+    return {status:pauseState,ticketId:context && context.ticketId || null,error:message,receipts};
+  } finally {
+    await release().catch(function(){});
   }
 }
 async function unifiedRunnerStepRequest(request, env) {
