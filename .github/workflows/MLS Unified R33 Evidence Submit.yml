@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: write
-  issues: read
+  issues: write
 
 concurrency:
   group: mls-unified-r33-evidence-${{ github.event.issue.number }}
@@ -80,3 +80,11 @@ jobs:
         run: |
           git push origin "HEAD:refs/heads/$BRANCH"
           echo "MLS_UNIFIED_R33_EVIDENCE_COMMIT ${{ steps.commit.outputs.sha }}"
+      - name: Publish fenced durable checkpoint
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUNDLE_PATH: ${{ steps.prep.outputs.bundle_path }}
+          COMMIT_SHA: ${{ steps.commit.outputs.sha }}
+        shell: bash
+        run: |
+          node "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" checkpoint "$BUNDLE_PATH" "$COMMIT_SHA" "$GITHUB_RUN_ID"
