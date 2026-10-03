@@ -78,5 +78,38 @@ class R44Client {
   }
   async renew(){return this.request('/api/r44/renew?lease='+encodeURIComponent(this.state.leaseToken)+'&leaseGeneration='+this.state.leaseGeneration,{});}
   async next(){const state=await this.recover();if(state.state!=='COMPLETE')throw new Error('CURRENT_TICKET_NOT_COMPLETE');this.state={workerId:this.state.workerId};this.save();return this.claim();}
+  async fastLane({maxTickets=10,processTicket,shouldContinue=()=>true}={}) {
+    if(!Number.isInteger(maxTickets)||maxTickets<1||maxTickets>10)throw new Error('FAST_LANE_LIMIT_INVALID');
+    if(typeof processTicket!=='function')throw new Error('FAST_LANE_PROCESSOR_REQUIRED');
+    const completed=[];
+    let reason='LIMIT_REACHED';
+    while(completed.length<maxTickets) {
+      let allocation;
+      if(this.state.ticketId) {
+        const current=await this.recover();
+        if(current.state==='COMPLETE') allocation=await this.next();
+        else {
+          const stop=current.status||current.state;
+          if(['LEASE_LOST','QUARANTINED','NO_BINDING'].includes(stop)){reason=stop;break;}
+          allocation=current;
+        }
+      } else allocation=await this.claim();
+      if(!this.state.ticketId){reason=allocation?.status||'NO_WORK';break;}
+      const ticketId=this.state.ticketId;
+      const remaining=allocation?.ticket?.entries?.map(e=>e.code)||
+        allocation?.remaining||
+        allocation?.entries?.filter(e=>!e.receipt).map(e=>e.code)||
+        [];
+      await processTicket({client:this,allocation,ticketId,remaining,index:completed.length});
+      const confirmed=await this.recover();
+      if(confirmed.state!=='COMPLETE') {
+        return {status:'FAST_LANE_STOPPED',reason:confirmed.status||confirmed.state||'CURRENT_TICKET_NOT_COMPLETE',completed,count:completed.length,workerId:this.state.workerId,ticketId,state:confirmed};
+      }
+      completed.push(ticketId);
+      if(completed.length>=maxTickets){reason='LIMIT_REACHED';break;}
+      if(!(await shouldContinue({client:this,completed:[...completed],last:confirmed}))){reason='CALLER_STOP';break;}
+    }
+    return {status:'FAST_LANE_STOPPED',reason,completed,count:completed.length,workerId:this.state.workerId};
+  }
 }
 if(typeof module!=='undefined')module.exports={R44Client};
