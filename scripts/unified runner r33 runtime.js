@@ -139,6 +139,69 @@ async function unifiedR33RunProvider(env,provider,messages,maxTokens) {
     throw error;
   }
 }
+function unifiedR33SafeSourceUrl(value) {
+  const raw=String(value||"").trim();
+  if(!raw)return null;
+  try{
+    const u=new URL(raw);
+    if(u.protocol!=="https:"&&u.protocol!=="http:")return null;
+    const host=u.hostname.toLowerCase();
+    if(host==="localhost"||host.endsWith(".local")||host==="::1"||host.startsWith("127.")||host.startsWith("10.")||host.startsWith("192.168.")||host.startsWith("169.254."))return null;
+    const m=/^172\.(\d{1,3})\./.exec(host);if(m&&Number(m[1])>=16&&Number(m[1])<=31)return null;
+    return u.toString();
+  }catch{return null}
+}
+function unifiedR33ReadableSourceText(raw,contentType) {
+  let text=String(raw||"");
+  if(/html|xml/i.test(String(contentType||""))){
+    text=text.replace(/<script\b[\s\S]*?<\/script>/gi," ").replace(/<style\b[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," ");
+  }
+  return text.replace(/&nbsp;|&#160;/gi," ").replace(/&amp;/gi,"&").replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'").replace(/\s+/g," ").trim();
+}
+async function unifiedR33FetchSourceDocument(candidate) {
+  const metadata=candidate&&candidate.metadata||{};
+  const type=String(metadata.sourceType||"");
+  const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
+  if(!autoTypes.has(type))return {ok:false,reason:"SOURCE_FULLTEXT_REQUIRED",sourceId:candidate.sourceId};
+  const url=unifiedR33SafeSourceUrl(metadata.canonicalUrl);
+  if(!url)return {ok:false,reason:"SOURCE_URL_UNAVAILABLE",sourceId:candidate.sourceId};
+  let response;
+  try{response=await fetch(url,{redirect:"follow",headers:{accept:"text/html,text/plain,application/json,application/xml;q=0.8,*/*;q=0.2","user-agent":"MLS-Unified-R33/1.0"}})}
+  catch{return {ok:false,reason:"SOURCE_FETCH_FAILED",sourceId:candidate.sourceId}};
+  if(!response.ok)return {ok:false,reason:"SOURCE_FETCH_HTTP_"+response.status,sourceId:candidate.sourceId};
+  const contentType=String(response.headers.get("content-type")||"");
+  if(!/text|html|json|xml/i.test(contentType))return {ok:false,reason:"SOURCE_CONTENT_TYPE_UNSUPPORTED",sourceId:candidate.sourceId};
+  const raw=await response.text();
+  const text=unifiedR33ReadableSourceText(raw,contentType).slice(0,18000);
+  if(text.length<300)return {ok:false,reason:"SOURCE_TEXT_TOO_SHORT",sourceId:candidate.sourceId};
+  return {ok:true,sourceId:candidate.sourceId,url,text,title:String(metadata.title||"")};
+}
+async function unifiedR33SourceSupportAudit(env,claims,candidates) {
+  const ids=[...new Set(claims.map(x=>x.sourceId))],documents=[];
+  for(const sourceId of ids){
+    const candidate=candidates.find(x=>x.sourceId===sourceId);
+    if(!candidate)return {ok:false,reason:"SOURCE_NOT_REGISTERED",sourceId};
+    const doc=await unifiedR33FetchSourceDocument(candidate);
+    if(!doc.ok)return doc;
+    documents.push(doc);
+  }
+  const packet=documents.map(d=>({sourceId:d.sourceId,title:d.title,url:d.url,text:d.text.slice(0,7000)}));
+  const prompt=[
+    "MLS R33 SOURCE-SUPPORT AUDITOR v3.",
+    "Return ONLY JSON.",
+    "Evaluate the claims against the ACTUAL fetched source text below, not merely bibliographic metadata.",
+    "PASS only when every claim is directly supported by the sourceId assigned to it. Reject inference that is broader than the source text.",
+    "If a source page is only a landing page, table of contents, bibliography, product page, metadata record, or otherwise lacks the substantive support, return NEEDS_CHAT_REVIEW.",
+    "Output keys: status (PASS or NEEDS_CHAT_REVIEW), confidence 0..1, unsupportedClaimIndexes array, rationale.",
+    "CLAIMS:\n"+JSON.stringify(claims.map((c,i)=>({index:i,summary:c.summary,claimType:c.claimType,sourceId:c.sourceId}))),
+    "FETCHED SOURCES:\n"+JSON.stringify(packet).slice(0,32000)
+  ].join("\n\n");
+  const provider={id:"cloudflare-r33-source-support-auditor",kind:"cloudflare",model:"@cf/ibm-granite/granite-4.0-h-micro"};
+  const result=await unifiedR33RunProvider(env,provider,[{role:"user",content:prompt}],1000);
+  const parsed=unifiedR33ParseJson(result.text),confidence=Number(parsed.confidence||0);
+  const unsupported=Array.isArray(parsed.unsupportedClaimIndexes)?parsed.unsupportedClaimIndexes.filter(Number.isInteger).slice(0,16):[];
+  return {ok:parsed.status==="PASS"&&confidence>=0.85&&!unsupported.length,confidence,unsupported,rationale:String(parsed.rationale||"").slice(0,1600),result};
+}
 async function unifiedR33CoverageAudit(env,finalArticle,claims,sourcePacket) {
   const prompt=[
     "MLS R33 CLAIM-COVERAGE AUDITOR v2.",
@@ -169,7 +232,7 @@ async function unifiedR33CoverageAudit(env,finalArticle,claims,sourcePacket) {
   };
 }
 function unifiedR33EvidenceObject(args) {
-  const {code,contentPath,finalArticle,claimSet,matcher,coverage,runId,currentEvidenceRevision}=args;
+  const {code,contentPath,finalArticle,claimSet,matcher,support,coverage,runId,currentEvidenceRevision}=args;
   const now=new Date().toISOString(),temp=code.replace(/[^A-Z0-9]/g,"");
   const claims=claimSet.claims.map((claim,index)=>({
     claimId:"MLS-CLM-TEMP-"+temp+"-"+String(index+1).padStart(2,"0"),
@@ -185,7 +248,7 @@ function unifiedR33EvidenceObject(args) {
     supportType:"supports",
     locator:{},
     notes:claim.rationale||null,
-    verificationMethod:"automated_registered_source_match_v2"
+    verificationMethod:"automated_registered_source_fulltext_match_v3"
   }));
   return {
     schemaVersion:"1.0",architecture:"github-native",code,
@@ -194,13 +257,13 @@ function unifiedR33EvidenceObject(args) {
     claims,links,conflicts:[],
     verification:{
       verifiedAt:now,reviewerType:"system",reviewer:"MLS Unified Cloudflare Runner",
-      verificationMethod:"automated_registered_source_match_v2",evidenceSnapshotHash:"pending-preflight",runId
+      verificationMethod:"automated_registered_source_fulltext_match_v3",evidenceSnapshotHash:"pending-preflight",runId
     },
     review:null,
     provenance:{
       generatedWithAI:true,
-      model:[matcher.model,coverage.result.model].filter(Boolean).join(" + "),
-      promptVersion:"R33-Unified-CF-2",runId,sourceOfTruth:"github",updatedAt:now
+      model:[matcher.model,support.result&&support.result.model,coverage.result.model].filter(Boolean).join(" + "),
+      promptVersion:"R33-Unified-CF-3",runId,sourceOfTruth:"github",updatedAt:now
     }
   };
 }
@@ -252,6 +315,21 @@ async function unifiedRunnerR33Draft(request,env) {
     },200);
   }
 
+  let support;
+  try{
+    support=await unifiedR33SourceSupportAudit(env,claimSet.claims,candidates);
+  }catch(error){
+    if(error.unifiedStatus)return r44Json({error:error.unifiedStatus,message:error.message},error.unifiedStatus==="QUOTA_PAUSED"?429:409);
+    throw error;
+  }
+  if(!support.ok){
+    return r44Json({
+      ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:support.reason||"SOURCE_SUPPORT_AUDIT_REJECTED",
+      confidence:support.confidence??null,sourceId:support.sourceId||null,
+      unsupportedClaimIndexes:support.unsupported||[],rationale:support.rationale||""
+    },200);
+  }
+
   let coverage;
   try{
     coverage=await unifiedR33CoverageAudit(env,finalArticle,claimSet.claims,packet);
@@ -269,7 +347,7 @@ async function unifiedRunnerR33Draft(request,env) {
 
   const runId=String(body.runId || "MLS-UNIFIED-WEB");
   const evidence=unifiedR33EvidenceObject({
-    code,contentPath,finalArticle,claimSet,matcher,coverage,runId,currentEvidenceRevision:body.currentEvidenceRevision
+    code,contentPath,finalArticle,claimSet,matcher,support,coverage,runId,currentEvidenceRevision:body.currentEvidenceRevision
   });
   const sources=[...new Set(claimSet.claims.map(x=>x.sourceId))].map(sourceId=>{
     const source=candidates.find(x=>x.sourceId===sourceId);
@@ -277,7 +355,7 @@ async function unifiedRunnerR33Draft(request,env) {
   }).filter(Boolean);
   return r44Json({
     ok:true,status:"MATCH",code,
-    confidence:Math.min(claimSet.confidence,coverage.confidence),
+    confidence:Math.min(claimSet.confidence,support.confidence,coverage.confidence),
     claimCount:claimSet.claims.length,sources,evidence,
     finalContent:String(handoffEntry.outcome||"").toUpperCase()==="CORRECTED"?finalArticle:null
   });
