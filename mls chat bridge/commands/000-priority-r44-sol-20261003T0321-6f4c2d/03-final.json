@@ -1,0 +1,153 @@
+{
+  "batchId": "r44-sol-0321-6f4c2d-ticket-1589-final",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {}
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "ticketId": "R44-CORPUS-1589",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-sol-0321-6f4c2d-MLS-V10-0328-corrected-v1",
+        "entry": {
+          "code": "MLS-V10-0328",
+          "outcome": "CORRECTED",
+          "correctedContent": {
+            "articleMarkdown": "#### En pocas palabras\n\nEl **leísmo** consiste en usar **le** o **les** como pronombres de objeto directo en contextos donde el sistema general emplea **lo, la, los, las**.\n\nPor ejemplo, junto a *Vi a Juan → Lo vi*, existe *Le vi*. Este último uso con una persona masculina singular está ampliamente extendido y es admitido por la norma culta.\n\n#### Cómo funciona\n\nPara reconocer el leísmo hay que determinar primero la función sintáctica. En **Le di el libro a Juan**, *le* es objeto indirecto y no hay leísmo: aquello que se da es *el libro* y Juan es el destinatario.\n\nEn **Vi a Juan**, en cambio, *a Juan* es objeto directo pese a llevar la preposición *a*. La sustitución general es *Lo vi*. Si aparece *Le vi*, *le* ocupa una función de objeto directo y se produce leísmo.\n\nLa valoración normativa varía según el referente. La norma culta admite **le/les** como objeto directo cuando el referente es una persona de género gramatical masculino, aunque este leísmo de persona es mucho más frecuente en singular. En cambio, el leísmo de cosa —por ejemplo, *el libro, le vi*— no se admite en la norma culta estándar.\n\n#### Ejemplos\n\n**A Juan lo vi ayer.** *Lo* es objeto directo masculino singular.\n\n**A Juan le vi ayer.** Es leísmo de persona masculina singular, admitido por la norma.\n\n**A Juan y Pedro les vi ayer.** Es leísmo de persona masculina plural; la norma actual no lo considera incorrecto, aunque es mucho menos frecuente que el singular.\n\n**A Juan le di el informe.** No hay leísmo: *le* funciona como objeto indirecto.\n\n**El informe lo revisé.** *Lo* recupera un objeto directo de cosa; usar *le* en este contexto sería otro tipo de leísmo.\n\n#### Observación importante\n\nNo debe identificarse el leísmo simplemente por encontrar **le**. Este pronombre es la forma regular de objeto indirecto en construcciones como *Le conté la noticia a Marta* o *Le entregué el paquete a Luis*.\n\nAdemás, el uso real varía entre regiones y hablantes. La descripción de una variedad debe distinguir esos usos dialectales de la recomendación normativa y no trasladar automáticamente los patrones de unas zonas a otras.\n\n#### Entradas relacionadas\n\n- [Entrada 327: Posición de los pronombres átonos en estructuras complejas](#entrada-327)\n- [Entrada 329: El laísmo y el loísmo](#entrada-329)\n- [Entrada 326: Posición de los pronombres átonos en relación con el verbo](#entrada-326)\n- [Entrada 330: La duplicación pronominal](#entrada-330)"
+          },
+          "notes": {
+            "auditStatus": "CORRECTED",
+            "summary": "Se actualizó la explicación normativa del leísmo de persona masculina según la 2.ª edición del DPD: la admisión comprende le y les; el plural es menos frecuente, no excluido.",
+            "changes": [
+              "Se sustituyó la afirmación de que «les vi» masculino plural queda fuera de la excepción normativa.",
+              "Se precisó que le/les como complemento directo de persona masculina no se considera incorrecto en la norma culta actual.",
+              "Se añadió un ejemplo explícito de leísmo masculino plural y se mantuvo la exclusión del leísmo de cosa."
+            ],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "La norma culta actual admite le/les en función de complemento directo cuando el referente es persona de género gramatical masculino; el singular es mucho más frecuente.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Real Academia Española y Asociación de Academias de la Lengua Española. Diccionario panhispánico de dudas, 2.ª ed., «leísmo», apartados 2-3.",
+              "role": "Fuente normativa principal para la admisión de le(s) con referente personal masculino y la mayor frecuencia del singular.",
+              "url": "https://www.rae.es/dpd/le%C3%ADsmo"
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "ticketId": "R44-CORPUS-1589",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-sol-0321-6f4c2d-MLS-V10-0329-pass-v1",
+        "entry": {
+          "code": "MLS-V10-0329",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "organization": "Real Academia Española y ASALE",
+              "title": "laísmo — Diccionario panhispánico de dudas",
+              "url": "https://www.rae.es/dpd/la%C3%ADsmo"
+            },
+            {
+              "organization": "Real Academia Española y ASALE",
+              "title": "loísmo — Diccionario panhispánico de dudas",
+              "url": "https://www.rae.es/dpd/lo%C3%ADsmo"
+            }
+          ],
+          "notes": "R44 audit: la definición de laísmo/loísmo como empleo de la(s)/lo(s) en función de complemento indirecto donde el sistema general usa le(s), y su caracterización como usos no pertenecientes a la norma culta general, son correctas."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "ticketId": "R44-CORPUS-1589",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-sol-0321-6f4c2d-MLS-V10-0330-pass-v1",
+        "entry": {
+          "code": "MLS-V10-0330",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "organization": "Real Academia Española y ASALE",
+              "title": "complemento indirecto — Glosario de términos gramaticales",
+              "url": "https://www.rae.es/gtg/complemento-indirecto"
+            }
+          ],
+          "notes": "R44 audit: la duplicación de pronombres tónicos por clíticos en objeto directo e indirecto está correctamente descrita; la referencia señala además que los pronombres tónicos en acusativo o dativo requieren normalmente el correspondiente clítico."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "ticketId": "R44-CORPUS-1589",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-sol-0321-6f4c2d-MLS-V10-0331-pass-v1",
+        "entry": {
+          "code": "MLS-V10-0331",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "organization": "Real Academia Española y ASALE",
+              "title": "complemento indirecto — Glosario de términos gramaticales",
+              "url": "https://www.rae.es/gtg/complemento-indirecto"
+            },
+            {
+              "organization": "Real Academia Española y ASALE",
+              "title": "El concepto de tópico (II) — Nueva gramática de la lengua española",
+              "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/el-concepto-de-t%C3%B3pico-ii-v%C3%ADnculos-sint%C3%A1cticos-y-discursivos-entre-el-t%C3%B3pico-y-la-oraci%C3%B3n-a-la-que-corresponde"
+            }
+          ],
+          "notes": "R44 audit: la entrada distingue adecuadamente la duplicación nominal de objeto indirecto y el doblado de objetos directos topicalizados, y acierta al advertir que la duplicación posverbal de objeto directo presenta variación dialectal."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "ticketId": "R44-CORPUS-1589",
+        "leaseGeneration": 2,
+        "idempotencyKey": "r44-sol-0321-6f4c2d-MLS-V10-0333-pass-v1",
+        "entry": {
+          "code": "MLS-V10-0333",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "organization": "Real Academia Española y ASALE",
+              "title": "voseo — Diccionario panhispánico de dudas",
+              "url": "https://www.rae.es/dpd/voseo"
+            },
+            {
+              "organization": "Real Academia Española y ASALE",
+              "title": "vos — Diccionario panhispánico de dudas",
+              "url": "https://www.rae.es/dpd/vos"
+            }
+          ],
+          "notes": "R44 audit: la caracterización del voseo guatemalteco, sus formas verbales e imperativas, el uso de te y posesivos de tuteo y la coexistencia social de vos/tú/usted son compatibles con la descripción académica."
+        }
+      }
+    },
+    {
+      "operationId": "r44RebindChat",
+      "input": {
+        "workerId": "r44-sol-20261003-0321-6f4c2d",
+        "ticketId": "R44-CORPUS-1589"
+      }
+    }
+  ]
+}
