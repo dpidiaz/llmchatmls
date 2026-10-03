@@ -14,24 +14,17 @@ function extractMarked(text){
   if(!m)fail('UNIFIED_EVIDENCE_MARKER_MISSING');
   try{return JSON.parse(m[1].trim())}catch{fail('UNIFIED_EVIDENCE_JSON_INVALID')}
 }
-function githubContext(){
+async function gh(endpoint){
   const token=process.env.GITHUB_TOKEN||'';
   const repository=process.env.GITHUB_REPOSITORY||'';
   if(!token||repository.split('/').length!==2||repository.startsWith('/')||repository.endsWith('/'))fail('GITHUB_CONTEXT_MISSING');
-  return {token,repository};
-}
-async function gh(endpoint,{method='GET',body}={}){
-  const {token}=githubContext();
   const response=await fetch('https://api.github.com'+endpoint,{
-    method,
-    headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-unified-r33-evidence-submit'},
-    body:body===undefined?undefined:JSON.stringify(body)
+    headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','x-github-api-version':'2022-11-28','user-agent':'mls-unified-r33-evidence-submit'}
   });
-  const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-  if(!response.ok)fail('GITHUB_'+response.status,data?.message||text||'GitHub request failed');
-  return data;
+  const body=await response.json();
+  if(!response.ok)fail('GITHUB_'+response.status,body?.message||'GitHub request failed');
+  return body;
 }
-function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
 function validate(issue,comment,payload){
   if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase()))fail('UNIFIED_EVIDENCE_AUTHOR_UNAUTHORIZED');
   if(!String(issue?.title||'').startsWith('[MLS Dispatcher][LEASED]'))fail('UNIFIED_EVIDENCE_NOT_LEASED');
@@ -93,98 +86,13 @@ function apply(){
   const root=path.resolve(workspace)+path.sep;
   if(!target.startsWith(root))fail('UNIFIED_EVIDENCE_TARGET_ESCAPE');
   fs.mkdirSync(path.dirname(target),{recursive:true});
-  fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+String.fromCharCode(10));
+  fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+'\\n');
   process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath})+'\n');
-}
-function syntheticEventPath(kind){
-  return path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-'+kind+'-event.json');
-}
-function writeSyntheticEvent(kind,issueNumber,commentBody,commentId){
-  const eventPath=syntheticEventPath(kind);
-  fs.writeFileSync(eventPath,JSON.stringify({
-    issue:{number:Number(issueNumber)},
-    comment:{
-      id:Number(commentId),
-      body:commentBody,
-      created_at:new Date().toISOString(),
-      user:{login:'github-actions[bot]'}
-    }
-  },null,2)+String.fromCharCode(10));
-  appendOutput('event_path',eventPath);
-  return eventPath;
-}
-async function checkpointEvent(){
-  const bundlePath=process.argv[3];
-  const commitSha=String(process.argv[4]||'').toLowerCase();
-  const runId=Number(process.argv[5]||0);
-  if(!bundlePath||!/^[a-f0-9]{40}$/.test(commitSha)||!Number.isInteger(runId)||runId<1)fail('UNIFIED_EVIDENCE_CHECKPOINT_ARGS');
-  const bundle=JSON.parse(fs.readFileSync(bundlePath,'utf8'));
-  const {repository}=githubContext();
-  const issue=await gh('/repos/'+repository+'/issues/'+Number(bundle.issueNumber));
-  const state=core.parseAssignmentState(issue?.body||'');
-  if(!state||state.status!=='leased'||state.assignmentId!==bundle.assignmentId||Number(state.leaseEpoch)!==Number(bundle.leaseEpoch))
-    fail('UNIFIED_EVIDENCE_CHECKPOINT_STATE_MISMATCH');
-  if(state.provider!=='r33-farm'||!String(state.workId||'').startsWith('r33-unified:')||state.branch!==bundle.branch)
-    fail('UNIFIED_EVIDENCE_CHECKPOINT_SCOPE_MISMATCH');
-  const ref=await gh('/repos/'+repository+'/git/ref/heads/'+encodeRef(state.branch));
-  if(String(ref?.object?.sha||'').toLowerCase()!==commitSha)fail('UNIFIED_EVIDENCE_CHECKPOINT_HEAD_MISMATCH');
-  const assignedCodes=(state.resourceLocks||[]).filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6));
-  const previous=(state.checkpoints||[]).at(-1)?.completedUnits||[];
-  const completed=[...new Set([...previous,bundle.code])].filter(code=>assignedCodes.includes(code));
-  const pending=assignedCodes.filter(code=>!completed.includes(code));
-  const event={
-    operation:'checkpoint',
-    assignmentId:state.assignmentId,
-    leaseToken:state.leaseToken,
-    leaseEpoch:state.leaseEpoch,
-    commitSha,
-    validation:{status:'passed',workflow:'MLS Unified R33 Evidence Submit',runId},
-    completedUnits:completed,
-    pendingUnits:pending,
-    notes:'Unified inline auto-checkpoint after canonical preflight and R33 tests.'
-  };
-  const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'checkpoint'})+'\\n-->';
-  const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
-  const eventPath=writeSyntheticEvent('checkpoint',bundle.issueNumber,body,runId*10+1);
-  process.stdout.write(JSON.stringify({ok:true,eventPath,code:bundle.code,commitSha,completedUnits:completed,pendingUnits:pending})+String.fromCharCode(10));
-}
-async function finishEvent(){
-  const bundlePath=process.argv[3];
-  const commitSha=String(process.argv[4]||'').toLowerCase();
-  const runId=Number(process.argv[5]||0);
-  if(!bundlePath||!/^[a-f0-9]{40}$/.test(commitSha)||!Number.isInteger(runId)||runId<1)fail('UNIFIED_EVIDENCE_FINISH_ARGS');
-  const bundle=JSON.parse(fs.readFileSync(bundlePath,'utf8'));
-  const {repository}=githubContext();
-  const issue=await gh('/repos/'+repository+'/issues/'+Number(bundle.issueNumber));
-  const state=core.parseAssignmentState(issue?.body||'');
-  if(!state||state.status!=='leased'||state.assignmentId!==bundle.assignmentId||Number(state.leaseEpoch)!==Number(bundle.leaseEpoch))
-    fail('UNIFIED_EVIDENCE_FINISH_STATE_MISMATCH');
-  const last=(state.checkpoints||[]).at(-1);
-  const pending=last?.pendingUnits||[];
-  if(String(state.lastCheckpointCommit||'').toLowerCase()!==commitSha||pending.length){
-    appendOutput('finish_needed','false');
-    process.stdout.write(JSON.stringify({ok:true,finishNeeded:false,pendingUnits:pending})+String.fromCharCode(10));
-    return;
-  }
-  const event={
-    operation:'finish',
-    assignmentId:state.assignmentId,
-    leaseToken:state.leaseToken,
-    leaseEpoch:state.leaseEpoch,
-    commitSha
-  };
-  const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'finish'})+'\\n-->';
-  const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
-  const eventPath=writeSyntheticEvent('finish',bundle.issueNumber,body,runId*10+2);
-  appendOutput('finish_needed','true');
-  process.stdout.write(JSON.stringify({ok:true,finishNeeded:true,eventPath,commitSha})+String.fromCharCode(10));
 }
 async function main(){
   const mode=String(process.argv[2]||'');
   if(mode==='prepare')return prepare();
   if(mode==='apply')return apply();
-  if(mode==='checkpoint-event')return checkpointEvent();
-  if(mode==='finish-event')return finishEvent();
   fail('UNIFIED_EVIDENCE_MODE_INVALID');
 }
 if(require.main===module)main().catch(error=>{console.error(error.code||'UNIFIED_EVIDENCE_SUBMIT_ERROR',error.message);process.exitCode=2});
