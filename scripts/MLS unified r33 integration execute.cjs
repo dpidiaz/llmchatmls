@@ -66,14 +66,21 @@ function validateState(issue,comment,payload){
 }
 async function prepare(){
   const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-  if(!event.issue||!event.comment)fail('UNIFIED_INTEGRATION_EVENT_INVALID');
   const {repository}=githubContext();
-  const issue=await gh('/repos/'+repository+'/issues/'+event.issue.number);
-  const payload=extractMarked(event.comment.body||'');
-  const state=validateState(issue,event.comment,payload);
+  let eventIssue=event.issue||null,eventComment=event.comment||null;
+  if(!eventIssue||!eventComment){
+    const issueNumber=Number(process.env.MLS_UNIFIED_ISSUE_NUMBER||0);
+    const commentId=Number(process.env.MLS_UNIFIED_COMMENT_ID||0);
+    if(!Number.isInteger(issueNumber)||issueNumber<1||!Number.isInteger(commentId)||commentId<1)fail('UNIFIED_INTEGRATION_EVENT_INVALID');
+    eventIssue={number:issueNumber};
+    eventComment=await gh('/repos/'+repository+'/issues/comments/'+commentId);
+  }
+  const issue=await gh('/repos/'+repository+'/issues/'+eventIssue.number);
+  const payload=extractMarked(eventComment.body||'');
+  const state=validateState(issue,eventComment,payload);
   const bundlePath=path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-integration.json');
   fs.writeFileSync(bundlePath,JSON.stringify({
-    issueNumber:Number(issue.number),commentId:Number(event.comment.id),commentLogin:String(event.comment.user?.login||''),
+    issueNumber:Number(issue.number),commentId:Number(eventComment.id),commentLogin:String(eventComment.user?.login||''),
     assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,branch:state.branch,baseCommit:state.baseCommit,
     workId:state.workId,allowedPaths:state.allowedPaths||[],integration:state.integration
   },null,2)+'\n');
