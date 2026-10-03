@@ -82,15 +82,15 @@ test('Unified candidate carries R44 correction context and canonical content pat
 
 test('protectCandidateCodes prevents the general R33 lane from taking a Unified code in the same allocation pass',()=>{
   const pool={
-    poolId:'P',manifestVersion:'1',status:'authorized',active:true,sourceOfTruth:'github',
+    poolId:'MLS-R33-TEST-PROTECT',manifestVersion:'1',status:'authorized',active:true,sourceOfTruth:'github',
     cloudflareEditorialAllowed:false,d1EditorialAllowed:false,execution:{defaultClaimSize:1,maxClaimSize:10},
     entries:[
       {order:1,code:'MLS-V01-9001',language:'ingles',contentPath:'content/a.json'},
       {order:2,code:'MLS-V01-9002',language:'ingles',contentPath:'content/b.json'}
     ]
   };
-  const snapshot={pool,ledger:{poolId:'P',manifestVersion:'1',verified:[],exceptions:[]},batches:[],reservedCodes:[]};
-  const selected={poolId:'P',units:[pool.entries[0]]};
+  const snapshot={pool,ledger:{poolId:'MLS-R33-TEST-PROTECT',manifestVersion:'1',verified:[],exceptions:[]},batches:[],reservedCodes:[]};
+  const selected={poolId:'MLS-R33-TEST-PROTECT',units:[pool.entries[0]]};
   const protectedView=integration.protectCandidateCodes(snapshot,[selected],NOW);
   const general=r33Provider.materializeCandidate(protectedView,{now:NOW,requested:1});
   assert.deepEqual(general.units.map(x=>x.code),['MLS-V01-9002']);
