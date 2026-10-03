@@ -13,13 +13,23 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Deploy R44 44.1 durable per-entry checkpoints, fenced leases and authenticated recovery",
-  "retryGeneration": 12,
+  "retryReason": "Deploy R44 Fast Lane bounded disposable-chat multiplexing on top of R44 44.1",
+  "retryGeneration": 13,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
   "githubHotPathWrites": false,
   "claimDistribution": "deterministic-worker-shard-with-wraparound",
   "bootstrapStrategy": "Resumable INSERT OR IGNORE: at most 10 static escaped batches of 50 missing tickets; verify exact D1 universe before POOL-2 sentinel",
-  "durableEntrySchema": "1"
+  "durableEntrySchema": "1",
+  "fastLane": {
+    "schema": "MLS-R44-FAST-LANE-1",
+    "command": "MLS R44 Fast Lane siguiente",
+    "maxTicketsPerSession": 10,
+    "noPrefetch": true,
+    "oneLiveLeasePerChat": true,
+    "usesExistingD1Allocator": true,
+    "usesDurableEntryCheckpoints": true,
+    "r33Boundary": "PENDING_CANONICAL_R33_VALIDATION"
+  }
 }
