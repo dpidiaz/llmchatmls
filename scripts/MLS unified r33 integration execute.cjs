@@ -49,10 +49,12 @@ function safeRepoPath(raw){
   return {p,full};
 }
 function validateState(issue,comment,payload){
-  if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase()))fail('UNIFIED_INTEGRATION_AUTHOR_UNAUTHORIZED');
   if(!String(issue?.title||'').startsWith('[MLS Dispatcher][LEASED]'))fail('UNIFIED_INTEGRATION_NOT_LEASED');
   const state=core.parseAssignmentState(issue?.body||'');
   if(!state||state.status!=='leased'||state.cancelRequested||state.readyToClose)fail('UNIFIED_INTEGRATION_STATE_INVALID');
+  const login=String(comment?.user?.login||'');
+  const botAuthorized=login==='github-actions[bot]'&&state.workerLogin===login&&state.provider==='r33-index-integration'&&String(state.workId||'').startsWith('r33-unified-integration:');
+  if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase())&&!botAuthorized)fail('UNIFIED_INTEGRATION_AUTHOR_UNAUTHORIZED');
   if(state.provider!=='r33-index-integration'||!String(state.workId||'').startsWith('r33-unified-integration:'))fail('UNIFIED_INTEGRATION_SCOPE_INVALID');
   if(!String(state.branch||'').startsWith('worker/r33-index-integration/'))fail('UNIFIED_INTEGRATION_BRANCH_INVALID');
   if(state.workerLogin&&String(comment?.user?.login||'')!==String(state.workerLogin))fail('UNIFIED_INTEGRATION_WORKER_LOGIN_MISMATCH');
