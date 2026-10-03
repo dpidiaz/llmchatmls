@@ -293,3 +293,19 @@ for(const workers of [5,15,30,60,100])test(`Fast Lane concurrency gate ${workers
  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_receipts").get().n,workers*5);
  h.close();
 });
+
+
+test('R44 export pagination advances by ordinal without repeating completed tickets',async()=>{
+ const h=harness();await seed(h,3);
+ for(let t=1;t<=3;t++){
+  const claimed=await claim(h,'page-worker-'+t,'page-claim-'+t);
+  for(let n=1;n<=5;n++)await checkpoint(h,claimed,n);
+ }
+ const first=await h.r.r44Export(h.env,2,0);
+ assert.deepEqual(first.map(x=>x.ticket_id),['T1','T2']);
+ const after=Number(first.at(-1).ordinal_end);
+ const second=await h.r.r44Export(h.env,2,after);
+ assert.deepEqual(second.map(x=>x.ticket_id),['T3']);
+ assert.equal(new Set([...first,...second].map(x=>x.ticket_id)).size,3);
+ h.close();
+});

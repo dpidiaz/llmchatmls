@@ -160,7 +160,7 @@ async function r44Status(env) {
   const metaRows = await env.WIKI_DB.prepare("SELECT key,value FROM r44_meta").all();
   return { status: "ACTIVE", controlPlane: "CLOUDFLARE_D1", productionMode: R44_CONCURRENCY_MODE, globalProductionMutex: false, githubHotPathWrites: R44_GITHUB_HOT_PATH_WRITES, leaseTtlSeconds: 300, maxActiveLeases: R44_MAX_ACTIVE, mcpEndpoint: "/mcp", mcpProtocol: R44_MCP_PROTOCOL, counts, durableCounts, meta: Object.fromEntries((metaRows.results || []).map((r) => [r.key, r.value])) };
 }
-async function r44Export(env, limit) { return r44DurableExport(env,limit); }
+async function r44Export(env, limit, afterOrdinal) { return r44DurableExport(env,limit,afterOrdinal); }
 async function r44Preview(env, code) {
   await r44PoolSeed(env);
   const row = await env.WIKI_DB.prepare("SELECT code,ticket_id,payload_json,result_sha256,updated_at FROM r44_preview_articles WHERE code=?").bind(code).first();
@@ -561,7 +561,7 @@ async function handleR44(request, env, url) {
       return renewed ? r44Json({ status: "RENEWED", ...renewed }) : r44Json({ error: "LEASE_INVALID_OR_EXPIRED" }, 409);
     }
     if (url.pathname === "/api/r44/submit" && request.method === "POST") return r44Submit(request, env);
-    if (url.pathname === "/api/r44/export" && request.method === "GET") return r44Json(await r44Export(env, url.searchParams.get("limit")));
+    if (url.pathname === "/api/r44/export" && request.method === "GET") return r44Json(await r44Export(env, url.searchParams.get("limit"), url.searchParams.get("afterOrdinal")));
     const previewMatch = url.pathname.match(/^\/api\/r44\/preview\/(MLS-V\d{2}-\d{4})$/i);
     if (previewMatch && request.method === "GET") {
       const preview = await r44Preview(env, previewMatch[1].toUpperCase());

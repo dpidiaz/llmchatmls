@@ -12,6 +12,89 @@ const revisions=require('../../r4 staging supersession.cjs');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
 const READY_QUEUE_TARGET=128;
+const R44_R33_HANDOFF_INDEX=path.join('MLS R32 EDITORIAL','r44','r33-handoff','index.json');
+const R44_R33_HANDOFF_SCHEMA='MLS-R44-R33-HANDOFF-1';
+
+function loadR44R33Handoffs(root='.'){
+  const full=path.join(root,R44_R33_HANDOFF_INDEX);
+  if(!fs.existsSync(full))return new Map();
+  const raw=JSON.parse(fs.readFileSync(full,'utf8'));
+  if(raw?.schema!==R44_R33_HANDOFF_SCHEMA||!Array.isArray(raw.entries))throw integrationError('R44_R33_HANDOFF_INVALID','Índice R44→R33 inválido.',503);
+  const out=new Map();
+  for(const item of raw.entries){
+    const code=String(item?.code||'').toUpperCase();
+    if(!/^MLS-V\d{2}-\d{4}$/.test(code)||out.has(code))throw integrationError('R44_R33_HANDOFF_CODE_INVALID','Código R44→R33 inválido/duplicado: '+code,503);
+    if(!['PASS_NO_CHANGE','CORRECTED'].includes(String(item.outcome||'')))throw integrationError('R44_R33_HANDOFF_OUTCOME_INVALID','Outcome R44→R33 inválido: '+code,503);
+    const handoffPath=String(item.handoffPath||'').replace(/\\/g,'/');
+    if(!handoffPath||handoffPath.startsWith('/')||handoffPath.includes('..'))throw integrationError('R44_R33_HANDOFF_PATH_INVALID','handoffPath inválido: '+code,503);
+    out.set(code,{...item,code,handoffPath});
+  }
+  return out;
+}
+function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,globalAssignments=[]}={}){
+  if(!(handoffs instanceof Map)||!handoffs.size)return null;
+  const integrated=r33IntegratedCodes(root);
+  const corpus=mlsCore.corpusEntries(root);
+  const entries=corpus
+    .map((entry,index)=>{
+      const code=String(entry.code||'').toUpperCase(),h=handoffs.get(code);
+      if(!h||integrated.has(code))return null;
+      return {
+        order:Number(h.ordinal||index+1),
+        code,
+        language:String(entry.language||''),
+        contentPath:String(entry.path||entry.contentPath||''),
+        r44Handoff:h
+      };
+    })
+    .filter(Boolean)
+    .sort((a,b)=>a.order-b.order||a.code.localeCompare(b.code));
+  if(!entries.length)return null;
+  const allowed=new Set(entries.map(x=>x.code));
+  const execution={...(snapshot.pool?.execution||{}),
+    defaultClaimSize:5,maxClaimSize:10,workerBatchSize:5,parallelWorkerLimit:128,maxConcurrentWorkers:128,
+    checkpointSizeMax:1,chatOnly:true,cloudflareEditorialInteractions:0,d1EditorialInteractions:0};
+  const pool={
+    ...(snapshot.pool||{}),
+    poolId:'MLS-R33-R44-UNIFIED-CONTINUATION',
+    manifestVersion:'1.0',
+    status:'authorized',
+    active:true,
+    dispatcherOnly:true,
+    sourceOfTruth:'github',
+    editorialArchitecture:'github-native',
+    cloudflareEditorialAllowed:false,
+    d1EditorialAllowed:false,
+    continuationOf:snapshot.pool?.poolId||null,
+    execution,
+    entries
+  };
+  const terminalCodes=codesFromTerminal(globalLedger,'r33-farm').filter(code=>allowed.has(code));
+  const ledger={...r33Core.initialLedger(pool),verified:terminalCodes,exceptions:[]};
+  const batches=[];
+  for(const state of activeProviderAssignments(globalAssignments,'r33-farm')){
+    const activeEntries=codesFromLocks(state.resourceLocks).filter(code=>allowed.has(code)).map(code=>({code}));
+    if(!activeEntries.length)continue;
+    batches.push({poolId:pool.poolId,batchId:'GLOBAL-UNIFIED-'+state.assignmentId,status:'leased',
+      acknowledgedAt:state.acknowledgedAt||null,ackDeadlineAt:state.ackDeadlineAt,expiresAt:state.expiresAt,entries:activeEntries});
+  }
+  const recoveryCodes=Object.values(globalLedger?.recoveries||{})
+    .filter(r=>r?.workItem?.provider==='r33-farm')
+    .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
+  const bufferedCodes=(snapshot.bufferedReservations||[]).flatMap(r=>(r?.allocation?.units||[]).map(u=>String(u?.code||'').toUpperCase()));
+  const reservedCodes=[...new Set([...recoveryCodes,...bufferedCodes].filter(code=>allowed.has(code)&&!terminalCodes.includes(code)))];
+  return {...snapshot,pool,ledger,batches,reservedCodes,r43Handoff:null,r43Handoffs:[],handoffCodes:[],
+    r44UnifiedHandoffs:handoffs,unifiedFullCorpus:true};
+}
+function protectCandidateCodes(snapshot,candidates,now){
+  const batches=(snapshot.batches||[]).map(x=>structuredClone(x));
+  for(const [index,candidate] of candidates.entries()){
+    batches.push({poolId:snapshot.pool.poolId,batchId:'GLOBAL-UNIFIED-PROTECT-'+String(index+1).padStart(3,'0'),status:'leased',
+      acknowledgedAt:new Date(now).toISOString(),ackDeadlineAt:new Date(Number(now)+60*60*1000).toISOString(),
+      expiresAt:new Date(Number(now)+60*60*1000).toISOString(),entries:candidate.units.map(unit=>({code:unit.code}))});
+  }
+  return {...snapshot,batches};
+}
 
 function integrationError(code,message,status=409){
   const error=new Error(message||code);error.code=code;error.status=status;return error;
@@ -78,7 +161,7 @@ function collectR33Snapshot(issues,root='.'){
   const ledger=ledgers.length===1?ledgers[0]:r33Core.initialLedger(pool);
   // Every open reservation Issue is a durable exclusion, independent of chat TTL.
   const bufferedReservations=buffered.reservations(issues);
-  return {pool,ledger,batches,bufferedReservations,ledgerSynthetic:ledgers.length===0,continuationActive:Boolean(continuation),configuredPoolId:configuredPool.poolId};
+  return {pool,ledger,batches,bufferedReservations,r44Handoffs:loadR44R33Handoffs(root),ledgerSynthetic:ledgers.length===0,continuationActive:Boolean(continuation),configuredPoolId:configuredPool.poolId};
 }
 function projectMlsSnapshot(snapshot,{globalLedger,globalAssignments}={}){
   const corpusCodes=new Set((snapshot.corpus||[]).map(x=>String(x.code)));
@@ -173,22 +256,35 @@ function r33CandidateToWork(candidate,now=Date.now()){
   if(!candidate?.eligible)return null;
   const codes=candidate.units.map(x=>x.code),first=codes[0],last=codes.at(-1);
   const handoff=candidate.ownership?.r43Handoff||null;
-  const workPrefix=handoff?'r33-handoff:'+String(handoff.waveIssueNumber)+':':'r33-farm:';
+  const unified=Array.isArray(candidate.r44Unified)&&candidate.r44Unified.length>0;
+  const workPrefix=handoff?'r33-handoff:'+String(handoff.waveIssueNumber)+':':unified?'r33-unified:':'r33-farm:';
+  const unifiedByCode=new Map((candidate.r44Unified||[]).map(x=>[String(x.code).toUpperCase(),x]));
+  const contentPaths=unified?candidate.units.map(x=>x.contentPath).filter(Boolean):[];
+  const handoffPaths=unified?[...new Set((candidate.r44Unified||[]).map(x=>x.handoffPath).filter(Boolean))]:[];
+  const unifiedContext=unified?candidate.units.map(unit=>{
+    const h=unifiedByCode.get(unit.code)||{};
+    return {code:unit.code,contentPath:unit.contentPath,handoffPath:h.handoffPath,outcome:h.outcome,resultSha256:h.resultSha256,sourceSha256:h.sourceSha256};
+  }):[];
+  const baseInstructions='R4 EPHEMERAL WORKER / CONTINUE-UNTIL-PREEMPTED: procesa exclusivamente estas entradas R33. Persiste y valida CADA entrada por separado; ANTES de cada commit ejecuta node scripts/R4-evidence-preflight.cjs <ruta-evidence>; este preflight recalcula articleHash, claimId, linkId y evidenceSnapshotHash con las funciones canónicas y debe terminar ok. Solo entonces crea el commit/checkpoint durable y continúa. No uses un push fallido como mecanismo normal de validación. checkpointSizeMax=1. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado. Al emitir FINISH del microclaim, Worker Events crea automáticamente un claim encadenado (autoPull.requestId/issueNumber). Si la sesión sigue razonando, sigue ese claim, espera su lease y procesa el siguiente microclaim. Repite FINISH → autoPull → siguiente lease indefinidamente mientras exista trabajo. No termines voluntariamente por haber acabado un microclaim. La finalización involuntaria del razonamiento es preemption normal: no intentes evitarla ni dependas de memoria conversacional; el progreso ya checkpointed debe sobrevivir y cualquier claim/lease sembrado debe poder expirar y ser reapeado.';
+  const unifiedInstructions=unified?' UNIFIED R44→R33: estas entradas tienen handoff durable R44. Lee cada handoffPath antes de editar. Si outcome=CORRECTED, reconcilia correctedContent del handoff contra el artículo en contentPath y deja en contentPath la versión final que será certificada; no copies ciegamente un objeto parcial. Si outcome=PASS_NO_CHANGE, no alteres contentPath salvo que la validación R33 detecte un error real. Evidence debe calcularse contra el contenido final en la misma rama. El checkpoint puede incluir contentPath + evidenceArtifactPath y ambos quedan ligados al mismo commit. Contexto R44='+JSON.stringify(unifiedContext):'';
   return {
     workId:workPrefix+candidate.poolId+':'+first+':'+last+':'+codes.length,
-    version:1,
-    title:(handoff?'R43→R33 Gate #'+handoff.waveIssueNumber+' ':'R33 Evidence Farm ')+first+'..'+last,
-    workType:'editorial_batch',status:'ready',priority:handoff?0:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
+    version:unified?2:1,
+    title:handoff?'R43→R33 Gate #'+handoff.waveIssueNumber+' '+first+'..'+last:unified?'R44→R33 Unified '+first+'..'+last:'R33 Evidence Farm '+first+'..'+last,
+    workType:'editorial_batch',status:'ready',priority:handoff?0:unified?2:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
     providerVersion:candidate.providerVersion,ownershipMode:'global-single-lease',units:codes,checkpointSizeMax:candidate.checkpointSizeMax,
-    resourceLocks:candidate.resourceLocks,allowedPaths:candidate.allowedPaths,dependsOn:[],
-    validation:['R33 Editorial Batch Tests'],
-    instructions:'R4 EPHEMERAL WORKER / CONTINUE-UNTIL-PREEMPTED: procesa exclusivamente estas entradas R33. Persiste y valida CADA entrada por separado; ANTES de cada commit ejecuta node scripts/R4-evidence-preflight.cjs <ruta-evidence>; este preflight recalcula articleHash, claimId, linkId y evidenceSnapshotHash con las funciones canónicas y debe terminar ok. Solo entonces crea el commit/checkpoint durable y continúa. No uses un push fallido como mecanismo normal de validación. checkpointSizeMax=1. El Global Dispatcher es el único owner efectivo; no crees un lease R33 Evidence Farm anidado. Al emitir FINISH del microclaim, Worker Events crea automáticamente un claim encadenado (autoPull.requestId/issueNumber). Si la sesión sigue razonando, sigue ese claim, espera su lease y procesa el siguiente microclaim. Repite FINISH → autoPull → siguiente lease indefinidamente mientras exista trabajo. No termines voluntariamente por haber acabado un microclaim. La finalización involuntaria del razonamiento es preemption normal: no intentes evitarla ni dependas de memoria conversacional; el progreso ya checkpointed debe sobrevivir y cualquier claim/lease sembrado debe poder expirar y ser reapeado.',
-    branchPolicy:{mode:'assignment',prefix:'worker/r33-farm'},completion:{requiresCommit:true,requiresValidation:true},
-    providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized
+    resourceLocks:[...candidate.resourceLocks,...contentPaths.map(x=>'path:'+x)],
+    allowedPaths:[...candidate.allowedPaths,...contentPaths],
+    dependsOn:[],validation:['R33 Editorial Batch Tests'],
+    instructions:baseInstructions+unifiedInstructions,
+    branchPolicy:{mode:'assignment',prefix:unified?'worker/r33-unified':'worker/r33-farm'},completion:{requiresCommit:true,requiresValidation:true},
+    providerSnapshot:candidate.snapshot,gate500Authorized:candidate.gate500Authorized,
+    ...(unified?{r44Unified:unifiedContext,handoffPaths}: {})
   };
 }
 function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
- const allowed=new Set((pool?.entries||[]).map(x=>String(x.code||'').toUpperCase()));
+ const entriesByCode=new Map((pool?.entries||[]).map(x=>[String(x.code||'').toUpperCase(),x]));
+ const allowed=new Set(entriesByCode.keys());
  const selector=revisions.load(root),out=new Map();
  for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
   if(terminal?.provider!=='r33-farm')continue;
@@ -197,8 +293,16 @@ function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
   for(const raw of terminal.completedUnits||[]){
    const code=String(raw).toUpperCase();
    if(!allowed.has(code)||selector.activeHeldCodes.has(code))continue;
+   const unified=String(workId).startsWith('r33-unified:');
+   const poolEntry=entriesByCode.get(code)||{},r44=poolEntry.r44Handoff||null;
    out.set(code,{code,workId,branch:chosen.branch,commitSha:chosen.commitSha,
      supersessionRevisionId:chosen.revisionId,revisionAssets:chosen.assets||[],
+     ...(unified&&poolEntry.contentPath?{
+       contentPath:poolEntry.contentPath,
+       r44Outcome:String(r44?.outcome||''),
+       r44SourceSha256:String(r44?.sourceSha256||''),
+       r44ResultSha256:String(r44?.resultSha256||'')
+     }:{}),
      completedAt:String(terminal.completedAt||'')});
   }
  }
@@ -293,6 +397,9 @@ function r33ContinuationPool({root='.',basePool,verifiedCodes=null,corpusEntries
     entries
   };
 }
+function r33ContentPaths(sourceRefs){
+ return [...new Set((sourceRefs||[]).map(x=>String(x?.contentPath||'').trim()).filter(Boolean))].sort();
+}
 function r33RevisionAssets(sourceRefs){
  const byPath=new Map();
  for(const ref of sourceRefs||[])for(const asset of ref.revisionAssets||[]){
@@ -335,12 +442,12 @@ function r33IndexPreparationWorks({pool,globalLedger,root='.',waveSize=50,verifi
       workType:'code_task',status:'ready',priority:8,createdAt:new Date().toISOString(),provider:'r33-index-preparation',
       units:wave.codes,sourceRefs:wave.sourceRefs,dependsOn:[],
       resourceLocks:['system:r33-index-preparation:'+wave.first+':'+wave.last,...wave.codes.map(code=>'entry:'+code)],
-      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),...r33RevisionAssets(wave.sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
+      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),...r33ContentPaths(wave.sourceRefs),...r33RevisionAssets(wave.sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
       validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-      instructions:'PREPARATION ONLY: integra los Evidence blobs de sourceRefs y todos los revisionAssets fijados por SHA en la rama asignada desde main; regenera los 4 índices con npm run r33:indexes:write; ejecuta npm run test:r33-github-native; abre un PR a main y déjalo sin mergear. Esta fase no posee system:main-integration y puede coexistir con otras preparaciones. Checkpoint/finish deben apuntar al HEAD exacto y validation debe registrar el PR preparado. sourceRefs='+sourceRefsJson,
+      instructions:'PREPARATION ONLY: integra los Evidence blobs de sourceRefs, cualquier contentPath certificado presente en esos mismos sourceRefs y todos los revisionAssets fijados por SHA en la rama asignada desde main; regenera los 4 índices con npm run r33:indexes:write; ejecuta npm run test:r33-github-native; abre un PR a main y déjalo sin mergear. Esta fase no posee system:main-integration y puede coexistir con otras preparaciones. Checkpoint/finish deben apuntar al HEAD exacto y validation debe registrar el PR preparado. sourceRefs='+sourceRefsJson,
       branchPolicy:{mode:'assignment',prefix:'worker/r33-index-preparation'},
       completion:{requiresCommit:true,requiresValidation:true},
-      preparation:{mode:'parallel-pr',base:'main',merge:false,sourceRefs:wave.sourceRefs,revisionAssets:r33RevisionAssets(wave.sourceRefs)}
+      preparation:{mode:'parallel-pr',base:'main',merge:false,sourceRefs:wave.sourceRefs,contentPaths:r33ContentPaths(wave.sourceRefs),revisionAssets:r33RevisionAssets(wave.sourceRefs)}
     };
   });
 }
@@ -364,18 +471,18 @@ function r33PreparedIndexIntegrationWork({pool,globalLedger,root='.',waveSize=50
       workType:'integration',status:'ready',priority:12,createdAt:new Date().toISOString(),provider:'r33-index-integration',
       units:wave.codes,sourceRefs:wave.sourceRefs,dependsOn:[],
       resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...wave.codes.map(code=>'entry:'+code)],
-      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),...r33RevisionAssets(wave.sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
+      allowedPaths:[...wave.sourceRefs.map(x=>x.evidenceArtifactPath),...r33ContentPaths(wave.sourceRefs),...r33RevisionAssets(wave.sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
       validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-      instructions:'FINAL SERIAL PHASE: usa preparedRef como artefacto certificado, pero construye la rama asignada desde el main vigente. Copia exactamente los 50 Evidence blobs preparados, regenera los 4 índices contra ese main, ejecuta npm run test:r33-github-native, abre/usa el PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Tras el merge, cierra el PR de preparación si sigue abierto. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
+      instructions:'FINAL SERIAL PHASE: usa preparedRef como artefacto certificado, pero construye la rama asignada desde el main vigente. Copia exactamente los Evidence blobs y cualquier contentPath certificado preparados, regenera los 4 índices contra ese main, ejecuta npm run test:r33-github-native, abre/usa el PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Tras el merge, cierra el PR de preparación si sigue abierto. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
       branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
       completion:{requiresCommit:true,requiresValidation:true},
-      integration:{mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests'],sourceRefs:wave.sourceRefs,revisionAssets:r33RevisionAssets(wave.sourceRefs),preparedRef:{workId:preparationWorkId,branch:preparedBranch,commitSha:preparedCommitSha}}
+      integration:{mode:'assignment-pr',base:'main',mergeMethod:'merge',requiredChecks:['R33 GitHub Native Tests'],postMergeChecks:['R33 GitHub Native Tests'],sourceRefs:wave.sourceRefs,contentPaths:r33ContentPaths(wave.sourceRefs),revisionAssets:r33RevisionAssets(wave.sourceRefs),preparedRef:{workId:preparationWorkId,branch:preparedBranch,commitSha:preparedCommitSha}}
     };
   }
   return null;
 }
 
-function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verifiedCodes=null}={}){
+function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verifiedCodes=null,workPrefix='r33-index-integration:'}={}){
   if(!pool||!Array.isArray(pool.entries))return null;
   const size=Number(waveSize??pool?.execution?.integrationWaveSize??50);
   if(!Number.isInteger(size)||size<1)throw integrationError('R33_INTEGRATION_WAVE_INVALID','waveSize inválido para R33 integration.',500);
@@ -388,15 +495,15 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
   const sourceRefs=units.map(x=>({...sources.get(String(x.code).toUpperCase()),evidenceArtifactPath:r33Provider.evidenceArtifactPath(x)}));
   const indexRoot='MLS R32 EDITORIAL/evidence git/indexes';
   return {
-    workId:'r33-index-integration:'+pool.poolId+':'+first+':'+last+':'+codes.length,
+    workId:workPrefix+pool.poolId+':'+first+':'+last+':'+codes.length,
     version:3,
     title:'R33 wave integration '+first+'..'+last,
     workType:'integration',status:'ready',priority:12,createdAt:new Date().toISOString(),provider:'r33-index-integration',
     units:codes,sourceRefs,dependsOn:[],
     resourceLocks:['system:main-integration','system:r33-index-integration','path:'+indexRoot,...codes.map(code=>'entry:'+code)],
-    allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),...r33RevisionAssets(sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
+    allowedPaths:[...sourceRefs.map(x=>x.evidenceArtifactPath),...r33ContentPaths(sourceRefs),...r33RevisionAssets(sourceRefs).map(a=>a.path),indexRoot+'/by-code.json',indexRoot+'/by-language.json',indexRoot+'/by-source.json',indexRoot+'/verified.json'],
     validation:['R33 GitHub Native Tests','R33 Evidence Farm Tests'],
-    instructions:'WAVE FINAL PHASE: construye la rama asignada desde el main vigente y agrega exactamente los Evidence blobs certificados por sourceRefs y sus revisionAssets, aunque provengan de múltiples workers/commits. No regeneres índices por worker: copia todos los Evidence de la wave y ejecuta npm run r33:indexes:write una sola vez al final. Ejecuta npm run test:r33-github-native, abre/usa un único PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
+    instructions:'WAVE FINAL PHASE: construye la rama asignada desde el main vigente y agrega exactamente los Evidence blobs certificados por sourceRefs, cualquier contentPath certificado presente en esos mismos sourceRefs y sus revisionAssets, aunque provengan de múltiples workers/commits. Para cada contentPath aplica reconciliación de tres vías usando r44SourceSha256: compara el archivo actual de main, el archivo del source commit y el hash original R44. Si main coincide con el original y el source commit difiere, aplica el source certificado; si main ya coincide con el source, no reescribas; si main divergió de ambos, detén la integración como conflicto y exige recertificación. Nunca sobrescribas silenciosamente una edición concurrente. El Evidence y cualquier contenido aplicado deben provenir del mismo commitSha. No regeneres índices por worker: copia todos los Evidence/contenido de la wave y ejecuta npm run r33:indexes:write una sola vez al final. Ejecuta npm run test:r33-github-native, abre/usa un único PR final y exige checks verdes. Antes del merge envía checkpoint integrationStage=premerge con HEAD exacto; mergea con expected_head_sha; verifica main; envía postmerge y finish. Solo cuando revisionAssets no esté vacío, incorpora exactamente esos archivos adicionales desde su commitSha fijado junto con Evidence; nunca sobrescribas archivos ajenos ni omitas los assets versionados.',
     branchPolicy:{mode:'assignment',prefix:'worker/r33-index-integration'},
     completion:{requiresCommit:true,requiresValidation:true},
     integration:{
@@ -406,7 +513,7 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
       mergeMethod:'merge',
       requiredChecks:['R33 GitHub Native Tests'],
       postMergeChecks:['R33 GitHub Native Tests'],
-      sourceRefs,revisionAssets:r33RevisionAssets(sourceRefs),
+      sourceRefs,contentPaths:r33ContentPaths(sourceRefs),revisionAssets:r33RevisionAssets(sourceRefs),
       waveSize:size,
       sourceWorkerCommits:[...new Set(sourceRefs.map(x=>x.commitSha).filter(Boolean))]
     }
@@ -432,6 +539,21 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const execution=snapshot.pool?.execution||{};
+    const unifiedViewForIntegration=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments});
+    if(unifiedViewForIntegration){
+      const unifiedIndexItem=r33IndexIntegrationWork({
+        pool:unifiedViewForIntegration.pool,
+        globalLedger,
+        root,
+        waveSize:50,
+        workPrefix:'r33-unified-integration:'
+      });
+      if(unifiedIndexItem){
+        unifiedIndexItem.priority=1;
+        unifiedIndexItem.title='R44→R33 Unified final integration '+unifiedIndexItem.units[0]+'..'+unifiedIndexItem.units.at(-1);
+        items.push(globalCore.normalizeWorkItem(unifiedIndexItem));
+      }
+    }
     if(execution.deferredIntegration===true){
       // R4: certified Evidence accumulates outside main. Integration is rehearsed/published separately.
     }else if(execution.directWaveIntegration===true){
@@ -459,8 +581,8 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
     if(available>0){
       const handoffSnapshots=r33HandoffSnapshots(snapshot);
       if(handoffSnapshots.length){
-        // Round-robin across active handoff waves so one large wave cannot
-        // monopolize every ready slot while newer waves wait behind it.
+        // Preserve historical R4.3 gate isolation: while an explicit R43→R33
+        // handoff exists, only those scoped units are materialized.
         const scoped=handoffSnapshots.map(x=>({...x,batches:(x.batches||[]).map(b=>structuredClone(b))}));
         let progressed=true;
         while(candidates.length<available&&progressed){
@@ -483,7 +605,22 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
           }
         }
       }else{
-        candidates.push(...r33Provider.materializeCandidates(snapshot,{now,count:available}));
+        // Unified lane first: only R44 COMPLETE entries with a durable GitHub
+        // handoff are eligible. The general R33 lane sees those codes as
+        // protected during this same materialization, preventing duplicate work.
+        let working=snapshot;
+        const unifiedView=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments});
+        if(unifiedView){
+          const unifiedCandidates=r33Provider.materializeCandidates(unifiedView,{now,count:available});
+          for(const candidate of unifiedCandidates){
+            candidate.r44Unified=candidate.units.map(unit=>snapshot.r44Handoffs.get(unit.code)).filter(Boolean);
+            if(candidate.r44Unified.length!==candidate.units.length)throw integrationError('R44_R33_HANDOFF_SCOPE_MISMATCH','Candidate Unified sin handoff completo.',503);
+            candidates.push(candidate);
+          }
+          working=protectCandidateCodes(working,unifiedCandidates,now);
+        }
+        const remaining=Math.max(0,available-candidates.length);
+        if(remaining>0)candidates.push(...r33Provider.materializeCandidates(working,{now,count:remaining}));
       }
     }
     for(const candidate of candidates){
@@ -508,7 +645,7 @@ function extendRegistry(baseRegistry,{items=[],globalLedger=null}={}){
 
 module.exports={
   DYNAMIC_PROVIDERS,READY_QUEUE_TARGET,integrationError,codesFromLocks,codesFromTerminal,activeProviderAssignments,completedUnitsForState,
-  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,r33HandoffSnapshots,r33CandidateToWork,r33TerminalSourceMap,r33StagingManifest,r33IntegratedCodes,r33ContinuationPool,
-  r33IntegrationWaves,r33IndexPreparationWorkId,r33IndexPreparationWorks,r33PreparedIndexIntegrationWork,r33IndexIntegrationWork,
+  collectMlsSnapshot,collectR33Snapshot,projectMlsSnapshot,projectR33Snapshot,loadR44R33Handoffs,r33UnifiedSnapshot,protectCandidateCodes,r33HandoffSnapshots,r33CandidateToWork,r33TerminalSourceMap,r33StagingManifest,r33IntegratedCodes,r33ContinuationPool,
+  r33IntegrationWaves,r33IndexPreparationWorkId,r33IndexPreparationWorks,r33PreparedIndexIntegrationWork,r33IndexIntegrationWork,r33ContentPaths,
   recoveryItems,materializeProviderItems,extendRegistry
 };

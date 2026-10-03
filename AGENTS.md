@@ -69,6 +69,37 @@ Never prefetch. Never hold two active leases for one chat. Never replace recover
 
 Fast Lane production cutover is complete. `MLS R44 Fast Lane siguiente` is an active production command. Ordinary `MLS R44 siguiente` keeps its existing one-ticket compatibility semantics unless separately changed.
 
+## MLS Unified verification command
+
+For the exact command `MLS Unified siguiente`, read:
+
+`docs/MLS Global Dispatcher/28 MLS Unified Verification Pipeline.md`
+
+This command is **CHAT ONLY — NO ChatGPT Work**. During certification it is deliberately distinct from historical `MLS siguiente`, `MLS R44 siguiente`, `MLS R44 Fast Lane siguiente` and `MLS R33 siguiente`.
+
+Goal: move work toward canonical R33 `VERIFIED`, not merely R44 COMPLETE.
+
+Priority order for a fresh Unified loop:
+
+1. **Unified final integration first.** Create a Global Dispatcher claim using `MLS R32 EDITORIAL/unified command.cjs` with stage `integration`. It must be scoped to provider `r33-index-integration` and workPrefix `r33-unified-integration:`. If leased, execute that integration assignment exactly as issued. If NO_WORK or CAPACITY_BUSY, continue to step 2.
+2. **Unified R33 certification.** Create a scoped claim with stage `r33`: provider `r33-farm`, workPrefix `r33-unified:`. If leased, process only those entries. Read each R44 handoff identified by the assignment instructions. Evidence must bind the final article content in the same branch/commit. On FINISH, follow the generated autoPull; Unified autoPull must remain scoped to `r33-unified:`.
+3. **Produce R44 work.** If no Unified integration or R33 assignment is immediately eligible, execute the existing deployed `MLS R44 Fast Lane siguiente` contract. Do not claim unrelated Global Dispatcher work as a substitute.
+
+Important invariants:
+
+- R44 COMPLETE is never reported as VERIFIED.
+- A durable R44→R33 GitHub handoff is required before an entry can enter `r33-unified:`.
+- The grouped handoff synchronizer, not disposable R44 workers, publishes R44 results to GitHub.
+- Never bypass the handoff by reconstructing a correction from chat memory.
+- If R44 outcome is CORRECTED, the R33 worker must reconcile the handoff correction into the assigned canonical `contentPath` before generating final Evidence.
+- Final integration must copy content and Evidence from the same pinned worker commit.
+- Canonical `MLS R32 EDITORIAL/evidence git/indexes/verified.json` remains the terminal VERIFIED authority.
+- Never prefetch R44 tickets or hold more than one R44 lease per chat.
+- Respect Global Dispatcher locks/recovery for R33 and integration work.
+- FREE ONLY. No paid API or paid browser fallback.
+- If an explicit R43→R33 historical handoff is active, its isolation contract remains higher priority; do not bypass it.
+- Until Unified is certified and separately activated, do not reinterpret historical `MLS siguiente` as an alias.
+
 ## MLS Watchdog commands
 
 When the user issues any command beginning with `MLS` and containing `watchdogs` or `watchdog group`, read and follow:

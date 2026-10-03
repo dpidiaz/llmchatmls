@@ -35,11 +35,14 @@ function autoPullRequest(state,comment){
   const seed=String(state.assignmentId||state.issueNumber||'assignment').replace(/[^A-Za-z0-9._:-]+/g,'-').slice(-70);
   const requestId=('autopull:'+seed+':'+String(comment.id)).slice(0,120);
   const workerLogin=String(state.workerLogin||'').trim();
-  const handoffScope=/^r33-handoff:\d+:/.exec(String(state.workId||''));
+  const workId=String(state.workId||'');
+  const handoffScope=/^r33-handoff:\d+:/.exec(workId);
+  const unifiedScope=workId.startsWith('r33-unified:')?'r33-unified:':null;
   return {
     operation:'claim',requestId,workerId,workerLogin:workerLogin||null,
     capabilities:['chat','github','r4-autopull'],
-    ...(handoffScope?{provider:'r33-farm',workPrefix:handoffScope[0]}:{})
+    ...(handoffScope?{provider:'r33-farm',workPrefix:handoffScope[0]}:
+      unifiedScope?{provider:'r33-farm',workPrefix:unifiedScope}:{})
   };
 }
 function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
