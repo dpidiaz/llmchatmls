@@ -97,8 +97,8 @@ test('protectCandidateCodes prevents the general R33 lane from taking a Unified 
 });
 
 test('Unified final integration carries certified contentPath beside Evidence and indexes',()=>{
-  const entry=unverifiedCorpusEntries(1)[0],code=String(entry.code).toUpperCase();
-  const pool={...baseSnapshot().pool,poolId:'MLS-R33-R44-UNIFIED-CONTINUATION',entries:[{order:1,code,language:entry.language,contentPath:entry.path}]};
+  const entry=unverifiedCorpusEntries(1)[0],code=String(entry.code).toUpperCase(),r44=handoffFor(entry,9100);
+  const pool={...baseSnapshot().pool,poolId:'MLS-R33-R44-UNIFIED-CONTINUATION',entries:[{order:1,code,language:entry.language,contentPath:entry.path,r44Handoff:r44}]};
   const globalLedger={terminal:{
     ['r33-unified:'+code]:{
       provider:'r33-farm',completedUnits:[code],branch:'worker/r33-unified/1',
@@ -115,7 +115,9 @@ test('Unified final integration carries certified contentPath beside Evidence an
   assert.ok(work.integration.contentPaths.includes(String(entry.path)));
   assert.match(work.instructions,/reconciliación de tres vías/);
   assert.match(work.instructions,/recertificación/);
-  assert.equal(work.sourceRefs[0].r44Outcome,'');
+  assert.equal(work.sourceRefs[0].r44Outcome,r44.outcome);
+  assert.equal(work.sourceRefs[0].r44SourceSha256,r44.sourceSha256);
+  assert.equal(work.sourceRefs[0].r44ResultSha256,r44.resultSha256);
 
 });
 
