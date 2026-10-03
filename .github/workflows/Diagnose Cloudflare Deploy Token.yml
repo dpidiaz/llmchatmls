@@ -1,0 +1,44 @@
+name: Diagnose Cloudflare Deploy Token
+
+on:
+  push:
+    branches:
+      - diag/cloudflare-deploy-token
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  identify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Identify Cloudflare token safely
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          verify="$(curl -fsSL 'https://api.cloudflare.com/client/v4/user/tokens/verify' \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN")"
+          token_id="$(printf '%s' "$verify" | jq -r '.result.id // empty')"
+          status="$(printf '%s' "$verify" | jq -r '.result.status // empty')"
+          expires="$(printf '%s' "$verify" | jq -r '.result.expires_on // "none"')"
+          if [ -z "$token_id" ]; then
+            echo 'TOKEN_VERIFY_NO_ID'
+            exit 2
+          fi
+          echo "CLOUDFLARE_DEPLOY_TOKEN_ID=$token_id"
+          echo "CLOUDFLARE_DEPLOY_TOKEN_STATUS=$status"
+          echo "CLOUDFLARE_DEPLOY_TOKEN_EXPIRES=$expires"
+
+          details_code="$(curl -sS -o "$RUNNER_TEMP/token-details.json" -w '%{http_code}' \
+            'https://api.cloudflare.com/client/v4/user/tokens/'"$token_id" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN")"
+          echo "CLOUDFLARE_TOKEN_DETAILS_HTTP=$details_code"
+          if [ "$details_code" = "200" ]; then
+            jq -r '"CLOUDFLARE_DEPLOY_TOKEN_NAME=" + (.result.name // "(sin nombre)")' "$RUNNER_TEMP/token-details.json"
+            jq -r '"CLOUDFLARE_DEPLOY_TOKEN_ISSUED=" + (.result.issued_on // "unknown")' "$RUNNER_TEMP/token-details.json"
+          else
+            jq -r '(.errors // [])[] | "CLOUDFLARE_TOKEN_DETAILS_ERROR=" + ((.code|tostring) + " " + (.message // ""))' "$RUNNER_TEMP/token-details.json" || true
+          fi
