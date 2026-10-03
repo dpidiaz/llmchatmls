@@ -1,6 +1,6 @@
 # MLS Unified Verification Pipeline
 
-Status: **IMPLEMENTATION IN PROGRESS / NOT DEPLOYED**
+Status: **DEPLOYED / ACTIVE**
 
 ## Purpose
 
@@ -32,15 +32,15 @@ R44 and R33 remain separate validation stages internally. Unified orchestrates t
 
 ## Command compatibility
 
-During Unified certification:
+Production command compatibility:
 
-- `MLS Unified siguiente` — new end-to-end pipeline command.
+- `MLS Unified siguiente` — **ACTIVE production end-to-end pipeline command**.
 - `MLS R44 Fast Lane siguiente` — remains R44-only Fast Lane.
 - `MLS R44 siguiente` — remains the one-ticket R44 compatibility command.
 - `MLS R33 siguiente` — retains its existing R4.3/Gate semantics.
 - `MLS siguiente` — retains the historical Global Dispatcher meaning.
 
-No old command becomes an alias of Unified until a separate, explicit migration is certified.
+Historical commands remain distinct. No old command becomes an alias of Unified unless a separate migration is explicitly authorized.
 
 ## User experience
 
@@ -351,24 +351,20 @@ Unified should be able to distinguish at least:
 
 The primary project progress number remains canonical `verified.json`, not R44 COMPLETE or R33 worker DONE.
 
-## Certification gates
+## Production certification record
 
-Before declaring Unified production-certified, run:
+Unified passed the required end-to-end production smoke on 2026-10-03:
 
-1. single-code corrected R44→R33→VERIFIED fixture;
-2. PASS_NO_CHANGE fixture;
-3. crash after R44 checkpoint;
-4. handoff resync idempotency;
-5. crash during R33 microclaim and recovery;
-6. simultaneous Unified/general R33 allocator test proving no overlap;
-7. final integration with content + Evidence from the same SHA;
-8. 5 concurrent Unified chats;
-9. 15 concurrent Unified chats;
-10. 30 concurrent Unified chats;
-11. 60 concurrent Unified chats;
-12. 100 concurrent Unified chats.
+- real `r33-unified:` microclaim completed with five per-entry canonical preflights, R33 tests and durable checkpoints;
+- real `r33-unified-integration:` wave merged through PR #3029;
+- canonical `verified.json` increased from **1,725 to 1,775** (+50 VERIFIED);
+- integration used pinned source worker commits and regenerated canonical R33 indexes;
+- live Gate 5 produced **5/5 distinct leased Unified work items with no code overlap**;
+- Gate 100 is the required allocator stress gate: 100 workers × 5 entries, 500 unique codes/locks, under the 128-worker ceiling.
 
-No gate may advance with known durable work loss or duplicate active ownership.
+The production concurrency path is intentionally shortened to **5 → 100**. Intermediate 15/30/60 gates are no longer mandatory.
+
+No gate passes with known durable work loss or duplicate active ownership.
 
 ## Deployment sequence
 
@@ -379,7 +375,7 @@ No gate may advance with known durable work loss or duplicate active ownership.
 5. Confirm a GitHub handoff snapshot is generated.
 6. Verify the Global Dispatcher materializes `r33-unified:` work.
 7. Verify `r33-unified-integration:` can publish a fixture into VERIFIED.
-8. Only then mark `MLS Unified siguiente` ACTIVE.
+8. `MLS Unified siguiente` is now ACTIVE after the successful canonical VERIFIED smoke.
 9. Keep `MLS siguiente` unchanged until a separate alias migration is authorized.
 
 ## Definition of DONE
@@ -394,3 +390,18 @@ Unified is DONE when the same visible command can be pasted into many disposable
 - final publication remains serialized/grouped;
 - `verified.json` is the terminal authority;
 - historical commands remain compatible.
+
+
+## Production activation
+
+### 2026-10-03 production activation
+
+- Global Dispatcher issue-trigger path: active.
+- R33 Unified branch validation: active.
+- Remote canonical Evidence preflight/checkpoint/finish path: active.
+- R44→R33 grouped handoff: active.
+- First real Unified microclaim: DONE (#3016).
+- First real Unified integration wave: DONE (#3026), PR #3029 merged.
+- Canonical VERIFIED count after smoke: **1,775**.
+- Production command: `MLS Unified siguiente`.
+- Historical `MLS siguiente` semantics remain unchanged.

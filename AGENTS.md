@@ -75,9 +75,9 @@ For the exact command `MLS Unified siguiente`, read:
 
 `docs/MLS Global Dispatcher/28 MLS Unified Verification Pipeline.md`
 
-This command is **CHAT ONLY — NO ChatGPT Work**. During certification it is deliberately distinct from historical `MLS siguiente`, `MLS R44 siguiente`, `MLS R44 Fast Lane siguiente` and `MLS R33 siguiente`.
+This command is **ACTIVE in production** and **CHAT ONLY — NO ChatGPT Work**. It remains deliberately distinct from historical `MLS siguiente`, `MLS R44 siguiente`, `MLS R44 Fast Lane siguiente` and `MLS R33 siguiente`.
 
-Goal: move work toward canonical R33 `VERIFIED`, not merely R44 COMPLETE.
+Goal: move work toward canonical R33 `VERIFIED`, not merely R44 COMPLETE. Production activation was certified by a real +50 VERIFIED integration smoke. Gate policy: 5 → 100; intermediate 15/30/60 gates are optional diagnostics, not mandatory blockers.
 
 Priority order for a fresh Unified loop:
 
@@ -98,7 +98,7 @@ Important invariants:
 - Respect Global Dispatcher locks/recovery for R33 and integration work.
 - FREE ONLY. No paid API or paid browser fallback.
 - If an explicit R43→R33 historical handoff is active, its isolation contract remains higher priority; do not bypass it.
-- Until Unified is certified and separately activated, do not reinterpret historical `MLS siguiente` as an alias.
+- Unified production activation is complete. Do not reinterpret historical `MLS siguiente` as an alias unless a separate migration is explicitly authorized.
 
 ## MLS Watchdog commands
 
