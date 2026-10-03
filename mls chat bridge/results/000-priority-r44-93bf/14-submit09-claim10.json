@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-93bf-ticket09-next10",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-0e058eda-cf91-475e-a046-d35eba78f6fb",
+          "ticketId": "R44-CORPUS-0830",
+          "leaseExpiresAt": 1790997999057
+        },
+        "completedAt": "2026-10-03T03:21:39.205Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0830",
+          "sha256": "13abf4bf86f6780900b7117fe1195e457241dfb414f502107e3cf4f388f3ad40",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0830",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c5a4e934-691d-4808-be2d-88963c911609",
+                "ticketId": "R44-CORPUS-0830",
+                "code": "MLS-V01-0186",
+                "idempotencyKey": "R44-CORPUS-0830:MLS-V01-0186:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0d841fa8554942fe169af8eebbf5c6a6495a007ad89f014e24a89d50276eed3d",
+                "sourceSha256": "caa5320fd30b3c74e0d091190f991f0addbd8bf56ad71824ec163aa206ad66b3",
+                "committedMs": 1790997699611,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "a1c6cd1895cbb86a92e32ac7a1da5e30fa885f84fbc132dd8f9d7864a488ae23",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0830",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "120a9422-8951-41de-8f70-444944cb584f",
+                "ticketId": "R44-CORPUS-0830",
+                "code": "MLS-V01-0188",
+                "idempotencyKey": "R44-CORPUS-0830:MLS-V01-0188:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "CORRECTED",
+                "payloadSha256": "648c36b05b3fe1da3c80a566930b6633880b3c3b1142cade5a9537dc38837b5a",
+                "sourceSha256": "d980055b8bda4fe3965f21a68d94f87f5fccb130fc94b4eba41c7708937f309a",
+                "committedMs": 1790997699828,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "39a98ce3ee93d5b6a0048d0d4d3de2d28e96915ea16bc1fb2ca0ff15d58c3b26",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0830",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b4d3120b-8145-4140-a033-9bd83daeeec3",
+                "ticketId": "R44-CORPUS-0830",
+                "code": "MLS-V01-0189",
+                "idempotencyKey": "R44-CORPUS-0830:MLS-V01-0189:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "CORRECTED",
+                "payloadSha256": "960d4d7d0efddcf36bc889fa02560263ecf5af90af36f7e4ee121186efab405f",
+                "sourceSha256": "964d55b20ca989fb2adbf963bc9783e499cc0fc362c962939e2582d7d456066c",
+                "committedMs": 1790997700043,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ffc7cdb6536eb05cfacbe10c6f832f625cd2bf2cf67ce3d7b2b5972588b421aa",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0830",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "7a6ca114-de50-4330-bdb0-dfe8665ad4d8",
+                "ticketId": "R44-CORPUS-0830",
+                "code": "MLS-V01-0192",
+                "idempotencyKey": "R44-CORPUS-0830:MLS-V01-0192:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "50f9033563c2f37d052d0ff78a4fee02d51287ab63583b1970060519a667a353",
+                "sourceSha256": "97e05f9e86b820c7af3e59356b3f0e935a823d586c533fb4ad3b974ea354bbae",
+                "committedMs": 1790997700265,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "db51b92430cb18940902163404fe128a82e7591e15880c8cff74767f50a8cca1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0830",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "76194f38-4c65-479d-9b35-36adaefa7eb8",
+                "ticketId": "R44-CORPUS-0830",
+                "code": "MLS-V01-0193",
+                "idempotencyKey": "R44-CORPUS-0830:MLS-V01-0193:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "f3a88688b86814a69b8f8f2526ee3125282d4de416d976004a10bee7f0986f21",
+                "sourceSha256": "118307d97f661ab894ff1273ca5b100940e53680722df1d20278ae6013660b74",
+                "committedMs": 1790997700478,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c9705d8a3d9e42b3c9399f8f88cf5e290576c1ae70ed1421a6a4eae0c9a70e5f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-0e058eda-cf91-475e-a046-d35eba78f6fb",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "13abf4bf86f6780900b7117fe1195e457241dfb414f502107e3cf4f388f3ad40"
+          }
+        },
+        "completedAt": "2026-10-03T03:21:40.778Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-80632fc8-f8af-4f5b-a138-a4c0efcc892e",
+          "workerId": "r44-m10-20261002-2045-sol-93bf",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0831",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790998000822,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0194",
+                "path": "ingles/MLS-V01-0194.json",
+                "sha256": "5fb9b1676ca99009e9e3122e63cc041f1cb2cb6a7f6b8ef40d33c597e6f28bd3"
+              },
+              {
+                "code": "MLS-V01-0195",
+                "path": "ingles/MLS-V01-0195.json",
+                "sha256": "8d0dd4cacaf9d04b8187811e4cf98b5973e0ef5a4bcf1bd764a31135947bc0ab"
+              },
+              {
+                "code": "MLS-V01-0197",
+                "path": "ingles/MLS-V01-0197.json",
+                "sha256": "24aa03a9e50d5237cf390ca88fc8f7a0022c19e75e67dd3380df8a42ec476914"
+              },
+              {
+                "code": "MLS-V01-0198",
+                "path": "ingles/MLS-V01-0198.json",
+                "sha256": "e49815c8efe9cc79d333c90d32a0bcb4c054c042f5c8e64fc59a70e007e63778"
+              },
+              {
+                "code": "MLS-V01-0199",
+                "path": "ingles/MLS-V01-0199.json",
+                "sha256": "61a5756bd9ed21d8f6b631c55ee49854617ac84188eb801a29cf959d88c58b79"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0831",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0194",
+                "path": "ingles/MLS-V01-0194.json",
+                "sha256": "5fb9b1676ca99009e9e3122e63cc041f1cb2cb6a7f6b8ef40d33c597e6f28bd3"
+              },
+              {
+                "code": "MLS-V01-0195",
+                "path": "ingles/MLS-V01-0195.json",
+                "sha256": "8d0dd4cacaf9d04b8187811e4cf98b5973e0ef5a4bcf1bd764a31135947bc0ab"
+              },
+              {
+                "code": "MLS-V01-0197",
+                "path": "ingles/MLS-V01-0197.json",
+                "sha256": "24aa03a9e50d5237cf390ca88fc8f7a0022c19e75e67dd3380df8a42ec476914"
+              },
+              {
+                "code": "MLS-V01-0198",
+                "path": "ingles/MLS-V01-0198.json",
+                "sha256": "e49815c8efe9cc79d333c90d32a0bcb4c054c042f5c8e64fc59a70e007e63778"
+              },
+              {
+                "code": "MLS-V01-0199",
+                "path": "ingles/MLS-V01-0199.json",
+                "sha256": "61a5756bd9ed21d8f6b631c55ee49854617ac84188eb801a29cf959d88c58b79"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0194",
+              "MLS-V01-0195",
+              "MLS-V01-0197",
+              "MLS-V01-0198",
+              "MLS-V01-0199"
+            ],
+            "lease": {
+              "workerId": "r44-m10-20261002-2045-sol-93bf",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790998000822,
+              "active": true
+            },
+            "workerId": "r44-m10-20261002-2045-sol-93bf",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790998000822,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0194",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 194,
+                "title": "Complementos de adjetivo",
+                "level": "B2",
+                "part": "Adjetivos, comparación y adverbios — Adjectives, comparison, and adverbs",
+                "chapter": "Adjetivos — Adjectives",
+                "articleMarkdown": "#### En pocas palabras\n\nUn **complemento de adjetivo** es una expresión que completa o precisa el significado de un adjetivo. Algunos adjetivos pueden aparecer solos, pero otros suelen combinarse con una preposición, un infinitivo con **to** o una cláusula.\n\nEn **She is interested in art**, el grupo **in art** completa el significado de **interested**: indica aquello que provoca el interés.\n\n#### Cómo funciona\n\nUn patrón frecuente es **adjective + prepositional phrase**: **afraid of spiders**, **good at mathematics**, **responsible for the project**. La preposición no se elige libremente; forma parte de la construcción asociada con el adjetivo.\n\nOtro patrón es **adjective + to-infinitive**: **ready to leave**, **happy to help**, **difficult to understand**. El infinitivo añade una situación o acción relacionada con la propiedad expresada por el adjetivo.\n\nTambién aparecen cláusulas con **that**: **I’m glad that you came**, **She was certain that the door was locked**. En estos casos, la cláusula expresa el contenido respecto del cual se aplica el adjetivo.\n\nNo todos los adjetivos permiten los mismos tipos de complemento. La selección depende del adjetivo concreto y, a veces, de su significado particular.\n\n#### Ejemplos\n\n- **She is interested in art.** — Ella está interesada en el arte.\n- **He is afraid of flying.** — Él tiene miedo de volar.\n- **We are ready to begin.** — Estamos listos para comenzar.\n- **I’m glad that you called.** — Me alegra que hayas llamado.\n\nEn cada caso, la expresión posterior especifica qué relación, acción o contenido completa el sentido del adjetivo.\n\n#### Observación importante\n\nUn complemento no es lo mismo que cualquier palabra situada después del adjetivo. Debe existir una relación estructural y semántica con ese adjetivo. Por ejemplo, en **proud of her work**, **of her work** está estrechamente seleccionado por **proud**.\n\nAdemás, una misma forma puede admitir más de una construcción: **happy about the result**, **happy to help**, **happy that you came**. Las diferencias de estructura pueden acompañar diferencias de significado o de perspectiva.\n\n#### Entradas relacionadas\n\n- [Entrada 193: Adjetivos participiales en -ing/-ed](#entry-193)\n- [Entrada 192: Adjetivos compuestos](#entry-192)\n- [Entrada 191: Opinión–tamaño–edad–forma–color–origen–material–propósito](#entry-191)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f711385c85551526463e6d3a218cff5d26edcee71f25225f5421d722e091e190",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:40:35.412Z"
+              },
+              {
+                "code": "MLS-V01-0195",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 195,
+                "title": "Adjetivos graduables frente a no graduables",
+                "level": "B1",
+                "part": "Adjetivos, comparación y adverbios — Adjectives, comparison, and adverbs",
+                "chapter": "Adjetivos — Adjectives",
+                "articleMarkdown": "#### En pocas palabras\n\nLos **adjetivos graduables** expresan propiedades que pueden presentarse en distintos grados: algo puede ser **slightly cold, very cold** o **colder** que otra cosa. Los **no graduables** suelen presentar una propiedad como límite, extremo o categoría, por ejemplo **perfect, impossible** o **dead** en sus sentidos literales más comunes.\n\nLa diferencia influye en qué comparativos e intensificadores resultan naturales.\n\n#### Cómo funciona\n\nUn adjetivo graduable admite normalmente palabras de grado como **very, fairly, quite, slightly** y puede formar comparaciones: **very tall**, **slightly expensive**, **taller than**, **more expensive than**.\n\nLos adjetivos no graduables tienden a combinarse con intensificadores como **absolutely, completely, totally**: **absolutely impossible**, **completely empty**, **totally unacceptable**. Esto ocurre porque su significado ya se interpreta como un punto límite o una categoría más que como una escala abierta.\n\nLa distinción, sin embargo, no es completamente rígida. El contexto puede reinterpretar un adjetivo. **Almost perfect** sitúa **perfect** cerca de un límite; y en usos informales pueden aparecer combinaciones como **very unique**, aunque algunos estilos las evitan.\n\n#### Ejemplos\n\n- **The water is very cold.** — El agua está muy fría.\n- **This room is slightly warmer.** — Esta habitación está un poco más cálida.\n- **The answer is absolutely correct.** — La respuesta es completamente correcta.\n- **The bottle is completely empty.** — La botella está completamente vacía.\n\n#### Observación importante\n\nNo conviene memorizar una división absoluta entre dos listas cerradas de adjetivos. La gradabilidad depende en parte del significado usado y del contexto. Por ejemplo, **full** suele tratarse como límite, pero expresiones como **very full** son normales cuando se interpreta un grado práctico de llenado.\n\nTampoco todos los intensificadores se comportan igual. **Really** es flexible y puede aparecer tanto con adjetivos graduables como con muchos no graduables: **really cold**, **really amazing**.\n\n#### Entradas relacionadas\n\n- [Entrada 196: Intensificadores very/really/quite](#entry-196)\n- [Entrada 197: Intensificadores absolutos absolutely/completely](#entry-197)\n- [Entrada 185: Adjetivos atributivos](#entry-185)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-fdf3bf7808172a3c42d245292761812ad8612330efa8647ef5d16fa4669603c3",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:40:56.372Z"
+              },
+              {
+                "code": "MLS-V01-0197",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 197,
+                "title": "Intensificadores absolutos absolutely/completely",
+                "level": "B2",
+                "part": "Adjetivos, comparación y adverbios — Adjectives, comparison, and adverbs",
+                "chapter": "Adjetivos — Adjectives",
+                "articleMarkdown": "#### En pocas palabras\n\n**Absolutely** y **completely** son intensificadores que suelen combinarse con adjetivos cuyo significado expresa un límite, un extremo o una condición completa. En **The room was completely empty**, **completely** presenta la ausencia de contenido como total.\n\nPor eso aparecen con frecuencia donde **very** resulta menos natural o cambia el matiz.\n\n#### Cómo funciona\n\n**Absolutely** se combina bien con muchos adjetivos extremos o categóricos: **absolutely impossible, absolutely certain, absolutely amazing, absolutely ridiculous**. Refuerza la idea de que la propiedad se aplica plenamente o en un grado extremo.\n\n**Completely** también expresa totalidad, pero suele encajar especialmente con estados que pueden entenderse como completos: **completely empty, completely full, completely wrong, completely different**.\n\nLos dos adverbios se parecen, pero no son intercambiables en todas las combinaciones. La elección depende en parte del adjetivo y del uso establecido. Por ejemplo, **absolutely delicious** es muy natural, mientras **completely delicious** resulta poco habitual.\n\nTambién pueden modificar otras expresiones además de adjetivos, pero aquí interesa su función como intensificadores de propiedades.\n\n#### Ejemplos\n\n- **The room was completely empty.** — La habitación estaba completamente vacía.\n- **That idea is absolutely impossible.** — Esa idea es absolutamente imposible.\n- **Her answer was completely wrong.** — Su respuesta estaba completamente equivocada.\n- **The view was absolutely amazing.** — La vista era absolutamente impresionante.\n\n#### Observación importante\n\nLa etiqueta «intensificador absoluto» describe una tendencia de significado y combinación, no una regla mecánica. Algunos adjetivos pueden interpretarse de manera más o menos graduable según el contexto.\n\nAdemás, **absolutely** puede intensificar adjetivos extremos sin significar literalmente «al cien por ciento» en todos los usos. En **absolutely amazing**, funciona como un refuerzo enfático de una valoración muy fuerte.\n\n#### Entradas relacionadas\n\n- [Entrada 196: Intensificadores very/really/quite](#entry-196)\n- [Entrada 195: Adjetivos graduables frente a no graduables](#entry-195)\n- [Entrada 185: Adjetivos atributivos](#entry-185)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6e146d84cc42e194ef1447aa8c2e35b12163ddf66a0621b43b0bc23c4ffcc5f1",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:41:52.612Z"
+              },
+              {
+                "code": "MLS-V01-0198",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 198,
+                "title": "Comparativo en -er",
+                "level": "A1",
+                "part": "Adjetivos, comparación y adverbios — Adjectives, comparison, and adverbs",
+                "chapter": "Comparación — Comparison",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **comparativo en -er** sirve para decir que una persona o cosa tiene una característica en mayor grado que otra. Con muchos adjetivos cortos, se añade **-er**.\n\nEn **My room is smaller than yours**, **smaller** significa «más pequeña» y **than** introduce el segundo elemento de la comparación.\n\n#### Cómo funciona\n\nEl patrón frecuente es:\n\n**adjective + -er + than**\n\nEjemplos: **small → smaller**, **tall → taller**, **fast → faster**.\n\nAlgunas palabras cambian un poco la escritura. Si el adjetivo termina en **-e**, normalmente se añade solo **-r**: **nice → nicer**. En ciertos adjetivos cortos se duplica la consonante final: **big → bigger**, **hot → hotter**. Si termina en consonante + **y**, la **y** cambia a **i**: **happy → happier**.\n\n**Than** aparece cuando se menciona claramente el segundo elemento: **This car is faster than that one**. Si la comparación ya está clara por el contexto, puede omitirse: **This one is faster**.\n\n#### Ejemplos\n\n- **My room is smaller than yours.** — Mi habitación es más pequeña que la tuya.\n- **Ana is taller than Luis.** — Ana es más alta que Luis.\n- **Today is hotter than yesterday.** — Hoy hace más calor que ayer.\n- **This bag is lighter.** — Esta bolsa es más liviana.\n\n#### Observación importante\n\nNo todos los adjetivos forman el comparativo con **-er**. Muchos adjetivos más largos usan **more**, como **more interesting**.\n\nTambién existen formas irregulares, por ejemplo **good → better** y **bad → worse**. Por eso **-er** es una regla frecuente para ciertos adjetivos, no una terminación que se añade a todos.\n\n#### Entradas relacionadas\n\n- [Entrada 199: Comparativo con more](#entry-199)\n- [Entrada 200: Superlativo en -est](#entry-200)\n- [Entrada 201: Superlativo con most](#entry-201)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3c0884b4e2f4e2ac4c18753c33ffb98669306c695c46f28fe3bfe7a74924d799",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:42:09.525Z"
+              },
+              {
+                "code": "MLS-V01-0199",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 199,
+                "title": "Comparativo con more",
+                "level": "A1",
+                "part": "Adjetivos, comparación y adverbios — Adjectives, comparison, and adverbs",
+                "chapter": "Comparación — Comparison",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **comparativo con more** sirve para expresar que una persona o cosa tiene una característica en mayor grado que otra. Con muchos adjetivos de dos o más sílabas, el patrón más común es **more + adjective**.\n\nEn **This book is more interesting than that one**, **more interesting** significa «más interesante» y **than** introduce el segundo elemento de la comparación.\n\n#### Cómo funciona\n\nEl patrón frecuente es:\n\n**more + adjective + than**\n\nEjemplos: **more interesting, more expensive, more difficult, more comfortable**.\n\nA diferencia de los comparativos en **-er**, el adjetivo normalmente no cambia de forma: se dice **more useful**, no *usefuller*. Cuando el segundo elemento ya está claro por el contexto, **than** puede omitirse: **This option is more practical**.\n\nLa elección entre **-er** y **more** depende en gran parte del adjetivo. Muchos adjetivos cortos prefieren **-er**, mientras muchos más largos prefieren **more**. Algunos adjetivos admiten variación según el uso.\n\n#### Ejemplos\n\n- **This book is more interesting than that one.** — Este libro es más interesante que ese.\n- **The blue sofa is more comfortable.** — El sofá azul es más cómodo.\n- **This route is more difficult than the other one.** — Esta ruta es más difícil que la otra.\n- **Her new phone is more expensive.** — Su teléfono nuevo es más caro.\n\n#### Observación importante\n\nNo se combinan normalmente los dos mecanismos en un mismo comparativo. Por eso se dice **easier** o **more difficult**, no *more easier*.\n\nTambién existen comparativos irregulares, como **good → better** y **bad → worse**, que no siguen ni el patrón regular con **-er** ni el de **more**.\n\n#### Entradas relacionadas\n\n- [Entrada 198: Comparativo en -er](#entry-198)\n- [Entrada 200: Superlativo en -est](#entry-200)\n- [Entrada 201: Superlativo con most](#entry-201)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-da3ffa26113436505dd1a75320a854de1d1f878f295bf0bef5418b0d9ff6bacd",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:42:31.093Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:21:41.568Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:21:41.568Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-93bf/14-submit09-claim10.json"
+}

@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-z6-ticket09-submit-claim10",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-b9758da7-2169-4049-a9a2-f5caccbe7aea",
+          "ticketId": "R43-EMERGENCY-0800",
+          "leaseExpiresAt": 1790998008324
+        },
+        "completedAt": "2026-10-03T03:21:48.465Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0800",
+          "sha256": "a6ddfb1caf8bdaaf6d419618d1a3ae054505c5298b6ab538b2a2dc76314a2036",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0800",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c9d1a923-9949-4738-a460-66eb82588f6c",
+                "ticketId": "R43-EMERGENCY-0800",
+                "code": "MLS-V07-0694",
+                "idempotencyKey": "R43-EMERGENCY-0800:MLS-V07-0694:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ca76b09dcf360b76dc588f85c108243da1b96a99607d4d3c9861a6f86ff3ba64",
+                "sourceSha256": "f1a169264b52e158b554dbbc603bac5410662200bba10d224a0a3b401a7fa438",
+                "committedMs": 1790997708834,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "5ff9400534f7139dd682ecc927936d7baf1be377bff0dccf4e7034a9378becf9",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0800",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5c6e4c74-c107-410a-a7c4-e0d0bd9b7457",
+                "ticketId": "R43-EMERGENCY-0800",
+                "code": "MLS-V07-0696",
+                "idempotencyKey": "R43-EMERGENCY-0800:MLS-V07-0696:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a3c5e3587e2613dfc92bb75c9349f103b5ef7a17107baf51f88b1d3372686220",
+                "sourceSha256": "caf25d304127951563da5383c5b3a8c89a7f876c388a4012fb586ed0adeb0d2a",
+                "committedMs": 1790997709043,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "89e3d9e906b04ed452c3080e47c6bdc9fd5fd55f95be10b9172f6a2516a925d9",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0800",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "fdf187eb-8604-4f8e-b833-7ac885ee888d",
+                "ticketId": "R43-EMERGENCY-0800",
+                "code": "MLS-V07-0697",
+                "idempotencyKey": "R43-EMERGENCY-0800:MLS-V07-0697:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9f6082c1ee7a18fb6d55c17ca197ea81717701008855ea34259028a1db87555b",
+                "sourceSha256": "c9e9c09d587acadd3d0b6d26bd27d5a5f68c5e4259c4c9b19b12dc79c671402f",
+                "committedMs": 1790997709252,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f06fcc8e7204db50657ded3f0cd7db7866dbbf141c291579422eca545fc12d11",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0800",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "acf8ad3f-2611-40c8-a7f0-26e96fca4e6f",
+                "ticketId": "R43-EMERGENCY-0800",
+                "code": "MLS-V07-0698",
+                "idempotencyKey": "R43-EMERGENCY-0800:MLS-V07-0698:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "32ab19618e3b77f060000165f8b434d4710398e9ae98157d143bcd1005251d97",
+                "sourceSha256": "474eaac2b0072680fafbf8be3cc74252eb4d48ae4e9388130fa0a5a2e9b8d25c",
+                "committedMs": 1790997709466,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "53f2d63cc5509f9caa0fc0d4adf69287ce2797570433a8722381884d1fc0715d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0800",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a55336b3-614c-453d-a57b-1ec575c6763e",
+                "ticketId": "R43-EMERGENCY-0800",
+                "code": "MLS-V07-0699",
+                "idempotencyKey": "R43-EMERGENCY-0800:MLS-V07-0699:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "19e47af0b81a2892112593a220800e7c14ef8ec622b8914969e6e340442dbd8a",
+                "sourceSha256": "9cfd0f63e6a10c49b08fea1ee33e25a0c500334e1c11b7509e1104143b7cbde8",
+                "committedMs": 1790997709680,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "31a596f7b5c5f453d12fe50f06a2e631e0b2e615abb1dc29e26b40bfede8b1a7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-b9758da7-2169-4049-a9a2-f5caccbe7aea",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "a6ddfb1caf8bdaaf6d419618d1a3ae054505c5298b6ab538b2a2dc76314a2036"
+          }
+        },
+        "completedAt": "2026-10-03T03:21:49.965Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-226a34ae-fdc5-4d46-8a8c-3af51699e93c",
+          "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0801",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790998010008,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0001",
+                "path": "ingles/MLS-V01-0001.json",
+                "sha256": "be5a312bc52820b5fe5f40f410b128490e137aefe40cd20ab53962380d6400fe"
+              },
+              {
+                "code": "MLS-V01-0002",
+                "path": "ingles/MLS-V01-0002.json",
+                "sha256": "6be9ea580e66767b2a6b48d1b204d4fbbb882b868c9d28482890ef1accfd3422"
+              },
+              {
+                "code": "MLS-V01-0004",
+                "path": "ingles/MLS-V01-0004.json",
+                "sha256": "117c86e397bb26174e0684c9f611deb7916798d61ab9d3608f0a07250fa4f1f9"
+              },
+              {
+                "code": "MLS-V01-0005",
+                "path": "ingles/MLS-V01-0005.json",
+                "sha256": "42e254434e677709091f8030502063e91a97d445c7319f84c916a7438cf50655"
+              },
+              {
+                "code": "MLS-V01-0006",
+                "path": "ingles/MLS-V01-0006.json",
+                "sha256": "dc974bbbccea3b19277799374072729d73d246d3c9d1b31b23bfc24dc6d2728c"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0801",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0001",
+                "path": "ingles/MLS-V01-0001.json",
+                "sha256": "be5a312bc52820b5fe5f40f410b128490e137aefe40cd20ab53962380d6400fe"
+              },
+              {
+                "code": "MLS-V01-0002",
+                "path": "ingles/MLS-V01-0002.json",
+                "sha256": "6be9ea580e66767b2a6b48d1b204d4fbbb882b868c9d28482890ef1accfd3422"
+              },
+              {
+                "code": "MLS-V01-0004",
+                "path": "ingles/MLS-V01-0004.json",
+                "sha256": "117c86e397bb26174e0684c9f611deb7916798d61ab9d3608f0a07250fa4f1f9"
+              },
+              {
+                "code": "MLS-V01-0005",
+                "path": "ingles/MLS-V01-0005.json",
+                "sha256": "42e254434e677709091f8030502063e91a97d445c7319f84c916a7438cf50655"
+              },
+              {
+                "code": "MLS-V01-0006",
+                "path": "ingles/MLS-V01-0006.json",
+                "sha256": "dc974bbbccea3b19277799374072729d73d246d3c9d1b31b23bfc24dc6d2728c"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0001",
+              "MLS-V01-0002",
+              "MLS-V01-0004",
+              "MLS-V01-0005",
+              "MLS-V01-0006"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790998010008,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-mp10-z6",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790998010008,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0001",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 1,
+                "title": "Alfabeto inglés y nombres de las letras",
+                "level": "A1",
+                "part": "Sistema gráfico, pronunciación y fundamentos — Writing system, pronunciation, and foundations",
+                "chapter": "Escritura y ortografía — Writing and orthography",
+                "articleMarkdown": "#### En pocas palabras\nEl alfabeto inglés consta de 26 letras que conforman el sistema de escritura del idioma. Estas letras se utilizan para representar los sonidos del inglés mediante símbolos gráficos.\n\n#### Cómo funciona\nPara un estudiante de inglés, es fundamental distinguir entre el **nombre de la letra** y su **sonido**:\n\n1.  **Nombre de la letra:** Es la forma en que pronunciamos la letra cuando la deletreamos (por ejemplo, al dictar un nombre, un correo electrónico o un código).\n2.  **Sonido:** Es el valor fonético que la letra aporta cuando forma parte de una palabra.\n\nEl nombre de la letra es una unidad estable, pero su sonido puede cambiar dependiendo de las letras que la acompañen en una palabra.\n\n#### Ejemplos\n\n| Letra | Nombre (Deletreo) | Ejemplo de uso |\n| :--- | :--- | :--- |\n| **A** | /eɪ/ | Deletrear *Apple* (A-P-P-L-E) |\n| **B** | /biː/ | Deletrear *Boy* (B-O-Y) |\n| **Z** | /ziː/ o /zed/ | Deletrear *Zoo* (Z-O-O) |\n\n#### Observación importante\n* **Variación de la Z:** El nombre de la letra **Z** presenta una diferencia regional importante. En Estados Unidos es predominante la pronunciación */ziː/* (*zee*), mientras que en el Reino Unido, Canadá y otras variedades del inglés se utiliza */zed/*.\n* **Nombre vs. Sonido:** No debe confundirse el nombre con el sonido. Por ejemplo, la letra **E** se llama /iː/, pero en la palabra *bed* su sonido es /ɛ/.\n\n#### Entradas relacionadas\n* [Mayúsculas y minúsculas — Uppercase and lowercase letters](#entry-2)\n* [Orden alfabético y deletreo — Alphabetical order and spelling](#entry-3)\n* [Grafemas y correspondencias letra-sonido — Graphemes and letter–sound correspondences](#entry-4)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T09:52:23.065Z"
+              },
+              {
+                "code": "MLS-V01-0002",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 2,
+                "title": "Mayúsculas y minúsculas",
+                "level": "A1",
+                "part": "Sistema gráfico, pronunciación y fundamentos — Writing system, pronunciation, and foundations",
+                "chapter": "Escritura y ortografía — Writing and orthography",
+                "articleMarkdown": "#### Mayúsculas y minúsculas (Uppercase and lowercase letters)\n\n#### En pocas palabras\nEl alfabeto inglés emplea dos versiones de cada letra: las **mayúsculas** (*uppercase letters*) y las **minúsculas** (*lowercase letters*). El uso de una u otra no depende de la intención de enfatizar una palabra, sino de reglas ortográficas que determinan la estructura correcta de la escritura.\n\n#### Cómo funciona\nLas **mayúsculas** se utilizan principalmente en los siguientes contextos:\n* **Inicio de una oración:** La primera letra de cualquier frase escrita.\n* **Nombres propios:** Nombres de personas, lugares específicos (ciudades, países, ríos), instituciones, marcas y nacionalidades.\n* **Siglas:** Abreviaturas formadas por las iniciales de un nombre o título (ej. *UN* para *United Nations*).\n* **Días y meses:** Los nombres de los días de la semana y los meses del año.\n\nLas **minúsculas** se utilizan para el resto de las letras en palabras comunes y en cualquier posición que no requiera una mayúscula por las reglas mencionadas.\n\n#### Ejemplos\n* ***S**arah lives in **P**aris.* (Mayúsculas en nombre de persona y ciudad).\n* *Today is **M**onday, **O**ctober 5th.* (Mayúsculas en día y mes).\n* ***T**he car is red.* (Mayúscula al inicio de la oración).\n\n#### Observación importante\nPara los hablantes de español, es crucial recordar que en inglés los **días de la semana** (*Monday, Tuesday...*) y los **meses del año** (*January, February...*) **siempre** deben escribirse con mayúscula inicial. En español estos suelen escribirse en minúscula, por lo que este es uno de los errores más frecuentes en niveles iniciales.\n\n#### Entradas relacionadas\n* [Alfabeto inglés y nombres de las letras](#entry-1)\n* [Orden alfabético y deletreo](#entry-3)\n* [Grafemas y correspondencias letra-sonido](#entry-4)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T09:57:39.508Z"
+              },
+              {
+                "code": "MLS-V01-0004",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 4,
+                "title": "Grafemas y correspondencias letra-sonido",
+                "level": "A1",
+                "part": "Sistema gráfico, pronunciación y fundamentos — Writing system, pronunciation, and foundations",
+                "chapter": "Escritura y ortografía — Writing and orthography",
+                "articleMarkdown": "#### En pocas palabras\n\nUn **grafema** es la unidad mínima de escritura; puede ser una sola letra (como *a*) o un grupo de letras (como *sh*) que representan un sonido. La **correspondencia letra-sonido** es la relación entre lo que escribimos y lo que pronunciamos.\n\nA diferencia del español, donde la relación entre letras y sonidos es muy constante, en inglés esta relación es irregular. No existe una regla de \"una letra = un sonido\".\n\n#### Cómo funciona\n\nEn inglés, el sistema de escritura presenta dos desafíos principales para el estudiante:\n\n1.  **Un mismo grafema puede tener varios sonidos:** Una letra o combinación de letras cambia su pronunciación según la palabra.\n2.  **Un mismo sonido puede representarse con distintos grafemas:** Un solo sonido puede escribirse de múltiples maneras.\n\n#### Ejemplos\n\n**1. Un grafema, múltiples sonidos**\nLa letra **a** cambia su sonido dependiendo del contexto:\n*   *cat* /kæt/ (sonido corto)\n*   *cake* /keɪk/ (sonido largo)\n*   *call* /kɔːl/ (sonido diferente)\n\n**2. Un sonido, múltiples grafemas**\nEl sonido **/f/** puede escribirse de diversas formas:\n*   **f** en *fish*\n*   **ph** en *phone*\n*   **gh** en *laugh*\n\n#### Observación importante\n\nNo intente pronunciar el inglés letra por letra como si fuera español. Para lograr precisión, es más efectivo aprender **patrones ortográficos** (secuencias de letras que suelen sonar de una forma determinada) y familiarizarse con la palabra completa. Además, tenga en cuenta que la pronunciación de un mismo grafema puede variar según el dialecto (por ejemplo, entre el inglés estadounidense y el británico).\n\n#### Entradas relacionadas\n\n*   [Dígrafos y secuencias ortográficas frecuentes](#entry-5)\n*   [Orden alfabético y deletreo](#entry-3)\n*   [Mayúsculas y minúsculas](#entry-2)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T09:57:58.747Z"
+              },
+              {
+                "code": "MLS-V01-0005",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 5,
+                "title": "Dígrafos y secuencias ortográficas frecuentes",
+                "level": "A1",
+                "part": "Sistema gráfico, pronunciación y fundamentos — Writing system, pronunciation, and foundations",
+                "chapter": "Escritura y ortografía — Writing and orthography",
+                "articleMarkdown": "#### En pocas palabras\n\nLos dígrafos y las secuencias ortográficas son grupos de dos o más letras que se combinan para representar un sonido específico o para formar patrones comunes en la escritura. En lugar de procesar cada letra de forma aislada, el lector reconoce el bloque completo, lo que facilita la lectura fluida y la precisión al escribir.\n\n#### Cómo funciona\n\nExisten dos conceptos principales que suelen estudiarse juntos:\n\n1.  **Dígrafos (Digraphs):** Es cuando dos letras se unen para producir un único sonido (fonema). En estos casos, la combinación de las letras crea un sonido que ninguna de las letras posee por separado.\n2.  **Secuencias ortográficas (Spelling sequences):** Son combinaciones de letras que aparecen con mucha frecuencia en el idioma. Aunque no siempre representan un solo sonido, forman patrones predecibles que ayudan a identificar la estructura de las palabras.\n\n#### Ejemplos\n\n*   **sh** (dígrafo): *ship* /ʃɪp/ (barco). Las letras *s* y *h* juntas producen el sonido /ʃ/.\n*   **ph** (dígrafo): *phone* /foʊn/ (teléfono). La combinación *ph* suena como la letra /f/.\n*   **tion** (secuencia): *action* /ˈækʃən/ (acción). Este grupo de letras es un patrón muy común para representar un sonido específico al final de las palabras.\n*   **ight** (secuencia): *night* /naɪt/ (noche). Es un patrón frecuente donde varias letras trabajan juntas para marcar un sonido de vocal larga.\n\n#### Observación importante\n\nEn inglés, es un error común intentar pronunciar cada letra de un dígrafo por separado. Por ejemplo, en la palabra *think*, no se pronuncia la \"t\" y la \"h\" de forma independiente, sino que se reconoce el dígrafo **th** como una unidad sonora. Dominar estos patrones es fundamental para mejorar la decodificación (lectura) y la codificación (escritura) de palabras complejas.\n\n#### Entradas relacionadas\n\n*   [Grafemas y correspondencias letra-sonido](#entry-4)\n*   [Orden alfabético y deletreo](#entry-3)\n*   [Mayúsculas y minúsculas](#entry-2)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T09:58:00.954Z"
+              },
+              {
+                "code": "MLS-V01-0006",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 6,
+                "title": "Duplicación de consonantes al añadir sufijos",
+                "level": "A2",
+                "part": "Sistema gráfico, pronunciación y fundamentos — Writing system, pronunciation, and foundations",
+                "chapter": "Escritura y ortografía — Writing and orthography",
+                "articleMarkdown": "#### En pocas palabras\n\nEs una regla ortográfica que indica cuándo se debe repetir la última consonante de una palabra antes de añadir un sufijo (una terminación como *-ing*, *-ed*, *-er* o *-est*). Esta duplicación sirve para mantener la pronunciación correcta de la vocal de la raíz, evitando que cambie su sonido al añadir la terminación.\n\n#### Cómo funciona\n\nLa decisión de duplicar la consonante depende de la estructura de la palabra y de dónde recae el acento (la fuerza de voz):\n\n1.  **Palabras de una sola sílaba:** Si la palabra termina en el patrón **consonante + vocal + consonante** (CVC), se duplica la última consonante.\n    *   *stop* $\\rightarrow$ *stopping*\n    *   *run* $\\rightarrow$ *running*\n2.  **Palabras de varias sílabas:** Solo se duplica la consonante si el **acento** recae en la **última sílaba**.\n    *   *begin* (be-GIN) $\\rightarrow$ *beginning*\n    *   *prefer* (pre-FER) $\\rightarrow$ *preferred*\n\n#### Ejemplos\n\n*   **plan $\\rightarrow$ planned**: Es una palabra de una sílaba con el patrón consonante-vocal-consonante, por lo que se duplica la *n*.\n*   **visit $\\rightarrow$ visiting**: Aunque termina en consonante, el acento está en la primera sílaba (**VI**-sit), por lo que **no** se duplica la *t*.\n*   **rain $\\rightarrow$ raining**: No se duplica la *n* porque antes de la consonante hay dos vocales (*ai*), no una sola.\n*   **help $\\rightarrow$ helping**: No se duplica la *p* porque la palabra termina en dos consonantes (*lp*).\n\n#### Observación importante\n\nNo todas las palabras que terminan en consonante requieren duplicación. Es fundamental identificar si la palabra tiene una sola vocal antes de la consonante final y, en palabras largas, verificar si la fuerza de voz está al final. Si la palabra tiene dos vocales juntas (como en *read* $\\rightarrow$ *reading*) o termina en dos consonantes (como en *jump* $\\rightarrow$ *jumping*), la regla no se aplica.\n\n#### Entradas relacionadas\n\n*   [Eliminación de -e final ante sufijos — Dropping final -e before suffixes](#entry-7)\n*   [Cambio de -y a -i — Changing -y to -i](#entry-8)\n*   [Plural ortográfico en -s/-es — Orthographic plural in -s/-es](#entry-9)",
+                "provider": "cloudflare",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-12T09:58:06.620Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:21:50.772Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:21:50.772Z",
+  "commandFile": "mls chat bridge/commands/r44/z6-ticket09-submit-claim10.json"
+}
