@@ -16,7 +16,11 @@ const durableSource = fs.readFileSync(require("node:path").join(__dirname,"r44 d
 const clientSource = fs.readFileSync(require("node:path").join(__dirname,"r44 client.js"),"utf8");
 const unifiedR33Source = fs.readFileSync(require("node:path").join(__dirname,"unified runner r33 runtime.js"),"utf8");
 const sourceRegistryDir=require("node:path").join(__dirname,"../MLS R32 EDITORIAL/evidence git/registry/sources");
-const sourceCatalog=fs.readdirSync(sourceRegistryDir).filter(name=>name.endsWith(".json")).sort().map(name=>JSON.parse(fs.readFileSync(require("node:path").join(sourceRegistryDir,name),"utf8")));
+const evidenceApa=require("../MLS R32 EDITORIAL/evidence apa.js");
+const sourceCatalog=fs.readdirSync(sourceRegistryDir)
+  .filter(name=>name.endsWith(".json")).sort()
+  .map(name=>JSON.parse(fs.readFileSync(require("node:path").join(sourceRegistryDir,name),"utf8")))
+  .filter(raw=>raw&&raw.metadata&&evidenceApa.validateApaSource(raw.metadata).citationReady);
 const RUNTIME = 'var MLS_R33_SOURCE_CATALOG = '+JSON.stringify(sourceCatalog)+';\n'+'var R44_DURABLE_SQL = '+JSON.stringify(durableSql)+';\nvar R44_CLIENT_SOURCE = '+JSON.stringify(clientSource)+';\n'+durableSource+'\n'+unifiedR33Source+'\n'+`var R44_POOL_SHA256 = "${poolSha}";\n` + fs.readFileSync(require("node:path").join(__dirname, "r44 runtime.js"), "utf8").replace('pool-manifest.json"', `pool-manifest.json?sha256=${poolSha}"`);
 
 function injectR44(code) {
