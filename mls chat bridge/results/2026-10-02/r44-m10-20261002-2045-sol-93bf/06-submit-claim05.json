@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-93bf-ticket04-next05",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-ad531307-4f64-4ed7-b32d-f290f84d69a6",
+          "ticketId": "R44-CORPUS-0824",
+          "leaseExpiresAt": 1790996829091
+        },
+        "completedAt": "2026-10-03T03:02:09.224Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0824",
+          "sha256": "763f672c94fa6e77b1e62380810d0b3feb235d0a329dd7f9c8b90906f0a7e922",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0824",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "cca29c49-3686-43a3-9a55-1237d508b089",
+                "ticketId": "R44-CORPUS-0824",
+                "code": "MLS-V01-0148",
+                "idempotencyKey": "R44-CORPUS-0824:MLS-V01-0148:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b52ec8b35b1bafa25b595678c32c71cc04aaf6f912f449724c92a7d3efd25bcd",
+                "sourceSha256": "3858ced7be755a8c9dba19ff2f7477055df9f94e07195f546aaf146c05f39d12",
+                "committedMs": 1790996529596,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c51f4d32c0a24724882e83072559c723542cd43bb95b56d603bc3240441ecb67",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0824",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "deb0c9c3-fae1-44b6-8058-f2c9150db838",
+                "ticketId": "R44-CORPUS-0824",
+                "code": "MLS-V01-0150",
+                "idempotencyKey": "R44-CORPUS-0824:MLS-V01-0150:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b6def3b484a8cbecc782b6c00d6d60091fc2b44f67118ec705962475d4417a34",
+                "sourceSha256": "8d3de3cad35e628bfe2781e7d3bab8072b942a43789a40583138d34ab9d6ba9c",
+                "committedMs": 1790996529815,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f74162a1b687f8456c8385ce4ac9dde7d3406a657c8e04439048b59ee988331a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0824",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "fdcdc4cf-c2f9-4258-955f-aa96ca36db70",
+                "ticketId": "R44-CORPUS-0824",
+                "code": "MLS-V01-0151",
+                "idempotencyKey": "R44-CORPUS-0824:MLS-V01-0151:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6a7aa0d0b7a4c26060f7607ec2559a3f351cd0b89851aa403a8188ab3ef74620",
+                "sourceSha256": "b950099851a97589d594ea6d8c4d7d090898ccf4cfa81a7f53cb01c127daf069",
+                "committedMs": 1790996530033,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "a4904803f4c7ac89906a874608719124167c61cbee6d0410724bd7d4f3b27ad7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0824",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "308f99af-f38c-43f3-9507-c399a4bf12b6",
+                "ticketId": "R44-CORPUS-0824",
+                "code": "MLS-V01-0152",
+                "idempotencyKey": "R44-CORPUS-0824:MLS-V01-0152:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "04bb0143438ca2c7daeb0c10884b48374bd4654a51637960deb1d5cce68f1f87",
+                "sourceSha256": "20eee067c576e02c40d3044e10c678ea9ada09350c3234db0a67e28a3158aad4",
+                "committedMs": 1790996530247,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "df1d32c4095b2f10431ea7b86eae92c60d8661c8fc17b89186f679cc6b08314f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0824",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d330701a-c1fb-4209-a74d-fd9ba9c7bf97",
+                "ticketId": "R44-CORPUS-0824",
+                "code": "MLS-V01-0154",
+                "idempotencyKey": "R44-CORPUS-0824:MLS-V01-0154:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "57a2389525f52fd3cc26d37e7a76766a94186518d0c4301093b2dce26f3c7d34",
+                "sourceSha256": "8f945e99ab79bac9e14c86089255e412bffb78da344fefefd3e2512e6e86e763",
+                "committedMs": 1790996530474,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "cf7e38738c2598713b2ec552ec135c0761eab8f01b34f6bcea4db5a7a0e894f1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-ad531307-4f64-4ed7-b32d-f290f84d69a6",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "763f672c94fa6e77b1e62380810d0b3feb235d0a329dd7f9c8b90906f0a7e922"
+          }
+        },
+        "completedAt": "2026-10-03T03:02:10.778Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-d578d7ba-83dc-4078-b413-724068d97a98",
+          "workerId": "r44-m10-20261002-2045-sol-93bf",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0825",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996830821,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0155",
+                "path": "ingles/MLS-V01-0155.json",
+                "sha256": "468238f50300c3bbb02453b7a4e2d81390cea1b0b2c3347c7ac85b2f7675d173"
+              },
+              {
+                "code": "MLS-V01-0156",
+                "path": "ingles/MLS-V01-0156.json",
+                "sha256": "3f2707bf8817b30e33c49952608fd7da843071ab109b9ef193231f2b9f6fa182"
+              },
+              {
+                "code": "MLS-V01-0158",
+                "path": "ingles/MLS-V01-0158.json",
+                "sha256": "85c12f318314b1003ad722f869dd0a09722b157a95ca54dca5fabc90a0c5b859"
+              },
+              {
+                "code": "MLS-V01-0159",
+                "path": "ingles/MLS-V01-0159.json",
+                "sha256": "39eabd7be02189cd08731049ad0a6e80b0649b13ecb9bb7db815739ca29556b1"
+              },
+              {
+                "code": "MLS-V01-0160",
+                "path": "ingles/MLS-V01-0160.json",
+                "sha256": "fc15f3ca3923f9605474f00aa040b6ea44b238a6257a2d9214b8ebdb73c9a852"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0825",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0155",
+                "path": "ingles/MLS-V01-0155.json",
+                "sha256": "468238f50300c3bbb02453b7a4e2d81390cea1b0b2c3347c7ac85b2f7675d173"
+              },
+              {
+                "code": "MLS-V01-0156",
+                "path": "ingles/MLS-V01-0156.json",
+                "sha256": "3f2707bf8817b30e33c49952608fd7da843071ab109b9ef193231f2b9f6fa182"
+              },
+              {
+                "code": "MLS-V01-0158",
+                "path": "ingles/MLS-V01-0158.json",
+                "sha256": "85c12f318314b1003ad722f869dd0a09722b157a95ca54dca5fabc90a0c5b859"
+              },
+              {
+                "code": "MLS-V01-0159",
+                "path": "ingles/MLS-V01-0159.json",
+                "sha256": "39eabd7be02189cd08731049ad0a6e80b0649b13ecb9bb7db815739ca29556b1"
+              },
+              {
+                "code": "MLS-V01-0160",
+                "path": "ingles/MLS-V01-0160.json",
+                "sha256": "fc15f3ca3923f9605474f00aa040b6ea44b238a6257a2d9214b8ebdb73c9a852"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0155",
+              "MLS-V01-0156",
+              "MLS-V01-0158",
+              "MLS-V01-0159",
+              "MLS-V01-0160"
+            ],
+            "lease": {
+              "workerId": "r44-m10-20261002-2045-sol-93bf",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996830821,
+              "active": true
+            },
+            "workerId": "r44-m10-20261002-2045-sol-93bf",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996830821,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0155",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 155,
+                "title": "Fracciones y porcentajes + concordancia",
+                "level": "B2",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\nCon **fracciones y porcentajes**, la forma del verbo suele depender de aquello que se está cuantificando, no de la cifra o la fracción por sí sola. Si la expresión con **of** se refiere a elementos plurales, suele aparecer un verbo plural; si cuantifica una masa o una entidad singular, suele aparecer un verbo singular.\n\n#### Cómo funciona\n\nEl patrón general es:\n\n**fraction/percentage + of + noun phrase + verb agreement**\n\nCompare **Fifty percent of the students are here** con **Fifty percent of the water is gone**. En la primera oración, **students** designa múltiples personas y el verbo es plural: **are**. En la segunda, **water** es un sustantivo no contable y el verbo es singular: **is**.\n\nLas fracciones siguen normalmente el mismo principio: **Two thirds of the seats are occupied**, pero **Two thirds of the building is empty** cuando se concibe el edificio como una entidad singular. Con sustantivos singulares contables también se mantiene la concordancia singular: **Half of the cake is gone**.\n\nEl porcentaje no determina por sí mismo el número gramatical. **One percent of the students are absent** puede llevar plural porque se habla de estudiantes, aunque la cifra sea **one percent**.\n\n#### Ejemplos\n\n- **Fifty percent of the students are here.** — El cincuenta por ciento de los estudiantes está aquí.\n- **Fifty percent of the water is gone.** — Se ha acabado el cincuenta por ciento del agua.\n- **Two thirds of the seats are occupied.** — Dos tercios de los asientos están ocupados.\n- **Half of the cake is gone.** — Se ha acabado la mitad del pastel.\n\n#### Observación importante\n\nNo conviene decidir la concordancia mirando únicamente el número escrito. En estas construcciones, la relación entre la cantidad y la entidad cuantificada es central.\n\nEn ciertos sustantivos colectivos pueden aparecer diferencias de interpretación y de variedad del inglés. Si el sustantivo puede conceptualizarse como una unidad o como sus miembros, la concordancia puede variar de acuerdo con esa lectura y con las convenciones regionales.\n\n#### Entradas relacionadas\n\n- [Entrada 154: a number of frente a the number of](#entry-154)\n- [Entrada 153: none of](#entry-153)\n- [Entrada 152: most frente a most of](#entry-152)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1ca052ef86871fff499a55637ecb547538997c77b50ebeae5b890df9c8583ba3",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:45:12.449Z"
+              },
+              {
+                "code": "MLS-V01-0156",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 156,
+                "title": "Pronombres de sujeto",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\nLos **pronombres de sujeto** son formas que pueden ocupar la función de sujeto de una cláusula sin repetir un nombre completo. Las formas principales son **I, you, he, she, it, we, they**. En **I work here** y **They live nearby**, **I** y **they** funcionan como sujetos.\n\n#### Cómo funciona\n\nLas formas básicas son:\n\n**I — you — he — she — it — we — they**\n\nEl sujeto es el elemento gramatical con el que normalmente concuerda el verbo en formas donde la concordancia es visible. Por ejemplo, se dice **She works here**, pero **They work here**.\n\n**I** se refiere al hablante; **we**, al hablante junto con otra persona o grupo. **You** puede referirse a una o varias personas. **He** y **she** suelen referirse a personas, mientras **it** se usa con muchas cosas, animales cuando no se destaca su sexo o identidad individual, y también en construcciones especiales. **They** se usa con referentes plurales y también puede tener referencia singular cuando el género es desconocido, irrelevante o no binario.\n\nEl inglés normalmente requiere un sujeto expreso en las cláusulas finitas: **It is raining**, no simplemente *Is raining* en el inglés estándar.\n\n#### Ejemplos\n\n- **I work here.** — Trabajo aquí.\n- **She lives nearby.** — Ella vive cerca.\n- **We are ready.** — Estamos listos.\n- **They called yesterday.** — Llamaron ayer.\n\n#### Observación importante\n\nNo se usan normalmente las formas de objeto como sujeto: **He is here**, no *Him is here*. Además, **it** no siempre representa una cosa concreta. En **It is raining**, funciona como sujeto gramatical sin referirse a una entidad específica.\n\n#### Entradas relacionadas\n\n- [Entrada 157: Pronombres de objeto](#entry-157)\n- [Entrada 158: Pronombres después de preposición](#entry-158)\n- [Entrada 159: Caso pronominal después de be](#entry-159)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-22d758d792766ce0d532988c9cbadb0a2812a8c8474368dcb778404d6379597b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:45:40.918Z"
+              },
+              {
+                "code": "MLS-V01-0158",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 158,
+                "title": "Pronombres después de preposición",
+                "level": "A1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\nCuando un **pronombre personal** funciona como complemento de una preposición, el inglés usa normalmente la forma objetiva: **me, you, him, her, it, us, them**. Así, se dice **for her**, **with them** y **between us**.\n\n#### Cómo funciona\n\nEl patrón básico es:\n\n**preposition + object pronoun**\n\nUna preposición introduce un complemento y establece una relación, por ejemplo de lugar, compañía, destinatario o tema. Si ese complemento se expresa mediante un pronombre personal, aparece normalmente la forma objetiva: **to me**, **from him**, **with us**, **about them**.\n\nEn **This gift is for her**, la preposición **for** tiene como complemento **her**. La forma correspondiente de sujeto es **she**, pero no se usa *for she* en esta construcción.\n\nLa misma regla se aplica cuando el pronombre forma parte de una coordinación: **for Ana and me**, **between you and me**. En la conversación real pueden oírse otras formas en algunas coordinaciones, pero el patrón estándar después de una preposición mantiene el caso objetivo.\n\n#### Ejemplos\n\n- **This gift is for her.** — Este regalo es para ella.\n- **Come with us.** — Ven con nosotros.\n- **I spoke to him yesterday.** — Hablé con él ayer.\n- **They were talking about me.** — Estaban hablando de mí.\n\n#### Observación importante\n\nNo conviene describir la regla como si la preposición simplemente «cambiara la palabra siguiente». La preposición rige un complemento completo; cuando ese complemento es un pronombre personal, la forma que normalmente corresponde es la objetiva.\n\n**You** e **it** no muestran una diferencia visible entre forma de sujeto y de objeto: **for you**, **about it**.\n\n#### Entradas relacionadas\n\n- [Entrada 157: Pronombres de objeto](#entry-157)\n- [Entrada 159: Caso pronominal después de be](#entry-159)\n- [Entrada 156: Pronombres de sujeto](#entry-156)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-03ca798c5774a0a64c581990ccaab8aa64c39ea18d7d265bb18ce677679762d5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:46:29.913Z"
+              },
+              {
+                "code": "MLS-V01-0159",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 159,
+                "title": "Caso pronominal después de be",
+                "level": "B2",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\nDespués del verbo **be** en construcciones identificativas, el inglés actual usa con mucha frecuencia formas objetivas como **me, him, her, us** y **them**: **It’s me**, **That was him**. La tradición gramatical también admite formas de sujeto como **It is I**, pero estas suelen sonar formales o marcadas en el inglés contemporáneo.\n\n#### Cómo funciona\n\nEn una oración como **It’s me**, **me** no es un objeto del verbo en el mismo sentido que en **She saw me**. Aparece como complemento predicativo de **be**: identifica quién corresponde al sujeto **it**.\n\nEn el uso conversacional y neutral son normales:\n\n**It’s me.**\n\n**That’s her.**\n\n**It was them.**\n\nLas variantes con forma nominativa o de sujeto —**It is I**, **It was he**, **This is she**— sobreviven sobre todo en contextos formales, estilizados o en ciertas fórmulas. Por eso no conviene enseñar que después de **be** la única opción correcta sea la forma de sujeto.\n\nLa selección también puede verse afectada por lo que sigue. En registros muy formales aparece **It is I who am responsible**; en el uso corriente es mucho más natural **It’s me who’s responsible** o una reformulación como **I’m the one who’s responsible**.\n\n#### Ejemplos\n\n- **It’s me.** — Soy yo.\n- **That was him at the door.** — Era él quien estaba en la puerta.\n- **It was them who called.** — Fueron ellos quienes llamaron.\n- **It is I who am responsible.** — Soy yo quien es responsable. — Forma muy formal.\n\n#### Observación importante\n\nLas etiquetas «pronombre de sujeto» y «pronombre de objeto» describen un contraste de formas, pero la distribución real no se reduce mecánicamente a «antes o después del verbo». **Me** en **It’s me** es la forma objetiva, aunque la construcción sea identificativa y no contenga un objeto verbal ordinario.\n\nLa preferencia entre **It’s me** e **It is I** depende fuertemente del registro; la primera es la opción no marcada en la conversación moderna.\n\n#### Entradas relacionadas\n\n- [Entrada 158: Pronombres después de preposición](#entry-158)\n- [Entrada 160: Caso después de than/as](#entry-160)\n- [Entrada 157: Pronombres de objeto](#entry-157)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3d9a8bf6056496c3b3c6702f4c14e7694bbf6c33f4e792902baf873578979f36",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:46:58.848Z"
+              },
+              {
+                "code": "MLS-V01-0160",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 160,
+                "title": "Caso después de than/as",
+                "level": "C1",
+                "part": "Pronombres y referencia — Pronouns and reference",
+                "chapter": "Pronombres personales — Personal pronouns",
+                "articleMarkdown": "#### En pocas palabras\n\nDespués de **than** y **as** en comparaciones, el inglés permite más de un patrón pronominal. Si el pronombre es el sujeto de una cláusula con verbo expreso, se usa la forma de sujeto: **She is taller than I am**. Cuando no aparece el verbo, las formas objetivas como **me, him, her, us** y **them** son muy frecuentes, especialmente en conversación: **She is taller than me**.\n\n#### Cómo funciona\n\nCompare estos dos patrones:\n\n**than/as + subject pronoun + verb**\n\n**than/as + objective pronoun**\n\nEn **She is taller than I am**, **I** es claramente el sujeto de **am**. Por eso *than me am* no es posible. Lo mismo ocurre en **He works as hard as she does**: **she** es el sujeto de **does**.\n\nCuando el verbo no se expresa, existen dos análisis y dos tendencias de uso. **She is taller than me** es normal en el inglés contemporáneo y puede analizarse con **than** seguido de un complemento pronominal. La variante **She is taller than I** representa una comparación elíptica, equivalente a **than I am**, y suele sonar más formal o literaria.\n\nCon **as** se observa un contraste parecido: **He isn’t as tall as I am** es plenamente clausal; **He isn’t as tall as me** es común en el habla y en muchos registros neutrales. La elección no se reduce, por tanto, a una regla única de «sujeto correcto» frente a «objeto incorrecto».\n\n#### Ejemplos\n\n- **She is taller than I am.** — Ella es más alta que yo.\n- **She is taller than me.** — Ella es más alta que yo.\n- **He works as hard as she does.** — Él trabaja tan duro como ella.\n- **He isn’t as tall as me.** — Él no es tan alto como yo.\n\n#### Observación importante\n\nLa forma completa puede evitar ambigüedades. **Maria likes Daniel more than I do** significa que María quiere a Daniel más de lo que yo lo quiero; **Maria likes Daniel more than she likes me** expresa otra comparación. Una forma reducida puede dejar sin expresar parte de esa estructura.\n\nEn escritura formal, las cláusulas explícitas como **than I am** o **as she does** suelen ser una opción clara. Las formas objetivas sin verbo no deben presentarse como errores generales: están ampliamente establecidas en el uso moderno.\n\n#### Entradas relacionadas\n\n- [Entrada 159: Caso pronominal después de be](#entry-159)\n- [Entrada 158: Pronombres después de preposición](#entry-158)\n- [Entrada 157: Pronombres de objeto](#entry-157)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a6153acadc0c5ab00f5d36605ee5ee130c1ccf905b041310986b92786b9bb3ec",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:47:35.527Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:02:11.630Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:02:11.630Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-m10-20261002-2045-sol-93bf/06-submit-claim05.json"
+}

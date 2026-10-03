@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-5c72-ticket05-close-next",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0678",
+          "sha256": "427c578d7babaaa11943f69d34bb022a5ad32b5b4bfd381580dee27addb56738",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0678",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e97c0121-9925-4d46-abc0-2b86dd2cc879",
+                "ticketId": "R43-EMERGENCY-0678",
+                "code": "MLS-V06-0989",
+                "idempotencyKey": "R43-EMERGENCY-0678:MLS-V06-0989:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0890feec4a950a03b838eb0e4da48f7d7924c6848e7d4ba978b5d3a836ea6df3",
+                "sourceSha256": "cc609f7a557e7fcf57719aa59f568e3d0539b48f1ed67b6bf6557e0c4668cfda",
+                "committedMs": 1790996550032,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "70f51d053509103dcd7bb964f3102f4cab0d77f7a4a16352bcb707340fc74ea3",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0678",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "0476d9ee-b734-43d2-8a8d-570966c9ab34",
+                "ticketId": "R43-EMERGENCY-0678",
+                "code": "MLS-V06-0990",
+                "idempotencyKey": "R43-EMERGENCY-0678:MLS-V06-0990:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d0e835e5fa556161cedf7c3d9c08f91cb8d3fa4d2033add1971d5eadc3f82358",
+                "sourceSha256": "7c8866309e471d988ae572712468f34891368c181900d64a9983fff735e4b4e2",
+                "committedMs": 1790996550279,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f1fe5d2b498a871d7e453f746bb07082eb7d51090e2c7795d517f1d281783deb",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0678",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1411a5e8-dc9b-43df-ad66-3854c8410df4",
+                "ticketId": "R43-EMERGENCY-0678",
+                "code": "MLS-V06-0992",
+                "idempotencyKey": "R43-EMERGENCY-0678:MLS-V06-0992:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "cd65211b642af675052f63feb80decb2dc2dac88d2ca6ccb2681560bb8badde7",
+                "sourceSha256": "78dfdf8a21f0960871ad2d4a0ed5b0dcdffc2108cadb5678bfba33708239f04f",
+                "committedMs": 1790996550491,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "aea0614db46a673c9aa7f4268fbd3da8f31675e1574f1f48a79a4665830a5c58",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0678",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2a7aa5ad-883d-4bd8-a604-e5725218e952",
+                "ticketId": "R43-EMERGENCY-0678",
+                "code": "MLS-V06-0993",
+                "idempotencyKey": "R43-EMERGENCY-0678:MLS-V06-0993:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "258df6ca4acffacce5be0483ce71672642986b22ce4761dbc450f07cb756111e",
+                "sourceSha256": "db4d1c154965108ee49cfde703e1a2f438aa4921cb37d89ae63713b0720b95a1",
+                "committedMs": 1790996550706,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d069585e7a271993443d3a749c75220c49b859a2580bfb663ab33e6287242b22",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0678",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8f02d840-cdcb-4d52-a38f-410e8da5a226",
+                "ticketId": "R43-EMERGENCY-0678",
+                "code": "MLS-V06-0994",
+                "idempotencyKey": "R43-EMERGENCY-0678:MLS-V06-0994:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bade34d75355c7e6eeace2c84bc06710d0270e78032922d88e0bd9ffc7bb96a4",
+                "sourceSha256": "02f1c6b3c2728e2e283656786e1bbcb3c851451de8efcd618b7d37a0a412c469",
+                "committedMs": 1790996550916,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "bd1610ef9b3347a5e1921643a6ab8d2ffd4e110b5cc414e8ecaafe04151a46af",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-facb35cb-eeb7-412e-bacf-8645589cda00",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "427c578d7babaaa11943f69d34bb022a5ad32b5b4bfd381580dee27addb56738"
+          }
+        },
+        "completedAt": "2026-10-03T03:02:31.202Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-a40d2a09-e90d-4ab5-8761-697cb68bfd70",
+          "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0679",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996851247,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0995",
+                "path": "japones/MLS-V06-0995.json",
+                "sha256": "24d73921d3475c188d754bd24e59bd9baa1837c8b980c47c401762745fcc90b4"
+              },
+              {
+                "code": "MLS-V06-0997",
+                "path": "japones/MLS-V06-0997.json",
+                "sha256": "6c9e52ccea23ff77a736d64ce651821372ec2d2421c18b170dda3e93a0397fc5"
+              },
+              {
+                "code": "MLS-V06-0998",
+                "path": "japones/MLS-V06-0998.json",
+                "sha256": "fe086cb55b5941e43c4c41231cc5f0dad791a0cc4c3a40b7405a6070f2e6bc14"
+              },
+              {
+                "code": "MLS-V06-0999",
+                "path": "japones/MLS-V06-0999.json",
+                "sha256": "b2b4b98cb2800e2c6a08c8e4f36bc3e6d9015ae28816e6597f3aed788448142e"
+              },
+              {
+                "code": "MLS-V06-1000",
+                "path": "japones/MLS-V06-1000.json",
+                "sha256": "8e77b707c00cf3207be75f282feb61b257ebbba56eafa8316524a0ab085e78e3"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0679",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0995",
+                "path": "japones/MLS-V06-0995.json",
+                "sha256": "24d73921d3475c188d754bd24e59bd9baa1837c8b980c47c401762745fcc90b4"
+              },
+              {
+                "code": "MLS-V06-0997",
+                "path": "japones/MLS-V06-0997.json",
+                "sha256": "6c9e52ccea23ff77a736d64ce651821372ec2d2421c18b170dda3e93a0397fc5"
+              },
+              {
+                "code": "MLS-V06-0998",
+                "path": "japones/MLS-V06-0998.json",
+                "sha256": "fe086cb55b5941e43c4c41231cc5f0dad791a0cc4c3a40b7405a6070f2e6bc14"
+              },
+              {
+                "code": "MLS-V06-0999",
+                "path": "japones/MLS-V06-0999.json",
+                "sha256": "b2b4b98cb2800e2c6a08c8e4f36bc3e6d9015ae28816e6597f3aed788448142e"
+              },
+              {
+                "code": "MLS-V06-1000",
+                "path": "japones/MLS-V06-1000.json",
+                "sha256": "8e77b707c00cf3207be75f282feb61b257ebbba56eafa8316524a0ab085e78e3"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0995",
+              "MLS-V06-0997",
+              "MLS-V06-0998",
+              "MLS-V06-0999",
+              "MLS-V06-1000"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996851247,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996851247,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0995",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 995,
+                "title": "Perspectiva en benefactivos",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLas expresiones benefactivas japonesas no solo indican que una acción beneficia a alguien; también organizan el evento desde una determinada perspectiva. Formas como **〜てくれる**, **〜てあげる** y **〜てもらう** sitúan de manera distinta a quien actúa, a quien recibe el beneficio y al centro desde el cual se presenta la escena.\n\nEn **母が私に作ってくれた。** “Mi madre lo preparó para mí”, **〜てくれる** orienta el beneficio hacia el hablante. En **私が母に作ってあげた。** “Lo preparé para mi madre”, **〜てあげる** presenta la acción como dirigida desde el hablante hacia otra persona.\n\n#### Cómo funciona\n\nEn **〜てくれる**, el sujeto realiza una acción presentada como favorable para el hablante o para alguien de su esfera: **友達が資料を送ってくれた。** “Un amigo me envió los materiales”. La perspectiva se aproxima al beneficiario.\n\n**〜てあげる** presenta al sujeto como quien realiza una acción en beneficio de otra persona: **私は弟に使い方を説明してあげた。** “Le expliqué a mi hermano cómo se usaba”. El foco perspectival parte del agente hacia el beneficiario.\n\n**〜てもらう** reorganiza la misma clase de evento desde quien recibe el beneficio: **私は友達に資料を送ってもらった。** “Un amigo me envió los materiales para mí”. La persona marcada por **に** ejecuta la acción, mientras el sujeto de **もらう** recibe el beneficio.\n\nEstas construcciones combinan sintaxis, dirección del beneficio y relaciones sociales; no son simples equivalentes de “hacer para”.\n\n#### Ejemplos\n\n* **母が私に作ってくれた。** — Mi madre lo preparó para mí.\n* **私が母に作ってあげた。** — Lo preparé para mi madre.\n* **先生が説明してくれた。** — El profesor me/nos lo explicó, presentado como beneficio recibido.\n* **私は先生に説明してもらった。** — Recibí del profesor la explicación / el profesor me lo explicó.\n\n#### Observación importante\n\nLa perspectiva benefactiva es también pragmática. **〜てあげる** puede resultar marcada cuando el hablante destaca abiertamente un favor propio, sobre todo en relaciones donde esa autoatribución de beneficio sería poco apropiada. La aceptabilidad depende del contexto y de la relación interpersonal.\n\nAsimismo, dos traducciones españolas casi idénticas pueden corresponder a **〜てくれる** y **〜てもらう**. La diferencia japonesa reside en cómo se estructura el evento: quién aparece como sujeto, quién ejecuta la acción y desde qué participante se conceptualiza el beneficio.\n\n#### Entradas relacionadas\n\n[Entrada 990: Empatía y dirección de くれる/あげる](#entry-990) · [Entrada 993: Modalidad de oración vs proposicional](#entry-993) · [Entrada 994: Nominalización y stance](#entry-994) · [Entrada 996: Politeness as grammar-pragmatics interface](#entry-996)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-44b0e9bc89449d4f913c4a0a7cf52a3da41a15fc09e5145479f6d077183c29f5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:06.763Z"
+              },
+              {
+                "code": "MLS-V06-0997",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 997,
+                "title": "Relativas gapless",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nNo todas las cláusulas japonesas que modifican a un sustantivo contienen una posición argumental recuperable para ese sustantivo. Las llamadas **relativas gapless** o “sin hueco” presentan una relación semántica entre la cláusula y el nombre, aunque el nombre no corresponda directamente a un argumento omitido del predicado interno.\n\nEn **鼻が長い象を見ました。** “Vi un elefante de trompa larga”, **鼻が長い** modifica a **象**, pero **象** no ocupa por sí mismo una posición vacía dentro de “la trompa es larga”. La relación se entiende como una propiedad característica del elefante.\n\n#### Cómo funciona\n\nEn una relativa con hueco prototípica, como **私が読んだ本** “el libro que leí”, el sustantivo **本** se interpreta como aquello que fue leído. Existe una relación argumental directa con **読む**.\n\nEn una construcción gapless, la conexión puede ser de parte-todo, causa, contenido, circunstancia u otra asociación pragmáticamente natural. **鼻が長い象** se interpreta porque la trompa forma parte del elefante y su longitud lo caracteriza. La cláusula interna está gramaticalmente completa como **鼻が長い**.\n\nOtro tipo frecuente establece una relación conceptual: **雨が降る音** “el sonido de la lluvia al caer”. **音** no es sujeto ni objeto de **降る**; el evento de llover proporciona el contenido o fuente que caracteriza al sonido.\n\nLa interpretación depende, por tanto, tanto de la sintaxis como del conocimiento semántico y del contexto discursivo.\n\n#### Ejemplos\n\n* **鼻が長い象** — un elefante de trompa larga.\n* **雨が降る音** — el sonido de la lluvia al caer.\n* **頭が痛くなる薬** — un medicamento que hace que duela la cabeza / asociado con ese efecto, según el contexto.\n* **値段が高い店** — una tienda cuyos precios son altos.\n\nEn estos casos, la relación entre cláusula y sustantivo no se explica siempre mediante la recuperación de un único argumento omitido.\n\n#### Observación importante\n\nLa etiqueta “gapless” es analítica y no implica que todas estas construcciones formen una clase semántica uniforme. Algunas tienen relaciones de parte-todo muy transparentes; otras dependen más de inferencias convencionales o del contexto.\n\nTampoco conviene forzar una paráfrasis con pronombre relativo español para decidir si existe un hueco japonés. El español puede expresar estas relaciones mediante “cuyo”, “de”, una oración relativa u otra construcción. El análisis debe basarse en la estructura japonesa y en la relación que el predicado interno establece con el sustantivo modificado.\n\n#### Entradas relacionadas\n\n[Entrada 989: Cláusulas relativas de gap implícito](#entry-989) · [Entrada 995: Perspectiva en benefactivos](#entry-995) · [Entrada 996: Politeness as grammar-pragmatics interface](#entry-996) · [Entrada 998: Scope de は y negación](#entry-998)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0c78bd7a0acba84aa1bebb68d3163a3464cb3b2d466b14e0f04a5677746f00a1",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:28:03.392Z"
+              },
+              {
+                "code": "MLS-V06-0998",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 998,
+                "title": "Scope de は y negación",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nCuando **は** aparece en una oración negativa, puede interactuar con el **alcance** de la negación. El alcance indica qué parte del contenido queda negada o contrastada. Por eso una oración con **は** no siempre equivale a negar de manera neutra toda la proposición: puede presentar un elemento como tópico y, al mismo tiempo, contrastarlo con otras posibilidades.\n\nEn **私は行きません。** “Yo no voy”, **私** es el tópico y la negación afecta al predicado **行きません**. Según el contexto, **は** también puede sugerir contraste: “yo, por mi parte, no voy”, sin afirmar qué harán los demás.\n\n#### Cómo funciona\n\nLa negación japonesa suele expresarse en el predicado, como **行かない**, **分からない** o **高くない**. **は** organiza la información alrededor de un tópico o contraste. La interpretación final depende de cómo se relacionen ambos niveles.\n\nEn **この本は読みません。** “Este libro no lo leo / no lo voy a leer”, el libro queda destacado como tópico contrastivo. La frase puede ser compatible con que sí se lean otros libros. El contraste no procede de la negación sola, sino de la combinación entre **は**, el contexto y el predicado negativo.\n\nTambién aparecen secuencias como **には**, **では** o **とは**, donde **は** se superpone a otra relación gramatical. En **私にはこの問題が分かりません。**, **私に** expresa al experimentante asociado con **分かる** y **は** tematiza o contrasta ese participante; la negación recae sobre **分かりません**.\n\nPor tanto, el análisis debe distinguir la función local de las partículas y el dominio semántico de la negación.\n\n#### Ejemplos\n\n* **私は行きません。** — Yo no voy; puede contrastar al hablante con otros.\n* **この本は読みません。** — Este libro no lo leo / no lo leeré.\n* **肉は食べない。** — Carne no como; no implica necesariamente que no se coma nada.\n* **私にはこの問題が分かりません。** — En cuanto a mí, no entiendo este problema.\n\n#### Observación importante\n\nNo existe una regla según la cual **は** quede siempre “fuera” de la negación en un único sentido lógico. La interpretación depende del tipo de constituyente topicalizado, del predicado y del contexto. El concepto de alcance es útil para describir qué lectura resulta disponible, pero la pragmática decide a menudo cuál es la más natural.\n\nTampoco debe confundirse contraste con negación parcial estricta. **この本は読まない** puede sugerir “este libro, no”, pero no codifica por sí solo una afirmación explícita sobre todos los demás libros.\n\n#### Entradas relacionadas\n\n[Entrada 979: は reemplazando が](#entry-979) · [Entrada 996: Politeness as grammar-pragmatics interface](#entry-996) · [Entrada 997: Relativas gapless](#entry-997) · [Entrada 999: Scope de も](#entry-999)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-504df9e3c82eca242f85e2e27bd2e565cc89e216ef540ba4be1db02d95ed5829",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:29:02.037Z"
+              },
+              {
+                "code": "MLS-V06-0999",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 999,
+                "title": "Scope de も",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\n**も** suele introducir una relación aditiva, cercana a “también”, pero su interpretación depende de qué conjunto de alternativas queda bajo su **alcance**. El alcance indica qué parte del contenido se relaciona con esas alternativas y qué contraste resulta relevante en el contexto.\n\nEn **田中さんも来た。** “Tanaka también vino”, la lectura natural añade a Tanaka a un conjunto de personas ya consideradas. En secuencias más complejas, como **学生も三人来た。**, la estructura informativa y el contexto determinan qué contraste recibe mayor prominencia.\n\n#### Cómo funciona\n\nEn su uso aditivo, **も** evoca una alternativa pertinente. **学生も来た。** puede significar “también vinieron estudiantes”, por ejemplo además de profesores. **学生** es el constituyente marcado y queda incorporado a una serie establecida por el discurso.\n\nCon expresiones cuantificadas aparece además un uso escalar. **学生が三人も来た。** significa aproximadamente “vinieron nada menos que tres estudiantes” o “vinieron hasta tres estudiantes”. En **三人も**, la cantidad se presenta como notable respecto de una expectativa contextual.\n\nLa secuencia **学生も三人来た** requiere más atención. Formalmente **も** sigue a **学生**, pero el sentido global depende del foco y de las alternativas disponibles: puede destacar que, además de otro grupo, llegaron tres estudiantes, y ciertos contextos pueden hacer especialmente relevante también la cantidad. Esto no implica que **も** cambie mecánicamente de posición; cambia la asociación interpretativa dentro de la estructura completa.\n\nCon negación, construcciones como **一度も行かなかった** “no fui ni una sola vez” muestran otra interacción de alcance: **も** se combina con una expresión mínima y la negación produce una lectura exhaustiva.\n\n#### Ejemplos\n\n* **田中さんも来た。** — Tanaka también vino.\n* **学生も三人来た。** — También vinieron tres estudiantes; el contraste exacto depende del contexto.\n* **学生が三人も来た。** — Vinieron nada menos que tres estudiantes.\n* **一度も行かなかった。** — No fui ni una sola vez.\n\n#### Observación importante\n\nNo toda aparición de **も** se traduce como “también”. Los valores aditivo, escalar y las lecturas asociadas con negación surgen de construcciones diferentes. Por ello, la interpretación no puede obtenerse únicamente observando la palabra situada inmediatamente antes de **も**.\n\nEl alcance tampoco equivale a una posición gráfica fija. La estructura sintáctica limita las lecturas posibles, pero el foco, la prosodia en el habla y el contexto discursivo ayudan a decidir qué conjunto de alternativas resulta activo.\n\n#### Entradas relacionadas\n\n[Entrada 997: Relativas gapless](#entry-997) · [Entrada 998: Scope de は y negación](#entry-998) · [Entrada 1000: Scrambling y foco](#entry-1000) · [Entrada 1001: Tópicos múltiples](#entry-1001)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6e038d2bd80585cd44010308dc3ab254e035e764bb11b963e56fdba658fbc7b5",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:30:29.102Z"
+              },
+              {
+                "code": "MLS-V06-1000",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1000,
+                "title": "Scrambling y foco",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nEl japonés permite alterar el orden más habitual de ciertos constituyentes sin cambiar necesariamente sus funciones gramaticales. Este fenómeno suele llamarse **scrambling**. El desplazamiento puede responder a la organización de la información: contraste, continuidad temática, foco o relación con lo ya mencionado.\n\nEn **この本を、私は昨日買いました。** “Este libro, yo lo compré ayer”, **この本を** aparece al inicio, pero **を** sigue marcándolo como objeto de **買いました**. El orden cambia; la relación gramatical básica no.\n\n#### Cómo funciona\n\nEl orden japonés ofrece cierta flexibilidad porque partículas como **が**, **を** y **に** ayudan a identificar relaciones entre los constituyentes y el predicado. Una secuencia relativamente neutra sería **私は昨日この本を買いました。** “Ayer compré este libro”. Adelantar **この本を** puede hacerlo más prominente dentro del discurso.\n\nEsa prominencia no equivale automáticamente a un único tipo de foco. Si se comparan varios libros, **この本を** puede recibir contraste: “este libro, y no otro”. Si el libro ya estaba presente en la conversación, el adelantamiento también puede servir para retomarlo antes de aportar información nueva sobre la compra.\n\nLa prosodia y el contexto son especialmente importantes. En el habla, pausas y acentos pueden reforzar una lectura contrastiva; en escritura, el contexto precedente y la puntuación ayudan a orientar la interpretación.\n\nEl scrambling puede afectar objetos, complementos y otros constituyentes, pero está limitado por la estructura sintáctica. No implica que cualquier orden sea igualmente natural en cualquier contexto.\n\n#### Ejemplos\n\n* **私は昨日この本を買いました。** — Ayer compré este libro; orden relativamente neutro.\n* **この本を、私は昨日買いました。** — Este libro, yo lo compré ayer; el objeto queda adelantado.\n* **東京には、来年行きます。** — A Tokio iré el próximo año; el destino recibe prominencia discursiva.\n* **その問題を、田中さんが解決した。** — Ese problema lo resolvió Tanaka; el elemento inicial puede establecer contraste o continuidad temática.\n\n#### Observación importante\n\nScrambling y topicalización no son sinónimos. Un constituyente adelantado puede conservar una partícula de caso como **を** o **に**, mientras que **は** introduce específicamente una función de tópico o contraste. Ambas estrategias pueden producir prominencia discursiva, pero mediante mecanismos diferentes.\n\nTampoco debe suponerse que el primer elemento de una oración sea siempre el foco principal. El foco depende de alternativas contextuales, prosodia y estructura informativa; el orden de palabras es solo uno de los recursos que contribuyen a esa interpretación.\n\n#### Entradas relacionadas\n\n[Entrada 998: Scope de は y negación](#entry-998) · [Entrada 999: Scope de も](#entry-999) · [Entrada 1001: Tópicos múltiples](#entry-1001) · [Entrada 1002: Ironía contextual](#entry-1002)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-920f39346939d90ec04e9b1c96442db5f1cba1b1ea0c008796fe2bad35c831b3",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:31:28.970Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:02:32.042Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:02:32.042Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-jdp-sol-5c72/09-submit-claim.json"
+}

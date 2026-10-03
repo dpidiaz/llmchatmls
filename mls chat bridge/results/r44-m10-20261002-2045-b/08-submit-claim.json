@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-b-step-08",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0312",
+          "sha256": "29a459d1d09ef1e16bd763cb1794735ef5c5d4fa0bdeaa72cfde930b25e26136",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0312",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "814bd9bf-00d4-4219-bb13-5ae16160efe3",
+                "ticketId": "R43-EMERGENCY-0312",
+                "code": "MLS-V04-1073",
+                "idempotencyKey": "R43-EMERGENCY-0312:MLS-V04-1073:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "531e08fb1f795fca7c30ab159b88f72bcf8ddf54fe3b3068f8f9d77c2793951e",
+                "sourceSha256": "853377c161dd784724f877411e9aac657a42fed0f3354f17f907499fd7cee5dc",
+                "committedMs": 1790996547752,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "71fa7059dcf6c1700b80b564d8287283ef52cf4ea1e3b113131153add5690fe9",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0312",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b0ff7102-6c61-49b4-9399-c4a07f6fa8ad",
+                "ticketId": "R43-EMERGENCY-0312",
+                "code": "MLS-V04-1074",
+                "idempotencyKey": "R43-EMERGENCY-0312:MLS-V04-1074:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "5367351f8290c140e9ee8a3365b96d543e8692cabd5b6907b8e6392b4f691544",
+                "sourceSha256": "4d0dc97c14dbcc018c4543bdf2f08cde3d778cdf1085ab39be223a0cb1b1c7c2",
+                "committedMs": 1790996547963,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "6557a14c410122814327eeebe8457c37ac2727994d02c0dba036b40b10f553c9",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0312",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "198de376-4d39-49e7-b8a3-876737bc24bd",
+                "ticketId": "R43-EMERGENCY-0312",
+                "code": "MLS-V04-1075",
+                "idempotencyKey": "R43-EMERGENCY-0312:MLS-V04-1075:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8fd115be65c7a22ed313d72fe96b3c55b28c597ff7d1da280c37ab2d50af7c65",
+                "sourceSha256": "2e4ddd43ae4648de875b743c0b5afaf09e187e6345f48f8f4665f42d3792280c",
+                "committedMs": 1790996548177,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9eff7812d8da47d315a31ab3cc076aefc879408efbbcb6093b53eb5de909788b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0312",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "fbe63015-6f40-4c64-8f5a-65bbaf25b308",
+                "ticketId": "R43-EMERGENCY-0312",
+                "code": "MLS-V04-1076",
+                "idempotencyKey": "R43-EMERGENCY-0312:MLS-V04-1076:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b68a606e6ce56559d7108de21a3334ea1456922b5028668e393a96ebbc58edfb",
+                "sourceSha256": "b8e87c5e24cef936de868f9a492bb56934abaad2ef9d0f3fef82e3ea4e949ad5",
+                "committedMs": 1790996548392,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "97dd5e511674b7ac98c283f77a841ede5c5a3ade9951744459da0a317e0d685d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0312",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "79cc9a4a-67f8-43a9-a84f-28f1b66f8011",
+                "ticketId": "R43-EMERGENCY-0312",
+                "code": "MLS-V04-1077",
+                "idempotencyKey": "R43-EMERGENCY-0312:MLS-V04-1077:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b03508cfb3d20aa51d5702ad0dbc13f435fcdc51962c918ff37cc80579335673",
+                "sourceSha256": "70422f2124e8876a617961700f1871dcae7a7b34280b0fa23327203b0226ceb7",
+                "committedMs": 1790996548605,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "428d34a81cf6c9937acf196d7261f4bd8dec72d5b7a5c50ebc89daf67c46f095",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-a59eab9a-236b-47c1-8211-61537c49eec3",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "29a459d1d09ef1e16bd763cb1794735ef5c5d4fa0bdeaa72cfde930b25e26136"
+          }
+        },
+        "completedAt": "2026-10-03T03:02:28.888Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-d7c24363-5077-4128-a621-ef5364a4909b",
+          "workerId": "chat-r44-m10-20261002-2045-b",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0315",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996848930,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V04-1090",
+                "path": "frances/MLS-V04-1090.json",
+                "sha256": "5bb6f5a3da5a616cdc1c43505c378461537bf5546e3a86838df6cedc1ada65cc"
+              },
+              {
+                "code": "MLS-V04-1091",
+                "path": "frances/MLS-V04-1091.json",
+                "sha256": "fa9fd18ed135addd8dfd3fb4fbbd263fdba4bfebbb039361b96c403200a4348d"
+              },
+              {
+                "code": "MLS-V04-1092",
+                "path": "frances/MLS-V04-1092.json",
+                "sha256": "ffac7355d93770dae4d13c66edba1428e78439f88c5ac89e27d504dcd2ef9054"
+              },
+              {
+                "code": "MLS-V04-1093",
+                "path": "frances/MLS-V04-1093.json",
+                "sha256": "7bdc6af7522e63948c46cfc70fd6c02f76db682dcdf09b727b5955da13f68f15"
+              },
+              {
+                "code": "MLS-V04-1094",
+                "path": "frances/MLS-V04-1094.json",
+                "sha256": "6c79a77a003c4a366a74003099e88ea6605d7a86401b7fab669949ef04928076"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0315",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V04-1090",
+                "path": "frances/MLS-V04-1090.json",
+                "sha256": "5bb6f5a3da5a616cdc1c43505c378461537bf5546e3a86838df6cedc1ada65cc"
+              },
+              {
+                "code": "MLS-V04-1091",
+                "path": "frances/MLS-V04-1091.json",
+                "sha256": "fa9fd18ed135addd8dfd3fb4fbbd263fdba4bfebbb039361b96c403200a4348d"
+              },
+              {
+                "code": "MLS-V04-1092",
+                "path": "frances/MLS-V04-1092.json",
+                "sha256": "ffac7355d93770dae4d13c66edba1428e78439f88c5ac89e27d504dcd2ef9054"
+              },
+              {
+                "code": "MLS-V04-1093",
+                "path": "frances/MLS-V04-1093.json",
+                "sha256": "7bdc6af7522e63948c46cfc70fd6c02f76db682dcdf09b727b5955da13f68f15"
+              },
+              {
+                "code": "MLS-V04-1094",
+                "path": "frances/MLS-V04-1094.json",
+                "sha256": "6c79a77a003c4a366a74003099e88ea6605d7a86401b7fab669949ef04928076"
+              }
+            ],
+            "remaining": [
+              "MLS-V04-1090",
+              "MLS-V04-1091",
+              "MLS-V04-1092",
+              "MLS-V04-1093",
+              "MLS-V04-1094"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-b",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996848930,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-b",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996848930,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V04-1090",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1090,
+                "title": "Usted/ustedes → vous según contexto",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Interferencias del español de Guatemala — Interférences de l'espagnol du Guatemala",
+                "articleMarkdown": "#### En pocas palabras\n\nEl pronombre francés **vous** puede corresponder a **usted** o a **ustedes**, según el contexto. También puede equivaler a **vosotros/vosotras** en variedades del español que usan esas formas. Por eso, **vous** no se traduce de una sola manera: expresa segunda persona plural y también tratamiento formal singular.\n\n#### Cómo funciona\n\nCuando se habla con una sola persona de manera formal o respetuosa, el francés usa **vous** con verbo en segunda persona plural: **Vous désirez autre chose, monsieur ?** — “¿Desea algo más, señor?”. Aunque el referente sea una sola persona, la forma verbal sigue siendo plural: **vous désirez**.\n\nCuando se habla con varias personas, **vous** también es la forma normal: **Vous êtes prêts ?** — “¿Están listos?”. En este caso no hay tratamiento singular, sino plural real.\n\nEn español de Guatemala, **ustedes** es la forma general para dirigirse a varias personas. Por eso, el mismo **vous** francés puede corresponder a **usted** en singular formal o a **ustedes** en plural.\n\n#### Ejemplos\n\n* **Vous désirez autre chose, monsieur ?** — ¿Desea algo más, señor?\n* **Madame, vous pouvez entrer.** — Señora, usted puede pasar.\n* **Vous êtes prêts ?** — ¿Ustedes están listos?\n* **Vous venez demain ?** — ¿Vienen mañana? / ¿Usted viene mañana?, según el contexto.\n\n#### Observación importante\n\nLa forma verbal por sí sola no siempre indica si **vous** se refiere a una persona o a varias. La situación comunicativa, los nombres, los adjetivos y otros elementos del contexto ayudan a distinguirlo. Tampoco existe una equivalencia automática entre **vous** y **usted**, porque **vous** cubre funciones más amplias.\n\n#### Entradas relacionadas\n\nEste contraste se relaciona con el sistema francés **tu/vous**, con el voseo guatemalteco y con el hecho de que el español de Guatemala use **ustedes** para el plural de tratamiento.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-163d50f1ebe09f397f64aa39ba0804a1cc64db5fd4f2d72ac07622a6354078ab",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:07:41.633Z"
+              },
+              {
+                "code": "MLS-V04-1091",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1091,
+                "title": "Vosotros ausente en Guatemala vs vous francés",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Interferencias del español de Guatemala — Interférences de l'espagnol du Guatemala",
+                "articleMarkdown": "#### En pocas palabras\n\nEn el español de Guatemala, **vosotros/vosotras** no forma parte del uso general: para dirigirse a varias personas se emplea **ustedes**. En francés, la segunda persona plural se expresa con **vous**. Por eso, **Vous venez demain, les amis ?** corresponde naturalmente a “¿Ustedes vienen mañana, amigos?” en español guatemalteco.\n\n#### Cómo funciona\n\nEl francés utiliza **vous** con verbo en segunda persona plural para hablar con varias personas: **vous venez**, **vous avez**, **vous êtes**. Ese sistema no depende de que el español de partida use **vosotros** o **ustedes**.\n\nEn Guatemala, **ustedes** se combina con formas verbales de tercera persona plural: **ustedes vienen**, **ustedes tienen**, **ustedes están**. En cambio, el francés mantiene su propia concordancia: **vous venez**, **vous avez**, **vous êtes**.\n\nLa diferencia es importante porque una traducción literal de las terminaciones verbales no refleja la estructura de cada lengua. La equivalencia se establece por la función comunicativa: dirigirse a varias personas.\n\n#### Ejemplos\n\n* **Vous venez demain, les amis ?** — ¿Ustedes vienen mañana, amigos?\n* **Vous avez faim ?** — ¿Ustedes tienen hambre?\n* **Vous êtes prêts ?** — ¿Ustedes están listos?\n* **Je vous attends dehors.** — Los / las espero afuera, según el grupo y el contexto.\n\n#### Observación importante\n\n**Vous** también puede dirigirse formalmente a una sola persona. Por eso, no significa automáticamente **ustedes**. Cuando el referente es plural, sí corresponde funcionalmente a la forma que el español guatemalteco expresa con **ustedes**. La ausencia de **vosotros** en Guatemala no implica ninguna carencia: es una diferencia legítima entre variedades del español.\n\n#### Entradas relacionadas\n\nEste contraste se relaciona con **usted/ustedes → vous según contexto** y con el sistema francés **tu/vous**. También muestra que la persona gramatical y las formas de tratamiento no se distribuyen del mismo modo en francés y en español guatemalteco.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-bc8e59de322a1f1d3dd01d61e8a8ef61fda7bbb858390f554f0f72a5b379a1af",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:08:19.805Z"
+              },
+              {
+                "code": "MLS-V04-1092",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1092,
+                "title": "Seseo guatemalteco y ortografía francesa",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Interferencias del español de Guatemala — Interférences de l'espagnol du Guatemala",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **seseo** del español guatemalteco consiste en pronunciar con /s/ las grafías que en otras variedades distinguen sonidos diferentes, como **s**, **c** ante **e/i** y **z**. Este rasgo es legítimo del español de Guatemala, pero no determina cómo se leen ni cómo se escriben las palabras francesas. El francés posee su propio sistema ortográfico y fonológico.\n\n#### Cómo funciona\n\nEn español guatemalteco, palabras como **casa** y **caza** pueden pronunciarse con el mismo sonido consonántico inicial o medial correspondiente a /s/. Esa coincidencia pertenece al sistema del español y no implica que letras parecidas tengan el mismo valor en francés.\n\nEn francés, una misma letra puede representar sonidos distintos según el contexto, y un mismo sonido puede escribirse de varias maneras. Por ejemplo, **c** suele sonar /s/ ante **e** o **i**, como en **cinq**, pero puede sonar /k/ ante otras vocales, como en **café**. La letra **g** también cambia de valor según el contexto: **gare** y **gilet** no comienzan con el mismo sonido.\n\n#### Ejemplos\n\n* **cinq** — “cinco”; la **c** inicial representa /s/.\n* **café** — “café”; la **c** representa /k/.\n* **singe** — “mono”; su escritura y pronunciación siguen reglas francesas propias.\n* **garçon** — “muchacho”; la cedilla en **ç** señala el valor /s/ ante **o**.\n\n#### Observación importante\n\nEl seseo no es un “error” que deba corregirse al hablar español guatemalteco. La dificultad aparece únicamente si se proyectan sobre el francés las correspondencias entre letras y sonidos del español. La ortografía francesa debe interpretarse según las reglas del francés, no según la pronunciación del español de origen.\n\n#### Entradas relacionadas\n\nEste contraste forma parte de las interferencias fonéticas y ortográficas entre español guatemalteco y francés. Se relaciona con otros casos donde una misma grafía tiene valores distintos en las dos lenguas y con la necesidad de separar pronunciación de ortografía.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-80dd59cf643cf1fb742711ec021f54ac7d1f2b8681c8c183066fe62f83db75f4",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:09:01.609Z"
+              },
+              {
+                "code": "MLS-V04-1093",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1093,
+                "title": "R española vs R francesa",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Interferencias del español de Guatemala — Interférences de l'espagnol du Guatemala",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **r** del francés y la **r** del español suelen articularse de manera distinta. En gran parte del francés contemporáneo, la consonante se produce en la zona posterior de la boca, cerca de la úvula. En español, en cambio, son frecuentes la vibrante simple de **pero** y la vibrante múltiple de **perro**, articuladas con la punta de la lengua.\n\n#### Cómo funciona\n\nEn muchas variedades francesas, palabras como **rue** y **rouge** contienen una **r** uvular. Esto significa que la constricción principal se forma hacia la parte posterior de la cavidad oral. La realización exacta puede variar entre hablantes y regiones: puede sonar más fricativa, aproximante o vibrante.\n\nEl español distingue normalmente dos realizaciones con función contrastiva: la vibrante simple /ɾ/, como en **caro**, y la múltiple /r/, como en **carro**. Esa oposición no funciona del mismo modo en francés.\n\nPor eso, sustituir sistemáticamente la **r** francesa por una erre múltiple española puede producir un acento muy marcado, aunque la comprensión no siempre se pierda.\n\n#### Ejemplos\n\n* **La rue est rouge.** — La calle es roja; ambas **r** siguen el patrón francés del hablante.\n* **Paris** — París; la **r** francesa no exige una vibración múltiple española.\n* **très** — muy; la consonante inicial se integra en el grupo **tr-** francés.\n* **regarder** — mirar; las dos grafías **r** no representan una oposición como **pero/perro**.\n\n#### Observación importante\n\nNo existe una única “r francesa” idéntica en todo el mundo francófono. Hay variación regional, histórica e individual. La pronunciación uvular es muy extendida, pero otras realizaciones también existen. La diferencia relevante frente al español guatemalteco es que no debe trasladarse automáticamente la oposición española entre vibrante simple y múltiple al sistema francés.\n\n#### Entradas relacionadas\n\nEste contraste pertenece a las interferencias de pronunciación entre español y francés. Se relaciona con otros casos en que una misma letra representa sonidos organizados de manera distinta en las dos lenguas.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2355008d1e18af56df0a08d7bfb01e0f17a723005267e79b01db9ac53670d2f4",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:09:44.329Z"
+              },
+              {
+                "code": "MLS-V04-1094",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1094,
+                "title": "u española vs u francesa /y/",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Interferencias del español de Guatemala — Interférences de l'espagnol du Guatemala",
+                "articleMarkdown": "#### En pocas palabras\n\nLa letra **u** no representa el mismo sonido en español y en muchas palabras francesas. En español, **u** suele corresponder a la vocal /u/, como en **luna**. En francés, la grafía **u** representa con frecuencia /y/, una vocal anterior y redondeada que no pertenece al sistema vocálico general del español.\n\n#### Cómo funciona\n\nPara producir /y/, la lengua se coloca aproximadamente en una posición parecida a la de la vocal /i/, pero los labios se redondean como para /u/. Por eso, el sonido francés de **tu**, **vu** o **lune** no equivale ni a la **u** española ni a una simple **i**.\n\nEl francés también tiene el sonido /u/, pero suele escribirse **ou**, como en **vous**, **rouge** o **jour**. Así, **tu** y **tout**, por ejemplo, contienen vocales distintas aunque para un hispanohablante puedan parecer próximas al principio.\n\nEsta diferencia afecta a la pronunciación y puede distinguir palabras, de modo que no es solo una cuestión de acento.\n\n#### Ejemplos\n\n* **Tu as vu la lune ?** — ¿Viste la luna?; las tres **u** de **tu**, **vu** y **lune** representan /y/.\n* **vous** — usted/ustedes; **ou** representa /u/.\n* **sur** — sobre; contiene /y/.\n* **sous** — debajo de; contiene /u/.\n\n#### Observación importante\n\nLa grafía francesa no debe leerse con las correspondencias automáticas del español. **U** francesa y **ou** francesa representan normalmente vocales distintas. Además, la pronunciación exacta puede variar ligeramente entre regiones francófonas, pero la oposición entre /y/ y /u/ sigue siendo fundamental en muchas variedades.\n\n#### Entradas relacionadas\n\nEste contraste pertenece a las interferencias de pronunciación entre español y francés. Se relaciona con otros casos en que letras familiares representan sonidos diferentes y con la necesidad de distinguir cuidadosamente ortografía y pronunciación.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-14d3e918247b65ffec3409099c5a444c846b93b1fd7ec09ea2e5e314990f472d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:10:19.701Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:02:29.661Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:02:29.661Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-b/08-submit-claim.json"
+}
