@@ -513,7 +513,7 @@ var MLS_UNIFIED_RUNNER_WORKER = "mls-unified-web-runner-v1";
 
 async function unifiedRunnerEnsure(env) {
   await env.WIKI_DB.batch([
-    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, worker_id TEXT NOT NULL, started_at TEXT, updated_at TEXT NOT NULL, processed_entries INTEGER NOT NULL DEFAULT 0, corrected_entries INTEGER NOT NULL DEFAULT 0, error_count INTEGER NOT NULL DEFAULT 0, last_ticket TEXT, last_code TEXT, last_error TEXT, last_step_at TEXT, schema_version TEXT NOT NULL)"),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, worker_id TEXT NOT NULL, started_at TEXT, updated_at TEXT NOT NULL, processed_entries INTEGER NOT NULL DEFAULT 0, corrected_entries INTEGER NOT NULL DEFAULT 0, error_count INTEGER NOT NULL DEFAULT 0, last_ticket TEXT, last_code TEXT, last_error TEXT, last_step_at TEXT, step_token TEXT, busy_until INTEGER, schema_version TEXT NOT NULL)"),
     env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner(id,state,worker_id,updated_at,schema_version) VALUES(1,'STOPPED',?,?,?)").bind(MLS_UNIFIED_RUNNER_WORKER,new Date().toISOString(),MLS_UNIFIED_RUNNER_SCHEMA)
   ]);
 }
@@ -642,9 +642,15 @@ async function unifiedRunnerStep(env, stepKey) {
   if (runner.state !== "RUNNING") return {status:"RUNNER_NOT_RUNNING",state:runner.state};
   const key = String(stepKey || "");
   if (!/^[A-Za-z0-9._:-]{8,120}$/.test(key)) return {status:"INVALID_STEP_KEY"};
-  const claim = await r44DurableClaim(env,runner.worker_id,"unified:"+key);
+  const now = Date.now(), stepToken = crypto.randomUUID();
+  const locked = await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET step_token=?,busy_until=?,updated_at=? WHERE id=1 AND state='RUNNING' AND (busy_until IS NULL OR busy_until<=?) RETURNING worker_id")
+    .bind(stepToken,now+14*60*1000,new Date(now).toISOString(),now).first();
+  if (!locked) return {status:"RUNNER_BUSY"};
+  const release = async()=>env.WIKI_DB.prepare("UPDATE mls_unified_runner SET step_token=NULL,busy_until=NULL,updated_at=? WHERE id=1 AND step_token=?").bind(new Date().toISOString(),stepToken).run();
+  const claim = await r44DurableClaim(env,locked.worker_id,"unified:"+key);
   if (!claim.ticket || !claim.ticket.lease_token) {
     await unifiedRunnerApplyMark(env,{last_step_at:new Date().toISOString(),last_error:null});
+    await release();
     return {status:claim.status || "NO_WORK",claim};
   }
   const token = claim.ticket.lease_token;
@@ -657,6 +663,7 @@ async function unifiedRunnerStep(env, stepKey) {
     for (let i=0;i<entries.length;i++) {
       const source = entries[i];
       const article = content[i];
+      await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET busy_until=? WHERE id=1 AND step_token=?").bind(Date.now()+14*60*1000,stepToken).run();
       await r44Renew(env,token,context.leaseGeneration);
       const result = await unifiedRunnerAuditEntry(env,article);
       const checkpoint = await r44Checkpoint(env,{
@@ -679,13 +686,16 @@ async function unifiedRunnerStep(env, stepKey) {
       });
     }
     const finalState = await r44Reconcile(env,context.ticketId);
+    await release();
     return {status:"TICKET_COMPLETE",ticketId:context.ticketId,entries:entries.length,receipts,state:finalState && finalState.state};
   } catch (error) {
     const message = wikiErrorMessage(error);
     const quota = (typeof WorkersQuotaExceededError !== "undefined" && error instanceof WorkersQuotaExceededError) || workersAiFailureKind(message) === "quota";
     const paid = (typeof ZeroCostPolicyError !== "undefined" && error instanceof ZeroCostPolicyError) || workersAiFailureKind(message) === "paid";
-    await unifiedRunnerApplyMark(env,{state:(quota || paid) ? "QUOTA_PAUSED" : "ERROR",last_error:message,last_step_at:new Date().toISOString(),errorDelta:1});
-    return {status:(quota || paid) ? "QUOTA_PAUSED" : "ERROR",ticketId:context.ticketId,error:message,receipts};
+    const pauseState = quota ? "QUOTA_PAUSED" : paid ? "POLICY_PAUSED" : "ERROR";
+    await unifiedRunnerApplyMark(env,{state:pauseState,last_error:message,last_step_at:new Date().toISOString(),errorDelta:1});
+    await release();
+    return {status:pauseState,ticketId:context.ticketId,error:message,receipts};
   }
 }
 async function unifiedRunnerStepRequest(request, env) {
@@ -698,7 +708,15 @@ async function unifiedRunnerStepRequest(request, env) {
 }
 async function unifiedRunnerScheduled(env) {
   try {
-    const runner = await unifiedRunnerRead(env);
+    let runner = await unifiedRunnerRead(env);
+    if (runner.state === "QUOTA_PAUSED") {
+      const pausedDay = String(runner.updated_at || "").slice(0,10);
+      const today = new Date().toISOString().slice(0,10);
+      if (pausedDay && pausedDay !== today) {
+        await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state='RUNNING',last_error=NULL,updated_at=? WHERE id=1 AND state='QUOTA_PAUSED'").bind(new Date().toISOString()).run();
+        runner = await unifiedRunnerRead(env);
+      }
+    }
     if (runner.state !== "RUNNING") return {status:"SKIPPED",state:runner.state};
     const bucket = Math.floor(Date.now()/300000);
     return await unifiedRunnerStep(env,"cron:"+bucket);
