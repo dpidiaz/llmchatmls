@@ -221,3 +221,75 @@ test('authenticated bridge session loss rebinds checkpoint 1-3 without claim and
 test('MCP lists per-entry checkpoint, rebind and authoritative reconciliation',()=>{
  const h=harness();for(const name of ['r44_checkpoint','r44_rebind','r44_reconcile'])assert(h.r.R44_MCP_TOOLS.some(t=>t.name===name));h.close();
 });
+
+
+test('Fast Lane completes multiple tickets sequentially with fresh claims and no prefetch',async()=>{
+ const h=harness();await seed(h,4);const store=storage(),calls=[];
+ const fetch=async(url,init)=>{calls.push(url);const req=new Request('https://fixture'+url,init);return h.r.handleR44(req,h.env,new URL(req.url));};
+ const client=new R44Client({storage:store,fetch,sleep:async()=>{}});
+ const seen=[];
+ const result=await client.fastLane({maxTickets:3,processTicket:async({client,ticketId,remaining})=>{
+  seen.push(ticketId);
+  for(const code of remaining)await client.checkpoint({code,outcome:'PASS_NO_CHANGE'});
+ }});
+ assert.equal(result.count,3);assert.equal(result.reason,'LIMIT_REACHED');
+ assert.equal(new Set(seen).size,3);assert.equal(calls.filter(x=>x.startsWith('/api/r44/claim')).length,3);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_ticket_progress WHERE state='COMPLETE'").get().n,3);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_ticket_progress WHERE state='CLAIMABLE'").get().n,1);
+ h.close();
+});
+
+test('Fast Lane caller stop does not prefetch another ticket',async()=>{
+ const h=harness();await seed(h,3);const calls=[];
+ const fetch=async(url,init)=>{calls.push(url);const req=new Request('https://fixture'+url,init);return h.r.handleR44(req,h.env,new URL(req.url));};
+ const client=new R44Client({storage:storage(),fetch,sleep:async()=>{}});
+ const result=await client.fastLane({maxTickets:10,processTicket:async({client,remaining})=>{
+  for(const code of remaining)await client.checkpoint({code,outcome:'PASS_NO_CHANGE'});
+ },shouldContinue:async()=>false});
+ assert.equal(result.count,1);assert.equal(result.reason,'CALLER_STOP');
+ assert.equal(calls.filter(x=>x.startsWith('/api/r44/claim')).length,1);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_ticket_progress WHERE state='LEASED' OR state='PARTIAL_DURABLE'").get().n,0);
+ h.close();
+});
+
+test('Fast Lane resumes partial durable ticket without claiming unrelated work',async()=>{
+ const h=harness();await seed(h,2);const store=storage(),calls=[];
+ const fetch=async(url,init)=>{calls.push(url);const req=new Request('https://fixture'+url,init);return h.r.handleR44(req,h.env,new URL(req.url));};
+ let client=new R44Client({storage:store,fetch,sleep:async()=>{}});
+ const first=await client.claim();for(const code of first.ticket.entries.slice(0,3).map(e=>e.code))await client.checkpoint({code,outcome:'PASS_NO_CHANGE'});
+ client=new R44Client({storage:store,fetch,sleep:async()=>{}});
+ const result=await client.fastLane({maxTickets:1,processTicket:async({client,remaining})=>{
+  assert.equal(remaining.length,2);for(const code of remaining)await client.checkpoint({code,outcome:'PASS_NO_CHANGE'});
+ }});
+ assert.equal(result.count,1);assert.equal(calls.filter(x=>x.startsWith('/api/r44/claim')).length,1);
+ assert.equal((await h.r.r44Reconcile(h.env,first.ticket.ticket_id)).state,'COMPLETE');
+ h.close();
+});
+
+test('Fast Lane stops fail-closed when processor leaves current ticket incomplete',async()=>{
+ const h=harness();await seed(h,2);const calls=[];
+ const fetch=async(url,init)=>{calls.push(url);const req=new Request('https://fixture'+url,init);return h.r.handleR44(req,h.env,new URL(req.url));};
+ const client=new R44Client({storage:storage(),fetch,sleep:async()=>{}});
+ const result=await client.fastLane({maxTickets:2,processTicket:async({client,remaining})=>{
+  await client.checkpoint({code:remaining[0],outcome:'PASS_NO_CHANGE'});
+ }});
+ assert.equal(result.status,'FAST_LANE_STOPPED');assert.equal(result.reason,'PARTIAL_DURABLE');assert.equal(result.count,0);
+ assert.equal(calls.filter(x=>x.startsWith('/api/r44/claim')).length,1);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_ticket_progress WHERE state='PARTIAL_DURABLE'").get().n,1);
+ h.close();
+});
+
+for(const workers of [5,15,30,60,100])test(`Fast Lane concurrency gate ${workers}: distinct tickets and durable completion`,async()=>{
+ const h=harness();await seed(h,workers);const ticketIds=[];
+ const clients=Array.from({length:workers},()=>{
+  const fetch=async(url,init)=>{const req=new Request('https://fixture'+url,init);return h.r.handleR44(req,h.env,new URL(req.url));};
+  return new R44Client({storage:storage(),fetch,sleep:async()=>{}});
+ });
+ const results=await Promise.all(clients.map(client=>client.fastLane({maxTickets:1,processTicket:async({client,ticketId,remaining})=>{
+  ticketIds.push(ticketId);for(const code of remaining)await client.checkpoint({code,outcome:'PASS_NO_CHANGE'});
+ }})));
+ assert(results.every(r=>r.count===1));assert.equal(new Set(ticketIds).size,workers);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_ticket_progress WHERE state='COMPLETE'").get().n,workers);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_receipts").get().n,workers*5);
+ h.close();
+});

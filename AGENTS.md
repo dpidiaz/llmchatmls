@@ -48,6 +48,27 @@ Mandatory transport rules:
 - If the current ChatGPT plan/client does not expose writable custom MCP, use the authenticated `MLS Chat Bridge` fallback (`r44ClaimChat` / `r44RenewChat` / `r44SubmitChat`) on `mlschatcontrol`. The lease token must remain server-side in D1; only `bridgeSessionId` may cross the public control branch. If that free bridge is unavailable, stop before claiming and report `CLIENT_TRANSPORT_UNAVAILABLE_FREE_ONLY`. Never substitute a paid transport.
 - A ticket is complete only after `AUDITED_DURABLE` (or idempotent `RESULT_ALREADY_SUBMITTED`) with a SHA-256 receipt. `AUDITED` is not R33 `VERIFIED`.
 
+## MLS R44 Fast Lane development command
+
+For the exact development command `MLS R44 Fast Lane siguiente`, read:
+
+`docs/MLS Global Dispatcher/27 R44 Fast Lane Disposable Chat Multiplexing.md`
+
+Fast Lane is **CHAT ONLY — NO ChatGPT Work** for worker execution. It reuses the existing R44 Cloudflare/D1 allocator, five-minute fenced leases, rebind/reconcile recovery and per-entry durable checkpoints. Do not create a second allocator, GitHub queue or alternate durable store.
+
+Execute a bounded same-chat sequential loop of **up to 10 complete tickets**:
+
+1. Reconcile any existing binding first.
+2. If the current ticket is incomplete and ownership is valid, finish only its remaining entries.
+3. Confirm every entry via durable receipt and confirm the ticket state is COMPLETE.
+4. Only after COMPLETE, clear the completed binding and issue a fresh claim/idempotency key.
+5. Continue while the chat remains healthy and has enough capacity to finish another ticket.
+6. Stop on NO_WORK, CAPACITY_BUSY, LEASE_LOST, QUARANTINED, receipt failure, ambiguous unconfirmed completion, transport exhaustion, or insufficient execution capacity.
+
+Never prefetch. Never hold two active leases for one chat. Never replace recovery of an interrupted ticket with a new claim. R44 results remain PENDING_CANONICAL_R33_VALIDATION and must never be reported as VERIFIED.
+
+This command is the certification path for Fast Lane. Until an explicit production cutover is separately completed, ordinary `MLS R44 siguiente` keeps its existing one-ticket compatibility semantics.
+
 ## MLS Watchdog commands
 
 When the user issues any command beginning with `MLS` and containing `watchdogs` or `watchdog group`, read and follow:
