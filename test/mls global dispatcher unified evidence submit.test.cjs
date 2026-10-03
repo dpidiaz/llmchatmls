@@ -2,6 +2,7 @@
 const test=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
+const child=require('node:child_process');
 
 test('Unified R33 Evidence submit is issue-scoped, authorized and preflights before commit',()=>{
   const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
@@ -30,4 +31,9 @@ test('Unified Evidence submit script fails closed on assignment scope and lease'
   assert.match(source,/UNIFIED_EVIDENCE_CONTENT_PATH_INVALID/);
   assert.match(source,/UNIFIED_EVIDENCE_LEASE_EXPIRED/);
   assert.doesNotMatch(source,/eval\(|Function\(/);
+});
+
+
+test('syntax-checks the submission runner',()=>{
+  child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence submit.cjs'],{stdio:'pipe'});
 });
