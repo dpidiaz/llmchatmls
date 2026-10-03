@@ -1,0 +1,63 @@
+{
+  "batchId": "r44-0456-renew-submit-6b8f1",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-7a784d95-71a7-46d2-8051-8b67ee6c54fb"
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-7a784d95-71a7-46d2-8051-8b67ee6c54fb",
+        "ticketId": "R43-EMERGENCY-0456",
+        "entries": [
+          {
+            "code": "MLS-V05-0764",
+            "outcome": "PASS_NO_CHANGE",
+            "sources": [
+              "https://www.deutschplus.net/en/pages/Trennbare_untrennbare_Verben/",
+              "https://www.deutschplus.net/en/pages/Partizip_Perfekt_mit_ohne_Prafix_ge"
+            ],
+            "notes": "R44 audit: er- is correctly treated as inseparable; Partizip II without ge- and the examples/Spanish explanations are consistent. No blocking correction."
+          },
+          {
+            "code": "MLS-V05-0766",
+            "outcome": "PASS_NO_CHANGE",
+            "sources": [
+              "https://www.deutschplus.net/en/pages/Trennbare_untrennbare_Verben/",
+              "https://www.deutschplus.net/en/pages/Partizip_Perfekt_mit_ohne_Prafix_ge"
+            ],
+            "notes": "R44 audit: miss- is correctly treated as inseparable in the covered verbs; missverstanden/misslungen and no-ge behavior are consistent. No blocking correction."
+          },
+          {
+            "code": "MLS-V05-0767",
+            "outcome": "PASS_NO_CHANGE",
+            "sources": [
+              "https://www.deutschplus.net/en/pages/Trennbare_untrennbare_Verben/",
+              "https://www.deutschplus.net/en/pages/Perfekt_schwacher_Verben"
+            ],
+            "notes": "R44 audit: nach- is correctly presented as separable; V2 separation and ge insertion in nachgefragt/nachgedacht are correct. Spanish rendering is understandable; no blocking correction."
+          },
+          {
+            "code": "MLS-V05-0768",
+            "outcome": "PASS_NO_CHANGE",
+            "sources": [],
+            "notes": "R44 audit: un- is correctly described as a derivational negating/contrastive prefix used especially with adjectives and nouns; examples and distinction from nicht are coherent. No blocking correction."
+          },
+          {
+            "code": "MLS-V05-0769",
+            "outcome": "PASS_NO_CHANGE",
+            "sources": [
+              "https://www.deutschplus.net/en/pages/Trennbare_untrennbare_Verben/",
+              "https://www.deutschplus.net/en/pages/Partizip_Perfekt_mit_ohne_Prafix_ge"
+            ],
+            "notes": "R44 audit: unter- is correctly described as allowing separable and inseparable verbs depending on lexical meaning/stress; untergehen/untergegangen and untersuchen/untersucht are consistent. No blocking correction."
+          }
+        ]
+      }
+    }
+  ]
+}
