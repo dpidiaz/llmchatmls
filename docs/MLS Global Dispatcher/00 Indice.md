@@ -77,3 +77,8 @@ Hasta que el workflow del Global Dispatcher sea implementado y certificado, los 
 - [08 — Parallel Wave Pipeline R3](./08%20Parallel%20Wave%20Pipeline%20R3.md)
 - [09 — R4 Massive Parallel / Deferred Integration](./09%20R4%20Massive%20Parallel%20Deferred%20Integration.md)
 - [10 — R4.1 Buffered Evidence Farm (piloto experimental)](./10%20R4.1%20Buffered%20Evidence%20Farm.md) — buffer offline de Evidence, checkpoints por entrada, paquete inmutable, planificación de importación read-only, evidencia CI y gates pendientes. No sustituye todavía a R4 ni modifica `MLS siguiente`.
+
+
+## R44 Fast Lane — planned / not implemented
+
+- [27 — R44 Fast Lane Disposable Chat Multiplexing](./27%20R44%20Fast%20Lane%20Disposable%20Chat%20Multiplexing.md) — diseño incremental para que múltiples chats descartables usen el mismo comando, reclamen trabajo distinto de forma atómica y puedan continuar por múltiples tickets con límites seguros. **PLANNED / NOT IMPLEMENTED**; no autoriza cambios de runtime, D1, Cloudflare, workflows, corpus, R33 ni producción.
