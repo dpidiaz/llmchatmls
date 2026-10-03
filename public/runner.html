@@ -464,18 +464,38 @@ button:disabled{opacity:.48;cursor:not-allowed}
   tabCorpus.onclick=()=>show('corpus'); tabUnified.onclick=()=>show('unified');
   function write(msg){log.textContent+='\\n['+new Date().toLocaleTimeString()+'] '+msg;log.scrollTop=log.scrollHeight}
   async function unifiedApi(path,body={}){
-    const r=await fetch('/api/unified-runner/browser/'+path,{
-      method:'POST',
-      headers:{'content-type':'application/json'},
-      credentials:'same-origin',
-      body:JSON.stringify(body),
-      cache:'no-store'
-    });
+    let r;
+    try{
+      r=await fetch('/api/unified-runner/browser/'+path,{
+        method:'POST',
+        headers:{'content-type':'application/json'},
+        credentials:'same-origin',
+        body:JSON.stringify(body),
+        cache:'no-store'
+      });
+    }catch(error){
+      if(!sessionStorage.getItem('mlsUnifiedAccessRecovery')){
+        sessionStorage.setItem('mlsUnifiedAccessRecovery','1');
+        localStorage.setItem('mlsRunnerTab','unified');
+        location.assign('/api/unified-runner/browser/session');
+        return new Promise(()=>{});
+      }
+      throw new Error('No pude renovar tu sesión de Cloudflare Access. Recargá esta página e iniciá sesión otra vez.');
+    }
     const j=await r.json().catch(()=>({error:'UNIFIED_RUNNER_ACCESS_REQUIRED'}));
     if(!r.ok){
-      if(r.status===401||j.error==='UNIFIED_RUNNER_ACCESS_REQUIRED') throw new Error('Tu sesión segura de Cloudflare no está activa. Volvé a abrir el Runner e iniciá sesión.');
+      if(r.status===401||j.error==='UNIFIED_RUNNER_ACCESS_REQUIRED'){
+        if(!sessionStorage.getItem('mlsUnifiedAccessRecovery')){
+          sessionStorage.setItem('mlsUnifiedAccessRecovery','1');
+          localStorage.setItem('mlsRunnerTab','unified');
+          location.assign('/api/unified-runner/browser/session');
+          return new Promise(()=>{});
+        }
+        throw new Error('Tu sesión segura de Cloudflare no está activa. Recargá la página e iniciá sesión nuevamente.');
+      }
       throw new Error(j.message||j.error||('HTTP '+r.status));
     }
+    sessionStorage.removeItem('mlsUnifiedAccessRecovery');
     return j;
   }
   function n(v){return Number(v||0)}
