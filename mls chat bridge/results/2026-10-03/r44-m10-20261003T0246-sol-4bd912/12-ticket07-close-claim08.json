@@ -1,0 +1,512 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-4bd912-ticket07-close-claim08",
+    "requested": 8,
+    "processed": 8,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-ce474bd0-b1ac-49fc-b6f5-7dc696b8fa4f",
+          "ticketId": "R43-EMERGENCY-0590",
+          "leaseExpiresAt": 1790997123217
+        },
+        "completedAt": "2026-10-03T03:07:03.433Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0590",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "a79c91f0-b770-4e43-b5d3-3813d28f4b49",
+            "ticketId": "R43-EMERGENCY-0590",
+            "code": "MLS-V06-0462",
+            "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0462-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "6527ae07b895a012022f16927d6bb8ac6bacedea4b537122197f5c39f4dac4c7",
+            "sourceSha256": "e9dc7c3a2a09fe23f7826dad36da73d0612ef0ddc667e2e6dccdfd5b0450dc43",
+            "committedMs": 1790996823793,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "b3cbb1669b36a7d3dcf312158d9337d9992a3672f3578ad38c2008bfdf7c2042",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:07:03.938Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0590",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "f5ebb209-931c-4dac-b505-2db69e4be7b4",
+            "ticketId": "R43-EMERGENCY-0590",
+            "code": "MLS-V06-0464",
+            "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0464-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "ba59dd74c1a14aec449d591cac06ddc711b6e24c2925c117ee816e4d806ac158",
+            "sourceSha256": "4497f1d7cdbe4ea7030781eca3a9135a4c3ff3a83df845ff7cceab69248a94b4",
+            "committedMs": 1790996824263,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "d1fde86bef7355272ef513b704220d3a8464df39008e5b5a682057f15b6a66d4",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:07:04.436Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0590",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "d34eaa7d-5a49-4018-9564-b1b218ef8264",
+            "ticketId": "R43-EMERGENCY-0590",
+            "code": "MLS-V06-0465",
+            "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0465-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "0c5629e032aa67ae2e86fa858a42f16ec95ee364317c08aa375e7077a7d6e105",
+            "sourceSha256": "5c36c02eaab440b4ba5d2b60385a9fa023b330f207ecde8692066c1feaf73466",
+            "committedMs": 1790996824749,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "a979933f1bf1e66358486062bf071625c07223e68b8f45823a62166066edec2c",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:07:04.869Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0590",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "44fb6933-7a42-4c8c-8f5d-e27bc61bd37a",
+            "ticketId": "R43-EMERGENCY-0590",
+            "code": "MLS-V06-0466",
+            "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0466-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "233386c40478887185833e594b735db917b5aab909097d2a6122c7f3325f3724",
+            "sourceSha256": "9c07e7afb8570b7456087ee9599174eb576d5301581a77dbe8f7885a717a5c1e",
+            "committedMs": 1790996825221,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "80c0c045393dd38ceb03035aaf58fffd18055c7aa48ceaf6e66576693c8c80be",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:07:05.372Z"
+      },
+      {
+        "index": 5,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44CheckpointChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/checkpoint",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0590",
+          "receipt": {
+            "schema": "MLS-R44-ENTRY-RECEIPT-1",
+            "receiptId": "dba34712-1d93-48fd-b4d9-2c20672b9493",
+            "ticketId": "R43-EMERGENCY-0590",
+            "code": "MLS-V06-0467",
+            "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0467-g2-4bd912",
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "outcome": "PASS_NO_CHANGE",
+            "payloadSha256": "0be87c3c243e72aaa227a15b2be3977f5b597f7a70afb2435dd72b2f184ee254",
+            "sourceSha256": "724a286ff76c24253ec62b6bf80f88f11c2374ec1d1f734f365efd94cb672233",
+            "committedMs": 1790996825717,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "receiptSha256": "e9171dae2a9061232c08b8341ec8ad193faefc436f2ecad90bd42f129339c892",
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+        },
+        "completedAt": "2026-10-03T03:07:05.833Z"
+      },
+      {
+        "index": 6,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RebindChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/rebind",
+        "response": {
+          "ticketId": "R43-EMERGENCY-0590",
+          "state": "COMPLETE",
+          "migrationNote": null,
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "entries": [
+            {
+              "code": "MLS-V06-0462",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0462",
+                "path": "japones/MLS-V06-0462.json",
+                "sha256": "e9dc7c3a2a09fe23f7826dad36da73d0612ef0ddc667e2e6dccdfd5b0450dc43"
+              },
+              "receipt": {
+                "code": "MLS-V06-0462",
+                "committedMs": 1790996823793,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0462-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6527ae07b895a012022f16927d6bb8ac6bacedea4b537122197f5c39f4dac4c7",
+                "receiptId": "a79c91f0-b770-4e43-b5d3-3813d28f4b49",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "e9dc7c3a2a09fe23f7826dad36da73d0612ef0ddc667e2e6dccdfd5b0450dc43",
+                "ticketId": "R43-EMERGENCY-0590",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "b3cbb1669b36a7d3dcf312158d9337d9992a3672f3578ad38c2008bfdf7c2042"
+            },
+            {
+              "code": "MLS-V06-0464",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0464",
+                "path": "japones/MLS-V06-0464.json",
+                "sha256": "4497f1d7cdbe4ea7030781eca3a9135a4c3ff3a83df845ff7cceab69248a94b4"
+              },
+              "receipt": {
+                "code": "MLS-V06-0464",
+                "committedMs": 1790996824263,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0464-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ba59dd74c1a14aec449d591cac06ddc711b6e24c2925c117ee816e4d806ac158",
+                "receiptId": "f5ebb209-931c-4dac-b505-2db69e4be7b4",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "4497f1d7cdbe4ea7030781eca3a9135a4c3ff3a83df845ff7cceab69248a94b4",
+                "ticketId": "R43-EMERGENCY-0590",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "d1fde86bef7355272ef513b704220d3a8464df39008e5b5a682057f15b6a66d4"
+            },
+            {
+              "code": "MLS-V06-0465",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0465",
+                "path": "japones/MLS-V06-0465.json",
+                "sha256": "5c36c02eaab440b4ba5d2b60385a9fa023b330f207ecde8692066c1feaf73466"
+              },
+              "receipt": {
+                "code": "MLS-V06-0465",
+                "committedMs": 1790996824749,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0465-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0c5629e032aa67ae2e86fa858a42f16ec95ee364317c08aa375e7077a7d6e105",
+                "receiptId": "d34eaa7d-5a49-4018-9564-b1b218ef8264",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "5c36c02eaab440b4ba5d2b60385a9fa023b330f207ecde8692066c1feaf73466",
+                "ticketId": "R43-EMERGENCY-0590",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "a979933f1bf1e66358486062bf071625c07223e68b8f45823a62166066edec2c"
+            },
+            {
+              "code": "MLS-V06-0466",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0466",
+                "path": "japones/MLS-V06-0466.json",
+                "sha256": "9c07e7afb8570b7456087ee9599174eb576d5301581a77dbe8f7885a717a5c1e"
+              },
+              "receipt": {
+                "code": "MLS-V06-0466",
+                "committedMs": 1790996825221,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0466-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "233386c40478887185833e594b735db917b5aab909097d2a6122c7f3325f3724",
+                "receiptId": "44fb6933-7a42-4c8c-8f5d-e27bc61bd37a",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "9c07e7afb8570b7456087ee9599174eb576d5301581a77dbe8f7885a717a5c1e",
+                "ticketId": "R43-EMERGENCY-0590",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "80c0c045393dd38ceb03035aaf58fffd18055c7aa48ceaf6e66576693c8c80be"
+            },
+            {
+              "code": "MLS-V06-0467",
+              "state": "AUDITED_DURABLE",
+              "source": {
+                "code": "MLS-V06-0467",
+                "path": "japones/MLS-V06-0467.json",
+                "sha256": "724a286ff76c24253ec62b6bf80f88f11c2374ec1d1f734f365efd94cb672233"
+              },
+              "receipt": {
+                "code": "MLS-V06-0467",
+                "committedMs": 1790996825717,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+                "idempotencyKey": "cp-R43-EMERGENCY-0590-MLS-V06-0467-g2-4bd912",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0be87c3c243e72aaa227a15b2be3977f5b597f7a70afb2435dd72b2f184ee254",
+                "receiptId": "dba34712-1d93-48fd-b4d9-2c20672b9493",
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "sourceSha256": "724a286ff76c24253ec62b6bf80f88f11c2374ec1d1f734f365efd94cb672233",
+                "ticketId": "R43-EMERGENCY-0590",
+                "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912"
+              },
+              "receiptSha256": "e9171dae2a9061232c08b8341ec8ad193faefc436f2ecad90bd42f129339c892"
+            }
+          ],
+          "remaining": [],
+          "lease": {
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790997125717,
+            "active": false
+          },
+          "status": "COMPLETE",
+          "bridgeSessionId": null,
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE"
+        },
+        "completedAt": "2026-10-03T03:07:06.062Z"
+      },
+      {
+        "index": 7,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-b63c0aeb-71ec-4198-8bf7-8ce6ad80219e",
+          "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0592",
+            "leaseGeneration": 2,
+            "lease_expires_at": 1790997126132,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-0474",
+                "path": "japones/MLS-V06-0474.json",
+                "sha256": "fc9e681fff862aef5de5a8b6a6a51b62468c34c74052f352ab0fb9e335324a98"
+              },
+              {
+                "code": "MLS-V06-0475",
+                "path": "japones/MLS-V06-0475.json",
+                "sha256": "9913aad294cd2c3cf408b7082152309445ac6b5ff046f80a848a4d8d157cdc5c"
+              },
+              {
+                "code": "MLS-V06-0476",
+                "path": "japones/MLS-V06-0476.json",
+                "sha256": "3048efce474440d3b9fb1ea97c8e170fafa4b85ff44abc17a3f6b483d1f23913"
+              },
+              {
+                "code": "MLS-V06-0478",
+                "path": "japones/MLS-V06-0478.json",
+                "sha256": "ce5a05f1b6e87b153c12d2261d5e0d62900767cafba91eb673b001730b456267"
+              },
+              {
+                "code": "MLS-V06-0479",
+                "path": "japones/MLS-V06-0479.json",
+                "sha256": "e63ef7a22b8c7822f7d61473b206b8dd4f4b98bde124a117e4f2b2151763822f"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0592",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-0474",
+                "path": "japones/MLS-V06-0474.json",
+                "sha256": "fc9e681fff862aef5de5a8b6a6a51b62468c34c74052f352ab0fb9e335324a98"
+              },
+              {
+                "code": "MLS-V06-0475",
+                "path": "japones/MLS-V06-0475.json",
+                "sha256": "9913aad294cd2c3cf408b7082152309445ac6b5ff046f80a848a4d8d157cdc5c"
+              },
+              {
+                "code": "MLS-V06-0476",
+                "path": "japones/MLS-V06-0476.json",
+                "sha256": "3048efce474440d3b9fb1ea97c8e170fafa4b85ff44abc17a3f6b483d1f23913"
+              },
+              {
+                "code": "MLS-V06-0478",
+                "path": "japones/MLS-V06-0478.json",
+                "sha256": "ce5a05f1b6e87b153c12d2261d5e0d62900767cafba91eb673b001730b456267"
+              },
+              {
+                "code": "MLS-V06-0479",
+                "path": "japones/MLS-V06-0479.json",
+                "sha256": "e63ef7a22b8c7822f7d61473b206b8dd4f4b98bde124a117e4f2b2151763822f"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-0474",
+              "MLS-V06-0475",
+              "MLS-V06-0476",
+              "MLS-V06-0478",
+              "MLS-V06-0479"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+              "leaseGeneration": 2,
+              "leaseExpiresAt": 1790997126132,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+            "leaseGeneration": 2,
+            "leaseExpiresAt": 1790997126132,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-0474",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 474,
+                "title": "〜なければならない",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Permiso, obligación y prohibición — 許可・義務・禁止",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜なければならない** expresa **obligación o necesidad**. Presenta una acción como algo que debe realizarse y suele traducirse como “tener que…” o “deber…”.\n\n**勉強しなければならない。** significa “Tengo que estudiar”.\n\n#### Cómo funciona\n\nLa construcción parte de la forma negativa en **〜ない**, que cambia a **〜なければ**, seguida de **ならない**: **行く → 行かなければならない**, **食べる → 食べなければならない**, **する → しなければならない**.\n\nAunque incluye formas negativas, el conjunto expresa una obligación afirmativa. La variante cortés es **〜なければなりません**.\n\nEn conversación puede abreviarse. Una reducción frecuente es **〜なきゃ**, especialmente en registros informales.\n\n#### Ejemplos\n\n* **勉強しなければならない。** — Tengo que estudiar.\n* **明日早く起きなければなりません。** — Mañana tengo que levantarme temprano.\n* **この書類を出さなければならない。** — Tengo que entregar este documento.\n* **もう帰らなければなりません。** — Ya tengo que regresar.\n\n#### Observación importante\n\nEl ejemplo heredado **入ってもいいです** expresa permiso y no corresponde a **〜なければならない**.\n\nEsta construcción pertenece al ámbito de la obligación. Se relaciona con **〜なくてはいけない** y **〜ないといけない**, pero puede sonar relativamente más formal o explícita según el contexto.\n\n#### Entradas relacionadas\n\n[Entrada 473: 〜なくてもいい — 「〜なくてもいい」](#entry-473) · [Entrada 475: 〜べきだ — 「〜べきだ」](#entry-475) · [Entrada 472: 〜なくてはいけない — 「〜なくてはいけない」](#entry-472) · [Entrada 476: 〜べきではない — 「〜べきではない」](#entry-476)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-17fa0a77984ea35f601da5a3bc3d126e4a5078c78cc405ca8e807d02e53cbc80",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:21:29.142Z"
+              },
+              {
+                "code": "MLS-V06-0475",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 475,
+                "title": "〜べきだ",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Permiso, obligación y prohibición — 許可・義務・禁止",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜べきだ** expresa que, según una norma, valoración o expectativa, **sería correcto o apropiado realizar una acción**. Suele traducirse como “debería…” o “se debe…”.\n\n**約束は守るべきだ。** significa “Se deben cumplir las promesas”.\n\n#### Cómo funciona\n\nLa construcción se une normalmente a la forma de diccionario del verbo: **行くべきだ**, **話すべきだ**, **考えるべきだ**. Con **する**, aparecen **するべきだ** y la forma tradicional **すべきだ**.\n\nA diferencia de construcciones como **〜なければならない**, que presentan una obligación o necesidad, **〜べきだ** suele expresar con más claridad una valoración sobre lo correcto, conveniente o esperable.\n\nLa forma cortés es **〜べきです**.\n\n#### Ejemplos\n\n* **約束は守るべきだ。** — Se deben cumplir las promesas.\n* **もっとよく考えるべきです。** — Debería pensarlo mejor.\n* **困っている人を助けるべきだ。** — Se debería ayudar a las personas que tienen dificultades.\n* **大事なことは直接話すべきです。** — Los asuntos importantes deberían hablarse directamente.\n\n#### Observación importante\n\nLa definición heredada mezcla permiso, obligación y capacidad. **〜べきだ** expresa principalmente una **recomendación fuerte, deber normativo o juicio sobre lo apropiado**.\n\nSu fuerza depende del contexto y de la relación entre interlocutores; dirigido directamente a otra persona puede sonar categórico.\n\n#### Entradas relacionadas\n\n[Entrada 474: 〜なければならない — 「〜なければならない」](#entry-474) · [Entrada 476: 〜べきではない — 「〜べきではない」](#entry-476) · [Entrada 473: 〜なくてもいい — 「〜なくてもいい」](#entry-473) · [Entrada 477: べきだ: introducción — べきだ：許可・義務・禁止（許可・義務・禁止）（べきだ: introducción）](#entry-477)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3bcd758b214bd4407536f42a5516495da260a3fcaef948cf029bfc074323d672",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:22:19.803Z"
+              },
+              {
+                "code": "MLS-V06-0476",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 476,
+                "title": "〜べきではない",
+                "level": "A2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Permiso, obligación y prohibición — 許可・義務・禁止",
+                "articleMarkdown": "#### En pocas palabras\n\n**〜べきではない** expresa que una acción **no se considera correcta, apropiada o recomendable**. Suele traducirse como “no debería…” o “no se debe…”.\n\n**人を見た目で判断するべきではない。** significa “No se debe juzgar a las personas por su apariencia”.\n\n#### Cómo funciona\n\nLa construcción corresponde a **〜べきだ** en forma negativa: verbo en forma de diccionario + **べきではない**. Aparecen formas como **言うべきではない**, **行くべきではない** y **するべきではない**; con **する** también existe **すべきではない**.\n\nExpresa un juicio normativo negativo: el hablante presenta la acción como impropia, inconveniente o contraria a lo esperado.\n\nLa forma cortés es **〜べきではありません**.\n\n#### Ejemplos\n\n* **人を見た目で判断するべきではない。** — No se debe juzgar a las personas por su apariencia.\n* **うそをつくべきではありません。** — No se debería mentir.\n* **そんな言い方をするべきではない。** — No deberías decirlo de esa manera.\n* **大事な問題を無視するべきではない。** — No se deben ignorar los problemas importantes.\n\n#### Observación importante\n\nLa definición heredada mezcla permiso, obligación y capacidad. **〜べきではない** expresa específicamente un **juicio de desaprobación o deber negativo**.\n\nNo equivale necesariamente a una prohibición formal como **〜てはいけない**. Puede ser una recomendación fuerte basada en normas, valores o expectativas.\n\n#### Entradas relacionadas\n\n[Entrada 475: 〜べきだ — 「〜べきだ」](#entry-475) · [Entrada 477: べきだ: introducción — べきだ：許可・義務・禁止（許可・義務・禁止）（べきだ: introducción）](#entry-477) · [Entrada 474: 〜なければならない — 「〜なければならない」](#entry-474) · [Entrada 478: Obligación involuntaria — 義務 involuntaria](#entry-478)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1878781f12f84c4d2f3ea908cc18b7d7a04e81fe8ac472a2d1f711dde189c973",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:23:14.855Z"
+              },
+              {
+                "code": "MLS-V06-0478",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 478,
+                "title": "Obligación involuntaria",
+                "level": "B2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Permiso, obligación y prohibición — 許可・義務・禁止",
+                "articleMarkdown": "#### En pocas palabras\n\nLa expresión **“obligación involuntaria”** puede describir situaciones en las que una persona **debe realizar una acción aunque esa acción no proceda de su deseo o intención**. No constituye una forma gramatical única del japonés; es una interpretación que puede surgir con distintas construcciones de obligación.\n\nPor ejemplo, **行かなければなりません。** significa “Tengo que ir”. La frase presenta la ida como necesaria, pero por sí sola no afirma si la persona quiere ir o no.\n\n#### Cómo funciona\n\nConstrucciones como **〜なければならない**, **〜なくてはいけない** y **〜ないといけない** expresan necesidad u obligación. La fuente de esa obligación puede ser externa —una regla, una fecha límite, una orden o una circunstancia— o interna, como una decisión que el hablante considera necesaria.\n\nPor eso, la falta de voluntad no está codificada automáticamente en la forma gramatical. Para interpretar una obligación como involuntaria hacen falta el contexto, el contenido de la oración o expresiones adicionales que indiquen falta de deseo.\n\nEste punto la distingue de **べきだ**, que suele presentar una acción como correcta, apropiada o normativamente esperable.\n\n#### Ejemplos\n\n* **行かなければなりません。** — Tengo que ir.\n* **仕事なので、日曜日も働かなければならない。** — Como es por trabajo, tengo que trabajar también el domingo.\n* **締め切りがあるので、今日終わらせないといけない。** — Como hay una fecha límite, tengo que terminarlo hoy.\n* **本当は休みたいが、会議に出なくてはいけない。** — En realidad quiero descansar, pero tengo que asistir a la reunión.\n\n#### Observación importante\n\n“Obligación involuntaria” es una etiqueta descriptiva útil para hablar del **origen o la experiencia de la obligación**, no una categoría morfológica independiente del japonés.\n\nLa frase **行かなければなりません** expresa obligación, pero solo un contexto como **本当は行きたくない** “en realidad no quiero ir” permite afirmar claramente que la acción contradice la voluntad del hablante.\n\n#### Entradas relacionadas\n\n[Entrada 477: べきだ: introducción — べきだ：許可・義務・禁止（許可・義務・禁止）（べきだ: introducción）](#entry-477) · [Entrada 479: べきだ obligación normativa — べきだ：許可・義務・禁止（許可・義務・禁止）（べきだ obligación normativa）](#entry-479) · [Entrada 476: 〜べきではない — 「〜べきではない」](#entry-476)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-eb346d552f9109efa06e63c64a5acb0afcd0ea788b9313a796a0567b474ece71",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:25:08.312Z"
+              },
+              {
+                "code": "MLS-V06-0479",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 479,
+                "title": "べきだ obligación normativa",
+                "level": "C2",
+                "part": "Modalidad deóntica e interacción — 義務的モダリティと相互行為",
+                "chapter": "Permiso, obligación y prohibición — 許可・義務・禁止",
+                "articleMarkdown": "#### En pocas palabras\n\nEn su uso de **obligación normativa**, **べきだ** presenta una acción como aquello que **corresponde hacer de acuerdo con una norma, un principio, una función social o una valoración razonada**. No describe simplemente una necesidad práctica: incorpora una evaluación sobre lo apropiado.\n\n**研究では出典を明示するべきだ。** significa “En investigación se deben indicar las fuentes”. La oración formula una expectativa normativa sobre la práctica investigadora.\n\n#### Cómo funciona\n\n**べきだ** se combina normalmente con un verbo en forma de diccionario: **守るべきだ**, **説明するべきだ**, **考慮するべきだ**. Con **する**, coexisten **するべきだ** y **すべきだ**. La forma cortés es **べきです** y la negativa, **べきではない**.\n\nEl origen de la norma puede variar. Puede tratarse de una regla profesional, una expectativa ética, una convención social o el juicio del hablante. Por eso la construcción no identifica por sí sola quién impone la obligación ni qué autoridad la respalda.\n\nEste valor contrasta con construcciones como **〜なければならない**, que presentan más directamente una acción como necesaria. **資料を提出しなければならない** puede describir un requisito concreto; **資料には出典を示すべきだ** evalúa la conducta como normativa o apropiada.\n\nLa fuerza de **べきだ** también depende de la persona a la que se aplica. En afirmaciones generales puede sonar como formulación de un principio; dirigido a un interlocutor concreto puede adquirir un tono de recomendación fuerte, reproche o exigencia.\n\n#### Ejemplos\n\n* **研究では出典を明示するべきだ。** — En investigación se deben indicar las fuentes.\n* **公的な機関は情報を分かりやすく説明するべきだ。** — Las instituciones públicas deberían explicar la información con claridad.\n* **重要な決定では複数の意見を考慮するべきです。** — En decisiones importantes deberían considerarse varias opiniones.\n* **約束した以上、責任を果たすべきだ。** — Puesto que se hizo una promesa, corresponde cumplir con la responsabilidad.\n\n#### Observación importante\n\nTraducir **べきだ** simplemente como “tener que” puede borrar su componente evaluativo. La construcción suele situar la acción dentro de un marco de **corrección, deber o expectativa normativa**, mientras que otras expresiones de obligación pueden limitarse a presentar una necesidad causada por las circunstancias.\n\nTampoco toda aparición de **べきだ** equivale a una norma objetiva o universal. El hablante puede presentar como “lo que debería hacerse” una valoración personal o discutible. El contexto permite determinar si la fuente del deber es institucional, social, ética o individual.\n\n#### Entradas relacionadas\n\n[Entrada 478: Obligación involuntaria — 義務 involuntaria](#entry-478) · [Entrada 477: べきだ: introducción — べきだ：許可・義務・禁止（許可・義務・禁止）（べきだ: introducción）](#entry-477)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-85154576bdf7307900e84a225ae49edae78dca9801d581c549f4c96e9540e177",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:06.519Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:07:07.113Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:07:07.113Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0246-sol-4bd912/12-ticket07-close-claim08.json"
+}

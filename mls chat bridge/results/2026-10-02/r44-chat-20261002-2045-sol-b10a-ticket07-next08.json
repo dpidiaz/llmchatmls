@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-b10a-ticket07-next08",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0894",
+          "sha256": "b3780b783832782e938b25f76583b2c9720d521f0e742cce498774583c4303b6",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0894",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "cf613dd7-2706-4381-8479-65fc5feceb6f",
+                "ticketId": "R44-CORPUS-0894",
+                "code": "MLS-V01-0598",
+                "idempotencyKey": "R44-CORPUS-0894:MLS-V01-0598:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "95bfacbb812e7951f0bf7c9b49b4ee582c4e25da86f67d9322d3264169edc490",
+                "sourceSha256": "e1bbce1985ec9c978d5167054e5d7bc39be9ce187325185d4fe6f28728957fec",
+                "committedMs": 1790996809708,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "af53da4d5bd256ba70447865d92289d228ffd64c91911f3592bc5c987a556ced",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0894",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2c11145d-1b28-4cc5-bacb-1fba6e37c96f",
+                "ticketId": "R44-CORPUS-0894",
+                "code": "MLS-V01-0599",
+                "idempotencyKey": "R44-CORPUS-0894:MLS-V01-0599:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bfbd7ea1a875df2648c33d793b0949ba6601443f94dfda52d5f52367f6d11e50",
+                "sourceSha256": "d4590cf7d235810abb0d3ead06dd815d08c4330aa41a36b1cb22d165190285e4",
+                "committedMs": 1790996810071,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d1b17612b6600566434abbf466140c6e798f7f8945ad758a2c05a79abd850f28",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0894",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a4aa790f-6213-4f74-abc0-84cf9bf79353",
+                "ticketId": "R44-CORPUS-0894",
+                "code": "MLS-V01-0601",
+                "idempotencyKey": "R44-CORPUS-0894:MLS-V01-0601:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2834c18f7b0e03c4bafe355d4a9d014f332a858b14c741a3c7de51f8ba88b69d",
+                "sourceSha256": "5800e5f0b6d33278fcd056daa1eb248e80edf726e38237c0902685e107a539b8",
+                "committedMs": 1790996810454,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f45a2745c2524aad8b922a0b47e45eec4350a38dccf22087a259431f3d5a0b18",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0894",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1e912146-f491-41c8-8184-3bd744d8cb8f",
+                "ticketId": "R44-CORPUS-0894",
+                "code": "MLS-V01-0602",
+                "idempotencyKey": "R44-CORPUS-0894:MLS-V01-0602:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ed443c0694f6aee388850537a88b0a3fe8d9acc359324250129d1e4ecae508ff",
+                "sourceSha256": "96bbb9a3ec237bc36a2eafa1ee71d9a9db076037a815b07ee0bb960cf4ca3c5b",
+                "committedMs": 1790996810791,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3785c73875f088a269fb15daef163ef9089a8fcbe493e1e7d91d2fa1d2da10c3",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0894",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "71c98194-c4df-49ba-b849-4649a8953ba1",
+                "ticketId": "R44-CORPUS-0894",
+                "code": "MLS-V01-0603",
+                "idempotencyKey": "R44-CORPUS-0894:MLS-V01-0603:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "04036fae614baf21c26800d20ebc222be11c8cd1b03fe51bb44766dfb5e09dc1",
+                "sourceSha256": "6da64a9d59fef3934e603344195154c76a061ba5d162f20373bb2f61beeeee47",
+                "committedMs": 1790996811153,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "381ee94b80029ae8e541f88a6da2affd06b1ac4e8d55a57516a68ba2b7798ecd",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-b1e02279-c16b-43b1-bb8b-c1879379dbaa",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "b3780b783832782e938b25f76583b2c9720d521f0e742cce498774583c4303b6"
+          }
+        },
+        "completedAt": "2026-10-03T03:06:51.573Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-0e2e103c-c35d-4391-8cf6-f168930f7cde",
+          "workerId": "r44-chat-20261002-2045-sol-b10a",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0895",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997111658,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0605",
+                "path": "ingles/MLS-V01-0605.json",
+                "sha256": "e159d19188caabac290eb6e3bdcf077efe7f826c148081e9c1fb3393511eb060"
+              },
+              {
+                "code": "MLS-V01-0606",
+                "path": "ingles/MLS-V01-0606.json",
+                "sha256": "758df88e42840b980f3e2af676882b7ab857311fa003a19490fc4cdb88b91e03"
+              },
+              {
+                "code": "MLS-V01-0607",
+                "path": "ingles/MLS-V01-0607.json",
+                "sha256": "dc3fbeebd24e6c84995d29b5506bfce2a7e7f0d064347c48ed18669f40bd5cd5"
+              },
+              {
+                "code": "MLS-V01-0609",
+                "path": "ingles/MLS-V01-0609.json",
+                "sha256": "753e2f20fa56310876a5d2e70ac3dc02ad23d22072c9aa3b1a8b3cdbec76230d"
+              },
+              {
+                "code": "MLS-V01-0610",
+                "path": "ingles/MLS-V01-0610.json",
+                "sha256": "930cdaa000de2f1871a0cdc395dce73894f6265f9832a47991645e84825a1117"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0895",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0605",
+                "path": "ingles/MLS-V01-0605.json",
+                "sha256": "e159d19188caabac290eb6e3bdcf077efe7f826c148081e9c1fb3393511eb060"
+              },
+              {
+                "code": "MLS-V01-0606",
+                "path": "ingles/MLS-V01-0606.json",
+                "sha256": "758df88e42840b980f3e2af676882b7ab857311fa003a19490fc4cdb88b91e03"
+              },
+              {
+                "code": "MLS-V01-0607",
+                "path": "ingles/MLS-V01-0607.json",
+                "sha256": "dc3fbeebd24e6c84995d29b5506bfce2a7e7f0d064347c48ed18669f40bd5cd5"
+              },
+              {
+                "code": "MLS-V01-0609",
+                "path": "ingles/MLS-V01-0609.json",
+                "sha256": "753e2f20fa56310876a5d2e70ac3dc02ad23d22072c9aa3b1a8b3cdbec76230d"
+              },
+              {
+                "code": "MLS-V01-0610",
+                "path": "ingles/MLS-V01-0610.json",
+                "sha256": "930cdaa000de2f1871a0cdc395dce73894f6265f9832a47991645e84825a1117"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0605",
+              "MLS-V01-0606",
+              "MLS-V01-0607",
+              "MLS-V01-0609",
+              "MLS-V01-0610"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261002-2045-sol-b10a",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997111658,
+              "active": true
+            },
+            "workerId": "r44-chat-20261002-2045-sol-b10a",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997111658,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0605",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 605,
+                "title": "Inversión con should",
+                "level": "C1",
+                "part": "Condicionalidad e hipótesis — Conditionality and hypothesis",
+                "chapter": "Condicionales — Conditionals",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **inversión con *should*** es una forma relativamente formal de expresar una condición sin usar *if*. En lugar de *If you should need help...*, se coloca **should** delante del sujeto: *Should you need help...*.\n\nEsta construcción suele presentar la situación como posible pero contingente, a veces con un matiz de eventualidad o cierta distancia respecto de que llegue a ocurrir.\n\n#### Cómo funciona\n\nEl patrón básico es `Should + sujeto + verbo base, cláusula principal`.\n\nLa inversión afecta al auxiliar **should** y al sujeto. El verbo que sigue permanece en forma base: *Should she arrive early...*, no *Should she arrives...*.\n\nUna versión con *if* puede ser: `If + sujeto + should + verbo base`. La variante invertida omite *if* y antepone *should*.\n\n#### Ejemplos\n\n* **Should you need help, call this number.**\n  *(Si llegara a necesitar ayuda, llame a este número).*  \n  La ayuda se presenta como una necesidad posible, no como un hecho esperado necesariamente.\n\n* **Should the weather worsen, the event will be moved indoors.**\n  *(Si empeorara el tiempo, el evento se trasladará al interior).*  \n  *Should* introduce una eventualidad futura y la cláusula principal indica la consecuencia prevista.\n\n* **Should anyone ask, tell them I’ll be back at three.**\n  *(Si alguien pregunta, dígale que volveré a las tres).*  \n  La condición se formula de manera más formal que con *if anyone asks*.\n\n#### Observación importante\n\nEsta construcción no es una pregunta, aunque tenga el orden **auxiliar + sujeto**. La puntuación y la cláusula principal muestran que funciona como condición.\n\nTampoco debe interpretarse *should* aquí únicamente con su valor de consejo u obligación. En la inversión condicional, contribuye a presentar una posibilidad eventual. El registro suele ser más formal, escrito o institucional que el de una condición ordinaria con *if*.\n\nLa inversión con *should* se asocia sobre todo con condiciones abiertas o posibles. Para condiciones irreales con *were* y condiciones pasadas contrafactuales con *had*, el inglés dispone de otros patrones de inversión.\n\n#### Contraste con otras inversiones condicionales\n\n**Should you need...** suele corresponder a *If you should need...* o, según el contexto, a un *If you need...* más neutral. **Were you to need...** presenta una hipótesis más marcada, mientras que **Had you known...** se refiere típicamente a una condición pasada no realizada.\n\n#### Entradas relacionadas\n\n* [Entrada 606: Inversión con were — Were inversion](#entry-606)\n* [Entrada 607: Inversión con had — Had inversion](#entry-607)\n* [Entrada 594: Condicional cero — Zero conditional](#entry-594)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0f9ad2efc4520104f9cce99c5b5d6f0e8e1a165e7b65dfbc1f16520078754b9d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:27:55.929Z"
+              },
+              {
+                "code": "MLS-V01-0606",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 606,
+                "title": "Inversión con were",
+                "level": "C1",
+                "part": "Condicionalidad e hipótesis — Conditionality and hypothesis",
+                "chapter": "Condicionales — Conditionals",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **inversión con *were*** permite expresar ciertas condiciones irreales o muy hipotéticas sin usar *if*. En vez de *If I were you...*, puede decirse **Were I you...**. También es frecuente el patrón **were + sujeto + to + infinitivo**, como *Were the company to close...*.\n\nLa construcción pertenece sobre todo a registros formales, escritos o deliberadamente elevados.\n\n#### Cómo funciona\n\nEl patrón general es `Were + sujeto + complemento / to-infinitive, cláusula principal`.\n\nEn la versión no invertida aparece *if*: *If I were you, I would wait*. Al invertir, se elimina *if* y **were** pasa delante del sujeto: *Were I you, I would wait*.\n\nCon verbos distintos de *be*, suele emplearse **were to + infinitivo**: *If the plan were to fail...* → *Were the plan to fail...*.\n\n#### Ejemplos\n\n* **Were I you, I would wait.**\n  *(Si yo fuera tú, esperaría).*  \n  La condición es irreal: el hablante imagina estar en la situación de otra persona.\n\n* **Were the company to close, hundreds of jobs would be affected.**\n  *(Si la empresa llegara a cerrar, cientos de empleos se verían afectados).*  \n  *Were ... to close* presenta el cierre como una hipótesis marcada o remota.\n\n* **Were she here, she would know what to do.**\n  *(Si ella estuviera aquí, sabría qué hacer).*  \n  *Were she here* equivale en este contexto a *If she were here*.\n\n#### Observación importante\n\nEsta inversión no convierte la cláusula en pregunta, aunque el orden superficial sea **verbo + sujeto**. Su función se reconoce por el contexto condicional y por la cláusula principal.\n\nEl patrón se asocia especialmente con **were**, no con cualquier forma pasada de *be*. En inglés formal contrafactual, *were* puede aparecer con todas las personas, como en *If I were* o *Were I...*. En habla coloquial se encuentra también *was* en algunas construcciones con *if*, pero **Was I you...** no es la inversión condicional estándar equivalente.\n\n#### Contraste con otras inversiones condicionales\n\n**Should you need...** presenta normalmente una posibilidad eventual; **Were you to need...** marca una hipótesis más distante; **Had you known...** remite a una condición pasada no realizada. Las tres construcciones permiten omitir *if*, pero no son intercambiables porque expresan marcos temporales y modales distintos.\n\n#### Entradas relacionadas\n\n* [Entrada 605: Inversión con should — Should inversion](#entry-605)\n* [Entrada 607: Inversión con had — Had inversion](#entry-607)\n* [Entrada 594: Condicional cero — Zero conditional](#entry-594)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-5cd3396ff94dffcefe4f9c1a3d0be4644dcdbb1ca8e0be2ca31e982686ffb089",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:28:19.063Z"
+              },
+              {
+                "code": "MLS-V01-0607",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 607,
+                "title": "Inversión con had",
+                "level": "C1",
+                "part": "Condicionalidad e hipótesis — Conditionality and hypothesis",
+                "chapter": "Condicionales — Conditionals",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **inversión con *had*** permite expresar una condición pasada contrafactual sin usar *if*. En vez de *If I had known...*, puede decirse **Had I known...**.\n\nSe usa sobre todo en registros formales o escritos y suele referirse a un pasado que no ocurrió, junto con una consecuencia también hipotética.\n\n#### Cómo funciona\n\nEl patrón básico es `Had + sujeto + participio pasado, cláusula principal`.\n\nLa construcción parte normalmente de una cláusula en **past perfect**: *if + sujeto + had + participio pasado*. Al omitir *if*, el auxiliar **had** se coloca delante del sujeto.\n\nAsí, *If they had left earlier, they would have arrived on time* puede convertirse en *Had they left earlier, they would have arrived on time*.\n\n#### Ejemplos\n\n* **Had I known, I would have called.**\n  *(Si lo hubiera sabido, habría llamado).*  \n  La realidad implícita es que no lo sabía y no llamé.\n\n* **Had we arrived ten minutes later, we would have missed the train.**\n  *(Si hubiéramos llegado diez minutos más tarde, habríamos perdido el tren).*  \n  La inversión presenta un pasado alternativo que no se realizó.\n\n* **Had she not intervened, the situation might have become worse.**\n  *(Si ella no hubiera intervenido, la situación podría haber empeorado).*  \n  La negación permanece después del sujeto: *Had she not intervened...*.\n\n#### Observación importante\n\nAunque el orden **had + sujeto** recuerda a una pregunta, aquí la estructura funciona como una cláusula condicional. La presencia de una cláusula principal y el significado contrafactual permiten identificarla.\n\nNo debe confundirse este **had** auxiliar con el verbo léxico *have* en pasado. La inversión condicional parte del **past perfect**: *had known, had left, had seen*. Por eso el elemento posterior es un participio pasado, no una forma verbal cualquiera.\n\nLa cláusula principal suele contener *would have*, pero también son posibles otros modales cuando el significado lo exige, como *could have* o *might have*.\n\n#### Contraste con otras inversiones condicionales\n\n**Had you known...** se refiere típicamente a una condición pasada no realizada. **Were you to know...** presenta una hipótesis distinta, normalmente presente o futura, y **Should you need...** una eventualidad posible. Las tres omiten *if*, pero no expresan el mismo tiempo ni el mismo grado de distancia modal.\n\n#### Entradas relacionadas\n\n* [Entrada 606: Inversión con were — Were inversion](#entry-606)\n* [Entrada 605: Inversión con should — Should inversion](#entry-605)\n* [Entrada 594: Condicional cero — Zero conditional](#entry-594)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7bd960f25325e8ede48628883f6fcc47011482857d97d4ad4aab36a0b1f416be",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:28:39.255Z"
+              },
+              {
+                "code": "MLS-V01-0609",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 609,
+                "title": "Condicionales de relevancia tipo biscuit",
+                "level": "C2",
+                "part": "Condicionalidad e hipótesis — Conditionality and hypothesis",
+                "chapter": "Condicionales — Conditionals",
+                "articleMarkdown": "#### En pocas palabras\n\nLos **condicionales de relevancia tipo *biscuit*** (*biscuit conditionals*) son construcciones en las que la cláusula con *if* no determina si la proposición principal es verdadera. En cambio, indica **cuándo resulta pertinente decirla, ofrecerla o hacerla saber**.\n\nEl nombre tradicional procede de ejemplos del tipo *There are biscuits on the table if you’re hungry*. Que haya galletas en la mesa no depende de que la otra persona tenga hambre; el hambre hace relevante mencionar su existencia.\n\n#### Cómo funciona\n\nEn un condicional ordinario, la condición suele afectar al contenido de la cláusula principal: *If it rains, the picnic will be cancelled*. La cancelación depende de la lluvia.\n\nEn un *biscuit conditional*, la relación se establece en otro nivel. En *There are biscuits on the table if you’re hungry*, la cláusula *if you’re hungry* puede entenderse como “si esta información te resulta útil porque tienes hambre”. La existencia de las galletas permanece constante tanto si el interlocutor tiene hambre como si no.\n\nPor eso estas construcciones se analizan a menudo como **condicionales pragmáticos** o relacionados con el acto de habla: la condición limita la pertinencia de afirmar, informar, ofrecer o recordar algo.\n\n#### Ejemplos\n\n* **There are biscuits on the table if you’re hungry.**\n  *(Hay galletas en la mesa, por si tienes hambre).*  \n  El hambre no causa la existencia de las galletas; determina la utilidad de la información.\n\n* **If you need anything later, my number is on the fridge.**\n  *(Si necesitas algo más tarde, mi número está en el refrigerador).*  \n  El número ya está allí. La posible necesidad futura explica por qué el hablante considera relevante señalarlo.\n\n* **If you’re interested, the museum closes at six.**\n  *(Por si te interesa, el museo cierra a las seis).*  \n  El horario no depende del interés del interlocutor; ese interés condiciona la pertinencia de mencionarlo.\n\n#### Observación importante\n\nLa interpretación no se obtiene únicamente de la forma `if + cláusula`. El contexto y el contenido de las dos proposiciones permiten decidir si existe una dependencia real entre los hechos o una relación de relevancia discursiva. Una misma estructura superficial puede recibir análisis distintos en contextos diferentes.\n\nTampoco todos los condicionales de relevancia tienen que referirse a ofrecimientos amistosos ni a comida. El término *biscuit conditional* es una etiqueta convencional para un patrón pragmático más general.\n\nEn traducción al español pueden aparecer *si*, *por si*, *si te interesa*, *por si te sirve* u otras soluciones naturales. La traducción adecuada depende de la función comunicativa, no de una equivalencia mecánica de *if*.\n\n#### Contraste con usos cercanos\n\nLos **condicionales como estrategia de cortesía** pueden suavizar peticiones u ofertas, mientras que un *biscuit conditional* se define principalmente porque la condición afecta a la relevancia de la cláusula principal y no a su verdad. La categoría más amplia de **condicionales de relevancia** incluye construcciones en las que la cláusula condicional organiza la pertinencia del enunciado o del acto comunicativo.\n\n#### Entradas relacionadas\n\n* [Entrada 608: Condicionales como estrategia de cortesía — Conditionals as politeness](#entry-608)\n* [Entrada 610: Condicionales de relevancia — Relevance conditionals](#entry-610)\n* [Entrada 594: Condicional cero — Zero conditional](#entry-594)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-d0d83b126bce2d8270eac5e75a15173625f245bf1a2e9289913766241f4eef99",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:29:55.073Z"
+              },
+              {
+                "code": "MLS-V01-0610",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 610,
+                "title": "Condicionales de relevancia",
+                "level": "C2",
+                "part": "Condicionalidad e hipótesis — Conditionality and hypothesis",
+                "chapter": "Condicionales — Conditionals",
+                "articleMarkdown": "#### En pocas palabras\n\nLos **condicionales de relevancia** (*relevance conditionals*) son construcciones en las que la cláusula con *if* no condiciona necesariamente la verdad del contenido principal. En cambio, puede indicar **cuándo es pertinente, apropiado o útil realizar el acto comunicativo** expresado por la oración.\n\nPor ejemplo, en *If I may be honest, the plan seems risky*, que el plan parezca arriesgado no depende de que el hablante “pueda ser sincero”. La cláusula con *if* regula la manera o la legitimidad con que se introduce esa valoración.\n\n#### Cómo funciona\n\nEn un condicional de contenido ordinario, existe una dependencia entre las situaciones descritas: *If the temperature falls below zero, the water may freeze*. La condición participa en la interpretación del evento principal.\n\nEn un condicional de relevancia, la relación puede operar en el nivel del **acto de habla**, es decir, de lo que el hablante hace al afirmar, preguntar, aconsejar, informar u ofrecer algo. Una paráfrasis útil de *If I may be honest, the plan seems risky* sería “si es apropiado que hable con franqueza, digo que el plan parece arriesgado”.\n\nNo existe una sola forma verbal exclusiva de esta categoría. Su identificación depende principalmente de la relación semántica y pragmática entre las cláusulas y del contexto discursivo.\n\n#### Ejemplos\n\n* **If I may be honest, the plan seems risky.**\n  *(Si puedo ser sincero, el plan parece arriesgado).*  \n  La condición enmarca la franqueza del comentario; no determina si el plan es arriesgado.\n\n* **If you want my opinion, the second proposal is clearer.**\n  *(Si quieres mi opinión, la segunda propuesta es más clara).*  \n  El deseo del interlocutor condiciona la pertinencia de expresar la opinión, no la propiedad atribuida a la propuesta.\n\n* **If you haven’t heard already, Marta has resigned.**\n  *(Si todavía no te has enterado, Marta ha renunciado).*  \n  La posible falta de conocimiento explica por qué la información resulta relevante para el interlocutor.\n\n#### Observación importante\n\nLa frontera entre una condición de contenido y una de relevancia no siempre puede decidirse por la sintaxis aislada. El mismo tipo de cláusula con *if* puede adquirir funciones distintas según el contexto, la intención comunicativa y lo que los interlocutores ya saben.\n\nAdemás, la etiqueta **relevance conditional** abarca relaciones pragmáticas diversas. Algunas regulan la conveniencia de hablar (*if I may say so*), otras la utilidad de una información (*if you’re interested...*) y otras la pertinencia para un destinatario concreto.\n\nPor ello, no conviene analizar automáticamente estas construcciones mediante las fórmulas pedagógicas de primero, segundo o tercer condicional: esas etiquetas describen otros patrones y no captan por sí solas la relación discursiva relevante aquí.\n\n#### Contraste con usos cercanos\n\nLos llamados **biscuit conditionals** constituyen un caso prototípico de relevancia: *There are biscuits on the table if you’re hungry* informa de algo verdadero independientemente de la condición, pero relevante si el interlocutor tiene hambre. Las construcciones de **cortesía condicional**, por su parte, se caracterizan por suavizar o gestionar interpersonalmente peticiones, ofertas y consejos; pueden solaparse con la relevancia pragmática, pero las etiquetas no son equivalentes.\n\n#### Entradas relacionadas\n\n* [Entrada 609: Condicionales de relevancia tipo biscuit — Biscuit conditionals](#entry-609)\n* [Entrada 608: Condicionales como estrategia de cortesía — Conditionals as politeness](#entry-608)\n* [Entrada 594: Condicional cero — Zero conditional](#entry-594)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7537bd522f278b0810aef2097bd173cf43e9a3140377844ab1f8fe332a81d884",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T11:30:25.295Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:06:52.909Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:06:52.909Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-chat-20261002-2045-sol-b10a-ticket07-next08.json"
+}

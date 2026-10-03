@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261003-0245-sol-5f2a9-t05-close-next06",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1014",
+          "sha256": "73e98a63144ba5084194da01117925c22e89d59d838efbdcf62ff82985ede184",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1014",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5e13b39b-fccd-43d1-bd04-31dbb9758e99",
+                "ticketId": "R44-CORPUS-1014",
+                "code": "MLS-V02-0548",
+                "idempotencyKey": "R44-CORPUS-1014:MLS-V02-0548:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bac38ed28078df9bef5bb682e42ed97ef68996a3b0e1737274f475f5ba507b4b",
+                "sourceSha256": "40171f0b9ac6812fa1f0ee1719920bdd7a72f628982529855a660321a197aab3",
+                "committedMs": 1790996835801,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "1240515d11c6d73cee3b7259930090fa88acbe9c2928dfb0f6142bd5a16a676d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1014",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "02f8a75d-7d4a-47af-a3bd-d8e4f76f53eb",
+                "ticketId": "R44-CORPUS-1014",
+                "code": "MLS-V02-0549",
+                "idempotencyKey": "R44-CORPUS-1014:MLS-V02-0549:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "156f2a4b541fa98642c03748260738bcef837a5bab30f715370fd4a2e2ed5894",
+                "sourceSha256": "8e6a1fff909705da49b2d238956b3ac502bcecf167568cbd4ce34317702cecbf",
+                "committedMs": 1790996836169,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "43e18b0f6128c5ba2bf1095ce9cec337862e3a7bfe0b06b9b6151f8a2ae34026",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1014",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ccda17f4-6f18-48fb-a818-c4c1b6145c54",
+                "ticketId": "R44-CORPUS-1014",
+                "code": "MLS-V02-0550",
+                "idempotencyKey": "R44-CORPUS-1014:MLS-V02-0550:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "20bc8318382039db25fce4447e4422d1bb3eda69132ecc1a22c214a9102aeba2",
+                "sourceSha256": "fe56e3152fb71d670b6870241a85663393a491f8740baa7e1f691da64f255671",
+                "committedMs": 1790996836547,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "102806e27378c1fb5ac8dbef9c7ba257ff9c58f9a799b408e1f6def4d153d783",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1014",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c83333dd-8e20-45be-b282-4eab25a40895",
+                "ticketId": "R44-CORPUS-1014",
+                "code": "MLS-V02-0551",
+                "idempotencyKey": "R44-CORPUS-1014:MLS-V02-0551:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9c3110350a645b63fdcfad9c59dfeb28b409ab9367c02e8dc92005be0b785093",
+                "sourceSha256": "15f09d31cc71813b46def52b947fa6e2b40bc0ea81a3d22da09e942b3a071bd4",
+                "committedMs": 1790996836944,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "fd29fda76f175dfec697aa8d59226bbedaf5512a9ade44e50e8b0963e9b271fb",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1014",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "31080f25-8d13-4bd6-afb2-91b0cf011f28",
+                "ticketId": "R44-CORPUS-1014",
+                "code": "MLS-V02-0552",
+                "idempotencyKey": "R44-CORPUS-1014:MLS-V02-0552:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "060ddc1f358dce4dd0164ae30c06383afcef58ee978c40496be43bcbe1a339d6",
+                "sourceSha256": "8403fc16fa7e2e79d2812a405d192d806a107a7e3e828a3c3e560dfeece008f6",
+                "committedMs": 1790996837329,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "cfadeafdcb56266f2cc4df3b240a92145a001203bd0b19f34abfda29890cfeac",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-eea5da7a-6805-4c3b-af8b-98c1935788af",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "73e98a63144ba5084194da01117925c22e89d59d838efbdcf62ff82985ede184"
+          }
+        },
+        "completedAt": "2026-10-03T03:07:17.767Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-3d677687-c78e-42ea-bbe6-b10bbfd59a70",
+          "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1015",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997137835,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0553",
+                "path": "portugues/MLS-V02-0553.json",
+                "sha256": "fc32c6aa6e9af374158d43bc61f12de7e2c82b043392d382b0e6f34e96cd06d1"
+              },
+              {
+                "code": "MLS-V02-0554",
+                "path": "portugues/MLS-V02-0554.json",
+                "sha256": "f1be31a431ec47eeb98ac88a603fd664079544993f702d735c0d427a52ee8646"
+              },
+              {
+                "code": "MLS-V02-0555",
+                "path": "portugues/MLS-V02-0555.json",
+                "sha256": "32c329bbe95e8219689872d03142715d13c798ba1ab8769e5455c3c53b9cdebc"
+              },
+              {
+                "code": "MLS-V02-0556",
+                "path": "portugues/MLS-V02-0556.json",
+                "sha256": "c72342b929fdb91126f80527f4ae858643a4b2baee3bca04c803627fd613e37e"
+              },
+              {
+                "code": "MLS-V02-0557",
+                "path": "portugues/MLS-V02-0557.json",
+                "sha256": "29d016e858e307450e1f993f2a55ff76fbc1764af07aa800bd85e760c61e9927"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1015",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0553",
+                "path": "portugues/MLS-V02-0553.json",
+                "sha256": "fc32c6aa6e9af374158d43bc61f12de7e2c82b043392d382b0e6f34e96cd06d1"
+              },
+              {
+                "code": "MLS-V02-0554",
+                "path": "portugues/MLS-V02-0554.json",
+                "sha256": "f1be31a431ec47eeb98ac88a603fd664079544993f702d735c0d427a52ee8646"
+              },
+              {
+                "code": "MLS-V02-0555",
+                "path": "portugues/MLS-V02-0555.json",
+                "sha256": "32c329bbe95e8219689872d03142715d13c798ba1ab8769e5455c3c53b9cdebc"
+              },
+              {
+                "code": "MLS-V02-0556",
+                "path": "portugues/MLS-V02-0556.json",
+                "sha256": "c72342b929fdb91126f80527f4ae858643a4b2baee3bca04c803627fd613e37e"
+              },
+              {
+                "code": "MLS-V02-0557",
+                "path": "portugues/MLS-V02-0557.json",
+                "sha256": "29d016e858e307450e1f993f2a55ff76fbc1764af07aa800bd85e760c61e9927"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0553",
+              "MLS-V02-0554",
+              "MLS-V02-0555",
+              "MLS-V02-0556",
+              "MLS-V02-0557"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997137835,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-5f2a9",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997137835,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0553",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 553,
+                "title": "Verbos que seleccionan com",
+                "level": "B1",
+                "part": "Voz, construcciones con se y estructura argumental — Voz, construções com se e estrutura argumental",
+                "chapter": "Transitividad, valencia y complementación verbal — Transitividade, valência e complementação verbal",
+                "articleMarkdown": "#### En pocas palabras\n\nAlgunos verbos portugueses seleccionan un complemento introducido por la preposición **com**. Esa preposición forma parte de su **regencia verbal**, es decir, del patrón con el que el verbo organiza uno de sus complementos.\n\nEn **Ele concorda com a proposta**, *concordar* selecciona **com** y el grupo **com a proposta** completa la relación expresada por el verbo.\n\n#### Cómo funciona\n\nEntre los verbos frecuentes con **com** están **concordar com**, **lidar com**, **sonhar com** y **contar com** en determinados sentidos. La preposición introduce el complemento completo: **concordar com a decisão**, **lidar com problemas**, **sonhar com uma viagem**.\n\nLa regencia depende del significado concreto del verbo. **Contar com alguém**, por ejemplo, puede significar “poder contar con alguien” o “tener a alguien disponible”, mientras otros usos de *contar* siguen estructuras distintas, como **contar uma história**.\n\nNo todo grupo con **com** es un complemento seleccionado. En **Ela viajou com a irmã**, *com a irmã* expresa compañía; el verbo *viajar* puede aparecer sin ese grupo. En **Ela concordou com a irmã**, en cambio, *com a irmã* forma parte del patrón semántico de *concordar*.\n\nPor eso conviene aprender el verbo junto con su preposición y con ejemplos completos, en lugar de memorizar **com** de forma aislada.\n\n#### Ejemplos\n\n* **Ele concorda com a proposta.**  \n  *(Él está de acuerdo con la propuesta.)*  \n  *Concordar* selecciona un complemento con **com**.\n\n* **Precisamos lidar com esse problema.**  \n  *(Tenemos que lidiar con ese problema.)*  \n  *Lidar* se construye aquí con **com**.\n\n* **Ela sonhou com a viagem.**  \n  *(Ella soñó con el viaje.)*  \n  *Sonhar* selecciona **com** en esta construcción.\n\n#### Observación importante\n\nLa presencia de **com** no basta para identificar la función del grupo preposicional. Puede expresar un argumento seleccionado por el verbo o una circunstancia más libre, como compañía o instrumento.\n\nAdemás, una traducción parecida al español no garantiza una regencia idéntica. La selección debe comprobarse en el portugués y en el significado específico del verbo.\n\n#### Entradas relacionadas\n\n[551. Verbos que selecionam em](#entrada-551) · [552. Verbos que selecionam a](#entrada-552) · [554. Verbos com dupla regência](#entrada-554) · [555. Mudança de sentido pela regência](#entrada-555) · [498. Regência verbal](#entrada-498)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-d2aea681d9e9b2f92f314894322625fb885e0503c06877e57c1f094e6ed4e0d9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:26:51.267Z"
+              },
+              {
+                "code": "MLS-V02-0554",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 554,
+                "title": "Preposición a",
+                "level": "A1",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa preposición **a** introduce relaciones como dirección, destino, tiempo o ciertas expresiones fijas. En **Vou a pé até o centro**, **a** forma parte de la expresión **a pé**.\n\nTambién aparece con algunos verbos que la seleccionan y puede combinarse con artículos definidos.\n\n#### Cómo funciona\n\nCon movimiento o destino, aparece en construcciones como **ir a algum lugar**: **Fui ao mercado**. En la norma formal, **ir a** puede alternar con otras preposiciones según el tipo de desplazamiento y el matiz.\n\nTambién aparece en expresiones temporales: **A reunião começa às oito**. En este caso, **às** resulta de **a + as**.\n\nCuando **a** se combina con artículos definidos, se forman **ao, à, aos, às**: **ao banco, à escola, aos domingos, às três horas**. La forma **à** lleva acento grave porque representa la fusión de la preposición **a** con el artículo femenino **a**.\n\n#### Ejemplos\n\n* **Vou a pé até o centro.**  \n  *(Voy a pie hasta el centro.)*  \n  **A pé** es una expresión fija.\n\n* **Fui ao mercado.**  \n  *(Fui al mercado.)*  \n  **Ao** resulta de **a + o**.\n\n* **A aula começa às nove.**  \n  *(La clase empieza a las nueve.)*  \n  **Às** combina la preposición con el artículo plural.\n\n#### Observación importante\n\nLa preposición **a** no debe confundirse con el artículo femenino **a**. En **a escola**, la primera palabra es artículo; en **vou à escola**, aparecen la preposición **a** y el artículo **a** fusionados.\n\nAdemás, las preposiciones no coinciden palabra por palabra con el español. Conviene analizar la construcción portuguesa completa.\n\n#### Entradas relacionadas\n\n[552. Verbos que selecionam a](#entrada-552) · [555. Preposição ante](#entrada-555) · [557. Preposição até](#entrada-557) · [466. Infinitivo pessoal depois de preposição](#entrada-466) · [596. A + aquele/aquela/aquilo](#entrada-596)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-93cc196a792527b98696f0ac1b4de0e815ee2bac10dbf32691b2b227a9b92c54",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:27:21.069Z"
+              },
+              {
+                "code": "MLS-V02-0555",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 555,
+                "title": "Preposición ante",
+                "level": "B1",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa preposición **ante** significa, en muchos contextos, **“frente a”, “delante de” o “ante una situación”**. En portugués brasileño actual aparece sobre todo en registros escritos, formales, jurídicos o administrativos.\n\nEn **Ante a dúvida, consulte o regulamento**, **ante** introduce la circunstancia frente a la cual se toma una decisión.\n\n#### Cómo funciona\n\n**Ante** puede introducir una situación, problema o hecho que sirve como marco para una reacción: **ante o risco**, **ante as dificuldades**, **ante a necessidade de mudança**.\n\nTambién puede aparecer con personas o autoridades, aunque en muchos contextos formales **perante** es una alternativa muy frecuente: **comparecer perante o juiz**. En el habla cotidiana suelen resultar más naturales expresiones como **diante de** o reformulaciones equivalentes.\n\nLa preposición **ante** introduce directamente su complemento: **ante a situação**, **ante os fatos**. No necesita otra preposición adicional.\n\nA diferencia de **a**, no forma contracciones como **ao/à**. Se escribe **ante a lei**, **ante o problema**, manteniendo la preposición y el artículo separados.\n\n#### Ejemplos\n\n* **Ante a dúvida, consulte o regulamento.**  \n  *(Ante la duda, consulte el reglamento.)*  \n  **Ante** introduce la situación considerada.\n\n* **Ante os fatos, a direção mudou de decisão.**  \n  *(Ante los hechos, la dirección cambió de decisión.)*  \n  Los hechos funcionan como marco de reacción.\n\n* **Ele permaneceu calmo ante a pressão.**  \n  *(Permaneció tranquilo ante la presión.)*  \n  **Ante** expresa la situación frente a la cual se mantiene esa actitud.\n\n#### Observación importante\n\n**Ante** no tiene la misma frecuencia que sus equivalentes cotidianos. En buena parte del portugués brasileño hablado, **diante de** es más neutral en muchos contextos.\n\nTambién conviene distinguir **ante** de **perante**: ambas pueden aproximarse en significado, pero **perante** es especialmente frecuente en relaciones formales con autoridades, normas o instituciones.\n\n#### Entradas relacionadas\n\n[554. Preposição a](#entrada-554) · [556. Preposição após](#entrada-556) · [565. Preposição perante](#entrada-565) · [557. Preposição até](#entrada-557) · [466. Infinitivo pessoal depois de preposição](#entrada-466)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-ad797b20e7bf3723eec4e69caf649c32ad0a301784e9b5d36ec449c59a6ebdff",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T06:27:51.183Z"
+              },
+              {
+                "code": "MLS-V02-0556",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 556,
+                "title": "Preposición após",
+                "level": "B1",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa preposición **após** indica que una situación ocurre **después de otra**. En **Após a reunião, fomos embora**, la salida ocurre después de que termina la reunión.\n\nEn muchos contextos equivale a **depois de**, aunque **após** suele ser más frecuente en registros escritos, formales o cuidados.\n\n#### Cómo funciona\n\n**Após** puede introducir un sustantivo o grupo nominal: **após o almoço**, **após a aula**, **após várias tentativas**. Ese complemento establece el punto de referencia temporal a partir del cual sucede otra acción.\n\nTambién puede combinarse con infinitivo: **Após terminar o relatório, ela foi embora**. En este caso, la construcción expresa que una acción ocurre primero y otra después.\n\nA diferencia de **depois**, **após** ya funciona como preposición por sí misma cuando lleva complemento: **após a reunião**. Con **depois**, normalmente se usa **de** delante del complemento: **depois da reunião**.\n\nLa contracción con artículos no se produce dentro de **após**. Por eso se dice **após a reunião**, **após o almoço**, no formas fusionadas equivalentes a *da* o *do*.\n\n#### Ejemplos\n\n* **Após o almoço, voltamos ao trabalho.**  \n  *(Después del almuerzo, volvimos al trabajo.)*  \n  **Após o almoço** sitúa temporalmente la acción de volver.\n\n* **Ela ligou para mim após a entrevista.**  \n  *(Ella me llamó después de la entrevista.)*  \n  El complemento **a entrevista** funciona como referencia temporal.\n\n* **Após terminar o curso, ele mudou de cidade.**  \n  *(Después de terminar el curso, él se mudó de ciudad.)*  \n  Aquí **após** introduce un infinitivo.\n\n#### Observación importante\n\n**Após** no debe confundirse con **atrás**. **Após** establece posterioridad respecto de un evento: **após a reunião**. **Atrás** suele localizar algo en una posición posterior o expresar tiempo transcurrido en ciertas construcciones, como **há dois anos atrás**, aunque esa combinación puede considerarse redundante en registros cuidados.\n\nEn conversación brasileña, **depois de** suele ser más frecuente y neutral que **após**, pero ambas opciones son correctas cuando la estructura lo permite.\n\n#### Entradas relacionadas\n\n[554. Preposição a](#entrada-554) · [555. Preposição ante](#entrada-555) · [557. Preposição até](#entrada-557) · [558. Preposição com](#entrada-558) · [466. Infinitivo pessoal depois de preposição](#entrada-466)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9204233902e204a72061251ca32cd90f4544c882bfaaade99374b921a929e8e4",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:57:43.924Z"
+              },
+              {
+                "code": "MLS-V02-0557",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 557,
+                "title": "Preposición até",
+                "level": "A1",
+                "part": "Preposiciones, contracciones y crase — Preposições, contrações e crase",
+                "chapter": "Preposiciones y locuciones prepositivas — Preposições e locuções prepositivas",
+                "articleMarkdown": "#### En pocas palabras\n\nLa preposición **até** marca un **límite**. Ese límite puede ser de lugar, tiempo o recorrido. En **Caminhei até a estação**, indica el punto final del trayecto: la estación.\n\nEn español suele corresponder a **hasta**.\n\n#### Cómo funciona\n\nCon lugares, **até** señala adónde llega un movimiento: **Vou até o mercado**. Con tiempo, marca el momento final de una situación: **Trabalho até as seis**.\n\nTambién puede aparecer con personas o acontecimientos como punto límite: **Esperei até o fim da reunião**.\n\nDelante de artículo definido pueden encontrarse formas como **até o** y **até a**. En el uso brasileño también existen contracciones como **até ao/até à** en ciertos registros y variedades, pero **até o/até a** son muy frecuentes.\n\n#### Ejemplos\n\n* **Caminhei até a estação.**  \n  *(Caminé hasta la estación.)*  \n  La estación es el límite del recorrido.\n\n* **Vou ficar aqui até amanhã.**  \n  *(Voy a quedarme aquí hasta mañana.)*  \n  **Até amanhã** marca un límite temporal.\n\n* **A loja fica aberta até as oito.**  \n  *(La tienda permanece abierta hasta las ocho.)*  \n  Las ocho marcan el final del período.\n\n#### Observación importante\n\n**Até** no siempre indica movimiento. En **até amanhã** o **até as oito**, expresa un límite temporal.\n\nTampoco debe confundirse con **até que**, que introduce una oración: **Esperei até que ele chegasse**. Esa construcción tiene una estructura diferente.\n\n#### Entradas relacionadas\n\n[555. Preposição ante](#entrada-555) · [556. Preposição após](#entrada-556) · [558. Preposição com](#entrada-558) · [559. Preposição contra](#entrada-559) · [466. Infinitivo pessoal depois de preposição](#entrada-466)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-52515fefb973c8a7b84d0f87d961c87c5065ebbb73abeaba3f358316dc54a12b",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T05:58:16.232Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:07:19.053Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:07:19.053Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261003-0245-sol-5f2a9/05-submit-next06.json"
+}

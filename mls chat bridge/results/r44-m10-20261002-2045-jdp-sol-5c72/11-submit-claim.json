@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-5c72-ticket07-close-next",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0680",
+          "sha256": "2e3fdb785e5bb6900bf6f3d500e5175ca238a3a3e1490d2a9fe5183be98ef1f6",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0680",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f398d5a8-5c21-4e9c-8698-5db02fb586ee",
+                "ticketId": "R43-EMERGENCY-0680",
+                "code": "MLS-V06-1002",
+                "idempotencyKey": "R43-EMERGENCY-0680:MLS-V06-1002:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d7ebab4b08bdcf2fa05cd2e870dbcc67fb76dd26739dcd33e3ed1b378ecdb323",
+                "sourceSha256": "35a6e30959e93b2bff43abe9c4db045f5b284b7e8899d104e2e5cd5fc3990dc1",
+                "committedMs": 1790996830392,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "1f47aad38ad3347bb3f74552639f0f110b70b3c5e04733065fac2555cca773bd",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0680",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2ada9587-deb2-43e1-9ebf-263505aec9a1",
+                "ticketId": "R43-EMERGENCY-0680",
+                "code": "MLS-V06-1003",
+                "idempotencyKey": "R43-EMERGENCY-0680:MLS-V06-1003:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0184b3f4e38a1f0d114997d8645b68dd10a5d65cafc3190ff6c022bb6e34ba8c",
+                "sourceSha256": "b22585d3fc3209d62f886a7618a5800f782ccf5b5bb7d25532d12e8c5d77af0f",
+                "committedMs": 1790996830812,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3231fd8d7d1f5a8566c869eaa8db357d8c542613057e71dd151dd5de82e41293",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0680",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c9934e68-436e-4b5d-be50-ac963e6b9d65",
+                "ticketId": "R43-EMERGENCY-0680",
+                "code": "MLS-V06-1004",
+                "idempotencyKey": "R43-EMERGENCY-0680:MLS-V06-1004:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "92fa21d624a32b3eef55685e8099ec96e71f647173297b0013f1a77cab6862af",
+                "sourceSha256": "008e249a000e19707accf3054a782a43eb70c4ce59fed052c277d4f75c32e4df",
+                "committedMs": 1790996831157,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c847cc079c7f7a0ba439bad3cda5dd89b9919294099d05d10d1702d31486d932",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0680",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "929e73a5-9183-4891-bc4f-982f6a38c0d2",
+                "ticketId": "R43-EMERGENCY-0680",
+                "code": "MLS-V06-1005",
+                "idempotencyKey": "R43-EMERGENCY-0680:MLS-V06-1005:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "3a9901d8b672f778ebc8590e35ea69f1ef299130773470ee73b8325912f7f422",
+                "sourceSha256": "ad2e4bf60f6494d4a66336c7a3440c3d0eb210601d0b32896b1867671633865d",
+                "committedMs": 1790996831533,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "38adf743b67d8de69c73b9c5e63417922fcffd729e454ae4dc0dff78daf10fdc",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0680",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1c88dd7b-cf60-4825-ba02-632ece0ba028",
+                "ticketId": "R43-EMERGENCY-0680",
+                "code": "MLS-V06-1006",
+                "idempotencyKey": "R43-EMERGENCY-0680:MLS-V06-1006:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8f20dfbc5804f2c971a8fe497298b95e855df599d529bf75d0ba43e83e78a866",
+                "sourceSha256": "b371025f53cc362bb6c2e342a7bb3e16b3c4fc080484652495e70cceceb5a85a",
+                "committedMs": 1790996831915,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "41c77d85e01c137feede97026e9edd7671bbf3e7a32c8ec07487df3550d7ca46",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-8bab9a3e-b4f0-44f2-9712-4287f4030985",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "2e3fdb785e5bb6900bf6f3d500e5175ca238a3a3e1490d2a9fe5183be98ef1f6"
+          }
+        },
+        "completedAt": "2026-10-03T03:07:12.359Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-a10083cf-ef17-44fc-9a13-8513de0f7fb2",
+          "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0681",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997132486,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V06-1007",
+                "path": "japones/MLS-V06-1007.json",
+                "sha256": "e1fc1ef0aea065264d4d18e8d97a760ae946795db9c8976df6dad5a5b50b5696"
+              },
+              {
+                "code": "MLS-V06-1008",
+                "path": "japones/MLS-V06-1008.json",
+                "sha256": "e56047640f0e68a92f14327207dc88922b69beb813ab13fbd2829ff9e2b3b7a9"
+              },
+              {
+                "code": "MLS-V06-1009",
+                "path": "japones/MLS-V06-1009.json",
+                "sha256": "653b26857da747923e8d367a5d06b1795c003eecafd8ee581662d2ac9282fef8"
+              },
+              {
+                "code": "MLS-V06-1010",
+                "path": "japones/MLS-V06-1010.json",
+                "sha256": "148229fea3b485fe833f71675840562994f280b4102e3f76a26411d455941671"
+              },
+              {
+                "code": "MLS-V06-1012",
+                "path": "japones/MLS-V06-1012.json",
+                "sha256": "1f38fbbf35ac7dbd92b5a18ad1c92f76f35da42732deb6f877836a969e970829"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0681",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V06-1007",
+                "path": "japones/MLS-V06-1007.json",
+                "sha256": "e1fc1ef0aea065264d4d18e8d97a760ae946795db9c8976df6dad5a5b50b5696"
+              },
+              {
+                "code": "MLS-V06-1008",
+                "path": "japones/MLS-V06-1008.json",
+                "sha256": "e56047640f0e68a92f14327207dc88922b69beb813ab13fbd2829ff9e2b3b7a9"
+              },
+              {
+                "code": "MLS-V06-1009",
+                "path": "japones/MLS-V06-1009.json",
+                "sha256": "653b26857da747923e8d367a5d06b1795c003eecafd8ee581662d2ac9282fef8"
+              },
+              {
+                "code": "MLS-V06-1010",
+                "path": "japones/MLS-V06-1010.json",
+                "sha256": "148229fea3b485fe833f71675840562994f280b4102e3f76a26411d455941671"
+              },
+              {
+                "code": "MLS-V06-1012",
+                "path": "japones/MLS-V06-1012.json",
+                "sha256": "1f38fbbf35ac7dbd92b5a18ad1c92f76f35da42732deb6f877836a969e970829"
+              }
+            ],
+            "remaining": [
+              "MLS-V06-1007",
+              "MLS-V06-1008",
+              "MLS-V06-1009",
+              "MLS-V06-1010",
+              "MLS-V06-1012"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997132486,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-jdp-sol-5c72",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997132486,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V06-1007",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1007,
+                "title": "〜ん arcaico: reconocimiento",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\nEn textos literarios, arcaizantes o fórmulas heredadas puede aparecer un **〜ん** que procede históricamente del auxiliar clásico **む（ん）**. Esta forma expresaba valores como intención, conjetura o proyección hacia una situación todavía no realizada. En japonés moderno no constituye una terminación productiva de uso cotidiano y suele reconocerse por construcciones fijadas.\n\nUn ejemplo característico es **あらん限りの力** “todas las fuerzas de que se disponga / toda la fuerza posible”. **あらん** conserva una forma histórica vinculada a **ある** y al antiguo **む**, no al **ん** explicativo de **〜んです**.\n\n#### Cómo funciona\n\nEl japonés clásico empleaba el auxiliar **む**, cuya pronunciación evolucionó históricamente hacia **ん** en determinados períodos y tradiciones escritas. Sus valores dependían del contexto e incluían voluntad del hablante, inferencia, posibilidad proyectada y otras lecturas modales.\n\nEn expresiones conservadas, **ん** puede aparecer unido a una base verbal: **知らんとする**, **言わんとする**, **あらん限り**. La construcción **〜んとする** puede presentar una acción que está a punto de realizarse o una intención de realizarla, según el contexto y el registro.\n\nEstas formas tienen sabor literario, solemne o histórico. En prosa contemporánea ordinaria suelen corresponder a expresiones más transparentes como **〜ようとする**, **〜だろう** u otras construcciones modernas, según el valor concreto.\n\nEl análisis debe hacerse sobre la construcción completa, porque el antiguo **む／ん** no tenía un único equivalente español.\n\n#### Ejemplos\n\n* **あらん限りの力を尽くす。** — Emplear toda la fuerza posible.\n* **言わんとすること** — lo que se pretende decir.\n* **まさに出発せんとする。** — Estar justamente a punto de partir; estilo literario.\n* **知らんと欲す。** — Desear saber; formulación arcaizante y marcadamente escrita.\n\n#### Observación importante\n\nEste **ん** histórico no debe confundirse con el **ん** de **〜んです**, que procede de **の** y cumple funciones explicativas, ni con ciertos **〜ん** negativos dialectales o coloquiales. La coincidencia gráfica no implica un mismo origen ni una misma función.\n\nLa referencia interna suministrada para esta entrada contiene un ejemplo con **分かりません** que no demuestra el fenómeno del título. Por coherencia lingüística, el análisis se basa en el **ん** arcaico derivado de **む**, que sí corresponde al tema indicado.\n\n#### Entradas relacionadas\n\n[Entrada 1005: Tema-rema](#entry-1005) · [Entrada 1006: 〜ざる](#entry-1006) · [Entrada 1008: ものか rechazo retórico](#entry-1008) · [Entrada 1009: Cambio de estilo en subordinadas](#entry-1009)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-89f22e2b3be9a3486cdddd44685969ab8635bd4fadb52125717b316a35433559",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:21:24.664Z"
+              },
+              {
+                "code": "MLS-V06-1008",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1008,
+                "title": "ものか rechazo retórico",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Sintaxis y pragmática avanzada C1–C2 — 高度な統語論・語用論 C1–C2",
+                "articleMarkdown": "#### En pocas palabras\n\n**ものか** puede aparecer al final de una oración como una pregunta retórica que expresa rechazo fuerte, incredulidad o negativa enfática. Aunque formalmente contiene **か**, no busca normalmente una respuesta informativa. El sentido global se aproxima a “¡de ninguna manera!”, “¡ni hablar!” o “¿cómo voy a…?”.\n\nEn **そんなことを信じるものか。** “¡Ni hablar de creer algo así!”, el hablante rechaza con fuerza la posibilidad de creerlo.\n\n#### Cómo funciona\n\nLa construcción suele seguir a una forma llana: **行くものか**, **負けるものか**, **忘れるものか**. El contenido anterior presenta una posibilidad o acción y **ものか** la rechaza retóricamente. El efecto surge de la oración completa y de la postura enfática del hablante.\n\nEn conversación aparece con frecuencia la variante **もんか**, más coloquial: **そんな店、二度と行くもんか。** “¡No vuelvo a ese lugar ni loco!”. También pueden aparecer formas reforzadas como **ものかよ** o **もんか**, cuyo tono depende de la relación interpersonal y la prosodia.\n\nLa construcción puede expresar determinación negativa: **負けるものか。** no describe simplemente que “no se pierde”, sino una postura del tipo “¡no pienso perder!” o “¡no voy a dejar que me derroten!”.\n\nPor su carga emotiva, es más frecuente en diálogo, narración y estilos expresivos que en exposición neutral.\n\n#### Ejemplos\n\n* **そんなことを信じるものか。** — ¡De ninguna manera voy a creer algo así!\n* **負けるものか。** — ¡No pienso perder!\n* **あんな人に頼むものか。** — ¡Ni hablar de pedírselo a una persona así!\n* **そんな店、二度と行くもんか。** — ¡No vuelvo a ese lugar ni loco!; variante coloquial.\n\n#### Observación importante\n\n**ものか** no equivale a una negación gramatical simple como **〜ない**. **行かない** puede ser una constatación neutral: “no voy”. **行くものか** convierte esa posibilidad en objeto de rechazo retórico y suele transmitir emoción, desafío o indignación.\n\nTampoco toda secuencia **もの + か** tiene este valor. **もの** puede funcionar en otras construcciones gramaticales y **か** puede ser una partícula interrogativa ordinaria. La lectura de rechazo depende del patrón final, la entonación y el contexto discursivo.\n\n#### Entradas relacionadas\n\n[Entrada 1006: 〜ざる](#entry-1006) · [Entrada 1007: 〜ん arcaico: reconocimiento](#entry-1007) · [Entrada 1009: Cambio de estilo en subordinadas](#entry-1009) · [Entrada 1004: Rechazo elíptico](#entry-1004)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-48c0582682ecec10409adcfdb0d66da974932f2357f6f4e231ba65fcbf416dbe",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:22:32.894Z"
+              },
+              {
+                "code": "MLS-V06-1009",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1009,
+                "title": "Cambio de estilo en subordinadas",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Norma, estilo y elección avanzada C2 — 規範・文体・高度な選択 C2",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **cambio de estilo en subordinadas** describe cómo una oración japonesa puede combinar un estilo principal cortés con cláusulas internas en forma llana, o mantener marcas de cortesía en ciertas subordinadas cuando la construcción lo permite. La elección no es libre: depende del tipo de subordinación, del género textual y del efecto discursivo.\n\nEn **明日行くと思います。** “Creo que iré mañana”, la cláusula citada indirectamente **明日行く** aparece en forma llana, mientras el predicado principal **思います** lleva cortesía. Esta combinación es completamente normal.\n\n#### Cómo funciona\n\nMuchas estructuras subordinadas seleccionan una forma llana antes del elemento que las integra. Las cláusulas relativas son un caso claro: **昨日買った本** “el libro que compré ayer”. Una forma como **昨日買いました本** no funciona como relativa estándar contemporánea, aunque la oración independiente **昨日買いました** sí sea cortés.\n\nEn cita indirecta con **と思う**, la forma llana es también la opción habitual: **来ると思います**, **来ないと思います**, **来たと思います**. La cortesía se concentra en el predicado principal y establece la relación con el interlocutor.\n\nOtras subordinadas admiten mayor variación. Con **ので**, por ejemplo, son posibles **時間がないので、帰ります。** y **時間がありませんので、失礼します。** La segunda mantiene cortesía dentro de la cláusula causal y resulta frecuente en atención profesional o comunicación formal.\n\nCon conectores como **けれども／が**, una forma cortés puede aparecer antes del conector: **少し難しいですが、検討します。** El límite entre subordinación sintáctica y conexión discursiva explica parte de esta flexibilidad.\n\n#### Ejemplos\n\n* **明日行くと思います。** — Creo que iré mañana; subordinada llana y principal cortés.\n* **昨日買った本です。** — Es el libro que compré ayer; la relativa permanece llana.\n* **時間がありませんので、先に失礼します。** — Como no tengo tiempo, me retiraré antes; cortesía mantenida en la causal.\n* **難しいですが、可能性はあります。** — Es difícil, pero existe una posibilidad; estilo cortés antes del conector.\n\n#### Observación importante\n\nNo debe formularse la regla como “las subordinadas siempre van en estilo llano”. Esa generalización funciona como primera aproximación para relativas y muchas citas indirectas, pero existen subordinadas y conectores que admiten o favorecen formas corteses según el contexto.\n\nTampoco significa que mezclar estilos sea automáticamente incoherente. Una alternancia puede ser gramatical y estilísticamente adecuada si distingue contenido interno y relación con el interlocutor. Lo problemático es cambiar de registro sin función reconocible o usar una forma cortés en una construcción que sintácticamente exige la forma llana.\n\n#### Entradas relacionadas\n\n[Entrada 1008: ものか rechazo retórico](#entry-1008) · [Entrada 1010: Estilo llano presente](#entry-1010) · [Entrada 1011: Elección estilística consciente](#entry-1011) · [Entrada 1019: Elipsis vs explicitud](#entry-1019)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-8fcb43b7be145f110725b07fa3b54442943bf6ab1c86045e434c9ff46656154c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:23:42.436Z"
+              },
+              {
+                "code": "MLS-V06-1010",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1010,
+                "title": "Estilo llano presente",
+                "level": "C1",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Norma, estilo y elección avanzada C2 — 規範・文体・高度な選択 C2",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **estilo llano no pasado（非過去）** usa formas como **読む**, **高い** o **静かだ** sin **です／ます** y sin marca de pasado. No corresponde únicamente al “presente” español: según el predicado y el contexto puede expresar hábito, verdad general, estado actual o un evento futuro.\n\nEn **毎日、本を読む。** “Leo libros todos los días”, **読む** es una forma llana no pasada y expresa un hábito. En **明日、本を読む。** la misma forma se interpreta como futuro: “Mañana leeré un libro”.\n\n#### Cómo funciona\n\nEn los verbos japoneses, la oposición básica es normalmente **pasado frente a no pasado**, no “presente frente a futuro” como categorías morfológicas separadas. Por eso **読む** puede abarcar situaciones habituales o futuras; el tiempo concreto se recupera mediante adverbios, contexto y tipo de predicado.\n\nCon verbos dinámicos, la forma no pasada simple no suele describir una acción que está ocurriendo justo ahora. **今、本を読む** puede significar “ahora voy a leer”, mientras **今、本を読んでいる** expresa naturalmente “ahora estoy leyendo”. Aquí **〜ている** aporta un valor aspectual progresivo.\n\nLos predicados estativos se comportan de otra manera. **分かる** puede describir un estado actual de comprensión, y **高い** puede referirse a una propiedad presente: **この山は高い。** “Esta montaña es alta”.\n\nEn nombres y な-adjetivos, el estilo llano no pasado suele usar **だ** en posición final: **学生だ**, **静かだ**. Sin embargo, **だ** no aparece en todos los entornos subordinados y su distribución depende de la construcción.\n\n#### Ejemplos\n\n* **毎日、本を読む。** — Leo libros todos los días; hábito.\n* **明日、東京へ行く。** — Mañana iré a Tokio; lectura futura.\n* **この問題は分かる。** — Entiendo este problema; estado actual.\n* **この部屋は静かだ。** — Esta habitación está tranquila; predicado nominal/adjetival en estilo llano.\n\n#### Observación importante\n\nLlamar a **読む** “presente” puede servir como simplificación inicial, pero resulta incompleto si se omite que es una forma **no pasada**. La misma morfología participa en hábitos, generalizaciones y futuros, y el contexto decide la lectura temporal.\n\nAsimismo, **estilo llano** no significa necesariamente informalidad descuidada. Las formas llanas aparecen en conversación cercana, en subordinadas y relativas, y también constituyen la base del estilo escrito **だ／である体**. Registro y tiempo gramatical son dimensiones relacionadas, pero no idénticas.\n\n#### Entradas relacionadas\n\n[Entrada 1009: Cambio de estilo en subordinadas](#entry-1009) · [Entrada 1011: Elección estilística consciente](#entry-1011) · [Entrada 1012: Norma vs uso](#entry-1012) · [Entrada 1018: Elección です/ます vs だ/である](#entry-1018)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-48807da1e7bdc201d2f4b76d91f1b4db98e2013a638f53a90ef3542bab45e516",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:24:46.386Z"
+              },
+              {
+                "code": "MLS-V06-1012",
+                "language": "japones",
+                "languageName": "Japonés",
+                "n": 1012,
+                "title": "Norma vs uso",
+                "level": "C2",
+                "part": "Dominio avanzado — 高度な運用",
+                "chapter": "Norma, estilo y elección avanzada C2 — 規範・文体・高度な選択 C2",
+                "articleMarkdown": "#### En pocas palabras\n\nLa oposición **norma vs uso** distingue entre las formas que una institución, manual o género recomienda y las formas que realmente emplean los hablantes en distintos contextos. Ambas perspectivas son necesarias: la norma orienta la adecuación dentro de ciertos ámbitos, mientras el uso muestra la variación viva de la lengua.\n\nEn **状況に応じて表現を使い分ける必要があります。** “Es necesario diferenciar las expresiones según la situación”, la idea central no es que exista una única forma correcta, sino que la elección depende del contexto y de las convenciones pertinentes.\n\n#### Cómo funciona\n\nUna **norma** puede establecer preferencias para escritura formal, atención profesional, educación, medios o administración. Por ejemplo, una guía editorial puede exigir coherencia entre **です・ます体** y **である体**, o recomendar determinada grafía en documentos institucionales.\n\nEl **uso**, en cambio, incluye también formas coloquiales, innovaciones, variantes regionales y expresiones que quizá no coinciden con una recomendación tradicional. Que una forma sea frecuente no significa automáticamente que resulte adecuada en todos los registros; que una norma la desaconseje tampoco implica que sea inexistente o agramatical.\n\nEl contraste se observa con expresiones como **全然大丈夫です。** “Está totalmente bien”. Esta construcción es común en japonés contemporáneo afirmativo, aunque explicaciones normativas más antiguas asociaran **全然** sobre todo con la negación. Describir el uso actual y explicar una recomendación tradicional son tareas diferentes.\n\nLo mismo ocurre con keigo, ortografía y estilo: distintas instituciones pueden formular normas específicas, mientras la práctica real muestra grados variables de aceptación.\n\n#### Ejemplos\n\n* **全然大丈夫です。** — Uso afirmativo contemporáneo extendido de **全然**.\n* **すごいおいしい。** — Forma coloquial frecuente; algunas normas prefieren **すごくおいしい** en escritura cuidada.\n* **今日は行かへん。** — Forma regional de Kansai; no pertenece al estándar común, pero sigue reglas propias.\n* **です・ます体** y **である体** pueden ser ambos normativos en géneros distintos.\n\n#### Observación importante\n\n“Normativo” no significa “lingüísticamente superior” y “de uso real” no significa “adecuado en cualquier situación”. La evaluación depende de quién habla, con quién, en qué medio y bajo qué convención.\n\nEn análisis avanzado conviene separar tres preguntas: qué formas existen, dónde y quiénes las usan, y qué opción recomienda una norma concreta. Confundir estos planos convierte una preferencia editorial o social en una supuesta regla universal del idioma.\n\n#### Entradas relacionadas\n\n[Entrada 1010: Estilo llano presente](#entry-1010) · [Entrada 1011: Elección estilística consciente](#entry-1011) · [Entrada 1013: Claridad vs densidad nominal](#entry-1013) · [Entrada 1014: Edición avanzada](#entry-1014)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-49c12a81751d4c7e9b56d49f4d7a091f9b7aadb99120a507e4c462b5470a0485",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:26:51.472Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:07:13.697Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:07:13.697Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-jdp-sol-5c72/11-submit-claim.json"
+}

@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-t05-complete-claim06",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-2ec09832-834a-4a4c-a803-5ac4c2e3a83a",
+          "ticketId": "R43-EMERGENCY-0714",
+          "leaseExpiresAt": 1790997104907
+        },
+        "completedAt": "2026-10-03T03:06:45.094Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0714",
+          "sha256": "797e50c8141ec08d172660e4b442f4bf0836b3e598d23cca30613e8c8ae460cc",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0714",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "3e3ed72e-e66b-471d-bd50-b4e99d957e46",
+                "ticketId": "R43-EMERGENCY-0714",
+                "code": "MLS-V07-0179",
+                "idempotencyKey": "R43-EMERGENCY-0714:MLS-V07-0179:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "22fbd7b0d6aa8e885f519dfcbedbdedc8d7a8a8e6d57716937e084b091ebf784",
+                "sourceSha256": "29a624c36c51060f92115973f6a93c48914d6137b774cc47177c8538e686686c",
+                "committedMs": 1790996805768,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e202f5727161d7ee44b70978c901d4a624ce92c4d703a35ea8acbd8be9c6b4af",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0714",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "fc3e3817-5736-46f0-b677-117493780829",
+                "ticketId": "R43-EMERGENCY-0714",
+                "code": "MLS-V07-0180",
+                "idempotencyKey": "R43-EMERGENCY-0714:MLS-V07-0180:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6084b541407b6c988fe677606c6317e1caef5ac8caf4c1a6a49740d13fae4b29",
+                "sourceSha256": "11c20123d58871bec434cab61faae38c5fe07cb446c42e587b9b13ad0a50a82e",
+                "committedMs": 1790996806133,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ff9a7b5c3ff779b534b06a3065bc494e8dc0ddcccda81b73dff3911800434a9e",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0714",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "48fe3923-60a8-477c-8568-c1c3acbda310",
+                "ticketId": "R43-EMERGENCY-0714",
+                "code": "MLS-V07-0181",
+                "idempotencyKey": "R43-EMERGENCY-0714:MLS-V07-0181:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "e182bdf7ae9781cf04a9fa9094c017ef9368143f332384df2386a0763ce1f8a6",
+                "sourceSha256": "208159df16c3a7627f36fb09e5d2bafd1364c11ffa0141a3da8b8e39b8ea43de",
+                "committedMs": 1790996806496,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7a0603bf5f6d19fa65f58c68c4172cb29e5b9c3a99cac555b5cfaafe556d2a34",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0714",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e1430d4a-010b-46ca-8361-1babf89f2f51",
+                "ticketId": "R43-EMERGENCY-0714",
+                "code": "MLS-V07-0182",
+                "idempotencyKey": "R43-EMERGENCY-0714:MLS-V07-0182:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1ab0e4c89fa645a4c7e5378614f9444d23272e994d979fe5c3279ee19a8ec370",
+                "sourceSha256": "7a71a1eb406cfe107f6726b552f7d541ee67980bc5af62903be7d96c0c403c7f",
+                "committedMs": 1790996806872,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ab6cb25f403e06386910b2422b78c5501d4caffbf45504b85d67939aece3321f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0714",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "d240dbff-ce01-4a63-933d-421844679d01",
+                "ticketId": "R43-EMERGENCY-0714",
+                "code": "MLS-V07-0183",
+                "idempotencyKey": "R43-EMERGENCY-0714:MLS-V07-0183:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "411c40b29804d069a0a467004526d892c4082ced3d00ddd37a63bdb152fc292a",
+                "sourceSha256": "c2c337e77b7572af84d7740b952540639679191ba103d50e591cdbf4492f2369",
+                "committedMs": 1790996807213,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "30ce963b86b0588cf4f03d765cf78dc2b5173d1b351f889e5c4a3330cf4ba7b8",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-2ec09832-834a-4a4c-a803-5ac4c2e3a83a",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "797e50c8141ec08d172660e4b442f4bf0836b3e598d23cca30613e8c8ae460cc"
+          }
+        },
+        "completedAt": "2026-10-03T03:06:47.657Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-431e9e32-a896-445c-90dd-57d56870ce07",
+          "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0722",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997107772,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0226",
+                "path": "chino-taiwan/MLS-V07-0226.json",
+                "sha256": "5154de9fa45dfe899f6163ddbdadc812d258bcb19a11eab71174268925db5fb5"
+              },
+              {
+                "code": "MLS-V07-0227",
+                "path": "chino-taiwan/MLS-V07-0227.json",
+                "sha256": "b3eaa44ea3691d404a4033a3b466b0d9d9058ddda87867f47cb1cbd880fa2858"
+              },
+              {
+                "code": "MLS-V07-0229",
+                "path": "chino-taiwan/MLS-V07-0229.json",
+                "sha256": "d7b17461c07eda624aba9091525edc63912fc54b169af5dc649b074fbb8921c8"
+              },
+              {
+                "code": "MLS-V07-0230",
+                "path": "chino-taiwan/MLS-V07-0230.json",
+                "sha256": "71c78eed75ae5d5f9dc88f61bebd93c6b9446ca9b06029817b97ebb58e698c91"
+              },
+              {
+                "code": "MLS-V07-0231",
+                "path": "chino-taiwan/MLS-V07-0231.json",
+                "sha256": "c804758963c483a474d377f48111aaf10e52ffa8661db4fb31492a0b2cdd0026"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0722",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0226",
+                "path": "chino-taiwan/MLS-V07-0226.json",
+                "sha256": "5154de9fa45dfe899f6163ddbdadc812d258bcb19a11eab71174268925db5fb5"
+              },
+              {
+                "code": "MLS-V07-0227",
+                "path": "chino-taiwan/MLS-V07-0227.json",
+                "sha256": "b3eaa44ea3691d404a4033a3b466b0d9d9058ddda87867f47cb1cbd880fa2858"
+              },
+              {
+                "code": "MLS-V07-0229",
+                "path": "chino-taiwan/MLS-V07-0229.json",
+                "sha256": "d7b17461c07eda624aba9091525edc63912fc54b169af5dc649b074fbb8921c8"
+              },
+              {
+                "code": "MLS-V07-0230",
+                "path": "chino-taiwan/MLS-V07-0230.json",
+                "sha256": "71c78eed75ae5d5f9dc88f61bebd93c6b9446ca9b06029817b97ebb58e698c91"
+              },
+              {
+                "code": "MLS-V07-0231",
+                "path": "chino-taiwan/MLS-V07-0231.json",
+                "sha256": "c804758963c483a474d377f48111aaf10e52ffa8661db4fb31492a0b2cdd0026"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0226",
+              "MLS-V07-0227",
+              "MLS-V07-0229",
+              "MLS-V07-0230",
+              "MLS-V07-0231"
+            ],
+            "lease": {
+              "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997107772,
+              "active": true
+            },
+            "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997107772,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0226",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 226,
+                "title": "哪裡 como interrogativo",
+                "level": "A1",
+                "part": "Negación e interrogación — 否定與疑問",
+                "chapter": "Preguntas: 嗎, A-not-A e interrogativos — 疑問：「嗎」、正反問句與疑問詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**哪裡** (*nǎlǐ*) significa **«dónde»** y sirve para preguntar por un lugar o destino. Como otros interrogativos del mandarín, suele aparecer en la posición donde iría la información de lugar que falta.\n\n#### Cómo funciona\n\nPor ejemplo, **你昨天去哪裡？** (*Nǐ zuótiān qù nǎlǐ?*) significa «¿Adónde fuiste ayer?». En una respuesta como **我昨天去台北。** «Ayer fui a Taipéi», **台北** ocupa la posición después de **去**; en la pregunta, **哪裡** aparece en ese mismo lugar.\n\nCon verbos de ubicación también puede significar «dónde»: **你住哪裡？** «¿Dónde vives?».\n\n#### Ejemplos\n\n* **他去哪裡？** (*Tā qù nǎlǐ?*) — «¿Adónde va?».\n* **你住哪裡？** (*Nǐ zhù nǎlǐ?*) — «¿Dónde vives?».\n* **洗手間在哪裡？** (*Xǐshǒujiān zài nǎlǐ?*) — «¿Dónde está el baño?».\n\n#### Observación importante\n\nLa traducción española puede alternar entre «dónde» y «adónde» según el verbo y el contexto; **哪裡** no cambia por esa diferencia.\n\nLas preguntas con **哪裡** normalmente no necesitan **嗎**. Además, no conviene mover **哪裡** automáticamente al inicio: su posición depende de la estructura de la oración.\n\n#### Entradas relacionadas\n\n* [哪個 en preguntas — 哪個](#entry-225)\n* [嗎 pregunta sí/no — 句末「嗎」](#entry-227)\n* [呢 en pregunta elíptica — 疑問語氣「呢」](#entry-224)\n* [多少 como palabra interrogativa — 多少](#entry-228)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c3995927ad7889f567c5a837d0f6b07ad00aca7bf2c5509c06bcfd7552f88383",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:33:44.764Z"
+              },
+              {
+                "code": "MLS-V07-0227",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 227,
+                "title": "嗎 pregunta sí/no",
+                "level": "A1",
+                "part": "Negación e interrogación — 否定與疑問",
+                "chapter": "Preguntas: 嗎, A-not-A e interrogativos — 疑問：「嗎」、正反問句與疑問詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**嗎** (*ma*) es una partícula que se coloca al final de una oración para convertir una afirmación en una **pregunta de sí o no**. No cambia el orden básico de la oración.\n\n#### Cómo funciona\n\nPor ejemplo, **你是學生。** (*Nǐ shì xuéshēng.*) significa «Eres estudiante». Al añadir **嗎**, obtenemos **你是學生嗎？** (*Nǐ shì xuéshēng ma?*) — «¿Eres estudiante?». La información de la oración se mantiene; **嗎** indica que se pide confirmar o negar esa proposición.\n\nLa respuesta puede ser afirmativa o negativa según el predicado: **是。** «Sí» o **不是。** «No».\n\n#### Ejemplos\n\n* **你忙嗎？** (*Nǐ máng ma?*) — «¿Estás ocupado/a?».\n* **他今天來嗎？** (*Tā jīntiān lái ma?*) — «¿Viene hoy?».\n* **你有時間嗎？** (*Nǐ yǒu shíjiān ma?*) — «¿Tienes tiempo?».\n\n#### Observación importante\n\n**嗎** se usa para preguntas polares, no para preguntas que ya contienen palabras interrogativas como **什麼** «qué» o **哪裡** «dónde». Tampoco suele añadirse a una estructura A-not-A como **去不去**.\n\nAdemás, **是** no es necesario en todas las preguntas con **嗎**: los adjetivos y verbos pueden formar directamente el predicado, como en **你忙嗎？**.\n\n#### Entradas relacionadas\n\n* [哪裡 como interrogativo — 哪裡](#entry-226)\n* [多少 como palabra interrogativa — 多少](#entry-228)\n* [哪個 en preguntas — 哪個](#entry-225)\n* [幾 — 幾](#entry-229)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c7cf95064ef1232d9797c2895c1e49350c548683865075f07be4e7c62854272e",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:34:37.325Z"
+              },
+              {
+                "code": "MLS-V07-0229",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 229,
+                "title": "幾",
+                "level": "A1",
+                "part": "Negación e interrogación — 否定與疑問",
+                "chapter": "Preguntas: 嗎, A-not-A e interrogativos — 疑問：「嗎」、正反問句與疑問詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**幾** (*jǐ*) significa **«cuántos» o «cuántas»** cuando se pregunta por una cantidad relativamente pequeña o limitada. Suele aparecer antes de un clasificador y un sustantivo.\n\n#### Cómo funciona\n\nPor ejemplo, **你有幾個兄弟姐妹？** (*Nǐ yǒu jǐ ge xiōngdì jiěmèi?*) significa «¿Cuántos hermanos tienes?». **幾** pregunta por la cantidad, **個** es un clasificador y **兄弟姐妹** se refiere a hermanos y hermanas.\n\nLa estructura frecuente es **幾 + clasificador + sustantivo**, como **幾本書** «cuántos libros» o **幾杯咖啡** «cuántos cafés/tazas de café».\n\n#### Ejemplos\n\n* **你幾歲？** (*Nǐ jǐ suì?*) — «¿Cuántos años tienes?».\n* **你要幾杯？** (*Nǐ yào jǐ bēi?*) — «¿Cuántas tazas quieres?».\n* **今天幾號？** (*Jīntiān jǐ hào?*) — «¿Qué fecha es hoy?».\n\n#### Observación importante\n\n**幾** se diferencia de **多少** en que suele usarse cuando se espera una cantidad pequeña o acotada, aunque no existe una frontera numérica rígida válida para todos los contextos.\n\nAdemás, no siempre lleva un clasificador visible. En expresiones establecidas como **幾歲** «cuántos años» o **幾號** «qué número/qué fecha», la construcción funciona de manera distinta a **幾 + clasificador + sustantivo**.\n\n#### Entradas relacionadas\n\n* [多少 como palabra interrogativa — 多少](#entry-228)\n* [怎麼 — 怎麼](#entry-230)\n* [嗎 pregunta sí/no — 句末「嗎」](#entry-227)\n* [怎麼樣 — 怎麼樣](#entry-231)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-68238f91563174753300a97b7e7454989386270bb5aaee36d8023260c0b99e96",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:18:58.070Z"
+              },
+              {
+                "code": "MLS-V07-0230",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 230,
+                "title": "怎麼",
+                "level": "A1",
+                "part": "Negación e interrogación — 否定與疑問",
+                "chapter": "Preguntas: 嗎, A-not-A e interrogativos — 疑問：「嗎」、正反問句與疑問詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**怎麼** (*zěnme*) significa normalmente **«cómo»** y se usa para preguntar por la manera, el procedimiento o el medio para hacer algo. En mandarín suele aparecer cerca del verbo al que modifica.\n\n#### Cómo funciona\n\nPor ejemplo, **你怎麼去公司？** (*Nǐ zěnme qù gōngsī?*) significa «¿Cómo vas a la oficina?». **怎麼** pregunta de qué manera se realiza **去公司** «ir a la oficina»: caminando, en autobús, en metro, etc.\n\nTambién puede preguntar cómo se hace una acción: **這個字怎麼寫？** «¿Cómo se escribe este carácter?».\n\n#### Ejemplos\n\n* **你怎麼回家？** (*Nǐ zěnme huí jiā?*) — «¿Cómo regresas a casa?».\n* **這個怎麼用？** (*Zhège zěnme yòng?*) — «¿Cómo se usa esto?».\n* **你怎麼知道？** (*Nǐ zěnme zhīdào?*) — «¿Cómo lo sabes?».\n\n#### Observación importante\n\nSegún el contexto, **怎麼** también puede introducir una pregunta sobre la causa o una reacción de sorpresa, como **你怎麼沒來？** «¿Cómo es que no viniste? / ¿Por qué no viniste?». Ese valor no es idéntico a preguntar por un procedimiento.\n\nComo palabra interrogativa, normalmente no necesita **嗎** y suele permanecer en la posición natural de la oración.\n\n#### Entradas relacionadas\n\n* [幾 — 幾](#entry-229)\n* [怎麼樣 — 怎麼樣](#entry-231)\n* [多少 como palabra interrogativa — 多少](#entry-228)\n* [是不是…？ tag — 確認問「是不是…？」](#entry-232)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-fd91a5ec8bb160b727df2722ff6e2edb20d07bb8b483273605477d1ea196b4a7",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:19:57.447Z"
+              },
+              {
+                "code": "MLS-V07-0231",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 231,
+                "title": "怎麼樣",
+                "level": "A1",
+                "part": "Negación e interrogación — 否定與疑問",
+                "chapter": "Preguntas: 嗎, A-not-A e interrogativos — 疑問：「嗎」、正反問句與疑問詞",
+                "articleMarkdown": "#### En pocas palabras\n\n**怎麼樣** (*zěnmeyàng*) significa normalmente **«qué tal», «cómo es» o «qué te parece»**. Se usa para pedir una evaluación, una descripción o una opinión sobre una persona, cosa o situación.\n\n#### Cómo funciona\n\nPor ejemplo, **這家餐廳怎麼樣？** (*Zhè jiā cāntīng zěnmeyàng?*) significa «¿Qué tal este restaurante?». La pregunta no pide el procedimiento para hacer algo, sino una valoración: si es bueno, caro, cómodo, ruidoso, etc.\n\nTambién puede usarse después de una propuesta para preguntar qué parece: **明天去，怎麼樣？** — «Vamos mañana, ¿qué te parece?».\n\n#### Ejemplos\n\n* **你的新工作怎麼樣？** (*Nǐ de xīn gōngzuò zěnmeyàng?*) — «¿Qué tal tu nuevo trabajo?».\n* **台北怎麼樣？** (*Táiběi zěnmeyàng?*) — «¿Qué tal Taipéi?».\n* **這樣怎麼樣？** (*Zhèyàng zěnmeyàng?*) — «¿Qué tal así?».\n\n#### Observación importante\n\n**怎麼樣** no es igual que **怎麼**. **怎麼** suele preguntar «cómo se hace» o por qué ocurre algo en ciertos contextos; **怎麼樣** pide una descripción o evaluación general.\n\nComo interrogativo, normalmente no necesita **嗎**. Su traducción cambia según el contexto, pero la función central es pedir cómo se considera o cómo resulta algo.\n\n#### Entradas relacionadas\n\n* [怎麼 — 怎麼](#entry-230)\n* [是不是…？ tag — 確認問「是不是…？」](#entry-232)\n* [幾 — 幾](#entry-229)\n* [為什麼 — 為什麼](#entry-233)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-21f10bc17b3fb5288208c888882e6cdefd099707e5eb720f3126bf07f47ce8b7",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T21:20:57.944Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:06:49.035Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:06:49.035Z",
+  "commandFile": "mls chat bridge/commands/000-r44/r44-chat-1163f026d16c4eb69e4e1f87775677b8/08-submit-claim06.json"
+}
