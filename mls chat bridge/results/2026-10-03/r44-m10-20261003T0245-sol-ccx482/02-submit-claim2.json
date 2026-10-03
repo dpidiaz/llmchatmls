@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-ccx482-step2",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-8edeb246-1348-4163-b68f-2b6a84e26d3c",
+          "ticketId": "R43-EMERGENCY-0493",
+          "leaseExpiresAt": 1790996276708
+        },
+        "completedAt": "2026-10-03T02:52:56.885Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0493",
+          "sha256": "25d86eb1d97e992b7943be4ce5813f0c3788c474ec75268cad53be6e54b90f54",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0493",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f2351eef-5a4f-41af-b5c0-4fab54ece6fd",
+                "ticketId": "R43-EMERGENCY-0493",
+                "code": "MLS-V05-0983",
+                "idempotencyKey": "R43-EMERGENCY-0493:MLS-V05-0983:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "00f54c42c82cbe61ba5af1c91d40cb493df08a6f8dbfb5c768dc44740dabe2e8",
+                "sourceSha256": "a9a18e52d76bbc0d63a4797d9504349a6c7bc34fe353bc64daf0f911b547ace4",
+                "committedMs": 1790995977488,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d5e7d9445ddddd685da3a992b355a15d5915f0f6ffc4ed97e4136755924efc76",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0493",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6dc15b85-a067-4919-ba03-451cf773dfc5",
+                "ticketId": "R43-EMERGENCY-0493",
+                "code": "MLS-V05-0984",
+                "idempotencyKey": "R43-EMERGENCY-0493:MLS-V05-0984:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2493c3c5899e3a3c2622e64d5374913a46990c9061bb6531aac1f3b6fe9cc346",
+                "sourceSha256": "99a1a4dfb38ffb7b9ac7f92c52bcf61fec49458cc7ad2c4f288ad48a77b03e61",
+                "committedMs": 1790995977824,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "52bc2b0a6c3fbbc20ca8fa56f8ec1c8e9b92d8052b958bdfbcc5ca3e9b2777de",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0493",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f2fa6495-3464-4373-8abb-fff3903b963c",
+                "ticketId": "R43-EMERGENCY-0493",
+                "code": "MLS-V05-0985",
+                "idempotencyKey": "R43-EMERGENCY-0493:MLS-V05-0985:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "53792a1c24c3b29837e36e6cf1248b7d4465cc08efa8b3c2c6b0a61a2dd0de60",
+                "sourceSha256": "24d0390f8a5f78b50a4be8da91bc769b1d0f04138adbfd3e938620d11147bf66",
+                "committedMs": 1790995978157,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "2cbac727142a1ebdd158333a2ad50e945437e3980193a427a12423059b94d822",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0493",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "553094a1-e071-4d67-b3f2-5fc42c28bb72",
+                "ticketId": "R43-EMERGENCY-0493",
+                "code": "MLS-V05-0987",
+                "idempotencyKey": "R43-EMERGENCY-0493:MLS-V05-0987:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "c6ab6d18bf8927b2df68e3051a10ad0d0ab707faa658fbfe01c81490fef8524f",
+                "sourceSha256": "26101c77cb1631a50010ed871b3d489288f9782ddb48fd59bd8427cadfc6a970",
+                "committedMs": 1790995978510,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "ae3aeada3519cfe8430c69d96fe2999569aabd4b6a885bb8d0ade16300b449c2",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0493",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f51b7f31-f162-420b-afd0-00b252acdf1e",
+                "ticketId": "R43-EMERGENCY-0493",
+                "code": "MLS-V05-0988",
+                "idempotencyKey": "R43-EMERGENCY-0493:MLS-V05-0988:legacy-v1",
+                "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "88a1555fe101605e11decf564b96c147e6af413ca52f7aa20cc39731272c80c5",
+                "sourceSha256": "0359b98c3f7d9fd06cad8d5eed6defce3d9b14fab146ebc7f6edf311933c0282",
+                "committedMs": 1790995978848,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0ef3546ae78745e7921b945c923e8caace659b57546381c582bc845d80b976f0",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-8edeb246-1348-4163-b68f-2b6a84e26d3c",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "25d86eb1d97e992b7943be4ce5813f0c3788c474ec75268cad53be6e54b90f54"
+          }
+        },
+        "completedAt": "2026-10-03T02:52:59.289Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-db1d9567-4211-43ad-89a0-1d1b23c13267",
+          "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0496",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996279359,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V05-1001",
+                "path": "aleman/MLS-V05-1001.json",
+                "sha256": "4e655388ddfba6c9d3c6db7ac7009b75ab457a1adfb600228f137051beb262b8"
+              },
+              {
+                "code": "MLS-V05-1002",
+                "path": "aleman/MLS-V05-1002.json",
+                "sha256": "130a522fc0de340956b991ad1d650db7edf525ea6745381a70363dd88cf52129"
+              },
+              {
+                "code": "MLS-V05-1004",
+                "path": "aleman/MLS-V05-1004.json",
+                "sha256": "51cf7cacb014c5db2b714ca211045e8bbe639657551036ffc57a227d669f6adb"
+              },
+              {
+                "code": "MLS-V05-1005",
+                "path": "aleman/MLS-V05-1005.json",
+                "sha256": "8b7e7e227a7991347ca2133caffd982cc80b828b52fdee18d60c09ff55b70317"
+              },
+              {
+                "code": "MLS-V05-1006",
+                "path": "aleman/MLS-V05-1006.json",
+                "sha256": "72ad270bef7fbe01c8a1f63ac30b9a67105b0c3adae0f0f8ec21970dbb7dee31"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0496",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V05-1001",
+                "path": "aleman/MLS-V05-1001.json",
+                "sha256": "4e655388ddfba6c9d3c6db7ac7009b75ab457a1adfb600228f137051beb262b8"
+              },
+              {
+                "code": "MLS-V05-1002",
+                "path": "aleman/MLS-V05-1002.json",
+                "sha256": "130a522fc0de340956b991ad1d650db7edf525ea6745381a70363dd88cf52129"
+              },
+              {
+                "code": "MLS-V05-1004",
+                "path": "aleman/MLS-V05-1004.json",
+                "sha256": "51cf7cacb014c5db2b714ca211045e8bbe639657551036ffc57a227d669f6adb"
+              },
+              {
+                "code": "MLS-V05-1005",
+                "path": "aleman/MLS-V05-1005.json",
+                "sha256": "8b7e7e227a7991347ca2133caffd982cc80b828b52fdee18d60c09ff55b70317"
+              },
+              {
+                "code": "MLS-V05-1006",
+                "path": "aleman/MLS-V05-1006.json",
+                "sha256": "72ad270bef7fbe01c8a1f63ac30b9a67105b0c3adae0f0f8ec21970dbb7dee31"
+              }
+            ],
+            "remaining": [
+              "MLS-V05-1001",
+              "MLS-V05-1002",
+              "MLS-V05-1004",
+              "MLS-V05-1005",
+              "MLS-V05-1006"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996279359,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261003-0245-sol-ccx482",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996279359,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V05-1001",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1001,
+                "title": "Partícula mal en peticiones",
+                "level": "B2",
+                "part": "D–A–CH y pragmática — D-A-CH und Pragmatik",
+                "chapter": "Pragmática, cortesía y registro — Pragmatik, Höflichkeit und Register",
+                "articleMarkdown": "#### En pocas palabras\n\nLa partícula **mal** aparece con mucha frecuencia en peticiones, sugerencias e imperativos coloquiales. Suele hacer que la formulación suene menos seca o más conversacional.\n\nPor ejemplo: **Warte mal kurz!** — «Espera un momento». Aquí **mal** no expresa por sí solo una duración; modifica el tono de la petición.\n\n#### Cómo funciona\n\nEn este uso, **mal** funciona como **partícula modal**, es decir, una palabra breve que aporta una actitud o matiz pragmático más que un significado léxico completo. Es especialmente común en el habla cotidiana.\n\nPuede aparecer con imperativos: **Schau mal!**, **Komm mal her!**, o con otras estructuras de petición: **Kannst du mal kurz helfen?**. En estos casos suele reducir la brusquedad y presentar la acción como pequeña, sencilla o razonable en el contexto.\n\nEl efecto depende también de la entonación. Una frase con **mal** puede seguir sonando impaciente si el tono o la situación son tensos.\n\n#### Ejemplos\n\n* **Warte mal kurz!** — Espera un momento.\n* **Schau mal hier!** — Mira aquí.\n* **Kannst du mal kurz helfen?** — ¿Puedes ayudar un momento?\n* **Könnten Sie mal bitte hier unterschreiben?** — ¿Podría firmar aquí, por favor?; posible en habla, aunque el grado de formalidad depende del contexto.\n\n#### Observación importante\n\n**Mal** no es una marca automática de cortesía ni equivale siempre a «por favor». Su función es principalmente pragmática y conversacional.\n\nTampoco debe confundirse este uso con **mal** como abreviación coloquial de **einmal** en otros contextos. La interpretación concreta depende de la construcción y del acto de habla.\n\n#### Entradas relacionadas\n\n[Könnten Sie...?](#entry-1000) · [Konjunktiv II para atenuar](#entry-999) · [Registro directo vs indirecto](#entry-1002) · [Sie formal](#entry-1003)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-0be9502c4cdc7098ff848414467b820318e3da9fd20b91a76876a555452e23be",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:11:48.834Z"
+              },
+              {
+                "code": "MLS-V05-1002",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1002,
+                "title": "Registro directo vs indirecto",
+                "level": "B2",
+                "part": "D–A–CH y pragmática — D-A-CH und Pragmatik",
+                "chapter": "Pragmática, cortesía y registro — Pragmatik, Höflichkeit und Register",
+                "articleMarkdown": "#### En pocas palabras\n\nEl alemán puede formular una misma intención de manera más **directa** o más **indirecta**. En las peticiones, una forma directa expresa con claridad la acción esperada; una forma indirecta añade distancia, cortesía o atenuación.\n\nPor ejemplo: **Schick mir die Datei.** frente a **Könnten Sie mir bitte die Datei schicken?**. Ambas pueden pedir el envío de un archivo, pero presentan la petición de manera muy distinta.\n\n#### Cómo funciona\n\nEl estilo directo puede usar imperativos o formulaciones simples: **Komm bitte morgen früher.** El estilo indirecto suele recurrir a preguntas, **Konjunktiv II**, verbos modales y otras estrategias que reducen la imposición: **Könnten Sie morgen etwas früher kommen?**\n\nLa diferencia no depende solo de la gramática. También intervienen **du/Sie**, **bitte**, partículas como **mal**, la entonación y la relación entre los interlocutores.\n\nUna formulación directa no es automáticamente descortés. Entre personas con confianza o en situaciones urgentes puede ser perfectamente adecuada. Del mismo modo, una forma muy indirecta puede sonar excesiva en ciertos contextos cotidianos.\n\n#### Ejemplos\n\n* **Schick mir die Datei.** — Envíame el archivo; petición directa con imperativo.\n* **Könnten Sie mir bitte die Datei schicken?** — ¿Podría enviarme el archivo, por favor?; petición indirecta y formal.\n* **Warte mal kurz.** — Espera un momento; directa, pero suavizada por **mal**.\n* **Würden Sie bitte kurz warten?** — ¿Podría esperar un momento, por favor?; más indirecta.\n\n#### Observación importante\n\n«Directo» e «indirecto» no equivalen mecánicamente a «descortés» y «cortés». La adecuación depende del acto de habla, la jerarquía, la confianza, el medio y la urgencia.\n\nPara describir una frase conviene separar su estructura gramatical del efecto pragmático que produce en una situación concreta.\n\n#### Entradas relacionadas\n\n[Partícula mal en peticiones](#entry-1001) · [Könnten Sie...?](#entry-1000) · [Konjunktiv II para atenuar](#entry-999) · [Sie formal](#entry-1003)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-e43a5cd01ab36794eb88694f916c85a8d83c027ece2d60312fa0a7188d2ae75f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:12:31.839Z"
+              },
+              {
+                "code": "MLS-V05-1004",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1004,
+                "title": "siezen",
+                "level": "B2",
+                "part": "D–A–CH y pragmática — D-A-CH und Pragmatik",
+                "chapter": "Pragmática, cortesía y registro — Pragmatik, Höflichkeit und Register",
+                "articleMarkdown": "#### En pocas palabras\n\n**Siezen** significa tratar a una persona con la forma de cortesía **Sie** en vez de **du**. En alemán, esta elección señala distancia social, formalidad o respeto según la situación, la relación entre las personas y las normas del contexto.\n\nEn **Wir siezen unsere Kunden**, la empresa indica que trata a sus clientes con **Sie**.\n\n#### Cómo funciona\n\nEl verbo **siezen** describe el uso sistemático de **Sie** y de las formas verbales correspondientes. **Sie** se escribe con mayúscula cuando es el pronombre de cortesía: **Wie heißen Sie?**, **Können Sie mir helfen?**. Aunque puede referirse a una o varias personas, el verbo aparece en la forma de tercera persona plural.\n\nLa elección entre **Sie** y **du** no depende solo de la edad. Influyen el entorno profesional, la cultura de la organización, el grado de confianza, la región y las preferencias de los interlocutores. En muchos contextos laborales tradicionales se empieza con **Sie** y se pasa a **du** solo después de un acuerdo explícito o implícito.\n\n#### Ejemplos\n\n* **Wir siezen unsere Kunden.** — Tratamos a nuestros clientes de «Sie».\n* **Siezen wir uns noch, oder können wir uns duzen?** — ¿Seguimos tratándonos de «Sie» o podemos tutearnos?\n* **In dieser Firma siezen sich die meisten Kollegen.** — En esta empresa, la mayoría de los colegas se tratan de «Sie».\n* **Der Chef siezt neue Mitarbeitende zunächst.** — El jefe trata inicialmente de «Sie» a los empleados nuevos.\n\n#### Observación importante\n\n**Siezen** describe una convención pragmática, no una regla absoluta de respeto. Hay empresas, universidades y grupos sociales donde **du** es normal incluso entre personas que no se conocen bien, mientras otros contextos mantienen **Sie** durante mucho tiempo.\n\nPor eso conviene interpretar **siezen** como una práctica de registro y distancia social, no como una traducción mecánica de “ser respetuoso”.\n\n#### Entradas relacionadas\n\n[duzen](#entry-1005) · [das Du anbieten](#entry-1006) · [per Sie sein](#entry-1007) · [per Du sein](#entry-1008)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-317246fe9a02d3ec6085966d4994008204cda1fea3523f2e59e52a3424d422c0",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:50:19.889Z"
+              },
+              {
+                "code": "MLS-V05-1005",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1005,
+                "title": "Würden Sie...?",
+                "level": "B2",
+                "part": "D–A–CH y pragmática — D-A-CH und Pragmatik",
+                "chapter": "Pragmática, cortesía y registro — Pragmatik, Höflichkeit und Register",
+                "articleMarkdown": "#### En pocas palabras\n\n**Würden Sie ...?** es una estructura muy frecuente para formular peticiones de manera cortés y formal. Combina **würden** con el pronombre de cortesía **Sie** y suele ir seguida de un infinitivo.\n\nPor ejemplo: **Würden Sie mir bitte helfen?** — «¿Podría ayudarme, por favor?».\n\n#### Cómo funciona\n\n**Würden** es una forma de **werden** usada aquí en **Konjunktiv II**, un modo verbal que puede expresar hipótesis, distancia o cortesía. En peticiones, esa distancia hace que la formulación suene menos directa que un imperativo.\n\nLa estructura típica es **Würden Sie + complemento + infinitivo?**: **Würden Sie das bitte wiederholen?** El infinitivo aparece al final. También puede combinarse con **bitte**, que añade una marca explícita de cortesía.\n\nExisten alternativas muy cercanas, como **Könnten Sie ...?**. Ambas son habituales en contextos formales; la elección concreta depende del verbo y del estilo del hablante.\n\n#### Ejemplos\n\n* **Würden Sie mir bitte helfen?** — ¿Podría ayudarme, por favor?\n* **Würden Sie das Fenster schließen?** — ¿Cerraría la ventana?\n* **Würden Sie das bitte wiederholen?** — ¿Podría repetir eso, por favor?\n* **Könnten Sie mir kurz erklären, wie das funktioniert?** — ¿Podría explicarme brevemente cómo funciona?\n\n#### Observación importante\n\n**Würden Sie ...?** no es simplemente “más respetuoso” que cualquier otra forma. Es una estrategia convencional de cortesía que reduce la imposición de la petición. En algunos contextos, una formulación más directa sigue siendo perfectamente cortés si la relación y la situación lo permiten.\n\nTampoco debe confundirse esta estructura con todos los demás usos de **würde**, que puede aparecer en hipótesis y construcciones condicionales.\n\n#### Entradas relacionadas\n\n[siezen](#entry-1004) · [duzen](#entry-1006) · [das Du anbieten](#entry-1007) · [per Sie sein](#entry-1008)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b2370ce8e62cff13a426f171e0494f6795f711153d8852aacb4abc2ee27e5161",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:51:06.262Z"
+              },
+              {
+                "code": "MLS-V05-1006",
+                "language": "aleman",
+                "languageName": "Alemán",
+                "n": 1006,
+                "title": "a personal española no equivale a dativo",
+                "level": "B1",
+                "part": "Contraste con español de Guatemala — Kontrast mit guatemaltekischem Spanisch",
+                "chapter": "Interferencias del español de Guatemala — Interferenzen aus dem guatemaltekischen Spanisch",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **a personal** del español y el **dativo** alemán no son equivalentes. En español, la preposición **a** puede introducir un objeto directo cuando el referente es una persona específica: **Veo a María**. En alemán, el verbo **sehen** selecciona acusativo, por eso se dice **Ich sehe Maria**, no una forma de dativo.\n\nLa presencia de **a** en español no permite decidir por sí sola qué caso necesita el alemán.\n\n#### Cómo funciona\n\nEl caso alemán depende de la construcción alemana: del verbo, de una preposición o de otra estructura gramatical. **Sehen** lleva un complemento en acusativo: **Ich sehe den Mann**. **Helfen**, en cambio, selecciona dativo: **Ich helfe dem Mann**.\n\nEn español, ambos pueden incluir una persona introducida por **a**: **Veo al hombre** y **Ayudo al hombre**. La misma preposición española aparece en funciones distintas, mientras el alemán distingue las construcciones mediante su propio sistema de casos.\n\nPor eso el análisis debe partir del verbo alemán, no de una correspondencia palabra por palabra con el español guatemalteco.\n\n#### Ejemplos\n\n* **Veo a María → Ich sehe Maria.** — **Maria** corresponde a un complemento de **sehen** en acusativo.\n* **Veo al profesor → Ich sehe den Lehrer.** — **den Lehrer** está en acusativo.\n* **Ayudo al profesor → Ich helfe dem Lehrer.** — **helfen** selecciona dativo.\n* **Llamo a Ana → Ich rufe Ana an.** — **anrufen** lleva acusativo, aunque el español use **a**.\n\n#### Observación importante\n\nNo debe identificarse automáticamente “persona introducida por **a**” con dativo alemán. El español usa **a** en varios contextos y el alemán organiza las funciones mediante construcciones propias.\n\nTampoco conviene reducir el dativo a “la persona que recibe algo”: verbos como **helfen, danken, folgen** o **gefallen** seleccionan dativo sin que exista necesariamente un objeto transferido.\n\n#### Entradas relacionadas\n\n[Aprender artículo + sustantivo + plural](#entry-1007) · [Compuestos alemanes vs sintagmas españoles](#entry-1008) · [Orden alemán vs orden español](#entry-1009) · [Preposiciones y régimen de caso](#entry-1010)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-509399d6c52309eb8b6854e0604471a579adba61f157e4df61c4b6312c6c817d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:51:47.489Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:53:00.487Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:53:00.487Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-m10-20261003T0245-sol-ccx482/02-submit-claim2.json"
+}
