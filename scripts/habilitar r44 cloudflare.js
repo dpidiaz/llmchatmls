@@ -5,7 +5,7 @@ const ROUTE_MARKER = "    const url = new URL(request.url);";
 const ROUTE = [
   ROUTE_MARKER,
   '    if (url.pathname === "/r44-worker" || url.pathname.startsWith("/api/r44/") || url.pathname.startsWith("/api/unified-runner/") || url.pathname === "/mcp") {',
-  "      return handleR44(request, env, url);",
+  "      return handleR44(request, env, url, _ctx);",
   "    }"
 ].join("\n");
 const RUNTIME_MARKER = "// MLS R44 CLOUDFLARE CONTROL PLANE END";
@@ -38,6 +38,7 @@ function injectR44(code) {
     if (!next.includes(ROUTE_MARKER)) throw new Error("R44 route marker not found");
     next = next.replace(ROUTE_MARKER, ROUTE);
   }
+  if (next.includes("return handleR44(request, env, url);")) next = next.replace("return handleR44(request, env, url);", "return handleR44(request, env, url, _ctx);");
   if (!next.includes("MLS Unified scheduled runner")) {
     const fetchMarker = /((?:var|const)\s+index_default\s*=\s*\{\s*)async\s+fetch\s*\(\s*request\s*,\s*env\s*,\s*_ctx\s*\)\s*\{/m;
     if (!fetchMarker.test(next)) throw new Error("Unified scheduled hook marker not found");
