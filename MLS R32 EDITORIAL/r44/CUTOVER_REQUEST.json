@@ -1,6 +1,6 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-02T20:50:39Z",
+  "requestedAt": "2026-10-03T08:45:00Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
   "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Deploy paginated R44 export required by MLS Unified R44→R33 grouped handoff",
-  "retryGeneration": 14,
+  "retryReason": "Deploy user-friendly MLS Unified VERIFIED monitor on /status",
+  "retryGeneration": 15,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
@@ -41,5 +41,15 @@
     "r33WorkPrefix": "r33-unified:",
     "integrationWorkPrefix": "r33-unified-integration:",
     "terminalAuthority": "MLS R32 EDITORIAL/evidence git/indexes/verified.json"
+  },
+  "unifiedStatusMonitor": {
+    "schema": "MLS-UNIFIED-STATUS-1",
+    "page": "/status",
+    "endpoint": "/api/unified/status",
+    "terminalAuthority": "MLS R32 EDITORIAL/evidence git/indexes/verified.json",
+    "refreshSeconds": 60,
+    "upstreamCacheSeconds": 30,
+    "tracksSessionDeltaLocally": true,
+    "countsOnlyCanonicalVerified": true
   }
 }
