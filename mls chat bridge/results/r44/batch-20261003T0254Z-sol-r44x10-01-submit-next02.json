@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "sol-r44x10-ticket01-submit-next02",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-487e87f9-175e-418b-8548-564a064c6a43",
+          "ticketId": "R43-EMERGENCY-0237",
+          "leaseExpiresAt": 1790996403843
+        },
+        "completedAt": "2026-10-03T02:55:03.966Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0237",
+          "sha256": "cff1a28c21999dff21525cd04bceaeb9df936c1418fdccd58fc295be80262508",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0237",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8e2a2adc-cb5b-4d36-9cc8-f5e7dfc304bd",
+                "ticketId": "R43-EMERGENCY-0237",
+                "code": "MLS-V04-0633",
+                "idempotencyKey": "R43-EMERGENCY-0237:MLS-V04-0633:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9c2234718d8bf02372cd927f32f888ae24b3a47c1a0b43233ee52df8bcad2c5e",
+                "sourceSha256": "5b0f0615276dfdaf5122041f127cd3f16b1e57cfe602fcf98b231678505406a4",
+                "committedMs": 1790996104386,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "af9f115d2f134edce492b36b16346b0e1462c3d272f040445a07f611ca4a791f",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0237",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "aea8a264-f41d-412a-8ae6-d4993607ad3f",
+                "ticketId": "R43-EMERGENCY-0237",
+                "code": "MLS-V04-0634",
+                "idempotencyKey": "R43-EMERGENCY-0237:MLS-V04-0634:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "32acf5d747d5380a9843cf88d69424c355e887fe5320df59e3e20dafc2d9ae4d",
+                "sourceSha256": "64e8c770943c7b627dd3a5d362cb446e70fdeef9dacf06bc0e89b791cf73041a",
+                "committedMs": 1790996104613,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e79c975a9cdaedc28a6699f612921b5ef5088eaff716bc35e38844dca4cd464c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0237",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "201f093d-dc23-4560-bd96-aa9fc55bb3d8",
+                "ticketId": "R43-EMERGENCY-0237",
+                "code": "MLS-V04-0635",
+                "idempotencyKey": "R43-EMERGENCY-0237:MLS-V04-0635:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "549e84676d3af49e47a5a0c7561244331981851ec9e439a86f83f4e1a5b6a97a",
+                "sourceSha256": "cdece221d5c5d1f4830349dc4b3af3d5880c948a98ecd902b728335c4b7760cb",
+                "committedMs": 1790996104830,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c51d4e1db0a38d4828c1955a1665dc02bbcbc6b1813c9f74c5d53136dfc68be9",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0237",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "e409014b-0f40-4655-a383-99c804fd9f80",
+                "ticketId": "R43-EMERGENCY-0237",
+                "code": "MLS-V04-0636",
+                "idempotencyKey": "R43-EMERGENCY-0237:MLS-V04-0636:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "77e58fa7058ff7962d93ce65be411ea9e7098177e21260d8f4cd5d31eee812c2",
+                "sourceSha256": "1957e7fc83efce7d8659166f9b70256e1041ad1f65e33628d8acfe418af795b9",
+                "committedMs": 1790996105046,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "fdcf1c1d4de84938872bcc3225027902df8fe61d3352e661c735204984e44add",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0237",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5885a226-cdd3-45d5-9c77-d348900cd164",
+                "ticketId": "R43-EMERGENCY-0237",
+                "code": "MLS-V04-0639",
+                "idempotencyKey": "R43-EMERGENCY-0237:MLS-V04-0639:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b33add42870c715c8f4fc8c315d650bb4e796655e608c6dfee529c10829643fd",
+                "sourceSha256": "ca2aa6e70e4922b858a5ffbe333ef849d2096c0af7adcb3aa7dcac5f3cc784ca",
+                "committedMs": 1790996105271,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "5257d21364a06991101f9d122cc4fce8ef58dbbba5d6a02e9221b41f42edcd1a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-487e87f9-175e-418b-8548-564a064c6a43",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "cff1a28c21999dff21525cd04bceaeb9df936c1418fdccd58fc295be80262508"
+          }
+        },
+        "completedAt": "2026-10-03T02:55:05.618Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-432153ad-1353-43df-bb06-8794c9ed725f",
+          "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0238",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996405664,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V04-0640",
+                "path": "frances/MLS-V04-0640.json",
+                "sha256": "8f9cf5d35dbf3f857efc01293e5eede691e225bd4f1c45647f19090993060c34"
+              },
+              {
+                "code": "MLS-V04-0641",
+                "path": "frances/MLS-V04-0641.json",
+                "sha256": "617d75ea56a45a21810dc3e92e3c4d60e1a7e3b536c77e459f4a3767516f9d0c"
+              },
+              {
+                "code": "MLS-V04-0642",
+                "path": "frances/MLS-V04-0642.json",
+                "sha256": "2c2a0c10c8d3daf4327cc319771110fa85ec2eecfcfc88e762eb3f9f9c3f0c03"
+              },
+              {
+                "code": "MLS-V04-0643",
+                "path": "frances/MLS-V04-0643.json",
+                "sha256": "fa5c635f3e51e7de653ad44dc3e6656493f180f485ec85989ae86c32f11ef8a0"
+              },
+              {
+                "code": "MLS-V04-0645",
+                "path": "frances/MLS-V04-0645.json",
+                "sha256": "d17cbedcec508c13d33787177dfd40b53bdf1db5363eb0cee0aa639a8ed34b3e"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0238",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V04-0640",
+                "path": "frances/MLS-V04-0640.json",
+                "sha256": "8f9cf5d35dbf3f857efc01293e5eede691e225bd4f1c45647f19090993060c34"
+              },
+              {
+                "code": "MLS-V04-0641",
+                "path": "frances/MLS-V04-0641.json",
+                "sha256": "617d75ea56a45a21810dc3e92e3c4d60e1a7e3b536c77e459f4a3767516f9d0c"
+              },
+              {
+                "code": "MLS-V04-0642",
+                "path": "frances/MLS-V04-0642.json",
+                "sha256": "2c2a0c10c8d3daf4327cc319771110fa85ec2eecfcfc88e762eb3f9f9c3f0c03"
+              },
+              {
+                "code": "MLS-V04-0643",
+                "path": "frances/MLS-V04-0643.json",
+                "sha256": "fa5c635f3e51e7de653ad44dc3e6656493f180f485ec85989ae86c32f11ef8a0"
+              },
+              {
+                "code": "MLS-V04-0645",
+                "path": "frances/MLS-V04-0645.json",
+                "sha256": "d17cbedcec508c13d33787177dfd40b53bdf1db5363eb0cee0aa639a8ed34b3e"
+              }
+            ],
+            "remaining": [
+              "MLS-V04-0640",
+              "MLS-V04-0641",
+              "MLS-V04-0642",
+              "MLS-V04-0643",
+              "MLS-V04-0645"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996405664,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261002-2045-sol-r44x10",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996405664,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V04-0640",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 640,
+                "title": "Adjetivo verbal vs participio presente",
+                "level": "B1",
+                "part": "Formas no personales y voz — Formes non personnelles et voix",
+                "chapter": "Infinitivo, participio presente y gerundio — Infinitif, participe présent et gérondif",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **adjectif verbal** y el **participe présent** pueden parecerse porque muchos terminan en **-ant**, pero no cumplen la misma función. El participio presente conserva un valor verbal y es normalmente invariable; el adjetivo verbal describe un sustantivo como un adjetivo y concuerda en género y número. Compare **des enfants fatiguant leurs parents** (“niños que cansan a sus padres”) con **des enfants fatigants** (“niños cansadores o molestos”).\n\n#### Cómo funciona\n\nEl **participe présent** puede conservar complementos propios de un verbo: **des enfants fatiguant leurs parents**, donde **leurs parents** completa el sentido verbal de **fatiguant**. Como forma verbal, el participio presente permanece normalmente invariable.\n\nEl **adjectif verbal** funciona como adjetivo: atribuye una propiedad al sustantivo y concuerda con él. Se dice **un enfant fatigant**, **une activité fatigante**, **des enfants fatigants**.\n\nEn algunos pares, la diferencia también aparece en la ortografía. Por ejemplo, el participio presente de **convaincre** es **convainquant**, mientras que el adjetivo es **convaincant**. Estas diferencias ortográficas deben aprenderse cuando existen.\n\n#### Ejemplos\n\n* **Des enfants fatiguant leurs parents jouent dehors.** — Unos niños que cansan a sus padres juegan afuera.\n* **Ce sont des enfants fatigants.** — Son niños cansadores o molestos.\n* **Une histoire convaincante.** — Una historia convincente.\n* **Un argument convainquant le jury peut être décisif.** — Un argumento que convence al jurado puede ser decisivo.\n\n#### Observación importante\n\nNo basta con mirar la terminación **-ant** para decidir la categoría. Hay que observar la función: si la forma conserva comportamiento verbal, es participio presente; si atribuye una propiedad al sustantivo y concuerda, es adjetivo verbal.\n\nAdemás, no todos los adjetivos verbales presentan una ortografía distinta del participio presente. La diferencia ortográfica existe solo en ciertos pares; la diferencia de función es más general.\n\n#### Entradas relacionadas\n\n[Tout en + gérondif](#entry-639) · [Infinitif passé](#entry-641) · [Condición con gerundio](#entry-638) · [Après avoir + participio](#entry-642)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6d398d82d45a309bdd50435fac21392b2bed870e82a196b75e26ab73cd72bf18",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:49:50.802Z"
+              },
+              {
+                "code": "MLS-V04-0641",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 641,
+                "title": "Infinitif passé",
+                "level": "B2",
+                "part": "Formas no personales y voz — Formes non personnelles et voix",
+                "chapter": "Infinitivo, participio presente y gerundio — Infinitif, participe présent et gérondif",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **infinitif passé** es una forma compuesta del infinitivo que expresa normalmente **anterioridad**: la acción del infinitivo ocurre antes que otra acción o antes del momento de referencia. Se forma con **avoir** o **être** en infinitivo más un participio pasado: **avoir fini**, **être parti**. En **Après avoir fini, elle est sortie**, primero terminó y después salió.\n\n#### Cómo funciona\n\nLa mayoría de los verbos forman el infinitivo pasado con **avoir**: **avoir parlé**, **avoir compris**, **avoir vu**. Los verbos que seleccionan **être** como auxiliar usan **être + participe passé**: **être arrivé**, **être parti**. Los verbos pronominales emplean igualmente **être**: **s’être levé**, **s’être souvenu**.\n\nEsta forma aparece después de preposiciones y en otras construcciones cuando se necesita marcar que la acción ya se ha completado: **après avoir terminé**, **sans avoir répondu**, **être content d’avoir réussi**.\n\nCon **être**, el participio suele reflejar género y número del sujeto correspondiente. En los verbos pronominales, la concordancia puede depender de reglas específicas y no conviene reducirla a una fórmula única.\n\n#### Ejemplos\n\n* **Après avoir fini, elle est sortie.** — Después de haber terminado, salió.\n* **Il regrette d’avoir parlé trop vite.** — Lamenta haber hablado demasiado rápido.\n* **Après être arrivées, elles ont téléphoné.** — Después de haber llegado, llamaron.\n* **Elle est partie sans avoir répondu.** — Se fue sin haber respondido.\n\n#### Observación importante\n\nEl **infinitif passé** no es una “forma básica” del verbo ni un tiempo conjugado independiente. Es una forma no personal compuesta cuyo valor principal es situar una acción como anterior respecto de otra referencia temporal.\n\nLa elección entre **avoir** y **être** sigue, en general, el sistema de auxiliares de los tiempos compuestos franceses; no depende de una traducción mecánica desde el español.\n\n#### Entradas relacionadas\n\n[Adjetivo verbal vs participio presente](#entry-640) · [Après avoir + participio](#entry-642) · [Tout en + gérondif](#entry-639) · [Après être + participio](#entry-643)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3ee1f8f49ac474a5bb9a1d3495d93917b6dc10e8f55fcd953d8d6dfd01337f3c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:50:25.224Z"
+              },
+              {
+                "code": "MLS-V04-0642",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 642,
+                "title": "Après avoir + participio",
+                "level": "B2",
+                "part": "Formas no personales y voz — Formes non personnelles et voix",
+                "chapter": "Infinitivo, participio presente y gerundio — Infinitif, participe présent et gérondif",
+                "articleMarkdown": "#### En pocas palabras\n\n**Après avoir + participe passé** expresa que una acción ya se ha completado antes de otra. En **Après avoir fini, il est parti**, primero terminó y después se fue: “Después de haber terminado, se fue”. La secuencia **avoir fini** es un **infinitif passé**, una forma compuesta que marca anterioridad relativa.\n\n#### Cómo funciona\n\nLa construcción combina **après**, el infinitivo **avoir** y un participio pasado: **après avoir parlé**, **après avoir compris**, **après avoir terminé**. Se usa con la mayoría de los verbos que forman sus tiempos compuestos con **avoir**.\n\nEn el uso más habitual, el sujeto entendido del infinitivo coincide con el de la oración principal. En **Après avoir mangé, Paul est sorti**, es Paul quien come y quien sale. Si los participantes fueran distintos, una proposición con verbo conjugado puede resultar más clara.\n\nLos pronombres átonos dependientes del infinitivo se colocan delante de **avoir** o del grupo correspondiente: **après l’avoir vu**, **après lui avoir parlé**, **après en avoir discuté**.\n\n#### Ejemplos\n\n* **Après avoir fini, il est parti.** — Después de haber terminado, se fue.\n* **Après avoir mangé, nous avons repris la route.** — Después de haber comido, retomamos el camino.\n* **Après l’avoir vu, elle a changé d’avis.** — Después de haberlo visto, cambió de opinión.\n* **Après lui avoir parlé, j’ai mieux compris la situation.** — Después de haber hablado con él/ella, comprendí mejor la situación.\n\n#### Observación importante\n\n**Après avoir + participe passé** no es una voz pasiva ni un tiempo conjugado independiente. Es una construcción con infinitivo pasado que sitúa su acción antes de la acción principal.\n\nCuando el verbo francés selecciona **être** como auxiliar, se usa **après être + participe passé**, no **après avoir**. La elección del auxiliar sigue el sistema francés y no se decide por traducción literal desde el español.\n\n#### Entradas relacionadas\n\n[Infinitif passé](#entry-641) · [Après être + participio](#entry-643) · [Adjetivo verbal vs participio presente](#entry-640) · [Avant de + infinitif](#entry-644)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-dcd304bfc2eace8bb920de08fd698c419b98f0624bdac24051db94c027a973cc",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:51:02.319Z"
+              },
+              {
+                "code": "MLS-V04-0643",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 643,
+                "title": "Après être + participio",
+                "level": "B2",
+                "part": "Formas no personales y voz — Formes non personnelles et voix",
+                "chapter": "Infinitivo, participio presente y gerundio — Infinitif, participe présent et gérondif",
+                "articleMarkdown": "#### En pocas palabras\n\n**Après être + participe passé** expresa que una acción ya se ha completado antes de otra, cuando el verbo forma sus tiempos compuestos con **être**. En **Après être arrivée, elle a téléphoné**, la llegada ocurre primero y la llamada después: “Después de haber llegado, llamó”.\n\n#### Cómo funciona\n\nLa construcción combina **après** (“después de”), el infinitivo **être** y un **participio pasado**: **après être arrivé**, **après être parti**, **après être sorti**. Es una forma del **infinitivo pasado**, usada aquí para marcar anterioridad sin introducir una nueva oración con verbo conjugado.\n\nSe emplea con verbos que forman los tiempos compuestos con **être**, como **arriver**, **partir**, **venir** o **naître**, y también con verbos pronominales: **après s’être levé**, **après s’être souvenu**.\n\nCon **être**, el participio pasado suele concordar en género y número con el referente correspondiente: **après être arrivée** si se habla de una mujer; **après être partis** si se habla de varios hombres o de un grupo mixto. En los verbos pronominales, la concordancia sigue reglas propias y puede depender de la construcción.\n\n#### Ejemplos\n\n* **Après être arrivée, elle a téléphoné.** — Después de haber llegado, llamó.\n* **Après être partis, ils ont pris le train.** — Después de haberse ido, tomaron el tren.\n* **Après s’être levée, Marie a ouvert la fenêtre.** — Después de levantarse, Marie abrió la ventana.\n* **Après être venu ici, il a changé d’avis.** — Después de haber venido aquí, cambió de opinión.\n\n#### Observación importante\n\nNo se usa **être** simplemente porque en español aparezca “haber” o “estar”. La elección del auxiliar depende del verbo francés y sigue, en general, las mismas pautas que otros tiempos compuestos.\n\nAdemás, **après être + participe passé** expresa anterioridad relativa: la acción del infinitivo ocurre antes de la acción principal. No constituye por sí sola un tiempo verbal conjugado.\n\n#### Entradas relacionadas\n\n[Infinitivo pasado](#entry-641) · [Après avoir + participe passé](#entry-642) · [Avant de + infinitif](#entry-644) · [Gérondif de simultaneidad](#entry-645)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-06c3a63cbc6f5a695eb963aff8b85f9b10eb5192e8d6a9c9c85ba4e09d3d7540",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:45:03.280Z"
+              },
+              {
+                "code": "MLS-V04-0645",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 645,
+                "title": "Gérondif de simultaneidad",
+                "level": "B2",
+                "part": "Formas no personales y voz — Formes non personnelles et voix",
+                "chapter": "Infinitivo, participio presente y gerundio — Infinitif, participe présent et gérondif",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **gérondif de simultaneidad** expresa que dos acciones ocurren al mismo tiempo. Se forma normalmente con **en + participe présent**: **En marchant, il téléphone** significa “Mientras camina, habla por teléfono”. La acción de **marcher** acompaña temporalmente a la acción principal.\n\n#### Cómo funciona\n\nEl **gérondif** combina **en** con el **participe présent** del verbo: **en parlant**, **en lisant**, **en travaillant**. Cuando tiene valor de simultaneidad, presenta una acción como contemporánea de la acción expresada por el verbo conjugado.\n\nEl sujeto entendido del gérondif coincide normalmente con el sujeto de la oración principal. En **En sortant, Marie a vu Paul**, quien sale y quien ve a Paul es Marie. Si los participantes fueran distintos, esta construcción podría resultar ambigua o incorrecta y convendría una oración conjugada.\n\nLa simultaneidad puede ser completa o parcial según el contexto. **En travaillant, il écoute de la musique** indica dos actividades que se desarrollan a la vez; no significa necesariamente que empiecen y terminen exactamente en el mismo instante.\n\n#### Ejemplos\n\n* **En marchant, il téléphone.** — Habla por teléfono mientras camina.\n* **Elle écoute la radio en préparant le dîner.** — Escucha la radio mientras prepara la cena.\n* **En sortant de chez elle, Marie a rencontré Luc.** — Al salir de casa, Marie se encontró con Luc.\n* **Nous avons discuté en attendant le bus.** — Conversamos mientras esperábamos el autobús.\n\n#### Observación importante\n\nEl **gérondif** francés no equivale automáticamente al gerundio español. El español puede usar gerundio, “mientras + verbo”, “al + infinitivo” u otras estructuras según el contexto.\n\nAdemás, **en + participe présent** puede expresar otros valores, como manera, condición o causa. La interpretación de simultaneidad depende del significado de la oración completa.\n\n#### Entradas relacionadas\n\n[Avant de + infinitif](#entry-644) · [Gérondif de manera](#entry-646) · [Après être + participe passé](#entry-643) · [Gérondif de condición](#entry-647)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1741fb25e72b1f6dc94b45f95bbd5fd2e434805e5d45a624dd9f20a908f2abb8",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:46:17.518Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:55:06.528Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:55:06.528Z",
+  "commandFile": "mls chat bridge/commands/r44/batch-20261003T0254Z-sol-r44x10-01-submit-next02.json"
+}
