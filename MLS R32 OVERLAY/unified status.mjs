@@ -42,6 +42,7 @@ export function buildUnifiedStatus(codes,{fetchedAt=new Date().toISOString(),eta
     sourcePath:"MLS R32 EDITORIAL/evidence git/indexes/verified.json",
     totalEntries:MLS_UNIFIED_TOTAL_ENTRIES,
     verifiedCount,
+    verifiedCodes:[...seen].sort(),
     remaining,
     percent:round2(verifiedCount/MLS_UNIFIED_TOTAL_ENTRIES*100),
     activationBaseline:MLS_UNIFIED_ACTIVATION_BASELINE,

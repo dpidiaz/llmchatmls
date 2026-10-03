@@ -24,6 +24,8 @@ function installFiles(){
   const html=fs.readFileSync(SOURCE,'utf8');
   fs.mkdirSync(path.dirname(PUBLIC),{recursive:true});
   fs.writeFileSync(PUBLIC,html,'utf8');
+  fs.mkdirSync('public/js',{recursive:true});
+  fs.copyFileSync('MLS R32 OVERLAY/status entries.js','public/js/status-entries.js');
   if(!fs.existsSync(TARGET))throw new Error('No se encontró src/index.js después de reconstruir R32.');
   fs.writeFileSync(TARGET,patchWorker(fs.readFileSync(TARGET,'utf8'),html),'utf8');
 }
