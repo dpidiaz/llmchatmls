@@ -267,8 +267,8 @@ function unifiedR33EvidenceObject(args) {
     }
   };
 }
-async function unifiedRunnerR33Draft(request,env) {
-  const auth=await unifiedRunnerAuthorize(request,env);
+async function unifiedRunnerR33Draft(request,env,ctx) {
+  const auth=await unifiedRunnerAuthorize(request,env,ctx);
   if(!auth.ok) return r44Json({error:auth.error},auth.status);
   const runner=await unifiedRunnerRead(env);
   if(runner.state!=="RUNNING") return r44Json({error:"UNIFIED_RUNNER_NOT_RUNNING",state:runner.state},409);

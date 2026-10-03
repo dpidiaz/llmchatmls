@@ -8,7 +8,7 @@ test("R44 injector adds route and is idempotent", () => {
   const twice = injectR44(once);
   assert.equal(once, twice);
   assert.match(once, /\/api\/r44\//);
-  assert.match(once, /handleR44\(request, env, url\)/);
+  assert.match(once, /handleR44\(request, env, url, _ctx\)/);
   assert.match(once, /CREATE TABLE IF NOT EXISTS r44_tickets/);
   assert.match(once, /R44_LEASE_MS = 5 \* 60 \* 1000/);
 });

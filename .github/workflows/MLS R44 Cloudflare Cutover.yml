@@ -47,11 +47,44 @@ jobs:
           npm run predeploy
           node --check src/index.js
           npm run check
+      - name: Check Cloudflare Access capability
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: node 'scripts/configurar unified access.cjs' --check
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Configure MLS Unified Cloudflare Access
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: node 'scripts/configurar unified access.cjs'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
       - name: Deploy R44 to Cloudflare
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: npx wrangler deploy --keep-vars
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Verify MLS Unified Access protection
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          check_protected() {
+            local path="$1"
+            local method="${2:-GET}"
+            local code
+            code="$(curl -sS -o /dev/null -w '%{http_code}' -X "$method" "$base$path")"
+            case "$code" in
+              302|303|401|403) ;;
+              *) echo "Access not enforced for $path (HTTP $code)" >&2; exit 1 ;;
+            esac
+          }
+          check_protected '/runner.html' GET
+          check_protected '/api/unified-runner/status' POST
+          echo 'MLS_UNIFIED_ACCESS_PROTECTED'
+
       - name: Bootstrap D1 and verify R44
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash

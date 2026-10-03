@@ -110,8 +110,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
 
 <div class="grid">
 <div>
-<label for="unifiedKey">Clave editorial</label>
-<input id="unifiedKey" type="password" autocomplete="current-password" placeholder="MLS_EDITORIAL_CHAT_KEY">
+<label for="unifiedAccess">Acceso</label>
+<input id="unifiedAccess" value="Sesión segura de Cloudflare" readonly>
 </div>
 <div>
 <label for="unifiedState">Estado global</label>
@@ -157,7 +157,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 </div>
 
 <div class="log" id="unifiedLog">Unified listo.</div>
-<p class="note">Si una entrada no puede justificarse con una fuente R33 registrada, el runner marca REVIEW_REQUIRED y se pausa antes de fabricar Evidence. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
+<p class="note">No necesitás copiar claves: esta página usa tu sesión segura de Cloudflare Access. Si una entrada no puede justificarse con una fuente R33 registrada, el runner marca REVIEW_REQUIRED y se pausa antes de fabricar Evidence. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
 </section>
 </main>
 
@@ -454,8 +454,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
   const q=(id)=>document.getElementById(id);
   const corpus=q('corpusPanel'), unified=q('unifiedPanel');
   const tabCorpus=q('tabCorpus'), tabUnified=q('tabUnified');
-  const key=q('unifiedKey'), log=q('unifiedLog'), dot=q('unifiedDot'), statusText=q('unifiedStatusText');
-  const saved=localStorage.getItem('mlsUnifiedRunnerKey')||''; if(saved) key.value=saved;
+  const log=q('unifiedLog'), dot=q('unifiedDot'), statusText=q('unifiedStatusText');
   function show(which){
     const u=which==='unified'; corpus.hidden=u; unified.hidden=!u;
     tabUnified.className=u?'primary':'secondary'; tabCorpus.className=u?'secondary':'primary';
@@ -463,13 +462,20 @@ button:disabled{opacity:.48;cursor:not-allowed}
     if(u) refresh().catch(()=>{});
   }
   tabCorpus.onclick=()=>show('corpus'); tabUnified.onclick=()=>show('unified');
-  key.addEventListener('change',()=>localStorage.setItem('mlsUnifiedRunnerKey',key.value));
   function write(msg){log.textContent+='\\n['+new Date().toLocaleTimeString()+'] '+msg;log.scrollTop=log.scrollHeight}
-  function auth(){const value=key.value.trim(); if(!value) throw new Error('Ingresá la clave editorial.'); localStorage.setItem('mlsUnifiedRunnerKey',value); return {'authorization':'Bearer '+value,'content-type':'application/json'};}
   async function unifiedApi(path,body={}){
-    const r=await fetch('/api/unified-runner/'+path,{method:'POST',headers:auth(),body:JSON.stringify(body),cache:'no-store'});
-    const j=await r.json().catch(()=>({error:'Respuesta no JSON'}));
-    if(!r.ok) throw new Error(j.message||j.error||('HTTP '+r.status));
+    const r=await fetch('/api/unified-runner/'+path,{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      credentials:'same-origin',
+      body:JSON.stringify(body),
+      cache:'no-store'
+    });
+    const j=await r.json().catch(()=>({error:'UNIFIED_RUNNER_ACCESS_REQUIRED'}));
+    if(!r.ok){
+      if(r.status===401||j.error==='UNIFIED_RUNNER_ACCESS_REQUIRED') throw new Error('Tu sesión segura de Cloudflare no está activa. Volvé a abrir el Runner e iniciá sesión.');
+      throw new Error(j.message||j.error||('HTTP '+r.status));
+    }
     return j;
   }
   function n(v){return Number(v||0)}
@@ -486,6 +492,9 @@ button:disabled{opacity:.48;cursor:not-allowed}
     q('unifiedPartial').textContent=durableCount(r44.durableCounts,'PARTIAL_DURABLE');
     q('unifiedMaxLeases').textContent=r44.maxActiveLeases??'—';
     q('unifiedFree').textContent=data.freeOnly===true?'Sí':'—';
+    q('unifiedAccess').value=data.auth?.mode==='cloudflare-access'
+      ? ('Cloudflare Access'+(data.auth?.email?' · '+data.auth.email:''))
+      : 'Automatización interna';
     q('unifiedR33Lane').textContent=lanes.r33?.state||'—';
     q('unifiedIntegrationLane').textContent=lanes.integration?.state||'—';
     q('unifiedVerified').textContent=canonical.verifiedCount??'—';
@@ -520,7 +529,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
       await refresh();
     }catch(e){write('ERROR — '+e.message)}
   };
-  setInterval(()=>{if(!unified.hidden&&key.value.trim())refresh().catch(()=>{})},15000);
+  setInterval(()=>{if(!unified.hidden)refresh().catch(()=>{})},15000);
   show(localStorage.getItem('mlsRunnerTab')==='unified'?'unified':'corpus');
 })();
 </script>
