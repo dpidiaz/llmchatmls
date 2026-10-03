@@ -1,0 +1,416 @@
+{
+  "batchId": "r44-sol-jd-0595-five-entry-close-v1",
+  "stopOnError": false,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-ff97586d-c29f-4779-9eb2-73381e81a4c8"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-ff97586d-c29f-4779-9eb2-73381e81a4c8",
+        "ticketId": "R43-EMERGENCY-0595",
+        "leaseGeneration": 3,
+        "idempotencyKey": "r44-sol-jd-0595-MLS-V06-0492-v1",
+        "entry": {
+          "code": "MLS-V06-0492",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La entrada describe correctamente la omisión contextual de argumentos y material recuperable en japonés. La literatura sobre pronombres cero confirma que sujetos y objetos se omiten con frecuencia cuando el antecedente se recupera del contexto; además, la entrada evita reducir toda omisión a un «pronombre implícito».",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "En japonés se omiten con frecuencia argumentos/pronombres de sujeto y objeto cuando son recuperables del contexto.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La interpretación de esas omisiones depende de información discursiva/contextual y de la recuperación del antecedente.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Shimazu, S., Takase, S., Nakazawa, T., & Okazaki, N. (2020). Evaluation Dataset for Zero Pronoun in Japanese to English Translation. Proceedings of LREC 2020, 3630–3634.",
+              "url": "https://aclanthology.org/2020.lrec-1.447/",
+              "role": "Documenta que en japonés se omiten con frecuencia pronombres de sujeto y objeto entendibles por el contexto y que su resolución requiere identificar el antecedente."
+            },
+            {
+              "citation": "Konno, R., Matsubayashi, Y., Kiyono, S., Ouchi, H., Takahashi, R., & Inui, K. (2020). An Empirical Study of Contextual Data Augmentation for Japanese Zero Anaphora Resolution. arXiv.",
+              "url": "https://arxiv.org/abs/2011.00948",
+              "role": "Confirma el fenómeno de la anáfora cero en japonés y la importancia del contexto para resolverla."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-ff97586d-c29f-4779-9eb2-73381e81a4c8",
+        "ticketId": "R43-EMERGENCY-0595",
+        "leaseGeneration": 3,
+        "idempotencyKey": "r44-sol-jd-0595-MLS-V06-0493-v1",
+        "entry": {
+          "code": "MLS-V06-0493",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La explicación es correcta: las peticiones japonesas pueden formularse mediante preguntas potenciales y expresiones de benefacción/honoríficas para reducir la imposición. Los ejemplos con 〜ていただけますか y formulaciones afines están documentados oficialmente, y la advertencia de que la cortesía depende de relación, jerarquía y contexto es pertinente.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "Vていただけますか／Vていただけませんか y variantes interrogativas funcionan como expresiones de petición.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "La forma interrogativa puede suavizar la fuerza de una petición, y el grado de cortesía adecuado depende de la relación interpersonal y el contexto.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "The Japan Foundation. (s. f.). Vていただきます／Vていただけませんか／Vていただきたいんですが. みんなの教材サイト.",
+              "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00096/ja/render.do",
+              "role": "Documenta Vていただけませんか, Vていただけますか y otras variantes como expresiones de petición, incluidos usos con interlocutores de mayor estatus."
+            },
+            {
+              "citation": "The Japan Foundation. (s. f.). 日本語・日本語教育を研究する 第32回 談話から見た文法.",
+              "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/research/032.html",
+              "role": "Explica que las formas interrogativas usadas como peticiones pueden reducir la imposición y que una forma excesivamente cortés puede crear distancia según el contexto."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-ff97586d-c29f-4779-9eb2-73381e81a4c8",
+        "ticketId": "R43-EMERGENCY-0595",
+        "leaseGeneration": 3,
+        "idempotencyKey": "r44-sol-jd-0595-MLS-V06-0494-v1",
+        "entry": {
+          "code": "MLS-V06-0494",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "Correcta: 〜たら se forma con la forma pasada llana + ら y sirve tanto para condiciones hipotéticas/futuras como para relaciones temporales o de resultado ya realizado. También es correcto que admite peticiones, decisiones y órdenes en la oración principal.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "〜たら se forma añadiendo ら a la forma pasada llana de verbos, adjetivos y nombres.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "〜たら puede expresar condición hipotética, condición ya prevista/temporal y secuencia o descubrimiento en pasado.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "The Japan Foundation. (2024). Irodori: Japanese for Life in Japan — Grammar Notes, Elementary 2, Lesson 7.",
+              "url": "https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf",
+              "role": "Explica los usos hipotético y temporal/fijo de 〜たら, su formación con la forma pasada llana + ら y ejemplos con peticiones."
+            },
+            {
+              "citation": "Tokyo University of Foreign Studies. (s. f.). 日本語 文法 条件.",
+              "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/083.html",
+              "role": "Distingue 〜たら como condición específica/de una sola vez, documenta su formación y su uso en secuencias temporales."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-ff97586d-c29f-4779-9eb2-73381e81a4c8",
+        "ticketId": "R43-EMERGENCY-0595",
+        "leaseGeneration": 3,
+        "idempotencyKey": "r44-sol-jd-0595-MLS-V06-0495-v1",
+        "entry": {
+          "code": "MLS-V06-0495",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "La comparación es adecuada y prudentemente matizada. Fuentes de referencia distinguen 〜ば como frecuente en relaciones generales o regulares y 〜たら como especialmente apto para condiciones específicas y secuencias; además, las restricciones de 〜ば con voluntad, orden o petición dependen de la estructura, por lo que la entrada acierta al no convertirlas en una prohibición absoluta.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "〜ば se usa con frecuencia para relaciones generales o regulares, mientras 〜たら es especialmente natural en condiciones específicas y secuencias.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "〜たら permite con libertad órdenes, peticiones y otras expresiones volitivas en la principal; 〜ば presenta restricciones estructurales que no se reducen a una regla absoluta.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Tokyo University of Foreign Studies. (s. f.). 日本語 文法 条件.",
+              "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/083.html",
+              "role": "Compara と・ば・たら・なら: ば favorece relaciones generales y たら condiciones específicas/de una sola vez, con ejemplos volitivos para たら."
+            },
+            {
+              "citation": "The Japan Foundation. (s. f.). ば（条件）. みんなの教材サイト.",
+              "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00018/ja/render.do",
+              "role": "Describe ば y contrasta explícitamente sus restricciones de oración principal con たら, que admite órdenes como 地震が来たら…火を消しなさい."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-ff97586d-c29f-4779-9eb2-73381e81a4c8",
+        "ticketId": "R43-EMERGENCY-0595",
+        "leaseGeneration": 3,
+        "idempotencyKey": "r44-sol-jd-0595-MLS-V06-0496-v1",
+        "entry": {
+          "code": "MLS-V06-0496",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": {
+            "auditStatus": "PASS_NO_CHANGE",
+            "summary": "Correcta: 〜なら toma una condición como supuesto, tema o información contextual de partida y permite formular valoración, recomendación, voluntad u orden sobre esa base. La conexión indicada con nombres, な-adjetivos, verbos e い-adjetivos coincide con fuentes didácticas institucionales.",
+            "changes": [],
+            "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+          },
+          "claims": [
+            {
+              "claim": "〜なら puede retomar información del interlocutor o un supuesto contextual y presentar sobre esa base un juicio, recomendación, voluntad u orden.",
+              "supportType": "direct"
+            },
+            {
+              "claim": "〜なら se conecta con nombres y な-adjetivos sin な, y con la forma llana de verbos e い-adjetivos.",
+              "supportType": "direct"
+            }
+          ],
+          "sources": [
+            {
+              "citation": "Tokyo University of Foreign Studies. (s. f.). 日本語 文法 条件.",
+              "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/083.html",
+              "role": "Explica el valor contextual de なら, su uso para juicios/órdenes/deseos y su capacidad de retomar información aportada por el interlocutor."
+            },
+            {
+              "citation": "The Japan Foundation. (2024). Irodori: Japanese for Life in Japan — Grammar Notes, Elementary 2, Lesson 13.",
+              "url": "https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf",
+              "role": "Documenta なら como referencia a lo dicho por el interlocutor y como condición hipotética; especifica la conexión con nombres, verbos y adjetivos."
+            }
+          ],
+          "evidence": {
+            "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-ff97586d-c29f-4779-9eb2-73381e81a4c8",
+        "ticketId": "R43-EMERGENCY-0595",
+        "entries": [
+          {
+            "code": "MLS-V06-0492",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La entrada describe correctamente la omisión contextual de argumentos y material recuperable en japonés. La literatura sobre pronombres cero confirma que sujetos y objetos se omiten con frecuencia cuando el antecedente se recupera del contexto; además, la entrada evita reducir toda omisión a un «pronombre implícito».",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En japonés se omiten con frecuencia argumentos/pronombres de sujeto y objeto cuando son recuperables del contexto.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "La interpretación de esas omisiones depende de información discursiva/contextual y de la recuperación del antecedente.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Shimazu, S., Takase, S., Nakazawa, T., & Okazaki, N. (2020). Evaluation Dataset for Zero Pronoun in Japanese to English Translation. Proceedings of LREC 2020, 3630–3634.",
+                "url": "https://aclanthology.org/2020.lrec-1.447/",
+                "role": "Documenta que en japonés se omiten con frecuencia pronombres de sujeto y objeto entendibles por el contexto y que su resolución requiere identificar el antecedente."
+              },
+              {
+                "citation": "Konno, R., Matsubayashi, Y., Kiyono, S., Ouchi, H., Takahashi, R., & Inui, K. (2020). An Empirical Study of Contextual Data Augmentation for Japanese Zero Anaphora Resolution. arXiv.",
+                "url": "https://arxiv.org/abs/2011.00948",
+                "role": "Confirma el fenómeno de la anáfora cero en japonés y la importancia del contexto para resolverla."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V06-0493",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La explicación es correcta: las peticiones japonesas pueden formularse mediante preguntas potenciales y expresiones de benefacción/honoríficas para reducir la imposición. Los ejemplos con 〜ていただけますか y formulaciones afines están documentados oficialmente, y la advertencia de que la cortesía depende de relación, jerarquía y contexto es pertinente.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "Vていただけますか／Vていただけませんか y variantes interrogativas funcionan como expresiones de petición.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "La forma interrogativa puede suavizar la fuerza de una petición, y el grado de cortesía adecuado depende de la relación interpersonal y el contexto.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "The Japan Foundation. (s. f.). Vていただきます／Vていただけませんか／Vていただきたいんですが. みんなの教材サイト.",
+                "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00096/ja/render.do",
+                "role": "Documenta Vていただけませんか, Vていただけますか y otras variantes como expresiones de petición, incluidos usos con interlocutores de mayor estatus."
+              },
+              {
+                "citation": "The Japan Foundation. (s. f.). 日本語・日本語教育を研究する 第32回 談話から見た文法.",
+                "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/research/032.html",
+                "role": "Explica que las formas interrogativas usadas como peticiones pueden reducir la imposición y que una forma excesivamente cortés puede crear distancia según el contexto."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V06-0494",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "Correcta: 〜たら se forma con la forma pasada llana + ら y sirve tanto para condiciones hipotéticas/futuras como para relaciones temporales o de resultado ya realizado. También es correcto que admite peticiones, decisiones y órdenes en la oración principal.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "〜たら se forma añadiendo ら a la forma pasada llana de verbos, adjetivos y nombres.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "〜たら puede expresar condición hipotética, condición ya prevista/temporal y secuencia o descubrimiento en pasado.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "The Japan Foundation. (2024). Irodori: Japanese for Life in Japan — Grammar Notes, Elementary 2, Lesson 7.",
+                "url": "https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf",
+                "role": "Explica los usos hipotético y temporal/fijo de 〜たら, su formación con la forma pasada llana + ら y ejemplos con peticiones."
+              },
+              {
+                "citation": "Tokyo University of Foreign Studies. (s. f.). 日本語 文法 条件.",
+                "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/083.html",
+                "role": "Distingue 〜たら como condición específica/de una sola vez, documenta su formación y su uso en secuencias temporales."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V06-0495",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La comparación es adecuada y prudentemente matizada. Fuentes de referencia distinguen 〜ば como frecuente en relaciones generales o regulares y 〜たら como especialmente apto para condiciones específicas y secuencias; además, las restricciones de 〜ば con voluntad, orden o petición dependen de la estructura, por lo que la entrada acierta al no convertirlas en una prohibición absoluta.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "〜ば se usa con frecuencia para relaciones generales o regulares, mientras 〜たら es especialmente natural en condiciones específicas y secuencias.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "〜たら permite con libertad órdenes, peticiones y otras expresiones volitivas en la principal; 〜ば presenta restricciones estructurales que no se reducen a una regla absoluta.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Tokyo University of Foreign Studies. (s. f.). 日本語 文法 条件.",
+                "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/083.html",
+                "role": "Compara と・ば・たら・なら: ば favorece relaciones generales y たら condiciones específicas/de una sola vez, con ejemplos volitivos para たら."
+              },
+              {
+                "citation": "The Japan Foundation. (s. f.). ば（条件）. みんなの教材サイト.",
+                "url": "https://www.kyozai.jpf.go.jp/kyozai/material/BMA00018/ja/render.do",
+                "role": "Describe ば y contrasta explícitamente sus restricciones de oración principal con たら, que admite órdenes como 地震が来たら…火を消しなさい."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V06-0496",
+            "outcome": "PASS_NO_CHANGE",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "Correcta: 〜なら toma una condición como supuesto, tema o información contextual de partida y permite formular valoración, recomendación, voluntad u orden sobre esa base. La conexión indicada con nombres, な-adjetivos, verbos e い-adjetivos coincide con fuentes didácticas institucionales.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "〜なら puede retomar información del interlocutor o un supuesto contextual y presentar sobre esa base un juicio, recomendación, voluntad u orden.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "〜なら se conecta con nombres y な-adjetivos sin な, y con la forma llana de verbos e い-adjetivos.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Tokyo University of Foreign Studies. (s. f.). 日本語 文法 条件.",
+                "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/083.html",
+                "role": "Explica el valor contextual de なら, su uso para juicios/órdenes/deseos y su capacidad de retomar información aportada por el interlocutor."
+              },
+              {
+                "citation": "The Japan Foundation. (2024). Irodori: Japanese for Life in Japan — Grammar Notes, Elementary 2, Lesson 13.",
+                "url": "https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf",
+                "role": "Documenta なら como referencia a lo dicho por el interlocutor y como condición hipotética; especifica la conexión con nombres, verbos y adjetivos."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
