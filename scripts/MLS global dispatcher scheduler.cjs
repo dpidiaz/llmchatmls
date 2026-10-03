@@ -45,6 +45,13 @@ async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo
 function dispatcherIssue(issue){return issue&&!issue.pull_request&&String(issue.title||'').startsWith('[MLS Dispatcher]');}
 function ledgerIssue(issue){return issue&&!issue.pull_request&&String(issue.title||'')==='[MLS Dispatcher Ledger]';}
 function hasCommandMarker(issue){return /<!--\s*MLS_GLOBAL_DISPATCH_COMMAND\b/.test(String(issue?.body||''));}
+const DISPATCH_AUTHORIZED_ASSOCIATIONS=new Set(['OWNER','MEMBER','COLLABORATOR']);
+function dispatcherCommandAuthorized(issue,command){
+  const association=String(issue?.author_association||'').toUpperCase();
+  if(DISPATCH_AUTHORIZED_ASSOCIATIONS.has(association))return true;
+  const login=String(issue?.user?.login||'');
+  return login==='github-actions[bot]'&&command?.operation==='claim'&&String(command?.requestId||'').startsWith('autopull:');
+}
 function hasAssignmentState(issue){return Boolean(core.parseAssignmentState(issue?.body||''));}
 function renderResponse(title,payload){return '## '+title+'\n\n'+JSON.stringify(payload,null,2)+'\n';}
 async function getMainSha(){const ref=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');return String(ref?.object?.sha||'');}
@@ -336,6 +343,10 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
   for(const issue of issues){
     let command;
     try{command=core.parseCommand(issue.body||'');}catch(error){await reject(issue,error);drained.push({issueNumber:issue.number,status:'rejected'});continue;}
+    if(!dispatcherCommandAuthorized(issue,command)){
+      const error=core.dispatchError('DISPATCH_AUTHOR_UNAUTHORIZED','Only repository owner/member/collaborator or a trusted autopull bot may submit Dispatcher commands.',403);
+      await reject(issue,error);drained.push({issueNumber:issue.number,status:'rejected_unauthorized'});continue;
+    }
     if(command.operation==='status_global'){
       const registry=runtimeRegistry();
       const progress=progressFor(registry);
