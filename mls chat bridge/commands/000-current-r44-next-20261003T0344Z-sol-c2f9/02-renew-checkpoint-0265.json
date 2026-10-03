@@ -1,0 +1,48 @@
+{
+  "batchId": "r44-next-20261003T0345Z-sol-c2f9-checkpoint-one",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-60865914-3922-41e2-8c1e-e2ea8c83e95c"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-60865914-3922-41e2-8c1e-e2ea8c83e95c",
+        "ticketId": "R43-EMERGENCY-0557",
+        "leaseGeneration": 1,
+        "idempotencyKey": "R43-EMERGENCY-0557:MLS-V06-0265:audit-20261003T0345Z-sol-c2f9",
+        "entry": {
+          "code": "MLS-V06-0265",
+          "outcome": "PASS_NO_CHANGE",
+          "sources": [
+            {
+              "id": "JPF-IRODORI-STARTER-L17",
+              "citation": "The Japan Foundation. Irodori: Japanese for Life in Japan, Starter, Lesson 17 (Verbs: past and non-past).",
+              "url": "https://www.irodori.jpf.go.jp/assets/data/starter/pdf/X_L17_au.pdf"
+            },
+            {
+              "id": "JPF-IRODORI-GRAMMAR-L18",
+              "citation": "The Japan Foundation. Irodori: Japanese for Life in Japan, Elementary 1, Lesson 18, Grammar Notes (plain-form past/non-past table).",
+              "url": "https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf"
+            }
+          ],
+          "claims": [
+            {
+              "claim": "El sistema verbal básico japonés distingue pasado y no pasado; el no pasado cubre tanto presente habitual/factual como futuro, y su negativo puede expresarse con V-ません o con formas negativas basadas en V-ない.",
+              "support": "JPF-IRODORI-STARTER-L17"
+            },
+            {
+              "claim": "En forma llana, el negativo no pasado verbal se representa como V-ない (por ejemplo 行かない), mientras el pasado negativo es V-なかった (por ejemplo 行かなかった); por tanto la entrada distingue correctamente 行かない de 行かなかった.",
+              "support": "JPF-IRODORI-GRAMMAR-L18"
+            }
+          ],
+          "notes": "Auditoría R44 de MLS-V06-0265: la explicación es sustantivamente correcta. Irodori de The Japan Foundation documenta que el japonés verbal básico opone pasado y no pasado, que el no pasado abarca presente habitual/factual y futuro, y que el negativo no pasado aparece como V-ません / V-ない; también contrasta V-ない (p. ej., 行かない) con V-なかった (行かなかった). Los ejemplos y la observación de la entrada son coherentes con estas formas. No se detecta corrección editorial necesaria. PASS_NO_CHANGE; R33 canónico permanece pendiente."
+        }
+      }
+    }
+  ]
+}
