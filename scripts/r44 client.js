@@ -103,7 +103,7 @@ class R44Client {
       await processTicket({client:this,allocation,ticketId,remaining,index:completed.length});
       const confirmed=await this.recover();
       if(confirmed.state!=='COMPLETE') {
-        return {status:'FAST_LANE_STOPPED',reason:confirmed.status||confirmed.state||'CURRENT_TICKET_NOT_COMPLETE',completed,count:completed.length,workerId:this.state.workerId,ticketId,state:confirmed};
+        return {status:'FAST_LANE_STOPPED',reason:confirmed.state||confirmed.status||'CURRENT_TICKET_NOT_COMPLETE',completed,count:completed.length,workerId:this.state.workerId,ticketId,state:confirmed};
       }
       completed.push(ticketId);
       if(completed.length>=maxTickets){reason='LIMIT_REACHED';break;}
