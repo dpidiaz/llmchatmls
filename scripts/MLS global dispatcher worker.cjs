@@ -38,11 +38,11 @@ function autoPullRequest(state,comment){
   const workId=String(state.workId||'');
   const handoffScope=/^r33-handoff:\d+:/.exec(workId);
   const unifiedScope=workId.startsWith('r33-unified:')?'r33-unified:':null;
-  const scopedPrefix=handoffScope?.[0]||unifiedScope;
   return {
     operation:'claim',requestId,workerId,workerLogin:workerLogin||null,
     capabilities:['chat','github','r4-autopull'],
-    ...(scopedPrefix?{provider:'r33-farm',workPrefix:scopedPrefix}:{})
+    ...(handoffScope?{provider:'r33-farm',workPrefix:handoffScope[0]}:
+      unifiedScope?{provider:'r33-farm',workPrefix:unifiedScope}:{})
   };
 }
 function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
