@@ -32,6 +32,12 @@ test('Unified Cloudflare runner injects one syntactically valid scheduled contro
   assert.match(built,/\/api\/unified-runner\/status/);
   assert.match(built,/\/api\/unified-runner\/control/);
   assert.match(built,/\/api\/unified-runner\/step/);
+  assert.match(built,/\/api\/unified-runner\/r33-evidence/);
+  assert.match(built,/\/api\/unified-runner\/report/);
+  assert.match(built,/CREATE TABLE IF NOT EXISTS mls_unified_runner_lane/);
+  assert.match(built,/MLS_R33_SOURCE_CATALOG/);
+  assert.match(built,/R33-Unified-CF-1/);
+  assert.match(built,/NEEDS_CHAT_REVIEW/);
   assert.match(built,/r44ChatBridgeAuthorize\(request, env\)/);
   assert.match(built,/@cf\/ibm-granite\/granite-4\.0-h-micro/);
   assert.match(built,/POLICY_PAUSED/);
@@ -46,6 +52,10 @@ test('Unified runner page preserves corpus runner and parses all inline scripts'
   assert.match(html,/id="unifiedPanel"/);
   assert.match(html,/>MLS Unified</);
   assert.match(html,/\/api\/unified-runner\//);
+  assert.match(html,/id="unifiedR33Lane"/);
+  assert.match(html,/VERIFIED canónico/);
+  assert.match(html,/\/api\/unified\/status/);
+  assert.match(html,/REVIEW_PAUSED/);
   assert.match(html,/authorization':'Bearer /);
   assert.doesNotMatch(html,/GITHUB_TOKEN|api\.github\.com/);
   const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(x=>x[1]).filter(Boolean);
