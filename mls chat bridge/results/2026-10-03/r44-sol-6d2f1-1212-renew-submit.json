@@ -1,0 +1,50 @@
+{
+  "success": false,
+  "httpStatus": 400,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": false,
+    "batchId": "r44-sol-6d2f1-1212-renew-submit",
+    "requested": 2,
+    "processed": 2,
+    "failures": 1,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-af5a588a-0be2-4d1f-b7eb-91b26426334a",
+          "ticketId": "R44-CORPUS-1212",
+          "leaseExpiresAt": 1790998359221
+        },
+        "completedAt": "2026-10-03T03:27:39.367Z"
+      },
+      {
+        "index": 1,
+        "success": false,
+        "httpStatus": 400,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "http": 400,
+          "error": "INVALID_OUTCOME",
+          "receipts": [],
+          "durable": false,
+          "bridgeSessionId": "r44b-af5a588a-0be2-4d1f-b7eb-91b26426334a"
+        },
+        "completedAt": "2026-10-03T03:27:39.766Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:27:39.766Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/r44-sol-6d2f1-1212-renew-submit.json"
+}
