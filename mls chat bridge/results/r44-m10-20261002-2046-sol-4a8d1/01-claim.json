@@ -1,0 +1,186 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "r44ClaimChat",
+  "method": "POST",
+  "path": "/api/r44/chat-bridge/claim",
+  "response": {
+    "status": "LEASE_REUSED",
+    "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+    "bridgeSessionId": "r44b-40932f81-6030-48c0-b9f1-1bc59827be54",
+    "workerId": "chat-r44-m10-20261002-2046-sol-4a8d1",
+    "ticket": {
+      "ticket_id": "R43-EMERGENCY-0655",
+      "leaseGeneration": 1,
+      "lease_expires_at": 1790996091966,
+      "state": "LEASED",
+      "entries": [
+        {
+          "code": "MLS-V06-0851",
+          "path": "japones/MLS-V06-0851.json",
+          "sha256": "3961cc8a118081cd3d3a004faf7b33c583834db2513fbe86d7c18d060ddf4482"
+        },
+        {
+          "code": "MLS-V06-0853",
+          "path": "japones/MLS-V06-0853.json",
+          "sha256": "960130a8c2eeb921ebb3fe1a220f7904151945e09786bf147034576dcee74c6b"
+        },
+        {
+          "code": "MLS-V06-0854",
+          "path": "japones/MLS-V06-0854.json",
+          "sha256": "5b67cb35b67e29e938047b077fc11e546ebc5aa9368a7b622cdf389b83f61c0f"
+        },
+        {
+          "code": "MLS-V06-0855",
+          "path": "japones/MLS-V06-0855.json",
+          "sha256": "2074d7ffe357e6f077fb897af98acefd4df5bfcf8572717aac1f430ab2bd7bcb"
+        },
+        {
+          "code": "MLS-V06-0856",
+          "path": "japones/MLS-V06-0856.json",
+          "sha256": "5f18464bf25be7876cdfc160374bd2eeab06fc3f874e2312816333a53db26701"
+        }
+      ]
+    },
+    "context": {
+      "ticketId": "R43-EMERGENCY-0655",
+      "state": "LEASED",
+      "migrationNote": null,
+      "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+      "entries": [
+        {
+          "code": "MLS-V06-0851",
+          "path": "japones/MLS-V06-0851.json",
+          "sha256": "3961cc8a118081cd3d3a004faf7b33c583834db2513fbe86d7c18d060ddf4482"
+        },
+        {
+          "code": "MLS-V06-0853",
+          "path": "japones/MLS-V06-0853.json",
+          "sha256": "960130a8c2eeb921ebb3fe1a220f7904151945e09786bf147034576dcee74c6b"
+        },
+        {
+          "code": "MLS-V06-0854",
+          "path": "japones/MLS-V06-0854.json",
+          "sha256": "5b67cb35b67e29e938047b077fc11e546ebc5aa9368a7b622cdf389b83f61c0f"
+        },
+        {
+          "code": "MLS-V06-0855",
+          "path": "japones/MLS-V06-0855.json",
+          "sha256": "2074d7ffe357e6f077fb897af98acefd4df5bfcf8572717aac1f430ab2bd7bcb"
+        },
+        {
+          "code": "MLS-V06-0856",
+          "path": "japones/MLS-V06-0856.json",
+          "sha256": "5f18464bf25be7876cdfc160374bd2eeab06fc3f874e2312816333a53db26701"
+        }
+      ],
+      "remaining": [
+        "MLS-V06-0851",
+        "MLS-V06-0853",
+        "MLS-V06-0854",
+        "MLS-V06-0855",
+        "MLS-V06-0856"
+      ],
+      "lease": {
+        "workerId": "chat-r44-m10-20261002-2046-sol-4a8d1",
+        "leaseGeneration": 1,
+        "leaseExpiresAt": 1790996091966,
+        "active": true
+      },
+      "workerId": "chat-r44-m10-20261002-2046-sol-4a8d1",
+      "leaseGeneration": 1,
+      "leaseExpiresAt": 1790996091966,
+      "active": true,
+      "content": [
+        {
+          "code": "MLS-V06-0851",
+          "language": "japones",
+          "languageName": "Japonés",
+          "n": 851,
+          "title": "Recuperación por contexto",
+          "level": "C1",
+          "part": "Información y elipsis — 情報構造・省略",
+          "chapter": "Elipsis, referencia y anáfora — 省略・指示・照応",
+          "articleMarkdown": "#### En pocas palabras\n\nLa **文脈による補完（ぶんみゃくによるほかん）**, o recuperación por contexto, es el proceso por el cual quienes participan en una conversación o leen un texto interpretan información que no aparece expresada de manera completa, pero que puede reconstruirse a partir de lo ya dicho, la situación o el conocimiento compartido.\n\nEn **田中さんは来ました。佐藤さんはまだです。** — “Tanaka vino. Sato todavía no” — la segunda oración se entiende normalmente como “Sato todavía no ha venido”. El verbo **来る** no se repite, pero el contexto inmediato permite recuperarlo.\n\n#### Cómo funciona\n\nEl japonés permite omitir con frecuencia sujetos, objetos, predicados y otros elementos cuando su referencia resulta suficientemente accesible. La recuperación puede depender de una expresión anterior, de la estructura paralela del discurso o de la situación física en la que ocurre la interacción.\n\nPor ejemplo, en **A: もう食べた？ B: うん。** — “A: ¿Ya comiste? B: Sí” — la respuesta no repite **食べた**, porque la pregunta proporciona el contenido necesario. En **これ、誰の？** “¿Esto, de quién?”, la identidad del objeto puede provenir de lo que ambos interlocutores están mirando, no de una frase anterior.\n\nEl mecanismo es pragmático y discursivo: la gramática limita las interpretaciones posibles, pero el contexto ayuda a seleccionar cuál de ellas resulta pertinente.\n\n#### Ejemplos\n\n* **田中さんは来ました。佐藤さんはまだです。** — Tanaka vino. Sato todavía no; se recupera “todavía no ha venido”.\n* **A: 明日行く？ B: 行く。** — A: ¿Vas mañana? B: Sí, voy; el sujeto puede recuperarse del intercambio.\n* **A: コーヒーは？ B: もう飲んだ。** — A: ¿Y el café? B: Ya lo bebí; el objeto se recupera del tópico previo.\n* **そこに置いて。** — Ponlo ahí; qué debe colocarse puede estar determinado por la situación compartida.\n\n#### Observación importante\n\nRecuperar información por contexto no significa que siempre exista una única “oración completa” oculta. A veces varias formulaciones gramaticales podrían expresar de manera explícita el mismo contenido pragmático.\n\nTambién conviene distinguir recuperación contextual de referencia léxica explícita. Demostrativos como **これ** o **それ** sí aparecen pronunciados; otros participantes pueden quedar completamente omitidos. Ambos recursos dependen del contexto, pero no son estructuralmente idénticos.\n\n#### Entradas relacionadas\n\n[Entrada 850: Elipsis de predicado](#entry-850) · [Entrada 852: Referencia honorífica implícita](#entry-852) · [Entrada 849: Elipsis de cópula en habla](#entry-849) · [Entrada 853: これ/それ anafóricos](#entry-853)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-41248b2ac97e7a0fbcaaaded7f93960c5b6b0f394737dfd05c0924337218abe1",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T21:22:36.501Z"
+        },
+        {
+          "code": "MLS-V06-0853",
+          "language": "japones",
+          "languageName": "Japonés",
+          "n": 853,
+          "title": "これ/それ anafóricos",
+          "level": "C1",
+          "part": "Información y elipsis — 情報構造・省略",
+          "chapter": "Elipsis, referencia y anáfora — 省略・指示・照応",
+          "articleMarkdown": "#### En pocas palabras\n\nLos demostrativos **これ** y **それ** pueden funcionar de manera **anafórica**, es decir, pueden remitir a algo mencionado previamente en el discurso. En este uso no señalan necesariamente un objeto visible en el espacio: recuperan una entidad, un hecho o una idea ya introducida.\n\nEn **本を買った。それは高かった。** — “Compré un libro. Era caro” — **それ** retoma **本** “libro”. El lector entiende que la segunda oración habla del mismo referente sin necesidad de repetir el sustantivo.\n\n#### Cómo funciona\n\nLa serie demostrativa japonesa incluye **こ-**, **そ-** y **あ-**, pero su interpretación no depende solo de distancia física. En el discurso, **それ** es especialmente frecuente para retomar información presentada justo antes por otra persona o por el texto. **これ** puede emplearse cuando quien habla presenta la información como cercana a su propio punto de vista discursivo.\n\nEl referente puede ser una entidad concreta: **新しい機械を買った。それは便利だ。** “Compré una máquina nueva. Es útil”. También puede ser un contenido más amplio: **電車が止まった。それで遅れた。** “El tren se detuvo. Por eso llegué tarde”, donde la serie **そ-** retoma una situación previa dentro de una construcción conectiva.\n\nLa referencia exacta depende del contexto. Si hay varios posibles antecedentes, la elección de **これ／それ** por sí sola puede no bastar para resolver la ambigüedad.\n\n#### Ejemplos\n\n* **本を買った。それは高かった。** — Compré un libro. Era caro.\n* **新しい案が出た。それを検討する。** — Surgió una nueva propuesta. La examinaremos.\n* **これは前に説明した問題です。** — Este es el problema que expliqué antes; **これ** vincula el referente actual con información previa.\n* **彼は計画を変更した。それが成功につながった。** — Cambió el plan. Eso condujo al éxito.\n\n#### Observación importante\n\nLa anáfora no es lo mismo que la deixis. En uso deíctico, **これ** o **それ** señalan algo identificado por la situación física o conversacional; en uso anafórico, el antecedente se encuentra en el discurso previo. En muchos casos ambos tipos de información pueden colaborar.\n\nTampoco debe suponerse que **これ** significa siempre “esto” y **それ** siempre “eso” de manera mecánica. La elección depende de perspectiva discursiva, acceso compartido y organización de la información.\n\n#### Entradas relacionadas\n\n[Entrada 852: Referencia honorífica implícita](#entry-852) · [Entrada 854: その + nombre anafórico](#entry-854) · [Entrada 851: Recuperación por contexto](#entry-851) · [Entrada 855: Mismo referente](#entry-855)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-776acd1ad344b6b962c6b9c1be3360e982de4fced4944a9f76f6bdb8cf9056eb",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T21:24:47.458Z"
+        },
+        {
+          "code": "MLS-V06-0854",
+          "language": "japones",
+          "languageName": "Japonés",
+          "n": 854,
+          "title": "その + nombre anafórico",
+          "level": "C1",
+          "part": "Información y elipsis — 情報構造・省略",
+          "chapter": "Elipsis, referencia y anáfora — 省略・指示・照応",
+          "articleMarkdown": "#### En pocas palabras\n\nLa secuencia **その＋名詞（めいし）** puede funcionar de manera **anafórica**: retoma una entidad, hecho o concepto mencionado previamente y lo vuelve a presentar mediante un sustantivo. En este uso, **その** no señala necesariamente algo físicamente cercano al interlocutor; enlaza el nuevo grupo nominal con información ya introducida.\n\nPor ejemplo, **新しい計画が発表された。その計画は来月始まる。** significa “Se anunció un nuevo plan. Ese plan comenzará el próximo mes”. **その計画** retoma **新しい計画** y mantiene explícito el tipo de referente mediante el sustantivo **計画**.\n\n#### Cómo funciona\n\nA diferencia de **それ**, que puede funcionar por sí solo como demostrativo, **その** modifica a un nombre: **その本**, **その問題**, **その結果**. El sustantivo ayuda a clasificar o reinterpretar el antecedente y puede hacer la referencia más clara cuando el discurso contiene varios candidatos.\n\nEl antecedente no tiene que repetirse con exactamente las mismas palabras. En **事故が起きた。その出来事は大きく報道された。** “Ocurrió un accidente. Ese hecho recibió amplia cobertura”, **その出来事** retoma el accidente mediante un nombre más general, **出来事** “hecho/suceso”.\n\nTambién puede resumir contenido proposicional: **計画は延期された。その決定に反対する人もいた。** “El plan fue aplazado. Algunas personas se opusieron a esa decisión”. Aquí **その決定** convierte el contenido previo en una entidad discursiva.\n\nEsta estrategia permite mantener cohesión sin repetir literalmente el antecedente. El nombre elegido puede conservar la misma categoría léxica o introducir una caracterización nueva, siempre que el vínculo con lo anterior sea suficientemente claro para el lector.\n\n#### Ejemplos\n\n* **本を一冊買った。その本は高かった。** — Compré un libro. Ese libro era caro.\n* **新しい制度が始まった。その制度には例外もある。** — Comenzó un nuevo sistema. Ese sistema también tiene excepciones.\n* **試験を延期した。その決定は後で説明された。** — Se aplazó el examen. Esa decisión se explicó después.\n* **事故が起きた。その出来事はニュースになった。** — Ocurrió un accidente. Ese suceso apareció en las noticias.\n\nLos cuatro casos muestran que **その＋名詞** puede repetir, reclasificar o resumir el antecedente manteniendo una referencia reconocible.\n\n#### Observación importante\n\nEl **その** anafórico no equivale siempre al español “ese” con sentido espacial. Su función puede ser puramente discursiva y depender de un antecedente textual.\n\nTampoco debe añadirse automáticamente **その＋名詞** allí donde el japonés omite una referencia recuperable. La omisión, **それ** y **その＋名詞** son estrategias distintas, y la elección depende de claridad, cohesión, registro y estructura informativa.\n\n#### Entradas relacionadas\n\n[Entrada 853: これ/それ anafóricos](#entry-853) · [Entrada 855: Mismo referente](#entry-855) · [Entrada 852: Referencia honorífica implícita](#entry-852) · [Entrada 856: 自分 anafórico](#entry-856)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-ef1492d085b99596e4d9aee3862b70c95cb9519791887270d90008deec32cfc2",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T21:26:18.683Z"
+        },
+        {
+          "code": "MLS-V06-0855",
+          "language": "japones",
+          "languageName": "Japonés",
+          "n": 855,
+          "title": "同じ referente",
+          "level": "C1",
+          "part": "Información y elipsis — 情報構造・省略",
+          "chapter": "Elipsis, referencia y anáfora — 省略・指示・照応",
+          "articleMarkdown": "#### En pocas palabras\n\n**同一指示（どういつしじ）** significa que dos expresiones del discurso remiten al mismo referente, es decir, a la misma persona, objeto, entidad o situación. Las expresiones no tienen que ser idénticas: pueden usar un nombre, un demostrativo, una descripción o incluso una omisión recuperable.\n\nPor ejemplo, **田中さんが来た。その人は資料を持っていた。** — “Llegó Tanaka. Esa persona llevaba los documentos” — permite interpretar **田中さん** y **その人** como dos expresiones que apuntan a la misma persona.\n\n#### Cómo funciona\n\nLa identidad de referencia se establece combinando información lingüística y contexto. Un nombre propio puede introducir una entidad y una expresión posterior puede retomarla: **新しい機械を買った。その機械は高かった。** “Compré una máquina nueva. Esa máquina era cara”. Ambos grupos nominales comparten referente aunque su forma no sea idéntica.\n\nEn japonés también es frecuente mantener la referencia mediante omisión. En **田中さんは会社に着いた。すぐ会議室に入った。** “Tanaka llegó a la empresa. Entró enseguida en la sala de reuniones”, el sujeto de la segunda oración puede interpretarse como Tanaka si el contexto no introduce otro candidato más plausible.\n\nLa correferencia no depende de una sola partícula. **は**, **が**, demostrativos, nombres y elipsis pueden participar en cadenas referenciales distintas según la estructura del discurso.\n\nUna misma entidad puede mantenerse activa durante varias oraciones mediante expresiones diferentes. Esa cadena referencial permite al texto cambiar entre repetición explícita, demostrativos y omisión sin perder continuidad, siempre que el lector pueda seguir identificando al mismo referente.\n\n#### Ejemplos\n\n* **田中さんが来た。その人は資料を持っていた。** — Llegó Tanaka. Esa persona llevaba los documentos.\n* **本を買った。その本を昨日読んだ。** — Compré un libro. Ayer leí ese libro.\n* **先生は教室に入った。すぐ話し始めた。** — El profesor entró al aula. Enseguida empezó a hablar; el sujeto omitido puede conservar el mismo referente.\n* **新しい案が出た。それについて議論した。** — Surgió una nueva propuesta. Se discutió sobre ella.\n\nEstos casos muestran que la continuidad referencial puede expresarse de manera explícita o elíptica sin exigir la repetición literal del mismo nombre.\n\n#### Observación importante\n\nDos expresiones parecidas no tienen necesariamente el mismo referente. **田中さん** y **その人** solo son correferentes si el contexto permite identificar a **その人** como Tanaka; en otro contexto podría señalar a otra persona.\n\nTampoco debe confundirse **同一指示** con “tener el mismo significado”. **医者** “médico” y **先生** “profesor/doctor, según contexto” pueden tener significados distintos y, aun así, referirse a una misma persona en un discurso concreto.\n\n#### Entradas relacionadas\n\n[Entrada 854: その + nombre anafórico](#entry-854) · [Entrada 856: 自分 anafórico](#entry-856) · [Entrada 853: これ/それ anafóricos](#entry-853) · [Entrada 857: Ambigüedad por elipsis](#entry-857)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-d3749075959468a39344b407edad4a537bfd72712b416184574e1a2880665f1d",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T21:27:50.229Z"
+        },
+        {
+          "code": "MLS-V06-0856",
+          "language": "japones",
+          "languageName": "Japonés",
+          "n": 856,
+          "title": "自分 anafórico",
+          "level": "C1",
+          "part": "Información y elipsis — 情報構造・省略",
+          "chapter": "Elipsis, referencia y anáfora — 省略・指示・照応",
+          "articleMarkdown": "#### En pocas palabras\n\n**自分（じぶん）** puede funcionar como una expresión anafórica: su referencia se interpreta a partir de una persona relevante ya establecida por la oración o el discurso. En muchos contextos equivale naturalmente a “sí mismo/a” o “su propio/a”, pero no tiene una traducción única.\n\nEn **彼は自分の部屋に戻った。** — “Él volvió a su propio cuarto” — **自分** se interpreta normalmente como correferente con **彼**: el cuarto pertenece a la misma persona presentada como protagonista de la oración.\n\n#### Cómo funciona\n\nLa referencia de **自分** depende de la estructura y del punto de vista discursivo. Con frecuencia remite al sujeto o al participante cuyo punto de vista organiza la oración, especialmente en construcciones donde una persona actúa, piensa, habla o experimenta algo.\n\nPor ejemplo, **田中さんは自分が間違っていたと認めた。** — “Tanaka reconoció que él mismo se había equivocado” — favorece una lectura en la que **自分** remite a Tanaka, aunque aparezca dentro de una cláusula subordinada. Esa posibilidad muestra que su comportamiento no coincide exactamente con el de un pronombre reflexivo español ligado únicamente a la cláusula más pequeña.\n\nEn narración y discurso citado, el centro de perspectiva puede influir en la interpretación. Por ello, cuando hay varios posibles antecedentes humanos, la lectura de **自分** puede volverse ambigua y necesita apoyo del contexto.\n\n#### Ejemplos\n\n* **彼は自分の部屋に戻った。** — Él volvió a su propio cuarto.\n* **田中さんは自分が間違っていたと認めた。** — Tanaka reconoció que él mismo se había equivocado.\n* **先生は学生に自分の意見を書くよう求めた。** — El profesor pidió al estudiante que escribiera su propia opinión; el contexto determina a quién se atribuye **自分**.\n* **彼女は自分を責めなかった。** — Ella no se culpó a sí misma.\n\nLos ejemplos muestran que la correferencia puede ser muy clara o depender de la perspectiva y de los participantes disponibles.\n\n#### Observación importante\n\n**自分** no debe equipararse mecánicamente al español “sí mismo”. En japonés puede tener un dominio de referencia más amplio y su interpretación está vinculada a factores sintácticos, discursivos y de perspectiva.\n\nAdemás, existen usos no anafóricos o lexicalizados de **自分**, y en algunas variedades o registros puede emplearse con valores personales particulares. Por eso cada caso debe analizarse según la construcción concreta y no mediante una equivalencia fija.\n\n#### Entradas relacionadas\n\n[Entrada 855: Mismo referente](#entry-855) · [Entrada 857: Ambigüedad por elipsis](#entry-857) · [Entrada 854: その + nombre anafórico](#entry-854) · [Entrada 858: Anáfora cero](#entry-858)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-bf2d1a7f276956d262b74eef8da4baa6eb061e7154b9aeacb7ad527e06bf7696",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T21:29:21.300Z"
+        }
+      ]
+    },
+    "leaseTtlSeconds": 300
+  },
+  "completedAt": "2026-10-03T02:50:59.096Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2046-sol-4a8d1/01-claim.json"
+}
