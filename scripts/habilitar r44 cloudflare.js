@@ -46,9 +46,10 @@ function injectR44(code) {
       '$1// MLS Unified scheduled runner\n  async scheduled(_controller, env, ctx) {\n    ctx.waitUntil(unifiedRunnerScheduled(env));\n  },\n  async fetch(request, env, _ctx) {'
     );
   }
+  const sourceCatalogStart = next.indexOf('var MLS_R33_SOURCE_CATALOG =');
   const start = next.indexOf('var R44_DURABLE_SQL =');
   const legacyStart = next.indexOf('var R44_POOL_SHA256 =');
-  const begin = start >= 0 ? start : legacyStart;
+  const begin = sourceCatalogStart >= 0 ? sourceCatalogStart : start >= 0 ? start : legacyStart;
   const end = next.indexOf(RUNTIME_MARKER);
   if (begin >= 0 && end >= begin) next = next.slice(0,begin) + RUNTIME.trimEnd() + next.slice(end+RUNTIME_MARKER.length);
   else if (!next.includes(RUNTIME_MARKER)) next += "\n\n" + RUNTIME + "\n";
