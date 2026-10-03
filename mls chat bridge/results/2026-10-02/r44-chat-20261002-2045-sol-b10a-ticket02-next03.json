@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-b10a-ticket02-next03",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0888",
+          "sha256": "3fc2b67f09693dfeeda0a3e92e6fc609a396a5680081a5e21c388ff2030667b0",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0888",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ae1da92d-2779-4aaa-a331-bd5bc07e0ede",
+                "ticketId": "R44-CORPUS-0888",
+                "code": "MLS-V01-0560",
+                "idempotencyKey": "R44-CORPUS-0888:MLS-V01-0560:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2599adeb6ee419206f411a4d4327b43159892a943b2ee4968ab45eb605eb3a21",
+                "sourceSha256": "bd4cfa07bf0dbf25ef2b10b048d7157db45be89998b71110ba352ab17af330f0",
+                "committedMs": 1790996018112,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0dcc623acbd62bb9d44e82c71a29bce7b642083b98529da0d88cf99aadbd97b2",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0888",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "0e8c9ef7-ae2a-4e8e-9946-6a87d427de16",
+                "ticketId": "R44-CORPUS-0888",
+                "code": "MLS-V01-0561",
+                "idempotencyKey": "R44-CORPUS-0888:MLS-V01-0561:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "0c6e6ff714db564eaf8c8911c513056403108269b55d6f388ff0ef45af6720d9",
+                "sourceSha256": "ee43e16a2578c0de71c9ce343bc6e1bbcff5b96393c91298347f5760e3bedb01",
+                "committedMs": 1790996018323,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0570a10eede7dfb014ace0b4d1ac675e5e21ebec68479f5e44997d63dab588d5",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0888",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "780747a6-9c1e-4424-8a45-7879034a4771",
+                "ticketId": "R44-CORPUS-0888",
+                "code": "MLS-V01-0563",
+                "idempotencyKey": "R44-CORPUS-0888:MLS-V01-0563:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1df3b873741a7f7574ba627f81d19076267d4a9f4ef8f852076c882fabec8c92",
+                "sourceSha256": "793639e3a4268ed4e954bb20e2f60011284241cd630ac1ca8526e4970bf4c46b",
+                "committedMs": 1790996018542,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e29ffb7519637b5d007082a95d381882653b39e0b8f04678c751ac9886431711",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0888",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "0ec1bfc9-6649-408e-aeae-a83f98fc6a8e",
+                "ticketId": "R44-CORPUS-0888",
+                "code": "MLS-V01-0564",
+                "idempotencyKey": "R44-CORPUS-0888:MLS-V01-0564:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "51509381610e44ce966b7fbee2abf9b9c0bd5b99a370453ed9cde8f4cad5c1a9",
+                "sourceSha256": "b78ff5cf7bcc8f50812ae542e55a3374ee7d7a4fb213876e7077e2e27dcc4110",
+                "committedMs": 1790996018753,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "809da7238c0d0ce930b2f80168ae6ba9c7da7238eda8e43bc1af79e7a1d18af7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0888",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "79dec344-2cef-40db-a614-799b44de9b19",
+                "ticketId": "R44-CORPUS-0888",
+                "code": "MLS-V01-0565",
+                "idempotencyKey": "R44-CORPUS-0888:MLS-V01-0565:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a9aa647d90e55d908b63330bd172a3962c6b00d4e4783aa60ae106b551ed5a11",
+                "sourceSha256": "542d4c3ccf78e5c3255f5c76cfe7c8d6c5f795ad7e6d102dd63b65183ea4f8cc",
+                "committedMs": 1790996018965,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "da8d833146abbccd156eb75e563a10d7ad2f6098acf5761d54ac72f2998c4f7a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-e574c39d-c440-4b25-bd34-31078061cdd1",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "3fc2b67f09693dfeeda0a3e92e6fc609a396a5680081a5e21c388ff2030667b0"
+          }
+        },
+        "completedAt": "2026-10-03T02:53:39.249Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-6f366215-4d15-4640-b49d-d5b544e397ae",
+          "workerId": "r44-chat-20261002-2045-sol-b10a",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0890",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996319404,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0574",
+                "path": "ingles/MLS-V01-0574.json",
+                "sha256": "c7d4a07135cc801e5e0122c49048b18fba8d62ad311f66e641fa6c74b1526d6e"
+              },
+              {
+                "code": "MLS-V01-0575",
+                "path": "ingles/MLS-V01-0575.json",
+                "sha256": "a2a9b55f03347977fd6b44146308bdffb91669bb3e02e5163b9c7fe6b2a459e4"
+              },
+              {
+                "code": "MLS-V01-0576",
+                "path": "ingles/MLS-V01-0576.json",
+                "sha256": "c7a273f4db159e5a8f0a1834369ba758b0bb3546501b9eb2282cd2035a558bee"
+              },
+              {
+                "code": "MLS-V01-0577",
+                "path": "ingles/MLS-V01-0577.json",
+                "sha256": "1ab82ecc59d4f07619a58bc784302c9125ee1cf9c730345889d63fd0e87e2f5e"
+              },
+              {
+                "code": "MLS-V01-0579",
+                "path": "ingles/MLS-V01-0579.json",
+                "sha256": "ce2660a85ab223f6bbfef6b94b051fdf510923a6be226be2f7469a1bff54ca8e"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0890",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0574",
+                "path": "ingles/MLS-V01-0574.json",
+                "sha256": "c7d4a07135cc801e5e0122c49048b18fba8d62ad311f66e641fa6c74b1526d6e"
+              },
+              {
+                "code": "MLS-V01-0575",
+                "path": "ingles/MLS-V01-0575.json",
+                "sha256": "a2a9b55f03347977fd6b44146308bdffb91669bb3e02e5163b9c7fe6b2a459e4"
+              },
+              {
+                "code": "MLS-V01-0576",
+                "path": "ingles/MLS-V01-0576.json",
+                "sha256": "c7a273f4db159e5a8f0a1834369ba758b0bb3546501b9eb2282cd2035a558bee"
+              },
+              {
+                "code": "MLS-V01-0577",
+                "path": "ingles/MLS-V01-0577.json",
+                "sha256": "1ab82ecc59d4f07619a58bc784302c9125ee1cf9c730345889d63fd0e87e2f5e"
+              },
+              {
+                "code": "MLS-V01-0579",
+                "path": "ingles/MLS-V01-0579.json",
+                "sha256": "ce2660a85ab223f6bbfef6b94b051fdf510923a6be226be2f7469a1bff54ca8e"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0574",
+              "MLS-V01-0575",
+              "MLS-V01-0576",
+              "MLS-V01-0577",
+              "MLS-V01-0579"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261002-2045-sol-b10a",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996319404,
+              "active": true
+            },
+            "workerId": "r44-chat-20261002-2045-sol-b10a",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996319404,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0574",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 574,
+                "title": "Cláusulas con than",
+                "level": "B2",
+                "part": "Subordinación y cláusulas dependientes — Subordination and dependent clauses",
+                "chapter": "Cláusulas adverbiales — Adverbial clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nLas cláusulas con **than** completan una comparación de desigualdad. Aparecen después de comparativos como **earlier, taller, more carefully, less expensive** y aportan el punto con el que se compara. En **He arrived earlier than I expected** («Llegó antes de lo que esperaba»), la cláusula **than I expected** establece la referencia respecto de la cual **earlier** expresa anterioridad.\n\n#### Cómo funciona\n\nEl patrón general es **comparativo + than + cláusula**: **She is taller than I am**, **They worked more quickly than we expected**, **The result was better than anyone had predicted**.\n\nLa cláusula introducida por **than** puede estar completa o presentar **elipsis**, es decir, omisión de material que se recupera del contexto. En **She is taller than I am**, el adjetivo comparado no necesita repetirse después de **am**. En **He knows more than I do**, **do** recupera el contenido verbal relevante sin repetirlo por completo.\n\nDespués de **than** también puede aparecer un grupo nominal o pronombre sin verbo expreso: **She is taller than me**. Esta forma es muy común en el inglés actual. La variante **than I am** hace explícita la estructura clausal.\n\n#### Ejemplos\n\n- **He arrived earlier than I expected.** — Llegó antes de lo que esperaba.\n- **She is taller than I am.** — Ella es más alta que yo.\n- **They spent less than we had planned.** — Gastaron menos de lo que habíamos planeado.\n- **The film was better than I thought it would be.** — La película fue mejor de lo que pensé que sería.\n- **He works more efficiently than his colleagues do.** — Trabaja con más eficiencia que sus colegas.\n\n#### Observación importante\n\nLas secuencias después de **than** no tienen siempre la misma forma. Algunas contienen una cláusula claramente finita; otras son reducidas o elípticas. Por eso no conviene asumir que todo lo que sigue a **than** es simplemente un sustantivo aislado.\n\nTampoco debe confundirse **than** con **then**. **Than** pertenece a construcciones comparativas; **then** es normalmente un adverbio relacionado con tiempo, secuencia o consecuencia.\n\n#### Entradas relacionadas\n\n- [Entrada 573: Cláusulas con as…as — as…as clauses](#entry-573)\n- [Entrada 572: as if/as though — as if/as though](#entry-572)\n- [Entrada 555: when — when](#entry-555)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c4067fe2149cb8c53823a89d71c0346fe29f69267ebee5215698b6bdc30473aa",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:10:46.078Z"
+              },
+              {
+                "code": "MLS-V01-0575",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 575,
+                "title": "Cláusulas adverbiales reducidas en -ing",
+                "level": "B2",
+                "part": "Subordinación y cláusulas dependientes — Subordination and dependent clauses",
+                "chapter": "Cláusulas adverbiales — Adverbial clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nUna **cláusula adverbial reducida en -ing** expresa una circunstancia —por ejemplo, tiempo, causa o manera— mediante una forma verbal en **-ing**, normalmente sin repetir un sujeto que se recupera de la cláusula principal. En **Walking home, I called my mother** («Mientras caminaba a casa, llamé a mi madre»), se entiende que **I** es quien camina y quien llama.\n\n#### Cómo funciona\n\nLa forma reducida suele aparecer como **V-ing + complementos**, con o sin un subordinante expreso: **Walking home, I saw Ana**; **While walking home, I saw Ana**. En ambos casos, la secuencia en **-ing** aporta información circunstancial sobre el evento principal.\n\nEstas cláusulas pueden expresar tiempo: **Leaving the office, she called a taxi**; causa: **Knowing the answer, he remained silent**; o circunstancias simultáneas: **She sat by the window reading a book**. La interpretación concreta depende del contexto y de la relación entre las dos situaciones.\n\nEl sujeto implícito de la cláusula reducida suele coincidir con el sujeto de la cláusula principal. Esta correspondencia permite evitar una repetición explícita y mantiene clara la relación entre ambas acciones.\n\n#### Ejemplos\n\n- **Walking home, I called my mother.** — Mientras caminaba a casa, llamé a mi madre.\n- **Leaving the building, she noticed the rain.** — Al salir del edificio, notó la lluvia.\n- **Knowing the risks, they proceeded carefully.** — Como conocían los riesgos, procedieron con cuidado.\n- **While waiting for the bus, he read the news.** — Mientras esperaba el autobús, leyó las noticias.\n- **She crossed the room smiling.** — Cruzó la habitación sonriendo.\n\n#### Observación importante\n\nLa relación con el sujeto principal debe ser clara. Una secuencia como **Walking down the street, the rain started** resulta problemática porque la forma **walking** parece atribuirse gramaticalmente a **the rain**, aunque el significado pretendido sea que una persona caminaba. Este tipo de estructura se conoce tradicionalmente como *dangling participle*.\n\nAdemás, una cláusula en **-ing** no expresa por sí sola una relación temporal o causal específica. Esa relación se infiere del contexto o puede hacerse más explícita con palabras como **while** o **when** cuando la construcción lo permite.\n\n#### Entradas relacionadas\n\n- [Entrada 576: Cláusulas adverbiales reducidas de participio pasado — Reduced past-participial clauses](#entry-576)\n- [Entrada 577: Cláusulas sin verbo — Verbless clauses](#entry-577)\n- [Entrada 555: when — when](#entry-555)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-434b7a0a6b789fb00cb3656d9454482483a28733f3e311523f0c664a21b1b1ae",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:11:09.340Z"
+              },
+              {
+                "code": "MLS-V01-0576",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 576,
+                "title": "Cláusulas adverbiales reducidas de participio pasado",
+                "level": "C1",
+                "part": "Subordinación y cláusulas dependientes — Subordination and dependent clauses",
+                "chapter": "Cláusulas adverbiales — Adverbial clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nUna **cláusula adverbial reducida de participio pasado** usa una forma de participio pasado para expresar una circunstancia sin desarrollar una subordinada finita completa. Suele tener interpretación pasiva, resultativa o de estado. En **Asked about the delay, the manager declined to comment**, la secuencia **Asked about the delay** equivale aproximadamente a «Cuando fue preguntado sobre el retraso» o «Al ser preguntado sobre el retraso».\n\n#### Cómo funciona\n\nEl patrón general es **participio pasado + complementos**, seguido o precedido por una cláusula principal: **Surprised by the news, she said nothing**; **The documents, signed yesterday, were sent this morning**. En usos adverbiales, la cláusula reducida aporta información circunstancial sobre el evento principal.\n\nEl participante implícito de la cláusula reducida suele corresponder al sujeto de la principal. En **Exhausted by the journey, they went straight to bed**, se entiende que **they** son quienes estaban agotados. Esa relación debe quedar clara para evitar una asociación equivocada.\n\nEl significado concreto puede ser temporal, causal, concesivo o condicional, entre otros, y normalmente se interpreta a partir del contexto. En ciertos casos puede mantenerse un subordinante: **When asked about the issue, she refused to answer**; **Although disappointed, he remained calm**.\n\nA diferencia de las cláusulas reducidas en **-ing**, estas construcciones presentan con frecuencia al referente como afectado por una acción o como situado en un estado resultante: **Built in 1890, the house still retains its original facade**.\n\n#### Ejemplos\n\n- **Asked about the delay, the manager declined to comment.** — Al ser preguntado sobre el retraso, el gerente se negó a comentar.\n- **Surprised by the result, she checked the figures again.** — Sorprendida por el resultado, volvió a revisar las cifras.\n- **When completed, the bridge will connect the two districts.** — Cuando esté terminado, el puente conectará los dos distritos.\n- **Although disappointed, he congratulated the winner.** — Aunque decepcionado, felicitó al ganador.\n- **Built on unstable ground, the structure required reinforcement.** — Construida sobre terreno inestable, la estructura necesitó refuerzo.\n\n#### Observación importante\n\nEl participio pasado no expresa por sí solo una relación adverbial específica. La lectura de tiempo, causa, concesión o condición surge de la construcción y del contexto. Tampoco todo participio pasado separado por comas es necesariamente una cláusula adverbial; algunas secuencias funcionan como modificadores de un nombre.\n\nLa referencia del sujeto implícito es especialmente importante. Una reducción mal vinculada puede producir una interpretación no deseada. En prosa formal, estas construcciones son frecuentes porque permiten condensar información, pero la concisión no debe sacrificar la claridad sintáctica.\n\n#### Entradas relacionadas\n\n- [Entrada 575: Cláusulas adverbiales reducidas en -ing — Reduced adverbial -ing clauses](#entry-575)\n- [Entrada 577: Cláusulas sin verbo — Verbless clauses](#entry-577)\n- [Entrada 555: when — when](#entry-555)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1717b437469b263006aa747d85104fd0d4c47317ca6c8ae5406c97adb1370cb9",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:11:31.091Z"
+              },
+              {
+                "code": "MLS-V01-0577",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 577,
+                "title": "Cláusulas sin verbo",
+                "level": "C1",
+                "part": "Subordinación y cláusulas dependientes — Subordination and dependent clauses",
+                "chapter": "Cláusulas adverbiales — Adverbial clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nUna **cláusula sin verbo** (*verbless clause*) es una estructura con valor semejante al de una cláusula, pero sin verbo expreso. En **If necessary, call me** («Si es necesario, llámame»), la secuencia **if necessary** se interpreta como una condición equivalente aproximadamente a **if it is necessary**, aunque **it is** no aparece.\n\nEstas construcciones son frecuentes en registros condensados, especialmente cuando el contenido omitido puede recuperarse con facilidad del contexto.\n\n#### Cómo funciona\n\nEl patrón habitual contiene un subordinante opcional seguido de un predicado sin verbo: **if necessary**, **when possible**, **although tired**, **while in London**. La parte omitida suele corresponder a una forma de **be** y, en muchos casos, a un sujeto recuperable.\n\nEn **Although tired, she continued working**, la secuencia **although tired** equivale aproximadamente a **although she was tired**. En **When in doubt, ask for clarification**, **when in doubt** puede interpretarse como «cuando se está en duda» o «cuando haya duda», según el contexto.\n\nLas cláusulas sin verbo pueden expresar condición, tiempo, concesión u otras relaciones circunstanciales. El subordinante contribuye a hacer explícita esa relación: **if** marca condición, **although** concesión y **when/while** una relación temporal.\n\nTambién existen cláusulas sin verbo suplementarias sin subordinante, como **The meeting over, everyone left**, aunque este tipo de construcción tiene una estructura y un registro más marcados.\n\n#### Ejemplos\n\n- **If necessary, call me.** — Si es necesario, llámame.\n- **Although tired, she continued working.** — Aunque estaba cansada, siguió trabajando.\n- **When possible, use the original data.** — Cuando sea posible, use los datos originales.\n- **While in London, they visited several museums.** — Mientras estaban en Londres, visitaron varios museos.\n- **The weather permitting, we will leave at dawn.** — Si el tiempo lo permite, saldremos al amanecer.\n\n#### Observación importante\n\nLa ausencia de verbo no significa que cualquier fragmento pueda analizarse como cláusula. La interpretación clausal depende de que exista una relación predicativa recuperable y de que la secuencia desempeñe una función que normalmente podría expresarse mediante una cláusula más completa.\n\nLa recuperación del sujeto también debe ser clara. En muchas construcciones adverbiales reducidas, el sujeto implícito coincide con el de la cláusula principal; en otras estructuras absolutas, como **The weather permitting**, aparece un sujeto propio y la relación sintáctica es diferente.\n\n#### Entradas relacionadas\n\n- [Entrada 576: Cláusulas adverbiales reducidas de participio pasado — Reduced past-participial clauses](#entry-576)\n- [Entrada 575: Cláusulas adverbiales reducidas en -ing — Reduced adverbial -ing clauses](#entry-575)\n- [Entrada 555: when — when](#entry-555)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-dfb0c3cd41a473606a59e768dcceba653533a0deaef2f452f34298efd9c2206d",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:11:53.915Z"
+              },
+              {
+                "code": "MLS-V01-0579",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 579,
+                "title": "which",
+                "level": "A2",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\n**Which** introduce una cláusula relativa que normalmente da información sobre cosas, animales o ideas. En **the book which won the prize** («el libro que ganó el premio»), **which won the prize** identifica o describe a **the book**.\n\n#### Cómo funciona\n\nEl patrón básico es **antecedente no humano + which + cláusula**. El antecedente es aquello a lo que se refiere la relativa.\n\n**Which** puede funcionar como sujeto: **the car which stopped outside**. Aquí **which** representa al automóvil y es el sujeto de **stopped**.\n\nTambién puede funcionar como objeto: **the book which I bought yesterday**. En esta oración, **I** es el sujeto de **bought** y **which** representa el libro comprado.\n\nEn relativas suplementarias, que añaden información extra y suelen escribirse entre comas, **which** es frecuente: **The house, which was built in 1920, has been restored**.\n\n#### Ejemplos\n\n- **The book which won the prize is on the table.** — El libro que ganó el premio está sobre la mesa.\n- **This is the phone which I bought last week.** — Este es el teléfono que compré la semana pasada.\n- **The car, which was very old, broke down again.** — El automóvil, que era muy viejo, volvió a averiarse.\n- **We visited a museum which opens every day.** — Visitamos un museo que abre todos los días.\n\n#### Observación importante\n\nCuando **which** funciona como objeto en una relativa restrictiva, a menudo puede omitirse: **the book (which) I bought**. Cuando funciona como sujeto, no se omite: **the book which won**.\n\n**Which** también puede referirse a toda una idea anterior en una relativa suplementaria: **He missed the train, which made him late**. Aquí **which** no se refiere solo a *the train*, sino al hecho de haber perdido el tren.\n\n#### Entradas relacionadas\n\n- [Entrada 578: who — who](#entry-578)\n- [Entrada 580: that — that](#entry-580)\n- [Entrada 581: whose — whose](#entry-581)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-fe27c716d7f05583b355e056dad42b81a8efaa5d82c92b18ccd122c636a13ced",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:12:39.164Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:53:40.180Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:53:40.180Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-chat-20261002-2045-sol-b10a-ticket02-next03.json"
+}

@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-b-step-03",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0302",
+          "sha256": "ab82de59d3102f76508edc4adf79f36517b9aefcd142369b3de0544148c13509",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0302",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "03de1e9a-f2f7-4f02-bf71-9a90eda3dcaa",
+                "ticketId": "R43-EMERGENCY-0302",
+                "code": "MLS-V04-1014",
+                "idempotencyKey": "R43-EMERGENCY-0302:MLS-V04-1014:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "5df61f024a110b8fcc35551344dcbf840823893e9e9ec6bcc7c250f1db6fe44f",
+                "sourceSha256": "e51a465975f17964d7e47440086f8fad679c56cec78ae0db5a97ceac2c47de3b",
+                "committedMs": 1790996032147,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "83d389dd3a6626a5809d463add8ea9b4e9c75c88c9071e060cdfb89afbff379d",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0302",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "bb0dbb19-2d77-4175-a0f4-e56dbaa474c1",
+                "ticketId": "R43-EMERGENCY-0302",
+                "code": "MLS-V04-1016",
+                "idempotencyKey": "R43-EMERGENCY-0302:MLS-V04-1016:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "efd57fdb3228a606fc67ec8b36d972176fa512579b920f46390ff3aa230fe018",
+                "sourceSha256": "b3661b02f5bf13b82049480f0b6b8839fa0fa4c7131bcc121aeea275cdf83f6c",
+                "committedMs": 1790996032372,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "9fe70918236a81ebc7ef6c5c26ce79ae1f7b021274b193f448a756ca62206fb8",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0302",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1152be50-d5ce-4982-83e6-7694baf276fd",
+                "ticketId": "R43-EMERGENCY-0302",
+                "code": "MLS-V04-1017",
+                "idempotencyKey": "R43-EMERGENCY-0302:MLS-V04-1017:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "72473363d68eebc6cf7184b043e9bcff1f6f8423b5e9ea4f3786272c0f0aa728",
+                "sourceSha256": "e1030a29ea6cabe473b565dc6bebe6745177ae5c45edc5fefc7b76dd7373f8c7",
+                "committedMs": 1790996032583,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "39796331ee67e3703f157061663482d9ff83a4ed00d83b825f5be755a0824ed6",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0302",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "13ad17e8-2cba-4c00-a238-ba715f663143",
+                "ticketId": "R43-EMERGENCY-0302",
+                "code": "MLS-V04-1018",
+                "idempotencyKey": "R43-EMERGENCY-0302:MLS-V04-1018:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "b7fa8a8e4a735ab17575c24768025fc4d65bf76280ffd86dafc8c7ced0807941",
+                "sourceSha256": "f1fc781a12d00030c5e4f5f16c8a6a80e7bf300a414efd9aff3fa6cd14b2abc4",
+                "committedMs": 1790996032803,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "818fb1e11f931874e54d873e88382b61b9477c0c906d9a3805ce45d97a8d4e67",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0302",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "7c61aedf-4720-4508-b177-8d0d0157b1f8",
+                "ticketId": "R43-EMERGENCY-0302",
+                "code": "MLS-V04-1019",
+                "idempotencyKey": "R43-EMERGENCY-0302:MLS-V04-1019:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d8df0f6d7315481e071c898680d4e572fc4f9ef8ceda073735bc31191be8ade7",
+                "sourceSha256": "63db7f77ef413b39a32b1533f96834c1c9a4f622d057ae02d914528f742218b3",
+                "committedMs": 1790996033024,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "27fa83d31181b590e88f9f70e3ef84ab35524b7b94b471ea04c1fc076febf0f1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-e7a0dc09-fc81-4c5e-902b-058dba42df8c",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "ab82de59d3102f76508edc4adf79f36517b9aefcd142369b3de0544148c13509"
+          }
+        },
+        "completedAt": "2026-10-03T02:53:53.314Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-1561c340-06b0-46ea-b681-6c7c2eed2e9a",
+          "workerId": "chat-r44-m10-20261002-2045-b",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0303",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996333357,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V04-1020",
+                "path": "frances/MLS-V04-1020.json",
+                "sha256": "8e9098bb0ddbaa4080919759a36e5f16e03144dc1169deb092302bb02e0a171c"
+              },
+              {
+                "code": "MLS-V04-1021",
+                "path": "frances/MLS-V04-1021.json",
+                "sha256": "0e5180351078faee745dfef89d380116edafb8d628c391867e29475585c19bd5"
+              },
+              {
+                "code": "MLS-V04-1022",
+                "path": "frances/MLS-V04-1022.json",
+                "sha256": "0c02665054651cc050f9a20e81e12918faf26a73968a0ed9f29b391d8601e8c6"
+              },
+              {
+                "code": "MLS-V04-1023",
+                "path": "frances/MLS-V04-1023.json",
+                "sha256": "f6142f808748e7799e6f4627ca8093bfeb8781c95d62c9aedb69fdbad2efeb7b"
+              },
+              {
+                "code": "MLS-V04-1024",
+                "path": "frances/MLS-V04-1024.json",
+                "sha256": "2b2ee3e5df4802e62562bc462689619db25cf722808b1303369c5159ebc3b294"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0303",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V04-1020",
+                "path": "frances/MLS-V04-1020.json",
+                "sha256": "8e9098bb0ddbaa4080919759a36e5f16e03144dc1169deb092302bb02e0a171c"
+              },
+              {
+                "code": "MLS-V04-1021",
+                "path": "frances/MLS-V04-1021.json",
+                "sha256": "0e5180351078faee745dfef89d380116edafb8d628c391867e29475585c19bd5"
+              },
+              {
+                "code": "MLS-V04-1022",
+                "path": "frances/MLS-V04-1022.json",
+                "sha256": "0c02665054651cc050f9a20e81e12918faf26a73968a0ed9f29b391d8601e8c6"
+              },
+              {
+                "code": "MLS-V04-1023",
+                "path": "frances/MLS-V04-1023.json",
+                "sha256": "f6142f808748e7799e6f4627ca8093bfeb8781c95d62c9aedb69fdbad2efeb7b"
+              },
+              {
+                "code": "MLS-V04-1024",
+                "path": "frances/MLS-V04-1024.json",
+                "sha256": "2b2ee3e5df4802e62562bc462689619db25cf722808b1303369c5159ebc3b294"
+              }
+            ],
+            "remaining": [
+              "MLS-V04-1020",
+              "MLS-V04-1021",
+              "MLS-V04-1022",
+              "MLS-V04-1023",
+              "MLS-V04-1024"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-b",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996333357,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-b",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996333357,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V04-1020",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1020,
+                "title": "Je crains que...",
+                "level": "B2",
+                "part": "Francés académico y cortesía — Français académique et politesse",
+                "chapter": "Pragmática, cortesía y actos de habla — Pragmatique, politesse et actes de parole",
+                "articleMarkdown": "#### En pocas palabras\n\n**Je crains que…** significa «Temo que…» o «Me temo que…». Introduce una situación que el hablante considera posible y negativa, preocupante o indeseable. En francés cuidado, **craindre que** suele ir seguido de **subjonctif**: **Je crains que le délai ne soit trop court**.\n\n#### Cómo funciona\n\nLa estructura básica es **craindre que + subjonctif**. En **Je crains que le projet soit retardé**, **soit** está en subjuntivo porque la subordinada depende de un verbo que expresa temor o preocupación.\n\nEn registros formales puede aparecer un **ne explétif**: **Je crains que le délai ne soit trop court**. Ese **ne** no convierte la oración en negativa; la frase significa «Temo que el plazo sea demasiado corto», no «que no sea demasiado corto». La negación real requeriría otra estructura y debe interpretarse por el conjunto de la oración.\n\nLa expresión también puede servir para introducir con tacto una respuesta desfavorable: **Je crains que cela ne soit pas possible**. Aquí **ne… pas** sí forma una negación real.\n\n#### Ejemplos\n\n* **Je crains que le délai ne soit trop court.** — Temo que el plazo sea demasiado corto.\n* **Je crains que le projet soit retardé.** — Temo que el proyecto se retrase.\n* **Je crains que cela ne soit pas possible.** — Me temo que eso no sea posible.\n* **Nous craignons que les résultats soient insuffisants.** — Tememos que los resultados sean insuficientes.\n\n#### Observación importante\n\nNo conviene reducir el subjuntivo de **craindre que** a una supuesta «regla de duda». Aquí la selección está ligada a una construcción que expresa temor. Además, el **ne explétif** es más frecuente en escritura cuidada y registros formales; su ausencia también es normal en muchos usos contemporáneos.\n\n#### Entradas relacionadas\n\n[Je suis désolé(e) de...](#entry-1019) · [Excusez-moi de...](#entry-1018) · [J'aimerais...](#entry-1015) · [Il convient de](#entry-1010)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b455bf97293562d5ed136cba88beeb3f4d83289807b746994f511319b2487d6f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:09:19.401Z"
+              },
+              {
+                "code": "MLS-V04-1021",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1021,
+                "title": "Me temo que... → Je crains que / J'ai peur que",
+                "level": "B2",
+                "part": "Francés académico y cortesía — Français académique et politesse",
+                "chapter": "Pragmática, cortesía y actos de habla — Pragmatique, politesse et actes de parole",
+                "articleMarkdown": "#### En pocas palabras\n\nEl español **«me temo que…»** puede corresponder en francés a **je crains que…** o **j’ai peur que…** cuando se expresa preocupación ante una posibilidad negativa. Ambas construcciones suelen ir seguidas de **subjonctif**: **J’ai peur que le train soit déjà parti** — «Me temo que el tren ya se haya ido».\n\n#### Cómo funciona\n\n**Je crains que…** pertenece con frecuencia a un registro algo más cuidado o formal. **J’ai peur que…** es muy común en la conversación y conserva literalmente la idea de «tener miedo de que», aunque según el contexto puede equivaler de forma natural a «me temo que».\n\nCon ambas construcciones, el verbo subordinado aparece normalmente en subjuntivo: **Je crains qu’il soit trop tard** y **J’ai peur qu’il soit trop tard**. La selección se relaciona con la expresión de temor, no con una regla general según la cual todo lo incierto exige subjuntivo.\n\nCon **craindre que**, sobre todo en registros formales, puede aparecer **ne explétif**: **Je crains qu’il ne soit trop tard**. También puede encontrarse con **avoir peur que**, aunque su distribución depende del registro y del uso.\n\n#### Ejemplos\n\n* **J’ai peur que le train soit déjà parti.** — Me temo que el tren ya se haya ido.\n* **Je crains que la réunion ne soit annulée.** — Me temo que la reunión sea cancelada.\n* **J’ai peur qu’il soit trop tard.** — Me temo que sea demasiado tarde.\n* **Je crains que nous n’ayons pas assez de temps.** — Me temo que no tengamos suficiente tiempo.\n\n#### Observación importante\n\nNo existe una equivalencia palabra por palabra obligatoria entre «me temo que» y una sola fórmula francesa. La elección entre **je crains que** y **j’ai peur que** depende del registro, del contexto y del matiz buscado. Además, un **ne** explétif no debe confundirse con la negación real.\n\n#### Entradas relacionadas\n\n[Je crains que...](#entry-1020) · [Je suis désolé(e) de...](#entry-1019) · [J'aimerais...](#entry-1015) · [Il convient de](#entry-1010)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-3b694f5d5a3e4c0223afe7021c53beedc84f9c6a1a2bda8ff08d26b794f903ef",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:09:55.682Z"
+              },
+              {
+                "code": "MLS-V04-1022",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1022,
+                "title": "Desacuerdo atenuado",
+                "level": "B2",
+                "part": "Francés académico y cortesía — Français académique et politesse",
+                "chapter": "Pragmática, cortesía y actos de habla — Pragmatique, politesse et actes de parole",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **désaccord atténué** es una forma de expresar desacuerdo sin formularlo de la manera más frontal posible. En **Je comprends votre point de vue ; toutefois, je ne partage pas cette conclusion**, primero se reconoce la posición del interlocutor y después se introduce una divergencia de manera explícita pero moderada.\n\n#### Cómo funciona\n\nLa atenuación puede apoyarse en varios recursos: reconocer una parte válida del argumento, usar conectores de contraste, limitar el alcance del desacuerdo o presentar la propia posición como perspectiva. Fórmulas como **je comprends votre point de vue**, **je vois ce que vous voulez dire** o **sur ce point, je ne suis pas entièrement d’accord** ayudan a organizar esa relación.\n\nLos conectores **toutefois, cependant, néanmoins** o **en revanche** permiten señalar el contraste sin recurrir a una oposición brusca. También pueden emplearse modalizadores como **il me semble que** o **je ne suis pas certain que**, siempre que expresen realmente el grado de compromiso del hablante.\n\nAtenuar no significa ocultar el desacuerdo. En textos profesionales o debates, una formulación clara suele ser preferible a una vaguedad que impida saber cuál es la posición defendida.\n\n#### Ejemplos\n\n* **Je comprends votre point de vue ; toutefois, je ne partage pas cette conclusion.** — Comprendo su punto de vista; sin embargo, no comparto esta conclusión.\n* **Je vois ce que vous voulez dire, mais j’interprète les résultats autrement.** — Entiendo lo que quiere decir, pero interpreto los resultados de otra manera.\n* **Sur ce point, je ne suis pas entièrement d’accord.** — En este punto, no estoy completamente de acuerdo.\n* **Il me semble néanmoins que cette solution présente un risque.** — Sin embargo, me parece que esta solución presenta un riesgo.\n\n#### Observación importante\n\nNo existe una fórmula universalmente «más cortés» para disentir. El efecto depende del tono, la relación entre interlocutores, el contexto institucional y la claridad del argumento. Una acumulación excesiva de atenuadores puede sonar evasiva o incluso irónica; la finalidad es combinar consideración interpersonal y precisión.\n\n#### Entradas relacionadas\n\n[Me temo que... → Je crains que / J'ai peur que](#entry-1021) · [Je crains que...](#entry-1020) · [Je suis désolé(e) de...](#entry-1019) · [Ça vous dérangerait de...?](#entry-1017)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-fd839ad2137dd2b362f3ab492d458a23c292d4d89767b52bbc28e4bac279e345",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:10:34.570Z"
+              },
+              {
+                "code": "MLS-V04-1023",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1023,
+                "title": "Petición indirecta",
+                "level": "B2",
+                "part": "Francés académico y cortesía — Français académique et politesse",
+                "chapter": "Pragmática, cortesía y actos de habla — Pragmatique, politesse et actes de parole",
+                "articleMarkdown": "#### En pocas palabras\n\nUna **demande indirecte** o petición indirecta formula lo solicitado sin recurrir directamente a un imperativo. En **Serait-il possible de reporter la réunion ?**, la pregunta parece centrarse en la posibilidad de posponer la reunión, pero pragmáticamente puede funcionar como una solicitud para que se cambie la fecha.\n\n#### Cómo funciona\n\nUna estrategia frecuente consiste en preguntar por la posibilidad, disponibilidad o disposición: **Serait-il possible de… ?**, **Pourriez-vous… ?**, **Auriez-vous la possibilité de… ?**. Estas construcciones dejan más espacio al interlocutor que una orden directa como **Reportez la réunion**.\n\nEl condicional, presente en **serait** o **pourriez**, puede contribuir a la atenuación al presentar la acción con mayor distancia modal. Sin embargo, la cortesía no depende únicamente del tiempo verbal: también intervienen el tratamiento, la relación entre hablantes, el contexto y el contenido de la petición.\n\nLas peticiones indirectas son habituales en correos profesionales, atención al público y situaciones en las que se quiere evitar una formulación demasiado imperativa. No obstante, una petición directa puede ser perfectamente adecuada en contextos de confianza o cuando se requiere máxima claridad operativa.\n\n#### Ejemplos\n\n* **Serait-il possible de reporter la réunion ?** — ¿Sería posible posponer la reunión?\n* **Pourriez-vous m’envoyer le document aujourd’hui ?** — ¿Podría enviarme el documento hoy?\n* **Auriez-vous la possibilité de participer à la réunion ?** — ¿Tendría la posibilidad de participar en la reunión?\n* **Ça vous dérangerait de fermer la porte ?** — ¿Le importaría cerrar la puerta?\n\n#### Observación importante\n\n«Indirecta» describe la forma en que se realiza el acto de habla, no una falta de claridad obligatoria. Una buena petición indirecta puede dejar perfectamente identificada la acción solicitada. Tampoco existe una escala universal según la cual cuanto más indirecta sea una fórmula, más cortés resulte: una formulación excesivamente elaborada puede sonar distante o innecesaria.\n\n#### Entradas relacionadas\n\n[Desacuerdo atenuado](#entry-1022) · [Ça vous dérangerait de...?](#entry-1017) · [Auriez-vous la gentillesse de...](#entry-1016) · [Pouvez-vous...?](#entry-1014)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-11aa3ddda85020db495d28755f5886087f0551ae0763655172d04f11789e4529",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:11:14.524Z"
+              },
+              {
+                "code": "MLS-V04-1024",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1024,
+                "title": "Consejo con conditionnel",
+                "level": "B2",
+                "part": "Francés académico y cortesía — Français académique et politesse",
+                "chapter": "Pragmática, cortesía y actos de habla — Pragmatique, politesse et actes de parole",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **conseil au conditionnel** usa el condicional para presentar una sugerencia o recomendación de forma menos directiva. En **Vous pourriez vérifier les chiffres une seconde fois**, «Podría revisar las cifras otra vez», el hablante propone una acción posible sin formularla como una orden.\n\n#### Cómo funciona\n\nUna estructura frecuente es **pouvoir** en condicional + infinitivo: **vous pourriez vérifier**, **tu pourrais essayer**, **on pourrait comparer**. El condicional presenta la opción con cierta distancia modal y deja más explícitamente abierta la posibilidad de aceptarla o no.\n\nTambién aparecen otros verbos en condicional según el sentido: **Vous devriez consulter un spécialiste** expresa recomendación mediante **devoir**, mientras que **À votre place, je choisirais la première option** presenta el consejo desde una situación hipotética.\n\nEl grado de fuerza no depende solo del condicional. **Vous devriez** puede sonar bastante insistente según el contexto, mientras que **vous pourriez** suele presentar una posibilidad. La entonación, la relación entre interlocutores y las consecuencias de la decisión también influyen.\n\n#### Ejemplos\n\n* **Vous pourriez vérifier les chiffres une seconde fois.** — Podría revisar las cifras otra vez.\n* **Tu pourrais demander une confirmation écrite.** — Podrías pedir una confirmación por escrito.\n* **Vous devriez conserver une copie du document.** — Debería conservar una copia del documento.\n* **À votre place, je prendrais le temps de comparer les deux offres.** — En su lugar, me tomaría el tiempo de comparar las dos ofertas.\n\n#### Observación importante\n\nEl condicional no convierte automáticamente cualquier frase en una recomendación cortés. Su función depende del verbo y del contexto. **Pourriez-vous… ?**, por ejemplo, suele realizar una petición, mientras que **vous pourriez…** sin inversión puede proponer una opción o consejo. Conviene distinguir el acto de habla que realiza la oración completa.\n\n#### Entradas relacionadas\n\n[Petición indirecta](#entry-1023) · [Desacuerdo atenuado](#entry-1022) · [Pouvez-vous...?](#entry-1014) · [J'aimerais...](#entry-1015)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-946666d2fa434364d2d0df98bbf171da219a42a20172e503712f4df17313d4a0",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:11:51.842Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:53:54.116Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:53:54.116Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-b/03-submit-claim.json"
+}

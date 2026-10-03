@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-c7f9-step03",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-1089",
+          "sha256": "345708f0661ff0cacbf27118d64e9e7ecb99b7457e601422a05bb2ce9eb36a99",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1089",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "904a4cd4-ea22-482f-820b-8007e344cbc7",
+                "ticketId": "R44-CORPUS-1089",
+                "code": "MLS-V02-0984",
+                "idempotencyKey": "R44-CORPUS-1089:MLS-V02-0984:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "683c1760ec71e7c0de21f9d4c1ca01a8be67e2b03753ad5e2a4c9aa143751371",
+                "sourceSha256": "057209b1bbfc779ccfdbeb30db23f201089d6ac51157bc1338c6fa1c78213678",
+                "committedMs": 1790996015651,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "72c95dcd3ad0458ed5f158c234650173fe66b88712b74b1e058136617dc67c11",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1089",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "bb9ec592-6a5a-441b-8c65-ed495f3c6889",
+                "ticketId": "R44-CORPUS-1089",
+                "code": "MLS-V02-0985",
+                "idempotencyKey": "R44-CORPUS-1089:MLS-V02-0985:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ce68fa8c83836c170e361b68f5439a9e21196cecc1c633b47cbc71bcd0e855eb",
+                "sourceSha256": "4c0a780fc928a1682b193639eefca1bcf28fae93e348898938f05cf5c3c2a049",
+                "committedMs": 1790996015865,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b8c5f63210564686bd31c268381a9cd50041481547910003c243e25568f03a9c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1089",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "079102df-87b0-4a2b-92e4-229a392ffa09",
+                "ticketId": "R44-CORPUS-1089",
+                "code": "MLS-V02-0986",
+                "idempotencyKey": "R44-CORPUS-1089:MLS-V02-0986:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "ad9f8b6acc5dbe25b9c56b917f122ad6b2a0519aaa1f7084152ddf6471ed5134",
+                "sourceSha256": "27383033096727670dbf322887b6fc259db43c42b56caaec0543826a801c8915",
+                "committedMs": 1790996016080,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "34d7ecd1c7e91edd053436b79d1d2dad0ea9e176cf3bfb902c94d48975e99e27",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1089",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c255b14c-b82b-4947-a912-9d91b7ed7c59",
+                "ticketId": "R44-CORPUS-1089",
+                "code": "MLS-V02-0987",
+                "idempotencyKey": "R44-CORPUS-1089:MLS-V02-0987:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "3b3faa1aec79d82b4ce7e41939a7ae094e03b1d2fc7f0b3ec3d8e49b0e74831d",
+                "sourceSha256": "bf935c823b9da01c4a754c5ef4e3ea82ec1c3926e75f8180a7ccc272bd2de908",
+                "committedMs": 1790996016298,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "3fbb0abfaf6ad91702550e8b06baea49251a68ba9f2234cca59f82f933437697",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-1089",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "95fdc597-10d4-4098-af63-fa2162c7166f",
+                "ticketId": "R44-CORPUS-1089",
+                "code": "MLS-V02-0988",
+                "idempotencyKey": "R44-CORPUS-1089:MLS-V02-0988:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "4d71232a3d786414828e779e6639dc3a65bef599839138330e0668675861c055",
+                "sourceSha256": "f38fdf7494248815439d1c42fc5c93ae8f0302ea4667f9d8c4cc3367c047f2b7",
+                "committedMs": 1790996016511,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d1c07cf12d90c141a7c7b66762b3c81e416446fd91d176a4fe7f5bca57e4ecce",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-4729a735-630d-4236-96d7-5e2c59520db7",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "345708f0661ff0cacbf27118d64e9e7ecb99b7457e601422a05bb2ce9eb36a99"
+          }
+        },
+        "completedAt": "2026-10-03T02:53:36.812Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-cbf56f17-c7bf-434a-b6a1-b77cd534dca6",
+          "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-1090",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996316858,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V02-0989",
+                "path": "portugues/MLS-V02-0989.json",
+                "sha256": "339ff242785948ff2df6b637a1bc974671666e0634dc10daead1e903603f8854"
+              },
+              {
+                "code": "MLS-V02-0991",
+                "path": "portugues/MLS-V02-0991.json",
+                "sha256": "109ab620362ddefd6dd84f3c466c1f6668b58feb6d7f378b9ffd57dcdaff01b1"
+              },
+              {
+                "code": "MLS-V02-0992",
+                "path": "portugues/MLS-V02-0992.json",
+                "sha256": "96b8dd4fccbc95c3479bc3265f8bd6de751ac6d6107ba6c12edd79a86ef24b2f"
+              },
+              {
+                "code": "MLS-V02-0993",
+                "path": "portugues/MLS-V02-0993.json",
+                "sha256": "f117054495fc7e22f39d48ecfaf8cffb5e13bc4c5fd78bdb8ea73b4e814f80d5"
+              },
+              {
+                "code": "MLS-V02-0994",
+                "path": "portugues/MLS-V02-0994.json",
+                "sha256": "c5fe6428e9475bec775ca7df113492813f1ce920e626717a35ad82c3709616b8"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-1090",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V02-0989",
+                "path": "portugues/MLS-V02-0989.json",
+                "sha256": "339ff242785948ff2df6b637a1bc974671666e0634dc10daead1e903603f8854"
+              },
+              {
+                "code": "MLS-V02-0991",
+                "path": "portugues/MLS-V02-0991.json",
+                "sha256": "109ab620362ddefd6dd84f3c466c1f6668b58feb6d7f378b9ffd57dcdaff01b1"
+              },
+              {
+                "code": "MLS-V02-0992",
+                "path": "portugues/MLS-V02-0992.json",
+                "sha256": "96b8dd4fccbc95c3479bc3265f8bd6de751ac6d6107ba6c12edd79a86ef24b2f"
+              },
+              {
+                "code": "MLS-V02-0993",
+                "path": "portugues/MLS-V02-0993.json",
+                "sha256": "f117054495fc7e22f39d48ecfaf8cffb5e13bc4c5fd78bdb8ea73b4e814f80d5"
+              },
+              {
+                "code": "MLS-V02-0994",
+                "path": "portugues/MLS-V02-0994.json",
+                "sha256": "c5fe6428e9475bec775ca7df113492813f1ce920e626717a35ad82c3709616b8"
+              }
+            ],
+            "remaining": [
+              "MLS-V02-0989",
+              "MLS-V02-0991",
+              "MLS-V02-0992",
+              "MLS-V02-0993",
+              "MLS-V02-0994"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996316858,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-jdp-sol-c7f9",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996316858,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V02-0989",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 989,
+                "title": "Derivación regresiva",
+                "level": "B2",
+                "part": "Formación de palabras y léxico-gramática — Formação de palavras e léxico-gramática",
+                "chapter": "Formación de palabras — Formação de palavras",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **derivación regresiva** forma una palabra nueva mediante reducción o reinterpretación de una base, con frecuencia a partir de un verbo. Ejemplos tradicionales son **pescar → pesca** y **atacar → ataque**.\n\nSuele producir sustantivos relacionados con la acción verbal.\n\n#### Cómo funciona\n\nEl proceso no consiste simplemente en “quitar letras” de manera libre. La nueva palabra pertenece a un patrón lexicalizado reconocido por la lengua.\n\nEn muchos casos el sustantivo expresa acción, resultado o evento: **lutar → luta**, **cortar → corte**.\n\n#### Ejemplos\n\n* **pescar → pesca**\n* **atacar → ataque**\n* **lutar → luta**\n* **cortar → corte**\n\n#### Observación importante\n\nNo toda relación entre un verbo y un sustantivo corto debe analizarse automáticamente como derivación regresiva; la historia y el análisis morfológico pueden ser discutidos.\n\n\nLa clasificación tradicional de ciertos sustantivos como derivados regresivos no es idéntica en todas las teorías morfológicas. El criterio escolar suele observar la relación entre verbo y sustantivo de forma reducida, pero la historia de cada palabra puede ser más compleja. No toda palabra más corta relacionada con un verbo es automáticamente derivación regresiva.\n#### Entradas relacionadas\n\n[987. Prefixação](#entrada-987) · [988. Sufixação](#entrada-988) · [990. Derivação imprópria ou conversão](#entrada-990)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "staging-eeea782a46f6b7300d7f37e9ed1d3af586e5c0dea65925186892be35ffed6d33",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T18:22:08.386Z"
+              },
+              {
+                "code": "MLS-V02-0991",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 991,
+                "title": "Composición por yuxtaposición",
+                "level": "B1",
+                "part": "Formación de palabras y léxico-gramática — Formação de palavras e léxico-gramática",
+                "chapter": "Formación de palabras — Formação de palavras",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **composición por yuxtaposición** combina dos o más bases manteniendo relativamente reconocibles sus formas. Ejemplos tradicionales son **guarda-chuva, segunda-feira, passatempo**.\n\nLas partes conservan bastante de su identidad fonológica.\n\n#### Cómo funciona\n\nLa nueva palabra adquiere un significado propio aunque sus componentes sigan siendo identificables.\n\nLa ortografía puede incluir guion, unión gráfica o separación según las reglas vigentes y el tipo de compuesto.\n\n#### Ejemplos\n\n* **guarda-chuva**\n* **segunda-feira**\n* **passatempo**\n* **beija-flor**\n\n#### Observación importante\n\nLa distinción escolar entre yuxtaposición y aglutinación simplifica procesos históricos complejos. No debe inferirse solo por la presencia o ausencia de guion.\n\n\nEn la yuxtaposición, los componentes permanecen relativamente identificables, aunque la ortografía puede escribirse junta, separada o con guion según la palabra y las normas vigentes. El significado del compuesto tampoco tiene que ser la simple suma literal de las partes: **guarda-chuva** designa un objeto lexicalizado. La ortografía oficial de cada compuesto debe comprobarse individualmente, porque el uso del guion sigue reglas propias.\n#### Entradas relacionadas\n\n[992. Composição por aglutinação](#entrada-992) · [987. Prefixação](#entrada-987)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "staging-f3b370d61b95bc2a73bb123e712aba3e4b002d3f96ff0fa6accb5dd277e37785",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T18:22:19.067Z"
+              },
+              {
+                "code": "MLS-V02-0992",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 992,
+                "title": "Composición por aglutinación",
+                "level": "B1",
+                "part": "Formación de palabras y léxico-gramática — Formação de palavras e léxico-gramática",
+                "chapter": "Formación de palabras — Formação de palavras",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **composición por aglutinación** combina elementos que sufren cambios fonológicos o gráficos hasta formar una unidad menos transparentemente segmentable.\n\nUn ejemplo tradicional es **planalto**, históricamente relacionado con **plano + alto**.\n\n#### Cómo funciona\n\nDurante la formación pueden perderse sonidos, cambiar fronteras o fusionarse segmentos.\n\nOtros ejemplos citados en gramáticas incluyen **aguardente** a partir de **água + ardente**.\n\n#### Ejemplos\n\n* **plano + alto → planalto**\n* **água + ardente → aguardente**\n* **perna + alta → pernalta** en análisis tradicional.\n* **vinho + acre → vinagre** en explicaciones históricas tradicionales.\n\n#### Observación importante\n\nMuchos ejemplos de aglutinación dependen de historia léxica. No siempre es posible reconocer el proceso solo a partir de la forma moderna.\n\n\nEjemplos tradicionales incluyen formaciones en las que la frontera entre los elementos originales se vuelve menos transparente. La distinción escolar entre yuxtaposición y aglutinación se basa en el grado de modificación formal de los componentes, aunque los análisis históricos y morfológicos de palabras concretas pueden ser más detallados.\n#### Entradas relacionadas\n\n[991. Composição por justaposição](#entrada-991) · [993. Parassíntese](#entrada-993)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "staging-b4c14fdff11e79eed0e505856ca4e5edecce0b61f11f4e791f90691b7a1cf952",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T18:22:24.288Z"
+              },
+              {
+                "code": "MLS-V02-0993",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 993,
+                "title": "Parasíntesis",
+                "level": "B2",
+                "part": "Formación de palabras y léxico-gramática — Formação de palavras e léxico-gramática",
+                "chapter": "Formación de palabras — Formação de palavras",
+                "articleMarkdown": "#### En pocas palabras\n\nLa **parasíntesis** forma una palabra mediante la incorporación conjunta de prefijo y sufijo alrededor de una base. Ejemplos tradicionales son **entristecer** y **anoitecer**.\n\nLa idea central es que los dos elementos derivativos participan en la formación.\n\n#### Cómo funciona\n\nEn **triste → entristecer**, el patrón combina **en-** y **-ecer**. En **noite → anoitecer**, aparecen **a-** y **-ecer**.\n\nUn criterio escolar frecuente consiste en comprobar que las formas intermedias esperables no funcionan con el mismo significado.\n\n#### Ejemplos\n\n* **triste → entristecer**\n* **noite → anoitecer**\n* **rico → enriquecer**\n* **velho → envelhecer**\n\n#### Observación importante\n\nEl análisis parasintético puede variar entre teorías morfológicas. Conviene tratarlo como un patrón de formación, no como una fórmula mecánica aplicable a cualquier palabra con prefijo y sufijo.\n\n\nUn criterio tradicional es que prefijo y sufijo participen conjuntamente en la formación y que retirar uno de ellos no produzca la misma palabra derivada con el mismo sentido: **triste → entristecer**, **noite → anoitecer**. No toda palabra que contiene simultáneamente prefijo y sufijo es, por eso, parasintética.\n#### Entradas relacionadas\n\n[987. Prefixação](#entrada-987) · [988. Sufixação](#entrada-988) · [992. Composição por aglutinação](#entrada-992)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "staging-c60c48255373ea742a2fdf41ff76338227df2f3f51ab982eaddeb92db97bc4f7",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T18:22:29.433Z"
+              },
+              {
+                "code": "MLS-V02-0994",
+                "language": "portugues",
+                "languageName": "Portugués brasileño",
+                "n": 994,
+                "title": "Nominalización con -ção",
+                "level": "B1",
+                "part": "Formación de palabras y léxico-gramática — Formação de palavras e léxico-gramática",
+                "chapter": "Formación de palabras — Formação de palavras",
+                "articleMarkdown": "#### En pocas palabras\n\nEl sufijo **-ção** forma muchos sustantivos a partir de verbos: **organizar → organização**, **decidir → decisão**.\n\nEstos sustantivos suelen expresar acción, proceso o resultado.\n\n#### Cómo funciona\n\nLa forma de la base puede cambiar: **produzir → produção**, **informar → informação**. No siempre basta añadir literalmente las letras **-ção**.\n\nEl género de estos sustantivos es normalmente femenino: **a decisão, a organização**.\n\n#### Ejemplos\n\n* **organizar → organização**\n* **decidir → decisão**\n* **produzir → produção**\n* **informar → informação**\n\n#### Observación importante\n\nLa relación morfológica puede implicar cambios ortográficos y fonológicos. Cada derivado debe aprenderse con su forma correcta.\n\n\nLa base puede experimentar cambios gráficos o fonológicos, de modo que no basta con añadir literalmente las letras **-ção**. Además, el sustantivo resultante puede designar acción, proceso, resultado o concepto relacionado: **organização** puede referirse tanto al acto de organizar como a una entidad organizada, según el contexto.\n#### Entradas relacionadas\n\n[988. Sufixação](#entrada-988) · [995. Nominalização com -mento](#entrada-995) · [996. Formação com -dade](#entrada-996)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "staging-d73241c131815be43bd15bf77d7881a2697d9a5d61ea46fb429d357a4c7dc49c",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-18T18:22:34.373Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:53:37.727Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:53:37.727Z",
+  "commandFile": "mls chat bridge/commands/000-priority-r44-c7f9/03-submit02-claim03.json"
+}
