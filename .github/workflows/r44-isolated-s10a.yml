@@ -1,0 +1,40 @@
+name: R44 Isolated s10a
+
+on:
+  push:
+    branches:
+      - r44-isolated-s10a-20261003t0254z
+    paths:
+      - 'r44 isolated trigger/s10a.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Renew and submit R44 s10a
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: |
+          set -euo pipefail
+          node 'scripts/MLS chat bridge.cjs' \
+            'mls chat bridge/commands/2026-10-03/chatgpt-sol-20261003T0251Z-r44-s10a-renew.json' \
+            'mls chat bridge/commands/2026-10-03/chatgpt-sol-20261003T0252Z-r44-s10a-submit.json'
+      - name: Persist isolated results
+        run: |
+          set -euo pipefail
+          git config user.name 'MLS Chat Bridge'
+          git config user.email 'actions@users.noreply.github.com'
+          git add 'mls chat bridge/results/2026-10-03/chatgpt-sol-20261003T0251Z-r44-s10a-renew.json' \
+                  'mls chat bridge/results/2026-10-03/chatgpt-sol-20261003T0252Z-r44-s10a-submit.json'
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Persist R44 isolated s10a results'
+          git push origin HEAD:r44-isolated-s10a-20261003t0254z
