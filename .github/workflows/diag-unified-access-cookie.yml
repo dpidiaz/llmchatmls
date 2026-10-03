@@ -18,3 +18,7 @@ jobs:
           account='7ca8428acd1e83f8c7b03427c249a56d'
           apps="$(curl -fsSL -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$account/access/apps?per_page=100")"
           printf '%s' "$apps" | jq -c '.result[] | select(.name=="MLS Unified Runner") | {id,name,domain,aud,destinations,session_duration,path_cookie_attribute,http_only_cookie_attribute,same_site_cookie_attribute,enable_binding_cookie,eager_redirect_to_identity}'
+          echo '--- runner unauthenticated ---'
+          curl -sS -o /dev/null -D - 'https://llmchatmls.dpidiaz.workers.dev/runner.html' | sed -n '1,30p'
+          echo '--- browser api unauthenticated ---'
+          curl -sS -X POST -H 'Content-Type: application/json' --data '{}' -o /dev/null -D - 'https://llmchatmls.dpidiaz.workers.dev/api/unified-runner/browser/status' | sed -n '1,30p'
