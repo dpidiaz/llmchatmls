@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-b-step-05",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0304",
+          "sha256": "024c5b3fb26209abbcec755d4e727c2c767d37bbc9766458cfdc4aa843fdc12a",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0304",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "16c5be4a-71d9-4934-84dc-57229d20a8cb",
+                "ticketId": "R43-EMERGENCY-0304",
+                "code": "MLS-V04-1025",
+                "idempotencyKey": "R43-EMERGENCY-0304:MLS-V04-1025:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a53490133d5fe148ab3165d0a252784dbc74b0e23fc6830b886152fe45739253",
+                "sourceSha256": "c322ae7b13e308d7a14cdce94870382be4a56fc08ba57b91a754183edae4a4ba",
+                "committedMs": 1790996258841,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8e3a406d46d8c3d0dacf896f4003ef110ad90ce65b6da8c7bba62f1e3d0b4faf",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0304",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8ec50024-290b-4c75-ada7-c7435fc20463",
+                "ticketId": "R43-EMERGENCY-0304",
+                "code": "MLS-V04-1027",
+                "idempotencyKey": "R43-EMERGENCY-0304:MLS-V04-1027:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2a381f746e42a653d42d2a63fd69b8225d1ddc245eec9f08a327ec8da3a872f9",
+                "sourceSha256": "67a3b5b421b448455bd2d383691d7d868f2ee31ca79e2a03db0b386ea33b1fe7",
+                "committedMs": 1790996259082,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "a78d35a866bedc495269267ec86293400bcf0044a7e2ff51dc59fab5747cf55a",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0304",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c17ea5a3-5e46-4b33-9975-cacdc1045e62",
+                "ticketId": "R43-EMERGENCY-0304",
+                "code": "MLS-V04-1028",
+                "idempotencyKey": "R43-EMERGENCY-0304:MLS-V04-1028:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bd7057cf21763ec647d13c2759eda29c82502a61af6b0a3940d0bc57c91b2c36",
+                "sourceSha256": "4f0af38170ddc568745879abb12bede12d860b135808980243429b9963f636b0",
+                "committedMs": 1790996259316,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "e77ce57bd7235afe3033e911cea54f1172fb11c7d8c80213c5dfcf079b474225",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0304",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "45bc8484-aa8f-4c43-b429-c5e2a44ff330",
+                "ticketId": "R43-EMERGENCY-0304",
+                "code": "MLS-V04-1029",
+                "idempotencyKey": "R43-EMERGENCY-0304:MLS-V04-1029:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "968365d162b2201bca3494ae39361759e1b1d703d15077fc7cf5a71bf548d1c0",
+                "sourceSha256": "41664a80b203e716f3edfc7af40d63b894d37485ccd7b5f56c874cd3c758940b",
+                "committedMs": 1790996259541,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "47999b477ddc26ce591f586df0194315e53322dc56adc2b27e3375ff4e1575e4",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0304",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "cdba514e-eabf-4568-ae7d-26096ba9cd6c",
+                "ticketId": "R43-EMERGENCY-0304",
+                "code": "MLS-V04-1030",
+                "idempotencyKey": "R43-EMERGENCY-0304:MLS-V04-1030:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "bbc3c424c017e710996a2cd297959315fdf43395cc4bb07cb2d38aefdb70b9ae",
+                "sourceSha256": "d302474ceb4cf3b948cb4ffd4d32250e30b59fb30b108acafb9f9f0ddc67ca11",
+                "committedMs": 1790996259783,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "197334e5d2ea6e066e9173c261599ce27f32df7795c7aa86023d9decfac337bd",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-4073d38c-19c3-48e7-88eb-bde255ab0109",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "024c5b3fb26209abbcec755d4e727c2c767d37bbc9766458cfdc4aa843fdc12a"
+          }
+        },
+        "completedAt": "2026-10-03T02:57:40.082Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-3ed2870e-34b6-441f-ab81-0402c6da9c74",
+          "workerId": "chat-r44-m10-20261002-2045-b",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0310",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996560125,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V04-1062",
+                "path": "frances/MLS-V04-1062.json",
+                "sha256": "b5d1d258faa971b2aef2fc21f57f6d38116c3988ef21b4a63a149c0806050084"
+              },
+              {
+                "code": "MLS-V04-1063",
+                "path": "frances/MLS-V04-1063.json",
+                "sha256": "df9218e1b5ce9590b5f9c7d9d4075221316abdde1f1f2a7eb7e43e54b986578d"
+              },
+              {
+                "code": "MLS-V04-1064",
+                "path": "frances/MLS-V04-1064.json",
+                "sha256": "4a395f5453968d252b674e44be13f0e5535e17b5f114143eb8308f68b3b91607"
+              },
+              {
+                "code": "MLS-V04-1065",
+                "path": "frances/MLS-V04-1065.json",
+                "sha256": "354c7535eddb93805d19635ecf57a12e4359e27651ca972449353edaa9d3dce6"
+              },
+              {
+                "code": "MLS-V04-1066",
+                "path": "frances/MLS-V04-1066.json",
+                "sha256": "50c6eefcd10f87f5ad639cf4ce2a5f5ac8786f8fb89fc0ccbbd5546d7cbdf7e0"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0310",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V04-1062",
+                "path": "frances/MLS-V04-1062.json",
+                "sha256": "b5d1d258faa971b2aef2fc21f57f6d38116c3988ef21b4a63a149c0806050084"
+              },
+              {
+                "code": "MLS-V04-1063",
+                "path": "frances/MLS-V04-1063.json",
+                "sha256": "df9218e1b5ce9590b5f9c7d9d4075221316abdde1f1f2a7eb7e43e54b986578d"
+              },
+              {
+                "code": "MLS-V04-1064",
+                "path": "frances/MLS-V04-1064.json",
+                "sha256": "4a395f5453968d252b674e44be13f0e5535e17b5f114143eb8308f68b3b91607"
+              },
+              {
+                "code": "MLS-V04-1065",
+                "path": "frances/MLS-V04-1065.json",
+                "sha256": "354c7535eddb93805d19635ecf57a12e4359e27651ca972449353edaa9d3dce6"
+              },
+              {
+                "code": "MLS-V04-1066",
+                "path": "frances/MLS-V04-1066.json",
+                "sha256": "50c6eefcd10f87f5ad639cf4ce2a5f5ac8786f8fb89fc0ccbbd5546d7cbdf7e0"
+              }
+            ],
+            "remaining": [
+              "MLS-V04-1062",
+              "MLS-V04-1063",
+              "MLS-V04-1064",
+              "MLS-V04-1065",
+              "MLS-V04-1066"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-b",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996560125,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-b",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996560125,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V04-1062",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1062,
+                "title": "On con valor de nous",
+                "level": "C1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Francés estándar, neoestándar y norma — Français standard, néostandard et norme",
+                "articleMarkdown": "#### En pocas palabras\n\nEl pronombre **on** puede tener varios valores en francés. Uno de los más frecuentes en la lengua hablada contemporánea es representar a **nous**, es decir, incluir al hablante y a una o más personas: **On arrive demain** puede significar “Llegamos mañana”.\n\nAunque **on** tenga valor de “nosotros”, el verbo se mantiene normalmente en **tercera persona singular**: **on est**, **on va**, **on fait**, no *on sommes* ni *on allons*.\n\n#### Cómo funciona\n\nCuando **on** sustituye a **nous**, cambia la forma del sujeto pero no necesariamente las personas incluidas en el significado. En **On part à huit heures**, el hablante puede estar diciendo exactamente lo que en un registro más formal expresaría como **Nous partons à huit heures**.\n\nEste uso es especialmente frecuente en conversación y en estilos escritos que imitan una voz cercana o espontánea. **Nous** sigue siendo plenamente normal, sobre todo en escritura formal, discursos planificados y contextos donde se desea evitar ambigüedad.\n\nLa concordancia del verbo es singular porque gramaticalmente **on** pertenece a la tercera persona singular. En cambio, ciertos adjetivos o participios pueden reflejar el número o el género de las personas a las que **on** se refiere: **On est contents** puede decirlo un grupo masculino o mixto.\n\n#### Ejemplos\n\n* **On arrive demain matin.** — Llegamos mañana por la mañana. **On** equivale aquí a **nous**.\n* **On va au cinéma ce soir ?** — ¿Vamos al cine esta noche? Uso conversacional inclusivo.\n* **On est très contents de vous revoir.** — Estamos muy contentos de volver a verlo. El verbo queda en singular, mientras **contents** refleja un referente plural.\n* **Nous vous remercions de votre réponse.** — Le agradecemos su respuesta. **Nous** puede preferirse en un registro escrito más formal.\n\nEstos ejemplos muestran que el valor semántico plural de **on** no cambia la conjugación verbal que le corresponde como pronombre singular.\n\n#### Observación importante\n\nNo todo **on** significa **nous**. También puede tener valor indefinido, semejante a “se”, “uno”, “la gente” o una referencia no especificada: **En France, on mange du pain** no implica necesariamente que el hablante forme parte del grupo mencionado.\n\nPor eso, el valor de **on** se determina por el contexto. Tampoco debe presentarse **on = nous** como una forma incorrecta o puramente descuidada: es un uso muy extendido y normal del francés contemporáneo, aunque su frecuencia varía según registro y situación.\n\n#### Entradas relacionadas\n\n[Omisión de ne como rasgo neoestándar](#entry-1061) · [Francés neoestándar](#entry-1053) · [Uso culto hablado](#entry-1055) · [Norma escrita](#entry-1054)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9073518b57e82a16e34bd19876f5a145da1ce7358281b78a8bb68575f4a1e582",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:12:03.246Z"
+              },
+              {
+                "code": "MLS-V04-1063",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1063,
+                "title": "Après que + indicatif: norma y uso",
+                "level": "C1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Francés estándar, neoestándar y norma — Français standard, néostandard et norme",
+                "articleMarkdown": "#### En pocas palabras\n\nLa conjunción **après que** introduce un hecho presentado como posterior a otro hecho ya realizado o considerado real. Por esa razón, la norma tradicional del francés selecciona normalmente el **indicativo**, no el subjuntivo.\n\nAsí, **Après qu’il est parti, j’ai fermé la porte** significa “Después de que se fue, cerré la puerta”. El indicativo presenta la salida como un hecho situado en la secuencia temporal.\n\n#### Cómo funciona\n\nEl indicativo es el modo que aparece normalmente cuando **après que** introduce un acontecimiento tratado como efectivo. Según la relación temporal, pueden encontrarse diferentes tiempos: **après qu’il est parti**, **après qu’il était parti** o, en ciertos registros, formas de anterioridad más cuidadas.\n\nEn el uso contemporáneo también se oye y se escribe **après que + subjonctif**, probablemente favorecido por la analogía con **avant que**, que sí selecciona el subjuntivo: **avant qu’il parte**. Esa frecuencia real no convierte el subjuntivo en la recomendación normativa tradicional para **après que**.\n\nLa diferencia ilustra la separación entre descripción y prescripción. Una gramática descriptiva puede registrar el subjuntivo como uso extendido; una gramática normativa suele recomendar el indicativo en escritura cuidada.\n\n#### Ejemplos\n\n* **Après qu’il est parti, j’ai fermé la porte.** — Después de que se fue, cerré la puerta.\n* **Après qu’elle a terminé son travail, elle est sortie.** — Después de terminar su trabajo, salió.\n* **Nous sommes arrivés après que le spectacle avait commencé.** — Llegamos después de que el espectáculo había empezado.\n* **Avant qu’il parte, parle-lui.** — Antes de que se vaya, háblale. Aquí **avant que** contrasta con **après que** al seleccionar subjuntivo.\n\nLos ejemplos muestran que la elección del modo depende de la conjunción y de cómo se estructura la relación temporal, no de una regla general según la cual toda subordinada con **que** llevaría subjuntivo.\n\n#### Observación importante\n\nNo conviene calificar automáticamente como incomprensible o ajeno al uso cualquier ejemplo de **après que + subjonctif**. La construcción está documentada y es frecuente para muchos hablantes, aunque siga recibiendo reservas en la norma tradicional.\n\nTampoco basta decir que el indicativo expresa “certeza” y el subjuntivo “duda”. Esa oposición es demasiado simple: la selección modal francesa depende en gran medida de la construcción concreta.\n\n#### Entradas relacionadas\n\n[Variación aceptada vs error](#entry-1059) · [Gramática descriptiva vs prescriptiva](#entry-1058) · [Omisión de ne como rasgo neoestándar](#entry-1061) · [On con valor de nous](#entry-1062)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-1047546a1f37b676175a978d3214587c69b6f31a04ffdc3a7e8cc817a9ff4fa8",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:12:46.563Z"
+              },
+              {
+                "code": "MLS-V04-1064",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1064,
+                "title": "Français standard vs usages régionaux",
+                "level": "C2",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Francés estándar, neoestándar y norma — Français standard, néostandard et norme",
+                "articleMarkdown": "#### En pocas palabras\n\nEl **francés estándar** ofrece una referencia común para la escritura, la enseñanza y muchos contextos formales, pero convive con **usos regionales** plenamente legítimos. Una forma regional no es un error simplemente porque no coincida con la variedad más difundida internacionalmente.\n\nPor ejemplo, en Francia es habitual **soixante-dix** para 70, mientras que **septante** es corriente en Bélgica y en buena parte de la Suiza francófona. Ambas formas pertenecen al francés; su distribución geográfica es diferente.\n\n#### Cómo funciona\n\nUna lengua estándar selecciona y estabiliza ciertas formas para facilitar la comunicación entre comunidades. Esa función práctica no elimina la diversidad interna. Pronunciación, vocabulario, construcciones y usos pragmáticos pueden variar de una región francófona a otra.\n\nLa relación tampoco es simplemente “estándar frente a dialecto”. Algunas variantes regionales poseen prestigio, codificación y uso institucional dentro de su propia comunidad. **Septante** y **nonante**, por ejemplo, pueden aparecer en medios, administración y conversación sin adquirir por ello un carácter subestándar.\n\nAdemás, una misma persona puede dominar varios repertorios y adaptar su forma de hablar o escribir según interlocutor, medio y situación. La variación regional y el estándar forman parte de un sistema lingüístico compartido, no de lenguas necesariamente separadas.\n\n#### Ejemplos\n\n* **En France, on dit généralement soixante-dix.** — En Francia, generalmente se dice *soixante-dix*.\n* **En Suisse romande, septante est courant.** — En la Suiza francófona, *septante* es corriente.\n* **En Belgique, nonante est une forme normale.** — En Bélgica, *nonante* es una forma normal.\n* **Le même mot peut se prononcer différemment selon la région.** — La misma palabra puede pronunciarse de manera distinta según la región.\n\nLos ejemplos muestran que la variación afecta distintos niveles de la lengua y que una diferencia regional no implica por sí sola incorrección.\n\n#### Observación importante\n\nNo conviene identificar “francés estándar” exclusivamente con “francés de Francia”. Francia ha tenido un peso histórico importante en la codificación, pero existen normas y usos consolidados en Quebec, Bélgica, Suiza, África y otras comunidades francófonas.\n\nTampoco toda forma local es automáticamente estándar regional. Para describirla con precisión importan su extensión, estabilidad, registro y aceptación dentro de la comunidad.\n\nLa comparación útil distingue entre estándar común, norma regional, variante coloquial y error de aprendizaje sin convertir esas categorías en una jerarquía de legitimidad lingüística.\n\n#### Entradas relacionadas\n\n[Variación aceptada vs error](#entry-1059) · [Francés estándar](#entry-1052) · [Variación léxica sin error gramatical](#entry-1049) · [Après que + indicatif: norma y uso](#entry-1063)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-7b702fc62663759d4994b80708885eb7920b907a5c6b0435bbbc5b06780c7130",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:13:23.978Z"
+              },
+              {
+                "code": "MLS-V04-1065",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1065,
+                "title": "Sujeto omitido del español → sujeto expreso francés",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Interferencias del español de Guatemala — Interférences de l'espagnol du Guatemala",
+                "articleMarkdown": "#### En pocas palabras\n\nEn español es normal omitir el pronombre sujeto porque la forma verbal suele indicar quién realiza la acción: **Trabajo hoy**. En francés, en cambio, el sujeto normalmente debe expresarse: **Je travaille aujourd’hui**.\n\nPor eso, una traducción palabra por palabra que elimine **je**, **tu**, **il/elle**, etc., suele producir una oración no estándar en francés.\n\n#### Cómo funciona\n\nEl francés necesita normalmente un sujeto expreso delante del verbo conjugado. Se dice **Je parle français**, **Tu arrives demain**, **Nous travaillons ici**. El pronombre identifica la persona gramatical y forma parte de la estructura habitual de la oración.\n\nLa diferencia es especialmente visible porque muchas terminaciones francesas se pronuncian igual. **Je parle**, **tu parles** e **il parle** tienen formas escritas distintas, pero la terminación verbal no siempre distingue auditivamente la persona; el pronombre cumple entonces una función esencial.\n\nTambién existen sujetos no personales, como **il** en **Il pleut** — “Llueve”. En español no aparece un pronombre equivalente obligatorio, pero el francés conserva **il**.\n\n#### Ejemplos\n\n* **Je travaille aujourd’hui.** — Trabajo hoy.\n* **Tu comprends la question.** — Entendés la pregunta.\n* **Nous arrivons à huit heures.** — Llegamos a las ocho.\n* **Il pleut depuis ce matin.** — Llueve desde esta mañana.\n\n#### Observación importante\n\nEl francés sí permite omitir el sujeto en contextos especiales, por ejemplo en ciertos imperativos: **Viens !** — “¡Vení!”. Eso no cambia la regla general de las oraciones declarativas con verbo conjugado.\n\nLa interferencia del español puede producir formas como *Travaille aujourd’hui* cuando se pretende decir “Trabajo hoy”. Sin contexto imperativo, la forma esperada es **Je travaille aujourd’hui**.\n\n#### Entradas relacionadas\n\nEste contraste pertenece a las diferencias estructurales entre español y francés. Se relaciona también con la obligatoriedad de ciertos pronombres sujetos y con la pronunciación de las terminaciones verbales francesas.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a53c35a245bf24bd8272cf99ed8fdfd05ab6ad1ebc1a6686840ec057a09a0eab",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:14:04.844Z"
+              },
+              {
+                "code": "MLS-V04-1066",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1066,
+                "title": "Ser/estar → être",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Interferencias del español de Guatemala — Interférences de l'espagnol du Guatemala",
+                "articleMarkdown": "#### En pocas palabras\n\nEl francés **être** cubre muchos usos que en español se reparten entre **ser** y **estar**, pero no existe una equivalencia mecánica. Por ejemplo, **Il est médecin** significa “Es médico” y **Il est à la maison** significa “Está en casa”.\n\nLa elección francesa depende de la construcción y del significado, no de escoger entre dos verbos distintos como en español.\n\n#### Cómo funciona\n\n**Être** se usa para identificar, clasificar o describir: **Elle est professeure**, **La maison est grande**. También aparece para expresar ubicación de personas o cosas: **Paul est au bureau**, **Les clés sont sur la table**.\n\nPor eso, la traducción al español puede requerir **ser** o **estar** según el contexto. La misma forma francesa **est** aparece en **Il est gentil** — “Es amable” y en **Il est fatigué** — “Está cansado”.\n\nSin embargo, no todo uso de **ser** o **estar** se traduce automáticamente con **être**. Hay expresiones francesas que utilizan otros verbos o construcciones, como **avoir faim** — “tener hambre”, donde una traducción literal basada en *être* sería incorrecta.\n\n#### Ejemplos\n\n* **Il est médecin.** — Es médico.\n* **Il est à la maison.** — Está en casa.\n* **Elle est contente.** — Está contenta.\n* **Paris est la capitale de la France.** — París es la capital de Francia.\n\n#### Observación importante\n\nDecir que **être significa “ser y estar”** puede servir como primera orientación, pero es insuficiente como regla completa. El francés organiza estas relaciones de manera distinta del español.\n\nLa interferencia aparece cuando se intenta reconstruir en francés la oposición española entre **ser** y **estar**. En lugar de buscar dos equivalentes franceses separados, conviene reconocer qué construcción francesa expresa el significado concreto.\n\n#### Entradas relacionadas\n\nEste contraste pertenece a las diferencias estructurales entre español y francés. Se relaciona con la expresión de identidad, descripción, estado y ubicación, y con otras construcciones frecuentes que no coinciden palabra por palabra entre ambas lenguas.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-2857679dfdded3d07f2e38907e67197a12adebb30aeace049f91a15a5e32f88e",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:15:13.901Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:57:40.922Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:57:40.922Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-b/05-submit-claim.json"
+}

@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-b10a-ticket03-next04",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0890",
+          "sha256": "44dbe39f1d6c76307be2a82d7d0d9fa8564891eb647e43367e5e9fc39625f9a7",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0890",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "05af1b80-66ac-4dda-883a-ccfc0f6231d7",
+                "ticketId": "R44-CORPUS-0890",
+                "code": "MLS-V01-0574",
+                "idempotencyKey": "R44-CORPUS-0890:MLS-V01-0574:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "c5e0378ba79522ea6384915251b8c100f68cfa634eef61e61b71e0b2bb095870",
+                "sourceSha256": "c7d4a07135cc801e5e0122c49048b18fba8d62ad311f66e641fa6c74b1526d6e",
+                "committedMs": 1790996238512,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "416b47943fdc18efa7ef1818bb80236c834ac76e80b870575fbe2207dcd45cc6",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0890",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "6aaef3cb-5ef0-4de5-9690-852670ceffe3",
+                "ticketId": "R44-CORPUS-0890",
+                "code": "MLS-V01-0575",
+                "idempotencyKey": "R44-CORPUS-0890:MLS-V01-0575:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "c646a34cb162669ff64d55e4ffd0d38900dc0276d9dbb22ccdb5c557e07a06a7",
+                "sourceSha256": "a2a9b55f03347977fd6b44146308bdffb91669bb3e02e5163b9c7fe6b2a459e4",
+                "committedMs": 1790996238730,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "de929264eea65df2f01329e03640589f2af05b55dd8328a56771eed32fa2b05c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0890",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ce920baf-8f38-460b-9cb8-8aec98cb533f",
+                "ticketId": "R44-CORPUS-0890",
+                "code": "MLS-V01-0576",
+                "idempotencyKey": "R44-CORPUS-0890:MLS-V01-0576:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "7b1b18148d2054e415fcef31feeb3147b9cd5453094374256ce335404b74ed13",
+                "sourceSha256": "c7a273f4db159e5a8f0a1834369ba758b0bb3546501b9eb2282cd2035a558bee",
+                "committedMs": 1790996238982,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f2ef9389af1f93704a096d4035ea2bb37509097817e69efc3e4509f400095455",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0890",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5707983e-bcee-4f87-bf7c-965f8edbeed0",
+                "ticketId": "R44-CORPUS-0890",
+                "code": "MLS-V01-0577",
+                "idempotencyKey": "R44-CORPUS-0890:MLS-V01-0577:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d99c3108a277ffe6efc8eacf904b32a09425857dfd419295ccbd58995a073985",
+                "sourceSha256": "1ab82ecc59d4f07619a58bc784302c9125ee1cf9c730345889d63fd0e87e2f5e",
+                "committedMs": 1790996239192,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c9e00752c37d24f1a187fcbce1e83481a2ae710fae78c1c2ce0eec8f04082580",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0890",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "89189769-ac34-4cd9-a846-10268573cff4",
+                "ticketId": "R44-CORPUS-0890",
+                "code": "MLS-V01-0579",
+                "idempotencyKey": "R44-CORPUS-0890:MLS-V01-0579:legacy-v1",
+                "workerId": "r44-chat-20261002-2045-sol-b10a",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6ead550a6382c66a5162fa2ec331c5afca40217c268adaa44ad7368b19b707d1",
+                "sourceSha256": "ce2660a85ab223f6bbfef6b94b051fdf510923a6be226be2f7469a1bff54ca8e",
+                "committedMs": 1790996239406,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d9c4212f8b3b778186449542c6af7390e2091b70c478a7f0fd2a53d6e728b957",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-6f366215-4d15-4640-b49d-d5b544e397ae",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "44dbe39f1d6c76307be2a82d7d0d9fa8564891eb647e43367e5e9fc39625f9a7"
+          }
+        },
+        "completedAt": "2026-10-03T02:57:19.697Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-0d75eebf-571b-410a-8d7e-fd5af30fe8cf",
+          "workerId": "r44-chat-20261002-2045-sol-b10a",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0891",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996539742,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0580",
+                "path": "ingles/MLS-V01-0580.json",
+                "sha256": "9a6da7780cdb49347721d8a3a08414848c530a83e4c23704b9aa9d76deac9fa3"
+              },
+              {
+                "code": "MLS-V01-0581",
+                "path": "ingles/MLS-V01-0581.json",
+                "sha256": "b6cc486167b3fb7184ddcb574367ee5de7d53df44bf9d953961959c6df4b3c83"
+              },
+              {
+                "code": "MLS-V01-0582",
+                "path": "ingles/MLS-V01-0582.json",
+                "sha256": "4d8f1fadadb264d328c935c6f9e10b0b9401eac2b9ddff7901797d6f7ea5f135"
+              },
+              {
+                "code": "MLS-V01-0583",
+                "path": "ingles/MLS-V01-0583.json",
+                "sha256": "6b892d8b82e3ca84ef5b396ade7fa9c375d6257ee39faf1337214560cbdf06ed"
+              },
+              {
+                "code": "MLS-V01-0584",
+                "path": "ingles/MLS-V01-0584.json",
+                "sha256": "17b6e19143e819382f8c6ed2d895b16fa05ed3a94121a27d926eddd4044ec10f"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0891",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0580",
+                "path": "ingles/MLS-V01-0580.json",
+                "sha256": "9a6da7780cdb49347721d8a3a08414848c530a83e4c23704b9aa9d76deac9fa3"
+              },
+              {
+                "code": "MLS-V01-0581",
+                "path": "ingles/MLS-V01-0581.json",
+                "sha256": "b6cc486167b3fb7184ddcb574367ee5de7d53df44bf9d953961959c6df4b3c83"
+              },
+              {
+                "code": "MLS-V01-0582",
+                "path": "ingles/MLS-V01-0582.json",
+                "sha256": "4d8f1fadadb264d328c935c6f9e10b0b9401eac2b9ddff7901797d6f7ea5f135"
+              },
+              {
+                "code": "MLS-V01-0583",
+                "path": "ingles/MLS-V01-0583.json",
+                "sha256": "6b892d8b82e3ca84ef5b396ade7fa9c375d6257ee39faf1337214560cbdf06ed"
+              },
+              {
+                "code": "MLS-V01-0584",
+                "path": "ingles/MLS-V01-0584.json",
+                "sha256": "17b6e19143e819382f8c6ed2d895b16fa05ed3a94121a27d926eddd4044ec10f"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0580",
+              "MLS-V01-0581",
+              "MLS-V01-0582",
+              "MLS-V01-0583",
+              "MLS-V01-0584"
+            ],
+            "lease": {
+              "workerId": "r44-chat-20261002-2045-sol-b10a",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996539742,
+              "active": true
+            },
+            "workerId": "r44-chat-20261002-2045-sol-b10a",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996539742,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0580",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 580,
+                "title": "that",
+                "level": "A2",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\n**That** puede introducir una cláusula relativa restrictiva que identifica o delimita a una persona, cosa o grupo. En **the book that I need** («el libro que necesito»), **that I need** indica cuál libro se menciona.\n\n#### Cómo funciona\n\nEl patrón es **antecedente + that + cláusula restrictiva**. El antecedente es el elemento al que se refiere la relativa.\n\n**That** puede usarse con antecedentes humanos: **the person that called**, y no humanos: **the car that broke down**. También puede funcionar como sujeto u objeto dentro de la relativa.\n\nCuando es sujeto, se mantiene: **the dog that barked all night**. Cuando es objeto, a menudo puede omitirse: **the book (that) I bought**.\n\n**That** es especialmente frecuente en relativas restrictivas, es decir, aquellas cuya información ayuda a identificar o limitar el referente.\n\n#### Ejemplos\n\n- **The book that I need is on the desk.** — El libro que necesito está sobre el escritorio.\n- **She is the person that called yesterday.** — Ella es la persona que llamó ayer.\n- **The car that broke down was very old.** — El automóvil que se averió era muy viejo.\n- **This is the song that we heard earlier.** — Esta es la canción que oímos antes.\n\n#### Observación importante\n\n**That** no suele introducir relativas suplementarias, que añaden información extra y aparecen entre comas. Se dice **My car, which is ten years old, still runs well**, no normalmente *My car, that is ten years old,...*.\n\nAdemás, una preposición formal colocada antes del relativo suele combinarse con **which** o **whom**, no con **that**: **the topic about which we spoke**.\n\n#### Entradas relacionadas\n\n- [Entrada 579: which — which](#entry-579)\n- [Entrada 581: whose — whose](#entry-581)\n- [Entrada 578: who — who](#entry-578)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-84232b32fe5408fd8a741245f9055bc839f386b33b8909a1d7f0b27d8a9ac770",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:12:59.879Z"
+              },
+              {
+                "code": "MLS-V01-0581",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 581,
+                "title": "whose",
+                "level": "B1",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\n**Whose** introduce una cláusula relativa y expresa una relación de posesión o pertenencia. En **the student whose laptop broke** («el estudiante cuya computadora se rompió»), **whose laptop** relaciona la computadora con **the student**.\n\nAunque se asocia con frecuencia con personas, **whose** también puede referirse a organizaciones, animales y cosas, especialmente en registros cuidados.\n\n#### Cómo funciona\n\nEl patrón frecuente es **antecedente + whose + sustantivo + cláusula**: **the woman whose car was stolen**, **a company whose products are sold worldwide**.\n\n**Whose** funciona como determinante dentro de la cláusula relativa: aparece delante de un sustantivo y expresa la relación entre ese sustantivo y el antecedente. No lleva artículo entre **whose** y el sustantivo: se dice **whose car**, no *whose the car*.\n\nPuede aparecer en relativas restrictivas: **Students whose applications are incomplete will be contacted**, y en relativas suplementarias: **Daniel, whose sister lives here, is visiting us**. En el segundo caso, la información se añade como comentario y va separada por comas.\n\nCon antecedentes no humanos, **whose** es una opción legítima: **a house whose roof was damaged**. También existen alternativas como **the roof of which**, pero suelen ser más formales y menos naturales en muchos contextos.\n\n#### Ejemplos\n\n- **The student whose laptop broke called the technician.** — El estudiante cuya computadora se rompió llamó al técnico.\n- **I met a woman whose son works here.** — Conocí a una mujer cuyo hijo trabaja aquí.\n- **They bought a house whose garden faces the river.** — Compraron una casa cuyo jardín da al río.\n- **Laura, whose parents live abroad, visits them every summer.** — Laura, cuyos padres viven en el extranjero, los visita cada verano.\n- **We work with a company whose offices are in Berlin.** — Trabajamos con una empresa cuyas oficinas están en Berlín.\n\n#### Observación importante\n\n**Whose** no debe confundirse con **who’s**, que es la contracción de **who is** o **who has**. **Whose** expresa relación posesiva; **who’s** contiene un verbo.\n\nLa traducción española puede variar entre «cuyo», «cuya», «cuyos», «cuyas» u otras estructuras más naturales según el contexto. En inglés, **whose** no cambia de forma según número o género.\n\n#### Entradas relacionadas\n\n- [Entrada 580: that — that](#entry-580)\n- [Entrada 582: whom como elección de registro formal — whom as a formal-register choice](#entry-582)\n- [Entrada 579: which — which](#entry-579)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-728fc1bf53095acc8396691132862e60c253f8db72d77597148504829605469a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:13:20.673Z"
+              },
+              {
+                "code": "MLS-V01-0582",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 582,
+                "title": "whom como elección de registro formal",
+                "level": "B2",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\n**Whom** es una forma de relativo asociada con función de objeto y con registros formales. En **the person whom I met** («la persona a quien conocí»), **whom** representa a la persona que recibe la acción de **met**.\n\nEn el inglés conversacional actual, **who** suele sustituir a **whom** en muchos de estos contextos: **the person who I met**. La diferencia es principalmente de registro y estructura, no de identidad del referente.\n\n#### Cómo funciona\n\nEl patrón típico es **antecedente humano + whom + sujeto + verbo**: **the woman whom we invited**, **the professor whom I contacted**. Dentro de la relativa, **whom** funciona como objeto, mientras que otro elemento ocupa la función de sujeto.\n\n**Whom** es especialmente frecuente después de una preposición colocada antes del relativo: **the colleague with whom I worked**, **the person to whom she spoke**. Esta disposición es formal y mantiene la preposición junto al relativo.\n\nEn conversación, es muy común dejar la preposición al final y usar **who** o una relativa sin pronombre: **the colleague who I worked with** o **the colleague I worked with**.\n\nTambién puede aparecer en relativas suplementarias: **Mr Harris, whom I met last year, has retired**. Las comas indican que la relativa añade información y no identifica cuál Mr Harris se menciona.\n\n#### Ejemplos\n\n- **The candidate whom we interviewed was highly experienced.** — El candidato a quien entrevistamos tenía mucha experiencia.\n- **She is the person to whom I sent the letter.** — Ella es la persona a quien envié la carta.\n- **The colleague with whom I worked has moved abroad.** — El colega con quien trabajé se mudó al extranjero.\n- **Daniel, whom I met in London, is visiting next week.** — Daniel, a quien conocí en Londres, viene de visita la próxima semana.\n- **The person who I spoke to was helpful.** — La persona con quien hablé fue servicial.\n\n#### Observación importante\n\n**Whom** no funciona normalmente como sujeto. Se dice **the person who called**, no *the person whom called*. La elección depende de la función dentro de la cláusula relativa, no simplemente de que el antecedente sea una persona.\n\nEl uso de **whom** está disminuido en registros informales, pero sigue siendo normal en prosa formal y después de preposiciones frontales. Por eso no debe presentarse ni como obligatorio en todo objeto humano ni como una forma desaparecida.\n\n#### Entradas relacionadas\n\n- [Entrada 581: whose — whose](#entry-581)\n- [Entrada 583: Relativa sin pronombre relativo — Zero relative](#entry-583)\n- [Entrada 580: that — that](#entry-580)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-52a43004e225292fe9402cb8c5f60e65da8b9ea6fc27c89884daef9faaa92317",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T07:13:43.500Z"
+              },
+              {
+                "code": "MLS-V01-0583",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 583,
+                "title": "Relativa sin pronombre relativo",
+                "level": "B1",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nEn inglés, es común omitir el pronombre relativo (*who, which, that*) cuando este se utiliza para dar información esencial sobre una persona o una cosa. A este fenómeno se le conoce como **zero relative**. \n\nSin embargo, esta omisión no es libre; solo es posible en un escenario gramatical específico relacionado con la función del pronombre dentro de la oración.\n\n#### Cómo funciona\n\nPara saber si puedes omitir el pronombre, debes identificar si el pronombre actúa como **sujeto** o como **objeto** de la cláusula relativa (la parte de la oración que describe al sustantivo o antecedente).\n\n1.  **Cuando el pronombre es el objeto (Omisión permitida):**\n    Si después del pronombre relativo aparece un nuevo sujeto (una persona o cosa que realiza la acción), el pronombre funciona como el objeto de esa acción. En este caso, el pronombre es prescindible.\n    *   *Estructura:* Sustantivo + [Pronombre] + **Sujeto** + Verbo.\n\n2.  **Cuando el pronombre es el sujeto (Omisión prohibida):**\n    Si el pronombre relativo va seguido inmediatamente por un verbo, significa que el pronombre es el sujeto que realiza la acción de ese verbo. En este caso, el pronombre es indispensable para que la oración tenga sentido.\n    *   *Estructura:* Sustantivo + [Pronombre] + **Verbo**.\n\n**Nota importante:** Esta regla solo se aplica a las **cláusulas restrictivas** (aquellas que son necesarias para identificar de qué objeto o persona estamos hablando). En las cláusulas no restrictivas (las que añaden información extra y van entre comas), el pronombre nunca se omite.\n\n#### Ejemplos\n\n**Caso 1: El pronombre es el objeto**\n*   *The movie **(that)** we watched was boring.*\n*   Traducción: La película que vimos era aburrida.\n*   **Análisis:** \"We\" es el sujeto de la cláusula. \"That\" es el objeto (la película es lo que fue visto). Como hay un sujeto después del pronombre, podemos decir tanto *The movie that we watched...* como *The movie we watched...*\n\n**Caso 2: El pronombre es el sujeto**\n*   *The girl **who** won the race is my cousin.*\n*   Traducción: La chica que ganó la carrera es mi prima.\n*   **Análisis:** \"Who\" es el sujeto de la acción \"won\". No hay otro sujeto entre el pronombre y el verbo. Por lo tanto, **no** se puede omitir: *The girl won the race is my cousin* sería incorrecto.\n\n**Caso 3: Uso con objetos inanimados**\n*   *The car **(which)** he bought is expensive.*\n*   Traducción: El carro que él compró es caro.\n*   **Análisis:** \"He\" es el sujeto. \"Which\" es el objeto. La omisión es correcta: *The car he bought is expensive.*\n\n#### Observación importante\n\nUn error frecuente es intentar aplicar la omisión en cláusulas que llevan comas. Las cláusulas que van entre comas (no restrictivas) siempre requieren el pronombre para mantener la estructura gramatical.\n*   **Correcto:** *My house, which was built in 1990, is small.*\n*   **Incorrecto:** *My house, built in 1990, is small.* (Aunque esto es posible en otros contextos como participios, no es una *zero relative*).\n\n#### Entradas relacionadas\n\n*   [Cláusulas relativas](#)\n*   [Pronombres relativos (that, who, which)](#)\n*   [Cláusulas restrictivas y no restrictivas](#)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:54:42.689Z"
+              },
+              {
+                "code": "MLS-V01-0584",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 584,
+                "title": "who/which en relativas no restrictivas",
+                "level": "B1",
+                "part": "Cláusulas relativas — Relative clauses",
+                "chapter": "Cláusulas relativas — Relative clauses",
+                "articleMarkdown": "#### En pocas palabras\n\nLas cláusulas relativas no restrictivas (o *non-defining relative clauses*) se utilizan para añadir información extra o suplementaria sobre una persona o cosa que ya ha sido identificada previamente. Esta información es \"accesoria\": si la eliminamos, la oración principal sigue teniendo sentido completo y el referente sigue siendo claramente identificable.\n\n#### Cómo funciona\n\nPara construir estas cláusulas, se siguen tres reglas fundamentales:\n\n1.  **El referente ya es conocido:** El sujeto del que hablamos ya está definido por un nombre propio (ej. *London*, *Mary*) o por un determinante que lo hace único (ej. *my brother*, *the sun*).\n2.  **Uso de pronombres específicos:** \n    *   Se usa **who** para referirse a personas.\n    *   Se usa **which** para referirse a cosas o animales.\n3.  **Uso obligatorio de comas:** La cláusula debe ir aislada del resto de la oración mediante comas. Estas comas actúan como un indicador visual de que lo que sigue es un paréntesis informativo.\n\n#### Ejemplos\n\n*   **My brother, who lives in Canada, is visiting.**\n    *(Mi hermano, que vive en Canadá, está de visita).*\n    *   **Análisis:** Ya sabemos quién es \"mi hermano\". El hecho de que viva en Canadá es un detalle adicional, no es necesario para saber de quién hablamos.\n\n*   **The Eiffel Tower, which was built in 1889, is in Paris.**\n    *(La Torre Eiffel, que fue construida en 1889, está en París).*\n    *   **Análisis:** \"La Torre Eiffel\" es un objeto único y ya identificado. La fecha de construcción es información suplementaria.\n\n*   **Mr. Smith, who is my neighbor, travels a lot.**\n    *(El Sr. Smith, que es mi vecino, viaja mucho).*\n    *   **Análisis:** Al usar el nombre propio \"Mr. Smith\", la identidad ya es clara; la cláusula solo añade un dato sobre su relación con el hablante.\n\n#### Observación importante\n\nExisten dos restricciones críticas que distinguen a estas cláusulas de las restrictivas (*defining*):\n\n1.  **Prohibición de \"that\":** En las cláusulas no restrictivas, **nunca** se puede usar el pronombre *that*. Aunque en el habla cotidiana se use *that* para definir cosas (ej. *The car that I bought*), en una cláusula con comas siempre debes usar *which* para objetos o *who* para personas.\n    *   Incorrecto: *My car, that is blue, is fast.*\n    *   Correcto: *My car, which is blue, is fast.*\n\n2.  **No se puede omitir el pronombre:** En las cláusulas restrictivas (las que no llevan comas), a veces podemos eliminar el pronombre (*The book I read*). En las no restrictivas, **el pronombre (*who/which*) es obligatorio** y siempre debe aparecer.\n\n#### Entradas relacionadas\n\n*   [Entrada 578: who](#)\n*   [Entrada 585: Comas en relativas no restrictivas — Commas in non-defining relatives](#)\n*   [Entrada 586: which oracional — Sentential which](#)",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T10:55:11.652Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:57:20.557Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:57:20.557Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-chat-20261002-2045-sol-b10a-ticket03-next04.json"
+}

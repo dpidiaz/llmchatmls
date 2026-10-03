@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-sol-93bf-ticket02-next03",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-4dc2ee86-7a0e-43e4-a7ff-4b0201291879",
+          "ticketId": "R44-CORPUS-0822",
+          "leaseExpiresAt": 1790996545556
+        },
+        "completedAt": "2026-10-03T02:57:25.708Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R44-CORPUS-0822",
+          "sha256": "87ec65ac2f798df24e26ccaaa6f7f4a7aa9480438778632a9acdbc6b17d9acfc",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0822",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2fedc79d-f145-4539-8fe5-4485bac9a8e7",
+                "ticketId": "R44-CORPUS-0822",
+                "code": "MLS-V01-0136",
+                "idempotencyKey": "R44-CORPUS-0822:MLS-V01-0136:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "2fe0f3d78a662c62720ab77a1aac0f7facd60c558ca671860ab02b27c510824d",
+                "sourceSha256": "3303e58e94cb87fec504008337317ade36dda876853badbf89bcac4bb64596e6",
+                "committedMs": 1790996246110,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f3476cc5838721df4c7c72ce7ef489105a339e359e4d7dbd06c57a514fd83ac1",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0822",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "665ca900-ab39-44f3-a16d-cd7d28e70ea6",
+                "ticketId": "R44-CORPUS-0822",
+                "code": "MLS-V01-0137",
+                "idempotencyKey": "R44-CORPUS-0822:MLS-V01-0137:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "796c56add0de5d4cf19688363d8a22c8d989f9cece3e75a0d089d86bfd1f98f0",
+                "sourceSha256": "37b801f6de7d4260be2e0acf964029ed5abe37fc39b4337993921d7102640dda",
+                "committedMs": 1790996246416,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "cf4ec176377c754ee5bf1209693d0b9865433eb0900ed03fcb326ccecaa91992",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0822",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "91c1987c-a7b9-476f-b98e-e251135d68f1",
+                "ticketId": "R44-CORPUS-0822",
+                "code": "MLS-V01-0138",
+                "idempotencyKey": "R44-CORPUS-0822:MLS-V01-0138:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "cc37d6c64c38b7afff0cd1f62b70f50982af048d1318088c4aba6f814f23efb5",
+                "sourceSha256": "7d2b8be24c0c3e8b974c86498debf2a0e1ea051838428cd746a033eb0698afaa",
+                "committedMs": 1790996246629,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "865d5179739dc3db4881c74347e5c390c706d6b5669c4de432e151823d06a7f4",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0822",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f2128796-965c-4289-81c2-88dbad37a52e",
+                "ticketId": "R44-CORPUS-0822",
+                "code": "MLS-V01-0139",
+                "idempotencyKey": "R44-CORPUS-0822:MLS-V01-0139:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "220767c362fa89cefc4f298b3bfa3238814440cbe435e26ed16c460bcbab933d",
+                "sourceSha256": "a1c064c5e0697bfdc6c3c3c358b08dc76921ea147931894aa1878c07596f5ab7",
+                "committedMs": 1790996246844,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "548d65d5320b5e5e96fb3b63d9cf51f2edef96d33ab7129e6c6245cf9c0fb002",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R44-CORPUS-0822",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ca61d17a-b782-4e7a-9481-266669cdaa06",
+                "ticketId": "R44-CORPUS-0822",
+                "code": "MLS-V01-0140",
+                "idempotencyKey": "R44-CORPUS-0822:MLS-V01-0140:legacy-v1",
+                "workerId": "r44-m10-20261002-2045-sol-93bf",
+                "leaseGeneration": 2,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1eb27221afb90f4933947e48a0236b101176e1ceeaaa73564b3806d8bc6c1c54",
+                "sourceSha256": "c8d25097f4b255a05d4788e22dd35cb0c6af9fe9893d5f8f4264295718b865cb",
+                "committedMs": 1790996247043,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "765073cb85737467225076a828c8b51dd96c1589219d86b8759591b155bbafca",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-4dc2ee86-7a0e-43e4-a7ff-4b0201291879",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "87ec65ac2f798df24e26ccaaa6f7f4a7aa9480438778632a9acdbc6b17d9acfc"
+          }
+        },
+        "completedAt": "2026-10-03T02:57:27.354Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-42bc18e3-9fd4-4098-afa1-23588938d929",
+          "workerId": "r44-m10-20261002-2045-sol-93bf",
+          "ticket": {
+            "ticket_id": "R44-CORPUS-0823",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996547409,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V01-0142",
+                "path": "ingles/MLS-V01-0142.json",
+                "sha256": "e7e5026bcabba56fa8228558949763b388594cffa655fd8a73afe37e61a59437"
+              },
+              {
+                "code": "MLS-V01-0143",
+                "path": "ingles/MLS-V01-0143.json",
+                "sha256": "3154f362959f2e3999db6bb386a76c6f18bb16c7483ac736cdc698e7ff90bf17"
+              },
+              {
+                "code": "MLS-V01-0144",
+                "path": "ingles/MLS-V01-0144.json",
+                "sha256": "bff9e0d9f242938e1d209087e681b6d671e709635faa0f4a147259b57e788817"
+              },
+              {
+                "code": "MLS-V01-0146",
+                "path": "ingles/MLS-V01-0146.json",
+                "sha256": "9778779513c189b553c433958d8f7625629e5036282c85b3f013c3b6e6af0898"
+              },
+              {
+                "code": "MLS-V01-0147",
+                "path": "ingles/MLS-V01-0147.json",
+                "sha256": "4ef27bbb4d01e221b8904201a4c23b461a57c90145ecb3edb4761fb5b85bb23d"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R44-CORPUS-0823",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V01-0142",
+                "path": "ingles/MLS-V01-0142.json",
+                "sha256": "e7e5026bcabba56fa8228558949763b388594cffa655fd8a73afe37e61a59437"
+              },
+              {
+                "code": "MLS-V01-0143",
+                "path": "ingles/MLS-V01-0143.json",
+                "sha256": "3154f362959f2e3999db6bb386a76c6f18bb16c7483ac736cdc698e7ff90bf17"
+              },
+              {
+                "code": "MLS-V01-0144",
+                "path": "ingles/MLS-V01-0144.json",
+                "sha256": "bff9e0d9f242938e1d209087e681b6d671e709635faa0f4a147259b57e788817"
+              },
+              {
+                "code": "MLS-V01-0146",
+                "path": "ingles/MLS-V01-0146.json",
+                "sha256": "9778779513c189b553c433958d8f7625629e5036282c85b3f013c3b6e6af0898"
+              },
+              {
+                "code": "MLS-V01-0147",
+                "path": "ingles/MLS-V01-0147.json",
+                "sha256": "4ef27bbb4d01e221b8904201a4c23b461a57c90145ecb3edb4761fb5b85bb23d"
+              }
+            ],
+            "remaining": [
+              "MLS-V01-0142",
+              "MLS-V01-0143",
+              "MLS-V01-0144",
+              "MLS-V01-0146",
+              "MLS-V01-0147"
+            ],
+            "lease": {
+              "workerId": "r44-m10-20261002-2045-sol-93bf",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996547409,
+              "active": true
+            },
+            "workerId": "r44-m10-20261002-2045-sol-93bf",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996547409,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V01-0142",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 142,
+                "title": "all",
+                "level": "A2",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**All** expresa la totalidad de un grupo o de una cantidad. Puede aparecer delante de sustantivos contables plurales y no contables, y también combinarse con determinantes o pronombres mediante construcciones como **all the**, **all my** o **all of them**.\n\n#### Cómo funciona\n\nCon un sustantivo plural o no contable sin otro determinante, el patrón básico es:\n\n**all + plural noun / mass noun**\n\nPor ejemplo: **all students**, **all books**, **all water**, **all information**. En **All students must register**, **all** incluye a todos los miembros del grupo mencionado.\n\nCuando ya aparece un determinante, es frecuente usar **all + determiner + noun**: **all the students**, **all my friends**, **all these questions**. También puede aparecer **all of + determiner/pronoun**, como **all of the students** o **all of them**. Con pronombres personales de objeto, **of** es necesario: **all of us**, no *all us* en este uso.\n\n#### Ejemplos\n\n- **All students must register.** — Todos los estudiantes deben inscribirse.\n- **All the windows are open.** — Todas las ventanas están abiertas.\n- **She drank all the water.** — Bebió toda el agua.\n- **All of them agreed.** — Todos estuvieron de acuerdo.\n\n#### Observación importante\n\nLa concordancia depende del sustantivo o grupo cuantificado: **All the students are here**, pero **All the information is correct**. **All** no obliga por sí solo a usar un verbo plural.\n\nCon sustantivos contables singulares, normalmente no se usa **all** directamente para expresar totalidad: se dice **the whole day** o **all day**, según el sentido, no *all the day* como equivalente general de «todo el día».\n\n#### Entradas relacionadas\n\n- [Entrada 143: both](#entry-143)\n- [Entrada 144: each](#entry-144)\n- [Entrada 145: every](#entry-145)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-98adaab2a54e3d2d371877253ec0ba0a4df73a2032cd3b916b09ff666b8b098e",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:39:36.988Z"
+              },
+              {
+                "code": "MLS-V01-0143",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 143,
+                "title": "both",
+                "level": "A2",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**Both** se usa cuando hablamos de exactamente dos personas, cosas o grupos y queremos incluir a los dos conjuntamente. Por eso suele combinarse con sustantivos contables en plural o con expresiones que ya identifican dos referentes.\n\n#### Cómo funciona\n\nEl patrón más simple es:\n\n**both + plural noun**\n\nPor ejemplo: **both answers**, **both parents**, **both doors**. En **Both answers are correct**, se afirma que cada una de las dos respuestas pertenece al conjunto considerado y que las dos cumplen la condición.\n\nCuando el sustantivo lleva otro determinante, pueden usarse estructuras como **both the students** o **both of the students**. Con pronombres personales de objeto se usa **both of**: **both of us**, **both of them**.\n\n**Both** también puede aparecer después de un pronombre o sujeto nominal en ciertas posiciones: **They are both ready** o **The children both laughed**. En esos casos sigue expresando inclusión de los dos referentes.\n\n#### Ejemplos\n\n- **Both answers are correct.** — Ambas respuestas son correctas.\n- **Both my sisters live abroad.** — Mis dos hermanas viven en el extranjero.\n- **Both of them called me.** — Los dos me llamaron.\n- **They are both tired.** — Los dos están cansados.\n\n#### Observación importante\n\n**Both** presupone un conjunto de dos. Para grupos de más de dos se usa normalmente **all**, no **both**.\n\nComo cuantifica dos referentes, la concordancia suele ser plural: **Both doors are open**. Además, **both** no significa «cada uno» de manera aislada; presenta los dos miembros juntos, aunque la propiedad se aplique a cada uno.\n\n#### Entradas relacionadas\n\n- [Entrada 142: all](#entry-142)\n- [Entrada 144: each](#entry-144)\n- [Entrada 145: every](#entry-145)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-68eb0a5d6e958b772cf4a5ada54a131cb00e181fff9cefbc6f09e9722e6d565f",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:40:01.433Z"
+              },
+              {
+                "code": "MLS-V01-0144",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 144,
+                "title": "each",
+                "level": "A2",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**Each** significa aproximadamente «cada uno» y presenta a los miembros de un grupo de manera individual. Aunque el grupo puede tener dos o más integrantes, **each** dirige la atención a cada miembro por separado.\n\n#### Cómo funciona\n\nDelante de un sustantivo contable singular, el patrón básico es:\n\n**each + singular count noun**\n\nPor ejemplo: **each student**, **each room**, **each question**. En **Each student has a locker**, se considera individualmente a cada estudiante; por eso **student** aparece en singular y el verbo concuerda como singular: **has**.\n\nTambién puede usarse **each of + determiner/pronoun**: **each of the students**, **each of these books**, **each of them**. Aunque el grupo mencionado después de **of** es plural, la idea sigue siendo distributiva: se toma a sus miembros uno por uno.\n\n**Each** también puede aparecer después de un sujeto plural: **They each have a key**. Aquí el verbo concuerda con **they**, no con **each**.\n\n#### Ejemplos\n\n- **Each student has a locker.** — Cada estudiante tiene un casillero.\n- **Each room has a window.** — Cada habitación tiene una ventana.\n- **Each of them received a message.** — Cada uno recibió un mensaje.\n- **They each have a key.** — Cada uno de ellos tiene una llave.\n\n#### Observación importante\n\n**Each** y **every** se parecen, pero no son idénticos. **Each** resalta más fácilmente a los miembros por separado y puede usarse con **of**; **every** normalmente va directamente delante de un sustantivo singular.\n\nCon **each + sustantivo singular**, la concordancia estándar es singular: **Each answer is correct**, no *Each answer are correct*.\n\n#### Entradas relacionadas\n\n- [Entrada 143: both](#entry-143)\n- [Entrada 145: every](#entry-145)\n- [Entrada 142: all](#entry-142)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-a49ee44a3fe393d2df750250359acc5e6fbc6e2b8effe9f21493975695613ff1",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:40:23.591Z"
+              },
+              {
+                "code": "MLS-V01-0146",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 146,
+                "title": "either",
+                "level": "B1",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**Either** tiene varios usos relacionados con una elección entre dos posibilidades. Como cuantificador puede significar «cualquiera de los dos»; también aparece en la estructura **either ... or** y, en oraciones negativas, puede equivaler a «tampoco».\n\n#### Cómo funciona\n\nDelante de un sustantivo contable singular, el patrón básico es:\n\n**either + singular noun**\n\nEn **Either answer is acceptable**, hay exactamente dos respuestas relevantes y cualquiera de las dos resulta aceptable. También se usa **either of + plural noun phrase/pronoun**: **either of the answers**, **either of them**. En estilo cuidado es frecuente la concordancia singular, como **Either of the options is possible**, aunque en el uso real también aparece concordancia plural, especialmente en conversación.\n\nEn la construcción correlativa **either ... or**, se presentan dos alternativas: **You can either call or write**. En negativas, **either** suele aparecer al final: **I don’t like it either** («A mí tampoco me gusta»).\n\n#### Ejemplos\n\n- **Either answer is acceptable.** — Cualquiera de las dos respuestas es aceptable.\n- **Either of these routes will work.** — Cualquiera de estas dos rutas servirá.\n- **We can either stay or leave.** — Podemos quedarnos o irnos.\n- **I don’t want it either.** — Yo tampoco lo quiero.\n\n#### Observación importante\n\nEl sentido cuantificador de **either** presupone normalmente dos alternativas. No equivale a **any** cuando hay un conjunto abierto de tres o más posibilidades.\n\nTampoco debe confundirse con **neither**: **either** selecciona una de dos opciones posibles, mientras **neither** excluye las dos. En **either ... or**, la construcción presenta alternativas; en **not ... either**, **either** no introduce una elección, sino que participa en una expresión negativa.\n\n#### Entradas relacionadas\n\n- [Entrada 145: every](#entry-145)\n- [Entrada 147: neither](#entry-147)\n- [Entrada 144: each](#entry-144)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9fe04eddc232e186a64ab596ce9425a173f63df96db362f93698acd661c71a73",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:41:09.289Z"
+              },
+              {
+                "code": "MLS-V01-0147",
+                "language": "ingles",
+                "languageName": "Inglés",
+                "n": 147,
+                "title": "neither",
+                "level": "B1",
+                "part": "Artículos, determinantes y cuantificación — Articles, determiners, and quantification",
+                "chapter": "Cuantificadores — Quantifiers",
+                "articleMarkdown": "#### En pocas palabras\n\n**Neither** significa «ninguno de los dos» y se usa cuando se excluyen las dos personas, cosas o alternativas de un par. Puede funcionar delante de un sustantivo o aparecer de manera pronominal, sin repetir el sustantivo.\n\n#### Cómo funciona\n\nDelante de un sustantivo contable singular, el patrón básico es:\n\n**neither + singular noun**\n\nEn **Neither option works**, existen dos opciones relevantes y se afirma que ninguna funciona. También puede usarse **neither of + plural noun phrase/pronoun**: **neither of the options**, **neither of them**.\n\nCon **neither + sustantivo singular**, la concordancia es singular: **Neither answer is correct**. Después de **neither of + plural**, la concordancia singular es tradicional y frecuente en estilo formal, como **Neither of the answers is correct**; la concordancia plural también se encuentra en el uso real, sobre todo en conversación.\n\n**Neither** forma además la correlación **neither ... nor**: **Neither Ana nor Luis was there**, que excluye las dos alternativas coordinadas.\n\n#### Ejemplos\n\n- **Neither option works.** — Ninguna de las dos opciones funciona.\n- **Neither answer is correct.** — Ninguna de las dos respuestas es correcta.\n- **Neither of them called.** — Ninguno de los dos llamó.\n- **Neither tea nor coffee is available.** — No hay disponible ni té ni café.\n\n#### Observación importante\n\n**Neither** ya tiene significado negativo, por lo que en inglés estándar no suele combinarse con otra negación para expresar la misma idea: **Neither option works**, no *Neither option doesn’t work* con el sentido simple de «ninguna funciona».\n\nSe contrapone a **either**: **either** permite cualquiera de dos opciones; **neither** rechaza ambas.\n\n#### Entradas relacionadas\n\n- [Entrada 146: either](#entry-146)\n- [Entrada 148: each frente a every](#entry-148)\n- [Entrada 145: every](#entry-145)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-c432b4c144376d23336fc5bf8f3725f7c50de6f1df36af29d510c449eaee8e00",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-17T06:41:30.986Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:57:28.244Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:57:28.244Z",
+  "commandFile": "mls chat bridge/commands/2026-10-02/r44-m10-20261002-2045-sol-93bf/04-submit-claim03.json"
+}
