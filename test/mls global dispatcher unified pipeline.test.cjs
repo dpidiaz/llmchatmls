@@ -113,7 +113,10 @@ test('Unified final integration carries certified contentPath beside Evidence an
   assert.ok(work.allowedPaths.includes(String(entry.path)));
   assert.equal(work.sourceRefs[0].contentPath,String(entry.path));
   assert.ok(work.integration.contentPaths.includes(String(entry.path)));
-  assert.match(work.instructions,/mismo commitSha/);
+  assert.match(work.instructions,/reconciliación de tres vías/);
+  assert.match(work.instructions,/recertificación/);
+  assert.equal(work.sourceRefs[0].r44Outcome,'');
+
 });
 
 test('Unified auto-pull remains scoped to r33-unified',()=>{
