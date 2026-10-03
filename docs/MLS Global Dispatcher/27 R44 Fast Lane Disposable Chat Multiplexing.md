@@ -1,8 +1,26 @@
 # MLS R44 — Fast Lane disposable chat multiplexing
 
-Status: **IMPLEMENTATION IN PROGRESS / NOT DEPLOYED**
+Status: **DEPLOYED / ACTIVE FAST LANE COMMAND**
 
-This document defines the design and rollout contract. Implementation on an isolated feature branch is now authorized. It does **not** by itself authorize production cutover, deployment, D1 data mutation, corpus changes, R33 promotion, or production-state changes.
+This document defines the design and rollout contract. Fast Lane is deployed for the explicit command `MLS R44 Fast Lane siguiente`. The deployment does not alter the R33 boundary, canonical corpus, or VERIFIED status semantics.
+
+## Production deployment record — 2026-10-02 / 2026-10-03 UTC
+
+Fast Lane production cutover completed successfully.
+
+- Implementation merge: `f085e5d1060760584818f6fc2bd05032155b2173`.
+- Cutover merge: `56a255397b78e7ba823a9a667d884ffea079fb83`.
+- Cutover request generation: `13`.
+- GitHub Actions run: `37099772720` — **SUCCESS**.
+- `Validate R44 contracts`: success.
+- `Build production worker`: success.
+- `Deploy R44 to Cloudflare`: success.
+- `Bootstrap D1 and verify R44`: success.
+- Production target: `llmchatmls.dpidiaz.workers.dev`.
+- Explicit Fast Lane command: `MLS R44 Fast Lane siguiente`.
+- Initial bounded policy: up to 10 tickets sequentially per healthy chat.
+- No prefetch; one live lease per chat; D1 remains authoritative.
+- R44 output remains `PENDING_CANONICAL_R33_VALIDATION`; no R33 promotion is implied.
 
 ## Purpose
 
