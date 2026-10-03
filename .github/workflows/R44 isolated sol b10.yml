@@ -1,0 +1,38 @@
+name: R44 Isolated Bridge Sol B10
+
+on:
+  push:
+    branches:
+      - r44-sol-b10-20261003-0245
+    paths:
+      - 'mls chat bridge isolated/commands/**/*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Execute isolated R44 bridge command
+        shell: bash
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep '^mls chat bridge isolated/commands/.*\.json$' || true)
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No isolated command found."
+            exit 0
+          fi
+          for command_file in "${files[@]}"; do
+            node 'scripts/MLS chat bridge.cjs' "$command_file"
+            result_file="${command_file/\/commands\//\/results\/}"
+            echo "=== R44_RESULT_BEGIN ${result_file} ==="
+            cat "$result_file"
+            echo "=== R44_RESULT_END ${result_file} ==="
+          done
