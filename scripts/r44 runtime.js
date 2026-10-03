@@ -514,7 +514,8 @@ var MLS_UNIFIED_RUNNER_WORKER = "mls-unified-web-runner-v1";
 async function unifiedRunnerEnsure(env) {
   await env.WIKI_DB.batch([
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, worker_id TEXT NOT NULL, started_at TEXT, updated_at TEXT NOT NULL, processed_entries INTEGER NOT NULL DEFAULT 0, corrected_entries INTEGER NOT NULL DEFAULT 0, error_count INTEGER NOT NULL DEFAULT 0, last_ticket TEXT, last_code TEXT, last_error TEXT, last_step_at TEXT, step_token TEXT, busy_until INTEGER, schema_version TEXT NOT NULL)"),
-    env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner(id,state,worker_id,updated_at,schema_version) VALUES(1,'STOPPED',?,?,?)").bind(MLS_UNIFIED_RUNNER_WORKER,new Date().toISOString(),MLS_UNIFIED_RUNNER_SCHEMA)
+    env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner(id,state,worker_id,updated_at,schema_version) VALUES(1,'STOPPED',?,?,?)").bind(MLS_UNIFIED_RUNNER_WORKER,new Date().toISOString(),MLS_UNIFIED_RUNNER_SCHEMA),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_lane (stage TEXT PRIMARY KEY CHECK(stage IN ('r33','integration')), state TEXT NOT NULL, issue_number INTEGER, assignment_id TEXT, last_code TEXT, last_error TEXT, detail_json TEXT, updated_at TEXT NOT NULL)")
   ]);
 }
 async function unifiedRunnerRead(env) {
@@ -545,7 +546,9 @@ async function unifiedRunnerStatus(request, env) {
   const r44 = await r44Status(env);
   let budget = null;
   try { budget = await wikiStore(env).getCloudflareBudget(); } catch (_) {}
-  return r44Json({ok:true,runner,r44,budget,freeOnly:true,chatCompatible:true,canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
+  const laneRows=await env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner_lane ORDER BY stage").all();
+  const lanes=Object.fromEntries((laneRows.results||[]).map(row=>[row.stage,{...row,detail:(()=>{try{return row.detail_json?JSON.parse(row.detail_json):null}catch{return null}})()}]));
+  return r44Json({ok:true,runner,r44,budget,lanes,freeOnly:true,chatCompatible:true,canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
 }
 function unifiedRunnerSeed(article) {
   return {
@@ -727,11 +730,38 @@ async function unifiedRunnerScheduled(env) {
     throw error;
   }
 }
+
+async function unifiedRunnerReport(request,env) {
+  const auth=await unifiedRunnerAuthorize(request,env);
+  if(!auth.ok) return r44Json({error:auth.error},auth.status);
+  const body=await r44ChatBridgeBody(request);
+  const stage=String(body.stage||"").toLowerCase();
+  if(stage!=="r33"&&stage!=="integration") return r44Json({error:"UNIFIED_RUNNER_REPORT_STAGE_INVALID"},400);
+  const state=String(body.state||"").toUpperCase().slice(0,80);
+  if(!state) return r44Json({error:"UNIFIED_RUNNER_REPORT_STATE_REQUIRED"},400);
+  const issueNumber=body.issueNumber==null?null:Number(body.issueNumber);
+  if(issueNumber!==null&&(!Number.isInteger(issueNumber)||issueNumber<1)) return r44Json({error:"UNIFIED_RUNNER_REPORT_ISSUE_INVALID"},400);
+  const assignmentId=body.assignmentId==null?null:String(body.assignmentId).slice(0,120);
+  const lastCode=body.code==null?null:String(body.code).toUpperCase().slice(0,40);
+  const lastError=body.error==null?null:String(body.error).slice(0,2000);
+  const detail=body.detail==null?null:JSON.stringify(body.detail).slice(0,12000);
+  const now=new Date().toISOString();
+  await unifiedRunnerEnsure(env);
+  await env.WIKI_DB.prepare("INSERT INTO mls_unified_runner_lane(stage,state,issue_number,assignment_id,last_code,last_error,detail_json,updated_at) VALUES(?,?,?,?,?,?,?,?) ON CONFLICT(stage) DO UPDATE SET state=excluded.state,issue_number=excluded.issue_number,assignment_id=excluded.assignment_id,last_code=excluded.last_code,last_error=excluded.last_error,detail_json=excluded.detail_json,updated_at=excluded.updated_at")
+    .bind(stage,state,issueNumber,assignmentId,lastCode,lastError,detail,now).run();
+  if(body.pauseRunner===true){
+    await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state='REVIEW_PAUSED',last_error=?,updated_at=? WHERE id=1 AND state='RUNNING'")
+      .bind(lastError||("R33 review required"+(lastCode?" for "+lastCode:"")),now).run();
+  }
+  return r44Json({ok:true,stage,state,runner:await unifiedRunnerRead(env)});
+}
+
 async function handleUnifiedRunner(request, env, url) {
   if (url.pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env);
   if (url.pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env);
   if (url.pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env);
   if (url.pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env);
+  if (url.pathname === "/api/unified-runner/report" && request.method === "POST") return unifiedRunnerReport(request,env);
   return r44Json({error:"UNIFIED_RUNNER_ROUTE_NOT_FOUND"},404);
 }
 
