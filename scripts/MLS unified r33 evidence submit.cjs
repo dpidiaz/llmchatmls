@@ -17,7 +17,7 @@ function extractMarked(text){
 async function gh(endpoint){
   const token=process.env.GITHUB_TOKEN||'';
   const repository=process.env.GITHUB_REPOSITORY||'';
-  if(!token||!/^[^/]+\\/[^/]+$/.test(repository))fail('GITHUB_CONTEXT_MISSING');
+  if(!token||repository.split('/').length!==2||repository.startsWith('/')||repository.endsWith('/'))fail('GITHUB_CONTEXT_MISSING');
   const response=await fetch('https://api.github.com'+endpoint,{
     headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','x-github-api-version':'2022-11-28','user-agent':'mls-unified-r33-evidence-submit'}
   });
@@ -36,7 +36,7 @@ function validate(issue,comment,payload){
   if(String(payload?.assignmentId||'')!==String(state.assignmentId))fail('UNIFIED_EVIDENCE_ASSIGNMENT_MISMATCH');
   if(Number(payload?.leaseEpoch)!==Number(state.leaseEpoch))fail('UNIFIED_EVIDENCE_EPOCH_MISMATCH');
   const code=String(payload?.code||'').toUpperCase();
-  if(!/^MLS-V\\d{2}-\\d{4}$/.test(code))fail('UNIFIED_EVIDENCE_CODE_INVALID');
+  if(!/^MLS-V\d{2}-\d{4}$/.test(code))fail('UNIFIED_EVIDENCE_CODE_INVALID');
   if(!(state.resourceLocks||[]).includes('entry:'+code))fail('UNIFIED_EVIDENCE_CODE_OUT_OF_SCOPE');
   const evidence=payload?.evidence;
   if(!evidence||typeof evidence!=='object'||Array.isArray(evidence))fail('UNIFIED_EVIDENCE_PAYLOAD_INVALID');
@@ -53,7 +53,7 @@ function validate(issue,comment,payload){
 function appendOutput(name,value){
   const out=process.env.GITHUB_OUTPUT;
   if(!out)fail('GITHUB_OUTPUT_MISSING');
-  fs.appendFileSync(out,name+'='+String(value).replace(/\\r?\\n/g,' ')+'\\n');
+  fs.appendFileSync(out,name+'='+String(value).replace(/\r?\n/g,' ')+'\n');
 }
 async function prepare(){
   const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
@@ -73,7 +73,7 @@ async function prepare(){
     evidencePath:validated.evidencePath,
     contentPath:validated.contentPath,
     evidence:validated.evidence
-  },null,2)+'\\n');
+  },null,2)+'\n');
   appendOutput('branch',validated.state.branch);
   appendOutput('code',validated.code);
   appendOutput('evidence_path',validated.evidencePath);
@@ -87,7 +87,7 @@ function apply(){
   if(!target.startsWith(root))fail('UNIFIED_EVIDENCE_TARGET_ESCAPE');
   fs.mkdirSync(path.dirname(target),{recursive:true});
   fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+'\\n');
-  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath})+'\\n');
+  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath})+'\n');
 }
 async function main(){
   const mode=String(process.argv[2]||'');
