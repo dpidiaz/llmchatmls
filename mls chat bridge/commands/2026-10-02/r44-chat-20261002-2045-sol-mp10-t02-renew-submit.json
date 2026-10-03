@@ -1,0 +1,182 @@
+{
+  "batchId": "r44-chat-20261002-2045-sol-mp10-t02-renew-submit",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-12ee9f23-dbf2-4d46-80d3-006a94d3e35b"
+      }
+    },
+    {
+      "operationId": "r44SubmitChat",
+      "input": {
+        "bridgeSessionId": "r44b-12ee9f23-dbf2-4d46-80d3-006a94d3e35b",
+        "ticketId": "R43-EMERGENCY-0354",
+        "entries": [
+          {
+            "code": "MLS-V05-0161",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La construcción con fehlen está correctamente analizada: la persona afectada aparece en dativo y aquello que falta funciona como sujeto, controlando la concordancia singular o plural.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En la construcción descrita con fehlen, el elemento que falta funciona como sujeto y el experimentante puede expresarse en dativo.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "La concordancia verbal sigue al sujeto: fehlt con sujeto singular y fehlen con sujeto plural.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). fehlen. Wörterbuch zur Verbvalenz, grammis.",
+                "url": "https://grammis.ids-mannheim.de/verbs/view/400577/5",
+                "role": "Valencia institucional de fehlen; documenta sujeto y complemento dativo."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0162",
+            "correctedContent": {
+              "articleMarkdown": "#### En pocas palabras\nEl verbo *gefallen* se utiliza para expresar que algo le agrada o le gusta a alguien. En alemán, la cosa o persona que causa el agrado funciona como el **sujeto** (en nominativo), mientras que la persona que experimenta ese agrado se expresa mediante el **dativo**.\n\n#### Cómo funciona\nPara usar este verbo correctamente, conviene identificar los dos roles gramaticales:\n1. **Sujeto (nominativo):** es el elemento que provoca la sensación de agrado. El verbo concuerda con este elemento en número.\n2. **Complemento (dativo):** es la persona o entidad que experimenta el agrado.\n\n#### Ejemplos\n* **Das Lied gefällt mir.**\n  (La canción me gusta / La canción me agrada).\n  * *Das Lied*: sujeto (nominativo singular).\n  * *mir*: complemento en dativo del pronombre personal *ich*.\n* **Die Blumen gefallen der Frau.**\n  (A la mujer le gustan las flores).\n  * *Die Blumen*: sujeto (nominativo plural).\n  * *der Frau*: complemento en dativo.\n* **Gefällt euch das Auto?**\n  (¿Os gusta el coche? / ¿Les gusta el coche a ustedes?).\n  * *Das Auto*: sujeto (nominativo singular).\n  * *euch*: complemento en dativo del pronombre personal *ihr*.\n\n#### Observación importante\nEl alemán y el español coinciden aquí en un punto central: en **Me gusta la canción**, **la canción** es también el sujeto gramatical y **me** funciona como complemento indirecto. Por tanto, no es correcto analizar “yo” como sujeto de esa oración española.\n\nLa diferencia pedagógicamente útil está en las formas y en la construcción de cada lengua. En alemán, *gefallen* concuerda con aquello que agrada:\n* Si lo que gusta es singular: **Das Buch gefällt mir**.\n* Si lo que gusta es plural: **Die Bücher gefallen mir**.\n\n#### Entradas relacionadas\n* [helfen + dativo](#entry-164)\n* [gehören + dativo](#entry-163)\n* [Spanisches persönliches a ≠ deutscher Dativ](#entry-1006)"
+            },
+            "notes": {
+              "auditStatus": "CORRECTED",
+              "summary": "Se corrigió la comparación con el español. La versión original afirmaba que en «Me gusta la canción» el sujeto era «yo»; la RAE analiza el pronombre dativo como complemento indirecto, por lo que «la canción» es el sujeto. Se preservó la explicación correcta de gefallen + dativo.",
+              "changes": [
+                "Corregida la identificación del sujeto en el ejemplo español «Me gusta la canción».",
+                "Reformulada la observación contrastiva para no atribuir al español una estructura sintáctica incorrecta."
+              ],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "Con gefallen, aquello que agrada funciona como sujeto y la persona experimentante se expresa mediante dativo.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "En español, en construcciones como «Me gusta la canción», el pronombre «me» es complemento indirecto, no sujeto.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). gefallen. Wörterbuch zur Verbvalenz, grammis.",
+                "url": "https://grammis.ids-mannheim.de/verbs/view/400651/1",
+                "role": "Valencia de gefallen con complemento dativo."
+              },
+              {
+                "citation": "Real Academia Española & Asociación de Academias de la Lengua Española. (s. f.). El complemento indirecto (CI): introducción. Nueva gramática básica de la lengua española.",
+                "url": "https://www.rae.es/gram%C3%A1tica-b%C3%A1sica/complemento-directo-complemento-indirecto-complemento-de-r%C3%A9gimen/el-complemento-indirecto-ci/introducci%C3%B3n",
+                "role": "La RAE ejemplifica con «Le/Les gusta el chocolate» el complemento indirecto relacionado con el dativo."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0163",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "gehören está correctamente presentado con el objeto poseído como sujeto y el poseedor como complemento dativo; los ejemplos y formas de determinantes/pronombres son adecuados.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "gehören selecciona en el patrón descrito un sujeto para la entidad poseída y un complemento dativo para el poseedor.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Formas como meinem Bruder, der Lehrerin e Ihnen son realizaciones válidas del complemento dativo.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). gehören. Wörterbuch zur Verbvalenz, grammis.",
+                "url": "https://grammis.ids-mannheim.de/verbs/view/400655/1",
+                "role": "Valencia institucional de gehören con K_sub y K_dat."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0165",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La declinación dativa de kein- está correctamente dada como keinem/keiner/keinem/keinen; también es correcta la explicación de la marca -n frecuente en el dativo plural.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "En dativo, kein- presenta las formas keinem, keiner, keinem y keinen para masculino, femenino, neutro y plural.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "En el dativo plural, muchos sustantivos muestran además -n cuando su forma plural lo permite.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). Quantifikativ-Artikel. Systematische Grammatik, grammis.",
+                "url": "https://grammis.ids-mannheim.de/systematische-grammatik/377",
+                "role": "Paradigma de kein- con las formas de dativo, incluido plural keinen."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          },
+          {
+            "code": "MLS-V05-0167",
+            "notes": {
+              "auditStatus": "PASS_NO_CHANGE",
+              "summary": "La serie de pronombres personales en dativo mir/dir/ihm/ihr/ihm/uns/euch/ihnen/Ihnen es correcta, incluida la distinción gráfica entre ihnen e Ihnen.",
+              "changes": [],
+              "evidenceStage": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            "claims": [
+              {
+                "claim": "Las formas dativas de ich, du, er, sie, es, wir, ihr, sie y Sie son mir, dir, ihm, ihr, ihm, uns, euch, ihnen e Ihnen.",
+                "supportType": "direct"
+              },
+              {
+                "claim": "Ihnen, con mayúscula inicial, corresponde al tratamiento formal Sie.",
+                "supportType": "direct"
+              }
+            ],
+            "sources": [
+              {
+                "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). Personalpronomen. ProGr@mm/grammis.",
+                "url": "https://grammis.ids-mannheim.de/progr%40mm/6855",
+                "role": "Paradigmas de pronombres personales, incluidas formas de dativo."
+              },
+              {
+                "citation": "Leibniz-Institut für Deutsche Sprache. (s. f.). Personalpronomen der dritten Person. Kontrastive Grammatik, grammis.",
+                "url": "https://grammis.ids-mannheim.de/kontrastive-grammatik/3914",
+                "role": "Formas de tercera persona en dativo."
+              }
+            ],
+            "evidence": {
+              "status": "EDITORIAL_REVIEWED_PENDING_R33_LOCATOR_VALIDATION"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
