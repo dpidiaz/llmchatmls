@@ -5,7 +5,7 @@ on:
     branches:
       - r44-isolated-s10a-20261003t0254z
     paths:
-      - 'r44 isolated trigger/s10b-submit.txt'
+      - 'r44 isolated trigger/s10c-claim.txt'
 
 permissions:
   contents: write
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Submit R44 s10b
+      - name: Claim R44 s10c
         env:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
         run: |
@@ -29,24 +29,15 @@ jobs:
           const fs = require('node:fs');
           const bridge = require('./scripts/MLS chat bridge.cjs');
           (async () => {
-            const submit = await bridge.executeRemoteOperation('r44SubmitChat', {
-              bridgeSessionId: 'r44b-7953e19b-904d-4515-bc78-cd3b8b7a27e3',
-              ticketId: 'R44-CORPUS-1251',
-              entries: [
-                { code: 'MLS-V08-0429', outcome: 'PASS_NO_CHANGE' },
-                { code: 'MLS-V08-0430', outcome: 'PASS_NO_CHANGE' },
-                { code: 'MLS-V08-0432', outcome: 'PASS_NO_CHANGE' },
-                { code: 'MLS-V08-0433', outcome: 'PASS_NO_CHANGE' },
-                { code: 'MLS-V08-0434', outcome: 'PASS_NO_CHANGE' }
-              ]
+            const claim = await bridge.executeRemoteOperation('r44ClaimChat', {
+              workerId: 'r44-chat-20261002-2046-sol-s10c'
             });
             fs.mkdirSync('r44 isolated result', { recursive: true });
-            fs.writeFileSync('r44 isolated result/s10b-submit.json', JSON.stringify(submit, null, 2) + '\n');
+            fs.writeFileSync('r44 isolated result/s10c-claim.json', JSON.stringify(claim, null, 2) + '\n');
             console.log(JSON.stringify({
-              success: submit.success,
-              status: submit.response?.status || null,
-              ticketId: submit.response?.ticketId || null,
-              durable: submit.response?.durable || false
+              success: claim.success,
+              status: claim.response?.status || null,
+              ticketId: claim.response?.ticket?.ticket_id || claim.response?.context?.ticketId || null
             }));
           })().catch(err => {
             console.error(err);
@@ -59,7 +50,7 @@ jobs:
           set -euo pipefail
           git config user.name 'MLS Chat Bridge'
           git config user.email 'actions@users.noreply.github.com'
-          git add 'r44 isolated result/s10b-submit.json'
+          git add 'r44 isolated result/s10c-claim.json'
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Persist R44 isolated s10b submit'
+          git commit -m 'Persist R44 isolated s10c claim'
           git push origin HEAD:r44-isolated-s10a-20261003t0254z
