@@ -82,3 +82,8 @@ Hasta que el workflow del Global Dispatcher sea implementado y certificado, los 
 ## R44 Fast Lane — planned / not implemented
 
 - [27 — R44 Fast Lane Disposable Chat Multiplexing](./27%20R44%20Fast%20Lane%20Disposable%20Chat%20Multiplexing.md) — diseño incremental para que múltiples chats descartables usen el mismo comando, reclamen trabajo distinto de forma atómica y puedan continuar por múltiples tickets con límites seguros. **PLANNED / NOT IMPLEMENTED**; no autoriza cambios de runtime, D1, Cloudflare, workflows, corpus, R33 ni producción.
+
+
+## Unified verification pipeline
+
+- [28 — MLS Unified Verification Pipeline](./28%20MLS%20Unified%20Verification%20Pipeline.md) — pipeline explícito `R44 → handoff durable → R33 → integración → VERIFIED` bajo el nuevo comando `MLS Unified siguiente`. Durante certificación no cambia el significado histórico de `MLS siguiente`.
