@@ -93,3 +93,31 @@ jobs:
           printf '%s' "$bridge_status" | grep -F '"transport":"GITHUB_ACTIONS_FREE_BRIDGE"'
           printf '%s' "$bridge_status" | grep -F '"authenticated":true'
           echo 'R44_CLOUDFLARE_CUTOVER_OK'
+
+      - name: Verify Unified status monitor in production
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://llmchatmls.dpidiaz.workers.dev'
+          json="$RUNNER_TEMP/unified-status.json"
+          html="$RUNNER_TEMP/status.html"
+          curl -fsSL --retry 5 --retry-delay 2 "$base/api/unified/status" -o "$json"
+          curl -fsSL --retry 5 --retry-delay 2 "$base/status" -o "$html"
+          node - "$json" <<'NODE'
+          const fs=require('node:fs');
+          const live=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+          const canonical=JSON.parse(fs.readFileSync('MLS R32 EDITORIAL/evidence git/indexes/verified.json','utf8'));
+          if(live.ok!==true)throw Error('LIVE_UNIFIED_STATUS_NOT_OK');
+          if(live.sourceOfTruth!=='github-main-verified-index')throw Error('LIVE_UNIFIED_SOURCE_INVALID');
+          if(live.verifiedCount!==canonical.length)throw Error('LIVE_UNIFIED_COUNT_MISMATCH '+live.verifiedCount+' != '+canonical.length);
+          if(live.totalEntries!==10133)throw Error('LIVE_UNIFIED_TOTAL_INVALID');
+          if(live.remaining!==10133-canonical.length)throw Error('LIVE_UNIFIED_REMAINING_INVALID');
+          console.log(JSON.stringify({ok:true,verifiedCount:live.verifiedCount,remaining:live.remaining,percent:live.percent}));
+          NODE
+          grep -F 'MLS Unified' "$html"
+          grep -F '/api/unified/status' "$html"
+          grep -F 'entradas canónicas VERIFIED' "$html"
+          grep -F 'Desde que abriste el monitor' "$html"
+          grep -F 'verified.json' "$html"
+          echo 'MLS_UNIFIED_STATUS_MONITOR_OK'
