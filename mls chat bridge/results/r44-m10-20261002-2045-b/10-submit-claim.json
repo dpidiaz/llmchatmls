@@ -1,0 +1,329 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-m10-20261002-2045-b-step-10",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0316",
+          "sha256": "5d2871cc9f707759e84147ecab8b419469afa0f5e482cc7d55174d9f83dd391c",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0316",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "2c1812ee-69e5-4fcc-977d-cf1b94aa5fa4",
+                "ticketId": "R43-EMERGENCY-0316",
+                "code": "MLS-V04-1096",
+                "idempotencyKey": "R43-EMERGENCY-0316:MLS-V04-1096:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "72172c11fd2310c2db2e0056a13111c175710243e5a5d1f9ea839fbad28d61dd",
+                "sourceSha256": "65e2a3e0c9b4576d57ce1435fafcf85af84fd87bbb598cc92bfc9eab81f22919",
+                "committedMs": 1790996723988,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "f03bddc79d7772ef53e4d2541801de720f5543d9ac6fded07da8617232d04456",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0316",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "1a9fc1df-2414-4f8d-9939-6e91491b3405",
+                "ticketId": "R43-EMERGENCY-0316",
+                "code": "MLS-V04-1097",
+                "idempotencyKey": "R43-EMERGENCY-0316:MLS-V04-1097:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1a435b1ab8c295b0b3a6ca8465be4c654c560ed97e1a6a5e74cd5b89fbe2caf1",
+                "sourceSha256": "00a7e297fab3e329d2620158b11fed65960db29a791db2aaccdfd164c58fb855",
+                "committedMs": 1790996724221,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "0dfad95fc390e839cd8a6dda0aa57296d15443b33fcce8f122b1519f8dfe7763",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0316",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "a81580b6-274c-45f2-b795-2fc006c8150e",
+                "ticketId": "R43-EMERGENCY-0316",
+                "code": "MLS-V04-1098",
+                "idempotencyKey": "R43-EMERGENCY-0316:MLS-V04-1098:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "25d947172feded453dcde919565d141052357d9d684b21e44c0964bb2dc83853",
+                "sourceSha256": "156ff8118e781de2dfff63a2a9d5d948aeb76fd03110af52137536bd4ddbba70",
+                "committedMs": 1790996724627,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "d78ebe68a6615322158e1a1ba554f2c61c6872c2d75c69d79c9605781c035e1b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0316",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "0ccd7069-1f4c-482e-b993-95d78614dee2",
+                "ticketId": "R43-EMERGENCY-0316",
+                "code": "MLS-V04-1099",
+                "idempotencyKey": "R43-EMERGENCY-0316:MLS-V04-1099:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a7cd567abb6035469a915dc7a1863dcbee5b842b104bb9d5fbaf2a0c181ae5a4",
+                "sourceSha256": "8f03b6b44b9afc5904b350364bac174393a1d4c75130955ddfb94d89f1583919",
+                "committedMs": 1790996724850,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "6262dc1e5f41db207d633dd5ea40f53c80163a8d811ab71f3fd5982ece059dac",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0316",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "ef8cddc6-f5c4-408f-b162-857db4bcb496",
+                "ticketId": "R43-EMERGENCY-0316",
+                "code": "MLS-V04-1101",
+                "idempotencyKey": "R43-EMERGENCY-0316:MLS-V04-1101:legacy-v1",
+                "workerId": "chat-r44-m10-20261002-2045-b",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a640a4c47b9823667f853161ce12148b59a7e8106225b22fb534da26a8cc9686",
+                "sourceSha256": "8ddcf19b4bdc5c3d04a041b01042b7c4232ee293a9306e9f64bf3aa5bb8656a0",
+                "committedMs": 1790996725079,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8998b9c57cb82dc83456e7c268fe429abf46d114f7266e23b3efb77a2fe62b0b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-27b30053-4415-438e-b98e-a310fabe6fc3",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "5d2871cc9f707759e84147ecab8b419469afa0f5e482cc7d55174d9f83dd391c"
+          }
+        },
+        "completedAt": "2026-10-03T03:05:25.416Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-81a3f748-2908-4d96-af23-afb96ad969ce",
+          "workerId": "chat-r44-m10-20261002-2045-b",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0319",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997025461,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V04-1114",
+                "path": "frances/MLS-V04-1114.json",
+                "sha256": "0050f58f04a34319e501807544a691775473fa02fc52f841a7fc9e86ce004bd5"
+              },
+              {
+                "code": "MLS-V04-1115",
+                "path": "frances/MLS-V04-1115.json",
+                "sha256": "236cd6df33bf196a5d1a8405acad2fa904224d2453bae88c2e10ab4e59a2bf39"
+              },
+              {
+                "code": "MLS-V04-1116",
+                "path": "frances/MLS-V04-1116.json",
+                "sha256": "62b7720def8d3efa6efcfae4d6bd6d9a0827dc19006ff9cf5faa0531053e7ab1"
+              },
+              {
+                "code": "MLS-V04-1117",
+                "path": "frances/MLS-V04-1117.json",
+                "sha256": "64f8276e0db2ca6e2c8d0981bbca55abade5142a953e86d0baeb25720cccf106"
+              },
+              {
+                "code": "MLS-V04-1119",
+                "path": "frances/MLS-V04-1119.json",
+                "sha256": "307d917fccc3f3dbb4e7e51951676ccb5ed5e26ec0400dd54b3bc31a7463d209"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0319",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V04-1114",
+                "path": "frances/MLS-V04-1114.json",
+                "sha256": "0050f58f04a34319e501807544a691775473fa02fc52f841a7fc9e86ce004bd5"
+              },
+              {
+                "code": "MLS-V04-1115",
+                "path": "frances/MLS-V04-1115.json",
+                "sha256": "236cd6df33bf196a5d1a8405acad2fa904224d2453bae88c2e10ab4e59a2bf39"
+              },
+              {
+                "code": "MLS-V04-1116",
+                "path": "frances/MLS-V04-1116.json",
+                "sha256": "62b7720def8d3efa6efcfae4d6bd6d9a0827dc19006ff9cf5faa0531053e7ab1"
+              },
+              {
+                "code": "MLS-V04-1117",
+                "path": "frances/MLS-V04-1117.json",
+                "sha256": "64f8276e0db2ca6e2c8d0981bbca55abade5142a953e86d0baeb25720cccf106"
+              },
+              {
+                "code": "MLS-V04-1119",
+                "path": "frances/MLS-V04-1119.json",
+                "sha256": "307d917fccc3f3dbb4e7e51951676ccb5ed5e26ec0400dd54b3bc31a7463d209"
+              }
+            ],
+            "remaining": [
+              "MLS-V04-1114",
+              "MLS-V04-1115",
+              "MLS-V04-1116",
+              "MLS-V04-1117",
+              "MLS-V04-1119"
+            ],
+            "lease": {
+              "workerId": "chat-r44-m10-20261002-2045-b",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997025461,
+              "active": true
+            },
+            "workerId": "chat-r44-m10-20261002-2045-b",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997025461,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V04-1114",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1114,
+                "title": "embarrassé ≠ embarazada",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Falsos amigos y equivalencias engañosas — Faux amis et équivalences trompeuses",
+                "articleMarkdown": "#### En pocas palabras\n\nEl adjetivo francés **embarrassé** significa normalmente **incómodo**, **avergonzado**, **cohibido** o **en una situación difícil**, según el contexto. En **Je suis embarrassé par cette situation**, la persona se siente incómoda por la situación. No significa **embarazada**.\n\n#### Cómo funciona\n\n**Embarrassé** está relacionado con **embarrasser**, que puede significar poner a alguien en una situación incómoda, dificultar o estorbar. Con personas, suele describir incomodidad social, vergüenza o indecisión: **Il semblait embarrassé par la question** — “Parecía incómodo por la pregunta”.\n\nPara expresar embarazo en francés se usa **enceinte** cuando se habla de una mujer embarazada: **Elle est enceinte** — “Está embarazada”. El sustantivo habitual es **grossesse**, “embarazo”.\n\nLa semejanza entre **embarrassé** y **embarazada** es gráfica e histórica, pero sus significados actuales cotidianos divergen claramente.\n\n#### Ejemplos\n\n* **Je suis embarrassé par cette situation.** — Estoy incómodo / avergonzado por esta situación.\n* **Elle était embarrassée de répondre.** — Le daba vergüenza / se sentía incómoda al responder.\n* **Il a l’air embarrassé.** — Parece incómodo.\n* **Elle est enceinte de six mois.** — Está embarazada de seis meses.\n\n#### Observación importante\n\nLa traducción de **embarrassé** depende del contexto: puede ser **incómodo**, **avergonzado**, **cohibido** o incluso **en apuros**. No debe traducirse automáticamente por una sola palabra. Para el sentido español de embarazo, **enceinte** es la forma francesa habitual.\n\n#### Entradas relacionadas\n\nEste contraste pertenece a los falsos amigos clásicos entre francés y español. Se relaciona con **embarrasser**, **enceinte**, **grossesse** y con otros cognados cuya semejanza formal no garantiza un significado moderno equivalente.",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-ac084c00e1543fe0d05d2b2d76c60265b6a477eba81faa58df511d6bcc293040",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:25:42.898Z"
+              },
+              {
+                "code": "MLS-V04-1115",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1115,
+                "title": "entendre ≠ entender solamente",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Falsos amigos y equivalencias engañosas — Faux amis et équivalences trompeuses",
+                "articleMarkdown": "#### En pocas palabras\n\nAunque la palabra francesa *entendre* se parece mucho al español *entender*, no son sinónimos directos. En la mayoría de los contextos cotidianos, *entendre* significa **oír** (percibir un sonido físicamente), mientras que para expresar la idea de **entender** (comprender un concepto, una idea o un idioma), el francés utiliza el verbo *comprendre*.\n\n#### Cómo funciona\n\nEl uso de *entendre* como equivalente de *entender* es un error común debido a la similitud gráfica (lo que en lingüística llamamos un \"falso amigo\"). Para usar el francés con precisión, es necesario distinguir entre la percepción sensorial y la comprensión intelectual:\n\n1.  **Percepción auditiva (Oír):** Se utiliza *entendre*. Se refiere a la capacidad del oído para captar sonidos o voces.\n2.  **Comprensión intelectual (Entender):** Se utiliza *comprendre*. Se refiere a la capacidad de la mente para procesar el significado de lo que se ha escuchado o leído.\n\n#### Ejemplos\n\n*   **J'entends de la musique.**\n    *   *Traducción:* Oigo música.\n    *   *Explicación:* El hablante percibe el sonido de la música en su entorno.\n\n*   **Je n'entends pas ce que tu dis.**\n    *   *Traducción:* No oigo lo que dices.\n    *   *Explicación:* El problema es de audición (quizás hay mucho ruido o la persona habla muy bajo), no de falta de inteligencia o conocimiento del idioma.\n\n*   **Je ne comprends pas cette règle.**\n    *   *Traducción:* No entiendo esta regla.\n    *   *Explicación:* Se utiliza *comprendre* porque el problema es de comprensión de un concepto, no de falta de audición.\n\n#### Observación importante\n\nExiste un matiz más formal donde *entendre* puede significar \"tener la intención de\" o \"querer decir\" (por ejemplo, en la pregunta *Qu'entendez-vous par là ?*, que significa *¿Qué quiere decir con eso?*). Sin embargo, para evitar confusiones en la comunicación diaria, la regla de oro es: si en español dirías \"oír\", usa *entendre*; si dirías \"entender\", usa *comprendre*.\n\n#### Entradas relacionadas\n\n*   *Comprendre*\n*   *Falsos amigos (Faux amis)*",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:48:51.283Z"
+              },
+              {
+                "code": "MLS-V04-1116",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1116,
+                "title": "éventuellement ≠ eventualmente",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Falsos amigos y equivalencias engañosas — Faux amis et équivalences trompeuses",
+                "articleMarkdown": "#### En pocas palabras\n\nEl adverbio francés **éventuellement** no significa \"al final\" ni \"tarde o temprano\". Su función es expresar una **posibilidad** o una **contingencia**; es decir, algo que podría suceder si se presentan las condiciones adecuadas.\n\n#### Cómo funciona\n\nAunque las palabras se parecen visualmente, el significado de *éventuellement* en francés difiere del uso que solemos darle en español y del uso que se le da en inglés. Un adverbio es una palabra que modifica al verbo para indicar circunstancias como el modo, el tiempo o la posibilidad.\n\nPara evitar errores de comunicación, es vital distinguir estas tres interpretaciones:\n\n1.  **En francés (*éventuellement*):** Indica que algo es posible, pero no seguro. Equivale a decir \"tal vez\", \"quizá\" o \"si fuera necesario\".\n2.  **En español (*eventualmente*):** Generalmente se refiere a algo que ocurre de forma ocasional o no habitual (por ejemplo: \"El servicio funciona eventualmente\").\n3.  **El error del inglés (*eventually*):** Muchos estudiantes confunden la palabra con el inglés *eventually*, que significa \"finalmente\" o \"al final de un proceso\". **En francés, *éventuellement* nunca se usa con este sentido de finalidad.**\n\n#### Ejemplos\n\n**Ejemplo 1**\n*   *Nous pourrons éventuellement reporter la réunion.*\n*   **Traducción:** Quizá podamos aplazar la reunión / Podríamos aplazar la reunión si fuera necesario.\n*   **Explicación:** El hablante no está diciendo que la reunión se aplazará con seguridad al final del día, sino que existe la *posibilidad* de hacerlo si surge la necesidad.\n\n**Ejemplo 2**\n*   *Je peux éventuellement vous aider.*\n*   **Traducción:** Tal vez pueda ayudarle / Podría ayudarle si se requiere.\n*   **Explicación:** El adverbio matiza la acción de ayudar como una opción disponible, no como un evento que ocurrirá tarde o temprano.\n\n#### Observación importante\n\nSi intentas traducir conceptos que no son de \"posibilidad\", no uses *éventuellement*. Utiliza estas alternativas según tu intención:\n\n*   Si quieres decir **\"finalmente\"** o **\"al final\"**: usa *finalement*.\n*   Si quieres decir **\"ocasionalmente\"**: usa *occasionnellement*.\n*   Si quieres decir **\"tarde o temprano\"**: usa *tôt ou tard*.\n\n#### Entradas relacionadas\n\n*   Falsos amigos (*Faux amis*)\n*   Adverbios de modo\n*   Expresión de la posibilidad en francés",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:49:01.580Z"
+              },
+              {
+                "code": "MLS-V04-1117",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1117,
+                "title": "figure ≠ figura solamente",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Falsos amigos y equivalencias engañosas — Faux amis et équivalences trompeuses",
+                "articleMarkdown": "#### En pocas palabras\n\nAunque la palabra francesa *figure* puede traducirse como \"figura\" en contextos académicos o técnicos, no es un equivalente exacto del español. Dependiendo del contexto, puede referirse al rostro de una persona o a un personaje, significados que en español requieren palabras distintas.\n\n#### Cómo funciona\n\nEl término *figure* en francés abarca tres áreas principales que no siempre coinciden con el uso de \"figura\" en español:\n\n1.  **Representaciones gráficas:** Es el uso más cercano al español. Se emplea para referirse a diagramas, ilustraciones o gráficos dentro de un libro o documento.\n2.  **El rostro:** En el lenguaje cotidiano, *figure* es un sinónimo de *visage* (cara o rostro).\n3.  **Personajes o figuras públicas:** Se utiliza para describir a personas prominentes, históricas o personajes de una obra literaria o teatral.\n\n#### Ejemplos\n\n*   **Contexto técnico (Equivalencia):**\n    *La figure 2 montre les résultats.*\n    (La figura 2 muestra los resultados).\n    *Aquí, al igual que en español, se refiere a un elemento gráfico en un texto.*\n\n*   **Contexto físico (Divergencia):**\n    *Elle a une figure anguleuse.*\n    (Ella tiene un rostro anguloso).\n    *En este caso, no se habla de su \"figura\" (silueta), sino de las facciones de su cara.*\n\n*   **Contexto social (Equivalencia parcial):**\n    *C'est une figure historique du pays.*\n    (Es un personaje histórico del país).\n    *Se refiere a una persona relevante, similar al uso de \"figura\" en español para personas ilustres.*\n\n#### Observación importante\n\nUn error de traducción frecuente ocurre al intentar describir la apariencia física. En español, cuando decimos que alguien \"tiene buena figura\", nos referimos a su silueta o a la forma de su cuerpo. En francés, si utilizas la expresión *« il a une belle figure »*, estarás diciendo que tiene una **cara bonita**, no que tiene un buen cuerpo. Para referirse a la silueta corporal, el francés utiliza términos como *silhouette* o *forme*.\n\n#### Entradas relacionadas\n\n*Visage*, *Chiffre*, *Forme*.",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "",
+                "auditModel": "",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:49:07.578Z"
+              },
+              {
+                "code": "MLS-V04-1119",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 1119,
+                "title": "journée ≠ jornada exactamente",
+                "level": "B1",
+                "part": "Norma y contraste con Guatemala — Norme et contraste avec le Guatemala",
+                "chapter": "Falsos amigos y equivalencias engañosas — Faux amis et équivalences trompeuses",
+                "articleMarkdown": "#### En pocas palabras\n\nEn francés, no existe una única palabra para traducir \"día\". La elección entre **jour** y **journée** depende de si te refieres al día como una unidad de medida (un concepto abstracto) o como un periodo de tiempo con contenido y duración (lo que sucede durante el día).\n\n#### Cómo funciona\n\nPara utilizar estos términos correctamente, es necesario distinguir su enfoque:\n\n1.  **Jour (Unidad de tiempo):** Se utiliza para contar, para indicar fechas o para referirse al día como una entidad cronológica. Es el \"día\" que se suma o se resta en un calendario.\n2.  **Journée (Duración o contenido):** Se utiliza para hablar del transcurso del tiempo, de la experiencia vivida o de la extensión de una actividad. Es el \"día\" que se siente, se trabaja o se disfruta desde que amanece hasta que anochece.\n\n#### Ejemplos\n\n*   *Il est resté trois **jours** à Paris.*\n    (Se quedó tres días en París).\n    Aquí usamos **jour** porque estamos contando unidades de tiempo (1, 2, 3 días). El enfoque es la cantidad, no lo que ocurrió dentro de ellos.\n\n*   *Passe une bonne **journée** !*\n    (¡Que tengas un buen día!).\n    Usamos **journée** porque el deseo se refiere al transcurso del día y a la experiencia que la persona tendrá durante esas horas.\n\n*   *J'ai travaillé toute la **journée**.*\n    (Trabajé todo el día).\n    En este ejemplo, **journée** enfatiza la duración de la acción de trabajar a lo largo del tiempo que transcurre durante el día.\n\n#### Observación importante\n\nLa confusión con la palabra española **jornada** es común. En español, \"jornada\" suele referirse a un periodo de actividad (como una \"jornada laboral\"). En francés, para expresar esa idea de un periodo de actividad, se utiliza precisamente **journée** (por ejemplo: *une journée de travail*). \n\nLa clave para no fallar es recordar que si el énfasis está en la **cantidad** de días, usa *jour*; si el énfasis está en la **extensión o el contenido** de ese tiempo, usa *journée*.\n\n#### Entradas relacionadas\n\n*   *Distinción entre unidad y duración.*\n*   *Marcadores temporales en francés.*",
+                "provider": "cloudflare-gemma",
+                "model": "@cf/google/gemma-4-26b-a4b-it",
+                "auditProvider": "cloudflare-llama",
+                "auditModel": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T08:49:20.417Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:05:26.270Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:05:26.270Z",
+  "commandFile": "mls chat bridge/commands/r44-m10-20261002-2045-b/10-submit-claim.json"
+}

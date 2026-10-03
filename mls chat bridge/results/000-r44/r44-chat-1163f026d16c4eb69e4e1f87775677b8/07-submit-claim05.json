@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "r44-t04-complete-claim05",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-c4aa663f-bde0-4955-a08d-1dfdedde2261",
+          "ticketId": "R43-EMERGENCY-0713",
+          "leaseExpiresAt": 1790997014248
+        },
+        "completedAt": "2026-10-03T03:05:14.398Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0713",
+          "sha256": "4b52671d28d777aef17eed22dd4b06dd43f121994dd4ab3ddb4c77f4a62fbdb7",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0713",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "aeebd221-3d1a-4d5a-b063-9f0810df2600",
+                "ticketId": "R43-EMERGENCY-0713",
+                "code": "MLS-V07-0172",
+                "idempotencyKey": "R43-EMERGENCY-0713:MLS-V07-0172:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "9a23c287aece2401c06ca0eb60de4cfbf22b9ec73ee218a52124a9035fcf6772",
+                "sourceSha256": "a2a37d9f3ccb4156de445571243c30eebe6c4f1b50e116ed1404c255780c70d7",
+                "committedMs": 1790996714782,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "b4cba92a866a76f4b133a1a9c8bd7807ef33e2d5025cd8d68d0649de49892887",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0713",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "5518bd3f-31fb-4adc-a530-b2dba552f278",
+                "ticketId": "R43-EMERGENCY-0713",
+                "code": "MLS-V07-0174",
+                "idempotencyKey": "R43-EMERGENCY-0713:MLS-V07-0174:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d92ab5efcd64534d189a455f1f10d46cbc98520212e514ef93a36993aca247a3",
+                "sourceSha256": "2a9f67d7db774a8f89828cf5cc9349a737e3cbc6a5b9a6a1ead90c7098d6189b",
+                "committedMs": 1790996715005,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "49152475ee977afc02dd63681922d0c1bab574a13a28dee9b984739748f444a7",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0713",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "f97739c3-a0dc-4491-beca-657f7f4ff5fd",
+                "ticketId": "R43-EMERGENCY-0713",
+                "code": "MLS-V07-0175",
+                "idempotencyKey": "R43-EMERGENCY-0713:MLS-V07-0175:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "6bfb2452a5329b8ce1b328ad3208cdd040ff900c58f4add0b2367fa187111cd3",
+                "sourceSha256": "0168db405ac417fc31aa6936b3c1fd7c5a116c7eff125f247cb4b97facde00da",
+                "committedMs": 1790996715222,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "60f46358039c94832156d28186f8a56321fa16d56e04f17f1656cc36e387ef31",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0713",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "979e142d-a7aa-466a-8712-6aeccefca087",
+                "ticketId": "R43-EMERGENCY-0713",
+                "code": "MLS-V07-0176",
+                "idempotencyKey": "R43-EMERGENCY-0713:MLS-V07-0176:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "a516bcc5f16731f3a1113c2831dc84ec70c2d51f8f045693e7c86a1661dce7b1",
+                "sourceSha256": "1e690eba1e40c9b9aa3e5e647d51b5549e71a80c21649180a42ba7720da80cba",
+                "committedMs": 1790996715450,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "837dfc5858c00fba47ba84ff9f73b7544d73df0bc3152cd7fe6576fa9aa54056",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0713",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "bcb75b5e-ca6b-4181-8fb0-749d071d2b3b",
+                "ticketId": "R43-EMERGENCY-0713",
+                "code": "MLS-V07-0177",
+                "idempotencyKey": "R43-EMERGENCY-0713:MLS-V07-0177:legacy-v1",
+                "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "149d4930e5f51bad3423c16ab830702caa43bbb60d431d3441d3efccb7141db7",
+                "sourceSha256": "79f359a2c8ce1c2d6c9d6091e9427b6f81fbe69b6803532604cba0654c5fb0ed",
+                "committedMs": 1790996715677,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8d871358f1c32c1b49a95fa4bc74706e7340f919fbc99ebda5797c463ee4d59c",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-c4aa663f-bde0-4955-a08d-1dfdedde2261",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "4b52671d28d777aef17eed22dd4b06dd43f121994dd4ab3ddb4c77f4a62fbdb7"
+          }
+        },
+        "completedAt": "2026-10-03T03:05:16.001Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-2ec09832-834a-4a4c-a803-5ac4c2e3a83a",
+          "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0714",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790997016044,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V07-0179",
+                "path": "chino-taiwan/MLS-V07-0179.json",
+                "sha256": "29a624c36c51060f92115973f6a93c48914d6137b774cc47177c8538e686686c"
+              },
+              {
+                "code": "MLS-V07-0180",
+                "path": "chino-taiwan/MLS-V07-0180.json",
+                "sha256": "11c20123d58871bec434cab61faae38c5fe07cb446c42e587b9b13ad0a50a82e"
+              },
+              {
+                "code": "MLS-V07-0181",
+                "path": "chino-taiwan/MLS-V07-0181.json",
+                "sha256": "208159df16c3a7627f36fb09e5d2bafd1364c11ffa0141a3da8b8e39b8ea43de"
+              },
+              {
+                "code": "MLS-V07-0182",
+                "path": "chino-taiwan/MLS-V07-0182.json",
+                "sha256": "7a71a1eb406cfe107f6726b552f7d541ee67980bc5af62903be7d96c0c403c7f"
+              },
+              {
+                "code": "MLS-V07-0183",
+                "path": "chino-taiwan/MLS-V07-0183.json",
+                "sha256": "c2c337e77b7572af84d7740b952540639679191ba103d50e591cdbf4492f2369"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0714",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V07-0179",
+                "path": "chino-taiwan/MLS-V07-0179.json",
+                "sha256": "29a624c36c51060f92115973f6a93c48914d6137b774cc47177c8538e686686c"
+              },
+              {
+                "code": "MLS-V07-0180",
+                "path": "chino-taiwan/MLS-V07-0180.json",
+                "sha256": "11c20123d58871bec434cab61faae38c5fe07cb446c42e587b9b13ad0a50a82e"
+              },
+              {
+                "code": "MLS-V07-0181",
+                "path": "chino-taiwan/MLS-V07-0181.json",
+                "sha256": "208159df16c3a7627f36fb09e5d2bafd1364c11ffa0141a3da8b8e39b8ea43de"
+              },
+              {
+                "code": "MLS-V07-0182",
+                "path": "chino-taiwan/MLS-V07-0182.json",
+                "sha256": "7a71a1eb406cfe107f6726b552f7d541ee67980bc5af62903be7d96c0c403c7f"
+              },
+              {
+                "code": "MLS-V07-0183",
+                "path": "chino-taiwan/MLS-V07-0183.json",
+                "sha256": "c2c337e77b7572af84d7740b952540639679191ba103d50e591cdbf4492f2369"
+              }
+            ],
+            "remaining": [
+              "MLS-V07-0179",
+              "MLS-V07-0180",
+              "MLS-V07-0181",
+              "MLS-V07-0182",
+              "MLS-V07-0183"
+            ],
+            "lease": {
+              "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790997016044,
+              "active": true
+            },
+            "workerId": "r44-chat-1163f026d16c4eb69e4e1f87775677b8",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790997016044,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V07-0179",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 179,
+                "title": "這些/那些",
+                "level": "A1",
+                "part": "Cantidad, demostración y tiempo — 數量、指示與時間",
+                "chapter": "Demostrativos, posesión y 的 — 指示、領屬與「的」",
+                "articleMarkdown": "#### En pocas palabras\n\n**這些 (zhèxiē)** y **那些 (nàxiē)** son demostrativos que señalan **varios elementos**. Como primera aproximación, 這些 corresponde a «estos/estas» y 那些 a «esos/esas» o «aquellos/aquellas».\n\n#### Cómo funciona\n\nSuelen colocarse directamente antes de un nombre: **這些書 (zhèxiē shū)** significa «estos libros» y **那些人 (nàxiē rén)**, «esas/aquellas personas».\n\nTambién pueden aparecer sin nombre cuando el referente ya está claro. En **這些書很新，那些比較舊。 (Zhèxiē shū hěn xīn, nàxiē bǐjiào jiù.)**, **那些** se entiende como «aquellos [libros]».\n\n#### Ejemplos\n\n- **這些書很好。 (Zhèxiē shū hěn hǎo.)** — Estos libros son muy buenos.\n- **那些人是學生。 (Nàxiē rén shì xuéshēng.)** — Esas personas son estudiantes.\n- **我喜歡這些。 (Wǒ xǐhuān zhèxiē.)** — Me gustan estos/estas.\n\n#### Observación importante\n\nA diferencia de **這個/那個**, que seleccionan normalmente una entidad individual, **這些/那些** presentan un conjunto o una pluralidad.\n\nLa oposición proximal/distal es útil como primera guía, pero la traducción española concreta depende del contexto discursivo y espacial.\n\n#### Entradas relacionadas\n\n- [這/那 — 「這／那」](#entry-178)\n- [這個/那個 — 「這個／那個」](#entry-180)\n- [的 posesivo — 領屬「的」](#entry-177)\n- [這樣/那樣 — 「這樣／那樣」](#entry-181)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-f535104e1a2a20a587ac9f0c0127e1b607a4829fd3cbca790ba4a7849a75f952",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:02.749Z"
+              },
+              {
+                "code": "MLS-V07-0180",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 180,
+                "title": "這個/那個",
+                "level": "A1",
+                "part": "Cantidad, demostración y tiempo — 數量、指示與時間",
+                "chapter": "Demostrativos, posesión y 的 — 指示、領屬與「的」",
+                "articleMarkdown": "#### En pocas palabras\n\n**這個 (zhè ge)** y **那個 (nà ge)** señalan normalmente una entidad individual. Como primera aproximación, 這個 equivale a «este/esta» y 那個 a «ese/esa» o «aquel/aquella».\n\n#### Cómo funciona\n\nEstán formados por el demostrativo **這/那** y el clasificador general **個**. Pueden aparecer antes de un nombre, como **這個人 (zhè ge rén)** «esta persona», o sin nombre cuando el referente ya se conoce.\n\nEn **這個便宜，那個比較貴。 (Zhè ge piányi, nà ge bǐjiào guì.)**, ambas expresiones funcionan solas: «Este es barato; ese/aquel es más caro».\n\n#### Ejemplos\n\n- **這個很好。 (Zhè ge hěn hǎo.)** — Este está muy bien.\n- **那個是我的。 (Nà ge shì wǒ de.)** — Ese es mío.\n- **這個人是老師。 (Zhè ge rén shì lǎoshī.)** — Esta persona es profesor/a.\n\n#### Observación importante\n\n**個** es un clasificador muy general, pero no sustituye necesariamente a todos los clasificadores. Con muchos nombres se prefieren clasificadores específicos, como **這本書** «este libro».\n\nPara señalar varios elementos se usan **這些/那些**, no simplemente 這個/那個.\n\n#### Entradas relacionadas\n\n- [這些/那些 — 「這些／那些」](#entry-179)\n- [這樣/那樣 — 「這樣／那樣」](#entry-181)\n- [這/那 — 「這／那」](#entry-178)\n- [這麼/那麼 — 「這麼／那麼」](#entry-182)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b0b0d83280cffc51b7faec5fa97e8f546b31e7c1a2ea4e5df9609a055aeb4f80",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:26:56.484Z"
+              },
+              {
+                "code": "MLS-V07-0181",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 181,
+                "title": "這樣/那樣",
+                "level": "A1",
+                "part": "Cantidad, demostración y tiempo — 數量、指示與時間",
+                "chapter": "Demostrativos, posesión y 的 — 指示、領屬與「的」",
+                "articleMarkdown": "#### En pocas palabras\n\n**這樣 (zhèyàng)** y **那樣 (nàyàng)** expresan una **manera, forma o tipo** relacionado con «esto» o «eso». Según el contexto, pueden traducirse como «así», «de esta manera» o «de esa manera».\n\n#### Cómo funciona\n\n**這樣** señala una manera asociada con algo cercano o presente en el discurso; **那樣** remite a una manera más distante o ya mencionada. En **不要這樣做。 (Bú yào zhèyàng zuò.)**, 這樣 modifica la manera de realizar la acción: «No lo hagas así».\n\nTambién pueden describir una clase o característica: **我不喜歡那樣的衣服。 (Wǒ bù xǐhuān nàyàng de yīfu.)**, «No me gusta esa clase de ropa».\n\n#### Ejemplos\n\n- **不要這樣做。** — No lo hagas de esta manera.\n- **你可以這樣說。 (Nǐ kěyǐ zhèyàng shuō.)** — Puedes decirlo así.\n- **我不想那樣做。 (Wǒ bù xiǎng nàyàng zuò.)** — No quiero hacerlo de esa manera.\n\n#### Observación importante\n\n**這樣/那樣** no señalan principalmente objetos individuales, como **這個/那個**. Su función central aquí es señalar **cómo es algo o cómo se hace algo**.\n\nLa traducción exacta depende de si el contexto habla de manera, apariencia, tipo u otra semejanza.\n\n#### Entradas relacionadas\n\n- [這個/那個 — 「這個／那個」](#entry-180)\n- [這麼/那麼 — 「這麼／那麼」](#entry-182)\n- [這些/那些 — 「這些／那些」](#entry-179)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-6b8842ed4dc3585cf69774ad7e8cc3e6e05c4d6bff5a8267f6f9503e98d4aefa",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:28:41.304Z"
+              },
+              {
+                "code": "MLS-V07-0182",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 182,
+                "title": "這麼/那麼",
+                "level": "A1",
+                "part": "Cantidad, demostración y tiempo — 數量、指示與時間",
+                "chapter": "Demostrativos, posesión y 的 — 指示、領屬與「的」",
+                "articleMarkdown": "#### En pocas palabras\n\n**這麼 (zhème)** y **那麼 (nàme)** se usan con frecuencia para indicar **grado o intensidad**: «tan», «así de» o «de ese modo», según la construcción.\n\n#### Cómo funciona\n\nDelante de una expresión descriptiva, **這麼/那麼** pueden marcar el grado de una cualidad. En **怎麼這麼貴？ (Zěnme zhème guì?)**, **這麼** intensifica **貴** «caro»: la oración significa naturalmente «¿Cómo es que es tan caro?» o «¿Por qué es tan caro?» según el contexto.\n\n**那麼** funciona de manera semejante con una referencia más distante o previamente establecida: **不要那麼快。 (Bú yào nàme kuài.)**, «No tan rápido».\n\n#### Ejemplos\n\n- **怎麼這麼貴？** — ¿Por qué es tan caro?\n- **今天這麼冷。 (Jīntiān zhème lěng.)** — Hoy hace tanto frío / está así de frío.\n- **不要那麼大聲。 (Bú yào nàme dàshēng.)** — No hables tan fuerte.\n\n#### Observación importante\n\n**這麼/那麼** no son equivalentes a **這樣/那樣** en todos los contextos. 這樣/那樣 suelen señalar una manera o forma; 這麼/那麼 aparecen muy frecuentemente ante expresiones de grado.\n\nLa traducción exacta depende de la estructura completa, no de una equivalencia fija palabra por palabra.\n\n#### Entradas relacionadas\n\n- [這樣/那樣 — 「這樣／那樣」](#entry-181)\n- [這個/那個 — 「這個／那個」](#entry-180)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-022e9c4bddf24190dc7fdec3cd7674e2904d2100f11618839a1744deca9c4595",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:29:31.825Z"
+              },
+              {
+                "code": "MLS-V07-0183",
+                "language": "chino-taiwan",
+                "languageName": "Chino mandarín de Taiwán",
+                "n": 183,
+                "title": "Expresión temporal sin preposición",
+                "level": "A1",
+                "part": "Cantidad, demostración y tiempo — 數量、指示與時間",
+                "chapter": "Tiempo, calendario y orden temporal — 時間、日期與時間語序",
+                "articleMarkdown": "#### En pocas palabras\n\nEn mandarín, muchas **expresiones de tiempo** pueden aparecer directamente en la oración, sin una preposición equivalente a «en», «a» o «durante» del español. Por ejemplo, **明天 (míngtiān)** «mañana» puede situar directamente una acción en el tiempo.\n\n#### Cómo funciona\n\nUna estructura frecuente es **persona/tema + tiempo + predicado**. En **我明天去台北。 (Wǒ míngtiān qù Táiběi.)**, **明天** indica cuándo ocurre **去台北** «ir a Taipéi» y no necesita una palabra equivalente a «en» antes.\n\nTambién puede colocarse el tiempo al inicio para establecer el marco: **明天我去台北。 (Míngtiān wǒ qù Táiběi.)**.\n\n#### Ejemplos\n\n- **我明天去台北。** — Mañana voy a Taipéi.\n- **他星期一上班。 (Tā xīngqíyī shàngbān.)** — Él trabaja el lunes.\n- **我們晚上吃飯。 (Wǒmen wǎnshàng chīfàn.)** — Comemos por la noche.\n\n#### Observación importante\n\nEsto no significa que el mandarín nunca use palabras que introducen relaciones temporales. La regla útil para principiantes es que expresiones calendáricas y adverbiales frecuentes como **明天、星期一、晚上** suelen incorporarse directamente.\n\nLa ausencia de preposición no convierte estas expresiones en verbos; su función aquí es establecer el momento de la situación.\n\n#### Entradas relacionadas\n\n- [Tiempo antes de lugar — 時間通常先於處所](#entry-184)\n- [下午 — 下午](#entry-185)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-202a98e1c346d64ee7624546019b23c166e2315d915ee5889775a0aa737694b8",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T09:30:26.754Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T03:05:16.855Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T03:05:16.855Z",
+  "commandFile": "mls chat bridge/commands/000-r44/r44-chat-1163f026d16c4eb69e4e1f87775677b8/07-submit-claim05.json"
+}
