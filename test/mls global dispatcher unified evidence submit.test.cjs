@@ -37,3 +37,10 @@ test('Unified Evidence submit script fails closed on assignment scope and lease'
 test('syntax-checks the submission runner',()=>{
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence submit.cjs'],{stdio:'pipe'});
 });
+
+
+test('Evidence writer does not append a literal backslash-n after JSON',()=>{
+  const source=fs.readFileSync('scripts/MLS unified r33 evidence submit.cjs','utf8');
+  assert.match(source,/String\.fromCharCode\(10\)/);
+  assert.doesNotMatch(source,/JSON\.stringify\(bundle\.evidence,null,2\)\+'\\\\n'/);
+});
