@@ -623,18 +623,6 @@ async function unifiedRunnerAuditEntry(env, article) {
     notes:["Cloudflare Unified R44 automatic audit corrected the article and passed a second audit."]
   };
 }
-async function unifiedRunnerMark(env, patch) {
-  const fields = [], values = [];
-  for (const key of ["state","last_ticket","last_code","last_error","last_step_at"]) {
-    if (Object.prototype.hasOwnProperty.call(patch,key)) { fields.push(key+"=?"); values.push(patch[key]); }
-  }
-  if (patch.processedDelta) fields.push("processed_entries=processed_entries+"+Math.max(0,Number(patch.processedDelta)||0));
-  if (patch.correctedDelta) fields.push("corrected_entries=corrected_entries+"+Math.max(0,Number(patch.correctedDelta)||0));
-  if (patch.errorDelta) fields.push("error_count=error_count+"+Math.max(0,Number(patch.errorDelta)||0));
-  fields.push("updated_at=?"); values.push(new Date().toISOString());
-  values.push(1);
-  await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET "+fields.join(", ")+" WHERE id=?").bind.apply(env.WIKI_DB.prepare("UPDATE mls_unified_runner SET "+fields.join(", ")+" WHERE id=?"),values);
-}
 async function unifiedRunnerApplyMark(env, patch) {
   await unifiedRunnerEnsure(env);
   const fields = [], values = [];
