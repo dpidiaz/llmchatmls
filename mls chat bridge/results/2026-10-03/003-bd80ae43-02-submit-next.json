@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "bd80ae43-t02-submit-next",
+    "requested": 3,
+    "processed": 3,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44RenewChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/renew",
+        "response": {
+          "status": "RENEWED",
+          "bridgeSessionId": "r44b-07c7cb05-1139-4fa2-b9f4-e0d5bb67277d",
+          "ticketId": "R43-EMERGENCY-0180",
+          "leaseExpiresAt": 1790996619041
+        },
+        "completedAt": "2026-10-03T02:58:39.136Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44SubmitChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/submit",
+        "response": {
+          "status": "AUDITED_DURABLE",
+          "ticketId": "R43-EMERGENCY-0180",
+          "sha256": "8dea6d0aa5862295711ec36fe048098da354b1c9087a53194665beadb49c4aca",
+          "receipts": [
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0180",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b43555b6-5417-4852-8dfc-4049ca3be8b3",
+                "ticketId": "R43-EMERGENCY-0180",
+                "code": "MLS-V04-0300",
+                "idempotencyKey": "R43-EMERGENCY-0180:MLS-V04-0300:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "1c49b030a87aa3e89595f8af557610638b7435b23a1d0a6a6944825f67c1edb3",
+                "sourceSha256": "a39f900f02e1bfdacb1ed9647392d5499d2df8915d48a07500889201c1c2f3c0",
+                "committedMs": 1790996319266,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "46e18b1dad6ce793fb0167bf46daff77f8cf8d0938b9694595c14adac7ec3619",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0180",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "b2ab5663-28a4-421e-9db8-e54863362b87",
+                "ticketId": "R43-EMERGENCY-0180",
+                "code": "MLS-V04-0301",
+                "idempotencyKey": "R43-EMERGENCY-0180:MLS-V04-0301:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "20b150e5f12afd1c9610c08a4fbdea77a6ee5454457d24dc819cb35c83b58a71",
+                "sourceSha256": "d1b0274c93dc5828bd5431846d28d285412064d503e80b4d1b3d302815c2a203",
+                "committedMs": 1790996319346,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "229145e663d07deb3ccf9ac53884336e5c17424ffd38b1f920bffb23a1698b60",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0180",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "c4e111c6-a71c-434b-9bcd-c0801baa1cbf",
+                "ticketId": "R43-EMERGENCY-0180",
+                "code": "MLS-V04-0302",
+                "idempotencyKey": "R43-EMERGENCY-0180:MLS-V04-0302:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "8a8fec6b2e18b37b51a2686b4413ef16d5722bfb0f91016e750f826da28ad15f",
+                "sourceSha256": "5c500528f81c01f8e3baeb858729e30c2ad5fe62fe38db887c5cd12016047c1e",
+                "committedMs": 1790996319432,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "8be6d9277ca6dc223b313a48170bb0a9a20af616fd48d140f62b6cba72cc5c00",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0180",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "8ad73929-4c88-474b-aa77-8ddf26125eff",
+                "ticketId": "R43-EMERGENCY-0180",
+                "code": "MLS-V04-0303",
+                "idempotencyKey": "R43-EMERGENCY-0180:MLS-V04-0303:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "31e669d76a48a7eeeb6b814c46113e0168b2c5e0d83e304d7287d81805303377",
+                "sourceSha256": "dc7ffa899408b942d7bf9fd14a21be5f5582788a52f44e5657c8f0ac2e1bf6aa",
+                "committedMs": 1790996319520,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "c68d67edebee2ab6b1f044d9124c865549e79285f1387d57540f9866a42f0053",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            },
+            {
+              "status": "AUDITED_DURABLE",
+              "ticketId": "R43-EMERGENCY-0180",
+              "receipt": {
+                "schema": "MLS-R44-ENTRY-RECEIPT-1",
+                "receiptId": "00c04f97-9727-4247-b7c4-807f468f90d8",
+                "ticketId": "R43-EMERGENCY-0180",
+                "code": "MLS-V04-0304",
+                "idempotencyKey": "R43-EMERGENCY-0180:MLS-V04-0304:legacy-v1",
+                "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+                "leaseGeneration": 1,
+                "outcome": "PASS_NO_CHANGE",
+                "payloadSha256": "d53fe52f92e03f9d223bfe6d6f98ad85d9ba599d0717036429dd41ddee269178",
+                "sourceSha256": "dd67aff90187b2cf8ed9c3ec9873b09f43159ed13e787114de42e8251ca110c9",
+                "committedMs": 1790996319602,
+                "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+              },
+              "receiptSha256": "7b3be73c01ff3dfffdf72334631de0099fcf14f7736e0cde9d17319cf3497b3b",
+              "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION"
+            }
+          ],
+          "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+          "state": "COMPLETE",
+          "durable": true,
+          "bridgeSessionId": "r44b-07c7cb05-1139-4fa2-b9f4-e0d5bb67277d",
+          "receipt": {
+            "algorithm": "sha256",
+            "sha256": "8dea6d0aa5862295711ec36fe048098da354b1c9087a53194665beadb49c4aca"
+          }
+        },
+        "completedAt": "2026-10-03T02:58:39.833Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44ClaimChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/claim",
+        "response": {
+          "status": "CLAIMED",
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "bridgeSessionId": "r44b-8fe48c7b-7c2b-4888-a032-f9cedc9fd1b1",
+          "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+          "ticket": {
+            "ticket_id": "R43-EMERGENCY-0181",
+            "leaseGeneration": 1,
+            "lease_expires_at": 1790996619860,
+            "state": "LEASED",
+            "entries": [
+              {
+                "code": "MLS-V04-0305",
+                "path": "frances/MLS-V04-0305.json",
+                "sha256": "0eca131ab48687f375711dd5d45afe40c9fb5fcd9848102c2b5cfac533ab81d1"
+              },
+              {
+                "code": "MLS-V04-0306",
+                "path": "frances/MLS-V04-0306.json",
+                "sha256": "23fe4b79232b338b6b94b17e6ff047173f485e026cb2f9d77598490c8362aa0a"
+              },
+              {
+                "code": "MLS-V04-0308",
+                "path": "frances/MLS-V04-0308.json",
+                "sha256": "942effc97c3acc15e76b8311e0e8b0089361d26e5b4657109614ecdb039199e3"
+              },
+              {
+                "code": "MLS-V04-0309",
+                "path": "frances/MLS-V04-0309.json",
+                "sha256": "46b9c030667788366c2244fef6d54645d2103916201faaf52956016aed8cda9e"
+              },
+              {
+                "code": "MLS-V04-0310",
+                "path": "frances/MLS-V04-0310.json",
+                "sha256": "791fcedb0391b6218e114b4bdec67ef7327033b44ab193a540528ce0bb5e2d9e"
+              }
+            ]
+          },
+          "context": {
+            "ticketId": "R43-EMERGENCY-0181",
+            "state": "LEASED",
+            "migrationNote": null,
+            "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+            "entries": [
+              {
+                "code": "MLS-V04-0305",
+                "path": "frances/MLS-V04-0305.json",
+                "sha256": "0eca131ab48687f375711dd5d45afe40c9fb5fcd9848102c2b5cfac533ab81d1"
+              },
+              {
+                "code": "MLS-V04-0306",
+                "path": "frances/MLS-V04-0306.json",
+                "sha256": "23fe4b79232b338b6b94b17e6ff047173f485e026cb2f9d77598490c8362aa0a"
+              },
+              {
+                "code": "MLS-V04-0308",
+                "path": "frances/MLS-V04-0308.json",
+                "sha256": "942effc97c3acc15e76b8311e0e8b0089361d26e5b4657109614ecdb039199e3"
+              },
+              {
+                "code": "MLS-V04-0309",
+                "path": "frances/MLS-V04-0309.json",
+                "sha256": "46b9c030667788366c2244fef6d54645d2103916201faaf52956016aed8cda9e"
+              },
+              {
+                "code": "MLS-V04-0310",
+                "path": "frances/MLS-V04-0310.json",
+                "sha256": "791fcedb0391b6218e114b4bdec67ef7327033b44ab193a540528ce0bb5e2d9e"
+              }
+            ],
+            "remaining": [
+              "MLS-V04-0305",
+              "MLS-V04-0306",
+              "MLS-V04-0308",
+              "MLS-V04-0309",
+              "MLS-V04-0310"
+            ],
+            "lease": {
+              "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+              "leaseGeneration": 1,
+              "leaseExpiresAt": 1790996619860,
+              "active": true
+            },
+            "workerId": "chatgpt-r44-20261002-2045-sol-bd80ae43",
+            "leaseGeneration": 1,
+            "leaseExpiresAt": 1790996619860,
+            "active": true,
+            "content": [
+              {
+                "code": "MLS-V04-0305",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 305,
+                "title": "Conjugación de vouloir",
+                "level": "A2",
+                "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+                "chapter": "Verbos frecuentes e irregularidad — Verbes fréquents et irrégularité",
+                "articleMarkdown": "#### En pocas palabras\n\n**Vouloir** significa principalmente “querer” y es irregular. En presente se conjuga **je veux, tu veux, il/elle/on veut, nous voulons, vous voulez, ils/elles veulent**.\n\n#### Cómo funciona\n\nEl verbo alterna entre **veu-**, **voul-** y **veul-**. Se usa muy frecuentemente seguido de infinitivo: **Nous voulons partir**, **Je veux comprendre**.\n\nEn esa estructura, **vouloir** se conjuga y el segundo verbo permanece en infinitivo.\n\n#### Ejemplos\n\n* **Nous voulons partir.** — Queremos salir.\n* **Je veux apprendre.** — Quiero aprender.\n* **Vous voulez entrer ?** — ¿Quieren entrar? / ¿Quiere usted entrar?\n* **Ils veulent rester.** — Quieren quedarse.\n\n#### Observación importante\n\n**Vouloir** puede expresar deseo o intención, pero en ciertas peticiones **je veux** puede sonar directo. La cortesía depende del contexto y de otras construcciones. Además, las formas **veux, veut, veulent** deben aprenderse también por escrito.\n\n#### Entradas relacionadas\n\n[Conjugaison de pouvoir](#entry-304) · [Conjugaison de devoir](#entry-306) · [Conjugaison de permettre](#entry-303) · [Conjugaison de savoir](#entry-307)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b72677b133cb33b18e92fbe08b4b10f109b929d107ab6e9477ea9572c8adf901",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:38:30.646Z"
+              },
+              {
+                "code": "MLS-V04-0306",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 306,
+                "title": "Conjugación de devoir",
+                "level": "A2",
+                "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+                "chapter": "Verbos frecuentes e irregularidad — Verbes fréquents et irrégularité",
+                "articleMarkdown": "#### En pocas palabras\n\n**Devoir** significa principalmente “deber” y es irregular. En presente se conjuga **je dois, tu dois, il/elle/on doit, nous devons, vous devez, ils/elles doivent**.\n\n#### Cómo funciona\n\nEl verbo alterna entre **doi-**, **dev-** y **doiv-**. Se usa con frecuencia seguido de infinitivo: **Tu dois étudier**, **Nous devons partir**.\n\nSegún el contexto puede expresar obligación, necesidad o una conclusión probable.\n\n#### Ejemplos\n\n* **Tu dois étudier.** — Debés estudiar.\n* **Nous devons attendre.** — Debemos esperar.\n* **Vous devez partir.** — Deben irse / debe usted irse.\n* **Ils doivent être ici.** — Deben de estar aquí / probablemente están aquí, según el contexto.\n\n#### Observación importante\n\nNo todos los usos de **devoir** expresan una obligación directa. Con ciertos tiempos y contextos puede indicar probabilidad. Además, las formas **dois, doit, doivent** presentan diferencias ortográficas que conviene aprender junto con la pronunciación.\n\n#### Entradas relacionadas\n\n[Conjugaison de vouloir](#entry-305) · [Conjugaison de savoir](#entry-307) · [Conjugaison de pouvoir](#entry-304) · [Conjugaison de connaître](#entry-308)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-9823a55f0b882559130297048ffcfd09aadee65e21833654782bc5a5dea98cfd",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:39:00.626Z"
+              },
+              {
+                "code": "MLS-V04-0308",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 308,
+                "title": "Conjugación de connaître",
+                "level": "A2",
+                "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+                "chapter": "Verbos frecuentes e irregularidad — Verbes fréquents et irrégularité",
+                "articleMarkdown": "#### En pocas palabras\n\n**Connaître** significa “conocer” y es irregular. En presente se conjuga **je connais, tu connais, il/elle/on connaît, nous connaissons, vous connaissez, ils/elles connaissent**.\n\n#### Cómo funciona\n\nEn singular aparecen **connais, connais, connaît**; en plural, **connaissons, connaissez, connaissent**. La forma **connaît** lleva acento circunflejo en la ortografía tradicional vigente.\n\n#### Ejemplos\n\n* **Je connais cette ville.** — Conozco esta ciudad.\n* **Nous connaissons Paul.** — Conocemos a Paul.\n* **Vous connaissez ce livre ?** — ¿Conocen este libro?\n* **Ils connaissent bien Paris.** — Conocen bien París.\n\n#### Observación importante\n\n**Connaître** no coincide exactamente con **savoir**. Como primera aproximación, se usa frecuentemente para personas, lugares o entidades conocidas, mientras que **savoir** aparece mucho con información y habilidades. La distribución completa depende de la construcción.\n\n#### Entradas relacionadas\n\n[Conjugaison de savoir](#entry-307) · [Conjugaison de dire](#entry-309) · [Conjugaison de devoir](#entry-306) · [Conjugaison de lire](#entry-310)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-b883c2637de68a1f8792730b344bd7329c24f422d7023f65a87e138817b0c6ef",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:39:59.414Z"
+              },
+              {
+                "code": "MLS-V04-0309",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 309,
+                "title": "Conjugación de dire",
+                "level": "A2",
+                "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+                "chapter": "Verbos frecuentes e irregularidad — Verbes fréquents et irrégularité",
+                "articleMarkdown": "#### En pocas palabras\n\n**Dire** significa “decir” y es irregular. En presente se conjuga **je dis, tu dis, il/elle/on dit, nous disons, vous dites, ils/elles disent**.\n\n#### Cómo funciona\n\nEn singular aparecen **dis, dis, dit**; en plural, **disons, dites, disent**. La forma **vous dites** es especialmente importante: no sigue una forma regular esperable como *disez*.\n\n**Dire** puede introducir palabras, información o una oración: **Il dit la vérité**, **Elle dit qu’elle vient**.\n\n#### Ejemplos\n\n* **Ils disent la vérité.** — Dicen la verdad.\n* **Je dis bonjour.** — Digo hola / saludo.\n* **Nous disons la même chose.** — Decimos lo mismo.\n* **Vous dites que tout va bien.** — Dicen / dice usted que todo va bien.\n\n#### Observación importante\n\nNo conviene confundir **dire** con **parler**: ambos pueden relacionarse con el habla, pero sus construcciones no son intercambiables. Además, **vous dites** debe memorizarse como forma irregular frecuente.\n\n#### Entradas relacionadas\n\n[Conjugaison de connaître](#entry-308) · [Conjugaison de lire](#entry-310) · [Conjugaison de savoir](#entry-307) · [Conjugaison de écrire](#entry-311)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-54bbd27d76ede2f19ca563b07a2c8766f51f062a5c7535bbaf6be6ed4068709a",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:40:49.072Z"
+              },
+              {
+                "code": "MLS-V04-0310",
+                "language": "frances",
+                "languageName": "Francés",
+                "n": 310,
+                "title": "Conjugación de lire",
+                "level": "A2",
+                "part": "Presente y sistema verbal básico — Présent et système verbal de base",
+                "chapter": "Verbos frecuentes e irregularidad — Verbes fréquents et irrégularité",
+                "articleMarkdown": "#### En pocas palabras\n\n**Lire** significa “leer” y es irregular. En presente se conjuga **je lis, tu lis, il/elle/on lit, nous lisons, vous lisez, ils/elles lisent**.\n\n#### Cómo funciona\n\nEn singular aparecen **lis, lis, lit**; en plural, **lisons, lisez, lisent**. La consonante final escrita cambia según la persona, aunque varias formas suenan de manera muy parecida.\n\n**Lire** puede llevar un complemento directo: **Je lis le journal**, **Nous lisons ce livre**.\n\n#### Ejemplos\n\n* **Je lis le journal.** — Leo el periódico.\n* **Nous lisons un roman.** — Leemos una novela.\n* **Vous lisez vite.** — Leen rápido / lee usted rápido.\n* **Ils lisent la lettre.** — Leen la carta.\n\n#### Observación importante\n\nNo conviene aprender **lire** solo por su pronunciación, porque **lis**, **lit** y **lisent** presentan diferencias importantes en la escritura. Su participio pasado es **lu**, forma que también debe aprenderse como irregular.\n\n#### Entradas relacionadas\n\n[Conjugaison de dire](#entry-309) · [Conjugaison de écrire](#entry-311) · [Conjugaison de connaître](#entry-308) · [Conjugaison de boire](#entry-312)",
+                "provider": "mls-r32",
+                "model": "editorial-standard-32",
+                "auditProvider": "mls-r32-validator",
+                "auditModel": "chat-draft-48ff507b28b00e2d276d9120252eb7c00c9c5d42a07d4f5b223d2168b53020d7",
+                "promptVersion": "32.0",
+                "generatedAt": "2026-09-19T07:41:20.063Z"
+              }
+            ]
+          },
+          "leaseTtlSeconds": 300
+        },
+        "completedAt": "2026-10-03T02:58:40.333Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-03T02:58:40.333Z",
+  "commandFile": "mls chat bridge/commands/2026-10-03/003-bd80ae43-02-submit-next.json"
+}
