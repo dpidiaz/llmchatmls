@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Deploy R44 Fast Lane bounded disposable-chat multiplexing on top of R44 44.1",
-  "retryGeneration": 13,
+  "retryReason": "Deploy paginated R44 export required by MLS Unified R44→R33 grouped handoff",
+  "retryGeneration": 14,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
@@ -31,5 +31,15 @@
     "usesExistingD1Allocator": true,
     "usesDurableEntryCheckpoints": true,
     "r33Boundary": "PENDING_CANONICAL_R33_VALIDATION"
+  },
+  "unifiedPipeline": {
+    "schema": "MLS-UNIFIED-VERIFICATION-1",
+    "command": "MLS Unified siguiente",
+    "r44ExportPagination": true,
+    "handoffSchema": "MLS-R44-R33-HANDOFF-1",
+    "handoffCadenceMinutes": 5,
+    "r33WorkPrefix": "r33-unified:",
+    "integrationWorkPrefix": "r33-unified-integration:",
+    "terminalAuthority": "MLS R32 EDITORIAL/evidence git/indexes/verified.json"
   }
 }
