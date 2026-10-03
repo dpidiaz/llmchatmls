@@ -38,6 +38,8 @@ jobs:
           node --test 'test/integration/r44-d1.test.cjs'
           node 'scripts/validar corpus canonico.js'
           node --test 'test/canonical corpus.test.cjs' 'test/canonical runtime.test.cjs' 'test/canonical legacy removal.test.cjs' 'test/bundle sanitation.test.cjs' 'test/full text search.test.cjs'
+      - name: Validate Unified status monitor
+        run: node --test 'test/pagina status.test.cjs' 'test/unified status monitor.test.cjs'
       - name: Build production worker
         env:
           MLS_DERIVED_STALE_POLICY: degrade
