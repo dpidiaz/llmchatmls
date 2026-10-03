@@ -1,0 +1,96 @@
+{
+  "batchId": "r44-m10-4bd912-ticket09-close-claim10",
+  "stopOnError": true,
+  "commands": [
+    {
+      "operationId": "r44RenewChat",
+      "input": {
+        "bridgeSessionId": "r44b-9c6c3dfe-21d2-4a8b-b461-4ea496c4ed4c"
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-9c6c3dfe-21d2-4a8b-b461-4ea496c4ed4c",
+        "ticketId": "R43-EMERGENCY-0593",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0593-MLS-V06-0480-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0480",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 〜たほうがいい usa forma llana pasada + ほうがいい para consejo/recomendación; el 〜た no implica necesariamente pasado temporal. Ejemplos y matiz correctos."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-9c6c3dfe-21d2-4a8b-b461-4ea496c4ed4c",
+        "ticketId": "R43-EMERGENCY-0593",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0593-MLS-V06-0481-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0481",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 〜ていただけますか forma una petición muy cortés/deferente; relación con いただく y uso de la forma potencial interrogativa correctamente explicados."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-9c6c3dfe-21d2-4a8b-b461-4ea496c4ed4c",
+        "ticketId": "R43-EMERGENCY-0593",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0593-MLS-V06-0483-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0483",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 〜てくれますか funciona como petición desde la perspectiva de una acción de otro en beneficio/esfera del hablante; deferencia menor que 〜ていただけますか. Sin corrección."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-9c6c3dfe-21d2-4a8b-b461-4ea496c4ed4c",
+        "ticketId": "R43-EMERGENCY-0593",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0593-MLS-V06-0484-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0484",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 〜てもらえますか presenta la acción solicitada como favor recibido; contraste de perspectiva y cortesía con 〜てくれますか / 〜ていただけますか correctamente descrito."
+        }
+      }
+    },
+    {
+      "operationId": "r44CheckpointChat",
+      "input": {
+        "bridgeSessionId": "r44b-9c6c3dfe-21d2-4a8b-b461-4ea496c4ed4c",
+        "ticketId": "R43-EMERGENCY-0593",
+        "leaseGeneration": 1,
+        "idempotencyKey": "cp-R43-EMERGENCY-0593-MLS-V06-0485-g1-4bd912",
+        "entry": {
+          "code": "MLS-V06-0485",
+          "outcome": "PASS_NO_CHANGE",
+          "notes": "Auditado: 〜ないでください es petición negativa cortés y puede funcionar contextualmente como indicación/prohibición cortés. Formación y ejemplos correctos."
+        }
+      }
+    },
+    {
+      "operationId": "r44RebindChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "ticketId": "R43-EMERGENCY-0593"
+      }
+    },
+    {
+      "operationId": "r44ClaimChat",
+      "input": {
+        "workerId": "chatgpt-r44-m10-20261003T0246-sol-4bd912",
+        "idempotencyKey": "claim-20261003T0246Z-4bd912-10"
+      }
+    }
+  ]
+}
