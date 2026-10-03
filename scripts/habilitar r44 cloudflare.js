@@ -39,10 +39,12 @@ function injectR44(code) {
     next = next.replace(ROUTE_MARKER, ROUTE);
   }
   if (!next.includes("MLS Unified scheduled runner")) {
-    const fetchMarker = "var index_default = {\n  async fetch(request, env, _ctx) {";
-    const scheduled = "var index_default = {\n  // MLS Unified scheduled runner\n  async scheduled(_controller, env, ctx) {\n    ctx.waitUntil(unifiedRunnerScheduled(env));\n  },\n  async fetch(request, env, _ctx) {";
-    if (!next.includes(fetchMarker)) throw new Error("Unified scheduled hook marker not found");
-    next = next.replace(fetchMarker, scheduled);
+    const fetchMarker = /((?:var|const)\s+index_default\s*=\s*\{\s*)async\s+fetch\s*\(\s*request\s*,\s*env\s*,\s*_ctx\s*\)\s*\{/m;
+    if (!fetchMarker.test(next)) throw new Error("Unified scheduled hook marker not found");
+    next = next.replace(
+      fetchMarker,
+      '$1// MLS Unified scheduled runner\n  async scheduled(_controller, env, ctx) {\n    ctx.waitUntil(unifiedRunnerScheduled(env));\n  },\n  async fetch(request, env, _ctx) {'
+    );
   }
   const start = next.indexOf('var R44_DURABLE_SQL =');
   const legacyStart = next.indexOf('var R44_POOL_SHA256 =');
