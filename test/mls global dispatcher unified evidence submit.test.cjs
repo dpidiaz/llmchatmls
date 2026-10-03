@@ -52,7 +52,7 @@ test('Unified auto-checkpoint remains fenced to bot, assignment and branch head'
   const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
   const workerWorkflow=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
   assert.match(workflow,/issues: write/);
-  assert.match(workflow,/checkpoint "\$BUNDLE_PATH" "\$COMMIT_SHA" "\$GITHUB_RUN_ID"/);
+  assert.match(workflow,/checkpoint-event "\$BUNDLE_PATH" "\$COMMIT_SHA" "\$GITHUB_RUN_ID"/);
   assert.ok(workflow.indexOf('git push origin')<workflow.indexOf('Prepare fenced durable checkpoint event'));
   assert.match(submit,/UNIFIED_EVIDENCE_CHECKPOINT_STATE_MISMATCH/);
   assert.match(submit,/UNIFIED_EVIDENCE_CHECKPOINT_HEAD_MISMATCH/);
