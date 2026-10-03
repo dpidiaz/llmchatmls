@@ -1,0 +1,56 @@
+name: MLS Unified R44 R33 Handoff
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/10 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mls-unified-r44-r33-handoff
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Sync durable R44 COMPLETE results into GitHub handoff
+        run: node 'scripts/r44 r33 handoff sync.cjs'
+      - name: Validate handoff shape
+        run: |
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const p='MLS R32 EDITORIAL/r44/r33-handoff/index.json';
+          if(!fs.existsSync(p)){console.log('No handoff yet.');process.exit(0)}
+          const x=JSON.parse(fs.readFileSync(p,'utf8'));
+          if(x.schema!=='MLS-R44-R33-HANDOFF-1'||!Array.isArray(x.entries))throw Error('INVALID_HANDOFF_INDEX');
+          const codes=new Set();
+          for(const e of x.entries){
+            if(!/^MLS-V\d{2}-\d{4}$/.test(e.code)||codes.has(e.code))throw Error('INVALID_HANDOFF_CODE '+e.code);
+            if(!['PASS_NO_CHANGE','CORRECTED'].includes(e.outcome))throw Error('INVALID_HANDOFF_OUTCOME '+e.code);
+            codes.add(e.code);
+          }
+          console.log(JSON.stringify({ok:true,entries:x.entries.length,snapshotSha256:x.snapshotSha256}));
+          NODE
+      - name: Commit grouped handoff snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add 'MLS R32 EDITORIAL/r44/r33-handoff'
+          if git diff --cached --quiet; then
+            echo 'No new R44→R33 handoff data.'
+            exit 0
+          fi
+          git commit -m 'unified: sync R44 durable handoff to R33'
+          git push origin HEAD:main
