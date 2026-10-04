@@ -37,12 +37,14 @@ test('refuses conflicting old live claims or terminal ownership',()=>{
  assert.throws(()=>r33.materializeCandidate(snapshot,{now:epoch,requested:1}),e=>e.code==='BUFFER_DOUBLE_OWNER');
  assert.throws(()=>r33.materializeCandidate({...snapshot,ledger:{...ledger,verified:[code(1)]},batches:[]},{now:epoch,requested:1}),e=>e.code==='BUFFER_TERMINAL_CONFLICT');
 });
-test('serialized reservations reject overlapping codes and corrupt hashes',()=>{
+test('serialized reservations dedupe repeated issue inventory but reject real overlapping owners',()=>{
  const first=buffered.allocate({pool:pool(),ledger,batches:[]},args(1234));
+ const firstIssue=issue(first);
+ assert.equal(buffered.reservations([firstIssue,{...firstIssue}]).length,1);
  const copy={...first,issueNumber:1235};
  assert.throws(()=>buffered.parseReservation(issue(copy)),e=>e.code==='BUFFER_RESERVATION_INVALID');
  const other=buffered.allocate({pool:pool(),ledger,batches:[]},args(1235));
- assert.throws(()=>buffered.reservations([issue(first),issue(other)]),e=>e.code==='DOUBLE_BUFFERED_OWNERSHIP');
+ assert.throws(()=>buffered.reservations([firstIssue,issue(other)]),e=>e.code==='DOUBLE_BUFFERED_OWNERSHIP');
 });
 test('public non-collaborator cannot block R33 with fake reservation issue',()=>{
  const r=buffered.allocate({pool:pool(),ledger,batches:[]},args(1234));
