@@ -167,6 +167,16 @@ async function heartbeatInline(issue,state,stage){
   if(!stageMatchesState(stage,next)||next.status!=='leased')fail('UNIFIED_WEB_HEARTBEAT_STATE_MISMATCH');
   return {issue:refreshed,state:next};
 }
+async function replaceExpiredAssignment(stage,issue,detail={}){
+  const previousIssue=Number(issue.number);
+  await report(stage,'EXPIRED',{
+    issueNumber:null,
+    error:'Lease is no longer active.',
+    detail:{previousIssue,...detail}
+  });
+  const replacement=await createClaim(stage);
+  return {kind:'pending',issue:replacement,replacedIssue:previousIssue};
+}
 async function resolveAssignment(stage,lane){
   let issue=await laneIssue(stage,lane);
   const title=String(issue?.title||'');
@@ -183,6 +193,7 @@ async function resolveAssignment(stage,lane){
     ['[MLS Dispatcher][EXPIRED]','EXPIRED']
   ]){
     if(title.startsWith(prefix)){
+      if(state==='EXPIRED')return replaceExpiredAssignment(stage,issue,{source:'dispatcher-title'});
       await report(stage,state,{issueNumber:null,error:state==='REJECTED'?title:null,detail:{previousIssue:Number(issue.number)}});
       return {kind:state.toLowerCase(),issue};
     }
@@ -200,8 +211,7 @@ async function resolveAssignment(stage,lane){
     }
   }
   if(state.status!=='leased'||expired(state)){
-    await report(stage,'EXPIRED',{issueNumber:null,error:'Lease is no longer active.',detail:{issueNumber:Number(issue.number)}});
-    return {kind:'expired',issue};
+    return replaceExpiredAssignment(stage,issue,{source:'assignment-state'});
   }
   const hb=await heartbeatInline(issue,state,stage);
   await report(stage,'LEASED',{issueNumber:Number(issue.number),assignmentId:hb.state.assignmentId,detail:{workId:hb.state.workId,expiresAt:hb.state.expiresAt}});
