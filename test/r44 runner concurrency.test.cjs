@@ -89,6 +89,10 @@ test('legacy lock, stopped state, expired locks and FREE-only errors gate execut
   assert.equal((await h.r.unifiedRunnerStep(h.env,'quota:test',1)).status,'QUOTA_PAUSED');
   assert.equal((await h.r.unifiedRunnerStep(h.env,'quota:next',2)).status,'RUNNER_NOT_RUNNING');
   await control(h,{action:'resume'});
+  h.r.unifiedRunnerAuditEntry=async()=>{throw Error('R44_CONTEXT_HASH_MISMATCH_MLS-V10-0870')};
+  assert.equal((await h.r.unifiedRunnerStep(h.env,'r44:degraded',2)).status,'R44_DEGRADED');
+  assert.equal((await h.r.unifiedRunnerRead(h.env)).state,'RUNNING');
+  assert.match((await h.r.unifiedRunnerRead(h.env)).last_error,/R44 lane: R44_CONTEXT_HASH_MISMATCH/);
   h.r.unifiedRunnerAuditEntry=async()=>{throw Error('paid provider prohibited')};
   assert.equal((await h.r.unifiedRunnerStep(h.env,'policy:test',2)).status,'POLICY_PAUSED');
   assert.equal((await h.r.unifiedRunnerRead(h.env)).active_runners,0);

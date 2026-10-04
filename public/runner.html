@@ -106,7 +106,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 
 <section class="panel" id="unifiedPanel" hidden>
 <h2 style="margin-top:0">MLS Unified Runner</h2>
-<p>Controla el runner persistente del MLS. R44 se ejecuta en Cloudflare; R33 e integración usan los leases, branches, preflight, tests y checkpoints del Global Dispatcher. Cerrar esta página no detiene la ejecución.</p>
+<p>Controla el runner persistente del MLS hasta VERIFIED canónico. R44 se ejecuta en Cloudflare; R33 e integración usan los leases, branches, preflight, tests y checkpoints del Global Dispatcher. <strong>R44 Claimable = 0 no significa que el trabajo terminó:</strong> mientras queden pendientes canónicos, el runner continúa por R33 e integración. Cerrar esta página no detiene la ejecución.</p>
 
 <div class="grid">
 <div>
@@ -162,7 +162,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 </div>
 
 <div class="log" id="unifiedLog">Unified listo.</div>
-<p class="note">No necesitás copiar claves: esta página usa tu sesión segura de Cloudflare Access. Si una entrada no puede justificarse con una fuente R33 registrada, el runner marca REVIEW_REQUIRED y se pausa antes de fabricar Evidence. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
+<p class="note">La métrica principal es VERIFIED canónico. Un error aislado de R44 se registra como degradación de esa etapa y no debe bloquear R33 ni integración de trabajo R44 ya durable. No necesitás copiar claves: esta página usa tu sesión segura de Cloudflare Access. Si una entrada no puede justificarse con una fuente R33 registrada, el runner marca REVIEW_REQUIRED y se pausa antes de fabricar Evidence. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
 </section>
 </main>
 
