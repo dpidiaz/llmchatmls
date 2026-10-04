@@ -170,14 +170,19 @@ function validateStaged(){
 async function openPr(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),headSha=String(process.argv[4]||'').toLowerCase();
   if(!/^[a-f0-9]{40}$/.test(headSha))fail('UNIFIED_INTEGRATION_HEAD_INVALID');
-  const {repository}=githubContext();
-  const pr=await gh('/repos/'+repository+'/pulls',{method:'POST',body:{
-    title:'r33(unified): integrate '+bundle.workId,
-    head:bundle.branch,base:'main',
-    body:'Automated serialized MLS Unified R33 integration for '+bundle.assignmentId+'.\n\nSource refs are pinned by commit SHA; indexes/tests are generated before merge.'
-  }});
+  const {repository}=githubContext(),owner=repository.split('/')[0];
+  const existing=await gh('/repos/'+repository+'/pulls?state=open&head='+encodeURIComponent(owner+':'+bundle.branch)+'&base=main');
+  let pr=Array.isArray(existing)?existing.find(x=>String(x?.head?.ref||'')===bundle.branch&&String(x?.base?.ref||'')==='main'):null;
+  if(!pr){
+    pr=await gh('/repos/'+repository+'/pulls',{method:'POST',body:{
+      title:'r33(unified): integrate '+bundle.workId,
+      head:bundle.branch,base:'main',
+      body:'Automated serialized MLS Unified R33 integration for '+bundle.assignmentId+'.\n\nSource refs are pinned by commit SHA; indexes/tests are generated before merge.'
+    }});
+  }
+  if(String(pr?.head?.sha||'').toLowerCase()!==headSha)fail('UNIFIED_INTEGRATION_PR_HEAD_MISMATCH','Existing/opened PR head does not match the expected assignment head.');
   output('pr_number',pr.number);output('head_sha',headSha);
-  process.stdout.write(JSON.stringify({ok:true,prNumber:pr.number,headSha})+'\n');
+  process.stdout.write(JSON.stringify({ok:true,prNumber:pr.number,headSha,reused:Boolean(existing?.length)})+'\n');
 }
 async function waitCheck(){
   const headSha=String(process.argv[3]||'').toLowerCase();
