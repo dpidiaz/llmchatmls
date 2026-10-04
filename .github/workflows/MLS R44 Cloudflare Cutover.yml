@@ -136,6 +136,16 @@ jobs:
           printf '%s' "$bridge_status" | grep -F '"authenticated":true'
           echo 'R44_CLOUDFLARE_CUTOVER_OK'
 
+      - name: Reconcile legacy R44 quarantine
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+          MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
+          R44_LEGACY_RECONCILE_BATCH: 5
+          R44_LEGACY_RECONCILE_MAX_BATCHES: 60
+          R44_LEGACY_RECONCILE_MIN_WRITES_REMAINING: 2500
+        run: node 'scripts/r44 legacy quarantine reconcile.cjs'
+
       - name: Verify Unified status monitor in production
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
