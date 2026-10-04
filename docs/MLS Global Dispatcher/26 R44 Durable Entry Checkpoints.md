@@ -168,7 +168,7 @@ For each eligible quarantined ticket the reconciler:
 2. parses the persisted payload and verifies exact code scope against the frozen ticket entries;
 3. when the payload contains a valid per-entry result set, creates normal fenced `MLS-R44-ENTRY-RECEIPT-1` receipts through the existing checkpoint path and requires terminal `COMPLETE`;
 4. when the historical artifact is a valid but unstructured sentinel, removes that obsolete result projection and safely requeues the ticket for a fresh normal R44 audit rather than fabricating receipts;
-5. leaves hash/JSON-corrupt artifacts quarantined with an explicit `LEGACY_RECONCILIATION_BLOCKED_*` note;
+5. if a legacy result has an invalid hash, invalid JSON, or an outcome incompatible with the current per-entry receipt contract, discards only that obsolete legacy result projection and safely requeues the unfinished entries for a fresh R44 audit; existing durable receipts remain preserved;
 6. preserves genuine non-migration quarantine states.
 
 The recovery runner operates in bounded batches of at most five tickets and stops when the D1 daily write headroom drops below the configured safety floor. The MLS Unified five-minute workflow performs one bounded recovery batch per run so safe recovery continues without requiring manual ticket IDs.
