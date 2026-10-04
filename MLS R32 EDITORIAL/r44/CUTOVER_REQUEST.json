@@ -1,6 +1,6 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-04T06:36:00.000Z",
+  "requestedAt": "2026-10-04T06:41:00.000Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
   "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Deploy Unified downstream-backlog isolation: keep global runner RUNNING across isolated R44 entry failures so R33/integration can continue toward canonical VERIFIED",
-  "retryGeneration": 26,
+  "retryReason": "Deploy Unified persisted R44 error self-heal so current ERROR returns to RUNNING and downstream R33/integration continue",
+  "retryGeneration": 27,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
@@ -42,7 +42,8 @@
     "integrationWorkPrefix": "r33-unified-integration:",
     "terminalAuthority": "MLS R32 EDITORIAL/evidence git/indexes/verified.json",
     "r44LaneFailureIsolation": "R44_DEGRADED_NONBLOCKING",
-    "canonicalBacklogContinuesAfterR44Drain": true
+    "canonicalBacklogContinuesAfterR44Drain": true,
+    "legacyR44ErrorSelfHealOnCron": true
   },
   "unifiedStatusMonitor": {
     "schema": "MLS-UNIFIED-STATUS-1",
