@@ -41,6 +41,16 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/unified-runner/r33-evidence',
     input: 'body'
   },
+  unifiedRunnerStatus: {
+    method: 'POST',
+    pathname: '/api/unified-runner/status',
+    input: 'body'
+  },
+  unifiedRunnerControl: {
+    method: 'POST',
+    pathname: '/api/unified-runner/control',
+    input: 'body'
+  },
   unifiedRunnerControl: {
     method: 'POST',
     pathname: '/api/unified-runner/control',
