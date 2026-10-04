@@ -62,6 +62,23 @@ The chat must not ask the user for:
 
 The system chooses the highest-value eligible stage automatically.
 
+## Minimum entries per execution — effective 2026-10-03
+
+Canonical rule: `MLS Unified siguiente` → **>=50 entries processed per execution**, whenever at least 50 entries are available.
+
+This replaces the previous minimum of **25 entries per execution** and takes precedence over any older Unified instruction or configuration allowing a smaller completed execution. The minimum applies to the whole execution in the same chat, not to each individual claim, ticket or integration wave.
+
+- If the first claim provides fewer than 50 entries, finish it and issue additional scoped claims within the **same cycle**, without requiring another user command, until at least 50 distinct entries have been processed.
+- A partial batch of 5, 10, 25 or any other total below 50 is not a complete execution while more work is available.
+- Count distinct entry codes with confirmed durable processing in this execution. Claims alone, duplicate receipts and processing the same code at multiple stages do not increase this count. Report stage outcomes separately; R44 COMPLETE or R33 worker DONE is not canonical VERIFIED.
+- Confirm completion of the current assignment/ticket before claiming another. Follow the existing scoped R33 auto-pull when issued; do not create a competing claim. Preserve recovery, lease fencing, no-prefetch and serialized integration rules.
+- The R44 bound of up to 10 tickets applies to each Fast Lane batch, not as an early-exit rule for Unified. If short/recovered tickets leave the execution below 50 and more work is available, continue with another sequential bounded batch in the same cycle.
+- Ending below 50 is allowed **only** when fewer entries actually remain available in the pool or a **verifiable technical blocker** prevents continuation. A single short claim does not prove pool exhaustion. Check eligible Unified stages in their documented priority order before concluding that no more work is available.
+- When ending below 50, record the confirmed distinct-entry total, affected stage, claim/assignment or ticket references, durable checkpoints/receipts, and the reason with evidence: authoritative no-work/pool responses or the concrete technical error/status. A busy stage may require trying the next eligible stage; it does not by itself prove pool exhaustion.
+- Safety stops still apply: preserve confirmed work and recovery state on lease loss, ambiguous completion, transport failure or an actual execution limit. Document the specific verifiable blocker; do not use a generic capacity statement or a batch-size preference to declare a sub-50 execution complete.
+
+This is an operational execution policy. It does not enlarge individual allocator claims, change historical commands, bypass validation or promise 50 new VERIFIED entries per execution.
+
 ## Scheduling priority
 
 Every new Unified execution follows this order.
@@ -234,7 +251,7 @@ After a Unified R33 FINISH, the worker event auto-pull must generate another cla
 
 It must never silently escape into general `r33-farm:` backlog.
 
-The loop remains in-chat and ends naturally on preemption, no work, capacity limits, error, or insufficient safe execution capacity.
+The loop remains in-chat and follows the minimum-50 execution policy above. Below 50, a stop requires verified lack of available work or a documented technical blocker; preserve durable checkpoints and recovery state. A completed sub-50 assignment alone is not a reason to end the Unified execution.
 
 ## Unified final integration
 
@@ -405,3 +422,9 @@ Unified is DONE when the same visible command can be pasted into many disposable
 - Canonical VERIFIED count after smoke: **1,775**.
 - Production command: `MLS Unified siguiente`.
 - Historical `MLS siguiente` semantics remain unchanged.
+
+### 2026-10-03 operational change — minimum 50 entries
+
+- Previous execution minimum: 25 entries; superseded by **50 entries**.
+- Complete additional sequential claims in the same cycle whenever work is available.
+- A sub-50 close requires documented pool exhaustion or a verifiable technical blocker, with the confirmed processed count and supporting evidence.

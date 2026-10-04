@@ -86,4 +86,4 @@ Hasta que el workflow del Global Dispatcher sea implementado y certificado, los 
 
 ## Unified verification pipeline
 
-- [28 — MLS Unified Verification Pipeline](./28%20MLS%20Unified%20Verification%20Pipeline.md) — pipeline explícito `R44 → handoff durable → R33 → integración → VERIFIED` bajo el nuevo comando `MLS Unified siguiente`. Durante certificación no cambia el significado histórico de `MLS siguiente`.
+- [28 — MLS Unified Verification Pipeline](./28%20MLS%20Unified%20Verification%20Pipeline.md) — pipeline explícito `R44 → handoff durable → R33 → integración → VERIFIED` bajo el nuevo comando `MLS Unified siguiente`. Mínimo operativo desde 2026-10-03: **50 entradas por ejecución**, con claims adicionales en el mismo ciclo; menos de 50 solo por falta real de entradas o bloqueo técnico verificable documentado. Sustituye el mínimo previo de 25 para Unified y conserva el significado histórico de `MLS siguiente`.
