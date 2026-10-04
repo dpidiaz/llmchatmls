@@ -428,7 +428,7 @@ async function dispatchR33(issue,state){
     await report('r33','REVIEW_REQUIRED',{
       issueNumber:Number(issue.number),assignmentId:state.assignmentId,code:pending[0],
       error:'All remaining entries in the active microclaim require editorial review.',
-      detail:{blocked:[...blocked],pending},pauseRunner:true
+      detail:{blocked:[...blocked],pending},pauseRunner:false
     });
     return;
   }
@@ -507,7 +507,7 @@ async function run(){
     console.log(JSON.stringify({ok:true,status:'R33_DISPATCHED',issueNumber:r33.issue.number}));
     return;
   }
-  if(integration.kind==='no_work'&&r33.kind==='no_work'&&r44Drained(refreshed.r44)){
+  if(integration.kind==='no_work'&&r33.kind==='no_work'&&r44Drained(refreshed.r44)&&refreshed.canonical?.initialized&&refreshed.canonical.pending===0){
     const completed=await cf('/api/unified-runner/control',{action:'complete'});
     console.log(JSON.stringify({ok:true,status:'COMPLETE',runnerState:completed.state||'COMPLETE'}));
     return;

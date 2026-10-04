@@ -273,6 +273,11 @@ async function unifiedRunnerR33Draft(request,env,ctx) {
   const runner=await unifiedRunnerRead(env);
   if(runner.state!=="RUNNING") return r44Json({error:"UNIFIED_RUNNER_NOT_RUNNING",state:runner.state},409);
   const body=await r44ChatBridgeBody(request);
+  const prepared=await canonicalPrepared(env,body);
+  if(prepared)return r44Json({...prepared,preparedByRunner:true});
+  return unifiedR33BuildDraft(env,body);
+}
+async function unifiedR33BuildDraft(env,body) {
   const article=body.article,handoffEntry=body.handoffEntry || {};
   const code=String(body.code || article && article.code || "").toUpperCase();
   const contentPath=String(body.contentPath || "");

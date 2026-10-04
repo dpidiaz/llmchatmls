@@ -84,14 +84,20 @@ async function r44Rebind(env, body) {
   const owned = result.lease.workerId === body.workerId && (!body.leaseToken || result.lease.leaseToken===body.leaseToken);
   return {...result,status:result.state==='COMPLETE'?'COMPLETE':owned&&result.lease.active?'LEASE_REUSED':'LEASE_LOST'};
 }
-async function r44DurableContext(env, token, limit = Infinity) {
+async function r44DurableContext(env, token, limit = Infinity, runner = false) {
   await r44DurableReady(env);
   const lease = await env.WIKI_DB.prepare('SELECT ticket_id FROM r44_leases WHERE lease_token=? AND expires_ms>?').bind(token,Date.now()).first();
   if (!lease) return null;
   const state = await r44Reconcile(env,lease.ticket_id);
   if (!state.lease.active) return null;
-  const entries = state.entries.filter(e=>e.state!=='AUDITED_DURABLE').slice(0,limit).map(e=>e.source);
-  const content = await Promise.all(entries.map((entry) => r44LoadEntry(env, entry)));
+  const entries = state.entries.filter(e=>e.state!=='AUDITED_DURABLE' && (!runner || !['FAILED_RETRYABLE','QUARANTINED'].includes(e.state))).slice(0,limit).map(e=>e.source);
+  const content = await Promise.all(entries.map(async entry => {
+    try { return await r44LoadEntry(env,entry); }
+    catch(error) {
+      if(runner) await r44EntryState(env,{...state.lease,ticketId:state.ticketId,code:entry.code,state:"FAILED_RETRYABLE"});
+      throw error;
+    }
+  }));
   return {...state,...state.lease,entries,content};
 }
 async function r44DurableRenew(env, token, generation) {
