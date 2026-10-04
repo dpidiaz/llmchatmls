@@ -36,6 +36,29 @@ fresh ticket can be claimed. Manual `/step` now also checkpoints one entry and
 accepts an optional integer `runnerId` (default 1). R33 certification and final
 integration continue using their existing canonical Dispatcher lanes.
 
+## Canonical backlog after R44 drains
+
+`R44 Claimable = 0` does **not** mean MLS Unified has no work. Once the R44
+audit pool is mostly or fully durable, the remaining canonical backlog is
+primarily downstream work:
+
+```text
+R44 COMPLETE/handoff → R33 certification → serialized integration → VERIFIED
+```
+
+The global runner state therefore remains `RUNNING` when an individual R44
+ticket/article hits a non-policy execution error (for example a frozen-context
+hash mismatch). That failure is recorded as an R44-lane degradation and can be
+repaired separately, while already-durable R44 work continues through R33 and
+integration. Only quota/policy pauses or a fatal scheduler/control-plane failure
+stop the global runner. This prevents a small R44 tail from blocking thousands
+of canonical entries that are already eligible downstream.
+
+The user-facing success metric is canonical `verified.json`, not the R44
+Claimable counter. The runner may show `R44 Claimable = 0` while canonical
+`Pendientes para VERIFIED` remains greater than zero and the R33/integration
+lanes continue advancing.
+
 The authenticated `/control` endpoint adds `{ "action": "configure", "runners": 25 }`.
 Noninteger values, strings, missing values and values outside the ten choices
 are rejected with HTTP 400; authorization is checked before mutation. Existing
