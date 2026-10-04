@@ -49,6 +49,10 @@ test('Unified integration executor treats an already-applied wave as a validated
   assert.match(source,/output\('has_changes',files\.length\?'true':'false'\)/);
   assert.doesNotMatch(source,/UNIFIED_INTEGRATION_NO_STAGED_CHANGES/);
   assert.match(source,/UNIFIED_INTEGRATION_NOOP_MAIN_MOVED/);
+  assert.match(source,/UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED/);
+  assert.match(source,/checkpoint\?\.integrationStage/);
+  assert.match(source,/checkpointSha!==mainSha\|\|checkpointSha!==branchSha/);
+  assert.doesNotMatch(source,/lastCheckpointCommit\|\|'\'\)\.toLowerCase\(\)!==String\(state\.baseCommit/);
   assert.match(worker,/stage==='noop'/);
   assert.match(worker,/INTEGRATION_NOOP_MAIN_MISMATCH/);
 });
