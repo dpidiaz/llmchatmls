@@ -508,9 +508,9 @@ async function r44McpHandle(request, env) {
 }
 
 
-var MLS_UNIFIED_RUNNER_SCHEMA = "2";
+var MLS_UNIFIED_RUNNER_SCHEMA = "3";
 var unifiedRunnerReady = new WeakSet();
-function unifiedRunnerCount(n) { return Number.isInteger(n) && n >= 5 && n <= 50 && n % 5 === 0; }
+function unifiedRunnerCount(n) { return Number.isInteger(n) && (n === 1 || n === 100 || (n >= 5 && n <= 50 && n % 5 === 0)); }
 var MLS_UNIFIED_RUNNER_WORKER = "mls-unified-web-runner-v1";
 
 async function unifiedRunnerEnsure(env) {
@@ -521,12 +521,28 @@ async function unifiedRunnerEnsure(env) {
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_lane (stage TEXT PRIMARY KEY CHECK(stage IN ('r33','integration')), state TEXT NOT NULL, issue_number INTEGER, assignment_id TEXT, last_code TEXT, last_error TEXT, detail_json TEXT, updated_at TEXT NOT NULL)")
   ]);
   await env.WIKI_DB.batch([
-    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_config (id INTEGER PRIMARY KEY CHECK(id=1), desired INTEGER NOT NULL CHECK(desired BETWEEN 5 AND 50 AND desired%5=0))"),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_config (id INTEGER PRIMARY KEY CHECK(id=1), desired INTEGER NOT NULL CHECK(desired IN (1,100) OR (desired BETWEEN 5 AND 50 AND desired%5=0)))"),
     env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner_config VALUES(1,5)"),
-    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_slots (id INTEGER PRIMARY KEY CHECK(id BETWEEN 1 AND 50), worker_id TEXT NOT NULL UNIQUE, step_token TEXT, busy_until INTEGER, updated_at TEXT, last_step_key TEXT)")
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_slots (id INTEGER PRIMARY KEY CHECK(id BETWEEN 1 AND 100), worker_id TEXT NOT NULL UNIQUE, step_token TEXT, busy_until INTEGER, updated_at TEXT, last_step_key TEXT)")
   ]);
+  const schema = await env.WIKI_DB.prepare('SELECT schema_version FROM mls_unified_runner WHERE id=1').first();
+  if (schema.schema_version !== MLS_UNIFIED_RUNNER_SCHEMA) {
+    // Replace only the two CHECK constraints, preserving identities and live locks
+    // in the same D1 transaction. Repeated/concurrent migration is safe.
+    await env.WIKI_DB.batch([
+      env.WIKI_DB.prepare("CREATE TABLE mls_unified_runner_config_v3 (id INTEGER PRIMARY KEY CHECK(id=1), desired INTEGER NOT NULL CHECK(desired IN (1,100) OR (desired BETWEEN 5 AND 50 AND desired%5=0)))"),
+      env.WIKI_DB.prepare('INSERT INTO mls_unified_runner_config_v3 SELECT * FROM mls_unified_runner_config'),
+      env.WIKI_DB.prepare('DROP TABLE mls_unified_runner_config'),
+      env.WIKI_DB.prepare('ALTER TABLE mls_unified_runner_config_v3 RENAME TO mls_unified_runner_config'),
+      env.WIKI_DB.prepare("CREATE TABLE mls_unified_runner_slots_v3 (id INTEGER PRIMARY KEY CHECK(id BETWEEN 1 AND 100), worker_id TEXT NOT NULL UNIQUE, step_token TEXT, busy_until INTEGER, updated_at TEXT, last_step_key TEXT)"),
+      env.WIKI_DB.prepare('INSERT INTO mls_unified_runner_slots_v3 SELECT * FROM mls_unified_runner_slots'),
+      env.WIKI_DB.prepare('DROP TABLE mls_unified_runner_slots'),
+      env.WIKI_DB.prepare('ALTER TABLE mls_unified_runner_slots_v3 RENAME TO mls_unified_runner_slots'),
+      env.WIKI_DB.prepare('UPDATE mls_unified_runner SET schema_version=? WHERE id=1').bind(MLS_UNIFIED_RUNNER_SCHEMA)
+    ]);
+  }
   // One statement seeds all slots; slot 1 preserves the old worker identity.
-  await env.WIKI_DB.prepare("WITH RECURSIVE slots(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM slots WHERE n<50) INSERT OR IGNORE INTO mls_unified_runner_slots(id,worker_id) SELECT n,CASE WHEN n=1 THEN ? ELSE 'mls-unified-runner-'||printf('%03d',n) END FROM slots").bind(MLS_UNIFIED_RUNNER_WORKER).run();
+  await env.WIKI_DB.prepare("WITH RECURSIVE slots(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM slots WHERE n<100) INSERT OR IGNORE INTO mls_unified_runner_slots(id,worker_id) SELECT n,CASE WHEN n=1 THEN ? ELSE 'mls-unified-runner-'||printf('%03d',n) END FROM slots").bind(MLS_UNIFIED_RUNNER_WORKER).run();
   unifiedRunnerReady.add(env.WIKI_DB);
 }
 async function unifiedRunnerRead(env) {
@@ -820,16 +836,19 @@ async function unifiedRunnerScheduled(env) {
     // Only arm alarms here. Each logical runner executes in its own invocation,
     // keeping D1/AI request budgets independent of the selected concurrency.
     const results = [];
-    for (let first=1;first<=runner.configured_runners;first+=5) {
-      results.push(...await Promise.all(Array.from({length:Math.min(5,runner.configured_runners-first+1)},async(_,offset)=>{
+    // Wake at most 25 objects here; each object wakes up to three peers in its
+    // own invocation, keeping the cron comfortably below FREE subrequest limits.
+    const roots=Math.min(25,runner.configured_runners);
+    for (let first=1;first<=roots;first+=5) {
+      results.push(...await Promise.all(Array.from({length:Math.min(5,roots-first+1)},async(_,offset)=>{
         const id=first+offset;
         const stub=env.MLS_UNIFIED_RUNNERS.get(env.MLS_UNIFIED_RUNNERS.idFromName("runner-"+id));
-        const response=await stub.fetch("https://runner.internal/wake",{method:"POST",body:JSON.stringify({runnerId:id})});
+        const response=await stub.fetch("https://runner.internal/wake",{method:"POST",body:JSON.stringify({runnerId:id,wakeThrough:runner.configured_runners})});
         if (!response.ok) throw new Error("UNIFIED_RUNNER_WAKE_FAILED");
         return id;
       })));
     }
-    return {status:"SCHEDULED",runners:results.length};
+    return {status:"SCHEDULED",runners:runner.configured_runners};
   } catch (error) {
     await unifiedRunnerApplyMark(env,{state:"ERROR",last_error:wikiErrorMessage(error),last_step_at:new Date().toISOString(),errorDelta:1}).catch(function(){});
     throw error;
@@ -952,11 +971,17 @@ class UnifiedLogicalRunner {
   constructor(state, env) { this.storage=state.storage; this.env=env; }
   async fetch(request) {
     const body=await request.json();
-    if (!Number.isInteger(body.runnerId) || body.runnerId<1 || body.runnerId>50) return new Response("Invalid runner",{status:400});
+    if (!Number.isInteger(body.runnerId) || body.runnerId<1 || body.runnerId>100) return new Response("Invalid runner",{status:400});
+    if (body.wakeThrough !== undefined && (!unifiedRunnerCount(body.wakeThrough) || body.runnerId>25 || body.runnerId>body.wakeThrough)) return new Response("Invalid fanout",{status:400});
     const prior=await this.storage.get("runnerId");
     if (prior && prior!==body.runnerId) return new Response("Identity conflict",{status:409});
     if (!prior) await this.storage.put("runnerId",body.runnerId);
     if (await this.storage.getAlarm() === null) await this.storage.setAlarm(Date.now()+1000);
+    for (let peer=body.runnerId+25;peer<=Number(body.wakeThrough||0);peer+=25) {
+      const stub=this.env.MLS_UNIFIED_RUNNERS.get(this.env.MLS_UNIFIED_RUNNERS.idFromName('runner-'+peer));
+      const response=await stub.fetch('https://runner.internal/wake',{method:'POST',body:JSON.stringify({runnerId:peer})});
+      if(!response.ok)throw new Error('UNIFIED_RUNNER_WAKE_FAILED');
+    }
     return new Response("Scheduled");
   }
   async alarm() {

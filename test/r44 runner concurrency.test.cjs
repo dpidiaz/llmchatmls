@@ -33,32 +33,32 @@ async function setup(h,count=150){
 }
 function control(h,body){return h.r.unifiedRunnerControl(new Request('https://test/control',{method:'POST',body:JSON.stringify(body)}),h.env)}
 
-test('configuration accepts exactly 5..50 by five, persists, rejects invalid and unauthenticated writes',async()=>{
+test('configuration accepts 1, 5..50 by five and 100, persists, rejects invalid and unauthenticated writes',async()=>{
   const h=harness();await setup(h);
-  for(let runners=5;runners<=50;runners+=5){assert.equal((await control(h,{action:'configure',runners})).status,200);assert.equal((await h.r.unifiedRunnerRead(h.env)).configured_runners,runners)}
-  for(const runners of [0,1,4,6,51,128,'10',null,5.5])assert.equal((await control(h,{action:'configure',runners})).status,400);
+  for(const runners of [1,100,5,10,15,20,25,30,35,40,45,50]){assert.equal((await control(h,{action:'configure',runners})).status,200);assert.equal((await h.r.unifiedRunnerRead(h.env)).configured_runners,runners)}
+  for(const runners of [0,2,4,6,51,55,99,101,128,'10',null,5.5])assert.equal((await control(h,{action:'configure',runners})).status,400);
   h.r.unifiedRunnerReady=new WeakSet();
   assert.equal((await h.r.unifiedRunnerRead(h.env)).configured_runners,50);
-  assert.equal(h.db.prepare('SELECT COUNT(DISTINCT worker_id) n FROM mls_unified_runner_slots').get().n,50);
+  assert.equal(h.db.prepare('SELECT COUNT(DISTINCT worker_id) n FROM mls_unified_runner_slots').get().n,100);
   h.r.unifiedRunnerAuthorize=async()=>({ok:false,error:'UNAUTHORIZED',status:401});
   assert.equal((await control(h,{action:'configure',runners:5})).status,401);
   assert.equal((await h.r.unifiedRunnerRead(h.env)).configured_runners,50);
 });
-test('50 simultaneous slots checkpoint different tickets; duplicate slot cannot execute; shrink drains safely',async()=>{
-  const h=harness();await setup(h);await control(h,{action:'configure',runners:50});
+test('100 simultaneous slots checkpoint different tickets; duplicate slot cannot execute; shrink drains safely',async()=>{
+  const h=harness();await setup(h);await control(h,{action:'configure',runners:100});
   let release;const barrier=new Promise(r=>release=r);let entered=0;
   h.r.unifiedRunnerAuditEntry=async(_env,entry)=>{entered++;await barrier;return {code:entry.code,outcome:'PASS_NO_CHANGE'}};
-  const pending=Array.from({length:50},(_,i)=>h.r.unifiedRunnerStep(h.env,'parallel:'+i,i+1));
-  for(let i=0;i<1000&&entered<50;i++)await new Promise(r=>setImmediate(r));
-  assert.equal(entered,50);
-  assert.equal((await h.r.unifiedRunnerRead(h.env)).active_runners,50);
+  const pending=Array.from({length:100},(_,i)=>h.r.unifiedRunnerStep(h.env,'parallel:'+i,i+1));
+  for(let i=0;i<1000&&entered<100;i++)await new Promise(r=>setImmediate(r));
+  assert.equal(entered,100);
+  assert.equal((await h.r.unifiedRunnerRead(h.env)).active_runners,100);
   assert.equal((await h.r.unifiedRunnerStep(h.env,'duplicate:slot',1)).status,'RUNNER_BUSY');
   await control(h,{action:'configure',runners:5});
-  assert.equal((await h.r.unifiedRunnerStep(h.env,'disabled:slot',50)).status,'RUNNER_DISABLED');
+  assert.equal((await h.r.unifiedRunnerStep(h.env,'disabled:slot',100)).status,'RUNNER_DISABLED');
   release();const results=await Promise.all(pending);
   assert(results.every(r=>r.status==='ENTRY_DURABLE'));
-  assert.equal(new Set(results.map(r=>r.ticketId)).size,50);
-  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM r44_receipts').get().n,50);
+  assert.equal(new Set(results.map(r=>r.ticketId)).size,100);
+  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM r44_receipts').get().n,100);
   assert.equal((await h.r.unifiedRunnerRead(h.env)).active_runners,0);
   const again=await h.r.unifiedRunnerStep(h.env,'recover:slot',1);
   assert.equal(again.ticketId,results[0].ticketId);
@@ -97,28 +97,48 @@ test('legacy lock, stopped state, expired locks and FREE-only errors gate execut
   assert.equal((await h.r.unifiedRunnerStep(h.env,'policy:test',2)).status,'POLICY_PAUSED');
   assert.equal((await h.r.unifiedRunnerRead(h.env)).active_runners,0);
 });
-test('cron arms 50 independent server alarms, alarms resume entries and stop when disabled',async()=>{
-  const h=harness();await setup(h);await control(h,{action:'configure',runners:50});
+test('cron arms 100 independent server alarms, alarms resume entries and stop when disabled',async()=>{
+  const h=harness();await setup(h);await control(h,{action:'configure',runners:100});
   const Klass=vm.runInContext('UnifiedLogicalRunner',h.r),objects=new Map();
   h.env.MLS_UNIFIED_RUNNERS={idFromName:n=>n,get(n){if(!objects.has(n)){const values=new Map();let alarm=null;const storage={async get(k){return values.get(k)},async put(k,v){values.set(k,v)},async delete(k){values.delete(k)},async getAlarm(){return alarm},async setAlarm(v){alarm=v}};objects.set(n,{object:new Klass({storage},h.env),values,get alarm(){return alarm},clear(){alarm=null}})}return {fetch:(url,init)=>objects.get(n).object.fetch(new Request(url,init))}}};
   h.db.exec("UPDATE mls_unified_runner SET state='ERROR',last_error='R44_CONTEXT_HASH_MISMATCH_MLS-V10-0870'");
-  assert.equal((await h.r.unifiedRunnerScheduled(h.env)).runners,50);
+  assert.equal((await h.r.unifiedRunnerScheduled(h.env)).runners,100);
   assert.equal((await h.r.unifiedRunnerRead(h.env)).state,'RUNNING');
   assert.match((await h.r.unifiedRunnerRead(h.env)).last_error,/^R44 lane: R44_CONTEXT_HASH_MISMATCH/);
-  assert.equal(objects.size,50);assert([...objects.values()].every(x=>x.alarm));
+  assert.equal(objects.size,100);assert([...objects.values()].every(x=>x.alarm));
   const one=objects.get('runner-1');one.clear();await one.object.alarm();assert(one.alarm);
   assert.equal(h.db.prepare('SELECT COUNT(*) n FROM r44_receipts').get().n,1);
   await control(h,{action:'configure',runners:5});
-  const fifty=objects.get('runner-50');fifty.clear();await fifty.object.alarm();assert.equal(fifty.alarm,null);
+  const fifty=objects.get('runner-100');fifty.clear();await fifty.object.alarm();assert.equal(fifty.alarm,null);
   await control(h,{action:'stop'});one.clear();await one.object.alarm();assert.equal(one.alarm,null);
 });
-test('build exports the SQLite alarm class once and panel has exactly the ten options',()=>{
+test('v2 migration preserves configured count and live slot fences, permits 1 and 100',async()=>{
+  const h=harness();await setup(h);await control(h,{action:'configure',runners:50});
+  h.db.exec(`CREATE TABLE config_old(id INTEGER PRIMARY KEY,desired INTEGER CHECK(desired BETWEEN 5 AND 50 AND desired%5=0));
+    INSERT INTO config_old SELECT * FROM mls_unified_runner_config;
+    DROP TABLE mls_unified_runner_config; ALTER TABLE config_old RENAME TO mls_unified_runner_config;
+    CREATE TABLE slots_old(id INTEGER PRIMARY KEY CHECK(id BETWEEN 1 AND 50),worker_id TEXT UNIQUE,step_token TEXT,busy_until INTEGER,updated_at TEXT,last_step_key TEXT);
+    INSERT INTO slots_old SELECT * FROM mls_unified_runner_slots WHERE id<=50;
+    DROP TABLE mls_unified_runner_slots; ALTER TABLE slots_old RENAME TO mls_unified_runner_slots;
+    UPDATE mls_unified_runner SET schema_version='2';
+    UPDATE mls_unified_runner_slots SET step_token='live-fence',busy_until=9999999999999,last_step_key='live-key' WHERE id=1;`);
+  h.r.unifiedRunnerReady=new WeakSet();
+  await Promise.all([h.r.unifiedRunnerEnsure(h.env),h.r.unifiedRunnerEnsure(h.env)]);
+  assert.equal((await h.r.unifiedRunnerRead(h.env)).configured_runners,50);
+  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM mls_unified_runner_slots').get().n,100);
+  assert.equal(h.db.prepare('SELECT step_token FROM mls_unified_runner_slots WHERE id=1').get().step_token,'live-fence');
+  assert.equal((await control(h,{action:'configure',runners:100})).status,200);
+  assert.equal((await control(h,{action:'configure',runners:1})).status,200);
+  assert.equal((await h.r.unifiedRunnerStep(h.env,'single:disabled',2)).status,'RUNNER_DISABLED');
+});
+
+test('build exports the SQLite alarm class once and panel has exactly the twelve options',()=>{
   const original=fs.readFileSync('MLS R32 OVERLAY/index.js','utf8'),built=injectR44(original);
   assert.equal(injectR44(built),built);
   assert.equal((built.match(/export \{ UnifiedLogicalRunner \}/g)||[]).length,1);
   const html=fs.readFileSync('public/runner.html','utf8');
   const select=html.match(/<select id="unifiedRunners">([\s\S]*?)<\/select>/)[1];
-  assert.deepEqual([...select.matchAll(/value="(\d+)"/g)].map(m=>Number(m[1])),[5,10,15,20,25,30,35,40,45,50]);
+  assert.deepEqual([...select.matchAll(/value="(\d+)"/g)].map(m=>Number(m[1])),[1,5,10,15,20,25,30,35,40,45,50,100]);
   for(const m of html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
   const config=JSON.parse(fs.readFileSync('MLS R32 OVERLAY/wrangler.jsonc'));
   assert(config.migrations.some(m=>m.new_sqlite_classes?.includes('UnifiedLogicalRunner')));
