@@ -10,7 +10,7 @@ function harness(){
   db.exec('PRAGMA foreign_keys=ON');
   let queries=0;
   const run=(sql,p,all)=>{queries++;const stmt=db.prepare(sql);const args=/\?\d/.test(sql)?[Object.fromEntries(p.map((v,i)=>[String(i+1),v]))]:p;return all?stmt.all(...args):stmt.run(...args)};
-  const env={WIKI_DB:{prepare(sql){let p=[];return {bind(...args){p=args;return this},runSync(){return run(sql,p,false)},async run(){return run(sql,p,false)},async first(){return run(sql,p,true)[0]||null},async all(){return {results:run(sql,p,true)}}}},async batch(ss){db.exec('BEGIN');try{const out=ss.map(s=>s.runSync());db.exec('COMMIT');return out}catch(e){db.exec('ROLLBACK');throw e}}}};
+  const env={WIKI_DB:{prepare(sql){let p=[];return {bind(...args){p=args;return this},runSync(){return /\bRETURNING\b/i.test(sql)?{results:run(sql,p,true)}:run(sql,p,false)},async run(){return run(sql,p,false)},async first(){return run(sql,p,true)[0]||null},async all(){return {results:run(sql,p,true)}}}},async batch(ss){db.exec('BEGIN');try{const out=ss.map(s=>s.runSync());db.exec('COMMIT');return out}catch(e){db.exec('ROLLBACK');throw e}}}};
   const r=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Request,Date,Map,Set,JSON});
   vm.runInContext(RUNTIME,r);
   r.wikiErrorMessage=e=>e.message;
@@ -84,6 +84,17 @@ test('idle runners claim the next full batch while one earlier entry is still pr
     assert.deepEqual(h.db.prepare("SELECT lease_token,batch_id FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get(),original);
   }finally{release();}
   assert.equal((await slow).status,'CANONICAL_PREPARED');
+});
+
+test('concurrent callers exhaust a small READY tail and immediately claim the next batch',async()=>{
+  const h=harness();await setup(h,0);await assets(h,205);await h.r.canonicalSeed(h.env);
+  h.db.exec("UPDATE mls_canonical_queue SET state='READY',batch_id='previous' WHERE code IN (SELECT code FROM mls_canonical_queue ORDER BY code LIMIT 3)");
+  const results=await Promise.all(Array.from({length:20},()=>h.r.canonicalStep(h.env)));
+  assert(results.every(x=>x.status==='CANONICAL_PREPARED'),'no false NO_WORK at the batch boundary');
+  assert.equal(new Set(results.map(x=>x.code)).size,20);
+  const batches=results.filter(x=>x.batchId!=='previous').map(x=>x.batchId);
+  assert.equal(new Set(batches).size,1);
+  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM mls_canonical_queue WHERE batch_id=?').get(batches[0]).n,100);
 });
 
 test('individual canonical failures continue, quota pauses, prepared results bind exact input',async()=>{
