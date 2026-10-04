@@ -17,7 +17,7 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/\/api\/unified-runner\/r33-evidence/);
   assert.match(source,/\/api\/unified-runner\/report/);
   assert.match(source,/REVIEW_REQUIRED/);
-  assert.match(source,/pauseRunner:true/);
+  assert.match(source,/pauseRunner:false/);
   assert.match(source,/function r44Drained/);
   assert.match(source,/action:'complete'/);
   assert.doesNotMatch(source,/\/contents\/.*method:'PUT'/);

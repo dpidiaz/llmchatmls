@@ -618,7 +618,7 @@ async function unifiedRunnerStatus(request, env, ctx) {
   try { budget = await wikiStore(env).getCloudflareBudget(); } catch (_) {}
   const laneRows=await env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner_lane ORDER BY stage").all();
   const lanes=Object.fromEntries((laneRows.results||[]).map(row=>[row.stage,{...row,detail:(()=>{try{return row.detail_json?JSON.parse(row.detail_json):null}catch{return null}})()}]));
-  return r44Json({ok:true,runner,r44,budget,lanes,freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
+  return r44Json({ok:true,runner,r44,budget,lanes,canonical:await canonicalStatus(env),freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
 }
 function unifiedRunnerSeed(article) {
   return {
@@ -727,13 +727,15 @@ async function unifiedRunnerStep(env, stepKey, runnerId = 1) {
     const claim = await r44DurableClaim(env,locked.worker_id,"unified:"+key);
     if (!["CLAIMED","LEASE_REUSED"].includes(claim.status) || !claim.ticket || !claim.ticket.lease_token) {
       await unifiedRunnerApplyMark(env,{last_step_at:new Date().toISOString(),last_error:null});
+      if (claim.status === "NO_WORK") return await canonicalStep(env);
       return {status:claim.status || "NO_WORK",claim};
     }
     const token = claim.ticket.lease_token;
-    context = await r44DurableContext(env,token,1);
+    context = await r44DurableContext(env,token,1,true);
     if (!context) throw new Error("UNIFIED_R44_CONTEXT_MISSING");
     const entries = Array.isArray(context.entries) ? context.entries : [];
     const content = Array.isArray(context.content) ? context.content : [];
+    if (!entries.length) return await canonicalStep(env);
     if (content.length !== entries.length) throw new Error("UNIFIED_R44_CONTEXT_ALIGNMENT");
     for (let i=0;i<Math.min(entries.length,1);i++) {
       const source = entries[i];
@@ -777,6 +779,8 @@ async function unifiedRunnerStep(env, stepKey, runnerId = 1) {
       await unifiedRunnerApplyMark(env,{state:pauseState,last_error:message,last_step_at:new Date().toISOString(),errorDelta:1});
       return {status:pauseState,ticketId:context && context.ticketId || null,error:message,receipts};
     }
+    const failed=context && context.entries && context.entries[0];
+    if (failed) await r44EntryState(env,{ticketId:context.ticketId,workerId:context.workerId,leaseToken:context.leaseToken,leaseGeneration:context.leaseGeneration,code:failed.code,state:"FAILED_RETRYABLE"});
     await unifiedRunnerApplyMark(env,{last_error:"R44 lane: "+message,last_step_at:new Date().toISOString(),errorDelta:1});
     return {status:"R44_DEGRADED",ticketId:context && context.ticketId || null,error:message,receipts};
   } finally {
@@ -811,6 +815,8 @@ async function unifiedRunnerScheduled(env) {
     }
     if (runner.state !== "RUNNING") return {status:"SKIPPED",state:runner.state};
     if (!env.MLS_UNIFIED_RUNNERS) throw new Error("UNIFIED_RUNNER_BINDING_MISSING");
+    // A read-only grouped refresh retires entries only after canonical integration.
+    if (env.ASSETS) await canonicalRefreshVerified(env).catch(error=>unifiedRunnerApplyMark(env,{last_error:'Canonical status: '+wikiErrorMessage(error)}));
     // Only arm alarms here. Each logical runner executes in its own invocation,
     // keeping D1/AI request budgets independent of the selected concurrency.
     const results = [];
@@ -961,8 +967,8 @@ class UnifiedLogicalRunner {
     if (!key) { key="alarm:"+crypto.randomUUID(); await this.storage.put("stepKey",key); }
     const result=await unifiedRunnerStep(this.env,key,id);
     await this.storage.delete("stepKey");
-    if (["ENTRY_DURABLE","TICKET_COMPLETE","RUNNER_BUSY","NO_WORK","CAPACITY_BUSY","CLAIM_ALREADY_RESOLVED"].includes(result.status)) {
-      await this.storage.setAlarm(Date.now()+(["ENTRY_DURABLE","TICKET_COMPLETE"].includes(result.status)?1000:300000));
+    if (["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED","RUNNER_BUSY","NO_WORK","CAPACITY_BUSY","CLAIM_ALREADY_RESOLVED"].includes(result.status)) {
+      await this.storage.setAlarm(Date.now()+(["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED"].includes(result.status)?1000:300000));
     }
   }
 }

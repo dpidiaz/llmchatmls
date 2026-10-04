@@ -148,6 +148,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
 <div class="stat"><span>R44 COMPLETE</span><strong id="unifiedComplete">—</strong></div>
 </div>
 <div class="stats">
+<div class="stat"><span>Canonical Claimable</span><strong id="unifiedCanonicalClaimable">—</strong></div>
+<div class="stat"><span>Evidencia preparada (pendiente de integración)</span><strong id="unifiedCanonicalPrepared">—</strong></div>
 <div class="stat"><span>R44 Claimable</span><strong id="unifiedClaimable">—</strong></div>
 <div class="stat"><span>R44 Parcial</span><strong id="unifiedPartial">—</strong></div>
 <div class="stat"><span>Runners ejecutando ahora</span><strong id="unifiedActiveRunners">—</strong></div>
@@ -162,7 +164,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 </div>
 
 <div class="log" id="unifiedLog">Unified listo.</div>
-<p class="note">La métrica principal es VERIFIED canónico. Un error aislado de R44 se registra como degradación de esa etapa y no debe bloquear R33 ni integración de trabajo R44 ya durable. No necesitás copiar claves: esta página usa tu sesión segura de Cloudflare Access. Si una entrada no puede justificarse con una fuente R33 registrada, el runner marca REVIEW_REQUIRED y se pausa antes de fabricar Evidence. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
+<p class="note">La métrica principal es VERIFIED canónico. Un error aislado de R44 se registra como degradación de esa etapa y no debe bloquear R33 ni integración de trabajo R44 ya durable. No necesitás copiar claves: esta página usa tu sesión segura de Cloudflare Access. La preparación canónica usa lotes de 100 y continúa con las demás entradas cuando una requiere revisión; solo cuota o política FREE-only detienen el procesamiento. La evidencia preparada aún debe pasar por R33 e integración. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
 </section>
 </main>
 
@@ -515,6 +517,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
     q('unifiedCorrected').textContent=n(r.corrected_entries);
     q('unifiedErrors').textContent=n(r.error_count);
     q('unifiedComplete').textContent=durableCount(r44.durableCounts,'COMPLETE');
+    q('unifiedCanonicalClaimable').textContent=data.canonical?.initialized?data.canonical.claimable:'Inicializando';
+    q('unifiedCanonicalPrepared').textContent=data.canonical?.prepared??0;
     q('unifiedClaimable').textContent=durableCount(r44.durableCounts,'CLAIMABLE');
     q('unifiedPartial').textContent=durableCount(r44.durableCounts,'PARTIAL_DURABLE');
     q('unifiedMaxLeases').textContent=r44.maxActiveLeases??'—';
