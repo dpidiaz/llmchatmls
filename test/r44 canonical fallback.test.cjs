@@ -59,6 +59,33 @@ test('NO_WORK falls back to 100-entry canonical batch, fenced leases do not dupl
   assert.equal((await h.r.canonicalStatus(h.env)).prepared,2);
   assert.equal((await h.r.unifiedRunnerRead(h.env)).state,'RUNNING');
 });
+test('idle runners claim the next full batch while one earlier entry is still processing',async()=>{
+  const h=harness();await setup(h,0);await assets(h,205);
+  let release,entered=false;
+  const gate=new Promise(resolve=>release=resolve),codes=[];
+  h.r.unifiedR33BuildDraft=async(_env,input)=>{
+    codes.push(input.code);
+    if(input.code==='MLS-V01-0001'){entered=true;await gate;}
+    return Response.json({status:'MATCH',evidence:{code:input.code}});
+  };
+  const slow=h.r.canonicalStep(h.env);
+  try{
+    while(!entered)await new Promise(r=>setImmediate(r));
+    const original=h.db.prepare("SELECT lease_token,batch_id FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get();
+    for(let i=0;i<99;i++)assert.equal((await h.r.canonicalStep(h.env)).status,'CANONICAL_PREPARED');
+    assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='READY'").get().n,0);
+    const next=await Promise.all(Array.from({length:20},()=>h.r.canonicalStep(h.env)));
+    assert(next.every(x=>x.status==='CANONICAL_PREPARED'));
+    assert.equal(new Set(next.map(x=>x.batchId)).size,1,'concurrent refill must reserve one batch');
+    assert.notEqual(next[0].batchId,original.batch_id);
+    assert.equal(new Set(codes).size,120,'no duplicate entry processing');
+    assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE batch_id=?").get(next[0].batchId).n,100);
+    assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='PENDING'").get().n,5);
+    assert.deepEqual(h.db.prepare("SELECT lease_token,batch_id FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get(),original);
+  }finally{release();}
+  assert.equal((await slow).status,'CANONICAL_PREPARED');
+});
+
 test('individual canonical failures continue, quota pauses, prepared results bind exact input',async()=>{
   const h=harness();await setup(h,0);const packets=await assets(h,4);
   h.r.unifiedR33BuildDraft=async()=>{throw Error('temporary source error')};

@@ -67,10 +67,12 @@ async function canonicalStep(env){
   const now=Date.now(),batch=crypto.randomUUID(),token=crypto.randomUUID();
   // A batch contains 100 available entries, consumed across independent alarms to
   // respect the FREE invocation budget. Reservations are not 100 active AI leases.
+  // Refill when READY is empty. Slow LEASED entries keep their original fences
+  // and batch IDs, but must not hold up idle runners taking the next batch.
   await env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='READY',batch_id=?1 WHERE code IN (
     SELECT code FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1)
     AND (state='PENDING' OR (state='RETRY' AND retry_ms<=?2))
-    AND NOT EXISTS(SELECT 1 FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1) AND state IN ('READY','LEASED'))
+    AND NOT EXISTS(SELECT 1 FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1) AND state='READY')
     ORDER BY code LIMIT 100)`).bind(batch,now).run();
   const row=await env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='LEASED',lease_token=?1,expires_ms=?2,attempts=attempts+1 WHERE code=(
     SELECT code FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1)
