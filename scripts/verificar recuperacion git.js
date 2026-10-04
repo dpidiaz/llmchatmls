@@ -18,6 +18,12 @@ function json(file){return JSON.parse(read(file))}
 function exists(file){return fs.existsSync(path.join(ROOT,file))}
 function assertIncludes(value,needle,label){if(!String(value).includes(needle))fail(label+' no contiene '+needle)}
 function assertExcludes(value,needle,label){if(String(value).includes(needle))fail(label+' contiene valor prohibido '+needle)}
+function semanticRecoveryState(semantic,{policy=process.env.MLS_DERIVED_STALE_POLICY}={}){
+  if(semantic?.complete===true)return {degraded:false,reason:null};
+  const reason=String(semantic?.reason||'unknown');
+  if(policy==='degrade'&&reason==='corpus_mismatch')return {degraded:true,reason};
+  fail('Índice semántico fuente incompleto: '+reason);
+}
 
 function listBundle(){
   const archive=path.join(ROOT,'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz');
@@ -32,11 +38,13 @@ function verifySources(){
   if(canonical.totalEntries!==EXPECTED_ENTRIES)fail('Corpus canónico incompleto.');
 
   const semantic=validateSemanticSource();
-  if(!semantic.complete)fail('Índice semántico fuente incompleto: '+semantic.reason);
-  if(semantic.totalEntries!==EXPECTED_ENTRIES)fail('Índice semántico no cubre 10,133 entradas.');
-  if(semantic.totalChunks!==EXPECTED_CHUNKS)fail('Conteo de chunks semánticos inesperado.');
-  if(semantic.manifest.model!==EXPECTED_SEMANTIC_MODEL)fail('Modelo semántico inesperado.');
-  if(Object.keys(semantic.manifest.languages||{}).length!==EXPECTED_LANGUAGES)fail('Índice semántico no contiene diez idiomas.');
+  const semanticState=semanticRecoveryState(semantic);
+  if(!semanticState.degraded){
+    if(semantic.totalEntries!==EXPECTED_ENTRIES)fail('Índice semántico no cubre 10,133 entradas.');
+    if(semantic.totalChunks!==EXPECTED_CHUNKS)fail('Conteo de chunks semánticos inesperado.');
+    if(semantic.manifest.model!==EXPECTED_SEMANTIC_MODEL)fail('Modelo semántico inesperado.');
+    if(Object.keys(semantic.manifest.languages||{}).length!==EXPECTED_LANGUAGES)fail('Índice semántico no contiene diez idiomas.');
+  }
 
   const pkg=json('package.json');
   const predeploy=String(pkg.scripts?.predeploy||'');
@@ -90,10 +98,12 @@ function verifySources(){
   return {
     canonicalEntries:canonical.totalEntries,
     canonicalLanguages:Object.keys(canonical.byLanguage||{}).length,
-    semanticEntries:semantic.totalEntries,
-    semanticChunks:semantic.totalChunks,
-    semanticLanguages:Object.keys(semantic.manifest.languages||{}).length,
-    semanticModel:semantic.manifest.model,
+    semanticDegraded:semanticState.degraded,
+    semanticReason:semanticState.reason,
+    semanticEntries:semanticState.degraded?null:semantic.totalEntries,
+    semanticChunks:semanticState.degraded?null:semantic.totalChunks,
+    semanticLanguages:semanticState.degraded?null:Object.keys(semantic.manifest.languages||{}).length,
+    semanticModel:semanticState.degraded?null:semantic.manifest.model,
     bundleEntries:bundle.length
   };
 }
@@ -154,6 +164,7 @@ function verifyRecovery(){
     sourceOfTruth:'GitHub content/',
     publishedReadsRequireD1:false,
     semanticRuntimeRequiresVectorDatabase:false,
+    derivedSemanticDegraded:sources.semanticDegraded,
     aiFailureHasLexicalFallback:true,
     virtuosoFailureHasCanonicalFallback:true,
     sources,
@@ -163,7 +174,7 @@ function verifyRecovery(){
   return result;
 }
 
-module.exports={verifySources,verifyBuildArtifacts,verifyRecovery};
+module.exports={semanticRecoveryState,verifySources,verifyBuildArtifacts,verifyRecovery};
 
 if(require.main===module){
   try{verifyRecovery()}
