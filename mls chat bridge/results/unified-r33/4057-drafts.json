@@ -1,0 +1,114 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "unified-r33-4057-drafts",
+    "requested": 5,
+    "processed": 5,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V07-0166",
+          "reason": "SOURCE_URL_UNAVAILABLE",
+          "confidence": null,
+          "sourceId": "MLS-SRC-11A45143C504132F2F5B",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-04T02:47:50.210Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V07-0167",
+          "reason": "SOURCE_FULLTEXT_REQUIRED",
+          "confidence": null,
+          "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-04T02:47:58.258Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V07-0169",
+          "reason": "SOURCE_URL_UNAVAILABLE",
+          "confidence": null,
+          "sourceId": "MLS-SRC-11A45143C504132F2F5B",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-04T02:48:11.910Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V07-0170",
+          "reason": "SOURCE_URL_UNAVAILABLE",
+          "confidence": null,
+          "sourceId": "MLS-SRC-11A45143C504132F2F5B",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-04T02:48:21.408Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V07-0171",
+          "reason": "SOURCE_FULLTEXT_REQUIRED",
+          "confidence": null,
+          "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-04T02:48:34.511Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-04T02:48:34.511Z",
+  "commandFile": "mls chat bridge/commands/unified-r33/4057-drafts.json"
+}
