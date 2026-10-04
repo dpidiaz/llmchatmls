@@ -67,17 +67,23 @@ async function canonicalStep(env){
   const now=Date.now(),batch=crypto.randomUUID(),token=crypto.randomUUID();
   // A batch contains 100 available entries, consumed across independent alarms to
   // respect the FREE invocation budget. Reservations are not 100 active AI leases.
-  await env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='READY',batch_id=?1 WHERE code IN (
+  // Refill when READY is empty. Slow LEASED entries keep their original fences
+  // and batch IDs, but must not hold up idle runners taking the next batch.
+  const refill=env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='READY',batch_id=?1 WHERE code IN (
     SELECT code FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1)
     AND (state='PENDING' OR (state='RETRY' AND retry_ms<=?2))
-    AND NOT EXISTS(SELECT 1 FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1) AND state IN ('READY','LEASED'))
-    ORDER BY code LIMIT 100)`).bind(batch,now).run();
-  const row=await env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='LEASED',lease_token=?1,expires_ms=?2,attempts=attempts+1 WHERE code=(
+    AND NOT EXISTS(SELECT 1 FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1) AND state='READY')
+    ORDER BY code LIMIT 100)`).bind(batch,now);
+  const claim=env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='LEASED',lease_token=?1,expires_ms=?2,attempts=attempts+1 WHERE code=(
     SELECT code FROM mls_canonical_queue WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1)
     AND (state='READY' OR (state='LEASED' AND expires_ms<=?3))
     AND (SELECT COUNT(*) FROM mls_canonical_queue WHERE state='LEASED' AND expires_ms>?3)
       +(SELECT COUNT(*) FROM r44_leases l JOIN r44_ticket_progress p USING(ticket_id) WHERE l.expires_ms>?3 AND p.state IN ('LEASED','PARTIAL_DURABLE'))<128
-    ORDER BY code LIMIT 1) RETURNING *`).bind(token,now+14*60*1000,now).first();
+    ORDER BY code LIMIT 1) RETURNING *`).bind(token,now+14*60*1000,now);
+  // Keep refill and claim in one transaction: concurrent callers must not all
+  // observe the last READY entry, miss it, and sleep despite a pending backlog.
+  const results=await env.WIKI_DB.batch([refill,claim]);
+  const row=results[1].results?.[0];
   if(!row)return {status:'NO_WORK',source:'CANONICAL'};
   const commit=async(state,result,error,retry)=>{
     const saved=await env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state=?,result_json=?,last_error=?,retry_ms=?,lease_token=NULL,expires_ms=0
