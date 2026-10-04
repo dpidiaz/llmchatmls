@@ -508,19 +508,30 @@ async function r44McpHandle(request, env) {
 }
 
 
-var MLS_UNIFIED_RUNNER_SCHEMA = "1";
+var MLS_UNIFIED_RUNNER_SCHEMA = "2";
+var unifiedRunnerReady = new WeakSet();
+function unifiedRunnerCount(n) { return Number.isInteger(n) && n >= 5 && n <= 50 && n % 5 === 0; }
 var MLS_UNIFIED_RUNNER_WORKER = "mls-unified-web-runner-v1";
 
 async function unifiedRunnerEnsure(env) {
+  if (unifiedRunnerReady.has(env.WIKI_DB)) return;
   await env.WIKI_DB.batch([
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, worker_id TEXT NOT NULL, started_at TEXT, updated_at TEXT NOT NULL, processed_entries INTEGER NOT NULL DEFAULT 0, corrected_entries INTEGER NOT NULL DEFAULT 0, error_count INTEGER NOT NULL DEFAULT 0, last_ticket TEXT, last_code TEXT, last_error TEXT, last_step_at TEXT, step_token TEXT, busy_until INTEGER, schema_version TEXT NOT NULL)"),
     env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner(id,state,worker_id,updated_at,schema_version) VALUES(1,'STOPPED',?,?,?)").bind(MLS_UNIFIED_RUNNER_WORKER,new Date().toISOString(),MLS_UNIFIED_RUNNER_SCHEMA),
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_lane (stage TEXT PRIMARY KEY CHECK(stage IN ('r33','integration')), state TEXT NOT NULL, issue_number INTEGER, assignment_id TEXT, last_code TEXT, last_error TEXT, detail_json TEXT, updated_at TEXT NOT NULL)")
   ]);
+  await env.WIKI_DB.batch([
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_config (id INTEGER PRIMARY KEY CHECK(id=1), desired INTEGER NOT NULL CHECK(desired BETWEEN 5 AND 50 AND desired%5=0))"),
+    env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner_config VALUES(1,5)"),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_slots (id INTEGER PRIMARY KEY CHECK(id BETWEEN 1 AND 50), worker_id TEXT NOT NULL UNIQUE, step_token TEXT, busy_until INTEGER, updated_at TEXT, last_step_key TEXT)")
+  ]);
+  // One statement seeds all slots; slot 1 preserves the old worker identity.
+  await env.WIKI_DB.prepare("WITH RECURSIVE slots(n) AS (SELECT 1 UNION ALL SELECT n+1 FROM slots WHERE n<50) INSERT OR IGNORE INTO mls_unified_runner_slots(id,worker_id) SELECT n,CASE WHEN n=1 THEN ? ELSE 'mls-unified-runner-'||printf('%03d',n) END FROM slots").bind(MLS_UNIFIED_RUNNER_WORKER).run();
+  unifiedRunnerReady.add(env.WIKI_DB);
 }
 async function unifiedRunnerRead(env) {
   await unifiedRunnerEnsure(env);
-  return env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner WHERE id=1").first();
+  return env.WIKI_DB.prepare("SELECT r.*,c.desired AS configured_runners,(SELECT COUNT(*) FROM mls_unified_runner_slots WHERE step_token IS NOT NULL AND busy_until>?) AS active_runners FROM mls_unified_runner r JOIN mls_unified_runner_config c ON c.id=r.id WHERE r.id=1").bind(Date.now()).first();
 }
 var MLS_UNIFIED_ACCESS_TEAM_ORIGIN = "https://flat-wave-7385.cloudflareaccess.com";
 var MLS_UNIFIED_ACCESS_AUD = "2e8cca974ae20d4a4812a6259207e203154b294c1587b32babe93031e1177dd6";
@@ -588,8 +599,11 @@ async function unifiedRunnerControl(request, env, ctx) {
   const action = String(body.action || "").toLowerCase();
   const map = {start:"RUNNING",resume:"RUNNING",pause:"PAUSED",stop:"STOPPED",complete:"COMPLETE"};
   const next = map[action];
-  if (!next) return r44Json({error:"UNIFIED_RUNNER_ACTION_INVALID"},400);
+  if (!next && action !== "configure") return r44Json({error:"UNIFIED_RUNNER_ACTION_INVALID"},400);
+  if ((action === "configure" || body.runners !== undefined) && !unifiedRunnerCount(body.runners)) return r44Json({error:"UNIFIED_RUNNER_COUNT_INVALID"},400);
   await unifiedRunnerEnsure(env);
+  if (body.runners !== undefined) await env.WIKI_DB.prepare("UPDATE mls_unified_runner_config SET desired=? WHERE id=1").bind(body.runners).run();
+  if (action === "configure") return r44Json({ok:true,action,runner:await unifiedRunnerRead(env)});
   const now = new Date().toISOString();
   await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state=?, started_at=CASE WHEN ?='RUNNING' AND started_at IS NULL THEN ? ELSE started_at END, updated_at=?, last_error=CASE WHEN ? IN ('RUNNING','COMPLETE') THEN NULL ELSE last_error END WHERE id=1")
     .bind(next,next,now,now,next).run();
@@ -696,34 +710,36 @@ async function unifiedRunnerApplyMark(env, patch) {
   const stmt = env.WIKI_DB.prepare("UPDATE mls_unified_runner SET "+fields.join(", ")+" WHERE id=?");
   await stmt.bind.apply(stmt,values).run();
 }
-async function unifiedRunnerStep(env, stepKey) {
+async function unifiedRunnerStep(env, stepKey, runnerId = 1) {
   const runner = await unifiedRunnerRead(env);
   if (runner.state !== "RUNNING") return {status:"RUNNER_NOT_RUNNING",state:runner.state};
+  if (!Number.isInteger(runnerId) || runnerId < 1 || runnerId > runner.configured_runners) return {status:"RUNNER_DISABLED"};
   const key = String(stepKey || "");
   if (!/^[A-Za-z0-9._:-]{8,120}$/.test(key)) return {status:"INVALID_STEP_KEY"};
   const now = Date.now(), stepToken = crypto.randomUUID();
-  const locked = await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET step_token=?,busy_until=?,updated_at=? WHERE id=1 AND state='RUNNING' AND (busy_until IS NULL OR busy_until<=?) RETURNING worker_id")
-    .bind(stepToken,now+14*60*1000,new Date(now).toISOString(),now).first();
+  const locked = await env.WIKI_DB.prepare("UPDATE mls_unified_runner_slots SET step_token=?1,busy_until=?2,updated_at=?3,last_step_key=?6 WHERE id=?5 AND (busy_until IS NULL OR busy_until<=?4) AND (last_step_key IS NULL OR last_step_key<>?6) AND id<=(SELECT desired FROM mls_unified_runner_config WHERE id=1) AND EXISTS(SELECT 1 FROM mls_unified_runner WHERE id=1 AND state='RUNNING' AND (busy_until IS NULL OR busy_until<=?4)) RETURNING worker_id")
+    .bind(stepToken,now+14*60*1000,new Date(now).toISOString(),now,runnerId,key).first();
   if (!locked) return {status:"RUNNER_BUSY"};
-  const release = async()=>env.WIKI_DB.prepare("UPDATE mls_unified_runner SET step_token=NULL,busy_until=NULL,updated_at=? WHERE id=1 AND step_token=?").bind(new Date().toISOString(),stepToken).run();
+  const release = async()=>env.WIKI_DB.prepare("UPDATE mls_unified_runner_slots SET step_token=NULL,busy_until=NULL,updated_at=? WHERE id=? AND step_token=?").bind(new Date().toISOString(),runnerId,stepToken).run();
   let context = null;
   const receipts = [];
   try {
     const claim = await r44DurableClaim(env,locked.worker_id,"unified:"+key);
-    if (!claim.ticket || !claim.ticket.lease_token) {
+    if (!["CLAIMED","LEASE_REUSED"].includes(claim.status) || !claim.ticket || !claim.ticket.lease_token) {
       await unifiedRunnerApplyMark(env,{last_step_at:new Date().toISOString(),last_error:null});
       return {status:claim.status || "NO_WORK",claim};
     }
     const token = claim.ticket.lease_token;
-    context = await r44Context(env,token);
+    context = await r44DurableContext(env,token,1);
     if (!context) throw new Error("UNIFIED_R44_CONTEXT_MISSING");
     const entries = Array.isArray(context.entries) ? context.entries : [];
     const content = Array.isArray(context.content) ? context.content : [];
     if (content.length !== entries.length) throw new Error("UNIFIED_R44_CONTEXT_ALIGNMENT");
-    for (let i=0;i<entries.length;i++) {
+    for (let i=0;i<Math.min(entries.length,1);i++) {
       const source = entries[i];
       const article = content[i];
-      await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET busy_until=? WHERE id=1 AND step_token=?").bind(Date.now()+14*60*1000,stepToken).run();
+      const owned = await env.WIKI_DB.prepare("SELECT s.id FROM mls_unified_runner_slots s JOIN mls_unified_runner r ON r.id=1 JOIN mls_unified_runner_config c ON c.id=1 WHERE s.id=? AND s.step_token=? AND s.busy_until>? AND r.state='RUNNING' AND s.id<=c.desired").bind(runnerId,stepToken,Date.now()).first();
+      if (!owned) return {status:"RUNNER_DISABLED"};
       const renewed = await r44Renew(env,token,context.leaseGeneration);
       if (!renewed) throw new Error("UNIFIED_R44_LEASE_RENEW_FAILED");
       const result = await unifiedRunnerAuditEntry(env,article);
@@ -747,7 +763,7 @@ async function unifiedRunnerStep(env, stepKey) {
       });
     }
     const finalState = await r44Reconcile(env,context.ticketId);
-    return {status:"TICKET_COMPLETE",ticketId:context.ticketId,entries:entries.length,receipts,state:finalState && finalState.state};
+    return {status:finalState && finalState.state === "COMPLETE" ? "TICKET_COMPLETE" : "ENTRY_DURABLE",ticketId:context.ticketId,entries:receipts.length,receipts,state:finalState && finalState.state};
   } catch (error) {
     const message = wikiErrorMessage(error);
     const quota = (typeof WorkersQuotaExceededError !== "undefined" && error instanceof WorkersQuotaExceededError) || workersAiFailureKind(message) === "quota";
@@ -763,7 +779,7 @@ async function unifiedRunnerStepRequest(request, env, ctx) {
   const auth = await unifiedRunnerAuthorize(request, env, ctx);
   if (!auth.ok) return r44Json({error:auth.error},auth.status);
   const body = await r44ChatBridgeBody(request);
-  const result = await unifiedRunnerStep(env,String(body.stepKey || ""));
+  const result = await unifiedRunnerStep(env,String(body.stepKey || ""),body.runnerId === undefined ? 1 : body.runnerId);
   const status = result.status === "ERROR" ? 500 : result.status === "QUOTA_PAUSED" ? 429 : 200;
   return r44Json(result,status);
 }
@@ -779,8 +795,20 @@ async function unifiedRunnerScheduled(env) {
       }
     }
     if (runner.state !== "RUNNING") return {status:"SKIPPED",state:runner.state};
-    const bucket = Math.floor(Date.now()/300000);
-    return await unifiedRunnerStep(env,"cron:"+bucket);
+    if (!env.MLS_UNIFIED_RUNNERS) throw new Error("UNIFIED_RUNNER_BINDING_MISSING");
+    // Only arm alarms here. Each logical runner executes in its own invocation,
+    // keeping D1/AI request budgets independent of the selected concurrency.
+    const results = [];
+    for (let first=1;first<=runner.configured_runners;first+=5) {
+      results.push(...await Promise.all(Array.from({length:Math.min(5,runner.configured_runners-first+1)},async(_,offset)=>{
+        const id=first+offset;
+        const stub=env.MLS_UNIFIED_RUNNERS.get(env.MLS_UNIFIED_RUNNERS.idFromName("runner-"+id));
+        const response=await stub.fetch("https://runner.internal/wake",{method:"POST",body:JSON.stringify({runnerId:id})});
+        if (!response.ok) throw new Error("UNIFIED_RUNNER_WAKE_FAILED");
+        return id;
+      })));
+    }
+    return {status:"SCHEDULED",runners:results.length};
   } catch (error) {
     await unifiedRunnerApplyMark(env,{state:"ERROR",last_error:wikiErrorMessage(error),last_step_at:new Date().toISOString(),errorDelta:1}).catch(function(){});
     throw error;
@@ -895,6 +923,32 @@ async function handleR44(request, env, url, ctx) {
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     return r44Json({ error: "R44_CONTROL_PLANE_ERROR", message }, message === "R44_POOL_MIGRATION_IN_PROGRESS" ? 503 : 500);
+  }
+}
+// Alarms provide scheduling only. D1 remains the sole configuration, lock,
+// claim, fencing and receipt authority. No external or paid fallback.
+class UnifiedLogicalRunner {
+  constructor(state, env) { this.storage=state.storage; this.env=env; }
+  async fetch(request) {
+    const body=await request.json();
+    if (!Number.isInteger(body.runnerId) || body.runnerId<1 || body.runnerId>50) return new Response("Invalid runner",{status:400});
+    const prior=await this.storage.get("runnerId");
+    if (prior && prior!==body.runnerId) return new Response("Identity conflict",{status:409});
+    if (!prior) await this.storage.put("runnerId",body.runnerId);
+    if (await this.storage.getAlarm() === null) await this.storage.setAlarm(Date.now()+1000);
+    return new Response("Scheduled");
+  }
+  async alarm() {
+    const id=await this.storage.get("runnerId");
+    if (!id) return;
+    // A retry reuses the same key; it cannot start fresh work after completion.
+    let key=await this.storage.get("stepKey");
+    if (!key) { key="alarm:"+crypto.randomUUID(); await this.storage.put("stepKey",key); }
+    const result=await unifiedRunnerStep(this.env,key,id);
+    await this.storage.delete("stepKey");
+    if (["ENTRY_DURABLE","TICKET_COMPLETE","RUNNER_BUSY","NO_WORK","CAPACITY_BUSY","CLAIM_ALREADY_RESOLVED"].includes(result.status)) {
+      await this.storage.setAlarm(Date.now()+(["ENTRY_DURABLE","TICKET_COMPLETE"].includes(result.status)?1000:300000));
+    }
   }
 }
 // MLS R44 CLOUDFLARE CONTROL PLANE END

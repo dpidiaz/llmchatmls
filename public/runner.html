@@ -114,6 +114,10 @@ button:disabled{opacity:.48;cursor:not-allowed}
 <input id="unifiedAccess" value="Sesión segura de Cloudflare" readonly>
 </div>
 <div>
+<label for="unifiedRunners">Runners configurados</label>
+<select id="unifiedRunners"><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option></select>
+<button id="unifiedApplyRunners" class="secondary">Aplicar concurrencia</button>
+</div><div>
 <label for="unifiedState">Estado global</label>
 <input id="unifiedState" value="—" readonly>
 </div>
@@ -131,7 +135,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 </div>
 <div class="actions" style="grid-template-columns:1fr 1fr">
 <button class="secondary" id="unifiedRefresh">Actualizar</button>
-<button class="secondary" id="unifiedStep">Procesar un ticket R44 ahora</button>
+<button class="secondary" id="unifiedStep">Procesar una entrada R44 ahora</button>
 </div>
 
 <div class="statusline"><span class="dot" id="unifiedDot"></span><span id="unifiedStatusText">Sin consultar</span></div>
@@ -146,6 +150,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
 <div class="stats">
 <div class="stat"><span>R44 Claimable</span><strong id="unifiedClaimable">—</strong></div>
 <div class="stat"><span>R44 Parcial</span><strong id="unifiedPartial">—</strong></div>
+<div class="stat"><span>Runners ejecutando ahora</span><strong id="unifiedActiveRunners">—</strong></div>
 <div class="stat"><span>Leases R44 máx.</span><strong id="unifiedMaxLeases">—</strong></div>
 <div class="stat"><span>FREE only</span><strong id="unifiedFree">Sí</strong></div>
 </div>
@@ -503,6 +508,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
   function render(data,canonical={}){
     const r=data.runner||{}, r44=data.r44||{}, lanes=data.lanes||{};
     q('unifiedState').value=r.state||'—';
+    q('unifiedActiveRunners').textContent=r.active_runners??'—';
+    if (!runnersDirty) q('unifiedRunners').value=String(r.configured_runners||5);
     q('unifiedLast').value=[r.last_ticket,r.last_code].filter(Boolean).join(' · ')||'—';
     q('unifiedProcessed').textContent=n(r.processed_entries);
     q('unifiedCorrected').textContent=n(r.corrected_entries);
@@ -535,6 +542,9 @@ button:disabled{opacity:.48;cursor:not-allowed}
     render(data,canonical);
     return {data,canonical};
   }
+  let runnersDirty=false;
+  q('unifiedRunners').onchange=()=>{runnersDirty=true};
+  q('unifiedApplyRunners').onclick=async()=>{try{await unifiedApi('control',{action:'configure',runners:Number(q('unifiedRunners').value)});runnersDirty=false;await refresh();write('Concurrencia guardada. Se aplica como máximo en el próximo ciclo de 5 minutos; las entradas en curso terminan antes de retirarse.')}catch(e){write('ERROR — '+e.message)}};
   async function control(action){write(action+' solicitado.');const data=await unifiedApi('control',{action});write('Estado: '+data.state);await refresh()}
   q('unifiedStart').onclick=()=>control('start').catch(e=>write('ERROR — '+e.message));
   q('unifiedPause').onclick=()=>control('pause').catch(e=>write('ERROR — '+e.message));
@@ -543,7 +553,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
   q('unifiedRefresh').onclick=()=>refresh().then(()=>write('Estado actualizado.')).catch(e=>write('ERROR — '+e.message));
   q('unifiedStep').onclick=async()=>{
     try{
-      write('Ticket manual iniciado.');
+      write('Entrada manual iniciada.');
       const result=await unifiedApi('step',{stepKey:'web:'+crypto.randomUUID()});
       write(JSON.stringify(result));
       await refresh();
