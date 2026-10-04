@@ -1,0 +1,223 @@
+{
+  "schema": "MLS-R44-R33-HANDOFF-1",
+  "version": 1,
+  "ticketId": "R44-CORPUS-0861",
+  "ordinalStart": 4301,
+  "ordinalEnd": 4305,
+  "resultSha256": "622b9923b006816be12f31168353d7237c994494c48df128d6f5459648df8039",
+  "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+  "source": "cloudflare-chat",
+  "createdAt": "2026-10-02T03:29:26.945Z",
+  "entries": [
+    {
+      "code": "MLS-V01-0387",
+      "outcome": "PASS_NO_CHANGE",
+      "source": {
+        "path": "content/ingles/MLS-V01-0387.json",
+        "sha256": "2d0d29b380f9e7c8ffe0005df3df3610900911f44456c20aed6e040e1a9238f8"
+      },
+      "correctedContent": null,
+      "evidence": "La construcción let + objeto + verbo en forma base está bien descrita. Cambridge documenta let me, let us/let’s y los imperativos de tercera persona con let; también confirma que let no lleva to ante el verbo léxico.",
+      "sources": [
+        {
+          "key": "CAMBRIDGE-LET",
+          "apa": "Cambridge University Press. (n.d.). Let, let’s. Cambridge Dictionary.",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/let",
+          "tier": "B"
+        },
+        {
+          "key": "CAMBRIDGE-IMPERATIVE",
+          "apa": "Cambridge University Press. (n.d.). Imperative clauses (Be quiet!). Cambridge Dictionary.",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/imperative",
+          "tier": "B"
+        }
+      ],
+      "claims": [
+        {
+          "statement": "Let selecciona normalmente objeto + verbo base sin to.",
+          "support": [
+            "CAMBRIDGE-LET"
+          ],
+          "supportType": "direct"
+        },
+        {
+          "statement": "Let us/let’s, let me y let + tercera persona pueden funcionar como imperativos.",
+          "support": [
+            "CAMBRIDGE-LET",
+            "CAMBRIDGE-IMPERATIVE"
+          ],
+          "supportType": "direct"
+        }
+      ],
+      "notes": "Auditada: correcta. La distinción entre let us formal, let’s como propuesta conjunta y let him/her/them es pedagógicamente adecuada.",
+      "ordinal": 4301
+    },
+    {
+      "code": "MLS-V01-0388",
+      "outcome": "CORRECTED",
+      "source": {
+        "path": "content/ingles/MLS-V01-0388.json",
+        "sha256": "923910324c09b2990333117c83610438432aa97e860bb1066181ce83ce02ccca"
+      },
+      "correctedContent": {
+        "action": "targeted_correction",
+        "patches": [
+          "En la explicación de sujetos expresos, sustituir el ejemplo que trata “John, you take the front door; Maria, you call the police” como si John/Maria fueran sujetos.",
+          "Aclarar que en ese ejemplo John y Maria son vocativos, mientras que you es el sujeto gramatical del imperativo.",
+          "Mantener como ejemplos genuinos de sujeto expreso You stay here, Everyone take a seat, Somebody call an ambulance y You two wait outside."
+        ]
+      },
+      "evidence": "Cambridge confirma que los imperativos pueden llevar you por énfasis/contraste y también indefinidos como somebody/everybody. El artículo heredado es sustancialmente correcto, pero confunde en un pasaje el vocativo con el sujeto.",
+      "sources": [
+        {
+          "key": "CAMBRIDGE-IMPERATIVE",
+          "apa": "Cambridge University Press. (n.d.). Imperative clauses (Be quiet!). Cambridge Dictionary.",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/imperative",
+          "tier": "B"
+        },
+        {
+          "key": "HUDDLESTON-PULLUM-2005",
+          "apa": "Huddleston, R., & Pullum, G. K. (2005). A student’s introduction to English grammar. Cambridge University Press.",
+          "tier": "B"
+        }
+      ],
+      "claims": [
+        {
+          "statement": "Los imperativos ingleses admiten sujetos expresos como you, somebody y everybody.",
+          "support": [
+            "CAMBRIDGE-IMPERATIVE"
+          ],
+          "supportType": "direct"
+        },
+        {
+          "statement": "En “John, you take...”, John es vocativo y you es el sujeto de la cláusula imperativa.",
+          "support": [
+            "HUDDLESTON-PULLUM-2005"
+          ],
+          "supportType": "reference_scope_match"
+        }
+      ],
+      "notes": "Corrección material menor: separar vocativo de sujeto gramatical. El resto de la entrada y sus ejemplos son válidos.",
+      "ordinal": 4302
+    },
+    {
+      "code": "MLS-V01-0389",
+      "outcome": "PASS_NO_CHANGE",
+      "source": {
+        "path": "content/ingles/MLS-V01-0389.json",
+        "sha256": "1c7fa4dada9bf576f1061a9da0e1c50820ae2c6add9b99f326c486320ae63ce0"
+      },
+      "correctedContent": null,
+      "evidence": "El mandative subjunctive usa la forma base en complementos de exigencia, recomendación o propuesta; la literatura comparativa documenta además una preferencia histórica mayor por el subjuntivo en AmE y por should en BrE.",
+      "sources": [
+        {
+          "key": "CRAWFORD-2009",
+          "apa": "Crawford, W. J. (2009). The mandative subjunctive. In G. Rohdenburg & J. Schlüter (Eds.), One language, two grammars? Differences between British and American English (pp. 257–276). Cambridge University Press.",
+          "url": "https://doi.org/10.1017/CBO9780511551970.015",
+          "tier": "A"
+        },
+        {
+          "key": "CAMBRIDGE-RECOMMEND",
+          "apa": "Cambridge University Press. (n.d.). Word patterns: recommend. Cambridge Dictionary.",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/word-patterns-recommend",
+          "tier": "B"
+        }
+      ],
+      "claims": [
+        {
+          "statement": "En mandativas pueden aparecer formas base como be/apply sin -s de tercera persona.",
+          "support": [
+            "CRAWFORD-2009",
+            "CAMBRIDGE-RECOMMEND"
+          ],
+          "supportType": "direct"
+        },
+        {
+          "statement": "AmE ha favorecido más el mandative subjunctive, mientras BrE ha favorecido relativamente la construcción con should.",
+          "support": [
+            "CRAWFORD-2009"
+          ],
+          "supportType": "direct"
+        }
+      ],
+      "notes": "Auditada: correcta. No requiere correctedContent.",
+      "ordinal": 4303
+    },
+    {
+      "code": "MLS-V01-0391",
+      "outcome": "PASS_NO_CHANGE",
+      "source": {
+        "path": "content/ingles/MLS-V01-0391.json",
+        "sha256": "30e8619c2964ed6549947e5994e66285a767e454c40083c79629d6ef1cab39b3"
+      },
+      "correctedContent": null,
+      "evidence": "El llamado subjuntivo formulaico sobrevive en expresiones lexicalizadas u optativas con verbo en forma base, como God save..., Long live... y So be it; debe distinguirse del mandativo productivo.",
+      "sources": [
+        {
+          "key": "HUDDLESTON-PULLUM-2005",
+          "apa": "Huddleston, R., & Pullum, G. K. (2005). A student’s introduction to English grammar. Cambridge University Press.",
+          "tier": "B"
+        },
+        {
+          "key": "QUIRK-ET-AL-1985",
+          "apa": "Quirk, R., Greenbaum, S., Leech, G., & Svartvik, J. (1985). A comprehensive grammar of the English language. Longman.",
+          "tier": "B"
+        }
+      ],
+      "claims": [
+        {
+          "statement": "Expresiones fijas optativas conservan formas subjuntivas/base sin -s, por ejemplo God save... y Long live....",
+          "support": [
+            "HUDDLESTON-PULLUM-2005",
+            "QUIRK-ET-AL-1985"
+          ],
+          "supportType": "reference_scope_match"
+        }
+      ],
+      "notes": "Auditada: correcta. La entrada delimita adecuadamente el carácter formular y lo diferencia del subjuntivo mandativo.",
+      "ordinal": 4304
+    },
+    {
+      "code": "MLS-V01-0392",
+      "outcome": "PASS_NO_CHANGE",
+      "source": {
+        "path": "content/ingles/MLS-V01-0392.json",
+        "sha256": "5cd83bcbc680b32c47ae99670709c8c0fb26bc7f06097173fb1715fd04bf8cb8"
+      },
+      "correctedContent": null,
+      "evidence": "La construcción mandativa con should está documentada en inglés británico y contrasta distribucionalmente con el mandative subjunctive, más favorecido en inglés estadounidense. Cambridge también documenta suggest that ... should + verbo base.",
+      "sources": [
+        {
+          "key": "CRAWFORD-2009",
+          "apa": "Crawford, W. J. (2009). The mandative subjunctive. In G. Rohdenburg & J. Schlüter (Eds.), One language, two grammars? Differences between British and American English (pp. 257–276). Cambridge University Press.",
+          "url": "https://doi.org/10.1017/CBO9780511551970.015",
+          "tier": "A"
+        },
+        {
+          "key": "CAMBRIDGE-SUGGEST",
+          "apa": "Cambridge University Press. (n.d.). Suggest. Cambridge Dictionary.",
+          "url": "https://dictionary.cambridge.org/grammar/british-grammar/suggest",
+          "tier": "B"
+        }
+      ],
+      "claims": [
+        {
+          "statement": "El inglés británico favorece relativamente should en mandativas frente al subjuntivo en forma base más característico de AmE.",
+          "support": [
+            "CRAWFORD-2009"
+          ],
+          "supportType": "direct"
+        },
+        {
+          "statement": "Tras suggest en una that-clause puede aparecer should + verbo base.",
+          "support": [
+            "CAMBRIDGE-SUGGEST"
+          ],
+          "supportType": "direct"
+        }
+      ],
+      "notes": "Auditada: correcta. La distinción frente al should de consejo está bien planteada; no requiere correctedContent.",
+      "ordinal": 4305
+    }
+  ]
+}
