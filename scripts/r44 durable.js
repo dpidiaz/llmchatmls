@@ -234,17 +234,20 @@ async function r44LegacyQuarantineReconcile(env, limit = 5) {
     const ticketId = row.ticket_id;
     try {
       if (!row.payload || !row.sha256) {
+        await env.WIKI_DB.prepare("UPDATE r44_ticket_progress SET migration_note='LEGACY_RECONCILIATION_BLOCKED_RESULT_MISSING' WHERE ticket_id=? AND state='QUARANTINED'").bind(ticketId).run();
         results.push({ticketId,status:'BLOCKED',reason:'LEGACY_RESULT_MISSING'});
         continue;
       }
       const digest = await r44Sha256Text(row.payload);
       if (digest !== row.sha256) {
+        await env.WIKI_DB.prepare("UPDATE r44_ticket_progress SET migration_note='LEGACY_RECONCILIATION_BLOCKED_HASH_MISMATCH' WHERE ticket_id=? AND state='QUARANTINED'").bind(ticketId).run();
         results.push({ticketId,status:'BLOCKED',reason:'LEGACY_RESULT_HASH_MISMATCH'});
         continue;
       }
       let payload;
       try { payload = JSON.parse(row.payload); }
       catch (_) {
+        await env.WIKI_DB.prepare("UPDATE r44_ticket_progress SET migration_note='LEGACY_RECONCILIATION_BLOCKED_JSON_INVALID' WHERE ticket_id=? AND state='QUARANTINED'").bind(ticketId).run();
         results.push({ticketId,status:'BLOCKED',reason:'LEGACY_RESULT_JSON_INVALID'});
         continue;
       }
