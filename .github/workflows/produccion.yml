@@ -7,7 +7,6 @@ on:
       - main
     paths:
       - 'MLS R32 EDITORIAL/evidence git/indexes/verified.json'
-      - 'MLS R32 EDITORIAL/evidence git/registry/sources/**'
       - 'scripts/generar evidence runtime github.js'
       - 'MLS R32 OVERLAY/reader.js'
       - 'test/evidence github runtime.test.cjs'
@@ -31,9 +30,9 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Certificar Evidence GitHub-native
+      - name: Certificar Evidence publicada
         if: ${{ github.event_name == 'push' }}
-        run: npm run test:r33-github-native
+        run: node --test 'test/evidence github runtime.test.cjs' 'test/evidence native reader.test.cjs'
 
       - run: node --test 'test/r44 cloudflare control plane.test.cjs'
         if: ${{ github.event_name == 'workflow_dispatch' }}
