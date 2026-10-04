@@ -36,6 +36,11 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/r44/chat-bridge/checkpoint',
     input: 'body'
   },
+  unifiedR33EvidenceDraft: {
+    method: 'POST',
+    pathname: '/api/unified-runner/r33-evidence',
+    input: 'body'
+  },
   iniciarLoteStagingMLS: {
     method: 'POST',
     pathname: '/api/wiki/editorial/staging/start',
