@@ -56,3 +56,15 @@ test('Unified integration executor treats an already-applied wave as a validated
   assert.match(worker,/stage==='noop'/);
   assert.match(worker,/INTEGRATION_NOOP_MAIN_MISMATCH/);
 });
+
+test('Unified integration inline handlers bind synthetic event paths only to worker subprocess',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Integration Execute.yml','utf8');
+  assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.noop_checkpoint\.outputs\.event_path \}\}/);
+  assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.noop_finish\.outputs\.event_path \}\}/);
+  assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.premerge\.outputs\.event_path \}\}/);
+  assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.postmerge\.outputs\.event_path \}\}/);
+  assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.finish\.outputs\.event_path \}\}/);
+  assert.doesNotMatch(workflow,/\n\s+GITHUB_EVENT_PATH: \$\{\{ steps\.(?:noop_checkpoint|noop_finish|premerge|postmerge|finish)\.outputs\.event_path \}\}/);
+  const inline=(workflow.match(/GITHUB_EVENT_PATH="\$SYNTHETIC_EVENT_PATH" node 'scripts\/MLS global dispatcher worker\.cjs'/g)||[]).length;
+  assert.equal(inline,5);
+});
