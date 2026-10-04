@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "r44StatusChat",
+  "method": "POST",
+  "path": "/api/r44/chat-bridge/status",
+  "response": {
+    "status": "ACTIVE",
+    "controlPlane": "CLOUDFLARE_D1",
+    "productionMode": "PARALLEL_HOT_PATH",
+    "globalProductionMutex": false,
+    "githubHotPathWrites": false,
+    "leaseTtlSeconds": 300,
+    "maxActiveLeases": 128,
+    "mcpEndpoint": "/mcp",
+    "mcpProtocol": "2026-07-28",
+    "counts": {
+      "queued": 675,
+      "leased": 106,
+      "audited": 901,
+      "verified": 0,
+      "quarantined": 0,
+      "recoverable": 104
+    },
+    "durableCounts": [
+      {
+        "state": "CLAIMABLE",
+        "n": 675
+      },
+      {
+        "state": "COMPLETE",
+        "n": 655
+      },
+      {
+        "state": "LEASED",
+        "n": 90
+      },
+      {
+        "state": "PARTIAL_DURABLE",
+        "n": 16
+      },
+      {
+        "state": "QUARANTINED",
+        "n": 246
+      }
+    ],
+    "meta": {
+      "pool_schema": "MLS-R44-CLOUDFLARE-POOL-2",
+      "pool_generated_at": "2026-10-01T09:50:08.936233Z",
+      "base_commit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+      "pool_ticket_count": "1682",
+      "pool_entry_count": "8408",
+      "pool_ticket_size": "5",
+      "pool_manifest_sha256": "28153404f333669c2d1d7219aae45972387c1d49ff913b5ff75175c009eee47d",
+      "content_manifest_blob": "643b3c9cab84a0372f9e52127fe78ad0e9fab938",
+      "cutover_mode": "cloudflare-d1",
+      "durable_entry_schema": "1"
+    },
+    "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+    "authenticated": true
+  },
+  "completedAt": "2026-10-04T00:26:54.634Z",
+  "commandFile": "mls chat bridge/commands/unified-20261004T0026-sol-ratelimit-probe/status.json"
+}
