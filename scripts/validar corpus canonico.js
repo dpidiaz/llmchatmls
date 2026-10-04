@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { LANGUAGES, PROMPT_VERSION } = require('./exportar corpus canonico.js');
+const { titleIssues } = require('./auditar titulos canonicos.cjs');
 
 const ROOT = path.resolve(process.env.MLS_CANONICAL_ROOT || 'content');
 
@@ -67,6 +68,7 @@ function validateCanonicalCorpus() {
       if (article.language !== language.slug) fail(code + ': idioma incorrecto.');
       if (article.promptVersion !== PROMPT_VERSION) fail(code + ': promptVersion incorrecto.');
       if (!String(article.title || '').trim()) fail(code + ': título vacío.');
+      if (titleIssues(article.title).length) fail(code + ': título genérico o inválido: ' + article.title);
       if (!String(article.articleMarkdown || '').trim()) fail(code + ': articleMarkdown vacío.');
       if (countWords(article.articleMarkdown) < 90) fail(code + ': articleMarkdown tiene menos de 90 palabras.');
       if (!String(article.articleMarkdown).includes('####')) fail(code + ': faltan encabezados #### requeridos por R32.');
@@ -78,6 +80,7 @@ function validateCanonicalCorpus() {
 
       const manifestItem = manifestByCode.get(code);
       if (!manifestItem) fail(code + ': falta en manifest.');
+      if (manifestItem.title !== article.title) fail(code + ': manifest.title no coincide.');
       const relativePath = language.slug + '/' + fileName;
       if (manifestItem.path !== relativePath) fail(code + ': manifest.path no coincide.');
       if (manifestItem.sha256 !== sha256(raw)) fail(code + ': hash SHA-256 no coincide.');
