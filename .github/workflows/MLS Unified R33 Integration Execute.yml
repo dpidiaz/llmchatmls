@@ -84,8 +84,8 @@ jobs:
         if: ${{ steps.scope.outputs.has_changes == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_PATH: ${{ steps.noop_checkpoint.outputs.event_path }}
-        run: node 'scripts/MLS global dispatcher worker.cjs'
+          SYNTHETIC_EVENT_PATH: ${{ steps.noop_checkpoint.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
       - name: Record idempotent no-op finish
         if: ${{ steps.scope.outputs.has_changes == 'false' }}
         id: noop_finish
@@ -96,8 +96,8 @@ jobs:
         if: ${{ steps.scope.outputs.has_changes == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_PATH: ${{ steps.noop_finish.outputs.event_path }}
-        run: node 'scripts/MLS global dispatcher worker.cjs'
+          SYNTHETIC_EVENT_PATH: ${{ steps.noop_finish.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
       - name: Commit and push integration branch
         if: ${{ steps.scope.outputs.has_changes == 'true' }}
         id: commit
@@ -132,8 +132,8 @@ jobs:
         if: ${{ steps.scope.outputs.has_changes == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_PATH: ${{ steps.premerge.outputs.event_path }}
-        run: node 'scripts/MLS global dispatcher worker.cjs'
+          SYNTHETIC_EVENT_PATH: ${{ steps.premerge.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
       - name: Merge with expected head SHA
         if: ${{ steps.scope.outputs.has_changes == 'true' }}
         id: merge
@@ -150,8 +150,8 @@ jobs:
         if: ${{ steps.scope.outputs.has_changes == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_PATH: ${{ steps.postmerge.outputs.event_path }}
-        run: node 'scripts/MLS global dispatcher worker.cjs'
+          SYNTHETIC_EVENT_PATH: ${{ steps.postmerge.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
       - name: Record finish event
         if: ${{ steps.scope.outputs.has_changes == 'true' }}
         id: finish
@@ -162,5 +162,5 @@ jobs:
         if: ${{ steps.scope.outputs.has_changes == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
-        run: node 'scripts/MLS global dispatcher worker.cjs'
+          SYNTHETIC_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
