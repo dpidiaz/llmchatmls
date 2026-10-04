@@ -243,7 +243,7 @@ async function dispatchWorkflow(file,issueNumber,commentId){
 }
 async function dispatchIntegration(issue,state){
   const prior=await recentMarker(issue.number,'MLS_UNIFIED_R33_INTEGRATION_EXECUTE',p=>p.assignmentId===state.assignmentId,20*60*1000);
-  if(prior){
+  if(prior&&String(prior.user?.login||'')===String(state.workerLogin||'')){
     await report('integration','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,detail:{commentId:Number(prior.id),deduped:true}});
     return;
   }
