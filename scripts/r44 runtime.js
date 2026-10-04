@@ -794,6 +794,13 @@ async function unifiedRunnerStepRequest(request, env, ctx) {
 async function unifiedRunnerScheduled(env) {
   try {
     let runner = await unifiedRunnerRead(env);
+    const legacyR44Error = String(runner.last_error || "");
+    if (runner.state === "ERROR" && /^(?:R44_CONTEXT_(?:HASH_MISMATCH|FETCH)_|UNIFIED_R44_(?:ARTICLE|CORRECTION|CONTEXT|LEASE_RENEW|CHECKPOINT)_)/.test(legacyR44Error)) {
+      const now = new Date().toISOString();
+      await env.WIKI_DB.prepare("UPDATE mls_unified_runner SET state='RUNNING',last_error=?,updated_at=? WHERE id=1 AND state='ERROR'")
+        .bind("R44 lane: "+legacyR44Error,now).run();
+      runner = await unifiedRunnerRead(env);
+    }
     if (runner.state === "QUOTA_PAUSED") {
       const pausedDay = String(runner.updated_at || "").slice(0,10);
       const today = new Date().toISOString().slice(0,10);
