@@ -23,6 +23,7 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/createClaim\(stage\)/);
   assert.match(source,/source:'dispatcher-title'/);
   assert.match(source,/source:'assignment-state'/);
+  assert.match(source,/source:'readyToClose-recovery'/);
   assert.match(source,/action:'complete'/);
   assert.doesNotMatch(source,/\/contents\/.*method:'PUT'/);
   child.execFileSync(process.execPath,['--check','scripts/MLS unified web runner.cjs'],{stdio:'pipe'});
