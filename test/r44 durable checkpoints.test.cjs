@@ -172,6 +172,13 @@ test('legacy quarantined structured result reconciles into immutable entry recei
  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_events WHERE ticket_id='T1' AND event_type='LEGACY_QUARANTINE_RECONCILED'").get().n,1);h.close();
 });
 
+test('legacy quarantine admin route is wired and authenticated',async()=>{
+ const h=harness();await seed(h);h.env.MLS_EDITORIAL_CHAT_KEY='k'.repeat(40);
+ const req=new Request('https://fixture/api/r44/admin/reconcile-legacy-quarantine',{method:'POST',headers:{authorization:'Bearer '+'k'.repeat(40),'content-type':'application/json'},body:JSON.stringify({limit:1})});
+ const res=await h.r.r44DurableRoute(req,h.env,new URL(req.url));assert(res);assert.equal(res.status,200);
+ const body=await res.json();assert.equal(body.status,'LEGACY_QUARANTINE_RECONCILE');h.close();
+});
+
 test('legacy unstructured sentinel is requeued for fresh R44 instead of fabricating receipts',async()=>{
  const h=harness();await seed(h);const payload=JSON.stringify({resultMarkdown:'legacy sentinel',imported:true});const sha=await h.r.r44Sha256Text(payload);
  h.db.exec("UPDATE r44_ticket_progress SET state='QUARANTINED',migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION' WHERE ticket_id='T1'; UPDATE r44_entries SET state='QUARANTINED' WHERE ticket_id='T1'; UPDATE r44_tickets SET state='quarantined' WHERE ticket_id='T1'");
