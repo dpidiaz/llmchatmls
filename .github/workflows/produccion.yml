@@ -34,7 +34,9 @@ jobs:
 
       - name: Certificar Evidence publicada
         if: ${{ github.event_name == 'push' }}
-        run: node --test 'test/evidence github runtime.test.cjs' 'test/evidence native reader.test.cjs'
+        run: node --test 'test/evidence github runtime.test.cjs' 'test/evidence native reader.test.cjs' 'test/disaster recovery.test.cjs'
+        env:
+          MLS_DERIVED_STALE_POLICY: degrade
 
       - run: node --test 'test/r44 cloudflare control plane.test.cjs'
         if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -51,6 +53,8 @@ jobs:
         env:
           MLS_DERIVED_STALE_POLICY: degrade
       - run: npm run recovery:verify
+        env:
+          MLS_DERIVED_STALE_POLICY: degrade
       - run: node --test test/deploy-contract.test.cjs
       - run: npm run check
 

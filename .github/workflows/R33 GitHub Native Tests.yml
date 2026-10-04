@@ -27,6 +27,8 @@ on:
       - 'test/evidence github runtime.test.cjs'
       - 'test/evidence reader integration.test.cjs'
       - 'test/evidence native reader.test.cjs'
+      - 'scripts/verificar recuperacion git.js'
+      - 'test/disaster recovery.test.cjs'
       - 'docs/evidence y provenance/15 Evidence Farm Correction Repeat Pool.json'
       - 'docs/evidence y provenance/20 R33 Gate 500 Pool.json'
       - 'docs/evidence y provenance/21 R33 Active Pool Control.json'
@@ -51,6 +53,8 @@ on:
       - 'test/evidence github runtime.test.cjs'
       - 'test/evidence reader integration.test.cjs'
       - 'test/evidence native reader.test.cjs'
+      - 'scripts/verificar recuperacion git.js'
+      - 'test/disaster recovery.test.cjs'
       - '.github/workflows/produccion.yml'
       - 'test/r33 evidence **'
       - 'test/r33 gate500 preparation.test.cjs'
@@ -75,3 +79,7 @@ jobs:
           node-version: 24
       - name: Certificar R33 GitHub-native
         run: npm run test:r33-github-native
+      - name: Certificar recovery degradable
+        env:
+          MLS_DERIVED_STALE_POLICY: degrade
+        run: node --test 'test/disaster recovery.test.cjs'
