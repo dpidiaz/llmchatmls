@@ -57,3 +57,10 @@ test('Gate pool hash updates reproduce the previous blob by restoring only the t
     assert.equal(blob(raw.replace(JSON.stringify(correction.title),JSON.stringify(correction.oldTitle))),update.previousContentBlobSha,update.code);
   }
 });
+
+test('every canonical catalog title matches its article title',()=>{
+  for(const item of manifest.entries){
+    const article=JSON.parse(fs.readFileSync('content/'+item.path,'utf8'));
+    assert.equal(item.title,article.title,item.code);
+  }
+});
