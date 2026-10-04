@@ -101,7 +101,10 @@ test('cron arms 50 independent server alarms, alarms resume entries and stop whe
   const h=harness();await setup(h);await control(h,{action:'configure',runners:50});
   const Klass=vm.runInContext('UnifiedLogicalRunner',h.r),objects=new Map();
   h.env.MLS_UNIFIED_RUNNERS={idFromName:n=>n,get(n){if(!objects.has(n)){const values=new Map();let alarm=null;const storage={async get(k){return values.get(k)},async put(k,v){values.set(k,v)},async delete(k){values.delete(k)},async getAlarm(){return alarm},async setAlarm(v){alarm=v}};objects.set(n,{object:new Klass({storage},h.env),values,get alarm(){return alarm},clear(){alarm=null}})}return {fetch:(url,init)=>objects.get(n).object.fetch(new Request(url,init))}}};
+  h.db.exec("UPDATE mls_unified_runner SET state='ERROR',last_error='R44_CONTEXT_HASH_MISMATCH_MLS-V10-0870'");
   assert.equal((await h.r.unifiedRunnerScheduled(h.env)).runners,50);
+  assert.equal((await h.r.unifiedRunnerRead(h.env)).state,'RUNNING');
+  assert.match((await h.r.unifiedRunnerRead(h.env)).last_error,/^R44 lane: R44_CONTEXT_HASH_MISMATCH/);
   assert.equal(objects.size,50);assert([...objects.values()].every(x=>x.alarm));
   const one=objects.get('runner-1');one.clear();await one.object.alarm();assert(one.alarm);
   assert.equal(h.db.prepare('SELECT COUNT(*) n FROM r44_receipts').get().n,1);
