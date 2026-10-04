@@ -1,6 +1,6 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-04T05:12:00.000Z",
+  "requestedAt": "2026-10-04T05:16:00.000Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
   "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Retry legacy R44 quarantine recovery after route wiring fix",
-  "retryGeneration": 24,
+  "retryReason": "Finalize legacy R44 quarantine recovery by requeueing incompatible historical results for fresh R44 audit",
+  "retryGeneration": 25,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
@@ -58,6 +58,7 @@
     "endpoint": "/api/r44/admin/reconcile-legacy-quarantine",
     "batchSize": 5,
     "d1MinWritesRemaining": 2500,
-    "selfHealingUnifiedCron": true
+    "selfHealingUnifiedCron": true,
+    "finalizeUnsafeLegacyResults": true
   }
 }
