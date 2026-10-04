@@ -30,6 +30,15 @@ test('canonical registry is GitHub-only and Gate 500 activation is explicitly au
   assert.equal(gate.authorization?.authorized,true);
 });
 
+test('claim parser accepts the GitHub Actions bot login used by MLS Unified Web Runner',()=>{
+  const body=core.renderCommandBody({
+    operation:'claim',requestId:'unified-web-r33-test',workerId:'mls-unified-web-r33',
+    workerLogin:'github-actions[bot]',provider:'r33-farm',workPrefix:'r33-unified:',capabilities:['chat','github','mls-unified']
+  });
+  const command=core.parseCommand(body);
+  assert.equal(command.workerLogin,'github-actions[bot]');
+});
+
 test('timing is ACK 5m, rolling lease 10m, reaper 5m',()=>{
   assert.equal(core.ACK_TTL_MS,5*60*1000);
   assert.equal(core.LEASE_TTL_MS,10*60*1000);
