@@ -1,6 +1,6 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-03T23:03:38.782Z",
+  "requestedAt": "2026-10-04T05:05:00.000Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
   "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Deploy browser Access JWT fallback and automatic session recovery",
-  "retryGeneration": 22,
+  "retryReason": "Deploy and drain legacy R44 quarantines into durable per-entry receipts",
+  "retryGeneration": 23,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
@@ -52,5 +52,12 @@
     "tracksSessionDeltaLocally": true,
     "countsOnlyCanonicalVerified": true,
     "productionSmoke": true
+  },
+  "legacyQuarantineRecovery": {
+    "mode": "STRUCTURED_RESULT_TO_DURABLE_RECEIPTS_OR_FRESH_R44_REQUEUE",
+    "endpoint": "/api/r44/admin/reconcile-legacy-quarantine",
+    "batchSize": 5,
+    "d1MinWritesRemaining": 2500,
+    "selfHealingUnifiedCron": true
   }
 }
