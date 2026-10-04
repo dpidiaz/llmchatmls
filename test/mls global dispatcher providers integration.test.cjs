@@ -244,7 +244,8 @@ test('R4 finish auto-pulls the next claim, preserves worker identity, and explic
   const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
   const scheduler=fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
-  assert.match(worker,/operation==='finish'&&next\.readyToClose===true&&next\.provider==='r33-farm'/);
+  assert.match(worker,/operation==='finish'&&next\.readyToClose===true&&\(next\.provider==='r33-farm'\|\|integrationAutoPull\)/);
+  assert.match(worker,/unifiedIntegrationScope\?\{provider:'r33-index-integration',workPrefix:unifiedIntegrationScope\}/);
   assert.match(worker,/\[MLS Dispatcher\]\[CLAIM\]/);
   assert.match(worker,/workerLogin:workerLogin\|\|null/);
   assert.match(worker,/wakeScheduler\(\)/);

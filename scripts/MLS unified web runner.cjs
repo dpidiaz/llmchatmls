@@ -203,12 +203,17 @@ async function resolveAssignment(stage,lane){
     await report(stage,'FENCE_REJECTED',{issueNumber:null,error:'Issue pointer does not belong to web runner lane.',detail:{issueNumber:Number(issue.number)}});
     return {kind:'fence_rejected',issue};
   }
-  if(state.readyToClose&&state.autoPull?.issueNumber){
-    const next=await getIssue(Number(state.autoPull.issueNumber));
-    if(next){
-      await report(stage,'CLAIM_PENDING',{issueNumber:Number(next.number),detail:{source:'readyToClose-autoPull'}});
-      return {kind:'pending',issue:next};
+  if(state.readyToClose){
+    if(state.autoPull?.issueNumber){
+      const next=await getIssue(Number(state.autoPull.issueNumber));
+      if(next){
+        await report(stage,'CLAIM_PENDING',{issueNumber:Number(next.number),detail:{source:'readyToClose-autoPull'}});
+        return {kind:'pending',issue:next};
+      }
     }
+    const next=await createClaim(stage);
+    await report(stage,'CLAIM_PENDING',{issueNumber:Number(next.number),detail:{source:'readyToClose-recovery',from:Number(issue.number)}});
+    return {kind:'pending',issue:next};
   }
   if(state.status!=='leased'||expired(state)){
     return replaceExpiredAssignment(stage,issue,{source:'assignment-state'});

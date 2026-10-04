@@ -515,6 +515,7 @@ function r33IndexIntegrationWork({pool,globalLedger,root='.',waveSize=null,verif
       waveMode:'aggregate-certified-workers',
       base:'main',
       mergeMethod:'merge',
+      allowDirectFallback:unifiedCertifiedSubset,
       requiredChecks:['R33 GitHub Native Tests'],
       postMergeChecks:['R33 GitHub Native Tests'],
       sourceRefs,contentPaths:r33ContentPaths(sourceRefs),revisionAssets:r33RevisionAssets(sourceRefs),
