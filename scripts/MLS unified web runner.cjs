@@ -107,8 +107,10 @@ async function findExisting(stage){
   return null;
 }
 async function createClaim(stage){
-  const requestId=('unified-web-'+stage+'-'+String(process.env.GITHUB_RUN_ID||Date.now())+'-'+Date.now().toString(36)).slice(0,120);
-  const claim=unified.createClaim({stage,requestId,workerId:WORKERS[stage],workerLogin:BOT});
+  const requestId=('autopull:unified-web-'+stage+'-'+String(process.env.GITHUB_RUN_ID||Date.now())+'-'+Date.now().toString(36)).slice(0,120);
+  // Bot-created Dispatcher claims must use the trusted auto-pull fence. Do not delegate
+  // workerLogin here: the scheduler derives github-actions[bot] from the issue author.
+  const claim=unified.createClaim({stage,requestId,workerId:WORKERS[stage]});
   const issue=await gh('/repos/'+REPOSITORY+'/issues',{method:'POST',body:{title:claim.title,body:claim.body}});
   await report(stage,'CLAIM_PENDING',{issueNumber:Number(issue.number),detail:{requestId,workerId:WORKERS[stage]}});
   await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
