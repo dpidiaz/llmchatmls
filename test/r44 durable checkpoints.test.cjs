@@ -172,6 +172,27 @@ test('legacy quarantined structured result reconciles into immutable entry recei
  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_events WHERE ticket_id='T1' AND event_type='LEGACY_QUARANTINE_RECONCILED'").get().n,1);h.close();
 });
 
+test('legacy invalid outcome is safely requeued for fresh R44',async()=>{
+ const h=harness();await seed(h);const entries=JSON.parse(h.db.prepare("SELECT entries_json FROM r44_tickets WHERE ticket_id='T1'").get().entries_json);
+ const payload=JSON.stringify({entries:entries.map((e,i)=>({code:e.code,outcome:i===0?'UNSAFE_LEGACY':'PASS_NO_CHANGE'}))});const sha=await h.r.r44Sha256Text(payload);
+ h.db.exec("UPDATE r44_ticket_progress SET state='QUARANTINED',migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION' WHERE ticket_id='T1'; UPDATE r44_entries SET state='QUARANTINED' WHERE ticket_id='T1'; UPDATE r44_tickets SET state='quarantined' WHERE ticket_id='T1'");
+ h.db.prepare("INSERT INTO r44_results(ticket_id,worker_id,stage,editorial_status,payload,sha256,source,created_at) VALUES(?,?,?,?,?,?,?,?)").run('T1','legacy-worker','audited','PENDING_CANONICAL_R33_VALIDATION',payload,sha,'legacy','fixture');
+ const result=await h.r.r44LegacyQuarantineReconcile(h.env,5);assert.equal(result.requeued,1);assert.equal(result.blocked,0);
+ assert.equal(h.db.prepare("SELECT state FROM r44_ticket_progress WHERE ticket_id='T1'").get().state,'CLAIMABLE');
+ assert.match(h.db.prepare("SELECT migration_note FROM r44_ticket_progress WHERE ticket_id='T1'").get().migration_note,/LEGACY_REQUEUED_FRESH_R44/);
+ assert.equal((await claim(h,'fresh-after-invalid','fresh-invalid')).status,'CLAIMED');h.close();
+});
+
+test('legacy hash mismatch is discarded and requeued, never promoted',async()=>{
+ const h=harness();await seed(h);const entries=JSON.parse(h.db.prepare("SELECT entries_json FROM r44_tickets WHERE ticket_id='T1'").get().entries_json);
+ const payload=JSON.stringify({entries:entries.map(e=>({code:e.code,outcome:'PASS_NO_CHANGE'}))});
+ h.db.exec("UPDATE r44_ticket_progress SET state='QUARANTINED',migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION' WHERE ticket_id='T1'; UPDATE r44_entries SET state='QUARANTINED' WHERE ticket_id='T1'; UPDATE r44_tickets SET state='quarantined' WHERE ticket_id='T1'");
+ h.db.prepare("INSERT INTO r44_results(ticket_id,worker_id,stage,editorial_status,payload,sha256,source,created_at) VALUES(?,?,?,?,?,?,?,?)").run('T1','legacy-worker','audited','PENDING_CANONICAL_R33_VALIDATION',payload,'deadbeef','legacy','fixture');
+ const result=await h.r.r44LegacyQuarantineReconcile(h.env,5);assert.equal(result.requeued,1);assert.equal(result.reconciled,0);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_results WHERE ticket_id='T1'").get().n,0);
+ assert.equal(h.db.prepare("SELECT state FROM r44_ticket_progress WHERE ticket_id='T1'").get().state,'CLAIMABLE');h.close();
+});
+
 test('legacy quarantine admin route is wired and authenticated',async()=>{
  const h=harness();await seed(h);h.env.MLS_EDITORIAL_CHAT_KEY='k'.repeat(40);
  const req=new Request('https://fixture/api/r44/admin/reconcile-legacy-quarantine',{method:'POST',headers:{authorization:'Bearer '+'k'.repeat(40),'content-type':'application/json'},body:JSON.stringify({limit:1})});
