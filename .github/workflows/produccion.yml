@@ -46,6 +46,8 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' }}
 
       - run: npm run predeploy
+        env:
+          MLS_DERIVED_STALE_POLICY: degrade
       - run: npm run recovery:verify
       - run: node --test test/deploy-contract.test.cjs
       - run: npm run check
