@@ -1,0 +1,182 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "unified-20261004T0934Z-sol-cycle11-start100-v1",
+    "requested": 2,
+    "processed": 2,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedRunnerControl",
+        "method": "POST",
+        "path": "/api/unified-runner/control",
+        "response": {
+          "ok": true,
+          "action": "start",
+          "state": "RUNNING",
+          "runner": {
+            "id": 1,
+            "state": "RUNNING",
+            "worker_id": "mls-unified-web-runner-v1",
+            "started_at": "2026-10-03T23:10:20.246Z",
+            "updated_at": "2026-10-04T09:37:45.847Z",
+            "processed_entries": 734,
+            "corrected_entries": 1,
+            "error_count": 9,
+            "last_ticket": "R43-EMERGENCY-0020",
+            "last_code": "MLS-V03-0126",
+            "last_error": null,
+            "last_step_at": "2026-10-04T09:35:57.350Z",
+            "step_token": null,
+            "busy_until": null,
+            "schema_version": "3",
+            "configured_runners": 100,
+            "active_runners": 0
+          }
+        },
+        "completedAt": "2026-10-04T09:37:45.972Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedRunnerStatus",
+        "method": "POST",
+        "path": "/api/unified-runner/status",
+        "response": {
+          "ok": true,
+          "runner": {
+            "id": 1,
+            "state": "RUNNING",
+            "worker_id": "mls-unified-web-runner-v1",
+            "started_at": "2026-10-03T23:10:20.246Z",
+            "updated_at": "2026-10-04T09:37:45.847Z",
+            "processed_entries": 734,
+            "corrected_entries": 1,
+            "error_count": 9,
+            "last_ticket": "R43-EMERGENCY-0020",
+            "last_code": "MLS-V03-0126",
+            "last_error": null,
+            "last_step_at": "2026-10-04T09:35:57.350Z",
+            "step_token": null,
+            "busy_until": null,
+            "schema_version": "3",
+            "configured_runners": 100,
+            "active_runners": 0
+          },
+          "r44": {
+            "status": "ACTIVE",
+            "controlPlane": "CLOUDFLARE_D1",
+            "productionMode": "PARALLEL_HOT_PATH",
+            "globalProductionMutex": false,
+            "githubHotPathWrites": false,
+            "leaseTtlSeconds": 300,
+            "maxActiveLeases": 128,
+            "mcpEndpoint": "/mcp",
+            "mcpProtocol": "2026-07-28",
+            "counts": {
+              "queued": 0,
+              "leased": 1,
+              "audited": 1681,
+              "verified": 0,
+              "quarantined": 0,
+              "recoverable": 0
+            },
+            "durableCounts": [
+              {
+                "state": "COMPLETE",
+                "n": 1681
+              },
+              {
+                "state": "PARTIAL_DURABLE",
+                "n": 1
+              }
+            ],
+            "meta": {
+              "pool_schema": "MLS-R44-CLOUDFLARE-POOL-2",
+              "pool_generated_at": "2026-10-01T09:50:08.936233Z",
+              "base_commit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+              "pool_ticket_count": "1682",
+              "pool_entry_count": "8408",
+              "pool_ticket_size": "5",
+              "pool_manifest_sha256": "28153404f333669c2d1d7219aae45972387c1d49ff913b5ff75175c009eee47d",
+              "content_manifest_blob": "643b3c9cab84a0372f9e52127fe78ad0e9fab938",
+              "cutover_mode": "cloudflare-d1",
+              "durable_entry_schema": "1"
+            }
+          },
+          "budget": {
+            "dateUTC": "2026-10-04",
+            "dailyNeurons": 75125.65,
+            "dailyReservedNeurons": 0,
+            "targetNeurons": 9000,
+            "quotaExhaustedDate": null,
+            "workersAiCircuit": null
+          },
+          "lanes": {
+            "integration": {
+              "stage": "integration",
+              "state": "WAITING_PR_CHECK",
+              "issue_number": 4395,
+              "assignment_id": "MLS-GLOBAL-004395",
+              "last_code": null,
+              "last_error": null,
+              "detail_json": "{\"prNumber\":4399,\"headSha\":\"fe415d216408b7e56433494c4941863807b9c840\"}",
+              "updated_at": "2026-10-04T09:37:42.743Z",
+              "detail": {
+                "prNumber": 4399,
+                "headSha": "fe415d216408b7e56433494c4941863807b9c840"
+              }
+            },
+            "r33": {
+              "stage": "r33",
+              "state": "EXPIRED",
+              "issue_number": null,
+              "assignment_id": null,
+              "last_code": null,
+              "last_error": "Lease is no longer active.",
+              "detail_json": "{\"issueNumber\":4304}",
+              "updated_at": "2026-10-04T07:34:44.967Z",
+              "detail": {
+                "issueNumber": 4304
+              }
+            }
+          },
+          "canonical": {
+            "initialized": true,
+            "claimable": 0,
+            "pending": 6258,
+            "waitingHandoff": 420,
+            "prepared": 681,
+            "counts": {
+              "PREPARED": 681,
+              "QUARANTINED": 5157
+            },
+            "batchSize": 100,
+            "verifiedAuthority": "github-main-verified-index"
+          },
+          "freeOnly": true,
+          "chatCompatible": true,
+          "auth": {
+            "mode": "editorial-key",
+            "email": null,
+            "aud": null
+          },
+          "canonicalVerifiedAuthority": "MLS R32 EDITORIAL/evidence git/indexes/verified.json"
+        },
+        "completedAt": "2026-10-04T09:37:46.493Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-04T09:37:46.493Z",
+  "commandFile": "mls chat bridge/commands/unified-20261004T0934Z-sol-cycle11/01-start100-status.json"
+}
