@@ -338,6 +338,7 @@ async function r44LegacyQuarantineReconcileRoute(request,env) {
 }
 
 async function r44DurableRoute(request,env,url) {
+  if(url.pathname==='/api/r44/admin/reconcile-legacy-quarantine' && request.method==='POST')return r44LegacyQuarantineReconcileRoute(request,env);
   if(url.pathname==='/api/r44/chat-bridge/rebind' && request.method==='POST')return r44BridgeRecover(request,env);
   if(url.pathname==='/api/r44/chat-bridge/checkpoint' && request.method==='POST')return r44BridgeCheckpoint(request,env);
   if(url.pathname==='/api/r44/entry-state' && request.method==='POST') {const result=await r44EntryState(env,await request.json());return r44Json(result,result.http||200);}
