@@ -33,6 +33,10 @@ test('Unified integration executor validates exact leased scope and fails closed
   assert.match(source,/merge_method:'merge',sha:headSha/);
   assert.match(source,/integrationStage:'premerge'/);
   assert.match(source,/integrationStage:'postmerge'/);
+  assert.match(source,/ACTIONS_PULL_REQUEST_CREATION_DISABLED/);
+  assert.match(source,/integrationStage:'premerge-direct'/);
+  assert.match(source,/integrationStage:'postmerge-direct'/);
+  assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_MOVED/);
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 integration execute.cjs'],{stdio:'pipe'});
 });
 
@@ -65,6 +69,10 @@ test('Unified integration inline handlers bind synthetic event paths only to wor
   assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.postmerge\.outputs\.event_path \}\}/);
   assert.match(workflow,/SYNTHETIC_EVENT_PATH: \$\{\{ steps\.finish\.outputs\.event_path \}\}/);
   assert.doesNotMatch(workflow,/\n\s+GITHUB_EVENT_PATH: \$\{\{ steps\.(?:noop_checkpoint|noop_finish|premerge|postmerge|finish)\.outputs\.event_path \}\}/);
+  assert.match(workflow,/direct-premerge-event/);
+  assert.match(workflow,/direct-merge/);
+  assert.match(workflow,/direct-postmerge-event/);
+  assert.match(workflow,/direct-finish-event/);
   const inline=(workflow.match(/GITHUB_EVENT_PATH="\$SYNTHETIC_EVENT_PATH" node 'scripts\/MLS global dispatcher worker\.cjs'/g)||[]).length;
-  assert.equal(inline,5);
+  assert.equal(inline,8);
 });
