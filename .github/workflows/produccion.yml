@@ -9,6 +9,8 @@ on:
       - 'MLS R32 EDITORIAL/evidence git/indexes/verified.json'
       - 'scripts/generar evidence runtime github.js'
       - 'MLS R32 OVERLAY/reader.js'
+      - 'MLS R32 OVERLAY/sw.js'
+      - 'test/offline resilience behavior.test.cjs'
       - 'scripts/habilitar enlaces canonicos lector.js'
       - 'test/reader canonical links.test.cjs'
       - 'content/**'
@@ -39,7 +41,7 @@ jobs:
 
       - name: Certificar Evidence publicada
         if: ${{ github.event_name == 'push' }}
-        run: node --test 'test/evidence github runtime.test.cjs' 'test/evidence native reader.test.cjs' 'test/disaster recovery.test.cjs' 'test/reader canonical links.test.cjs' 'test/canonical titles.test.cjs'
+        run: node --test 'test/evidence github runtime.test.cjs' 'test/evidence native reader.test.cjs' 'test/disaster recovery.test.cjs' 'test/reader canonical links.test.cjs' 'test/canonical titles.test.cjs' 'test/offline resilience behavior.test.cjs'
         env:
           MLS_DERIVED_STALE_POLICY: degrade
 

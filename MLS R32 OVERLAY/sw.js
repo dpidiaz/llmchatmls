@@ -100,6 +100,7 @@ self.addEventListener('fetch',event=>{
   }
   const destination=event.request.destination;
   const needsFreshCode=
+    url.pathname==='/data/canonical/runtime-manifest.json'||
     event.request.mode==='navigate'||
     destination==='document'||
     destination==='script'||

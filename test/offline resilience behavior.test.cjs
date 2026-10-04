@@ -253,3 +253,20 @@ test('retry without connection does not reload and announces why',async()=>{
   assert.ok(live);
   assert.match(live.textContent,/Todavía no hay conexión/i);
 });
+
+test('canonical manifest refreshes online and falls back to its latest cached build offline',async()=>{
+  const caches=new FakeCaches(),listeners={};
+  const url='https://example.test/data/canonical/runtime-manifest.json';
+  const cache=await caches.open('mls-app-shell-2026-r32-offline-v2-translator');
+  await cache.put(url,new FakeResponse('old-build'));
+  let online=true,calls=0;
+  const self={location:{origin:'https://example.test'},addEventListener(name,fn){listeners[name]=fn}};
+  const context={self,caches,URL,console,fetch:async()=>{calls++;if(!online)throw Error('offline');return new FakeResponse('new-build')}};
+  vm.createContext(context);new vm.Script(swSource).runInContext(context);
+  async function request(){let result;listeners.fetch({request:{method:'GET',url,destination:'',mode:'cors'},respondWith(p){result=p}});return result;}
+  assert.equal((await request()).body,'new-build');
+  await Promise.resolve();
+  online=false;
+  assert.equal((await request()).body,'new-build');
+  assert.equal(calls,2);
+});
