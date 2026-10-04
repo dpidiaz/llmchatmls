@@ -42,3 +42,18 @@ test('all reviewed title corrections preserve canonical bodies and historical Ev
 test('the reported direct-object entry has a standalone descriptive title',()=>{
   assert.equal(manifest.entries.find(e=>e.code==='MLS-V10-0572').title,'Complemento directo');
 });
+
+test('Gate pool hash updates reproduce the previous blob by restoring only the title',()=>{
+  const audit=JSON.parse(fs.readFileSync('docs/editorial/canonical title corrections.json','utf8'));
+  const blob=value=>crypto.createHash('sha1').update(Buffer.concat([Buffer.from('blob '+Buffer.byteLength(value)+'\0'),Buffer.from(value)])).digest('hex');
+  assert.equal(audit.poolMetadataUpdates.changes.length,7);
+  for(const update of audit.poolMetadataUpdates.changes){
+    const correction=corrections.find(c=>c.code===update.code);
+    const pool=JSON.parse(fs.readFileSync(update.poolPath,'utf8'));
+    const entry=pool.entries.find(e=>e.code===update.code);
+    const raw=fs.readFileSync(entry.contentPath,'utf8').replace(/\r\n/g,'\n');
+    assert.equal(blob(raw),update.contentBlobSha,update.code);
+    assert.equal(entry.contentBlobSha,update.contentBlobSha,update.code);
+    assert.equal(blob(raw.replace(JSON.stringify(correction.title),JSON.stringify(correction.oldTitle))),update.previousContentBlobSha,update.code);
+  }
+});
