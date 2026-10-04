@@ -233,10 +233,18 @@ async function noopFinishEvent(){
   const {repository}=githubContext();
   const issue=await gh('/repos/'+repository+'/issues/'+bundle.issueNumber);
   const state=core.parseAssignmentState(issue.body||'');
-  if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased'||String(state.lastCheckpointCommit||'').toLowerCase()!==String(state.baseCommit||'').toLowerCase())
+  const checkpoint=(state?.checkpoints||[]).at(-1);
+  const checkpointSha=String(state?.lastCheckpointCommit||'').toLowerCase();
+  if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased'||!/^[a-f0-9]{40}$/.test(checkpointSha)||
+    String(checkpoint?.integrationStage||'').toLowerCase()!=='noop'||String(checkpoint?.validation?.status||'').toLowerCase()!=='passed')
     fail('UNIFIED_INTEGRATION_NOOP_FINISH_STATE_INVALID');
+  const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
+  const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
+  const mainSha=String(mainRef?.object?.sha||'').toLowerCase(),branchSha=String(branchRef?.object?.sha||'').toLowerCase();
+  if(checkpointSha!==mainSha||checkpointSha!==branchSha)
+    fail('UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED','No-op finish requires the accepted checkpoint, assignment branch HEAD and current main HEAD to match.');
   writeEvent('noop-finish',bundle,{operation:'finish',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
-    commitSha:String(state.lastCheckpointCommit).toLowerCase(),integrationStage:'noop'},runId*10+5);
+    commitSha:checkpointSha,integrationStage:'noop'},runId*10+5);
 }
 async function premergeEvent(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),headSha=String(process.argv[4]||'').toLowerCase();
