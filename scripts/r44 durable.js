@@ -91,13 +91,13 @@ async function r44DurableContext(env, token, limit = Infinity, runner = false) {
   const state = await r44Reconcile(env,lease.ticket_id);
   if (!state.lease.active) return null;
   const entries = state.entries.filter(e=>e.state!=='AUDITED_DURABLE' && (!runner || !['FAILED_RETRYABLE','QUARANTINED'].includes(e.state))).slice(0,limit).map(e=>e.source);
-  const content = await Promise.all(entries.map(async entry => {
+  const content = runner ? await Promise.all(entries.map(async entry => {
     try { return await r44LoadEntry(env,entry); }
     catch(error) {
       if(runner) await r44EntryState(env,{...state.lease,ticketId:state.ticketId,code:entry.code,state:"FAILED_RETRYABLE"});
       throw error;
     }
-  }));
+  })) : await Promise.all(entries.map((entry) => r44LoadEntry(env, entry)));
   return {...state,...state.lease,entries,content};
 }
 async function r44DurableRenew(env, token, generation) {
