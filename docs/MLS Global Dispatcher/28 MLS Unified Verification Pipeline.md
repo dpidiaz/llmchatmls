@@ -62,6 +62,21 @@ The chat must not ask the user for:
 
 The system chooses the highest-value eligible stage automatically.
 
+## Per-execution throughput contract
+
+For the production command `MLS Unified siguiente`, the user-visible execution target is **at least 100 entries per execution** whenever at least 100 eligible entries remain available.
+
+Operational rules:
+
+- Internal microclaims may remain smaller than 100 entries; this rule does not require changing the atomic claim size.
+- If the first claim or set of claims yields fewer than 100 entries, the same execution must continue pulling additional eligible Unified work until the cumulative total reaches **≥100 entries**.
+- The execution may finish below 100 only when fewer than 100 eligible entries genuinely remain available, or when a **verifiable technical blocker** prevents additional safe work in that execution.
+- A small claim, an exhausted single microclaim, or the absence of work in only one Unified lane is not by itself sufficient reason to stop below 100 if additional eligible Unified work can still be claimed safely.
+- Durable checkpoints, ownership isolation, R44/R33 validation standards, FREE ONLY constraints and serialized final integration remain authoritative; throughput must not bypass correctness or safety gates.
+- This policy **supersedes the previous ≥50 entries-per-execution rule**.
+
+The ≥100 figure is a cumulative execution contract, not a requirement that any individual low-level claim contain 100 entries.
+
 ## Scheduling priority
 
 Every new Unified execution follows this order.
