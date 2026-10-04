@@ -1,0 +1,23 @@
+name: Reader internal links
+on:
+  pull_request:
+    paths:
+      - 'MLS R32 OVERLAY/reader.js'
+      - 'MASTER LANGUAGE SYSTEM REVISION 32 BUNDLE.tar.gz'
+      - 'scripts/habilitar enlaces canonicos lector.js'
+      - 'test/reader canonical links.test.cjs'
+      - 'content/**'
+      - 'package.json'
+      - '.github/workflows/Reader Links Tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reader-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node --test 'test/reader canonical links.test.cjs' 'test/evidence native reader.test.cjs' 'test/navigation orientation.test.cjs' 'test/reader related discovery.test.cjs'
