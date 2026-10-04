@@ -768,9 +768,17 @@ async function unifiedRunnerStep(env, stepKey, runnerId = 1) {
     const message = wikiErrorMessage(error);
     const quota = (typeof WorkersQuotaExceededError !== "undefined" && error instanceof WorkersQuotaExceededError) || workersAiFailureKind(message) === "quota";
     const paid = (typeof ZeroCostPolicyError !== "undefined" && error instanceof ZeroCostPolicyError) || workersAiFailureKind(message) === "paid";
-    const pauseState = quota ? "QUOTA_PAUSED" : paid ? "POLICY_PAUSED" : "ERROR";
-    await unifiedRunnerApplyMark(env,{state:pauseState,last_error:message,last_step_at:new Date().toISOString(),errorDelta:1});
-    return {status:pauseState,ticketId:context && context.ticketId || null,error:message,receipts};
+    // R44 is only one lane of MLS Unified. A ticket/article failure must not stop
+    // R33 certification or serialized integration of already durable R44 work.
+    // Only FREE-only policy/quota failures pause the global runner here; fatal
+    // scheduler/control-plane failures are still handled by unifiedRunnerScheduled.
+    const pauseState = quota ? "QUOTA_PAUSED" : paid ? "POLICY_PAUSED" : null;
+    if (pauseState) {
+      await unifiedRunnerApplyMark(env,{state:pauseState,last_error:message,last_step_at:new Date().toISOString(),errorDelta:1});
+      return {status:pauseState,ticketId:context && context.ticketId || null,error:message,receipts};
+    }
+    await unifiedRunnerApplyMark(env,{last_error:"R44 lane: "+message,last_step_at:new Date().toISOString(),errorDelta:1});
+    return {status:"R44_DEGRADED",ticketId:context && context.ticketId || null,error:message,receipts};
   } finally {
     await release().catch(function(){});
   }
