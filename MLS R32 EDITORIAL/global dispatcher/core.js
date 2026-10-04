@@ -101,7 +101,7 @@ function parseCommand(body){
     if(!/^[A-Za-z0-9._:-]{8,120}$/.test(requestId))throw dispatchError('INVALID_REQUEST_ID','requestId inválido.');
     if(!/^[A-Za-z0-9._:-]{8,160}$/.test(workerId))throw dispatchError('INVALID_WORKER_ID','workerId inválido.');
     const workerLogin=String(x.workerLogin||'').trim();
-    if(workerLogin&&!/^[A-Za-z0-9][A-Za-z0-9-]*(?:\\[bot\\])?$/.test(workerLogin))throw dispatchError('INVALID_WORKER_LOGIN','workerLogin inválido.');
+    if(workerLogin&&!/^[A-Za-z0-9][A-Za-z0-9-]*(?:\[bot\])?$/.test(workerLogin))throw dispatchError('INVALID_WORKER_LOGIN','workerLogin inválido.');
     const provider=String(x.provider||'').trim(),workPrefix=String(x.workPrefix||'').trim();
     if(provider&&!/^[A-Za-z0-9._:-]{2,80}$/.test(provider))throw dispatchError('INVALID_PROVIDER_FILTER','provider inválido.');
     if(workPrefix&&!/^[A-Za-z0-9._:-]{4,120}$/.test(workPrefix))throw dispatchError('INVALID_WORK_PREFIX','workPrefix inválido.');
