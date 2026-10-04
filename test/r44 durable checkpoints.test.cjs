@@ -159,6 +159,31 @@ test('fenced entry state transitions and quarantine cannot modify durable entry'
  const q=packet(c,2);await h.r.r44EntryState(h.env,{...q,code:q.entry.code,state:'QUARANTINED'});
  assert.equal((await h.r.r44Reconcile(h.env,'T1')).state,'QUARANTINED');assert.equal((await checkpoint(h,c,3)).http,409);h.close();
 });
+test('legacy quarantined structured result reconciles into immutable entry receipts',async()=>{
+ const h=harness();await seed(h);const entries=JSON.parse(h.db.prepare("SELECT entries_json FROM r44_tickets WHERE ticket_id='T1'").get().entries_json);
+ const payload=JSON.stringify({entries:entries.map(e=>({code:e.code,outcome:'PASS_NO_CHANGE'}))});
+ const sha=await h.r.r44Sha256Text(payload);
+ h.db.exec("UPDATE r44_ticket_progress SET state='QUARANTINED',migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION' WHERE ticket_id='T1'; UPDATE r44_entries SET state='QUARANTINED' WHERE ticket_id='T1'; UPDATE r44_tickets SET state='quarantined' WHERE ticket_id='T1'");
+ h.db.prepare("INSERT INTO r44_results(ticket_id,worker_id,stage,editorial_status,payload,sha256,source,created_at) VALUES(?,?,?,?,?,?,?,?)").run('T1','legacy-worker','audited','PENDING_CANONICAL_R33_VALIDATION',payload,sha,'legacy','fixture');
+ const result=await h.r.r44LegacyQuarantineReconcile(h.env,5);
+ assert.equal(result.reconciled,1);assert.equal(result.requeued,0);assert.equal(result.remainingLegacy,0);
+ const state=await h.r.r44Reconcile(h.env,'T1');assert.equal(state.state,'COMPLETE');assert.equal(state.migrationNote,null);assert.equal(state.remaining.length,0);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_receipts WHERE ticket_id='T1'").get().n,5);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_events WHERE ticket_id='T1' AND event_type='LEGACY_QUARANTINE_RECONCILED'").get().n,1);h.close();
+});
+
+test('legacy unstructured sentinel is requeued for fresh R44 instead of fabricating receipts',async()=>{
+ const h=harness();await seed(h);const payload=JSON.stringify({resultMarkdown:'legacy sentinel',imported:true});const sha=await h.r.r44Sha256Text(payload);
+ h.db.exec("UPDATE r44_ticket_progress SET state='QUARANTINED',migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION' WHERE ticket_id='T1'; UPDATE r44_entries SET state='QUARANTINED' WHERE ticket_id='T1'; UPDATE r44_tickets SET state='quarantined' WHERE ticket_id='T1'");
+ h.db.prepare("INSERT INTO r44_results(ticket_id,worker_id,stage,editorial_status,payload,sha256,source,created_at) VALUES(?,?,?,?,?,?,?,?)").run('T1','legacy-worker','audited','PENDING_CANONICAL_R33_VALIDATION',payload,sha,'legacy','fixture');
+ const result=await h.r.r44LegacyQuarantineReconcile(h.env,5);
+ assert.equal(result.reconciled,0);assert.equal(result.requeued,1);assert.equal(result.remainingLegacy,0);
+ assert.equal(h.db.prepare("SELECT state FROM r44_ticket_progress WHERE ticket_id='T1'").get().state,'CLAIMABLE');
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_receipts WHERE ticket_id='T1'").get().n,0);
+ assert.equal(h.db.prepare("SELECT COUNT(*) n FROM r44_results WHERE ticket_id='T1'").get().n,0);
+ assert.equal((await claim(h,'fresh-worker','fresh-claim')).status,'CLAIMED');h.close();
+});
+
 test('legacy migration preserves rows and active lease; no fabricated entry receipts',async()=>{
  const h=harness();await seed(h,3);
  // Recreate pre-migration fixture using a fresh database with legacy tables only.
