@@ -58,3 +58,13 @@ test('production CI certifies disaster recovery after predeploy with the same de
     'recovery:verify debe heredar la política degrade explícita'
   );
 });
+
+test('production deploy publishes the already-certified artifact without rerunning npm predeploy lifecycle',()=>{
+  const workflow=fs.readFileSync('.github/workflows/produccion.yml','utf8');
+  assert.match(workflow,/run: npx wrangler deploy --keep-vars/);
+  assert.doesNotMatch(workflow,/run: npm run deploy/);
+  const check=workflow.indexOf('npm run check');
+  const deploy=workflow.indexOf('npx wrangler deploy --keep-vars');
+  assert.ok(check>=0&&deploy>check,'deploy directo debe ocurrir después del dry-run certificado');
+});
+
