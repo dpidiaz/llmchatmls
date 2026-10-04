@@ -101,13 +101,21 @@ function parseReservation(issue){
   return r;
 }
 function reservations(issues){
-  const result=[],codes=new Set();
+  const result=[],codes=new Set(),seenIssues=new Set();
   for(const issue of issues||[]){
     // Public repositories must not let unauthorized, user-created Issues block R33 allocation.
     if(!requestAuthorized(issue))continue;
     if(!String(issue?.title||'').startsWith(BUFFERED_TITLE+'[RESERVED]')&&
        !String(issue?.title||'').startsWith(BUFFERED_TITLE+'[STAGED]')&&
        !String(issue?.title||'').startsWith(BUFFERED_TITLE+'[QUARANTINED]'))continue;
+    // Paginated GitHub issue inventories can repeat an issue when the open set shifts
+    // while pages are being read. Ignore only the same durable issue identity; overlap
+    // across two distinct reservation issues must still fail below.
+    const issueNumber=Number(issue?.number);
+    if(Number.isSafeInteger(issueNumber)&&issueNumber>0){
+      if(seenIssues.has(issueNumber))continue;
+      seenIssues.add(issueNumber);
+    }
     const r=parseReservation(issue);
     for(const u of r.allocation.units){
       if(codes.has(u.code))fail('DOUBLE_BUFFERED_OWNERSHIP',u.code);
