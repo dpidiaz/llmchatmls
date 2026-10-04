@@ -1,0 +1,186 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "r44ClaimChat",
+  "method": "POST",
+  "path": "/api/r44/chat-bridge/claim",
+  "response": {
+    "status": "CLAIMED",
+    "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+    "bridgeSessionId": "r44b-97af236b-669c-4711-978a-94792a76ab52",
+    "workerId": "r44-unified-sol-20261003T1839-05",
+    "ticket": {
+      "ticket_id": "R44-CORPUS-1172",
+      "leaseGeneration": 1,
+      "lease_expires_at": 1791074346806,
+      "state": "LEASED",
+      "entries": [
+        {
+          "code": "MLS-V07-0977",
+          "path": "chino-taiwan/MLS-V07-0977.json",
+          "sha256": "c7914505f34f63267a1566b3fb12de7dad7206037825868fa44a5bdc29763ae6"
+        },
+        {
+          "code": "MLS-V07-0978",
+          "path": "chino-taiwan/MLS-V07-0978.json",
+          "sha256": "dba5f248f20575108568436eeb5bb4facf2bc7cf6c4aea7ca205aeb533d353f2"
+        },
+        {
+          "code": "MLS-V07-0979",
+          "path": "chino-taiwan/MLS-V07-0979.json",
+          "sha256": "69b99cb5cbfa5bc836c15866084d15cb6abecee07d65222da367a2149c39e03d"
+        },
+        {
+          "code": "MLS-V07-0981",
+          "path": "chino-taiwan/MLS-V07-0981.json",
+          "sha256": "8194d8bca3dd7f95d534b98e95d105cae48442133068697d8250d3037ddfac16"
+        },
+        {
+          "code": "MLS-V07-0982",
+          "path": "chino-taiwan/MLS-V07-0982.json",
+          "sha256": "cbfa656a71f4634fc844bd37eff84c380fe30f09a614786fe0c01f0163ddbc7d"
+        }
+      ]
+    },
+    "context": {
+      "ticketId": "R44-CORPUS-1172",
+      "state": "LEASED",
+      "migrationNote": null,
+      "editorialStatus": "PENDING_CANONICAL_R33_VALIDATION",
+      "entries": [
+        {
+          "code": "MLS-V07-0977",
+          "path": "chino-taiwan/MLS-V07-0977.json",
+          "sha256": "c7914505f34f63267a1566b3fb12de7dad7206037825868fa44a5bdc29763ae6"
+        },
+        {
+          "code": "MLS-V07-0978",
+          "path": "chino-taiwan/MLS-V07-0978.json",
+          "sha256": "dba5f248f20575108568436eeb5bb4facf2bc7cf6c4aea7ca205aeb533d353f2"
+        },
+        {
+          "code": "MLS-V07-0979",
+          "path": "chino-taiwan/MLS-V07-0979.json",
+          "sha256": "69b99cb5cbfa5bc836c15866084d15cb6abecee07d65222da367a2149c39e03d"
+        },
+        {
+          "code": "MLS-V07-0981",
+          "path": "chino-taiwan/MLS-V07-0981.json",
+          "sha256": "8194d8bca3dd7f95d534b98e95d105cae48442133068697d8250d3037ddfac16"
+        },
+        {
+          "code": "MLS-V07-0982",
+          "path": "chino-taiwan/MLS-V07-0982.json",
+          "sha256": "cbfa656a71f4634fc844bd37eff84c380fe30f09a614786fe0c01f0163ddbc7d"
+        }
+      ],
+      "remaining": [
+        "MLS-V07-0977",
+        "MLS-V07-0978",
+        "MLS-V07-0979",
+        "MLS-V07-0981",
+        "MLS-V07-0982"
+      ],
+      "lease": {
+        "workerId": "r44-unified-sol-20261003T1839-05",
+        "leaseGeneration": 1,
+        "leaseExpiresAt": 1791074346806,
+        "active": true
+      },
+      "workerId": "r44-unified-sol-20261003T1839-05",
+      "leaseGeneration": 1,
+      "leaseExpiresAt": 1791074346806,
+      "active": true,
+      "content": [
+        {
+          "code": "MLS-V07-0977",
+          "language": "chino-taiwan",
+          "languageName": "Chino mandarín de Taiwán",
+          "n": 977,
+          "title": "Ellipsis resolution across clauses",
+          "level": "C2",
+          "part": "Información y discurso avanzado — 信息與進階篇章",
+          "chapter": "Sintaxis y discurso avanzados C1–C2 — 進階句法與篇章 C1–C2",
+          "articleMarkdown": "#### En pocas palabras\n\nLa **resolución de elipsis entre cláusulas** consiste en recuperar contenido que no se repite porque una cláusula anterior ya proporciona la información necesaria. El mandarín permite omitir material cuando la estructura paralela y el contexto hacen clara la interpretación.\n\nEn **小王買了咖啡，小李也買了。** *Xiǎo Wáng mǎi le kāfēi, Xiǎo Lǐ yě mǎi le.* — «Xiaowang compró café y Xiaoli también», la segunda cláusula no repite **咖啡**. La lectura natural recupera «Xiaoli también compró café» a partir de la primera cláusula.\n\n#### Cómo funciona\n\nLa elipsis no significa que el material ausente sea irrelevante. Su contenido se reconstruye mediante un **antecedente**, es decir, una expresión previa que ofrece el modelo interpretativo.\n\nCompare:\n\n- **我點了牛肉麵，他也點了。** — «Yo pedí fideos con carne y él también».\n- **姐姐會游泳，弟弟也會。** — «La hermana mayor sabe nadar y el hermano menor también».\n\nEn el primer caso se recupera el objeto **牛肉麵**; en el segundo, después de **會**, se recupera la actividad **游泳**. La forma exacta de lo omitido depende de la estructura precedente.\n\n#### Qué permite recuperar el contenido\n\nLa semejanza estructural entre las cláusulas facilita la resolución. Marcadores como **也** «también» suelen señalar que la segunda cláusula mantiene una relación paralela con la primera, pero no son suficientes por sí solos: el significado y el contexto deben apoyar la misma reconstrucción.\n\nSi existen varios antecedentes posibles, la interpretación puede volverse ambigua. En ese caso, repetir el sustantivo, el verbo o una parte mayor de la expresión puede ser preferible para mantener claridad.\n\nLa recuperación también puede cruzar límites oracionales cuando el discurso mantiene activa la información necesaria.\n\n#### Observación importante\n\nNo toda ausencia visible constituye la misma clase de elipsis. El mandarín permite sujetos y objetos no expresados por continuidad discursiva, además de estructuras donde una parte del predicado se recupera por paralelismo. Es importante distinguir estos mecanismos antes de proponer un análisis.\n\nAsimismo, la elipsis no obliga a copiar palabra por palabra la cláusula anterior. Lo que se recupera es una interpretación compatible; diferencias de sujeto, tiempo contextual, modalidad o perspectiva pueden permanecer explícitas.\n\n#### Entradas relacionadas\n\n- [Coercion of aspectual readings — 體貌解讀的強制轉換](#entry-976)\n- [Event structure and resultatives — 事件結構與結果補語](#entry-978)\n- [Argument structure alternations — 論元結構交替](#entry-975)\n- [Information packaging in 把 — 把字句的信息包裝](#entry-979)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-245c255c61a173b322c44bb15fcbb9eab56fa86642ccc6442c75dbbb036a27ee",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T09:26:49.000Z"
+        },
+        {
+          "code": "MLS-V07-0978",
+          "language": "chino-taiwan",
+          "languageName": "Chino mandarín de Taiwán",
+          "n": 978,
+          "title": "Event structure and resultatives",
+          "level": "C2",
+          "part": "Información y discurso avanzado — 信息與進階篇章",
+          "chapter": "Sintaxis y discurso avanzados C1–C2 — 進階句法與篇章 C1–C2",
+          "articleMarkdown": "#### En pocas palabras\n\nLa **estructura eventiva** describe cómo se organiza internamente una situación: puede contener una actividad, un cambio y un estado resultante. En mandarín, los **complementos resultativos** hacen visible esa organización al combinar una acción con el resultado que produce.\n\nEn **他把杯子摔破了。** *Tā bǎ bēizi shuāi-pò le.* — «Rompió el vaso al tirarlo», **摔** expresa la acción de arrojar o dejar caer con fuerza y **破** expresa el resultado «quedar roto». Juntos, **摔破** presentan una actividad que culmina en un cambio de estado.\n\n#### Cómo funciona\n\nUn compuesto resultativo suele combinar un primer elemento que describe la acción o proceso con un segundo elemento que indica el resultado alcanzado. El resultado delimita el evento porque establece un punto final relevante.\n\nCompare:\n\n- **他摔杯子。** — «Tira/deja caer el vaso»; no afirma necesariamente que se rompa.\n- **他把杯子摔破了。** — «Rompió el vaso al tirarlo»; **破** afirma el estado resultante.\n\nLa segunda oración contiene, por tanto, más información sobre la consecuencia del evento.\n\n#### Acción, cambio y resultado\n\nOtros compuestos muestran relaciones semejantes: **吃完** «terminar de comer», **寫好** «escribir y dejar listo», **推開** «empujar y abrir», **洗乾淨** «lavar hasta dejar limpio». El segundo componente especifica qué estado o límite se alcanza.\n\nLa relación causal debe resultar semánticamente plausible. En **他把門推開了**, la acción de empujar conduce a que la puerta quede abierta. La construcción no se interpreta como dos acontecimientos independientes, sino como una unidad compleja en la que el primero causa o conduce al segundo.\n\nEl aspecto gramatical puede añadirse después, pero no sustituye al significado resultativo.\n\n#### Observación importante\n\nNo todo compuesto verbal con dos elementos es un resultativo. Hay que comprobar si el segundo componente realmente expresa un resultado del evento anterior y qué participante experimenta ese resultado.\n\nAdemás, **了** no es lo que crea por sí solo la culminación de **摔破**. El resultado **破** aporta el límite léxico; **了** presenta ese evento delimitado como realizado o relevante dentro del contexto. Distinguir ambas contribuciones evita confundir estructura eventiva con tiempo verbal.\n\n#### Entradas relacionadas\n\n- [Ellipsis resolution across clauses — 跨句省略還原](#entry-977)\n- [Information packaging in 把 — 把字句的信息包裝](#entry-979)\n- [Coercion of aspectual readings — 體貌解讀的強制轉換](#entry-976)\n- [Information packaging in 被 — 被字句的信息包裝](#entry-980)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-5bf3006266fd17a6a7a9b3a7edc673dc2be244a51913a15e21610eee9bd5687d",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T09:27:44.499Z"
+        },
+        {
+          "code": "MLS-V07-0979",
+          "language": "chino-taiwan",
+          "languageName": "Chino mandarín de Taiwán",
+          "n": 979,
+          "title": "Information packaging in 把",
+          "level": "C2",
+          "part": "Información y discurso avanzado — 信息與進階篇章",
+          "chapter": "Sintaxis y discurso avanzados C1–C2 — 進階句法與篇章 C1–C2",
+          "articleMarkdown": "#### En pocas palabras\n\nLa construcción con **把** no solo cambia el orden de una entidad respecto del verbo: también ayuda a **empaquetar la información**. Con frecuencia presenta como accesible o identificable aquello que será afectado y reserva para el predicado la información nueva sobre qué se hizo con ello o en qué estado quedó.\n\nEn **這些文件，我已經把重要的部分整理好了。** *Zhèxiē wénjiàn, wǒ yǐjīng bǎ zhòngyào de bùfen zhěnglǐ hǎo le.* — «Estos documentos, ya dejé organizada la parte importante», **這些文件** establece el marco temático y **把重要的部分** identifica la entidad afectada; **整理好了** aporta el resultado relevante.\n\n#### Cómo funciona\n\nLa **estructura informativa** distingue, de manera simplificada, entre información que el interlocutor ya puede identificar y contenido que se presenta como nuevo, contrastivo o central para el avance del mensaje. La construcción con **把** suele favorecer objetos suficientemente determinados dentro del discurso.\n\nCompare:\n\n- **我把那份報告改好了。** — «Ya dejé corregido ese informe».\n- **我改了一份報告。** — «Corregí un informe».\n\nLa segunda oración puede introducir un informe nuevo. En la primera, **那份報告** se presenta como identificable y el foco informativo recae con naturalidad en el resultado **改好了**.\n\n#### Tópico, objeto y resultado\n\nUna oración puede contener un tópico externo y, dentro del comentario, una construcción con **把**. En **這些文件，我把重要的部分整理好了**, **這些文件** funciona como marco tópico, mientras **重要的部分** es la entidad directamente afectada por **整理**.\n\nEsto muestra que tópico y objeto no son la misma categoría. El orden permite organizar capas informativas: primero el dominio del que se habla, después la entidad afectada y finalmente el cambio o resultado que se afirma.\n\nEn español de Guatemala esa organización suele expresarse mediante pronombres, entonación, tematización u otros órdenes; no existe una traducción fija de **把**.\n\n#### Observación importante\n\nNo debe afirmarse que el objeto de **把** sea siempre «información vieja» en sentido absoluto. Puede introducirse con material descriptivo nuevo si resulta identificable dentro de la situación. La accesibilidad y la determinación son tendencias discursivas, no una regla mecánica de «viejo antes, nuevo después».\n\nAdemás, la construcción mantiene requisitos semánticos propios: el predicado normalmente debe expresar un efecto, resultado, ubicación o tratamiento suficientemente definido sobre la entidad introducida por **把**.\n\n#### Entradas relacionadas\n\n- [Event structure and resultatives — 事件結構與結果補語](#entry-978)\n- [Information packaging in 被 — 被字句的信息包裝](#entry-980)\n- [Ellipsis resolution across clauses — 跨句省略還原](#entry-977)\n- [Light verb constructions — 輕動詞結構](#entry-981)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-3d71ebac40bc6d8ba3c9ee4ca496c6e042f7f102c76361055bee5414b0ba8ea6",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T09:28:43.626Z"
+        },
+        {
+          "code": "MLS-V07-0981",
+          "language": "chino-taiwan",
+          "languageName": "Chino mandarín de Taiwán",
+          "n": 981,
+          "title": "Light verb constructions",
+          "level": "C2",
+          "part": "Información y discurso avanzado — 信息與進階篇章",
+          "chapter": "Sintaxis y discurso avanzados C1–C2 — 進階句法與篇章 C1–C2",
+          "articleMarkdown": "#### En pocas palabras\n\nLas **construcciones con verbo ligero** combinan un verbo de significado relativamente general con un sustantivo que aporta gran parte del contenido léxico del evento. El verbo no está vacío de significado: ayuda a formar el predicado, expresa propiedades gramaticales y puede contribuir matices de realización, inicio o ejecución.\n\nEn **我們對這個問題進行了討論。** *Wǒmen duì zhège wèntí jìnxíng le tǎolùn.* — «Realizamos una discusión sobre este problema», **進行** funciona como verbo ligero y **討論** nombra la actividad principal. La oración presenta el evento de discutir mediante una estructura más nominal y formal que el verbo simple **討論**.\n\n#### Cómo funciona\n\nCompare **我們討論了這個問題** «discutimos este problema» con **我們對這個問題進行了討論** «realizamos una discusión sobre este problema». Las dos expresiones pueden describir un acontecimiento semejante, pero su estructura no es idéntica.\n\nEn la primera, **討論** funciona directamente como verbo y selecciona **這個問題** como su complemento. En la segunda, **進行** constituye el núcleo verbal y **討論** aparece como nombre de actividad; **對這個問題** establece aquello sobre lo que recae la discusión.\n\nEl marcador aspectual **了** se asocia con el predicado encabezado por **進行**. No debe interpretarse como una terminación de pasado: presenta el evento como realizado o delimitado dentro del contexto.\n\n#### Registro y elección léxica\n\nLas construcciones con **進行** son frecuentes en registros formales, administrativos, académicos y periodísticos, especialmente con nombres de actividad como **研究** «investigación», **分析** «análisis», **討論** «discusión» o **調查** «investigación/indagación».\n\nPor ejemplo, **研究團隊進行了分析** «el equipo de investigación realizó un análisis» resulta más nominal y formal que una formulación verbal directa cuando existe una alternativa natural.\n\nEsta diferencia puede ser útil para organizar información compleja, añadir modificadores al nombre de evento o mantener un registro institucional coherente.\n\n#### Observación importante\n\n«Verbo ligero» no significa «verbo sin significado». **進行** conserva una contribución relacionada con llevar a cabo o desarrollar una actividad, y no puede combinarse libremente con cualquier sustantivo.\n\nTampoco toda secuencia verbo + sustantivo es una construcción de verbo ligero. El análisis depende de cuánto contenido aporta cada elemento, de la relación sintáctica entre ellos y de si la combinación está convencionalizada en el uso.\n\n#### Entradas relacionadas\n\n- [Information packaging in 被 — 被字句的信息包裝](#entry-980)\n- [Metadiscourse in Chinese — 中文元話語](#entry-982)\n- [Information packaging in 把 — 把字句的信息包裝](#entry-979)\n- [Register-sensitive word order — 受語體制約的語序](#entry-983)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-e2d84b8b88973c431dcc6e660886ad828ceb95f0605737265bf381aec96225bb",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T09:31:11.690Z"
+        },
+        {
+          "code": "MLS-V07-0982",
+          "language": "chino-taiwan",
+          "languageName": "Chino mandarín de Taiwán",
+          "n": 982,
+          "title": "Metadiscourse in Chinese",
+          "level": "C2",
+          "part": "Información y discurso avanzado — 信息與進階篇章",
+          "chapter": "Sintaxis y discurso avanzados C1–C2 — 進階句法與篇章 C1–C2",
+          "articleMarkdown": "#### En pocas palabras\n\nEl **metadiscurso** reúne expresiones con las que el hablante o escritor organiza explícitamente su propio mensaje: anuncia una reformulación, introduce una conclusión, señala un contraste o guía al lector entre partes del razonamiento. Estas expresiones no describen solamente el tema; también indican cómo debe interpretarse la relación entre segmentos del discurso.\n\nEn **換句話說，這個結果不支持原假設。** *Huàn jù huà shuō, zhège jiéguǒ bù zhīchí yuán jiǎshè.* — «En otras palabras, este resultado no apoya la hipótesis original», **換句話說** avisa que lo siguiente reformula una idea previa desde otra formulación.\n\n#### Cómo funciona\n\nEl metadiscurso actúa sobre unidades mayores que una palabra aislada. Una expresión inicial puede establecer la relación lógica o comunicativa entre una oración y lo dicho antes.\n\nEntre las funciones frecuentes se encuentran:\n\n- **換句話說** «en otras palabras», para reformular;\n- **總而言之** «en resumen / en definitiva», para cerrar o sintetizar;\n- **也就是說** «es decir», para explicar o precisar;\n- **值得注意的是** «conviene señalar que», para destacar información.\n\nEstas fórmulas ayudan a que el lector reconozca la arquitectura argumentativa sin tener que inferir todas las conexiones únicamente por el contenido.\n\n#### Posición, registro y perspectiva\n\nMuchas expresiones metadiscursivas aparecen al comienzo de una cláusula u oración porque allí pueden orientar lo que sigue. Sin embargo, su posición concreta depende de la construcción y del registro.\n\nEn textos académicos y formales son comunes fórmulas que indican transición, recapitulación o relevancia. En conversación aparecen también recursos más espontáneos, como **簡單來說** «dicho de forma sencilla» o **我的意思是** «lo que quiero decir es».\n\nEstas últimas expresiones hacen visible además la perspectiva del hablante: no solo conectan ideas, sino que comentan cómo debe entenderse la formulación previa.\n\n#### Observación importante\n\nNo toda conjunción o adverbio discursivo constituye metadiscurso en el mismo sentido. Algunas expresiones describen directamente relaciones entre acontecimientos, mientras otras comentan la organización, formulación o interpretación del propio mensaje. El límite puede depender del análisis y del contexto.\n\nTampoco conviene traducir mecánicamente cada marcador por una única fórmula española. **換句話說**, **也就是說** y otras expresiones pueden solaparse, pero difieren en registro, grado de reformulación y función local.\n\n#### Entradas relacionadas\n\n- [Light verb constructions — 輕動詞結構](#entry-981)\n- [Register-sensitive word order — 受語體制約的語序](#entry-983)\n- [Information packaging in 被 — 被字句的信息包裝](#entry-980)\n- [Relative-clause processing and ambiguity — 關係子句處理與歧義](#entry-984)",
+          "provider": "mls-r32",
+          "model": "editorial-standard-32",
+          "auditProvider": "mls-r32-validator",
+          "auditModel": "chat-draft-cda692da803f6cccc42cbd61fe914c9ae5cc48c9fdb4f204ff5af00851f26c75",
+          "promptVersion": "32.0",
+          "generatedAt": "2026-09-19T09:32:07.073Z"
+        }
+      ]
+    },
+    "leaseTtlSeconds": 300
+  },
+  "completedAt": "2026-10-04T00:34:07.754Z",
+  "commandFile": "mls chat bridge/commands/r44-unified-claim-20261003T1839-sol-05.json"
+}
