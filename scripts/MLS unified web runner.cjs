@@ -243,6 +243,124 @@ async function dispatchIntegration(issue,state){
   await dispatchWorkflow(WORKFLOWS.integration,issue.number,comment.id);
   await report('integration','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,detail:{commentId:Number(comment.id),workflow:WORKFLOWS.integration}});
 }
+
+function integrationUnits(state){
+  return (state.resourceLocks||[]).filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6));
+}
+async function applyIntegrationEventInline(issue,event,kind){
+  const body='<!-- MLS_GLOBAL_DISPATCH_EVENT\n'+JSON.stringify(event,null,2)+'\n-->';
+  const p=syntheticEventPath('integration-'+kind);
+  fs.writeFileSync(p,JSON.stringify({
+    issue:{number:Number(issue.number)},
+    comment:{id:Date.now(),body,created_at:new Date().toISOString(),user:{login:BOT}}
+  },null,2)+'\n');
+  try{
+    child.execFileSync(process.execPath,['scripts/MLS global dispatcher worker.cjs'],{
+      cwd:process.cwd(),stdio:'inherit',env:{...process.env,GITHUB_EVENT_PATH:p}
+    });
+  }finally{try{fs.unlinkSync(p)}catch{}}
+  const refreshed=await getIssue(Number(issue.number));
+  return {issue:refreshed,state:parseAssignment(refreshed)};
+}
+async function existingIntegrationPr(state){
+  const {owner}=repoParts();
+  const rows=await gh('/repos/'+REPOSITORY+'/pulls?state=all&base=main&head='+encodeURIComponent(owner+':'+state.branch)+'&per_page=20');
+  const branchRef=await gh('/repos/'+REPOSITORY+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
+  const branchSha=String(branchRef?.object?.sha||'').toLowerCase();
+  return (Array.isArray(rows)?rows:[])
+    .filter(pr=>String(pr.head?.ref||'')===state.branch&&String(pr.head?.sha||'').toLowerCase()===branchSha)
+    .sort((a,b)=>Number(b.number)-Number(a.number))[0]||null;
+}
+async function requiredIntegrationCheck(headSha){
+  const runs=await gh('/repos/'+REPOSITORY+'/actions/runs?head_sha='+encodeURIComponent(headSha)+'&event=pull_request&per_page=50');
+  return (runs.workflow_runs||[]).filter(r=>r.name==='R33 GitHub Native Tests').sort((a,b)=>Number(b.id)-Number(a.id))[0]||null;
+}
+async function resumeIntegrationPr(issue,state){
+  const pr=await existingIntegrationPr(state);
+  if(!pr||(!pr.merged_at&&pr.state!=='open'))return {handled:false};
+  const headSha=String(pr.head?.sha||'').toLowerCase();
+  if(!/^[a-f0-9]{40}$/.test(headSha))fail('UNIFIED_WEB_INTEGRATION_PR_HEAD_INVALID');
+  const check=await requiredIntegrationCheck(headSha);
+  if(!check||check.status!=='completed'){
+    await report('integration','WAITING_PR_CHECK',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,detail:{prNumber:Number(pr.number),headSha}});
+    return {handled:true,status:'WAITING_PR_CHECK'};
+  }
+  if(check.conclusion!=='success')fail('UNIFIED_WEB_INTEGRATION_REQUIRED_CHECK_FAILED','R33 GitHub Native Tests: '+check.conclusion);
+
+  let currentIssue=issue,currentState=state;
+  const last=(currentState.checkpoints||[]).at(-1);
+  if(!(last?.integrationStage==='premerge'&&String(last.integrationHeadSha||last.commitSha||'').toLowerCase()===headSha)){
+    ({issue:currentIssue,state:currentState}=await applyIntegrationEventInline(currentIssue,{
+      operation:'checkpoint',
+      assignmentId:currentState.assignmentId,
+      leaseToken:currentState.leaseToken,
+      leaseEpoch:currentState.leaseEpoch,
+      commitSha:headSha,
+      integrationStage:'premerge',
+      integrationPrNumber:Number(pr.number),
+      integrationHeadSha:headSha,
+      validation:{status:'passed',workflow:'R33 GitHub Native Tests',runId:Number(check.id)},
+      completedUnits:integrationUnits(currentState),
+      pendingUnits:[],
+      notes:'Unified web runner resumed an existing serialized integration PR after checks passed.'
+    },'resume-premerge'));
+  }
+
+  let mergeSha=String(pr.merge_commit_sha||'').toLowerCase();
+  if(!pr.merged_at){
+    const merged=await gh('/repos/'+REPOSITORY+'/pulls/'+Number(pr.number)+'/merge',{
+      method:'PUT',body:{merge_method:'merge',sha:headSha}
+    });
+    if(merged?.merged!==true||!/^[a-f0-9]{40}$/.test(String(merged.sha||'')))fail('UNIFIED_WEB_INTEGRATION_MERGE_FAILED',merged?.message||'merge failed');
+    mergeSha=String(merged.sha).toLowerCase();
+  }
+  if(!/^[a-f0-9]{40}$/.test(mergeSha)){
+    const refreshedPr=await gh('/repos/'+REPOSITORY+'/pulls/'+Number(pr.number));
+    mergeSha=String(refreshedPr?.merge_commit_sha||'').toLowerCase();
+  }
+  if(!/^[a-f0-9]{40}$/.test(mergeSha))fail('UNIFIED_WEB_INTEGRATION_MERGE_SHA_INVALID');
+  const mainRef=await gh('/repos/'+REPOSITORY+'/git/ref/heads/main');
+  const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
+  if(mainSha!==mergeSha)fail('UNIFIED_WEB_INTEGRATION_MAIN_VERIFY_FAILED','main HEAD does not match integration merge SHA.');
+
+  currentIssue=await getIssue(Number(issue.number));
+  currentState=parseAssignment(currentIssue);
+  const lastAfterMerge=(currentState?.checkpoints||[]).at(-1);
+  if(!(lastAfterMerge?.integrationStage==='postmerge'&&String(lastAfterMerge.commitSha||'').toLowerCase()===mergeSha)){
+    ({issue:currentIssue,state:currentState}=await applyIntegrationEventInline(currentIssue,{
+      operation:'checkpoint',
+      assignmentId:currentState.assignmentId,
+      leaseToken:currentState.leaseToken,
+      leaseEpoch:currentState.leaseEpoch,
+      commitSha:mergeSha,
+      integrationStage:'postmerge',
+      integrationPrNumber:Number(pr.number),
+      integrationHeadSha:headSha,
+      validation:{status:'passed',workflow:'R33 GitHub Native Tests',runId:Number(check.id)},
+      completedUnits:integrationUnits(currentState),
+      pendingUnits:[],
+      notes:'Unified web runner resumed existing PR, merged with expected head SHA and verified main.'
+    },'resume-postmerge'));
+  }
+
+  currentIssue=await getIssue(Number(issue.number));
+  currentState=parseAssignment(currentIssue);
+  if(!currentState?.readyToClose){
+    ({issue:currentIssue,state:currentState}=await applyIntegrationEventInline(currentIssue,{
+      operation:'finish',
+      assignmentId:currentState.assignmentId,
+      leaseToken:currentState.leaseToken,
+      leaseEpoch:currentState.leaseEpoch,
+      commitSha:mergeSha,
+      integrationStage:'postmerge',
+      integrationPrNumber:Number(pr.number),
+      integrationHeadSha:headSha
+    },'resume-finish'));
+  }
+  await report('integration','FINISHING',{issueNumber:Number(issue.number),assignmentId:currentState?.assignmentId||state.assignmentId,detail:{prNumber:Number(pr.number),headSha,mergeSha,resumedExistingPr:true}});
+  return {handled:true,status:'INTEGRATION_RESUMED',prNumber:Number(pr.number),mergeSha};
+}
+
 function jsonArrayAfter(text,marker){
   const raw=String(text||''),m=raw.lastIndexOf(marker);
   if(m<0)return null;
@@ -367,6 +485,11 @@ async function run(){
 
   const integration=await resolveAssignment('integration',status.lanes?.integration||null);
   if(integration.kind==='leased'){
+    const resumed=await resumeIntegrationPr(integration.issue,integration.state);
+    if(resumed.handled){
+      console.log(JSON.stringify({ok:true,status:resumed.status,issueNumber:integration.issue.number,prNumber:resumed.prNumber||null,mergeSha:resumed.mergeSha||null}));
+      return;
+    }
     await dispatchIntegration(integration.issue,integration.state);
     console.log(JSON.stringify({ok:true,status:'INTEGRATION_DISPATCHED',issueNumber:integration.issue.number}));
     return;
