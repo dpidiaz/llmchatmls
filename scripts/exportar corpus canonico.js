@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
+const { titleIssues } = require('./auditar titulos canonicos.cjs');
 
 const DB_BINDING = process.env.MLS_WIKI_DB_BINDING || 'WIKI_DB';
 const PROMPT_VERSION = process.env.MLS_CANONICAL_PROMPT_VERSION || '32.0';
@@ -95,6 +96,7 @@ function validateArticle(article, language) {
   if (article.language !== language.slug) fail(article.code + ': idioma incorrecto: ' + article.language + '.');
   if (article.promptVersion !== PROMPT_VERSION) fail(article.code + ': promptVersion ' + article.promptVersion + ' no es ' + PROMPT_VERSION + '.');
   if (!article.title) fail(article.code + ': falta title.');
+  if (titleIssues(article.title).length) fail(article.code + ': título genérico o inválido: ' + article.title);
   if (!article.languageName) fail(article.code + ': falta languageName.');
   if (!article.articleMarkdown) fail(article.code + ': falta articleMarkdown.');
   if (article.provider === 'cloudflare-legacy' || article.auditProvider === 'cloudflare-legacy') {

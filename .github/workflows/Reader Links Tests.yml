@@ -7,6 +7,11 @@ on:
       - 'scripts/habilitar enlaces canonicos lector.js'
       - 'test/reader canonical links.test.cjs'
       - 'content/**'
+      - 'scripts/auditar titulos canonicos.cjs'
+      - 'scripts/validar corpus canonico.js'
+      - 'scripts/exportar corpus canonico.js'
+      - 'test/canonical titles.test.cjs'
+      - 'docs/editorial/canonical title corrections.json'
       - 'package.json'
       - '.github/workflows/Reader Links Tests.yml'
   workflow_dispatch:
@@ -20,4 +25,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - run: node --test 'test/reader canonical links.test.cjs' 'test/evidence native reader.test.cjs' 'test/navigation orientation.test.cjs' 'test/reader related discovery.test.cjs'
+      - run: node 'scripts/auditar titulos canonicos.cjs'
+      - run: node --test 'test/reader canonical links.test.cjs' 'test/evidence native reader.test.cjs' 'test/navigation orientation.test.cjs' 'test/reader related discovery.test.cjs' 'test/canonical titles.test.cjs'
