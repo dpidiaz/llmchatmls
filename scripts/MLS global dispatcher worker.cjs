@@ -38,11 +38,13 @@ function autoPullRequest(state,comment){
   const workId=String(state.workId||'');
   const handoffScope=/^r33-handoff:\d+:/.exec(workId);
   const unifiedScope=workId.startsWith('r33-unified:')?'r33-unified:':null;
+  const unifiedIntegrationScope=workId.startsWith('r33-unified-integration:')?'r33-unified-integration:':null;
   return {
     operation:'claim',requestId,workerId,workerLogin:workerLogin||null,
     capabilities:['chat','github','r4-autopull'],
     ...(handoffScope?{provider:'r33-farm',workPrefix:handoffScope[0]}:
-      unifiedScope?{provider:'r33-farm',workPrefix:unifiedScope}:{})
+      unifiedScope?{provider:'r33-farm',workPrefix:unifiedScope}:
+      unifiedIntegrationScope?{provider:'r33-index-integration',workPrefix:unifiedIntegrationScope}:{})
   };
 }
 function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
@@ -68,7 +70,9 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
         throw core.dispatchError('INTEGRATION_NOOP_MAIN_MISMATCH','No-op integration requires assignment branch HEAD and current main HEAD to equal commitSha.',409);
       return;
     }
-    if(stage==='premerge'){
+    if(stage==='premerge'||stage==='premerge-direct'){
+      if(stage==='premerge-direct'&&policy.allowDirectFallback!==true)
+        throw core.dispatchError('INTEGRATION_DIRECT_FALLBACK_NOT_ALLOWED','El assignment no permite integración directa.',409);
       const head=await branchHead(state.branch);
       if(head!==commitSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','Premerge commit no coincide con HEAD de la rama asignada.',409);
       const base=String(state.recovery?.integrationBaseCommit||state.baseCommit||'').toLowerCase();
@@ -81,7 +85,26 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
       if(disallowed.length)throw core.dispatchError('CHECKPOINT_SCOPE_VIOLATION','Cambios integration fuera de allowedPaths: '+disallowed.slice(0,10).join(', '),409);
       return;
     }
-    if(stage!=='postmerge')throw core.dispatchError('INTEGRATION_STAGE_REQUIRED','assignment-pr requiere integrationStage premerge/postmerge.',409);
+    if(stage==='postmerge-direct'){
+      if(policy.allowDirectFallback!==true)
+        throw core.dispatchError('INTEGRATION_DIRECT_FALLBACK_NOT_ALLOWED','El assignment no permite integración directa.',409);
+      const expectedHeadSha=String(event.integrationHeadSha||'').toLowerCase();
+      if(!/^[a-f0-9]{40}$/.test(expectedHeadSha))throw core.dispatchError('INTEGRATION_HEAD_REQUIRED','checkpoint directo requiere integrationHeadSha.',409);
+      const assignedHead=await branchHead(state.branch);
+      if(assignedHead!==expectedHeadSha)throw core.dispatchError('INTEGRATION_BRANCH_HEAD_MISMATCH','integrationHeadSha directo no coincide con HEAD de la rama asignada.',409);
+      if(!recoveryContext.acceptedHead(state,expectedHeadSha))throw core.dispatchError('INTEGRATION_PREMERGE_CHECKPOINT_REQUIRED','Falta checkpoint premerge-direct del head exacto.',409);
+      const base=String(state.recovery?.integrationBaseCommit||state.baseCommit||'').toLowerCase();
+      if(!/^[a-f0-9]{40}$/.test(base))throw core.dispatchError('BASE_COMMIT_INVALID','Assignment integration sin base válido.',409);
+      const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
+      const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
+      if(mainSha!==commitSha)throw core.dispatchError('INTEGRATION_DIRECT_MAIN_MISMATCH','main HEAD no coincide con el merge directo checkpointed.',409);
+      const mergeCommit=await gh('GET','/repos/'+owner+'/'+repo+'/git/commits/'+commitSha);
+      const parents=(mergeCommit?.parents||[]).map(x=>String(x?.sha||'').toLowerCase());
+      if(parents.length!==2||parents[0]!==base||parents[1]!==expectedHeadSha)
+        throw core.dispatchError('INTEGRATION_DIRECT_PARENTS_MISMATCH','El merge directo no conserva exactamente base + head certificado.',409);
+      return;
+    }
+    if(stage!=='postmerge')throw core.dispatchError('INTEGRATION_STAGE_REQUIRED','assignment-pr requiere integrationStage premerge/postmerge o el fallback directo autorizado.',409);
     const prNumber=Number(event.integrationPrNumber);
     const expectedHeadSha=String(event.integrationHeadSha||'').toLowerCase();
     if(!Number.isInteger(prNumber)||prNumber<1)throw core.dispatchError('INTEGRATION_PR_REQUIRED','checkpoint assignment-pr requiere integrationPrNumber.',409);
@@ -157,7 +180,8 @@ async function main(){
     state=core.parseAssignmentState(issue.body||'');if(!state)return;
     let next=core.applyWorkerEvent(state,workerEvent,{createdAt:comment.created_at,commentId:comment.id});
     let chainedClaim=null;
-    if(workerEvent.operation==='finish'&&next.readyToClose===true&&next.provider==='r33-farm'){
+    const integrationAutoPull=next.provider==='r33-index-integration'&&String(next.workId||'').startsWith('r33-unified-integration:');
+    if(workerEvent.operation==='finish'&&next.readyToClose===true&&(next.provider==='r33-farm'||integrationAutoPull)){
       const command=autoPullRequest(next,comment);
       if(command){
         chainedClaim=await createIssue('[MLS Dispatcher][CLAIM] '+command.requestId,core.renderCommandBody(command));
