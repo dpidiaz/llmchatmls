@@ -111,56 +111,99 @@ jobs:
           HEAD_SHA="$(git rev-parse HEAD)"
           git push origin "HEAD:refs/heads/$BRANCH"
           echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
-      - name: Open serialized integration PR
+      - name: Open serialized integration PR or select safe direct fallback
         if: ${{ steps.scope.outputs.has_changes == 'true' }}
         id: pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" open-pr "${{ steps.prep.outputs.bundle_path }}" "${{ steps.commit.outputs.head_sha }}"
       - name: Wait for required R33 PR check
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" wait-check "${{ steps.commit.outputs.head_sha }}"
       - name: Record premerge checkpoint
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         id: premerge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" premerge-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.commit.outputs.head_sha }}" "${{ steps.pr.outputs.pr_number }}" "${{ github.run_id }}"
       - name: Apply premerge event through canonical Dispatcher worker
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SYNTHETIC_EVENT_PATH: ${{ steps.premerge.outputs.event_path }}
         run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
       - name: Merge with expected head SHA
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         id: merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" merge-pr "${{ steps.prep.outputs.bundle_path }}" "${{ steps.pr.outputs.pr_number }}" "${{ steps.commit.outputs.head_sha }}"
       - name: Record postmerge checkpoint
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         id: postmerge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" postmerge-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.merge.outputs.merge_sha }}" "${{ steps.pr.outputs.pr_number }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
       - name: Apply postmerge event through canonical Dispatcher worker
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SYNTHETIC_EVENT_PATH: ${{ steps.postmerge.outputs.event_path }}
         run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
       - name: Record finish event
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         id: finish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" finish-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.merge.outputs.merge_sha }}" "${{ steps.pr.outputs.pr_number }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
       - name: Finish through canonical Dispatcher worker
-        if: ${{ steps.scope.outputs.has_changes == 'true' }}
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'pr' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SYNTHETIC_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+
+      - name: Record direct fallback premerge checkpoint
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        id: direct_premerge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" direct-premerge-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
+      - name: Apply direct fallback premerge through canonical Dispatcher worker
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SYNTHETIC_EVENT_PATH: ${{ steps.direct_premerge.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Merge validated branch directly to main
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        id: direct_merge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" direct-merge "${{ steps.prep.outputs.bundle_path }}" "${{ steps.commit.outputs.head_sha }}"
+      - name: Record direct fallback postmerge checkpoint
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        id: direct_postmerge
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" direct-postmerge-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.direct_merge.outputs.merge_sha }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
+      - name: Apply direct fallback postmerge through canonical Dispatcher worker
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SYNTHETIC_EVENT_PATH: ${{ steps.direct_postmerge.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Record direct fallback finish
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        id: direct_finish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" direct-finish-event "${{ steps.prep.outputs.bundle_path }}" "${{ steps.direct_merge.outputs.merge_sha }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
+      - name: Finish direct fallback through canonical Dispatcher worker
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SYNTHETIC_EVENT_PATH: ${{ steps.direct_finish.outputs.event_path }}
         run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
