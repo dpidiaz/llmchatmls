@@ -55,6 +55,7 @@ function injectR44(code) {
   if (begin >= 0 && end >= begin) next = next.slice(0,begin) + RUNTIME.trimEnd() + next.slice(end+RUNTIME_MARKER.length);
   else if (!next.includes(RUNTIME_MARKER)) next += "\n\n" + RUNTIME + "\n";
 
+  if (!next.includes("export { UnifiedLogicalRunner }")) next += "\nexport { UnifiedLogicalRunner };\n";
   return next;
 }
 if (require.main === module) {
