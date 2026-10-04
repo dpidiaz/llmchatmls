@@ -153,6 +153,26 @@ reassign the unfinished ticket with an incremented generation. Rebind never
 revives expired ownership. QUARANTINED requires administrative resolution and
 is not eligible for automatic claim or recovery writes.
 
+
+## Legacy quarantine reconciliation
+
+Tickets carrying `migration_note=LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION` are migration quarantines, not automatically editorial failures. They originated from full-ticket R44 results that predate per-entry durable receipts.
+
+Production recovery is fail-closed and authenticated through:
+
+`POST /api/r44/admin/reconcile-legacy-quarantine`
+
+For each eligible quarantined ticket the reconciler:
+
+1. verifies the persisted legacy result SHA-256;
+2. parses the persisted payload and verifies exact code scope against the frozen ticket entries;
+3. when the payload contains a valid per-entry result set, creates normal fenced `MLS-R44-ENTRY-RECEIPT-1` receipts through the existing checkpoint path and requires terminal `COMPLETE`;
+4. when the historical artifact is a valid but unstructured sentinel, removes that obsolete result projection and safely requeues the ticket for a fresh normal R44 audit rather than fabricating receipts;
+5. leaves hash/JSON-corrupt artifacts quarantined with an explicit `LEGACY_RECONCILIATION_BLOCKED_*` note;
+6. preserves genuine non-migration quarantine states.
+
+The recovery runner operates in bounded batches of at most five tickets and stops when the D1 daily write headroom drops below the configured safety floor. The MLS Unified five-minute workflow performs one bounded recovery batch per run so safe recovery continues without requiring manual ticket IDs.
+
 ## Recovery and messaging
 
 The bundled HTTP client persists worker, claim key, ticket, token, generation and
