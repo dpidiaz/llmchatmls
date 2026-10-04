@@ -30,7 +30,10 @@ async function gh(endpoint,{method='GET',body}={}){
     body:body===undefined?undefined:JSON.stringify(body)
   });
   const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-  if(!response.ok)fail('GITHUB_'+response.status,data?.message||text||'GitHub request failed');
+  if(!response.ok){
+    const e=new Error(data?.message||text||'GitHub request failed');
+    e.code='GITHUB_'+response.status;e.status=response.status;e.data=data;throw e;
+  }
   return data;
 }
 function output(name,value){
@@ -174,15 +177,25 @@ async function openPr(){
   const existing=await gh('/repos/'+repository+'/pulls?state=open&head='+encodeURIComponent(owner+':'+bundle.branch)+'&base=main');
   let pr=Array.isArray(existing)?existing.find(x=>String(x?.head?.ref||'')===bundle.branch&&String(x?.base?.ref||'')==='main'):null;
   if(!pr){
-    pr=await gh('/repos/'+repository+'/pulls',{method:'POST',body:{
-      title:'r33(unified): integrate '+bundle.workId,
-      head:bundle.branch,base:'main',
-      body:'Automated serialized MLS Unified R33 integration for '+bundle.assignmentId+'.\n\nSource refs are pinned by commit SHA; indexes/tests are generated before merge.'
-    }});
+    try{
+      pr=await gh('/repos/'+repository+'/pulls',{method:'POST',body:{
+        title:'r33(unified): integrate '+bundle.workId,
+        head:bundle.branch,base:'main',
+        body:'Automated serialized MLS Unified R33 integration for '+bundle.assignmentId+'.\n\nSource refs are pinned by commit SHA; indexes/tests are generated before merge.'
+      }});
+    }catch(error){
+      const message=String(error?.message||'');
+      if(error?.code==='GITHUB_403'&&/not permitted to create or approve pull requests/i.test(message)&&bundle.integration?.allowDirectFallback===true){
+        output('mode','direct');output('head_sha',headSha);
+        process.stdout.write(JSON.stringify({ok:true,mode:'direct',headSha,reason:'ACTIONS_PULL_REQUEST_CREATION_DISABLED'})+'\n');
+        return;
+      }
+      throw error;
+    }
   }
   if(String(pr?.head?.sha||'').toLowerCase()!==headSha)fail('UNIFIED_INTEGRATION_PR_HEAD_MISMATCH','Existing/opened PR head does not match the expected assignment head.');
-  output('pr_number',pr.number);output('head_sha',headSha);
-  process.stdout.write(JSON.stringify({ok:true,prNumber:pr.number,headSha,reused:Boolean(existing?.length)})+'\n');
+  output('mode','pr');output('pr_number',pr.number);output('head_sha',headSha);
+  process.stdout.write(JSON.stringify({ok:true,mode:'pr',prNumber:pr.number,headSha,reused:Boolean(existing?.length)})+'\n');
 }
 async function waitCheck(){
   const headSha=String(process.argv[3]||'').toLowerCase();
@@ -265,6 +278,64 @@ async function mergePr(){
   if(result?.merged!==true||!/^[a-f0-9]{40}$/.test(String(result.sha||'')))fail('UNIFIED_INTEGRATION_MERGE_FAILED',result?.message||'merge failed');
   output('merge_sha',String(result.sha).toLowerCase());
 }
+async function directPremergeEvent(){
+  const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),headSha=String(process.argv[4]||'').toLowerCase(),runId=Number(process.argv[5]);
+  if(bundle.integration?.allowDirectFallback!==true)fail('UNIFIED_INTEGRATION_DIRECT_FALLBACK_NOT_ALLOWED');
+  if(!/^[a-f0-9]{40}$/.test(headSha))fail('UNIFIED_INTEGRATION_DIRECT_HEAD_INVALID');
+  const {repository}=githubContext(),issue=await gh('/repos/'+repository+'/issues/'+bundle.issueNumber);
+  const state=core.parseAssignmentState(issue.body||'');
+  if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased')fail('UNIFIED_INTEGRATION_DIRECT_PREMERGE_STATE_INVALID');
+  writeEvent('direct-premerge',bundle,{operation:'checkpoint',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
+    commitSha:headSha,integrationStage:'premerge-direct',integrationHeadSha:headSha,
+    validation:{status:'passed',workflow:'MLS Unified R33 Integration Execute',runId},
+    completedUnits:state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6)),pendingUnits:[],
+    notes:'Unified direct fallback premerge checkpoint after source pinning, index regeneration and R33 tests.'},runId*10+6);
+}
+async function directMerge(){
+  const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),headSha=String(process.argv[4]||'').toLowerCase();
+  if(bundle.integration?.allowDirectFallback!==true)fail('UNIFIED_INTEGRATION_DIRECT_FALLBACK_NOT_ALLOWED');
+  if(!/^[a-f0-9]{40}$/.test(headSha))fail('UNIFIED_INTEGRATION_DIRECT_HEAD_INVALID');
+  const {repository}=githubContext();
+  const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+bundle.branch.split('/').map(encodeURIComponent).join('/'));
+  const branchSha=String(branchRef?.object?.sha||'').toLowerCase();
+  if(branchSha!==headSha)fail('UNIFIED_INTEGRATION_DIRECT_BRANCH_MOVED','Assignment branch moved before direct merge.');
+  const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
+  const mainSha=String(mainRef?.object?.sha||'').toLowerCase(),base=String(bundle.baseCommit||'').toLowerCase();
+  if(!/^[a-f0-9]{40}$/.test(base)||mainSha!==base)fail('UNIFIED_INTEGRATION_DIRECT_MAIN_MOVED','main moved since the serialized assignment was leased.');
+  run('git',['fetch','--no-tags','origin','refs/heads/main:refs/remotes/origin/main']);
+  run('git',['config','user.name','github-actions[bot]']);
+  run('git',['config','user.email','41898282+github-actions[bot]@users.noreply.github.com']);
+  run('git',['checkout','-B','unified-direct-main','refs/remotes/origin/main']);
+  run('git',['merge','--no-ff','--no-edit',headSha]);
+  const mergeSha=String(run('git',['rev-parse','HEAD'],{capture:true})).trim().toLowerCase();
+  if(!/^[a-f0-9]{40}$/.test(mergeSha)||mergeSha===headSha)fail('UNIFIED_INTEGRATION_DIRECT_MERGE_SHA_INVALID');
+  run('git',['push','origin','HEAD:refs/heads/main']);
+  const finalRef=await gh('/repos/'+repository+'/git/ref/heads/main');
+  if(String(finalRef?.object?.sha||'').toLowerCase()!==mergeSha)fail('UNIFIED_INTEGRATION_DIRECT_MAIN_VERIFY_FAILED');
+  output('merge_sha',mergeSha);
+}
+async function directPostmergeEvent(){
+  const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),mergeSha=String(process.argv[4]||'').toLowerCase();
+  const headSha=String(process.argv[5]||'').toLowerCase(),runId=Number(process.argv[6]);
+  const {repository}=githubContext(),issue=await gh('/repos/'+repository+'/issues/'+bundle.issueNumber);
+  const state=core.parseAssignmentState(issue.body||'');
+  if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased')fail('UNIFIED_INTEGRATION_DIRECT_POSTMERGE_STATE_INVALID');
+  writeEvent('direct-postmerge',bundle,{operation:'checkpoint',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
+    commitSha:mergeSha,integrationStage:'postmerge-direct',integrationHeadSha:headSha,
+    validation:{status:'passed',workflow:'MLS Unified R33 Integration Execute',runId},
+    completedUnits:state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6)),pendingUnits:[],
+    notes:'Unified direct fallback merge verified on main after an exact base/head merge commit.'},runId*10+7);
+}
+async function directFinishEvent(){
+  const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),mergeSha=String(process.argv[4]||'').toLowerCase();
+  const headSha=String(process.argv[5]||'').toLowerCase(),runId=Number(process.argv[6]);
+  const {repository}=githubContext(),issue=await gh('/repos/'+repository+'/issues/'+bundle.issueNumber);
+  const state=core.parseAssignmentState(issue.body||'');
+  if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased'||String(state.lastCheckpointCommit||'').toLowerCase()!==mergeSha)
+    fail('UNIFIED_INTEGRATION_DIRECT_FINISH_STATE_INVALID');
+  writeEvent('direct-finish',bundle,{operation:'finish',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
+    commitSha:mergeSha,integrationStage:'postmerge-direct',integrationHeadSha:headSha},runId*10+8);
+}
 async function postmergeEvent(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),mergeSha=String(process.argv[4]||'').toLowerCase();
   const prNumber=Number(process.argv[5]),headSha=String(process.argv[6]||'').toLowerCase(),runId=Number(process.argv[7]);
@@ -298,6 +369,10 @@ async function main(){
   if(mode==='noop-finish-event')return noopFinishEvent();
   if(mode==='premerge-event')return premergeEvent();
   if(mode==='merge-pr')return mergePr();
+  if(mode==='direct-premerge-event')return directPremergeEvent();
+  if(mode==='direct-merge')return directMerge();
+  if(mode==='direct-postmerge-event')return directPostmergeEvent();
+  if(mode==='direct-finish-event')return directFinishEvent();
   if(mode==='postmerge-event')return postmergeEvent();
   if(mode==='finish-event')return finishEvent();
   fail('UNIFIED_INTEGRATION_MODE_INVALID');
