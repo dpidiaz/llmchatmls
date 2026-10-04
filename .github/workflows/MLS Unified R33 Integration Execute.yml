@@ -48,8 +48,8 @@ jobs:
         id: prep
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MLS_UNIFIED_ISSUE_NUMBER: ${{ github.event.inputs.issue_number || '' }}
-          MLS_UNIFIED_COMMENT_ID: ${{ github.event.inputs.comment_id || '' }}
+          MLS_UNIFIED_ISSUE_NUMBER: ${{ github.event.inputs.issue_number || github.event.issue.number || '' }}
+          MLS_UNIFIED_COMMENT_ID: ${{ github.event.inputs.comment_id || github.event.comment.id || '' }}
         run: |
           cp 'scripts/MLS unified r33 integration execute.cjs' "$RUNNER_TEMP/mls-unified-r33-integration.cjs"
           node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" prepare
