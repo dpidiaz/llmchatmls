@@ -33,6 +33,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Recover legacy R44 quarantine
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+          MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
+          R44_LEGACY_RECONCILE_BATCH: 5
+          R44_LEGACY_RECONCILE_MAX_BATCHES: 1
+          R44_LEGACY_RECONCILE_MIN_WRITES_REMAINING: 2500
+        run: node 'scripts/r44 legacy quarantine reconcile.cjs'
+
       - name: Advance canonical MLS Unified lanes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
