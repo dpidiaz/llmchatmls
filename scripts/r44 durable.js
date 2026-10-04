@@ -217,6 +217,123 @@ async function r44DurableExport(env,limit,afterOrdinal=0) {
   }
   return rows.results;
 }
+
+async function r44LegacyQuarantineReconcile(env, limit = 5) {
+  await r44DurableReady(env);
+  const n = Math.max(1, Math.min(5, Number(limit) || 1));
+  const rows = await env.WIKI_DB.prepare(`SELECT p.ticket_id,p.migration_note,t.ordinal_start,t.state AS legacy_state,
+    r.payload,r.sha256,r.worker_id AS result_worker
+    FROM r44_ticket_progress p
+    JOIN r44_tickets t USING(ticket_id)
+    LEFT JOIN r44_results r USING(ticket_id)
+    WHERE p.state='QUARANTINED'
+      AND p.migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION'
+    ORDER BY t.ordinal_start LIMIT ?`).bind(n).all();
+  const results = [];
+  for (const row of rows.results || []) {
+    const ticketId = row.ticket_id;
+    try {
+      if (!row.payload || !row.sha256) {
+        results.push({ticketId,status:'BLOCKED',reason:'LEGACY_RESULT_MISSING'});
+        continue;
+      }
+      const digest = await r44Sha256Text(row.payload);
+      if (digest !== row.sha256) {
+        results.push({ticketId,status:'BLOCKED',reason:'LEGACY_RESULT_HASH_MISMATCH'});
+        continue;
+      }
+      let payload;
+      try { payload = JSON.parse(row.payload); }
+      catch (_) {
+        results.push({ticketId,status:'BLOCKED',reason:'LEGACY_RESULT_JSON_INVALID'});
+        continue;
+      }
+      const sourceRows = await env.WIKI_DB.prepare(
+        "SELECT code,source_json,state FROM r44_entries WHERE ticket_id=? ORDER BY ordinal"
+      ).bind(ticketId).all();
+      const sources = (sourceRows.results || []).map(x => JSON.parse(x.source_json));
+      const structured = payload && Array.isArray(payload.entries) && r44SameCodes(sources,payload.entries);
+      if (!structured) {
+        // Some migration imports retained only an unstructured legacy sentinel.
+        // They cannot be promoted into per-entry receipts without inventing results.
+        // Re-open them for a fresh normal R44 audit, while retaining an audit event.
+        const now = Date.now();
+        await env.WIKI_DB.batch([
+          env.WIKI_DB.prepare("DELETE FROM r44_results WHERE ticket_id=?").bind(ticketId),
+          env.WIKI_DB.prepare("DELETE FROM r44_claims WHERE ticket_id=?").bind(ticketId),
+          env.WIKI_DB.prepare("UPDATE r44_entries SET state='PENDING' WHERE ticket_id=? AND state!='AUDITED_DURABLE'").bind(ticketId),
+          env.WIKI_DB.prepare("UPDATE r44_ticket_progress SET state='CLAIMABLE',migration_note='LEGACY_UNSTRUCTURED_REQUEUED_FOR_FRESH_R44' WHERE ticket_id=?").bind(ticketId),
+          env.WIKI_DB.prepare("UPDATE r44_leases SET worker_id=NULL,lease_token=NULL,expires_ms=0,renewed_ms=? WHERE ticket_id=?").bind(now,ticketId),
+          env.WIKI_DB.prepare("UPDATE r44_tickets SET state='queued',worker_id=NULL,lease_token=NULL,lease_expires_at=0,result_sha256=NULL,result_stage=NULL,updated_at=? WHERE ticket_id=?").bind(new Date(now).toISOString(),ticketId),
+          env.WIKI_DB.prepare("INSERT INTO r44_events(ticket_id,event_type,detail,created_at) VALUES(?,?,?,?)")
+            .bind(ticketId,'LEGACY_QUARANTINE_REQUEUED',row.sha256,new Date(now).toISOString())
+        ]);
+        results.push({ticketId,status:'REQUEUED_FRESH_R44',reason:'LEGACY_RESULT_NOT_ENTRY_STRUCTURED'});
+        continue;
+      }
+
+      const workerId = 'r44-legacy-reconciler-v1';
+      const leaseToken = crypto.randomUUID();
+      const now = Date.now();
+      await env.WIKI_DB.batch([
+        env.WIKI_DB.prepare("UPDATE r44_entries SET state='PENDING' WHERE ticket_id=? AND state='QUARANTINED'").bind(ticketId),
+        env.WIKI_DB.prepare("UPDATE r44_ticket_progress SET state='LEASED' WHERE ticket_id=? AND state='QUARANTINED' AND migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION'").bind(ticketId),
+        env.WIKI_DB.prepare("UPDATE r44_leases SET worker_id=?,lease_token=?,generation=generation+1,expires_ms=?,renewed_ms=? WHERE ticket_id=?")
+          .bind(workerId,leaseToken,now+300000,now,ticketId),
+        env.WIKI_DB.prepare("UPDATE r44_tickets SET state='leased',worker_id=?,lease_token=?,lease_expires_at=?,updated_at=? WHERE ticket_id=?")
+          .bind(workerId,leaseToken,now+300000,new Date(now).toISOString(),ticketId)
+      ]);
+      const lease = await env.WIKI_DB.prepare("SELECT generation FROM r44_leases WHERE ticket_id=?").bind(ticketId).first();
+      if (!lease) throw new Error('LEGACY_RECONCILE_LEASE_MISSING');
+      for (const raw of payload.entries) {
+        const entry = {...raw,code:String(raw.code || '').toUpperCase()};
+        if (!entry.outcome) entry.outcome = entry.correctedContent ? 'CORRECTED' : 'PASS_NO_CHANGE';
+        const checkpoint = await r44Checkpoint(env,{
+          ticketId,
+          workerId,
+          leaseToken,
+          leaseGeneration:lease.generation,
+          idempotencyKey:ticketId+':'+entry.code+':legacy-reconcile-v1',
+          entry
+        },false);
+        if (checkpoint.error) throw new Error('LEGACY_RECONCILE_CHECKPOINT_'+checkpoint.error);
+      }
+      const finalState = await r44Reconcile(env,ticketId);
+      if (!finalState || finalState.state !== 'COMPLETE') throw new Error('LEGACY_RECONCILE_NOT_COMPLETE');
+      await env.WIKI_DB.batch([
+        env.WIKI_DB.prepare("UPDATE r44_ticket_progress SET migration_note=NULL WHERE ticket_id=? AND state='COMPLETE'").bind(ticketId),
+        env.WIKI_DB.prepare("INSERT INTO r44_events(ticket_id,event_type,worker_id,lease_token,detail,created_at) VALUES(?,?,?,?,?,?)")
+          .bind(ticketId,'LEGACY_QUARANTINE_RECONCILED',workerId,leaseToken,row.sha256,new Date().toISOString())
+      ]);
+      results.push({ticketId,status:'RECONCILED_COMPLETE',entries:payload.entries.length});
+    } catch (error) {
+      results.push({ticketId,status:'ERROR',reason:String(error && error.message || error).slice(0,500)});
+    }
+  }
+  const remaining = await env.WIKI_DB.prepare(`SELECT COUNT(*) AS n FROM r44_ticket_progress
+    WHERE state='QUARANTINED' AND migration_note='LEGACY_TICKET_RECEIPT_REQUIRES_ENTRY_RECONCILIATION'`).first();
+  const quarantined = await env.WIKI_DB.prepare("SELECT COUNT(*) AS n FROM r44_ticket_progress WHERE state='QUARANTINED'").first();
+  return {
+    status:'LEGACY_QUARANTINE_RECONCILE',
+    attempted:results.length,
+    reconciled:results.filter(x=>x.status==='RECONCILED_COMPLETE').length,
+    requeued:results.filter(x=>x.status==='REQUEUED_FRESH_R44').length,
+    blocked:results.filter(x=>x.status==='BLOCKED'||x.status==='ERROR').length,
+    remainingLegacy:Number(remaining && remaining.n || 0),
+    quarantinedTotal:Number(quarantined && quarantined.n || 0),
+    results
+  };
+}
+
+async function r44LegacyQuarantineReconcileRoute(request,env) {
+  const auth = await r44ChatBridgeAuthorize(request,env);
+  if(!auth.ok)return r44Json({error:auth.error},auth.status);
+  const body = await r44ChatBridgeBody(request);
+  const limit = body.limit === undefined ? 5 : Number(body.limit);
+  if(!Number.isInteger(limit)||limit<1||limit>5)return r44Json({error:'R44_LEGACY_RECONCILE_LIMIT_INVALID'},400);
+  return r44Json(await r44LegacyQuarantineReconcile(env,limit));
+}
+
 async function r44DurableRoute(request,env,url) {
   if(url.pathname==='/api/r44/chat-bridge/rebind' && request.method==='POST')return r44BridgeRecover(request,env);
   if(url.pathname==='/api/r44/chat-bridge/checkpoint' && request.method==='POST')return r44BridgeCheckpoint(request,env);
