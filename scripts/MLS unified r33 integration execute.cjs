@@ -93,7 +93,8 @@ function fetchSourceRef(ref){
   const branch=String(ref.branch||'');
   const commit=String(ref.commitSha||'').toLowerCase();
   if(!/^[a-f0-9]{40}$/.test(commit))fail('UNIFIED_INTEGRATION_SOURCE_SHA_INVALID',ref.code);
-  const sourceBranchAllowed=/^worker\/[A-Za-z0-9._\/-]+$/.test(branch)||/^r41\/staged\/[A-Za-z0-9._\/-]+$/.test(branch);\n  if(!sourceBranchAllowed)fail('UNIFIED_INTEGRATION_SOURCE_BRANCH_INVALID',branch);
+  const sourceBranchAllowed=/^worker\/[A-Za-z0-9._\/-]+$/.test(branch)||/^r41\/staged\/[A-Za-z0-9._\/-]+$/.test(branch);
+  if(!sourceBranchAllowed)fail('UNIFIED_INTEGRATION_SOURCE_BRANCH_INVALID',branch);
   try{run('git',['fetch','--no-tags','origin','refs/heads/'+branch+':refs/remotes/origin/'+branch]);}
   catch{fail('UNIFIED_INTEGRATION_SOURCE_FETCH_FAILED',branch)}
   try{run('git',['cat-file','-e',commit+'^{commit}'],{capture:true});}
