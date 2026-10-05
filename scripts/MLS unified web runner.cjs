@@ -509,6 +509,19 @@ async function run(){
     return;
   }
 
+  if(status.lanes?.r33?.issue_number){
+    const hintedR33=await resolveAssignment('r33',status.lanes.r33);
+    if(hintedR33.kind==='leased'){
+      await dispatchR33(hintedR33.issue,hintedR33.state);
+      console.log(JSON.stringify({ok:true,status:'R33_DISPATCHED',issueNumber:hintedR33.issue.number,fastPath:true}));
+      return;
+    }
+    if(hintedR33.kind==='pending'){
+      console.log(JSON.stringify({ok:true,status:'WAITING_R33',kind:hintedR33.kind,fastPath:true}));
+      return;
+    }
+  }
+
   const integration=await resolveAssignment('integration',status.lanes?.integration||null);
   if(integration.kind==='leased'){
     const resumed=await resumeIntegrationPr(integration.issue,integration.state);
