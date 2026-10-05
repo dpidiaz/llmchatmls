@@ -1,6 +1,14 @@
 // Canonical preparation only. The existing R33 gate/integration owns VERIFIED.
 var canonicalReadyEnvs=new WeakSet();
 var canonicalRecoveryInterval=5*60*1000;
+var canonicalStatusOverlayCache=new WeakMap();
+var canonicalAuthorityCache={expiresMs:0,status:null};
+async function canonicalAuthorityStatus(now=Date.now()){
+  if(canonicalAuthorityCache.status&&canonicalAuthorityCache.expiresMs>now)return canonicalAuthorityCache.status;
+  const status=await fetchUnifiedStatus(fetch);
+  canonicalAuthorityCache={expiresMs:now+5*60*1000,status};
+  return status;
+}
 // An allowlist: authorization/404, unsupported content and editorial rejection
 // are never treated as transient. Six total attempts per unchanged input.
 var canonicalTransientSql="(q.last_error='UNIFIED_R33_DRAFT_JSON_INVALID' OR q.last_error='SOURCE_FETCH_FAILED' OR q.last_error IN ('SOURCE_FETCH_HTTP_408','SOURCE_FETCH_HTTP_429','SOURCE_FETCH_HTTP_500','SOURCE_FETCH_HTTP_502','SOURCE_FETCH_HTTP_503','SOURCE_FETCH_HTTP_504') OR q.last_error IN ('CANONICAL_ASSET_500','CANONICAL_ASSET_502','CANONICAL_ASSET_503','CANONICAL_ASSET_504'))";
@@ -97,22 +105,51 @@ async function canonicalRefreshVerified(env){
     env.WIKI_DB.prepare('UPDATE mls_canonical_meta SET pending=? WHERE id=1').bind(status.remaining)
   ]);
 }
-async function canonicalStatus(env){
+async function canonicalStatus(env,authorityStatus=null){
   await canonicalEnsure(env);
   const meta=await env.WIKI_DB.prepare('SELECT * FROM mls_canonical_meta WHERE id=1').first();
   if(!meta)return {initialized:false,claimable:0,pending:null,prepared:0};
+  const authorityCodes=Array.isArray(authorityStatus?.verifiedCodes)?authorityStatus.verifiedCodes.map(x=>String(x).toUpperCase()):null;
+  const authorityEtag=String(authorityStatus?.etag||'');
+  if(authorityCodes){
+    const cached=canonicalStatusOverlayCache.get(env);
+    if(cached&&cached.expiresMs>Date.now()&&cached.etag===authorityEtag)return cached.value;
+  }
   const rows=await env.WIKI_DB.prepare(`SELECT state,COUNT(*) n FROM mls_canonical_queue WHERE revision=? GROUP BY state`).bind(meta.revision).all();
   const counts=Object.fromEntries((rows.results||[]).map(r=>[r.state,Number(r.n)]));
-  const eligible=await env.WIKI_DB.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE revision=? AND (state IN ('PENDING','READY') OR (state='RETRY' AND retry_ms<=?) OR (state='LEASED' AND expires_ms<=?))").bind(meta.revision,Date.now(),Date.now()).first();
-  const groups=await env.WIKI_DB.prepare(`SELECT q.last_error,q.attempts,COUNT(*) n,
-    SUM(CASE WHEN ${canonicalRecoverableSql} THEN 1 ELSE 0 END) recoverable
-    FROM mls_canonical_queue q LEFT JOIN mls_canonical_recovery r USING(code)
-    WHERE q.state='QUARANTINED' AND q.revision=? GROUP BY q.last_error,q.attempts`).bind(meta.revision).all();
+  let authorityJson=null,reconciliationPending=0;
+  if(authorityCodes){
+    authorityJson=JSON.stringify(authorityCodes);
+    const stale=await env.WIKI_DB.prepare(`SELECT state,COUNT(*) n FROM mls_canonical_queue
+      WHERE revision=? AND state!='VERIFIED' AND code IN (SELECT value FROM json_each(?))
+      GROUP BY state`).bind(meta.revision,authorityJson).all();
+    for(const row of stale.results||[]){
+      const n=Number(row.n||0);reconciliationPending+=n;
+      counts[row.state]=Math.max(0,Number(counts[row.state]||0)-n);
+    }
+    counts.VERIFIED=Number(counts.VERIFIED||0)+reconciliationPending;
+  }
+  const now=Date.now();
+  const eligible=authorityJson
+    ?await env.WIKI_DB.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE revision=?1 AND (state IN ('PENDING','READY') OR (state='RETRY' AND retry_ms<=?2) OR (state='LEASED' AND expires_ms<=?3)) AND code NOT IN (SELECT value FROM json_each(?4))").bind(meta.revision,now,now,authorityJson).first()
+    :await env.WIKI_DB.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE revision=? AND (state IN ('PENDING','READY') OR (state='RETRY' AND retry_ms<=?) OR (state='LEASED' AND expires_ms<=?))").bind(meta.revision,now,now).first();
+  const groups=authorityJson
+    ?await env.WIKI_DB.prepare(`SELECT q.last_error,q.attempts,COUNT(*) n,
+      SUM(CASE WHEN ${canonicalRecoverableSql} THEN 1 ELSE 0 END) recoverable
+      FROM mls_canonical_queue q LEFT JOIN mls_canonical_recovery r USING(code)
+      WHERE q.state='QUARANTINED' AND q.revision=?1 AND q.code NOT IN (SELECT value FROM json_each(?2))
+      GROUP BY q.last_error,q.attempts`).bind(meta.revision,authorityJson).all()
+    :await env.WIKI_DB.prepare(`SELECT q.last_error,q.attempts,COUNT(*) n,
+      SUM(CASE WHEN ${canonicalRecoverableSql} THEN 1 ELSE 0 END) recoverable
+      FROM mls_canonical_queue q LEFT JOIN mls_canonical_recovery r USING(code)
+      WHERE q.state='QUARANTINED' AND q.revision=? GROUP BY q.last_error,q.attempts`).bind(meta.revision).all();
   const byCategory={technical_transient:0,sources_context:0,editorial_review:0,hash_context:0,other:0};
   let recoverable=0;
   const byReason=(groups.results||[]).map(row=>{const category=canonicalQuarantineCategory(row.last_error);byCategory[category]+=Number(row.n);recoverable+=Number(row.recoverable);return {...row,category}});
   const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:5,intervalMs:canonicalRecoveryInterval};
-  return {initialized:true,claimable:Number(eligible.n),pending:meta.pending,waitingHandoff:meta.waiting_handoff,prepared:counts.PREPARED||0,counts,quarantine,batchSize:100,verifiedAuthority:'github-main-verified-index'};
+  const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:meta.waiting_handoff,prepared:counts.PREPARED||0,counts,quarantine,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
+  if(authorityCodes)canonicalStatusOverlayCache.set(env,{etag:authorityEtag,expiresMs:Date.now()+5*60*1000,value});
+  return value;
 }
 async function canonicalInputHash(body){
   return r44Sha256Text(r44Stable({code:body.code,contentPath:body.contentPath,article:body.article,handoffEntry:body.handoffEntry||{},currentEvidenceRevision:Number(body.currentEvidenceRevision||0)}));

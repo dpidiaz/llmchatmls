@@ -634,7 +634,11 @@ async function unifiedRunnerStatus(request, env, ctx) {
   try { budget = await wikiStore(env).getCloudflareBudget(); } catch (_) {}
   const laneRows=await env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner_lane ORDER BY stage").all();
   const lanes=Object.fromEntries((laneRows.results||[]).map(row=>[row.stage,{...row,detail:(()=>{try{return row.detail_json?JSON.parse(row.detail_json):null}catch{return null}})()}]));
-  return r44Json({ok:true,runner,r44,budget,lanes,canonical:await canonicalStatus(env),freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
+  let authorityStatus=null;
+  if(Number(budget?.d1Usage?.writesRemaining)===0){
+    try{authorityStatus=await canonicalAuthorityStatus();}catch(_){}
+  }
+  return r44Json({ok:true,runner,r44,budget,lanes,canonical:await canonicalStatus(env,authorityStatus),freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
 }
 function unifiedRunnerSeed(article) {
   return {
