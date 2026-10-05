@@ -120,6 +120,42 @@ test('expired canonical result cannot commit and expired entry is reclaimable',a
   h.r.unifiedR33BuildDraft=async()=>Response.json({status:'MATCH'});
   assert.equal((await h.r.canonicalStep(h.env)).status,'CANONICAL_PREPARED');
 });
+
+test('prepared-only drain never regenerates evidence on cache miss or changed context',async()=>{
+  const h=harness();await setup(h,0);const packets=await assets(h,2);
+  await h.r.canonicalStep(h.env);
+  h.r.unifiedR33BuildDraft=async()=>{throw Error('AI MUST NOT RUN')};
+  const input=packets[0][0].input;
+  const call=body=>h.r.unifiedRunnerR33Draft(new Request('https://test/prepared-evidence',{method:'POST',body:JSON.stringify(body)}),h.env,null,true);
+  const hit=await (await call(input)).json();
+  assert.equal(hit.preparedByRunner,true);
+  assert.equal((await (await call({...input,currentEvidenceRevision:9})).json()).reason,'PREPARED_CONTEXT_MISMATCH_OR_MISSING');
+  assert.equal((await (await call(packets[0][1].input)).json()).reason,'PREPARED_CONTEXT_MISMATCH_OR_MISSING');
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='PREPARED'").get().n,1);
+});
+
+test('new asset revision preserves prepared evidence and its original context hash',async()=>{
+  const h=harness();await setup(h,0);const packets=await assets(h,1);
+  await h.r.canonicalStep(h.env);
+  const before=h.db.prepare('SELECT input_hash,result_json FROM mls_canonical_queue').get();
+  const input={...packets[0][0].input,currentEvidenceRevision:2};
+  h.env.ASSETS={async fetch(){return Response.json({revision:'changed',pending:1,waitingHandoff:0,rows:[{code:input.code,inputHash:await h.r.canonicalInputHash(input),page:0}]})}};
+  await h.r.canonicalSeed(h.env);
+  const after=h.db.prepare('SELECT state,input_hash,result_json FROM mls_canonical_queue').get();
+  assert.equal(after.state,'PREPARED');assert.equal(after.input_hash,before.input_hash);assert.equal(after.result_json,before.result_json);
+  assert.equal(await h.r.canonicalPrepared(h.env,input),null);
+});
+
+test('canonical malformed JSON recovery is bounded and leaves source quarantine intact',async()=>{
+  const h=harness();await setup(h,0);await assets(h,2);await h.r.canonicalSeed(h.env);
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=3,last_error='UNIFIED_R33_DRAFT_JSON_INVALID' WHERE code='MLS-V01-0001'");
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=3,last_error='SOURCE_FULLTEXT_REQUIRED' WHERE code='MLS-V01-0002'");
+  h.r.unifiedR33BuildDraft=async()=>{throw Error('UNIFIED_R33_DRAFT_JSON_INVALID')};
+  await h.r.canonicalStep(h.env);
+  assert.equal(h.db.prepare("SELECT attempts FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().attempts,4);
+  assert.equal((await h.r.canonicalStep(h.env)).status,'NO_WORK');
+  assert.equal(h.db.prepare("SELECT attempts FROM mls_canonical_queue WHERE code='MLS-V01-0002'").get().attempts,3);
+});
 test('R44 bad context is isolated; subsequent runner step advances to the next entry',async()=>{
   const h=harness();await setup(h,1);
   h.r.r44LoadEntry=async()=>{throw Error('R44_CONTEXT_HASH_MISMATCH_MLS-V10-0870')};

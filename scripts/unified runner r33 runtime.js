@@ -267,7 +267,7 @@ function unifiedR33EvidenceObject(args) {
     }
   };
 }
-async function unifiedRunnerR33Draft(request,env,ctx) {
+async function unifiedRunnerR33Draft(request,env,ctx,preparedOnly=false) {
   const auth=await unifiedRunnerAuthorize(request,env,ctx);
   if(!auth.ok) return r44Json({error:auth.error},auth.status);
   const runner=await unifiedRunnerRead(env);
@@ -275,6 +275,8 @@ async function unifiedRunnerR33Draft(request,env,ctx) {
   const body=await r44ChatBridgeBody(request);
   const prepared=await canonicalPrepared(env,body);
   if(prepared)return r44Json({...prepared,preparedByRunner:true});
+  // A drain request must never call AI again, including when its context has drifted.
+  if(preparedOnly||body.preparedOnly===true)return r44Json({ok:true,status:'NEEDS_CHAT_REVIEW',code:body.code,reason:'PREPARED_CONTEXT_MISMATCH_OR_MISSING'},200);
   return unifiedR33BuildDraft(env,body);
 }
 async function unifiedR33BuildDraft(env,body) {

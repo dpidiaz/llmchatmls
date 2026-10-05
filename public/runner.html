@@ -150,6 +150,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
 <div class="stats">
 <div class="stat"><span>Canonical Claimable</span><strong id="unifiedCanonicalClaimable">—</strong></div>
 <div class="stat"><span>Evidencia preparada (pendiente de integración)</span><strong id="unifiedCanonicalPrepared">—</strong></div>
+<div class="stat"><span>Pendientes que requieren fuentes o revisión</span><strong id="unifiedCanonicalBlocked">—</strong></div>
+<div class="stat"><span>Pendientes de entrega R44</span><strong id="unifiedCanonicalHandoff">—</strong></div>
 <div class="stat"><span>R44 Claimable</span><strong id="unifiedClaimable">—</strong></div>
 <div class="stat"><span>R44 Parcial</span><strong id="unifiedPartial">—</strong></div>
 <div class="stat"><span>Runners ejecutando ahora</span><strong id="unifiedActiveRunners">—</strong></div>
@@ -519,6 +521,8 @@ button:disabled{opacity:.48;cursor:not-allowed}
     q('unifiedComplete').textContent=durableCount(r44.durableCounts,'COMPLETE');
     q('unifiedCanonicalClaimable').textContent=data.canonical?.initialized?data.canonical.claimable:'Inicializando';
     q('unifiedCanonicalPrepared').textContent=data.canonical?.prepared??0;
+    q('unifiedCanonicalBlocked').textContent=data.canonical?.counts?.QUARANTINED??0;
+    q('unifiedCanonicalHandoff').textContent=data.canonical?.waitingHandoff??0;
     q('unifiedClaimable').textContent=durableCount(r44.durableCounts,'CLAIMABLE');
     q('unifiedPartial').textContent=durableCount(r44.durableCounts,'PARTIAL_DURABLE');
     q('unifiedMaxLeases').textContent=r44.maxActiveLeases??'—';

@@ -1,0 +1,23 @@
+'use strict';
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const drain=require('../MLS R32 EDITORIAL/prepared drain.cjs');
+const integration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
+const r33=require('../MLS R32 EDITORIAL/global dispatcher/providers/r33.js');
+test('prepared cohort has 234 unique durable handoffs and enters existing fenced R33 queue first',()=>{
+  const codes=drain.load('.');assert.equal(codes.size,234);
+  const handoffs=integration.loadR44R33Handoffs('.');
+  for(const code of codes)assert(handoffs.has(code),code);
+  const snapshot={pool:{poolId:'MLS-R33-TEST-PREPARED',manifestVersion:'1',status:'authorized',active:true,execution:{}},bufferedReservations:[]};
+  const view=integration.r33UnifiedSnapshot(snapshot,handoffs,{root:'.',globalLedger:{terminal:{},recoveries:{}},globalAssignments:[]});
+  const remaining=[...codes].filter(code=>!integration.r33IntegratedCodes('.').has(code));
+  assert.deepEqual(new Set(view.pool.entries.slice(0,remaining.length).map(x=>x.code)),new Set(remaining));
+  const first=view.pool.entries[0].code;
+  view.reservedCodes=[first];
+  const candidate=r33.materializeCandidate(view,{now:Date.now(),requested:5});
+  assert(candidate.units.every(x=>codes.has(x.code)&&x.code!==first));
+  const protectedView=integration.protectCandidateCodes(view,[candidate],Date.now());
+  const second=r33.materializeCandidate(protectedView,{now:Date.now(),requested:5});
+  assert(second.units.every(x=>!candidate.units.some(y=>y.code===x.code)));
+});
