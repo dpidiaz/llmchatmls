@@ -36,7 +36,7 @@ test('Unified integration executor validates exact leased scope and fails closed
   assert.match(source,/ACTIONS_PULL_REQUEST_CREATION_DISABLED/);
   assert.match(source,/integrationStage:'premerge-direct'/);
   assert.match(source,/integrationStage:'postmerge-direct'/);
-  assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_MOVED/);
+  assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_DIVERGED/);\n  assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_OVERLAP/);\n  assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_VERIFY_FAILED/);
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 integration execute.cjs'],{stdio:'pipe'});
 });
 
