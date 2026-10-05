@@ -21,12 +21,11 @@ permissions:
   pull-requests: write
   actions: write
 
-concurrency:
-  group: mls-unified-r33-integration
-  cancel-in-progress: false
-
 jobs:
   integrate:
+    concurrency:
+      group: mls-unified-r33-integration
+      cancel-in-progress: false
     if: >-
       ${{ github.event_name == 'workflow_dispatch' ||
           (startsWith(github.event.issue.title, '[MLS Dispatcher][LEASED]') &&
