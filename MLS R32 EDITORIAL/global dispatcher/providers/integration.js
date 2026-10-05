@@ -9,6 +9,7 @@ const mlsProvider=require('./mls farm.js');
 const r33Provider=require('./r33.js');
 const buffered=require('../../r4 buffered allocation.cjs');
 const revisions=require('../../r4 staging supersession.cjs');
+const preparedDrain=require('../../prepared drain.cjs');
 
 const DYNAMIC_PROVIDERS=new Set(['mls-farm','r33-farm','r33-index-preparation','r33-index-integration']);
 const READY_QUEUE_TARGET=128;
@@ -35,7 +36,7 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
   if(!(handoffs instanceof Map)||!handoffs.size)return null;
   const integrated=r33IntegratedCodes(root);
   const corpus=mlsCore.corpusEntries(root);
-  const entries=corpus
+  let entries=corpus
     .map((entry,index)=>{
       const code=String(entry.code||'').toUpperCase(),h=handoffs.get(code);
       if(!h||integrated.has(code))return null;
@@ -50,6 +51,9 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
     .filter(Boolean)
     .sort((a,b)=>a.order-b.order||a.code.localeCompare(b.code));
   if(!entries.length)return null;
+  // Reorder only eligible durable handoffs; all terminal/reservation/lease fences below remain authoritative.
+  const drainCodes=preparedDrain.load(root);
+  entries=preparedDrain.prioritize(entries,drainCodes);
   const allowed=new Set(entries.map(x=>x.code));
   const execution={...(snapshot.pool?.execution||{}),
     defaultClaimSize:5,maxClaimSize:10,workerBatchSize:5,parallelWorkerLimit:128,maxConcurrentWorkers:128,
@@ -84,7 +88,7 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
   const bufferedCodes=(snapshot.bufferedReservations||[]).flatMap(r=>(r?.allocation?.units||[]).map(u=>String(u?.code||'').toUpperCase()));
   const reservedCodes=[...new Set([...recoveryCodes,...bufferedCodes].filter(code=>allowed.has(code)&&!terminalCodes.includes(code)))];
   return {...snapshot,pool,ledger,batches,reservedCodes,r43Handoff:null,r43Handoffs:[],handoffCodes:[],
-    r44UnifiedHandoffs:handoffs,unifiedFullCorpus:true};
+    r44UnifiedHandoffs:handoffs,unifiedFullCorpus:true,preparedDrainCodes:drainCodes};
 }
 function protectCandidateCodes(snapshot,candidates,now){
   const batches=(snapshot.batches||[]).map(x=>structuredClone(x));
@@ -271,7 +275,7 @@ function r33CandidateToWork(candidate,now=Date.now()){
     workId:workPrefix+candidate.poolId+':'+first+':'+last+':'+codes.length,
     version:unified?2:1,
     title:handoff?'R43→R33 Gate #'+handoff.waveIssueNumber+' '+first+'..'+last:unified?'R44→R33 Unified '+first+'..'+last:'R33 Evidence Farm '+first+'..'+last,
-    workType:'editorial_batch',status:'ready',priority:handoff?0:unified?2:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
+    workType:'editorial_batch',status:'ready',priority:handoff?0:candidate.preparedDrain?1:unified?2:25,createdAt:new Date(now).toISOString(),provider:'r33-farm',
     providerVersion:candidate.providerVersion,ownershipMode:'global-single-lease',units:codes,checkpointSizeMax:candidate.checkpointSizeMax,
     resourceLocks:[...candidate.resourceLocks,...contentPaths.map(x=>'path:'+x)],
     allowedPaths:[...candidate.allowedPaths,...contentPaths],
@@ -618,6 +622,7 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
         if(unifiedView){
           const unifiedCandidates=r33Provider.materializeCandidates(unifiedView,{now,count:available});
           for(const candidate of unifiedCandidates){
+            candidate.preparedDrain=candidate.units.some(unit=>unifiedView.preparedDrainCodes.has(unit.code));
             candidate.r44Unified=candidate.units.map(unit=>snapshot.r44Handoffs.get(unit.code)).filter(Boolean);
             if(candidate.r44Unified.length!==candidate.units.length)throw integrationError('R44_R33_HANDOFF_SCOPE_MISMATCH','Candidate Unified sin handoff completo.',503);
             candidates.push(candidate);

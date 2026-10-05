@@ -24,9 +24,9 @@ async function canonicalSeed(env){
     env.WIKI_DB.prepare(`INSERT INTO mls_canonical_queue(code,input_hash,page,revision)
       SELECT json_extract(value,'$.code'),json_extract(value,'$.inputHash'),json_extract(value,'$.page'),?2 FROM json_each(?1)
       WHERE NOT EXISTS(SELECT 1 FROM mls_canonical_meta WHERE id=1 AND revision=?2)
-      ON CONFLICT(code) DO UPDATE SET input_hash=excluded.input_hash,page=excluded.page,revision=excluded.revision,
-      state=CASE WHEN input_hash=excluded.input_hash THEN state ELSE 'PENDING' END,
-      result_json=CASE WHEN input_hash=excluded.input_hash THEN result_json ELSE NULL END,
+      ON CONFLICT(code) DO UPDATE SET input_hash=CASE WHEN state='PREPARED' THEN input_hash ELSE excluded.input_hash END,page=excluded.page,revision=excluded.revision,
+      state=CASE WHEN state='PREPARED' OR input_hash=excluded.input_hash THEN state ELSE 'PENDING' END,
+      result_json=CASE WHEN state='PREPARED' OR input_hash=excluded.input_hash THEN result_json ELSE NULL END,
       lease_token=CASE WHEN input_hash=excluded.input_hash THEN lease_token ELSE NULL END,
       expires_ms=CASE WHEN input_hash=excluded.input_hash THEN expires_ms ELSE 0 END,
       attempts=CASE WHEN input_hash=excluded.input_hash THEN attempts ELSE 0 END,
@@ -64,6 +64,12 @@ async function canonicalPrepared(env,body){
 }
 async function canonicalStep(env){
   await canonicalSeed(env);
+  // One bounded recovery of malformed AI JSON. Missing sources/rejected evidence
+  // remain quarantined. Attempt 4 cannot be requeued by this recovery.
+  await env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='RETRY',retry_ms=0
+    WHERE revision=(SELECT revision FROM mls_canonical_meta WHERE id=1)
+    AND state='QUARANTINED' AND last_error='UNIFIED_R33_DRAFT_JSON_INVALID'
+    AND attempts=3 AND lease_token IS NULL AND expires_ms=0`).run();
   const now=Date.now(),batch=crypto.randomUUID(),token=crypto.randomUUID();
   // A batch contains 100 available entries, consumed across independent alarms to
   // respect the FREE invocation budget. Reservations are not 100 active AI leases.

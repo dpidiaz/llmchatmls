@@ -7,6 +7,7 @@ const child=require('node:child_process');
 
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const unified=require('../MLS R32 EDITORIAL/unified command.cjs');
+const PREPARED_DRAIN=require('../MLS R32 EDITORIAL/prepared drain.cjs').load();
 
 const REPOSITORY=String(process.env.GITHUB_REPOSITORY||'');
 const TOKEN=String(process.env.GITHUB_TOKEN||'');
@@ -466,7 +467,7 @@ async function dispatchR33(issue,state){
   const handoffEntry=(ticket.entries||[]).find(x=>String(x.code||'').toUpperCase()===code);
   if(!handoffEntry)fail('UNIFIED_WEB_HANDOFF_ENTRY_MISSING',code);
   const existing=await githubJsonAt(evidencePath,state.branch,{optional:true});
-  const draft=await cf('/api/unified-runner/r33-evidence',{
+  const draft=await cf(PREPARED_DRAIN.has(code)?'/api/unified-runner/prepared-evidence':'/api/unified-runner/r33-evidence',{
     code,contentPath,article,handoffEntry,currentEvidenceRevision:Number(existing?.evidenceRevision||0),
     runId:'MLS-UNIFIED-WEB-'+String(process.env.GITHUB_RUN_ID||Date.now())
   });
