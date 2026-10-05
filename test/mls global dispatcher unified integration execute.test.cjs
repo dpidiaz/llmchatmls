@@ -29,6 +29,7 @@ test('Unified integration executor validates exact leased scope and fails closed
   assert.match(source,/startsWith\('r33-unified-integration:'\)/);
   assert.match(source,/UNIFIED_INTEGRATION_CONTENT_DRIFT/);
   assert.match(source,/r44SourceSha256/);
+  assert.ok(source.includes("r41\\/staged\\/"));
   assert.match(source,/R33 GitHub Native Tests/);
   assert.match(source,/merge_method:'merge',sha:headSha/);
   assert.match(source,/integrationStage:'premerge'/);
