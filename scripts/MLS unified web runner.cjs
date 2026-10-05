@@ -131,6 +131,14 @@ async function laneIssue(stage,lane){
       }
     }
   }
+  if(issue&&!stageMatchesState(stage,parseAssignment(issue))&&!stageMatchesClaim(stage,parseClaim(issue))){
+    await report(stage,'FENCE_REJECTED',{
+      issueNumber:null,
+      error:'Lane pointer belongs to a different Unified stage.',
+      detail:{issueNumber:Number(issue.number),source:'cloudflare-lane-pointer'}
+    });
+    issue=null;
+  }
   if(!issue){
     issue=await findExisting(stage);
     if(issue)await report(stage,'RECOVERED_POINTER',{issueNumber:Number(issue.number),detail:{source:'github-open-issue'}});
