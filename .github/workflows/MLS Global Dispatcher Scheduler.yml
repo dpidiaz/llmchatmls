@@ -52,4 +52,10 @@ jobs:
         with:
           path: ${{ env.MLS_GITHUB_COOLDOWN_FILE }}
           key: mls-github-cooldown-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Continue Unified Web Runner
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: gh workflow run 'MLS Unified Web Runner.yml' --ref main
 
