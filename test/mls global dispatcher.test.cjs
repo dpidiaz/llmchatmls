@@ -301,3 +301,11 @@ test('unified R33 finish hands off to serialized integration after persisting FI
   assert.match(runner,/Claim pointer belongs to a different web runner lane/);
   assert.match(runner,/stageMatchesClaim\(stage,command\)/);
 });
+
+
+test('unified runner clears cross-lane integration pointers and continues to R33',()=>{
+  const source=fs.readFileSync('scripts/MLS unified web runner.cjs','utf8');
+  assert.match(source,/if\(integration\.kind==='pending'\)/);
+  assert.doesNotMatch(source,/\['pending','fence_rejected'\]\.includes\(integration\.kind\)/);
+  assert.match(source,/Claim pointer belongs to a different web runner lane/);
+});
