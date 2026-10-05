@@ -542,7 +542,7 @@ async function run(){
     console.log(JSON.stringify({ok:true,status:'INTEGRATION_DISPATCHED',issueNumber:integration.issue.number}));
     return;
   }
-  if(['pending','fence_rejected'].includes(integration.kind)){
+  if(integration.kind==='pending'){
     console.log(JSON.stringify({ok:true,status:'WAITING_INTEGRATION',kind:integration.kind}));
     return;
   }
