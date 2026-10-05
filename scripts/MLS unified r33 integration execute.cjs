@@ -114,18 +114,30 @@ function syncCanonicalManifest(sourceRefs){
   const {full}=safeRepoPath(manifestPath);
   const manifest=JSON.parse(fs.readFileSync(full,'utf8'));
   if(!Array.isArray(manifest.entries))fail('UNIFIED_INTEGRATION_MANIFEST_INVALID');
-  let changed=0;
+  const candidates=new Map();
   for(const ref of sourceRefs||[]){
-    if(!ref.contentPath)continue;
-    const contentPath=String(ref.contentPath).replace(/\\/g,'/');
-    if(!contentPath.startsWith('content/'))fail('UNIFIED_INTEGRATION_MANIFEST_CONTENT_PATH_INVALID',ref.code);
+    if(ref.contentPath){
+      const contentPath=String(ref.contentPath).replace(/\\/g,'/');
+      candidates.set(contentPath,String(ref.code||'').toUpperCase());
+    }
+    for(const asset of ref.revisionAssets||[]){
+      const contentPath=String(asset?.path||'').replace(/\\/g,'/');
+      if(contentPath.startsWith('content/')&&contentPath!==manifestPath&&!candidates.has(contentPath)){
+        candidates.set(contentPath,null);
+      }
+    }
+  }
+  let changed=0;
+  for(const [contentPath,expectedCode] of candidates){
+    if(!contentPath.startsWith('content/'))fail('UNIFIED_INTEGRATION_MANIFEST_CONTENT_PATH_INVALID',expectedCode||contentPath);
     const relative=contentPath.slice('content/'.length);
     const {full:contentFull}=safeRepoPath(contentPath);
     const raw=fs.readFileSync(contentFull);
-    const code=String(ref.code||'').toUpperCase();
-    const item=manifest.entries.find(x=>String(x.code||'').toUpperCase()===code);
-    if(!item)fail('UNIFIED_INTEGRATION_MANIFEST_ENTRY_MISSING',code);
-    if(String(item.path||'')!==relative)fail('UNIFIED_INTEGRATION_MANIFEST_PATH_MISMATCH',code);
+    const item=expectedCode
+      ? manifest.entries.find(x=>String(x.code||'').toUpperCase()===expectedCode)
+      : manifest.entries.find(x=>String(x.path||'')===relative);
+    if(!item)fail('UNIFIED_INTEGRATION_MANIFEST_ENTRY_MISSING',expectedCode||relative);
+    if(String(item.path||'')!==relative)fail('UNIFIED_INTEGRATION_MANIFEST_PATH_MISMATCH',expectedCode||relative);
     const nextHash=sha256(raw),nextBytes=raw.length;
     if(item.sha256!==nextHash||Number(item.bytes)!==nextBytes){
       item.sha256=nextHash;item.bytes=nextBytes;changed++;
