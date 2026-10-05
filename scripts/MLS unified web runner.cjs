@@ -441,6 +441,16 @@ async function dispatchR33(issue,state){
       await finishR33Inline(issue,state);
       return;
     }
+    const last=(state.checkpoints||[]).at(-1);
+    if(completed.size>0&&last?.validation?.status==='passed'&&state.lastCheckpointCommit){
+      await report('r33','REVIEW_REQUIRED_PARTIAL_FINISH',{
+        issueNumber:Number(issue.number),assignmentId:state.assignmentId,code:pending[0],
+        error:'Remaining entries require editorial review; closing only durable checkpointed units.',
+        detail:{blocked:[...blocked],pending,completed:[...completed]},pauseRunner:false
+      });
+      await finishR33Inline(issue,state);
+      return;
+    }
     await report('r33','REVIEW_REQUIRED',{
       issueNumber:Number(issue.number),assignmentId:state.assignmentId,code:pending[0],
       error:'All remaining entries in the active microclaim require editorial review.',
