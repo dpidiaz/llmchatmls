@@ -66,8 +66,14 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
       const assignedHead=await branchHead(state.branch);
       const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
       const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
-      if(assignedHead!==commitSha||mainSha!==commitSha)
-        throw core.dispatchError('INTEGRATION_NOOP_MAIN_MISMATCH','No-op integration requires assignment branch HEAD and current main HEAD to equal commitSha.',409);
+      if(mainSha!==commitSha)
+        throw core.dispatchError('INTEGRATION_NOOP_MAIN_MISMATCH','No-op integration requires current main HEAD to equal commitSha.',409);
+      if(assignedHead!==commitSha){
+        const comparison=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+assignedHead+'...'+commitSha);
+        const overlap=(comparison.files||[]).map(x=>String(x?.filename||'')).filter(file=>unifiedIntegrationPathAllowed(file,state));
+        if(String(comparison.status||'')!=='ahead'||overlap.length)
+          throw core.dispatchError('INTEGRATION_NOOP_MAIN_MISMATCH','No-op integration permits only descendant main drift that is disjoint from the integration scope.',409);
+      }
       return;
     }
     if(stage==='premerge'||stage==='premerge-direct'){
