@@ -145,3 +145,9 @@ jobs:
           SYNTHETIC_EVENT_PATH: ${{ steps.finish.outputs.event_path }}
         shell: bash
         run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Continue Unified Web Runner
+        if: ${{ success() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: gh workflow run 'MLS Unified Web Runner.yml' --ref main
