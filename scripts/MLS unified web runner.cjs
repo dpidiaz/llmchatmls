@@ -182,6 +182,15 @@ async function resolveAssignment(stage,lane){
   let issue=await laneIssue(stage,lane);
   const title=String(issue?.title||'');
   if(title.startsWith('[MLS Dispatcher][CLAIM]')){
+    const command=parseClaim(issue);
+    if(!stageMatchesClaim(stage,command)){
+      await report(stage,'FENCE_REJECTED',{
+        issueNumber:null,
+        error:'Claim pointer belongs to a different web runner lane.',
+        detail:{issueNumber:Number(issue.number)}
+      });
+      return {kind:'fence_rejected',issue};
+    }
     await report(stage,'CLAIM_PENDING',{issueNumber:Number(issue.number)});
     return {kind:'pending',issue};
   }

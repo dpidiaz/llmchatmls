@@ -287,3 +287,17 @@ test('dispatcher issue-trigger authorization is enforced again inside the schedu
   assert.match(source,/startsWith\('autopull:'\)/);
   assert.match(source,/DISPATCH_AUTHOR_UNAUTHORIZED/);
 });
+
+
+test('unified R33 finish hands off to serialized integration after persisting FINISH',()=>{
+  const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
+  assert.match(worker,/const targetWorkerId=unifiedScope\?'mls-unified-web-integration':workerId;/);
+  assert.match(worker,/unifiedScope\?\{provider:'r33-index-integration',workPrefix:'r33-unified-integration:'\}/);
+  const persist=worker.indexOf('// Persist FINISH before opening the chained claim');
+  const create=worker.indexOf("chainedClaim=await createIssue",persist);
+  const wake=worker.indexOf('await wakeScheduler();',create);
+  assert.ok(persist>=0&&create>persist&&wake>create);
+  const runner=fs.readFileSync('scripts/MLS unified web runner.cjs','utf8');
+  assert.match(runner,/Claim pointer belongs to a different web runner lane/);
+  assert.match(runner,/stageMatchesClaim\(stage,command\)/);
+});
