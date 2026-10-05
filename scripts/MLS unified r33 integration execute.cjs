@@ -245,7 +245,12 @@ async function noopCheckpointEvent(){
   if(!/^[a-f0-9]{40}$/.test(mainSha))fail('UNIFIED_INTEGRATION_NOOP_MAIN_INVALID');
   const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
   const branchSha=String(branchRef?.object?.sha||'').toLowerCase();
-  if(branchSha!==mainSha)fail('UNIFIED_INTEGRATION_NOOP_MAIN_MOVED','No-op requires assignment branch HEAD to equal current main HEAD.');
+  if(branchSha!==mainSha){
+    const drift=await gh('/repos/'+repository+'/compare/'+branchSha+'...'+mainSha);
+    const overlap=(drift?.files||[]).map(x=>String(x?.filename||'')).filter(file=>integrationPathAllowed(file,bundle.allowedPaths||[]));
+    if(String(drift?.status||'')!=='ahead'||overlap.length)
+      fail('UNIFIED_INTEGRATION_NOOP_MAIN_MOVED','No-op requires assignment branch HEAD to equal current main HEAD or main drift to be descendant-only and disjoint from the integration scope.');
+  }
   const existing=(state.checkpoints||[]).find(x=>String(x?.commitSha||'').toLowerCase()===mainSha);
   if(existing){
     const expectedUnits=state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6));
@@ -277,8 +282,14 @@ async function noopFinishEvent(){
   const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
   const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
   const mainSha=String(mainRef?.object?.sha||'').toLowerCase(),branchSha=String(branchRef?.object?.sha||'').toLowerCase();
-  if(checkpointSha!==mainSha||checkpointSha!==branchSha)
-    fail('UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED','No-op finish requires the accepted checkpoint, assignment branch HEAD and current main HEAD to match.');
+  if(checkpointSha!==mainSha)
+    fail('UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED','No-op finish requires the accepted checkpoint to equal current main HEAD.');
+  if(branchSha!==checkpointSha){
+    const drift=await gh('/repos/'+repository+'/compare/'+branchSha+'...'+checkpointSha);
+    const overlap=(drift?.files||[]).map(x=>String(x?.filename||'')).filter(file=>integrationPathAllowed(file,bundle.allowedPaths||[]));
+    if(String(drift?.status||'')!=='ahead'||overlap.length)
+      fail('UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED','No-op finish permits only descendant main drift that is disjoint from the integration scope.');
+  }
   writeEvent('noop-finish',bundle,{operation:'finish',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
     commitSha:checkpointSha,integrationStage:'noop'},runId*10+5);
 }
