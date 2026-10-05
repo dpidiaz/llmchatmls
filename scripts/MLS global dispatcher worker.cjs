@@ -39,11 +39,12 @@ function autoPullRequest(state,comment){
   const handoffScope=/^r33-handoff:\d+:/.exec(workId);
   const unifiedScope=workId.startsWith('r33-unified:')?'r33-unified:':null;
   const unifiedIntegrationScope=workId.startsWith('r33-unified-integration:')?'r33-unified-integration:':null;
+  const targetWorkerId=unifiedScope?'mls-unified-web-integration':workerId;
   return {
-    operation:'claim',requestId,workerId,workerLogin:workerLogin||null,
+    operation:'claim',requestId,workerId:targetWorkerId,workerLogin:workerLogin||null,
     capabilities:['chat','github','r4-autopull'],
     ...(handoffScope?{provider:'r33-farm',workPrefix:handoffScope[0]}:
-      unifiedScope?{provider:'r33-farm',workPrefix:unifiedScope}:
+      unifiedScope?{provider:'r33-index-integration',workPrefix:'r33-unified-integration:'}:
       unifiedIntegrationScope?{provider:'r33-index-integration',workPrefix:unifiedIntegrationScope}:{})
   };
 }
@@ -179,13 +180,16 @@ async function main(){
     if(!String(issue.title||'').startsWith('[MLS Dispatcher][LEASED]'))return;
     state=core.parseAssignmentState(issue.body||'');if(!state)return;
     let next=core.applyWorkerEvent(state,workerEvent,{createdAt:comment.created_at,commentId:comment.id});
-    let chainedClaim=null;
+    let chainedClaim=null,finishPersisted=false;
     const integrationAutoPull=next.provider==='r33-index-integration'&&String(next.workId||'').startsWith('r33-unified-integration:');
     if(workerEvent.operation==='finish'&&next.readyToClose===true&&(next.provider==='r33-farm'||integrationAutoPull)){
       const command=autoPullRequest(next,comment);
       if(command){
+        // Persist FINISH before opening the chained claim so any issue-opened Scheduler
+        // sees the completed R33 terminal and can materialize integration immediately.
+        await updateIssue(issue.number,{body:core.renderAssignmentBody(next)});
+        finishPersisted=true;
         chainedClaim=await createIssue('[MLS Dispatcher][CLAIM] '+command.requestId,core.renderCommandBody(command));
-        await wakeScheduler();
         next={...next,autoPull:{
           enabled:true,
           requestId:command.requestId,
@@ -193,9 +197,11 @@ async function main(){
           createdAt:comment.created_at,
           policy:'continue-until-preempted'
         }};
+        await updateIssue(issue.number,{body:core.renderAssignmentBody(next)});
+        await wakeScheduler();
       }
     }
-    await updateIssue(issue.number,{body:core.renderAssignmentBody(next)});
+    if(!finishPersisted)await updateIssue(issue.number,{body:core.renderAssignmentBody(next)});
   }catch(error){
     issue=await getIssue(eventIssue.number);
     state=core.parseAssignmentState(issue.body||'');
