@@ -250,3 +250,24 @@ test('R44 bad context is isolated; subsequent runner step advances to the next e
 });
 
 
+
+
+test('runner status reads through GitHub authority when D1 writes are exhausted without mutating D1',async()=>{
+  const h=harness();await setup(h,0);await assets(h,2);
+  await h.r.canonicalStep(h.env);
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',last_error='SOURCE_FULLTEXT_REQUIRED' WHERE code='MLS-V01-0002'");
+  const before=h.db.prepare("SELECT code,state FROM mls_canonical_queue ORDER BY code").all();
+  h.r.fetchUnifiedStatus=async()=>({verifiedCodes:['MLS-V01-0001','MLS-V01-0002'],verifiedCount:2,remaining:0,etag:'fixture-etag'});
+  h.r.wikiStore=()=>({async getCloudflareBudget(){return {d1Usage:{writesRemaining:0}}}});
+  h.r.r44Status=async()=>({durableCounts:[]});
+  const response=await h.r.unifiedRunnerStatus(new Request('https://test/api/unified-runner/status',{method:'POST'}),h.env,null);
+  const status=await response.json();
+  assert.equal(status.canonical.prepared,0);
+  assert.equal(status.canonical.quarantine.total,0);
+  assert.equal(status.canonical.counts.VERIFIED,2);
+  assert.equal(status.canonical.pending,0);
+  assert.equal(status.canonical.claimable,0);
+  assert.equal(status.canonical.readThroughAuthority,true);
+  assert.equal(status.canonical.reconciliationPending,2);
+  assert.deepEqual(h.db.prepare("SELECT code,state FROM mls_canonical_queue ORDER BY code").all(),before,'read-through status must not write D1');
+});
