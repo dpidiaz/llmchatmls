@@ -67,7 +67,7 @@ jobs:
       - name: Stage and validate exact integration scope
         id: scope
         run: |
-          git add -- 'MLS R32 EDITORIAL/evidence git/entries' 'MLS R32 EDITORIAL/evidence git/indexes' content
+          git add -- 'MLS R32 EDITORIAL/evidence git' content
           node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" validate-staged "${{ steps.prep.outputs.bundle_path }}"
       - name: Run R33 integration tests
         run: |
