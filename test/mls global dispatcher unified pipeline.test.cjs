@@ -121,12 +121,13 @@ test('Unified final integration carries certified contentPath beside Evidence an
 
 });
 
-test('Unified auto-pull remains scoped to R33 and serialized integration lanes',()=>{
+test('Unified auto-pull hands R33 finish to serialized integration and keeps both lanes scoped',()=>{
   const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
   assert.match(worker,/unifiedScope=workId\.startsWith\('r33-unified:'\)\?'r33-unified:'/);
   assert.match(worker,/unifiedIntegrationScope=workId\.startsWith\('r33-unified-integration:'\)\?'r33-unified-integration:'/);
   assert.match(worker,/handoffScope\?\{provider:'r33-farm',workPrefix:handoffScope\[0\]\}/);
-  assert.match(worker,/unifiedScope\?\{provider:'r33-farm',workPrefix:unifiedScope\}/);
+  assert.match(worker,/const targetWorkerId=unifiedScope\?'mls-unified-web-integration':workerId/);
+  assert.match(worker,/unifiedScope\?\{provider:'r33-index-integration',workPrefix:'r33-unified-integration:'\}/);
   assert.match(worker,/unifiedIntegrationScope\?\{provider:'r33-index-integration',workPrefix:unifiedIntegrationScope\}/);
   assert.match(worker,/integrationAutoPull=next\.provider==='r33-index-integration'/);
 });
