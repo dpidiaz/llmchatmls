@@ -1,5 +1,15 @@
 "use strict";
 
+// Explicit semantic versions, not a deployment/global-catalog hash. Bump only
+// when the corresponding R33 behavior materially changes. Candidate fingerprints
+// ensure unrelated source-catalog edits do not reopen every entry.
+var MLS_CANONICAL_R33_POLICY={claims:1,support:1,coverage:1};
+function unifiedR33CanonicalContext(body) {
+  const article=unifiedR33ReconcileArticle(body.article,body.handoffEntry||{});
+  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{});
+  return {policy:MLS_CANONICAL_R33_POLICY,candidates:unifiedR33SourcePacket(candidates)};
+}
+
 function unifiedR33NormalizeText(value) {
   return String(value || "").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
     .replace(/[^a-z0-9\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af\u0400-\u04ff]+/g," ").trim();
