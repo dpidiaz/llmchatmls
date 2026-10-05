@@ -1,0 +1,53 @@
+name: MLS Unified Runner Control
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Runner action
+        required: true
+        default: start
+        type: choice
+        options:
+          - start
+          - resume
+          - pause
+          - stop
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/MLS Unified Runner Control.yml'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  control:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set runner state
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+          MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
+          REQUESTED_ACTION: ${{ github.event_name == 'push' && 'start' || inputs.action }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error \
+            -X POST "$MLS_UNIFIED_BASE_URL/api/unified-runner/control" \
+            -H "Authorization: Bearer $MLS_EDITORIAL_CHAT_KEY" \
+            -H "Content-Type: application/json" \
+            --data "{\"action\":\"$REQUESTED_ACTION\"}"
+      - name: Kick web runner
+        if: ${{ github.event_name == 'push' || inputs.action == 'start' || inputs.action == 'resume' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --silent --show-error \
+            -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/MLS%20Unified%20Web%20Runner.yml/dispatches" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            --data '{"ref":"main"}'
