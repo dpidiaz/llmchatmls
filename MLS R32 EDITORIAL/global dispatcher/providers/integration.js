@@ -67,13 +67,18 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
     dispatcherOnly:true,
     sourceOfTruth:'github',
     editorialArchitecture:'github-native',
+    unifiedR44Only:true,
     cloudflareEditorialAllowed:false,
     d1EditorialAllowed:false,
     continuationOf:snapshot.pool?.poolId||null,
     execution,
     entries
   };
-  const terminalCodes=codesFromTerminal(globalLedger,'r33-farm').filter(code=>allowed.has(code));
+  const terminalCodes=Object.entries(globalLedger?.terminal||{})
+    .filter(([workId,entry])=>entry?.provider==='r33-farm'&&String(workId).startsWith('r33-unified:'))
+    .flatMap(([,entry])=>Array.isArray(entry.completedUnits)?entry.completedUnits:[])
+    .map(code=>String(code||'').toUpperCase())
+    .filter((code,index,list)=>allowed.has(code)&&list.indexOf(code)===index);
   const ledger={...r33Core.initialLedger(pool),verified:terminalCodes,exceptions:[]};
   const batches=[];
   for(const state of activeProviderAssignments(globalAssignments,'r33-farm')){
@@ -83,7 +88,7 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
       acknowledgedAt:state.acknowledgedAt||null,ackDeadlineAt:state.ackDeadlineAt,expiresAt:state.expiresAt,entries:activeEntries});
   }
   const recoveryCodes=Object.values(globalLedger?.recoveries||{})
-    .filter(r=>r?.workItem?.provider==='r33-farm')
+    .filter(r=>r?.workItem?.provider==='r33-farm'&&String(r?.workItem?.workId||'').startsWith('r33-unified:'))
     .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
   const bufferedCodes=(snapshot.bufferedReservations||[]).flatMap(r=>(r?.allocation?.units||[]).map(u=>String(u?.code||'').toUpperCase()));
   const reservedCodes=[...new Set([...recoveryCodes,...bufferedCodes].filter(code=>allowed.has(code)&&!terminalCodes.includes(code)))];
@@ -292,6 +297,7 @@ function r33TerminalSourceMap(globalLedger,pool,{root='.'}={}){
  const selector=revisions.load(root),out=new Map();
  for(const [workId,terminal] of Object.entries(globalLedger?.terminal||{})){
   if(terminal?.provider!=='r33-farm')continue;
+  if(pool?.unifiedR44Only===true&&!String(workId).startsWith('r33-unified:'))continue;
   const chosen=revisions.choose(workId,terminal,selector,{mode:'integration'});
   if(chosen.blocked)continue; // Never fall back to an obsolete historical Evidence SHA.
   for(const raw of terminal.completedUnits||[]){
