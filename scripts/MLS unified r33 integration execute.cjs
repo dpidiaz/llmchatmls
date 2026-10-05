@@ -302,8 +302,16 @@ async function directMerge(){
   if(branchSha!==headSha)fail('UNIFIED_INTEGRATION_DIRECT_BRANCH_MOVED','Assignment branch moved before direct merge.');
   const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
   const mainSha=String(mainRef?.object?.sha||'').toLowerCase(),base=String(bundle.baseCommit||'').toLowerCase();
-  if(!/^[a-f0-9]{40}$/.test(base)||mainSha!==base)fail('UNIFIED_INTEGRATION_DIRECT_MAIN_MOVED','main moved since the serialized assignment was leased.');
+  if(!/^[a-f0-9]{40}$/.test(base))fail('UNIFIED_INTEGRATION_DIRECT_BASE_INVALID');
   run('git',['fetch','--no-tags','origin','refs/heads/main:refs/remotes/origin/main']);
+  if(mainSha!==base){
+    try{run('git',['merge-base','--is-ancestor',base,'refs/remotes/origin/main'],{capture:true});}
+    catch{fail('UNIFIED_INTEGRATION_DIRECT_MAIN_DIVERGED','main is no longer a descendant of the serialized assignment base.');}
+    const mainChanged=new Set(run('git',['diff','--name-only',base+'..refs/remotes/origin/main'],{capture:true}).split(/\\r?\\n/).filter(Boolean));
+    const branchChanged=new Set(run('git',['diff','--name-only',base+'..'+headSha],{capture:true}).split(/\\r?\\n/).filter(Boolean));
+    const overlap=[...mainChanged].filter(file=>branchChanged.has(file));
+    if(overlap.length)fail('UNIFIED_INTEGRATION_DIRECT_MAIN_OVERLAP','main moved on files also changed by the validated integration branch: '+overlap.join(', '));
+  }
   run('git',['config','user.name','github-actions[bot]']);
   run('git',['config','user.email','41898282+github-actions[bot]@users.noreply.github.com']);
   run('git',['checkout','-B','unified-direct-main','refs/remotes/origin/main']);
