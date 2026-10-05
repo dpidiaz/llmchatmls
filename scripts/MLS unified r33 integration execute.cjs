@@ -246,6 +246,16 @@ async function noopCheckpointEvent(){
   const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
   const branchSha=String(branchRef?.object?.sha||'').toLowerCase();
   if(branchSha!==mainSha)fail('UNIFIED_INTEGRATION_NOOP_MAIN_MOVED','No-op requires assignment branch HEAD to equal current main HEAD.');
+  const existing=(state.checkpoints||[]).find(x=>String(x?.commitSha||'').toLowerCase()===mainSha);
+  if(existing){
+    const expectedUnits=state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6));
+    const completed=new Set(existing.completedUnits||[]);
+    if(String(existing?.validation?.status||'').toLowerCase()!=='passed'||(existing.pendingUnits||[]).length||
+      expectedUnits.some(code=>!completed.has(code)))
+      fail('UNIFIED_INTEGRATION_NOOP_EXISTING_CHECKPOINT_INVALID','Existing same-commit checkpoint is not a complete passed integration checkpoint.');
+    writeEvent('noop-checkpoint',bundle,{operation:'heartbeat',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch},runId*10+4);
+    return;
+  }
   writeEvent('noop-checkpoint',bundle,{operation:'checkpoint',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
     commitSha:mainSha,integrationStage:'noop',
     validation:{status:'passed',workflow:'MLS Unified R33 Integration Execute',runId},
@@ -259,8 +269,10 @@ async function noopFinishEvent(){
   const state=core.parseAssignmentState(issue.body||'');
   const checkpoint=(state?.checkpoints||[]).at(-1);
   const checkpointSha=String(state?.lastCheckpointCommit||'').toLowerCase();
+  const checkpointStage=String(checkpoint?.integrationStage||'').toLowerCase();
   if(!state||state.assignmentId!==bundle.assignmentId||state.status!=='leased'||!/^[a-f0-9]{40}$/.test(checkpointSha)||
-    String(checkpoint?.integrationStage||'').toLowerCase()!=='noop'||String(checkpoint?.validation?.status||'').toLowerCase()!=='passed')
+    !['noop','postmerge','postmerge-direct'].includes(checkpointStage)||String(checkpoint?.validation?.status||'').toLowerCase()!=='passed'||
+    (checkpoint?.pendingUnits||[]).length)
     fail('UNIFIED_INTEGRATION_NOOP_FINISH_STATE_INVALID');
   const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
   const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
