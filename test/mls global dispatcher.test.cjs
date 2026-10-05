@@ -309,3 +309,15 @@ test('unified runner clears cross-lane integration pointers and continues to R33
   assert.doesNotMatch(source,/\['pending','fence_rejected'\]\.includes\(integration\.kind\)/);
   assert.match(source,/Claim pointer belongs to a different web runner lane/);
 });
+
+
+test('unified runner recovers a crossed Cloudflare lane pointer inside laneIssue',()=>{
+  const source=fs.readFileSync('scripts/MLS unified web runner.cjs','utf8');
+  assert.match(source,/Lane pointer belongs to a different Unified stage/);
+  assert.match(source,/source:'cloudflare-lane-pointer'/);
+  const fence=source.indexOf("error:'Lane pointer belongs to a different Unified stage.'");
+  const clear=source.indexOf('issue=null;',fence);
+  const recover=source.indexOf('issue=await findExisting(stage);',clear);
+  const create=source.indexOf('if(!issue)issue=await createClaim(stage);',recover);
+  assert.ok(fence>=0&&clear>fence&&recover>clear&&create>recover);
+});
