@@ -215,8 +215,9 @@ function selectNextWork(registry,ledger,states,at=Date.now(),provider=null,workP
     candidates.push({item,recovery,recoveryRank:recovery?0:1});
   }
   const preparedDrainFirst=filter==='r33-farm'&&prefix==='r33-unified:';
+  const preparedDrainRank=candidate=>!candidate.recovery&&Number(candidate.item.priority)===1?0:candidate.recovery?1:2;
   candidates.sort((a,b)=>preparedDrainFirst
-    ? a.item.priority-b.item.priority||a.recoveryRank-b.recoveryRank||String(a.item.createdAt).localeCompare(String(b.item.createdAt))||a.item.workId.localeCompare(b.item.workId)
+    ? preparedDrainRank(a)-preparedDrainRank(b)||a.item.priority-b.item.priority||String(a.item.createdAt).localeCompare(String(b.item.createdAt))||a.item.workId.localeCompare(b.item.workId)
     : a.recoveryRank-b.recoveryRank||a.item.priority-b.item.priority||String(a.item.createdAt).localeCompare(String(b.item.createdAt))||a.item.workId.localeCompare(b.item.workId));
   return candidates[0]||null;
 }
