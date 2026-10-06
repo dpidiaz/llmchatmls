@@ -86,7 +86,7 @@ function unifiedR33SourceCandidates(article,handoffEntry,options={}) {
     if(title && handoffText.includes(title)) score+=160;
     if(url && handoffText.includes(url)) score+=220;
     if(raw.sourceId && handoffText.includes(unifiedR33NormalizeText(raw.sourceId))) score+=500;
-    return {sourceId:String(raw.sourceId||""),metadata:m,score};
+    return {sourceId:String(raw.sourceId||""),metadata:m,score,repairValidatedFulltext:raw&&raw.repairValidatedFulltext===true,repairPublishRequired:raw&&raw.repairPublishRequired!==false};
   }).filter(Boolean);
   const eligible=options.autoAuditableOnly?ranked.filter(unifiedR33SourceAutoAuditable):ranked;
   return eligible.sort((a,b)=>b.score-a.score||a.sourceId.localeCompare(b.sourceId)).slice(0,16);
@@ -119,7 +119,7 @@ function unifiedR33SourceAutoAuditable(candidate) {
   const metadata=candidate&&candidate.metadata||{};
   const type=String(metadata.sourceType||"");
   const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
-  return autoTypes.has(type)&&!!unifiedR33SafeSourceUrl(metadata.canonicalUrl);
+  return (autoTypes.has(type)||candidate&&candidate.repairValidatedFulltext===true)&&!!unifiedR33SafeSourceUrl(metadata.canonicalUrl);
 }
 function unifiedR33SourcePacket(candidates) {
   return candidates.map(x=>({
@@ -208,7 +208,7 @@ async function unifiedR33FetchSourceDocument(candidate) {
   const metadata=candidate&&candidate.metadata||{};
   const type=String(metadata.sourceType||"");
   const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
-  if(!autoTypes.has(type))return {ok:false,reason:"SOURCE_FULLTEXT_REQUIRED",sourceId:candidate.sourceId};
+  if(!autoTypes.has(type)&&!(candidate&&candidate.repairValidatedFulltext===true))return {ok:false,reason:"SOURCE_FULLTEXT_REQUIRED",sourceId:candidate.sourceId};
   const url=unifiedR33SafeSourceUrl(metadata.canonicalUrl);
   if(!url)return {ok:false,reason:"SOURCE_URL_UNAVAILABLE",sourceId:candidate.sourceId};
   let response;
@@ -410,7 +410,7 @@ async function unifiedR33BuildDraft(env,body) {
     const source=candidates.find(x=>x.sourceId===sourceId);
     return source?{sourceId,metadata:source.metadata}:null;
   }).filter(Boolean);
-  const repairIds=new Set(repairCatalog.map(x=>String(x.sourceId||"")));
+  const repairIds=new Set(repairCatalog.filter(x=>x&&x.repairPublishRequired!==false).map(x=>String(x.sourceId||"")));
   const repairSources=sources.filter(x=>repairIds.has(String(x.sourceId||"")));
   return r44Json({
     ok:true,status:"MATCH",code,

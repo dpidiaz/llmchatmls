@@ -266,7 +266,7 @@ async function canonicalStep(env){
   if(!row){
     const repair=await unifiedR33RepairStep(env);
     if(repair.status!=='NO_REPAIR_WORK'){
-      if(repair.status==='REPAIR_SOURCE_REGISTERED')await canonicalRecoverQuarantine(env);
+      if(repair.status==='REPAIR_SOURCE_REGISTERED'||repair.status==='REPAIR_SOURCE_REHYDRATED')await canonicalRecoverQuarantine(env);
       return {status:'REPAIR_QUARANTINE',repair};
     }
     return {status:'NO_WORK',source:'CANONICAL'};

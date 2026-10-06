@@ -135,15 +135,76 @@ test('repair quarantine lane registers a live auditable source and reopens only 
   assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
 });
 
-test('repair quarantine discovery is bounded to three failed attempts',async()=>{
+test('repair quarantine discovery is bounded to three v1 plus three v2 failed attempts',async()=>{
   const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',lease_token=NULL,expires_ms=0,retry_ms=0 WHERE code='MLS-V01-0001'");
   h.r.unifiedR33RepairDiscover=async()=>({parsed:{status:'NO_SAFE_SOURCE',candidates:[]},result:{model:'fixture'}});
-  for(let i=0;i<3;i++)assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'REPAIR_NO_SAFE_SOURCE');
+  h.r.unifiedR33RepairRegisteredRescue=async()=>({ok:false,reason:'REPAIR_NO_REGISTERED_FULLTEXT_RESCUE'});
+  for(let i=0;i<6;i++)assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'REPAIR_NO_SAFE_SOURCE');
   assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'NO_REPAIR_WORK');
   const row=h.db.prepare("SELECT state,attempts FROM mls_r33_repair_queue WHERE code='MLS-V01-0001'").get();
-  assert.equal(row.state,'BLOCKED');assert.equal(row.attempts,3);
+  assert.equal(row.state,'BLOCKED');assert.equal(row.attempts,6);
 });
+
+test('repair source links allow one validated source to support multiple canonical entries',async()=>{
+  const h=harness();await setup(h,0);const packets=await assets(h,2);await h.r.canonicalSeed(h.env);await h.r.unifiedR33RepairEnsure(h.env);
+  h.r.unifiedR33FetchSourceDocument=async candidate=>({ok:true,sourceId:candidate.sourceId,url:candidate.metadata.canonicalUrl,text:'English grammar substantive source text '.repeat(20),title:candidate.metadata.title});
+  h.r.unifiedR33RepairOverlap=()=>4;
+  const candidate={url:'https://example.org/shared-grammar',title:'Shared grammar source',sourceType:'institutional_webpage'};
+  for(let i=0;i<2;i++){
+    const code='MLS-V01-000'+(i+1),lease='lease-'+i;
+    h.db.prepare("UPDATE mls_canonical_queue SET state='QUARANTINED',last_error='SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE' WHERE code=?").run(code);
+    h.db.prepare("INSERT OR REPLACE INTO mls_r33_repair_queue(code,state,reason,attempts,lease_token,expires_ms,updated_ms) VALUES(?,?,?,?,?,?,?)")
+      .run(code,'LEASED','SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',1,lease,Date.now()+60000,Date.now());
+    const input=packets[0].find(x=>x.input.code===code).input;
+    const saved=await h.r.unifiedR33RepairRegister(h.env,input,{code,reason:'SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',lease_token:lease},candidate,{model:'fixture'});
+    assert.equal(saved.ok,true);
+  }
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_r33_repair_sources").get().n,1);
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_r33_repair_source_links").get().n,2);
+  assert.equal((await h.r.unifiedR33RepairSources(h.env,'MLS-V01-0001')).length,1);
+  assert.equal((await h.r.unifiedR33RepairSources(h.env,'MLS-V01-0002')).length,1);
+});
+
+test('repair v2 rehydrates legacy DONE source pointers without new inference',async()=>{
+  const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);await h.r.unifiedR33RepairEnsure(h.env);
+  const code='MLS-V01-0001',sourceId='MLS-SRC-AAAAAAAAAAAAAAAAAAAA';
+  const source={schemaVersion:'1.0',sourceId,metadata:{sourceType:'institutional_webpage',authorityTier:'A',status:'active',title:'Grammar source',institution:'Example',canonicalUrl:'https://example.org/grammar',language:'en'},repairValidatedFulltext:true,repairPublishRequired:true};
+  h.db.prepare("INSERT OR REPLACE INTO mls_r33_repair_sources(source_id,code,source_json,source_sha256,url,authority_tier,provenance_json,created_ms,state) VALUES(?,?,?,?,?,?,?,?,?)")
+    .run(sourceId,code,JSON.stringify(source),'sha','https://example.org/grammar','A','{}',Date.now(),'ACTIVE');
+  h.db.prepare("INSERT OR REPLACE INTO mls_r33_repair_queue(code,state,reason,attempts,last_error,last_source_id,updated_ms) VALUES(?,?,?,?,?,?,?)")
+    .run(code,'DONE','SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',3,null,sourceId,Date.now());
+  h.db.prepare("UPDATE mls_canonical_queue SET state='QUARANTINED',last_error='SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE' WHERE code=?").run(code);
+  h.db.prepare("DELETE FROM mls_r33_repair_source_links WHERE code=?").run(code);
+  const before=h.db.prepare("SELECT context_hash FROM mls_canonical_recovery WHERE code=?").get(code).context_hash;
+  const out=await h.r.unifiedR33RepairRehydrateDone(h.env);
+  assert.equal(out.status,'REPAIR_SOURCE_REHYDRATED');
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_r33_repair_source_links WHERE code=? AND source_id=?").get(code,sourceId).n,1);
+  const after=h.db.prepare("SELECT context_hash FROM mls_canonical_recovery WHERE code=?").get(code).context_hash;
+  assert.notEqual(after,before);
+  assert.equal(h.db.prepare("SELECT last_error FROM mls_r33_repair_queue WHERE code=?").get(code).last_error,'REHYDRATED_V2');
+});
+
+test('repair v2 rescues a blocked entry with live full text from an existing registered source',async()=>{
+  const h=harness();await setup(h,0);const packets=await assets(h,1);await h.r.canonicalSeed(h.env);await h.r.unifiedR33RepairEnsure(h.env);
+  const code='MLS-V01-0001',sourceId='MLS-SRC-BBBBBBBBBBBBBBBBBBBB';
+  h.r.MLS_R33_SOURCE_CATALOG=[{schemaVersion:'1.0',sourceId,metadata:{language:'en',title:'English grammar reference',sourceType:'book',authorityTier:'A',status:'active',publisher:'Example Press',canonicalUrl:'https://example.org/fulltext-book'}}];
+  h.db.prepare("UPDATE mls_canonical_queue SET state='QUARANTINED',last_error='SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE' WHERE code=?").run(code);
+  h.db.prepare("INSERT OR REPLACE INTO mls_r33_repair_queue(code,state,reason,attempts,last_error,updated_ms) VALUES(?,?,?,?,?,?)")
+    .run(code,'BLOCKED','SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',3,'REPAIR_NO_SAFE_SOURCE',Date.now());
+  h.r.unifiedR33RepairFetchRegisteredDocument=async candidate=>({ok:true,sourceId:candidate.sourceId,url:candidate.metadata.canonicalUrl,text:'English grammar reference nouns verbs clauses agreement '.repeat(20),title:candidate.metadata.title});
+  h.r.unifiedR33RepairOverlap=()=>5;
+  const out=await h.r.unifiedR33RepairStep(h.env);
+  assert.equal(out.status,'REPAIR_SOURCE_REGISTERED');
+  const overlays=await h.r.unifiedR33RepairSources(h.env,code);
+  assert.equal(overlays.length,1);
+  assert.equal(overlays[0].repairValidatedFulltext,true);
+  assert.equal(overlays[0].repairPublishRequired,false);
+  const eligible=h.r.unifiedR33SourceCandidates(packets[0][0].input.article,{}, {autoAuditableOnly:true,extraCatalog:overlays});
+  assert.equal(eligible.some(x=>x.sourceId===sourceId&&x.repairValidatedFulltext===true),true);
+  assert.equal(h.r.unifiedR33SourceAutoAuditable({sourceId,metadata:h.r.MLS_R33_SOURCE_CATALOG[0].metadata}),false,'normal static book remains excluded until live repair validation');
+});
+
 
 test('prepared-only drain never regenerates evidence on cache miss or changed context',async()=>{
   const h=harness();await setup(h,0);const packets=await assets(h,2);
