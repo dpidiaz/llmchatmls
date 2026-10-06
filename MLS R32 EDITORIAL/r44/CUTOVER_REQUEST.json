@@ -1,6 +1,6 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-06T01:05:00.000Z",
+  "requestedAt": "2026-10-06T03:55:00.000Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
   "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Canonical quarantine entries become immediately eligible while preserving bounded retry fences and terminal safety",
-  "retryGeneration": 34,
+  "retryReason": "Deploy MLS Unified GitHub 403 degraded mode: keep Cloudflare/D1 hot path active, defer GitHub writes with durable bounded backoff, then recover through the serialized writer",
+  "retryGeneration": 35,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
@@ -43,7 +43,17 @@
     "terminalAuthority": "MLS R32 EDITORIAL/evidence git/indexes/verified.json",
     "r44LaneFailureIsolation": "R44_DEGRADED_NONBLOCKING",
     "canonicalBacklogContinuesAfterR44Drain": true,
-    "legacyR44ErrorSelfHealOnCron": true
+    "legacyR44ErrorSelfHealOnCron": true,
+    "githubSecondaryRateLimitMode": "D1_DEGRADED_CONTINUE",
+    "githubGateAuthority": "WIKI_DB.mls_unified_github_gate",
+    "githubCooldownMinSeconds": 60,
+    "githubCooldownMaxSeconds": 900,
+    "githubAggressiveRetryDisabled": true,
+    "cloudflareContinuesDuringGithub403": true,
+    "degradedExecutionTargetEntries": 100,
+    "preparedDuringDegradedIsVerified": false,
+    "terminalVerificationRequiresGithubIntegration": true,
+    "recoveryWriter": "SERIALIZED_EXISTING_UNIFIED_INTEGRATION"
   },
   "unifiedStatusMonitor": {
     "schema": "MLS-UNIFIED-STATUS-1",

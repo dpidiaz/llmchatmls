@@ -518,7 +518,9 @@ async function unifiedRunnerEnsure(env) {
   await env.WIKI_DB.batch([
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, worker_id TEXT NOT NULL, started_at TEXT, updated_at TEXT NOT NULL, processed_entries INTEGER NOT NULL DEFAULT 0, corrected_entries INTEGER NOT NULL DEFAULT 0, error_count INTEGER NOT NULL DEFAULT 0, last_ticket TEXT, last_code TEXT, last_error TEXT, last_step_at TEXT, step_token TEXT, busy_until INTEGER, schema_version TEXT NOT NULL)"),
     env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_runner(id,state,worker_id,updated_at,schema_version) VALUES(1,'STOPPED',?,?,?)").bind(MLS_UNIFIED_RUNNER_WORKER,new Date().toISOString(),MLS_UNIFIED_RUNNER_SCHEMA),
-    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_lane (stage TEXT PRIMARY KEY CHECK(stage IN ('r33','integration')), state TEXT NOT NULL, issue_number INTEGER, assignment_id TEXT, last_code TEXT, last_error TEXT, detail_json TEXT, updated_at TEXT NOT NULL)")
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_lane (stage TEXT PRIMARY KEY CHECK(stage IN ('r33','integration')), state TEXT NOT NULL, issue_number INTEGER, assignment_id TEXT, last_code TEXT, last_error TEXT, detail_json TEXT, updated_at TEXT NOT NULL)"),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_github_gate (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL CHECK(state IN ('NORMAL','DEGRADED')), retry_at INTEGER NOT NULL DEFAULT 0, failure_count INTEGER NOT NULL DEFAULT 0, last_error TEXT, degraded_at TEXT, recovered_at TEXT, updated_at TEXT NOT NULL)"),
+    env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_unified_github_gate(id,state,retry_at,failure_count,updated_at) VALUES(1,'NORMAL',0,0,?)").bind(new Date().toISOString())
   ]);
   await env.WIKI_DB.batch([
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_unified_runner_config (id INTEGER PRIMARY KEY CHECK(id=1), desired INTEGER NOT NULL CHECK(desired IN (1,100) OR (desired BETWEEN 5 AND 50 AND desired%5=0)))"),
@@ -548,6 +550,44 @@ async function unifiedRunnerEnsure(env) {
 async function unifiedRunnerRead(env) {
   await unifiedRunnerEnsure(env);
   return env.WIKI_DB.prepare("SELECT r.*,c.desired AS configured_runners,(SELECT COUNT(*) FROM mls_unified_runner_slots WHERE step_token IS NOT NULL AND busy_until>?) AS active_runners FROM mls_unified_runner r JOIN mls_unified_runner_config c ON c.id=r.id WHERE r.id=1").bind(Date.now()).first();
+}
+async function unifiedRunnerGithubGateRead(env) {
+  await unifiedRunnerEnsure(env);
+  return env.WIKI_DB.prepare("SELECT * FROM mls_unified_github_gate WHERE id=1").first();
+}
+function unifiedRunnerGithubRetryDelay(failureCount,requestedMs) {
+  const requested=Math.max(0,Number(requestedMs)||0);
+  const exponential=Math.min(15*60*1000,60*1000*Math.pow(2,Math.max(0,Number(failureCount||1)-1)));
+  return Math.max(60*1000,requested,exponential);
+}
+async function unifiedRunnerGithubGate(request,env,ctx) {
+  const auth=await unifiedRunnerAuthorize(request,env,ctx);
+  if(!auth.ok)return r44Json({error:auth.error},auth.status);
+  const body=await r44ChatBridgeBody(request);
+  const action=String(body.action||"").toLowerCase();
+  if(action!=="degrade"&&action!=="recover")return r44Json({error:"UNIFIED_GITHUB_GATE_ACTION_INVALID"},400);
+  await unifiedRunnerEnsure(env);
+  const nowMs=Date.now(),now=new Date(nowMs).toISOString();
+  if(action==="degrade"){
+    const current=await unifiedRunnerGithubGateRead(env);
+    const failures=Math.max(1,Number(current&&current.failure_count||0)+1);
+    const delay=unifiedRunnerGithubRetryDelay(failures,body.retryAfterMs);
+    const error=String(body.error||"GitHub Secondary Rate Limit").slice(0,2000);
+    await env.WIKI_DB.prepare("UPDATE mls_unified_github_gate SET state='DEGRADED',retry_at=?,failure_count=?,last_error=?,degraded_at=CASE WHEN state='NORMAL' OR degraded_at IS NULL THEN ? ELSE degraded_at END,recovered_at=NULL,updated_at=? WHERE id=1")
+      .bind(nowMs+delay,failures,error,now,now).run();
+  }else{
+    await env.WIKI_DB.prepare("UPDATE mls_unified_github_gate SET state='NORMAL',retry_at=0,failure_count=0,last_error=NULL,recovered_at=?,updated_at=? WHERE id=1")
+      .bind(now,now).run();
+  }
+  return r44Json({ok:true,action,githubGate:await unifiedRunnerGithubGateRead(env)});
+}
+async function unifiedRunnerKick(request,env,ctx) {
+  const auth=await unifiedRunnerAuthorize(request,env,ctx);
+  if(!auth.ok)return r44Json({error:auth.error},auth.status);
+  const runner=await unifiedRunnerRead(env);
+  if(runner.state!=="RUNNING")return r44Json({error:"UNIFIED_RUNNER_NOT_RUNNING",state:runner.state},409);
+  const result=await unifiedRunnerScheduled(env);
+  return r44Json({ok:true,mode:"CLOUDFLARE_ONLY",result,githubGate:await unifiedRunnerGithubGateRead(env)});
 }
 var MLS_UNIFIED_ACCESS_TEAM_ORIGIN = "https://flat-wave-7385.cloudflareaccess.com";
 var MLS_UNIFIED_ACCESS_AUD = "2e8cca974ae20d4a4812a6259207e203154b294c1587b32babe93031e1177dd6";
@@ -639,7 +679,7 @@ async function unifiedRunnerStatus(request, env, ctx) {
   // write budget. This makes /runner reflect merged VERIFIED entries immediately
   // (bounded by canonicalAuthorityStatus' 5-minute cache) without mutating D1.
   try{authorityStatus=await canonicalAuthorityStatus();}catch(_){}
-  return r44Json({ok:true,runner,r44,budget,lanes,canonical:await canonicalStatus(env,authorityStatus),freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
+  return r44Json({ok:true,runner,r44,budget,lanes,githubGate:await unifiedRunnerGithubGateRead(env),canonical:await canonicalStatus(env,authorityStatus),freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
 }
 function unifiedRunnerSeed(article) {
   return {
@@ -897,6 +937,8 @@ async function handleUnifiedRunner(request, env, url, ctx) {
   }
   if (pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env,ctx);
   if (pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env,ctx);
+  if (pathname === "/api/unified-runner/github-gate" && request.method === "POST") return unifiedRunnerGithubGate(request,env,ctx);
+  if (pathname === "/api/unified-runner/kick" && request.method === "POST") return unifiedRunnerKick(request,env,ctx);
   if (pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env,ctx);
   if (pathname === "/api/unified-runner/r33-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env,ctx);
   if (pathname === "/api/unified-runner/prepared-evidence" && request.method === "POST") return unifiedRunnerR33Draft(request,env,ctx,true);

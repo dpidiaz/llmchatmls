@@ -34,7 +34,13 @@ test('Unified Cloudflare runner injects one syntactically valid scheduled contro
   assert.match(built,/\/api\/unified-runner\/step/);
   assert.match(built,/\/api\/unified-runner\/r33-evidence/);
   assert.match(built,/\/api\/unified-runner\/report/);
+  assert.match(built,/\/api\/unified-runner\/github-gate/);
+  assert.match(built,/\/api\/unified-runner\/kick/);
   assert.match(built,/CREATE TABLE IF NOT EXISTS mls_unified_runner_lane/);
+  assert.match(built,/CREATE TABLE IF NOT EXISTS mls_unified_github_gate/);
+  assert.match(built,/state TEXT NOT NULL CHECK\(state IN \('NORMAL','DEGRADED'\)\)/);
+  assert.match(built,/unifiedRunnerGithubRetryDelay/);
+  assert.match(built,/mode:"CLOUDFLARE_ONLY"/);
   assert.match(built,/MLS_R33_SOURCE_CATALOG/);
   assert.match(built,/R33-Unified-CF-3/);
   assert.match(built,/NEEDS_CHAT_REVIEW/);
