@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "unifiedRunnerControl",
+  "method": "POST",
+  "path": "/api/unified-runner/control",
+  "response": {
+    "ok": true,
+    "action": "resume",
+    "state": "RUNNING",
+    "runner": {
+      "id": 1,
+      "state": "RUNNING",
+      "worker_id": "mls-unified-web-runner-v1",
+      "started_at": "2026-10-03T23:10:20.246Z",
+      "updated_at": "2026-10-06T19:58:13.870Z",
+      "processed_entries": 734,
+      "corrected_entries": 1,
+      "error_count": 24,
+      "last_ticket": "R43-EMERGENCY-0020",
+      "last_code": "MLS-V03-0126",
+      "last_error": null,
+      "last_step_at": "2026-10-06T19:58:04.493Z",
+      "step_token": null,
+      "busy_until": null,
+      "schema_version": "3",
+      "configured_runners": 100,
+      "active_runners": 0
+    }
+  },
+  "completedAt": "2026-10-06T19:58:13.982Z",
+  "commandFile": "mls chat bridge/commands/01-unified-resume-r33-repair-20261006T1358.json"
+}
