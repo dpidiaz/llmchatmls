@@ -3,6 +3,7 @@ const KEY=process.env.MLS_EDITORIAL_CHAT_KEY||'';
 const BATCH=Math.max(1,Math.min(5,Number(process.env.R44_LEGACY_RECONCILE_BATCH||5)));
 const MAX_BATCHES=Math.max(1,Math.min(100,Number(process.env.R44_LEGACY_RECONCILE_MAX_BATCHES||60)));
 const MIN_WRITES=Math.max(0,Number(process.env.R44_LEGACY_RECONCILE_MIN_WRITES_REMAINING||2500));
+const ENFORCE_FREE_D1_GUARD=/^(1|true|yes|on)$/i.test(String(process.env.R44_LEGACY_RECONCILE_ENFORCE_D1_FREE_GUARD||''));
 
 if(KEY.length<32)throw new Error('MLS_EDITORIAL_CHAT_KEY missing or invalid');
 
@@ -15,12 +16,18 @@ async function json(path,options={}){
 }
 async function run(){
   let last=null,totalReconciled=0,totalRequeued=0,totalBlocked=0;
+  if(!ENFORCE_FREE_D1_GUARD){
+    console.log(JSON.stringify({status:'D1_FREE_WRITE_GUARD_DISABLED',reason:'WORKERS_PAID'}));
+  }
   for(let i=0;i<MAX_BATCHES;i++){
-    const wiki=await json('/api/wiki/status');
-    const remaining=Number(wiki?.d1Usage?.writesRemaining);
-    if(Number.isFinite(remaining)&&remaining<MIN_WRITES){
-      console.log(JSON.stringify({status:'D1_WRITE_GUARD',writesRemaining:remaining,minWritesRemaining:MIN_WRITES,totalReconciled,totalRequeued,totalBlocked,last}));
-      return;
+    if(ENFORCE_FREE_D1_GUARD){
+      const wiki=await json('/api/wiki/status');
+      const rawRemaining=wiki?.d1Usage?.writesRemaining??wiki?.cloudflare?.d1Usage?.writesRemaining;
+      const remaining=Number(rawRemaining);
+      if(Number.isFinite(remaining)&&remaining<MIN_WRITES){
+        console.log(JSON.stringify({status:'D1_WRITE_GUARD',writesRemaining:remaining,minWritesRemaining:MIN_WRITES,totalReconciled,totalRequeued,totalBlocked,last}));
+        return;
+      }
     }
     last=await json('/api/r44/admin/reconcile-legacy-quarantine',{
       method:'POST',
