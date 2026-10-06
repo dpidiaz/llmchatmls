@@ -3,6 +3,8 @@
 const core=require('./global dispatcher/core.js');
 
 const GUIDE='docs/MLS Global Dispatcher/28 MLS Unified Verification Pipeline.md';
+const EXECUTION_TARGET_ENTRIES=100;
+const MAX_MICROCLAIM_ENTRIES=50;
 const STAGES={
   integration:{provider:'r33-index-integration',workPrefix:'r33-unified-integration:',action:'process_integration'},
   r33:{provider:'r33-farm',workPrefix:'r33-unified:',action:'process_r33'}
@@ -51,7 +53,7 @@ function inspectAssignment(issue,{stage}={}){
   const codes=(state.resourceLocks||[])
     .filter(x=>String(x).startsWith('entry:'))
     .map(x=>String(x).slice(6));
-  assert(codes.length>0&&codes.length<=50,'UNIFIED_ASSIGNMENT_CODES');
+  assert(codes.length>0&&codes.length<=MAX_MICROCLAIM_ENTRIES,'UNIFIED_ASSIGNMENT_CODES');
   return {
     action:spec.action,
     stage,
@@ -73,4 +75,4 @@ function inspectAssignment(issue,{stage}={}){
     guide:GUIDE
   };
 }
-module.exports={GUIDE,STAGES,stageSpec,createClaim,inspectAssignment};
+module.exports={GUIDE,EXECUTION_TARGET_ENTRIES,MAX_MICROCLAIM_ENTRIES,STAGES,stageSpec,createClaim,inspectAssignment};
