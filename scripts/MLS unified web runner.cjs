@@ -613,7 +613,8 @@ async function dispatchR33(issue,state){
     leaseEpoch:state.leaseEpoch,
     code,
     evidence:draft.evidence,
-    ...(draft.finalContent?{content:draft.finalContent}:{})
+    ...(draft.finalContent?{content:draft.finalContent}:{}),
+    ...(Array.isArray(draft.repairSources)&&draft.repairSources.length?{sources:draft.repairSources}:{})
   };
   const body='<!-- MLS_UNIFIED_R33_EVIDENCE_SUBMIT\n'+JSON.stringify(payload,null,2)+'\n-->';
   const comment=await postComment(issue.number,body);
