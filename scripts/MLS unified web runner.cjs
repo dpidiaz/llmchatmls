@@ -23,6 +23,7 @@ const WORKFLOWS={
   r33:'MLS Unified R33 Evidence Submit.yml'
 };
 const REVIEW_MARKER='MLS_UNIFIED_WEB_NEEDS_REVIEW';
+let githubMutationSucceeded=false;
 
 function fail(code,message,status=1){const e=new Error(message||code);e.code=code;e.status=status;throw e;}
 function sleep(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
@@ -45,8 +46,13 @@ async function gh(endpoint,{method='GET',body,allow404=false}={}){
   if(response.status===404&&allow404)return null;
   if(!response.ok){
     const e=new Error(data?.message||text||('GitHub '+response.status));
-    e.code='GITHUB_'+response.status;e.status=response.status;e.data=data;throw e;
+    e.code='GITHUB_'+response.status;e.status=response.status;e.data=data;
+    e.retryAfter=response.headers.get('retry-after');
+    e.rateLimitRemaining=response.headers.get('x-ratelimit-remaining');
+    e.rateLimitReset=response.headers.get('x-ratelimit-reset');
+    throw e;
   }
+  if(method!=='GET'&&method!=='HEAD')githubMutationSucceeded=true;
   return data;
 }
 async function cf(pathname,body={}){
@@ -66,6 +72,34 @@ async function cf(pathname,body={}){
 }
 async function report(stage,state,extra={}){
   return cf('/api/unified-runner/report',{stage,state,...extra});
+}
+function isGithubSecondaryRateLimit(error){
+  const status=Number(error&&error.status||0);
+  const message=[
+    error&&error.message,
+    error&&error.data&&error.data.message,
+    error&&error.data&&error.data.documentation_url
+  ].filter(Boolean).join(' ').toLowerCase();
+  return status===403&&(/secondary rate limit|temporarily blocked from content creation|abuse detection/.test(message));
+}
+function githubRetryAfterMs(error){
+  const header=Number(error&&error.retryAfter||0);
+  if(Number.isFinite(header)&&header>0)return Math.max(60000,header*1000);
+  const reset=Number(error&&error.rateLimitReset||0);
+  if(Number.isFinite(reset)&&reset>0)return Math.max(60000,reset*1000-Date.now());
+  return 60000;
+}
+async function githubGate(action,extra={}){
+  return cf('/api/unified-runner/github-gate',{action,...extra});
+}
+async function kickCloudflareOnly(reason,gate=null){
+  const result=await cf('/api/unified-runner/kick',{reason,targetEntries:unified.EXECUTION_TARGET_ENTRIES});
+  const detail={reason,targetEntries:unified.EXECUTION_TARGET_ENTRIES,githubGate:gate||null,kick:result.result||null};
+  await Promise.all([
+    report('r33','GITHUB_DEGRADED',{error:'GitHub writes deferred; Cloudflare/D1 continues preparing durable R33 work.',detail}),
+    report('integration','GITHUB_DEGRADED',{error:'GitHub integration writer deferred until rate limit recovery.',detail})
+  ]);
+  return result;
 }
 function durableCount(r44,state){
   const row=(r44?.durableCounts||[]).find(x=>String(x.state||'')===state);
@@ -526,6 +560,13 @@ async function run(){
     return;
   }
 
+  const gate=status.githubGate||{};
+  if(gate.state==='DEGRADED'&&Number(gate.retry_at||0)>Date.now()){
+    const kicked=await kickCloudflareOnly('github-secondary-rate-limit-cooldown',gate);
+    console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:Number(gate.retry_at||0),targetEntries:unified.EXECUTION_TARGET_ENTRIES,kick:kicked.result||null}));
+    return;
+  }
+
   if(status.lanes?.r33?.issue_number){
     const hintedR33=await resolveAssignment('r33',status.lanes.r33);
     if(hintedR33.kind==='leased'){
@@ -570,8 +611,28 @@ async function run(){
   }
   console.log(JSON.stringify({ok:true,status:'NO_AUTOMATIC_ASSIGNMENT',integration:integration.kind,r33:r33.kind}));
 }
-run().catch(async error=>{
+async function main(){
+  await run();
+  if(githubMutationSucceeded){
+    await githubGate('recover').catch(()=>{});
+  }
+}
+main().catch(async error=>{
   console.error(error.code||'MLS_UNIFIED_WEB_RUNNER_ERROR',error.message);
+  if(isGithubSecondaryRateLimit(error)){
+    try{
+      const degraded=await githubGate('degrade',{
+        retryAfterMs:githubRetryAfterMs(error),
+        error:(error.code||'GITHUB_403')+': '+error.message
+      });
+      const gate=degraded.githubGate||null;
+      const kicked=await kickCloudflareOnly('github-secondary-rate-limit',gate);
+      console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:gate&&gate.retry_at||null,targetEntries:unified.EXECUTION_TARGET_ENTRIES,kick:kicked.result||null}));
+      return;
+    }catch(degradedError){
+      console.error('UNIFIED_GITHUB_DEGRADED_MODE_ERROR',degradedError.message);
+    }
+  }
   try{
     const stage=String(error.code||'').includes('INTEGRATION')?'integration':'r33';
     await report(stage,'ERROR',{error:(error.code||'ERROR')+': '+error.message});
