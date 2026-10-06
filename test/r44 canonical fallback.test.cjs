@@ -174,11 +174,16 @@ async function reseed(h,packets,revision,contextFor=()=> 'sources-v1'){
   h.env.ASSETS={async fetch(req){return Response.json(new URL(req.url).pathname.endsWith('manifest.json')?{revision,pending:rows.length,waitingHandoff:0,rows}:packets.flat())}};
   await h.r.canonicalSeed(h.env);
 }
-test('legacy bootstrap and irrelevant deployment preserve editorial quarantine; relevant source change recovers only its entry',async()=>{
+test('legacy bootstrap gets one same-context preflight recovery; unrelated deploy cannot duplicate it; material change reopens one row',async()=>{
   const h=harness();await setup(h,0);const packets=await assets(h,2);await h.r.canonicalSeed(h.env);
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'fixture-source',metadata:{language:'en',title:'Example',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/source'}}];
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=1,last_error='MATCHER_REQUESTED_REVIEW'; DELETE FROM mls_canonical_recovery");
   await reseed(h,packets,'baseline');
   await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='RETRY'").get().n,2);
+  assert.equal(h.db.prepare("SELECT SUM(recoveries) n FROM mls_canonical_recovery").get().n,2);
+  // Simulate the bounded same-context R33 retry failing editorial review again.
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',retry_ms=0,last_error='MATCHER_REQUESTED_REVIEW'");
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
   await reseed(h,packets,'unrelated-deploy');
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
@@ -186,24 +191,39 @@ test('legacy bootstrap and irrelevant deployment preserve editorial quarantine; 
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1);
   h.db.exec('UPDATE mls_canonical_recovery_clock SET next_ms=0');
   await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
   assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0002'").get().state,'QUARANTINED');
-  h.db.exec('UPDATE mls_canonical_queue SET retry_ms=0');
-  assert.equal((await h.r.canonicalStatus(h.env)).claimable,1);
-  assert.equal((await h.r.canonicalStep(h.env)).status,'CANONICAL_PREPARED');
-  assert.equal(h.db.prepare('SELECT last_error FROM mls_canonical_recovery_history').get().last_error,'MATCHER_REQUESTED_REVIEW');
-  assert.equal((await h.r.canonicalStep(h.env)).status,'NO_WORK');
 });
-test('recovery is globally bounded under concurrent runners and never includes R44 quarantines',async()=>{
-  const h=harness();await setup(h,1);await assets(h,12);await h.r.canonicalSeed(h.env);
+test('recovery is globally bounded to one 100-entry sweep and never includes R44 quarantines',async()=>{
+  const h=harness();await setup(h,1);await assets(h,120);await h.r.canonicalSeed(h.env);
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=1,last_error='SOURCE_FETCH_HTTP_503'; UPDATE r44_ticket_progress SET state='QUARANTINED'");
   const r44Before=h.db.prepare('SELECT * FROM r44_ticket_progress').all();
   await Promise.all(Array.from({length:20},()=>h.r.canonicalRecoverQuarantine(h.env)));
-  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='RETRY'").get().n,5);
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='RETRY'").get().n,100);
   const status=await h.r.canonicalStatus(h.env);
-  assert.equal(status.quarantine.source,'mls_canonical_queue');assert.equal(status.quarantine.total,7);
-  assert.equal(status.quarantine.byCategory.technical_transient,7);
+  assert.equal(status.quarantine.source,'mls_canonical_queue');assert.equal(status.quarantine.total,20);
+  assert.equal(status.quarantine.byCategory.technical_transient,20);
+  assert.equal(status.quarantine.batchSize,100);
   assert.deepEqual(h.db.prepare('SELECT * FROM r44_ticket_progress').all(),r44Before);
 });
+test('same-context editorial quarantine gets one cheap preflight retry and then fences repeated failure',async()=>{
+  const h=harness();await setup(h,0);const packets=await assets(h,1);await h.r.canonicalSeed(h.env);
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'fixture-source',metadata:{language:'en',title:'Example',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/source'}}];
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=1,last_error='MATCHER_REQUESTED_REVIEW' WHERE code='MLS-V01-0001'");
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1);
+  await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
+  assert.equal(h.db.prepare("SELECT technical_retries FROM mls_canonical_recovery WHERE code='MLS-V01-0001'").get().technical_retries,1);
+  h.r.unifiedR33BuildDraft=async()=>Response.json({status:'NEEDS_CHAT_REVIEW',reason:'MATCHER_REQUESTED_REVIEW'});
+  assert.equal((await h.r.canonicalStep(h.env)).status,'CANONICAL_QUARANTINED');
+  h.db.exec('UPDATE mls_canonical_recovery_clock SET next_ms=0');
+  await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'QUARANTINED');
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
+  await reseed(h,packets,'source-context-changed',()=> 'sources-v2');
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1,'material context change must reopen recovery');
+});
+
 test('input and policy changes never degrade VERIFIED or regenerate PREPARED',async()=>{
   const h=harness();await setup(h,0);const packets=await assets(h,2);
   await h.r.canonicalStep(h.env);await h.r.canonicalStep(h.env);
