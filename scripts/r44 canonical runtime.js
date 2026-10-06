@@ -1,6 +1,7 @@
 // Canonical preparation only. The existing R33 gate/integration owns VERIFIED.
 var canonicalReadyEnvs=new WeakSet();
-var canonicalRecoveryInterval=5*60*1000;
+var canonicalRecoveryLockMs=2*60*1000;
+var canonicalTechnicalRetryBaseMs=5*60*1000;
 var canonicalRecoveryBatchSize=100;
 var canonicalStatusOverlayCache=new WeakMap();
 var canonicalAuthorityCache={expiresMs:0,status:null};
@@ -71,10 +72,13 @@ async function canonicalSeed(env){
   ]);
 }
 async function canonicalRecoverQuarantine(env,now=Date.now()){
-  // One global gate across all runners. The sweep itself uses no AI and no
-  // source fetch. At most one canonical 100-entry batch is reconsidered per gate.
-  const gate=await env.WIKI_DB.prepare('UPDATE mls_canonical_recovery_clock SET next_ms=? WHERE id=1 AND next_ms<=? RETURNING id').bind(now+canonicalRecoveryInterval,now).first();
+  // No time throttle: the clock is only a crash-safe single-flight mutex.
+  // Normal completion releases it immediately, so the next runner invocation
+  // may sweep the next 100 rows without waiting for a cron/window.
+  const lockUntil=now+canonicalRecoveryLockMs;
+  const gate=await env.WIKI_DB.prepare('UPDATE mls_canonical_recovery_clock SET next_ms=? WHERE id=1 AND next_ms<=? RETURNING id').bind(lockUntil,now).first();
   if(!gate)return;
+  try{
   const rows=await env.WIKI_DB.prepare(`SELECT q.code,q.page,q.revision,q.input_hash,q.attempts,q.last_error,r.* FROM mls_canonical_queue q JOIN mls_canonical_recovery r USING(code)
     WHERE q.revision=(SELECT revision FROM mls_canonical_meta WHERE id=1) AND q.state='QUARANTINED'
     AND q.lease_token IS NULL AND q.expires_ms=0 AND q.retry_ms<=? AND ${canonicalRecoverableSql}
@@ -104,7 +108,7 @@ async function canonicalRecoverQuarantine(env,now=Date.now()){
       }
     }
     const delay=!changed&&category==='technical_transient'
-      ?canonicalRecoveryInterval*Math.pow(2,Math.min(row.technical_retries,4))
+      ?canonicalTechnicalRetryBaseMs*Math.pow(2,Math.min(row.technical_retries,4))
       :0;
     // The history INSERT is the compare-and-swap guard. A stale selection cannot
     // reopen a completed row or overwrite a newer context.
@@ -122,6 +126,10 @@ async function canonicalRecoverQuarantine(env,now=Date.now()){
         WHERE code=? AND recoveries=? AND EXISTS(SELECT 1 FROM mls_canonical_recovery_history WHERE code=? AND recovery=? AND recovered_ms=?)`)
         .bind(changed?0:row.technical_retries+1,row.code,row.recoveries,row.code,row.recoveries+1,now)
     ]);
+  }
+  }finally{
+    // Release only our own mutex value; never clear a newer stale-lock recovery.
+    await env.WIKI_DB.prepare('UPDATE mls_canonical_recovery_clock SET next_ms=0 WHERE id=1 AND next_ms=?').bind(lockUntil).run();
   }
 }
 async function canonicalRefreshVerified(env){
@@ -175,7 +183,7 @@ async function canonicalStatus(env,authorityStatus=null){
   const byCategory={technical_transient:0,sources_context:0,editorial_review:0,hash_context:0,other:0};
   let recoverable=0;
   const byReason=(groups.results||[]).map(row=>{const category=canonicalQuarantineCategory(row.last_error);byCategory[category]+=Number(row.n);recoverable+=Number(row.recoverable);return {...row,category}});
-  const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:canonicalRecoveryInterval};
+  const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:0,mode:'IMMEDIATE_SINGLE_FLIGHT'};
   const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:meta.waiting_handoff,prepared:counts.PREPARED||0,counts,quarantine,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
   if(authorityCodes)canonicalStatusOverlayCache.set(env,{etag:authorityEtag,expiresMs:Date.now()+5*60*1000,value});
   return value;
