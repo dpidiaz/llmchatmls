@@ -77,6 +77,48 @@ Operational rules:
 
 The ≥100 figure is a cumulative execution contract, not a requirement that any individual low-level claim contain 100 entries.
 
+## GitHub Secondary Rate Limit degraded mode
+
+A GitHub `403 Secondary Rate Limit` is **not** a reason to stop useful Unified work below the execution target while Cloudflare/D1 capacity remains healthy.
+
+The Web Runner maintains a durable D1 GitHub gate with two states:
+
+- `NORMAL` — GitHub publication/checkpoint/integration may run normally.
+- `DEGRADED` — GitHub writes are temporarily deferred and Cloudflare/D1 continues the hot path.
+
+On a verified secondary-rate-limit response, Unified must:
+
+1. persist `DEGRADED` in D1 with a bounded retry timestamp and failure count;
+2. stop issuing GitHub writes for the cooldown window rather than aggressively retrying;
+3. wake the Cloudflare logical runners so R44 audit/correction and canonical R33 evidence preparation can continue durably;
+4. retain prepared R33 results in D1 until GitHub publication is available again;
+5. keep final integration serialized and deferred;
+6. return the gate to `NORMAL` only after a later GitHub mutation succeeds.
+
+The cooldown is at least 60 seconds and uses bounded exponential backoff, capped at 15 minutes, while honoring a longer server-provided retry interval when present.
+
+Work completed only in Cloudflare/D1 during this mode is **prepared/durable work**, not canonical VERIFIED work. A code becomes `VERIFIED` only after the existing GitHub-native R33 checkpoint/publication and serialized merge regenerate canonical `verified.json`.
+
+Therefore the degraded path is:
+
+```text
+GitHub 403 Secondary Rate Limit
+        ↓
+D1 gate = DEGRADED
+        ↓
+Cloudflare/D1 continues R44 + R33 preparation
+        ↓
+prepared durable backlog
+        ↓
+GitHub write succeeds later
+        ↓
+D1 gate = NORMAL
+        ↓
+single serialized publication/integration path
+        ↓
+canonical VERIFIED
+```
+
 ## Scheduling priority
 
 Every new Unified execution follows this order.
@@ -335,6 +377,14 @@ The global main-integration lock and existing R33 integration recovery rules app
 
 No code becomes VERIFIED merely because a worker branch exists.
 
+### GitHub Secondary Rate Limit
+
+The D1 GitHub gate survives workflow/chat death. During its cooldown, the Web Runner must not create claims, comments, workflow dispatches, checkpoints or integration writes in GitHub.
+
+Cloudflare logical runners remain eligible to prepare durable work. When the cooldown expires, one normal Web Runner pass probes the existing GitHub path. A successful mutation clears the gate; another secondary-limit response extends the bounded backoff without discarding D1 work.
+
+The integration writer remains globally serialized during recovery, so a backlog accumulated during degraded mode is drained without creating multiple concurrent main writers.
+
 ## FREE ONLY / CHAT ONLY
 
 Unified production workers are CHAT ONLY.
@@ -348,7 +398,7 @@ Do not introduce:
 - paid AI provider;
 - per-worker GitHub publication from R44.
 
-R33 remains GitHub-native; R44 remains Cloudflare/D1 hot-path native.
+R44 remains Cloudflare/D1 hot-path native. R33 evidence preparation may continue durably in Cloudflare/D1 during GitHub degraded mode, while canonical R33 publication/checkpointing and terminal integration remain GitHub-native.
 
 ## Observability
 
@@ -362,6 +412,8 @@ Unified should be able to distinguish at least:
 - R33 Unified checkpointed/done;
 - Unified integration ready;
 - Unified integration active;
+- GitHub gate NORMAL / DEGRADED and retry timestamp;
+- prepared durable R33 backlog awaiting GitHub publication;
 - canonical VERIFIED.
 
 The primary project progress number remains canonical `verified.json`, not R44 COMPLETE or R33 worker DONE.
