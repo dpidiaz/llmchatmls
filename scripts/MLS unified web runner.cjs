@@ -15,6 +15,7 @@ const BASE=String(process.env.MLS_UNIFIED_BASE_URL||'https://llmchatmls.dpidiaz.
 const EXECUTION_TARGET=unified.executionTarget(process.env.MLS_UNIFIED_TARGET_ENTRIES||unified.EXECUTION_TARGET_ENTRIES);
 const TARGET_POLL_MS=5000;
 const TARGET_MAX_STAGNANT_POLLS=120;
+const R33_FANOUT=Math.max(1,Math.min(16,Number(process.env.MLS_UNIFIED_R33_FANOUT||8)));
 const BOT='github-actions[bot]';
 const WORKERS={
   integration:'mls-unified-web-integration',
@@ -183,13 +184,19 @@ function parseAssignment(issue){
 function parseClaim(issue){
   try{return core.parseCommand(issue?.body||'')}catch{return null}
 }
+function r33WorkerId(slot){return WORKERS.r33+'-'+String(slot).padStart(2,'0')}
+function stageWorkerMatches(stage,workerId){
+  const value=String(workerId||'');
+  if(stage==='r33')return value===WORKERS.r33||value.startsWith(WORKERS.r33+'-');
+  return value===WORKERS[stage];
+}
 function stageMatchesState(stage,state){
   const spec=unified.stageSpec(stage);
-  return !!state&&state.workerId===WORKERS[stage]&&state.workerLogin===BOT&&state.provider===spec.provider&&String(state.workId||'').startsWith(spec.workPrefix);
+  return !!state&&stageWorkerMatches(stage,state.workerId)&&state.workerLogin===BOT&&state.provider===spec.provider&&String(state.workId||'').startsWith(spec.workPrefix);
 }
 function stageMatchesClaim(stage,command){
   const spec=unified.stageSpec(stage);
-  return !!command&&command.operation==='claim'&&command.workerId===WORKERS[stage]&&command.workerLogin===BOT&&command.provider===spec.provider&&command.workPrefix===spec.workPrefix;
+  return !!command&&command.operation==='claim'&&stageWorkerMatches(stage,command.workerId)&&command.workerLogin===BOT&&command.provider===spec.provider&&command.workPrefix===spec.workPrefix;
 }
 async function getIssue(number){
   if(!Number.isInteger(Number(number))||Number(number)<1)return null;
@@ -210,17 +217,56 @@ async function findExisting(stage){
   }
   return null;
 }
-async function createClaim(stage){
-  const requestId=('autopull:unified-web-'+stage+'-'+String(process.env.GITHUB_RUN_ID||Date.now())+'-'+Date.now().toString(36)).slice(0,120);
+async function createClaim(stage,{workerId=WORKERS[stage],reportLane=true,dispatchScheduler=true}={}){
+  const requestId=('autopull:unified-web-'+stage+'-'+String(process.env.GITHUB_RUN_ID||Date.now())+'-'+Date.now().toString(36)+'-'+workerId.replace(/[^A-Za-z0-9]/g,'')).slice(0,120);
   // Bot-created Dispatcher claims must use the trusted auto-pull fence. Do not delegate
   // workerLogin here: the scheduler derives github-actions[bot] from the issue author.
-  const claim=unified.createClaim({stage,requestId,workerId:WORKERS[stage]});
+  const claim=unified.createClaim({stage,requestId,workerId});
   const issue=await gh('/repos/'+REPOSITORY+'/issues',{method:'POST',body:{title:claim.title,body:claim.body}});
-  await report(stage,'CLAIM_PENDING',{issueNumber:Number(issue.number),detail:{requestId,workerId:WORKERS[stage]}});
-  await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
+  if(reportLane)await report(stage,'CLAIM_PENDING',{issueNumber:Number(issue.number),detail:{requestId,workerId}});
+  if(dispatchScheduler)await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
     method:'POST',body:{ref:'main'}
   });
   return issue;
+}
+async function findExistingR33All(){
+  const found=[];
+  for(let page=1;page<=5;page++){
+    const rows=await gh('/repos/'+REPOSITORY+'/issues?state=open&per_page=100&sort=updated&direction=desc&page='+page);
+    if(!Array.isArray(rows)||!rows.length)break;
+    for(const issue of rows){
+      if(stageMatchesState('r33',parseAssignment(issue))||stageMatchesClaim('r33',parseClaim(issue))){
+        found.push(issue);
+        if(found.length>=R33_FANOUT)return found;
+      }
+    }
+    if(rows.length<100)break;
+  }
+  return found;
+}
+function issueWorkerId(issue){
+  const state=parseAssignment(issue),claim=parseClaim(issue);
+  return String(state?.workerId||claim?.workerId||'');
+}
+async function ensureR33Fanout(){
+  const existing=await findExistingR33All();
+  const used=new Set(existing.map(issueWorkerId).filter(Boolean));
+  const desired=[];
+  for(let slot=1;slot<=R33_FANOUT;slot++)desired.push(r33WorkerId(slot));
+  const created=[];
+  for(const workerId of desired){
+    if(existing.length+created.length>=R33_FANOUT)break;
+    if(used.has(workerId))continue;
+    const issue=await createClaim('r33',{workerId,reportLane:false,dispatchScheduler:false});
+    created.push(issue);used.add(workerId);
+  }
+  if(created.length){
+    await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
+      method:'POST',body:{ref:'main'}
+    });
+    await report('r33','FANOUT_PENDING',{issueNumber:null,detail:{fanout:R33_FANOUT,existing:existing.length,created:created.length,issues:created.map(x=>Number(x.number))},pauseRunner:false});
+  }
+  return [...existing,...created];
 }
 async function laneIssue(stage,lane){
   let issue=lane?.issue_number?await getIssue(Number(lane.issue_number)):null;
@@ -551,11 +597,11 @@ async function dispatchR33(issue,state){
   const completed=new Set((state.checkpoints||[]).at(-1)?.completedUnits||[]);
   const blocked=await blockedCodes(issue.number,state.assignmentId);
   const pending=codes.filter(code=>!completed.has(code));
-  const code=pending.find(x=>!blocked.has(x));
-  if(!code){
+  const candidates=pending.filter(code=>!blocked.has(code));
+  if(!candidates.length){
     if(!pending.length){
       await finishR33Inline(issue,state);
-      return;
+      return {status:'finished'};
     }
     const last=(state.checkpoints||[]).at(-1);
     if(completed.size>0&&last?.validation?.status==='passed'&&state.lastCheckpointCommit){
@@ -565,62 +611,84 @@ async function dispatchR33(issue,state){
         detail:{blocked:[...blocked],pending,completed:[...completed]},pauseRunner:false
       });
       await finishR33Inline(issue,state);
-      return;
+      return {status:'partial-finished'};
     }
     await report('r33','REVIEW_REQUIRED',{
       issueNumber:Number(issue.number),assignmentId:state.assignmentId,code:pending[0],
       error:'All remaining entries in the active microclaim require editorial review.',
       detail:{blocked:[...blocked],pending},pauseRunner:false
     });
-    return;
+    return {status:'review-required'};
   }
-  const duplicate=await recentMarker(issue.number,'MLS_UNIFIED_R33_EVIDENCE_SUBMIT',p=>p.assignmentId===state.assignmentId&&String(p.code||'')===code,15*60*1000);
-  if(duplicate){
-    await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,detail:{commentId:Number(duplicate.id),deduped:true}});
-    return;
-  }
+
   const context=jsonArrayAfter(state.instructions,'Contexto R44=');
   if(!Array.isArray(context))fail('UNIFIED_WEB_R44_CONTEXT_MISSING');
-  const ctx=context.find(x=>String(x.code||'').toUpperCase()===code);
-  if(!ctx)fail('UNIFIED_WEB_R44_CODE_CONTEXT_MISSING',code);
-  const contentPath=String(ctx.contentPath||'');
-  const handoffPath=String(ctx.handoffPath||'');
-  const evidencePath=(state.allowedPaths||[]).find(p=>String(p).startsWith('MLS R32 EDITORIAL/evidence git/entries/')&&String(p).endsWith('/'+code+'.json'));
-  if(!contentPath||!handoffPath||!evidencePath)fail('UNIFIED_WEB_R33_PATH_SCOPE_MISSING',code);
+  const waiting=[];
+  for(const code of candidates){
+    const duplicate=await recentMarker(issue.number,'MLS_UNIFIED_R33_EVIDENCE_SUBMIT',p=>p.assignmentId===state.assignmentId&&String(p.code||'')===code,15*60*1000);
+    if(duplicate){
+      await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,detail:{commentId:Number(duplicate.id),deduped:true}});
+      return {status:'already-dispatched',code};
+    }
+    const ctx=context.find(x=>String(x.code||'').toUpperCase()===code);
+    if(!ctx)fail('UNIFIED_WEB_R44_CODE_CONTEXT_MISSING',code);
+    const contentPath=String(ctx.contentPath||'');
+    const handoffPath=String(ctx.handoffPath||'');
+    const evidencePath=(state.allowedPaths||[]).find(p=>String(p).startsWith('MLS R32 EDITORIAL/evidence git/entries/')&&String(p).endsWith('/'+code+'.json'));
+    if(!contentPath||!handoffPath||!evidencePath)fail('UNIFIED_WEB_R33_PATH_SCOPE_MISSING',code);
 
-  const article=await githubJsonAt(contentPath,state.branch);
-  const ticket=await githubJsonAt(handoffPath,state.branch);
-  const handoffEntry=(ticket.entries||[]).find(x=>String(x.code||'').toUpperCase()===code);
-  if(!handoffEntry)fail('UNIFIED_WEB_HANDOFF_ENTRY_MISSING',code);
-  const existing=await githubJsonAt(evidencePath,state.branch,{optional:true});
-  const draft=await cf('/api/unified-runner/prepared-evidence',{
-    code,contentPath,article,handoffEntry,currentEvidenceRevision:Number(existing?.evidenceRevision||0),
-    runId:'MLS-UNIFIED-WEB-'+String(process.env.GITHUB_RUN_ID||Date.now())
-  });
-  if(draft.reason==='PREPARED_CONTEXT_MISMATCH_OR_MISSING'){
-    await report('r33','WAITING_PREPARATION',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:draft.reason,pauseRunner:false});
-    return;
+    const article=await githubJsonAt(contentPath,state.branch);
+    const ticket=await githubJsonAt(handoffPath,state.branch);
+    const handoffEntry=(ticket.entries||[]).find(x=>String(x.code||'').toUpperCase()===code);
+    if(!handoffEntry)fail('UNIFIED_WEB_HANDOFF_ENTRY_MISSING',code);
+    const existing=await githubJsonAt(evidencePath,state.branch,{optional:true});
+    const draft=await cf('/api/unified-runner/prepared-evidence',{
+      code,contentPath,article,handoffEntry,currentEvidenceRevision:Number(existing?.evidenceRevision||0),
+      runId:'MLS-UNIFIED-WEB-'+String(process.env.GITHUB_RUN_ID||Date.now())
+    });
+    if(draft.reason==='PREPARED_CONTEXT_MISMATCH_OR_MISSING'){
+      waiting.push(code);
+      await report('r33','WAITING_PREPARATION',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:draft.reason,pauseRunner:false});
+      continue;
+    }
+    if(draft.status!=='MATCH'){
+      const reviewPayload={assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,code,reason:draft.reason||'NEEDS_CHAT_REVIEW',confidence:draft.confidence??null,sourceId:draft.sourceId||null,rationale:draft.rationale||null};
+      const already=await recentMarker(issue.number,REVIEW_MARKER,p=>p.assignmentId===state.assignmentId&&String(p.code||'')===code,365*24*60*60*1000);
+      if(!already)await postComment(issue.number,'<!-- '+REVIEW_MARKER+'\n'+JSON.stringify(reviewPayload,null,2)+'\n-->\n\nMLS Unified web runner paused this entry for editorial review; no Evidence was fabricated.');
+      await report('r33','NEEDS_CHAT_REVIEW',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:String(draft.reason||'Source match below threshold.'),detail:reviewPayload});
+      continue;
+    }
+    const payload={
+      assignmentId:state.assignmentId,
+      leaseEpoch:state.leaseEpoch,
+      code,
+      evidence:draft.evidence,
+      ...(draft.finalContent?{content:draft.finalContent}:{}),
+      ...(Array.isArray(draft.repairSources)&&draft.repairSources.length?{sources:draft.repairSources}:{})
+    };
+    const body='<!-- MLS_UNIFIED_R33_EVIDENCE_SUBMIT\n'+JSON.stringify(payload,null,2)+'\n-->';
+    const comment=await postComment(issue.number,body);
+    await dispatchWorkflow(WORKFLOWS.r33,issue.number,comment.id);
+    await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,detail:{commentId:Number(comment.id),workflow:WORKFLOWS.r33,confidence:draft.confidence,sourceId:draft.source?.sourceId||null}});
+    return {status:'dispatched',code};
   }
-  if(draft.status!=='MATCH'){
-    const reviewPayload={assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,code,reason:draft.reason||'NEEDS_CHAT_REVIEW',confidence:draft.confidence??null,sourceId:draft.sourceId||null,rationale:draft.rationale||null};
-    const already=await recentMarker(issue.number,REVIEW_MARKER,p=>p.assignmentId===state.assignmentId&&String(p.code||'')===code,365*24*60*60*1000);
-    if(!already)await postComment(issue.number,'<!-- '+REVIEW_MARKER+'\n'+JSON.stringify(reviewPayload,null,2)+'\n-->\n\nMLS Unified web runner paused this entry for editorial review; no Evidence was fabricated.');
-    await report('r33','NEEDS_CHAT_REVIEW',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:String(draft.reason||'Source match below threshold.'),detail:reviewPayload});
-    return;
-  }
-  const payload={
-    assignmentId:state.assignmentId,
-    leaseEpoch:state.leaseEpoch,
-    code,
-    evidence:draft.evidence,
-    ...(draft.finalContent?{content:draft.finalContent}:{}),
-    ...(Array.isArray(draft.repairSources)&&draft.repairSources.length?{sources:draft.repairSources}:{})
-  };
-  const body='<!-- MLS_UNIFIED_R33_EVIDENCE_SUBMIT\n'+JSON.stringify(payload,null,2)+'\n-->';
-  const comment=await postComment(issue.number,body);
-  await dispatchWorkflow(WORKFLOWS.r33,issue.number,comment.id);
-  await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,detail:{commentId:Number(comment.id),workflow:WORKFLOWS.r33,confidence:draft.confidence,sourceId:draft.source?.sourceId||null}});
+  return {status:'waiting-preparation',waiting};
 }
+async function runR33Fanout(status){
+  if(Number(status?.canonical?.prepared||0)<=0)return {fanout:R33_FANOUT,existing:0,created:0,leased:0,dispatched:0,skipped:'NO_PREPARED'};
+  const before=await findExistingR33All();
+  const issues=await ensureR33Fanout();
+  const created=Math.max(0,issues.length-before.length),leased=[];
+  for(const issue of issues){
+    const resolved=await resolveAssignment('r33',{issue_number:Number(issue.number)});
+    if(resolved.kind==='leased')leased.push(resolved);
+  }
+  const results=await Promise.allSettled(leased.map(item=>dispatchR33(item.issue,item.state)));
+  const dispatched=results.filter(x=>x.status==='fulfilled'&&['dispatched','already-dispatched'].includes(x.value?.status)).length;
+  const failures=results.filter(x=>x.status==='rejected').map(x=>String(x.reason?.code||x.reason?.message||x.reason)).slice(0,8);
+  return {fanout:R33_FANOUT,existing:before.length,created,leased:leased.length,dispatched,failures};
+}
+
 async function run(){
   repoParts();
   const status=await cf('/api/unified-runner/status');
@@ -645,50 +713,37 @@ async function run(){
   // Secondary reconciliation may fail without blocking independently scheduled D1 work.
   await cf('/api/unified-runner/reconcile');
 
-  if(status.lanes?.r33?.issue_number){
-    const hintedR33=await resolveAssignment('r33',status.lanes.r33);
-    if(hintedR33.kind==='leased'){
-      await dispatchR33(hintedR33.issue,hintedR33.state);
-      console.log(JSON.stringify({ok:true,status:'R33_DISPATCHED',issueNumber:hintedR33.issue.number,fastPath:true}));
-      return;
-    }
-    if(hintedR33.kind==='pending'){
-      console.log(JSON.stringify({ok:true,status:'WAITING_R33',kind:hintedR33.kind,fastPath:true}));
-      return;
-    }
-  }
+  // R33 evidence is branch-isolated. Keep several disjoint Dispatcher assignments
+  // warm and dispatch one entry from each assignment per coordinator cycle.
+  const fanout=await runR33Fanout(status);
 
+  // Integration remains globally serialized because it ultimately merges to main.
   const integration=await resolveAssignment('integration',status.lanes?.integration||null);
   if(integration.kind==='leased'){
     const resumed=await resumeIntegrationPr(integration.issue,integration.state);
     if(resumed.handled){
-      console.log(JSON.stringify({ok:true,status:resumed.status,issueNumber:integration.issue.number,prNumber:resumed.prNumber||null,mergeSha:resumed.mergeSha||null}));
+      console.log(JSON.stringify({ok:true,status:resumed.status,issueNumber:integration.issue.number,prNumber:resumed.prNumber||null,mergeSha:resumed.mergeSha||null,fanout}));
       return;
     }
     await dispatchIntegration(integration.issue,integration.state);
-    console.log(JSON.stringify({ok:true,status:'INTEGRATION_DISPATCHED',issueNumber:integration.issue.number}));
+    console.log(JSON.stringify({ok:true,status:'INTEGRATION_DISPATCHED',issueNumber:integration.issue.number,fanout}));
     return;
   }
   if(integration.kind==='pending'){
-    console.log(JSON.stringify({ok:true,status:'WAITING_INTEGRATION',kind:integration.kind}));
+    console.log(JSON.stringify({ok:true,status:'WAITING_INTEGRATION',kind:integration.kind,fanout}));
     return;
   }
 
   const refreshed=await cf('/api/unified-runner/status');
   if(refreshed.runner?.state!=='RUNNING')return;
-  const r33=await resolveAssignment('r33',refreshed.lanes?.r33||null);
-  if(r33.kind==='leased'){
-    await dispatchR33(r33.issue,r33.state);
-    console.log(JSON.stringify({ok:true,status:'R33_DISPATCHED',issueNumber:r33.issue.number}));
-    return;
-  }
-  if(integration.kind==='no_work'&&r33.kind==='no_work'&&r44Drained(refreshed.r44)&&refreshed.canonical?.initialized&&refreshed.canonical.pending===0){
+  if(integration.kind==='no_work'&&fanout.dispatched===0&&fanout.leased===0&&r44Drained(refreshed.r44)&&refreshed.canonical?.initialized&&refreshed.canonical.pending===0){
     const completed=await cf('/api/unified-runner/control',{action:'complete'});
-    console.log(JSON.stringify({ok:true,status:'COMPLETE',runnerState:completed.state||'COMPLETE'}));
+    console.log(JSON.stringify({ok:true,status:'COMPLETE',runnerState:completed.state||'COMPLETE',fanout}));
     return;
   }
-  console.log(JSON.stringify({ok:true,status:'NO_AUTOMATIC_ASSIGNMENT',integration:integration.kind,r33:r33.kind}));
+  console.log(JSON.stringify({ok:true,status:'R33_FANOUT',integration:integration.kind,fanout}));
 }
+
 async function main(){
   await run();
   if(githubMutationSucceeded){
