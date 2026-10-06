@@ -115,8 +115,11 @@ function execDispatcherWorker(eventPath){
 async function githubGate(action,extra={}){
   return cf('/api/unified-runner/github-gate',{action,...extra});
 }
-async function kickCloudflareOnly(reason,gate=null){
-  const result=await cf('/api/unified-runner/kick',{reason,targetEntries:unified.EXECUTION_TARGET_ENTRIES});
+async function kickCloudflarePrimary(reason='cloudflare-primary-hot-path'){
+  return cf('/api/unified-runner/kick',{reason,targetEntries:unified.EXECUTION_TARGET_ENTRIES});
+}
+async function kickCloudflareOnly(reason,gate=null,existingKick=null){
+  const result=existingKick||await kickCloudflarePrimary(reason);
   const detail={reason,targetEntries:unified.EXECUTION_TARGET_ENTRIES,githubGate:gate||null,kick:result.result||null};
   await Promise.all([
     report('r33','GITHUB_DEGRADED',{error:'GitHub writes deferred; Cloudflare/D1 continues preparing durable R33 work.',detail}),
@@ -579,9 +582,12 @@ async function run(){
     return;
   }
 
+  // Cloudflare/D1 is the primary hot path. Always wake it before attempting any
+  // GitHub-backed Dispatcher publication or drain work.
+  const cloudflarePrimary=await kickCloudflarePrimary('cloudflare-primary-before-github');
   const gate=status.githubGate||{};
   if(gate.state==='DEGRADED'&&Number(gate.retry_at||0)>Date.now()){
-    const kicked=await kickCloudflareOnly('github-secondary-rate-limit-cooldown',gate);
+    const kicked=await kickCloudflareOnly('github-secondary-rate-limit-cooldown',gate,cloudflarePrimary);
     console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:Number(gate.retry_at||0),targetEntries:unified.EXECUTION_TARGET_ENTRIES,kick:kicked.result||null}));
     return;
   }
