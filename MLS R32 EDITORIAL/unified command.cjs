@@ -4,6 +4,9 @@ const core=require('./global dispatcher/core.js');
 
 const GUIDE='docs/MLS Global Dispatcher/28 MLS Unified Verification Pipeline.md';
 const EXECUTION_TARGET_ENTRIES=100;
+const MIN_EXECUTION_TARGET_ENTRIES=100;
+const MAX_EXECUTION_TARGET_ENTRIES=1000;
+const EXECUTION_TARGET_STEP=5;
 const MAX_MICROCLAIM_ENTRIES=50;
 const STAGES={
   integration:{provider:'r33-index-integration',workPrefix:'r33-unified-integration:',action:'process_integration'},
@@ -13,6 +16,27 @@ const STAGES={
 function fail(code,msg){const e=new Error(msg||code);e.code=code;e.status=409;throw e;}
 function assert(ok,code,msg){if(!ok)fail(code,msg);}
 
+function executionTarget(value=EXECUTION_TARGET_ENTRIES){
+  const n=Number(value);
+  assert(Number.isInteger(n),'UNIFIED_TARGET_INVALID','targetEntries debe ser un entero.');
+  assert(n>=MIN_EXECUTION_TARGET_ENTRIES&&n<=MAX_EXECUTION_TARGET_ENTRIES,
+    'UNIFIED_TARGET_INVALID','targetEntries debe estar entre '+MIN_EXECUTION_TARGET_ENTRIES+' y '+MAX_EXECUTION_TARGET_ENTRIES+'.');
+  assert(n%EXECUTION_TARGET_STEP===0,'UNIFIED_TARGET_INVALID',
+    'targetEntries debe ser múltiplo de '+EXECUTION_TARGET_STEP+'.');
+  return n;
+}
+function parseUserCommand(text){
+  const raw=String(text||'').trim();
+  const normalized=raw.startsWith('`')&&raw.endsWith('`')?raw.slice(1,-1).trim():raw;
+  const match=/^MLS\s+Unified\s+siguiente(?:\s+(\d+))?$/i.exec(normalized);
+  assert(match,'UNIFIED_COMMAND_INVALID','Use MLS Unified siguiente o MLS Unified siguiente N.');
+  const explicitTarget=match[1]!=null;
+  return {
+    command:'MLS Unified siguiente',
+    targetEntries:executionTarget(explicitTarget?match[1]:EXECUTION_TARGET_ENTRIES),
+    explicitTarget
+  };
+}
 function stageSpec(stage){
   const spec=STAGES[String(stage||'').toLowerCase()];
   assert(spec,'UNIFIED_STAGE_INVALID','stage debe ser integration o r33.');
@@ -75,4 +99,17 @@ function inspectAssignment(issue,{stage}={}){
     guide:GUIDE
   };
 }
-module.exports={GUIDE,EXECUTION_TARGET_ENTRIES,MAX_MICROCLAIM_ENTRIES,STAGES,stageSpec,createClaim,inspectAssignment};
+module.exports={
+  GUIDE,
+  EXECUTION_TARGET_ENTRIES,
+  MIN_EXECUTION_TARGET_ENTRIES,
+  MAX_EXECUTION_TARGET_ENTRIES,
+  EXECUTION_TARGET_STEP,
+  MAX_MICROCLAIM_ENTRIES,
+  STAGES,
+  executionTarget,
+  parseUserCommand,
+  stageSpec,
+  createClaim,
+  inspectAssignment
+};
