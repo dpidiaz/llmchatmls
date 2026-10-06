@@ -548,13 +548,17 @@ test('cold R44 context uses hash-checked Cloudflare Assets then D1, never GitHub
   assert.equal(h.db.prepare('SELECT COUNT(*) n FROM r44_entry_cache').get().n,0);
 });
 
-test('all Unified publishers serialize; durable cooldown blocks before publication',async()=>{
+test('Unified main publishers serialize while branch-isolated R33 evidence serializes per assignment; durable cooldown blocks before publication',async()=>{
   const {run}=require('../scripts/r44 sink guard.cjs');
-  for(const name of ['MLS Unified Web Runner','MLS Unified R44 R33 Handoff','MLS Unified R33 Evidence Submit','MLS Unified R33 Integration Execute']){
+  for(const name of ['MLS Unified Web Runner','MLS Unified R44 R33 Handoff','MLS Unified R33 Integration Execute']){
     const workflow=fs.readFileSync('.github/workflows/'+name+'.yml','utf8');
     assert.match(workflow,/group: mls-unified-github-writer/);
     assert.match(workflow,/cancel-in-progress: false/);
   }
+  const evidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  assert.match(evidenceWorkflow,/group: mls-unified-r33-/);
+  assert.match(evidenceWorkflow,/github\.event\.inputs\.issue_number \|\| github\.event\.issue\.number/);
+  assert.match(evidenceWorkflow,/cancel-in-progress: false/);
   const env={MLS_EDITORIAL_CHAT_KEY:'fixture'};
   await assert.rejects(()=>run('check',env,async()=>Response.json({githubGate:{state:'DEGRADED',retry_at:Date.now()+60000}})),/COOLDOWN/);
   assert.equal((await run('check',env,async()=>Response.json({githubGate:{state:'NORMAL'}}))).ok,true);
