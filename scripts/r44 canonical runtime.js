@@ -226,7 +226,12 @@ async function canonicalStatus(env,authorityStatus=null){
   const byReason=(groups.results||[]).map(row=>{const category=canonicalQuarantineCategory(row.last_error);byCategory[category]+=Number(row.n);recoverable+=Number(row.recoverable);return {...row,category}});
   const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:0,mode:'IMMEDIATE_SINGLE_FLIGHT'};
   const repair=await unifiedR33RepairStatus(env);
-  const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:counts.WAITING_HANDOFF||0,prepared:counts.PREPARED||0,counts,quarantine,repair,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
+  // Expose a bounded live drain list so the GitHub-native R33 allocator can
+  // prioritize exactly the D1 rows that are already PREPARED instead of relying
+  // on a stale checked-in snapshot.
+  const preparedRows=await env.WIKI_DB.prepare("SELECT code FROM mls_canonical_queue WHERE revision=? AND state='PREPARED' ORDER BY code LIMIT 1000").bind(meta.revision).all();
+  const preparedCodes=(preparedRows.results||[]).map(row=>String(row.code||'').toUpperCase()).filter(Boolean);
+  const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:counts.WAITING_HANDOFF||0,prepared:counts.PREPARED||0,preparedCodes,counts,quarantine,repair,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
   if(authorityCodes)canonicalStatusOverlayCache.set(env,{etag:authorityEtag,expiresMs:Date.now()+5*60*1000,value});
   return value;
 }
