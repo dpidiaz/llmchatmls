@@ -525,7 +525,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
     q('unifiedCanonicalBlocked').textContent=data.canonical?.counts?.QUARANTINED??0;
     const quarantine=data.canonical?.quarantine;
     q('unifiedQuarantineSummary').textContent=quarantine
-      ?`${quarantine.recoverable} recuperables con espera y límites; ${quarantine.requiresChangeOrReview} requieren cambio relevante o revisión. Máximo ${quarantine.batchSize} recuperaciones cada 5 minutos.`
+      ?`${quarantine.recoverable} candidatas a reevaluación/reintento controlado; ${quarantine.requiresChangeOrReview} requieren cambio relevante o revisión. Barrido máximo: ${quarantine.batchSize} cada ${Math.round((quarantine.intervalMs||300000)/60000)} minutos.`
       :'Desglose no disponible';
     const categoryNames={technical_transient:'Técnicas/transitorias',sources_context:'Contexto/fuentes',editorial_review:'Revisión editorial',hash_context:'Hash/contexto',other:'Otras'};
     q('unifiedQuarantineReasons').textContent=quarantine
