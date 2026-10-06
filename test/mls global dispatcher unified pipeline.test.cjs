@@ -54,9 +54,9 @@ test('Unified visible command supports chat-scoped targets from 100 through 1000
     command:'MLS Unified siguiente',targetEntries:500,explicitTarget:true
   });
   assert.equal(unified.parseUserCommand('MLS Unified siguiente 1000').targetEntries,1000);
-  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 95'),/UNIFIED_TARGET_INVALID/);
-  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 503'),/UNIFIED_TARGET_INVALID/);
-  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 1005'),/UNIFIED_TARGET_INVALID/);
+  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 95'),{code:'UNIFIED_TARGET_INVALID'});
+  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 503'),{code:'UNIFIED_TARGET_INVALID'});
+  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 1005'),{code:'UNIFIED_TARGET_INVALID'});
 
   const agents=fs.readFileSync('AGENTS.md','utf8');
   const guide=fs.readFileSync(unified.GUIDE,'utf8');
