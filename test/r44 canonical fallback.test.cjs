@@ -11,7 +11,7 @@ function harness(){
   let queries=0;
   const run=(sql,p,all)=>{queries++;const stmt=db.prepare(sql);const args=/\?\d/.test(sql)?[Object.fromEntries(p.map((v,i)=>[String(i+1),v]))]:p;return all?stmt.all(...args):stmt.run(...args)};
   const env={WIKI_DB:{prepare(sql){let p=[];return {bind(...args){p=args;return this},runSync(){return /\bRETURNING\b/i.test(sql)?{results:run(sql,p,true)}:run(sql,p,false)},async run(){return run(sql,p,false)},async first(){return run(sql,p,true)[0]||null},async all(){return {results:run(sql,p,true)}}}},async batch(ss){db.exec('BEGIN');try{const out=ss.map(s=>s.runSync());db.exec('COMMIT');return out}catch(e){db.exec('ROLLBACK');throw e}}}};
-  const r=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Request,Date,Map,Set,JSON});
+  const r=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Request,URL,Date,Map,Set,JSON});
   vm.runInContext(RUNTIME,r);
   r.wikiErrorMessage=e=>e.message;
   r.workersAiFailureKind=message=>message.includes('quota')?'quota':message.includes('paid')?'paid':'other';
