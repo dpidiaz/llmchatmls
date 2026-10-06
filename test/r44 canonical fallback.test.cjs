@@ -11,7 +11,7 @@ function harness(){
   let queries=0;
   const run=(sql,p,all)=>{queries++;const stmt=db.prepare(sql);const args=/\?\d/.test(sql)?[Object.fromEntries(p.map((v,i)=>[String(i+1),v]))]:p;return all?stmt.all(...args):stmt.run(...args)};
   const env={WIKI_DB:{prepare(sql){let p=[];return {bind(...args){p=args;return this},runSync(){return /\bRETURNING\b/i.test(sql)?{results:run(sql,p,true)}:run(sql,p,false)},async run(){return run(sql,p,false)},async first(){return run(sql,p,true)[0]||null},async all(){return {results:run(sql,p,true)}}}},async batch(ss){db.exec('BEGIN');try{const out=ss.map(s=>s.runSync());db.exec('COMMIT');return out}catch(e){db.exec('ROLLBACK');throw e}}}};
-  const r=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Request,Date,Map,Set,JSON});
+  const r=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Request,URL,Date,Map,Set,JSON});
   vm.runInContext(RUNTIME,r);
   r.wikiErrorMessage=e=>e.message;
   r.workersAiFailureKind=message=>message.includes('quota')?'quota':message.includes('paid')?'paid':'other';
@@ -148,6 +148,7 @@ test('new asset revision preserves prepared evidence and its original context ha
 
 test('canonical malformed JSON recovery is bounded and leaves source quarantine intact',async()=>{
   const h=harness();await setup(h,0);await assets(h,2);await h.r.canonicalSeed(h.env);
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'book-only',metadata:{language:'en',title:'Fixture',sourceType:'book',authorityTier:'A',canonicalUrl:'https://books.example/product'}}];
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=4,last_error='UNIFIED_R33_DRAFT_JSON_INVALID' WHERE code='MLS-V01-0001'");
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=3,last_error='SOURCE_FULLTEXT_REQUIRED' WHERE code='MLS-V01-0002'");
   h.r.unifiedR33BuildDraft=async()=>{throw Error('UNIFIED_R33_DRAFT_JSON_INVALID')};
@@ -249,7 +250,7 @@ test('403, unknown errors and hash mismatches remain quarantined without changed
 test('candidate fingerprint ignores unrelated language sources and reacts to selected source URL or policy',()=>{
   const {hash}=require('../scripts/r44 canonical assets.cjs');
   const h=harness();
-  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'english',metadata:{language:'en',title:'Grammar',sourceType:'website',authorityTier:'A',canonicalUrl:'https://example.org/old'}}];
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'english',metadata:{language:'en',title:'Grammar',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/old'}}];
   const input={article:{code:'MLS-V01-0001',language:'ingles',title:'Grammar'},handoffEntry:{}};
   const fingerprint=()=>hash(h.r.unifiedR33CanonicalContext(input));
   const before=fingerprint();
@@ -260,6 +261,74 @@ test('candidate fingerprint ignores unrelated language sources and reacts to sel
   const sourceChanged=fingerprint();h.r.MLS_CANONICAL_R33_POLICY.support=2;
   assert.notEqual(fingerprint(),sourceChanged);
 });
+test('R33 auto-auditable selection excludes books, missing URLs and private URLs',()=>{
+  const h=harness();h.r.URL=URL;
+  const candidate=(sourceType,canonicalUrl)=>({sourceId:'fixture',metadata:{sourceType,canonicalUrl}});
+  assert.equal(h.r.unifiedR33SourceAutoAuditable(candidate('book',null)),false);
+  assert.equal(h.r.unifiedR33SourceAutoAuditable(candidate('book','https://www.amazon.com/example')),false);
+  assert.equal(h.r.unifiedR33SourceAutoAuditable(candidate('reference_entry',null)),false);
+  assert.equal(h.r.unifiedR33SourceAutoAuditable(candidate('institutional_webpage','http://127.0.0.1/private')),false);
+  assert.equal(h.r.unifiedR33SourceAutoAuditable(candidate('institutional_webpage','https://example.org/source')),true);
+});
+
+test('R33 source quarantine preflight retries only when an auditable source exists',()=>{
+  const h=harness();h.r.URL=URL;
+  const input={article:{code:'MLS-V01-0001',language:'ingles',title:'English grammar',articleMarkdown:'English grammar'},handoffEntry:{}};
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'book',metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:'https://books.example/product'}}];
+  let preflight=h.r.unifiedR33CanonicalPreflight(input,'SOURCE_FULLTEXT_REQUIRED');
+  assert.equal(preflight.eligible,false);assert.equal(preflight.fetchableCandidateCount,0);
+  h.r.MLS_R33_SOURCE_CATALOG.push({sourceId:'institutional',metadata:{language:'en',title:'English grammar',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/grammar'}});
+  preflight=h.r.unifiedR33CanonicalPreflight(input,'SOURCE_FULLTEXT_REQUIRED');
+  assert.equal(preflight.eligible,true);assert.equal(preflight.fetchableCandidateCount,1);
+});
+
+test('R33 ranks auditable sources before the top-16 cutoff',()=>{
+  const h=harness();h.r.URL=URL;
+  h.r.MLS_R33_SOURCE_CATALOG=Array.from({length:16},(_,i)=>({
+    sourceId:'book-'+i,
+    metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:'https://books.example/'+i}
+  }));
+  h.r.MLS_R33_SOURCE_CATALOG.push({
+    sourceId:'institutional-source',
+    metadata:{language:'en',title:'Grammar reference',sourceType:'institutional_webpage',authorityTier:'B',canonicalUrl:'https://example.org/grammar'}
+  });
+  const input={article:{code:'MLS-V01-0001',language:'ingles',title:'English grammar',articleMarkdown:'English grammar'},handoffEntry:{}};
+  const candidates=h.r.unifiedR33SourceCandidates(input.article,input.handoffEntry,{autoAuditableOnly:true});
+  assert.equal(candidates.length,1);
+  assert.equal(candidates[0].sourceId,'institutional-source');
+});
+
+test('R33 mapper receives only auto-auditable registered candidates',async()=>{
+  const h=harness();h.r.URL=URL;let prompt='';
+  h.r.MLS_R33_SOURCE_CATALOG=[
+    {sourceId:'book-source',metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:'https://www.amazon.com/example'}},
+    {sourceId:'institutional-source',metadata:{language:'en',title:'English grammar',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/grammar'}}
+  ];
+  h.r.unifiedR33RunProvider=async(_env,_provider,messages)=>{prompt=messages[0].content;return {text:JSON.stringify({status:'NEEDS_CHAT_REVIEW',confidence:0,claims:[],rationale:'fixture'})}};
+  const response=await h.r.unifiedR33BuildDraft({},{
+    code:'MLS-V01-0001',contentPath:'content/fixture.json',
+    article:{code:'MLS-V01-0001',language:'ingles',title:'English grammar',articleMarkdown:'English grammar uses nouns and verbs.'},
+    handoffEntry:{}
+  });
+  assert.equal(response.status,200);
+  assert.match(prompt,/institutional-source/);
+  assert.doesNotMatch(prompt,/book-source/);
+});
+
+test('R33 returns explicit review reason when registered sources exist but none is auditable',async()=>{
+  const h=harness();h.r.URL=URL;let providerCalls=0;
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'book-source',metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:'https://www.amazon.com/example'}}];
+  h.r.unifiedR33RunProvider=async()=>{providerCalls++;throw Error('AI MUST NOT RUN')};
+  const response=await h.r.unifiedR33BuildDraft({},{
+    code:'MLS-V01-0001',contentPath:'content/fixture.json',
+    article:{code:'MLS-V01-0001',language:'ingles',title:'English grammar',articleMarkdown:'English grammar uses nouns and verbs.'},
+    handoffEntry:{}
+  });
+  const data=await response.json();
+  assert.equal(data.reason,'SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE');
+  assert.equal(providerCalls,0);
+});
+
 test('R44 bad context is isolated; subsequent runner step advances to the next entry',async()=>{
   const h=harness();await setup(h,1);
   h.r.r44LoadEntry=async()=>{throw Error('R44_CONTEXT_HASH_MISMATCH_MLS-V10-0870')};
