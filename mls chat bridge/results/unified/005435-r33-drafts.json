@@ -1,0 +1,110 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "unified-r33-005435-drafts",
+    "requested": 5,
+    "processed": 5,
+    "failures": 0,
+    "stopOnError": true,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V05-0822",
+          "reason": "MATCHER_REQUESTED_REVIEW",
+          "confidence": 0.6,
+          "rationale": "The article contains several substantial claims about the usage of modal particles, but none of them can be directly mapped to a credible source. Therefore, the review needs a chat review to further investigate the claims."
+        },
+        "completedAt": "2026-10-06T02:04:45.991Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V05-0844",
+          "reason": "SOURCE_FULLTEXT_REQUIRED",
+          "confidence": null,
+          "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-06T02:04:59.365Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V05-0845",
+          "reason": "MATCHER_REQUESTED_REVIEW",
+          "confidence": 0.6,
+          "rationale": "The claims are substantiated by the sources provided. However, the mapping is not exhaustive and some claims may require further verification. The confidence levels reflect the credibility of the sources and the clarity of the claims."
+        },
+        "completedAt": "2026-10-06T02:05:20.289Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V05-0846",
+          "reason": "SOURCE_FULLTEXT_REQUIRED",
+          "confidence": null,
+          "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-06T02:05:35.194Z"
+      },
+      {
+        "index": 4,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedR33EvidenceDraft",
+        "method": "POST",
+        "path": "/api/unified-runner/r33-evidence",
+        "response": {
+          "ok": true,
+          "status": "NEEDS_CHAT_REVIEW",
+          "code": "MLS-V05-0854",
+          "reason": "SOURCE_FULLTEXT_REQUIRED",
+          "confidence": null,
+          "sourceId": "MLS-SRC-1FFA2EE4DACDECB4BBCD",
+          "unsupportedClaimIndexes": [],
+          "rationale": ""
+        },
+        "completedAt": "2026-10-06T02:05:51.622Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-06T02:05:51.622Z",
+  "commandFile": "mls chat bridge/commands/unified/005435-r33-drafts.json"
+}
