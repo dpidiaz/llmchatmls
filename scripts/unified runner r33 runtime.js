@@ -24,7 +24,7 @@ function unifiedR33CanonicalPreflight(body,reason) {
   const s=String(reason||"");
   if(!candidates.length)return {eligible:false,reason:"NO_REGISTERED_SOURCE_CANDIDATE",candidateCount:0,fetchableCandidateCount:0};
   if(s==="NO_REGISTERED_SOURCE_CANDIDATE")return {eligible:true,reason:"CANDIDATE_NOW_AVAILABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
-  if(/^SOURCE_/.test(s)){
+  if(["SOURCE_FULLTEXT_REQUIRED","SOURCE_URL_UNAVAILABLE","SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE"].includes(s)){
     return {eligible:fetchable.length>0,reason:fetchable.length?"FETCHABLE_SOURCE_NOW_AVAILABLE":"NO_FETCHABLE_REGISTERED_SOURCE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
   }
   if(s==="CLAIM_SOURCE_TIER_INVALID"){
