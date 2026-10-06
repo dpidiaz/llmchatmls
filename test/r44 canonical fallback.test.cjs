@@ -288,7 +288,7 @@ test('canonical status reads through GitHub authority without mutating D1',async
   assert.equal(status.reconciliationPending,2);
   assert.deepEqual(h.db.prepare("SELECT code,state FROM mls_canonical_queue ORDER BY code").all(),before,'read-through status must not write D1');
   const runtime=fs.readFileSync('scripts/r44 runtime.js','utf8');
-  assert.match(runtime,/Number\(budget\?\.d1Usage\?\.writesRemaining\)===0/);
-  assert.match(runtime,/authorityStatus=await canonicalAuthorityStatus\(\)/);
+  assert.doesNotMatch(runtime,/Number\(budget\?\.d1Usage\?\.writesRemaining\)===0/);
+  assert.match(runtime,/try\{authorityStatus=await canonicalAuthorityStatus\(\);\}catch\(_\)\{\}/);
   assert.match(runtime,/canonicalStatus\(env,authorityStatus\)/);
 });

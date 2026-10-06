@@ -635,9 +635,10 @@ async function unifiedRunnerStatus(request, env, ctx) {
   const laneRows=await env.WIKI_DB.prepare("SELECT * FROM mls_unified_runner_lane ORDER BY stage").all();
   const lanes=Object.fromEntries((laneRows.results||[]).map(row=>[row.stage,{...row,detail:(()=>{try{return row.detail_json?JSON.parse(row.detail_json):null}catch{return null}})()}]));
   let authorityStatus=null;
-  if(Number(budget?.d1Usage?.writesRemaining)===0){
-    try{authorityStatus=await canonicalAuthorityStatus();}catch(_){}
-  }
+  // Status is read-through against canonical GitHub authority even when D1 still has
+  // write budget. This makes /runner reflect merged VERIFIED entries immediately
+  // (bounded by canonicalAuthorityStatus' 5-minute cache) without mutating D1.
+  try{authorityStatus=await canonicalAuthorityStatus();}catch(_){}
   return r44Json({ok:true,runner,r44,budget,lanes,canonical:await canonicalStatus(env,authorityStatus),freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
 }
 function unifiedRunnerSeed(article) {
