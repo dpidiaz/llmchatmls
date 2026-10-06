@@ -98,11 +98,34 @@ async function verifyIntegrationCheckpoint(state,commitSha,event={}){
       if(!/^[a-f0-9]{40}$/.test(base))throw core.dispatchError('BASE_COMMIT_INVALID','Assignment integration sin base válido.',409);
       const mainRef=await gh('GET','/repos/'+owner+'/'+repo+'/git/ref/heads/main');
       const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
-      if(mainSha!==commitSha)throw core.dispatchError('INTEGRATION_DIRECT_MAIN_MISMATCH','main HEAD no coincide con el merge directo checkpointed.',409);
+      let mainContainsCommit=mainSha===commitSha;
+      if(!mainContainsCommit){
+        const afterMerge=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+commitSha+'...'+mainSha);
+        mainContainsCommit=['ahead','identical'].includes(String(afterMerge?.status||''));
+      }
+      if(!mainContainsCommit)
+        throw core.dispatchError('INTEGRATION_DIRECT_MAIN_MISMATCH','main no contiene el merge directo checkpointed.',409);
       const mergeCommit=await gh('GET','/repos/'+owner+'/'+repo+'/git/commits/'+commitSha);
       const parents=(mergeCommit?.parents||[]).map(x=>String(x?.sha||'').toLowerCase());
-      if(parents.length!==2||parents[0]!==base||parents[1]!==expectedHeadSha)
-        throw core.dispatchError('INTEGRATION_DIRECT_PARENTS_MISMATCH','El merge directo no conserva exactamente base + head certificado.',409);
+      if(parents.length!==2||parents[1]!==expectedHeadSha)
+        throw core.dispatchError('INTEGRATION_DIRECT_PARENTS_MISMATCH','El merge directo no conserva el head certificado como segundo padre.',409);
+      const directMainParent=parents[0];
+      if(directMainParent!==base){
+        const mainDrift=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+base+'...'+directMainParent);
+        if(!['ahead','identical'].includes(String(mainDrift?.status||'')))
+          throw core.dispatchError('INTEGRATION_DIRECT_MAIN_DIVERGED','El primer padre del merge directo no desciende del base serializado.',409);
+        const certified=await gh('GET','/repos/'+owner+'/'+repo+'/compare/'+base+'...'+expectedHeadSha);
+        if(!['ahead','identical'].includes(String(certified?.status||'')))
+          throw core.dispatchError('CHECKPOINT_NOT_DESCENDANT','El head certificado dejó de descender del base serializado.',409);
+        const mainFiles=Array.isArray(mainDrift?.files)?mainDrift.files.map(x=>String(x.filename||'')):[];
+        const certifiedFiles=Array.isArray(certified?.files)?certified.files.map(x=>String(x.filename||'')):[];
+        if(mainFiles.length>=300||certifiedFiles.length>=300)
+          throw core.dispatchError('INTEGRATION_DIRECT_DRIFT_SCOPE_INCOMPLETE','No se puede probar disjointness con un compare truncado.',409);
+        const certifiedSet=new Set(certifiedFiles);
+        const overlap=mainFiles.filter(file=>certifiedSet.has(file));
+        if(overlap.length)
+          throw core.dispatchError('INTEGRATION_DIRECT_MAIN_OVERLAP','main avanzó sobre archivos también modificados por el head certificado: '+overlap.slice(0,10).join(', '),409);
+      }
       return;
     }
     if(stage!=='postmerge')throw core.dispatchError('INTEGRATION_STAGE_REQUIRED','assignment-pr requiere integrationStage premerge/postmerge o el fallback directo autorizado.',409);
