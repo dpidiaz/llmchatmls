@@ -39,7 +39,15 @@ test('Unified integration executor validates exact leased scope and fails closed
   assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_DIVERGED/);
   assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_OVERLAP/);
   assert.match(source,/UNIFIED_INTEGRATION_DIRECT_MAIN_VERIFY_FAILED/);
+  const worker=fs.readFileSync('scripts/MLS global dispatcher worker.cjs','utf8');
+  assert.match(worker,/mainContainsCommit/);
+  assert.match(worker,/INTEGRATION_DIRECT_DRIFT_SCOPE_INCOMPLETE/);
+  assert.match(worker,/INTEGRATION_DIRECT_MAIN_DIVERGED/);
+  assert.match(worker,/INTEGRATION_DIRECT_MAIN_OVERLAP/);
+  assert.match(worker,/parents\[1\]!==expectedHeadSha/);
+  assert.doesNotMatch(worker,/parents\[0\]!==base\|\|parents\[1\]!==expectedHeadSha/);
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 integration execute.cjs'],{stdio:'pipe'});
+  child.execFileSync(process.execPath,['--check','scripts/MLS global dispatcher worker.cjs'],{stdio:'pipe'});
 });
 
 
