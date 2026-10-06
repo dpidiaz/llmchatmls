@@ -47,6 +47,7 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
 });
 
 test('Web runner is page-controlled, recurring, and re-enters after canonical workflows finish',()=>{
+  const source=fs.readFileSync('scripts/MLS unified web runner.cjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/MLS Unified Web Runner.yml','utf8');
   assert.match(workflow,/schedule:/);
   assert.match(workflow,/cron: '\*\/5 \* \* \* \*'/);
