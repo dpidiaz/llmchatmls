@@ -186,7 +186,8 @@ test('canonical malformed JSON recovery is bounded and leaves source quarantine 
   }
   assert.equal(h.db.prepare("SELECT attempts FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().attempts,6);
   h.db.exec('UPDATE mls_canonical_recovery_clock SET next_ms=0; UPDATE mls_canonical_queue SET retry_ms=0');
-  assert.equal((await h.r.canonicalStep(h.env)).status,'NO_WORK');
+  h.r.unifiedR33RepairDiscover=async()=>({parsed:{status:'NO_SAFE_SOURCE',candidates:[]},result:{model:'fixture'}});
+  assert.equal((await h.r.canonicalStep(h.env)).status,'REPAIR_QUARANTINE');
   assert.equal(h.db.prepare("SELECT attempts FROM mls_canonical_queue WHERE code='MLS-V01-0002'").get().attempts,3);
   assert.equal(h.db.prepare('SELECT COUNT(*) n FROM mls_canonical_recovery_history').get().n,2);
 });
