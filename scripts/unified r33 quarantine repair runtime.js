@@ -136,20 +136,27 @@ async function unifiedR33RepairPersistSource(env,input,row,source,provenance){
   ]);
   return {ok:true,status:"REPAIR_SOURCE_REGISTERED",code:row.code,sourceId,url,authorityTier:String(metadata.authorityTier||"D").toUpperCase()};
 }
-async function unifiedR33RepairRehydrateDone(env){
+async function unifiedR33RepairClaimRehydrate(env){
   await unifiedR33RepairEnsure(env);
-  const row=await env.WIKI_DB.prepare(`SELECT r.code,r.last_source_id,q.page,q.revision,q.input_hash,rec.context_hash,rec.failed_context_hash
-    FROM mls_r33_repair_queue r
-    JOIN mls_canonical_queue q USING(code)
-    JOIN mls_canonical_recovery rec USING(code)
-    WHERE r.state='DONE' AND r.last_source_id IS NOT NULL AND r.last_error IS NULL
-      AND q.state='QUARANTINED'
-      AND EXISTS(SELECT 1 FROM mls_r33_repair_source_links l WHERE l.code=r.code AND l.source_id=r.last_source_id)
-    ORDER BY r.updated_ms,r.code LIMIT 1`).first();
+  const now=Date.now(),token=crypto.randomUUID();
+  const claimed=await env.WIKI_DB.prepare(`UPDATE mls_r33_repair_queue SET state='REHYDRATING',lease_token=?1,expires_ms=?2,updated_ms=?3
+    WHERE code=(SELECT r.code FROM mls_r33_repair_queue r JOIN mls_canonical_queue q USING(code)
+      WHERE r.last_source_id IS NOT NULL AND r.last_error IS NULL AND q.state='QUARANTINED'
+        AND (r.state='DONE' OR (r.state='REHYDRATING' AND r.expires_ms<=?3))
+        AND EXISTS(SELECT 1 FROM mls_r33_repair_source_links l WHERE l.code=r.code AND l.source_id=r.last_source_id)
+      ORDER BY r.updated_ms,r.code LIMIT 1)
+    RETURNING code,last_source_id,lease_token`).bind(token,now+2*60*1000,now).first();
+  if(!claimed)return null;
+  const context=await env.WIKI_DB.prepare(`SELECT q.page,q.revision,q.input_hash,rec.context_hash,rec.failed_context_hash
+    FROM mls_canonical_queue q JOIN mls_canonical_recovery rec USING(code) WHERE q.code=?`).bind(claimed.code).first();
+  return context?{...claimed,...context}:claimed;
+}
+async function unifiedR33RepairRehydrateDone(env){
+  const row=await unifiedR33RepairClaimRehydrate(env);
   if(!row)return {status:"NO_REHYDRATE_WORK"};
   const packet=await canonicalPacket(env,row),item=(packet||[]).find(x=>x.input&&x.input.code===row.code&&x.inputHash===row.input_hash);
   if(!item||await canonicalInputHash(item.input)!==row.input_hash){
-    await env.WIKI_DB.prepare("UPDATE mls_r33_repair_queue SET last_error='REHYDRATE_CONTEXT_MISMATCH',updated_ms=? WHERE code=?").bind(Date.now(),row.code).run();
+    await env.WIKI_DB.prepare("UPDATE mls_r33_repair_queue SET state='BLOCKED',lease_token=NULL,expires_ms=0,last_error='REHYDRATE_CONTEXT_MISMATCH',updated_ms=? WHERE code=? AND lease_token=?").bind(Date.now(),row.code,row.lease_token).run();
     return {status:"REHYDRATE_BLOCKED",code:row.code};
   }
   const overlays=await unifiedR33RepairSources(env,row.code);
@@ -157,10 +164,11 @@ async function unifiedR33RepairRehydrateDone(env){
   const staticContext=await r44Sha256Text(r44Stable(unifiedR33CanonicalContext(item.input)));
   const overlayHash=await r44Sha256Text(r44Stable(overlays.map(x=>({sourceId:x.sourceId,metadata:x.metadata,repairValidatedFulltext:x.repairValidatedFulltext===true}))));
   const contextHash=baseHash+":"+staticContext+":"+overlayHash;
-  await env.WIKI_DB.batch([
-    env.WIKI_DB.prepare("UPDATE mls_canonical_recovery SET context_hash=? WHERE code=?").bind(contextHash,row.code),
-    env.WIKI_DB.prepare("UPDATE mls_r33_repair_queue SET last_error='REHYDRATED_V2',updated_ms=? WHERE code=?").bind(Date.now(),row.code)
+  const saved=await env.WIKI_DB.batch([
+    env.WIKI_DB.prepare("UPDATE mls_canonical_recovery SET context_hash=? WHERE code=? AND EXISTS(SELECT 1 FROM mls_r33_repair_queue WHERE code=? AND state='REHYDRATING' AND lease_token=? AND expires_ms>?)").bind(contextHash,row.code,row.code,row.lease_token,Date.now()),
+    env.WIKI_DB.prepare("UPDATE mls_r33_repair_queue SET state='DONE',lease_token=NULL,expires_ms=0,last_error='REHYDRATED_V2',updated_ms=? WHERE code=? AND state='REHYDRATING' AND lease_token=? AND expires_ms>? RETURNING code").bind(Date.now(),row.code,row.lease_token,Date.now())
   ]);
+  if(!saved[1].results?.length)return {status:"REHYDRATE_LEASE_LOST",code:row.code};
   return {status:"REPAIR_SOURCE_REHYDRATED",code:row.code,sourceId:row.last_source_id,contextChanged:contextHash!==row.context_hash};
 }
 async function unifiedR33RepairRegisteredRescue(env,input,row){
@@ -282,6 +290,7 @@ async function unifiedR33RepairStatus(env){
   const blocked=await env.WIKI_DB.prepare("SELECT COALESCE(last_error,'') last_error,COUNT(*) n FROM mls_r33_repair_queue WHERE state='BLOCKED' GROUP BY last_error ORDER BY n DESC,last_error").all();
   const sources=await env.WIKI_DB.prepare("SELECT COUNT(*) n FROM mls_r33_repair_sources WHERE state='ACTIVE'").first();
   const links=await env.WIKI_DB.prepare("SELECT COUNT(*) n,COUNT(DISTINCT code) codes FROM mls_r33_repair_source_links").first();
+  const rehydration=await env.WIKI_DB.prepare("SELECT SUM(CASE WHEN state='DONE' AND last_source_id IS NOT NULL AND last_error IS NULL THEN 1 ELSE 0 END) pending,SUM(CASE WHEN state='DONE' AND last_error='REHYDRATED_V2' THEN 1 ELSE 0 END) done FROM mls_r33_repair_queue").first();
   return {
     schema:MLS_R33_REPAIR_SCHEMA,
     maxAttempts:MLS_R33_REPAIR_MAX_ATTEMPTS,
@@ -289,6 +298,7 @@ async function unifiedR33RepairStatus(env){
     blockedByError:(blocked.results||[]).map(r=>({error:r.last_error||null,n:Number(r.n)})),
     registeredSources:Number(sources&&sources.n||0),
     sourceLinks:Number(links&&links.n||0),
-    linkedCodes:Number(links&&links.codes||0)
+    linkedCodes:Number(links&&links.codes||0),
+    rehydration:{pending:Number(rehydration&&rehydration.pending||0),done:Number(rehydration&&rehydration.done||0)}
   };
 }
