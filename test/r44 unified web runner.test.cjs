@@ -36,7 +36,7 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/pauseRunner:false/);
   assert.match(source,/function r44Drained/);
   assert.match(source,/async function replaceExpiredAssignment/);
-  assert.match(source,/createClaim\\(stage,/);
+  assert.match(source,/createClaim\(stage,/);
   assert.match(source,/source:'dispatcher-title'/);
   assert.match(source,/source:'assignment-state'/);
   assert.match(source,/source:'readyToClose-recovery'/);
