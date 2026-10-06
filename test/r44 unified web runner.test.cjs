@@ -36,7 +36,7 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/pauseRunner:false/);
   assert.match(source,/function r44Drained/);
   assert.match(source,/async function replaceExpiredAssignment/);
-  assert.match(source,/createClaim\(stage\)/);
+  assert.match(source,/createClaim\(stage,/);
   assert.match(source,/source:'dispatcher-title'/);
   assert.match(source,/source:'assignment-state'/);
   assert.match(source,/source:'readyToClose-recovery'/);
@@ -47,6 +47,7 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
 });
 
 test('Web runner is page-controlled, recurring, and re-enters after canonical workflows finish',()=>{
+  const source=fs.readFileSync('scripts/MLS unified web runner.cjs','utf8');
   const workflow=fs.readFileSync('.github/workflows/MLS Unified Web Runner.yml','utf8');
   assert.match(workflow,/schedule:/);
   assert.match(workflow,/cron: '\*\/5 \* \* \* \*'/);
@@ -58,6 +59,13 @@ test('Web runner is page-controlled, recurring, and re-enters after canonical wo
   assert.match(workflow,/actions: write/);
   assert.match(workflow,/target_entries:/);
   assert.match(workflow,/MLS_UNIFIED_TARGET_ENTRIES/);
+  const evidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  assert.match(evidenceWorkflow,/group: mls-unified-r33-/);
+  assert.match(source,/R33_FANOUT/);
+  assert.match(source,/findExistingR33All/);
+  assert.match(source,/ensureR33Fanout/);
+  assert.match(source,/runR33Fanout/);
+
 });
 
 test('Bot submissions remain fenced and use explicit workflow_dispatch, not recursive comment events',()=>{
