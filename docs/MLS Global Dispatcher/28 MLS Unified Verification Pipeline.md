@@ -135,7 +135,11 @@ canonical VERIFIED
 
 Every new Unified execution follows this order.
 
-### Priority 1 — publish already-certified Unified work
+### Priority 1 — Cloudflare/D1 hot path
+
+Wake the deployed Unified Cloudflare logical runners first. This happens before any GitHub-backed drain attempt. If GitHub is unavailable or rate-limited, Cloudflare/D1 continues producing and preserving durable work.
+
+### Priority 2 — publish already-certified Unified work
 
 Attempt a Global Dispatcher claim scoped to:
 
@@ -148,7 +152,7 @@ This is the step that can move already-certified R33 units into canonical `verif
 
 If no integration work is eligible or the global integration lock is busy, continue to Priority 2 rather than blocking all workers.
 
-### Priority 2 — certify R44-complete work in R33
+### Priority 3 — certify R44-complete work in R33
 
 Attempt a Global Dispatcher claim scoped to:
 
@@ -165,7 +169,7 @@ If the handoff says `PASS_NO_CHANGE`, do not change content unless R33 itself fi
 
 Evidence, claims, links, Source Registry references, provenance and article hash must correspond to the final article in the same worker commit.
 
-### Priority 3 — produce more R44-complete work
+### Priority 4 — produce more R44-complete work
 
 If neither Unified integration nor Unified R33 work is immediately eligible, execute the deployed:
 
