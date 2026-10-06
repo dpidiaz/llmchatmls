@@ -1048,8 +1048,8 @@ class UnifiedLogicalRunner {
     if (!key) { key="alarm:"+crypto.randomUUID(); await this.storage.put("stepKey",key); }
     const result=await unifiedRunnerStep(this.env,key,id);
     await this.storage.delete("stepKey");
-    if (["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED","RUNNER_BUSY","NO_WORK","CAPACITY_BUSY","CLAIM_ALREADY_RESOLVED"].includes(result.status)) {
-      await this.storage.setAlarm(Date.now()+(["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED"].includes(result.status)?1000:300000));
+    if (["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED","REPAIR_QUARANTINE","RUNNER_BUSY","NO_WORK","CAPACITY_BUSY","CLAIM_ALREADY_RESOLVED"].includes(result.status)) {
+      await this.storage.setAlarm(Date.now()+(["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED","REPAIR_QUARANTINE"].includes(result.status)?1000:300000));
     }
   }
 }

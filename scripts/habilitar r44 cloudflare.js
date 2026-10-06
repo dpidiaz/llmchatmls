@@ -14,6 +14,7 @@ const poolSha = require("node:crypto").createHash("sha256").update(poolBytes).di
 const durableSql = fs.readFileSync(require("node:path").join(__dirname,"../migrations/0044_entry_checkpoints.sql"),"utf8").split('-- statement boundary').map(s=>s.trim()).filter(Boolean);
 const durableSource = fs.readFileSync(require("node:path").join(__dirname,"r44 durable.js"),"utf8");
 const clientSource = fs.readFileSync(require("node:path").join(__dirname,"r44 client.js"),"utf8");
+const repairR33Source = fs.readFileSync(require("node:path").join(__dirname,"unified r33 quarantine repair runtime.js"),"utf8");
 const unifiedR33Source = fs.readFileSync(require("node:path").join(__dirname,"unified runner r33 runtime.js"),"utf8");
 const canonicalSource = fs.readFileSync(require("node:path").join(__dirname,"r44 canonical runtime.js"),"utf8");
 const sourceRegistryDir=require("node:path").join(__dirname,"../MLS R32 EDITORIAL/evidence git/registry/sources");
@@ -22,7 +23,7 @@ const sourceCatalog=fs.readdirSync(sourceRegistryDir)
   .filter(name=>name.endsWith(".json")).sort()
   .map(name=>JSON.parse(fs.readFileSync(require("node:path").join(sourceRegistryDir,name),"utf8")))
   .filter(raw=>raw&&raw.metadata&&evidenceApa.validateApaSource(raw.metadata).citationReady);
-const RUNTIME = 'var MLS_R33_SOURCE_CATALOG = '+JSON.stringify(sourceCatalog)+';\n'+'var R44_DURABLE_SQL = '+JSON.stringify(durableSql)+';\nvar R44_CLIENT_SOURCE = '+JSON.stringify(clientSource)+';\n'+durableSource+'\n'+unifiedR33Source+'\n'+canonicalSource+'\n'+`var R44_POOL_SHA256 = "${poolSha}";\n` + fs.readFileSync(require("node:path").join(__dirname, "r44 runtime.js"), "utf8").replace('pool-manifest.json"', `pool-manifest.json?sha256=${poolSha}"`);
+const RUNTIME = 'var MLS_R33_SOURCE_CATALOG = '+JSON.stringify(sourceCatalog)+';\n'+'var R44_DURABLE_SQL = '+JSON.stringify(durableSql)+';\nvar R44_CLIENT_SOURCE = '+JSON.stringify(clientSource)+';\n'+durableSource+'\n'+repairR33Source+'\n'+unifiedR33Source+'\n'+canonicalSource+'\n'+`var R44_POOL_SHA256 = "${poolSha}";\n` + fs.readFileSync(require("node:path").join(__dirname, "r44 runtime.js"), "utf8").replace('pool-manifest.json"', `pool-manifest.json?sha256=${poolSha}"`);
 
 function injectR44(code) {
   let next = String(code);

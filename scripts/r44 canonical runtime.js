@@ -225,7 +225,8 @@ async function canonicalStatus(env,authorityStatus=null){
   let recoverable=0;
   const byReason=(groups.results||[]).map(row=>{const category=canonicalQuarantineCategory(row.last_error);byCategory[category]+=Number(row.n);recoverable+=Number(row.recoverable);return {...row,category}});
   const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:0,mode:'IMMEDIATE_SINGLE_FLIGHT'};
-  const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:counts.WAITING_HANDOFF||0,prepared:counts.PREPARED||0,counts,quarantine,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
+  const repair=await unifiedR33RepairStatus(env);
+  const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:counts.WAITING_HANDOFF||0,prepared:counts.PREPARED||0,counts,quarantine,repair,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
   if(authorityCodes)canonicalStatusOverlayCache.set(env,{etag:authorityEtag,expiresMs:Date.now()+5*60*1000,value});
   return value;
 }
@@ -262,7 +263,14 @@ async function canonicalStep(env){
   // observe the last READY entry, miss it, and sleep despite a pending backlog.
   const results=await env.WIKI_DB.batch([refill,claim]);
   const row=results[1].results?.[0];
-  if(!row)return {status:'NO_WORK',source:'CANONICAL'};
+  if(!row){
+    const repair=await unifiedR33RepairStep(env);
+    if(repair.status!=='NO_REPAIR_WORK'){
+      if(repair.status==='REPAIR_SOURCE_REGISTERED')await canonicalRecoverQuarantine(env);
+      return {status:'REPAIR_QUARANTINE',repair};
+    }
+    return {status:'NO_WORK',source:'CANONICAL'};
+  }
   const context=await env.WIKI_DB.prepare('SELECT context_hash FROM mls_canonical_recovery WHERE code=?').bind(row.code).first();
   const commit=async(state,result,error,retry)=>{
     const saved=await env.WIKI_DB.batch([

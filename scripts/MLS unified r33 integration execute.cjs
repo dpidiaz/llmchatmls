@@ -109,6 +109,20 @@ function copyExact(commit,repoPath){
   const {full}=safeRepoPath(repoPath),data=blobAt(commit,repoPath);
   fs.mkdirSync(path.dirname(full),{recursive:true});fs.writeFileSync(full,data);
 }
+function copyEvidenceSources(commit,evidencePath){
+  let evidence;
+  try{evidence=JSON.parse(blobAt(commit,evidencePath).toString('utf8'))}catch{fail('UNIFIED_INTEGRATION_EVIDENCE_JSON_INVALID',evidencePath)}
+  const ids=[...new Set((evidence.links||[]).map(x=>String(x?.sourceId||'').toUpperCase()).filter(x=>/^MLS-SRC-[A-F0-9]{20}$/.test(x)))];
+  const copied=[];
+  for(const sourceId of ids){
+    const sourcePath='MLS R32 EDITORIAL/evidence git/registry/sources/'+sourceId+'.json';
+    try{copyExact(commit,sourcePath);copied.push(sourcePath)}catch(error){
+      if(fs.existsSync(safeRepoPath(sourcePath).full))continue;
+      throw error;
+    }
+  }
+  return copied;
+}
 function syncCanonicalManifest(sourceRefs){
   const manifestPath='content/manifest.json';
   const {full}=safeRepoPath(manifestPath);
@@ -155,6 +169,7 @@ function applySources(){
     const key=String(ref.branch)+'@'+String(ref.commitSha);
     if(!fetched.has(key)){fetchSourceRef(ref);fetched.add(key);}
     copyExact(ref.commitSha,ref.evidenceArtifactPath);
+    copyEvidenceSources(ref.commitSha,ref.evidenceArtifactPath);
     if(ref.contentPath){
       const {p,full}=safeRepoPath(ref.contentPath);
       const current=fs.readFileSync(full),source=blobAt(ref.commitSha,p);

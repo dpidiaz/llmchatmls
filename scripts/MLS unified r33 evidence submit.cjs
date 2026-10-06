@@ -5,6 +5,8 @@ const path=require('node:path');
 
 const workspace=process.env.GITHUB_WORKSPACE||process.cwd();
 const core=require(path.join(workspace,'MLS R32 EDITORIAL','global dispatcher','core.js'));
+const foundation=require(path.join(workspace,'MLS R32 EDITORIAL','evidence foundation.js'));
+const SOURCE_PREFIX='MLS R32 EDITORIAL/evidence git/registry/sources/';
 const MARKER='MLS_UNIFIED_R33_EVIDENCE_SUBMIT';
 const AUTHORIZED=new Set(['OWNER','MEMBER','COLLABORATOR']);
 
@@ -62,9 +64,24 @@ function validate(issue,comment,payload){
     if(String(content.language||'')!==String(evidence.language||''))fail('UNIFIED_EVIDENCE_CONTENT_LANGUAGE_MISMATCH');
     if(typeof content.articleMarkdown!=='string'||!content.articleMarkdown.trim())fail('UNIFIED_EVIDENCE_CONTENT_MARKDOWN_MISSING');
   }
+  const sources=Array.isArray(payload?.sources)?payload.sources:[];
+  if(sources.length>8)fail('UNIFIED_EVIDENCE_REPAIR_SOURCES_TOO_MANY');
+  const referenced=new Set((evidence.links||[]).map(x=>String(x?.sourceId||'')));
+  const normalizedSources=sources.map(raw=>{
+    if(!raw||typeof raw!=='object'||Array.isArray(raw))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_INVALID');
+    const sourceId=String(raw.sourceId||'').toUpperCase(),metadata=raw.metadata;
+    if(!/^MLS-SRC-[A-F0-9]{20}$/.test(sourceId))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_ID_INVALID');
+    if(!metadata||typeof metadata!=='object'||Array.isArray(metadata))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_METADATA_INVALID');
+    if(!['institutional_webpage','reference_entry','report'].includes(String(metadata.sourceType||'')))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_TYPE_INVALID');
+    if(String(metadata.status||'active')!=='active'||!String(metadata.title||'').trim()||!String(metadata.canonicalUrl||'').trim())fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_METADATA_INCOMPLETE');
+    if(!referenced.has(sourceId))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_UNREFERENCED');
+    const sourcePath=SOURCE_PREFIX+sourceId+'.json';
+    if(!core.pathAllowed(sourcePath,state.allowedPaths||[]))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_PATH_OUT_OF_SCOPE');
+    return {sourceId,metadata,sourcePath};
+  });
   const expires=Date.parse(String(state.expiresAt||''));
   if(!Number.isFinite(expires)||Date.now()>expires)fail('UNIFIED_EVIDENCE_LEASE_EXPIRED');
-  return {state,code,evidencePath,contentPath,evidence,content};
+  return {state,code,evidencePath,contentPath,evidence,content,sources:normalizedSources};
 }
 function appendOutput(name,value){
   const out=process.env.GITHUB_OUTPUT;
@@ -96,7 +113,8 @@ async function prepare(){
     evidencePath:validated.evidencePath,
     contentPath:validated.contentPath,
     evidence:validated.evidence,
-    content:validated.content
+    content:validated.content,
+    sources:validated.sources
   },null,2)+'\n');
   appendOutput('branch',validated.state.branch);
   appendOutput('code',validated.code);
@@ -110,9 +128,23 @@ function safeTarget(repoPath,code){
   if(!target.startsWith(root))fail(code);
   return target;
 }
-function apply(){
+async function apply(){
   const bundlePath=process.argv[3]||path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-evidence-submit.json');
   const bundle=JSON.parse(fs.readFileSync(bundlePath,'utf8'));
+  const writtenSources=[];
+  for(const source of bundle.sources||[]){
+    const normalized=await foundation.normalizeSourceMetadata(source.metadata||{});
+    if(normalized.sourceId!==source.sourceId)fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_ID_MISMATCH');
+    const sourceTarget=safeTarget(source.sourcePath,'UNIFIED_EVIDENCE_REPAIR_SOURCE_TARGET_ESCAPE');
+    if(fs.existsSync(sourceTarget)){
+      const existing=JSON.parse(fs.readFileSync(sourceTarget,'utf8')),current=await foundation.normalizeSourceMetadata(existing.metadata||{});
+      if(current.sourceId!==source.sourceId)fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_IDENTITY_CONFLICT');
+    }else{
+      fs.mkdirSync(path.dirname(sourceTarget),{recursive:true});
+      fs.writeFileSync(sourceTarget,JSON.stringify({schemaVersion:'1.0',sourceId:source.sourceId,metadata:source.metadata,migratedFrom:'cloudflare-d1:MLS-R33-REPAIR-SOURCE-1:'+bundle.code},null,2)+String.fromCharCode(10));
+      writtenSources.push(source.sourcePath);
+    }
+  }
   if(bundle.content){
     const contentTarget=safeTarget(bundle.contentPath,'UNIFIED_EVIDENCE_CONTENT_TARGET_ESCAPE');
     fs.mkdirSync(path.dirname(contentTarget),{recursive:true});
@@ -121,7 +153,7 @@ function apply(){
   const target=safeTarget(bundle.evidencePath,'UNIFIED_EVIDENCE_TARGET_ESCAPE');
   fs.mkdirSync(path.dirname(target),{recursive:true});
   fs.writeFileSync(target,JSON.stringify(bundle.evidence,null,2)+String.fromCharCode(10));
-  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath,contentPath:bundle.content?bundle.contentPath:null})+'\n');
+  process.stdout.write(JSON.stringify({ok:true,code:bundle.code,evidencePath:bundle.evidencePath,contentPath:bundle.content?bundle.contentPath:null,sourcePaths:writtenSources})+'\n');
 }
 function syntheticEventPath(kind){
   return path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-'+kind+'-event.json');

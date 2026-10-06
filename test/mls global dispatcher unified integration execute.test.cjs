@@ -4,6 +4,16 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const child=require('node:child_process');
 
+test('Unified integration copies source registry records referenced by certified Evidence',()=>{
+  const source=fs.readFileSync('scripts/MLS unified r33 integration execute.cjs','utf8');
+  const provider=fs.readFileSync('MLS R32 EDITORIAL/global dispatcher/providers/integration.js','utf8');
+  assert.match(source,/function copyEvidenceSources/);
+  assert.match(source,/registry\/sources\/.*sourceId/);
+  assert.match(source,/copyEvidenceSources\(ref\.commitSha,ref\.evidenceArtifactPath\)/);
+  assert.match(provider,/R33_SOURCE_REGISTRY_PREFIX/);
+  assert.match(provider,/allowedPaths:\[\.\.\.candidate\.allowedPaths,\.\.\.contentPaths,R33_SOURCE_REGISTRY_PREFIX\]/);
+});
+
 test('Unified integration executor is authorized, serialized and keeps canonical ordering',()=>{
   const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Integration Execute.yml','utf8');
   assert.match(workflow,/issue_comment:/);

@@ -76,11 +76,11 @@ jobs:
         run: |
           node "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" apply "$BUNDLE_PATH"
           node scripts/R4-evidence-preflight.cjs "$EVIDENCE_PATH"
-          git add -- "$EVIDENCE_PATH" "$CONTENT_PATH"
+          git add -- "$EVIDENCE_PATH" "$CONTENT_PATH" 'MLS R32 EDITORIAL/evidence git/registry/sources'
           mapfile -t staged < <(git diff --cached --name-only)
           bad=()
           for file in "${staged[@]}"; do
-            if [ "$file" != "$EVIDENCE_PATH" ] && [ "$file" != "$CONTENT_PATH" ]; then
+            if [ "$file" != "$EVIDENCE_PATH" ] && [ "$file" != "$CONTENT_PATH" ] && [[ "$file" != "MLS R32 EDITORIAL/evidence git/registry/sources/"MLS-SRC-*.json ]]; then
               bad+=("$file")
             fi
           done

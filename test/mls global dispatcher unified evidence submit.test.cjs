@@ -34,6 +34,17 @@ test('Unified Evidence submit script fails closed on assignment scope and lease'
 });
 
 
+test('Unified Evidence submit carries only referenced fenced repair sources',()=>{
+  const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  const source=fs.readFileSync('scripts/MLS unified r33 evidence submit.cjs','utf8');
+  assert.match(source,/UNIFIED_EVIDENCE_REPAIR_SOURCE_UNREFERENCED/);
+  assert.match(source,/UNIFIED_EVIDENCE_REPAIR_SOURCE_ID_MISMATCH/);
+  assert.match(source,/SOURCE_PREFIX='MLS R32 EDITORIAL\/evidence git\/registry\/sources\/'/);
+  assert.match(source,/foundation\.normalizeSourceMetadata/);
+  assert.match(workflow,/registry\/sources/);
+  assert.match(workflow,/MLS-SRC-\*\.json/);
+});
+
 test('syntax-checks the submission runner',()=>{
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence submit.cjs'],{stdio:'pipe'});
 });
