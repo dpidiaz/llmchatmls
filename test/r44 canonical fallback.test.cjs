@@ -185,6 +185,24 @@ test('repair v2 rehydrates legacy DONE source pointers without new inference',as
   assert.equal(h.db.prepare("SELECT last_error FROM mls_r33_repair_queue WHERE code=?").get(code).last_error,'REHYDRATED_V2');
 });
 
+test('repair v2 rehydration atomically fans out distinct DONE rows',async()=>{
+  const h=harness();await setup(h,0);await assets(h,2);await h.r.canonicalSeed(h.env);await h.r.unifiedR33RepairEnsure(h.env);
+  const sourceId='MLS-SRC-CCCCCCCCCCCCCCCCCCCC';
+  const source={schemaVersion:'1.0',sourceId,metadata:{sourceType:'institutional_webpage',authorityTier:'A',status:'active',title:'Shared grammar source',institution:'Example',canonicalUrl:'https://example.org/shared',language:'en'},repairValidatedFulltext:true,repairPublishRequired:true};
+  h.db.prepare("INSERT OR REPLACE INTO mls_r33_repair_sources(source_id,code,source_json,source_sha256,url,authority_tier,provenance_json,created_ms,state) VALUES(?,?,?,?,?,?,?,?,?)")
+    .run(sourceId,'MLS-V01-0001',JSON.stringify(source),'sha','https://example.org/shared','A','{}',Date.now(),'ACTIVE');
+  for(const code of ['MLS-V01-0001','MLS-V01-0002']){
+    h.db.prepare("UPDATE mls_canonical_queue SET state='QUARANTINED',last_error='SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE' WHERE code=?").run(code);
+    h.db.prepare("INSERT OR REPLACE INTO mls_r33_repair_queue(code,state,reason,attempts,last_error,last_source_id,updated_ms) VALUES(?,?,?,?,?,?,?)")
+      .run(code,'DONE','SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',3,null,sourceId,Date.now());
+    h.db.prepare("INSERT OR IGNORE INTO mls_r33_repair_source_links(code,source_id,created_ms) VALUES(?,?,?)").run(code,sourceId,Date.now());
+  }
+  const out=await Promise.all([h.r.unifiedR33RepairRehydrateDone(h.env),h.r.unifiedR33RepairRehydrateDone(h.env)]);
+  assert(out.every(x=>x.status==='REPAIR_SOURCE_REHYDRATED'));
+  assert.equal(new Set(out.map(x=>x.code)).size,2,'concurrent rehydration must lease distinct codes');
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_r33_repair_queue WHERE state='DONE' AND last_error='REHYDRATED_V2'").get().n,2);
+});
+
 test('repair v2 rescues a blocked entry with live full text from an existing registered source',async()=>{
   const h=harness();await setup(h,0);const packets=await assets(h,1);await h.r.canonicalSeed(h.env);await h.r.unifiedR33RepairEnsure(h.env);
   const code='MLS-V01-0001',sourceId='MLS-SRC-BBBBBBBBBBBBBBBBBBBB';
