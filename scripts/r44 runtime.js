@@ -1032,7 +1032,8 @@ class UnifiedLogicalRunner {
     const prior=await this.storage.get("runnerId");
     if (prior && prior!==body.runnerId) return new Response("Identity conflict",{status:409});
     if (!prior) await this.storage.put("runnerId",body.runnerId);
-    if (await this.storage.getAlarm() === null) await this.storage.setAlarm(Date.now()+1000);
+    const scheduled=await this.storage.getAlarm(),wakeAt=Date.now()+1000;
+    if (scheduled === null || scheduled>wakeAt+1000) await this.storage.setAlarm(wakeAt);
     for (let peer=body.runnerId+25;peer<=Number(body.wakeThrough||0);peer+=25) {
       const stub=this.env.MLS_UNIFIED_RUNNERS.get(this.env.MLS_UNIFIED_RUNNERS.idFromName('runner-'+peer));
       const response=await stub.fetch('https://runner.internal/wake',{method:'POST',body:JSON.stringify({runnerId:peer})});
