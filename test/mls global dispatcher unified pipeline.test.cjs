@@ -40,16 +40,33 @@ function handoffFor(entry,ordinal){
   };
 }
 
-test('Unified visible command requires 100 cumulative entries per execution',()=>{
+test('Unified visible command supports chat-scoped targets from 100 through 1000',()=>{
   assert.equal(unified.EXECUTION_TARGET_ENTRIES,100);
+  assert.equal(unified.MIN_EXECUTION_TARGET_ENTRIES,100);
+  assert.equal(unified.MAX_EXECUTION_TARGET_ENTRIES,1000);
+  assert.equal(unified.EXECUTION_TARGET_STEP,5);
   assert.equal(unified.MAX_MICROCLAIM_ENTRIES,50);
+
+  assert.deepEqual(unified.parseUserCommand('MLS Unified siguiente'),{
+    command:'MLS Unified siguiente',targetEntries:100,explicitTarget:false
+  });
+  assert.deepEqual(unified.parseUserCommand('`MLS Unified siguiente 500`'),{
+    command:'MLS Unified siguiente',targetEntries:500,explicitTarget:true
+  });
+  assert.equal(unified.parseUserCommand('MLS Unified siguiente 1000').targetEntries,1000);
+  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 95'),{code:'UNIFIED_TARGET_INVALID'});
+  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 503'),{code:'UNIFIED_TARGET_INVALID'});
+  assert.throws(()=>unified.parseUserCommand('MLS Unified siguiente 1005'),{code:'UNIFIED_TARGET_INVALID'});
+
   const agents=fs.readFileSync('AGENTS.md','utf8');
   const guide=fs.readFileSync(unified.GUIDE,'utf8');
   assert.match(agents,/targetEntries = 100/);
+  assert.match(agents,/MLS Unified siguiente N/);
+  assert.match(agents,/100 through 1000/);
   assert.match(agents,/\*\*not\*\* the command boundary/i);
-  assert.match(agents,/Do \*\*not\*\* report the command as DONE at 5, 10, 15/);
-  assert.match(guide,/at least 100 entries per execution/);
-  assert.match(guide,/same execution must continue pulling additional eligible Unified work/);
+  assert.match(guide,/chat-scoped cumulative target/);
+  assert.match(guide,/MLS Unified siguiente N/);
+  assert.match(guide,/100 through 1000/);
 });
 
 test('Unified command creates only scoped integration and R33 claims',()=>{
