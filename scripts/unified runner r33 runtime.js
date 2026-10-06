@@ -9,6 +9,37 @@ function unifiedR33CanonicalContext(body) {
   const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{});
   return {policy:MLS_CANONICAL_R33_POLICY,candidates:unifiedR33SourcePacket(candidates)};
 }
+// Cheap deterministic quarantine preflight. It performs no AI inference and no
+// source fetch. Its only job is deciding whether the CURRENT registered context
+// is good enough to justify one bounded R33 retry at the same fingerprint.
+function unifiedR33CanonicalPreflight(body,reason) {
+  let article,candidates;
+  try{
+    article=unifiedR33ReconcileArticle(body.article,body.handoffEntry||{});
+    candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{});
+  }catch(error){
+    return {eligible:false,reason:String(error&&error.message||'CANONICAL_PREFLIGHT_INVALID_CONTEXT'),candidateCount:0,fetchableCandidateCount:0};
+  }
+  const safeTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
+  const fetchable=candidates.filter(candidate=>{
+    const metadata=candidate&&candidate.metadata||{};
+    return safeTypes.has(String(metadata.sourceType||""))&&!!unifiedR33SafeSourceUrl(metadata.canonicalUrl);
+  });
+  const s=String(reason||"");
+  if(!candidates.length)return {eligible:false,reason:"NO_REGISTERED_SOURCE_CANDIDATE",candidateCount:0,fetchableCandidateCount:0};
+  if(s==="NO_REGISTERED_SOURCE_CANDIDATE")return {eligible:true,reason:"CANDIDATE_NOW_AVAILABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
+  if(/^SOURCE_/.test(s)){
+    return {eligible:fetchable.length>0,reason:fetchable.length?"FETCHABLE_SOURCE_NOW_AVAILABLE":"NO_FETCHABLE_REGISTERED_SOURCE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
+  }
+  if(s==="CLAIM_SOURCE_TIER_INVALID"){
+    const strong=candidates.some(candidate=>["A","B"].includes(String(candidate.metadata&&candidate.metadata.authorityTier||"").toUpperCase()));
+    return {eligible:strong,reason:strong?"STRONG_SOURCE_CANDIDATE_AVAILABLE":"NO_STRONG_SOURCE_CANDIDATE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
+  }
+  if(/^CLAIM_SOURCE_/.test(s)||/^(MATCHER_|CLAIM_|COVERAGE_|SOURCE_SUPPORT_|NEEDS_CHAT_REVIEW)/.test(s)){
+    return {eligible:true,reason:"CURRENT_CONTEXT_RECHECKABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
+  }
+  return {eligible:false,reason:"REASON_NOT_SAFE_FOR_SAME_CONTEXT_RETRY",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
+}
 
 function unifiedR33NormalizeText(value) {
   return String(value || "").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
