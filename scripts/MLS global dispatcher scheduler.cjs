@@ -18,6 +18,29 @@ if(!token||!/^[^/]+\/[^/]+$/.test(repository))throw new Error('GITHUB_TOKEN/GITH
 const [owner,repo]=repository.split('/');
 const root=path.resolve(__dirname,'..');
 
+const unifiedBase=String(process.env.MLS_UNIFIED_BASE_URL||'https://llmchatmls.dpidiaz.workers.dev').replace(/\/$/,'');
+const editorialKey=String(process.env.MLS_EDITORIAL_CHAT_KEY||'');
+async function livePreparedDrainCodes(){
+  if(!editorialKey)return null;
+  try{
+    const response=await fetch(unifiedBase+'/api/unified-runner/status',{
+      method:'POST',
+      headers:{authorization:'Bearer '+editorialKey,'content-type':'application/json',accept:'application/json'},
+      body:'{}'
+    });
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const data=await response.json();
+    const codes=data&&data.canonical&&Array.isArray(data.canonical.preparedCodes)?data.canonical.preparedCodes:[];
+    const valid=codes.map(x=>String(x||'').toUpperCase()).filter(x=>/^MLS-V\d{2}-\d{4}$/.test(x));
+    if(valid.length!==codes.length)throw Error('PREPARED_CODE_INVALID');
+    console.log('MLS_LIVE_PREPARED_DRAIN '+JSON.stringify({count:valid.length}));
+    return new Set(valid);
+  }catch(error){
+    console.warn('MLS_LIVE_PREPARED_DRAIN_FALLBACK '+String(error&&error.message||error));
+    return null;
+  }
+}
+
 const githubApiCounts={GET:0,POST:0,PATCH:0,PUT:0,DELETE:0};
 if(typeof process.on==='function')process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'scheduler',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
 async function gh(method,endpoint,body){
@@ -307,6 +330,7 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
   const reconciliation=await reconcileCompletedIssues(ledgerItem);
   const now=Date.now(),s=await sweep(baseRegistry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
   const providerIssues=await allIssues('open');
+  const preparedDrainCodes=await livePreparedDrainCodes();
   const bufferedResults=await processBufferedRequests(providerIssues,ledgerItem.ledger,activeStates,now);
   const stagedResults=await bufferedFinalize.reconcile({issues:providerIssues,ledgerItem,
     get:endpoint=>gh('GET','/repos/'+owner+'/'+repo+endpoint),
@@ -324,7 +348,7 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
   let cachedRegistry=null;
   function runtimeRegistry(refresh=false){
     if(cachedRegistry&&!refresh)return cachedRegistry;
-    const dynamic=providerIntegration.materializeProviderItems({issues:providerIssues,root,now,globalLedger:ledgerItem.ledger,globalAssignments:activeStates});
+    const dynamic=providerIntegration.materializeProviderItems({issues:providerIssues,root,now,globalLedger:ledgerItem.ledger,globalAssignments:activeStates,preparedDrainCodes});
     if(dynamic.diagnostics.length)console.warn(JSON.stringify({providerDiagnostics:dynamic.diagnostics}));
     cachedRegistry=providerIntegration.extendRegistry(baseRegistry,{items:dynamic.items,globalLedger:ledgerItem.ledger});
     return cachedRegistry;
