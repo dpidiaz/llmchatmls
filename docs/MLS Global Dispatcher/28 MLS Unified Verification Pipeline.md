@@ -130,6 +130,9 @@ canonical VERIFIED
 
 ## Scheduling priority
 
+**Runtime order:** Cloudflare/D1 is the primary hot path. Each Unified web-runner cycle wakes Cloudflare before attempting GitHub-backed publication or integration. GitHub remains the final canonical sink for VERIFIED.
+
+
 Every new Unified execution follows this order.
 
 ### Priority 1 — publish already-certified Unified work
