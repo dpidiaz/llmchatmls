@@ -46,7 +46,7 @@ test('Unified visible command requires 100 cumulative entries per execution',()=
   const agents=fs.readFileSync('AGENTS.md','utf8');
   const guide=fs.readFileSync(unified.GUIDE,'utf8');
   assert.match(agents,/targetEntries = 100/);
-  assert.match(agents,/not the command boundary/i);
+  assert.match(agents,/\*\*not\*\* the command boundary/i);
   assert.match(agents,/Do \*\*not\*\* report the command as DONE at 5, 10, 15/);
   assert.match(guide,/at least 100 entries per execution/);
   assert.match(guide,/same execution must continue pulling additional eligible Unified work/);
