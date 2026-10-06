@@ -105,9 +105,12 @@ function parseCommand(body){
     const provider=String(x.provider||'').trim(),workPrefix=String(x.workPrefix||'').trim();
     if(provider&&!/^[A-Za-z0-9._:-]{2,80}$/.test(provider))throw dispatchError('INVALID_PROVIDER_FILTER','provider inválido.');
     if(workPrefix&&!/^[A-Za-z0-9._:-]{4,120}$/.test(workPrefix))throw dispatchError('INVALID_WORK_PREFIX','workPrefix inválido.');
+    const preferredCodes=Array.isArray(x.preferredCodes)?[...new Set(x.preferredCodes.map(v=>String(v||'').toUpperCase()))]:[];
+    if(preferredCodes.length>256||preferredCodes.some(code=>!/^MLS-V\d{2}-\d{4}$/.test(code)))
+      throw dispatchError('INVALID_PREFERRED_CODES','preferredCodes debe contener hasta 256 códigos MLS válidos.');
     return {operation,requestId,workerId,workerLogin:workerLogin||null,
       capabilities:normalizeStringArray(x.capabilities||['chat','github'],'capabilities'),
-      ...(provider?{provider}: {}),...(workPrefix?{workPrefix}: {})};
+      ...(provider?{provider}: {}),...(workPrefix?{workPrefix}: {}),...(preferredCodes.length?{preferredCodes}: {})};
   }
   return {operation};
 }
