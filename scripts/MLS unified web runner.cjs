@@ -89,6 +89,29 @@ function githubRetryAfterMs(error){
   if(Number.isFinite(reset)&&reset>0)return Math.max(60000,reset*1000-Date.now());
   return 60000;
 }
+function execDispatcherWorker(eventPath){
+  try{
+    const stdout=child.execFileSync(process.execPath,['scripts/MLS global dispatcher worker.cjs'],{
+      cwd:process.cwd(),stdio:['ignore','pipe','pipe'],encoding:'utf8',
+      env:{...process.env,GITHUB_EVENT_PATH:eventPath}
+    });
+    if(stdout)process.stdout.write(stdout);
+  }catch(error){
+    const stdout=Buffer.isBuffer(error&&error.stdout)?error.stdout.toString('utf8'):String(error&&error.stdout||'');
+    const stderr=Buffer.isBuffer(error&&error.stderr)?error.stderr.toString('utf8'):String(error&&error.stderr||'');
+    if(stdout)process.stdout.write(stdout);
+    if(stderr)process.stderr.write(stderr);
+    const combined=[error&&error.message,stdout,stderr].filter(Boolean).join('\n');
+    if(/secondary rate limit|temporarily blocked from content creation|abuse detection/i.test(combined)){
+      const e=new Error(combined.slice(0,4000));
+      e.code='GITHUB_403_SECONDARY_RATE_LIMIT';
+      e.status=403;
+      e.data={message:combined.slice(0,4000)};
+      throw e;
+    }
+    throw error;
+  }
+}
 async function githubGate(action,extra={}){
   return cf('/api/unified-runner/github-gate',{action,...extra});
 }
@@ -201,9 +224,7 @@ async function heartbeatInline(issue,state,stage){
     comment:{id:Date.now(),body,created_at:new Date().toISOString(),user:{login:BOT}}
   },null,2)+'\n');
   try{
-    child.execFileSync(process.execPath,['scripts/MLS global dispatcher worker.cjs'],{
-      cwd:process.cwd(),stdio:'inherit',env:{...process.env,GITHUB_EVENT_PATH:p}
-    });
+    execDispatcherWorker(p);
   }finally{try{fs.unlinkSync(p)}catch{}}
   const refreshed=await getIssue(Number(issue.number));
   const next=parseAssignment(refreshed);
@@ -322,9 +343,7 @@ async function applyIntegrationEventInline(issue,event,kind){
     comment:{id:Date.now(),body,created_at:new Date().toISOString(),user:{login:BOT}}
   },null,2)+'\n');
   try{
-    child.execFileSync(process.execPath,['scripts/MLS global dispatcher worker.cjs'],{
-      cwd:process.cwd(),stdio:'inherit',env:{...process.env,GITHUB_EVENT_PATH:p}
-    });
+    execDispatcherWorker(p);
   }finally{try{fs.unlinkSync(p)}catch{}}
   const refreshed=await getIssue(Number(issue.number));
   return {issue:refreshed,state:parseAssignment(refreshed)};
@@ -476,7 +495,7 @@ async function finishR33Inline(issue,state){
   const p=syntheticEventPath('r33-finish');
   fs.writeFileSync(p,JSON.stringify({issue:{number:Number(issue.number)},comment:{id:Date.now(),body,created_at:new Date().toISOString(),user:{login:BOT}}},null,2)+'\n');
   try{
-    child.execFileSync(process.execPath,['scripts/MLS global dispatcher worker.cjs'],{cwd:process.cwd(),stdio:'inherit',env:{...process.env,GITHUB_EVENT_PATH:p}});
+    execDispatcherWorker(p);
   }finally{try{fs.unlinkSync(p)}catch{}}
   await report('r33','FINISHING',{issueNumber:Number(issue.number),assignmentId:state.assignmentId});
   return true;
