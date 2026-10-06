@@ -6,7 +6,7 @@
 var MLS_CANONICAL_R33_POLICY={claims:1,support:1,coverage:1};
 function unifiedR33CanonicalContext(body) {
   const article=unifiedR33ReconcileArticle(body.article,body.handoffEntry||{});
-  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{}).filter(unifiedR33SourceAutoAuditable);
+  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
   return {policy:MLS_CANONICAL_R33_POLICY,candidates:unifiedR33SourcePacket(candidates)};
 }
 // Cheap deterministic quarantine preflight. It performs no AI inference and no
@@ -20,7 +20,7 @@ function unifiedR33CanonicalPreflight(body,reason) {
   }catch(error){
     return {eligible:false,reason:String(error&&error.message||'CANONICAL_PREFLIGHT_INVALID_CONTEXT'),candidateCount:0,fetchableCandidateCount:0};
   }
-  const fetchable=candidates.filter(unifiedR33SourceAutoAuditable);
+  const fetchable=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
   const s=String(reason||"");
   if(!candidates.length)return {eligible:false,reason:"NO_REGISTERED_SOURCE_CANDIDATE",candidateCount:0,fetchableCandidateCount:0};
   if(s==="NO_REGISTERED_SOURCE_CANDIDATE")return {eligible:true,reason:"CANDIDATE_NOW_AVAILABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
@@ -58,7 +58,7 @@ function unifiedR33HandoffSourceText(entry) {
     return "";
   }).join(" ");
 }
-function unifiedR33SourceCandidates(article,handoffEntry) {
+function unifiedR33SourceCandidates(article,handoffEntry,options={}) {
   const lang=unifiedR33LanguageCode(article && article.language);
   const hints=Array.isArray(handoffEntry && handoffEntry.claims)?handoffEntry.claims.map(x=>typeof x==="string"?x:JSON.stringify(x)):[];
   const articleText=[
@@ -67,7 +67,7 @@ function unifiedR33SourceCandidates(article,handoffEntry) {
   ].filter(Boolean).join(" ");
   const articleTokens=unifiedR33Tokens(articleText);
   const handoffText=unifiedR33NormalizeText(unifiedR33HandoffSourceText(handoffEntry));
-  return (Array.isArray(MLS_R33_SOURCE_CATALOG)?MLS_R33_SOURCE_CATALOG:[]).map(raw=>{
+  const ranked=(Array.isArray(MLS_R33_SOURCE_CATALOG)?MLS_R33_SOURCE_CATALOG:[]).map(raw=>{
     const m=raw && raw.metadata || {};
     if(m.status && m.status!=="active") return null;
     if(String(m.authorityTier || "").toUpperCase()==="X") return null;
@@ -86,7 +86,9 @@ function unifiedR33SourceCandidates(article,handoffEntry) {
     if(url && handoffText.includes(url)) score+=220;
     if(raw.sourceId && handoffText.includes(unifiedR33NormalizeText(raw.sourceId))) score+=500;
     return {sourceId:String(raw.sourceId||""),metadata:m,score};
-  }).filter(Boolean).sort((a,b)=>b.score-a.score||a.sourceId.localeCompare(b.sourceId)).slice(0,16);
+  }).filter(Boolean);
+  const eligible=options.autoAuditableOnly?ranked.filter(unifiedR33SourceAutoAuditable):ranked;
+  return eligible.sort((a,b)=>b.score-a.score||a.sourceId.localeCompare(b.sourceId)).slice(0,16);
 }
 function unifiedR33ParseJson(text) {
   const raw=String(text || "").trim();
@@ -331,7 +333,7 @@ async function unifiedR33BuildDraft(env,body) {
   const finalArticle=unifiedR33ReconcileArticle(article,handoffEntry);
   const registeredCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry);
   if(!registeredCandidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"NO_REGISTERED_SOURCE_CANDIDATE"},200);
-  const candidates=registeredCandidates.filter(unifiedR33SourceAutoAuditable);
+  const candidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{autoAuditableOnly:true});
   if(!candidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE"},200);
 
   const packet=unifiedR33SourcePacket(candidates);
