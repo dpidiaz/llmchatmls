@@ -556,9 +556,13 @@ test('Unified main publishers serialize while branch-isolated R33 evidence seria
     assert.match(workflow,/cancel-in-progress: false/);
   }
   const evidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
+  const batchEvidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Batch Submit.yml','utf8');
   assert.match(evidenceWorkflow,/group: mls-unified-r33-/);
   assert.match(evidenceWorkflow,/github\.event\.inputs\.issue_number \|\| github\.event\.issue\.number/);
   assert.match(evidenceWorkflow,/cancel-in-progress: false/);
+  assert.match(batchEvidenceWorkflow,/group: mls-unified-r33-/);
+  assert.match(batchEvidenceWorkflow,/github\.event\.inputs\.issue_number/);
+  assert.match(batchEvidenceWorkflow,/cancel-in-progress: false/);
   const env={MLS_EDITORIAL_CHAT_KEY:'fixture'};
   await assert.rejects(()=>run('check',env,async()=>Response.json({githubGate:{state:'DEGRADED',retry_at:Date.now()+60000}})),/COOLDOWN/);
   assert.equal((await run('check',env,async()=>Response.json({githubGate:{state:'NORMAL'}}))).ok,true);
