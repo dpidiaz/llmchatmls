@@ -6,7 +6,7 @@
 var MLS_CANONICAL_R33_POLICY={claims:1,support:1,coverage:1};
 function unifiedR33CanonicalContext(body) {
   const article=unifiedR33ReconcileArticle(body.article,body.handoffEntry||{});
-  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{});
+  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{}).filter(unifiedR33SourceAutoAuditable);
   return {policy:MLS_CANONICAL_R33_POLICY,candidates:unifiedR33SourcePacket(candidates)};
 }
 // Cheap deterministic quarantine preflight. It performs no AI inference and no
@@ -20,11 +20,7 @@ function unifiedR33CanonicalPreflight(body,reason) {
   }catch(error){
     return {eligible:false,reason:String(error&&error.message||'CANONICAL_PREFLIGHT_INVALID_CONTEXT'),candidateCount:0,fetchableCandidateCount:0};
   }
-  const safeTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
-  const fetchable=candidates.filter(candidate=>{
-    const metadata=candidate&&candidate.metadata||{};
-    return safeTypes.has(String(metadata.sourceType||""))&&!!unifiedR33SafeSourceUrl(metadata.canonicalUrl);
-  });
+  const fetchable=candidates.filter(unifiedR33SourceAutoAuditable);
   const s=String(reason||"");
   if(!candidates.length)return {eligible:false,reason:"NO_REGISTERED_SOURCE_CANDIDATE",candidateCount:0,fetchableCandidateCount:0};
   if(s==="NO_REGISTERED_SOURCE_CANDIDATE")return {eligible:true,reason:"CANDIDATE_NOW_AVAILABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
@@ -115,6 +111,12 @@ function unifiedR33ReconcileArticle(article,handoffEntry) {
   next.language=base.language;
   next.languageName=base.languageName;
   return next;
+}
+function unifiedR33SourceAutoAuditable(candidate) {
+  const metadata=candidate&&candidate.metadata||{};
+  const type=String(metadata.sourceType||"");
+  const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
+  return autoTypes.has(type)&&!!unifiedR33SafeSourceUrl(metadata.canonicalUrl);
 }
 function unifiedR33SourcePacket(candidates) {
   return candidates.map(x=>({
@@ -327,8 +329,10 @@ async function unifiedR33BuildDraft(env,body) {
   if(!/^MLS-V\d{2}-\d{4}$/.test(code)||!contentPath.startsWith("content/")) return r44Json({error:"UNIFIED_R33_DRAFT_SCOPE_INVALID"},400);
   if(String(article && article.code || "").toUpperCase()!==code) return r44Json({error:"UNIFIED_R33_DRAFT_CODE_MISMATCH"},400);
   const finalArticle=unifiedR33ReconcileArticle(article,handoffEntry);
-  const candidates=unifiedR33SourceCandidates(finalArticle,handoffEntry);
-  if(!candidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"NO_REGISTERED_SOURCE_CANDIDATE"},200);
+  const registeredCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry);
+  if(!registeredCandidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"NO_REGISTERED_SOURCE_CANDIDATE"},200);
+  const candidates=registeredCandidates.filter(unifiedR33SourceAutoAuditable);
+  if(!candidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE"},200);
 
   const packet=unifiedR33SourcePacket(candidates);
   const prompt=[
@@ -336,6 +340,7 @@ async function unifiedR33BuildDraft(env,body) {
     "Return ONLY JSON. Never invent a sourceId, URL, quotation, page, locator, bibliographic fact, or source content.",
     "Enumerate ALL substantial externally verifiable claims actually asserted by ARTICLE. Do not omit a claim merely because no source fits.",
     "For EACH substantial claim, choose one sourceId from CANDIDATES only when the source metadata makes the match credible.",
+    "Every candidate below is auto-auditable: R33 can fetch its registered canonical URL and inspect source text. Do not infer support from sources outside CANDIDATES.",
     "If even one substantial claim cannot be credibly mapped, return NEEDS_CHAT_REVIEW.",
     "Do not create quotation claims. Do not treat illustrative examples or navigation links as independent substantial claims unless they assert a rule.",
     "Allowed claimType values: general, normative, orthography, regional_variation, historical.",
