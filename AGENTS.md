@@ -71,7 +71,7 @@ Fast Lane production cutover is complete. `MLS R44 Fast Lane siguiente` is an ac
 
 ## MLS Unified verification command
 
-For the exact command `MLS Unified siguiente`, read:
+For `MLS Unified siguiente` and the explicit-target form `MLS Unified siguiente N`, read:
 
 `docs/MLS Global Dispatcher/28 MLS Unified Verification Pipeline.md`
 
@@ -79,7 +79,9 @@ This command is **ACTIVE in production** and **CHAT ONLY — NO ChatGPT Work**. 
 
 Goal: move work toward canonical R33 `VERIFIED`, not merely R44 COMPLETE. Production activation was certified by a real +50 VERIFIED integration smoke. Gate policy: 5 → 100; intermediate 15/30/60 gates are optional diagnostics, not mandatory blockers.
 
-**Mandatory per-command throughput:** one pasted `MLS Unified siguiente` is a cumulative execution loop with `targetEntries = 100`. A 5-entry R33 microclaim or 5-entry R44 ticket is only an atomic unit; it is **not** the command boundary. After every safely completed claim, immediately continue with the next eligible Unified work in the same chat until at least 100 entries have been durably checkpointed/certified/integrated during that execution. Do **not** report the command as DONE at 5, 10, 15, etc. Stop below 100 only when fewer than 100 eligible entries genuinely remain or a verifiable technical/safety blocker prevents further safe work. Never prefetch and never hold overlapping leases merely to reach the target.
+**Mandatory per-command throughput:** the default pasted command `MLS Unified siguiente` uses `targetEntries = 100`. The explicit form `MLS Unified siguiente N` sets the cumulative target for **this chat execution only**, where `N` must be a multiple of 5 from 100 through 1000 inclusive. Examples: `MLS Unified siguiente 200`, `MLS Unified siguiente 500`, `MLS Unified siguiente 1000`. Never use this number to mutate global runner concurrency or low-level claim sizes.
+
+A 5-entry R33 microclaim or 5-entry R44 ticket is only an atomic unit; it is **not** the command boundary. After every safely completed claim, immediately continue with the next eligible Unified work in the same chat until at least `targetEntries` entries have been durably checkpointed/certified/integrated during that execution. Do **not** report the command as DONE below the parsed target. Stop below the target only when fewer eligible entries genuinely remain or a verifiable technical/safety blocker prevents further safe work. Never prefetch and never hold overlapping leases merely to reach the target.
 
 Priority order for a fresh Unified loop:
 
