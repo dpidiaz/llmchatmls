@@ -879,23 +879,34 @@ async function unifiedRunnerScheduled(env) {
     }
     if (runner.state !== "RUNNING") return {status:"SKIPPED",state:runner.state};
     if (!env.MLS_UNIFIED_RUNNERS) throw new Error("UNIFIED_RUNNER_BINDING_MISSING");
-    // Canonical reconciliation belongs to the secondary writer, never to wakeup.
-    // Only arm alarms here. Each logical runner executes in its own invocation,
-    // keeping D1/AI request budgets independent of the selected concurrency.
-    const results = [];
-    // Wake at most 25 objects here; each object wakes up to three peers in its
-    // own invocation, keeping the cron comfortably below FREE subrequest limits.
-    const roots=Math.min(25,runner.configured_runners);
-    for (let first=1;first<=roots;first+=5) {
-      results.push(...await Promise.all(Array.from({length:Math.min(5,roots-first+1)},async(_,offset)=>{
+
+    // Paid Workers path: wake each logical runner directly from the scheduler.
+    // Avoid recursive Durable Object fan-out, which can turn one nested exception
+    // into a Worker 1101 and incorrectly stop the entire Unified runner.
+    const scheduled=[],failures=[];
+    const desired=Math.max(1,Math.min(100,Number(runner.configured_runners)||1));
+    for (let first=1;first<=desired;first+=10) {
+      const settled=await Promise.all(Array.from({length:Math.min(10,desired-first+1)},async(_,offset)=>{
         const id=first+offset;
-        const stub=env.MLS_UNIFIED_RUNNERS.get(env.MLS_UNIFIED_RUNNERS.idFromName("runner-"+id));
-        const response=await stub.fetch("https://runner.internal/wake",{method:"POST",body:JSON.stringify({runnerId:id,wakeThrough:runner.configured_runners})});
-        if (!response.ok) throw new Error("UNIFIED_RUNNER_WAKE_FAILED");
-        return id;
-      })));
+        try{
+          const stub=env.MLS_UNIFIED_RUNNERS.get(env.MLS_UNIFIED_RUNNERS.idFromName("runner-"+id));
+          const response=await stub.fetch("https://runner.internal/wake",{method:"POST",body:JSON.stringify({runnerId:id})});
+          if(!response.ok)return {id,ok:false,error:"HTTP_"+response.status};
+          return {id,ok:true};
+        }catch(error){
+          return {id,ok:false,error:wikiErrorMessage(error)};
+        }
+      }));
+      for(const row of settled)(row.ok?scheduled:failures).push(row);
     }
-    return {status:"SCHEDULED",runners:runner.configured_runners};
+    if(failures.length){
+      await unifiedRunnerApplyMark(env,{
+        last_error:"UNIFIED_RUNNER_WAKE_PARTIAL: "+failures.slice(0,8).map(x=>x.id+":"+x.error).join(" | "),
+        last_step_at:new Date().toISOString(),
+        errorDelta:1
+      });
+    }
+    return {status:failures.length?"SCHEDULED_PARTIAL":"SCHEDULED",runners:desired,scheduled:scheduled.length,failed:failures.length,failures:failures.slice(0,20)};
   } catch (error) {
     await unifiedRunnerApplyMark(env,{state:"ERROR",last_error:wikiErrorMessage(error),last_step_at:new Date().toISOString(),errorDelta:1}).catch(function(){});
     throw error;
@@ -1028,7 +1039,7 @@ class UnifiedLogicalRunner {
   async fetch(request) {
     const body=await request.json();
     if (!Number.isInteger(body.runnerId) || body.runnerId<1 || body.runnerId>100) return new Response("Invalid runner",{status:400});
-    if (body.wakeThrough !== undefined && (!unifiedRunnerCount(body.wakeThrough) || body.runnerId>25 || body.runnerId>body.wakeThrough)) return new Response("Invalid fanout",{status:400});
+    if (body.wakeThrough !== undefined && !unifiedRunnerCount(body.wakeThrough)) return new Response("Invalid fanout",{status:400});
     const prior=await this.storage.get("runnerId");
     if (prior && prior!==body.runnerId) return new Response("Identity conflict",{status:409});
     if (!prior) await this.storage.put("runnerId",body.runnerId);
@@ -1038,11 +1049,6 @@ class UnifiedLogicalRunner {
     const wakeAt=Date.now()+1000;
     const existingAlarm=await this.storage.getAlarm();
     if (existingAlarm === null || Number(existingAlarm)>wakeAt) await this.storage.setAlarm(wakeAt);
-    for (let peer=body.runnerId+25;peer<=Number(body.wakeThrough||0);peer+=25) {
-      const stub=this.env.MLS_UNIFIED_RUNNERS.get(this.env.MLS_UNIFIED_RUNNERS.idFromName('runner-'+peer));
-      const response=await stub.fetch('https://runner.internal/wake',{method:'POST',body:JSON.stringify({runnerId:peer})});
-      if(!response.ok)throw new Error('UNIFIED_RUNNER_WAKE_FAILED');
-    }
     return new Response("Scheduled");
   }
   async alarm() {
