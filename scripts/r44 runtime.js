@@ -1,4 +1,4 @@
-var R44_POOL_URL = "https://raw.githubusercontent.com/dpidiaz/llmchatmls/main/MLS%20R32%20EDITORIAL/r44/pool-manifest.json";
+var R44_POOL_URL = "https://assets.internal/r44-primary/pool-manifest.json";
 var R44_BASE_COMMIT = "2961a29cfcb62caa9972e5dc5552037b001063a3";
 var R44_LEASE_MS = 5 * 60 * 1000;
 var R44_MAX_ACTIVE = 128;
@@ -33,7 +33,7 @@ async function r44PoolSeed(env) {
     if (!Number.isSafeInteger(ticketCount) || ticketCount < 1 || !Number.isSafeInteger(ticketSize) || ticketSize < 1) throw new Error("R44_POOL_META_INVALID");
     return {ticketCount,ticketSize};
   }
-  const response = await fetch(R44_POOL_URL, { cf: { cacheEverything: true, cacheTtl: 3600 } });
+  const response = await env.ASSETS.fetch(new Request(R44_POOL_URL));
   if (!response.ok) throw new Error("R44_POOL_FETCH_" + response.status);
   const text = await response.text();
   if (await r44Sha256Text(text) !== R44_POOL_SHA256) throw new Error("R44_POOL_HASH_MISMATCH");
@@ -133,11 +133,11 @@ async function r44Counts(env) {
 async function r44LoadEntry(env, entry) {
   const cached = await env.WIKI_DB.prepare("SELECT content_json,sha256 FROM r44_entry_cache WHERE code=?").bind(entry.code).first();
   if (cached && cached.sha256 === entry.sha256) return JSON.parse(cached.content_json);
-  const encodedPath = String(entry.path).split("/").map(encodeURIComponent).join("/");
-  const url = "https://raw.githubusercontent.com/dpidiaz/llmchatmls/" + R44_BASE_COMMIT + "/content/" + encodedPath;
-  const response = await fetch(url, { cf: { cacheEverything: true, cacheTtl: 86400 } });
+  const response = await env.ASSETS.fetch(new Request("https://assets.internal/r44-primary/" + entry.sha256.slice(0,2) + ".json"));
   if (!response.ok) throw new Error("R44_CONTEXT_FETCH_" + entry.code + "_" + response.status);
-  const text = await response.text();
+  const shard = await response.json();
+  const text = shard[entry.sha256];
+  if(typeof text!=="string")throw new Error("R44_CONTEXT_FETCH_" + entry.code + "_404");
   const hash = await r44Sha256Text(text);
   if (hash !== entry.sha256) throw new Error("R44_CONTEXT_HASH_MISMATCH_" + entry.code);
   JSON.parse(text);
@@ -678,7 +678,10 @@ async function unifiedRunnerStatus(request, env, ctx) {
   // Status is read-through against canonical GitHub authority even when D1 still has
   // write budget. This makes /runner reflect merged VERIFIED entries immediately
   // (bounded by canonicalAuthorityStatus' 5-minute cache) without mutating D1.
-  try{authorityStatus=await canonicalAuthorityStatus();}catch(_){}
+  // Machine control reads D1 only. Browser monitoring may request live authority.
+  if(new URL(request.url).pathname.includes("/browser/")){
+    try{authorityStatus=await canonicalAuthorityStatus();}catch(_){}
+  }
   return r44Json({ok:true,runner,r44,budget,lanes,githubGate:await unifiedRunnerGithubGateRead(env),canonical:await canonicalStatus(env,authorityStatus),freeOnly:true,chatCompatible:true,auth:{mode:auth.auth||"editorial-key",email:auth.email||null,aud:auth.aud||null},canonicalVerifiedAuthority:"MLS R32 EDITORIAL/evidence git/indexes/verified.json"});
 }
 function unifiedRunnerSeed(article) {
@@ -876,8 +879,7 @@ async function unifiedRunnerScheduled(env) {
     }
     if (runner.state !== "RUNNING") return {status:"SKIPPED",state:runner.state};
     if (!env.MLS_UNIFIED_RUNNERS) throw new Error("UNIFIED_RUNNER_BINDING_MISSING");
-    // A read-only grouped refresh retires entries only after canonical integration.
-    if (env.ASSETS) await canonicalRefreshVerified(env).catch(error=>unifiedRunnerApplyMark(env,{last_error:'Canonical status: '+wikiErrorMessage(error)}));
+    // Canonical reconciliation belongs to the secondary writer, never to wakeup.
     // Only arm alarms here. Each logical runner executes in its own invocation,
     // keeping D1/AI request budgets independent of the selected concurrency.
     const results = [];
@@ -937,6 +939,12 @@ async function handleUnifiedRunner(request, env, url, ctx) {
   }
   if (pathname === "/api/unified-runner/status" && request.method === "POST") return unifiedRunnerStatus(request,env,ctx);
   if (pathname === "/api/unified-runner/control" && request.method === "POST") return unifiedRunnerControl(request,env,ctx);
+  if (pathname === "/api/unified-runner/reconcile" && request.method === "POST") {
+    const auth=await unifiedRunnerAuthorize(request,env,ctx);
+    if(!auth.ok)return r44Json({error:auth.error},auth.status);
+    await canonicalRefreshVerified(env);
+    return r44Json({ok:true});
+  }
   if (pathname === "/api/unified-runner/github-gate" && request.method === "POST") return unifiedRunnerGithubGate(request,env,ctx);
   if (pathname === "/api/unified-runner/kick" && request.method === "POST") return unifiedRunnerKick(request,env,ctx);
   if (pathname === "/api/unified-runner/step" && request.method === "POST") return unifiedRunnerStepRequest(request,env,ctx);

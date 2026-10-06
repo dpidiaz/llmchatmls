@@ -488,3 +488,5 @@ Unified is DONE when the same visible command can be pasted into many disposable
 - Canonical VERIFIED count after smoke: **1,775**.
 - Production command: `MLS Unified siguiente`.
 - Historical `MLS siguiente` semantics remain unchanged.
+
+Cloudflare primary consolidation is specified in `docs/MLS Global Dispatcher/29 Cloudflare Primary Consolidation.md`. D1 receipt-based preparation does not require a GitHub handoff; canonical publication into `r33-unified:` still does. Deployment status is tracked separately from implementation.

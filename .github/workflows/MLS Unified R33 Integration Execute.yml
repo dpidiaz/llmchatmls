@@ -24,7 +24,7 @@ permissions:
 jobs:
   integrate:
     concurrency:
-      group: mls-unified-r33-integration
+      group: mls-unified-github-writer
       cancel-in-progress: false
     if: >-
       ${{ github.event_name == 'workflow_dispatch' ||
@@ -43,6 +43,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Check durable secondary writer cooldown
+        id: sink_guard
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: |
+          cp 'scripts/r44 sink guard.cjs' "$RUNNER_TEMP/mls-sink-guard.cjs"
+          node "$RUNNER_TEMP/mls-sink-guard.cjs" check
       - name: Validate leased Unified integration
         id: prep
         env:
@@ -206,3 +213,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SYNTHETIC_EVENT_PATH: ${{ steps.direct_finish.outputs.event_path }}
         run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+
+      - name: Preserve durable retry after writer failure
+        if: ${{ failure() && steps.sink_guard.outcome == 'success' }}
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: node "$RUNNER_TEMP/mls-sink-guard.cjs" degrade
