@@ -6,7 +6,7 @@
 var MLS_CANONICAL_R33_POLICY={claims:2,support:2,coverage:1,repair:1};
 function unifiedR33CanonicalContext(body) {
   const article=unifiedR33ReconcileArticle(body.article,body.handoffEntry||{});
-  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
+  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{},{repairUrlOnly:true});
   return {policy:MLS_CANONICAL_R33_POLICY,candidates:unifiedR33SourcePacket(candidates)};
 }
 // Cheap deterministic quarantine preflight. It performs no AI inference and no
@@ -20,7 +20,7 @@ function unifiedR33CanonicalPreflight(body,reason) {
   }catch(error){
     return {eligible:false,reason:String(error&&error.message||'CANONICAL_PREFLIGHT_INVALID_CONTEXT'),candidateCount:0,fetchableCandidateCount:0};
   }
-  const fetchable=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
+  const fetchable=unifiedR33SourceCandidates(article,body.handoffEntry||{},{repairUrlOnly:true});
   const s=String(reason||"");
   if(!candidates.length)return {eligible:false,reason:"NO_REGISTERED_SOURCE_CANDIDATE",candidateCount:0,fetchableCandidateCount:0};
   if(s==="NO_REGISTERED_SOURCE_CANDIDATE")return {eligible:true,reason:"CANDIDATE_NOW_AVAILABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
@@ -360,13 +360,13 @@ function unifiedR33EvidenceObject(args) {
     claims,links,conflicts:[],
     verification:{
       verifiedAt:now,reviewerType:"system",reviewer:"MLS Unified Cloudflare Runner",
-      verificationMethod:"automated_registered_source_fulltext_match_v3",evidenceSnapshotHash:"pending-preflight",runId
+      verificationMethod:"automated_registered_source_fulltext_match_v4_repair",evidenceSnapshotHash:"pending-preflight",runId
     },
     review:null,
     provenance:{
       generatedWithAI:true,
       model:[matcher.model,support.result&&support.result.model,coverage.result.model].filter(Boolean).join(" + "),
-      promptVersion:"R33-Unified-CF-3",runId,sourceOfTruth:"github",updatedAt:now
+      promptVersion:"R33-Unified-CF-4-Repair",runId,sourceOfTruth:"github",updatedAt:now
     }
   };
 }
