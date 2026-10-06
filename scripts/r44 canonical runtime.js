@@ -1,6 +1,7 @@
 // Canonical preparation only. The existing R33 gate/integration owns VERIFIED.
 var canonicalReadyEnvs=new WeakSet();
 var canonicalRecoveryInterval=5*60*1000;
+var canonicalRecoveryBatchSize=100;
 var canonicalStatusOverlayCache=new WeakMap();
 var canonicalAuthorityCache={expiresMs:0,status:null};
 async function canonicalAuthorityStatus(now=Date.now()){
@@ -9,10 +10,13 @@ async function canonicalAuthorityStatus(now=Date.now()){
   canonicalAuthorityCache={expiresMs:now+5*60*1000,status};
   return status;
 }
-// An allowlist: authorization/404, unsupported content and editorial rejection
-// are never treated as transient. Six total attempts per unchanged input.
+// Same-context recovery is deliberately narrow. Technical failures get at most
+// two retries. Source/editorial quarantines get one deterministic preflight and,
+// only when current registered context is usable, one R33 retry. Context changes
+// remain independently recoverable. Six automatic releases is the lifetime cap.
 var canonicalTransientSql="(q.last_error='UNIFIED_R33_DRAFT_JSON_INVALID' OR q.last_error='SOURCE_FETCH_FAILED' OR q.last_error IN ('SOURCE_FETCH_HTTP_408','SOURCE_FETCH_HTTP_429','SOURCE_FETCH_HTTP_500','SOURCE_FETCH_HTTP_502','SOURCE_FETCH_HTTP_503','SOURCE_FETCH_HTTP_504') OR q.last_error IN ('CANONICAL_ASSET_500','CANONICAL_ASSET_502','CANONICAL_ASSET_503','CANONICAL_ASSET_504'))";
-var canonicalRecoverableSql="r.recoveries<6 AND (r.context_hash<>r.failed_context_hash OR ("+canonicalTransientSql+" AND q.attempts<6 AND r.technical_retries<2))";
+var canonicalReviewSql="(q.last_error='NO_REGISTERED_SOURCE_CANDIDATE' OR q.last_error LIKE 'SOURCE_%' OR q.last_error LIKE 'MATCHER_%' OR q.last_error LIKE 'CLAIM_%' OR q.last_error LIKE 'COVERAGE_%' OR q.last_error LIKE 'SOURCE_SUPPORT_%' OR q.last_error='NEEDS_CHAT_REVIEW')";
+var canonicalRecoverableSql="r.recoveries<6 AND (r.context_hash<>r.failed_context_hash OR ("+canonicalTransientSql+" AND q.attempts<6 AND r.technical_retries<2) OR ("+canonicalReviewSql+" AND q.attempts<6 AND r.technical_retries<1))";
 function canonicalQuarantineCategory(reason){
   const s=String(reason||'');
   if(/HASH_MISMATCH/.test(s))return 'hash_context';
@@ -67,18 +71,43 @@ async function canonicalSeed(env){
   ]);
 }
 async function canonicalRecoverQuarantine(env,now=Date.now()){
-  // One global gate, fenced in D1, across all logical runners. No AI here.
+  // One global gate across all runners. The sweep itself uses no AI and no
+  // source fetch. At most one canonical 100-entry batch is reconsidered per gate.
   const gate=await env.WIKI_DB.prepare('UPDATE mls_canonical_recovery_clock SET next_ms=? WHERE id=1 AND next_ms<=? RETURNING id').bind(now+canonicalRecoveryInterval,now).first();
   if(!gate)return;
-  const rows=await env.WIKI_DB.prepare(`SELECT q.code,q.attempts,q.last_error,r.* FROM mls_canonical_queue q JOIN mls_canonical_recovery r USING(code)
+  const rows=await env.WIKI_DB.prepare(`SELECT q.code,q.page,q.input_hash,q.attempts,q.last_error,r.* FROM mls_canonical_queue q JOIN mls_canonical_recovery r USING(code)
     WHERE q.revision=(SELECT revision FROM mls_canonical_meta WHERE id=1) AND q.state='QUARANTINED'
     AND q.lease_token IS NULL AND q.expires_ms=0 AND q.retry_ms<=? AND ${canonicalRecoverableSql}
-    ORDER BY q.code LIMIT 5`).bind(now).all();
+    ORDER BY q.code LIMIT ${canonicalRecoveryBatchSize}`).bind(now).all();
+  const pageCache=new Map();
   for(const row of rows.results||[]){
     const changed=row.context_hash!==row.failed_context_hash;
-    const delay=canonicalRecoveryInterval*Math.pow(2,Math.min(row.technical_retries,4));
-    // The history INSERT is the transaction's compare-and-swap guard. A stale
-    // selection cannot reopen a completed row or overwrite a newer context.
+    const category=canonicalQuarantineCategory(row.last_error);
+    if(!changed&&(category==='sources_context'||category==='editorial_review')){
+      let packet=pageCache.get(row.page);
+      if(!packet){
+        try{packet=await canonicalAsset(env,row.revision+'-'+row.page+'.json')}catch(_){packet=[]}
+        pageCache.set(row.page,packet);
+      }
+      const item=(packet||[]).find(x=>x.input&&x.input.code===row.code&&x.inputHash===row.input_hash);
+      let preflight={eligible:false,reason:'CANONICAL_PREFLIGHT_CONTEXT_MISSING'};
+      if(item&&await canonicalInputHash(item.input)===row.input_hash){
+        preflight=unifiedR33CanonicalPreflight(item.input,row.last_error);
+      }
+      if(!preflight.eligible){
+        // Mark this same-context review as consumed so it cannot spin forever.
+        // A later material context change still bypasses this fence.
+        await env.WIKI_DB.prepare(`UPDATE mls_canonical_recovery
+          SET technical_retries=CASE WHEN technical_retries<1 THEN 1 ELSE technical_retries END
+          WHERE code=? AND context_hash=failed_context_hash`).bind(row.code).run();
+        continue;
+      }
+    }
+    const delay=!changed&&category==='technical_transient'
+      ?canonicalRecoveryInterval*Math.pow(2,Math.min(row.technical_retries,4))
+      :0;
+    // The history INSERT is the compare-and-swap guard. A stale selection cannot
+    // reopen a completed row or overwrite a newer context.
     await env.WIKI_DB.batch([
       env.WIKI_DB.prepare(`INSERT OR IGNORE INTO mls_canonical_recovery_history
         SELECT q.code,r.recoveries+1,?1,q.last_error,q.attempts,r.failed_context_hash,r.context_hash
@@ -146,7 +175,7 @@ async function canonicalStatus(env,authorityStatus=null){
   const byCategory={technical_transient:0,sources_context:0,editorial_review:0,hash_context:0,other:0};
   let recoverable=0;
   const byReason=(groups.results||[]).map(row=>{const category=canonicalQuarantineCategory(row.last_error);byCategory[category]+=Number(row.n);recoverable+=Number(row.recoverable);return {...row,category}});
-  const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:5,intervalMs:canonicalRecoveryInterval};
+  const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:canonicalRecoveryInterval};
   const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:meta.waiting_handoff,prepared:counts.PREPARED||0,counts,quarantine,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
   if(authorityCodes)canonicalStatusOverlayCache.set(env,{etag:authorityEtag,expiresMs:Date.now()+5*60*1000,value});
   return value;
