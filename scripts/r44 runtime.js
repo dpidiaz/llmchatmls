@@ -1032,7 +1032,12 @@ class UnifiedLogicalRunner {
     const prior=await this.storage.get("runnerId");
     if (prior && prior!==body.runnerId) return new Response("Identity conflict",{status:409});
     if (!prior) await this.storage.put("runnerId",body.runnerId);
-    if (await this.storage.getAlarm() === null) await this.storage.setAlarm(Date.now()+1000);
+    // A manual/cron kick must wake a runner that is sleeping on the five-minute
+    // NO_WORK backoff. Keeping a later existing alarm would make "100 runners"
+    // mostly nominal. Never delay an earlier alarm; only pull a later one forward.
+    const wakeAt=Date.now()+1000;
+    const existingAlarm=await this.storage.getAlarm();
+    if (existingAlarm === null || Number(existingAlarm)>wakeAt) await this.storage.setAlarm(wakeAt);
     for (let peer=body.runnerId+25;peer<=Number(body.wakeThrough||0);peer+=25) {
       const stub=this.env.MLS_UNIFIED_RUNNERS.get(this.env.MLS_UNIFIED_RUNNERS.idFromName('runner-'+peer));
       const response=await stub.fetch('https://runner.internal/wake',{method:'POST',body:JSON.stringify({runnerId:peer})});
