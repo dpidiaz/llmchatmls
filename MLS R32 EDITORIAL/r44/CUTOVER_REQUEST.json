@@ -1,6 +1,6 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-06T00:52:00.000Z",
+  "requestedAt": "2026-10-06T01:03:00.000Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
   "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Remove canonical quarantine time throttle: immediate crash-safe single-flight 100-entry sweeps, preserving per-entry retry fences and R44/PREPARED/VERIFIED",
-  "retryGeneration": 33,
+  "retryReason": "Canonical quarantine entries become immediately eligible while preserving bounded retry fences and terminal safety",
+  "retryGeneration": 34,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
