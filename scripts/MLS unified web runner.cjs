@@ -7,7 +7,6 @@ const child=require('node:child_process');
 
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
 const unified=require('../MLS R32 EDITORIAL/unified command.cjs');
-const PREPARED_DRAIN=require('../MLS R32 EDITORIAL/prepared drain.cjs').load();
 
 const REPOSITORY=String(process.env.GITHUB_REPOSITORY||'');
 const TOKEN=String(process.env.GITHUB_TOKEN||'');
@@ -550,10 +549,14 @@ async function dispatchR33(issue,state){
   const handoffEntry=(ticket.entries||[]).find(x=>String(x.code||'').toUpperCase()===code);
   if(!handoffEntry)fail('UNIFIED_WEB_HANDOFF_ENTRY_MISSING',code);
   const existing=await githubJsonAt(evidencePath,state.branch,{optional:true});
-  const draft=await cf(PREPARED_DRAIN.has(code)?'/api/unified-runner/prepared-evidence':'/api/unified-runner/r33-evidence',{
+  const draft=await cf('/api/unified-runner/prepared-evidence',{
     code,contentPath,article,handoffEntry,currentEvidenceRevision:Number(existing?.evidenceRevision||0),
     runId:'MLS-UNIFIED-WEB-'+String(process.env.GITHUB_RUN_ID||Date.now())
   });
+  if(draft.reason==='PREPARED_CONTEXT_MISMATCH_OR_MISSING'){
+    await report('r33','WAITING_PREPARATION',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:draft.reason,pauseRunner:false});
+    return;
+  }
   if(draft.status!=='MATCH'){
     const reviewPayload={assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,code,reason:draft.reason||'NEEDS_CHAT_REVIEW',confidence:draft.confidence??null,sourceId:draft.sourceId||null,rationale:draft.rationale||null};
     const already=await recentMarker(issue.number,REVIEW_MARKER,p=>p.assignmentId===state.assignmentId&&String(p.code||'')===code,365*24*60*60*1000);
@@ -591,6 +594,9 @@ async function run(){
     console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:Number(gate.retry_at||0),targetEntries:unified.EXECUTION_TARGET_ENTRIES,kick:kicked.result||null}));
     return;
   }
+
+  // Secondary reconciliation may fail without blocking independently scheduled D1 work.
+  await cf('/api/unified-runner/reconcile');
 
   if(status.lanes?.r33?.issue_number){
     const hintedR33=await resolveAssignment('r33',status.lanes.r33);

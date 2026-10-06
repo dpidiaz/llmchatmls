@@ -20,7 +20,8 @@ function harness() {
     };
     return {bind(...p){assert(p.length<=100);params=p;return this},async run(){return run(false)},async all(){return {results:run(true)}},async first(){return run(true)[0]||null}};
   },async batch(statements){db.exec('BEGIN');try{const out=[];for(const s of statements)out.push(await s.run());db.exec('COMMIT');return out}catch(e){db.exec('ROLLBACK');throw e}}}};
-  const context=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Date,Map,Set,JSON,fetch:async()=>new Response(fs.readFileSync(POOL_PATH))});
+  env.ASSETS={fetch:async()=>new Response(fs.readFileSync(POOL_PATH))};
+  const context=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Request,Date,Map,Set,JSON,fetch:async()=>{throw Error('GitHub must not be used')}});
   vm.runInContext(RUNTIME,context);
   return {db,env,r:context,reset(){queries=0},get queries(){return queries},interrupt(n){failAt=writes+n}};
 }

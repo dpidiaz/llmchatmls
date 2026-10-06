@@ -28,6 +28,7 @@ function canonicalQuarantineCategory(reason){
 async function canonicalEnsure(env){
   if(canonicalReadyEnvs.has(env))return;
   await env.WIKI_DB.batch([
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_canonical_durable_inputs(code TEXT PRIMARY KEY,input_hash TEXT NOT NULL,input_json TEXT NOT NULL,receipt_sha256 TEXT NOT NULL)"),
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_canonical_queue(code TEXT PRIMARY KEY,input_hash TEXT NOT NULL,page INTEGER NOT NULL,revision TEXT NOT NULL,state TEXT NOT NULL DEFAULT 'PENDING',batch_id TEXT,lease_token TEXT,expires_ms INTEGER NOT NULL DEFAULT 0,attempts INTEGER NOT NULL DEFAULT 0,retry_ms INTEGER NOT NULL DEFAULT 0,result_json TEXT,last_error TEXT)"),
     env.WIKI_DB.prepare("CREATE INDEX IF NOT EXISTS mls_canonical_ready ON mls_canonical_queue(revision,state,retry_ms)"),
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_canonical_meta(id INTEGER PRIMARY KEY CHECK(id=1),revision TEXT NOT NULL,pending INTEGER NOT NULL,waiting_handoff INTEGER NOT NULL)"),
@@ -56,19 +57,61 @@ async function canonicalSeed(env){
       SELECT json_extract(value,'$.code'),json_extract(value,'$.inputHash')||':'||COALESCE(json_extract(value,'$.contextHash'),''),
         COALESCE((SELECT input_hash FROM mls_canonical_queue WHERE code=json_extract(value,'$.code')),json_extract(value,'$.inputHash'))||':'||COALESCE(json_extract(value,'$.contextHash'),'')
       FROM json_each(?1) WHERE NOT EXISTS(SELECT 1 FROM mls_canonical_meta WHERE id=1 AND revision=?2)
-      ON CONFLICT(code) DO UPDATE SET context_hash=excluded.context_hash`).bind(JSON.stringify(manifest.rows),manifest.revision),
-    env.WIKI_DB.prepare(`INSERT INTO mls_canonical_queue(code,input_hash,page,revision)
-      SELECT json_extract(value,'$.code'),json_extract(value,'$.inputHash'),json_extract(value,'$.page'),?2 FROM json_each(?1)
+      ON CONFLICT(code) DO UPDATE SET context_hash=CASE WHEN code IN (SELECT code FROM mls_canonical_durable_inputs) THEN context_hash ELSE excluded.context_hash END`).bind(JSON.stringify(manifest.rows),manifest.revision),
+    env.WIKI_DB.prepare(`INSERT INTO mls_canonical_queue(code,input_hash,page,revision,state)
+      SELECT json_extract(value,'$.code'),json_extract(value,'$.inputHash'),json_extract(value,'$.page'),?2,
+        CASE WHEN json_extract(value,'$.waiting')=1 THEN 'WAITING_HANDOFF' ELSE 'PENDING' END FROM json_each(?1)
       WHERE NOT EXISTS(SELECT 1 FROM mls_canonical_meta WHERE id=1 AND revision=?2)
-      ON CONFLICT(code) DO UPDATE SET input_hash=CASE WHEN state IN ('PREPARED','VERIFIED') THEN input_hash ELSE excluded.input_hash END,page=excluded.page,revision=excluded.revision,
-      state=CASE WHEN state IN ('PREPARED','VERIFIED','QUARANTINED') OR input_hash=excluded.input_hash THEN state ELSE 'PENDING' END,
-      result_json=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash THEN result_json ELSE NULL END,
-      lease_token=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash THEN lease_token ELSE NULL END,
-      expires_ms=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash THEN expires_ms ELSE 0 END,
-      attempts=CASE WHEN state IN ('PREPARED','VERIFIED','QUARANTINED') OR input_hash=excluded.input_hash THEN attempts ELSE 0 END,
-      retry_ms=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash THEN retry_ms ELSE 0 END`).bind(JSON.stringify(manifest.rows),manifest.revision),
+      ON CONFLICT(code) DO UPDATE SET input_hash=CASE WHEN state IN ('PREPARED','VERIFIED') OR code IN (SELECT code FROM mls_canonical_durable_inputs) THEN input_hash ELSE excluded.input_hash END,
+      page=CASE WHEN code IN (SELECT code FROM mls_canonical_durable_inputs) THEN -1 ELSE excluded.page END,revision=excluded.revision,
+      state=CASE WHEN state IN ('PREPARED','VERIFIED','QUARANTINED') OR input_hash=excluded.input_hash OR code IN (SELECT code FROM mls_canonical_durable_inputs) THEN state ELSE excluded.state END,
+      result_json=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash OR code IN (SELECT code FROM mls_canonical_durable_inputs) THEN result_json ELSE NULL END,
+      lease_token=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash OR code IN (SELECT code FROM mls_canonical_durable_inputs) THEN lease_token ELSE NULL END,
+      expires_ms=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash OR code IN (SELECT code FROM mls_canonical_durable_inputs) THEN expires_ms ELSE 0 END,
+      attempts=CASE WHEN state IN ('PREPARED','VERIFIED','QUARANTINED') OR input_hash=excluded.input_hash OR code IN (SELECT code FROM mls_canonical_durable_inputs) THEN attempts ELSE 0 END,
+      retry_ms=CASE WHEN state IN ('PREPARED','VERIFIED') OR input_hash=excluded.input_hash OR code IN (SELECT code FROM mls_canonical_durable_inputs) THEN retry_ms ELSE 0 END`).bind(JSON.stringify(manifest.rows),manifest.revision),
     env.WIKI_DB.prepare('INSERT OR REPLACE INTO mls_canonical_meta VALUES(1,?,?,?)').bind(manifest.revision,manifest.pending,manifest.waitingHandoff)
   ]);
+}
+// Promote committed receipts through the same allocator. A crash before this
+// transaction leaves WAITING_HANDOFF discoverable; replay cannot create a second job.
+async function canonicalIngestReceipts(env){
+  const rows=await env.WIKI_DB.prepare(`SELECT r.*,e.source_json,t.ordinal_start,t.entries_json
+    FROM mls_canonical_queue q JOIN r44_receipts r USING(code)
+    JOIN r44_entries e ON e.ticket_id=r.ticket_id AND e.code=r.code
+    JOIN r44_tickets t ON t.ticket_id=r.ticket_id
+    JOIN r44_ticket_progress p ON p.ticket_id=r.ticket_id
+    WHERE q.state='WAITING_HANDOFF' AND p.state='COMPLETE'
+    ORDER BY q.code LIMIT 5`).all();
+  for(const row of rows.results||[]){
+    if(await r44Sha256Text(row.payload_json)!==row.payload_sha256 || await r44Sha256Text(row.receipt_json)!==row.receipt_sha256)
+      throw Error('CANONICAL_RECEIPT_HASH_MISMATCH_'+row.code);
+    const response=await env.ASSETS.fetch(new Request('https://assets.internal/canonical-input/'+row.code+'.json'));
+    if(!response.ok)throw Error('CANONICAL_ASSET_'+response.status);
+    const base=await response.json(),raw=JSON.parse(row.payload_json),source=JSON.parse(row.source_json);
+    if(base.code!==row.code||source.sha256!==row.source_sha256)throw Error('CANONICAL_CONTEXT_HASH_MISMATCH_'+row.code);
+    const input={...base,handoffEntry:{code:row.code,outcome:raw.outcome,
+      source:{path:'content/'+String(source.path).replace(/^content\//,''),sha256:source.sha256},
+      correctedContent:raw.outcome==='CORRECTED'?raw.correctedContent:null,
+      evidence:raw.evidence||null,sources:raw.sources||[],claims:raw.claims||[],notes:String(raw.notes||''),
+      ordinal:Number(row.ordinal_start)+JSON.parse(row.entries_json).findIndex(e=>e.code===row.code)}};
+    const hash=await canonicalInputHash(input),context=hash+':'+await r44Sha256Text(r44Stable(unifiedR33CanonicalContext(input)));
+    await env.WIKI_DB.batch([
+      env.WIKI_DB.prepare(`INSERT INTO mls_canonical_durable_inputs SELECT ?,?,?,?
+        WHERE EXISTS(SELECT 1 FROM mls_canonical_queue WHERE code=? AND state='WAITING_HANDOFF')
+        ON CONFLICT(code) DO NOTHING`).bind(row.code,hash,JSON.stringify(input),row.receipt_sha256,row.code),
+      env.WIKI_DB.prepare(`UPDATE mls_canonical_recovery SET context_hash=?,failed_context_hash=? WHERE code=?
+        AND EXISTS(SELECT 1 FROM mls_canonical_queue WHERE code=? AND state='WAITING_HANDOFF')`).bind(context,context,row.code,row.code),
+      env.WIKI_DB.prepare(`UPDATE mls_canonical_queue SET state='PENDING',input_hash=?,page=-1
+        WHERE code=? AND state='WAITING_HANDOFF'
+        AND EXISTS(SELECT 1 FROM mls_canonical_durable_inputs WHERE code=? AND input_hash=?)`).bind(hash,row.code,row.code,hash)
+    ]);
+  }
+}
+async function canonicalPacket(env,row){
+  if(row.page!==-1)return canonicalAsset(env,row.revision+'-'+row.page+'.json');
+  const saved=await env.WIKI_DB.prepare('SELECT input_json,input_hash FROM mls_canonical_durable_inputs WHERE code=?').bind(row.code).first();
+  return saved?[{inputHash:saved.input_hash,input:JSON.parse(saved.input_json)}]:[];
 }
 async function canonicalRecoverQuarantine(env,now=Date.now()){
   // No time throttle: the clock is only a crash-safe single-flight mutex.
@@ -87,10 +130,11 @@ async function canonicalRecoverQuarantine(env,now=Date.now()){
     const changed=row.context_hash!==row.failed_context_hash;
     const category=canonicalQuarantineCategory(row.last_error);
     if(!changed&&(category==='sources_context'||category==='editorial_review')){
-      let packet=pageCache.get(row.page);
+      const pageKey=row.page===-1?row.code:row.page;
+      let packet=pageCache.get(pageKey);
       if(!packet){
-        try{packet=await canonicalAsset(env,row.revision+'-'+row.page+'.json')}catch(_){packet=[]}
-        pageCache.set(row.page,packet);
+        try{packet=await canonicalPacket(env,row)}catch(_){packet=[]}
+        pageCache.set(pageKey,packet);
       }
       const item=(packet||[]).find(x=>x.input&&x.input.code===row.code&&x.inputHash===row.input_hash);
       let preflight={eligible:false,reason:'CANONICAL_PREFLIGHT_CONTEXT_MISSING'};
@@ -181,7 +225,7 @@ async function canonicalStatus(env,authorityStatus=null){
   let recoverable=0;
   const byReason=(groups.results||[]).map(row=>{const category=canonicalQuarantineCategory(row.last_error);byCategory[category]+=Number(row.n);recoverable+=Number(row.recoverable);return {...row,category}});
   const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:0,mode:'IMMEDIATE_SINGLE_FLIGHT'};
-  const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:meta.waiting_handoff,prepared:counts.PREPARED||0,counts,quarantine,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
+  const value={initialized:true,claimable:Number(eligible.n),pending:Number.isFinite(Number(authorityStatus?.remaining))?Number(authorityStatus.remaining):meta.pending,waitingHandoff:counts.WAITING_HANDOFF||0,prepared:counts.PREPARED||0,counts,quarantine,batchSize:100,verifiedAuthority:'github-main-verified-index',readThroughAuthority:!!authorityCodes,reconciliationPending};
   if(authorityCodes)canonicalStatusOverlayCache.set(env,{etag:authorityEtag,expiresMs:Date.now()+5*60*1000,value});
   return value;
 }
@@ -196,6 +240,7 @@ async function canonicalPrepared(env,body){
 }
 async function canonicalStep(env){
   await canonicalSeed(env);
+  await canonicalIngestReceipts(env);
   await canonicalRecoverQuarantine(env);
   const now=Date.now(),batch=crypto.randomUUID(),token=crypto.randomUUID();
   // A batch contains 100 available entries, consumed across independent alarms to
@@ -230,7 +275,7 @@ async function canonicalStep(env){
     if(!saved[1].results?.length)throw Error('CANONICAL_LEASE_LOST');
   };
   try{
-    const packet=await canonicalAsset(env,row.revision+'-'+row.page+'.json');
+    const packet=await canonicalPacket(env,row);
     const item=packet.find(x=>x.input.code===row.code&&x.inputHash===row.input_hash);
     if(!item||await canonicalInputHash(item.input)!==row.input_hash)throw Error('CANONICAL_CONTEXT_HASH_MISMATCH_'+row.code);
     const response=await unifiedR33BuildDraft(env,{...item.input,runId:'CANONICAL-'+row.batch_id});

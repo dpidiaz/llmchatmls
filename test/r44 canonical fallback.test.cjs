@@ -292,3 +292,98 @@ test('canonical status reads through GitHub authority without mutating D1',async
   assert.match(runtime,/try\{authorityStatus=await canonicalAuthorityStatus\(\);\}catch\(_\)\{\}/);
   assert.match(runtime,/canonicalStatus\(env,authorityStatus\)/);
 });
+
+async function receiptPrimaryFixture(h){
+  await setup(h,1);
+  const entries=JSON.parse(h.db.prepare('SELECT entries_json FROM r44_tickets').get().entries_json);
+  for(const entry of entries){const old=entry.code;entry.code=old.replace('MLS-V1-','MLS-V01-');h.db.prepare('UPDATE r44_entries SET code=?,source_json=? WHERE code=?').run(entry.code,JSON.stringify(entry),old)}
+  h.db.prepare('UPDATE r44_tickets SET entries_json=?').run(JSON.stringify(entries));
+  const rows=entries.map(e=>({code:e.code,inputHash:'waiting',contextHash:'waiting',page:-1,waiting:true}));
+  h.env.ASSETS={async fetch(req){
+    const url=new URL(req.url);
+    if(url.pathname.endsWith('/manifest.json'))return Response.json({revision:'primary',pending:5,waitingHandoff:5,rows});
+    const code=url.pathname.split('/').at(-1).replace('.json','');
+    return Response.json({code,contentPath:'content/fixture.json',article:{code,articleMarkdown:'fixture'},currentEvidenceRevision:0});
+  }};
+  h.r.fetch=async()=>{throw Error('GitHub 403 Secondary Rate Limit')};
+  h.r.unifiedR33BuildDraft=async(_env,input)=>Response.json({status:'MATCH',evidence:{code:input.code}});
+  const claim=await h.r.r44Claim(h.env,'receipt-worker','receipt-claim');
+  const packet=entry=>({ticketId:'T1',workerId:'receipt-worker',leaseToken:claim.ticket.lease_token,leaseGeneration:claim.ticket.leaseGeneration,idempotencyKey:'receipt:'+entry.code,entry:{code:entry.code,outcome:'PASS_NO_CHANGE'}});
+  return {entries,packet};
+}
+
+test('GitHub 403: COMPLETE D1 receipts prepare once without a published handoff',async()=>{
+  const h=harness(),{entries,packet}=await receiptPrimaryFixture(h);
+  for(const entry of entries.slice(0,4))await h.r.r44Checkpoint(h.env,packet(entry));
+  assert.equal((await h.r.canonicalStep(h.env)).status,'NO_WORK','partial ticket cannot enter R33');
+  await h.r.r44Checkpoint(h.env,packet(entries[4]));
+  const results=await Promise.all(entries.map(()=>h.r.canonicalStep(h.env)));
+  assert(results.every(x=>x.status==='CANONICAL_PREPARED'));
+  assert.equal(new Set(results.map(x=>x.code)).size,5);
+  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM mls_canonical_durable_inputs').get().n,5);
+  assert.equal((await h.r.canonicalStep(h.env)).status,'NO_WORK');
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='VERIFIED'").get().n,0);
+  const stored=h.db.prepare('SELECT input_json FROM mls_canonical_durable_inputs LIMIT 1').get();
+  assert.equal((await h.r.canonicalPrepared(h.env,JSON.parse(stored.input_json))).status,'MATCH');
+});
+
+test('receipt promotion crash rolls back and retry recovers; tampering never prepares',async()=>{
+  const h=harness(),{entries,packet}=await receiptPrimaryFixture(h);
+  for(const entry of entries)await h.r.r44Checkpoint(h.env,packet(entry));
+  await h.r.canonicalSeed(h.env);
+  h.db.exec("CREATE TRIGGER crash_primary BEFORE UPDATE OF state ON mls_canonical_queue WHEN NEW.state='PENDING' BEGIN SELECT RAISE(ABORT,'fixture crash'); END");
+  await assert.rejects(()=>h.r.canonicalIngestReceipts(h.env),/fixture crash/);
+  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM mls_canonical_durable_inputs').get().n,0);
+  h.db.exec('DROP TRIGGER crash_primary');
+  await h.r.canonicalIngestReceipts(h.env);
+  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM mls_canonical_durable_inputs').get().n,5);
+  const h2=harness(),f2=await receiptPrimaryFixture(h2);
+  for(const entry of f2.entries)await h2.r.r44Checkpoint(h2.env,f2.packet(entry));
+  await h2.r.canonicalSeed(h2.env);
+  assert.throws(()=>h2.db.prepare('UPDATE r44_receipts SET payload_sha256=?').run('tampered'),/RECEIPT_IMMUTABLE/);
+  // Simulate corrupt storage independently of the API's immutability guard.
+  h2.db.exec('DROP TRIGGER r44_receipt_immutable');
+  h2.db.prepare('UPDATE r44_receipts SET payload_sha256=?').run('tampered');
+  await assert.rejects(()=>h2.r.canonicalIngestReceipts(h2.env),/RECEIPT_HASH_MISMATCH/);
+  assert.equal(h2.db.prepare('SELECT COUNT(*) n FROM mls_canonical_durable_inputs').get().n,0);
+});
+
+test('scheduled wakeup never consults unavailable GitHub authority',async()=>{
+  const h=harness();await setup(h,0);let wakes=0;
+  h.env.ASSETS={};
+  h.r.canonicalRefreshVerified=async()=>{throw Error('must not read GitHub')};
+  h.env.MLS_UNIFIED_RUNNERS={idFromName:x=>x,get:()=>({fetch:async()=>{wakes++;return new Response('{}')}})};
+  assert.equal((await h.r.unifiedRunnerScheduled(h.env)).status,'SCHEDULED');
+  assert(wakes>0);
+});
+
+
+test('cold R44 context uses hash-checked Cloudflare Assets then D1, never GitHub',async()=>{
+  const h=harness();await setup(h,0);
+  h.r=vm.createContext({crypto:globalThis.crypto,TextEncoder,Response,Request,Date,Map,Set,JSON});
+  vm.runInContext(RUNTIME,h.r);
+  const text=JSON.stringify({code:'MLS-V01-0001',articleMarkdown:'frozen'}),sha=await h.r.r44Sha256Text(text);
+  let reads=0;h.r.fetch=async()=>{throw Error('GitHub 403')};
+  h.env.ASSETS={fetch:async()=>{reads++;return Response.json({[sha]:text})}};
+  const entry={code:'MLS-V01-0001',sha256:sha,path:'unused'};
+  assert.equal((await h.r.r44LoadEntry(h.env,entry)).code,entry.code);
+  assert.equal((await h.r.r44LoadEntry(h.env,entry)).code,entry.code);
+  assert.equal(reads,1);
+  h.db.exec('DELETE FROM r44_entry_cache');
+  h.env.ASSETS={fetch:async()=>Response.json({[sha]:text+'tampered'})};
+  await assert.rejects(()=>h.r.r44LoadEntry(h.env,entry),/HASH_MISMATCH/);
+  assert.equal(h.db.prepare('SELECT COUNT(*) n FROM r44_entry_cache').get().n,0);
+});
+
+test('all Unified publishers serialize; durable cooldown blocks before publication',async()=>{
+  const {run}=require('../scripts/r44 sink guard.cjs');
+  for(const name of ['MLS Unified Web Runner','MLS Unified R44 R33 Handoff','MLS Unified R33 Evidence Submit','MLS Unified R33 Integration Execute']){
+    const workflow=fs.readFileSync('.github/workflows/'+name+'.yml','utf8');
+    assert.match(workflow,/group: mls-unified-github-writer/);
+    assert.match(workflow,/cancel-in-progress: false/);
+  }
+  const env={MLS_EDITORIAL_CHAT_KEY:'fixture'};
+  await assert.rejects(()=>run('check',env,async()=>Response.json({githubGate:{state:'DEGRADED',retry_at:Date.now()+60000}})),/COOLDOWN/);
+  assert.equal((await run('check',env,async()=>Response.json({githubGate:{state:'NORMAL'}}))).ok,true);
+  await assert.rejects(()=>run('check',env,async()=>new Response('',{status:503})),/GATE_UNAVAILABLE/);
+});

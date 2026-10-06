@@ -61,6 +61,7 @@ function injectR44(code) {
 }
 if (require.main === module) {
   require('./r44 full pending corpus.cjs').validate();
+  require("./r44 primary assets.cjs").build();
   require("./r44 canonical assets.cjs").build();
   const before = fs.readFileSync(TARGET, "utf8");
   const after = injectR44(before);

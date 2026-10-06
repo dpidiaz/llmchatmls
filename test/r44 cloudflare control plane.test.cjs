@@ -14,7 +14,8 @@ test("R44 injector adds route and is idempotent", () => {
 });
 
 test("R44 runtime keeps workers off GitHub writes and results noncanonical", () => {
-  assert.match(RUNTIME, /raw\.githubusercontent\.com/);
+  assert.doesNotMatch(RUNTIME, /raw\.githubusercontent\.com/);
+  assert.match(RUNTIME, /env\.ASSETS\.fetch/);
   assert.doesNotMatch(RUNTIME, /api\.github\.com\/repos/);
   assert.match(RUNTIME, /PENDING_CANONICAL_R33_VALIDATION/);
   assert.match(RUNTIME, /AUDITED_DURABLE/);

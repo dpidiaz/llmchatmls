@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: mls-unified-r44-r33-handoff
+  group: mls-unified-github-writer
   cancel-in-progress: false
 
 jobs:
@@ -27,6 +27,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
+      - name: Check durable secondary writer cooldown
+        id: sink_guard
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: |
+          cp 'scripts/r44 sink guard.cjs' "$RUNNER_TEMP/mls-sink-guard.cjs"
+          node "$RUNNER_TEMP/mls-sink-guard.cjs" check
       - name: Sync durable R44 COMPLETE results into GitHub handoff
         run: node 'scripts/r44 r33 handoff sync.cjs'
       - name: Validate handoff shape
@@ -57,12 +64,12 @@ jobs:
             exit 0
           fi
           git commit -m 'unified: sync R44 durable handoff to R33'
-          for attempt in 1 2 3; do
-            if git pull --rebase origin main && git push origin HEAD:main; then
-              exit 0
-            fi
-            git rebase --abort >/dev/null 2>&1 || true
-            sleep $((attempt * 5))
-          done
-          echo 'Unable to publish grouped handoff after bounded retries.' >&2
-          exit 1
+          # One attempt; the durable exporter will replay on the next scheduled run.
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Preserve durable retry after writer failure
+        if: ${{ failure() && steps.sink_guard.outcome == 'success' }}
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: node "$RUNNER_TEMP/mls-sink-guard.cjs" degrade

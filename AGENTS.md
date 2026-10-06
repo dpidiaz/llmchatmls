@@ -164,3 +164,5 @@ Mandatory guardrails:
 - Do not use ChatGPT Work, OpenAI API, other paid AI APIs (including latent options/feature flags), Cloudflare/D1 editorial writes or deployment by default. FREE ONLY is non-negotiable.
 - Branch `feat/mls-r4-1-buffered-farm` and PR #1860 remain Draft; do not merge to `main`, migrate existing claims or deploy Cloudflare without explicit separate authorization.
 
+
+Cloudflare primary consolidation is specified in `docs/MLS Global Dispatcher/29 Cloudflare Primary Consolidation.md`. D1 receipt-based preparation does not require a GitHub handoff; canonical publication into `r33-unified:` still does. Deployment status is tracked separately from implementation.
