@@ -183,6 +183,8 @@ test('legacy bootstrap and irrelevant deployment preserve editorial quarantine; 
   await reseed(h,packets,'unrelated-deploy');
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
   await reseed(h,packets,'source-fixed',code=>code.endsWith('0001')?'sources-v2':'sources-v1');
+  const changedContext=h.db.prepare("SELECT context_hash,failed_context_hash,technical_retries FROM mls_canonical_recovery WHERE code='MLS-V01-0001'").get();
+  assert.notEqual(changedContext.context_hash,changedContext.failed_context_hash,'material source context must differ from the failed fingerprint');
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1);
   h.db.exec('UPDATE mls_canonical_recovery_clock SET next_ms=0');
   await h.r.canonicalRecoverQuarantine(h.env);
