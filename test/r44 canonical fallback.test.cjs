@@ -148,6 +148,7 @@ test('new asset revision preserves prepared evidence and its original context ha
 
 test('canonical malformed JSON recovery is bounded and leaves source quarantine intact',async()=>{
   const h=harness();await setup(h,0);await assets(h,2);await h.r.canonicalSeed(h.env);
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'book-only',metadata:{language:'en',title:'Fixture',sourceType:'book',authorityTier:'A',canonicalUrl:'https://books.example/product'}}];
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=4,last_error='UNIFIED_R33_DRAFT_JSON_INVALID' WHERE code='MLS-V01-0001'");
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=3,last_error='SOURCE_FULLTEXT_REQUIRED' WHERE code='MLS-V01-0002'");
   h.r.unifiedR33BuildDraft=async()=>{throw Error('UNIFIED_R33_DRAFT_JSON_INVALID')};
