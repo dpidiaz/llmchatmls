@@ -298,26 +298,29 @@ test('R33 ranks auditable sources before the top-16 cutoff',()=>{
   assert.equal(candidates[0].sourceId,'institutional-source');
 });
 
-test('R33 mapper receives only auto-auditable registered candidates',async()=>{
-  const h=harness();h.r.URL=URL;let prompt='';
+test('R33 keeps conservative first-pass candidates and expands only in bounded quarantine repair',async()=>{
+  const h=harness();h.r.URL=URL;const prompts=[];
   h.r.MLS_R33_SOURCE_CATALOG=[
     {sourceId:'book-source',metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:'https://www.amazon.com/example'}},
     {sourceId:'institutional-source',metadata:{language:'en',title:'English grammar',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/grammar'}}
   ];
-  h.r.unifiedR33RunProvider=async(_env,_provider,messages)=>{prompt=messages[0].content;return {text:JSON.stringify({status:'NEEDS_CHAT_REVIEW',confidence:0,claims:[],rationale:'fixture'})}};
+  h.r.unifiedR33RunProvider=async(_env,_provider,messages)=>{prompts.push(messages[0].content);return {text:JSON.stringify({status:'NEEDS_CHAT_REVIEW',confidence:0,claims:[],rationale:'fixture'})}};
   const response=await h.r.unifiedR33BuildDraft({},{
     code:'MLS-V01-0001',contentPath:'content/fixture.json',
     article:{code:'MLS-V01-0001',language:'ingles',title:'English grammar',articleMarkdown:'English grammar uses nouns and verbs.'},
     handoffEntry:{}
   });
   assert.equal(response.status,200);
-  assert.match(prompt,/institutional-source/);
-  assert.doesNotMatch(prompt,/book-source/);
+  assert.equal(prompts.length,2);
+  assert.match(prompts[0],/institutional-source/);
+  assert.doesNotMatch(prompts[0],/book-source/);
+  assert.match(prompts[1],/QUARANTINE REPAIR MAPPER/);
+  assert.match(prompts[1],/book-source/);
 });
 
 test('R33 returns explicit review reason when registered sources exist but none is auditable',async()=>{
   const h=harness();h.r.URL=URL;let providerCalls=0;
-  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'book-source',metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:'https://www.amazon.com/example'}}];
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'book-source',metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:null}}];
   h.r.unifiedR33RunProvider=async()=>{providerCalls++;throw Error('AI MUST NOT RUN')};
   const response=await h.r.unifiedR33BuildDraft({},{
     code:'MLS-V01-0001',contentPath:'content/fixture.json',
