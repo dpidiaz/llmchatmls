@@ -46,8 +46,6 @@ jobs:
         run: node 'scripts/MLS global dispatcher scheduler.cjs'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
-          MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
       - name: Preserve GitHub cooldown after interruption
         if: always()
         uses: actions/cache/save@v4
