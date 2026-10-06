@@ -154,7 +154,7 @@ test('canonical malformed JSON recovery is bounded and leaves source quarantine 
   for(let i=0;i<2;i++){
     await h.r.canonicalRecoverQuarantine(h.env);
     const waiting=h.db.prepare("SELECT state,retry_ms,last_error FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get();
-    assert.equal(waiting.state,'RETRY');assert.equal(waiting.retry_ms,0,'quarantine recovery must be immediately claimable');
+    assert.equal(waiting.state,'RETRY');assert(waiting.retry_ms<=Date.now(),'quarantine recovery must be immediately claimable');
     assert.equal(waiting.last_error,'UNIFIED_R33_DRAFT_JSON_INVALID');
     assert.equal((await h.r.canonicalStatus(h.env)).claimable,1);
     await h.r.canonicalStep(h.env);
