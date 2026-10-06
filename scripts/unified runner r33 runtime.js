@@ -67,7 +67,8 @@ function unifiedR33SourceCandidates(article,handoffEntry,options={}) {
   ].filter(Boolean).join(" ");
   const articleTokens=unifiedR33Tokens(articleText);
   const handoffText=unifiedR33NormalizeText(unifiedR33HandoffSourceText(handoffEntry));
-  const ranked=(Array.isArray(MLS_R33_SOURCE_CATALOG)?MLS_R33_SOURCE_CATALOG:[]).map(raw=>{
+  const catalog=[...(Array.isArray(MLS_R33_SOURCE_CATALOG)?MLS_R33_SOURCE_CATALOG:[]),...(Array.isArray(options.extraCatalog)?options.extraCatalog:[])];
+  const ranked=catalog.map(raw=>{
     const m=raw && raw.metadata || {};
     if(m.status && m.status!=="active") return null;
     if(String(m.authorityTier || "").toUpperCase()==="X") return null;
@@ -331,9 +332,10 @@ async function unifiedR33BuildDraft(env,body) {
   if(!/^MLS-V\d{2}-\d{4}$/.test(code)||!contentPath.startsWith("content/")) return r44Json({error:"UNIFIED_R33_DRAFT_SCOPE_INVALID"},400);
   if(String(article && article.code || "").toUpperCase()!==code) return r44Json({error:"UNIFIED_R33_DRAFT_CODE_MISMATCH"},400);
   const finalArticle=unifiedR33ReconcileArticle(article,handoffEntry);
-  const registeredCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry);
+  const repairCatalog=await unifiedR33RepairSources(env,code);
+  const registeredCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{extraCatalog:repairCatalog});
   if(!registeredCandidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"NO_REGISTERED_SOURCE_CANDIDATE"},200);
-  const candidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{autoAuditableOnly:true});
+  const candidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{autoAuditableOnly:true,extraCatalog:repairCatalog});
   if(!candidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE"},200);
 
   const packet=unifiedR33SourcePacket(candidates);
@@ -408,10 +410,12 @@ async function unifiedR33BuildDraft(env,body) {
     const source=candidates.find(x=>x.sourceId===sourceId);
     return source?{sourceId,metadata:source.metadata}:null;
   }).filter(Boolean);
+  const repairIds=new Set(repairCatalog.map(x=>String(x.sourceId||"")));
+  const repairSources=sources.filter(x=>repairIds.has(String(x.sourceId||"")));
   return r44Json({
     ok:true,status:"MATCH",code,
     confidence:Math.min(claimSet.confidence,support.confidence,coverage.confidence),
-    claimCount:claimSet.claims.length,sources,evidence,
+    claimCount:claimSet.claims.length,sources,evidence,repairSources,
     finalContent:String(handoffEntry.outcome||"").toUpperCase()==="CORRECTED"?finalArticle:null
   });
 }
