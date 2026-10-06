@@ -281,6 +281,22 @@ test('R33 source quarantine preflight retries only when an auditable source exis
   assert.equal(preflight.eligible,true);assert.equal(preflight.fetchableCandidateCount,1);
 });
 
+test('R33 ranks auditable sources before the top-16 cutoff',()=>{
+  const h=harness();h.r.URL=URL;
+  h.r.MLS_R33_SOURCE_CATALOG=Array.from({length:16},(_,i)=>({
+    sourceId:'book-'+i,
+    metadata:{language:'en',title:'English grammar',sourceType:'book',authorityTier:'A',canonicalUrl:'https://books.example/'+i}
+  }));
+  h.r.MLS_R33_SOURCE_CATALOG.push({
+    sourceId:'institutional-source',
+    metadata:{language:'en',title:'Grammar reference',sourceType:'institutional_webpage',authorityTier:'B',canonicalUrl:'https://example.org/grammar'}
+  });
+  const input={article:{code:'MLS-V01-0001',language:'ingles',title:'English grammar',articleMarkdown:'English grammar'},handoffEntry:{}};
+  const candidates=h.r.unifiedR33SourceCandidates(input.article,input.handoffEntry,{autoAuditableOnly:true});
+  assert.equal(candidates.length,1);
+  assert.equal(candidates[0].sourceId,'institutional-source');
+});
+
 test('R33 mapper receives only auto-auditable registered candidates',async()=>{
   const h=harness();h.r.URL=URL;let prompt='';
   h.r.MLS_R33_SOURCE_CATALOG=[
