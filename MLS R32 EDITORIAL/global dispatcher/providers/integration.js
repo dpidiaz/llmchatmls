@@ -33,7 +33,7 @@ function loadR44R33Handoffs(root='.'){
   }
   return out;
 }
-function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,globalAssignments=[]}={}){
+function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,globalAssignments=[],preparedDrainCodes=null}={}){
   if(!(handoffs instanceof Map)||!handoffs.size)return null;
   const integrated=r33IntegratedCodes(root);
   const corpus=mlsCore.corpusEntries(root);
@@ -53,7 +53,7 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
     .sort((a,b)=>a.order-b.order||a.code.localeCompare(b.code));
   if(!entries.length)return null;
   // Reorder only eligible durable handoffs; all terminal/reservation/lease fences below remain authoritative.
-  const drainCodes=preparedDrain.load(root);
+  const drainCodes=preparedDrainCodes instanceof Set?preparedDrainCodes:preparedDrain.load(root);
   entries=preparedDrain.prioritize(entries,drainCodes);
   const allowed=new Set(entries.map(x=>x.code));
   const execution={...(snapshot.pool?.execution||{}),
@@ -545,7 +545,7 @@ function recoveryItems(globalLedger){
   }
   return items;
 }
-function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedger=null,globalAssignments=[],queueTarget=READY_QUEUE_TARGET}={}){
+function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedger=null,globalAssignments=[],preparedDrainCodes=null,queueTarget=READY_QUEUE_TARGET}={}){
   const items=[],diagnostics=[];
   try{
     const snapshot=projectMlsSnapshot(collectMlsSnapshot(issues,root),{globalLedger,globalAssignments});
@@ -555,7 +555,7 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const execution=snapshot.pool?.execution||{};
-    const unifiedViewForIntegration=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments});
+    const unifiedViewForIntegration=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments,preparedDrainCodes});
     if(unifiedViewForIntegration){
       const unifiedIndexItem=r33IndexIntegrationWork({
         pool:unifiedViewForIntegration.pool,
@@ -625,7 +625,7 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
         // handoff are eligible. The general R33 lane sees those codes as
         // protected during this same materialization, preventing duplicate work.
         let working=snapshot;
-        const unifiedView=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments});
+        const unifiedView=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments,preparedDrainCodes});
         if(unifiedView){
           const unifiedCandidates=r33Provider.materializeCandidates(unifiedView,{now,count:available});
           for(const candidate of unifiedCandidates){

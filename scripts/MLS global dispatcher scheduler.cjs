@@ -321,13 +321,14 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
     globalLedger:ledgerItem.ledger,activeStates,now,technical:true,
     api:{get:route=>gh('GET',repoPath+route),post:(route,body)=>gh('POST',repoPath+route,body),
       patch:(route,body)=>gh('PATCH',repoPath+route,body)}});
-  let cachedRegistry=null;
+  let cachedRegistry=null,runtimePreparedDrainCodes=null;
   function runtimeRegistry(refresh=false){
-    if(cachedRegistry&&!refresh)return cachedRegistry;
-    const dynamic=providerIntegration.materializeProviderItems({issues:providerIssues,root,now,globalLedger:ledgerItem.ledger,globalAssignments:activeStates});
+    if(cachedRegistry&&!refresh&&!runtimePreparedDrainCodes)return cachedRegistry;
+    const dynamic=providerIntegration.materializeProviderItems({issues:providerIssues,root,now,globalLedger:ledgerItem.ledger,globalAssignments:activeStates,preparedDrainCodes:runtimePreparedDrainCodes});
     if(dynamic.diagnostics.length)console.warn(JSON.stringify({providerDiagnostics:dynamic.diagnostics}));
-    cachedRegistry=providerIntegration.extendRegistry(baseRegistry,{items:dynamic.items,globalLedger:ledgerItem.ledger});
-    return cachedRegistry;
+    const registry=providerIntegration.extendRegistry(baseRegistry,{items:dynamic.items,globalLedger:ledgerItem.ledger});
+    if(!runtimePreparedDrainCodes)cachedRegistry=registry;
+    return registry;
   }
   function progressFor(registry){
     const staging=providerIntegration.r33StagingManifest(ledgerItem.ledger,{createdAt:core.iso(now)});
@@ -369,12 +370,16 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       await closeCommand(issue,'[MLS Dispatcher][STALE] '+command.requestId,{ok:false,error:'STALE_CLAIM',requestId:command.requestId,claimTtlMs:core.CLAIM_TTL_MS,createdAt:issue.created_at},'not_planned');
       drained.push({issueNumber:issue.number,status:'stale'});continue;
     }
-    let registry=runtimeRegistry();
+    const preferredDrain=command.operation==='claim'&&Array.isArray(command.preferredCodes)&&command.preferredCodes.length
+      ?new Set(command.preferredCodes):null;
+    runtimePreparedDrainCodes=preferredDrain;
+    let registry=runtimeRegistry(Boolean(preferredDrain));
     let selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now,command.provider||null,command.workPrefix||null);
     if(!selected){
       registry=runtimeRegistry(true);
       selected=core.selectNextWork(registry,ledgerItem.ledger,activeStates,now,command.provider||null,command.workPrefix||null);
     }
+    runtimePreparedDrainCodes=null;
     if(!selected){
       const progress=progressFor(registry);
       const activeR33=activeStates.filter(state=>state&&state.status==='leased'&&!state.readyToClose&&!state.cancelRequested&&state.provider==='r33-farm').length;

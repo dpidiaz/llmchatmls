@@ -15,7 +15,7 @@ const BASE=String(process.env.MLS_UNIFIED_BASE_URL||'https://llmchatmls.dpidiaz.
 const EXECUTION_TARGET=unified.executionTarget(process.env.MLS_UNIFIED_TARGET_ENTRIES||unified.EXECUTION_TARGET_ENTRIES);
 const TARGET_POLL_MS=5000;
 const TARGET_MAX_STAGNANT_POLLS=120;
-const R33_FANOUT=Math.max(1,Math.min(32,Number(process.env.MLS_UNIFIED_R33_FANOUT||16)));
+const R33_FANOUT=Math.max(1,Math.min(64,Number(process.env.MLS_UNIFIED_R33_FANOUT||50)));
 const BOT='github-actions[bot]';
 const WORKERS={
   integration:'mls-unified-web-integration',
@@ -218,11 +218,11 @@ async function findExisting(stage){
   }
   return null;
 }
-async function createClaim(stage,{workerId=WORKERS[stage],reportLane=true,dispatchScheduler=true}={}){
+async function createClaim(stage,{workerId=WORKERS[stage],reportLane=true,dispatchScheduler=true,preferredCodes=[]}={}){
   const requestId=('autopull:unified-web-'+stage+'-'+String(process.env.GITHUB_RUN_ID||Date.now())+'-'+Date.now().toString(36)+'-'+workerId.replace(/[^A-Za-z0-9]/g,'')).slice(0,120);
   // Bot-created Dispatcher claims must use the trusted auto-pull fence. Do not delegate
   // workerLogin here: the scheduler derives github-actions[bot] from the issue author.
-  const claim=unified.createClaim({stage,requestId,workerId});
+  const claim=unified.createClaim({stage,requestId,workerId,preferredCodes:stage==='r33'?preferredCodes:[]});
   const issue=await gh('/repos/'+REPOSITORY+'/issues',{method:'POST',body:{title:claim.title,body:claim.body}});
   if(reportLane)await report(stage,'CLAIM_PENDING',{issueNumber:Number(issue.number),detail:{requestId,workerId}});
   if(dispatchScheduler)await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
@@ -249,23 +249,25 @@ function issueWorkerId(issue){
   const state=parseAssignment(issue),claim=parseClaim(issue);
   return String(state?.workerId||claim?.workerId||'');
 }
-async function ensureR33Fanout(){
+async function ensureR33Fanout(preferredCodes=[]){
   const existing=await findExistingR33All();
   const used=new Set(existing.map(issueWorkerId).filter(Boolean));
+  const preferred=[...new Set((Array.isArray(preferredCodes)?preferredCodes:[]).map(x=>String(x||'').toUpperCase()))]
+    .filter(code=>/^MLS-V\d{2}-\d{4}$/.test(code)).slice(0,256);
   const desired=[];
   for(let slot=1;slot<=R33_FANOUT;slot++)desired.push(r33WorkerId(slot));
   const created=[];
   for(const workerId of desired){
     if(existing.length+created.length>=R33_FANOUT)break;
     if(used.has(workerId))continue;
-    const issue=await createClaim('r33',{workerId,reportLane:false,dispatchScheduler:false});
+    const issue=await createClaim('r33',{workerId,reportLane:false,dispatchScheduler:false,preferredCodes:preferred});
     created.push(issue);used.add(workerId);
   }
   if(created.length){
     await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
       method:'POST',body:{ref:'main'}
     });
-    await report('r33','FANOUT_PENDING',{issueNumber:null,detail:{fanout:R33_FANOUT,existing:existing.length,created:created.length,issues:created.map(x=>Number(x.number))},pauseRunner:false});
+    await report('r33','FANOUT_PENDING',{issueNumber:null,detail:{fanout:R33_FANOUT,existing:existing.length,created:created.length,preferred:preferred.length,issues:created.map(x=>Number(x.number))},pauseRunner:false});
   }
   return [...existing,...created];
 }
@@ -678,7 +680,7 @@ async function dispatchR33(issue,state){
 async function runR33Fanout(status){
   if(Number(status?.canonical?.prepared||0)<=0)return {fanout:R33_FANOUT,existing:0,created:0,leased:0,dispatched:0,skipped:'NO_PREPARED'};
   const before=await findExistingR33All();
-  const issues=await ensureR33Fanout();
+  const issues=await ensureR33Fanout(status?.canonical?.preparedCodes||[]);
   const created=Math.max(0,issues.length-before.length),leased=[];
   for(const issue of issues){
     const resolved=await resolveAssignment('r33',{issue_number:Number(issue.number)});
