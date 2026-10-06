@@ -212,7 +212,10 @@ async function checkpointEvent(){
   };
   const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'checkpoint'})+'\\n-->';
   const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
-  const eventPath=writeSyntheticEvent('checkpoint',bundle.issueNumber,body,runId*10+1);
+  const sequence=Number(process.argv[6]||0);
+  if(!Number.isInteger(sequence)||sequence<0||sequence>20)fail('UNIFIED_EVIDENCE_CHECKPOINT_SEQUENCE_INVALID');
+  const commentId=sequence>0?runId*100+sequence*2+1:runId*10+1;
+  const eventPath=writeSyntheticEvent('checkpoint',bundle.issueNumber,body,commentId);
   process.stdout.write(JSON.stringify({ok:true,eventPath,code:bundle.code,commitSha,completedUnits:completed,pendingUnits:pending})+String.fromCharCode(10));
 }
 async function finishEvent(){
@@ -242,7 +245,10 @@ async function finishEvent(){
   };
   const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'finish'})+'\\n-->';
   const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
-  const eventPath=writeSyntheticEvent('finish',bundle.issueNumber,body,runId*10+2);
+  const sequence=Number(process.argv[6]||0);
+  if(!Number.isInteger(sequence)||sequence<0||sequence>20)fail('UNIFIED_EVIDENCE_FINISH_SEQUENCE_INVALID');
+  const commentId=sequence>0?runId*100+sequence*2+2:runId*10+2;
+  const eventPath=writeSyntheticEvent('finish',bundle.issueNumber,body,commentId);
   appendOutput('finish_needed','true');
   process.stdout.write(JSON.stringify({ok:true,finishNeeded:true,eventPath,commitSha})+String.fromCharCode(10));
 }
