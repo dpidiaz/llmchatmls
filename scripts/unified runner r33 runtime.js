@@ -3,7 +3,7 @@
 // Explicit semantic versions, not a deployment/global-catalog hash. Bump only
 // when the corresponding R33 behavior materially changes. Candidate fingerprints
 // ensure unrelated source-catalog edits do not reopen every entry.
-var MLS_CANONICAL_R33_POLICY={claims:1,support:1,coverage:1};
+var MLS_CANONICAL_R33_POLICY={claims:2,support:2,coverage:1,repair:1};
 function unifiedR33CanonicalContext(body) {
   const article=unifiedR33ReconcileArticle(body.article,body.handoffEntry||{});
   const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
@@ -88,14 +88,18 @@ function unifiedR33SourceCandidates(article,handoffEntry,options={}) {
     if(raw.sourceId && handoffText.includes(unifiedR33NormalizeText(raw.sourceId))) score+=500;
     return {sourceId:String(raw.sourceId||""),metadata:m,score};
   }).filter(Boolean);
-  const eligible=options.autoAuditableOnly?ranked.filter(unifiedR33SourceAutoAuditable):ranked;
+  const eligible=options.autoAuditableOnly?ranked.filter(unifiedR33SourceAutoAuditable):options.repairUrlOnly?ranked.filter(candidate=>!!unifiedR33SafeSourceUrl(candidate.metadata&&candidate.metadata.canonicalUrl)):ranked;
   return eligible.sort((a,b)=>b.score-a.score||a.sourceId.localeCompare(b.sourceId)).slice(0,16);
 }
 function unifiedR33ParseJson(text) {
-  const raw=String(text || "").trim();
-  try{return JSON.parse(raw)}catch(_){}
+  const raw=String(text || "").replace(/^\uFEFF/,"").trim();
+  const attempts=[raw,raw.replace(/^\`\`\`(?:json)?\s*/i,"").replace(/\s*\`\`\`$/,"")];
   const a=raw.indexOf("{"),b=raw.lastIndexOf("}");
-  if(a>=0&&b>a){try{return JSON.parse(raw.slice(a,b+1))}catch(_){}}
+  if(a>=0&&b>a)attempts.push(raw.slice(a,b+1));
+  for(const value of attempts){
+    try{return JSON.parse(value)}catch(_){}
+    try{return JSON.parse(value.replace(/,\s*([}\]])/g,"$1"))}catch(_){}
+  }
   throw new Error("UNIFIED_R33_DRAFT_JSON_INVALID");
 }
 function unifiedR33ReconcileArticle(article,handoffEntry) {
@@ -206,9 +210,8 @@ function unifiedR33ReadableSourceText(raw,contentType) {
 }
 async function unifiedR33FetchSourceDocument(candidate) {
   const metadata=candidate&&candidate.metadata||{};
-  const type=String(metadata.sourceType||"");
-  const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
-  if(!autoTypes.has(type))return {ok:false,reason:"SOURCE_FULLTEXT_REQUIRED",sourceId:candidate.sourceId};
+  // Repair mode may try any citation-ready registered source with a safe URL.
+  // R33 still requires substantive fetched text plus support and coverage audits.
   const url=unifiedR33SafeSourceUrl(metadata.canonicalUrl);
   if(!url)return {ok:false,reason:"SOURCE_URL_UNAVAILABLE",sourceId:candidate.sourceId};
   let response;
@@ -247,6 +250,60 @@ async function unifiedR33SourceSupportAudit(env,claims,candidates) {
   const parsed=unifiedR33ParseJson(result.text),confidence=Number(parsed.confidence||0);
   const unsupported=Array.isArray(parsed.unsupportedClaimIndexes)?parsed.unsupportedClaimIndexes.filter(Number.isInteger).slice(0,16):[];
   return {ok:parsed.status==="PASS"&&confidence>=0.85&&!unsupported.length,confidence,unsupported,rationale:String(parsed.rationale||"").slice(0,1600),result};
+}
+async function unifiedR33RepairMapping(env,finalArticle,handoffEntry,candidates,previous={}) {
+  const previousReason=String(previous.reason||"NEEDS_CHAT_REVIEW");
+  const excluded=new Set();
+  if(previous.sourceId)excluded.add(String(previous.sourceId));
+  const priorClaims=Array.isArray(previous.claims)?previous.claims:[];
+  for(const index of Array.isArray(previous.unsupported)?previous.unsupported:[]){
+    const claim=priorClaims[index];
+    if(claim&&claim.sourceId)excluded.add(String(claim.sourceId));
+  }
+  const usable=(candidates||[]).filter(candidate=>!excluded.has(candidate.sourceId)).slice(0,16);
+  if(!usable.length)return {ok:false,reason:previousReason};
+  const packet=unifiedR33SourcePacket(usable);
+  const prompt=[
+    "MLS R33 QUARANTINE REPAIR MAPPER v1.",
+    "Return ONLY valid JSON. This is one bounded repair pass after a prior R33 failure.",
+    "Previous failure: "+previousReason+".",
+    excluded.size?"Do not reuse rejected sourceIds: "+[...excluded].join(", ")+".":"No sourceId is pre-excluded.",
+    "Use only REGISTERED CANDIDATES. Never invent a sourceId, URL, quotation, page, locator, bibliographic fact, or source content.",
+    "Enumerate every substantial externally verifiable assertion in ARTICLE. Choose a candidate only when its registered metadata makes the match credible.",
+    "Every candidate has a registered safe canonical URL. Downstream R33 will fetch the actual text and fail closed unless every mapped claim is directly supported.",
+    "If support is uncertain, return NEEDS_CHAT_REVIEW rather than guessing.",
+    "Allowed claimType values: general, normative, orthography, regional_variation, historical.",
+    "Source tiers: normative/orthography require A or B; regional_variation/historical require A, B or C; general permits A-D.",
+    "Output: {status:'MATCH'|'NEEDS_CHAT_REVIEW',confidence:0..1,claims:[{sectionKey,summary,claimType,materiality:'substantial',sourceId,confidence,rationale}],rationale}.",
+    "ARTICLE:\n"+String(finalArticle.articleMarkdown||"").slice(0,20000),
+    "TITLE/PART/CHAPTER:\n"+[finalArticle.title,finalArticle.part,finalArticle.chapter].filter(Boolean).join(" | "),
+    "R44 CLAIM HINTS:\n"+JSON.stringify(Array.isArray(handoffEntry.claims)?handoffEntry.claims:[]).slice(0,7000),
+    "REGISTERED CANDIDATES:\n"+JSON.stringify(packet)
+  ].join("\n\n");
+  const provider={id:"cloudflare-r33-quarantine-repair",kind:"cloudflare",model:"@cf/ibm-granite/granite-4.0-h-micro"};
+  let matcher;
+  try{
+    matcher=await unifiedR33RunProvider(env,provider,[{role:"user",content:prompt}],2000);
+  }catch(error){
+    if(error.unifiedStatus)return {ok:false,fatal:error};
+    throw error;
+  }
+  let parsed;
+  try{parsed=unifiedR33ParseJson(matcher.text)}catch(error){
+    if(String(error&&error.message||"")==="UNIFIED_R33_DRAFT_JSON_INVALID")return {ok:false,reason:"UNIFIED_R33_DRAFT_JSON_INVALID"};
+    throw error;
+  }
+  const claimSet=unifiedR33ValidateClaimSet(parsed,usable);
+  if(!claimSet.ok)return {ok:false,reason:claimSet.reason,confidence:claimSet.confidence??Number(parsed.confidence||0),rationale:String(parsed.rationale||"")};
+  let support;
+  try{support=await unifiedR33SourceSupportAudit(env,claimSet.claims,usable)}
+  catch(error){if(error.unifiedStatus)return {ok:false,fatal:error};throw error}
+  if(!support.ok)return {ok:false,reason:support.reason||"SOURCE_SUPPORT_AUDIT_REJECTED",confidence:support.confidence??null,sourceId:support.sourceId||null,unsupported:support.unsupported||[],claims:claimSet.claims,rationale:support.rationale||""};
+  let coverage;
+  try{coverage=await unifiedR33CoverageAudit(env,finalArticle,claimSet.claims,packet)}
+  catch(error){if(error.unifiedStatus)return {ok:false,fatal:error};throw error}
+  if(!coverage.ok)return {ok:false,reason:"COVERAGE_AUDIT_REJECTED",confidence:coverage.confidence,unsupported:coverage.unsupported||[],claims:claimSet.claims,rationale:coverage.rationale||""};
+  return {ok:true,candidates:usable,packet,matcher,claimSet,support,coverage};
 }
 async function unifiedR33CoverageAudit(env,finalArticle,claims,sourcePacket) {
   const prompt=[
@@ -332,19 +389,20 @@ async function unifiedR33BuildDraft(env,body) {
   if(!/^MLS-V\d{2}-\d{4}$/.test(code)||!contentPath.startsWith("content/")) return r44Json({error:"UNIFIED_R33_DRAFT_SCOPE_INVALID"},400);
   if(String(article && article.code || "").toUpperCase()!==code) return r44Json({error:"UNIFIED_R33_DRAFT_CODE_MISMATCH"},400);
   const finalArticle=unifiedR33ReconcileArticle(article,handoffEntry);
-  const repairCatalog=await unifiedR33RepairSources(env,code);
-  const registeredCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{extraCatalog:repairCatalog});
+  const registeredCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry);
   if(!registeredCandidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"NO_REGISTERED_SOURCE_CANDIDATE"},200);
-  const candidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{autoAuditableOnly:true,extraCatalog:repairCatalog});
+  const autoCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{autoAuditableOnly:true});
+  const repairCandidates=unifiedR33SourceCandidates(finalArticle,handoffEntry,{repairUrlOnly:true});
+  let candidates=autoCandidates.length?autoCandidates:repairCandidates;
   if(!candidates.length)return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE"},200);
 
-  const packet=unifiedR33SourcePacket(candidates);
+  let packet=unifiedR33SourcePacket(candidates);
   const prompt=[
-    "MLS R33 REGISTERED-SOURCE CLAIM MAPPER v2.",
+    "MLS R33 REGISTERED-SOURCE CLAIM MAPPER v3.",
     "Return ONLY JSON. Never invent a sourceId, URL, quotation, page, locator, bibliographic fact, or source content.",
     "Enumerate ALL substantial externally verifiable claims actually asserted by ARTICLE. Do not omit a claim merely because no source fits.",
     "For EACH substantial claim, choose one sourceId from CANDIDATES only when the source metadata makes the match credible.",
-    "Every candidate below is auto-auditable: R33 can fetch its registered canonical URL and inspect source text. Do not infer support from sources outside CANDIDATES.",
+    "Every candidate below has a registered safe URL or is in the established auto-auditable class. R33 will fetch actual source text before approval.",
     "If even one substantial claim cannot be credibly mapped, return NEEDS_CHAT_REVIEW.",
     "Do not create quotation claims. Do not treat illustrative examples or navigation links as independent substantial claims unless they assert a rule.",
     "Allowed claimType values: general, normative, orthography, regional_variation, historical.",
@@ -363,43 +421,65 @@ async function unifiedR33BuildDraft(env,body) {
     if(error.unifiedStatus)return r44Json({error:error.unifiedStatus,message:error.message},error.unifiedStatus==="QUOTA_PAUSED"?429:409);
     throw error;
   }
-  const parsed=unifiedR33ParseJson(matcher.text);
-  const claimSet=unifiedR33ValidateClaimSet(parsed,candidates);
-  if(!claimSet.ok){
-    return r44Json({
-      ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:claimSet.reason,
-      confidence:claimSet.confidence??Number(parsed.confidence||0),rationale:String(parsed.rationale||"")
-    },200);
+  let parsed=null,claimSet;
+  try{
+    parsed=unifiedR33ParseJson(matcher.text);
+    claimSet=unifiedR33ValidateClaimSet(parsed,candidates);
+  }catch(error){
+    if(String(error&&error.message||"")==="UNIFIED_R33_DRAFT_JSON_INVALID")claimSet={ok:false,reason:"UNIFIED_R33_DRAFT_JSON_INVALID",confidence:0};
+    else throw error;
   }
 
-  let support;
-  try{
-    support=await unifiedR33SourceSupportAudit(env,claimSet.claims,candidates);
-  }catch(error){
-    if(error.unifiedStatus)return r44Json({error:error.unifiedStatus,message:error.message},error.unifiedStatus==="QUOTA_PAUSED"?429:409);
-    throw error;
+  let support=null,coverage=null;
+  const applyRepair=repaired=>{
+    candidates=repaired.candidates;packet=repaired.packet;matcher=repaired.matcher;
+    claimSet=repaired.claimSet;support=repaired.support;coverage=repaired.coverage;
+  };
+  const fatalResponse=repaired=>repaired&&repaired.fatal?r44Json({error:repaired.fatal.unifiedStatus,message:repaired.fatal.message},repaired.fatal.unifiedStatus==="QUOTA_PAUSED"?429:409):null;
+
+  if(!claimSet.ok){
+    const repaired=await unifiedR33RepairMapping(env,finalArticle,handoffEntry,repairCandidates,{reason:claimSet.reason});
+    const fatal=fatalResponse(repaired);if(fatal)return fatal;
+    if(!repaired.ok){
+      return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:repaired.reason||claimSet.reason,
+        confidence:repaired.confidence??claimSet.confidence??Number(parsed&&parsed.confidence||0),rationale:repaired.rationale||String(parsed&&parsed.rationale||"")},200);
+    }
+    applyRepair(repaired);
+  }
+
+  if(!support){
+    try{support=await unifiedR33SourceSupportAudit(env,claimSet.claims,candidates)}
+    catch(error){if(error.unifiedStatus)return r44Json({error:error.unifiedStatus,message:error.message},error.unifiedStatus==="QUOTA_PAUSED"?429:409);throw error}
   }
   if(!support.ok){
-    return r44Json({
-      ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:support.reason||"SOURCE_SUPPORT_AUDIT_REJECTED",
-      confidence:support.confidence??null,sourceId:support.sourceId||null,
-      unsupportedClaimIndexes:support.unsupported||[],rationale:support.rationale||""
-    },200);
+    const repaired=await unifiedR33RepairMapping(env,finalArticle,handoffEntry,repairCandidates,{
+      reason:support.reason||"SOURCE_SUPPORT_AUDIT_REJECTED",sourceId:support.sourceId||null,
+      unsupported:support.unsupported||[],claims:claimSet.claims
+    });
+    const fatal=fatalResponse(repaired);if(fatal)return fatal;
+    if(!repaired.ok){
+      return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:repaired.reason||support.reason||"SOURCE_SUPPORT_AUDIT_REJECTED",
+        confidence:repaired.confidence??support.confidence??null,sourceId:repaired.sourceId||support.sourceId||null,
+        unsupportedClaimIndexes:repaired.unsupported||support.unsupported||[],rationale:repaired.rationale||support.rationale||""},200);
+    }
+    applyRepair(repaired);
   }
 
-  let coverage;
-  try{
-    coverage=await unifiedR33CoverageAudit(env,finalArticle,claimSet.claims,packet);
-  }catch(error){
-    if(error.unifiedStatus)return r44Json({error:error.unifiedStatus,message:error.message},error.unifiedStatus==="QUOTA_PAUSED"?429:409);
-    throw error;
+  if(!coverage){
+    try{coverage=await unifiedR33CoverageAudit(env,finalArticle,claimSet.claims,packet)}
+    catch(error){if(error.unifiedStatus)return r44Json({error:error.unifiedStatus,message:error.message},error.unifiedStatus==="QUOTA_PAUSED"?429:409);throw error}
   }
   if(!coverage.ok){
-    return r44Json({
-      ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:"COVERAGE_AUDIT_REJECTED",
-      confidence:coverage.confidence,missingClaims:coverage.missing,
-      unsupportedClaimIndexes:coverage.unsupported,rationale:coverage.rationale
-    },200);
+    const repaired=await unifiedR33RepairMapping(env,finalArticle,handoffEntry,repairCandidates,{
+      reason:"COVERAGE_AUDIT_REJECTED",unsupported:coverage.unsupported||[],claims:claimSet.claims
+    });
+    const fatal=fatalResponse(repaired);if(fatal)return fatal;
+    if(!repaired.ok){
+      return r44Json({ok:true,status:"NEEDS_CHAT_REVIEW",code,reason:repaired.reason||"COVERAGE_AUDIT_REJECTED",
+        confidence:repaired.confidence??coverage.confidence,missingClaims:coverage.missing,
+        unsupportedClaimIndexes:repaired.unsupported||coverage.unsupported||[],rationale:repaired.rationale||coverage.rationale||""},200);
+    }
+    applyRepair(repaired);
   }
 
   const runId=String(body.runId || "MLS-UNIFIED-WEB");
@@ -410,12 +490,11 @@ async function unifiedR33BuildDraft(env,body) {
     const source=candidates.find(x=>x.sourceId===sourceId);
     return source?{sourceId,metadata:source.metadata}:null;
   }).filter(Boolean);
-  const repairIds=new Set(repairCatalog.map(x=>String(x.sourceId||"")));
-  const repairSources=sources.filter(x=>repairIds.has(String(x.sourceId||"")));
   return r44Json({
     ok:true,status:"MATCH",code,
     confidence:Math.min(claimSet.confidence,support.confidence,coverage.confidence),
-    claimCount:claimSet.claims.length,sources,evidence,repairSources,
+    claimCount:claimSet.claims.length,sources,evidence,
     finalContent:String(handoffEntry.outcome||"").toUpperCase()==="CORRECTED"?finalArticle:null
   });
 }
+
