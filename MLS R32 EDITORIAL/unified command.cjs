@@ -42,12 +42,15 @@ function stageSpec(stage){
   assert(spec,'UNIFIED_STAGE_INVALID','stage debe ser integration o r33.');
   return spec;
 }
-function createClaim({stage,requestId,workerId,workerLogin=null}={}){
+function createClaim({stage,requestId,workerId,workerLogin=null,preferredCodes=[]}={}){
   const spec=stageSpec(stage);
   assert(/^[A-Za-z0-9._:-]{8,120}$/.test(String(requestId||'')),'UNIFIED_CLAIM_REQUEST');
   assert(/^[A-Za-z0-9._:-]{8,160}$/.test(String(workerId||'')),'UNIFIED_CLAIM_WORKER');
   if(workerLogin!=null)assert(/^[A-Za-z0-9][A-Za-z0-9-]*(?:\[bot\])?$/.test(String(workerLogin)),
     'UNIFIED_CLAIM_LOGIN');
+  const preferred=[...new Set((Array.isArray(preferredCodes)?preferredCodes:[]).map(x=>String(x||'').toUpperCase()))];
+  assert(preferred.length<=256&&preferred.every(code=>/^MLS-V\d{2}-\d{4}$/.test(code)),
+    'UNIFIED_CLAIM_PREFERRED_CODES','preferredCodes inválido.');
   const command={
     operation:'claim',
     requestId:String(requestId),
@@ -55,7 +58,8 @@ function createClaim({stage,requestId,workerId,workerLogin=null}={}){
     ...(workerLogin?{workerLogin:String(workerLogin)}:{}),
     provider:spec.provider,
     workPrefix:spec.workPrefix,
-    capabilities:['chat','github','mls-unified']
+    capabilities:['chat','github','mls-unified'],
+    ...(preferred.length?{preferredCodes:preferred}:{})
   };
   return {title:'[MLS Dispatcher][CLAIM] '+command.requestId,body:core.renderCommandBody(command),command};
 }
