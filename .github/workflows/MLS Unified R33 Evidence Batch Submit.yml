@@ -1,0 +1,79 @@
+name: MLS Unified R33 Evidence Batch Submit
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Canonical Dispatcher assignment issue
+        required: true
+        type: string
+      comment_id:
+        description: Auditable Evidence batch submission comment
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+jobs:
+  submit:
+    concurrency:
+      group: mls-unified-r33-${{ github.event.inputs.issue_number }}
+      cancel-in-progress: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Check durable secondary writer cooldown
+        id: sink_guard
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: |
+          cp 'scripts/r44 sink guard.cjs' "$RUNNER_TEMP/mls-sink-guard.cjs"
+          node "$RUNNER_TEMP/mls-sink-guard.cjs" check
+      - name: Validate authorized Unified Evidence batch
+        id: prep
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MLS_UNIFIED_ISSUE_NUMBER: ${{ github.event.inputs.issue_number }}
+          MLS_UNIFIED_COMMENT_ID: ${{ github.event.inputs.comment_id }}
+        shell: bash
+        run: |
+          cp 'scripts/MLS unified r33 evidence submit.cjs' "$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs"
+          cp 'scripts/MLS unified r33 evidence batch.cjs' "$RUNNER_TEMP/mls-unified-r33-evidence-batch.cjs"
+          MLS_UNIFIED_SINGLE_SCRIPT="$RUNNER_TEMP/mls-unified-r33-evidence-submit.cjs" \
+            node "$RUNNER_TEMP/mls-unified-r33-evidence-batch.cjs" prepare
+      - name: Checkout exact assignment branch
+        env:
+          BRANCH: ${{ steps.prep.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch --no-tags origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+          git checkout -B unified-evidence-submit "refs/remotes/origin/$BRANCH"
+      - name: Process preflighted Evidence microbatch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BATCH_PATH: ${{ steps.prep.outputs.batch_path }}
+          MLS_UNIFIED_SINGLE_SCRIPT: ${{ runner.temp }}/mls-unified-r33-evidence-submit.cjs
+          MLS_UNIFIED_BATCH_SCRIPT: ${{ runner.temp }}/mls-unified-r33-evidence-batch.cjs
+        shell: bash
+        run: |
+          node "$MLS_UNIFIED_BATCH_SCRIPT" run "$BATCH_PATH" "$GITHUB_RUN_ID"
+      - name: Continue Unified Web Runner
+        if: ${{ success() }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: gh workflow run 'MLS Unified Web Runner.yml' --ref main
+      - name: Preserve durable retry after writer failure
+        if: ${{ failure() && steps.sink_guard.outcome == 'success' }}
+        env:
+          MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
+        run: node "$RUNNER_TEMP/mls-sink-guard.cjs" degrade
