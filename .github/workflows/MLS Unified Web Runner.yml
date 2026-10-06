@@ -2,6 +2,12 @@ name: MLS Unified Web Runner
 
 on:
   workflow_dispatch:
+    inputs:
+      target_entries:
+        description: Chat-scoped cumulative target (100-1000, multiple of 5)
+        required: false
+        default: '100'
+        type: string
   schedule:
     - cron: '*/5 * * * *'
   workflow_run:
@@ -47,4 +53,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
           MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
+          MLS_UNIFIED_TARGET_ENTRIES: ${{ inputs.target_entries || '100' }}
         run: node 'scripts/MLS unified web runner.cjs'

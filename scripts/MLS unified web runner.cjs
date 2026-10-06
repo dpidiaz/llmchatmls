@@ -12,6 +12,9 @@ const REPOSITORY=String(process.env.GITHUB_REPOSITORY||'');
 const TOKEN=String(process.env.GITHUB_TOKEN||'');
 const EDITORIAL_KEY=String(process.env.MLS_EDITORIAL_CHAT_KEY||'');
 const BASE=String(process.env.MLS_UNIFIED_BASE_URL||'https://llmchatmls.dpidiaz.workers.dev').replace(/\/$/,'');
+const EXECUTION_TARGET=unified.executionTarget(process.env.MLS_UNIFIED_TARGET_ENTRIES||unified.EXECUTION_TARGET_ENTRIES);
+const TARGET_POLL_MS=5000;
+const TARGET_MAX_STAGNANT_POLLS=120;
 const BOT='github-actions[bot]';
 const WORKERS={
   integration:'mls-unified-web-integration',
@@ -119,11 +122,11 @@ async function githubGate(action,extra={}){
   return cf('/api/unified-runner/github-gate',{action,...extra});
 }
 async function kickCloudflarePrimary(reason='cloudflare-primary-hot-path'){
-  return cf('/api/unified-runner/kick',{reason,targetEntries:unified.EXECUTION_TARGET_ENTRIES});
+  return cf('/api/unified-runner/kick',{reason,targetEntries:EXECUTION_TARGET});
 }
 async function kickCloudflareOnly(reason,gate=null,existingKick=null){
   const result=existingKick||await kickCloudflarePrimary(reason);
-  const detail={reason,targetEntries:unified.EXECUTION_TARGET_ENTRIES,githubGate:gate||null,kick:result.result||null};
+  const detail={reason,targetEntries:EXECUTION_TARGET,githubGate:gate||null,kick:result.result||null};
   await Promise.all([
     report('r33','GITHUB_DEGRADED',{error:'GitHub writes deferred; Cloudflare/D1 continues preparing durable R33 work.',detail}),
     report('integration','GITHUB_DEGRADED',{error:'GitHub integration writer deferred until rate limit recovery.',detail})
@@ -136,6 +139,43 @@ function durableCount(r44,state){
 }
 function r44Drained(r44){
   return ['CLAIMABLE','LEASED','PARTIAL_DURABLE','QUARANTINED'].every(state=>durableCount(r44,state)===0);
+}
+function canonicalDurableCount(status){
+  const counts=status?.canonical?.counts||{};
+  return Number(counts.PREPARED||0)+Number(counts.VERIFIED||0);
+}
+function progressSnapshot(status,baseline=null){
+  const processed=Number(status?.runner?.processed_entries||0);
+  const canonicalDurable=canonicalDurableCount(status);
+  const progress=baseline?Math.max(0,processed-baseline.processedEntries,canonicalDurable-baseline.canonicalDurable):0;
+  return {
+    runnerState:status?.runner?.state||null,
+    processedEntries:processed,
+    correctedEntries:Number(status?.runner?.corrected_entries||0),
+    configuredRunners:Number(status?.runner?.configured_runners||0),
+    activeRunners:Number(status?.runner?.active_runners||0),
+    canonical:{claimable:Number(status?.canonical?.claimable||0),prepared:Number(status?.canonical?.prepared||0),pending:Number(status?.canonical?.pending||0),counts:status?.canonical?.counts||{}},
+    githubGate:status?.githubGate?.state||null,
+    progress
+  };
+}
+async function waitForCloudflareTarget(startStatus,target=EXECUTION_TARGET){
+  const baseline={processedEntries:Number(startStatus?.runner?.processed_entries||0),canonicalDurable:canonicalDurableCount(startStatus)};
+  let current=startStatus,highWater=0,stagnant=0;
+  for(;;){
+    const snap=progressSnapshot(current,baseline);
+    highWater=Math.max(highWater,snap.progress);
+    console.log(JSON.stringify({ok:true,status:'UNIFIED_TARGET_PROGRESS',targetEntries:target,progressEntries:highWater,...snap}));
+    if(highWater>=target)return {status:'TARGET_REACHED',targetEntries:target,progressEntries:highWater,snapshot:snap};
+    if(snap.runnerState!=='RUNNING')return {status:'TARGET_BLOCKED',targetEntries:target,progressEntries:highWater,blocker:snap.runnerState,snapshot:snap};
+    if(r44Drained(current.r44)&&Number(current?.canonical?.claimable||0)===0)return {status:'NO_ELIGIBLE_WORK',targetEntries:target,progressEntries:highWater,snapshot:snap};
+    await sleep(TARGET_POLL_MS);
+    const next=await cf('/api/unified-runner/status');
+    const nextProgress=progressSnapshot(next,baseline).progress;
+    stagnant=nextProgress>highWater?0:stagnant+1;
+    current=next;
+    if(stagnant>=TARGET_MAX_STAGNANT_POLLS)return {status:'TARGET_STALLED',targetEntries:target,progressEntries:highWater,snapshot:progressSnapshot(current,baseline)};
+  }
 }
 function parseAssignment(issue){
   try{return core.parseAssignmentState(issue?.body||'')}catch{return null}
@@ -583,6 +623,7 @@ async function dispatchR33(issue,state){
 async function run(){
   repoParts();
   const status=await cf('/api/unified-runner/status');
+  console.log(JSON.stringify({ok:true,status:'UNIFIED_STATUS_SNAPSHOT',targetEntries:EXECUTION_TARGET,...progressSnapshot(status)}));
   const runner=status.runner||{};
   if(runner.state!=='RUNNING'){
     console.log(JSON.stringify({ok:true,status:'SKIPPED',runnerState:runner.state||null}));
@@ -595,7 +636,8 @@ async function run(){
   const gate=status.githubGate||{};
   if(gate.state==='DEGRADED'&&Number(gate.retry_at||0)>Date.now()){
     const kicked=await kickCloudflareOnly('github-secondary-rate-limit-cooldown',gate,cloudflarePrimary);
-    console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:Number(gate.retry_at||0),targetEntries:unified.EXECUTION_TARGET_ENTRIES,kick:kicked.result||null}));
+    const target=await waitForCloudflareTarget(status,EXECUTION_TARGET);
+    console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:Number(gate.retry_at||0),targetEntries:EXECUTION_TARGET,kick:kicked.result||null,target}));
     return;
   }
 
@@ -662,7 +704,7 @@ main().catch(async error=>{
       });
       const gate=degraded.githubGate||null;
       const kicked=await kickCloudflareOnly('github-secondary-rate-limit',gate);
-      console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:gate&&gate.retry_at||null,targetEntries:unified.EXECUTION_TARGET_ENTRIES,kick:kicked.result||null}));
+      console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:gate&&gate.retry_at||null,targetEntries:EXECUTION_TARGET,kick:kicked.result||null}));
       return;
     }catch(degradedError){
       console.error('UNIFIED_GITHUB_DEGRADED_MODE_ERROR',degradedError.message);

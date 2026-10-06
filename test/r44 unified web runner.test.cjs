@@ -25,7 +25,11 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/GITHUB_403_SECONDARY_RATE_LIMIT/);
   assert.match(source,/stdio:\['ignore','pipe','pipe'\]/);
   assert.match(source,/GITHUB_DEGRADED_CLOUDFLARE_CONTINUES/);
-  assert.match(source,/targetEntries:unified\.EXECUTION_TARGET_ENTRIES/);
+  assert.match(source,/EXECUTION_TARGET=unified\.executionTarget/);
+  assert.match(source,/MLS_UNIFIED_TARGET_ENTRIES/);
+  assert.match(source,/UNIFIED_TARGET_PROGRESS/);
+  assert.match(source,/processed_entries/);
+  assert.match(source,/targetEntries:EXECUTION_TARGET/);
   assert.match(source,/REVIEW_REQUIRED/);
   assert.match(source,/pauseRunner:false/);
   assert.match(source,/function r44Drained/);
@@ -50,6 +54,8 @@ test('Web runner is page-controlled, recurring, and re-enters after canonical wo
   assert.match(workflow,/MLS Unified R33 Integration Execute/);
   assert.match(workflow,/MLS_EDITORIAL_CHAT_KEY/);
   assert.match(workflow,/actions: write/);
+  assert.match(workflow,/target_entries:/);
+  assert.match(workflow,/MLS_UNIFIED_TARGET_ENTRIES/);
 });
 
 test('Bot submissions remain fenced and use explicit workflow_dispatch, not recursive comment events',()=>{
