@@ -45,6 +45,42 @@ test('Unified Evidence submit carries only referenced fenced repair sources',()=
   assert.match(workflow,/MLS-SRC-\*\.json/);
 });
 
+test('legacy r33-unified lease may publish only its referenced deterministic repair source',()=>{
+  const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
+  const submit=require('../scripts/MLS unified r33 evidence submit.cjs');
+  const code='MLS-V01-0001';
+  const evidencePath='MLS R32 EDITORIAL/evidence git/entries/ingles/'+code+'.json';
+  const contentPath='content/ingles/'+code+'.json';
+  const sourceId='MLS-SRC-0123456789ABCDEF0123';
+  const sourcePath='MLS R32 EDITORIAL/evidence git/registry/sources/'+sourceId+'.json';
+  const state={
+    kind:'mls_global_assignment',version:'1.0',assignmentId:'MLS-GLOBAL-000001',issueNumber:1,
+    workerId:'mls-unified-web-r33',workerLogin:'github-actions[bot]',
+    workId:'r33-unified:fixture',workVersion:2,workType:'editorial_batch',title:'fixture',provider:'r33-farm',
+    instructions:'fixture',dependencies:[],resourceLocks:['entry:'+code,'path:'+evidencePath,'path:'+contentPath],
+    allowedPaths:[evidencePath,contentPath],validationRequired:[],completion:{requiresCommit:true,requiresValidation:true},
+    integration:null,branch:'worker/r33-unified/000001',baseCommit:'0'.repeat(40),leaseToken:'fixture',
+    leaseEpoch:1,status:'leased',claimedAt:new Date(Date.now()-1000).toISOString(),acknowledgedAt:new Date(Date.now()-1000).toISOString(),
+    ackDeadlineAt:new Date(Date.now()+60000).toISOString(),lastHeartbeatAt:null,expiresAt:new Date(Date.now()+60000).toISOString(),
+    checkpoints:[],lastCheckpointCommit:null,lastCheckpointHash:null,recovery:null,readyToClose:false,cancelRequested:false,
+    finalCommitSha:null,lastRejectedEvent:null,closedAt:null
+  };
+  assert.equal(core.pathAllowed(sourcePath,state.allowedPaths),false);
+  assert.equal(submit.repairSourcePathAllowed(sourcePath,state,code,sourceId),true);
+  assert.equal(submit.repairSourcePathAllowed(sourcePath,{...state,provider:'global'},code,sourceId),false);
+  assert.equal(submit.repairSourcePathAllowed(sourcePath.replace(sourceId,'MLS-SRC-FFFFFFFFFFFFFFFFFFFF'),state,code,sourceId),false);
+  const issue={title:'[MLS Dispatcher][LEASED] fixture',body:core.renderAssignmentBody(state)};
+  const comment={user:{login:'github-actions[bot]'},author_association:'NONE'};
+  const payload={
+    assignmentId:state.assignmentId,leaseEpoch:1,code,
+    evidence:{code,status:'VERIFIED',contentPath,language:'ingles',links:[{sourceId}]},
+    content:null,
+    sources:[{sourceId,metadata:{sourceType:'institutional_webpage',authorityTier:'B',status:'active',title:'Fixture source',canonicalUrl:'https://example.org/source'}}]
+  };
+  const validated=submit.validate(issue,comment,payload);
+  assert.equal(validated.sources[0].sourcePath,sourcePath);
+});
+
 test('syntax-checks the submission runner',()=>{
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence submit.cjs'],{stdio:'pipe'});
 });
