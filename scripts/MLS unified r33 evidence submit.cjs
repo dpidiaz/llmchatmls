@@ -34,6 +34,14 @@ async function gh(endpoint,{method='GET',body}={}){
   return data;
 }
 function encodeRef(ref){return String(ref).split('/').map(encodeURIComponent).join('/');}
+function repairSourcePathAllowed(sourcePath,state,code,sourceId){
+  if(core.pathAllowed(sourcePath,state.allowedPaths||[]))return true;
+  return state.provider==='r33-farm' &&
+    String(state.workId||'').startsWith('r33-unified:') &&
+    String(state.branch||'').startsWith('worker/r33-unified/') &&
+    (state.resourceLocks||[]).includes('entry:'+code) &&
+    sourcePath===SOURCE_PREFIX+sourceId+'.json';
+}
 function validate(issue,comment,payload){
   if(!String(issue?.title||'').startsWith('[MLS Dispatcher][LEASED]'))fail('UNIFIED_EVIDENCE_NOT_LEASED');
   const state=core.parseAssignmentState(issue?.body||'');
@@ -76,7 +84,7 @@ function validate(issue,comment,payload){
     if(String(metadata.status||'active')!=='active'||!String(metadata.title||'').trim()||!String(metadata.canonicalUrl||'').trim())fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_METADATA_INCOMPLETE');
     if(!referenced.has(sourceId))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_UNREFERENCED');
     const sourcePath=SOURCE_PREFIX+sourceId+'.json';
-    if(!core.pathAllowed(sourcePath,state.allowedPaths||[]))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_PATH_OUT_OF_SCOPE');
+    if(!repairSourcePathAllowed(sourcePath,state,code,sourceId))fail('UNIFIED_EVIDENCE_REPAIR_SOURCE_PATH_OUT_OF_SCOPE');
     return {sourceId,metadata,sourcePath};
   });
   const expires=Date.parse(String(state.expiresAt||''));
@@ -247,4 +255,4 @@ async function main(){
   fail('UNIFIED_EVIDENCE_MODE_INVALID');
 }
 if(require.main===module)main().catch(error=>{console.error(error.code||'UNIFIED_EVIDENCE_SUBMIT_ERROR',error.message);process.exitCode=2});
-module.exports={MARKER,AUTHORIZED,extractMarked,validate};
+module.exports={MARKER,AUTHORIZED,extractMarked,repairSourcePathAllowed,validate};
