@@ -194,16 +194,20 @@ test('legacy bootstrap gets one same-context preflight recovery; unrelated deplo
   assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
   assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0002'").get().state,'QUARANTINED');
 });
-test('recovery is globally bounded to one 100-entry sweep and never includes R44 quarantines',async()=>{
+test('quarantine recovery has no time throttle: consecutive 100-entry sweeps run immediately and never include R44 quarantines',async()=>{
   const h=harness();await setup(h,1);await assets(h,120);await h.r.canonicalSeed(h.env);
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=1,last_error='SOURCE_FETCH_HTTP_503'; UPDATE r44_ticket_progress SET state='QUARANTINED'");
   const r44Before=h.db.prepare('SELECT * FROM r44_ticket_progress').all();
-  await Promise.all(Array.from({length:20},()=>h.r.canonicalRecoverQuarantine(h.env)));
+  await h.r.canonicalRecoverQuarantine(h.env);
   assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='RETRY'").get().n,100);
+  assert.equal(h.db.prepare("SELECT next_ms FROM mls_canonical_recovery_clock WHERE id=1").get().next_ms,0,'single-flight mutex must release immediately');
+  await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='RETRY'").get().n,120,'second sweep must not wait for a time window');
   const status=await h.r.canonicalStatus(h.env);
-  assert.equal(status.quarantine.source,'mls_canonical_queue');assert.equal(status.quarantine.total,20);
-  assert.equal(status.quarantine.byCategory.technical_transient,20);
+  assert.equal(status.quarantine.source,'mls_canonical_queue');assert.equal(status.quarantine.total,0);
   assert.equal(status.quarantine.batchSize,100);
+  assert.equal(status.quarantine.intervalMs,0);
+  assert.equal(status.quarantine.mode,'IMMEDIATE_SINGLE_FLIGHT');
   assert.deepEqual(h.db.prepare('SELECT * FROM r44_ticket_progress').all(),r44Before);
 });
 test('same-context editorial quarantine gets one cheap preflight retry and then fences repeated failure',async()=>{
