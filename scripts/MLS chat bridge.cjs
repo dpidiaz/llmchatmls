@@ -46,6 +46,11 @@ const MLS_CHAT_BRIDGE_OPERATIONS = Object.freeze({
     pathname: '/api/unified-runner/status',
     input: 'body'
   },
+  unifiedRunnerKick: {
+    method: 'POST',
+    pathname: '/api/unified-runner/kick',
+    input: 'body'
+  },
   unifiedRunnerControl: {
     method: 'POST',
     pathname: '/api/unified-runner/control',
