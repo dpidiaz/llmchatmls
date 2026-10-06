@@ -47,6 +47,7 @@ function unifiedR33RepairDomainTier(url){
   return tiers.sort((a,b)=>order[b]-order[a])[0];
 }
 async function unifiedR33RepairSources(env,code){
+  if(!env||!env.WIKI_DB)return [];
   await unifiedR33RepairEnsure(env);
   const rows=await env.WIKI_DB.prepare("SELECT source_json FROM mls_r33_repair_sources WHERE code=? AND state='ACTIVE' ORDER BY created_ms,source_id").bind(String(code||"").toUpperCase()).all();
   return (rows.results||[]).map(r=>{try{return JSON.parse(r.source_json)}catch{return null}}).filter(Boolean);
