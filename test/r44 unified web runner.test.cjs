@@ -13,6 +13,8 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/MLS Global Dispatcher Scheduler\.yml/);
   assert.match(source,/MLS_GLOBAL_DISPATCH_EVENT/);
   assert.match(source,/MLS_UNIFIED_R33_EVIDENCE_SUBMIT/);
+  assert.match(source,/MLS_UNIFIED_R33_EVIDENCE_SUBMIT_BATCH/);
+  assert.match(source,/MLS Unified R33 Evidence Batch Submit\.yml/);
   assert.match(source,/draft\.repairSources/);
   assert.match(source,/sources:draft\.repairSources/);
   assert.match(source,/MLS_UNIFIED_R33_INTEGRATION_EXECUTE/);
@@ -44,6 +46,7 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.doesNotMatch(source,/\/contents\/.*method:'PUT'/);
   child.execFileSync(process.execPath,['--check','scripts/MLS unified web runner.cjs'],{stdio:'pipe'});
   child.execFileSync(process.execPath,['--check','scripts/unified runner r33 runtime.js'],{stdio:'pipe'});
+  child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence batch.cjs'],{stdio:'pipe'});
 });
 
 test('Web runner is page-controlled, recurring, and re-enters after canonical workflows finish',()=>{
@@ -54,6 +57,7 @@ test('Web runner is page-controlled, recurring, and re-enters after canonical wo
   assert.match(workflow,/workflow_run:/);
   assert.match(workflow,/MLS Global Dispatcher Scheduler/);
   assert.match(workflow,/MLS Unified R33 Evidence Submit/);
+  assert.match(workflow,/MLS Unified R33 Evidence Batch Submit/);
   assert.match(workflow,/MLS Unified R33 Integration Execute/);
   assert.match(workflow,/MLS_EDITORIAL_CHAT_KEY/);
   assert.match(workflow,/actions: write/);
