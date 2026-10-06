@@ -54,9 +54,13 @@ async function unifiedR33RepairSources(env,code){
 async function unifiedR33RepairSeed(env){
   await unifiedR33RepairEnsure(env);
   const reasons=JSON.stringify([...MLS_R33_REPAIR_REASONS]);
-  await env.WIKI_DB.prepare(`INSERT OR IGNORE INTO mls_r33_repair_queue(code,state,reason,updated_ms)
+  await env.WIKI_DB.prepare(`INSERT INTO mls_r33_repair_queue(code,state,reason,updated_ms)
     SELECT q.code,'PENDING',q.last_error,?1 FROM mls_canonical_queue q
-    WHERE q.state='QUARANTINED' AND q.last_error IN (SELECT value FROM json_each(?2))`).bind(Date.now(),reasons).run();
+    WHERE q.state='QUARANTINED' AND q.last_error IN (SELECT value FROM json_each(?2))
+    ON CONFLICT(code) DO UPDATE SET
+      reason=excluded.reason,
+      state=CASE WHEN mls_r33_repair_queue.state='DONE' AND mls_r33_repair_queue.attempts<3 THEN 'PENDING' ELSE mls_r33_repair_queue.state END,
+      updated_ms=excluded.updated_ms`).bind(Date.now(),reasons).run();
 }
 async function unifiedR33RepairClaim(env){
   await unifiedR33RepairSeed(env);
@@ -97,14 +101,16 @@ async function unifiedR33RepairRegister(env,input,row,candidate,providerResult){
   const sourceType=String(candidate&&candidate.sourceType||"institutional_webpage");
   if(!new Set(["institutional_webpage","reference_entry","report"]).has(sourceType))return {ok:false,reason:"REPAIR_TYPE_INVALID"};
   const sourceId=await unifiedR33RepairSourceId(url);
+  const prior=await env.WIKI_DB.prepare("SELECT source_id FROM mls_r33_repair_sources WHERE code=? AND source_id=?").bind(row.code,sourceId).first();
+  if(prior)return {ok:false,reason:"REPAIR_SOURCE_ALREADY_TRIED"};
   const language=unifiedR33LanguageCode(input.article&&input.article.language)||String(candidate&&candidate.language||"");
+  const host=new URL(url).hostname.toLowerCase();
   const metadata={
     sourceType,authorityTier:unifiedR33RepairDomainTier(url),status:"active",
     title:String(candidate&&candidate.title||"").trim(),authors:[],
-    institution:String(candidate&&candidate.institution||"").trim()||new URL(url).hostname,
-    publisher:String(candidate&&candidate.publisher||"").trim()||null,
+    institution:host,publisher:null,
     canonicalUrl:url,language:language||null,
-    topics:Array.isArray(candidate&&candidate.topics)?candidate.topics.filter(Boolean).slice(0,16):[input.article&&input.article.title].filter(Boolean),
+    topics:[input.article&&input.article.title,input.article&&input.article.part,input.article&&input.article.chapter].filter(Boolean).slice(0,16),
     accessedAt:new Date().toISOString().slice(0,10)
   };
   if(!metadata.title)return {ok:false,reason:"REPAIR_TITLE_MISSING"};
@@ -112,6 +118,8 @@ async function unifiedR33RepairRegister(env,input,row,candidate,providerResult){
   const source={schemaVersion:"1.0",sourceId,metadata};
   const doc=await unifiedR33FetchSourceDocument(source);
   if(!doc.ok)return {ok:false,reason:doc.reason||"REPAIR_FETCH_REJECTED"};
+  const docTokens=unifiedR33Tokens(doc.text),titleTokens=[...unifiedR33Tokens(metadata.title)].filter(t=>t.length>=4);
+  if(titleTokens.length&&titleTokens.filter(t=>docTokens.has(t)).length<Math.min(2,titleTokens.length))return {ok:false,reason:"REPAIR_TITLE_NOT_IN_SOURCE"};
   const articleText=[input.article&&input.article.title,input.article&&input.article.part,input.article&&input.article.chapter,input.article&&input.article.articleMarkdown].filter(Boolean).join(" ");
   if(unifiedR33RepairOverlap(articleText,doc.text)<3)return {ok:false,reason:"REPAIR_RELEVANCE_TOO_LOW"};
   const sourceJson=JSON.stringify(source),sha=await r44Sha256Text(sourceJson);
