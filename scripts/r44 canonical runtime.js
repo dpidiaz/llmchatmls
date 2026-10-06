@@ -75,7 +75,7 @@ async function canonicalRecoverQuarantine(env,now=Date.now()){
   // source fetch. At most one canonical 100-entry batch is reconsidered per gate.
   const gate=await env.WIKI_DB.prepare('UPDATE mls_canonical_recovery_clock SET next_ms=? WHERE id=1 AND next_ms<=? RETURNING id').bind(now+canonicalRecoveryInterval,now).first();
   if(!gate)return;
-  const rows=await env.WIKI_DB.prepare(`SELECT q.code,q.page,q.input_hash,q.attempts,q.last_error,r.* FROM mls_canonical_queue q JOIN mls_canonical_recovery r USING(code)
+  const rows=await env.WIKI_DB.prepare(`SELECT q.code,q.page,q.revision,q.input_hash,q.attempts,q.last_error,r.* FROM mls_canonical_queue q JOIN mls_canonical_recovery r USING(code)
     WHERE q.revision=(SELECT revision FROM mls_canonical_meta WHERE id=1) AND q.state='QUARANTINED'
     AND q.lease_token IS NULL AND q.expires_ms=0 AND q.retry_ms<=? AND ${canonicalRecoverableSql}
     ORDER BY q.code LIMIT ${canonicalRecoveryBatchSize}`).bind(now).all();
