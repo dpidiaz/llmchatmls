@@ -196,7 +196,8 @@ function stageMatchesState(stage,state){
 }
 function stageMatchesClaim(stage,command){
   const spec=unified.stageSpec(stage);
-  return !!command&&command.operation==='claim'&&stageWorkerMatches(stage,command.workerId)&&command.workerLogin===BOT&&command.provider===spec.provider&&command.workPrefix===spec.workPrefix;
+  const trustedAutopullLogin=command&&command.workerLogin!=null?command.workerLogin===BOT:true;
+  return !!command&&command.operation==='claim'&&stageWorkerMatches(stage,command.workerId)&&trustedAutopullLogin&&command.provider===spec.provider&&command.workPrefix===spec.workPrefix;
 }
 async function getIssue(number){
   if(!Number.isInteger(Number(number))||Number(number)<1)return null;
