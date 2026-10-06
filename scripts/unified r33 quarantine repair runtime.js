@@ -81,7 +81,7 @@ async function unifiedR33RepairDiscover(env,input,reason){
     "Prefer official language academies, government language institutes, universities, standards bodies, dictionaries/reference works, or other authoritative institutional pages.",
     "Never return product pages, bookstores, search-result pages, login pages, DOI landing pages without article text, or guessed URLs. If uncertain return NO_SAFE_SOURCE.",
     "Output {status:'CANDIDATES'|'NO_SAFE_SOURCE',candidates:[{url,title,sourceType,institution,publisher,language,topics:[...]}],rationale}.",
-    "Allowed sourceType: institutional_webpage, reference_entry, report, dataset, standard.",
+    "Allowed sourceType: institutional_webpage, reference_entry, report. These are the only automatically publishable APA source types in this lane.",
     "QUARANTINE REASON: "+String(reason||""),
     "ARTICLE TITLE/PART/CHAPTER: "+[article.title,article.part,article.chapter].filter(Boolean).join(" | "),
     "ARTICLE: "+String(article.articleMarkdown||"").slice(0,14000),
@@ -95,7 +95,7 @@ async function unifiedR33RepairDiscover(env,input,reason){
 async function unifiedR33RepairRegister(env,input,row,candidate,providerResult){
   const url=unifiedR33RepairNormalizeUrl(candidate&&candidate.url);if(!url)return {ok:false,reason:"REPAIR_URL_INVALID"};
   const sourceType=String(candidate&&candidate.sourceType||"institutional_webpage");
-  if(!new Set(["institutional_webpage","reference_entry","report","dataset","standard"]).has(sourceType))return {ok:false,reason:"REPAIR_TYPE_INVALID"};
+  if(!new Set(["institutional_webpage","reference_entry","report"]).has(sourceType))return {ok:false,reason:"REPAIR_TYPE_INVALID"};
   const sourceId=await unifiedR33RepairSourceId(url);
   const language=unifiedR33LanguageCode(input.article&&input.article.language)||String(candidate&&candidate.language||"");
   const metadata={
