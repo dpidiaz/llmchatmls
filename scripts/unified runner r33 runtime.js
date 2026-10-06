@@ -6,7 +6,7 @@
 var MLS_CANONICAL_R33_POLICY={claims:2,support:2,coverage:1,repair:1};
 function unifiedR33CanonicalContext(body) {
   const article=unifiedR33ReconcileArticle(body.article,body.handoffEntry||{});
-  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
+  const candidates=unifiedR33SourceCandidates(article,body.handoffEntry||{},{repairUrlOnly:true});
   return {policy:MLS_CANONICAL_R33_POLICY,candidates:unifiedR33SourcePacket(candidates)};
 }
 // Cheap deterministic quarantine preflight. It performs no AI inference and no
@@ -20,7 +20,7 @@ function unifiedR33CanonicalPreflight(body,reason) {
   }catch(error){
     return {eligible:false,reason:String(error&&error.message||'CANONICAL_PREFLIGHT_INVALID_CONTEXT'),candidateCount:0,fetchableCandidateCount:0};
   }
-  const fetchable=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
+  const fetchable=unifiedR33SourceCandidates(article,body.handoffEntry||{},{repairUrlOnly:true});
   const s=String(reason||"");
   if(!candidates.length)return {eligible:false,reason:"NO_REGISTERED_SOURCE_CANDIDATE",candidateCount:0,fetchableCandidateCount:0};
   if(s==="NO_REGISTERED_SOURCE_CANDIDATE")return {eligible:true,reason:"CANDIDATE_NOW_AVAILABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
