@@ -79,7 +79,7 @@ function isGithubSecondaryRateLimit(error){
     error&&error.data&&error.data.message,
     error&&error.data&&error.data.documentation_url
   ].filter(Boolean).join(' ').toLowerCase();
-  const remaining=String(error&&error.rateLimitRemaining??'');
+  const remaining=String((error&&error.rateLimitRemaining)??'');
   return (status===403||status===429)&&(
     /secondary rate limit|temporarily blocked from content creation|abuse detection|api rate limit exceeded|rate limit exceeded for installation/.test(message)
     || remaining==='0'
