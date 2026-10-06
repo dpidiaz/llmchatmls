@@ -40,6 +40,18 @@ function handoffFor(entry,ordinal){
   };
 }
 
+test('Unified visible command requires 100 cumulative entries per execution',()=>{
+  assert.equal(unified.EXECUTION_TARGET_ENTRIES,100);
+  assert.equal(unified.MAX_MICROCLAIM_ENTRIES,50);
+  const agents=fs.readFileSync('AGENTS.md','utf8');
+  const guide=fs.readFileSync(unified.GUIDE,'utf8');
+  assert.match(agents,/targetEntries = 100/);
+  assert.match(agents,/\*\*not\*\* the command boundary/i);
+  assert.match(agents,/Do \*\*not\*\* report the command as DONE at 5, 10, 15/);
+  assert.match(guide,/at least 100 entries per execution/);
+  assert.match(guide,/same execution must continue pulling additional eligible Unified work/);
+});
+
 test('Unified command creates only scoped integration and R33 claims',()=>{
   const a=unified.createClaim({stage:'integration',requestId:'unified-int-0001',workerId:'unified-worker-0001'});
   assert.equal(a.command.provider,'r33-index-integration');
