@@ -76,7 +76,7 @@ async function unifiedR33RepairSeed(env){
     WHERE q.state='QUARANTINED' AND q.last_error IN (SELECT value FROM json_each(?2))
     ON CONFLICT(code) DO UPDATE SET
       reason=excluded.reason,
-      state=CASE WHEN mls_r33_repair_queue.state='DONE' AND mls_r33_repair_queue.attempts<6 THEN 'PENDING' ELSE mls_r33_repair_queue.state END,
+      state=CASE WHEN mls_r33_repair_queue.state='DONE' AND mls_r33_repair_queue.last_error='REHYDRATED_V2' AND mls_r33_repair_queue.attempts<6 THEN 'PENDING' ELSE mls_r33_repair_queue.state END,
       updated_ms=excluded.updated_ms`).bind(Date.now(),reasons).run();
 }
 async function unifiedR33RepairClaim(env){
@@ -142,7 +142,7 @@ async function unifiedR33RepairRehydrateDone(env){
     FROM mls_r33_repair_queue r
     JOIN mls_canonical_queue q USING(code)
     JOIN mls_canonical_recovery rec USING(code)
-    WHERE r.state='DONE' AND r.last_source_id IS NOT NULL AND (r.last_error IS NULL OR r.last_error<>'REHYDRATED_V2')
+    WHERE r.state='DONE' AND r.last_source_id IS NOT NULL AND r.last_error IS NULL
       AND q.state='QUARANTINED'
       AND EXISTS(SELECT 1 FROM mls_r33_repair_source_links l WHERE l.code=r.code AND l.source_id=r.last_source_id)
     ORDER BY r.updated_ms,r.code LIMIT 1`).first();
