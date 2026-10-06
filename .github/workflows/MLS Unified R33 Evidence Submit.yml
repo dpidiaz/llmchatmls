@@ -23,7 +23,10 @@ permissions:
 jobs:
   submit:
     concurrency:
-      group: mls-unified-github-writer
+      # Evidence writes are isolated by Dispatcher assignment branch. Serialize
+      # only within one assignment; distinct R33 assignments may validate and
+      # checkpoint concurrently. Final integration to main stays globally serial.
+      group: mls-unified-r33-${{ github.event.inputs.issue_number || github.event.issue.number }}
       cancel-in-progress: false
     if: >-
       ${{ github.event_name == 'workflow_dispatch' ||
