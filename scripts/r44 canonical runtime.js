@@ -1,7 +1,6 @@
 // Canonical preparation only. The existing R33 gate/integration owns VERIFIED.
 var canonicalReadyEnvs=new WeakSet();
 var canonicalRecoveryLockMs=2*60*1000;
-var canonicalTechnicalRetryBaseMs=5*60*1000;
 var canonicalRecoveryBatchSize=100;
 var canonicalStatusOverlayCache=new WeakMap();
 var canonicalAuthorityCache={expiresMs:0,status:null};
@@ -107,9 +106,7 @@ async function canonicalRecoverQuarantine(env,now=Date.now()){
         continue;
       }
     }
-    const delay=!changed&&category==='technical_transient'
-      ?canonicalTechnicalRetryBaseMs*Math.pow(2,Math.min(row.technical_retries,4))
-      :0;
+    const delay=0;
     // The history INSERT is the compare-and-swap guard. A stale selection cannot
     // reopen a completed row or overwrite a newer context.
     await env.WIKI_DB.batch([
@@ -250,7 +247,8 @@ async function canonicalStep(env){
     if(message==='CANONICAL_LEASE_LOST')return {status:'NO_WORK',error:message};
     const kind=workersAiFailureKind(message);
     const pause=error.unifiedStatus==='QUOTA_PAUSED'||kind==='quota'?'QUOTA_PAUSED':error.unifiedStatus==='POLICY_PAUSED'||kind==='paid'?'POLICY_PAUSED':null;
-    await commit(pause?'RETRY':row.attempts>=3||message.includes('HASH_MISMATCH')?'QUARANTINED':'RETRY',null,message,Date.now()+300000);
+    const nextState=pause?'RETRY':row.attempts>=3||message.includes('HASH_MISMATCH')?'QUARANTINED':'RETRY';
+    await commit(nextState,null,message,nextState==='QUARANTINED'?0:Date.now()+300000);
     if(pause){await unifiedRunnerApplyMark(env,{state:pause,last_error:message,errorDelta:1});return {status:pause};}
     return {status:'CANONICAL_RETRY',code:row.code,error:message};
   }
