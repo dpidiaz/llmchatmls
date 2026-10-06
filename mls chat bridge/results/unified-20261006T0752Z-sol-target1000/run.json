@@ -1,0 +1,544 @@
+{
+  "success": true,
+  "httpStatus": 200,
+  "operationId": "bridgeBatch",
+  "method": "BATCH",
+  "path": "bridge://batch",
+  "response": {
+    "ok": true,
+    "batchId": "MLS-UNIFIED-1000-20261006T0752Z-SOL",
+    "requested": 4,
+    "processed": 4,
+    "failures": 0,
+    "stopOnError": false,
+    "results": [
+      {
+        "index": 0,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedRunnerControl",
+        "method": "POST",
+        "path": "/api/unified-runner/control",
+        "response": {
+          "ok": true,
+          "action": "start",
+          "state": "RUNNING",
+          "runner": {
+            "id": 1,
+            "state": "RUNNING",
+            "worker_id": "mls-unified-web-runner-v1",
+            "started_at": "2026-10-03T23:10:20.246Z",
+            "updated_at": "2026-10-06T07:54:47.673Z",
+            "processed_entries": 734,
+            "corrected_entries": 1,
+            "error_count": 16,
+            "last_ticket": "R43-EMERGENCY-0020",
+            "last_code": "MLS-V03-0126",
+            "last_error": null,
+            "last_step_at": "2026-10-06T07:54:46.815Z",
+            "step_token": null,
+            "busy_until": null,
+            "schema_version": "3",
+            "configured_runners": 100,
+            "active_runners": 87
+          }
+        },
+        "completedAt": "2026-10-06T07:54:47.908Z"
+      },
+      {
+        "index": 1,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedRunnerKick",
+        "method": "POST",
+        "path": "/api/unified-runner/kick",
+        "response": {
+          "ok": true,
+          "mode": "CLOUDFLARE_ONLY",
+          "result": {
+            "status": "SCHEDULED",
+            "runners": 100
+          },
+          "githubGate": {
+            "id": 1,
+            "state": "NORMAL",
+            "retry_at": 0,
+            "failure_count": 0,
+            "last_error": null,
+            "degraded_at": "2026-10-06T06:55:40.801Z",
+            "recovered_at": "2026-10-06T07:34:01.181Z",
+            "updated_at": "2026-10-06T07:34:01.181Z"
+          }
+        },
+        "completedAt": "2026-10-06T07:54:51.209Z"
+      },
+      {
+        "index": 2,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "unifiedRunnerStatus",
+        "method": "POST",
+        "path": "/api/unified-runner/status",
+        "response": {
+          "ok": true,
+          "runner": {
+            "id": 1,
+            "state": "RUNNING",
+            "worker_id": "mls-unified-web-runner-v1",
+            "started_at": "2026-10-03T23:10:20.246Z",
+            "updated_at": "2026-10-06T07:54:51.074Z",
+            "processed_entries": 734,
+            "corrected_entries": 1,
+            "error_count": 16,
+            "last_ticket": "R43-EMERGENCY-0020",
+            "last_code": "MLS-V03-0126",
+            "last_error": null,
+            "last_step_at": "2026-10-06T07:54:51.074Z",
+            "step_token": null,
+            "busy_until": null,
+            "schema_version": "3",
+            "configured_runners": 100,
+            "active_runners": 85
+          },
+          "r44": {
+            "status": "ACTIVE",
+            "controlPlane": "CLOUDFLARE_D1",
+            "productionMode": "PARALLEL_HOT_PATH",
+            "globalProductionMutex": false,
+            "githubHotPathWrites": false,
+            "leaseTtlSeconds": 300,
+            "maxActiveLeases": 128,
+            "mcpEndpoint": "/mcp",
+            "mcpProtocol": "2026-07-28",
+            "counts": {
+              "queued": 0,
+              "leased": 1,
+              "audited": 1681,
+              "verified": 0,
+              "quarantined": 0,
+              "recoverable": 0
+            },
+            "durableCounts": [
+              {
+                "state": "COMPLETE",
+                "n": 1681
+              },
+              {
+                "state": "PARTIAL_DURABLE",
+                "n": 1
+              }
+            ],
+            "meta": {
+              "pool_schema": "MLS-R44-CLOUDFLARE-POOL-2",
+              "pool_generated_at": "2026-10-01T09:50:08.936233Z",
+              "base_commit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+              "pool_ticket_count": "1682",
+              "pool_entry_count": "8408",
+              "pool_ticket_size": "5",
+              "pool_manifest_sha256": "28153404f333669c2d1d7219aae45972387c1d49ff913b5ff75175c009eee47d",
+              "content_manifest_blob": "643b3c9cab84a0372f9e52127fe78ad0e9fab938",
+              "cutover_mode": "cloudflare-d1",
+              "durable_entry_schema": "1"
+            }
+          },
+          "budget": {
+            "dateUTC": "2026-10-06",
+            "dailyNeurons": 51246.95,
+            "dailyReservedNeurons": 0,
+            "targetNeurons": 9000,
+            "quotaExhaustedDate": null,
+            "workersAiCircuit": null
+          },
+          "lanes": {
+            "integration": {
+              "stage": "integration",
+              "state": "FENCE_REJECTED",
+              "issue_number": null,
+              "assignment_id": null,
+              "last_code": null,
+              "last_error": "Claim pointer belongs to a different web runner lane.",
+              "detail_json": "{\"issueNumber\":5626}",
+              "updated_at": "2026-10-06T07:33:57.267Z",
+              "detail": {
+                "issueNumber": 5626
+              }
+            },
+            "r33": {
+              "stage": "r33",
+              "state": "WAITING_PREPARATION",
+              "issue_number": 5627,
+              "assignment_id": "MLS-GLOBAL-005627",
+              "last_code": "MLS-V06-0161",
+              "last_error": "PREPARED_CONTEXT_MISMATCH_OR_MISSING",
+              "detail_json": null,
+              "updated_at": "2026-10-06T07:44:55.606Z",
+              "detail": null
+            }
+          },
+          "githubGate": {
+            "id": 1,
+            "state": "NORMAL",
+            "retry_at": 0,
+            "failure_count": 0,
+            "last_error": null,
+            "degraded_at": "2026-10-06T06:55:40.801Z",
+            "recovered_at": "2026-10-06T07:34:01.181Z",
+            "updated_at": "2026-10-06T07:34:01.181Z"
+          },
+          "canonical": {
+            "initialized": true,
+            "claimable": 26,
+            "pending": 3671,
+            "waitingHandoff": 5,
+            "prepared": 165,
+            "counts": {
+              "LEASED": 74,
+              "PREPARED": 165,
+              "QUARANTINED": 3401,
+              "READY": 21,
+              "RETRY": 5,
+              "WAITING_HANDOFF": 5
+            },
+            "quarantine": {
+              "source": "mls_canonical_queue",
+              "total": 3401,
+              "byCategory": {
+                "technical_transient": 10,
+                "sources_context": 1057,
+                "editorial_review": 1763,
+                "hash_context": 0,
+                "other": 571
+              },
+              "byReason": [
+                {
+                  "last_error": "CLAIM_CONFIDENCE_LOW",
+                  "attempts": 2,
+                  "n": 1,
+                  "recoverable": 1,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "CLAIM_SOURCE_NOT_REGISTERED",
+                  "attempts": 2,
+                  "n": 2,
+                  "recoverable": 2,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "CLAIM_SOURCE_NOT_REGISTERED",
+                  "attempts": 4,
+                  "n": 4,
+                  "recoverable": 0,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "CLAIM_SOURCE_TIER_INVALID",
+                  "attempts": 2,
+                  "n": 1,
+                  "recoverable": 1,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "CLAIM_SUMMARY_INVALID",
+                  "attempts": 2,
+                  "n": 19,
+                  "recoverable": 19,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "CLAIM_SUMMARY_INVALID",
+                  "attempts": 4,
+                  "n": 16,
+                  "recoverable": 1,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "CLAIM_SUMMARY_INVALID",
+                  "attempts": 6,
+                  "n": 1,
+                  "recoverable": 1,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "CLAIM_TYPE_INVALID",
+                  "attempts": 2,
+                  "n": 1,
+                  "recoverable": 1,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "MATCHER_REQUESTED_REVIEW",
+                  "attempts": 2,
+                  "n": 648,
+                  "recoverable": 648,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "MATCHER_REQUESTED_REVIEW",
+                  "attempts": 3,
+                  "n": 27,
+                  "recoverable": 27,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "MATCHER_REQUESTED_REVIEW",
+                  "attempts": 4,
+                  "n": 475,
+                  "recoverable": 1,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "MATCHER_REQUESTED_REVIEW",
+                  "attempts": 5,
+                  "n": 4,
+                  "recoverable": 1,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "MATCHER_REQUESTED_REVIEW",
+                  "attempts": 6,
+                  "n": 2,
+                  "recoverable": 1,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "SOURCE_CONTENT_TYPE_UNSUPPORTED",
+                  "attempts": 2,
+                  "n": 6,
+                  "recoverable": 6,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_FETCH_HTTP_403",
+                  "attempts": 3,
+                  "n": 5,
+                  "recoverable": 0,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_FETCH_HTTP_530",
+                  "attempts": 3,
+                  "n": 32,
+                  "recoverable": 11,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_FETCH_HTTP_530",
+                  "attempts": 4,
+                  "n": 2,
+                  "recoverable": 0,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_FULLTEXT_REQUIRED",
+                  "attempts": 1,
+                  "n": 345,
+                  "recoverable": 345,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_FULLTEXT_REQUIRED",
+                  "attempts": 2,
+                  "n": 179,
+                  "recoverable": 179,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_FULLTEXT_REQUIRED",
+                  "attempts": 3,
+                  "n": 8,
+                  "recoverable": 8,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_FULLTEXT_REQUIRED",
+                  "attempts": 4,
+                  "n": 3,
+                  "recoverable": 3,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE",
+                  "attempts": 3,
+                  "n": 514,
+                  "recoverable": 0,
+                  "category": "other"
+                },
+                {
+                  "last_error": "SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE",
+                  "attempts": 4,
+                  "n": 53,
+                  "recoverable": 0,
+                  "category": "other"
+                },
+                {
+                  "last_error": "SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE",
+                  "attempts": 5,
+                  "n": 1,
+                  "recoverable": 0,
+                  "category": "other"
+                },
+                {
+                  "last_error": "SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE",
+                  "attempts": 7,
+                  "n": 3,
+                  "recoverable": 0,
+                  "category": "other"
+                },
+                {
+                  "last_error": "SOURCE_SUPPORT_AUDIT_REJECTED",
+                  "attempts": 2,
+                  "n": 52,
+                  "recoverable": 52,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "SOURCE_SUPPORT_AUDIT_REJECTED",
+                  "attempts": 3,
+                  "n": 9,
+                  "recoverable": 9,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "SOURCE_SUPPORT_AUDIT_REJECTED",
+                  "attempts": 4,
+                  "n": 498,
+                  "recoverable": 0,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "SOURCE_SUPPORT_AUDIT_REJECTED",
+                  "attempts": 5,
+                  "n": 8,
+                  "recoverable": 0,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "SOURCE_SUPPORT_AUDIT_REJECTED",
+                  "attempts": 6,
+                  "n": 2,
+                  "recoverable": 0,
+                  "category": "editorial_review"
+                },
+                {
+                  "last_error": "SOURCE_URL_UNAVAILABLE",
+                  "attempts": 2,
+                  "n": 463,
+                  "recoverable": 463,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_URL_UNAVAILABLE",
+                  "attempts": 3,
+                  "n": 5,
+                  "recoverable": 5,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "SOURCE_URL_UNAVAILABLE",
+                  "attempts": 4,
+                  "n": 2,
+                  "recoverable": 2,
+                  "category": "sources_context"
+                },
+                {
+                  "last_error": "UNIFIED_R33_DRAFT_JSON_INVALID",
+                  "attempts": 4,
+                  "n": 2,
+                  "recoverable": 2,
+                  "category": "technical_transient"
+                },
+                {
+                  "last_error": "UNIFIED_R33_DRAFT_JSON_INVALID",
+                  "attempts": 5,
+                  "n": 3,
+                  "recoverable": 2,
+                  "category": "technical_transient"
+                },
+                {
+                  "last_error": "UNIFIED_R33_DRAFT_JSON_INVALID",
+                  "attempts": 6,
+                  "n": 5,
+                  "recoverable": 3,
+                  "category": "technical_transient"
+                }
+              ],
+              "recoverable": 1794,
+              "requiresChangeOrReview": 1607,
+              "batchSize": 100,
+              "intervalMs": 0,
+              "mode": "IMMEDIATE_SINGLE_FLIGHT"
+            },
+            "batchSize": 100,
+            "verifiedAuthority": "github-main-verified-index",
+            "readThroughAuthority": false,
+            "reconciliationPending": 0
+          },
+          "freeOnly": true,
+          "chatCompatible": true,
+          "auth": {
+            "mode": "editorial-key",
+            "email": null,
+            "aud": null
+          },
+          "canonicalVerifiedAuthority": "MLS R32 EDITORIAL/evidence git/indexes/verified.json"
+        },
+        "completedAt": "2026-10-06T07:54:52.358Z"
+      },
+      {
+        "index": 3,
+        "success": true,
+        "httpStatus": 200,
+        "operationId": "r44StatusChat",
+        "method": "POST",
+        "path": "/api/r44/chat-bridge/status",
+        "response": {
+          "status": "ACTIVE",
+          "controlPlane": "CLOUDFLARE_D1",
+          "productionMode": "PARALLEL_HOT_PATH",
+          "globalProductionMutex": false,
+          "githubHotPathWrites": false,
+          "leaseTtlSeconds": 300,
+          "maxActiveLeases": 128,
+          "mcpEndpoint": "/mcp",
+          "mcpProtocol": "2026-07-28",
+          "counts": {
+            "queued": 0,
+            "leased": 1,
+            "audited": 1681,
+            "verified": 0,
+            "quarantined": 0,
+            "recoverable": 0
+          },
+          "durableCounts": [
+            {
+              "state": "COMPLETE",
+              "n": 1681
+            },
+            {
+              "state": "PARTIAL_DURABLE",
+              "n": 1
+            }
+          ],
+          "meta": {
+            "pool_schema": "MLS-R44-CLOUDFLARE-POOL-2",
+            "pool_generated_at": "2026-10-01T09:50:08.936233Z",
+            "base_commit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+            "pool_ticket_count": "1682",
+            "pool_entry_count": "8408",
+            "pool_ticket_size": "5",
+            "pool_manifest_sha256": "28153404f333669c2d1d7219aae45972387c1d49ff913b5ff75175c009eee47d",
+            "content_manifest_blob": "643b3c9cab84a0372f9e52127fe78ad0e9fab938",
+            "cutover_mode": "cloudflare-d1",
+            "durable_entry_schema": "1"
+          },
+          "transport": "GITHUB_ACTIONS_FREE_BRIDGE",
+          "authenticated": true
+        },
+        "completedAt": "2026-10-06T07:54:52.817Z"
+      }
+    ]
+  },
+  "completedAt": "2026-10-06T07:54:52.817Z",
+  "commandFile": "mls chat bridge/commands/unified-20261006T0752Z-sol-target1000/run.json"
+}
