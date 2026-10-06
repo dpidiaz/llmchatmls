@@ -23,9 +23,11 @@ const WORKERS={
 };
 const WORKFLOWS={
   integration:'MLS Unified R33 Integration Execute.yml',
-  r33:'MLS Unified R33 Evidence Submit.yml'
+  r33:'MLS Unified R33 Evidence Submit.yml',
+  r33Batch:'MLS Unified R33 Evidence Batch Submit.yml'
 };
 const REVIEW_MARKER='MLS_UNIFIED_WEB_NEEDS_REVIEW';
+const BATCH_SUBMIT_MARKER='MLS_UNIFIED_R33_EVIDENCE_SUBMIT_BATCH';
 let githubMutationSucceeded=false;
 
 function fail(code,message,status=1){const e=new Error(message||code);e.code=code;e.status=status;throw e;}
@@ -624,15 +626,23 @@ async function dispatchR33(issue,state){
     return {status:'review-required'};
   }
 
+  const inflightBatch=await recentMarker(issue.number,BATCH_SUBMIT_MARKER,p=>
+    p.assignmentId===state.assignmentId&&Array.isArray(p.entries)&&p.entries.some(e=>pending.includes(String(e?.code||'').toUpperCase())),
+    15*60*1000);
+  const inflightSingle=await recentMarker(issue.number,'MLS_UNIFIED_R33_EVIDENCE_SUBMIT',p=>
+    p.assignmentId===state.assignmentId&&pending.includes(String(p.code||'').toUpperCase()),
+    15*60*1000);
+  if(inflightBatch||inflightSingle){
+    const marker=inflightBatch||inflightSingle;
+    await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,
+      code:pending[0],detail:{commentId:Number(marker.id),deduped:true,batch:Boolean(inflightBatch)}});
+    return {status:'already-dispatched',code:pending[0],count:inflightBatch?Math.min(5,pending.length):1};
+  }
+
   const context=jsonArrayAfter(state.instructions,'Contexto R44=');
   if(!Array.isArray(context))fail('UNIFIED_WEB_R44_CONTEXT_MISSING');
-  const waiting=[];
-  for(const code of candidates){
-    const duplicate=await recentMarker(issue.number,'MLS_UNIFIED_R33_EVIDENCE_SUBMIT',p=>p.assignmentId===state.assignmentId&&String(p.code||'')===code,15*60*1000);
-    if(duplicate){
-      await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,detail:{commentId:Number(duplicate.id),deduped:true}});
-      return {status:'already-dispatched',code};
-    }
+  const waiting=[],payloads=[],details=[];
+  for(const code of candidates.slice(0,5)){
     const ctx=context.find(x=>String(x.code||'').toUpperCase()===code);
     if(!ctx)fail('UNIFIED_WEB_R44_CODE_CONTEXT_MISSING',code);
     const contentPath=String(ctx.contentPath||'');
@@ -661,22 +671,29 @@ async function dispatchR33(issue,state){
       await report('r33','NEEDS_CHAT_REVIEW',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:String(draft.reason||'Source match below threshold.'),detail:reviewPayload});
       continue;
     }
-    const payload={
+    payloads.push({
       assignmentId:state.assignmentId,
       leaseEpoch:state.leaseEpoch,
       code,
       evidence:draft.evidence,
       ...(draft.finalContent?{content:draft.finalContent}:{}),
       ...(Array.isArray(draft.repairSources)&&draft.repairSources.length?{sources:draft.repairSources}:{})
-    };
-    const body='<!-- MLS_UNIFIED_R33_EVIDENCE_SUBMIT\n'+JSON.stringify(payload,null,2)+'\n-->';
+    });
+    details.push({code,confidence:draft.confidence,sourceId:draft.source?.sourceId||null});
+  }
+
+  if(payloads.length){
+    const batchPayload={assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,entries:payloads};
+    const body='<!-- '+BATCH_SUBMIT_MARKER+'\n'+JSON.stringify(batchPayload,null,2)+'\n-->';
     const comment=await postComment(issue.number,body);
-    await dispatchWorkflow(WORKFLOWS.r33,issue.number,comment.id);
-    await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,detail:{commentId:Number(comment.id),workflow:WORKFLOWS.r33,confidence:draft.confidence,sourceId:draft.source?.sourceId||null}});
-    return {status:'dispatched',code};
+    await dispatchWorkflow(WORKFLOWS.r33Batch,issue.number,comment.id);
+    await report('r33','DISPATCHED_BATCH',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,
+      code:payloads[0].code,detail:{commentId:Number(comment.id),workflow:WORKFLOWS.r33Batch,count:payloads.length,codes:payloads.map(x=>x.code),entries:details}});
+    return {status:'dispatched-batch',codes:payloads.map(x=>x.code),count:payloads.length};
   }
   return {status:'waiting-preparation',waiting};
 }
+
 async function runR33Fanout(status){
   if(Number(status?.canonical?.prepared||0)<=0)return {fanout:R33_FANOUT,existing:0,created:0,leased:0,dispatched:0,skipped:'NO_PREPARED'};
   const before=await findExistingR33All();
@@ -687,9 +704,10 @@ async function runR33Fanout(status){
     if(resolved.kind==='leased')leased.push(resolved);
   }
   const results=await Promise.allSettled(leased.map(item=>dispatchR33(item.issue,item.state)));
-  const dispatched=results.filter(x=>x.status==='fulfilled'&&['dispatched','already-dispatched'].includes(x.value?.status)).length;
+  const dispatched=results.filter(x=>x.status==='fulfilled'&&['dispatched','dispatched-batch','already-dispatched'].includes(x.value?.status)).length;
+  const dispatchedEntries=results.filter(x=>x.status==='fulfilled').reduce((n,x)=>n+Number(x.value?.count||(['dispatched','already-dispatched'].includes(x.value?.status)?1:0)),0);
   const failures=results.filter(x=>x.status==='rejected').map(x=>String(x.reason?.code||x.reason?.message||x.reason)).slice(0,8);
-  return {fanout:R33_FANOUT,existing:before.length,created,leased:leased.length,dispatched,failures};
+  return {fanout:R33_FANOUT,existing:before.length,created,leased:leased.length,dispatched,dispatchedEntries,failures};
 }
 
 async function run(){
