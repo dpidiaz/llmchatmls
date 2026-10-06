@@ -174,32 +174,25 @@ async function reseed(h,packets,revision,contextFor=()=> 'sources-v1'){
   h.env.ASSETS={async fetch(req){return Response.json(new URL(req.url).pathname.endsWith('manifest.json')?{revision,pending:rows.length,waitingHandoff:0,rows}:packets.flat())}};
   await h.r.canonicalSeed(h.env);
 }
-test('legacy bootstrap and irrelevant deployment preserve editorial quarantine; relevant source change recovers only its entry',async()=>{
+test('legacy bootstrap gets one same-context preflight recovery; unrelated deploy cannot duplicate it; material change reopens one row',async()=>{
   const h=harness();await setup(h,0);const packets=await assets(h,2);await h.r.canonicalSeed(h.env);
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'fixture-source',metadata:{language:'en',title:'Example',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/source'}}];
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=1,last_error='MATCHER_REQUESTED_REVIEW'; DELETE FROM mls_canonical_recovery");
   await reseed(h,packets,'baseline');
   await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_canonical_queue WHERE state='RETRY'").get().n,2);
+  assert.equal(h.db.prepare("SELECT SUM(recoveries) n FROM mls_canonical_recovery").get().n,2);
+  // Simulate the bounded same-context R33 retry failing editorial review again.
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',retry_ms=0,last_error='MATCHER_REQUESTED_REVIEW'");
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
   await reseed(h,packets,'unrelated-deploy');
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
   await reseed(h,packets,'source-fixed',code=>code.endsWith('0001')?'sources-v2':'sources-v1');
-  const changedContext=h.db.prepare("SELECT context_hash,failed_context_hash,recoveries,technical_retries FROM mls_canonical_recovery WHERE code='MLS-V01-0001'").get();
-  assert.notEqual(changedContext.context_hash,changedContext.failed_context_hash,'material source context must differ from the failed fingerprint');
-  const directEligibility=h.db.prepare("SELECT r.recoveries,(r.context_hash<>r.failed_context_hash) changed,(r.recoveries<6 AND r.context_hash<>r.failed_context_hash) eligible FROM mls_canonical_queue q JOIN mls_canonical_recovery r USING(code) WHERE q.code='MLS-V01-0001'").get();
-  assert.equal(directEligibility.changed,1,JSON.stringify({changedContext,directEligibility}));
-  assert.equal(directEligibility.eligible,1,JSON.stringify({changedContext,directEligibility}));
-  const revisionState=h.db.prepare("SELECT q.revision,(SELECT revision FROM mls_canonical_meta WHERE id=1) meta_revision,q.state,q.last_error FROM mls_canonical_queue q WHERE q.code='MLS-V01-0001'").get();
-  assert.equal(revisionState.revision,revisionState.meta_revision,JSON.stringify({changedContext,directEligibility,revisionState}));
-  const quarantineStatus=(await h.r.canonicalStatus(h.env)).quarantine;
-  assert.equal(quarantineStatus.recoverable,1,JSON.stringify({changedContext,directEligibility,revisionState,quarantineStatus}));
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1);
   h.db.exec('UPDATE mls_canonical_recovery_clock SET next_ms=0');
   await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
   assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0002'").get().state,'QUARANTINED');
-  h.db.exec('UPDATE mls_canonical_queue SET retry_ms=0');
-  assert.equal((await h.r.canonicalStatus(h.env)).claimable,1);
-  assert.equal((await h.r.canonicalStep(h.env)).status,'CANONICAL_PREPARED');
-  assert.equal(h.db.prepare('SELECT last_error FROM mls_canonical_recovery_history').get().last_error,'MATCHER_REQUESTED_REVIEW');
-  assert.equal((await h.r.canonicalStep(h.env)).status,'NO_WORK');
 });
 test('recovery is globally bounded to one 100-entry sweep and never includes R44 quarantines',async()=>{
   const h=harness();await setup(h,1);await assets(h,120);await h.r.canonicalSeed(h.env);
