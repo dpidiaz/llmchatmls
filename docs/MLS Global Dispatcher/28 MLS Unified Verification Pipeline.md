@@ -34,7 +34,8 @@ R44 and R33 remain separate validation stages internally. Unified orchestrates t
 
 Production command compatibility:
 
-- `MLS Unified siguiente` — **ACTIVE production end-to-end pipeline command**.
+- `MLS Unified siguiente` — **ACTIVE production end-to-end pipeline command**, default target 100 entries.
+- `MLS Unified siguiente N` — explicit per-chat cumulative target, where `N` is a multiple of 5 from 100 through 1000.
 - `MLS R44 Fast Lane siguiente` — remains R44-only Fast Lane.
 - `MLS R44 siguiente` — remains the one-ticket R44 compatibility command.
 - `MLS R33 siguiente` — retains its existing R4.3/Gate semantics.
@@ -44,9 +45,13 @@ Historical commands remain distinct. No old command becomes an alias of Unified 
 
 ## User experience
 
-The user opens many disposable chats and pastes exactly:
+The user opens many disposable chats and pastes either:
 
 `MLS Unified siguiente`
+
+or an explicit target such as:
+
+`MLS Unified siguiente 500`
 
 The chat must not ask the user for:
 
@@ -64,18 +69,22 @@ The system chooses the highest-value eligible stage automatically.
 
 ## Per-execution throughput contract
 
-For the production command `MLS Unified siguiente`, the user-visible execution target is **at least 100 entries per execution** whenever at least 100 eligible entries remain available.
+The production command has a **chat-scoped cumulative target**:
+
+- `MLS Unified siguiente` → `targetEntries = 100` (default).
+- `MLS Unified siguiente N` → `targetEntries = N`, when `N` is an integer multiple of 5 from 100 through 1000 inclusive.
+
+The parser must reject targets below 100, above 1000, non-integers, and values not divisible by 5. The target belongs only to the current command execution; it must **not** change global logical-runner concurrency, D1 runner configuration, Dispatcher limits, or the size of individual microclaims.
 
 Operational rules:
 
-- Internal microclaims may remain smaller than 100 entries; this rule does not require changing the atomic claim size.
-- If the first claim or set of claims yields fewer than 100 entries, the same execution must continue pulling additional eligible Unified work until the cumulative total reaches **≥100 entries**.
-- The execution may finish below 100 only when fewer than 100 eligible entries genuinely remain available, or when a **verifiable technical blocker** prevents additional safe work in that execution.
-- A small claim, an exhausted single microclaim, or the absence of work in only one Unified lane is not by itself sufficient reason to stop below 100 if additional eligible Unified work can still be claimed safely.
+- Internal microclaims may remain smaller than `targetEntries`; this rule does not require changing the atomic claim size.
+- If the first claim or set of claims yields fewer than `targetEntries`, the same execution must continue pulling additional eligible Unified work until the cumulative total reaches **at least the parsed target**.
+- The execution may finish below the parsed target only when fewer eligible entries genuinely remain available, or when a **verifiable technical/safety blocker** prevents additional safe work in that execution.
+- A small claim, an exhausted single microclaim, or the absence of work in only one Unified lane is not by itself sufficient reason to stop below the parsed target if additional eligible Unified work can still be claimed safely.
 - Durable checkpoints, ownership isolation, R44/R33 validation standards, FREE ONLY constraints and serialized final integration remain authoritative; throughput must not bypass correctness or safety gates.
-- This policy **supersedes the previous ≥50 entries-per-execution rule**.
+- The target is cumulative work for that command execution, not a requirement that any individual low-level claim contain that many entries.
 
-The ≥100 figure is a cumulative execution contract, not a requirement that any individual low-level claim contain 100 entries.
 
 ## GitHub Secondary Rate Limit degraded mode
 
