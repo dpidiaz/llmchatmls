@@ -13,6 +13,8 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/MLS Global Dispatcher Scheduler\.yml/);
   assert.match(source,/MLS_GLOBAL_DISPATCH_EVENT/);
   assert.match(source,/MLS_UNIFIED_R33_EVIDENCE_SUBMIT/);
+  assert.match(source,/draft\.repairSources/);
+  assert.match(source,/sources:draft\.repairSources/);
   assert.match(source,/MLS_UNIFIED_R33_INTEGRATION_EXECUTE/);
   assert.match(source,/\/api\/unified-runner\/prepared-evidence/);
   assert.match(source,/\/api\/unified-runner\/report/);
