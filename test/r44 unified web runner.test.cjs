@@ -19,6 +19,8 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/\/api\/unified-runner\/github-gate/);
   assert.match(source,/\/api\/unified-runner\/kick/);
   assert.match(source,/isGithubSecondaryRateLimit/);
+  assert.match(source,/api rate limit exceeded/);
+  assert.match(source,/rateLimitRemaining/);
   assert.match(source,/function execDispatcherWorker/);
   assert.match(source,/GITHUB_403_SECONDARY_RATE_LIMIT/);
   assert.match(source,/stdio:\['ignore','pipe','pipe'\]/);

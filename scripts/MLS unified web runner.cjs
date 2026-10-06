@@ -79,7 +79,11 @@ function isGithubSecondaryRateLimit(error){
     error&&error.data&&error.data.message,
     error&&error.data&&error.data.documentation_url
   ].filter(Boolean).join(' ').toLowerCase();
-  return status===403&&(/secondary rate limit|temporarily blocked from content creation|abuse detection/.test(message));
+  const remaining=String((error&&error.rateLimitRemaining)??'');
+  return (status===403||status===429)&&(
+    /secondary rate limit|temporarily blocked from content creation|abuse detection|api rate limit exceeded|rate limit exceeded for installation/.test(message)
+    || remaining==='0'
+  );
 }
 function githubRetryAfterMs(error){
   const header=Number(error&&error.retryAfter||0);
@@ -101,7 +105,7 @@ function execDispatcherWorker(eventPath){
     if(stdout)process.stdout.write(stdout);
     if(stderr)process.stderr.write(stderr);
     const combined=[error&&error.message,stdout,stderr].filter(Boolean).join('\n');
-    if(/secondary rate limit|temporarily blocked from content creation|abuse detection/i.test(combined)){
+    if(/secondary rate limit|temporarily blocked from content creation|abuse detection|api rate limit exceeded|rate limit exceeded for installation/i.test(combined)){
       const e=new Error(combined.slice(0,4000));
       e.code='GITHUB_403_SECONDARY_RATE_LIMIT';
       e.status=403;
