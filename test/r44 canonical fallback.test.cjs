@@ -121,6 +121,30 @@ test('expired canonical result cannot commit and expired entry is reclaimable',a
   assert.equal((await h.r.canonicalStep(h.env)).status,'CANONICAL_PREPARED');
 });
 
+test('repair quarantine lane registers a live auditable source and reopens only that entry',async()=>{
+  const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);
+  h.r.MLS_R33_SOURCE_CATALOG=[];
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_URL_UNAVAILABLE',lease_token=NULL,expires_ms=0,retry_ms=0 WHERE code='MLS-V01-0001'");
+  h.r.unifiedR33RepairDiscover=async()=>({parsed:{status:'CANDIDATES',candidates:[{url:'https://example.org/grammar',title:'Example',sourceType:'institutional_webpage'}]},result:{model:'fixture'}});
+  h.r.unifiedR33FetchSourceDocument=async candidate=>({ok:true,sourceId:candidate.sourceId,url:candidate.metadata.canonicalUrl,text:'Example grammar source with enough substantive content for a validated repair candidate.'.repeat(8),title:candidate.metadata.title});
+  h.r.unifiedR33RepairOverlap=()=>3;
+  const out=await h.r.canonicalStep(h.env);
+  assert.equal(out.status,'REPAIR_QUARANTINE');
+  assert.equal(out.repair.status,'REPAIR_SOURCE_REGISTERED');
+  assert.equal(h.db.prepare("SELECT COUNT(*) n FROM mls_r33_repair_sources WHERE code='MLS-V01-0001' AND state='ACTIVE'").get().n,1);
+  assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
+});
+
+test('repair quarantine discovery is bounded to three failed attempts',async()=>{
+  const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',lease_token=NULL,expires_ms=0,retry_ms=0 WHERE code='MLS-V01-0001'");
+  h.r.unifiedR33RepairDiscover=async()=>({parsed:{status:'NO_SAFE_SOURCE',candidates:[]},result:{model:'fixture'}});
+  for(let i=0;i<3;i++)assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'REPAIR_NO_SAFE_SOURCE');
+  assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'NO_REPAIR_WORK');
+  const row=h.db.prepare("SELECT state,attempts FROM mls_r33_repair_queue WHERE code='MLS-V01-0001'").get();
+  assert.equal(row.state,'BLOCKED');assert.equal(row.attempts,3);
+});
+
 test('prepared-only drain never regenerates evidence on cache miss or changed context',async()=>{
   const h=harness();await setup(h,0);const packets=await assets(h,2);
   await h.r.canonicalStep(h.env);
