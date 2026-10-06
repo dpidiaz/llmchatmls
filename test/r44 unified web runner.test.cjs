@@ -16,6 +16,11 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/MLS_UNIFIED_R33_INTEGRATION_EXECUTE/);
   assert.match(source,/\/api\/unified-runner\/r33-evidence/);
   assert.match(source,/\/api\/unified-runner\/report/);
+  assert.match(source,/\/api\/unified-runner\/github-gate/);
+  assert.match(source,/\/api\/unified-runner\/kick/);
+  assert.match(source,/isGithubSecondaryRateLimit/);
+  assert.match(source,/GITHUB_DEGRADED_CLOUDFLARE_CONTINUES/);
+  assert.match(source,/targetEntries:unified\.EXECUTION_TARGET_ENTRIES/);
   assert.match(source,/REVIEW_REQUIRED/);
   assert.match(source,/pauseRunner:false/);
   assert.match(source,/function r44Drained/);
