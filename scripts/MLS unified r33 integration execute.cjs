@@ -86,7 +86,7 @@ async function prepare(){
   const bundlePath=path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-integration.json');
   fs.writeFileSync(bundlePath,JSON.stringify({
     issueNumber:Number(issue.number),commentId:Number(eventComment.id),commentLogin:String(eventComment.user?.login||''),
-    assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,branch:state.branch,baseCommit:state.baseCommit,
+    workerLogin:String(state.workerLogin||''),assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,branch:state.branch,baseCommit:state.baseCommit,
     workId:state.workId,allowedPaths:state.allowedPaths||[],integration:state.integration
   },null,2)+'\n');
   output('branch',state.branch);output('bundle_path',bundlePath);output('assignment_id',state.assignmentId);
@@ -247,7 +247,7 @@ function writeEvent(kind,bundle,event,commentId){
   const marker='<!-- MLS_UNIFIED_R33_INTEGRATION_AUTOCHECKPOINT\n'+JSON.stringify({kind,assignmentId:bundle.assignmentId})+'\n-->';
   const body=marker+'\n\n<!-- MLS_GLOBAL_DISPATCH_EVENT\n'+JSON.stringify(event,null,2)+'\n-->';
   fs.writeFileSync(p,JSON.stringify({issue:{number:bundle.issueNumber},comment:{
-    id:Number(commentId),body,created_at:new Date().toISOString(),user:{login:bundle.commentLogin}
+    id:Number(commentId),body,created_at:new Date().toISOString(),user:{login:bundle.workerLogin||bundle.commentLogin}
   }},null,2)+'\n');
   output('event_path',p);return p;
 }

@@ -191,10 +191,14 @@ async function main(){
   if(!String(issue.title||'').startsWith('[MLS Dispatcher][LEASED]'))return;
   let state=core.parseAssignmentState(issue.body||'');if(!state)return;
   const commentLogin=String(comment.user?.login||'');
+  const commentAssociation=String(comment.author_association||'').toUpperCase();
   const trustedUnifiedBot=commentLogin==='github-actions[bot]'&&
     /<!--\s*MLS_UNIFIED_R33_AUTOCHECKPOINT\b/.test(String(comment.body||''))&&
     state.provider==='r33-farm'&&String(state.workId||'').startsWith('r33-unified:');
-  if(state.workerLogin&&commentLogin!==String(state.workerLogin)&&!trustedUnifiedBot)return;
+  const authorizedIntegrationOperator=['OWNER','MEMBER','COLLABORATOR'].includes(commentAssociation)&&
+    /<!--\s*MLS_UNIFIED_R33_INTEGRATION_AUTOCHECKPOINT\b/.test(String(comment.body||''))&&
+    state.provider==='r33-index-integration'&&String(state.workId||'').startsWith('r33-unified-integration:');
+  if(state.workerLogin&&commentLogin!==String(state.workerLogin)&&!trustedUnifiedBot&&!authorizedIntegrationOperator)return;
   try{
     const workerEvent=core.parseWorkerEvent(comment.body||'');
     core.validateLeaseEvent(state,workerEvent,comment.created_at);
