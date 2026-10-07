@@ -228,10 +228,10 @@ async function canonicalStatus(env,authorityStatus=null){
     ?await env.WIKI_DB.prepare(`SELECT q.code,q.last_error,q.attempts,CASE WHEN ${canonicalRecoverableSql} THEN 1 ELSE 0 END recoverable
       FROM mls_canonical_queue q LEFT JOIN mls_canonical_recovery r USING(code)
       WHERE q.state='QUARANTINED' AND q.revision=?1 AND q.code NOT IN (SELECT value FROM json_each(?2))
-      ORDER BY q.code LIMIT 1000`).bind(meta.revision,authorityJson).all()
+      ORDER BY q.code LIMIT 5000`).bind(meta.revision,authorityJson).all()
     :await env.WIKI_DB.prepare(`SELECT q.code,q.last_error,q.attempts,CASE WHEN ${canonicalRecoverableSql} THEN 1 ELSE 0 END recoverable
       FROM mls_canonical_queue q LEFT JOIN mls_canonical_recovery r USING(code)
-      WHERE q.state='QUARANTINED' AND q.revision=? ORDER BY q.code LIMIT 1000`).bind(meta.revision).all();
+      WHERE q.state='QUARANTINED' AND q.revision=? ORDER BY q.code LIMIT 5000`).bind(meta.revision).all();
   const quarantineEntries=(quarantineRows.results||[]).map(row=>({
     code:String(row.code||'').toUpperCase(),
     reason:String(row.last_error||''),
