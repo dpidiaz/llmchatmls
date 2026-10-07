@@ -57,7 +57,7 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
   entries=preparedDrain.prioritize(entries,drainCodes);
   const allowed=new Set(entries.map(x=>x.code));
   const execution={...(snapshot.pool?.execution||{}),
-    defaultClaimSize:5,maxClaimSize:10,workerBatchSize:5,parallelWorkerLimit:128,maxConcurrentWorkers:128,
+    defaultClaimSize:50,maxClaimSize:50,workerBatchSize:50,parallelWorkerLimit:128,maxConcurrentWorkers:128,
     checkpointSizeMax:1,chatOnly:true,cloudflareEditorialInteractions:0,d1EditorialInteractions:0};
   const pool={
     ...(snapshot.pool||{}),
