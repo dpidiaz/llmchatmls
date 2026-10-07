@@ -70,6 +70,7 @@ test('Web runner is page-controlled, recurring, and re-enters after canonical wo
   assert.match(source,/candidates\.slice\(0,R33_MAX_BATCH\)/);
   assert.match(source,/findExistingR33All/);
   assert.match(source,/ensureR33Fanout/);
+  assert.match(source,/\.slice\(0,256\)/);
   assert.match(source,/integrationWorkflowActive/);
   assert.match(source,/redispatched:true/);
   assert.match(source,/runR33Fanout/);
