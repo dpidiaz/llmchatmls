@@ -275,7 +275,10 @@ async function ensureR33Fanout(preferredCodes=[],desiredFanout=R33_FANOUT){
     });
     await report('r33','FANOUT_PENDING',{issueNumber:null,detail:{fanout:target,maxFanout:R33_FANOUT,existing:existing.length,created:created.length,preferred:preferred.length,issues:created.map(x=>Number(x.number))},pauseRunner:false});
   }
-  return [...existing,...created];
+  // Existing claims may outnumber the new backlog-sized fanout after an older
+  // high-fanout cycle. Dispatch only the current target; excess leases remain
+  // fenced and are reaped normally instead of recreating a GitHub burst.
+  return [...existing,...created].slice(0,target);
 }
 async function laneIssue(stage,lane){
   let issue=lane?.issue_number?await getIssue(Number(lane.issue_number)):null;
