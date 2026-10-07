@@ -32,6 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MLS_GITHUB_COOLDOWN_FILE: .mls-github-cooldown.json
+      NODE_OPTIONS: "--require=${{ github.workspace }}/scripts/MLS global dispatcher ledger emergency preload.cjs"
     steps:
       - uses: actions/checkout@v4
         with:
