@@ -16,6 +16,17 @@ async function wait(file,{now=Date.now,sleep=ms=>new Promise(resolve=>setTimeout
  await sleep(delay);
  return delay;
 }
+async function retry(file,operation,{maxRetries=3,waitOptions}={}){
+ let retries=0;
+ while(true){
+  await wait(file,waitOptions);
+  try{return await operation();}
+  catch(error){
+   if(!error?.retryAfterCooldown||retries>=maxRetries)throw error;
+   retries++;
+  }
+ }
+}
 function record(file,response,now=Date.now(),random=Math.random){
  const prior=read(file),attempts=Math.min(8,(prior?.attempts||0)+1);
  const retry=response.headers.get('retry-after'),reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
@@ -28,4 +39,4 @@ function record(file,response,now=Date.now(),random=Math.random){
  if(file){fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,JSON.stringify(value));}
  return value;
 }
-module.exports={read,check,wait,record};
+module.exports={read,check,wait,retry,record};

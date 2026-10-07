@@ -176,6 +176,19 @@ test('scheduler waits until a persisted GitHub cooldown expires before resuming'
   assert.doesNotThrow(()=>backoff.check(file,current));
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+test('GitHub client retries the same rejected rate-limited operation after its persisted cooldown',async()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'mls-backoff-retry-test-')),file=path.join(dir,'cooldown.json');
+ try{
+  let current=NOW,calls=0,waited=0;
+  const value=await backoff.retry(file,async()=>{
+   calls++;
+   if(calls===1){fs.writeFileSync(file,JSON.stringify({schema:'MLS-GITHUB-COOLDOWN-1',until:NOW+45000,attempts:1,status:403}));const e=new Error('rate limit exceeded');e.retryAfterCooldown=true;throw e;}
+   return 'resumed';
+  },{maxRetries:2,waitOptions:{now:()=>current,sleep:async ms=>{waited+=ms;current+=ms;},log:()=>{}}});
+  assert.equal(value,'resumed');assert.equal(calls,2);assert.equal(waited,45000);
+  await assert.rejects(()=>backoff.retry(file,async()=>{const e=new Error('Resource not accessible by integration');e.status=403;throw e;},{waitOptions:{now:()=>current,sleep:async()=>{},log:()=>{}}}),/Resource not accessible/);
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
 test('missing, copied or forged source reviews cannot become academic PASS',()=>{
  const entry={code:'MLS-V10-1881',claims:[{claimId:'c'}],links:[{claimId:'c',linkId:'l',sourceId:'s',locator:{section:'1'}}]};
  assert.deepEqual(gate.reviewErrors(entry,null),['SOURCE_REVIEW_REQUIRED']);
