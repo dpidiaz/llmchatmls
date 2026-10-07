@@ -13,7 +13,7 @@ const MARKER='MLS_UNIFIED_R33_EVIDENCE_SUBMIT_BATCH';
 // Capacity is intentionally per assignment. Assignments remain fenced by
 // assignmentId/leaseEpoch/branch and final canonical integration remains serial.
 // 50 removes the historical 5-entry microbatch bottleneck without weakening R33.
-const MAX_BATCH=Number(process.env.MLS_UNIFIED_R33_MAX_BATCH||50);
+const MAX_BATCH=single.MAX_BATCH;
 
 function fail(code,message){const e=new Error(message||code);e.code=code;throw e;}
 function appendOutput(name,value){

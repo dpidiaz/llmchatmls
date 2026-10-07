@@ -4,6 +4,19 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const child=require('node:child_process');
 
+test('Unified Evidence checkpoints and finish support the full 50-entry batch sequence',()=>{
+  const submit=require('../scripts/MLS unified r33 evidence submit.cjs');
+  const batch=require('../scripts/MLS unified r33 evidence batch.cjs');
+  assert.equal(batch.MAX_BATCH,50);
+  assert.equal(submit.validateSequence(batch.MAX_BATCH,batch.MAX_BATCH,'CHECKPOINT_SEQUENCE_INVALID'),50);
+  assert.equal(submit.validateSequence(batch.MAX_BATCH+1,batch.MAX_BATCH+1,'FINISH_SEQUENCE_INVALID'),51);
+  assert.throws(()=>submit.validateSequence(batch.MAX_BATCH+1,batch.MAX_BATCH,'CHECKPOINT_SEQUENCE_INVALID'),/CHECKPOINT_SEQUENCE_INVALID/);
+  assert.throws(()=>submit.validateSequence(batch.MAX_BATCH+2,batch.MAX_BATCH+1,'FINISH_SEQUENCE_INVALID'),/FINISH_SEQUENCE_INVALID/);
+  const source=fs.readFileSync('scripts/MLS unified r33 evidence batch.cjs','utf8');
+  assert.match(source,/singleMode\('checkpoint-event',\[bundlePath,sha,String\(runId\),String\(index\+1\)\]/);
+  assert.match(source,/finish-event',\[lastBundlePath,lastSha,String\(runId\),String\(batch\.entries\.length\+1\)\]/);
+});
+
 test('Unified R33 Evidence submit is issue-scoped, authorized and preflights before commit',()=>{
   const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
   assert.match(workflow,/issue_comment:/);

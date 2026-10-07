@@ -9,8 +9,14 @@ const foundation=require(path.join(workspace,'MLS R32 EDITORIAL','evidence found
 const SOURCE_PREFIX='MLS R32 EDITORIAL/evidence git/registry/sources/';
 const MARKER='MLS_UNIFIED_R33_EVIDENCE_SUBMIT';
 const AUTHORIZED=new Set(['OWNER','MEMBER','COLLABORATOR']);
+const MAX_BATCH=Number(process.env.MLS_UNIFIED_R33_MAX_BATCH||50);
 
 function fail(code,message){const e=new Error(message||code);e.code=code;throw e;}
+function validateSequence(value,max,errorCode){
+  const sequence=Number(value);
+  if(!Number.isInteger(sequence)||sequence<0||sequence>max)fail(errorCode);
+  return sequence;
+}
 function extractMarked(text){
   const m=new RegExp('<!--\\s*'+MARKER+'\\s*([\\s\\S]*?)-->','m').exec(String(text||''));
   if(!m)fail('UNIFIED_EVIDENCE_MARKER_MISSING');
@@ -212,8 +218,7 @@ async function checkpointEvent(){
   };
   const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'checkpoint'})+'\\n-->';
   const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
-  const sequence=Number(process.argv[6]||0);
-  if(!Number.isInteger(sequence)||sequence<0||sequence>20)fail('UNIFIED_EVIDENCE_CHECKPOINT_SEQUENCE_INVALID');
+  const sequence=validateSequence(process.argv[6]||0,MAX_BATCH,'UNIFIED_EVIDENCE_CHECKPOINT_SEQUENCE_INVALID');
   const commentId=sequence>0?runId*100+sequence*2+1:runId*10+1;
   const eventPath=writeSyntheticEvent('checkpoint',bundle.issueNumber,body,commentId);
   process.stdout.write(JSON.stringify({ok:true,eventPath,code:bundle.code,commitSha,completedUnits:completed,pendingUnits:pending})+String.fromCharCode(10));
@@ -245,8 +250,7 @@ async function finishEvent(){
   };
   const marker='<!-- MLS_UNIFIED_R33_AUTOCHECKPOINT\\n'+JSON.stringify({code:bundle.code,runId,kind:'finish'})+'\\n-->';
   const body=marker+'\\n\\n<!-- MLS_GLOBAL_DISPATCH_EVENT\\n'+JSON.stringify(event,null,2)+'\\n-->';
-  const sequence=Number(process.argv[6]||0);
-  if(!Number.isInteger(sequence)||sequence<0||sequence>20)fail('UNIFIED_EVIDENCE_FINISH_SEQUENCE_INVALID');
+  const sequence=validateSequence(process.argv[6]||0,MAX_BATCH+1,'UNIFIED_EVIDENCE_FINISH_SEQUENCE_INVALID');
   const commentId=sequence>0?runId*100+sequence*2+2:runId*10+2;
   const eventPath=writeSyntheticEvent('finish',bundle.issueNumber,body,commentId);
   appendOutput('finish_needed','true');
@@ -261,4 +265,4 @@ async function main(){
   fail('UNIFIED_EVIDENCE_MODE_INVALID');
 }
 if(require.main===module)main().catch(error=>{console.error(error.code||'UNIFIED_EVIDENCE_SUBMIT_ERROR',error.message);process.exitCode=2});
-module.exports={MARKER,AUTHORIZED,extractMarked,repairSourcePathAllowed,validate};
+module.exports={MARKER,AUTHORIZED,MAX_BATCH,validateSequence,extractMarked,repairSourcePathAllowed,validate};
