@@ -550,11 +550,14 @@ test('cold R44 context uses hash-checked Cloudflare Assets then D1, never GitHub
 
 test('Unified main publishers serialize while branch-isolated R33 evidence serializes per assignment; durable cooldown blocks before publication',async()=>{
   const {run}=require('../scripts/r44 sink guard.cjs');
-  for(const name of ['MLS Unified Web Runner','MLS Unified R44 R33 Handoff','MLS Unified R33 Integration Execute']){
+  for(const name of ['MLS Unified Web Runner','MLS Unified R44 R33 Handoff']){
     const workflow=fs.readFileSync('.github/workflows/'+name+'.yml','utf8');
     assert.match(workflow,/group: mls-unified-github-writer/);
     assert.match(workflow,/cancel-in-progress: false/);
   }
+  const integrationWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Integration Execute.yml','utf8');
+  assert.match(integrationWorkflow,/group: mls-unified-main-integration/);
+  assert.match(integrationWorkflow,/cancel-in-progress: false/);
   const evidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
   const batchEvidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Batch Submit.yml','utf8');
   assert.match(evidenceWorkflow,/group: mls-unified-r33-/);
