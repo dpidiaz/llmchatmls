@@ -83,7 +83,11 @@ test('Unified integration executor treats an already-applied wave as a validated
   assert.match(workflow,/noop-checkpoint-event/);
   assert.match(workflow,/noop-finish-event/);
   assert.match(workflow,/steps\.scope\.outputs\.has_changes == 'true'/);
-  assert.match(source,/output\('has_changes',files\.length\?'true':'false'\)/);
+  assert.match(source,/git',\['diff','--name-only','origin\/main\.\.\.HEAD'\]/);
+  assert.match(source,/\[\.\.\.new Set\(\[\.\.\.branchDelta,\.\.\.staged\]\)\]/);
+  assert.match(source,/output\('needs_commit',staged\.length\?'true':'false'\)/);
+  assert.match(workflow,/steps\.scope\.outputs\.needs_commit/);
+  assert.match(workflow,/HEAD_SHA="\$\(git rev-parse HEAD\)"/);
   assert.doesNotMatch(source,/UNIFIED_INTEGRATION_NO_STAGED_CHANGES/);
   assert.match(source,/UNIFIED_INTEGRATION_NOOP_MAIN_MOVED/);
   assert.match(source,/UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED/);
