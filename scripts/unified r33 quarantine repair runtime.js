@@ -1,5 +1,5 @@
 var MLS_R33_REPAIR_SCHEMA="2";
-var MLS_R33_REPAIR_MAX_ATTEMPTS=6;
+var MLS_R33_REPAIR_MAX_ATTEMPTS=12;
 var MLS_R33_REPAIR_REASONS=new Set([
   "NO_REGISTERED_SOURCE_CANDIDATE",
   "CLAIM_SOURCE_NOT_REGISTERED",
@@ -21,7 +21,8 @@ async function unifiedR33RepairEnsure(env){
   await env.WIKI_DB.batch([
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_r33_repair_queue(code TEXT PRIMARY KEY,state TEXT NOT NULL DEFAULT 'PENDING',reason TEXT NOT NULL,attempts INTEGER NOT NULL DEFAULT 0,lease_token TEXT,expires_ms INTEGER NOT NULL DEFAULT 0,last_error TEXT,last_source_id TEXT,updated_ms INTEGER NOT NULL DEFAULT 0)"),
     env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_r33_repair_sources(source_id TEXT PRIMARY KEY,code TEXT NOT NULL,source_json TEXT NOT NULL,source_sha256 TEXT NOT NULL,url TEXT NOT NULL,authority_tier TEXT NOT NULL,provenance_json TEXT NOT NULL,created_ms INTEGER NOT NULL,state TEXT NOT NULL DEFAULT 'ACTIVE')"),
-    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_r33_repair_source_links(code TEXT NOT NULL,source_id TEXT NOT NULL,created_ms INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(code,source_id))")
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_r33_repair_source_links(code TEXT NOT NULL,source_id TEXT NOT NULL,created_ms INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(code,source_id))"),
+    env.WIKI_DB.prepare("CREATE TABLE IF NOT EXISTS mls_r33_repair_rejections(code TEXT NOT NULL,url TEXT NOT NULL,reason TEXT NOT NULL,created_ms INTEGER NOT NULL,PRIMARY KEY(code,url))")
   ]);
   // Schema v1 stored one owning code on a globally unique source_id. A source can
   // legitimately support many entries, so v2 keeps the source canonical and
@@ -72,6 +73,16 @@ async function unifiedR33RepairGlobalSources(env){
   await unifiedR33RepairEnsure(env);
   const rows=await env.WIKI_DB.prepare("SELECT source_json FROM mls_r33_repair_sources WHERE state='ACTIVE' ORDER BY created_ms DESC,source_id LIMIT 500").all();
   return (rows.results||[]).map(r=>{try{return JSON.parse(r.source_json)}catch{return null}}).filter(Boolean);
+}
+async function unifiedR33RepairRejectedUrls(env,code){
+  await unifiedR33RepairEnsure(env);
+  const rows=await env.WIKI_DB.prepare("SELECT url FROM mls_r33_repair_rejections WHERE code=? ORDER BY created_ms DESC,url LIMIT 32").bind(String(code||"").toUpperCase()).all();
+  return (rows.results||[]).map(row=>String(row.url||"")).filter(Boolean);
+}
+async function unifiedR33RepairRecordRejected(env,code,url,reason){
+  const normalized=unifiedR33RepairNormalizeUrl(url);if(!normalized)return;
+  await env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_r33_repair_rejections(code,url,reason,created_ms) VALUES(?,?,?,?)")
+    .bind(String(code||"").toUpperCase(),normalized,String(reason||"REPAIR_CANDIDATE_REJECTED").slice(0,160),Date.now()).run();
 }
 async function unifiedR33RepairSeed(env){
   await unifiedR33RepairEnsure(env);
@@ -176,17 +187,17 @@ async function unifiedR33RepairRehydrateDone(env){
   if(!saved[1].results?.length)return {status:"REHYDRATE_LEASE_LOST",code:row.code};
   return {status:"REPAIR_SOURCE_REHYDRATED",code:row.code,sourceId:row.last_source_id,contextChanged:contextHash!==row.context_hash};
 }
-async function unifiedR33RepairRegisteredRescue(env,input,row){
+async function unifiedR33RepairRegisteredRescue(env,input,row,rejectedUrls=[]){
   const local=await unifiedR33RepairSources(env,row.code),global=await unifiedR33RepairGlobalSources(env);
   const linked=new Set(local.map(x=>String(x&&x.sourceId||"")));
   const staticIds=new Set((Array.isArray(MLS_R33_SOURCE_CATALOG)?MLS_R33_SOURCE_CATALOG:[]).map(x=>String(x&&x.sourceId||"")));
   const ranked=unifiedR33SourceCandidates(input.article||{},input.handoffEntry||{},{extraCatalog:global})
-    .filter(candidate=>candidate&&candidate.sourceId&&!linked.has(candidate.sourceId)&&unifiedR33SafeSourceUrl(candidate.metadata&&candidate.metadata.canonicalUrl))
+    .filter(candidate=>candidate&&candidate.sourceId&&!linked.has(candidate.sourceId)&&unifiedR33SafeSourceUrl(candidate.metadata&&candidate.metadata.canonicalUrl)&&!rejectedUrls.includes(unifiedR33RepairNormalizeUrl(candidate.metadata.canonicalUrl)))
     .slice(0,6);
   const articleText=[input.article&&input.article.title,input.article&&input.article.part,input.article&&input.article.chapter,input.article&&input.article.articleMarkdown].filter(Boolean).join(" ");
   for(const candidate of ranked){
     const doc=await unifiedR33RepairFetchRegisteredDocument(candidate);
-    if(!doc.ok||unifiedR33RepairOverlap(articleText,doc.text)<3)continue;
+    if(!doc.ok||unifiedR33RepairOverlap(articleText,doc.text)<3){await unifiedR33RepairRecordRejected(env,row.code,candidate.metadata&&candidate.metadata.canonicalUrl,doc.reason||"REPAIR_REGISTERED_SOURCE_OVERLAP_LOW");continue;}
     const source={
       schemaVersion:"1.0",sourceId:candidate.sourceId,metadata:{...candidate.metadata},
       repairValidatedFulltext:true,
@@ -201,13 +212,15 @@ async function unifiedR33RepairRegisteredRescue(env,input,row){
   }
   return {ok:false,reason:"REPAIR_NO_REGISTERED_FULLTEXT_RESCUE"};
 }
-async function unifiedR33RepairDiscover(env,input,reason){
+async function unifiedR33RepairDiscover(env,input,reason,rejectedUrls=[]){
   const article=input.article||{};
   const prompt=[
-    "MLS R33 SOURCE REPAIR DISCOVERY v1.",
-    "Return ONLY JSON. Suggest up to 4 direct public URLs that are likely to contain substantive full text supporting the article below.",
+    "MLS R33 SOURCE REPAIR DISCOVERY v2.",
+    "Return ONLY JSON. Suggest up to 8 new direct public URLs that are likely to contain substantive full text supporting the article below.",
     "Prefer official language academies, government language institutes, universities, standards bodies, dictionaries/reference works, or other authoritative institutional pages.",
     "Never return product pages, bookstores, search-result pages, login pages, DOI landing pages without article text, or guessed URLs. If uncertain return NO_SAFE_SOURCE.",
+    "Do not return any URL in REJECTED URLS; choose a different institution or direct article path.",
+    "REJECTED URLS: "+JSON.stringify(rejectedUrls).slice(0,5000),
     "Output {status:'CANDIDATES'|'NO_SAFE_SOURCE',candidates:[{url,title,sourceType,institution,publisher,language,topics:[...]}],rationale}.",
     "Allowed sourceType: institutional_webpage, reference_entry, report. These are the only automatically publishable APA source types in this lane.",
     "QUARANTINE REASON: "+String(reason||""),
@@ -265,16 +278,20 @@ async function unifiedR33RepairStep(env){
     // Strategy v2 (attempts 4-6) first reuses already registered sources and
     // live-validates their actual text. It does not trust source type or metadata
     // alone and therefore does not weaken R33's support audit.
+    const rejectedUrls=await unifiedR33RepairRejectedUrls(env,row.code);
     if(Number(row.attempts)>=4){
-      const rescued=await unifiedR33RepairRegisteredRescue(env,item.input,row);
+      const rescued=await unifiedR33RepairRegisteredRescue(env,item.input,row,rejectedUrls);
       if(rescued.ok)return rescued;
     }
 
-    const discovered=await unifiedR33RepairDiscover(env,item.input,row.reason);
-    const candidates=Array.isArray(discovered.parsed&&discovered.parsed.candidates)?discovered.parsed.candidates.slice(0,4):[];
+    const discovered=await unifiedR33RepairDiscover(env,item.input,row.reason,rejectedUrls);
+    const candidates=Array.isArray(discovered.parsed&&discovered.parsed.candidates)?discovered.parsed.candidates.slice(0,8):[];
     for(const candidate of candidates){
+      const normalized=unifiedR33RepairNormalizeUrl(candidate&&candidate.url);
+      if(!normalized||rejectedUrls.includes(normalized))continue;
       const saved=await unifiedR33RepairRegister(env,item.input,row,candidate,discovered.result);
       if(saved.ok)return saved;
+      await unifiedR33RepairRecordRejected(env,row.code,normalized,saved.reason||"REPAIR_CANDIDATE_REJECTED");
     }
     await env.WIKI_DB.prepare(`UPDATE mls_r33_repair_queue SET state=CASE WHEN attempts<${MLS_R33_REPAIR_MAX_ATTEMPTS} THEN 'RETRY' ELSE 'BLOCKED' END,lease_token=NULL,expires_ms=0,last_error=?,updated_ms=? WHERE code=? AND lease_token=?`)
       .bind(candidates.length?"REPAIR_NO_VALIDATED_SOURCE":"REPAIR_NO_SAFE_SOURCE",Date.now(),row.code,row.lease_token).run();
