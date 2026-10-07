@@ -24,7 +24,7 @@ permissions:
 jobs:
   integrate:
     concurrency:
-      group: mls-unified-github-writer
+      group: mls-unified-main-integration
       cancel-in-progress: false
     if: >-
       ${{ github.event_name == 'workflow_dispatch' ||
