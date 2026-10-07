@@ -28,6 +28,10 @@
       {
         "name": "WIKI_STORE",
         "class_name": "WikiStore"
+      },
+      {
+        "name": "MLS_UNIFIED_RUNNERS",
+        "class_name": "UnifiedLogicalRunner"
       }
     ]
   },
@@ -36,6 +40,12 @@
       "tag": "revision-31-wiki-store",
       "new_sqlite_classes": [
         "WikiStore"
+      ]
+    },
+    {
+      "tag": "unified-logical-runners-v2",
+      "new_sqlite_classes": [
+        "UnifiedLogicalRunner"
       ]
     }
   ],
@@ -48,6 +58,8 @@
   },
   "upload_source_maps": true,
   "triggers": {
-    "crons": []
+    "crons": [
+      "*/5 * * * *"
+    ]
   }
 }
