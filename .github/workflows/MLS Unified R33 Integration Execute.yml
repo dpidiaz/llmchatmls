@@ -201,6 +201,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SYNTHETIC_EVENT_PATH: ${{ steps.direct_postmerge.outputs.event_path }}
         run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Reconcile missing direct fallback postmerge checkpoint
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        id: direct_postmerge_reconcile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" direct-postmerge-reconcile "${{ steps.prep.outputs.bundle_path }}" "${{ steps.direct_merge.outputs.merge_sha }}" "${{ steps.commit.outputs.head_sha }}" "${{ github.run_id }}"
+      - name: Apply recovered direct fallback postmerge through canonical Dispatcher worker
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' && steps.direct_postmerge_reconcile.outputs.recovery_needed == 'true' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SYNTHETIC_EVENT_PATH: ${{ steps.direct_postmerge_reconcile.outputs.event_path }}
+        run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Require persisted direct fallback postmerge ACK
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" verify-direct-postmerge "${{ steps.prep.outputs.bundle_path }}" "${{ steps.direct_merge.outputs.merge_sha }}" "${{ steps.commit.outputs.head_sha }}"
       - name: Record direct fallback finish
         if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
         id: direct_finish
@@ -213,6 +230,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SYNTHETIC_EVENT_PATH: ${{ steps.direct_finish.outputs.event_path }}
         run: GITHUB_EVENT_PATH="$SYNTHETIC_EVENT_PATH" node 'scripts/MLS global dispatcher worker.cjs'
+      - name: Verify direct fallback finish was persisted
+        if: ${{ steps.scope.outputs.has_changes == 'true' && steps.pr.outputs.mode == 'direct' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node "$RUNNER_TEMP/mls-unified-r33-integration.cjs" verify-direct-finish "${{ steps.prep.outputs.bundle_path }}" "${{ steps.direct_merge.outputs.merge_sha }}" "${{ steps.commit.outputs.head_sha }}"
 
       - name: Preserve durable retry after writer failure
         if: ${{ failure() && steps.sink_guard.outcome == 'success' }}
