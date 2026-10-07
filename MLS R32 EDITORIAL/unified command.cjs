@@ -49,7 +49,7 @@ function createClaim({stage,requestId,workerId,workerLogin=null,preferredCodes=[
   if(workerLogin!=null)assert(/^[A-Za-z0-9][A-Za-z0-9-]*(?:\[bot\])?$/.test(String(workerLogin)),
     'UNIFIED_CLAIM_LOGIN');
   const preferred=[...new Set((Array.isArray(preferredCodes)?preferredCodes:[]).map(x=>String(x||'').toUpperCase()))];
-  assert(preferred.length<=256&&preferred.every(code=>/^MLS-V\d{2}-\d{4}$/.test(code)),
+  assert(preferred.length<=1000&&preferred.every(code=>/^MLS-V\d{2}-\d{4}$/.test(code)),
     'UNIFIED_CLAIM_PREFERRED_CODES','preferredCodes inválido.');
   const command={
     operation:'claim',
