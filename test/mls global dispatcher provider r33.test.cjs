@@ -61,6 +61,23 @@ test('falla cerrado ante ledger contradictorio o pool no autorizado',()=>{
   assert.throws(()=>provider.materializeCandidate({pool:blocked,ledger:ledger(),batches:[]},{now:NOW}),error=>error.code==='POOL_NOT_AUTHORIZED');
 });
 
+test('Unified R44 continuation permits true 50-entry claims without widening normal R33 pools',()=>{
+  const entries=Array.from({length:60},(_,i)=>({
+    order:i+1,
+    code:'MLS-V03-'+String(i+1).padStart(4,'0'),
+    language:'frances',
+    contentPath:'content/frances/MLS-V03-'+String(i+1).padStart(4,'0')+'.json'
+  }));
+  const unifiedPool={...pool(),poolId:'MLS-R33-R44-UNIFIED-CONTINUATION',unifiedR44Only:true,
+    execution:{defaultClaimSize:50,maxClaimSize:50},entries};
+  const unifiedLedger={...ledger(),poolId:unifiedPool.poolId};
+  const out=provider.materializeCandidate({pool:unifiedPool,ledger:unifiedLedger,batches:[]},{now:NOW});
+  assert.equal(out.requested,50);
+  assert.equal(out.units.length,50);
+  const normal={...pool(),entries,execution:{defaultClaimSize:50,maxClaimSize:50}};
+  assert.throws(()=>provider.materializeCandidate({pool:normal,ledger:ledger(),batches:[]},{now:NOW}),error=>error.code==='INVALID_REQUESTED');
+});
+
 test('no materializa trabajo cuando todo es terminal o protegido',()=>{
   const out=provider.materializeCandidate({pool:pool(),ledger:ledger({verified:['MLS-V01-0001','MLS-V01-0002','MLS-V01-0003'],exceptions:[]}),batches:[activeBatch('MLS-V01-0004')]},{now:NOW});
   assert.equal(out.eligible,false);
