@@ -16,7 +16,7 @@ async function canonicalAuthorityStatus(now=Date.now()){
 // remain independently recoverable. Six automatic releases is the lifetime cap.
 var canonicalTransientSql="(q.last_error='UNIFIED_R33_DRAFT_JSON_INVALID' OR q.last_error='SOURCE_FETCH_FAILED' OR q.last_error IN ('SOURCE_FETCH_HTTP_408','SOURCE_FETCH_HTTP_429','SOURCE_FETCH_HTTP_500','SOURCE_FETCH_HTTP_502','SOURCE_FETCH_HTTP_503','SOURCE_FETCH_HTTP_504') OR q.last_error IN ('CANONICAL_ASSET_500','CANONICAL_ASSET_502','CANONICAL_ASSET_503','CANONICAL_ASSET_504'))";
 var canonicalReviewSql="(q.last_error='NO_REGISTERED_SOURCE_CANDIDATE' OR q.last_error LIKE 'SOURCE_%' OR q.last_error LIKE 'MATCHER_%' OR q.last_error LIKE 'CLAIM_%' OR q.last_error LIKE 'COVERAGE_%' OR q.last_error LIKE 'SOURCE_SUPPORT_%' OR q.last_error='NEEDS_CHAT_REVIEW')";
-var canonicalRecoverableSql="r.recoveries<6 AND (r.context_hash<>r.failed_context_hash OR ("+canonicalTransientSql+" AND q.attempts<6 AND r.technical_retries<2) OR ("+canonicalReviewSql+" AND q.attempts<6 AND r.technical_retries<1))";
+var canonicalRecoverableSql="r.recoveries<24 AND (r.context_hash<>r.failed_context_hash OR ("+canonicalTransientSql+" AND q.attempts<6 AND r.technical_retries<2) OR ("+canonicalReviewSql+" AND q.attempts<6 AND r.technical_retries<1))";
 function canonicalQuarantineCategory(reason){
   const s=String(reason||'');
   if(/HASH_MISMATCH/.test(s))return 'hash_context';
