@@ -32,7 +32,8 @@ function parseTime(value,field){
 function normalizeRequested(value,pool){
   const configuredDefault=Number(pool?.execution?.defaultClaimSize??DEFAULT_REQUESTED);
   const configuredMax=Number(pool?.execution?.maxClaimSize??MAX_REQUESTED);
-  const max=Math.min(MAX_REQUESTED,Number.isInteger(configuredMax)&&configuredMax>0?configuredMax:MAX_REQUESTED);
+  const hardMax=pool?.unifiedR44Only===true?50:MAX_REQUESTED;
+  const max=Math.min(hardMax,Number.isInteger(configuredMax)&&configuredMax>0?configuredMax:hardMax);
   const requested=Number(value??(Number.isInteger(configuredDefault)&&configuredDefault>0?configuredDefault:DEFAULT_REQUESTED));
   if(!Number.isInteger(requested)||requested<1||requested>max)throw providerError('INVALID_REQUESTED','requested debe estar entre 1 y '+max+'.');
   return requested;
