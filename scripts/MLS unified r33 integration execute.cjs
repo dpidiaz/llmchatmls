@@ -7,6 +7,7 @@ const child=require('node:child_process');
 
 const workspace=process.env.GITHUB_WORKSPACE||process.cwd();
 const core=require(path.join(workspace,'MLS R32 EDITORIAL','global dispatcher','core.js'));
+const recoveryContext=require(path.join(workspace,'MLS R32 EDITORIAL','global dispatcher','recovery.js'));
 const MARKER='MLS_UNIFIED_R33_INTEGRATION_EXECUTE';
 const AUTHORIZED=new Set(['OWNER','MEMBER','COLLABORATOR']);
 
