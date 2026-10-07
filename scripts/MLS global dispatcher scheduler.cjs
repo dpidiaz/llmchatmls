@@ -22,18 +22,22 @@ const root=path.resolve(__dirname,'..');
 const githubApiCounts={GET:0,POST:0,PATCH:0,PUT:0,DELETE:0};
 if(typeof process.on==='function')process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'scheduler',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
 async function gh(method,endpoint,body){
-  backoff.check(process.env.MLS_GITHUB_COOLDOWN_FILE);
-  if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
-  const response=await fetch('https://api.github.com'+endpoint,{
-    method,
-    headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-r1'},
-    body:body===undefined?undefined:JSON.stringify(body)
+  const cooldownFile=process.env.MLS_GITHUB_COOLDOWN_FILE;
+  return backoff.retry(cooldownFile,async()=>{
+    backoff.check(cooldownFile);
+    if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
+    const response=await fetch('https://api.github.com'+endpoint,{
+      method,
+      headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-r1'},
+      body:body===undefined?undefined:JSON.stringify(body)
+    });
+    const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
+    if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;
+      const rateLimited=response.status===429||/rate limit/i.test(String(data?.message||text))||response.headers.get('x-ratelimit-remaining')==='0';
+      if(rateLimited){e.cooldown=backoff.record(cooldownFile,response);e.retryAfterCooldown=true;}
+      throw e;}
+    return data;
   });
-  const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-  if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;
-    if([403,429].includes(response.status))e.cooldown=backoff.record(process.env.MLS_GITHUB_COOLDOWN_FILE,response);
-    throw e;}
-  return data;
 }
 async function pages(endpoint){
   const out=[];for(let page=1;page<=20;page++){const join=endpoint.includes('?')?'&':'?';const rows=await gh('GET',endpoint+join+'per_page=100&page='+page);

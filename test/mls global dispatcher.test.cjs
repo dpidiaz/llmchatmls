@@ -149,6 +149,7 @@ test('dispatcher scheduler accepts authorized command Issues and keeps one seria
   assert.match(scheduler,/workflow_dispatch:/);
   assert.match(scheduler,/issues:\s*\n\s*types:\s*\n\s*- opened/);
   assert.match(fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8'),/await backoff\.wait\(process\.env\.MLS_GITHUB_COOLDOWN_FILE\)/);
+  assert.match(fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8'),/return backoff\.retry\(cooldownFile/);
   assert.match(scheduler,/startsWith\(github\.event\.issue\.title, '\[MLS Dispatcher\]'/);
   assert.match(scheduler,/MLS_GLOBAL_DISPATCH_COMMAND/);
   assert.match(scheduler,/author_association == 'OWNER'/);
