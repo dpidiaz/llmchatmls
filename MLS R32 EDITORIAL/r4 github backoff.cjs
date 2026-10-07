@@ -7,6 +7,15 @@ function check(file,now=Date.now()){
   e.code='GITHUB_COOLDOWN';e.status=429;e.retryAt=prior.until;throw e;
  }
 }
+async function wait(file,{now=Date.now,sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),log=message=>console.log(message)}={}){
+ const prior=read(file);if(!prior)return 0;
+ if(!Number.isFinite(prior.until))throw new Error('GitHub cooldown checkpoint has an invalid retry time.');
+ const delay=Math.max(0,prior.until-now());
+ if(!delay)return 0;
+ log('GitHub rate-limit cooldown active; scheduler will resume in '+Math.ceil(delay/1000)+'s.');
+ await sleep(delay);
+ return delay;
+}
 function record(file,response,now=Date.now(),random=Math.random){
  const prior=read(file),attempts=Math.min(8,(prior?.attempts||0)+1);
  const retry=response.headers.get('retry-after'),reset=Number(response.headers.get('x-ratelimit-reset'))*1000;
@@ -19,4 +28,4 @@ function record(file,response,now=Date.now(),random=Math.random){
  if(file){fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,JSON.stringify(value));}
  return value;
 }
-module.exports={read,check,record};
+module.exports={read,check,wait,record};

@@ -165,6 +165,17 @@ test('403/429 cooldown persists Retry-After, primary reset and exponential bound
   assert.equal(next.until,NOW+520000);assert.equal(next.attempts,2);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
+test('scheduler waits until a persisted GitHub cooldown expires before resuming',async()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'mls-backoff-wait-test-')),file=path.join(dir,'cooldown.json');
+ try{
+  fs.writeFileSync(file,JSON.stringify({schema:'MLS-GITHUB-COOLDOWN-1',until:NOW+30000,attempts:1,status:403}));
+  let current=NOW,waited=0,logged='';
+  const delay=await backoff.wait(file,{now:()=>current,sleep:async ms=>{waited=ms;current+=ms;},log:message=>{logged=message;}});
+  assert.equal(delay,30000);assert.equal(waited,30000);assert.equal(current,NOW+30000);
+  assert.match(logged,/scheduler will resume in 30s/);
+  assert.doesNotThrow(()=>backoff.check(file,current));
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
 test('missing, copied or forged source reviews cannot become academic PASS',()=>{
  const entry={code:'MLS-V10-1881',claims:[{claimId:'c'}],links:[{claimId:'c',linkId:'l',sourceId:'s',locator:{section:'1'}}]};
  assert.deepEqual(gate.reviewErrors(entry,null),['SOURCE_REVIEW_REQUIRED']);
