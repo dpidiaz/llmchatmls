@@ -26,6 +26,16 @@ function extractBatch(text){
   if(!m)return null;
   try{return JSON.parse(m[1].trim())}catch{fail('UNIFIED_EVIDENCE_BATCH_JSON_INVALID')}
 }
+function resumePlan(bundles,state){
+  const completed=new Set(state?.checkpoints?.at(-1)?.completedUnits||[]);
+  const codes=new Set(bundles.map(bundle=>bundle.code));
+  if([...completed].some(code=>!codes.has(code)))fail('UNIFIED_EVIDENCE_BATCH_COMPLETED_SCOPE_MISMATCH');
+  return {
+    entries:bundles.filter(bundle=>!completed.has(bundle.code)),
+    finishBundle:bundles.at(-1)||null,
+    lastCheckpointCommit:String(state?.lastCheckpointCommit||'')
+  };
+}
 function githubContext(){
   const token=process.env.GITHUB_TOKEN||'',repository=process.env.GITHUB_REPOSITORY||'';
   if(!token||repository.split('/').length!==2)fail('GITHUB_CONTEXT_MISSING');
@@ -52,10 +62,13 @@ async function prepare(){
   const assignmentId=bundles[0].assignmentId,leaseEpoch=bundles[0].leaseEpoch,branch=bundles[0].branch;
   if(bundles.some(x=>x.assignmentId!==assignmentId||x.leaseEpoch!==leaseEpoch||x.branch!==branch))fail('UNIFIED_EVIDENCE_BATCH_ASSIGNMENT_MISMATCH');
   if(batchPayload&& (String(batchPayload.assignmentId||'')!==assignmentId||Number(batchPayload.leaseEpoch)!==Number(leaseEpoch)))fail('UNIFIED_EVIDENCE_BATCH_FENCE_MISMATCH');
+  const state=core.parseAssignmentState(issue.body||'');
+  if(!state||state.status!=='leased'||state.assignmentId!==assignmentId||Number(state.leaseEpoch)!==Number(leaseEpoch))fail('UNIFIED_EVIDENCE_BATCH_ASSIGNMENT_STATE_INVALID');
+  const plan=resumePlan(bundles,state);
   const batchPath=path.join(process.env.RUNNER_TEMP||workspace,'mls-unified-r33-evidence-batch.json');
-  fs.writeFileSync(batchPath,JSON.stringify({schema:'MLS-UNIFIED-R33-EVIDENCE-BATCH-1',issueNumber:Number(issue.number),commentId:Number(eventComment.id),branch,assignmentId,leaseEpoch,entries:bundles},null,2)+'\n');
-  appendOutput('branch',branch);appendOutput('batch_path',batchPath);appendOutput('count',bundles.length);appendOutput('codes',bundles.map(x=>x.code).join(','));
-  process.stdout.write(JSON.stringify({ok:true,status:'BATCH_PREPARED',assignmentId,branch,count:bundles.length,codes:bundles.map(x=>x.code),maxBatch:MAX_BATCH})+'\n');
+  fs.writeFileSync(batchPath,JSON.stringify({schema:'MLS-UNIFIED-R33-EVIDENCE-BATCH-1',issueNumber:Number(issue.number),commentId:Number(eventComment.id),branch,assignmentId,leaseEpoch,entries:plan.entries,finishBundle:plan.finishBundle,lastCheckpointCommit:plan.lastCheckpointCommit},null,2)+'\n');
+  appendOutput('branch',branch);appendOutput('batch_path',batchPath);appendOutput('count',plan.entries.length);appendOutput('codes',plan.entries.map(x=>x.code).join(','));
+  process.stdout.write(JSON.stringify({ok:true,status:'BATCH_PREPARED',assignmentId,branch,count:plan.entries.length,completed:bundles.length-plan.entries.length,codes:plan.entries.map(x=>x.code),maxBatch:MAX_BATCH})+'\n');
 }
 function exec(bin,args,{capture=false,env={}}={}){try{const result=child.execFileSync(bin,args,{cwd:workspace,env:{...process.env,...env},encoding:'utf8',stdio:capture?['ignore','pipe','pipe']:['ignore','inherit','inherit']});return capture?String(result||'').trim():'';}catch(error){if(capture){if(error.stdout)process.stdout.write(String(error.stdout));if(error.stderr)process.stderr.write(String(error.stderr));}throw error;}}
 function git(args,options={}){return exec('git',args,options)}
@@ -70,7 +83,13 @@ function dispatcherEvent(eventPath){exec(process.execPath,['scripts/MLS global d
 function singleMode(mode,args,outFile){exec(process.execPath,[singlePath,mode,...args],{env:outFile?{GITHUB_OUTPUT:outFile}:{}});}
 async function run(){
   const batchPath=process.argv[3],runId=Number(process.argv[4]||process.env.GITHUB_RUN_ID||0);if(!batchPath||!Number.isInteger(runId)||runId<1)fail('UNIFIED_EVIDENCE_BATCH_RUN_ARGS');
-  const batch=JSON.parse(fs.readFileSync(batchPath,'utf8'));if(batch.schema!=='MLS-UNIFIED-R33-EVIDENCE-BATCH-1'||!Array.isArray(batch.entries)||!batch.entries.length||batch.entries.length>MAX_BATCH)fail('UNIFIED_EVIDENCE_BATCH_FILE_INVALID');
+  const batch=JSON.parse(fs.readFileSync(batchPath,'utf8'));if(batch.schema!=='MLS-UNIFIED-R33-EVIDENCE-BATCH-1'||!Array.isArray(batch.entries)||batch.entries.length>MAX_BATCH||!batch.finishBundle)fail('UNIFIED_EVIDENCE_BATCH_FILE_INVALID');
+  if(!batch.entries.length){
+    if(!/^[a-f0-9]{40}$/.test(String(batch.lastCheckpointCommit||'')))fail('UNIFIED_EVIDENCE_BATCH_EMPTY_WITHOUT_CHECKPOINT');
+    const finishOut=tempOutput('finish');singleMode('finish-event',[writeEntryBundle(batch.finishBundle,batch.entries.length),batch.lastCheckpointCommit,String(runId),'1'],finishOut);
+    const finish=outputMap(finishOut);if(finish.finish_needed==='true'){if(!finish.event_path)fail('UNIFIED_EVIDENCE_BATCH_FINISH_EVENT_MISSING');checkoutCanonicalMain();dispatcherEvent(finish.event_path);}
+    process.stdout.write(JSON.stringify({ok:true,status:'BATCH_COMPLETE',assignmentId:batch.assignmentId,count:0,finishNeeded:finish.finish_needed==='true',alreadyCheckpointed:true})+'\n');return;
+  }
   git(['config','user.name','github-actions[bot]']);git(['config','user.email','41898282+github-actions[bot]@users.noreply.github.com']);
   const results=[];let lastBundlePath=null,lastSha=null;
   for(let index=0;index<batch.entries.length;index++){
@@ -88,4 +107,4 @@ async function run(){
 }
 async function main(){const mode=String(process.argv[2]||'');if(mode==='prepare')return prepare();if(mode==='run')return run();fail('UNIFIED_EVIDENCE_BATCH_MODE_INVALID');}
 if(require.main===module)main().catch(error=>{console.error(error.code||'UNIFIED_EVIDENCE_BATCH_ERROR',error.message);process.exitCode=2});
-module.exports={MARKER,MAX_BATCH,extractBatch};
+module.exports={MARKER,MAX_BATCH,extractBatch,resumePlan};

@@ -17,6 +17,22 @@ test('Unified Evidence checkpoints and finish support the full 50-entry batch se
   assert.match(source,/finish-event',\[lastBundlePath,lastSha,String\(runId\),String\(batch\.entries\.length\+1\)\]/);
 });
 
+test('Unified Evidence batch resume skips checkpointed codes and finishes a fully checkpointed assignment',()=>{
+  const batch=require('../scripts/MLS unified r33 evidence batch.cjs');
+  const bundles=Array.from({length:50},(_,i)=>({code:'MLS-V01-'+String(i+1).padStart(4,'0')}));
+  const state={checkpoints:[{completedUnits:bundles.slice(0,20).map(x=>x.code)}],lastCheckpointCommit:'a'.repeat(40)};
+  const resumed=batch.resumePlan(bundles,state);
+  assert.equal(resumed.entries.length,30);
+  assert.equal(resumed.entries[0].code,bundles[20].code);
+  assert.deepEqual(resumed.entries.map(x=>x.code),bundles.slice(20).map(x=>x.code));
+  assert.equal(resumed.lastCheckpointCommit,'a'.repeat(40));
+  const complete=batch.resumePlan(bundles,{checkpoints:[{completedUnits:bundles.map(x=>x.code)}],lastCheckpointCommit:'b'.repeat(40)});
+  assert.deepEqual(complete.entries,[]);
+  assert.equal(complete.finishBundle.code,bundles.at(-1).code);
+  assert.equal(complete.lastCheckpointCommit,'b'.repeat(40));
+  assert.throws(()=>batch.resumePlan(bundles,{checkpoints:[{completedUnits:['MLS-V02-0001']}]}),/COMPLETED_SCOPE_MISMATCH/);
+});
+
 test('Unified R33 Evidence submit is issue-scoped, authorized and preflights before commit',()=>{
   const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
   assert.match(workflow,/issue_comment:/);
