@@ -31,6 +31,23 @@ async function r44PoolSeed(env) {
   if (meta.pool_schema === R44_POOL_SCHEMA) {
     const ticketCount = Number(meta.pool_ticket_count), ticketSize = Number(meta.pool_ticket_size);
     if (!Number.isSafeInteger(ticketCount) || ticketCount < 1 || !Number.isSafeInteger(ticketSize) || ticketSize < 1) throw new Error("R44_POOL_META_INVALID");
+    if (meta.pool_manifest_sha256 && meta.pool_manifest_sha256 !== R44_POOL_SHA256) {
+      // Re-pin a manifest revision only after proving D1's immutable ticket universe matches it.
+      const response = await env.ASSETS.fetch(new Request(R44_POOL_URL));
+      if (!response.ok) throw new Error("R44_POOL_FETCH_" + response.status);
+      const text = await response.text();
+      if (await r44Sha256Text(text) !== R44_POOL_SHA256) throw new Error("R44_POOL_HASH_MISMATCH");
+      const pool = JSON.parse(text);
+      if (!pool || pool.schema !== R44_POOL_SCHEMA || !Array.isArray(pool.tickets) || pool.tickets.length !== pool.ticketCount ||
+          Number(pool.ticketCount) !== ticketCount || !Number.isSafeInteger(Number(pool.entryCount)) || Number(pool.entryCount) < 1) {
+        throw new Error("R44_POOL_INVALID");
+      }
+      const existing = await env.WIKI_DB.prepare("SELECT ticket_id,ordinal_start,ordinal_end,entries_json FROM r44_tickets ORDER BY ordinal_start").all();
+      r44VerifyPoolRows(pool,existing.results || [],true);
+      await env.WIKI_DB.prepare("UPDATE r44_meta SET value=? WHERE key='pool_manifest_sha256'").bind(R44_POOL_SHA256).run();
+      const migrated = await env.WIKI_DB.prepare("SELECT value FROM r44_meta WHERE key='pool_manifest_sha256'").first();
+      if (!migrated || migrated.value !== R44_POOL_SHA256) throw new Error("R44_POOL_META_MIGRATION_FAILED");
+    }
     return {ticketCount,ticketSize};
   }
   const response = await env.ASSETS.fetch(new Request(R44_POOL_URL));
