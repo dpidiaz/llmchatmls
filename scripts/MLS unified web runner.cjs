@@ -152,13 +152,19 @@ function progressSnapshot(status,baseline=null){
   const processed=Number(status?.runner?.processed_entries||0);
   const canonicalDurable=canonicalDurableCount(status);
   const progress=baseline?Math.max(0,processed-baseline.processedEntries,canonicalDurable-baseline.canonicalDurable):0;
+  const quarantine=status?.canonical?.quarantine||{};
+  const repair=status?.canonical?.repair||{};
   return {
     runnerState:status?.runner?.state||null,
     processedEntries:processed,
     correctedEntries:Number(status?.runner?.corrected_entries||0),
     configuredRunners:Number(status?.runner?.configured_runners||0),
     activeRunners:Number(status?.runner?.active_runners||0),
-    canonical:{claimable:Number(status?.canonical?.claimable||0),prepared:Number(status?.canonical?.prepared||0),pending:Number(status?.canonical?.pending||0),counts:status?.canonical?.counts||{}},
+    canonical:{
+      claimable:Number(status?.canonical?.claimable||0),prepared:Number(status?.canonical?.prepared||0),pending:Number(status?.canonical?.pending||0),counts:status?.canonical?.counts||{},
+      quarantine:{total:Number(quarantine.total||0),recoverable:Number(quarantine.recoverable||0),requiresChangeOrReview:Number(quarantine.requiresChangeOrReview||0),byCategory:quarantine.byCategory||{},byReason:quarantine.byReason||[]},
+      repair:{counts:repair.counts||{},blockedByError:repair.blockedByError||[],registeredSources:Number(repair.registeredSources||0),sourceLinks:Number(repair.sourceLinks||0),linkedCodes:Number(repair.linkedCodes||0),rehydration:repair.rehydration||{pending:0,done:0}}
+    },
     githubGate:status?.githubGate?.state||null,
     progress
   };
@@ -811,3 +817,4 @@ main().catch(async error=>{
   }catch(_){}
   process.exitCode=1;
 });
+

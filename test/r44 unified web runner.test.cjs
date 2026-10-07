@@ -34,6 +34,8 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/UNIFIED_TARGET_PROGRESS/);
   assert.match(source,/processed_entries/);
   assert.match(source,/targetEntries:EXECUTION_TARGET/);
+  assert.match(source,/requiresChangeOrReview:Number\(quarantine\.requiresChangeOrReview\|\|0\)/);
+  assert.match(source,/blockedByError:repair\.blockedByError\|\|\[\]/);
   assert.match(source,/REVIEW_REQUIRED/);
   assert.match(source,/pauseRunner:false/);
   assert.match(source,/function r44Drained/);
@@ -103,3 +105,4 @@ test('Bot submissions remain fenced and use explicit workflow_dispatch, not recu
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 evidence submit.cjs'],{stdio:'pipe'});
   child.execFileSync(process.execPath,['--check','scripts/MLS unified r33 integration execute.cjs'],{stdio:'pipe'});
 });
+
