@@ -56,11 +56,13 @@ function validateState(issue,comment,payload){
   const state=core.parseAssignmentState(issue?.body||'');
   if(!state||state.status!=='leased'||state.cancelRequested||state.readyToClose)fail('UNIFIED_INTEGRATION_STATE_INVALID');
   const login=String(comment?.user?.login||'');
+  const association=String(comment?.author_association||'').toUpperCase();
+  const associationAuthorized=AUTHORIZED.has(association);
   const botAuthorized=login==='github-actions[bot]'&&state.workerLogin===login&&state.provider==='r33-index-integration'&&String(state.workId||'').startsWith('r33-unified-integration:');
-  if(!AUTHORIZED.has(String(comment?.author_association||'').toUpperCase())&&!botAuthorized)fail('UNIFIED_INTEGRATION_AUTHOR_UNAUTHORIZED');
+  if(!associationAuthorized&&!botAuthorized)fail('UNIFIED_INTEGRATION_AUTHOR_UNAUTHORIZED');
   if(state.provider!=='r33-index-integration'||!String(state.workId||'').startsWith('r33-unified-integration:'))fail('UNIFIED_INTEGRATION_SCOPE_INVALID');
   if(!String(state.branch||'').startsWith('worker/r33-index-integration/'))fail('UNIFIED_INTEGRATION_BRANCH_INVALID');
-  if(state.workerLogin&&String(comment?.user?.login||'')!==String(state.workerLogin))fail('UNIFIED_INTEGRATION_WORKER_LOGIN_MISMATCH');
+  if(state.workerLogin&&!associationAuthorized&&login!==String(state.workerLogin))fail('UNIFIED_INTEGRATION_WORKER_LOGIN_MISMATCH');
   if(String(payload?.assignmentId||'')!==String(state.assignmentId)||Number(payload?.leaseEpoch)!==Number(state.leaseEpoch))fail('UNIFIED_INTEGRATION_FENCE_MISMATCH');
   const expires=Date.parse(String(state.expiresAt||''));if(!Number.isFinite(expires)||Date.now()>expires)fail('UNIFIED_INTEGRATION_LEASE_EXPIRED');
   const spec=state.integration;
