@@ -18,7 +18,7 @@ test('Unified integration executor is authorized, serialized and keeps canonical
   const workflow=fs.readFileSync('.github/workflows/MLS Unified R33 Integration Execute.yml','utf8');
   assert.match(workflow,/issue_comment:/);
   assert.match(workflow,/MLS_UNIFIED_R33_INTEGRATION_EXECUTE/);
-  assert.match(workflow,/group: mls-unified-github-writer/);
+  assert.match(workflow,/group: mls-unified-main-integration/);
   assert.match(workflow,/cancel-in-progress: false/);
   assert.match(workflow,/pull-requests: write/);
   const materialize=workflow.indexOf('Materialize pinned certified sources');
