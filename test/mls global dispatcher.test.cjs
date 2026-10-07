@@ -148,7 +148,9 @@ test('dispatcher scheduler accepts authorized command Issues and keeps one seria
   const worker=fs.readFileSync('.github/workflows/MLS Global Dispatcher Worker Events.yml','utf8');
   assert.match(scheduler,/workflow_dispatch:/);
   assert.match(scheduler,/issues:\s*\n\s*types:\s*\n\s*- opened/);
-  assert.match(fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8'),/await backoff\.wait\(process\.env\.MLS_GITHUB_COOLDOWN_FILE\)/);
+  assert.match(fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8'),/await backoff\.wait\(cooldownFile\)/);
+  assert.match(fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8'),/backoff\.cooldownWindows\(cooldownFile\)/);
+  assert.match(fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8'),/core\.isClaimStale\(issue\.created_at,now,cooldownWindows\)/);
   assert.match(fs.readFileSync('scripts/MLS global dispatcher scheduler.cjs','utf8'),/return backoff\.retry\(cooldownFile/);
   assert.match(scheduler,/startsWith\(github\.event\.issue\.title, '\[MLS Dispatcher\]'/);
   assert.match(scheduler,/MLS_GLOBAL_DISPATCH_COMMAND/);
@@ -187,6 +189,15 @@ test('burst claims have a ten-minute queue window while ACK and rolling lease re
   assert.equal(core.CLAIM_TTL_MS,10*60*1000);
   assert.equal(core.ACK_TTL_MS,5*60*1000);
   assert.equal(core.LEASE_TTL_MS,10*60*1000);
+});
+
+test('queued claim TTL excludes only its overlap with persisted GitHub cooldowns',()=>{
+  const t=Date.parse('2026-10-07T10:00:00.000Z'),until='2026-10-07T10:30:00.000Z',now=Date.parse('2026-10-07T10:31:00.000Z');
+  const windows=[{startedAt:new Date(t).toISOString(),until}];
+  assert.equal(core.isClaimStale('2026-10-07T10:05:00.000Z',now,windows),false,'a request created during cooldown keeps its full queue TTL');
+  assert.equal(core.isClaimStale('2026-10-07T09:49:00.000Z',now,windows),true,'time before cooldown still counts toward TTL');
+  assert.equal(core.isClaimStale('2026-10-07T10:31:00.000Z',now+11*60*1000,windows),true,'requests created after cooldown receive no extra grace');
+  assert.equal(core.isClaimStale('not-a-date',now,windows),true);
 });
 
 test('a new recovery generation fences a revived stale worker',()=>{

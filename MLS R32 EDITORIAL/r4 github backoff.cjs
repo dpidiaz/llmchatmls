@@ -1,6 +1,12 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path');
 function read(file){if(!file||!fs.existsSync(file))return null;return JSON.parse(fs.readFileSync(file,'utf8'));}
+function cooldownWindows(file,now=Date.now()){
+ const prior=read(file);if(!prior)return [];
+ const windows=Array.isArray(prior.cooldownWindows)?prior.cooldownWindows:
+  (Number.isFinite(prior.recordedAt)?[{startedAt:new Date(prior.recordedAt).toISOString(),until:new Date(prior.until).toISOString()}]:[]);
+ return windows.filter(w=>Number.isFinite(Date.parse(w?.startedAt))&&Number.isFinite(Date.parse(w?.until))&&Date.parse(w.until)>now-600000);
+}
 function check(file,now=Date.now()){
  const prior=read(file);if(prior&&(!Number.isFinite(prior.until)||prior.until>now)){
   const e=new Error('GitHub cooldown active; preserve all claims and checkpoints.');
@@ -35,8 +41,10 @@ function record(file,response,now=Date.now(),random=Math.random){
  const primary=response.headers.get('x-ratelimit-remaining')==='0'?reset:0;
  const until=Math.max(now+Math.min(3600000,60000*2**(attempts-1))+Math.floor(random()*10000),
   Number.isFinite(retryDate)?retryDate:0,Number.isFinite(primary)?primary:0);
- const value={schema:'MLS-GITHUB-COOLDOWN-1',until,attempts,status:response.status};
+ const priorWindows=cooldownWindows(file,now);
+ const value={schema:'MLS-GITHUB-COOLDOWN-1',until,attempts,status:response.status,recordedAt:now,
+  cooldownWindows:[...priorWindows,{startedAt:new Date(now).toISOString(),until:new Date(until).toISOString()}]};
  if(file){fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,JSON.stringify(value));}
  return value;
 }
-module.exports={read,check,wait,retry,record};
+module.exports={read,check,wait,retry,record,cooldownWindows};

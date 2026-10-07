@@ -163,6 +163,10 @@ test('403/429 cooldown persists Retry-After, primary reset and exponential bound
   assert.doesNotThrow(()=>backoff.check(file,NOW+300001));
   const next=backoff.record(file,{status:429,headers:{get:()=>null}},NOW+400000,()=>0);
   assert.equal(next.until,NOW+520000);assert.equal(next.attempts,2);
+  assert.deepEqual(backoff.cooldownWindows(file,NOW+400000),[
+   {startedAt:new Date(NOW).toISOString(),until:new Date(NOW+300000).toISOString()},
+   {startedAt:new Date(NOW+400000).toISOString(),until:new Date(NOW+520000).toISOString()}
+  ]);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
 test('scheduler waits until a persisted GitHub cooldown expires before resuming',async()=>{
@@ -174,6 +178,17 @@ test('scheduler waits until a persisted GitHub cooldown expires before resuming'
   assert.equal(delay,30000);assert.equal(waited,30000);assert.equal(current,NOW+30000);
   assert.match(logged,/scheduler will resume in 30s/);
   assert.doesNotThrow(()=>backoff.check(file,current));
+ }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+test('cooldown cache preserves recorded windows needed to age queued claims correctly',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'mls-backoff-window-test-')),file=path.join(dir,'cooldown.json');
+ try{
+  fs.writeFileSync(file,JSON.stringify({schema:'MLS-GITHUB-COOLDOWN-1',until:NOW+30000,recordedAt:NOW,status:403,
+   cooldownWindows:[{startedAt:new Date(NOW).toISOString(),until:new Date(NOW+30000).toISOString()}]}));
+  assert.deepEqual(backoff.cooldownWindows(file,NOW+30000),[{startedAt:new Date(NOW).toISOString(),until:new Date(NOW+30000).toISOString()}]);
+  assert.deepEqual(backoff.cooldownWindows(file,NOW+630001),[]);
+  const legacy=path.join(dir,'legacy.json');fs.writeFileSync(legacy,JSON.stringify({until:NOW+30000,recordedAt:NOW}));
+  assert.deepEqual(backoff.cooldownWindows(legacy,NOW+30000),[{startedAt:new Date(NOW).toISOString(),until:new Date(NOW+30000).toISOString()}]);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
 test('GitHub client retries the same rejected rate-limited operation after its persisted cooldown',async()=>{
