@@ -109,9 +109,29 @@ async function unifiedR33RepairClaim(env){
     RETURNING *`).bind(token,now+10*60*1000,now).first();
   return row||null;
 }
-function unifiedR33RepairOverlap(articleText,sourceText){
-  const a=unifiedR33Tokens(articleText),b=unifiedR33Tokens(sourceText);let n=0;
-  for(const t of a)if(t.length>=4&&b.has(t))n++;
+function unifiedR33RepairTokens(value,language){
+  const locale=String(language||"").toLowerCase().split(/[-_]/)[0];
+  if((locale==="ja"||locale==="zh")&&typeof Intl!=="undefined"&&typeof Intl.Segmenter==="function"){
+    try{
+      const normalized=unifiedR33NormalizeText(value);
+      const segmenter=new Intl.Segmenter(locale,{granularity:"word"});
+      const tokens=new Set();
+      for(const item of segmenter.segment(normalized)){
+        if(!item.isWordLike)continue;
+        const token=String(item.segment||"").trim();
+        if(Array.from(token).length>=2)tokens.add(token);
+        if(tokens.size>=1200)break;
+      }
+      if(tokens.size)return tokens;
+    }catch{}
+  }
+  return unifiedR33Tokens(value);
+}
+function unifiedR33RepairOverlap(articleText,sourceText,language){
+  const locale=String(language||"").toLowerCase().split(/[-_]/)[0];
+  const minLength=locale==="ja"||locale==="zh"?2:4;
+  const a=unifiedR33RepairTokens(articleText,language),b=unifiedR33RepairTokens(sourceText,language);let n=0;
+  for(const t of a)if(Array.from(t).length>=minLength&&b.has(t))n++;
   return n;
 }
 async function unifiedR33RepairFetchRegisteredDocument(candidate){
@@ -197,7 +217,8 @@ async function unifiedR33RepairRegisteredRescue(env,input,row,rejectedUrls=[]){
   const articleText=[input.article&&input.article.title,input.article&&input.article.part,input.article&&input.article.chapter,input.article&&input.article.articleMarkdown].filter(Boolean).join(" ");
   for(const candidate of ranked){
     const doc=await unifiedR33RepairFetchRegisteredDocument(candidate);
-    if(!doc.ok||unifiedR33RepairOverlap(articleText,doc.text)<3){await unifiedR33RepairRecordRejected(env,row.code,candidate.metadata&&candidate.metadata.canonicalUrl,doc.reason||"REPAIR_REGISTERED_SOURCE_OVERLAP_LOW");continue;}
+    const language=unifiedR33LanguageCode(input.article&&input.article.language)||input.article&&input.article.language;
+    if(!doc.ok||unifiedR33RepairOverlap(articleText,doc.text,language)<3){await unifiedR33RepairRecordRejected(env,row.code,candidate.metadata&&candidate.metadata.canonicalUrl,doc.reason||"REPAIR_REGISTERED_SOURCE_OVERLAP_LOW");continue;}
     const source={
       schemaVersion:"1.0",sourceId:candidate.sourceId,metadata:{...candidate.metadata},
       repairValidatedFulltext:true,
@@ -255,10 +276,10 @@ async function unifiedR33RepairRegister(env,input,row,candidate,providerResult){
   const source={schemaVersion:"1.0",sourceId,metadata,repairValidatedFulltext:true,repairPublishRequired:true};
   const doc=await unifiedR33FetchSourceDocument(source);
   if(!doc.ok)return {ok:false,reason:doc.reason||"REPAIR_FETCH_REJECTED"};
-  const docTokens=unifiedR33Tokens(doc.text),titleTokens=[...unifiedR33Tokens(metadata.title)].filter(t=>t.length>=4);
+  const docTokens=unifiedR33RepairTokens(doc.text,language),titleTokens=[...unifiedR33RepairTokens(metadata.title,language)].filter(t=>Array.from(t).length>=((language==="ja"||language==="zh")?2:4));
   if(titleTokens.length&&titleTokens.filter(t=>docTokens.has(t)).length<Math.min(2,titleTokens.length))return {ok:false,reason:"REPAIR_TITLE_NOT_IN_SOURCE"};
   const articleText=[input.article&&input.article.title,input.article&&input.article.part,input.article&&input.article.chapter,input.article&&input.article.articleMarkdown].filter(Boolean).join(" ");
-  if(unifiedR33RepairOverlap(articleText,doc.text)<3)return {ok:false,reason:"REPAIR_RELEVANCE_TOO_LOW"};
+  if(unifiedR33RepairOverlap(articleText,doc.text,language)<3)return {ok:false,reason:"REPAIR_RELEVANCE_TOO_LOW"};
   return unifiedR33RepairPersistSource(env,input,row,source,{
     schema:"MLS-R33-REPAIR-SOURCE-2",code:row.code,reason:row.reason,
     provider:providerResult&&providerResult.model||null,discoveredAt:new Date().toISOString(),
