@@ -793,6 +793,7 @@ async function unifiedRunnerStep(env, stepKey, runnerId = 1) {
     // work is plentiful. Every fourth logical runner repairs QUARANTINED rows
     // first; if there is nothing repairable it immediately falls through.
     if (runnerId % MLS_UNIFIED_REPAIR_STRIDE === 0) {
+      await canonicalEnsure(env);
       const repair = await unifiedR33RepairStep(env);
       if (repair.status !== "NO_REPAIR_WORK") {
         if (repair.status === "REPAIR_SOURCE_REGISTERED" || repair.status === "REPAIR_SOURCE_REHYDRATED") {
