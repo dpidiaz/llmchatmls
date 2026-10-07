@@ -259,7 +259,7 @@ async function ensureR33Fanout(preferredCodes=[],desiredFanout=R33_FANOUT){
   const target=Math.max(1,Math.min(R33_FANOUT,Number(desiredFanout)||1));
   const used=new Set(existing.map(issueWorkerId).filter(Boolean));
   const preferred=[...new Set((Array.isArray(preferredCodes)?preferredCodes:[]).map(x=>String(x||'').toUpperCase()))]
-    .filter(code=>/^MLS-V\d{2}-\d{4}$/.test(code)).slice(0,256);
+    .filter(code=>/^MLS-V\d{2}-\d{4}$/.test(code)).slice(0,1000);
   const desired=[];
   for(let slot=1;slot<=target;slot++)desired.push(r33WorkerId(slot));
   const created=[];
@@ -275,7 +275,10 @@ async function ensureR33Fanout(preferredCodes=[],desiredFanout=R33_FANOUT){
     });
     await report('r33','FANOUT_PENDING',{issueNumber:null,detail:{fanout:target,maxFanout:R33_FANOUT,existing:existing.length,created:created.length,preferred:preferred.length,issues:created.map(x=>Number(x.number))},pauseRunner:false});
   }
-  return [...existing,...created];
+  // Existing claims may outnumber the new backlog-sized fanout after an older
+  // high-fanout cycle. Dispatch only the current target; excess leases remain
+  // fenced and are reaped normally instead of recreating a GitHub burst.
+  return [...existing,...created].slice(0,target);
 }
 async function laneIssue(stage,lane){
   let issue=lane?.issue_number?await getIssue(Number(lane.issue_number)):null;

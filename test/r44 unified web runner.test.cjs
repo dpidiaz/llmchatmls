@@ -71,6 +71,7 @@ test('Web runner is page-controlled, recurring, and re-enters after canonical wo
   assert.match(source,/findExistingR33All/);
   assert.match(source,/ensureR33Fanout/);
   assert.match(source,/runR33Fanout/);
+  assert.match(source,/\.slice\(0,target\)/);
 
 });
 

@@ -77,6 +77,10 @@ test('Unified command creates only scoped integration and R33 claims',()=>{
   assert.equal(b.command.provider,'r33-farm');
   assert.equal(b.command.workPrefix,'r33-unified:');
   assert.ok(b.command.capabilities.includes('mls-unified'));
+  const preferred=Array.from({length:1000},(_,i)=>'MLS-V01-'+String(i+1).padStart(4,'0'));
+  const c=unified.createClaim({stage:'r33',requestId:'unified-r33-prepared-1000',workerId:'unified-worker-0002',preferredCodes:preferred});
+  assert.equal(c.command.preferredCodes.length,1000);
+  assert.throws(()=>unified.createClaim({stage:'r33',requestId:'unified-r33-prepared-1001',workerId:'unified-worker-0003',preferredCodes:[...preferred,'MLS-V02-0001']}),{code:'UNIFIED_CLAIM_PREFERRED_CODES'});
 });
 
 test('Unified R33 pool is full-corpus based and only admits durable R44 handoffs',()=>{
