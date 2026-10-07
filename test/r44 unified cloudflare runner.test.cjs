@@ -55,6 +55,9 @@ test('Unified Cloudflare runner injects one syntactically valid scheduled contro
   assert.match(built,/automated_registered_source_fulltext_match_v3/);
   assert.match(built,/SOURCE_FULLTEXT_REQUIRED/);
   assert.match(built,/complete:"COMPLETE"/);
+  assert.match(built,/MLS_UNIFIED_REPAIR_STRIDE = 4/);
+  assert.match(built,/too many active sessions/);
+  assert.match(built,/REPAIR_QUARANTINE/);
   assert.equal(injectR44(built),built,'R44/Unified injection must be idempotent');
   checkJs(built,'.mjs');
 });

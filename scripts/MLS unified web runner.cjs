@@ -16,6 +16,7 @@ const EXECUTION_TARGET=unified.executionTarget(process.env.MLS_UNIFIED_TARGET_EN
 const TARGET_POLL_MS=5000;
 const TARGET_MAX_STAGNANT_POLLS=120;
 const R33_FANOUT=Math.max(1,Math.min(128,Number(process.env.MLS_UNIFIED_R33_FANOUT||64)));
+const R33_MAX_BATCH=Math.max(1,Math.min(50,Number(process.env.MLS_UNIFIED_R33_MAX_BATCH||50)));
 const BOT='github-actions[bot]';
 const WORKERS={
   integration:'mls-unified-web-integration',
@@ -636,13 +637,13 @@ async function dispatchR33(issue,state){
     const marker=inflightBatch||inflightSingle;
     await report('r33','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,
       code:pending[0],detail:{commentId:Number(marker.id),deduped:true,batch:Boolean(inflightBatch)}});
-    return {status:'already-dispatched',code:pending[0],count:inflightBatch?Math.min(5,pending.length):1};
+    return {status:'already-dispatched',code:pending[0],count:inflightBatch?Math.min(R33_MAX_BATCH,pending.length):1};
   }
 
   const context=jsonArrayAfter(state.instructions,'Contexto R44=');
   if(!Array.isArray(context))fail('UNIFIED_WEB_R44_CONTEXT_MISSING');
   const waiting=[],payloads=[],details=[];
-  for(const code of candidates.slice(0,5)){
+  for(const code of candidates.slice(0,R33_MAX_BATCH)){
     const ctx=context.find(x=>String(x.code||'').toUpperCase()===code);
     if(!ctx)fail('UNIFIED_WEB_R44_CODE_CONTEXT_MISSING',code);
     const contentPath=String(ctx.contentPath||'');
@@ -735,7 +736,7 @@ async function run(){
   await cf('/api/unified-runner/reconcile');
 
   // R33 evidence is branch-isolated. Keep several disjoint Dispatcher assignments
-  // warm and dispatch one entry from each assignment per coordinator cycle.
+  // warm and dispatch up to the configured Evidence batch from each assignment per coordinator cycle.
   const fanout=await runR33Fanout(status);
 
   // Integration remains globally serialized because it ultimately merges to main.
