@@ -66,6 +66,8 @@ test('Web runner is page-controlled, recurring, and re-enters after canonical wo
   const evidenceWorkflow=fs.readFileSync('.github/workflows/MLS Unified R33 Evidence Submit.yml','utf8');
   assert.match(evidenceWorkflow,/group: mls-unified-r33-/);
   assert.match(source,/R33_FANOUT/);
+  assert.match(source,/R33_MAX_BATCH/);
+  assert.match(source,/candidates\.slice\(0,R33_MAX_BATCH\)/);
   assert.match(source,/findExistingR33All/);
   assert.match(source,/ensureR33Fanout/);
   assert.match(source,/runR33Fanout/);
