@@ -423,10 +423,19 @@ async function dispatchWorkflow(file,issueNumber,commentId){
     body:{ref:'main',inputs:{issue_number:String(issueNumber),comment_id:String(commentId)}}
   });
 }
+async function integrationWorkflowActive(){
+  const rows=await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent(WORKFLOWS.integration)+'/runs?per_page=20');
+  return (rows?.workflow_runs||[]).some(run=>['queued','in_progress','pending','waiting','requested'].includes(String(run?.status||'')));
+}
 async function dispatchIntegration(issue,state){
   const prior=await recentMarker(issue.number,'MLS_UNIFIED_R33_INTEGRATION_EXECUTE',p=>p.assignmentId===state.assignmentId,20*60*1000);
   if(prior&&String(prior.user?.login||'')===String(state.workerLogin||'')){
-    await report('integration','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,detail:{commentId:Number(prior.id),deduped:true}});
+    if(await integrationWorkflowActive()){
+      await report('integration','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,detail:{commentId:Number(prior.id),deduped:true,activeWorkflow:true}});
+      return;
+    }
+    await dispatchWorkflow(WORKFLOWS.integration,issue.number,prior.id);
+    await report('integration','DISPATCHED',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,detail:{commentId:Number(prior.id),redispatched:true,workflow:WORKFLOWS.integration}});
     return;
   }
   const payload={assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch};
