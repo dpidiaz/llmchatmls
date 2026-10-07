@@ -15,7 +15,7 @@ const BASE=String(process.env.MLS_UNIFIED_BASE_URL||'https://llmchatmls.dpidiaz.
 const EXECUTION_TARGET=unified.executionTarget(process.env.MLS_UNIFIED_TARGET_ENTRIES||unified.EXECUTION_TARGET_ENTRIES);
 const TARGET_POLL_MS=5000;
 const TARGET_MAX_STAGNANT_POLLS=120;
-const R33_FANOUT=Math.max(1,Math.min(32,Number(process.env.MLS_UNIFIED_R33_FANOUT||20)));
+const R33_FANOUT=Math.max(1,Math.min(128,Number(process.env.MLS_UNIFIED_R33_FANOUT||64)));
 const BOT='github-actions[bot]';
 const WORKERS={
   integration:'mls-unified-web-integration',
