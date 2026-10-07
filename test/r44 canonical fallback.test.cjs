@@ -135,15 +135,15 @@ test('repair quarantine lane registers a live auditable source and reopens only 
   assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
 });
 
-test('repair quarantine discovery is bounded to three v1 plus three v2 failed attempts',async()=>{
+test('repair quarantine discovery is bounded to twelve diverse source attempts',async()=>{
   const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);
   h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE',lease_token=NULL,expires_ms=0,retry_ms=0 WHERE code='MLS-V01-0001'");
   h.r.unifiedR33RepairDiscover=async()=>({parsed:{status:'NO_SAFE_SOURCE',candidates:[]},result:{model:'fixture'}});
   h.r.unifiedR33RepairRegisteredRescue=async()=>({ok:false,reason:'REPAIR_NO_REGISTERED_FULLTEXT_RESCUE'});
-  for(let i=0;i<6;i++)assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'REPAIR_NO_SAFE_SOURCE');
+  for(let i=0;i<12;i++)assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'REPAIR_NO_SAFE_SOURCE');
   assert.equal((await h.r.unifiedR33RepairStep(h.env)).status,'NO_REPAIR_WORK');
   const row=h.db.prepare("SELECT state,attempts FROM mls_r33_repair_queue WHERE code='MLS-V01-0001'").get();
-  assert.equal(row.state,'BLOCKED');assert.equal(row.attempts,6);
+  assert.equal(row.state,'BLOCKED');assert.equal(row.attempts,12);
 });
 
 test('repair source links allow one validated source to support multiple canonical entries',async()=>{
