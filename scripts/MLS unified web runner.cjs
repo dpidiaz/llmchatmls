@@ -254,16 +254,17 @@ function issueWorkerId(issue){
   const state=parseAssignment(issue),claim=parseClaim(issue);
   return String(state?.workerId||claim?.workerId||'');
 }
-async function ensureR33Fanout(preferredCodes=[]){
+async function ensureR33Fanout(preferredCodes=[],desiredFanout=R33_FANOUT){
   const existing=await findExistingR33All();
+  const target=Math.max(1,Math.min(R33_FANOUT,Number(desiredFanout)||1));
   const used=new Set(existing.map(issueWorkerId).filter(Boolean));
   const preferred=[...new Set((Array.isArray(preferredCodes)?preferredCodes:[]).map(x=>String(x||'').toUpperCase()))]
     .filter(code=>/^MLS-V\d{2}-\d{4}$/.test(code)).slice(0,256);
   const desired=[];
-  for(let slot=1;slot<=R33_FANOUT;slot++)desired.push(r33WorkerId(slot));
+  for(let slot=1;slot<=target;slot++)desired.push(r33WorkerId(slot));
   const created=[];
   for(const workerId of desired){
-    if(existing.length+created.length>=R33_FANOUT)break;
+    if(existing.length+created.length>=target)break;
     if(used.has(workerId))continue;
     const issue=await createClaim('r33',{workerId,reportLane:false,dispatchScheduler:false,preferredCodes:preferred});
     created.push(issue);used.add(workerId);
@@ -272,7 +273,7 @@ async function ensureR33Fanout(preferredCodes=[]){
     await gh('/repos/'+REPOSITORY+'/actions/workflows/'+encodeURIComponent('MLS Global Dispatcher Scheduler.yml')+'/dispatches',{
       method:'POST',body:{ref:'main'}
     });
-    await report('r33','FANOUT_PENDING',{issueNumber:null,detail:{fanout:R33_FANOUT,existing:existing.length,created:created.length,preferred:preferred.length,issues:created.map(x=>Number(x.number))},pauseRunner:false});
+    await report('r33','FANOUT_PENDING',{issueNumber:null,detail:{fanout:target,maxFanout:R33_FANOUT,existing:existing.length,created:created.length,preferred:preferred.length,issues:created.map(x=>Number(x.number))},pauseRunner:false});
   }
   return [...existing,...created];
 }
@@ -699,8 +700,10 @@ async function dispatchR33(issue,state){
 
 async function runR33Fanout(status){
   if(Number(status?.canonical?.prepared||0)<=0)return {fanout:R33_FANOUT,existing:0,created:0,leased:0,dispatched:0,skipped:'NO_PREPARED'};
+  const prepared=Number(status?.canonical?.prepared||0);
+  const desiredFanout=Math.max(1,Math.min(R33_FANOUT,Math.ceil(prepared/R33_MAX_BATCH)));
   const before=await findExistingR33All();
-  const issues=await ensureR33Fanout(status?.canonical?.preparedCodes||[]);
+  const issues=await ensureR33Fanout(status?.canonical?.preparedCodes||[],desiredFanout);
   const created=Math.max(0,issues.length-before.length),leased=[];
   for(const issue of issues){
     const resolved=await resolveAssignment('r33',{issue_number:Number(issue.number)});
@@ -710,7 +713,7 @@ async function runR33Fanout(status){
   const dispatched=results.filter(x=>x.status==='fulfilled'&&['dispatched','dispatched-batch','already-dispatched'].includes(x.value?.status)).length;
   const dispatchedEntries=results.filter(x=>x.status==='fulfilled').reduce((n,x)=>n+Number(x.value?.count||(['dispatched','already-dispatched'].includes(x.value?.status)?1:0)),0);
   const failures=results.filter(x=>x.status==='rejected').map(x=>String(x.reason?.code||x.reason?.message||x.reason)).slice(0,8);
-  return {fanout:R33_FANOUT,existing:before.length,created,leased:leased.length,dispatched,dispatchedEntries,failures};
+  return {fanout:desiredFanout,maxFanout:R33_FANOUT,existing:before.length,created,leased:leased.length,dispatched,dispatchedEntries,failures};
 }
 
 async function run(){
