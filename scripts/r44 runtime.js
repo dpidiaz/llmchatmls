@@ -512,7 +512,7 @@ var MLS_UNIFIED_RUNNER_SCHEMA = "3";
 var unifiedRunnerReady = new WeakSet();
 function unifiedRunnerCount(n) { return Number.isInteger(n) && (n === 1 || n === 100 || (n >= 5 && n <= 50 && n % 5 === 0)); }
 var MLS_UNIFIED_RUNNER_WORKER = "mls-unified-web-runner-v1";
-var MLS_UNIFIED_REPAIR_STRIDE = 1;
+var MLS_UNIFIED_REPAIR_STRIDE = 2;
 
 async function unifiedRunnerEnsure(env) {
   if (unifiedRunnerReady.has(env.WIKI_DB)) return;
