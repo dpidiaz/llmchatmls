@@ -21,7 +21,7 @@ function canonicalQuarantineCategory(reason){
   const s=String(reason||'');
   if(/HASH_MISMATCH/.test(s))return 'hash_context';
   if(/^(UNIFIED_R33_DRAFT_JSON_INVALID|SOURCE_FETCH_FAILED|SOURCE_FETCH_HTTP_(408|429|500|502|503|504)|CANONICAL_ASSET_(500|502|503|504))$/.test(s))return 'technical_transient';
-  if(/^(NO_REGISTERED_SOURCE_CANDIDATE|CLAIM_SOURCE_|SOURCE_(FULLTEXT|URL|CONTENT_TYPE|TEXT_TOO_SHORT|NOT_REGISTERED|FETCH))/.test(s))return 'sources_context';
+  if(/^(NO_REGISTERED_SOURCE_CANDIDATE|CLAIM_SOURCE_|SOURCE_NO_AUDITABLE_REGISTERED_CANDIDATE|SOURCE_(FULLTEXT|URL|CONTENT_TYPE|TEXT_TOO_SHORT|NOT_REGISTERED|FETCH))/.test(s))return 'sources_context';
   if(/^(MATCHER_|CLAIM_|COVERAGE_|SOURCE_SUPPORT_|NEEDS_CHAT_REVIEW)/.test(s))return 'editorial_review';
   return 'other';
 }
