@@ -55,6 +55,6 @@ jobs:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
           MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
           MLS_UNIFIED_TARGET_ENTRIES: ${{ inputs.target_entries || '1000' }}
-          MLS_UNIFIED_R33_FANOUT: '32'
+          MLS_UNIFIED_R33_FANOUT: '64'
           MLS_UNIFIED_R33_MAX_BATCH: '50'
         run: node 'scripts/MLS unified web runner.cjs'
