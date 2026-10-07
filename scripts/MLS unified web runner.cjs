@@ -265,7 +265,7 @@ async function ensureR33Fanout(preferredCodes=[],desiredFanout=R33_FANOUT){
   const target=Math.max(1,Math.min(R33_FANOUT,Number(desiredFanout)||1));
   const used=new Set(existing.map(issueWorkerId).filter(Boolean));
   const preferred=[...new Set((Array.isArray(preferredCodes)?preferredCodes:[]).map(x=>String(x||'').toUpperCase()))]
-    .filter(code=>/^MLS-V\d{2}-\d{4}$/.test(code)).slice(0,1000);
+    .filter(code=>/^MLS-V\d{2}-\d{4}$/.test(code)).slice(0,256);
   const desired=[];
   for(let slot=1;slot<=target;slot++)desired.push(r33WorkerId(slot));
   const created=[];
