@@ -37,6 +37,8 @@ test('Unified integration executor validates exact leased scope and fails closed
   const source=fs.readFileSync('scripts/MLS unified r33 integration execute.cjs','utf8');
   assert.match(source,/state\.provider!=='r33-index-integration'/);
   assert.match(source,/startsWith\('r33-unified-integration:'\)/);
+  assert.match(source,/associationAuthorized=AUTHORIZED\.has\(association\)/);
+  assert.match(source,/state\.workerLogin&&!associationAuthorized&&login!==String\(state\.workerLogin\)/);
   assert.match(source,/UNIFIED_INTEGRATION_CONTENT_DRIFT/);
   assert.match(source,/r44SourceSha256/);
   assert.match(source,/R33 GitHub Native Tests/);
