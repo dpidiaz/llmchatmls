@@ -2,6 +2,7 @@
 
 const path=require('node:path');
 const core=require('../MLS R32 EDITORIAL/global dispatcher/core.js');
+const issueInventory=require('../MLS R32 EDITORIAL/global dispatcher/issue inventory.js');
 const providerIntegration=require('../MLS R32 EDITORIAL/global dispatcher/providers/integration.js');
 const recoveryContext=require('../MLS R32 EDITORIAL/global dispatcher/recovery.js');
 const buffered=require('../MLS R32 EDITORIAL/r4 buffered allocation.cjs');
@@ -39,9 +40,21 @@ async function pages(endpoint){
     if(!Array.isArray(rows))throw core.dispatchError('GITHUB_PAGE_INVALID');out.push(...rows);if(rows.length<100)return out;}
   throw core.dispatchError('GITHUB_PAGE_LIMIT','Incomplete inventory: no allocation allowed.',503);
 }
-async function allIssues(state='open'){return (await pages('/repos/'+owner+'/'+repo+'/issues?state='+state)).filter(x=>!x.pull_request);}
-async function updateIssue(number,patch){return gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);}
-async function createIssue(title,body){return gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});}
+const openIssueInventory=issueInventory.createOpenIssueInventoryCache();
+async function allIssues(state='open'){
+  const load=async()=>(await pages('/repos/'+owner+'/'+repo+'/issues?state='+state)).filter(x=>!x.pull_request);
+  return state==='open'?openIssueInventory.load(load):load();
+}
+async function updateIssue(number,patch){
+  const issue=await gh('PATCH','/repos/'+owner+'/'+repo+'/issues/'+number,patch);
+  openIssueInventory.record(issue);
+  return issue;
+}
+async function createIssue(title,body){
+  const issue=await gh('POST','/repos/'+owner+'/'+repo+'/issues',{title,body});
+  openIssueInventory.record(issue);
+  return issue;
+}
 function dispatcherIssue(issue){return issue&&!issue.pull_request&&String(issue.title||'').startsWith('[MLS Dispatcher]');}
 function ledgerIssue(issue){return issue&&!issue.pull_request&&String(issue.title||'')==='[MLS Dispatcher Ledger]';}
 function hasCommandMarker(issue){return /<!--\s*MLS_GLOBAL_DISPATCH_COMMAND\b/.test(String(issue?.body||''));}
