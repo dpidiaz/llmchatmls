@@ -84,6 +84,7 @@ function unifiedR33SourceCandidates(article,handoffEntry,options={}) {
   const catalog=[...(Array.isArray(MLS_R33_SOURCE_CATALOG)?MLS_R33_SOURCE_CATALOG:[]),...(Array.isArray(options.extraCatalog)?options.extraCatalog:[])];
   const ranked=catalog.map(raw=>{
     const m=raw && raw.metadata || {};
+    if(Array.isArray(m.appliesToCodes)&&!m.appliesToCodes.includes(String(article&&article.code||"").toUpperCase())) return null;
     if(m.status && m.status!=="active") return null;
     if(String(m.authorityTier || "").toUpperCase()==="X") return null;
     const sourceLang=String(m.language || "").toLowerCase();
