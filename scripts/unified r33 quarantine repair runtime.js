@@ -1,5 +1,6 @@
 var MLS_R33_REPAIR_SCHEMA="2";
 var MLS_R33_REPAIR_MAX_ATTEMPTS=12;
+var MLS_R33_REPAIR_CJK_MAX_ATTEMPTS=15;
 var MLS_R33_REPAIR_REASONS=new Set([
   "NO_REGISTERED_SOURCE_CANDIDATE",
   "CLAIM_SOURCE_NOT_REGISTERED",
@@ -32,6 +33,9 @@ async function unifiedR33RepairEnsure(env){
     env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_r33_repair_source_links(code,source_id,created_ms) SELECT code,source_id,created_ms FROM mls_r33_repair_sources WHERE state='ACTIVE'"),
     env.WIKI_DB.prepare("INSERT OR IGNORE INTO mls_r33_repair_source_links(code,source_id,created_ms) SELECT q.code,q.last_source_id,q.updated_ms FROM mls_r33_repair_queue q JOIN mls_r33_repair_sources s ON s.source_id=q.last_source_id WHERE q.last_source_id IS NOT NULL AND s.state='ACTIVE'")
   ]);
+}
+function unifiedR33RepairMaxAttempts(code){
+  return /^MLS-V0[67]-/i.test(String(code||""))?MLS_R33_REPAIR_CJK_MAX_ATTEMPTS:MLS_R33_REPAIR_MAX_ATTEMPTS;
 }
 function unifiedR33RepairNormalizeUrl(value){
   const raw=String(value||"").trim();if(!raw)return null;
@@ -100,7 +104,7 @@ async function unifiedR33RepairClaim(env){
   const now=Date.now(),token=crypto.randomUUID();
   const row=await env.WIKI_DB.prepare(`UPDATE mls_r33_repair_queue SET state='LEASED',lease_token=?1,expires_ms=?2,attempts=attempts+1,updated_ms=?3
     WHERE code=(SELECT r.code FROM mls_r33_repair_queue r JOIN mls_canonical_queue q USING(code)
-      WHERE q.state='QUARANTINED' AND r.attempts<${MLS_R33_REPAIR_MAX_ATTEMPTS} AND (
+      WHERE q.state='QUARANTINED' AND r.attempts<CASE WHEN r.code LIKE 'MLS-V06-%' OR r.code LIKE 'MLS-V07-%' THEN ${MLS_R33_REPAIR_CJK_MAX_ATTEMPTS} ELSE ${MLS_R33_REPAIR_MAX_ATTEMPTS} END AND (
         r.state IN ('PENDING','RETRY') OR
         (r.state='BLOCKED' AND r.attempts>=3 AND r.last_error IN ('REPAIR_NO_VALIDATED_SOURCE','REPAIR_NO_SAFE_SOURCE')) OR
         (r.state='LEASED' AND r.expires_ms<=?3)
@@ -314,7 +318,7 @@ async function unifiedR33RepairStep(env){
       if(saved.ok)return saved;
       await unifiedR33RepairRecordRejected(env,row.code,normalized,saved.reason||"REPAIR_CANDIDATE_REJECTED");
     }
-    await env.WIKI_DB.prepare(`UPDATE mls_r33_repair_queue SET state=CASE WHEN attempts<${MLS_R33_REPAIR_MAX_ATTEMPTS} THEN 'RETRY' ELSE 'BLOCKED' END,lease_token=NULL,expires_ms=0,last_error=?,updated_ms=? WHERE code=? AND lease_token=?`)
+    await env.WIKI_DB.prepare(`UPDATE mls_r33_repair_queue SET state=CASE WHEN attempts<${unifiedR33RepairMaxAttempts(row.code)} THEN 'RETRY' ELSE 'BLOCKED' END,lease_token=NULL,expires_ms=0,last_error=?,updated_ms=? WHERE code=? AND lease_token=?`)
       .bind(candidates.length?"REPAIR_NO_VALIDATED_SOURCE":"REPAIR_NO_SAFE_SOURCE",Date.now(),row.code,row.lease_token).run();
     return {status:candidates.length?"REPAIR_NO_VALIDATED_SOURCE":"REPAIR_NO_SAFE_SOURCE",code:row.code};
   }catch(error){
@@ -337,6 +341,7 @@ async function unifiedR33RepairStatus(env){
   return {
     schema:MLS_R33_REPAIR_SCHEMA,
     maxAttempts:MLS_R33_REPAIR_MAX_ATTEMPTS,
+    cjkMaxAttempts:MLS_R33_REPAIR_CJK_MAX_ATTEMPTS,
     counts:Object.fromEntries((rows.results||[]).map(r=>[r.state,Number(r.n)])),
     blockedByError:(blocked.results||[]).map(r=>({error:r.last_error||null,n:Number(r.n)})),
     registeredSources:Number(sources&&sources.n||0),
