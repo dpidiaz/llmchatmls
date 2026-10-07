@@ -6,6 +6,7 @@ const fs=require('node:fs');
 const os=require('node:os');
 const path=require('node:path');
 const child=require('node:child_process');
+const vm=require('node:vm');
 
 const root=path.resolve(__dirname,'..');
 const {injectR44}=require('../scripts/habilitar r44 cloudflare.js');
@@ -112,4 +113,24 @@ test('Wrangler schedules server-side Unified execution every five minutes',()=>{
   assert.deepEqual(config.triggers && config.triggers.crons,['*/5 * * * *']);
   assert.equal(config.ai.binding,'AI');
   assert.equal(config.d1_databases[0].binding,'WIKI_DB');
+});
+
+test('R33 remaps a tier-invalid claim only to an on-topic higher-tier registered source',()=>{
+  const runtime=fs.readFileSync(path.join(root,'scripts','unified runner r33 runtime.js'),'utf8');
+  const context=vm.createContext({});
+  vm.runInContext(runtime,context);
+  const weak={sourceId:'weak-source',score:100,metadata:{authorityTier:'D',title:'German grammar article',topics:['German grammar rules']}};
+  const strong={sourceId:'strong-source',score:10,metadata:{authorityTier:'A',title:'Official German orthography standard',topics:['German spelling rules official standard']}};
+  const parsed={status:'MATCH',confidence:0.95,claims:[{
+    summary:'The official German spelling rule follows the orthography standard',
+    claimType:'normative',sourceId:'weak-source',confidence:0.9
+  }]};
+  const repaired=context.unifiedR33ValidateClaimSet(parsed,[weak,strong]);
+  assert.equal(repaired.ok,true);
+  assert.equal(repaired.claims[0].sourceId,'strong-source');
+  assert.equal(repaired.claims[0].source.metadata.authorityTier,'A');
+
+  const closed=context.unifiedR33ValidateClaimSet(parsed,[weak]);
+  assert.equal(closed.ok,false);
+  assert.equal(closed.reason,'CLAIM_SOURCE_TIER_INVALID');
 });

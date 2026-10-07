@@ -135,6 +135,24 @@ function unifiedR33AllowedTier(claimType,tier) {
   if(type==="regional_variation"||type==="historical")return t==="A"||t==="B"||t==="C";
   return t==="A"||t==="B"||t==="C"||t==="D";
 }
+function unifiedR33ClaimSourceOverlap(summary,candidate) {
+  const claimTokens=unifiedR33Tokens(summary);
+  const metadata=candidate&&candidate.metadata||{};
+  const sourceTokens=unifiedR33Tokens([
+    metadata.title,(metadata.topics||[]).join(" "),metadata.institution,
+    (metadata.authors||[]).join(" ")
+  ].filter(Boolean).join(" "));
+  let overlap=0;
+  for(const token of claimTokens)if(token.length>=4&&sourceTokens.has(token))overlap++;
+  return overlap;
+}
+function unifiedR33TierEligibleSource(claimType,selected,candidates,summary) {
+  return candidates
+    .filter(candidate=>candidate&&candidate.sourceId!==selected.sourceId&&unifiedR33AllowedTier(claimType,candidate.metadata&&candidate.metadata.authorityTier))
+    .map(candidate=>({candidate,overlap:unifiedR33ClaimSourceOverlap(summary,candidate)}))
+    .filter(row=>row.overlap>=2)
+    .sort((a,b)=>b.overlap-a.overlap||Number(b.candidate.score||0)-Number(a.candidate.score||0)||a.candidate.sourceId.localeCompare(b.candidate.sourceId))[0]?.candidate||null;
+}
 function unifiedR33ValidateClaimSet(parsed,candidates) {
   if(parsed?.status!=="MATCH")return {ok:false,reason:"MATCHER_REQUESTED_REVIEW"};
   const overall=Number(parsed.confidence||0);
@@ -149,11 +167,15 @@ function unifiedR33ValidateClaimSet(parsed,candidates) {
     const normalized=unifiedR33NormalizeText(summary);
     const claimType=String(item.claimType||"general");
     const confidence=Number(item.confidence??overall);
-    const selected=candidates.find(x=>x.sourceId===String(item.sourceId||""));
+    let selected=candidates.find(x=>x.sourceId===String(item.sourceId||""));
     if(!summary||normalized.length<12||seen.has(normalized))return {ok:false,reason:"CLAIM_SUMMARY_INVALID",claimIndex:i};
     if(!allowedTypes.has(claimType))return {ok:false,reason:"CLAIM_TYPE_INVALID",claimIndex:i};
     if(!selected)return {ok:false,reason:"CLAIM_SOURCE_NOT_REGISTERED",claimIndex:i};
-    if(!unifiedR33AllowedTier(claimType,selected.metadata.authorityTier))return {ok:false,reason:"CLAIM_SOURCE_TIER_INVALID",claimIndex:i};
+    if(!unifiedR33AllowedTier(claimType,selected.metadata.authorityTier)){
+      const stronger=unifiedR33TierEligibleSource(claimType,selected,candidates,summary);
+      if(!stronger)return {ok:false,reason:"CLAIM_SOURCE_TIER_INVALID",claimIndex:i};
+      selected=stronger;
+    }
     if(confidence<0.78)return {ok:false,reason:"CLAIM_CONFIDENCE_LOW",claimIndex:i,confidence};
     seen.add(normalized);
     claims.push({
