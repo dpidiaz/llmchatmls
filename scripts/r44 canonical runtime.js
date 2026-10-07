@@ -224,7 +224,22 @@ async function canonicalStatus(env,authorityStatus=null){
   const byCategory={technical_transient:0,sources_context:0,editorial_review:0,hash_context:0,other:0};
   let recoverable=0;
   const byReason=(groups.results||[]).map(row=>{const category=canonicalQuarantineCategory(row.last_error);byCategory[category]+=Number(row.n);recoverable+=Number(row.recoverable);return {...row,category}});
-  const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:0,mode:'IMMEDIATE_SINGLE_FLIGHT'};
+  const quarantineRows=authorityJson
+    ?await env.WIKI_DB.prepare(`SELECT q.code,q.last_error,q.attempts,CASE WHEN ${canonicalRecoverableSql} THEN 1 ELSE 0 END recoverable
+      FROM mls_canonical_queue q LEFT JOIN mls_canonical_recovery r USING(code)
+      WHERE q.state='QUARANTINED' AND q.revision=?1 AND q.code NOT IN (SELECT value FROM json_each(?2))
+      ORDER BY q.code LIMIT 1000`).bind(meta.revision,authorityJson).all()
+    :await env.WIKI_DB.prepare(`SELECT q.code,q.last_error,q.attempts,CASE WHEN ${canonicalRecoverableSql} THEN 1 ELSE 0 END recoverable
+      FROM mls_canonical_queue q LEFT JOIN mls_canonical_recovery r USING(code)
+      WHERE q.state='QUARANTINED' AND q.revision=? ORDER BY q.code LIMIT 1000`).bind(meta.revision).all();
+  const quarantineEntries=(quarantineRows.results||[]).map(row=>({
+    code:String(row.code||'').toUpperCase(),
+    reason:String(row.last_error||''),
+    attempts:Number(row.attempts||0),
+    category:canonicalQuarantineCategory(row.last_error),
+    recoverable:Number(row.recoverable||0)>0
+  }));
+  const quarantine={source:'mls_canonical_queue',total:counts.QUARANTINED||0,byCategory,byReason,entries:quarantineEntries,recoverable,requiresChangeOrReview:(counts.QUARANTINED||0)-recoverable,batchSize:canonicalRecoveryBatchSize,intervalMs:0,mode:'IMMEDIATE_SINGLE_FLIGHT'};
   const repair=await unifiedR33RepairStatus(env);
   // Expose a bounded live drain list so the GitHub-native R33 allocator can
   // prioritize exactly the D1 rows that are already PREPARED instead of relying
