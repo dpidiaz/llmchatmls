@@ -99,17 +99,27 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
   // lease remains protected by `batches`. Count it once so it cannot make the
   // entire R33 provider fail with BUFFER_DOUBLE_OWNER and starve unrelated work.
   const reservedCodes=requestedReservations.filter(code=>!leasedCodes.has(code));
+  const supersededLegacyRecoveryCodes=[...new Set(Object.values(globalLedger?.recoveries||{})
+    .filter(r=>r?.workItem?.provider==='r33-farm'&&!String(r?.workItem?.workId||'').startsWith('r33-unified:'))
+    .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]))
+    .filter(code=>allowed.has(code)&&!terminalCodes.includes(code)))].sort();
   return {...snapshot,pool,ledger,batches,reservedCodes,reservationLeaseOverlaps,r43Handoff:null,r43Handoffs:[],handoffCodes:[],
-    r44UnifiedHandoffs:handoffs,unifiedFullCorpus:true,preparedDrainCodes:drainCodes};
+    r44UnifiedHandoffs:handoffs,unifiedFullCorpus:true,preparedDrainCodes:drainCodes,supersededLegacyRecoveryCodes};
 }
-function protectCandidateCodes(snapshot,candidates,now){
+function protectCandidateCodes(snapshot,candidates,now,{supersededCodes=[]}={}){
   const batches=(snapshot.batches||[]).map(x=>structuredClone(x));
   for(const [index,candidate] of candidates.entries()){
     batches.push({poolId:snapshot.pool.poolId,batchId:'GLOBAL-UNIFIED-PROTECT-'+String(index+1).padStart(3,'0'),status:'leased',
       acknowledgedAt:new Date(now).toISOString(),ackDeadlineAt:new Date(Number(now)+60*60*1000).toISOString(),
       expiresAt:new Date(Number(now)+60*60*1000).toISOString(),entries:candidate.units.map(unit=>({code:unit.code}))});
   }
-  return {...snapshot,batches};
+  // Unified candidates intentionally supersede legacy R33 recoveries for these
+  // codes. Once protected in this materialization, do not pass the same codes
+  // as durable reservations to the general R33 lane, which rejects a
+  // reservation/lease overlap and blocks every provider item.
+  const superseded=new Set(supersededCodes.map(code=>String(code||'').toUpperCase()));
+  const reservedCodes=(snapshot.reservedCodes||[]).filter(code=>!superseded.has(String(code||'').toUpperCase()));
+  return {...snapshot,batches,reservedCodes};
 }
 
 function integrationError(code,message,status=409){
@@ -662,7 +672,7 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
             if(candidate.r44Unified.length!==candidate.units.length)throw integrationError('R44_R33_HANDOFF_SCOPE_MISMATCH','Candidate Unified sin handoff completo.',503);
             candidates.push(candidate);
           }
-          working=protectCandidateCodes(working,unifiedCandidates,now);
+          working=protectCandidateCodes(working,unifiedCandidates,now,{supersededCodes:unifiedView.supersededLegacyRecoveryCodes});
         }
         const remaining=Math.max(0,available-candidates.length);
         if(remaining>0)candidates.push(...r33Provider.materializeCandidates(working,{now,count:remaining}));

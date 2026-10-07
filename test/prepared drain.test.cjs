@@ -49,3 +49,14 @@ test('prepared drain ignores legacy R33 terminals and recoveries but honors Unif
   const unifiedSources=integration.r33TerminalSourceMap(unifiedLedger,unifiedView.pool,{root:'.'});
   assert.equal(unifiedSources.has(code),true,'Unified terminal remains eligible as integration source');
 });
+
+test('Unified candidate protection consumes an overlapping legacy reservation before general R33 materialization',()=>{
+  const code='MLS-V01-0696';
+  const entry={code,language:'italiano',contentPath:'content/italiano/'+code+'.json',order:1};
+  const pool={poolId:'MLS-R33-TEST-PREPARED',manifestVersion:'1',status:'authorized',active:true,execution:{},entries:[entry]};
+  const snapshot={pool,ledger:{poolId:pool.poolId,manifestVersion:pool.manifestVersion,verified:[],exceptions:[]},batches:[],reservedCodes:[code]};
+  const candidate={poolId:pool.poolId,units:[{...entry,evidenceArtifactPath:r33.evidenceArtifactPath(entry)}]};
+  const protectedView=integration.protectCandidateCodes(snapshot,[candidate],Date.now(),{supersededCodes:[code]});
+  assert.deepEqual(protectedView.reservedCodes,[]);
+  assert.doesNotThrow(()=>r33.materializeCandidate(protectedView,{now:Date.now(),requested:1}));
+});
