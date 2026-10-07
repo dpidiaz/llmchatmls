@@ -506,4 +506,3 @@ async function main(){
 }
 if(require.main===module)main().catch(error=>{console.error(error.code||'UNIFIED_INTEGRATION_ERROR',error.message);process.exitCode=2});
 module.exports={MARKER,AUTHORIZED,extractMarked,validateState,directPostmergeCheckpointMatches};
-

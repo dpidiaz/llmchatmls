@@ -130,4 +130,3 @@ test('direct postmerge ACK is idempotent and requires exact complete scope',()=>
   assert.equal(source.directPostmergeCheckpointMatches({...state,checkpoints:[{...state.checkpoints[0],integrationStage:'postmerge'}]},merge,head,units),false,'incompatible stage must fail closed');
   assert.equal(source.directPostmergeCheckpointMatches({...state,checkpoints:[{...state.checkpoints[0],pendingUnits:['MLS-V01-0050']}]},merge,head,units),false,'partial wave must fail closed');
 });
-
