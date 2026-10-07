@@ -512,6 +512,7 @@ var MLS_UNIFIED_RUNNER_SCHEMA = "3";
 var unifiedRunnerReady = new WeakSet();
 function unifiedRunnerCount(n) { return Number.isInteger(n) && (n === 1 || n === 100 || (n >= 5 && n <= 50 && n % 5 === 0)); }
 var MLS_UNIFIED_RUNNER_WORKER = "mls-unified-web-runner-v1";
+var MLS_UNIFIED_REPAIR_STRIDE = 4;
 
 async function unifiedRunnerEnsure(env) {
   if (unifiedRunnerReady.has(env.WIKI_DB)) return;
@@ -788,6 +789,23 @@ async function unifiedRunnerStep(env, stepKey, runnerId = 1) {
   let context = null;
   const receipts = [];
   try {
+    // Keep a dedicated repair fast lane active even while normal canonical/R44
+    // work is plentiful. Every fourth logical runner repairs QUARANTINED rows
+    // first; if there is nothing repairable it immediately falls through.
+    if (runnerId % MLS_UNIFIED_REPAIR_STRIDE === 0) {
+      const repair = await unifiedR33RepairStep(env);
+      if (repair.status !== "NO_REPAIR_WORK") {
+        if (repair.status === "REPAIR_SOURCE_REGISTERED" || repair.status === "REPAIR_SOURCE_REHYDRATED") {
+          await canonicalRecoverQuarantine(env);
+        }
+        await unifiedRunnerApplyMark(env,{
+          last_code:repair.code || null,
+          last_step_at:new Date().toISOString(),
+          last_error:null
+        });
+        return {status:"REPAIR_QUARANTINE",repair,repairLane:true};
+      }
+    }
     const claim = await r44DurableClaim(env,locked.worker_id,"unified:"+key);
     if (!["CLAIMED","LEASE_REUSED"].includes(claim.status) || !claim.ticket || !claim.ticket.lease_token) {
       await unifiedRunnerApplyMark(env,{last_step_at:new Date().toISOString(),last_error:null});
@@ -1057,10 +1075,29 @@ class UnifiedLogicalRunner {
     // A retry reuses the same key; it cannot start fresh work after completion.
     let key=await this.storage.get("stepKey");
     if (!key) { key="alarm:"+crypto.randomUUID(); await this.storage.put("stepKey",key); }
-    const result=await unifiedRunnerStep(this.env,key,id);
+    let result;
+    try {
+      result=await unifiedRunnerStep(this.env,key,id);
+    } catch (error) {
+      await this.storage.delete("stepKey");
+      const message=wikiErrorMessage(error);
+      // Cloudflare/D1 contention must reduce pressure locally, not stop the fleet.
+      // Policy/quota errors are handled by unifiedRunnerStep and intentionally pause.
+      if (/too many active sessions|\b429\b|timed?\s*out|timeout|temporarily unavailable|\b503\b|\b524\b/i.test(message)) {
+        await this.storage.setAlarm(Date.now()+15000+(Number(id)%10)*1000);
+        return;
+      }
+      throw error;
+    }
     await this.storage.delete("stepKey");
-    if (["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED","REPAIR_QUARANTINE","RUNNER_BUSY","NO_WORK","CAPACITY_BUSY","CLAIM_ALREADY_RESOLVED"].includes(result.status)) {
-      await this.storage.setAlarm(Date.now()+(["ENTRY_DURABLE","TICKET_COMPLETE","R44_DEGRADED","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED","REPAIR_QUARANTINE"].includes(result.status)?1000:300000));
+    const productive=new Set(["ENTRY_DURABLE","TICKET_COMPLETE","CANONICAL_PREPARED","CANONICAL_RETRY","CANONICAL_QUARANTINED","REPAIR_QUARANTINE"]);
+    const contention=new Set(["RUNNER_BUSY","CAPACITY_BUSY","CLAIM_ALREADY_RESOLVED","R44_DEGRADED"]);
+    if (productive.has(result.status)) {
+      await this.storage.setAlarm(Date.now()+1000);
+    } else if (contention.has(result.status)) {
+      await this.storage.setAlarm(Date.now()+5000+(Number(id)%10)*500);
+    } else if (result.status==="NO_WORK") {
+      await this.storage.setAlarm(Date.now()+30000+(Number(id)%10)*1000);
     }
   }
 }
