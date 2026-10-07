@@ -92,8 +92,14 @@ function r33UnifiedSnapshot(snapshot,handoffs,{root='.',globalLedger=null,global
     .filter(r=>r?.workItem?.provider==='r33-farm'&&String(r?.workItem?.workId||'').startsWith('r33-unified:'))
     .flatMap(r=>codesFromLocks(r.resourceLocks||r.workItem.resourceLocks||[]));
   const bufferedCodes=(snapshot.bufferedReservations||[]).flatMap(r=>(r?.allocation?.units||[]).map(u=>String(u?.code||'').toUpperCase()));
-  const reservedCodes=[...new Set([...recoveryCodes,...bufferedCodes].filter(code=>allowed.has(code)&&!terminalCodes.includes(code)))];
-  return {...snapshot,pool,ledger,batches,reservedCodes,r43Handoff:null,r43Handoffs:[],handoffCodes:[],
+  const requestedReservations=[...new Set([...recoveryCodes,...bufferedCodes].filter(code=>allowed.has(code)&&!terminalCodes.includes(code)))];
+  const leasedCodes=activeBatchCodes(batches);
+  const reservationLeaseOverlaps=requestedReservations.filter(code=>leasedCodes.has(code)).sort();
+  // A buffered reservation that has already become a live Global Dispatcher
+  // lease remains protected by `batches`. Count it once so it cannot make the
+  // entire R33 provider fail with BUFFER_DOUBLE_OWNER and starve unrelated work.
+  const reservedCodes=requestedReservations.filter(code=>!leasedCodes.has(code));
+  return {...snapshot,pool,ledger,batches,reservedCodes,reservationLeaseOverlaps,r43Handoff:null,r43Handoffs:[],handoffCodes:[],
     r44UnifiedHandoffs:handoffs,unifiedFullCorpus:true,preparedDrainCodes:drainCodes};
 }
 function protectCandidateCodes(snapshot,candidates,now){
@@ -131,6 +137,20 @@ function codesFromTerminal(ledger,provider){
 }
 function activeProviderAssignments(states,provider){
   return (Array.isArray(states)?states:[]).filter(state=>state&&state.status==='leased'&&!state.readyToClose&&!state.cancelRequested&&String(state.provider||'')===provider);
+}
+function activeBatchCodes(batches,now=Date.now()){
+  const codes=new Set(),at=Number(now);
+  for(const batch of Array.isArray(batches)?batches:[]){
+    if(batch?.status!=='leased')continue;
+    const expiryValue=!batch.acknowledgedAt&&batch.ackDeadlineAt?batch.ackDeadlineAt:batch.expiresAt;
+    const expiry=Date.parse(String(expiryValue||''));
+    if(!Number.isFinite(expiry)||at>expiry)continue;
+    for(const entry of Array.isArray(batch.entries)?batch.entries:[]){
+      const code=String(entry?.code||'').toUpperCase();
+      if(/^MLS-V\d{2}-\d{4}$/.test(code))codes.add(code);
+    }
+  }
+  return codes;
 }
 function completedUnitsForState(state){
   const out=[];
@@ -243,15 +263,18 @@ function projectR33Snapshot(snapshot,{globalLedger,globalAssignments}={}){
     }
   }
   const activeHandoffCodes=new Set(seenHandoffCodes.keys());
-  const reservedCodes=[...new Set([...(snapshot.bufferedReservations||[])
+  const requestedReservations=[...new Set([...(snapshot.bufferedReservations||[])
     .flatMap(r=>r.allocation.units.map(u=>u.code)),...recoveryCodes]
     .filter(code=>poolCodes.has(code)&&!terminal.has(code)&&!activeHandoffCodes.has(code)))];
+  const leasedCodes=activeBatchCodes(batches);
+  const reservationLeaseOverlaps=requestedReservations.filter(code=>leasedCodes.has(String(code).toUpperCase())).sort();
+  const reservedCodes=requestedReservations.filter(code=>!leasedCodes.has(String(code).toUpperCase()));
 
   // Backward-compatible singular fields remain populated only when exactly one
   // active handoff exists. Multi-wave scheduling uses r43Handoffs explicitly.
   const r43Handoff=r43Handoffs.length===1?structuredClone(r43Handoffs[0]):null;
   const handoffCodes=r43Handoffs.length===1?[...r43Handoffs[0].pendingCodes]:[];
-  return {...snapshot,ledger,batches,reservedCodes,handoffCodes,r43Handoff,r43Handoffs};
+  return {...snapshot,ledger,batches,reservedCodes,reservationLeaseOverlaps,handoffCodes,r43Handoff,r43Handoffs};
 }
 function r33HandoffSnapshots(snapshot){
   const waves=Array.isArray(snapshot?.r43Handoffs)?snapshot.r43Handoffs:[];
@@ -549,13 +572,18 @@ function materializeProviderItems({issues=[],root='.',now=Date.now(),globalLedge
   const items=[],diagnostics=[];
   try{
     const snapshot=projectMlsSnapshot(collectMlsSnapshot(issues,root),{globalLedger,globalAssignments});
-    const works=mlsProvider.materializeFarmWorks({...snapshot,at:now,count:queueTarget});
+    const works=mlsProvider.materializeFarmWorks({...snapshot,at:now,count:Math.min(queueTarget,mlsProvider.PREFETCH_MAX)});
     for(const item of works)items.push(globalCore.normalizeWorkItem(item));
   }catch(error){diagnostics.push({provider:'mls-farm',status:'blocked',error:error.code||'MLS_FARM_PROVIDER_ERROR',message:error.message});}
   try{
     const snapshot=projectR33Snapshot(collectR33Snapshot(issues,root),{globalLedger,globalAssignments});
     const execution=snapshot.pool?.execution||{};
     const unifiedViewForIntegration=r33UnifiedSnapshot(snapshot,snapshot.r44Handoffs||new Map(),{root,globalLedger,globalAssignments,preparedDrainCodes});
+    const reservationLeaseOverlaps=[...new Set([
+      ...(snapshot.reservationLeaseOverlaps||[]),
+      ...(unifiedViewForIntegration?.reservationLeaseOverlaps||[])
+    ])].sort();
+    if(reservationLeaseOverlaps.length)diagnostics.push({provider:'r33-farm',status:'reservation-overlap-protected',codes:reservationLeaseOverlaps});
     if(unifiedViewForIntegration){
       const unifiedIndexItem=r33IndexIntegrationWork({
         pool:unifiedViewForIntegration.pool,
