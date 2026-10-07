@@ -20,23 +20,48 @@ const [owner,repo]=repository.split('/');
 const root=path.resolve(__dirname,'..');
 
 const githubApiCounts={GET:0,POST:0,PATCH:0,PUT:0,DELETE:0};
+const GITHUB_REQUEST_TIMEOUT_MS=15000;
+const GITHUB_GET_TRANSIENT_STATUSES=new Set([500,502,503,504]);
 if(typeof process.on==='function')process.on('exit',()=>console.log('MLS_R4_GITHUB_API_METRICS '+JSON.stringify({module:'scheduler',calls:githubApiCounts,total:Object.values(githubApiCounts).reduce((a,b)=>a+b,0)})));
 async function gh(method,endpoint,body){
   const cooldownFile=process.env.MLS_GITHUB_COOLDOWN_FILE;
   return backoff.retry(cooldownFile,async()=>{
     backoff.check(cooldownFile);
-    if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
-    const response=await fetch('https://api.github.com'+endpoint,{
-      method,
-      headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-r1'},
-      body:body===undefined?undefined:JSON.stringify(body)
-    });
-    const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
-    if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;
-      const rateLimited=response.status===429||/rate limit/i.test(String(data?.message||text))||response.headers.get('x-ratelimit-remaining')==='0';
-      if(rateLimited){e.cooldown=backoff.record(cooldownFile,response);e.retryAfterCooldown=true;}
-      throw e;}
-    return data;
+    let transientRetries=0;
+    for(;;){
+      if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
+      let response;
+      try{
+        response=await fetch('https://api.github.com'+endpoint,{
+          method,
+          headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-r1'},
+          body:body===undefined?undefined:JSON.stringify(body),
+          signal:AbortSignal.timeout(GITHUB_REQUEST_TIMEOUT_MS)
+        });
+      }catch(error){
+        const retryableRead=method==='GET'&&transientRetries<2&&(
+          error?.name==='AbortError'||error?.name==='TimeoutError'||error?.name==='TypeError'||
+          ['ECONNRESET','ETIMEDOUT','EAI_AGAIN','ECONNREFUSED'].includes(error?.cause?.code)
+        );
+        if(!retryableRead)throw error;
+        transientRetries++;
+        console.warn('GitHub GET transient failure; retry '+transientRetries+'/2 for '+endpoint+'.');
+        await new Promise(resolve=>setTimeout(resolve,500*2**(transientRetries-1)));
+        continue;
+      }
+      const text=await response.text();let data=null;try{data=text?JSON.parse(text):null}catch{data=text}
+      if(!response.ok){const e=new Error('GitHub '+response.status+': '+(data?.message||text));e.status=response.status;
+        const rateLimited=response.status===429||/rate limit/i.test(String(data?.message||text))||response.headers.get('x-ratelimit-remaining')==='0';
+        if(rateLimited){e.cooldown=backoff.record(cooldownFile,response);e.retryAfterCooldown=true;}
+        if(method==='GET'&&GITHUB_GET_TRANSIENT_STATUSES.has(response.status)&&transientRetries<2){
+          transientRetries++;
+          console.warn('GitHub GET transient HTTP '+response.status+'; retry '+transientRetries+'/2 for '+endpoint+'.');
+          await new Promise(resolve=>setTimeout(resolve,500*2**(transientRetries-1)));
+          continue;
+        }
+        throw e;}
+      return data;
+    }
   });
 }
 async function pages(endpoint){
