@@ -2,8 +2,6 @@ name: MLS Global Dispatcher Scheduler
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/5 * * * *'
   issues:
     types:
       - opened
@@ -20,7 +18,6 @@ jobs:
       cancel-in-progress: false
     if: >-
       ${{ github.event_name == 'workflow_dispatch' ||
-          github.event_name == 'schedule' ||
           (github.event_name == 'issues' &&
            startsWith(github.event.issue.title, '[MLS Dispatcher]') &&
            contains(github.event.issue.body, '<!-- MLS_GLOBAL_DISPATCH_COMMAND') &&
