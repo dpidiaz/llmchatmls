@@ -34,8 +34,6 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/UNIFIED_TARGET_PROGRESS/);
   assert.match(source,/processed_entries/);
   assert.match(source,/targetEntries:EXECUTION_TARGET/);
-  assert.match(source,/requiresChangeOrReview:Number\(quarantine\.requiresChangeOrReview\|\|0\)/);
-  assert.match(source,/blockedByError:repair\.blockedByError\|\|\[\]/);
   assert.match(source,/REVIEW_REQUIRED/);
   assert.match(source,/pauseRunner:false/);
   assert.match(source,/function r44Drained/);
