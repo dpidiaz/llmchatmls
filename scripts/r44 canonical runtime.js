@@ -11,12 +11,14 @@ async function canonicalAuthorityStatus(now=Date.now()){
   return status;
 }
 // Same-context recovery is deliberately narrow. Technical failures get at most
-// two retries. Source/editorial quarantines get one deterministic preflight and,
-// only when current registered context is usable, one R33 retry. Context changes
-// remain independently recoverable. Six automatic releases is the lifetime cap.
+// two retries. Source/editorial quarantines get a deterministic preflight and,
+// only when current registered context is usable, a bounded R33 retry. Locator
+// failures get up to two retries after URL resolution changes. Context changes
+// remain independently recoverable. Twenty-four automatic releases is the lifetime cap.
 var canonicalTransientSql="(q.last_error='UNIFIED_R33_DRAFT_JSON_INVALID' OR q.last_error='SOURCE_FETCH_FAILED' OR q.last_error IN ('SOURCE_FETCH_HTTP_408','SOURCE_FETCH_HTTP_429','SOURCE_FETCH_HTTP_500','SOURCE_FETCH_HTTP_502','SOURCE_FETCH_HTTP_503','SOURCE_FETCH_HTTP_504') OR q.last_error IN ('CANONICAL_ASSET_500','CANONICAL_ASSET_502','CANONICAL_ASSET_503','CANONICAL_ASSET_504'))";
+var canonicalSourceLocatorSql="(q.last_error IN ('SOURCE_FULLTEXT_REQUIRED','SOURCE_URL_UNAVAILABLE'))";
 var canonicalReviewSql="(q.last_error='NO_REGISTERED_SOURCE_CANDIDATE' OR q.last_error LIKE 'SOURCE_%' OR q.last_error LIKE 'MATCHER_%' OR q.last_error LIKE 'CLAIM_%' OR q.last_error LIKE 'COVERAGE_%' OR q.last_error LIKE 'SOURCE_SUPPORT_%' OR q.last_error='NEEDS_CHAT_REVIEW')";
-var canonicalRecoverableSql="r.recoveries<24 AND (r.context_hash<>r.failed_context_hash OR ("+canonicalTransientSql+" AND q.attempts<6 AND r.technical_retries<2) OR ("+canonicalReviewSql+" AND q.attempts<6 AND r.technical_retries<1))";
+var canonicalRecoverableSql="r.recoveries<24 AND (r.context_hash<>r.failed_context_hash OR ("+canonicalTransientSql+" AND q.attempts<6 AND r.technical_retries<2) OR ("+canonicalSourceLocatorSql+" AND q.attempts<6 AND r.technical_retries<2) OR ("+canonicalReviewSql+" AND q.attempts<6 AND r.technical_retries<1))";
 function canonicalQuarantineCategory(reason){
   const s=String(reason||'');
   if(/HASH_MISMATCH/.test(s))return 'hash_context';
@@ -142,11 +144,13 @@ async function canonicalRecoverQuarantine(env,now=Date.now()){
         preflight=unifiedR33CanonicalPreflight(item.input,row.last_error);
       }
       if(!preflight.eligible){
-        // Mark this same-context review as consumed so it cannot spin forever.
-        // A later material context change still bypasses this fence.
+        // Locator failures get one additional bounded retry under the upgraded
+        // fetch policy. If the current context is still not fetchable, consume
+        // that retry immediately so the row cannot spin.
+        const consumed=(row.last_error==='SOURCE_FULLTEXT_REQUIRED'||row.last_error==='SOURCE_URL_UNAVAILABLE')?2:1;
         await env.WIKI_DB.prepare(`UPDATE mls_canonical_recovery
-          SET technical_retries=CASE WHEN technical_retries<1 THEN 1 ELSE technical_retries END
-          WHERE code=? AND context_hash=failed_context_hash`).bind(row.code).run();
+          SET technical_retries=CASE WHEN technical_retries<?1 THEN ?1 ELSE technical_retries END
+          WHERE code=?2 AND context_hash=failed_context_hash`).bind(consumed,row.code).run();
         continue;
       }
     }

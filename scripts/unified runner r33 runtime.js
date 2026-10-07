@@ -58,6 +58,20 @@ function unifiedR33HandoffSourceText(entry) {
     return "";
   }).join(" ");
 }
+function unifiedR33DoiSourceUrl(value) {
+  const doi=String(value||"").trim().replace(/^https?:\/\/(?:dx\.)?doi\.org\//i,"").replace(/^doi:\s*/i,"");
+  if(!/^10\.\d{4,9}\/.+/.test(doi))return null;
+  return unifiedR33SafeSourceUrl("https://doi.org/"+doi);
+}
+function unifiedR33HandoffSourceUrl(entry,sourceId) {
+  const wanted=String(sourceId||"").toUpperCase();
+  for(const row of (Array.isArray(entry&&entry.sources)?entry.sources:[])){
+    if(!row||typeof row!=="object"||String(row.sourceId||"").toUpperCase()!==wanted)continue;
+    const url=unifiedR33SafeSourceUrl(row.canonicalUrl||row.url);
+    if(url)return url;
+  }
+  return null;
+}
 function unifiedR33SourceCandidates(article,handoffEntry,options={}) {
   const lang=unifiedR33LanguageCode(article && article.language);
   const hints=Array.isArray(handoffEntry && handoffEntry.claims)?handoffEntry.claims.map(x=>typeof x==="string"?x:JSON.stringify(x)):[];
@@ -81,12 +95,19 @@ function unifiedR33SourceCandidates(article,handoffEntry,options={}) {
     let score=overlap*5;
     const tier=String(m.authorityTier || "").toUpperCase();
     score+=tier==="A"?20:tier==="B"?14:tier==="C"?8:3;
+    const sourceId=String(raw.sourceId||"");
     const title=unifiedR33NormalizeText(m.title);
     const url=unifiedR33NormalizeText(m.canonicalUrl);
     if(title && handoffText.includes(title)) score+=160;
     if(url && handoffText.includes(url)) score+=220;
     if(raw.sourceId && handoffText.includes(unifiedR33NormalizeText(raw.sourceId))) score+=500;
-    return {sourceId:String(raw.sourceId||""),metadata:m,score,repairValidatedFulltext:raw&&raw.repairValidatedFulltext===true,repairPublishRequired:raw&&raw.repairPublishRequired!==false};
+    const registeredUrl=unifiedR33SafeSourceUrl(m.canonicalUrl);
+    const handoffUrl=unifiedR33HandoffSourceUrl(handoffEntry,sourceId);
+    const doiUrl=unifiedR33DoiSourceUrl(m.doi);
+    const fetchUrl=registeredUrl||handoffUrl||doiUrl||null;
+    const fetchLocatorSource=registeredUrl?"registry":handoffUrl?"handoff":doiUrl?"doi":null;
+    if(fetchUrl)score+=8;
+    return {sourceId,metadata:m,score,repairValidatedFulltext:raw&&raw.repairValidatedFulltext===true,repairPublishRequired:raw&&raw.repairPublishRequired!==false,fetchUrl,fetchLocatorSource};
   }).filter(Boolean);
   const eligible=options.autoAuditableOnly?ranked.filter(unifiedR33SourceAutoAuditable):ranked;
   return eligible.sort((a,b)=>b.score-a.score||a.sourceId.localeCompare(b.sourceId)).slice(0,16);
@@ -119,14 +140,16 @@ function unifiedR33SourceAutoAuditable(candidate) {
   const metadata=candidate&&candidate.metadata||{};
   const type=String(metadata.sourceType||"");
   const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
-  return (autoTypes.has(type)||candidate&&candidate.repairValidatedFulltext===true)&&!!unifiedR33SafeSourceUrl(metadata.canonicalUrl);
+  const verificationUrl=unifiedR33SafeSourceUrl(candidate&&candidate.fetchUrl)||unifiedR33SafeSourceUrl(metadata.canonicalUrl);
+  return (autoTypes.has(type)||candidate&&candidate.repairValidatedFulltext===true)&&!!verificationUrl;
 }
 function unifiedR33SourcePacket(candidates) {
   return candidates.map(x=>({
     sourceId:x.sourceId,authorityTier:x.metadata.authorityTier,sourceType:x.metadata.sourceType,
     title:x.metadata.title,authors:x.metadata.authors||[],institution:x.metadata.institution||null,
     publicationYear:x.metadata.publicationYear||null,canonicalUrl:x.metadata.canonicalUrl||null,
-    topics:x.metadata.topics||[],score:x.score
+    topics:x.metadata.topics||[],score:x.score,fetchable:!!x.fetchUrl,
+    verificationUrl:x.fetchUrl||null,verificationLocatorSource:x.fetchLocatorSource||null
   }));
 }
 function unifiedR33AllowedTier(claimType,tier) {
@@ -229,10 +252,11 @@ function unifiedR33ReadableSourceText(raw,contentType) {
 async function unifiedR33FetchSourceDocument(candidate) {
   const metadata=candidate&&candidate.metadata||{};
   const type=String(metadata.sourceType||"");
-  const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
-  if(!autoTypes.has(type)&&!(candidate&&candidate.repairValidatedFulltext===true))return {ok:false,reason:"SOURCE_FULLTEXT_REQUIRED",sourceId:candidate.sourceId};
-  const url=unifiedR33SafeSourceUrl(metadata.canonicalUrl);
-  if(!url)return {ok:false,reason:"SOURCE_URL_UNAVAILABLE",sourceId:candidate.sourceId};
+  const url=candidate&&candidate.fetchUrl||unifiedR33SafeSourceUrl(metadata.canonicalUrl)||unifiedR33DoiSourceUrl(metadata.doi);
+  if(!url){
+    const bibliographicOnly=new Set(["book","book_chapter","journal_article","thesis","other"]);
+    return {ok:false,reason:bibliographicOnly.has(type)?"SOURCE_FULLTEXT_REQUIRED":"SOURCE_URL_UNAVAILABLE",sourceId:candidate.sourceId};
+  }
   let response;
   try{response=await fetch(url,{redirect:"follow",headers:{accept:"text/html,text/plain,application/json,application/xml;q=0.8,*/*;q=0.2","user-agent":"MLS-Unified-R33/1.0"}})}
   catch{return {ok:false,reason:"SOURCE_FETCH_FAILED",sourceId:candidate.sourceId}};
@@ -366,7 +390,8 @@ async function unifiedR33BuildDraft(env,body) {
     "Return ONLY JSON. Never invent a sourceId, URL, quotation, page, locator, bibliographic fact, or source content.",
     "Enumerate ALL substantial externally verifiable claims actually asserted by ARTICLE. Do not omit a claim merely because no source fits.",
     "For EACH substantial claim, choose one sourceId from CANDIDATES only when the source metadata makes the match credible.",
-    "Every candidate below is auto-auditable: R33 can fetch its registered canonical URL and inspect source text. Do not infer support from sources outside CANDIDATES.",
+    "Every candidate below has a safe verification URL; R33 fetches its actual text before accepting support. Do not infer support from metadata or sources outside CANDIDATES.",
+    "When candidates are comparably authoritative and relevant, prefer fetchable:true. Never sacrifice authority tier or topical fit merely for fetchability.",
     "If even one substantial claim cannot be credibly mapped, return NEEDS_CHAT_REVIEW.",
     "Do not create quotation claims. Do not treat illustrative examples or navigation links as independent substantial claims unless they assert a rule.",
     "Allowed claimType values: general, normative, orthography, regional_variation, historical.",

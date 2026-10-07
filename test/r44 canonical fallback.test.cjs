@@ -351,6 +351,49 @@ test('403, unknown errors and hash mismatches remain quarantined without changed
   assert.equal(status.quarantine.byCategory.sources_context,1);
   assert.equal(status.quarantine.byCategory.other,1);
 });
+test('registered DOI and exact handoff locator make source text fetchable without changing source identity',async()=>{
+  const h=harness();h.r.URL=URL;
+  h.r.MLS_R33_SOURCE_CATALOG=[
+    {sourceId:'journal',metadata:{language:'en',title:'Grammar Journal',sourceType:'journal_article',authorityTier:'B',doi:'10.1234/example'}},
+    {sourceId:'book',metadata:{language:'en',title:'Grammar Book',sourceType:'book',authorityTier:'B'}}
+  ];
+  const article={language:'ingles',title:'Grammar',articleMarkdown:'Grammar morphology syntax'};
+  const candidates=h.r.unifiedR33SourceCandidates(article,{sources:[{sourceId:'book',url:'https://example.org/book-text'}]});
+  const journal=candidates.find(x=>x.sourceId==='journal'),book=candidates.find(x=>x.sourceId==='book');
+  assert.equal(journal.fetchUrl,'https://doi.org/10.1234/example');
+  assert.equal(journal.fetchLocatorSource,'doi');
+  assert.equal(book.fetchUrl,'https://example.org/book-text');
+  assert.equal(book.fetchLocatorSource,'handoff');
+  h.r.fetch=async()=>new Response('<html><body>'+('substantive grammar evidence '.repeat(30))+'</body></html>',{status:200,headers:{'content-type':'text/html'}});
+  assert.equal((await h.r.unifiedR33FetchSourceDocument(journal)).ok,true);
+  assert.equal((await h.r.unifiedR33FetchSourceDocument(book)).ok,true);
+  const withoutMatch=h.r.unifiedR33SourceCandidates(article,{sources:[{sourceId:'someone-else',url:'https://example.org/not-this-source'}]}).find(x=>x.sourceId==='book');
+  assert.equal(withoutMatch.fetchUrl,null,'handoff URL must never cross sourceId identity');
+});
+
+test('source locator quarantine gets one extra bounded retry and then fences',async()=>{
+  const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);h.r.URL=URL;
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'fixture-source',metadata:{language:'en',title:'Example',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/source'}}];
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_URL_UNAVAILABLE' WHERE code='MLS-V01-0001'; UPDATE mls_canonical_recovery SET technical_retries=1,failed_context_hash=context_hash WHERE code='MLS-V01-0001'");
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1);
+  await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
+  assert.equal(h.db.prepare("SELECT technical_retries FROM mls_canonical_recovery WHERE code='MLS-V01-0001'").get().technical_retries,2);
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',retry_ms=0,last_error='SOURCE_URL_UNAVAILABLE',lease_token=NULL,expires_ms=0 WHERE code='MLS-V01-0001'");
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
+});
+
+test('unfetchable source locator quarantine consumes the extra retry without spinning',async()=>{
+  const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);h.r.URL=URL;
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'book-only',metadata:{language:'en',title:'Example',sourceType:'book',authorityTier:'B'}}];
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_FULLTEXT_REQUIRED' WHERE code='MLS-V01-0001'; UPDATE mls_canonical_recovery SET technical_retries=1,failed_context_hash=context_hash WHERE code='MLS-V01-0001'");
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1);
+  await h.r.canonicalRecoverQuarantine(h.env);
+  assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'QUARANTINED');
+  assert.equal(h.db.prepare("SELECT technical_retries FROM mls_canonical_recovery WHERE code='MLS-V01-0001'").get().technical_retries,2);
+  assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
+});
+
 test('candidate fingerprint ignores unrelated language sources and reacts to selected source URL or policy',()=>{
   const {hash}=require('../scripts/r44 canonical assets.cjs');
   const h=harness();
