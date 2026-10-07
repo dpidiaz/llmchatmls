@@ -17,6 +17,7 @@ const TARGET_POLL_MS=5000;
 const TARGET_MAX_STAGNANT_POLLS=120;
 const R33_FANOUT=Math.max(1,Math.min(128,Number(process.env.MLS_UNIFIED_R33_FANOUT||12)));
 const R33_MAX_BATCH=Math.max(1,Math.min(50,Number(process.env.MLS_UNIFIED_R33_MAX_BATCH||50)));
+const R33_DIRECT_DRAFT_MAX_PER_RUN=5;
 const BOT='github-actions[bot]';
 const WORKERS={
   integration:'mls-unified-web-integration',
@@ -30,6 +31,7 @@ const WORKFLOWS={
 const REVIEW_MARKER='MLS_UNIFIED_WEB_NEEDS_REVIEW';
 const BATCH_SUBMIT_MARKER='MLS_UNIFIED_R33_EVIDENCE_SUBMIT_BATCH';
 let githubMutationSucceeded=false;
+let r33DirectDraftsUsed=0;
 
 function fail(code,message,status=1){const e=new Error(message||code);e.code=code;e.status=status;throw e;}
 function sleep(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
@@ -677,14 +679,19 @@ async function dispatchR33(issue,state){
     const handoffEntry=(ticket.entries||[]).find(x=>String(x.code||'').toUpperCase()===code);
     if(!handoffEntry)fail('UNIFIED_WEB_HANDOFF_ENTRY_MISSING',code);
     const existing=await githubJsonAt(evidencePath,state.branch,{optional:true});
-    const draft=await cf('/api/unified-runner/prepared-evidence',{
+    const draftBody={
       code,contentPath,article,handoffEntry,currentEvidenceRevision:Number(existing?.evidenceRevision||0),
       runId:'MLS-UNIFIED-WEB-'+String(process.env.GITHUB_RUN_ID||Date.now())
-    });
+    };
+    let draft=await cf('/api/unified-runner/prepared-evidence',draftBody);
     if(draft.reason==='PREPARED_CONTEXT_MISMATCH_OR_MISSING'){
-      waiting.push(code);
-      await report('r33','WAITING_PREPARATION',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:draft.reason,pauseRunner:false});
-      continue;
+      if(r33DirectDraftsUsed>=R33_DIRECT_DRAFT_MAX_PER_RUN){
+        waiting.push(code);
+        await report('r33','WAITING_PREPARATION',{issueNumber:Number(issue.number),assignmentId:state.assignmentId,code,error:draft.reason,detail:{directDraftCap:R33_DIRECT_DRAFT_MAX_PER_RUN,capReached:true},pauseRunner:false});
+        continue;
+      }
+      r33DirectDraftsUsed++;
+      draft=await cf('/api/unified-runner/r33-evidence',draftBody);
     }
     if(draft.status!=='MATCH'){
       const reviewPayload={assignmentId:state.assignmentId,leaseEpoch:state.leaseEpoch,code,reason:draft.reason||'NEEDS_CHAT_REVIEW',confidence:draft.confidence??null,sourceId:draft.sourceId||null,rationale:draft.rationale||null};

@@ -19,6 +19,9 @@ test('Unified web orchestrator advances through canonical Dispatcher instead of 
   assert.match(source,/sources:draft\.repairSources/);
   assert.match(source,/MLS_UNIFIED_R33_INTEGRATION_EXECUTE/);
   assert.match(source,/\/api\/unified-runner\/prepared-evidence/);
+  assert.match(source,/R33_DIRECT_DRAFT_MAX_PER_RUN=5/);
+  assert.match(source,/\/api\/unified-runner\/r33-evidence/);
+  assert.match(source,/r33DirectDraftsUsed\+\+/);
   assert.match(source,/\/api\/unified-runner\/report/);
   assert.match(source,/\/api\/unified-runner\/github-gate/);
   assert.match(source,/\/api\/unified-runner\/kick/);
