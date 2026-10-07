@@ -410,7 +410,10 @@ async function directPostmergeReconcile(){
   if(String(branchRef?.object?.sha||'').toLowerCase()!==headSha)fail('UNIFIED_INTEGRATION_DIRECT_RECOVERY_BRANCH_MOVED');
   const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
   const mainSha=String(mainRef?.object?.sha||'').toLowerCase();
-  if(mainSha!==mergeSha)fail('UNIFIED_INTEGRATION_DIRECT_RECOVERY_MAIN_MOVED');
+  const mainComparison=await gh('/repos/'+repository+'/compare/'+mergeSha+'...'+mainSha);
+  if(!['ahead','identical'].includes(String(mainComparison?.status||'').toLowerCase())||
+    (mainComparison?.files||[]).some(file=>integrationPathAllowed(file.filename,state.allowedPaths||[])))
+    fail('UNIFIED_INTEGRATION_DIRECT_RECOVERY_MAIN_MOVED');
   const mergeCommit=await gh('/repos/'+repository+'/git/commits/'+mergeSha);
   const parents=(mergeCommit?.parents||[]).map(x=>String(x?.sha||'').toLowerCase());
   if(parents.length!==2||parents[1]!==headSha)fail('UNIFIED_INTEGRATION_DIRECT_RECOVERY_IDENTITY_MISMATCH');
