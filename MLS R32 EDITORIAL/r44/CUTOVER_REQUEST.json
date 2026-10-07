@@ -1,9 +1,9 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-06T22:20:30.978Z",
+  "requestedAt": "2026-10-07T03:53:12.000Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
-  "emergencyBaseCommit": "2961a29cfcb62caa9972e5dc5552037b001063a3",
+  "emergencyBaseCommit": "9a3ceb0b6db9c0c0b9fd61067875f33a1d06c335",
   "expectedTickets": 1682,
   "expectedEntries": 8408,
   "importedAuditedTickets": [
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Deploy live D1 PREPARED routing + directed R33 fanout 50 from merge d1ae7ea",
-  "retryGeneration": 43,
+  "retryReason": "Deploy emergency drain throughput: 50-entry R33 batches + concurrent quarantine repair + adaptive backpressure",
+  "retryGeneration": 44,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
@@ -50,7 +50,7 @@
     "githubCooldownMaxSeconds": 900,
     "githubAggressiveRetryDisabled": true,
     "cloudflareContinuesDuringGithub403": true,
-    "degradedExecutionTargetEntries": 100,
+    "degradedExecutionTargetEntries": 1000,
     "preparedDuringDegradedIsVerified": false,
     "terminalVerificationRequiresGithubIntegration": true,
     "recoveryWriter": "SERIALIZED_EXISTING_UNIFIED_INTEGRATION"
