@@ -2,17 +2,26 @@ const fs = require('node:fs');
 const {execFileSync} = require('node:child_process');
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
+const path = require('node:path');
+const zlib = require('node:zlib');
 const BASE = '2961a29cfcb62caa9972e5dc5552037b001063a3';
 const CANONICAL_BASE = '0fa768aba71a5f9d31fe3558a625203c3dff856e';
 const LEGACY = '9ca3221fad3be35d55b8848b890d435d344421c3';
 const LEGACY_BLOB = '2cc713bd40bcb42dfc7f19f7a79cd5acafc3ecd2';
 const POOL_PATH = 'MLS R32 EDITORIAL/r44/pool-manifest.json';
-function frozen(commit, path, blob) {
-  const ref = `${commit}:${path}`;
+function frozen(commit, filePath, blob) {
+  const ref = `${commit}:${filePath}`;
   if (process.env.R44_FROZEN_DIR) {
-    const bytes=fs.readFileSync(require('node:path').join(process.env.R44_FROZEN_DIR,`${commit}-${path.split('/').at(-1)}`));
+    const bytes=fs.readFileSync(path.join(process.env.R44_FROZEN_DIR,`${commit}-${filePath.split('/').at(-1)}`));
     assert(blob, 'Offline frozen sources require an expected Git blob');
     assert.equal(crypto.createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'),blob);
+    return JSON.parse(bytes);
+  }
+  const snapshot = path.join(__dirname, 'r44-frozen', `${commit}-${filePath.split('/').at(-1)}.gz`);
+  if (fs.existsSync(snapshot)) {
+    const bytes = zlib.gunzipSync(fs.readFileSync(snapshot));
+    assert(blob, 'Bundled frozen sources require an expected Git blob');
+    assert.equal(crypto.createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'), blob);
     return JSON.parse(bytes);
   }
   if (blob) assert.equal(execFileSync('git', ['rev-parse', ref], {encoding:'utf8'}).trim(), blob);
