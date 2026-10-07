@@ -6,12 +6,14 @@ on:
       - '**/*r44*'
       - '**/*R44*'
       - 'MLS R32 EDITORIAL/r44/**'
+      - 'MLS R32 EDITORIAL/evidence git/registry/sources/**'
   push:
     branches: [main]
     paths:
       - 'MLS R32 EDITORIAL/r44/CUTOVER_REQUEST.json'
       - 'scripts/r44 canonical runtime.js'
       - 'public/runner.html'
+      - 'MLS R32 EDITORIAL/evidence git/registry/sources/**'
   workflow_dispatch:
 
 permissions:
