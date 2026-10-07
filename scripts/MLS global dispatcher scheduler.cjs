@@ -464,6 +464,10 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
 }
 
 async function main(){
+  // A previous run may have persisted a real GitHub 403/429 reset. Wait out
+  // that server-provided cooldown so this queued invocation resumes the work
+  // instead of failing before it can inspect the preserved command ledger.
+  await backoff.wait(process.env.MLS_GITHUB_COOLDOWN_FILE);
   const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
   if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length||result.bufferedCleanup.length||Object.values(result.elastic||{}).some(v=>Array.isArray(v)&&v.length))console.log(JSON.stringify({ok:true,...result}));
   // GitHub concurrency retains one pending workflow at most. An explicit NEXT
