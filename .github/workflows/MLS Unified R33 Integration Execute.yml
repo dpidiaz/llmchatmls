@@ -111,11 +111,13 @@ jobs:
           BRANCH: ${{ steps.prep.outputs.branch }}
           ASSIGNMENT: ${{ steps.prep.outputs.assignment_id }}
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "r33(unified): integrate $ASSIGNMENT"
+          if [ "${{ steps.scope.outputs.needs_commit }}" = 'true' ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m "r33(unified): integrate $ASSIGNMENT"
+            git push origin "HEAD:refs/heads/$BRANCH"
+          fi
           HEAD_SHA="$(git rev-parse HEAD)"
-          git push origin "HEAD:refs/heads/$BRANCH"
           echo "head_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
       - name: Open serialized integration PR or select safe direct fallback
         if: ${{ steps.scope.outputs.has_changes == 'true' }}

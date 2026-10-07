@@ -194,10 +194,13 @@ function applySources(){
 }
 function validateStaged(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));
-  const files=run('git',['diff','--cached','--name-only'],{capture:true}).split(/\r?\n/).filter(Boolean);
+  const staged=run('git',['diff','--cached','--name-only'],{capture:true}).split(/\r?\n/).filter(Boolean);
+  const branchDelta=run('git',['diff','--name-only','origin/main...HEAD'],{capture:true}).split(/\r?\n/).filter(Boolean);
+  const files=[...new Set([...branchDelta,...staged])];
   const bad=files.filter(file=>!integrationPathAllowed(file,bundle.allowedPaths||[]));
   if(bad.length)fail('UNIFIED_INTEGRATION_SCOPE_VIOLATION',bad.join(', '));
   output('has_changes',files.length?'true':'false');
+  output('needs_commit',staged.length?'true':'false');
   process.stdout.write(JSON.stringify({ok:true,hasChanges:files.length>0,files})+'\n');
 }
 async function openPr(){
