@@ -3,8 +3,14 @@ const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
 const vm=require('node:vm');
+const {URL}=require('node:url');
 function stable(x){return Array.isArray(x)?x.map(stable):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;}
 function hash(x){return crypto.createHash('sha256').update(JSON.stringify(stable(x))).digest('hex');}
+function createRuntime(catalog,root=path.resolve(__dirname,'..')){
+  const runtime=vm.createContext({URL,MLS_R33_SOURCE_CATALOG:catalog});
+  vm.runInContext(fs.readFileSync(path.join(root,'scripts/unified runner r33 runtime.js'),'utf8'),runtime);
+  return runtime;
+}
 function build(root=path.resolve(__dirname,'..')){
   const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
   const sourceDir=path.join(root,'MLS R32 EDITORIAL/evidence git/registry/sources');
@@ -12,8 +18,7 @@ function build(root=path.resolve(__dirname,'..')){
   const catalog=fs.readdirSync(sourceDir).filter(n=>n.endsWith('.json')).sort()
     .map(n=>JSON.parse(fs.readFileSync(path.join(sourceDir,n),'utf8')))
     .filter(raw=>raw&&raw.metadata&&apa.validateApaSource(raw.metadata).citationReady);
-  const runtime=vm.createContext({MLS_R33_SOURCE_CATALOG:catalog});
-  vm.runInContext(fs.readFileSync(path.join(root,'scripts/unified runner r33 runtime.js'),'utf8'),runtime);
+  const runtime=createRuntime(catalog,root);
   const manifest=read('content/manifest.json');
   const verified=new Set(read('MLS R32 EDITORIAL/evidence git/indexes/verified.json'));
   const handoffs=new Map(read('MLS R32 EDITORIAL/r44/r33-handoff/index.json').entries.map(e=>[e.code,e]));
@@ -47,4 +52,4 @@ function build(root=path.resolve(__dirname,'..')){
   return {revision,pending,claimable:rows.filter(r=>!r.waiting).length,waitingHandoff:pending-rows.length};
 }
 if(require.main===module)console.log(JSON.stringify(build()));
-module.exports={build,hash};
+module.exports={build,hash,createRuntime};
