@@ -10,6 +10,8 @@ on:
     branches: [main]
     paths:
       - 'MLS R32 EDITORIAL/r44/CUTOVER_REQUEST.json'
+      - 'scripts/r44 canonical runtime.js'
+      - 'public/runner.html'
   workflow_dispatch:
 
 permissions:
@@ -173,3 +175,4 @@ jobs:
           grep -F 'Desde que abriste el monitor' "$html"
           grep -F 'verified.json' "$html"
           echo 'MLS_UNIFIED_STATUS_MONITOR_OK'
+
