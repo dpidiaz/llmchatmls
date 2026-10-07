@@ -277,22 +277,44 @@ async function noopCheckpointEvent(){
   if(!/^[a-f0-9]{40}$/.test(mainSha))fail('UNIFIED_INTEGRATION_NOOP_MAIN_INVALID');
   const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
   const branchSha=String(branchRef?.object?.sha||'').toLowerCase();
-  if(branchSha!==mainSha)fail('UNIFIED_INTEGRATION_NOOP_MAIN_MOVED','No-op requires assignment branch HEAD to equal current main HEAD.');
-  const existing=(state.checkpoints||[]).find(x=>String(x?.commitSha||'').toLowerCase()===mainSha);
+  let checkpointSha=mainSha,integrationStage='noop',integrationHeadSha=null;
+  if(branchSha!==mainSha){
+    const premerge=(state.checkpoints||[]).find(x=>String(x.integrationStage||'').toLowerCase()==='premerge-direct'&&
+      String(x.integrationHeadSha||'').toLowerCase()===branchSha&&String(x.validation?.status||'').toLowerCase()==='passed'&&!(x.pendingUnits||[]).length);
+    const expectedUnits=state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6));
+    const completed=new Set((premerge?.completedUnits||[]).map(String));
+    if(!premerge||completed.size!==expectedUnits.length||!expectedUnits.every(code=>completed.has(code)))
+      fail('UNIFIED_INTEGRATION_NOOP_MAIN_MOVED','Assignment branch is behind Main and has no complete accepted direct premerge checkpoint.');
+    const baseSha=String(state.recovery?.integrationBaseCommit||state.baseCommit||'').toLowerCase();
+    if(!/^[a-f0-9]{40}$/.test(baseSha))fail('UNIFIED_INTEGRATION_NOOP_BASE_INVALID');
+    const history=await gh('/repos/'+repository+'/compare/'+baseSha+'...'+mainSha);
+    const merged=(history?.commits||[]).find(commit=>{
+      const parents=(commit?.parents||[]).map(parent=>String(parent?.sha||'').toLowerCase());
+      return parents.length===2&&parents[1]===branchSha;
+    });
+    if(!merged)fail('UNIFIED_INTEGRATION_NOOP_MERGE_NOT_FOUND','Main does not contain the exact assignment head as a direct merge parent.');
+    checkpointSha=String(merged.sha||'').toLowerCase();
+    const afterMerge=await gh('/repos/'+repository+'/compare/'+checkpointSha+'...'+mainSha);
+    if(!['ahead','identical'].includes(String(afterMerge?.status||'').toLowerCase())||
+      (afterMerge?.files||[]).some(file=>integrationPathAllowed(file.filename,state.allowedPaths||[])))
+      fail('UNIFIED_INTEGRATION_NOOP_MAIN_OVERLAP','Main changed an allowed assignment path after its exact merge.');
+    integrationStage='postmerge-direct';integrationHeadSha=branchSha;
+  }
+  const existing=(state.checkpoints||[]).find(x=>String(x?.commitSha||'').toLowerCase()===checkpointSha);
   if(existing){
     const expectedUnits=state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6));
     const completed=new Set(existing.completedUnits||[]);
-    if(String(existing?.validation?.status||'').toLowerCase()!=='passed'||(existing.pendingUnits||[]).length||
+    if(String(existing?.integrationStage||'').toLowerCase()!==integrationStage||String(existing?.validation?.status||'').toLowerCase()!=='passed'||(existing.pendingUnits||[]).length||
       expectedUnits.some(code=>!completed.has(code)))
       fail('UNIFIED_INTEGRATION_NOOP_EXISTING_CHECKPOINT_INVALID','Existing same-commit checkpoint is not a complete passed integration checkpoint.');
     writeEvent('noop-checkpoint',bundle,{operation:'heartbeat',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch},runId*10+4);
     return;
   }
   writeEvent('noop-checkpoint',bundle,{operation:'checkpoint',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
-    commitSha:mainSha,integrationStage:'noop',
+    commitSha:checkpointSha,integrationStage,integrationHeadSha,
     validation:{status:'passed',workflow:'MLS Unified R33 Integration Execute',runId},
     completedUnits:state.resourceLocks.filter(x=>String(x).startsWith('entry:')).map(x=>String(x).slice(6)),pendingUnits:[],
-    notes:'Unified idempotent no-op integration: pinned sources and regenerated indexes already match canonical main.'},runId*10+4);
+    notes:integrationStage==='noop'?'Unified idempotent no-op integration: pinned sources and regenerated indexes already match canonical main.':'Recovered exact direct merge after the assignment branch was already integrated into Main.'},runId*10+4);
 }
 async function noopFinishEvent(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),runId=Number(process.argv[4]);
@@ -309,10 +331,16 @@ async function noopFinishEvent(){
   const mainRef=await gh('/repos/'+repository+'/git/ref/heads/main');
   const branchRef=await gh('/repos/'+repository+'/git/ref/heads/'+state.branch.split('/').map(encodeURIComponent).join('/'));
   const mainSha=String(mainRef?.object?.sha||'').toLowerCase(),branchSha=String(branchRef?.object?.sha||'').toLowerCase();
-  if(checkpointSha!==mainSha||checkpointSha!==branchSha)
+  const checkpointHead=String(checkpoint?.integrationHeadSha||'').toLowerCase();
+  if(checkpointStage==='postmerge-direct'){
+    const afterMerge=await gh('/repos/'+repository+'/compare/'+checkpointSha+'...'+mainSha);
+    if(branchSha!==checkpointHead||!['ahead','identical'].includes(String(afterMerge?.status||'').toLowerCase()))
+      fail('UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED','Direct-merge finish requires the exact assignment head and its merge to remain in current Main.');
+  }else if(checkpointSha!==mainSha||checkpointSha!==branchSha){
     fail('UNIFIED_INTEGRATION_NOOP_FINISH_MAIN_MOVED','No-op finish requires the accepted checkpoint, assignment branch HEAD and current main HEAD to match.');
+  }
   writeEvent('noop-finish',bundle,{operation:'finish',assignmentId:state.assignmentId,leaseToken:state.leaseToken,leaseEpoch:state.leaseEpoch,
-    commitSha:checkpointSha,integrationStage:'noop'},runId*10+5);
+    commitSha:checkpointSha,integrationStage:checkpointStage,integrationHeadSha:checkpointHead},runId*10+5);
 }
 async function premergeEvent(){
   const bundle=JSON.parse(fs.readFileSync(process.argv[3],'utf8')),headSha=String(process.argv[4]||'').toLowerCase();
