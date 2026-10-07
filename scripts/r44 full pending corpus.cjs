@@ -3,6 +3,7 @@ const {execFileSync} = require('node:child_process');
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const BASE = '2961a29cfcb62caa9972e5dc5552037b001063a3';
+const CANONICAL_BASE = '0fa768aba71a5f9d31fe3558a625203c3dff856e';
 const LEGACY = '9ca3221fad3be35d55b8848b890d435d344421c3';
 const LEGACY_BLOB = '2cc713bd40bcb42dfc7f19f7a79cd5acafc3ecd2';
 const POOL_PATH = 'MLS R32 EDITORIAL/r44/pool-manifest.json';
@@ -24,7 +25,7 @@ function unique(values, count) {
   return set;
 }
 function derive() {
-  const manifest = frozen(BASE, 'content/manifest.json', '643b3c9cab84a0372f9e52127fe78ad0e9fab938');
+  const manifest = frozen(CANONICAL_BASE, 'content/manifest.json', '643b3c9cab84a0372f9e52127fe78ad0e9fab938');
   const verified = frozen(BASE, 'MLS R32 EDITORIAL/evidence git/indexes/verified.json', 'e19bc5f617a93f4b1ec50eb96815783ba6b8920e');
   const legacy = frozen(LEGACY, POOL_PATH, LEGACY_BLOB);
   const all = unique(manifest.entries.map(e=>e.code), 10133);
@@ -55,7 +56,7 @@ function derive() {
     assert.equal(e.sha256,canonical.get(e.code).sha256);
   }
   return {...legacy,schema:'MLS-R44-CLOUDFLARE-POOL-2',ticketCount:tickets.length,entryCount:pending.length,
-    source:{...legacy.source,fullPendingBaseCommit:BASE,legacyPoolCommit:LEGACY},
+    source:{...legacy.source,fullPendingBaseCommit:CANONICAL_BASE,legacyPoolCommit:LEGACY},
     fullPendingCorpus:{frozen:all.size,verified:certified.size,pending:pending.length,existing:current.size,added:remainder.length,addedTickets:tickets.length-legacy.tickets.length,remainderByPrefix:byPrefix},tickets};
 }
 function validate() {
@@ -68,4 +69,4 @@ if(require.main===module) {
   const pool=validate();
   console.log(JSON.stringify(pool.fullPendingCorpus));
 }
-module.exports={derive,validate,BASE,LEGACY,POOL_PATH};
+module.exports={derive,validate,BASE,CANONICAL_BASE,LEGACY,POOL_PATH};
