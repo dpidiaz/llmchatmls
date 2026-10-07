@@ -31,7 +31,7 @@ async function r44PoolSeed(env) {
   if (meta.pool_schema === R44_POOL_SCHEMA) {
     const ticketCount = Number(meta.pool_ticket_count), ticketSize = Number(meta.pool_ticket_size);
     if (!Number.isSafeInteger(ticketCount) || ticketCount < 1 || !Number.isSafeInteger(ticketSize) || ticketSize < 1) throw new Error("R44_POOL_META_INVALID");
-    if (meta.pool_manifest_sha256 !== R44_POOL_SHA256) {
+    if (meta.pool_manifest_sha256 && meta.pool_manifest_sha256 !== R44_POOL_SHA256) {
       // Re-pin a manifest revision only after proving D1's immutable ticket universe matches it.
       const response = await env.ASSETS.fetch(new Request(R44_POOL_URL));
       if (!response.ok) throw new Error("R44_POOL_FETCH_" + response.status);
