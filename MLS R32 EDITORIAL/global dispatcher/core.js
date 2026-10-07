@@ -179,7 +179,25 @@ function reconcileDurableDone(ledger,states,completedUnitsForState){
   return changes;
 }
 
-function isClaimStale(createdAt,at=Date.now()){const created=parseDate(createdAt);return created===null||Number(at)-created>CLAIM_TTL_MS;}
+function isClaimStale(createdAt,at=Date.now(),cooldownWindows=[]){
+  const created=parseDate(createdAt),now=Number(at);if(created===null)return true;
+  let age=now-created;
+  const overlaps=[];
+  for(const window of Array.isArray(cooldownWindows)?cooldownWindows:[]){
+    const start=parseDate(window?.startedAt),until=parseDate(window?.until);
+    if(start===null||until===null)continue;
+    const left=Math.max(created,start),right=Math.min(now,until);
+    if(right>left)overlaps.push([left,right]);
+  }
+  overlaps.sort((a,b)=>a[0]-b[0]);
+  let coveredUntil=-Infinity;
+  for(const [start,end] of overlaps){
+    if(end<=coveredUntil)continue;
+    age-=end-Math.max(start,coveredUntil);
+    coveredUntil=end;
+  }
+  return age>CLAIM_TTL_MS;
+}
 function isLeaseExpired(state,at=Date.now()){
   if(!state||state.status!=='leased')return true;
   const expiry=!state.acknowledgedAt&&state.ackDeadlineAt?parseDate(state.ackDeadlineAt):parseDate(state.expiresAt);

@@ -319,7 +319,7 @@ async function processBufferedRequests(issues,globalLedger,activeStates,now){
   return result;
 }
 
-async function drainPendingCommands(baseRegistry,ledgerItem){
+async function drainPendingCommands(baseRegistry,ledgerItem,cooldownWindows=[]){
   // Repair stale ledger before any reaper, queue materialization, or new lease.
   const reconciliation=await reconcileCompletedIssues(ledgerItem);
   const now=Date.now(),s=await sweep(baseRegistry,ledgerItem,now),activeStates=s.active.map(x=>x.state);
@@ -382,7 +382,7 @@ async function drainPendingCommands(baseRegistry,ledgerItem){
       await closeCommand(issue,'[MLS Dispatcher][DUPLICATE] '+command.requestId,{ok:true,duplicate:true,requestId:command.requestId,...duplicate});
       drained.push({issueNumber:issue.number,status:'duplicate'});continue;
     }
-    if(core.isClaimStale(issue.created_at,now)){
+    if(core.isClaimStale(issue.created_at,now,cooldownWindows)){
       touchRequest(ledgerItem,command.requestId,{status:'stale',issueNumber:issue.number});
       await closeCommand(issue,'[MLS Dispatcher][STALE] '+command.requestId,{ok:false,error:'STALE_CLAIM',requestId:command.requestId,claimTtlMs:core.CLAIM_TTL_MS,createdAt:issue.created_at},'not_planned');
       drained.push({issueNumber:issue.number,status:'stale'});continue;
@@ -471,8 +471,9 @@ async function main(){
   // A previous run may have persisted a real GitHub 403/429 reset. Wait out
   // that server-provided cooldown so this queued invocation resumes the work
   // instead of failing before it can inspect the preserved command ledger.
-  await backoff.wait(process.env.MLS_GITHUB_COOLDOWN_FILE);
-  const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem);
+  const cooldownFile=process.env.MLS_GITHUB_COOLDOWN_FILE,cooldownWindows=backoff.cooldownWindows(cooldownFile);
+  await backoff.wait(cooldownFile);
+  const baseRegistry=core.loadRegistry(root),ledgerItem=await ensureLedger(baseRegistry),result=await drainPendingCommands(baseRegistry,ledgerItem,cooldownWindows);
   if(result.drained.length||result.reaped.length||result.buffered.length||result.bufferedStaged.length||result.bufferedCleanup.length||Object.values(result.elastic||{}).some(v=>Array.isArray(v)&&v.length))console.log(JSON.stringify({ok:true,...result}));
   // GitHub concurrency retains one pending workflow at most. An explicit NEXT
   // dispatch after a productive partial drain prevents a large burst from
