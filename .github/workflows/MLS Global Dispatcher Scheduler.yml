@@ -1,10 +1,12 @@
 name: MLS Global Dispatcher Scheduler
 
-
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/5 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/MLS global dispatcher ledger emergency preload.cjs'
+      - '.github/workflows/MLS Global Dispatcher Scheduler.yml'
   issues:
     types:
       - opened
@@ -21,7 +23,7 @@ jobs:
       cancel-in-progress: false
     if: >-
       ${{ github.event_name == 'workflow_dispatch' ||
-          github.event_name == 'schedule' ||
+          github.event_name == 'push' ||
           (github.event_name == 'issues' &&
            startsWith(github.event.issue.title, '[MLS Dispatcher]') &&
            contains(github.event.issue.body, '<!-- MLS_GLOBAL_DISPATCH_COMMAND') &&
@@ -62,4 +64,3 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: gh workflow run 'MLS Unified Web Runner.yml' --ref main
-
