@@ -6,7 +6,7 @@ on:
       target_entries:
         description: Chat-scoped cumulative target (100-1000, multiple of 5)
         required: false
-        default: '100'
+        default: '1000'
         type: string
   schedule:
     - cron: '*/5 * * * *'
@@ -44,8 +44,8 @@ jobs:
         env:
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
           MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
-          R44_LEGACY_RECONCILE_BATCH: 5
-          R44_LEGACY_RECONCILE_MAX_BATCHES: 1
+          R44_LEGACY_RECONCILE_BATCH: 50
+          R44_LEGACY_RECONCILE_MAX_BATCHES: 4
           R44_LEGACY_RECONCILE_ENFORCE_D1_FREE_GUARD: '0'
         run: node 'scripts/r44 legacy quarantine reconcile.cjs'
 
@@ -54,5 +54,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MLS_EDITORIAL_CHAT_KEY: ${{ secrets.MLS_EDITORIAL_CHAT_KEY }}
           MLS_UNIFIED_BASE_URL: https://llmchatmls.dpidiaz.workers.dev
-          MLS_UNIFIED_TARGET_ENTRIES: ${{ inputs.target_entries || '100' }}
+          MLS_UNIFIED_TARGET_ENTRIES: ${{ inputs.target_entries || '1000' }}
+          MLS_UNIFIED_R33_FANOUT: '32'
+          MLS_UNIFIED_R33_MAX_BATCH: '50'
         run: node 'scripts/MLS unified web runner.cjs'
