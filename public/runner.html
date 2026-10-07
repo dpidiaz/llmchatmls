@@ -37,6 +37,13 @@ button:disabled{opacity:.48;cursor:not-allowed}
 .log{margin-top:18px;border:1px solid #ddd7cc;background:#fbfaf7;border-radius:14px;max-height:320px;overflow:auto;padding:8px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;line-height:1.5;white-space:pre-wrap}
 .note{font-size:.9rem;margin-top:12px;color:#69736f}
 .badge{display:inline-block;padding:3px 8px;border-radius:999px;background:#e7eee9;color:#315643;font-size:.78rem;font-weight:750;margin-left:6px}
+.quarantine-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.quarantine-list{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.quarantine-item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #e2dcd1;border-radius:12px;padding:10px 12px;background:#fff}
+.quarantine-item small{display:block;color:#68746d;margin-top:3px}.quarantine-item a{color:#315643;font-weight:700;white-space:nowrap}
+.quarantine-empty{padding:12px;border:1px dashed #cfc7ba;border-radius:12px;color:#56616c}
+@media(max-width:760px){.quarantine-tools{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.quarantine-tools{grid-template-columns:1fr}.quarantine-item{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -166,6 +173,22 @@ button:disabled{opacity:.48;cursor:not-allowed}
 </div>
 
 <details><summary>Razones de cuarentena canónica</summary><p id="unifiedQuarantineSummary">Sin consultar</p><pre id="unifiedQuarantineReasons"></pre></details>
+<div class="panel" style="padding:16px;margin-top:16px;background:#fbfaf7;box-shadow:none">
+  <h3 style="margin:0 0 6px">Bandeja de trabajo de cuarentena</h3>
+  <p class="note" id="unifiedQuarantineWorkSummary" style="margin:0">Consultando entradas…</p>
+  <div class="quarantine-tools">
+    <div><label for="unifiedQuarantineCategory">Tipo de trabajo</label><select id="unifiedQuarantineCategory"><option value="all">Todos</option><option value="technical_transient">Técnicas/transitorias</option><option value="sources_context">Fuentes y contexto</option><option value="editorial_review">Revisión editorial</option><option value="hash_context">Hash/contexto</option><option value="other">Otras</option></select></div>
+    <div><label for="unifiedQuarantineReason">Motivo</label><select id="unifiedQuarantineReason"><option value="all">Todos los motivos</option></select></div>
+    <div><label for="unifiedQuarantineEligibility">Estado de trabajo</label><select id="unifiedQuarantineEligibility"><option value="all">Todos</option><option value="recoverable">Reintento seguro disponible</option><option value="review">Cambio o revisión necesarios</option></select></div>
+    <div><label for="unifiedQuarantineSearch">Buscar código</label><input id="unifiedQuarantineSearch" type="search" placeholder="Ej. MLS-ES-0001"></div>
+  </div>
+  <ol id="unifiedQuarantineList" class="quarantine-list"></ol>
+  <div class="actions" style="grid-template-columns:1fr 1fr;max-width:360px">
+    <button class="secondary" id="unifiedQuarantinePrevious" type="button">Anterior</button>
+    <button class="secondary" id="unifiedQuarantineNext" type="button">Siguiente</button>
+  </div>
+  <p class="note">Esta bandeja organiza el trabajo y abre cada entrada para revisión. Un filtro no cambia su estado: solo la validación canónica puede moverla a VERIFIED y luego a Main.</p>
+</div>
 <div class="log" id="unifiedLog">Unified listo.</div>
 <p class="note">La métrica principal es VERIFIED canónico. Un error aislado de R44 se registra como degradación de esa etapa y no debe bloquear R33 ni integración de trabajo R44 ya durable. No necesitás copiar claves: esta página usa tu sesión segura de Cloudflare Access. La preparación canónica usa lotes de 100 y continúa con las demás entradas cuando una requiere revisión; solo cuota o política FREE-only detienen el procesamiento. La evidencia preparada aún debe pasar por R33 e integración. Podés resolver esa excepción con el flujo de ChatGPT y luego reanudar aquí. R44 COMPLETE nunca se muestra como VERIFIED.</p>
 </section>
@@ -465,6 +488,11 @@ button:disabled{opacity:.48;cursor:not-allowed}
   const corpus=q('corpusPanel'), unified=q('unifiedPanel');
   const tabCorpus=q('tabCorpus'), tabUnified=q('tabUnified');
   const log=q('unifiedLog'), dot=q('unifiedDot'), statusText=q('unifiedStatusText');
+  const quarantineFilters={category:'all',reason:'all',eligibility:'all',search:''};
+  let quarantineEntries=[];
+  let quarantineTotal=0;
+  let quarantinePage=0;
+  const quarantinePageSize=100;
   function show(which){
     const u=which==='unified'; corpus.hidden=u; unified.hidden=!u;
     tabUnified.className=u?'primary':'secondary'; tabCorpus.className=u?'secondary':'primary';
@@ -510,6 +538,50 @@ button:disabled{opacity:.48;cursor:not-allowed}
   }
   function n(v){return Number(v||0)}
   function durableCount(list,state){const row=(list||[]).find(x=>x.state===state);return row?Number(row.n||0):0}
+  function renderQuarantineWorklist(quarantine){
+    quarantineEntries=Array.isArray(quarantine?.entries)?quarantine.entries:[];
+    quarantineTotal=Number(quarantine?.total||0);
+    const reasons=[...new Set(quarantineEntries.map(entry=>String(entry.reason||'').trim()).filter(Boolean))].sort();
+    const reasonSelect=q('unifiedQuarantineReason'),selectedReason=quarantineFilters.reason;
+    reasonSelect.replaceChildren(new Option('Todos los motivos','all'),...reasons.map(reason=>new Option(reason,reason)));
+    reasonSelect.value=reasons.includes(selectedReason)?selectedReason:'all';
+    quarantineFilters.reason=reasonSelect.value;
+    const filtered=quarantineEntries.filter(entry=>{
+      if(quarantineFilters.category!=='all'&&entry.category!==quarantineFilters.category)return false;
+      if(quarantineFilters.reason!=='all'&&entry.reason!==quarantineFilters.reason)return false;
+      if(quarantineFilters.eligibility==='recoverable'&&!entry.recoverable)return false;
+      if(quarantineFilters.eligibility==='review'&&entry.recoverable)return false;
+      if(quarantineFilters.search&&!String(entry.code||'').toLowerCase().includes(quarantineFilters.search))return false;
+      return true;
+    }).sort((a,b)=>Number(b.recoverable)-Number(a.recoverable)||Number(a.attempts||0)-Number(b.attempts||0)||String(a.code||'').localeCompare(String(b.code||'')));
+    const pageCount=Math.max(1,Math.ceil(filtered.length/quarantinePageSize));
+    quarantinePage=Math.min(quarantinePage,pageCount-1);
+    const start=quarantinePage*quarantinePageSize;
+    const list=q('unifiedQuarantineList');list.replaceChildren();
+    for(const entry of filtered.slice(start,start+quarantinePageSize)){
+      const item=document.createElement('li');item.className='quarantine-item';
+      const details=document.createElement('div');
+      const code=document.createElement('strong');code.textContent=entry.code||'Código desconocido';
+      const note=document.createElement('small');note.textContent=`${entry.reason||'Sin motivo'} · ${entry.attempts||0} intentos · ${entry.recoverable?'reintento seguro':'requiere cambio/revisión'}`;
+      details.append(code,note);
+      const link=document.createElement('a');link.href=`/#entry=${encodeURIComponent(entry.code||'')}`;link.target='_blank';link.rel='noopener';link.textContent='Abrir entrada';
+      item.append(details,link);list.append(item);
+    }
+    if(!filtered.length){const empty=document.createElement('li');empty.className='quarantine-empty';empty.textContent='No hay entradas que coincidan con estos filtros.';list.append(empty)}
+    const visibleEnd=Math.min(start+quarantinePageSize,filtered.length);
+    q('unifiedQuarantineWorkSummary').textContent=quarantine
+      ?`Mostrando ${filtered.length?start+1:0}–${visibleEnd} de ${filtered.length} coincidencias; ${quarantineEntries.length} entradas cargadas de ${quarantineTotal} en D1.`
+      :'No se pudo cargar la lista de cuarentena.';
+    q('unifiedQuarantinePrevious').disabled=quarantinePage===0;
+    q('unifiedQuarantineNext').disabled=start+quarantinePageSize>=filtered.length;
+  }
+  function updateQuarantineFilter(key,value){quarantineFilters[key]=value;quarantinePage=0;renderQuarantineWorklist({entries:quarantineEntries,total:quarantineTotal})}
+  q('unifiedQuarantineCategory').addEventListener('change',event=>updateQuarantineFilter('category',event.target.value));
+  q('unifiedQuarantineReason').addEventListener('change',event=>updateQuarantineFilter('reason',event.target.value));
+  q('unifiedQuarantineEligibility').addEventListener('change',event=>updateQuarantineFilter('eligibility',event.target.value));
+  q('unifiedQuarantineSearch').addEventListener('input',event=>updateQuarantineFilter('search',event.target.value.trim().toLowerCase()));
+  q('unifiedQuarantinePrevious').addEventListener('click',()=>{quarantinePage=Math.max(0,quarantinePage-1);renderQuarantineWorklist({entries:quarantineEntries,total:quarantineTotal})});
+  q('unifiedQuarantineNext').addEventListener('click',()=>{quarantinePage++;renderQuarantineWorklist({entries:quarantineEntries,total:quarantineTotal})});
   function render(data,canonical={}){
     const r=data.runner||{}, r44=data.r44||{}, lanes=data.lanes||{};
     q('unifiedState').value=r.state||'—';
@@ -531,6 +603,7 @@ button:disabled{opacity:.48;cursor:not-allowed}
     q('unifiedQuarantineReasons').textContent=quarantine
       ?Object.entries(quarantine.byCategory).map(([key,n])=>`${categoryNames[key]||key}: ${n}`).join('\n')+'\n\n'+quarantine.byReason.map(row=>`${row.last_error||'Sin razón'} · intentos ${row.attempts}: ${row.n}`).join('\n')
       :'';
+    renderQuarantineWorklist(quarantine);
     q('unifiedCanonicalHandoff').textContent=data.canonical?.waitingHandoff??0;
     q('unifiedClaimable').textContent=durableCount(r44.durableCounts,'CLAIMABLE');
     q('unifiedPartial').textContent=durableCount(r44.durableCounts,'PARTIAL_DURABLE');
@@ -582,3 +655,4 @@ button:disabled{opacity:.48;cursor:not-allowed}
 </script>
 </body>
 </html>
+
