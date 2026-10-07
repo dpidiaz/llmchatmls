@@ -1,9 +1,9 @@
 {
   "schema": "MLS-R44-CLOUDFLARE-CUTOVER-REQUEST-1",
-  "requestedAt": "2026-10-07T03:53:12.000Z",
+  "requestedAt": "2026-10-07T04:03:03.000Z",
   "controlPlane": "CLOUDFLARE_D1",
   "poolSchema": "MLS-R44-CLOUDFLARE-POOL-2",
-  "emergencyBaseCommit": "9a3ceb0b6db9c0c0b9fd61067875f33a1d06c335",
+  "emergencyBaseCommit": "3d5e856ba8b805267ed42a3788c8f163fe1bac2b",
   "expectedTickets": 1682,
   "expectedEntries": 8408,
   "importedAuditedTickets": [
@@ -13,8 +13,8 @@
     "R43-EMERGENCY-0208"
   ],
   "deploymentTarget": "llmchatmls.dpidiaz.workers.dev",
-  "retryReason": "Deploy emergency drain throughput: 50-entry R33 batches + concurrent quarantine repair + adaptive backpressure",
-  "retryGeneration": 44,
+  "retryReason": "Deploy expanded automatic repair for source registration/tier and 520/525/530 failures",
+  "retryGeneration": 45,
   "productionMode": "PARALLEL_HOT_PATH",
   "maxConcurrentWorkers": 128,
   "globalProductionMutex": false,
