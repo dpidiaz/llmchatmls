@@ -2,6 +2,7 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
+const zlib=require('node:zlib');
 const {execFileSync}=require('node:child_process');
 const {BASE,POOL_PATH}=require('./r44 full pending corpus.cjs');
 const digest=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
@@ -12,7 +13,8 @@ function build(root=path.resolve(__dirname,'..')){
   const out=path.join(root,'public/r44-primary');
   fs.mkdirSync(out,{recursive:true});
   const refs=entries.map(e=>BASE+':content/'+e.path);
-  const blobs=process.env.R44_FROZEN_BATCH?fs.readFileSync(process.env.R44_FROZEN_BATCH):execFileSync('git',['cat-file','--batch'],{cwd:root,input:refs.join('\n')+'\n',maxBuffer:256*1024*1024});
+  const bundledBatch=path.join(__dirname,'r44-frozen','primary-assets.batch.gz');
+  const blobs=process.env.R44_FROZEN_BATCH?fs.readFileSync(process.env.R44_FROZEN_BATCH):fs.existsSync(bundledBatch)?zlib.gunzipSync(fs.readFileSync(bundledBatch)):execFileSync('git',['cat-file','--batch'],{cwd:root,input:refs.join('\n')+'\n',maxBuffer:256*1024*1024});
   let offset=0;
   const quarantined=[],shards=new Map();
   for(const entry of entries){
