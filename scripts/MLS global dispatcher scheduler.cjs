@@ -32,12 +32,14 @@ async function gh(method,endpoint,body){
       if(Object.hasOwn(githubApiCounts,method))githubApiCounts[method]++;
       let response;
       try{
-        response=await fetch('https://api.github.com'+endpoint,{
+        const requestOptions={
           method,
           headers:{authorization:'Bearer '+token,accept:'application/vnd.github+json','content-type':'application/json','x-github-api-version':'2022-11-28','user-agent':'mls-global-dispatcher-r1'},
-          body:body===undefined?undefined:JSON.stringify(body),
-          signal:AbortSignal.timeout(GITHUB_REQUEST_TIMEOUT_MS)
-        });
+          body:body===undefined?undefined:JSON.stringify(body)
+        };
+        if(typeof AbortSignal!=='undefined'&&typeof AbortSignal.timeout==='function')
+          requestOptions.signal=AbortSignal.timeout(GITHUB_REQUEST_TIMEOUT_MS);
+        response=await fetch('https://api.github.com'+endpoint,requestOptions);
       }catch(error){
         const retryableRead=method==='GET'&&transientRetries<2&&(
           error?.name==='AbortError'||error?.name==='TimeoutError'||error?.name==='TypeError'||
