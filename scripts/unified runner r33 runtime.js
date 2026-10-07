@@ -20,7 +20,7 @@ function unifiedR33CanonicalPreflight(body,reason) {
   }catch(error){
     return {eligible:false,reason:String(error&&error.message||'CANONICAL_PREFLIGHT_INVALID_CONTEXT'),candidateCount:0,fetchableCandidateCount:0};
   }
-  const fetchable=candidates.filter(candidate=>!!(candidate&&candidate.fetchUrl));
+  const fetchable=unifiedR33SourceCandidates(article,body.handoffEntry||{},{autoAuditableOnly:true});
   const s=String(reason||"");
   if(!candidates.length)return {eligible:false,reason:"NO_REGISTERED_SOURCE_CANDIDATE",candidateCount:0,fetchableCandidateCount:0};
   if(s==="NO_REGISTERED_SOURCE_CANDIDATE")return {eligible:true,reason:"CANDIDATE_NOW_AVAILABLE",candidateCount:candidates.length,fetchableCandidateCount:fetchable.length};
@@ -140,7 +140,8 @@ function unifiedR33SourceAutoAuditable(candidate) {
   const metadata=candidate&&candidate.metadata||{};
   const type=String(metadata.sourceType||"");
   const autoTypes=new Set(["institutional_webpage","reference_entry","standard","report","dataset"]);
-  return (autoTypes.has(type)||candidate&&candidate.repairValidatedFulltext===true)&&!!unifiedR33SafeSourceUrl(candidate&&candidate.fetchUrl);
+  const verificationUrl=unifiedR33SafeSourceUrl(candidate&&candidate.fetchUrl)||unifiedR33SafeSourceUrl(metadata.canonicalUrl);
+  return (autoTypes.has(type)||candidate&&candidate.repairValidatedFulltext===true)&&!!verificationUrl;
 }
 function unifiedR33SourcePacket(candidates) {
   return candidates.map(x=>({

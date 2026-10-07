@@ -373,13 +373,13 @@ test('registered DOI and exact handoff locator make source text fetchable withou
 
 test('source locator quarantine gets one extra bounded retry and then fences',async()=>{
   const h=harness();await setup(h,0);await assets(h,1);await h.r.canonicalSeed(h.env);h.r.URL=URL;
-  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'fixture-source',metadata:{language:'en',title:'Example',sourceType:'journal_article',authorityTier:'A',canonicalUrl:'https://example.org/source'}}];
-  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_FULLTEXT_REQUIRED' WHERE code='MLS-V01-0001'; UPDATE mls_canonical_recovery SET technical_retries=1,failed_context_hash=context_hash WHERE code='MLS-V01-0001'");
+  h.r.MLS_R33_SOURCE_CATALOG=[{sourceId:'fixture-source',metadata:{language:'en',title:'Example',sourceType:'institutional_webpage',authorityTier:'A',canonicalUrl:'https://example.org/source'}}];
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',attempts=2,last_error='SOURCE_URL_UNAVAILABLE' WHERE code='MLS-V01-0001'; UPDATE mls_canonical_recovery SET technical_retries=1,failed_context_hash=context_hash WHERE code='MLS-V01-0001'");
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,1);
   await h.r.canonicalRecoverQuarantine(h.env);
   assert.equal(h.db.prepare("SELECT state FROM mls_canonical_queue WHERE code='MLS-V01-0001'").get().state,'RETRY');
   assert.equal(h.db.prepare("SELECT technical_retries FROM mls_canonical_recovery WHERE code='MLS-V01-0001'").get().technical_retries,2);
-  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',retry_ms=0,last_error='SOURCE_FULLTEXT_REQUIRED',lease_token=NULL,expires_ms=0 WHERE code='MLS-V01-0001'");
+  h.db.exec("UPDATE mls_canonical_queue SET state='QUARANTINED',retry_ms=0,last_error='SOURCE_URL_UNAVAILABLE',lease_token=NULL,expires_ms=0 WHERE code='MLS-V01-0001'");
   assert.equal((await h.r.canonicalStatus(h.env)).quarantine.recoverable,0);
 });
 
