@@ -172,6 +172,8 @@ function r44SameCodes(expected, submitted) {
 async function r44Submit(request, env) { return r44DurableSubmit(request,env); }
 async function r44Status(env) {
   await r44DurableReady(env);
+  // The cutover workflow bootstraps through status; reconcile the immutable pool pin before reporting it.
+  await r44PoolSeed(env);
   const counts = await r44Counts(env);
   const durableCounts = (await env.WIKI_DB.prepare("SELECT state,COUNT(*) AS n FROM r44_ticket_progress GROUP BY state").all()).results;
   const metaRows = await env.WIKI_DB.prepare("SELECT key,value FROM r44_meta").all();
