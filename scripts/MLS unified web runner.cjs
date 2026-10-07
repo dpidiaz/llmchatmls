@@ -172,6 +172,8 @@ async function waitForCloudflareTarget(startStatus,target=EXECUTION_TARGET){
     console.log(JSON.stringify({ok:true,status:'UNIFIED_TARGET_PROGRESS',targetEntries:target,progressEntries:highWater,...snap}));
     if(highWater>=target)return {status:'TARGET_REACHED',targetEntries:target,progressEntries:highWater,snapshot:snap};
     if(snap.runnerState!=='RUNNING')return {status:'TARGET_BLOCKED',targetEntries:target,progressEntries:highWater,blocker:snap.runnerState,snapshot:snap};
+    if(current?.githubGate?.state!=='DEGRADED'||Number(current?.githubGate?.retry_at||0)<=Date.now())
+      return {status:'GITHUB_RETRY_READY',targetEntries:target,progressEntries:highWater,snapshot:snap};
     if(r44Drained(current.r44)&&Number(current?.canonical?.claimable||0)===0)return {status:'NO_ELIGIBLE_WORK',targetEntries:target,progressEntries:highWater,snapshot:snap};
     await sleep(TARGET_POLL_MS);
     const next=await cf('/api/unified-runner/status');
@@ -729,7 +731,7 @@ async function run(){
     const kicked=await kickCloudflareOnly('github-secondary-rate-limit-cooldown',gate,cloudflarePrimary);
     const target=await waitForCloudflareTarget(status,EXECUTION_TARGET);
     console.log(JSON.stringify({ok:true,status:'GITHUB_DEGRADED_CLOUDFLARE_CONTINUES',retryAt:Number(gate.retry_at||0),targetEntries:EXECUTION_TARGET,kick:kicked.result||null,target}));
-    return;
+    if(target.status!=='GITHUB_RETRY_READY')return;
   }
 
   // Secondary reconciliation may fail without blocking independently scheduled D1 work.
