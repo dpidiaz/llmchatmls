@@ -131,7 +131,7 @@ scripts/
 dist/              # generado, no canónico
 ~~~
 
-La disposición física definitiva se determinará mediante inventario del contenido ya existente bajo @@content/@@. Evitar cambios masivos de rutas e IDs sin tabla de correspondencias, pruebas y plan de reversión.
+La disposición física definitiva se determinará mediante inventario del contenido ya existente bajo `content/`. Evitar cambios masivos de rutas e IDs sin tabla de correspondencias, pruebas y plan de reversión.
 
 ### 6.2 Campos mínimos de una entrada
 
@@ -196,7 +196,7 @@ Estados **propuestos para una nueva interfaz editorial**, cuya correspondencia c
 
 **Invariantes:**
 
-- R44 @@AUDITED_DURABLE@@ **no es** R33 @@VERIFIED@@.
+- R44 `AUDITED_DURABLE` **no es** R33 `VERIFIED`.
 - Una importación, una compilación o un commit exitoso **no confieren** estado VERIFIED.
 - Las cuarentenas no se eliminan para mejorar estadísticas.
 - Una fuente no disponible se registra como limitación; no se simula su lectura.
