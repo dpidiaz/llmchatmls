@@ -36,6 +36,9 @@ Todos los resultados se generan en `tools/r33-local/workspace/output/r33/`, excl
 - 8.406 recibos R44 recuperables y 1.476 propuestas preview.
 - Dos primeras revisiones en `reviews/`: abecedario español contrastado y corrección propuesta de `celui-ci / celui-là`.
 - **Ninguna nueva entrada certificada canónicamente en este checkpoint.**
+- La base local se recuperó desde el SQL con el SHA esperado y pasó la comprobación de integridad de SQLite. La comparación con los artefactos y el índice canónicos encontró 9.999 versiones del backup iguales a la versión canónica y 134 distintas; el validador canónico confirmó 6.900 entradas VERIFIED. No se reutilizaron estados del backup como certificaciones nuevas.
+- Se compilaron los diez PDF completos en `output/pdf/`: un apéndice final de 10.133 páginas de referencias/enlaces (una por entrada), 6.891 referencias APA 7 y 30.381 enlaces internos. El cuerpo, los capítulos y la paginación del índice original quedan intactos; cada apéndice identifica su entrada por código y enlaza las entradas relacionadas. El manifiesto registra cero enlaces rotos y cero títulos discrepantes. Las 132 entradas VERIFIED cuyo PDF corresponde a una versión anterior se marcan sin atribuirles fuentes de la versión nueva.
+- La revisión sustantiva sigue parcial: no se certificó ninguna entrada nueva y quedan conflictos, discrepancias y fuentes por validar. Los PDF son salidas editoriales, no una validación R33.
 
 La auditoría reconstruye el CSV individual y los datos recuperados desde el SQL, sin publicarlos. La preparación reconstruye 10.133 apartados de fuentes como datos separados y 102 lotes con código, fecha y hash. Los paquetes ya entregados `MLS-R33-diagnostico-y-recuperacion.zip` y `MLS-coleccion-completa.pdfs.zip` sirven para recuperar los resultados y el generador editorial; sus hashes constan en `checkpoint.json`.
 

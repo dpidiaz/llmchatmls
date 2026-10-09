@@ -6,18 +6,19 @@
   "total_entries": 10133,
   "canonical_verified_this_checkpoint": 0,
   "reviewed_locally": [
-    "MLS-V10-0020"
+    "MLS-V10-0020",
+    "MLS-V04-0174"
   ],
   "proposed_corrections": [
     "MLS-V04-0174"
   ],
   "next_actions": [
-    "Reconcile canonical GitHub evidence and exact article hashes before reusing backup states.",
     "Resolve two source conflicts.",
     "Reconcile 225 state/claim discrepancies.",
     "Validate recovered candidates with fulltext and locators.",
     "Research missing evidence.",
-    "Render APA7 and related-entry links in ten complete language PDFs."
+    "Continue validating claims and sources for the remaining entries.",
+    "Review APA 7 citations and related-entry navigation in the ten generated complete PDFs."
   ],
   "original_sql_sha256": "3f7063532393fc8fed543b2d0a712c0d3712cb236fa343557f334d739d5843bb",
   "diagnostic_package_sha256": "d4b2733d03d999477159b984274374c4127d5589d736cea707670a82ed044227",
@@ -37,5 +38,40 @@
     "ENTRY_STARTS_NEW_PAGE",
     "NUMBERED_CHAPTERS",
     "LANGUAGE_FLAGS"
-  ]
+  ],
+  "local_recovery_progress": {
+    "database": {
+      "path": "tools/r33-local/workspace/mls.sqlite",
+      "source_sha256": "3f7063532393fc8fed543b2d0a712c0d3712cb236fa343557f334d739d5843bb",
+      "imported_and_integrity_checked": true,
+      "entries": 10133
+    },
+    "backup_vs_canonical": {
+      "exact_current_article_versions": 9999,
+      "different_article_versions": 134,
+      "canonical_verified_entries": 6900,
+      "canonical_validator": "passed; 6900 verified, 0 errors, 0 warnings",
+      "backup_versions_matching_canonical_verified_evidence": 6768,
+      "verified_entries_with_older_backup_pdf_versions": 132,
+      "canonical_verified_this_checkpoint": 0
+    },
+    "pdfs": {
+      "manifest": "output/pdf/MLS-R33-PDF-APA7-manifest.json",
+      "complete_pdfs": 10,
+      "supplement_location": "appended after each complete original volume to preserve original chapter and contents-page pagination",
+      "entries_with_one_new_page_each": 10133,
+      "apa7_references": 6891,
+      "related_entry_links": 30381,
+      "broken_related_links": 0,
+      "title_mismatches": 0,
+      "older_versions_flagged_without_reusing_sources": 132,
+      "version_association_method": "PDF entry starts and normalized titles matched to the backup inventory; canonical citation reuse additionally required exact current article hash/version and canonical VERIFIED status.",
+      "source_collection": "Downloads/github backup mls/bibliotecas"
+    },
+    "safety": {
+      "cloudflare_activated": false,
+      "d1_writes": 0,
+      "merge_or_deployment": false
+    }
+  }
 }

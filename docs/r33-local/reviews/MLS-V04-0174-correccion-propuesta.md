@@ -41,6 +41,10 @@ Corrección documental propuesta; validación completa de la entrada pendiente.
 
 Centre national de ressources textuelles et lexicales. (s. f.). Celui-là, celle-là, ceux-là, celles-là. En *Trésor de la langue française informatisé*. Recuperado el 9 de octubre de 2026, de https://www.cnrtl.fr/definition/celui-l%C3%A0
 
+Académie française. (2024). *Celui-ci, celle-ci*. En *Dictionnaire de l’Académie française* (9.ª ed.). https://www.dictionnaire-academie.fr/article/A9C1267-A
+
+Académie française. (2024). *Celui-là, celle-là*. En *Dictionnaire de l’Académie française* (9.ª ed.). https://www.dictionnaire-academie.fr/article/A9C1267-B
+
 Office québécois de la langue française. (s. f.). *Les particules adverbiales ci et là*. Recuperado el 9 de octubre de 2026, de https://vitrinelinguistique.oqlf.gouv.qc.ca/23480/la-grammaire/ladverbe/les-particules-adverbiales-ci-et-la
 
 Office québécois de la langue française. (2022). pronom démonstratif. En *Grand dictionnaire terminologique*. https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/26559761/pronom-demonstratif
