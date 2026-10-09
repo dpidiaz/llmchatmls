@@ -4,6 +4,12 @@ Rama: `feat/r33-local-recovery`. Base: `5bee9a8530d07cea2bf2c82ed409278a70da2c10
 
 Objetivo: respaldar las 10.133 entradas mediante fuentes trazables que sostengan sus afirmaciones y presentar referencias APA 7 en los diez PDF completos.
 
+## Estado del checkpoint — 9 de octubre de 2026
+
+El validador R33 canónico registra 6,978 de 10.133 entradas como `VERIFIED` (68,86 %); quedan 3155 fuera del índice. El tramo local 0449–0551 cuenta con revisión por entrada; el bloque más reciente 0546–0551 cubrió 42 afirmaciones y añadió 5 entradas netas al índice. El objetivo de validar el 100 % sigue pendiente: no se declara completo. `MLS-V10-0455` y `MLS-V10-0517` permanecen en `SOURCED`; `MLS-V10-0516` conserva un registro local de afirmaciones regionales no respaldadas y no se marcó VERIFIED.
+
+Los diez PDF completos se regeneraron: 10,133 páginas nuevas, una por entrada, 6,977 referencias APA 7 y 30,381 enlaces relacionados; hay cero enlaces rotos y cero desajustes de título. Se conservan los volúmenes originales, capítulos y banderas. Las 140 versiones antiguas de PDF siguen señaladas; la comparación registra 9.991 versiones exactas y 142 distintas. El validador canónico terminó con cero errores y advertencias; Cloudflare y D1 registran cero interacciones/escrituras. El checkpoint detalla hashes y conteos.
+
 ## Empezar
 
 Se necesita Git, Python 3.11 o posterior, espacio suficiente para el backup y SQLite local, y conexión gratuita a las fuentes que se investiguen. Importar el SQL requiere RAM suficiente para leer el export de unos 342 MB. La auditoría utiliza solo la biblioteca estándar de Python; no necesita claves ni cuenta de Cloudflare.
@@ -68,7 +74,7 @@ Este trabajo local de recuperación fue autorizado expresamente. No es una invoc
 6. Revisar APA 7; presentar el estado de evidencia y las referencias en cada entrada.
 7. Regenerar los diez PDF desde las versiones aceptadas, verificar contenido y navegación, y revisar muestras visuales.
 
-Priorizar resultados verificables; no declarar el lote completo porque solo parte de sus entradas pasó. Las revisiones de `reviews/` son un punto de partida y permanecen pendientes de validación canónica. El lote `MLS-V10-0444`–`MLS-V10-0448` añadió 85 afirmaciones con evidencia de la NGLE §§25.1–25.3, 25.13–25.14 y 42.3, además del DPD voseo; cada entrada pasó preflight y el validador canónico. Los diez PDF se regeneraron con 6.916 referencias APA 7 y 30.381 enlaces internos; cero enlaces rotos, 10.133 páginas de apéndice y 140 versiones antiguas señaladas.
+Priorizar resultados verificables; no declarar el lote completo porque solo parte de sus entradas pasó. Los artefactos de `reviews/` guardan la validación canónica por entrada y la propuesta no aceptada para 0455.
 
 ## Instrucción para continuar con Codex local
 
