@@ -28,4 +28,4 @@ Real Academia Española. (s. f.). *Ortografía*. §§ 3.1.2 y 3.5.3, pp. 12 y 16
 
 ## Pendiente
 
-Esta propuesta solo resuelve el punto ortográfico detectado. Falta revisar las otras afirmaciones y ejemplos de la entrada y ejecutar la validación canónica sobre cualquier cambio aceptado. No marcar `VERIFIED` ni actualizar el PDF hasta cerrar ese proceso.
+Las afirmaciones restantes y los ejemplos se contrastaron en el registro ampliado de revisión local. Esa revisión no modifica ni amplía la Evidence canónica y no atribuye estas fuentes locales al PDF. La propuesta completa, incluida la corrección anterior, aún requiere validación canónica sobre la versión propuesta. No marcar `VERIFIED` ni sustituir fuentes del PDF antes de cerrar ese proceso.
