@@ -37,7 +37,9 @@ En la lengua hablada, **-là** puede emplearse donde el contraste tradicional es
 
 #### Fuentes y referencias
 
-Corrección documental propuesta; validación completa de la entrada pendiente.
+Corrección documental propuesta; validación canónica de la entrada pendiente.
+
+En la revisión local se confirmaron las formas *celui, celle, ceux, celles* como pronombres demostrativos; el contraste pronombre/determinante en *celui-ci / ce livre-ci*; los usos espaciales, temporales y textuales de *-ci / -là*; y el matiz de la lengua hablada. El CNRTL confirma el uso contextual escrito de *celui-là* para el primero de dos términos citados. Los ejemplos franceses del artículo son construidos, no citas; sus equivalentes españoles siguen siendo aproximaciones pedagógicas.
 
 Centre national de ressources textuelles et lexicales. (s. f.). Celui-là, celle-là, ceux-là, celles-là. En *Trésor de la langue française informatisé*. Recuperado el 9 de octubre de 2026, de https://www.cnrtl.fr/definition/celui-l%C3%A0
 
