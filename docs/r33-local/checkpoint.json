@@ -4,7 +4,7 @@
   "base_commit": "5bee9a8530d07cea2bf2c82ed409278a70da2c10",
   "branch": "feat/r33-local-recovery",
   "total_entries": 10133,
-  "canonical_verified_this_checkpoint": 106,
+  "canonical_verified_this_checkpoint": 109,
   "reviewed_locally": [
     "MLS-V04-0174",
     "MLS-V10-0020",
@@ -169,7 +169,10 @@
     "MLS-V10-0586",
     "MLS-V10-0587",
     "MLS-V10-0588",
-    "MLS-V10-0589"
+    "MLS-V10-0589",
+    "MLS-V10-0591",
+    "MLS-V10-0592",
+    "MLS-V10-0593"
   ],
   "proposed_corrections": [
     "MLS-V04-0174",
@@ -199,27 +202,26 @@
   ],
   "latest_local_review_batch": {
     "date": "2026-10-09",
-    "first_entry": "MLS-V10-0587",
-    "last_entry": "MLS-V10-0589",
+    "first_entry": "MLS-V10-0591",
+    "last_entry": "MLS-V10-0593",
     "entries": [
-      "MLS-V10-0587",
-      "MLS-V10-0588",
-      "MLS-V10-0589"
+      "MLS-V10-0591",
+      "MLS-V10-0592",
+      "MLS-V10-0593"
     ],
     "review_artifacts": [
-      "docs/r33-local/reviews/MLS-V10-0587-revision.json",
-      "docs/r33-local/reviews/MLS-V10-0588-revision.json",
-      "docs/r33-local/reviews/MLS-V10-0589-revision.json"
+      "docs/r33-local/reviews/MLS-V10-0591-revision.json",
+      "docs/r33-local/reviews/MLS-V10-0592-revision.json",
+      "docs/r33-local/reviews/MLS-V10-0593-revision.json"
     ],
-    "latest_review_artifact": "docs/r33-local/reviews/MLS-V10-0589-revision.json",
-    "latest_review_artifact_sha256": "21b6ee18cf692037388955955371ec05e45966188c9bf807da4499a055591c6b",
-    "claims_reviewed": 10,
-    "primary_sources_added": [
-      "MLS-SRC-E45F15E03FFE273C7136"
-    ],
+    "latest_review_artifact": "docs/r33-local/reviews/MLS-V10-0593-revision.json",
+    "latest_review_artifact_sha256": "fac271e91a8ce5119e940ff87280bfcded07a14ab8994bd445544d429487d206",
+    "claims_reviewed": 15,
+    "primary_sources_added": [],
     "primary_sources_used": [
+      "MLS-SRC-E45F15E03FFE273C7136",
       "MLS-SRC-5489C23D3680489CAAAE",
-      "MLS-SRC-E45F15E03FFE273C7136"
+      "MLS-SRC-52EA3D79C22CF31E2DB9"
     ],
     "canonical_article_modified": false,
     "canonical_evidence_modified": true,
@@ -230,22 +232,23 @@
   },
   "latest_canonical_validation": {
     "date": "2026-10-09",
-    "entry": "MLS-V10-0589",
-    "code": "MLS-V10-0589",
-    "articleGeneratedAt": "2026-09-14T14:04:31.447Z",
+    "entry": "MLS-V10-0593",
+    "code": "MLS-V10-0593",
+    "articleGeneratedAt": "2026-09-14T14:30:45.620Z",
     "evidenceStatus": "VERIFIED",
-    "review_artifact": "docs/r33-local/reviews/MLS-V10-0589-revision.json",
-    "original_article_sha256": "475fc7730ed44b4dd3a967e09c8aac8e9ca0be270c98db543f424d5a2aa71e59",
-    "verified_article_sha256": "475fc7730ed44b4dd3a967e09c8aac8e9ca0be270c98db543f424d5a2aa71e59",
-    "evidence_artifact_path": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0589.json",
-    "evidence_artifact_sha256": "b661900f4c1c3f4938fadf7888ebeebfde0157fabfa76da3c04d74dde2a1564f",
+    "review_artifact": "docs/r33-local/reviews/MLS-V10-0593-revision.json",
+    "original_article_sha256": "6030f24425af5d9588598f5d37be88d4d6ae7b3af25c2495429988b505238115",
+    "verified_article_sha256": "6030f24425af5d9588598f5d37be88d4d6ae7b3af25c2495429988b505238115",
+    "evidence_artifact_path": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0593.json",
+    "evidence_artifact_sha256": "e7a566f6e9161e9fe199faf1d474eb244ec6b1c138fdc8496da1a59c06c3d608",
     "evidence_revision": 2,
     "status": "VERIFIED",
     "reviewedHuman": false,
-    "claims_total": 4,
-    "claims_verified": 4,
+    "claims_total": 5,
+    "claims_verified": 5,
     "source_ids": [
-      "MLS-SRC-E45F15E03FFE273C7136"
+      "MLS-SRC-E45F15E03FFE273C7136",
+      "MLS-SRC-5489C23D3680489CAAAE"
     ],
     "preflight_passed": true,
     "canonical_store_validator_passed": true,
@@ -274,9 +277,9 @@
       "entries": 10133
     },
     "backup_vs_canonical": {
-      "canonical_verified_entries": 7006,
-      "canonical_validator": "passed; 7006 verified, 0 errors, 0 warnings",
-      "canonical_verified_this_checkpoint": 106
+      "canonical_verified_entries": 7009,
+      "canonical_validator": "passed; 7009 verified, 0 errors, 0 warnings",
+      "canonical_verified_this_checkpoint": 109
     },
     "entry_review_batch": {
       "entries_with_local_review_records": [
@@ -443,22 +446,25 @@
         "MLS-V10-0586",
         "MLS-V10-0587",
         "MLS-V10-0588",
-        "MLS-V10-0589"
+        "MLS-V10-0589",
+        "MLS-V10-0591",
+        "MLS-V10-0592",
+        "MLS-V10-0593"
       ],
       "newly_examined_conflict": "MLS-V10-0051",
-      "latest_verified_entry": "MLS-V10-0589",
+      "latest_verified_entry": "MLS-V10-0593",
       "proposed_article_changes_applied": 6,
       "canonical_evidence_changes": 119,
-      "latest_local_review_entry": "MLS-V10-0589",
-      "latest_canonical_validation": "PASSED; 7006 verified, 0 errors, 0 warnings",
-      "claims_reviewed_this_batch": 10
+      "latest_local_review_entry": "MLS-V10-0593",
+      "latest_canonical_validation": "PASSED; 7009 verified, 0 errors, 0 warnings",
+      "claims_reviewed_this_batch": 15
     },
     "pdfs": {
       "manifest": "output/pdf/MLS-R33-PDF-APA7-manifest.json",
       "complete_pdfs": 10,
       "supplement_location": "appended after each complete original volume to preserve original chapter and contents-page pagination",
       "entries_with_one_new_page_each": 10133,
-      "apa7_references": 7011,
+      "apa7_references": 7019,
       "related_entry_links": 30381,
       "broken_related_links": 0,
       "title_mismatches": 0,
@@ -519,8 +525,8 @@
     "date": "2026-10-09",
     "validator": "scripts/R33 evidence git validate.cjs",
     "status": "PASSED",
-    "entries": 7008,
-    "verified": 7006,
+    "entries": 7011,
+    "verified": 7009,
     "errors": 0,
     "warnings": 0,
     "cloudflareEditorialInteractions": 0,
