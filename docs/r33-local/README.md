@@ -6,7 +6,7 @@ Objetivo: respaldar las 10.133 entradas mediante fuentes trazables que sostengan
 
 ## Estado del checkpoint — 9 de octubre de 2026
 
-El validador R33 canónico registra 7.085 de 10.133 entradas como `VERIFIED` (69,92 %); quedan 3.048 fuera del índice. El tramo local 0449–0700 conserva registros por entrada. Los lotes recientes 0676–0691 y 0693–0700 añadieron dieciséis Evidence con 80 afirmaciones cubiertas, preflight R4 y validación canónica aprobados.
+El validador R33 canónico registra 7.094 de 10.133 entradas como `VERIFIED` (70,01 %); quedan 3.039 fuera del índice. El tramo local 0449–0710 conserva registros por entrada. El lote 0701–0710 añadió nueve Evidence con 45 afirmaciones cubiertas y preflight R4 aprobado. La compilación PDF más reciente corresponde al checkpoint anterior (0676–0700); falta integrar 0701–0710.
 
 Los diez PDF completos se regeneraron: 10,133 páginas nuevas, una por entrada, 7.097 referencias APA 7 y 30,381 enlaces relacionados; hay cero enlaces rotos y cero desajustes de título. Se conservan los volúmenes originales, capítulos y banderas. Las 140 versiones antiguas de PDF siguen señaladas; la comparación registra 9.991 versiones exactas y 142 distintas. El validador canónico de Evidence terminó con cero errores y advertencias; los checks Gate 500 y Gate 1000 aún señalan `CONTENT_BLOB_DRIFT`, por lo que no se consideran validados. Cloudflare y D1 registran cero interacciones/escrituras. El checkpoint detalla hashes y conteos.
 
@@ -119,3 +119,6 @@ Priorizar resultados verificables; no declarar el lote completo porque solo part
 
 - Lote 0676–0691 (nuevas: 0676, 0680–0682, 0685–0686, 0688–0691; las demás ya estaban VERIFIED): diez Evidence y 50 afirmaciones cubiertas con NGLE Manual §§41.2.1, 41.3.2, 41.4.1–41.4.5, 41.5.1–41.5.3 y 41.6.1–41.6.3; todas pasaron preflight R4 y validación canónica.
 - Lote 0693–0700 (nuevas: 0693–0695 y 0698–0700; 0696–0697 ya estaban VERIFIED): seis Evidence y 30 afirmaciones cubiertas con NGLE Manual §§41.7.1–41.7.3, 42.1.1–42.1.2 y 42.2.1–42.2.4; todas pasaron preflight R4 y validación canónica. El índice registra 7.085 VERIFIED de 7.087 entradas, con cero errores y advertencias. Los PDF completos suman 7.097 referencias APA 7 y 30.381 enlaces relacionados, sin enlaces rotos ni títulos discrepantes.
+
+
+- Lote 0701–0710 (nuevas: 0701–0702 y 0704–0710; 0703 ya estaba VERIFIED): nueve Evidence, 45 afirmaciones cubiertas con NGLE Manual §§42.3.1–42.3.6 y 42.4.1–42.4.4. Las entradas pasaron preflight R4 y el índice canónico global quedó en 7.094 VERIFIED de 7.096 registros, cero errores/advertencias e interacciones Cloudflare/D1. La actualización de los diez PDF queda pendiente para el próximo lote, por la pausa solicitada.
