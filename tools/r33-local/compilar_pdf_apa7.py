@@ -133,8 +133,13 @@ def header(c, meta, lang, country, labels, continuation=False):
     c.setFillColor(INK); c.setFont(FONTS.get(lang, FONTS["default"]), 18)
     c.drawString(LEFT, PAGE_H-90, title)
     if not continuation:
-        c.setFillColor(MUTED); c.setFont(FONTS.get(lang, FONTS["default"]), 10)
-        c.drawString(LEFT, PAGE_H-108, f"{meta.get('number', '')} · {meta.get('title', '')} · {meta.get('code', '')}")
+        subtitle_text = f"{meta.get('number', '')} · {meta.get('title', '')} · {meta.get('code', '')}"
+        subtitle_style = ParagraphStyle("EntrySubtitle", fontName=FONTS.get(lang, FONTS["default"]), fontSize=9, leading=11, textColor=MUTED, wordWrap="CJK")
+        subtitle = Paragraph(escape(subtitle_text), subtitle_style)
+        _, subtitle_height = subtitle.wrap(PAGE_W-LEFT-RIGHT, PAGE_H)
+        subtitle.drawOn(c, LEFT, PAGE_H-111-subtitle_height)
+        return PAGE_H-123-subtitle_height
+    return PAGE_H-132
 
 
 def clean_markup(markdown):
@@ -157,12 +162,12 @@ def draw_appendix(c, meta, lang, country, labels, number_to_code, code_to_title,
         nonlocal page_no
         if page_no:
             c.showPage()
-        header(c, meta, lang, country, labels, continuation=continuation)
+        body_top = header(c, meta, lang, country, labels, continuation=continuation)
         page_no += 1
         # Canvas spans every entry's supplement, so the PDF page index must be
         # global rather than reset to zero for each entry.
         page_indices.append(c.getPageNumber()-1)
-        return PAGE_H-132
+        return body_top
 
     y = new_page()
     if meta.get("canonicalVerified") and meta.get("evidenceVersionMatches"):
