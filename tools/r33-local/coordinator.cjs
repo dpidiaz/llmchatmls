@@ -41,7 +41,7 @@ function withLock(paths, fn) {
       if (error.code !== "EEXIST") throw error;
       try {
         const age = Date.now() - fs.statSync(paths.lockPath).mtimeMs;
-        if (age > 120000) fs.rmSync(paths.lockPath, { recursive: true, force: true });
+        if (age > 600000) fs.rmSync(paths.lockPath, { recursive: true, force: true });
       } catch { /* Another process may have released it. */ }
       if (Date.now() > deadline) throw new Error("COORDINATOR_LOCK_TIMEOUT");
       sleep(40 + Math.floor(Math.random() * 30));
@@ -60,7 +60,7 @@ async function withLockAsync(paths, fn) {
       if (error.code !== "EEXIST") throw error;
       try {
         const age = Date.now() - fs.statSync(paths.lockPath).mtimeMs;
-        if (age > 120000) fs.rmSync(paths.lockPath, { recursive: true, force: true });
+        if (age > 600000) fs.rmSync(paths.lockPath, { recursive: true, force: true });
       } catch { /* Another process may have released it. */ }
       if (Date.now() > deadline) throw new Error("COORDINATOR_LOCK_TIMEOUT");
       await new Promise((resolve) => setTimeout(resolve, 60));
@@ -197,6 +197,7 @@ function findLease(state, args) {
   const lease = token && state.leases[token];
   if (!lease) throw new Error("LEASE_NOT_FOUND_OR_EXPIRED");
   if (args.worker !== lease.workerId) throw new Error("WORKER_ID_MISMATCH");
+  if (Date.parse(lease.expiresAt) <= Date.now()) throw new Error("LEASE_EXPIRED");
   return lease;
 }
 function summarize(state) {

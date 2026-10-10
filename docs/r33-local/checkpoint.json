@@ -1998,5 +1998,75 @@
     "MLS-V07-0771": "edd9d6dda80e7ceb42fc8efb77c30868010becfaa766c7fe0bf007c4ce6def58",
     "MLS-V07-0770": "4c0a811a1adedb5830d3a12af02d551b6507d2d1f13f153c2b08a6cedb878659",
     "MLS-V07-0772": "e8135312d390c89e9de370edbe321202ae116af764af382381890b09cb9b112c"
+  },
+  "local_coordinator": {
+    "schema": "MLS-R33-LOCAL-COORDINATOR-1",
+    "state_path": ".git/r33-local-coordinator/state.json",
+    "branch": "feat/r33-local-recovery",
+    "base_commit": "1551013e",
+    "pending_at_initialization": 2680,
+    "already_reviewed_pending": 5,
+    "entries_to_allocate": 2675,
+    "partitions": [
+      {
+        "id": "R33-01",
+        "entries": 268
+      },
+      {
+        "id": "R33-02",
+        "entries": 268
+      },
+      {
+        "id": "R33-03",
+        "entries": 268
+      },
+      {
+        "id": "R33-04",
+        "entries": 268
+      },
+      {
+        "id": "R33-05",
+        "entries": 268
+      },
+      {
+        "id": "R33-06",
+        "entries": 267
+      },
+      {
+        "id": "R33-07",
+        "entries": 267
+      },
+      {
+        "id": "R33-08",
+        "entries": 267
+      },
+      {
+        "id": "R33-09",
+        "entries": 267
+      },
+      {
+        "id": "R33-10",
+        "entries": 267
+      }
+    ],
+    "pilot": {
+      "active_limit": 5,
+      "batch_size": 20,
+      "simultaneous_process_claims": 5,
+      "unique_codes_allocated": 100,
+      "leases_after_release": 0,
+      "completed_entries": 0,
+      "codex_chat_pilot": "NOT_RUN"
+    },
+    "scale_to_10": "NOT_ENABLED",
+    "safety": {
+      "cloudflareInteractions": 0,
+      "d1Reads": 0,
+      "d1Writes": 0,
+      "apiCalls": 0,
+      "pushes": 0,
+      "merges": 0,
+      "deployments": 0
+    }
   }
 }
