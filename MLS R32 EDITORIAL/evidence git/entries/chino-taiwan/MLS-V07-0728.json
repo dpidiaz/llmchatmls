@@ -5,57 +5,79 @@
   "language": "chino-taiwan",
   "languageName": "Chino mandarín de Taiwán",
   "contentPath": "content/chino-taiwan/MLS-V07-0728.json",
-  "evidenceVersion": "1.0",
-  "evidenceRevision": 1,
-  "status": "VERIFIED",
-  "claims": [
-    {
-      "claimId": "MLS-CLM-1E15029F0894575E07C99EFA",
-      "sectionKey": "En pocas palabras",
-      "summary": "附件 funciona como sustantivo para un material adjunto: en correo profesional suele designar un archivo adjunto y en documentación formal también puede referirse a un anexo; no equivale a un simple 連結 «enlace».",
-      "claimType": "grammatical_description",
-      "materiality": "substantial"
-    }
-  ],
-  "links": [
-    {
-      "linkId": "MLS-LNK-C826DE30017220D3D04E4F7A",
-      "claimId": "MLS-CLM-1E15029F0894575E07C99EFA",
-      "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
-      "supportType": "supports",
-      "locator": {},
-      "notes": "Fuente Tier B canónica para estructura nominal del mandarín; claim contrastado con el handoff R44 PASS_NO_CHANGE específico de 附件.",
-      "verificationMethod": "manual_source_match"
-    }
-  ],
-  "conflicts": [],
-  "verification": {
-    "verifiedAt": "2026-10-04T04:43:45.000Z",
-    "reviewerType": "chatgpt",
-    "reviewer": "ChatGPT R33 Unified",
-    "verificationMethod": "manual_source_match",
-    "evidenceSnapshotHash": "bb3a066bcf22f5012af3e1e7bb0dcfd077f1c88396c731b1ae418784b787f8c8",
-    "runId": "MLS-GLOBAL-004257"
-  },
-  "review": null,
-  "provenance": {
-    "generatedWithAI": true,
-    "model": "GPT-5.6 Sol",
-    "promptVersion": "R33",
-    "runId": "MLS-GLOBAL-004257",
-    "sourceOfTruth": "github",
-    "r44HandoffPath": "MLS R32 EDITORIAL/r44/r33-handoff/tickets/R44-CORPUS-1130.json",
-    "updatedAt": "2026-10-04T04:43:45.000Z"
-  },
   "article": {
     "code": "MLS-V07-0728",
     "articleGeneratedAt": "2026-09-19T09:18:07.618Z",
-    "articleHash": "013e4a3ca62324f8b10934ff7f3be296dfaf75d1a3f420ce5e999551b9b51cee",
+    "articleHash": "d87584335c0d908291a040c26386d6b3fb7a6877baacf5bc9d07206bba6ae012",
     "language": "chino-taiwan",
     "languageName": "Chino mandarín de Taiwán",
     "title": "附件",
     "level": "C1",
     "part": "Chino académico y profesional — 學術與職場華語",
     "chapter": "Chino académico, profesional y administrativo — 學術、職場與行政華語"
+  },
+  "evidenceVersion": "1.0",
+  "evidenceRevision": 2,
+  "status": "VERIFIED",
+  "claims": [
+    {
+      "claimId": "MLS-CLM-1C729EA38E7DBB9E2635DAB7",
+      "sectionKey": "Definición del diccionario",
+      "summary": "Una acepción de 附件 es material o documento agregado fuera del documento principal.",
+      "claimType": "lexical_definition",
+      "materiality": "substantial"
+    },
+    {
+      "claimId": "MLS-CLM-7E8A51997BE7726865F9CA30",
+      "sectionKey": "Ejemplo del diccionario",
+      "summary": "El diccionario ejemplifica la acepción documental con una frase sobre un correo que contiene dos 附件.",
+      "claimType": "usage_observation",
+      "materiality": "substantial"
+    }
+  ],
+  "links": [
+    {
+      "linkId": "MLS-LNK-34D6FCD779C4950B7D4444B7",
+      "claimId": "MLS-CLM-1C729EA38E7DBB9E2635DAB7",
+      "sourceId": "MLS-SRC-04A61C13AD23B8D024D9",
+      "supportType": "primary_source",
+      "locator": {
+        "section": "釋義, acepción 1",
+        "definition": "主要的正件外所附加的資料或文件",
+        "explanation": "Definición lexicográfica de la acepción documental."
+      },
+      "notes": "No se confunde con la segunda acepción de partes mecánicas.",
+      "verificationMethod": "manual_source_match"
+    },
+    {
+      "linkId": "MLS-LNK-B3064929A07D83AD0AA9632A",
+      "claimId": "MLS-CLM-7E8A51997BE7726865F9CA30",
+      "sourceId": "MLS-SRC-04A61C13AD23B8D024D9",
+      "supportType": "primary_source",
+      "locator": {
+        "section": "釋義, acepción 1",
+        "example": "他寄來的那封電子郵件，另外還夾帶了兩份附件。",
+        "explanation": "Ejemplo exacto del diccionario."
+      },
+      "notes": "Se retiran los demás ejemplos no localizados.",
+      "verificationMethod": "manual_source_match"
+    }
+  ],
+  "conflicts": [],
+  "verification": {
+    "verifiedAt": "2026-10-10T06:35:27.018Z",
+    "reviewerType": "chatgpt",
+    "reviewer": "R33 local semantic source-to-claim review",
+    "verificationMethod": "manual_primary_source_to_claim_review",
+    "evidenceSnapshotHash": "2a80e38d5c45c96729d7c2c155cbe625a75d952bb47f08bda15d86a87eeba670",
+    "runId": "R33-local-20261010-0728"
+  },
+  "review": null,
+  "provenance": {
+    "generatedWithAI": true,
+    "model": "local semantic source review",
+    "promptVersion": "R33",
+    "runId": "R33-local-20261010-0728",
+    "updatedAt": "2026-10-10T06:35:27.018Z"
   }
 }

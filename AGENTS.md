@@ -1,5 +1,16 @@
 # Agent instructions for MASTER LANGUAGE SYSTEM
 
+## R33 local recovery command
+
+On branch `feat/r33-local-recovery`, when the user sends exactly `R33 local siguiente`, use the local-only allocator `tools/r33-local/coordinator.cjs next`. This command is separate from MLS R33, MLS Farm, MLS Unified, R44, and every Cloudflare/D1 dispatcher.
+
+- `docs/r33-local/checkpoint.json` and `docs/r33-local/README.md` define the recovery state and constraints. The shared allocator state is stored under the Git common directory and is initialized once from the current local branch snapshot; never reinitialize or reset it.
+- Process only the `code` values in the current lease. Worker ID and lease token are generated automatically by the local allocator. Never claim a second lease before completing or releasing the current one. Renew a long-running lease with `node tools/r33-local/coordinator.cjs renew --worker <worker_id> --token <lease_token>`.
+- Review each material claim against the cited primary source and its exact locator. Save one `docs/r33-local/reviews/<code>-revision.json` per entry. `VERIFIED` requires the canonical article hash, source metadata, claim-level locators, canonical Evidence, and a successful local R33 entry assessment. If sources do not support the claims, save a complete `PENDING_SOURCE_SUPPORT` review with findings and limitations; do not invent a pass.
+- Work in the current task's isolated worktree. On `complete`, the coordinator serializes local integration to the recovery checkout, checks the per-entry review and Evidence, rebuilds local indexes and updates the checkpoint. If the coordinator rejects completion, preserve the lease and resolve the reported mismatch; do not mark the entry done by hand.
+- After a confirmed completion, this same chat may claim the next available local assignment while it has capacity. Stop on `CAPACITY_BUSY`, `NO_WORK`, lease loss, uncertain completion, or insufficient turn capacity. No background execution.
+- FREE ONLY. No paid APIs, external allocators, Cloudflare, D1, push, merge, or deployment. All changes remain local to `feat/r33-local-recovery`.
+
 ## MLS BCR universal command (R4.2)
 
 For `MLS BCR siguiente`, read `docs/MLS Global Dispatcher/19 Comando universal BCR.md`.

@@ -8,7 +8,7 @@
   "article": {
     "code": "MLS-V07-0145",
     "articleGeneratedAt": "2026-09-19T09:31:54.330Z",
-    "articleHash": "9caa5c04ff756b8fedaae997f68891148a7e41495ebb773500380ae45dd0e1b2",
+    "articleHash": "65d4353f00adce69000a90ef6ea25225995cecef3ace8ba33cb150e37e1b8149",
     "language": "chino-taiwan",
     "languageName": "Chino mandarín de Taiwán",
     "title": "Numeral + clasificador + nombre",
@@ -21,40 +21,86 @@
   "status": "VERIFIED",
   "claims": [
     {
-      "claimId": "MLS-CLM-6BF468AE2432B0C50E804CD1",
+      "claimId": "MLS-CLM-8566A1F474C94E8DB802B052",
       "sectionKey": "En pocas palabras",
-      "summary": "普通話表達可數名詞的數量時，常用「數詞＋量詞＋名詞」結構，例如「三本書」；量詞位於數詞與名詞之間。",
-      "claimType": "grammatical_description",
+      "summary": "La fuente establece que los nombres calificados por numerales requieren clasificador y ofrece 一把刀.",
+      "claimType": "grammatical_rule",
+      "materiality": "substantial"
+    },
+    {
+      "claimId": "MLS-CLM-2E3F08138CECBDAA59728F12",
+      "sectionKey": "Cómo funciona",
+      "summary": "La fuente ejemplifica el orden numeral + clasificador 把 + nombre en 一把刀 y 兩把銼.",
+      "claimType": "grammatical_rule",
+      "materiality": "substantial"
+    },
+    {
+      "claimId": "MLS-CLM-EADFAF002BF90761E13CA248",
+      "sectionKey": "Observación importante",
+      "summary": "Esta revisión se limita al clasificador 把 y a los ejemplos citados de la sección 2.8.2.",
+      "claimType": "grammatical_rule",
       "materiality": "substantial"
     }
   ],
   "links": [
     {
-      "linkId": "MLS-LNK-C725C201E835B9EFC26D1D44",
-      "claimId": "MLS-CLM-6BF468AE2432B0C50E804CD1",
-      "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
-      "supportType": "supports",
-      "locator": {},
-      "notes": null,
+      "linkId": "MLS-LNK-A184A6C27BDBBA5BE8029D91",
+      "claimId": "MLS-CLM-8566A1F474C94E8DB802B052",
+      "sourceId": "MLS-SRC-FAA43C123B426927BE00",
+      "supportType": "primary_source",
+      "locator": {
+        "chapter": "2.8.2 Classifying measures",
+        "page": "41",
+        "example": "一把刀"
+      },
+      "notes": "La fuente explica que los clasificadores se usan con nombres calificados por numeral o demostrativo; da este ejemplo.",
+      "verificationMethod": "manual_source_match"
+    },
+    {
+      "linkId": "MLS-LNK-3AB3DC3E89A275DA34EDCA5A",
+      "claimId": "MLS-CLM-2E3F08138CECBDAA59728F12",
+      "sourceId": "MLS-SRC-FAA43C123B426927BE00",
+      "supportType": "primary_source",
+      "locator": {
+        "chapter": "2.8.2",
+        "page": "41",
+        "examples": [
+          "一把刀",
+          "兩把銼"
+        ]
+      },
+      "notes": "Los ejemplos se presentan en el orden numeral + 把 + nombre.",
+      "verificationMethod": "manual_source_match"
+    },
+    {
+      "linkId": "MLS-LNK-28D7B7A938884329F17D4FF1",
+      "claimId": "MLS-CLM-EADFAF002BF90761E13CA248",
+      "sourceId": "MLS-SRC-FAA43C123B426927BE00",
+      "supportType": "primary_source",
+      "locator": {
+        "chapter": "2.8.2",
+        "page": "41",
+        "classifier": "把"
+      },
+      "notes": "La fuente explica 把 y lo ejemplifica con objetos que usan ese clasificador.",
       "verificationMethod": "manual_source_match"
     }
   ],
   "conflicts": [],
   "verification": {
-    "verifiedAt": "2026-09-25T22:16:00.000Z",
+    "verifiedAt": "2026-10-10T03:19:42.882Z",
     "reviewerType": "chatgpt",
-    "reviewer": "ChatGPT R33 Evidence Farm",
-    "verificationMethod": "manual_source_match",
-    "evidenceSnapshotHash": "83078380a462633b5afa2ceeed678b23b40c017f36f34e510b9e4cb357cb8578",
-    "runId": "MLS-GLOBAL-000969"
+    "reviewer": "R33 local semantic source-to-claim review",
+    "verificationMethod": "manual_primary_source_to_claim_review",
+    "evidenceSnapshotHash": "4d4e880d538313219c712986b83f4ec322667dba843ad6c5f63670bb7ac3625f",
+    "runId": "R33-local-20261010"
   },
   "review": null,
   "provenance": {
     "generatedWithAI": true,
-    "model": "GPT-5.6 Sol",
+    "model": "local semantic source review",
     "promptVersion": "R33",
-    "runId": "MLS-GLOBAL-000969",
-    "sourceOfTruth": "github",
-    "updatedAt": "2026-09-25T22:16:00.000Z"
+    "runId": "R33-local-20261010",
+    "updatedAt": "2026-10-10T03:19:42.882Z"
   }
 }

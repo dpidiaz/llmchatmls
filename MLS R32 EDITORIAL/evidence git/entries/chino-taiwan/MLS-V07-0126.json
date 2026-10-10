@@ -8,7 +8,7 @@
   "article": {
     "code": "MLS-V07-0126",
     "articleGeneratedAt": "2026-09-19T09:14:43.010Z",
-    "articleHash": "e26272a2bb79f01d88dc49333de696299a86c49d2a242dc6831c9551177096e4",
+    "articleHash": "fbde851ca4ec2a4bb97076585317c559d5518f0beb614efbfe489aaa4b089630",
     "language": "chino-taiwan",
     "languageName": "Chino mandarín de Taiwán",
     "title": "很 como grado neutro",
@@ -21,40 +21,86 @@
   "status": "VERIFIED",
   "claims": [
     {
-      "claimId": "MLS-CLM-F519D7D535005574392BC94B",
+      "claimId": "MLS-CLM-10361B3F6A12D425B18A81A4",
       "sectionKey": "En pocas palabras",
-      "summary": "形容詞作謂語時常與「很」連用；在沒有特別比較語境時，「很」可以使句子自然成立，而不一定都表示強烈的「非常」程度。",
-      "claimType": "grammatical_description",
+      "summary": "Sin énfasis especial, los verbos adjetivales monosilábicos suelen ir precedidos por 很 en afirmativo.",
+      "claimType": "grammatical_rule",
+      "materiality": "substantial"
+    },
+    {
+      "claimId": "MLS-CLM-DCFC80187317694840F53212",
+      "sectionKey": "Cómo funciona",
+      "summary": "La fuente traduce 他很高 como “He is tall” en el contexto de la preferencia por frases de dos sílabas.",
+      "claimType": "grammatical_rule",
+      "materiality": "substantial"
+    },
+    {
+      "claimId": "MLS-CLM-DC6884C2B8B4DC7C18F0807B",
+      "sectionKey": "Ejemplos",
+      "summary": "La gramática contrasta 他很高 / 他不高 y ofrece 那本書很貴.",
+      "claimType": "grammatical_rule",
       "materiality": "substantial"
     }
   ],
   "links": [
     {
-      "linkId": "MLS-LNK-77766E4719DD8111CF075EFC",
-      "claimId": "MLS-CLM-F519D7D535005574392BC94B",
-      "sourceId": "MLS-SRC-4A474CDBCB5878223DF3",
-      "supportType": "supports",
-      "locator": {},
-      "notes": null,
+      "linkId": "MLS-LNK-A42EA57212DF45592A488C28",
+      "claimId": "MLS-CLM-10361B3F6A12D425B18A81A4",
+      "sourceId": "MLS-SRC-9CB0A4630BDBCEF94C71",
+      "supportType": "primary_source",
+      "locator": {
+        "chapter": "10.5 Two-syllable preference",
+        "page": "58"
+      },
+      "notes": "La sección explica la preferencia por expresiones de dos sílabas y el uso de 很 con adjetivos monosilábicos cuando no hay énfasis especial.",
+      "verificationMethod": "manual_source_match"
+    },
+    {
+      "linkId": "MLS-LNK-235E90D6D7E9663A87CF5F81",
+      "claimId": "MLS-CLM-DCFC80187317694840F53212",
+      "sourceId": "MLS-SRC-9CB0A4630BDBCEF94C71",
+      "supportType": "primary_source",
+      "locator": {
+        "chapter": "10.5",
+        "page": "58",
+        "example": "他很高。"
+      },
+      "notes": "La fuente traduce el ejemplo como “He is tall”.",
+      "verificationMethod": "manual_source_match"
+    },
+    {
+      "linkId": "MLS-LNK-81D368CFF33908F6C055777F",
+      "claimId": "MLS-CLM-DC6884C2B8B4DC7C18F0807B",
+      "sourceId": "MLS-SRC-9CB0A4630BDBCEF94C71",
+      "supportType": "primary_source",
+      "locator": {
+        "chapter": "10.5",
+        "page": "58",
+        "examples": [
+          "他很高。",
+          "他不高。",
+          "那本書很貴。"
+        ]
+      },
+      "notes": "Ejemplos de la sección de preferencia silábica.",
       "verificationMethod": "manual_source_match"
     }
   ],
   "conflicts": [],
   "verification": {
-    "verifiedAt": "2026-09-25T22:14:00.000Z",
+    "verifiedAt": "2026-10-10T02:49:46.806Z",
     "reviewerType": "chatgpt",
-    "reviewer": "ChatGPT R33 Evidence Farm",
-    "verificationMethod": "manual_source_match",
-    "evidenceSnapshotHash": "4cad8788b6c204b48a615aed305fad428e7a3b11a12301ba709c368f55074931",
-    "runId": "MLS-GLOBAL-000969"
+    "reviewer": "R33 local semantic source-to-claim review",
+    "verificationMethod": "manual_primary_source_to_claim_review",
+    "evidenceSnapshotHash": "71c6659a9bc8331a43bccf6c65c72632b7f8d6521bb1f04b211196a3504737cf",
+    "runId": "R33-local-20261010"
   },
   "review": null,
   "provenance": {
     "generatedWithAI": true,
-    "model": "GPT-5.6 Sol",
+    "model": "local semantic source review",
     "promptVersion": "R33",
-    "runId": "MLS-GLOBAL-000969",
-    "sourceOfTruth": "github",
-    "updatedAt": "2026-09-25T22:14:00.000Z"
+    "runId": "R33-local-20261010",
+    "updatedAt": "2026-10-10T02:49:46.806Z"
   }
 }
