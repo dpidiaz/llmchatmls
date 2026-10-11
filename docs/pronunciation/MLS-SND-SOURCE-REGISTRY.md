@@ -106,13 +106,14 @@ La URL sola no constituye por defecto un localizador suficiente para una afirmac
 ### SND-SRC-0004 — American English / Ladefoged
 
 - **Tier:** B
-- **APA 7:** Ladefoged, P. (1989). American English. *Journal of the International Phonetic Association, 19*(2), 41–44.
-- **Índice bibliográfico:** https://phoible.org/sources/eng_ladefoged1989
-- **Idioma/variedad:** inglés estadounidense; descripción histórica de referencia de una variedad de California meridional según literatura posterior.
-- **Cobertura:** Illustration of the IPA; inventario y transcripción de referencia.
-- **Localizador:** pp. 41–44.
-- **Acceso:** metadatos gratuitos; disponibilidad del texto debe comprobarse antes de usar afirmaciones no visibles.
-- **Limitación:** no debe etiquetarse como descripción exhaustiva de “General American”.
+- **APA 7 canónica para R33:** Ladefoged, P. (1999). American English. En International Phonetic Association (Ed.), *Handbook of the International Phonetic Association: A guide to the use of the International Phonetic Alphabet* (pp. 41–44). Cambridge University Press.
+- **URL canónica:** https://www.cambridge.org/core/books/handbook-of-the-international-phonetic-association/illustrations-of-the-ipa/324F06806CCBF10275E6E52989B02404
+- **Antecedente editorial:** la Illustration se originó en el modelo presentado por Ladefoged en 1989 y posteriormente fue incorporada al *Handbook* de 1999. MLS-SND usa la versión de 1999 como referencia canónica porque su procedencia, alcance y contexto son directamente verificables en Cambridge.
+- **Idioma/variedad:** inglés estadounidense; habla de estadounidenses jóvenes educados del Far West y algunas zonas del Midwest; la grabación base corresponde a una hablante de 21 años de Southern California.
+- **Cobertura:** Illustration of the IPA; inventario y transcripción de una variedad estadounidense explícitamente delimitada.
+- **Localizador:** capítulo “American English”, pp. 41–44 del *Handbook*.
+- **Acceso:** extracto y metadatos accesibles en Cambridge Core; acceso integral según edición/suscripción.
+- **Limitación:** la propia descripción advierte que existen múltiples dialectos norteamericanos y que resulta impropio presentar una sola variedad como “American English” sin delimitación. No representa todo EE. UU.
 - **Verificado:** 2026-10-11.
 - **Estado:** ADMITTED_WITH_SCOPE_WARNING.
 
