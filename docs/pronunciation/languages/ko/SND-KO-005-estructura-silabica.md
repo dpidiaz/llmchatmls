@@ -6,9 +6,7 @@
 
 ## 1. Lo que puede cerrarse
 
-La literatura especializada trata muchos procesos coreanos en función de posiciones como **onset** y **coda** y de los límites silábicos.
-
-El capítulo de Cho (2015) se centra precisamente en procesos fonológicos cuya descripción requiere referencia a posiciones dentro de la sílaba o al límite silábico.
+Para MLS-SND basta primero con establecer que análisis fonológicos del coreano hacen referencia explícita a posiciones como **onset** y **coda** y a decisiones de silabificación. Jun (2015) utiliza precisamente estas categorías al analizar la inserción de /n/ y las posibles silabificaciones de /j/.
 
 ## 2. Lo que no debe simplificarse
 
@@ -25,7 +23,6 @@ MLS-SND no necesita resolver esa disputa teórica para explicar pronunciación. 
 No se publicará todavía un árbol silábico “canónico MLS” para coreano.
 
 Primero se revisarán:
-- Cho (2015);
 - literatura específica de estructura silábica;
 - relación entre estructura fonológica y bloque ortográfico hangul.
 
@@ -33,7 +30,7 @@ Primero se revisarán:
 
 | claim_id | afirmación | source | localizador | estado |
 |---|---|---|---|---|
-| KO005-C01 | Existe un conjunto importante de procesos coreanos formulados respecto de onset, coda o límite silábico | KO-W1-C06 | Summary del capítulo | VERIFIED |
+| KO005-C01 | Un análisis fonológico abierto de Seoul Korean utiliza explícitamente onset, coda y alternativas de silabificación para formular el fenómeno estudiado | KO-W1-C10 | Jun 2015, análisis alrededor de (13b)–(17), especialmente discusión de Onset/*Coda | VERIFIED |
 | KO005-C02 | La literatura coreana ha propuesto más de una silabificación para /j/: en el núcleo y, en determinados análisis/contextos, en el onset | KO-W1-C10 | Jun 2015, análisis alrededor de (13b)–(16), especialmente el párrafo “Both syllabifications have been proposed…” | VERIFIED |
 
 ## 5. Gate
