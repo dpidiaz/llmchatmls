@@ -35,13 +35,20 @@ Las entradas de escritura y romanización son capas distintas.
 
 **SND-SRC-0023** aporta una descripción IPA compacta del japonés y se conserva como ancla de referencia.
 
-En esta wave no se vuelve a declarar un inventario completo como “actual” sin control contemporáneo. El objetivo inmediato es:
+A esto se añade el manual institucional de etiquetado segmental del **Corpus of Spontaneous Japanese (CSJ)**. El manual documenta que el núcleo etiquetado comprende aproximadamente 500.000 palabras y unas 44 horas de audio. Su política no pretende ser una transcripción fonémica pura: parte de etiquetas de fonemas japoneses y añade etiquetas fonéticas para variantes que pueden anotarse de forma consistente.
+
+La Tabla 2 ofrece un mapa amplio de etiquetas consonánticas, entre ellas series para oclusivas, fricativas, africadas, nasales, aproximantes, /r/, consonantes palatalizadas, 撥音 y 促音. También distingue ciertas variantes de la serie /g/. Sin embargo, el propio manual advierte que algunas etiquetas definidas en la tabla **no se usan actualmente en el corpus**.
+
+Por eso MLS-SND interpreta esta fuente como **evidencia de anotación segmental corpus-observed**, no como una lista metafísica de “todos los fonemas del japonés”.
+
+En esta wave no se vuelve a declarar un inventario completo como “actual” sin control adicional. El objetivo inmediato es:
 
 - conservar un baseline canónico;
+- contrastarlo con un esquema corpus amplio y reproducible;
 - añadir evidencia moderna donde existe;
 - marcar huecos que requieren revisión segmental reciente.
 
-Resultado: **SOURCE_MAPPED para el sistema general; evidencia contemporánea selectiva para fenómenos concretos**.
+Resultado: **SOURCE_MAPPED para el mapa general; CORPUS_OBSERVED para las etiquetas CSJ; evidencia contemporánea selectiva para fenómenos concretos**.
 
 ## 4. /r/ y /d/: categorías distintas con propiedades articulatorias próximas
 
@@ -150,6 +157,9 @@ La comparación debe basarse en articulación y distribución documentadas, no e
 | JA004-C04 | El lugar de contacto de /r/ muestra variación contextual y la explicación por influencia vocálica se presenta como hipótesis | JA-W04-S01 | 「母音の影響」「まとめ」 | muestras de estándar/Tokio en la página | SOURCED_PENDING_REGISTRY |
 | JA004-C05 | Contadores de la serie ハ pueden mostrar alternancias p~h~b condicionadas por el numeral | JA-W04-S02 | 「匹はハ行音で始まる助数詞」, tabla 1 | fenómeno morfofonológico específico | SOURCED_PENDING_REGISTRY |
 | JA004-C06 | La explicación institucional vincula parte de las realizaciones con 促音 y con cambio histórico de la serie ハ | JA-W04-S02 | 「ハ行音の特殊性」 y desarrollo posterior | fenómeno histórico/morfofonológico | SOURCED_PENDING_REGISTRY |
+| JA004-C07 | El núcleo CSJ con etiquetado segmental cubre aproximadamente 500.000 palabras y unas 44 horas de audio | JA-W04-S03 | p. 2, §1 | corpus institucional | SOURCED_PENDING_REGISTRY |
+| JA004-C08 | El esquema CSJ combina etiquetas fonémicas japonesas con etiquetas fonéticas para variantes observables y se sitúa entre etiquetado amplio y estrecho | JA-W04-S03 | p. 2, §2 | política de anotación | SOURCED_PENDING_REGISTRY |
+| JA004-C09 | La Tabla 2 define un conjunto amplio de etiquetas consonánticas y señala que algunas etiquetas definidas no se usan actualmente en el corpus | JA-W04-S03 | p. 2, §3; p. 3, Tabla 2 y nota | mapa de anotación consonántica | SOURCED_PENDING_REGISTRY |
 
 ## 14. Fuentes APA 7
 
@@ -157,14 +167,17 @@ Maekawa, K. (2026, July 27). *子供がラ行とダ行を区別できないの�
 
 Kubozono, H. (2024, November 27). *「匹」に「ひき」「びき」「ぴき」の読み方があるのはなぜですか*. ことば研究館, National Institute for Japanese Language and Linguistics. https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-225/
 
+Maekawa, K., Kikuchi, H., Fujimoto, M., & Yoneyama, S. (s. f.). *『日本語話し言葉コーパス』の分節音ラベリング* [Segmental labeling of the Corpus of Spontaneous Japanese] (Version 1.0). National Institute for Japanese Language and Linguistics. https://www2.ninjal.ac.jp/kikuo/segment.pdf
+
 Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 21*(2), 94–96. https://doi.org/10.1017/S002510030000445X
 
 ## 15. Nota editorial
 
 - SND-SRC-0023 permanece como baseline, no como prueba única de actualidad.
-- JA-W04-S01 y JA-W04-S02 son fuentes contemporáneas puntuales, no sustitutos de una descripción segmental completa.
+- JA-W04-S01 y JA-W04-S02 son fuentes contemporáneas puntuales.
+- JA-W04-S03 aporta cobertura segmental amplia basada en corpus, pero su función es de **anotación** y no debe confundirse con un inventario fonológico definitivo.
 - La entrada no fija todavía un inventario contemporáneo definitivo.
-- Una futura wave debe añadir una fuente segmental amplia y reciente antes de considerar EVIDENCE_CHECKED global.
+- Antes de considerar EVIDENCE_CHECKED global conviene añadir o validar una descripción fonológica amplia y suficientemente reciente, independiente del esquema de anotación CSJ.
 - No se mezcla evidencia de Tokio, corpus general y explicación histórica sin indicar su alcance.
 
 ## Gate de salida
@@ -173,7 +186,7 @@ Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 
 
 Pendiente para EVIDENCE_CHECKED:
 1. canonicalizar/deduplicar JA-W04-S01/S02;
-2. añadir al menos una descripción segmental amplia contemporánea;
-3. revisar el inventario completo contra esa fuente;
+2. contrastar SND-SRC-0023 + JA-W04-S03 con una descripción fonológica amplia y suficientemente reciente;
+3. revisar el inventario completo contra las fuentes reconciliadas;
 4. auditoría lingüística independiente;
 5. verificar coherencia con JA-002/005/008/010.
