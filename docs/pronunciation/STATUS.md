@@ -15,7 +15,7 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. N
 
 | Estado registrado en la entrada | Número |
 |---|---:|
-| EDITORIAL_REVIEW | 43 |
+| EDITORIAL_REVIEW | 42 |
 | LINGUISTIC_REVIEW | 35 |
 | EVIDENCE_CHECKED | 22 |
 | SOURCE_MAPPED | 1 |
@@ -23,7 +23,7 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. N
 | RESEARCHED | 1 |
 | RESEARCHED_PARTIAL | 1 |
 | IN_PROGRESS | 1 |
-| READY_FOR_COMPOSITION | 1 |
+| READY_FOR_COMPOSITION | 2 |
 | **Total** | **106** |
 
 **Importante:** `EDITORIAL_REVIEW` no equivale a `READY_FOR_COMPOSITION`. `EVIDENCE_CHECKED` tampoco equivale a publicación ni valida automáticamente claims futuros.
@@ -49,7 +49,7 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 | Comparación CMP | 1 | CMP-001 EVIDENCE_CHECKED |
 | Referencia REF | 1 | REF-002 IN_PROGRESS |
 | Español de Guatemala ESGT | 7 | 2 EDITORIAL_REVIEW; 3 EVIDENCE_CHECKED; 1 SOURCE_MAPPED; 1 DRAFTED |
-| Inglés estadounidense ENUS | 8 | 2 EDITORIAL_REVIEW; 6 EVIDENCE_CHECKED |
+| Inglés estadounidense ENUS | 8 | 1 EDITORIAL_REVIEW; 6 EVIDENCE_CHECKED; 1 READY_FOR_COMPOSITION |
 | Portugués brasileño / carioca PTBR | 2 | 2 EDITORIAL_REVIEW |
 | Italiano IT | 9 | 9 LINGUISTIC_REVIEW |
 | Francés FR | 9 | 3 EDITORIAL_REVIEW; 6 LINGUISTIC_REVIEW |
@@ -63,8 +63,9 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 ## Primer gate de composición alcanzado
 
 - **FND-002 — Fonética y fonología:** READY_FOR_COMPOSITION.
+- **ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz:** READY_FOR_COMPOSITION.
 - Audit: `audits/FND-002-COMPOSITION-READINESS-WAVE-02-2026-10-11.md`.
-- Handoff: `handoffs/SND-FND-002-composition.md`.
+- Handoffs: `handoffs/SND-FND-002-composition.md` y `handoffs/SND-ENUS-001-composition.md`.
 - Reader-facing projection explícita; metadata R33/reviews permanece en repositorio.
 
 ## Entradas todavía pre-gate
