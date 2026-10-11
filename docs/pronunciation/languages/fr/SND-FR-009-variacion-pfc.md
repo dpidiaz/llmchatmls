@@ -1,6 +1,6 @@
 # SND-FR-009 — Variación documentada en PFC
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** francés.
 **Dominio:** variación / corpus.
 
