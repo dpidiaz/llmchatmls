@@ -1,6 +1,6 @@
 # SND-RU-007 — Procesos contextuales
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** fonología / fonética / habla conectada.  
 **Alcance:** procesos documentados por SND-SRC-0015.
@@ -58,3 +58,10 @@ Las futuras entradas de cirílico/pronunciación deberán enlazar a estos proces
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** Ensordecimiento, asimilación, simplificación y variación fonética se presentan como procesos contextuales, no como nuevos fonemas.
+- **Control:** no se cambiaron source IDs, localizadores ni transcripciones; cualquier cambio terminológico mantiene el mismo contenido analítico.
