@@ -1,6 +1,6 @@
 # MLS-SND Source Registry
 
-Estado: **registro operativo v0.2**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
+Estado: **registro operativo v0.5**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
 
 ## 1. Objetivo
 
@@ -441,3 +441,15 @@ El registro contiene ahora **24 fuentes** con alcance explícito. SND-SRC-0024 p
 - **Limitación crítica:** un corpus proporciona datos; no convierte automáticamente una observación en generalización fonológica. Toda inferencia requiere análisis y delimitación de muestra.
 - **Verificado:** 2026-10-11.
 - **Estado:** ADMITTED_AS_CORPUS.
+
+
+## 14. Resultado del registro v0.5
+
+El registro contiene **26 fuentes** numeradas SND-SRC-0001 a SND-SRC-0026.
+
+La expansión reciente añadió:
+
+- SND-SRC-0025 — Utgård (2010), estudio geolingüístico del español de Guatemala;
+- SND-SRC-0026 — Corpus NURC-RJ/UFRJ para datos de habla urbana culta de Río de Janeiro.
+
+La prioridad siguiente sigue siendo **cerrar vacíos**, no aumentar el conteo: evidencia contemporánea carioca, mayor cobertura de inglés estadounidense actual y fuentes prosódicas específicas de Guatemala.
