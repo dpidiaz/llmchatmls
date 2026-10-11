@@ -33,9 +33,9 @@ La investigación se usa como encuesta fonética geolingüística nacional, no c
 - descripción de prosodia;
 - sustituto de evidencia contemporánea de contacto.
 
-## ESGT-W2-S01 — Baird 2020
+## SND-SRC-0053 — Baird 2020
 
-Referencia local propuesta:
+Referencia canónica:
 
 Baird, B. O. (2020). The vowel spaces of Spanish-K’ichee’ bilinguals. En R. Rao (Ed.), *Spanish Phonetics and Phonology in Contact: Studies from Africa, the Americas, and Spain* (pp. 63–82). John Benjamins. https://doi.org/10.1075/ihll.28.03bai
 
@@ -60,12 +60,11 @@ El abstract sostiene:
 
 ## Resultado
 
-- ESGT-003: **DRAFTED**, porque combina una fuente canónica con una fuente local todavía no canonicalizada y con acceso abstract-only.
+- ESGT-003: **EVIDENCE_CHECKED** para los claims vigentes; SND-SRC-0053 está canonicalizada y los claims de Baird permanecen limitados al abstract.
 - ESGT-004: **DRAFTED**, aunque sus claims actuales se apoyan en SND-SRC-0025; se retiene antes de EVIDENCE_CHECKED por su función de mapa y por la necesidad de revisar terminología descriptiva histórica.
 
 ## Siguiente gate
 
-1. canonicalizar Baird 2020 o mantenerla como fuente de contacto separada;
-2. revisión lingüística de ESGT-004;
-3. R33 claim-level audit independiente;
-4. después decidir si ESGT-003/004 pueden pasar a EVIDENCE_CHECKED o si deben dividirse.
+1. revisión lingüística independiente de ESGT-003/004;
+2. obtener texto completo de SND-SRC-0053 antes de añadir claims más finos que el abstract;
+3. conservar ESGT-004 en DRAFTED hasta revisar la terminología descriptiva histórica.
