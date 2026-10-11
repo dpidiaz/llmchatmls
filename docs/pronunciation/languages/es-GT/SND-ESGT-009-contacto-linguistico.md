@@ -1,6 +1,6 @@
 # SND-ESGT-009 — Contacto lingüístico y alcance
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala; contacto K’iche’–español como caso documentado.
 **Dominio:** contacto lingüístico / sociophonética / alcance descriptivo.
@@ -51,9 +51,9 @@ Cuando una fuente use etiquetas como “K’iche’-accented Spanish”, “Mam-
 
 No se utilizará “acento maya” como categoría única y homogénea para todo el país.
 
-## 6. Evidencia R33 local
+## 6. Evidencia R33
 
-| claim_id | afirmación | source_id local | localizador | alcance | estado |
+| claim_id | afirmación | source_id | localizador | alcance | estado |
 |---|---|---|---|---|---|
 | ESGT009-C01 | El estudio analiza 1,430 tokens de /f/ de 40 bilingües K’iche’–español | SND-SRC-0054 | Abstract | población estudiada | VERIFIED |
 | ESGT009-C02 | En los datos aparecen [f], lenición [h] y fortición [p] para /f/ | SND-SRC-0054 | §1 Introduction + Abstract | K’iche’–español / Guatemalan Spanish del estudio | VERIFIED |
@@ -61,9 +61,17 @@ No se utilizará “acento maya” como categoría única y homogénea para todo
 | ESGT009-C04 | La fortición se relaciona con dominancia en K’iche’ y el artículo la interpreta como efecto de contacto/enregisterment | SND-SRC-0054 | §6 Conclusions | población estudiada | VERIFIED |
 | ESGT009-C05 | La lenición no se explica únicamente por contacto/dominancia; educación y contexto fonético tienen peso en el análisis | SND-SRC-0054 | Abstract + §6 Conclusions | población estudiada | VERIFIED |
 
-## 7. Gate
+## 7. Gate lingüístico
 
-La correspondencia claim ↔ fuente ↔ localizador fue comprobada y SND-SRC-0054 quedó canonicalizada. **Gate de evidencia: PASS → EVIDENCE_CHECKED.** La revisión lingüística permanece separada.
+La correspondencia claim ↔ fuente ↔ localizador fue comprobada y SND-SRC-0054 está canonicalizada.
+
+**R33: PASS. LINGUISTIC_REVIEW: PASS_WITH_CONTACT_SCOPE_WARNING.**
+
+La revisión preserva cuatro límites:
+- la muestra son 40 bilingües K’iche’–español, no “todos los guatemaltecos”;
+- lenición y fortición son relativamente infrecuentes en el conjunto estudiado;
+- fortición y lenición no reciben la misma explicación causal;
+- dominancia lingüística no se usa como explicación automática de toda variación.
 
 ## 8. Relacionado con
 
