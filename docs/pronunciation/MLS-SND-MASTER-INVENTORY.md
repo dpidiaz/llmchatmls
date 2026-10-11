@@ -32,14 +32,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
 | SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
 | SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
-| SND-FND-010 | Duración y cantidad | terminología | INVENTORY |
+| SND-FND-010 | Duración y cantidad | terminología | LINGUISTIC_REVIEW |
 | SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
 | SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
 | SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
-| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | SOURCE_MAPPED |
+| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
 
 ## 3. Representación y escritura
@@ -50,10 +50,10 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | EVIDENCE_CHECKED |
 | SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
-| SND-REP-005 | Diacríticos | REP-002 | SOURCE_MAPPED |
-| SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | SOURCE_MAPPED |
-| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | SOURCE_MAPPED |
-| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | SOURCE_MAPPED |
+| SND-REP-005 | Diacríticos | REP-002 | LINGUISTIC_REVIEW |
+| SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
+| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
+| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | LINGUISTIC_REVIEW |
 | SND-REP-009 | Ortografía y pronunciación | terminology | INVENTORY |
 | SND-REP-010 | Romanización | terminology | INVENTORY |
 | SND-REP-011 | Transliteración | terminology | INVENTORY |
@@ -66,7 +66,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada/cluster | Estado |
 |---|---|---|
 | SND-ESGT-001 | Alcance y variedades del español de Guatemala | EVIDENCE_CHECKED |
-| SND-ESGT-002 | Inventario segmental: mapa de evidencia | INVENTORY |
+| SND-ESGT-002 | Inventario segmental: mapa de evidencia | SOURCE_MAPPED |
 | SND-ESGT-003 | Vocales y variación | INVENTORY |
 | SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
 | SND-ESGT-005 | /s/ y variación regional | EVIDENCE_CHECKED |
@@ -110,72 +110,72 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-IT-001 | Estándar, variedades regionales y mainstream | SOURCE_MAPPED |
+| SND-IT-001 | Estándar, variedades regionales y mainstream | EVIDENCE_CHECKED |
 | SND-IT-002 | Vocales | SOURCE_MAPPED |
 | SND-IT-003 | Consonantes | SOURCE_MAPPED |
-| SND-IT-004 | Geminación/duración consonántica | INVENTORY |
+| SND-IT-004 | Geminación/duración consonántica | RESEARCHED |
 | SND-IT-005 | Acento | INVENTORY |
 | SND-IT-006 | E y O: pronunciación y ortoepía | SOURCE_MAPPED |
 | SND-IT-007 | S y Z: pronunciación y ortoepía | SOURCE_MAPPED |
-| SND-IT-008 | Grafía y pronunciación | SOURCE_MAPPED |
+| SND-IT-008 | Grafía y pronunciación | EVIDENCE_CHECKED |
 | SND-IT-009 | Variación regional | INVENTORY |
 
 ### 🇫🇷 Francés — FR
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-FR-001 | Selección de variedad de referencia | RESEARCHED_PARTIAL |
-| SND-FR-002 | Vocales y contrastes | SOURCE_MAPPED |
+| SND-FR-001 | Selección de variedad de referencia | EVIDENCE_CHECKED |
+| SND-FR-002 | Vocales y contrastes | EVIDENCE_CHECKED |
 | SND-FR-003 | Vocales nasales | INVENTORY |
 | SND-FR-004 | Schwa | INVENTORY |
 | SND-FR-005 | Consonantes finales | INVENTORY |
 | SND-FR-006 | Liaison | INVENTORY |
 | SND-FR-007 | Enchaînement y habla conectada | INVENTORY |
 | SND-FR-008 | Acento/prominencia y frase | INVENTORY |
-| SND-FR-009 | Variación documentada en PFC | SOURCE_MAPPED |
+| SND-FR-009 | Variación documentada en PFC | EVIDENCE_CHECKED |
 
 ### 🇩🇪 Alemán — DE
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-DE-001 | Alemán estándar y estándares nacionales | RESEARCHED_PARTIAL |
+| SND-DE-001 | Alemán estándar y estándares nacionales | RESEARCHED |
 | SND-DE-002 | Vocales | SOURCE_MAPPED |
 | SND-DE-003 | Longitud y calidad vocálica | SOURCE_MAPPED |
 | SND-DE-004 | Consonantes | SOURCE_MAPPED |
 | SND-DE-005 | Acento | INVENTORY |
 | SND-DE-006 | Procesos contextuales | INVENTORY |
-| SND-DE-007 | Duden e IPA | SOURCE_MAPPED |
-| SND-DE-008 | DE/AT/CH: mapa de diferencias | INVENTORY |
+| SND-DE-007 | Duden e IPA | EVIDENCE_CHECKED |
+| SND-DE-008 | DE/AT/CH: mapa de diferencias | RESEARCHED |
 
 ### 🇹🇼 Mandarín de Taiwán — ZHTW
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | SOURCE_MAPPED |
+| SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | EVIDENCE_CHECKED |
 | SND-ZHTW-002 | Estructura silábica | INVENTORY |
-| SND-ZHTW-003 | Iniciales y finales: análisis fonético/fonológico | INVENTORY |
-| SND-ZHTW-004 | Sistema tonal: mapa de evidencia | SOURCE_MAPPED |
-| SND-ZHTW-005 | Variación tonal norte/centro | SOURCE_MAPPED |
+| SND-ZHTW-003 | Iniciales y finales: análisis fonético/fonológico | RESEARCHED_PARTIAL |
+| SND-ZHTW-004 | Sistema tonal: mapa de evidencia | EVIDENCE_CHECKED |
+| SND-ZHTW-005 | Variación tonal norte/centro | EVIDENCE_CHECKED |
 | SND-ZHTW-006 | Procesos tonales | INVENTORY |
 | SND-ZHTW-007 | Zhuyin/Bopomofo | EVIDENCE_CHECKED |
-| SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | SOURCE_MAPPED |
-| SND-ZHTW-009 | Romanización latina | REFERENCE_OPEN |
-| SND-ZHTW-010 | Variación por contacto | SOURCE_MAPPED |
+| SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | EVIDENCE_CHECKED |
+| SND-ZHTW-009 | Romanización latina | DRAFTED |
+| SND-ZHTW-010 | Variación por contacto | EVIDENCE_CHECKED |
 
 ### 🇰🇷 Coreano — KO
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-KO-001 | Estándar y habla de Seúl | RESEARCHED_PARTIAL |
+| SND-KO-001 | Estándar y habla de Seúl | EVIDENCE_CHECKED |
 | SND-KO-002 | Sistema consonántico | SOURCE_MAPPED |
-| SND-KO-003 | Oclusivas y cambios contemporáneos | SOURCE_MAPPED |
-| SND-KO-004 | Vocales | INVENTORY |
-| SND-KO-005 | Estructura silábica | INVENTORY |
-| SND-KO-006 | Procesos fonológicos contextuales | INVENTORY |
-| SND-KO-007 | Prosodia | INVENTORY |
-| SND-KO-008 | Hangul y pronunciación | INVENTORY |
+| SND-KO-003 | Oclusivas y cambios contemporáneos | EVIDENCE_CHECKED |
+| SND-KO-004 | Vocales | EVIDENCE_CHECKED |
+| SND-KO-005 | Estructura silábica | RESEARCHED_PARTIAL |
+| SND-KO-006 | Procesos fonológicos contextuales | EVIDENCE_CHECKED |
+| SND-KO-007 | Prosodia | EVIDENCE_CHECKED |
+| SND-KO-008 | Hangul y pronunciación | EVIDENCE_CHECKED |
 | SND-KO-009 | Romanización Revisada | EVIDENCE_CHECKED |
-| SND-KO-010 | Romanización vs. IPA | SOURCE_MAPPED |
+| SND-KO-010 | Romanización vs. IPA | EVIDENCE_CHECKED |
 
 ### 🇯🇵 Japonés — JA
 
@@ -196,14 +196,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-RU-001 | Ruso literario contemporáneo: alcance | SOURCE_MAPPED |
-| SND-RU-002 | Vocales | SOURCE_MAPPED |
-| SND-RU-003 | Reducción vocálica | SOURCE_MAPPED |
-| SND-RU-004 | Consonantes | SOURCE_MAPPED |
-| SND-RU-005 | Palatalización | SOURCE_MAPPED |
-| SND-RU-006 | Acento léxico | SOURCE_MAPPED |
-| SND-RU-007 | Procesos contextuales | INVENTORY |
-| SND-RU-008 | Norma ortoépica y variantes | SOURCE_MAPPED |
+| SND-RU-001 | Ruso literario contemporáneo: alcance | EVIDENCE_CHECKED |
+| SND-RU-002 | Vocales | EVIDENCE_CHECKED |
+| SND-RU-003 | Reducción vocálica | EVIDENCE_CHECKED |
+| SND-RU-004 | Consonantes | EVIDENCE_CHECKED |
+| SND-RU-005 | Palatalización | EVIDENCE_CHECKED |
+| SND-RU-006 | Acento léxico | EVIDENCE_CHECKED |
+| SND-RU-007 | Procesos contextuales | EVIDENCE_CHECKED |
+| SND-RU-008 | Norma ortoépica y variantes | EVIDENCE_CHECKED |
 | SND-RU-009 | Cirílico y pronunciación | INVENTORY |
 
 ## 5. Comparación transversal
