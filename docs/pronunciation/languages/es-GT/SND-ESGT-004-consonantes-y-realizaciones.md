@@ -1,6 +1,6 @@
 # SND-ESGT-004 — Consonantes y realizaciones: mapa inicial
 
-**Estado:** DRAFTED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** español.  
 **Variedad:** Guatemala; encuesta geolingüística nacional con variación regional.  
 **Dominio:** consonantes / fonética / variación.
@@ -81,15 +81,18 @@ No:
 
 Utgård, K. (2010). El español de Guatemala. En M. Á. Quesada Pacheco (Ed.), *El español hablado en América Central: Nivel fonético* (pp. 49–82). Iberoamericana/Vervuert. https://doi.org/10.31819/9783865278708-003
 
-## 9. Gate pendiente
+## 9. Gate lingüístico
 
-La entrada permanece **DRAFTED** porque todavía funciona como mapa de realizaciones y no como inventario consonántico integral.
+**R33: PASS. LINGUISTIC_REVIEW: PASS_WITH_SOURCE_TERMINOLOGY_WARNING.**
 
-Para promoverla:
+La revisión confirma que los cinco claims vigentes corresponden a SND-SRC-0025 y sus localizadores.
 
-1. revisar lingüísticamente la terminología histórica “fricativa” de la fuente frente a marcos actuales;
-2. decidir qué fenómenos deben convertirse en entradas separadas;
-3. no añadir IPA más estrecho sin evidencia específica.
+Decisiones cerradas:
+1. **“fricativa” se conserva como categoría descriptiva de Utgård**; MLS-SND no la reetiqueta automáticamente como aproximante sin una fuente que justifique ese análisis;
+2. esta entrada funciona como **mapa de realizaciones**, no como inventario consonántico nacional definitivo;
+3. /s/ permanece en SND-ESGT-005 y los demás clusters pendientes no se consideran validados por aparecer en la lista de investigación;
+4. no se añade IPA estrecho más allá de lo respaldado por la fuente;
+5. la variación oriental de las oclusivas sonoras y las variantes minoritarias de /f/ no se generalizan a toda Guatemala.
 
 ## 10. Relacionado con
 
