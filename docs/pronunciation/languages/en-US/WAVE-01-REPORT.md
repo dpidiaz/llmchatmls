@@ -13,6 +13,7 @@ Rama: snd/en-us-pilot-wave-01.
 - SND-ENUS-008 — RESEARCHED.
 - SND-ENUS-004 — RESEARCHED.
 - SND-ENUS-006 — RESEARCHED.
+- SND-ENUS-005 — RESEARCHED.
 
 ## Archivos creados
 
@@ -24,6 +25,7 @@ Rama: snd/en-us-pilot-wave-01.
 - SND-ENUS-008-entonacion.md
 - SND-ENUS-004-reduccion.md
 - SND-ENUS-006-habla-conectada.md
+- SND-ENUS-005-acento-lexico.md
 
 ## Fuente nueva más importante
 
@@ -38,6 +40,8 @@ Clopper, Pisoni & de Jong (2005) compara acústicamente seis variedades regional
 - ENUS-CAND-005 — Clopper & Smiljanic (2015), organización temporal regional.
 - ENUS-CAND-006 — Buckeye Corpus / Pitt et al. (2005).
 - ENUS-CAND-007 — Johnson (2004), reducción conversacional.
+- ENUS-CAND-008 — Broeders & Gussenhoven, word stress.
+- ENUS-CAND-009 — CMU Pronouncing Dictionary.
 
 No se asignaron IDs SND-SRC globales para evitar colisiones con ramas paralelas.
 
