@@ -1,6 +1,6 @@
 # SND-FR-001 — Selección de variedad de referencia
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** francés.
 **Dominio:** alcance / variación.
 **Propuesta de estado:** REFERENCE_PROVISIONAL.
