@@ -155,9 +155,9 @@ Desglose de gaps físicos:
 Preferir clean reapply de waves con contenido útil ya producido antes de abrir investigación redundante.
 
 ### 3. Composition readiness
-El proyecto tiene 43 entradas en EDITORIAL_REVIEW y **1 en READY_FOR_COMPOSITION**.
+El proyecto tiene 42 entradas en EDITORIAL_REVIEW y **2 en READY_FOR_COMPOSITION**.
 
-FND-002 completó el primer PASS con reader-facing projection y handoff manifest. Las siguientes promociones deben repetir el gate por versión concreta; no copiar el estado por analogía.
+FND-002 y ENUS-001 completaron PASS con reader-facing projection y handoff manifest. ENUS-001 confirma que el gate funciona también en una entrada con alcance dialectal MULTI_REFERENCE. Las siguientes promociones deben repetir el gate por versión concreta; no copiar el estado por analogía.
 
 ### 4. QA
 Repetir:

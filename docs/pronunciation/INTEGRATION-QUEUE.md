@@ -25,7 +25,7 @@ Resultado:
 
 - 106 entradas canónicas;
 - 91 fuentes canónicas;
-- 43 EDITORIAL_REVIEW;
+- 42 EDITORIAL_REVIEW;
 - 35 LINGUISTIC_REVIEW;
 - 22 EVIDENCE_CHECKED;
 - 1 SOURCE_MAPPED;
@@ -33,7 +33,7 @@ Resultado:
 - 1 RESEARCHED;
 - 1 RESEARCHED_PARTIAL;
 - 1 IN_PROGRESS;
-- 1 READY_FOR_COMPOSITION.
+- 2 READY_FOR_COMPOSITION.
 
 ## Reconciliaciones recientes
 
@@ -52,6 +52,8 @@ Revisión lingüística integrada: FND-014 está en **LINGUISTIC_REVIEW**.
 El gate canónico ya está integrado.
 
 PR #7458: **MERGED** — FND-002 es la primera entrada READY_FOR_COMPOSITION con reader-facing projection, audit PASS y handoff manifest.
+
+PR #7463: **MERGED** — ENUS-001 es la segunda entrada READY_FOR_COMPOSITION; conserva MULTI_REFERENCE como decisión MLS-SND y separa fuente evidencial de fuente complementaria de alcance.
 
 Las siguientes entradas deben ejecutar el gate de forma independiente; no hay promoción por arrastre.
 
@@ -101,7 +103,7 @@ El control actual es estructural/referencial. El control de localizadores y sufi
 
 ## Próximo orden sugerido
 
-1. ejecutar un segundo composition-readiness pilot sobre una entrada EDITORIAL_REVIEW estable;
+1. continuar composition-readiness por lotes pequeños y heterogéneos; ya existen PASS en fundamentos y en-US;
 2. cerrar pre-gates ESGT-002 / ESGT-004 / DE-008 / ZHTW-003;
 3. clean-reapply de coverage waves ya investigadas;
 4. completar aparato REF;
