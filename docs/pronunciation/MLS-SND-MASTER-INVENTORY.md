@@ -24,20 +24,20 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-FND-001 | El sonido como parte del idioma | — | INVENTORY |
-| SND-FND-002 | Fonética y fonología | terminología v0.2 | EVIDENCE_CHECKED |
-| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | EVIDENCE_CHECKED |
-| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | EVIDENCE_CHECKED |
+| SND-FND-002 | Fonética y fonología | terminología v0.2 | LINGUISTIC_REVIEW |
+| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | LINGUISTIC_REVIEW |
+| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | LINGUISTIC_REVIEW |
 | SND-FND-005 | Percepción del habla | fuentes generales | INVENTORY |
-| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | EVIDENCE_CHECKED |
-| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | EVIDENCE_CHECKED |
-| SND-FND-008 | Sílaba | terminología | EVIDENCE_CHECKED |
-| SND-FND-009 | Fonotáctica | FND-008 | EVIDENCE_CHECKED |
+| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | LINGUISTIC_REVIEW |
+| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
+| SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
+| SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
 | SND-FND-010 | Duración y cantidad | terminología | INVENTORY |
-| SND-FND-011 | Acento y prominencia | terminología | EVIDENCE_CHECKED |
+| SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
-| SND-FND-013 | Tono | terminología | EVIDENCE_CHECKED |
+| SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
-| SND-FND-015 | Entonación | terminología | EVIDENCE_CHECKED |
+| SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
 | SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | SOURCE_MAPPED |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
