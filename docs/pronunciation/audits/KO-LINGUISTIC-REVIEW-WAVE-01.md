@@ -313,3 +313,24 @@ Prosodic categories such as Accentual Phrase must retain their analytical-source
 | KO-010 | PASS_WITH_MINOR_REMEDIATION |
 
 **Profile-level verdict:** linguistically promising and internally well designed, but **not yet ready for integration as a closed Korean profile** until provenance IDs and representation notation are repaired.
+
+
+# Post-review remediation status
+
+After this review was issued, PR #7288 applied the non-global remediations identified here:
+
+- KO-004 source refs: `KO-W1-S04/S05` → `KO-W1-C04/C05`;
+- KO-005 source ref: `KO-W1-S06` → `KO-W1-C06`;
+- KO-006 source ref repaired and bare Hangul pronunciation forms removed from MLS phonetic brackets;
+- KO-007 source refs repaired; KO007-C03 narrowed and linked to canonical SND-SRC-0021; unsupported compound mention of “longitud” removed;
+- KO-008 source ref repaired;
+- KO-010 C03 split into an external IPA fact plus an MLS `ANALYTICAL_CHOICE`.
+
+## Remaining blockers after remediation
+
+1. Promote/deduplicate the branch-local `KO-W1-Cxx` sources into canonical global `SND-SRC` IDs during integration, then rewrite entry references accordingly.
+2. Repair KO-001 provenance: `KO-SRC-P01/P02` are still not canonical in the matrix Source Registry.
+3. Keep KO-005 `RESEARCHED_PARTIAL` until its theoretical/localizer gate is satisfied.
+4. Recover KO-002/003 through a clean current integration path.
+
+**Updated profile verdict:** content-level remediation substantially passed; **global provenance/integration HOLD remains**.
