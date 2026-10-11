@@ -283,3 +283,112 @@ Aún faltan fuentes de base suficientes para cerrar:
 ## 8. Regla de expansión
 
 No se llenará el registro para alcanzar una cuota numérica. Cada fuente nueva debe cubrir un vacío identificable y debe registrar qué afirmaciones podría sostener y cuáles **no**.
+
+
+## 9. Segunda expansión verificada
+
+### SND-SRC-0017 — Italiano / Illustration of the IPA
+
+- **Tier:** B
+- **APA 7:** Rogers, D., & d’Arcangeli, L. (2004). Italian. *Journal of the International Phonetic Association, 34*(1), 117–121.
+- **Registro:** https://researchnow.flinders.edu.au/en/publications/illustrations-of-the-ipa-italian/
+- **Idioma/variedad:** italiano; el artículo distingue variedades regionales del estándar y discute el “mainstream Italian”.
+- **Cobertura:** Illustration of the IPA.
+- **Localizador:** pp. 117–121.
+- **Acceso:** metadatos abiertos; Cambridge lista el artículo entre Illustrations de libre acceso.
+- **Limitación:** no debe borrar la distinción entre estándar, variedades regionales y mainstream contemporáneo.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0018 — Francés / Illustration of the IPA
+
+- **Tier:** B
+- **APA 7:** Fougeron, C., & Smith, C. L. (1993). French. *Journal of the International Phonetic Association, 23*(2), 73–76. https://doi.org/10.1017/S0025100300004874
+- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/french/E2BC8B1DD975FE4B272B088B8345B933
+- **Idioma/variedad:** francés; descripción basada en una joven hablante parisina.
+- **Cobertura:** Illustration of the IPA.
+- **Localizador:** pp. 73–76.
+- **Acceso:** Cambridge la incluye en la colección de Illustrations libres.
+- **Limitación:** perfil antiguo y basado en una hablante; usar PFC y estudios contemporáneos para variación y cambios.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SCOPE_DATE_WARNING.
+
+### SND-SRC-0019 — Alemán / Illustration of the IPA
+
+- **Tier:** B
+- **APA 7:** Kohler, K. J. (1990). German. *Journal of the International Phonetic Association, 20*(1), 48–50. https://doi.org/10.1017/S0025100300004084
+- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/german/D74393072AA2D66032B8A6E58BE15082
+- **Idioma/variedad:** alemán.
+- **Cobertura:** Illustration of the IPA.
+- **Localizador:** pp. 48–50.
+- **Acceso:** disponible vía Cambridge según la ficha consultada.
+- **Limitación:** no cubre por sí sola los estándares nacionales contemporáneos de Alemania, Austria y Suiza.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SCOPE_DATE_WARNING.
+
+### SND-SRC-0020 — Coreano / Illustration of the IPA
+
+- **Tier:** B
+- **APA 7:** Lee, H. B. (1993). Korean. *Journal of the International Phonetic Association, 23*(1), 28–31. https://doi.org/10.1017/S0025100300004758
+- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/korean/07312FF2A7409D9C71A4FE83E12AA54D
+- **Idioma/variedad:** coreano; autor afiliado a Seoul National University.
+- **Cobertura:** Illustration of the IPA.
+- **Localizador:** pp. 28–31.
+- **Acceso:** disponible vía Cambridge según la ficha consultada.
+- **Limitación:** antigüedad relevante dada la documentación de cambios fonéticos posteriores; no usar como única descripción del coreano contemporáneo.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_DATE_WARNING.
+
+### SND-SRC-0021 — Coreano de Seúl / oclusivas contemporáneas
+
+- **Tier:** B
+- **APA 7:** Schweizer, D., Ahn, S., & Kwon, H. (2026). Acoustic properties of Seoul Korean stops in phrase-initial and word-medial positions. *Journal of the International Phonetic Association*. Publicación en línea 11 de mayo de 2026.
+- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/acoustic-properties-of-seoul-korean-stops-in-phraseinitial-and-wordmedial-positions/51F4CFC5431FA2FFF9F61C3B360383B4
+- **Idioma/variedad:** coreano de Seúl.
+- **Cobertura:** propiedades acústicas de oclusivas en posiciones inicial de frase y medial de palabra; experimento de producción y corpus.
+- **Localizador:** secciones “Study 1: Production experiment”, “Study 2: Corpus”, “Discussion” y tablas/figuras del artículo.
+- **Acceso:** ficha y resumen web.
+- **Limitación:** fenómeno específico; no reemplaza una gramática fonética completa.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0022 — Taiwan Mandarin / variación tonal regional
+
+- **Tier:** B
+- **APA 7:** *When a rise is not only a rise: An acoustic analysis of the impressionistic distinction between northern and central Taiwan Mandarin using Tone 1 as an example*. (2025). *Journal of the International Phonetic Association*.
+- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/when-a-rise-is-not-only-a-rise-an-acoustic-analysis-of-the-impressionistic-distinction-between-northern-and-central-taiwan-mandarin-using-tone-1-as-an-example/3523B438DD9F526443D5661BB6131A57
+- **Idioma/variedad:** mandarín de Taiwán; norte vs. centro.
+- **Cobertura:** análisis acústico de variación tonal; el artículo documenta explícitamente variación fonética interna de Taiwan Mandarin.
+- **Localizador:** sección 1 “Introduction” y secciones experimentales/tablas/figuras correspondientes.
+- **Acceso:** artículo web de Cambridge; copyright de autores indicado.
+- **Limitación:** se centra en Tone 1 y contraste regional concreto; no generalizar a todo el sistema tonal.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0023 — Japonés / Illustration of the IPA
+
+- **Tier:** B
+- **APA 7:** Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 21*(2), 94–96. https://doi.org/10.1017/S002510030000445X
+- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/japanese/EF0E01DD40A1B2779F3ADFF96B5D97E3
+- **Idioma/variedad:** japonés.
+- **Cobertura:** Illustration of the IPA.
+- **Localizador:** pp. 94–96.
+- **Acceso:** disponible vía Cambridge según la ficha consultada.
+- **Limitación:** descripción breve y antigua; complementar con NINJAL y estudios actuales.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_DATE_WARNING.
+
+## 10. Resultado del registro v0.3
+
+El registro contiene ahora **23 fuentes** con alcance explícito.
+
+La prioridad de la siguiente ronda no es aumentar el número, sino cerrar estos huecos:
+
+- Guatemala contemporánea con mejor granularidad regional/urbana;
+- inglés estadounidense contemporáneo con corpus y variación;
+- prosodia y vocalismo carioca actuales;
+- estándares nacionales del alemán;
+- fonética integral de Taiwan Mandarin;
+- coreano contemporáneo más allá de oclusivas;
+- japonés segmental/prosódico contemporáneo;
+- francés contemporáneo con selección de subcorpus PFC.
