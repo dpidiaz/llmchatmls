@@ -1,6 +1,6 @@
 # SND-FND-009 — Fonotáctica
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Dominio:** fonología.
 **Idioma:** transversal.
 
@@ -38,8 +38,8 @@ Las restricciones fonotácticas se documentarán con análisis lingüístico o d
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND009-C01 | Las lenguas presentan restricciones sobre combinaciones y posiciones de sonidos | SND-SRC-0024 | §4.2 “Phonotactics” | introductorio/transversal | SOURCED |
-| FND009-C02 | Los patrones fonotácticos forman parte del conocimiento fonológico de una lengua | SND-SRC-0024 | §4.2 “Phonotactics” | introductorio/transversal | SOURCED |
+| FND009-C01 | Las lenguas presentan restricciones sobre combinaciones y posiciones de sonidos | SND-SRC-0024 | §4.2 “Phonotactics” | introductorio/transversal | VERIFIED |
+| FND009-C02 | Los patrones fonotácticos forman parte del conocimiento fonológico de una lengua | SND-SRC-0024 | §4.2 “Phonotactics” | introductorio/transversal | VERIFIED |
 
 ## 6. Relacionado con
 
@@ -53,3 +53,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 8. Nota editorial
 
 Las restricciones concretas pertenecen a los perfiles por idioma; esta entrada solo define el marco compartido.
+
+## R33 audit
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED para los claims listados.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
