@@ -48,10 +48,10 @@ sin indicar:
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| ZHTW010-C01 | El merger [s–ʂ] varía entre hablantes y puede ser completo, ausente o dependiente del contexto | ZHTW-LOCAL-006 | Abstract | VERIFIED |
-| ZHTW010-C02 | El contexto vocálico puede condicionar el merger observado | ZHTW-LOCAL-006 | Abstract | VERIFIED |
-| ZHTW010-C03 | Fon et al. reportan patrones distintos de merger nasal en norte y sur | ZHTW-LOCAL-005 | Abstract institucional / pp. 273–311 | VERIFIED |
-| ZHTW010-C04 | La fuente distingue /in/→[iŋ], /əŋ/→[ən] y, en el sur, /iŋ/→[in] | ZHTW-LOCAL-005 | Abstract institucional | VERIFIED |
+| ZHTW010-C01 | El merger [s–ʂ] varía entre hablantes y puede ser completo, ausente o dependiente del contexto | SND-SRC-0046 | Abstract | VERIFIED |
+| ZHTW010-C02 | El contexto vocálico puede condicionar el merger observado | SND-SRC-0046 | Abstract | VERIFIED |
+| ZHTW010-C03 | Fon et al. reportan patrones distintos de merger nasal en norte y sur | SND-SRC-0045 | Abstract institucional / pp. 273–311 | VERIFIED |
+| ZHTW010-C04 | La fuente distingue /in/→[iŋ], /əŋ/→[ən] y, en el sur, /iŋ/→[in] | SND-SRC-0045 | Abstract institucional | VERIFIED |
 
 ## 6. Fuentes
 
