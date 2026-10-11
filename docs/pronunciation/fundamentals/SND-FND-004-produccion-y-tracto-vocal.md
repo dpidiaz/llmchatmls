@@ -1,6 +1,6 @@
 # SND-FND-004 — Producción del habla y tracto vocal
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** fonética articulatoria.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -31,7 +31,7 @@ MLS-SND no asumirá que este mecanismo agota todas las posibilidades fonéticas 
 
 ## 4. Diagramas
 
-Los diagramas mediosagitales podrán utilizarse para mostrar relaciones entre articuladores, siempre que:
+Los diagramas mediosagitales representan una vista lateral del tracto vocal y podrán utilizarse para mostrar relaciones entre articuladores, siempre que:
 
 - indiquen orientación;
 - no sugieran precisión anatómica mayor que la necesaria;
@@ -45,6 +45,7 @@ Los diagramas mediosagitales podrán utilizarse para mostrar relaciones entre ar
 | FND004-C01 | La articulación del habla ocurre principalmente en el tracto vocal mediante labios, lengua y otras partes de boca y garganta | SND-SRC-0024 | §3.2 “Speech articulators”, “Overview of the vocal tract” | introductorio/transversal | VERIFIED |
 | FND004-C02 | La cavidad oral, faringe y cavidad nasal son regiones relevantes del tracto vocal | SND-SRC-0024 | §3.2, “Open spaces in the vocal tract” | introductorio/transversal | VERIFIED |
 | FND004-C03 | La mayor parte del habla emplea aire proveniente de los pulmones que pasa por la tráquea hacia la faringe | SND-SRC-0024 | §3.2, “Open spaces in the vocal tract” | introductorio/transversal | VERIFIED |
+| FND004-C04 | Los diagramas mediosagitales permiten representar en vista lateral estructuras y relaciones del tracto vocal | SND-SRC-0024 | §3.2, Figure 3.2 y explicación asociada | introductorio/transversal | VERIFIED |
 
 ## 6. Relacionado con
 
@@ -59,3 +60,11 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 8. Nota editorial
 
 La selección de partes anatómicas está deliberadamente limitada a lo necesario para comprender las explicaciones del tomo.
+
+## 9. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS WITH CONSOLIDATION → `LINGUISTIC_REVIEW`.
+- **Decisión:** esta ruta queda como versión canónica de SND-FND-004 por coincidir con el título y alcance del Master Inventory.
+- **Integración:** se conserva de la versión paralela la explicación explícita del diagrama mediosagital.
+- **Límite:** el capítulo introduce anatomía articulatoria funcional; no pretende describir exhaustivamente mecanismos de corriente de aire ni anatomía clínica.
