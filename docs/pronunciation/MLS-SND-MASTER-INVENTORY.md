@@ -47,13 +47,13 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-REP-001 | Sonido, letra y símbolo | terminology | EVIDENCE_CHECKED |
-| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | LINGUISTIC_REVIEW |
-| SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | LINGUISTIC_REVIEW |
-| SND-REP-004 | Cómo leer vocales del IPA | REP-002 | LINGUISTIC_REVIEW |
-| SND-REP-005 | Diacríticos | REP-002 | LINGUISTIC_REVIEW |
-| SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
-| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
-| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | LINGUISTIC_REVIEW |
+| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | EDITORIAL_REVIEW |
+| SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | EDITORIAL_REVIEW |
+| SND-REP-004 | Cómo leer vocales del IPA | REP-002 | EDITORIAL_REVIEW |
+| SND-REP-005 | Diacríticos | REP-002 | EDITORIAL_REVIEW |
+| SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | EDITORIAL_REVIEW |
+| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | EDITORIAL_REVIEW |
+| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | EDITORIAL_REVIEW |
 | SND-REP-009 | Ortografía y pronunciación | terminology | EVIDENCE_CHECKED |
 | SND-REP-010 | Romanización | terminology | EVIDENCE_CHECKED |
 | SND-REP-011 | Transliteración | terminology | EVIDENCE_CHECKED |
@@ -145,7 +145,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-DE-005 | Acento | INVENTORY |
 | SND-DE-006 | Procesos contextuales | LINGUISTIC_REVIEW |
 | SND-DE-007 | Duden e IPA | LINGUISTIC_REVIEW |
-| SND-DE-008 | DE/AT/CH: mapa de diferencias | RESEARCHED |
+| SND-DE-008 | DE/AT/CH: mapa de diferencias | EVIDENCE_CHECKED |
 
 ### 🇹🇼 Mandarín de Taiwán — ZHTW
 
@@ -157,7 +157,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-ZHTW-004 | Sistema tonal: mapa de evidencia | EDITORIAL_REVIEW |
 | SND-ZHTW-005 | Variación tonal norte/centro | EDITORIAL_REVIEW |
 | SND-ZHTW-006 | Procesos tonales | INVENTORY |
-| SND-ZHTW-007 | Zhuyin/Bopomofo | EDITORIAL_REVIEW |
+| SND-ZHTW-007 | Zhuyin/Bopomofo | READY_FOR_COMPOSITION |
 | SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | EDITORIAL_REVIEW |
 | SND-ZHTW-009 | Romanización latina | EVIDENCE_CHECKED |
 | SND-ZHTW-010 | Variación por contacto | EDITORIAL_REVIEW |
