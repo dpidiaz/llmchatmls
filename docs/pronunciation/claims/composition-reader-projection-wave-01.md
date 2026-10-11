@@ -2,7 +2,7 @@
 
 - Tipo: editorial workflow refinement.
 - Base: `feat/mls-snd-foundation`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Objetivo
 
