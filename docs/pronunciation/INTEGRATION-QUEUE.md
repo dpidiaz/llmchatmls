@@ -43,7 +43,7 @@ Este archivo registra **decisiones de reconciliación entre chats paralelos**. E
 
 | PR / wave | Área | Estado integrador | Acción |
 |---|---|---|---|
-| #7343 | content linter | **CHANGES_REQUIRED** | Corregir regex que confunde prefijos SND-SRC con IDs de entrada; añadir chequeo de IDs locales; rerun sobre snapshot actual. |
+| #7343 / #7373 / #7375 | content linter | **CLOSED_FIXED** | Linter v0.1 y fix de integridad ya integrados; falta rerun global sobre 90 entradas / 79 fuentes. |
 | #7342 | status reconciliation | **STALE_SNAPSHOT / REBASE_REQUIRED** | No reemplazar STATUS/Inventory con conteos antiguos; reevaluar 77 entradas / 56 fuentes o posteriores. |
 | #7336 | coordinación | **USEFUL_RULES / STALE_COUNTS** | Integrar solo reglas anti-colisión compatibles; no copiar snapshots históricos. |
 | #7352 | alemán linguistic review | **REVIEW_ARTIFACT_CANDIDATE** | Integrar audit/claim sin promover DE-005/008 mientras sigan pre-gate. |
@@ -81,13 +81,13 @@ La versión duplicada `SND-CMP-001-comparar-sin-identidad.md` fue retirada despu
 
 Último PASS completo histórico: 60/60 contra Source Registry v0.7.
 
-Snapshot actual documentado en STATUS: **77 entradas únicas / 56 fuentes**.
+Árbol físico actual recontado: **90 entradas únicas / 79 fuentes / 0 IDs de entrada duplicados**.
 
-No declarar un nuevo PASS global hasta ejecutar un reescaneo completo con el linter/reconciliador actualizado. Las promociones recientes usan IDs canónicos, pero eso no sustituye el scan total.
+No declarar un nuevo PASS global hasta ejecutar el reescaneo completo con el linter/reconciliador actualizado sobre **90/79**. Los merges recientes no sustituyen ese scan.
 
 ## Próximo orden de integración
 
-1. arreglar y ejecutar QA estructural/global;
+1. ejecutar QA estructural/global actualizado sobre 90 entradas / 79 fuentes;
 2. integrar reviews lingüísticas concluidas que no alteren claims;
 3. canonicalizar fuentes locales de waves activas antes de promoción;
 4. clean-reapply de ramas muy behind;

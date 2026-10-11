@@ -12,7 +12,7 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 | Transcription Guide | v0.2 — decisiones base cerradas |
 | Varieties Policy | v0.2 — operativa |
 | Master Inventory | v0.2 — 143 unidades candidatas |
-| Source Registry | v0.13 — 56 fuentes canónicas |
+| Source Registry | v0.18 — 79 fuentes canónicas |
 | R33 gate | operativo por claim/entrada |
 | Entry Template | v0.1 |
 | R44 Work Plan | v0.1 |
@@ -22,9 +22,13 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 
 ## Snapshot canónico
 
-**Entradas físicas únicas `SND-*.md` presentes en la rama matriz: 79.**
+**Entradas físicas únicas `SND-*.md` presentes en la rama matriz: 90.**
 
-Distribución física verificada por `SOURCE-ID-INTEGRITY-02`:
+El árbol Git actual fue recontado tras la pausa: **90 archivos de entrada / 90 IDs únicos / 0 IDs duplicados**.
+
+La distribución por estados que sigue debajo corresponde al último snapshot detallado de 79 entradas y se conserva como **histórico**, no como conteo global vigente. Debe recalcularse antes de declarar una distribución 90/90.
+
+Distribución del último snapshot detallado (79 entradas):
 
 - **30** en `EVIDENCE_CHECKED`;
 - **42** en `LINGUISTIC_REVIEW`;
@@ -36,7 +40,7 @@ Distribución física verificada por `SOURCE-ID-INTEGRITY-02`:
 - **0** en `EDITORIAL_REVIEW`;
 - **0** en `READY_FOR_COMPOSITION`.
 
-Los conteos se refieren a entradas físicas canónicas, no a claims, notas de investigación o PRs. El audit también verificó **56 fuentes canónicas**, **0 referencias canónicas inexistentes** y **0 IDs de fuente locales en entradas canónicas**.
+Los conteos se refieren a entradas físicas canónicas, no a claims, notas de investigación o PRs. Ese audit histórico verificó **56 fuentes canónicas**, **0 referencias canónicas inexistentes** y **0 IDs de fuente locales en las entradas de aquel snapshot**. El Source Registry actual contiene 79 fuentes; las waves posteriores requieren un nuevo scan global.
 
 ## Fundamentos
 
@@ -107,8 +111,9 @@ REP-003/004 ya existen físicamente y están en `EVIDENCE_CHECKED`; el trabajo �
 Referencia: **REFERENCE_PROVISIONAL**; el perfil nacional mantiene variación explícita.
 
 ### 🇺🇸 en-US
-- ENUS-001 — LINGUISTIC_REVIEW.
-- ENUS-009 — LINGUISTIC_REVIEW.
+Entradas físicas canónicas presentes: ENUS-001, ENUS-003, ENUS-004, ENUS-005, ENUS-006, ENUS-007, ENUS-008 y ENUS-009.
+
+La distribución exacta de estados de las integraciones 003–008 debe entrar en el próximo scan global; no se infiere aquí a partir del merge.
 
 Referencia: **MULTI_REFERENCE**.
 
@@ -119,9 +124,9 @@ Referencia: **MULTI_REFERENCE**.
 Referencia: **REFERENCE_PROVISIONAL**; mantener PB_BROAD separado de RIO_CARIOCA.
 
 ### 🇮🇹 it
-- IT-001 — EVIDENCE_CHECKED.
-- IT-004 — EVIDENCE_CHECKED.
-- IT-008 — EVIDENCE_CHECKED.
+Entradas físicas canónicas presentes: IT-001, IT-004, IT-005, IT-008 e IT-009.
+
+IT-005/009 fueron integradas con sus fuentes canonicalizadas; su distribución de estados se reconciliará en el próximo scan global.
 
 ### 🇫🇷 fr
 - FR-001 — EVIDENCE_CHECKED.
@@ -157,7 +162,9 @@ Referencia: **REFERENCE_PROVISIONAL**.
 Referencia: **REFERENCE_PROVISIONAL**; norma institucional, habla empírica de Seúl y romanización permanecen separadas.
 
 ### 🇯🇵 ja
-- JA-001 — EVIDENCE_CHECKED.
+Entradas físicas canónicas presentes: JA-001, JA-004, JA-008 y JA-009.
+
+JA-004 y JA-008/009 entraron con nuevas fuentes canonicalizadas hasta SND-SRC-0079; sus estados exactos se reconciliarán en el próximo scan global.
 
 Referencia: **REFERENCE_FIXED** solo como ancla prosódica Tokio/lengua común, con límites explícitos.
 
@@ -176,25 +183,25 @@ Referencia: **REFERENCE_FIXED** para referencia ortoépica literaria, separada d
 6. **SOURCE-INTEGRATION-PROTOCOL-01:** protocolo de IDs locales → canonicalización global activo.
 7. **CMP-METHOD-01:** CMP-001 integrado y EVIDENCE_CHECKED.
 8. **REF-IPA-SEED-01:** REF-002 integrado como índice vivo IN_PROGRESS.
-9. **SOURCE-ID-INTEGRITY-02:** PASS 79/79 contra Source Registry v0.13 / 56 fuentes; 0 referencias rotas y 0 IDs locales en entradas canónicas.
+9. **SOURCE-ID-INTEGRITY-02:** PASS histórico 79/79 contra Source Registry v0.13 / 56 fuentes; no se proyecta automáticamente sobre el árbol actual de 90 entradas / 79 fuentes.
 
 ## Source-ID integrity
 
-La auditoría vigente `SOURCE-ID-INTEGRITY-02` dio **PASS 79/79** sobre el snapshot actual de `feat/mls-snd-foundation`.
+La auditoría `SOURCE-ID-INTEGRITY-02` dio **PASS 79/79** sobre un snapshot anterior. El árbol físico actual ya creció a **90 entradas únicas** y el Source Registry a **79 fuentes**, por lo que ese PASS debe tratarse como histórico hasta repetir el scan.
 
 Resultados verificados:
 
-- **79** entradas físicas únicas;
-- **56** fuentes canónicas en Source Registry v0.13;
+- **79** entradas físicas únicas en el snapshot auditado;
+- **56** fuentes canónicas en Source Registry v0.13 en ese snapshot;
 - **0** referencias `SND-SRC-*` inexistentes;
 - **0** IDs de fuente locales/no canónicos dentro de entradas canónicas;
 - **0** entradas promovidas sin referencia canónica.
 
-Este PASS sustituye para el snapshot actual al PASS histórico 60/60. No debe proyectarse automáticamente sobre integraciones futuras: después de cualquier lote que añada/promueva entradas o fuentes debe repetirse el scan.
+Este PASS sustituyó al histórico 60/60 para aquel snapshot, pero ya no representa el árbol completo actual. Antes de una nueva declaración global debe repetirse el scan sobre **90 entradas / 79 fuentes**.
 
 ## Próximos gates
 
-1. mantener el reescaneo de integridad después de cada lote relevante de integración;
+1. ejecutar de inmediato un nuevo reescaneo de integridad sobre **90 entradas / 79 fuentes**;
 2. llevar REP-003 y REP-004 desde EVIDENCE_CHECKED a `LINGUISTIC_REVIEW`;
 3. continuar LINGUISTIC_REVIEW de perfiles EVIDENCE_CHECKED y comenzar EDITORIAL_REVIEW de en-US, zh-TW, ru y otros perfiles con PASS lingüístico;
 4. reconciliar waves nuevas de es-GT, fr, it, de, ja y perfiles piloto sin duplicar canónicos;

@@ -2,7 +2,7 @@
 
 Actualizado: 2026-10-11.
 
-La rama matriz contiene **77 entradas canónicas únicas** y el Source Registry contiene **56 fuentes canónicas**. Antes de reclamar trabajo, revisar:
+La rama matriz contiene **90 entradas canónicas únicas** y el Source Registry contiene **79 fuentes canónicas**. Antes de reclamar trabajo, revisar:
 
 1. `STATUS.md`;
 2. `INTEGRATION-QUEUE.md`;
@@ -37,10 +37,7 @@ Canónicos físicos:
 - REP-001, REP-002;
 - REP-005…REP-012.
 
-Aún faltan como entrada física:
-
-- **REP-003 — Cómo leer consonantes del IPA**;
-- **REP-004 — Cómo leer vocales del IPA**.
+REP-003 y REP-004 ya existen físicamente; el trabajo útil sobre ellos es revisión lingüística/editorial, corrección o ampliación compatible.
 
 ### Comparación
 - CMP-001 es único, canónico y `EVIDENCE_CHECKED`.
@@ -65,10 +62,10 @@ Canónicos físicos: ESGT-001/002/003/004/005/009/010.
 Róticas/asibilación tienen waves activas; revisar #7330/#7328 antes de reclamar.
 
 ### 🇺🇸 en-US
-Canónicos físicos: ENUS-001/009, ambos en `LINGUISTIC_REVIEW`.
+Canónicos físicos: ENUS-001, ENUS-003, ENUS-004, ENUS-005, ENUS-006, ENUS-007, ENUS-008 y ENUS-009.
 
-**Abiertos:** ENUS-002…008 salvo cualquier claim activo.  
-#7350 trabaja reducción vocálica; #7278 mantiene clusters de variación.
+**Abierto como entrada física:** ENUS-002, sujeto a claims/PRs activos.  
+Las waves 003–008 ya fueron clean-reapplied; no crear segundos canónicos.
 
 ### 🇧🇷 pt-BR-rio
 Canónicos físicos: PTBR-001/006.
@@ -77,9 +74,9 @@ Canónicos físicos: PTBR-001/006.
 #7340 es review independiente; no crear duplicados de su contenido.
 
 ### 🇮🇹 it
-Canónicos físicos: IT-001/004/008.
+Canónicos físicos: IT-001/004/005/008/009.
 
-**Abiertos:** IT-002/003/005/006/007/009, pero hay waves #7306/#7317 y otras; comprobar PRs antes de reclamar.
+**Abiertos como entrada física:** IT-002/003/006/007. Revisar PRs/waves existentes antes de reclamar.
 
 ### 🇫🇷 fr
 Canónicos físicos: FR-001/002/009.  
@@ -112,10 +109,9 @@ KO-001…010 ya tienen archivo físico canónico.
 No crear segundos drafts; trabajo útil = gate de KO-002, revisión editorial, correcciones o ampliaciones compatibles.
 
 ### 🇯🇵 ja
-Canónico físico: JA-001.
+Canónicos físicos: JA-001/004/008/009.
 
-Hay waves activas para mora/duración, romanización, acento, escritura y consonantes (#7290/#7313/#7332/#7333/#7347).  
-No reclamar esos IDs sin revisar PRs.
+Siguen abiertas otras rutas para mora/duración, acento y entradas faltantes. No reclamar JA-002/003/005/006/007/010 sin revisar PRs activos.
 
 ### 🇷🇺 ru
 RU-001…008 están canónicos y en `LINGUISTIC_REVIEW`.
@@ -143,8 +139,8 @@ Waves activas conocidas:
 
 Prioridad actual:
 
-1. corregir el linter #7343 para que no confunda `SND-SRC` con IDs de entrada y cubra IDs locales;
-2. ejecutar nuevo source-ID/inventory scan sobre las **77 entradas únicas** y 56 fuentes;
+1. el linter estructural y su fix ya están integrados; ejecutar un nuevo source-ID/inventory scan sobre las **90 entradas únicas** y 79 fuentes;
+2. reconciliar la distribución exacta de estados después de ese scan;
 3. integrar reviews lingüísticas concluidas sin saltar a EDITORIAL_REVIEW automáticamente;
 4. reconciliar waves que estén muy behind mediante clean reapply;
 5. mantener un solo archivo físico por ID;
