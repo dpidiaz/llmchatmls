@@ -1,10 +1,10 @@
 # es-GT wave 04 — Source map local
 
-Estado: **LOCAL_SOURCE_CANDIDATES**.
+Estado: **CANONICALIZED**.
 
 Estos IDs son locales a la rama `snd/es-gt-contact-writing-wave-04` y **no deben convertirse en `SND-SRC-*` globales** hasta deduplicación/canonicalización por el integrador.
 
-## ESGT-W04-SRC-01 — Baird & Regan 2025
+## ESGT-W04-SRC-01 → SND-SRC-0054 — Baird & Regan 2025
 
 - **Tier propuesto:** B — artículo académico revisado por pares.
 - **APA 7:** Baird, B., & Regan, B. (2025). The status of /f/ in Mayan-accented Spanish. *Studies in Hispanic and Lusophone Linguistics, 18*(1), 1–35. https://doi.org/10.1515/shll-2025-2001
@@ -15,7 +15,7 @@ Estos IDs son locales a la rama `snd/es-gt-contact-writing-wave-04` y **no deben
 - **Límite:** no representa todo el español de Guatemala; el estudio se concentra en una población bilingüe K’iche’–español y en /f/.
 - **Uso previsto:** ESGT-009 como caso documentado que demuestra por qué “contacto” debe tratarse con alcance explícito y no como explicación automática de toda variación.
 
-## ESGT-W04-SRC-02 — RAE/ASALE Ortografía 2010
+## ESGT-W04-SRC-02 → SND-SRC-0055 — RAE/ASALE Ortografía 2010
 
 - **Tier propuesto:** A — obra académica institucional panhispánica.
 - **APA 7:** Real Academia Española & Asociación de Academias de la Lengua Española. (2010). *Ortografía de la lengua española*. Espasa. https://www.asale.org/obras-academicas/ortografia/ortografia-2010
@@ -25,7 +25,7 @@ Estos IDs son locales a la rama `snd/es-gt-contact-writing-wave-04` y **no deben
 - **Límite:** fuente de ortografía, no descripción fonética específica de Guatemala.
 - **Uso previsto:** ESGT-010 para separar sistema ortográfico de descripción fonética.
 
-## ESGT-W04-SRC-03 — RAE/ASALE Ortografía básica, secuencias vocálicas
+## ESGT-W04-SRC-03 → SND-SRC-0056 — RAE/ASALE Ortografía básica, secuencias vocálicas
 
 - **Tier propuesto:** A — recurso académico institucional.
 - **APA 7:** Real Academia Española & Asociación de Academias de la Lengua Española. (2012). *Ortografía básica de la lengua española*. Espasa. Versión en línea: https://www.rae.es/ortograf%C3%ADa-b%C3%A1sica/uso-de-la-tilde/las-reglas-de-acentuaci%C3%B3n-gr%C3%A1fica/la-acentuaci%C3%B3n-gr%C3%A1fica-de-las-palabras-con-secuencias-voc%C3%A1licas
@@ -35,11 +35,10 @@ Estos IDs son locales a la rama `snd/es-gt-contact-writing-wave-04` y **no deben
 - **Límite:** no describe específicamente la pronunciación guatemalteca.
 - **Uso previsto:** ESGT-010 como evidencia directa de que una convención ortográfica no debe interpretarse automáticamente como descripción fonética.
 
-## Canonicalización solicitada
+## Canonicalización completada
 
-Antes de promover ESGT-009/010 a `EVIDENCE_CHECKED` en la rama matriz:
+- ESGT-W04-SRC-01 → SND-SRC-0054.
+- ESGT-W04-SRC-02 → SND-SRC-0055.
+- ESGT-W04-SRC-03 → SND-SRC-0056.
 
-1. deduplicar estas tres fuentes contra el Source Registry vigente;
-2. asignar o reutilizar IDs `SND-SRC-*` globales;
-3. sustituir todos los IDs `ESGT-W04-SRC-*`;
-4. ejecutar SOURCE-ID-INTEGRITY.
+Los IDs locales se conservan en este archivo únicamente para trazabilidad histórica. Nuevos claims deben citar los IDs canónicos.

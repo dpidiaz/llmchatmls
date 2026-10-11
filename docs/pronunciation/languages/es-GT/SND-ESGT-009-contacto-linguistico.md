@@ -1,6 +1,6 @@
 # SND-ESGT-009 — Contacto lingüístico y alcance
 
-**Estado:** RESEARCHED.
+**Estado:** EVIDENCE_CHECKED.
 **Idioma:** español.
 **Variedad:** Guatemala; contacto K’iche’–español como caso documentado.
 **Dominio:** contacto lingüístico / sociophonética / alcance descriptivo.
@@ -55,15 +55,15 @@ No se utilizará “acento maya” como categoría única y homogénea para todo
 
 | claim_id | afirmación | source_id local | localizador | alcance | estado |
 |---|---|---|---|---|---|
-| ESGT009-C01 | El estudio analiza 1,430 tokens de /f/ de 40 bilingües K’iche’–español | ESGT-W04-SRC-01 | Abstract | población estudiada | CHECKED_LOCAL |
-| ESGT009-C02 | En los datos aparecen [f], lenición [h] y fortición [p] para /f/ | ESGT-W04-SRC-01 | §1 Introduction + Abstract | K’iche’–español / Guatemalan Spanish del estudio | CHECKED_LOCAL |
-| ESGT009-C03 | Lenición y fortición fueron relativamente infrecuentes en el conjunto estudiado | ESGT-W04-SRC-01 | Abstract + §6 Conclusions | población estudiada | CHECKED_LOCAL |
-| ESGT009-C04 | La fortición se relaciona con dominancia en K’iche’ y el artículo la interpreta como efecto de contacto/enregisterment | ESGT-W04-SRC-01 | §6 Conclusions | población estudiada | CHECKED_LOCAL |
-| ESGT009-C05 | La lenición no se explica únicamente por contacto/dominancia; educación y contexto fonético tienen peso en el análisis | ESGT-W04-SRC-01 | Abstract + §6 Conclusions | población estudiada | CHECKED_LOCAL |
+| ESGT009-C01 | El estudio analiza 1,430 tokens de /f/ de 40 bilingües K’iche’–español | SND-SRC-0054 | Abstract | población estudiada | VERIFIED |
+| ESGT009-C02 | En los datos aparecen [f], lenición [h] y fortición [p] para /f/ | SND-SRC-0054 | §1 Introduction + Abstract | K’iche’–español / Guatemalan Spanish del estudio | VERIFIED |
+| ESGT009-C03 | Lenición y fortición fueron relativamente infrecuentes en el conjunto estudiado | SND-SRC-0054 | Abstract + §6 Conclusions | población estudiada | VERIFIED |
+| ESGT009-C04 | La fortición se relaciona con dominancia en K’iche’ y el artículo la interpreta como efecto de contacto/enregisterment | SND-SRC-0054 | §6 Conclusions | población estudiada | VERIFIED |
+| ESGT009-C05 | La lenición no se explica únicamente por contacto/dominancia; educación y contexto fonético tienen peso en el análisis | SND-SRC-0054 | Abstract + §6 Conclusions | población estudiada | VERIFIED |
 
 ## 7. Gate
 
-La correspondencia claim ↔ fuente ↔ localizador fue comprobada en esta wave, pero la entrada permanece en **RESEARCHED** porque utiliza un ID de fuente local pendiente de canonicalización.
+La correspondencia claim ↔ fuente ↔ localizador fue comprobada y SND-SRC-0054 quedó canonicalizada. **Gate de evidencia: PASS → EVIDENCE_CHECKED.** La revisión lingüística permanece separada.
 
 ## 8. Relacionado con
 
