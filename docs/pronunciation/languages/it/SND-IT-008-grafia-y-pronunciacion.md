@@ -1,6 +1,7 @@
 # SND-IT-008 — Grafía y pronunciación en italiano
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
+**Estado:** EDITORIAL_REVIEW  
+**Idioma:** italiano.  
 **Dominio:** escritura / pronunciación.
 
 ## 1. Regla editorial
@@ -54,6 +55,16 @@ RAI. (2025). *DOP: Dizionario italiano multimediale e multilingue d’ortografia
 
 Esta entrada no afirma que la ortografía italiana sea opaca en general. Solo establece que no debe tratarse como transcripción fonética completa.
 
-## 8. Nota de auditoría
+## 8. Entradas relacionadas
 
-Claims contrastados el 2026-10-11. Falta revisión lingüística y editorial.
+- SND-IT-001 — Italiano de referencia y variedades.
+- SND-IT-005 — Acento léxico.
+- SND-IT-009 — Variación regional y referencia.
+
+## 9. Gate editorial
+
+Claims contrastados el 2026-10-11.
+
+**LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+DOP continúa tratado como referencia ortoépica/lexicográfica, no como descripción exhaustiva de toda la variación regional.
