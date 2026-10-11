@@ -1,6 +1,6 @@
 # SND-JA-004 — Consonantes: mapa general y realizaciones documentadas
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** japonés.  
 **Variedad / alcance:** japonés de referencia con controles contemporáneos puntuales; no exhaustivo.  
 **Dominio:** fonología / fonética / pronunciación.  
@@ -142,7 +142,7 @@ No se generaliza desde esos casos a toda la geografía o sociedad japonesa.
 
 Para estudiantes de lenguas con /r/ alveolar aproximante o vibrante, no es adecuado identificar automáticamente el japonés /r/ con una sola “r” de otro idioma.
 
-Etiqueta recomendada: **SEMEJANZA_PARCIAL**.
+Etiqueta recomendada: **SEMEJANZA PARCIAL**.
 
 La comparación debe basarse en articulación y distribución documentadas, no en la letra latina usada en romanización.
 
@@ -190,7 +190,7 @@ Maekawa, K., Kikuchi, H., Fujimoto, M., & Yoneyama, S. (s. f.). *『日本語話
 
 Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 21*(2), 94–96. https://doi.org/10.1017/S002510030000445X
 
-## 15. Nota editorial
+## 15. Nota editorial y límites de composición
 
 - SND-SRC-0023 permanece como baseline, no como prueba única de actualidad.
 - SND-SRC-0076 y SND-SRC-0077 son fuentes contemporáneas puntuales.
@@ -198,11 +198,12 @@ Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 
 - La entrada no fija todavía un inventario contemporáneo definitivo.
 - SND-SRC-0079 ya fue verificada en texto completo para la sección consonántica relevante (pp. impresas 6–9); se usa como control amplio y no como autoridad única.
 - El mapa canonicalizado superó una revisión lingüística independiente; el PASS valida los claims actuales, no convierte la entrada en un inventario superficial exhaustivo.
+- La lectura debe mantener separados **categoría fonológica**, **realización fonética**, **etiqueta de corpus** y **alternancia morfofonológica**.
 - No se mezcla evidencia de Tokio, corpus general y explicación histórica sin indicar su alcance.
 
 ## Gate de salida
 
-**R33 claim gate: PASS. LINGUISTIC_REVIEW: PASS_WITH_SCOPE_WARNING.**
+**R33 claim gate: PASS. LINGUISTIC_REVIEW: PASS_WITH_SCOPE_WARNING. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
 
 Comprobaciones cerradas:
 1. SND-SRC-0023 y SND-SRC-0076…0079 son canónicas;
@@ -215,3 +216,14 @@ Comprobaciones cerradas:
 Pendiente antes de EDITORIAL_REVIEW/READY_FOR_COMPOSITION:
 - reconciliar navegación y terminología con JA-002/005/008/010 a medida que esas entradas se integren;
 - conservar esta entrada como mapa general con evidencia contemporánea selectiva, no como lista exhaustiva de todas las realizaciones japonesas.
+
+
+## 17. Estado editorial
+
+Cambios de esta revisión:
+- terminología comparativa normalizada a **SEMEJANZA PARCIAL**;
+- separación explícita entre inventario fonémico de referencia, alofonía, etiquetas de corpus y alternancias morfofonológicas;
+- gate reconciliado con el PASS lingüístico;
+- ninguna afirmación, fuente, localizador o transcripción fue modificada.
+
+La entrada no pasa todavía a READY_FOR_COMPOSITION mientras JA-002/005/010 y la navegación completa del perfil sigan pendientes.
