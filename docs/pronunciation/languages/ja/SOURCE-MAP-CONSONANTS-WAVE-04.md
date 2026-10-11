@@ -49,6 +49,19 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y dos ca
 - **Entradas / claims:** SND-JA-004; JA004-C07–C09.
 - **Verificado:** 2026-10-11, PDF revisado visualmente en pp. 2–3.
 
+## JA-W04-S04 — Kubozono (2015), broad phonetics/phonology overview
+
+- **Estado de verificación:** HOLD_FULLTEXT.
+- **Tier candidato:** B — handbook académico de referencia.
+- **APA 7:** Kubozono, H. (2015). Introduction to Japanese phonetics and phonology. In H. Kubozono (Ed.), *Handbook of Japanese Phonetics and Phonology* (pp. 1–40). De Gruyter Mouton. https://doi.org/10.1515/9781614511984.1
+- **Metadatos verificados en:** De Gruyter y base bibliográfica NINJAL.
+- **Fenómeno cubierto:** panorama general; la ficha NINJAL enumera explícitamente §3 “Consonant inventory”.
+- **Localizador disponible actualmente:** capítulo pp. 1–40; §3 “Consonant inventory”.
+- **Acceso comprobado en esta wave:** metadatos/tabla de contenidos, no texto completo de §3.
+- **Limitaciones:** no se usa todavía para afirmar detalles del inventario ni para promover claims. Requiere inspección del texto completo y localizadores internos antes de pasar a VERIFIED.
+- **Entradas / claims:** candidato para SND-JA-004; **ningún claim R33 depende todavía de esta fuente**.
+- **Verificado:** 2026-10-11 (metadatos solamente).
+
 ## Integración
 
 - deduplicar JA-W04-S01/S02 contra el registro vigente;
