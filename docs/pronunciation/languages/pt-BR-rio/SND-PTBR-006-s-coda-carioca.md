@@ -1,4 +1,4 @@
-# SND-PTBR-006 — /s/ en coda y variación carioca
+# SND-PTBR-006 — Sibilante /S/ en coda y variación carioca
 
 **Estado:** EVIDENCE_CHECKED.
 **Idioma:** portugués.
@@ -13,7 +13,9 @@ Esta evidencia es valiosa para comprender el perfil histórico reciente de la fa
 
 ## 2. Inventario de realizaciones en el marco estudiado
 
-El capítulo presenta para /s/ en coda, dentro del panorama brasileño considerado, realizaciones fricativas alveolares, post-alveolares, laríngeas y cero fonético.
+La fuente emplea **/S/** como notación analítica para la sibilante postvocálica en coda. MLS-SND conserva esa notación para no transformarla silenciosamente en un análisis /s/.
+
+El capítulo presenta para /S/ en coda, dentro del panorama brasileño considerado, realizaciones fricativas alveolares, post-alveolares, laríngeas y cero fonético.
 
 La entrada no convierte esa lista en un inventario categórico para toda persona carioca: se trata del espacio de variación documentado por la fuente.
 
@@ -49,7 +51,7 @@ No se afirmará, a partir de estos datos, que:
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| PTBR006-C01 | El capítulo enumera varias realizaciones de /s/ en coda dentro del portugués brasileño estudiado | SND-SRC-0007 | Callou (2009), p. 133, Quadro 1 | PB en el marco del capítulo | VERIFIED |
+| PTBR006-C01 | El capítulo enumera varias realizaciones de /S/ en coda dentro del portugués brasileño estudiado | SND-SRC-0007 | Callou (2009), p. 133, Quadro 1 | PB en el marco del capítulo | VERIFIED |
 | PTBR006-C02 | Río presenta alto índice de palatalización frente a otros grandes centros discutidos | SND-SRC-0007 | pp. 133–134, apartado “A propósito do S” y Figura 1 | comparación de ciudades / datos históricos | VERIFIED |
 | PTBR006-C03 | En fala culta carioca, Tabla 1 registra 85/72 % palatal en los 70 y 91/76 % en los 90 para coda interna/final | SND-SRC-0007 | p. 134, Tabela 1 | NURC-RJ, décadas 70/90 | VERIFIED |
 | PTBR006-C04 | La fuente caracteriza la palatalización como casi completa en esos datos, mayor en coda interna que externa | SND-SRC-0007 | p. 134, párrafo inmediatamente anterior a Tabela 1 | fala culta carioca histórica | VERIFIED |
@@ -72,3 +74,10 @@ Callou, D. (2009). Um perfil da fala carioca. En S. S. C. Ribeiro, S. B. B. Cost
 - SND-PTBR-007 — Róticas y variación
 - SND-PTBR-008 — /l/ en coda y variación
 - SND-FND-017 — Variación
+
+## 10. Revisión lingüística wave 01
+
+- **Resultado:** PASS con corrección analítica; revisión especializada del perfil aún pendiente.
+- **Ajuste:** se conserva /S/ de la fuente en vez de normalizar silenciosamente a /s/.
+- **Control temporal:** los porcentajes siguen anclados a los corpus de las décadas indicadas.
+- **Estado:** EVIDENCE_CHECKED mantenido.
