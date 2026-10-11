@@ -1,6 +1,6 @@
 # SND-DE-001 — Alemán estándar y estándares nacionales
 
-**Estado:** RESEARCHED.  
+**Estado:** EVIDENCE_CHECKED.  
 **Idioma:** alemán.  
 **Dominio:** variedad / alcance descriptivo.
 
@@ -38,16 +38,16 @@ Por tanto, Swiss Standard German necesita tratamiento propio cuando un rasgo fon
 
 Se mantiene **MULTI_REFERENCE**.
 
-Antes de pasar a EVIDENCE_CHECKED global deben integrarse en el Source Registry las fuentes específicas DE-PROP-001/002 y, si se utiliza, DE-PROP-003.
+SND-SRC-0030 y SND-SRC-0031 ya están canonicalizadas. DE-PROP-003 permanece fuera de esta entrada mientras sus metadatos no estén completos.
 
-## 6. Evidencia provisional
+## 6. Evidencia R33
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| DE001-C01 | La referencia alemana no debe extrapolarse automáticamente a Austria y Suiza | SND-SRC-0010 + SND-SRC-0019 + DE-PROP-001/002 | alcance declarado de cada fuente | ANALYTICAL_SYNTHESIS_PENDING_REGISTRY |
-| DE001-C02 | El estándar austríaco muestra variación fonética condicionada y normas en competencia | DE-PROP-001 | Abstract / pp. 143–175 | SOURCED_PENDING_REGISTRY |
-| DE001-C03 | Swiss Standard German presenta variación e influencia de dialectos alemánicos en el dominio fonético estudiado | DE-PROP-002 | Abstract + Introduction | SOURCED_PENDING_REGISTRY |
+| DE001-C01 | La referencia alemana no debe extrapolarse automáticamente a Austria y Suiza | SND-SRC-0010 + SND-SRC-0019 + SND-SRC-0030/002 | alcance declarado de cada fuente | EDITORIAL_SYNTHESIS |
+| DE001-C02 | El estándar austríaco muestra variación fonética condicionada y normas en competencia | SND-SRC-0030 | Abstract / pp. 143–175 | VERIFIED |
+| DE001-C03 | Swiss Standard German presenta variación e influencia de dialectos alemánicos en el dominio fonético estudiado | SND-SRC-0031 | Abstract + Introduction | VERIFIED |
 
 ## 7. Gate
 
-RESEARCHED. No promover a EVIDENCE_CHECKED hasta canonicalizar fuentes y revisar el alcance de la síntesis.
+EVIDENCE_CHECKED para las afirmaciones específicas de Austria y Suiza. La síntesis MULTI_REFERENCE es una decisión editorial sustentada por los alcances diferenciados de las fuentes; LINGUISTIC_REVIEW sigue pendiente.
