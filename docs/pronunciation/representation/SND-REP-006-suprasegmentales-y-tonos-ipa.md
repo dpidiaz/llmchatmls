@@ -1,6 +1,6 @@
 # SND-REP-006 — Suprasegmentales, tonos y acentos de palabra en el IPA
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** representación / prosodia.
 **Idioma:** transversal.
 
@@ -66,15 +66,32 @@ Anderson, C., et al. (2022). *Essentials of Linguistics* (2nd ed.). eCampusOntar
 
 Las entradas de mandarín de Taiwán, japonés y otros perfiles prosódicamente relevantes deberán decidir su propia notación de exposición a partir de las fuentes de esa lengua.
 
-## R33 audit
+## Auditoría R33
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **No equivale todavía a:** LINGUISTIC_REVIEW o EDITORIAL_REVIEW.
 
 
+## Entradas relacionadas
+
+- SND-FND-013 — Tono.
+- SND-FND-015 — Entonación.
+- SND-REP-002 — Qué es el AFI/IPA.
+- SND-REP-005 — Diacríticos del IPA.
+
 ## Revisión lingüística wave 01
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS. La disponibilidad de signos IPA se mantiene separada de su función lingüística concreta en cada idioma.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Revisión:** claridad, jerarquía, navegación y consistencia terminológica.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** decisión de integración/composición; no se promueve automáticamente a READY_FOR_COMPOSITION.
