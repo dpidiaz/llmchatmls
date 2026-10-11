@@ -9,5 +9,15 @@ Las comparaciones sustantivas deben respetar los estados del `MLS-SND-MASTER-INV
 ## Wave activa
 
 - `SND-CMP-001` — **Cómo comparar sonidos sin asumir identidad**.
-- Propósito: establecer un método editorial temprano para distinguir semejanza fonética, equivalencia fonológica y correspondencia gráfica.
-- Estado de esta wave: claim activo; investigación y redacción en curso.
+- Rama: `snd/comparative-sound-comparison-wave-01`.
+- PR de coordinación: #7296.
+- Estado de la entrada: **DRAFTED**.
+- Source map local: `SOURCE-MAP.md`.
+- Bloqueo principal: `CMP-PROP-001` debe canonicalizarse o sustituirse antes de promover sus claims dependientes a `EVIDENCE_CHECKED`.
+
+## Salida producida
+
+- `SND-CMP-001-comparar-sonidos-sin-asumir-identidad.md`
+- `SOURCE-MAP.md`
+
+La entrada establece cuatro etiquetas comparativas: `IDENTIDAD_DOCUMENTADA`, `SEMEJANZA_PARCIAL`, `APROXIMACIÓN_ARTICULATORIA` y `SIN_EQUIVALENTE_DIRECTO_ÚTIL`.
