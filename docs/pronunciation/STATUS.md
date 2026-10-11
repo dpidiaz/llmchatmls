@@ -59,9 +59,13 @@
 - 26 fuentes registradas.
 - 143 unidades editoriales candidatas inventariadas.
 - 10 perfiles lingüísticos inicializados.
-- 20 entradas redactadas.
-- 20 entradas en EVIDENCE_CHECKED.
-- 10 entradas fundacionales en LINGUISTIC_REVIEW.
+- 30 entradas únicas redactadas.
+- 17 entradas transversales en LINGUISTIC_REVIEW.
+- 11 entradas específicas de idiomas en EVIDENCE_CHECKED.
+- 1 entrada específica en SOURCE_MAPPED.
+- 1 entrada específica en RESEARCHED.
+- 12 entradas fundacionales en LINGUISTIC_REVIEW.
+- 5 entradas de representación en LINGUISTIC_REVIEW.
 - 0 entradas todavía en EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
 
 ## Coordinación paralela
@@ -93,7 +97,7 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 - SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca — EVIDENCE_CHECKED.
 - SND-ESGT-005 — /s/ y variación regional — EVIDENCE_CHECKED.
 - SND-ENUS-009 — Southern Michigan como perfil documentado — EVIDENCE_CHECKED.
-- SND-PTBR-006 — /s/ en coda y variación carioca — EVIDENCE_CHECKED.
+- SND-PTBR-006 — Sibilante /S/ en coda y variación carioca — EVIDENCE_CHECKED.
 
 
 ## Gate PILOT-SCOPE-01
@@ -123,3 +127,31 @@ Ejecutar **LINGUISTIC_REVIEW** independiente o de segunda pasada sobre la primer
 ## Gate LINGUISTIC-FOUNDATIONS-01
 
 **PASS:** FND-002, 003, 004, 006, 007, 008, 009, 011, 013 y 015 fueron revisadas independientemente y promovidas a LINGUISTIC_REVIEW. Se canonicalizaron las rutas duplicadas de FND-004/006/007. Próximo gate: EDITORIAL_REVIEW.
+
+
+## Gate LINGUISTIC-TRANSVERSAL-01
+
+**PASS.** El núcleo transversal actual queda en LINGUISTIC_REVIEW:
+
+- 12 entradas de fundamentos;
+- 5 entradas de representación.
+
+La revisión mantuvo separados fonética/fonología, pitch/F0, tono/entonación, duración/cantidad y transcripción fonológica/fonética. La nueva wave también mantiene transcripción amplia/estrecha como continuo de detalle.
+
+### Perfiles
+
+Las entradas específicas de idiomas **no** se promueven por arrastre:
+
+- 11 permanecen en EVIDENCE_CHECKED;
+- ESGT-002 permanece SOURCE_MAPPED;
+- IT-004 permanece RESEARCHED hasta canonicalizar su fuente.
+
+### Correcciones de control
+
+- PTBR-001: claims de alcance alineados con pasajes sustantivos de Callou.
+- PTBR-006: se conserva /S/ de la fuente; no se normaliza silenciosamente a /s/.
+- FND-011: “higher pitch” no se interpreta como regla universal de F0.
+
+### Siguiente gate
+
+EDITORIAL_REVIEW del núcleo transversal y revisión específica por idioma de los perfiles.
