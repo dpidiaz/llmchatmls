@@ -1,6 +1,6 @@
 # SND-FR-002 — Vocales y contrastes: mapa descriptivo
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** francés.
 **Variedad principal en esta entrada:** variable según la fuente; **parisino** cuando el estudio está delimitado a París y **supralocal/norte de Francia** únicamente cuando la fuente lo declara.
 **Dominio:** vocales / variación.
