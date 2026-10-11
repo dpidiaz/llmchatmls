@@ -1,6 +1,6 @@
 # SND-DE-001 — Alemán estándar y estándares nacionales
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** alemán.  
 **Dominio:** variedad / alcance descriptivo.
 
