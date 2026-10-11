@@ -1,6 +1,6 @@
 # SND-FND-006 — Consonantes: parámetros articulatorios
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonética.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -78,3 +78,12 @@ La tríada lugar–modo–fonación/sonoridad sirve como entrada al análisis. L
 - **Decisión:** esta ruta queda como versión canónica de SND-FND-006.
 - **Ajuste:** se separó explícitamente fonación de la oposición sonoro–sordo y se desambiguó “sonoridad” frente a intensidad.
 - **Salvaguarda:** compartir lugar, modo o rasgos laríngeos no implica identidad fonética entre lenguas.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** Lugar, modo y actividad laríngea aparecen en jerarquía clara y la salvaguarda anti-equivalencia está visible antes de la evidencia.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
