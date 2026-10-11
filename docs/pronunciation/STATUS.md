@@ -59,7 +59,7 @@
 - 24 fuentes registradas.
 - 143 unidades editoriales candidatas inventariadas.
 - 10 perfiles lingüísticos inicializados.
-- 15 entradas piloto redactadas.
+- 17 entradas piloto redactadas.
 - 15 entradas en EVIDENCE_CHECKED.
 - 0 entradas todavía en LINGUISTIC_REVIEW, EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
 
@@ -79,3 +79,23 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 ## Gate FND-01
 
 **PASS provisional:** 10 entradas fundacionales y 5 entradas de representación/perfiles alcanzaron EVIDENCE_CHECKED. El siguiente paso es ejecutar LINGUISTIC_REVIEW sobre esta wave y avanzar clusters sustantivos de los tres perfiles piloto (es-GT, en-US, pt-BR-rio).
+
+
+### Otras entradas piloto
+
+- SND-REP-002 — Qué es el AFI/IPA — EVIDENCE_CHECKED.
+- SND-ESGT-001 — Alcance y variedades del español de Guatemala — EVIDENCE_CHECKED.
+- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz — EVIDENCE_CHECKED.
+- SND-ZHTW-007 — Zhuyin/Bopomofo — EVIDENCE_CHECKED.
+- SND-KO-009 — Romanización Revisada del coreano — EVIDENCE_CHECKED.
+- SND-JA-001 — Tokio como ancla de referencia y sus límites — EVIDENCE_CHECKED.
+- SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca — DRAFTED; localizadores primarios finos pendientes.
+
+
+## Gate PILOT-SCOPE-01
+
+- 🇬🇹 es-GT: EVIDENCE_CHECKED.
+- 🇺🇸 en-US: EVIDENCE_CHECKED.
+- 🇧🇷 pt-BR-rio: DRAFTED, retenido por control R33.
+
+**Estado:** 2/3 perfiles de alcance superan EVIDENCE_CHECKED. El tercero no se promoverá hasta verificar localizadores primarios suficientes.
