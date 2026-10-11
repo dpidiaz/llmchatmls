@@ -47,13 +47,13 @@ Una entrada podrá etiquetar una afirmación como:
 
 **Estado:** REFERENCE_PROVISIONAL.
 
-**Propuesta editorial:** usar como punto de partida el español urbano de la región centro-occidental/área metropolitana de Guatemala cuando la fuente permita delimitarlo, sin presentarlo como “el español guatemalteco” completo.
+**Propuesta editorial:** usar un perfil nacional provisional del español de Guatemala, con etiquetas regionales, sociales, generacionales y de contacto cuando sean materiales. Ciudad de Guatemala podrá funcionar como subreferencia urbana solo cuando la evidencia la delimite; no se toma como sustituto automático de todo el país.
 
 **Evidencia inicial:** SND-SRC-0003 (ASALE) documenta que existen al menos tres grandes áreas dialectales —centro-occidental, oriental y norteña— y variación generacional, aun cuando describe la variación fonética global como relativamente reducida.
 
 **Regla:** cualquier rasgo de oriente, norte u otra zona debe etiquetarse por separado.
 
-**Pendiente crítico:** localizar estudios fonéticos específicos de Ciudad de Guatemala y del área centro-occidental para convertir la referencia en REFERENCE_FIXED.
+**Pendiente crítico:** ampliar estudios fonéticos específicos de Ciudad de Guatemala/área centro-occidental y reconciliar las zonificaciones nacionales antes de considerar REFERENCE_FIXED.
 
 ---
 
@@ -113,9 +113,9 @@ Una entrada podrá etiquetar una afirmación como:
 
 ### 🇫🇷 Francés
 
-**Estado:** REFERENCE_OPEN.
+**Estado:** REFERENCE_PROVISIONAL.
 
-**Decisión provisional:** no escoger todavía “francés de París” o “français standard” como etiqueta autosuficiente.
+**Decisión provisional:** usar como ancla descriptiva un francés metropolitano supralocal / norte de Francia, y etiquetar como parisinos únicamente los datos cuya fuente esté delimitada a París. No usar “français standard” como etiqueta autosuficiente ni presentar París como toda la francofonía.
 
 **Fuente marco:** SND-SRC-0009 — proyecto PFC, diseñado para estudiar usos, variedades y estructura del francés oral contemporáneo en el espacio francófono.
 
@@ -255,7 +255,7 @@ Una variedad solo puede pasar de REFERENCE_PROVISIONAL o REFERENCE_OPEN a REFERE
 | 🇺🇸 en-US | MULTI_REFERENCE |
 | 🇧🇷 pt-BR-rio | REFERENCE_PROVISIONAL |
 | 🇮🇹 it | REFERENCE_PROVISIONAL |
-| 🇫🇷 fr | REFERENCE_OPEN |
+| 🇫🇷 fr | REFERENCE_PROVISIONAL |
 | 🇩🇪 de | MULTI_REFERENCE |
 | 🇹🇼 zh-TW | REFERENCE_PROVISIONAL |
 | 🇰🇷 ko | REFERENCE_PROVISIONAL |
