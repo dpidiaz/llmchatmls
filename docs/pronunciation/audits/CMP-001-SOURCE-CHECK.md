@@ -2,9 +2,9 @@
 
 **Date:** 2026-10-11  
 **Entry:** SND-CMP-001 — Cómo comparar sonidos sin asumir identidad  
-**Status:** local evidence checked; canonical Source Registry IDs pending.
+**Status:** EVIDENCE_CHECKED after canonical source-ID reconciliation.
 
-## CMP-PROP-001 — Lee & Iverson 2017
+## SND-SRC-0051 — Lee & Iverson 2017
 
 Checked against Cambridge Core:
 
@@ -17,7 +17,7 @@ Checked against Cambridge Core:
 
 **Result:** supports CMP001-C01 at the narrow methodological scope used in the entry.
 
-## CMP-PROP-002 — Cavar et al. 2025
+## SND-SRC-0052 — Cavar et al. 2025
 
 Checked against Cambridge Core:
 
@@ -41,10 +41,13 @@ Checked against Cambridge Core:
 
 The prose and two external evidence mappings are sufficiently supported for a draft.
 
-The entry remains **DRAFTED**, not `EVIDENCE_CHECKED`, solely because CMP-PROP-001 and CMP-PROP-002 have not yet been assigned collision-safe canonical `SND-SRC-xxxx` IDs in the shared Source Registry.
+The two local candidates were canonicalized as SND-SRC-0051 and SND-SRC-0052. Their DOI/title/scope records match the sources audited in this file.
 
-After integration assigns canonical IDs:
+## Canonicalization recheck
 
-1. replace CMP-PROP-001/002 in the entry;
-2. recheck the claim table against those records;
-3. then the entry is eligible for an R33 `EVIDENCE_CHECKED` gate.
+1. CMP-PROP-001 → SND-SRC-0051.
+2. CMP-PROP-002 → SND-SRC-0052.
+3. The claim table was re-read against those canonical records.
+4. No claim scope changed during ID substitution.
+
+**Gate result:** PASS → `EVIDENCE_CHECKED`.
