@@ -12,7 +12,7 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 | Transcription Guide | v0.2 — decisiones base cerradas |
 | Varieties Policy | v0.2 — sincronizada con es-GT y fr |
 | Master Inventory | v0.2 — 143 unidades candidatas |
-| Source Registry | v0.6 — 27 fuentes canónicas |
+| Source Registry | v0.7 — 46 fuentes canónicas |
 | R33 gate | DRAFTED / operativo en waves |
 | Entry Template | v0.1 |
 | R44 Work Plan | v0.1 |
@@ -166,3 +166,15 @@ Referencia: **REFERENCE_FIXED** para referencia ortoépica literaria, separada d
 ## Regla operativa
 
 Los PRs y ramas pueden cerrarse sin merge administrativo cuando su contenido se reaplica a la matriz por otra wave. Para determinar el estado canónico, **manda el archivo presente en `feat/mls-snd-foundation`**, no el estado histórico del PR.
+
+
+## Gate SOURCE-ID-INTEGRITY-01
+
+**PASS:** 60/60 entradas canónicas auditadas contra Source Registry v0.7.
+
+- 0 `SND-SRC` citados inexistentes.
+- 0 entradas `EVIDENCE_CHECKED` con IDs locales.
+- 0 entradas `LINGUISTIC_REVIEW` con IDs locales.
+- 4 entradas pre-gate conservan IDs locales documentados y bloqueados antes de promoción.
+
+Auditoría: `audits/SOURCE-ID-INTEGRITY-2026-10-11.md`.
