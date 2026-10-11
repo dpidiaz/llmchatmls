@@ -1,6 +1,6 @@
 # SND-KO-001 — Estándar y habla de Seúl
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** coreano.
 **Dominio:** variedad / norma / fonética.
 **Referencia:** REFERENCE_PROVISIONAL.
@@ -57,3 +57,11 @@ La norma NIKL se tratará como capa normativa separada de la descripción sociop
 ## 7. Gate
 
 EVIDENCE_CHECKED. Falta LINGUISTIC_REVIEW.
+
+
+## Revisión lingüística 2026-10-11
+
+- Alcance y variedad preservados.
+- Source IDs canónicos comprobados.
+- No se detectó extrapolación normativa/descriptiva incompatible con el alcance declarado.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
