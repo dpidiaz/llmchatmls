@@ -1,0 +1,29 @@
+{
+  "schema": "MLS-SND-SOURCE-ID-INTEGRITY-2",
+  "date": "2026-10-11",
+  "result": "PASS",
+  "physical_entries": 79,
+  "canonical_sources": 56,
+  "broken_canonical_source_refs": 0,
+  "local_source_ids_in_entries": 0,
+  "promoted_entries_without_canonical_source_refs": 0,
+  "state_counts": {
+    "LINGUISTIC_REVIEW": 42,
+    "EVIDENCE_CHECKED": 30,
+    "SOURCE_MAPPED": 2,
+    "DRAFTED": 2,
+    "RESEARCHED": 1,
+    "RESEARCHED_PARTIAL": 1,
+    "IN_PROGRESS": 1
+  },
+  "status_snapshot_declared_entries": 77,
+  "detected_status_drift": {
+    "physical_entries_delta": 2,
+    "note": "REP-003 and REP-004 are physically present although STATUS still listed them as missing."
+  },
+  "follow_up": {
+    "linter_fix_pr": 7375,
+    "status_reconciliation_pr": 7381,
+    "entry_or_registry_changes_after_snapshot": false
+  }
+}
