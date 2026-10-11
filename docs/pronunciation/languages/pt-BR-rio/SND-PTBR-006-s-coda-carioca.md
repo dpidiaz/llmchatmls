@@ -1,4 +1,4 @@
-# SND-PTBR-006 — /s/ en coda y variación carioca
+# SND-PTBR-006 — Sibilante /S/ en coda y variación carioca
 
 **Estado:** EVIDENCE_CHECKED.
 **Idioma:** portugués.
@@ -11,13 +11,17 @@ Callou (2009) documenta una fuerte presencia de realizaciones palatales de /S/ e
 
 Esta evidencia es valiosa para comprender el perfil histórico reciente de la fala carioca, pero **no se presentará como una medición de 2026**.
 
-## 2. Inventario de realizaciones en el marco estudiado
+## 2. Notación y realizaciones en el marco estudiado
 
-El capítulo presenta para /s/ en coda, dentro del panorama brasileño considerado, realizaciones fricativas alveolares, post-alveolares, laríngeas y cero fonético.
+La fuente emplea **/S/** como notación analítica para la sibilante postvocálica en coda. MLS-SND conserva aquí esa notación para no transformarla silenciosamente en un análisis /s/. La política fonémica definitiva del perfil portugués se decidirá al construir su inventario segmental.
+
+## 3. Inventario de realizaciones en el marco estudiado
+
+El capítulo presenta para **/S/** en coda, dentro del panorama brasileño considerado, realizaciones fricativas alveolares, post-alveolares, laríngeas y cero fonético.
 
 La entrada no convierte esa lista en un inventario categórico para toda persona carioca: se trata del espacio de variación documentado por la fuente.
 
-## 3. Datos de Río de Janeiro
+## 4. Datos de Río de Janeiro
 
 En la Tabla 1 del capítulo, para **fala culta carioca**, la variante palatal aparece con estos porcentajes:
 
@@ -28,13 +32,13 @@ La misma tabla registra también realizaciones alveolares, aspiradas y apagamien
 
 Callou caracteriza el proceso de palatalización en esos datos como casi completo, con mayor incidencia en coda interna que en coda externa/final.
 
-## 4. Variación social
+## 5. Variación social
 
 El capítulo recuerda un estudio anterior de Callou y Marques (1975) con 2.579 ocurrencias y hablantes de diferentes niveles de escolaridad, género y zonas de residencia en Río de Janeiro. Allí se reportó variación del porcentaje de palatalización según condicionamientos sociales.
 
 MLS-SND utilizará este punto para mostrar que incluso un rasgo asociado culturalmente a la fala carioca **no es una constante sin variación interna**.
 
-## 5. Qué queda abierto
+## 6. Qué queda abierto
 
 Para describir el uso contemporáneo deben añadirse corpus y estudios más recientes.
 
@@ -45,7 +49,7 @@ No se afirmará, a partir de estos datos, que:
 - la variante palatal sea obligatoria;
 - las realizaciones se distribuyan igual en todos los registros y grupos sociales.
 
-## 6. Evidencia R33
+## 7. Evidencia R33
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
@@ -55,20 +59,26 @@ No se afirmará, a partir de estos datos, que:
 | PTBR006-C04 | La fuente caracteriza la palatalización como casi completa en esos datos, mayor en coda interna que externa | SND-SRC-0007 | p. 134, párrafo inmediatamente anterior a Tabela 1 | fala culta carioca histórica | VERIFIED |
 | PTBR006-C05 | Un estudio anterior de 2.579 ocurrencias reportó variación por escolaridad, género y residencia | SND-SRC-0007 | pp. 134–135, párrafo posterior a Tabela 1 | estudio Callou & Marques (1975) | VERIFIED |
 
-## 7. Fuente
+## 8. Fuente
 
 Callou, D. (2009). Um perfil da fala carioca. En S. S. C. Ribeiro, S. B. B. Costa, & S. A. M. Cardoso (Orgs.), *Dos sons às palavras: nas trilas da Língua Portuguesa* (pp. 129–152). EDUFBA. https://doi.org/10.7476/9788523211851.0008
 
-## 8. Auditoría R33
+## 9. Auditoría R33
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **Control de temporalidad:** todos los porcentajes quedan etiquetados por década/muestra; no se reinterpretan como estado actual.
 - **Pendiente:** añadir evidencia contemporánea de Río antes de redactar una conclusión sobre la distribución actual.
 
-## 9. Relacionado con
+## 10. Relacionado con
 
 - SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca
 - SND-PTBR-007 — Róticas y variación
 - SND-PTBR-008 — /l/ en coda y variación
 - SND-FND-017 — Variación
+
+## 11. Linguistic review wave 01
+
+- **Resultado:** PASS con corrección analítica, **revisión especializada del perfil aún pendiente**.
+- **Ajuste:** se conserva /S/ de la fuente en vez de normalizar silenciosamente a /s/.
+- **Control temporal:** los porcentajes siguen anclados a los corpus de las décadas indicadas.
