@@ -1,6 +1,6 @@
 # SND-RU-006 — Acento léxico
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** prosodia / vocales.  
 **Alcance:** descripción de SND-SRC-0015; consulta normativa complementaria en SND-SRC-0016.
@@ -50,9 +50,24 @@ No se incluirán listas de acentos léxicos reconstruidas desde intuición o gra
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 
+## Entradas relacionadas
+
+- SND-RU-003 — Reducción vocálica.
+- SND-RU-008 — Norma ortoépica y variantes.
+
 ## Revisión lingüística
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** Acento libre no se confunde con desplazamiento arbitrario; la consulta normativa se mantiene separada de la descripción general.
 - **Control:** no se cambiaron source IDs, localizadores ni transcripciones; cualquier cambio terminológico mantiene el mismo contenido analítico.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación, terminología y visibilidad de límites entre descripción, análisis, norma y variación.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
