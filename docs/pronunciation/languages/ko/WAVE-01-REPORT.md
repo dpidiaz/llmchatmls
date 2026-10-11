@@ -1,66 +1,45 @@
-# 🇰🇷 Korean pilot — Wave 01 report
+# 🇰🇷 Korean pilot — Wave 01 complementary report
 
 **Branch:** `snd/korean-pilot-wave-01`  
 **PR:** #7288  
-**Fecha:** 2026-10-11
+**Coordination:** PR #7287 is primary for KO-001/002/003. This PR supplies the complementary half of the profile.
 
-## Resultado
+## IDs worked here
 
-Se completó un primer perfil operativo que separa:
-1. **norma institucional**;
-2. **descripción fonética de Seoul Korean**;
-3. **análisis fonológico/prosódico**;
-4. **escritura y romanización**.
-
-## IDs trabajados
-
-| ID | Estado en esta wave | Resultado |
+| ID | Estado | Resultado |
 |---|---|---|
-| SND-KO-001 | EVIDENCE_CHECKED | Norma estándar y Seoul Korean separados por alcance |
-| SND-KO-002 | RESEARCHED_PARTIAL | Contraste oclusivo mapeado; consonantes no oclusivas aún abiertas |
-| SND-KO-003 | EVIDENCE_CHECKED | Cambio VOT/F0 y dependencia de posición documentados |
-| SND-KO-004 | EVIDENCE_CHECKED | Cambio vocálico de Seúl documentado con límites de muestra |
-| SND-KO-005 | RESEARCHED_PARTIAL | Marco silábico útil; controversia sub-silábica no cerrada |
-| SND-KO-006 | EVIDENCE_CHECKED (NORMATIVE) | Neutralización de coda, nasalización y tensificación separadas de frecuencia real |
-| SND-KO-007 | EVIDENCE_CHECKED (modelo) | Accentual Phrase como marco de referencia para Seoul Korean |
-| SND-KO-008 | EVIDENCE_CHECKED (NORMATIVE) | Hangul y realización superficial tratados como capas distintas |
-| SND-KO-009 | ya EVIDENCE_CHECKED en base | No duplicado |
-| SND-KO-010 | EVIDENCE_CHECKED | Romanización Revisada ≠ IPA |
+| SND-KO-004 | EVIDENCE_CHECKED | Seoul vowel change mapped with sample/date limits |
+| SND-KO-005 | RESEARCHED_PARTIAL | syllable framework mapped; theoretical representation left open |
+| SND-KO-006 | EVIDENCE_CHECKED (NORMATIVE) | coda neutralization, nasalization, tensification |
+| SND-KO-007 | EVIDENCE_CHECKED (model) | Accentual Phrase reference model |
+| SND-KO-008 | EVIDENCE_CHECKED (NORMATIVE) | Hangul spelling and surface pronunciation separated |
+| SND-KO-010 | EVIDENCE_CHECKED | Romanization Revised and IPA separated |
 
-## Fuentes nuevas locales
+KO-009 was already EVIDENCE_CHECKED in the matrix branch and was not duplicated.
 
-Se añadieron nueve anchors locales `KO-W1-S01..S09`.
+## Cross-branch resolution
 
-No se asignaron IDs globales `SND-SRC` para evitar colisiones con las ramas paralelas. El integrador debe promocionar únicamente los anchors que acepte.
+A concurrent PR (#7287) produced stronger overlapping drafts for KO-001/002/003. This branch deleted its copies of those files instead of competing for the same paths.
 
-## Hallazgos que cambian el diseño
+## Sources
 
-### 1. No congelar valores acústicos antiguos
-El contraste lenis–aspirada de Seoul Korean está en cambio; F0 ha ganado peso frente a VOT. Un cuadro pedagógico debe incluir fecha/población/posición.
+New branch-local sources live in `SOURCE-MAP-WAVE-01-COMPLEMENT.md`. They must be deduplicated against #7287 before promotion to the global Source Registry.
 
-### 2. La posición prosódica es material
-La realización de las oclusivas no es idéntica en inicio de frase y posición medial de palabra.
+## Findings
 
-### 3. “Standard Korean” y “Seoul Korean” no se colapsan
-La primera etiqueta se mantiene para normativa institucional; la segunda para estudios fonéticos que declaran esa muestra/variedad.
+- Contemporary Seoul vowel studies show age/gender-linked change; historical vowel charts must not be treated as timeless.
+- Standard Pronunciation Rules are useful for normative process descriptions but do not by themselves establish spontaneous frequency.
+- Seoul prosody requires an explicit model; Accentual Phrase is used as a reference model, not translated as lexical stress.
+- Hangul, Romanization Revised and IPA are distinct representation layers.
 
-### 4. Normativa ≠ corpus
-Las Standard Pronunciation Rules respaldan claims NORMATIVE, no frecuencia espontánea.
+## Next gate
 
-### 5. La prosodia necesita modelo explícito
-Accentual Phrase se adopta como marco de referencia inicial, sin traducirlo como “estrés léxico”.
+Ready for independent LINGUISTIC_REVIEW:
+- KO-004
+- KO-006
+- KO-007
+- KO-008
+- KO-010
 
-## Gaps para wave 02
-
-- consonantes no oclusivas contemporáneas;
-- inventario vocálico contemporáneo con fuentes adicionales;
-- corpus de procesos contextuales para pasar de NORMATIVE a descriptivo;
-- fuentes sobre relación fonológica entre hangul y estructura silábica;
-- revisión especializada de prosodia y terminología española;
-- localizadores full-text para KO-W1-S06 antes de elevar KO-005.
-
-## Gate
-
-Esta wave puede pasar a **LINGUISTIC_REVIEW** para KO-001/003/004/006/007/008/010.
-
-KO-002 y KO-005 permanecen abiertos por diseño.
+Remain open:
+- KO-005 requires stronger full-text theoretical localizers before full EVIDENCE_CHECKED.
