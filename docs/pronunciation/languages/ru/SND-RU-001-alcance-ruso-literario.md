@@ -1,6 +1,6 @@
 # SND-RU-001 — Ruso literario contemporáneo: alcance de referencia
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** variedad / alcance descriptivo / norma.  
 **Referencia editorial:** ruso literario contemporáneo, con separación obligatoria entre descripción fonética y ortoepía.
@@ -60,9 +60,24 @@ El estado `REFERENCE_FIXED` del perfil ruso se limita a la **referencia ortoépi
 - **Resultado:** EVIDENCE_CHECKED.
 - **Límite:** ninguna transcripción del hablante de San Petersburgo se generaliza automáticamente a todo el ruso.
 
+## Entradas relacionadas
+
+- SND-RU-008 — Norma ortoépica y variantes.
+- SND-RU-002 — Vocales: inventario analítico y realizaciones.
+
 ## Revisión lingüística
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** El perfil separa correctamente el alcance fonético de la Illustration y la referencia ortoépica; REFERENCE_FIXED queda limitado a esta última.
 - **Control:** no se cambiaron source IDs, localizadores ni transcripciones; el cambio terminológico de RU-004 mantiene el mismo contenido analítico.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación, terminología y visibilidad de límites entre descripción, análisis, norma y variación.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
