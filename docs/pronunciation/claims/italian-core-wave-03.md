@@ -4,7 +4,18 @@
 - Área: 🇮🇹 italiano — núcleo segmental, ortoepía y variación
 - Tipo: investigación + redacción + evidence mapping
 - Base: feat/mls-snd-foundation
-- Estado: ACTIVE
+- Estado: COMPLETE
 - Fecha: 2026-10-11
 
-No reclama IT-001/004/008 (wave italiana previa) ni IT-005 (rama de acento).
+## Salida
+
+- SND-IT-002 — EVIDENCE_CHECKED.
+- SND-IT-003 — EVIDENCE_CHECKED.
+- SND-IT-006 — EVIDENCE_CHECKED.
+- SND-IT-007 — EVIDENCE_CHECKED.
+- SND-IT-009 — RESEARCHED.
+- IT-PROP-CORE-001 propuesto localmente para variación regional.
+
+## Coordinación
+
+IT-001/004/008 pertenecen a wave previa; IT-005 a `snd/it-stress-wave-02`. No se modifican archivos globales.
