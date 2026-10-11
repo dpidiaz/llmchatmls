@@ -1,6 +1,6 @@
 # SND-FND-015 — Entonación
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
@@ -64,3 +64,10 @@ La entrada establece una barrera contra generalizaciones pedagógicas fáciles p
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## Linguistic review wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Control:** terminología, alcance y coherencia con la política de transcripción revisados.
+- **Siguiente etapa:** EDITORIAL_REVIEW.
