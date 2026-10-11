@@ -24,20 +24,20 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-FND-001 | El sonido como parte del idioma | — | EVIDENCE_CHECKED |
-| SND-FND-002 | Fonética y fonología | terminología v0.2 | LINGUISTIC_REVIEW |
-| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | LINGUISTIC_REVIEW |
-| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | LINGUISTIC_REVIEW |
+| SND-FND-002 | Fonética y fonología | terminología v0.2 | EDITORIAL_REVIEW |
+| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | EDITORIAL_REVIEW |
+| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | EDITORIAL_REVIEW |
 | SND-FND-005 | Percepción del habla | fuentes generales | EVIDENCE_CHECKED |
-| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | LINGUISTIC_REVIEW |
-| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
-| SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
-| SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
+| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | EDITORIAL_REVIEW |
+| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | EDITORIAL_REVIEW |
+| SND-FND-008 | Sílaba | terminología | EDITORIAL_REVIEW |
+| SND-FND-009 | Fonotáctica | FND-008 | EDITORIAL_REVIEW |
 | SND-FND-010 | Duración y cantidad | terminología | LINGUISTIC_REVIEW |
-| SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
+| SND-FND-011 | Acento y prominencia | terminología | EDITORIAL_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | EVIDENCE_CHECKED |
-| SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
+| SND-FND-013 | Tono | terminología | EDITORIAL_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | EVIDENCE_CHECKED |
-| SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
+| SND-FND-015 | Entonación | terminología | EDITORIAL_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | EVIDENCE_CHECKED |
 | SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | EVIDENCE_CHECKED |
@@ -48,8 +48,8 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 |---|---|---|---|
 | SND-REP-001 | Sonido, letra y símbolo | terminology | EVIDENCE_CHECKED |
 | SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | LINGUISTIC_REVIEW |
-| SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | EVIDENCE_CHECKED |
-| SND-REP-004 | Cómo leer vocales del IPA | REP-002 | EVIDENCE_CHECKED |
+| SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | LINGUISTIC_REVIEW |
+| SND-REP-004 | Cómo leer vocales del IPA | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-005 | Diacríticos | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
@@ -80,27 +80,27 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | LINGUISTIC_REVIEW |
+| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | EDITORIAL_REVIEW |
 | SND-ENUS-002 | Sistema consonántico: mapa de contrastes | SOURCE_MAPPED |
-| SND-ENUS-003 | Sistemas vocálicos y variación regional | SOURCE_MAPPED |
-| SND-ENUS-004 | Reducción vocálica | INVENTORY |
-| SND-ENUS-005 | Acento léxico | INVENTORY |
-| SND-ENUS-006 | Habla conectada | INVENTORY |
-| SND-ENUS-007 | Ritmo y prominencia | INVENTORY |
-| SND-ENUS-008 | Entonación | INVENTORY |
-| SND-ENUS-009 | Southern Michigan como perfil documentado | LINGUISTIC_REVIEW |
+| SND-ENUS-003 | Sistemas vocálicos y variación regional | EVIDENCE_CHECKED |
+| SND-ENUS-004 | Reducción vocálica | EVIDENCE_CHECKED |
+| SND-ENUS-005 | Acento léxico | EVIDENCE_CHECKED |
+| SND-ENUS-006 | Habla conectada | EVIDENCE_CHECKED |
+| SND-ENUS-007 | Ritmo y prominencia | EVIDENCE_CHECKED |
+| SND-ENUS-008 | Entonación | EVIDENCE_CHECKED |
+| SND-ENUS-009 | Southern Michigan como perfil documentado | EDITORIAL_REVIEW |
 | SND-ENUS-010 | Comparaciones con español/portugués | BLOCKED_BY_PROFILES |
 
 ### 🇧🇷 Portugués brasileño — referencia carioca — PTBR
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-PTBR-001 | PB amplio vs. habla carioca | EVIDENCE_CHECKED |
+| SND-PTBR-001 | PB amplio vs. habla carioca | EDITORIAL_REVIEW |
 | SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
 | SND-PTBR-005 | Consonantes: mapa general | INVENTORY |
-| SND-PTBR-006 | /s/ en coda y variación carioca | EVIDENCE_CHECKED |
+| SND-PTBR-006 | /s/ en coda y variación carioca | EDITORIAL_REVIEW |
 | SND-PTBR-007 | Róticas y variación | SOURCE_MAPPED |
 | SND-PTBR-008 | /l/ en coda y variación | SOURCE_MAPPED |
 | SND-PTBR-009 | Acento y ritmo | INVENTORY |
@@ -114,25 +114,25 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-IT-002 | Vocales | SOURCE_MAPPED |
 | SND-IT-003 | Consonantes | SOURCE_MAPPED |
 | SND-IT-004 | Geminación/duración consonántica | EVIDENCE_CHECKED |
-| SND-IT-005 | Acento | INVENTORY |
+| SND-IT-005 | Acento | EVIDENCE_CHECKED |
 | SND-IT-006 | E y O: pronunciación y ortoepía | SOURCE_MAPPED |
 | SND-IT-007 | S y Z: pronunciación y ortoepía | SOURCE_MAPPED |
 | SND-IT-008 | Grafía y pronunciación | EVIDENCE_CHECKED |
-| SND-IT-009 | Variación regional | INVENTORY |
+| SND-IT-009 | Variación regional | EVIDENCE_CHECKED |
 
 ### 🇫🇷 Francés — FR
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-FR-001 | Selección de variedad de referencia | EVIDENCE_CHECKED |
-| SND-FR-002 | Vocales y contrastes | EVIDENCE_CHECKED |
+| SND-FR-001 | Selección de variedad de referencia | EDITORIAL_REVIEW |
+| SND-FR-002 | Vocales y contrastes | EDITORIAL_REVIEW |
 | SND-FR-003 | Vocales nasales | INVENTORY |
 | SND-FR-004 | Schwa | INVENTORY |
 | SND-FR-005 | Consonantes finales | INVENTORY |
 | SND-FR-006 | Liaison | INVENTORY |
 | SND-FR-007 | Enchaînement y habla conectada | INVENTORY |
 | SND-FR-008 | Acento/prominencia y frase | INVENTORY |
-| SND-FR-009 | Variación documentada en PFC | EVIDENCE_CHECKED |
+| SND-FR-009 | Variación documentada en PFC | EDITORIAL_REVIEW |
 
 ### 🇩🇪 Alemán — DE
 
@@ -151,59 +151,59 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | LINGUISTIC_REVIEW |
+| SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | EDITORIAL_REVIEW |
 | SND-ZHTW-002 | Estructura silábica | INVENTORY |
 | SND-ZHTW-003 | Iniciales y finales: análisis fonético/fonológico | RESEARCHED_PARTIAL |
-| SND-ZHTW-004 | Sistema tonal: mapa de evidencia | LINGUISTIC_REVIEW |
-| SND-ZHTW-005 | Variación tonal norte/centro | LINGUISTIC_REVIEW |
+| SND-ZHTW-004 | Sistema tonal: mapa de evidencia | EDITORIAL_REVIEW |
+| SND-ZHTW-005 | Variación tonal norte/centro | EDITORIAL_REVIEW |
 | SND-ZHTW-006 | Procesos tonales | INVENTORY |
-| SND-ZHTW-007 | Zhuyin/Bopomofo | LINGUISTIC_REVIEW |
-| SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | LINGUISTIC_REVIEW |
+| SND-ZHTW-007 | Zhuyin/Bopomofo | EDITORIAL_REVIEW |
+| SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | EDITORIAL_REVIEW |
 | SND-ZHTW-009 | Romanización latina | DRAFTED |
-| SND-ZHTW-010 | Variación por contacto | LINGUISTIC_REVIEW |
+| SND-ZHTW-010 | Variación por contacto | EDITORIAL_REVIEW |
 
 ### 🇰🇷 Coreano — KO
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-KO-001 | Estándar y habla de Seúl | LINGUISTIC_REVIEW |
+| SND-KO-001 | Estándar y habla de Seúl | EDITORIAL_REVIEW |
 | SND-KO-002 | Sistema consonántico | SOURCE_MAPPED |
-| SND-KO-003 | Oclusivas y cambios contemporáneos | LINGUISTIC_REVIEW |
-| SND-KO-004 | Vocales | LINGUISTIC_REVIEW |
-| SND-KO-005 | Estructura silábica | LINGUISTIC_REVIEW |
-| SND-KO-006 | Procesos fonológicos contextuales | LINGUISTIC_REVIEW |
-| SND-KO-007 | Prosodia | LINGUISTIC_REVIEW |
-| SND-KO-008 | Hangul y pronunciación | LINGUISTIC_REVIEW |
-| SND-KO-009 | Romanización Revisada | LINGUISTIC_REVIEW |
-| SND-KO-010 | Romanización vs. IPA | LINGUISTIC_REVIEW |
+| SND-KO-003 | Oclusivas y cambios contemporáneos | EDITORIAL_REVIEW |
+| SND-KO-004 | Vocales | EDITORIAL_REVIEW |
+| SND-KO-005 | Estructura silábica | EDITORIAL_REVIEW |
+| SND-KO-006 | Procesos fonológicos contextuales | EDITORIAL_REVIEW |
+| SND-KO-007 | Prosodia | EDITORIAL_REVIEW |
+| SND-KO-008 | Hangul y pronunciación | EDITORIAL_REVIEW |
+| SND-KO-009 | Romanización Revisada | EDITORIAL_REVIEW |
+| SND-KO-010 | Romanización vs. IPA | EDITORIAL_REVIEW |
 
 ### 🇯🇵 Japonés — JA
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-JA-001 | Referencia de Tokio/lengua común y sus límites | EVIDENCE_CHECKED |
+| SND-JA-001 | Referencia de Tokio/lengua común y sus límites | LINGUISTIC_REVIEW |
 | SND-JA-002 | Mora | INVENTORY |
 | SND-JA-003 | Vocales y duración | SOURCE_MAPPED |
 | SND-JA-004 | Consonantes | SOURCE_MAPPED |
 | SND-JA-005 | Estructura moraica/silábica | INVENTORY |
 | SND-JA-006 | Acento tonal de Tokio | SOURCE_MAPPED |
 | SND-JA-007 | Variación y cambio acentual | SOURCE_MAPPED |
-| SND-JA-008 | Kana y pronunciación | INVENTORY |
-| SND-JA-009 | Kanji, lecturas y pronunciación | INVENTORY |
+| SND-JA-008 | Kana y pronunciación | EVIDENCE_CHECKED |
+| SND-JA-009 | Kanji, lecturas y pronunciación | EVIDENCE_CHECKED |
 | SND-JA-010 | Romanización | REFERENCE_OPEN |
 
 ### 🇷🇺 Ruso — RU
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-RU-001 | Ruso literario contemporáneo: alcance | LINGUISTIC_REVIEW |
-| SND-RU-002 | Vocales | LINGUISTIC_REVIEW |
-| SND-RU-003 | Reducción vocálica | LINGUISTIC_REVIEW |
-| SND-RU-004 | Consonantes | LINGUISTIC_REVIEW |
-| SND-RU-005 | Palatalización | LINGUISTIC_REVIEW |
-| SND-RU-006 | Acento léxico | LINGUISTIC_REVIEW |
-| SND-RU-007 | Procesos contextuales | LINGUISTIC_REVIEW |
-| SND-RU-008 | Norma ortoépica y variantes | LINGUISTIC_REVIEW |
+| SND-RU-001 | Ruso literario contemporáneo: alcance | EDITORIAL_REVIEW |
+| SND-RU-002 | Vocales | EDITORIAL_REVIEW |
+| SND-RU-003 | Reducción vocálica | EDITORIAL_REVIEW |
+| SND-RU-004 | Consonantes | EDITORIAL_REVIEW |
+| SND-RU-005 | Palatalización | EDITORIAL_REVIEW |
+| SND-RU-006 | Acento léxico | EDITORIAL_REVIEW |
+| SND-RU-007 | Procesos contextuales | EDITORIAL_REVIEW |
+| SND-RU-008 | Norma ortoépica y variantes | EDITORIAL_REVIEW |
 | SND-RU-009 | Cirílico y pronunciación | INVENTORY |
 
 ## 5. Comparación transversal
