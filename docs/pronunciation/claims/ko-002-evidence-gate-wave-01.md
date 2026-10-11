@@ -3,7 +3,7 @@
 - ID: `SND-KO-002`.
 - Tipo: claim-level R33 audit / gate.
 - Base: `feat/mls-snd-foundation`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Alcance
 
