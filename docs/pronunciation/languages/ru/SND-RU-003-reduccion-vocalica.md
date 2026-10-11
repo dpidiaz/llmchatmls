@@ -1,6 +1,6 @@
 # SND-RU-003 — Reducción vocálica
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** vocales / acento / procesos contextuales.  
 **Alcance:** análisis y estándar descritos por SND-SRC-0015; las diferencias Moscú–San Petersburgo se etiquetan.
@@ -57,3 +57,10 @@ La entrada evita fijar una única transcripción reducida para todo contexto y v
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** La reducción se vincula a acento, posición y variedad; Moscú/San Petersburgo permanecen etiquetados y la duración se formula como tendencia, no absoluto.
+- **Control:** no se cambiaron source IDs, localizadores ni transcripciones; el cambio terminológico de RU-004 mantiene el mismo contenido analítico.
