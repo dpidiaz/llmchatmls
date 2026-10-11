@@ -9,11 +9,12 @@
 | Editorial Charter | DRAFTED |
 | Transcription Guide | v0.2 — decisiones base cerradas |
 | Varieties Policy | v0.2 — matriz de referencias creada |
-| Master Inventory | DRAFTED |
-| Source Registry | v0.3 — 23 fuentes registradas |
+| Master Inventory | v0.2 — 143 unidades editoriales candidatas |
+| Source Registry | v0.4 — 24 fuentes registradas |
 | R33 gate | DRAFTED |
 | Entry Template | v0.1 |
 | R44 Work Plan | v0.1 |
+| Coordination Protocol | ACTIVO |
 
 ## Referencias de variedad
 
@@ -30,31 +31,42 @@
 | 🇯🇵 ja | REFERENCE_FIXED para ancla prosódica Tokio/común |
 | 🇷🇺 ru | REFERENCE_FIXED para referencia ortoépica |
 
-## Próximos gates
+## Wave de contenido actual
 
-1. ampliar fuentes contemporáneas de los diez perfiles;
-2. convertir el Master Inventory en IDs de entradas;
-3. cerrar terminología canónica v0.2;
-4. redactar 8–12 fundamentos piloto;
-5. producir los pilotos es-GT, en-US y pt-BR-rio;
-6. ejecutar gate R33 antes de expansión masiva.
+### Entradas de fundamento auditadas
 
-## Primera wave de contenido
+- SND-FND-002 — Fonética y fonología — EVIDENCE_CHECKED.
+- SND-FND-003 — Fonema, alófono, segmento y realización — EVIDENCE_CHECKED.
+- SND-FND-008 — Sílaba — EVIDENCE_CHECKED.
+- SND-FND-009 — Fonotáctica — EVIDENCE_CHECKED.
+- SND-FND-013 — Tono — EVIDENCE_CHECKED.
+- SND-FND-015 — Entonación — EVIDENCE_CHECKED.
 
-Entradas piloto redactadas:
+### Otras entradas piloto redactadas
 
-- SND-REP-002 — Qué es el AFI/IPA.
-- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz.
-- SND-ZHTW-007 — Zhuyin/Bopomofo.
-- SND-KO-009 — Romanización Revisada del coreano.
-- SND-JA-001 — Tokio como ancla de referencia y sus límites.
+- SND-REP-002 — Qué es el AFI/IPA — DRAFTED.
+- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz — DRAFTED.
+- SND-ZHTW-007 — Zhuyin/Bopomofo — DRAFTED.
+- SND-KO-009 — Romanización Revisada del coreano — DRAFTED.
+- SND-JA-001 — Tokio como ancla de referencia y sus límites — DRAFTED.
 
-Estas cinco entradas están en **DRAFTED** con tablas claim ↔ source ↔ locator. Aún no se marcan como VERIFIED/REVIEWED: falta ejecutar el gate lingüístico/evidencial sobre su versión vigente.
+## Métricas
 
-## Métricas v0.3
-
-- 23 fuentes registradas.
+- 24 fuentes registradas.
 - 143 unidades editoriales candidatas inventariadas.
 - 10 perfiles lingüísticos inicializados.
-- 5 entradas piloto redactadas.
-- 0 entradas marcadas como R33-validadas todavía.
+- 11 entradas piloto redactadas.
+- 6 entradas en EVIDENCE_CHECKED.
+- 0 entradas todavía en LINGUISTIC_REVIEW, EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
+
+## Coordinación paralela
+
+Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes desde `feat/mls-snd-foundation` y abrir PR hacia esa rama, no hacia `main`.
+
+## Próximos gates
+
+1. completar 8–12 entradas de fundamentos;
+2. auditar SND-REP-002 y los cuatro pilotos lingüísticos ya redactados;
+3. producir pilotos es-GT, en-US y pt-BR-rio con clusters sustantivos;
+4. ejecutar LINGUISTIC_REVIEW sobre la primera wave;
+5. congelar arquitectura solo después del gate del piloto.
