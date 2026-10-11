@@ -1,164 +1,181 @@
 # MLS-SND — Work Queue
 
-Actualizado: 2026-10-11.
+Actualizado: 2026-10-11.  
+Corte de coordinación: **106 entradas / 91 fuentes**.
 
-La rama matriz contiene **96 entradas canónicas únicas** y el Source Registry contiene **79 fuentes canónicas**. Antes de reclamar trabajo, revisar:
+Antes de reclamar trabajo:
 
-1. `STATUS.md`;
-2. `INTEGRATION-QUEUE.md`;
-3. PRs abiertos contra `feat/mls-snd-foundation`;
-4. ramas `snd/*`;
-5. existencia física del ID en la matriz.
+1. leer `STATUS.md`;
+2. revisar `INTEGRATION-QUEUE.md`;
+3. buscar ramas/PRs sobre el mismo ID;
+4. comprobar si el archivo canónico ya existe;
+5. distinguir draft nuevo de review/ampliación.
 
 ## Reglas
 
 - Base: `feat/mls-snd-foundation`.
-- Cada worker usa `snd/<area>-<wave>`.
-- PRs apuntan a la rama matriz, no a `main`.
-- Si una entrada ya existe físicamente, una wave nueva debe declararse **review, ampliación compatible o corrección**, no segundo canónico.
-- No editar hot files globales desde workers salvo claim explícito de integración/coordinación.
-- Source IDs locales son válidos en ramas de trabajo; antes de promoción/integración deben deduplicarse y canonicalizarse.
-- Un PR no-draft no implica merge automático.
-- Una rama muy behind/diverged se integra por **clean reapply** de archivos/claims válidos, no por merge ciego.
+- Workers: `snd/<area>-<wave>`.
+- PRs apuntan a la rama matriz.
+- Si un ID ya existe, el trabajo nuevo debe ser revisión, corrección o ampliación compatible.
+- No editar hot files globales salvo claim explícito de integración/coordinación.
+- IDs locales de fuentes deben canonicalizarse antes de promoción.
+- Ramas muy behind/diverged se integran por clean reapply, no por merge ciego.
+- No rebajar R33 para aumentar throughput.
 
 ## Ya canónico — no reclamar como draft nuevo
 
-Las filas de trabajo por idioma que siguen son orientativas: **el estado exacto y los IDs físicos se consultan en `STATUS.md` y `MLS-SND-MASTER-INVENTORY.md`**, no se infieren de PRs abiertos.
-
 ### Fundamentos
-**FND-001…FND-018** tienen archivo físico canónico.
-
-- 10 están en `EDITORIAL_REVIEW`.
-- 2 están en `LINGUISTIC_REVIEW`.
-- 6 están en `EVIDENCE_CHECKED`.
-
-Las waves #7300/#7304/#7311 y cualquier otra sobre estos IDs son revisión/ampliación, no nuevas rutas canónicas.
+FND-001…FND-018: **18/18 físicos**.
 
 ### Representación
-Canónicos físicos:
-
-- REP-001, REP-002;
-- REP-005…REP-012.
-
-REP-003 y REP-004 ya existen físicamente; el trabajo útil sobre ellos es revisión lingüística/editorial, corrección o ampliación compatible.
+REP-001…REP-012: **12/12 físicos**.
 
 ### Comparación
-- CMP-001 es único, canónico y `EVIDENCE_CHECKED`.
-- El checklist editorial ya está transferido.
-- PRs #7294/#7297 quedaron cerrados tras reconciliación.
-- CMP-002…CMP-011 siguen bloqueados por perfiles suficientes.
+- CMP-001 físico.
+- CMP-002…CMP-011 todavía bloqueados por perfiles suficientes.
 
 ### Referencia
-- REF-002 — índice IPA: `IN_PROGRESS`, ya canónico.
-- #7310 quedó cerrado tras reaplicación limpia.
+- REF-002 físico e IN_PROGRESS.
+- REF-001 y REF-003…REF-008 siguen pendientes de integración/cobertura según sus waves.
 
-## Perfiles: estado físico y trabajo libre
+## Perfiles: cobertura física
 
-### 🇬🇹 es-GT
-Canónicos físicos: ESGT-001/002/003/004/005/009/010.
+### 🇬🇹 ESGT
+Físicos:
+- ESGT-001/002/003/004/005/009/010.
 
-- 003/004: DRAFTED.
-- 009/010: RESEARCHED.
-- fuentes locales de estas waves ya fueron canonicalizadas hasta SND-SRC-0056.
+Ausentes:
+- ESGT-006/007/008.
 
-**IDs todavía claramente abiertos:** ESGT-006/007/008.  
-Róticas/asibilación tienen waves activas; revisar #7330/#7328 antes de reclamar.
+Estados pre-gate:
+- ESGT-002 SOURCE_MAPPED.
+- ESGT-004 DRAFTED.
 
-### 🇺🇸 en-US
-Canónicos físicos: ENUS-001, ENUS-003, ENUS-004, ENUS-005, ENUS-006, ENUS-007, ENUS-008 y ENUS-009.
+Antes de reclamar 006/007/008, revisar waves activas de róticas/prosodia.
 
-**Abierto como entrada física:** ENUS-002, sujeto a claims/PRs activos.  
-Las waves 003–008 ya fueron clean-reapplied; no crear segundos canónicos.
+### 🇺🇸 ENUS
+Físicos:
+- ENUS-001;
+- ENUS-003…009.
 
-### 🇧🇷 pt-BR-rio
-Canónicos físicos: PTBR-001/006.
+Ausente:
+- ENUS-002.
 
-**Abiertos:** PTBR-002/003/004/005/007/008/009/010, sujeto a claims de #7277.  
-#7340 es review independiente; no crear duplicados de su contenido.
+No crear segundos canónicos de 003–009.
 
-### 🇮🇹 it
-Canónicos físicos: IT-001/004/005/008/009.
+### 🇧🇷 PTBR
+Físicos:
+- PTBR-001/006.
 
-**Abiertos como entrada física:** IT-002/003/006/007. Revisar PRs/waves existentes antes de reclamar.
+Ausentes:
+- PTBR-002/003/004/005/007/008/009/010.
 
-### 🇫🇷 fr
-Canónicos físicos: FR-001/002/009.  
-La revisión lingüística independiente ya está integrada con warnings de alcance.
+La pilot wave histórica contiene material; integrar por ID y scope, no por merge masivo.
 
-**Abiertos:** FR-003…008; #7324 trabaja el core francés.
+### 🇮🇹 IT
+IT-001…IT-009: **9/9 físicos**, todos en LINGUISTIC_REVIEW.
 
-### 🇩🇪 de
-Canónicos físicos: DE-001/007/008.
+### 🇫🇷 FR
+FR-001…FR-009: **9/9 físicos**.
 
-**Abiertos:** DE-002…006, sujeto a #7309.  
-#7352 es review lingüística; no sustituye las entradas aún no integradas.
+- FR-001/002/009: EDITORIAL_REVIEW.
+- FR-003…008: LINGUISTIC_REVIEW.
 
-### 🇹🇼 zh-TW
-Canónicos físicos: ZHTW-001/003/004/005/007/008/009/010.
+### 🇩🇪 DE
+Físicos:
+- DE-001/002/003/004/006/007/008.
 
-- 001/004/005/007/008/010: LINGUISTIC_REVIEW.
-- 003: RESEARCHED_PARTIAL.
-- 009: DRAFTED.
+Ausente:
+- DE-005.
 
-**Abiertos:** ZHTW-002/006 y gates de 003/009.  
-#7337 trabaja segmentales/sílaba; revisar antes de reclamar.
+Pre-gate:
+- DE-008 RESEARCHED.
 
-### 🇰🇷 ko
-KO-001…010 ya tienen archivo físico canónico.
+### 🇹🇼 ZHTW
+Físicos:
+- ZHTW-001/003/004/005/007/008/009/010.
 
-- KO-001/003…010: LINGUISTIC_REVIEW.
-- KO-002: SOURCE_MAPPED.
+Ausentes:
+- ZHTW-002/006.
 
-No crear segundos drafts; trabajo útil = gate de KO-002, revisión editorial, correcciones o ampliaciones compatibles.
+Pre-gate:
+- ZHTW-003 RESEARCHED_PARTIAL.
 
-### 🇯🇵 ja
-Canónicos físicos: JA-001/004/008/009.
+ZHTW-009 ya está EVIDENCE_CHECKED con fuente canónica; no volver a tratarlo como draft.
 
-Siguen abiertas otras rutas para mora/duración, acento y entradas faltantes. No reclamar JA-002/003/005/006/007/010 sin revisar PRs activos.
+### 🇰🇷 KO
+KO-001…KO-010: **10/10 físicos**.
 
-### 🇷🇺 ru
-RU-001…008 están canónicos y en `LINGUISTIC_REVIEW`.
+KO-002 ya está EVIDENCE_CHECKED como **mapa de evidencia**, no inventario final.
 
-**Abierto:** RU-009 hasta integrar/canonicalizar su wave de escritura (#7292).
+### 🇯🇵 JA
+Físicos:
+- JA-001/004/006/007/008/009.
 
-## Aparato de referencia y edición
+Ausentes:
+- JA-002/003/005/010.
 
-Waves activas conocidas:
+Revisar waves activas de mora/duración/romanización antes de reclamar.
 
-- REF-001 glosario — #7315;
-- REF-003 índice por fenómeno — #7314;
-- REF-004 índice por idioma — #7319;
-- romanizaciones/transliteraciones — #7321;
-- bibliografías — #7322;
-- grafo de referencias cruzadas — #7325;
-- apertura/guía de lectura — #7318;
-- evidence display — #7308;
-- editorial review foundations — #7326/#7329;
-- editorial review representation — #7327;
-- typography/Unicode QA — #7335;
-- content linter — #7343.
+### 🇷🇺 RU
+Físicos:
+- RU-001…RU-008.
 
-Italia IT-001…009 ya tiene **nueve archivos físicos** en LINGUISTIC_REVIEW; Japón JA-006/007 también está integrado con revisión lingüística, no reclamar IT-002/003/006/007 como drafts nuevos.
+Ausente:
+- RU-009.
 
-## Trabajo de integración / QA
+## Conteo de cobertura
 
-El corte actual está en `STATUS.md` y la auditoría `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`. El inventario ya se sincronizó con los 90 encabezados físicos; **no repetir esa reconciliación a partir de snapshots antiguos**.
+Inventario candidato: 143.  
+Entradas físicas: 106.  
+Unidades candidatas todavía sin archivo físico: **37**.
 
-Prioridad actual:
+Desglose de gaps físicos:
 
-1. mapear evidencia para ZHTW-009, todavía DRAFTED y sin SND-SRC;
-2. ejecutar linter reproducible a SHA fijo y revisar localizadores R33 por claim;
-3. continuar reviews y composición sin confundir EDITORIAL_REVIEW con READY_FOR_COMPOSITION;
-4. reconciliar waves behind mediante clean reapply;
-5. mantener un solo archivo físico por ID y verificar PRs antes de reclamar;
-6. actualizar STATUS solo con un nuevo corte verificable.
+- CMP: 10.
+- REF: 7.
+- ESGT: 3.
+- ENUS: 1.
+- PTBR: 8.
+- DE: 1.
+- ZHTW: 2.
+- JA: 4.
+- RU: 1.
+
+## Trabajo prioritario no meramente volumétrico
+
+### 1. Cerrar estados pre-gate
+- ESGT-002.
+- ESGT-004.
+- DE-008.
+- ZHTW-003.
+- REF-002 como aparato de referencia.
+
+### 2. Integrar cobertura ya investigada
+Preferir clean reapply de waves con contenido útil ya producido antes de abrir investigación redundante.
+
+### 3. Composition readiness
+El proyecto tiene 44 entradas en EDITORIAL_REVIEW y 0 en READY_FOR_COMPOSITION.
+
+La wave de gate de composición debe integrarse antes de promover cualquier entrada.
+
+### 4. QA
+Repetir:
+- unicidad de IDs;
+- existencia de Source IDs;
+- estados;
+- localizadores;
+- Unicode/IPA;
+- referencias cruzadas;
+
+sobre un SHA congelado.
 
 ## Criterio para elegir siguiente trabajo
 
 1. no duplicado;
 2. desbloquea dependencias;
-3. tiene evidencia verificable;
-4. reduce un gap claro;
-5. termina con salida auditable;
-6. respeta variedad y alcance;
-7. no rebaja R33 para aumentar throughput.
+3. evidencia verificable;
+4. reduce un gap real;
+5. salida auditable;
+6. conserva variedad/alcance;
+7. no rebaja gates.
