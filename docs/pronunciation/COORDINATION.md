@@ -38,7 +38,24 @@ Ejemplos:
 
 Si el nombre ya existe, añadir un sufijo corto.
 
-## 4. Regla anti-duplicación
+## 4. Claim visible mediante PR borrador
+
+Inmediatamente después de crear su rama, cada chat trabajador debe abrir un PR **borrador** hacia `feat/mls-snd-foundation` antes de producir trabajo sustantivo.
+
+Título recomendado:
+
+`[MLS-SND][CLAIM] <alcance concreto>`
+
+El cuerpo debe declarar:
+
+- área o IDs reclamados;
+- rutas principales que piensa editar;
+- tipo de trabajo: investigación / redacción / auditoría / integración;
+- dependencias conocidas.
+
+Ese PR borrador funciona como claim visible. Si otro chat encuentra un claim activo sobre el mismo bloque, debe cambiar de frente salvo que esté realizando una revisión independiente.
+
+## 5. Regla anti-duplicación
 
 Antes de comenzar una entrada o cluster:
 
@@ -48,7 +65,7 @@ Antes de comenzar una entrada o cluster:
 
 Si otro chat ya trabaja el mismo ID, elegir otro bloque salvo que el objetivo explícito sea una revisión independiente.
 
-## 5. Propiedad de archivos
+## 6. Propiedad de archivos
 
 Los chats trabajadores deben preferir archivos de su propio dominio:
 
@@ -66,7 +83,7 @@ Los siguientes archivos son **globales** y deben modificarse con cautela:
 
 Un chat trabajador puede proponer cambios globales en su PR, pero debe minimizar conflictos y explicar la necesidad.
 
-## 6. Registro de fuentes
+## 7. Registro de fuentes
 
 Si una fuente nueva es necesaria:
 
@@ -75,7 +92,7 @@ Si una fuente nueva es necesaria:
 3. no usar una fuente fuera de su alcance declarado;
 4. no declarar una entrada validada solo porque una fuente esté registrada.
 
-## 7. Estados editoriales
+## 8. Estados editoriales
 
 Secuencia normal:
 
@@ -83,7 +100,7 @@ Secuencia normal:
 
 No saltar de DRAFTED a READY_FOR_COMPOSITION.
 
-## 8. Evidencia R33
+## 9. Evidencia R33
 
 Toda entrada con afirmaciones materiales debe incluir una tabla:
 
@@ -91,7 +108,7 @@ Toda entrada con afirmaciones materiales debe incluir una tabla:
 
 `EVIDENCE_CHECKED` significa únicamente que la correspondencia entre claim y evidencia fue comprobada. No equivale a revisión lingüística completa ni a revisión editorial.
 
-## 9. PR de salida
+## 10. PR de salida
 
 Cada PR debe indicar:
 
@@ -107,13 +124,13 @@ Base del PR:
 
 `feat/mls-snd-foundation`
 
-## 10. Qué hacer al terminar un bloque
+## 11. Qué hacer al terminar un bloque
 
 El chat debe buscar otro bloque elegible y continuar si todavía tiene capacidad.
 
 No necesita esperar instrucciones del usuario.
 
-## 11. Qué hacer si encuentra contradicciones
+## 12. Qué hacer si encuentra contradicciones
 
 No sobrescribir silenciosamente.
 
@@ -125,7 +142,7 @@ Debe:
 4. documentar el conflicto;
 5. dejar la decisión como OPEN_QUESTION si no puede resolverse con evidencia suficiente.
 
-## 12. Principio de autonomía
+## 13. Principio de autonomía
 
 El usuario no debe actuar como dispatcher manual.
 
