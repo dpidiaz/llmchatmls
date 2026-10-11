@@ -3,7 +3,7 @@
 - Tipo: editorial workflow design / clean reapply.
 - Base: `feat/mls-snd-foundation`.
 - Origen conceptual: `snd/composition-readiness-gate-wave-01`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Objetivo
 
