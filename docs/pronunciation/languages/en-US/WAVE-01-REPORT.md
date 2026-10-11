@@ -9,6 +9,8 @@ Rama: snd/en-us-pilot-wave-01.
 - SND-ENUS-002 — SOURCE_MAPPED.
 - SND-ENUS-003 — RESEARCHED.
 - SND-ENUS-009 — EVIDENCE_CHECKED.
+- SND-ENUS-007 — RESEARCHED.
+- SND-ENUS-008 — RESEARCHED.
 
 ## Archivos creados
 
@@ -16,6 +18,8 @@ Rama: snd/en-us-pilot-wave-01.
 - SND-ENUS-002-consonantes-source-map.md
 - SND-ENUS-003-vocales-variacion-regional.md
 - SND-ENUS-009-southern-michigan.md
+- SND-ENUS-007-ritmo-prominencia.md
+- SND-ENUS-008-entonacion.md
 
 ## Fuente nueva más importante
 
@@ -26,6 +30,8 @@ Clopper, Pisoni & de Jong (2005) compara acústicamente seis variedades regional
 - ENUS-CAND-001 — Labov, Ash & Boberg, Atlas of North American English.
 - ENUS-CAND-002 — Clopper, Pisoni & de Jong (2005).
 - ENUS-CAND-003 — Nationwide Speech Project (Clopper & Pisoni, 2006).
+- ENUS-CAND-004 — Clopper & Smiljanic (2011), prosodia Southern/Midland.
+- ENUS-CAND-005 — Clopper & Smiljanic (2015), organización temporal regional.
 
 No se asignaron IDs SND-SRC globales para evitar colisiones con ramas paralelas.
 
@@ -50,3 +56,7 @@ SND-ENUS-009 contiene cuatro claims en VERIFIED respaldados por SND-SRC-0005 / e
 ## Conflictos detectados
 
 Ninguno con ramas/PRs activos al momento de reclamar el bloque. El intento previo sobre pt-BR-rio se abandonó al detectar que otra rama lo había reclamado.
+
+## Sincronización
+
+Al cierre de esta actualización la rama estaba 12 commits por delante y 15 por detrás de `feat/mls-snd-foundation`. Los cambios propios se concentran en `languages/en-US/`; no se modificaron archivos globales, para reducir conflictos al integrar.
