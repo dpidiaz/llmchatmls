@@ -6,7 +6,7 @@
 
 ## 1. Qué significa “tono” aquí
 
-MLS-SND reservará **tono** para patrones de altura tonal o frecuencia fundamental que cumplen una función lingüística documentada dentro de un sistema.
+MLS-SND reservará **tono** para patrones de altura tonal que cumplen una función lingüística documentada dentro de un sistema. Cuando haga falta describir el correlato acústico, se hablará de **frecuencia fundamental (F0)**; F0 es una medida física y *pitch/altura percibida* es una categoría perceptiva relacionada, no un sinónimo técnico exacto.
 
 No utilizará “tono” como sinónimo general de entonación.
 
@@ -38,7 +38,8 @@ No se enseñará mandarín y japonés como si fueran dos versiones del mismo sis
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND013-C01 | La altura tonal puede participar en contrastes lingüísticos de palabra en lenguas tonales | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | VERIFIED |
+| FND013-C01 | La altura percibida (pitch) puede participar en contrastes lingüísticos de palabra en lenguas tonales | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | VERIFIED |
+| FND013-C03 | La fuente distingue F0 como vibración física y pitch como percepción/categorización auditiva de esa vibración | SND-SRC-0024 | §3.12 “Tone and Intonation”, apartado “Pitch” | introductorio/transversal | VERIFIED |
 | FND013-C02 | Tono e intonación requieren distinguir funciones y dominios | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | VERIFIED |
 
 ## 6. Relacionado con
@@ -61,3 +62,9 @@ Las categorías específicas de tono no se definirán a partir de esta fuente in
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## 9. Linguistic review wave 01
+
+- **Resultado:** PASS tras corrección terminológica.
+- **Ajuste:** F0 y pitch dejan de presentarse como términos intercambiables.
+- **Siguiente estado recomendado:** EDITORIAL_REVIEW para esta entrada transversal.
