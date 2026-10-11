@@ -854,3 +854,73 @@ Mapeo de IDs locales resuelto en esta wave:
 - `ESGT-W04-SRC-01` → `SND-SRC-0054`;
 - `ESGT-W04-SRC-02` → `SND-SRC-0055`;
 - `ESGT-W04-SRC-03` → `SND-SRC-0056`.
+
+
+## 25. Canonicalización japonesa: escritura y pronunciación
+
+### SND-SRC-0057 — Japonés / 現代仮名遣い (Modern Kana Usage)
+
+- **Tier:** A.
+- **Institución:** 文化庁 [Agency for Cultural Affairs], Government of Japan.
+- **APA 7:** 文化庁 [Agency for Cultural Affairs]. (s. f.). *現代仮名遣い* [Modern Kana Usage]. https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/gendaikana/index.html
+- **Instrumento reproducido:** Cabinet Notice No. 1 (1986), con modificación institucional de 2010.
+- **Idioma/alcance:** japonés; ortografía kana moderna de uso social general.
+- **Cobertura:** principio fonológico de la ortografía, excepciones convencionales, partículas を/は/へ, determinadas grafías ぢ/づ y convenciones de vocales largas.
+- **Localizador:** 前書き, especialmente puntos 1 y 6; 本文 第2, apartados sobre excepciones y vocales largas; 付記.
+- **Acceso:** gratuito en sitio oficial.
+- **Limitación:** norma ortográfica; no decide toda variación de pronunciación y no constituye transcripción fonética IPA.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_NORMATIVE.
+
+### SND-SRC-0058 — Japonés / 外来語の表記 (Orthography of Loanwords)
+
+- **Tier:** A.
+- **Institución:** 文化庁 [Agency for Cultural Affairs], Government of Japan.
+- **APA 7:** 文化庁 [Agency for Cultural Affairs]. (s. f.). *外来語の表記* [Orthography of Loanwords]. https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/gairai/index.html
+- **Instrumento reproducido:** Cabinet Notice No. 2 (1991).
+- **Idioma/alcance:** japonés; escritura en katakana de préstamos y nombres extranjeros.
+- **Cobertura:** tablas de kana para préstamos, formas de uso general, formas que buscan aproximarse más al sonido/grafía de origen y límites de regulación.
+- **Localizador:** 前書き; 留意事項その1; 仮名と符号の表; 留意事項その2.
+- **Acceso:** gratuito en sitio oficial.
+- **Limitación:** política ortográfica/adaptativa; no representa de manera exhaustiva la fonética del idioma de origen ni regula todos los sonidos especiales.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_NORMATIVE.
+
+### SND-SRC-0059 — Japonés / 常用漢字表 (Jōyō Kanji Table)
+
+- **Tier:** A.
+- **Institución:** Government of Japan / 文化庁 [Agency for Cultural Affairs].
+- **APA 7:** Government of Japan. (2010). *常用漢字表* [Jōyō Kanji Table] (Cabinet Notice No. 2, November 30, 2010). https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/
+- **Idioma/alcance:** japonés escrito; guía de uso general de kanji en la vida social moderna.
+- **Cobertura:** caracteres, formas, 音訓, ejemplos y límites de alcance; incluye 2,136 caracteres en la tabla vigente.
+- **Localizador:** 内閣告示; 前書き; 表の見方及び使い方; 本表/付表.
+- **Acceso:** gratuito en sitio oficial.
+- **Limitación:** guía de uso general, no diccionario exhaustivo de todas las lecturas; los nombres propios quedan en general fuera del alcance salvo excepciones institucionales indicadas.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_NORMATIVE.
+
+### SND-SRC-0060 — Japonés / 常用漢字表の音訓索引
+
+- **Tier:** A.
+- **Institución:** 文化庁 [Agency for Cultural Affairs], Government of Japan.
+- **APA 7:** 文化庁 [Agency for Cultural Affairs]. (s. f.). *常用漢字表の音訓索引* [On/Kun Reading Index of the Jōyō Kanji Table]. https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/joyokanjisakuin/index.html
+- **Idioma/alcance:** japonés; índice oficial de 音/訓 y ejemplos léxicos de la tabla Jōyō.
+- **Cobertura:** búsqueda por 音 en katakana, 訓 en hiragana, múltiples lecturas y ejemplos por carácter.
+- **Localizador:** introducción; 音・訓検索; fila/registro individual del carácter citado.
+- **Acceso:** gratuito en sitio oficial.
+- **Limitación:** índice de la tabla Jōyō; no agota lecturas de nombres propios, usos no incluidos ni información de acento tonal/fonética estrecha.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_NORMATIVE.
+
+## 26. Resultado del registro v0.13
+
+El registro contiene **60 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0060.
+
+Mapeo de IDs locales resuelto en esta wave:
+
+- `JA-W3-S01` → `SND-SRC-0057`;
+- `JA-W3-S02` → `SND-SRC-0058`;
+- `JA-W3-S03` → `SND-SRC-0059`;
+- `JA-W3-S04` → `SND-SRC-0060`.
+
+La canonicalización mantiene separados kana, katakana de préstamos, kanji y lecturas; ninguno de estos sistemas se trata como IPA ni como transcripción fonética exhaustiva.
