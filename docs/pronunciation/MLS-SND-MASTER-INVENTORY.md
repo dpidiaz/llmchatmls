@@ -151,16 +151,16 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | EVIDENCE_CHECKED |
+| SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | LINGUISTIC_REVIEW |
 | SND-ZHTW-002 | Estructura silábica | INVENTORY |
 | SND-ZHTW-003 | Iniciales y finales: análisis fonético/fonológico | RESEARCHED_PARTIAL |
-| SND-ZHTW-004 | Sistema tonal: mapa de evidencia | EVIDENCE_CHECKED |
-| SND-ZHTW-005 | Variación tonal norte/centro | EVIDENCE_CHECKED |
+| SND-ZHTW-004 | Sistema tonal: mapa de evidencia | LINGUISTIC_REVIEW |
+| SND-ZHTW-005 | Variación tonal norte/centro | LINGUISTIC_REVIEW |
 | SND-ZHTW-006 | Procesos tonales | INVENTORY |
-| SND-ZHTW-007 | Zhuyin/Bopomofo | EVIDENCE_CHECKED |
-| SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | EVIDENCE_CHECKED |
+| SND-ZHTW-007 | Zhuyin/Bopomofo | LINGUISTIC_REVIEW |
+| SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | LINGUISTIC_REVIEW |
 | SND-ZHTW-009 | Romanización latina | DRAFTED |
-| SND-ZHTW-010 | Variación por contacto | EVIDENCE_CHECKED |
+| SND-ZHTW-010 | Variación por contacto | LINGUISTIC_REVIEW |
 
 ### 🇰🇷 Coreano — KO
 
