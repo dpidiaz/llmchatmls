@@ -64,3 +64,14 @@
 ## Integration rule
 
 The integrator should promote these sources only after checking against PR #7287's source map to avoid duplicate canonical SND-SRC IDs.
+
+
+### KO-W1-C10 — Jun (2015/2016), Korean n-insertion
+- APA: Jun, J. (2015). Korean n-insertion: A mismatch between data and learning. *Phonology, 32*(3), 417–458. https://doi.org/10.1017/S0952675715000275
+- Online publication: 15 February 2016.
+- URL: https://www.cambridge.org/core/journals/phonology/article/korean-ninsertion-a-mismatch-between-data-and-learning/6C53BDA0D8F55B2DA793E043D10B968D
+- Scope: Seoul Korean n-insertion and phonological analysis; includes explicit discussion of competing syllabifications for /j/.
+- Locator: analysis section around (13b)–(16), especially Cambridge HTML lines corresponding to the paragraph “Both syllabifications have been proposed…”; print pp. 417–458, exact page to be captured if composition requires print pagination.
+- Use: KO-005.
+- Access: Open Access (Cambridge).
+- Status: VERIFIED_FOR_WAVE.
