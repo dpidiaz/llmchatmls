@@ -1,6 +1,6 @@
 # SND-KO-006 — Procesos contextuales: norma y descripción
 
-**Estado:** EVIDENCE_CHECKED (alcance normativo)  
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** coreano  
 **Variedad:** pronunciación estándar normativa  
 **Dominio:** pronunciación / fonología
@@ -40,3 +40,11 @@ No se escribirán fórmulas como “los coreanos siempre pronuncian…” a part
 ## 7. Pendiente descriptivo
 
 Añadir evidencia de corpus sobre frecuencia, variación y condicionamiento de estos procesos antes de etiquetar cualquier claim como BROADLY_DISTRIBUTED en habla espontánea.
+
+
+## Revisión lingüística 2026-10-11
+
+- Alcance y nivel analítico comprobados.
+- Source IDs canónicos y localizadores revisados.
+- Se mantuvo la separación entre norma, descripción empírica y modelo analítico.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
