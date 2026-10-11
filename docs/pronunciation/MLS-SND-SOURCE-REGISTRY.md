@@ -713,3 +713,19 @@ La existencia de un ID global no convierte automáticamente todos los claims aso
 ## 19. Resultado del registro v0.8
 
 El registro contiene **47 fuentes** numeradas SND-SRC-0001 a SND-SRC-0047.
+
+
+### SND-SRC-0048 — Tipología prosódica / pitch-accent
+
+- **Tier:** B.
+- **APA 7:** Hyman, L. M. (2009). How (not) to do phonological typology: the case of pitch-accent. *Language Sciences, 31*(2–3), 213–238. https://doi.org/10.1016/j.langsci.2008.12.007
+- **Cobertura:** tipología prosódica; crítica de `pitch-accent` como tipo unitario; enfoque guiado por propiedades.
+- **Localizador:** abstract; introducción sobre property-driven typology; conclusión tipológica; pp. 213–238.
+- **Acceso:** copia académica abierta alojada por UC Berkeley.
+- **Limitación:** discusión tipológica/teórica; no sustituye descripciones específicas de japonés ni de otros sistemas particulares.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_MODEL_REFERENCE.
+
+## 20. Resultado del registro v0.9
+
+El registro contiene **48 fuentes** numeradas SND-SRC-0001 a SND-SRC-0048.
