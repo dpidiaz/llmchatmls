@@ -1,6 +1,6 @@
 # SND-FND-008 — La sílaba
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** fonología / organización sonora.
 **Idioma:** transversal.
 
@@ -69,3 +69,10 @@ La entrada no pretende resolver debates teóricos sobre la representación de la
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## 9. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** ataque, núcleo, coda y rima se presentan como herramientas de análisis, no como una plantilla obligatoria universal.
+- **Límite:** la silabificación concreta debe atribuirse al análisis de cada lengua/variedad.
