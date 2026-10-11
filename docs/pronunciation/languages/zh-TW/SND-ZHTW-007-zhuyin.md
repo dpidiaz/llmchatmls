@@ -1,6 +1,6 @@
 # SND-ZHTW-007 — Zhuyin/Bopomofo
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** sistema local de anotación / escritura-pronunciación.
 
@@ -27,9 +27,16 @@ Cuando sea pertinente, una entrada de zh-TW podrá presentar:
 
 caracteres → Zhuyin → IPA → explicación.
 
-La romanización latina se mantiene como decisión editorial separada y aún no cerrada.
+La romanización latina se trata por separado en **SND-ZHTW-009**; no sustituye ni a Zhuyin ni al IPA.
 
-## 5. Evidencia R33
+## 5. Entradas relacionadas
+
+- **SND-ZHTW-008** — Zhuyin e IPA: funciones distintas.
+- **SND-ZHTW-009** — Romanización latina.
+- **SND-REP-010** — Romanización.
+- **SND-REP-012** — Sistemas locales de anotación.
+
+## 6. Evidencia R33
 
 | claim_id | afirmación | source_id | localizador | estado |
 |---|---|---|---|---|
@@ -37,15 +44,15 @@ La romanización latina se mantiene como decisión editorial separada y aún no 
 | ZHTW007-C02 | El manual organiza símbolos de onset, rhyme y marcas tonales | SND-SRC-0011 | “1. List of Phonetic Symbols”, apartados a–d: main list, onset, rhyme y tonal marks | VERIFIED |
 | ZHTW007-C03 | El manual incluye una tabla de sílabas de mandarín con Bopomofo | SND-SRC-0011 | “6. Reference Table of Chinese Characters with Mandarin Chinese Syllables”; Reader’s Guide, punto 5 | VERIFIED |
 
-## 6. Fuente
+## 7. Fuente
 
 Ministry of Education, Taiwan. (2017). The Manual of the Phonetic Symbols of Mandarin Chinese. https://language.moe.gov.tw/001/Upload/files/site_content/M0001/juyin/html_en/index.html
 
-## 7. Nota editorial
+## 8. Nota editorial
 
 La separación conceptual entre Zhuyin e IPA es una decisión metodológica MLS-SND respaldada por las funciones distintas de ambos sistemas.
 
-## 8. Auditoría R33
+## 9. Auditoría R33
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
@@ -53,7 +60,7 @@ La separación conceptual entre Zhuyin e IPA es una decisión metodológica MLS-
 - **Límite:** la distinción conceptual Zhuyin ≠ IPA es política metodológica MLS-SND; el manual no se usa como descripción fonética completa de Taiwan Mandarin.
 
 
-## Revisión lingüística wave 01
+## 10. Revisión lingüística wave 01
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS.
@@ -62,7 +69,7 @@ La separación conceptual entre Zhuyin e IPA es una decisión metodológica MLS-
 - **Siguiente gate:** EDITORIAL_REVIEW.
 
 
-## Revisión editorial wave 01
+## 11. Revisión editorial wave 01
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS → `EDITORIAL_REVIEW`.
