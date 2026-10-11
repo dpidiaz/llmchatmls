@@ -25,3 +25,16 @@ Check each material claim against the cited source and exact locator; narrow or 
 ## Started
 
 2026-10-11
+
+
+## Completed
+
+2026-10-11
+
+### Outcome
+
+- 5/5 pilot entries independently rechecked.
+- 4 PASS without substantive claim changes.
+- 1 PASS WITH CORRECTION: SND-ENUS-001 / SND-SRC-0004 bibliographic provenance corrected to Ladefoged (1999), *Handbook of the IPA*, pp. 41–44.
+- Consolidated report: `docs/pronunciation/audits/R33-PILOT-WAVE-01.md`.
+- No entry was promoted beyond `EVIDENCE_CHECKED`; next gates remain independent `LINGUISTIC_REVIEW` and `EDITORIAL_REVIEW`.
