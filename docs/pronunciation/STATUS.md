@@ -86,15 +86,16 @@ En el snapshot actual no queda ninguna entrada física con estado top-level SOUR
 
 Auditoría vigente:
 
-`audits/STATUS-RECONCILIATION-107-96-2026-10-11.md`
+`audits/SOURCE-ID-INTEGRITY-108-97-2026-10-11.md`
 
 Resultado estructural/referencial para el SHA indicado:
 
-- 107 IDs canónicos únicos;
-- 96 fuentes `SND-SRC-0001…0096`;
+- 108 IDs canónicos únicos;
+- 97 fuentes `SND-SRC-0001…0097`, sin huecos;
 - 0 IDs de entrada duplicados;
-- 11 entradas `READY_FOR_COMPOSITION`;
-- el audit registra qué comprobaciones estructurales fueron rehechas y cuáles permanecen heredadas del scan completo anterior.
+- 0 referencias canónicas inexistentes detectadas en el audit diferencial;
+- 0 tokens locales detectados en las 30 entradas nuevas/modificadas;
+- 12/12 entradas `READY_FOR_COMPOSITION` con handoff canónico.
 
 Este PASS **no** certifica:
 
@@ -118,7 +119,7 @@ Este PASS **no** certifica:
 
 ## Trabajo pendiente priorizado
 
-1. **Pre-EVIDENCE:** DE-008, ZHTW-003 y REF-002 siguen por debajo de EVIDENCE_CHECKED.
+1. **Pre-EVIDENCE:** ZHTW-003 y REF-002 siguen por debajo de EVIDENCE_CHECKED.
 2. **Referencia:** completar REF-002 y los demás artefactos REF todavía no físicos.
 3. **Reviews:** continuar los 33 LINGUISTIC_REVIEW y 39 EDITORIAL_REVIEW sin saltar etapas.
 4. **Cobertura:** integrar únicamente IDs ausentes o revisiones compatibles; no crear segundos canónicos.
@@ -131,6 +132,6 @@ Este PASS **no** certifica:
 - `INTEGRATION-QUEUE.md`: reconciliación de waves.
 - `MLS-SND-MASTER-INVENTORY.md`: inventario de 143 candidatas.
 - `MLS-SND-SOURCE-REGISTRY.md`: 97 fuentes canónicas.
-- `audits/STATUS-RECONCILIATION-107-96-2026-10-11.md`: corte reproducible actual.
+- `audits/STATUS-SYNC-108-97-WAVE-05-2026-10-11.md`: corte de workflow; `audits/SOURCE-ID-INTEGRITY-108-97-2026-10-11.md`: QA referencial vigente.
 
 **Regla:** el estado canónico lo determina el árbol de `feat/mls-snd-foundation`, no el título histórico de un PR.
