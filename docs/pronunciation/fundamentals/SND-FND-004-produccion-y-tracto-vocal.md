@@ -1,6 +1,6 @@
 # SND-FND-004 — Producción del habla y tracto vocal
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonética articulatoria.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -68,3 +68,12 @@ La selección de partes anatómicas está deliberadamente limitada a lo necesari
 - **Decisión:** esta ruta queda como versión canónica de SND-FND-004 por coincidir con el título y alcance del Master Inventory.
 - **Integración:** se conserva de la versión paralela la explicación explícita del diagrama mediosagital.
 - **Límite:** el capítulo introduce anatomía articulatoria funcional; no pretende describir exhaustivamente mecanismos de corriente de aire ni anatomía clínica.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La anatomía se mantiene funcional y breve; el lector recibe solo las regiones necesarias para entender las entradas articulatorias posteriores.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
