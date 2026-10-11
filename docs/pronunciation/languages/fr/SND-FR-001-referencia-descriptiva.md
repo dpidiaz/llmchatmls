@@ -56,7 +56,7 @@ No usar `FR-STANDARD` sin definir qué norma o corpus sustenta la etiqueta.
 | FR001-C01 | PFC se propone describir el francés hablado en su unidad y diversidad | SND-SRC-0009 | PFC Recherche, objetivos del proyecto | VERIFIED |
 | FR001-C02 | PFC organiza coordinaciones y encuestas en múltiples regiones francófonas | SND-SRC-0009 | PFC Recherche, coordinaciones regionales y protocolo | VERIFIED |
 | FR001-C03 | La Illustration of the IPA de 1993 se basa en una joven hablante parisina | SND-SRC-0018 | extracto de Cambridge; JIPA 23(2), pp. 73–76 | VERIFIED |
-| FR001-C04 | Chalier documenta pluralidad de normas y una tendencia bicéntrica París/Québec en el alcance estudiado | FR-SRC-P01 | resumen institucional FWF + conclusión del libro | VERIFIED |
+| FR001-C04 | Chalier documenta pluralidad de normas y una tendencia bicéntrica París/Québec en el alcance estudiado | SND-SRC-0039 | resumen institucional FWF + conclusión del libro | VERIFIED |
 | FR001-C05 | PFC exige citar la encuesta específica cuando se usan uno o dos puntos concretos | SND-SRC-0009 | página principal, condiciones de uso | VERIFIED |
 
 ## 7. Decisión editorial
