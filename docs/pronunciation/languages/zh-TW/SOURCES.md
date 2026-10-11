@@ -78,3 +78,43 @@ Toda entrada de zh-TW debe distinguir al menos una de estas capas:
 5. **decisión editorial MLS-SND**.
 
 No se fusionarán esas capas en una sola tabla sin indicar su procedencia.
+
+
+### ZHTW-LOCAL-004 — Fon 2020 / inventario y variantes
+
+Fon, J. (2020). The phonetic realizations of the Mandarin phoneme inventory: The canonical and the variants. En H.-M. Liu, F.-M. Tsao, & P. Li (Eds.), *Speech Perception, Production and Acquisition: Multidisciplinary Approaches in Chinese Languages* (pp. 11–36). Springer. https://doi.org/10.1007/978-981-15-7606-5_2
+
+Uso:
+- marco canónico del inventario de Mandarin descrito por la autora;
+- comparación de variantes de Taiwán, Singapur y China;
+- evidencia de derretroflexión/hipercorrección de sibilantes y mergers nasales.
+
+Limitación:
+- el inventario canónico del capítulo no debe etiquetarse automáticamente como inventario exclusivo de Taiwan Mandarin;
+- la propia fuente subraya variabilidad intrarregional.
+
+### ZHTW-LOCAL-005 — Fon et al. 2011 / nasales finales
+
+Fon, J., Hung, J.-M., Huang, Y.-H., & Hsu, H.-J. (2011). Dialectal variations on syllable-final nasal mergers in Taiwan Mandarin. *Language and Linguistics, 12*(2), 273–311.
+
+Uso:
+- mergers de nasales finales;
+- contraste norte/sur;
+- dimensión sociolingüística de las variantes.
+
+Localizador:
+- abstract institucional;
+- pp. 273–311 para claims detallados.
+
+### ZHTW-LOCAL-006 — Chiu et al. 2020 / sibilantes
+
+Chiu, C., Wei, P.-C., Noguchi, M., & Yamane, N. (2020). Sibilant fricative merging in Taiwan Mandarin: An investigation of tongue postures using ultrasound imaging. *Language and Speech, 63*(4), 877–897. https://doi.org/10.1177/0023830919896386
+
+Uso:
+- contraste [s]–[ʂ]–[ɕ] como punto de partida descriptivo del estudio;
+- variación individual en merger [s–ʂ];
+- condicionamiento por contexto vocálico;
+- articulación mediante ultrasonido.
+
+Limitación:
+- estudio específico de fricativas; no constituye descripción segmental completa.
