@@ -2,74 +2,85 @@
 
 Actualizado: 2026-10-11.
 
-Este archivo es la cola canónica orientativa para chats paralelos. Antes de reclamar trabajo, revisar también PRs y ramas recientes porque GitHub puede avanzar entre actualizaciones de este documento.
+La rama matriz contiene **60 entradas integradas**. Antes de reclamar trabajo, revisar `STATUS.md`, `INTEGRATION-QUEUE.md`, ramas `snd/*` y PRs abiertos.
 
 ## Reglas
 
-- Base de trabajo: `feat/mls-snd-foundation`.
-- Cada chat trabaja en una rama `snd/<area>-<wave>`.
-- Cada PR debe apuntar a `feat/mls-snd-foundation`.
-- Si un ID aparece como ACTIVE o COMPLETE_AWAITING_INTEGRATION, no duplicarlo salvo revisión independiente explícita.
-- Los archivos globales se actualizan principalmente durante integración.
+- Base: `feat/mls-snd-foundation`.
+- Cada chat trabaja en `snd/<area>-<wave>`.
+- PRs apuntan a la rama matriz, no a `main`.
+- Si una entrada ya existe en la matriz, una wave nueva debe ser **review**, no un segundo archivo canónico.
+- Global hot files se actualizan durante integración.
+- Source IDs locales no se convierten en SND-SRC globales hasta deduplicación.
 
-## Trabajo activo
+## Trabajo activo prioritario
 
-| Área | IDs / alcance | Estado | PR / rama |
+| Área | Alcance | Ruta / PR | Nota |
 |---|---|---|---|
-| 🇧🇷 pt-BR-rio | PTBR-001, 006, 007, 008 | ACTIVE | PR #7277 |
-| 🇺🇸 en-US | ENUS-002, 003, 009 | ACTIVE | PR #7278 |
-| 🇯🇵 japonés | JA-002, 003, 005 | ACTIVE | PR #7290 |
-| 🇹🇼 zh-TW | ZHTW-001, 004, 005, 009 | COMPLETE_AWAITING_INTEGRATION / overlapping wave | PR #7291 |
-| 🇹🇼 zh-TW | ZHTW-004, 005, 008 | COMPLETE_AWAITING_INTEGRATION | PR #7286 |
-| 🇰🇷 coreano | KO-001, 002, 003 | COMPLETE_AWAITING_INTEGRATION | PR #7287 |
-| 🇰🇷 coreano | KO-001..008, KO-010 | ACTIVE / OVERLAP_WARNING | PR #7288 |
-| 🇷🇺 ruso wave 1 | RU-001, 003, 005, 006, 008 | COMPLETE_AWAITING_INTEGRATION | PR #7283 |
-| 🇷🇺 ruso wave 2 | RU-002, 004, 007 | COMPLETE_AWAITING_INTEGRATION | PR #7289 |
-| 🇫🇷 francés | FR-001, 002, 009 | COMPLETE_AWAITING_INTEGRATION | PR #7282 |
-| 🇩🇪 alemán | DE-001, 007, 008 | COMPLETE_AWAITING_INTEGRATION | PR #7284 |
-| Fundamentos review | FND-002, 003, 004, 006, 007, 008, 009, 011, 013, 015 | INTEGRATED — LINGUISTIC_REVIEW | PR #7281 |
-| Representación IPA lectura | REP-003, REP-004 | ACTIVE / branch present | snd/representation-ipa-reading-wave-01 |
-| Representación IPA signos | REP-005, REP-006 | ACTIVE / branch present | snd/representation-diacritics-suprasegmentals-wave-01 |
+| FND-005 | percepción del habla | #7300 | **Ruta canónica de investigación**; canonicalizar fuentes antes de EVIDENCE_CHECKED. |
+| FND-012/016/018 | ritmo, procesos, norma/uso | #7302 | Reducir scope; FND-004/005 no son salidas canónicas de esta PR. |
+| FND-001/014 | sonido + acento tonal | #7304 | FND-014 permanece RESEARCHED hasta canonicalizar Hyman y fuentes por perfil. |
+| FND-017 review | variación | #7311 | La entrada ya está en LINGUISTIC_REVIEW; tratar esta wave como revisión independiente. |
+| REP-001/009/012 | escritura y sistemas locales | #7295 | Evitar duplicar perfiles. |
+| REP-010/011 | romanización/transliteración | #7299 | Mantener separado de IPA y de sistemas locales. |
+| REP-003/004 | lectura IPA | ramas representation activas | Integrar después de review. |
+| CMP-001 | método comparativo | #7294 | **Ruta canónica**; canonicalizar dos fuentes y absorber checklist de #7297. |
+| CMP-001 paralelo | checklist | #7297 | Conservar checklist; cerrar entrada duplicada después de transferencia. |
+| 🇺🇸 en-US | clusters de variación | #7278 | Sigue activo. |
+| 🇧🇷 pt-BR-rio | clusters cariocas | #7277 | Sigue activo. |
+| 🇯🇵 ja | mora/duración/estructura | #7290 | RESEARCHED; requiere bibliografía fonológica antes de gate. |
+| 🇯🇵 ja | romanización oficial | #7313 | Nueva wave; verificar norma vigente. |
+| 🇩🇪 de | core segmental/prosódico | #7309 | Continuación del perfil ya integrado parcialmente. |
+| 🇮🇹 it | acento | #7306 | No solapa IT-004/008. |
+| 🇮🇹 it | E/O ortoepía | #7316 | Coordinar con core wave italiana. |
+| 🇮🇹 it | core vowels/consonants/variación | #7317 | Evitar duplicar IT-006 con #7316. |
+| 🇷🇺 ru | cirílico/pronunciación RU-009 | #7292 | Fuente ortográfica pendiente de canonicalización. |
+| 🇰🇷 ko | revisión lingüística | #7307 | Perfil 001–010 ya está integrado; esta wave debe revisar, no reescribir. |
+| REF-001 | glosario | #7315 | Derivar de terminología canónica, sin inventar definiciones nuevas. |
+| REF-002 | índice IPA | #7310 | Seed de índice; no sustituye IPA Chart. |
+| REF-003/004 | índices fenómeno/idioma | #7314/#7319 | Índices vivos derivados del corpus. |
+| editorial | navegación/frontmatter/evidence display | #7293/#7318/#7308 | Mantener libro de consulta; sin ejercicios/evaluación. |
+| source integration | protocolo/deduplicación | #7320 | Debe reducir colisiones de IDs locales antes de integración masiva. |
 
-## Integrado en la matriz
+## Integrado — no reclamar como draft nuevo
 
-- REP-007, REP-008.
-- IT-001, IT-004, IT-008 y mapa local de fuentes italiano.
-- FND-010, FND-017.
-- ESGT-001, ESGT-002, ESGT-005 y SOURCE-MAP.
-- Auditoría R33 piloto consolidada.
-- REP-002, ENUS-001, ZHTW-007, KO-009, JA-001.
-- Primer gate de fundamentos.
+### Fundamentos
+FND-002, 003, 004, 006, 007, 008, 009, 010, 011, 013, 015, 017.
 
-## Trabajo elegible no reclamado
+### Representación
+REP-002, 005, 006, 007, 008.
 
-Prioridad sugerida:
+### Perfiles
+- ESGT-001/002/005.
+- ENUS-001/009.
+- PTBR-001/006.
+- IT-001/004/008.
+- FR-001/002/009.
+- DE-001/007/008.
+- ZHTW-001/003/004/005/007/008/009/010.
+- KO-001…010.
+- JA-001.
+- RU-001…008.
 
-1. **EDITORIAL_REVIEW del primer gate fundacional**, una vez integrado PR #7281.
-2. **FND-001 — El sonido como parte del idioma.**
-3. **FND-005 — Percepción del habla.**
-4. **FND-012 — Ritmo**, con fuente especializada; evitar la dicotomía simplista stress-timed/syllable-timed.
-5. **FND-014 — Acento tonal**, después de coordinar con japonés.
-6. **FND-016 — Habla conectada y procesos contextuales.**
-7. **FND-018 — Norma, descripción y uso.**
-8. **REP-001 — Sonido, letra y símbolo.**
-9. **REP-009 — Ortografía y pronunciación.**
-10. **REP-010/011/012 — Romanización, transliteración y sistemas locales**, cuidando no duplicar perfiles.
-11. **ESGT-003/004/006/007/008/009/010**, excepto lo reclamado por futuras waves.
-12. **IT-002/003/005/006/007/009**, preservando el estado de IT-004.
-13. Capítulos comparativos permanecen BLOQUEADOS salvo CMP-001.
+Una wave nueva sobre cualquiera de esos IDs debe declararse como **revisión, ampliación compatible o corrección**, no como segundo canónico.
 
-## Alertas de solapamiento
+## Trabajo todavía claramente abierto
 
-- Coreano tiene dos waves parcialmente solapadas (#7287 y #7288). El integrador debe preservar la mejor versión por ID y no sumar claims incompatibles sin revisión.
-- zh-TW tiene dos waves parcialmente solapadas (#7286 y #7291). Resolver por alcance y evidencia, no por “último commit gana”.
-- Varias ramas antiguas de auditoría permanecen en GitHub aunque sus PRs ya fueron cerrados; no deben considerarse trabajo activo.
+Además de las waves activas:
 
-## Criterio para tomar el siguiente trabajo
+- ESGT-003/004/006/007/008/009/010.
+- ENUS-004/005/006/007/008.
+- PTBR-002/003/004/005/009/010.
+- FR-003/004/005/006/007/008.
+- JA-004/006/007/008/009, respetando claims nuevos.
+- RU-009 hasta integración.
+- capítulos comparativos CMP-002…011 permanecen bloqueados por perfiles.
 
-Elegir primero una unidad que:
+## Criterio de siguiente trabajo
 
-1. no esté reclamada;
-2. tenga fuentes admisibles o un gap investigable claro;
-3. desbloquee otras unidades;
-4. pueda dejar una salida auditable sin modificar innecesariamente archivos globales.
+1. no duplicado;
+2. desbloquea dependencias;
+3. tiene evidencia verificable;
+4. reduce un gap crítico;
+5. puede terminar con salida auditable;
+6. no rebaja R33 para aumentar throughput.
