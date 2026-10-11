@@ -1,7 +1,6 @@
 # SND-JA-008 — Kana y pronunciación: ortografía, no transcripción fonética
 
-**Estado:** EVIDENCE_CHECKED  
-**Idioma:** japonés  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** japonés  
 **Dominio:** escritura / pronunciación  
 **Alcance:** ortografía kana moderna de uso general; préstamos tratados con instrumento institucional separado
 
