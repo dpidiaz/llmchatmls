@@ -4,7 +4,15 @@
 - Área: 🇷🇺 ruso / escritura y pronunciación
 - Tipo: investigación + redacción provisional
 - Base: feat/mls-snd-foundation
-- Estado: ACTIVE
+- Estado: COMPLETE
 - Fecha: 2026-10-11
 
-La fuente ortográfica nueva se registrará localmente como propuesta y no recibirá un ID SND-SRC global desde este worker.
+## Salida
+
+- `languages/ru/SOURCES-PROPOSED.md` creado con RU-PROP-001.
+- SND-RU-009 — RESEARCHED.
+- No se asignó ID global de Source Registry desde esta rama.
+
+## Gate pendiente
+
+Canonicalizar RU-PROP-001 en Source Registry y volver a auditar los claims antes de promover a EVIDENCE_CHECKED.
