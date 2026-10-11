@@ -2,124 +2,167 @@
 
 Última actualización: 2026-10-11.
 
-## Fundación
+Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-foundation`. Los PRs abiertos se registran aparte en `WORK-QUEUE.md` e `INTEGRATION-QUEUE.md`.
+
+## Fundación editorial
 
 | Componente | Estado |
 |---|---|
 | Editorial Charter | DRAFTED |
 | Transcription Guide | v0.2 — decisiones base cerradas |
-| Varieties Policy | v0.2 — matriz de referencias creada |
-| Master Inventory | v0.2 — 143 unidades editoriales candidatas |
-| Source Registry | v0.5 — 26 fuentes registradas |
-| R33 gate | DRAFTED |
+| Varieties Policy | v0.2 — sincronizada con es-GT y fr |
+| Master Inventory | v0.2 — 143 unidades candidatas |
+| Source Registry | v0.6 — 27 fuentes canónicas |
+| R33 gate | DRAFTED / operativo en waves |
 | Entry Template | v0.1 |
 | R44 Work Plan | v0.1 |
 | Coordination Protocol | ACTIVO |
+| Integration Queue | ACTIVO |
 
-## Referencias de variedad
+## Snapshot integrado
 
-| Perfil | Estado |
-|---|---|
-| 🇬🇹 es-GT | REFERENCE_PROVISIONAL |
-| 🇺🇸 en-US | MULTI_REFERENCE |
-| 🇧🇷 pt-BR-rio | REFERENCE_PROVISIONAL |
-| 🇮🇹 it | REFERENCE_PROVISIONAL |
-| 🇫🇷 fr | REFERENCE_OPEN |
-| 🇩🇪 de | MULTI_REFERENCE |
-| 🇹🇼 zh-TW | REFERENCE_PROVISIONAL |
-| 🇰🇷 ko | REFERENCE_PROVISIONAL |
-| 🇯🇵 ja | REFERENCE_FIXED para ancla prosódica Tokio/común |
-| 🇷🇺 ru | REFERENCE_FIXED para referencia ortoépica |
+**Entradas presentes en la rama matriz: 60.**
 
-## Wave de contenido actual
+Distribución por gate:
 
-### Entradas de fundamento auditadas
+- **16** en `LINGUISTIC_REVIEW`;
+- **36** en `EVIDENCE_CHECKED`;
+- **8** en estados `RESEARCHED`, `RESEARCHED_PARTIAL`, `SOURCE_MAPPED` o `DRAFTED`;
+- **0** en `EDITORIAL_REVIEW`;
+- **0** en `READY_FOR_COMPOSITION`.
 
-- SND-FND-002 — Fonética y fonología — EVIDENCE_CHECKED.
-- SND-FND-004 — Producción del habla y tracto vocal — EVIDENCE_CHECKED.
-- SND-FND-003 — Fonema, alófono, segmento y realización — EVIDENCE_CHECKED.
-- SND-FND-006 — Consonantes: parámetros articulatorios — EVIDENCE_CHECKED.
-- SND-FND-007 — Vocales: parámetros articulatorios — EVIDENCE_CHECKED.
-- SND-FND-008 — Sílaba — EVIDENCE_CHECKED.
-- SND-FND-009 — Fonotáctica — EVIDENCE_CHECKED.
-- SND-FND-011 — Acento y prominencia — EVIDENCE_CHECKED.
-- SND-FND-013 — Tono — EVIDENCE_CHECKED.
-- SND-FND-015 — Entonación — EVIDENCE_CHECKED.
+Los conteos anteriores se refieren a archivos de entrada `SND-*.md` integrados, no a claims o PRs.
 
-### Entradas de representación/perfiles auditadas
+## Fundamentos integrados
 
-- SND-REP-002 — Qué es el AFI/IPA — EVIDENCE_CHECKED.
-- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz — EVIDENCE_CHECKED.
-- SND-ZHTW-007 — Zhuyin/Bopomofo — EVIDENCE_CHECKED.
-- SND-KO-009 — Romanización Revisada del coreano — EVIDENCE_CHECKED.
-- SND-JA-001 — Tokio como ancla de referencia y sus límites — EVIDENCE_CHECKED.
+### LINGUISTIC_REVIEW
 
-## Métricas
+- FND-002 — Fonética y fonología.
+- FND-003 — Fonema, alófono, segmento y realización.
+- FND-004 — Producción del habla y tracto vocal.
+- FND-006 — Consonantes: parámetros articulatorios.
+- FND-007 — Vocales: parámetros.
+- FND-008 — Sílaba.
+- FND-009 — Fonotáctica.
+- FND-010 — Duración y cantidad.
+- FND-011 — Acento y prominencia.
+- FND-013 — Tono.
+- FND-015 — Entonación.
+- FND-017 — Variación.
 
-- 26 fuentes registradas.
-- 143 unidades editoriales candidatas inventariadas.
-- 10 perfiles lingüísticos inicializados.
-- 20 entradas redactadas.
-- 20 entradas en EVIDENCE_CHECKED.
-- 10 entradas fundacionales en LINGUISTIC_REVIEW.
-- 0 entradas todavía en EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
+### Aún no integrados como entrada canónica
 
-## Coordinación paralela
+- FND-001 — wave activa.
+- FND-005 — wave especializada activa; ruta canónica de investigación #7300.
+- FND-012 — wave activa.
+- FND-014 — RESEARCHED en wave activa; fuente Hyman pendiente de canonicalización.
+- FND-016 — wave activa.
+- FND-018 — wave activa.
 
-Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes desde `feat/mls-snd-foundation` y abrir PR hacia esa rama, no hacia `main`.
+## Representación integrada
+
+- REP-002 — EVIDENCE_CHECKED.
+- REP-005 — LINGUISTIC_REVIEW.
+- REP-006 — LINGUISTIC_REVIEW.
+- REP-007 — LINGUISTIC_REVIEW.
+- REP-008 — LINGUISTIC_REVIEW.
+
+REP-001/003/004/009/010/011/012 continúan en waves o inventario.
+
+## Perfiles lingüísticos integrados
+
+### 🇬🇹 es-GT
+- ESGT-001 — EVIDENCE_CHECKED.
+- ESGT-002 — SOURCE_MAPPED.
+- ESGT-005 — EVIDENCE_CHECKED.
+
+Referencia: **REFERENCE_PROVISIONAL**, perfil nacional con variación explícita; Ciudad de Guatemala no sustituye automáticamente al país.
+
+### 🇺🇸 en-US
+- ENUS-001 — EVIDENCE_CHECKED.
+- ENUS-009 — EVIDENCE_CHECKED.
+
+Referencia: **MULTI_REFERENCE**.
+
+### 🇧🇷 pt-BR-rio
+- PTBR-001 — EVIDENCE_CHECKED.
+- PTBR-006 — EVIDENCE_CHECKED.
+
+Referencia: **REFERENCE_PROVISIONAL**.
+
+### 🇮🇹 it
+- IT-001 — EVIDENCE_CHECKED.
+- IT-004 — RESEARCHED.
+- IT-008 — EVIDENCE_CHECKED.
+
+### 🇫🇷 fr
+- FR-001 — EVIDENCE_CHECKED.
+- FR-002 — EVIDENCE_CHECKED.
+- FR-009 — EVIDENCE_CHECKED.
+
+Referencia: **REFERENCE_PROVISIONAL**; ancla metropolitana supralocal/norte de Francia con datos parisinos solo cuando la fuente sea parisina.
+
+### 🇩🇪 de
+- DE-001 — RESEARCHED.
+- DE-007 — EVIDENCE_CHECKED.
+- DE-008 — RESEARCHED.
+
+Referencia: **MULTI_REFERENCE**.
+
+### 🇹🇼 zh-TW
+- ZHTW-001 — EVIDENCE_CHECKED.
+- ZHTW-003 — RESEARCHED_PARTIAL.
+- ZHTW-004 — EVIDENCE_CHECKED para mapa descriptivo básico.
+- ZHTW-005 — EVIDENCE_CHECKED.
+- ZHTW-007 — EVIDENCE_CHECKED.
+- ZHTW-008 — EVIDENCE_CHECKED.
+- ZHTW-009 — DRAFTED.
+- ZHTW-010 — EVIDENCE_CHECKED.
+
+Referencia: **REFERENCE_PROVISIONAL**.
+
+### 🇰🇷 ko
+- KO-001 — EVIDENCE_CHECKED.
+- KO-002 — SOURCE_MAPPED.
+- KO-003 — EVIDENCE_CHECKED.
+- KO-004 — EVIDENCE_CHECKED.
+- KO-005 — RESEARCHED_PARTIAL.
+- KO-006 — EVIDENCE_CHECKED, alcance normativo.
+- KO-007 — EVIDENCE_CHECKED para modelo de referencia.
+- KO-008 — EVIDENCE_CHECKED, alcance normativo.
+- KO-009 — EVIDENCE_CHECKED.
+- KO-010 — EVIDENCE_CHECKED.
+
+Referencia: **REFERENCE_PROVISIONAL**; norma institucional, habla empírica de Seúl y romanización permanecen separadas.
+
+### 🇯🇵 ja
+- JA-001 — EVIDENCE_CHECKED.
+
+Referencia: **REFERENCE_FIXED** solo como ancla prosódica Tokio/lengua común, con límites explícitos.
+
+### 🇷🇺 ru
+- RU-001…RU-008 — EVIDENCE_CHECKED.
+
+Referencia: **REFERENCE_FIXED** para referencia ortoépica literaria, separada de descripción fonética y variación.
+
+## Gates cumplidos
+
+1. **FND-01:** primer bloque fundacional alcanzó EVIDENCE_CHECKED.
+2. **PILOT-SCOPE-01:** es-GT, en-US y pt-BR-rio cuentan con alcance documentado.
+3. **PILOT-PHENOMENA-01:** los tres perfiles piloto cuentan con al menos un fenómeno sustantivo EVIDENCE_CHECKED.
+4. **LINGUISTIC-FOUNDATIONS-01:** 12 fundamentos integrados están actualmente en LINGUISTIC_REVIEW.
+5. **REPRESENTATION-REVIEW-01:** REP-005/006/007/008 están en LINGUISTIC_REVIEW.
 
 ## Próximos gates
 
-1. **GATE CUMPLIDO:** 10 entradas de fundamentos en EVIDENCE_CHECKED;
-2. **GATE CUMPLIDO:** SND-REP-002 y cuatro pilotos lingüísticos auditados;
-3. **GATE CUMPLIDO:** los tres perfiles piloto tienen alcance y al menos un fenómeno sustantivo en EVIDENCE_CHECKED;
-4. ejecutar LINGUISTIC_REVIEW sobre la primera wave;
-5. congelar arquitectura solo después del gate del piloto.
+1. completar y revisar FND-001/005/012/014/016/018;
+2. integrar REP-003/004 y cerrar REP-001/009/010/011/012;
+3. ejecutar LINGUISTIC_REVIEW de perfiles con waves EVIDENCE_CHECKED;
+4. canonicalizar fuentes locales propuestas sin colisiones;
+5. integrar CMP-001 después de source canonicalization;
+6. ejecutar EDITORIAL_REVIEW del primer bloque transversal;
+7. congelar arquitectura solo después de esos gates.
 
+## Regla operativa
 
-## Gate FND-01
-
-**PASS provisional:** 10 entradas fundacionales y 5 entradas de representación/perfiles alcanzaron EVIDENCE_CHECKED. El siguiente paso es ejecutar LINGUISTIC_REVIEW sobre esta wave y avanzar clusters sustantivos de los tres perfiles piloto (es-GT, en-US, pt-BR-rio).
-
-
-### Otras entradas piloto
-
-- SND-REP-002 — Qué es el AFI/IPA — EVIDENCE_CHECKED.
-- SND-ESGT-001 — Alcance y variedades del español de Guatemala — EVIDENCE_CHECKED.
-- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz — EVIDENCE_CHECKED.
-- SND-ZHTW-007 — Zhuyin/Bopomofo — EVIDENCE_CHECKED.
-- SND-KO-009 — Romanización Revisada del coreano — EVIDENCE_CHECKED.
-- SND-JA-001 — Tokio como ancla de referencia y sus límites — EVIDENCE_CHECKED.
-- SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca — EVIDENCE_CHECKED.
-- SND-ESGT-005 — /s/ y variación regional — EVIDENCE_CHECKED.
-- SND-ENUS-009 — Southern Michigan como perfil documentado — EVIDENCE_CHECKED.
-- SND-PTBR-006 — /s/ en coda y variación carioca — EVIDENCE_CHECKED.
-
-
-## Gate PILOT-SCOPE-01
-
-- 🇬🇹 es-GT: EVIDENCE_CHECKED.
-- 🇺🇸 en-US: EVIDENCE_CHECKED.
-- 🇧🇷 pt-BR-rio: EVIDENCE_CHECKED.
-
-**Estado:** PASS — 3/3 perfiles de alcance superan EVIDENCE_CHECKED.
-
-
-## Gate PILOT-PHENOMENA-01
-
-**PASS provisional.** Los tres perfiles piloto ya contienen un segundo nivel de evidencia:
-
-- 🇬🇹 es-GT — SND-ESGT-005: /s/ y variación regional.
-- 🇺🇸 en-US — SND-ENUS-009: Southern Michigan como perfil regional documentado.
-- 🇧🇷 pt-BR-rio — SND-PTBR-006: /s/ en coda en los conjuntos históricos descritos por Callou.
-
-Los tres están en **EVIDENCE_CHECKED**. El perfil carioca conserva advertencia temporal explícita: los porcentajes NURC de décadas de 1970/1990 no se presentan como mediciones actuales.
-
-### Siguiente gate
-
-Ejecutar **LINGUISTIC_REVIEW** independiente o de segunda pasada sobre la primera wave antes de congelar la arquitectura del tomo.
-
-
-## Gate LINGUISTIC-FOUNDATIONS-01
-
-**PASS:** FND-002, 003, 004, 006, 007, 008, 009, 011, 013 y 015 fueron revisadas independientemente y promovidas a LINGUISTIC_REVIEW. Se canonicalizaron las rutas duplicadas de FND-004/006/007. Próximo gate: EDITORIAL_REVIEW.
+Los PRs y ramas pueden cerrarse sin merge administrativo cuando su contenido se reaplica a la matriz por otra wave. Para determinar el estado canónico, **manda el archivo presente en `feat/mls-snd-foundation`**, no el estado histórico del PR.
