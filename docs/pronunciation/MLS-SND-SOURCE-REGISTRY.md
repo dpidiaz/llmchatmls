@@ -106,7 +106,7 @@ La URL sola no constituye por defecto un localizador suficiente para una afirmac
 ### SND-SRC-0004 — American English / Ladefoged
 
 - **Tier:** B
-- **APA 7 canónica para R33:** Ladefoged, P. (1999). American English. En International Phonetic Association (Ed.), *Handbook of the International Phonetic Association: A guide to the use of the International Phonetic Alphabet* (pp. 41–44). Cambridge University Press.
+- **APA 7:** Ladefoged, P. (1999). American English. En International Phonetic Association (Ed.), *Handbook of the International Phonetic Association: A guide to the use of the International Phonetic Alphabet* (pp. 41–44). Cambridge University Press.
 - **URL canónica:** https://www.cambridge.org/core/books/handbook-of-the-international-phonetic-association/illustrations-of-the-ipa/324F06806CCBF10275E6E52989B02404
 - **Antecedente editorial:** la Illustration se originó en el modelo presentado por Ladefoged en 1989 y posteriormente fue incorporada al *Handbook* de 1999. MLS-SND usa la versión de 1999 como referencia canónica porque su procedencia, alcance y contexto son directamente verificables en Cambridge.
 - **Idioma/variedad:** inglés estadounidense; habla de estadounidenses jóvenes educados del Far West y algunas zonas del Midwest; la grabación base corresponde a una hablante de 21 años de Southern California.
@@ -434,6 +434,7 @@ El registro contiene ahora **24 fuentes** con alcance explícito. SND-SRC-0024 p
 
 - **Tier:** A/B — corpus institucional universitario.
 - **Institución:** Projeto NURC-RJ, Faculdade de Letras, Universidade Federal do Rio de Janeiro.
+- **APA 7:** Projeto NURC-RJ. (s. f.). *Projeto NURC-RJ*. Faculdade de Letras, Universidade Federal do Rio de Janeiro. https://nurcrj.letras.ufrj.br/
 - **URL base:** https://nurcrj.letras.ufrj.br/
 - **Idioma/variedad:** portugués de Río de Janeiro; habla culta urbana según los criterios del proyecto y la muestra concreta.
 - **Cobertura:** entrevistas e inquéritos con metadatos de locutor, edad, profesión, zona residencial, fecha, duración y transcripción.
@@ -527,6 +528,7 @@ SND-SRC-0027 se incorpora como control tipológico de la revisión lingüística
 
 - **Tier:** A.
 - **Institución:** National Institute of Korean Language.
+- **APA 7:** National Institute of Korean Language. (s. f.). *표준 발음법* [Standard Pronunciation Rules]. https://www.korean.go.kr/front/page/pageView.do?mn_id=94&page_id=P000097
 - **Título:** *표준 발음법* [Standard Pronunciation Rules].
 - **URL:** https://www.korean.go.kr/front/page/pageView.do?mn_id=94&page_id=P000097
 - **Idioma/variedad:** coreano estándar; norma institucional.
@@ -735,6 +737,7 @@ El registro contiene **48 fuentes** numeradas SND-SRC-0001 a SND-SRC-0048.
 
 - **Tier:** A.
 - **Institución:** United Nations Group of Experts on Geographical Names (UNGEGN).
+- **APA 7:** United Nations Group of Experts on Geographical Names. (s. f.). *Romanization Systems*. United Nations Statistics Division. https://unstats.un.org/unsd/ungegn/romanization/
 - **Título:** *Romanization Systems*.
 - **URL:** https://unstats.un.org/unsd/ungegn/romanization/
 - **Cobertura:** romanización de escrituras no romanas al alfabeto romano; principios y proceso de adopción UNGEGN para nombres geográficos.
@@ -747,6 +750,7 @@ El registro contiene **48 fuentes** numeradas SND-SRC-0001 a SND-SRC-0048.
 
 - **Tier:** A/B técnico-institucional.
 - **Institución:** Unicode Consortium, Common Locale Data Repository.
+- **APA 7:** Unicode Consortium. (s. f.). *Unicode Transliteration Guidelines*. Common Locale Data Repository. https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines
 - **Título:** *Unicode Transliteration Guidelines*.
 - **URL:** https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines
 - **Cobertura:** diseño y uso de transliteradores; conversión entre scripts; reversibilidad y excepciones; distinción respecto de traducción.
