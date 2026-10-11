@@ -1,6 +1,6 @@
 # SND-ZHTW-010 — Variación segmental y contacto
 
-**Estado:** LINGUISTIC_REVIEW para los fenómenos aquí acotados.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin.
 **Dominio:** variación segmental / contacto lingüístico.
@@ -71,3 +71,12 @@ Esta entrada no afirma que todos estos mergers se den en todos los hablantes. Pr
 - **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
 - **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** Los mergers y variantes se mantienen ligados a región, contexto y muestra; la regla editorial impide convertir evidencia variable en correspondencias categóricas Taiwan Mandarin = X.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
+- **Siguiente paso:** aplicar composition readiness a esta misma versión.
