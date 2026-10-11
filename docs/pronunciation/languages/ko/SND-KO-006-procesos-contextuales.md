@@ -17,7 +17,7 @@ La Standard Pronunciation Rule 9 del NIKL prescribe que varios obstruyentes escr
 
 ## 3. Nasalización
 
-La Rule 18 prescribe que obstruyentes finales representados por las series ㄱ/ㄷ/ㅂ se realizan como [ㅇ, ㄴ, ㅁ] respectivamente ante ㄴ o ㅁ. El NIKL identifica explícitamente el proceso como 비음화 (nasalización).
+La Rule 18 prescribe que obstruyentes finales representados por las series ㄱ/ㄷ/ㅂ se realizan mediante las formas que el NIKL representa en Hangul como ㅇ, ㄴ y ㅁ, respectivamente, ante ㄴ o ㅁ. El NIKL identifica explícitamente el proceso como 비음화 (nasalización).
 
 ## 4. Tensificación
 
