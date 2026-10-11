@@ -1,6 +1,6 @@
 # MLS-SND Source Registry
 
-Estado: **registro operativo v0.5**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
+Estado: **registro operativo v0.6**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
 
 ## 1. Objetivo
 
@@ -454,3 +454,24 @@ La expansión reciente añadió:
 - SND-SRC-0026 — Corpus NURC-RJ/UFRJ para datos de habla urbana culta de Río de Janeiro.
 
 La prioridad siguiente sigue siendo **cerrar vacíos**, no aumentar el conteo: evidencia contemporánea carioca, mayor cobertura de inglés estadounidense actual y fuentes prosódicas específicas de Guatemala.
+
+
+## 15. Control tipológico para revisión de fundamentos
+
+### SND-SRC-0027 — Van Soeren 2023 / lexical stress
+
+- **Tier:** B.
+- **APA 7:** Van Soeren, D. P. (2023). The role of word recognition factors and lexical stress in the distribution of consonants in Spanish, English and Dutch. *Journal of Linguistics, 59*(1), 149–177. https://doi.org/10.1017/S0022226722000081
+- **Idioma/variedad:** control comparativo de español, inglés y neerlandés; no es una descripción general de todos los sistemas prosódicos.
+- **Cobertura usada por MLS-SND:** control tipológico para evitar presuponer que toda lengua posee stress léxico del mismo tipo.
+- **Localizador:** §6.1 “Lexical stress and word recognition”, especialmente la afirmación de que stress no aparece en la fonología de palabra de todas las lenguas y que sus funciones/realización varían entre lenguas que sí lo poseen.
+- **Acceso:** abierto en Cambridge Core.
+- **Limitación:** el artículo investiga distribución consonántica y reconocimiento de palabras en tres lenguas; no debe utilizarse como fuente única para una teoría universal del acento.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_FOR_LINGUISTIC_REVIEW.
+
+## 16. Resultado del registro v0.6
+
+El registro contiene **27 fuentes** numeradas SND-SRC-0001 a SND-SRC-0027.
+
+SND-SRC-0027 se incorpora como control tipológico de la revisión lingüística de fundamentos; no reemplaza fuentes prosódicas específicas de cada idioma.
