@@ -15,3 +15,12 @@ Definir el gate entre `EDITORIAL_REVIEW` y `READY_FOR_COMPOSITION` sin cambiar a
 - no imponer reglas de maquetación incompatibles con la modularidad R32;
 - mantener el tomo plenamente funcional como obra escrita;
 - separar readiness editorial de decisiones finales de diseño/composición.
+## Resultado
+
+**Estado:** REVIEW_READY.
+
+- `editorial/composition-readiness.md` — gate PASS/BLOCKED.
+- `editorial/composition-handoff-template.md` — manifiesto obligatorio de handoff.
+- No se promovió ninguna entrada.
+- No se añadió ningún estado de workflow.
+- COMPOSITION queda explícitamente impedido de modificar análisis, claims, IPA o alcance sin rollback.
