@@ -412,3 +412,32 @@ La prioridad de la siguiente ronda no es aumentar el número, sino cerrar estos 
 ## 12. Resultado del registro v0.4
 
 El registro contiene ahora **24 fuentes** con alcance explícito. SND-SRC-0024 permite comenzar la wave de fundamentos sin reutilizar fuentes específicas de idiomas fuera de su alcance.
+
+
+## 13. Expansión del prototipo trilingüe
+
+### SND-SRC-0025 — Español de Guatemala / Utgård 2010
+
+- **Tier:** B.
+- **APA 7:** Utgård, K. (2010). El español de Guatemala. En M. Á. Quesada Pacheco (Ed.), *El español hablado en América Central: Nivel fonético* (pp. 49–82). Iberoamericana/Vervuert. https://doi.org/10.31819/9783865278708-003
+- **Idioma/variedad:** español de Guatemala; estudio geolingüístico nacional.
+- **Cobertura:** fonética segmental, variación regional y propuesta de zonas dialectales.
+- **Metodología relevante:** el estudio reporta 22 localidades y 88 informantes en la versión ampliada; los datos proceden de trabajo de campo del Atlas Fonético/ALAC.
+- **Localizadores:** capítulo pp. 49–82; para claims concretos usar subsección y página exacta.
+- **Acceso:** metadatos y DOI abiertos; existe copia pública de autor de la investigación relacionada.
+- **Limitación:** el diseño privilegia localidades y fonética segmental; no sustituye una descripción prosódica ni un estudio exclusivo de Ciudad de Guatemala.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0026 — Corpus NURC-RJ / UFRJ
+
+- **Tier:** A/B — corpus institucional universitario.
+- **Institución:** Projeto NURC-RJ, Faculdade de Letras, Universidade Federal do Rio de Janeiro.
+- **URL base:** https://nurcrj.letras.ufrj.br/
+- **Idioma/variedad:** portugués de Río de Janeiro; habla culta urbana según los criterios del proyecto y la muestra concreta.
+- **Cobertura:** entrevistas e inquéritos con metadatos de locutor, edad, profesión, zona residencial, fecha, duración y transcripción.
+- **Localizador:** identificador de inquérito + locutor + fecha + fragmento/transcripción.
+- **Acceso:** web institucional; múltiples inquéritos consultables.
+- **Limitación crítica:** un corpus proporciona datos; no convierte automáticamente una observación en generalización fonológica. Toda inferencia requiere análisis y delimitación de muestra.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_AS_CORPUS.
