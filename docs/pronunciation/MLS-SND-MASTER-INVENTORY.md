@@ -229,7 +229,7 @@ Estos capítulos permanecen bloqueados hasta que los perfiles pertinentes supere
 | ID | Salida | Estado |
 |---|---|---|
 | SND-REF-001 | Glosario canónico | IN_PROGRESS |
-| SND-REF-002 | Índice IPA | INVENTORY |
+| SND-REF-002 | Índice IPA | IN_PROGRESS |
 | SND-REF-003 | Índice por fenómeno | INVENTORY |
 | SND-REF-004 | Índice por idioma | INVENTORY |
 | SND-REF-005 | Tabla de romanizaciones/transliteraciones | INVENTORY |
