@@ -160,3 +160,65 @@ Localizador:
 
 Limitación:
 - fenómeno específico; no define por sí solo la estructura silábica ni el inventario de nasales de todo el perfil.
+
+
+### ZHTW-LOCAL-009 — Wan et al. 2024 / fonotáctica corpus
+
+Wan, I.-P., Chang, C.-W., Lee, C., & Yu, P. (2024). Probability distributions of sounds and phonotactics in Taiwan Mandarin syllables. En *Proceedings of the 38th Pacific Asia Conference on Language, Information and Computation* (pp. 1157–1165). Tokyo University of Foreign Studies. https://aclanthology.org/2024.paclic-1.111/
+
+Uso:
+- corpus natural de Taiwan Mandarin;
+- tipos de sílaba de superficie;
+- frecuencia de phones;
+- contrastes aspirado/no aspirado presentados por los autores;
+- fonotáctica probabilística.
+
+Metodología:
+- 202 horas de conversación y otros contextos naturalistas;
+- 2,384,567 ítems léxicos;
+- 6,272,394 tokens;
+- corpus clasificado en 12 tipos de estructura silábica;
+- tono omitido de los cálculos fonotácticos.
+
+Localizadores:
+- abstract y §2 Methodology, pp. 1157–1159;
+- Tables 1–2 y discusión consonantes/vocales, pp. 1159–1160;
+- discusión de 12 tipos silábicos y CGVX, p. 1161;
+- conclusión, pp. 1163–1164.
+
+Limitación:
+- las tablas son phone-frequency/corpus representations y no deben reinterpretarse automáticamente como un inventario fonémico definitivo;
+- el análisis silábico es el adoptado por los autores;
+- no usa tono en la probabilidad fonotáctica.
+
+### ZHTW-LOCAL-010 — Wan & Jaeger 2003 / representación vocálica
+
+Wan, I.-P., & Jaeger, J. J. (2003). The phonological representation of Taiwan Mandarin vowels: A psycholinguistic study. *Journal of East Asian Linguistics, 12*(3), 205–257. https://doi.org/10.1023/A:1023666819363
+
+Uso:
+- evidencia de que análisis vocálicos basados en Beijing Mandarin no se transfieren automáticamente a Taiwan Mandarin;
+- propuesta de un sistema de cinco vocales para Taiwan Mandarin;
+- separación entre evidencia distribucional, fonética y psicolingüística.
+
+Localizador:
+- abstract institucional NCCU;
+- pp. 205–257 para revisión completa.
+
+Limitación:
+- la propuesta de cinco vocales es un análisis de los autores, no una convención universal obligatoria para MLS-SND.
+
+### ZHTW-LOCAL-011 — Ogasawara 2011 / VOT en oclusivas
+
+Ogasawara, N. (2011). Acoustic analysis of voice-onset time in Taiwan Mandarin and Japanese. *Concentric: Studies in Linguistics, 37*(2), 155–178.
+
+Uso:
+- contraste acústico aspirado/no aspirado en oclusivas de Taiwan Mandarin;
+- VOT en habla conectada y sílabas aisladas.
+
+Resultado resumido:
+- oclusivas aspiradas de Taiwan Mandarin: long-lag;
+- oclusivas no aspiradas: short-lag.
+
+Limitación:
+- estudio centrado en VOT y comparación con japonés;
+- no usar como descripción completa del sistema consonántico.
