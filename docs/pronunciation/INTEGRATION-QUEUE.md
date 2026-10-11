@@ -14,11 +14,11 @@ Este archivo registra **decisiones de reconciliación entre chats paralelos**. E
 - Nunca retroceder el estado canónico por copiar un snapshot viejo.
 - Antes de escribir hot files globales, volver a leer su SHA actual.
 
-## Reconciliación vigente — 90 entradas / 79 fuentes
+## Reconciliación vigente — 94 entradas / 79 fuentes
 
-- **Auditoría:** `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`; PASS referencial con advertencia para ZHTW-009 (DRAFTED, sin fuente).
+- **Auditoría base:** `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`; PASS referencial del corte anterior 90/79. Después se integraron IT-002/003/006/007 con fuentes canónicas; el próximo escaneo global debe cubrir 94/79.
 - **Inventario:** 53 filas obsoletas reconciliadas con las entradas físicas en `f9ae21fff78c72d4079f6c4c0e168c0bba75c2f4`.
-- **STATUS.md:** publicado con distribución actual (40 EDITORIAL_REVIEW, 12 LINGUISTIC_REVIEW, 30 EVIDENCE_CHECKED, 8 estados previos).
+- **STATUS.md:** publicado con distribución actual (40 EDITORIAL_REVIEW, 21 LINGUISTIC_REVIEW, 25 EVIDENCE_CHECKED, 8 estados previos).
 - **#7402:** CLOSED_REAPPLIED; FND-002/003/004/006/007/008/009/011/013/015 ya en EDITORIAL_REVIEW; audit y claim preservados.
 - **#7404:** CLOSED_REAPPLIED; ENUS-001/009 ya en EDITORIAL_REVIEW; audit y claim preservados.
 - **#7395:** sigue abierto para escaneo independiente reproducible a SHA fijo; se le comunicó el corte 90/79 y la advertencia ZHTW-009.
@@ -93,11 +93,13 @@ La versión duplicada `SND-CMP-001-comparar-sin-identidad.md` fue retirada despu
 ## Source-ID integrity
 
 - Histórico: 60/60 (v0.7), 79/79 (v0.13); no reutilizar como prueba del corte actual.
-- Corte 90/79: auditoría referencial con **0 IDs duplicados**, **0 fuentes inexistentes** y **1 draft sin source ID** (ZHTW-009).
+- Corte anterior 90/79: auditoría referencial con **0 IDs duplicados**, **0 fuentes inexistentes** y **1 draft sin source ID** (ZHTW-009).
 - El control de localizadores, alcance y licencias por claim sigue pendiente y es distinto del control de identidad de fuentes.
 - Próxima automatización QA: ejecución a SHA fijo, no lectura de rama móvil.
 
 ## Próximo orden de integración
+
+0. ejecutar un nuevo scan global **94/79** a SHA fijo, sin reutilizar el PASS histórico 90/79;
 
 1. ejecutar QA a SHA fijo y completar validación de localizadores por claim;
 2. integrar reviews lingüísticas concluidas que no alteren claims;
