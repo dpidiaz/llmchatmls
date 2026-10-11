@@ -1,50 +1,53 @@
-# MLS-SND — Source check for SND-CMP-001
+# MLS-SND — Auditoría de fuentes de SND-CMP-001
 
-**Date:** 2026-10-11  
-**Entry:** SND-CMP-001 — Cómo comparar sonidos sin asumir identidad  
-**Status:** local evidence checked; canonical Source Registry IDs pending.
+**Fecha:** 2026-10-11  
+**Entrada:** SND-CMP-001 — Cómo comparar sonidos sin asumir identidad  
+**Resultado:** PASS para los claims CMP001-C01…C05 de la versión canónica auditada.
 
-## CMP-PROP-001 — Lee & Iverson 2017
+## Fuentes ya canónicas
 
-Checked against Cambridge Core:
+- SND-SRC-0001 — International Phonetic Association, IPA Chart.
+- SND-SRC-0024 — Anderson et al., *Essentials of Linguistics*.
+- SND-SRC-0051 — Lee & Iverson (2017).
+- SND-SRC-0052 — Cavar et al. (2025).
 
-- authors: Sue Ann S. Lee and Gregory K. Iverson;
-- journal: *Journal of Child Language*;
-- volume 44, issue 6;
-- pages 1485–1515;
-- DOI: https://doi.org/10.1017/S0305000916000659;
-- relevant passage: introduction, discussion of phonetic category formation, explicitly using Spanish and English /p/ as an example of a shared phonemic symbol/category with different VOT values.
+## SND-SRC-0051 — Lee & Iverson 2017
 
-**Result:** supports CMP001-C01 at the narrow methodological scope used in the entry.
+Comprobado contra la ficha/texto de Cambridge Core:
 
-## CMP-PROP-002 — Cavar et al. 2025
+- autores: Sue Ann S. Lee y Gregory K. Iverson;
+- *Journal of Child Language*, 44(6), 1485–1515;
+- DOI: 10.1017/S0305000916000659;
+- la introducción usa español e inglés /p/ como ejemplo de categoría compartida con valores distintos de VOT.
 
-Checked against Cambridge Core:
+**Uso admitido en CMP-001:** control metodológico de que una categoría/símbolo compartido no garantiza una implementación fonética idéntica.
 
-- authors: Malgorzata E. Cavar, Emily M. Rudman, Neha Nagaraj, Lily Peters;
-- journal: *Journal of the International Phonetic Association*;
-- volume 55, issue 1–2;
-- pages 1–34;
-- DOI: https://doi.org/10.1017/S0025100325000040;
-- open access under CC BY 4.0;
-- relevant passage: §1 states that the same IPA symbol /ɨ/ is used for the three language categories for presentation while the study explicitly tests their physical realizations and whether the same/different IPA symbols are warranted;
-- conclusions report articulatory differences across the three languages.
+**No admite:** convertir el artículo en descripción completa de español, inglés estadounidense ni sus variedades.
 
-**Result:** supports CMP001-C02 at the methodological scope used in the entry.
+## SND-SRC-0052 — Cavar et al. 2025
 
-## Existing project sources
+Comprobado contra Cambridge Core:
 
-- SND-SRC-0001 supports the official status and shared descriptive role of the IPA chart.
-- SND-SRC-0024 supports keeping phonetic realization and phonological organization analytically distinct.
+- autores: Malgorzata E. Cavar, Emily M. Rudman, Neha Nagaraj y Lily Peters;
+- *Journal of the International Phonetic Association*, 55(1–2), 1–34;
+- DOI: 10.1017/S0025100325000040;
+- §1 explica el uso de /ɨ/ para facilitar la presentación comparativa y formula explícitamente la pregunta de si las realizaciones físicas justifican símbolos iguales o diferentes;
+- resultados/discusión y conclusiones documentan diferencias articulatorias entre las vocales estudiadas.
 
-## Gate decision
+**Uso admitido en CMP-001:** control metodológico de que una notación amplia compartida puede coexistir con realizaciones físicas distintas.
 
-The prose and two external evidence mappings are sufficiently supported for a draft.
+**No admite:** extrapolar esas realizaciones a otras lenguas que utilicen /ɨ/.
 
-The entry remains **DRAFTED**, not `EVIDENCE_CHECKED`, solely because CMP-PROP-001 and CMP-PROP-002 have not yet been assigned collision-safe canonical `SND-SRC-xxxx` IDs in the shared Source Registry.
+## Reconciliación de waves
 
-After integration assigns canonical IDs:
+- PR #7297 aportó el checklist editorial de comparación, ya presente en la matriz.
+- PR #7294 aportó los dos controles empíricos y la auditoría inicial.
+- La entrada canónica conserva su estructura integrada previa y absorbe únicamente evidencia compatible; no se reemplaza por una segunda versión paralela.
 
-1. replace CMP-PROP-001/002 in the entry;
-2. recheck the claim table against those records;
-3. then the entry is eligible for an R33 `EVIDENCE_CHECKED` gate.
+## Gate
+
+Los cinco claims de la tabla R33 de CMP-001 utilizan IDs canónicos y localizadores congruentes con el alcance declarado.
+
+**Estado canónico:** EVIDENCE_CHECKED.
+
+Aún requiere, como cualquier entrada del tomo, los gates posteriores que correspondan antes de READY_FOR_COMPOSITION.
