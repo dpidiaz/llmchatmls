@@ -3,11 +3,11 @@
 - Tipo: QA reproducible / source integrity.
 - Base: `feat/mls-snd-foundation`.
 - Rama: `snd/source-integrity-96-wave-01`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Objetivo
 
-Reescanear las 96 entradas físicas actuales contra Source Registry v0.18 (79 fuentes canónicas), detectar IDs inexistentes/locales y reconciliar el conteo de estados.
+Reescanear el árbol real contra el Source Registry del mismo SHA. El snapshot avanzó durante la coordinación: resultado efectivo 106 entradas / 91 fuentes.
 
 ## Límites
 
