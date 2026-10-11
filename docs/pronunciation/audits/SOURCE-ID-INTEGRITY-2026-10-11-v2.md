@@ -121,9 +121,11 @@ No se sustituyeron IDs ni se interpretó similitud textual como equivalencia.
 
 Este PASS reemplaza, para este snapshot, el PASS histórico 60/60. No debe proyectarse automáticamente sobre integraciones futuras: cualquier wave que añada/promueva entradas o fuentes requiere nuevo reescaneo.
 
-## 8. Acción recomendada al integrador
+## 8. Seguimiento de integración
 
-1. actualizar `STATUS.md` mediante la wave de reconciliación ya activa;
-2. mantener REP-003/004 como presentes físicamente;
-3. conservar el linter y el source-ID audit como controles separados;
-4. reejecutar el scan tras el siguiente lote grande de integración.
+Después de este snapshot:
+
+1. #7375 fusionó el fix del linter que evita falsos positivos `SND-SRC-* → SND-*-###` y añade `DANGLING_LOCAL_SOURCE_ID`;
+2. #7381 fusionó la reconciliación de `STATUS.md` a 79 entradas / 56 fuentes y marcó REP-003/004 como presentes;
+3. ninguna de esas dos integraciones modifica entradas lingüísticas ni el Source Registry, por lo que el universo 79/56 auditado aquí permanece materialmente igual;
+4. el scan debe repetirse después del siguiente lote que sí añada/promueva entradas o fuentes.
