@@ -127,3 +127,45 @@ jobs:
           path: /tmp/r41-1872-canonical-report.json
           if-no-files-found: warn
           retention-days: 30
+
+
+  canonical-seal-candidate-1872:
+    # This PR-only job cannot publish a package, SYNC or modify production.
+    if: github.event_name == 'pull_request' && github.head_ref == 'audit/r41-1872-seal-candidate'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Extract exact unsealed snapshot into temporary runner directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin '+refs/heads/r41/buffer/1872:refs/remotes/origin/r41-bcr-1872'
+          pin='8c612b789d117c8cfecfd5e835b1227543cda546'
+          test "$(git rev-parse refs/remotes/origin/r41-bcr-1872)" = "$pin"
+          mkdir -p "$RUNNER_TEMP/r41-seal-1872"
+          git archive "$pin" r41-buffer/1872 | tar -xf - -C "$RUNNER_TEMP/r41-seal-1872"
+          test ! -e "$RUNNER_TEMP/r41-seal-1872/r41-buffer/1872/package.json"
+      - name: Execute actual canonical seal and validate portable bundle in temporary checkout
+        shell: bash
+        env:
+          MLS_SEAL_CANDIDATE_OUTPUT: /tmp/r41-1872-seal-candidate.json
+        run: |
+          set -euo pipefail
+          node --check scripts/R4-1-bcr-seal-candidate.cjs
+          node scripts/R4-1-bcr-seal-candidate.cjs . \
+            "$RUNNER_TEMP/r41-seal-1872/r41-buffer/1872"
+          test -s /tmp/r41-1872-seal-candidate.json
+          test "$(git rev-parse refs/remotes/origin/r41-bcr-1872)" = \
+            '8c612b789d117c8cfecfd5e835b1227543cda546'
+      - name: Retain temporary seal candidate for audit, not a publication
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mls-1872-seal-candidate-not-published
+          path: /tmp/r41-1872-seal-candidate.json
+          retention-days: 30
