@@ -1,6 +1,6 @@
 # SND-RU-004 — Consonantes: mapa del sistema descrito
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** consonantes / fonología / fonética.  
 **Alcance:** sistema descrito por SND-SRC-0015.
@@ -66,3 +66,13 @@ Yanushevskaya, I., & Bunčić, D. (2015). Russian. *Journal of the International
 - **Resultado:** PASS WITH TERMINOLOGY CHANGE → `LINGUISTIC_REVIEW`.
 - **Comprobación:** El inventario se atribuye a la fuente y los procesos contextuales se delegan correctamente a RU-007; se desambigua voicing frente a intensidad.
 - **Control:** no se cambiaron source IDs, localizadores ni transcripciones; el cambio terminológico de RU-004 mantiene el mismo contenido analítico.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación, terminología y visibilidad de límites entre descripción, análisis, norma y variación.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.

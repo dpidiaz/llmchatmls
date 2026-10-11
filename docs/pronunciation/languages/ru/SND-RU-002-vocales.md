@@ -1,6 +1,6 @@
 # SND-RU-002 — Vocales: inventario analítico y realizaciones
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** vocales / fonología / fonética.  
 **Alcance:** análisis de Yanushevskaya & Bunčić (2015), con desacuerdos teóricos conservados explícitamente.
@@ -54,9 +54,24 @@ Las transcripciones de esta fuente se interpretan dentro del marco fonológico d
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 
+## Entradas relacionadas
+
+- SND-RU-003 — Reducción vocálica.
+- SND-RU-005 — Palatalización y oposición blanda/dura.
+
 ## Revisión lingüística
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** La entrada conserva el desacuerdo analítico sobre [i]/[ɨ] y no presenta una fonemización discutida como consenso universal.
 - **Control:** no se cambiaron source IDs, localizadores ni transcripciones; el cambio terminológico de RU-004 mantiene el mismo contenido analítico.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación, terminología y visibilidad de límites entre descripción, análisis, norma y variación.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
