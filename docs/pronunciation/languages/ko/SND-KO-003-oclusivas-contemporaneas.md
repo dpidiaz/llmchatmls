@@ -1,6 +1,6 @@
 # SND-KO-003 — Oclusivas y cambio contemporáneo en Seúl
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** coreano.
 **Variedad:** coreano de Seúl.
 **Dominio:** consonantes / fonética acústica / cambio.
@@ -65,7 +65,7 @@ Schweizer, D., Ahn, S., & Kwon, H. (2026). Acoustic properties of Seoul Korean s
 
 ## 8. Gate
 
-EVIDENCE_CHECKED. Falta LINGUISTIC_REVIEW.
+LINGUISTIC_REVIEW completado; esta entrada pasa ahora por EDITORIAL_REVIEW.
 
 
 ## Revisión lingüística 2026-10-11
@@ -74,3 +74,13 @@ EVIDENCE_CHECKED. Falta LINGUISTIC_REVIEW.
 - Source IDs canónicos comprobados.
 - No se detectó extrapolación normativa/descriptiva incompatible con el alcance declarado.
 - Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación conceptual y separación entre norma, habla empírica, hangul, romanización e IPA.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
