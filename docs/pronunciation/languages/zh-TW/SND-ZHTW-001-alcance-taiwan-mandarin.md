@@ -1,6 +1,6 @@
 # SND-ZHTW-001 — Qué entendemos por Taiwan Mandarin
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin; no homogénea.
 **Dominio:** alcance / variación.
@@ -61,3 +61,12 @@ La elección de mantener REFERENCE_PROVISIONAL es una decisión MLS-SND derivada
 - **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
 - **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La entrada declara desde el inicio que Taiwan Mandarin no es homogéneo, separa la evidencia regional de la decisión REFERENCE_PROVISIONAL y hace visibles los límites de generalización.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
+- **Siguiente paso:** aplicar composition readiness a esta misma versión; los blockers explícitos del texto siguen vigentes.
