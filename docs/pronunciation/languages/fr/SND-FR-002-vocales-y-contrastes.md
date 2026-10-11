@@ -51,10 +51,10 @@ El inventario final deberá separar:
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
 | FR002-C01 | Fougeron & Smith describen una joven hablante parisina y sitúan parte de la variación entre variedades en mantenimiento/pérdida de contrastes | SND-SRC-0018 | extracto Cambridge; pp. 73–76 | VERIFIED |
-| FR002-C02 | En los datos parisinos recientes, /e~ɛ/, /o~ɔ/, /ø~œ/ tienen estatus marginal y realizaciones variables | FR-SRC-P02 | abstract/resultados del artículo 2025 | VERIFIED |
-| FR002-C03 | Una descripción contemporánea distingue norma prescriptiva de cuatro vocales nasales y norma hablada supralocal de tres en el alcance discutido | FR-SRC-P03 | sección “Linguistic background” | VERIFIED |
-| FR002-C04 | La fusión frontal nasal se describe como mayoritaria en el norte de Francia dentro de esa literatura | FR-SRC-P03 | “Linguistic background” | VERIFIED |
-| FR002-C05 | Se documenta cambio en curso de las vocales nasales en francés parisino | FR-SRC-P03 | sección “Linguistic background” y análisis del estudio | VERIFIED |
+| FR002-C02 | En los datos parisinos recientes, /e~ɛ/, /o~ɔ/, /ø~œ/ tienen estatus marginal y realizaciones variables | SND-SRC-0040 | abstract/resultados del artículo 2025 | VERIFIED |
+| FR002-C03 | Una descripción contemporánea distingue norma prescriptiva de cuatro vocales nasales y norma hablada supralocal de tres en el alcance discutido | SND-SRC-0041 | sección “Linguistic background” | VERIFIED |
+| FR002-C04 | La fusión frontal nasal se describe como mayoritaria en el norte de Francia dentro de esa literatura | SND-SRC-0041 | “Linguistic background” | VERIFIED |
+| FR002-C05 | Se documenta cambio en curso de las vocales nasales en francés parisino | SND-SRC-0041 | sección “Linguistic background” y análisis del estudio | VERIFIED |
 
 ## 6. Advertencia
 
