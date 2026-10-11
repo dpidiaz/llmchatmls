@@ -118,3 +118,45 @@ Uso:
 
 Limitación:
 - estudio específico de fricativas; no constituye descripción segmental completa.
+
+
+### ZHTW-LOCAL-007 — Zhang 2009 / vocales de Taiwan Mandarin
+
+Zhang, H.-Y. (2009). *An acoustic study on Taiwan Mandarin vowels* [Master’s thesis, National Chengchi University].
+
+Registro institucional: https://thesis.lib.nccu.edu.tw/detail/478653cb3f3c856e303d769153e75e75/
+
+Uso:
+- calidad vocálica acústica en una muestra de Taipei;
+- condicionamiento por elementos de la final silábica;
+- mapa de posibles contrastes y problemas de transcripción.
+
+Muestra:
+- seis hombres hablantes nativos de mandarín nacidos y criados en Taipei;
+- 70 sílabas con combinaciones de segmentos en la final;
+- formas de citación sin consonante inicial.
+
+Localizadores institucionales:
+- resumen y método, registro NCCU;
+- TOC: metodología pp. 25–33; resultados pp. 35–96; conclusiones pp. 97–101.
+
+Limitación:
+- tesis de maestría de 2009, muestra pequeña y exclusivamente masculina de Taipei;
+- no generalizar sus valores acústicos a todo Taiwan Mandarin contemporáneo.
+
+### ZHTW-LOCAL-008 — Chiu & Lu 2021 / nasales finales
+
+Chiu, C., & Lu, Y.-A. (2021). Articulatory evidence for the syllable-final nasal merging in Taiwan Mandarin. *Language and Speech, 64*(4). https://doi.org/10.1177/0023830920948084
+
+Uso:
+- /n/–/ŋ/ en coda;
+- dependencia del merger respecto al contexto vocálico;
+- articulación por ultrasonido;
+- evidencia de merger potencialmente incompleto mediante nasalización de la vocal precedente.
+
+Localizador:
+- abstract del artículo;
+- para claims más finos se requieren páginas/secciones del texto completo.
+
+Limitación:
+- fenómeno específico; no define por sí solo la estructura silábica ni el inventario de nasales de todo el perfil.
