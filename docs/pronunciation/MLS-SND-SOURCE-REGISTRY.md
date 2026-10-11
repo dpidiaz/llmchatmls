@@ -951,3 +951,145 @@ Mapeo de IDs locales resuelto en esta wave:
 - `JA-W3-S04` → `SND-SRC-0062`.
 
 La canonicalización mantiene separados kana, katakana de préstamos, kanji y lecturas; ninguno de estos sistemas se trata como IPA ni como transcripción fonética exhaustiva.
+
+
+## 28. Canonicalización en-US: variación, reducción, corpus y acento
+
+### SND-SRC-0063 — American English / six regional vowel systems
+
+- **Tier:** B.
+- **APA 7:** Clopper, C. G., Pisoni, D. B., & de Jong, K. (2005). Acoustic characteristics of the vowel systems of six regional varieties of American English. *The Journal of the Acoustical Society of America, 118*(3), 1661–1676. https://doi.org/10.1121/1.2000774
+- **Idioma/alcance:** American English; seis regiones de Estados Unidos.
+- **Cobertura:** duración, F1/F2 y variación regional de sistemas vocálicos; 48 hablantes, ocho por región.
+- **Localizadores:** Abstract; §I Introduction; §II.A “Talkers”; resultados/discusión, pp. 1661–1676.
+- **Acceso:** texto completo abierto en PubMed Central (PMCID PMC3432912).
+- **Limitación:** muestra joven y regionalmente balanceada; no agota variación social/étnica/generacional ni autoriza un único inventario nacional.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0064 — American English / schwa, duración y posición acústica
+
+- **Tier:** B.
+- **APA 7:** Cohen Priva, U., & Strand, E. (2023). Schwa’s duration and acoustic position in American English. *Journal of Phonetics, 96*, 101198. https://doi.org/10.1016/j.wocn.2022.101198
+- **Idioma/alcance:** American English; habla espontánea del Buckeye Corpus.
+- **Cobertura:** duración, contexto acústico, schwa, vocales breves, neutralización/asimilación.
+- **Localizadores:** Abstract; Highlights; secciones de métodos/resultados del artículo cuando un claim exceda el resumen.
+- **Acceso:** open access; versión aceptada del autor disponible desde la página del autor.
+- **Limitación:** fenómeno acústico específico; no constituye una teoría completa de reducción vocálica ni una muestra nacional.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0065 — American English / tempo, stress y reducción vocálica
+
+- **Tier:** B.
+- **APA 7:** Fourakis, M. (1991). Tempo, stress, and vowel reduction in American English. *The Journal of the Acoustical Society of America, 90*(4), 1816–1827. https://doi.org/10.1121/1.401662
+- **Idioma/alcance:** American English; experimento controlado con ocho hablantes.
+- **Cobertura:** reducción fonológica/fonética en el marco del estudio; efectos de stress y tempo sobre duración y espacio vocálico.
+- **Localizadores:** Abstract; pp. 1816–1827; para claims finos usar sección/página del texto completo.
+- **Acceso:** metadatos y abstract verificables en PubMed.
+- **Limitación:** estudio experimental de 1991, muestra pequeña y contextos controlados; no generalizar sus magnitudes a toda habla estadounidense.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_ACCESS_WARNING.
+
+### SND-SRC-0066 — Buckeye / artículo metodológico
+
+- **Tier:** B.
+- **APA 7:** Pitt, M. A., Johnson, K., Hume, E., Kiesling, S., & Raymond, W. (2005). The Buckeye corpus of conversational speech: Labeling conventions and a test of transcriber reliability. *Speech Communication, 45*(1), 89–95. https://doi.org/10.1016/j.specom.2004.09.001
+- **Idioma/alcance:** American English; Central Ohio / Columbus.
+- **Cobertura:** diseño del corpus, 40 hablantes, aproximadamente 307,000 palabras, transcripción y etiquetado fonémico.
+- **Localizadores:** Abstract; “Corpus creation”; “Corpus transcription and labeling”; “Corpus availability”.
+- **Acceso:** página del publisher y documentación del Buckeye Corpus.
+- **Limitación:** muestra regional y demográficamente delimitada; no representa automáticamente Estados Unidos.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0067 — Buckeye Corpus of Conversational Speech, 2nd release
+
+- **Tier:** A/B — corpus institucional.
+- **APA 7:** Pitt, M. A., Dilley, L., Johnson, K., Kiesling, S., Raymond, W., Hume, E., & Fosler-Lussier, E. (2007). *Buckeye Corpus of Conversational Speech* (2nd release). Department of Psychology, The Ohio State University. https://buckeyecorpus.osu.edu/
+- **Idioma/alcance:** American English; 40 hablantes de Columbus, Ohio.
+- **Cobertura:** grabaciones de conversación espontánea, transcripción ortográfica, etiquetas fonéticas y alineación temporal.
+- **Localizadores:** sitio oficial “The Buckeye Speech Corpus”; página “Publications”; token/archivo/intervalo cuando se cite un ejemplo de corpus.
+- **Acceso:** gratuito para usos no comerciales sujeto a las condiciones del proyecto.
+- **Limitación:** corpus regional; cada ejemplo debe conservar procedencia y metadatos relevantes.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_CORPUS.
+
+### SND-SRC-0068 — American English / organización temporal regional
+
+- **Tier:** B.
+- **APA 7:** Clopper, C. G., & Smiljanic, R. (2015). Regional variation in temporal organization in American English. *Journal of Phonetics, 49*, 1–15. https://doi.org/10.1016/j.wocn.2014.10.002
+- **Idioma/alcance:** American English; seis dialectos regionales en el diseño del estudio.
+- **Cobertura:** articulation rate, pausas y variabilidad de duración consonántica/vocálica.
+- **Localizadores:** Abstract; Highlights; Discussion/Conclusions; pp. 1–15.
+- **Acceso:** abstract y partes del artículo disponibles en ScienceDirect; material de proyecto también disponible en Ohio State.
+- **Limitación:** las diferencias reportadas pertenecen al diseño/muestra; no convertirlas en estereotipos categóricos regionales.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_ACCESS_WARNING.
+
+### SND-SRC-0069 — American English / prosodia Southern vs. Midland
+
+- **Tier:** B.
+- **APA 7:** Clopper, C. G., & Smiljanic, R. (2011). Effects of gender and regional dialect on prosodic patterns in American English. *Journal of Phonetics, 39*(2), 237–245. https://doi.org/10.1016/j.wocn.2011.02.006
+- **Idioma/alcance:** American English; variedades Southern y Midland, habla leída.
+- **Cobertura:** speaking rate, pausas, pitch accents, tonos de frontera y efectos de género.
+- **Localizadores:** Abstract; §1.0 Introduction; §4.0 Discussion; §5.0 Conclusions; pp. 237–245.
+- **Acceso:** texto completo abierto en PubMed Central (PMCID PMC3113495).
+- **Limitación:** dos regiones y habla leída; no constituye una gramática entonativa nacional.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0070 — American English / manual abierto de fonética y word stress
+
+- **Tier:** B/D — manual universitario abierto.
+- **APA 7:** Broeders, T., & Gussenhoven, C. (s. f.). *An Introduction to American English Phonetics: A Theoretical Guide to American English Pronunciation* (N. Verberkt, Ed.). Radboud University / Open Textbook Platform. https://opentextbooks.rug.nl/americanenglishphonetics2/
+- **Idioma/alcance:** modelo pedagógico de American English; el propio manual utiliza GA como referencia.
+- **Cobertura:** spelling/pronunciation, segmentos y capítulo 3 sobre word stress: homógrafos, derivados, múltiples acentos, compuestos y stress shift.
+- **Localizadores:** tabla de contenidos; cap. 3 “Word stress”; §§3.1–3.8.
+- **Acceso:** gratuito.
+- **Licencia:** CC BY-NC-SA 4.0 indicada por el libro.
+- **Limitación:** recurso pedagógico y variedad-modelo; MLS-SND no adopta GA como pronunciación estadounidense homogénea.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_FOR_PEDAGOGICAL_FRAME.
+
+### SND-SRC-0071 — CMU Pronouncing Dictionary
+
+- **Tier:** A/C — recurso lexicográfico/técnico institucional.
+- **APA 7:** Carnegie Mellon University Speech Group. (s. f.). *CMUdict: Carnegie Mellon Pronouncing Dictionary*. https://github.com/cmusphinx/cmudict
+- **Idioma/alcance:** inglés; pronunciaciones usadas en tecnología del habla, mantenidas por el Speech Group de Carnegie Mellon University.
+- **Cobertura:** entradas léxicas y pronunciaciones en el phoneset CMU/Arpabet.
+- **Localizadores:** README del repositorio; entrada concreta en `cmudict.dict`.
+- **Acceso:** repositorio público; README declara uso irrestricto con reconocimiento de origen.
+- **Limitación:** el propio README advierte errores, omisiones e inconsistencias; no usar como autoridad única para generalizaciones fonológicas.
+- **Verificado:** 2026-10-11 contra `cmusphinx/cmudict` README.
+- **Estado:** ADMITTED_LEXICOGRAPHIC.
+
+### SND-SRC-0072 — cmudict-tools / formato y marcadores de stress
+
+- **Tier:** C/D — documentación técnica complementaria.
+- **APA 7:** Dunn, R. H. (2015–). *CMU Pronunciation Dictionary Tools*. https://github.com/cmusphinx/cmudict-tools
+- **Idioma/alcance:** formato CMUdict y phonesets; configuración en-US.
+- **Cobertura:** formato de entradas, phones, variantes y marcadores de stress vocálico.
+- **Localizador:** README → “CMU Pronunciation Dictionary File Format”: `0` unstressed, `1` primary stress, `2` secondary stress.
+- **Acceso:** repositorio público.
+- **Licencia:** GPL-3.0-or-later según README.
+- **Limitación:** documentación de herramientas/formato, no fuente fonológica general del inglés.
+- **Verificado:** 2026-10-11 contra `cmusphinx/cmudict-tools` README.
+- **Estado:** ADMITTED_TECHNICAL.
+
+## 29. Resultado del registro v0.16
+
+En esta cadena apilada, el registro contiene **72 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0072.
+
+Mapeo local propuesto/resuelto por esta wave:
+
+- `ENUS-CAND-002` → `SND-SRC-0063`;
+- `ENUS-W2-S01` → `SND-SRC-0064`;
+- `ENUS-W2-S02` → `SND-SRC-0065`;
+- `ENUS-CAND-006` → `SND-SRC-0066` (artículo) + `SND-SRC-0067` (corpus), según el claim;
+- `ENUS-CAND-005` → `SND-SRC-0068`;
+- `ENUS-CAND-004` → `SND-SRC-0069`;
+- `ENUS-CAND-008` → `SND-SRC-0070`;
+- `ENUS-CAND-009` → `SND-SRC-0071` (diccionario) + `SND-SRC-0072` (formato/stress markers).
+
+No se canonicalizan en esta wave ENUS-CAND-001/003/007 porque no son necesarios para el núcleo que se integrará a continuación.
