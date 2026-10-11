@@ -334,3 +334,10 @@ After this review was issued, PR #7288 applied the non-global remediations ident
 4. Recover KO-002/003 through a clean current integration path.
 
 **Updated profile verdict:** content-level remediation substantially passed; **global provenance/integration HOLD remains**.
+
+
+## Addendum — KO-005 gate closed
+
+After the original review, an open-access *Phonology* article by Jongho Jun (2015, online 2016) supplied a directly checkable theoretical locator. In the analysis around (13b)–(16), the paper explicitly notes that both onset and nucleus syllabifications of /j/ have been proposed in Korean phonology. PR #7288 therefore narrowed KO005-C02 to that concrete issue, added local source `KO-W1-C10`, and promoted KO-005 to **EVIDENCE_CHECKED**.
+
+Remaining caveat: `KO-W1-C10` still requires canonical global Source Registry integration before matrix merge.
