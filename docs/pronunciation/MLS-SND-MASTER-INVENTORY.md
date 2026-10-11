@@ -67,8 +67,8 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 |---|---|---|
 | SND-ESGT-001 | Alcance y variedades del español de Guatemala | EVIDENCE_CHECKED |
 | SND-ESGT-002 | Inventario segmental: mapa de evidencia | SOURCE_MAPPED |
-| SND-ESGT-003 | Vocales y variación | INVENTORY |
-| SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
+| SND-ESGT-003 | Vocales y variación | DRAFTED |
+| SND-ESGT-004 | Consonantes y realizaciones | DRAFTED |
 | SND-ESGT-005 | /s/ y variación regional | EVIDENCE_CHECKED |
 | SND-ESGT-006 | Róticas | INVENTORY |
 | SND-ESGT-007 | Acento y prominencia | INVENTORY |
@@ -212,7 +212,7 @@ Estos capítulos permanecen bloqueados hasta que los perfiles pertinentes supere
 
 | ID | Entrada candidata | Estado |
 |---|---|---|
-| SND-CMP-001 | Cómo comparar sonidos sin asumir identidad | READY_FOR_EARLY_DRAFT |
+| SND-CMP-001 | Cómo comparar sonidos sin asumir identidad | DRAFTED |
 | SND-CMP-002 | Sistemas vocálicos en perspectiva | BLOCKED_BY_PROFILES |
 | SND-CMP-003 | Sistemas consonánticos en perspectiva | BLOCKED_BY_PROFILES |
 | SND-CMP-004 | Sílaba y fonotáctica | BLOCKED_BY_PROFILES |
