@@ -64,3 +64,16 @@ Machado, L., Moraes, J., Callou, D., & Leite, Y. (2010). Sobre vogais pretônica
 - investigar vocales postónicas;
 - incorporar muestras sociolingüísticas no experimentales y de mayor amplitud;
 - determinar qué generalizaciones pueden promoverse de RIO_SUBSCOPE a RIO_CARIOCA.
+
+
+## 9. Discrepancia interna detectada
+
+El abstract del artículo informa un total de **1344 tokens**, mientras que la sección de metodología indica **1152 ocurrencias analizadas**.
+
+Hasta revisar la contabilidad completa del artículo, MLS-SND:
+
+- no utiliza ninguno de esos totales como claim cuantitativo;
+- conserva ambos localizadores como conflicto interno;
+- mantiene válidos únicamente los claims sobre diseño, hablantes y objetivo que no dependen de ese total.
+
+**Estado del conflicto:** OPEN_QUESTION.
