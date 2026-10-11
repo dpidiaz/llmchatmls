@@ -1,6 +1,6 @@
 # SND-FND-008 — La sílaba
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Dominio:** fonología / organización sonora.
 **Idioma:** transversal.
 
@@ -48,8 +48,8 @@ Cuando una entrada muestre silabificación, deberá indicar si procede de:
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND008-C01 | Las sílabas pueden analizarse en constituyentes como onset, nucleus y coda | SND-SRC-0024 | §3.10 “Syllables” | introductorio/transversal | SOURCED |
-| FND008-C02 | La estructura silábica permite describir patrones de organización sonora | SND-SRC-0024 | §3.10 “Syllables” | introductorio/transversal | SOURCED |
+| FND008-C01 | Las sílabas pueden analizarse en constituyentes como onset, nucleus y coda | SND-SRC-0024 | §3.10 “Syllables” | introductorio/transversal | VERIFIED |
+| FND008-C02 | La estructura silábica permite describir patrones de organización sonora | SND-SRC-0024 | §3.10 “Syllables” | introductorio/transversal | VERIFIED |
 
 ## 6. Relacionado con
 
@@ -63,3 +63,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 8. Nota editorial
 
 La entrada no pretende resolver debates teóricos sobre la representación de la sílaba. Su función es establecer una herramienta de consulta que luego será especializada por idioma.
+
+## R33 audit
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED para los claims listados.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
