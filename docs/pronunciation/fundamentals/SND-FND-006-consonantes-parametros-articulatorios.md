@@ -1,6 +1,6 @@
 # SND-FND-006 — Consonantes: parámetros articulatorios
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** fonética.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -87,3 +87,17 @@ La tríada lugar–modo–fonación/sonoridad sirve como entrada al análisis. L
 - **Lectura:** Lugar, modo y actividad laríngea aparecen en jerarquía clara y la salvaguarda anti-equivalencia está visible antes de la evidencia.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
+
+
+## Composition readiness wave 02
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `091e448acac2bbf76a5b55cf4202df2325598bb0`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** EVIDENCE_CHECKED + LINGUISTIC_REVIEW + EDITORIAL_REVIEW vigentes.
+- **Representación:** No contiene secuencias IPA concretas; usa terminología articulatoria y `voicing` como glosa técnica.
+- **Ejemplos:** No contiene ejemplos lingüísticos materiales.
+- **Navegación:** IDs relacionados verificados.
+- **Autonomía escrita:** PASS; no requiere audio, ejercicios ni evaluación del lector.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** solo estado/metadata de readiness.
