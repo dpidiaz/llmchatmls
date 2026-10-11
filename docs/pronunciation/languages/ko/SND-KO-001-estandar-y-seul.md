@@ -43,9 +43,9 @@ Por eso MLS-SND no copiará una descripción de 1993 y la etiquetará sin más c
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| KO001-C01 | La norma oficial sigue la pronunciación real del estándar, condicionada por tradición y racionalidad | KO-SRC-P01 | Standard Pronunciation Rules, capítulo 1, artículo 1 | VERIFIED |
-| KO001-C02 | La explicación oficial vincula el estándar por principio al habla moderna de Seúl ampliamente usada por hablantes educados | KO-SRC-P01 | comentario al artículo 1 | VERIFIED |
-| KO001-C03 | El coreano de Seúl presenta cambios fonéticos contemporáneos en las pistas de las oclusivas | SND-SRC-0021 + KO-SRC-P02 | JIPA 2026, introducción/abstract; Journal of Phonetics 2018, abstract | VERIFIED |
+| KO001-C01 | La norma oficial sigue la pronunciación real del estándar, condicionada por tradición y racionalidad | SND-SRC-0032 | Standard Pronunciation Rules, capítulo 1, artículo 1 | VERIFIED |
+| KO001-C02 | La explicación oficial vincula el estándar por principio al habla moderna de Seúl ampliamente usada por hablantes educados | SND-SRC-0032 | comentario al artículo 1 | VERIFIED |
+| KO001-C03 | El coreano de Seúl presenta cambios fonéticos contemporáneos en las pistas de las oclusivas | SND-SRC-0021 + SND-SRC-0033 | JIPA 2026, introducción/abstract; Journal of Phonetics 2018, abstract | VERIFIED |
 | KO001-C04 | La romanización oficial se basa en pronunciación estándar pero no refleja todos los detalles fonéticos | SND-SRC-0012 | Basic Principles + Note 2 | VERIFIED |
 
 ## 6. Decisión editorial
