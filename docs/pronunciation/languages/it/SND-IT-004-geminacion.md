@@ -1,9 +1,9 @@
 # SND-IT-004 — Geminación y duración consonántica
 
-**Estado:** RESEARCHED.  
+**Estado:** EVIDENCE_CHECKED.  
 **Idioma:** italiano.  
 **Dominio:** fonética / fonología.  
-**Dependencia:** canonicalización de IT-PROP-001 y revisión lingüística.
+**Dependencia:** canonicalización de SND-SRC-0028 y revisión lingüística.
 
 ## 1. Qué fenómeno se investiga
 
@@ -35,10 +35,10 @@ Esta entrada no decide aún:
 
 | claim_id | afirmación | fuente provisional | localizador | estado |
 |---|---|---|---|---|
-| IT004-C01 | GEMMA contrasta materiales con consonantes simples y geminadas | IT-PROP-001 | Abstract | SOURCED_PENDING_REGISTRY |
-| IT004-C02 | El conjunto incluye medidas de duración para casos singleton vs. geminate | IT-PROP-001 | Abstract / Value of the Data | SOURCED_PENDING_REGISTRY |
-| IT004-C03 | Los datos fueron producidos por seis hablantes adultos de italiano estándar criados y residentes en Roma | IT-PROP-001 | Abstract / Specifications Table | SOURCED_PENDING_REGISTRY |
-| IT004-C04 | La geminación léxica se trata como contraste relevante en italiano | IT-PROP-001 | Value of the Data / descripción del objetivo | SOURCED_PENDING_REGISTRY |
+| IT004-C01 | GEMMA contrasta materiales con consonantes simples y geminadas | SND-SRC-0028 | Abstract | SOURCED_PENDING_REGISTRY |
+| IT004-C02 | El conjunto incluye medidas de duración para casos singleton vs. geminate | SND-SRC-0028 | Abstract / Value of the Data | SOURCED_PENDING_REGISTRY |
+| IT004-C03 | Los datos fueron producidos por seis hablantes adultos de italiano estándar criados y residentes en Roma | SND-SRC-0028 | Abstract / Specifications Table | SOURCED_PENDING_REGISTRY |
+| IT004-C04 | La geminación léxica se trata como contraste relevante en italiano | SND-SRC-0028 | Value of the Data / descripción del objetivo | SOURCED_PENDING_REGISTRY |
 
 ## 6. Fuente provisional
 
@@ -46,4 +46,4 @@ Di Benedetto, M.-G., & De Nardis, L. (2022). The GEMMA speech database: VCV and 
 
 ## 7. Gate
 
-La entrada permanece en **RESEARCHED**, no EVIDENCE_CHECKED global, hasta que la fuente reciba ID canónico en el Source Registry y se revise el mapeo final.
+La fuente ya fue canonicalizada como **SND-SRC-0028**. Los claims citados quedan en **EVIDENCE_CHECKED**; todavía falta LINGUISTIC_REVIEW.
