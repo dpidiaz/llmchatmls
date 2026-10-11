@@ -8,7 +8,9 @@
   "generated_on": "2026-10-11",
   "notes": [
     "No inferred linguistic equivalences.",
-    "Edges are explicit inventory dependencies or policy-backed structural links."
+    "Edges connect editorial/content entries only; evidence-source dependencies stay in the Source Registry and claim tables.",
+    "Edges are explicit inventory dependencies or policy-backed structural links.",
+    "Master Inventory declares 143 units but current tables contain 144 unique entry IDs; discrepancy is documented for integration."
   ],
   "nodes": [
     {
@@ -818,18 +820,6 @@
       "raw": "explicit policy/guide relationship"
     },
     {
-      "from": "SND-REP-002",
-      "to": "SND-SRC-000",
-      "type": "depends_on",
-      "raw": "SND-SRC-0001/0002"
-    },
-    {
-      "from": "SND-REP-002",
-      "to": "SND-SRC-0001",
-      "type": "depends_on",
-      "raw": "SND-SRC-0001/0002"
-    },
-    {
       "from": "SND-REP-003",
       "to": "SND-REP-002",
       "type": "depends_on",
@@ -883,5 +873,12 @@
       "type": "profile_to_representation",
       "raw": "explicit policy/guide relationship"
     }
-  ]
+  ],
+  "audit": {
+    "inventory_declared_count": 143,
+    "inventory_detected_unique_ids": 144,
+    "profile_declared_count": 94,
+    "profile_detected_count": 95,
+    "bad_entry_edges": 0
+  }
 }
