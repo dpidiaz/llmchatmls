@@ -1,6 +1,6 @@
 # SND-JA-001 — Tokio como ancla de referencia y sus límites
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Idioma:** japonés.
 **Variedad:** Tokio / lengua común para el ancla prosódica.
 **Dominio:** variedad / prosodia.
@@ -29,10 +29,10 @@ Los datos principales de SND-SRC-0013 fueron recogidos entre 1982 y 1984. Para a
 
 | claim_id | afirmación | source_id | localizador | estado |
 |---|---|---|---|---|
-| JA001-C01 | El recurso Tokyo Accent registra 12,803 palabras y 19 hablantes | SND-SRC-0013 | descripción principal del recurso | SOURCED |
-| JA001-C02 | La selección y documentación buscan reflejar variación del acento de Tokio | SND-SRC-0013 | descripción/metodología; prólogo pp. 3–10 | SOURCED |
-| JA001-C03 | OJAD adopta información de acento de lengua común/dialecto de Tokio y reconoce variación | SND-SRC-0014 | sección de objetivo/proyecto | SOURCED |
-| JA001-C04 | La investigación base del Tokyo Accent se realizó 1982–1984 | SND-SRC-0013 | descripción principal | SOURCED |
+| JA001-C01 | El recurso Tokyo Accent registra 12,803 palabras y 19 hablantes | SND-SRC-0013 | descripción principal del recurso | VERIFIED |
+| JA001-C02 | La selección y documentación buscan reflejar variación del acento de Tokio | SND-SRC-0013 | descripción/metodología; prólogo pp. 3–10 | VERIFIED |
+| JA001-C03 | OJAD adopta información de acento de lengua común/dialecto de Tokio y reconoce variación | SND-SRC-0014 | NINJAL OJAD: 概要 y プロジェクトの詳細; 共通語（東京方言） y tratamiento explícito de アクセントの揺れ | VERIFIED |
+| JA001-C04 | La investigación base del Tokyo Accent se realizó 1982–1984 | SND-SRC-0013 | descripción principal | VERIFIED |
 
 ## 6. Fuentes
 
@@ -43,3 +43,10 @@ National Institute for Japanese Language and Linguistics. (s. f.). 日本語教�
 ## 7. Nota editorial
 
 REFERENCE_FIXED se limita al papel de ancla prosódica principal; no implica que toda descripción del japonés deba reducirse a Tokio.
+
+## 8. Auditoría R33
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED.
+- **Comprobación:** el recurso Tokyo Accent documenta 12,803 palabras, 19 hablantes y trabajo de campo de 1982–1984; NINJAL/OJAD define la lengua común basada en el dialecto de Tokio como referencia de acento y reconoce explícitamente la existencia de variación.
+- **Límite:** REFERENCE_FIXED se limita al papel de ancla prosódica; no convierte Tokio en descripción universal de todo Japón.
