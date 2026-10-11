@@ -1,6 +1,6 @@
 # SND-ZHTW-007 — Zhuyin/Bopomofo
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** sistema local de anotación / escritura-pronunciación.
 
@@ -33,9 +33,9 @@ La romanización latina se mantiene como decisión editorial separada y aún no 
 
 | claim_id | afirmación | source_id | localizador | estado |
 |---|---|---|---|---|
-| ZHTW007-C01 | El MOE de Taiwán publica un manual de símbolos fonéticos del mandarín | SND-SRC-0011 | portada y datos de publicación de la edición digital 2017 | SOURCED |
-| ZHTW007-C02 | El manual organiza símbolos de onset, rhyme y marcas tonales | SND-SRC-0011 | “1. List of Phonetic Symbols”, apartados a–d | SOURCED |
-| ZHTW007-C03 | El manual incluye una tabla de sílabas de mandarín con Bopomofo | SND-SRC-0011 | “6. Reference Table of Chinese Characters with Mandarin Chinese Syllables” | SOURCED |
+| ZHTW007-C01 | El MOE de Taiwán publica un manual de símbolos fonéticos del mandarín | SND-SRC-0011 | datos editoriales de la edición digital 2017; Ministry of Education | VERIFIED |
+| ZHTW007-C02 | El manual organiza símbolos de onset, rhyme y marcas tonales | SND-SRC-0011 | “1. List of Phonetic Symbols”, apartados a–d: main list, onset, rhyme y tonal marks | VERIFIED |
+| ZHTW007-C03 | El manual incluye una tabla de sílabas de mandarín con Bopomofo | SND-SRC-0011 | “6. Reference Table of Chinese Characters with Mandarin Chinese Syllables”; Reader’s Guide, punto 5 | VERIFIED |
 
 ## 6. Fuente
 
@@ -44,3 +44,10 @@ Ministry of Education, Taiwan. (2017). The Manual of the Phonetic Symbols of Man
 ## 7. Nota editorial
 
 La separación conceptual entre Zhuyin e IPA es una decisión metodológica MLS-SND respaldada por las funciones distintas de ambos sistemas.
+
+## 8. Auditoría R33
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED.
+- **Comprobación:** el manual oficial del MOE identifica Bopomofo, lista onset/rhyme/tonal marks y contiene una tabla de sílabas de mandarín con Bopomofo.
+- **Límite:** la distinción conceptual Zhuyin ≠ IPA es política metodológica MLS-SND; el manual no se usa como descripción fonética completa de Taiwan Mandarin.
