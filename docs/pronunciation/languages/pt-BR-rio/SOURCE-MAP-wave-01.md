@@ -58,3 +58,31 @@ En esta wave:
 - **RIO_CARIOCA** = municipio/comunidad de habla de Río de Janeiro cuando la fuente lo permite;
 - **RIO_SUBSCOPE** = subconjuntos como Copacabana, NURC/culta o FavRio;
 - **FLUMINENSE** = estado de Río de Janeiro fuera o más allá de la capital; no se tratará como sinónimo de RIO_CARIOCA.
+
+
+## PTBR-W01-SRC-06 — Machado et al. (2010), vogais pretônicas cariocas
+
+- **Tier:** B.
+- **Referencia:** Machado, L., Moraes, J., Callou, D., & Leite, Y. (2010). Sobre vogais pretônicas médias no dialeto carioca: vogal derivada versus vogal subjacente. En *Textos Seleccionados do XXV Encontro Nacional da Associação Portuguesa de Linguística* (pp. 499–511).
+- **URL:** https://apl.pt/wp-content/uploads/2017/09/36-Luana-Machado.pdf
+- **Alcance:** experimento acústico con hablantes urbanos jóvenes de Río de Janeiro.
+- **Localizadores usados:** p. 499 (objetivo y resumen), pp. 500–503 (corpus/metodología), p. 504 en adelante (análisis).
+- **Muestra:** 8 estudiantes universitarios, 18–28 años, residentes en área urbana de Río; corpus controlado.
+- **Limitación:** diseño experimental pequeño y controlado; no representa por sí solo el sistema pretónico de toda la ciudad ni cubre vocales postónicas.
+
+## PTBR-W01-SRC-07 — Frota & Moraes (2016), intonación de Río
+
+- **Tier:** B.
+- **Referencia:** Frota, S., & Moraes, J. A. de. (2016). Intonation in European and Brazilian Portuguese. En W. L. Wetzels, J. Costa, & S. Menuzzi (Eds.), *The Handbook of Portuguese Linguistics* (pp. 141–166). Wiley. https://doi.org/10.1002/9781118791844.ch9
+- **Repositorio abierto:** http://hdl.handle.net/10451/25546
+- **Alcance:** comparación Lisboa (PE) / Río de Janeiro (PB); sistema de entonación, agrupamiento, eventos tonales, fronteras y tipos de pregunta.
+- **Localizador usado en esta wave:** registro institucional/abstract y pp. 141–166 para futura revisión del texto completo.
+- **Limitación:** el resumen permite fijar alcance y funciones; los contornos específicos requieren auditoría del capítulo completo.
+
+## PTBR-W01-SRC-08 — Moraes & Rilliard (2018), actos de habla y prosodia
+
+- **Tier:** B.
+- **Referencia:** Moraes, J. A. de, & Rilliard, A. (2018). Describing the intonation of speech acts in Brazilian Portuguese: Methodological aspects. En *Methods in prosody: A Romance language perspective* (pp. 229–262). Language Science Press. https://doi.org/10.5281/zenodo.1441347
+- **Alcance:** actos de habla en portugués brasileño; metodología de resíntesis y pruebas perceptivas.
+- **Localizador:** descripción del registro Zenodo; pp. 229–262 para auditoría fina.
+- **Limitación:** no se usará para atribuir un contorno concreto a “todo PB” sin comprobar el corpus y la variedad del capítulo.
