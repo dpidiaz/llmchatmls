@@ -22,21 +22,21 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 
 ## Snapshot canónico
 
-**Entradas físicas únicas `SND-*.md` presentes en la rama matriz: 77.**
+**Entradas físicas únicas `SND-*.md` presentes en la rama matriz: 79.**
 
-Distribución derivada del Master Inventory para esos 77 IDs:
+Distribución física verificada por `SOURCE-ID-INTEGRITY-02`:
 
-- **26** en `EVIDENCE_CHECKED`;
-- **40** en `LINGUISTIC_REVIEW`;
+- **30** en `EVIDENCE_CHECKED`;
+- **42** en `LINGUISTIC_REVIEW`;
 - **2** en `SOURCE_MAPPED`;
-- **4** en `DRAFTED`;
-- **3** en `RESEARCHED`;
+- **2** en `DRAFTED`;
+- **1** en `RESEARCHED`;
 - **1** en `RESEARCHED_PARTIAL`;
 - **1** en `IN_PROGRESS`;
 - **0** en `EDITORIAL_REVIEW`;
 - **0** en `READY_FOR_COMPOSITION`.
 
-Los conteos se refieren a entradas físicas canónicas, no a claims, notas de investigación o PRs.
+Los conteos se refieren a entradas físicas canónicas, no a claims, notas de investigación o PRs. El audit también verificó **56 fuentes canónicas**, **0 referencias canónicas inexistentes** y **0 IDs de fuente locales en entradas canónicas**.
 
 ## Fundamentos
 
@@ -74,6 +74,8 @@ Entradas canónicas físicas presentes:
 
 - REP-001 — EVIDENCE_CHECKED.
 - REP-002 — LINGUISTIC_REVIEW.
+- REP-003 — EVIDENCE_CHECKED.
+- REP-004 — EVIDENCE_CHECKED.
 - REP-005 — LINGUISTIC_REVIEW.
 - REP-006 — LINGUISTIC_REVIEW.
 - REP-007 — LINGUISTIC_REVIEW.
@@ -83,10 +85,7 @@ Entradas canónicas físicas presentes:
 - REP-011 — EVIDENCE_CHECKED.
 - REP-012 — EVIDENCE_CHECKED.
 
-Aún faltan como entrada canónica física:
-
-- REP-003 — Cómo leer consonantes del IPA.
-- REP-004 — Cómo leer vocales del IPA.
+REP-003/004 ya existen físicamente y están en `EVIDENCE_CHECKED`; el trabajo útil sobre ellos es `LINGUISTIC_REVIEW`, corrección o ampliación compatible.
 
 ## Comparación y referencia
 
@@ -99,11 +98,11 @@ Aún faltan como entrada canónica física:
 ### 🇬🇹 es-GT
 - ESGT-001 — EVIDENCE_CHECKED.
 - ESGT-002 — SOURCE_MAPPED.
-- ESGT-003 — DRAFTED; SND-SRC-0025 + SND-SRC-0053 (contacto, abstract-only).
+- ESGT-003 — EVIDENCE_CHECKED; SND-SRC-0025 + SND-SRC-0053 (contacto, abstract-only).
 - ESGT-004 — DRAFTED; mapa consonántico inicial.
 - ESGT-005 — EVIDENCE_CHECKED.
-- ESGT-009 — RESEARCHED; contacto K’iche’–español, fuentes canonicalizadas.
-- ESGT-010 — RESEARCHED; ortografía/pronunciación, fuentes canonicalizadas.
+- ESGT-009 — EVIDENCE_CHECKED; contacto K’iche’–español, fuentes canonicalizadas.
+- ESGT-010 — EVIDENCE_CHECKED; ortografía/pronunciación, fuentes canonicalizadas.
 
 Referencia: **REFERENCE_PROVISIONAL**; el perfil nacional mantiene variación explícita.
 
@@ -114,7 +113,7 @@ Referencia: **REFERENCE_PROVISIONAL**; el perfil nacional mantiene variación ex
 Referencia: **MULTI_REFERENCE**.
 
 ### 🇧🇷 pt-BR-rio
-- PTBR-001 — DRAFTED.
+- PTBR-001 — EVIDENCE_CHECKED.
 - PTBR-006 — EVIDENCE_CHECKED.
 
 Referencia: **REFERENCE_PROVISIONAL**; mantener PB_BROAD separado de RIO_CARIOCA.
@@ -177,19 +176,26 @@ Referencia: **REFERENCE_FIXED** para referencia ortoépica literaria, separada d
 6. **SOURCE-INTEGRATION-PROTOCOL-01:** protocolo de IDs locales → canonicalización global activo.
 7. **CMP-METHOD-01:** CMP-001 integrado y EVIDENCE_CHECKED.
 8. **REF-IPA-SEED-01:** REF-002 integrado como índice vivo IN_PROGRESS.
+9. **SOURCE-ID-INTEGRITY-02:** PASS 79/79 contra Source Registry v0.13 / 56 fuentes; 0 referencias rotas y 0 IDs locales en entradas canónicas.
 
 ## Source-ID integrity
 
-La auditoría completa histórica `SOURCE-ID-INTEGRITY-01` dio **PASS 60/60** contra Source Registry v0.7.
+La auditoría vigente `SOURCE-ID-INTEGRITY-02` dio **PASS 79/79** sobre el snapshot actual de `feat/mls-snd-foundation`.
 
-Desde entonces la matriz creció a 77 entradas únicas y el registro a v0.13/56 fuentes. Las integraciones promovidas recientes usan IDs canónicos `SND-SRC`, pero el **reescaneo completo 73/73 contra v0.11 queda pendiente** antes de declarar un nuevo PASS global.
+Resultados verificados:
 
-No convertir el PASS histórico 60/60 en una afirmación automática sobre el snapshot actual.
+- **79** entradas físicas únicas;
+- **56** fuentes canónicas en Source Registry v0.13;
+- **0** referencias `SND-SRC-*` inexistentes;
+- **0** IDs de fuente locales/no canónicos dentro de entradas canónicas;
+- **0** entradas promovidas sin referencia canónica.
+
+Este PASS sustituye para el snapshot actual al PASS histórico 60/60. No debe proyectarse automáticamente sobre integraciones futuras: después de cualquier lote que añada/promueva entradas o fuentes debe repetirse el scan.
 
 ## Próximos gates
 
-1. ejecutar el reescaneo completo de integridad 77/77 contra Source Registry v0.13;
-2. integrar/revisar REP-003 y REP-004;
+1. mantener el reescaneo de integridad después de cada lote relevante de integración;
+2. llevar REP-003 y REP-004 desde EVIDENCE_CHECKED a `LINGUISTIC_REVIEW`;
 3. continuar LINGUISTIC_REVIEW de perfiles EVIDENCE_CHECKED y comenzar EDITORIAL_REVIEW de en-US, zh-TW, ru y otros perfiles con PASS lingüístico;
 4. reconciliar waves nuevas de es-GT, fr, it, de, ja y perfiles piloto sin duplicar canónicos;
 5. ejecutar EDITORIAL_REVIEW del primer bloque transversal;
