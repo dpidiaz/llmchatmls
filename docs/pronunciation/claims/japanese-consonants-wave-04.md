@@ -25,8 +25,9 @@ SOURCE_MAPPED / RESEARCHED_PARTIAL salvo que el inventario completo pueda revali
 - SND-SRC-0023 reutilizada como baseline con advertencia de fecha.
 - JA-W04-S01 — NINJAL 2026, /r/ vs /d/ con articulación + CSJ.
 - JA-W04-S02 — NINJAL 2024, alternancias p~h~b en contadores.
+- JA-W04-S03 — manual institucional del CSJ, política y mapa amplio de etiquetado segmental.
 - Source map local creado conforme a #7320.
 
 ## Gate
 
-No se promueve a EVIDENCE_CHECKED: aún falta una descripción segmental amplia y contemporánea que revalide el inventario completo.
+No se promueve a EVIDENCE_CHECKED: el CSJ aporta un mapa segmental amplio de corpus, pero todavía falta una validación fonológica amplia y suficientemente reciente que permita reconciliar el inventario completo sin confundir etiquetas de anotación con categorías fonémicas.
