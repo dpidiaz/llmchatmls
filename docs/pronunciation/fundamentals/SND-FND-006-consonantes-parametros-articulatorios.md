@@ -1,6 +1,6 @@
 # SND-FND-006 — Consonantes: parámetros articulatorios
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonética.
 **Idioma:** transversal.
 **Variedad:** no aplica.
