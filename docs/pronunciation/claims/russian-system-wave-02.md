@@ -4,7 +4,18 @@
 - Área: 🇷🇺 ruso
 - Tipo: redacción + evidence mapping
 - Base: feat/mls-snd-foundation
-- Estado: ACTIVE
+- Estado: COMPLETE
 - Fecha: 2026-10-11
 
-Objetivo: completar el núcleo segmental y procesos contextuales usando SND-SRC-0015 dentro de su alcance declarado. RU-009 no se reclama todavía.
+## Salida
+
+- SND-RU-002 — EVIDENCE_CHECKED.
+- SND-RU-004 — EVIDENCE_CHECKED.
+- SND-RU-007 — EVIDENCE_CHECKED.
+
+## Control
+
+- Se preserva explícitamente el desacuerdo analítico sobre [i]/[ɨ].
+- Los procesos contextuales no se convierten en fonemas por aparecer en transcripción estrecha.
+- No se modifican archivos globales.
+- RU-009 permanece fuera de esta wave.
