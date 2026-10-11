@@ -31,7 +31,7 @@ No todos los modos se explicarán de una sola vez en cada perfil: una lengua sol
 
 La vibración de los pliegues vocales es una dimensión importante de numerosas descripciones consonánticas.
 
-MLS-SND evitará usar “sonoro/sordo” como si fuera la única dimensión laríngea posible. Cuando una lengua requiera categorías adicionales, se describirán según sus propias fuentes.
+MLS-SND evitará usar “sonoro/sordo” como si fuera la única dimensión laríngea posible. Cuando una lengua requiera categorías adicionales, se describirán según sus propias fuentes. También evitará usar “sonoridad” de forma ambigua para referirse a intensidad/loudness.
 
 ## 5. Una descripción no es una equivalencia entre idiomas
 
@@ -62,3 +62,10 @@ La tríada lugar–modo–fonación/sonoridad sirve como entrada al análisis. L
 - **Resultado:** EVIDENCE_CHECKED.
 - **Alcance:** claims introductorios contrastados con §§3.3–3.4 de SND-SRC-0024.
 - **No equivale todavía a:** LINGUISTIC_REVIEW o EDITORIAL_REVIEW.
+
+
+## 9. Linguistic review wave 01
+
+- **Resultado:** PASS tras consolidación de duplicado.
+- **Decisión:** este archivo queda como versión canónica de SND-FND-006.
+- **Control:** se conserva la distinción entre voicing/fonación y se evita confundir “sonoridad” con intensidad.
