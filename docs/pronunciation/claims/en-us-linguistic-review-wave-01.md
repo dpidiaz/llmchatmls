@@ -15,3 +15,11 @@
 - no redactar ENUS-004…008;
 - no promover comparaciones ENUS-010;
 - revisar alcance, evidencia, terminología y generalización regional.
+## Resultado
+
+**Estado:** REVIEW_READY.
+
+- ENUS-001 — LINGUISTIC_REVIEW / PASS.
+- ENUS-009 — LINGUISTIC_REVIEW / PASS.
+
+No se modificó ningún claim R33. Southern Michigan permanece como perfil regional histórico/documentado; no se proyecta la muestra a todo EE. UU. ni al presente.
