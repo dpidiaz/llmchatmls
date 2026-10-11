@@ -1,6 +1,6 @@
 # SND-FND-003 — Fonema, alófono, segmento y realización
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** fonología / fonética.
 **Idioma:** transversal.
 
@@ -84,3 +84,16 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Lectura:** Las cuatro etiquetas se presentan antes del análisis y la advertencia sobre análisis alternativos evita una falsa definición absoluta.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
+
+
+## Composition readiness pilot 01
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `1a09e3c750885e141ea84fe9f2f2b799812d1785`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** EVIDENCE_CHECKED + LINGUISTIC_REVIEW + EDITORIAL_REVIEW vigentes para esta versión.
+- **Representación:** Usa terminología analítica, pero no muestra transcripciones fonéticas/fonológicas concretas que requieran auditoría de símbolos.
+- **Navegación:** referencias cruzadas verificadas contra IDs canónicos existentes.
+- **Autonomía escrita:** PASS; la entrada no requiere audio, ejercicios ni evaluación del lector.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** únicamente estado/metadata de readiness; sin cambios lingüísticos, evidenciales ni de ejemplos.

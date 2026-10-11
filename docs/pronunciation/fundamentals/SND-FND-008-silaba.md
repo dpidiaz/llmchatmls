@@ -1,6 +1,6 @@
 # SND-FND-008 — La sílaba
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** fonología / organización sonora.
 **Idioma:** transversal.
 
@@ -85,3 +85,17 @@ La entrada no pretende resolver debates teóricos sobre la representación de la
 - **Lectura:** La entrada es breve, consultable y explica ataque/núcleo/coda sin convertirlos en plantilla universal.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
+
+
+## Composition readiness wave 02
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `e6aaa128cb709f836b77a955b3d968c428aeceae`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** EVIDENCE_CHECKED + LINGUISTIC_REVIEW + EDITORIAL_REVIEW vigentes.
+- **Representación:** No contiene transcripción IPA material; usa etiquetas de estructura silábica.
+- **Ejemplos:** Dos blockquotes son ilustraciones metalingüísticas de formulación editorial, no SOURCE_EXAMPLE/CORPUS_EXAMPLE ni evidencia.
+- **Navegación:** IDs relacionados verificados.
+- **Autonomía escrita:** PASS; no requiere audio, ejercicios ni evaluación del lector.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** solo estado/metadata de readiness.
