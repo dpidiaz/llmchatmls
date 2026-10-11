@@ -29,8 +29,8 @@ La entrada no fijará una melodía única como invariable. Estudios recientes mu
 
 | claim_id | afirmación | source | localizador | estado |
 |---|---|---|---|---|
-| KO007-C01 | Jun propone la Accentual Phrase como unidad prosódica relevante de Korean/Seoul Korean | KO-W1-C08 | pp. 189–226; descripción del modelo | VERIFIED |
-| KO007-C02 | Trabajos contemporáneos describen Seoul Korean mediante APs tonales y prominencia de borde/fraseo | KO-W1-C09 | introducción/overview del sistema prosódico | VERIFIED |
+| KO007-C01 | Jun propone la Accentual Phrase como unidad prosódica relevante de Korean/Seoul Korean | SND-SRC-0037 | pp. 189–226; descripción del modelo | VERIFIED |
+| KO007-C02 | Trabajos contemporáneos describen Seoul Korean mediante APs tonales y prominencia de borde/fraseo | SND-SRC-0038 | introducción/overview del sistema prosódico | VERIFIED |
 | KO007-C03 | La F0 posterior a oclusivas participa en la diferenciación de categorías y su implementación varía según la posición prosódica en Seoul Korean | SND-SRC-0021 | Abstract; §1.1; Current study | VERIFIED |
 
 ## 6. Límite
