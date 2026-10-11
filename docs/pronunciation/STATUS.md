@@ -74,8 +74,8 @@ Entradas canónicas físicas presentes:
 
 - REP-001 — EVIDENCE_CHECKED.
 - REP-002 — LINGUISTIC_REVIEW.
-- REP-003 — SOURCE_MAPPED.
-- REP-004 — SOURCE_MAPPED.
+- REP-003 — EVIDENCE_CHECKED.
+- REP-004 — EVIDENCE_CHECKED.
 - REP-005 — LINGUISTIC_REVIEW.
 - REP-006 — LINGUISTIC_REVIEW.
 - REP-007 — LINGUISTIC_REVIEW.
@@ -85,7 +85,7 @@ Entradas canónicas físicas presentes:
 - REP-011 — EVIDENCE_CHECKED.
 - REP-012 — EVIDENCE_CHECKED.
 
-REP-003/004 ya existen físicamente en la matriz; cualquier wave abierta sobre ellos debe tratarse como revisión o ampliación compatible, no como creación del canónico faltante.
+REP-003/004 ya existen físicamente y están en `EVIDENCE_CHECKED`; el trabajo útil sobre ellos es `LINGUISTIC_REVIEW`, corrección o ampliación compatible.
 
 ## Comparación y referencia
 
@@ -98,11 +98,11 @@ REP-003/004 ya existen físicamente en la matriz; cualquier wave abierta sobre e
 ### 🇬🇹 es-GT
 - ESGT-001 — EVIDENCE_CHECKED.
 - ESGT-002 — SOURCE_MAPPED.
-- ESGT-003 — DRAFTED; SND-SRC-0025 + SND-SRC-0053 (contacto, abstract-only).
+- ESGT-003 — EVIDENCE_CHECKED; SND-SRC-0025 + SND-SRC-0053 (contacto, abstract-only).
 - ESGT-004 — DRAFTED; mapa consonántico inicial.
 - ESGT-005 — EVIDENCE_CHECKED.
-- ESGT-009 — RESEARCHED; contacto K’iche’–español, fuentes canonicalizadas.
-- ESGT-010 — RESEARCHED; ortografía/pronunciación, fuentes canonicalizadas.
+- ESGT-009 — EVIDENCE_CHECKED; contacto K’iche’–español, fuentes canonicalizadas.
+- ESGT-010 — EVIDENCE_CHECKED; ortografía/pronunciación, fuentes canonicalizadas.
 
 Referencia: **REFERENCE_PROVISIONAL**; el perfil nacional mantiene variación explícita.
 
@@ -113,7 +113,7 @@ Referencia: **REFERENCE_PROVISIONAL**; el perfil nacional mantiene variación ex
 Referencia: **MULTI_REFERENCE**.
 
 ### 🇧🇷 pt-BR-rio
-- PTBR-001 — DRAFTED.
+- PTBR-001 — EVIDENCE_CHECKED.
 - PTBR-006 — EVIDENCE_CHECKED.
 
 Referencia: **REFERENCE_PROVISIONAL**; mantener PB_BROAD separado de RIO_CARIOCA.
@@ -195,7 +195,7 @@ Este PASS sustituye para el snapshot actual al PASS histórico 60/60. No debe pr
 ## Próximos gates
 
 1. mantener el reescaneo de integridad después de cada lote relevante de integración;
-2. llevar REP-003 y REP-004 desde SOURCE_MAPPED a revisión lingüística cuando su evidencia lo permita;
+2. llevar REP-003 y REP-004 desde EVIDENCE_CHECKED a `LINGUISTIC_REVIEW`;
 3. continuar LINGUISTIC_REVIEW de perfiles EVIDENCE_CHECKED y comenzar EDITORIAL_REVIEW de en-US, zh-TW, ru y otros perfiles con PASS lingüístico;
 4. reconciliar waves nuevas de es-GT, fr, it, de, ja y perfiles piloto sin duplicar canónicos;
 5. ejecutar EDITORIAL_REVIEW del primer bloque transversal;
