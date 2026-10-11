@@ -47,3 +47,8 @@ El tomo será explicativo y de consulta. No contendrá ejercicios, pruebas, exá
 5. Aparato de consulta.
 
 Los capítulos comparativos deben redactarse después de validar suficientemente los perfiles lingüísticos, para evitar generalizaciones prematuras.
+
+
+## Coordinación paralela
+
+- `COORDINATION.md`: protocolo para que múltiples chats trabajen en ramas independientes y se coordinen mediante GitHub.
