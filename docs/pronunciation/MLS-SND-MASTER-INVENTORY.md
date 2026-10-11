@@ -186,8 +186,8 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-JA-003 | Vocales y duración | SOURCE_MAPPED |
 | SND-JA-004 | Consonantes | SOURCE_MAPPED |
 | SND-JA-005 | Estructura moraica/silábica | INVENTORY |
-| SND-JA-006 | Acento tonal de Tokio | SOURCE_MAPPED |
-| SND-JA-007 | Variación y cambio acentual | SOURCE_MAPPED |
+| SND-JA-006 | Acento tonal de Tokio | LINGUISTIC_REVIEW |
+| SND-JA-007 | Variación y cambio acentual | LINGUISTIC_REVIEW |
 | SND-JA-008 | Kana y pronunciación | LINGUISTIC_REVIEW |
 | SND-JA-009 | Kanji, lecturas y pronunciación | LINGUISTIC_REVIEW |
 | SND-JA-010 | Romanización | REFERENCE_OPEN |
