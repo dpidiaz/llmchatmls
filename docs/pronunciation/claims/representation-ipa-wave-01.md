@@ -1,0 +1,10 @@
+# MLS-SND claim — representation-ipa-wave-01
+
+- IDs: SND-REP-003, SND-REP-004, SND-REP-005, SND-REP-006, SND-REP-007, SND-REP-008
+- Área: representación y transcripción IPA
+- Tipo: investigación + redacción + auditoría R33
+- Base: feat/mls-snd-foundation
+- Estado: ACTIVE
+- Fecha: 2026-10-11
+
+No editar perfiles lingüísticos ni IDs reclamados por otros chats.
