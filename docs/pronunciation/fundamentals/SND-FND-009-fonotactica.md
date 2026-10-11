@@ -1,12 +1,12 @@
 # SND-FND-009 — Fonotáctica
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** fonología.
 **Idioma:** transversal.
 
 ## 1. Qué entendemos por fonotáctica
 
-En MLS-SND, **fonotáctica** se refiere a los patrones y restricciones que condicionan qué secuencias o posiciones son posibles o habituales dentro de una lengua o variedad.
+En MLS-SND, **fonotáctica** se refiere a los patrones y restricciones que condicionan qué secuencias o posiciones están permitidas o cómo se distribuyen dentro de una lengua o variedad. La frecuencia de una secuencia puede estudiarse además como gradiencia o probabilidad fonotáctica, pero no se confundirá automáticamente con una restricción categórica.
 
 No se presentará como una lista universal de combinaciones permitidas.
 
@@ -59,3 +59,10 @@ Las restricciones concretas pertenecen a los perfiles por idioma; esta entrada s
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## 9. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS WITH CHANGE → `LINGUISTIC_REVIEW`.
+- **Ajuste:** se retiró “habituales” de la definición básica para no confundir restricciones fonotácticas con mera frecuencia de uso; la gradiencia queda como fenómeno adicional cuando una fuente la documente.
+- **Límite:** ninguna restricción concreta se generaliza entre idiomas.
