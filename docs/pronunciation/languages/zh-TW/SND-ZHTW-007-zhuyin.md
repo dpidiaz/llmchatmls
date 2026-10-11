@@ -1,6 +1,6 @@
 # SND-ZHTW-007 — Zhuyin/Bopomofo
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** sistema local de anotación / escritura-pronunciación.
 
