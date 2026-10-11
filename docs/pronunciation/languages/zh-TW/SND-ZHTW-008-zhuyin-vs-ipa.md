@@ -1,6 +1,6 @@
 # SND-ZHTW-008 — Zhuyin e IPA: funciones distintas
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** mandarín de Taiwán.  
 **Dominio:** representación / pronunciación.
 
@@ -87,3 +87,12 @@ La secuencia visual es una decisión MLS-SND. La evidencia respalda las funcione
 - **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
 - **Corrección bibliográfica:** Fon & Chuang se alinea a 2024 conforme a SND-SRC-0022; la fecha de publicación web puede ser posterior.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La estructura por capas deja claro qué hace Zhuyin y qué hace IPA, y la sección de tonos evita inferir una realización acústica fija desde una convención gráfica.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
+- **Siguiente paso:** aplicar composition readiness a esta misma versión.
