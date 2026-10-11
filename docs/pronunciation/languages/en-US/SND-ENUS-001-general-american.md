@@ -1,6 +1,6 @@
 # SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** inglés.
 **Variedad:** Estados Unidos; alcance multirreferencia.
 **Dominio:** variación / política descriptiva.
@@ -55,3 +55,11 @@ La elección MULTI_REFERENCE es una decisión de MLS-SND construida a partir de 
 - **Resultado:** EVIDENCE_CHECKED.
 - **Comprobación:** el extracto de Hillenbrand confirma explícitamente la diversidad fonética norteamericana, cuestiona la utilidad de “General American English” como etiqueta plenamente significativa y declara que su perfil de Southern Michigan amplía la descripción previa de Ladefoged. Para procedencia canónica, MLS-SND usa la versión de Ladefoged incorporada al *Handbook* de 1999 (pp. 41–44); la historia editorial de JIPA documenta el antecedente de 1989.
 - **Límite:** MULTI_REFERENCE es una decisión editorial MLS-SND, no una categoría de Hillenbrand.
+
+## Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** alcance regional/histórico, límites de muestra, relación con Ladefoged y control de generalización nacional.
+- **Cambios de claims:** ninguno.
+- **Siguiente gate:** EDITORIAL_REVIEW.
