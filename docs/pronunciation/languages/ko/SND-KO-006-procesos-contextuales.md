@@ -1,6 +1,6 @@
 # SND-KO-006 — Procesos contextuales: norma y descripción
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** coreano  
 **Variedad:** pronunciación estándar normativa  
 **Dominio:** pronunciación / fonología
@@ -48,3 +48,13 @@ Añadir evidencia de corpus sobre frecuencia, variación y condicionamiento de e
 - Source IDs canónicos y localizadores revisados.
 - Se mantuvo la separación entre norma, descripción empírica y modelo analítico.
 - Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación conceptual y separación entre norma, habla empírica, hangul, romanización e IPA.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
