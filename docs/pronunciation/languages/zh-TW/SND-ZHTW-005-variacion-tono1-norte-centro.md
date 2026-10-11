@@ -1,6 +1,6 @@
 # SND-ZHTW-005 — Variación de Tone 1 entre norte y centro
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** mandarín.
 **Variedad:** norte y centro de Taiwán.
 **Dominio:** variación tonal / fonética.
@@ -58,3 +58,12 @@ Este estudio trata Tone 1; no debe extrapolarse automáticamente a los otros ton
 - **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
 - **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La pregunta inicial, la muestra y la regla anti-simplificación hacen legible el hallazgo sin convertir la variación regional condicionada en una regla categórica.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
+- **Siguiente paso:** aplicar composition readiness a esta misma versión; los blockers explícitos del texto siguen vigentes.
