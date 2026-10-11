@@ -18,3 +18,13 @@
 - no automatic source-ID substitution;
 - no promotion of editorial/linguistic states;
 - no merge of active worker branches.
+## Resultado
+
+**Estado:** REVIEW_READY.
+
+- SOURCE-ID-INTEGRITY-02: **PASS 79/79**.
+- Source Registry: 56 fuentes canónicas.
+- Referencias SND-SRC inexistentes: 0.
+- IDs locales en entradas: 0.
+- Entradas promovidas sin fuente canónica: 0.
+- Drift detectado en STATUS: declara 77, snapshot físico = 79; REP-003/004 ya existen.
