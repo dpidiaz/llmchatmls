@@ -77,23 +77,23 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y cuatro
 
 ## JA-W04-S04 — Kubozono (2015), broad phonetics/phonology overview
 
-- **Estado de verificación:** HOLD_FULLTEXT.
+- **Estado de verificación:** VERIFIED_FULLTEXT_SECTION_PENDING_CANONICALIZATION.
 - **Tier candidato:** B — handbook académico de referencia.
 - **APA 7:** Kubozono, H. (2015). Introduction to Japanese phonetics and phonology. In H. Kubozono (Ed.), *Handbook of Japanese Phonetics and Phonology* (pp. 1–40). De Gruyter Mouton. https://doi.org/10.1515/9781614511984.1
 - **Metadatos verificados en:** De Gruyter y base bibliográfica NINJAL.
 - **Fenómeno cubierto:** panorama general; la ficha NINJAL enumera explícitamente §3 “Consonant inventory”.
-- **Localizador disponible actualmente:** capítulo pp. 1–40; §3 “Consonant inventory”.
-- **Acceso comprobado en esta wave:** metadatos/tabla de contenidos, no texto completo de §3.
-- **Limitaciones:** no se usa todavía para afirmar detalles del inventario ni para promover claims. Requiere inspección del texto completo y localizadores internos antes de pasar a VERIFIED.
-- **Entradas / claims:** candidato para SND-JA-004; **ningún claim R33 depende todavía de esta fuente**.
-- **access_status:** RESTRICTED para el texto completo / metadatos FREE_TO_READ.
+- **Localizadores verificados:** pp. impresas 6–9, §3 “Consonant inventory”; §3.1 “Phonemes and allophones”; Tabla 1; §3.2; inicio de §3.3.
+- **Acceso comprobado en esta wave:** preview PDF oficial con texto completo de la sección consonántica usada; páginas verificadas visualmente.
+- **Limitaciones:** la Tabla 1 es un baseline fonémico de referencia adaptado de Shibatani (1990); el propio capítulo muestra mayor complejidad alofónica y por estratos léxicos. No tratarla como inventario superficial exhaustivo.
+- **Entradas / claims:** SND-JA-004; JA004-C10–C12.
+- **access_status:** FREE_TO_READ para el preview PDF verificado; acceso total al libro no asumido.
 - **license:** UNKNOWN.
-- **fulltext_verified:** no.
-- **evidence_surface:** METADATA.
+- **fulltext_verified:** yes para pp. impresas 6–9 usadas en esta wave.
+- **evidence_surface:** FULLTEXT_PDF_PREVIEW.
 - **reuse_status:** UNKNOWN.
 - **derivative_allowed:** unknown.
 - **redistribution_allowed:** unknown.
-- **Verificado:** 2026-10-11 (metadatos solamente).
+- **Verificado:** 2026-10-11 (preview PDF oficial, pp. impresas 6–9 revisadas visualmente).
 
 ## Integración
 
@@ -102,4 +102,5 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y cuatro
 - mantener SND-SRC-0023 con su advertencia de fecha;
 - re-auditar JA-004 después de cualquier canonicalización;
 - no promover el inventario completo por el solo hecho de resolver IDs bibliográficos;
+- JA-W04-S04 ya no está en HOLD_FULLTEXT; la deuda restante es canonicalización + revisión lingüística;
 - esta wave es una clean reapply de #7347 sobre la matriz viva.
