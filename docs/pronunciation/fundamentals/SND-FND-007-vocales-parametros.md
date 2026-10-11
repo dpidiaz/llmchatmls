@@ -15,7 +15,7 @@ Entre los parámetros comunes para describir calidad vocálica se encuentran:
 - anterioridad/posterioridad;
 - redondeamiento de los labios.
 
-Otros rasgos —por ejemplo duración, nasalidad o calidad dinámica— se añadirán cuando la lengua y la evidencia los hagan pertinentes.
+Otros rasgos —por ejemplo duración, nasalidad, propiedades de raíz lingual o calidad dinámica— se añadirán cuando la lengua y la evidencia los hagan pertinentes. El espacio vocálico se tratará como continuo; las etiquetas son categorías descriptivas, no coordenadas anatómicas rígidas.
 
 ## 2. Altura
 
@@ -56,6 +56,7 @@ No usará el diagrama IPA como sustituto de una descripción por variedad.
 | FND007-C03 | La anterioridad/posterioridad corresponde a la posición horizontal de la lengua | SND-SRC-0024 | §3.5, “Backness” | introductorio/transversal | VERIFIED |
 | FND007-C04 | El redondeamiento labial contribuye a la calidad vocálica | SND-SRC-0024 | §3.5, “Rounding” | introductorio/transversal | VERIFIED |
 | FND007-C05 | Algunas vocales mantienen calidad relativamente estable y otras cambian durante su articulación | SND-SRC-0024 | §3.5, “Multiple vowel qualities in sequence” | introductorio/transversal | VERIFIED |
+| FND007-C06 | La fuente también documenta nasalidad y longitud como dimensiones posibles de descripción vocálica | SND-SRC-0024 | §3.5, “Nasality” y “Length” | introductorio/transversal | VERIFIED |
 
 ## 8. Relacionado con
 
@@ -72,3 +73,10 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **Límite:** cualquier inventario, valor fonémico, distribución o comparación concreta requerirá fuentes específicas del idioma/variedad.
+
+
+## 11. Linguistic review wave 01
+
+- **Resultado:** PASS tras consolidación de duplicado.
+- **Decisión:** este archivo queda como versión canónica de SND-FND-007.
+- **Control:** se incorporan explícitamente continuidad del espacio vocálico, nasalidad y duración sin convertirlas en contrastes universales.
