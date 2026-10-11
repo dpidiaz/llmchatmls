@@ -4,7 +4,15 @@
 - Área: romanización y transliteración
 - Tipo: investigación + redacción provisional
 - Base: feat/mls-snd-foundation
-- Estado: ACTIVE
+- Estado: COMPLETE
 - Fecha: 2026-10-11
 
-Fuentes generales nuevas se mantendrán como propuestas locales hasta canonicalización global.
+## Salida
+
+- SND-REP-010 — RESEARCHED.
+- SND-REP-011 — RESEARCHED.
+- `representation/SOURCES-PROPOSED.md` creado con REP-PROP-001 (UNGEGN) y REP-PROP-002 (Unicode CLDR).
+
+## Gate pendiente
+
+Canonicalizar las fuentes propuestas y volver a auditar antes de promover a EVIDENCE_CHECKED.
