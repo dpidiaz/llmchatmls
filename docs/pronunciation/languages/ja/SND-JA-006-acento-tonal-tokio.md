@@ -1,6 +1,7 @@
 # SND-JA-006 — Acento tonal de Tokio como referencia
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** japonés.  
+**Estado:** LINGUISTIC_REVIEW.
+**Idioma:** japonés.  
 **Variedad:** lengua común / dialecto de Tokio como ancla prosódica.  
 **Dominio:** prosodia / acento.
 
@@ -73,7 +74,7 @@ National Institute for Japanese Language and Linguistics. (s. f.). *日本語教
 
 ## 9. Nota de auditoría
 
-Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional vigente de NINJAL. Falta LINGUISTIC_REVIEW y EDITORIAL_REVIEW.
+Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional vigente de NINJAL. La revisión lingüística independiente ya obtuvo PASS_WITH_NOTE; permanece pendiente EDITORIAL_REVIEW.
 
 
 ## Revisión lingüística wave 04
