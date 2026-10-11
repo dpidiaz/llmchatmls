@@ -65,7 +65,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ESGT-001 | Alcance y variedades del español de Guatemala | SOURCE_MAPPED |
+| SND-ESGT-001 | Alcance y variedades del español de Guatemala | EVIDENCE_CHECKED |
 | SND-ESGT-002 | Inventario segmental: mapa de evidencia | INVENTORY |
 | SND-ESGT-003 | Vocales y variación | INVENTORY |
 | SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
@@ -95,7 +95,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-PTBR-001 | PB amplio vs. habla carioca | SOURCE_MAPPED |
+| SND-PTBR-001 | PB amplio vs. habla carioca | DRAFTED |
 | SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
