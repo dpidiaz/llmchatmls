@@ -1,7 +1,6 @@
 # SND-IT-005 — Acento léxico
 
-**Estado:** EVIDENCE_CHECKED.  
-**Idioma:** italiano.  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
 **Dominio:** prosodia / fonología / fonética.  
 **Tipo de alcance:** REFERENCE_VARIETY / BROADLY_DISTRIBUTED con límites explícitos.  
 **Nivel de representación:** fonológico / fonético / ortográfico.  
