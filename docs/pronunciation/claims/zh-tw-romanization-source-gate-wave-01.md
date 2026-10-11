@@ -4,7 +4,7 @@
 - Tipo: source mapping + R33 gate prep.
 - Rama: `snd/zh-tw-romanization-source-gate-wave-01`.
 - Base: `feat/mls-snd-foundation`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Objetivo
 
