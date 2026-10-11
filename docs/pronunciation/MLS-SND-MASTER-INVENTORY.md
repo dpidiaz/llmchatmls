@@ -36,7 +36,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-FND-011 | Acento y prominencia | terminología | EDITORIAL_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | EVIDENCE_CHECKED |
 | SND-FND-013 | Tono | terminología | EDITORIAL_REVIEW |
-| SND-FND-014 | Acento tonal | FND-011, FND-013 | EVIDENCE_CHECKED |
+| SND-FND-014 | Acento tonal | FND-011, FND-013 | LINGUISTIC_REVIEW |
 | SND-FND-015 | Entonación | terminología | EDITORIAL_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | EVIDENCE_CHECKED |
 | SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
