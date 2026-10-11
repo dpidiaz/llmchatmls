@@ -1,6 +1,6 @@
 # SND-FND-009 — Fonotáctica
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** fonología.
 **Idioma:** transversal.
 
@@ -75,3 +75,17 @@ Las restricciones concretas pertenecen a los perfiles por idioma; esta entrada s
 - **Lectura:** la definición, la relación con la sílaba y la advertencia ortográfica forman una secuencia breve y fácil de consultar; la distinción entre restricción y gradiencia permanece visible.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` solo después de comprobar política final de composición/metadatos y ausencia de cambios sustantivos posteriores.
+
+
+## Composition readiness wave 03
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `1949bfff2720e1bff88bc0ef48bf50465538082b`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** gates evidencial, lingüístico y editorial vigentes para esta versión.
+- **Fuentes:** SND-SRC-0024.
+- **Navegación:** IDs relacionados verificados/reservados canónicamente.
+- **Representación:** no hay notación no identificada ni transcripciones materiales pendientes.
+- **Autonomía escrita:** PASS.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** solo estado/metadata de readiness.
