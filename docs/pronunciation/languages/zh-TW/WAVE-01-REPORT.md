@@ -58,6 +58,9 @@ No fusionar dos versiones competidoras de 004/005 sin revisión.
 - ZHTW-LOCAL-006 — Chiu et al. (2020), sibilantes.
 - ZHTW-LOCAL-007 — Zhang (2009), vocales de Taipei.
 - ZHTW-LOCAL-008 — Chiu & Lu (2021), nasales finales articulatorias.
+- ZHTW-LOCAL-009 — Wan et al. (2024), corpus/fonotáctica de Taiwan Mandarin.
+- ZHTW-LOCAL-010 — Wan & Jaeger (2003), representación vocálica.
+- ZHTW-LOCAL-011 — Ogasawara (2011), VOT en oclusivas.
 
 No se asignaron IDs SND-SRC globales para evitar colisiones entre ramas.
 
@@ -67,8 +70,11 @@ No se asignaron IDs SND-SRC globales para evitar colisiones entre ramas.
 2. Zhuyin, Hanyu Pinyin e IPA cumplen funciones distintas.
 3. El inventario canónico de Mandarin no debe copiarse automáticamente como inventario fonético exclusivo de Taiwán.
 4. Los mergers de sibilantes y nasales pueden depender de hablante/contexto.
-5. Tone 3 sandhi conserva conflicto de evidencia y no debe simplificarse.
-6. Una tabla futura debe separar categorías fonológicas de realizaciones fonéticas.
+5. Un corpus natural de 202 h respalda una clasificación de 12 tipos silábicos de superficie, pero ese análisis no se convierte automáticamente en teoría universal.
+6. Wan & Jaeger (2003) muestran que el análisis vocálico de Taiwan Mandarin requiere decisión analítica explícita.
+7. La aspiración tiene respaldo corpus y acústico; no debe explicarse como simple oposición ortográfica.
+8. Tone 3 sandhi conserva conflicto de evidencia y no debe simplificarse.
+9. Una tabla futura debe separar categorías fonológicas de realizaciones fonéticas.
 
 ## Gate siguiente
 
