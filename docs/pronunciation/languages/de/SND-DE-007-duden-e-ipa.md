@@ -1,7 +1,6 @@
 # SND-DE-007 — Duden e IPA
 
-**Estado:** EVIDENCE_CHECKED.  
-**Idioma:** alemán.  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** alemán.  
 **Dominio:** pronunciación / transcripción / lexicografía.
 
 ## 1. Función de Duden en MLS-SND
