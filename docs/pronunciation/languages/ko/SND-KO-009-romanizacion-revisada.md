@@ -1,6 +1,6 @@
 # SND-KO-009 — Romanización Revisada del coreano
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Idioma:** coreano.
 **Dominio:** romanización.
 
@@ -28,9 +28,9 @@ hangul → Romanización Revisada, cuando sea útil → IPA, cuando la entrada n
 
 | claim_id | afirmación | source_id | localizador | estado |
 |---|---|---|---|---|
-| KO009-C01 | La romanización se basa en la pronunciación estándar | SND-SRC-0012 | “1. Basic Principles for Transcription”, punto (1) | SOURCED |
-| KO009-C02 | Se procura usar letras romanas sin otros símbolos | SND-SRC-0012 | “1. Basic Principles for Transcription”, punto (2) | SOURCED |
-| KO009-C03 | La longitud vocálica no se refleja en la romanización | SND-SRC-0012 | “2. Summary of the Transcription System”, Note 2 | SOURCED |
+| KO009-C01 | La romanización se basa en la pronunciación estándar | SND-SRC-0012 | “1. Basic Principles for Transcription”, punto (1) | VERIFIED |
+| KO009-C02 | Se procura usar letras romanas sin otros símbolos | SND-SRC-0012 | “1. Basic Principles for Transcription”, punto (2) | VERIFIED |
+| KO009-C03 | La longitud vocálica no se refleja en la romanización | SND-SRC-0012 | “2. Summary of the Transcription System”, Note 2 | VERIFIED |
 
 ## 6. Fuente
 
@@ -39,3 +39,10 @@ National Institute of Korean Language. (s. f.). Romanization of Korean. https://
 ## 7. Nota editorial
 
 La secuencia visual de capas es una decisión MLS-SND.
+
+## 8. Auditoría R33
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED.
+- **Comprobación:** NIKL establece explícitamente que la romanización se basa en la pronunciación estándar, procura usar solo letras romanas y no refleja la longitud vocálica.
+- **Límite:** la secuencia hangul → romanización → IPA es diseño editorial MLS-SND, no una regla del NIKL.
