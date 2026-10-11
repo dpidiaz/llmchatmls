@@ -177,7 +177,8 @@ Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 
 - JA-W04-S01 y JA-W04-S02 son fuentes contemporáneas puntuales.
 - JA-W04-S03 aporta cobertura segmental amplia basada en corpus, pero su función es de **anotación** y no debe confundirse con un inventario fonológico definitivo.
 - La entrada no fija todavía un inventario contemporáneo definitivo.
-- Antes de considerar EVIDENCE_CHECKED global conviene añadir o validar una descripción fonológica amplia y suficientemente reciente, independiente del esquema de anotación CSJ.
+- JA-W04-S04 identifica una descripción fonológica amplia de 2015 con sección específica de inventario consonántico, pero permanece en HOLD hasta inspeccionar su texto completo; no se usa aún como evidencia de detalle.
+- Antes de considerar EVIDENCE_CHECKED global debe verificarse el texto completo de una descripción fonológica amplia, independiente del esquema de anotación CSJ.
 - No se mezcla evidencia de Tokio, corpus general y explicación histórica sin indicar su alcance.
 
 ## Gate de salida
@@ -186,7 +187,7 @@ Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 
 
 Pendiente para EVIDENCE_CHECKED:
 1. canonicalizar/deduplicar JA-W04-S01/S02;
-2. contrastar SND-SRC-0023 + JA-W04-S03 con una descripción fonológica amplia y suficientemente reciente;
+2. verificar el texto completo de JA-W04-S04 (o fuente equivalente) y contrastarlo con SND-SRC-0023 + JA-W04-S03;
 3. revisar el inventario completo contra las fuentes reconciliadas;
 4. auditoría lingüística independiente;
 5. verificar coherencia con JA-002/005/008/010.
