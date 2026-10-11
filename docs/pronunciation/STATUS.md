@@ -46,13 +46,13 @@
 - SND-FND-013 — Tono — EVIDENCE_CHECKED.
 - SND-FND-015 — Entonación — EVIDENCE_CHECKED.
 
-### Otras entradas piloto redactadas
+### Entradas de representación/perfiles auditadas
 
-- SND-REP-002 — Qué es el AFI/IPA — DRAFTED.
-- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz — DRAFTED.
-- SND-ZHTW-007 — Zhuyin/Bopomofo — DRAFTED.
-- SND-KO-009 — Romanización Revisada del coreano — DRAFTED.
-- SND-JA-001 — Tokio como ancla de referencia y sus límites — DRAFTED.
+- SND-REP-002 — Qué es el AFI/IPA — EVIDENCE_CHECKED.
+- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz — EVIDENCE_CHECKED.
+- SND-ZHTW-007 — Zhuyin/Bopomofo — EVIDENCE_CHECKED.
+- SND-KO-009 — Romanización Revisada del coreano — EVIDENCE_CHECKED.
+- SND-JA-001 — Tokio como ancla de referencia y sus límites — EVIDENCE_CHECKED.
 
 ## Métricas
 
@@ -60,7 +60,7 @@
 - 143 unidades editoriales candidatas inventariadas.
 - 10 perfiles lingüísticos inicializados.
 - 15 entradas piloto redactadas.
-- 10 entradas en EVIDENCE_CHECKED.
+- 15 entradas en EVIDENCE_CHECKED.
 - 0 entradas todavía en LINGUISTIC_REVIEW, EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
 
 ## Coordinación paralela
@@ -70,7 +70,7 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 ## Próximos gates
 
 1. **GATE CUMPLIDO:** 10 entradas de fundamentos en EVIDENCE_CHECKED;
-2. auditar SND-REP-002 y los cuatro pilotos lingüísticos ya redactados;
+2. **GATE CUMPLIDO:** SND-REP-002 y cuatro pilotos lingüísticos auditados;
 3. producir pilotos es-GT, en-US y pt-BR-rio con clusters sustantivos;
 4. ejecutar LINGUISTIC_REVIEW sobre la primera wave;
 5. congelar arquitectura solo después del gate del piloto.
@@ -78,4 +78,4 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 
 ## Gate FND-01
 
-**PASS provisional:** 10 entradas fundacionales alcanzaron EVIDENCE_CHECKED. El siguiente paso no es redactar fundamentos indefinidamente, sino ejecutar LINGUISTIC_REVIEW y avanzar los tres perfiles piloto (es-GT, en-US, pt-BR-rio).
+**PASS provisional:** 10 entradas fundacionales y 5 entradas de representación/perfiles alcanzaron EVIDENCE_CHECKED. El siguiente paso es ejecutar LINGUISTIC_REVIEW sobre esta wave y avanzar clusters sustantivos de los tres perfiles piloto (es-GT, en-US, pt-BR-rio).
