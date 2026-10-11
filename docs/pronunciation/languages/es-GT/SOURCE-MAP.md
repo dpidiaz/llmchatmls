@@ -1,8 +1,8 @@
 # 🇬🇹 Español de Guatemala — Source map
 
-Estado: **RESEARCHED / branch-local**.
+Estado: **PARTIALLY_CANONICALIZED**.
 
-Este archivo propone fuentes para el perfil es-GT. Los IDs `ESGT-SRC-Pxx` son temporales hasta que el integrador decida incorporarlos al Source Registry global.
+Este archivo conserva el historial de fuentes propuestas para el perfil es-GT. Las fuentes P01, P03 y P04 ya fueron resueltas a IDs globales; P02 permanece como candidato local hasta una wave posterior.
 
 ## Fuente ya canónica
 
@@ -25,7 +25,7 @@ Este archivo propone fuentes para el perfil es-GT. Los IDs `ESGT-SRC-Pxx` son te
 
 ## Propuesta de alta al registro global
 
-### ESGT-SRC-P01 — Utgård, atlas fonético nacional
+### ESGT-SRC-P01 → SND-SRC-0025 — Utgård, estudio geolingüístico nacional
 
 **Fuente:** Katrine Utgård, “La pronunciación del español guatemalteco: Atlas lingüístico-etnográfico de Guatemala. Nivel fonético segmental. Análisis geolingüístico pluridimensional”.
 
@@ -51,7 +51,7 @@ Este archivo propone fuentes para el perfil es-GT. Los IDs `ESGT-SRC-Pxx` son te
 
 Utgård, K. (2010). El español de Guatemala. En M. Á. Quesada Pacheco (Ed.), *El español hablado en América Central: Nivel fonético* (pp. 49–82). Iberoamericana/Vervuert. https://doi.org/10.31819/9783865278708-003
 
-**Estado propuesto:** ADMITTED_CONTENT / METADATA_RESOLUTION_REQUIRED.
+**Resultado de integración:** DEDUP_MATCH → **SND-SRC-0025** (Utgård 2010). El ID local no debe volver a citarse en entradas canónicas.
 
 ---
 
@@ -67,11 +67,11 @@ McKinnon, S. (2025). La variación fonológica del español guatemalteco. En M. 
 
 **No usar todavía para:** claims fonéticos específicos sin acceso al pasaje correspondiente.
 
-**Estado propuesto:** SOURCE_MAPPED / FULLTEXT_REQUIRED_FOR_SPECIFIC_CLAIMS.
+**Resultado de integración:** CANONICAL_NEW → **SND-SRC-0057**. Se mantiene FULLTEXT_REQUIRED_FOR_SPECIFIC_CLAIMS: la canonicalización no amplía el acceso ni el alcance del resumen editorial.
 
 ---
 
-### ESGT-SRC-P03 — McKinnon 2020
+### ESGT-SRC-P03 → SND-SRC-0057 — McKinnon 2020
 
 McKinnon, S. (2020). Un análisis sociofonético de la aspiración de las oclusivas sordas en el español guatemalteco monolingüe y bilingüe (español-kaqchikel). *Spanish in Context, 17*(1), 1–29. https://doi.org/10.1075/sic.00051.mck
 
@@ -83,7 +83,7 @@ McKinnon, S. (2020). Un análisis sociofonético de la aspiración de las oclusi
 
 ---
 
-### ESGT-SRC-P04 — Congosto Martín 2020
+### ESGT-SRC-P04 → SND-SRC-0058 — Congosto Martín 2020
 
 Congosto Martín, Y. (2020). El español guatemalteco en contacto: prosodia y entonación. *Estudios de Fonética Experimental, 29*, 153–194.
 
@@ -93,7 +93,7 @@ Congosto Martín, Y. (2020). El español guatemalteco en contacto: prosodia y en
 
 **Límite:** estudio circunscrito a entonación femenina y tipos concretos de enunciados del corpus; no generalizar a toda la prosodia guatemalteca.
 
-**Estado propuesto:** ADMITTED_WITH_SCOPE_WARNING.
+**Resultado de integración:** CANONICAL_NEW → **SND-SRC-0058**, con ADMITTED_WITH_SCOPE_WARNING. La limitación por género, corpus y tipos de enunciado se conserva.
 
 ## Gaps prioritarios
 
@@ -103,3 +103,14 @@ Congosto Martín, Y. (2020). El español guatemalteco en contacto: prosodia y en
 4. Investigar vocalismo contemporáneo con datos acústicos, no solo impresionistas.
 5. Ampliar prosodia más allá del diseño AMPER femenino/declarativas/interrogativas de las fuentes actuales.
 6. Mantener separado español monolingüe, español como L2 y español en contacto con lenguas mayas.
+
+
+## Reconciliación wave 06
+
+| ID local | Resultado | ID canónico |
+|---|---|---|
+| ESGT-SRC-P01 | DEDUP_MATCH | SND-SRC-0025 |
+| ESGT-SRC-P03 | CANONICAL_NEW | SND-SRC-0057 |
+| ESGT-SRC-P04 | CANONICAL_NEW | SND-SRC-0058 |
+
+**Pendiente:** ESGT-SRC-P02 (McKinnon 2025) sigue siendo candidato local y no se cita desde ESGT-002.
