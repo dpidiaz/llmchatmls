@@ -1,6 +1,6 @@
 # SND-FND-002 — Fonética y fonología
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fundamentos.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -58,7 +58,7 @@ Las formulaciones de “fonética” y “fonología” están adaptadas a la vo
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
-- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; corresponde al gate evidencial anterior; los gates lingüístico y editorial se registran por separado.
 
 ## 8. Revisión lingüística
 
@@ -66,3 +66,12 @@ Las formulaciones de “fonética” y “fonología” están adaptadas a la vo
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** la entrada mantiene separados el nivel fonético y el fonológico y evita deducir categorías fonológicas a partir de diferencias fonéticas por sí solas.
 - **Límite:** los perfiles pueden adoptar análisis fonológicos diferentes; MLS-SND debe atribuirlos a sus fuentes.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La distinción central se entiende sin formación previa; la secuencia definición → conexión → regla editorial es compacta y útil para consulta.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
