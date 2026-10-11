@@ -26,14 +26,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-FND-001 | El sonido como parte del idioma | — | INVENTORY |
 | SND-FND-002 | Fonética y fonología | terminología v0.2 | EVIDENCE_CHECKED |
 | SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | EVIDENCE_CHECKED |
-| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | INVENTORY |
+| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | EVIDENCE_CHECKED |
 | SND-FND-005 | Percepción del habla | fuentes generales | INVENTORY |
-| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | SOURCE_MAPPED |
-| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | SOURCE_MAPPED |
+| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | EVIDENCE_CHECKED |
+| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | EVIDENCE_CHECKED |
 | SND-FND-008 | Sílaba | terminología | EVIDENCE_CHECKED |
 | SND-FND-009 | Fonotáctica | FND-008 | EVIDENCE_CHECKED |
 | SND-FND-010 | Duración y cantidad | terminología | INVENTORY |
-| SND-FND-011 | Acento y prominencia | terminología | INVENTORY |
+| SND-FND-011 | Acento y prominencia | terminología | EVIDENCE_CHECKED |
 | SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
 | SND-FND-013 | Tono | terminología | EVIDENCE_CHECKED |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
