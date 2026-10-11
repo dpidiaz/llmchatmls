@@ -3,7 +3,7 @@
 - Tipo: integration / hot-file reconciliation.
 - Base SHA al iniciar: `6020ef0ca75053cdd73a14aaf32896cef02b1704`.
 - Rama: `snd/status-reconciliation-106-wave-02`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Objetivo
 
