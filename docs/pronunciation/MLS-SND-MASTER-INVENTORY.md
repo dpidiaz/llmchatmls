@@ -1,196 +1,262 @@
 # MLS-SND Master Inventory
 
-Estado: **mapa de investigación**, no contenido lingüístico validado.
+Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales candidatas; no convierte sus títulos en afirmaciones lingüísticas validadas.
 
-## A. Fundamentos comunes
+## 1. Convención de IDs
 
-1. Sonido, habla y representación.
-2. Fonética y fonología.
-3. Fonema, alófono y realización.
-4. Articulación.
-5. Percepción del habla.
-6. Consonantes.
-7. Vocales.
-8. Sílaba.
-9. Fonotáctica.
-10. Duración y cantidad.
-11. Acento y prominencia.
-12. Ritmo.
-13. Tono.
-14. Acento tonal.
-15. Entonación.
-16. Habla conectada.
-17. Variación.
-18. Ortografía y pronunciación.
-19. AFI/IPA.
-20. Transcripción fonológica y fonética.
-21. Transcripción amplia y estrecha.
-22. Romanización y transliteración.
-23. Sistemas locales de anotación.
+- FND = fundamentos comunes
+- REP = representación y transcripción
+- ESGT = español de Guatemala
+- ENUS = inglés estadounidense
+- PTBR = portugués brasileño / carioca
+- IT = italiano
+- FR = francés
+- DE = alemán
+- ZHTW = mandarín de Taiwán
+- KO = coreano
+- JA = japonés
+- RU = ruso
+- CMP = comparación transversal
+- REF = aparato de consulta
 
-## B. Perfiles lingüísticos
+## 2. Fundamentos comunes
 
-Los temas siguientes son **candidatos de investigación**. No constituyen afirmaciones publicables.
+| ID | Entrada candidata | Dependencias | Estado |
+|---|---|---|---|
+| SND-FND-001 | El sonido como parte del idioma | — | INVENTORY |
+| SND-FND-002 | Fonética y fonología | terminología v0.2 | SOURCE_MAPPED |
+| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | INVENTORY |
+| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | INVENTORY |
+| SND-FND-005 | Percepción del habla | fuentes generales | INVENTORY |
+| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | SOURCE_MAPPED |
+| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | SOURCE_MAPPED |
+| SND-FND-008 | Sílaba | terminología | INVENTORY |
+| SND-FND-009 | Fonotáctica | FND-008 | INVENTORY |
+| SND-FND-010 | Duración y cantidad | terminología | INVENTORY |
+| SND-FND-011 | Acento y prominencia | terminología | INVENTORY |
+| SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
+| SND-FND-013 | Tono | terminología | INVENTORY |
+| SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
+| SND-FND-015 | Entonación | terminología | INVENTORY |
+| SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
+| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | SOURCE_MAPPED |
+| SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
 
-### 🇬🇹 Español de Guatemala
+## 3. Representación y escritura
 
-- inventario segmental;
-- realizaciones consonánticas y vocálicas;
-- acento;
-- entonación;
-- variación regional;
-- variación generacional;
-- fenómenos de contacto cuando sean pertinentes;
-- relación grafía-pronunciación.
+| ID | Entrada candidata | Dependencias | Estado |
+|---|---|---|---|
+| SND-REP-001 | Sonido, letra y símbolo | terminology | INVENTORY |
+| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | SOURCE_MAPPED |
+| SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
+| SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
+| SND-REP-005 | Diacríticos | REP-002 | SOURCE_MAPPED |
+| SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | SOURCE_MAPPED |
+| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | SOURCE_MAPPED |
+| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | SOURCE_MAPPED |
+| SND-REP-009 | Ortografía y pronunciación | terminology | INVENTORY |
+| SND-REP-010 | Romanización | terminology | INVENTORY |
+| SND-REP-011 | Transliteración | terminology | INVENTORY |
+| SND-REP-012 | Sistemas locales de anotación | perfiles | INVENTORY |
 
-**Decisión pendiente:** variedad o conjunto de subvariedades de referencia.
+## 4. Perfiles lingüísticos
 
-### 🇺🇸 Inglés estadounidense
+### 🇬🇹 Español de Guatemala — ESGT
 
-- sistema vocálico;
-- consonantes;
-- reducción;
-- acento léxico;
-- habla conectada;
-- ritmo;
-- entonación;
-- variación regional.
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-ESGT-001 | Alcance y variedades del español de Guatemala | SOURCE_MAPPED |
+| SND-ESGT-002 | Inventario segmental: mapa de evidencia | INVENTORY |
+| SND-ESGT-003 | Vocales y variación | INVENTORY |
+| SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
+| SND-ESGT-005 | /s/ y variación regional | SOURCE_MAPPED |
+| SND-ESGT-006 | Róticas | INVENTORY |
+| SND-ESGT-007 | Acento y prominencia | INVENTORY |
+| SND-ESGT-008 | Entonación | INVENTORY |
+| SND-ESGT-009 | Contacto lingüístico y alcance | INVENTORY |
+| SND-ESGT-010 | Ortografía y pronunciación | INVENTORY |
 
-**Decisión pendiente:** alcance exacto de "inglés estadounidense de referencia".
+### 🇺🇸 Inglés estadounidense — ENUS
 
-### 🇧🇷 Portugués brasileño — referencia carioca
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | SOURCE_MAPPED |
+| SND-ENUS-002 | Sistema consonántico: mapa de contrastes | SOURCE_MAPPED |
+| SND-ENUS-003 | Sistemas vocálicos y variación regional | SOURCE_MAPPED |
+| SND-ENUS-004 | Reducción vocálica | INVENTORY |
+| SND-ENUS-005 | Acento léxico | INVENTORY |
+| SND-ENUS-006 | Habla conectada | INVENTORY |
+| SND-ENUS-007 | Ritmo y prominencia | INVENTORY |
+| SND-ENUS-008 | Entonación | INVENTORY |
+| SND-ENUS-009 | Southern Michigan como perfil documentado | SOURCE_MAPPED |
+| SND-ENUS-010 | Comparaciones con español/portugués | BLOCKED_BY_PROFILES |
 
-- vocalismo;
-- nasalidad;
-- reducción;
-- consonantes;
-- procesos contextuales;
-- acento;
-- prosodia;
-- rasgos propios de la referencia carioca.
+### 🇧🇷 Portugués brasileño — referencia carioca — PTBR
 
-**Decisión pendiente:** frontera entre rasgos generales de PB y rasgos específicamente cariocas.
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-PTBR-001 | PB amplio vs. habla carioca | SOURCE_MAPPED |
+| SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
+| SND-PTBR-003 | Nasalidad | INVENTORY |
+| SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
+| SND-PTBR-005 | Consonantes: mapa general | INVENTORY |
+| SND-PTBR-006 | /s/ en coda y variación carioca | SOURCE_MAPPED |
+| SND-PTBR-007 | Róticas y variación | SOURCE_MAPPED |
+| SND-PTBR-008 | /l/ en coda y variación | SOURCE_MAPPED |
+| SND-PTBR-009 | Acento y ritmo | INVENTORY |
+| SND-PTBR-010 | Entonación carioca | INVENTORY |
 
-### 🇮🇹 Italiano
+### 🇮🇹 Italiano — IT
 
-- grafía y pronunciación;
-- vocales;
-- consonantes;
-- duración/geminación;
-- acento;
-- variación regional pertinente.
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-IT-001 | Estándar, variedades regionales y mainstream | SOURCE_MAPPED |
+| SND-IT-002 | Vocales | SOURCE_MAPPED |
+| SND-IT-003 | Consonantes | SOURCE_MAPPED |
+| SND-IT-004 | Geminación/duración consonántica | INVENTORY |
+| SND-IT-005 | Acento | INVENTORY |
+| SND-IT-006 | E y O: pronunciación y ortoepía | SOURCE_MAPPED |
+| SND-IT-007 | S y Z: pronunciación y ortoepía | SOURCE_MAPPED |
+| SND-IT-008 | Grafía y pronunciación | SOURCE_MAPPED |
+| SND-IT-009 | Variación regional | INVENTORY |
 
-**Decisión pendiente:** pronunciación de referencia y política frente a variación regional.
+### 🇫🇷 Francés — FR
 
-### 🇫🇷 Francés
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-FR-001 | Selección de variedad de referencia | RESEARCHED_PARTIAL |
+| SND-FR-002 | Vocales y contrastes | SOURCE_MAPPED |
+| SND-FR-003 | Vocales nasales | INVENTORY |
+| SND-FR-004 | Schwa | INVENTORY |
+| SND-FR-005 | Consonantes finales | INVENTORY |
+| SND-FR-006 | Liaison | INVENTORY |
+| SND-FR-007 | Enchaînement y habla conectada | INVENTORY |
+| SND-FR-008 | Acento/prominencia y frase | INVENTORY |
+| SND-FR-009 | Variación documentada en PFC | SOURCE_MAPPED |
 
-- vocales;
-- nasalidad;
-- schwa;
-- consonantes finales;
-- procesos de encadenamiento;
-- prosodia;
-- variación.
+### 🇩🇪 Alemán — DE
 
-**Decisión pendiente:** variedad principal de referencia y relación entre descripción y norma.
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-DE-001 | Alemán estándar y estándares nacionales | RESEARCHED_PARTIAL |
+| SND-DE-002 | Vocales | SOURCE_MAPPED |
+| SND-DE-003 | Longitud y calidad vocálica | SOURCE_MAPPED |
+| SND-DE-004 | Consonantes | SOURCE_MAPPED |
+| SND-DE-005 | Acento | INVENTORY |
+| SND-DE-006 | Procesos contextuales | INVENTORY |
+| SND-DE-007 | Duden e IPA | SOURCE_MAPPED |
+| SND-DE-008 | DE/AT/CH: mapa de diferencias | INVENTORY |
 
-### 🇩🇪 Alemán
+### 🇹🇼 Mandarín de Taiwán — ZHTW
 
-- vocales;
-- duración y calidad;
-- consonantes;
-- acento;
-- procesos fonológicos;
-- ortografía y pronunciación;
-- estándares nacionales.
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | SOURCE_MAPPED |
+| SND-ZHTW-002 | Estructura silábica | INVENTORY |
+| SND-ZHTW-003 | Iniciales y finales: análisis fonético/fonológico | INVENTORY |
+| SND-ZHTW-004 | Sistema tonal: mapa de evidencia | SOURCE_MAPPED |
+| SND-ZHTW-005 | Variación tonal norte/centro | SOURCE_MAPPED |
+| SND-ZHTW-006 | Procesos tonales | INVENTORY |
+| SND-ZHTW-007 | Zhuyin/Bopomofo | SOURCE_MAPPED |
+| SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | SOURCE_MAPPED |
+| SND-ZHTW-009 | Romanización latina | REFERENCE_OPEN |
+| SND-ZHTW-010 | Variación por contacto | SOURCE_MAPPED |
 
-**Decisión pendiente:** tratamiento de Alemania, Austria y Suiza.
+### 🇰🇷 Coreano — KO
 
-### 🇹🇼 Mandarín de Taiwán
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-KO-001 | Estándar y habla de Seúl | RESEARCHED_PARTIAL |
+| SND-KO-002 | Sistema consonántico | SOURCE_MAPPED |
+| SND-KO-003 | Oclusivas y cambios contemporáneos | SOURCE_MAPPED |
+| SND-KO-004 | Vocales | INVENTORY |
+| SND-KO-005 | Estructura silábica | INVENTORY |
+| SND-KO-006 | Procesos fonológicos contextuales | INVENTORY |
+| SND-KO-007 | Prosodia | INVENTORY |
+| SND-KO-008 | Hangul y pronunciación | INVENTORY |
+| SND-KO-009 | Romanización Revisada | SOURCE_MAPPED |
+| SND-KO-010 | Romanización vs. IPA | SOURCE_MAPPED |
 
-- tonos;
-- sílaba;
-- procesos tonales;
-- pronunciación de Taiwán;
-- zhuyin;
-- romanizaciones;
-- relación entre escritura y pronunciación.
+### 🇯🇵 Japonés — JA
 
-**Decisión pendiente:** variedad de referencia y convenciones de representación.
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-JA-001 | Referencia de Tokio/lengua común y sus límites | SOURCE_MAPPED |
+| SND-JA-002 | Mora | INVENTORY |
+| SND-JA-003 | Vocales y duración | SOURCE_MAPPED |
+| SND-JA-004 | Consonantes | SOURCE_MAPPED |
+| SND-JA-005 | Estructura moraica/silábica | INVENTORY |
+| SND-JA-006 | Acento tonal de Tokio | SOURCE_MAPPED |
+| SND-JA-007 | Variación y cambio acentual | SOURCE_MAPPED |
+| SND-JA-008 | Kana y pronunciación | INVENTORY |
+| SND-JA-009 | Kanji, lecturas y pronunciación | INVENTORY |
+| SND-JA-010 | Romanización | REFERENCE_OPEN |
 
-### 🇰🇷 Coreano
+### 🇷🇺 Ruso — RU
 
-- contrastes consonánticos;
-- vocales;
-- estructura silábica;
-- procesos contextuales;
-- prosodia;
-- hangul;
-- romanización.
+| ID | Entrada/cluster | Estado |
+|---|---|---|
+| SND-RU-001 | Ruso literario contemporáneo: alcance | SOURCE_MAPPED |
+| SND-RU-002 | Vocales | SOURCE_MAPPED |
+| SND-RU-003 | Reducción vocálica | SOURCE_MAPPED |
+| SND-RU-004 | Consonantes | SOURCE_MAPPED |
+| SND-RU-005 | Palatalización | SOURCE_MAPPED |
+| SND-RU-006 | Acento léxico | SOURCE_MAPPED |
+| SND-RU-007 | Procesos contextuales | INVENTORY |
+| SND-RU-008 | Norma ortoépica y variantes | SOURCE_MAPPED |
+| SND-RU-009 | Cirílico y pronunciación | INVENTORY |
 
-**Decisión pendiente:** relación entre estándar, habla de Seúl y descripción fonética.
+## 5. Comparación transversal
 
-### 🇯🇵 Japonés
+Estos capítulos permanecen bloqueados hasta que los perfiles pertinentes superen al menos EVIDENCE_CHECKED.
 
-- mora;
-- duración;
-- estructura silábica;
-- acento tonal;
-- prosodia;
-- kana;
-- kanji y lectura.
+| ID | Entrada candidata | Estado |
+|---|---|---|
+| SND-CMP-001 | Cómo comparar sonidos sin asumir identidad | READY_FOR_EARLY_DRAFT |
+| SND-CMP-002 | Sistemas vocálicos en perspectiva | BLOCKED_BY_PROFILES |
+| SND-CMP-003 | Sistemas consonánticos en perspectiva | BLOCKED_BY_PROFILES |
+| SND-CMP-004 | Sílaba y fonotáctica | BLOCKED_BY_PROFILES |
+| SND-CMP-005 | Duración y cantidad | BLOCKED_BY_PROFILES |
+| SND-CMP-006 | Acento y prominencia | BLOCKED_BY_PROFILES |
+| SND-CMP-007 | Tono y acento tonal | BLOCKED_BY_PROFILES |
+| SND-CMP-008 | Ritmo | BLOCKED_BY_PROFILES |
+| SND-CMP-009 | Entonación | BLOCKED_BY_PROFILES |
+| SND-CMP-010 | Escritura y pronunciación | BLOCKED_BY_PROFILES |
+| SND-CMP-011 | Qué significa “tener acento” | BLOCKED_BY_PROFILES |
 
-**Decisión pendiente:** papel de Tokio como referencia y tratamiento de otras variedades.
+## 6. Aparato de consulta
 
-### 🇷🇺 Ruso
+| ID | Salida | Estado |
+|---|---|---|
+| SND-REF-001 | Glosario canónico | IN_PROGRESS |
+| SND-REF-002 | Índice IPA | INVENTORY |
+| SND-REF-003 | Índice por fenómeno | INVENTORY |
+| SND-REF-004 | Índice por idioma | INVENTORY |
+| SND-REF-005 | Tabla de romanizaciones/transliteraciones | INVENTORY |
+| SND-REF-006 | Bibliografía general | IN_PROGRESS |
+| SND-REF-007 | Bibliografías por perfil | IN_PROGRESS |
+| SND-REF-008 | Grafo de referencias cruzadas | INVENTORY |
 
-- acento;
-- reducción vocálica;
-- consonantes;
-- palatalización;
-- procesos contextuales;
-- ortoepía;
-- cirílico y pronunciación.
+## 7. Conteo inicial
 
-**Decisión pendiente:** norma contemporánea de referencia y política de variantes.
+- Fundamentos: 18 entradas.
+- Representación: 12 entradas.
+- Perfiles lingüísticos: 94 entradas/clusters candidatos.
+- Comparación: 11 entradas.
+- Aparato de consulta: 8 salidas.
 
-## C. Comparación transversal
+**Total inicial inventariado: 143 unidades editoriales candidatas.**
 
-Solo debe escribirse después de contar con perfiles suficientemente investigados.
+Este conteo no es una cuota ni un límite. Las unidades pueden dividirse o fusionarse después de investigación.
 
-1. Comparar sonidos sin suponer identidad.
-2. Sistemas vocálicos.
-3. Sistemas consonánticos.
-4. Sílaba y fonotáctica.
-5. Duración.
-6. Acento y prominencia.
-7. Tono y acento tonal.
-8. Ritmo.
-9. Entonación.
-10. Escritura y pronunciación.
-11. Concepto de "acento" en perspectiva.
+## 8. Primer gate de producción
 
-## D. Aparato de consulta
+Antes de redactar en masa:
 
-- glosario;
-- índice IPA;
-- índice por fenómeno;
-- índice por idioma;
-- sistemas de romanización/transliteración;
-- bibliografía general;
-- bibliografía por perfil;
-- referencias cruzadas.
-
-## E. Dependencias editoriales
-
-Antes de producción masiva:
-
-1. cerrar variedades;
-2. cerrar política IPA;
-3. cerrar terminología;
-4. aprobar plantilla de entrada;
-5. aprobar Source Registry;
-6. aprobar gate R33;
-7. producir piloto;
-8. revisar piloto;
-9. congelar arquitectura.
+1. terminar fuentes base de FND/REP;
+2. cerrar terminología v0.2;
+3. usar la plantilla canónica;
+4. redactar 8–12 entradas de fundamentos;
+5. someterlas a R33;
+6. producir tres perfiles piloto;
+7. congelar arquitectura solo después del piloto.
