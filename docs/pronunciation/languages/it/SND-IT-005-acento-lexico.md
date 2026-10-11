@@ -5,7 +5,7 @@
 **Dominio:** prosodia / fonología / fonética.  
 **Tipo de alcance:** REFERENCE_VARIETY / BROADLY_DISTRIBUTED con límites explícitos.  
 **Nivel de representación:** fonológico / fonético / ortográfico.  
-**Dependencias:** SND-IT-001, SND-IT-008; canonicalización de IT-PROP-003 e IT-PROP-004.  
+**Dependencias:** SND-IT-001, SND-IT-008; canonicalización de IT-W02-S01 e IT-W02-S02 conforme a `editorial/source-integration-protocol.md`.  
 **Versión:** wave-02.
 
 ## 1. Qué es
@@ -153,11 +153,11 @@ Las tres simplificaciones pueden ser útiles como primeras pistas en contextos m
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| IT005-C01 | El acento léxico italiano tiene posición libre y puede cumplir función distintiva | IT-PROP-003 | “Definizione”; “L’accento in italiano”, apartados sobre posición libre y función distintiva | italiano descrito por la Enciclopedia dell’Italiano | SOURCED_PENDING_REGISTRY |
-| IT005-C02 | La penúltima es estadísticamente preferida, pero existen otras posiciones y restricciones prosódicas/morfofonológicas | IT-PROP-003 | “L’accento in italiano”, apartados sobre distribución, restricción prosódica y fenómenos morfofonológicos | italiano / síntesis enciclopédica | SOURCED_PENDING_REGISTRY |
-| IT005-C03 | F0, duración e intensidad son correlatos acústicos del acento; su contribución no debe reducirse a un único parámetro | IT-PROP-003 | “Principali correlati fonetici”; “L’accento in italiano” | general + italiano | SOURCED_PENDING_REGISTRY |
-| IT005-C04 | En el estudio citado la duración vocálica no es contrastiva en las variedades estándar/regionales consideradas; las vocales de sílabas abiertas tónicas son más largas que las átonas o las de sílabas cerradas | IT-PROP-004 | Abstract | alcance del estudio de D’Imperio & Rosenthall | SOURCED_PENDING_REGISTRY |
-| IT005-C05 | El incremento de duración asociado a vocales tónicas abiertas cambia según la posición del acento, y la posición final no muestra el mismo alargamiento | IT-PROP-004 | Abstract | alcance del estudio de D’Imperio & Rosenthall | SOURCED_PENDING_REGISTRY |
+| IT005-C01 | El acento léxico italiano tiene posición libre y puede cumplir función distintiva | IT-W02-S01 | “Definizione”; “L’accento in italiano”, apartados sobre posición libre y función distintiva | italiano descrito por la Enciclopedia dell’Italiano | SOURCED_PENDING_REGISTRY |
+| IT005-C02 | La penúltima es estadísticamente preferida, pero existen otras posiciones y restricciones prosódicas/morfofonológicas | IT-W02-S01 | “L’accento in italiano”, apartados sobre distribución, restricción prosódica y fenómenos morfofonológicos | italiano / síntesis enciclopédica | SOURCED_PENDING_REGISTRY |
+| IT005-C03 | F0, duración e intensidad son correlatos acústicos del acento; su contribución no debe reducirse a un único parámetro | IT-W02-S01 | “Principali correlati fonetici”; “L’accento in italiano” | general + italiano | SOURCED_PENDING_REGISTRY |
+| IT005-C04 | En el estudio citado la duración vocálica no es contrastiva en las variedades estándar/regionales consideradas; las vocales de sílabas abiertas tónicas son más largas que las átonas o las de sílabas cerradas | IT-W02-S02 | Abstract | alcance del estudio de D’Imperio & Rosenthall | SOURCED_PENDING_REGISTRY |
+| IT005-C05 | El incremento de duración asociado a vocales tónicas abiertas cambia según la posición del acento, y la posición final no muestra el mismo alargamiento | IT-W02-S02 | Abstract | alcance del estudio de D’Imperio & Rosenthall | SOURCED_PENDING_REGISTRY |
 | IT005-C06 | La ortografía no debe usarse como transcripción fonética completa de la pronunciación italiana | SND-SRC-0008 | SND-IT-008, claims IT008-C01–C03 y sus localizadores DOP | referencia ortoépica / regla editorial ya validada | VERIFIED_BY_DEPENDENCY |
 
 ## 14. Fuentes APA 7
@@ -173,7 +173,7 @@ RAI. (2025). *DOP: Dizionario italiano multimediale e multilingue d’ortografia
 - La entrada evita presentar “penúltima” como regla categórica: es una preferencia de distribución con excepciones y condicionamientos.
 - El tratamiento de duración se limita a lo verificable en el resumen del artículo de D’Imperio y Rosenthall consultado para esta wave.
 - No se adopta aquí una teoría métrica única del acento italiano.
-- IT-PROP-003 e IT-PROP-004 deben recibir IDs canónicos o ser reconciliadas con fuentes equivalentes antes del gate global de EVIDENCE_CHECKED.
+- IT-W02-S01 e IT-W02-S02 deben recibir IDs canónicos o ser reconciliadas con fuentes equivalentes antes del gate global de EVIDENCE_CHECKED.
 - La variación regional detallada queda para SND-IT-009 y para revisión lingüística posterior.
 
 ## Gate de salida
@@ -181,7 +181,7 @@ RAI. (2025). *DOP: Dizionario italiano multimediale e multilingue d’ortografia
 **Resultado de esta wave:** DRAFTED.
 
 Para avanzar a EVIDENCE_CHECKED:
-1. canonicalizar IT-PROP-003 e IT-PROP-004 en el Source Registry, comprobando duplicados;
+1. canonicalizar IT-W02-S01 e IT-W02-S02 en el Source Registry, comprobando duplicados;
 2. reconciliar los claims con cualquier fuente italiana nueva integrada por otras waves;
 3. realizar revisión lingüística independiente;
 4. mantener la separación entre acento, duración vocálica, geminación y ortografía.
