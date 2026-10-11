@@ -1,6 +1,6 @@
 # SND-FND-007 — Vocales: parámetros articulatorios
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** fonética.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -21,7 +21,7 @@ Otros rasgos —por ejemplo duración, nasalidad o calidad dinámica— se añad
 
 La **altura vocálica** se relaciona con la posición vertical de la lengua durante la articulación.
 
-Las categorías exactas utilizadas en una entrada deberán corresponder al nivel de detalle del análisis adoptado.
+Las categorías exactas utilizadas en una entrada deberán corresponder al nivel de detalle del análisis adoptado. Las etiquetas de altura y anterioridad/posterioridad son regiones descriptivas útiles dentro de un espacio articulatorio continuo; no deben imaginarse como coordenadas anatómicas rígidas e idénticas entre hablantes.
 
 ## 3. Anterioridad y posterioridad
 
@@ -72,3 +72,12 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **Límite:** cualquier inventario, valor fonémico, distribución o comparación concreta requerirá fuentes específicas del idioma/variedad.
+
+
+## 11. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS WITH CONSOLIDATION → `LINGUISTIC_REVIEW`.
+- **Decisión:** esta ruta queda como versión canónica de SND-FND-007.
+- **Integración:** se incorporó de la versión paralela la cautela de no interpretar altura/anterioridad como posiciones discretas absolutas.
+- **Salvaguarda:** el espacio vocálico común es una herramienta descriptiva; no sustituye los inventarios ni realizaciones de cada variedad.
