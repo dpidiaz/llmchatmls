@@ -1,6 +1,6 @@
 # SND-FND-004 — Producción del habla y tracto vocal
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** fonética articulatoria.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -77,3 +77,16 @@ La selección de partes anatómicas está deliberadamente limitada a lo necesari
 - **Lectura:** La anatomía se mantiene funcional y breve; el lector recibe solo las regiones necesarias para entender las entradas articulatorias posteriores.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
+
+
+## Composition readiness pilot 01
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `b1bcb55cc46858440a8d9479a3831aebc83595b7`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** EVIDENCE_CHECKED + LINGUISTIC_REVIEW + EDITORIAL_REVIEW vigentes para esta versión.
+- **Representación:** No contiene IPA. La mención de diagramas es normativa/editorial; no existe un diagrama empírico que deba licenciarse en esta versión.
+- **Navegación:** referencias cruzadas verificadas contra IDs canónicos existentes.
+- **Autonomía escrita:** PASS; la entrada no requiere audio, ejercicios ni evaluación del lector.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** únicamente estado/metadata de readiness; sin cambios lingüísticos, evidenciales ni de ejemplos.
