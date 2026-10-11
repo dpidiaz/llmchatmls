@@ -847,3 +847,37 @@ El registro contiene **53 fuentes canónicas** hasta SND-SRC-0053.
 ## 24. Resultado del registro v0.13
 
 El registro contiene **56 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0056.
+
+
+### SND-SRC-0057 — Español de Guatemala / aspiración de oclusivas sordas
+
+- **Tier:** B.
+- **APA 7:** McKinnon, S. (2020). Un análisis sociofonético de la aspiración de las oclusivas sordas en el español guatemalteco monolingüe y bilingüe (español-kaqchikel). *Spanish in Context, 17*(1), 1–29. https://doi.org/10.1075/sic.00051.mck
+- **URL editorial:** https://www.benjamins.com/catalog/sic.00051.mck
+- **Idioma/variedad:** español guatemalteco en comunidades monolingües y bilingües español–kaqchikel dentro de la muestra del estudio.
+- **Cobertura admitida con acceso actual:** aspiración/VOT de oclusivas sordas; comparación de factores lingüísticos y extralingüísticos entre comunidades monolingües y bilingües; el resumen reporta VOT más largo que en variedades sin contacto y señala indicios, no confirmación definitiva, de efectos de contacto.
+- **Localizadores disponibles:** Abstract; estructura del artículo (§1 Introducción; §3 Metodología; §4 Resultados; §5 Discusión y conclusión); pp. 1–29.
+- **Acceso verificado:** metadatos, resumen y estructura públicos en John Benjamins; texto completo requiere autorización en la plataforma editorial.
+- **Limitación crítica:** no usar sin texto completo comprobado para valores numéricos, efectos estadísticos detallados o generalizaciones que excedan el resumen. El propio resumen indica que se requieren investigaciones futuras para confirmar definitivamente los efectos del contacto.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_ABSTRACT_SCOPE_ONLY / FULLTEXT_REQUIRED_FOR_SPECIFIC_CLAIMS.
+
+### SND-SRC-0058 — Español guatemalteco / prosodia y entonación en contacto
+
+- **Tier:** B.
+- **APA 7:** Congosto Martín, Y. (2020). Guatemalan Spanish in contact: Prosody and intonation / El español guatemalteco en contacto: prosodia y entonación. *Estudios de Fonética Experimental, 29*, 153–194.
+- **Registro bibliográfico:** https://raco.cat/index.php/EFE/article/view/375462
+- **Copia institucional:** https://idus.us.es/bitstreams/7186befa-3743-49b1-9816-09206104806d/download
+- **Idioma/variedad:** español guatemalteco; comparación entre hablantes guatemaltecos en Guatemala y hablantes guatemaltecos residentes en Los Ángeles dentro del diseño del estudio.
+- **Cobertura:** prosodia y entonación; proyecto Geoprosodic; metodología vinculada a AMPER; declarativas e interrogativas absolutas con estructura SVO del corpus analizado.
+- **Localizadores:** pp. 153–194; resumen/abstract para objetivo y alcance; sección metodológica para el diseño AMPER y delimitación de enunciados; tablas/figuras y conclusiones solo cuando un claim las cite explícitamente.
+- **Acceso verificado:** registro institucional de Universidad de Sevilla y texto accesible mediante repositorios académicos; referencia confirmada también en bibliografía de ASALE.
+- **Limitación crítica:** el estudio declara un alcance circunscrito a entonación femenina y a tipos de enunciados concretos; no debe presentarse como descripción exhaustiva de toda la prosodia guatemalteca ni extrapolarse a todos los hablantes.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SCOPE_WARNING.
+
+## 25. Resultado del registro v0.14
+
+El registro contiene **58 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0058.
+
+SND-SRC-0057 y SND-SRC-0058 se incorporan para resolver fuentes locales históricas del mapa es-GT sin promover automáticamente ninguna entrada. Sus alcances permanecen separados: sociofonética segmental/aspiración en el primer caso y prosodia/entonación de diseño acotado en el segundo.
