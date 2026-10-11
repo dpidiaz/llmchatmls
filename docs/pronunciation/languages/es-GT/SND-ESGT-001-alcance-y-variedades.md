@@ -51,10 +51,13 @@ Antes de fijarlo como REFERENCE_FIXED se necesita bibliografía adicional espec�
 | ESGT001-C01 | La descripción académica consultada distingue tres grandes áreas dialectales: centro-occidental, oriental y norteña | SND-SRC-0003 | “Peculiaridades del español de Guatemala” → “Fonética y fonología”, p. 209 | Guatemala | VERIFIED |
 | ESGT001-C02 | La sección reconoce variación que afecta a distintos grupos etarios | SND-SRC-0003 | misma sección, p. 209 | Guatemala | VERIFIED |
 | ESGT001-C03 | El informe declara que no ofrece una descripción fonético-fonológica exhaustiva de la variedad | SND-SRC-0003 | misma sección, p. 209 | Guatemala | VERIFIED |
+| ESGT001-C04 | Utgård presenta una investigación geolingüística ampliada con 22 localidades y 88 informantes | SND-SRC-0025 | Utgård (2010), pp. 49–82; metodología de la investigación asociada | Guatemala, fonética segmental | VERIFIED |
 
-## 6. Fuente
+## 6. Fuentes
 
 Asociación de Academias de la Lengua Española. (2021). *Crónica de la lengua española 2021*. Espasa.
+
+Utgård, K. (2010). El español de Guatemala. En M. Á. Quesada Pacheco (Ed.), *El español hablado en América Central: Nivel fonético* (pp. 49–82). Iberoamericana/Vervuert. https://doi.org/10.31819/9783865278708-003
 
 ## 7. Nota editorial
 
