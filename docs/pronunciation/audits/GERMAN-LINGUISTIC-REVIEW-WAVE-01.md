@@ -16,7 +16,7 @@ This is a **MULTI_REFERENCE** profile. No reviewed entry authorizes collapsing G
 A source-metadata defect was discovered during review:
 - canonical `SND-SRC-0031` has an incorrect DOI in the matrix Source Registry;
 - correct DOI: `10.1017/S0025100320000377`;
-- fix applied to the canonical Source Registry; PR #7351 was closed after clean reapplication.
+- fix prepared separately in PR #7351.
 
 The DOI correction changes metadata only, not the linguistic claims.
 
@@ -89,7 +89,7 @@ DE001-C03 is appropriately scoped to the phonetic domain studied.
 
 ### Required remediation
 
-SND-SRC-0031 DOI metadata has been corrected in the canonical Source Registry; no linguistic rewrite is required.
+Merge source metadata fix #7351 before treating SND-SRC-0031 bibliography as clean.
 
 The entry itself does not need linguistic rewriting.
 
