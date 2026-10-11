@@ -25,7 +25,9 @@ Segmentos; sílaba; tonos; variación tonal; Zhuyin; romanización; escritura.
 | SND-ZHTW-004 | `SND-ZHTW-004-sistema-tonal-mapa.md` | EVIDENCE_CHECKED (mapa básico) |
 | SND-ZHTW-005 | `SND-ZHTW-005-variacion-tono1-norte-centro.md` | EVIDENCE_CHECKED |
 | SND-ZHTW-007 | `SND-ZHTW-007-zhuyin.md` | EVIDENCE_CHECKED (heredada de foundation) |
+| SND-ZHTW-003 | `SND-ZHTW-003-inventario-segmental-mapa.md` | RESEARCHED_PARTIAL |
 | SND-ZHTW-009 | `SND-ZHTW-009-romanizacion-latina.md` | DRAFTED / PROVISIONAL_ACCEPT |
+| SND-ZHTW-010 | `SND-ZHTW-010-variacion-por-contacto.md` | EVIDENCE_CHECKED |
 | SND-ZHTW-006 | `RESEARCH-NOTE-tone3-sandhi.md` | BLOCKED_BY_CONFLICTING_EVIDENCE |
 
 ## Gap principal después de wave 01
@@ -39,7 +41,7 @@ Aún falta una descripción fonética integral contemporánea de Taiwan Mandarin
 
 ## Dependencias para la siguiente wave
 
-1. revisar literatura segmental contemporánea;
+1. completar el inventario segmental con localizadores de capítulo y análisis alternativos;
 2. resolver Tone 3 sandhi con lectura metodológica comparada;
 3. decidir si Hanyu Pinyin se adopta globalmente como capa latina auxiliar;
 4. promover, si el coordinador lo aprueba, las fuentes locales al Source Registry global;
