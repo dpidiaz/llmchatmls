@@ -31,7 +31,8 @@ Esta entrada documenta **la frontera editorial entre romanización y transcripci
 |---|---|---|---|---|
 | KO010-C01 | La Romanización Revisada se basa en pronunciación estándar y usa letras romanas | SND-SRC-0012 | Basic Principles (1)–(2) | VERIFIED |
 | KO010-C02 | La Romanización Revisada no refleja longitud vocálica | SND-SRC-0012 | Summary, Note 2 | VERIFIED |
-| KO010-C03 | IPA es el sistema internacional oficial usado por MLS-SND como capa de transcripción fonética | SND-SRC-0001 | “The International Phonetic Alphabet and the IPA Chart” | VERIFIED |
+| KO010-C03 | La International Phonetic Association mantiene el International Phonetic Alphabet y su tabla oficial | SND-SRC-0001 | “The International Phonetic Alphabet and the IPA Chart” | VERIFIED |
+| KO010-C04 | MLS-SND adopta IPA como capa fonética descriptiva común cuando aporta precisión | MLS-SND-TRANSCRIPTION-GUIDE | §2 “AFI/IPA como capa descriptiva común” | ANALYTICAL_CHOICE |
 
 ## 5. Nota editorial
 
