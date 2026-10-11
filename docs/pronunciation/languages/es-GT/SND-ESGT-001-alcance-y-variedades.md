@@ -1,6 +1,6 @@
 # SND-ESGT-001 — Alcance y variedades del español de Guatemala
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala.
 **Dominio:** alcance descriptivo / variación.
