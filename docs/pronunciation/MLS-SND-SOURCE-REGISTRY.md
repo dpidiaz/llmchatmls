@@ -737,6 +737,7 @@ El registro contiene **48 fuentes** numeradas SND-SRC-0001 a SND-SRC-0048.
 
 - **Tier:** A.
 - **Institución:** United Nations Group of Experts on Geographical Names (UNGEGN).
+- **APA 7:** United Nations Group of Experts on Geographical Names. (s. f.). *Romanization Systems*. United Nations Statistics Division. https://unstats.un.org/unsd/ungegn/romanization/
 - **Título:** *Romanization Systems*.
 - **URL:** https://unstats.un.org/unsd/ungegn/romanization/
 - **Cobertura:** romanización de escrituras no romanas al alfabeto romano; principios y proceso de adopción UNGEGN para nombres geográficos.
@@ -749,6 +750,7 @@ El registro contiene **48 fuentes** numeradas SND-SRC-0001 a SND-SRC-0048.
 
 - **Tier:** A/B técnico-institucional.
 - **Institución:** Unicode Consortium, Common Locale Data Repository.
+- **APA 7:** Unicode Consortium. (s. f.). *Unicode Transliteration Guidelines*. Common Locale Data Repository. https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines
 - **Título:** *Unicode Transliteration Guidelines*.
 - **URL:** https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines
 - **Cobertura:** diseño y uso de transliteradores; conversión entre scripts; reversibilidad y excepciones; distinción respecto de traducción.
