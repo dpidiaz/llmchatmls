@@ -1,6 +1,6 @@
 # SND-JA-006 — Acento tonal de Tokio como referencia
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** japonés.  
 **Variedad:** lengua común / dialecto de Tokio como ancla prosódica.  
 **Dominio:** prosodia / acento.
@@ -67,18 +67,19 @@ National Institute for Japanese Language and Linguistics. (s. f.). *日本語教
 
 ## 8. Relacionado con
 
-- SND-JA-001 — Tokio como ancla de referencia y sus límites
-- SND-JA-007 — Variación y cambio acentual
-- SND-FND-014 — Acento tonal
-- SND-FND-015 — Entonación
+- SND-JA-001 — Tokio como ancla de referencia y sus límites.
+- SND-JA-007 — Variación y cambio acentual.
+- SND-FND-014 — Acento tonal.
+- SND-FND-015 — Entonación.
 
-## 9. Nota de auditoría
+## 9. Gate editorial
 
-Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional vigente de NINJAL. La revisión lingüística independiente ya obtuvo PASS_WITH_NOTE; permanece pendiente EDITORIAL_REVIEW.
+Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional de NINJAL.
 
+- **LINGUISTIC_REVIEW:** PASS_WITH_NOTE.
+- **EDITORIAL_REVIEW:** PASS_WITH_EDITORIAL_CHANGES.
+- **Dependencia terminológica:** SND-FND-014 conserva la política general de “acento tonal / pitch accent”.
 
-## Revisión lingüística wave 04
+El uso de **acento tonal** sigue siendo una etiqueta editorial de consulta: no se atribuye a NINJAL como traducción oficial ni se usa para convertir el japonés en una categoría tipológica universal cerrada.
 
-- **Resultado:** PASS_WITH_NOTE.
-- **Control:** alcance, temporalidad y separación entre referencia de Tokio, variación interna y terminología editorial revisados de forma independiente.
-- **Siguiente gate:** EDITORIAL_REVIEW.
+Esta entrada no pasa todavía a READY_FOR_COMPOSITION mientras JA-007 y la arquitectura prosódica completa del perfil sigan pendientes de integración/reconciliación.
