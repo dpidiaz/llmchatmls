@@ -1,6 +1,6 @@
 # SND-CMP-001 — Cómo comparar sonidos sin asumir identidad
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Dominio:** comparación / fonética / fonología.  
 **Idioma:** transversal.
 
