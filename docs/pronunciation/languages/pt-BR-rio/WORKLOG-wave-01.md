@@ -48,3 +48,15 @@ Primer cluster sustantivo carioca con claims y evidencia auditables.
 - actualizar Master Inventory/STATUS desde el integrador;
 - ejecutar LINGUISTIC_REVIEW sobre las seis entradas;
 - continuar PTBR-002, PTBR-003, PTBR-005 y PTBR-009 en una wave posterior.
+
+
+## Cierre técnico de Wave 01
+
+- IDs PTBR-001…010: **10/10 cubiertos**.
+- Claims R33 explícitos: **47**.
+- Entradas con EVIDENCE_CHECKED pleno o acotado: **10/10**.
+- Entradas en LINGUISTIC_REVIEW: **0** — deliberadamente, para preservar revisión separada.
+- Archivos globales modificados: **0**.
+- PR de integración: **#7277** (draft).
+
+La wave queda **REVIEW_READY**, no READY_FOR_COMPOSITION.
