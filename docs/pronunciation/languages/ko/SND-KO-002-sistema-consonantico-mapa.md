@@ -14,7 +14,7 @@ La entrada histórica de Lee sirve como punto de partida, pero el perfil debe co
 
 | Cluster | Base histórica | Evidencia contemporánea | Estado |
 |---|---|---|---|
-| Oclusivas lax/tense/aspirated | SND-SRC-0020 | SND-SRC-0021 + KO-SRC-P02 | READY / primer cluster |
+| Oclusivas lax/tense/aspirated | SND-SRC-0020 | SND-SRC-0021 + SND-SRC-0033 | READY / primer cluster |
 | Fricativas | SND-SRC-0020 | buscar actualización acústica | SOURCE_MAPPED |
 | Africadas | SND-SRC-0020 | buscar actualización | SOURCE_MAPPED |
 | Nasales | SND-SRC-0020 | buscar procesos contextuales | SOURCE_MAPPED |
