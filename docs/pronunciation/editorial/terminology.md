@@ -37,7 +37,7 @@ Puede incluir decisiones segmentales y prosódicas.
 
 ### Prosodia
 
-Uso MLS: organización temporal y melódica por encima o a través de segmentos, incluyendo cuando corresponda acento, duración, tono, ritmo, prominencia, fraseo e intonación.
+Uso MLS: organización temporal y melódica por encima o a través de segmentos, incluyendo cuando corresponda acento, duración, tono, ritmo, prominencia, fraseo y entonación.
 
 No se asumirá que todas estas categorías funcionan de la misma manera en todas las lenguas.
 
@@ -119,9 +119,9 @@ Término paraguas potencialmente ambiguo. En MLS deberá especificarse siempre u
 
 ### Acento léxico
 
-Propiedad de prominencia o patrón prosódico asociado a una palabra según el sistema de la lengua.
+Categoría de prominencia o patrón prosódico asociado a una palabra **cuando el análisis de la lengua reconoce acento léxico**.
 
-No implica necesariamente mayor intensidad.
+No se presupone que todas las lenguas deban describirse mediante esta categoría y no implica necesariamente mayor intensidad.
 
 ### Prominencia
 
@@ -131,7 +131,7 @@ Saliencia relativa de una unidad dentro de una estructura prosódica. Su correla
 
 Uso MLS: categoría o patrón de frecuencia fundamental con función lingüística en sistemas donde esté documentada.
 
-No usar como sinónimo de intonación.
+No usar como sinónimo de entonación.
 
 ### Acento tonal
 
@@ -143,7 +143,7 @@ No tratar japonés y mandarín como si compartieran el mismo tipo de sistema.
 
 Término descriptivo para organización temporal y patrones de prominencia. Se evitarán clasificaciones tipológicas simplistas sin evidencia.
 
-### Intonación
+### Entonación
 
 Patrones melódicos/prosódicos asociados a unidades superiores a la palabra y a funciones discursivas, gramaticales o pragmáticas según la lengua.
 
@@ -192,6 +192,6 @@ La primera aparición de un término técnico en un capítulo deberá:
 
 ## 5. Estado v0.2
 
-**Cerrados para prototipo:** fonética, fonología, pronunciación, prosodia, ortografía, escritura, romanización, transliteración, transcripción fonológica/fonética, amplia/estrecha, fonema, alófono, segmento, realización, sílaba, fonotáctica, mora, acento, tono, intonación, duración, cantidad, geminación, variedad, estándar, norma ortoépica.
+**Cerrados para prototipo:** fonética, fonología, pronunciación, prosodia, ortografía, escritura, romanización, transliteración, transcripción fonológica/fonética, amplia/estrecha, fonema, alófono, segmento, realización, sílaba, fonotáctica, mora, acento, tono, entonación, duración, cantidad, geminación, variedad, estándar, norma ortoépica.
 
 **Pendiente de refinamiento por perfiles:** acento tonal, ritmo, prominencia y taxonomías prosódicas específicas.
