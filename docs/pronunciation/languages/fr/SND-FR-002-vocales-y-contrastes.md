@@ -2,7 +2,7 @@
 
 **Estado:** EVIDENCE_CHECKED.
 **Idioma:** francés.
-**Variedad principal en esta entrada:** francés parisino/metropolitano cuando la fuente lo indica.
+**Variedad principal en esta entrada:** variable según la fuente; **parisino** cuando el estudio está delimitado a París y **supralocal/norte de Francia** únicamente cuando la fuente lo declara.
 **Dominio:** vocales / variación.
 
 ## 1. No publicar un inventario atemporal
@@ -64,6 +64,11 @@ Es un gate contra dos errores:
 - congelar una Illustration de 1993 como sistema universal actual;
 - tratar cambios/fusiones parisinos como universales de la francofonía.
 
-## 7. Gate
+## 7. Entradas relacionadas
 
-**EVIDENCE_CHECKED** para este mapa descriptivo. El inventario fonológico final queda pendiente de LINGUISTIC_REVIEW y de la decisión exacta de subcorpus.
+- **SND-FR-001** — Selección de variedad de referencia.
+- **SND-FR-009** — Variación documentada en PFC.
+
+## 8. Gate
+
+Los claims permanecen **EVIDENCE_CHECKED**. La revisión lingüística independiente concluyó **PASS_WITH_SCOPE_WARNING**. El inventario fonológico final sigue bloqueado hasta fijar el subcorpus/variedad primaria y superar el gate editorial.

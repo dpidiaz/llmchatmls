@@ -17,7 +17,7 @@ Por ello MLS-SND no etiquetará automáticamente una realización parisina como 
 
 Cuando el tomo necesite una referencia principal para la descripción básica, utilizará provisionalmente:
 
-> **francés metropolitano supralocal / norte de Francia, con datos parisinos solo cuando la fuente esté delimitada a París.**
+> **una referencia metropolitana provisional, delimitada operacionalmente por el corpus que se seleccione; los datos de norte de Francia y de París conservarán siempre su etiqueta específica.**
 
 Esta elección sirve para mantener un perfil manejable dentro del MLS. No pretende representar toda la francofonía.
 
@@ -41,11 +41,12 @@ Cuando MLS use datos de un punto PFC concreto, deberá citar ese punto y su publ
 
 Ejemplos admisibles:
 
-- `FR-METROPOLITAN-SUPRALOCAL`
 - `FR-PARIS-PFC`
 - `FR-FRANCE-NORD`
 - `FR-QUEBEC-<FUENTE>`
 - `FR-SWITZERLAND-<FUENTE>`
+
+Estas etiquetas **no son intercambiables**. Si se adopta una etiqueta metropolitana o supralocal para la referencia editorial, deberá definirse por separado y vincularse a un corpus o criterio explícito.
 
 No usar `FR-STANDARD` sin definir qué norma o corpus sustenta la etiqueta.
 
@@ -61,7 +62,7 @@ No usar `FR-STANDARD` sin definir qué norma o corpus sustenta la etiqueta.
 
 ## 7. Decisión editorial
 
-La ancla metropolitana/supralocal es una **decisión MLS**, no un hecho que las fuentes impongan.
+El ancla metropolitana provisional es una **decisión MLS**, no un hecho que las fuentes impongan.
 
 Debe revisarse tras el primer cluster completo.
 
@@ -73,6 +74,11 @@ Fougeron, C., & Smith, C. L. (1993). French. *Journal of the International Phone
 
 Programme Phonologie du Français Contemporain. *PFC : usages, variétés, structure*.
 
-## 9. Gate
+## 9. Entradas relacionadas
 
-**EVIDENCE_CHECKED** para los claims listados. Falta LINGUISTIC_REVIEW.
+- **SND-FR-002** — Vocales y contrastes: mapa descriptivo.
+- **SND-FR-009** — Variación documentada en PFC.
+
+## 10. Gate
+
+Los claims permanecen **EVIDENCE_CHECKED**. La revisión lingüística independiente concluyó **PASS_WITH_SCOPE_WARNING**; esta entrada no pasa a READY_FOR_COMPOSITION hasta definir operacionalmente la referencia francesa y superar el gate editorial.

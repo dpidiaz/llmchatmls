@@ -67,8 +67,11 @@ MLS-SND combinará:
 | FR009-C04 | El corpus institucional declara más de 50 encuestas y 400 hablantes | SND-SRC-0009 | página principal PFC | VERIFIED |
 | FR009-C05 | Para datos de uno o dos puntos, PFC exige citar la encuesta y su publicación principal | SND-SRC-0009 | condiciones de uso | VERIFIED |
 
-## 7. Gate
+## 7. Entradas relacionadas
 
-**EVIDENCE_CHECKED.**
+- **SND-FR-001** — Selección de variedad de referencia.
+- **SND-FR-002** — Vocales y contrastes: mapa descriptivo.
 
-Pendiente: seleccionar los puntos concretos que servirán de base para la referencia metropolitana del perfil.
+## 8. Gate
+
+Los claims permanecen **EVIDENCE_CHECKED**. La revisión lingüística independiente concluyó **PASS**. Pendiente: seleccionar los puntos concretos que servirán de base para la referencia editorial del perfil; esta entrada no se promueve automáticamente a READY_FOR_COMPOSITION.
