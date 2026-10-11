@@ -1,6 +1,6 @@
 # MLS-SND — Estado canónico del proyecto
 
-**Corte:** 2026-10-11 (incluye integración IT-002/003/006/007 y JA-006/007)  
+**Corte:** 2026-10-11 (incluye integración IT-002/003/006/007, JA-006/007 y FND-014)  
 **Rama matriz:** `feat/mls-snd-foundation`  
 **Inventario:** 143 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad para cada entrada:** su archivo `SND-*.md`, cotejado con `MLS-SND-MASTER-INVENTORY.md`.
@@ -15,8 +15,8 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 | Estado registrado en el encabezado de cada entrada | Número |
 |---|---:|
 | EDITORIAL_REVIEW | 40 |
-| LINGUISTIC_REVIEW | 23 |
-| EVIDENCE_CHECKED | 25 |
+| LINGUISTIC_REVIEW | 24 |
+| EVIDENCE_CHECKED | 24 |
 | SOURCE_MAPPED | 3 |
 | DRAFTED | 2 |
 | RESEARCHED | 1 |
@@ -31,7 +31,7 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 
 | Bloque | Entradas | Estado / alcance |
 |---|---:|---|
-| Fundamentos FND | 18 | 10 EDITORIAL_REVIEW; 2 LINGUISTIC_REVIEW; 6 EVIDENCE_CHECKED |
+| Fundamentos FND | 18 | 10 EDITORIAL_REVIEW; 3 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
 | Representación REP | 12 | 7 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
 | Comparación CMP | 1 | CMP-001 EVIDENCE_CHECKED |
 | Referencia REF | 1 | REF-002 IN_PROGRESS; índice IPA vivo |
@@ -45,7 +45,9 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 | Coreano ko | 10 | 9 EDITORIAL_REVIEW; 1 SOURCE_MAPPED |
 | Japonés ja | 6 | 5 LINGUISTIC_REVIEW; 1 SOURCE_MAPPED |
 | Ruso ru | 8 | 8 EDITORIAL_REVIEW |
-| **Total** | **90** | |
+| **Total** | **96** | |
+
+**Reconciliación puntual:** FND-014 pasó de `EVIDENCE_CHECKED` a `LINGUISTIC_REVIEW` por el PR #7447, con auditoría en `reviews/SND-FND-014-LINGUISTIC-REVIEW-20261011.md`. El cambio modifica la distribución de estados pero no el total de entradas ni fuentes. La auditoría global 96/79 sigue pendiente; esta reconciliación no la sustituye.
 
 ## Integridad de fuentes
 
