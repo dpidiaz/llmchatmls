@@ -77,7 +77,7 @@ Los resultados deben conservar ese alcance.
 
 Antes de EVIDENCE_CHECKED global se requiere:
 
-1. canonicalizar ENUS-LOCAL-001/002;
+1. canonicalizar ENUS-W2-S01/002;
 2. comprobar localizadores en texto completo cuando la afirmación exceda el abstract;
 3. decidir qué ejemplos léxicos/corpus pueden publicarse;
 4. vincular la entrada con ENUS-005 (acento léxico) y ENUS-006 (habla conectada) sin duplicar contenido.
@@ -86,11 +86,11 @@ Antes de EVIDENCE_CHECKED global se requiere:
 
 | claim_id | afirmación | fuente provisional | localizador | estado |
 |---|---|---|---|---|
-| ENUS004-C01 | Fourakis distingue reducción fonológica y fonética y estudia efectos de stress/tempo | ENUS-LOCAL-002 | Abstract | SOURCED_PENDING_REGISTRY |
-| ENUS004-C02 | En el experimento, stress y tempo afectaron propiedades como duración y tamaño global del espacio vocálico | ENUS-LOCAL-002 | Abstract | SOURCED_PENDING_REGISTRY |
-| ENUS004-C03 | Cohen Priva & Strand estudian schwa y vocales breves usando el Buckeye corpus de habla espontánea | ENUS-LOCAL-001 | Abstract | SOURCED_PENDING_REGISTRY |
-| ENUS004-C04 | Los resultados de 2023 no apoyan la idea simple de que las vocales breves neutralicen universalmente hacia schwa | ENUS-LOCAL-001 | Abstract / Highlights | SOURCED_PENDING_REGISTRY |
-| ENUS004-C05 | Schwa mostró mayor dependencia de contexto y duración que otras vocales | ENUS-LOCAL-001 | Abstract / Highlights | SOURCED_PENDING_REGISTRY |
+| ENUS004-C01 | Fourakis distingue reducción fonológica y fonética y estudia efectos de stress/tempo | ENUS-W2-S02 | Abstract | SOURCED_PENDING_REGISTRY |
+| ENUS004-C02 | En el experimento, stress y tempo afectaron propiedades como duración y tamaño global del espacio vocálico | ENUS-W2-S02 | Abstract | SOURCED_PENDING_REGISTRY |
+| ENUS004-C03 | Cohen Priva & Strand estudian schwa y vocales breves usando el Buckeye corpus de habla espontánea | ENUS-W2-S01 | Abstract | SOURCED_PENDING_REGISTRY |
+| ENUS004-C04 | Los resultados de 2023 no apoyan la idea simple de que las vocales breves neutralicen universalmente hacia schwa | ENUS-W2-S01 | Abstract / Highlights | SOURCED_PENDING_REGISTRY |
+| ENUS004-C05 | Schwa mostró mayor dependencia de contexto y duración que otras vocales | ENUS-W2-S01 | Abstract / Highlights | SOURCED_PENDING_REGISTRY |
 
 ## 9. Fuentes provisionales
 
