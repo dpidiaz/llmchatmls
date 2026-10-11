@@ -1,7 +1,6 @@
 # SND-DE-001 — Alemán estándar y estándares nacionales
 
-**Estado:** EVIDENCE_CHECKED.  
-**Idioma:** alemán.  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** alemán.  
 **Dominio:** variedad / alcance descriptivo.
 
 ## 1. Decisión de arquitectura
