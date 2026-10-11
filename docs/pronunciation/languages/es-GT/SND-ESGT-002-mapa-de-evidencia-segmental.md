@@ -55,8 +55,8 @@ Después conviene trabajar róticas con fuentes específicas verificables y desa
 
 ## 5. Canonicalización de fuentes — wave 06
 
-- `ESGT-SRC-P01` → `SND-SRC-0025` (Utgård 2010; deduplicación).
-- `ESGT-SRC-P03` → `SND-SRC-0057` (McKinnon 2020).
-- `ESGT-SRC-P04` → `SND-SRC-0058` (Congosto Martín 2020).
+Las referencias temporales que permanecían en este mapa fueron resueltas contra el Source Registry canónico. La tabla anterior utiliza únicamente IDs `SND-SRC-*` vigentes.
 
 **Estado de la entrada:** se mantiene `SOURCE_MAPPED`. La sustitución de IDs resuelve trazabilidad bibliográfica; no constituye un gate R33 ni una validación lingüística del inventario.
+
+El historial de deduplicación y asignación se conserva fuera de la entrada, en `audits/ESGT-SOURCE-CANONICALIZATION-WAVE-06.md` y en el source map de es-GT.
