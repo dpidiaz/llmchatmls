@@ -11,7 +11,7 @@
 | SND-ENUS-002 | Sistema consonántico: mapa de evidencia | SOURCE_MAPPED |
 | SND-ENUS-003 | Sistemas vocálicos y variación regional | RESEARCHED |
 | SND-ENUS-004 | Reducción en conversación | RESEARCHED |
-| SND-ENUS-005 | Acento léxico | INVENTORY |
+| SND-ENUS-005 | Acento léxico | RESEARCHED |
 | SND-ENUS-006 | Habla conectada: corpus y alcance | RESEARCHED |
 | SND-ENUS-007 | Ritmo, organización temporal y prominencia | RESEARCHED |
 | SND-ENUS-008 | Entonación y variación prosódica regional | RESEARCHED |
@@ -46,4 +46,5 @@ Después de integrar esta wave:
 - promover las fuentes candidatas con IDs globales no conflictivos;
 - auditar SND-ENUS-003;
 - promover fuentes prosódicas y conversacionales candidatas al Source Registry global y ejecutar sus gates R33;
-- avanzar SND-ENUS-005 (acento léxico) con fuentes específicas.
+- promover fuentes candidatas locales al Source Registry global y ejecutar gates R33 de las entradas RESEARCHED;
+- mantener SND-ENUS-010 bloqueada hasta que los perfiles comparados estén suficientemente maduros.
