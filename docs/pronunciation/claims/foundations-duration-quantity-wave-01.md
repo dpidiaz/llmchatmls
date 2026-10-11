@@ -1,20 +1,26 @@
-# MLS-SND work claim — Duration and quantity wave 01
+# MLS-SND work claim — Duration and quantity review wave 01
 
 **Branch:** `snd/foundations-duration-quantity-wave-01`  
 **Base:** `feat/mls-snd-foundation`  
-**Type:** research + drafting + evidence mapping
+**Type:** supplementary research + independent linguistic review
 
-## Claimed ID
+## Reviewed ID
 
 - SND-FND-010 — Duración y cantidad
 
-## Scope
+## Coordination change
 
-Separar duración fonética medible de cantidad fonológica y fijar una base común para perfiles donde longitud, peso o geminación sean pertinentes.
+The canonical entry reached `EVIDENCE_CHECKED` on the matrix while this branch was researching it. This branch therefore does **not** replace or independently redraft the canonical entry.
+
+It contributes:
+
+- a specialized source map;
+- a second-pass check of the phonetics/phonology distinction;
+- proposed safeguards for prosodic lengthening and non-contrastive long segments.
 
 ## Exclusions
 
-- No asumir que toda diferencia temporal es contrastiva.
-- No asumir que toda ortografía doble representa duración.
-- No imponer una única teoría métrica/representacional.
-- No duplicar las entradas específicas de japonés, italiano, alemán u otros idiomas.
+- no overwrite of the canonical entry;
+- no claim that every durational difference is quantity;
+- no imposition of a single theory of phonological length;
+- no duplication of language-specific entries.
