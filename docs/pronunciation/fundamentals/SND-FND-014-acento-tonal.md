@@ -1,6 +1,6 @@
 # SND-FND-014 — Acento tonal: una etiqueta que exige definición local
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Dominio:** prosodia / tipología.  
 **Idioma:** transversal.  
 **Fuente tipológica principal:** SND-SRC-0048.
@@ -9,7 +9,7 @@
 
 El término **acento tonal** / *pitch accent* aparece en la literatura para sistemas prosódicos que no encajan de manera sencilla en prototipos de tono o acento. Sin embargo, la categoría es analíticamente controvertida.
 
-Hyman (2009) argumenta que los sistemas llamados *pitch-accent* no comparten un conjunto único de propiedades que permita tratarlos como un tipo prosódico coherente. Propone, en cambio, comparar las propiedades concretas de cada sistema.
+Hyman (2009) argumenta que los sistemas denominados *pitch-accent* no comparten un conjunto exclusivo de propiedades que permita reunirlos en un tercer tipo prosódico coherente. Su propuesta tipológica es describir propiedades de los subsistemas, en vez de clasificar lenguas solo mediante etiquetas. **Esta es la posición analítica del autor citado**, no una declaración de consenso universal ni una prohibición del término en otras tradiciones.
 
 ## 2. Política MLS-SND
 
@@ -33,7 +33,7 @@ Cada perfil deberá indicar qué propiedades están realmente documentadas:
 
 MLS-SND puede usar el japonés de Tokio como un perfil importante porque NINJAL mantiene recursos específicos de acento de Tokio y porque ese ancla ya está delimitada en SND-JA-001.
 
-Pero las propiedades del japonés de Tokio no se utilizarán para definir automáticamente qué debe significar “acento tonal” en cualquier otra lengua.
+El propio Hyman (2009, §3, pp. 218–219) presenta análisis alternativos —acentual y tonal— del japonés de Tokio. Esa coexistencia de análisis obliga a identificar la convención adoptada en cada entrada. Las propiedades de Tokio no se utilizarán para definir automáticamente “acento tonal” en otras lenguas.
 
 ## 4. Relación con tono y acento
 
@@ -49,11 +49,12 @@ La comparación se hará por propiedades y funciones, no solo por etiquetas term
 
 | claim_id | afirmación | source_id | localizador | alcance | estado |
 |---|---|---|---|---|---|
-| FND014-C01 | Hyman sostiene que los sistemas denominados pitch-accent no constituyen un prototipo prosódico único coherente | SND-SRC-0048 | abstract + conclusión tipológica del artículo | tipología prosódica | VERIFIED |
-| FND014-C02 | Hyman recomienda caracterizar propiedades de subsistemas en lugar de clasificar lenguas únicamente mediante etiquetas | SND-SRC-0048 | introducción/conclusión; enfoque property-driven | tipología fonológica | VERIFIED |
+| FND014-C01 | Hyman sostiene que los sistemas denominados pitch-accent no constituyen un prototipo prosódico único coherente | SND-SRC-0048 | resumen; §3, pp. 218–219; §4, pp. 230–234 | tipología prosódica, posición del autor | VERIFIED |
+| FND014-C02 | Hyman recomienda caracterizar propiedades de subsistemas en lugar de clasificar lenguas únicamente mediante etiquetas | SND-SRC-0048 | §1, pp. 213–215; §4, pp. 230–234 | tipología fonológica, posición del autor | VERIFIED |
 | FND014-C03 | NINJAL mantiene recursos específicos sobre acento de Tokio | SND-SRC-0013, SND-SRC-0014 | descripción de los recursos | japonés/Tokio | VERIFIED |
+| FND014-C04 | Hyman expone análisis acentuales y tonales del japonés de Tokio como alternativas en la literatura | SND-SRC-0048 | §3, pp. 218–219, discusión del ejemplo (8) | japonés/Tokio; historia analítica, no descripción fonética independiente | VERIFIED |
 
-## 6. Fuente propuesta
+## 6. Referencia bibliográfica
 
 Hyman, L. M. (2009). How (not) to do phonological typology: the case of pitch-accent. *Language Sciences, 31*(2–3), 213–238. https://doi.org/10.1016/j.langsci.2008.12.007
 
@@ -63,4 +64,4 @@ La traducción española preferida —“acento tonal” u otra— deberá fijar
 
 ## 8. Gate
 
-**EVIDENCE_CHECKED.** SND-SRC-0048 quedó canonicalizada. Aún se requiere revisión terminológica especializada de “acento tonal” y LINGUISTIC_REVIEW.
+**LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING (2026-10-11).** Se contrastó la interpretación tipológica con el artículo publicado de Hyman (2009), especialmente §§1, 3 y 4. La entrada conserva la atribución explícita de la postura a Hyman, evita universalizar una categoría discutida y no traslada datos de Tokio a otras variedades. **Pendiente:** decisión editorial sobre la traducción española y revisión editorial independiente; no promover todavía a `EDITORIAL_REVIEW` ni `READY_FOR_COMPOSITION`.
