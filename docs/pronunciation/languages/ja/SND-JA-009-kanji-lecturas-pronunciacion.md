@@ -1,7 +1,6 @@
 # SND-JA-009 — Kanji, lecturas y pronunciación
 
-**Estado:** EVIDENCE_CHECKED  
-**Idioma:** japonés  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** japonés  
 **Dominio:** escritura / léxico / pronunciación  
 **Referencia normativa:** 常用漢字表, con límites de alcance explícitos
 
