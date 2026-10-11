@@ -27,7 +27,7 @@ Este archivo es la cola canónica orientativa para chats paralelos. Antes de rec
 | 🇷🇺 ruso wave 2 | RU-002, 004, 007 | COMPLETE_AWAITING_INTEGRATION | PR #7289 |
 | 🇫🇷 francés | FR-001, 002, 009 | COMPLETE_AWAITING_INTEGRATION | PR #7282 |
 | 🇩🇪 alemán | DE-001, 007, 008 | COMPLETE_AWAITING_INTEGRATION | PR #7284 |
-| Fundamentos review | FND-002, 003, 004, 006, 007, 008, 009, 011, 013, 015 | COMPLETE_AWAITING_INTEGRATION | PR #7281 |
+| Fundamentos review | FND-002, 003, 004, 006, 007, 008, 009, 011, 013, 015 | INTEGRATED — LINGUISTIC_REVIEW | PR #7281 |
 | Representación IPA lectura | REP-003, REP-004 | ACTIVE / branch present | snd/representation-ipa-reading-wave-01 |
 | Representación IPA signos | REP-005, REP-006 | ACTIVE / branch present | snd/representation-diacritics-suprasegmentals-wave-01 |
 
