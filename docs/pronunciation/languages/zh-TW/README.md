@@ -27,7 +27,7 @@ Segmentos; sílaba; tonos; variación tonal; Zhuyin; romanización; escritura.
 | SND-ZHTW-007 | `SND-ZHTW-007-zhuyin.md` | EVIDENCE_CHECKED (heredada de foundation) |
 | SND-ZHTW-002 | `SND-ZHTW-002-estructura-silabica.md` | EVIDENCE_CHECKED (alcance acotado) |
 | SND-ZHTW-003 | `SND-ZHTW-003-iniciales-finales-mapa.md` | RESEARCHED_PARTIAL |
-| SND-ZHTW-009 | `SND-ZHTW-009-romanizacion-latina.md` | DRAFTED / PROVISIONAL_ACCEPT |
+| SND-ZHTW-009 | `SND-ZHTW-009-romanizacion-latina.md` | EVIDENCE_CHECKED / PROVISIONAL_ACCEPT |
 | SND-ZHTW-010 | `SND-ZHTW-010-variacion-por-contacto.md` | EVIDENCE_CHECKED |
 | SND-ZHTW-006 | `RESEARCH-NOTE-tone3-sandhi.md` | BLOCKED_BY_CONFLICTING_EVIDENCE |
 
