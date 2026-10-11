@@ -31,3 +31,19 @@ The index will record:
 ## Dependency
 
 Official IPA Chart / symbol-list resources (SND-SRC-0001) and current MLS-SND entries.
+
+
+## Completed
+
+2026-10-11
+
+### Outcome
+
+- Created `reference/SND-REF-002-ipa-index.md`.
+- Seeded the index from integrated MLS-SND entries rather than copying the complete IPA chart.
+- Added explicit statuses: USED, EXPLAINED, SOURCE_SPECIFIC, PENDING_CLASSIFICATION.
+- Added a notation guard so source-specific `/S/` in PTBR-006 is not misclassified as an IPA symbol.
+- Recorded official IPA chart revision/reissue distinction and CC BY-SA 4.0 reuse conditions.
+- Added `audits/REF-002-IPA-INDEX-SEED.md`.
+- Advanced only SND-REF-002 from `INVENTORY` to `IN_PROGRESS`.
+- Index remains intentionally incomplete until active language/representation waves are integrated.
