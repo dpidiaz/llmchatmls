@@ -1,6 +1,6 @@
 # SND-ESGT-003 — Vocales y variación
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** español.  
 **Variedad:** Guatemala; alcance nacional geolingüístico + evidencia de contacto explícitamente separada.  
 **Dominio:** vocales / fonética / variación.
@@ -89,7 +89,17 @@ La entrada no constituye un inventario acústico nacional exhaustivo.
 
 ## 9. Relacionado con
 
-- SND-ESGT-001 — Alcance y variedades
-- SND-ESGT-002 — Inventario segmental: mapa de evidencia
-- SND-FND-007 — Vocales: parámetros articulatorios/acústicos
-- SND-FND-017 — Variación
+- SND-ESGT-001 — Alcance y variedades.
+- SND-ESGT-002 — Inventario segmental: mapa de evidencia.
+- SND-ESGT-009 — Contacto lingüístico y alcance.
+- SND-FND-007 — Vocales: parámetros articulatorios/acústicos.
+- SND-FND-017 — Variación regional, social, estilística y temporal.
+
+
+## 10. Gate editorial
+
+**LINGUISTIC_REVIEW: PASS_WITH_ABSTRACT_SCOPE_WARNING. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+Se mantiene visible que SND-SRC-0053 respalda únicamente los claims C06–C07 al nivel verificable del abstract. La entrada no añade valores formánticos, tamaños de muestra ni estadística interna no comprobada.
+
+La evidencia bilingüe continúa etiquetada como contacto y no se convierte en una descripción homogénea de las vocales guatemaltecas.
