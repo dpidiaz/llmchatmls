@@ -3,7 +3,7 @@
 - IDs: `SND-ZHTW-002`, `SND-ZHTW-003`.
 - Fuentes nuevas: `SND-SRC-0092…0096`.
 - Tipo: clean reapply / source canonicalization / content integration.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Regla
 
