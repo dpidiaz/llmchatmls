@@ -1,6 +1,6 @@
 # SND-ZHTW-004 — Sistema tonal: mapa de evidencia
 
-**Estado:** EVIDENCE_CHECKED para el mapa descriptivo básico.
+**Estado:** LINGUISTIC_REVIEW para el mapa descriptivo básico.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin.
 **Dominio:** tono / fonología / fonética.
@@ -55,3 +55,11 @@ Antes de READY_FOR_COMPOSITION falta:
 - seleccionar la convención exacta para representar tonos al lector;
 - revisar realizaciones de Tone 2–4 con bibliografía específica;
 - resolver cómo presentar neutral tone y procesos tonales sin importar reglas de otra variedad.
+
+## Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
+- **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
+- **Siguiente gate:** EDITORIAL_REVIEW.
