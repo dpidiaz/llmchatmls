@@ -10,9 +10,9 @@
 | SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | EVIDENCE_CHECKED |
 | SND-ENUS-002 | Sistema consonántico: mapa de evidencia | SOURCE_MAPPED |
 | SND-ENUS-003 | Sistemas vocálicos y variación regional | RESEARCHED |
-| SND-ENUS-004 | Reducción vocálica | INVENTORY |
+| SND-ENUS-004 | Reducción en conversación | RESEARCHED |
 | SND-ENUS-005 | Acento léxico | INVENTORY |
-| SND-ENUS-006 | Habla conectada | INVENTORY |
+| SND-ENUS-006 | Habla conectada: corpus y alcance | RESEARCHED |
 | SND-ENUS-007 | Ritmo, organización temporal y prominencia | RESEARCHED |
 | SND-ENUS-008 | Entonación y variación prosódica regional | RESEARCHED |
 | SND-ENUS-009 | Southern Michigan como perfil documentado | EVIDENCE_CHECKED |
@@ -45,6 +45,5 @@ Falta justificar un inventario consonántico de alcance amplio sin extrapolar un
 Después de integrar esta wave:
 - promover las fuentes candidatas con IDs globales no conflictivos;
 - auditar SND-ENUS-003;
-- investigar SND-ENUS-004 (reducción) y SND-ENUS-006 (habla conectada) con corpus adecuado;
-- promover fuentes prosódicas candidatas al Source Registry global y ejecutar sus gates R33;
-- investigar SND-ENUS-004 (reducción) y SND-ENUS-006 (habla conectada) con corpus adecuado.
+- promover fuentes prosódicas y conversacionales candidatas al Source Registry global y ejecutar sus gates R33;
+- avanzar SND-ENUS-005 (acento léxico) con fuentes específicas.
