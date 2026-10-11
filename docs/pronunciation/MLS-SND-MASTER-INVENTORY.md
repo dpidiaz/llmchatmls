@@ -110,15 +110,15 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-IT-001 | Estándar, variedades regionales y mainstream | EVIDENCE_CHECKED |
-| SND-IT-002 | Vocales | SOURCE_MAPPED |
-| SND-IT-003 | Consonantes | SOURCE_MAPPED |
-| SND-IT-004 | Geminación/duración consonántica | EVIDENCE_CHECKED |
-| SND-IT-005 | Acento | EVIDENCE_CHECKED |
-| SND-IT-006 | E y O: pronunciación y ortoepía | SOURCE_MAPPED |
-| SND-IT-007 | S y Z: pronunciación y ortoepía | SOURCE_MAPPED |
-| SND-IT-008 | Grafía y pronunciación | EVIDENCE_CHECKED |
-| SND-IT-009 | Variación regional | EVIDENCE_CHECKED |
+| SND-IT-001 | Estándar, variedades regionales y mainstream | LINGUISTIC_REVIEW |
+| SND-IT-002 | Vocales | LINGUISTIC_REVIEW |
+| SND-IT-003 | Consonantes | LINGUISTIC_REVIEW |
+| SND-IT-004 | Geminación/duración consonántica | LINGUISTIC_REVIEW |
+| SND-IT-005 | Acento | LINGUISTIC_REVIEW |
+| SND-IT-006 | E y O: pronunciación y ortoepía | LINGUISTIC_REVIEW |
+| SND-IT-007 | S y Z: pronunciación y ortoepía | LINGUISTIC_REVIEW |
+| SND-IT-008 | Grafía y pronunciación | LINGUISTIC_REVIEW |
+| SND-IT-009 | Variación regional | LINGUISTIC_REVIEW |
 
 ### 🇫🇷 Francés — FR
 
