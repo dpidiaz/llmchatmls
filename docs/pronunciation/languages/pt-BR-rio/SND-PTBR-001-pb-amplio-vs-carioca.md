@@ -48,8 +48,9 @@ La futura referencia principal será habla urbana de Río de Janeiro cuando exis
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
 | PTBR001-C01 | Existe una descripción académica específicamente titulada *Um perfil da fala carioca* | SND-SRC-0007 | Callou (2009), cap. “Um perfil da fala carioca”, pp. 129–152 | Río de Janeiro | VERIFIED |
-| PTBR001-C02 | La fuente forma parte de una obra académica abierta de SciELO/EDUFBA | SND-SRC-0007 | metadatos editoriales SciELO/JSTOR de la obra y del capítulo | fuente | VERIFIED |
-| PTBR001-C03 | NURC-RJ ofrece inquéritos con metadatos individuales de hablantes de Río de Janeiro, incluyendo edad, profesión, zona residencial y fecha | SND-SRC-0026 | inquéritos institucionales NURC-RJ; usar identificador de inquérito por ejemplo concreto | Río de Janeiro, corpus | VERIFIED |
+| PTBR001-C02 | Callou compara realizaciones de /S/ en coda entre ciudades y documenta diferencias que incluyen Río de Janeiro | SND-SRC-0007 | Callou (2009), pp. 133–134, Quadro 1, apartado “A propósito do S” y Figura 1 | contraste regional | VERIFIED |
+| PTBR001-C03 | El capítulo documenta variación social interna en los datos cariocas discutidos | SND-SRC-0007 | pp. 134–135, Tabela 1 y párrafo sobre Callou & Marques (1975) | Río de Janeiro / variación social | VERIFIED |
+| PTBR001-C04 | NURC-RJ ofrece inquéritos con metadatos individuales de hablantes de Río de Janeiro, incluyendo edad, profesión, zona residencial y fecha | SND-SRC-0026 | inquéritos institucionales NURC-RJ; usar identificador de inquérito por ejemplo concreto | Río de Janeiro, corpus | VERIFIED |
 
 ## 6. Fuentes
 
@@ -67,3 +68,9 @@ Projeto NURC-RJ. Faculdade de Letras, Universidade Federal do Rio de Janeiro. Co
 ## 8. Nota editorial
 
 La taxonomía PB_BROAD / RIO_CARIOCA es propia de MLS-SND y sirve para controlar alcance; no es terminología de Callou.
+
+## 9. Revisión lingüística wave 01
+
+- **Resultado:** PASS para la política de alcance, con revisión especializada del perfil aún pendiente.
+- **Ajuste:** los claims de alcance quedan ligados a pasajes sustantivos de variación regional/social, no solo a metadatos editoriales.
+- **Estado:** EVIDENCE_CHECKED mantenido.
