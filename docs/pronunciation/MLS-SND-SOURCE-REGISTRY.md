@@ -803,3 +803,43 @@ SND-SRC-0051 y SND-SRC-0052 se incorporan para fortalecer CMP-001 con controles 
 ## Resultado del registro tras SND-SRC-0053
 
 El registro contiene **53 fuentes canónicas** hasta SND-SRC-0053.
+
+
+### SND-SRC-0054 — Español K’iche’–español / /f/ y contacto
+
+- **Tier:** B.
+- **APA 7:** Baird, B., & Regan, B. (2025). The status of /f/ in Mayan-accented Spanish. *Studies in Hispanic and Lusophone Linguistics, 18*(1), 1–35. https://doi.org/10.1515/shll-2025-2001
+- **Idioma/variedad:** español de bilingües K’iche’–español dentro del estudio.
+- **Cobertura:** 1,430 tokens de /f/ de 40 bilingües; [f], lenición [h], fortición [p]; dominancia lingüística, educación, contexto fonético, contacto y *enregisterment*.
+- **Localizadores:** Abstract; §1 Introduction; §6 Conclusions.
+- **Acceso:** Open Access; CC BY 4.0 según el editor.
+- **Limitación:** población bilingüe y fenómeno /f/; no representa automáticamente todo el español de Guatemala.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_CONTACT_SCOPE.
+
+### SND-SRC-0055 — RAE/ASALE / Ortografía 2010
+
+- **Tier:** A.
+- **APA 7:** Real Academia Española & Asociación de Academias de la Lengua Española. (2010). *Ortografía de la lengua española*. Espasa. https://www.asale.org/obras-y-proyectos/ortografia/ortografia-2010
+- **Idioma/variedad:** español panhispánico; sistema ortográfico.
+- **Cobertura:** objetivo y descripción institucional del sistema ortográfico y de las normas de escritura.
+- **Localizador:** ficha oficial “Ortografía 2010”, descripción del objetivo y características.
+- **Limitación:** fuente ortográfica/normativa; no es descripción fonética específica de Guatemala.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_INSTITUTIONAL.
+
+### SND-SRC-0056 — RAE/ASALE / Ortografía básica §2.4.2
+
+- **Tier:** A.
+- **APA 7:** Real Academia Española & Asociación de Academias de la Lengua Española. (2012). *Ortografía básica de la lengua española*. Espasa. Versión en línea, §2.4.2 “La acentuación gráfica de las palabras con secuencias vocálicas”.
+- **URL:** https://www.rae.es/ortografía-básica/uso-de-la-tilde/las-reglas-de-acentuación-gráfica/la-acentuación-gráfica-de-las-palabras-con-secuencias-vocálicas
+- **Idioma/variedad:** español panhispánico.
+- **Cobertura:** variación de hiato/diptongo/triptongo y convención ortográfica para acentuación gráfica independiente de la articulación real.
+- **Localizador:** §2.4.2, párrafos introductorios y párrafo que comienza “Por todo ello…”.
+- **Limitación:** convención ortográfica panhispánica; no describe específicamente la pronunciación guatemalteca.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_INSTITUTIONAL.
+
+## 24. Resultado del registro v0.13
+
+El registro contiene **56 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0056.
