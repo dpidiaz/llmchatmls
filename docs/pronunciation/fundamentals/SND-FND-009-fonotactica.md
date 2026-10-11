@@ -1,6 +1,6 @@
 # SND-FND-009 — Fonotáctica
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonología.
 **Idioma:** transversal.
 
@@ -58,7 +58,7 @@ Las restricciones concretas pertenecen a los perfiles por idioma; esta entrada s
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
-- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; corresponde al gate evidencial anterior; los gates lingüístico y editorial se registran por separado.
 
 ## 9. Revisión lingüística
 
@@ -66,3 +66,12 @@ Las restricciones concretas pertenecen a los perfiles por idioma; esta entrada s
 - **Resultado:** PASS WITH CHANGE → `LINGUISTIC_REVIEW`.
 - **Ajuste:** se retiró “habituales” de la definición básica para no confundir restricciones fonotácticas con mera frecuencia de uso; la gradiencia queda como fenómeno adicional cuando una fuente la documente.
 - **Límite:** ninguna restricción concreta se generaliza entre idiomas.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la definición, la relación con la sílaba y la advertencia ortográfica forman una secuencia breve y fácil de consultar; la distinción entre restricción y gradiencia permanece visible.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` solo después de comprobar política final de composición/metadatos y ausencia de cambios sustantivos posteriores.
