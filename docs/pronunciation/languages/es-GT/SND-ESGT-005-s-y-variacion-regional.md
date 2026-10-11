@@ -1,6 +1,6 @@
 # SND-ESGT-005 — /s/ y variación regional
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala; contraste nacional/oriental.
 **Dominio:** consonantes / variación regional.
@@ -62,6 +62,19 @@ Asociación de Academias de la Lengua Española. (2021). *Crónica de la lengua 
 
 ## 8. Relacionado con
 
-- SND-ESGT-001 — Alcance y variedades del español de Guatemala
-- SND-FND-006 — Consonantes: parámetros articulatorios
-- SND-FND-017 — Variación
+- SND-ESGT-001 — Alcance y variedades del español de Guatemala.
+- SND-ESGT-002 — Inventario segmental: mapa de evidencia.
+- SND-FND-006 — Consonantes: parámetros articulatorios.
+- SND-FND-017 — Variación regional, social, estilística y temporal.
+
+## 9. Gate editorial
+
+**LINGUISTIC_REVIEW: PASS_WITH_SCOPE_WARNING. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+Controles preservados:
+- la síntesis de ASALE no se trata como atlas exhaustivo de /s/ en Guatemala;
+- “prestigio” se reporta como valoración sociolingüística de la fuente, no como recomendación MLS-SND;
+- no se infieren tasas por localidad, generación o registro sin evidencia adicional;
+- no se fija una transcripción estrecha de todos los alófonos a partir de la fuente marco.
+
+ESGT-002 permanece SOURCE_MAPPED y este bloque no pasa todavía a READY_FOR_COMPOSITION.
