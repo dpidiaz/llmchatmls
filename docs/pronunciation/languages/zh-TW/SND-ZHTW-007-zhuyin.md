@@ -1,6 +1,6 @@
 # SND-ZHTW-007 — Zhuyin/Bopomofo
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** sistema local de anotación / escritura-pronunciación.
 
@@ -60,3 +60,12 @@ La separación conceptual entre Zhuyin e IPA es una decisión metodológica MLS-
 - **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
 - **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** Zhuyin se presenta como sistema local de representación con función propia; la entrada evita equipararlo con IPA y mantiene separada la decisión de romanización latina.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
+- **Siguiente paso:** aplicar composition readiness a esta misma versión.
