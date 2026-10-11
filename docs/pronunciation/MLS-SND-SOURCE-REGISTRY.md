@@ -758,3 +758,31 @@ El registro contiene **48 fuentes** numeradas SND-SRC-0001 a SND-SRC-0048.
 ## 21. Resultado del registro v0.10
 
 El registro contiene **50 fuentes** numeradas SND-SRC-0001 a SND-SRC-0050.
+
+
+### SND-SRC-0051 — Comparación interlingüística / /p/ y VOT
+
+- **Tier:** B.
+- **APA 7:** Lee, S. A. S., & Iverson, G. K. (2017). The emergence of phonetic categories in Korean–English bilingual children. *Journal of Child Language, 44*(6), 1485–1515. https://doi.org/10.1017/S0305000916000659
+- **Cobertura usada por MLS-SND:** control metodológico para distinguir una categoría/símbolo fonémico compartido de su implementación fonética. La introducción usa español e inglés /p/ como ejemplo y señala valores de VOT diferentes.
+- **Localizador:** introducción, pasaje inmediatamente posterior a la definición de *phonetic category formation* que ejemplifica Spanish/English /p/ y VOT.
+- **Limitación:** el artículo trata adquisición bilingüe coreano–inglés; el ejemplo español/inglés se usa únicamente como control metodológico, no como descripción completa de ninguna variedad de español o inglés.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_FOR_COMPARATIVE_METHOD.
+
+### SND-SRC-0052 — Comparación interlingüística / vocales altas centrales
+
+- **Tier:** B.
+- **APA 7:** Cavar, M. E., Rudman, E. M., Nagaraj, N., & Peters, L. (2025). High central vowels in Polish, Ukrainian and Russian. *Journal of the International Phonetic Association, 55*(1–2), 1–34. https://doi.org/10.1017/S0025100325000040
+- **Cobertura usada por MLS-SND:** control metodológico para mostrar que una misma notación amplia /ɨ/ puede facilitar una comparación mientras las realizaciones articulatorias siguen siendo objeto de investigación y pueden diferir entre lenguas.
+- **Localizadores:** §1, especialmente la discusión sobre el uso de /ɨ/ para presentación y el objetivo de comprobar las realizaciones físicas; sección de resultados/discusión y conclusiones para diferencias articulatorias.
+- **Acceso:** Open Access, CC BY 4.0.
+- **Limitación:** estudio específico de polaco, ucraniano y ruso; no autoriza a generalizar sobre cualquier uso de /ɨ/ ni sobre cualquier símbolo IPA compartido.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_FOR_COMPARATIVE_METHOD.
+
+## 22. Resultado del registro v0.11
+
+El registro contiene **52 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0052.
+
+SND-SRC-0051 y SND-SRC-0052 se incorporan para fortalecer CMP-001 con controles empíricos independientes sin convertir ejemplos comparativos en descripciones generales de las variedades implicadas.
