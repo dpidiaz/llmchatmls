@@ -3,7 +3,7 @@
 - ID: `SND-FND-002`.
 - Tipo: composition-readiness dry run.
 - Base: `feat/mls-snd-foundation`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — BLOCKED by COMP-BLOCKER-001.
 
 ## Objetivo
 
