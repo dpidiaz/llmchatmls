@@ -1,45 +1,63 @@
 # SND-ZHTW-009 — Romanización latina
 
-**Estado:** DRAFTED — decisión editorial provisional.
+**Estado:** EVIDENCE_CHECKED para la base factual; decisión editorial **PROVISIONAL_ACCEPT**.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** romanización / consulta.
 
-## 1. Evidencia institucional mínima
+## 1. Evidencia institucional contemporánea
 
-El *Revised Mandarin Chinese Dictionary* del Ministry of Education permite consulta mediante **Bopomofo** y **Hanyu Pinyin**, y sus entradas muestran ambas capas.
+El *Revised Mandarin Chinese Dictionary* del Ministry of Education de Taiwán permite consulta mediante caracteres, Bopomofo o **Hanyu Pinyin**. Sus entradas presentan campos separados de Bopomofo y Hanyu Pinyin.
 
-Esto demuestra que Hanyu Pinyin puede funcionar como una capa latina de consulta junto a Zhuyin en un recurso institucional taiwanés contemporáneo.
+Esto demuestra que Hanyu Pinyin funciona actualmente como una capa latina de consulta dentro de un recurso institucional taiwanés.
 
-## 2. Decisión provisional MLS-SND
+## 2. Qué no demuestra
 
-Cuando una romanización latina ayude al lector, el perfil zh-TW podrá utilizar **Hanyu Pinyin**, siempre etiquetado como romanización.
+La evidencia no demuestra que Hanyu Pinyin:
 
-La secuencia recomendada será, según necesidad:
+- sea la única romanización usada histórica o actualmente en Taiwán;
+- sustituya a Zhuyin;
+- sea una transcripción IPA;
+- capture todas las realizaciones fonéticas de Taiwan Mandarin.
+
+## 3. Decisión provisional MLS-SND
+
+Cuando una romanización latina ayude al lector, el perfil zh-TW podrá utilizar **Hanyu Pinyin**, siempre identificado como romanización.
+
+Secuencia posible:
 
 **caracteres → Zhuyin → Hanyu Pinyin → IPA → explicación**
 
-No todas las entradas necesitan las cuatro capas.
+No todas las entradas necesitan todas las capas.
 
-## 3. Qué no implica esta decisión
+## 4. Regla de economía
 
-- No afirma que Hanyu Pinyin sea la única romanización históricamente usada en Taiwán.
-- No lo convierte en transcripción fonética.
-- No reemplaza Zhuyin en el perfil.
-- No obliga a mostrar Pinyin si añade ruido y no información.
+Pinyin se mostrará cuando aporte una función concreta: búsqueda, identificación de forma o interoperabilidad con recursos externos. No se añadirá solo por simetría visual.
 
-## 4. Evidencia R33
+## 5. Relación con IPA
+
+- **Hanyu Pinyin:** romanización.
+- **IPA:** representación fonética/fonológica según el nivel declarado.
+
+Una letra de Pinyin nunca se interpretará automáticamente como el símbolo IPA visualmente equivalente.
+
+## 6. Evidencia R33
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| ZHTW009-C01 | El diccionario revisado del MOE ofrece consulta en Bopomofo y Hanyu Pinyin | ZHTW-LOCAL-001 | Basic Search / teclados de Bopomofo y Hanyu Pinyin | VERIFIED |
-| ZHTW009-C02 | Las entradas del diccionario presentan ambas capas de pronunciación | ZHTW-LOCAL-001 | campos “Bopomofo” y “Hanyu Pinyin” en entradas | VERIFIED |
+| ZHTW009-C01 | El diccionario MOE permite búsqueda por Bopomofo o Hanyu Pinyin | ZHTW-LOCAL-001 | Basic Search: campo y teclados de Bopomofo/Hanyu Pinyin | VERIFIED |
+| ZHTW009-C02 | Las entradas presentan campos separados de Bopomofo y Hanyu Pinyin | ZHTW-LOCAL-001 | entradas individuales del diccionario | VERIFIED |
+| ZHTW009-C03 | El recurso corresponde al Revised Mandarin Chinese Dictionary, Taiwan Academic Network Version 6 | ZHTW-LOCAL-001 | metadatos/pie de página | VERIFIED |
 
-## 5. Fuente
+## 7. Fuente
 
 Ministry of Education, R.O.C. (Taiwan). (2021–). *Revised Mandarin Chinese Dictionary*, Taiwan Academic Network Version 6. https://dict.revised.moe.edu.tw/
 
-## 6. Estado de decisión
+## 8. Estado editorial
 
-**PROVISIONAL_ACCEPT:** Hanyu Pinyin como romanización latina auxiliar para MLS-SND zh-TW.
+**PROVISIONAL_ACCEPT:** Hanyu Pinyin como romanización latina auxiliar de zh-TW.
 
-Antes de convertirla en política global del tomo, el coordinador debe decidir si la misma capa se usará en otros contenidos de chino del MLS.
+La promoción a política global corresponde a la wave de romanizaciones/transliteraciones; esta rama ya notificó esa dependencia.
+
+## 9. Advertencia histórica
+
+La historia de la romanización en Taiwán queda fuera de esta entrada. Si se necesita, deberá investigarse como contenido propio.
