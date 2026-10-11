@@ -41,7 +41,7 @@ Una tabla futura podrá alinear estas capas, pero no colapsarlas.
 |---|---|---|---|---|
 | ZHTW004-C01 | El artículo describe cuatro tonos léxicos de Taiwan Mandarin | SND-SRC-0022 | Introduction, discusión previa a Figure 1 | VERIFIED |
 | ZHTW004-C02 | Tone 3 aparece con dos realizaciones ilustradas: low fall y low dipping | SND-SRC-0022 | Figure 1 caption | VERIFIED |
-| ZHTW004-C03 | Huang propone un análisis /H, M, L, HM/ para los cuatro tonos de Taiwan Mandarin | ZHTW-LOCAL-003 | Abstract | VERIFIED_AS_ANALYTICAL_PROPOSAL |
+| ZHTW004-C03 | Huang propone un análisis /H, M, L, HM/ para los cuatro tonos de Taiwan Mandarin | SND-SRC-0043 | Abstract | VERIFIED_AS_ANALYTICAL_PROPOSAL |
 
 ## 5. Fuentes
 
