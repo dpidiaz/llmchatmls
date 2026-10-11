@@ -7,7 +7,7 @@
 Este grafo usa únicamente relaciones explícitas del inventario y unas pocas relaciones estructurales ya fijadas por las políticas/guía de transcripción. **No infiere relaciones lingüísticas nuevas.**
 
 - Nodos inventariados detectados: **144**.
-- Aristas explícitas/estructurales: **25**.
+- Aristas explícitas/estructurales entre entradas: **23**.
 
 ## Tipos de arista
 
@@ -35,8 +35,6 @@ Este grafo usa únicamente relaciones explícitas del inventario y unas pocas re
 | SND-JA-006 | SND-FND-014 | profile_to_foundation |
 | SND-KO-009 | SND-REP-010 | profile_to_representation |
 | SND-PTBR-010 | SND-FND-015 | profile_to_foundation |
-| SND-REP-002 | SND-SRC-000 | depends_on |
-| SND-REP-002 | SND-SRC-0001 | depends_on |
 | SND-REP-003 | SND-REP-002 | depends_on |
 | SND-REP-004 | SND-REP-002 | depends_on |
 | SND-REP-005 | SND-REP-002 | depends_on |
@@ -53,3 +51,20 @@ Este grafo usa únicamente relaciones explícitas del inventario y unas pocas re
 - No se generan enlaces por semejanza de título.
 - Los enlaces entre perfiles y fundamentos se ampliarán solo cuando las entradas los declaren explícitamente.
 - El grafo no cambia estados editoriales ni gates R33.
+## Auditoría de conteo
+
+El Master Inventory declara **143 unidades editoriales candidatas**, pero sus tablas actuales contienen **144 IDs únicos**:
+
+- Fundamentos: 18
+- Representación: 12
+- Perfiles lingüísticos: **95** (el resumen global todavía dice 94)
+- Comparación: 11
+- Referencia: 8
+
+Total detectado: **144**.
+
+Este archivo **no corrige** el Master Inventory desde una rama trabajadora. El integrador debe reconciliar el conteo global.
+
+## Separación de evidencias
+
+Dependencias como `SND-REP-002 → SND-SRC-0001/0002` pertenecen a la capa de evidencia, no al grafo de referencias entre entradas. Se conservan en Source Registry/tablas R33 y quedan fuera de este grafo.
