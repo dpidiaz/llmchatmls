@@ -1,6 +1,6 @@
 # SND-REP-003 — Cómo leer consonantes del IPA
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** representación / fonética.
 **Idioma:** transversal.
 
@@ -71,3 +71,12 @@ La entrada enseña a orientarse en la tabla. No reproduce aquí el inventario co
 - **No se cambió:** el alcance transversal, la función editorial de la entrada ni la separación IPA ↔ inventario de una lengua.
 - **Gate alcanzado:** `LINGUISTIC_REVIEW`.
 - **Pendiente:** `EDITORIAL_REVIEW`.
+
+
+## 9. Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La entrada conduce al lector desde la función de la tabla hacia lugar, modo y fonación sin presentar el IPA como inventario universal; la precisión sordo/sonoro queda visible y la sección sobre límites evita memorización acrítica.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, símbolos IPA, transcripciones ni alcance durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` únicamente después del gate de composition readiness aplicado a esta misma versión.
