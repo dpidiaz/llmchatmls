@@ -12,13 +12,7 @@ Una sílaba acentuada puede adquirir mayor prominencia mediante distintas combin
 
 ## 2. Correlatos fonéticos
 
-La fuente introductoria documenta que, en lenguas habladas, las sílabas acentuadas suelen realizarse con alguna combinación de:
-
-- mayor intensidad;
-- mayor duración;
-- mayor altura tonal.
-
-La combinación exacta puede variar entre lenguas.
+La fuente introductoria resume que, en lenguas habladas, las sílabas acentuadas suelen realizarse con alguna combinación de mayor intensidad, mayor duración y/o mayor pitch. MLS-SND conservará esa formulación como **punto de partida pedagógico**, no como ley acústica universal: cada perfil deberá documentar sus correlatos concretos y no asumir que la prominencia exige siempre un ascenso de F0.
 
 ## 3. Acento no es una sola propiedad acústica
 
@@ -55,3 +49,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 9. Nota editorial
 
 “Prominencia” se usa como término más general. Los perfiles por idioma deberán precisar su análisis prosódico en vez de importar automáticamente la terminología del inglés.
+
+## 10. Linguistic review wave 01
+
+- **Resultado:** PASS con aclaración.
+- **Ajuste:** se evita convertir “higher pitch” de la fuente introductoria en una regla universal sobre F0.
+- **Siguiente estado recomendado:** EDITORIAL_REVIEW para esta entrada transversal.
