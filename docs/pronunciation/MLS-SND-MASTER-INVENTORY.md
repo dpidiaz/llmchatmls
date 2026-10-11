@@ -24,20 +24,20 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-FND-001 | El sonido como parte del idioma | — | INVENTORY |
-| SND-FND-002 | Fonética y fonología | terminología v0.2 | EVIDENCE_CHECKED |
-| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | EVIDENCE_CHECKED |
-| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | EVIDENCE_CHECKED |
+| SND-FND-002 | Fonética y fonología | terminología v0.2 | LINGUISTIC_REVIEW |
+| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | LINGUISTIC_REVIEW |
+| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | LINGUISTIC_REVIEW |
 | SND-FND-005 | Percepción del habla | fuentes generales | INVENTORY |
-| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | EVIDENCE_CHECKED |
-| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | EVIDENCE_CHECKED |
-| SND-FND-008 | Sílaba | terminología | EVIDENCE_CHECKED |
-| SND-FND-009 | Fonotáctica | FND-008 | EVIDENCE_CHECKED |
+| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | LINGUISTIC_REVIEW |
+| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
+| SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
+| SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
 | SND-FND-010 | Duración y cantidad | terminología | INVENTORY |
-| SND-FND-011 | Acento y prominencia | terminología | EVIDENCE_CHECKED |
+| SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
-| SND-FND-013 | Tono | terminología | EVIDENCE_CHECKED |
+| SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
-| SND-FND-015 | Entonación | terminología | EVIDENCE_CHECKED |
+| SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
 | SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | SOURCE_MAPPED |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
@@ -69,7 +69,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-ESGT-002 | Inventario segmental: mapa de evidencia | INVENTORY |
 | SND-ESGT-003 | Vocales y variación | INVENTORY |
 | SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
-| SND-ESGT-005 | /s/ y variación regional | SOURCE_MAPPED |
+| SND-ESGT-005 | /s/ y variación regional | EVIDENCE_CHECKED |
 | SND-ESGT-006 | Róticas | INVENTORY |
 | SND-ESGT-007 | Acento y prominencia | INVENTORY |
 | SND-ESGT-008 | Entonación | INVENTORY |
@@ -88,19 +88,19 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-ENUS-006 | Habla conectada | INVENTORY |
 | SND-ENUS-007 | Ritmo y prominencia | INVENTORY |
 | SND-ENUS-008 | Entonación | INVENTORY |
-| SND-ENUS-009 | Southern Michigan como perfil documentado | SOURCE_MAPPED |
+| SND-ENUS-009 | Southern Michigan como perfil documentado | EVIDENCE_CHECKED |
 | SND-ENUS-010 | Comparaciones con español/portugués | BLOCKED_BY_PROFILES |
 
 ### 🇧🇷 Portugués brasileño — referencia carioca — PTBR
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-PTBR-001 | PB amplio vs. habla carioca | DRAFTED |
+| SND-PTBR-001 | PB amplio vs. habla carioca | EVIDENCE_CHECKED |
 | SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
 | SND-PTBR-005 | Consonantes: mapa general | INVENTORY |
-| SND-PTBR-006 | /s/ en coda y variación carioca | SOURCE_MAPPED |
+| SND-PTBR-006 | /s/ en coda y variación carioca | EVIDENCE_CHECKED |
 | SND-PTBR-007 | Róticas y variación | SOURCE_MAPPED |
 | SND-PTBR-008 | /l/ en coda y variación | SOURCE_MAPPED |
 | SND-PTBR-009 | Acento y ritmo | INVENTORY |
