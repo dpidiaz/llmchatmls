@@ -38,13 +38,13 @@ Por tanto, Swiss Standard German necesita tratamiento propio cuando un rasgo fon
 
 Se mantiene **MULTI_REFERENCE**.
 
-SND-SRC-0030 y SND-SRC-0031 ya están canonicalizadas. DE-PROP-003 permanece fuera de esta entrada mientras sus metadatos no estén completos.
+SND-SRC-0030 y SND-SRC-0031 ya están canonicalizadas. Una fuente contextual adicional sobre Swiss Standard German permanece fuera de esta entrada mientras sus metadatos no estén completos.
 
 ## 6. Evidencia R33
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| DE001-C01 | La referencia alemana no debe extrapolarse automáticamente a Austria y Suiza | SND-SRC-0010 + SND-SRC-0019 + SND-SRC-0030/002 | alcance declarado de cada fuente | EDITORIAL_SYNTHESIS |
+| DE001-C01 | La referencia alemana no debe extrapolarse automáticamente a Austria y Suiza | SND-SRC-0010 + SND-SRC-0019 + SND-SRC-0030 + SND-SRC-0031 | alcance declarado de cada fuente | EDITORIAL_SYNTHESIS |
 | DE001-C02 | El estándar austríaco muestra variación fonética condicionada y normas en competencia | SND-SRC-0030 | Abstract / pp. 143–175 | VERIFIED |
 | DE001-C03 | Swiss Standard German presenta variación e influencia de dialectos alemánicos en el dominio fonético estudiado | SND-SRC-0031 | Abstract + Introduction | VERIFIED |
 
