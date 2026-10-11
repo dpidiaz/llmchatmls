@@ -24,20 +24,20 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-FND-001 | El sonido como parte del idioma | — | EVIDENCE_CHECKED |
-| SND-FND-002 | Fonética y fonología | terminología v0.2 | EDITORIAL_REVIEW |
-| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | EDITORIAL_REVIEW |
-| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | EDITORIAL_REVIEW |
+| SND-FND-002 | Fonética y fonología | terminología v0.2 | READY_FOR_COMPOSITION |
+| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | READY_FOR_COMPOSITION |
+| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | READY_FOR_COMPOSITION |
 | SND-FND-005 | Percepción del habla | fuentes generales | EVIDENCE_CHECKED |
-| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | EDITORIAL_REVIEW |
-| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | EDITORIAL_REVIEW |
-| SND-FND-008 | Sílaba | terminología | EDITORIAL_REVIEW |
-| SND-FND-009 | Fonotáctica | FND-008 | EDITORIAL_REVIEW |
+| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | READY_FOR_COMPOSITION |
+| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | READY_FOR_COMPOSITION |
+| SND-FND-008 | Sílaba | terminología | READY_FOR_COMPOSITION |
+| SND-FND-009 | Fonotáctica | FND-008 | READY_FOR_COMPOSITION |
 | SND-FND-010 | Duración y cantidad | terminología | LINGUISTIC_REVIEW |
-| SND-FND-011 | Acento y prominencia | terminología | EDITORIAL_REVIEW |
+| SND-FND-011 | Acento y prominencia | terminología | READY_FOR_COMPOSITION |
 | SND-FND-012 | Ritmo | terminología + fuentes | EVIDENCE_CHECKED |
-| SND-FND-013 | Tono | terminología | EDITORIAL_REVIEW |
+| SND-FND-013 | Tono | terminología | READY_FOR_COMPOSITION |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | LINGUISTIC_REVIEW |
-| SND-FND-015 | Entonación | terminología | EDITORIAL_REVIEW |
+| SND-FND-015 | Entonación | terminología | READY_FOR_COMPOSITION |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | EVIDENCE_CHECKED |
 | SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | EVIDENCE_CHECKED |
@@ -65,22 +65,22 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ESGT-001 | Alcance y variedades del español de Guatemala | EVIDENCE_CHECKED |
-| SND-ESGT-002 | Inventario segmental: mapa de evidencia | SOURCE_MAPPED |
-| SND-ESGT-003 | Vocales y variación | EVIDENCE_CHECKED |
-| SND-ESGT-004 | Consonantes y realizaciones | DRAFTED |
-| SND-ESGT-005 | /s/ y variación regional | EVIDENCE_CHECKED |
+| SND-ESGT-001 | Alcance y variedades del español de Guatemala | EDITORIAL_REVIEW |
+| SND-ESGT-002 | Inventario segmental: mapa de evidencia | EVIDENCE_CHECKED |
+| SND-ESGT-003 | Vocales y variación | LINGUISTIC_REVIEW |
+| SND-ESGT-004 | Consonantes y realizaciones | LINGUISTIC_REVIEW |
+| SND-ESGT-005 | /s/ y variación regional | EDITORIAL_REVIEW |
 | SND-ESGT-006 | Róticas | INVENTORY |
 | SND-ESGT-007 | Acento y prominencia | INVENTORY |
 | SND-ESGT-008 | Entonación | INVENTORY |
-| SND-ESGT-009 | Contacto lingüístico y alcance | EVIDENCE_CHECKED |
-| SND-ESGT-010 | Ortografía y pronunciación | EVIDENCE_CHECKED |
+| SND-ESGT-009 | Contacto lingüístico y alcance | LINGUISTIC_REVIEW |
+| SND-ESGT-010 | Ortografía y pronunciación | LINGUISTIC_REVIEW |
 
 ### 🇺🇸 Inglés estadounidense — ENUS
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | EDITORIAL_REVIEW |
+| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | READY_FOR_COMPOSITION |
 | SND-ENUS-002 | Sistema consonántico: mapa de contrastes | SOURCE_MAPPED |
 | SND-ENUS-003 | Sistemas vocálicos y variación regional | EVIDENCE_CHECKED |
 | SND-ENUS-004 | Reducción vocálica | EVIDENCE_CHECKED |
@@ -126,25 +126,25 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 |---|---|---|
 | SND-FR-001 | Selección de variedad de referencia | EDITORIAL_REVIEW |
 | SND-FR-002 | Vocales y contrastes | EDITORIAL_REVIEW |
-| SND-FR-003 | Vocales nasales | INVENTORY |
-| SND-FR-004 | Schwa | INVENTORY |
-| SND-FR-005 | Consonantes finales | INVENTORY |
-| SND-FR-006 | Liaison | INVENTORY |
-| SND-FR-007 | Enchaînement y habla conectada | INVENTORY |
-| SND-FR-008 | Acento/prominencia y frase | INVENTORY |
+| SND-FR-003 | Vocales nasales | LINGUISTIC_REVIEW |
+| SND-FR-004 | Schwa | LINGUISTIC_REVIEW |
+| SND-FR-005 | Consonantes finales | LINGUISTIC_REVIEW |
+| SND-FR-006 | Liaison | LINGUISTIC_REVIEW |
+| SND-FR-007 | Enchaînement y habla conectada | LINGUISTIC_REVIEW |
+| SND-FR-008 | Acento/prominencia y frase | LINGUISTIC_REVIEW |
 | SND-FR-009 | Variación documentada en PFC | EDITORIAL_REVIEW |
 
 ### 🇩🇪 Alemán — DE
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-DE-001 | Alemán estándar y estándares nacionales | EVIDENCE_CHECKED |
-| SND-DE-002 | Vocales | SOURCE_MAPPED |
-| SND-DE-003 | Longitud y calidad vocálica | SOURCE_MAPPED |
-| SND-DE-004 | Consonantes | SOURCE_MAPPED |
+| SND-DE-001 | Alemán estándar y estándares nacionales | LINGUISTIC_REVIEW |
+| SND-DE-002 | Vocales | LINGUISTIC_REVIEW |
+| SND-DE-003 | Longitud y calidad vocálica | LINGUISTIC_REVIEW |
+| SND-DE-004 | Consonantes | LINGUISTIC_REVIEW |
 | SND-DE-005 | Acento | INVENTORY |
-| SND-DE-006 | Procesos contextuales | INVENTORY |
-| SND-DE-007 | Duden e IPA | EVIDENCE_CHECKED |
+| SND-DE-006 | Procesos contextuales | LINGUISTIC_REVIEW |
+| SND-DE-007 | Duden e IPA | LINGUISTIC_REVIEW |
 | SND-DE-008 | DE/AT/CH: mapa de diferencias | RESEARCHED |
 
 ### 🇹🇼 Mandarín de Taiwán — ZHTW
@@ -152,14 +152,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada/cluster | Estado |
 |---|---|---|
 | SND-ZHTW-001 | Qué entendemos por Taiwan Mandarin | EDITORIAL_REVIEW |
-| SND-ZHTW-002 | Estructura silábica | INVENTORY |
+| SND-ZHTW-002 | Estructura silábica | EVIDENCE_CHECKED |
 | SND-ZHTW-003 | Iniciales y finales: análisis fonético/fonológico | RESEARCHED_PARTIAL |
 | SND-ZHTW-004 | Sistema tonal: mapa de evidencia | EDITORIAL_REVIEW |
 | SND-ZHTW-005 | Variación tonal norte/centro | EDITORIAL_REVIEW |
 | SND-ZHTW-006 | Procesos tonales | INVENTORY |
 | SND-ZHTW-007 | Zhuyin/Bopomofo | EDITORIAL_REVIEW |
 | SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | EDITORIAL_REVIEW |
-| SND-ZHTW-009 | Romanización latina | DRAFTED |
+| SND-ZHTW-009 | Romanización latina | EVIDENCE_CHECKED |
 | SND-ZHTW-010 | Variación por contacto | EDITORIAL_REVIEW |
 
 ### 🇰🇷 Coreano — KO
@@ -167,7 +167,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada/cluster | Estado |
 |---|---|---|
 | SND-KO-001 | Estándar y habla de Seúl | EDITORIAL_REVIEW |
-| SND-KO-002 | Sistema consonántico | SOURCE_MAPPED |
+| SND-KO-002 | Sistema consonántico | EVIDENCE_CHECKED |
 | SND-KO-003 | Oclusivas y cambios contemporáneos | EDITORIAL_REVIEW |
 | SND-KO-004 | Vocales | EDITORIAL_REVIEW |
 | SND-KO-005 | Estructura silábica | EDITORIAL_REVIEW |
@@ -181,12 +181,12 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-JA-001 | Referencia de Tokio/lengua común y sus límites | LINGUISTIC_REVIEW |
+| SND-JA-001 | Referencia de Tokio/lengua común y sus límites | EDITORIAL_REVIEW |
 | SND-JA-002 | Mora | INVENTORY |
 | SND-JA-003 | Vocales y duración | SOURCE_MAPPED |
-| SND-JA-004 | Consonantes | SOURCE_MAPPED |
+| SND-JA-004 | Consonantes | LINGUISTIC_REVIEW |
 | SND-JA-005 | Estructura moraica/silábica | INVENTORY |
-| SND-JA-006 | Acento tonal de Tokio | LINGUISTIC_REVIEW |
+| SND-JA-006 | Acento tonal de Tokio | EDITORIAL_REVIEW |
 | SND-JA-007 | Variación y cambio acentual | LINGUISTIC_REVIEW |
 | SND-JA-008 | Kana y pronunciación | LINGUISTIC_REVIEW |
 | SND-JA-009 | Kanji, lecturas y pronunciación | LINGUISTIC_REVIEW |
@@ -212,7 +212,7 @@ Estos capítulos permanecen bloqueados hasta que los perfiles pertinentes supere
 
 | ID | Entrada candidata | Estado |
 |---|---|---|
-| SND-CMP-001 | Cómo comparar sonidos sin asumir identidad | EVIDENCE_CHECKED |
+| SND-CMP-001 | Cómo comparar sonidos sin asumir identidad | LINGUISTIC_REVIEW |
 | SND-CMP-002 | Sistemas vocálicos en perspectiva | BLOCKED_BY_PROFILES |
 | SND-CMP-003 | Sistemas consonánticos en perspectiva | BLOCKED_BY_PROFILES |
 | SND-CMP-004 | Sílaba y fonotáctica | BLOCKED_BY_PROFILES |

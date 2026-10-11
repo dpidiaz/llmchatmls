@@ -1,7 +1,7 @@
 # MLS-SND — Estado canónico del proyecto
 
 **Corte:** 2026-10-11  
-**SHA de coordinación:** `6020ef0ca75053cdd73a14aaf32896cef02b1704`  
+**SHA de coordinación:** `f59651f4da403967ea659fcb67bb3d439e95ccec`  
 **Rama matriz:** `feat/mls-snd-foundation`  
 **Inventario editorial:** 143 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad:** cada archivo canónico `SND-*.md` dentro de los directorios editoriales, cotejado con el inventario.
@@ -10,21 +10,21 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. N
 
 ## Snapshot físico y editorial
 
-**106 entradas canónicas / 106 IDs únicos / 0 duplicados.**  
-**91 fuentes canónicas** en Source Registry v0.19 (`SND-SRC-0001…0091`).
+**107 entradas canónicas / 107 IDs únicos / 0 duplicados.**  
+**96 fuentes canónicas** (`SND-SRC-0001…0096`).
 
 | Estado registrado en la entrada | Número |
 |---|---:|
-| EDITORIAL_REVIEW | 42 |
-| LINGUISTIC_REVIEW | 35 |
-| EVIDENCE_CHECKED | 22 |
-| SOURCE_MAPPED | 1 |
-| DRAFTED | 1 |
+| EDITORIAL_REVIEW | 33 |
+| LINGUISTIC_REVIEW | 40 |
+| EVIDENCE_CHECKED | 20 |
+| SOURCE_MAPPED | 0 |
+| DRAFTED | 0 |
 | RESEARCHED | 1 |
 | RESEARCHED_PARTIAL | 1 |
 | IN_PROGRESS | 1 |
-| READY_FOR_COMPOSITION | 2 |
-| **Total** | **106** |
+| READY_FOR_COMPOSITION | 11 |
+| **Total** | **107** |
 
 **Importante:** `EDITORIAL_REVIEW` no equivale a `READY_FOR_COMPOSITION`. `EVIDENCE_CHECKED` tampoco equivale a publicación ni valida automáticamente claims futuros.
 
@@ -44,53 +44,57 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 
 | Bloque | Entradas | Estado / alcance |
 |---|---:|---|
-| Fundamentos FND | 18 | 9 EDITORIAL_REVIEW; 3 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED; 1 READY_FOR_COMPOSITION |
+| Fundamentos FND | 18 | 10 READY_FOR_COMPOSITION; 3 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
 | Representación REP | 12 | 7 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
-| Comparación CMP | 1 | CMP-001 EVIDENCE_CHECKED |
+| Comparación CMP | 1 | CMP-001 LINGUISTIC_REVIEW |
 | Referencia REF | 1 | REF-002 IN_PROGRESS |
-| Español de Guatemala ESGT | 7 | 2 EDITORIAL_REVIEW; 3 EVIDENCE_CHECKED; 1 SOURCE_MAPPED; 1 DRAFTED |
+| Español de Guatemala ESGT | 7 | 2 EDITORIAL_REVIEW; 4 LINGUISTIC_REVIEW; 1 EVIDENCE_CHECKED |
 | Inglés estadounidense ENUS | 8 | 1 EDITORIAL_REVIEW; 6 EVIDENCE_CHECKED; 1 READY_FOR_COMPOSITION |
 | Portugués brasileño / carioca PTBR | 2 | 2 EDITORIAL_REVIEW |
 | Italiano IT | 9 | 9 LINGUISTIC_REVIEW |
 | Francés FR | 9 | 3 EDITORIAL_REVIEW; 6 LINGUISTIC_REVIEW |
 | Alemán DE | 7 | 6 LINGUISTIC_REVIEW; 1 RESEARCHED |
-| Mandarín de Taiwán ZHTW | 8 | 6 EDITORIAL_REVIEW; 1 EVIDENCE_CHECKED; 1 RESEARCHED_PARTIAL |
+| Mandarín de Taiwán ZHTW | 9 | 6 EDITORIAL_REVIEW; 2 EVIDENCE_CHECKED; 1 RESEARCHED_PARTIAL |
 | Coreano KO | 10 | 9 EDITORIAL_REVIEW; 1 EVIDENCE_CHECKED |
 | Japonés JA | 6 | 2 EDITORIAL_REVIEW; 4 LINGUISTIC_REVIEW |
 | Ruso RU | 8 | 8 EDITORIAL_REVIEW |
 | **Total** | **106** | |
 
-## Primer gate de composición alcanzado
+## Composición: primer bloque integrado
 
-- **FND-002 — Fonética y fonología:** READY_FOR_COMPOSITION.
-- **ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz:** READY_FOR_COMPOSITION.
-- Audit: `audits/FND-002-COMPOSITION-READINESS-WAVE-02-2026-10-11.md`.
-- Handoffs: `handoffs/SND-FND-002-composition.md` y `handoffs/SND-ENUS-001-composition.md`.
-- Reader-facing projection explícita; metadata R33/reviews permanece en repositorio.
+**11 entradas** han superado el gate por versión concreta.
+
+Fundamentos READY_FOR_COMPOSITION:
+- FND-002, FND-003, FND-004;
+- FND-006, FND-007, FND-008, FND-009;
+- FND-011, FND-013 y FND-015.
+
+Perfil READY_FOR_COMPOSITION:
+- **ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz.**
+
+Los diez fundamentos cuentan con Composition Handoff Manifest canónico bajo `composition/handoffs/`. ENUS-001 conserva su handoff previo. La reader-facing projection es una vista derivada; metadata R33 y reviews permanecen en repositorio.
 
 ## Entradas todavía pre-gate
 
-- **ESGT-002** — SOURCE_MAPPED.
-- **ESGT-004** — DRAFTED.
 - **DE-008** — RESEARCHED.
 - **ZHTW-003** — RESEARCHED_PARTIAL.
 - **REF-002** — IN_PROGRESS.
 
-La presencia de una fuente canónica no promueve automáticamente ninguna de estas entradas.
+En el snapshot actual no queda ninguna entrada física con estado top-level SOURCE_MAPPED o DRAFTED. Esto no significa que todos los subclusters internos estén cerrados: varios mapas EVIDENCE_CHECKED conservan gaps explícitos.
 
 ## Integridad de fuentes
 
 Auditoría vigente:
 
-`audits/STATUS-RECONCILIATION-106-91-2026-10-11.md`
+`audits/STATUS-RECONCILIATION-107-96-2026-10-11.md`
 
 Resultado estructural/referencial para el SHA indicado:
 
-- 106 IDs canónicos únicos;
-- 91 fuentes `SND-SRC-0001…0091`;
+- 107 IDs canónicos únicos;
+- 96 fuentes `SND-SRC-0001…0096`;
 - 0 IDs de entrada duplicados;
-- 0 referencias `SND-SRC-*` inexistentes detectadas en el scan completo base;
-- 0 entradas `READY_FOR_COMPOSITION`.
+- 11 entradas `READY_FOR_COMPOSITION`;
+- el audit registra qué comprobaciones estructurales fueron rehechas y cuáles permanecen heredadas del scan completo anterior.
 
 Este PASS **no** certifica:
 
@@ -114,11 +118,11 @@ Este PASS **no** certifica:
 
 ## Trabajo pendiente priorizado
 
-1. **Gates pre-R33:** ESGT-002, ESGT-004, DE-008 y ZHTW-003.
+1. **Pre-EVIDENCE:** DE-008, ZHTW-003 y REF-002 siguen por debajo de EVIDENCE_CHECKED.
 2. **Referencia:** completar REF-002 y los demás artefactos REF todavía no físicos.
-3. **Reviews:** continuar LINGUISTIC_REVIEW y EDITORIAL_REVIEW sin saltar etapas.
+3. **Reviews:** continuar los 40 LINGUISTIC_REVIEW y 33 EDITORIAL_REVIEW sin saltar etapas.
 4. **Cobertura:** integrar únicamente IDs ausentes o revisiones compatibles; no crear segundos canónicos.
-5. **Composición:** integrar el gate explícito de `READY_FOR_COMPOSITION` y luego ejecutar pilotos por versión concreta.
+5. **Composición:** continuar readiness por versión concreta; nunca promover en masa por estado anterior.
 6. **QA:** repetir source/localizer lint después de grandes waves y siempre sobre SHA congelado.
 
 ## Coordinación por GitHub
@@ -126,7 +130,7 @@ Este PASS **no** certifica:
 - `WORK-QUEUE.md`: gaps y prioridades.
 - `INTEGRATION-QUEUE.md`: reconciliación de waves.
 - `MLS-SND-MASTER-INVENTORY.md`: inventario de 143 candidatas.
-- `MLS-SND-SOURCE-REGISTRY.md`: 91 fuentes canónicas.
-- `audits/STATUS-RECONCILIATION-106-91-2026-10-11.md`: corte reproducible actual.
+- `MLS-SND-SOURCE-REGISTRY.md`: 96 fuentes canónicas.
+- `audits/STATUS-RECONCILIATION-107-96-2026-10-11.md`: corte reproducible actual.
 
 **Regla:** el estado canónico lo determina el árbol de `feat/mls-snd-foundation`, no el título histórico de un PR.
