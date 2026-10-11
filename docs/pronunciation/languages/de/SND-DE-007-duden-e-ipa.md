@@ -1,6 +1,7 @@
 # SND-DE-007 — Duden e IPA
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** alemán.  
+**Estado:** EDITORIAL_REVIEW  
+**Idioma:** alemán.  
 **Dominio:** pronunciación / transcripción / lexicografía.
 
 ## 1. Función de Duden en MLS-SND
@@ -43,6 +44,15 @@ Una entrada de diccionario no sustituye por sí sola una investigación sobre el
 
 Dudenredaktion. (s. f.). *Aussprache*. https://www.duden.de/hilfe/aussprache
 
-## 7. Nota de auditoría
+## 7. Entradas relacionadas
 
-Los claims fueron contrastados el 2026-10-11 contra la página vigente de Duden. Esta entrada todavía requiere LINGUISTIC_REVIEW y EDITORIAL_REVIEW.
+- SND-DE-001 — Alemán estándar y estándares nacionales.
+- SND-DE-008 — Mapa DE/AT/CH.
+
+## 8. Gate editorial
+
+Los claims fueron contrastados el 2026-10-11 contra la página vigente de Duden.
+
+**LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+Duden permanece delimitado como fuente lexicográfica/ortoépica; no se utiliza como sustituto de evidencia nacional o regional.
