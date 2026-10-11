@@ -17,6 +17,17 @@
 - **EDITORIAL_REVIEW:** PASS / commit:
 - **COMPOSITION_READINESS:** PASS / BLOCKED
 
+## Proyección reader-facing
+
+- **secciones/bloques incluidos en edición de lectura:**
+- **bloques internos excluidos de edición de lectura:**
+- **Fuentes y fundamento visible al lector:** sí / no / derivado; especificar:
+- **nota editorial visible al lector:** sí / no / parcial; especificar:
+- **secciones ambiguas:** ninguna / listar:
+- **regla de proyección:** la decisión debe estar cerrada antes de PASS; COMPOSITION no elige qué mostrar.
+
+Esta sección implementa las políticas `reader-facing-evidence.md` y `page-composition.md`. La metadata interna puede permanecer en el repositorio aunque no forme parte de la edición de lectura.
+
 ## Alcance
 
 - **idioma:**
