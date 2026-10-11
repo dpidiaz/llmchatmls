@@ -1,6 +1,6 @@
 # SND-REP-002 — Qué es el AFI/IPA
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** transcripción.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -80,3 +80,12 @@ Las afirmaciones sobre lo que el IPA no debe sustituir dentro de MLS-SND son dec
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS. El IPA se mantiene como sistema descriptivo compartido y no como ortografía universal.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+
+## 11. Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada define la función del IPA antes de sus límites, separa con claridad IPA de ortografía/romanización/transliteración y distingue las decisiones editoriales MLS-SND de los claims atribuidos a la International Phonetic Association.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, símbolos IPA, transcripciones ni alcance durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` únicamente después del gate de composition readiness aplicado a esta misma versión.
