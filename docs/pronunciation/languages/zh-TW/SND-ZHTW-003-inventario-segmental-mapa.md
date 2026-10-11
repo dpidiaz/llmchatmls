@@ -43,9 +43,9 @@ Para pasar esta entrada a EVIDENCE_CHECKED falta:
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| ZHTW003-C01 | Fon 2020 presenta un inventario canónico de Mandarin con cinco vocales, 19 consonantes y cuatro tonos léxicos | ZHTW-LOCAL-004 | Abstract institucional NTU | SOURCED |
-| ZHTW003-C02 | El capítulo compara variantes de Taiwán, Singapur y China | ZHTW-LOCAL-004 | Abstract institucional NTU | SOURCED |
-| ZHTW003-C03 | El resumen identifica derretroflexión/hipercorrección y mergers nasales como fenómenos variables | ZHTW-LOCAL-004 | Abstract institucional NTU | SOURCED |
+| ZHTW003-C01 | Fon 2020 presenta un inventario canónico de Mandarin con cinco vocales, 19 consonantes y cuatro tonos léxicos | SND-SRC-0044 | Abstract institucional NTU | SOURCED |
+| ZHTW003-C02 | El capítulo compara variantes de Taiwán, Singapur y China | SND-SRC-0044 | Abstract institucional NTU | SOURCED |
+| ZHTW003-C03 | El resumen identifica derretroflexión/hipercorrección y mergers nasales como fenómenos variables | SND-SRC-0044 | Abstract institucional NTU | SOURCED |
 
 ## 5. Fuente
 
