@@ -1,39 +1,30 @@
-# ITALIAN-CORE-REAPPLY-WAVE-05
+# ITALIAN-CORE-REAPPLY-WAVE-05B
 
 Fecha: 2026-10-11.
 
-## Base de gate
+## Resultado efectivo
 
-Reaplicación limpia de los PASS documentados en `ITALIAN-LINGUISTIC-REVIEW-WAVE-01.md`.
-
-## Resultado
+La matriz viva ya contenía IT-001/004/005/008/009 en `LINGUISTIC_REVIEW` al rehacer esta wave. Esta reapply añade únicamente los cuatro PASS auditados que faltaban físicamente:
 
 | entrada | estado |
 |---|---|
-| SND-IT-001 | LINGUISTIC_REVIEW |
 | SND-IT-002 | LINGUISTIC_REVIEW |
 | SND-IT-003 | LINGUISTIC_REVIEW |
-| SND-IT-004 | LINGUISTIC_REVIEW |
 | SND-IT-006 | LINGUISTIC_REVIEW |
 | SND-IT-007 | LINGUISTIC_REVIEW |
-| SND-IT-008 | LINGUISTIC_REVIEW |
-
-## HOLD preservados
-
-- IT-005 permanece EVIDENCE_CHECKED.
-- IT-009 permanece EVIDENCE_CHECKED.
-- Su canonicalización/re-auditoría R33 no se confunde con un PASS lingüístico final.
 
 ## QA
 
-- 7/7 ID = H1.
-- 7/7 estado = LINGUISTIC_REVIEW.
+- 4/4 ID = H1.
+- 4/4 estado = LINGUISTIC_REVIEW.
 - 0 source IDs locales.
 - 0 SND-SRC citados inexistentes.
-- REFERENCE_PROVISIONAL preservado.
+- no se sobrescriben entradas italianas ya integradas por otros workers.
+
+## Base de revisión
+
+`audits/ITALIAN-LINGUISTIC-REVIEW-WAVE-01.md` — PASS para IT-001/002/003/004/006/007/008.
 
 ## Gate
 
-**PASS — LINGUISTIC_REVIEW** para IT-001/002/003/004/006/007/008.
-
-No se promueve a EDITORIAL_REVIEW en esta wave.
+**PASS — clean-reapply de IT-002/003/006/007.**
