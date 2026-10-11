@@ -31,10 +31,13 @@ Este archivo es mantenido por el chat integrador. No sustituye `STATUS.md`: regi
 | #7283 | 🇷🇺 Ruso wave 1 | EVIDENCE_WAVE_COMPLETE | RU-001/003/005/006/008 EVIDENCE_CHECKED; requiere revisión lingüística. |
 | #7289 | 🇷🇺 Ruso wave 2 | EVIDENCE_WAVE_COMPLETE | RU-002/004/007 EVIDENCE_CHECKED; requiere revisión lingüística. |
 | #7292 | 🇷🇺 Ruso escritura | RESEARCHED_PENDING_SOURCE_ID | RU-009 espera canonicalización de fuente ortográfica. |
-| #7297/#7294 | comparación metodológica | OVERLAP_CHECK | Mantener un solo CMP-001 canónico tras comparar alcance; no integrar duplicados. |
+| #7294 | CMP-001 comparación | CANONICAL_CMP001 | Ruta canónica; absorber `editorial/comparison-checklist.md` de #7297; canonicalizar dos fuentes locales y limpiar inventario. |
+| #7297 | CMP-001 paralelo | HOLD_FOR_CHECKLIST_TRANSFER | Conservar solo el checklist editorial; cerrar como superseded después de transferirlo a #7294. |
 | #7293 | navegación editorial | ACTIVE | Esperar salida; vigilar que no renumere IDs globales sin reconciliación. |
 | #7295/#7299 | representación/escritura | ACTIVE | Coordinar con waves IPA para evitar entradas duplicadas. |
-| #7300/#7302/#7304 | fundamentos restantes | ACTIVE | Completar huecos FND-001/005/010/012/014/016/017/018 sin duplicar IDs. |
+| #7300 | FND-005 percepción | CANONICAL_FND005_RESEARCH | Ruta canónica por mayor profundidad; canonicalizar fuentes candidatas antes de EVIDENCE_CHECKED. |
+| #7302 | fundamentos wave 02 | REDUCE_SCOPE | Conservar como salida canónica FND-012/016/018; FND-004 y FND-005 quedan como revisión paralela, no segunda ruta. |
+| #7304 | FND-001 + FND-014 | ACTIVE / NONOVERLAP | FND-001 evidence-checked; FND-014 researched con fuente Hyman pendiente de canonicalización. |
 
 ## Decisiones de integración vigentes
 
