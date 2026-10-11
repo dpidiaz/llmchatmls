@@ -3,7 +3,7 @@
 - Área: SND-JA
 - IDs: SND-JA-008
 - Tipo: investigación + redacción + evidence mapping R33
-- Estado: ACTIVE
+- Estado: COMPLETE
 - Base: feat/mls-snd-foundation
 - Inicio: 2026-10-11
 
@@ -21,3 +21,14 @@
 - no solapa SND-JA-010 de #7313;
 - no modifica Source Registry global;
 - nuevas fuentes usan IDs locales según el protocolo #7320.
+
+## Salida
+
+- SND-JA-008 — DRAFTED.
+- JA-W03-S01 — 文化庁, 現代仮名遣い (1986), norma institucional primaria.
+- JA-W03-S02 — NINJAL ことば研究館, explicación institucional de 拍（モーラ）.
+- Source map local creado conforme al protocolo #7320.
+
+## Gate
+
+No se promueve a EVIDENCE_CHECKED hasta canonicalizar/deduplicar las fuentes locales, reescribir los claims y repetir auditoría R33 independiente.
