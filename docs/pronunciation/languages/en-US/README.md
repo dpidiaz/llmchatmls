@@ -13,8 +13,8 @@
 | SND-ENUS-004 | Reducción vocálica | INVENTORY |
 | SND-ENUS-005 | Acento léxico | INVENTORY |
 | SND-ENUS-006 | Habla conectada | INVENTORY |
-| SND-ENUS-007 | Ritmo y prominencia | INVENTORY |
-| SND-ENUS-008 | Entonación | INVENTORY |
+| SND-ENUS-007 | Ritmo, organización temporal y prominencia | RESEARCHED |
+| SND-ENUS-008 | Entonación y variación prosódica regional | RESEARCHED |
 | SND-ENUS-009 | Southern Michigan como perfil documentado | EVIDENCE_CHECKED |
 | SND-ENUS-010 | Comparaciones con español/portugués | BLOCKED_BY_PROFILES |
 
@@ -46,4 +46,5 @@ Después de integrar esta wave:
 - promover las fuentes candidatas con IDs globales no conflictivos;
 - auditar SND-ENUS-003;
 - investigar SND-ENUS-004 (reducción) y SND-ENUS-006 (habla conectada) con corpus adecuado;
-- abrir prosodia solo después de mapear fuentes específicas.
+- promover fuentes prosódicas candidatas al Source Registry global y ejecutar sus gates R33;
+- investigar SND-ENUS-004 (reducción) y SND-ENUS-006 (habla conectada) con corpus adecuado.
