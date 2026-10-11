@@ -341,3 +341,25 @@ After this review was issued, PR #7288 applied the non-global remediations ident
 After the original review, an open-access *Phonology* article by Jongho Jun (2015, online 2016) supplied a directly checkable theoretical locator. In the analysis around (13b)–(16), the paper explicitly notes that both onset and nucleus syllabifications of /j/ have been proposed in Korean phonology. PR #7288 therefore narrowed KO005-C02 to that concrete issue, added local source `KO-W1-C10`, and promoted KO-005 to **EVIDENCE_CHECKED**.
 
 Remaining caveat: `KO-W1-C10` still requires canonical global Source Registry integration before matrix merge.
+
+
+# Final current-state reconciliation
+
+The matrix branch advanced again during this review. Current status:
+
+- **KO-001:** canonicalized to SND-SRC-0032/0033; provenance blocker resolved → **PASS**.
+- **KO-002:** restored on the matrix branch as a cautious `SOURCE_MAPPED` consonant evidence map → **PASS_STATE**.
+- **KO-003:** restored on the matrix branch with SND-SRC-0021 + SND-SRC-0033 → **PASS**.
+- **KO-004:** #7288 now cites canonical SND-SRC-0034/0035 → **PASS**.
+- **KO-005:** content gate closed with Jun (2015/online 2016); **EVIDENCE_CHECKED**, but its source remains local as `KO-W1-C10` → **PASS_CONTENT / HOLD_PROVENANCE**.
+- **KO-006:** now cites canonical SND-SRC-0032 and no longer uses ambiguous bare Hangul phonetic brackets → **PASS**.
+- **KO-007:** now cites canonical SND-SRC-0037/0038/0021 with narrowed claims → **PASS**.
+- **KO-008:** now cites canonical SND-SRC-0032 → **PASS**.
+- **KO-009:** canonical SND-SRC-0012 → **PASS**.
+- **KO-010:** factual IPA claim separated from MLS analytical choice → **PASS**.
+
+## Remaining Korean blocker
+
+Exactly one branch-local source ID remains in active Korean entry content: **KO-W1-C10**, Jun (2015), *Korean n-insertion: a mismatch between data and learning*, DOI 10.1017/S0952675715000275. It needs one canonical `SND-SRC` identity during integration.
+
+**Profile-level verdict now:** **LINGUISTIC_REVIEW PASS, conditional on canonicalizing KO-W1-C10 before merge of KO-005.**
