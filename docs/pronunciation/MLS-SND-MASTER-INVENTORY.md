@@ -24,20 +24,20 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-FND-001 | El sonido como parte del idioma | — | INVENTORY |
-| SND-FND-002 | Fonética y fonología | terminología v0.2 | EVIDENCE_CHECKED |
-| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | EVIDENCE_CHECKED |
-| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | EVIDENCE_CHECKED |
+| SND-FND-002 | Fonética y fonología | terminología v0.2 | EDITORIAL_REVIEW |
+| SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | EDITORIAL_REVIEW |
+| SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | EDITORIAL_REVIEW |
 | SND-FND-005 | Percepción del habla | fuentes generales | INVENTORY |
-| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | EVIDENCE_CHECKED |
-| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | EVIDENCE_CHECKED |
-| SND-FND-008 | Sílaba | terminología | EVIDENCE_CHECKED |
-| SND-FND-009 | Fonotáctica | FND-008 | EVIDENCE_CHECKED |
+| SND-FND-006 | Consonantes: parámetros articulatorios | IPA | EDITORIAL_REVIEW |
+| SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | EDITORIAL_REVIEW |
+| SND-FND-008 | Sílaba | terminología | EDITORIAL_REVIEW |
+| SND-FND-009 | Fonotáctica | FND-008 | EDITORIAL_REVIEW |
 | SND-FND-010 | Duración y cantidad | terminología | INVENTORY |
-| SND-FND-011 | Acento y prominencia | terminología | EVIDENCE_CHECKED |
+| SND-FND-011 | Acento y prominencia | terminología | EDITORIAL_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
-| SND-FND-013 | Tono | terminología | EVIDENCE_CHECKED |
+| SND-FND-013 | Tono | terminología | EDITORIAL_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
-| SND-FND-015 | Entonación | terminología | EVIDENCE_CHECKED |
+| SND-FND-015 | Entonación | terminología | EDITORIAL_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
 | SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | SOURCE_MAPPED |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
@@ -47,7 +47,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-REP-001 | Sonido, letra y símbolo | terminology | INVENTORY |
-| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | EVIDENCE_CHECKED |
+| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | EDITORIAL_REVIEW |
 | SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-005 | Diacríticos | REP-002 | SOURCE_MAPPED |
@@ -100,7 +100,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
 | SND-PTBR-005 | Consonantes: mapa general | INVENTORY |
-| SND-PTBR-006 | /s/ en coda y variación carioca | EVIDENCE_CHECKED |
+| SND-PTBR-006 | Sibilante /S/ en coda y variación carioca | EVIDENCE_CHECKED |
 | SND-PTBR-007 | Róticas y variación | SOURCE_MAPPED |
 | SND-PTBR-008 | /l/ en coda y variación | SOURCE_MAPPED |
 | SND-PTBR-009 | Acento y ritmo | INVENTORY |
