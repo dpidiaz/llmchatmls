@@ -205,4 +205,4 @@ Esta entrada puede redactarse antes de los capítulos comparativos restantes por
 
 No autoriza todavía tablas comparativas de vocales, consonantes, ritmo, tono o entonación; esas entradas siguen bloqueadas hasta que los perfiles pertinentes alcancen suficiente validación.
 
-Los antiguos IDs locales CMP-PROP-001 y CMP-PROP-002 fueron canonicalizados como SND-SRC-0051 y SND-SRC-0052. El mapeo fue re-auditado sin cambiar el alcance de los claims.
+Las fuentes comparativas están registradas canónicamente como SND-SRC-0051 y SND-SRC-0052. El mapeo fue re-auditado sin cambiar el alcance de los claims.
