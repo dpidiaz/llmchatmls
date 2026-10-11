@@ -204,7 +204,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-RU-006 | Acento léxico | EDITORIAL_REVIEW |
 | SND-RU-007 | Procesos contextuales | EDITORIAL_REVIEW |
 | SND-RU-008 | Norma ortoépica y variantes | EDITORIAL_REVIEW |
-| SND-RU-009 | Cirílico y pronunciación | INVENTORY |
+| SND-RU-009 | Cirílico y pronunciación | EVIDENCE_CHECKED |
 
 ## 5. Comparación transversal
 
