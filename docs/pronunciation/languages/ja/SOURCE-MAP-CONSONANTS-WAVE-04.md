@@ -10,6 +10,11 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y dos ca
 - **Uso en esta wave:** ancla para el mapa general consonántico y la notación IPA de referencia.
 - **Localizador canónico:** pp. 94–96.
 - **Limitación:** fuente breve y antigua; no se usa como única prueba de uso fonético contemporáneo.
+- **access_status:** FREE_TO_READ según la ficha canónica consultada.
+- **license:** UNKNOWN en esta wave.
+- **fulltext_verified:** no en esta wave.
+- **evidence_surface:** CANONICAL_REGISTRY + METADATA.
+- **reuse_status:** UNKNOWN; esta wave solo parafrasea hechos y no redistribuye figuras/audio.
 
 ## JA-W04-S01 — NINJAL / /r/ y /d/ contemporáneos
 
@@ -22,6 +27,13 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y dos ca
 - **Datos explícitos reutilizados:** video con 5 hablantes de Tokio; análisis de duración con ~200 hablantes; /r/ sistemáticamente más breve que /d/ en los seis entornos vocálicos mostrados.
 - **Limitaciones:** no es inventario consonántico completo; el propio texto presenta como hipótesis una parte del análisis de la variación de contacto de /r/.
 - **Entradas / claims:** SND-JA-004; JA004-C02–C04.
+- **access_status:** FREE_TO_READ.
+- **license:** UNKNOWN; no inferida por acceso gratuito.
+- **fulltext_verified:** yes (página institucional completa consultada).
+- **evidence_surface:** INSTITUTIONAL_PAGE.
+- **reuse_status:** UNKNOWN; se usa paráfrasis, sin copiar imágenes/videos.
+- **derivative_allowed:** unknown.
+- **redistribution_allowed:** unknown.
 - **Verificado:** 2026-10-11.
 
 ## JA-W04-S02 — NINJAL / alternancias p~h~b en contadores
@@ -34,6 +46,13 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y dos ca
 - **Localizadores:** 「匹はハ行音で始まる助数詞」; 「ハ行音の特殊性」 y desarrollo posterior.
 - **Limitaciones:** caso morfofonológico específico; no generalizar a todo /h/, /p/ o /b/ del japonés.
 - **Entradas / claims:** SND-JA-004; JA004-C05–C06.
+- **access_status:** FREE_TO_READ.
+- **license:** UNKNOWN; no inferida por acceso gratuito.
+- **fulltext_verified:** yes (página institucional completa consultada).
+- **evidence_surface:** INSTITUTIONAL_PAGE.
+- **reuse_status:** UNKNOWN; se usa paráfrasis, sin reproducir tablas/figuras.
+- **derivative_allowed:** unknown.
+- **redistribution_allowed:** unknown.
 - **Verificado:** 2026-10-11.
 
 ## JA-W04-S03 — CSJ / manual de etiquetado segmental
@@ -47,6 +66,13 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y dos ca
 - **Cobertura documentada:** el manual indica que el núcleo CSJ con etiquetado segmental comprende aproximadamente 500.000 palabras / 44 horas de audio.
 - **Limitaciones:** el conjunto es un esquema de anotación intermedio entre transcripción amplia y estrecha, no una ontología fonémica definitiva. Algunas etiquetas de Tabla 2 están definidas pero marcadas como no usadas actualmente en CSJ.
 - **Entradas / claims:** SND-JA-004; JA004-C07–C09.
+- **access_status:** FREE_TO_READ.
+- **license:** UNKNOWN; no inferida por disponibilidad del PDF.
+- **fulltext_verified:** yes para pp. 2–3 usadas en esta wave.
+- **evidence_surface:** FULLTEXT_PDF.
+- **reuse_status:** UNKNOWN; MLS-SND parafrasea el contenido y no reutiliza la tabla original como arte editorial.
+- **derivative_allowed:** unknown.
+- **redistribution_allowed:** unknown para el archivo PDF; no se redistribuye.
 - **Verificado:** 2026-10-11, PDF revisado visualmente en pp. 2–3.
 
 ## JA-W04-S04 — Kubozono (2015), broad phonetics/phonology overview
@@ -60,6 +86,13 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y dos ca
 - **Acceso comprobado en esta wave:** metadatos/tabla de contenidos, no texto completo de §3.
 - **Limitaciones:** no se usa todavía para afirmar detalles del inventario ni para promover claims. Requiere inspección del texto completo y localizadores internos antes de pasar a VERIFIED.
 - **Entradas / claims:** candidato para SND-JA-004; **ningún claim R33 depende todavía de esta fuente**.
+- **access_status:** RESTRICTED para el texto completo / metadatos FREE_TO_READ.
+- **license:** UNKNOWN.
+- **fulltext_verified:** no.
+- **evidence_surface:** METADATA.
+- **reuse_status:** UNKNOWN.
+- **derivative_allowed:** unknown.
+- **redistribution_allowed:** unknown.
 - **Verificado:** 2026-10-11 (metadatos solamente).
 
 ## Integración
