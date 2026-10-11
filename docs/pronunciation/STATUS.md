@@ -11,8 +11,8 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 | Editorial Charter | DRAFTED |
 | Transcription Guide | v0.2 — decisiones base cerradas |
 | Varieties Policy | v0.2 — sincronizada con es-GT y fr |
-| Master Inventory | v0.2 — 143 unidades candidatas |
-| Source Registry | v0.7 — 46 fuentes canónicas |
+| Master Inventory | v0.3 — 144 unidades candidatas |
+| Source Registry | v0.10 — 50 fuentes canónicas |
 | R33 gate | DRAFTED / operativo en waves |
 | Entry Template | v0.1 |
 | R44 Work Plan | v0.1 |
@@ -21,13 +21,13 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 
 ## Snapshot integrado
 
-**Entradas presentes en la rama matriz: 60.**
+**Entradas presentes en el snapshot auditado: 73.**
 
 Distribución por gate:
 
-- **16** en `LINGUISTIC_REVIEW`;
-- **36** en `EVIDENCE_CHECKED`;
-- **8** en estados `RESEARCHED`, `RESEARCHED_PARTIAL`, `SOURCE_MAPPED` o `DRAFTED`;
+- **26** en `LINGUISTIC_REVIEW`;
+- **41** en `EVIDENCE_CHECKED`;
+- **6** en estados previos (`SOURCE_MAPPED`, `RESEARCHED`, `RESEARCHED_PARTIAL`, `DRAFTED` o `IN_PROGRESS`);
 - **0** en `EDITORIAL_REVIEW`;
 - **0** en `READY_FOR_COMPOSITION`.
 
@@ -50,24 +50,29 @@ Los conteos anteriores se refieren a archivos de entrada `SND-*.md` integrados, 
 - FND-015 — Entonación.
 - FND-017 — Variación.
 
-### Aún no integrados como entrada canónica
+### EVIDENCE_CHECKED
 
-- FND-001 — wave activa.
-- FND-005 — wave especializada activa; ruta canónica de investigación #7300.
-- FND-012 — wave activa.
-- FND-014 — RESEARCHED en wave activa; fuente Hyman pendiente de canonicalización.
-- FND-016 — wave activa.
-- FND-018 — wave activa.
+- FND-001 — El sonido como parte del idioma.
+- FND-005 — Percepción del habla.
+- FND-012 — Ritmo.
+- FND-014 — Acento tonal.
+- FND-016 — Habla conectada y procesos contextuales.
+- FND-018 — Norma, descripción y uso.
 
 ## Representación integrada
 
-- REP-002 — EVIDENCE_CHECKED.
+- REP-001 — EVIDENCE_CHECKED.
+- REP-002 — LINGUISTIC_REVIEW.
 - REP-005 — LINGUISTIC_REVIEW.
 - REP-006 — LINGUISTIC_REVIEW.
 - REP-007 — LINGUISTIC_REVIEW.
 - REP-008 — LINGUISTIC_REVIEW.
+- REP-009 — EVIDENCE_CHECKED.
+- REP-010 — EVIDENCE_CHECKED.
+- REP-011 — EVIDENCE_CHECKED.
+- REP-012 — EVIDENCE_CHECKED.
 
-REP-001/003/004/009/010/011/012 continúan en waves o inventario.
+REP-003/004 todavía no están presentes como entrada canónica en el snapshot auditado.
 
 ## Perfiles lingüísticos integrados
 
@@ -103,7 +108,7 @@ Referencia: **REFERENCE_PROVISIONAL**.
 Referencia: **REFERENCE_PROVISIONAL**; ancla metropolitana supralocal/norte de Francia con datos parisinos solo cuando la fuente sea parisina.
 
 ### 🇩🇪 de
-- DE-001 — RESEARCHED.
+- DE-001 — EVIDENCE_CHECKED.
 - DE-007 — EVIDENCE_CHECKED.
 - DE-008 — RESEARCHED.
 
@@ -122,16 +127,16 @@ Referencia: **MULTI_REFERENCE**.
 Referencia: **REFERENCE_PROVISIONAL**.
 
 ### 🇰🇷 ko
-- KO-001 — EVIDENCE_CHECKED.
+- KO-001 — LINGUISTIC_REVIEW.
 - KO-002 — SOURCE_MAPPED.
-- KO-003 — EVIDENCE_CHECKED.
-- KO-004 — EVIDENCE_CHECKED.
+- KO-003 — LINGUISTIC_REVIEW.
+- KO-004 — LINGUISTIC_REVIEW.
 - KO-005 — RESEARCHED_PARTIAL.
-- KO-006 — EVIDENCE_CHECKED, alcance normativo.
-- KO-007 — EVIDENCE_CHECKED para modelo de referencia.
-- KO-008 — EVIDENCE_CHECKED, alcance normativo.
-- KO-009 — EVIDENCE_CHECKED.
-- KO-010 — EVIDENCE_CHECKED.
+- KO-006 — LINGUISTIC_REVIEW.
+- KO-007 — LINGUISTIC_REVIEW.
+- KO-008 — LINGUISTIC_REVIEW.
+- KO-009 — LINGUISTIC_REVIEW.
+- KO-010 — LINGUISTIC_REVIEW.
 
 Referencia: **REFERENCE_PROVISIONAL**; norma institucional, habla empírica de Seúl y romanización permanecen separadas.
 
@@ -170,7 +175,7 @@ Los PRs y ramas pueden cerrarse sin merge administrativo cuando su contenido se 
 
 ## Gate SOURCE-ID-INTEGRITY-01
 
-**PASS:** 60/60 entradas canónicas auditadas contra Source Registry v0.7.
+**HISTÓRICO / REQUIERE REEJECUCIÓN:** el último PASS documentado cubrió 60/60 entradas contra un snapshot anterior del Source Registry. El snapshot reconciliado contiene 73 entradas y 50 fuentes; no se declara 73/73 hasta ejecutar una nueva auditoría de integridad.
 
 - 0 `SND-SRC` citados inexistentes.
 - 0 entradas `EVIDENCE_CHECKED` con IDs locales.
