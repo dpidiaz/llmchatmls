@@ -1,6 +1,6 @@
 # MLS-SND — Estado canónico del proyecto
 
-**Corte:** 2026-10-11 (incluye IT-002/003/006/007 y revisión italiana 9/9)  
+**Corte:** 2026-10-11 (incluye integración IT-002/003/006/007 y JA-006/007)  
 **Rama matriz:** `feat/mls-snd-foundation`  
 **Inventario:** 143 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad para cada entrada:** su archivo `SND-*.md`, cotejado con `MLS-SND-MASTER-INVENTORY.md`.
@@ -9,13 +9,13 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 
 ## Snapshot físico y editorial
 
-**94 entradas físicas / 94 IDs únicos / 0 duplicados.**  
+**96 entradas físicas / 96 IDs únicos / 0 duplicados.**  
 **79 fuentes canónicas** en Source Registry v0.18 (`SND-SRC-0001…0079`).
 
 | Estado registrado en el encabezado de cada entrada | Número |
 |---|---:|
 | EDITORIAL_REVIEW | 40 |
-| LINGUISTIC_REVIEW | 21 |
+| LINGUISTIC_REVIEW | 23 |
 | EVIDENCE_CHECKED | 25 |
 | SOURCE_MAPPED | 3 |
 | DRAFTED | 2 |
@@ -23,7 +23,7 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 | RESEARCHED_PARTIAL | 1 |
 | IN_PROGRESS | 1 |
 | READY_FOR_COMPOSITION | 0 |
-| **Total** | **94** |
+| **Total** | **96** |
 
 **Importante:** `EDITORIAL_REVIEW` significa que la entrada alcanzó esa etapa de revisión, **no** que esté aprobada para composición. `EVIDENCE_CHECKED` no equivale a publicación ni valida automáticamente todos los claims futuros.
 
@@ -43,19 +43,19 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 | Alemán de | 3 | 2 EVIDENCE_CHECKED; 1 RESEARCHED |
 | Mandarín de Taiwán zh-TW | 8 | 6 EDITORIAL_REVIEW; 1 RESEARCHED_PARTIAL; 1 DRAFTED |
 | Coreano ko | 10 | 9 EDITORIAL_REVIEW; 1 SOURCE_MAPPED |
-| Japonés ja | 4 | 3 LINGUISTIC_REVIEW; 1 SOURCE_MAPPED |
+| Japonés ja | 6 | 5 LINGUISTIC_REVIEW; 1 SOURCE_MAPPED |
 | Ruso ru | 8 | 8 EDITORIAL_REVIEW |
 | **Total** | **90** | |
 
 ## Integridad de fuentes
 
-Auditoría de base: `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md` (90/79, SHA congelado de ese corte). Después se integraron cuatro entradas IT-002/003/006/007, todas con fuentes canónicas comprobadas individualmente; **el siguiente PASS global debe reescanear 94/79**.
+Auditoría de base: `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md` (90/79, SHA congelado de ese corte). Después se integraron cuatro entradas IT-002/003/006/007 y dos JA-006/007, todas con fuentes canónicas registradas; **el siguiente PASS global debe reescanear 96/79**.
 
-- **PASS referencial del corte anterior:** 90 archivos inspeccionados; 90 IDs únicos. El árbol actual tiene 94 entradas únicas tras cuatro incorporaciones italianas.
+- **PASS referencial del corte anterior:** 90 archivos inspeccionados; 90 IDs únicos. El árbol actual tiene 96 entradas únicas tras cuatro incorporaciones italianas y dos japonesas.
 - 79 fuentes registradas con IDs contiguos.
 - **0** referencias `SND-SRC-NNNN` fuera del registro.
 - **0** IDs locales de wave detectados mediante los patrones examinados.
-- **93/94** entradas con al menos una referencia canónica (los cuatro IT nuevos usan IDs ya registrados).
+- **95/96** entradas con al menos una referencia canónica (los cuatro IT nuevos usan IDs ya registrados).
 - **SND-ZHTW-009** permanece `DRAFTED` sin referencia canónica; requiere source mapping, no promoción.
 - **0** entradas en `READY_FOR_COMPOSITION`.
 
@@ -90,6 +90,6 @@ El PASS histórico 79/79 (Source Registry v0.13 / 56 fuentes) sigue archivado co
 - `INTEGRATION-QUEUE.md`: reconciliación y decisiones de clean reapply.
 - `MLS-SND-MASTER-INVENTORY.md`: 143 candidatas y estado actualizado de los 90 IDs físicos.
 - `MLS-SND-SOURCE-REGISTRY.md`: identidad y alcance de 79 fuentes.
-- `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`: control estructural del corte anterior 90/79; repetir sobre 94/79.
+- `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`: control estructural del corte anterior 90/79; repetir sobre 96/79.
 
 **Regla:** el estado canónico lo determina el contenido de la rama matriz, no el título o estado histórico de un PR. Una wave paralela puede producir revisión o ampliación, pero no un segundo canónico ni una promoción editorial sin gate.
