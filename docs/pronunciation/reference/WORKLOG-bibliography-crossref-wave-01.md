@@ -45,3 +45,20 @@ Hallazgos transferibles al integrador/worker REF-008:
 - Master Inventory declara 143 unidades, pero las tablas actuales contienen 144 IDs únicos.
 - El resumen declara 94 unidades de perfil, pero las tablas contienen 95.
 - Dependencias `SND-* → SND-SRC-*` pertenecen a evidencia/R33 y no deben mezclarse con navegación entre entradas.
+## Auditoría de clasificación REF-007
+
+- es-GT: 2 fuentes.
+- en-US: 2 fuentes.
+- pt-BR-rio: 3 fuentes.
+- it: 4 fuentes.
+- fr: 5 fuentes.
+- de: 4 fuentes.
+- zh-TW: 7 fuentes.
+- ko: 10 fuentes.
+- ja: 3 fuentes.
+- ru: 2 fuentes.
+- transversales/comparativas: 4 fuentes.
+
+No se detectaron fuentes asignadas a un perfil por mera coincidencia débil en esta pasada.
+
+**Estado final del claim:** REVIEW_READY para SND-REF-006 y SND-REF-007.
