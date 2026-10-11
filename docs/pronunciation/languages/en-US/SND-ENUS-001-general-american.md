@@ -41,7 +41,7 @@ No significa que sea imposible enseñar pronunciación estadounidense de manera 
 
 ## 6. Fuentes
 
-Ladefoged, P. (1989). American English. Journal of the International Phonetic Association, 19(2), 41–44.
+Ladefoged, P. (1999). American English. En International Phonetic Association (Ed.), Handbook of the International Phonetic Association: A guide to the use of the International Phonetic Alphabet (pp. 41–44). Cambridge University Press.
 
 Hillenbrand, J. M. (2003). American English: Southern Michigan. Journal of the International Phonetic Association, 33(1), 121–126.
 
@@ -53,5 +53,5 @@ La elección MULTI_REFERENCE es una decisión de MLS-SND construida a partir de 
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
-- **Comprobación:** el extracto de Cambridge afirma explícitamente la diversidad fonética norteamericana, cuestiona la utilidad de “General American English” como etiqueta plenamente significativa y declara que Hillenbrand amplía la descripción de Ladefoged con Southern Michigan.
+- **Comprobación:** el extracto de Cambridge afirma explícitamente la diversidad fonética norteamericana, cuestiona la utilidad de “General American English” como etiqueta plenamente significativa y declara que Hillenbrand amplía la descripción de Ladefoged con Southern Michigan. La versión verificable de la descripción de Ladefoged utilizada por Hillenbrand es el capítulo de 1999 del Handbook, pp. 41–44.
 - **Límite:** MULTI_REFERENCE es una decisión editorial MLS-SND, no una categoría de Hillenbrand.
