@@ -69,7 +69,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-ESGT-002 | Inventario segmental: mapa de evidencia | INVENTORY |
 | SND-ESGT-003 | Vocales y variación | INVENTORY |
 | SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
-| SND-ESGT-005 | /s/ y variación regional | SOURCE_MAPPED |
+| SND-ESGT-005 | /s/ y variación regional | EVIDENCE_CHECKED |
 | SND-ESGT-006 | Róticas | INVENTORY |
 | SND-ESGT-007 | Acento y prominencia | INVENTORY |
 | SND-ESGT-008 | Entonación | INVENTORY |
@@ -88,19 +88,19 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-ENUS-006 | Habla conectada | INVENTORY |
 | SND-ENUS-007 | Ritmo y prominencia | INVENTORY |
 | SND-ENUS-008 | Entonación | INVENTORY |
-| SND-ENUS-009 | Southern Michigan como perfil documentado | SOURCE_MAPPED |
+| SND-ENUS-009 | Southern Michigan como perfil documentado | EVIDENCE_CHECKED |
 | SND-ENUS-010 | Comparaciones con español/portugués | BLOCKED_BY_PROFILES |
 
 ### 🇧🇷 Portugués brasileño — referencia carioca — PTBR
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-PTBR-001 | PB amplio vs. habla carioca | DRAFTED |
+| SND-PTBR-001 | PB amplio vs. habla carioca | EVIDENCE_CHECKED |
 | SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
 | SND-PTBR-005 | Consonantes: mapa general | INVENTORY |
-| SND-PTBR-006 | /s/ en coda y variación carioca | SOURCE_MAPPED |
+| SND-PTBR-006 | /s/ en coda y variación carioca | EVIDENCE_CHECKED |
 | SND-PTBR-007 | Róticas y variación | SOURCE_MAPPED |
 | SND-PTBR-008 | /l/ en coda y variación | SOURCE_MAPPED |
 | SND-PTBR-009 | Acento y ritmo | INVENTORY |
