@@ -19,8 +19,8 @@
 ## Salida
 
 - SND-IT-005 — DRAFTED.
-- IT-PROP-003 — Gili Fivela (2010), “Accento”, Enciclopedia dell’Italiano / Treccani.
-- IT-PROP-004 — D’Imperio & Rosenthall (1999), *Phonology* 16(1), 1–28.
+- IT-W02-S01 — Gili Fivela (2010), “Accento”, Enciclopedia dell’Italiano / Treccani.
+- IT-W02-S02 — D’Imperio & Rosenthall (1999), *Phonology* 16(1), 1–28.
 - `languages/it/SOURCES-PROPOSED-STRESS-WAVE-02.md` creado con alcance, localizadores y limitaciones; el archivo compartido `SOURCES-PROPOSED.md` queda sin cambios respecto de la matriz.
 
 ## Decisiones
@@ -30,6 +30,13 @@
 - no confundir duración vocálica con geminación consonántica;
 - no confundir acento gráfico, acento léxico y prominencia de frase.
 
+## Coordinación post-#7320
+
+- IDs locales migrados al formato canónico de waves: `IT-W02-S01` y `IT-W02-S02`.
+- El source map local contiene los campos obligatorios del protocolo de integración.
+- No se edita el Source Registry desde esta branch.
+- No deben quedar IDs `IT-W02-Sxx` cuando la entrada sea integrada a la rama matriz.
+
 ## Gate
 
-La entrada no pasa todavía a EVIDENCE_CHECKED porque IT-PROP-003 e IT-PROP-004 requieren canonicalización en el Source Registry y revisión lingüística independiente.
+La entrada no pasa todavía a EVIDENCE_CHECKED porque IT-W02-S01 e IT-W02-S02 requieren canonicalización/deduplicación en el Source Registry, re-auditoría R33 posterior a esa reescritura y revisión lingüística independiente.
