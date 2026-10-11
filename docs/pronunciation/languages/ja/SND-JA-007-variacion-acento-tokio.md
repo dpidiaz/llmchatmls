@@ -1,6 +1,7 @@
 # SND-JA-007 — Variación y cambio en el acento de Tokio
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** japonés.  
+**Estado:** LINGUISTIC_REVIEW.
+**Idioma:** japonés.  
 **Variedad:** Tokio; datos recogidos principalmente entre 1982 y 1984.  
 **Dominio:** prosodia / variación.
 
@@ -80,7 +81,7 @@ Shibata, T. (superv.), Mase, Y., & Sato, R. (Eds.). (1985/2013). *東京語ア�
 
 ## 10. Nota de auditoría
 
-Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional de NINJAL. La fuente tiene advertencia temporal explícita. Falta LINGUISTIC_REVIEW y EDITORIAL_REVIEW.
+Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional de NINJAL. La fuente tiene advertencia temporal explícita. La revisión lingüística independiente ya obtuvo PASS_WITH_NOTE; permanece pendiente EDITORIAL_REVIEW.
 
 
 ## Revisión lingüística wave 04
