@@ -1,6 +1,6 @@
 # SND-FND-013 — Tono
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** prosodia / fonología.
 **Idioma:** transversal.
 
@@ -60,7 +60,7 @@ Las categorías específicas de tono no se definirán a partir de esta fuente in
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
-- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; corresponde al gate evidencial anterior; los gates lingüístico y editorial se registran por separado.
 
 ## 9. Revisión lingüística
 
@@ -68,3 +68,12 @@ Las categorías específicas de tono no se definirán a partir de esta fuente in
 - **Resultado:** PASS WITH CHANGE → `LINGUISTIC_REVIEW`.
 - **Ajuste:** se distinguió la categoría/percepción tonal de su correlato acústico F0.
 - **Salvaguarda:** tono, acento tonal y entonación siguen separados; las categorías específicas pertenecen a los perfiles y a sus tradiciones analíticas.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada introduce tono sin equipararlo con F0, entonación o acento tonal y deriva rápidamente hacia las preguntas que cada perfil deberá resolver.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` solo después de comprobar política final de composición/metadatos y ausencia de cambios sustantivos posteriores.

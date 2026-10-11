@@ -1,6 +1,6 @@
 # SND-FND-003 — Fonema, alófono, segmento y realización
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonología / fonética.
 **Idioma:** transversal.
 
@@ -67,7 +67,7 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
-- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; corresponde al gate evidencial anterior; los gates lingüístico y editorial se registran por separado.
 
 ## 8. Revisión lingüística
 
@@ -75,3 +75,12 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** “fonema”, “alófono”, “segmento” y “realización” se presentan como niveles/objetos analíticos distintos y la entrada reconoce explícitamente que puede haber análisis alternativos.
 - **Límite:** ningún perfil debe heredar automáticamente un análisis fonémico del capítulo general.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** Las cuatro etiquetas se presentan antes del análisis y la advertencia sobre análisis alternativos evita una falsa definición absoluta.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.

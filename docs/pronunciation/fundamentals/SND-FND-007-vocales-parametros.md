@@ -1,6 +1,6 @@
 # SND-FND-007 — Vocales: parámetros articulatorios
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonética.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -81,3 +81,12 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Decisión:** esta ruta queda como versión canónica de SND-FND-007.
 - **Integración:** se incorporó de la versión paralela la cautela de no interpretar altura/anterioridad como posiciones discretas absolutas.
 - **Salvaguarda:** el espacio vocálico común es una herramienta descriptiva; no sustituye los inventarios ni realizaciones de cada variedad.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** Los parámetros se explican por separado y la sección “Qué no hará MLS-SND” funciona como control editorial claro contra equivalencias fáciles.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
