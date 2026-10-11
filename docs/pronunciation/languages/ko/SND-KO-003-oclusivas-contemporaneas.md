@@ -50,7 +50,7 @@ En cambio, la entrada completa deberá especificar:
 | KO003-C02 | En posición IP/AP-inicial, burst duration y f0 son pistas principales; H1*-H2* contribuye a tense vs. non-tense | SND-SRC-0021 | abstract/resultados | VERIFIED |
 | KO003-C03 | En posición medial, closure duration, voicing during closure y burst duration ganan peso | SND-SRC-0021 | abstract/resultados | VERIFIED |
 | KO003-C04 | La implementación del contraste depende de la posición prosódica | SND-SRC-0021 | conclusión/abstract | VERIFIED |
-| KO003-C05 | Existe cambio en curso en el contraste lax/aspirated con reducción VOT y mayor papel de f0 en Seúl | KO-SRC-P02 | abstract, Journal of Phonetics 66, 120–144 | VERIFIED |
+| KO003-C05 | Existe cambio en curso en el contraste lax/aspirated con reducción VOT y mayor papel de f0 en Seúl | SND-SRC-0033 | abstract, Journal of Phonetics 66, 120–144 | VERIFIED |
 | KO003-C06 | El estudio 2026 observa diferencias f0 lax/aspirated también mediales, especialmente ante vocales no altas | SND-SRC-0021 | abstract | VERIFIED |
 
 ## 6. Advertencia
