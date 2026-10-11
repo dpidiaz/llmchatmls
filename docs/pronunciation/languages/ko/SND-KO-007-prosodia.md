@@ -23,7 +23,7 @@ En este modelo, el patrón tonal inicial de la AP se relaciona con propiedades l
 
 ## 4. Cambio y modelo
 
-La entrada no fijará una melodía única como invariable. Estudios recientes muestran variación, cambio sonoro y efectos de foco, longitud y segmento inicial.
+La entrada no fijará una melodía única como invariable. Estudios recientes muestran variación, cambio sonoro y efectos de foco y del segmento inicial.
 
 ## 5. Evidencia R33
 
@@ -31,7 +31,7 @@ La entrada no fijará una melodía única como invariable. Estudios recientes mu
 |---|---|---|---|---|
 | KO007-C01 | Jun propone la Accentual Phrase como unidad prosódica relevante de Korean/Seoul Korean | SND-SRC-0037 | pp. 189–226; descripción del modelo | VERIFIED |
 | KO007-C02 | Trabajos contemporáneos describen Seoul Korean mediante APs tonales y prominencia de borde/fraseo | SND-SRC-0038 | introducción/overview del sistema prosódico | VERIFIED |
-| KO007-C03 | La F0 posterior a oclusivas participa en un cambio contemporáneo que interactúa con posición prosódica | SND-SRC-0021 | Abstract; §1; Discussion | VERIFIED |
+| KO007-C03 | La F0 posterior a oclusivas participa en la diferenciación de categorías y su implementación varía según la posición prosódica en Seoul Korean | SND-SRC-0021 | Abstract; §1.1; Current study | VERIFIED |
 
 ## 6. Límite
 
