@@ -25,7 +25,8 @@ Segmentos; sílaba; tonos; variación tonal; Zhuyin; romanización; escritura.
 | SND-ZHTW-004 | `SND-ZHTW-004-sistema-tonal-mapa.md` | EVIDENCE_CHECKED (mapa básico) |
 | SND-ZHTW-005 | `SND-ZHTW-005-variacion-tono1-norte-centro.md` | EVIDENCE_CHECKED |
 | SND-ZHTW-007 | `SND-ZHTW-007-zhuyin.md` | EVIDENCE_CHECKED (heredada de foundation) |
-| SND-ZHTW-003 | `SND-ZHTW-003-inventario-segmental-mapa.md` | RESEARCHED_PARTIAL |
+| SND-ZHTW-002 | `SND-ZHTW-002-estructura-silabica.md` | EVIDENCE_CHECKED (alcance acotado) |
+| SND-ZHTW-003 | `SND-ZHTW-003-iniciales-finales-mapa.md` | RESEARCHED_PARTIAL |
 | SND-ZHTW-009 | `SND-ZHTW-009-romanizacion-latina.md` | DRAFTED / PROVISIONAL_ACCEPT |
 | SND-ZHTW-010 | `SND-ZHTW-010-variacion-por-contacto.md` | EVIDENCE_CHECKED |
 | SND-ZHTW-006 | `RESEARCH-NOTE-tone3-sandhi.md` | BLOCKED_BY_CONFLICTING_EVIDENCE |
@@ -50,3 +51,9 @@ Aún falta una descripción fonética integral contemporánea de Taiwan Mandarin
 ## Regla
 
 Ninguna lista de fenómenos constituye por sí sola una afirmación fonética validada. Toda ampliación debe conservar la distinción entre convención institucional, descripción fonética, análisis fonológico, variación y decisión editorial.
+
+
+## Handoff
+
+- `WAVE-01-REPORT.md` resume alcance, superposiciones y fuentes locales.
+- `LINGUISTIC-REVIEW-CHECKLIST.md` define el gate independiente requerido antes de promoción.
