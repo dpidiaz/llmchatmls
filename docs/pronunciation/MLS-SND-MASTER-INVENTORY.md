@@ -196,14 +196,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-RU-001 | Ruso literario contemporáneo: alcance | EVIDENCE_CHECKED |
-| SND-RU-002 | Vocales | EVIDENCE_CHECKED |
-| SND-RU-003 | Reducción vocálica | EVIDENCE_CHECKED |
-| SND-RU-004 | Consonantes | EVIDENCE_CHECKED |
-| SND-RU-005 | Palatalización | EVIDENCE_CHECKED |
-| SND-RU-006 | Acento léxico | EVIDENCE_CHECKED |
-| SND-RU-007 | Procesos contextuales | EVIDENCE_CHECKED |
-| SND-RU-008 | Norma ortoépica y variantes | EVIDENCE_CHECKED |
+| SND-RU-001 | Ruso literario contemporáneo: alcance | LINGUISTIC_REVIEW |
+| SND-RU-002 | Vocales | LINGUISTIC_REVIEW |
+| SND-RU-003 | Reducción vocálica | LINGUISTIC_REVIEW |
+| SND-RU-004 | Consonantes | LINGUISTIC_REVIEW |
+| SND-RU-005 | Palatalización | LINGUISTIC_REVIEW |
+| SND-RU-006 | Acento léxico | LINGUISTIC_REVIEW |
+| SND-RU-007 | Procesos contextuales | LINGUISTIC_REVIEW |
+| SND-RU-008 | Norma ortoépica y variantes | LINGUISTIC_REVIEW |
 | SND-RU-009 | Cirílico y pronunciación | INVENTORY |
 
 ## 5. Comparación transversal
