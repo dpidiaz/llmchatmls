@@ -1,6 +1,6 @@
 # SND-JA-001 — Tokio como ancla de referencia y sus límites
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** japonés.
 **Variedad:** Tokio / lengua común para el ancla prosódica.
 **Dominio:** variedad / prosodia.
