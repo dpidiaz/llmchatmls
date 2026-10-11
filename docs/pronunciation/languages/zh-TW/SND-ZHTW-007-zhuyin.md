@@ -1,6 +1,6 @@
 # SND-ZHTW-007 — Zhuyin/Bopomofo
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** sistema local de anotación / escritura-pronunciación.
 
@@ -51,3 +51,12 @@ La separación conceptual entre Zhuyin e IPA es una decisión metodológica MLS-
 - **Resultado:** EVIDENCE_CHECKED.
 - **Comprobación:** el manual oficial del MOE identifica Bopomofo, lista onset/rhyme/tonal marks y contiene una tabla de sílabas de mandarín con Bopomofo.
 - **Límite:** la distinción conceptual Zhuyin ≠ IPA es política metodológica MLS-SND; el manual no se usa como descripción fonética completa de Taiwan Mandarin.
+
+
+## Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
+- **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
+- **Siguiente gate:** EDITORIAL_REVIEW.
