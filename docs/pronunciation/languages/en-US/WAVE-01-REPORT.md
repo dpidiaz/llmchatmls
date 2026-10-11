@@ -11,6 +11,8 @@ Rama: snd/en-us-pilot-wave-01.
 - SND-ENUS-009 — EVIDENCE_CHECKED.
 - SND-ENUS-007 — RESEARCHED.
 - SND-ENUS-008 — RESEARCHED.
+- SND-ENUS-004 — RESEARCHED.
+- SND-ENUS-006 — RESEARCHED.
 
 ## Archivos creados
 
@@ -20,6 +22,8 @@ Rama: snd/en-us-pilot-wave-01.
 - SND-ENUS-009-southern-michigan.md
 - SND-ENUS-007-ritmo-prominencia.md
 - SND-ENUS-008-entonacion.md
+- SND-ENUS-004-reduccion.md
+- SND-ENUS-006-habla-conectada.md
 
 ## Fuente nueva más importante
 
@@ -32,6 +36,8 @@ Clopper, Pisoni & de Jong (2005) compara acústicamente seis variedades regional
 - ENUS-CAND-003 — Nationwide Speech Project (Clopper & Pisoni, 2006).
 - ENUS-CAND-004 — Clopper & Smiljanic (2011), prosodia Southern/Midland.
 - ENUS-CAND-005 — Clopper & Smiljanic (2015), organización temporal regional.
+- ENUS-CAND-006 — Buckeye Corpus / Pitt et al. (2005).
+- ENUS-CAND-007 — Johnson (2004), reducción conversacional.
 
 No se asignaron IDs SND-SRC globales para evitar colisiones con ramas paralelas.
 
