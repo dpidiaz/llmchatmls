@@ -47,13 +47,13 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-REP-001 | Sonido, letra y símbolo | terminology | INVENTORY |
-| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | EVIDENCE_CHECKED |
+| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | LINGUISTIC_REVIEW |
 | SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-005 | Diacríticos | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
-| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | EVIDENCE_CHECKED |
-| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | EVIDENCE_CHECKED |
+| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
+| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | LINGUISTIC_REVIEW |
 | SND-REP-009 | Ortografía y pronunciación | terminology | INVENTORY |
 | SND-REP-010 | Romanización | terminology | INVENTORY |
 | SND-REP-011 | Transliteración | terminology | INVENTORY |
