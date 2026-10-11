@@ -1,6 +1,6 @@
 # SND-REP-004 — Cómo leer vocales del IPA
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** representación / fonética.
 **Idioma:** transversal.
 
@@ -68,3 +68,12 @@ Las decisiones sobre cuánta precisión acústica o articulatoria incluir en cad
 - **No se cambió:** el objetivo pedagógico de orientación, la política de transcripción amplia ni la exigencia de fuentes específicas por perfil.
 - **Gate alcanzado:** `LINGUISTIC_REVIEW`.
 - **Pendiente:** `EDITORIAL_REVIEW`.
+
+
+## 9. Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La secuencia función → ejes → posición relativa → símbolo vs. realización es clara para consulta; el control contra la inferencia ‘mismo símbolo = mismo sonido físico’ está suficientemente destacado.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, símbolos IPA, transcripciones ni alcance durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` únicamente después del gate de composition readiness aplicado a esta misma versión.
