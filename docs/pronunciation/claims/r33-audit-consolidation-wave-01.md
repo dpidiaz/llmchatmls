@@ -3,7 +3,7 @@
 - Área: SND-R33
 - IDs: SND-REP-002, SND-ENUS-001, SND-ZHTW-007, SND-KO-009, SND-JA-001
 - Tipo: consolidación de auditorías R33 independientes
-- Estado: ACTIVE
+- Estado: COMPLETE
 - Base: feat/mls-snd-foundation
 - Inicio: 2026-10-11
 
@@ -14,3 +14,12 @@ Cambios esperados:
 - sincronizar bibliografía de SND-ENUS-001;
 - acotar JA001-C03 a lo que OJAD declara explícitamente;
 - crear un único informe de auditoría canónico.
+
+## Resultado
+
+- 5/5 entradas piloto consolidadas.
+- SND-SRC-0004 canonizada a Ladefoged (1999) Handbook, conservando antecedente 1989.
+- SND-ENUS-001 sincronizada.
+- JA001-C03 acotada al alcance explícito de OJAD.
+- Informe canónico: `docs/pronunciation/audits/R33-PILOT-WAVE-01.md`.
+- Sin promociones más allá de EVIDENCE_CHECKED.
