@@ -695,3 +695,21 @@ La canonicalización mantiene separadas:
 - estudios de fenómenos específicos.
 
 La existencia de un ID global no convierte automáticamente todos los claims asociados en EVIDENCE_CHECKED: cada entrada conserva su propio gate claim ↔ source ↔ locator.
+
+
+### SND-SRC-0047 — Coreano de Seúl / n-insertion y silabificación de /j/
+
+- **Tier:** B.
+- **APA 7:** Jun, J. (2015). Korean n-insertion: A mismatch between data and learning. *Phonology, 32*(3), 417–458. https://doi.org/10.1017/S0952675715000275
+- **Publicación online:** 15 de febrero de 2016.
+- **Idioma/variedad:** coreano de Seúl en el alcance del estudio.
+- **Cobertura:** variación de n-insertion, factores fonológicos y discusión explícita de alternativas de silabificación para /j/.
+- **Localizador:** pp. 417–458; para KO-005, análisis alrededor de (13b)–(16), incluido el pasaje que señala que ambas silabificaciones han sido propuestas.
+- **Acceso:** Open Access en Cambridge Core.
+- **Limitación:** fenómeno específico y análisis teórico concreto; no constituye por sí solo una gramática silábica completa del coreano.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_ANALYTICAL_SCOPE.
+
+## 19. Resultado del registro v0.8
+
+El registro contiene **47 fuentes** numeradas SND-SRC-0001 a SND-SRC-0047.
