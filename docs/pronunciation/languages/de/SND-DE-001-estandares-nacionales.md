@@ -1,6 +1,7 @@
 # SND-DE-001 — Alemán estándar y estándares nacionales
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** alemán.  
+**Estado:** EDITORIAL_REVIEW  
+**Idioma:** alemán.  
 **Dominio:** variedad / alcance descriptivo.
 
 ## 1. Decisión de arquitectura
@@ -47,6 +48,15 @@ SND-SRC-0030 y SND-SRC-0031 ya están canonicalizadas. Una fuente contextual adi
 | DE001-C02 | El estándar austríaco muestra variación fonética condicionada y normas en competencia | SND-SRC-0030 | Abstract / pp. 143–175 | VERIFIED |
 | DE001-C03 | Swiss Standard German presenta variación e influencia de dialectos alemánicos en el dominio fonético estudiado | SND-SRC-0031 | Abstract + Introduction | VERIFIED |
 
-## 7. Gate
+## 7. Entradas relacionadas
 
-EVIDENCE_CHECKED para las afirmaciones específicas de Austria y Suiza. La síntesis MULTI_REFERENCE es una decisión editorial sustentada por los alcances diferenciados de las fuentes; LINGUISTIC_REVIEW sigue pendiente.
+- SND-DE-007 — Duden e IPA.
+- SND-DE-008 — Mapa DE/AT/CH.
+
+## 8. Gate editorial
+
+Las afirmaciones específicas de Austria y Suiza conservan sus fuentes y localizadores.
+
+**LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+La síntesis **MULTI_REFERENCE** se mantiene como decisión editorial sustentada por alcances diferenciados. DE-008 continúa en RESEARCHED y este perfil no pasa todavía a READY_FOR_COMPOSITION.
