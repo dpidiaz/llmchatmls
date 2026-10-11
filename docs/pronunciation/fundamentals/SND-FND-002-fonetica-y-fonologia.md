@@ -1,6 +1,6 @@
 # SND-FND-002 — Fonética y fonología
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Dominio:** fundamentos.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -42,9 +42,9 @@ Si una fuente y otra adoptan análisis fonológicos distintos, MLS-SND registrar
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND002-C01 | La fonética estudia propiedades y producción/percepción de los sonidos del habla | SND-SRC-0024 | cap. 3 “Phonetics” | introductorio/transversal | SOURCED |
-| FND002-C02 | La fonología estudia la organización y patrones sonoros dentro de las lenguas | SND-SRC-0024 | cap. 4 “Phonology” | introductorio/transversal | SOURCED |
-| FND002-C03 | El análisis lingüístico requiere distinguir propiedades fonéticas de patrones fonológicos | SND-SRC-0024 | transición cap. 3 → cap. 4 | introductorio/transversal | SOURCED |
+| FND002-C01 | La fonética trata la realidad física del habla, incluida su articulación, categorización y descripción | SND-SRC-0024 | cap. 3 “Phonetics”, especialmente introducción del capítulo | introductorio/transversal | VERIFIED |
+| FND002-C02 | La fonología estudia la organización y patrones sonoros dentro de las lenguas | SND-SRC-0024 | cap. 4 “Phonology”, especialmente §4.1 “Phonemes and allophones” | introductorio/transversal | VERIFIED |
+| FND002-C03 | El análisis lingüístico requiere distinguir propiedades fonéticas de patrones fonológicos | SND-SRC-0024 | cap. 3 + cap. 4, §4.1 | introductorio/transversal | VERIFIED |
 
 ## 6. Fuente
 
@@ -53,3 +53,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 7. Nota editorial
 
 Las formulaciones de “fonética” y “fonología” están adaptadas a la voz editorial del MLS. La fuente respalda la distinción conceptual; no se atribuye a ella la arquitectura específica del tomo.
+
+## R33 audit
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED para los claims listados.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
