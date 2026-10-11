@@ -127,6 +127,35 @@ Este mapa complementa el Source Registry global sin asignar nuevos IDs globales,
 
 **Limitaciones:** estudio centrado en un corpus concreto; las tasas no se generalizarán a todas las variedades/estilos sin evidencia adicional.
 
+
+### ENUS-CAND-008 — Broeders & Gussenhoven, word stress
+
+**Referencia propuesta:** Broeders, T., & Gussenhoven, C. *An Introduction to American English Phonetics: A Theoretical Guide to American English Pronunciation*. Open Textbook Platform, University of Groningen / Radboud University. https://doi.org/10.48544/45d5019f-29ba-49e8-8fc8-462079fc1459
+
+**Acceso:** abierto; licencia CC BY-NC-SA 4.0.
+
+**Cobertura:** manual universitario de fonética del inglés estadounidense. El capítulo 3 trata word stress e incluye homógrafos, palabras derivadas, palabras con múltiples acentos, compuestos y stress shift.
+
+**Localizadores:** cap. 3 “Word stress”; §§3.1–3.8.
+
+**Utilidad:** marco didáctico para describir regularidades de acento léxico y distinguir stress de fenómenos segmentales.
+
+**Limitaciones:** el libro utiliza la etiqueta GA y está orientado pedagógicamente; MLS-SND no adoptará su variedad-modelo como si representara una pronunciación estadounidense homogénea.
+
+### ENUS-CAND-009 — CMU Pronouncing Dictionary
+
+**Referencia propuesta:** Carnegie Mellon University Speech Group. *CMU Pronouncing Dictionary (CMUdict)*. https://github.com/cmusphinx/cmudict
+
+**Cobertura:** diccionario gratuito de pronunciación de inglés estadounidense para tecnología del habla.
+
+**Formato de stress:** en el formato CMU, las vocales pueden llevar `0` (sin acento), `1` (acento primario) o `2` (acento secundario), según la documentación de cmudict-tools.
+
+**Localizadores:** README de CMUdict; documentación “CMU Pronunciation Dictionary File Format” de cmudict-tools → apartado sobre stress markers.
+
+**Utilidad:** recurso lexicográfico para consultar patrones de acento de entradas individuales y contrastar formas cuando MLS-SND necesite ejemplos.
+
+**Limitaciones:** el propio proyecto advierte que mantiene errores, omisiones e inconsistencias; no debe utilizarse como autoridad única para afirmaciones fonológicas generales ni como sustituto de una obra lexicográfica revisada.
+
 ## Decisión de esta wave
 
 - SND-ENUS-009 puede pasar a EVIDENCE_CHECKED con SND-SRC-0005.
