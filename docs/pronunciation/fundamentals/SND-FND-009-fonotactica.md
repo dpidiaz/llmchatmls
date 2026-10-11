@@ -1,6 +1,6 @@
 # SND-FND-009 — Fonotáctica
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonología.
 **Idioma:** transversal.
 
@@ -59,3 +59,10 @@ Las restricciones concretas pertenecen a los perfiles por idioma; esta entrada s
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## Linguistic review wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Control:** terminología, alcance, nivel fonético/fonológico y correspondencia con la política de transcripción revisados.
+- **Siguiente etapa:** EDITORIAL_REVIEW.
