@@ -1,6 +1,6 @@
 # SND-FND-002 — Fonética y fonología
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** fundamentos.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -75,3 +75,16 @@ Las formulaciones de “fonética” y “fonología” están adaptadas a la vo
 - **Lectura:** La distinción central se entiende sin formación previa; la secuencia definición → conexión → regla editorial es compacta y útil para consulta.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
+
+
+## Composition readiness pilot 01
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `7a0fbe507364fae3e2bf2a5a72950ca92bf29adb`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** EVIDENCE_CHECKED + LINGUISTIC_REVIEW + EDITORIAL_REVIEW vigentes para esta versión.
+- **Representación:** No contiene transcripción IPA ni capas de escritura que requieran auditoría adicional.
+- **Navegación:** referencias cruzadas verificadas contra IDs canónicos existentes.
+- **Autonomía escrita:** PASS; la entrada no requiere audio, ejercicios ni evaluación del lector.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** únicamente estado/metadata de readiness; sin cambios lingüísticos, evidenciales ni de ejemplos.
