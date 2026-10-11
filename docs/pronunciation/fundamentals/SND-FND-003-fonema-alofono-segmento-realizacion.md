@@ -1,6 +1,6 @@
 # SND-FND-003 — Fonema, alófono, segmento y realización
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Dominio:** fonología / fonética.
 **Idioma:** transversal.
 
@@ -45,9 +45,9 @@ Cuando exista una diferencia analítica material se registrará:
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND003-C01 | El contraste es central para identificar fonemas en análisis introductorio | SND-SRC-0024 | §4.1 “Phonemes and Contrast” | introductorio/transversal | SOURCED |
-| FND003-C02 | Fonemas y alófonos se distinguen mediante relaciones de contraste y distribución | SND-SRC-0024 | §4.1 “Phonemes and Contrast” | introductorio/transversal | SOURCED |
-| FND003-C03 | Un conjunto de datos puede admitir decisiones de análisis fonémico que requieren argumentación | SND-SRC-0024 | §4.5 “Phonemic Analysis” | introductorio/transversal | SOURCED |
+| FND003-C01 | Un fonema se trata como una unidad abstracta y sus realizaciones físicas relacionadas como alófonos dentro del análisis | SND-SRC-0024 | §4.1 “Phonemes and allophones”, especialmente explicación de fonema/alófono | introductorio/transversal | VERIFIED |
+| FND003-C02 | La distribución y los entornos de los phones se usan para determinar relaciones alofónicas en el análisis | SND-SRC-0024 | §4.1 “Phonemes and allophones”, apartados sobre environments y aim of phonology | introductorio/transversal | VERIFIED |
+| FND003-C03 | Una lengua puede admitir más de un análisis fonémico y las decisiones dependen de datos y supuestos analíticos | SND-SRC-0024 | §4.5 “Phonemic analysis”, “Phonemecization” y “Simplicity” | introductorio/transversal | VERIFIED |
 
 ## 5. Relacionado con
 
@@ -62,3 +62,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 7. Nota editorial
 
 “Segmento” y “realización” se fijan aquí como términos editoriales útiles. Las entradas por idioma deberán precisar el análisis de sus propias fuentes.
+
+## R33 audit
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED para los claims listados.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
