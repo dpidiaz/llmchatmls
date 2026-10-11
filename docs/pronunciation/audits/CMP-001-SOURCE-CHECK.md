@@ -45,9 +45,8 @@ The two local candidates were canonicalized as SND-SRC-0051 and SND-SRC-0052. Th
 
 ## Canonicalization recheck
 
-1. CMP-PROP-001 → SND-SRC-0051.
-2. CMP-PROP-002 → SND-SRC-0052.
-3. The claim table was re-read against those canonical records.
+1. SND-SRC-0051 y SND-SRC-0052 corresponden a las mismas obras auditadas inicialmente.
+2. The claim table was re-read against those canonical records.
 4. No claim scope changed during ID substitution.
 
 **Gate result:** PASS → `EVIDENCE_CHECKED`.
