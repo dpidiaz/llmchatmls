@@ -1,6 +1,6 @@
 # SND-FND-013 — Tono
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** prosodia / fonología.
 **Idioma:** transversal.
 
@@ -77,3 +77,17 @@ Las categorías específicas de tono no se definirán a partir de esta fuente in
 - **Lectura:** la entrada introduce tono sin equipararlo con F0, entonación o acento tonal y deriva rápidamente hacia las preguntas que cada perfil deberá resolver.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` solo después de comprobar política final de composición/metadatos y ausencia de cambios sustantivos posteriores.
+
+
+## Composition readiness wave 03
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `219bcc2dcae686d28dc8d06e146e0c973ed0574b`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** gates evidencial, lingüístico y editorial vigentes para esta versión.
+- **Fuentes:** SND-SRC-0024.
+- **Navegación:** IDs relacionados verificados/reservados canónicamente.
+- **Representación:** no hay notación no identificada ni transcripciones materiales pendientes.
+- **Autonomía escrita:** PASS.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** solo estado/metadata de readiness.
