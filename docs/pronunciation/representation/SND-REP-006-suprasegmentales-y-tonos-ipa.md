@@ -1,6 +1,6 @@
 # SND-REP-006 — Suprasegmentales, tonos y acentos de palabra en el IPA
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** representación / prosodia.
 **Idioma:** transversal.
 
@@ -71,3 +71,10 @@ Las entradas de mandarín de Taiwán, japonés y otros perfiles prosódicamente 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **No equivale todavía a:** LINGUISTIC_REVIEW o EDITORIAL_REVIEW.
+
+
+## 10. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS. Se mantiene separada la disponibilidad de signos IPA de su función lingüística concreta en cada idioma.
+- **Siguiente gate:** EDITORIAL_REVIEW.
