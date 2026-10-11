@@ -2,7 +2,7 @@
 
 Actualizado: 2026-10-11.
 
-La rama matriz contiene **90 entradas canónicas únicas** y el Source Registry contiene **79 fuentes canónicas**. Antes de reclamar trabajo, revisar:
+La rama matriz contiene **94 entradas canónicas únicas** y el Source Registry contiene **79 fuentes canónicas**. Antes de reclamar trabajo, revisar:
 
 1. `STATUS.md`;
 2. `INTEGRATION-QUEUE.md`;
@@ -137,6 +137,8 @@ Waves activas conocidas:
 - editorial review representation — #7327;
 - typography/Unicode QA — #7335;
 - content linter — #7343.
+
+Italia IT-001…009 ya tiene **nueve archivos físicos** en LINGUISTIC_REVIEW; no reclamar IT-002/003/006/007 como drafts nuevos.
 
 ## Trabajo de integración / QA
 
