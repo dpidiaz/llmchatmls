@@ -1,6 +1,6 @@
 # SND-ENUS-009 — Southern Michigan como perfil documentado
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** inglés.
 **Variedad:** Southern Michigan / Northern Cities context.
 **Dominio:** perfil regional / vocales / alcance.
@@ -57,3 +57,10 @@ Hillenbrand, J. M. (2003). American English: Southern Michigan. *Journal of the 
 - SND-ENUS-001 — Por qué no usamos “General American” como una sola voz
 - SND-ENUS-003 — Sistemas vocálicos y variación regional
 - SND-FND-017 — Variación
+## Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** alcance regional/histórico, límites de muestra, relación con Ladefoged y control de generalización nacional.
+- **Cambios de claims:** ninguno.
+- **Siguiente gate:** EDITORIAL_REVIEW.
