@@ -82,3 +82,10 @@ Los capítulos CMP-002…CMP-011 siguen bloqueados por perfiles.
 3. reconciliar zh-TW;
 4. solicitar/revisar LINGUISTIC_REVIEW de waves EVIDENCE_CHECKED completas;
 5. solo después actualizar `STATUS.md` y documentos globales en un batch coordinado.
+
+
+### Source integration
+
+- **#7320 — READY_FOR_INTEGRATION:** protocolo de source IDs/deduplicación auditado contra 60 entradas canónicas.
+- SOURCE-ID-INTEGRITY-01: PASS.
+- Únicos IDs locales restantes: DE-001, DE-008, ESGT-002, KO-005; todos en estados pre-R33.
