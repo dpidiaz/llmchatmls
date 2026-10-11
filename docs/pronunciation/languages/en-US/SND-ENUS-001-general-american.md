@@ -1,6 +1,6 @@
 # SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Idioma:** inglés.
 **Variedad:** Estados Unidos; alcance multirreferencia.
 **Dominio:** variación / política descriptiva.
@@ -36,8 +36,8 @@ No significa que sea imposible enseñar pronunciación estadounidense de manera 
 
 | claim_id | afirmación | source_id | localizador | estado |
 |---|---|---|---|---|
-| ENUS001-C01 | Existe diversidad fonética considerable en el inglés norteamericano y la etiqueta General American no designa una realización única suficientemente precisa | SND-SRC-0005 | extracto introductorio de Cambridge para Hillenbrand 2003, pp. 121–126 | SOURCED |
-| ENUS001-C02 | La descripción de Hillenbrand trata Southern Michigan como perfil regional que complementa una descripción previa | SND-SRC-0005 | introducción / pp. 121–126 | SOURCED |
+| ENUS001-C01 | Existe diversidad fonética considerable en el inglés norteamericano y la etiqueta General American no designa una realización única suficientemente precisa | SND-SRC-0005 | Cambridge Core, Extract; Hillenbrand (2003), pp. 121–126 | VERIFIED |
+| ENUS001-C02 | La descripción de Hillenbrand trata Southern Michigan como perfil regional que complementa una descripción previa | SND-SRC-0005 | Cambridge Core, Extract; propósito declarado del artículo, pp. 121–126 | VERIFIED |
 
 ## 6. Fuentes
 
@@ -48,3 +48,10 @@ Hillenbrand, J. M. (2003). American English: Southern Michigan. Journal of the I
 ## 7. Nota editorial
 
 La elección MULTI_REFERENCE es una decisión de MLS-SND construida a partir de esta evidencia; no es una categoría utilizada por los artículos.
+
+## 8. Auditoría R33
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED.
+- **Comprobación:** el extracto de Cambridge afirma explícitamente la diversidad fonética norteamericana, cuestiona la utilidad de “General American English” como etiqueta plenamente significativa y declara que Hillenbrand amplía la descripción de Ladefoged con Southern Michigan.
+- **Límite:** MULTI_REFERENCE es una decisión editorial MLS-SND, no una categoría de Hillenbrand.
