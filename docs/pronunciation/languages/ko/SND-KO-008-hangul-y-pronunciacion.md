@@ -1,6 +1,6 @@
 # SND-KO-008 — Hangul y pronunciación: escritura no es superficie fonética
 
-**Estado:** EVIDENCE_CHECKED (alcance normativo)  
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** coreano  
 **Dominio:** escritura / pronunciación
 
@@ -42,3 +42,11 @@ No todas las entradas necesitan todas las capas.
 ## 5. Nota editorial
 
 La secuencia de capas es una decisión MLS-SND. Esta entrada no afirma que la ortografía sea “irregular”; describe que ortografía y realización fonética son niveles distintos.
+
+
+## Revisión lingüística 2026-10-11
+
+- Representación, alcance y separación escritura/romanización/IPA comprobados.
+- Source IDs canónicos revisados.
+- Las decisiones editoriales permanecen separadas de los claims externos.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
