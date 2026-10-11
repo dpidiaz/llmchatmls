@@ -33,7 +33,7 @@ Primero se revisarán:
 
 | claim_id | afirmación | source | localizador | estado |
 |---|---|---|---|---|
-| KO005-C01 | Existe un conjunto importante de procesos coreanos formulados respecto de onset, coda o límite silábico | KO-W1-S06 | Summary del capítulo | VERIFIED |
+| KO005-C01 | Existe un conjunto importante de procesos coreanos formulados respecto de onset, coda o límite silábico | KO-W1-C06 | Summary del capítulo | VERIFIED |
 | KO005-C02 | La representación sub-silábica coreana ha recibido análisis diferentes en la literatura | SOURCE_MAP_PENDING_CANONICAL | literatura de estructura silábica mapeada; requiere localizador final | SOURCED_NOT_FINAL |
 
 ## 5. Gate
