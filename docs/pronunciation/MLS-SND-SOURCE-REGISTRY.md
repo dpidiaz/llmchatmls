@@ -786,3 +786,20 @@ El registro contiene **50 fuentes** numeradas SND-SRC-0001 a SND-SRC-0050.
 El registro contiene **52 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0052.
 
 SND-SRC-0051 y SND-SRC-0052 se incorporan para fortalecer CMP-001 con controles empíricos independientes sin convertir ejemplos comparativos en descripciones generales de las variedades implicadas.
+
+
+### SND-SRC-0053 — Español guatemalteco–k’ichee’ / espacios vocálicos
+
+- **Tier:** B.
+- **APA 7:** Baird, B. O. (2020). The vowel spaces of Spanish-K’ichee’ bilinguals. En R. Rao (Ed.), *Spanish Phonetics and Phonology in Contact: Studies from Africa, the Americas, and Spain* (pp. 63–82). John Benjamins. https://doi.org/10.1075/ihll.28.03bai
+- **Idioma/variedad:** español guatemalteco monolingüe y español–k’ichee’ bilingüe de dos variedades de k’ichee’, según el abstract.
+- **Cobertura admitida con acceso actual:** análisis acústico de espacios vocálicos; diferencia reportada entre espacios vocálicos del español de grupos bilingües y monolingües; mantenimiento de diferencias translingüísticas en vocales medias por los bilingües.
+- **Localizador:** abstract del capítulo publicado por John Benjamins.
+- **Acceso verificado:** metadatos y abstract públicos; texto completo no utilizado para claims no visibles.
+- **Limitación crítica:** la evidencia de contacto no se generaliza a todo el español de Guatemala; no usar esta fuente, sin texto completo comprobado, para valores formánticos, tamaños de muestra o resultados internos más específicos.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_ABSTRACT_SCOPE_ONLY.
+
+## Resultado del registro tras SND-SRC-0053
+
+El registro contiene **53 fuentes canónicas** hasta SND-SRC-0053.
