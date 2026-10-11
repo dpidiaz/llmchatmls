@@ -1,6 +1,6 @@
 # SND-ESGT-005 — /s/ y variación regional
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala; contraste nacional/oriental.
 **Dominio:** consonantes / variación regional.
