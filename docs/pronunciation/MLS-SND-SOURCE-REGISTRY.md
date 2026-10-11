@@ -729,3 +729,32 @@ El registro contiene **47 fuentes** numeradas SND-SRC-0001 a SND-SRC-0047.
 ## 20. Resultado del registro v0.9
 
 El registro contiene **48 fuentes** numeradas SND-SRC-0001 a SND-SRC-0048.
+
+
+### SND-SRC-0049 — UNGEGN / Romanization Systems
+
+- **Tier:** A.
+- **Institución:** United Nations Group of Experts on Geographical Names (UNGEGN).
+- **Título:** *Romanization Systems*.
+- **URL:** https://unstats.un.org/unsd/ungegn/romanization/
+- **Cobertura:** romanización de escrituras no romanas al alfabeto romano; principios y proceso de adopción UNGEGN para nombres geográficos.
+- **Localizador:** párrafo definitorio inicial y requisitos de adopción, incluido el grado aceptable de reversibilidad.
+- **Limitación:** mandato centrado en nombres geográficos; sus requisitos institucionales no son propiedades universales de toda romanización.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_INSTITUTIONAL.
+
+### SND-SRC-0050 — Unicode CLDR / Transliteration Guidelines
+
+- **Tier:** A/B técnico-institucional.
+- **Institución:** Unicode Consortium, Common Locale Data Repository.
+- **Título:** *Unicode Transliteration Guidelines*.
+- **URL:** https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines
+- **Cobertura:** diseño y uso de transliteradores; conversión entre scripts; reversibilidad y excepciones; distinción respecto de traducción.
+- **Localizador:** Introduction; principios de diseño; secciones sobre reversibility/ambiguity y available transliterations.
+- **Limitación:** CLDR usa una terminología operativa propia y amplia; no debe presentarse como la única definición lingüística posible de “transliteración”.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_TECHNICAL_REFERENCE.
+
+## 21. Resultado del registro v0.10
+
+El registro contiene **50 fuentes** numeradas SND-SRC-0001 a SND-SRC-0050.
