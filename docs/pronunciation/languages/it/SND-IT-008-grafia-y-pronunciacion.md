@@ -1,7 +1,6 @@
 # SND-IT-008 — Grafía y pronunciación en italiano
 
-**Estado:** EVIDENCE_CHECKED.  
-**Idioma:** italiano.  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
 **Dominio:** escritura / pronunciación.
 
 ## 1. Regla editorial
