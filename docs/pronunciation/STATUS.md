@@ -10,7 +10,7 @@
 | Transcription Guide | v0.2 — decisiones base cerradas |
 | Varieties Policy | v0.2 — matriz de referencias creada |
 | Master Inventory | v0.2 — 143 unidades editoriales candidatas |
-| Source Registry | v0.4 — 24 fuentes registradas |
+| Source Registry | v0.5 — 26 fuentes registradas |
 | R33 gate | DRAFTED |
 | Entry Template | v0.1 |
 | R44 Work Plan | v0.1 |
@@ -56,11 +56,11 @@
 
 ## Métricas
 
-- 24 fuentes registradas.
+- 26 fuentes registradas.
 - 143 unidades editoriales candidatas inventariadas.
 - 10 perfiles lingüísticos inicializados.
-- 17 entradas piloto redactadas.
-- 15 entradas en EVIDENCE_CHECKED.
+- 20 entradas redactadas.
+- 20 entradas en EVIDENCE_CHECKED.
 - 0 entradas todavía en LINGUISTIC_REVIEW, EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
 
 ## Coordinación paralela
@@ -71,7 +71,7 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 
 1. **GATE CUMPLIDO:** 10 entradas de fundamentos en EVIDENCE_CHECKED;
 2. **GATE CUMPLIDO:** SND-REP-002 y cuatro pilotos lingüísticos auditados;
-3. producir pilotos es-GT, en-US y pt-BR-rio con clusters sustantivos;
+3. **GATE CUMPLIDO:** los tres perfiles piloto tienen alcance y al menos un fenómeno sustantivo en EVIDENCE_CHECKED;
 4. ejecutar LINGUISTIC_REVIEW sobre la primera wave;
 5. congelar arquitectura solo después del gate del piloto.
 
@@ -89,13 +89,31 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 - SND-ZHTW-007 — Zhuyin/Bopomofo — EVIDENCE_CHECKED.
 - SND-KO-009 — Romanización Revisada del coreano — EVIDENCE_CHECKED.
 - SND-JA-001 — Tokio como ancla de referencia y sus límites — EVIDENCE_CHECKED.
-- SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca — DRAFTED; localizadores primarios finos pendientes.
+- SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca — EVIDENCE_CHECKED.
+- SND-ESGT-005 — /s/ y variación regional — EVIDENCE_CHECKED.
+- SND-ENUS-009 — Southern Michigan como perfil documentado — EVIDENCE_CHECKED.
+- SND-PTBR-006 — /s/ en coda y variación carioca — EVIDENCE_CHECKED.
 
 
 ## Gate PILOT-SCOPE-01
 
 - 🇬🇹 es-GT: EVIDENCE_CHECKED.
 - 🇺🇸 en-US: EVIDENCE_CHECKED.
-- 🇧🇷 pt-BR-rio: DRAFTED, retenido por control R33.
+- 🇧🇷 pt-BR-rio: EVIDENCE_CHECKED.
 
-**Estado:** 2/3 perfiles de alcance superan EVIDENCE_CHECKED. El tercero no se promoverá hasta verificar localizadores primarios suficientes.
+**Estado:** PASS — 3/3 perfiles de alcance superan EVIDENCE_CHECKED.
+
+
+## Gate PILOT-PHENOMENA-01
+
+**PASS provisional.** Los tres perfiles piloto ya contienen un segundo nivel de evidencia:
+
+- 🇬🇹 es-GT — SND-ESGT-005: /s/ y variación regional.
+- 🇺🇸 en-US — SND-ENUS-009: Southern Michigan como perfil regional documentado.
+- 🇧🇷 pt-BR-rio — SND-PTBR-006: /s/ en coda en los conjuntos históricos descritos por Callou.
+
+Los tres están en **EVIDENCE_CHECKED**. El perfil carioca conserva advertencia temporal explícita: los porcentajes NURC de décadas de 1970/1990 no se presentan como mediciones actuales.
+
+### Siguiente gate
+
+Ejecutar **LINGUISTIC_REVIEW** independiente o de segunda pasada sobre la primera wave antes de congelar la arquitectura del tomo.
