@@ -22,6 +22,7 @@ Opciones:
 - `UNICODE_REPLACEMENT` — aparece U+FFFD.
 - `R33_SECTION_MISSING` — entrada EVIDENCE_CHECKED sin sección Evidencia R33.
 - `UNKNOWN_SOURCE_ID` — se cita un SND-SRC no presente en Source Registry.
+- `DANGLING_LOCAL_SOURCE_ID` — una entrada cita un ID local de fuente pero ese ID no está declarado en un `SOURCE-MAP`/`SOURCES-PROPOSED` del checkout validado.
 - `DUPLICATE_CLAIM_ID` — el mismo claim_id aparece en entradas distintas.
 
 ### WARN
@@ -30,6 +31,13 @@ Opciones:
 - `STATUS_MISSING` — entrada sin campo Estado.
 - `NO_VERIFIED_CLAIM` — EVIDENCE_CHECKED sin ningún claim marcado VERIFIED.
 - `UNDECLARED_INTERNAL_ID` — referencia a un ID que no existe como archivo ni en Master Inventory.
+
+## Reglas de identidad
+
+- `SND-SRC-xxxx` se excluye explícitamente del patrón de IDs de entrada.
+- Los IDs de entrada exigen exactamente tres dígitos finales y no pueden consumir el prefijo de un Source ID.
+- IDs locales recomendados como `JA-W04-S01`/`KO-W1-C04` y candidatos históricos `*-CAND-###`/`*-PROP-###` se detectan estructuralmente.
+- Un ID local es válido en una branch solo si el checkout contiene su source map; antes de integración canónica debe resolverse a `SND-SRC-xxxx` según el protocolo de integración.
 
 ## Qué no valida
 
