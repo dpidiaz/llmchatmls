@@ -1,6 +1,6 @@
 # MLS-SND — Estado canónico del proyecto
 
-**Corte:** 2026-10-11  
+**Corte:** 2026-10-11 (incluye revisión JA-008/009)  
 **Rama matriz:** `feat/mls-snd-foundation`  
 **Inventario:** 143 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad para cada entrada:** su archivo `SND-*.md`, cotejado con `MLS-SND-MASTER-INVENTORY.md`.
@@ -15,8 +15,8 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 | Estado registrado en el encabezado de cada entrada | Número |
 |---|---:|
 | EDITORIAL_REVIEW | 40 |
-| LINGUISTIC_REVIEW | 10 |
-| EVIDENCE_CHECKED | 32 |
+| LINGUISTIC_REVIEW | 12 |
+| EVIDENCE_CHECKED | 30 |
 | SOURCE_MAPPED | 3 |
 | DRAFTED | 2 |
 | RESEARCHED | 1 |
@@ -43,7 +43,7 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros. No modifi
 | Alemán de | 3 | 2 EVIDENCE_CHECKED; 1 RESEARCHED |
 | Mandarín de Taiwán zh-TW | 8 | 6 EDITORIAL_REVIEW; 1 RESEARCHED_PARTIAL; 1 DRAFTED |
 | Coreano ko | 10 | 9 EDITORIAL_REVIEW; 1 SOURCE_MAPPED |
-| Japonés ja | 4 | 1 LINGUISTIC_REVIEW; 1 SOURCE_MAPPED; 2 EVIDENCE_CHECKED |
+| Japonés ja | 4 | 3 LINGUISTIC_REVIEW; 1 SOURCE_MAPPED |
 | Ruso ru | 8 | 8 EDITORIAL_REVIEW |
 | **Total** | **90** | |
 
