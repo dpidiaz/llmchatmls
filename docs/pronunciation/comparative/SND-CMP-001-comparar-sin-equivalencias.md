@@ -66,7 +66,31 @@ Por ello, compartir un símbolo en una transcripción amplia no autoriza por sí
 
 La entrada deberá respetar el nivel de detalle declarado en las fuentes.
 
-## 5. Orden de explicación
+## 5. Dos controles empíricos
+
+Estos ejemplos no definen las lenguas implicadas; sirven para comprobar por qué la metodología anterior es necesaria.
+
+### 5.1 /p/ compartido como categoría, VOT diferente
+
+Lee e Iverson (2017) utilizan español e inglés como ejemplo de dos lenguas que comparten una categoría transcrita /p/ y, sin embargo, presentan valores diferentes de *voice onset time* (VOT).
+
+Para MLS-SND, la inferencia permitida es metodológica:
+
+> **compartir un símbolo o categoría fonémica no garantiza una implementación fonética idéntica.**
+
+No se infiere aquí una realización única para todo el español ni para todo el inglés; cualquier descripción de variedades concretas sigue requiriendo sus propias fuentes.
+
+### 5.2 /ɨ/ como notación compartida mientras se investigan realizaciones físicas
+
+Cavar et al. (2025) comparan vocales altas centrales de polaco, ucraniano y ruso. El estudio utiliza /ɨ/ de manera común para facilitar la presentación, a la vez que investiga si las realizaciones físicas son suficientemente semejantes para justificar esa notación y documenta diferencias articulatorias entre las lenguas.
+
+La consecuencia editorial es:
+
+> **una transcripción amplia compartida puede ser útil sin demostrar identidad fonética.**
+
+Este control no autoriza a extrapolar esas realizaciones a otras lenguas que empleen el mismo símbolo.
+
+## 6. Orden de explicación
 
 Cuando haya comparación, se recomienda:
 
@@ -80,7 +104,7 @@ Cuando haya comparación, se recomienda:
 
 Este orden evita que el lector construya la categoría extranjera exclusivamente desde su idioma de partida.
 
-## 6. Lenguas de comparación autoral
+## 7. Lenguas de comparación autoral
 
 El tomo puede comparar con:
 
@@ -95,7 +119,7 @@ Pero esas tres referencias:
 - deben estar delimitadas por variedad igual que cualquier otro idioma;
 - no poseen prioridad descriptiva sobre el sistema estudiado.
 
-## 7. Escritura nunca prueba identidad
+## 8. Escritura nunca prueba identidad
 
 Dos letras iguales entre idiomas no demuestran que sus realizaciones sean iguales.
 
@@ -103,7 +127,7 @@ Dos letras distintas tampoco demuestran que los sonidos sean distintos.
 
 La comparación fonética debe partir de evidencia fonética/fonológica, no de semejanza visual.
 
-## 8. Ejemplo editorial abstracto
+## 9. Ejemplo editorial abstracto
 
 > **Objetivo:** sonido X de la lengua A.  
 > **Comparación:** SEMEJANZA PARCIAL con Y de la variedad B.  
@@ -113,7 +137,7 @@ La comparación fonética debe partir de evidencia fonética/fonológica, no de 
 
 Este ejemplo es estructural; no afirma nada sobre un idioma concreto.
 
-## 9. Gate para permitir una comparación publicada
+## 10. Gate para permitir una comparación publicada
 
 Una comparación solo puede pasar a edición final si:
 
@@ -124,15 +148,17 @@ Una comparación solo puede pasar a edición final si:
 - no se infiere identidad desde grafía;
 - cualquier diferencia material para el lector está mencionada.
 
-## 10. Evidencia R33
+## 11. Evidencia R33
 
 | claim_id | afirmación | source_id | localizador | alcance | estado |
 |---|---|---|---|---|---|
 | CMP001-C01 | El IPA organiza consonantes y vocales mediante dimensiones fonéticas descriptivas | SND-SRC-0001 | IPA Chart oficial: pulmonic consonants y vowels | transversal | VERIFIED |
 | CMP001-C02 | La fonética y la fonología describen niveles relacionados pero distintos del sistema sonoro | SND-SRC-0024 | cap. 3 “Phonetics” + cap. 4 “Phonology” | introductorio/transversal | VERIFIED |
 | CMP001-C03 | Las lenguas presentan restricciones propias sobre combinaciones/distribución de sonidos | SND-SRC-0024 | §4.2 “Phonotactics” | introductorio/transversal | VERIFIED |
+| CMP001-C04 | Compartir una categoría transcrita /p/ entre español e inglés no implica la misma implementación fonética; Lee e Iverson ejemplifican valores de VOT diferentes | SND-SRC-0051 | introducción, pasaje sobre Spanish/English /p/ y VOT | control metodológico | VERIFIED |
+| CMP001-C05 | El uso compartido de /ɨ/ para presentación comparativa puede coexistir con diferencias físicas investigadas y documentadas entre lenguas | SND-SRC-0052 | §1 + resultados/discusión + conclusiones | polaco/ucraniano/ruso; control metodológico | VERIFIED |
 
-## 11. Decisiones editoriales
+## 12. Decisiones editoriales
 
 La taxonomía:
 
@@ -143,7 +169,7 @@ La taxonomía:
 
 es una convención editorial de MLS-SND. No se atribuye a las fuentes.
 
-## 12. Relacionado con
+## 13. Relacionado con
 
 - SND-FND-002 — Fonética y fonología
 - SND-FND-006 — Consonantes
