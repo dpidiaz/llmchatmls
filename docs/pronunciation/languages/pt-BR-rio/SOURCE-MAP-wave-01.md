@@ -86,3 +86,50 @@ En esta wave:
 - **Alcance:** actos de habla en portugués brasileño; metodología de resíntesis y pruebas perceptivas.
 - **Localizador:** descripción del registro Zenodo; pp. 229–262 para auditoría fina.
 - **Limitación:** no se usará para atribuir un contorno concreto a “todo PB” sin comprobar el corpus y la variedad del capítulo.
+
+
+## PTBR-W01-SRC-09 — Orsini (1995), vogais orais cariocas
+
+- **Tier:** B, dissertação UFRJ registrada em catálogo institucional.
+- **Referencia:** Orsini, M. T. (1995). *A acústica das vogais orais no dialeto carioca: a voz feminina* [Dissertação de mestrado, Universidade Federal do Rio de Janeiro].
+- **Registro UFRJ:** https://buscaintegrada.ufrj.br/Record/aleph-UFR01-000401799
+- **Alcance:** vogais orais do dialeto carioca; seis inquéritos do arquivo sonoro NURC; comparação do espaço acústico em posições tônica, pretônica e postônica; voz feminina.
+- **Localizador disponível nesta wave:** resumo/registro bibliográfico institucional. Para valores formânticos e categorias específicas, consultar o texto integral antes de criar claims numéricos.
+- **Limitação:** amostra NURC histórica e feminina; não representa toda a população contemporânea do Rio.
+
+## PTBR-W01-SRC-10 — Moraes & Wetzels (1992), nasal vs. nasalizado
+
+- **Tier:** B.
+- **Referencia:** Moraes, J. A., & Wetzels, W. L. (1992). Sobre a duração dos segmentos vocálicos nasais e nasalizados em português: um exercício de fonologia experimental. *Cadernos de Estudos Linguísticos, 23*, 153–166. https://doi.org/10.20396/cel.v23i0.8636851
+- **Registro:** https://periodicos.sbu.unicamp.br/ojs/index.php/cel/article/view/8636851
+- **Alcance:** duração de segmentos vocálicos nasais/nasalizados; fonologia experimental.
+- **Localizadores:** pp. 153–166; registro institucional confirma autores, volumen y páginas.
+- **Limitación:** la wave no dispone de texto extraído suficientemente fiable para convertir resultados finos en claims; estudios posteriores indican que el experimento original usó hablantes cariocas, pero eso debe verificarse en el artículo antes de promoverlo como claim primario.
+
+## PTBR-W01-SRC-11 — Shosted (2006), nasal coda emergence carioca
+
+- **Tier:** B.
+- **Referencia:** Shosted, R. K. (2006). Vocalic context as a condition for nasal coda emergence: aerodynamic evidence. *Journal of the International Phonetic Association, 36*(1), 39–58. https://doi.org/10.1017/S0025100306002350
+- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/abs/vocalic-context-as-a-condition-for-nasal-coda-emergence-aerodynamic-evidence/9D87E879AD6DC9F77593BEBE9F08A975
+- **Alcance:** dialecto carioca; nasal coda emergence (NCE); tres hablantes; señales aerodinámicas.
+- **Localizador:** abstract; pp. 39–58 para revisión completa.
+- **Hallazgos admisibles desde el abstract:** el artículo identifica cinco vocales nasal-fonémicas en la variedad descrita y estudia la aparición de una coda nasal excrescente, usualmente velar, mediante datos de tres hablantes.
+- **Limitación:** muestra muy pequeña; no convertir frecuencia/condicionamiento del estudio en norma global sin revisar el artículo completo.
+
+## PTBR-W01-SRC-12 — Moraes (2003), acento secundário PB
+
+- **Tier:** B.
+- **Referencia:** Moraes, J. A. de. (2003). Secondary stress in Brazilian Portuguese: Perceptual and acoustical evidence. En *Proceedings of the 15th International Congress of Phonetic Sciences*.
+- **PDF:** https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2003/papers/p15_2063.pdf
+- **Alcance:** portugués brasileño, no variedad carioca explícitamente identificada en la sección de métodos consultada.
+- **Localizadores:** p. 1, métodos; pp. 2–4, resultados y conclusiones.
+- **Hallazgos:** cuatro hablantes en producción, diez oyentes en prueba perceptiva; dos estrategias de prominencia secundaria; ausencia de un correlato acústico único y estable en el experimento.
+- **Limitación crítica:** **PB_BROAD/EXPERIMENTAL**, no RIO_CARIOCA. No usarlo para afirmar que el patrón describe específicamente Río.
+
+## PTBR-W01-SRC-13 — NURC-RJ, bibliografía prosódica de João A. de Moraes
+
+- **Tier:** A/D como registro institucional de producción; no sustituye el texto de cada obra.
+- **URL:** https://nurcrj.letras.ufrj.br/participantes/joao.htm
+- **Alcance:** catálogo institucional de trabajos sobre ritmo, acento, vocalismo, nasalidad e intonación vinculados al investigador/NURC-RJ.
+- **Uso:** localizar fuentes primarias como “Ritmo e velocidade da fala…”, “Acentuação lexical e acentuação frasal…” y “O sistema vocálico…”.
+- **Limitación:** un listado bibliográfico no respalda por sí solo los resultados de esas publicaciones.
