@@ -1,6 +1,6 @@
 # MLS-SND Source Registry
 
-Estado: **registro operativo v0.6**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
+Estado: **registro operativo v0.20**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
 
 ## 1. Objetivo
 
@@ -1240,3 +1240,167 @@ Mapeo local resuelto:
 - `ZHTW-ROM-S01` → `SND-SRC-0080`.
 
 La canonicalización resuelve identidad bibliográfica y localizadores. La política global de romanización del MLS permanece como decisión editorial separada.
+
+
+## 36. Canonicalización pt-BR/rio: variación segmental, vocalismo y prosodia
+
+### SND-SRC-0081 — Português carioca / /S/ pós-vocálico em Copacabana
+
+- **Tier:** B — trabalho acadêmico institucional aberto.
+- **APA 7:** Nanini, R. F. (2022). *O /S/ pós-vocálico na fala carioca: uma análise dos falantes mais velhos de Copacabana* [Trabalho de conclusão de graduação, Universidade Federal do Rio de Janeiro]. Pantheon/UFRJ. http://hdl.handle.net/11422/22317
+- **Idioma/variedade:** português carioca; subamostra de moradores mais velhos de Copacabana.
+- **Cobertura:** /S/ pós-vocálico e palatalização na amostra delimitada do estudo.
+- **Localizadores:** registro institucional para autoria, ano, título e escopo; PDF `RFNanini.pdf` para resultados quantitativos ou condicionamentos finos.
+- **Acesso:** aberto no Pantheon/UFRJ.
+- **Limitação:** amostra pequena e social/geograficamente específica; não representar como frequência de toda a cidade do Rio.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SAMPLE_SCOPE.
+
+### SND-SRC-0082 — Português carioca / apagamento de /R/ final
+
+- **Tier:** B.
+- **APA 7:** Callou, D., Moraes, J., & Leite, Y. (1998). Apagamento do R final no dialeto carioca: um estudo em tempo aparente e em tempo real. *DELTA, 14*(n. esp.), 61–72. https://doi.org/10.1590/S0102-44501998000300006
+- **Idioma/variedade:** português do Rio de Janeiro; fala culta em conjuntos NURC históricos.
+- **Cobertura:** enfraquecimento/apagamento de /R/ em coda final, comparação em tempo aparente e real e condicionamento por idade.
+- **Localizadores:** pp. 61–72; abstract; seções 1, 3, 4, 5 e 6 quando um claim exigir detalhe.
+- **Acesso:** artigo disponível via SciELO/DELTA.
+- **Nota de data:** o fascículo é de 1998; plataformas atuais exibem datas posteriores de disponibilização/migração web. O ano bibliográfico preservado é 1998.
+- **Limitação:** dados históricos NURC; não constituem frequência atual de toda a população carioca.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_DATE_SCOPE.
+
+### SND-SRC-0083 — Português carioca periférico / coda (r), FavRio
+
+- **Tier:** B — dissertação institucional aberta.
+- **APA 7:** Silva, K. L. A. da. (2026). *Um estudo sobre a variação da coda (r) com falantes periféricos da comunidade de fala do Rio de Janeiro* [Dissertação de mestrado, Universidade Federal do Rio de Janeiro]. Pantheon/UFRJ. http://hdl.handle.net/11422/29818
+- **Idioma/variedade:** português carioca; falantes residentes em favelas do município do Rio de Janeiro, Amostra FavRio.
+- **Cobertura:** coda (r) interna e externa em itens não verbais; condicionamentos estruturais e sociais.
+- **Localizadores:** registro institucional/abstract para desenho, 24 falantes e resultados globais; PDF `KLASilva.pdf` para claims finos.
+- **Acesso:** aberto no Pantheon/UFRJ.
+- **Limitação:** subamostra periférica específica; não usar como sinônimo de toda a comunidade carioca.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SAMPLE_SCOPE.
+
+### SND-SRC-0084 — Português fluminense popular / S, R e L em coda
+
+- **Tier:** B.
+- **APA 7:** Brandão, S. F. (2008). Variação em coda silábica na fala popular fluminense. *Revista da ABRALIN, 7*(1), 177–190. https://revista.abralin.org/index.php/abralin/article/view/983
+- **Idioma/variedade:** fala popular de treze comunidades do Norte e Noroeste do estado do Rio de Janeiro.
+- **Cobertura:** variação de S, R e L em coda silábica e atuação de variáveis extralinguísticas.
+- **Localizadores:** resumo do artigo; pp. 177–190 para resultados e condicionamentos.
+- **Acesso:** página e PDF da Revista da ABRALIN.
+- **Nota de data:** a edição é identificada como v. 7, n. 1 (2008); a plataforma também mostra datas posteriores de publicação/migração web. O ano bibliográfico usado por MLS-SND é 2008.
+- **Limitação crítica:** **fluminense não equivale a carioca**; esta fonte funciona como controle geográfico, não como evidência direta da cidade do Rio.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_GEOGRAPHIC_SCOPE.
+
+### SND-SRC-0085 — Português carioca / vogais pretônicas médias
+
+- **Tier:** B.
+- **APA 7:** Machado, L., Moraes, J., Callou, D., & Leite, Y. (2010). Sobre vogais pretônicas médias no dialeto carioca: vogal derivada versus vogal subjacente. In *Textos Seleccionados do XXV Encontro Nacional da Associação Portuguesa de Linguística* (pp. 499–511). https://apl.pt/wp-content/uploads/2017/09/36-Luana-Machado.pdf
+- **Idioma/variedade:** português carioca; experimento controlado com oito universitários de 18–28 anos do Rio de Janeiro.
+- **Cobertura:** diferenças acústicas entre vogais altas derivadas e subjacentes em posição pretônica; medições acústicas e análise multivariada.
+- **Localizadores:** p. 499, abstract/objetivo; pp. 500–503, corpus e metodologia; p. 504 em diante para análise.
+- **Acesso:** PDF aberto no site da Associação Portuguesa de Linguística.
+- **Conflito documental preservado:** o abstract informa **1344 tokens**, enquanto a metodologia da versão auditada registra **1152 ocorrências analisadas**. MLS-SND não escolhe um número até que a distinção de contagem seja demonstrada.
+- **Limitação:** amostra experimental pequena e controlada; não representa todo o sistema pretônico nem cobre por si só vogais postônicas.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_OPEN_COUNT_CONFLICT.
+
+### SND-SRC-0086 — Português / entoação de Lisboa e Rio de Janeiro
+
+- **Tier:** B.
+- **APA 7:** Frota, S., & Moraes, J. A. de. (2016). Intonation in European and Brazilian Portuguese. In W. L. Wetzels, J. Costa, & S. Menuzzi (Eds.), *The Handbook of Portuguese Linguistics* (pp. 141–166). Wiley-Blackwell. https://doi.org/10.1002/9781118791844.ch9
+- **Repositório aberto:** http://hdl.handle.net/10451/25546
+- **Idioma/variedade:** português europeu de Lisboa e português brasileiro do Rio de Janeiro.
+- **Cobertura:** demarcação, highlighting/prominence, distinção de tipos de enunciado, agrupamento entoacional, eventos tonais e fronteiras.
+- **Localizadores:** pp. 141–166; resumo institucional/publisher para escopo; seção específica do capítulo para contornos concretos.
+- **Acesso:** versão em repositório institucional da Universidade de Lisboa.
+- **Limitação:** o resumo valida escopo e funções gerais; fórmulas/contornos específicos exigem auditoria da seção correspondente do capítulo.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SECTION_LOCATOR_REQUIREMENT.
+
+### SND-SRC-0087 — Português brasileiro / atos de fala e metodologia entoacional
+
+- **Tier:** B.
+- **APA 7:** Moraes, J. A. de, & Rilliard, A. (2018). Describing the intonation of speech acts in Brazilian Portuguese: Methodological aspects. In *Methods in prosody: A Romance language perspective* (pp. 229–262). Language Science Press. https://doi.org/10.5281/zenodo.1441347
+- **Idioma/variedade:** português brasileiro; metodologia experimental/perceptiva para atos de fala.
+- **Cobertura:** resíntese de contornos de pitch, testes perceptivos e avaliação de pistas prosódicas.
+- **Localizadores:** registro Zenodo para metadados/resumo; pp. 229–262 e seção correspondente para claims específicos.
+- **Acesso:** capítulo aberto via Zenodo/Language Science Press.
+- **Limitação:** **PB_BROAD/METHOD**, não se converte automaticamente em evidência da variedade carioca.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_VARIETY_SCOPE.
+
+### SND-SRC-0088 — Português carioca / acústica das vogais orais, voz feminina
+
+- **Tier:** B — dissertação UFRJ em catálogo institucional.
+- **APA 7:** Orsini, M. T. (1995). *A acústica das vogais orais no dialeto carioca: a voz feminina* [Dissertação de mestrado, Universidade Federal do Rio de Janeiro].
+- **Registro:** https://buscaintegrada.ufrj.br/Record/aleph-UFR01-000401799
+- **Idioma/variedade:** português carioca; seis inquéritos do arquivo sonoro NURC, voz feminina.
+- **Cobertura:** espaço acústico das vogais orais em posições tônica, pretônica e postônica.
+- **Localizadores:** registro/resumo institucional para escopo; dissertação integral para valores formânticos e categorias específicas.
+- **Acesso:** metadados institucionais abertos; disponibilidade integral deve ser confirmada antes de usar claims numéricos.
+- **Limitação:** amostra NURC histórica e feminina; não representa toda a população contemporânea do Rio.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_FULLTEXT_REQUIRED_FOR_NUMERIC_CLAIMS.
+
+### SND-SRC-0089 — Português / duração de vogais nasais e nasalizadas
+
+- **Tier:** B.
+- **APA 7:** Moraes, J. A., & Wetzels, W. L. (1992). Sobre a duração dos segmentos vocálicos nasais e nasalizados em português: um exercício de fonologia experimental. *Cadernos de Estudos Linguísticos, 23*, 153–166. https://doi.org/10.20396/cel.v23i0.8636851
+- **Idioma/variedade:** português brasileiro dentro do desenho experimental do artigo.
+- **Cobertura:** duração de segmentos vocálicos nasais e nasalizados; fonologia experimental.
+- **Localizadores:** pp. 153–166; artigo integral para qualquer claim sobre amostra, variedade ou resultado fino.
+- **Acesso:** PDF/página do periódico UNICAMP.
+- **Nota de data:** o fascículo é v. 23 (1992); a plataforma atual exibe data de publicação web em 2012. O ano bibliográfico preservado é 1992.
+- **Limitação crítica:** MLS-SND não trata a afiliação UFRJ dos autores como prova de proveniência carioca dos falantes; a variedade da amostra deve ser verificada no artigo antes de um claim RIO_CARIOCA.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SAMPLE_PROVENANCE_HOLD.
+
+### SND-SRC-0090 — Português carioca / nasal coda emergence
+
+- **Tier:** B.
+- **APA 7:** Shosted, R. K. (2006). Vocalic context as a condition for nasal coda emergence: aerodynamic evidence. *Journal of the International Phonetic Association, 36*(1), 39–58. https://doi.org/10.1017/S0025100306002350
+- **Idioma/variedade:** Carioca Brazilian Portuguese / Rio de Janeiro.
+- **Cobertura:** nasal coda emergence (NCE), cinco vogais fonemicamente nasais no análise do artigo, coda nasal excrescente e condicionamento por altura/posterioridade.
+- **Localizadores:** abstract; pp. 39–58 para resultados detalhados.
+- **Amostra:** três falantes de CBP para os dados aerodinâmicos.
+- **Acesso:** abstract e metadados via Cambridge; texto completo conforme acesso disponível.
+- **Limitação:** amostra muito pequena; não generalizar frequências/condicionamentos além do estudo sem evidência adicional.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SMALL_SAMPLE_WARNING.
+
+### SND-SRC-0091 — Português brasileiro / acento secundário
+
+- **Tier:** B.
+- **APA 7:** Moraes, J. A. de. (2003). Secondary stress in Brazilian Portuguese: perceptual and acoustical evidence. In *Proceedings of the 15th International Congress of Phonetic Sciences* (pp. 2063–2066). https://www.internationalphoneticassociation.org/icphs-proceedings/ICPhS2003/papers/p15_2063.pdf
+- **Idioma/variedade:** português brasileiro; variedade regional dos falantes **não explicitada** na metodologia auditada.
+- **Cobertura:** produção e percepção de proeminência secundária; evidência acústica/perceptiva.
+- **Localizadores:** pp. 2063–2066; metodologia p. 2063/2064 e resultados/conclusões nas páginas seguintes.
+- **Amostra:** quatro falantes na produção e dez ouvintes no teste perceptivo segundo a versão auditada.
+- **Limitação crítica:** **PB_BROAD/EXPERIMENTAL**, não RIO_CARIOCA. Afiliação institucional do autor não é evidência da variedade dos falantes.
+- **Verificado:** 2026-10-11 contra os proceedings oficiais de ICPhS.
+- **Estado:** ADMITTED_WITH_VARIETY_SCOPE.
+
+## 37. Resultado do registro v0.20
+
+O registro contém **91 fontes canônicas** numeradas SND-SRC-0001 a SND-SRC-0091.
+
+Mapeamento local resolvido nesta wave:
+
+- `PTBR-W01-SRC-02` → `SND-SRC-0081`;
+- `PTBR-W01-SRC-03` → `SND-SRC-0082`;
+- `PTBR-W01-SRC-04` → `SND-SRC-0083`;
+- `PTBR-W01-SRC-05` → `SND-SRC-0084`;
+- `PTBR-W01-SRC-06` → `SND-SRC-0085`;
+- `PTBR-W01-SRC-07` → `SND-SRC-0086`;
+- `PTBR-W01-SRC-08` → `SND-SRC-0087`;
+- `PTBR-W01-SRC-09` → `SND-SRC-0088`;
+- `PTBR-W01-SRC-10` → `SND-SRC-0089`;
+- `PTBR-W01-SRC-11` → `SND-SRC-0090`;
+- `PTBR-W01-SRC-12` → `SND-SRC-0091`.
+
+`PTBR-W01-SRC-13` permanece deliberadamente fora do registro como catálogo/discovery aid; não substitui evidência primária.
+
+A canonicalização resolve identidade bibliográfica, escopo e localizadores mínimos. **Não promove por si só nenhuma entrada PTBR nem fecha OPEN_QUESTION/HOLDs.**
