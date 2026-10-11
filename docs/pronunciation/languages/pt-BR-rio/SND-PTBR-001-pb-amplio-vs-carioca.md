@@ -35,7 +35,7 @@ La entrada de alcance no cerrará todavía afirmaciones sobre:
 - ritmo;
 - entonación.
 
-Cada uno de esos fenómenos necesita claims y localizadores propios.
+Cada uno de esos fenómenos necesita claims y localizadores propios. El corpus NURC-RJ podrá aportar ejemplos y muestras delimitadas, pero ninguna observación aislada se generalizará automáticamente al habla carioca.
 
 ## 4. Decisión editorial
 
@@ -48,11 +48,14 @@ La futura referencia principal será habla urbana de Río de Janeiro cuando exis
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
 | PTBR001-C01 | Existe una descripción académica específicamente titulada *Um perfil da fala carioca* | SND-SRC-0007 | Callou (2009), cap. “Um perfil da fala carioca”, pp. 129–152 | Río de Janeiro | VERIFIED |
-| PTBR001-C02 | La fuente forma parte de una obra académica abierta de SciELO/EDUFBA y está disponible bajo CC BY 4.0 | SND-SRC-0007 | metadatos de JSTOR/Open JSTOR y edición SciELO | fuente | VERIFIED |
+| PTBR001-C02 | La fuente forma parte de una obra académica abierta de SciELO/EDUFBA | SND-SRC-0007 | metadatos editoriales SciELO/JSTOR de la obra y del capítulo | fuente | VERIFIED |
+| PTBR001-C03 | NURC-RJ ofrece inquéritos con metadatos individuales de hablantes de Río de Janeiro, incluyendo edad, profesión, zona residencial y fecha | SND-SRC-0026 | inquéritos institucionales NURC-RJ; usar identificador de inquérito por ejemplo concreto | Río de Janeiro, corpus | VERIFIED |
 
-## 6. Fuente
+## 6. Fuentes
 
 Callou, D. (2009). Um perfil da fala carioca. En S. S. C. Ribeiro, S. B. B. Costa, & S. A. M. Cardoso (Orgs.), *Dos sons às palavras: nas trilas da Língua Portuguesa* (pp. 129–152). EDUFBA.
+
+Projeto NURC-RJ. Faculdade de Letras, Universidade Federal do Rio de Janeiro. Corpus e inquéritos públicos. https://nurcrj.letras.ufrj.br/
 
 ## 7. Pendiente R33
 
