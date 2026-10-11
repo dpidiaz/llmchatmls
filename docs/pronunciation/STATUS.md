@@ -36,9 +36,13 @@
 ### Entradas de fundamento auditadas
 
 - SND-FND-002 — Fonética y fonología — EVIDENCE_CHECKED.
+- SND-FND-004 — Producción del habla y tracto vocal — EVIDENCE_CHECKED.
 - SND-FND-003 — Fonema, alófono, segmento y realización — EVIDENCE_CHECKED.
+- SND-FND-006 — Consonantes: parámetros articulatorios — EVIDENCE_CHECKED.
+- SND-FND-007 — Vocales: parámetros articulatorios — EVIDENCE_CHECKED.
 - SND-FND-008 — Sílaba — EVIDENCE_CHECKED.
 - SND-FND-009 — Fonotáctica — EVIDENCE_CHECKED.
+- SND-FND-011 — Acento y prominencia — EVIDENCE_CHECKED.
 - SND-FND-013 — Tono — EVIDENCE_CHECKED.
 - SND-FND-015 — Entonación — EVIDENCE_CHECKED.
 
@@ -55,8 +59,8 @@
 - 24 fuentes registradas.
 - 143 unidades editoriales candidatas inventariadas.
 - 10 perfiles lingüísticos inicializados.
-- 11 entradas piloto redactadas.
-- 6 entradas en EVIDENCE_CHECKED.
+- 15 entradas piloto redactadas.
+- 10 entradas en EVIDENCE_CHECKED.
 - 0 entradas todavía en LINGUISTIC_REVIEW, EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
 
 ## Coordinación paralela
@@ -65,8 +69,13 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 
 ## Próximos gates
 
-1. completar 8–12 entradas de fundamentos;
+1. **GATE CUMPLIDO:** 10 entradas de fundamentos en EVIDENCE_CHECKED;
 2. auditar SND-REP-002 y los cuatro pilotos lingüísticos ya redactados;
 3. producir pilotos es-GT, en-US y pt-BR-rio con clusters sustantivos;
 4. ejecutar LINGUISTIC_REVIEW sobre la primera wave;
 5. congelar arquitectura solo después del gate del piloto.
+
+
+## Gate FND-01
+
+**PASS provisional:** 10 entradas fundacionales alcanzaron EVIDENCE_CHECKED. El siguiente paso no es redactar fundamentos indefinidamente, sino ejecutar LINGUISTIC_REVIEW y avanzar los tres perfiles piloto (es-GT, en-US, pt-BR-rio).
