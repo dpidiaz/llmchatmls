@@ -46,6 +46,13 @@ const inventoryIds = new Set(uniqueMatches(inventory, ENTRY_ID_RE));
 
 const allFiles = walk(ROOT);
 const entryFiles = allFiles.filter(p => ENTRY_FILE_RE.test(path.basename(p)));
+const sourceMapFiles = allFiles.filter(p => /(?:SOURCE-MAP|SOURCES-PROPOSED).*\\.md$/i.test(path.basename(p)));
+const declaredLocalSources = new Set();
+for (const sourceMapFile of sourceMapFiles) {
+  for (const localId of uniqueMatches(read(sourceMapFile), LOCAL_SOURCE_ID_RE)) {
+    declaredLocalSources.add(localId);
+  }
+}
 
 const issues = [];
 const entryIds = new Map();
@@ -93,6 +100,12 @@ for (const file of entryFiles) {
     }
   }
 
+  for (const localSourceId of uniqueMatches(content, LOCAL_SOURCE_ID_RE)) {
+    if (!declaredLocalSources.has(localSourceId)) {
+      issue("ERROR", "DANGLING_LOCAL_SOURCE_ID", file, { local_source_id: localSourceId });
+    }
+  }
+
   for (const claimId of uniqueMatches(content, CLAIM_ID_RE)) {
     if (claimIds.has(claimId) && claimIds.get(claimId) !== file) {
       issue("ERROR", "DUPLICATE_CLAIM_ID", file, {
@@ -122,6 +135,7 @@ const report = {
   entries_scanned: entryFiles.length,
   unique_entry_ids: entryIds.size,
   source_ids_known: knownSources.size,
+  local_source_ids_declared: declaredLocalSources.size,
   errors: errors.length,
   warnings: warnings.length,
   issues
@@ -132,7 +146,7 @@ if (JSON_MODE) {
 } else {
   console.log(`MLS-SND lint: ${report.entries_scanned} entries, ${errors.length} errors, ${warnings.length} warnings.`);
   for (const x of issues) {
-    console.log(`[${x.severity}] ${x.rule}: ${x.file}${x.id ? ` (${x.id})` : ""}${x.source_id ? ` (${x.source_id})` : ""}`);
+    console.log(`[${x.severity}] ${x.rule}: ${x.file}${x.id ? ` (${x.id})` : ""}${x.source_id ? ` (${x.source_id})` : ""}${x.local_source_id ? ` (${x.local_source_id})` : ""}`);
   }
 }
 
