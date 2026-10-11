@@ -21,13 +21,13 @@ Todavía se necesita bibliografía contemporánea adicional antes de fijar un pe
 
 ## 3. Austria
 
-DE-PROP-001 demuestra que incluso dentro del registro estándar austríaco la realización de -ig no es uniforme y responde a factores fonéticos, gramaticales, situacionales, regionales y sociales.
+SND-SRC-0030 demuestra que incluso dentro del registro estándar austríaco la realización de -ig no es uniforme y responde a factores fonéticos, gramaticales, situacionales, regionales y sociales.
 
 Por ello MLS-SND no debe presentar una única forma austríaca sin contexto.
 
 ## 4. Suiza
 
-DE-PROP-002 documenta influencia de dialectos alemánicos sobre calidad vocálica en variedades de Swiss Standard German.
+SND-SRC-0031 documenta influencia de dialectos alemánicos sobre calidad vocálica en variedades de Swiss Standard German.
 
 DE-PROP-003 puede aportar contexto adicional sobre la variación fonético-fonológica del estándar suizo hablado, una vez completada y admitida su referencia bibliográfica.
 
@@ -47,4 +47,4 @@ No se publicará una celda simplemente para que los tres países tengan “una r
 
 ## 6. Gate
 
-RESEARCHED. Bloqueado hasta canonicalización de DE-PROP-001/002 y ampliación de fuentes para Alemania y Suiza.
+RESEARCHED. SND-SRC-0030 y SND-SRC-0031 ya están canonicalizadas; el mapa sigue bloqueado por cobertura contemporánea insuficiente de Alemania y por DE-PROP-003, que aún no tiene metadatos canónicos completos.
