@@ -1383,7 +1383,7 @@ La canonicalización resuelve identidad bibliográfica y localizadores. La polí
 - **Verificado:** 2026-10-11 contra os proceedings oficiais de ICPhS.
 - **Estado:** ADMITTED_WITH_VARIETY_SCOPE.
 
-## 35. Resultado do registro v0.19
+## 37. Resultado do registro v0.20
 
 O registro contém **91 fontes canônicas** numeradas SND-SRC-0001 a SND-SRC-0091.
 
