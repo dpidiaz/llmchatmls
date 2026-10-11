@@ -97,11 +97,11 @@ La URL sola no constituye por defecto un localizador suficiente para una afirmac
 - **URL:** https://www.asale.org/sites/default/files/2024-03/Cronica%20de%20la%20lengua%20espanola%202021.pdf
 - **Idioma/variedad:** español de Guatemala.
 - **Cobertura:** panorama contemporáneo; sección específica de fonética y fonología; variación regional y generacional.
-- **Localizador:** capítulo de Guatemala → epígrafe “Fonética y fonología”; para publicación final deben registrarse además las páginas exactas del PDF por afirmación.
+- **Localizador:** capítulo “Una aproximación al español en Guatemala en los albores del siglo XXI” → “Peculiaridades del español de Guatemala” → “Fonética y fonología”, p. 209 de la edición impresa (página PDF 231 / índice interno P230 en la copia digital consultada).
 - **Acceso:** gratuito.
 - **Limitación:** la propia obra declara que no pretende una descripción fonético-fonológica exhaustiva de la variedad.
 - **Verificado:** 2026-10-11.
-- **Estado:** ADMITTED; PAGE_LOCATORS_PENDING.
+- **Estado:** ADMITTED.
 
 ### SND-SRC-0004 — American English / Ladefoged
 
