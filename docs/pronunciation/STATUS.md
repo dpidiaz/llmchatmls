@@ -1,7 +1,7 @@
 # MLS-SND — Estado canónico del proyecto
 
 **Corte:** 2026-10-11  
-**SHA de coordinación:** `039df6e8c3217857c543d17b0406c0df52322abf`  
+**SHA de coordinación:** `24d5ad1c7f2b3a9102c525145f1e0d64c0285cf4`  
 **Rama matriz:** `feat/mls-snd-foundation`  
 **Inventario editorial:** 143 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad:** cada archivo canónico `SND-*.md` dentro de los directorios editoriales, cotejado con el inventario.
@@ -10,21 +10,21 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. N
 
 ## Snapshot físico y editorial
 
-**107 entradas canónicas / 107 IDs únicos / 0 duplicados.**  
-**96 fuentes canónicas** (`SND-SRC-0001…0096`).
+**108 entradas canónicas / 108 IDs únicos / 0 duplicados.**  
+**97 fuentes canónicas** (`SND-SRC-0001…0097`).
 
 | Estado registrado en la entrada | Número |
 |---|---:|
 | EDITORIAL_REVIEW | 39 |
 | LINGUISTIC_REVIEW | 33 |
-| EVIDENCE_CHECKED | 21 |
+| EVIDENCE_CHECKED | 22 |
 | SOURCE_MAPPED | 0 |
 | DRAFTED | 0 |
 | RESEARCHED | 0 |
 | RESEARCHED_PARTIAL | 1 |
 | IN_PROGRESS | 1 |
 | READY_FOR_COMPOSITION | 12 |
-| **Total** | **107** |
+| **Total** | **108** |
 
 **Importante:** `EDITORIAL_REVIEW` no equivale a `READY_FOR_COMPOSITION`. `EVIDENCE_CHECKED` tampoco equivale a publicación ni valida automáticamente claims futuros.
 
@@ -57,7 +57,7 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 | Mandarín de Taiwán ZHTW | 9 | 1 READY_FOR_COMPOSITION; 5 EDITORIAL_REVIEW; 2 EVIDENCE_CHECKED; 1 RESEARCHED_PARTIAL |
 | Coreano KO | 10 | 9 EDITORIAL_REVIEW; 1 EVIDENCE_CHECKED |
 | Japonés JA | 6 | 2 EDITORIAL_REVIEW; 4 LINGUISTIC_REVIEW |
-| Ruso RU | 8 | 8 EDITORIAL_REVIEW |
+| Ruso RU | 9 | 8 EDITORIAL_REVIEW; 1 EVIDENCE_CHECKED |
 | **Total** | **106** | |
 
 ## Composición: primer bloque integrado
@@ -130,7 +130,7 @@ Este PASS **no** certifica:
 - `WORK-QUEUE.md`: gaps y prioridades.
 - `INTEGRATION-QUEUE.md`: reconciliación de waves.
 - `MLS-SND-MASTER-INVENTORY.md`: inventario de 143 candidatas.
-- `MLS-SND-SOURCE-REGISTRY.md`: 96 fuentes canónicas.
+- `MLS-SND-SOURCE-REGISTRY.md`: 97 fuentes canónicas.
 - `audits/STATUS-RECONCILIATION-107-96-2026-10-11.md`: corte reproducible actual.
 
 **Regla:** el estado canónico lo determina el árbol de `feat/mls-snd-foundation`, no el título histórico de un PR.
