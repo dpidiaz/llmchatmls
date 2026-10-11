@@ -1404,3 +1404,85 @@ Mapeamento local resolvido nesta wave:
 `PTBR-W01-SRC-13` permanece deliberadamente fora do registro como catálogo/discovery aid; não substitui evidência primária.
 
 A canonicalização resolve identidade bibliográfica, escopo e localizadores mínimos. **Não promove por si só nenhuma entrada PTBR nem fecha OPEN_QUESTION/HOLDs.**
+
+
+## 38. Canonicalización zh-TW segmental / sílaba wave 03
+
+### SND-SRC-0092 — Taiwan Mandarin / vocales acústicas de Taipei
+
+- **Tier:** B.
+- **APA 7:** Zhang, H.-Y. (2009). *An acoustic study on Taiwan Mandarin vowels* [Master’s thesis, National Chengchi University].
+- **URL:** https://thesis.lib.nccu.edu.tw/detail/478653cb3f3c856e303d769153e75e75/
+- **Idioma/variedad:** Taiwan Mandarin; muestra de seis hombres hablantes nativos nacidos y criados en Taipei.
+- **Cobertura:** calidad vocálica acústica, formantes y condicionamiento por elementos de la final; 70 sílabas de prueba.
+- **Localizadores:** metodología pp. 25–33; resultados pp. 35–96; conclusiones pp. 97–101; metadatos/resumen institucional NCCU.
+- **Acceso:** registro institucional; disponibilidad del texto según repositorio NCCU.
+- **Limitación:** tesis de 2009 con muestra pequeña, masculina y de Taipei; no generalizar valores acústicos a todo Taiwan Mandarin contemporáneo.
+- **Verificado:** 2026-10-11 contra el registro institucional de National Chengchi University.
+- **Estado:** ADMITTED_WITH_SAMPLE_DATE_WARNING.
+
+### SND-SRC-0093 — Taiwan Mandarin / merger de nasales finales
+
+- **Tier:** B.
+- **APA 7:** Chiu, C., & Lu, Y.-A. (2021). Articulatory evidence for the syllable-final nasal merging in Taiwan Mandarin. *Language and Speech, 64*(4), 771–789. https://doi.org/10.1177/0023830920948084
+- **URL:** https://journals.sagepub.com/doi/10.1177/0023830920948084
+- **Idioma/variedad:** Taiwan Mandarin.
+- **Cobertura:** /n/–/ŋ/ finales, ultrasonido, dependencia del contexto vocálico, nasalización de la vocal precedente y evidencia de merger potencialmente incompleto.
+- **Localizadores:** abstract; pp. 771–789 para claims detallados.
+- **Acceso:** metadatos y abstract SAGE/PubMed; texto completo según acceso del artículo.
+- **Limitación:** fenómeno articulatorio específico; no es descripción integral del inventario ni de la estructura silábica.
+- **Verificado:** 2026-10-11 contra SAGE y PubMed.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0094 — Taiwan Mandarin / fonotáctica y tipos silábicos
+
+- **Tier:** B.
+- **APA 7:** Wan, I.-P., Chang, C.-W., Lee, C., & Yu, P. (2024). Probability distributions of sounds and phonotactics in Taiwan Mandarin syllables. In *Proceedings of the 38th Pacific Asia Conference on Language, Information and Computation* (pp. 1157–1165). Tokyo University of Foreign Studies.
+- **URL:** https://aclanthology.org/2024.paclic-1.111/
+- **Idioma/variedad:** Taiwan Mandarin.
+- **Cobertura:** corpus natural de 202 horas, distribución de phones, fonotáctica probabilística y 12 tipos silábicos de superficie.
+- **Localizadores:** abstract y §2 Methodology, pp. 1157–1159; Tables 1–2, pp. 1159–1160; discusión de estructura silábica, p. 1161.
+- **Acceso/licencia:** ACL Anthology; publicación 2024 bajo CC BY 4.0 según la ficha de Anthology.
+- **Limitación:** análisis de corpus/phones y representación de superficie; no equivale automáticamente a inventario fonémico definitivo. El tono se excluye de los cálculos fonotácticos del estudio.
+- **Verificado:** 2026-10-11 contra ACL Anthology.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0095 — Taiwan Mandarin / representación vocálica
+
+- **Tier:** B.
+- **APA 7:** Wan, I.-P., & Jaeger, J. J. (2003). The phonological representation of Taiwan Mandarin vowels: A psycholinguistic study. *Journal of East Asian Linguistics, 12*(3), 205–257. https://doi.org/10.1023/A:1023666819363
+- **URL:** https://doi.org/10.1023/A:1023666819363
+- **Idioma/variedad:** Taiwan Mandarin.
+- **Cobertura:** contraste de hipótesis previas basadas en Beijing Mandarin y propuesta de un sistema de cinco vocales para Taiwan Mandarin apoyada en evidencia distribucional, fonética y psicolingüística.
+- **Localizadores:** pp. 205–257; abstract y secciones de análisis según claim.
+- **Acceso:** metadatos/abstract institucionales y DOI; texto completo según acceso editorial.
+- **Limitación:** la propuesta de cinco vocales es **ANALYTICAL_CHOICE** de los autores; no se trata como consenso universal ni sistema obligatorio del MLS.
+- **Verificado:** 2026-10-11 contra NCCU Academic Hub, University at Buffalo y metadatos DOI.
+- **Estado:** ADMITTED_WITH_ANALYTICAL_SCOPE.
+
+### SND-SRC-0096 — Taiwan Mandarin / VOT de oclusivas
+
+- **Tier:** B.
+- **APA 7:** Ogasawara, N. (2011). Acoustic analysis of voice-onset time in Taiwan Mandarin and Japanese. *Concentric: Studies in Linguistics, 37*(2), 155–178.
+- **URL de metadatos:** https://tci.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi?o=dnclresource&s=id%3D%22A11034686%22.&searchmode=basic&tcihsspage=tcisearch_opt1_search
+- **Idioma/variedad:** Taiwan Mandarin y japonés en diseño comparativo.
+- **Cobertura usada por MLS-SND:** VOT en oclusivas aspiradas/no aspiradas de Taiwan Mandarin, incluidas posiciones de habla conectada.
+- **Localizadores:** pp. 155–178; abstract institucional TCI/NCL.
+- **Acceso:** metadatos y abstract en Taiwan Citation Index / National Central Library; texto según disponibilidad del periódico.
+- **Limitación:** estudio específico de VOT y comparación con japonés; no constituye descripción consonántica completa.
+- **Verificado:** 2026-10-11 contra TCI/NCL, EBSCO metadata y listado bibliográfico de la autora.
+- **Estado:** ADMITTED.
+
+## 39. Resultado del registro v0.21
+
+El registro contiene **96 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0096.
+
+Mapeamiento local resuelto en esta wave:
+
+- `ZHTW-LOCAL-007` → `SND-SRC-0092`;
+- `ZHTW-LOCAL-008` → `SND-SRC-0093`;
+- `ZHTW-LOCAL-009` → `SND-SRC-0094`;
+- `ZHTW-LOCAL-010` → `SND-SRC-0095`;
+- `ZHTW-LOCAL-011` → `SND-SRC-0096`.
+
+La canonicalización resuelve identidad bibliográfica, alcance y localizadores mínimos. **No promueve ZHTW-003 más allá de RESEARCHED_PARTIAL ni convierte un análisis de una fuente en consenso del perfil.**
