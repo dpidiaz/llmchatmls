@@ -26,7 +26,7 @@ p b t d ʈ ɖ c ɟ k ɡ q ɢ ʔ m ɱ n ɳ ɲ ŋ ɴ ʙ r ʀ ⱱ ɾ ɽ ɸ β f v �
 
 ## 5. Diacríticos combinantes
 
-[n̥] [ã] [l̩] [t̪] [d̤] [kʲ] [tʰ] [ɫ] [ɚ]
+[n̥] [ã] [l̩] [t̪] [d̤] [kʲ] [tʰ] [ɫ] [ɚ]
 
 ## 6. Suprasegmentales
 
