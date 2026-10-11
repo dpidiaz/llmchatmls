@@ -1,6 +1,6 @@
 # SND-ZHTW-001 — Qué entendemos por Taiwan Mandarin
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin; no homogénea.
 **Dominio:** alcance / variación.
@@ -52,3 +52,11 @@ Fon, J., & Chuang, Y.-Y. (2024). When a rise is not only a rise: An acoustic ana
 ## 7. Nota editorial
 
 La elección de mantener REFERENCE_PROVISIONAL es una decisión MLS-SND derivada de la variación documentada; no es una categoría usada por la fuente.
+
+## Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
+- **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
+- **Siguiente gate:** EDITORIAL_REVIEW.
