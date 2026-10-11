@@ -392,3 +392,23 @@ La prioridad de la siguiente ronda no es aumentar el número, sino cerrar estos 
 - coreano contemporáneo más allá de oclusivas;
 - japonés segmental/prosódico contemporáneo;
 - francés contemporáneo con selección de subcorpus PFC.
+
+
+## 11. Fuente transversal para fundamentos
+
+### SND-SRC-0024 — Essentials of Linguistics, 2nd edition
+
+- **Tier:** B/D — manual académico abierto de introducción; admisible para definiciones y fundamentos, no como única fuente para afirmaciones especializadas o específicas de una variedad.
+- **APA 7:** Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & Taniguchi, A. (2022). *Essentials of Linguistics* (2nd ed.). eCampusOntario Pressbooks. https://ecampusontario.pressbooks.pub/essentialsoflinguistics2/
+- **Idioma/variedad:** transversal.
+- **Cobertura:** fonética, IPA, sílaba, tono e intonación, fonología, fonemas/alófonos, análisis fonémico y fonotáctica.
+- **Localizadores útiles:** cap. 3 “Phonetics”; §3.6 “The International Phonetic Alphabet”; §3.10 “Syllables”; §3.12 “Tone and Intonation”; cap. 4 “Phonology”; §4.1 “Phonemes and Contrast”; §4.2 “Phonotactics”; §4.5 “Phonemic Analysis”.
+- **Acceso:** gratuito.
+- **Licencia:** CC BY-NC-SA 4.0 indicada por la edición.
+- **Limitación:** obra introductoria; sus ejemplos y simplificaciones pedagógicas no sustituyen fuentes especializadas por idioma ni debates teóricos avanzados.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_FOR_FOUNDATIONS.
+
+## 12. Resultado del registro v0.4
+
+El registro contiene ahora **24 fuentes** con alcance explícito. SND-SRC-0024 permite comenzar la wave de fundamentos sin reutilizar fuentes específicas de idiomas fuera de su alcance.
