@@ -1,6 +1,6 @@
 # SND-REP-005 — Diacríticos del IPA
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** representación / fonética.
 **Idioma:** transversal.
 
@@ -66,3 +66,11 @@ La lista completa de diacríticos se mantendrá en el índice de referencia; las
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **No equivale todavía a:** LINGUISTIC_REVIEW o EDITORIAL_REVIEW.
+
+
+## Linguistic review wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Control:** se mantiene separada la disponibilidad de una notación IPA de su función lingüística en cada idioma; no se presentan diacríticos o signos prosódicos como requisitos universales.
+- **Siguiente etapa:** EDITORIAL_REVIEW.
