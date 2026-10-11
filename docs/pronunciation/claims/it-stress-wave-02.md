@@ -21,7 +21,7 @@
 - SND-IT-005 — DRAFTED.
 - IT-PROP-003 — Gili Fivela (2010), “Accento”, Enciclopedia dell’Italiano / Treccani.
 - IT-PROP-004 — D’Imperio & Rosenthall (1999), *Phonology* 16(1), 1–28.
-- `languages/it/SOURCES-PROPOSED.md` ampliado con alcance, localizadores y limitaciones.
+- `languages/it/SOURCES-PROPOSED-STRESS-WAVE-02.md` creado con alcance, localizadores y limitaciones; el archivo compartido `SOURCES-PROPOSED.md` queda sin cambios respecto de la matriz.
 
 ## Decisiones
 
