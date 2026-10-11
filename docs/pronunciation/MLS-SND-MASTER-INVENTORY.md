@@ -47,7 +47,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-REP-001 | Sonido, letra y símbolo | terminology | INVENTORY |
-| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | SOURCE_MAPPED |
+| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | EVIDENCE_CHECKED |
 | SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-005 | Diacríticos | REP-002 | SOURCE_MAPPED |
@@ -80,7 +80,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | SOURCE_MAPPED |
+| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | EVIDENCE_CHECKED |
 | SND-ENUS-002 | Sistema consonántico: mapa de contrastes | SOURCE_MAPPED |
 | SND-ENUS-003 | Sistemas vocálicos y variación regional | SOURCE_MAPPED |
 | SND-ENUS-004 | Reducción vocálica | INVENTORY |
@@ -157,7 +157,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-ZHTW-004 | Sistema tonal: mapa de evidencia | SOURCE_MAPPED |
 | SND-ZHTW-005 | Variación tonal norte/centro | SOURCE_MAPPED |
 | SND-ZHTW-006 | Procesos tonales | INVENTORY |
-| SND-ZHTW-007 | Zhuyin/Bopomofo | SOURCE_MAPPED |
+| SND-ZHTW-007 | Zhuyin/Bopomofo | EVIDENCE_CHECKED |
 | SND-ZHTW-008 | IPA y Zhuyin: funciones distintas | SOURCE_MAPPED |
 | SND-ZHTW-009 | Romanización latina | REFERENCE_OPEN |
 | SND-ZHTW-010 | Variación por contacto | SOURCE_MAPPED |
@@ -174,14 +174,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-KO-006 | Procesos fonológicos contextuales | INVENTORY |
 | SND-KO-007 | Prosodia | INVENTORY |
 | SND-KO-008 | Hangul y pronunciación | INVENTORY |
-| SND-KO-009 | Romanización Revisada | SOURCE_MAPPED |
+| SND-KO-009 | Romanización Revisada | EVIDENCE_CHECKED |
 | SND-KO-010 | Romanización vs. IPA | SOURCE_MAPPED |
 
 ### 🇯🇵 Japonés — JA
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-JA-001 | Referencia de Tokio/lengua común y sus límites | SOURCE_MAPPED |
+| SND-JA-001 | Referencia de Tokio/lengua común y sus límites | EVIDENCE_CHECKED |
 | SND-JA-002 | Mora | INVENTORY |
 | SND-JA-003 | Vocales y duración | SOURCE_MAPPED |
 | SND-JA-004 | Consonantes | SOURCE_MAPPED |
