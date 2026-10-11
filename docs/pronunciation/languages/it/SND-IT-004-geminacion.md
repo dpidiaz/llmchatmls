@@ -35,10 +35,10 @@ Esta entrada no decide aún:
 
 | claim_id | afirmación | fuente provisional | localizador | estado |
 |---|---|---|---|---|
-| IT004-C01 | GEMMA contrasta materiales con consonantes simples y geminadas | SND-SRC-0028 | Abstract | SOURCED_PENDING_REGISTRY |
-| IT004-C02 | El conjunto incluye medidas de duración para casos singleton vs. geminate | SND-SRC-0028 | Abstract / Value of the Data | SOURCED_PENDING_REGISTRY |
-| IT004-C03 | Los datos fueron producidos por seis hablantes adultos de italiano estándar criados y residentes en Roma | SND-SRC-0028 | Abstract / Specifications Table | SOURCED_PENDING_REGISTRY |
-| IT004-C04 | La geminación léxica se trata como contraste relevante en italiano | SND-SRC-0028 | Value of the Data / descripción del objetivo | SOURCED_PENDING_REGISTRY |
+| IT004-C01 | GEMMA contrasta materiales con consonantes simples y geminadas | SND-SRC-0028 | Abstract | VERIFIED |
+| IT004-C02 | El conjunto incluye medidas de duración para casos singleton vs. geminate | SND-SRC-0028 | Abstract / Value of the Data | VERIFIED |
+| IT004-C03 | Los datos fueron producidos por seis hablantes adultos de italiano estándar criados y residentes en Roma | SND-SRC-0028 | Abstract / Specifications Table | VERIFIED |
+| IT004-C04 | La geminación léxica se trata como contraste relevante en italiano | SND-SRC-0028 | Value of the Data / descripción del objetivo | VERIFIED |
 
 ## 6. Fuente provisional
 
