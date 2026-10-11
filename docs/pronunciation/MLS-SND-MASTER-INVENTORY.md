@@ -32,14 +32,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
 | SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
 | SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
-| SND-FND-010 | Duración y cantidad | terminología | INVENTORY |
+| SND-FND-010 | Duración y cantidad | terminología | LINGUISTIC_REVIEW |
 | SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
 | SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
 | SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
-| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | SOURCE_MAPPED |
+| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
 
 ## 3. Representación y escritura
@@ -47,13 +47,13 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
 | SND-REP-001 | Sonido, letra y símbolo | terminology | INVENTORY |
-| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | EVIDENCE_CHECKED |
+| SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | LINGUISTIC_REVIEW |
 | SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
-| SND-REP-005 | Diacríticos | REP-002 | SOURCE_MAPPED |
-| SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | SOURCE_MAPPED |
-| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | SOURCE_MAPPED |
-| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | SOURCE_MAPPED |
+| SND-REP-005 | Diacríticos | REP-002 | LINGUISTIC_REVIEW |
+| SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
+| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
+| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | LINGUISTIC_REVIEW |
 | SND-REP-009 | Ortografía y pronunciación | terminology | INVENTORY |
 | SND-REP-010 | Romanización | terminology | INVENTORY |
 | SND-REP-011 | Transliteración | terminology | INVENTORY |
@@ -66,7 +66,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | ID | Entrada/cluster | Estado |
 |---|---|---|
 | SND-ESGT-001 | Alcance y variedades del español de Guatemala | EVIDENCE_CHECKED |
-| SND-ESGT-002 | Inventario segmental: mapa de evidencia | INVENTORY |
+| SND-ESGT-002 | Inventario segmental: mapa de evidencia | SOURCE_MAPPED |
 | SND-ESGT-003 | Vocales y variación | INVENTORY |
 | SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
 | SND-ESGT-005 | /s/ y variación regional | EVIDENCE_CHECKED |
@@ -100,7 +100,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
 | SND-PTBR-005 | Consonantes: mapa general | INVENTORY |
-| SND-PTBR-006 | /s/ en coda y variación carioca | EVIDENCE_CHECKED |
+| SND-PTBR-006 | Sibilante /S/ en coda y variación carioca | EVIDENCE_CHECKED |
 | SND-PTBR-007 | Róticas y variación | SOURCE_MAPPED |
 | SND-PTBR-008 | /l/ en coda y variación | SOURCE_MAPPED |
 | SND-PTBR-009 | Acento y ritmo | INVENTORY |
@@ -110,14 +110,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-IT-001 | Estándar, variedades regionales y mainstream | SOURCE_MAPPED |
+| SND-IT-001 | Estándar, variedades regionales y mainstream | EVIDENCE_CHECKED |
 | SND-IT-002 | Vocales | SOURCE_MAPPED |
 | SND-IT-003 | Consonantes | SOURCE_MAPPED |
-| SND-IT-004 | Geminación/duración consonántica | INVENTORY |
+| SND-IT-004 | Geminación/duración consonántica | RESEARCHED |
 | SND-IT-005 | Acento | INVENTORY |
 | SND-IT-006 | E y O: pronunciación y ortoepía | SOURCE_MAPPED |
 | SND-IT-007 | S y Z: pronunciación y ortoepía | SOURCE_MAPPED |
-| SND-IT-008 | Grafía y pronunciación | SOURCE_MAPPED |
+| SND-IT-008 | Grafía y pronunciación | EVIDENCE_CHECKED |
 | SND-IT-009 | Variación regional | INVENTORY |
 
 ### 🇫🇷 Francés — FR
