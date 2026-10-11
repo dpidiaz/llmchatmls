@@ -1,8 +1,13 @@
-# Italiano — fuentes propuestas: stress wave 02
+# Italiano — source map local: stress wave 02
 
-Estado: **LOCAL_PROPOSAL**. Este archivo pertenece a la wave SND-IT-005 y evita editar el registro global o el archivo compartido de propuestas mientras existen workers paralelos.
+Estado: **LOCAL_CANDIDATE**. Este archivo es el source map obligatorio de la wave SND-IT-005 conforme a `editorial/source-integration-protocol.md`. Evita editar el Source Registry global mientras existen workers paralelos.
 
-## IT-PROP-003 — Treccani, “Accento”
+## IT-W02-S01 — Treccani, “Accento”
+
+- **Estado de verificación:** VERIFIED_LOCATOR_PENDING_CANONICALIZATION.
+- **Idioma / variedad:** italiano; síntesis general del italiano con discusión explícita de distribución y morfofonología del acento.
+- **Fenómeno cubierto:** acento léxico; función distintiva; correlatos fonéticos; distribución; interacción morfofonológica.
+- **Entradas / claims:** SND-IT-005; IT005-C01, IT005-C02, IT005-C03.
 
 - **Propuesta de tier:** C/B auxiliar académica.
 - **Referencia:** Gili Fivela, B. (2010). Accento. En *Enciclopedia dell’Italiano*. Treccani. https://www.treccani.it/enciclopedia/accento_%28Enciclopedia-dell%27Italiano%29/
@@ -11,7 +16,12 @@ Estado: **LOCAL_PROPOSAL**. Este archivo pertenece a la wave SND-IT-005 y evita 
 - **Localizadores:** “Definizione”; “Principali correlati fonetici”; “L’accento in italiano”, especialmente los apartados sobre posición libre, distribución y función distintiva; “Fenomeni morfofonologici dovuti a derivazione, composizione e flessione della parola”.
 - **Limitación:** obra enciclopédica de síntesis; no sustituye estudios experimentales para medidas acústicas ni resuelve por sí sola todos los análisis métricos del italiano.
 
-## IT-PROP-004 — D’Imperio & Rosenthall (1999)
+## IT-W02-S02 — D’Imperio & Rosenthall (1999)
+
+- **Estado de verificación:** VERIFIED_ABSTRACT_PENDING_CANONICALIZATION.
+- **Idioma / variedad:** italiano; italiano estándar y variedades regionales incluidas por el estudio.
+- **Fenómeno cubierto:** acento principal y duración vocálica condicionada por estructura silábica y posición.
+- **Entradas / claims:** SND-IT-005; IT005-C04, IT005-C05.
 
 - **Propuesta de tier:** B.
 - **Referencia:** D’Imperio, M., & Rosenthall, S. (1999). Phonetics and phonology of main stress in Italian. *Phonology, 16*(1), 1–28. https://doi.org/10.1017/S0952675799003681
@@ -22,4 +32,9 @@ Estado: **LOCAL_PROPOSAL**. Este archivo pertenece a la wave SND-IT-005 y evita 
 
 ## Integración
 
-El integrador debe comprobar duplicados y asignar IDs canónicos antes de promover los claims dependientes de SND-IT-005 a EVIDENCE_CHECKED.
+- **Fecha de verificación de esta wave:** 2026-10-11.
+- El integrador debe comprobar DOI/URL y metadatos contra el Source Registry vigente.
+- Si existe una coincidencia canónica, marcar el candidato como `DEDUP_MATCH` y reescribir todos sus claims al `SND-SRC` existente.
+- Si es realmente nuevo, asignar un `SND-SRC` únicamente en la wave de integración.
+- La canonicalización bibliográfica por sí sola **no** promueve SND-IT-005 a `EVIDENCE_CHECKED`; debe repetirse el gate R33 después de la reescritura.
+- Antes de integrar la entrada a `feat/mls-snd-foundation`, no puede quedar ningún `IT-W02-Sxx` dentro de la entrada integrada.
