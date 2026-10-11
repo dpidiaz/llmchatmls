@@ -1,12 +1,12 @@
 # MLS-SND — Japanese writing/pronunciation linguistic review wave 03
 
-**Reviewed content:** JA-008 / JA-009 from #7333 and clean canonical integration #7367  
+**Reviewed content:** JA-008 / JA-009 from #7333 and the current matrix integration  
 **Date:** 2026-10-11  
 **Scope:** writing ↔ pronunciation only; mora, segmental phonetics, pitch accent and romanization are outside this gate.
 
 ## Executive verdict
 
-**LINGUISTIC_REVIEW PASS for JA-008 and JA-009, conditional only on clean source integration #7367.**
+**LINGUISTIC_REVIEW PASS for JA-008 and JA-009 on the current canonical matrix content.**
 
 The entries correctly distinguish:
 - kana orthography;
@@ -136,13 +136,15 @@ Neither entry claims:
 | JA-008 | PASS |
 | JA-009 | PASS |
 
-## Integration dependency
+## Canonical reconciliation
 
-The review is linguistically complete, but the matrix version must use the clean canonical source path in #7367:
+The matrix now contains the reviewed entries and sources with the final canonical mapping:
 
-- SND-SRC-0057;
-- SND-SRC-0058;
-- SND-SRC-0059;
-- SND-SRC-0060.
+- JA-008: SND-SRC-0059 — 現代仮名遣い;
+- JA-008: SND-SRC-0060 — 外来語の表記;
+- JA-009: SND-SRC-0061 — 常用漢字表;
+- JA-009: SND-SRC-0062 — 常用漢字表の音訓索引.
 
-After #7367 integrates, JA-008/009 are eligible to carry **LINGUISTIC_REVIEW** state on the integrated version, provided no substantive text changes occur.
+The source identities and substantive claims are unchanged; only canonical numbering differs from the earlier provisional integration path.
+
+**Gate:** JA-008 and JA-009 are eligible for **LINGUISTIC_REVIEW** state on the matrix version.
