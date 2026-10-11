@@ -1214,3 +1214,29 @@ Mapeo local resuelto:
 
 La canonicalización resuelve identidad bibliográfica y localizadores; no promueve por sí sola SND-JA-004 más allá de SOURCE_MAPPED.
 
+
+
+## 34. Canonicalización zh-TW: romanización latina
+
+### SND-SRC-0080 — Taiwan MOE / Revised Mandarin Chinese Dictionary
+
+- **Tier:** A — recurso lexicográfico institucional.
+- **APA 7:** Ministry of Education, R.O.C. (Taiwan). (2021–). *Revised Mandarin Chinese Dictionary, Taiwan Academic Network Version 6*. https://dict.revised.moe.edu.tw/
+- **Idioma/alcance:** mandarín; recurso institucional taiwanés de consulta lexicográfica.
+- **Cobertura usada por MLS-SND:** coexistencia operativa de Bopomofo/Zhuyin y Hanyu Pinyin como capas separadas de búsqueda y visualización de pronunciación.
+- **Localizadores verificados:** Basic Search (campo de búsqueda + Bopomofo Keypad + Hanyu Pinyin Keypad); entradas 博 y 模, campos “Bopomofo” y “Hanyu Pinyin”.
+- **Acceso:** FREE_TO_READ en el sitio oficial.
+- **Licencia/reutilización:** no se asume licencia abierta; MLS-SND usa paráfrasis y metadatos, no redistribuye contenido del diccionario.
+- **Limitación:** demuestra que Hanyu Pinyin funciona como capa latina institucional de consulta en este recurso; no prueba que sea la única romanización histórica de Taiwán, una transcripción fonética exhaustiva ni una obligación para todos los materiales del MLS.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_INSTITUTIONAL.
+
+## 35. Resultado del registro v0.19
+
+El registro contiene **80 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0080.
+
+Mapeo local resuelto:
+
+- `ZHTW-ROM-S01` → `SND-SRC-0080`.
+
+La canonicalización resuelve identidad bibliográfica y localizadores. La política global de romanización del MLS permanece como decisión editorial separada.
