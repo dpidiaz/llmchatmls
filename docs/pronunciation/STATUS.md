@@ -12,7 +12,7 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 | Transcription Guide | v0.2 — decisiones base cerradas |
 | Varieties Policy | v0.2 — operativa |
 | Master Inventory | v0.2 — 143 unidades candidatas |
-| Source Registry | v0.11 — 52 fuentes canónicas |
+| Source Registry | v0.13 — 56 fuentes canónicas |
 | R33 gate | operativo por claim/entrada |
 | Entry Template | v0.1 |
 | R44 Work Plan | v0.1 |
@@ -22,15 +22,15 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 
 ## Snapshot canónico
 
-**Entradas físicas `SND-*.md` presentes en la rama matriz: 73.**
+**Entradas físicas únicas `SND-*.md` presentes en la rama matriz: 77.**
 
-Distribución derivada del Master Inventory para esos 73 IDs:
+Distribución derivada del Master Inventory para esos 77 IDs:
 
 - **26** en `EVIDENCE_CHECKED`;
 - **40** en `LINGUISTIC_REVIEW`;
 - **2** en `SOURCE_MAPPED`;
-- **2** en `DRAFTED`;
-- **1** en `RESEARCHED`;
+- **4** en `DRAFTED`;
+- **3** en `RESEARCHED`;
 - **1** en `RESEARCHED_PARTIAL`;
 - **1** en `IN_PROGRESS`;
 - **0** en `EDITORIAL_REVIEW`;
@@ -99,7 +99,11 @@ Aún faltan como entrada canónica física:
 ### 🇬🇹 es-GT
 - ESGT-001 — EVIDENCE_CHECKED.
 - ESGT-002 — SOURCE_MAPPED.
+- ESGT-003 — DRAFTED; SND-SRC-0025 + SND-SRC-0053 (contacto, abstract-only).
+- ESGT-004 — DRAFTED; mapa consonántico inicial.
 - ESGT-005 — EVIDENCE_CHECKED.
+- ESGT-009 — RESEARCHED; contacto K’iche’–español, fuentes canonicalizadas.
+- ESGT-010 — RESEARCHED; ortografía/pronunciación, fuentes canonicalizadas.
 
 Referencia: **REFERENCE_PROVISIONAL**; el perfil nacional mantiene variación explícita.
 
@@ -178,13 +182,13 @@ Referencia: **REFERENCE_FIXED** para referencia ortoépica literaria, separada d
 
 La auditoría completa histórica `SOURCE-ID-INTEGRITY-01` dio **PASS 60/60** contra Source Registry v0.7.
 
-Desde entonces la matriz creció a 73 entradas y el registro a v0.11/52 fuentes. Las integraciones promovidas recientes usan IDs canónicos `SND-SRC`, pero el **reescaneo completo 73/73 contra v0.11 queda pendiente** antes de declarar un nuevo PASS global.
+Desde entonces la matriz creció a 77 entradas únicas y el registro a v0.13/56 fuentes. Las integraciones promovidas recientes usan IDs canónicos `SND-SRC`, pero el **reescaneo completo 73/73 contra v0.11 queda pendiente** antes de declarar un nuevo PASS global.
 
 No convertir el PASS histórico 60/60 en una afirmación automática sobre el snapshot actual.
 
 ## Próximos gates
 
-1. ejecutar el reescaneo completo de integridad 73/73 contra Source Registry v0.11;
+1. ejecutar el reescaneo completo de integridad 77/77 contra Source Registry v0.13;
 2. integrar/revisar REP-003 y REP-004;
 3. continuar LINGUISTIC_REVIEW de perfiles EVIDENCE_CHECKED y comenzar EDITORIAL_REVIEW de en-US, zh-TW, ru y otros perfiles con PASS lingüístico;
 4. reconciliar waves nuevas de es-GT, fr, it, de, ja y perfiles piloto sin duplicar canónicos;
