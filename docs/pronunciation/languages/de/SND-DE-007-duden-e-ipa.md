@@ -1,6 +1,6 @@
 # SND-DE-007 — Duden e IPA
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** alemán.  
 **Dominio:** pronunciación / transcripción / lexicografía.
 
