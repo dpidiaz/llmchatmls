@@ -32,14 +32,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
 | SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
 | SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
-| SND-FND-010 | Duración y cantidad | terminología | LINGUISTIC_REVIEW |
+| SND-FND-010 | Duración y cantidad | terminología | EVIDENCE_CHECKED |
 | SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
 | SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
 | SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
-| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
+| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | EVIDENCE_CHECKED |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
 
 ## 3. Representación y escritura
@@ -52,8 +52,8 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-005 | Diacríticos | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
-| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
-| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | LINGUISTIC_REVIEW |
+| SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | EVIDENCE_CHECKED |
+| SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | EVIDENCE_CHECKED |
 | SND-REP-009 | Ortografía y pronunciación | terminology | INVENTORY |
 | SND-REP-010 | Romanización | terminology | INVENTORY |
 | SND-REP-011 | Transliteración | terminology | INVENTORY |
@@ -95,7 +95,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-PTBR-001 | PB amplio vs. habla carioca | EVIDENCE_CHECKED |
+| SND-PTBR-001 | PB amplio vs. habla carioca | DRAFTED |
 | SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
@@ -113,7 +113,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-IT-001 | Estándar, variedades regionales y mainstream | EVIDENCE_CHECKED |
 | SND-IT-002 | Vocales | SOURCE_MAPPED |
 | SND-IT-003 | Consonantes | SOURCE_MAPPED |
-| SND-IT-004 | Geminación/duración consonántica | RESEARCHED |
+| SND-IT-004 | Geminación/duración consonántica | EVIDENCE_CHECKED |
 | SND-IT-005 | Acento | INVENTORY |
 | SND-IT-006 | E y O: pronunciación y ortoepía | SOURCE_MAPPED |
 | SND-IT-007 | S y Z: pronunciación y ortoepía | SOURCE_MAPPED |
@@ -138,7 +138,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-DE-001 | Alemán estándar y estándares nacionales | RESEARCHED |
+| SND-DE-001 | Alemán estándar y estándares nacionales | EVIDENCE_CHECKED |
 | SND-DE-002 | Vocales | SOURCE_MAPPED |
 | SND-DE-003 | Longitud y calidad vocálica | SOURCE_MAPPED |
 | SND-DE-004 | Consonantes | SOURCE_MAPPED |
