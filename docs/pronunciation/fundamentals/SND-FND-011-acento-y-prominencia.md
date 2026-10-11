@@ -61,5 +61,5 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS WITH CHANGE → `LINGUISTIC_REVIEW`.
 - **Ajuste:** se eliminó la presuposición de que “acento/estrés” sea una categoría uniforme y universal; cada perfil deberá justificar si utiliza acento, prominencia, tono, acento tonal u otro análisis.
-- **Comprobación externa de cautela tipológica:** la literatura señala variación considerable en la función y realización del stress y que no aparece en la fonología léxica de todas las lenguas.
+- **Comprobación externa de cautela tipológica:** Van Soeren (2023, §6.1) señala que el stress no aparece en la fonología léxica de todas las lenguas y que su función y realización varían considerablemente entre las que sí lo tienen (https://doi.org/10.1017/S0022226722000081).
 - **Límite:** los correlatos intensidad/duración/pitch de la fuente introductoria no se transfieren automáticamente a cada idioma.
