@@ -1,6 +1,6 @@
 # SND-RU-005 — Palatalización y oposición “blanda/dura”
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** consonantes / fonología / articulación.  
 **Alcance:** análisis de SND-SRC-0015.
@@ -52,9 +52,25 @@ La comparación con ortografía/cirílico se desarrollará en SND-RU-009; esta e
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 
+## Entradas relacionadas
+
+- SND-RU-004 — Consonantes: mapa del sistema descrito.
+- SND-RU-007 — Procesos contextuales.
+- SND-RU-009 — Cirílico y pronunciación (entrada prevista/integración pendiente).
+
 ## Revisión lingüística
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** La oposición blanda/dura se explica fonética y fonológicamente y se evita la equivalencia simplista consonante + y.
 - **Control:** no se cambiaron source IDs, localizadores ni transcripciones; cualquier cambio terminológico mantiene el mismo contenido analítico.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación, terminología y visibilidad de límites entre descripción, análisis, norma y variación.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
