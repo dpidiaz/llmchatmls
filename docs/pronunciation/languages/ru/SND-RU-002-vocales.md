@@ -1,6 +1,6 @@
 # SND-RU-002 — Vocales: inventario analítico y realizaciones
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** vocales / fonología / fonética.  
 **Alcance:** análisis de Yanushevskaya & Bunčić (2015), con desacuerdos teóricos conservados explícitamente.
@@ -53,3 +53,10 @@ Las transcripciones de esta fuente se interpretan dentro del marco fonológico d
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** La entrada conserva el desacuerdo analítico sobre [i]/[ɨ] y no presenta una fonemización discutida como consenso universal.
+- **Control:** no se cambiaron source IDs, localizadores ni transcripciones; el cambio terminológico de RU-004 mantiene el mismo contenido analítico.
