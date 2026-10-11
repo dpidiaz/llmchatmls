@@ -1,6 +1,6 @@
 # SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** inglés.
 **Variedad:** Estados Unidos; alcance multirreferencia.
 **Dominio:** variación / política descriptiva.
@@ -63,3 +63,11 @@ La elección MULTI_REFERENCE es una decisión de MLS-SND construida a partir de 
 - **Comprobado:** alcance regional/histórico, límites de muestra, relación con Ladefoged y control de generalización nacional.
 - **Cambios de claims:** ninguno.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La secuencia problema → evidencia → decisión MLS → límites es compacta y comprensible. MULTI_REFERENCE aparece claramente como decisión editorial y no como categoría atribuida a las fuentes.
+- **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` únicamente después de aplicar el gate de composition readiness a esta misma versión.
