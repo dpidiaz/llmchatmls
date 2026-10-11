@@ -1,6 +1,6 @@
 # SND-FND-007 — Vocales: parámetros articulatorios
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** fonética.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -90,3 +90,17 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Lectura:** Los parámetros se explican por separado y la sección “Qué no hará MLS-SND” funciona como control editorial claro contra equivalencias fáciles.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
+
+
+## Composition readiness wave 02
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `04ec13cef85a0748cf35c426ac573f5846afc226`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** EVIDENCE_CHECKED + LINGUISTIC_REVIEW + EDITORIAL_REVIEW vigentes.
+- **Representación:** No contiene transcripciones IPA concretas; los parámetros vocálicos se presentan conceptualmente.
+- **Ejemplos:** No contiene ejemplos lingüísticos materiales.
+- **Navegación:** IDs relacionados verificados.
+- **Autonomía escrita:** PASS; no requiere audio, ejercicios ni evaluación del lector.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** solo estado/metadata de readiness.
