@@ -1,6 +1,6 @@
 # SND-FND-008 — La sílaba
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonología / organización sonora.
 **Idioma:** transversal.
 
@@ -68,7 +68,7 @@ La entrada no pretende resolver debates teóricos sobre la representación de la
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
-- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; corresponde al gate evidencial anterior; los gates lingüístico y editorial se registran por separado.
 
 ## 9. Revisión lingüística
 
@@ -76,3 +76,12 @@ La entrada no pretende resolver debates teóricos sobre la representación de la
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** ataque, núcleo, coda y rima se presentan como herramientas de análisis, no como una plantilla obligatoria universal.
 - **Límite:** la silabificación concreta debe atribuirse al análisis de cada lengua/variedad.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** La entrada es breve, consultable y explica ataque/núcleo/coda sin convertirlos en plantilla universal.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** la entrada puede considerarse candidata a `READY_FOR_COMPOSITION` únicamente cuando la política de composición/metadatos aplicable esté integrada y una comprobación final confirme que no hubo cambios sustantivos posteriores.
