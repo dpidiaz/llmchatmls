@@ -1,6 +1,6 @@
 # SND-FND-015 — Entonación
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
@@ -64,3 +64,10 @@ La entrada establece una barrera contra generalizaciones pedagógicas fáciles p
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## 9. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** la entrada evita equiparar entonación con tono léxico y no universaliza contornos interrogativos ni funciones discursivas.
+- **Límite:** el dominio prosódico y la relación forma–función de cada contorno deben definirse por idioma/variedad y fuente.
