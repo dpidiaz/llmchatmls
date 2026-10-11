@@ -1,6 +1,6 @@
 # SND-JA-004 — Consonantes: mapa general y realizaciones documentadas
 
-**Estado:** SOURCE_MAPPED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** japonés.  
 **Variedad / alcance:** japonés de referencia con controles contemporáneos puntuales; no exhaustivo.  
 **Dominio:** fonología / fonética / pronunciación.  
@@ -167,18 +167,18 @@ La comparación debe basarse en articulación y distribución documentadas, no e
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| JA004-C01 | Existe una fuente canónica de referencia IPA para el japonés, útil como baseline pero con advertencia de fecha | SND-SRC-0023 | Okada 1991, pp. 94–96; registro canónico | mapa general | CANONICAL_SOURCE_WITH_DATE_WARNING |
-| JA004-C02 | /r/ y /d/ presentan semejanza articulatoria pero diferencias de duración y lugar de contacto | SND-SRC-0076 | 「調音運動の分析」「持続時間の分析」「接触位置」 | japonés estándar; datos de la fuente | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C03 | En ~200 hablantes del CSJ, la duración media de /r/ es menor que la de /d/ en los seis entornos vocálicos reportados | SND-SRC-0076 | 「持続時間の分析」, tabla /r/ vs /d/ | corpus de habla; posiciones internas de palabra | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C04 | El lugar de contacto de /r/ muestra variación contextual y la explicación por influencia vocálica se presenta como hipótesis | SND-SRC-0076 | 「母音の影響」「まとめ」 | muestras de estándar/Tokio en la página | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C05 | Contadores de la serie ハ pueden mostrar alternancias p~h~b condicionadas por el numeral | SND-SRC-0077 | 「匹はハ行音で始まる助数詞」, tabla 1 | fenómeno morfofonológico específico | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C06 | La explicación institucional vincula parte de las realizaciones con 促音 y con cambio histórico de la serie ハ | SND-SRC-0077 | 「ハ行音の特殊性」 y desarrollo posterior | fenómeno histórico/morfofonológico | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C07 | El núcleo CSJ con etiquetado segmental cubre aproximadamente 500.000 palabras y unas 44 horas de audio | SND-SRC-0078 | p. 2, §1 | corpus institucional | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C08 | El esquema CSJ combina etiquetas fonémicas japonesas con etiquetas fonéticas para variantes observables y se sitúa entre etiquetado amplio y estrecho | SND-SRC-0078 | p. 2, §2 | política de anotación | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C09 | La Tabla 2 define un conjunto amplio de etiquetas consonánticas y señala que algunas etiquetas definidas no se usan actualmente en el corpus | SND-SRC-0078 | p. 2, §3; p. 3, Tabla 2 y nota | mapa de anotación consonántica | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C10 | Una síntesis amplia de 2015 presenta un inventario fonémico de referencia para el japonés moderno con /p b t d k g s z h m n r w j/ | SND-SRC-0079 | p. impresa 6, §3.1, Tabla 1 | japonés moderno; baseline fonémico | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C11 | La misma síntesis distingue alofonía contextual de /s t h/ en vocabulario nativo y muestra que varias realizaciones dejan de ser complementarias en estratos sinojaponeses/préstamos | SND-SRC-0079 | pp. impresas 6–7, §3.1 | fonología segmental + estratos léxicos | SOURCED_CANONICAL_PENDING_REVIEW |
-| JA004-C12 | Préstamos recientes amplían combinaciones consonante-vocal y la distribución de segmentos como [t], [ts], [ɸ], /w/ y /j/ | SND-SRC-0079 | p. impresa 7, §3.1 | préstamos contemporáneos | SOURCED_CANONICAL_PENDING_REVIEW |
+| JA004-C01 | Existe una fuente canónica de referencia IPA para el japonés, útil como baseline pero con advertencia de fecha | SND-SRC-0023 | Okada 1991, pp. 94–96; registro canónico | mapa general; DATE_SCOPE_WARNING | VERIFIED |
+| JA004-C02 | /r/ y /d/ presentan semejanza articulatoria pero diferencias de duración y lugar de contacto | SND-SRC-0076 | 「調音運動の分析」「持続時間の分析」「接触位置」 | japonés estándar; datos de la fuente | VERIFIED |
+| JA004-C03 | En ~200 hablantes del CSJ, la duración media de /r/ es menor que la de /d/ en los seis entornos vocálicos reportados | SND-SRC-0076 | 「持続時間の分析」, tabla /r/ vs /d/ | corpus de habla; posiciones internas de palabra | VERIFIED |
+| JA004-C04 | El lugar de contacto de /r/ muestra variación contextual y la explicación por influencia vocálica se presenta como hipótesis | SND-SRC-0076 | 「母音の影響」「まとめ」 | muestras de estándar/Tokio en la página | VERIFIED |
+| JA004-C05 | Contadores de la serie ハ pueden mostrar alternancias p~h~b condicionadas por el numeral | SND-SRC-0077 | 「匹はハ行音で始まる助数詞」, tabla 1 | fenómeno morfofonológico específico | VERIFIED |
+| JA004-C06 | La explicación institucional vincula parte de las realizaciones con 促音 y con cambio histórico de la serie ハ | SND-SRC-0077 | 「ハ行音の特殊性」 y desarrollo posterior | fenómeno histórico/morfofonológico | VERIFIED |
+| JA004-C07 | El núcleo CSJ con etiquetado segmental cubre aproximadamente 500.000 palabras y unas 44 horas de audio | SND-SRC-0078 | p. 2, §1 | corpus institucional | VERIFIED |
+| JA004-C08 | El esquema CSJ combina etiquetas fonémicas japonesas con etiquetas fonéticas para variantes observables y se sitúa entre etiquetado amplio y estrecho | SND-SRC-0078 | p. 2, §2 | política de anotación | VERIFIED |
+| JA004-C09 | La Tabla 2 define un conjunto amplio de etiquetas consonánticas y señala que algunas etiquetas definidas no se usan actualmente en el corpus | SND-SRC-0078 | p. 2, §3; p. 3, Tabla 2 y nota | mapa de anotación consonántica | VERIFIED |
+| JA004-C10 | Una síntesis amplia de 2015 presenta un inventario fonémico de referencia para el japonés moderno con /p b t d k g s z h m n r w j/ | SND-SRC-0079 | p. impresa 6, §3.1, Tabla 1 | japonés moderno; baseline fonémico | VERIFIED |
+| JA004-C11 | La misma síntesis distingue alofonía contextual de /s t h/ en vocabulario nativo y muestra que varias realizaciones dejan de ser complementarias en estratos sinojaponeses/préstamos | SND-SRC-0079 | pp. impresas 6–7, §3.1 | fonología segmental + estratos léxicos | VERIFIED |
+| JA004-C12 | Préstamos recientes amplían combinaciones consonante-vocal y la distribución de segmentos como [t], [ts], [ɸ], /w/ y /j/ | SND-SRC-0079 | p. impresa 7, §3.1 | préstamos contemporáneos | VERIFIED |
 
 ## 14. Fuentes APA 7
 
@@ -197,15 +197,21 @@ Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 
 - SND-SRC-0078 aporta cobertura segmental amplia basada en corpus, pero su función es de **anotación** y no debe confundirse con un inventario fonológico definitivo.
 - La entrada no fija todavía un inventario contemporáneo definitivo.
 - SND-SRC-0079 ya fue verificada en texto completo para la sección consonántica relevante (pp. impresas 6–9); se usa como control amplio y no como autoridad única.
-- Antes de considerar EVIDENCE_CHECKED global debe completarse una revisión lingüística independiente del mapa ya canonicalizado.
+- El mapa canonicalizado superó una revisión lingüística independiente; el PASS valida los claims actuales, no convierte la entrada en un inventario superficial exhaustivo.
 - No se mezcla evidencia de Tokio, corpus general y explicación histórica sin indicar su alcance.
 
 ## Gate de salida
 
-**Resultado:** SOURCE_MAPPED.
+**R33 claim gate: PASS. LINGUISTIC_REVIEW: PASS_WITH_SCOPE_WARNING.**
 
-Pendiente para EVIDENCE_CHECKED:
-1. canonicalizar/deduplicar SND-SRC-0076/S02/S03/S04;
-2. reescribir IDs locales a SND-SRC canónicos y repetir el gate R33;
-3. auditoría lingüística independiente;
-4. verificar coherencia con JA-002/005/008/010.
+Comprobaciones cerradas:
+1. SND-SRC-0023 y SND-SRC-0076…0079 son canónicas;
+2. JA004-C01…C12 tienen fuente y localizador reproducibles;
+3. la evidencia institucional contemporánea permanece separada por alcance;
+4. CSJ se usa como documentación de anotación/corpus, no como inventario fonológico definitivo;
+5. Kubozono (2015) se usa como baseline fonémico y control de alofonía/estratos, no como autoridad única;
+6. la fecha de Okada (1991) continúa visible como DATE_SCOPE_WARNING.
+
+Pendiente antes de EDITORIAL_REVIEW/READY_FOR_COMPOSITION:
+- reconciliar navegación y terminología con JA-002/005/008/010 a medida que esas entradas se integren;
+- conservar esta entrada como mapa general con evidencia contemporánea selectiva, no como lista exhaustiva de todas las realizaciones japonesas.
