@@ -18,10 +18,12 @@ Este archivo registra **decisiones de reconciliación entre chats paralelos**. E
 
 - **Auditoría:** `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`; PASS referencial con advertencia para ZHTW-009 (DRAFTED, sin fuente).
 - **Inventario:** 53 filas obsoletas reconciliadas con las entradas físicas en `f9ae21fff78c72d4079f6c4c0e168c0bba75c2f4`.
-- **STATUS.md:** publicado con distribución actual (40 EDITORIAL_REVIEW, 10 LINGUISTIC_REVIEW, 32 EVIDENCE_CHECKED, 8 estados previos).
+- **STATUS.md:** publicado con distribución actual (40 EDITORIAL_REVIEW, 12 LINGUISTIC_REVIEW, 30 EVIDENCE_CHECKED, 8 estados previos).
 - **#7402:** CLOSED_REAPPLIED; FND-002/003/004/006/007/008/009/011/013/015 ya en EDITORIAL_REVIEW; audit y claim preservados.
 - **#7404:** CLOSED_REAPPLIED; ENUS-001/009 ya en EDITORIAL_REVIEW; audit y claim preservados.
 - **#7395:** sigue abierto para escaneo independiente reproducible a SHA fijo; se le comunicó el corte 90/79 y la advertencia ZHTW-009.
+- **#7377/#7382/#7379/#7376/#7401:** CLOSED_REAPPLIED tras comprobar auditorías/claims integrados y sus estados canónicos; francés, japonés, coreano, ruso y pt-BR mantienen sus advertencias de alcance.
+- **JA-008/009:** promovidas a LINGUISTIC_REVIEW por revisión de escritura, sincronizadas en Inventory y STATUS; el audit 90/79 anterior conserva su propio SHA y distribución histórica.
 
 Los estados editoriales reflejan el encabezado canónico de cada entrada. No equivalen a `READY_FOR_COMPOSITION`. No copiar a la matriz conteos de snapshots de 58, 56 o 79 entradas.
 
