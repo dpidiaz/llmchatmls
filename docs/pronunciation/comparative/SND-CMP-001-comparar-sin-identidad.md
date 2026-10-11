@@ -1,6 +1,6 @@
 # SND-CMP-001 — Cómo comparar sonidos sin asumir identidad
 
-**Estado:** DRAFTED.  
+**Estado:** EVIDENCE_CHECKED.  
 **Dominio:** comparación transversal / metodología.  
 **Idioma:** transversal.  
 **Variedad:** toda comparación debe declarar las variedades concretas implicadas.
@@ -75,7 +75,7 @@ La enseñanza editorial que extrae MLS-SND no es que exista una sola regla para 
 
 > **el mismo símbolo fonémico entre dos lenguas no garantiza la misma realización fonética.**
 
-**Fuente local:** CMP-PROP-001.
+**Fuente canónica:** SND-SRC-0051.
 
 ### 3.2 Mismo símbolo IPA como convención comparativa, realizaciones físicas bajo investigación
 
@@ -85,7 +85,7 @@ Para MLS-SND esto ilustra una regla crítica:
 
 > **la identidad gráfica de una transcripción amplia puede ocultar diferencias que solo aparecen al especificar el nivel fonético.**
 
-**Fuente local:** CMP-PROP-002.
+**Fuente canónica:** SND-SRC-0052.
 
 ## 4. Taxonomía MLS-SND para comparaciones
 
@@ -184,8 +184,8 @@ Por ello, una tabla comparativa del futuro deberá incluir más información que
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| CMP001-C01 | Compartir un fonema/símbolo entre lenguas no garantiza la misma implementación fonética; el artículo ejemplifica /p/ español e inglés con VOT diferente | CMP-PROP-001 | introducción, pasaje sobre Spanish/English /p/ | VERIFIED_FOR_LOCAL_USE |
-| CMP001-C02 | Un estudio puede usar el mismo símbolo IPA /ɨ/ para categorías comparables en varias lenguas y aun investigar diferencias de realización física | CMP-PROP-002 | §1, especialmente objetivo de verificar el símbolo frente a realizaciones físicas | VERIFIED_FOR_LOCAL_USE |
+| CMP001-C01 | Compartir un fonema/símbolo entre lenguas no garantiza la misma implementación fonética; el artículo ejemplifica /p/ español e inglés con VOT diferente | SND-SRC-0051 | introducción, pasaje sobre Spanish/English /p/ | VERIFIED |
+| CMP001-C02 | Un estudio puede usar el mismo símbolo IPA /ɨ/ para categorías comparables en varias lenguas y aun investigar diferencias de realización física | SND-SRC-0052 | §1, especialmente objetivo de verificar el símbolo frente a realizaciones físicas | VERIFIED |
 | CMP001-C03 | El IPA organiza una notación descriptiva común, pero el nivel de transcripción debe distinguirse de la identidad fonética | SND-SRC-0001 + Transcription Guide v0.2 | IPA Chart + política MLS-SND | SOURCED/EDITORIAL |
 | CMP001-C04 | Fonética y fonología son niveles descriptivos distintos; una diferencia física y una categoría fonológica no son la misma afirmación | SND-SRC-0024 | caps. 3–4 | SOURCED |
 
@@ -205,4 +205,4 @@ Esta entrada puede redactarse antes de los capítulos comparativos restantes por
 
 No autoriza todavía tablas comparativas de vocales, consonantes, ritmo, tono o entonación; esas entradas siguen bloqueadas hasta que los perfiles pertinentes alcancen suficiente validación.
 
-Los identificadores CMP-PROP-001 y CMP-PROP-002 deben recibir IDs canónicos en el Source Registry durante integración antes de promover esta entrada a `EVIDENCE_CHECKED`.
+Los antiguos IDs locales CMP-PROP-001 y CMP-PROP-002 fueron canonicalizados como SND-SRC-0051 y SND-SRC-0052. El mapeo fue re-auditado sin cambiar el alcance de los claims.
