@@ -1,6 +1,6 @@
 # SND-ZHTW-010 — Variación segmental y contacto
 
-**Estado:** EVIDENCE_CHECKED para los fenómenos aquí acotados.
+**Estado:** LINGUISTIC_REVIEW para los fenómenos aquí acotados.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin.
 **Dominio:** variación segmental / contacto lingüístico.
@@ -62,3 +62,12 @@ Fon, J., Hung, J.-M., Huang, Y.-H., & Hsu, H.-J. (2011). Dialectal variations on
 ## 7. Límite
 
 Esta entrada no afirma que todos estos mergers se den en todos los hablantes. Precisamente, la variabilidad forma parte central de la evidencia.
+
+
+## Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
+- **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
+- **Siguiente gate:** EDITORIAL_REVIEW.
