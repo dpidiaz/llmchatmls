@@ -1,6 +1,6 @@
 # SND-FND-013 — Tono
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Dominio:** prosodia / fonología.
 **Idioma:** transversal.
 
@@ -38,8 +38,8 @@ No se enseñará mandarín y japonés como si fueran dos versiones del mismo sis
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND013-C01 | La altura tonal puede participar en contrastes lingüísticos de palabra en lenguas tonales | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | SOURCED |
-| FND013-C02 | Tono e intonación requieren distinguir funciones y dominios | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | SOURCED |
+| FND013-C01 | La altura tonal puede participar en contrastes lingüísticos de palabra en lenguas tonales | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | VERIFIED |
+| FND013-C02 | Tono e intonación requieren distinguir funciones y dominios | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | VERIFIED |
 
 ## 6. Relacionado con
 
@@ -55,3 +55,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 8. Nota editorial
 
 Las categorías específicas de tono no se definirán a partir de esta fuente introductoria; se documentarán dentro de cada perfil con bibliografía especializada.
+
+## R33 audit
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED para los claims listados.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
