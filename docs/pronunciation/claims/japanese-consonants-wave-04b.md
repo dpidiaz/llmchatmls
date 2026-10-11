@@ -22,12 +22,12 @@ SOURCE_MAPPED / RESEARCHED_PARTIAL salvo que el inventario completo pueda revali
 
 ## Salida
 
-- SND-JA-004 — RESEARCHED_PARTIAL.
+- SND-JA-004 — SOURCE_MAPPED.
 - SND-SRC-0023 reutilizada como baseline con advertencia de fecha.
 - JA-W04-S01 — NINJAL 2026, /r/ vs /d/ con articulación + CSJ.
 - JA-W04-S02 — NINJAL 2024, alternancias p~h~b en contadores.
 - JA-W04-S03 — manual institucional del CSJ, política y mapa amplio de etiquetado segmental.
-- JA-W04-S04 — Kubozono (2015), metadatos y §3 “Consonant inventory” identificados; HOLD_FULLTEXT, sin claims dependientes.
+- JA-W04-S04 — Kubozono (2015), §3 “Consonant inventory” verificado en preview PDF oficial (pp. impresas 6–9); claims C10–C12.
 - Source map local creado conforme a #7320.
 
 ## QA de reapply
@@ -40,4 +40,4 @@ SOURCE_MAPPED / RESEARCHED_PARTIAL salvo que el inventario completo pueda revali
 
 ## Gate
 
-No se promueve a EVIDENCE_CHECKED: el CSJ aporta un mapa segmental amplio de corpus y ya se identificó Kubozono (2015) como síntesis fonológica amplia, pero su §3 debe inspeccionarse en texto completo antes de usarlo para claims o reconciliar el inventario.
+No se promueve a EVIDENCE_CHECKED: la síntesis amplia de Kubozono (2015) ya fue verificada para la sección consonántica y el mapa pasa a SOURCE_MAPPED, pero los IDs locales deben canonicalizarse y todavía falta revisión lingüística independiente.
