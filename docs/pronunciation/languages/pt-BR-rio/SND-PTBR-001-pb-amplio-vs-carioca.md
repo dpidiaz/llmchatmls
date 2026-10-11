@@ -1,6 +1,6 @@
 # SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Idioma:** portugués.
 **Variedad:** Brasil / Río de Janeiro.
 **Dominio:** alcance descriptivo / variación.
@@ -57,9 +57,12 @@ Callou, D. (2009). Um perfil da fala carioca. En S. S. C. Ribeiro, S. B. B. Cost
 
 Projeto NURC-RJ. Faculdade de Letras, Universidade Federal do Rio de Janeiro. Corpus e inquéritos públicos. https://nurcrj.letras.ufrj.br/
 
-## 7. Pendiente R33
+## 7. Auditoría R33
 
-Antes de promover esta entrada a EVIDENCE_CHECKED deben incorporarse localizadores primarios de al menos dos pasajes que documenten la variación interna o el contraste regional que fundamenta la política RIO_CARIOCA.
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED.
+- **Comprobación:** los pasajes de pp. 133–135 documentan contraste entre ciudades y variación social en el fenómeno /S/ en coda, suficiente para justificar que RIO_CARIOCA sea una etiqueta de alcance separada.
+- **Límite:** esto valida la política de alcance, no un inventario completo del portugués carioca ni una generalización sobre el habla de 2026.
 
 ## 8. Nota editorial
 
