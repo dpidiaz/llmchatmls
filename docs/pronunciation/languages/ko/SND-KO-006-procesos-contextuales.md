@@ -33,9 +33,9 @@ No se escribirán fórmulas como “los coreanos siempre pronuncian…” a part
 
 | claim_id | afirmación | source | localizador | alcance | estado |
 |---|---|---|---|---|---|
-| KO006-C01 | Rule 9 codifica neutralización de diversas obstruyentes en coda hacia [ㄱ, ㄷ, ㅂ] | KO-W1-S07 | Standard Pronunciation Rule 9; NIKL Q&A seq 318280 | NORMATIVE | VERIFIED |
-| KO006-C02 | Rule 18 codifica nasalización ante ㄴ/ㅁ | KO-W1-S07 | Rule 18; NIKL Q&A seq 313050 | NORMATIVE | VERIFIED |
-| KO006-C03 | Rule 23 codifica tensificación después de determinadas codas obstruyentes | KO-W1-S07 | Rule 23; NIKL Q&A seq 323814 | NORMATIVE | VERIFIED |
+| KO006-C01 | Rule 9 codifica neutralización de diversas obstruyentes en coda hacia [ㄱ, ㄷ, ㅂ] | SND-SRC-0032 | Standard Pronunciation Rule 9; NIKL Q&A seq 318280 | NORMATIVE | VERIFIED |
+| KO006-C02 | Rule 18 codifica nasalización ante ㄴ/ㅁ | SND-SRC-0032 | Rule 18; NIKL Q&A seq 313050 | NORMATIVE | VERIFIED |
+| KO006-C03 | Rule 23 codifica tensificación después de determinadas codas obstruyentes | SND-SRC-0032 | Rule 23; NIKL Q&A seq 323814 | NORMATIVE | VERIFIED |
 
 ## 7. Pendiente descriptivo
 
