@@ -1,6 +1,6 @@
 # SND-ESGT-004 — Consonantes y realizaciones: mapa inicial
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** español.  
 **Variedad:** Guatemala; encuesta geolingüística nacional con variación regional.  
 **Dominio:** consonantes / fonética / variación.
@@ -96,8 +96,23 @@ Decisiones cerradas:
 
 ## 10. Relacionado con
 
-- SND-ESGT-001 — Alcance y variedades
-- SND-ESGT-002 — Inventario segmental: mapa de evidencia
-- SND-ESGT-005 — /s/ y variación regional
-- SND-FND-006 — Consonantes: parámetros articulatorios
-- SND-FND-017 — Variación
+- SND-ESGT-001 — Alcance y variedades.
+- SND-ESGT-002 — Inventario segmental: mapa de evidencia.
+- SND-ESGT-005 — /s/ y variación regional.
+- SND-ESGT-009 — Contacto lingüístico y alcance.
+- SND-FND-006 — Consonantes: parámetros articulatorios.
+- SND-FND-017 — Variación regional, social, estilística y temporal.
+
+
+## 11. Gate editorial
+
+**LINGUISTIC_REVIEW: PASS_WITH_SOURCE_TERMINOLOGY_WARNING. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+Controles de lectura:
+- “fricativa” aparece como terminología descriptiva de la fuente, no como reclasificación fonética moderna de MLS-SND;
+- la entrada se presenta como **mapa inicial de realizaciones**, no como inventario consonántico canónico;
+- /s/ remite a su entrada específica en vez de duplicar análisis;
+- variantes regionales y minoritarias no se convierten en errores ni en reglas nacionales;
+- no se añade IPA estrecho sin evidencia específica.
+
+La entrada no pasa todavía a READY_FOR_COMPOSITION.
