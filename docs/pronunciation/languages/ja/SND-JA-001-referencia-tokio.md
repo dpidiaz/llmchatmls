@@ -1,6 +1,6 @@
 # SND-JA-001 — Tokio como ancla de referencia y sus límites
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** japonés.
 **Variedad:** Tokio / lengua común para el ancla prosódica.
 **Dominio:** variedad / prosodia.
@@ -43,13 +43,35 @@ Shibata, T. (superv.), Mase, Y., & Sato, R. (Eds.). (1985/2013). 東京語アク
 
 National Institute for Japanese Language and Linguistics. (s. f.). 日本語教育のためのコーパスを利用したオンライン日本語アクセント辞書の開発. https://www.ninjal.ac.jp/research/cr-project/project/pubpro/accentdictionary/
 
-## 7. Nota editorial
+## 7. Entradas relacionadas
 
-REFERENCE_FIXED se limita al papel de ancla prosódica principal; no implica que toda descripción del japonés deba reducirse a Tokio.
+- SND-JA-006 — Acento tonal de Tokio.
+- SND-JA-007 — Variación y cambio acentual.
+- SND-JA-008 — Kana y pronunciación.
+- SND-JA-009 — Kanji, lecturas y pronunciación.
 
-## 8. Auditoría R33
+## 8. Nota editorial
+
+**REFERENCE_FIXED** se limita al papel de ancla prosódica principal; no implica que toda descripción del japonés deba reducirse a Tokio.
+
+Las fechas de los recursos permanecen visibles porque forman parte del alcance de la evidencia, no como nota bibliográfica secundaria.
+
+## 9. Auditoría y gate editorial
 
 - **Fecha:** 2026-10-11.
-- **Resultado:** EVIDENCE_CHECKED.
+- **Resultado R33:** EVIDENCE_CHECKED.
+- **LINGUISTIC_REVIEW:** PASS_WITH_DATE_SCOPE_WARNING.
+- **EDITORIAL_REVIEW:** PASS_WITH_EDITORIAL_CHANGES.
 - **Comprobación:** el recurso Tokyo Accent documenta 12,803 palabras, 19 hablantes, diversidad esperada del acento de Tokio y trabajo de campo de 1982–1984; NINJAL/OJAD declara explícitamente la lengua común (dialecto de Tokio) como referencia de acento para su recurso. La evidencia de variación se atribuye a Tokyo Accent, no se sobreextiende al texto de OJAD. El proyecto OJAD terminó en 2013 y no se usa por sí solo como prueba de vigencia contemporánea.
 - **Límite:** REFERENCE_FIXED se limita al papel de ancla prosódica; no convierte Tokio en descripción universal de todo Japón.
+
+
+## 10. Gate de salida
+
+Esta entrada no pasa todavía a READY_FOR_COMPOSITION.
+
+Condiciones preservadas:
+1. Tokio/lengua común funciona como ancla prosódica, no como japonés universal;
+2. los datos 1982–1984 no se presentan como frecuencia contemporánea;
+3. OJAD documenta una referencia institucional del proyecto, no una actualización continua hasta 2026;
+4. cualquier afirmación contemporánea deberá usar bibliografía actual cuando la fecha sea material.
