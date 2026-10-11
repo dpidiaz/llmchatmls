@@ -1,6 +1,6 @@
 # SND-KO-005 — Estructura silábica: marco y decisiones abiertas
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** coreano  
 **Dominio:** fonología
 
@@ -35,7 +35,7 @@ Primero se revisarán:
 
 ## 5. Gate
 
-**EVIDENCE_CHECKED.** La entrada mantiene deliberadamente una política descriptiva mínima: usa onset/núcleo/coda cuando sean necesarios y no adopta un árbol silábico canónico para resolver debates que no son necesarios para la consulta.
+**LINGUISTIC_REVIEW completado.** La entrada mantiene deliberadamente una política descriptiva mínima: usa onset/núcleo/coda cuando sean necesarios y no adopta un árbol silábico canónico para resolver debates que no son necesarios para la consulta.
 
 
 ## Revisión lingüística 2026-10-11
@@ -44,3 +44,13 @@ Primero se revisarán:
 - Source IDs canónicos y localizadores revisados.
 - Se mantuvo la separación entre norma, descripción empírica y modelo analítico.
 - Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación conceptual y separación entre norma, habla empírica, hangul, romanización e IPA.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
