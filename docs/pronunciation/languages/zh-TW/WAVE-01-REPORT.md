@@ -25,7 +25,7 @@ Construir un primer perfil auditable de Taiwan Mandarin sin tratarlo como una pr
 | SND-ZHTW-005 | EVIDENCE_CHECKED | Tone 1 norte/centro; wave paralela puede superponer |
 | SND-ZHTW-006 | BLOCKED_BY_CONFLICTING_EVIDENCE | Tone 3 sandhi |
 | SND-ZHTW-007 | EVIDENCE_CHECKED | heredada: Zhuyin |
-| SND-ZHTW-009 | DRAFTED / PROVISIONAL_ACCEPT | Hanyu Pinyin como capa auxiliar |
+| SND-ZHTW-009 | EVIDENCE_CHECKED / PROVISIONAL_ACCEPT | Hanyu Pinyin como capa auxiliar; decisión global pendiente |
 | SND-ZHTW-010 | EVIDENCE_CHECKED | sibilantes y nasales finales |
 
 ## Coordinación con otras ramas
