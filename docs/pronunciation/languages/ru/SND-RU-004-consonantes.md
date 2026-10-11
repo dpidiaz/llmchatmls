@@ -1,6 +1,6 @@
 # SND-RU-004 — Consonantes: mapa del sistema descrito
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** consonantes / fonología / fonética.  
 **Alcance:** sistema descrito por SND-SRC-0015.
@@ -10,7 +10,7 @@
 En la Illustration de Yanushevskaya y Bunčić, dos dimensiones tienen especial peso en la organización consonántica:
 
 - la oposición entre consonantes palatalizadas y no palatalizadas;
-- el contraste de sonoridad en obstruyentes donde corresponde.
+- el contraste sordo–sonoro (`voicing`) en obstruyentes donde corresponde.
 
 La primera se desarrolla en SND-RU-005. Esta entrada ofrece el mapa más general del sistema.
 
@@ -20,9 +20,9 @@ El artículo proporciona una tabla de fonemas consonánticos organizada por modo
 
 MLS-SND puede utilizar esa tabla como fuente de referencia para este análisis concreto, pero no copiará el inventario a otra variedad o marco sin comprobarlo.
 
-## 3. Sonoridad
+## 3. Contraste sordo–sonoro (`voicing`)
 
-La fuente afirma que la sonoridad se usa de manera contrastiva en ruso y describe las consonantes sonoras como plenamente sonoras. También señala que las oclusivas sordas del hablante/sistema descrito son no aspiradas.
+La fuente afirma que el contraste sordo–sonoro (`voicing`) se usa de manera contrastiva en ruso y describe las consonantes sonoras como plenamente sonoras. También señala que las oclusivas sordas del hablante/sistema descrito son no aspiradas.
 
 ## 4. Posición final
 
@@ -59,3 +59,10 @@ Yanushevskaya, I., & Bunčić, D. (2015). Russian. *Journal of the International
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS WITH TERMINOLOGY CHANGE → `LINGUISTIC_REVIEW`.
+- **Comprobación:** El inventario se atribuye a la fuente y los procesos contextuales se delegan correctamente a RU-007; se desambigua voicing frente a intensidad.
+- **Control:** no se cambiaron source IDs, localizadores ni transcripciones; cualquier cambio terminológico mantiene el mismo contenido analítico.
