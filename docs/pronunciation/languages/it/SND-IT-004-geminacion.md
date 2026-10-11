@@ -1,7 +1,6 @@
 # SND-IT-004 — Geminación y duración consonántica
 
-**Estado:** EVIDENCE_CHECKED.  
-**Idioma:** italiano.  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
 **Dominio:** fonética / fonología.  
 **Dependencia:** canonicalización de SND-SRC-0028 y revisión lingüística.
 

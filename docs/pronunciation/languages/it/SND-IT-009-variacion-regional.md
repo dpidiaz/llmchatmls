@@ -1,7 +1,6 @@
 # SND-IT-009 — Variación regional y referencia
 
-**Estado:** EVIDENCE_CHECKED.  
-**Idioma:** italiano.  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
 **Dominio:** variación / referencia.  
 **Fuente regional canonicalizada:** SND-SRC-0073.
 

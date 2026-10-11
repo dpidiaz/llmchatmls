@@ -1,7 +1,6 @@
 # SND-IT-001 — Italiano de referencia, variedades regionales y “mainstream Italian”
 
-**Estado:** EVIDENCE_CHECKED.  
-**Idioma:** italiano.  
+**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
 **Dominio:** variedad / alcance descriptivo.
 
 ## 1. Problema editorial
