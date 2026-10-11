@@ -1,6 +1,6 @@
 # SND-ZHTW-008 — Zhuyin e IPA: funciones distintas
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** mandarín de Taiwán.  
 **Dominio:** representación / pronunciación.
 
@@ -72,8 +72,18 @@ Ministry of Education, Taiwan. (2017). *The Manual of the Phonetic Symbols of Ma
 
 International Phonetic Association. (2026). *The IPA Chart*.
 
-Fon, J., & Chuang, Y.-Y. (2025). *When a rise is not only a rise…* https://doi.org/10.1017/S0025100324000100
+Fon, J., & Chuang, Y.-Y. (2024). *When a rise is not only a rise…* https://doi.org/10.1017/S0025100324000100
 
 ## 7. Nota editorial
 
 La secuencia visual es una decisión MLS-SND. La evidencia respalda las funciones distintas y los límites de cada capa, no una equivalencia uno-a-uno.
+
+
+## Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** alcance de variedad, separación fonética/fonología, límites de generalización y función de las capas de representación.
+- **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
+- **Corrección bibliográfica:** Fon & Chuang se alinea a 2024 conforme a SND-SRC-0022; la fecha de publicación web puede ser posterior.
+- **Siguiente gate:** EDITORIAL_REVIEW.
