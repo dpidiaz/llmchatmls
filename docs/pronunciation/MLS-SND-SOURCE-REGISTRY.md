@@ -786,3 +786,67 @@ El registro contiene **50 fuentes** numeradas SND-SRC-0001 a SND-SRC-0050.
 El registro contiene **52 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0052.
 
 SND-SRC-0051 y SND-SRC-0052 se incorporan para fortalecer CMP-001 con controles empíricos independientes sin convertir ejemplos comparativos en descripciones generales de las variedades implicadas.
+
+
+## 23. Canonicalización es-GT y ortografía — wave 02
+
+### SND-SRC-0053 — Español–K’iche’ / espacios vocálicos
+
+- **Tier:** B.
+- **APA 7:** Baird, B. O. (2020). The vowel spaces of Spanish-K’ichee’ bilinguals. En R. Rao (Ed.), *Spanish Phonetics and Phonology in Contact: Studies from Africa, the Americas, and Spain* (pp. 63–82). John Benjamins. https://doi.org/10.1075/ihll.28.03bai
+- **Idioma/variedad:** español de Guatemala y español–K’iche’ en los grupos estudiados.
+- **Cobertura:** comparación acústica de espacios vocálicos de monolingües de español guatemalteco y bilingües español–K’iche’ de dos dialectos de K’iche’.
+- **Localizador disponible:** abstract y estructura del capítulo; para claims más finos usar sección/página del texto completo.
+- **Acceso:** metadatos y abstract abiertos; texto completo sujeto a acceso de la plataforma/editorial.
+- **Limitación:** la evidencia bilingüe de contacto no se generaliza al conjunto del español de Guatemala ni sustituye un inventario acústico nacional.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_ABSTRACT_SCOPE.
+
+### SND-SRC-0054 — Español K’iche’ /f/ y contacto
+
+- **Tier:** B.
+- **APA 7:** Baird, B., & Regan, B. (2025). The status of /f/ in Mayan-accented Spanish. *Studies in Hispanic and Lusophone Linguistics, 18*(1), 1–35. https://doi.org/10.1515/shll-2025-2001
+- **Idioma/variedad:** español de bilingües K’iche’–español del estudio.
+- **Cobertura:** 1,430 tokens de /f/ de 40 bilingües; [f], lenición [h], fortición [p], factores lingüísticos y extralingüísticos, dominancia lingüística, educación y contacto.
+- **Localizadores:** Abstract; §1 Introduction; §6 Conclusions; páginas 1–35 para claims específicos.
+- **Acceso:** Open Access, CC BY 4.0 según el editor.
+- **Limitación:** población bilingüe K’iche’–español y fenómeno /f/; no representa todo el español guatemalteco ni todas las variedades mayas en contacto.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0055 — RAE/ASALE / Ortografía 2010
+
+- **Tier:** A.
+- **APA 7:** Real Academia Española & Asociación de Academias de la Lengua Española. (2010). *Ortografía de la lengua española*. Espasa. https://www.asale.org/obras-academicas/ortografia/ortografia-2010
+- **Idioma/alcance:** español panhispánico; sistema ortográfico.
+- **Cobertura:** descripción del sistema ortográfico, normas de escritura y fundamentos de la ortografía académica.
+- **Localizador:** ficha oficial “Ortografía 2010”, especialmente objetivo y características; para claims internos de la obra usar capítulo/sección/página.
+- **Acceso:** ficha y consulta institucional en línea.
+- **Limitación:** fuente normativa/ortográfica; no es descripción fonética específica de Guatemala ni evidencia de frecuencia de pronunciaciones.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_NORMATIVE.
+
+### SND-SRC-0056 — RAE/ASALE / Ortografía básica §2.4.2
+
+- **Tier:** A.
+- **APA 7:** Real Academia Española & Asociación de Academias de la Lengua Española. (2012). *Ortografía básica de la lengua española*. Espasa. https://www.rae.es/ortografía-básica/uso-de-la-tilde/las-reglas-de-acentuación-gráfica/la-acentuación-gráfica-de-las-palabras-con-secuencias-vocálicas
+- **Idioma/alcance:** español panhispánico; convención ortográfica.
+- **Cobertura usada por MLS-SND:** §2.4.2 sobre secuencias vocálicas; variación de articulación hiato/diptongo/triptongo y distinción entre convenciones ortográficas y pronunciación real.
+- **Localizador:** §2.4.2, párrafos introductorios y párrafo “Por todo ello…” sobre convenciones a efectos ortográficos.
+- **Acceso:** gratuito en el sitio oficial RAE/ASALE.
+- **Limitación:** no describe específicamente la pronunciación guatemalteca; se usa para separar la capa ortográfica de la fonética.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_NORMATIVE.
+
+## 24. Resultado del registro v0.12
+
+El registro contiene **56 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0056.
+
+Mapeo de IDs locales resuelto en esta wave:
+
+- `CMP-PROP-001` → `SND-SRC-0051`;
+- `CMP-PROP-002` → `SND-SRC-0052`;
+- `ESGT-W2-S01` → `SND-SRC-0053`;
+- `ESGT-W04-SRC-01` → `SND-SRC-0054`;
+- `ESGT-W04-SRC-02` → `SND-SRC-0055`;
+- `ESGT-W04-SRC-03` → `SND-SRC-0056`.
