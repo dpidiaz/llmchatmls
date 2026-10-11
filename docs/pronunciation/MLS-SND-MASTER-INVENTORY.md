@@ -80,7 +80,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | EVIDENCE_CHECKED |
+| SND-ENUS-001 | Por qué no usamos “General American” como una sola voz | LINGUISTIC_REVIEW |
 | SND-ENUS-002 | Sistema consonántico: mapa de contrastes | SOURCE_MAPPED |
 | SND-ENUS-003 | Sistemas vocálicos y variación regional | SOURCE_MAPPED |
 | SND-ENUS-004 | Reducción vocálica | INVENTORY |
@@ -88,7 +88,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-ENUS-006 | Habla conectada | INVENTORY |
 | SND-ENUS-007 | Ritmo y prominencia | INVENTORY |
 | SND-ENUS-008 | Entonación | INVENTORY |
-| SND-ENUS-009 | Southern Michigan como perfil documentado | EVIDENCE_CHECKED |
+| SND-ENUS-009 | Southern Michigan como perfil documentado | LINGUISTIC_REVIEW |
 | SND-ENUS-010 | Comparaciones con español/portugués | BLOCKED_BY_PROFILES |
 
 ### 🇧🇷 Portugués brasileño — referencia carioca — PTBR
