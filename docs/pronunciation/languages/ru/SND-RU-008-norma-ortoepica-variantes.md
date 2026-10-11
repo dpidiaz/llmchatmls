@@ -1,6 +1,6 @@
 # SND-RU-008 — Norma ortoépica y variantes
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** pronunciación / norma / variación.  
 **Alcance:** metadescripción institucional de SND-SRC-0016.
@@ -60,3 +60,10 @@ Esta entrada documenta qué tipo de evidencia aporta la obra; no reproduce ni re
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** La entrada delimita qué puede sostener la metadescripción institucional y exige consultar entradas concretas para pronunciaciones léxicas.
+- **Control:** no se cambiaron source IDs, localizadores ni transcripciones; cualquier cambio terminológico mantiene el mismo contenido analítico.
