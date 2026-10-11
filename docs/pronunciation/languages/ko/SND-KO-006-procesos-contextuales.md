@@ -13,11 +13,11 @@ Por ello esta entrada registra primero procesos normativos; la descripción de u
 
 ## 2. Neutralización en coda
 
-La Standard Pronunciation Rule 9 del NIKL prescribe que varios obstruyentes escritos se realizan, en posición final o antes de consonante, mediante las categorías finales [ㄱ, ㄷ, ㅂ] correspondientes. La explicación institucional sitúa esta regla dentro de la restricción de consonantes posibles en coda.
+La Standard Pronunciation Rule 9 del NIKL prescribe que varios obstruyentes escritos se realizan, en posición final o antes de consonante, con las formas que el NIKL representa en Hangul como ㄱ, ㄷ y ㅂ. La explicación institucional sitúa esta regla dentro de la restricción de consonantes posibles en coda.
 
 ## 3. Nasalización
 
-La Rule 18 prescribe que obstruyentes finales representados por las series ㄱ/ㄷ/ㅂ se realizan como [ㅇ, ㄴ, ㅁ] respectivamente ante ㄴ o ㅁ. El NIKL identifica explícitamente el proceso como 비음화 (nasalización).
+La Rule 18 prescribe que obstruyentes finales representados por las series ㄱ/ㄷ/ㅂ se realizan mediante las formas que el NIKL representa en Hangul como ㅇ, ㄴ y ㅁ, respectivamente, ante ㄴ o ㅁ. El NIKL identifica explícitamente el proceso como 비음화 (nasalización).
 
 ## 4. Tensificación
 
@@ -33,7 +33,7 @@ No se escribirán fórmulas como “los coreanos siempre pronuncian…” a part
 
 | claim_id | afirmación | source | localizador | alcance | estado |
 |---|---|---|---|---|---|
-| KO006-C01 | Rule 9 codifica neutralización de diversas obstruyentes en coda hacia [ㄱ, ㄷ, ㅂ] | SND-SRC-0032 | Standard Pronunciation Rule 9; NIKL Q&A seq 318280 | NORMATIVE | VERIFIED |
+| KO006-C01 | Rule 9 codifica neutralización de diversas obstruyentes en coda hacia las formas representadas por NIKL como ㄱ, ㄷ y ㅂ | SND-SRC-0032 | Standard Pronunciation Rule 9; NIKL Q&A seq 318280 | NORMATIVE | VERIFIED |
 | KO006-C02 | Rule 18 codifica nasalización ante ㄴ/ㅁ | SND-SRC-0032 | Rule 18; NIKL Q&A seq 313050 | NORMATIVE | VERIFIED |
 | KO006-C03 | Rule 23 codifica tensificación después de determinadas codas obstruyentes | SND-SRC-0032 | Rule 23; NIKL Q&A seq 323814 | NORMATIVE | VERIFIED |
 
