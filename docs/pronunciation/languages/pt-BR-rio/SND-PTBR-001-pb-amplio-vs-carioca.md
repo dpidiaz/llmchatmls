@@ -2,7 +2,8 @@
 
 **Estado:** EVIDENCE_CHECKED.
 **Idioma:** portugués.
-**Variedad:** Brasil / Río de Janeiro.
+**Variedad:** PB_BROAD y RIO_CARIOCA, según el claim.
+**Tipo de alcance:** decisión editorial / CORPUS_OBSERVED cuando se citan muestras NURC-RJ.
 **Dominio:** alcance descriptivo / variación.
 
 ## 1. Decisión de alcance
@@ -69,8 +70,16 @@ Projeto NURC-RJ. Faculdade de Letras, Universidade Federal do Rio de Janeiro. Co
 
 La taxonomía PB_BROAD / RIO_CARIOCA es propia de MLS-SND y sirve para controlar alcance; no es terminología de Callou.
 
-## 9. Revisión lingüística wave 01
+## 9. Entradas relacionadas
 
-- **Resultado:** PASS para la política de alcance, con revisión especializada del perfil aún pendiente.
-- **Ajuste:** los claims de alcance quedan ligados a pasajes sustantivos de variación regional/social, no solo a metadatos editoriales.
-- **Estado:** EVIDENCE_CHECKED mantenido.
+- **SND-PTBR-006** — Sibilante /S/ en coda y variación carioca.
+- **SND-PTBR-007** — Róticas y variación.
+- **SND-PTBR-008** — /l/ en coda y variación.
+- **SND-FND-017** — Variación.
+
+## 10. Gate
+
+- **Revisión lingüística:** PASS para la política de alcance, con advertencias de procedencia y submuestra preservadas.
+- **Estado evidencial:** EVIDENCE_CHECKED mantenido.
+- **Pendiente editorial:** el perfil no puede considerarse completo hasta integrar y revisar los fenómenos todavía abiertos en PTBR-002…010.
+- **No implica:** READY_FOR_COMPOSITION ni generalización del habla carioca a todo PB.
