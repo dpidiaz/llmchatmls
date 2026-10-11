@@ -1,6 +1,6 @@
 # SND-FND-011 — Acento y prominencia
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
@@ -54,4 +54,4 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 
 - **Resultado:** PASS con aclaración.
 - **Ajuste:** se evita convertir “higher pitch” de la fuente introductoria en una regla universal sobre F0.
-- **Siguiente estado recomendado:** EDITORIAL_REVIEW para esta entrada transversal.
+- **Siguiente etapa:** EDITORIAL_REVIEW.
