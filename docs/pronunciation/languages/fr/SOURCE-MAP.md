@@ -83,15 +83,19 @@ Griffiths, J. M., & Renwick, M. E. L. (2025). Reconsidering the mid-vowel system
 
 ---
 
-### FR-SRC-P03 — Estudio contemporáneo de vocales nasales parisinas
+### FR-SRC-P03 — Mooney 2023, vocales nasales parisinas
 
-*The role of speaker sex and sexuality in an ongoing sound change: Nasal vowels in Parisian French*. *Journal of French Language Studies*.
+Mooney, D. (2023). The role of speaker sex and sexuality in an ongoing sound change: Nasal vowels in Parisian French. *Journal of French Language Studies, 33*(3), 357–384. https://doi.org/10.1017/S0959269523000157
+
+**Acceso:** Open Access, CC BY 4.0.
 
 **Cobertura útil:** diferencia entre norma prescriptiva y norma hablada supralocal; cambio contemporáneo de vocales nasales parisinas.
 
-**Dato de alcance verificado:** la discusión distingue un sistema prescriptivo de cuatro vocales nasales de una norma hablada supralocal de tres en la zona considerada, y documenta cambio en curso en París.
+**Localizadores:** §3 “Linguistic background”, pp. del artículo 357–384; tablas/figuras del análisis según claim.
 
-**Estado propuesto:** SOURCE_MAPPED; completar referencia APA exacta antes de alta global.
+**Dato de alcance verificado:** la discusión distingue un sistema prescriptivo de cuatro vocales nasales de una norma hablada supralocal de tres en el alcance tratado y documenta cambio en curso en París.
+
+**Estado propuesto:** ADMITTED.
 
 ## Decisión de alcance recomendada
 
