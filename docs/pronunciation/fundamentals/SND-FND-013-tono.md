@@ -1,6 +1,6 @@
 # SND-FND-013 — Tono
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** prosodia / fonología.
 **Idioma:** transversal.
 
@@ -67,4 +67,4 @@ Las categorías específicas de tono no se definirán a partir de esta fuente in
 
 - **Resultado:** PASS tras corrección terminológica.
 - **Ajuste:** F0 y pitch dejan de presentarse como términos intercambiables.
-- **Siguiente estado recomendado:** EDITORIAL_REVIEW para esta entrada transversal.
+- **Siguiente etapa:** EDITORIAL_REVIEW.
