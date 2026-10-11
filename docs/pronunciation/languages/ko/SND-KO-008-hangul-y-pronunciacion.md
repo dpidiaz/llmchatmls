@@ -35,9 +35,9 @@ No todas las entradas necesitan todas las capas.
 
 | claim_id | afirmación | source | localizador | estado |
 |---|---|---|---|---|
-| KO008-C01 | La pronunciación estándar distingue entre grafía final y realización prescrita en coda | KO-W1-S07 | Rule 9 | VERIFIED |
-| KO008-C02 | El contexto nasal modifica la realización prescrita de ciertas codas | KO-W1-S07 | Rule 18 | VERIFIED |
-| KO008-C03 | El contexto consonántico puede producir tensificación prescrita no visible como simple lectura letra-a-letra | KO-W1-S07 | Rule 23 | VERIFIED |
+| KO008-C01 | La pronunciación estándar distingue entre grafía final y realización prescrita en coda | KO-W1-C07 | Rule 9 | VERIFIED |
+| KO008-C02 | El contexto nasal modifica la realización prescrita de ciertas codas | KO-W1-C07 | Rule 18 | VERIFIED |
+| KO008-C03 | El contexto consonántico puede producir tensificación prescrita no visible como simple lectura letra-a-letra | KO-W1-C07 | Rule 23 | VERIFIED |
 
 ## 5. Nota editorial
 
