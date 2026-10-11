@@ -356,13 +356,13 @@ No se llenará el registro para alcanzar una cuota numérica. Cada fuente nueva 
 ### SND-SRC-0022 — Taiwan Mandarin / variación tonal regional
 
 - **Tier:** B
-- **APA 7:** *When a rise is not only a rise: An acoustic analysis of the impressionistic distinction between northern and central Taiwan Mandarin using Tone 1 as an example*. (2025). *Journal of the International Phonetic Association*.
-- **URL:** https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/when-a-rise-is-not-only-a-rise-an-acoustic-analysis-of-the-impressionistic-distinction-between-northern-and-central-taiwan-mandarin-using-tone-1-as-an-example/3523B438DD9F526443D5661BB6131A57
+- **APA 7:** Fon, J., & Chuang, Y.-Y. (2024). When a rise is not only a rise: An acoustic analysis of the impressionistic distinction between northern and central Taiwan Mandarin using Tone 1 as an example. *Journal of the International Phonetic Association, 54*(2), 738–769. https://doi.org/10.1017/S0025100324000100
 - **Idioma/variedad:** mandarín de Taiwán; norte vs. centro.
-- **Cobertura:** análisis acústico de variación tonal; el artículo documenta explícitamente variación fonética interna de Taiwan Mandarin.
-- **Localizador:** sección 1 “Introduction” y secciones experimentales/tablas/figuras correspondientes.
-- **Acceso:** artículo web de Cambridge; copyright de autores indicado.
-- **Limitación:** se centra en Tone 1 y contraste regional concreto; no generalizar a todo el sistema tonal.
+- **Cobertura:** análisis acústico de Tone 1 y variación regional; 53 hablantes en la muestra descrita por el artículo.
+- **Localizador:** secciones metodológicas, resultados, tablas y figuras del artículo; usar localizador exacto por claim.
+- **Acceso:** ficha/artículo de Cambridge; metadatos institucionales de NTU.
+- **Limitación:** se centra en Tone 1 y un contraste regional concreto; no generalizar a todo el sistema tonal.
+- **Nota bibliográfica:** Cambridge puede mostrar fecha de publicación web posterior, pero el volumen/issue canónico es JIPA 54(2), 2024.
 - **Verificado:** 2026-10-11.
 - **Estado:** ADMITTED.
 
@@ -475,3 +475,223 @@ La prioridad siguiente sigue siendo **cerrar vacíos**, no aumentar el conteo: e
 El registro contiene **27 fuentes** numeradas SND-SRC-0001 a SND-SRC-0027.
 
 SND-SRC-0027 se incorpora como control tipológico de la revisión lingüística de fundamentos; no reemplaza fuentes prosódicas específicas de cada idioma.
+
+
+## 17. Canonicalización de fuentes multilingües — wave 01
+
+### SND-SRC-0028 — Italiano / GEMMA lexical gemination
+
+- **Tier:** B.
+- **APA 7:** Di Benedetto, M.-G., & De Nardis, L. (2022). The GEMMA speech database: VCV and VCCV words for the acoustic analysis of consonants and lexical gemination in Italian. *Data in Brief, 43*, 108373. https://doi.org/10.1016/j.dib.2022.108373
+- **Idioma/variedad:** italiano estándar; hablantes adultos criados/residentes en Roma según el diseño del conjunto.
+- **Cobertura:** consonantes simples vs. geminadas; medidas de duración en materiales VCV/VCCV.
+- **Localizadores:** Abstract; Value of the Data; Specifications Table.
+- **Acceso:** abierto; PMCID PMC9256837.
+- **Limitación:** corpus controlado y centrado en geminación; no representa toda la variación italiana.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0029 — Italiano / Treccani, Fonetica
+
+- **Tier:** B/C.
+- **APA 7:** Bertinetto, P. M. (2010). Fonetica. En *Enciclopedia dell’Italiano*. Treccani. https://www.treccani.it/enciclopedia/fonetica_%28Enciclopedia-dell%27Italiano%29/
+- **Idioma/variedad:** italiano; descripción enciclopédica con variación regional.
+- **Cobertura:** fonética/fonología, geminación, cantidad, procesos y variación.
+- **Localizadores:** §3.2 para geminación; sección de prosodia/cantidad; §6 para variación regional cuando corresponda.
+- **Acceso:** gratuito.
+- **Limitación:** recurso enciclopédico; para claims experimentales finos se prefieren estudios específicos.
+- **Estado:** ADMITTED_AS_REFERENCE.
+
+### SND-SRC-0030 — Alemán de Austria / variación de -ig
+
+- **Tier:** B.
+- **APA 7:** Lanwermeyer, M., Fanta-Jende, J., Lenz, A. N., & Korecky-Kröll, K. (2019). Competing norms of standard pronunciation. Phonetic analyses on the -ig-variation in Austria. *Dialectologia et Geolinguistica, 27*(1), 143–175. https://doi.org/10.1515/dialect-2019-0008
+- **Idioma/variedad:** alemán estándar de Austria.
+- **Cobertura:** variación fonética de -ig; 52 hablantes, dos generaciones y cobertura regional austríaca según el estudio.
+- **Localizador:** pp. 143–175; metodología/resultados por claim.
+- **Limitación:** fenómeno específico; no es descripción completa del estándar austríaco.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0031 — Swiss Standard German / vocales
+
+- **Tier:** B.
+- **APA 7:** Zihlmann, U. B. (2023). Vowel quality in four Alemannic dialects and its influence on the respective varieties of Swiss Standard German. *Journal of the International Phonetic Association, 53*(1), 1–28. https://doi.org/10.1017/S0025100320000357
+- **Publicación online:** 2021-02-18.
+- **Idioma/variedad:** cuatro dialectos alemánicos y sus variedades correspondientes de Swiss Standard German.
+- **Cobertura:** calidad vocálica y efecto de dialectos alemánicos sobre SSG.
+- **Localizadores:** Abstract; Methods; Results; Discussion.
+- **Acceso:** Open Access en Cambridge.
+- **Limitación:** vocales/áreas concretas; no representa toda la fonética del SSG.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0032 — Coreano / Standard Pronunciation Rules
+
+- **Tier:** A.
+- **Institución:** National Institute of Korean Language.
+- **Título:** *표준 발음법* [Standard Pronunciation Rules].
+- **URL:** https://www.korean.go.kr/front/page/pageView.do?mn_id=94&page_id=P000097
+- **Idioma/variedad:** coreano estándar; norma institucional.
+- **Cobertura:** consonantes/vocales, longitud, pronunciación de coda, asimilación, tensificación e inserción.
+- **Localizador:** reglas/capítulos individuales; Principle 1 y comentario institucional para alcance.
+- **Dato de alcance:** la explicación institucional vincula el estándar con el habla moderna de Seúl ampliamente usada por hablantes educados.
+- **Limitación:** fuente normativa; no equivale a corpus exhaustivo del habla espontánea.
+- **Estado:** ADMITTED_NORMATIVE.
+
+### SND-SRC-0033 — Coreano de Seúl / cambio en oclusivas
+
+- **Tier:** B.
+- **APA 7:** Bang, H.-Y., Sonderegger, M., Kang, Y., Clayards, M., & Yoon, T.-J. (2018). The emergence, progress, and impact of sound change in progress in Seoul Korean: Implications for mechanisms of tonogenesis. *Journal of Phonetics, 66*, 120–144.
+- **Idioma/variedad:** coreano de Seúl.
+- **Cobertura:** cambio en curso en el contraste de oclusivas; relación VOT/f0.
+- **Localizador:** pp. 120–144; secciones de métodos/resultados según claim.
+- **Limitación:** foco en cambio de oclusivas, especialmente posición inicial relevante al estudio.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0034 — Coreano de Seúl / vocales monoptongales
+
+- **Tier:** B.
+- **APA 7:** Kang, J., & Kong, E. J. (2016). Static and dynamic spectral properties of the monophthong vowels in Seoul Korean: Implication on sound change. *Phonetics and Speech Sciences, 8*(4), 39–47. https://doi.org/10.13064/KSSS.2016.8.4.039
+- **Idioma/variedad:** coreano de Seúl; habla espontánea del Seoul Corpus.
+- **Cobertura:** siete vocales monoptongales; diferencias por edad/género y cambio vocálico.
+- **Localizador:** pp. 39–47; abstract, métodos, resultados.
+- **Limitación:** muestra y periodo concretos; no congelar como sistema atemporal.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0035 — Coreano de Seúl / cambio de /o/
+
+- **Tier:** B.
+- **APA 7:** Igeta, T., Sonu, M., & Arai, T. (2014). Sound change of /o/ in modern Seoul Korean: Focused on relations with acoustic characteristics and perception. *Phonetics and Speech Sciences, 6*(3), 109–119. https://doi.org/10.13064/KSSS.2014.6.3.109
+- **Idioma/variedad:** coreano de Seúl.
+- **Cobertura:** producción/percepción de /o/ y relación con /u/ en hablantes jóvenes.
+- **Localizador:** pp. 109–119; producción, percepción y resultados.
+- **Limitación:** fenómeno y grupo etario concretos.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0036 — Coreano de Seúl / /e/–/ɛ/
+
+- **Tier:** B.
+- **APA 7:** Chung, I. (2022). On the phonemic status of the vowels /e/ ㅔ and /ɛ/ ㅐ and their merger in modern Seoul Korean. *Korean Journal of Linguistics, 47*(4), 857–877. https://doi.org/10.18855/lisoko.2022.47.4.009
+- **Idioma/variedad:** coreano moderno de Seúl.
+- **Cobertura:** estatus fonémico y fusión /e/–/ɛ/.
+- **Localizador:** pp. 857–877; usar secciones concretas por claim.
+- **Limitación:** presenta una posición analítica argumentada; no convertirla en consenso universal sin contraste.
+- **Estado:** ADMITTED_WITH_ANALYTICAL_SCOPE.
+
+### SND-SRC-0037 — Coreano de Seúl / Accentual Phrase
+
+- **Tier:** B.
+- **APA 7:** Jun, S.-A. (1998). The Accentual Phrase in the Korean prosodic hierarchy. *Phonology, 15*(2), 189–226. https://doi.org/10.1017/S0952675798003571
+- **Idioma/variedad:** coreano estándar/de Seúl dentro del modelo del artículo.
+- **Cobertura:** Accentual Phrase y jerarquía prosódica.
+- **Localizador:** pp. 189–226; secciones específicas por claim.
+- **Limitación:** modelo analítico; no usar “Accentual Phrase” como equivalente de acento léxico.
+- **Estado:** ADMITTED_MODEL_REFERENCE.
+
+### SND-SRC-0038 — Coreano de Seúl / focus prosody
+
+- **Tier:** B.
+- **APA 7:** Lee, Y.-c., & Cho, S. (2020). Focus Prosody Varies by Phrase-Initial Tones in Seoul Korean: Production, Perception, and Automatic Classification. *Languages, 5*(4), 64. https://doi.org/10.3390/languages5040064
+- **Idioma/variedad:** coreano de Seúl.
+- **Cobertura:** foco prosódico y relación con tonos iniciales de frase.
+- **Localizador:** Abstract; §1 y secciones experimentales/resultados según claim.
+- **Acceso:** Open Access.
+- **Limitación:** foco prosódico; no es descripción completa de la prosodia coreana.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0039 — Francés / normas de pronunciación panfrancófonas
+
+- **Tier:** B.
+- **APA 7:** Chalier, M. (2021). *Les normes de prononciation du français: Une étude perceptive panfrancophone*. De Gruyter.
+- **Repositorio:** https://e-book.fwf.ac.at/o:1567
+- **Idioma/variedad:** París, Québec y Suiza francófona en el diseño del estudio.
+- **Cobertura:** producción, percepción, representaciones y pluralidad de normas.
+- **Localizadores:** capítulos 4–7; páginas exactas por claim.
+- **Acceso:** Open Access, CC BY 4.0.
+- **Limitación:** modela normas en las regiones estudiadas; no representa toda la francofonía.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0040 — Francés parisino / vocales medias
+
+- **Tier:** B.
+- **APA 7:** Griffiths, J. M., & Renwick, M. E. L. (2025). Reconsidering the mid-vowel system of Parisian French: Phonetic and phonological factors. *Isogloss. Open Journal of Romance Linguistics, 11*(5), 1–17. https://doi.org/10.5565/rev/isogloss.503
+- **Idioma/variedad:** francés parisino.
+- **Cobertura:** /e, ɛ/, /o, ɔ/, /ø, œ/; contraste marginal y variación.
+- **Localizador:** pp. 1–17; métodos/resultados por claim.
+- **Acceso:** Open Access, CC BY 4.0.
+- **Limitación:** vocales medias/parisino; no generalizar al francés completo.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0041 — Francés parisino / vocales nasales
+
+- **Tier:** B.
+- **APA 7:** Mooney, D. (2023). The role of speaker sex and sexuality in an ongoing sound change: Nasal vowels in Parisian French. *Journal of French Language Studies, 33*(3), 357–384. https://doi.org/10.1017/S0959269523000157
+- **Idioma/variedad:** francés parisino.
+- **Cobertura:** cambio en curso de vocales nasales y variación sociolingüística.
+- **Localizador:** pp. 357–384; Linguistic Background, Methodology, Results.
+- **Acceso:** Open Access.
+- **Limitación:** fenómeno y población del estudio; no generalizar a toda la francofonía.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0042 — Taiwan Mandarin / Tone 3 sandhi
+
+- **Tier:** B.
+- **APA 7:** Myers, J., & Tsay, J. (2003). Investigating the phonetics of Mandarin tone sandhi. *Taiwan Journal of Linguistics, 1*(1), 29–68. https://doi.org/10.6519/TJL.2003.1(1).2
+- **Idioma/variedad:** incluye Taiwan Mandarin dentro del contraste de variedades.
+- **Cobertura:** evidencia fonética sobre Tone 3 sandhi y yi-sandhi.
+- **Localizador:** pp. 29–68; abstract, metodología y secciones experimentales.
+- **Acceso:** PDF de Taiwan Journal of Linguistics.
+- **Limitación:** debe contrastarse con literatura posterior; no usar como última palabra sobre el análisis.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0043 — Taiwan Mandarin / representación tonal propuesta
+
+- **Tier:** B.
+- **APA 7:** Huang, K. (2017). From pitch contour variation to tone change: An analysis of the phonological representations of the tones in Taiwan Mandarin. *International Journal of Chinese Linguistics, 4*(2), 273–307. https://doi.org/10.1075/ijchl.16016.hua
+- **Idioma/variedad:** Taiwan Mandarin.
+- **Cobertura:** propuesta analítica fonológica del sistema tonal basada en experimentos acústicos.
+- **Localizador:** pp. 273–307.
+- **Limitación:** propuesta analítica concreta; no etiquetarla como única representación posible.
+- **Estado:** ADMITTED_WITH_ANALYTICAL_SCOPE.
+
+### SND-SRC-0044 — Mandarin / inventario canónico y variantes
+
+- **Tier:** B.
+- **APA 7:** Fon, J. (2020). The Phonetic Realizations of the Mandarin Phoneme Inventory: The Canonical and the Variants. En H.-M. Liu, F.-M. Tsao, & P. Li (Eds.), *Speech Perception, Production and Acquisition: Multidisciplinary Approaches in Chinese Languages* (pp. 11–36). Springer. https://doi.org/10.1007/978-981-15-7606-5_2
+- **Idioma/variedad:** Mandarin; compara variantes de Taiwán, Singapur y China.
+- **Cobertura:** inventario canónico usado por el capítulo y variantes fonéticas regionales.
+- **Localizador:** pp. 11–36; subsecciones por fenómeno.
+- **Limitación:** el inventario canónico del capítulo no debe etiquetarse automáticamente como inventario exclusivo de Taiwan Mandarin.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0045 — Taiwan Mandarin / mergers de nasales finales
+
+- **Tier:** B.
+- **APA 7:** Fon, J., Hung, J.-M., Huang, Y.-H., & Hsu, H.-J. (2011). Dialectal variations on syllable-final nasal mergers in Taiwan Mandarin. *Language and Linguistics, 12*(2), 273–311.
+- **Idioma/variedad:** Taiwan Mandarin; norte/sur.
+- **Cobertura:** mergers de nasales finales y variación dialectal/social.
+- **Localizador:** pp. 273–311.
+- **Limitación:** fenómeno específico.
+- **Estado:** ADMITTED.
+
+### SND-SRC-0046 — Taiwan Mandarin / mergers de sibilantes
+
+- **Tier:** B.
+- **APA 7:** Chiu, C., Wei, P.-C., Noguchi, M., & Yamane, N. (2020). Sibilant Fricative Merging in Taiwan Mandarin: An Investigation of Tongue Postures using Ultrasound Imaging. *Language and Speech, 63*(4), 877–897. https://doi.org/10.1177/0023830919896386
+- **Idioma/variedad:** Taiwan Mandarin.
+- **Cobertura:** [s]–[ʂ]–[ɕ], merger variable, articulación por ultrasonido y condicionamiento contextual.
+- **Localizador:** pp. 877–897; métodos/resultados.
+- **Acceso:** manuscrito en PMC; metadatos PubMed/NTU.
+- **Limitación:** fricativas sibilantes; no descripción segmental completa.
+- **Estado:** ADMITTED.
+
+## 18. Resultado del registro v0.7
+
+El registro contiene **46 fuentes** numeradas SND-SRC-0001 a SND-SRC-0046.
+
+La canonicalización mantiene separadas:
+- fuentes normativas;
+- fuentes descriptivas;
+- modelos analíticos;
+- corpora/datasets;
+- estudios de fenómenos específicos.
+
+La existencia de un ID global no convierte automáticamente todos los claims asociados en EVIDENCE_CHECKED: cada entrada conserva su propio gate claim ↔ source ↔ locator.
