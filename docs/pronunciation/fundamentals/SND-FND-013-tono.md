@@ -1,12 +1,12 @@
 # SND-FND-013 — Tono
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** prosodia / fonología.
 **Idioma:** transversal.
 
 ## 1. Qué significa “tono” aquí
 
-MLS-SND reservará **tono** para patrones de altura tonal o frecuencia fundamental que cumplen una función lingüística documentada dentro de un sistema.
+MLS-SND reservará **tono** para categorías o patrones de altura tonal con función lingüística documentada dentro de un sistema. La frecuencia fundamental (F0) puede ser un correlato acústico central de esa altura percibida, pero no se usarán “pitch” y “F0” como términos físicamente idénticos.
 
 No utilizará “tono” como sinónimo general de entonación.
 
@@ -61,3 +61,10 @@ Las categorías específicas de tono no se definirán a partir de esta fuente in
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## 9. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS WITH CHANGE → `LINGUISTIC_REVIEW`.
+- **Ajuste:** se distinguió la categoría/percepción tonal de su correlato acústico F0.
+- **Salvaguarda:** tono, acento tonal y entonación siguen separados; las categorías específicas pertenecen a los perfiles y a sus tradiciones analíticas.
