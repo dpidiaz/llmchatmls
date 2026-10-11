@@ -1,6 +1,6 @@
 # SND-CMP-001 — Cómo comparar sonidos sin asumir identidad
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Dominio:** comparación / fonética / fonología.  
 **Idioma:** transversal.
 
@@ -16,7 +16,9 @@ La comparación es una ayuda de orientación; no sustituye la descripción.
 
 Uso excepcional.
 
-Solo se empleará cuando la evidencia permita sostener que, para el nivel de detalle relevante, las realizaciones comparadas pueden tratarse como equivalentes dentro del propósito de la entrada.
+Solo se empleará cuando la evidencia permita sostener que, **para una dimensión y un nivel de granularidad declarados**, las realizaciones comparadas pueden tratarse como equivalentes dentro del propósito de la entrada.
+
+La entrada deberá decir qué está igualando: por ejemplo, un rasgo articulatorio concreto, una categoría funcional o una realización bajo un contexto delimitado. **IDENTIDAD DOCUMENTADA nunca significa identidad absoluta en todas las dimensiones.**
 
 No se deduce identidad porque dos fuentes usen el mismo grafema o el mismo símbolo IPA amplio.
 
@@ -30,7 +32,7 @@ La entrada debe decir **en qué se parecen y en qué no**.
 
 Se utiliza para orientar al lector hacia una configuración articulatoria conocida sin afirmar equivalencia fonética.
 
-Debe quedar explícito que es un punto de partida.
+Debe quedar explícito que es un punto de partida y qué dimensiones deja fuera. Si el contraste objetivo depende de duración, VOT, fonación, coordinación gestual, F0 u otra pista acústica/prosódica material, una semejanza de postura articulatoria **no basta como regla de producción**.
 
 ### SIN EQUIVALENTE DIRECTO ÚTIL
 
@@ -80,15 +82,17 @@ Para MLS-SND, la inferencia permitida es metodológica:
 
 No se infiere aquí una realización única para todo el español ni para todo el inglés; cualquier descripción de variedades concretas sigue requiriendo sus propias fuentes.
 
-### 5.2 /ɨ/ como notación compartida mientras se investigan realizaciones físicas
+### 5.2 Categorías comparables y realizaciones físicas distintas
 
-Cavar et al. (2025) comparan vocales altas centrales de polaco, ucraniano y ruso. El estudio utiliza /ɨ/ de manera común para facilitar la presentación, a la vez que investiga si las realizaciones físicas son suficientemente semejantes para justificar esa notación y documenta diferencias articulatorias entre las lenguas.
+Cavar et al. (2025) comparan vocales altas centrales o centralizadas funcionalmente correspondientes en polaco, ucraniano y ruso. Polaco y ruso se transcriben a menudo con [ɨ], mientras que la vocal ucraniana comparada aparece también con [ɪ] en la literatura que discute el estudio.
+
+El resultado relevante para MLS-SND no depende de fingir una notación idéntica: el trabajo muestra diferencias articulatorias medibles entre categorías cercanas y funcionalmente comparables.
 
 La consecuencia editorial es:
 
-> **una transcripción amplia compartida puede ser útil sin demostrar identidad fonética.**
+> **una etiqueta comparativa, una categoría funcionalmente correspondiente o incluso una notación amplia parecida no demuestran identidad fonética.**
 
-Este control no autoriza a extrapolar esas realizaciones a otras lenguas que empleen el mismo símbolo.
+Este control no autoriza a extrapolar esas realizaciones a otras lenguas ni a convertir correspondencia funcional en equivalencia articulatoria.
 
 ## 6. Orden de explicación
 
@@ -144,8 +148,10 @@ Una comparación solo puede pasar a edición final si:
 - la realización objetivo está documentada;
 - la variedad objetivo está delimitada;
 - la realización usada como punto de comparación también está documentada o claramente descrita;
-- se especifica el nivel de semejanza;
-- no se infiere identidad desde grafía;
+- se especifica el nivel de semejanza y la **dimensión/granularidad** comparada;
+- la variedad, contexto y fecha de ambos lados de la comparación están delimitados cuando son materiales;
+- no se infiere identidad desde grafía ni desde un símbolo IPA amplio compartido;
+- una aproximación articulatoria no sustituye pistas acústicas/prosódicas necesarias para el contraste;
 - cualquier diferencia material para el lector está mencionada.
 
 ## 11. Evidencia R33
@@ -156,7 +162,7 @@ Una comparación solo puede pasar a edición final si:
 | CMP001-C02 | La fonética y la fonología describen niveles relacionados pero distintos del sistema sonoro | SND-SRC-0024 | cap. 3 “Phonetics” + cap. 4 “Phonology” | introductorio/transversal | VERIFIED |
 | CMP001-C03 | Las lenguas presentan restricciones propias sobre combinaciones/distribución de sonidos | SND-SRC-0024 | §4.2 “Phonotactics” | introductorio/transversal | VERIFIED |
 | CMP001-C04 | Compartir una categoría transcrita /p/ entre español e inglés no implica la misma implementación fonética; Lee e Iverson ejemplifican valores de VOT diferentes | SND-SRC-0051 | introducción, pasaje sobre Spanish/English /p/ y VOT | control metodológico | VERIFIED |
-| CMP001-C05 | El uso compartido de /ɨ/ para presentación comparativa puede coexistir con diferencias físicas investigadas y documentadas entre lenguas | SND-SRC-0052 | §1 + resultados/discusión + conclusiones | polaco/ucraniano/ruso; control metodológico | VERIFIED |
+| CMP001-C05 | Vocales altas centrales/centralizadas funcionalmente correspondientes en polaco, ucraniano y ruso presentan diferencias articulatorias medibles; la comparabilidad funcional/notacional no implica identidad física | SND-SRC-0052 | abstract + §1 + discusión/conclusiones | polaco/ucraniano/ruso; control metodológico | VERIFIED |
 
 ## 12. Decisiones editoriales
 
