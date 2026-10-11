@@ -32,14 +32,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
 | SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
 | SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
-| SND-FND-010 | Duración y cantidad | terminología | EVIDENCE_CHECKED |
+| SND-FND-010 | Duración y cantidad | terminología | LINGUISTIC_REVIEW |
 | SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
 | SND-FND-012 | Ritmo | terminología + fuentes | EVIDENCE_CHECKED |
 | SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
 | SND-FND-014 | Acento tonal | FND-011, FND-013 | EVIDENCE_CHECKED |
 | SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
 | SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | EVIDENCE_CHECKED |
-| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | EVIDENCE_CHECKED |
+| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
 | SND-FND-018 | Norma, descripción y uso | FND-017 | EVIDENCE_CHECKED |
 
 ## 3. Representación y escritura
@@ -48,8 +48,8 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 |---|---|---|---|
 | SND-REP-001 | Sonido, letra y símbolo | terminology | EVIDENCE_CHECKED |
 | SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | LINGUISTIC_REVIEW |
-| SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
-| SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
+| SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | EVIDENCE_CHECKED |
+| SND-REP-004 | Cómo leer vocales del IPA | REP-002 | EVIDENCE_CHECKED |
 | SND-REP-005 | Diacríticos | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
@@ -67,14 +67,14 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 |---|---|---|
 | SND-ESGT-001 | Alcance y variedades del español de Guatemala | EVIDENCE_CHECKED |
 | SND-ESGT-002 | Inventario segmental: mapa de evidencia | SOURCE_MAPPED |
-| SND-ESGT-003 | Vocales y variación | INVENTORY |
-| SND-ESGT-004 | Consonantes y realizaciones | INVENTORY |
+| SND-ESGT-003 | Vocales y variación | EVIDENCE_CHECKED |
+| SND-ESGT-004 | Consonantes y realizaciones | DRAFTED |
 | SND-ESGT-005 | /s/ y variación regional | EVIDENCE_CHECKED |
 | SND-ESGT-006 | Róticas | INVENTORY |
 | SND-ESGT-007 | Acento y prominencia | INVENTORY |
 | SND-ESGT-008 | Entonación | INVENTORY |
-| SND-ESGT-009 | Contacto lingüístico y alcance | INVENTORY |
-| SND-ESGT-010 | Ortografía y pronunciación | INVENTORY |
+| SND-ESGT-009 | Contacto lingüístico y alcance | EVIDENCE_CHECKED |
+| SND-ESGT-010 | Ortografía y pronunciación | EVIDENCE_CHECKED |
 
 ### 🇺🇸 Inglés estadounidense — ENUS
 
@@ -95,7 +95,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-PTBR-001 | PB amplio vs. habla carioca | DRAFTED |
+| SND-PTBR-001 | PB amplio vs. habla carioca | EVIDENCE_CHECKED |
 | SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
