@@ -18,14 +18,14 @@
 
 ## Local candidates for integration
 
-### KO-W1-C04 — Kang & Kong (2016)
+### KO-W1-C04 — Kang & Kong (2016) — DEDUP_MATCH → SND-SRC-0034
 - APA: Kang, J., & Kong, E. J. (2016). Static and dynamic spectral properties of the monophthong vowels in Seoul Korean: Implication on sound change. *Phonetics and Speech Sciences, 8*(4), 39–47. https://doi.org/10.13064/KSSS.2016.8.4.039
 - URL: https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002181061
 - Scope: spontaneous speech from Seoul Corpus; seven monophthong vowels; age/gender patterns.
 - Use: KO-004.
 - Status: VERIFIED_FOR_WAVE.
 
-### KO-W1-C05 — Igeta, Sonu & Arai (2014)
+### KO-W1-C05 — Igeta, Sonu & Arai (2014) — DEDUP_MATCH → SND-SRC-0035
 - APA: Igeta, T., Sonu, M., & Arai, T. (2014). Sound change of /o/ in modern Seoul Korean: Focused on relations with acoustic characteristics and perception. *Phonetics and Speech Sciences, 6*(3), 109–119. https://doi.org/10.13064/KSSS.2014.6.3.109
 - URL: https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART001917515
 - Scope: production/perception of /o/ and /u/ in young adult Seoul Korean.
@@ -38,7 +38,7 @@
 - Use: KO-005/006.
 - Status: SOURCE_MAPPED; full-text localizers still needed for final publication claims.
 
-### KO-W1-C07 — NIKL Standard Pronunciation Rules
+### KO-W1-C07 — NIKL Standard Pronunciation Rules — DEDUP_MATCH → SND-SRC-0032
 - Canonical norm URL: https://korean.go.kr/kornorms/regltn/regltnView.do?regltn_code=0002
 - Verified support pages:
   - Rule 9: https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=318280
@@ -48,13 +48,13 @@
 - Use: KO-006/008.
 - Status: VERIFIED_NORMATIVE.
 
-### KO-W1-C08 — Jun (1998)
+### KO-W1-C08 — Jun (1998) — DEDUP_MATCH → SND-SRC-0037
 - APA: Jun, S.-A. (1998). The Accentual Phrase in the Korean prosodic hierarchy. *Phonology, 15*(2), 189–226. https://doi.org/10.1017/S0952675798003571
 - Scope: Accentual Phrase model for standard/Seoul Korean.
 - Use: KO-007.
 - Status: VERIFIED_MODEL_REFERENCE.
 
-### KO-W1-C09 — Focus Prosody in Seoul Korean (2020)
+### KO-W1-C09 — Focus Prosody in Seoul Korean (2020) — DEDUP_MATCH → SND-SRC-0038
 - Citation: *Focus Prosody Varies by Phrase-Initial Tones in Seoul Korean: Production, Perception, and Automatic Classification*. *Languages, 5*(4), 64. https://doi.org/10.3390/languages5040064
 - URL: https://www.mdpi.com/2226-471X/5/4/64
 - Scope: Seoul Korean prosody/focus; Accentual Phrase patterns.
