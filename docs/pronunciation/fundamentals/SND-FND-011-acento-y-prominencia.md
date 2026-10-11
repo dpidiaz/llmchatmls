@@ -1,6 +1,6 @@
 # SND-FND-011 — Acento y prominencia
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
@@ -63,3 +63,12 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 
 - **Fecha:** 2026-10-11.
 - **Ajuste:** se evita convertir “higher pitch” de la fuente introductoria en una regla universal sobre F0.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada aclara desde el inicio qué significa “acento”, separa correlatos fonéticos de categoría lingüística y mantiene visible que el análisis no es universal.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` solo después de comprobar política final de composición/metadatos y ausencia de cambios sustantivos posteriores.
