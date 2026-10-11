@@ -1,6 +1,6 @@
 # SND-FND-011 — Acento y prominencia
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
@@ -72,3 +72,17 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Lectura:** la entrada aclara desde el inicio qué significa “acento”, separa correlatos fonéticos de categoría lingüística y mantiene visible que el análisis no es universal.
 - **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
 - **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` solo después de comprobar política final de composición/metadatos y ausencia de cambios sustantivos posteriores.
+
+
+## Composition readiness wave 03
+
+- **Fecha:** 2026-10-11.
+- **Versión evaluada:** blob `dd1216b7770481694d6345522f17a15cb5e8d6c0`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Precondiciones:** gates evidencial, lingüístico y editorial vigentes para esta versión.
+- **Fuentes:** SND-SRC-0024; SND-SRC-0027 como soporte canonicalizado de la cautela tipológica en revisión lingüística.
+- **Navegación:** IDs relacionados verificados/reservados canónicamente.
+- **Representación:** no hay notación no identificada ni transcripciones materiales pendientes.
+- **Autonomía escrita:** PASS.
+- **Blockers:** ninguno.
+- **Cambio en este gate:** solo estado/metadata de readiness.
