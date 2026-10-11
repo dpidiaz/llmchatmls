@@ -514,7 +514,7 @@ SND-SRC-0027 se incorpora como control tipológico de la revisión lingüística
 ### SND-SRC-0031 — Swiss Standard German / vocales
 
 - **Tier:** B.
-- **APA 7:** Zihlmann, U. B. (2023). Vowel quality in four Alemannic dialects and its influence on the respective varieties of Swiss Standard German. *Journal of the International Phonetic Association, 53*(1), 1–28. https://doi.org/10.1017/S0025100320000357
+- **APA 7:** Zihlmann, U. B. (2023). Vowel quality in four Alemannic dialects and its influence on the respective varieties of Swiss Standard German. *Journal of the International Phonetic Association, 53*(1), 1–28. https://doi.org/10.1017/S0025100320000377
 - **Publicación online:** 2021-02-18.
 - **Idioma/variedad:** cuatro dialectos alemánicos y sus variedades correspondientes de Swiss Standard German.
 - **Cobertura:** calidad vocálica y efecto de dialectos alemánicos sobre SSG.
