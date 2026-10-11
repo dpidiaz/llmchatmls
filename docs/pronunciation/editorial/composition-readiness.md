@@ -1,6 +1,6 @@
 # MLS-SND — Gate de preparación para composición
 
-**Estado:** propuesta editorial v0.1.  
+**Estado:** norma editorial v0.2.  
 **Función:** definir el paso `EDITORIAL_REVIEW → READY_FOR_COMPOSITION`.  
 **Importante:** este documento **no promueve automáticamente ninguna entrada**.
 
@@ -70,7 +70,8 @@ No se crea un estado intermedio nuevo.
 - [ ] Títulos y jerarquía de secciones son consistentes.
 - [ ] Referencias cruzadas usan IDs canónicos.
 - [ ] Comparaciones entre idiomas conservan su etiqueta de relación.
-- [ ] No quedan instrucciones internas, notas de trabajo o lenguaje de “pendiente” mezclados con contenido destinado al lector.
+- [ ] No quedan instrucciones internas, notas de trabajo o lenguaje de “pendiente” dentro de la **proyección reader-facing**.
+- [ ] Si el archivo fuente conserva metadata interna de auditoría/revisión, el handoff identifica explícitamente qué secciones quedan fuera de la edición de lectura.
 
 ## 5. Checklist de transcripción y sistemas de escritura
 
@@ -171,7 +172,8 @@ Una entrada que reciba PASS debe llevar un **Composition Handoff Manifest** con:
 - referencias cruzadas;
 - open questions no bloqueantes;
 - requisitos especiales de tipografía/tablas;
-- resultado PASS y fecha.
+- resultado PASS y fecha;
+- **reader-facing projection**: secciones/bloques incluidos en la edición de lectura y metadata interna excluida.
 
 La plantilla está en `editorial/composition-handoff-template.md`.
 
@@ -210,7 +212,27 @@ Ejemplos:
 
 COMPOSITION no “corrige sobre la marcha” estos problemas.
 
-## 15. Definición de PASS
+## 15. Proyección reader-facing
+
+El archivo canónico puede conservar metadata interna de R33, revisión lingüística o revisión editorial **siempre que el Composition Handoff Manifest defina de forma inequívoca la proyección de lectura**.
+
+La proyección debe indicar:
+
+- qué secciones o bloques entran a la edición destinada al lector;
+- qué bloques permanecen como metadata interna del repositorio;
+- cómo se deriva el bloque visible de “Fuentes y fundamento”, cuando exista;
+- si alguna nota editorial es reader-facing o únicamente interna;
+- cualquier excepción.
+
+Reglas:
+
+1. COMPOSITION no decide la proyección.
+2. La proyección se aprueba antes del PASS.
+3. Excluir metadata interna de la página de lectura no elimina esa metadata del repositorio.
+4. Una sección ambigua bloquea el gate hasta que EDITORIAL_REVIEW la clasifique.
+5. La proyección debe ser coherente con `reader-facing-evidence.md` y `page-composition.md`.
+
+## 16. Definición de PASS
 
 Una entrada puede marcarse `READY_FOR_COMPOSITION` únicamente cuando:
 
@@ -219,6 +241,7 @@ Una entrada puede marcarse `READY_FOR_COMPOSITION` únicamente cuando:
 3. no existen blockers abiertos;
 4. la auditoría de representación pasa;
 5. navegación y ejemplos son auditables;
-6. se adjunta el Composition Handoff Manifest.
+6. se adjunta el Composition Handoff Manifest;
+7. el manifiesto define una proyección reader-facing inequívoca.
 
 Este gate preserva la separación fundamental de MLS-SND: **composición recibe contenido estabilizado; no decide lingüística ni evidencia**.
