@@ -1,6 +1,7 @@
 # SND-IT-005 — Acento léxico
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
+**Estado:** EDITORIAL_REVIEW  
+**Idioma:** italiano.  
 **Dominio:** prosodia / fonología / fonética.  
 **Tipo de alcance:** REFERENCE_VARIETY / BROADLY_DISTRIBUTED con límites explícitos.  
 **Nivel de representación:** fonológico / fonético / ortográfico.  
@@ -44,7 +45,7 @@ Un ejemplo transparente es:
 
 La secuencia consonantes-vocales es esencialmente la misma; cambia la ubicación del acento y cambia la palabra.
 
-Esto justifica tratar el acento como parte de la representación fonológica cuando la evidencia lexical lo exige, y no como simple “énfasis” añadido al hablar.
+Esto justifica tratar el acento como parte de la representación fonológica cuando la evidencia léxica lo exige, y no como simple “énfasis” añadido al hablar.
 
 ## 4. Correlatos fonéticos
 
@@ -121,7 +122,7 @@ La transcripción concreta de una palabra seguirá dependiendo de la variedad y 
 
 Para hablantes de otras lenguas, puede ser útil comparar la **movilidad** del acento o sus correlatos acústicos, pero no debe afirmarse que dos idiomas “tienen el mismo acento” solo porque ambos permitan más de una posición.
 
-Etiqueta recomendada para comparaciones generales: **SEMEJANZA_PARCIAL**.
+Etiqueta recomendada para comparaciones generales: **SEMEJANZA PARCIAL**.
 
 Una comparación válida debe separar al menos:
 
@@ -176,12 +177,14 @@ RAI. (2025). *DOP: Dizionario italiano multimediale e multilingue d’ortografia
 
 ## Gate de salida
 
-**Resultado integrado:** EVIDENCE_CHECKED.
-
 - SND-SRC-0074 y SND-SRC-0075 están canonicalizadas.
 - Los claims IT005-C01…C05 fueron re-auditados contra los localizadores declarados.
-- La revisión lingüística independiente #7358 aprobó la dirección del contenido y mantuvo como invariantes la separación acento/duración/geminación/ortografía.
-- La canonicalización no se trató por sí sola como validación: el estado se promueve después de la re-auditoría de esta versión.
+- La revisión lingüística independiente preservó la separación acento/duración/geminación/ortografía.
+- La revisión editorial normalizó terminología, navegación y estado sin modificar claims ni fuentes.
+
+**LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+La entrada no se promueve aún a READY_FOR_COMPOSITION porque el perfil italiano conserva IDs no integrados y decisiones de arquitectura pendientes.
 
 
 ## Auditoría de integración — 2026-10-11
@@ -192,4 +195,4 @@ RAI. (2025). *DOP: Dizionario italiano multimediale e multilingue d’ortografia
 - **IT005-C04:** VERIFIED contra SND-SRC-0075, Abstract.
 - **IT005-C05:** VERIFIED contra SND-SRC-0075, Abstract.
 - **IT005-C06:** conserva dependencia ya validada SND-SRC-0008 / IT-008.
-- **Resultado:** EVIDENCE_CHECKED; todavía requiere promoción formal a LINGUISTIC_REVIEW en la versión integrada.
+- **Resultado:** evidencia y revisión lingüística reconciliadas; EDITORIAL_REVIEW PASS_WITH_EDITORIAL_CHANGES.
