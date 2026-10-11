@@ -1,6 +1,6 @@
 # MLS-SND Source Registry
 
-Estado: **registro operativo v0.6**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
+Estado: **registro operativo v0.10**. Este archivo registra fuentes admisibles y su alcance. La presencia de una fuente aquí **no valida por sí sola una entrada**.
 
 ## 1. Objetivo
 
