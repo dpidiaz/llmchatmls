@@ -1,6 +1,6 @@
 # SND-FND-015 — Entonación
 
-**Estado:** DRAFTED.
+**Estado:** EVIDENCE_CHECKED.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
@@ -42,8 +42,8 @@ Cuando una entrada necesite mostrar un contorno, deberá usar la convención pro
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND015-C01 | La entonación implica patrones de pitch con funciones lingüísticas más allá del contraste tonal de palabra | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | SOURCED |
-| FND015-C02 | Tono e intonación pueden coexistir y deben analizarse por sus funciones | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | SOURCED |
+| FND015-C01 | La entonación implica patrones de pitch con funciones lingüísticas más allá del contraste tonal de palabra | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | VERIFIED |
+| FND015-C02 | Tono e intonación pueden coexistir y deben analizarse por sus funciones | SND-SRC-0024 | §3.12 “Tone and Intonation” | introductorio/transversal | VERIFIED |
 
 ## 6. Relacionado con
 
@@ -58,3 +58,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 8. Nota editorial
 
 La entrada establece una barrera contra generalizaciones pedagógicas fáciles pero no universales. Los perfiles necesitarán bibliografía prosódica específica antes de formular reglas concretas.
+
+## R33 audit
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** EVIDENCE_CHECKED para los claims listados.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
