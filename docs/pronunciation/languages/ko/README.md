@@ -1,25 +1,40 @@
 # 🇰🇷 Coreano
 
-**Estado de referencia:** REFERENCE_PROVISIONAL.
-**Fuentes iniciales:** SND-SRC-0012, SND-SRC-0020, SND-SRC-0021.
+**Estado de referencia:** REFERENCE_PROVISIONAL.  
+**Wave activa:** Korean pilot wave 01, PR #7288.
 
-## Alcance candidato
+## Principio de alcance
 
-Contrastes consonánticos; vocales; sílaba; procesos; prosodia; hangul; romanización.
+MLS-SND mantiene separadas:
+- la **pronunciación estándar normativa** documentada por el NIKL;
+- la **descripción fonética de Seoul Korean** cuando los estudios delimitan esa variedad;
+- las decisiones de análisis fonológico/prosódico de la literatura.
 
-## Regla
+No se presupone identidad automática entre estas capas.
 
-Este archivo es un mapa de investigación. Ninguna lista de fenómenos constituye todavía una afirmación fonética validada.
+## Estado de entradas
 
-## Gap principal
+- KO-001 — EVIDENCE_CHECKED
+- KO-002 — RESEARCHED_PARTIAL
+- KO-003 — EVIDENCE_CHECKED
+- KO-004 — EVIDENCE_CHECKED
+- KO-005 — RESEARCHED_PARTIAL
+- KO-006 — EVIDENCE_CHECKED (NORMATIVE)
+- KO-007 — EVIDENCE_CHECKED para el modelo de referencia
+- KO-008 — EVIDENCE_CHECKED (NORMATIVE)
+- KO-009 — EVIDENCE_CHECKED en rama matriz
+- KO-010 — EVIDENCE_CHECKED
 
-Actualizar descripción con estudios contemporáneos y delimitar estándar vs. habla de Seúl.
+## Hallazgo central
 
-## Salidas previstas
+La fonética contemporánea de Seoul Korean no debe describirse con una instantánea histórica única: el contraste de oclusivas y parte del sistema vocálico muestran cambio y variación documentados.
 
-1. source map específico;
-2. inventario de entradas;
-3. decisiones de transcripción;
-4. primer cluster redactado;
-5. gate R33;
-6. revisión lingüística y editorial.
+## Archivos de coordinación
+
+- `WAVE-01-CLAIM.md`
+- `SOURCE-MAP.md`
+- `WAVE-01-REPORT.md`
+
+## Próximo gate
+
+Revisión lingüística independiente de KO-001/003/004/006/007/008/010 y ampliación de KO-002/005.
