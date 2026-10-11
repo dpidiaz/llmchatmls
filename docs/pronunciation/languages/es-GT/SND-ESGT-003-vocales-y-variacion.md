@@ -1,6 +1,6 @@
 # SND-ESGT-003 — Vocales y variación
 
-**Estado:** DRAFTED.  
+**Estado:** EVIDENCE_CHECKED.  
 **Idioma:** español.  
 **Variedad:** Guatemala; alcance nacional geolingüístico + evidencia de contacto explícitamente separada.  
 **Dominio:** vocales / fonética / variación.
@@ -67,8 +67,8 @@ Esta entrada todavía no fija:
 | ESGT003-C03 | /e/ final átona se realiza mayoritariamente plena, con variantes documentadas | SND-SRC-0025 | Utgård (2010), sección de /e/ átona, pp. 52–53 | posiciones estudiadas | VERIFIED |
 | ESGT003-C04 | /o/ final átona muestra mayor variación que /a/ y /e/ en el conjunto descrito | SND-SRC-0025 | Utgård (2010), sección de /o/ átona, p. 53 | encuesta descrita | VERIFIED |
 | ESGT003-C05 | La autora caracteriza la relajación/elisión de átonas como tendencia ligera, insuficiente en sus datos para definir un rasgo representativo o división dialectal | SND-SRC-0025 | Utgård (2010), síntesis de vocales, p. 53 | encuesta descrita | VERIFIED |
-| ESGT003-C06 | Baird compara acústicamente monolingües de español guatemalteco y bilingües español–k’ichee’ y reporta diferencias entre sus espacios vocálicos | SND-SRC-0053 | abstract | grupos del estudio | ABSTRACT_VERIFIED_LOCAL_SOURCE |
-| ESGT003-C07 | El abstract de Baird reporta mantenimiento de diferencias translingüísticas en vocales medias por los bilingües | SND-SRC-0053 | abstract | bilingües del estudio | ABSTRACT_VERIFIED_LOCAL_SOURCE |
+| ESGT003-C06 | Baird compara acústicamente monolingües de español guatemalteco y bilingües español–k’ichee’ y reporta diferencias entre sus espacios vocálicos | SND-SRC-0053 | abstract | grupos del estudio | ABSTRACT_VERIFIED_CANONICAL_SOURCE |
+| ESGT003-C07 | El abstract de Baird reporta mantenimiento de diferencias translingüísticas en vocales medias por los bilingües | SND-SRC-0053 | abstract | bilingües del estudio | ABSTRACT_VERIFIED_CANONICAL_SOURCE |
 
 ## 7. Fuentes
 
@@ -78,10 +78,9 @@ Baird, B. O. (2020). The vowel spaces of Spanish-K’ichee’ bilinguals. En R. 
 
 ## 8. Gate pendiente
 
-La entrada permanece **DRAFTED** hasta:
+La entrada pasa a **EVIDENCE_CHECKED** para sus claims vigentes. SND-SRC-0053 está canonicalizada y C06–C07 permanecen deliberadamente limitados a lo visible en el abstract.
 
-2. comprobar texto completo si se desean claims más allá del abstract;
-3. ejecutar revisión lingüística de la distinción entre encuesta nacional y evidencia de contacto.
+Para ampliar la entrada con valores formánticos, estadística, tamaños de muestra u otros detalles internos será necesario comprobar el texto completo. La revisión lingüística sigue siendo un gate posterior.
 
 ## 9. Relacionado con
 
