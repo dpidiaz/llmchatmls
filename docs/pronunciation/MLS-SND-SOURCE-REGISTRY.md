@@ -1144,3 +1144,73 @@ Mapeo local resuelto:
 - `IT-W02-S02` → `SND-SRC-0075`.
 
 Esta numeración sustituye la reserva italiana provisional 0061–0063, cedida a las waves upstream ya integradas al detectarse la colisión antes de integración.
+
+
+## 32. Canonicalización japonesa: consonantes y realizaciones
+
+### SND-SRC-0076 — Japonés / /r/ y /d/: articulación, duración y contacto
+
+- **Tier:** B — evidencia institucional contemporánea con datos articulatorios y corpus.
+- **APA 7:** Maekawa, K. (2026, July 27). *子供がラ行とダ行を区別できないのはなぜですか* [Why do children confuse the Japanese r-row and d-row?]. ことば研究館, National Institute for Japanese Language and Linguistics. https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-246/
+- **Idioma/variedad:** japonés estándar; muestras articulatorias de hablantes de Tokio y análisis de /r/ y /d/ en el Corpus of Spontaneous Japanese.
+- **Cobertura:** semejanza y diferencias articulatorias de /r/ y /d/; duración; lugar de contacto; variación contextual de /r/.
+- **Localizadores:** 「調音運動の分析」; 「持続時間の分析」; 「接触位置」; 「母音の影響」; 「まとめ」.
+- **Acceso:** FREE_TO_READ; página institucional completa verificada.
+- **Licencia/reutilización:** UNKNOWN; acceso gratuito no se interpreta como licencia abierta. MLS-SND usa paráfrasis y no redistribuye video/figuras.
+- **Limitación:** no es un inventario consonántico completo; parte de la explicación de la variación de contacto se presenta como hipótesis.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_INSTITUTIONAL_WITH_SCOPE.
+
+### SND-SRC-0077 — Japonés / alternancias p~h~b en contadores
+
+- **Tier:** B/C — explicación académica institucional de morfofonología e historia fonológica.
+- **APA 7:** Kubozono, H. (2024, November 27). *「匹」に「ひき」「びき」「ぴき」の読み方があるのはなぜですか* [Why does the counter 匹 have the readings hiki, biki and piki?]. ことば研究館, National Institute for Japanese Language and Linguistics. https://kotoba.ninjal.ac.jp/qa/yokuaru/qa-225/
+- **Idioma/variedad:** japonés contemporáneo con explicación histórica.
+- **Cobertura:** alternancias /p ~ h ~ b/ en contadores; condicionamiento por numeral y sokuon; relación con cambio histórico de la serie ハ.
+- **Localizadores:** 「匹はハ行音で始まる助数詞」; 「ハ行音の特殊性」 y desarrollo posterior.
+- **Acceso:** FREE_TO_READ; página institucional completa verificada.
+- **Licencia/reutilización:** UNKNOWN; se usa paráfrasis, sin reproducir tablas/figuras.
+- **Limitación:** caso morfofonológico específico; no generalizar a todo /h/, /p/ o /b/ del japonés.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_INSTITUTIONAL_WITH_SCOPE.
+
+### SND-SRC-0078 — Japonés / etiquetado segmental del Corpus of Spontaneous Japanese
+
+- **Tier:** B — documentación institucional primaria de corpus.
+- **APA 7:** Maekawa, K., Kikuchi, H., Fujimoto, M., & Yoneyama, S. (s. f.). *『日本語話し言葉コーパス』の分節音ラベリング* [Segmental labeling of the Corpus of Spontaneous Japanese] (Version 1.0). National Institute for Japanese Language and Linguistics. https://www2.ninjal.ac.jp/kikuo/segment.pdf
+- **Idioma/variedad:** japonés hablado representado en el Corpus of Spontaneous Japanese (CSJ).
+- **Cobertura:** política de segmentación; etiquetas consonánticas/vocálicas; variantes fonéticas anotables; relación con mora.
+- **Localizadores:** p. 2, §§1–3; p. 3, Tabla 2; p. 11, apéndice mora ↔ etiquetas cuando sea pertinente.
+- **Cobertura del material etiquetado:** aproximadamente 500.000 palabras / 44 horas según el manual.
+- **Acceso:** FREE_TO_READ; PDF institucional.
+- **Licencia/reutilización:** UNKNOWN; el PDF no se redistribuye y la tabla no se reutiliza como arte editorial.
+- **Limitación:** esquema de anotación intermedio entre transcripción amplia y estrecha, no inventario fonológico definitivo; algunas etiquetas definidas no se usan actualmente en CSJ.
+- **Verificado:** 2026-10-11; pp. 2–3 inspeccionadas visualmente.
+- **Estado:** ADMITTED_CORPUS_DOCUMENTATION.
+
+### SND-SRC-0079 — Japonés / panorama fonético-fonológico e inventario consonántico
+
+- **Tier:** B — handbook académico de referencia.
+- **APA 7:** Kubozono, H. (2015). Introduction to Japanese phonetics and phonology. In H. Kubozono (Ed.), *Handbook of Japanese Phonetics and Phonology* (pp. 1–40). De Gruyter Mouton. https://doi.org/10.1515/9781614511984.1
+- **Idioma/alcance:** japonés moderno; panorama fonético y fonológico.
+- **Cobertura usada por MLS-SND:** inventario consonántico de referencia; alofonía de /s t h/; estratos léxicos; expansión de combinaciones consonante-vocal en préstamos.
+- **Localizadores verificados:** pp. impresas 6–9; §3 “Consonant inventory”; §3.1 “Phonemes and allophones”; Tabla 1; §3.2; inicio de §3.3.
+- **Acceso:** FREE_TO_READ para el preview PDF oficial verificado; no se asume acceso abierto al libro completo.
+- **Licencia/reutilización:** UNKNOWN; se usa paráfrasis del fragmento verificado.
+- **Limitación:** Tabla 1 es baseline fonémico de referencia adaptado de Shibatani (1990); el propio capítulo documenta mayor complejidad alofónica y por estratos léxicos. No usar como lista superficial exhaustiva.
+- **Verificado:** 2026-10-11; pp. impresas 6–9 inspeccionadas visualmente.
+- **Estado:** ADMITTED_WITH_SECTION_VERIFICATION.
+
+## 33. Resultado del registro v0.18
+
+El registro contiene **79 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0079.
+
+Mapeo local resuelto:
+
+- `JA-W04-S01` → `SND-SRC-0076`;
+- `JA-W04-S02` → `SND-SRC-0077`;
+- `JA-W04-S03` → `SND-SRC-0078`;
+- `JA-W04-S04` → `SND-SRC-0079`.
+
+La canonicalización resuelve identidad bibliográfica y localizadores; no promueve por sí sola SND-JA-004 más allá de SOURCE_MAPPED.
+
