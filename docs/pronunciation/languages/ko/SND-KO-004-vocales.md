@@ -1,6 +1,6 @@
 # SND-KO-004 — Vocales de Seoul Korean: sistema en cambio
 
-**Estado:** EVIDENCE_CHECKED  
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** coreano  
 **Variedad:** Seoul Korean  
 **Dominio:** fonética
@@ -40,3 +40,11 @@ Las entradas vocálicas deberán separar:
 ## 5. Límite
 
 No se extrapolan estos resultados a todas las generaciones, registros o variedades coreanas.
+
+
+## Revisión lingüística 2026-10-11
+
+- Alcance y variedad preservados.
+- Source IDs canónicos comprobados.
+- No se detectó extrapolación normativa/descriptiva incompatible con el alcance declarado.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
