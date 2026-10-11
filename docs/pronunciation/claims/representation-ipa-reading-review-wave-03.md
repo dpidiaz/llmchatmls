@@ -4,7 +4,7 @@
 - Tipo: LINGUISTIC_REVIEW independiente.
 - Base exacta: `a751ca935da621e7d640e3f12d8ef6cb28a2991a`.
 - Rama: `snd/representation-ipa-reading-review-wave-03`.
-- Estado: ACTIVE.
+- Estado: COMPLETE — ready for integration.
 
 ## Alcance
 
@@ -18,3 +18,11 @@
 ## Gate
 
 La salida será PASS, PASS_WITH_CHANGES o HOLD. No implica EDITORIAL_REVIEW ni READY_FOR_COMPOSITION.
+
+
+## Resultado
+
+- REP-003: PASS_WITH_CHANGE → LINGUISTIC_REVIEW.
+- REP-004: PASS_WITH_CHANGE → LINGUISTIC_REVIEW.
+- Audit: `audits/LINGUISTIC-REVIEW-REP-003-004-WAVE-03.md`.
+- No global hot files modified.
