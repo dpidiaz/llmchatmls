@@ -1,6 +1,6 @@
 # SND-FND-015 — Entonación
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
@@ -63,7 +63,7 @@ La entrada establece una barrera contra generalizaciones pedagógicas fáciles p
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
-- **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+- **Alcance:** comprobación claim ↔ fuente ↔ sección; corresponde al gate evidencial anterior; los gates lingüístico y editorial se registran por separado.
 
 ## 9. Revisión lingüística
 
@@ -71,3 +71,12 @@ La entrada establece una barrera contra generalizaciones pedagógicas fáciles p
 - **Resultado:** PASS → `LINGUISTIC_REVIEW`.
 - **Comprobación:** la entrada evita equiparar entonación con tono léxico y no universaliza contornos interrogativos ni funciones discursivas.
 - **Límite:** el dominio prosódico y la relación forma–función de cada contorno deben definirse por idioma/variedad y fuente.
+
+
+## Revisión editorial
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la estructura definición → contraste con tono → control anti-universalización → escritura ofrece una ruta de lectura clara para autodidactas.
+- **Control:** no se modificaron claims R33, transcripciones ni alcance lingüístico durante este gate.
+- **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` solo después de comprobar política final de composición/metadatos y ausencia de cambios sustantivos posteriores.
