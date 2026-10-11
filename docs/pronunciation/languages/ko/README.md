@@ -1,40 +1,40 @@
 # 🇰🇷 Coreano
 
-**Estado de referencia:** REFERENCE_PROVISIONAL.  
-**Wave activa:** Korean pilot wave 01, PR #7288.
+**Estado de referencia:** REFERENCE_PROVISIONAL.
+
+## Coordinación actual
+
+Dos waves nacieron casi simultáneamente y se repartieron el perfil:
+
+- **PR #7287:** KO-001/002/003 — estándar vs. Seúl, mapa consonántico y oclusivas contemporáneas.
+- **PR #7288:** KO-004/005/006/007/008/010 — vocales, sílaba, procesos, prosodia, Hangul y representación.
+- **KO-009:** ya EVIDENCE_CHECKED en la rama matriz.
+
+No deben fusionarse como dos versiones completas competidoras: #7288 ya eliminó sus duplicados de KO-001/002/003.
 
 ## Principio de alcance
 
-MLS-SND mantiene separadas:
-- la **pronunciación estándar normativa** documentada por el NIKL;
-- la **descripción fonética de Seoul Korean** cuando los estudios delimitan esa variedad;
-- las decisiones de análisis fonológico/prosódico de la literatura.
+Mantener separadas:
+- norma institucional NIKL;
+- descripción fonética de Seoul Korean;
+- análisis fonológico/prosódico;
+- escritura Hangul;
+- Romanización Revisada;
+- IPA.
 
-No se presupone identidad automática entre estas capas.
+## Estado después de ambas waves
 
-## Estado de entradas
-
-- KO-001 — EVIDENCE_CHECKED
-- KO-002 — RESEARCHED_PARTIAL
-- KO-003 — EVIDENCE_CHECKED
-- KO-004 — EVIDENCE_CHECKED
-- KO-005 — RESEARCHED_PARTIAL
-- KO-006 — EVIDENCE_CHECKED (NORMATIVE)
-- KO-007 — EVIDENCE_CHECKED para el modelo de referencia
-- KO-008 — EVIDENCE_CHECKED (NORMATIVE)
-- KO-009 — EVIDENCE_CHECKED en rama matriz
-- KO-010 — EVIDENCE_CHECKED
-
-## Hallazgo central
-
-La fonética contemporánea de Seoul Korean no debe describirse con una instantánea histórica única: el contraste de oclusivas y parte del sistema vocálico muestran cambio y variación documentados.
-
-## Archivos de coordinación
-
-- `WAVE-01-CLAIM.md`
-- `SOURCE-MAP.md`
-- `WAVE-01-REPORT.md`
+- KO-001 — EVIDENCE_CHECKED (#7287)
+- KO-002 — SOURCE_MAPPED / parcial (#7287)
+- KO-003 — EVIDENCE_CHECKED (#7287)
+- KO-004 — EVIDENCE_CHECKED (#7288)
+- KO-005 — RESEARCHED_PARTIAL (#7288)
+- KO-006 — EVIDENCE_CHECKED NORMATIVE (#7288)
+- KO-007 — EVIDENCE_CHECKED para modelo (#7288)
+- KO-008 — EVIDENCE_CHECKED NORMATIVE (#7288)
+- KO-009 — EVIDENCE_CHECKED (base)
+- KO-010 — EVIDENCE_CHECKED (#7288)
 
 ## Próximo gate
 
-Revisión lingüística independiente de KO-001/003/004/006/007/008/010 y ampliación de KO-002/005.
+Integrar ambos source maps sin IDs duplicados y ejecutar LINGUISTIC_REVIEW independiente.
