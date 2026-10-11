@@ -1,6 +1,6 @@
 # SND-REP-007 — Transcripción fonológica y transcripción fonética
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Dominio:** transcripción / fonología / fonética.  
 **Idioma:** transversal.
 
@@ -56,3 +56,9 @@ La política exacta de adaptación de transcripciones se rige también por MLS-S
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 10. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS. Barras y corchetes se presentan como convenciones ligadas al nivel analítico, no como propiedades del carácter IPA aislado.
+- **Siguiente gate:** EDITORIAL_REVIEW.
