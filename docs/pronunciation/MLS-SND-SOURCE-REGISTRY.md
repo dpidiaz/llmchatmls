@@ -1093,3 +1093,54 @@ Mapeo local propuesto/resuelto por esta wave:
 - `ENUS-CAND-009` → `SND-SRC-0071` (diccionario) + `SND-SRC-0072` (formato/stress markers).
 
 No se canonicalizan en esta wave ENUS-CAND-001/003/007 porque no son necesarios para el núcleo que se integrará a continuación.
+
+
+## 30. Canonicalización italiana: variación y acento
+
+### SND-SRC-0073 — Italiano / Standard Italian vs. Florence, Milan and Rome
+
+- **Tier:** B.
+- **APA 7:** Bertinetto, P. M., & Loporcaro, M. (2005). The sound pattern of Standard Italian, as compared with the varieties spoken in Florence, Milan and Rome. *Journal of the International Phonetic Association, 35*(2), 131–151. https://doi.org/10.1017/S0025100305002148
+- **Idioma/variedad:** Standard Italian (SI), Florence Italian (FI), Milan Italian (MI), Rome Italian (RI).
+- **Cobertura:** comparación segmental/prosódica de SI y tres variedades regionales prestigiosas; vocales medias, consonantes, geminación, procesos y variación.
+- **Localizador:** pp. 131–151; introducción pp. 131–132 para alcance; p. 137 para distribución de vocales medias; otras secciones por fenómeno.
+- **Acceso:** versión publicada y post-print disponibles en repositorio de Scuola Normale Superiore.
+- **Limitación:** FI/MI/RI son comparadores documentados, no un inventario exhaustivo de la diversidad regional italiana.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_SCOPE_WARNING.
+
+### SND-SRC-0074 — Italiano / acento léxico (Treccani)
+
+- **Tier:** B/C, referencia académica institucional.
+- **APA 7:** Gili Fivela, B. (2010). Accento. En *Enciclopedia dell’Italiano*. Treccani. https://www.treccani.it/enciclopedia/accento_%28Enciclopedia-dell%27Italiano%29/
+- **Idioma/variedad:** italiano; síntesis general del sistema de acento.
+- **Cobertura:** acento léxico, posición libre/móvil, función distintiva, correlatos fonéticos, distribución y morfofonología.
+- **Localizador:** “Definizione”; “Principali correlati fonetici”; “L’accento in italiano”; sección morfofonológica.
+- **Acceso:** gratuito en Treccani.
+- **Limitación:** obra enciclopédica de síntesis; no sustituye estudios experimentales para medidas acústicas ni resuelve por sí sola todos los análisis métricos.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_AS_REFERENCE.
+
+### SND-SRC-0075 — Italiano / acento principal y duración vocálica
+
+- **Tier:** B.
+- **APA 7:** D’Imperio, M., & Rosenthall, S. (1999). Phonetics and phonology of main stress in Italian. *Phonology, 16*(1), 1–28. https://doi.org/10.1017/S0952675799003681
+- **Idioma/variedad:** italiano estándar y variedades regionales dentro del alcance del artículo.
+- **Cobertura:** relación entre acento principal, estructura silábica, posición y duración vocálica.
+- **Localizador:** Abstract; pp. 1–28 para claims que requieran detalle adicional.
+- **Acceso:** metadatos y abstract abiertos en Cambridge Core.
+- **Limitación:** no convertir la duración de vocal tónica en contraste fonémico de longitud; la propia fuente distingue duración fonética y análisis fonológico.
+- **Verificado:** 2026-10-11.
+- **Estado:** ADMITTED_WITH_ABSTRACT_SCOPE.
+
+## 31. Resultado del registro v0.17
+
+El registro contiene **75 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0075.
+
+Mapeo local resuelto:
+
+- `IT-PROP-CORE-001` → `SND-SRC-0073`;
+- `IT-W02-S01` → `SND-SRC-0074`;
+- `IT-W02-S02` → `SND-SRC-0075`.
+
+Esta numeración sustituye la reserva italiana provisional 0061–0063, cedida a las waves upstream ya integradas al detectarse la colisión antes de integración.
