@@ -1,6 +1,6 @@
 # SND-KO-009 — Romanización Revisada del coreano
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** coreano.
 **Dominio:** romanización.
 
@@ -46,3 +46,11 @@ La secuencia visual de capas es una decisión MLS-SND.
 - **Resultado:** EVIDENCE_CHECKED.
 - **Comprobación:** NIKL establece explícitamente que la romanización se basa en la pronunciación estándar, procura usar solo letras romanas y no refleja la longitud vocálica.
 - **Límite:** la secuencia hangul → romanización → IPA es diseño editorial MLS-SND, no una regla del NIKL.
+
+
+## Revisión lingüística 2026-10-11
+
+- Representación, alcance y separación escritura/romanización/IPA comprobados.
+- Source IDs canónicos revisados.
+- Las decisiones editoriales permanecen separadas de los claims externos.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
