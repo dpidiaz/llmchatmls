@@ -12,13 +12,7 @@ MLS-SND no presupone que toda lengua deba analizarse con una categoría de acent
 
 ## 2. Correlatos fonéticos
 
-La fuente introductoria documenta que, en lenguas habladas, las sílabas acentuadas suelen realizarse con alguna combinación de:
-
-- mayor intensidad;
-- mayor duración;
-- mayor altura tonal.
-
-La combinación exacta puede variar entre lenguas.
+La fuente introductoria resume que, en lenguas habladas, las sílabas acentuadas suelen realizarse con alguna combinación de mayor intensidad, mayor duración y/o mayor *pitch*. MLS-SND tratará esto como un punto de partida pedagógico, no como una ley acústica universal: cada perfil deberá documentar sus correlatos concretos y no asumir que la prominencia exige siempre un ascenso de F0.
 
 ## 3. Acento no es una sola propiedad acústica
 
@@ -63,3 +57,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Ajuste:** se eliminó la presuposición de que “acento/estrés” sea una categoría uniforme y universal; cada perfil deberá justificar si utiliza acento, prominencia, tono, acento tonal u otro análisis.
 - **Comprobación externa de cautela tipológica:** Van Soeren (2023, §6.1) señala que el stress no aparece en la fonología léxica de todas las lenguas y que su función y realización varían considerablemente entre las que sí lo tienen (https://doi.org/10.1017/S0022226722000081).
 - **Límite:** los correlatos intensidad/duración/pitch de la fuente introductoria no se transfieren automáticamente a cada idioma.
+
+
+## 11. Ajuste de revisión wave 01
+
+- **Fecha:** 2026-10-11.
+- **Ajuste:** se evita convertir “higher pitch” de la fuente introductoria en una regla universal sobre F0.
