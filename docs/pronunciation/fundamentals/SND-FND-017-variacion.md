@@ -1,6 +1,6 @@
 # SND-FND-017 — Variación: región, sociedad, estilo y tiempo
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
 **Dominio:** variación / sociolingüística.  
 **Idioma:** transversal.
 
@@ -65,3 +65,10 @@ Esta entrada justifica la política de variedades del tomo, pero no sustituye es
 ## 9. Nota de auditoría
 
 Claim ↔ fuente ↔ localizador comprobados el 2026-10-11. Falta revisión lingüística y editorial.
+
+
+## 10. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS. Variación regional/social/estilística/temporal se presenta como dimensión estructural, no como desviación de un estándar.
+- **Siguiente gate:** EDITORIAL_REVIEW.
