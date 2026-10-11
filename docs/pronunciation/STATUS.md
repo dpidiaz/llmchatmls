@@ -38,3 +38,23 @@
 4. redactar 8–12 fundamentos piloto;
 5. producir los pilotos es-GT, en-US y pt-BR-rio;
 6. ejecutar gate R33 antes de expansión masiva.
+
+## Primera wave de contenido
+
+Entradas piloto redactadas:
+
+- SND-REP-002 — Qué es el AFI/IPA.
+- SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz.
+- SND-ZHTW-007 — Zhuyin/Bopomofo.
+- SND-KO-009 — Romanización Revisada del coreano.
+- SND-JA-001 — Tokio como ancla de referencia y sus límites.
+
+Estas cinco entradas están en **DRAFTED** con tablas claim ↔ source ↔ locator. Aún no se marcan como VERIFIED/REVIEWED: falta ejecutar el gate lingüístico/evidencial sobre su versión vigente.
+
+## Métricas v0.3
+
+- 23 fuentes registradas.
+- 143 unidades editoriales candidatas inventariadas.
+- 10 perfiles lingüísticos inicializados.
+- 5 entradas piloto redactadas.
+- 0 entradas marcadas como R33-validadas todavía.
