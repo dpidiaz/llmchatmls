@@ -67,7 +67,9 @@ McKinnon, S. (2025). La variación fonológica del español guatemalteco. En M. 
 
 **No usar todavía para:** claims fonéticos específicos sin acceso al pasaje correspondiente.
 
-**Resultado de integración:** CANONICAL_NEW → **SND-SRC-0057**. Se mantiene FULLTEXT_REQUIRED_FOR_SPECIFIC_CLAIMS: la canonicalización no amplía el acceso ni el alcance del resumen editorial.
+**Estado propuesto:** SOURCE_MAPPED / FULLTEXT_REQUIRED_FOR_SPECIFIC_CLAIMS.
+
+**Resultado wave 06:** sin canonicalizar. P02 no es necesario para resolver ESGT-002 y permanece candidato local para una wave posterior.
 
 ---
 
@@ -79,7 +81,7 @@ McKinnon, S. (2020). Un análisis sociofonético de la aspiración de las oclusi
 
 **Acceso:** resumen y metadatos verificables; texto completo no abierto en la fuente editorial consultada.
 
-**Estado propuesto:** SOURCE_MAPPED / FULLTEXT_REQUIRED_FOR_SPECIFIC_CLAIMS.
+**Resultado de integración:** CANONICAL_NEW → **SND-SRC-0057**. Se mantiene FULLTEXT_REQUIRED_FOR_SPECIFIC_CLAIMS: la canonicalización no amplía el acceso ni el alcance del resumen editorial.
 
 ---
 
