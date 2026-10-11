@@ -1,6 +1,6 @@
 # SND-ESGT-001 — Alcance y variedades del español de Guatemala
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala.
 **Dominio:** alcance descriptivo / variación.
@@ -59,6 +59,17 @@ Asociación de Academias de la Lengua Española. (2021). *Crónica de la lengua 
 
 Utgård, K. (2010). El español de Guatemala. En M. Á. Quesada Pacheco (Ed.), *El español hablado en América Central: Nivel fonético* (pp. 49–82). Iberoamericana/Vervuert. https://doi.org/10.31819/9783865278708-003
 
-## 7. Nota editorial
+## 7. Entradas relacionadas
+
+- SND-ESGT-002 — Inventario segmental: mapa de evidencia.
+- SND-ESGT-005 — /s/ y variación regional.
+- SND-ESGT-009 — Contacto lingüístico.
+- SND-FND-017 — Variación regional, social, estilística y temporal.
+
+## 8. Nota editorial y gate
 
 La preferencia por una futura referencia urbana centro-occidental es una propuesta editorial de MLS-SND; la fuente citada respalda la existencia de áreas dialectales, pero no autoriza por sí sola a equiparar “centro-occidental” con “habla de Ciudad de Guatemala”.
+
+**LINGUISTIC_REVIEW: PASS_WITH_SCOPE_WARNING. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+Se mantiene **REFERENCE_PROVISIONAL**. Esta entrada no pasa a READY_FOR_COMPOSITION mientras la referencia urbana, el inventario segmental y la prosodia sigan incompletos.
