@@ -1,6 +1,6 @@
 # SND-FND-004 — Producción del habla y tracto vocal
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** fonética articulatoria.
 **Idioma:** transversal.
 **Variedad:** no aplica.
