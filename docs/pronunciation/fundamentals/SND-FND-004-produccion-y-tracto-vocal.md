@@ -31,7 +31,7 @@ MLS-SND no asumirá que este mecanismo agota todas las posibilidades fonéticas 
 
 ## 4. Diagramas
 
-Los diagramas mediosagitales podrán utilizarse para mostrar relaciones entre articuladores, siempre que:
+Los diagramas mediosagitales —vistas laterales del tracto vocal— podrán utilizarse para mostrar relaciones entre articuladores, siempre que:
 
 - indiquen orientación;
 - no sugieran precisión anatómica mayor que la necesaria;
@@ -45,6 +45,8 @@ Los diagramas mediosagitales podrán utilizarse para mostrar relaciones entre ar
 | FND004-C01 | La articulación del habla ocurre principalmente en el tracto vocal mediante labios, lengua y otras partes de boca y garganta | SND-SRC-0024 | §3.2 “Speech articulators”, “Overview of the vocal tract” | introductorio/transversal | VERIFIED |
 | FND004-C02 | La cavidad oral, faringe y cavidad nasal son regiones relevantes del tracto vocal | SND-SRC-0024 | §3.2, “Open spaces in the vocal tract” | introductorio/transversal | VERIFIED |
 | FND004-C03 | La mayor parte del habla emplea aire proveniente de los pulmones que pasa por la tráquea hacia la faringe | SND-SRC-0024 | §3.2, “Open spaces in the vocal tract” | introductorio/transversal | VERIFIED |
+| FND004-C04 | Los diagramas mediosagitales se usan para representar estructuras del tracto vocal en vista lateral | SND-SRC-0024 | §3.2, Figure 3.2 y explicación introductoria | introductorio/transversal | VERIFIED |
+| FND004-C05 | Los pliegues vocales forman parte de la laringe y participan en la fonación | SND-SRC-0024 | §3.3, apartado sobre vocal folds/phonation | introductorio/transversal | VERIFIED |
 
 ## 6. Relacionado con
 
@@ -59,3 +61,9 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 8. Nota editorial
 
 La selección de partes anatómicas está deliberadamente limitada a lo necesario para comprender las explicaciones del tomo.
+
+## 9. Linguistic review wave 01
+
+- **Resultado:** PASS tras consolidación de duplicado.
+- **Decisión:** este archivo queda como versión canónica de SND-FND-004.
+- **Contenido incorporado:** nota sobre diagramas mediosagitales y papel de pliegues vocales, procedentes de la versión paralela eliminada.
