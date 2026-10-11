@@ -120,7 +120,7 @@ for (const file of entryFiles) {
 }
 
 for (const [file, content] of contents) {
-  const fileId = (path.basename(file).match(/SND-[A-Z0-9]+-\d{3}/) || [])[0] || null;
+  const fileId = (path.basename(file).match(/SND-(?!SRC-)[A-Z0-9]+-\d{3}(?!\d)/) || [])[0] || null;
   for (const id of uniqueMatches(content, ENTRY_ID_RE)) {
     if (id === fileId) continue;
     if (!entryIds.has(id) && !inventoryIds.has(id)) {
