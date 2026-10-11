@@ -4,7 +4,18 @@
 - Área: 🇩🇪 alemán — núcleo segmental y prosódico
 - Tipo: investigación + redacción + evidence mapping
 - Base: feat/mls-snd-foundation
-- Estado: ACTIVE
+- Estado: COMPLETE
 - Fecha: 2026-10-11
 
-Regla de alcance: no generalizar la Illustration de Kohler más allá de la variedad/hablante que declara. DE-001/007/008 pertenecen a otra wave.
+## Salida
+
+- SND-DE-002 — EVIDENCE_CHECKED.
+- SND-DE-003 — EVIDENCE_CHECKED.
+- SND-DE-004 — EVIDENCE_CHECKED.
+- SND-DE-005 — RESEARCHED.
+- SND-DE-006 — EVIDENCE_CHECKED.
+- `languages/de/SOURCE-MAP-CORE.md` creado.
+
+## Gate pendiente
+
+DE-005 requiere canonicalizar la fuente IDS Grammis y revisión prosódica adicional si se desea ampliar reglas de asignación de acento.
