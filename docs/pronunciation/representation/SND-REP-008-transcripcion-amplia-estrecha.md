@@ -1,6 +1,6 @@
 # SND-REP-008 — Transcripción amplia y transcripción estrecha
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Dominio:** transcripción fonética.  
 **Idioma:** transversal.
 
@@ -54,8 +54,23 @@ MLS-SND adopta transcripción amplia por defecto, pero puede exigir más detalle
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 
+## Entradas relacionadas
+
+- SND-REP-005 — Diacríticos del IPA.
+- SND-REP-007 — Transcripción fonológica y transcripción fonética.
+
 ## Revisión lingüística wave 01
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS. Amplia/estrecha se conserva como continuo de detalle y no como dicotomía mecánica basada en diacríticos.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Revisión:** claridad, jerarquía, navegación y consistencia terminológica.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** decisión de integración/composición; no se promueve automáticamente a READY_FOR_COMPOSITION.
