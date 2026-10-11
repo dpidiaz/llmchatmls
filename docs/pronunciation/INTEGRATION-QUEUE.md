@@ -14,6 +14,17 @@ Este archivo registra **decisiones de reconciliación entre chats paralelos**. E
 - Nunca retroceder el estado canónico por copiar un snapshot viejo.
 - Antes de escribir hot files globales, volver a leer su SHA actual.
 
+## Reconciliación vigente — 90 entradas / 79 fuentes
+
+- **Auditoría:** `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`; PASS referencial con advertencia para ZHTW-009 (DRAFTED, sin fuente).
+- **Inventario:** 53 filas obsoletas reconciliadas con las entradas físicas en `f9ae21fff78c72d4079f6c4c0e168c0bba75c2f4`.
+- **STATUS.md:** publicado con distribución actual (40 EDITORIAL_REVIEW, 10 LINGUISTIC_REVIEW, 32 EVIDENCE_CHECKED, 8 estados previos).
+- **#7402:** CLOSED_REAPPLIED; FND-002/003/004/006/007/008/009/011/013/015 ya en EDITORIAL_REVIEW; audit y claim preservados.
+- **#7404:** CLOSED_REAPPLIED; ENUS-001/009 ya en EDITORIAL_REVIEW; audit y claim preservados.
+- **#7395:** sigue abierto para escaneo independiente reproducible a SHA fijo; se le comunicó el corte 90/79 y la advertencia ZHTW-009.
+
+Los estados editoriales reflejan el encabezado canónico de cada entrada. No equivalen a `READY_FOR_COMPOSITION`. No copiar a la matriz conteos de snapshots de 58, 56 o 79 entradas.
+
 ## Resultados de reconciliación cerrados
 
 | PR | Área | Resultado |
@@ -79,17 +90,16 @@ La versión duplicada `SND-CMP-001-comparar-sin-identidad.md` fue retirada despu
 
 ## Source-ID integrity
 
-Último PASS completo histórico: 60/60 contra Source Registry v0.7.
-
-Árbol físico actual recontado: **90 entradas únicas / 79 fuentes / 0 IDs de entrada duplicados**.
-
-No declarar un nuevo PASS global hasta ejecutar el reescaneo completo con el linter/reconciliador actualizado sobre **90/79**. Los merges recientes no sustituyen ese scan.
+- Histórico: 60/60 (v0.7), 79/79 (v0.13); no reutilizar como prueba del corte actual.
+- Corte 90/79: auditoría referencial con **0 IDs duplicados**, **0 fuentes inexistentes** y **1 draft sin source ID** (ZHTW-009).
+- El control de localizadores, alcance y licencias por claim sigue pendiente y es distinto del control de identidad de fuentes.
+- Próxima automatización QA: ejecución a SHA fijo, no lectura de rama móvil.
 
 ## Próximo orden de integración
 
-1. ejecutar QA estructural/global actualizado sobre 90 entradas / 79 fuentes;
+1. ejecutar QA a SHA fijo y completar validación de localizadores por claim;
 2. integrar reviews lingüísticas concluidas que no alteren claims;
 3. canonicalizar fuentes locales de waves activas antes de promoción;
 4. clean-reapply de ramas muy behind;
 5. integrar perfiles nuevos por ID, nunca por merge masivo de historia vieja;
-6. luego abrir EDITORIAL_REVIEW del primer bloque transversal.
+6. definir el gate de READY_FOR_COMPOSITION para el primer bloque transversal; no inferirlo de EDITORIAL_REVIEW.
