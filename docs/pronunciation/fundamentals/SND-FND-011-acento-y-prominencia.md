@@ -1,14 +1,14 @@
 # SND-FND-011 — Acento y prominencia
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** prosodia.
 **Idioma:** transversal.
 
 ## 1. Qué entendemos por acento aquí
 
-En esta entrada, **acento** se refiere al acento prosódico/estrés de sílabas, no al acento gráfico ni al “acento” regional de una persona.
+En esta entrada, **acento** se refiere a sistemas que las fuentes analizan mediante `stress` o prominencia acentual, no al acento gráfico ni al “acento” regional de una persona.
 
-Una sílaba acentuada puede adquirir mayor prominencia mediante distintas combinaciones de propiedades fonéticas.
+MLS-SND no presupone que toda lengua deba analizarse con una categoría de acento del mismo tipo. Cuando un perfil sí emplee esa categoría, una sílaba acentuada puede adquirir mayor prominencia mediante distintas combinaciones de propiedades fonéticas.
 
 ## 2. Correlatos fonéticos
 
@@ -55,3 +55,11 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 ## 9. Nota editorial
 
 “Prominencia” se usa como término más general. Los perfiles por idioma deberán precisar su análisis prosódico en vez de importar automáticamente la terminología del inglés.
+
+## 10. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS WITH CHANGE → `LINGUISTIC_REVIEW`.
+- **Ajuste:** se eliminó la presuposición de que “acento/estrés” sea una categoría uniforme y universal; cada perfil deberá justificar si utiliza acento, prominencia, tono, acento tonal u otro análisis.
+- **Comprobación externa de cautela tipológica:** Van Soeren (2023, §6.1) señala que el stress no aparece en la fonología léxica de todas las lenguas y que su función y realización varían considerablemente entre las que sí lo tienen (https://doi.org/10.1017/S0022226722000081).
+- **Límite:** los correlatos intensidad/duración/pitch de la fuente introductoria no se transfieren automáticamente a cada idioma.
