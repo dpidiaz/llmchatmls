@@ -23,11 +23,14 @@ La rama matriz contiene **90 entradas canónicas únicas** y el Source Registry 
 
 ## Ya canónico — no reclamar como draft nuevo
 
+Las filas de trabajo por idioma que siguen son orientativas: **el estado exacto y los IDs físicos se consultan en `STATUS.md` y `MLS-SND-MASTER-INVENTORY.md`**, no se infieren de PRs abiertos.
+
 ### Fundamentos
 **FND-001…FND-018** tienen archivo físico canónico.
 
-- 10 están en `LINGUISTIC_REVIEW`.
-- 8 están en `EVIDENCE_CHECKED`.
+- 10 están en `EDITORIAL_REVIEW`.
+- 2 están en `LINGUISTIC_REVIEW`.
+- 6 están en `EVIDENCE_CHECKED`.
 
 Las waves #7300/#7304/#7311 y cualquier otra sobre estos IDs son revisión/ampliación, no nuevas rutas canónicas.
 
@@ -137,14 +140,16 @@ Waves activas conocidas:
 
 ## Trabajo de integración / QA
 
+El corte actual está en `STATUS.md` y la auditoría `audits/SOURCE-ID-INTEGRITY-90-2026-10-11.md`. El inventario ya se sincronizó con los 90 encabezados físicos; **no repetir esa reconciliación a partir de snapshots antiguos**.
+
 Prioridad actual:
 
-1. el linter estructural y su fix ya están integrados; ejecutar un nuevo source-ID/inventory scan sobre las **90 entradas únicas** y 79 fuentes;
-2. reconciliar la distribución exacta de estados después de ese scan;
-3. integrar reviews lingüísticas concluidas sin saltar a EDITORIAL_REVIEW automáticamente;
-4. reconciliar waves que estén muy behind mediante clean reapply;
-5. mantener un solo archivo físico por ID;
-6. no declarar un PASS global usando snapshots antiguos.
+1. mapear evidencia para ZHTW-009, todavía DRAFTED y sin SND-SRC;
+2. ejecutar linter reproducible a SHA fijo y revisar localizadores R33 por claim;
+3. continuar reviews y composición sin confundir EDITORIAL_REVIEW con READY_FOR_COMPOSITION;
+4. reconciliar waves behind mediante clean reapply;
+5. mantener un solo archivo físico por ID y verificar PRs antes de reclamar;
+6. actualizar STATUS solo con un nuevo corte verificable.
 
 ## Criterio para elegir siguiente trabajo
 
