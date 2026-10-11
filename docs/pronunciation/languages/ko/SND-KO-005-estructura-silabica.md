@@ -1,6 +1,6 @@
 # SND-KO-005 — Estructura silábica: marco y decisiones abiertas
 
-**Estado:** RESEARCHED_PARTIAL  
+**Estado:** EVIDENCE_CHECKED  
 **Idioma:** coreano  
 **Dominio:** fonología
 
@@ -12,9 +12,9 @@ El capítulo de Cho (2015) se centra precisamente en procesos fonológicos cuya 
 
 ## 2. Lo que no debe simplificarse
 
-La estructura interna de la sílaba coreana ha sido objeto de análisis teóricos distintos.
+Al menos un punto concreto de la estructura silábica —la silabificación de /j/— ha recibido análisis distintos en la literatura coreana. Jun documenta propuestas que lo silabifican en el núcleo y propuestas/análisis donde puede ocupar el onset en determinados contextos.
 
-MLS-SND no necesita resolver toda esa controversia para explicar pronunciación. Para el lector de consulta bastará inicialmente con:
+MLS-SND no necesita resolver esa disputa teórica para explicar pronunciación. Para el lector de consulta bastará inicialmente con:
 - identificar ataque/onset cuando sea descriptivamente necesario;
 - identificar núcleo;
 - identificar coda/batchim cuando sea necesario;
@@ -34,8 +34,8 @@ Primero se revisarán:
 | claim_id | afirmación | source | localizador | estado |
 |---|---|---|---|---|
 | KO005-C01 | Existe un conjunto importante de procesos coreanos formulados respecto de onset, coda o límite silábico | KO-W1-C06 | Summary del capítulo | VERIFIED |
-| KO005-C02 | La representación sub-silábica coreana ha recibido análisis diferentes en la literatura | SOURCE_MAP_PENDING_CANONICAL | literatura de estructura silábica mapeada; requiere localizador final | SOURCED_NOT_FINAL |
+| KO005-C02 | La literatura coreana ha propuesto más de una silabificación para /j/: en el núcleo y, en determinados análisis/contextos, en el onset | KO-W1-C10 | Jun 2015, análisis alrededor de (13b)–(16), especialmente el párrafo “Both syllabifications have been proposed…” | VERIFIED |
 
 ## 5. Gate
 
-Antes de EVIDENCE_CHECKED completo: añadir al menos una fuente primaria/teórica con localizadores verificables sobre la controversia de estructura interna.
+**EVIDENCE_CHECKED.** La entrada mantiene deliberadamente una política descriptiva mínima: usa onset/núcleo/coda cuando sean necesarios y no adopta un árbol silábico canónico para resolver debates que no son necesarios para la consulta.
