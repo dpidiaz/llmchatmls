@@ -25,7 +25,7 @@ Resultado:
 
 - 106 entradas canónicas;
 - 91 fuentes canónicas;
-- 44 EDITORIAL_REVIEW;
+- 43 EDITORIAL_REVIEW;
 - 35 LINGUISTIC_REVIEW;
 - 22 EVIDENCE_CHECKED;
 - 1 SOURCE_MAPPED;
@@ -33,7 +33,7 @@ Resultado:
 - 1 RESEARCHED;
 - 1 RESEARCHED_PARTIAL;
 - 1 IN_PROGRESS;
-- 0 READY_FOR_COMPOSITION.
+- 1 READY_FOR_COMPOSITION.
 
 ## Reconciliaciones recientes
 
@@ -49,11 +49,11 @@ KO-002 está EVIDENCE_CHECKED únicamente como **mapa de evidencia**. Fricativas
 Revisión lingüística integrada: FND-014 está en **LINGUISTIC_REVIEW**.
 
 ### Composition readiness
-La propuesta de gate existe en:
-- `snd/composition-readiness-clean-reapply-wave-02`;
-- una wave de integración paralela `snd/composition-readiness-integration-wave-03`.
+El gate canónico ya está integrado.
 
-No promover entradas a READY_FOR_COMPOSITION hasta que el gate canónico esté físicamente en la matriz.
+PR #7458: **MERGED** — FND-002 es la primera entrada READY_FOR_COMPOSITION con reader-facing projection, audit PASS y handoff manifest.
+
+Las siguientes entradas deben ejecutar el gate de forma independiente; no hay promoción por arrastre.
 
 ### Source integrity
 La wave #7446 produjo un audit 106/91 pero queda supersedida por esta reconciliación, que además fija la definición exacta de entrada canónica y absorbe los cambios FND-014/KO-002.
@@ -101,7 +101,7 @@ El control actual es estructural/referencial. El control de localizadores y sufi
 
 ## Próximo orden sugerido
 
-1. integrar composition-readiness gate;
+1. ejecutar un segundo composition-readiness pilot sobre una entrada EDITORIAL_REVIEW estable;
 2. cerrar pre-gates ESGT-002 / ESGT-004 / DE-008 / ZHTW-003;
 3. clean-reapply de coverage waves ya investigadas;
 4. completar aparato REF;

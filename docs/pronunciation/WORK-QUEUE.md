@@ -155,9 +155,9 @@ Desglose de gaps físicos:
 Preferir clean reapply de waves con contenido útil ya producido antes de abrir investigación redundante.
 
 ### 3. Composition readiness
-El proyecto tiene 44 entradas en EDITORIAL_REVIEW y 0 en READY_FOR_COMPOSITION.
+El proyecto tiene 43 entradas en EDITORIAL_REVIEW y **1 en READY_FOR_COMPOSITION**.
 
-La wave de gate de composición debe integrarse antes de promover cualquier entrada.
+FND-002 completó el primer PASS con reader-facing projection y handoff manifest. Las siguientes promociones deben repetir el gate por versión concreta; no copiar el estado por analogía.
 
 ### 4. QA
 Repetir:

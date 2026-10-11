@@ -15,7 +15,7 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. N
 
 | Estado registrado en la entrada | Número |
 |---|---:|
-| EDITORIAL_REVIEW | 44 |
+| EDITORIAL_REVIEW | 43 |
 | LINGUISTIC_REVIEW | 35 |
 | EVIDENCE_CHECKED | 22 |
 | SOURCE_MAPPED | 1 |
@@ -23,7 +23,7 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. N
 | RESEARCHED | 1 |
 | RESEARCHED_PARTIAL | 1 |
 | IN_PROGRESS | 1 |
-| READY_FOR_COMPOSITION | 0 |
+| READY_FOR_COMPOSITION | 1 |
 | **Total** | **106** |
 
 **Importante:** `EDITORIAL_REVIEW` no equivale a `READY_FOR_COMPOSITION`. `EVIDENCE_CHECKED` tampoco equivale a publicación ni valida automáticamente claims futuros.
@@ -44,7 +44,7 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 
 | Bloque | Entradas | Estado / alcance |
 |---|---:|---|
-| Fundamentos FND | 18 | 10 EDITORIAL_REVIEW; 3 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
+| Fundamentos FND | 18 | 9 EDITORIAL_REVIEW; 3 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED; 1 READY_FOR_COMPOSITION |
 | Representación REP | 12 | 7 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
 | Comparación CMP | 1 | CMP-001 EVIDENCE_CHECKED |
 | Referencia REF | 1 | REF-002 IN_PROGRESS |
@@ -59,6 +59,13 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 | Japonés JA | 6 | 2 EDITORIAL_REVIEW; 4 LINGUISTIC_REVIEW |
 | Ruso RU | 8 | 8 EDITORIAL_REVIEW |
 | **Total** | **106** | |
+
+## Primer gate de composición alcanzado
+
+- **FND-002 — Fonética y fonología:** READY_FOR_COMPOSITION.
+- Audit: `audits/FND-002-COMPOSITION-READINESS-WAVE-02-2026-10-11.md`.
+- Handoff: `handoffs/SND-FND-002-composition.md`.
+- Reader-facing projection explícita; metadata R33/reviews permanece en repositorio.
 
 ## Entradas todavía pre-gate
 
