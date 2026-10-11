@@ -1,6 +1,6 @@
 # SND-KO-010 — Romanización Revisada e IPA cumplen funciones distintas
 
-**Estado:** EVIDENCE_CHECKED  
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** coreano  
 **Dominio:** romanización / transcripción
 
@@ -37,3 +37,11 @@ Esta entrada documenta **la frontera editorial entre romanización y transcripci
 ## 5. Nota editorial
 
 La decisión de mostrar ambas capas solo cuando sean útiles forma parte de la política MLS-SND; no es una exigencia del NIKL ni de la IPA.
+
+
+## Revisión lingüística 2026-10-11
+
+- Representación, alcance y separación escritura/romanización/IPA comprobados.
+- Source IDs canónicos revisados.
+- Las decisiones editoriales permanecen separadas de los claims externos.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
