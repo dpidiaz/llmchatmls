@@ -27,4 +27,4 @@
 - Referencias SND-SRC inexistentes: 0.
 - IDs locales en entradas: 0.
 - Entradas promovidas sin fuente canónica: 0.
-- Drift detectado en STATUS: declara 77, snapshot físico = 79; REP-003/004 ya existen.
+- Drift detectado en STATUS: declaraba 77, snapshot físico = 79; REP-003/004 ya existen. Resuelto posteriormente por #7381. El fix de linter asociado quedó fusionado por #7375.
