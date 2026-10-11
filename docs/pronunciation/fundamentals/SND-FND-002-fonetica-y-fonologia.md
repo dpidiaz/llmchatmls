@@ -1,6 +1,6 @@
 # SND-FND-002 — Fonética y fonología
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** fundamentos.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -59,3 +59,10 @@ Las formulaciones de “fonética” y “fonología” están adaptadas a la vo
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## 8. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** la entrada mantiene separados el nivel fonético y el fonológico y evita deducir categorías fonológicas a partir de diferencias fonéticas por sí solas.
+- **Límite:** los perfiles pueden adoptar análisis fonológicos diferentes; MLS-SND debe atribuirlos a sus fuentes.
