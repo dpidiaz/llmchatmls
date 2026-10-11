@@ -35,20 +35,24 @@
 
 ### Entradas de fundamento auditadas
 
-- SND-FND-002 — Fonética y fonología — EVIDENCE_CHECKED.
-- SND-FND-004 — Producción del habla y tracto vocal — EVIDENCE_CHECKED.
-- SND-FND-003 — Fonema, alófono, segmento y realización — EVIDENCE_CHECKED.
-- SND-FND-006 — Consonantes: parámetros articulatorios — EVIDENCE_CHECKED.
-- SND-FND-007 — Vocales: parámetros articulatorios — EVIDENCE_CHECKED.
-- SND-FND-008 — Sílaba — EVIDENCE_CHECKED.
-- SND-FND-009 — Fonotáctica — EVIDENCE_CHECKED.
-- SND-FND-011 — Acento y prominencia — EVIDENCE_CHECKED.
-- SND-FND-013 — Tono — EVIDENCE_CHECKED.
-- SND-FND-015 — Entonación — EVIDENCE_CHECKED.
+- SND-FND-002 — Fonética y fonología — EDITORIAL_REVIEW.
+- SND-FND-004 — Producción del habla y tracto vocal — EDITORIAL_REVIEW.
+- SND-FND-003 — Fonema, alófono, segmento y realización — EDITORIAL_REVIEW.
+- SND-FND-006 — Consonantes: parámetros articulatorios — EDITORIAL_REVIEW.
+- SND-FND-007 — Vocales: parámetros articulatorios — EDITORIAL_REVIEW.
+- SND-FND-008 — Sílaba — EDITORIAL_REVIEW.
+- SND-FND-009 — Fonotáctica — EDITORIAL_REVIEW.
+- SND-FND-011 — Acento y prominencia — EDITORIAL_REVIEW.
+- SND-FND-013 — Tono — EDITORIAL_REVIEW.
+- SND-FND-015 — Entonación — EDITORIAL_REVIEW.
 
-### Entradas de representación/perfiles auditadas
+### Entradas transversales de representación revisadas
 
-- SND-REP-002 — Qué es el AFI/IPA — EVIDENCE_CHECKED.
+- SND-REP-002 — Qué es el AFI/IPA — EDITORIAL_REVIEW.
+- SND-REP-005 — Diacríticos del IPA — EDITORIAL_REVIEW.
+- SND-REP-006 — Suprasegmentales, tonos y acentos de palabra en el IPA — EDITORIAL_REVIEW.
+
+### Entradas específicas de idiomas auditadas
 - SND-ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz — EVIDENCE_CHECKED.
 - SND-ZHTW-007 — Zhuyin/Bopomofo — EVIDENCE_CHECKED.
 - SND-KO-009 — Romanización Revisada del coreano — EVIDENCE_CHECKED.
@@ -59,9 +63,10 @@
 - 26 fuentes registradas.
 - 143 unidades editoriales candidatas inventariadas.
 - 10 perfiles lingüísticos inicializados.
-- 20 entradas redactadas.
-- 20 entradas en EVIDENCE_CHECKED.
-- 0 entradas todavía en LINGUISTIC_REVIEW, EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
+- 22 entradas únicas redactadas.
+- 13 entradas transversales en EDITORIAL_REVIEW.
+- 9 entradas específicas de idiomas en EVIDENCE_CHECKED.
+- 0 entradas en READY_FOR_COMPOSITION.
 
 ## Coordinación paralela
 
@@ -92,7 +97,7 @@ Los chats nuevos deben leer `COORDINATION.md`, trabajar en ramas independientes 
 - SND-PTBR-001 — Portugués brasileño amplio vs. habla carioca — EVIDENCE_CHECKED.
 - SND-ESGT-005 — /s/ y variación regional — EVIDENCE_CHECKED.
 - SND-ENUS-009 — Southern Michigan como perfil documentado — EVIDENCE_CHECKED.
-- SND-PTBR-006 — /s/ en coda y variación carioca — EVIDENCE_CHECKED.
+- SND-PTBR-006 — Sibilante /S/ en coda y variación carioca — EVIDENCE_CHECKED.
 
 
 ## Gate PILOT-SCOPE-01
@@ -117,3 +122,16 @@ Los tres están en **EVIDENCE_CHECKED**. El perfil carioca conserva advertencia 
 ### Siguiente gate
 
 Ejecutar **LINGUISTIC_REVIEW** independiente o de segunda pasada sobre la primera wave antes de congelar la arquitectura del tomo.
+
+
+## Gate LINGUISTIC-REVIEW-WAVE-01
+
+**PASS para el núcleo transversal.**
+
+- 10 entradas de fundamentos: revisión lingüística de segunda pasada completada → EDITORIAL_REVIEW.
+- 3 entradas transversales de representación: revisión lingüística completada → EDITORIAL_REVIEW.
+- 9 entradas específicas de idiomas: permanecen en EVIDENCE_CHECKED hasta revisión especializada o segunda revisión específica por idioma.
+- 3 conflictos de ID creados por concurrencia fueron consolidados: FND-004, FND-006 y FND-007.
+- Correcciones sustantivas de la wave: distinción pitch/F0; cautela con correlatos del acento; conservación de /S/ en la notación fuente del portugués carioca; realineación de claims de alcance PTBR-001.
+
+**No hay entradas READY_FOR_COMPOSITION todavía.** El siguiente gate es revisión editorial de las 13 entradas transversales y revisión lingüística especializada de los tres perfiles piloto.
