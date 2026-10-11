@@ -98,6 +98,35 @@ Este mapa complementa el Source Registry global sin asignar nuevos IDs globales,
 
 **Limitaciones:** no usar los Highlights como sustituto de la lectura del artículo para una regla fonológica o prosódica fina.
 
+
+### ENUS-CAND-006 — Buckeye Corpus
+
+**Referencia propuesta:** Pitt, M. A., Dilley, L., Johnson, K., Kiesling, S., Raymond, W., Hume, E., & Fosler-Lussier, E. (2007). *Buckeye Corpus of Conversational Speech* (2nd release). Department of Psychology, The Ohio State University. https://buckeyecorpus.osu.edu/
+
+**Artículo metodológico:** Pitt, M. A., Johnson, K., Hume, E., Kiesling, S., & Raymond, W. (2005). The Buckeye corpus of conversational speech: Labeling conventions and a test of transcriber reliability. *Speech Communication, 45*(1), 89–95. https://doi.org/10.1016/j.specom.2004.09.001
+
+**Cobertura:** conversación espontánea de 40 hablantes de Columbus, Ohio; aproximadamente 307,000 palabras; transcripción ortográfica, segmentación y etiquetas fonéticas.
+
+**Acceso:** corpus gratuito para uso no comercial previa aceptación/registro según el sitio del proyecto.
+
+**Localizadores:** artículo 2005, Abstract/Introduction; sitio Buckeye Corpus “The Buckeye Speech Corpus”; sección Publications.
+
+**Utilidad:** habla conectada, variación de pronunciación, reducción, deletion y otras realizaciones conversacionales.
+
+**Limitación crítica:** corpus regional de Columbus, Ohio; no representa automáticamente todo American English.
+
+### ENUS-CAND-007 — Johnson (2004), massive reduction
+
+**Referencia propuesta:** Johnson, K. (2004). Massive reduction in conversational American English. En K. Yoneyama & K. Maekawa (Eds.), *Spontaneous Speech: Data and Analysis* (pp. 29–54). National Institute for Japanese Language.
+
+**Acceso:** copia de autor disponible desde UC Berkeley.
+
+**Cobertura:** reducción fonética en un corpus de conversación estadounidense relacionado con ViC/Buckeye; cuantifica desviaciones respecto a formas de cita mediante pérdida de sílabas y cambios segmentales.
+
+**Localizadores iniciales:** Abstract; §1 Introduction; secciones del corpus y resultados, pp. 29–54.
+
+**Limitaciones:** estudio centrado en un corpus concreto; las tasas no se generalizarán a todas las variedades/estilos sin evidencia adicional.
+
 ## Decisión de esta wave
 
 - SND-ENUS-009 puede pasar a EVIDENCE_CHECKED con SND-SRC-0005.
