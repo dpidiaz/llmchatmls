@@ -1,6 +1,6 @@
 # SND-FND-003 — Fonema, alófono, segmento y realización
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Dominio:** fonología / fonética.
 **Idioma:** transversal.
 
@@ -68,3 +68,10 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para los claims listados.
 - **Alcance:** comprobación claim ↔ fuente ↔ sección; no equivale todavía a LINGUISTIC_REVIEW ni EDITORIAL_REVIEW.
+
+## 8. Revisión lingüística
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Comprobación:** “fonema”, “alófono”, “segmento” y “realización” se presentan como niveles/objetos analíticos distintos y la entrada reconoce explícitamente que puede haber análisis alternativos.
+- **Límite:** ningún perfil debe heredar automáticamente un análisis fonémico del capítulo general.
