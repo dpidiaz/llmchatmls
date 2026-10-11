@@ -32,10 +32,10 @@ Las entradas vocálicas deberán separar:
 
 | claim_id | afirmación | source | localizador | estado |
 |---|---|---|---|---|
-| KO004-C01 | Kang & Kong analizan siete monoftongos en habla espontánea del Seoul Corpus | KO-W1-S04 | Abstract; pp. 39–47 | VERIFIED |
-| KO004-C02 | El estudio documenta patrones de /o/ elevado y anteriorización de /u, ɨ/, con diferencias por edad/género | KO-W1-S04 | Abstract | VERIFIED |
-| KO004-C03 | Sus resultados apoyan cambio en cadena y no una simple fusión completa /o/–/u/ | KO-W1-S04 | Abstract | VERIFIED |
-| KO004-C04 | Igeta et al. encuentran proximidad/solapamiento parcial /o/–/u/ y efectos en percepción en jóvenes adultos | KO-W1-S05 | Abstract; pp. 109–119 | VERIFIED |
+| KO004-C01 | Kang & Kong analizan siete monoftongos en habla espontánea del Seoul Corpus | KO-W1-C04 | Abstract; pp. 39–47 | VERIFIED |
+| KO004-C02 | El estudio documenta patrones de /o/ elevado y anteriorización de /u, ɨ/, con diferencias por edad/género | KO-W1-C04 | Abstract | VERIFIED |
+| KO004-C03 | Sus resultados apoyan cambio en cadena y no una simple fusión completa /o/–/u/ | KO-W1-C04 | Abstract | VERIFIED |
+| KO004-C04 | Igeta et al. encuentran proximidad/solapamiento parcial /o/–/u/ y efectos en percepción en jóvenes adultos | KO-W1-C05 | Abstract; pp. 109–119 | VERIFIED |
 
 ## 5. Límite
 
