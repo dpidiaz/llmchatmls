@@ -1,6 +1,6 @@
 # SND-REP-002 — Qué es el AFI/IPA
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** EDITORIAL_REVIEW.
 **Dominio:** transcripción.
 **Idioma:** transversal.
 **Variedad:** no aplica.
@@ -73,3 +73,11 @@ Las afirmaciones sobre lo que el IPA no debe sustituir dentro de MLS-SND son dec
 - **Resultado:** EVIDENCE_CHECKED.
 - **Comprobación:** la página oficial de la International Phonetic Association confirma que la Asociación mantiene el IPA y su tabla, que los cambios oficiales requieren aprobación del Council y que la tabla ofrece subgráficos de consonantes, vocales, diacríticos, suprasegmentales y tonos/acentos de palabra. La página oficial del Handbook confirma capítulos de análisis y 29 Illustrations.
 - **Límite:** las decisiones sobre qué sistemas no debe sustituir el IPA son política editorial MLS-SND, no claims atribuidos a la IPA.
+
+
+## Linguistic review wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Control:** terminología, alcance y coherencia con la política de transcripción revisados.
+- **Siguiente etapa:** EDITORIAL_REVIEW.
