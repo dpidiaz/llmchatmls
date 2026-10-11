@@ -2,7 +2,7 @@
 
 ## Cubierto en v0.1
 
-- 29 términos o etiquetas principales;
+- 33 términos o etiquetas principales;
 - advertencias de uso para 6 expresiones de riesgo;
 - referencias a entradas FND cuando ya existen;
 - separación explícita entre escritura, romanización, transliteración e IPA;
