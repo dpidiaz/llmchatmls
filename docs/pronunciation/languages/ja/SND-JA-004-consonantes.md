@@ -1,13 +1,13 @@
 # SND-JA-004 — Consonantes: mapa general y realizaciones documentadas
 
-**Estado:** RESEARCHED_PARTIAL.  
+**Estado:** SOURCE_MAPPED.  
 **Idioma:** japonés.  
 **Variedad / alcance:** japonés de referencia con controles contemporáneos puntuales; no exhaustivo.  
 **Dominio:** fonología / fonética / pronunciación.  
 **Tipo de alcance:** REFERENCE_VARIETY + CORPUS_OBSERVED para subfenómenos documentados.  
 **Nivel de representación:** fonológico / fonético.  
 **Dependencias:** SND-JA-001, SND-JA-002, SND-JA-005.  
-**Versión:** wave-04b (clean reapply de #7347).
+**Versión:** wave-04b (clean reapply de #7347; broad-source fulltext verified).
 
 ## 1. Qué es
 
@@ -49,6 +49,22 @@ En esta wave no se vuelve a declarar un inventario completo como “actual” si
 - marcar huecos que requieren revisión segmental reciente.
 
 Resultado: **SOURCE_MAPPED para el mapa general; CORPUS_OBSERVED para las etiquetas CSJ; evidencia contemporánea selectiva para fenómenos concretos**.
+
+### 3.1 Control amplio contemporáneo: Kubozono (2015)
+
+El capítulo introductorio del *Handbook of Japanese Phonetics and Phonology* ya fue verificado en texto completo para la sección consonántica relevante.
+
+En la p. impresa 6, §3.1 y Tabla 1, Kubozono presenta un inventario fonémico de referencia para el japonés moderno —adaptado de Shibatani (1990)— con /p b t d k g s z h m n r w j/. La misma sección advierte inmediatamente que el panorama superficial es más rico cuando se consideran alófonos y estratos léxicos.
+
+En pp. 6–7 se documentan, entre otros puntos:
+
+- /s/ con realizaciones contextuales en vocabulario nativo;
+- /t/ con realizaciones africadas ante /i/ y /u/;
+- /h/ con realizaciones palatal, bilabial y glotal condicionadas por vocal;
+- pérdida de complementariedad estricta para varias de esas realizaciones en vocabulario sinojaponés y préstamos;
+- expansión reciente de combinaciones consonante-vocal mediante préstamos, incluida la distribución de [t], [ts], [ɸ], /w/ y /j/.
+
+Por tanto, MLS-SND usa la Tabla 1 como **baseline fonémico de referencia**, no como una lista exhaustiva de todas las realizaciones contrastivas o contextuales del japonés moderno.
 
 ## 4. /r/ y /d/: categorías distintas con propiedades articulatorias próximas
 
@@ -160,6 +176,9 @@ La comparación debe basarse en articulación y distribución documentadas, no e
 | JA004-C07 | El núcleo CSJ con etiquetado segmental cubre aproximadamente 500.000 palabras y unas 44 horas de audio | JA-W04-S03 | p. 2, §1 | corpus institucional | SOURCED_PENDING_REGISTRY |
 | JA004-C08 | El esquema CSJ combina etiquetas fonémicas japonesas con etiquetas fonéticas para variantes observables y se sitúa entre etiquetado amplio y estrecho | JA-W04-S03 | p. 2, §2 | política de anotación | SOURCED_PENDING_REGISTRY |
 | JA004-C09 | La Tabla 2 define un conjunto amplio de etiquetas consonánticas y señala que algunas etiquetas definidas no se usan actualmente en el corpus | JA-W04-S03 | p. 2, §3; p. 3, Tabla 2 y nota | mapa de anotación consonántica | SOURCED_PENDING_REGISTRY |
+| JA004-C10 | Una síntesis amplia de 2015 presenta un inventario fonémico de referencia para el japonés moderno con /p b t d k g s z h m n r w j/ | JA-W04-S04 | p. impresa 6, §3.1, Tabla 1 | japonés moderno; baseline fonémico | SOURCED_PENDING_REGISTRY |
+| JA004-C11 | La misma síntesis distingue alofonía contextual de /s t h/ en vocabulario nativo y muestra que varias realizaciones dejan de ser complementarias en estratos sinojaponeses/préstamos | JA-W04-S04 | pp. impresas 6–7, §3.1 | fonología segmental + estratos léxicos | SOURCED_PENDING_REGISTRY |
+| JA004-C12 | Préstamos recientes amplían combinaciones consonante-vocal y la distribución de segmentos como [t], [ts], [ɸ], /w/ y /j/ | JA-W04-S04 | p. impresa 7, §3.1 | préstamos contemporáneos | SOURCED_PENDING_REGISTRY |
 
 ## 14. Fuentes APA 7
 
@@ -177,17 +196,16 @@ Okada, H. (1991). Japanese. *Journal of the International Phonetic Association, 
 - JA-W04-S01 y JA-W04-S02 son fuentes contemporáneas puntuales.
 - JA-W04-S03 aporta cobertura segmental amplia basada en corpus, pero su función es de **anotación** y no debe confundirse con un inventario fonológico definitivo.
 - La entrada no fija todavía un inventario contemporáneo definitivo.
-- JA-W04-S04 identifica una descripción fonológica amplia de 2015 con sección específica de inventario consonántico, pero permanece en HOLD hasta inspeccionar su texto completo; no se usa aún como evidencia de detalle.
-- Antes de considerar EVIDENCE_CHECKED global debe verificarse el texto completo de una descripción fonológica amplia, independiente del esquema de anotación CSJ.
+- JA-W04-S04 ya fue verificada en texto completo para la sección consonántica relevante (pp. impresas 6–9); se usa como control amplio y no como autoridad única.
+- Antes de considerar EVIDENCE_CHECKED global debe completarse la canonicalización de IDs y una revisión lingüística independiente del mapa ya reconciliado.
 - No se mezcla evidencia de Tokio, corpus general y explicación histórica sin indicar su alcance.
 
 ## Gate de salida
 
-**Resultado:** RESEARCHED_PARTIAL.
+**Resultado:** SOURCE_MAPPED.
 
 Pendiente para EVIDENCE_CHECKED:
-1. canonicalizar/deduplicar JA-W04-S01/S02/S03;
-2. verificar el texto completo de JA-W04-S04 (o fuente equivalente) y contrastarlo con SND-SRC-0023 + JA-W04-S03;
-3. revisar el inventario completo contra las fuentes reconciliadas;
-4. auditoría lingüística independiente;
-5. verificar coherencia con JA-002/005/008/010.
+1. canonicalizar/deduplicar JA-W04-S01/S02/S03/S04;
+2. reescribir IDs locales a SND-SRC canónicos y repetir el gate R33;
+3. auditoría lingüística independiente;
+4. verificar coherencia con JA-002/005/008/010.
