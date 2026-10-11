@@ -61,7 +61,8 @@
 - 10 perfiles lingüísticos inicializados.
 - 20 entradas redactadas.
 - 20 entradas en EVIDENCE_CHECKED.
-- 0 entradas todavía en LINGUISTIC_REVIEW, EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
+- 10 entradas fundacionales en LINGUISTIC_REVIEW.
+- 0 entradas todavía en EDITORIAL_REVIEW o READY_FOR_COMPOSITION.
 
 ## Coordinación paralela
 
@@ -117,3 +118,8 @@ Los tres están en **EVIDENCE_CHECKED**. El perfil carioca conserva advertencia 
 ### Siguiente gate
 
 Ejecutar **LINGUISTIC_REVIEW** independiente o de segunda pasada sobre la primera wave antes de congelar la arquitectura del tomo.
+
+
+## Gate LINGUISTIC-FOUNDATIONS-01
+
+**PASS:** FND-002, 003, 004, 006, 007, 008, 009, 011, 013 y 015 fueron revisadas independientemente y promovidas a LINGUISTIC_REVIEW. Se canonicalizaron las rutas duplicadas de FND-004/006/007. Próximo gate: EDITORIAL_REVIEW.
