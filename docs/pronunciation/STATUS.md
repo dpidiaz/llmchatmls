@@ -26,8 +26,8 @@ Este archivo describe **lo que ya existe en la rama matriz** `feat/mls-snd-found
 
 Distribución derivada del Master Inventory para esos 73 IDs:
 
-- **42** en `EVIDENCE_CHECKED`;
-- **24** en `LINGUISTIC_REVIEW`;
+- **26** en `EVIDENCE_CHECKED`;
+- **40** en `LINGUISTIC_REVIEW`;
 - **2** en `SOURCE_MAPPED`;
 - **2** en `DRAFTED`;
 - **1** en `RESEARCHED`;
@@ -104,8 +104,8 @@ Aún faltan como entrada canónica física:
 Referencia: **REFERENCE_PROVISIONAL**; el perfil nacional mantiene variación explícita.
 
 ### 🇺🇸 en-US
-- ENUS-001 — EVIDENCE_CHECKED.
-- ENUS-009 — EVIDENCE_CHECKED.
+- ENUS-001 — LINGUISTIC_REVIEW.
+- ENUS-009 — LINGUISTIC_REVIEW.
 
 Referencia: **MULTI_REFERENCE**.
 
@@ -135,14 +135,14 @@ Referencia: **REFERENCE_PROVISIONAL**; ancla metropolitana supralocal/norte de F
 Referencia: **MULTI_REFERENCE**.
 
 ### 🇹🇼 zh-TW
-- ZHTW-001 — EVIDENCE_CHECKED.
+- ZHTW-001 — LINGUISTIC_REVIEW.
 - ZHTW-003 — RESEARCHED_PARTIAL.
-- ZHTW-004 — EVIDENCE_CHECKED.
-- ZHTW-005 — EVIDENCE_CHECKED.
-- ZHTW-007 — EVIDENCE_CHECKED.
-- ZHTW-008 — EVIDENCE_CHECKED.
+- ZHTW-004 — LINGUISTIC_REVIEW.
+- ZHTW-005 — LINGUISTIC_REVIEW.
+- ZHTW-007 — LINGUISTIC_REVIEW.
+- ZHTW-008 — LINGUISTIC_REVIEW.
 - ZHTW-009 — DRAFTED.
-- ZHTW-010 — EVIDENCE_CHECKED.
+- ZHTW-010 — LINGUISTIC_REVIEW.
 
 Referencia: **REFERENCE_PROVISIONAL**.
 
@@ -159,7 +159,7 @@ Referencia: **REFERENCE_PROVISIONAL**; norma institucional, habla empírica de S
 Referencia: **REFERENCE_FIXED** solo como ancla prosódica Tokio/lengua común, con límites explícitos.
 
 ### 🇷🇺 ru
-- RU-001…RU-008 — EVIDENCE_CHECKED.
+- RU-001…RU-008 — LINGUISTIC_REVIEW.
 
 Referencia: **REFERENCE_FIXED** para referencia ortoépica literaria, separada de descripción fonética y variación.
 
@@ -186,7 +186,7 @@ No convertir el PASS histórico 60/60 en una afirmación automática sobre el sn
 
 1. ejecutar el reescaneo completo de integridad 73/73 contra Source Registry v0.11;
 2. integrar/revisar REP-003 y REP-004;
-3. continuar LINGUISTIC_REVIEW de perfiles EVIDENCE_CHECKED;
+3. continuar LINGUISTIC_REVIEW de perfiles EVIDENCE_CHECKED y comenzar EDITORIAL_REVIEW de en-US, zh-TW, ru y otros perfiles con PASS lingüístico;
 4. reconciliar waves nuevas de es-GT, fr, it, de, ja y perfiles piloto sin duplicar canónicos;
 5. ejecutar EDITORIAL_REVIEW del primer bloque transversal;
 6. completar los aparatos REF vivos;
