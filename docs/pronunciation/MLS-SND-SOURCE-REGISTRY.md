@@ -1485,3 +1485,29 @@ Mapeamiento local resuelto en esta wave:
 - `ZHTW-LOCAL-011` → `SND-SRC-0096`.
 
 La canonicalización resuelve identidad bibliográfica, alcance y localizadores mínimos. **No promueve ZHTW-003 más allá de RESEARCHED_PARTIAL ni convierte un análisis de una fuente en consenso del perfil.**
+
+
+## 40. Canonicalización rusa: cirílico, ortografía y pronunciación
+
+### SND-SRC-0097 — Ruso / reglas académicas de ortografía y uso de letras
+
+- **Tier:** A/B — referencia académica institucional.
+- **APA 7:** Lopatin, V. V. (Ed.). (2006). *Правила русской орфографии и пунктуации. Полный академический справочник*. Москва: Эксмо.
+- **Registro institucional:** https://ruslang.ru/book/pravila-russkoy-orfografii-i-punktuacii-polnyy-akademicheskiy-spravochnik
+- **Texto consultable:** Gramota.ru, secciones “Общие сведения о русском письме” y “Основной принцип употребления букв”.
+- **Idioma/alcance:** ruso; sistema ortográfico académico.
+- **Cobertura usada por MLS-SND:** alfabeto ruso de 33 letras; relación no unívoca sonido↔letra; representación gráfica de consonantes duras/blandas; función de pares de letras vocálicas y signos ortográficos.
+- **Localizadores:** Gramota → “Общие сведения о русском письме” (alfabeto); Gramota → “Основной принцип употребления букв” (relaciones sonido-letra y dureza/blandura).
+- **Acceso:** registro institucional abierto; texto de consulta abierto en Gramota.
+- **Limitación:** fuente ortográfica/gráfica; no es descripción fonética exhaustiva ni corpus de habla espontánea. Para realizaciones se requieren SND-SRC-0015 y otras fuentes fonéticas.
+- **Verificado:** 2026-10-11 contra Instituto Vinogradov RAN y Gramota.
+- **Estado:** ADMITTED_INSTITUTIONAL_ORTHOGRAPHY.
+
+## 41. Resultado del registro v0.22
+
+El registro contiene **97 fuentes canónicas** numeradas SND-SRC-0001 a SND-SRC-0097.
+
+Mapeo local resuelto:
+- `RU-PROP-001` → `SND-SRC-0097`.
+
+La canonicalización resuelve identidad bibliográfica y localizadores. No convierte reglas ortográficas en evidencia de realización fonética.
