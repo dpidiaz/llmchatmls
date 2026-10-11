@@ -1,6 +1,6 @@
 # MLS-SND Master Inventory
 
-Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales candidatas; no convierte sus títulos en afirmaciones lingüísticas validadas.
+Estado: **inventario operativo v0.3**. Este archivo enumera unidades editoriales candidatas; no convierte sus títulos en afirmaciones lingüísticas validadas.
 
 ## 1. Convención de IDs
 
@@ -23,30 +23,30 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
-| SND-FND-001 | El sonido como parte del idioma | — | INVENTORY |
+| SND-FND-001 | El sonido como parte del idioma | — | EVIDENCE_CHECKED |
 | SND-FND-002 | Fonética y fonología | terminología v0.2 | LINGUISTIC_REVIEW |
 | SND-FND-003 | Fonema, alófono, segmento y realización | FND-002 | LINGUISTIC_REVIEW |
 | SND-FND-004 | Producción del habla y tracto vocal | fuentes generales | LINGUISTIC_REVIEW |
-| SND-FND-005 | Percepción del habla | fuentes generales | INVENTORY |
+| SND-FND-005 | Percepción del habla | fuentes generales | EVIDENCE_CHECKED |
 | SND-FND-006 | Consonantes: parámetros articulatorios | IPA | LINGUISTIC_REVIEW |
 | SND-FND-007 | Vocales: parámetros articulatorios/acústicos | IPA | LINGUISTIC_REVIEW |
 | SND-FND-008 | Sílaba | terminología | LINGUISTIC_REVIEW |
 | SND-FND-009 | Fonotáctica | FND-008 | LINGUISTIC_REVIEW |
-| SND-FND-010 | Duración y cantidad | terminología | EVIDENCE_CHECKED |
+| SND-FND-010 | Duración y cantidad | terminología | LINGUISTIC_REVIEW |
 | SND-FND-011 | Acento y prominencia | terminología | LINGUISTIC_REVIEW |
-| SND-FND-012 | Ritmo | terminología + fuentes | INVENTORY |
+| SND-FND-012 | Ritmo | terminología + fuentes | EVIDENCE_CHECKED |
 | SND-FND-013 | Tono | terminología | LINGUISTIC_REVIEW |
-| SND-FND-014 | Acento tonal | FND-011, FND-013 | INVENTORY |
+| SND-FND-014 | Acento tonal | FND-011, FND-013 | EVIDENCE_CHECKED |
 | SND-FND-015 | Entonación | terminología | LINGUISTIC_REVIEW |
-| SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | INVENTORY |
-| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | EVIDENCE_CHECKED |
-| SND-FND-018 | Norma, descripción y uso | FND-017 | INVENTORY |
+| SND-FND-016 | Habla conectada y procesos contextuales | FND-008/009 | EVIDENCE_CHECKED |
+| SND-FND-017 | Variación: región, sociedad, estilo y tiempo | varieties-policy | LINGUISTIC_REVIEW |
+| SND-FND-018 | Norma, descripción y uso | FND-017 | EVIDENCE_CHECKED |
 
 ## 3. Representación y escritura
 
 | ID | Entrada candidata | Dependencias | Estado |
 |---|---|---|---|
-| SND-REP-001 | Sonido, letra y símbolo | terminology | INVENTORY |
+| SND-REP-001 | Sonido, letra y símbolo | terminology | EVIDENCE_CHECKED |
 | SND-REP-002 | Qué es el AFI/IPA | SND-SRC-0001/0002 | LINGUISTIC_REVIEW |
 | SND-REP-003 | Cómo leer consonantes del IPA | REP-002 | SOURCE_MAPPED |
 | SND-REP-004 | Cómo leer vocales del IPA | REP-002 | SOURCE_MAPPED |
@@ -54,10 +54,10 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 | SND-REP-006 | Suprasegmentales y tonos en IPA | REP-002 | LINGUISTIC_REVIEW |
 | SND-REP-007 | Transcripción fonológica y fonética | guide v0.2 | LINGUISTIC_REVIEW |
 | SND-REP-008 | Transcripción amplia y estrecha | guide v0.2 | LINGUISTIC_REVIEW |
-| SND-REP-009 | Ortografía y pronunciación | terminology | INVENTORY |
-| SND-REP-010 | Romanización | terminology | INVENTORY |
-| SND-REP-011 | Transliteración | terminology | INVENTORY |
-| SND-REP-012 | Sistemas locales de anotación | perfiles | INVENTORY |
+| SND-REP-009 | Ortografía y pronunciación | terminology | EVIDENCE_CHECKED |
+| SND-REP-010 | Romanización | terminology | EVIDENCE_CHECKED |
+| SND-REP-011 | Transliteración | terminology | EVIDENCE_CHECKED |
+| SND-REP-012 | Sistemas locales de anotación | perfiles | EVIDENCE_CHECKED |
 
 ## 4. Perfiles lingüísticos
 
@@ -95,7 +95,7 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-PTBR-001 | PB amplio vs. habla carioca | DRAFTED |
+| SND-PTBR-001 | PB amplio vs. habla carioca | EVIDENCE_CHECKED |
 | SND-PTBR-002 | Inventario vocálico: mapa de evidencia | INVENTORY |
 | SND-PTBR-003 | Nasalidad | INVENTORY |
 | SND-PTBR-004 | Vocales pretónicas/postónicas | INVENTORY |
@@ -166,16 +166,16 @@ Estado: **inventario operativo v0.2**. Este archivo enumera unidades editoriales
 
 | ID | Entrada/cluster | Estado |
 |---|---|---|
-| SND-KO-001 | Estándar y habla de Seúl | EVIDENCE_CHECKED |
+| SND-KO-001 | Estándar y habla de Seúl | LINGUISTIC_REVIEW |
 | SND-KO-002 | Sistema consonántico | SOURCE_MAPPED |
-| SND-KO-003 | Oclusivas y cambios contemporáneos | EVIDENCE_CHECKED |
-| SND-KO-004 | Vocales | EVIDENCE_CHECKED |
-| SND-KO-005 | Estructura silábica | RESEARCHED_PARTIAL |
-| SND-KO-006 | Procesos fonológicos contextuales | EVIDENCE_CHECKED |
-| SND-KO-007 | Prosodia | EVIDENCE_CHECKED |
-| SND-KO-008 | Hangul y pronunciación | EVIDENCE_CHECKED |
-| SND-KO-009 | Romanización Revisada | EVIDENCE_CHECKED |
-| SND-KO-010 | Romanización vs. IPA | EVIDENCE_CHECKED |
+| SND-KO-003 | Oclusivas y cambios contemporáneos | LINGUISTIC_REVIEW |
+| SND-KO-004 | Vocales | LINGUISTIC_REVIEW |
+| SND-KO-005 | Estructura silábica | LINGUISTIC_REVIEW |
+| SND-KO-006 | Procesos fonológicos contextuales | LINGUISTIC_REVIEW |
+| SND-KO-007 | Prosodia | LINGUISTIC_REVIEW |
+| SND-KO-008 | Hangul y pronunciación | LINGUISTIC_REVIEW |
+| SND-KO-009 | Romanización Revisada | LINGUISTIC_REVIEW |
+| SND-KO-010 | Romanización vs. IPA | LINGUISTIC_REVIEW |
 
 ### 🇯🇵 Japonés — JA
 
@@ -212,7 +212,7 @@ Estos capítulos permanecen bloqueados hasta que los perfiles pertinentes supere
 
 | ID | Entrada candidata | Estado |
 |---|---|---|
-| SND-CMP-001 | Cómo comparar sonidos sin asumir identidad | READY_FOR_EARLY_DRAFT |
+| SND-CMP-001 | Cómo comparar sonidos sin asumir identidad | EVIDENCE_CHECKED |
 | SND-CMP-002 | Sistemas vocálicos en perspectiva | BLOCKED_BY_PROFILES |
 | SND-CMP-003 | Sistemas consonánticos en perspectiva | BLOCKED_BY_PROFILES |
 | SND-CMP-004 | Sílaba y fonotáctica | BLOCKED_BY_PROFILES |
@@ -241,11 +241,11 @@ Estos capítulos permanecen bloqueados hasta que los perfiles pertinentes supere
 
 - Fundamentos: 18 entradas.
 - Representación: 12 entradas.
-- Perfiles lingüísticos: 94 entradas/clusters candidatos.
+- Perfiles lingüísticos: 95 entradas/clusters candidatos.
 - Comparación: 11 entradas.
 - Aparato de consulta: 8 salidas.
 
-**Total inicial inventariado: 143 unidades editoriales candidatas.**
+**Total inicial inventariado: 144 unidades editoriales candidatas.**
 
 Este conteo no es una cuota ni un límite. Las unidades pueden dividirse o fusionarse después de investigación.
 
