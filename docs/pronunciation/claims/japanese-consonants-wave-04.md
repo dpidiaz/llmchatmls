@@ -26,8 +26,9 @@ SOURCE_MAPPED / RESEARCHED_PARTIAL salvo que el inventario completo pueda revali
 - JA-W04-S01 — NINJAL 2026, /r/ vs /d/ con articulación + CSJ.
 - JA-W04-S02 — NINJAL 2024, alternancias p~h~b en contadores.
 - JA-W04-S03 — manual institucional del CSJ, política y mapa amplio de etiquetado segmental.
+- JA-W04-S04 — Kubozono (2015), metadatos y §3 “Consonant inventory” identificados; HOLD_FULLTEXT, sin claims dependientes.
 - Source map local creado conforme a #7320.
 
 ## Gate
 
-No se promueve a EVIDENCE_CHECKED: el CSJ aporta un mapa segmental amplio de corpus, pero todavía falta una validación fonológica amplia y suficientemente reciente que permita reconciliar el inventario completo sin confundir etiquetas de anotación con categorías fonémicas.
+No se promueve a EVIDENCE_CHECKED: el CSJ aporta un mapa segmental amplio de corpus y ya se identificó Kubozono (2015) como síntesis fonológica amplia, pero su §3 debe inspeccionarse en texto completo antes de usarlo para claims o reconciliar el inventario.
