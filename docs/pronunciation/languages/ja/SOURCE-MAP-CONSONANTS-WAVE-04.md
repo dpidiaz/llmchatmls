@@ -36,6 +36,19 @@ Estado: **LOCAL_CANDIDATE**. El mapa usa una fuente canónica existente y dos ca
 - **Entradas / claims:** SND-JA-004; JA004-C05–C06.
 - **Verificado:** 2026-10-11.
 
+## JA-W04-S03 — CSJ / manual de etiquetado segmental
+
+- **Estado de verificación:** VERIFIED_PDF_LOCATORS_PENDING_CANONICALIZATION.
+- **Tier candidato:** B — documentación institucional primaria de corpus.
+- **APA 7:** Maekawa, K., Kikuchi, H., Fujimoto, M., & Yoneyama, S. (s. f.). *『日本語話し言葉コーパス』の分節音ラベリング* [Segmental labeling of the Corpus of Spontaneous Japanese] (Version 1.0). National Institute for Japanese Language and Linguistics. https://www2.ninjal.ac.jp/kikuo/segment.pdf
+- **Idioma / variedad:** japonés hablado representado en el Corpus of Spontaneous Japanese (CSJ).
+- **Fenómeno cubierto:** política de segmentación; conjunto amplio de etiquetas de consonantes y vocales; variantes fonéticas anotables; correspondencia con mora.
+- **Localizadores:** p. 2, §§1–3; p. 3, Tabla 2; p. 11, apéndice de mora ↔ etiquetas (si se usa posteriormente).
+- **Cobertura documentada:** el manual indica que el núcleo CSJ con etiquetado segmental comprende aproximadamente 500.000 palabras / 44 horas de audio.
+- **Limitaciones:** el conjunto es un esquema de anotación intermedio entre transcripción amplia y estrecha, no una ontología fonémica definitiva. Algunas etiquetas de Tabla 2 están definidas pero marcadas como no usadas actualmente en CSJ.
+- **Entradas / claims:** SND-JA-004; JA004-C07–C09.
+- **Verificado:** 2026-10-11, PDF revisado visualmente en pp. 2–3.
+
 ## Integración
 
 - deduplicar JA-W04-S01/S02 contra el registro vigente;
