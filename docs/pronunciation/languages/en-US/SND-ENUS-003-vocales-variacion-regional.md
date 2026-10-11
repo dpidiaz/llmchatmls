@@ -13,6 +13,12 @@ La investigación de esta wave muestra que la variación vocálica regional es s
 
 ## 2. Base documental inicial
 
+### Six regional varieties — Clopper, Pisoni & de Jong
+
+ENUS-CAND-002 compara acústicamente vocales de 48 hablantes de seis regiones estadounidenses. Su conclusión central para este tomo es que los sistemas vocálicos se describen mejor atendiendo a la región de origen que mediante una única línea base idealizada de “General American”.
+
+La muestra incluye New England, Mid-Atlantic, North, Midland, South y West, con ocho hablantes por región.
+
 ### Southern Michigan
 
 SND-SRC-0005 documenta un perfil regional del sur de Michigan dentro del área Northern Cities y vincula esa región con cambios vocálicos.
@@ -60,7 +66,9 @@ MLS-SND distinguirá:
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| ENUS003-C01 | Southern Michigan constituye un perfil regional útil para mostrar variación dentro del inglés estadounidense | SND-SRC-0005 | Cambridge Core, extracto; pp. 121–126 | VERIFIED |
+| ENUS003-C01 | En una comparación de seis regiones de Estados Unidos, los sistemas vocálicos se caracterizan mejor por región de origen que mediante una única línea base idealizada de “General” American English | ENUS-CAND-002 | Abstract; JASA 118(3), pp. 1661–1676 | SOURCED_PENDING_REGISTRY |
+| ENUS003-C01b | El estudio utiliza 48 hablantes de 18–25 años, ocho por cada una de seis regiones: New England, Mid-Atlantic, North, Midland, South y West | ENUS-CAND-002 | §II.A “Talkers” | SOURCED_PENDING_REGISTRY |
+| ENUS003-C01c | Southern Michigan constituye un perfil regional útil para mostrar variación dentro del inglés estadounidense | SND-SRC-0005 | Cambridge Core, extracto; pp. 121–126 | VERIFIED |
 | ENUS003-C02 | El Atlas se plantea como una visión general de pronunciación y sistemas vocálicos de dialectos de EE. UU. y Canadá y redefine regiones a partir de cambios sonoros | ENUS-CAND-001 | De Gruyter, descripción editorial del libro | SOURCED_PENDING_REGISTRY |
 | ENUS003-C03 | El Atlas declara una base de 762 hablantes locales de áreas urbanizadas y un aparato de 139 mapas y 120 diagramas vocálicos | ENUS-CAND-001 | De Gruyter, descripción editorial del libro | SOURCED_PENDING_REGISTRY |
 
@@ -68,7 +76,7 @@ MLS-SND distinguirá:
 
 Para pasar a EVIDENCE_CHECKED:
 
-1. promover ENUS-CAND-001 al Source Registry global con un ID no conflictivo;
+1. promover ENUS-CAND-002 y, si se necesita para arquitectura histórica/regional, ENUS-CAND-001 al Source Registry global con IDs no conflictivos;
 2. comprobar dentro del libro los localizadores relevantes;
 3. seleccionar qué regiones/perfiles son necesarios para el tomo;
 4. no reconstruir un “promedio estadounidense” que la fuente no proponga.
