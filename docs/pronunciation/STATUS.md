@@ -1,7 +1,7 @@
 # MLS-SND — Estado canónico del proyecto
 
 **Corte:** 2026-10-11  
-**SHA de coordinación:** `f59651f4da403967ea659fcb67bb3d439e95ccec`  
+**SHA de coordinación:** `039df6e8c3217857c543d17b0406c0df52322abf`  
 **Rama matriz:** `feat/mls-snd-foundation`  
 **Inventario editorial:** 143 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad:** cada archivo canónico `SND-*.md` dentro de los directorios editoriales, cotejado con el inventario.
@@ -15,15 +15,15 @@ MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. N
 
 | Estado registrado en la entrada | Número |
 |---|---:|
-| EDITORIAL_REVIEW | 33 |
-| LINGUISTIC_REVIEW | 40 |
-| EVIDENCE_CHECKED | 20 |
+| EDITORIAL_REVIEW | 39 |
+| LINGUISTIC_REVIEW | 33 |
+| EVIDENCE_CHECKED | 21 |
 | SOURCE_MAPPED | 0 |
 | DRAFTED | 0 |
-| RESEARCHED | 1 |
+| RESEARCHED | 0 |
 | RESEARCHED_PARTIAL | 1 |
 | IN_PROGRESS | 1 |
-| READY_FOR_COMPOSITION | 11 |
+| READY_FOR_COMPOSITION | 12 |
 | **Total** | **107** |
 
 **Importante:** `EDITORIAL_REVIEW` no equivale a `READY_FOR_COMPOSITION`. `EVIDENCE_CHECKED` tampoco equivale a publicación ni valida automáticamente claims futuros.
@@ -45,7 +45,7 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 | Bloque | Entradas | Estado / alcance |
 |---|---:|---|
 | Fundamentos FND | 18 | 10 READY_FOR_COMPOSITION; 3 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
-| Representación REP | 12 | 7 LINGUISTIC_REVIEW; 5 EVIDENCE_CHECKED |
+| Representación REP | 12 | 7 EDITORIAL_REVIEW; 5 EVIDENCE_CHECKED |
 | Comparación CMP | 1 | CMP-001 LINGUISTIC_REVIEW |
 | Referencia REF | 1 | REF-002 IN_PROGRESS |
 | Español de Guatemala ESGT | 7 | 2 EDITORIAL_REVIEW; 4 LINGUISTIC_REVIEW; 1 EVIDENCE_CHECKED |
@@ -53,8 +53,8 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 | Portugués brasileño / carioca PTBR | 2 | 2 EDITORIAL_REVIEW |
 | Italiano IT | 9 | 9 LINGUISTIC_REVIEW |
 | Francés FR | 9 | 3 EDITORIAL_REVIEW; 6 LINGUISTIC_REVIEW |
-| Alemán DE | 7 | 6 LINGUISTIC_REVIEW; 1 RESEARCHED |
-| Mandarín de Taiwán ZHTW | 9 | 6 EDITORIAL_REVIEW; 2 EVIDENCE_CHECKED; 1 RESEARCHED_PARTIAL |
+| Alemán DE | 7 | 6 LINGUISTIC_REVIEW; 1 EVIDENCE_CHECKED |
+| Mandarín de Taiwán ZHTW | 9 | 1 READY_FOR_COMPOSITION; 5 EDITORIAL_REVIEW; 2 EVIDENCE_CHECKED; 1 RESEARCHED_PARTIAL |
 | Coreano KO | 10 | 9 EDITORIAL_REVIEW; 1 EVIDENCE_CHECKED |
 | Japonés JA | 6 | 2 EDITORIAL_REVIEW; 4 LINGUISTIC_REVIEW |
 | Ruso RU | 8 | 8 EDITORIAL_REVIEW |
@@ -62,21 +62,21 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 
 ## Composición: primer bloque integrado
 
-**11 entradas** han superado el gate por versión concreta.
+**12 entradas** han superado el gate por versión concreta.
 
 Fundamentos READY_FOR_COMPOSITION:
 - FND-002, FND-003, FND-004;
 - FND-006, FND-007, FND-008, FND-009;
 - FND-011, FND-013 y FND-015.
 
-Perfil READY_FOR_COMPOSITION:
+Perfiles READY_FOR_COMPOSITION:
 - **ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz.**
+- **ZHTW-007 — Zhuyin/Bopomofo.**
 
 Los diez fundamentos cuentan con Composition Handoff Manifest canónico bajo `composition/handoffs/`. ENUS-001 conserva su handoff previo. La reader-facing projection es una vista derivada; metadata R33 y reviews permanecen en repositorio.
 
 ## Entradas todavía pre-gate
 
-- **DE-008** — RESEARCHED.
 - **ZHTW-003** — RESEARCHED_PARTIAL.
 - **REF-002** — IN_PROGRESS.
 
@@ -120,7 +120,7 @@ Este PASS **no** certifica:
 
 1. **Pre-EVIDENCE:** DE-008, ZHTW-003 y REF-002 siguen por debajo de EVIDENCE_CHECKED.
 2. **Referencia:** completar REF-002 y los demás artefactos REF todavía no físicos.
-3. **Reviews:** continuar los 40 LINGUISTIC_REVIEW y 33 EDITORIAL_REVIEW sin saltar etapas.
+3. **Reviews:** continuar los 33 LINGUISTIC_REVIEW y 39 EDITORIAL_REVIEW sin saltar etapas.
 4. **Cobertura:** integrar únicamente IDs ausentes o revisiones compatibles; no crear segundos canónicos.
 5. **Composición:** continuar readiness por versión concreta; nunca promover en masa por estado anterior.
 6. **QA:** repetir source/localizer lint después de grandes waves y siempre sobre SHA congelado.
