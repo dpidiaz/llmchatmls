@@ -1,6 +1,6 @@
 # SND-ESGT-010 — Ortografía y pronunciación
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala dentro del sistema ortográfico panhispánico.
 **Dominio:** escritura / pronunciación / transcripción.
@@ -48,18 +48,22 @@ MLS-SND no debe:
 - utilizar diferencias ortográficas para inferir por sí solas diferencias fonológicas;
 - ocultar variantes porque compartan la misma escritura.
 
-## 6. Evidencia R33 local
+## 6. Evidencia R33
 
-| claim_id | afirmación | source_id local/global | localizador | alcance | estado |
+| claim_id | afirmación | source_id | localizador | alcance | estado |
 |---|---|---|---|---|---|
 | ESGT010-C01 | La Ortografía 2010 describe el sistema ortográfico y las normas que rigen la escritura del español | SND-SRC-0055 | ficha ASALE “Ortografía 2010”, objetivo y características | español panhispánico / escritura | VERIFIED |
 | ESGT010-C02 | La articulación de ciertas secuencias vocálicas puede variar por factores geográficos y de habla | SND-SRC-0056 | §2.4.2, párrafos introductorios sobre variación de hiato/diptongo/triptongo | español panhispánico | VERIFIED |
 | ESGT010-C03 | Las convenciones de diptongo/triptongo/hiato para acentuación son ortográficas y pueden aplicarse independientemente de la articulación real | SND-SRC-0056 | §2.4.2, párrafo “Por todo ello…” | español panhispánico / ortografía | VERIFIED |
 | ESGT010-C04 | Guatemala presenta variación regional de pronunciación que la ortografía compartida no codifica como variantes gráficas distintas en el fenómeno de /s/ documentado | SND-SRC-0003 | “Peculiaridades del español de Guatemala” → “Fonética y fonología”, apartado a), p. 209 | Guatemala | VERIFIED_GLOBAL |
 
-## 7. Gate
+## 7. Gate lingüístico
 
-Los claims nuevos de ortografía han sido comprobados contra recursos académicos de RAE/ASALE, pero la entrada permanece en **RESEARCHED** hasta canonicalizar SND-SRC-0055/03 o reutilizar IDs globales equivalentes.
+SND-SRC-0055, SND-SRC-0056 y SND-SRC-0003 están canonicalizadas y los claims de esta entrada fueron re-auditados.
+
+**R33: PASS. LINGUISTIC_REVIEW: PASS.**
+
+La distinción central queda preservada: las convenciones ortográficas de diptongo/triptongo/hiato pueden mantenerse aunque la pronunciación real varíe, por lo que la escritura no se usa como transcripción fonética automática.
 
 ## 8. Relacionado con
 
