@@ -1,6 +1,6 @@
 # SND-KO-007 — Prosodia de Seoul Korean: Accentual Phrase y límites
 
-**Estado:** EVIDENCE_CHECKED para el modelo de referencia  
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** coreano  
 **Variedad:** Seoul Korean  
 **Dominio:** prosodia
@@ -13,7 +13,7 @@ Jun (1998) sitúa la Accentual Phrase inmediatamente por encima de la palabra de
 
 ## 2. No convertir “acento” en estrés léxico
 
-La literatura posterior que adopta este marco describe Seoul Korean como una lengua en la que la prominencia se organiza fuertemente mediante fraseo e intonación, no mediante un acento léxico tipo inglés.
+La literatura posterior que adopta este marco describe Seoul Korean como una lengua en la que la prominencia se organiza fuertemente mediante fraseo y entonación, no mediante un acento léxico tipo inglés.
 
 En MLS-SND se evitará traducir **Accentual Phrase** como si significara “palabra acentuada”.
 
@@ -36,3 +36,11 @@ La entrada no fijará una melodía única como invariable. Estudios recientes mu
 ## 6. Límite
 
 Esta entrada no se extiende automáticamente a dialectos tonales regionales ni a todas las variedades de coreano.
+
+
+## Revisión lingüística 2026-10-11
+
+- Alcance y nivel analítico comprobados.
+- Source IDs canónicos y localizadores revisados.
+- Se mantuvo la separación entre norma, descripción empírica y modelo analítico.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
