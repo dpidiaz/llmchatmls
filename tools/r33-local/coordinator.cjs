@@ -10,13 +10,17 @@ const { execFileSync } = require("node:child_process");
 const store = require("../../MLS R32 EDITORIAL/evidence git.js");
 
 const LIMIT = 10;
+const MAX_LIMIT = 50;
 const PILOT_LIMIT = 5;
 const PILOT_BATCH = 20;
 const SCALE_BATCH = 25;
 const LEASE_MS = 60 * 60 * 1000;
+const FOLLOWUP_INSTRUCTION = "REGLA R33 DE REINTENTO: PENDING no cierra el objetivo ni es una salida rápida. Reabra y conserve la revisión previa; identifique qué afirmación, fuente, localizador, conflicto o validación impide VERIFIED; busque fuentes primarias públicas gratuitas con al menos dos consultas distintas y revise los pasajes exactos; si la ficha afirma más de lo que las fuentes sustentan, reduzca/corrija el contenido y actualice APA 7 y Evidence. Repita validación con hash actual, assessEntry e índice canónico. VERIFIED requiere respaldo semántico real y todos los controles aprobados. Un resultado PENDING solo se acepta como excepción documentada e incluye semanticReview.exceptionalDisposition con blockingCriterion, al menos dos searches distintas ({query, portal, outcome}), primarySourcesInspected ({title, url, locator, finding}; puede ser [] si ninguna fuente primaria pertinente apareció), contentCorrectionConsidered, canonicalCheck y nextConcreteStep. Sin ese registro el coordinador rechazará complete. Si la búsqueda exhaustiva no encuentra respaldo, documente bloqueo, complete como PENDING excepcional y continúe con los demás; el código sigue elegible. Continúe reclamando leases tras cada completion; no declare completo hasta que unresolvedReviewOutcomes sea cero.";
+const INITIAL_INSTRUCTION = "Revise semánticamente cada entrada contra sus fuentes primarias y localizadores exactos; guarde revisión y checkpoint por entrada. Si no pasa VERIFIED, aplique la regla R33 de reintento: investigue nuevas fuentes, corrija afirmaciones no respaldadas y actualice APA 7/Evidence. PENDING solo se acepta como excepción documentada mediante semanticReview.exceptionalDisposition (bloqueo, al menos dos búsquedas distintas, fuentes examinadas, corrección considerada, validación canónica y siguiente paso); no es una salida rápida. Complete solo tras verificar los artefactos y nunca fuerce VERIFIED.";
+const DIFFICULTY_INSTRUCTION = "Para cada resultado PENDING, incluye remainingWorkAssessment en la revisión JSON, con scale=R33-FOLLOWUP-DIFFICULTY-1-4, level 1–4, label (baja/media/alta/muy alta), reason (bloqueo concreto que justifica el nivel) y nextStep (acción concreta nueva y específica para el bloqueo). Evalúa el trabajo que falta después de este intento: 1 baja = localizador/comprobación puntual con fuente primaria directamente pertinente; 2 media = respaldo parcial y algunas afirmaciones/ejemplos/localizadores faltantes; 3 alta = varias afirmaciones materiales, matices de variedad/registro o corrección que requiere nuevo cotejo; 4 muy alta = contradicción o falta de fuente primaria para una afirmación central, con nueva vía de búsqueda o revisión sustancial del alcance. La dificultad es informativa: no sustituye ninguna validación, no justifica PENDING apresurado y nunca cambia VERIFIED.";
 const REVIEW_DIR = path.join("docs", "r33-local", "reviews");
 const INDEX_PATH = path.join("MLS R32 EDITORIAL", "evidence git", "indexes", "verified.json");
-let articlePaths = null;
+const articlePathsByRoot = new Map();
 
 function git(root, ...args) {
   return execFileSync("git", args, { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
@@ -87,9 +91,11 @@ function parseArgs(args) {
 }
 function currentIndex(root) { return new Set(readJson(path.join(root, INDEX_PATH)).map((x) => String(x).toUpperCase())); }
 function articlePath(root, code) {
+  let articlePaths = articlePathsByRoot.get(root);
   if (!articlePaths) {
     articlePaths = new Map();
     for (const article of contentEntries(root)) articlePaths.set(String(article.code).toUpperCase(), path.join(root, "content", article.language, `${article.code}.json`));
+    articlePathsByRoot.set(root, articlePaths);
   }
   const found = articlePaths.get(code);
   if (!found || !fs.existsSync(found)) throw new Error(`ARTICLE_NOT_FOUND:${code}`);
@@ -153,15 +159,32 @@ function buildState(root) {
     partitions,
     completed: alreadyReviewed,
     leases: {},
+    followupAttempts: {},
     history: [],
     safety: { cloudflareInteractions: 0, d1Reads: 0, d1Writes: 0, apiCalls: 0, pushes: 0, merges: 0, deployments: 0 },
   };
 }
 function stateOrFail(paths) {
   if (!fs.existsSync(paths.statePath)) throw new Error("COORDINATOR_NOT_INITIALIZED — ejecute `node tools/r33-local/coordinator.cjs init` una vez en la rama base.");
-  return readJson(paths.statePath);
+  const state = readJson(paths.statePath);
+  state.followupAttempts = state.followupAttempts || {};
+  return state;
 }
 function countPending(state) { return state.partitions.reduce((n, p) => n + p.codes.filter((c) => !state.completed[c]).length, 0); }
+function followupCodes(state) {
+  const leased = new Set(Object.values(state.leases).flatMap((x) => x.codes));
+  return Object.entries(state.completed)
+    .filter(([code, outcome]) => ["PENDING_SOURCE_SUPPORT", "PENDING_CONFLICT", "PENDING_SOURCE"].includes(outcome.status)
+      && !leased.has(code))
+    .map(([code]) => code)
+    .sort((a, b) => Number(state.followupAttempts[a] || 0) - Number(state.followupAttempts[b] || 0)
+      || Number(!a.startsWith("MLS-V10-")) - Number(!b.startsWith("MLS-V10-"))
+      || a.localeCompare(b));
+}
+function countFollowup(state) { return followupCodes(state).length; }
+function countUnresolvedOutcomes(state) {
+  return Object.values(state.completed).filter((x) => ["PENDING_SOURCE_SUPPORT", "PENDING_CONFLICT", "PENDING_SOURCE"].includes(x.status)).length;
+}
 function expireLeases(state, now = Date.now()) {
   for (const [token, lease] of Object.entries(state.leases)) {
     if (Date.parse(lease.expiresAt) <= now) {
@@ -174,8 +197,20 @@ function makeWorkerId() {
   const stamp = new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 14);
   return `R33W-local-${stamp}-${crypto.randomBytes(3).toString("hex")}`;
 }
-function assignmentFor(state, workerId) {
+function assignmentFor(state, workerId, phase = "initial") {
   const leasedCodes = new Set(Object.values(state.leases).flatMap((x) => x.codes));
+  if (phase === "source-followup") {
+    const codes = followupCodes(state).filter((code) => !leasedCodes.has(code)).slice(0, state.batchSize);
+    if (!codes.length) return null;
+    const leaseToken = crypto.randomBytes(24).toString("hex");
+    const assignmentId = `R33A-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`;
+    const issuedAt = new Date().toISOString();
+    const lease = { assignmentId, workerId, partitionId: "R33-FOLLOWUP", phase, codes, leaseToken, issuedAt, expiresAt: new Date(Date.now() + state.leaseMs).toISOString(), heartbeatAt: issuedAt };
+    state.leases[leaseToken] = lease;
+    state.history.push({ event: "claimed", assignmentId, workerId, partitionId: lease.partitionId, phase, codes, at: issuedAt });
+    for (const code of codes) if (!state.baseArticleHashes[code]) state.baseArticleHashes[code] = articleTextHash(state.coordinatorRoot, code);
+    return lease;
+  }
   const available = state.partitions.map((p) => ({
     partition: p,
     codes: p.codes.filter((c) => !state.completed[c] && !leasedCodes.has(c)),
@@ -187,9 +222,9 @@ function assignmentFor(state, workerId) {
   const leaseToken = crypto.randomBytes(24).toString("hex");
   const assignmentId = `R33A-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`;
   const expiresAt = new Date(Date.now() + state.leaseMs).toISOString();
-  const lease = { assignmentId, workerId, partitionId: chosen.partition.id, codes, leaseToken, issuedAt: new Date().toISOString(), expiresAt, heartbeatAt: new Date().toISOString() };
+  const lease = { assignmentId, workerId, partitionId: chosen.partition.id, phase, codes, leaseToken, issuedAt: new Date().toISOString(), expiresAt, heartbeatAt: new Date().toISOString() };
   state.leases[leaseToken] = lease;
-  state.history.push({ event: "claimed", assignmentId, workerId, partitionId: chosen.partition.id, codes, at: lease.issuedAt });
+  state.history.push({ event: "claimed", assignmentId, workerId, partitionId: chosen.partition.id, phase, codes, at: lease.issuedAt });
   return lease;
 }
 function findLease(state, args) {
@@ -207,7 +242,11 @@ function summarize(state) {
     verifiedAtInit: state.sourceVerifiedIndexEntries,
     pendingAtInit: state.sourcePendingEntries,
     reviewedPendingAtInit: Object.keys(state.completed).length,
-    remaining: countPending(state),
+    remaining: countPending(state) + countFollowup(state),
+    primaryRemaining: countPending(state),
+    followupRemaining: countFollowup(state),
+    unresolvedReviewOutcomes: countUnresolvedOutcomes(state),
+    activeFollowupLeases: Object.values(state.leases).filter((x) => x.phase === "source-followup").length,
     reviewedSinceInit: Object.keys(state.completed).length - Number(state.reviewedAtInit || 0),
     activeLeases: Object.values(state.leases).length,
     activeLimit: state.activeLimit,
@@ -236,6 +275,15 @@ async function validateCompletion(root, lease) {
       outcomes.push({ code, status: "VERIFIED", reviewPath: path.relative(root, found.file).replace(/\\/g, "/"), sha256: sha256(fs.readFileSync(found.file)), completedAt: new Date().toISOString() });
     } else if (["PENDING_SOURCE_SUPPORT", "PENDING_CONFLICT", "PENDING_SOURCE"].includes(r.status)) {
       if (!r.semanticReview?.findings?.length || !r.semanticReview?.limitations?.length) throw new Error(`PENDING_REVIEW_INCOMPLETE:${code}`);
+      const exception = r.semanticReview?.exceptionalDisposition;
+      if (!exception || typeof exception.blockingCriterion !== "string" || !exception.blockingCriterion.trim()) throw new Error(`PENDING_EXCEPTION_BLOCKER_REQUIRED:${code}`);
+      const searchesValid = Array.isArray(exception.searches) && exception.searches.length >= 2 && exception.searches.every((x) => typeof x?.query === "string" && x.query.trim() && typeof x?.portal === "string" && x.portal.trim() && typeof x?.outcome === "string" && x.outcome.trim());
+      const distinctSearches = searchesValid ? new Set(exception.searches.map((x) => `${x.portal.trim().toLowerCase()}\0${x.query.trim().toLowerCase()}`)).size : 0;
+      if (!searchesValid || distinctSearches < 2) throw new Error(`PENDING_EXCEPTION_SEARCH_LOG_REQUIRED:${code}`);
+      if (!Array.isArray(exception.primarySourcesInspected) || exception.primarySourcesInspected.some((x) => typeof x?.title !== "string" || !x.title.trim() || typeof x?.url !== "string" || !x.url.trim() || typeof x?.locator !== "string" || !x.locator.trim() || typeof x?.finding !== "string" || !x.finding.trim())) throw new Error(`PENDING_EXCEPTION_SOURCE_LOG_INVALID:${code}`);
+      if (typeof exception.contentCorrectionConsidered !== "string" || !exception.contentCorrectionConsidered.trim()) throw new Error(`PENDING_EXCEPTION_CORRECTION_REVIEW_REQUIRED:${code}`);
+      if (typeof exception.canonicalCheck !== "string" || !exception.canonicalCheck.trim()) throw new Error(`PENDING_EXCEPTION_CANONICAL_CHECK_REQUIRED:${code}`);
+      if (typeof exception.nextConcreteStep !== "string" || !exception.nextConcreteStep.trim()) throw new Error(`PENDING_EXCEPTION_NEXT_STEP_REQUIRED:${code}`);
       outcomes.push({ code, status: r.status, reviewPath: path.relative(root, found.file).replace(/\\/g, "/"), sha256: sha256(fs.readFileSync(found.file)), completedAt: new Date().toISOString() });
     } else throw new Error(`REVIEW_NOT_TERMINAL:${code}:${r.status}`);
   }
@@ -262,6 +310,20 @@ async function integrateBatch(workerRoot, state, lease, outcomes) {
       const workerArticle = articlePath(workerRoot, code);
       const reviewSource = path.join(workerRoot, outcome.reviewPath);
       const reviewDest = path.join(baseRoot, outcome.reviewPath);
+      if (lease.phase === "source-followup" && fs.existsSync(reviewDest)) {
+        const previous = state.completed[code] || {};
+        const priorBytes = fs.readFileSync(reviewDest);
+        if (previous.sha256 && sha256(priorBytes) !== previous.sha256) throw new Error(`FOLLOWUP_BASE_REVIEW_HASH_MISMATCH:${code}`);
+        const previousRound = Number(state.followupAttempts[code] || 0);
+        const previousName = previous.assignmentId || (previousRound ? `followup-${previousRound}-${String(previous.sha256 || sha256(priorBytes)).slice(0, 12)}` : "pre-coordinator");
+        const priorPath = path.join(baseRoot, "docs", "r33-local", "review-history", code, `${previousName}.json`);
+        remember(priorPath);
+        atomicWrite(priorPath, priorBytes);
+        const nextReview = readJson(reviewSource);
+        nextReview.supersedesReview = { path: path.relative(baseRoot, priorPath).replace(/\\/g, "/"), sha256: sha256(priorBytes), status: previous.status || null, assignmentId: previous.assignmentId || null };
+        nextReview.followupRound = Number(state.followupAttempts[outcome.code] || 0) + 1;
+        atomicWrite(reviewSource, Buffer.from(`${JSON.stringify(nextReview, null, 2)}\n`, "utf8"));
+      }
       if (outcome.status === "VERIFIED") {
         const article = readJson(workerArticle);
         const evidencePath = store.entryPath(article.language, code);
@@ -307,6 +369,9 @@ async function integrateBatch(workerRoot, state, lease, outcomes) {
         if (outcome.status === "VERIFIED" && Array.isArray(c.pending_semantic_review_entries)) {
           c.pending_semantic_review_entries = c.pending_semantic_review_entries.filter((x) => x !== outcome.code);
           c.local_recovery_progress.latest_verified_entry = outcome.code;
+        } else if (outcome.status === "VERIFIED" && Number.isFinite(c.pending_semantic_review_entries)) {
+          c.pending_semantic_review_entries = Math.max(0, c.pending_semantic_review_entries - 1);
+          c.local_recovery_progress.latest_verified_entry = outcome.code;
         }
         c.local_recovery_progress.latest_local_review_entry = outcome.code;
         c.local_recovery_progress.latest_reviewed_entry = outcome.code;
@@ -315,6 +380,54 @@ async function integrateBatch(workerRoot, state, lease, outcomes) {
         c.local_recovery_progress.claims_reviewed_this_batch = outcomes.length;
       }
       c.local_recovery_progress.entry_review_batch.entries_with_local_review_records = [...new Set([...(c.local_recovery_progress.entry_review_batch.entries_with_local_review_records || []), ...outcomes.map((x) => x.code)])];
+      if (lease.phase === "source-followup") {
+        c.latest_review_history = c.latest_review_history || {};
+        c.local_coordinator = c.local_coordinator || {};
+        c.local_coordinator.latest_reconciliation = c.local_coordinator.latest_reconciliation || {};
+        const rec = c.local_coordinator.latest_reconciliation;
+        for (const outcome of outcomes) {
+          const previous = state.completed[outcome.code] || {};
+          c.latest_review_history[outcome.code] = {
+            previous_status: previous.status || null,
+            previous_review_path: previous.reviewPath || null,
+            previous_review_sha256: previous.sha256 || null,
+            followup_status: outcome.status,
+            followup_review_path: outcome.reviewPath,
+            followup_review_sha256: outcome.sha256,
+            followup_round: Number(state.followupAttempts[outcome.code] || 0) + 1,
+          };
+          const bucket = { VERIFIED: "canonical_verified", PENDING_SOURCE_SUPPORT: "pending_source_support", PENDING_CONFLICT: "pending_conflict", PENDING_SOURCE: "pending_source_support" };
+          const oldKey = bucket[previous.status], newKey = bucket[outcome.status];
+          if (oldKey) rec[oldKey] = Math.max(0, Number(rec[oldKey] || 0) - 1);
+          if (newKey) rec[newKey] = Number(rec[newKey] || 0) + 1;
+          const followup = c.local_coordinator.followup_phase;
+          if (followup) {
+            followup.completedEntries = Number(followup.completedEntries || 0) + 1;
+            followup.roundsPlanned = "UNTIL_RESOLVED";
+            if (outcome.status === "VERIFIED") followup.verifiedEntries = Number(followup.verifiedEntries || 0) + 1;
+          }
+        }
+        c.local_coordinator.followup_rounds_completed = Number(c.local_coordinator.followup_rounds_completed || 0) + outcomes.length;
+        rec.date = new Date().toISOString();
+        rec.entries_with_canonical_verified = Number(rec.canonical_verified || 0);
+        rec.entries_pending_semantic_or_conflict = Number(rec.pending_source_support || 0) + Number(rec.pending_conflict || 0);
+        rec.requires_source_followup = rec.entries_pending_semantic_or_conflict > 0;
+        rec.completed_local_reviews = Number(rec.completed_local_reviews || 0) + outcomes.length;
+        const followupCodes = new Set([...Object.keys(state.followupAttempts || {}), ...outcomes.map((x) => x.code)]);
+        const latestOutcomes = new Map(Object.entries(state.completed).map(([entryCode, value]) => [entryCode, value]));
+        for (const outcome of outcomes) latestOutcomes.set(outcome.code, outcome);
+        const unresolved = (value) => ["PENDING_SOURCE_SUPPORT", "PENDING_CONFLICT", "PENDING_SOURCE"].includes(value?.status);
+        rec.entries_with_followup_review = followupCodes.size;
+        rec.entries_pending_followup = [...latestOutcomes.values()].filter(unresolved).length;
+        rec.followup_verified = [...followupCodes].filter((entryCode) => latestOutcomes.get(entryCode)?.status === "VERIFIED").length;
+        rec.followupUpdatedAt = rec.date;
+        if (c.local_coordinator.followup_phase) {
+          c.local_coordinator.followup_phase.remaining = rec.entries_pending_semantic_or_conflict;
+          c.local_coordinator.followup_phase.unresolvedReviewOutcomes = rec.entries_pending_semantic_or_conflict;
+          c.local_coordinator.followup_phase.status = rec.entries_pending_semantic_or_conflict === 0 ? "COMPLETED" : "IN_PROGRESS";
+          delete c.local_coordinator.followup_phase.blocker;
+        }
+      }
       c.local_recovery_progress.latest_local_review_batch = outcomes.map((x) => x.code).join(", ");
       c.latest_local_review_batch = {
         date: new Date().toISOString().slice(0, 10),
@@ -351,7 +464,7 @@ async function main() {
   const command = args.positional[0] || "help";
   const paths = findPaths();
   if (command === "help") {
-    console.log("R33 local coordinator: init | status | next | renew --worker ID --token TOKEN | complete --worker ID --token TOKEN | release --worker ID --token TOKEN | scale 5|10 | self-check");
+    console.log("R33 local coordinator: init | status | next | renew --worker ID --token TOKEN | complete --worker ID --token TOKEN | release --worker ID --token TOKEN | scale 5|10|50 | self-check");
     return;
   }
   if (command === "init") {
@@ -383,12 +496,14 @@ async function main() {
   }
   if (command === "scale") {
     const n = Number(args.positional[1]);
-    if (![PILOT_LIMIT, LIMIT].includes(n)) throw new Error("CONCURRENCY_ALLOWED_VALUES:5,10");
+    if (![PILOT_LIMIT, LIMIT, MAX_LIMIT].includes(n)) throw new Error("CONCURRENCY_ALLOWED_VALUES:5,10,50");
     const out = withLock(paths, () => {
       const state = stateOrFail(paths); expireLeases(state);
-      if (Object.keys(state.leases).length) throw new Error("SCALE_REQUIRES_ZERO_ACTIVE_LEASES");
-      state.activeLimit = n; state.batchSize = n === LIMIT ? SCALE_BATCH : PILOT_BATCH;
-      state.history.push({ event: "scaled", activeLimit: n, batchSize: state.batchSize, at: new Date().toISOString() });
+      const activeLeases = Object.keys(state.leases).length;
+      if (n < activeLeases) throw new Error("SCALE_BELOW_ACTIVE_LEASE_COUNT");
+      if (n < state.activeLimit && activeLeases) throw new Error("SCALE_DOWN_REQUIRES_ZERO_ACTIVE_LEASES");
+      state.activeLimit = n; state.batchSize = n >= LIMIT ? SCALE_BATCH : PILOT_BATCH;
+      state.history.push({ event: "scaled", activeLimit: n, batchSize: state.batchSize, activeLeasesAtScale: activeLeases, at: new Date().toISOString() });
       saveState(paths, state); return summarize(state);
     });
     console.log(JSON.stringify(out, null, 2));
@@ -399,10 +514,26 @@ async function main() {
       const state = stateOrFail(paths); expireLeases(state);
       if (Object.keys(state.leases).length >= state.activeLimit) throw new Error("CAPACITY_BUSY");
       const workerId = makeWorkerId();
-      const lease = assignmentFor(state, workerId);
-      if (!lease) { saveState(paths, state); return { status: "NO_WORK", remaining: countPending(state) }; }
+      let lease = assignmentFor(state, workerId);
+      if (!lease && countPending(state) === 0 && !Object.values(state.leases).some((x) => x.phase !== "source-followup")) lease = assignmentFor(state, workerId, "source-followup");
+      if (!lease) {
+        saveState(paths, state);
+        const unresolvedReviewOutcomes = countUnresolvedOutcomes(state);
+        const activeLeases = Object.values(state.leases).length;
+        const activeFollowupLeases = Object.values(state.leases).filter((x) => x.phase === "source-followup").length;
+        return {
+          status: unresolvedReviewOutcomes > 0 && activeLeases > 0 ? "WAITING_ON_ACTIVE_LEASES" : "NO_WORK",
+          remaining: countPending(state) + countFollowup(state),
+          unresolvedReviewOutcomes,
+          activeLeases,
+          activeFollowupLeases,
+          objectiveComplete: unresolvedReviewOutcomes === 0,
+          followupRounds: "until-resolved",
+        };
+      }
       saveState(paths, state);
-      return { status: "LEASED", ...lease, instruction: "Revise semánticamente cada entrada; guarde revisión/checkpoint por entrada. Solo complete después de verificar los artefactos. Mantenga VERIFIED sujeto al validador canónico." };
+      const baseInstruction = lease.phase === "source-followup" ? FOLLOWUP_INSTRUCTION : INITIAL_INSTRUCTION;
+      return { status: "LEASED", ...lease, instruction: `${baseInstruction} ${DIFFICULTY_INSTRUCTION}` };
     });
     console.log(JSON.stringify(out, null, 2));
     return;
@@ -415,9 +546,12 @@ async function main() {
       const summary = await withLockAsync(paths, async () => {
         const state = stateOrFail(paths); const live = findLease(state, args);
         await integrateBatch(paths.root, state, live, outcomes);
-        for (const outcome of outcomes) state.completed[outcome.code] = outcome;
+        for (const outcome of outcomes) {
+          state.completed[outcome.code] = outcome;
+          if (live.phase === "source-followup") state.followupAttempts[outcome.code] = Number(state.followupAttempts[outcome.code] || 0) + 1;
+        }
         delete state.leases[live.leaseToken];
-        state.history.push({ event: "completed", assignmentId: live.assignmentId, workerId: live.workerId, outcomes, at: new Date().toISOString() });
+        state.history.push({ event: "completed", assignmentId: live.assignmentId, workerId: live.workerId, phase: live.phase || "initial", outcomes, at: new Date().toISOString() });
         saveState(paths, state); return { outcomes, ...summarize(state) };
       });
       console.log(JSON.stringify(summary, null, 2));
