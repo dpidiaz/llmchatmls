@@ -1,6 +1,6 @@
 # MLS-SND — Fuentes y fundamento para el lector
 
-Estado: **diseño editorial v0.1**.
+Estado: **diseño editorial v0.2**.
 
 ## 1. Objetivo
 
@@ -24,6 +24,27 @@ Puede contener:
 - decisiones analíticas.
 
 Esta capa existe para investigación, revisión y trazabilidad.
+
+### Pronunciation Quick Layer: derivada, no evidencial
+
+La pronunciación fácil puede formar parte de la capa de lectura, pero **no es una fuente ni una capa R33**.
+
+Debe derivarse de representación lingüística ya aprobada y conservar, cuando sea material:
+
+- forma original;
+- locale del lector;
+- variedad/contexto;
+- vínculo con la representación formal o explicación profunda.
+
+No se permite usar una respelling pedagógica para:
+
+- justificar un claim;
+- reemplazar un localizador;
+- inferir IPA;
+- ocultar una diferencia de variedad;
+- promover un estado editorial.
+
+La procedencia de la derivación puede registrarse en el Composition Handoff Manifest sin mostrarla como aparato crítico al lector.
 
 ### Capa de lectura
 
