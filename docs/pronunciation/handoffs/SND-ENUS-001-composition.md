@@ -23,6 +23,12 @@
 - **nota editorial visible:** sí; §7 completa.
 - **secciones ambiguas:** ninguna.
 
+## Pronunciation Quick Layer
+
+- **status:** NOT_APPLICABLE
+- **motivo:** esta versión es una entrada de alcance/variedad MULTI_REFERENCE, no una ficha de pronunciación de una forma concreta.
+- **regla:** no añadir una palabra, IPA ni respelling únicamente para satisfacer el patrón visual.
+
 ## Alcance
 
 - **idioma:** inglés
