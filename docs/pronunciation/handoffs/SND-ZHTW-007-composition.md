@@ -24,6 +24,13 @@
 - **secciones ambiguas:** ninguna.
 - **regla de proyección:** COMPOSITION ejecuta esta proyección y no decide contenido nuevo.
 
+## Pronunciation Quick Layer
+
+- **status:** OMITTED_WITH_REASON
+- **reader_locale:** no aplica todavía
+- **motivo:** la versión aprobada no contiene glifos/ejemplos Zhuyin reader-facing ni una forma concreta con IPA autorizada para derivar una ayuda rápida.
+- **regla:** COMPOSITION no debe inventar símbolos, ejemplos, romanización ni pronunciación. Si una versión futura incorpora ejemplos aprobados, se vuelve a evaluar esta capa.
+
 ## Alcance
 
 - **idioma:** mandarín

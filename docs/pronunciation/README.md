@@ -37,6 +37,7 @@ El tomo será explicativo y de consulta. No contendrá ejercicios, pruebas, exá
 - `editorial/terminology.md`: vocabulario editorial canónico.
 - `editorial/varieties-policy.md`: política de variedades.
 - `editorial/r33-validation.md`: gate de validación lingüística y evidencial.
+- `editorial/pronunciation-quick-layer.md`: capa R32 de acceso rápido a pronunciación para la reader-facing projection.
 
 ## Arquitectura prevista
 

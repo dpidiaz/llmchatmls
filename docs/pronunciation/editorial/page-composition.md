@@ -1,6 +1,6 @@
 # MLS-SND — Política de composición de página
 
-Estado: **norma editorial v0.1**.
+Estado: **norma editorial v0.2**.
 
 ## 1. Regla principal
 
@@ -49,6 +49,7 @@ Los estados internos de workflow/R33 no forman parte necesariamente de la edici�
 
 El diseño debe reconocer visualmente, cuando existan:
 
+- Pronunciation Quick Layer / acceso rápido;
 - explicación principal;
 - IPA/transcripción;
 - escritura original;
@@ -60,6 +61,32 @@ El diseño debe reconocer visualmente, cuando existan:
 - entradas relacionadas.
 
 No todos los bloques son obligatorios en todas las entradas.
+
+
+### 5.1 Pronunciation Quick Layer
+
+Cuando la entrada tenga una capa rápida aprobada en el handoff, debe aparecer **antes del análisis profundo** y mantener una jerarquía visual compacta:
+
+1. forma original;
+2. significado/glosa breve;
+3. **Pronunciación fácil (aprox.)** en el locale del lector;
+4. IPA aprobado, si corresponde;
+5. variedad/contexto material;
+6. acceso a la explicación completa.
+
+La capa rápida debe sentirse como una ayuda de consulta, no como un bloque técnico de R33.
+
+Reglas visuales:
+
+- la forma original tiene mayor prioridad que la respelling;
+- la pronunciación fácil usa una etiqueta explícita de aproximación;
+- IPA conserva su tipografía y delimitadores propios;
+- alcance/variedad puede mostrarse como metadata secundaria, pero nunca desaparecer cuando sea material;
+- no usar color como única diferencia entre pronunciación fácil e IPA;
+- no añadir contenido para equilibrar visualmente la caja;
+- `NOT_APPLICABLE` y `OMITTED_WITH_REASON` no producen una caja vacía.
+
+La especificación completa está en `pronunciation-quick-layer.md`.
 
 ## 6. Transcripciones
 

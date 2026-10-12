@@ -16,6 +16,12 @@
 - **EDITORIAL_REVIEW:** PASS.
 - **COMPOSITION_READINESS:** PASS — recorded in the canonical entry.
 
+## Pronunciation Quick Layer
+
+- **status:** NOT_APPLICABLE
+- **motivo:** entrada conceptual de fundamentos; no contiene una forma léxica concreta cuya pronunciación deba exponerse en una capa rápida.
+- **regla:** COMPOSITION no debe fabricar un ejemplo para llenar esta capa.
+
 ## Alcance
 
 - **idioma:** transversal

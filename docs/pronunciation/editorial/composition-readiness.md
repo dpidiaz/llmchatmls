@@ -1,6 +1,6 @@
 # MLS-SND — Gate de preparación para composición
 
-**Estado:** norma editorial v0.2.  
+**Estado:** norma editorial v0.3.  
 **Función:** definir el paso `EDITORIAL_REVIEW → READY_FOR_COMPOSITION`.  
 **Importante:** este documento **no promueve automáticamente ninguna entrada**.
 
@@ -173,7 +173,8 @@ Una entrada que reciba PASS debe llevar un **Composition Handoff Manifest** con:
 - open questions no bloqueantes;
 - requisitos especiales de tipografía/tablas;
 - resultado PASS y fecha;
-- **reader-facing projection**: secciones/bloques incluidos en la edición de lectura y metadata interna excluida.
+- **reader-facing projection**: secciones/bloques incluidos en la edición de lectura y metadata interna excluida;
+- **Pronunciation Quick Layer**: `PRESENT`, `NOT_APPLICABLE` u `OMITTED_WITH_REASON`, con locale y procedencia derivada cuando aplique.
 
 La plantilla está en `editorial/composition-handoff-template.md`.
 
@@ -187,7 +188,8 @@ El carril de composición puede ajustar:
 - presentación de tablas;
 - cabeceras/pies;
 - índices visuales;
-- disposición tipográfica de bloques aprobados.
+- disposición tipográfica de bloques aprobados;
+- presentación visual de una Pronunciation Quick Layer **ya aprobada en el handoff**.
 
 No puede cambiar sin reabrir revisión:
 
@@ -198,7 +200,8 @@ No puede cambiar sin reabrir revisión:
 - ejemplos;
 - fuentes/localizadores;
 - análisis;
-- relaciones de equivalencia.
+- relaciones de equivalencia;
+- contenido o forma de una pronunciación fácil cuando modificarla implique una decisión fonética nueva.
 
 ## 14. Regla de rollback
 
@@ -232,6 +235,28 @@ Reglas:
 4. Una sección ambigua bloquea el gate hasta que EDITORIAL_REVIEW la clasifique.
 5. La proyección debe ser coherente con `reader-facing-evidence.md` y `page-composition.md`.
 
+### 15.1 Pronunciation Quick Layer
+
+La reader-facing projection puede incorporar la política `pronunciation-quick-layer.md`.
+
+Cuando aplique, el handoff debe clasificar explícitamente la capa como:
+
+- `PRESENT`;
+- `NOT_APPLICABLE`;
+- `OMITTED_WITH_REASON`.
+
+Reglas del gate:
+
+1. la pronunciación fácil es una **derivación de composición**, no un claim R33;
+2. debe declarar el idioma/locale del lector para el que fue diseñada;
+3. no sustituye IPA, escritura original, romanización ni explicación lingüística aprobada;
+4. COMPOSITION no puede derivarla directamente de la ortografía por intuición;
+5. si producirla requiere una decisión fonética nueva, la entrada vuelve al gate pertinente;
+6. una entrada conceptual puede marcar `NOT_APPLICABLE` sin perder `READY_FOR_COMPOSITION`;
+7. una versión que carece de datos suficientes puede usar `OMITTED_WITH_REASON`; el hueco no se rellena artificialmente.
+
+Las entradas ya `READY_FOR_COMPOSITION` no pierden automáticamente su estado por la introducción de esta política. La clasificación se añade en su siguiente handoff/composición; solo se reabre revisión si la nueva proyección exige contenido lingüístico no aprobado.
+
 ## 16. Definición de PASS
 
 Una entrada puede marcarse `READY_FOR_COMPOSITION` únicamente cuando:
@@ -242,6 +267,7 @@ Una entrada puede marcarse `READY_FOR_COMPOSITION` únicamente cuando:
 4. la auditoría de representación pasa;
 5. navegación y ejemplos son auditables;
 6. se adjunta el Composition Handoff Manifest;
-7. el manifiesto define una proyección reader-facing inequívoca.
+7. el manifiesto define una proyección reader-facing inequívoca;
+8. la Pronunciation Quick Layer queda clasificada y, si está presente, no introduce decisiones fonéticas nuevas.
 
 Este gate preserva la separación fundamental de MLS-SND: **composición recibe contenido estabilizado; no decide lingüística ni evidencia**.

@@ -1,6 +1,6 @@
 # MLS-SND — Gate editorial de autonomía escrita
 
-**Versión propuesta:** 0.1 · **Tipo:** checklist interno de edición/composición, **no** ejercicio, prueba ni evaluación del lector.
+**Versión propuesta:** 0.2 · **Tipo:** checklist interno de edición/composición, **no** ejercicio, prueba ni evaluación del lector.
 
 ## 1. Propósito
 
@@ -36,6 +36,8 @@ No inventar un estado R33 nuevo a partir de estos resultados.
 | WRT-10 | ¿Claims materiales y fuentes están trazados? | No existe gate R33 para la versión vigente |
 | WRT-11 | ¿La entrada carece de prácticas, ejercicios, pruebas y evaluación? | Se pide al lector ejecutar una tarea |
 | WRT-12 | ¿La exportación conserva el IPA y las escrituras originales? | Se corrompen caracteres, diacríticos o separación de capas |
+| WRT-13 | Si existe pronunciación fácil, ¿está etiquetada como aproximada y localizada para un reader locale? | Se presenta como transcripción universal o exacta |
+| WRT-14 | ¿La pronunciación fácil acompaña, pero no sustituye, la representación formal o explicación escrita necesaria? | La comprensión depende solo de la respelling o esta introduce una decisión fonética nueva |
 
 ## 4. Evidencia del gate
 
@@ -60,6 +62,8 @@ controls:
   WRT-10: NOT_REVIEWED
   WRT-11: NOT_REVIEWED
   WRT-12: NOT_REVIEWED
+  WRT-13: NOT_REVIEWED
+  WRT-14: NOT_REVIEWED
 notes: []
 ```
 
@@ -86,7 +90,7 @@ No marcar `READY_FOR_COMPOSITION` solo porque este checklist tenga PASS.
 
 ## 7. Prueba de regresión editorial
 
-Si una entrada cambia después del PASS, su resultado queda **obsoleto para la nueva revisión**. Debe volver a comprobarse WRT-01/03/04/05/10/11 y cualquier control afectado por el cambio.
+Si una entrada cambia después del PASS, su resultado queda **obsoleto para la nueva revisión**. Debe volver a comprobarse WRT-01/03/04/05/10/11/13/14 y cualquier control afectado por el cambio.
 
 El gate se almacena por **ID + revisión**, nunca como aprobación permanente de un título.
 

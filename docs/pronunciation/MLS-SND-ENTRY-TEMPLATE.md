@@ -1,6 +1,6 @@
 # MLS-SND — Plantilla canónica de entrada
 
-Estado: **v0.1 para prototipos**.
+Estado: **v0.2 para prototipos**.
 
 ## Metadatos
 
@@ -84,3 +84,5 @@ Decisiones analíticas, límites de evidencia, conflictos entre fuentes y asunto
 ## Gate de salida
 
 Una entrada solo pasa a READY_FOR_COMPOSITION cuando supera por separado revisión lingüística/evidencial y revisión editorial.
+
+La **Pronunciation Quick Layer** no se usa como evidencia ni se redacta para rellenar huecos del archivo canónico. Se define en el Composition Handoff Manifest como proyección R32 derivada. Si requiere una decisión fonética nueva, la entrada vuelve al gate correspondiente antes de composición.
