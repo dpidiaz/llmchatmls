@@ -1,6 +1,6 @@
 # MLS-SND — Claim R32 pronunciation quick layer wave 01
 
-**Estado:** CLAIMED  
+**Estado:** COMPLETE  
 **Fecha:** 2026-10-12  
 **Rama:** `snd/r32-pronunciation-quick-layer`  
 **Base:** `feat/mls-snd-foundation`
@@ -35,3 +35,13 @@ Orden lector propuesto cuando aplique:
 - SND-ZHTW-007
 
 El piloto valida arquitectura de composición; no introduce claims lingüísticos nuevos.
+
+
+## Cierre
+
+- PR: #7480
+- Audit: `audits/R32-PRONUNCIATION-QUICK-LAYER-2026-10-12.md`
+- Resultado: PASS
+- Cambios lingüísticos: ninguno
+- Cambios R33: ninguno
+- Estados promovidos: ninguno
