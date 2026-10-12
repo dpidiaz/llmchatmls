@@ -28,6 +28,27 @@
 
 Esta sección implementa las políticas `reader-facing-evidence.md` y `page-composition.md`. La metadata interna puede permanecer en el repositorio aunque no forme parte de la edición de lectura.
 
+
+### Pronunciation Quick Layer (R32)
+
+- **status:** PRESENT / NOT_APPLICABLE / OMITTED_WITH_REASON
+- **reader_locale:** 
+- **source_form:** 
+- **meaning_or_gloss:** 
+- **easy_pronunciation:** 
+- **ipa_source / representación aprobada de origen:** 
+- **scope_note:** 
+- **deep_link / sección de detalle:** 
+- **derivation_note:** 
+
+Reglas:
+- la ayuda es aproximada y dependiente del locale;
+- no usa `/ /` ni `[ ]` como si fuera IPA;
+- no sustituye IPA ni sistemas locales;
+- no crea claims R33;
+- si requiere una decisión fonética nueva, el handoff es BLOCKED hasta reabrir el gate pertinente;
+- no completar campos por inferencia para “llenar” la plantilla.
+
 ## Alcance
 
 - **idioma:**
