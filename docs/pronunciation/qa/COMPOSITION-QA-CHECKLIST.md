@@ -42,6 +42,20 @@
 - [ ] Letras visualmente ambiguas con latín no se sustituyen entre scripts.
 - [ ] Búsqueda distingue el texto real.
 
+## Pronunciation Quick Layer
+
+- [ ] El estado de la capa es PRESENT / NOT_APPLICABLE / OMITTED_WITH_REASON.
+- [ ] Si está PRESENT, declara reader locale.
+- [ ] La forma original se conserva sin sustitución.
+- [ ] La pronunciación fácil está etiquetada como aproximada.
+- [ ] No usa / / ni [ ] como si fuera IPA.
+- [ ] No sustituye IPA, escritura local, romanización ni explicación formal.
+- [ ] No introduce sonidos, acentos, contrastes o alófonos no aprobados.
+- [ ] Conserva variedad/contexto cuando son materiales.
+- [ ] La glosa identifica la forma y no inventa equivalencias.
+- [ ] Existe acceso al detalle profundo cuando la vista básica simplifica información.
+- [ ] Una caja vacía no se renderiza para NOT_APPLICABLE / OMITTED_WITH_REASON.
+
 ## PDF
 
 - [ ] Texto seleccionable.
