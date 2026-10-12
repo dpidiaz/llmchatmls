@@ -1,0 +1,43 @@
+{
+  "schema": "MLS-R33-LOCAL-BLOCKER-1",
+  "recordedAt": "2026-10-10T17:39:59Z",
+  "branch": "feat/r33-local-recovery",
+  "trigger": "R33 local siguiente returned NO_WORK",
+  "coordinatorSnapshot": {
+    "remaining": 0,
+    "unresolvedReviewOutcomes": 2473,
+    "activeLeases": 4,
+    "followupRound": 1,
+    "configuredSourceFollowupRounds": 1
+  },
+  "blocker": "No unleased entry codes remain in the coordinator queue. The single configured source-followup round has been allocated/completed, while thousands of outcomes still remain pending source support or conflict. Four other leases were active at this snapshot and may still update the unresolved count, but the coordinator returned no further lease to this worker.",
+  "workerBatches": [
+    {
+      "workerId": "R33W-local-20261010173334-502a74",
+      "assignmentId": "R33A-1791653614574-9959fa",
+      "reviewed": 25,
+      "verified": 0,
+      "pendingSourceSupport": 25,
+      "coordinatorIntegrated": true
+    },
+    {
+      "workerId": "R33W-local-20261010173731-fe918b",
+      "assignmentId": "R33A-1791653851653-1cdd60",
+      "reviewed": 25,
+      "verified": 0,
+      "pendingSourceSupport": 24,
+      "pendingConflict": 1,
+      "coordinatorIntegrated": true
+    }
+  ],
+  "objectiveStatus": "OPEN",
+  "safety": {
+    "cloudflareInteractions": 0,
+    "d1Reads": 0,
+    "d1Writes": 0,
+    "paidApiCalls": 0,
+    "pushes": 0,
+    "merges": 0,
+    "deployments": 0
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0406",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:59:20.932Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791716180842-959e0e",
+  "workerId": "R33W-local-20261011105620-049411",
+  "phase": "source-followup",
+  "followupRound": 4,
+  "articlePath": "content/ruso/MLS-V09-0406.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento de fuentes; búsquedas y pasajes candidatos cotejados, sin declarar verificación.",
+    "findings": [
+      "La ficha generaliza las interacciones de ya/todavía con selección aspectual y temporal; falta un pasaje primario localizado que sostenga todos sus ejemplos.",
+      "No se modificó el artículo ni se creó Evidence canónica."
+    ],
+    "limitations": [
+      "Las referencias revisadas no sostienen todas las afirmaciones materiales con localizadores exactos."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La ficha generaliza las interacciones de ya/todavía con selección aspectual y temporal; falta un pasaje primario localizado que sostenga todos sus ejemplos.",
+      "searches": [
+        {
+          "query": "site:russian.cornell.edu grammar уже ещё aspect",
+          "portal": "Cornell Russian Grammar",
+          "outcome": "Los capítulos de aspecto localizados no exponen los matices de ya/todavía de la ficha."
+        },
+        {
+          "query": "site:gramota.ru уже еще глагольный вид",
+          "portal": "Gramota.ru",
+          "outcome": "Los resultados no ofrecieron respaldo directo para los contrastes completos y ejemplos originales."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "A specific instance vs. repeated occurrences of an action",
+          "url": "https://russian.cornell.edu/grammar/html/le31_40_f.htm",
+          "locator": "lines 0–3, perfective specific instance vs. imperfective habitual/repeated",
+          "finding": "Aporta una distinción general de aspecto, pero no valida los efectos de уже/ещё descritos por la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró limitar la entrada a las distinciones generales localizadas; no se aplicó la corrección porque no cubriría las afirmaciones centrales y ejemplos de ya/ещё.",
+      "canonicalCheck": "Artículo content/ruso/MLS-V09-0406.json conserva SHA-256 0cf74057ff8d48faaa25f1271de4b5d68eaa8c92338bd742672302c5e1f31999; no se creó Evidence y assessEntry no se ejecutó al faltar respaldo directo para las afirmaciones centrales.",
+      "nextConcreteStep": "Consultar una fuente gramatical dedicada a уже/ещё y determinar qué contrastes de aspecto y tiempo respalda de forma explícita; luego limitar el texto."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "Alta",
+    "reason": "La ficha generaliza las interacciones de ya/todavía con selección aspectual y temporal; falta un pasaje primario localizado que sostenga todos sus ejemplos.",
+    "nextStep": "Consultar una fuente gramatical dedicada a уже/ещё y determinar qué contrastes de aspecto y tiempo respalda de forma explícita; luego limitar el texto."
+  },
+  "originalArticleSha256": "0cf74057ff8d48faaa25f1271de4b5d68eaa8c92338bd742672302c5e1f31999",
+  "verifiedArticleSha256": "0cf74057ff8d48faaa25f1271de4b5d68eaa8c92338bd742672302c5e1f31999",
+  "backupComparison": {
+    "source": "tools/r33-local/work/R33A-1791716180842-959e0e-backup-comparison.json",
+    "code": "MLS-V09-0406",
+    "contentPath": "content/ruso/MLS-V09-0406.json",
+    "backupGeneratedAt": "2026-09-19T09:38:27.696Z",
+    "canonicalGeneratedAt": "2026-09-19T09:38:27.696Z",
+    "backupArticleSha256": "0cf74057ff8d48faaa25f1271de4b5d68eaa8c92338bd742672302c5e1f31999",
+    "canonicalArticleSha256": "0cf74057ff8d48faaa25f1271de4b5d68eaa8c92338bd742672302c5e1f31999",
+    "articleMatches": true,
+    "versionMatches": true,
+    "titleMatches": true
+  },
+  "canonicalEvidenceFound": false,
+  "assessEntry": {
+    "attempted": false,
+    "reason": "No hay respaldo suficiente para crear y evaluar Evidence."
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0406/followup-3-1de8f1e4beda.json",
+    "sha256": "1de8f1e4bedab3eaaedbed40bd436c6825282dfa956824b7a86a270a61f85059",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0876",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0876.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/el-concepto-de-t%C3%B3pico-ii-v%C3%ADnculos-sint%C3%A1cticos-y-discursivos-entre-el-t%C3%B3pico-y-la-oraci%C3%B3n-a-la-que-corresponde",
+      "locator": "§§40.3a–p",
+      "observation": "NGLE §40.3a–b describe el tópico y su vínculo con la oración mediante pronombres; no prescribe estructura universal de párrafo ni respalda por sí sola la oración temática como práctica académica."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T09:06:14.122Z",
+      "canonicalGeneratedAt": "2026-09-15T09:06:14.122Z",
+      "backupArticleSha256": "eec10f71810cf13f48329a40b89a7874d4785661af61e8d645f4856e4c3d1ee1",
+      "canonicalArticleSha256": "eec10f71810cf13f48329a40b89a7874d4785661af61e8d645f4856e4c3d1ee1",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "NGLE §40.3a–b describe el tópico y su vínculo con la oración mediante pronombres; no prescribe estructura universal de párrafo ni respalda por sí sola la oración temática como práctica académica."
+    ],
+    "limitations": [
+      "El artículo mezcla gramática de tópico con orientación pedagógica sobre organización de párrafos sin fuente primaria adecuada para esta última.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El artículo mezcla gramática de tópico con orientación pedagógica sobre organización de párrafos sin fuente primaria adecuada para esta última.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática/sintaxis tópico comentario párrafo tema rema 40.1 40.4",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se localizó NGLE §40.3; la fuente aborda tópico oracional, no la recomendación general sobre párrafos académicos."
+        },
+        {
+          "query": "site:rae.es/gramática/sintaxis ambigüedad pronombre antecedente claro anáfora tópico",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se abrió la fuente sobre tópico y pronombres; no se encontró norma que obligue a oración temática inicial."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/el-concepto-de-t%C3%B3pico-ii-v%C3%ADnculos-sint%C3%A1cticos-y-discursivos-entre-el-t%C3%B3pico-y-la-oraci%C3%B3n-a-la-que-corresponde",
+          "locator": "§§40.3a–p",
+          "finding": "NGLE §40.3a–b describe el tópico y su vínculo con la oración mediante pronombres; no prescribe estructura universal de párrafo ni respalda por sí sola la oración temática como práctica académica."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré distinguir “tópico” gramatical de “oración temática” retórica y retirar cualquier regla de posición universal; no se editó por la regla del coordinador para PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (eec10f71810cf13f48329a40b89a7874d4785661af61e8d645f4856e4c3d1ee1); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0876.json no existe y el índice verified.json no incluye MLS-V10-0876. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Buscar manuales universitarios gratuitos/oficiales de escritura académica para las recomendaciones de párrafo y conservar NGLE solo para afirmaciones gramaticales."
+    }
+  },
+  "originalArticleSha256": "eec10f71810cf13f48329a40b89a7874d4785661af61e8d645f4856e4c3d1ee1",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T09:06:14.122Z",
+    "canonicalGeneratedAt": "2026-09-15T09:06:14.122Z",
+    "backupArticleSha256": "eec10f71810cf13f48329a40b89a7874d4785661af61e8d645f4856e4c3d1ee1",
+    "canonicalArticleSha256": "eec10f71810cf13f48329a40b89a7874d4785661af61e8d645f4856e4c3d1ee1",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0876/followup-1-3c9d1bb58d0a.json",
+    "sha256": "3c9d1bb58d0a8c6ad09345b88c78c58153ee2838fe910b484b58496acfbb9cac",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0876-revision.json",
+    "sha256": "3c9d1bb58d0a8c6ad09345b88c78c58153ee2838fe910b484b58496acfbb9cac",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "eec10f71810cf13f48329a40b89a7874d4785661af61e8d645f4856e4c3d1ee1",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0876.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

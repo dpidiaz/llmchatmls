@@ -1,0 +1,85 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0842",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T17:25:03.998Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791652844138-bad78b",
+  "workerId": "R33W-local-20261010172044-86156d",
+  "articlePath": "content/japones/MLS-V06-0842.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "La explicación define scrambling como reordenamiento preverbal con partículas conservadas, y vincula orden a estructura informativa/contexto.",
+      "El extracto de Cambridge sobre scrambling confirma el orden básico SOV, permutaciones preverbales y que algunas secuencias son marcadas o inaceptables. No respalda por sí solo las funciones de tópico/contraste ni cada oración de la ficha.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T09:31:08.562Z) frente a content/japones/MLS-V06-0842.json; article_markdown SHA-256 cdbc9c109dbd34f65a7feb3e9b57cb46c9e760c2a42a33264e4657c6549d9183 / cdbc9c109dbd34f65a7feb3e9b57cb46c9e760c2a42a33264e4657c6549d9183; coincidencia=true.",
+      "Yamashita (2002) y Shoji (2022) estudian scrambling, pero no se cotejaron pasajes/páginas para cada afirmación funcional ni para las oraciones creadas en la ficha."
+    ],
+    "limitations": [
+      "Fuentes consultadas solo cubren partes de las afirmaciones, si las hay; falta validar exhaustivamente cada ejemplo y cada claim con localizadores precisos.",
+      "Sin Evidence canónica y sin ejecución de assessEntry, no se cumplen condiciones para VERIFIED.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ]
+  },
+  "originalArticleSha256": "cdbc9c109dbd34f65a7feb3e9b57cb46c9e760c2a42a33264e4657c6549d9183",
+  "verifiedArticleSha256": "cdbc9c109dbd34f65a7feb3e9b57cb46c9e760c2a42a33264e4657c6549d9183",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T09:31:08.562Z",
+    "backupArticleSha256": "cdbc9c109dbd34f65a7feb3e9b57cb46c9e760c2a42a33264e4657c6549d9183",
+    "canonicalArticleSha256": "cdbc9c109dbd34f65a7feb3e9b57cb46c9e760c2a42a33264e4657c6549d9183",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "Scrambled sentences in Japanese: Linguistic properties and motivations for production",
+      "author": "Yamashita, H.",
+      "year": 2002,
+      "publication": "Text—Interdisciplinary Journal for the Study of Discourse, 22(4), 597–633",
+      "doi": "10.1515/text.2002.023",
+      "url": "https://doi.org/10.1515/text.2002.023",
+      "locator": "pp. 597–633; estudio basado en textos naturales (texto completo no cotejado aquí)",
+      "coverage": "Estudio empírico de propiedades y motivaciones de scrambling en textos japoneses.",
+      "limits": "Falta mapear resultados y ejemplos específicos; no asumir que respalda cada función de tópico/contraste propuesta."
+    },
+    {
+      "title": "Syntactic, Semantic and Discourse Effects on the Processing of Scrambled Japanese Sentences",
+      "author": "Shoji, S.",
+      "year": 2022,
+      "publication": "Journal of Language Teaching and Research, 13(3), 481–491",
+      "doi": "10.17507/jltr.1303.04",
+      "url": "https://www.academypublication.com/issues3/jltr/vol13/jltr1303.pdf",
+      "locator": "pp. 481–491; abstract y experimentos de procesamiento SOV/OSV",
+      "coverage": "Experimentos sobre efectos sintácticos, semánticos y discursivos en oraciones OSV.",
+      "limits": "Estudio de procesamiento no valida automáticamente las funciones discursivas ni los ejemplos de la ficha."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0842/pre-coordinator.json",
+    "sha256": "8b23a662b32c578a6e82e13a7dac7aaeb34c6a73e6d4266a69d3f5a7303d807f",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 1
+}

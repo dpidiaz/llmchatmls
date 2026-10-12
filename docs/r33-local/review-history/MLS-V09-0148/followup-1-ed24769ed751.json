@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0148",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.625Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0148.json",
+  "articleGeneratedAt": "2026-09-19T09:19:36.766Z",
+  "articleSha256": "a2f9ba9a015e8b62dedbb8ad1701b853f8348c7bec9bd627a7111086f5802e24",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La tabla respalda -ы/-и por clase y reglas ortográficas principales; no cubre todos los subpatrones/ejemplos de la entrada.",
+      "Lectura directa de content/ruso/MLS-V09-0148.json (sha256 a2f9ba9a015e8b62dedbb8ad1701b853f8348c7bec9bd627a7111086f5802e24). La entrada explica «Genitivo femenino -ы/-и»; su introducción afirma: En ruso, muchos sustantivos femeninos forman el **genitivo singular** con **-ы** o **-и**. El genitivo puede aparecer en relaciones de pertenencia, después de ciertas preposiciones, en expresiones de cantidad y en construcciones negativas, entre otros usos. Los sustantivos femeninos en **-а** suelen cambiar esa terminación por **-ы**: **мама → мамы**, **комната → комнаты**. Sin embargo, después de **г, к, х, ж, ч, ш, щ** se escribe normalmente **-и** en lugar de **-ы**: **книга → книги**. Los su"
+    ],
+    "limitations": [
+      "No se completó cotejo morfológico, lema por lema, con una gramática descriptiva o diccionario de flexión para los patrones femeninos -а/-я/-ь y las excepciones ortográficas; los ejemplos no bastan para certificar la generalización completa.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Genitivo femenino -ы/-и",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Genitive Singular forms (nouns and adjectives)",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_b_1_a.htm",
+          "locator": "table/examples: masculine/neuter -а, feminine -ы/-и and spelling notes"
+        }
+      ],
+      "rationale": "La tabla respalda -ы/-и por clase y reglas ortográficas principales; no cubre todos los subpatrones/ejemplos de la entrada."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Genitive Singular forms (nouns and adjectives)",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_b_1_a.htm",
+          "locator": "table/examples: masculine/neuter -а, feminine -ы/-и and spelling notes"
+        }
+      ],
+      "rationale": "No se completó cotejo morfológico, lema por lema, con una gramática descriptiva o diccionario de flexión para los patrones femeninos -а/-я/-ь y las excepciones ortográficas; los ejemplos no bastan para certificar la generalización completa."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Genitive Singular forms (nouns and adjectives)",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr04_b_1_a.htm",
+      "locator": "table/examples: masculine/neuter -а, feminine -ы/-и and spelling notes",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Genitive Singular forms (nouns and adjectives). Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr04_b_1_a.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:19:36.766Z",
+    "backupGeneratedAt": "2026-09-19T09:19:36.766Z",
+    "canonicalArticleSha256": "a2f9ba9a015e8b62dedbb8ad1701b853f8348c7bec9bd627a7111086f5802e24",
+    "backupArticleSha256": "a2f9ba9a015e8b62dedbb8ad1701b853f8348c7bec9bd627a7111086f5802e24",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "a2f9ba9a015e8b62dedbb8ad1701b853f8348c7bec9bd627a7111086f5802e24",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0148/pre-coordinator.json",
+    "sha256": "aef44ec32f85e3147de6c97b401881e2abc7f8de0709bda4ecda579224804df9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0649",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0649.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 10,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "JPF, artículo 「そうだ／ようだ／らしい」（１）, líneas 198–200, explica que らしい puede significar típico y da 春らしい1日. Ese pasaje no valida los demás sustantivos, ejemplos ni generalizaciones de la ficha."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "JPF reconoce el sentido de ‘típico’, pero la ficha combina ese sentido con ejemplos y afirmaciones de distribución no cotejados.",
+      "searches": [
+        {
+          "query": "site:jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201307.html らしい 典型的 春らしい",
+          "portal": "Japan Foundation search",
+          "outcome": "Se encontró el uso típico en el material oficial; faltan los ejemplos y límites de la ficha."
+        },
+        {
+          "query": "site:jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html らしい 意味 用法",
+          "portal": "Japan Foundation search",
+          "outcome": "Página comparativa localizada; no documenta la totalidad de afirmaciones y ejemplos del artículo."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "市川保子. (2010年12月). 文法を楽しく「そうだ／ようだ／らしい」（１）. 国際交流基金.",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html",
+          "locator": "§「らしい」, líneas 198–200",
+          "finding": "Confirma sentido típico mediante 春らしい1日; no valida todos los ejemplos de la ficha."
+        },
+        {
+          "title": "市川保子. (2010年12月). 文法を楽しく「そうだ／ようだ／らしい」（１）. 国際交流基金.",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html",
+          "locator": "líneas 163–188",
+          "finding": "Contrasta inferencia y transmisión, no cubre el sentido típico completo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré restringir ejemplos y explicaciones al único patrón documentado 春らしい; hace falta cotejar la ficha completa y redactar APA/Evidence claim-level.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 7b97986ba69ffe445d3783e6e1acabdfe0ce38d432e95ebe3eedcdeee621d656. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "JPF reconoce el sentido de ‘típico’, pero la ficha combina ese sentido con ejemplos y afirmaciones de distribución no cotejados.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "7b97986ba69ffe445d3783e6e1acabdfe0ce38d432e95ebe3eedcdeee621d656",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0649/followup-2-6593cdebf624.json",
+    "sha256": "6593cdebf6248b0ebb008fa9fe98cf88cdb63a8e942b8652502e4e9a048cb2fe",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

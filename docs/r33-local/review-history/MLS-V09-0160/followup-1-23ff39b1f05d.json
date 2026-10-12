@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0160",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.641Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0160.json",
+  "articleGeneratedAt": "2026-09-19T09:30:56.970Z",
+  "articleSha256": "70268751d8612e6738dd303dcdde872499361ed202504f709e8de1ae43cbc05d",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente ofrece нет + genitivo y pasado/futuro impersonal; falta comprobar todos los contrastes y ejemplos de la ficha.",
+      "La ficha describe нет + genitivo para ausencia/existencia negativa y posesión con у + genitivo."
+    ],
+    "limitations": [
+      "No se localizó una fuente primaria de gramática rusa con cita exacta para todos los paradigmas y el contraste.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Genitivo de ausencia con нет",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "The net construction",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_b_2_1.htm",
+          "locator": "lines 0–6: нет/не было/не будет + genitive and impersonal examples"
+        }
+      ],
+      "rationale": "La fuente ofrece нет + genitivo y pasado/futuro impersonal; falta comprobar todos los contrastes y ejemplos de la ficha."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The net construction",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_b_2_1.htm",
+          "locator": "lines 0–6: нет/не было/не будет + genitive and impersonal examples"
+        }
+      ],
+      "rationale": "No se localizó una fuente primaria de gramática rusa con cita exacta para todos los paradigmas y el contraste."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "The net construction",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr04_b_2_1.htm",
+      "locator": "lines 0–6: нет/не было/не будет + genitive and impersonal examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The net construction. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr04_b_2_1.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:30:56.970Z",
+    "backupGeneratedAt": "2026-09-19T09:30:56.970Z",
+    "canonicalArticleSha256": "70268751d8612e6738dd303dcdde872499361ed202504f709e8de1ae43cbc05d",
+    "backupArticleSha256": "70268751d8612e6738dd303dcdde872499361ed202504f709e8de1ae43cbc05d",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "70268751d8612e6738dd303dcdde872499361ed202504f709e8de1ae43cbc05d",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0160/pre-coordinator.json",
+    "sha256": "d3fba041e58cf852609f1d8109008966050e11c9ca4868983c2d3fa150379e1b",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

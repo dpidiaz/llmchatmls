@@ -1,0 +1,157 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V07-0778",
+  "language": "chino-taiwan",
+  "reviewedAt": "2026-10-11T10:49:30.058Z",
+  "reviewer": "R33 local source-followup",
+  "articlePath": "content/chino-taiwan/MLS-V07-0778.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: lectura de artículo/revisión anterior; búsquedas públicas gratuitas y apertura de páginas institucionales/artículos con localizadores documentados. Resúmenes y documentación de corpus no se extienden a ejemplos no examinados.",
+    "findings": [
+      "Hash del texto vigente cotejado con baseArticleHashes; no hay drift. El diccionario MOE define 一下 como breve duración o matiz leve al seguir un verbo; el estudio de peticiones en Taiwan Mandarin respalda mitigación de manera general, pero no mide el efecto específico de 一下, frecuencia ni el ejemplo 請等一下.",
+      "Las fuentes consultadas solo sostienen el alcance explícito registrado; no cubren toda afirmación material ni todos los ejemplos. Sin Evidence canónica y sin assessEntry exitoso."
+    ],
+    "limitations": [
+      "Coverage claim-level incompleta; los abstracts y descripciones de corpus solo respaldan su alcance explícito.",
+      "No se validaron todos los ejemplos, traducciones, frecuencias y recomendaciones del texto.",
+      "No se creó Evidence ni se marcó VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El diccionario MOE define 一下 como breve duración o matiz leve al seguir un verbo; el estudio de peticiones en Taiwan Mandarin respalda mitigación de manera general, pero no mide el efecto específico de 一下, frecuencia ni el ejemplo 請等一下.",
+      "searches": [
+        {
+          "query": "Taiwan Mandarin 一下 mitigation requests corpus pragmatic study",
+          "portal": "Free public web search · academic",
+          "outcome": "Consulta realmente ejecutada; se revisaron los resultados. Cuando el resumen o la página no aportó el ejemplo/localizador específico, se registró como cobertura parcial y no como evidencia suficiente."
+        },
+        {
+          "query": "Taiwan Mandarin request politeness 一下 可以 麻煩您 corpus study open access",
+          "portal": "Free public web search · academic",
+          "outcome": "Consulta realmente ejecutada; se revisaron los resultados. Cuando el resumen o la página no aportó el ejemplo/localizador específico, se registró como cobertura parcial y no como evidencia suficiente."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "一下 — Revised Mandarin Chinese Dictionary",
+          "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=149508&la=0&powerMode=0",
+          "locator": "Dictionary entry 一下, senses 1–3, lines 29–35.",
+          "finding": "Sense 2 is brief time/quick action; sense 3 after verb is slight extent. No stated politeness function."
+        },
+        {
+          "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+          "url": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+          "locator": "English abstract, lines 71–76: 984 Taiwan Mandarin conversation tokens; requests/invitations commonly interrogative and combine with hedges/subjectivizers/preparators.",
+          "finding": "Supports general request strategy only; abstract does not report the specific lexical forms/examples in these entries."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró restringir el texto a los datos cubiertos y quitar generalizaciones o ejemplos sin respaldo; no se cambió articleMarkdown porque primero hace falta cotejar los pasajes restantes por afirmación.",
+      "canonicalCheck": "SHA-256 vigente 73138b765eb29a9a93ebbf752f72dccb8b8b3daab3ba28ce800f69573bf42aba = hash canónico al emitir lease. No se creó Evidence; no se ejecutó assessEntry como aprobación. Sin Cloudflare/D1.",
+      "nextConcreteStep": "Resolver el bloqueo con localizadores claim-level, revisar/corregir las afirmaciones sobre Atenuación con 一下, y solo entonces construir Evidence y ejecutar assessEntry."
+    }
+  },
+  "originalArticleSha256": "73138b765eb29a9a93ebbf752f72dccb8b8b3daab3ba28ce800f69573bf42aba",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "verifiedArticleSha256": "73138b765eb29a9a93ebbf752f72dccb8b8b3daab3ba28ce800f69573bf42aba",
+  "followupSourceReview": {
+    "sourcesConsulted": [
+      {
+        "title": "重編國語辭典修訂本：一下",
+        "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=149508",
+        "sourceKind": "Fuente primaria/página institucional pública; alcance limitado descrito en locator",
+        "publisher": "Ministry of Education, Taiwan",
+        "apa7": "重編國語辭典修訂本：一下. (n.d.). https://dict.revised.moe.edu.tw/dictView.jsp?ID=149508"
+      }
+    ],
+    "locatorConvention": "Localizador exacto a sección, páginas, entrada o resumen público efectivamente inspeccionado; cuando solo se vio abstract/metadata se indica así.",
+    "result": "MOE documenta duración/acción breve de 一下 y ejemplos lexicográficos, pero no sustenta que reduzca imposición, compare cortesía ni sea frecuente en peticiones taiwanesas."
+  },
+  "apiCalls": 0,
+  "followupRound": 4,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V07-0778/followup-3-0c293dd0eb6f.json",
+    "sha256": "0c293dd0eb6f451d9b18f31b98612d5ec6f016a29a70baf2a07205fe308a3244",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "assignmentId": "R33A-1791715615283-604727",
+  "sourceAudit": {
+    "method": "Free public source search and inspected primary/institutional sources; claims kept within scope.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "El diccionario MOE define 一下 como breve duración o matiz leve al seguir un verbo; el estudio de peticiones en Taiwan Mandarin respalda mitigación de manera general, pero no mide el efecto específico de 一下, frecuencia ni el ejemplo 請等一下."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "El diccionario MOE define 一下 como breve duración o matiz leve al seguir un verbo; el estudio de peticiones en Taiwan Mandarin respalda mitigación de manera general, pero no mide el efecto específico de 一下, frecuencia ni el ejemplo 請等一下.",
+    "nextStep": "Investigar las afirmaciones específicas aún sin localizar; conseguir pasajes completos y cotejar MLS-V07-0778 afirmación por afirmación."
+  },
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "phase": "source-followup",
+  "sourceReferences": [
+    {
+      "title": "一下 — Revised Mandarin Chinese Dictionary",
+      "canonicalUrl": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=149508&la=0&powerMode=0",
+      "authorityTier": "A",
+      "apa7": "教育部. (2021). 一下. 重編國語辭典修訂本. https://dict.revised.moe.edu.tw/dictView.jsp?ID=149508&la=0&powerMode=0"
+    },
+    {
+      "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+      "canonicalUrl": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+      "authorityTier": "A",
+      "apa7": "Wang, Y.-F., Lin, S.-F., Tsai, P.-H., Lin, M.-F., & Hung, H.-J. (2026). A study of requests, suggestions, invitations, and offers in Taiwan Mandarin conversations. Journal of Chinese Language Teaching, 23(2), 37–107. https://doi.org/10.6393/JCLT.202606_23(2).0002"
+    }
+  ],
+  "workerId": "R33W-local-20261011104655-689735",
+  "articleGeneratedAt": "2026-09-19T09:28:15.128Z",
+  "articleSha256": "73138b765eb29a9a93ebbf752f72dccb8b8b3daab3ba28ce800f69573bf42aba",
+  "consultedSources": [
+    {
+      "title": "一下 — Revised Mandarin Chinese Dictionary",
+      "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=149508&la=0&powerMode=0",
+      "locator": "Dictionary entry 一下, senses 1–3, lines 29–35.",
+      "use": "Sense 2 is brief time/quick action; sense 3 after verb is slight extent. No stated politeness function."
+    },
+    {
+      "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+      "url": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+      "locator": "English abstract, lines 71–76: 984 Taiwan Mandarin conversation tokens; requests/invitations commonly interrogative and combine with hedges/subjectivizers/preparators.",
+      "use": "Supports general request strategy only; abstract does not report the specific lexical forms/examples in these entries."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "一下 — Revised Mandarin Chinese Dictionary",
+      "author": null,
+      "year": null,
+      "sourceType": "Official institutional / primary research source",
+      "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=149508&la=0&powerMode=0",
+      "locator": "Dictionary entry 一下, senses 1–3, lines 29–35.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Sense 2 is brief time/quick action; sense 3 after verb is slight extent. No stated politeness function."
+    },
+    {
+      "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+      "author": null,
+      "year": null,
+      "sourceType": "Official institutional / primary research source",
+      "url": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+      "locator": "English abstract, lines 71–76: 984 Taiwan Mandarin conversation tokens; requests/invitations commonly interrogative and combine with hedges/subjectivizers/preparators.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Supports general request strategy only; abstract does not report the specific lexical forms/examples in these entries."
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED"
+}

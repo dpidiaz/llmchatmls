@@ -1,0 +1,93 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0632",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:36:37.098Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0632.json",
+  "articleGeneratedAt": "2026-09-19T09:23:38.213Z",
+  "articleSha256": "0b743cf3df6237713e2015792652bb121a0a274d15a14f7d2aee51a96ada7a43",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims sustanciales con fuentes universitarias/gramaticales abiertas y localizadores definidos; identidad de respaldo SQLite en read-only. Evidencia parcial no se promovió a VERIFIED.",
+    "findings": [
+      "Cornell states present passive participles use -м-, non-past stems and imperfective verbs; source also says they are rare. This narrows rather than validates every formation claim."
+    ],
+    "limitations": [
+      "Falta gramática morfológica para sufijos por conjugación, restricciones de transitividad, instrumental agente y distribución escrita; la simultaneidad/habitualidad requiere matiz aspectual.",
+      "La fuente consultada no cubre todos los ejemplos, excepciones y juicios contextuales de la ficha; no se creó Evidence canónica ni se ejecutó assessEntry exitoso."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación central sobre Participio pasivo presente.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Present passive participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_g.htm",
+          "locator": "lines 0–10: -м-, non-past stem, imperfective restriction, aspect examples and rare usage"
+        }
+      ],
+      "rationale": "Cornell states present passive participles use -м-, non-past stems and imperfective verbs; source also says they are rare. This narrows rather than validates every formation claim."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos y generalizaciones de alcance de la ficha están respaldados por la fuente.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Present passive participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_g.htm",
+          "locator": "lines 0–10: -м-, non-past stem, imperfective restriction, aspect examples and rare usage"
+        }
+      ],
+      "rationale": "Falta gramática morfológica para sufijos por conjugación, restricciones de transitividad, instrumental agente y distribución escrita; la simultaneidad/habitualidad requiere matiz aspectual."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S.",
+      "title": "Present passive participles",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le103_110_g.htm",
+      "locator": "lines 0–10: -м-, non-past stem, imperfective restriction, aspect examples and rare usage",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Present passive participles. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le103_110_g.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:23:38.213Z",
+    "backupGeneratedAt": "2026-09-19T09:23:38.213Z",
+    "canonicalArticleSha256": "0b743cf3df6237713e2015792652bb121a0a274d15a14f7d2aee51a96ada7a43",
+    "backupArticleSha256": "0b743cf3df6237713e2015792652bb121a0a274d15a14f7d2aee51a96ada7a43",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "0b743cf3df6237713e2015792652bb121a0a274d15a14f7d2aee51a96ada7a43",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0632/pre-coordinator.json",
+    "sha256": "43a2239060e4a6b46b4aa82f0abf287a3c5d3b48fd7793822aec96b5bbaf308b",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

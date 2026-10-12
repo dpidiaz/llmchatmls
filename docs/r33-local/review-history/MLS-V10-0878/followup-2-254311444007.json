@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0878",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0878.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (s. f.). Diccionario panhispánico de dudas (2.ª ed.).",
+      "url": "https://www.rae.es/dpd/se",
+      "locator": "s. v. se, §§2.1–2.4",
+      "observation": "DPD s. v. se §2.4 explica pasiva refleja e impersonal, concordancia con sujeto paciente y casos de ambigüedad; no recomienda la pasiva refleja por estilo en escritura académica."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T09:08:18.201Z",
+      "canonicalGeneratedAt": "2026-09-15T09:08:18.201Z",
+      "backupArticleSha256": "591be737bc5ffde4148aac6486223c9104c9b8dbfedfb89421ef821dbdcb63fb",
+      "canonicalArticleSha256": "591be737bc5ffde4148aac6486223c9104c9b8dbfedfb89421ef821dbdcb63fb",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "DPD s. v. se §2.4 explica pasiva refleja e impersonal, concordancia con sujeto paciente y casos de ambigüedad; no recomienda la pasiva refleja por estilo en escritura académica."
+    ],
+    "limitations": [
+      "El contenido gramatical tiene respaldo parcial, pero las recomendaciones de estilo y los ejemplos requieren localizadores y Evidence por afirmación.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El contenido gramatical tiene respaldo parcial, pero las recomendaciones de estilo y los ejemplos requieren localizadores y Evidence por afirmación.",
+      "searches": [
+        {
+          "query": "site:rae.es/dpd/se pasiva refleja concordancia sujeto paciente impersonal",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se abrió DPD s. v. se §2.4; confirma contraste y concordancia, pero no consejo de estilo académico."
+        },
+        {
+          "query": "site:rae.es/dpd/se 2.4 pasiva refleja concordancia sujeto paciente ejemplos",
+          "portal": "RAE/ASALE search",
+          "outcome": "La consulta recupera el mismo pasaje primario; el componente estilístico del artículo no queda acreditado."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (s. f.). Diccionario panhispánico de dudas (2.ª ed.).",
+          "url": "https://www.rae.es/dpd/se",
+          "locator": "s. v. se, §§2.1–2.4",
+          "finding": "DPD s. v. se §2.4 explica pasiva refleja e impersonal, concordancia con sujeto paciente y casos de ambigüedad; no recomienda la pasiva refleja por estilo en escritura académica."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré separar descripción gramatical de consejo estilístico y retirar como regla lo que el DPD no prescribe. No se editó por el requisito del coordinador para PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (591be737bc5ffde4148aac6486223c9104c9b8dbfedfb89421ef821dbdcb63fb); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0878.json no existe y el índice verified.json no incluye MLS-V10-0878. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Completar matriz de los ejemplos con DPD §§2.1–2.4 y buscar manual de estilo académico abierto para recomendaciones de uso."
+    }
+  },
+  "originalArticleSha256": "591be737bc5ffde4148aac6486223c9104c9b8dbfedfb89421ef821dbdcb63fb",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T09:08:18.201Z",
+    "canonicalGeneratedAt": "2026-09-15T09:08:18.201Z",
+    "backupArticleSha256": "591be737bc5ffde4148aac6486223c9104c9b8dbfedfb89421ef821dbdcb63fb",
+    "canonicalArticleSha256": "591be737bc5ffde4148aac6486223c9104c9b8dbfedfb89421ef821dbdcb63fb",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0878/followup-1-d5ecbab54a13.json",
+    "sha256": "d5ecbab54a130426e66008b50c23e5fb1147907e6997c4bd8605f0e74ad89389",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0878-revision.json",
+    "sha256": "d5ecbab54a130426e66008b50c23e5fb1147907e6997c4bd8605f0e74ad89389",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "591be737bc5ffde4148aac6486223c9104c9b8dbfedfb89421ef821dbdcb63fb",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0878.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

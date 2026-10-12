@@ -1,0 +1,117 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0818",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T05:19:30.819Z",
+  "reviewer": "R33W-local-20261011050055-cf0f8d",
+  "assignmentId": "R33A-1791694855663-dd464d",
+  "workerId": "R33W-local-20261011050055-cf0f8d",
+  "articlePath": "content/japones/MLS-V06-0818.json",
+  "status": "VERIFIED",
+  "claimsTotal": 3,
+  "claimsVerified": 3,
+  "coverageComplete": true,
+  "citationReady": true,
+  "semanticReview": {
+    "method": "Verificación de cada afirmación y ejemplo contra la explicación gramatical institucional de Tokyo University of Foreign Studies; se acotó el artículo al contenido explícito de la fuente.",
+    "findings": [
+      "La revisión anterior había señalado que no se había sustentado el patrón morfológico ni los ejemplos. La nueva vía consulta directamente el módulo de gramática de TUFS y su lección 普通体.",
+      "La fuente define el 普通体 como formas ordinarias para hablar o escribir, distingue ダ体 y デアル体 y dice que デアル体 se usa normalmente en artículos académicos e informes (puntos 1–2, líneas 17–19). El artículo conserva “habitualmente” y limita la afirmación a esos géneros.",
+      "La fuente limita la diferencia entre ダ体 y デアル体 a predicados que acaban en だ, incluidos nombres y な-adjetivos; verbos e い-adjetivos no cambian (punto 3, línea 21).",
+      "El ejemplo 日本の冬は寒い y las formas marcadas incorrectas 寒いだ / 寒いである aparecen en la fuente (ejemplos 2 y 2-prime, líneas 25–27).",
+      "Se eliminaron las afirmaciones no documentadas sobre objetividad, concisión, coherencia universal, variación editorial y ejemplos inventados; APA 7 se generó con el renderer y coincide con el metadato Evidence.",
+      "La fuente es gratuita, pública e institucional. Se inspeccionó el contenido pertinente directamente en la página oficial. No se utilizó Cloudflare ni D1."
+    ],
+    "limitations": [
+      "La recomendación de uso académico es descriptiva y dice “normalmente”; no demuestra que todas las revistas, disciplinas o instituciones requieran el estilo.",
+      "La ficha resume esta lección del módulo; no es una descripción exhaustiva de todos los registros ni de toda variación de estilo."
+    ]
+  },
+  "originalArticleSha256": "1950e6441898e553b2ccce334a0fb87d5f0546ff51f716c040dfeb84a302ad42",
+  "verifiedArticleSha256": "354ad2179bb46912651f09101325f2dd275333168fb9d59e6c352971d5f8438c",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; comparación documentada en la revisión anterior (SQLite readOnly=true)",
+    "backupGeneratedAt": "2026-09-19T21:28:15.646Z",
+    "backupArticleSha256": "1950e6441898e553b2ccce334a0fb87d5f0546ff51f716c040dfeb84a302ad42",
+    "canonicalOriginalArticleSha256": "1950e6441898e553b2ccce334a0fb87d5f0546ff51f716c040dfeb84a302ad42",
+    "articleMatchesAtPriorReview": true,
+    "currentArticleSha256": "354ad2179bb46912651f09101325f2dd275333168fb9d59e6c352971d5f8438c",
+    "currentArticleDiffersFromBackupDueToThisReview": true,
+    "note": "El backup SQL no está presente en este worktree; se preserva el cotejo hash previo del artículo original. El hash actual refleja esta edición editorial."
+  },
+  "sourceReferences": [
+    {
+      "apa7": "Tokyo University of Foreign Studies. (s. f.). *日本語文法 普通体:解説*. https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/090.html",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/090.html",
+      "locator": "普通体, points 1–3, examples (2) and (2 prime), HTML lines 17–27",
+      "supports": "Definición de estilo llano, distinción ダ体/デアル体, ámbito académico habitual, morfología diferencial y ejemplo い-adjective."
+    }
+  ],
+  "searches": [
+    {
+      "query": "site:coelang.tufs.ac.jp/mt/ja/gmod \"デアル体\" \"名詞\"",
+      "portal": "Búsqueda web del módulo gramatical de Tokyo University of Foreign Studies",
+      "outcome": "Localizó la explicación oficial 普通体 y el patrón morfológico de nombres/な-adjetivos frente a verbos/い-adjetivos."
+    },
+    {
+      "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/090 \"普通体\" デアル体",
+      "portal": "Búsqueda web institucional + inspección directa de la página",
+      "outcome": "Abrió la lección oficial; se inspeccionaron los puntos 1–3 y el ejemplo de 寒い con su restricción."
+    }
+  ],
+  "primarySourcesInspected": [
+    {
+      "title": "Tokyo University of Foreign Studies. 日本語文法 普通体：解説",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/090.html",
+      "locator": "普通体, points 1–3 and examples (2)/(2 prime), HTML lines 17–27",
+      "finding": "El estilo llano usa formas ordinarias; se distingue ダ体/デアル体 y este último se usa normalmente en artículos académicos e informes. Las diferencias morfológicas se limitan a predicados terminados en だ; verbos e い-adjetivos no varían. 日本の冬は寒い se muestra con 寒いだ y 寒いである marcados como incorrectos."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": true,
+    "path": "MLS R32 EDITORIAL/evidence git/entries/japones/MLS-V06-0818.json",
+    "status": "VERIFIED",
+    "evidenceRevision": 2,
+    "articleSha256": "0a6fcb3734e50c1696fdcce99a14860e00a44c0df2bf944e5dc1368d337975b0",
+    "assessment": "PASSED",
+    "verifiedIndexIncludesCode": true
+  },
+  "assessEntry": {
+    "attempted": true,
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "claimsTotal": 3,
+    "claimsVerified": 3,
+    "coverageComplete": true,
+    "citationReady": true,
+    "derivedStatus": "VERIFIED"
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0818/followup-2-2e74ee28b745.json",
+    "sha256": "2e74ee28b7452fbb04cc77311dcdf3bd5eef3cda78c9ff48110e649fbfda1ad7",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3,
+  "preflight": {
+    "ok": true,
+    "articleHash": "0a6fcb3734e50c1696fdcce99a14860e00a44c0df2bf944e5dc1368d337975b0",
+    "evidenceRevision": 2,
+    "validatedAt": "2026-10-11T05:48:49.188Z",
+    "claimsTotal": 3,
+    "claimsVerified": 3,
+    "coverageComplete": true,
+    "citationReady": true,
+    "errors": []
+  },
+  "artifactMetadataCorrection": {
+    "reason": "Se conservó el archivo previo y se corrigieron los campos de hash/preflight necesarios para completar el lease; assessEntry pasó con Evidence canónica y el índice VERIFIED incluye la entrada.",
+    "previousArtifactPath": "docs/r33-local/review-history/MLS-V06-0818/coordinator-fix-66a684eb58a9.json",
+    "previousArtifactSha256": "66a684eb58a918780325e5a7674186bdda93686b7a9213d6881bbef24dda7942",
+    "coordinatorArticleTextSha256": "354ad2179bb46912651f09101325f2dd275333168fb9d59e6c352971d5f8438c"
+  }
+}

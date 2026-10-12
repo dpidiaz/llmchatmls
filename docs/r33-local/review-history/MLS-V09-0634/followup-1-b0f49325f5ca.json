@@ -1,0 +1,112 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0634",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:36:37.103Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0634.json",
+  "articleGeneratedAt": "2026-09-19T09:25:24.071Z",
+  "articleSha256": "d228765f1b5cd9882882ef2f4846824346b44c02bdbcfc140bda0619e2b68a5d",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims sustanciales con fuentes universitarias/gramaticales abiertas y localizadores definidos; identidad de respaldo SQLite en read-only. Evidencia parcial no se promovió a VERIFIED.",
+    "findings": [
+      "Cornell distinguishes past passive -нн-/-т- in overview and points to separate formation rules; the article’s three suffixes and derivational conditions are not covered completely."
+    ],
+    "limitations": [
+      "No hay fuente cotejada con localizador ni Evidence canónica claim-level para este lote; claimsVerified=0, status=PENDING_SOURCE_SUPPORT. SQL coincide en todos los campos de versión, lo que acredita identidad de texto, no corrección lingüística.",
+      "La fuente consultada no cubre todos los ejemplos, excepciones y juicios contextuales de la ficha; no se creó Evidence canónica ni se ejecutó assessEntry exitoso."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación central sobre Pasivo -нный/-енный/-тый.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases"
+        },
+        {
+          "title": "Short forms of past passive participles",
+          "url": "https://russian.cornell.edu/grammar/html/le95_102_h.htm",
+          "locator": "lines 0–17: short participle as true passive, agreement/examples, source and limits of formation rules"
+        }
+      ],
+      "rationale": "Cornell distinguishes past passive -нн-/-т- in overview and points to separate formation rules; the article’s three suffixes and derivational conditions are not covered completely."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos y generalizaciones de alcance de la ficha están respaldados por la fuente.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases"
+        },
+        {
+          "title": "Short forms of past passive participles",
+          "url": "https://russian.cornell.edu/grammar/html/le95_102_h.htm",
+          "locator": "lines 0–17: short participle as true passive, agreement/examples, source and limits of formation rules"
+        }
+      ],
+      "rationale": "No hay fuente cotejada con localizador ni Evidence canónica claim-level para este lote; claimsVerified=0, status=PENDING_SOURCE_SUPPORT. SQL coincide en todos los campos de versión, lo que acredita identidad de texto, no corrección lingüística."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S.",
+      "title": "Long forms of participles",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+      "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Long forms of participles. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le103_110_b.htm"
+    },
+    {
+      "author": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S.",
+      "title": "Short forms of past passive participles",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le95_102_h.htm",
+      "locator": "lines 0–17: short participle as true passive, agreement/examples, source and limits of formation rules",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Short forms of past passive participles. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le95_102_h.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:25:24.071Z",
+    "backupGeneratedAt": "2026-09-19T09:25:24.071Z",
+    "canonicalArticleSha256": "d228765f1b5cd9882882ef2f4846824346b44c02bdbcfc140bda0619e2b68a5d",
+    "backupArticleSha256": "d228765f1b5cd9882882ef2f4846824346b44c02bdbcfc140bda0619e2b68a5d",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "d228765f1b5cd9882882ef2f4846824346b44c02bdbcfc140bda0619e2b68a5d",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0634/pre-coordinator.json",
+    "sha256": "bf8574a62c4bec51a186262c969d25cdb29acdc495afefb8df6f55d3a1b6bb94",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

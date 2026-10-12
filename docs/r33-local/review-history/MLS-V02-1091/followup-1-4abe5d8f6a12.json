@@ -1,0 +1,99 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V02-1091",
+  "language": "portugues",
+  "reviewedAt": "2026-10-10T17:22:59.176Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791652673045-64891c",
+  "articlePath": "content/portugues/MLS-V02-1091.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [],
+  "sourceAudit": {
+    "method": "Consulta y apertura de fuentes externas con localizadores textuales. Las referencias son candidatas; no se crea Evidence canónica ni se considera cubierta la entrada completa.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false
+  },
+  "semanticReview": {
+    "method": "Seguimiento semántico de la revisión anterior: consulta de fuentes primarias/institucionales abiertas, cotejo de localizadores disponibles y delimitación explícita del alcance. No se elevó una afirmación parcial a VERIFIED.",
+    "findings": [
+      "Se identificó el Manual de Redação oficial y un localizador candidato para punto y coma en segmentos con comas internas, pero el PDF no pudo cotejarse directamente durante esta ronda; no se certifique hasta validar el pasaje y cada ejemplo."
+    ],
+    "limitations": [
+      "El localizador oficial está pendiente de comprobación directa; no se creó Evidence ni se ejecutó assessEntry, por lo que el estado debe seguir pendiente."
+    ]
+  },
+  "originalArticleSha256": "10eec0a5b938c3afdce8e97ef7610897e319e225cb72dadfc94eee0f13913605",
+  "backupComparison": {
+    "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite",
+    "access": "node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-18T18:56:45.749Z",
+    "canonicalGeneratedAt": "2026-09-18T18:56:45.749Z",
+    "backupArticleSha256": "10eec0a5b938c3afdce8e97ef7610897e319e225cb72dadfc94eee0f13913605",
+    "canonicalArticleSha256": "10eec0a5b938c3afdce8e97ef7610897e319e225cb72dadfc94eee0f13913605",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "workerId": "R33W-local-20261010171753-0f4a03",
+  "followupRound": 1,
+  "canonicalArticleSha256": "10eec0a5b938c3afdce8e97ef7610897e319e225cb72dadfc94eee0f13913605",
+  "verifiedArticleSha256": "10eec0a5b938c3afdce8e97ef7610897e319e225cb72dadfc94eee0f13913605",
+  "followupSources": [
+    {
+      "title": "Manual de redação da Presidência da República",
+      "reference": "Brasil. Presidência da República. (2018). Manual de redação da Presidência da República (3.ª ed.). https://www.gov.br/cidades/pt-br/midia/documentos/pdf/manualderedacao.pdf",
+      "url": "https://www.gov.br/cidades/pt-br/midia/documentos/pdf/manualderedacao.pdf",
+      "locator": "Sección 11.9.2, p. 80 (referencia del manual): punto y coma entre estructuras coordinadas extensas con comas internas; PDF oficial no pudo abrirse directamente en esta sesión, por lo que localizador requiere confirmación local.",
+      "supports": "Regla normativa candidata sobre punto y coma en estructuras con comas internas.",
+      "limitation": "Acceso directo al PDF falló en esta sesión y no se cotejaron todos los usos ni ejemplos de la entrada; mantener como pendiente hasta confirmar el pasaje.",
+      "status": "PARTIAL"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "preflight": {
+    "ok": false,
+    "reason": "Evidence canónica ausente; assessEntry no ejecutado."
+  },
+  "sourceSearch": {
+    "followupRound": 1,
+    "consultedAt": "2026-10-10T17:22:59.176Z",
+    "result": "PARTIAL_SUPPORT_ONLY",
+    "partialHits": [
+      {
+        "title": "Manual de redação da Presidência da República",
+        "reference": "Brasil. Presidência da República. (2018). Manual de redação da Presidência da República (3.ª ed.). https://www.gov.br/cidades/pt-br/midia/documentos/pdf/manualderedacao.pdf",
+        "url": "https://www.gov.br/cidades/pt-br/midia/documentos/pdf/manualderedacao.pdf",
+        "locator": "Sección 11.9.2, p. 80 (referencia del manual): punto y coma entre estructuras coordinadas extensas con comas internas; PDF oficial no pudo abrirse directamente en esta sesión, por lo que localizador requiere confirmación local.",
+        "supports": "Regla normativa candidata sobre punto y coma en estructuras con comas internas.",
+        "limitation": "Acceso directo al PDF falló en esta sesión y no se cotejaron todos los usos ni ejemplos de la entrada; mantener como pendiente hasta confirmar el pasaje.",
+        "status": "PARTIAL"
+      }
+    ],
+    "repositories": [
+      "www.gov.br"
+    ]
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V02-1091/pre-coordinator.json",
+    "sha256": "3cd35ed02656fb29d3be1cbccb23b1db6e0c24617e299f3239be181c32679498",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  }
+}

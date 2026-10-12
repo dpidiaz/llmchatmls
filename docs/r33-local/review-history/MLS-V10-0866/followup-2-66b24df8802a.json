@@ -1,0 +1,137 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0866",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0866.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española. (s. f.). Conjugación española. El buen uso del español.",
+      "url": "https://www.rae.es/buen-uso-espa%C3%B1ol/conjugaci%C3%B3n-espa%C3%B1ola",
+      "locator": "Tabla de ANDAR: presente y pretérito",
+      "observation": "La conjugación académica muestra anduve y andás en el presente voseante; no se localizó fuente primaria académica que declare directamente el estatus de andé en Guatemala ni su frecuencia regional."
+    },
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/morfolog%C3%ADa/verbos-irregulares-iv-pret%C3%A9ritos-fuertes-y-participios-irregulares",
+      "locator": "§§4.12c–d",
+      "observation": "La conjugación académica muestra anduve y andás en el presente voseante; no se localizó fuente primaria académica que declare directamente el estatus de andé en Guatemala ni su frecuencia regional."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T08:55:49.653Z",
+      "canonicalGeneratedAt": "2026-09-15T08:55:49.653Z",
+      "backupArticleSha256": "e54491c6990988d7beeb3ebc0cf99cb481d9e91389a610998740b6eb1bf7368b",
+      "canonicalArticleSha256": "e54491c6990988d7beeb3ebc0cf99cb481d9e91389a610998740b6eb1bf7368b",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "La conjugación académica muestra anduve y andás en el presente voseante; no se localizó fuente primaria académica que declare directamente el estatus de andé en Guatemala ni su frecuencia regional."
+    ],
+    "limitations": [
+      "La forma paradigma está respaldada; el contraste normativo y la afirmación sobre usos regionales de andé carecen de localizador primario preciso.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La forma paradigma está respaldada; el contraste normativo y la afirmación sobre usos regionales de andé carecen de localizador primario preciso.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática \"anduve\" \"andás\" andar pretérito Guatemala andé",
+          "portal": "RAE/ASALE search",
+          "outcome": "La conjugación oficial ofrece anduve y andás; no formula juicio específico sobre andé ni Guatemala."
+        },
+        {
+          "query": "site:rae.es/dpd/andar \"anduve\" pretérito andé",
+          "portal": "RAE/ASALE search",
+          "outcome": "No se halló artículo DPD pertinente; el resultado secundario fue histórico. La consulta no resuelve estatus regional de andé."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española. (s. f.). Conjugación española. El buen uso del español.",
+          "url": "https://www.rae.es/buen-uso-espa%C3%B1ol/conjugaci%C3%B3n-espa%C3%B1ola",
+          "locator": "Tabla de ANDAR: presente y pretérito",
+          "finding": "La conjugación académica muestra anduve y andás en el presente voseante; no se localizó fuente primaria académica que declare directamente el estatus de andé en Guatemala ni su frecuencia regional."
+        },
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/morfolog%C3%ADa/verbos-irregulares-iv-pret%C3%A9ritos-fuertes-y-participios-irregulares",
+          "locator": "§§4.12c–d",
+          "finding": "La conjugación académica muestra anduve y andás en el presente voseante; no se localizó fuente primaria académica que declare directamente el estatus de andé en Guatemala ni su frecuencia regional."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré retirar la afirmación de frecuencia/registro regional y conservar solo las formas del paradigma que la fuente académica muestra. No edité por la restricción del coordinador al cerrar PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (e54491c6990988d7beeb3ebc0cf99cb481d9e91389a610998740b6eb1bf7368b); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0866.json no existe y el índice verified.json no incluye MLS-V10-0866. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Buscar estudios académicos abiertos de Guatemala/Centroamérica y corpus públicos que permitan establecer el valor regional de andé; luego delimitar el texto y validar."
+    }
+  },
+  "originalArticleSha256": "e54491c6990988d7beeb3ebc0cf99cb481d9e91389a610998740b6eb1bf7368b",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T08:55:49.653Z",
+    "canonicalGeneratedAt": "2026-09-15T08:55:49.653Z",
+    "backupArticleSha256": "e54491c6990988d7beeb3ebc0cf99cb481d9e91389a610998740b6eb1bf7368b",
+    "canonicalArticleSha256": "e54491c6990988d7beeb3ebc0cf99cb481d9e91389a610998740b6eb1bf7368b",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0866/followup-1-297813b95f0d.json",
+    "sha256": "297813b95f0dec4cb29662d75a6aeb9221d56ad6559eb1f9273e7b50d303d98a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0866-revision.json",
+    "sha256": "297813b95f0dec4cb29662d75a6aeb9221d56ad6559eb1f9273e7b50d303d98a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "e54491c6990988d7beeb3ebc0cf99cb481d9e91389a610998740b6eb1bf7368b",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0866.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

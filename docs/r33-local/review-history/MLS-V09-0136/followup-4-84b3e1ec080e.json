@@ -1,0 +1,166 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0136",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:59:43.870Z",
+  "reviewer": "R33 local semantic source-to-claim follow-up",
+  "workerId": "R33W-local-20261011105450-9edfa8",
+  "assignmentId": "R33A-1791716090756-0a2a38",
+  "articlePath": "content/ruso/MLS-V09-0136.json",
+  "articleGeneratedAt": "2026-09-19T10:19:51.807Z",
+  "articleSha256": "d21eabf681ec7396371c4ca842659b5091194a22c5e26af145f63b6ed242f26b",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33 source-followup: relectura del artículo vigente, cotejo de fuentes primarias abiertas con localizadores y registro excepcional para afirmaciones todavía no cubiertas. No se creó Evidence y no se elevó el estado.",
+    "findings": [
+      "La fuente da яйцо como ejemplo de acusativo igual al nominativo; falta cotejar el paradigma neutro completo del artículo.",
+      "Se leyó íntegramente “Acusativo: neutro inanimado” (ruso) y se comparó con wiki_articles del backup SQL, abierto en modo read-only: SHA-256 de articleMarkdown y generatedAt coinciden con la versión del repositorio. No hay Evidence canónica para MLS-V09-0136, así que la ficha no tiene respaldo R33 fuente-afirmación con localizadores.",
+      "Lease R33A-1791716090756-0a2a38: la revisión del texto completo “Acusativo: neutro inanimado” confirmó respaldo parcial de Accusative case: inanimate nouns; La regla neutra singular cuenta con apoyo parcial, pero faltan el cotejo de todos los ejemplos y cualquier restricción/contraste de la ficha."
+    ],
+    "limitations": [
+      "La coincidencia con el backup solo identifica la versión; no prueba corrección lingüística.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa.",
+      "La regla neutra singular cuenta con apoyo parcial, pero faltan el cotejo de todos los ejemplos y cualquier restricción/contraste de la ficha.",
+      "No se creó Evidence canónica vigente ni se obtuvo una evaluación assessEntry exitosa; por contrato R33 la entrada permanece pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La regla neutra singular cuenta con apoyo parcial, pero faltan el cotejo de todos los ejemplos y cualquier restricción/contraste de la ficha.",
+      "searches": [
+        {
+          "query": "site:russian.cornell.edu/grammar Russian accusative animacy masculine neuter plural",
+          "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+          "outcome": "Consulta ejecutada; condujo a la gramática Cornell y a las páginas indicadas en primarySourcesInspected. El resultado respalda solo el alcance descrito allí."
+        },
+        {
+          "query": "site:seelrc.org \"Beginning Russian Grammar\" accusative case forms",
+          "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+          "outcome": "Consulta ejecutada; no apareció en los resultados una fuente primaria adicional que cubra los claims faltantes. No se toma la lista de resultados como evidencia."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Accusative case: inanimate nouns",
+          "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+          "locator": "Líneas 0–12: sustantivos masculinos y neutros inanimados singulares con acusativo igual al nominativo; ejemplos.",
+          "finding": "Apoya el patrón de estas clases; no basta para certificar cada forma y uso de los ejemplos de la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o restringir el texto. No se aplicó una modificación sin un cotejo completo y fuente que valide la redacción sustitutiva; la entrada queda sin cambios hasta validar todos los ejemplos/afirmaciones.",
+      "canonicalCheck": "Artículo d21eabf681ec7396371c4ca842659b5091194a22c5e26af145f63b6ed242f26b; coincide con state.baseArticleHashes para MLS-V09-0136. La entrada no tiene Evidence canónica verificada en el índice local consultado; assessEntry no se ejecutó como aprobado porque falta el respaldo claim-level.",
+      "nextConcreteStep": "Revisar cada forma neutra y traducción con paradigmas primarios y documentar excepciones."
+    }
+  },
+  "claimAssessments": [
+    {
+      "claim": "Acusativo neutro inanimado",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+          "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+          "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples"
+        }
+      ],
+      "rationale": "La fuente da яйцо como ejemplo de acusativo igual al nominativo; falta cotejar el paradigma neutro completo del artículo."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+          "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+          "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples"
+        }
+      ],
+      "rationale": "La coincidencia con el backup solo identifica la versión; no prueba corrección lingüística."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+      "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The Acc. Sg. of #-declension and o-declension inanimate nouns. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr02_a_1.htm"
+    },
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Accusative case: inanimate nouns",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+      "locator": "Líneas 0–12: sustantivos masculinos y neutros inanimados singulares con acusativo igual al nominativo; ejemplos.",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Accusative case: inanimate nouns. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr02_a_1.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "Canonical content JSON against local coordinator baseArticleHashes; prior SQL snapshot comparison retained from review history",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:19:51.807Z",
+    "backupGeneratedAt": "2026-09-19T10:19:51.807Z",
+    "canonicalArticleSha256": "d21eabf681ec7396371c4ca842659b5091194a22c5e26af145f63b6ed242f26b",
+    "backupArticleSha256": "d21eabf681ec7396371c4ca842659b5091194a22c5e26af145f63b6ed242f26b",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "d21eabf681ec7396371c4ca842659b5091194a22c5e26af145f63b6ed242f26b",
+  "followupRound": 4,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0136/followup-3-46a7e979400f.json",
+    "sha256": "46a7e979400f1266c46b7e30ccc833a6839e0fcd511571e858f57389ee487303",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "verifiedArticleSha256": null,
+  "sourceFollowup": {
+    "workerId": "R33W-local-20261011105450-9edfa8",
+    "assignmentId": "R33A-1791716090756-0a2a38",
+    "previousReviewSha256": "8230aa37db5f02467a71cec2c586a8beccab25a841fdd2c774b725919605292a",
+    "sourceChecks": [
+      {
+        "title": "Accusative case: inanimate nouns",
+        "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+        "locator": "Líneas 0–12: sustantivos masculinos y neutros inanimados singulares con acusativo igual al nominativo; ejemplos.",
+        "finding": "Apoya el patrón de estas clases; no basta para certificar cada forma y uso de los ejemplos de la ficha."
+      }
+    ],
+    "searches": [
+      {
+        "query": "site:russian.cornell.edu/grammar Russian accusative animacy masculine neuter plural",
+        "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+        "outcome": "Consulta ejecutada; condujo a la gramática Cornell y a las páginas indicadas en primarySourcesInspected. El resultado respalda solo el alcance descrito allí."
+      },
+      {
+        "query": "site:seelrc.org \"Beginning Russian Grammar\" accusative case forms",
+        "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+        "outcome": "Consulta ejecutada; no apareció en los resultados una fuente primaria adicional que cubra los claims faltantes. No se toma la lista de resultados como evidencia."
+      }
+    ],
+    "completedAt": "2026-10-11T10:59:43.870Z"
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "La regla neutra singular cuenta con apoyo parcial, pero faltan el cotejo de todos los ejemplos y cualquier restricción/contraste de la ficha.",
+    "nextStep": "Revisar cada forma neutra y traducción con paradigmas primarios y documentar excepciones."
+  }
+}

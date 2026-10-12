@@ -1,0 +1,112 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0671",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:37:18.055Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0671.json",
+  "articleGeneratedAt": "2026-09-19T09:24:07.735Z",
+  "articleSha256": "fb493e650595e2e0d14952132a29cd3844c45da55f60f09446a2338cc47986c3",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Source-followup con fuentes universitarias y normativas abiertas; contraste de localizadores exactos, semántica y versiones SQLite en read-only. La cobertura parcial no se marca VERIFIED.",
+    "findings": [
+      "Cornell directly supports надо with dative experiencer + infinitive and distinguishes нужный with nouns; remaining nuances need sources."
+    ],
+    "limitations": [
+      "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED. No se modificó el artículo ni se creó Evidence canónica; se conserva PENDING_SOURCE_SUPPORT hasta completar ese cotejo.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; quedan afirmaciones materiales y ejemplos por validar."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación material principal de “надо/нужно + infinitivo”.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "The word nado",
+          "url": "https://russian.cornell.edu/grammar/html/le57_62_f.htm",
+          "locator": "lines 0–3: надо + dative experiencer + infinitive"
+        },
+        {
+          "title": "Government pattern of nuzhnyj",
+          "url": "https://russian.cornell.edu/grammar/html/le31_40_c.htm",
+          "locator": "need/needed case governance and examples"
+        }
+      ],
+      "rationale": "Cornell directly supports надо with dative experiencer + infinitive and distinguishes нужный with nouns; remaining nuances need sources."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos, límites y generalizaciones completos del artículo quedan respaldados.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The word nado",
+          "url": "https://russian.cornell.edu/grammar/html/le57_62_f.htm",
+          "locator": "lines 0–3: надо + dative experiencer + infinitive"
+        },
+        {
+          "title": "Government pattern of nuzhnyj",
+          "url": "https://russian.cornell.edu/grammar/html/le31_40_c.htm",
+          "locator": "need/needed case governance and examples"
+        }
+      ],
+      "rationale": "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED. No se modificó el artículo ni se creó Evidence canónica; se conserva PENDING_SOURCE_SUPPORT hasta completar ese cotejo."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "The word nado",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le57_62_f.htm",
+      "locator": "lines 0–3: надо + dative experiencer + infinitive",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The word nado. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le57_62_f.htm"
+    },
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "Government pattern of nuzhnyj",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le31_40_c.htm",
+      "locator": "need/needed case governance and examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Government pattern of nuzhnyj. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le31_40_c.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:24:07.735Z",
+    "backupGeneratedAt": "2026-09-19T09:24:07.735Z",
+    "canonicalArticleSha256": "fb493e650595e2e0d14952132a29cd3844c45da55f60f09446a2338cc47986c3",
+    "backupArticleSha256": "fb493e650595e2e0d14952132a29cd3844c45da55f60f09446a2338cc47986c3",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "fb493e650595e2e0d14952132a29cd3844c45da55f60f09446a2338cc47986c3",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0671/pre-coordinator.json",
+    "sha256": "0ca50c4ed4dab2b9106da92a6a8db694ba6995c8247fc692f0273b6dd94f06ee",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

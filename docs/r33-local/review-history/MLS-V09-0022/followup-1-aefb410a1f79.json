@@ -1,0 +1,161 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0022",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:36:51.016Z",
+  "reviewer": "R33 local semantic source review (R33W-local-20261010173246-b43c7c)",
+  "assignmentId": "R33A-1791653566157-a3fe77",
+  "followupRound": 1,
+  "articlePath": "content/ruso/MLS-V09-0022.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": true,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "id": "alphabet",
+      "title": "Общие сведения о русском письме (General information on Russian writing)",
+      "authors": "Правила русской орфографии и пунктуации; Gramota.ru reference portal",
+      "year": null,
+      "publisher": "Gramota.ru",
+      "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/obshchie-svedeniya-o-russkom-pisme",
+      "locator": "Section “Русский алфавит” / paragraph beginning “Русский алфавит (набор букв…)”: states 33 letters, uppercase and lowercase variants, alphabet sequence and names; indexed page text includes the full sequence. It does not give all individual IPA values or Spanish equivalents."
+    },
+    {
+      "id": "letters",
+      "title": "Русский алфавит (Russian alphabet)",
+      "authors": "Словарь трудностей русского языка; Gramota.ru",
+      "year": null,
+      "publisher": "Gramota.ru",
+      "url": "https://gramota.ru/biblioteka/slovari/slovar-trudnostej-russkogo-yazyka/russkiy-alfavit",
+      "locator": "Section “Русский алфавит (в скобках указаны названия букв)”: alphabet entries with Cyrillic forms and letter names, including names for Х, Ц, Ч, Ш, Щ, Ъ, Ы, Ь, Э, Ю, Я; discusses names as nouns. Supports grapheme/name only."
+    },
+    {
+      "id": "orthography",
+      "title": "Основной принцип употребления букв (Basic principle of letter use)",
+      "authors": "Правила русской орфографии и пунктуации; Gramota.ru reference portal",
+      "year": null,
+      "publisher": "Gramota.ru",
+      "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/osnovnoy-printsip-upotrebleniya-bukv",
+      "locator": "Section “Основной принцип употребления букв”: ten vowel letters in five pairs; ь marks softness of paired consonants in specified positions; е/ё/ю/я may signal a preceding palatalized consonant or [j]+vowel depending on position. Does not endorse unqualified “all adjacent vowels soften” rules."
+    },
+    {
+      "id": "signs",
+      "title": "Буквы ъ и ь (Letters ъ and ь)",
+      "authors": "Правила русской орфографии и пунктуации; Gramota.ru reference portal",
+      "year": null,
+      "publisher": "Gramota.ru",
+      "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/bukvy-i",
+      "locator": "Section “Буквы ъ и ь” and subsection “Буква ь как знак мягкости согласного”: ь can mark softness of a paired consonant at word end/before consonant; ъ has a separating function before iotated vowels and indicates [j]+vowel rather than softening the preceding consonant."
+    },
+    {
+      "id": "ipa",
+      "title": "Russian: Illustrations of the IPA",
+      "authors": "Yanushevskaya, Irena; Bunčić, Daniel",
+      "year": 2015,
+      "publisher": "Journal of the International Phonetic Association 45(2), 221–228; Cambridge University Press",
+      "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+      "locator": "“Consonants” and “Vowels” sections, pp. 222–224; phoneme chart and transcribed passage/audio on pp. 221–228. Describes standard Russian consonant and vowel realizations, palatalization contrast, context-dependent vowel reduction and IPA examples. It does not support pedagogical comparisons with Spanish or all article-specific unstated recommendations."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "claim": "Forma, nombre y posición alfabética de la letra (Уу name and vowel value, reduction/stability claims, examples and preceding consonant articulation).",
+      "sourceKeys": [
+        "alphabet",
+        "letters"
+      ],
+      "assessment": "supported",
+      "locatorChecks": [
+        {
+          "sourceId": "alphabet",
+          "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/obshchie-svedeniya-o-russkom-pisme",
+          "locator": "Section “Русский алфавит” / paragraph beginning “Русский алфавит (набор букв…)”: states 33 letters, uppercase and lowercase variants, alphabet sequence and names; indexed page text includes the full sequence. It does not give all individual IPA values or Spanish equivalents."
+        },
+        {
+          "sourceId": "letters",
+          "url": "https://gramota.ru/biblioteka/slovari/slovar-trudnostej-russkogo-yazyka/russkiy-alfavit",
+          "locator": "Section “Русский алфавит (в скобках указаны названия букв)”: alphabet entries with Cyrillic forms and letter names, including names for Х, Ц, Ч, Ш, Щ, Ъ, Ы, Ь, Э, Ю, Я; discusses names as nouns. Supports grapheme/name only."
+        }
+      ],
+      "finding": "Gramota confirma la letra en el alfabeto y proporciona nombres en su tabla. Esto solo respalda la identidad gráfica y el nombre, no su realización fonética."
+    },
+    {
+      "claim": "Valor fonético, clase consonántica/vocálica, palatalización/dureza, reducción vocálica, transcripciones IPA y ejemplos de Уу name and vowel value, reduction/stability claims, examples and preceding consonant articulation.",
+      "sourceKeys": [
+        "ipa",
+        "orthography",
+        "signs"
+      ],
+      "assessment": "partial",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "“Consonants” and “Vowels” sections, pp. 222–224; phoneme chart and transcribed passage/audio on pp. 221–228. Describes standard Russian consonant and vowel realizations, palatalization contrast, context-dependent vowel reduction and IPA examples. It does not support pedagogical comparisons with Spanish or all article-specific unstated recommendations."
+        },
+        {
+          "sourceId": "orthography",
+          "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/osnovnoy-printsip-upotrebleniya-bukv",
+          "locator": "Section “Основной принцип употребления букв”: ten vowel letters in five pairs; ь marks softness of paired consonants in specified positions; е/ё/ю/я may signal a preceding palatalized consonant or [j]+vowel depending on position. Does not endorse unqualified “all adjacent vowels soften” rules."
+        },
+        {
+          "sourceId": "signs",
+          "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/bukvy-i",
+          "locator": "Section “Буквы ъ и ь” and subsection “Буква ь как знак мягкости согласного”: ь can mark softness of a paired consonant at word end/before consonant; ъ has a separating function before iotated vowels and indicates [j]+vowel rather than softening the preceding consonant."
+        }
+      ],
+      "finding": "La descripción IPA de ruso (secciones “Consonants” y “Vowels”, pp. 222–224; cuadro y transcripciones en pp. 221–228) respalda rasgos fonológicos generales y ejemplos de la norma descrita; Gramota delimita funciones ortográficas de letras y signos. No se encontró en esos localizadores validación para cada transcripción, acento, glosa y palabra específica de esta ficha. Las reglas de palatalización no pueden aplicarse a toda consonante/letra sin delimitar pares y excepciones."
+    },
+    {
+      "claim": "Comparaciones con sonidos del español/inglés, instrucciones articulatorias para hispanohablantes y recomendaciones didácticas incluidas en Уу name and vowel value, reduction/stability claims, examples and preceding consonant articulation.",
+      "sourceKeys": [
+        "ipa"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "“Consonants” and “Vowels” sections, pp. 222–224; phoneme chart and transcribed passage/audio on pp. 221–228. Describes standard Russian consonant and vowel realizations, palatalization contrast, context-dependent vowel reduction and IPA examples. It does not support pedagogical comparisons with Spanish or all article-specific unstated recommendations."
+        }
+      ],
+      "finding": "La fuente primaria describe ruso, no una comparación acústica contrastiva con español ni una prueba pedagógica para hispanohablantes; el símil o instrucción no queda respaldado."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Relectura de la ficha y contraste por bloques materiales con referencias primarias abiertas; se conservaron únicamente afirmaciones parciales que el localizador examinado respalda. Cada fuente se registra con localizador y alcance; no se usó respaldo inferido para ejemplos no cotejados.",
+    "apa7ReferencesAreCandidates": false,
+    "canonicalEvidenceCreated": false,
+    "claimLevelSupportIncomplete": true
+  },
+  "semanticReview": {
+    "method": "Seguimiento de source-followup: se identificó la afirmación material por bloque y se evaluó contra la ubicación exacta de cada fuente; resultado pendiente cuando los pasajes no cubren la redacción completa, ejemplo o recomendación.",
+    "findings": [
+      "Afirmaciones auditadas por bloques de la ficha: Уу name and vowel value, reduction/stability claims, examples and preceding consonant articulation.",
+      "La fonología general encuentra respaldo parcial; los ejemplos de pronunciación/IPA, glosas, comparaciones con español y consejos de articulación no han sido verificados uno por uno con localizadores exactos.",
+      "Gramota distingue en la ortografía sonidos/letras y funciones concretas de ь, ъ y letras vocálicas; no avala generalizaciones simplificadas sobre todas las letras/consonantes."
+    ],
+    "limitations": [
+      "No se añadió Evidence canónica y no se ejecutó un pase `assessEntry` porque el soporte claim-level no alcanza el contrato VERIFIED.",
+      "Las afirmaciones de ejemplo y transcripción de la ficha requieren fuente léxica/fonética que documente exactamente cada forma, acento y glosa.",
+      "Las analogías e instrucciones de pronunciación para hispanohablantes carecen de fuente contrastiva primaria."
+    ]
+  },
+  "originalArticleSha256": "01a4c2d24ac325ad0f49625a8e9233b1e0366368e81c07560fce6c6eee352c1b",
+  "verifiedArticleSha256": "01a4c2d24ac325ad0f49625a8e9233b1e0366368e81c07560fce6c6eee352c1b",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0022/pre-coordinator.json",
+    "sha256": "05b830873f3c7950f3a6d846f2d050c3df2bd64d05053c4f6b69e5c7728bdc1e",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  }
+}

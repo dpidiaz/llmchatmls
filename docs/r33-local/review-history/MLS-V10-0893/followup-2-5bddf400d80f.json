@@ -1,0 +1,137 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0893",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0893.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2010). Ortografía de la lengua española. Espasa.",
+      "url": "https://www.rae.es/ortograf%C3%ADa/los-dos-puntos",
+      "locator": "§§3.4.4 y ss.",
+      "observation": "Ortografía RAE ofrece reglas para signos, incisos y oraciones yuxtapuestas extensas; no se mapeó cada regla del artículo (subordinadas antepuestas, relativas, punto y coma, etc.) al localizador exacto."
+    },
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2010). Ortografía de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/docs/puntuaci%C3%B3n%20de%20oraciones%20yuxtapuestas.pdf",
+      "locator": "Puntuación de oraciones yuxtapuestas: coma/punto y coma; casos de oraciones extensas",
+      "observation": "Ortografía RAE ofrece reglas para signos, incisos y oraciones yuxtapuestas extensas; no se mapeó cada regla del artículo (subordinadas antepuestas, relativas, punto y coma, etc.) al localizador exacto."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-16T08:33:26.908Z",
+      "canonicalGeneratedAt": "2026-09-16T08:33:26.908Z",
+      "backupArticleSha256": "3df60fa4a22979ba959c442a424f831e9fa4c51c392fb55335228cfd533ec094",
+      "canonicalArticleSha256": "3df60fa4a22979ba959c442a424f831e9fa4c51c392fb55335228cfd533ec094",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "Ortografía RAE ofrece reglas para signos, incisos y oraciones yuxtapuestas extensas; no se mapeó cada regla del artículo (subordinadas antepuestas, relativas, punto y coma, etc.) al localizador exacto."
+    ],
+    "limitations": [
+      "La cita general Ortografía cap. 3 no identifica los pasajes de cada afirmación; falta evidencia canónica.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La cita general Ortografía cap. 3 no identifica los pasajes de cada afirmación; falta evidencia canónica.",
+      "searches": [
+        {
+          "query": "site:rae.es/ortografía puntuación oraciones complejas coma punto y coma dos puntos",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se recuperaron reglas oficiales de dos puntos y yuxtaposición; cobertura parcial, no todos los casos del artículo."
+        },
+        {
+          "query": "site:rae.es/ortografía \"oraciones complejas\" puntuación relativas subordinadas coma",
+          "portal": "RAE/ASALE search",
+          "outcome": "La consulta recuperó materiales de puntuación pero no una matriz para cada afirmación y ejemplo del artículo."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2010). Ortografía de la lengua española. Espasa.",
+          "url": "https://www.rae.es/ortograf%C3%ADa/los-dos-puntos",
+          "locator": "§§3.4.4 y ss.",
+          "finding": "Ortografía RAE ofrece reglas para signos, incisos y oraciones yuxtapuestas extensas; no se mapeó cada regla del artículo (subordinadas antepuestas, relativas, punto y coma, etc.) al localizador exacto."
+        },
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2010). Ortografía de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/docs/puntuaci%C3%B3n%20de%20oraciones%20yuxtapuestas.pdf",
+          "locator": "Puntuación de oraciones yuxtapuestas: coma/punto y coma; casos de oraciones extensas",
+          "finding": "Ortografía RAE ofrece reglas para signos, incisos y oraciones yuxtapuestas extensas; no se mapeó cada regla del artículo (subordinadas antepuestas, relativas, punto y coma, etc.) al localizador exacto."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré dividir reglas por signo y estructura sintáctica y eliminar formulaciones absolutas donde la regla depende de integración semántica. No edité con estado PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (3df60fa4a22979ba959c442a424f831e9fa4c51c392fb55335228cfd533ec094); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0893.json no existe y el índice verified.json no incluye MLS-V10-0893. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Localizar por separado las reglas de relativas, subordinadas, incisos, coma y punto y coma; luego assessment."
+    }
+  },
+  "originalArticleSha256": "3df60fa4a22979ba959c442a424f831e9fa4c51c392fb55335228cfd533ec094",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-16T08:33:26.908Z",
+    "canonicalGeneratedAt": "2026-09-16T08:33:26.908Z",
+    "backupArticleSha256": "3df60fa4a22979ba959c442a424f831e9fa4c51c392fb55335228cfd533ec094",
+    "canonicalArticleSha256": "3df60fa4a22979ba959c442a424f831e9fa4c51c392fb55335228cfd533ec094",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0893/followup-1-15cb7038bf15.json",
+    "sha256": "15cb7038bf1510e9b33e6864bbb1308d70181fe823779463d7db271746338b78",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0893-revision.json",
+    "sha256": "15cb7038bf1510e9b33e6864bbb1308d70181fe823779463d7db271746338b78",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "3df60fa4a22979ba959c442a424f831e9fa4c51c392fb55335228cfd533ec094",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0893.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

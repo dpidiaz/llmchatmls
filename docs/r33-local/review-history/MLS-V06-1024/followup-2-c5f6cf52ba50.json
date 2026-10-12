@@ -1,0 +1,96 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-1024",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:59:12.890Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791665647537-fdf88c",
+  "articlePath": "content/japones/MLS-V06-1024.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [],
+  "sourceAudit": {
+    "method": "Búsqueda nueva por dos vías distintas y cotejo de pasajes públicos; resultados limitados a lo efectivamente inspeccionado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "reviewedPriorSourceCount": 0,
+    "unverifiedMaterialClaims": "Consultar los findings concretos: falta respaldo y localizador de fuente primaria para todas las afirmaciones materiales y ejemplos."
+  },
+  "semanticReview": {
+    "method": "R33 source-followup; revisión previa preservada por el coordinador al integrar el lease.",
+    "findings": [
+      "Se define registro académico japonés y se señala el uso frecuente de である体 junto con です・ます体.",
+      "Falta corpus de artículos/tesis o estudio de registro con delimitación de géneros que respalde las generalizaciones de frecuencia y estilo.",
+      "Seguimiento R33 source-followup, ronda 1: se volvió a leer la revisión previa (PENDING_SOURCE_SUPPORT) y se contrastó su observación con la ficha vigente (SHA-256 bfd93386484f17dfb8193fb0b77c11886565683773a493c29f7578a8f8157dad). No consta en el expediente una fuente primaria con localizador que cubra las afirmaciones materiales. Por tanto, la brecha descrita en los findings sigue abierta; no se modificó el contenido.",
+      "Ronda nueva: se hicieron dos búsquedas distintas para MLS-V06-1024; resultados y alcance quedan anotados en exceptionalDisposition.",
+      "Balanced corpus of contemporary written Japanese (BCCWJ): Confirma recurso multi-registro; no mide la proporción de である体/です・ます体 en este artículo.",
+      "A Multi-dimensional Approach to Register Variations in Mandarin Chinese: Es sobre chino mandarín, no respalda directamente patrones del japonés académico."
+    ],
+    "limitations": [
+      "No se completó la comprobación semántica fuente-afirmación con localizadores; queda pendiente para no inferir validación a partir de paráfrasis o ejemplos. No se creó Evidence canónica.",
+      "Falta cobertura primaria completa y localizador por afirmación material/ejemplo. No hay Evidence canónica ni assessEntry satisfactorio; por contrato R33 el estado sigue PENDING_SOURCE_SUPPORT.",
+      "La evidencia encontrada no cubre todas las afirmaciones materiales ni cada ejemplo/localizador. No se cambió el artículo, no se creó Evidence canónica y no se obtuvo assessEntry satisfactorio; continúa PENDING_SOURCE_SUPPORT."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Los corpus nuevos confirman variación por géneros, pero no la proporción de である体/です・ます体 ni la frecuencia que afirma esta ficha.",
+      "searches": [
+        {
+          "query": "site:repository.ninjal.ac.jp 日本語 学術論文 文体 corpus である体 文体差",
+          "portal": "NINJAL repository",
+          "outcome": "No localizó evidencia claim-level sobre la proporción de である体 en esta entrada."
+        },
+        {
+          "query": "Japanese academic writing corpus である体 academic register study corpus open access",
+          "portal": "Buscador de estudios y repositorios académicos",
+          "outcome": "Se encontraron corpus y estudios de registro; se necesita medir frecuencia por género/sección."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Balanced corpus of contemporary written Japanese (BCCWJ)",
+          "url": "https://link.springer.com/article/10.1007/s10579-013-9261-0",
+          "locator": "§§1–2, líneas 77–88: corpus balanceado, variedad de registros escritos y diseño.",
+          "finding": "Confirma recurso multi-registro; no mide la proporción de である体/です・ます体 en este artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró limitar la ficha a lo que las fuentes sí documentan; la corrección parcial no resolvería los corpus nuevos confirman variación por géneros, pero no la proporción de である体/です・ます体 ni la frecuencia que afirma esta ficha. ni cotejaría los ejemplos no localizados, por lo que el artículo permanece intacto en esta ronda.",
+      "canonicalCheck": "Hash actual de articleMarkdown: bfd93386484f17dfb8193fb0b77c11886565683773a493c29f7578a8f8157dad. No se agregó Evidence canónica ni se obtuvo assessEntry satisfactorio; el índice canónico no se actualizó a VERIFIED.",
+      "nextConcreteStep": "Contrastar un corpus de artículos y tesis, por género y sección, y medir las formas である／です・ます antes de mantener la generalización de frecuencia."
+    }
+  },
+  "originalArticleSha256": "bfd93386484f17dfb8193fb0b77c11886565683773a493c29f7578a8f8157dad",
+  "backupComparison": {
+    "priorReviewPath": "docs/r33-local/reviews/MLS-V06-1024-revision.json",
+    "priorStatus": "PENDING_SOURCE_SUPPORT",
+    "priorArticleSha256": "bfd93386484f17dfb8193fb0b77c11886565683773a493c29f7578a8f8157dad",
+    "priorReviewRead": true,
+    "historyPreservedByCoordinatorOnCompletion": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "verifiedArticleSha256": "bfd93386484f17dfb8193fb0b77c11886565683773a493c29f7578a8f8157dad",
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-1024/followup-1-cda93496459f.json",
+    "sha256": "cda93496459ff432ccf75e2e7f65a7f11dd9062d35808e4faa9583c5ea6c480d",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Los corpus nuevos confirman variación por géneros, pero no la proporción de である体/です・ます体 ni la frecuencia que afirma esta ficha.",
+    "nextStep": "Contrastar un corpus de artículos y tesis, por género y sección, y medir las formas である／です・ます antes de mantener la generalización de frecuencia."
+  }
+}

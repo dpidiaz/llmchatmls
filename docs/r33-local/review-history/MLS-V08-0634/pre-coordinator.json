@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0634",
+  "language": "coreano",
+  "reviewedAt": "2026-10-10T10:05:27.796Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100420-ebb9d5",
+  "assignmentId": "R33A-1791626660074-a03c12",
+  "articlePath": "content/coreano/MLS-V08-0634.json",
+  "articleGeneratedAt": "2026-09-19T09:19:40.325Z",
+  "articleSha256": "4a8ec21c06b15a9db7090815ca5fa72da43a670bb6dafcbd29edbc01d96bc466",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite abierto en modo de solo lectura, y consulta dirigida de las fuentes institucionales indicadas. Se conserva PENDING_SOURCE_SUPPORT si no se respaldan semánticamente todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha completa «-던 recuerdo/incompletitud» (content/coreano/MLS-V08-0634.json; sha256 4a8ec21c06b15a9db7090815ca5fa72da43a670bb6dafcbd29edbc01d96bc466). La ficha presenta -던 como modificador retrospectivo para situaciones recordadas, habituales o no marcadas como completas; contrasta con -았/었던 y observa que el ejemplo -더라고요 pertenece a otra construcción. La respuesta de 국립국어원 confirma que en verbos relativos -(으)ㄴ y -던 indican pasado y que -던 perfila acción no completada frente a -(으)ㄴ completada."
+    ],
+    "limitations": [
+      "La fuente confirma el contraste de completitud, pero no respalda por completo habitualidad, perspectiva experiencial, análisis morfológico interno ni comparación con -았/었던; las generalizaciones aspectuales requieren bibliografía especializada."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "온라인가나다: 했는 말",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=&pageIndex=1&qna_seq=331637",
+      "provider": "국립국어원",
+      "use": "Establece la oposición completado/no completado entre -(으)ㄴ y -던 en relativas verbales."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "4a8ec21c06b15a9db7090815ca5fa72da43a670bb6dafcbd29edbc01d96bc466",
+    "backupSha256": "4a8ec21c06b15a9db7090815ca5fa72da43a670bb6dafcbd29edbc01d96bc466",
+    "articleGeneratedAt": "2026-09-19T09:19:40.325Z",
+    "backupGeneratedAt": "2026-09-19T09:19:40.325Z"
+  },
+  "originalArticleSha256": "4a8ec21c06b15a9db7090815ca5fa72da43a670bb6dafcbd29edbc01d96bc466",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0740",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T10:02:41.550Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100022-115fb1",
+  "assignmentId": "R33A-1791626422088-fd55f4",
+  "articlePath": "content/japones/MLS-V06-0740.json",
+  "articleGeneratedAt": "2026-09-19T09:10:36.528Z",
+  "articleSha256": "b18a33e6e2f43ef9efc97d4efd02b0085426ceeb9c00c407c4973e40f19ef74f",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite abierto en modo de solo lectura, y consulta de las fuentes indicadas para cada entrada. Se conserva PENDING_SOURCE_SUPPORT cuando las fuentes consultadas no respaldan semánticamente todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha completa «尊敬語 おっしゃる» (content/japones/MLS-V06-0740.json; sha256 b18a33e6e2f43ef9efc97d4efd02b0085426ceeb9c00c407c4973e40f19ef74f). La ficha identifica おっしゃる como 尊敬語 de 言う y diferencia su sujeto elevado de las formas humildes 申す／申し上げる. La guía oficial de la Agencia de Asuntos Culturales clasifica おっしゃる en el patrón de 尊敬語 y define esa categoría como forma que eleva a la persona que realiza la acción."
+    ],
+    "limitations": [
+      "La fuente oficial consultada no se cotejó por página para la conjugación irregular おっしゃいます ni para cada regla de uso con miembros internos/externos; no cubre todos los ejemplos y restricciones de la entrada."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "敬語の指針",
+      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/keigo_tosin.pdf",
+      "provider": "文化庁",
+      "use": "Clasifica el patrón おっしゃる como 尊敬語 y describe la elevación lingüística de quien realiza la acción."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "b18a33e6e2f43ef9efc97d4efd02b0085426ceeb9c00c407c4973e40f19ef74f",
+    "backupSha256": "b18a33e6e2f43ef9efc97d4efd02b0085426ceeb9c00c407c4973e40f19ef74f",
+    "articleGeneratedAt": "2026-09-19T09:10:36.528Z",
+    "backupGeneratedAt": "2026-09-19T09:10:36.528Z"
+  },
+  "originalArticleSha256": "b18a33e6e2f43ef9efc97d4efd02b0085426ceeb9c00c407c4973e40f19ef74f",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

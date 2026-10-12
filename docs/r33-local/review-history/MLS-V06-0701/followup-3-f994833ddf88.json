@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0701",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0701.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "Kotobank/小学館 Digital Daijisen, entrada 加える, sentido 1 y líneas 23–24, define añadir algo más a lo que ya existe. El artículo usa eso como si bastara para gramática del patrón y aporta ejemplos no localizados; no es evidencia claim-level suficiente."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El diccionario inspeccionado define 加える como añadir, pero no demuestra por sí mismo la construcción に加えて ni los ejemplos editorializados.",
+      "searches": [
+        {
+          "query": "site:kotobank.jp/word に加えて 意味 追加",
+          "portal": "Kotobank search",
+          "outcome": "Se recuperó la entrada léxica 加える, no una descripción completa de に加えて."
+        },
+        {
+          "query": "日本語 文法 に加えて 名詞 追加 例文 教材 PDF",
+          "portal": "Japanese grammar materials search",
+          "outcome": "No apareció en esta consulta una fuente primaria accesible que valide todos los claims y ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "小学館. (s. f.). 加える. デジタル大辞泉, コトバンク.",
+          "url": "https://kotobank.jp/word/%E5%8A%A0%E3%81%88%E3%82%8B-487486",
+          "locator": "sentido 1; líneas 23–24",
+          "finding": "Confirma añadir un elemento; no prueba estructura ni los ejemplos de に加えて."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reescribir con ejemplos tomados de una gramática institucional que presente に加えて literalmente; falta localizarla y no alteré la ficha todavía.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: f0526ab3f7fdd48011703b9acbe42c61dcee43f9dce3ab6a517d8a4d4a95c445. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "El diccionario inspeccionado define 加える como añadir, pero no demuestra por sí mismo la construcción に加えて ni los ejemplos editorializados.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "f0526ab3f7fdd48011703b9acbe42c61dcee43f9dce3ab6a517d8a4d4a95c445",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0701/followup-2-362b2e09878e.json",
+    "sha256": "362b2e09878e97b154a159c78fbe96b831c7006a68b44efa2da29c5df5a5e5d0",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

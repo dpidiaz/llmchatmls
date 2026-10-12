@@ -1,0 +1,112 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0630",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:36:37.094Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0630.json",
+  "articleGeneratedAt": "2026-09-19T09:21:29.014Z",
+  "articleSha256": "d4fe63152feb7aaf6ff86d5ef9517820aa5f1615a866781868621eefe23c9670",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims sustanciales con fuentes universitarias/gramaticales abiertas y localizadores definidos; identidad de respaldo SQLite en read-only. Evidencia parcial no se promovió a VERIFIED.",
+    "findings": [
+      "Cornell documents long passive participles and example paraphrases; Gramota punctuation rules are conditional on position and meaning, so the article’s comma claim needs exact Russian example review."
+    ],
+    "limitations": [
+      "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED. No se modificó el artículo ni se creó Evidence canónica; se conserva PENDING_SOURCE_SUPPORT hasta completar ese cotejo.",
+      "La fuente consultada no cubre todos los ejemplos, excepciones y juicios contextuales de la ficha; no se creó Evidence canónica ni se ejecutó assessEntry exitoso."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación central sobre Frase participial y puntuación.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases"
+        },
+        {
+          "title": "Обособленные согласованные определения",
+          "url": "https://gramota.ru/uchebnik/pravila/normy-obosobleniya-soglasovannykh-opredeleniy",
+          "locator": "rule: participial phrase after defined noun commonly separated by commas; exceptions/context"
+        }
+      ],
+      "rationale": "Cornell documents long passive participles and example paraphrases; Gramota punctuation rules are conditional on position and meaning, so the article’s comma claim needs exact Russian example review."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos y generalizaciones de alcance de la ficha están respaldados por la fuente.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases"
+        },
+        {
+          "title": "Обособленные согласованные определения",
+          "url": "https://gramota.ru/uchebnik/pravila/normy-obosobleniya-soglasovannykh-opredeleniy",
+          "locator": "rule: participial phrase after defined noun commonly separated by commas; exceptions/context"
+        }
+      ],
+      "rationale": "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED. No se modificó el artículo ni se creó Evidence canónica; se conserva PENDING_SOURCE_SUPPORT hasta completar ese cotejo."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S.",
+      "title": "Long forms of participles",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+      "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Long forms of participles. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le103_110_b.htm"
+    },
+    {
+      "author": "Грамота.ру",
+      "title": "Обособленные согласованные определения",
+      "publisher": "Грамота.ру, справочный портал",
+      "year": "n.d.",
+      "url": "https://gramota.ru/uchebnik/pravila/normy-obosobleniya-soglasovannykh-opredeleniy",
+      "locator": "rule: participial phrase after defined noun commonly separated by commas; exceptions/context",
+      "apa7": "Грамота.ру. (n.d.). Обособленные согласованные определения. https://gramota.ru/uchebnik/pravila/normy-obosobleniya-soglasovannykh-opredeleniy"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:21:29.014Z",
+    "backupGeneratedAt": "2026-09-19T09:21:29.014Z",
+    "canonicalArticleSha256": "d4fe63152feb7aaf6ff86d5ef9517820aa5f1615a866781868621eefe23c9670",
+    "backupArticleSha256": "d4fe63152feb7aaf6ff86d5ef9517820aa5f1615a866781868621eefe23c9670",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "d4fe63152feb7aaf6ff86d5ef9517820aa5f1615a866781868621eefe23c9670",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0630/pre-coordinator.json",
+    "sha256": "ad13d10c55b2f02679210b67bbe8f05f3acdd2611e1873b708bad2437fdacb1e",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

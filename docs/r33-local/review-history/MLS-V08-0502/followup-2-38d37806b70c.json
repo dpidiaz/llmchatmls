@@ -1,0 +1,135 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0502",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:33:37.479Z",
+  "reviewer": "R33 local source follow-up round 2 (R33W-local-20261011003152-62d49b)",
+  "articlePath": "content/coreano/MLS-V08-0502.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento ronda 2: búsqueda institucional por diccionario y por fuentes gramaticales/consultas oficiales; inspección de pasajes primarios; cotejo semántico de alcance sin elevar respaldo parcial a certificación.",
+    "findings": [
+      "Afirmación central inspeccionada: “-기 전에 expresa que una acción ocurre antes de otra. En español suele corresponder a “antes de”, “antes de hacer…” o “antes de que…”. La acción unida a -기 전에 funciona como punto temporal posterior respecto de la acción principal.”. No se obtuvo en esta pasada una fuente primaria con localizador que permita comprobar la afirmación y sus ejemplos para MLS-V08-0502.",
+      "Seguimiento source-followup ronda 1: relectura de la revisión previa (PENDING_SOURCE_SUPPORT) y cotejo del artículo vigente (SHA-256 ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a). El expediente no identifica un pasaje de fuente primaria con localizador suficiente para todas las afirmaciones materiales. Las limitaciones detalladas siguen abiertas; artículo sin cambios.",
+      "Ronda 2: relectura de la revisión anterior (PENDING_SOURCE_SUPPORT, SHA-256 6e63751287e50fa6e656f737d0f5bc629fb51c1b414ce49c7ab27b85bc6b833c) y comprobación del artículo vigente (ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a). Se inspeccionaron pasajes oficiales nuevos; los resultados y límites se registran en exceptionalDisposition."
+    ],
+    "limitations": [
+      "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED.",
+      "No se modificó el artículo ni se creó Evidence canónica; se conserva PENDING_SOURCE_SUPPORT hasta completar ese cotejo.",
+      "Falta cobertura primaria claim-level y Evidence canónica vigente; no se obtuvo assessEntry exitoso para poder certificar VERIFIED.",
+      "La evidencia localizada cubre solo la categoría o una porción de la construcción; no cubre todas las afirmaciones, ejemplos y traducciones de la ficha. No se creó Evidence canónica."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La ficha -기 전에 antes de formula generalizaciones sobre orden temporal/condicional, completitud o lecturas contextuales y enumera varios ejemplos. Las guías oficiales localizadas apoyan la categoría básica, pero no todos los alomorfos, contextos, traducciones y ejemplos del artículo.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr/kor/dicSearch/SearchView \"-기 전에\"",
+          "portal": "National Institute of Korean Language, Korean Basic Dictionary (krdict.korean.go.kr)",
+          "outcome": "La búsqueda lexical del portal no proporcionó en esta pasada un pasaje que cubra todas las afirmaciones de la construcción; se contrastó con los resultados gramaticales oficiales listados abajo."
+        },
+        {
+          "query": "site:korean.go.kr \"-기 전에\" Korean grammar",
+          "portal": "National Institute of Korean Language, official grammar publications and Online Q&A (korean.go.kr)",
+          "outcome": "The guide supports the basic before/after relationship and a teaching example, but the full set of inflectional examples and the article’s completion/aspectual statements need direct page-level matching. The handout does not cover all examples and distinctions asserted in this particular before/after entry."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "National Institute of Korean Language, *세종한국어 2 교원용 지침서*",
+          "url": "https://www.korean.go.kr/common/download.do?front=7A307B77AD2A44B8A026F27505B6AAED&c_file_name=b29c6837-dee9-4f2a-918e-3f8edbb3c46a_0.pdf&file_path=reportData&o_file_name=%EC%84%B8%EC%A2%85%ED%95%9C%EA%B5%AD%EC%96%B4+2+%EA%B5%90%EC%9B%90%EC%9A%A9+%EC%A7%80%EC%B9%A8%EC%84%9C.pdf",
+          "locator": "Teacher guide discussion of -(으)ㄴ 후에 and -기 전에; search result includes 밥을 먹기 전에 손을 씻으세요 and contrasts preceding/following actions.",
+          "finding": "The guide supports the basic before/after relationship and a teaching example, but the full set of inflectional examples and the article’s completion/aspectual statements need direct page-level matching."
+        },
+        {
+          "title": "National Institute of Korean Language, Korean grammar materials, intermediate reference",
+          "url": "https://www.korean.go.kr/common/download.do?c_file_name=c4b897e3-3c46-4c8b-bf5d-b28abbe3a789_0.pdf&file_path=etcData&o_file_name=%EC%A4%91%EA%B8%89.pdf",
+          "locator": "Official intermediate grammar handout, entries for -(으)ㄹ 때 and -(으)면; used as a comparison source for temporal/conditional readings.",
+          "finding": "The handout does not cover all examples and distinctions asserted in this particular before/after entry."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el artículo a la construcción/categoría que las fuentes sí describen y retirar traducciones, restricciones pragmáticas y ejemplos no cotejados. No se aplicó una edición parcial porque cambiar el artículo exigiría volver a validar toda la versión y Evidence, y el integrador rechaza importar un artículo editado con resultado PENDING; la próxima pasada debe corregir junto con respaldo por cada afirmación retenida.",
+      "canonicalCheck": "Comprobación realizada para MLS-V08-0502: artículo ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a coincide con el hash base; Evidence ausente; verified index=false. Resultado: no hay certificación canónica verificable para este artículo.",
+      "nextConcreteStep": "Consultar directamente las páginas de los manuales Sejong que presentan el patrón, registrar lección/página y cotejar cada oración de ejemplo; después reducir las generalizaciones aspectuales o condicionales a lo expresamente cubierto."
+    }
+  },
+  "originalArticleSha256": "ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "assignmentId": "R33A-1791678712517-6b343a",
+  "sourceReferences": [
+    {
+      "apa7": "National Institute of Korean Language. (n.d.). National Institute of Korean Language, *세종한국어 2 교원용 지침서*. https://www.korean.go.kr/common/download.do?front=7A307B77AD2A44B8A026F27505B6AAED&c_file_name=b29c6837-dee9-4f2a-918e-3f8edbb3c46a_0.pdf&file_path=reportData&o_file_name=%EC%84%B8%EC%A2%85%ED%95%9C%EA%B5%AD%EC%96%B4+2+%EA%B5%90%EC%9B%90%EC%9A%A9+%EC%A7%80%EC%B9%A8%EC%84%9C.pdf",
+      "url": "https://www.korean.go.kr/common/download.do?front=7A307B77AD2A44B8A026F27505B6AAED&c_file_name=b29c6837-dee9-4f2a-918e-3f8edbb3c46a_0.pdf&file_path=reportData&o_file_name=%EC%84%B8%EC%A2%85%ED%95%9C%EA%B5%AD%EC%96%B4+2+%EA%B5%90%EC%9B%90%EC%9A%A9+%EC%A7%80%EC%B9%A8%EC%84%9C.pdf",
+      "locator": "Teacher guide discussion of -(으)ㄴ 후에 and -기 전에; search result includes 밥을 먹기 전에 손을 씻으세요 and contrasts preceding/following actions.",
+      "supports": "The guide supports the basic before/after relationship and a teaching example, but the full set of inflectional examples and the article’s completion/aspectual statements need direct page-level matching."
+    },
+    {
+      "apa7": "National Institute of Korean Language. (n.d.). National Institute of Korean Language, Korean grammar materials, intermediate reference. https://www.korean.go.kr/common/download.do?c_file_name=c4b897e3-3c46-4c8b-bf5d-b28abbe3a789_0.pdf&file_path=etcData&o_file_name=%EC%A4%91%EA%B8%89.pdf",
+      "url": "https://www.korean.go.kr/common/download.do?c_file_name=c4b897e3-3c46-4c8b-bf5d-b28abbe3a789_0.pdf&file_path=etcData&o_file_name=%EC%A4%91%EA%B8%89.pdf",
+      "locator": "Official intermediate grammar handout, entries for -(으)ㄹ 때 and -(으)면; used as a comparison source for temporal/conditional readings.",
+      "supports": "The handout does not cover all examples and distinctions asserted in this particular before/after entry."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Seguimiento source-followup ronda 1: relectura de la revisión previa/artículo y contraste del alcance comprobable de fuentes y localizadores contra claims y ejemplos. No se infiere validez semántica por coincidencia de traducción.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "Findings previos identifican aspectos sin verificación fuente-afirmación y localizador exacto."
+  },
+  "verifiedArticleSha256": "ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a",
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "backupComparison": {
+    "database": "local coordinator canonical branch snapshot",
+    "mode": "read-only hash comparison",
+    "articlePath": "content/coreano/MLS-V08-0502.json",
+    "articleSha256": "ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a",
+    "coordinatorBaseSha256": "ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a",
+    "articleHashMatchesCoordinatorBase": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0502/pre-coordinator.json",
+    "sha256": "6e63751287e50fa6e656f737d0f5bc629fb51c1b414ce49c7ab27b85bc6b833c",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "title": "-기 전에 antes de",
+  "workerId": "R33W-local-20261011003152-62d49b",
+  "canonicalArticleSha256": "ba7e739f8bfa1b54e1c443f471d3a12879145940eaddc4337b2fc51f3da70e1a",
+  "sourceSearch": {
+    "repositories": [
+      "National Institute of Korean Language, Korean Basic Dictionary",
+      "National Institute of Korean Language, Korean grammar publications and Online Q&A"
+    ],
+    "partialHits": [
+      {
+        "title": "National Institute of Korean Language, *세종한국어 2 교원용 지침서*",
+        "institution": "National Institute of Korean Language",
+        "publicationYear": null,
+        "url": "https://www.korean.go.kr/common/download.do?front=7A307B77AD2A44B8A026F27505B6AAED&c_file_name=b29c6837-dee9-4f2a-918e-3f8edbb3c46a_0.pdf&file_path=reportData&o_file_name=%EC%84%B8%EC%A2%85%ED%95%9C%EA%B5%AD%EC%96%B4+2+%EA%B5%90%EC%9B%90%EC%9A%A9+%EC%A7%80%EC%B9%A8%EC%84%9C.pdf",
+        "locator": "Teacher guide discussion of -(으)ㄴ 후에 and -기 전에; search result includes 밥을 먹기 전에 손을 씻으세요 and contrasts preceding/following actions.",
+        "note": "The guide supports the basic before/after relationship and a teaching example, but the full set of inflectional examples and the article’s completion/aspectual statements need direct page-level matching."
+      },
+      {
+        "title": "National Institute of Korean Language, Korean grammar materials, intermediate reference",
+        "institution": "National Institute of Korean Language",
+        "publicationYear": null,
+        "url": "https://www.korean.go.kr/common/download.do?c_file_name=c4b897e3-3c46-4c8b-bf5d-b28abbe3a789_0.pdf&file_path=etcData&o_file_name=%EC%A4%91%EA%B8%89.pdf",
+        "locator": "Official intermediate grammar handout, entries for -(으)ㄹ 때 and -(으)면; used as a comparison source for temporal/conditional readings.",
+        "note": "The handout does not cover all examples and distinctions asserted in this particular before/after entry."
+      }
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED"
+}

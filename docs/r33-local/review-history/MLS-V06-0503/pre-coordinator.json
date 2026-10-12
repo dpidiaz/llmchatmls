@@ -1,0 +1,54 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0503",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T10:02:41.550Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100022-115fb1",
+  "assignmentId": "R33A-1791626422088-fd55f4",
+  "articlePath": "content/japones/MLS-V06-0503.json",
+  "articleGeneratedAt": "2026-09-19T09:12:26.486Z",
+  "articleSha256": "02d3eb94f9972ad9fb69eb443eefebad76373f1c5d65691f54656516bb62723b",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite abierto en modo de solo lectura, y consulta de las fuentes indicadas para cada entrada. Se conserva PENDING_SOURCE_SUPPORT cuando las fuentes consultadas no respaldan semánticamente todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha completa «〜なら condicional contextual» (content/japones/MLS-V06-0503.json; sha256 02d3eb94f9972ad9fb69eb443eefebad76373f1c5d65691f54656516bb62723b). La ficha caracteriza なら como condición/premisa que puede retomar información previa y habilitar consejo, y proporciona formación con nombres, verbos y adjetivos. La gramática de la Japan Foundation confirma el uso de なら al responder a información previa para aconsejar/opinar, su uso hipotético y la conexión con nombres, formas llanas verbales/adjetivales. TUFS ofrece una explicación comparativa de las formas condicionales japonesas."
+    ],
+    "limitations": [
+      "Las fuentes consultadas no justifican con suficiente precisión todos los contrastes particulares de la ficha entre なら, と y たら, ni los cuatro ejemplos se cotejaron como ejemplos atestiguados."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "いろどり 生活の日本語 文法解説 (Grammar all)",
+      "url": "https://www.irodori.jpf.go.jp/assets/data/Grammar_all.pdf",
+      "provider": "国際交流基金",
+      "use": "Lesson 4 y Pre-Intermediate Lesson 3 describen なら como respuesta/premisa, condición hipotética, conexión y usos de consejo/pregunta."
+    },
+    {
+      "title": "日本語 文法 条件：解説",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/083.html",
+      "provider": "東京外国語大学言語モジュール",
+      "use": "Marco comparativo sobre ～と・～ば・～たら・～なら; no confirma todos los contrastes formulados por la ficha."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "02d3eb94f9972ad9fb69eb443eefebad76373f1c5d65691f54656516bb62723b",
+    "backupSha256": "02d3eb94f9972ad9fb69eb443eefebad76373f1c5d65691f54656516bb62723b",
+    "articleGeneratedAt": "2026-09-19T09:12:26.486Z",
+    "backupGeneratedAt": "2026-09-19T09:12:26.486Z"
+  },
+  "originalArticleSha256": "02d3eb94f9972ad9fb69eb443eefebad76373f1c5d65691f54656516bb62723b",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

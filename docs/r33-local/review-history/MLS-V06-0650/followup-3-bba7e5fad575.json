@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0650",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0650.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 10,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, lección 01.19.2, líneas 183–189, define そうだ② como transmisión de información oída/leída, con ejemplos publicados y conexión del patrón. Los ejemplos propios y matices adicionales de la ficha siguen sin cotejar."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS confirma que そうだ② reporta información recibida, pero los ejemplos y restricciones de esta ficha carecen de enlaces de evidencia por afirmación.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson19/step2/explanation/076.html そうだ 伝聞",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Confirmada la lectura reportativa y los ejemplos del recurso; faltan ejemplos de la entrada."
+        },
+        {
+          "query": "site:jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html 伝聞 そうだ ようだ らしい",
+          "portal": "Japan Foundation search",
+          "outcome": "Contraste institucional adicional; no valida afirmaciones propias de la ficha."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). ～かもしれません・～にちがいありません：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson19/step2/explanation/076.html",
+          "locator": "líneas 183–189",
+          "finding": "Define そうだ② como reporte de información oída/leída y da ejemplos; no respalda todos los ejemplos editoriales."
+        },
+        {
+          "title": "市川保子. (2010年12月). 文法を楽しく「そうだ／ようだ／らしい」（１）. 国際交流基金.",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html",
+          "locator": "líneas 163–188",
+          "finding": "Compara información transmitida e inferencia; alcance parcial."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reemplazar ejemplos propios por los publicados en TUFS y limitar las afirmaciones al patrón demostrado; falta editar y vincular Evidence.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: e3832d76d0d6f0368d6dc84d389a1714571b26719bd4c03663100fc6215c4b62. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS confirma que そうだ② reporta información recibida, pero los ejemplos y restricciones de esta ficha carecen de enlaces de evidencia por afirmación.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "e3832d76d0d6f0368d6dc84d389a1714571b26719bd4c03663100fc6215c4b62",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0650/followup-2-f878abf0900c.json",
+    "sha256": "f878abf0900ceeb064c1bf464df2737c4aca777e57f1d22735ee5b08fc7e58af",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

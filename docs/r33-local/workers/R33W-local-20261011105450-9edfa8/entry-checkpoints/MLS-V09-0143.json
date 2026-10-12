@@ -1,0 +1,56 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-CHECKPOINT-1",
+  "branch": "feat/r33-local-recovery",
+  "workerId": "R33W-local-20261011105450-9edfa8",
+  "assignmentId": "R33A-1791716090756-0a2a38",
+  "code": "MLS-V09-0143",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/ruso/MLS-V09-0143.json",
+  "articleSha256": "4fabc85a100f3eee7da75d1b62a871d6f1580d2879d6b58b17effb0752295401",
+  "previousReviewSha256": "df1cec62e4aa7e9c4ffd3d5792c56d333dfe4d0604686c59f60531e4d77d4588",
+  "reviewPath": "docs/r33-local/reviews/MLS-V09-0143-revision.json",
+  "reviewSha256": "7bafe4ed372267bf4eef5345471c291f176791889d67e23f81e807f72b21eafb",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsReviewed": 2,
+  "claimsVerified": 0,
+  "searches": [
+    {
+      "query": "site:russian.cornell.edu/grammar Russian между motion instrumental под над перед за cases",
+      "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+      "outcome": "Consulta ejecutada; se localizaron páginas Cornell para под/за y между; результат respalda un conflicto de alcance, no todas las preposiciones."
+    },
+    {
+      "query": "Cornell Beginning Russian Grammar accusative case motion location chapter Leed Nakhimovsky online",
+      "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+      "outcome": "Consulta ejecutada; no se encontró una fuente única que cubra над/перед/за/под/между."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "Instrumental with prepositions",
+      "url": "https://russian.cornell.edu/grammar/html/gr06_a_2_2.htm",
+      "locator": "Líneas 0–9: между con instrumental; под con instrumental estático frente a acusativo de movimiento.",
+      "finding": "Demuestra que между no cambia a acusativo por movimiento y el contraste de под; no cubre над/перед/за de forma completa."
+    },
+    {
+      "title": "Под and за with instrumental or accusative",
+      "url": "https://russian.cornell.edu/grammar/html/gr09_b_a.htm",
+      "locator": "Líneas 0–10: под/за con instrumental para ubicación y acusativo para movimiento, además de otros sentidos.",
+      "finding": "Apoya la distinción central de под/за con alcance limitado; no valida las demás preposiciones enumeradas ni todos los usos."
+    },
+    {
+      "title": "Между",
+      "url": "https://russian.cornell.edu/grammar/html/le41_50_g.htm",
+      "locator": "Líneas 0–5: между rige instrumental incluso en ejemplos de movimiento; contraste de construcciones.",
+      "finding": "La fuente contradice una generalización de acusativo por movimiento con между; confirma que esa preposición requiere un tratamiento separado."
+    }
+  ],
+  "canonicalEvidenceCreated": false,
+  "assessEntry": "not passed; claim-level evidence incomplete",
+  "completedAt": "2026-10-11T11:00:32.568Z",
+  "blocker": "Hay un conflicto: Cornell confirma que между usa instrumental incluso con movimiento; las páginas sobre под/за no respaldan над/перед ni la lista completa.",
+  "nextConcreteStep": "Separar las cinco preposiciones por régimen; corregir cualquier generalización sobre между y localizar fuente primaria para над/перед/за.",
+  "coordinatorCompletion": "completed",
+  "integratedAt": "2026-10-11T11:00:03.110Z"
+}

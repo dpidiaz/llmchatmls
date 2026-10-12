@@ -1,0 +1,137 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0884",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0884.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Centro Virtual Cervantes. (s. f.). Marcadores del discurso. Diccionario de términos clave de ELE. Instituto Cervantes.",
+      "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/diccio_ele/diccionario/marcadoresdiscurso.htm",
+      "locator": "apartados “Reformuladores” y polifuncionalidad",
+      "observation": "CVC clasifica reformuladores explicativos, rectificativos, de distanciamiento y recapitulativos y advierte polifuncionalidad; el Plan Curricular aporta inventarios didácticos. No se inspeccionaron uno a uno todos los marcadores del artículo."
+    },
+    {
+      "apa7Candidate": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+      "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_c1-c2.htm",
+      "locator": "§1.2.3, reformuladores C1–C2",
+      "observation": "CVC clasifica reformuladores explicativos, rectificativos, de distanciamiento y recapitulativos y advierte polifuncionalidad; el Plan Curricular aporta inventarios didácticos. No se inspeccionaron uno a uno todos los marcadores del artículo."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-16T08:28:50.187Z",
+      "canonicalGeneratedAt": "2026-09-16T08:28:50.187Z",
+      "backupArticleSha256": "ddf4547bfeb9afac626f0e28752ab8b62e3a975e4f2bb0cd727181b81c6decbd",
+      "canonicalArticleSha256": "ddf4547bfeb9afac626f0e28752ab8b62e3a975e4f2bb0cd727181b81c6decbd",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "CVC clasifica reformuladores explicativos, rectificativos, de distanciamiento y recapitulativos y advierte polifuncionalidad; el Plan Curricular aporta inventarios didácticos. No se inspeccionaron uno a uno todos los marcadores del artículo."
+    ],
+    "limitations": [
+      "El artículo agrupa marcadores y ofrece consejos de registro/puntuación que necesitan mapeo individual y respaldo más específico.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El artículo agrupa marcadores y ofrece consejos de registro/puntuación que necesitan mapeo individual y respaldo más específico.",
+      "searches": [
+        {
+          "query": "site:cvc.cervantes.es marcadores reformuladores explicativos rectificación recapitulativos discurso",
+          "portal": "CVC/Instituto Cervantes search",
+          "outcome": "La entrada CVC se abrió en §§16–22; clasifica reformuladores y polifuncionalidad, apoyo parcial a la lista."
+        },
+        {
+          "query": "site:cvc.cervantes.es Plan Curricular reformuladores explicativos recapitulativos rectificativos",
+          "portal": "CVC/Instituto Cervantes search",
+          "outcome": "El inventario C1–C2 inspeccionado enumera categorías y ejemplos, sin validar todas las recomendaciones de puntuación/registro del artículo."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Centro Virtual Cervantes. (s. f.). Marcadores del discurso. Diccionario de términos clave de ELE. Instituto Cervantes.",
+          "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/diccio_ele/diccionario/marcadoresdiscurso.htm",
+          "locator": "apartados “Reformuladores” y polifuncionalidad",
+          "finding": "CVC clasifica reformuladores explicativos, rectificativos, de distanciamiento y recapitulativos y advierte polifuncionalidad; el Plan Curricular aporta inventarios didácticos. No se inspeccionaron uno a uno todos los marcadores del artículo."
+        },
+        {
+          "title": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+          "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_c1-c2.htm",
+          "locator": "§1.2.3, reformuladores C1–C2",
+          "finding": "CVC clasifica reformuladores explicativos, rectificativos, de distanciamiento y recapitulativos y advierte polifuncionalidad; el Plan Curricular aporta inventarios didácticos. No se inspeccionaron uno a uno todos los marcadores del artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré limitar la clasificación a los tipos y ejemplos presentes en CVC/Plan Curricular; no edité por la restricción del coordinador en revisiones PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (ddf4547bfeb9afac626f0e28752ab8b62e3a975e4f2bb0cd727181b81c6decbd); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0884.json no existe y el índice verified.json no incluye MLS-V10-0884. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Mapear cada marcador y uso a CVC o fuente primaria especializada abierta, y retirar etiquetas no apoyadas antes de evaluar."
+    }
+  },
+  "originalArticleSha256": "ddf4547bfeb9afac626f0e28752ab8b62e3a975e4f2bb0cd727181b81c6decbd",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-16T08:28:50.187Z",
+    "canonicalGeneratedAt": "2026-09-16T08:28:50.187Z",
+    "backupArticleSha256": "ddf4547bfeb9afac626f0e28752ab8b62e3a975e4f2bb0cd727181b81c6decbd",
+    "canonicalArticleSha256": "ddf4547bfeb9afac626f0e28752ab8b62e3a975e4f2bb0cd727181b81c6decbd",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0884/followup-1-58c265526ac6.json",
+    "sha256": "58c265526ac6a11cad0d4d8c5c55cd9dc0810c240a7a49cfd44fadf0d14e4223",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0884-revision.json",
+    "sha256": "58c265526ac6a11cad0d4d8c5c55cd9dc0810c240a7a49cfd44fadf0d14e4223",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "ddf4547bfeb9afac626f0e28752ab8b62e3a975e4f2bb0cd727181b81c6decbd",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0884.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

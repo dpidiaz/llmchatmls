@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0151",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.630Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0151.json",
+  "articleGeneratedAt": "2026-09-19T09:22:44.898Z",
+  "articleSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente ofrece patrones -ов/-ев/-ёв/-ей para cierto grupo de sustantivos, y admite límites en otras declinaciones; artículo excede cobertura.",
+      "Se leyó «Genitivo plural: patrones» (content/ruso/MLS-V09-0151.json; sha256 0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba). La afirmación de apertura dice: El **genitivo plural** ruso no tiene una sola terminación. Según el tipo de sustantivo, puede aparecer con terminaciones como **-ов/-ев/-ей** o incluso sin una terminación visible. Por eso conviene aprender varios patrones frecuentes en lugar de una regla única. Muchos masculinos terminados en consonante forman el genitivo plural con **-ов**: **стол → столов**, **брат → братьев** muestra además un cambio de base. Los sustantivos en **-й** suelen usar **-ев**: **музей → музеев**. Algunos sustantivos terminados en consonante blanda o sibilante emplean **-ей**, como **словарь → словарей** y **врач → врачей**. En numerosos femeninos y neutros apa"
+    ],
+    "limitations": [
+      "Gramota.ru presenta un esquema general del genitivo plural con -ов/-ев, -ей y terminación cero; falta cotejar contra fuente de paradigmas los ejemplos y excepciones particulares que aparecen en el artículo.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Patrones del genitivo plural",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Genitive Plural endings",
+          "url": "https://russian.cornell.edu/grammar/html/gr07_c_3.htm",
+          "locator": "lines 0–5: -ов/-ев/-ёв/-ей conditions; limits by declension"
+        }
+      ],
+      "rationale": "La fuente ofrece patrones -ов/-ев/-ёв/-ей para cierto grupo de sustantivos, y admite límites en otras declinaciones; artículo excede cobertura."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Genitive Plural endings",
+          "url": "https://russian.cornell.edu/grammar/html/gr07_c_3.htm",
+          "locator": "lines 0–5: -ов/-ев/-ёв/-ей conditions; limits by declension"
+        }
+      ],
+      "rationale": "Gramota.ru presenta un esquema general del genitivo plural con -ов/-ев, -ей y terminación cero; falta cotejar contra fuente de paradigmas los ejemplos y excepciones particulares que aparecen en el artículo."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Genitive Plural endings",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr07_c_3.htm",
+      "locator": "lines 0–5: -ов/-ев/-ёв/-ей conditions; limits by declension",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Genitive Plural endings. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr07_c_3.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:22:44.898Z",
+    "backupGeneratedAt": "2026-09-19T09:22:44.898Z",
+    "canonicalArticleSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+    "backupArticleSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0151/pre-coordinator.json",
+    "sha256": "cb761d57d25ac5d463719d720abd7ebc7efe70972788b4daca1c404d8b1da1e9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

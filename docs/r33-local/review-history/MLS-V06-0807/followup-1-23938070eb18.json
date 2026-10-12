@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0807",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T17:25:03.978Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791652844138-bad78b",
+  "workerId": "R33W-local-20261010172044-86156d",
+  "articlePath": "content/japones/MLS-V06-0807.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "Se generalizan contracciones coloquiales de 〜れば a 〜りゃ/〜ゃ para varios tipos verbales y regiones/registros. No se localizó evidencia fonética/dialectal que determine su productividad o condiciones.",
+      "Las contracciones varían por forma, dialecto y habla; necesitan fuente lingüística primaria con ejemplos y límites, no una regla general.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T21:15:25.696Z) frente a content/japones/MLS-V06-0807.json; article_markdown SHA-256 cd7573a28b9deda48409fc2f1828d0f11a009e59d05278ddd5fe296903a7b967 / cd7573a28b9deda48409fc2f1828d0f11a009e59d05278ddd5fe296903a7b967; coincidencia=true.",
+      "Nueva comprobación: el trabajo de Irie y Jin analiza contracciones condicionales mediante tres corpus y describe efectos de situación/género/edad; aún falta localizar la tabla/pasaje que respalde cada transformación concreta de la ficha."
+    ],
+    "limitations": [
+      "No se editó el artículo ni se creó Evidence canónica. Permanece pendiente hasta revisar fuentes primarias identificables, con localizador por afirmación material y ejemplos.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ]
+  },
+  "originalArticleSha256": "cd7573a28b9deda48409fc2f1828d0f11a009e59d05278ddd5fe296903a7b967",
+  "verifiedArticleSha256": "cd7573a28b9deda48409fc2f1828d0f11a009e59d05278ddd5fe296903a7b967",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T21:15:25.696Z",
+    "backupArticleSha256": "cd7573a28b9deda48409fc2f1828d0f11a009e59d05278ddd5fe296903a7b967",
+    "canonicalArticleSha256": "cd7573a28b9deda48409fc2f1828d0f11a009e59d05278ddd5fe296903a7b967",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "A Quantitative Study Using Corpora on the Use of Contractions of Conditional Forms",
+      "author": "Irie, S., & Jin, M.",
+      "year": 2020,
+      "publication": "NINJAL Research Papers, 18, 1–16",
+      "url": "https://repository.ninjal.ac.jp/record/2555/files/papers1801.pdf",
+      "locator": "p. 1, resumen; pp. 1–16 estudio completo",
+      "coverage": "El resumen afirma análisis de contracciones condicionales con NUCC, CSJ y CEJC y diferencias por situación, género y generación.",
+      "limits": "No se confirmó que el estudio respalde todas las correspondencias gráficas/verbales y ejemplos 行きゃ・見りゃ・食べりゃ・やりゃ de la ficha."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0807/pre-coordinator.json",
+    "sha256": "b3cc3bfd4b2e2d7166f4c8c69850ee1171ac384057f405df80fd247f673cdb1f",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 1
+}

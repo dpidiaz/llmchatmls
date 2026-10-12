@@ -1,0 +1,136 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0175",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:22:26.535Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/coreano/MLS-V08-0175.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "은/는과 이/가의 대비는 담화 조건에 좌우되고 여러 핵심 설명이 간단 예문만으로 검증되지 않는다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "은/는과 이/가의 대비는 담화 조건에 좌우되고 여러 핵심 설명이 간단 예문만으로 검증되지 않는다.",
+      "searches": [
+        {
+          "query": "site:kci.go.kr 은는 이가 주제 초점 대조 한국어 조사",
+          "portal": "한국학술지인용색인(KCI) 검색",
+          "outcome": "정보구조 논문에서 은/는과 이/가의 기능이 복합적임을 확인했다."
+        },
+        {
+          "query": "site:krdict.korean.go.kr 은 는 이 가 을 를 조사 의미",
+          "portal": "한국어기초사전 검색",
+          "outcome": "사전의 기본 뜻은 확인했으나 담화 초점 일반화를 단독으로 결정하지 못했다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+          "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+          "locator": "초록, 국어학 104 (2022), pp. 191–219",
+          "finding": "주제·초점·대조 기능의 복합성 지지."
+        },
+        {
+          "title": "국립국어원 온라인가나다 qna_seq=320750",
+          "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+          "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+          "finding": "문맥별 구별 필요성 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "KCI 연구 본문과 국립국어원 답변으로 예문을 검토하고 설명을 구체 문맥에 한정한다."
+    }
+  },
+  "originalArticleSha256": "e87a4ce18aa8cfb53293b94f23df4aaae573f5d29d8a381eb0a0e27cdc82d019",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "workerId": "R33W-local-20261011002037-241d84",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "followupRound": 2,
+  "canonicalArticleSha256": "e87a4ce18aa8cfb53293b94f23df4aaae573f5d29d8a381eb0a0e27cdc82d019",
+  "verifiedArticleSha256": "e87a4ce18aa8cfb53293b94f23df4aaae573f5d29d8a381eb0a0e27cdc82d019",
+  "followupSources": [
+    {
+      "title": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+      "locator": "초록, 국어학 104 (2022), pp. 191–219",
+      "finding": "주제·초점·대조 기능의 복합성 지지.",
+      "result": "PARTIAL"
+    },
+    {
+      "title": "국립국어원 온라인가나다 qna_seq=320750",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+      "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+      "finding": "문맥별 구별 필요성 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.535Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "국립국어원 온라인가나다 qna_seq=320750"
+    ]
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0175/followup-1-a0099d4c4d9a.json",
+    "sha256": "a0099d4c4d9ab51bc7680156881d5fa485abcf034fb66ef163968607fe3d3736",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "sourceChecks": [
+    {
+      "sourceTitle": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+      "locator": "초록, 국어학 104 (2022), pp. 191–219",
+      "result": "PARTIAL",
+      "finding": "주제·초점·대조 기능의 복합성 지지."
+    },
+    {
+      "sourceTitle": "국립국어원 온라인가나다 qna_seq=320750",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+      "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+      "result": "PARTIAL",
+      "finding": "문맥별 구별 필요성 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+      "locator": "초록, 국어학 104 (2022), pp. 191–219",
+      "finding": "주제·초점·대조 기능의 복합성 지지."
+    },
+    {
+      "title": "국립국어원 온라인가나다 qna_seq=320750",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+      "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+      "finding": "문맥별 구별 필요성 지지."
+    }
+  ],
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "은/는과 이/가의 대비는 담화 조건에 좌우되고 여러 핵심 설명이 간단 예문만으로 검증되지 않는다.",
+    "nextStep": "KCI 연구 본문과 국립국어원 답변으로 예문을 검토하고 설명을 구체 문맥에 한정한다."
+  }
+}

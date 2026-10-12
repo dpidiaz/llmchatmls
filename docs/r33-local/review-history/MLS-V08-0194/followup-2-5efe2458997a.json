@@ -1,0 +1,123 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0194",
+  "title": "까지 hasta",
+  "language": "coreano",
+  "articlePath": "content/coreano/MLS-V08-0194.json",
+  "reviewedAt": "2026-10-11T00:22:26.547Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "workerId": "R33W-local-20261011002037-241d84",
+  "originalArticleSha256": "a13613031856d57241ff6931990ad15a114c15de2273632ba75cca0501e5a167",
+  "canonicalArticleSha256": "a13613031856d57241ff6931990ad15a114c15de2273632ba75cca0501e5a167",
+  "verifiedArticleSha256": "a13613031856d57241ff6931990ad15a114c15de2273632ba75cca0501e5a167",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "까지 종점 의미는 직접 근거가 있고 특정 시간 예문을 뜻풀이 1 locator와 연결해야 한다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "까지 종점 의미는 직접 근거가 있고 특정 시간 예문을 뜻풀이 1 locator와 연결해야 한다.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr Korean particle 에 시간 장소 에게 한테 께 까지 랑 이랑",
+          "portal": "한국어기초사전 검색",
+          "outcome": "관련 항목 검색 후 사전에서 뜻풀이와 문형을 직접 대조했다."
+        },
+        {
+          "query": "site:korean.go.kr \"오늘\" \"내일\" \"에\" 시간 부사격 조사 생략",
+          "portal": "국립국어원 검색",
+          "outcome": "시간표현 등 개별 범주에 관해 직접 관련 자료를 확인했다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "한국어기초사전 까지",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69698&nation=eng",
+          "locator": "뜻풀이 1, 내일까지·서울에서 부산까지·내일 오전까지 예문",
+          "finding": "종점 의미 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "까지 뜻풀이 1의 시간 예문과 ficha를 대조해 종점 의미와 locator를 추가한다."
+    }
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.547Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "한국어기초사전 까지"
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "backupComparison": {
+    "database": "local coordinator canonical branch snapshot",
+    "mode": "read-only hash comparison",
+    "articlePath": "content/coreano/MLS-V08-0194.json",
+    "articleSha256": "a13613031856d57241ff6931990ad15a114c15de2273632ba75cca0501e5a167",
+    "coordinatorBaseSha256": "a13613031856d57241ff6931990ad15a114c15de2273632ba75cca0501e5a167",
+    "articleHashMatchesCoordinatorBase": true,
+    "canonicalEvidenceIndexEntry": false,
+    "canonicalArticleSha256": "a13613031856d57241ff6931990ad15a114c15de2273632ba75cca0501e5a167",
+    "articleMatches": false,
+    "versionMatches": false
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0194/followup-1-fdea4d258ba4.json",
+    "sha256": "fdea4d258ba4a51dbf8e6249ed8674bd7d91af814b0219148879689c2cd696c5",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "sourceChecks": [
+    {
+      "sourceTitle": "한국어기초사전 까지",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69698&nation=eng",
+      "locator": "뜻풀이 1, 내일까지·서울에서 부산까지·내일 오전까지 예문",
+      "result": "PARTIAL",
+      "finding": "종점 의미 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "한국어기초사전 까지",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69698&nation=eng",
+      "locator": "뜻풀이 1, 내일까지·서울에서 부산까지·내일 오전까지 예문",
+      "finding": "종점 의미 지지."
+    }
+  ],
+  "followupSources": [
+    {
+      "title": "한국어기초사전 까지",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69698&nation=eng",
+      "locator": "뜻풀이 1, 내일까지·서울에서 부산까지·내일 오전까지 예문",
+      "finding": "종점 의미 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "까지 종점 의미는 직접 근거가 있고 특정 시간 예문을 뜻풀이 1 locator와 연결해야 한다.",
+    "nextStep": "까지 뜻풀이 1의 시간 예문과 ficha를 대조해 종점 의미와 locator를 추가한다."
+  }
+}

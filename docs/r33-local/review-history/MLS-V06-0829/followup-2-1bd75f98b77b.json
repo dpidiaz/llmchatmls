@@ -1,0 +1,145 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0829",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:52:42.406Z",
+  "reviewer": "R33W-local-20261010205126-e2aac2",
+  "assignmentId": "R33A-1791665486589-6ee456",
+  "workerId": "R33W-local-20261010205126-e2aac2",
+  "articlePath": "content/japones/MLS-V06-0829.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "La entrada atribuye a つまり funciones de reformulación, síntesis y conclusión, con posición típica al inicio de oración.",
+      "No se consultó una fuente de conectores japoneses que determine la relación semántica y distribución; habría que contrastar ejemplos de paráfrasis, conclusión y conversación por separado.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T09:18:12.326Z) frente a content/japones/MLS-V06-0829.json; article_markdown SHA-256 b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f / b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f; coincidencia=true.",
+      "Li (2026) respalda que つまり se estudia como conector de reformulación y su distribución por género; faltan localizadores por función/posición y ejemplos de la ficha.",
+      "Follow-up 2026-10-10T20:52:42.406Z; revisión anterior exacta archivada en docs/r33-local/review-history/MLS-V06-0829/before-followup-4541ffa83552.json, SHA-256 4541ffa835528db58ca54fb47789fda41aa21c45fa5f3e04158c6a0fe702c756. Hash del artículo vigente b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f.",
+      "Fuente inspeccionada NINJAL. (s. f.). 認識的ムード（話し手の判断）, § 接続詞.; localizador sección 接続詞: clasificación lógica,逆接,換言; ejemplos de そこで/しかし/つまり/ところが; hallazgo: Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas.",
+      "Fuente inspeccionada NINJAL. (2024). 論文における接続詞と連接関係.; localizador tabla de relaciones de連接: そこで・したがって, しかし, さらに, つまり; hallazgo: Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+    ],
+    "limitations": [
+      "Fuentes consultadas solo cubren partes de las afirmaciones, si las hay; falta validar exhaustivamente cada ejemplo y cada claim con localizadores precisos.",
+      "Sin Evidence canónica y sin ejecución de assessEntry, no se cumplen condiciones para VERIFIED.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Media: NINJAL incluye つまり en換言・整理; los ejemplos y la distinción entre resumen, reformulación y conclusión aún requieren cotejo.",
+      "searches": [
+        {
+          "query": "接続詞 さらに しかし ところが つまり NINJAL",
+          "portal": "NINJAL research repository",
+          "outcome": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+        },
+        {
+          "query": "論文 接続詞 そこで したがって なお NINJAL corpus",
+          "portal": "NINJAL corpus study",
+          "outcome": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "NINJAL. (s. f.). 認識的ムード（話し手の判断）, § 接続詞.",
+          "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+          "locator": "sección 接続詞: clasificación lógica,逆接,換言; ejemplos de そこで/しかし/つまり/ところが",
+          "finding": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+        },
+        {
+          "title": "NINJAL. (2024). 論文における接続詞と連接関係.",
+          "url": "https://repository.ninjal.ac.jp/record/3707/files/papers2405.pdf",
+          "locator": "tabla de relaciones de連接: そこで・したがって, しかし, さらに, つまり",
+          "finding": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o reducir la ficha; antes se deben cotejar sus ejemplos y separar descripción de recomendación. Acción específica: Asignar cada ejemplo a un valor específico de つまり usando el material NINJAL; eliminar diferencias que la fuente no sostenga.",
+      "canonicalCheck": "Hash vigente b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f confirmado; Evidence existe: false; índice VERIFIED contiene el código: false. assessEntry aún no puede aprobar la ficha porque no existe Evidence canónica completa con claims y localizadores.",
+      "nextConcreteStep": "Asignar cada ejemplo a un valor específico de つまり usando el material NINJAL; eliminar diferencias que la fuente no sostenga."
+    }
+  },
+  "originalArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+  "verifiedArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T09:18:12.326Z",
+    "backupArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+    "canonicalArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "ジャンルによる換言の接続表現の使い分け—BCCWJ、CSJ、CEJCの出現頻度別の特徴",
+      "author": "Li, Q.",
+      "year": 2026,
+      "publication": "計量国語学, 35(4), 193–208",
+      "doi": "10.24701/mathling.35.4_193",
+      "url": "https://www.jstage.jst.go.jp/article/mathling/35/4/35_193/_pdf",
+      "locator": "pp. 193–208; resumen y análisis de つまり y tres conectores de reformulación",
+      "coverage": "Analiza つまり como expresión de reformulación en libros, conferencias y conversación informal; documenta diferencias de frecuencia por género.",
+      "limits": "No valida todas las funciones, posiciones, paráfrasis ni ejemplos de la ficha."
+    },
+    {
+      "apa7": "NINJAL. (s. f.). 認識的ムード（話し手の判断）, § 接続詞.",
+      "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+      "locator": "sección 接続詞: clasificación lógica,逆接,換言; ejemplos de そこで/しかし/つまり/ところが",
+      "supports": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+    },
+    {
+      "apa7": "NINJAL. (2024). 論文における接続詞と連接関係.",
+      "url": "https://repository.ninjal.ac.jp/record/3707/files/papers2405.pdf",
+      "locator": "tabla de relaciones de連接: そこで・したがって, しかし, さらに, つまり",
+      "supports": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0829/followup-1-4541ffa83552.json",
+    "sha256": "4541ffa835528db58ca54fb47789fda41aa21c45fa5f3e04158c6a0fe702c756",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "Media: NINJAL incluye つまり en換言・整理; los ejemplos y la distinción entre resumen, reformulación y conclusión aún requieren cotejo.",
+    "nextStep": "Asignar cada ejemplo a un valor específico de つまり usando el material NINJAL; eliminar diferencias que la fuente no sostenga."
+  },
+  "canonicalEvidenceFound": false,
+  "assessEntry": {
+    "attempted": false,
+    "reason": "Sin Evidence canónica; pendiente construirla y ejecutar assessEntry."
+  },
+  "searches": [
+    {
+      "query": "接続詞 さらに しかし ところが つまり NINJAL",
+      "portal": "NINJAL research repository",
+      "outcome": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+    },
+    {
+      "query": "論文 接続詞 そこで したがって なお NINJAL corpus",
+      "portal": "NINJAL corpus study",
+      "outcome": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+    }
+  ]
+}

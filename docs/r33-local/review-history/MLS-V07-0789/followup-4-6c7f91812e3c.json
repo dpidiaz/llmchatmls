@@ -1,0 +1,129 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V07-0789",
+  "language": "chino-taiwan",
+  "reviewedAt": "2026-10-11T10:49:30.066Z",
+  "reviewer": "R33 local source-followup",
+  "articlePath": "content/chino-taiwan/MLS-V07-0789.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: lectura de artículo/revisión anterior; búsquedas públicas gratuitas y apertura de páginas institucionales/artículos con localizadores documentados. Resúmenes y documentación de corpus no se extienden a ejemplos no examinados.",
+    "findings": [
+      "Hash del texto vigente cotejado con baseArticleHashes; no hay drift. No se halló fuente que pruebe que el apellido + 經理/主任 sea tratamiento frecuente/prototípico en instituciones taiwanesas; definición de cargo no bastaría para demostrar uso vocativo ni adecuación social.",
+      "Las fuentes consultadas solo sostienen el alcance explícito registrado; no cubren toda afirmación material ni todos los ejemplos. Sin Evidence canónica y sin assessEntry exitoso."
+    ],
+    "limitations": [
+      "Coverage claim-level incompleta; los abstracts y descripciones de corpus solo respaldan su alcance explícito.",
+      "No se validaron todos los ejemplos, traducciones, frecuencias y recomendaciones del texto.",
+      "No se creó Evidence ni se marcó VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "No se halló fuente que pruebe que el apellido + 經理/主任 sea tratamiento frecuente/prototípico en instituciones taiwanesas; definición de cargo no bastaría para demostrar uso vocativo ni adecuación social.",
+      "searches": [
+        {
+          "query": "site:edu.tw Taiwan Mandarin requests politeness",
+          "portal": "Free public web search",
+          "outcome": "Consulta realmente ejecutada; se revisaron los resultados. Cuando el resumen o la página no aportó el ejemplo/localizador específico, se registró como cobertura parcial y no como evidencia suficiente."
+        },
+        {
+          "query": "Taiwan Mandarin 方便嗎 request corpus pragmatics 方便",
+          "portal": "Free public web search · academic",
+          "outcome": "Consulta realmente ejecutada; se revisaron los resultados. Cuando el resumen o la página no aportó el ejemplo/localizador específico, se registró como cobertura parcial y no como evidencia suficiente."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+          "url": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+          "locator": "English abstract, lines 71–76: 984 Taiwan Mandarin conversation tokens; requests/invitations commonly interrogative and combine with hedges/subjectivizers/preparators.",
+          "finding": "Supports general request strategy only; abstract does not report the specific lexical forms/examples in these entries."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró restringir el texto a los datos cubiertos y quitar generalizaciones o ejemplos sin respaldo; no se cambió articleMarkdown porque primero hace falta cotejar los pasajes restantes por afirmación.",
+      "canonicalCheck": "SHA-256 vigente fd7ed762d7415649fdc37fb7675de30d417d3a4c4da5c1c6c3a2943dafac67d1 = hash canónico al emitir lease. No se creó Evidence; no se ejecutó assessEntry como aprobación. Sin Cloudflare/D1.",
+      "nextConcreteStep": "Resolver el bloqueo con localizadores claim-level, revisar/corregir las afirmaciones sobre 經理/主任 por cargo, y solo entonces construir Evidence y ejecutar assessEntry."
+    }
+  },
+  "originalArticleSha256": "fd7ed762d7415649fdc37fb7675de30d417d3a4c4da5c1c6c3a2943dafac67d1",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "verifiedArticleSha256": "fd7ed762d7415649fdc37fb7675de30d417d3a4c4da5c1c6c3a2943dafac67d1",
+  "followupSourceReview": {
+    "sourcesConsulted": [
+      {
+        "title": "重編國語辭典修訂本：經理",
+        "url": "https://dict.revised.moe.edu.tw/",
+        "sourceKind": "Fuente primaria/página institucional pública; alcance limitado descrito en locator",
+        "publisher": "Ministry of Education, Taiwan",
+        "apa7": "重編國語辭典修訂本：經理. (n.d.). https://dict.revised.moe.edu.tw/"
+      }
+    ],
+    "locatorConvention": "Localizador exacto a sección, páginas, entrada o resumen público efectivamente inspeccionado; cuando solo se vio abstract/metadata se indica así.",
+    "result": "MOE define 經理 como cargo, pero no respalda vocativos 李經理/王主任, el lema 主任 en el uso atribuido, ni frecuencia/adecuación institucional en Taiwán."
+  },
+  "apiCalls": 0,
+  "followupRound": 4,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V07-0789/followup-3-923dc5739f53.json",
+    "sha256": "923dc5739f53c771360e8176c02f5487af053bcfc06d4bd0cef24c3334256b39",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "assignmentId": "R33A-1791715615283-604727",
+  "sourceAudit": {
+    "method": "Free public source search and inspected primary/institutional sources; claims kept within scope.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "No se halló fuente que pruebe que el apellido + 經理/主任 sea tratamiento frecuente/prototípico en instituciones taiwanesas; definición de cargo no bastaría para demostrar uso vocativo ni adecuación social."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "No se halló fuente que pruebe que el apellido + 經理/主任 sea tratamiento frecuente/prototípico en instituciones taiwanesas; definición de cargo no bastaría para demostrar uso vocativo ni adecuación social.",
+    "nextStep": "Investigar las afirmaciones específicas aún sin localizar; conseguir pasajes completos y cotejar MLS-V07-0789 afirmación por afirmación."
+  },
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "phase": "source-followup",
+  "sourceReferences": [
+    {
+      "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+      "canonicalUrl": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+      "authorityTier": "A",
+      "apa7": "Wang, Y.-F., Lin, S.-F., Tsai, P.-H., Lin, M.-F., & Hung, H.-J. (2026). A study of requests, suggestions, invitations, and offers in Taiwan Mandarin conversations. Journal of Chinese Language Teaching, 23(2), 37–107. https://doi.org/10.6393/JCLT.202606_23(2).0002"
+    }
+  ],
+  "workerId": "R33W-local-20261011104655-689735",
+  "articleGeneratedAt": "2026-09-19T22:38:55.723Z",
+  "articleSha256": "fd7ed762d7415649fdc37fb7675de30d417d3a4c4da5c1c6c3a2943dafac67d1",
+  "consultedSources": [
+    {
+      "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+      "url": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+      "locator": "English abstract, lines 71–76: 984 Taiwan Mandarin conversation tokens; requests/invitations commonly interrogative and combine with hedges/subjectivizers/preparators.",
+      "use": "Supports general request strategy only; abstract does not report the specific lexical forms/examples in these entries."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "A Study of Requests, Suggestions, Invitations, and Offers in Taiwan Mandarin Conversations",
+      "author": null,
+      "year": null,
+      "sourceType": "Official institutional / primary research source",
+      "url": "https://toaj.stpi.niar.org.tw/index/journal/volume/article/4b1141f99e45d979019f218046432e5c",
+      "locator": "English abstract, lines 71–76: 984 Taiwan Mandarin conversation tokens; requests/invitations commonly interrogative and combine with hedges/subjectivizers/preparators.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Supports general request strategy only; abstract does not report the specific lexical forms/examples in these entries."
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED"
+}

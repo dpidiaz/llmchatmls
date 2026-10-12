@@ -1,0 +1,118 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0809",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T05:13:32.273Z",
+  "reviewer": "R33W-local-20261011050055-cf0f8d",
+  "assignmentId": "R33A-1791694855663-dd464d",
+  "workerId": "R33W-local-20261011050055-cf0f8d",
+  "articlePath": "content/japones/MLS-V06-0809.json",
+  "status": "VERIFIED",
+  "claimsTotal": 2,
+  "claimsVerified": 2,
+  "coverageComplete": true,
+  "citationReady": true,
+  "semanticReview": {
+    "method": "Revisión de cada afirmación material contra fuentes primarias públicas gratuitas; la ficha se acotó a clasificación y datos de la muestra documentados por el estudio.",
+    "findings": [
+      "La versión previa b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc hacía afirmaciones no localizadas sobre equivalencias, registro general, ejemplos y el homógrafo 従って; se retiraron en lugar de atribuirlas al estudio.",
+      "Mukozaka (2022), §4.2, item ③, enumera したがって con otros 順接接続詞 examinados y explica que midió apariciones y autores usuarios; pp. 4–5, líneas PDF extraídas 121–125.",
+      "Mukozaka (2022), §4.3, tabla 2: la tasa para したがって es 3,8 por 100.000 caracteres en 日本文学 y 23,1 en 数学; son recuentos de la muestra de revistas descrita por el estudio, no regla de uso universal.",
+      "La página oficial del programa LRW2022 confirma título y autor de la ponencia; el trabajo completo y su tabla se consultaron directamente en el PDF institucional.",
+      "La ficha ahora declara el alcance limitado al corpus académico y advierte que no generaliza a conversación u otras variedades."
+    ],
+    "limitations": [
+      "Los resultados describen la muestra académica concreta; esta ficha no caracteriza conversación espontánea ni ofrece ejemplos creados."
+    ]
+  },
+  "originalArticleSha256": "b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc",
+  "verifiedArticleSha256": "7997bd7156fde10c7c1b216d7117906c3b522239322453f0e76b6cff32c8a98c",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; comparación registrada por revisión previa (SQLite readOnly=true)",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T21:17:43.614Z",
+    "backupArticleSha256": "b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc",
+    "originalCanonicalArticleSha256": "b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc",
+    "articleMatchesAtPriorReview": true,
+    "currentArticleSha256": "7997bd7156fde10c7c1b216d7117906c3b522239322453f0e76b6cff32c8a98c",
+    "currentArticleDiffersFromBackupDueToThisReview": true,
+    "note": "El backup de SQLite no está presente en este worktree para repetir la consulta; se conserva el cotejo previo que confirmó igualdad del texto original antes de su corrección."
+  },
+  "sourceReferences": [
+    {
+      "apa7": "Mukozaka, T. (2022). *学術論文と論説文における「だから」の使用の比較*. 国立国語研究所. https://clrd.ninjal.ac.jp/lrw/lrw2022/p4-9_paper.pdf",
+      "url": "https://clrd.ninjal.ac.jp/lrw/lrw2022/p4-9_paper.pdf",
+      "locator": "§4.2, item ③ (PDF pp. 4–5, locator lines 121–125); §4.3, Table 2 (PDF p. 5, locator lines 141–155)",
+      "supports": "Enumera したがって como 順接接続詞 incluido en el análisis y reporta su frecuencia por revista/campo; Table 2 permite comprobar directamente los valores citados.",
+      "authorityTier": "A"
+    }
+  ],
+  "searches": [
+    {
+      "query": "site:repository.ninjal.ac.jp \"学術論文と論説文における「だから」の使用の比較\" したがって",
+      "portal": "NINJAL institutional repository",
+      "outcome": "Localizó el PDF de ponencia; el extracto identificó el estudio y me llevó al texto íntegro servido por el portal NINJAL."
+    },
+    {
+      "query": "site:clrd.ninjal.ac.jp/lrw2022-programme-c.html 向坂卓也 学術論文と論説文",
+      "portal": "NINJAL workshop programme",
+      "outcome": "Confirmó autor, título y ponencia p4-9; después se abrió y cotejó el PDF primario completo en la web institucional."
+    }
+  ],
+  "primarySourcesInspected": [
+    {
+      "title": "Mukozaka, T. (2022). 学術論文と論説文における「だから」の使用の比較",
+      "url": "https://clrd.ninjal.ac.jp/lrw/lrw2022/p4-9_paper.pdf",
+      "locator": "§4.2 item ③, PDF pp. 4–5, extracted lines 121–125; §4.3 Table 2, PDF p. 5, lines 141–155",
+      "finding": "La metodología incluye したがって en su lista de 順接接続詞 analizados; Table 2 reports 3.8/100,000 characters for 日本文学 and 23.1 for 数学."
+    },
+    {
+      "title": "言語資源ワークショップ2022：プログラム（簡易版）",
+      "url": "https://clrd.ninjal.ac.jp/lrw2022-programme-c.html",
+      "locator": "p4-9: title and presenter, lines 382–387",
+      "finding": "Confirma que Takuya Mukozaka presentó el trabajo con el título citado en LRW2022."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": true,
+    "path": "MLS R32 EDITORIAL/evidence git/entries/japones/MLS-V06-0809.json",
+    "status": "VERIFIED",
+    "evidenceRevision": 2,
+    "articleSha256": "7997bd7156fde10c7c1b216d7117906c3b522239322453f0e76b6cff32c8a98c",
+    "assessment": "PASSED",
+    "verifiedIndexIncludesCode": true
+  },
+  "assessEntry": {
+    "attempted": true,
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "claimsTotal": 2,
+    "claimsVerified": 2,
+    "coverageComplete": true,
+    "citationReady": true,
+    "derivedStatus": "VERIFIED"
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0809/followup-2-7fbb037a7a53.json",
+    "sha256": "7fbb037a7a53c3ce31d4143ad38081ee306f7bdce0398f8c45f9c894593742b5",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3,
+  "preflight": {
+    "ok": true,
+    "articleHash": "7997bd7156fde10c7c1b216d7117906c3b522239322453f0e76b6cff32c8a98c",
+    "evidenceRevision": 2,
+    "validatedAt": "2026-10-11T05:13:32.273Z"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0659",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:37:18.043Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0659.json",
+  "articleGeneratedAt": "2026-09-19T10:22:34.550Z",
+  "articleSha256": "22c37e1f8bbb3de2e529f3e56add5bf76e286b69ed9ca8db65fdd63955d2e543",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Source-followup con fuentes universitarias y normativas abiertas; contraste de localizadores exactos, semántica y versiones SQLite en read-only. La cobertura parcial no se marca VERIFIED.",
+    "findings": [
+      "General participle/passive sources do not support the entry’s information-structure preference; examples need corpus/context evidence."
+    ],
+    "limitations": [
+      "No se creó Evidence ni se modificó la ficha. Los respaldos mencionados son parciales y no cubren todos los claims ni ejemplos. Mantener PENDING_SOURCE_SUPPORT hasta consultar entradas/páginas exactas, comprobar los paradigmas y evaluar cada afirmación sustancial.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; quedan afirmaciones materiales y ejemplos por validar."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación material principal de “Preferencia activa vs pasiva”.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: participle categories/examples and adjective forms"
+        },
+        {
+          "title": "Short forms of past passive participles",
+          "url": "https://russian.cornell.edu/grammar/html/le95_102_h.htm",
+          "locator": "lines 3–17: passive use, examples, formation caveats"
+        }
+      ],
+      "rationale": "General participle/passive sources do not support the entry’s information-structure preference; examples need corpus/context evidence."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos, límites y generalizaciones completos del artículo quedan respaldados.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: participle categories/examples and adjective forms"
+        },
+        {
+          "title": "Short forms of past passive participles",
+          "url": "https://russian.cornell.edu/grammar/html/le95_102_h.htm",
+          "locator": "lines 3–17: passive use, examples, formation caveats"
+        }
+      ],
+      "rationale": "No se creó Evidence ni se modificó la ficha. Los respaldos mencionados son parciales y no cubren todos los claims ni ejemplos. Mantener PENDING_SOURCE_SUPPORT hasta consultar entradas/páginas exactas, comprobar los paradigmas y evaluar cada afirmación sustancial."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "Long forms of participles",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+      "locator": "lines 4–27: participle categories/examples and adjective forms",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Long forms of participles. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le103_110_b.htm"
+    },
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "Short forms of past passive participles",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le95_102_h.htm",
+      "locator": "lines 3–17: passive use, examples, formation caveats",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Short forms of past passive participles. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le95_102_h.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:22:34.550Z",
+    "backupGeneratedAt": "2026-09-19T10:22:34.550Z",
+    "canonicalArticleSha256": "22c37e1f8bbb3de2e529f3e56add5bf76e286b69ed9ca8db65fdd63955d2e543",
+    "backupArticleSha256": "22c37e1f8bbb3de2e529f3e56add5bf76e286b69ed9ca8db65fdd63955d2e543",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "22c37e1f8bbb3de2e529f3e56add5bf76e286b69ed9ca8db65fdd63955d2e543",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0659/pre-coordinator.json",
+    "sha256": "2a2d476eba46a6262e49aee70660b092388eda93f43537869f42181ce99e7bee",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

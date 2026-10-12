@@ -1,0 +1,123 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0182",
+  "title": "에게 receptor",
+  "language": "coreano",
+  "articlePath": "content/coreano/MLS-V08-0182.json",
+  "reviewedAt": "2026-10-11T00:22:26.541Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "workerId": "R33W-local-20261011002037-241d84",
+  "originalArticleSha256": "14e24e3f5d8090231399e394809df434ae5e73566d65f7b4ce575b25d86b230b",
+  "canonicalArticleSha256": "14e24e3f5d8090231399e394809df434ae5e73566d65f7b4ce575b25d86b230b",
+  "verifiedArticleSha256": "14e24e3f5d8090231399e394809df434ae5e73566d65f7b4ce575b25d86b230b",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "에게의 기본 기능은 확인됐지만 모든 예문에서 수혜자와 영향 대상을 구별할 근거가 일부 누락됐다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "에게의 기본 기능은 확인됐지만 모든 예문에서 수혜자와 영향 대상을 구별할 근거가 일부 누락됐다.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr Korean particle 에 시간 장소 에게 한테 께 까지 랑 이랑",
+          "portal": "한국어기초사전 검색",
+          "outcome": "관련 항목 검색 후 사전에서 뜻풀이와 문형을 직접 대조했다."
+        },
+        {
+          "query": "site:korean.go.kr \"오늘\" \"내일\" \"에\" 시간 부사격 조사 생략",
+          "portal": "국립국어원 검색",
+          "outcome": "시간표현 등 개별 범주에 관해 직접 관련 자료를 확인했다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "한국어기초사전 에게",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69713&nation=eng",
+          "locator": "뜻풀이 1–3 및 수혜자·영향 대상 예문",
+          "finding": "에게의 기본 기능 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "에게의 세 뜻풀이를 예문별 적용해 역할 구분과 위치를 기록한다."
+    }
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.541Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "한국어기초사전 에게"
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "backupComparison": {
+    "database": "local coordinator canonical branch snapshot",
+    "mode": "read-only hash comparison",
+    "articlePath": "content/coreano/MLS-V08-0182.json",
+    "articleSha256": "14e24e3f5d8090231399e394809df434ae5e73566d65f7b4ce575b25d86b230b",
+    "coordinatorBaseSha256": "14e24e3f5d8090231399e394809df434ae5e73566d65f7b4ce575b25d86b230b",
+    "articleHashMatchesCoordinatorBase": true,
+    "canonicalEvidenceIndexEntry": false,
+    "canonicalArticleSha256": "14e24e3f5d8090231399e394809df434ae5e73566d65f7b4ce575b25d86b230b",
+    "articleMatches": false,
+    "versionMatches": false
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0182/followup-1-890d645ef872.json",
+    "sha256": "890d645ef87231e960f5cc527f1763b505dcba103d7a5a608296ce66faec7b26",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "sourceChecks": [
+    {
+      "sourceTitle": "한국어기초사전 에게",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69713&nation=eng",
+      "locator": "뜻풀이 1–3 및 수혜자·영향 대상 예문",
+      "result": "PARTIAL",
+      "finding": "에게의 기본 기능 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "한국어기초사전 에게",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69713&nation=eng",
+      "locator": "뜻풀이 1–3 및 수혜자·영향 대상 예문",
+      "finding": "에게의 기본 기능 지지."
+    }
+  ],
+  "followupSources": [
+    {
+      "title": "한국어기초사전 에게",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=69713&nation=eng",
+      "locator": "뜻풀이 1–3 및 수혜자·영향 대상 예문",
+      "finding": "에게의 기본 기능 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "에게의 기본 기능은 확인됐지만 모든 예문에서 수혜자와 영향 대상을 구별할 근거가 일부 누락됐다.",
+    "nextStep": "에게의 세 뜻풀이를 예문별 적용해 역할 구분과 위치를 기록한다."
+  }
+}

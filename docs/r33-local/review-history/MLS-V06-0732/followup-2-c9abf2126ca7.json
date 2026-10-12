@@ -1,0 +1,91 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0732",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:52:38.046Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0732.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: nueva búsqueda y cotejo de fuente primaria; revisión previa queda preservada en review-history al completar el lease.",
+    "findings": [
+      "La ficha presenta la forma llana antes de から/ので/けど/と思う, además de alternar con です/ます en la principal. No se cotejó un pasaje institucional que cubra todos los subordinadores y tiempos.",
+      "La selección de forma puede depender del tipo de conector; hacen falta fuente gramatical con paradigmas y localizadores.",
+      "Seguimiento de fuentes primarias: se buscó material gramatical institucional gratuito para la construcción y se cotejó el artículo vigente; no se obtuvo una fuente primaria abierta con localizador suficiente para respaldar todas sus generalizaciones y ejemplos.",
+      "Revisión nueva: se amplió la búsqueda con consultas diferentes en portales lexicográficos/institucionales y se inspeccionaron los pasajes indicados en primarySourcesInspected.",
+      "丁寧体（東京外国語大学言語モジュール）: Muestra que la forma anterior al conector depende del tipo de relación y que la cláusula principal cortés no impone siempre una subordinada cortés; queda sin localizar と思う y ejemplos propios."
+    ],
+    "limitations": [
+      "No se editó el artículo ni se creó Evidence canónica. Permanece pendiente hasta revisar fuentes primarias identificables, con localizador por afirmación material y ejemplos.",
+      "No se identificó una fuente primaria con localizadores claim por claim; el artículo no se editó y no se creó Evidence canónica.",
+      "La búsqueda adicional respalda algunos puntos, pero no aporta localizadores para todas las afirmaciones materiales y ejemplos. No se editó el contenido, no se generó Evidence canónica y no se ejecutó assessEntry exitosamente; por eso se conserva PENDING_SOURCE_SUPPORT."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS respalda la alternancia entre forma llana y cortés con から・ので・けど, pero no todos los conectores, tiempos ni ejemplos de la ficha.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod 普通体 丁寧体 から ので けど",
+          "portal": "Módulo gramatical de Tokyo University of Foreign Studies",
+          "outcome": "Se abrió explicación de 丁寧体 y estilo; cubre combinaciones y contraste de registro, con limitaciones por conector."
+        },
+        {
+          "query": "site:irodori.jpf.go.jp/assets/data/Grammar_all.pdf 普通形 から ので けど",
+          "portal": "Repositorio de materiales gramaticales de Japan Foundation / Irodori",
+          "outcome": "Localicé el PDF de gramática como segunda vía; no sustituye el cotejo del patrón preciso para todos los ejemplos de la entrada."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "丁寧体（東京外国語大学言語モジュール）",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson48/step1/explanation/091.html",
+          "locator": "Sección 5, inciso ①, contraste de から／ので por razón vs. fundamento; inciso ② para が／けど／けれど y forma de S1.",
+          "finding": "Muestra que la forma anterior al conector depende del tipo de relación y que la cláusula principal cortés no impone siempre una subordinada cortés; queda sin localizar と思う y ejemplos propios."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el artículo a lo directamente documentado por las fuentes localizadas; eso no resolvería tufs respalda la alternancia entre forma llana y cortés con から・ので・けど, pero no todos los conectores, tiempos ni ejemplos de la ficha. sin cotejar los ejemplos y afirmaciones restantes, así que no se alteró el artículo en esta ronda.",
+      "canonicalCheck": "Se calculó SHA-256 vigente de articleMarkdown (3918eca742e44b7bdb36fce4bd7952f1cb273e1e0b688cd0960fe9abdc922027) y se comparó con la Evidence/índice local; no hay Evidence de esta entrada que permita assessEntry exitoso ni una actualización canónica a VERIFIED. La validación canónica completa sigue pendiente.",
+      "nextConcreteStep": "Completar una tabla claim por claim para cada conector y comprobar por separado la cláusula con と思う en una gramática primaria."
+    }
+  },
+  "originalArticleSha256": "3918eca742e44b7bdb36fce4bd7952f1cb273e1e0b688cd0960fe9abdc922027",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "verifiedArticleSha256": "3918eca742e44b7bdb36fce4bd7952f1cb273e1e0b688cd0960fe9abdc922027",
+  "followupRound": 2,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0732/followup-1-2d0ce3b4b16a.json",
+    "sha256": "2d0ce3b4b16a663f043fa371646edf040e767b085d26e117b8a2c55825e1a707",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "assignmentId": "R33A-1791665209082-ee7dec",
+  "sourceReferences": [
+    {
+      "apa7": "小学館. (n.d.). 丁寧体（東京外国語大学言語モジュール）. コトバンク. https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson48/step1/explanation/091.html",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson48/step1/explanation/091.html",
+      "locator": "Sección 5, inciso ①, contraste de から／ので por razón vs. fundamento; inciso ② para が／けど／けれど y forma de S1.",
+      "supports": "Muestra que la forma anterior al conector depende del tipo de relación y que la cláusula principal cortés no impone siempre una subordinada cortés; queda sin localizar と思う y ejemplos propios."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Revisión incremental de esta ronda: se cotejaron fuentes primarias gratuitas y pasajes exactos; la cobertura parcial no se convierte en certificación.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS respalda la alternancia entre forma llana y cortés con から・ので・けど, pero no todos los conectores, tiempos ni ejemplos de la ficha.",
+    "nextStep": "Completar una tabla claim por claim para cada conector y comprobar por separado la cláusula con と思う en una gramática primaria."
+  },
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0
+}

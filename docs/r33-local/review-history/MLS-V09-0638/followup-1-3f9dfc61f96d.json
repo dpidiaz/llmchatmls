@@ -1,0 +1,93 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0638",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:36:37.115Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0638.json",
+  "articleGeneratedAt": "2026-09-19T09:28:54.606Z",
+  "articleSha256": "c7a2e5570cc459f3407330274d2fcb267964ec1e4d9c302a11fa06b153469322",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims sustanciales con fuentes universitarias/gramaticales abiertas y localizadores definidos; identidad de respaldo SQLite en read-only. Evidencia parcial no se promovió a VERIFIED.",
+    "findings": [
+      "Cornell gives examples of past passive -нн- and cites a separate formation appendix; the article’s specific -нный rules and exceptions remain unverified."
+    ],
+    "limitations": [
+      "Falta gramática morfológica que distinga sufijo de participio -нн-/-нный, condiciones derivativas y concordancia.",
+      "La fuente consultada no cubre todos los ejemplos, excepciones y juicios contextuales de la ficha; no se creó Evidence canónica ni se ejecutó assessEntry exitoso."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación central sobre Pasivo pasado -нный.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases"
+        }
+      ],
+      "rationale": "Cornell gives examples of past passive -нн- and cites a separate formation appendix; the article’s specific -нный rules and exceptions remain unverified."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos y generalizaciones de alcance de la ficha están respaldados por la fuente.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Long forms of participles",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+          "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases"
+        }
+      ],
+      "rationale": "Falta gramática morfológica que distinga sufijo de participio -нн-/-нный, condiciones derivativas y concordancia."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S.",
+      "title": "Long forms of participles",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le103_110_b.htm",
+      "locator": "lines 4–27: adjective agreement, four participles, suffix examples and relative-clause paraphrases",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Long forms of participles. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le103_110_b.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:28:54.606Z",
+    "backupGeneratedAt": "2026-09-19T09:28:54.606Z",
+    "canonicalArticleSha256": "c7a2e5570cc459f3407330274d2fcb267964ec1e4d9c302a11fa06b153469322",
+    "backupArticleSha256": "c7a2e5570cc459f3407330274d2fcb267964ec1e4d9c302a11fa06b153469322",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "c7a2e5570cc459f3407330274d2fcb267964ec1e4d9c302a11fa06b153469322",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0638/pre-coordinator.json",
+    "sha256": "b0e33bb299985a2509ebf810b38a17f655bd66776660d1a6018f4629dc3f43f2",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

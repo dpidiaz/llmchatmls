@@ -1,0 +1,129 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V07-0760",
+  "language": "chino-taiwan",
+  "reviewedAt": "2026-10-11T10:49:30.050Z",
+  "reviewer": "R33 local source-followup",
+  "articlePath": "content/chino-taiwan/MLS-V07-0760.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: lectura de artículo/revisión anterior; búsquedas públicas gratuitas y apertura de páginas institucionales/artículos con localizadores documentados. Resúmenes y documentación de corpus no se extienden a ejemplos no examinados.",
+    "findings": [
+      "Hash del texto vigente cotejado con baseArticleHashes; no hay drift. Las búsquedas encontraron afirmaciones generales sobre erhua, no un estudio primario comparativo que cuantifique productividad/frecuencia Taiwan Mandarin vs Beijing ni contraste 哪裡/哪兒 o 一點/一點兒.",
+      "Las fuentes consultadas solo sostienen el alcance explícito registrado; no cubren toda afirmación material ni todos los ejemplos. Sin Evidence canónica y sin assessEntry exitoso."
+    ],
+    "limitations": [
+      "Coverage claim-level incompleta; los abstracts y descripciones de corpus solo respaldan su alcance explícito.",
+      "No se validaron todos los ejemplos, traducciones, frecuencias y recomendaciones del texto.",
+      "No se creó Evidence ni se marcó VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Las búsquedas encontraron afirmaciones generales sobre erhua, no un estudio primario comparativo que cuantifique productividad/frecuencia Taiwan Mandarin vs Beijing ni contraste 哪裡/哪兒 o 一點/一點兒.",
+      "searches": [
+        {
+          "query": "Taiwan Mandarin erhua frequency productivity Beijing Mandarin corpus comparative study",
+          "portal": "Free public web search · academic",
+          "outcome": "Consulta realmente ejecutada; se revisaron los resultados. Cuando el resumen o la página no aportó el ejemplo/localizador específico, se registró como cobertura parcial y no como evidencia suficiente."
+        },
+        {
+          "query": "Taiwan Mandarin retroflex sibilants careful speech spontaneous conversation corpus Chuang Fon",
+          "portal": "Free public web search · academic",
+          "outcome": "Consulta realmente ejecutada; se revisaron los resultados. Cuando el resumen o la página no aportó el ejemplo/localizador específico, se registró como cobertura parcial y no como evidencia suficiente."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "List of corpora — Sinica Taiwan Mandarin Conversational Corpus",
+          "url": "https://tmc.ling.sinica.edu.tw/corpus_list_en/",
+          "locator": "Sinica Taiwan Mandarin Conversational Corpus description, lines 4–15; corpus annotation and participant scope.",
+          "finding": "Provides conversation corpus, speaker ages, and annotation of particles/markers/fragments; this page is corpus documentation, not evidence of a particular entry claim unless concordance/results are inspected."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró restringir el texto a los datos cubiertos y quitar generalizaciones o ejemplos sin respaldo; no se cambió articleMarkdown porque primero hace falta cotejar los pasajes restantes por afirmación.",
+      "canonicalCheck": "SHA-256 vigente 742eb9874c106edf5e0d50a1233d5d09476e03db49673f509aa69d8c5761f0ca = hash canónico al emitir lease. No se creó Evidence; no se ejecutó assessEntry como aprobación. Sin Cloudflare/D1.",
+      "nextConcreteStep": "Resolver el bloqueo con localizadores claim-level, revisar/corregir las afirmaciones sobre Erhua menos productivo que en Beijing, y solo entonces construir Evidence y ejecutar assessEntry."
+    }
+  },
+  "originalArticleSha256": "742eb9874c106edf5e0d50a1233d5d09476e03db49673f509aa69d8c5761f0ca",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V07-0760/followup-3-d06c036aa027.json",
+    "sha256": "d06c036aa027df77b2ab112b432c099c148cddb711c6894870b179e5af56fa2d",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 4,
+  "assignmentId": "R33A-1791715615283-604727",
+  "verifiedArticleSha256": "742eb9874c106edf5e0d50a1233d5d09476e03db49673f509aa69d8c5761f0ca",
+  "sourceAudit": {
+    "method": "Free public source search and inspected primary/institutional sources; claims kept within scope.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "Las búsquedas encontraron afirmaciones generales sobre erhua, no un estudio primario comparativo que cuantifique productividad/frecuencia Taiwan Mandarin vs Beijing ni contraste 哪裡/哪兒 o 一點/一點兒."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 4,
+    "label": "muy alta",
+    "reason": "Las búsquedas encontraron afirmaciones generales sobre erhua, no un estudio primario comparativo que cuantifique productividad/frecuencia Taiwan Mandarin vs Beijing ni contraste 哪裡/哪兒 o 一點/一點兒.",
+    "nextStep": "Investigar las afirmaciones específicas aún sin localizar; conseguir pasajes completos y cotejar MLS-V07-0760 afirmación por afirmación."
+  },
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "phase": "source-followup",
+  "sourceReferences": [
+    {
+      "title": "List of corpora — Sinica Taiwan Mandarin Conversational Corpus",
+      "canonicalUrl": "https://tmc.ling.sinica.edu.tw/corpus_list_en/",
+      "authorityTier": "A",
+      "apa7": "Institute of Linguistics, Academia Sinica. (n.d.). List of corpora: Sinica Taiwan Mandarin Conversational Corpus. https://tmc.ling.sinica.edu.tw/corpus_list_en/"
+    }
+  ],
+  "followupSourceReview": {
+    "sourcesConsulted": [
+      {
+        "title": "重編國語辭典修訂本：兒化音",
+        "url": "https://dict.revised.moe.edu.tw/",
+        "sourceKind": "Fuente primaria/página institucional pública; alcance limitado descrito en locator",
+        "publisher": "Ministry of Education, Taiwan",
+        "apa7": "重編國語辭典修訂本：兒化音. (n.d.). https://dict.revised.moe.edu.tw/"
+      }
+    ],
+    "locatorConvention": "Localizador exacto a sección, páginas, entrada o resumen público efectivamente inspeccionado; cuando solo se vio abstract/metadata se indica así.",
+    "result": "La definición fonética lexicográfica no mide frecuencia o productividad de erhua en Taiwan Mandarin frente a Beijing ni coteja 哪裡/哪兒 y 一點/一點兒 con datos comparables."
+  },
+  "workerId": "R33W-local-20261011104655-689735",
+  "articleGeneratedAt": "2026-09-19T09:11:14.999Z",
+  "articleSha256": "742eb9874c106edf5e0d50a1233d5d09476e03db49673f509aa69d8c5761f0ca",
+  "consultedSources": [
+    {
+      "title": "List of corpora — Sinica Taiwan Mandarin Conversational Corpus",
+      "url": "https://tmc.ling.sinica.edu.tw/corpus_list_en/",
+      "locator": "Sinica Taiwan Mandarin Conversational Corpus description, lines 4–15; corpus annotation and participant scope.",
+      "use": "Provides conversation corpus, speaker ages, and annotation of particles/markers/fragments; this page is corpus documentation, not evidence of a particular entry claim unless concordance/results are inspected."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "List of corpora — Sinica Taiwan Mandarin Conversational Corpus",
+      "author": null,
+      "year": null,
+      "sourceType": "Official institutional / primary research source",
+      "url": "https://tmc.ling.sinica.edu.tw/corpus_list_en/",
+      "locator": "Sinica Taiwan Mandarin Conversational Corpus description, lines 4–15; corpus annotation and participant scope.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Provides conversation corpus, speaker ages, and annotation of particles/markers/fragments; this page is corpus documentation, not evidence of a particular entry claim unless concordance/results are inspected."
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED"
+}

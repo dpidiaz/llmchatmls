@@ -1,0 +1,93 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0647",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:37:18.015Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0647.json",
+  "articleGeneratedAt": "2026-09-19T09:37:42.162Z",
+  "articleSha256": "0304af72aa973585910d754e4842ace98b61b7d0395740d329656e1ccc0d69dc",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Source-followup con fuentes universitarias y normativas abiertas; contraste de localizadores exactos, semántica y versiones SQLite en read-only. La cobertura parcial no se marca VERIFIED.",
+    "findings": [
+      "Cornell directly supports imperfective present-stem -я and -а spelling after sibilants, but not every verb-class exception."
+    ],
+    "limitations": [
+      "Se requiere fuente normativa/descriptiva para formación por tema verbal y excepciones, además de reglas de sujeto compartido y restricciones de correferencia.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; quedan afirmaciones materiales y ejemplos por validar."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación material principal de “Деепричастие imperfectivo -я/-а”.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Present deverbal adverbs",
+          "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+          "locator": "lines 0–8: imperfective formation and while-ing meaning"
+        }
+      ],
+      "rationale": "Cornell directly supports imperfective present-stem -я and -а spelling after sibilants, but not every verb-class exception."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos, límites y generalizaciones completos del artículo quedan respaldados.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Present deverbal adverbs",
+          "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+          "locator": "lines 0–8: imperfective formation and while-ing meaning"
+        }
+      ],
+      "rationale": "Se requiere fuente normativa/descriptiva para formación por tema verbal y excepciones, además de reglas de sujeto compartido y restricciones de correferencia."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "Present deverbal adverbs",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+      "locator": "lines 0–8: imperfective formation and while-ing meaning",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Present deverbal adverbs. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le87_94_e.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:37:42.162Z",
+    "backupGeneratedAt": "2026-09-19T09:37:42.162Z",
+    "canonicalArticleSha256": "0304af72aa973585910d754e4842ace98b61b7d0395740d329656e1ccc0d69dc",
+    "backupArticleSha256": "0304af72aa973585910d754e4842ace98b61b7d0395740d329656e1ccc0d69dc",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "0304af72aa973585910d754e4842ace98b61b7d0395740d329656e1ccc0d69dc",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0647/pre-coordinator.json",
+    "sha256": "4c7b7f53bff58347fdb25e90acf5a07c348d46e1c63020fda44b686bfcc45054",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

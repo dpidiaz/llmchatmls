@@ -1,0 +1,133 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0838",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:52:42.406Z",
+  "reviewer": "R33W-local-20261010205126-e2aac2",
+  "assignmentId": "R33A-1791665486589-6ee456",
+  "workerId": "R33W-local-20261010205126-e2aac2",
+  "articlePath": "content/japones/MLS-V06-0838.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "Se afirma preferencia por が en relativas para el sujeto y se describen omisión y foco. No se cotejó fuente primaria para contraste は/が en cláusulas adnominales.",
+      "La distribución es sensible a tópico/foco, restricciones de は y lectura relativa; requiere gramática y ejemplos mínimos localizados.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T09:26:56.548Z) frente a content/japones/MLS-V06-0838.json; article_markdown SHA-256 28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f / 28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f; coincidencia=true.",
+      "No se localizó fuente primaria con localizadores que respalde preferencia por が dentro de relativas, condiciones de omisión y función de foco de los ejemplos.",
+      "Follow-up 2026-10-10T20:52:42.406Z; revisión anterior exacta archivada en docs/r33-local/review-history/MLS-V06-0838/before-followup-fb2220a87bc5.json, SHA-256 fb2220a87bc52148e628888df73eed60fa34d713b39bfa63f1ce9b1725e4fe5e. Hash del artículo vigente 28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f.",
+      "Fuente inspeccionada NINJAL. (2018). 現代日本語の連体修飾節における主語標示.; localizador paper on subject marking in relative clauses, §2–4; hallazgo: Estudia alternancia en corpus de relativas y usos de が／の; no confirma por sí sola reglas simples de は/が de la ficha.",
+      "Fuente inspeccionada NINJAL. (2018). 連体修飾節の用例分析.; localizador §3.2.4, corpus examples and frequency; hallazgo: Da evidencia de relativas en datos; falta mapear cada afirmación de la entrada a contextos concretos."
+    ],
+    "limitations": [
+      "No se cambió el artículo ni se generó Evidence canónica. Se mantiene PENDING_SOURCE_SUPPORT hasta verificar con fuentes primarias localizables cada afirmación material.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Muy alta: las alternancias は/が en relativas son un tema estructural con condicionamientos discursivos; la ficha no identifica una fuente directa que valide sus reglas y ejemplos centrales.",
+      "searches": [
+        {
+          "query": "連体修飾節 は が 主語標示 NINJAL",
+          "portal": "NINJAL repository",
+          "outcome": "Estudia alternancia en corpus de relativas y usos de が／の; no confirma por sí sola reglas simples de は/が de la ficha."
+        },
+        {
+          "query": "日本語 相対節 が の 主語 corpus NINJAL",
+          "portal": "NINJAL repository",
+          "outcome": "Da evidencia de relativas en datos; falta mapear cada afirmación de la entrada a contextos concretos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "NINJAL. (2018). 現代日本語の連体修飾節における主語標示.",
+          "url": "https://repository.ninjal.ac.jp/record/2228/files/kk_ngkgk_025_02.pdf",
+          "locator": "paper on subject marking in relative clauses, §2–4",
+          "finding": "Estudia alternancia en corpus de relativas y usos de が／の; no confirma por sí sola reglas simples de は/が de la ficha."
+        },
+        {
+          "title": "NINJAL. (2018). 連体修飾節の用例分析.",
+          "url": "https://repository.ninjal.ac.jp/record/1689/files/LRW-2018-42-P-3-06.pdf",
+          "locator": "§3.2.4, corpus examples and frequency",
+          "finding": "Da evidencia de relativas en datos; falta mapear cada afirmación de la entrada a contextos concretos."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o reducir la ficha; antes se deben cotejar sus ejemplos y separar descripción de recomendación. Acción específica: Consultar estudio NINJAL de alternancia が／の y gramática descriptiva de relativas; rehacer reglas y ejemplos solo tras fijar contexto y estructura.",
+      "canonicalCheck": "Hash vigente 28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f confirmado; Evidence existe: false; índice VERIFIED contiene el código: false. assessEntry aún no puede aprobar la ficha porque no existe Evidence canónica completa con claims y localizadores.",
+      "nextConcreteStep": "Consultar estudio NINJAL de alternancia が／の y gramática descriptiva de relativas; rehacer reglas y ejemplos solo tras fijar contexto y estructura."
+    }
+  },
+  "originalArticleSha256": "28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f",
+  "verifiedArticleSha256": "28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T09:26:56.548Z",
+    "backupArticleSha256": "28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f",
+    "canonicalArticleSha256": "28fcac9af93426ed4d982cd96367fdced91e4ef2bf924005a9829cc08d5d731f",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "apa7": "NINJAL. (2018). 現代日本語の連体修飾節における主語標示.",
+      "url": "https://repository.ninjal.ac.jp/record/2228/files/kk_ngkgk_025_02.pdf",
+      "locator": "paper on subject marking in relative clauses, §2–4",
+      "supports": "Estudia alternancia en corpus de relativas y usos de が／の; no confirma por sí sola reglas simples de は/が de la ficha."
+    },
+    {
+      "apa7": "NINJAL. (2018). 連体修飾節の用例分析.",
+      "url": "https://repository.ninjal.ac.jp/record/1689/files/LRW-2018-42-P-3-06.pdf",
+      "locator": "§3.2.4, corpus examples and frequency",
+      "supports": "Da evidencia de relativas en datos; falta mapear cada afirmación de la entrada a contextos concretos."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0838/followup-1-fb2220a87bc5.json",
+    "sha256": "fb2220a87bc52148e628888df73eed60fa34d713b39bfa63f1ce9b1725e4fe5e",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 4,
+    "label": "muy alta",
+    "reason": "Muy alta: las alternancias は/が en relativas son un tema estructural con condicionamientos discursivos; la ficha no identifica una fuente directa que valide sus reglas y ejemplos centrales.",
+    "nextStep": "Consultar estudio NINJAL de alternancia が／の y gramática descriptiva de relativas; rehacer reglas y ejemplos solo tras fijar contexto y estructura."
+  },
+  "canonicalEvidenceFound": false,
+  "assessEntry": {
+    "attempted": false,
+    "reason": "Sin Evidence canónica; pendiente construirla y ejecutar assessEntry."
+  },
+  "searches": [
+    {
+      "query": "連体修飾節 は が 主語標示 NINJAL",
+      "portal": "NINJAL repository",
+      "outcome": "Estudia alternancia en corpus de relativas y usos de が／の; no confirma por sí sola reglas simples de は/が de la ficha."
+    },
+    {
+      "query": "日本語 相対節 が の 主語 corpus NINJAL",
+      "portal": "NINJAL repository",
+      "outcome": "Da evidencia de relativas en datos; falta mapear cada afirmación de la entrada a contextos concretos."
+    }
+  ]
+}

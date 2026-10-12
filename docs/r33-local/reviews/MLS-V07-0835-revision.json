@@ -1,0 +1,109 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V07-0835",
+  "language": "chino-taiwanés",
+  "reviewedAt": "2026-10-12T15:31:45.657Z",
+  "reviewer": "R33 local source-follow-up review",
+  "articlePath": "content/chino-taiwan/MLS-V07-0835.json",
+  "status": "VERIFIED",
+  "claimsTotal": 4,
+  "claimsVerified": 4,
+  "coverageComplete": true,
+  "citationReady": true,
+  "originalArticleSha256": "f306d918bf42256dfe5a65a4189afa4af77f27f9e0053c5b11f514c191918b05",
+  "verifiedArticleSha256": "bfc2b20b6e7626644238819e5a95fbdd7be77e2c164158523b91117ec103d0b9",
+  "articleSha256": "bfc2b20b6e7626644238819e5a95fbdd7be77e2c164158523b91117ec103d0b9",
+  "canonicalArticleSha256": "bfc2b20b6e7626644238819e5a95fbdd7be77e2c164158523b91117ec103d0b9",
+  "originalStatus": "PENDING_SOURCE_SUPPORT",
+  "followupRound": 9,
+  "phase": "source-followup",
+  "workerId": "R33W-local-20261012152808-572e6e",
+  "assignmentId": "R33A-1791818888838-78b06c",
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V07-0835/followup-8-476dd29163f4.json",
+    "sha256": "476dd29163f48bb52147577c2a9a3d6eaba31ba81104e9d137bbacada3fd0173",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/review-history/MLS-V07-0835/before-followup-9-R33A-1791818888838-78b06c.json",
+    "sha256": "476dd29163f48bb52147577c2a9a3d6eaba31ba81104e9d137bbacada3fd0173",
+    "status": "PENDING_SOURCE_SUPPORT"
+  },
+  "semanticReview": {
+    "method": "Se inspeccionaron directamente las entradas del diccionario oficial del Ministerio de Educación de Taiwán y se reemplazaron la generalización de registro y los ejemplos no cotejados por los sentidos y ejemplos que la fuente publica.",
+    "findings": [
+      "La ficha oficial del diccionario conciso presenta pronunciación y ocho sentidos preposicionales de 於 con equivalentes y construcciones ejemplificadas.",
+      "Se cotejaron los equivalentes locativo/temporal, destinatario, objeto y comparativo con las acepciones 1, 2, 4 y 8 (líneas 39–46).",
+      "Cada ejemplo chino de la ficha actual se reproduce en la acepción correspondiente del diccionario; se retiraron oraciones originales sin fuente.",
+      "Las búsquedas diferenciadas por entrada oficial y por secuencias de ejemplo llevaron a la misma ficha; se contrastó además la versión extensa del diccionario para confirmar el abanico de sentidos y el aviso de que es una obra histórica/descriptiva."
+    ],
+    "limitations": [
+      "La ficha del diccionario no contiene comparación cuantitativa de registro oral y escrito; se retiró toda afirmación de frecuencia o preferencia por canal."
+    ],
+    "claimLevelResult": "Cada sentido y ejemplo retenido queda enlazado a acepciones exactas del diccionario oficial; Evidence refleja el hash vigente y assessEntry pasó antes y después de verificar."
+  },
+  "sourceFollowup": {
+    "reviewedAt": "2026-10-12T15:31:45.657Z",
+    "assignmentId": "R33A-1791818888838-78b06c",
+    "searches": [
+      {
+        "query": "site:dict.concised.moe.edu.tw/dictView.jsp 於 生於戰亂 嫁禍於人 無濟於事 苛政猛於虎",
+        "portal": "Diccionario conciso oficial del Ministerio de Educación de Taiwán",
+        "outcome": "Localicé la entrada y cotejé individualmente cuatro ejemplos con sus acepciones 1, 2, 4 y 8."
+      },
+      {
+        "query": "MOE 國語辭典簡編本 於 在 給 與 對 比 例句",
+        "portal": "Búsqueda diferenciada en los diccionarios oficiales del Ministerio de Educación",
+        "outcome": "Verifiqué los sentidos comparables y ejemplos mediante una segunda ruta de consulta; confirmé que las funciones dependen de la construcción."
+      }
+    ],
+    "primarySourcesInspected": [
+      {
+        "title": "於 — 國語辭典簡編本",
+        "url": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=44183&la=0&powerMode=0",
+        "locator": "Acepciones 1–8, líneas 37–46; ejemplos de acepciones 1, 2, 4 y 8, líneas 39–46",
+        "finding": "La fuente oficial relaciona 於 con ocho sentidos preposicionales y ofrece directamente los ejemplos retenidos."
+      },
+      {
+        "title": "教育部《重編國語辭典修訂本》 entry 於",
+        "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=11248&la=0&powerMode=0",
+        "locator": "Acepciones 1–10, líneas 32–42",
+        "finding": "La entrada extensa confirma el inventario de relaciones, incluidos ubicación, dirección, destinatario, pasiva, comparación y origen; no respalda una tendencia de frecuencia por registro."
+      }
+    ],
+    "conclusion": "El artículo ahora ofrece sentidos y ejemplos comprobables del diccionario y elimina el contraste de registro no medido."
+  },
+  "sourceReferences": [
+    {
+      "sourceId": "moe-2021-concise-dictionary-yu",
+      "title": "於 — 國語辭典簡編本",
+      "canonicalUrl": "https://dict.concised.moe.edu.tw/dictView.jsp?ID=44183&la=0&powerMode=0",
+      "locator": "Acepciones 1–8, líneas 37–46",
+      "finding": "Respalda los sentidos y los cuatro ejemplos retenidos.",
+      "apa7": "Ministry of Education, Taiwan. (2021). 於 — 國語辭典簡編本. https://dict.concised.moe.edu.tw/dictView.jsp?ID=44183&la=0&powerMode=0"
+    }
+  ],
+  "canonicalEvidenceStatus": "VERIFIED",
+  "preflight": {
+    "ok": true,
+    "evidenceStatus": "VERIFIED",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/chino-taiwan/MLS-V07-0835.json",
+    "evidenceRevision": 2,
+    "claimsTotal": 4,
+    "claimsVerified": 4,
+    "coverageComplete": true,
+    "citationReady": true,
+    "errors": [],
+    "warnings": []
+  },
+  "safety": {
+    "cloudflareInteractions": 0,
+    "d1Reads": 0,
+    "d1Writes": 0,
+    "apiCalls": 0,
+    "pushes": 0,
+    "merges": 0,
+    "deployments": 0
+  }
+}

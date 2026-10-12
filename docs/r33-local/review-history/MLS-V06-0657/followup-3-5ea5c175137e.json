@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0657",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0657.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, líneas 202–225, incluye 僕がやるぞ como ejemplo principalmente masculino, y sitúa ぞ después de だ. La fuerza pragmática/registro completo de esta entrada no queda documentado por esos pasajes."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS apoya ejemplo masculino y sintaxis de conexión, pero no el grado de énfasis y registro de todos los ejemplos creados.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html ぞ 終助詞 意味",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Apoya ejemplo y regla morfosintáctica; no todos los matices descriptivos."
+        },
+        {
+          "query": "site:repository.ninjal.ac.jp ぞ 終助詞 現代日本語 機能",
+          "portal": "NINJAL repository search",
+          "outcome": "No se encontró una fuente directamente suficiente y accesible para los ejemplos/pragmática de la ficha."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "líneas 202–225",
+          "finding": "Ejemplo y patrón de conexión de ぞ; alcance pragmático parcial."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré acotar la explicación al dato de TUFS; no he certificado ejemplos editoriales ni la intensidad asociada.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 4c1fbdb61c4a9c46397dffa9e543a5a288dedf203a2584959bf5ef797aa6a5a1. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS apoya ejemplo masculino y sintaxis de conexión, pero no el grado de énfasis y registro de todos los ejemplos creados.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "4c1fbdb61c4a9c46397dffa9e543a5a288dedf203a2584959bf5ef797aa6a5a1",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0657/followup-2-e24df8293a06.json",
+    "sha256": "e24df8293a067540a543a8fd3820bb5a580f2eb373b7e51e5073c6f2c4fc34f9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0812",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T05:14:32.054Z",
+  "reviewer": "R33W-local-20261011050055-cf0f8d",
+  "assignmentId": "R33A-1791694855663-dd464d",
+  "workerId": "R33W-local-20261011050055-cf0f8d",
+  "articlePath": "content/japones/MLS-V06-0812.json",
+  "status": "VERIFIED",
+  "claimsTotal": 3,
+  "claimsVerified": 3,
+  "coverageComplete": true,
+  "citationReady": true,
+  "semanticReview": {
+    "method": "Revisión de afirmaciones materiales contra fuentes primarias públicas gratuitas; corrección del alcance para que coincida con la guía normativa consultada.",
+    "findings": [
+      "La revisión anterior ya identificaba el informe de la Agencia, pero la ficha generalizaba a todos los géneros. La entrada se reescribió para cubrir exclusivamente las pautas sobre puntuación en documentos oficiales.",
+      "La guía de la Agencia para Asuntos Culturales, Ⅰ 表記の原則 §5(1)ア–イ: 句点「。」, 読点「、」; «，» también permitido en horizontal si se mantiene uniforme; «・» para términos paralelos. Localizadores: pp. impresas 18, PDF pp. 29, líneas 1291–1300.",
+      "La misma guía, §5(1)ウ–オ, describe paréntesis/comillas, anidación, y la colocación de 句点 antes del paréntesis si concluye una oración completa; distingue citas/palabras usadas como términos. pp. impresas 18–19, PDF pp. 29–30, líneas 1301–1321.",
+      "El aviso oficial confirma que el Consejo Cultural presentó el documento en enero de 2022 como manual de uso futuro para la redacción de documentos gubernamentales; sus apartados delimitan el dominio como 公用文.",
+      "Los ejemplos retenidos son literales del documento fuente; la ficha no conserva la generalización previa sobre estilos académicos ni presenta los puntos como reglas universales del japonés."
+    ],
+    "limitations": [
+      "Las convenciones aquí descritas corresponden al documento oficial consultado; otras guías editoriales o géneros pueden tener convenciones distintas."
+    ]
+  },
+  "originalArticleSha256": "1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521",
+  "verifiedArticleSha256": "04aee0e3c7003052bd6922b2075839a6b556dac2aa6965152361bdd3029b212b",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; comparación documentada por la revisión previa (SQLite readOnly=true)",
+    "backupGeneratedAt": "2026-09-19T21:21:06.217Z",
+    "backupArticleSha256": "1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521",
+    "canonicalOriginalArticleSha256": "1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521",
+    "articleMatchesAtPriorReview": true,
+    "currentArticleSha256": "04aee0e3c7003052bd6922b2075839a6b556dac2aa6965152361bdd3029b212b",
+    "currentArticleDiffersFromBackupDueToThisReview": true,
+    "note": "El backup no está disponible en el worktree para repetir la lectura; el cotejo previamente guardado confirmó igualdad del hash del artículo original antes de la corrección."
+  },
+  "sourceReferences": [
+    {
+      "apa7": "文化審議会. (2022). *公用文作成の考え方*. 文化庁. https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/kokugo/kokugo_79/pdf/93639901_01.pdf",
+      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/kokugo/kokugo_79/pdf/93639901_01.pdf",
+      "locator": "{\"section\":\"Ⅰ 表記の原則 §5(1)ア–イ\",\"printedPages\":\"18\",\"pdfPages\":\"29\",\"htmlLines\":\"1291–1300\"}; {\"section\":\"Ⅰ 表記の原則 §5(1)ウ–オ\",\"printedPages\":\"18–19\",\"pdfPages\":\"29–30\",\"htmlLines\":\"1301–1321\"}",
+      "supports": "公用文作成の考え方 establece 「。」 y 「、」 como forma general, permite 「，」 en escritura horizontal y pide evitar mezclar las dos formas dentro de un documento; también explica el empleo de ・ en enumeraciones. La guía explica formas básicas y anidación de paréntesis y comillas, y cuándo se coloca el punto dentro de un paréntesis que cierra una oración completa."
+    },
+    {
+      "apa7": "Agency for Cultural Affairs. (2022, 7 de enero). *文化審議会建議「公用文作成の考え方」について*. 文化庁. https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/93650001.html",
+      "url": "https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/93650001.html",
+      "locator": "{\"section\":\"headline/date; introductory notice; §2 content\",\"htmlLines\":\"45–67\"}",
+      "supports": "La Agencia para Asuntos Culturales presenta 公用文作成の考え方 como una guía dirigida al uso gubernamental en la redacción de documentos oficiales."
+    }
+  ],
+  "searches": [
+    {
+      "query": "site:bunka.go.jp 公用文作成の考え方 句読点 文化審議会",
+      "portal": "Agencia para Asuntos Culturales, buscador institucional",
+      "outcome": "Localizó el PDF oficial y la sección de uso de signos; lectura directa de las reglas y ejemplos en el informe."
+    },
+    {
+      "query": "site:bunka.go.jp/seisaku/bunkashingikai/kokugo/kokugo/kokugo_79/pdf/93639901_01.pdf 句点 読点 括弧 文末",
+      "portal": "Búsqueda en el repositorio oficial de informes de la Agencia",
+      "outcome": "Confirmó §5(1) y pasajes separados para puntuación de lectura, comillas y paréntesis; cotejé sus líneas y páginas impresas."
+    }
+  ],
+  "primarySourcesInspected": [
+    {
+      "title": "文化審議会. (2022). 公用文作成の考え方.",
+      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/kokugo/kokugo_79/pdf/93639901_01.pdf",
+      "locator": "Ⅰ 表記の原則 §5(1)ア–オ; printed pp. 18–19, PDF pp. 29–30, extracted lines 1291–1321",
+      "finding": "Establece coma/punto para documentos oficiales, forma alternativa en horizontal con consistencia, usos de ・, corchetes y regla de punto dentro de paréntesis."
+    },
+    {
+      "title": "文化庁. (2022, 7 de enero). 文化審議会建議「公用文作成の考え方」について.",
+      "url": "https://www.bunka.go.jp/koho_hodo_oshirase/hodohappyo/93650001.html",
+      "locator": "notice date and purpose, lines 45–67",
+      "finding": "Informa la fecha de la recomendación, que busca orientar la redacción gubernamental de documentos oficiales, y describe el alcance de la guía."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": true,
+    "path": "MLS R32 EDITORIAL/evidence git/entries/japones/MLS-V06-0812.json",
+    "status": "VERIFIED",
+    "evidenceRevision": 2,
+    "articleSha256": "04aee0e3c7003052bd6922b2075839a6b556dac2aa6965152361bdd3029b212b",
+    "assessment": "PASSED",
+    "verifiedIndexIncludesCode": true
+  },
+  "assessEntry": {
+    "attempted": true,
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "claimsTotal": 3,
+    "claimsVerified": 3,
+    "coverageComplete": true,
+    "citationReady": true,
+    "derivedStatus": "VERIFIED"
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0812/followup-2-c91c971bf08d.json",
+    "sha256": "c91c971bf08df2c1eb2ed2b381553083a322f18d865c7eabfeaee93521df4f93",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3,
+  "preflight": {
+    "ok": true,
+    "articleHash": "04aee0e3c7003052bd6922b2075839a6b556dac2aa6965152361bdd3029b212b",
+    "evidenceRevision": 2,
+    "validatedAt": "2026-10-11T05:14:32.054Z"
+  }
+}

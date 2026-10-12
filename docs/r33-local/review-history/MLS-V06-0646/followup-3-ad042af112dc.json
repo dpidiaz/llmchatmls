@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0646",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0646.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 10,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, lección 01.19.2, líneas 169–181, describe inferencia/símil y la conexión llana, な y の. JPF, líneas 163–188, contrasta ようだ con らしい/そうだ. No valida los ejemplos propios ni la afirmación de registro respecto de みたいだ."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La fuente oficial apoya inferencia, símil y conexiones; los ejemplos creados y las afirmaciones comparativas con みたいだ exceden los pasajes enlazados.",
+      "searches": [
+        {
+          "query": "site:jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html ようだ らしい みたいだ 意味 文法",
+          "portal": "Japan Foundation search",
+          "outcome": "Encontrado contraste ようだ・らしい・そうだ; みたいだ y ejemplos de la ficha no quedan completamente respaldados."
+        },
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod ようだ 推量 比喩 接続",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Encontrada explicación institucional de inferencia, símil y conexiones; no coteja los ejemplos editoriales."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). ～かもしれません・～にちがいありません：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson19/step2/explanation/076.html",
+          "locator": "líneas 169–181",
+          "finding": "Explica los sentidos de juicio y símil de ようです y sus conexiones; no valida ejemplos propios ni contraste con みたいだ."
+        },
+        {
+          "title": "市川保子. (2010年12月). 文法を楽しく「そうだ／ようだ／らしい」（１）. 国際交流基金.",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html",
+          "locator": "líneas 163–188",
+          "finding": "Compara inferencia y transmisión con ejemplos publicados; no prueba todos los contextos de la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré limitar la ficha a los sentidos y conexiones explícitos en TUFS/JPF; falta cotejar y reemplazar cada ejemplo antes de corregir.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 617650f2ff51ed28d66b22fcca45d9bb7c929e479f3dae5427ec2cddb0bb417c. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "La fuente oficial apoya inferencia, símil y conexiones; los ejemplos creados y las afirmaciones comparativas con みたいだ exceden los pasajes enlazados.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "617650f2ff51ed28d66b22fcca45d9bb7c929e479f3dae5427ec2cddb0bb417c",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0646/followup-2-667d72ffa9b0.json",
+    "sha256": "667d72ffa9b00bb03afaeef37d0c45257269d891c26440bc4100e2a0699b8779",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

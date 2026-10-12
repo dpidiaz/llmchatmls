@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0114",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.557Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0114.json",
+  "articleGeneratedAt": "2026-09-19T09:25:03.398Z",
+  "articleSha256": "53018f0a1e3c82e16b5050fd3193de9ba2ad932abc970daf95600e42e57cc346",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La tabla fuente da formas nominativas personales; no verifica todos los usos, ejemplos, pronunciación ni afirmaciones discursivas.",
+      "Se leyó íntegramente “Pronombres personales nominativo” (ruso) y se comparó con wiki_articles del backup SQL, abierto en modo read-only: SHA-256 de articleMarkdown y generatedAt coinciden con la versión del repositorio. No hay Evidence canónica para MLS-V09-0114, así que la ficha no tiene respaldo R33 fuente-afirmación con localizadores."
+    ],
+    "limitations": [
+      "La coincidencia con el backup solo identifica la versión; no prueba corrección lingüística.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Pronombres personales nominativo",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Pronouns: the six case forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+          "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms"
+        }
+      ],
+      "rationale": "La tabla fuente da formas nominativas personales; no verifica todos los usos, ejemplos, pronunciación ni afirmaciones discursivas."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Pronouns: the six case forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+          "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms"
+        }
+      ],
+      "rationale": "La coincidencia con el backup solo identifica la versión; no prueba corrección lingüística."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Pronouns: the six case forms",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+      "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Pronouns: the six case forms. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:25:03.398Z",
+    "backupGeneratedAt": "2026-09-19T09:25:03.398Z",
+    "canonicalArticleSha256": "53018f0a1e3c82e16b5050fd3193de9ba2ad932abc970daf95600e42e57cc346",
+    "backupArticleSha256": "53018f0a1e3c82e16b5050fd3193de9ba2ad932abc970daf95600e42e57cc346",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "53018f0a1e3c82e16b5050fd3193de9ba2ad932abc970daf95600e42e57cc346",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0114/pre-coordinator.json",
+    "sha256": "0d7f63fcef4e9c032bd3da3fc14c03c745f94cff28e0a78dbd8d246e6dd4d94b",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

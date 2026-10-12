@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0131",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.587Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0131.json",
+  "articleGeneratedAt": "2026-09-19T10:15:33.533Z",
+  "articleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente establece la oposición movimiento/ubicación para в/на; faltan fuentes para cada verbo y ejemplo incluido.",
+      "в/на + acusativo para dirección se contrasta con prepositivo estático; falta fuente de gramática que delimite verbos de movimiento, destinos convencionales y excepciones. Los ejemplos no están vinculados a un locator."
+    ],
+    "limitations": [
+      "Las búsquedas de dos páginas de Gramota relevantes para género ruso devolvieron 403; se registró el límite y no se citó su fragmento como fuente verificada. Para las demás entradas faltan pasajes concretos y APA 7 rastreable.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "в/на + acusativo de dirección",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Motion vs. location",
+          "url": "https://russian.cornell.edu/grammar/html/gr03_a_2.htm",
+          "locator": "definition and examples: в/на + accusative for motion; prepositional for location"
+        }
+      ],
+      "rationale": "La fuente establece la oposición movimiento/ubicación para в/на; faltan fuentes para cada verbo y ejemplo incluido."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Motion vs. location",
+          "url": "https://russian.cornell.edu/grammar/html/gr03_a_2.htm",
+          "locator": "definition and examples: в/на + accusative for motion; prepositional for location"
+        }
+      ],
+      "rationale": "Las búsquedas de dos páginas de Gramota relevantes para género ruso devolvieron 403; se registró el límite y no se citó su fragmento como fuente verificada. Para las demás entradas faltan pasajes concretos y APA 7 rastreable."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Motion vs. location",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr03_a_2.htm",
+      "locator": "definition and examples: в/на + accusative for motion; prepositional for location",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Motion vs. location. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr03_a_2.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:15:33.533Z",
+    "backupGeneratedAt": "2026-09-19T10:15:33.533Z",
+    "canonicalArticleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+    "backupArticleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0131/pre-coordinator.json",
+    "sha256": "1eb0d86f1dcc3a165dbb56c0b3e7b972ef4a7de4b8ff77e103ac4ada22a1e6a9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

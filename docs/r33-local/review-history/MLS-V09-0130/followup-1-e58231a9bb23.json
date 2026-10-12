@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0130",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.582Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0130.json",
+  "articleGeneratedAt": "2026-09-19T10:14:42.307Z",
+  "articleSha256": "fb80d6f6c9dce094ed93d30138a63fbf4378b4152667260d4dd0ba37f5557ced",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La tabla presenta las formas acusativas de pronombres personales; no cubre usos preposicionales, variantes y ejemplos de la ficha.",
+      "Afirmación central inspeccionada: “Los pronombres personales sustituyen o recuperan referentes como «yo», «tú», «él» o «ella». En ruso, cuando un pronombre personal aparece en acusativo, adopta una forma específica: меня, тебя, его, её, нас, вас, их.”. No se obtuvo en esta pasada una fuente primaria con localizador que permita comprobar la afirmación y sus ejemplos para MLS-V09-0130."
+    ],
+    "limitations": [
+      "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Pronombres personales acusativo",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Pronouns: the six case forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+          "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms"
+        }
+      ],
+      "rationale": "La tabla presenta las formas acusativas de pronombres personales; no cubre usos preposicionales, variantes y ejemplos de la ficha."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Pronouns: the six case forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+          "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms"
+        }
+      ],
+      "rationale": "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Pronouns: the six case forms",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+      "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Pronouns: the six case forms. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:14:42.307Z",
+    "backupGeneratedAt": "2026-09-19T10:14:42.307Z",
+    "canonicalArticleSha256": "fb80d6f6c9dce094ed93d30138a63fbf4378b4152667260d4dd0ba37f5557ced",
+    "backupArticleSha256": "fb80d6f6c9dce094ed93d30138a63fbf4378b4152667260d4dd0ba37f5557ced",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "fb80d6f6c9dce094ed93d30138a63fbf4378b4152667260d4dd0ba37f5557ced",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0130/pre-coordinator.json",
+    "sha256": "61d165701c1684c0444d1ffb907107a7b92480d16ea39310399336be80d6c8ae",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

@@ -1,0 +1,137 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0885",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0885.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 21,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Centro Virtual Cervantes. (s. f.). Marcadores del discurso. Diccionario de términos clave de ELE. Instituto Cervantes.",
+      "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/diccio_ele/diccionario/marcadoresdiscurso.htm",
+      "locator": "§16 y §20, operadores de concreción",
+      "observation": "CVC describe por ejemplo/operadores de concreción y el Plan Curricular incluye operadores de concreción/especificación; esos pasajes no fundamentan automáticamente como, tal como, entre otros ni todas las funciones del artículo."
+    },
+    {
+      "apa7Candidate": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+      "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_b1-b2.htm",
+      "locator": "§1.2.4, concreción o especificación",
+      "observation": "CVC describe por ejemplo/operadores de concreción y el Plan Curricular incluye operadores de concreción/especificación; esos pasajes no fundamentan automáticamente como, tal como, entre otros ni todas las funciones del artículo."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-16T08:29:14.283Z",
+      "canonicalGeneratedAt": "2026-09-16T08:29:14.283Z",
+      "backupArticleSha256": "eb203d0db33d4c89d8fe64608e0f9f4b1e535d368eb1a3fe24ed73646fce326a",
+      "canonicalArticleSha256": "eb203d0db33d4c89d8fe64608e0f9f4b1e535d368eb1a3fe24ed73646fce326a",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "CVC describe por ejemplo/operadores de concreción y el Plan Curricular incluye operadores de concreción/especificación; esos pasajes no fundamentan automáticamente como, tal como, entre otros ni todas las funciones del artículo."
+    ],
+    "limitations": [
+      "Hay respaldo para ejemplificación como función, pero falta fuente/localizador para cada forma y sus posibles lecturas comparativas.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Hay respaldo para ejemplificación como función, pero falta fuente/localizador para cada forma y sus posibles lecturas comparativas.",
+      "searches": [
+        {
+          "query": "site:cvc.cervantes.es marcadores de ejemplificación por ejemplo operadores de concreción",
+          "portal": "CVC/Instituto Cervantes search",
+          "outcome": "La entrada CVC inspeccionada respalda por ejemplo como concreción; no cubre cada forma listada."
+        },
+        {
+          "query": "site:cvc.cervantes.es Plan Curricular \"por ejemplo\" \"concreción\" marcadores",
+          "portal": "CVC/Instituto Cervantes search",
+          "outcome": "El Plan Curricular ofrece operadores concretivos; no prueba que todos los ejemplos del artículo sean marcadores de la misma clase."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Centro Virtual Cervantes. (s. f.). Marcadores del discurso. Diccionario de términos clave de ELE. Instituto Cervantes.",
+          "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/diccio_ele/diccionario/marcadoresdiscurso.htm",
+          "locator": "§16 y §20, operadores de concreción",
+          "finding": "CVC describe por ejemplo/operadores de concreción y el Plan Curricular incluye operadores de concreción/especificación; esos pasajes no fundamentan automáticamente como, tal como, entre otros ni todas las funciones del artículo."
+        },
+        {
+          "title": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+          "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_b1-b2.htm",
+          "locator": "§1.2.4, concreción o especificación",
+          "finding": "CVC describe por ejemplo/operadores de concreción y el Plan Curricular incluye operadores de concreción/especificación; esos pasajes no fundamentan automáticamente como, tal como, entre otros ni todas las funciones del artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré restringir la lista a marcadores con función de concreción comprobada y separar como/tal como cuando actúan de otra manera; no edité aún.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (eb203d0db33d4c89d8fe64608e0f9f4b1e535d368eb1a3fe24ed73646fce326a); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0885.json no existe y el índice verified.json no incluye MLS-V10-0885. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Comprobar cada forma en CVC/obras académicas de marcadores y contrastar los ejemplos antes de crear Evidence."
+    }
+  },
+  "originalArticleSha256": "eb203d0db33d4c89d8fe64608e0f9f4b1e535d368eb1a3fe24ed73646fce326a",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-16T08:29:14.283Z",
+    "canonicalGeneratedAt": "2026-09-16T08:29:14.283Z",
+    "backupArticleSha256": "eb203d0db33d4c89d8fe64608e0f9f4b1e535d368eb1a3fe24ed73646fce326a",
+    "canonicalArticleSha256": "eb203d0db33d4c89d8fe64608e0f9f4b1e535d368eb1a3fe24ed73646fce326a",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0885/followup-1-794184dfec18.json",
+    "sha256": "794184dfec180cebb9bcbbe861252e484499692c2a4be6aa6e6d9c47f51d59f2",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0885-revision.json",
+    "sha256": "794184dfec180cebb9bcbbe861252e484499692c2a4be6aa6e6d9c47f51d59f2",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "eb203d0db33d4c89d8fe64608e0f9f4b1e535d368eb1a3fe24ed73646fce326a",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0885.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

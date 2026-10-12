@@ -1,0 +1,109 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0171",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:22:26.531Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/coreano/MLS-V08-0171.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 4,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "가의 모음 뒤 이형태는 직접 근거가 있지만 예문 하나의 locator 매칭이 남는다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "가의 모음 뒤 이형태는 직접 근거가 있지만 예문 하나의 locator 매칭이 남는다.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr 은 는 이 가 을 를 조사 의미",
+          "portal": "한국어기초사전 검색",
+          "outcome": "검색결과에서 일부 조사 항목을 확인하고 각 표제어를 직접 대조했다."
+        },
+        {
+          "query": "site:krdict.korean.go.kr \"은\" 조사 받침 뒤 대조 주제",
+          "portal": "한국어기초사전 검색",
+          "outcome": "은/는의 대조·주제 뜻과 결합 제약을 직접 확인했으며 기사 예문별 매칭이 남았다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "국립국어원 세종한국어 3 교원용 지침서",
+          "url": "https://www.korean.go.kr/front/reportData/reportDataView.do?report_seq=744",
+          "locator": "PDF p. 86, lines 2517–2521, 이/가",
+          "finding": "기본 주격 기능 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "세종한국어 3 p. 86과 해당 명사 예문을 대조해 받침 없음과 가 결합을 기록한다."
+    }
+  },
+  "originalArticleSha256": "4d844603a8cacf5cd945cacbaad7a9ca02378e341f55147da209506a118dee90",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "workerId": "R33W-local-20261011002037-241d84",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "followupRound": 2,
+  "canonicalArticleSha256": "4d844603a8cacf5cd945cacbaad7a9ca02378e341f55147da209506a118dee90",
+  "verifiedArticleSha256": "4d844603a8cacf5cd945cacbaad7a9ca02378e341f55147da209506a118dee90",
+  "followupSources": [
+    {
+      "title": "국립국어원 세종한국어 3 교원용 지침서",
+      "url": "https://www.korean.go.kr/front/reportData/reportDataView.do?report_seq=744",
+      "locator": "PDF p. 86, lines 2517–2521, 이/가",
+      "finding": "기본 주격 기능 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.531Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "국립국어원 세종한국어 3 교원용 지침서"
+    ]
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0171/followup-1-fafa38e4af5b.json",
+    "sha256": "fafa38e4af5bb20b54bdeca51138710c964e6292c5539fbd6220f729b65f7c7b",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "sourceChecks": [
+    {
+      "sourceTitle": "국립국어원 세종한국어 3 교원용 지침서",
+      "url": "https://www.korean.go.kr/front/reportData/reportDataView.do?report_seq=744",
+      "locator": "PDF p. 86, lines 2517–2521, 이/가",
+      "result": "PARTIAL",
+      "finding": "기본 주격 기능 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "국립국어원 세종한국어 3 교원용 지침서",
+      "url": "https://www.korean.go.kr/front/reportData/reportDataView.do?report_seq=744",
+      "locator": "PDF p. 86, lines 2517–2521, 이/가",
+      "finding": "기본 주격 기능 지지."
+    }
+  ],
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "가의 모음 뒤 이형태는 직접 근거가 있지만 예문 하나의 locator 매칭이 남는다.",
+    "nextStep": "세종한국어 3 p. 86과 해당 명사 예문을 대조해 받침 없음과 가 결합을 기록한다."
+  }
+}

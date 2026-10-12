@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0143",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.614Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0143.json",
+  "articleGeneratedAt": "2026-09-19T09:15:23.553Z",
+  "articleSha256": "4fabc85a100f3eee7da75d1b62a871d6f1580d2879d6b58b17effb0752295401",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente sólo cubre под/за; no respalda automáticamente между/над/перед ni las afirmaciones de la ficha.",
+      "Afirmación central inspeccionada: “Las preposiciones rusas под y за pueden alternar entre acusativo e instrumental según el significado espacial: el acusativo suele presentar movimiento hacia una posición, mientras que el instrumental presenta ubicación. Sin embargo, no conviene extender esta alternancia a над, перед y между, que en sus usos espaciales normales rigen instrumental incluso cuando la oración contiene movimiento.”. No se obtuvo en esta pasada una fuente primaria con localizador que permita comprobar la afirmación y sus ejemplos para MLS-V09-0143."
+    ],
+    "limitations": [
+      "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Entre/encima/debajo/delante: acusativo de movimiento vs instrumental estático",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Prepositions pod and za",
+          "url": "https://russian.cornell.edu/grammar/html/gr09_b_a.htm",
+          "locator": "table examples: под/за + accusative motion vs instrumental location"
+        }
+      ],
+      "rationale": "La fuente sólo cubre под/за; no respalda automáticamente между/над/перед ni las afirmaciones de la ficha."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Prepositions pod and za",
+          "url": "https://russian.cornell.edu/grammar/html/gr09_b_a.htm",
+          "locator": "table examples: под/за + accusative motion vs instrumental location"
+        }
+      ],
+      "rationale": "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Prepositions pod and za",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr09_b_a.htm",
+      "locator": "table examples: под/за + accusative motion vs instrumental location",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Prepositions pod and za. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr09_b_a.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:15:23.553Z",
+    "backupGeneratedAt": "2026-09-19T09:15:23.553Z",
+    "canonicalArticleSha256": "4fabc85a100f3eee7da75d1b62a871d6f1580d2879d6b58b17effb0752295401",
+    "backupArticleSha256": "4fabc85a100f3eee7da75d1b62a871d6f1580d2879d6b58b17effb0752295401",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "4fabc85a100f3eee7da75d1b62a871d6f1580d2879d6b58b17effb0752295401",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0143/pre-coordinator.json",
+    "sha256": "9301f763c8fb6090eb405658d6f80d7155a094b89dd85e4281ca00804e9e384d",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

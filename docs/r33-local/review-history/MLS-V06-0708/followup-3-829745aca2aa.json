@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0708",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0708.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "Digital Daijisen, Kotobank, entrada 掛ける, sentido 32(ア), líneas 88–90, define que unido a la forma continuativa puede significar comenzar, hacer hasta la mitad o estar a punto, con 言いかけてやめる y 死にかける. El núcleo de la ficha tiene respaldo lexicográfico; sus ejemplos propios, traducciones y matices siguen sin validación claim-level."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El diccionario respalda la semántica central, la conexión a 連用形 y las lecturas ‘empezar’, ‘a medio camino’ y ‘estar a punto’; faltan cotejo de cada ejemplo y enlaces APA/Evidence.",
+      "searches": [
+        {
+          "query": "site:kotobank.jp/word 掛ける かける 動詞 連用形 途中",
+          "portal": "Kotobank search",
+          "outcome": "Entrada lexicográfica directa localizada para conexión y tres lecturas; ejemplos de la ficha no aparecen ahí."
+        },
+        {
+          "query": "site:repository.ninjal.ac.jp 掛ける 動詞 連用形 途中 始める",
+          "portal": "NINJAL repository search",
+          "outcome": "No se encontró una segunda fuente primaria accesible que inspeccione los ejemplos exactos de la ficha."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "小学館. (s. f.). 掛ける. デジタル大辞泉, コトバンク.",
+          "url": "https://kotobank.jp/word/%E6%8E%9B%E3%81%91%E3%82%8B-461286",
+          "locator": "sentido 32(ア), líneas 88–90",
+          "finding": "Apoya la forma continuativa, ‘empezar’, ‘hasta la mitad’ y ‘estar a punto’, con dos ejemplos léxicos; no los ejemplos editoriales completos."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré sustituir ejemplos no atestiguados por los ejemplos lexicográficos y restringir afirmaciones a esa acepción; faltan APA 7 y Evidence por claim.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: ca48938fea421bfa11f2df5399d67e16ad40f339b812d2d7639843099f5e9387. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "El diccionario respalda la semántica central, la conexión a 連用形 y las lecturas ‘empezar’, ‘a medio camino’ y ‘estar a punto’; faltan cotejo de cada ejemplo y enlaces APA/Evidence.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "ca48938fea421bfa11f2df5399d67e16ad40f339b812d2d7639843099f5e9387",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0708/followup-2-88dd55babf06.json",
+    "sha256": "88dd55babf06d605bcb1039be2d12a7abe211ecc3d8360c16a3769782064cbef",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

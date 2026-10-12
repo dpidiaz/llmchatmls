@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0144",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.618Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0144.json",
+  "articleGeneratedAt": "2026-09-19T09:16:12.641Z",
+  "articleSha256": "2466b0fe32498bfe3110a7ab0c869333f17e6788f680d3440768d6dca62356b7",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente permite genitivo con algunos objetos negados y alternancia en ciertos verbos; no prueba una regla única para todos los verbos.",
+      "La fuente consultada sobre negación no se cotejó con un apartado que respalde todas las condiciones semánticas de acusativo/genitivo, los contrastes de definitud y los ejemplos de la ficha; se requiere cobertura claim-level para evitar una regla simplificada."
+    ],
+    "limitations": [
+      "No se creó Evidence canónica ni se modificó el artículo. La entrada permanece pendiente y no se declara VERIFIED.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Negación: objeto acusativo frente a genitivo",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Genitive object with a negated verb",
+          "url": "https://russian.cornell.edu/grammar/html/le71_78_i.htm",
+          "locator": "lines 0–6: genitive after negation and optional accusative/genitive examples"
+        }
+      ],
+      "rationale": "La fuente permite genitivo con algunos objetos negados y alternancia en ciertos verbos; no prueba una regla única para todos los verbos."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Genitive object with a negated verb",
+          "url": "https://russian.cornell.edu/grammar/html/le71_78_i.htm",
+          "locator": "lines 0–6: genitive after negation and optional accusative/genitive examples"
+        }
+      ],
+      "rationale": "No se creó Evidence canónica ni se modificó el artículo. La entrada permanece pendiente y no se declara VERIFIED."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Genitive object with a negated verb",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le71_78_i.htm",
+      "locator": "lines 0–6: genitive after negation and optional accusative/genitive examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Genitive object with a negated verb. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le71_78_i.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:16:12.641Z",
+    "backupGeneratedAt": "2026-09-19T09:16:12.641Z",
+    "canonicalArticleSha256": "2466b0fe32498bfe3110a7ab0c869333f17e6788f680d3440768d6dca62356b7",
+    "backupArticleSha256": "2466b0fe32498bfe3110a7ab0c869333f17e6788f680d3440768d6dca62356b7",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "2466b0fe32498bfe3110a7ab0c869333f17e6788f680d3440768d6dca62356b7",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0144/pre-coordinator.json",
+    "sha256": "d013e4e79af8e4ff52d65afc23f8024c28c1154435f3023edab4c69b0042303a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

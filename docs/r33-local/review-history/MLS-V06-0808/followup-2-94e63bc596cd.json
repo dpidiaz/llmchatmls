@@ -1,0 +1,144 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0808",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:52:42.406Z",
+  "reviewer": "R33W-local-20261010205126-e2aac2",
+  "assignmentId": "R33A-1791665486589-6ee456",
+  "workerId": "R33W-local-20261010205126-e2aac2",
+  "articlePath": "content/japones/MLS-V06-0808.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "さ se analiza como marcador discursivo después de tópico/nombre para tomar o mantener turno, con prosodia y registro. No se verificó estudio de conversación que sustente las funciones.",
+      "Hace falta fuente con transcripciones contextuales para distinguir さ discursivo, final e intensificador.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T21:16:35.546Z) frente a content/japones/MLS-V06-0808.json; article_markdown SHA-256 f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144 / f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144; coincidencia=true.",
+      "Se identificó un estudio primario sobre さ discursivo, pero no se cotejó el texto completo; quedan sin validar función post-tópico, toma/mantenimiento de turno, prosodia, registro y ejemplos.",
+      "Follow-up 2026-10-10T20:52:42.406Z; revisión anterior exacta archivada en docs/r33-local/review-history/MLS-V06-0808/before-followup-4fa27ce72361.json, SHA-256 4fa27ce72361ac05d98c2986b378235378ec182c076889c1328f13da96ca3e8a. Hash del artículo vigente f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144.",
+      "Fuente inspeccionada 東京外国語大学. (s. f.). 日本語文法 終助詞：解説.; localizador lines 196–225 y 227–237; hallazgo: Clasifica さ y ejemplos de ぞ/ぜ/わ/ね; no desarrolla todos los valores de la ficha.",
+      "Fuente inspeccionada 国立国語研究所. (s. f.). 終助詞のついたもの.; localizador §2.2; hallazgo: Análisis de partículas finales, insuficiente para todos los contextos contemporáneos tratados."
+    ],
+    "limitations": [
+      "No se cambió el artículo ni se generó Evidence canónica. Se mantiene PENDING_SOURCE_SUPPORT hasta verificar con fuentes primarias localizables cada afirmación material.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Media: hay fuentes sobre el final さ como partícula, pero hace falta distinguir valor discursivo, marcador de pausa y su uso en registros/variedades.",
+      "searches": [
+        {
+          "query": "終助詞 さ ね ぞ ぜ 文法 TUFS",
+          "portal": "Tokyo University of Foreign Studies",
+          "outcome": "Clasifica さ y ejemplos de ぞ/ぜ/わ/ね; no desarrolla todos los valores de la ficha."
+        },
+        {
+          "query": "終助詞 さ discourse particle NINJAL repository",
+          "portal": "NINJAL repository",
+          "outcome": "Análisis de partículas finales, insuficiente para todos los contextos contemporáneos tratados."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 日本語文法 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "lines 196–225 y 227–237",
+          "finding": "Clasifica さ y ejemplos de ぞ/ぜ/わ/ね; no desarrolla todos los valores de la ficha."
+        },
+        {
+          "title": "国立国語研究所. (s. f.). 終助詞のついたもの.",
+          "url": "https://repository.ninjal.ac.jp/record/1314/files/kkrep_055.pdf",
+          "locator": "§2.2",
+          "finding": "Análisis de partículas finales, insuficiente para todos los contextos contemporáneos tratados."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o reducir la ficha; antes se deben cotejar sus ejemplos y separar descripción de recomendación. Acción específica: Comparar todos los ejemplos con descripción de partículas finales TUFS y un corpus conversacional; restringir la ficha a valores localizados.",
+      "canonicalCheck": "Hash vigente f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144 confirmado; Evidence existe: false; índice VERIFIED contiene el código: false. assessEntry aún no puede aprobar la ficha porque no existe Evidence canónica completa con claims y localizadores.",
+      "nextConcreteStep": "Comparar todos los ejemplos con descripción de partículas finales TUFS y un corpus conversacional; restringir la ficha a valores localizados."
+    }
+  },
+  "originalArticleSha256": "f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144",
+  "verifiedArticleSha256": "f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T21:16:35.546Z",
+    "backupArticleSha256": "f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144",
+    "canonicalArticleSha256": "f509dbf6ea7f9a826fcc04c4108d955292c70ec847698a96fc598c3bb8fce144",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "A discourse analysis of the Japanese particle sa",
+      "author": "Squires, T.",
+      "year": 1994,
+      "publication": "Pragmatics, 4(1), 1–29",
+      "doi": "10.1075/prag.4.1.01squ",
+      "url": "https://benjamins.com/catalog/prag.4.1.01squ",
+      "locator": "artículo completo, pp. 1–29 (texto completo no cotejado en este lote)",
+      "coverage": "Fuente primaria identificada por tema: partícula japonesa sa en discurso.",
+      "limits": "No atribuir respaldo a funciones/ejemplos específicos sin cotejar el texto y sus transcripciones."
+    },
+    {
+      "apa7": "東京外国語大学. (s. f.). 日本語文法 終助詞：解説.",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+      "locator": "lines 196–225 y 227–237",
+      "supports": "Clasifica さ y ejemplos de ぞ/ぜ/わ/ね; no desarrolla todos los valores de la ficha."
+    },
+    {
+      "apa7": "国立国語研究所. (s. f.). 終助詞のついたもの.",
+      "url": "https://repository.ninjal.ac.jp/record/1314/files/kkrep_055.pdf",
+      "locator": "§2.2",
+      "supports": "Análisis de partículas finales, insuficiente para todos los contextos contemporáneos tratados."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0808/followup-1-4fa27ce72361.json",
+    "sha256": "4fa27ce72361ac05d98c2986b378235378ec182c076889c1328f13da96ca3e8a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "Media: hay fuentes sobre el final さ como partícula, pero hace falta distinguir valor discursivo, marcador de pausa y su uso en registros/variedades.",
+    "nextStep": "Comparar todos los ejemplos con descripción de partículas finales TUFS y un corpus conversacional; restringir la ficha a valores localizados."
+  },
+  "canonicalEvidenceFound": false,
+  "assessEntry": {
+    "attempted": false,
+    "reason": "Sin Evidence canónica; pendiente construirla y ejecutar assessEntry."
+  },
+  "searches": [
+    {
+      "query": "終助詞 さ ね ぞ ぜ 文法 TUFS",
+      "portal": "Tokyo University of Foreign Studies",
+      "outcome": "Clasifica さ y ejemplos de ぞ/ぜ/わ/ね; no desarrolla todos los valores de la ficha."
+    },
+    {
+      "query": "終助詞 さ discourse particle NINJAL repository",
+      "portal": "NINJAL repository",
+      "outcome": "Análisis de partículas finales, insuficiente para todos los contextos contemporáneos tratados."
+    }
+  ]
+}

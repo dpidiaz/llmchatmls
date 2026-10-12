@@ -1,0 +1,142 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V02-0174",
+  "language": "portugues",
+  "reviewedAt": "2026-10-10T19:27:36.965Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010192014-1e9a5a)",
+  "assignmentId": "R33A-1791660014478-02c0a1",
+  "articlePath": "content/portugues/MLS-V02-0174.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Direção-Geral da Educação. (s. f.). Quantificador. Dicionário Terminológico.",
+      "url": "https://dt.dge.mec.pt/index.php?id=n262",
+      "locator": "verbete “Quantificador”, definição e exemplos",
+      "observation": "Define quantificadores por referência a número, quantidade e parcela; oferece exemplos. Não discrimina todos os valores lexicais, polaridade, escopo e concordancia discutidos nos artículos."
+    },
+    {
+      "apa7Candidate": "Bechara, E. (2019). Moderna gramática portuguesa (40.ª ed.). Nova Fronteira.",
+      "url": "https://biblioteca.faculdadeunimed.edu.br/phl84/pdf2/Modernagramaticaportuguesa.pdf",
+      "locator": "PDF impresso, pp. 133–136 (artigo junto a possessivos); p. 151 (referência e ambiguidade); pp. 161, 167 (nenhum, ambos); passagens consultadas por busca no texto",
+      "observation": "Gramática normativa brasileira consultada diretamente; confirma variação de artigo, ambiguidade de possessivos, usos de nenhum e ambos. Os localizadores indicados não cobrem individualmente todas as afirmações dos 25 artigos."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Dos vías distintas de búsqueda gratuitas por entrada, lectura directa de pasajes pertinentes y comparación con afirmaciones y artículo vigente. Las referencias son candidatas de investigación, no una matriz Evidence ni citas APA integradas.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "NOT_APPROVED: la cobertura afirmación-localizador está incompleta; el estado no se elevó.",
+    "backupComparison": {
+      "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite",
+      "access": "node:sqlite readOnly=true",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-18T04:47:15.365Z",
+      "canonicalGeneratedAt": "2026-09-18T04:47:15.365Z",
+      "backupArticleSha256": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+      "canonicalArticleSha256": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento por afirmación con consulta de las revisiones previas, búsquedas independientes y lectura directa de pasajes; no se infiere respaldo más allá del localizador observado.",
+    "findings": [
+      "Bechara p. 167 presenta ambos os filhos/livros y ambas as razões, pero la ficha añade equivalencia exacta a dos, norma de artículo y alcance de preposiciones sin fuente vinculada por afirmación. La revisión previa describió los vacíos; este seguimiento consultó las fuentes y localizadores enumerados en sourceReferences, con apoyo parcial solamente."
+    ],
+    "limitations": [
+      "Bechara p. 167 presenta ambos os filhos/livros y ambas as razões, pero la ficha añade equivalencia exacta a dos, norma de artículo y alcance de preposiciones sin fuente vinculada por afirmación.",
+      "No se validó Evidence por afirmación; assessEntry y el control canónico VERIFIED siguen sin aprobar."
+    ],
+    "exceptionalDisposition": {
+      "searches": [
+        {
+          "query": "português quantificadores indefinidos nenhum muito pouco vários ambos gramática universitária PDF",
+          "portal": "Dicionário Terminológico + gramáticas académicas abiertas",
+          "outcome": "Localizó la definición institucional de quantificador y la gramática de Bechara; esta última trata nenhum (p. 161) y ambos (p. 167), pero no respalda todas las distinciones y ejemplos."
+        },
+        {
+          "query": "site:edu.br “nenhum” “muito” quantificador português gramática PDF",
+          "portal": "Repositorios de educación superior (IFRS/CEDERJ)",
+          "outcome": "La búsqueda no produjo una fuente académica única que cubra las categorías y contrastes pedidos; se encontró material temático cercano y se inspeccionó Bechara directamente como fuente primaria."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Direção-Geral da Educação. (s. f.). Quantificador. Dicionário Terminológico.",
+          "url": "https://dt.dge.mec.pt/index.php?id=n262",
+          "locator": "verbete “Quantificador”, definição e exemplos",
+          "finding": "Define quantificadores por referência a número, quantidade e parcela; oferece exemplos. Não discrimina todos os valores lexicais, polaridade, escopo e concordancia discutidos nos artículos."
+        },
+        {
+          "title": "Bechara, E. (2019). Moderna gramática portuguesa (40.ª ed.). Nova Fronteira.",
+          "url": "https://biblioteca.faculdadeunimed.edu.br/phl84/pdf2/Modernagramaticaportuguesa.pdf",
+          "locator": "PDF impresso, pp. 133–136 (artigo junto a possessivos); p. 151 (referência e ambiguidade); pp. 161, 167 (nenhum, ambos); passagens consultadas por busca no texto",
+          "finding": "Gramática normativa brasileira consultada diretamente; confirma variação de artigo, ambiguidade de possessivos, usos de nenhum e ambos. Os localizadores indicados não cobrem individualmente todas as afirmações dos 25 artigos."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reducir la ficha a las definiciones/ejemplos directamente apoyados y retirar o matizar cualquier generalización no documentada. No modifiqué el artículo: aún hace falta determinar la redacción respaldada por fuente primaria; tampoco existe Evidence canónica para actualizar de modo auditable.",
+      "canonicalCheck": "Recalculé SHA-256 del articleMarkdown vigente: 283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530. Evidence canónica MLS R32 EDITORIAL/evidence git/entries/portugues/MLS-V02-0174.json no existe; índice verified no contiene MLS-V02-0174. assessEntry no pasa: no hay evidencia claim-level validada que complete todas las afirmaciones materiales. Estado conservado como PENDING, sin promoción.",
+      "nextConcreteStep": "Investigar las afirmaciones concretas señaladas con una consulta nueva en corpus/gramáticas brasileñas de acceso abierto y otra búsqueda por construcciones/ejemplos; registrar páginas/subapartados, corregir o acotar artículo, crear Evidence por afirmación y ejecutar assessEntry/hash/índice.",
+      "blockingCriterion": "Bechara p. 167 presenta ambos os filhos/livros y ambas as razões, pero la ficha añade equivalencia exacta a dos, norma de artículo y alcance de preposiciones sin fuente vinculada por afirmación."
+    }
+  },
+  "originalArticleSha256": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+  "backupComparison": {
+    "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite",
+    "access": "node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-18T04:47:15.365Z",
+    "canonicalGeneratedAt": "2026-09-18T04:47:15.365Z",
+    "backupArticleSha256": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+    "canonicalArticleSha256": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V02-0174/followup-1-697961134f03.json",
+    "sha256": "697961134f03588e252bc5c30bd655afbb960664e9f2485ef33b774154f553f0",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "phase": "source-followup",
+  "canonicalArticleSha256": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+  "verifiedArticleSha256": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V02-0174-revision.json",
+    "sha256": "697961134f03588e252bc5c30bd655afbb960664e9f2485ef33b774154f553f0",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791626474055-08a543"
+  },
+  "canonicalCheck": {
+    "articleHash": "283a0792cbf9d294004836c5ad06cbdc8762c613b6798b7efe821d7d67ed8530",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/portugues/MLS-V02-0174.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: falta cobertura semántica claim-level validada."
+  },
+  "workerId": "R33W-local-20261010192014-1e9a5a"
+}

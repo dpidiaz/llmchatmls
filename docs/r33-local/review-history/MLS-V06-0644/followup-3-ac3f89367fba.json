@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0644",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0644.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 10,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "NINJAL (2017), p. 105, sección 「伝聞・引用」, ejemplos (13)–(16), clasifica とのことだ dentro de recursos de reporte/cita. JPF explica el contraste entre そうだ・ようだ・らしい (§§2–3, líneas 125–189), pero no demuestra los ejemplos editados ni la generalización de frecuencia y registro de esta ficha."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La ficha generaliza registro/frecuencia y varios ejemplos propios sin enlace de evidencia por afirmación; NINJAL confirma la categoría citativa, pero no todos esos usos.",
+      "searches": [
+        {
+          "query": "site:repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf とのことだ 伝聞 引用",
+          "portal": "NINJAL repository search",
+          "outcome": "Encontrado un pasaje pertinente de reporte/cita en p. 105; no cubre todas las afirmaciones editoriales."
+        },
+        {
+          "query": "site:jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html とのことだ そうだ 伝聞",
+          "portal": "Japan Foundation search",
+          "outcome": "La página contrasta そうだ・ようだ・らしい, pero no contiene una validación completa de とのことだ."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "国立国語研究所. (2017). 認識的ムード（話し手の判断）.",
+          "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+          "locator": "p. 105, 「伝聞・引用」, ejemplos (13)–(16)",
+          "finding": "Incluye とのことだ en el área de reporte/cita; no respalda por sí solo registro, frecuencia ni los ejemplos propios."
+        },
+        {
+          "title": "市川保子. (2010年12月). 文法を楽しく「そうだ／ようだ／らしい」（１）. 国際交流基金.",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html",
+          "locator": "§§2–3, líneas 125–189",
+          "finding": "Detalla evidencialidad/inferencia y contraste de esas tres expresiones; no es una fuente directa para cada ejemplo とのことだ."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reducir frecuencia y registro y sustituir ejemplos propios por formas efectivamente documentadas; sin cotejo adicional no alteré el artículo ni fabriqué una cita APA.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 6fbe19affbd77dcf2a98edfed234d32b7ac7178d1d4131a070be51833ae8a340. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "La ficha generaliza registro/frecuencia y varios ejemplos propios sin enlace de evidencia por afirmación; NINJAL confirma la categoría citativa, pero no todos esos usos.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "6fbe19affbd77dcf2a98edfed234d32b7ac7178d1d4131a070be51833ae8a340",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0644/followup-2-48d6ace659c2.json",
+    "sha256": "48d6ace659c2bc171c1eff43861262f98608d4b57d56d31de8c1e75df6449076",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

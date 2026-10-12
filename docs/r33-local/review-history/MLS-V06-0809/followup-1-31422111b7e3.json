@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0809",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T17:25:03.981Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791652844138-bad78b",
+  "workerId": "R33W-local-20261010172044-86156d",
+  "articlePath": "content/japones/MLS-V06-0809.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "No se encontró un recurso lexicográfico/gramatical primario con localizador que cubra el valor conclusivo de したがって, su registro formal, contraste con だから y distinción gráfica frente al verbo 従う.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T21:17:43.614Z) frente a content/japones/MLS-V06-0809.json; article_markdown SHA-256 b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc / b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc; coincidencia=true.",
+      "El estudio de conectores discursivos es metodológicamente pertinente, pero no se encontró localizador específico para したがって, だから ni 従って."
+    ],
+    "limitations": [
+      "No se creó Evidence canónica ni se modificó el artículo. La entrada permanece pendiente y no se declara VERIFIED.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ]
+  },
+  "originalArticleSha256": "b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc",
+  "verifiedArticleSha256": "b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T21:17:43.614Z",
+    "backupArticleSha256": "b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc",
+    "canonicalArticleSha256": "b3f4dcb0adf93e70d4084157d401f3e8b4dd8e958ceb83d62b84f1212e56dbcc",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "Japanese Discourse Relation Analysis: Task Definition, Connective Detection, and Corpus Annotation",
+      "author": "Kishimoto, Y., Murawaki, Y., Kawahara, D., & Kurohashi, S.",
+      "year": 2020,
+      "publication": "Journal of Natural Language Processing, 27(4), 889–931",
+      "doi": "10.5715/jnlp.27.889",
+      "url": "https://www.jstage.jst.go.jp/article/jnlp/27/4/27_889/_article/-char/en",
+      "locator": "pp. 889–931; definición de tarea y corpus de conectores discursivos",
+      "coverage": "Proporciona marco/corpus para relaciones discursivas y conectores japoneses.",
+      "limits": "No quedó localizado un pasaje que coteje したがって, su contraste con だから ni el homógrafo 従って."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0809/pre-coordinator.json",
+    "sha256": "d890ae5cc2f933279a41df50819fdec86e7a3e7ac9493510be0a3e1e0438bb9d",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 1
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0669",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0669.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 4,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, líneas 202–225, ofrece 僕がやるぞ y clasificación principalmente masculina. El calificativo «marcado» y los grados de énfasis requieren estudio pragmático y ejemplos contextuales exactos."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS apoya el ejemplo masculino, pero no caracteriza ぞ como marcado en todos los contextos ni respalda la escala de énfasis editorial.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html ぞ 主に男性 終助詞",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Verifica ejemplo y perfil de género pedagógico; no justifica todos los matices."
+        },
+        {
+          "query": "site:jstage.jst.go.jp 終助詞 ぞ 男性語 強調 論文",
+          "portal": "J-STAGE search",
+          "outcome": "No se encontró una fuente abierta inspeccionada que respalde la formulación completa de la ficha."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "líneas 202–225",
+          "finding": "Apoya ejemplo y perfil principalmente masculino; no la escala de marcado/énfasis del artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré eliminar «marcado» o definirlo con estudio pragmático localizado; no cambié la etiqueta a falta de esa evidencia.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: fda1a331c6332a8ad84208548d3ce3946be2fef03073e717f89ab91e0623c781. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS apoya el ejemplo masculino, pero no caracteriza ぞ como marcado en todos los contextos ni respalda la escala de énfasis editorial.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "fda1a331c6332a8ad84208548d3ce3946be2fef03073e717f89ab91e0623c781",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0669/followup-2-c6b27aaa37b2.json",
+    "sha256": "c6b27aaa37b2144476cda3eec88a6eef784bf521c00b7f7d98ffd9d098c459c8",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

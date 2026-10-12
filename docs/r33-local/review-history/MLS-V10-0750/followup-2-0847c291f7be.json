@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0750",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0750.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/comparativas-progresivas-comparativas-correctivas-o-de-adecuaci%C3%B3n-y-comparativas-protot%C3%ADpicas",
+      "locator": "§§45.12a–m; especialmente f–m",
+      "observation": "NGLE §45.12a–m distingue comparativas progresivas, correctivas/de adecuación y prototípicas. La fuente respalda la taxonomía central, pero no necesariamente la selección de ejemplos y recomendaciones pedagógicas."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-14T21:55:30.288Z",
+      "canonicalGeneratedAt": "2026-09-14T21:55:30.288Z",
+      "backupArticleSha256": "47c353c4bc0b71a519b809c8dfda2c70258dccfd22b152a1e11773f1e99fbb2e",
+      "canonicalArticleSha256": "47c353c4bc0b71a519b809c8dfda2c70258dccfd22b152a1e11773f1e99fbb2e",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "NGLE §45.12a–m distingue comparativas progresivas, correctivas/de adecuación y prototípicas. La fuente respalda la taxonomía central, pero no necesariamente la selección de ejemplos y recomendaciones pedagógicas."
+    ],
+    "limitations": [
+      "No existe Evidence canónica y la revisión anterior no separa las tres familias por afirmación y localizador.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "No existe Evidence canónica y la revisión anterior no separa las tres familias por afirmación y localizador.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática/sintaxis \"comparativas progresivas\" \"correctivas\" \"prototípicas\" 45.12",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se abrió NGLE §45.12; los pasajes a–m sustentan las categorías, pero no se completó el mapeo de todos los ejemplos."
+        },
+        {
+          "query": "site:rae.es/gramática \"comparativas progresivas\" \"cada vez\" 45.12a-c",
+          "portal": "RAE/ASALE search",
+          "outcome": "La consulta recuperó el bloque progresivo y ejemplos; las categorías correctivas y prototípicas requieren su propia matriz de evidencia."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/comparativas-progresivas-comparativas-correctivas-o-de-adecuaci%C3%B3n-y-comparativas-protot%C3%ADpicas",
+          "locator": "§§45.12a–m; especialmente f–m",
+          "finding": "NGLE §45.12a–m distingue comparativas progresivas, correctivas/de adecuación y prototípicas. La fuente respalda la taxonomía central, pero no necesariamente la selección de ejemplos y recomendaciones pedagógicas."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré separar las tres construcciones y retirar generalizaciones sin referencia. No se aplicó una modificación porque esta entrega aún es PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (47c353c4bc0b71a519b809c8dfda2c70258dccfd22b152a1e11773f1e99fbb2e); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0750.json no existe y el índice verified.json no incluye MLS-V10-0750. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Completar matriz para §45.12a–m, probar cada ejemplo del artículo y construir Evidence canónica antes de evaluar VERIFIED."
+    }
+  },
+  "originalArticleSha256": "47c353c4bc0b71a519b809c8dfda2c70258dccfd22b152a1e11773f1e99fbb2e",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-14T21:55:30.288Z",
+    "canonicalGeneratedAt": "2026-09-14T21:55:30.288Z",
+    "backupArticleSha256": "47c353c4bc0b71a519b809c8dfda2c70258dccfd22b152a1e11773f1e99fbb2e",
+    "canonicalArticleSha256": "47c353c4bc0b71a519b809c8dfda2c70258dccfd22b152a1e11773f1e99fbb2e",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0750/followup-1-37f11e53bded.json",
+    "sha256": "37f11e53bded028a4dbc6d3419373791959212b9051b33fc69da1097554a52f9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0750-revision.json",
+    "sha256": "37f11e53bded028a4dbc6d3419373791959212b9051b33fc69da1097554a52f9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "47c353c4bc0b71a519b809c8dfda2c70258dccfd22b152a1e11773f1e99fbb2e",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0750.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

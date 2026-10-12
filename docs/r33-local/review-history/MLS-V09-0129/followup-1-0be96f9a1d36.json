@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0129",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.577Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0129.json",
+  "articleGeneratedAt": "2026-09-19T10:13:50.891Z",
+  "articleSha256": "9f9d5cb848bdb5469fe838d9aaa0d7f11c2693a43664a5b095e81d954624726c",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente define un uso del acusativo como objeto directo; no valida todos los verbos/roles ni ejemplos particulares de la ficha.",
+      "Afirmación central inspeccionada: “El objeto directo es una función sintáctica: identifica el grupo nominal que completa directamente el significado de muchos verbos. En ruso, ese grupo aparece con frecuencia en acusativo, aunque el acusativo también tiene otros usos.”. No se obtuvo en esta pasada una fuente primaria con localizador que permita comprobar la afirmación y sus ejemplos para MLS-V09-0129."
+    ],
+    "limitations": [
+      "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Objeto directo en acusativo",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+          "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+          "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples"
+        }
+      ],
+      "rationale": "La fuente define un uso del acusativo como objeto directo; no valida todos los verbos/roles ni ejemplos particulares de la ficha."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+          "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+          "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples"
+        }
+      ],
+      "rationale": "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+      "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The Acc. Sg. of #-declension and o-declension inanimate nouns. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr02_a_1.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:13:50.891Z",
+    "backupGeneratedAt": "2026-09-19T10:13:50.891Z",
+    "canonicalArticleSha256": "9f9d5cb848bdb5469fe838d9aaa0d7f11c2693a43664a5b095e81d954624726c",
+    "backupArticleSha256": "9f9d5cb848bdb5469fe838d9aaa0d7f11c2693a43664a5b095e81d954624726c",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "9f9d5cb848bdb5469fe838d9aaa0d7f11c2693a43664a5b095e81d954624726c",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0129/pre-coordinator.json",
+    "sha256": "07f4f5cd2ce06698989eb7d32df327c01cc433b38acbd73770a4a8ba60709f79",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

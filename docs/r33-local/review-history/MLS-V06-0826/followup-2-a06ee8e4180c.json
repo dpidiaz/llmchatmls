@@ -1,0 +1,133 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0826",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:52:42.406Z",
+  "reviewer": "R33W-local-20261010205126-e2aac2",
+  "assignmentId": "R33A-1791665486589-6ee456",
+  "workerId": "R33W-local-20261010205126-e2aac2",
+  "articlePath": "content/japones/MLS-V06-0826.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "La distinción de そこで como respuesta práctica frente a したがって como conclusión lógica y los ejemplos discursivos requieren fuentes de gramática/discurso con localizadores. No se encontró respaldo exacto en esta pasada.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T09:15:45.757Z) frente a content/japones/MLS-V06-0826.json; article_markdown SHA-256 2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2 / 2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2; coincidencia=true.",
+      "No se encontró fuente primaria con localizadores para la distinción de そこで (respuesta práctica) frente a したがって (conclusión lógica) ni sus ejemplos.",
+      "Follow-up 2026-10-10T20:52:42.406Z; revisión anterior exacta archivada en docs/r33-local/review-history/MLS-V06-0826/before-followup-87f21111d507.json, SHA-256 87f21111d507e6b827aa3ff6e8ea7aeda0c1eb1f2227d358a2c168d5fd9d964a. Hash del artículo vigente 2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2.",
+      "Fuente inspeccionada NINJAL. (s. f.). 認識的ムード（話し手の判断）, § 接続詞.; localizador sección 接続詞: clasificación lógica,逆接,換言; ejemplos de そこで/しかし/つまり/ところが; hallazgo: Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas.",
+      "Fuente inspeccionada NINJAL. (2024). 論文における接続詞と連接関係.; localizador tabla de relaciones de連接: そこで・したがって, しかし, さらに, つまり; hallazgo: Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+    ],
+    "limitations": [
+      "No existe Evidence canónica nueva ni mapa de localizadores claim por claim; por ello claimsVerified=0 y la entrada permanece pendiente.",
+      "La comparación SQL confirma identidad de la versión, pero no prueba exactitud semántica.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Media: los estudios distinguen そこで entre consecuencia lógica y respuesta/acción, pero la entrada combina varios valores sin localizadores claim-level.",
+      "searches": [
+        {
+          "query": "接続詞 さらに しかし ところが つまり NINJAL",
+          "portal": "NINJAL research repository",
+          "outcome": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+        },
+        {
+          "query": "論文 接続詞 そこで したがって なお NINJAL corpus",
+          "portal": "NINJAL corpus study",
+          "outcome": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "NINJAL. (s. f.). 認識的ムード（話し手の判断）, § 接続詞.",
+          "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+          "locator": "sección 接続詞: clasificación lógica,逆接,換言; ejemplos de そこで/しかし/つまり/ところが",
+          "finding": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+        },
+        {
+          "title": "NINJAL. (2024). 論文における接続詞と連接関係.",
+          "url": "https://repository.ninjal.ac.jp/record/3707/files/papers2405.pdf",
+          "locator": "tabla de relaciones de連接: そこで・したがって, しかし, さらに, つまり",
+          "finding": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o reducir la ficha; antes se deben cotejar sus ejemplos y separar descripción de recomendación. Acción específica: Separar los sentidos de そこで y cotejar ejemplos contra NINJAL; corregir la equivalencia genérica con したがって.",
+      "canonicalCheck": "Hash vigente 2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2 confirmado; Evidence existe: false; índice VERIFIED contiene el código: false. assessEntry aún no puede aprobar la ficha porque no existe Evidence canónica completa con claims y localizadores.",
+      "nextConcreteStep": "Separar los sentidos de そこで y cotejar ejemplos contra NINJAL; corregir la equivalencia genérica con したがって."
+    }
+  },
+  "originalArticleSha256": "2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2",
+  "verifiedArticleSha256": "2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T09:15:45.757Z",
+    "backupArticleSha256": "2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2",
+    "canonicalArticleSha256": "2fefacfea43a11a029f9d1b31b272b0e85f6e3301f4e1e05fe90544136eae7e2",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "apa7": "NINJAL. (s. f.). 認識的ムード（話し手の判断）, § 接続詞.",
+      "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+      "locator": "sección 接続詞: clasificación lógica,逆接,換言; ejemplos de そこで/しかし/つまり/ところが",
+      "supports": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+    },
+    {
+      "apa7": "NINJAL. (2024). 論文における接続詞と連接関係.",
+      "url": "https://repository.ninjal.ac.jp/record/3707/files/papers2405.pdf",
+      "locator": "tabla de relaciones de連接: そこで・したがって, しかし, さらに, つまり",
+      "supports": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0826/followup-1-87f21111d507.json",
+    "sha256": "87f21111d507e6b827aa3ff6e8ea7aeda0c1eb1f2227d358a2c168d5fd9d964a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "Media: los estudios distinguen そこで entre consecuencia lógica y respuesta/acción, pero la entrada combina varios valores sin localizadores claim-level.",
+    "nextStep": "Separar los sentidos de そこで y cotejar ejemplos contra NINJAL; corregir la equivalencia genérica con したがって."
+  },
+  "canonicalEvidenceFound": false,
+  "assessEntry": {
+    "attempted": false,
+    "reason": "Sin Evidence canónica; pendiente construirla y ejecutar assessEntry."
+  },
+  "searches": [
+    {
+      "query": "接続詞 さらに しかし ところが つまり NINJAL",
+      "portal": "NINJAL research repository",
+      "outcome": "Clasifica familias de conectores y algunos ejemplos; no prueba todos los matices de uso redactados en las fichas."
+    },
+    {
+      "query": "論文 接続詞 そこで したがって なお NINJAL corpus",
+      "portal": "NINJAL corpus study",
+      "outcome": "Estudio de conectores en artículos académicos; da clasificación empírica, no cobertura completa para todos los sentidos/ejemplos."
+    }
+  ]
+}

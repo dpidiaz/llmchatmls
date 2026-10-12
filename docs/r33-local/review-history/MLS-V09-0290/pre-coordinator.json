@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0290",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T10:06:17.345Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100534-a78b9b",
+  "assignmentId": "R33A-1791626734319-1d0bb4",
+  "articlePath": "content/ruso/MLS-V09-0290.json",
+  "articleGeneratedAt": "2026-09-19T10:13:26.125Z",
+  "articleSha256": "aa940058f7c351519c90abe62d6b82cc403745a1e67d93908827dca2cea9640b",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite en modo de solo lectura, y consulta dirigida de las fuentes listadas. PENDING_SOURCE_SUPPORT se conserva mientras las referencias no respalden todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha «Pronombre они en dativo» (content/ruso/MLS-V09-0290.json; sha256 aa940058f7c351519c90abe62d6b82cc403745a1e67d93908827dca2cea9640b). La ficha da они → им en dativo y menciona el régimen de звонить/помогать y dativo experiencial impersonal. La tabla de Gramota confirma им como forma dativa de они."
+    ],
+    "limitations": [
+      "La fuente cotejada confirma paradigma, pero no los marcos de звонить/помогать ni los usos impersonales y traducciones de la ficha."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "Грамматические признаки местоимений-существительных",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/grammaticheskie-priznaki-mestoimeniy-sushchestvitelnykh",
+      "provider": "Грамота.ру",
+      "use": "Tabla de declinación: они → им en dativo."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "aa940058f7c351519c90abe62d6b82cc403745a1e67d93908827dca2cea9640b",
+    "backupSha256": "aa940058f7c351519c90abe62d6b82cc403745a1e67d93908827dca2cea9640b",
+    "articleGeneratedAt": "2026-09-19T10:13:26.125Z",
+    "backupGeneratedAt": "2026-09-19T10:13:26.125Z"
+  },
+  "originalArticleSha256": "aa940058f7c351519c90abe62d6b82cc403745a1e67d93908827dca2cea9640b",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

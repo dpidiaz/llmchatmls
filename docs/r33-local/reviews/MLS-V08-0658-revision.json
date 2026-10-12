@@ -1,0 +1,124 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0658",
+  "language": "coreano",
+  "reviewedAt": "2026-10-12T16:00:53.789Z",
+  "reviewer": "R33 local source-followup review",
+  "articlePath": "content/coreano/MLS-V08-0658.json",
+  "status": "VERIFIED",
+  "claimsTotal": 4,
+  "claimsVerified": 4,
+  "coverageComplete": true,
+  "citationReady": true,
+  "originalArticleSha256": "f53aeb6ed3ab921c89344e3d8ac3a06e835f2167c3864f240b50ef7356e826c0",
+  "verifiedArticleSha256": "ff2ee1f4ce9c7fd3529f36e734c2ff1b02ebdffdd83cd7f8585e0114c2f88ea4",
+  "articleSha256": "ff2ee1f4ce9c7fd3529f36e734c2ff1b02ebdffdd83cd7f8585e0114c2f88ea4",
+  "canonicalArticleSha256": "ff2ee1f4ce9c7fd3529f36e734c2ff1b02ebdffdd83cd7f8585e0114c2f88ea4",
+  "originalStatus": "PENDING_SOURCE_SUPPORT",
+  "followupRound": 9,
+  "phase": "source-followup",
+  "workerId": "R33W-local-20261012152808-572e6e",
+  "assignmentId": "R33A-1791818888838-78b06c",
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0658/followup-8-58f8186d5456.json",
+    "sha256": "58f8186d5456d372b65cbfdb7bd1d05df9ac08e976009d08106cdfbd6e8cf6d1",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/review-history/MLS-V08-0658/before-followup-10-R33A-1791818888838-78b06c.json",
+    "sha256": "58f8186d5456d372b65cbfdb7bd1d05df9ac08e976009d08106cdfbd6e8cf6d1",
+    "status": "PENDING_SOURCE_SUPPORT"
+  },
+  "semanticReview": {
+    "method": "Se inspeccionó el material primario de la unidad 01 de ‘-기는커녕’ en Ewha Korean 4 y la entrada completa de 커녕 del diccionario oficial del National Institute of Korean Language. Se reemplazaron las generalizaciones y ejemplos anteriores por los ejemplos de esas dos fuentes; se retiró el contraste no documentado con -기는 하지만.",
+    "findings": [
+      "Ewha Korean 4, Part 1, entrada 01, describe A/V+기는커녕 como comparación entre lo anterior y lo posterior que enfatiza que lo primero no merece mencionarse; indica que se usa principalmente en situaciones negativas.",
+      "La misma unidad presenta el diálogo 자주 만나기는커녕 바빠서 얼굴도 못 봐요 y el ejemplo 잘 보기는커녕 실수를 많이 해서 시험을 망쳤어요.",
+      "El Korean-English Learners’ Dictionary clasifica 커녕 como partícula posposicional, indica que se escribe unida a la palabra anterior, y define dos sentidos comparativos que enfatizan/niegan lo anterior o significan ‘not to mention, but rather’.",
+      "El diccionario da los ejemplos 밥커녕 죽도 삼키기 힘들다 y 집안일커녕 누워서 꼼짝도 안 해; los ejemplos se tradujeron al español en la entrada y se identificaron como traducciones editoriales."
+    ],
+    "limitations": [
+      "Ewha describe el patrón A/V+기는커녕 principalmente en situaciones negativas; la entrada ya no lo presenta como regla sin excepción.",
+      "La evidencia del diccionario define principalmente 커녕 con nombres y no se usa sola para generalizar todas las restricciones de A/V+기는커녕.",
+      "Las fuentes respaldan los ejemplos citados, pero no una equivalencia uniforme ‘en vez de’ para cualquier contexto."
+    ],
+    "claimLevelResult": "Las cuatro afirmaciones fueron cotejadas con fuentes directas y localizadores de sección/entrada; Evidence corresponde al hash vigente y assessEntry pasó antes y después de verificar."
+  },
+  "sourceFollowup": {
+    "reviewedAt": "2026-10-12T16:00:53.789Z",
+    "assignmentId": "R33A-1791818888838-78b06c",
+    "searches": [
+      {
+        "query": "Ewha Korean 4 -기는커녕 Part 1 준비합시다 source passage examples",
+        "portal": "Búsqueda por título del manual universitario y la forma gramatical; inspección del libro completo disponible en PDF",
+        "outcome": "Se consultó el apartado 01, su explicación y sus ejemplos; se registraron la función comparativa, el uso principalmente negativo y dos ejemplos directos."
+      },
+      {
+        "query": "site:krdict.korean.go.kr/eng/dicSearch/SearchView ParaWordNo=86168 커녕 definition",
+        "portal": "Korean-English Learners’ Dictionary del National Institute of Korean Language",
+        "outcome": "Se abrió la entrada oficial y se cotejaron categoría, ortografía unida, dos sentidos y ejemplos de los localizadores anotados."
+      },
+      {
+        "query": "Ewha Womans University Press Ewha Korean 4 Language Center publication metadata",
+        "portal": "Sitio de Ewha Womans University Press y catálogo editorial",
+        "outcome": "Se cotejaron título de la serie, institución responsable y datos editoriales; el libro abierto fue inspeccionado en el apartado gramatical pertinente."
+      }
+    ],
+    "primarySourcesInspected": [
+      {
+        "title": "Ewha Korean 4",
+        "url": "https://linuxmasterrace.com/korean/downloads/ewha_korean_4.compressed.pdf",
+        "locator": "Part 1 ‘준비합시다’, entry 01 ‘-기는커녕’, dialogue, explanation, examples and practice",
+        "finding": "Defines the A/V form as comparative emphasis, mainly in negative situations, and provides the examples retained in the entry."
+      },
+      {
+        "title": "커녕",
+        "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86168&nation=eng&nationCode=6",
+        "locator": "Headword 커녕, senses 1–2; lines 190–224",
+        "finding": "Official dictionary entry for category, orthography, comparison/negation semantics, secondary sense, and the cited noun examples."
+      }
+    ],
+    "conclusion": "La ficha se redujo a lo que documentan el material didáctico primario y el diccionario oficial; no se afirma una lectura invariable ni se conserva la equivalencia imprecisa ‘en vez de’."
+  },
+  "sourceReferences": [
+    {
+      "sourceId": "ewha-language-center-2011-ewha-korean-4",
+      "title": "Ewha Korean 4",
+      "canonicalUrl": "https://linuxmasterrace.com/korean/downloads/ewha_korean_4.compressed.pdf",
+      "locator": "Part 1 ‘준비합시다’, entry 01 ‘-기는커녕’",
+      "finding": "Respalda formación A/V y N, el sentido comparativo de énfasis, su uso principalmente negativo y los dos ejemplos citados.",
+      "apa7": "Ewha Womans University Language Center. (2011). Ewha Korean 4. Ewha Womans University Press. https://linuxmasterrace.com/korean/downloads/ewha_korean_4.compressed.pdf"
+    },
+    {
+      "sourceId": "nikl-korean-english-learners-dictionary-keonyeong-86168",
+      "title": "커녕",
+      "canonicalUrl": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86168&nation=eng&nationCode=6",
+      "locator": "Headword 커녕, senses 1–2, lines 190–224",
+      "finding": "Respalda la categoría y el uso unido al nombre, los dos sentidos léxicos y los ejemplos citados.",
+      "apa7": "National Institute of Korean Language. (s. f.). 커녕. In Korean-English Learners’ Dictionary. National Institute of Korean Language. Recuperado el 12 de octubre de 2026, de https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86168&nation=eng&nationCode=6"
+    }
+  ],
+  "canonicalEvidenceStatus": "VERIFIED",
+  "preflight": {
+    "ok": true,
+    "evidenceStatus": "VERIFIED",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/coreano/MLS-V08-0658.json",
+    "evidenceRevision": 2,
+    "claimsTotal": 4,
+    "claimsVerified": 4,
+    "coverageComplete": true,
+    "citationReady": true,
+    "errors": [],
+    "warnings": []
+  },
+  "safety": {
+    "cloudflareInteractions": 0,
+    "d1Reads": 0,
+    "d1Writes": 0,
+    "apiCalls": 0,
+    "pushes": 0,
+    "merges": 0,
+    "deployments": 0
+  }
+}

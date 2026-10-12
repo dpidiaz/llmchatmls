@@ -1,0 +1,135 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0168",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:22:26.529Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/coreano/MLS-V08-0168.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "국립국어원 문법 자료는 생략 조건을 설명하지만 ficha의 각 예문이 그 조건을 충족하는지 대조해야 한다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "국립국어원 문법 자료는 생략 조건을 설명하지만 ficha의 각 예문이 그 조건을 충족하는지 대조해야 한다.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr Korean particle 에 시간 장소 에게 한테 께 까지 랑 이랑",
+          "portal": "한국어기초사전 검색",
+          "outcome": "관련 항목 검색 후 사전에서 뜻풀이와 문형을 직접 대조했다."
+        },
+        {
+          "query": "site:korean.go.kr \"오늘\" \"내일\" \"에\" 시간 부사격 조사 생략",
+          "portal": "국립국어원 검색",
+          "outcome": "시간표현 등 개별 범주에 관해 직접 관련 자료를 확인했다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "한국어기초사전 을",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86355&nation=eng",
+          "locator": "뜻풀이, 받침 뒤 결합, 빵을·소설책을 예문",
+          "finding": "받침 뒤 을과 기본 목적격 기능 지지."
+        },
+        {
+          "title": "국립국어원, 표준국어문법론/목적어와 목적격 조사 생략",
+          "url": "https://www.korean.go.kr/common/download.do%3Bfront%3DA956746FC987E77C7754D90D8F71D3A1?c_file_name=5cf42b79-1c29-4e7c-aaf2-ce86b5486691_0.pdf&file_path=reportData&o_file_name=2014%EB%85%84+%ED%91%9C%EC%A4%80%EA%B5%AD%EC%96%B4%EB%AC%B8%EB%B2%95%EA%B0%9C%EB%B0%9C.pdf",
+          "locator": "PDF p. 181, §3.1.2.2 「목적격 조사와 목적어의 생략」",
+          "finding": "주술 관계가 분명한 일상 대화에서 을/를이 생략될 수 있고 맥락으로 목적어가 분명할 때 목적어 자체도 생략될 수 있음을 설명한다."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "§3.1.2.2의 조건을 기사 예문 하나씩에 적용하고 부적합한 생략 설명을 좁힌다."
+    }
+  },
+  "originalArticleSha256": "9b13f55c5c20d187b0662ae2a4091badb91cd201cd5de8a595dd8a864c4249fb",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "workerId": "R33W-local-20261011002037-241d84",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "followupRound": 2,
+  "canonicalArticleSha256": "9b13f55c5c20d187b0662ae2a4091badb91cd201cd5de8a595dd8a864c4249fb",
+  "verifiedArticleSha256": "9b13f55c5c20d187b0662ae2a4091badb91cd201cd5de8a595dd8a864c4249fb",
+  "followupSources": [
+    {
+      "title": "한국어기초사전 을",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86355&nation=eng",
+      "locator": "뜻풀이, 받침 뒤 결합, 빵을·소설책을 예문",
+      "finding": "받침 뒤 을과 기본 목적격 기능 지지.",
+      "result": "PARTIAL"
+    },
+    {
+      "title": "국립국어원, 표준국어문법론/목적어와 목적격 조사 생략",
+      "url": "https://www.korean.go.kr/common/download.do%3Bfront%3DA956746FC987E77C7754D90D8F71D3A1?c_file_name=5cf42b79-1c29-4e7c-aaf2-ce86b5486691_0.pdf&file_path=reportData&o_file_name=2014%EB%85%84+%ED%91%9C%EC%A4%80%EA%B5%AD%EC%96%B4%EB%AC%B8%EB%B2%95%EA%B0%9C%EB%B0%9C.pdf",
+      "locator": "PDF p. 181, §3.1.2.2 「목적격 조사와 목적어의 생략」",
+      "finding": "주술 관계가 분명한 일상 대화에서 을/를이 생략될 수 있고 맥락으로 목적어가 분명할 때 목적어 자체도 생략될 수 있음을 설명한다.",
+      "result": "PARTIAL"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.529Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "한국어기초사전 을"
+    ]
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0168/followup-1-f53e4bbe561a.json",
+    "sha256": "f53e4bbe561a9dec35f8d35304b358f8018a6e2f2623d6c9a411133fa7776323",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "sourceChecks": [
+    {
+      "sourceTitle": "한국어기초사전 을",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86355&nation=eng",
+      "locator": "뜻풀이, 받침 뒤 결합, 빵을·소설책을 예문",
+      "result": "PARTIAL",
+      "finding": "받침 뒤 을과 기본 목적격 기능 지지."
+    },
+    {
+      "sourceTitle": "국립국어원, 표준국어문법론/목적어와 목적격 조사 생략",
+      "url": "https://www.korean.go.kr/common/download.do%3Bfront%3DA956746FC987E77C7754D90D8F71D3A1?c_file_name=5cf42b79-1c29-4e7c-aaf2-ce86b5486691_0.pdf&file_path=reportData&o_file_name=2014%EB%85%84+%ED%91%9C%EC%A4%80%EA%B5%AD%EC%96%B4%EB%AC%B8%EB%B2%95%EA%B0%9C%EB%B0%9C.pdf",
+      "locator": "PDF p. 181, §3.1.2.2 「목적격 조사와 목적어의 생략」",
+      "result": "PARTIAL",
+      "finding": "주술 관계가 분명한 일상 대화에서 을/를이 생략될 수 있고 맥락으로 목적어가 분명할 때 목적어 자체도 생략될 수 있음을 설명한다."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "한국어기초사전 을",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86355&nation=eng",
+      "locator": "뜻풀이, 받침 뒤 결합, 빵을·소설책을 예문",
+      "finding": "받침 뒤 을과 기본 목적격 기능 지지."
+    },
+    {
+      "title": "국립국어원, 표준국어문법론/목적어와 목적격 조사 생략",
+      "url": "https://www.korean.go.kr/common/download.do%3Bfront%3DA956746FC987E77C7754D90D8F71D3A1?c_file_name=5cf42b79-1c29-4e7c-aaf2-ce86b5486691_0.pdf&file_path=reportData&o_file_name=2014%EB%85%84+%ED%91%9C%EC%A4%80%EA%B5%AD%EC%96%B4%EB%AC%B8%EB%B2%95%EA%B0%9C%EB%B0%9C.pdf",
+      "locator": "PDF p. 181, §3.1.2.2 「목적격 조사와 목적어의 생략」",
+      "finding": "주술 관계가 분명한 일상 대화에서 을/를이 생략될 수 있고 맥락으로 목적어가 분명할 때 목적어 자체도 생략될 수 있음을 설명한다."
+    }
+  ],
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "국립국어원 문법 자료는 생략 조건을 설명하지만 ficha의 각 예문이 그 조건을 충족하는지 대조해야 한다.",
+    "nextStep": "§3.1.2.2의 조건을 기사 예문 하나씩에 적용하고 부적합한 생략 설명을 좁힌다."
+  }
+}

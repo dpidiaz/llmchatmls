@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0729",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0729.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "Digital Daijisen, Kotobank, entrada 続ける, sentidos 1–2, líneas 15–20, define mantener un estado/acción sin interrupción y repetir una cosa sin intervalo. Esto apoya el núcleo semántico; no valida los ejemplos compuestos de la ficha. El ejemplo citado de NINJAL en la revisión anterior no se volvió a inspeccionar en este seguimiento."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El diccionario confirma continuidad y repetición sin intervalo, pero la ficha no enlaza sus ejemplos ni delimita usos eventivos frente a estados.",
+      "searches": [
+        {
+          "query": "site:kotobank.jp/word 続ける 補助動詞 動詞 継続 意味",
+          "portal": "Kotobank search",
+          "outcome": "Entrada directa apoya continuidad y repetición; no todos los ejemplos compuestos de la ficha."
+        },
+        {
+          "query": "site:repository.ninjal.ac.jp 続ける 朝まで 飲み続ける 雨が降り続いた",
+          "portal": "NINJAL repository search",
+          "outcome": "Se localizaron ejemplos de 続ける en material NINJAL; falta Evidence por claim y ejemplos exactos de la entrada."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "小学館. (s. f.). 続ける. デジタル大辞泉, コトバンク.",
+          "url": "https://kotobank.jp/word/%E7%B6%9A%E3%81%91%E3%82%8B-571909",
+          "locator": "sentidos 1–2, líneas 15–20",
+          "finding": "Apoya continuidad sin interrupción y repetición; no valida los ejemplos editoriales restantes."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reemplazar ejemplos propios por ejemplos exactos de diccionario/NINJAL y limitar el contraste continuidad-repetición; falta localizar y enlazar cada claim.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "El diccionario confirma continuidad y repetición sin intervalo, pero la ficha no enlaza sus ejemplos ni delimita usos eventivos frente a estados.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0729/followup-2-bc93f19c2f81.json",
+    "sha256": "bc93f19c2f81629a825aed0721a5990a91785e446e7a33896730168222ee7793",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

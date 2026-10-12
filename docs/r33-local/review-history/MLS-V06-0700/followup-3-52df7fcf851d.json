@@ -1,0 +1,59 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0700",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0700.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "El resultado de una publicación alojada en TUFS sobre Nにわたって menciona nombres de cantidad/periodo y construcciones con にわたって, pero el intento de abrir el PDF falló; no se considera pasaje inspeccionado ni soporte verificable."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Se encontró un artículo académico candidato con sintaxis/categoría de nombre cuantitativo, pero el PDF devolvió error y no se cotejó; falta fuente accesible para alcance temporal/espacial y ejemplos.",
+      "searches": [
+        {
+          "query": "日本語 文法 にわたって 名詞 期間 範囲 教材 PDF",
+          "portal": "Japanese academic web search",
+          "outcome": "Se localizó candidato de TUFS sobre Nにわたって; PDF no se pudo abrir en esta revisión."
+        },
+        {
+          "query": "site:kotobank.jp/word にわたって に渡る 意味",
+          "portal": "Kotobank search",
+          "outcome": "No se obtuvo una entrada directa adecuada para toda la construcción ni para sus ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [],
+      "contentCorrectionConsidered": "Consideré reducir afirmaciones a una sola acepción lexicográfica solo después de localizar texto accesible; hace falta acceso al paper de TUFS o una fuente institucional alternativa.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 5378ff5d129dadcacbf7801ce17c0be2e65c7b88116a59d5b54f9ece5506e217. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Se encontró un artículo académico candidato con sintaxis/categoría de nombre cuantitativo, pero el PDF devolvió error y no se cotejó; falta fuente accesible para alcance temporal/espacial y ejemplos.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "5378ff5d129dadcacbf7801ce17c0be2e65c7b88116a59d5b54f9ece5506e217",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0700/followup-2-9b0e1a7133b2.json",
+    "sha256": "9b0e1a7133b23b01acfd093d64f22716b73d4a5c9f6e6a38ab5490adb24d7af5",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

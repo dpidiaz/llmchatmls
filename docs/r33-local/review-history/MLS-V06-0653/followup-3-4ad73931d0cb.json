@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0653",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0653.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 11,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, lección 意志形, líneas 48–56, incluye 来よう en un ejemplo de intención estándar. Un resultado del repositorio NINJAL también expone variantes dialectales como コー, pero el PDF no pudo abrirse en esta revisión; esa variante no se cuenta como fuente inspeccionada ni universal."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Las fuentes apoyan la forma volitiva 来よう en japonés estándar y documentan variantes dialectales; la ficha incluye más variantes/usos y ejemplos que exigen cotejo puntual.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson16/step4/explanation/065.html 来よう 意志形",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Confirma 来よう estándar como forma volitiva y da un ejemplo; cobertura de la ficha parcial."
+        },
+        {
+          "query": "site:repository.ninjal.ac.jp/record/1364/files/kkrep_016.pdf コー 意志形 来る",
+          "portal": "NINJAL repository search",
+          "outcome": "Informe dialectológico identifica コー como forma de intención; no valida automáticamente otras variantes o ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 意志形：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson16/step4/explanation/065.html",
+          "locator": "líneas 48–56",
+          "finding": "Ejemplifica 来よう en volitivo estándar; las demás variantes y ejemplos de la ficha requieren cotejo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré separar claramente japonés estándar de formas dialectales y eliminar cualquier generalización no localizada; falta cotejar cada forma listada.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: e1d39b5e1bc310f30de76305c322d4f14b3a63aaeb535338c45be5b77aa7d725. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "Las fuentes apoyan la forma volitiva 来よう en japonés estándar y documentan variantes dialectales; la ficha incluye más variantes/usos y ejemplos que exigen cotejo puntual.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "e1d39b5e1bc310f30de76305c322d4f14b3a63aaeb535338c45be5b77aa7d725",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0653/followup-2-72b4207f2840.json",
+    "sha256": "72b4207f2840de6fa00543d88922a5e2ba8ac253b885e57f0eaae54e628786ff",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

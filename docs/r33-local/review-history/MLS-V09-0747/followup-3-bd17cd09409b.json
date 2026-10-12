@@ -1,0 +1,121 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0747",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:38:07.911Z",
+  "reviewer": "R33 local source-followup",
+  "workerId": "R33W-local-20261011103604-3d9826",
+  "assignmentId": "R33A-1791714964251-888f1b",
+  "articlePath": "content/ruso/MLS-V09-0747.json",
+  "articleGeneratedAt": "2026-09-19T09:20:10.518Z",
+  "articleSha256": "38465c9a844787c893194c48884eb9cbcf5263b7504e8052b9c8cfda9b881127",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento gratuito con dos búsquedas temáticas distintas, lectura de la revisión anterior, búsqueda de fuentes primarias de Gramota.ru y cotejo del hash del articleMarkdown.",
+    "findings": [
+      "Se relee la revisión anterior docs/r33-local/reviews/MLS-V09-0747-revision.json, SHA-256 c0fbc7fe080721658e869843485c9c7130c7f13e07108c74cb4f1c3236da6793; bloqueo anterior: La fuente define -ну- como sufijo de acción única y respalda кричать—крикнуть y verbos análogos; no valida todos los verbos, su semelfactividad uniforme, frecuencia ni la descripción de aspecto futuro en cada ejemplo.",
+      "The course states that aspect pairs may be formed by prefixation or suffixes; -ну- can express single occurrence, secondary imperfectives are formed by -ива-/-ыва- (among others), and prefixes often add lexical meaning alongside aspect. This does not establish that infinitive endings -ать/-ять generally mark aspect or validate all lexemes/examples.",
+      "El artículo ну- semelfactivo todavía contiene afirmaciones y ejemplos que no se pueden cerrar con los pasajes encontrados; no se certifica por apoyo general de tema."
+    ],
+    "limitations": [
+      "No hay localizador comprobado para cada afirmación material, ejemplo ruso y traducción; los pasajes documentados solo cubren el alcance expuesto en primarySourcesInspected.",
+      "La consulta actual a Gramota devolvió extractos, pero el acceso directo por web respondió 403; por ello la evidencia de búsqueda no basta para aprobar una afirmación central cuando requiere lectura contextual completa.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; el estado continúa pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El patrón morfológico/aspectual no valida por sí solo las afirmaciones léxicas y todos los ejemplos del artículo. Bloqueo previo persistente: La fuente define -ну- como sufijo de acción única y respalda кричать—крикнуть y verbos análogos; no valida todos los verbos, su semelfactividad uniforme, frecuencia ni la descripción de aspecto futuro en cada ejemplo.",
+      "searches": [
+        {
+          "query": "site:gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs глагол вид семельфактивный ну приставка совершенный вид",
+          "portal": "Búsqueda web de Gramota.ru / portal de diccionarios y referencias lingüísticas",
+          "outcome": "La consulta encontró una entrada de referencia lingüística pertinente o confirmó que la fuente consultada es solo ortográfica/no responde a la afirmación central. Se leyó el extracto devuelto y se anotó el alcance; la apertura directa de la página devolvió 403."
+        },
+        {
+          "query": "site:gramota.ru/poisk?mode=slovari кричать крикнуть однократное действие -ну-",
+          "portal": "Búsqueda web de Gramota.ru / portal de diccionarios y referencias lingüísticas",
+          "outcome": "Segunda consulta, con formulación/objetivo diferente para localizar un diccionario o sección gramatical específica. El extracto citado apoya solo el punto delimitado; no resuelve las afirmaciones restantes ni se usan snippets ajenos como prueba."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Вид как морфологический признак глагола",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/vid-kak-morfologicheskiy-priznak-glagola",
+          "locator": "Section “Вид как морфологический признак глагола”: paragraphs on perfective formation, prefix contribution, suffix -ну- (однократность), and -ива-/-ыва- secondary imperfectives.",
+          "finding": "The course states that aspect pairs may be formed by prefixation or suffixes; -ну- can express single occurrence, secondary imperfectives are formed by -ива-/-ыва- (among others), and prefixes often add lexical meaning alongside aspect. This does not establish that infinitive endings -ать/-ять generally mark aspect or validate all lexemes/examples. Se leyó el extracto devuelto por la búsqueda del portal; la apertura directa del endpoint de Gramota respondió 403 en esta sesión, por lo que no se toma como certificación completa."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar o corregir las afirmaciones de “ну- semelfactivo” al alcance de los localizadores. No se modificó el contenido porque aún falta leer la fuente completa y validar ejemplos/localizadores uno a uno; una corrección sin ese cotejo podría cambiar el sentido sin respaldo.",
+      "canonicalCheck": "articleMarkdown SHA-256 actual 38465c9a844787c893194c48884eb9cbcf5263b7504e8052b9c8cfda9b881127, coincide con el hash base del lease. No consta Evidence canónica aprobada ni assessEntry exitoso para MLS-V09-0747; no se marca VERIFIED.",
+      "nextConcreteStep": "Localizar una gramática académica abierta o corpus con un localizador directo para las afirmaciones aún no respaldadas de MLS-V09-0747; revisar ejemplos y traducciones uno por uno, corregir el artículo solo si el respaldo delimita el sentido, crear Evidence y ejecutar assessEntry con el hash vigente."
+    }
+  },
+  "consultedSources": [
+    {
+      "title": "Вид как морфологический признак глагола",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/vid-kak-morfologicheskiy-priznak-glagola",
+      "provider": "Грамота.ру / referencia académica o lexicográfica gratuita",
+      "use": "The course states that aspect pairs may be formed by prefixation or suffixes; -ну- can express single occurrence, secondary imperfectives are formed by -ива-/-ыва- (among others), and prefixes often add lexical meaning alongside aspect. This does not establish that infinitive endings -ать/-ять generally mark aspect or validate all lexemes/examples."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "Вид как морфологический признак глагола",
+      "author": "Е. И. Литневская",
+      "year": null,
+      "sourceType": "Diccionario o referencia gramatical gratuita",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/vid-kak-morfologicheskiy-priznak-glagola",
+      "locator": "Section “Вид как морфологический признак глагола”: paragraphs on perfective formation, prefix contribution, suffix -ну- (однократность), and -ива-/-ыва- secondary imperfectives.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "The course states that aspect pairs may be formed by prefixation or suffixes; -ну- can express single occurrence, secondary imperfectives are formed by -ива-/-ыва- (among others), and prefixes often add lexical meaning alongside aspect. This does not establish that infinitive endings -ать/-ять generally mark aspect or validate all lexemes/examples."
+    }
+  ],
+  "sourceReferences": [
+    {
+      "title": "Вид как морфологический признак глагола",
+      "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/vid-kak-morfologicheskiy-priznak-glagola",
+      "authorityTier": "B",
+      "apa7": "Грамота.ру. (s. f.). *Вид как морфологический признак глагола*. https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/vid-kak-morfologicheskiy-priznak-glagola"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "sourceAudit": {
+    "method": "Seguimiento de fuente primaria pública gratuita; limitaciones de acceso y alcance registradas.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "El patrón morfológico/aspectual no valida por sí solo las afirmaciones léxicas y todos los ejemplos del artículo. Bloqueo previo persistente: La fuente define -ну- como sufijo de acción única y respalda кричать—крикнуть y verbos análogos; no valida todos los verbos, su semelfactividad uniforme, frecuencia ni la descripción de aspecto futuro en cada ejemplo."
+  },
+  "originalArticleSha256": "38465c9a844787c893194c48884eb9cbcf5263b7504e8052b9c8cfda9b881127",
+  "verifiedArticleSha256": "38465c9a844787c893194c48884eb9cbcf5263b7504e8052b9c8cfda9b881127",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "priorReviewObserved": {
+    "path": "docs/r33-local/reviews/MLS-V09-0747-revision.json",
+    "sha256": "c0fbc7fe080721658e869843485c9c7130c7f13e07108c74cb4f1c3236da6793",
+    "status": "PENDING_SOURCE_SUPPORT"
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "El patrón morfológico/aspectual no valida por sí solo las afirmaciones léxicas y todos los ejemplos del artículo. Bloqueo previo persistente: La fuente define -ну- como sufijo de acción única y respalda кричать—крикнуть y verbos análogos; no valida todos los verbos, su semelfactividad uniforme, frecuencia ni la descripción de aspecto futuro en cada ejemplo.",
+    "nextStep": "Localizar una gramática académica abierta o corpus con un localizador directo para las afirmaciones aún no respaldadas de MLS-V09-0747; revisar ejemplos y traducciones uno por uno, corregir el artículo solo si el respaldo delimita el sentido, crear Evidence y ejecutar assessEntry con el hash vigente."
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0747/followup-2-c0fbc7fe0807.json",
+    "sha256": "c0fbc7fe080721658e869843485c9c7130c7f13e07108c74cb4f1c3236da6793",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

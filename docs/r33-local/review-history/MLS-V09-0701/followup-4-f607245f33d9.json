@@ -1,0 +1,135 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0701",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T11:05:05.873Z",
+  "reviewer": "R33 local source-follow-up review",
+  "assignmentId": "R33A-1791716512635-2e6015",
+  "workerId": "R33W-local-20261011110152-cf7916",
+  "phase": "source-followup",
+  "followupRound": 4,
+  "articlePath": "content/ruso/MLS-V09-0701.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Se reabrió la revisión canónica previa; se comprobaron los hashes del lease y se inspeccionaron fuentes universitarias gratuitas nuevas con localizadores de página/línea. Los límites de alcance permanecen explícitos.",
+    "findings": [
+      "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+      "Revisión previa preservada: docs/r33-local/reviews/MLS-V09-0701-revision.json, SHA-256 79f6d87d2eca3da0ed1e53c37998bc4a6b5028801d1037d016121233cc33c27d.",
+      "Afirmación material pendiente: contrastes modales y construcciones con нужно, надо, можно y нельзя."
+    ],
+    "limitations": [
+      "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+      "No se alteró el artículo ni se creó Evidence canónica; assessEntry no pasó, así que se conserva PENDING_SOURCE_SUPPORT.",
+      "FREE ONLY: cero Cloudflare, D1 y APIs pagadas."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+      "searches": [
+        {
+          "query": "Russian impersonal modal words надо нужно можно нельзя infinitive grammar",
+          "portal": "Búsqueda web de literatura académica y fuentes universitarias de acceso abierto",
+          "outcome": "Se encontró la fuente universitaria indicada en primarySourcesInspected; cubre solo el pasaje localizado, no la totalidad de las afirmaciones ni ejemplos."
+        },
+        {
+          "query": "надо нужно можно нельзя безличные предикативы инфинитив русский справочник",
+          "portal": "Búsqueda web en ruso de gramáticas, repositorios académicos y recursos lexicográficos gratuitos",
+          "outcome": "Se encontró la fuente universitaria indicada en primarySourcesInspected; cubre solo el pasaje localizado, no la totalidad de las afirmaciones ni ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Russian Aspect in Conversation, 3.1 Phase Verbs",
+          "url": "https://opentext.ku.edu/russianaspect/chapter/3-1-phase-verbs/",
+          "locator": "§ PHASE VERBS, lines 84–96 and 120–149: phase-verb inventory, infinitive complements, aspect restrictions and negation examples; no coverage of забыть reminder pragmatics.",
+          "finding": "El texto universitario inspeccionado confirma la clase de verbos de fase y complementos infinitivos imperfectivos, con restricciones de alcance explícitas; no respalda pragmática ajena a esa construcción."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró reducir o reformular cada afirmación a lo que permiten los localizadores inspeccionados. No se cambió el artículo en este pase porque aún hay claims y ejemplos sin respaldo verificable; cualquier corrección debe cotejarse y pasar validación canónica.",
+      "canonicalCheck": "SHA-256 del articleMarkdown 232fb1ee4ca85f0e0401025080c10e58a0df18066132f43e850b10a0cc6da885 coincide con la base del lease. No se generó Evidence canónica ni assessEntry exitoso para MLS-V09-0701; no se marca VERIFIED.",
+      "nextConcreteStep": "Localizar una gramática académica o estudio abierto que cubra los matices y cotejar cada ejemplo pendiente; corregir solo con respaldo; después crear Evidence y ejecutar assessEntry e índice canónico con el hash vigente."
+    },
+    "consultedSources": [
+      {
+        "title": "Russian Aspect in Conversation, 3.1 Phase Verbs",
+        "url": "https://opentext.ku.edu/russianaspect/chapter/3-1-phase-verbs/",
+        "locator": "§ PHASE VERBS, lines 84–96 and 120–149: phase-verb inventory, infinitive complements, aspect restrictions and negation examples; no coverage of забыть reminder pragmatics.",
+        "finding": "El texto universitario inspeccionado confirma la clase de verbos de fase y complementos infinitivos imperfectivos, con restricciones de alcance explícitas; no respalda pragmática ajena a esa construcción."
+      }
+    ],
+    "claimAssessments": []
+  },
+  "exceptionalDisposition": {
+    "blockingCriterion": "Las búsquedas localizaron usos literarios de estas formas, pero no una explicación gramatical contrastiva con localizadores para los cuatro predicados y sus construcciones.",
+    "searches": [
+      {
+        "query": "Russian academic grammar contrastes modales y construcciones con нужно, надо, можно y нельзя.",
+        "portal": "Google Search · búsqueda temática de gramáticas y lingüística de acceso abierto",
+        "outcome": "Se localizaron materiales generales de Cornell y diccionarios abiertos; no apareció una fuente que sostuviera el patrón central con alcance y ejemplo exactos."
+      },
+      {
+        "query": "site:russian.cornell.edu OR site:gramota.ru contrastes modales y construcciones con нужно, надо, можно y нельзя.",
+        "portal": "Google Search · búsqueda restringida a portales universitarios y lexicográficos",
+        "outcome": "Los pasajes inspeccionados versan sobre fenómenos vecinos, pero no prueban la regla/contraste central. Se conserva el resultado pendiente."
+      }
+    ],
+    "primarySourcesInspected": [
+      {
+        "title": "Beginning Russian Grammar",
+        "url": "https://russian.cornell.edu/grammar/",
+        "locator": "Subject index and applicable reported-speech/grammar pages; no exact subsection for the target construction.",
+        "finding": "Useful adjacent grammatical coverage, but no exact locator supporting the target claim."
+      }
+    ],
+    "contentCorrectionConsidered": "Se evaluó reducir o reformular el texto: contrastes modales y construcciones con нужно, надо, можно y нельзя. La reducción completa retiraría el contenido que define la entrada, así que se conserva pendiente hasta localizar evidencia específica.",
+    "canonicalCheck": "articleMarkdown SHA-256 vigente 232fb1ee4ca85f0e0401025080c10e58a0df18066132f43e850b10a0cc6da885; backup generatedAt 2026-09-19T09:14:06.519Z; markdownMatches=true; no canonical Evidence/assessEntry pass.",
+    "nextConcreteStep": "Buscar una gramática universitaria o estudio lingüístico gratuito sobre contrastes modales y construcciones con нужно, надо, можно y нельзя.; inspeccionar texto completo, extraer pasajes con localizadores exactos, revisar cada afirmación y crear Evidence antes de repetir assessEntry."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+    "nextStep": "Localizar una gramática académica o estudio abierto que cubra los matices y cotejar cada ejemplo pendiente; corregir solo con respaldo; después crear Evidence y ejecutar assessEntry e índice canónico con el hash vigente."
+  },
+  "consultedSources": [
+    {
+      "title": "Russian Aspect in Conversation, 3.1 Phase Verbs",
+      "url": "https://opentext.ku.edu/russianaspect/chapter/3-1-phase-verbs/",
+      "locator": "§ PHASE VERBS, lines 84–96 and 120–149: phase-verb inventory, infinitive complements, aspect restrictions and negation examples; no coverage of забыть reminder pragmatics.",
+      "finding": "El texto universitario inspeccionado confirma la clase de verbos de fase y complementos infinitivos imperfectivos, con restricciones de alcance explícitas; no respalda pragmática ajena a esa construcción."
+    }
+  ],
+  "originalArticleSha256": "232fb1ee4ca85f0e0401025080c10e58a0df18066132f43e850b10a0cc6da885",
+  "verifiedArticleSha256": null,
+  "backupComparison": {
+    "backupGeneratedAt": "2026-09-19T09:14:06.519Z",
+    "canonicalGeneratedAt": "2026-09-19T09:14:06.519Z",
+    "markdownMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0701/followup-3-570f4edc201b.json",
+    "sha256": "570f4edc201b201006bcffb35703e1e637b6594b40fcd08a753376d799c57453",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "articleSha256": "232fb1ee4ca85f0e0401025080c10e58a0df18066132f43e850b10a0cc6da885",
+  "sourceReferences": [
+    {
+      "title": "Russian Aspect in Conversation, 3.1 Phase Verbs",
+      "url": "https://opentext.ku.edu/russianaspect/chapter/3-1-phase-verbs/",
+      "locator": "§ PHASE VERBS, lines 84–96 and 120–149: phase-verb inventory, infinitive complements, aspect restrictions and negation examples; no coverage of забыть reminder pragmatics.",
+      "finding": "El texto universitario inspeccionado confirma la clase de verbos de fase y complementos infinitivos imperfectivos, con restricciones de alcance explícitas; no respalda pragmática ajena a esa construcción."
+    }
+  ]
+}

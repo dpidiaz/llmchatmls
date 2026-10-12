@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0358",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T10:02:41.550Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100022-115fb1",
+  "assignmentId": "R33A-1791626422088-fd55f4",
+  "articlePath": "content/japones/MLS-V06-0358.json",
+  "articleGeneratedAt": "2026-09-19T09:24:17.981Z",
+  "articleSha256": "ff375538761a8993400ef6929c63fcb54cea3a0c74b47c5af65578ea0bbdc725",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite abierto en modo de solo lectura, y consulta de las fuentes indicadas para cada entrada. Se conserva PENDING_SOURCE_SUPPORT cuando las fuentes consultadas no respaldan semánticamente todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha completa «Tener como existencia relativa» (content/japones/MLS-V06-0358.json; sha256 ff375538761a8993400ef6929c63fcb54cea3a0c74b47c5af65578ea0bbdc725). La ficha describe la construcción existencial に/には + が + ある/いる como una manera contextual de expresar disponibilidad, posesión o relación; distingue ある para referentes inanimados e いる para animados y advierte que に no significa por sí sola «tener». La comparación con los módulos de gramática de TUFS confirma el patrón existencial NにNがあります／います y el uso de が con entidades existentes."
+    ],
+    "limitations": [
+      "La fuente consultada respalda la estructura de existencia, pero no cubre semánticamente todos los ejemplos de posesión, la distribución entre disponibilidad/vínculo personal ni las generalizaciones sobre animacidad de la ficha."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "日本語文法「格助詞」",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson27/step2/explanation/053.html",
+      "provider": "東京外国語大学言語モジュール",
+      "use": "Confirma que が marca la entidad existente y remite a NにNがあります／います; no cubre por sí sola todos los matices posesivos."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "ff375538761a8993400ef6929c63fcb54cea3a0c74b47c5af65578ea0bbdc725",
+    "backupSha256": "ff375538761a8993400ef6929c63fcb54cea3a0c74b47c5af65578ea0bbdc725",
+    "articleGeneratedAt": "2026-09-19T09:24:17.981Z",
+    "backupGeneratedAt": "2026-09-19T09:24:17.981Z"
+  },
+  "originalArticleSha256": "ff375538761a8993400ef6929c63fcb54cea3a0c74b47c5af65578ea0bbdc725",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

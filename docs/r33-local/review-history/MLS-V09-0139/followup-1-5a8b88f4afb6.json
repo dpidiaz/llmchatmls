@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0139",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.606Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0139.json",
+  "articleGeneratedAt": "2026-09-19T09:12:23.073Z",
+  "articleSha256": "cadd1efbed3ba1ed3c6bf24f06f56db7e57dad6ef416abf7a4e3ad5b79c14e3a",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente establece la regla plural para inanimados; los paradigmas y excepciones del artículo necesitan mapeo propio.",
+      "La ficha sostiene que acusativo plural inanimado suele coincidir con nominativo plural y contrasta animados; no se consultó una tabla de declinación con fuente/localizador para verificar la regla y su formulación como general."
+    ],
+    "limitations": [
+      "No se creó Evidence ni se editó la ficha. El resumen/regla consultado respalda solo los puntos especificados en sourceChecks; los enunciados restantes requieren texto completo y localizadores exactos (página, sección, regla o entrada) antes de resolverlos. Mantener PENDING_SOURCE_SUPPORT y no certificar hasta cotejar todos los claims y ejemplos materiales.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Acusativo plural inanimado",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Acc. Sg. and Plur. endings and animacy",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+          "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples"
+        }
+      ],
+      "rationale": "La fuente establece la regla plural para inanimados; los paradigmas y excepciones del artículo necesitan mapeo propio."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Acc. Sg. and Plur. endings and animacy",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+          "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples"
+        }
+      ],
+      "rationale": "No se creó Evidence ni se editó la ficha. El resumen/regla consultado respalda solo los puntos especificados en sourceChecks; los enunciados restantes requieren texto completo y localizadores exactos (página, sección, regla o entrada) antes de resolverlos. Mantener PENDING_SOURCE_SUPPORT y no certificar hasta cotejar todos los claims y ejemplos materiales."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Acc. Sg. and Plur. endings and animacy",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+      "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Acc. Sg. and Plur. endings and animacy. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr04_c.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:12:23.073Z",
+    "backupGeneratedAt": "2026-09-19T09:12:23.073Z",
+    "canonicalArticleSha256": "cadd1efbed3ba1ed3c6bf24f06f56db7e57dad6ef416abf7a4e3ad5b79c14e3a",
+    "backupArticleSha256": "cadd1efbed3ba1ed3c6bf24f06f56db7e57dad6ef416abf7a4e3ad5b79c14e3a",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "cadd1efbed3ba1ed3c6bf24f06f56db7e57dad6ef416abf7a4e3ad5b79c14e3a",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0139/pre-coordinator.json",
+    "sha256": "358caaf1e2af41d3f712cc736006945003fe92c1ef85ef61a8b722c1a71084a6",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

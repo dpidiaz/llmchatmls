@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0665",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0665.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, líneas 202–225, distingue usos de わ con caída/subida tonal y perfiles ilustrativos; no es evidencia suficiente para universalizar la distribución social o regional descrita en el artículo."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS documenta usos y perfiles contrastivos de わ con ejemplo y entonación, pero la ficha añade matices regionales/sociales no corroborados.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html わ 終助詞 性別",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Se encontraron ejemplos con perfiles/entonación; generalización social de la ficha requiere más evidencia."
+        },
+        {
+          "query": "site:repository.ninjal.ac.jp 終助詞 わ 性差 方言",
+          "portal": "NINJAL repository search",
+          "outcome": "No se obtuvo fuente directa y abierta suficiente para las afirmaciones regionales/sociales amplias."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "líneas 202–225",
+          "finding": "Muestra dos perfiles de わ y marcas de entonación en ejemplos; no prueba alcance nacional o regional."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré limitar la distribución de わ a los ejemplos/contextos de TUFS y retirar universalizaciones; falta corpus o estudio para la distribución.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: f8230c0c8de9d97df9e3a242eff0f3a6ff61194eff2410695b3a23c26bda8acb. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS documenta usos y perfiles contrastivos de わ con ejemplo y entonación, pero la ficha añade matices regionales/sociales no corroborados.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "f8230c0c8de9d97df9e3a242eff0f3a6ff61194eff2410695b3a23c26bda8acb",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0665/followup-2-e0d0b0053c68.json",
+    "sha256": "e0d0b0053c68d0cc56ccf3ad9a979b53518fbbbf81595dc17df9055e17e24137",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

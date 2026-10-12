@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0670",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0670.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, §V, líneas 157–168, documenta auto-confirmación y búsqueda de confirmación/acuerdo. El estudio J-STAGE localizado trata adquisición de ね en datos de conversación de aprendientes, no necesariamente las afirmaciones prosódicas o generales de esta ficha."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS apoya confirmación y solicitud de acuerdo, pero la ficha agrega prosodia, mitigación y ejemplos que no están ligados a páginas/fuentes en Evidence.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html ね 同意 共感 確認",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Confirma funciones de confirmación y acuerdo; no cubre prosodia ni ejemplos propios."
+        },
+        {
+          "query": "site:jstage.jst.go.jp/article/jajls/24/1/24_220/_article ね 会話 コーパス",
+          "portal": "J-STAGE search",
+          "outcome": "Estudio localizado sobre adquisición en conversación; alcance no basta para generalizar las afirmaciones pragmáticas de la ficha."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "§V, líneas 157–168",
+          "finding": "Confirma funciones de auto-confirmación, comprobación y acuerdo."
+        },
+        {
+          "title": "韓国人日本語学習者による終助詞「ね」の習得―インタビュー形式の自由会話コーパスをデータとして―. (2013). 日本語教育方法研究会誌.",
+          "url": "https://www.jstage.jst.go.jp/article/jajls/24/1/24_220/_article/-char/ja/",
+          "locator": "página bibliográfica/abstract",
+          "finding": "Alcance indicado por el título: adquisición por aprendientes en corpus de conversación; no valida automáticamente generalizaciones nativas o prosódicas."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré quitar referencias a mitigación/prosodia sin cita acústica directa y limitar la descripción a funciones de TUFS; se requiere reescritura y enlace por claim.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 6e8bec18d3ea33edf0f22db36b0027a4fcce90d456655940c5c573e137d0aa04. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS apoya confirmación y solicitud de acuerdo, pero la ficha agrega prosodia, mitigación y ejemplos que no están ligados a páginas/fuentes en Evidence.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "6e8bec18d3ea33edf0f22db36b0027a4fcce90d456655940c5c573e137d0aa04",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0670/followup-2-245e8bb0fa60.json",
+    "sha256": "245e8bb0fa6053b9b595d10d802d1863159647492a3caee74f8482e471466c13",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

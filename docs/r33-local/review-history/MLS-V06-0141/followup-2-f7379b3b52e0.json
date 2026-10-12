@@ -1,0 +1,83 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0141",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:55:00.000Z",
+  "reviewer": "R33W-local-20261010202034-4582d5",
+  "articlePath": "content/japones/MLS-V06-0141.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 3,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceChecks": [],
+  "semanticReview": {
+    "method": "Seguimiento R33 por entrada: lectura del artículo canónico, búsqueda/cotejo de fuentes primarias pertinentes y registro explícito de cobertura parcial. El resultado no equivale a validación claim-level completa ni a VERIFIED. Cotejo semántico de reglas, ejemplos y matices con fuentes institucionales o lexicográficas consultadas; los resúmenes se consideraron respaldo parcial y se registraron las afirmaciones que requieren gramática/corpus con localizador antes de certificación. Seguimiento de fuente: búsquedas por vías institucionales y bibliográficas distintas, con registro de resultados y bloqueo concreto.",
+    "findings": [
+      "La observación morfológica de では como で + は se combina con usos de contexto/lugar/medio/tiempo/condición; no se aporta gramática que organice esos valores y separe では de conectores «entonces».",
+      "Las traducciones y ejemplos no se citaron; cada uso debe analizarse por función de で y alcance contrastivo/topical de は.",
+      "No se verificaron diferencias entre registro escrito/oral, condición hipotética y cierre de conversación.",
+      "La cobertura fuente-afirmación no está completa; no se declara VERIFIED.",
+      "Seguimiento de esta asignación: la búsqueda adicional no resolvió el bloqueo; véase exceptionalDisposition y remainingWorkAssessment. Revisión anterior preservada en docs/r33-local/review-history/MLS-V06-0141/followup-2-ee798b89f6e2.json; SHA-256 ee798b89f6e2dbeea0342809c2f74f5b50d807ff2eedbe8291675b6d092f2bfc."
+    ],
+    "limitations": [
+      "No se creó Evidence ni se editó el artículo. La fuente consultada respalda únicamente los puntos acotados en sourceChecks; los ejemplos, excepciones, registro y extensiones restantes requieren cotejo con texto completo y localizadores exactos. Mantener PENDING_SOURCE_SUPPORT.",
+      "Alta: se puede analizar では como で + は y hay fuente primaria para los valores discursivos de は, pero no se validaron los usos de lugar, medio, tiempo, condición y conector que mezcla la ficha."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Alta: se puede analizar では como で + は y hay fuente primaria para los valores discursivos de は, pero no se validaron los usos de lugar, medio, tiempo, condición y conector que mezcla la ficha.",
+      "searches": [
+        {
+          "query": "Japanese grammar では particle で は contrasting topic primary source",
+          "portal": "CiNii Research / Japanese Linguistic Society",
+          "outcome": "Yoshimoto (1982) explica tema/contraste de は y su combinación con otras partículas, pero no cubre todos los ejemplos ni el posible conector では."
+        },
+        {
+          "query": "site:jstage.jst.go.jp では 助詞 で は 対比 文法 日本語",
+          "portal": "J-STAGE",
+          "outcome": "La búsqueda no encontró un análisis primario único para las lecturas espaciales, temporales, condicionales y discursivas de la ficha."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "“Wa” and “ga”",
+          "url": "https://cir.nii.ac.jp/crid/1390282680099239808",
+          "locator": "Descripción, líneas 66–68: wa puede aparecer con otras partículas; distinción tema/contraste.",
+          "finding": "Apoya que は aporta tema/contraste sobre una relación marcada, pero no confirma todas las lecturas de では de la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Alta: se puede analizar では como で + は y hay fuente primaria para los valores discursivos de は, pero no se validaron los usos de lugar, medio, tiempo, condición y conector que mezcla la ficha. Se consideró reducir la ficha a los usos y ejemplos con evidencia directa; la evidencia disponible no permite resolver este bloqueo en la presente revisión sin alterar o eliminar afirmaciones materiales.",
+      "canonicalCheck": "Canonical check: the code is absent from the verified index; no canonical Evidence artifact exists; the current status remains PENDING_SOURCE_SUPPORT. No VERIFIED result is asserted.",
+      "nextConcreteStep": "Separar el sintagma で + は de los conectores discursivos y cotejar cada ejemplo con una fuente gramatical primaria; suprimir los usos sin localizador."
+    }
+  },
+  "originalArticleSha256": "706cbcb56ffe781169da02389ed46d155945f9067e4db4b8c6370632583612ca",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "assignmentId": "R33A-1791663634582-e194c8",
+  "workerId": "R33W-local-20261010202034-4582d5",
+  "followupRound": 2,
+  "previousReviewStatus": "PENDING_SOURCE_SUPPORT",
+  "canonicalArticleSha256": "706cbcb56ffe781169da02389ed46d155945f9067e4db4b8c6370632583612ca",
+  "verifiedArticleSha256": "706cbcb56ffe781169da02389ed46d155945f9067e4db4b8c6370632583612ca",
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0141/followup-1-ee798b89f6e2.json",
+    "sha256": "ee798b89f6e2dbeea0342809c2f74f5b50d807ff2eedbe8291675b6d092f2bfc",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "title": "では",
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Alta: se puede analizar では como で + は y hay fuente primaria para los valores discursivos de は, pero no se validaron los usos de lugar, medio, tiempo, condición y conector que mezcla la ficha.",
+    "nextStep": "Separar el sintagma で + は de los conectores discursivos y cotejar cada ejemplo con una fuente gramatical primaria; suprimir los usos sin localizador."
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED"
+}

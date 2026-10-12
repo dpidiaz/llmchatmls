@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0726",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0726.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "Irodori 初中級, Lesson 9, sección ➌ V はじめる, líneas 3729–3772, define el inicio de acción/estado, el enlace con forma ます sin ます y ofrece 通いはじめました／聞きはじめました. Confirma el núcleo; no la comparación contrastiva con 出す ni todos los ejemplos propios."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Irodori confirma inicio de acción y aporta 始める/聞きはじめる, pero los demás ejemplos y la comparación de matiz con 出す no están localizados.",
+      "searches": [
+        {
+          "query": "site:irodori.jpf.go.jp 始める はじめる 動作 状態 始まる",
+          "portal": "Japan Foundation Irodori search",
+          "outcome": "Material didáctico primario localizado con el patrón y ejemplo; contraste con 出す no cubierto."
+        },
+        {
+          "query": "site:kotobank.jp/word 始める 動詞 補助動詞 意味",
+          "portal": "Kotobank search",
+          "outcome": "La entrada lexicográfica puede apoyar inicio de acción; no valida todos los compuestos/ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "国際交流基金. (s. f.). いろどり 生活の日本語 初中級, 第9課.",
+          "url": "https://www.irodori.jpf.go.jp/assets/data/pre-intermediate/pdf/ZZ_L09.pdf",
+          "locator": "第9課, sección ➌ V はじめる, líneas 3729–3772 (PDF p. 28, L9-29)",
+          "finding": "Documenta inicio de la acción y ejemplos del recurso; no prueba la comparación 〜出す."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré eliminar el contraste con 出す y sustituir los ejemplos con formas publicadas por Irodori; falta transcribir APA y evaluar claims.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: e71419b3faa49bf0ca4ce1978738534fbba021bad08287ff0bd98d46576f0e89. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "Irodori confirma inicio de acción y aporta 始める/聞きはじめる, pero los demás ejemplos y la comparación de matiz con 出す no están localizados.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "e71419b3faa49bf0ca4ce1978738534fbba021bad08287ff0bd98d46576f0e89",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0726/followup-2-470d4416c62c.json",
+    "sha256": "470d4416c62cda8aeaf5dcc1880cc3dfdd358f5c23fc98cddefb24deb44cfba5",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

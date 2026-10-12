@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0647",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0647.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 10,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "JPF y TUFS documentan ようだ como inferencia/símil, pero el pasaje no estudia ように見える como construcción, ni valida ejemplos y restricciones de la ficha. Falta una fuente gramatical directa y cotejo de sus ejemplos."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Las fuentes inspeccionadas cubren ようだ general, no la construcción exacta ように見える ni las inferencias sociales/visuales específicas del artículo.",
+      "searches": [
+        {
+          "query": "site:jpf.go.jp ように見える 文法 日本語",
+          "portal": "Japan Foundation site search",
+          "outcome": "No se localizó una explicación directa suficiente de ように見える."
+        },
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod ように見える",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Los resultados localizados explican ようだ, no el patrón exacto de la ficha."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "市川保子. (2010年12月). 文法を楽しく「そうだ／ようだ／らしい」（１）. 国際交流基金.",
+          "url": "https://www.jpf.go.jp/j/project/japanese/teach/tsushin/grammar/201012.html",
+          "locator": "líneas 125–189",
+          "finding": "Útil como contraste de ようだ; no acredita la forma completa ように見える ni sus ejemplos."
+        },
+        {
+          "title": "東京外国語大学. (s. f.). ～かもしれません・～にちがいありません：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c01/lesson19/step2/explanation/076.html",
+          "locator": "líneas 169–181",
+          "finding": "Explica ようです; no documenta la construcción objetivo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré retirar los juicios sobre interpretación visual y social hasta obtener una fuente para ように見える; no cambié el texto sin respaldo directo.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 7841b41215e72ae95abececdbda5ba7b1dcd6f92235991393ee36a2eca05671d. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Las fuentes inspeccionadas cubren ようだ general, no la construcción exacta ように見える ni las inferencias sociales/visuales específicas del artículo.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "7841b41215e72ae95abececdbda5ba7b1dcd6f92235991393ee36a2eca05671d",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0647/followup-2-b7ba32e1262a.json",
+    "sha256": "b7ba32e1262ab04674a847a3314bec468b41378d99e9b803b49b8b0b1c1fe86a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

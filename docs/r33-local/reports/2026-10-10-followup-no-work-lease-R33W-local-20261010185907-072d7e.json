@@ -1,0 +1,40 @@
+{
+  "schema": "MLS-R33-LOCAL-BLOCKER-1",
+  "recordedAt": "2026-10-10T19:16:10Z",
+  "branch": "feat/r33-local-recovery",
+  "assignmentId": "R33A-1791658747998-f543f9",
+  "workerId": "R33W-local-20261010185907-072d7e",
+  "completedEntries": 25,
+  "completion": "coordinator-confirmed",
+  "completionStatuses": [
+    "VERIFIED"
+  ],
+  "unresolvedReviewOutcomes": 2406,
+  "nextClaim": {
+    "remaining": 0,
+    "followupRounds": 1,
+    "command": "node tools/r33-local/coordinator.cjs next",
+    "assignmentId": "R33A-1791659868315-5cc35f",
+    "workerId": "R33W-local-20261010191748-6d4e83",
+    "count": 25,
+    "status": "LEASED"
+  },
+  "coordinator": {
+    "configuredFollowupRoundLimit": 1,
+    "activeLeasesAtRecord": 3,
+    "unresolvedEntriesWithFollowupAttempt": 2406
+  },
+  "blocker": "Todos los resultados pendientes están agotados para asignación conforme al límite configurado de una ronda source-followup; el coordinador devuelve NO_WORK aunque unresolvedReviewOutcomes sigue siendo 2406. El checkpoint refleja followup_phase.status=COMPLETED, lo que solo cierra esa fase de asignación y no el objetivo de certificar todas las entradas.",
+  "nextConcreteStep": "Diseñar/autorizar una nueva ronda source-followup que requiera vías de búsqueda distintas y valide los seguimientos previos; mantener abierto el objetivo hasta unresolvedReviewOutcomes=0 y validación canónica global.",
+  "safety": {
+    "deployments": 0,
+    "paidApiCalls": 0,
+    "d1Writes": 0,
+    "d1Reads": 0,
+    "merges": 0,
+    "cloudflareInteractions": 0,
+    "pushes": 0
+  },
+  "supersededAt": "2026-10-10T19:17:48.315Z",
+  "correction": "NO_WORK fue producido por una copia desactualizada del coordinador en el worktree (limitaba source-followup a una sola ronda). El coordinador vigente en el checkout feat/r33-local-recovery permite reintentos sucesivos; ejecutado desde el worktree, asignó el lease R33A-1791659868315-5cc35f con 25 códigos. El objetivo sigue abierto."
+}

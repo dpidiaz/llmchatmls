@@ -1,0 +1,80 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0467",
+  "language": "coreano",
+  "reviewedAt": "2026-10-10T17:32:46.567Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010172824-035eb2",
+  "assignmentId": "R33A-1791653304586-69fa0d",
+  "articlePath": "content/coreano/MLS-V08-0467.json",
+  "articleGeneratedAt": "2026-09-19T09:14:03.993Z",
+  "articleSha256": "be12986795dd06a79c15dbf6cf198c0a7a3c71676e1fbb633cd6a69c5ec50e2d",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de afirmación central, hash/version SQL de solo lectura, fuente primaria pública y localizador específico. Fuentes parciales o contradictorias no se convirtieron en VERIFIED.",
+    "findings": [
+      "The dictionary’s 높임말 example lists 드시다 as a form of 먹다; it does not establish every drink use, conjugation, register claim, or the article’s example sentences."
+    ],
+    "limitations": [
+      "La afirmación central “드시다 is an honorific form for eating/drinking” no queda sustentada en toda su extensión junto con la morfología, matices y ejemplos materiales de la ficha. No se creó Evidence canónica ni se ejecutó assessEntry exitoso; se conserva estado pendiente."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "드시다 is an honorific form for eating/drinking",
+      "result": "PARTIAL_OR_CONFLICT",
+      "sources": [
+        {
+          "title": "높임말 [Dictionary entry]",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=45293&nation=eng&nationCode=6",
+          "locator": "headword 높임말; usage example explicitly listing 드시다/잡수시다 as honorific forms of 먹다"
+        }
+      ],
+      "rationale": "The dictionary’s 높임말 example lists 드시다 as a form of 먹다; it does not establish every drink use, conjugation, register claim, or the article’s example sentences."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "National Institute of Korean Language",
+      "title": "높임말 [Dictionary entry]",
+      "publisher": "Korean Basic Dictionary",
+      "year": "n.d.",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=45293&nation=eng&nationCode=6",
+      "locator": "headword 높임말; usage example explicitly listing 드시다/잡수시다 as honorific forms of 먹다",
+      "apa7": "National Institute of Korean Language. (n.d.). 높임말 [Dictionary entry]. Korean Basic Dictionary. https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=45293&nation=eng&nationCode=6"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:14:03.993Z",
+    "backupGeneratedAt": "2026-09-19T09:14:03.993Z",
+    "canonicalArticleSha256": "be12986795dd06a79c15dbf6cf198c0a7a3c71676e1fbb633cd6a69c5ec50e2d",
+    "backupArticleSha256": "be12986795dd06a79c15dbf6cf198c0a7a3c71676e1fbb633cd6a69c5ec50e2d",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "be12986795dd06a79c15dbf6cf198c0a7a3c71676e1fbb633cd6a69c5ec50e2d",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0467/pre-coordinator.json",
+    "sha256": "7a37affe2b480b3c622086a342f1d388e98c85b64ad36a9a4f9b29bfc941d49f",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

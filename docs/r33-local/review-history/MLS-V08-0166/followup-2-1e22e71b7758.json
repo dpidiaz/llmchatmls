@@ -1,0 +1,126 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0166",
+  "title": "은/는 contraste",
+  "language": "coreano",
+  "articlePath": "content/coreano/MLS-V08-0166.json",
+  "reviewedAt": "2026-10-11T00:22:26.527Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "workerId": "R33W-local-20261011002037-241d84",
+  "originalArticleSha256": "6be08127f318e8ba8a4e6b31598f02511779ef0638aa828f92c3767b915dddcf",
+  "canonicalArticleSha256": "6be08127f318e8ba8a4e6b31598f02511779ef0638aa828f92c3767b915dddcf",
+  "verifiedArticleSha256": "6be08127f318e8ba8a4e6b31598f02511779ef0638aa828f92c3767b915dddcf",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "은의 주요 기능은 확인했으나 복수 예문의 기능 구별과 문맥 조건이 남는다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "은의 주요 기능은 확인했으나 복수 예문의 기능 구별과 문맥 조건이 남는다.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr 은 는 이 가 을 를 조사 의미",
+          "portal": "한국어기초사전 검색",
+          "outcome": "검색결과에서 일부 조사 항목을 확인하고 각 표제어를 직접 대조했다."
+        },
+        {
+          "query": "site:krdict.korean.go.kr \"은\" 조사 받침 뒤 대조 주제",
+          "portal": "한국어기초사전 검색",
+          "outcome": "은/는의 대조·주제 뜻과 결합 제약을 직접 확인했으며 기사 예문별 매칭이 남았다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "한국어기초사전 은¹",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86111&nation=eng",
+          "locator": "뜻풀이 1–3, 받침 뒤 결합 참고",
+          "finding": "대조·주제·강조 기능 및 받침 뒤 결합 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "은¹의 뜻풀이를 예문별로 대응시키고 겹치는 기능은 문맥 조건부로 고친다."
+    }
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.527Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "한국어기초사전 은¹"
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "mode": "read-only",
+    "articlePath": "content/coreano/MLS-V08-0166.json",
+    "articleGeneratedAt": "2026-09-19T09:30:11.637Z",
+    "backupGeneratedAt": "2026-09-19T09:30:11.637Z",
+    "articleSha256": "6be08127f318e8ba8a4e6b31598f02511779ef0638aa828f92c3767b915dddcf",
+    "backupSha256": "6be08127f318e8ba8a4e6b31598f02511779ef0638aa828f92c3767b915dddcf",
+    "articleHashMatchesBackup": true,
+    "generatedAtMatchesBackup": true,
+    "canonicalEvidenceIndexEntry": false,
+    "canonicalArticleSha256": "6be08127f318e8ba8a4e6b31598f02511779ef0638aa828f92c3767b915dddcf",
+    "articleMatches": false,
+    "versionMatches": false
+  },
+  "followupRound": 2,
+  "followupSources": [
+    {
+      "title": "한국어기초사전 은¹",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86111&nation=eng",
+      "locator": "뜻풀이 1–3, 받침 뒤 결합 참고",
+      "finding": "대조·주제·강조 기능 및 받침 뒤 결합 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0166/followup-1-b6802fe3f5b4.json",
+    "sha256": "b6802fe3f5b470c862ff898e25c257a7f1188a6333a63d924e943be3d66fa9ef",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "sourceChecks": [
+    {
+      "sourceTitle": "한국어기초사전 은¹",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86111&nation=eng",
+      "locator": "뜻풀이 1–3, 받침 뒤 결합 참고",
+      "result": "PARTIAL",
+      "finding": "대조·주제·강조 기능 및 받침 뒤 결합 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "한국어기초사전 은¹",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=86111&nation=eng",
+      "locator": "뜻풀이 1–3, 받침 뒤 결합 참고",
+      "finding": "대조·주제·강조 기능 및 받침 뒤 결합 지지."
+    }
+  ],
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "은의 주요 기능은 확인했으나 복수 예문의 기능 구별과 문맥 조건이 남는다.",
+    "nextStep": "은¹의 뜻풀이를 예문별로 대응시키고 겹치는 기능은 문맥 조건부로 고친다."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0871",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T17:25:05.566Z",
+  "reviewer": "R33 local semantic source follow-up (R33W-local-20261010171810-62905b)",
+  "assignmentId": "R33A-1791652690371-b069b3",
+  "phase": "source-followup",
+  "followupRound": 1,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0871.json",
+  "status": "PENDING_CONFLICT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (s. f.). Sendos. En Diccionario de la lengua española (23.ª ed.). https://dle.rae.es/sendos DLE, s. v. sendos, acepción 1",
+      "url": "https://dle.rae.es/sendos",
+      "locator": "DLE, s. v. sendos, acepción 1",
+      "observation": "La acepción define el numeral distributivo («uno cada uno…») y marca uso plural; no acredita registro principalmente formal/escrito."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Cotejo manual de fuente primaria y localizador frente al alcance de las afirmaciones. Se registra evidencia parcial y sus límites; no se infiere cobertura total.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No ejecutado: la cobertura semántica sigue incompleta.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T09:00:50.388Z",
+      "canonicalGeneratedAt": "2026-09-15T09:00:50.388Z",
+      "backupArticleSha256": "73d65c7250be68e484d2bcd6d2632febb6b14ce6abec45b52d3e18e3add3ea3c",
+      "canonicalArticleSha256": "a28dd9b599e513956eef2bac344a23a4dbfb86250a82ee062e06b54ec0485b11",
+      "articleMatches": false,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento de la revisión previa; comprobación del localizador de fuente primaria y delimitación de afirmaciones no cubiertas.",
+    "findings": [
+      "DLE s. v. sendos, acep. 1, respalda sentido distributivo y plural. Sigue abierto el conflicto backup/canónica («siempre en plural en español actual» frente a «en la norma culta actual»); el DLE no respalda el juicio de registro. PENDING_CONFLICT. Existe discrepancia textual entre el respaldo SQL y la ficha canónica de la misma fecha de generación; se conserva como conflicto versionado sin sobrescribir el artículo."
+    ],
+    "limitations": [
+      "Faltan vínculos fuente-afirmación y localizadores precisos para cubrir todas las afirmaciones materiales y los ejemplos.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; por tanto, no se declara VERIFIED.",
+      "La comparación del respaldo halló distinto SHA-256 del texto canónico aunque título/fecha coinciden; hace falta conciliar explícitamente esa diferencia."
+    ]
+  },
+  "originalArticleSha256": "a28dd9b599e513956eef2bac344a23a4dbfb86250a82ee062e06b54ec0485b11",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T09:00:50.388Z",
+    "canonicalGeneratedAt": "2026-09-15T09:00:50.388Z",
+    "backupArticleSha256": "73d65c7250be68e484d2bcd6d2632febb6b14ce6abec45b52d3e18e3add3ea3c",
+    "canonicalArticleSha256": "a28dd9b599e513956eef2bac344a23a4dbfb86250a82ee062e06b54ec0485b11",
+    "articleMatches": false,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0871/pre-coordinator.json",
+    "sha256": "d08904f6c536a21a81d3009b94cfd2ffc329ec9f67d1b2b2d62e277277eebce6",
+    "status": "PENDING_CONFLICT",
+    "assignmentId": null
+  }
+}

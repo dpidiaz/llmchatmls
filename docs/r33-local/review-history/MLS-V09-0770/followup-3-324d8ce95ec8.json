@@ -1,0 +1,150 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0770",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:38:07.957Z",
+  "reviewer": "R33 local source-followup",
+  "workerId": "R33W-local-20261011103604-3d9826",
+  "assignmentId": "R33A-1791714964251-888f1b",
+  "articlePath": "content/ruso/MLS-V09-0770.json",
+  "articleGeneratedAt": "2026-09-19T10:15:30.590Z",
+  "articleSha256": "f37231fac97a85a75c8d52b96c83cfd0689bc622bc3484e21508316dc1110b1d",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento gratuito con dos búsquedas temáticas distintas, lectura de la revisión anterior, búsqueda de fuentes primarias de Gramota.ru y cotejo del hash del articleMarkdown.",
+    "findings": [
+      "Se relee la revisión anterior docs/r33-local/reviews/MLS-V09-0770-revision.json, SHA-256 fb78517e8dc84cc071f1d3c9592de1c8eb05b55a255a255d44221724353aaf3b; bloqueo anterior: La gramática identifica для того чтобы como conjunción de finalidad; los pasajes cubren tipo de subordinada, pero el artículo añade usos con infinitivo/forma finita, opciones de aspecto, equivalencia con чтобы y matices de formalidad que no se sustentan todos con esos localizadores.",
+      "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences.",
+      "Supports conjunction status and subordinate clause connection; exact purpose semantics/examples are separately corroborated by the course but not all aspect/modal claims.",
+      "El artículo Conector для того чтобы todavía contiene afirmaciones y ejemplos que no se pueden cerrar con los pasajes encontrados; no se certifica por apoyo general de tema."
+    ],
+    "limitations": [
+      "No hay localizador comprobado para cada afirmación material, ejemplo ruso y traducción; los pasajes documentados solo cubren el alcance expuesto en primarySourcesInspected.",
+      "La consulta actual a Gramota devolvió extractos, pero el acceso directo por web respondió 403; por ello la evidencia de búsqueda no basta para aprobar una afirmación central cuando requiere lectura contextual completa.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; el estado continúa pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La gramática respalda la clasificación principal de la subordinada, pero no cubre cada matiz pragmático, alternancia aspectual, ejemplo ni equivalencia de traducción. Bloqueo previo persistente: La gramática identifica для того чтобы como conjunción de finalidad; los pasajes cubren tipo de subordinada, pero el artículo añade usos con infinitivo/forma finita, opciones de aspecto, equivalencia con чтобы y matices de formalidad que no se sustentan todos con esos localizadores.",
+      "searches": [
+        {
+          "query": "site:gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii \"для того чтобы\" \"несмотря на то что\"",
+          "portal": "Búsqueda web de Gramota.ru / portal de diccionarios y referencias lingüísticas",
+          "outcome": "La consulta encontró una entrada de referencia lingüística pertinente o confirmó que la fuente consultada es solo ortográfica/no responde a la afirmación central. Se leyó el extracto devuelto y se anotó el alcance; la apertura directa de la página devolvió 403."
+        },
+        {
+          "query": "site:gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs \"для того чтобы\" цель придаточное",
+          "portal": "Búsqueda web de Gramota.ru / portal de diccionarios y referencias lingüísticas",
+          "outcome": "Segunda consulta, con formulación/objetivo diferente para localizar un diccionario o sección gramatical específica. El extracto citado apoya solo el punto delimitado; no resuelve las afirmaciones restantes ni se usan snippets ajenos como prueba."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Сложное предложение",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+          "locator": "Section “Сложноподчиненные предложения с придаточными условия” (если); section on purpose clauses (чтобы/для того чтобы); list of compound subordinating conjunctions including несмотря на то что.",
+          "finding": "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences. Se leyó el extracto devuelto por la búsqueda del portal; la apertura directa del endpoint de Gramota respondió 403 en esta sesión, por lo que no se toma como certificación completa."
+        },
+        {
+          "title": "Для того(,) чтобы",
+          "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/dlya-togo-chtoby",
+          "locator": "Punctuation reference entry “Для того(,) чтобы”: identifies it as a conjunction introducing a subordinate clause and describes punctuation.",
+          "finding": "Supports conjunction status and subordinate clause connection; exact purpose semantics/examples are separately corroborated by the course but not all aspect/modal claims. Se leyó el extracto devuelto por la búsqueda del portal; la apertura directa del endpoint de Gramota respondió 403 en esta sesión, por lo que no se toma como certificación completa."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar o corregir las afirmaciones de “Conector для того чтобы” al alcance de los localizadores. No se modificó el contenido porque aún falta leer la fuente completa y validar ejemplos/localizadores uno a uno; una corrección sin ese cotejo podría cambiar el sentido sin respaldo.",
+      "canonicalCheck": "articleMarkdown SHA-256 actual f37231fac97a85a75c8d52b96c83cfd0689bc622bc3484e21508316dc1110b1d, coincide con el hash base del lease. No consta Evidence canónica aprobada ni assessEntry exitoso para MLS-V09-0770; no se marca VERIFIED.",
+      "nextConcreteStep": "Localizar una gramática académica abierta o corpus con un localizador directo para las afirmaciones aún no respaldadas de MLS-V09-0770; revisar ejemplos y traducciones uno por uno, corregir el artículo solo si el respaldo delimita el sentido, crear Evidence y ejecutar assessEntry con el hash vigente."
+    }
+  },
+  "consultedSources": [
+    {
+      "title": "Сложное предложение",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+      "provider": "Грамота.ру / referencia académica o lexicográfica gratuita",
+      "use": "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences."
+    },
+    {
+      "title": "Для того(,) чтобы",
+      "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/dlya-togo-chtoby",
+      "provider": "Грамота.ру / referencia académica o lexicográfica gratuita",
+      "use": "Supports conjunction status and subordinate clause connection; exact purpose semantics/examples are separately corroborated by the course but not all aspect/modal claims."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "Сложное предложение",
+      "author": null,
+      "year": null,
+      "sourceType": "Diccionario o referencia gramatical gratuita",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+      "locator": "Section “Сложноподчиненные предложения с придаточными условия” (если); section on purpose clauses (чтобы/для того чтобы); list of compound subordinating conjunctions including несмотря на то что.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences."
+    },
+    {
+      "title": "Для того(,) чтобы",
+      "author": null,
+      "year": null,
+      "sourceType": "Diccionario o referencia gramatical gratuita",
+      "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/dlya-togo-chtoby",
+      "locator": "Punctuation reference entry “Для того(,) чтобы”: identifies it as a conjunction introducing a subordinate clause and describes punctuation.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Supports conjunction status and subordinate clause connection; exact purpose semantics/examples are separately corroborated by the course but not all aspect/modal claims."
+    }
+  ],
+  "sourceReferences": [
+    {
+      "title": "Сложное предложение",
+      "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+      "authorityTier": "B",
+      "apa7": "Грамота.ру. (s. f.). *Сложное предложение*. https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie"
+    },
+    {
+      "title": "Для того(,) чтобы",
+      "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/dlya-togo-chtoby",
+      "authorityTier": "B",
+      "apa7": "Грамота.ру. (s. f.). *Для того(,) чтобы*. https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/dlya-togo-chtoby"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "sourceAudit": {
+    "method": "Seguimiento de fuente primaria pública gratuita; limitaciones de acceso y alcance registradas.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "La gramática respalda la clasificación principal de la subordinada, pero no cubre cada matiz pragmático, alternancia aspectual, ejemplo ni equivalencia de traducción. Bloqueo previo persistente: La gramática identifica для того чтобы como conjunción de finalidad; los pasajes cubren tipo de subordinada, pero el artículo añade usos con infinitivo/forma finita, opciones de aspecto, equivalencia con чтобы y matices de formalidad que no se sustentan todos con esos localizadores."
+  },
+  "originalArticleSha256": "f37231fac97a85a75c8d52b96c83cfd0689bc622bc3484e21508316dc1110b1d",
+  "verifiedArticleSha256": "f37231fac97a85a75c8d52b96c83cfd0689bc622bc3484e21508316dc1110b1d",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "priorReviewObserved": {
+    "path": "docs/r33-local/reviews/MLS-V09-0770-revision.json",
+    "sha256": "fb78517e8dc84cc071f1d3c9592de1c8eb05b55a255a255d44221724353aaf3b",
+    "status": "PENDING_SOURCE_SUPPORT"
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "La gramática respalda la clasificación principal de la subordinada, pero no cubre cada matiz pragmático, alternancia aspectual, ejemplo ni equivalencia de traducción. Bloqueo previo persistente: La gramática identifica для того чтобы como conjunción de finalidad; los pasajes cubren tipo de subordinada, pero el artículo añade usos con infinitivo/forma finita, opciones de aspecto, equivalencia con чтобы y matices de formalidad que no se sustentan todos con esos localizadores.",
+    "nextStep": "Localizar una gramática académica abierta o corpus con un localizador directo para las afirmaciones aún no respaldadas de MLS-V09-0770; revisar ejemplos y traducciones uno por uno, corregir el artículo solo si el respaldo delimita el sentido, crear Evidence y ejecutar assessEntry con el hash vigente."
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0770/followup-2-fb78517e8dc8.json",
+    "sha256": "fb78517e8dc84cc071f1d3c9592de1c8eb05b55a255a255d44221724353aaf3b",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

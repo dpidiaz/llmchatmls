@@ -1,0 +1,118 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V02-0528",
+  "language": "portugues",
+  "reviewedAt": "2026-10-11T10:45:05.655Z",
+  "reviewer": "R33 local source-followup",
+  "articlePath": "content/portugues/MLS-V02-0528.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: se releyó el artículo del commit base del worktree, se verificó su SHA-256 y se buscaron pasajes gratuitos usando consultas separadas por construcción y por categoría gramatical; solo se registran como inspeccionadas las fuentes abiertas y los localizadores descritos aquí.",
+    "findings": [
+      "Fonte acadêmica brasileira confirma que se tem usos distintos e não equivale sempre ao reflexivo; não sustenta por si só os exemplos específicos arrepender-se/queixar-se da ficha.",
+      "Fonte acadêmica brasileira confirma que se tem usos distintos e não equivale sempre ao reflexivo; não sustenta por si só os exemplos específicos arrepender-se/queixar-se da ficha.",
+      "No se modificó el artículo ni se creó Evidence canónica. Sin cobertura completa de afirmaciones y assessEntry exitoso, no corresponde VERIFIED."
+    ],
+    "limitations": [
+      "Fonte acadêmica brasileira confirma que se tem usos distintos e não equivale sempre ao reflexivo; não sustenta por si só os exemplos específicos arrepender-se/queixar-se da ficha.",
+      "Las fuentes citadas son evidencia parcial: el registro consultado en esta ronda no verifica todos los ejemplos ni todas las afirmaciones materiales de la versión actual. No se creó Evidence canónica, no se ejecutó assessEntry aprobatorio y permanece PENDING_SOURCE_SUPPORT."
+    ],
+    "sourceAssessment": "PARTIAL_OR_INSUFFICIENT",
+    "previousFindingsRetainedByHistory": true,
+    "previousReviewStatus": "PENDING_SOURCE_SUPPORT",
+    "exceptionalDisposition": {
+      "blockingCriterion": "Fonte acadêmica brasileira confirma que se tem usos distintos e não equivale sempre ao reflexivo; não sustenta por si só os exemplos específicos arrepender-se/queixar-se da ficha.",
+      "searches": [
+        {
+          "query": "verbos pronominais português brasileiro arrepender-se queixar-se gramática acadêmica",
+          "portal": "Búsqueda web pública enfocada en estudios/revistas y repositorios universitarios",
+          "outcome": "Se localizó fuente académica o gramatical pertinente, con respaldo parcial descrito en primarySourcesInspected; no certifica todos los claims."
+        },
+        {
+          "query": "construções com se português brasileiro reflexivo médio impessoal artigo",
+          "portal": "Búsqueda web pública independiente enfocada en la construcción y ejemplos exactos de la ficha",
+          "outcome": "La segunda vía devolvió apoyo parcial o material de alcance/dialecto diferente; no completa la cobertura de claims."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "A rede gramatical das construções com se no português brasileiro",
+          "url": "https://www.e-publicacoes.uerj.br/soletras/article/view/73491",
+          "locator": "Resumo e classificação de seis usos de se, organizados nos domínios reflexivo-recíproco, médio e impessoal",
+          "finding": "Fonte acadêmica brasileira confirma que se tem usos distintos e não equivale sempre ao reflexivo; não sustenta por si só os exemplos específicos arrepender-se/queixar-se da ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar o corregir las generalizaciones y los ejemplos no respaldados. La capa local permite registrar la propuesta, pero no se modifica la entrada PENDING ni se fabrica Evidence; se requiere fuente primaria y cotejo de cada afirmación antes de aplicar cambios y validar.",
+      "canonicalCheck": "SHA-256 del texto articleMarkdown=68e2a2b8c1ac844513b9a08c4ad6dd3d39bded238afbdd6c6d07f054ca9f56f0; coincide con el contenido del snapshot local asignado. No se creó Evidence canónica ni se obtuvo assessEntry satisfactorio para todos los claims; sigue PENDING_SOURCE_SUPPORT.",
+      "nextConcreteStep": "Abrir el texto completo de la fuente primaria pertinente, registrar localizador exacto por afirmación y ejemplo, resolver el alcance de variedad/registro y revisar el validador canónico antes de crear Evidence."
+    }
+  },
+  "originalArticleSha256": "68e2a2b8c1ac844513b9a08c4ad6dd3d39bded238afbdd6c6d07f054ca9f56f0",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V02-0528/followup-3-313ddc50dd85.json",
+    "sha256": "313ddc50dd859a50c40aeb20089a5d88625ef6f06da8a47706a6160cebe00ff7",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 4,
+  "title": "Se parte de verbo pronominal",
+  "assignmentId": "R33A-1791715334038-1e79b0",
+  "workerId": "R33W-local-20261011104214-2f89fd",
+  "canonicalArticleSha256": "68e2a2b8c1ac844513b9a08c4ad6dd3d39bded238afbdd6c6d07f054ca9f56f0",
+  "verifiedArticleSha256": "68e2a2b8c1ac844513b9a08c4ad6dd3d39bded238afbdd6c6d07f054ca9f56f0",
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Alta: el estudio de corpus distingue usos de se y verbos pronominales, pero el artículo añade obligatoriedad, regencia y ejemplos léxicos (arrepender-se, queixar-se, orgulhar-se) que no se han cotejado uno por uno.",
+    "nextStep": "Cotejar arrepender-se, queixar-se y orgulhar-se en diccionarios brasileños de regencia y en el estudio de corpus; separar los usos lexicalizados de los reflexivos y eliminar generalizaciones sin fuente."
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "canonicalStoreValidatorPassed": false,
+  "canonicalStoreErrors": [
+    "No se estableció Evidence con cobertura y localizadores suficientes para todos los claims."
+  ],
+  "canonicalStoreWarnings": [],
+  "preflightPassed": false,
+  "preflight": {
+    "ok": false,
+    "code": "MLS-V02-0528",
+    "articleHash": "68e2a2b8c1ac844513b9a08c4ad6dd3d39bded238afbdd6c6d07f054ca9f56f0",
+    "validatedBy": "Se verificó el hash del artículo; no existe Evidence completa ni assessEntry que autorice VERIFIED."
+  },
+  "apiCalls": 0,
+  "sourceSearch": {
+    "repositories": [],
+    "followupQueries": [
+      "verbos pronominais português brasileiro arrepender-se queixar-se gramática acadêmica",
+      "construções com se português brasileiro reflexivo médio impessoal artigo"
+    ],
+    "followupCandidates": [
+      {
+        "title": "A rede gramatical das construções com se no português brasileiro",
+        "url": "https://www.e-publicacoes.uerj.br/soletras/article/view/73491",
+        "locator": "Resumo e classificação de seis usos de se, organizados nos domínios reflexivo-recíproco, médio e impessoal",
+        "assessment": "Fonte acadêmica brasileira confirma que se tem usos distintos e não equivale sempre ao reflexivo; não sustenta por si só os exemplos específicos arrepender-se/queixar-se da ficha.",
+        "apa7Candidate": "Godoy, L., & Pinheiro, D. (2023). A rede gramatical das construções com se no português brasileiro. Soletras, (45). https://doi.org/10.12957/soletras.2023.73491"
+      }
+    ]
+  },
+  "sourceAudit": {
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "Fonte acadêmica brasileira confirma que se tem usos distintos e não equivale sempre ao reflexivo; não sustenta por si só os exemplos específicos arrepender-se/queixar-se da ficha."
+  },
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "phase": "source-followup"
+}

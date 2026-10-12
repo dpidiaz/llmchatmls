@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0303",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T10:06:17.345Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100534-a78b9b",
+  "assignmentId": "R33A-1791626734319-1d0bb4",
+  "articlePath": "content/ruso/MLS-V09-0303.json",
+  "articleGeneratedAt": "2026-09-19T09:15:25.429Z",
+  "articleSha256": "9dcfc45f15e3f93f435eb0aa3a124a2de1fd2c2c813ebdbe4f66c565d218350c",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite en modo de solo lectura, y consulta dirigida de las fuentes listadas. PENDING_SOURCE_SUPPORT se conserva mientras las referencias no respalden todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha «Pronombre ты en preposicional» (content/ruso/MLS-V09-0303.json; sha256 9dcfc45f15e3f93f435eb0aa3a124a2de1fd2c2c813ebdbe4f66c565d218350c). La ficha identifica тебе como forma oblicua de ты usada con о/об/обо para referirse a «sobre ti». La tabla de Gramota confirma тебе entre las formas declinadas de ты."
+    ],
+    "limitations": [
+      "El cuadro consultado apoya la forma pronominal, no el régimen de о ni las condiciones de ob/obo, trato familiar y ejemplos de la ficha."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "Грамматические признаки местоимений-существительных",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/grammaticheskie-priznaki-mestoimeniy-sushchestvitelnykh",
+      "provider": "Грамота.ру",
+      "use": "Tabla de declinación: ты → тебе en dativo; no cubre el régimen preposicional descrito."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "9dcfc45f15e3f93f435eb0aa3a124a2de1fd2c2c813ebdbe4f66c565d218350c",
+    "backupSha256": "9dcfc45f15e3f93f435eb0aa3a124a2de1fd2c2c813ebdbe4f66c565d218350c",
+    "articleGeneratedAt": "2026-09-19T09:15:25.429Z",
+    "backupGeneratedAt": "2026-09-19T09:15:25.429Z"
+  },
+  "originalArticleSha256": "9dcfc45f15e3f93f435eb0aa3a124a2de1fd2c2c813ebdbe4f66c565d218350c",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

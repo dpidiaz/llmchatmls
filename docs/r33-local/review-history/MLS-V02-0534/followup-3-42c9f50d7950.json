@@ -1,0 +1,129 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V02-0534",
+  "language": "portugues",
+  "reviewedAt": "2026-10-11T01:18:32.2782033Z",
+  "reviewer": "R33 local semantic source follow-up (round 2)",
+  "assignmentId": "R33A-1791681302420-28b417",
+  "articlePath": "content/portugues/MLS-V02-0534.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [],
+  "sourceAudit": {
+    "method": "Búsqueda y apertura de fuentes externas para afirmaciones objetivo; cada locator indica el pasaje visible consultado. Las referencias son candidatas, sin crear Evidence canónica ni afirmar cobertura completa.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33: nuevas búsquedas públicas por dos vías y cotejo de las fuentes pertinentes inspeccionadas; se conserva pendiente cuando no hay respaldo semántico suficiente.",
+    "findings": [
+      "Artículo: Alternancia activa/pasiva y foco. Afirmaciones centrales consideradas: Alternancia de voz activa y pasiva en un mismo evento. Efectos de tema, foco y continuidad discursiva. Condicionamiento por género textual y omisión del agente.",
+      "No se elevó ninguna afirmación a verified: faltan fuentes con locators suficientes para todos los grupos y cobertura descriptiva brasileña donde corresponde.",
+      "Documenta estructura ser + participio y alternancias concretas; no respalda generalizaciones de foco o frecuencia discursiva."
+    ],
+    "limitations": [
+      "Falta fuente de sintaxis/discurso y evidencia de corpus que relacione pasiva con tema, foco, continuidad y género.",
+      "Muy alta: el manual respalda la transformación formal activa/pasiva, pero no la afirmación central sobre foco, continuidad temática, género textual ni condiciones de elección discursiva.",
+      "No se creó Evidence canónica ni se obtuvo assessEntry satisfactorio para todas las afirmaciones; permanece PENDING_SOURCE_SUPPORT."
+    ],
+    "sourceAssessment": "PARTIAL_OR_INSUFFICIENT",
+    "previousFindingsRetainedByHistory": true,
+    "previousReviewStatus": "PENDING_SOURCE_SUPPORT",
+    "exceptionalDisposition": {
+      "blockingCriterion": "Muy alta: el manual respalda la transformación formal activa/pasiva, pero no la afirmación central sobre foco, continuidad temática, género textual ni condiciones de elección discursiva.",
+      "searches": [
+        {
+          "query": "voz passiva português brasileiro foco tópico continuidade temática estudo corpus",
+          "portal": "Búsqueda web pública en literatura académica y repositorios universitarios",
+          "outcome": "La lección 16 muestra ejemplos de transformación activa/pasiva, pero no analiza tema, foco ni continuidad textual."
+        },
+        {
+          "query": "alternância ativa passiva português brasileiro gênero textual frequência pesquisa",
+          "portal": "Búsqueda web pública por construcción y ejemplo",
+          "outcome": "La búsqueda de estudios discursivos no produjo una fuente inspeccionada que respalde las generalizaciones de la ficha."
+        },
+        {
+          "query": "Brazilian Portuguese passive construction semantic frame acceptability ter SciELO study 83 speakers",
+          "portal": "Búsqueda web pública de investigación SciELO",
+          "outcome": "El artículo empírico propone función de realce del paciente y efecto de frames semánticos; las afirmaciones de la entrada exceden el resumen inspeccionado."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Português para principiantes",
+          "url": "https://openlibrary-repo.ecampusontario.ca/jspui/bitstream/123456789/861/4/Portugue%CC%82s-para-principiantes-1538054164.pdf",
+          "locator": "Lição 16, pp. 310–311, líneas 7017–7041",
+          "finding": "Documenta estructura ser + participio y alternancias concretas; no respalda generalizaciones de foco o frecuencia discursiva."
+        },
+        {
+          "title": "A construção passiva em português brasileiro: função explica sua distribuição e frames semânticos influenciam sua aceitabilidade",
+          "url": "https://www.scielo.br/j/delta/a/9bjnh3nnhkPtVgM8wdfZZYF/abstract/?lang=pt",
+          "locator": "Resumen, líneas 82–85; corpus y experimento de aceptabilidad",
+          "finding": "Estudio empírico: respalda que la pasiva puede poner en relieve al paciente y que el agente menos importante es un contexto funcional; no sustenta sin cotejo adicional todas las afirmaciones de frecuencia/foco de la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró reducir la ficha a lo que respalda la fuente. La corrección posible es la descrita en nextStep; aplicarla sin localizar los pasajes y ejemplos específicos dejaría afirmaciones materiales sin cotejo, por lo que no se cambió el contenido en esta revisión.",
+      "canonicalCheck": "Hash vigente del artículo (articleMarkdown) recalculado en el worktree: 339b1dec783d1d7895ed7379bcb9abdb175051190b14b4217c2876f4aedda2bb; cotejado contra la versión base incluida en el lease R33A-1791681302420-28b417. No se creó Evidence canónica ni assessEntry aprobatorio para todos los claims; permanece pendiente.",
+      "nextConcreteStep": "Encontrar estudio primario de discurso/corpus brasileño que compare activa y pasiva en contextos anotados; retirar las afirmaciones de foco y frecuencia si el análisis no las respalda."
+    }
+  },
+  "originalArticleSha256": "339b1dec783d1d7895ed7379bcb9abdb175051190b14b4217c2876f4aedda2bb",
+  "backupComparison": {
+    "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite",
+    "access": "node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-18T06:09:38.053Z",
+    "canonicalGeneratedAt": "2026-09-18T06:09:38.053Z",
+    "backupArticleSha256": "339b1dec783d1d7895ed7379bcb9abdb175051190b14b4217c2876f4aedda2bb",
+    "canonicalArticleSha256": "339b1dec783d1d7895ed7379bcb9abdb175051190b14b4217c2876f4aedda2bb",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V02-0534/followup-2-6623f6a9f82c.json",
+    "sha256": "6623f6a9f82c090e04df686bb2041c85aaafd4fa6eaa07e1c5cf55a0c5c92833",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3,
+  "title": "Alternancia activa/pasiva y foco",
+  "workerId": "R33W-local-20261011011502-8219e9",
+  "canonicalArticleSha256": "339b1dec783d1d7895ed7379bcb9abdb175051190b14b4217c2876f4aedda2bb",
+  "verifiedArticleSha256": "339b1dec783d1d7895ed7379bcb9abdb175051190b14b4217c2876f4aedda2bb",
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 4,
+    "label": "muy alta",
+    "reason": "Muy alta: el manual respalda la transformación formal activa/pasiva, pero no la afirmación central sobre foco, continuidad temática, género textual ni condiciones de elección discursiva.",
+    "nextStep": "Encontrar estudio primario de discurso/corpus brasileño que compare activa y pasiva en contextos anotados; retirar las afirmaciones de foco y frecuencia si el análisis no las respalda."
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "canonicalStoreValidatorPassed": false,
+  "canonicalStoreErrors": [
+    "No se ha establecido Evidence con cobertura y localizadores suficientes para todos los claims."
+  ],
+  "canonicalStoreWarnings": [],
+  "preflightPassed": false,
+  "preflight": {
+    "ok": false,
+    "code": "MLS-V02-0534",
+    "articleHash": "48536e8414c3f87f7edb64cd1270462816410e386f7b9a1935c3dea835c67348",
+    "validatedBy": "Comparación de hash completada; no hay Evidence/assessEntry suficiente para declarar VERIFIED."
+  }
+}

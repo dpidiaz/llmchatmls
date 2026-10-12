@@ -1,0 +1,149 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0190",
+  "title": "에게 vs 한테",
+  "language": "coreano",
+  "articlePath": "content/coreano/MLS-V08-0190.json",
+  "reviewedAt": "2026-10-11T00:22:26.545Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "workerId": "R33W-local-20261011002037-241d84",
+  "originalArticleSha256": "cbea741246b04dda9851c8b42af11521963cb07635fe6e7dedacff7af67953ac",
+  "canonicalArticleSha256": "cbea741246b04dda9851c8b42af11521963cb07635fe6e7dedacff7af67953ac",
+  "verifiedArticleSha256": "cbea741246b04dda9851c8b42af11521963cb07635fe6e7dedacff7af67953ac",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "에게/한테 격식·구어 차이는 말뭉치 연구에 의존하며 사전 표지만으로 분포 주장을 확인할 수 없다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "에게/한테 격식·구어 차이는 말뭉치 연구에 의존하며 사전 표지만으로 분포 주장을 확인할 수 없다.",
+      "searches": [
+        {
+          "query": "site:kci.go.kr 한테서 에게서 문어 구어 corpus register",
+          "portal": "한국학술지인용색인(KCI) 검색",
+          "outcome": "말뭉치 연구 결과의 register 분포와 ficha의 일반화가 긴장됨을 확인했다."
+        },
+        {
+          "query": "site:kci.go.kr \"에게서\" \"한테서\" 문어체 구어체 시원격",
+          "portal": "한국학술지인용색인(KCI) 검색",
+          "outcome": "별도 논문 결과에서도 register 대비를 다루며 자료·표본을 비교할 필요가 확인됐다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "백종학, 사용역 말뭉치 조사 분포 연구",
+          "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002774911",
+          "locator": "초록·방법: 구어/문어·격식/비격식 말뭉치 비교; 한테서 결과",
+          "finding": "한테서 초록 분포가 단순 구어 일반화와 긴장을 만듦."
+        },
+        {
+          "title": "번역학연구, 한·불 번역문에서 여격 조사 사용역",
+          "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+          "locator": "초록/본문 발췌: pp. 576 이하; -에게/-한테 빈도 및 register 대비 설명",
+          "finding": "에게를 문어체, 한테를 구어체로 비교하는 말뭉치 논의를 제공한다. ficha의 모든 문맥·분포 주장을 검증하려면 본문 표·방법 확인이 필요하다."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "연구 방법·표에서 에게/한테의 장르별 분포를 확인하고 비교 범위를 결과에 맞춘다."
+    }
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.545Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "백종학, 사용역 말뭉치 조사 분포 연구"
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "backupComparison": {
+    "database": "local coordinator canonical branch snapshot",
+    "mode": "read-only hash comparison",
+    "articlePath": "content/coreano/MLS-V08-0190.json",
+    "articleSha256": "cbea741246b04dda9851c8b42af11521963cb07635fe6e7dedacff7af67953ac",
+    "coordinatorBaseSha256": "cbea741246b04dda9851c8b42af11521963cb07635fe6e7dedacff7af67953ac",
+    "articleHashMatchesCoordinatorBase": true,
+    "canonicalEvidenceIndexEntry": false,
+    "canonicalArticleSha256": "cbea741246b04dda9851c8b42af11521963cb07635fe6e7dedacff7af67953ac",
+    "articleMatches": false,
+    "versionMatches": false
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0190/followup-1-00579ccee5ee.json",
+    "sha256": "00579ccee5ee2aa721e31538620b6de2544e10fc1575fa2997adf7c5788451fd",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "sourceChecks": [
+    {
+      "sourceTitle": "백종학, 사용역 말뭉치 조사 분포 연구",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002774911",
+      "locator": "초록·방법: 구어/문어·격식/비격식 말뭉치 비교; 한테서 결과",
+      "result": "PARTIAL",
+      "finding": "한테서 초록 분포가 단순 구어 일반화와 긴장을 만듦."
+    },
+    {
+      "sourceTitle": "번역학연구, 한·불 번역문에서 여격 조사 사용역",
+      "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+      "locator": "초록/본문 발췌: pp. 576 이하; -에게/-한테 빈도 및 register 대비 설명",
+      "result": "PARTIAL",
+      "finding": "에게를 문어체, 한테를 구어체로 비교하는 말뭉치 논의를 제공한다. ficha의 모든 문맥·분포 주장을 검증하려면 본문 표·방법 확인이 필요하다."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "백종학, 사용역 말뭉치 조사 분포 연구",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002774911",
+      "locator": "초록·방법: 구어/문어·격식/비격식 말뭉치 비교; 한테서 결과",
+      "finding": "한테서 초록 분포가 단순 구어 일반화와 긴장을 만듦."
+    },
+    {
+      "title": "번역학연구, 한·불 번역문에서 여격 조사 사용역",
+      "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+      "locator": "초록/본문 발췌: pp. 576 이하; -에게/-한테 빈도 및 register 대비 설명",
+      "finding": "에게를 문어체, 한테를 구어체로 비교하는 말뭉치 논의를 제공한다. ficha의 모든 문맥·분포 주장을 검증하려면 본문 표·방법 확인이 필요하다."
+    }
+  ],
+  "followupSources": [
+    {
+      "title": "백종학, 사용역 말뭉치 조사 분포 연구",
+      "url": "https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002774911",
+      "locator": "초록·방법: 구어/문어·격식/비격식 말뭉치 비교; 한테서 결과",
+      "finding": "한테서 초록 분포가 단순 구어 일반화와 긴장을 만듦.",
+      "result": "PARTIAL"
+    },
+    {
+      "title": "번역학연구, 한·불 번역문에서 여격 조사 사용역",
+      "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+      "locator": "초록/본문 발췌: pp. 576 이하; -에게/-한테 빈도 및 register 대비 설명",
+      "finding": "에게를 문어체, 한테를 구어체로 비교하는 말뭉치 논의를 제공한다. ficha의 모든 문맥·분포 주장을 검증하려면 본문 표·방법 확인이 필요하다.",
+      "result": "PARTIAL"
+    }
+  ],
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "에게/한테 격식·구어 차이는 말뭉치 연구에 의존하며 사전 표지만으로 분포 주장을 확인할 수 없다.",
+    "nextStep": "연구 방법·표에서 에게/한테의 장르별 분포를 확인하고 비교 범위를 결과에 맞춘다."
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0131",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:59:43.870Z",
+  "reviewer": "R33 local semantic source-to-claim follow-up",
+  "workerId": "R33W-local-20261011105450-9edfa8",
+  "assignmentId": "R33A-1791716090756-0a2a38",
+  "articlePath": "content/ruso/MLS-V09-0131.json",
+  "articleGeneratedAt": "2026-09-19T10:15:33.533Z",
+  "articleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33 source-followup: relectura del artículo vigente, cotejo de fuentes primarias abiertas con localizadores y registro excepcional para afirmaciones todavía no cubiertas. No se creó Evidence y no se elevó el estado.",
+    "findings": [
+      "La fuente establece la oposición movimiento/ubicación para в/на; faltan fuentes para cada verbo y ejemplo incluido.",
+      "в/на + acusativo para dirección se contrasta con prepositivo estático; falta fuente de gramática que delimite verbos de movimiento, destinos convencionales y excepciones. Los ejemplos no están vinculados a un locator.",
+      "Lease R33A-1791716090756-0a2a38: la revisión del texto completo “В/на + acusativo dirección” confirmó respaldo parcial de В and на with accusative and prepositional; На with accusative and prepositional; Las páginas abiertas solo ilustran reglas generales de в/на; no respaldan todos los verbos de movimiento, destinos y restricciones de los ejemplos."
+    ],
+    "limitations": [
+      "Las búsquedas de dos páginas de Gramota relevantes para género ruso devolvieron 403; se registró el límite y no se citó su fragmento como fuente verificada. Para las demás entradas faltan pasajes concretos y APA 7 rastreable.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa.",
+      "Las páginas abiertas solo ilustran reglas generales de в/на; no respaldan todos los verbos de movimiento, destinos y restricciones de los ejemplos.",
+      "No se creó Evidence canónica vigente ni se obtuvo una evaluación assessEntry exitosa; por contrato R33 la entrada permanece pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Las páginas abiertas solo ilustran reglas generales de в/на; no respaldan todos los verbos de movimiento, destinos y restricciones de los ejemplos.",
+      "searches": [
+        {
+          "query": "site:russian.cornell.edu/grammar accusative Russian в на motion location prepositions",
+          "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+          "outcome": "Consulta ejecutada; condujo a la gramática Cornell y a las páginas indicadas en primarySourcesInspected. El resultado respalda solo el alcance descrito allí."
+        },
+        {
+          "query": "Cornell Beginning Russian Grammar accusative case motion location chapter Leed Nakhimovsky online",
+          "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+          "outcome": "Consulta ejecutada; no apareció en los resultados una fuente primaria adicional que cubra los claims faltantes. No se toma la lista de resultados como evidencia."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "В and на with accusative and prepositional",
+          "url": "https://russian.cornell.edu/grammar/html/le12_21_b.htm",
+          "locator": "Ejemplos y regla de в + acusativo para movimiento hacia dentro/hacia un lugar frente a prepositivo locativo.",
+          "finding": "Apoya el contraste general de в; no valida todas las construcciones de в/на, destinos, verbos ni excepciones de la ficha."
+        },
+        {
+          "title": "На with accusative and prepositional",
+          "url": "https://russian.cornell.edu/grammar/html/le12_21_e.htm",
+          "locator": "Líneas 0–5: на + acusativo para movimiento y prepositivo para localización.",
+          "finding": "Apoya el contraste ilustrado de на; no respalda automáticamente todos los destinos, verbos y ejemplos del artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o restringir el texto. No se aplicó una modificación sin un cotejo completo y fuente que valide la redacción sustitutiva; la entrada queda sin cambios hasta validar todos los ejemplos/afirmaciones.",
+      "canonicalCheck": "Artículo 9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433; coincide con state.baseArticleHashes para MLS-V09-0131. La entrada no tiene Evidence canónica verificada en el índice local consultado; assessEntry no se ejecutó como aprobado porque falta el respaldo claim-level.",
+      "nextConcreteStep": "Cotejar cada par de ejemplo y la selección de в/на con páginas primarias específicas y registrar el localizador correspondiente."
+    }
+  },
+  "claimAssessments": [
+    {
+      "claim": "в/на + acusativo de dirección",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Motion vs. location",
+          "url": "https://russian.cornell.edu/grammar/html/gr03_a_2.htm",
+          "locator": "definition and examples: в/на + accusative for motion; prepositional for location"
+        }
+      ],
+      "rationale": "La fuente establece la oposición movimiento/ubicación para в/на; faltan fuentes para cada verbo y ejemplo incluido."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Motion vs. location",
+          "url": "https://russian.cornell.edu/grammar/html/gr03_a_2.htm",
+          "locator": "definition and examples: в/на + accusative for motion; prepositional for location"
+        }
+      ],
+      "rationale": "Las búsquedas de dos páginas de Gramota relevantes para género ruso devolvieron 403; se registró el límite y no se citó su fragmento como fuente verificada. Para las demás entradas faltan pasajes concretos y APA 7 rastreable."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Motion vs. location",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr03_a_2.htm",
+      "locator": "definition and examples: в/на + accusative for motion; prepositional for location",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Motion vs. location. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr03_a_2.htm"
+    },
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "В and на with accusative and prepositional",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le12_21_b.htm",
+      "locator": "Ejemplos y regla de в + acusativo para movimiento hacia dentro/hacia un lugar frente a prepositivo locativo.",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). В and на with accusative and prepositional. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le12_21_b.htm"
+    },
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "На with accusative and prepositional",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le12_21_e.htm",
+      "locator": "Líneas 0–5: на + acusativo para movimiento y prepositivo para localización.",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). На with accusative and prepositional. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le12_21_e.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "Canonical content JSON against local coordinator baseArticleHashes; prior SQL snapshot comparison retained from review history",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:15:33.533Z",
+    "backupGeneratedAt": "2026-09-19T10:15:33.533Z",
+    "canonicalArticleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+    "backupArticleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "9daa3b87b8e2ca8ac95df412dae7913345f325bb5262d9287136add3fef64433",
+  "followupRound": 4,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0131/followup-3-b04aae66e788.json",
+    "sha256": "b04aae66e788aef80848888d52df3d96426ef35303fedf8f4919e043879de5a8",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "verifiedArticleSha256": null,
+  "sourceFollowup": {
+    "workerId": "R33W-local-20261011105450-9edfa8",
+    "assignmentId": "R33A-1791716090756-0a2a38",
+    "previousReviewSha256": "931486afab84e03b674a9cc88bbba6d080623f3b918ea18e8343b78b36da7f44",
+    "sourceChecks": [
+      {
+        "title": "В and на with accusative and prepositional",
+        "url": "https://russian.cornell.edu/grammar/html/le12_21_b.htm",
+        "locator": "Ejemplos y regla de в + acusativo para movimiento hacia dentro/hacia un lugar frente a prepositivo locativo.",
+        "finding": "Apoya el contraste general de в; no valida todas las construcciones de в/на, destinos, verbos ni excepciones de la ficha."
+      },
+      {
+        "title": "На with accusative and prepositional",
+        "url": "https://russian.cornell.edu/grammar/html/le12_21_e.htm",
+        "locator": "Líneas 0–5: на + acusativo para movimiento y prepositivo para localización.",
+        "finding": "Apoya el contraste ilustrado de на; no respalda automáticamente todos los destinos, verbos y ejemplos del artículo."
+      }
+    ],
+    "searches": [
+      {
+        "query": "site:russian.cornell.edu/grammar accusative Russian в на motion location prepositions",
+        "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+        "outcome": "Consulta ejecutada; condujo a la gramática Cornell y a las páginas indicadas en primarySourcesInspected. El resultado respalda solo el alcance descrito allí."
+      },
+      {
+        "query": "Cornell Beginning Russian Grammar accusative case motion location chapter Leed Nakhimovsky online",
+        "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+        "outcome": "Consulta ejecutada; no apareció en los resultados una fuente primaria adicional que cubra los claims faltantes. No se toma la lista de resultados como evidencia."
+      }
+    ],
+    "completedAt": "2026-10-11T10:59:43.870Z"
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Las páginas abiertas solo ilustran reglas generales de в/на; no respaldan todos los verbos de movimiento, destinos y restricciones de los ejemplos.",
+    "nextStep": "Cotejar cada par de ejemplo y la selección de в/на con páginas primarias específicas y registrar el localizador correspondiente."
+  }
+}

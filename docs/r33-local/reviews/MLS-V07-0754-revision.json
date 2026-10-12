@@ -2,26 +2,123 @@
   "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
   "code": "MLS-V07-0754",
   "language": "chino-taiwan",
-  "reviewedAt": "2026-10-10T06:38:47.713Z",
-  "reviewer": "R33 local semantic source review",
+  "reviewedAt": "2026-10-11T05:43:59.867Z",
+  "reviewer": "R33W-local-20261011050055-cf0f8d",
+  "assignmentId": "R33A-1791694855663-dd464d",
+  "workerId": "R33W-local-20261011050055-cf0f8d",
   "articlePath": "content/chino-taiwan/MLS-V07-0754.json",
-  "status": "PENDING_SOURCE_SUPPORT",
-  "claimsTotal": 1,
-  "claimsVerified": 0,
-  "coverageComplete": false,
-  "citationReady": false,
+  "status": "VERIFIED",
+  "claimsTotal": 4,
+  "claimsVerified": 4,
+  "coverageComplete": true,
+  "citationReady": true,
   "semanticReview": {
-    "method": "Búsqueda de literatura primaria y contraste preliminar con la afirmación, los ejemplos y los límites de la ficha.",
+    "method": "Lectura directa del abstract del estudio de Kurdyumov (2025), cotejo del registro editorial y lectura de la entrada 咧 del diccionario oficial del Ministerio de Educación de Taiwán.",
     "findings": [
-      "La búsqueda localizó fuentes sobre el taiwanés 咧 y sobre usos de 咧 en mandarín, pero no una fuente que respalde todos los ejemplos y valores atribuidos en la entrada a la partícula coloquial 咧.",
-      "La ficha mezcla formas de posible origen o uso diferente (durativo/interrogativo/actitudinal) sin delimitarlas con material primario verificable."
+      "El artefacto anterior no tenía fuentes primarias y atribuía significados específicos (pregunta marcada, continuidad, énfasis, actitud) y frecuencia/uso escrito sin localizadores verificables. Se retiraron esas afirmaciones y ejemplos no cotejados.",
+      "Kurdyumov enumera 咧 con varias realizaciones dentro de un conjunto de partículas finales localizadas de Taiwan Guoyu, usadas principalmente en habla espontánea; indica variación ortográfica y analiza el conjunto como marcador de actitud hacia interlocutor y enunciado.",
+      "El diccionario oficial registra una lectura de 咧 como partícula final equivalente a 哪、哩、啦 y separa otras lecturas del carácter; la ficha explicita esa polisemia y no presenta el ejemplo didáctico como cita.",
+      "La influencia de Southern Min se atribuye al grupo en el resumen del estudio, no a un origen individual definitivo de 咧. APA 7, localizadores, hash vigente, assessEntry e índice canónico pasan."
     ],
     "limitations": [
-      "No se cambió el artículo ni se creó Evidence canónica. Se necesita un estudio de interacción/corpus que analice precisamente 咧 final en mandarín de Taiwán; el diccionario de taiwanés no basta para transferir esos usos al mandarín."
+      "El estudio académico está accesible en web como artículo con abstract detallado; no se infieren del abstract ejemplos específicos ni un valor semántico único para cada variante de 咧.",
+      "La entrada del diccionario también registra un ejemplo literario antiguo; no se extrapola directamente a cada uso oral contemporáneo de Taiwán."
     ]
   },
   "originalArticleSha256": "af5c385f9dbdcadb7bbf88a49c2700f00c01bf5bf287b50c01aa0d4900b219f5",
+  "verifiedArticleSha256": "bc95431b99198d2e4ecabf4337566479db6b158d3018df4107e244ec8832b40f",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite no está presente en este worktree; no hay backup SQL accesible para comparación.",
+    "backupGeneratedAt": "2026-09-19T22:43:01.067Z",
+    "backupArticleSha256": null,
+    "canonicalOriginalArticleSha256": "af5c385f9dbdcadb7bbf88a49c2700f00c01bf5bf287b50c01aa0d4900b219f5",
+    "articleMatchesAtPriorReview": null,
+    "currentArticleSha256": "bc95431b99198d2e4ecabf4337566479db6b158d3018df4107e244ec8832b40f",
+    "currentArticleDiffersFromBackupDueToThisReview": null,
+    "note": "Hash Markdown de la versión original preservado desde la revisión previa. No se puede cotejar directamente con SQL porque el respaldo no está disponible en este worktree."
+  },
+  "sourceReferences": [
+    {
+      "apa7": "Kurdyumov, V. A. (2025). Taiwanese Guoyu: colloquial localized sentence-final particles in everyday communication. Philology. Theory & Practice, 18(12), 5566–5575. https://doi.org/10.30853/phil20250749",
+      "url": "https://doi.org/10.30853/phil20250749",
+      "locator": "abstract, lines 17–22; journal metadata, lines 10–16",
+      "supports": "Localized Taiwanese Guoyu sentence-final particle group, pronunciations/orthographic variation, oral use, interactional stance, and group-level contact influence.",
+      "limits": "The inspected web article provides the abstract; no unsupported individual example or specific etymology is inferred."
+    },
+    {
+      "apa7": "Ministry of Education, Taiwan. (2021). 咧. In Revised Mandarin Chinese Dictionary. https://dict.revised.moe.edu.tw/dictView.jsp?ID=3510&la=0&powerMode=0",
+      "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=3510&la=0&powerMode=0",
+      "locator": "entry 咧, lines 29–42",
+      "supports": "One reading of 咧 as sentence-final particle and separate pronunciations/meanings.",
+      "limits": "Dictionary entry covers the listed reading and cites an older literary example; not every modern Taiwanese conversational use."
+    }
+  ],
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V07-0754/followup-2-6e2aa21b8941.json",
+    "sha256": "6e2aa21b894172212ebbeebfcc1824222ec99677f4e8286ba95f3827fb6e15ab",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3,
+  "searches": [
+    {
+      "query": "Taiwan Mandarin colloquial localized sentence-final particle 咧 Kurdyumov 2025 pronunciation address-modus",
+      "portal": "Full-text article page of Philology. Theory & Practice and publisher DOI record; abstract and bibliographic metadata inspected",
+      "outcome": "Confirmed 咧 in the localized Taiwan Guoyu particle set, multiple pronunciations, primary spoken use and address-modus analysis; narrowed all claims to the abstract."
+    },
+    {
+      "query": "site:dict.revised.moe.edu.tw/dictView.jsp 咧 句末 哪 哩 啦 教育部",
+      "portal": "Ministry of Education, Taiwan, Revised Mandarin Chinese Dictionary, entry 咧",
+      "outcome": "Confirmed one pronunciation/reading as a sentence-final particle equivalent to 哪、哩、啦 and separate readings for same character."
+    }
+  ],
+  "primarySourcesInspected": [
+    {
+      "title": "V. A. Kurdyumov, Taiwanese Guoyu: colloquial localized sentence-final particles in everyday communication",
+      "url": "https://philology-journal.ru/en/article/phil20250749/fulltext",
+      "locator": "Abstract, lines 17–22; journal metadata lines 10–16",
+      "finding": "Enumerates 咧 with multiple pronunciations in the localized Taiwan Guoyu sentence-final set, notes oral use/unstable orthography for the group, analyzes address-modus, and describes contact influence at group level."
+    },
+    {
+      "title": "Ministry of Education, Taiwan, Revised Mandarin Chinese Dictionary, 咧",
+      "url": "https://dict.revised.moe.edu.tw/dictView.jsp?ID=3510&la=0&powerMode=0",
+      "locator": "Dictionary entry 咧, lines 29–42, especially line 33",
+      "finding": "For one reading, labels 咧 a particle used sentence-finally and approximately equivalent to 哪、哩、啦; distinguishes other readings/word classes."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": true,
+    "path": "MLS R32 EDITORIAL/evidence git/entries/chino-taiwan/MLS-V07-0754.json",
+    "status": "VERIFIED",
+    "evidenceRevision": 2,
+    "articleSha256": "bc95431b99198d2e4ecabf4337566479db6b158d3018df4107e244ec8832b40f",
+    "assessment": "PASSED",
+    "verifiedIndexIncludesCode": true
+  },
+  "assessEntry": {
+    "attempted": true,
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "claimsTotal": 4,
+    "claimsVerified": 4,
+    "coverageComplete": true,
+    "citationReady": true,
+    "derivedStatus": "VERIFIED"
+  },
+  "preflight": {
+    "ok": true,
+    "claimsTotal": 4,
+    "claimsVerified": 4,
+    "coverageComplete": true,
+    "citationReady": true,
+    "errors": []
+  },
   "cloudflareEditorialInteractions": 0,
   "d1Reads": 0,
-  "d1Writes": 0
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0
 }

@@ -1,0 +1,74 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0829",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T17:25:03.992Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791652844138-bad78b",
+  "workerId": "R33W-local-20261010172044-86156d",
+  "articlePath": "content/japones/MLS-V06-0829.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "La entrada atribuye a つまり funciones de reformulación, síntesis y conclusión, con posición típica al inicio de oración.",
+      "No se consultó una fuente de conectores japoneses que determine la relación semántica y distribución; habría que contrastar ejemplos de paráfrasis, conclusión y conversación por separado.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T09:18:12.326Z) frente a content/japones/MLS-V06-0829.json; article_markdown SHA-256 b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f / b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f; coincidencia=true.",
+      "Li (2026) respalda que つまり se estudia como conector de reformulación y su distribución por género; faltan localizadores por función/posición y ejemplos de la ficha."
+    ],
+    "limitations": [
+      "Fuentes consultadas solo cubren partes de las afirmaciones, si las hay; falta validar exhaustivamente cada ejemplo y cada claim con localizadores precisos.",
+      "Sin Evidence canónica y sin ejecución de assessEntry, no se cumplen condiciones para VERIFIED.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ]
+  },
+  "originalArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+  "verifiedArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T09:18:12.326Z",
+    "backupArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+    "canonicalArticleSha256": "b589981807dbd4a6aabebf3934753ac0573fe26ce3c66084df5e2fc8c1e44b3f",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "ジャンルによる換言の接続表現の使い分け—BCCWJ、CSJ、CEJCの出現頻度別の特徴",
+      "author": "Li, Q.",
+      "year": 2026,
+      "publication": "計量国語学, 35(4), 193–208",
+      "doi": "10.24701/mathling.35.4_193",
+      "url": "https://www.jstage.jst.go.jp/article/mathling/35/4/35_193/_pdf",
+      "locator": "pp. 193–208; resumen y análisis de つまり y tres conectores de reformulación",
+      "coverage": "Analiza つまり como expresión de reformulación en libros, conferencias y conversación informal; documenta diferencias de frecuencia por género.",
+      "limits": "No valida todas las funciones, posiciones, paráfrasis ni ejemplos de la ficha."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0829/pre-coordinator.json",
+    "sha256": "6559cd2d972732ed81f5de0c38323ad965dedcdb1d6c6ca32aeeda249a38c735",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 1
+}

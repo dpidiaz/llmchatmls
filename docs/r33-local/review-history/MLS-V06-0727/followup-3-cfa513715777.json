@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0727",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0727.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "Digital Daijisen, Kotobank, entrada 直す, sentido 5, línea 33, define 連用形+直す como volver a hacer para mejorar y ejemplifica 見直す／やり直す. Apoya la formación central; no valida automáticamente los ejemplos de correo, cálculo ni extensiones de reconsideración."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Digital Daijisen define el sufijo adosado a 連用形 y el sentido de repetir para mejorar, pero faltan los ejemplos concretos y extensiones semánticas.",
+      "searches": [
+        {
+          "query": "site:kotobank.jp/word 直す 補助動詞 動詞 連用形 意味",
+          "portal": "Kotobank search",
+          "outcome": "Definición directa del sentido añadido a la forma continuativa; parte de los ejemplos difiere de la entrada."
+        },
+        {
+          "query": "日本語 文法 〜直す 書き直す 読み直す 例文 教材",
+          "portal": "Japanese grammar materials search",
+          "outcome": "No se inspeccionó una fuente adicional que coteje los ejemplos exactos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "小学館. (s. f.). 直す. デジタル大辞泉, コトバンク.",
+          "url": "https://kotobank.jp/word/%E7%9B%B4%E3%81%99-587499",
+          "locator": "sentido 5, línea 33",
+          "finding": "Confirma la forma 連用形+直す, volver a hacer para mejorar, y ejemplos 見直す／やり直す."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré restringir ejemplos a los publicados por el diccionario y separar corregir de reconsiderar; se requiere verificar cada caso.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 641e1c12beffdc2feb482f78dd655de0dd9b0d1853581d83230f6cbc7b618b75. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "Digital Daijisen define el sufijo adosado a 連用形 y el sentido de repetir para mejorar, pero faltan los ejemplos concretos y extensiones semánticas.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "641e1c12beffdc2feb482f78dd655de0dd9b0d1853581d83230f6cbc7b618b75",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0727/followup-2-be0fd801e6b7.json",
+    "sha256": "be0fd801e6b7368c8d952c5266db879af4532c39c935a4484e451f421acacd0d",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

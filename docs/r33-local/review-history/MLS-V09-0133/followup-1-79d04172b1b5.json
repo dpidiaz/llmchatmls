@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0133",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.590Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0133.json",
+  "articleGeneratedAt": "2026-09-19T10:17:16.687Z",
+  "articleSha256": "7a7686ffd7a965ea53ba53a0525c8cbe9e986b8b6fcc4142becce4f023d57802",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La tabla especializada confirma а→у y я→ю para sustantivos de declinación a; falta comprobar clasificación y ejemplos propios del artículo.",
+      "Se afirma que nombres femeninos singulares terminados en -я cambian a -ю en acusativo."
+    ],
+    "limitations": [
+      "No se completó el cotejo de todas las afirmaciones con fuente primaria y localizador suficiente. Ninguna entrada se certifica y no se creó Evidence canónica.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Acusativo femenino -я → -ю",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+          "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+          "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples"
+        }
+      ],
+      "rationale": "La tabla especializada confirma а→у y я→ю para sustantivos de declinación a; falta comprobar clasificación y ejemplos propios del artículo."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+          "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+          "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples"
+        }
+      ],
+      "rationale": "No se completó el cotejo de todas las afirmaciones con fuente primaria y localizador suficiente. Ninguna entrada se certifica y no se creó Evidence canónica."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "The Acc. Sg. of #-declension and o-declension inanimate nouns",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr02_a_1.htm",
+      "locator": "lines 0–7: inanimate accusative equals nominative; direct-object examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The Acc. Sg. of #-declension and o-declension inanimate nouns. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr02_a_1.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:17:16.687Z",
+    "backupGeneratedAt": "2026-09-19T10:17:16.687Z",
+    "canonicalArticleSha256": "7a7686ffd7a965ea53ba53a0525c8cbe9e986b8b6fcc4142becce4f023d57802",
+    "backupArticleSha256": "7a7686ffd7a965ea53ba53a0525c8cbe9e986b8b6fcc4142becce4f023d57802",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "7a7686ffd7a965ea53ba53a0525c8cbe9e986b8b6fcc4142becce4f023d57802",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0133/pre-coordinator.json",
+    "sha256": "7ec54c2aaa069583efb3a88abccb87a411b9920b189138fa755198e3771292db",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

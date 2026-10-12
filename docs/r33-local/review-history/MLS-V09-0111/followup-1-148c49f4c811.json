@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0111",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.549Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0111.json",
+  "articleGeneratedAt": "2026-09-19T09:22:25.888Z",
+  "articleSha256": "a6a7a741f5b14a81c945fa00ed00489f6282934fb5129bdea8a6f892942497af",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente explica que en predicación nominal conversacional se omite el verbo presente “быть” y da el ejemplo “Он врач”; faltan límites de registro/tipos de predicado y ejemplos del artículo.",
+      "La ficha dice que быть se omite normalmente en presente en predicaciones nominales/adjetivales y contrasta con otros tiempos."
+    ],
+    "limitations": [
+      "La cobertura semántica es parcial; hacen falta fuentes y localizadores para la mayoría de los claims y ejemplos.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Ausencia de быть en presente",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Instrumental case: linking verbs and double-object verbs",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_k.htm",
+          "locator": "first paragraph and examples: conversational present “be” omission; Он врач vs Он работает врачом"
+        }
+      ],
+      "rationale": "La fuente explica que en predicación nominal conversacional se omite el verbo presente “быть” y da el ejemplo “Он врач”; faltan límites de registro/tipos de predicado y ejemplos del artículo."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Instrumental case: linking verbs and double-object verbs",
+          "url": "https://russian.cornell.edu/grammar/html/le103_110_k.htm",
+          "locator": "first paragraph and examples: conversational present “be” omission; Он врач vs Он работает врачом"
+        }
+      ],
+      "rationale": "La cobertura semántica es parcial; hacen falta fuentes y localizadores para la mayoría de los claims y ejemplos."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Instrumental case: linking verbs and double-object verbs",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le103_110_k.htm",
+      "locator": "first paragraph and examples: conversational present “be” omission; Он врач vs Он работает врачом",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Instrumental case: linking verbs and double-object verbs. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le103_110_k.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:22:25.888Z",
+    "backupGeneratedAt": "2026-09-19T09:22:25.888Z",
+    "canonicalArticleSha256": "a6a7a741f5b14a81c945fa00ed00489f6282934fb5129bdea8a6f892942497af",
+    "backupArticleSha256": "a6a7a741f5b14a81c945fa00ed00489f6282934fb5129bdea8a6f892942497af",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "a6a7a741f5b14a81c945fa00ed00489f6282934fb5129bdea8a6f892942497af",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0111/pre-coordinator.json",
+    "sha256": "5c02dfd1b113ab30239c60d20e7ba0f659433f8e0c2815b77027d4563467e9df",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-CHECKPOINT-1",
+  "branch": "feat/r33-local-recovery",
+  "workerId": "R33W-local-20261011105450-9edfa8",
+  "assignmentId": "R33A-1791716090756-0a2a38",
+  "code": "MLS-V09-0148",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/ruso/MLS-V09-0148.json",
+  "articleSha256": "a2f9ba9a015e8b62dedbb8ad1701b853f8348c7bec9bd627a7111086f5802e24",
+  "previousReviewSha256": "ed24769ed75126ff2669aa61cdc8b49b533f16c721a3205e53b405f5d58e5205",
+  "reviewPath": "docs/r33-local/reviews/MLS-V09-0148-revision.json",
+  "reviewSha256": "de4434e208926afffe8bbb91a9d75119816b5c5347d8d1442bf4c015a4655f4e",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsReviewed": 2,
+  "claimsVerified": 0,
+  "searches": [
+    {
+      "query": "site:russian.cornell.edu/grammar feminine genitive singular ы и spelling rule Russian noun declension",
+      "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+      "outcome": "Consulta ejecutada; condujo a la gramática Cornell y a las páginas indicadas en primarySourcesInspected. El resultado respalda solo el alcance descrito allí."
+    },
+    {
+      "query": "Cornell Russian feminine genitive singular ы и spelling rule",
+      "portal": "Google web search, consulta pública gratuita; el portal solo localiza recursos, no cuenta como evidencia primaria.",
+      "outcome": "Consulta ejecutada; no apareció en los resultados una fuente primaria adicional que cubra los claims faltantes. No se toma la lista de resultados como evidencia."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "Case endings",
+      "url": "https://russian.cornell.edu/grammar/html/case_endings.htm",
+      "locator": "Líneas 0–37: tabla de terminaciones por declinación y caso; genitivo singular femenino a-declinación -ы y ь-declinación -и; nota sobre excepciones.",
+      "finding": "La tabla respalda patrones de clases definidas, con excepciones y reglas menores omitidas; faltan asignación de clase y validación de cada ejemplo."
+    },
+    {
+      "title": "Spelling rules",
+      "url": "https://russian.cornell.edu/grammar/html/spelling_rules.htm",
+      "locator": "Líneas 0–19: regla ortográfica de ы→и tras consonantes velares/sibilantes en los contextos enumerados.",
+      "finding": "Explica una condición ortográfica relevante, no todas las formas de genitivo femenino ni las excepciones/lexemas de la ficha."
+    }
+  ],
+  "canonicalEvidenceCreated": false,
+  "assessEntry": "not passed; claim-level evidence incomplete",
+  "completedAt": "2026-10-11T11:00:32.568Z",
+  "blocker": "Tablas y regla ortográfica respaldan patrones generales, pero la ficha abarca clases y ejemplos que no se han cotejado individualmente.",
+  "nextConcreteStep": "Clasificar cada sustantivo por declinación, verificar terminación y regla ortográfica en fuente primaria y localizar excepciones.",
+  "coordinatorCompletion": "completed",
+  "integratedAt": "2026-10-11T11:00:03.129Z"
+}

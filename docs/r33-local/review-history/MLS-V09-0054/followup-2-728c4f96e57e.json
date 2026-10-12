@@ -1,0 +1,358 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0054",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T00:50:05.817Z",
+  "reviewer": "R33 local semantic source follow-up",
+  "workerId": "R33W-local-20261011004401-38cd85",
+  "assignmentId": "R33A-1791679441550-5099bd",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/ruso/MLS-V09-0054.json",
+  "articleGeneratedAt": "2026-09-19T10:20:06.033Z",
+  "articleSha256": "eaf4c2a6a202063e69401132dea6b09bff403bfd2d3b66f03bda1efc4c9a6319",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 8,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "priorReview": {
+    "path": "docs/r33-local/reviews/MLS-V09-0054-revision.json",
+    "sha256": "503d210be45f62117b42a9d08f367961277e52021330074b07ec166233443818",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791653576444-d85aa6",
+    "semanticFindings": [
+      "Las fuentes explican alternancias de sonoridad/sordez y correspondencias letra-sonido, pero no respaldan el inventario o la frecuencia de grupos consonánticos, pronunciaciones y simplificaciones ejemplificadas.",
+      "Los ejemplos y restricciones de alcance no quedaron cotejados en conjunto con localizadores primarios específicos; no se extrapola el respaldo general a cada ejemplo.",
+      "Se leyó íntegramente “Clusters consonánticos” (ruso) y se comparó con wiki_articles del backup SQL, abierto en modo read-only: SHA-256 de articleMarkdown y generatedAt coinciden con la versión del repositorio. No hay Evidence canónica para MLS-V09-0054, así que la ficha no tiene respaldo R33 fuente-afirmación con localizadores.",
+      "Bloque material 01/8: “En ruso son frecuentes los grupos consonánticos, es decir, secuencias de dos o más consonantes sin una vocal entre ellas. Algunas pueden resultar difíciles para hablantes de español porque concentran varios sonidos en una sola parte de la palabra.”. Aún sin fuente y locator cotejados en Evidence canónica; no se certifica.",
+      "Bloque material 02/8: “Estos grupos forman parte normal de la estructura fonológica rusa. Al pronunciarlos, las consonantes pueden influirse entre sí mediante procesos como asimilación de sonoridad o sordez, pero eso no significa que todas se eliminen o que aparezcan vocales nuevas.”. Aún sin fuente y locator cotejados en Evidence canónica; no se certifica.",
+      "Bloque material 03/8: “La escritura conserva normalmente todas las consonantes del grupo, aunque la pronunciación pueda simplificarse o ajustarse en determinadas palabras.”. Aún sin fuente y locator cotejados en Evidence canónica; no se certifica."
+    ]
+  },
+  "sourceReferences": [
+    {
+      "id": "ipa-russian",
+      "title": "Russian",
+      "authors": "Yanushevskaya, Irena; Bunčić, Daniel",
+      "year": 2015,
+      "publisher": "Journal of the International Phonetic Association, 45(2), 221–228; Cambridge University Press",
+      "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+      "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety.",
+      "APA7": "Yanushevskaya, I., & Bunčić, D. (2015). Russian. Journal of the International Phonetic Association, 45(2), 221–228. https://doi.org/10.1017/S0025100314000395"
+    },
+    {
+      "id": "sound-letter",
+      "title": "Звук и буква (Sound and letter)",
+      "authors": "Русский язык: краткий теоретический курс для школьников; Грамота.ру",
+      "year": null,
+      "publisher": "Грамота.ру",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+      "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403.",
+      "APA7": "Грамота.ру. (б. д.). Звук и буква. Русский язык: краткий теоретический курс для школьников. https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva"
+    }
+  ],
+  "claimAssessments": [
+    {
+      "claimId": "MLS-V09-0054-block-01",
+      "claim": "En ruso son frecuentes los grupos consonánticos, es decir, secuencias de dos o más consonantes sin una vocal entre ellas. Algunas pueden resultar difíciles para hablantes de español porque concentran varios sonidos en una sola parte de la palabra.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "partial",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "La afirmación de dificultad y frecuencia relativa requiere corpus comparativo/adquisición; la afirmación de que no se insertan vocales necesita cotejar tokens específicos."
+    },
+    {
+      "claimId": "MLS-V09-0054-block-02",
+      "claim": "Estos grupos forman parte normal de la estructura fonológica rusa. Al pronunciarlos, las consonantes pueden influirse entre sí mediante procesos como asimilación de sonoridad o sordez, pero eso no significa que todas se eliminen o que aparezcan vocales nuevas.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "El bloque incluye ejemplos, IPA, glosas o una generalización que no está respaldada por el localizador disponible; requiere cotejo específico antes de conservarse como afirmación."
+    },
+    {
+      "claimId": "MLS-V09-0054-block-03",
+      "claim": "La escritura conserva normalmente todas las consonantes del grupo, aunque la pronunciación pueda simplificarse o ajustarse en determinadas palabras.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "El bloque incluye ejemplos, IPA, glosas o una generalización que no está respaldada por el localizador disponible; requiere cotejo específico antes de conservarse como afirmación."
+    },
+    {
+      "claimId": "MLS-V09-0054-block-04",
+      "claim": "встреча — «encuentro». La palabra comienza con el grupo встр-, que reúne varias consonantes antes de la primera vocal.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "El bloque incluye ejemplos, IPA, glosas o una generalización que no está respaldada por el localizador disponible; requiere cotejo específico antes de conservarse como afirmación."
+    },
+    {
+      "claimId": "MLS-V09-0054-block-05",
+      "claim": "взгляд — «mirada». La secuencia inicial взг- muestra otro grupo consonántico complejo.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "El bloque incluye ejemplos, IPA, glosas o una generalización que no está respaldada por el localizador disponible; requiere cotejo específico antes de conservarse como afirmación."
+    },
+    {
+      "claimId": "MLS-V09-0054-block-06",
+      "claim": "здравствуйте — «hola» formal. Contiene varios grupos de consonantes y algunas simplificaciones de pronunciación en el habla normal.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "El bloque incluye ejemplos, IPA, glosas o una generalización que no está respaldada por el localizador disponible; requiere cotejo específico antes de conservarse como afirmación."
+    },
+    {
+      "claimId": "MLS-V09-0054-block-07",
+      "claim": "No conviene insertar automáticamente una vocal entre consonantes para facilitar la pronunciación. En ruso, esos grupos pertenecen a la palabra y deben aprenderse como parte de su forma sonora.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "El bloque incluye ejemplos, IPA, glosas o una generalización que no está respaldada por el localizador disponible; requiere cotejo específico antes de conservarse como afirmación."
+    },
+    {
+      "claimId": "MLS-V09-0054-block-08",
+      "claim": "Para un nivel inicial, es útil reconocer primero dónde empieza y termina cada grupo y después observar si alguna consonante cambia de sonoridad, se ensordece o se simplifica en esa palabra concreta.",
+      "sourceReferences": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "El bloque incluye ejemplos, IPA, glosas o una generalización que no está respaldada por el localizador disponible; requiere cotejo específico antes de conservarse como afirmación."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "claim": "Afirmación central: Clusters consonánticos",
+      "sourceKeys": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "partial",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "La afirmación de dificultad y frecuencia relativa requiere corpus comparativo/adquisición; la afirmación de que no se insertan vocales necesita cotejar tokens específicos."
+    },
+    {
+      "claim": "Ejemplos/transcripciones y extensiones didácticas de la ficha",
+      "sourceKeys": [
+        "ipa",
+        "sound"
+      ],
+      "assessment": "unsupported",
+      "locatorChecks": [
+        {
+          "sourceId": "ipa",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety."
+        },
+        {
+          "sourceId": "sound",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403."
+        }
+      ],
+      "finding": "Los pasajes consultados no documentan todos los ejemplos ni las analogías, recomendaciones o generalizaciones específicas señaladas en la revisión."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Seguimiento con búsquedas nuevas y contraste directo de la descripción IPA de Cambridge y reglas ortográficas/lexicográficas consultadas. Se separaron los puntos cubiertos de ejemplos, transcripciones y afirmaciones comparativas no documentadas.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "claimLevelSupportIncomplete": true
+  },
+  "semanticReview": {
+    "method": "Seguimiento por bloques materiales de la ficha; resultado pendiente cuando las fuentes consultadas solo respaldan parte de la regla y no los ejemplos o extensiones concretos.",
+    "findings": [
+      "Se examinó el contenido completo de la ficha por párrafos; los bloques están registrados en claimAssessments.",
+      "La afirmación de dificultad y frecuencia relativa requiere corpus comparativo/adquisición; la afirmación de que no se insertan vocales necesita cotejar tokens específicos.",
+      "No se aplicó una edición reductiva porque las fuentes no permiten decidir con seguridad qué ejemplos, variantes y recomendaciones concretas deben conservarse; cada bloqueo tiene una acción de seguimiento específica."
+    ],
+    "limitations": [
+      "No se añadió Evidence canónica ni se ejecutó assessEntry porque faltan respaldos claim-level y localizadores para todos los bloques.",
+      "Las búsquedas devolvieron extractos de páginas de Gramota; el fetch directo de esas páginas devolvió 403. Esta limitación queda registrada y esas referencias se tratan solo dentro del alcance que muestran los extractos.",
+      "Cambridge describe principalmente una norma joven de San Petersburgo; no se extendió automáticamente a todas las variedades del ruso.",
+      "La transliteración, las analogías español-ruso y la eficacia pedagógica requieren fuentes distintas de una descripción fonética general."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Cambridge confirma clusters de tres o más consonantes y su simplificación frecuente; el artículo habla de frecuencia y dificultad para hispanohablantes, afirmaciones de tipología/adquisición no respaldadas por esa descripción.",
+      "searches": [
+        {
+          "query": "site:ruslang.ru русский язык фонетика редукция безударных гласных палатализация PDF",
+          "portal": "ruslang.ru / Russian Academy phonetics search",
+          "outcome": "La consulta se ejecutó; localizó recursos académicos sobre fonética, reducción y palatalización. El pasaje localizado respalda solo la regla general y no todos los ejemplos/afirmaciones de esta ficha."
+        },
+        {
+          "query": "учебник фонетика русского языка редукция гласных оглушение ассимиляция согласных университет pdf",
+          "portal": "University textbook search",
+          "outcome": "Se inspeccionó Cambridge, que ofrece pozdno y peterburgskij como grupos de 3+ consonantes simplificados; no compara frecuencia con español ni dificultad de aprendientes hispanohablantes."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Russian",
+          "url": "https://www.cambridge.org/core/journals/journal-of-the-international-phonetic-association/article/russian/55589EC639ADEF1764B5ECD0B76970FA",
+          "locator": "Consonants and Vowels; pp. 222–225; Stress and intonation, pp. 225–226. Description is based on a recorded St Petersburg speaker and identifies its standard variety.",
+          "finding": "La afirmación de dificultad y frecuencia relativa requiere corpus comparativo/adquisición; la afirmación de que no se insertan vocales necesita cotejar tokens específicos."
+        },
+        {
+          "title": "Звук и буква (Sound and letter)",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/zvuk-i-bukva",
+          "locator": "Sections «Русский алфавит» and «Гласные и согласные звуки»: 33 letters, letter names, and distinction between sounds and graphemes. Search-index extract inspected; direct page request returned 403.",
+          "finding": "El extracto consultado aporta solo el punto normativo descrito; no acredita extrapolaciones ni ejemplos no cotejados."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o reducir la ficha a las afirmaciones cubiertas. No se modificó el artículo porque el apoyo disponible no permite conservar con seguridad las transcripciones, ejemplos y extensiones centrales; recortarlo ahora sin cotejar cada caso podría cambiar su alcance sin base suficiente. El siguiente paso indicado es específico para este código.",
+      "canonicalCheck": "El SHA-256 vigente del articleMarkdown es eaf4c2a6a202063e69401132dea6b09bff403bfd2d3b66f03bda1efc4c9a6319 y coincide con baseArticleHashes: true. El código no aparece en indexes/verified.json y no existe Evidence canónica claim-level; por ello assessEntry no se ejecutó. No se declara VERIFIED.",
+      "nextConcreteStep": "Conservar solo el hecho fonológico respaldado o hallar estudio de adquisición español-ruso; localizar los clusters de cada ejemplo en el análisis IPA."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Cambridge confirma clusters de tres o más consonantes y su simplificación frecuente; el artículo habla de frecuencia y dificultad para hispanohablantes, afirmaciones de tipología/adquisición no respaldadas por esa descripción.",
+    "nextStep": "Conservar solo el hecho fonológico respaldado o hallar estudio de adquisición español-ruso; localizar los clusters de cada ejemplo en el análisis IPA."
+  },
+  "originalArticleSha256": "eaf4c2a6a202063e69401132dea6b09bff403bfd2d3b66f03bda1efc4c9a6319",
+  "verifiedArticleSha256": "eaf4c2a6a202063e69401132dea6b09bff403bfd2d3b66f03bda1efc4c9a6319",
+  "backupComparison": {
+    "articleMatchesCoordinatorBaseHash": true,
+    "previousReviewMatchesCoordinatorSha256": true,
+    "previousStatus": "PENDING_SOURCE_SUPPORT",
+    "previousReviewPath": "docs/r33-local/reviews/MLS-V09-0054-revision.json",
+    "previousReviewSha256": "503d210be45f62117b42a9d08f367961277e52021330074b07ec166233443818"
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0054/followup-1-503d210be45f.json",
+    "sha256": "503d210be45f62117b42a9d08f367961277e52021330074b07ec166233443818",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  }
+}

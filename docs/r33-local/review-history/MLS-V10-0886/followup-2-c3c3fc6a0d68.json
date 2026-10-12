@@ -1,0 +1,137 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0886",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0886.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Centro Virtual Cervantes. (s. f.). Marcadores del discurso. Diccionario de términos clave de ELE. Instituto Cervantes.",
+      "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/diccio_ele/diccionario/marcadoresdiscurso.htm",
+      "locator": "§§18–19, conectores y recapituladores",
+      "observation": "CVC distingue conectores consecutivos de reformuladores recapitulativos; el Plan Curricular incluye cierre, conclusión y recapitulación. Esto confirma que el artículo debe separar inferencia/consecuencia de resumen/cierre."
+    },
+    {
+      "apa7Candidate": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+      "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_c1-c2.htm",
+      "locator": "§§1.2.1–1.2.3",
+      "observation": "CVC distingue conectores consecutivos de reformuladores recapitulativos; el Plan Curricular incluye cierre, conclusión y recapitulación. Esto confirma que el artículo debe separar inferencia/consecuencia de resumen/cierre."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-16T08:29:38.605Z",
+      "canonicalGeneratedAt": "2026-09-16T08:29:38.605Z",
+      "backupArticleSha256": "58b04501d204864ffef5ed3ca58c03ddac62653d825d3d1a41e0f6590ecb00eb",
+      "canonicalArticleSha256": "58b04501d204864ffef5ed3ca58c03ddac62653d825d3d1a41e0f6590ecb00eb",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "CVC distingue conectores consecutivos de reformuladores recapitulativos; el Plan Curricular incluye cierre, conclusión y recapitulación. Esto confirma que el artículo debe separar inferencia/consecuencia de resumen/cierre."
+    ],
+    "limitations": [
+      "La fuente previa general no demuestra función uniforme de todos los marcadores; las categorías y puntuación requieren cotejo individual.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La fuente previa general no demuestra función uniforme de todos los marcadores; las categorías y puntuación requieren cotejo individual.",
+      "searches": [
+        {
+          "query": "site:cvc.cervantes.es marcadores conclusión conectores consecutivos recapitulativos en conclusión por tanto",
+          "portal": "CVC/Instituto Cervantes search",
+          "outcome": "CVC clasifica en conclusión como recapitulativo y pues/entonces como consecutivos; confirma distinción parcial."
+        },
+        {
+          "query": "site:cvc.cervantes.es Plan Curricular conectores cierre conclusión recapitulativos por consiguiente",
+          "portal": "CVC/Instituto Cervantes search",
+          "outcome": "El inventario C1–C2 ofrece cierre, recapitulación y conectores consecutivos en categorías distintas; cada ejemplo del artículo aún requiere revisión."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Centro Virtual Cervantes. (s. f.). Marcadores del discurso. Diccionario de términos clave de ELE. Instituto Cervantes.",
+          "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/diccio_ele/diccionario/marcadoresdiscurso.htm",
+          "locator": "§§18–19, conectores y recapituladores",
+          "finding": "CVC distingue conectores consecutivos de reformuladores recapitulativos; el Plan Curricular incluye cierre, conclusión y recapitulación. Esto confirma que el artículo debe separar inferencia/consecuencia de resumen/cierre."
+        },
+        {
+          "title": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+          "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_c1-c2.htm",
+          "locator": "§§1.2.1–1.2.3",
+          "finding": "CVC distingue conectores consecutivos de reformuladores recapitulativos; el Plan Curricular incluye cierre, conclusión y recapitulación. Esto confirma que el artículo debe separar inferencia/consecuencia de resumen/cierre."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré mantener separados resumen/cierre y consecuencia inferida y corregir marcadores mal clasificados. No se editó porque el cierre PENDING rechaza cambios de artículo.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (58b04501d204864ffef5ed3ca58c03ddac62653d825d3d1a41e0f6590ecb00eb); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0886.json no existe y el índice verified.json no incluye MLS-V10-0886. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Clasificar uno a uno los marcadores del artículo con las fuentes CVC y cotejar cada ejemplo antes de Evidence."
+    }
+  },
+  "originalArticleSha256": "58b04501d204864ffef5ed3ca58c03ddac62653d825d3d1a41e0f6590ecb00eb",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-16T08:29:38.605Z",
+    "canonicalGeneratedAt": "2026-09-16T08:29:38.605Z",
+    "backupArticleSha256": "58b04501d204864ffef5ed3ca58c03ddac62653d825d3d1a41e0f6590ecb00eb",
+    "canonicalArticleSha256": "58b04501d204864ffef5ed3ca58c03ddac62653d825d3d1a41e0f6590ecb00eb",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0886/followup-1-55ed5e087df2.json",
+    "sha256": "55ed5e087df225b64b9d504f9cb8d7c0c81ef1b7e18203d2e4cee8edde396a20",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0886-revision.json",
+    "sha256": "55ed5e087df225b64b9d504f9cb8d7c0c81ef1b7e18203d2e4cee8edde396a20",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "58b04501d204864ffef5ed3ca58c03ddac62653d825d3d1a41e0f6590ecb00eb",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0886.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

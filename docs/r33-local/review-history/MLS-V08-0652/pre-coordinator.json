@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0652",
+  "language": "coreano",
+  "reviewedAt": "2026-10-10T10:05:27.796Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100420-ebb9d5",
+  "assignmentId": "R33A-1791626660074-a03c12",
+  "articlePath": "content/coreano/MLS-V08-0652.json",
+  "articleGeneratedAt": "2026-09-19T22:36:30.824Z",
+  "articleSha256": "2747df503fac8ff9fa0255faba7b719e81746f49bf08c9e7d7ab344cc75561c0",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite abierto en modo de solo lectura, y consulta dirigida de las fuentes institucionales indicadas. Se conserva PENDING_SOURCE_SUPPORT si no se respaldan semánticamente todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha completa «더라도 incluso si» (content/coreano/MLS-V08-0652.json; sha256 2747df503fac8ff9fa0255faba7b719e81746f49bf08c9e7d7ab344cc75561c0). La ficha analiza -더라도 como concesivo: aunque se admita una situación, la principal se sostiene, y lo distingue de contraste general. La consulta oficial de 국립국어원 coincide en el núcleo concesivo y precisa que -더라도 funciona en registros formales además de otros contextos."
+    ],
+    "limitations": [
+      "La fuente consultada compara -더라도 con -더래도, no respalda los contrastes de la ficha con -아/어도 y -는데 ni todas las condiciones de forma y ejemplos."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "온라인가나다: -더라도/-더래도",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=73&pageIndex=1&qna_seq=328399",
+      "provider": "국립국어원",
+      "use": "Confirma valor concesivo de -더라도; no verifica las distinciones con -아/어도/-는데."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "2747df503fac8ff9fa0255faba7b719e81746f49bf08c9e7d7ab344cc75561c0",
+    "backupSha256": "2747df503fac8ff9fa0255faba7b719e81746f49bf08c9e7d7ab344cc75561c0",
+    "articleGeneratedAt": "2026-09-19T22:36:30.824Z",
+    "backupGeneratedAt": "2026-09-19T22:36:30.824Z"
+  },
+  "originalArticleSha256": "2747df503fac8ff9fa0255faba7b719e81746f49bf08c9e7d7ab344cc75561c0",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

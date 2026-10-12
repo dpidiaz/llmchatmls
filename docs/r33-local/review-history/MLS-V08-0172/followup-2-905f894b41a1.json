@@ -1,0 +1,109 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0172",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:22:26.532Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "articlePath": "content/coreano/MLS-V08-0172.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "는의 모음 뒤 결합은 근거가 있고 개별 예문의 exact locator만 남는다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "는의 모음 뒤 결합은 근거가 있고 개별 예문의 exact locator만 남는다.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr 은 는 이 가 을 를 조사 의미",
+          "portal": "한국어기초사전 검색",
+          "outcome": "검색결과에서 일부 조사 항목을 확인하고 각 표제어를 직접 대조했다."
+        },
+        {
+          "query": "site:krdict.korean.go.kr \"은\" 조사 받침 뒤 대조 주제",
+          "portal": "한국어기초사전 검색",
+          "outcome": "은/는의 대조·주제 뜻과 결합 제약을 직접 확인했으며 기사 예문별 매칭이 남았다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "한국어기초사전 는",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=85851&nation=eng",
+          "locator": "뜻풀이 1–3, 모음 뒤 결합 참고",
+          "finding": "대조·주제·강조 기능 및 모음 뒤 결합 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "는 항목 결합 안내와 ficha 예문을 대조해 로컬라이저를 추가한다."
+    }
+  },
+  "originalArticleSha256": "e4e50745eafa59d8a33ca998072327588ee0bd34e3fb61723237a91a28d62d52",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "workerId": "R33W-local-20261011002037-241d84",
+  "followupRound": 2,
+  "canonicalArticleSha256": "e4e50745eafa59d8a33ca998072327588ee0bd34e3fb61723237a91a28d62d52",
+  "verifiedArticleSha256": "e4e50745eafa59d8a33ca998072327588ee0bd34e3fb61723237a91a28d62d52",
+  "followupSources": [
+    {
+      "title": "한국어기초사전 는",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=85851&nation=eng",
+      "locator": "뜻풀이 1–3, 모음 뒤 결합 참고",
+      "finding": "대조·주제·강조 기능 및 모음 뒤 결합 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.532Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "한국어기초사전 는"
+    ]
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0172/followup-1-0eabe7f1695c.json",
+    "sha256": "0eabe7f1695cd708d1afbe6c967b02eb1fb58edeb9e8227c4044a77961f824ac",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "sourceChecks": [
+    {
+      "sourceTitle": "한국어기초사전 는",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=85851&nation=eng",
+      "locator": "뜻풀이 1–3, 모음 뒤 결합 참고",
+      "result": "PARTIAL",
+      "finding": "대조·주제·강조 기능 및 모음 뒤 결합 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "한국어기초사전 는",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=85851&nation=eng",
+      "locator": "뜻풀이 1–3, 모음 뒤 결합 참고",
+      "finding": "대조·주제·강조 기능 및 모음 뒤 결합 지지."
+    }
+  ],
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "는의 모음 뒤 결합은 근거가 있고 개별 예문의 exact locator만 남는다.",
+    "nextStep": "는 항목 결합 안내와 ficha 예문을 대조해 로컬라이저를 추가한다."
+  }
+}

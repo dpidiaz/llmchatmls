@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0875",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0875.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (s. f.). Diccionario panhispánico de dudas (2.ª ed.).",
+      "url": "https://www.rae.es/dpd/nivel",
+      "locator": "s. v. nivel, §1, apartados 1–3",
+      "observation": "DPD s. v. nivel §1 establece cuándo a(l) nivel de conserva altura/categoría y rechaza usos equivalentes a con respecto a/en el ámbito de/en; respalda gran parte del criterio central. El artículo incluye ejemplos de Guatemala y subtipos no cotejados."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T09:05:11.529Z",
+      "canonicalGeneratedAt": "2026-09-15T09:05:11.529Z",
+      "backupArticleSha256": "4707f40142c4c694698a2b8b3b5cfeb0d7239bc824c69286e6db6e884571550f",
+      "canonicalArticleSha256": "4707f40142c4c694698a2b8b3b5cfeb0d7239bc824c69286e6db6e884571550f",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "DPD s. v. nivel §1 establece cuándo a(l) nivel de conserva altura/categoría y rechaza usos equivalentes a con respecto a/en el ámbito de/en; respalda gran parte del criterio central. El artículo incluye ejemplos de Guatemala y subtipos no cotejados."
+    ],
+    "limitations": [
+      "El enlace DPD anterior estaba sin localizador preciso; faltan citas y Evidence por afirmación para los ejemplos, sustituciones y afirmaciones de registro.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El enlace DPD anterior estaba sin localizador preciso; faltan citas y Evidence por afirmación para los ejemplos, sustituciones y afirmaciones de registro.",
+      "searches": [
+        {
+          "query": "site:rae.es/dpd/nivel \"a nivel de\" uso adecuado",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se abrió DPD s. v. nivel §1.1–3; apoya el criterio, pero no cada ejemplo territorial o variante del artículo."
+        },
+        {
+          "query": "site:rae.es/dpd/nivel \"a nivel de\" DPD",
+          "portal": "RAE/ASALE search",
+          "outcome": "La segunda consulta condujo a la misma entrada primaria y a definiciones DLE; la cobertura de afirmaciones guatemaltecas sigue faltando."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (s. f.). Diccionario panhispánico de dudas (2.ª ed.).",
+          "url": "https://www.rae.es/dpd/nivel",
+          "locator": "s. v. nivel, §1, apartados 1–3",
+          "finding": "DPD s. v. nivel §1 establece cuándo a(l) nivel de conserva altura/categoría y rechaza usos equivalentes a con respecto a/en el ámbito de/en; respalda gran parte del criterio central. El artículo incluye ejemplos de Guatemala y subtipos no cotejados."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré mantener la regla académica y reemplazar ejemplos sin respaldo con ejemplos calcados de DPD, si el cotejo íntegro lo permite. No se editó por regla del coordinador para PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (4707f40142c4c694698a2b8b3b5cfeb0d7239bc824c69286e6db6e884571550f); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0875.json no existe y el índice verified.json no incluye MLS-V10-0875. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Cotejar cada ejemplo contra DPD §§1.1–3 y buscar corpus abierto guatemalteco para las afirmaciones regionales antes de Evidence."
+    }
+  },
+  "originalArticleSha256": "4707f40142c4c694698a2b8b3b5cfeb0d7239bc824c69286e6db6e884571550f",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T09:05:11.529Z",
+    "canonicalGeneratedAt": "2026-09-15T09:05:11.529Z",
+    "backupArticleSha256": "4707f40142c4c694698a2b8b3b5cfeb0d7239bc824c69286e6db6e884571550f",
+    "canonicalArticleSha256": "4707f40142c4c694698a2b8b3b5cfeb0d7239bc824c69286e6db6e884571550f",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0875/followup-1-b49160938673.json",
+    "sha256": "b4916093867345c58d9a2ba3ba5c45ca112b7ea3e5b8f652a011c4b308c71a56",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0875-revision.json",
+    "sha256": "b4916093867345c58d9a2ba3ba5c45ca112b7ea3e5b8f652a011c4b308c71a56",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "4707f40142c4c694698a2b8b3b5cfeb0d7239bc824c69286e6db6e884571550f",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0875.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

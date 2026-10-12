@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0870",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0870.json",
+  "status": "PENDING_CONFLICT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/morfolog%C3%ADa/verbos-irregulares-iv-pret%C3%A9ritos-fuertes-y-participios-irregulares",
+      "locator": "§4.12k (participios irregulares; rompido/roto)",
+      "observation": "NGLE §4.12k señala que rompido está perdido en el estándar pero documentado como popular en México, Centroamérica y otras áreas; esto matiza el artículo y explica el conflicto de alcance entre norma estándar y variación regional."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T08:59:55.640Z",
+      "canonicalGeneratedAt": "2026-09-15T08:59:55.640Z",
+      "backupArticleSha256": "f061a41b4cba68b1304930aa5e2e57f9800a9b05f6681b57f9f2e198529e0c1b",
+      "canonicalArticleSha256": "9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449",
+      "articleMatches": false,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "NGLE §4.12k señala que rompido está perdido en el estándar pero documentado como popular en México, Centroamérica y otras áreas; esto matiza el artículo y explica el conflicto de alcance entre norma estándar y variación regional."
+    ],
+    "limitations": [
+      "No se resolvió la discrepancia sobre el alcance de “no tiene hoy el mismo estatus” frente a usos populares centroamericanos; tampoco existe Evidence canónica.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "No se resolvió la discrepancia sobre el alcance de “no tiene hoy el mismo estatus” frente a usos populares centroamericanos; tampoco existe Evidence canónica.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática \"rompido\" \"América Central\" roto estándar",
+          "portal": "RAE/ASALE search",
+          "outcome": "NGLE §4.12k inspeccionado: distingue estándar de usos populares centroamericanos; la frase del artículo requiere matiz explícito."
+        },
+        {
+          "query": "site:rae.es/gramática \"rompido\" participio roto estándar América Central",
+          "portal": "RAE/ASALE search",
+          "outcome": "La segunda consulta confirma el mismo pasaje primario y el conflicto entre norma estándar y variación popular regional."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/morfolog%C3%ADa/verbos-irregulares-iv-pret%C3%A9ritos-fuertes-y-participios-irregulares",
+          "locator": "§4.12k (participios irregulares; rompido/roto)",
+          "finding": "NGLE §4.12k señala que rompido está perdido en el estándar pero documentado como popular en México, Centroamérica y otras áreas; esto matiza el artículo y explica el conflicto de alcance entre norma estándar y variación regional."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré sustituir “puede aparecer ocasionalmente como regularización analógica” por la distinción académica entre pérdida en la norma estándar y documentación popular regional. No se editó porque el coordinador no admite artículo alterado con estado PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0870.json no existe y el índice verified.json no incluye MLS-V10-0870. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Resolver el conflicto de versiones y, en un siguiente intento, aplicar esa precisión solo junto con Evidence completa y validación del hash."
+    }
+  },
+  "originalArticleSha256": "9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T08:59:55.640Z",
+    "canonicalGeneratedAt": "2026-09-15T08:59:55.640Z",
+    "backupArticleSha256": "f061a41b4cba68b1304930aa5e2e57f9800a9b05f6681b57f9f2e198529e0c1b",
+    "canonicalArticleSha256": "9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449",
+    "articleMatches": false,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0870/followup-1-8c3755175b7f.json",
+    "sha256": "8c3755175b7fc6aceaf97a7597e05192daed24715c86a53575c2e1655c53f24f",
+    "status": "PENDING_CONFLICT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0870-revision.json",
+    "sha256": "8c3755175b7fc6aceaf97a7597e05192daed24715c86a53575c2e1655c53f24f",
+    "status": "PENDING_CONFLICT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0870.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

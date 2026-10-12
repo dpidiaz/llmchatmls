@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0896",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0896.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/el-concepto-de-t%C3%B3pico-ii-v%C3%ADnculos-sint%C3%A1cticos-y-discursivos-entre-el-t%C3%B3pico-y-la-oraci%C3%B3n-a-la-que-corresponde",
+      "locator": "§40.3a–b; para estructura informativa, cap. 40 §§40.1–40.4",
+      "observation": "NGLE §40 trata funciones informativas y tópico/foco; el artículo debe evitar identificar tema con sujeto y rema con predicado como equivalencias fijas, y distinguir “tema/rema” de “tópico/comentario” según el marco teórico."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-16T08:34:51.824Z",
+      "canonicalGeneratedAt": "2026-09-16T08:34:51.824Z",
+      "backupArticleSha256": "61ca344fa8198e79d375be5f50e998a1cb8c193750869e99e39335a51f8c3c1b",
+      "canonicalArticleSha256": "61ca344fa8198e79d375be5f50e998a1cb8c193750869e99e39335a51f8c3c1b",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "NGLE §40 trata funciones informativas y tópico/foco; el artículo debe evitar identificar tema con sujeto y rema con predicado como equivalencias fijas, y distinguir “tema/rema” de “tópico/comentario” según el marco teórico."
+    ],
+    "limitations": [
+      "El localizador NGLE 40.1–40.4 era demasiado amplio y no se creó Evidence por afirmación ni se comprobó el tratamiento terminológico del artículo.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El localizador NGLE 40.1–40.4 era demasiado amplio y no se creó Evidence por afirmación ni se comprobó el tratamiento terminológico del artículo.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática tema rema tópico foco estructura informativa tema rema",
+          "portal": "RAE/ASALE search",
+          "outcome": "NGLE cap. 40 localizado; §40.3 explica relaciones de tópico/pronombre, pero hace falta cotejar toda la terminología tema/rema."
+        },
+        {
+          "query": "site:rae.es/gramática/sintaxis tema rema tema sujeto predicado tópico comentario 40",
+          "portal": "RAE/ASALE search",
+          "outcome": "La segunda búsqueda conduce al mismo capítulo y confirma que tópico/tema y sujeto no deben tratarse como idénticos sin matiz."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/el-concepto-de-t%C3%B3pico-ii-v%C3%ADnculos-sint%C3%A1cticos-y-discursivos-entre-el-t%C3%B3pico-y-la-oraci%C3%B3n-a-la-que-corresponde",
+          "locator": "§40.3a–b; para estructura informativa, cap. 40 §§40.1–40.4",
+          "finding": "NGLE §40 trata funciones informativas y tópico/foco; el artículo debe evitar identificar tema con sujeto y rema con predicado como equivalencias fijas, y distinguir “tema/rema” de “tópico/comentario” según el marco teórico."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré explicitar el marco terminológico y retirar cualquier equivalencia rígida tema=sujeto/rema=predicado. No se editó por la limitación de cambios a resultados PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (61ca344fa8198e79d375be5f50e998a1cb8c193750869e99e39335a51f8c3c1b); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0896.json no existe y el índice verified.json no incluye MLS-V10-0896. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Cotejar capítulo 40 completo y revisar cada ejemplo/uso terminológico; luego construir Evidence y assessment."
+    }
+  },
+  "originalArticleSha256": "61ca344fa8198e79d375be5f50e998a1cb8c193750869e99e39335a51f8c3c1b",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-16T08:34:51.824Z",
+    "canonicalGeneratedAt": "2026-09-16T08:34:51.824Z",
+    "backupArticleSha256": "61ca344fa8198e79d375be5f50e998a1cb8c193750869e99e39335a51f8c3c1b",
+    "canonicalArticleSha256": "61ca344fa8198e79d375be5f50e998a1cb8c193750869e99e39335a51f8c3c1b",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0896/followup-1-437ec1ae7c7f.json",
+    "sha256": "437ec1ae7c7fd7607f1ade81f06697acb872133d6786da95810ff4e73a475c7c",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0896-revision.json",
+    "sha256": "437ec1ae7c7fd7607f1ade81f06697acb872133d6786da95810ff4e73a475c7c",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "61ca344fa8198e79d375be5f50e998a1cb8c193750869e99e39335a51f8c3c1b",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0896.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

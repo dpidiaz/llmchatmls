@@ -1,0 +1,135 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0680",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T11:05:05.869Z",
+  "reviewer": "R33 local source-follow-up review",
+  "assignmentId": "R33A-1791716512635-2e6015",
+  "workerId": "R33W-local-20261011110152-cf7916",
+  "phase": "source-followup",
+  "followupRound": 4,
+  "articlePath": "content/ruso/MLS-V09-0680.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Se reabrió la revisión canónica previa; se comprobaron los hashes del lease y se inspeccionaron fuentes universitarias gratuitas nuevas con localizadores de página/línea. Los límites de alcance permanecen explícitos.",
+    "findings": [
+      "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+      "Revisión previa preservada: docs/r33-local/reviews/MLS-V09-0680-revision.json, SHA-256 60974806f1e2e350202d2d25e50a24f770815eab161d08dc5be82d3f987f4ec0.",
+      "Afirmación material pendiente: contraste semántico y aspectual entre сказать y говорить en discurso referido."
+    ],
+    "limitations": [
+      "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+      "No se alteró el artículo ni se creó Evidence canónica; assessEntry no pasó, así que se conserva PENDING_SOURCE_SUPPORT.",
+      "FREE ONLY: cero Cloudflare, D1 y APIs pagadas."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+      "searches": [
+        {
+          "query": "сказать говорить aspect pair meanings Russian lexicographic primary source",
+          "portal": "Búsqueda web de literatura académica y fuentes universitarias de acceso abierto",
+          "outcome": "Se encontró la fuente universitaria indicada en primarySourcesInspected; cubre solo el pasaje localizado, no la totalidad de las afirmaciones ni ejemplos."
+        },
+        {
+          "query": "сказать говорить различие употребление русский словарь",
+          "portal": "Búsqueda web en ruso de gramáticas, repositorios académicos y recursos lexicográficos gratuitos",
+          "outcome": "Se encontró la fuente universitaria indicada en primarySourcesInspected; cubre solo el pasaje localizado, no la totalidad de las afirmaciones ni ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Aspect Pairs",
+          "url": "https://russian.cornell.edu/verbs/irg17-21aspPairs.htm",
+          "locator": "§ Aspect pairs, lines 50–79: prefixes may or may not change lexical meaning; -ыва/-ива imperfective partners; lines 112–159 describe suffix formation limits; lines 180–187 list сказать/говорить as an irregular aspect pair.",
+          "finding": "La página universitaria inspeccionada distingue parejas aspectuales puras de prefijación léxica y describe imperfectivos secundarios; no valida todos los lexemas ni juicios de uso del artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró reducir o reformular cada afirmación a lo que permiten los localizadores inspeccionados. No se cambió el artículo en este pase porque aún hay claims y ejemplos sin respaldo verificable; cualquier corrección debe cotejarse y pasar validación canónica.",
+      "canonicalCheck": "SHA-256 del articleMarkdown 71985f905a38d90db5068da4863b2bceb7a8627d65321538b8231d85235b1815 coincide con la base del lease. No se generó Evidence canónica ni assessEntry exitoso para MLS-V09-0680; no se marca VERIFIED.",
+      "nextConcreteStep": "Localizar una gramática académica o estudio abierto que cubra los matices y cotejar cada ejemplo pendiente; corregir solo con respaldo; después crear Evidence y ejecutar assessEntry e índice canónico con el hash vigente."
+    },
+    "consultedSources": [
+      {
+        "title": "Aspect Pairs",
+        "url": "https://russian.cornell.edu/verbs/irg17-21aspPairs.htm",
+        "locator": "§ Aspect pairs, lines 50–79: prefixes may or may not change lexical meaning; -ыва/-ива imperfective partners; lines 112–159 describe suffix formation limits; lines 180–187 list сказать/говорить as an irregular aspect pair.",
+        "finding": "La página universitaria inspeccionada distingue parejas aspectuales puras de prefijación léxica y describe imperfectivos secundarios; no valida todos los lexemas ni juicios de uso del artículo."
+      }
+    ],
+    "claimAssessments": []
+  },
+  "exceptionalDisposition": {
+    "blockingCriterion": "Las fuentes disponibles documentan discursos citados y tiempos, pero no establecen la distribución léxico-aspectual que la ficha atribuye a сказать y говорить.",
+    "searches": [
+      {
+        "query": "Russian academic grammar contraste semántico y aspectual entre сказать y говорить en discurso referido.",
+        "portal": "Google Search · búsqueda temática de gramáticas y lingüística de acceso abierto",
+        "outcome": "Se localizaron materiales generales de Cornell y diccionarios abiertos; no apareció una fuente que sostuviera el patrón central con alcance y ejemplo exactos."
+      },
+      {
+        "query": "site:russian.cornell.edu OR site:gramota.ru contraste semántico y aspectual entre сказать y говорить en discurso referido.",
+        "portal": "Google Search · búsqueda restringida a portales universitarios y lexicográficos",
+        "outcome": "Los pasajes inspeccionados versan sobre fenómenos vecinos, pero no prueban la regla/contraste central. Se conserva el resultado pendiente."
+      }
+    ],
+    "primarySourcesInspected": [
+      {
+        "title": "Beginning Russian Grammar",
+        "url": "https://russian.cornell.edu/grammar/",
+        "locator": "Subject index and applicable reported-speech/grammar pages; no exact subsection for the target construction.",
+        "finding": "Useful adjacent grammatical coverage, but no exact locator supporting the target claim."
+      }
+    ],
+    "contentCorrectionConsidered": "Se evaluó reducir o reformular el texto: contraste semántico y aspectual entre сказать y говорить en discurso referido. La reducción completa retiraría el contenido que define la entrada, así que se conserva pendiente hasta localizar evidencia específica.",
+    "canonicalCheck": "articleMarkdown SHA-256 vigente 71985f905a38d90db5068da4863b2bceb7a8627d65321538b8231d85235b1815; backup generatedAt 2026-09-19T09:33:02.952Z; markdownMatches=true; no canonical Evidence/assessEntry pass.",
+    "nextConcreteStep": "Buscar una gramática universitaria o estudio lingüístico gratuito sobre contraste semántico y aspectual entre сказать y говорить en discurso referido.; inspeccionar texto completo, extraer pasajes con localizadores exactos, revisar cada afirmación y crear Evidence antes de repetir assessEntry."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Las fuentes nuevas inspeccionadas respaldan solo la regla general en el alcance señalado. No cotejan todos los ejemplos, restricciones, traducciones y afirmaciones pragmáticas de la ficha.",
+    "nextStep": "Localizar una gramática académica o estudio abierto que cubra los matices y cotejar cada ejemplo pendiente; corregir solo con respaldo; después crear Evidence y ejecutar assessEntry e índice canónico con el hash vigente."
+  },
+  "consultedSources": [
+    {
+      "title": "Aspect Pairs",
+      "url": "https://russian.cornell.edu/verbs/irg17-21aspPairs.htm",
+      "locator": "§ Aspect pairs, lines 50–79: prefixes may or may not change lexical meaning; -ыва/-ива imperfective partners; lines 112–159 describe suffix formation limits; lines 180–187 list сказать/говорить as an irregular aspect pair.",
+      "finding": "La página universitaria inspeccionada distingue parejas aspectuales puras de prefijación léxica y describe imperfectivos secundarios; no valida todos los lexemas ni juicios de uso del artículo."
+    }
+  ],
+  "originalArticleSha256": "71985f905a38d90db5068da4863b2bceb7a8627d65321538b8231d85235b1815",
+  "verifiedArticleSha256": null,
+  "backupComparison": {
+    "backupGeneratedAt": "2026-09-19T09:33:02.952Z",
+    "canonicalGeneratedAt": "2026-09-19T09:33:02.952Z",
+    "markdownMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0680/followup-3-45d5b90ba042.json",
+    "sha256": "45d5b90ba042ce923c30ceb0c11a2b91af53f6b72c3a196580d801e4f9831148",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "articleSha256": "71985f905a38d90db5068da4863b2bceb7a8627d65321538b8231d85235b1815",
+  "sourceReferences": [
+    {
+      "title": "Aspect Pairs",
+      "url": "https://russian.cornell.edu/verbs/irg17-21aspPairs.htm",
+      "locator": "§ Aspect pairs, lines 50–79: prefixes may or may not change lexical meaning; -ыва/-ива imperfective partners; lines 112–159 describe suffix formation limits; lines 180–187 list сказать/говорить as an irregular aspect pair.",
+      "finding": "La página universitaria inspeccionada distingue parejas aspectuales puras de prefijación léxica y describe imperfectivos secundarios; no valida todos los lexemas ni juicios de uso del artículo."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0704",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0704.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "Kotobank, entrada 応ずる, sentidos ③–④, líneas 33–39, apoya actuar en respuesta a demandas y adaptarse/ajustarse. El artículo extiende la definición a varios factores y ejemplos sin una fuente gramatical directa de la forma に応じて."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Kotobank define responder/ajustarse, pero no prueba todas las relaciones de condición/cantidad/necesidad ni los ejemplos de に応じて.",
+      "searches": [
+        {
+          "query": "site:kotobank.jp/word に応じて 応ずる 意味 条件",
+          "portal": "Kotobank search",
+          "outcome": "La entrada lexical apoya respuesta/adecuación en general, no el patrón entero ni todas sus glosas."
+        },
+        {
+          "query": "日本語 文法 に応じて 文型 例文 教材",
+          "portal": "Japanese grammar materials search",
+          "outcome": "No se localizó una fuente institucional accesible que cubra los claims completos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "小学館. (s. f.). 応ずる. 精選版 日本国語大辞典, コトバンク.",
+          "url": "https://kotobank.jp/word/%E5%BF%9C%E3%81%9A%E3%82%8B-449094",
+          "locator": "sentidos ③–④, líneas 33–39",
+          "finding": "Apoya responder a un requerimiento y actuar de modo adecuado; no demuestra todos los usos enumerados en la entrada."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré limitar la explicación a correspondencia/adecuación y retirar ejemplos de condición/cantidad hasta hallar una gramática del patrón.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 031c2f86f2af36ff9006c4ae35853cef267f799c51fec23dc77f85b37a575b6f. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "Kotobank define responder/ajustarse, pero no prueba todas las relaciones de condición/cantidad/necesidad ni los ejemplos de に応じて.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "031c2f86f2af36ff9006c4ae35853cef267f799c51fec23dc77f85b37a575b6f",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0704/followup-2-899ef481781e.json",
+    "sha256": "899ef481781e77e423882f4c1b9e6b3d658724a183925d8ada2769e8104c68da",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

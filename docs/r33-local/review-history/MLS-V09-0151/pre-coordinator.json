@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0151",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T09:56:50.983Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010095620-de4c6a",
+  "assignmentId": "R33A-1791626180473-e1c858",
+  "articlePath": "content/ruso/MLS-V09-0151.json",
+  "articleGeneratedAt": "2026-09-19T09:22:44.898Z",
+  "articleSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura semántica de la entrada rusa, consulta dirigida de fuentes lexicográficas/gramaticales y cotejo del hash y generatedAt con la base SQLite abierta en solo lectura. El estado permanece pendiente si no se obtuvo respaldo claim-level completo.",
+    "findings": [
+      "Se leyó «Genitivo plural: patrones» (content/ruso/MLS-V09-0151.json; sha256 0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba). La afirmación de apertura dice: El **genitivo plural** ruso no tiene una sola terminación. Según el tipo de sustantivo, puede aparecer con terminaciones como **-ов/-ев/-ей** o incluso sin una terminación visible. Por eso conviene aprender varios patrones frecuentes en lugar de una regla única. Muchos masculinos terminados en consonante forman el genitivo plural con **-ов**: **стол → столов**, **брат → братьев** muestra además un cambio de base. Los sustantivos en **-й** suelen usar **-ев**: **музей → музеев**. Algunos sustantivos terminados en consonante blanda o sibilante emplean **-ей**, como **словарь → словарей** y **врач → врачей**. En numerosos femeninos y neutros apa"
+    ],
+    "limitations": [
+      "Gramota.ru presenta un esquema general del genitivo plural con -ов/-ев, -ей y terminación cero; falta cotejar contra fuente de paradigmas los ejemplos y excepciones particulares que aparecen en el artículo."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "Склонение существительных",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/sklonenie-sushchestvitelnykh",
+      "institution": "Грамота.ру",
+      "result": "Apoya que el genitivo plural incluye terminaciones -ов/-ев, -ей y cero, con dependencias de clase; no se cotejaron todas las palabras y excepciones del artículo."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+    "backupSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+    "articleGeneratedAt": "2026-09-19T09:22:44.898Z",
+    "backupGeneratedAt": "2026-09-19T09:22:44.898Z"
+  },
+  "originalArticleSha256": "0ec6007ef87b7deb3b1ef3b20e52b36fdbd5f41adb706c7b3b17ed7e30e1f4ba",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

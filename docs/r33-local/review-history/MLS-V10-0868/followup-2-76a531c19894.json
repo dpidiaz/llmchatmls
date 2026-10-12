@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0868",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0868.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/morfolog%C3%ADa/verbos-irregulares-iv-pret%C3%A9ritos-fuertes-y-participios-irregulares",
+      "locator": "§§4.12k–l",
+      "observation": "NGLE §4.12k–l confirma la coexistencia de imprimido/impreso, distribución de usos y variación geográfica; falta enlazar cada afirmación del artículo y comprobar pasiva perifrástica/adjetivos con fuente/localizador pertinente."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T08:57:34.897Z",
+      "canonicalGeneratedAt": "2026-09-15T08:57:34.897Z",
+      "backupArticleSha256": "433edf6ce72e3c374591e03b1cf963b10a0e1e1fd3a0cd57fb829972a429d415",
+      "canonicalArticleSha256": "433edf6ce72e3c374591e03b1cf963b10a0e1e1fd3a0cd57fb829972a429d415",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "NGLE §4.12k–l confirma la coexistencia de imprimido/impreso, distribución de usos y variación geográfica; falta enlazar cada afirmación del artículo y comprobar pasiva perifrástica/adjetivos con fuente/localizador pertinente."
+    ],
+    "limitations": [
+      "El respaldo primario es parcial; la afirmación sobre preferencia en usos adjetivales y las pasivas no está probada para cada ejemplo con Evidence vigente.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El respaldo primario es parcial; la afirmación sobre preferencia en usos adjetivales y las pasivas no está probada para cada ejemplo con Evidence vigente.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática \"imprimido\" \"impreso\" participios equivalentes",
+          "portal": "RAE/ASALE search",
+          "outcome": "NGLE §4.12k–l confirma ambos participios y variación, pero el artículo hace afirmaciones adicionales que no se mapearon."
+        },
+        {
+          "query": "site:rae.es/dpd/imprimir imprimido impreso participio",
+          "portal": "RAE/ASALE search",
+          "outcome": "No se recuperó una entrada DPD específica; la NGLE consultada sigue siendo respaldo principal parcial."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/morfolog%C3%ADa/verbos-irregulares-iv-pret%C3%A9ritos-fuertes-y-participios-irregulares",
+          "locator": "§§4.12k–l",
+          "finding": "NGLE §4.12k–l confirma la coexistencia de imprimido/impreso, distribución de usos y variación geográfica; falta enlazar cada afirmación del artículo y comprobar pasiva perifrástica/adjetivos con fuente/localizador pertinente."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré separar los usos con haber, pasiva y adjetivo, y eliminar porcentajes o preferencias sin evidencia localizada. No se editó por el requisito de no alterar artículo con resultado PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (433edf6ce72e3c374591e03b1cf963b10a0e1e1fd3a0cd57fb829972a429d415); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0868.json no existe y el índice verified.json no incluye MLS-V10-0868. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Cotejar usos verbales y adjetivales en RAE/ASALE y corpus académico abierto, y crear enlaces diferenciados por afirmación."
+    }
+  },
+  "originalArticleSha256": "433edf6ce72e3c374591e03b1cf963b10a0e1e1fd3a0cd57fb829972a429d415",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T08:57:34.897Z",
+    "canonicalGeneratedAt": "2026-09-15T08:57:34.897Z",
+    "backupArticleSha256": "433edf6ce72e3c374591e03b1cf963b10a0e1e1fd3a0cd57fb829972a429d415",
+    "canonicalArticleSha256": "433edf6ce72e3c374591e03b1cf963b10a0e1e1fd3a0cd57fb829972a429d415",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0868/followup-1-1a5c5b1823b2.json",
+    "sha256": "1a5c5b1823b29ab7db5bf702567a7b1d2eff5bd3418cd7f09f28ce6f09c60c65",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0868-revision.json",
+    "sha256": "1a5c5b1823b29ab7db5bf702567a7b1d2eff5bd3418cd7f09f28ce6f09c60c65",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "433edf6ce72e3c374591e03b1cf963b10a0e1e1fd3a0cd57fb829972a429d415",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0868.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

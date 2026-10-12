@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0703",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0703.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "Digital Daijisen, Kotobank, entrada 基づく, sentido 1 líneas 15–19, define tener algo como causa o fundamento y ofrece 規則に基づく処理. Esto apoya el núcleo, pero no valida todos los ejemplos de la ficha ni sus generalizaciones discursivas."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Kotobank confirma que 基づく tiene sentido de fundamento/base, pero falta respaldar la forma adverbial y los ejemplos/contraste con tema.",
+      "searches": [
+        {
+          "query": "site:kotobank.jp/word/基づいて 基づく 意味 根拠",
+          "portal": "Kotobank search",
+          "outcome": "La entrada 基づく respalda sentido de fundamento; construcción/ejemplos restantes no completos."
+        },
+        {
+          "query": "日本語 文法 に基づいて 文型 例文 教材",
+          "portal": "Japanese grammar materials search",
+          "outcome": "No se localizó una fuente gramatical abierta adicional con cotejo suficiente de todos los ejemplos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "小学館. (s. f.). 基づく. デジタル大辞泉, コトバンク.",
+          "url": "https://kotobank.jp/word/%E5%9F%BA%E3%81%A5%E3%81%8F-646056",
+          "locator": "sentido 1, líneas 15–19",
+          "finding": "Apoya fundamento y ejemplo de procesamiento basado en reglas; no los ejemplos creados restantes."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré restringir el artículo a la relación de fundamento y reemplazar los ejemplos no publicados; falta source-to-claim completo.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 19fb8c6c0867a8e8a373069fe1950b47673c522bf53e3cc6052716fca448fa8a. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "Kotobank confirma que 基づく tiene sentido de fundamento/base, pero falta respaldar la forma adverbial y los ejemplos/contraste con tema.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "19fb8c6c0867a8e8a373069fe1950b47673c522bf53e3cc6052716fca448fa8a",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0703/followup-2-8a94cefdf2aa.json",
+    "sha256": "8a94cefdf2aaebf47d11d10e021864d4e9fb88967e2b7629ffd32a2aff2f65f0",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

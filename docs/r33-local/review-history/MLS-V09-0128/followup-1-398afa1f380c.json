@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0128",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.572Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0128.json",
+  "articleGeneratedAt": "2026-09-19T10:13:01.076Z",
+  "articleSha256": "47574b31d1fa37930f36a0d3a4f46955fcff982e68073cf2db44900bdf8789d5",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La fuente indica que el acusativo plural inanimado coincide con nominativo; falta mapear sustantivos, excepciones y ejemplos de la entrada.",
+      "El acusativo plural de inanimados se presenta como normalmente sincrético con nominativo y se distingue animacidad. No se cotejó la tabla normativa ni límites semánticos de animacidad."
+    ],
+    "limitations": [
+      "No se editó el artículo ni se añadió Evidence; la ficha permanece PENDING_SOURCE_SUPPORT porque no se localizaron pasajes primarios que cubran cada afirmación material.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Acusativo plural inanimado",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Acc. Sg. and Plur. endings and animacy",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+          "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples"
+        }
+      ],
+      "rationale": "La fuente indica que el acusativo plural inanimado coincide con nominativo; falta mapear sustantivos, excepciones y ejemplos de la entrada."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Acc. Sg. and Plur. endings and animacy",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+          "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples"
+        }
+      ],
+      "rationale": "No se editó el artículo ni se añadió Evidence; la ficha permanece PENDING_SOURCE_SUPPORT porque no se localizaron pasajes primarios que cubran cada afirmación material."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Acc. Sg. and Plur. endings and animacy",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+      "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Acc. Sg. and Plur. endings and animacy. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr04_c.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T10:13:01.076Z",
+    "backupGeneratedAt": "2026-09-19T10:13:01.076Z",
+    "canonicalArticleSha256": "47574b31d1fa37930f36a0d3a4f46955fcff982e68073cf2db44900bdf8789d5",
+    "backupArticleSha256": "47574b31d1fa37930f36a0d3a4f46955fcff982e68073cf2db44900bdf8789d5",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "47574b31d1fa37930f36a0d3a4f46955fcff982e68073cf2db44900bdf8789d5",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0128/pre-coordinator.json",
+    "sha256": "6498da18e5a39a396740d8c6d73a77d3dd2fe6476c77d22e877c94a048246040",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

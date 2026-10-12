@@ -1,0 +1,112 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0644",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:37:17.999Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0644.json",
+  "articleGeneratedAt": "2026-09-19T09:34:48.595Z",
+  "articleSha256": "0e392418336ac777b445a3ddb9bf700f5cf2e5d285daa28f7baafccfa430e319",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Source-followup con fuentes universitarias y normativas abiertas; contraste de localizadores exactos, semántica y versiones SQLite en read-only. La cobertura parcial no se marca VERIFIED.",
+    "findings": [
+      "Gramota documents punctuation for adverbial participial phrases; exact sentence-level exceptions and article examples need review."
+    ],
+    "limitations": [
+      "La entrada mezcla norma de comas y sintaxis del sujeto tácito; necesita citas oficiales de puntuación y gramática primaria para excepciones.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; quedan afirmaciones materiales y ejemplos por validar."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación material principal de “Frase gerundiva y comas”.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Знаки препинания при обособленных обстоятельствах",
+          "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/znaki-prepinaniya-pri-obosoblennykh-obstoyatelstvakh",
+          "locator": "§68: commas with adverbial participial phrases and contexts"
+        },
+        {
+          "title": "Present deverbal adverbs",
+          "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+          "locator": "lines 0–8: imperfective formation and while-ing meaning"
+        }
+      ],
+      "rationale": "Gramota documents punctuation for adverbial participial phrases; exact sentence-level exceptions and article examples need review."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos, límites y generalizaciones completos del artículo quedan respaldados.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Знаки препинания при обособленных обстоятельствах",
+          "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/znaki-prepinaniya-pri-obosoblennykh-obstoyatelstvakh",
+          "locator": "§68: commas with adverbial participial phrases and contexts"
+        },
+        {
+          "title": "Present deverbal adverbs",
+          "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+          "locator": "lines 0–8: imperfective formation and while-ing meaning"
+        }
+      ],
+      "rationale": "La entrada mezcla norma de comas y sintaxis del sujeto tácito; necesita citas oficiales de puntuación y gramática primaria para excepciones."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Грамота.ру",
+      "title": "Знаки препинания при обособленных обстоятельствах",
+      "publisher": "Грамота.ру, справочный портал",
+      "year": "n.d.",
+      "url": "https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/znaki-prepinaniya-pri-obosoblennykh-obstoyatelstvakh",
+      "locator": "§68: commas with adverbial participial phrases and contexts",
+      "apa7": "Грамота.ру. (n.d.). Знаки препинания при обособленных обстоятельствах. https://gramota.ru/biblioteka/spravochniki/pravila-russkoy-orfografii-i-punktuatsii/znaki-prepinaniya-pri-obosoblennykh-obstoyatelstvakh"
+    },
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "Present deverbal adverbs",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+      "locator": "lines 0–8: imperfective formation and while-ing meaning",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Present deverbal adverbs. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le87_94_e.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:34:48.595Z",
+    "backupGeneratedAt": "2026-09-19T09:34:48.595Z",
+    "canonicalArticleSha256": "0e392418336ac777b445a3ddb9bf700f5cf2e5d285daa28f7baafccfa430e319",
+    "backupArticleSha256": "0e392418336ac777b445a3ddb9bf700f5cf2e5d285daa28f7baafccfa430e319",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "0e392418336ac777b445a3ddb9bf700f5cf2e5d285daa28f7baafccfa430e319",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0644/pre-coordinator.json",
+    "sha256": "f8ed77f97c125162dea5f49154bf1a4ed7537305278e8f756b605299364a4633",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

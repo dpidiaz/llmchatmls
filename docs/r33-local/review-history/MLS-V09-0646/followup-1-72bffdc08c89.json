@@ -1,0 +1,112 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0646",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:37:18.010Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0646.json",
+  "articleGeneratedAt": "2026-09-19T09:36:40.241Z",
+  "articleSha256": "7f5ed040010c575201005c7d044be02d875024286d591b81ad604b370f3452ed",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Source-followup con fuentes universitarias y normativas abiertas; contraste de localizadores exactos, semántica y versiones SQLite en read-only. La cobertura parcial no se marca VERIFIED.",
+    "findings": [
+      "Cornell states present deverbal adverbs express simultaneous action with the main verb; the article’s examples still need individual mapping."
+    ],
+    "limitations": [
+      "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED. No se modificó el artículo ni se creó Evidence canónica; se conserva PENDING_SOURCE_SUPPORT hasta completar ese cotejo.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; quedan afirmaciones materiales y ejemplos por validar."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación material principal de “Simultaneidad”.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Present deverbal adverbs",
+          "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+          "locator": "lines 0–8: imperfective formation and while-ing meaning"
+        },
+        {
+          "title": "Deverbals: Past vs. Present forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr14_a_c.htm",
+          "locator": "lines 0–10: stem labels vs meaning; simultaneity and subject control"
+        }
+      ],
+      "rationale": "Cornell states present deverbal adverbs express simultaneous action with the main verb; the article’s examples still need individual mapping."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos, límites y generalizaciones completos del artículo quedan respaldados.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Present deverbal adverbs",
+          "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+          "locator": "lines 0–8: imperfective formation and while-ing meaning"
+        },
+        {
+          "title": "Deverbals: Past vs. Present forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr14_a_c.htm",
+          "locator": "lines 0–10: stem labels vs meaning; simultaneity and subject control"
+        }
+      ],
+      "rationale": "Falta cotejo semántico de cada afirmación material con fuente primaria y localizador exacto; no se puede declarar VERIFIED. No se modificó el artículo ni se creó Evidence canónica; se conserva PENDING_SOURCE_SUPPORT hasta completar ese cotejo."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "Present deverbal adverbs",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/le87_94_e.htm",
+      "locator": "lines 0–8: imperfective formation and while-ing meaning",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Present deverbal adverbs. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le87_94_e.htm"
+    },
+    {
+      "author": "R. L. Leed, A. D. Nakhimovsky, & A. S. Nakhimovsky",
+      "title": "Deverbals: Past vs. Present forms",
+      "publisher": "Beginning Russian Grammar, Cornell University",
+      "year": "1991",
+      "url": "https://russian.cornell.edu/grammar/html/gr14_a_c.htm",
+      "locator": "lines 0–10: stem labels vs meaning; simultaneity and subject control",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Deverbals: Past vs. Present forms. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr14_a_c.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:36:40.241Z",
+    "backupGeneratedAt": "2026-09-19T09:36:40.241Z",
+    "canonicalArticleSha256": "7f5ed040010c575201005c7d044be02d875024286d591b81ad604b370f3452ed",
+    "backupArticleSha256": "7f5ed040010c575201005c7d044be02d875024286d591b81ad604b370f3452ed",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "7f5ed040010c575201005c7d044be02d875024286d591b81ad604b370f3452ed",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0646/pre-coordinator.json",
+    "sha256": "6a95f4d92f1d5e142d29c50fd6e0a95292c6995fbea06bf7a84dfd6232ff7e15",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

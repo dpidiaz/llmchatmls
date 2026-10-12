@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0812",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T17:25:03.982Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791652844138-bad78b",
+  "workerId": "R33W-local-20261010172044-86156d",
+  "articlePath": "content/japones/MLS-V06-0812.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "La pauta oficial de la Agencia para Asuntos Culturales respalda 、/。 y algunas reglas para comillas/paréntesis en documentos públicos. El alcance de la ficha excede esa norma al generalizar a publicaciones académicas y convenciones disciplinares; ejemplos propios y variación editorial aún sin fuente específica.",
+      "公用文作成の考え方 [Guidelines for writing official documents]: candidata; cotejada, fuente normativa de documentos públicos; alcance parcial para estilo académico.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T21:21:06.217Z) frente a content/japones/MLS-V06-0812.json; article_markdown SHA-256 1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521 / 1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521; coincidencia=true.",
+      "La fuente oficial sostiene parte del uso de signos en documentos oficiales; no extiende su ámbito a normas editoriales académicas. Los ejemplos y generalizaciones sintáctico-discursivas permanecen sin fuente."
+    ],
+    "limitations": [
+      "No existe Evidence canónica nueva ni mapa de localizadores claim por claim; por ello claimsVerified=0 y la entrada permanece pendiente.",
+      "La comparación SQL confirma identidad de la versión, pero no prueba exactitud semántica.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ]
+  },
+  "originalArticleSha256": "1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521",
+  "verifiedArticleSha256": "1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T21:21:06.217Z",
+    "backupArticleSha256": "1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521",
+    "canonicalArticleSha256": "1b32ca768827988eaac1e64a75576646158ae1ff5e926f4142ac1f3fd507f521",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "公用文作成の考え方",
+      "author": "文化審議会",
+      "year": 2022,
+      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/kokugo/kokugo_79/pdf/93639901_01.pdf",
+      "locator": "p. 4, sección 5(1)(ア–エ), y reglas contiguas de paréntesis/citas",
+      "coverage": "Regla normativa para 公用文: 句点「。」 y 読点「、」 como regla general, posibilidad de 「，」 en horizontal y reglas de paréntesis.",
+      "limits": "Su alcance es la escritura de documentos oficiales. No valida por sí sola puntuación académica, todas las funciones sintácticas ni ejemplos creados."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0812/pre-coordinator.json",
+    "sha256": "af8679606d85c98e15c37d8999478f3485e5227758f87782fa3da0647fb96ddc",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 1
+}

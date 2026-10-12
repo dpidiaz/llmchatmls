@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0472",
+  "language": "coreano",
+  "reviewedAt": "2026-10-10T10:05:27.796Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100420-ebb9d5",
+  "assignmentId": "R33A-1791626660074-a03c12",
+  "articlePath": "content/coreano/MLS-V08-0472.json",
+  "articleGeneratedAt": "2026-09-19T09:18:08.846Z",
+  "articleSha256": "93f595127fdf0081e44ca1b9bfeba378ca45d3da0ec6c86ceb3f13ee3cde4e98",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite abierto en modo de solo lectura, y consulta dirigida de las fuentes institucionales indicadas. Se conserva PENDING_SOURCE_SUPPORT si no se respaldan semánticamente todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha completa «V-(으)세요» (content/coreano/MLS-V08-0472.json; sha256 93f595127fdf0081e44ca1b9bfeba378ca45d3da0ec6c86ceb3f13ee3cde4e98). La ficha caracteriza -(으)세요 como forma que puede describir acción de sujeto honorificado o realizar indicación/petición cortés; coteja 가세요, 읽으세요 y 오세요. La fuente oficial de 국립국어원 consultada analiza -세요 como forma relacionada con el sujeto honorífico -시- y la terminación cortés -어요, compatible con la segmentación de la ficha."
+    ],
+    "limitations": [
+      "La fuente no valida todos los alomorfos, actos directivos, diferencias de registro, ni la generalización de que la forma combina en todos los usos honorífico de sujeto y trato al interlocutor; los ejemplos requieren fuente gramatical integral."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "온라인가나다: 상대높임법 해요체와 -세요",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=&pageIndex=1&qna_seq=331667",
+      "provider": "국립국어원",
+      "use": "Describe -세요 como forma abreviada relacionada con -시어요 y distingue alturas gramaticales; la misma respuesta advierte variación de análisis morfológico."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "93f595127fdf0081e44ca1b9bfeba378ca45d3da0ec6c86ceb3f13ee3cde4e98",
+    "backupSha256": "93f595127fdf0081e44ca1b9bfeba378ca45d3da0ec6c86ceb3f13ee3cde4e98",
+    "articleGeneratedAt": "2026-09-19T09:18:08.846Z",
+    "backupGeneratedAt": "2026-09-19T09:18:08.846Z"
+  },
+  "originalArticleSha256": "93f595127fdf0081e44ca1b9bfeba378ca45d3da0ec6c86ceb3f13ee3cde4e98",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0658",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0658.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "El informe NINJAL candidateado sobre 終助詞のついたもの incluye っけ en §2.2/nota 2 según la revisión previa, pero el PDF devolvió HTTP 429 y no se inspeccionó directamente. No se cuenta como soporte verificado; la ficha sigue sin fuente primaria cotejada."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La fuente NINJAL localizada en el intento previo no fue accesible (HTTP 429); TUFS no cubre la partícula objetivo, así que falta respaldo primario inspeccionado.",
+      "searches": [
+        {
+          "query": "site:repository.ninjal.ac.jp/record/1314/files/kkrep_055.pdf っけ 終助詞",
+          "portal": "NINJAL repository search",
+          "outcome": "Resultado de búsqueda sugiere una nota sobre っけ; apertura de PDF falla con HTTP 429."
+        },
+        {
+          "query": "日本語 っけ 終助詞 記憶 確認 文法 論文",
+          "portal": "Academic web search",
+          "outcome": "No se obtuvo en esta consulta un pasaje primario abierto inspeccionable con localizador suficiente."
+        }
+      ],
+      "primarySourcesInspected": [],
+      "contentCorrectionConsidered": "Consideré retirar generalizaciones y ejemplos de っけ hasta poder cotejar un texto primario; no modifiqué el artículo sin acceso verificable.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: c039de0b4195ab5dfd59da50b533e3e427f9c030d448b5e42dff1aa6bbf87bdd. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "La fuente NINJAL localizada en el intento previo no fue accesible (HTTP 429); TUFS no cubre la partícula objetivo, así que falta respaldo primario inspeccionado.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "c039de0b4195ab5dfd59da50b533e3e427f9c030d448b5e42dff1aa6bbf87bdd",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0658/followup-2-553f1308ae63.json",
+    "sha256": "553f1308ae635ddc90dcb99196a7dab73abda35076b486d335c233acd2a2abfd",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

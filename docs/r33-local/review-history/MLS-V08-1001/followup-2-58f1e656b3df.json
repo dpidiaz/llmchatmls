@@ -1,0 +1,285 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-1001",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:42:50.300Z",
+  "reviewer": "R33 local semantic source follow-up (R33W-local-20261011003908-053a80)",
+  "workerId": "R33W-local-20261010173215-013377",
+  "assignmentId": "R33A-1791679148991-eb7dcf",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/coreano/MLS-V08-1001.json",
+  "articleGeneratedAt": "2026-09-19T09:25:05.224Z",
+  "articleSha256": "e1a2d9f3c3d1aa1b68f9b87eb2d6d696464088093a2f42d93080d713f846de33",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 11,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "priorReview": {
+    "path": "docs/r33-local/reviews/MLS-V08-1001-revision.json",
+    "sha256": "11df82ae3424d3c3448b080df7345db1c185dbdcfe8edb5bf400b1f0e600839a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791625631383-647833",
+    "semanticFindings": [
+      "Se define relativa anidada como cláusula modificadora que contiene otra estructura relativa.",
+      "Falta estudio de sintaxis coreana que formalice la recursión y valide los ejemplos y terminología."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Una **relativa anidada** aparece cuando una cláusula modificadora contiene dentro de sí otra estructura nominal que también está modificada por una relativa. El resultado es una cadena de dependencias: primero se interpreta la relativa interna y su sustantivo núcleo; después, ese grupo completo participa dentro de una relativa mayor.\n\nEl coreano coloca estas cláusulas antes del nombre que modifican. Por eso, una secuencia extensa puede acumular información a la izquierda del núcleo y exigir iden",
+      "articleParagraph": 1,
+      "assessment": "partial",
+      "sourceReferences": [
+        {
+          "citation": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+          "title": "Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean."
+        },
+        {
+          "citation": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+          "title": "Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages",
+          "url": "https://aclanthology.org/Y12-1070/",
+          "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory."
+        }
+      ],
+      "rationale": "La literatura localizada solo respalda una parte del grupo de afirmaciones de esta sección; falta cotejo directo de cada ejemplo, restricción y generalización de la ficha."
+    },
+    {
+      "claim": "En **[제가 어제 산] 책을 읽는 학생**, «el estudiante que lee el libro que compré ayer», la relativa interna es **제가 어제 산** «que compré ayer». Su núcleo es **책** «libro»: dentro de **산**, el libro corresponde al objeto no expresado de **사다** «comprar».\n\nDespués, todo el grupo **[제가 어제 산] 책을** funciona como objeto de **읽는** «que lee». La relativa externa **[제가 어제 산] 책을 읽는** modifica a **학생** «estudiante», que se interpreta como sujeto de **읽다**.\n\nAsí, el análisis progresa por niveles. Las partículas visibles",
+      "articleParagraph": 2,
+      "assessment": "partial",
+      "sourceReferences": [
+        {
+          "citation": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+          "title": "Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean."
+        },
+        {
+          "citation": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+          "title": "Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages",
+          "url": "https://aclanthology.org/Y12-1070/",
+          "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory."
+        }
+      ],
+      "rationale": "La literatura localizada solo respalda una parte del grupo de afirmaciones de esta sección; falta cotejo directo de cada ejemplo, restricción y generalización de la ficha."
+    },
+    {
+      "claim": "**[제가 어제 산] 책을 읽는 학생을 만났어요.** — «Me encontré con el estudiante que lee el libro que compré ayer.» **책** es el núcleo de la relativa interna y **학생** el núcleo de la externa.\n\n**[민수가 추천한] 영화를 본 친구가 전화했어요.** — «Llamó el amigo que vio la película que Minsu recomendó.» **민수가 추천한** modifica **영화**, y el grupo **영화를** funciona como objeto de **본**, que a su vez modifica **친구**.\n\n**[서울에 사는] 친구가 소개한 식당에 갔어요.** — «Fui al restaurante que recomendó/presentó el amigo que vive en Seúl.» La relativa interna m",
+      "articleParagraph": 3,
+      "assessment": "partial",
+      "sourceReferences": [
+        {
+          "citation": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+          "title": "Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean."
+        },
+        {
+          "citation": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+          "title": "Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages",
+          "url": "https://aclanthology.org/Y12-1070/",
+          "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory."
+        }
+      ],
+      "rationale": "La literatura localizada solo respalda una parte del grupo de afirmaciones de esta sección; falta cotejo directo de cada ejemplo, restricción y generalización de la ficha."
+    },
+    {
+      "claim": "Una relativa anidada no es simplemente una relativa «larga». Deben existir al menos dos relaciones de modificación jerárquicamente integradas. Las marcas de caso y los límites formados por cada sustantivo núcleo son claves para evitar interpretar toda la secuencia como una sola cláusula plana.\n\nEl contraste con el español también es estructural. El español suele colocar la relativa después del nombre mediante formas como «que» o «quien»; el coreano coloca la cláusula modificadora antes del núcle",
+      "articleParagraph": 4,
+      "assessment": "partial",
+      "sourceReferences": [
+        {
+          "citation": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+          "title": "Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean."
+        },
+        {
+          "citation": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+          "title": "Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages",
+          "url": "https://aclanthology.org/Y12-1070/",
+          "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory."
+        }
+      ],
+      "rationale": "La literatura localizada solo respalda una parte del grupo de afirmaciones de esta sección; falta cotejo directo de cada ejemplo, restricción y generalización de la ficha."
+    },
+    {
+      "claim": "Se relaciona con **desambiguación por contexto**, **ambigüedad sujeto/objeto**, **relativa con múltiples argumentos omitidos** y **relativa de contenido**. Estas entradas ayudan a separar anidamiento, papeles argumentales y distintos tipos de modificación nominal compleja.",
+      "articleParagraph": 5,
+      "assessment": "partial",
+      "sourceReferences": [
+        {
+          "citation": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+          "title": "Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean."
+        },
+        {
+          "citation": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+          "title": "Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages",
+          "url": "https://aclanthology.org/Y12-1070/",
+          "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory."
+        }
+      ],
+      "rationale": "La literatura localizada solo respalda una parte del grupo de afirmaciones de esta sección; falta cotejo directo de cada ejemplo, restricción y generalización de la ficha."
+    }
+  ],
+  "consultedSources": [
+    {
+      "citation": "Cheon, K.-H., Kim, Y., Yoon, H.-D., Nam, K.-C., Lee, S.-Y., & Jeon, H.-A. (2020). Syntactic comprehension of relative clauses and center embedding using pseudowords. Brain Sciences, 10(4), 202. https://doi.org/10.3390/brainsci10040202",
+      "title": "Syntactic Comprehension of Relative Clauses and Center Embedding Using Pseudowords",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7226570/",
+      "locator": "Introducción §§1, líneas 127–140: relativas prenominales coreanas sin pronombre relativo; dependencia de huecos y sensibilidad semántico-pragmática/contextual; define relativas “gapless” como una condición experimental. No examina todas las subclases ni los ejemplos de estas entradas.",
+      "use": "Fuente primaria gratuita consultada; localizador y límite de alcance quedan registrados. Candidata de respaldo, no integrada a Evidence canónica."
+    }
+  ],
+  "semanticReview": {
+    "method": "Lectura de la entrada canónica y contraste con fuentes primarias públicas de lingüística, artículos/corpus de acceso gratuito y sus localizadores explícitos; las páginas de resumen se distinguen de los textos completos.",
+    "findings": [
+      "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+    ],
+    "limitations": [
+      "Al menos una afirmación material o ejemplo no cuenta con respaldo directo y suficiente.",
+      "Los resúmenes públicos o análisis particulares no se extrapolan a afirmaciones más amplias.",
+      "No hay Evidence canónica completa ni resultado exitoso de assessEntry."
+    ],
+    "consultedSources": [
+      {
+        "title": "Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data",
+        "apa7": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+        "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean.",
+        "finding": "Apoya que el procesamiento de relativas de sujeto y objeto puede diferir; no sustituye el análisis sintáctico individual ni demuestra que contexto resuelva toda ambigüedad."
+      },
+      {
+        "title": "Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages",
+        "apa7": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+        "url": "https://aclanthology.org/Y12-1070/",
+        "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory.",
+        "finding": "Demuestra que “gapless” es una cuestión teórica discutida y ofrece un análisis particular; no valida automáticamente la taxonomía, los ejemplos temporales/posesivos o el análisis afirmado en la ficha."
+      }
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta.",
+      "searches": [
+        {
+          "query": "한국어 관계절 주어 목적어 상대절 gapless 논문 원문",
+          "portal": "Repositorios de artículos académicos, corpus institucional y recursos abiertos oficiales; búsqueda centrada en estructura/afirmación lingüística.",
+          "outcome": "Fuentes primarias localizadas: Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data; Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages. El alcance documentado solo apoya parte de las afirmaciones; véase el localizador de cada fuente. No se halló evidencia suficiente para cerrar el criterio de bloqueo."
+        },
+        {
+          "query": "Korean relative clause content possessive nested relative clause primary study",
+          "portal": "Repositorios universitarios, ACL Anthology, Frontiers, KCI/SSRN o NIKL según tema; búsqueda separada orientada a ejemplos y uso contextual.",
+          "outcome": "La segunda búsqueda confirma límites y variación en el análisis; no apareció respaldo directo para todas las generalizaciones, traducciones y ejemplos concretos de esta entrada."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data",
+          "apa7": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+          "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean.",
+          "finding": "Apoya que el procesamiento de relativas de sujeto y objeto puede diferir; no sustituye el análisis sintáctico individual ni demuestra que contexto resuelva toda ambigüedad."
+        },
+        {
+          "title": "Gap in “Gapless” Relative Clauses in Korean and Other Asian Languages",
+          "apa7": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+          "url": "https://aclanthology.org/Y12-1070/",
+          "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory.",
+          "finding": "Demuestra que “gapless” es una cuestión teórica discutida y ofrece un análisis particular; no valida automáticamente la taxonomía, los ejemplos temporales/posesivos o el análisis afirmado en la ficha."
+        }
+      ],
+      "claimReviewMatrix": [
+        {
+          "section": "En pocas palabras",
+          "text": "Una **relativa anidada** aparece cuando una cláusula modificadora contiene dentro de sí otra estructura nominal que también está modificada por una relativa. El resultado es una cadena de dependencias: primero se interpreta la relativa interna y su sustantivo núcleo; después, ese grupo completo participa dentro de una relativa mayor.\n\nEl coreano coloca estas cláusulas antes del nombre que modifican. Por eso, una secuencia extensa puede acumular información a la izquierda del núcleo y exigir iden",
+          "assessment": "PENDING_SOURCE_SUPPORT",
+          "reason": "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+        },
+        {
+          "section": "Cómo funciona",
+          "text": "En **[제가 어제 산] 책을 읽는 학생**, «el estudiante que lee el libro que compré ayer», la relativa interna es **제가 어제 산** «que compré ayer». Su núcleo es **책** «libro»: dentro de **산**, el libro corresponde al objeto no expresado de **사다** «comprar».\n\nDespués, todo el grupo **[제가 어제 산] 책을** funciona como objeto de **읽는** «que lee». La relativa externa **[제가 어제 산] 책을 읽는** modifica a **학생** «estudiante», que se interpreta como sujeto de **읽다**.\n\nAsí, el análisis progresa por niveles. Las partículas visibles",
+          "assessment": "PENDING_SOURCE_SUPPORT",
+          "reason": "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+        },
+        {
+          "section": "Ejemplos",
+          "text": "**[제가 어제 산] 책을 읽는 학생을 만났어요.** — «Me encontré con el estudiante que lee el libro que compré ayer.» **책** es el núcleo de la relativa interna y **학생** el núcleo de la externa.\n\n**[민수가 추천한] 영화를 본 친구가 전화했어요.** — «Llamó el amigo que vio la película que Minsu recomendó.» **민수가 추천한** modifica **영화**, y el grupo **영화를** funciona como objeto de **본**, que a su vez modifica **친구**.\n\n**[서울에 사는] 친구가 소개한 식당에 갔어요.** — «Fui al restaurante que recomendó/presentó el amigo que vive en Seúl.» La relativa interna m",
+          "assessment": "PENDING_SOURCE_SUPPORT",
+          "reason": "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+        },
+        {
+          "section": "Observación importante",
+          "text": "Una relativa anidada no es simplemente una relativa «larga». Deben existir al menos dos relaciones de modificación jerárquicamente integradas. Las marcas de caso y los límites formados por cada sustantivo núcleo son claves para evitar interpretar toda la secuencia como una sola cláusula plana.\n\nEl contraste con el español también es estructural. El español suele colocar la relativa después del nombre mediante formas como «que» o «quien»; el coreano coloca la cláusula modificadora antes del núcle",
+          "assessment": "PENDING_SOURCE_SUPPORT",
+          "reason": "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+        },
+        {
+          "section": "Entradas relacionadas",
+          "text": "Se relaciona con **desambiguación por contexto**, **ambigüedad sujeto/objeto**, **relativa con múltiples argumentos omitidos** y **relativa de contenido**. Estas entradas ayudan a separar anidamiento, papeles argumentales y distintos tipos de modificación nominal compleja.",
+          "assessment": "PENDING_SOURCE_SUPPORT",
+          "reason": "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+        }
+      ],
+      "contentCorrectionConsidered": "Se revisó si hacía falta retirar generalizaciones de frecuencia, convertir reglas absolutas en tendencias condicionadas, separar categorías teóricas discutidas y limitar ejemplos a lo que sostienen las fuentes. No se cambió el artículo canónico porque aún falta adjudicar evidencia claim-level para cada ejemplo y afirmación.",
+      "canonicalCheck": "Hash del artículo e1a2d9f3c3d1aa1b68f9b87eb2d6d696464088093a2f42d93080d713f846de33 coincide con baseArticleHashes[MLS-V08-1001]. No se creó Evidence canónica y assessEntry no se ejecutó con resultado aprobatorio; estado permanece pendiente.",
+      "nextConcreteStep": "Para MLS-V08-1001, cotejar con texto completo y localizadores las afirmaciones y ejemplos de “Relativa anidada”; para cada una registrar coincidencia, matiz o contradicción en Evidence y reevaluar con assessEntry. Resolver en particular: No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+    }
+  },
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite:wiki_articles (modo read-only)",
+    "backupGeneratedAt": "2026-09-19T09:25:05.224Z",
+    "canonicalGeneratedAt": "2026-09-19T09:25:05.224Z",
+    "backupArticleSha256": "e1a2d9f3c3d1aa1b68f9b87eb2d6d696464088093a2f42d93080d713f846de33",
+    "canonicalArticleSha256": "e1a2d9f3c3d1aa1b68f9b87eb2d6d696464088093a2f42d93080d713f846de33",
+    "articleMatches": true,
+    "versionMatches": true,
+    "previousReviewPath": "docs/r33-local/reviews/MLS-V08-1001-revision.json",
+    "previousReviewSha256": "11df82ae3424d3c3448b080df7345db1c185dbdcfe8edb5bf400b1f0e600839a",
+    "previousStatus": "PENDING_SOURCE_SUPPORT"
+  },
+  "originalArticleSha256": "e1a2d9f3c3d1aa1b68f9b87eb2d6d696464088093a2f42d93080d713f846de33",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-1001/followup-1-0a3be3e50450.json",
+    "sha256": "0a3be3e504509d0bec5e50e3e341d190102a4315002b25966bcf558bede7448a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta.",
+    "nextStep": "Para MLS-V08-1001, cotejar con texto completo y localizadores las afirmaciones y ejemplos de “Relativa anidada”; para cada una registrar coincidencia, matiz o contradicción en Evidence y reevaluar con assessEntry. Resolver en particular: No se localizó fuente primaria que confirme el análisis jerárquico de las dos relativas del ejemplo exacto ni la terminología “relativa anidada” tal como se presenta."
+  },
+  "sourceAudit": {
+    "method": "Contraste de fuentes primarias gratuitas con localizadores; distinción explícita entre resumen accesible y texto completo.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: persiste evidencia claim-level insuficiente; no se ha generado Evidence canónica."
+  },
+  "sourceReferences": [
+    {
+      "apa7": "Kwon, N., Gordon, P. C., Lee, Y., Kluender, R., & Polinsky, M. (2010). Subject/object processing asymmetries in Korean relative clauses: Evidence from ERP data. Language, Cognition and Neuroscience, 25(7), 1140–1166.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4231604/",
+      "locator": "Abstract and introduction; open full text. Experimental comparison of subject and object relative clauses and processing asymmetries in Korean.",
+      "supports": "Apoya que el procesamiento de relativas de sujeto y objeto puede diferir; no sustituye el análisis sintáctico individual ni demuestra que contexto resuelva toda ambigüedad."
+    },
+    {
+      "apa7": "Lee, J.-S., & Lee, C. (2012). Gap in “Gapless” relative clauses in Korean and other Asian languages. In Proceedings of the 26th Pacific Asia Conference on Language, Information, and Computation (pp. 640–645). Faculty of Computer Science, Universitas Indonesia.",
+      "url": "https://aclanthology.org/Y12-1070/",
+      "locator": "Artículo completo en ACL Anthology, pp. 640–645; análisis de las llamadas relativas “sin hueco” y propuesta de análisis mediante Generative Lexicon Theory.",
+      "supports": "Demuestra que “gapless” es una cuestión teórica discutida y ofrece un análisis particular; no valida automáticamente la taxonomía, los ejemplos temporales/posesivos o el análisis afirmado en la ficha."
+    }
+  ]
+}

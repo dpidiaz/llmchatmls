@@ -1,0 +1,120 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0532",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:37:56.982Z",
+  "reviewer": "R33 local source-followup",
+  "articlePath": "content/ruso/MLS-V09-0532.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura de artículo y revisión previa; se consultaron búsquedas públicas gratuitas, se inspeccionaron las fuentes primarias y localizadores indicados y se limitó el hallazgo a su alcance. No se generó Evidence canónica para este resultado pendiente.",
+    "findings": [
+      "La tabla Cornell lista три, трёх, трём, тремя, pero no confirma cada combinación de acusativo/animacidad ni todos los casos de sustantivos contados de la ficha.",
+      "Revisión anterior conservada (PENDING_SOURCE_SUPPORT, ronda 2); su bloqueo registrado era: La fuente presenta el paradigma central de три; falta verificar individualmente las formas de los sustantivos en ejemplos.",
+      "No se asignó respaldo automáticamente a claims enteros: falta una matriz claim-localizador, cotejo de todos los ejemplos/traducciones o resolver el desacuerdo indicado. assessEntry y la validación canónica no se declararon exitosos."
+    ],
+    "limitations": [
+      "La tabla Cornell lista три, трёх, трём, тремя, pero no confirma cada combinación de acusativo/animacidad ni todos los casos de sustantivos contados de la ficha.",
+      "La evidencia obtenida es parcial; no existe Evidence canónica vigente y validada que cubra todas las afirmaciones materiales.",
+      "El contenido no fue modificado y el hash del artículo coincide con el valor base del coordinador."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La tabla Cornell lista три, трёх, трём, тремя, pero no confirma cada combinación de acusativo/animacidad ni todos los casos de sustantivos contados de la ficha.",
+      "searches": [
+        {
+          "query": "site:rusgram.ru числительные склонение пять двадцать триста дробные",
+          "portal": "Búsqueda web pública; Rusgram / Cornell University",
+          "outcome": "Se abrió el paradigma Cornell de numerales cardinales; Gramota apareció en resultados pero sus páginas devolvieron 403 al abrirlas."
+        },
+        {
+          "query": "Russian fractions numerator denominator declension дробные числительные academic grammar",
+          "portal": "Búsqueda web pública; Gramota / repositorios universitarios",
+          "outcome": "La búsqueda recuperó un extracto oficial de Gramota y una gramática de referencia abierta; no se obtuvo un pasaje directamente inspeccionable para toda la cobertura."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Numbers and numerals: Case forms",
+          "url": "https://russian.cornell.edu/grammar/html/numbers_2.htm",
+          "locator": "Líneas 7–18 (три, пять–тридцать, casos oblicuos); 26–31 (200, 300 etc., paradigma de centenas).",
+          "finding": "Tabla primaria universitaria inspeccionada; respalda paradigmas centrales, pero no cada sintagma contado o ejemplo compuesto de las fichas."
+        },
+        {
+          "title": "Как правильно употреблять числительные?",
+          "url": "https://gramota.ru/biblioteka/spravochniki/pismovnik/kak-pravilno-upotreblyat-chislitelnye",
+          "locator": "Extracto del resultado de búsqueda (no fue posible cargar la página; HTTP 403): tabla de склонение триста/пятьсот y ordinal compuesto.",
+          "finding": "Extracto de fuente institucional oficial observado en resultados; no se pudo inspeccionar la página completa, por lo que no se usa como validación concluyente."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré acotar las reglas y ejemplos a lo que sí muestran las fuentes inspeccionadas; no edité articleMarkdown. Se requiere contrastar individualmente cada afirmación y ejemplo antes de corregir o certificar.",
+      "canonicalCheck": "content/ruso/MLS-V09-0532.json articleMarkdown SHA-256=68a01422f9812e30dc8edf86cb2e2814443fc2cf4eda263144dd9f534a8fbc71; coincide con baseArticleHashes del lease. La versión canónica no tiene Evidence nueva ni assessEntry exitoso asociado a esta revisión; se conserva PENDING_SOURCE_SUPPORT.",
+      "nextConcreteStep": "Construir una tabla de cada afirmación material y ejemplo del artículo frente a la fuente primaria exacta; localizar las formas no cubiertas, registrar APA 7, crear Evidence solo con cobertura completa y ejecutar assessEntry/preflight canónicos."
+    }
+  },
+  "originalArticleSha256": "68a01422f9812e30dc8edf86cb2e2814443fc2cf4eda263144dd9f534a8fbc71",
+  "verifiedArticleSha256": "68a01422f9812e30dc8edf86cb2e2814443fc2cf4eda263144dd9f534a8fbc71",
+  "backupComparison": {
+    "priorReviewPath": "docs/r33-local/reviews/MLS-V09-0532-revision.json",
+    "priorStatus": "PENDING_SOURCE_SUPPORT",
+    "priorArticleSha256": "68a01422f9812e30dc8edf86cb2e2814443fc2cf4eda263144dd9f534a8fbc71",
+    "priorReviewRead": true,
+    "historyPreservedByCoordinatorOnCompletion": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "followupRound": 3,
+  "assignmentId": "R33A-1791714707543-701199",
+  "phase": "source-followup",
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Numbers and numerals: Case forms. Beginning Russian Grammar. Cornell University Russian Language Program.",
+      "url": "https://russian.cornell.edu/grammar/html/numbers_2.htm",
+      "locator": "Líneas 7–18 (три, пять–тридцать, casos oblicuos); 26–31 (200, 300 etc., paradigma de centenas).",
+      "observation": "Tabla primaria universitaria inspeccionada; respalda paradigmas centrales, pero no cada sintagma contado o ejemplo compuesto de las fichas."
+    },
+    {
+      "apa7Candidate": "Грамота.ру. (s. f.). Как правильно употреблять числительные? Письмовник.",
+      "url": "https://gramota.ru/biblioteka/spravochniki/pismovnik/kak-pravilno-upotreblyat-chislitelnye",
+      "locator": "Extracto del resultado de búsqueda (no fue posible cargar la página; HTTP 403): tabla de склонение триста/пятьсот y ordinal compuesto.",
+      "observation": "Extracto de fuente institucional oficial observado en resultados; no se pudo inspeccionar la página completa, por lo que no se usa como validación concluyente."
+    },
+    {
+      "sourceId": "cornell-beginning-russian",
+      "title": "Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/intro.htm",
+      "apa7Candidate": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Beginning Russian grammar (2nd ed.) [Online grammar]. Cornell University Russian Language Program. https://russian.cornell.edu/grammar/intro.htm",
+      "locator": "Numbers and numerals: case forms, lines 7–18: gives the full oblique-case paradigm трёх/трём/тремя and nominative три, and 3 takes forms alongside numeral patterns. All counted-noun case examples in the entry not individually checked."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsqueda abierta y cotejo semántico parcial; localizadores y limitaciones se registran por fuente.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "NOT_APPROVED: claims sin cobertura completa por localizador; no se elevó el estado.",
+    "backupComparison": {
+      "priorReviewPath": "docs/r33-local/reviews/MLS-V09-0532-revision.json",
+      "priorStatus": "PENDING_SOURCE_SUPPORT",
+      "priorArticleSha256": "68a01422f9812e30dc8edf86cb2e2814443fc2cf4eda263144dd9f534a8fbc71",
+      "priorReviewRead": true,
+      "historyPreservedByCoordinatorOnCompletion": true
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "La tabla Cornell lista три, трёх, трём, тремя, pero no confirma cada combinación de acusativo/animacidad ni todos los casos de sustantivos contados de la ficha.",
+    "nextStep": "Completar mapa claim-localizador y cotejar todos los ejemplos contra gramática académica abierta."
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0532/followup-2-18219d54c9c5.json",
+    "sha256": "18219d54c9c5e0fae163ecc869581b895f68d0bd15f2e1720e889c384b5f326c",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  }
+}

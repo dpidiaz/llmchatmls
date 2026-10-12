@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0654",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0654.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, §II, líneas 122–127, da forma interrogativa, señala uso principalmente por mujeres adultas y describe el uso masculino. La afirmación completa de la ficha y ejemplos propios requieren localizadores adicionales."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS apoya interrogación introspectiva y perfil de uso, pero la fuente no sustenta cada matiz pragmático ni todos los ejemplos de la ficha.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html かしら 成人女性",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Fuente institucional explica interrogación y perfil; no valida todos los matices de la ficha."
+        },
+        {
+          "query": "site:repository.ninjal.ac.jp かしら 終助詞 日本語",
+          "portal": "NINJAL repository search",
+          "outcome": "No se encontró en esta consulta una fuente accesible que complete el análisis pragmático."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "§II 「かしら」, líneas 122–127",
+          "finding": "Apoya la interrogación y los perfiles presentados por TUFS; la ficha conserva generalizaciones y ejemplos no cotejados."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reducir el alcance a interrogación introspectiva y perfil descrito por TUFS; hace falta sustituir o documentar ejemplos.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 1da89cbe64f69f0e9f6e80a2001afaad8542f69762620683a2da57763e694d0d. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 1,
+    "label": "baja",
+    "reason": "TUFS apoya interrogación introspectiva y perfil de uso, pero la fuente no sustenta cada matiz pragmático ni todos los ejemplos de la ficha.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "1da89cbe64f69f0e9f6e80a2001afaad8542f69762620683a2da57763e694d0d",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0654/followup-2-51e344afb1b6.json",
+    "sha256": "51e344afb1b67f35370d82dc9b2e9bff573ee8a25bc795e908264107e69258f5",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

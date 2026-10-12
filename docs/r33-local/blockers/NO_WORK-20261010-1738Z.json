@@ -1,0 +1,49 @@
+{
+  "schema": "MLS-R33-LOCAL-NO-WORK-BLOCKER-1",
+  "recordedAt": "2026-10-10T17:38:37Z",
+  "branch": "feat/r33-local-recovery",
+  "trigger": "R33 local siguiente -> NO_WORK",
+  "coordinator": {
+    "remaining": 0,
+    "primaryRemaining": 0,
+    "followupRemaining": 0,
+    "unresolvedReviewOutcomes": 2477,
+    "followupRounds": 1,
+    "activeLeasesAtNext": 8,
+    "activeLeasesAtStatus": 7,
+    "activeLimit": 50,
+    "batchSize": 25
+  },
+  "blocker": "Repeated NO_WORK: the coordinator has no unleased eligible codes under the single planned follow-up round while other workers hold active batches. At latest revalidation, 2,473 review outcomes remained unresolved and 4 leases were active. Only a new coordinator round or eligible released assignment can unblock this chat.",
+  "requiredToResume": "Reconcile completion or expiry of currently active leases, then re-check coordinator status for eligible unleased entries. Do not change or duplicate existing leases.",
+  "goalStatus": "OPEN",
+  "verifiedThisBatch": 0,
+  "safety": {
+    "cloudflareInteractions": 0,
+    "d1Reads": 0,
+    "d1Writes": 0,
+    "pushes": 0,
+    "merges": 0,
+    "deployments": 0
+  },
+  "revalidation": {
+    "observedAt": "2026-10-10T17:39:46Z",
+    "coordinatorRemaining": 0,
+    "followupRemaining": 0,
+    "unresolvedReviewOutcomes": 2477,
+    "activeLeases": 6,
+    "activeLimit": 50,
+    "source": "tools/r33-local/coordinator.cjs status",
+    "action": "NO_WORK remains. Do not claim a lease until a later coordinator status exposes eligible unleased codes."
+  },
+  "latestRevalidation": {
+    "observedAt": "2026-10-10T17:40:10Z",
+    "coordinatorRemaining": 0,
+    "followupRemaining": 0,
+    "unresolvedReviewOutcomes": 2473,
+    "activeLeases": 4,
+    "activeLimit": 50,
+    "source": "tools/r33-local/coordinator.cjs status",
+    "action": "NO_WORK condition persists. This chat has no eligible code under the issued leases and the single follow-up round; do not process unleased entries."
+  }
+}

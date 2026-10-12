@@ -1,0 +1,93 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0645",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:37:18.004Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173529-053625",
+  "assignmentId": "R33A-1791653729098-95e146",
+  "articlePath": "content/ruso/MLS-V09-0645.json",
+  "articleGeneratedAt": "2026-09-19T09:35:43.837Z",
+  "articleSha256": "dfb333d752d491f456f25d16834910a5303e55b19869482effb684366cab99ec",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Source-followup con fuentes universitarias y normativas abiertas; contraste de localizadores exactos, semántica y versiones SQLite en read-only. La cobertura parcial no se marca VERIFIED.",
+    "findings": [
+      "Gramota presents shared-subject as a norm for деепричастие, with contextual caveats; article says “obligatory” and needs qualification."
+    ],
+    "limitations": [
+      "La página solo pudo consultarse mediante el extracto indexado y respondió 403 al abrirse. Debe cotejarse la formulación completa con la sección de la gramática citada y revisar los ejemplos de estructuras impersonales/pasivas y sujetos no nominativos. No se creó Evidence canónica ni se modificó el artículo. Estado PENDING_SOURCE_SUPPORT, claimsVerified=0, coverageComplete=false y citationReady=false. No usar VERIFIED hasta cerrar fuentes/locators y evaluación canónica R33.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; quedan afirmaciones materiales y ejemplos por validar."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Afirmación material principal de “Mismo sujeto obligatorio”.",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Деепричастие",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/deeprichastie",
+          "locator": "formation, verbal properties and subject-matching rule; article discusses qualifications"
+        }
+      ],
+      "rationale": "Gramota presents shared-subject as a norm for деепричастие, with contextual caveats; article says “obligatory” and needs qualification."
+    },
+    {
+      "claim": "Los paradigmas, ejemplos, límites y generalizaciones completos del artículo quedan respaldados.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Деепричастие",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/deeprichastie",
+          "locator": "formation, verbal properties and subject-matching rule; article discusses qualifications"
+        }
+      ],
+      "rationale": "La página solo pudo consultarse mediante el extracto indexado y respondió 403 al abrirse. Debe cotejarse la formulación completa con la sección de la gramática citada y revisar los ejemplos de estructuras impersonales/pasivas y sujetos no nominativos. No se creó Evidence canónica ni se modificó el artículo. Estado PENDING_SOURCE_SUPPORT, claimsVerified=0, coverageComplete=false y citationReady=false. No usar VERIFIED hasta cerrar fuentes/locators y evaluación canónica R33."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Грамота.ру",
+      "title": "Деепричастие",
+      "publisher": "Грамота.ру, справочный портал",
+      "year": "n.d.",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/deeprichastie",
+      "locator": "formation, verbal properties and subject-matching rule; article discusses qualifications",
+      "apa7": "Грамота.ру. (n.d.). Деепричастие. https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkij-teoreticheskij-kurs-dlya-shkolnikov/deeprichastie"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:35:43.837Z",
+    "backupGeneratedAt": "2026-09-19T09:35:43.837Z",
+    "canonicalArticleSha256": "dfb333d752d491f456f25d16834910a5303e55b19869482effb684366cab99ec",
+    "backupArticleSha256": "dfb333d752d491f456f25d16834910a5303e55b19869482effb684366cab99ec",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "dfb333d752d491f456f25d16834910a5303e55b19869482effb684366cab99ec",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0645/pre-coordinator.json",
+    "sha256": "84a067e91fefd74b63ac05b55938d2685f085b1feb4612ecbf1a87fa489f052c",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

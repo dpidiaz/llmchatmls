@@ -1,0 +1,158 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0368",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:44:41.111Z",
+  "reviewer": "R33 local source-followup with difficulty assessment",
+  "assignmentId": "R33A-1791664690705-b8cfdb",
+  "articlePath": "content/japones/MLS-V06-0368.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [],
+  "sourceAudit": {
+    "method": "Lectura semántica de la ficha, comparación de versión con el backup SQL y cotejo de fuentes primarias/institucionales localizadas; cinco grupos de afirmaciones se usan como triage y no sustituyen el mapa canónico claim por claim.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false
+  },
+  "semanticReview": {
+    "method": "Seguimiento por dos rutas institucionales/académicas; se revisaron los pasajes disponibles y se compararon con el texto. La cobertura hallada es parcial y no permite certificar.",
+    "findings": [
+      "La descripción de こちら・そちら・あちら como dirección/lugar/persona, su nivel de cortesía y las equivalencias de どちら agrupan varias funciones y juicios pragmáticos. Falta fuente lexicográfica/gramatical con localizadores para cada función y para los ejemplos.",
+      "No se localizó fuente primaria con localizador que cubra conjuntamente las funciones de こちら・そちら・あちら como lugar/dirección/persona, la serie interrogativa どちら y el grado de cortesía atribuido.",
+      "Los ejemplos y equivalencias pragmáticas de la entrada requieren pasajes lexicográficos o gramaticales específicos; mantener pendiente.",
+      "No apareció una fuente institucional gratuita que respaldara toda la distribución/cortesía de こちら/そちら/あちら.",
+      "No existe cobertura semántica claim-level suficiente para toda la afirmación material; no se crea Evidence canónica ni se certifica.",
+      "Cotejo nuevo: El paradigma básico no cubre los matices de persona, dirección, lugar y cortesía de こちら/そちら/あちら.",
+      "Fuentes inspeccionadas: NINJAL — 指示詞（コ・ソ・ア・ド）; Section 10, demonstrative/interrogative paradigms for things, places and noun modifiers; Confirms paradigms but not all pragmatic distinctions and example translations."
+    ],
+    "limitations": [
+      "No existe Evidence canónica nueva ni mapa de localizadores claim por claim; por ello claimsVerified=0 y la entrada permanece pendiente.",
+      "La comparación SQL confirma identidad de la versión, pero no prueba exactitud semántica.",
+      "El artículo y Evidence no fueron modificados; la revisión previa se conservará en review-history al integrar el seguimiento.",
+      "Las fuentes parciales no se trataron como respaldo de afirmaciones que no cubren.",
+      "La entrada carece de Evidence canónica vigente y no figura en el índice VERIFIED; assessEntry no se puede aprobar sin Evidence con cobertura, APA 7 y localizadores por afirmación. El paradigma básico no cubre los matices de persona, dirección, lugar y cortesía de こちら/そちら/あちら."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "El paradigma básico no cubre los matices de persona, dirección, lugar y cortesía de こちら/そちら/あちら.",
+      "searches": [
+        {
+          "query": "site:ninjal.ac.jp どう それ どこ どちら Japanese demonstrative interrogative grammar",
+          "portal": "NINJAL / institutional web search",
+          "outcome": "La búsqueda identificó material institucional pertinente a parte del patrón; no cubre todos los claims/ejemplos."
+        },
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod \"どこ\" \"どちら\" \"どう\" 指示詞",
+          "portal": "TUFS / institutional web search",
+          "outcome": "La segunda ruta localizó un pasaje parcial; el bloqueo concreto restante está descrito para esta entrada."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "NINJAL — 指示詞（コ・ソ・ア・ド）",
+          "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+          "locator": "Section 10, demonstrative/interrogative paradigms for things, places and noun modifiers",
+          "finding": "Confirms paradigms but not all pragmatic distinctions and example translations."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a los ejemplos cubiertos por las fuentes encontradas. No se editó porque aún falta resolver: El paradigma básico no cubre los matices de persona, dirección, lugar y cortesía de こちら/そちら/あちら.. El siguiente intento actualizará el texto y Evidence al hash final si la fuente primaria permite fijar el alcance.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: df3d676564566927850a6ddfdd2cc09610e0e5a5e5ac0dcfcb1e270d6560ed5f. No hay Evidence canónica y el código no aparece en el índice VERIFIED; assessEntry no dispone de artefacto evaluable. Resultado: no VERIFIED.",
+      "nextConcreteStep": "Separar deixis, cortesía y referencia personal y localizar cada sentido en fuentes lexicográficas/gramaticales."
+    }
+  },
+  "originalArticleSha256": "df3d676564566927850a6ddfdd2cc09610e0e5a5e5ac0dcfcb1e270d6560ed5f",
+  "backupComparison": {
+    "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T21:15:24.562Z",
+    "canonicalGeneratedAt": "2026-09-19T21:15:24.562Z",
+    "backupArticleSha256": "df3d676564566927850a6ddfdd2cc09610e0e5a5e5ac0dcfcb1e270d6560ed5f",
+    "canonicalArticleSha256": "df3d676564566927850a6ddfdd2cc09610e0e5a5e5ac0dcfcb1e270d6560ed5f",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "followupRound": 2,
+  "verifiedArticleSha256": "df3d676564566927850a6ddfdd2cc09610e0e5a5e5ac0dcfcb1e270d6560ed5f",
+  "sourceFollowup": {
+    "round": 1,
+    "findings": [
+      "No se localizó fuente primaria con localizador que cubra conjuntamente las funciones de こちら・そちら・あちら como lugar/dirección/persona, la serie interrogativa どちら y el grado de cortesía atribuido.",
+      "Los ejemplos y equivalencias pragmáticas de la entrada requieren pasajes lexicográficos o gramaticales específicos; mantener pendiente."
+    ]
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0368/followup-1-93252937edb6.json",
+    "sha256": "93252937edb610cdf10f87e5acd19a2f68ade40ef61321b8f9f51a6f5a8495a4",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "title": "こちら/そちら/あちら",
+  "workerId": "R33W-local-20261010203810-8075d6",
+  "canonicalArticleSha256": "df3d676564566927850a6ddfdd2cc09610e0e5a5e5ac0dcfcb1e270d6560ed5f",
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Nivel 3 (alta): El paradigma básico no cubre los matices de persona, dirección, lugar y cortesía de こちら/そちら/あちら.",
+    "nextStep": "Separar deixis, cortesía y referencia personal y localizar cada sentido en fuentes lexicográficas/gramaticales."
+  },
+  "sourceSearch": {
+    "queries": [
+      "site:ninjal.ac.jp どう それ どこ どちら Japanese demonstrative interrogative grammar",
+      "site:coelang.tufs.ac.jp/mt/ja/gmod \"どこ\" \"どちら\" \"どう\" 指示詞"
+    ],
+    "repositories": [
+      "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf"
+    ],
+    "partialHits": [
+      {
+        "title": "NINJAL — 指示詞（コ・ソ・ア・ド）",
+        "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+        "locator": "Section 10, demonstrative/interrogative paradigms for things, places and noun modifiers",
+        "finding": "Confirms paradigms but not all pragmatic distinctions and example translations."
+      }
+    ]
+  },
+  "sourceChecks": [
+    {
+      "title": "NINJAL — 指示詞（コ・ソ・ア・ド）",
+      "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+      "locator": "Section 10, demonstrative/interrogative paradigms for things, places and noun modifiers",
+      "finding": "Confirms paradigms but not all pragmatic distinctions and example translations.",
+      "status": "inspected_partial"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "canonicalCheck": {
+    "articleHash": "df3d676564566927850a6ddfdd2cc09610e0e5a5e5ac0dcfcb1e270d6560ed5f",
+    "verifiedIndex": false,
+    "evidenceExists": false,
+    "assessEntry": "not_run_no_evidence",
+    "result": "PENDING"
+  },
+  "reviewCheckpoint": {
+    "code": "MLS-V06-0368",
+    "assignmentId": "R33A-1791664690705-b8cfdb",
+    "completedAt": "2026-10-10T20:44:41.111Z",
+    "priorStatus": "PENDING_SOURCE_SUPPORT",
+    "priorReviewPath": "docs/r33-local/reviews/MLS-V06-0368-revision.json",
+    "priorReviewSha256": "93252937edb610cdf10f87e5acd19a2f68ade40ef61321b8f9f51a6f5a8495a4",
+    "result": "PENDING_SOURCE_SUPPORT",
+    "reason": "El paradigma básico no cubre los matices de persona, dirección, lugar y cortesía de こちら/そちら/あちら."
+  }
+}

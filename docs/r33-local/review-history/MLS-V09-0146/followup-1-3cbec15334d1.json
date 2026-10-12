@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0146",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.621Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0146.json",
+  "articleGeneratedAt": "2026-09-19T09:17:57.289Z",
+  "articleSha256": "a3d8fb24fc7315867b6a8f3fc1b3e3a720c29270a61c91ade49494e47ea4c26e",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La tabla respalda genitivo singular tras 2–4 en nominativo/acusativo y precisa género y oblicuos; falta cotejar excepciones y ejemplos.",
+      "La pauta 2–4 + genitivo singular se limita a nominativo y acusativo inanimado, pero necesita una gramática de declinación con paradigma y excepciones; forma de cantidad cambia en otros casos. Los ejemplos requieren fuente."
+    ],
+    "limitations": [
+      "No hay Evidence canónica ni mapa de citas por afirmación; claimsVerified=0 y status permanece PENDING_SOURCE_SUPPORT.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Cantidad 2–4 con genitivo singular",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Genitive after numerals",
+          "url": "https://russian.cornell.edu/grammar/html/le51_56_b.htm",
+          "locator": "lines 0–18: genitive singular after numerals 2–4 and plural after 5+, gender/oblique case"
+        }
+      ],
+      "rationale": "La tabla respalda genitivo singular tras 2–4 en nominativo/acusativo y precisa género y oblicuos; falta cotejar excepciones y ejemplos."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Genitive after numerals",
+          "url": "https://russian.cornell.edu/grammar/html/le51_56_b.htm",
+          "locator": "lines 0–18: genitive singular after numerals 2–4 and plural after 5+, gender/oblique case"
+        }
+      ],
+      "rationale": "No hay Evidence canónica ni mapa de citas por afirmación; claimsVerified=0 y status permanece PENDING_SOURCE_SUPPORT."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Genitive after numerals",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le51_56_b.htm",
+      "locator": "lines 0–18: genitive singular after numerals 2–4 and plural after 5+, gender/oblique case",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Genitive after numerals. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le51_56_b.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:17:57.289Z",
+    "backupGeneratedAt": "2026-09-19T09:17:57.289Z",
+    "canonicalArticleSha256": "a3d8fb24fc7315867b6a8f3fc1b3e3a720c29270a61c91ade49494e47ea4c26e",
+    "backupArticleSha256": "a3d8fb24fc7315867b6a8f3fc1b3e3a720c29270a61c91ade49494e47ea4c26e",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "a3d8fb24fc7315867b6a8f3fc1b3e3a720c29270a61c91ade49494e47ea4c26e",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0146/pre-coordinator.json",
+    "sha256": "df2bb993401e67bc672ec428356754a99d72d93478f879cbfc9e8e81b4dc79df",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

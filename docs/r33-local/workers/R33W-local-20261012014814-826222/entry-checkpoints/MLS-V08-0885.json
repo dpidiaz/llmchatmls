@@ -1,0 +1,61 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-CHECKPOINT-1",
+  "branch": "feat/r33-local-recovery",
+  "workerId": "R33W-local-20261012014814-826222",
+  "assignmentId": "R33A-1791769695001-a8b561",
+  "code": "MLS-V08-0885",
+  "phase": "source-followup",
+  "followupRound": 6,
+  "articlePath": "content/coreano/MLS-V08-0885.json",
+  "articleSha256": "ebab5967778672c0a142601f37e55403a2c4c8bfff3db0aad249bf7f7d7241e1",
+  "previousReviewSha256": "04305083e095e6ec25a601399defeb8dc98bd1b8bf2657033c1023e97c39ce97",
+  "reviewPath": "docs/r33-local/reviews/MLS-V08-0885-revision.json",
+  "reviewSha256": "db539a09f89d53ffc02228817b51b6728aa2de97077a85cf45e71847860d7ce2",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsReviewed": 3,
+  "claimsVerified": 0,
+  "searches": [
+    {
+      "query": "Korean sentence-final -거든 discourse function spoken corpus study",
+      "portal": "Búsqueda académica gratuita en inglés",
+      "outcome": "Consulta ejecutada en este seguimiento; solo se consideran inspeccionados los pasajes enumerados en primarySourcesInspected. Resultados de búsqueda no abiertos quedan como pistas."
+    },
+    {
+      "query": "-거든 종결어미 구어 말뭉치 화용 연구",
+      "portal": "Búsqueda dirigida en coreano / repositorios abiertos",
+      "outcome": "Consulta ejecutada en este seguimiento; solo se consideran inspeccionados los pasajes enumerados en primarySourcesInspected. Resultados de búsqueda no abiertos quedan como pistas."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "url": "https://www.korean.go.kr/common/download.do%3Bfront%3DBBB7ED56CDDC01D4D7953217F27578C6?c_file_name=e124058e-75ed-464c-adbc-00fb9fb779e7.pdf&file_path=reportData&o_file_name=2024%EB%85%84+%EC%9D%BC%EC%83%81+%EB%8C%80%ED%99%94+%EB%A7%90%EB%AD%89%EC%B9%98+%EA%B5%AC%EC%B6%95+%EC%82%AC%EC%97%85+%EA%B2%B0%EA%B3%BC+%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf",
+      "locator": "National Institute of Korean Language report, PDF pp. 104–105, lines 2587–2601: conversational-corpus conventions and recorded uses of -거든, -더니; it is usage documentation, not a full grammar for every ending.",
+      "finding": "El corpus oficial documenta usos conversacionales y ejemplos puntuales de -거든/-더니; no valida todos los juicios pragmáticos ni ejemplos de la ficha."
+    },
+    {
+      "url": "https://kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003232203",
+      "locator": "KCI journal metadata and abstract: 한국어학, 108, 89–125, DOI 10.20405/kl.2025.08.108.89; abstract states it analyzes final -거든/-잖아 across Modu corpus and discourse factors (speaker/listener relation, gender, topic).",
+      "finding": "Supports corpus-based variability for these two sentence-final forms; abstract alone does not validate the article's examples, translations, tonal effects, or every pragmatic subcategory."
+    },
+    {
+      "url": "https://www.korean.go.kr/common/download.do;front=BBB7ED56CDDC01D4D7953217F27578C6?c_file_name=e124058e-75ed-464c-adbc-00fb9fb779e7.pdf&file_path=reportData&o_file_name=2024%EB%85%84+%EC%9D%BC%EC%83%81+%EB%8C%80%ED%99%94+%EB%A7%90%EB%AD%89%EC%B9%98+%EA%B5%AC%EC%B6%95+%EC%82%AC%EC%97%85+%EA%B2%B0%EA%B3%BC+%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf",
+      "locator": "NIKL report, PDF pp.104–105 / lines 2587–2601: selected conversation-corpus examples for -거든/-더니.",
+      "finding": "Usage examples only; not a comprehensive semantic analysis."
+    }
+  ],
+  "canonicalEvidenceCreated": false,
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "assessEntry": "not passed; claim-level source coverage incomplete",
+  "blocker": "El diccionario registra varios usos de -거든, incluido final explicativo, pero la ficha necesita separar esos valores y cotejar ejemplos exactos. El corpus oficial documenta usos conversacionales y ejemplos puntuales de -거든/-더니; no valida todos los juicios pragmáticos ni ejemplos de la ficha.",
+  "nextConcreteStep": "Cotejar cada afirmación, forma y ejemplo de «-거든» con una fuente primaria completa y localizador exacto; corregir o retirar lo que exceda la evidencia, luego crear Evidence canónica y ejecutar assessEntry con el hash actual.",
+  "completedAt": "2026-10-12T01:51:03.420Z",
+  "safety": {
+    "cloudflareInteractions": 0,
+    "d1Reads": 0,
+    "d1Writes": 0,
+    "apiCalls": 0,
+    "pushes": 0,
+    "merges": 0,
+    "deployments": 0
+  }
+}

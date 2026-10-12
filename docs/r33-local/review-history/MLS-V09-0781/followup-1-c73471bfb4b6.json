@@ -1,0 +1,106 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0781",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:38:53.315Z",
+  "reviewer": "R33 local semantic source follow-up",
+  "assignmentId": "R33A-1791653757553-885497",
+  "articlePath": "content/ruso/MLS-V09-0781.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [],
+  "sourceAudit": {
+    "method": "Lectura semántica y comparación exacta del artículo con el backup SQLite de solo lectura; cinco grupos se usan para triage y no sustituyen el mapeo de Evidence por afirmación.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 con diccionarios de uso, referencias gramaticales gratuitas y bibliografía académica abierta; los localizadores y límites se asignan por afirmación. El soporte parcial no se trata como certificación.",
+    "findings": [
+      "Так что se define como conjunción consecutiva, se contrasta con так как y se discute aspecto en cláusulas. Requiere fuente sintáctica/discursiva para causalidad, puntuación y los ejemplos; la traducción no prueba una relación única.",
+      "Так что (Справочник по пунктуации): Consequence relation and construction distinction."
+    ],
+    "limitations": [
+      "No hay fuente cotejada con localizador ni Evidence canónica claim-level para este lote; claimsVerified=0, status=PENDING_SOURCE_SUPPORT.",
+      "SQL coincide en todos los campos de versión, lo que acredita identidad de texto, no corrección lingüística.",
+      "No se verificaron completamente registro, distribución, aspectos, ejemplos ni todos los matices de la entrada.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry con Evidence completa; conservar PENDING_SOURCE_SUPPORT."
+    ]
+  },
+  "originalArticleSha256": "c2438d83f4e02c2b22d68ad0663cbb8d3ed0d7da8e7cdf7939cc75eb5fcd5c61",
+  "backupComparison": {
+    "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T22:26:10.931Z",
+    "canonicalGeneratedAt": "2026-09-19T22:26:10.931Z",
+    "backupArticleSha256": "c2438d83f4e02c2b22d68ad0663cbb8d3ed0d7da8e7cdf7939cc75eb5fcd5c61",
+    "canonicalArticleSha256": "c2438d83f4e02c2b22d68ad0663cbb8d3ed0d7da8e7cdf7939cc75eb5fcd5c61",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "workerId": "R33W-local-20261010173557-5ba48f",
+  "articleGeneratedAt": "2026-09-19T22:26:10.931Z",
+  "canonicalArticleSha256": "c2438d83f4e02c2b22d68ad0663cbb8d3ed0d7da8e7cdf7939cc75eb5fcd5c61",
+  "verifiedArticleSha256": "c2438d83f4e02c2b22d68ad0663cbb8d3ed0d7da8e7cdf7939cc75eb5fcd5c61",
+  "articleSha256": "c2438d83f4e02c2b22d68ad0663cbb8d3ed0d7da8e7cdf7939cc75eb5fcd5c61",
+  "followupRound": 1,
+  "followupSources": [
+    {
+      "title": "Так что (Справочник по пунктуации)",
+      "reference": "Грамота.ру. (n.d.). Так что (Справочник по пунктуации) [Dictionary/reference entry]. https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/tak-chto",
+      "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/tak-chto",
+      "locator": "Entry defines “и поэтому, вследствие чего,” provides examples and distinguishes так + что.",
+      "supports": "Consequence relation and construction distinction.",
+      "limitation": "No se verificaron completamente registro, distribución, aspectos, ejemplos ni todos los matices de la entrada.",
+      "status": "PARTIAL"
+    }
+  ],
+  "sourceSearch": {
+    "repositories": [
+      "Gramota.ru dictionaries/reference guides",
+      "Cornell Beginning Russian Grammar",
+      "Open Language Resource Center: Russian Aspect in Conversation",
+      "Journal of Linguistics / Cambridge University Press"
+    ],
+    "followupConsultedAt": "2026-10-10T17:38:53.315Z",
+    "result": "PARTIAL_SUPPORT_ONLY",
+    "followupSources": [
+      {
+        "title": "Так что (Справочник по пунктуации)",
+        "reference": "Грамота.ру. (n.d.). Так что (Справочник по пунктуации) [Dictionary/reference entry]. https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/tak-chto",
+        "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/tak-chto",
+        "locator": "Entry defines “и поэтому, вследствие чего,” provides examples and distinguishes так + что.",
+        "supports": "Consequence relation and construction distinction.",
+        "limitation": "No se verificaron completamente registro, distribución, aspectos, ejemplos ni todos los matices de la entrada.",
+        "status": "PARTIAL"
+      }
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "preflight": {
+    "ok": false,
+    "reason": "Evidence canónica ausente; cobertura claim-level incompleta; assessEntry no ejecutado."
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0781/pre-coordinator.json",
+    "sha256": "314d285dc5c0d99eca67d6251fcf39590d477a589985cc2737e64227818071fc",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0415",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T10:06:17.345Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100534-a78b9b",
+  "assignmentId": "R33A-1791626734319-1d0bb4",
+  "articlePath": "content/ruso/MLS-V09-0415.json",
+  "articleGeneratedAt": "2026-09-19T10:20:13.521Z",
+  "articleSha256": "9c76fdce4de4cdaa1029b64747d183f31ef02b92e78312426735c3026d623894",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite en modo de solo lectura, y consulta dirigida de las fuentes listadas. PENDING_SOURCE_SUPPORT se conserva mientras las referencias no respalden todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha «Prefijo + идти/ехать perfectivo» (content/ruso/MLS-V09-0415.json; sha256 9c76fdce4de4cdaa1029b64747d183f31ef02b92e78312426735c3026d623894). La ficha presenta prefijos de movimiento como contribución de inicio, llegada, salida, entrada o dirección, con идти → пойти y ехать → поехать. El material léxico consultado confirma идти como verbo imperfectivo y relaciona пойти como derivado, pero no valida la semántica de todos los prefijos descritos."
+    ],
+    "limitations": [
+      "La evidencia consultada es parcial y no cubre sistemáticamente prefijos, parejas aspectuales y restricciones de идти/ехать; el análisis general queda sin respaldo completo."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "идти: значение и словоизменение",
+      "url": "https://gramota.ru/meta/idti",
+      "provider": "Грамота.ру",
+      "use": "Registra идти como imperfectivo y relaciona пойти; no cubre la clase completa de prefijos."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "9c76fdce4de4cdaa1029b64747d183f31ef02b92e78312426735c3026d623894",
+    "backupSha256": "9c76fdce4de4cdaa1029b64747d183f31ef02b92e78312426735c3026d623894",
+    "articleGeneratedAt": "2026-09-19T10:20:13.521Z",
+    "backupGeneratedAt": "2026-09-19T10:20:13.521Z"
+  },
+  "originalArticleSha256": "9c76fdce4de4cdaa1029b64747d183f31ef02b92e78312426735c3026d623894",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

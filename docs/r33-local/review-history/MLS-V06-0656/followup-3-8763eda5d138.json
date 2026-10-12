@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0656",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0656.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, líneas 202–225, da 俺もやるぜ como ejemplo principalmente masculino y regla de conexión. No establece todas las etiquetas de rudeza, frecuencia o contexto asignadas por la ficha."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS lo identifica como uso principalmente masculino y ofrece un ejemplo; falta sustento para el matiz y alcance exactos del artículo.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html ぜ 終助詞 主に男性",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Ejemplo y perfil principal corroborados; alcance pragmático de la ficha es más amplio."
+        },
+        {
+          "query": "site:jstage.jst.go.jp ぜ 終助詞 意味 日本語",
+          "portal": "J-STAGE search",
+          "outcome": "No se localizó texto abierto que valide todos los matices particulares de la entrada."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "líneas 202–225",
+          "finding": "Ejemplo ぜ y clasificación principalmente masculina; no cubre matices de registro reclamados por la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reducir la descripción al ejemplo/perfil confirmado por TUFS y eliminar etiquetas de tono no demostradas.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 835aa1c603e0b349920a2c644841eb881a77499dcccae049e3158b1d5a1ae15b. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS lo identifica como uso principalmente masculino y ofrece un ejemplo; falta sustento para el matiz y alcance exactos del artículo.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "835aa1c603e0b349920a2c644841eb881a77499dcccae049e3158b1d5a1ae15b",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0656/followup-2-c50943be2432.json",
+    "sha256": "c50943be24327f07f42ebbba41464a459df7faa3c8d37d9af7adfa8efb45b586",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

@@ -1,0 +1,121 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0729",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:52:38.044Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0729.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 4,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceChecks": [],
+  "semanticReview": {
+    "method": "Seguimiento R33: nueva búsqueda y cotejo de fuente primaria; revisión previa queda preservada en review-history al completar el lease.",
+    "findings": [
+      "Identidad/version: 〜続ける; SHA-256 de articleMarkdown aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52; la fila wiki_articles y generatedAt 2026-09-19T21:16:16.543Z coinciden con el JSON canónico local. La coincidencia confirma identidad, no exactitud semántica.",
+      "The continuative compound V-stem + 続ける and meaning “continue doing” are plausible; no verb-entry or grammar rule locator was obtained.",
+      "The claim that 雨が降り続けています presents rain as continuing “without the context presenting an end” is an aspectual inference that needs careful qualification and source evidence.",
+      "雨が降り続ける inflection and other stem forms/compatibility restrictions were not checked against a grammar source.",
+      "The Spanish gloss “sigue lloviendo” is natural but not sufficient evidence for the Japanese scope.",
+      "Seguimiento de fuentes primarias: se buscó material gramatical institucional gratuito para la construcción y se cotejó el artículo vigente; no se obtuvo una fuente primaria abierta con localizador suficiente para respaldar todas sus generalizaciones y ejemplos.",
+      "Revisión nueva: se amplió la búsqueda con consultas diferentes en portales lexicográficos/institucionales y se inspeccionaron los pasajes indicados en primarySourcesInspected.",
+      "続ける（デジタル大辞泉／コトバンク）: Respalda continuidad/repetición general, no por sí sola el análisis gramatical de todos los verbos de la ficha.",
+      "複合動詞と補助動詞（国立国語研究所）: Clasifica 〜続ける como forma de continuidad aspectual con ejemplos; no respalda automáticamente cada traducción o generalización de la ficha."
+    ],
+    "limitations": [
+      "Los recursos candidatos abiertos o localizados no cubren todas las afirmaciones sustantivas ni sustituyen Evidence canónica con localizadores exactos.",
+      "Los PDFs del repositorio NINJAL consultados dieron HTTP 429: sus fragmentos de búsqueda se conservaron como candidatos y no como soporte verificado.",
+      "No se identificó Evidence canónica de esta entrada en el repositorio local. No se certificaron ejemplos editoriales como datos de corpus ni se editó el artículo.",
+      "Estado PENDING_SOURCE_SUPPORT; cero afirmaciones certificadas en Evidence y cobertura de citas incompleta. No asignar VERIFIED hasta completar cotejo semántico con fuentes primarias y evaluación local R33.",
+      "No se identificó una fuente primaria con localizadores claim por claim; el artículo no se editó y no se creó Evidence canónica.",
+      "La búsqueda adicional respalda algunos puntos, pero no aporta localizadores para todas las afirmaciones materiales y ejemplos. No se editó el contenido, no se generó Evidence canónica y no se ejecutó assessEntry exitosamente; por eso se conserva PENDING_SOURCE_SUPPORT."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La continuidad está apoyada por diccionario y material de NINJAL, pero la lectura aspectual de 雨が降り続ける y las restricciones de combinación requieren localizadores propios.",
+      "searches": [
+        {
+          "query": "site:kotobank.jp 始める 補助動詞 動詞連用形 続ける 直す",
+          "portal": "Búsqueda web restringida a Kotobank (diccionarios japoneses)",
+          "outcome": "Se inspeccionaron entradas directas de 始める／直す／続ける; respaldan significado general y algunos ejemplos, no contraste/pragmática y totalidad de claims."
+        },
+        {
+          "query": "site:repository.ninjal.ac.jp 複合動詞 アスペクト 〜続ける 〜始める 〜直す",
+          "portal": "Repositorio académico de NINJAL",
+          "outcome": "Se localizó y abrió la clasificación de compuestos aspectuales para 〜続ける; no se localizó ahí una cobertura claim por claim de 〜始める/直す."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "続ける（デジタル大辞泉／コトバンク）",
+          "url": "https://kotobank.jp/word/%E7%B6%9A%E3%81%91%E3%82%8B-571909",
+          "locator": "Acepciones 1–2: mantener estado/acción sin interrupción y repetir algo sin intervalo.",
+          "finding": "Respalda continuidad/repetición general, no por sí sola el análisis gramatical de todos los verbos de la ficha."
+        },
+        {
+          "title": "複合動詞と補助動詞（国立国語研究所）",
+          "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+          "locator": "Sección 7, tabla de compuestos aspectuales, fila「〜続ける」; ejemplo 朝まで飲み続ける y 〜続く／雨が降り続いた.",
+          "finding": "Clasifica 〜続ける como forma de continuidad aspectual con ejemplos; no respalda automáticamente cada traducción o generalización de la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el artículo a lo directamente documentado por las fuentes localizadas; eso no resolvería la continuidad está apoyada por diccionario y material de ninjal, pero la lectura aspectual de 雨が降り続ける y las restricciones de combinación requieren localizadores propios. sin cotejar los ejemplos y afirmaciones restantes, así que no se alteró el artículo en esta ronda.",
+      "canonicalCheck": "Se calculó SHA-256 vigente de articleMarkdown (aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52) y se comparó con la Evidence/índice local; no hay Evidence de esta entrada que permita assessEntry exitoso ni una actualización canónica a VERIFIED. La validación canónica completa sigue pendiente.",
+      "nextConcreteStep": "Revisar los ejemplos de la ficha frente al apartado NINJAL de compuestos aspectuales y anotar un localizador para cada lectura."
+    }
+  },
+  "candidateSources": [],
+  "originalArticleSha256": "aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52",
+  "verifiedArticleSha256": "aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite:wiki_articles (recovery checkout, SQLite mode=ro)",
+    "backupGeneratedAt": "2026-09-19T21:16:16.543Z",
+    "canonicalGeneratedAt": "2026-09-19T21:16:16.543Z",
+    "backupArticleSha256": "aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52",
+    "canonicalArticleSha256": "aaf8fc2306f07dc7ae962bfbec7d40eb9224ac3c00f55b7bdbe62fc703326f52",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "followupRound": 2,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0729/followup-1-7a55e4dc452b.json",
+    "sha256": "7a55e4dc452be27c44757f8cff362182ac10e6820188967828009b125b1b426c",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "assignmentId": "R33A-1791665209082-ee7dec",
+  "sourceReferences": [
+    {
+      "apa7": "小学館. (n.d.). 続ける（デジタル大辞泉／コトバンク）. コトバンク. https://kotobank.jp/word/%E7%B6%9A%E3%81%91%E3%82%8B-571909",
+      "url": "https://kotobank.jp/word/%E7%B6%9A%E3%81%91%E3%82%8B-571909",
+      "locator": "Acepciones 1–2: mantener estado/acción sin interrupción y repetir algo sin intervalo.",
+      "supports": "Respalda continuidad/repetición general, no por sí sola el análisis gramatical de todos los verbos de la ficha."
+    },
+    {
+      "apa7": "国立国語研究所. (n.d.). 複合動詞と補助動詞（国立国語研究所）. https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+      "url": "https://repository.ninjal.ac.jp/record/1862/files/kk_nkss_022.pdf",
+      "locator": "Sección 7, tabla de compuestos aspectuales, fila「〜続ける」; ejemplo 朝まで飲み続ける y 〜続く／雨が降り続いた.",
+      "supports": "Clasifica 〜続ける como forma de continuidad aspectual con ejemplos; no respalda automáticamente cada traducción o generalización de la ficha."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Revisión incremental de esta ronda: se cotejaron fuentes primarias gratuitas y pasajes exactos; la cobertura parcial no se convierte en certificación.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "La continuidad está apoyada por diccionario y material de NINJAL, pero la lectura aspectual de 雨が降り続ける y las restricciones de combinación requieren localizadores propios.",
+    "nextStep": "Revisar los ejemplos de la ficha frente al apartado NINJAL de compuestos aspectuales y anotar un localizador para cada lectura."
+  },
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0
+}

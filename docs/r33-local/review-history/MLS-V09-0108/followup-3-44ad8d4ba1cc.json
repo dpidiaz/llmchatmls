@@ -1,0 +1,245 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0108",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:31:10.675Z",
+  "reviewer": "R33 local source-follow-up review",
+  "articlePath": "content/ruso/MLS-V09-0108.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 3,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento claim-level: se reabrió la revisión previa, se consultaron gramáticas universitarias abiertas y recursos normativos gratuitos; cada localizador se limita al pasaje realmente inspeccionado.",
+    "findings": [
+      "La consulta a Gramota muestra respaldo candidato para masculino literario y neutro coloquial no equivalente; la apertura de la página devolvió 403, por lo que no hay pasaje directamente cotejado ni referencia utilizable en esta revisión. Las formas de concordancia y la indeclinabilidad necesitan evidencia lexicográfica accesible.",
+      "Seguimiento source-followup ronda 1: se reabrió el expediente (PENDING_SOURCE_SUPPORT) y se comprobó el hash actual 54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc. No se identifica una fuente primaria/localizador suficiente para validar todas las afirmaciones y ejemplos. Persiste el vacío registrado en los findings; no se modificó el artículo.",
+      "Seguimiento source-followup ronda 2 (R33A-1791679538212-b231cb): relectura íntegra del artículo/hash 54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc y contraste por sección de sus afirmaciones materiales con los localizadores citados en sourceAudit.claimAssessments. Se encontró respaldo directo para varios paradigmas y limitaciones explícitas; no se encontró un respaldo suficiente para el conjunto completo de afirmaciones y ejemplos.",
+      "Seguimiento 2 (coffee): Respuesta: кофе es una excepción entre préstamos indeclinables terminados en -е; género masculino en norma neutral y согласование neutro con marca coloquial en diccionarios normativos modernos. | Respuesta: evaluación normativa de masculino como estándar y neutro como uso coloquial; referencia histórica a la marca del diccionario Ushakov de 1935.. Respaldo parcial; Gramota.ru confirma norma masculina y variante neutra coloquial; la ficha también afirma indeclinabilidad, usos de concordancia y ejemplos propios que no aparecen en el localizador consultado."
+    ],
+    "limitations": [
+      "Las búsquedas de dos páginas de Gramota relevantes para género ruso devolvieron 403; se registró el límite y no se citó su fragmento como fuente verificada. Para las demás entradas faltan pasajes concretos y APA 7 rastreable.",
+      "No se creó Evidence canónica ni mapeo de fuentes por claim; claimsVerified=0 y status queda PENDING_SOURCE_SUPPORT.",
+      "Hash SQL coincidente confirma versión, no validez semántica.",
+      "Falta cotejo completo fuente primaria–localizador–afirmación, Evidence canónica y assessEntry exitoso. No se promueve a VERIFIED.",
+      "Este seguimiento conserva el artículo original. No crea Evidence ni modifica el índice canónico; varias frases y ejemplos siguen sin localizador primario directo, y algunas fuentes consultadas no sostienen el alcance completo del texto.",
+      "No hay fuente primaria con localizador claim-level suficiente para todas las afirmaciones materiales. Se conserva PENDING; no se ha ejecutado assessEntry como validación aprobatoria ni se ha certificado VERIFIED.",
+      "No se crea Evidence canónica ni se promueve a VERIFIED mientras queden afirmaciones materiales sin localizador claim-level, ejemplos por cotejar o el assessEntry canónico sin ejecutar."
+    ],
+    "claimAssessments": [
+      {
+        "claimId": "MLS-V09-0108-section-1",
+        "articleSection": "En pocas palabras",
+        "materialClaimExcerpt": "El sustantivo ruso **кофе** «café» es **indeclinable** y, en la norma estándar, se trata tradicionalmente como **masculino**: **горячий кофе**, **вкусный кофе**, **кофе был готов**. Sin embargo, en el habla coloquial también se documenta concordancia en **neutro**, como **горячее кофе**. La diferencia es de norma y registro, no de significado léxico.",
+        "sourceChecks": [
+          {
+            "sourceId": "gramota-coffee",
+            "locator": "Respuesta a la pregunta 100006: masculino como forma normativa; neutro documentado como uso coloquial; la respuesta resume también la historia y cita Ushakov (1935). No localiza en ella todos los ejemplos del artículo.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          },
+          {
+            "sourceId": "cornell-beginning-russian",
+            "locator": "La tabla de declinaciones no incluye кофе ni demuestra por sí sola su indeclinabilidad: no basta para sostener esa afirmación.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          }
+        ],
+        "outcome": "NOT_VERIFIED",
+        "gap": "La referencia localizada ofrece respaldo parcial o paradigmático, pero no se comprobó cada afirmación, ejemplo, matiz de registro, generalización y traducción de esta sección en la fuente primaria."
+      },
+      {
+        "claimId": "MLS-V09-0108-section-2",
+        "articleSection": "Cómo funciona",
+        "materialClaimExcerpt": "La dificultad de **кофе** surge porque su forma termina en **-е**, una terminación que en muchos sustantivos rusos se asocia con el género neutro. No obstante, **кофе** no sigue mecánicamente ese patrón: su género masculino es una propiedad lexicalizada e históricamente establecida en la lengua culta y escrita.\n\nComo el sustantivo es indeclinable, **кофе** mantiene la misma forma en todos los casos. El género se vuelve visible sobre todo en las palabras que concuerdan con él: adjetivos, participios, pronombres o formas verbales del pasado. Así, en **крепкий кофе остыл** «el café fuerte se enfrió», tanto **крепкий** como **остыл** muestran concordancia masculina.\n\nLa concordancia neutra se encuentra especialmente en conversación espontánea e informal. Por eso conviene distinguir entre **descripción del uso real** y **elección normativa**: que una variante exista en el habla no significa que tenga el mismo valor estilístico en todos los registros.",
+        "sourceChecks": [
+          {
+            "sourceId": "gramota-coffee",
+            "locator": "Respuesta a la pregunta 100006: masculino como forma normativa; neutro documentado como uso coloquial; la respuesta resume también la historia y cita Ushakov (1935). No localiza en ella todos los ejemplos del artículo.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          },
+          {
+            "sourceId": "cornell-beginning-russian",
+            "locator": "La tabla de declinaciones no incluye кофе ni demuestra por sí sola su indeclinabilidad: no basta para sostener esa afirmación.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          }
+        ],
+        "outcome": "NOT_VERIFIED",
+        "gap": "La referencia localizada ofrece respaldo parcial o paradigmático, pero no se comprobó cada afirmación, ejemplo, matiz de registro, generalización y traducción de esta sección en la fuente primaria."
+      },
+      {
+        "claimId": "MLS-V09-0108-section-3",
+        "articleSection": "Ejemplos",
+        "materialClaimExcerpt": "- **Я заказал крепкий кофе.** — «Pedí un café fuerte.» **Крепкий** está en masculino y representa la concordancia estándar.\n- **Кофе был очень горячим.** — «El café estaba muy caliente.» **Был** y **горячим** confirman el género masculino dentro de la construcción.\n- **Это вкусный кофе.** — «Este es un café rico.» De nuevo aparece concordancia masculina.\n- En habla coloquial puede oírse **вкусное кофе** o **кофе было горячее**, con concordancia neutra. Estas formas reflejan una tendencia analógica basada en la terminación **-е** y en el comportamiento de otros indeclinables.",
+        "sourceChecks": [
+          {
+            "sourceId": "gramota-coffee",
+            "locator": "Respuesta a la pregunta 100006: masculino como forma normativa; neutro documentado como uso coloquial; la respuesta resume también la historia y cita Ushakov (1935). No localiza en ella todos los ejemplos del artículo.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          },
+          {
+            "sourceId": "cornell-beginning-russian",
+            "locator": "La tabla de declinaciones no incluye кофе ni demuestra por sí sola su indeclinabilidad: no basta para sostener esa afirmación.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          }
+        ],
+        "outcome": "NOT_VERIFIED",
+        "gap": "La referencia localizada ofrece respaldo parcial o paradigmático, pero no se comprobó cada afirmación, ejemplo, matiz de registro, generalización y traducción de esta sección en la fuente primaria."
+      },
+      {
+        "claimId": "MLS-V09-0108-section-4",
+        "articleSection": "Observación importante",
+        "materialClaimExcerpt": "No debe concluirse que **кофе** «cambia de género» según el caso: el sustantivo no cambia de forma y el contraste relevante está en la **concordancia**. Tampoco conviene presentar el neutro coloquial como un simple error inexistente, porque forma parte del uso real; a la vez, para textos formales, académicos o cuidadosamente editados, la concordancia masculina sigue siendo la opción estándar.\n\nEl fenómeno muestra que el género gramatical ruso no siempre puede deducirse de la última letra de una palabra. En préstamos indeclinables, el género puede depender de la tradición lexical, del referente, de analogías con otras palabras y del registro.",
+        "sourceChecks": [
+          {
+            "sourceId": "gramota-coffee",
+            "locator": "Respuesta a la pregunta 100006: masculino como forma normativa; neutro documentado como uso coloquial; la respuesta resume también la historia y cita Ushakov (1935). No localiza en ella todos los ejemplos del artículo.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          },
+          {
+            "sourceId": "cornell-beginning-russian",
+            "locator": "La tabla de declinaciones no incluye кофе ni demuestra por sí sola su indeclinabilidad: no basta para sostener esa afirmación.",
+            "assessment": "PARTIAL_OR_NOT_ENOUGH_FOR_FULL_SECTION"
+          }
+        ],
+        "outcome": "NOT_VERIFIED",
+        "gap": "La referencia localizada ofrece respaldo parcial o paradigmático, pero no se comprobó cada afirmación, ejemplo, matiz de registro, generalización y traducción de esta sección en la fuente primaria."
+      }
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Gramota.ru confirma norma masculina y variante neutra coloquial; la ficha también afirma indeclinabilidad, usos de concordancia y ejemplos propios que no aparecen en el localizador consultado.",
+      "searches": [
+        {
+          "query": "site:gramota.ru кофе мужской род разговорный средний род нормативный словарь",
+          "portal": "Cornell University Russian Grammar / источник по теме",
+          "outcome": "Se inspeccionó el localizador de Грамота.ру. Справочная служба, ответ № 315859.: respalda una parte del tema; Gramota.ru confirma norma masculina y variante neutra coloquial; la ficha también afirma indeclinabilidad, usos de concordancia y ejemplos propios que no aparecen en el localizador consultado."
+        },
+        {
+          "query": "site:gramota.ru кофе несклоняемое заимствование средний род разговорная норма",
+          "portal": "Источник нормы или грамматики по теме",
+          "outcome": "Búsqueda distinta para coffee; la fuente disponible no aporta aún localizadores para todos los ejemplos/condiciones: Gramota.ru confirma norma masculina y variante neutra coloquial; la ficha también afirma indeclinabilidad, usos de concordancia y ejemplos propios que no aparecen en el localizador consultado."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Грамота.ру. Справочная служба, ответ № 315859.",
+          "url": "https://gramota.ru/spravka/vopros/315859",
+          "locator": "Respuesta: кофе es una excepción entre préstamos indeclinables terminados en -е; género masculino en norma neutral y согласование neutro con marca coloquial en diccionarios normativos modernos.",
+          "finding": "Confirma género y variación de registro; no coteja cada frase de ejemplo."
+        },
+        {
+          "title": "Грамота.ру. Справочная служба, ответ № 100006.",
+          "url": "https://gramota.ru/spravka/vopros/100006",
+          "locator": "Respuesta: evaluación normativa de masculino como estándar y neutro como uso coloquial; referencia histórica a la marca del diccionario Ushakov de 1935.",
+          "finding": "Corrobora norma/registro; quedan por inspeccionar en una fuente lexicográfica los ejemplos concretos de concordancia."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar/corregir el texto «coffee» donde el alcance excede el localizador; no se cambió el artículo porque primero falta cotejar los ejemplos y restricciones indicados.",
+      "canonicalCheck": "Hash actual de articleMarkdown: 54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc, igual al hash base del lease. No hay Evidence canónica completa y no se ejecutó assessEntry; se conserva PENDING_SOURCE_SUPPORT.",
+      "nextConcreteStep": "Verificar ejemplos de concordancia y forma indeclinable en diccionario normativo abierto; corregir cualquier forma no documentada."
+    },
+    "consultedSources": [
+      {
+        "title": "Грамота.ру. Справочная служба, ответ № 315859.",
+        "publisher": "Грамота.ру",
+        "url": "https://gramota.ru/spravka/vopros/315859",
+        "locator": "Respuesta: кофе es una excepción entre préstamos indeclinables terminados en -е; género masculino en norma neutral y согласование neutro con marca coloquial en diccionarios normativos modernos.",
+        "use": "Confirma género y variación de registro; no coteja cada frase de ejemplo.",
+        "apa7": "Грамота.ру. (2024). Ответ справочной службы на вопрос № 315859. https://gramota.ru/spravka/vopros/315859"
+      },
+      {
+        "title": "Грамота.ру. Справочная служба, ответ № 100006.",
+        "publisher": "Грамота.ру",
+        "url": "https://gramota.ru/spravka/vopros/100006",
+        "locator": "Respuesta: evaluación normativa de masculino como estándar y neutro como uso coloquial; referencia histórica a la marca del diccionario Ushakov de 1935.",
+        "use": "Corrobora norma/registro; quedan por inspeccionar en una fuente lexicográfica los ejemplos concretos de concordancia.",
+        "apa7": "Грамота.ру. (2015). Ответ справочной службы на вопрос № 100006. https://gramota.ru/spravka/vopros/100006"
+      }
+    ]
+  },
+  "sourceReferences": [
+    {
+      "sourceId": "gramota-coffee",
+      "title": "Ответ справочной службы на вопрос № 100006",
+      "url": "https://gramota.ru/spravka/vopros/100006",
+      "apa7Candidate": "Грамота.ру. (2015, 22 июля). Ответ справочной службы на вопрос № 100006. https://gramota.ru/spravka/vopros/100006",
+      "locator": "Respuesta a la pregunta 100006: masculino como forma normativa; neutro documentado como uso coloquial; la respuesta resume también la historia y cita Ushakov (1935). No localiza en ella todos los ejemplos del artículo."
+    },
+    {
+      "sourceId": "cornell-beginning-russian",
+      "title": "Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/subject.htm",
+      "apa7Candidate": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (n.d.). Beginning Russian Grammar [Adapted online grammar]. Cornell University. https://russian.cornell.edu/grammar/subject.htm",
+      "locator": "La tabla de declinaciones no incluye кофе ni demuestra por sí sola su indeclinabilidad: no basta para sostener esa afirmación."
+    },
+    {
+      "title": "Грамота.ру. Справочная служба, ответ № 315859.",
+      "publisher": "Грамота.ру",
+      "canonicalUrl": "https://gramota.ru/spravka/vopros/315859",
+      "locator": "Respuesta: кофе es una excepción entre préstamos indeclinables terminados en -е; género masculino en norma neutral y согласование neutro con marca coloquial en diccionarios normativos modernos.",
+      "apa7": "Грамота.ру. (2024). Ответ справочной службы на вопрос № 315859. https://gramota.ru/spravka/vopros/315859",
+      "status": "APA 7 candidata; cotejo parcial, Evidence canónica no creada"
+    }
+  ],
+  "sourceAudit": {
+    "method": "Consulta web pública gratuita; localizadores se conservaron al nivel exacto leído.",
+    "sourceReferences": [
+      {
+        "title": "Грамота.ру. Справочная служба, ответ № 315859.",
+        "url": "https://gramota.ru/spravka/vopros/315859",
+        "locator": "Respuesta: кофе es una excepción entre préstamos indeclinables terminados en -е; género masculino en norma neutral y согласование neutro con marca coloquial en diccionarios normativos modernos.",
+        "apa7": "Грамота.ру. (2024). Ответ справочной службы на вопрос № 315859. https://gramota.ru/spravka/vopros/315859",
+        "assessment": "partial"
+      },
+      {
+        "title": "Грамота.ру. Справочная служба, ответ № 100006.",
+        "url": "https://gramota.ru/spravka/vopros/100006",
+        "locator": "Respuesta: evaluación normativa de masculino como estándar y neutro como uso coloquial; referencia histórica a la marca del diccionario Ushakov de 1935.",
+        "apa7": "Грамота.ру. (2015). Ответ справочной службы на вопрос № 100006. https://gramota.ru/spravka/vopros/100006",
+        "assessment": "partial"
+      }
+    ]
+  },
+  "originalArticleSha256": "54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc",
+  "verifiedArticleSha256": "54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "assignmentId": "R33A-1791714407252-3a92e2",
+  "followupRound": 3,
+  "backupComparison": {
+    "priorReviewPath": "docs/r33-local/reviews/MLS-V09-0108-revision.json",
+    "priorStatus": "PENDING_SOURCE_SUPPORT",
+    "priorArticleSha256": "54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc",
+    "priorReviewRead": true,
+    "historyPreservedByCoordinatorOnCompletion": true
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0108/followup-2-b800d5ad49d7.json",
+    "sha256": "b800d5ad49d777c2b8d66ffca64cef2e49152a24502378954d6a2e9ae341b2db",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReview": {
+    "path": "docs/r33-local/reviews/MLS-V09-0108-revision.json",
+    "sha256": "b800d5ad49d777c2b8d66ffca64cef2e49152a24502378954d6a2e9ae341b2db",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791679538212-b231cb",
+    "semanticFindings": [
+      "La consulta a Gramota muestra respaldo candidato para masculino literario y neutro coloquial no equivalente; la apertura de la página devolvió 403, por lo que no hay pasaje directamente cotejado ni referencia utilizable en esta revisión. Las formas de concordancia y la indeclinabilidad necesitan evidencia lexicográfica accesible.",
+      "Seguimiento source-followup ronda 1: se reabrió el expediente (PENDING_SOURCE_SUPPORT) y se comprobó el hash actual 54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc. No se identifica una fuente primaria/localizador suficiente para validar todas las afirmaciones y ejemplos. Persiste el vacío registrado en los findings; no se modificó el artículo.",
+      "Seguimiento source-followup ronda 2 (R33A-1791679538212-b231cb): relectura íntegra del artículo/hash 54d1d62086e89703506d5144642189eef08371e6c4bf685b06eaab101439fcdc y contraste por sección de sus afirmaciones materiales con los localizadores citados en sourceAudit.claimAssessments. Se encontró respaldo directo para varios paradigmas y limitaciones explícitas; no se encontró un respaldo suficiente para el conjunto completo de afirmaciones y ejemplos."
+    ],
+    "previousPriorReview": null
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "Gramota.ru confirma norma masculina y variante neutra coloquial; la ficha también afirma indeclinabilidad, usos de concordancia y ejemplos propios que no aparecen en el localizador consultado.",
+    "nextStep": "Verificar ejemplos de concordancia y forma indeclinable en diccionario normativo abierto; corregir cualquier forma no documentada."
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0749",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0749.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/las-comparativas-proporcionales",
+      "locator": "§§45.11a–o; especialmente a–f",
+      "observation": "NGLE §45.11a–f establece patrones correlativos, prótasis/apódosis, ausencia de complemento comparativo y concordancia; el artículo contiene otras generalizaciones que aún no se mapearon."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-14T21:53:57.811Z",
+      "canonicalGeneratedAt": "2026-09-14T21:53:57.811Z",
+      "backupArticleSha256": "68f1cac16b90e6a460c2b8dbc6bd7820453c575d95ced54f2a2d41171d1a5274",
+      "canonicalArticleSha256": "68f1cac16b90e6a460c2b8dbc6bd7820453c575d95ced54f2a2d41171d1a5274",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "NGLE §45.11a–f establece patrones correlativos, prótasis/apódosis, ausencia de complemento comparativo y concordancia; el artículo contiene otras generalizaciones que aún no se mapearon."
+    ],
+    "limitations": [
+      "Falta cobertura afirmación-localizador en Evidence; se debe revisar el conjunto completo de patrones y recomendaciones antes de certificar.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Falta cobertura afirmación-localizador en Evidence; se debe revisar el conjunto completo de patrones y recomendaciones antes de certificar.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática/sintaxis \"Las comparativas proporcionales\" 45.11",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se encontró la fuente oficial de NGLE §45.11; 45.11a–f inspeccionado y confirmado como respaldo parcial."
+        },
+        {
+          "query": "site:rae.es/gramática/sintaxis comparativas proporcionales cuanto más mientras más entre más ejemplos 45.11",
+          "portal": "RAE/ASALE search",
+          "outcome": "La segunda consulta recuperó variantes de las estructuras proporcionales; no se concluyó cotejo de todas las afirmaciones del artículo."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/las-comparativas-proporcionales",
+          "locator": "§§45.11a–o; especialmente a–f",
+          "finding": "NGLE §45.11a–f establece patrones correlativos, prótasis/apódosis, ausencia de complemento comparativo y concordancia; el artículo contiene otras generalizaciones que aún no se mapearon."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré acotar la lista de patrones y afirmaciones al repertorio de §§45.11a–o. No cambié el artículo dado el rechazo del coordinador a cambios PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (68f1cac16b90e6a460c2b8dbc6bd7820453c575d95ced54f2a2d41171d1a5274); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0749.json no existe y el índice verified.json no incluye MLS-V10-0749. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Cotejar correlativos, concordancia y ejemplos a–o; preparar links por afirmación y repetir assessment con hash actual."
+    }
+  },
+  "originalArticleSha256": "68f1cac16b90e6a460c2b8dbc6bd7820453c575d95ced54f2a2d41171d1a5274",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-14T21:53:57.811Z",
+    "canonicalGeneratedAt": "2026-09-14T21:53:57.811Z",
+    "backupArticleSha256": "68f1cac16b90e6a460c2b8dbc6bd7820453c575d95ced54f2a2d41171d1a5274",
+    "canonicalArticleSha256": "68f1cac16b90e6a460c2b8dbc6bd7820453c575d95ced54f2a2d41171d1a5274",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0749/followup-1-dedd6e267d80.json",
+    "sha256": "dedd6e267d805207d70035e65fa369f259a494e52f4b10ec73c00f3e211493a9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0749-revision.json",
+    "sha256": "dedd6e267d805207d70035e65fa369f259a494e52f4b10ec73c00f3e211493a9",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "68f1cac16b90e6a460c2b8dbc6bd7820453c575d95ced54f2a2d41171d1a5274",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0749.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

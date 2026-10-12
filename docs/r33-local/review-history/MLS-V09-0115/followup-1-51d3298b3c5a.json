@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0115",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.562Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0115.json",
+  "articleGeneratedAt": "2026-09-19T09:25:53.221Z",
+  "articleSha256": "0baa88adb83c9f106cf13329e7ff7c066b3c187478ff2daf3991bfa87ada5701",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La tabla general de pronombres no cubre paradigmas nominales femeninos; falta tabla directa de nominativo femenino y revisión de ejemplos.",
+      "La ficha define nominativo y género femenino y presenta terminaciones -а/-я como patrón frecuente; el preview de gramática consultado apoya patrones generales de género, pero no se consultó una sección sobre caso nominativo ni las formas de los ejemplos."
+    ],
+    "limitations": [
+      "No se creó Evidence ni se editó la ficha. El resumen/regla consultado respalda solo los puntos especificados en sourceChecks; los enunciados restantes requieren texto completo y localizadores exactos (página, sección, regla o entrada) antes de resolverlos. Mantener PENDING_SOURCE_SUPPORT y no certificar hasta cotejar todos los claims y ejemplos materiales.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "Nominativo femenino singular",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Pronouns: the six case forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+          "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms"
+        }
+      ],
+      "rationale": "La tabla general de pronombres no cubre paradigmas nominales femeninos; falta tabla directa de nominativo femenino y revisión de ejemplos."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Pronouns: the six case forms",
+          "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+          "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms"
+        }
+      ],
+      "rationale": "No se creó Evidence ni se editó la ficha. El resumen/regla consultado respalda solo los puntos especificados en sourceChecks; los enunciados restantes requieren texto completo y localizadores exactos (página, sección, regla o entrada) antes de resolverlos. Mantener PENDING_SOURCE_SUPPORT y no certificar hasta cotejar todos los claims y ejemplos materiales."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Pronouns: the six case forms",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm",
+      "locator": "table lines 0–8: nominative, accusative, and genitive personal pronoun forms",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Pronouns: the six case forms. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr06_a_1_b.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:25:53.221Z",
+    "backupGeneratedAt": "2026-09-19T09:25:53.221Z",
+    "canonicalArticleSha256": "0baa88adb83c9f106cf13329e7ff7c066b3c187478ff2daf3991bfa87ada5701",
+    "backupArticleSha256": "0baa88adb83c9f106cf13329e7ff7c066b3c187478ff2daf3991bfa87ada5701",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "0baa88adb83c9f106cf13329e7ff7c066b3c187478ff2daf3991bfa87ada5701",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0115/pre-coordinator.json",
+    "sha256": "821a64c5afe233d5bf6a34fba5973b3fdb8a0faf8e60247ca2c6eedf2d4c5c10",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

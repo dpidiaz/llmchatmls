@@ -1,0 +1,113 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0142",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.610Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0142.json",
+  "articleGeneratedAt": "2026-09-19T09:14:32.373Z",
+  "articleSha256": "362392dac18651062cbc74687a0b0b07db5c5798fa6203029456c2a8fbf2bd97",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "Las fuentes delimitan función de caso de который y sincretismo por animacidad; no verifican todo el paradigma subordinado de la entrada.",
+      "который se describe por género/número/caso y acusativo animado/inanimado. No se verificó paradigma completo de pronombre relativo, especialmente plural, femenino/neutro y concordancia con antecedente."
+    ],
+    "limitations": [
+      "No se editó el artículo ni se añadió Evidence; la ficha permanece PENDING_SOURCE_SUPPORT porque no se localizaron pasajes primarios que cubran cada afirmación material.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "который acusativo",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "The adjective kotoryj",
+          "url": "https://russian.cornell.edu/grammar/html/le41_50_i.htm",
+          "locator": "lines 0–5: antecedent agreement in gender/number, case by function in its own clause, nominative examples"
+        },
+        {
+          "title": "Acc. Sg. and Plur. endings and animacy",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+          "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples"
+        }
+      ],
+      "rationale": "Las fuentes delimitan función de caso de который y sincretismo por animacidad; no verifican todo el paradigma subordinado de la entrada."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The adjective kotoryj",
+          "url": "https://russian.cornell.edu/grammar/html/le41_50_i.htm",
+          "locator": "lines 0–5: antecedent agreement in gender/number, case by function in its own clause, nominative examples"
+        },
+        {
+          "title": "Acc. Sg. and Plur. endings and animacy",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+          "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples"
+        }
+      ],
+      "rationale": "No se editó el artículo ni se añadió Evidence; la ficha permanece PENDING_SOURCE_SUPPORT porque no se localizaron pasajes primarios que cubran cada afirmación material."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "The adjective kotoryj",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le41_50_i.htm",
+      "locator": "lines 0–5: antecedent agreement in gender/number, case by function in its own clause, nominative examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The adjective kotoryj. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le41_50_i.htm"
+    },
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Acc. Sg. and Plur. endings and animacy",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr04_c.htm",
+      "locator": "lines 0–12: accusative syncretism by animacy and declension, with examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Acc. Sg. and Plur. endings and animacy. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr04_c.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:14:32.373Z",
+    "backupGeneratedAt": "2026-09-19T09:14:32.373Z",
+    "canonicalArticleSha256": "362392dac18651062cbc74687a0b0b07db5c5798fa6203029456c2a8fbf2bd97",
+    "backupArticleSha256": "362392dac18651062cbc74687a0b0b07db5c5798fa6203029456c2a8fbf2bd97",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "362392dac18651062cbc74687a0b0b07db5c5798fa6203029456c2a8fbf2bd97",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0142/pre-coordinator.json",
+    "sha256": "d4ae21f3a678682fb3dce3faabdaeab7d5e95fc145a1158b159fd1d04d80df53",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

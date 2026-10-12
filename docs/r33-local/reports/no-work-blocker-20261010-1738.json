@@ -1,0 +1,42 @@
+{
+  "observedAt": "2026-10-10T17:39:06.713Z",
+  "coordinatorResponse": "NO_WORK",
+  "coordinatorRemaining": 0,
+  "unresolvedReviewOutcomes": 2477,
+  "activeLeases": 8,
+  "activeLeasedEntries": 200,
+  "eligibleUnleasedEntries": 0,
+  "reason": "La cola no ofrece entradas sin lease: todos los seguimientos elegibles restantes están asignados a workers activos. Las entradas todavía PENDING_SOURCE_SUPPORT/PENDING_CONFLICT no se consideran verificadas; deben conservar esos estados si no obtienen soporte y assessEntry canónico.",
+  "nextAction": "Dejar el objetivo abierto. Esperar a que se completen o venzan los leases activos; después volver a consultar el coordinador y reclamar trabajo solo si aparece disponible.",
+  "objectiveRemainsOpen": true,
+  "safety": {
+    "cloudflareInteractions": 0,
+    "d1Reads": 0,
+    "d1Writes": 0,
+    "apiCalls": 0,
+    "pushes": 0,
+    "merges": 0,
+    "deployments": 0
+  },
+  "recheck": {
+    "observedAt": "2026-10-10T17:39:56.938Z",
+    "coordinatorResponse": "NO_WORK",
+    "coordinatorRemaining": 0,
+    "unresolvedReviewOutcomes": 2477,
+    "activeLeases": 5,
+    "activeLeasedEntries": 125,
+    "eligibleUnleasedEntries": 0,
+    "reason": "La cola permanece sin entradas reclamables; cinco leases siguen activos y los demás resultados de revisión continúan pendientes tras la única ronda de seguimiento. El estado PENDING no equivale a VERIFIED.",
+    "nextAction": "Dejar el objetivo abierto. Al cerrar/vencer los cinco leases activos, consultar de nuevo el coordinador; si no se habilita otra ronda, registrar la limitación del asignador y continuar investigación con un flujo autorizado.",
+    "objectiveRemainsOpen": true,
+    "safety": {
+      "cloudflareInteractions": 0,
+      "d1Reads": 0,
+      "d1Writes": 0,
+      "apiCalls": 0,
+      "pushes": 0,
+      "merges": 0,
+      "deployments": 0
+    }
+  }
+}

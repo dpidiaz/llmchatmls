@@ -1,0 +1,166 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V02-0207",
+  "language": "portugues",
+  "reviewedAt": "2026-10-10T19:27:36.965Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010192014-1e9a5a)",
+  "assignmentId": "R33A-1791660014478-02c0a1",
+  "articlePath": "content/portugues/MLS-V02-0207.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Porto Editora. (s. f.). Grau. Infopédia.",
+      "url": "https://www.infopedia.pt/artigos/$grau",
+      "locator": "líneas 18–31",
+      "observation": "Presenta comparativos de superioridad, igualdad e inferioridad, y superlativos relativos; brinda formas esquema. No cubre por separado todas las variantes y matices brasileños."
+    },
+    {
+      "apa7Candidate": "Porto Editora. (s. f.). Adjetivo. Infopédia.",
+      "url": "https://www.infopedia.pt/artigos/$adjetivo",
+      "locator": "linhas 20, 28–38, 79, 87–115",
+      "observation": "Explica flexão de gênero/número, graus, padrão comparativo/superlativo, posición y diferencias entre adjetivos qualificativos y relacionais; reconoce que algunas lecturas varían con el contexto. No demuestra cada ejemplo específico de los artículos."
+    },
+    {
+      "apa7Candidate": "Porto Editora. (s. f.). Superlativo. Dicionário Infopédia da Língua Portuguesa.",
+      "url": "https://www.infopedia.pt/dicionarios/lingua-portuguesa/superlativo",
+      "locator": "líneas 186–198",
+      "observation": "Define superlativo absoluto y relativo, incluyendo grado superior/inferior dentro de una totalidad; apoya la distinción conceptual, no todos los patrones sintácticos y ejemplos de artículo."
+    },
+    {
+      "apa7Candidate": "Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul. (s. f.). Recursos da prova de Português [PDF].",
+      "url": "https://ifrs.edu.br/wp-content/uploads/2017/08/Recursos-da-Prova-de-Portugu%C3%AAs.pdf",
+      "locator": "PDF pp. 75–80 / líneas 3069–3088: comparativo de igualdade “tão...quanto/como”, superioridade e inferioridade citando Infante e Sarmento",
+      "observation": "Material oficial de IFRS que reproduce citas y páginas de gramáticas brasileñas; útil como localizador secundario y pista de bibliografía, pero no sustituye consultar esas obras primarias para afirmaciones ajenas al pasaje."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Dos vías distintas de búsqueda gratuitas por entrada, lectura directa de pasajes pertinentes y comparación con afirmaciones y artículo vigente. Las referencias son candidatas de investigación, no una matriz Evidence ni citas APA integradas.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "NOT_APPROVED: la cobertura afirmación-localizador está incompleta; el estado no se elevó.",
+    "backupComparison": {
+      "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite",
+      "access": "node:sqlite readOnly=true",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-18T05:04:33.652Z",
+      "canonicalGeneratedAt": "2026-09-18T05:04:33.652Z",
+      "backupArticleSha256": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+      "canonicalArticleSha256": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento por afirmación con consulta de las revisiones previas, búsquedas independientes y lectura directa de pasajes; no se infiere respaldo más allá del localizador observado.",
+    "findings": [
+      "Fuentes generales definen superlativo relativo dentro de un conjunto, pero faltan localizadores primarios específicos del patrón de superioridad, artículo, complemento de y ejemplos brasileños de la ficha. La revisión previa describió los vacíos; este seguimiento consultó las fuentes y localizadores enumerados en sourceReferences, con apoyo parcial solamente."
+    ],
+    "limitations": [
+      "Fuentes generales definen superlativo relativo dentro de un conjunto, pero faltan localizadores primarios específicos del patrón de superioridad, artículo, complemento de y ejemplos brasileños de la ficha.",
+      "No se validó Evidence por afirmación; assessEntry y el control canónico VERIFIED siguen sin aprobar."
+    ],
+    "exceptionalDisposition": {
+      "searches": [
+        {
+          "query": "site:infopedia.pt/artigos/$grau comparativo superioridade inferioridade superlativo relativo",
+          "portal": "Infopédia / Porto Editora",
+          "outcome": "Inspección directa del artículo “grau” §§/líneas 18–31 confirma categorías comparativas y superlativas principales."
+        },
+        {
+          "query": "site:edu.br gramática comparativa adjetivo “menos... do que” “mais... do que” português",
+          "portal": "IFRS / gramáticas de referencia citadas en documento institucional",
+          "outcome": "El PDF de IFRS, pp. 75–80, reproduce pasajes de Infante y Sarmento sobre comparación; no cubre todo el patrón individual, conectores, grupo comparado y ejemplos de estos artículos."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Porto Editora. (s. f.). Grau. Infopédia.",
+          "url": "https://www.infopedia.pt/artigos/$grau",
+          "locator": "líneas 18–31",
+          "finding": "Presenta comparativos de superioridad, igualdad e inferioridad, y superlativos relativos; brinda formas esquema. No cubre por separado todas las variantes y matices brasileños."
+        },
+        {
+          "title": "Porto Editora. (s. f.). Adjetivo. Infopédia.",
+          "url": "https://www.infopedia.pt/artigos/$adjetivo",
+          "locator": "linhas 20, 28–38, 79, 87–115",
+          "finding": "Explica flexão de gênero/número, graus, padrão comparativo/superlativo, posición y diferencias entre adjetivos qualificativos y relacionais; reconoce que algunas lecturas varían con el contexto. No demuestra cada ejemplo específico de los artículos."
+        },
+        {
+          "title": "Porto Editora. (s. f.). Superlativo. Dicionário Infopédia da Língua Portuguesa.",
+          "url": "https://www.infopedia.pt/dicionarios/lingua-portuguesa/superlativo",
+          "locator": "líneas 186–198",
+          "finding": "Define superlativo absoluto y relativo, incluyendo grado superior/inferior dentro de una totalidad; apoya la distinción conceptual, no todos los patrones sintácticos y ejemplos de artículo."
+        },
+        {
+          "title": "Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Sul. (s. f.). Recursos da prova de Português [PDF].",
+          "url": "https://ifrs.edu.br/wp-content/uploads/2017/08/Recursos-da-Prova-de-Portugu%C3%AAs.pdf",
+          "locator": "PDF pp. 75–80 / líneas 3069–3088: comparativo de igualdade “tão...quanto/como”, superioridade e inferioridade citando Infante e Sarmento",
+          "finding": "Material oficial de IFRS que reproduce citas y páginas de gramáticas brasileñas; útil como localizador secundario y pista de bibliografía, pero no sustituye consultar esas obras primarias para afirmaciones ajenas al pasaje."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré reducir la ficha a las definiciones/ejemplos directamente apoyados y retirar o matizar cualquier generalización no documentada. No modifiqué el artículo: aún hace falta determinar la redacción respaldada por fuente primaria; tampoco existe Evidence canónica para actualizar de modo auditable.",
+      "canonicalCheck": "Recalculé SHA-256 del articleMarkdown vigente: a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1. Evidence canónica MLS R32 EDITORIAL/evidence git/entries/portugues/MLS-V02-0207.json no existe; índice verified no contiene MLS-V02-0207. assessEntry no pasa: no hay evidencia claim-level validada que complete todas las afirmaciones materiales. Estado conservado como PENDING, sin promoción.",
+      "nextConcreteStep": "Investigar las afirmaciones concretas señaladas con una consulta nueva en corpus/gramáticas brasileñas de acceso abierto y otra búsqueda por construcciones/ejemplos; registrar páginas/subapartados, corregir o acotar artículo, crear Evidence por afirmación y ejecutar assessEntry/hash/índice.",
+      "blockingCriterion": "Fuentes generales definen superlativo relativo dentro de un conjunto, pero faltan localizadores primarios específicos del patrón de superioridad, artículo, complemento de y ejemplos brasileños de la ficha."
+    }
+  },
+  "originalArticleSha256": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+  "backupComparison": {
+    "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite",
+    "access": "node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-18T05:04:33.652Z",
+    "canonicalGeneratedAt": "2026-09-18T05:04:33.652Z",
+    "backupArticleSha256": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+    "canonicalArticleSha256": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V02-0207/followup-1-74b004a19344.json",
+    "sha256": "74b004a193441f4af93e9fbece5f87d60dd2b13765ef683d03b72fbdfe08aca0",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "phase": "source-followup",
+  "canonicalArticleSha256": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+  "verifiedArticleSha256": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V02-0207-revision.json",
+    "sha256": "74b004a193441f4af93e9fbece5f87d60dd2b13765ef683d03b72fbdfe08aca0",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791625302645-831241"
+  },
+  "canonicalCheck": {
+    "articleHash": "a19d44e72c6e14f8c133b2f0c805f5a17302265f88ca793189d29ea781d0ceb1",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/portugues/MLS-V02-0207.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: falta cobertura semántica claim-level validada."
+  },
+  "workerId": "R33W-local-20261010192014-1e9a5a"
+}

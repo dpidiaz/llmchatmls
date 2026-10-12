@@ -1,0 +1,125 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0746",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0746.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+      "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/la-alternancia-que--de-en-las-comparativas-de-desigualdad-ii-otros-contextos-de-elecci%C3%B3n",
+      "locator": "§45.7d–m; especialmente §45.7d para distinto/diferente",
+      "observation": "NGLE §45.7d trata distinto/diferente y alternancia a/de; no basta para respaldar preferir/preferible, al contrario/al revés ni todos los regímenes y ejemplos del artículo."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-14T21:50:02.523Z",
+      "canonicalGeneratedAt": "2026-09-14T21:50:02.523Z",
+      "backupArticleSha256": "dc5146d2377aa8fbd472aa14203dd2a04a3fb43e17d54c4c6a354e7e28a93ada",
+      "canonicalArticleSha256": "dc5146d2377aa8fbd472aa14203dd2a04a3fb43e17d54c4c6a354e7e28a93ada",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "NGLE §45.7d trata distinto/diferente y alternancia a/de; no basta para respaldar preferir/preferible, al contrario/al revés ni todos los regímenes y ejemplos del artículo."
+    ],
+    "limitations": [
+      "Las consultas hallaron respaldo parcial para distinto/diferente, pero no localizadores consultados que cubran todos los elementos léxicos ni Evidence canónica.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Las consultas hallaron respaldo parcial para distinto/diferente, pero no localizadores consultados que cubran todos los elementos léxicos ni Evidence canónica.",
+      "searches": [
+        {
+          "query": "site:rae.es/gramática/sintaxis \"La alternancia que ~ de\" elementos léxicos diferente distinto preferir preferible",
+          "portal": "RAE/ASALE search",
+          "outcome": "Se encontró y abrió §45.7d; el pasaje respalda diferente/distinto, no toda la lista del título."
+        },
+        {
+          "query": "site:rae.es/gramática/sintaxis/la-alternancia-que--de \"45.7\" preferir preferible diferente distinto al revés",
+          "portal": "RAE/ASALE search",
+          "outcome": "El resultado y la lectura de §45.7 apuntan a tratamientos separados; la cobertura para al contrario/al revés y cada ejemplo quedó incompleta."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa.",
+          "url": "https://www.rae.es/gram%C3%A1tica/sintaxis/la-alternancia-que--de-en-las-comparativas-de-desigualdad-ii-otros-contextos-de-elecci%C3%B3n",
+          "locator": "§45.7d–m; especialmente §45.7d para distinto/diferente",
+          "finding": "NGLE §45.7d trata distinto/diferente y alternancia a/de; no basta para respaldar preferir/preferible, al contrario/al revés ni todos los regímenes y ejemplos del artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré separar las familias léxicas y restringir el artículo a aquellas con localizador primario; no edité porque el cierre PENDING rechaza cambio de texto.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (dc5146d2377aa8fbd472aa14203dd2a04a3fb43e17d54c4c6a354e7e28a93ada); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0746.json no existe y el índice verified.json no incluye MLS-V10-0746. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Consultar cada entrada académica primaria de distinto, diferente, preferir/preferible y locuciones al contrario/al revés; después rehacer la matriz por afirmación."
+    }
+  },
+  "originalArticleSha256": "dc5146d2377aa8fbd472aa14203dd2a04a3fb43e17d54c4c6a354e7e28a93ada",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-14T21:50:02.523Z",
+    "canonicalGeneratedAt": "2026-09-14T21:50:02.523Z",
+    "backupArticleSha256": "dc5146d2377aa8fbd472aa14203dd2a04a3fb43e17d54c4c6a354e7e28a93ada",
+    "canonicalArticleSha256": "dc5146d2377aa8fbd472aa14203dd2a04a3fb43e17d54c4c6a354e7e28a93ada",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0746/followup-1-688fbf400148.json",
+    "sha256": "688fbf4001483a3b73c3b027ce6326cf36b9680a5674629d800eedebbe649845",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0746-revision.json",
+    "sha256": "688fbf4001483a3b73c3b027ce6326cf36b9680a5674629d800eedebbe649845",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "dc5146d2377aa8fbd472aa14203dd2a04a3fb43e17d54c4c6a354e7e28a93ada",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0746.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

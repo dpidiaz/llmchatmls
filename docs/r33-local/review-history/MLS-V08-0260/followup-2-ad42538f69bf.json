@@ -1,0 +1,110 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0260",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:28:53.164Z",
+  "reviewer": "R33 local semantic source follow-up (R33W-local-20261011002431-7aebbc)",
+  "assignmentId": "R33A-1791678271456-49bf37",
+  "phase": "source-followup",
+  "articlePath": "content/coreano/MLS-V08-0260.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7": "National Institute of Korean Language. (n.d.). Irregularity vs regular ㄷ-final verb. 국립국어원 온라인가나다/한국어 어문 규범. https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=314511",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=314511",
+      "locator": "온라인가나다의 ㄷ 불규칙 정의와 듣다 예시; 규범 사전 활용형 대조 필요",
+      "supports": "자료는 듣다 변화의 근거지만 받다 등 대조형과 ㄷ말음 전체의 어휘별 분류를 완전히 검증하지 않는다. PENDING_SOURCE_SUPPORT."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Cotejo de fuentes primarias gratuitas de NIKL/한국어기초사전 y de sus respuestas normativas con afirmaciones y alcance; hallazgos parciales y límites registrados.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: resultado PENDING_SOURCE_SUPPORT; falta cobertura completa por afirmación y Evidence canónica."
+  },
+  "semanticReview": {
+    "method": "Revisión semántica de seguimiento con búsquedas distintas en el diccionario oficial del NIKL y en el repositorio normativo/consultivo oficial; cotejo de pasajes localizados contra la ficha completa. No se creó Evidence canónica ni se cambió el artículo.",
+    "findings": [
+      "La respuesta oficial consultada define ㄷ irregular e ilustra 듣다→들어; falta comprobar en el diccionario las formas del artículo para 받다 y no generalizar entornos de alternancia sin especificar excepciones léxicas."
+    ],
+    "limitations": [
+      "La evidencia localizada es parcial y no acredita afirmación por afirmación todos los ejemplos, condiciones y matices del artículo.",
+      "No se crearon Evidence canónica ni enlaces por claim y assessEntry no se ejecutó con resultado satisfactorio; por contrato no se marca VERIFIED."
+    ],
+    "consultedSources": [
+      {
+        "title": "국립국어원. (2025, May 8). 붇다와 붓다 [Online Q&A].",
+        "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=314511",
+        "locator": "Respuesta, líneas visibles 218–221: ㄷ irregular 듣다→들으니/들어; definición de ㄷ irregular",
+        "finding": "Apoya la alternancia ㄷ→ㄹ de 듣다 ante vocal; no coteja 받다 ni todos los ejemplos."
+      }
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Cobertura semántica claim-level incompleta: La respuesta oficial consultada define ㄷ irregular e ilustra 듣다→들어; falta comprobar en el diccionario las formas del artículo para 받다 y no generalizar entornos de alternancia sin especificar excepciones léxicas.",
+      "searches": [
+        {
+          "query": "듣다 받다 활용형 한국어기초사전 들어요 받아요",
+          "portal": "한국어기초사전 (krdict.korean.go.kr), búsqueda web del diccionario oficial",
+          "outcome": "Resultado oficial de alternancias: confirma la explicación general y parte del ejemplo objetivo; el control léxico del artículo queda sin comprobar."
+        },
+        {
+          "query": "국립국어원 ㄷ 불규칙 활용 듣다 받다",
+          "portal": "국립국어원 (korean.go.kr), búsqueda web de respuestas Online Q&A y recursos normativos/gramaticales oficiales",
+          "outcome": "Hallazgo parcial o sin localizador suficiente para completar la matriz afirmación-fuente; se mantuvo el alcance no certificado."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "국립국어원. (2025, May 8). 붇다와 붓다 [Online Q&A].",
+          "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=314511",
+          "locator": "Respuesta, líneas visibles 218–221: ㄷ irregular 듣다→들으니/들어; definición de ㄷ irregular",
+          "finding": "Apoya la alternancia ㄷ→ㄹ de 듣다 ante vocal; no coteja 받다 ni todos los ejemplos."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró corregir o reducir las generalizaciones y ejemplos no localizados; no se editó el artículo porque la consulta de esta ronda no bastó para determinar de forma segura qué alcance exacto conservar. En la siguiente ronda, reducir cada afirmación a lo que el diccionario/regla/estudio respalde y actualizar el artículo y APA 7 si queda sustentado.",
+      "canonicalCheck": "Hash del artículo verificado contra baseArticleHashes del coordinador (fa1bb487c65a9f6801d77d5b11bac3b1ca8680284a554992eafa463b24765e19); el índice de Evidence VERIFIED no se usó para promover. No se agregó Evidence; assessEntry no exitoso/no ejecutado para este resultado pendiente.",
+      "nextConcreteStep": "Localizar un recurso gramatical primario con sección/párrafo y cotejar la matriz de afirmaciones MLS-V08-0260; abrir las entradas lexicográficas exactas de todos los verbos/ejemplos, corregir el alcance que no coincida y recién entonces crear Evidence canónica y ejecutar assessEntry."
+    }
+  },
+  "originalArticleSha256": "fa1bb487c65a9f6801d77d5b11bac3b1ca8680284a554992eafa463b24765e19",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T10:21:56.808Z",
+    "canonicalGeneratedAt": "2026-09-19T10:21:56.808Z",
+    "backupArticleSha256": "fa1bb487c65a9f6801d77d5b11bac3b1ca8680284a554992eafa463b24765e19",
+    "canonicalArticleSha256": "fa1bb487c65a9f6801d77d5b11bac3b1ca8680284a554992eafa463b24765e19",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0260/pre-coordinator.json",
+    "sha256": "cd3f40f2ced4e5d8af5fd11211002218cb126a97d9b4e5b6a4e48505c8f25c2a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "La respuesta oficial consultada define ㄷ irregular e ilustra 듣다→들어; falta comprobar en el diccionario las formas del artículo para 받다 y no generalizar entornos de alternancia sin especificar excepciones léxicas.",
+    "nextStep": "Encontrar fuentes primarias con localizadores exactos que cubran cada afirmación y ejemplo de MLS-V08-0260; corregir la ficha según cobertura."
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0841",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T17:25:03.998Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791652844138-bad78b",
+  "workerId": "R33W-local-20261010172044-86156d",
+  "articlePath": "content/japones/MLS-V06-0841.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Revisión por afirmación material contra fuentes primarias gratuitas; cotejo de versión SQL en solo lectura; referencias limitadas explícitamente a los pasajes consultados.",
+    "findings": [
+      "Se atribuye a が una lectura exhaustiva en preguntas de identificación, definida como selección de una alternativa.",
+      "La fuente académica localizada define focus ga/exhaustive listing, pero la ficha necesita un estudio primario consultado con ejemplos y localizadores que valide las condiciones contextuales específicas y la paráfrasis usada.",
+      "Cotejo de versión: backup SQLite wiki_articles (2026-09-19T09:30:09.281Z) frente a content/japones/MLS-V06-0841.json; article_markdown SHA-256 8d635721a30e097b825723d7e5095fb7cd772955262005cead2e55d32d08b44f / 8d635721a30e097b825723d7e5095fb7cd772955262005cead2e55d32d08b44f; coincidencia=true.",
+      "Kuroda (1983) es candidato teórico sobre foco/が, pero el contenido relevante no se cotejó hasta ejemplos/páginas; las condiciones exhaustivas de esta ficha no quedan verificadas."
+    ],
+    "limitations": [
+      "La cobertura de fuentes no alcanza todas las afirmaciones materiales y ejemplos; falta cotejo con localizadores para completar validación. No se creó Evidence canónica.",
+      "Cobertura de fuentes incompleta; las fuentes parciales no sostienen cada afirmación material, forma y ejemplo. No se creó Evidence canónica ni se ejecutó assessEntry; por contrato queda pendiente."
+    ]
+  },
+  "originalArticleSha256": "8d635721a30e097b825723d7e5095fb7cd772955262005cead2e55d32d08b44f",
+  "verifiedArticleSha256": "8d635721a30e097b825723d7e5095fb7cd772955262005cead2e55d32d08b44f",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T09:30:09.281Z",
+    "backupArticleSha256": "8d635721a30e097b825723d7e5095fb7cd772955262005cead2e55d32d08b44f",
+    "canonicalArticleSha256": "8d635721a30e097b825723d7e5095fb7cd772955262005cead2e55d32d08b44f",
+    "articleMatches": true,
+    "versionMatches": false
+  },
+  "sourceReferences": [
+    {
+      "title": "The Free-Floating Focus System in Japanese",
+      "author": "Kuroda, S.-Y.",
+      "year": 1983,
+      "publication": "Gengo, 83, 41 ff. (datos bibliográficos completos por cotejar)",
+      "url": "https://www.jstage.jst.go.jp/article/gengo1939/1983/83/1983_41/_article/-char/en",
+      "locator": "artículo y ejemplos (texto completo no cotejado aquí)",
+      "coverage": "Estudio teórico sobre foco, は y が; muestra que が no necesariamente indica sujeto.",
+      "limits": "No se cotejó que sus ejemplos o análisis respalden la lectura exhaustiva exacta de las preguntas-respuestas de esta entrada."
+    }
+  ],
+  "canonicalEvidence": {
+    "present": false,
+    "assessment": "NOT_RUN",
+    "verified": false
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0841/pre-coordinator.json",
+    "sha256": "bb35fa8598a91e96dd181c098a6c9993df01d302521c7b67f240df660a0be8e1",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 1
+}

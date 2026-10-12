@@ -1,0 +1,149 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0191",
+  "title": "에게서 vs 한테서",
+  "language": "coreano",
+  "articlePath": "content/coreano/MLS-V08-0191.json",
+  "reviewedAt": "2026-10-11T00:22:26.546Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "workerId": "R33W-local-20261011002037-241d84",
+  "originalArticleSha256": "5b8586cf7b5ec1146071328283f766e2ca86c73eeacc413313101fad70e41410",
+  "canonicalArticleSha256": "5b8586cf7b5ec1146071328283f766e2ca86c73eeacc413313101fad70e41410",
+  "verifiedArticleSha256": "5b8586cf7b5ec1146071328283f766e2ca86c73eeacc413313101fad70e41410",
+  "status": "PENDING_CONFLICT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "한테서=구어 일반화와 말뭉치 초록의 한테서 문어 분포가 충돌하며 표본·장르·단위가 미확인이다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "한테서=구어 일반화와 말뭉치 초록의 한테서 문어 분포가 충돌하며 표본·장르·단위가 미확인이다.",
+      "searches": [
+        {
+          "query": "site:kci.go.kr 한테서 에게서 문어 구어 corpus register",
+          "portal": "한국학술지인용색인(KCI) 검색",
+          "outcome": "말뭉치 연구 결과의 register 분포와 ficha의 일반화가 긴장됨을 확인했다."
+        },
+        {
+          "query": "site:kci.go.kr \"에게서\" \"한테서\" 문어체 구어체 시원격",
+          "portal": "한국학술지인용색인(KCI) 검색",
+          "outcome": "별도 논문 결과에서도 register 대비를 다루며 자료·표본을 비교할 필요가 확인됐다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "한국어기초사전 에게서",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=70321&nation=eng",
+          "locator": "출처·기원 뜻풀이·예문, 참고어 한테서",
+          "finding": "에게서 출처 기능 지지; register 차이는 미설명."
+        },
+        {
+          "title": "번역학연구, 한·불 번역문에서 시원격 조사 register",
+          "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+          "locator": "초록/본문 발췌: -에게서/-한테서가 각각 문어체/구어체 시원격 조사로 쓰인다는 결과",
+          "finding": "ficha의 일반화와 일치하는 비교 연구가 있으나 다른 말뭉치 연구 초록의 한테서 문어 분포와 충돌을 해소하지는 못한다."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "연구 본문의 표·방법에서 한테서/에게서 분포를 확인하고 표본 한계가 있으면 별도 말뭉치로 재검증해 설명을 다시 쓴다."
+    }
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.546Z",
+    "result": "CONFLICT_REMAINS",
+    "repositories": [
+      "한국어기초사전 에게서"
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "backupComparison": {
+    "database": "local coordinator canonical branch snapshot",
+    "mode": "read-only hash comparison",
+    "articlePath": "content/coreano/MLS-V08-0191.json",
+    "articleSha256": "5b8586cf7b5ec1146071328283f766e2ca86c73eeacc413313101fad70e41410",
+    "coordinatorBaseSha256": "5b8586cf7b5ec1146071328283f766e2ca86c73eeacc413313101fad70e41410",
+    "articleHashMatchesCoordinatorBase": true,
+    "canonicalEvidenceIndexEntry": false,
+    "canonicalArticleSha256": "5b8586cf7b5ec1146071328283f766e2ca86c73eeacc413313101fad70e41410",
+    "articleMatches": false,
+    "versionMatches": false
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0191/followup-1-4637d2c21808.json",
+    "sha256": "4637d2c218084dd9ff1953e486e831c3f8c05cbfe44cd10d362d38f518958e8d",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 2,
+  "sourceChecks": [
+    {
+      "sourceTitle": "한국어기초사전 에게서",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=70321&nation=eng",
+      "locator": "출처·기원 뜻풀이·예문, 참고어 한테서",
+      "result": "PARTIAL",
+      "finding": "에게서 출처 기능 지지; register 차이는 미설명."
+    },
+    {
+      "sourceTitle": "번역학연구, 한·불 번역문에서 시원격 조사 register",
+      "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+      "locator": "초록/본문 발췌: -에게서/-한테서가 각각 문어체/구어체 시원격 조사로 쓰인다는 결과",
+      "result": "PARTIAL",
+      "finding": "ficha의 일반화와 일치하는 비교 연구가 있으나 다른 말뭉치 연구 초록의 한테서 문어 분포와 충돌을 해소하지는 못한다."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "한국어기초사전 에게서",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=70321&nation=eng",
+      "locator": "출처·기원 뜻풀이·예문, 참고어 한테서",
+      "finding": "에게서 출처 기능 지지; register 차이는 미설명."
+    },
+    {
+      "title": "번역학연구, 한·불 번역문에서 시원격 조사 register",
+      "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+      "locator": "초록/본문 발췌: -에게서/-한테서가 각각 문어체/구어체 시원격 조사로 쓰인다는 결과",
+      "finding": "ficha의 일반화와 일치하는 비교 연구가 있으나 다른 말뭉치 연구 초록의 한테서 문어 분포와 충돌을 해소하지는 못한다."
+    }
+  ],
+  "followupSources": [
+    {
+      "title": "한국어기초사전 에게서",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=70321&nation=eng",
+      "locator": "출처·기원 뜻풀이·예문, 참고어 한테서",
+      "finding": "에게서 출처 기능 지지; register 차이는 미설명.",
+      "result": "PARTIAL"
+    },
+    {
+      "title": "번역학연구, 한·불 번역문에서 시원격 조사 register",
+      "url": "https://journal.kci.go.kr/kats/archive/articlePdf?artiId=ART001485267",
+      "locator": "초록/본문 발췌: -에게서/-한테서가 각각 문어체/구어체 시원격 조사로 쓰인다는 결과",
+      "finding": "ficha의 일반화와 일치하는 비교 연구가 있으나 다른 말뭉치 연구 초록의 한테서 문어 분포와 충돌을 해소하지는 못한다.",
+      "result": "PARTIAL"
+    }
+  ],
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 4,
+    "label": "muy alta",
+    "reason": "한테서=구어 일반화와 말뭉치 초록의 한테서 문어 분포가 충돌하며 표본·장르·단위가 미확인이다.",
+    "nextStep": "연구 본문의 표·방법에서 한테서/에게서 분포를 확인하고 표본 한계가 있으면 별도 말뭉치로 재검증해 설명을 다시 쓴다."
+  }
+}

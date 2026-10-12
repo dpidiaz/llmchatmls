@@ -1,0 +1,109 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0162",
+  "language": "coreano",
+  "reviewedAt": "2026-10-11T00:22:26.524Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/coreano/MLS-V08-0162.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "근거 기반 추측은 확인했으나 현재·과거·형용사 결합형 및 모든 예문이 미검증이다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "근거 기반 추측은 확인했으나 현재·과거·형용사 결합형 및 모든 예문이 미검증이다.",
+      "searches": [
+        {
+          "query": "site:krdict.korean.go.kr \"모양이다\" \"-는\" \"-은\"",
+          "portal": "한국어기초사전 검색",
+          "outcome": "검색 결과가 불충분해 사전 표제어의 결합형·예문을 직접 열었다."
+        },
+        {
+          "query": "site:krdict.korean.go.kr \"셈이다\" \"모양이다\" 추측",
+          "portal": "한국어기초사전 검색",
+          "outcome": "두 표현의 항목을 각각 대조했으나 기사 예문 전부를 검증하지 못했다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "한국어기초사전 -은 모양이다",
+          "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=71848&nation=eng",
+          "locator": "뜻풀이·결합형 및 학교에 간 모양이다 예문",
+          "finding": "근거 기반 추측과 일부 결합형 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "모양이다 결합형을 문장별 대조해 동사 시제와 형용사 예문의 근거 표현을 확인한다."
+    }
+  },
+  "originalArticleSha256": "9e393b94ff714363d5e89c739851ddc0950b2a598c25b43328419ad3d45e21cd",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "workerId": "R33W-local-20261011002037-241d84",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "followupRound": 2,
+  "canonicalArticleSha256": "9e393b94ff714363d5e89c739851ddc0950b2a598c25b43328419ad3d45e21cd",
+  "verifiedArticleSha256": "9e393b94ff714363d5e89c739851ddc0950b2a598c25b43328419ad3d45e21cd",
+  "followupSources": [
+    {
+      "title": "한국어기초사전 -은 모양이다",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=71848&nation=eng",
+      "locator": "뜻풀이·결합형 및 학교에 간 모양이다 예문",
+      "finding": "근거 기반 추측과 일부 결합형 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.524Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "한국어기초사전 -은 모양이다"
+    ]
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0162/followup-1-bf9a61b2567d.json",
+    "sha256": "bf9a61b2567d1c7cb6165fe75685242dcbcea4cf3b1fdc6076ba91bfa15c0f11",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "sourceChecks": [
+    {
+      "sourceTitle": "한국어기초사전 -은 모양이다",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=71848&nation=eng",
+      "locator": "뜻풀이·결합형 및 학교에 간 모양이다 예문",
+      "result": "PARTIAL",
+      "finding": "근거 기반 추측과 일부 결합형 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "한국어기초사전 -은 모양이다",
+      "url": "https://krdict.korean.go.kr/eng/dicSearch/SearchView?ParaWordNo=71848&nation=eng",
+      "locator": "뜻풀이·결합형 및 학교에 간 모양이다 예문",
+      "finding": "근거 기반 추측과 일부 결합형 지지."
+    }
+  ],
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "근거 기반 추측은 확인했으나 현재·과거·형용사 결합형 및 모든 예문이 미검증이다.",
+    "nextStep": "모양이다 결합형을 문장별 대조해 동사 시제와 형용사 예문의 근거 표현을 확인한다."
+  }
+}

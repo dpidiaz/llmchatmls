@@ -1,0 +1,138 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V08-0167",
+  "title": "은/는 tópico",
+  "language": "coreano",
+  "articlePath": "content/coreano/MLS-V08-0167.json",
+  "reviewedAt": "2026-10-11T00:22:26.528Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791678037627-4212b1",
+  "workerId": "R33W-local-20261011002037-241d84",
+  "originalArticleSha256": "4594f2a674880fe05ef878a417bdd9a1c05180c2cf3bccd164f793fb49c61832",
+  "canonicalArticleSha256": "4594f2a674880fe05ef878a417bdd9a1c05180c2cf3bccd164f793fb49c61832",
+  "verifiedArticleSha256": "4594f2a674880fe05ef878a417bdd9a1c05180c2cf3bccd164f793fb49c61832",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "semanticReview": {
+    "method": "Seguimiento semántico con dos consultas diferenciadas y consulta directa de fuentes públicas gratuitas; cotejo de alcance respecto de afirmaciones y ejemplos.",
+    "findings": [
+      "주제와 문법적 주어의 구분은 정보구조·격표지 상호작용을 포함해 단일 사전으로 충분히 입증되지 않는다."
+    ],
+    "limitations": [
+      "Las fuentes inspeccionadas no cubren todas las afirmaciones o ejemplos; no se creó Evidence canónica ni se ejecutó assessEntry. La entrada no queda VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "주제와 문법적 주어의 구분은 정보구조·격표지 상호작용을 포함해 단일 사전으로 충분히 입증되지 않는다.",
+      "searches": [
+        {
+          "query": "site:kci.go.kr 은는 이가 주제 초점 대조 한국어 조사",
+          "portal": "한국학술지인용색인(KCI) 검색",
+          "outcome": "정보구조 논문에서 은/는과 이/가의 기능이 복합적임을 확인했다."
+        },
+        {
+          "query": "site:krdict.korean.go.kr 은 는 이 가 을 를 조사 의미",
+          "portal": "한국어기초사전 검색",
+          "outcome": "사전의 기본 뜻은 확인했으나 담화 초점 일반화를 단독으로 결정하지 못했다."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+          "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+          "locator": "초록, 국어학 104 (2022), pp. 191–219",
+          "finding": "주제·초점·대조 기능의 복합성 지지."
+        },
+        {
+          "title": "국립국어원 온라인가나다 qna_seq=320750",
+          "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+          "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+          "finding": "문맥별 구별 필요성 지지."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el texto a lo respaldado. No se modificó el artículo: primero debe cotejarse cada afirmación y ejemplo descrito en el bloqueo para evitar una corrección no sustentada.",
+      "canonicalCheck": "Hash del artículo cotejado con el archivo canónico vigente. El índice no registra VERIFIED y la Evidence completa no está disponible; assessEntry no se ejecutó. Se conserva resultado pendiente.",
+      "nextConcreteStep": "KCI 본문과 국립국어원 답변을 대조하고 예문마다 통사역할과 담화기능을 분리한다."
+    }
+  },
+  "sourceSearch": {
+    "followupRound": 2,
+    "consultedAt": "2026-10-11T00:22:26.528Z",
+    "result": "PARTIAL_PRIMARY_SUPPORT",
+    "repositories": [
+      "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "국립국어원 온라인가나다 qna_seq=320750"
+    ]
+  },
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "followupRound": 2,
+  "followupSources": [
+    {
+      "title": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+      "locator": "초록, 국어학 104 (2022), pp. 191–219",
+      "finding": "주제·초점·대조 기능의 복합성 지지.",
+      "result": "PARTIAL"
+    },
+    {
+      "title": "국립국어원 온라인가나다 qna_seq=320750",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+      "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+      "finding": "문맥별 구별 필요성 지지.",
+      "result": "PARTIAL"
+    }
+  ],
+  "preflight": {
+    "ok": false,
+    "reason": "El respaldo es parcial; no hay Evidence canónica validada y assessEntry no se ejecutó."
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V08-0167/followup-1-f5a3a77a8948.json",
+    "sha256": "f5a3a77a894835dc017736802043b43c3714bad1491f74988fbd699b463b209a",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "sourceChecks": [
+    {
+      "sourceTitle": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+      "locator": "초록, 국어학 104 (2022), pp. 191–219",
+      "result": "PARTIAL",
+      "finding": "주제·초점·대조 기능의 복합성 지지."
+    },
+    {
+      "sourceTitle": "국립국어원 온라인가나다 qna_seq=320750",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+      "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+      "result": "PARTIAL",
+      "finding": "문맥별 구별 필요성 지지."
+    }
+  ],
+  "candidateSources": [
+    {
+      "title": "정해권, 은/는과 이/가의 의미 지도와 구문 관계",
+      "url": "https://www.kci.go.kr/kciportal/landing/article.kci?arti_id=ART002915155",
+      "locator": "초록, 국어학 104 (2022), pp. 191–219",
+      "finding": "주제·초점·대조 기능의 복합성 지지."
+    },
+    {
+      "title": "국립국어원 온라인가나다 qna_seq=320750",
+      "url": "https://www.korean.go.kr/front/onlineQna/onlineQnaView.do?mn_id=216&pageIndex=1&qna_seq=320750",
+      "locator": "답변 2025-09-15, 은/는 보조사와 이/가의 격/보조사 구별",
+      "finding": "문맥별 구별 필요성 지지."
+    }
+  ],
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "주제와 문법적 주어의 구분은 정보구조·격표지 상호작용을 포함해 단일 사전으로 충분히 입증되지 않는다.",
+    "nextStep": "KCI 본문과 국립국어원 답변을 대조하고 예문마다 통사역할과 담화기능을 분리한다."
+  }
+}

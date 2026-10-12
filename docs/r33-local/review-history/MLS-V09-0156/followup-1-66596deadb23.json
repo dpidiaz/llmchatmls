@@ -1,0 +1,113 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0156",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.637Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0156.json",
+  "articleGeneratedAt": "2026-09-19T09:27:18.401Z",
+  "articleSha256": "dd74765e5a7ec3775dd2f964ab2aab7d01c6ad027f0ca9b38bb5e3b4d6112098",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "Las referencias apoyan из + genitivo para lugares, от + genitivo para personas y с + genitivo desde/sobre; falta validar todos los contrastes contextuales del artículo.",
+      "Se leyó íntegramente “Из/с/от + genitivo” (ruso) y se comparó con wiki_articles del backup SQL abierto en modo read-only: SHA-256 de articleMarkdown y generatedAt coinciden con el JSON del repositorio. No hay Evidence canónica para MLS-V09-0156; falta el vínculo R33 afirmación-fuente-localizador."
+    ],
+    "limitations": [
+      "La identidad exacta con la versión del backup no demuestra veracidad lingüística.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "из/с/от + genitivo",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "The prepositions из and от: “from”",
+          "url": "https://russian.cornell.edu/grammar/html/le22_30_e.htm",
+          "locator": "lines 0–7: из + genitive places, от + genitive people; examples"
+        },
+        {
+          "title": "The preposition с/со; Instrumental vs. Genitive",
+          "url": "https://russian.cornell.edu/grammar/html/le41_50_d.htm",
+          "locator": "lines 0–10: accompaniment vs from/off, genitive examples"
+        }
+      ],
+      "rationale": "Las referencias apoyan из + genitivo para lugares, от + genitivo para personas y с + genitivo desde/sobre; falta validar todos los contrastes contextuales del artículo."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "The prepositions из and от: “from”",
+          "url": "https://russian.cornell.edu/grammar/html/le22_30_e.htm",
+          "locator": "lines 0–7: из + genitive places, от + genitive people; examples"
+        },
+        {
+          "title": "The preposition с/со; Instrumental vs. Genitive",
+          "url": "https://russian.cornell.edu/grammar/html/le41_50_d.htm",
+          "locator": "lines 0–10: accompaniment vs from/off, genitive examples"
+        }
+      ],
+      "rationale": "La identidad exacta con la versión del backup no demuestra veracidad lingüística."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "The prepositions из and от: “from”",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le22_30_e.htm",
+      "locator": "lines 0–7: из + genitive places, от + genitive people; examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The prepositions из and от: “from”. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le22_30_e.htm"
+    },
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "The preposition с/со; Instrumental vs. Genitive",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/le41_50_d.htm",
+      "locator": "lines 0–10: accompaniment vs from/off, genitive examples",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). The preposition с/со; Instrumental vs. Genitive. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/le41_50_d.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:27:18.401Z",
+    "backupGeneratedAt": "2026-09-19T09:27:18.401Z",
+    "canonicalArticleSha256": "dd74765e5a7ec3775dd2f964ab2aab7d01c6ad027f0ca9b38bb5e3b4d6112098",
+    "backupArticleSha256": "dd74765e5a7ec3775dd2f964ab2aab7d01c6ad027f0ca9b38bb5e3b4d6112098",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "dd74765e5a7ec3775dd2f964ab2aab7d01c6ad027f0ca9b38bb5e3b4d6112098",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0156/pre-coordinator.json",
+    "sha256": "26f0b2b9133340c84c0c6bf7df15e21ba5b0409bdd0ddf43f780cbb7d628a760",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

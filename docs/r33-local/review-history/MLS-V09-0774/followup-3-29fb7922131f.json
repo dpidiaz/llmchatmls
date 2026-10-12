@@ -1,0 +1,150 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0774",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T10:38:07.961Z",
+  "reviewer": "R33 local source-followup",
+  "workerId": "R33W-local-20261011103604-3d9826",
+  "assignmentId": "R33A-1791714964251-888f1b",
+  "articlePath": "content/ruso/MLS-V09-0774.json",
+  "articleGeneratedAt": "2026-09-19T10:19:40.285Z",
+  "articleSha256": "a1b3fbce4778bf7a604904717447dc007d7981a1b22f53caff379d3bc38a8ec9",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento gratuito con dos búsquedas temáticas distintas, lectura de la revisión anterior, búsqueda de fuentes primarias de Gramota.ru y cotejo del hash del articleMarkdown.",
+    "findings": [
+      "Se relee la revisión anterior docs/r33-local/reviews/MLS-V09-0774-revision.json, SHA-256 d2b1455cea4e3eebca6417589d27470cfd59da8a0acc3baecbe0ed4fae7d2d25; bloqueo anterior: La referencia identifica несмотря на то что como conjunción subordinante y explica puntuación; no verifica por sí sola la explicación de expectativa concesiva, la simetría de hechos, contraste con хотя ni los matices de registro y todos los ejemplos.",
+      "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences.",
+      "Supports conjunction status and clause attachment, not all concessive-pragmatic analysis or Spanish gloss alternatives.",
+      "El artículo Conector несмотря на то что todavía contiene afirmaciones y ejemplos que no se pueden cerrar con los pasajes encontrados; no se certifica por apoyo general de tema."
+    ],
+    "limitations": [
+      "No hay localizador comprobado para cada afirmación material, ejemplo ruso y traducción; los pasajes documentados solo cubren el alcance expuesto en primarySourcesInspected.",
+      "La consulta actual a Gramota devolvió extractos, pero el acceso directo por web respondió 403; por ello la evidencia de búsqueda no basta para aprobar una afirmación central cuando requiere lectura contextual completa.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; el estado continúa pendiente."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La gramática respalda la clasificación principal de la subordinada, pero no cubre cada matiz pragmático, alternancia aspectual, ejemplo ni equivalencia de traducción. Bloqueo previo persistente: La referencia identifica несмотря на то что como conjunción subordinante y explica puntuación; no verifica por sí sola la explicación de expectativa concesiva, la simetría de hechos, contraste con хотя ni los matices de registro y todos los ejemplos.",
+      "searches": [
+        {
+          "query": "site:gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii \"для того чтобы\" \"несмотря на то что\"",
+          "portal": "Búsqueda web de Gramota.ru / portal de diccionarios y referencias lingüísticas",
+          "outcome": "La consulta encontró una entrada de referencia lingüística pertinente o confirmó que la fuente consultada es solo ortográfica/no responde a la afirmación central. Se leyó el extracto devuelto y se anotó el alcance; la apertura directa de la página devolvió 403."
+        },
+        {
+          "query": "site:gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii \"несмотря на то что\" уступительный союз",
+          "portal": "Búsqueda web de Gramota.ru / portal de diccionarios y referencias lingüísticas",
+          "outcome": "Segunda consulta, con formulación/objetivo diferente para localizar un diccionario o sección gramatical específica. El extracto citado apoya solo el punto delimitado; no resuelve las afirmaciones restantes ni se usan snippets ajenos como prueba."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Сложное предложение",
+          "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+          "locator": "Section “Сложноподчиненные предложения с придаточными условия” (если); section on purpose clauses (чтобы/для того чтобы); list of compound subordinating conjunctions including несмотря на то что.",
+          "finding": "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences. Se leyó el extracto devuelto por la búsqueda del portal; la apertura directa del endpoint de Gramota respondió 403 en esta sesión, por lo que no se toma como certificación completa."
+        },
+        {
+          "title": "Несмотря на то(,) что",
+          "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/nesmotrya-na-to-chto",
+          "locator": "Punctuation reference entry “Несмотря на то(,) что”: identifies a conjunction attaching subordinate clauses; punctuation discussion and example.",
+          "finding": "Supports conjunction status and clause attachment, not all concessive-pragmatic analysis or Spanish gloss alternatives. Se leyó el extracto devuelto por la búsqueda del portal; la apertura directa del endpoint de Gramota respondió 403 en esta sesión, por lo que no se toma como certificación completa."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar o corregir las afirmaciones de “Conector несмотря на то что” al alcance de los localizadores. No se modificó el contenido porque aún falta leer la fuente completa y validar ejemplos/localizadores uno a uno; una corrección sin ese cotejo podría cambiar el sentido sin respaldo.",
+      "canonicalCheck": "articleMarkdown SHA-256 actual a1b3fbce4778bf7a604904717447dc007d7981a1b22f53caff379d3bc38a8ec9, coincide con el hash base del lease. No consta Evidence canónica aprobada ni assessEntry exitoso para MLS-V09-0774; no se marca VERIFIED.",
+      "nextConcreteStep": "Localizar una gramática académica abierta o corpus con un localizador directo para las afirmaciones aún no respaldadas de MLS-V09-0774; revisar ejemplos y traducciones uno por uno, corregir el artículo solo si el respaldo delimita el sentido, crear Evidence y ejecutar assessEntry con el hash vigente."
+    }
+  },
+  "consultedSources": [
+    {
+      "title": "Сложное предложение",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+      "provider": "Грамота.ру / referencia académica o lexicográfica gratuita",
+      "use": "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences."
+    },
+    {
+      "title": "Несмотря на то(,) что",
+      "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/nesmotrya-na-to-chto",
+      "provider": "Грамота.ру / referencia académica o lexicográfica gratuita",
+      "use": "Supports conjunction status and clause attachment, not all concessive-pragmatic analysis or Spanish gloss alternatives."
+    }
+  ],
+  "sourceChecks": [
+    {
+      "title": "Сложное предложение",
+      "author": null,
+      "year": null,
+      "sourceType": "Diccionario o referencia gramatical gratuita",
+      "url": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+      "locator": "Section “Сложноподчиненные предложения с придаточными условия” (если); section on purpose clauses (чтобы/для того чтобы); list of compound subordinating conjunctions including несмотря на то что.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Supports classification of если-clauses as conditions, для того чтобы clauses as purpose, and несмотря на то что as a compound subordinating conjunction. It does not by itself validate all semantic-pragmatic explanations or the entry’s example sentences."
+    },
+    {
+      "title": "Несмотря на то(,) что",
+      "author": null,
+      "year": null,
+      "sourceType": "Diccionario o referencia gramatical gratuita",
+      "url": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/nesmotrya-na-to-chto",
+      "locator": "Punctuation reference entry “Несмотря на то(,) что”: identifies a conjunction attaching subordinate clauses; punctuation discussion and example.",
+      "assessment": "LIMITED_SUPPORT",
+      "scopeNote": "Supports conjunction status and clause attachment, not all concessive-pragmatic analysis or Spanish gloss alternatives."
+    }
+  ],
+  "sourceReferences": [
+    {
+      "title": "Сложное предложение",
+      "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie",
+      "authorityTier": "B",
+      "apa7": "Грамота.ру. (s. f.). *Сложное предложение*. https://gramota.ru/biblioteka/spravochniki/russkij-yazyk-kratkiy-teoreticheskiy-kurs-dlya-shkolnikov/slozhnoe-predlozhenie"
+    },
+    {
+      "title": "Несмотря на то(,) что",
+      "canonicalUrl": "https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/nesmotrya-na-to-chto",
+      "authorityTier": "B",
+      "apa7": "Грамота.ру. (s. f.). *Несмотря на то(,) что*. https://gramota.ru/biblioteka/spravochniki/spravochnik-po-punktuatsii/nesmotrya-na-to-chto"
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "sourceAudit": {
+    "method": "Seguimiento de fuente primaria pública gratuita; limitaciones de acceso y alcance registradas.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "La gramática respalda la clasificación principal de la subordinada, pero no cubre cada matiz pragmático, alternancia aspectual, ejemplo ni equivalencia de traducción. Bloqueo previo persistente: La referencia identifica несмотря на то что como conjunción subordinante y explica puntuación; no verifica por sí sola la explicación de expectativa concesiva, la simetría de hechos, contraste con хотя ni los matices de registro y todos los ejemplos."
+  },
+  "originalArticleSha256": "a1b3fbce4778bf7a604904717447dc007d7981a1b22f53caff379d3bc38a8ec9",
+  "verifiedArticleSha256": "a1b3fbce4778bf7a604904717447dc007d7981a1b22f53caff379d3bc38a8ec9",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "priorReviewObserved": {
+    "path": "docs/r33-local/reviews/MLS-V09-0774-revision.json",
+    "sha256": "d2b1455cea4e3eebca6417589d27470cfd59da8a0acc3baecbe0ed4fae7d2d25",
+    "status": "PENDING_SOURCE_SUPPORT"
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 3,
+    "label": "alta",
+    "reason": "La gramática respalda la clasificación principal de la subordinada, pero no cubre cada matiz pragmático, alternancia aspectual, ejemplo ni equivalencia de traducción. Bloqueo previo persistente: La referencia identifica несмотря на то что como conjunción subordinante y explica puntuación; no verifica por sí sola la explicación de expectativa concesiva, la simetría de hechos, contraste con хотя ni los matices de registro y todos los ejemplos.",
+    "nextStep": "Localizar una gramática académica abierta o corpus con un localizador directo para las afirmaciones aún no respaldadas de MLS-V09-0774; revisar ejemplos y traducciones uno por uno, corregir el artículo solo si el respaldo delimita el sentido, crear Evidence y ejecutar assessEntry con el hash vigente."
+  },
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0774/followup-2-d2b1455cea4e.json",
+    "sha256": "d2b1455cea4e3eebca6417589d27470cfd59da8a0acc3baecbe0ed4fae7d2d25",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

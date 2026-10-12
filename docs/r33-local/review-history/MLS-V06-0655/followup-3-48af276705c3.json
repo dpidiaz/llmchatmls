@@ -1,0 +1,66 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0655",
+  "language": "japones",
+  "reviewedAt": "2026-10-11T01:29:48.952Z",
+  "reviewer": "R33 local semantic source review",
+  "articlePath": "content/japones/MLS-V06-0655.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento R33: relectura del estado previo, cotejo de afirmaciones con fuentes primarias gratuitas y localizadores; se conservó PENDING cuando la evidencia no cubre cada claim y ejemplo.",
+    "findings": [
+      "TUFS, bloque de partículas finales, líneas 202–225, presenta 来たのは山田君さ y reglas de conexión (sa excluye だ); no desarrolla la variedad de énfasis/registro atribuida en la ficha."
+    ],
+    "limitations": [
+      "No existe aún Evidence canónica con enlaces por afirmación y no se ha completado la revisión semántica de cada ejemplo; por tanto assessEntry no puede aprobar una certificación R33."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS solo ofrece un ejemplo de さ y reglas de conexión; no acredita por sí solo los matices discursivos específicos de la ficha.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html 終助詞 さ 意味",
+          "portal": "TUFS Language Modules search",
+          "outcome": "Se encontró ejemplo y regla morfosintáctica, no análisis exhaustivo del matiz de さ."
+        },
+        {
+          "query": "site:jstage.jst.go.jp 終助詞 さ 意味 機能 日本語",
+          "portal": "J-STAGE search",
+          "outcome": "Se localizó estudio académico pertinente a funciones históricas/modernas, pero no un pasaje abierto que respalde todos los claims."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "東京外国語大学. (s. f.). 終助詞：解説.",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+          "locator": "líneas 202–225",
+          "finding": "Ejemplifica さ y regla de conexión; no determina todos los matices de la ficha."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré retirar afirmaciones de registro o énfasis que TUFS no formula; hace falta fuente pragmática con ejemplos contextualizados.",
+      "canonicalCheck": "SHA-256 actual de articleMarkdown: 44f29b57291126e70b0671a7cd82e4bf6bcf26391a994582bee5cde26eef5150. Se comprobó que coincide con el baseArticleHash del lease. No se creó Evidence ni se cambió el índice canónico; mantener PENDING_SOURCE_SUPPORT hasta enlazar claims/localizadores y superar assessEntry.",
+      "nextConcreteStep": "Recuperar la fuente primaria indicada, cotejar individualmente cada afirmación y ejemplo, corregir el alcance cuando corresponda, añadir APA 7 y Evidence con localizadores por claim y volver a evaluar el hash vigente con assessEntry."
+    }
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS solo ofrece un ejemplo de さ y reglas de conexión; no acredita por sí solo los matices discursivos específicos de la ficha.",
+    "nextStep": "Aportar un pasaje primario accesible para cada afirmación pendiente; después actualizar el artículo y la Evidence claim-level antes de repetir la evaluación canónica."
+  },
+  "originalArticleSha256": "44f29b57291126e70b0671a7cd82e4bf6bcf26391a994582bee5cde26eef5150",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0655/followup-2-0ca3bbc87e16.json",
+    "sha256": "0ca3bbc87e16f36e42e0e062746770a94464d185ca668a680a70a3ebfe95224f",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 3
+}

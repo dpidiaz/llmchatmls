@@ -1,0 +1,121 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0737",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T20:52:38.047Z",
+  "reviewer": "R33 local semantic source review",
+  "assignmentId": "R33A-1791665209082-ee7dec",
+  "articlePath": "content/japones/MLS-V06-0737.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 5,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7": "小学館. (n.d.). スタイルとは（東京外国語大学言語モジュール）. コトバンク. https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson47/step1/explanation/089.html",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson47/step1/explanation/089.html",
+      "locator": "Párrafos 1–4: define estilo y 普通体／丁寧体, formas y contextos de uso.",
+      "supports": "Respalda la descripción general del estilo llano, pero no todas las afirmaciones sociolingüísticas y ejemplos de la entrada."
+    },
+    {
+      "apa7": "小学館. (n.d.). 丁寧体（東京外国語大学言語モジュール）. コトバンク. https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson48/step1/explanation/091.html",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson48/step1/explanation/091.html",
+      "locator": "Párrafos 21–35; formas corteses, modificación nominal y continuidad de estilo.",
+      "supports": "Documenta paradigmas y excepciones de mezcla de registros."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Revisión incremental de esta ronda: se cotejaron fuentes primarias gratuitas y pasajes exactos; la cobertura parcial no se convierte en certificación.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33: nueva búsqueda y cotejo de fuente primaria; revisión previa queda preservada en review-history al completar el lease.",
+    "findings": [
+      "La ficha contrasta 普通体 con です・ます体 y presenta formas llana y cortés por tipo de predicado.",
+      "Falta referencia gramatical para el paradigma, las condiciones de estilo y las generalizaciones sobre contextos de uso.",
+      "Seguimiento de fuentes primarias: se buscó material gramatical institucional gratuito para la construcción y se cotejó el artículo vigente; no se obtuvo una fuente primaria abierta con localizador suficiente para respaldar todas sus generalizaciones y ejemplos.",
+      "Revisión nueva: se amplió la búsqueda con consultas diferentes en portales lexicográficos/institucionales y se inspeccionaron los pasajes indicados en primarySourcesInspected.",
+      "スタイルとは（東京外国語大学言語モジュール）: Respalda la descripción general del estilo llano, pero no todas las afirmaciones sociolingüísticas y ejemplos de la entrada.",
+      "丁寧体（東京外国語大学言語モジュール）: Documenta paradigmas y excepciones de mezcla de registros."
+    ],
+    "limitations": [
+      "La cobertura de fuentes no alcanza todas las afirmaciones materiales y ejemplos; falta cotejo con localizadores para completar validación. No se creó Evidence canónica.",
+      "No se identificó una fuente primaria con localizadores claim por claim; el artículo no se editó y no se creó Evidence canónica.",
+      "La búsqueda adicional respalda algunos puntos, pero no aporta localizadores para todas las afirmaciones materiales y ejemplos. No se editó el contenido, no se generó Evidence canónica y no se ejecutó assessEntry exitosamente; por eso se conserva PENDING_SOURCE_SUPPORT."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "TUFS define 普通体 y sus formas; falta cotejar las generalizaciones contextuales y cada ejemplo de esta entrada con la versión vigente.",
+      "searches": [
+        {
+          "query": "site:coelang.tufs.ac.jp/mt/ja/gmod 普通体 丁寧体 から ので けど",
+          "portal": "Módulo gramatical de Tokyo University of Foreign Studies",
+          "outcome": "Se abrió explicación de 丁寧体 y estilo; cubre combinaciones y contraste de registro, con limitaciones por conector."
+        },
+        {
+          "query": "site:irodori.jpf.go.jp/assets/data/Grammar_all.pdf 普通形 から ので けど",
+          "portal": "Repositorio de materiales gramaticales de Japan Foundation / Irodori",
+          "outcome": "Localicé el PDF de gramática como segunda vía; no sustituye el cotejo del patrón preciso para todos los ejemplos de la entrada."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "スタイルとは（東京外国語大学言語モジュール）",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson47/step1/explanation/089.html",
+          "locator": "Párrafos 1–4: define estilo y 普通体／丁寧体, formas y contextos de uso.",
+          "finding": "Respalda la descripción general del estilo llano, pero no todas las afirmaciones sociolingüísticas y ejemplos de la entrada."
+        },
+        {
+          "title": "丁寧体（東京外国語大学言語モジュール）",
+          "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/courses/c02/lesson48/step1/explanation/091.html",
+          "locator": "Párrafos 21–35; formas corteses, modificación nominal y continuidad de estilo.",
+          "finding": "Documenta paradigmas y excepciones de mezcla de registros."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró acotar el artículo a lo directamente documentado por las fuentes localizadas; eso no resolvería tufs define 普通体 y sus formas; falta cotejar las generalizaciones contextuales y cada ejemplo de esta entrada con la versión vigente. sin cotejar los ejemplos y afirmaciones restantes, así que no se alteró el artículo en esta ronda.",
+      "canonicalCheck": "Se calculó SHA-256 vigente de articleMarkdown (78632e88606675d68d9fb1e65d1783052f67d6358e74937d9baf8a0d45b6a8d0) y se comparó con la Evidence/índice local; no hay Evidence de esta entrada que permita assessEntry exitoso ni una actualización canónica a VERIFIED. La validación canónica completa sigue pendiente.",
+      "nextConcreteStep": "Vincular cada paradigma y ejemplo del artículo con los apartados 普通体 y 丁寧体 de TUFS; acotar cualquier afirmación contextual más amplia."
+    }
+  },
+  "originalArticleSha256": "78632e88606675d68d9fb1e65d1783052f67d6358e74937d9baf8a0d45b6a8d0",
+  "backupComparison": {
+    "database": "C:/Users/Battlestation-Josu/llmchatmls/tools/r33-local/workspace/mls.sqlite",
+    "access": "node:sqlite readOnly=true",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-19T21:24:40.991Z",
+    "canonicalGeneratedAt": "2026-09-19T21:24:40.991Z",
+    "backupArticleSha256": "78632e88606675d68d9fb1e65d1783052f67d6358e74937d9baf8a0d45b6a8d0",
+    "canonicalArticleSha256": "78632e88606675d68d9fb1e65d1783052f67d6358e74937d9baf8a0d45b6a8d0",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "verifiedArticleSha256": "78632e88606675d68d9fb1e65d1783052f67d6358e74937d9baf8a0d45b6a8d0",
+  "followupRound": 2,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V06-0737/followup-1-2daa2cb13411.json",
+    "sha256": "2daa2cb13411fd6d6ac5ac3a29c6a1b5a25aed33978a3006c4b9eff159d52703",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 2,
+    "label": "media",
+    "reason": "TUFS define 普通体 y sus formas; falta cotejar las generalizaciones contextuales y cada ejemplo de esta entrada con la versión vigente.",
+    "nextStep": "Vincular cada paradigma y ejemplo del artículo con los apartados 普通体 y 丁寧体 de TUFS; acotar cualquier afirmación contextual más amplia."
+  }
+}

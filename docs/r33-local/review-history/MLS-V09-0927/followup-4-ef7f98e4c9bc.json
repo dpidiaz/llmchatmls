@@ -1,0 +1,126 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0927",
+  "language": "ruso",
+  "reviewedAt": "2026-10-11T11:05:06.621Z",
+  "reviewer": "R33 local source-follow-up review",
+  "workerId": "R33W-local-20261011110420-5c0d49",
+  "assignmentId": "R33A-1791716660577-69f082",
+  "phase": "source-followup",
+  "articlePath": "content/ruso/MLS-V09-0927.json",
+  "articleGeneratedAt": "2026-09-19T10:12:04.400Z",
+  "articleSha256": "2d22d38b299d485fdb048a68c1effce76dd6af53255c23d988e3ca2b3d262029",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-to-claim con dos búsquedas gratuitas distintas, revisión de las fuentes previas, inspección de nuevos pasajes públicos y hash vigente.",
+    "findings": [
+      "Hash vigente coincide. Ну results classify particle/interjection and show some functions, but frequency, translations, prosody and examples are not fully mapped to inspected dictionary locators.",
+      "Falta cobertura semántica con fuentes primarias y localizadores exactos para cada afirmación material; no hay Evidence canónica ni assessEntry exitoso.",
+      "Hash vigente de articleMarkdown: 2d22d38b299d485fdb048a68c1effce76dd6af53255c23d988e3ca2b3d262029.",
+      "El nuevo cotejo confirma respaldo parcial en los localizadores registrados, pero no cubre todas las afirmaciones de Partículas ну."
+    ],
+    "limitations": [
+      "Cobertura por afirmación incompleta; extractos de resultados no se consideran prueba suficiente.",
+      "Varias páginas de Gramota.ru devolvieron 403 al abrirse.",
+      "No se creó Evidence canónica y no se declaró VERIFIED.",
+      "No existe Evidence canónica completa ni assessEntry exitoso; no se marca VERIFIED."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "Cobertura incompleta: Falta cobertura semántica con fuentes primarias y localizadores exactos para cada afirmación material; no hay Evidence canónica ni assessEntry exitoso. Falta un localizador directo para cada afirmación y ejemplo.",
+      "searches": [
+        {
+          "query": "site:gramota.ru словарь частица ну вот типа дескать мол пусть пускай да здравствует",
+          "portal": "Gramota.ru",
+          "outcome": "Dictionary/reference results provide some lexical meanings; they do not resolve all frequency, prosody, pragmatic labels or constructed examples."
+        },
+        {
+          "query": "site:gramota.ru \"дескать\" словарь значение частица; \"мол\" частица словарь; \"типа\" разговорная частица",
+          "portal": "Gramota.ru",
+          "outcome": "Distinct targeted queries support selected reportative definitions; other particles and pragmatic claims remain partial."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "НУ",
+          "url": "https://gramota.ru/poisk?dicts%5B%5D=42&mode=slovari&query=%D0%BD%D1%83",
+          "locator": "Большой толковый словарь русского языка, entry “ну”: several interjection and particle functions/examples; no prosodic or frequency proof.",
+          "finding": "Fuente pública consultada; respaldo parcial y limitado al localizador descrito."
+        }
+      ],
+      "contentCorrectionConsidered": "Se consideró limitar las explicaciones a los sentidos y registros demostrados, quitando recomendaciones o ejemplos sin apoyo. No se modificó el texto antes de completar cotejo de cada frase.",
+      "canonicalCheck": "SHA-256 articleMarkdown=2d22d38b299d485fdb048a68c1effce76dd6af53255c23d988e3ca2b3d262029. Sin Evidence completa; assessEntry no ejecutado; conservar PENDING_SOURCE_SUPPORT.",
+      "nextConcreteStep": "Completar localizadores claim-level de Partículas ну con fuente primaria específica, revisar los ejemplos y corregir el alcance antes de Evidence/assessEntry."
+    },
+    "consultedSources": [
+      {
+        "title": "НУ",
+        "url": "https://gramota.ru/poisk?dicts%5B%5D=42&mode=slovari&query=%D0%BD%D1%83",
+        "locator": "Большой толковый словарь русского языка, entry “ну”: several interjection and particle functions/examples; no prosodic or frequency proof.",
+        "finding": "Fuente pública consultada; respaldo parcial y limitado al localizador descrito."
+      }
+    ]
+  },
+  "consultedSources": [],
+  "sourceChecks": [],
+  "sourceReferences": [
+    {
+      "title": "НУ",
+      "url": "https://gramota.ru/poisk?dicts%5B%5D=42&mode=slovari&query=%D0%BD%D1%83",
+      "locator": "Большой толковый словарь русского языка, entry “ну”: several interjection and particle functions/examples; no prosodic or frequency proof.",
+      "finding": "Fuente pública consultada; respaldo parcial y limitado al localizador descrito."
+    }
+  ],
+  "canonicalEvidenceStatus": "NOT_CREATED",
+  "sourceAudit": {
+    "method": "Free public sources; search excerpts kept distinct from inspected passages.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "coverageComplete": false,
+    "claimLevelCoverage": false,
+    "unverifiedMaterialClaims": "Ну results classify particle/interjection and show some functions, but frequency, translations, prosody and examples are not fully mapped to inspected dictionary locators."
+  },
+  "originalArticleSha256": "2d22d38b299d485fdb048a68c1effce76dd6af53255c23d988e3ca2b3d262029",
+  "verifiedArticleSha256": "2d22d38b299d485fdb048a68c1effce76dd6af53255c23d988e3ca2b3d262029",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0927/followup-3-3149f78fa5af.json",
+    "sha256": "3149f78fa5afd60da1a3079de9b0c33985ab5eef572a2959e85da394041984e3",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "followupRound": 4,
+  "remainingWorkAssessment": {
+    "scale": "R33-FOLLOWUP-DIFFICULTY-1-4",
+    "level": 4,
+    "label": "muy alta",
+    "reason": "Cobertura incompleta: Falta cobertura semántica con fuentes primarias y localizadores exactos para cada afirmación material; no hay Evidence canónica ni assessEntry exitoso. Falta un localizador directo para cada afirmación y ejemplo.",
+    "nextStep": "Localizar fuente primaria directa para cada claim sin respaldo de Partículas ну y repetir el cotejo."
+  },
+  "priorReview": {
+    "path": "docs/r33-local/reviews/MLS-V09-0927-revision.json",
+    "sha256": "3149f78fa5afd60da1a3079de9b0c33985ab5eef572a2959e85da394041984e3",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791716660577-69f082",
+    "semanticFindings": [
+      "Hash vigente coincide. Ну results classify particle/interjection and show some functions, but frequency, translations, prosody and examples are not fully mapped to inspected dictionary locators.",
+      "Falta cobertura semántica con fuentes primarias y localizadores exactos para cada afirmación material; no hay Evidence canónica ni assessEntry exitoso.",
+      "Hash vigente de articleMarkdown: 2d22d38b299d485fdb048a68c1effce76dd6af53255c23d988e3ca2b3d262029.",
+      "El nuevo cotejo confirma respaldo parcial en los localizadores registrados, pero no cubre todas las afirmaciones de Partículas ну."
+    ],
+    "previousPriorReview": null
+  },
+  "preflight": {
+    "ok": false,
+    "reason": "Falta Evidence canónica completa; assessEntry no ejecutado."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0870",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T17:25:05.565Z",
+  "reviewer": "R33 local semantic source follow-up (R33W-local-20261010171810-62905b)",
+  "assignmentId": "R33A-1791652690371-b069b3",
+  "phase": "source-followup",
+  "followupRound": 1,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0870.json",
+  "status": "PENDING_CONFLICT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2009). Nueva gramática de la lengua española. Espasa. NGLE §4.12k, entrada «Roto: de romper»",
+      "url": "https://www.rae.es/gram%C3%A1tica/morfolog%C3%ADa/verbos-irregulares-iv-pret%C3%A9ritos-fuertes-y-participios-irregulares",
+      "locator": "NGLE §4.12k, entrada «Roto: de romper»",
+      "observation": "Indica que rompido fue histórico y hoy está perdido en estándar, aunque se registra en habla popular de México y parte de Centroamérica, Antillas y área andina."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Cotejo manual de fuente primaria y localizador frente al alcance de las afirmaciones. Se registra evidencia parcial y sus límites; no se infiere cobertura total.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No ejecutado: la cobertura semántica sigue incompleta.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-15T08:59:55.640Z",
+      "canonicalGeneratedAt": "2026-09-15T08:59:55.640Z",
+      "backupArticleSha256": "f061a41b4cba68b1304930aa5e2e57f9800a9b05f6681b57f9f2e198529e0c1b",
+      "canonicalArticleSha256": "9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449",
+      "articleMatches": false,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento de la revisión previa; comprobación del localizador de fuente primaria y delimitación de afirmaciones no cubiertas.",
+    "findings": [
+      "La fuente contradice una posible generalización de que rompido no existe: está fuera del estándar, pero documentado en variedades populares americanas. Deben preservarse ambas partes y localizar ejemplos de la ficha. PENDING_SOURCE_SUPPORT. Existe discrepancia textual entre el respaldo SQL y la ficha canónica de la misma fecha de generación; se conserva como conflicto versionado sin sobrescribir el artículo."
+    ],
+    "limitations": [
+      "Faltan vínculos fuente-afirmación y localizadores precisos para cubrir todas las afirmaciones materiales y los ejemplos.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; por tanto, no se declara VERIFIED.",
+      "La comparación del respaldo halló distinto SHA-256 del texto canónico aunque título/fecha coinciden; hace falta conciliar explícitamente esa diferencia."
+    ]
+  },
+  "originalArticleSha256": "9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-15T08:59:55.640Z",
+    "canonicalGeneratedAt": "2026-09-15T08:59:55.640Z",
+    "backupArticleSha256": "f061a41b4cba68b1304930aa5e2e57f9800a9b05f6681b57f9f2e198529e0c1b",
+    "canonicalArticleSha256": "9d49df6523c29d9e3901e1935ff24de61d230720758d1153282a584e4e12b449",
+    "articleMatches": false,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0870/pre-coordinator.json",
+    "sha256": "251dea4dddfef51ed865e596bf99864a2fb18507cc49f731acbccfb1a96dca52",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  }
+}

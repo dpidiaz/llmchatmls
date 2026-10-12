@@ -1,0 +1,94 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V09-0155",
+  "language": "ruso",
+  "reviewedAt": "2026-10-10T17:35:02.633Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010173318-f88f45",
+  "assignmentId": "R33A-1791653598676-e113c6",
+  "articlePath": "content/ruso/MLS-V09-0155.json",
+  "articleGeneratedAt": "2026-09-19T09:26:20.839Z",
+  "articleSha256": "de8919d47337ac520d129b4d7e768085e26b2d98b2f39256b22fef6f7b16fd19",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 2,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Seguimiento source-followup: cotejo de claims con pasajes/localizadores de Beginning Russian Grammar (Cornell University), hash/version SQL abierto read-only y revisión del alcance. Fuentes parciales no se elevan a VERIFIED.",
+    "findings": [
+      "La referencia consultada no da localizador directo para до/после; el claim queda sin respaldo específico.",
+      "Se leyó la ficha «До/после + genitivo» (content/ruso/MLS-V09-0155.json; sha256 de8919d47337ac520d129b4d7e768085e26b2d98b2f39256b22fef6f7b16fd19). La ficha atribuye genitivo a до y после y diferencia el valor de límite de до de la posterioridad de после. Los ejemplos до работы, после урока, до вечера y до встречи requieren cotejo de régimen y traducción en contexto."
+    ],
+    "limitations": [
+      "La búsqueda en Gramota recuperó fuentes para locativos y pronombres, pero no una referencia directa para el régimen de estas preposiciones ni el matiz contextual descrito.",
+      "No se creó Evidence canónica ni se ejecutó assessEntry exitoso; falta cobertura fuente-afirmación completa."
+    ]
+  },
+  "claimAssessments": [
+    {
+      "claim": "до/после + genitivo",
+      "result": "PARTIAL",
+      "sources": [
+        {
+          "title": "Use Genitive after certain prepositions",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_b_2_3.htm",
+          "locator": "lines 0–5: у/от/из + genitive examples; does not list all target prepositions"
+        }
+      ],
+      "rationale": "La referencia consultada no da localizador directo para до/после; el claim queda sin respaldo específico."
+    },
+    {
+      "claim": "Los ejemplos, restricciones, excepciones y generalizaciones del artículo siguen la regla citada.",
+      "result": "NOT_FULLY_VALIDATED",
+      "sources": [
+        {
+          "title": "Use Genitive after certain prepositions",
+          "url": "https://russian.cornell.edu/grammar/html/gr04_b_2_3.htm",
+          "locator": "lines 0–5: у/от/из + genitive examples; does not list all target prepositions"
+        }
+      ],
+      "rationale": "La búsqueda en Gramota recuperó fuentes para locativos y pronombres, pero no una referencia directa para el régimen de estas preposiciones ni el matiz contextual descrito."
+    }
+  ],
+  "consultedSources": [
+    {
+      "author": "Leed, R. L.; Nakhimovsky, A. D.; Nakhimovsky, A. S.",
+      "year": 1991,
+      "title": "Use Genitive after certain prepositions",
+      "publisher": "Cornell University, Beginning Russian Grammar",
+      "url": "https://russian.cornell.edu/grammar/html/gr04_b_2_3.htm",
+      "locator": "lines 0–5: у/от/из + genitive examples; does not list all target prepositions",
+      "apa7": "Leed, R. L., Nakhimovsky, A. D., & Nakhimovsky, A. S. (1991). Use Genitive after certain prepositions. Beginning Russian Grammar. Cornell University. https://russian.cornell.edu/grammar/html/gr04_b_2_3.htm"
+    }
+  ],
+  "backupComparison": {
+    "source": "tools/r33-local/workspace/mls.sqlite: wiki_articles; node:sqlite readOnly",
+    "mode": "read-only",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "canonicalGeneratedAt": "2026-09-19T09:26:20.839Z",
+    "backupGeneratedAt": "2026-09-19T09:26:20.839Z",
+    "canonicalArticleSha256": "de8919d47337ac520d129b4d7e768085e26b2d98b2f39256b22fef6f7b16fd19",
+    "backupArticleSha256": "de8919d47337ac520d129b4d7e768085e26b2d98b2f39256b22fef6f7b16fd19",
+    "articleHashMatches": true,
+    "generatedAtMatches": true,
+    "canonicalEvidenceIndexEntry": false
+  },
+  "originalArticleSha256": "de8919d47337ac520d129b4d7e768085e26b2d98b2f39256b22fef6f7b16fd19",
+  "followupRound": 1,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V09-0155/pre-coordinator.json",
+    "sha256": "1e8739f8c8f37cb10253c87a00c36e74c4786a688208f03e9f900d0c3697afe7",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}

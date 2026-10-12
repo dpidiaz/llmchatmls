@@ -1,0 +1,137 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V10-0894",
+  "language": "espanol-guatemala",
+  "reviewedAt": "2026-10-10T19:19:45.134Z",
+  "reviewer": "R33 local source follow-up (R33W-local-20261010190140-0f05a0)",
+  "assignmentId": "R33A-1791658900019-9ef266",
+  "phase": "source-followup",
+  "followupRound": 2,
+  "articlePath": "content/espanol-guatemala/MLS-V10-0894.json",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 1,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "sourceReferences": [
+    {
+      "apa7Candidate": "Real Academia Española y Asociación de Academias de la Lengua Española. (2010). Ortografía de la lengua española. Espasa.",
+      "url": "https://www.rae.es/ortograf%C3%ADa/los-dos-puntos",
+      "locator": "§3.4.4, uso anunciativo y cita",
+      "observation": "Ortografía RAE respalda aspectos de comillas/dos puntos y el Plan Curricular describe estilo directo/indirecto; no se encontró respaldo completo para la integración sintáctica, regímenes verbales y ejemplos académicos del artículo."
+    },
+    {
+      "apa7Candidate": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+      "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_c1-c2.htm",
+      "locator": "§1.5, procedimientos de cita (estilo directo/indirecto)",
+      "observation": "Ortografía RAE respalda aspectos de comillas/dos puntos y el Plan Curricular describe estilo directo/indirecto; no se encontró respaldo completo para la integración sintáctica, regímenes verbales y ejemplos académicos del artículo."
+    }
+  ],
+  "sourceAudit": {
+    "method": "Búsquedas gratuitas en portales académicos distintos; inspección directa de pasajes primarios; contraste con el hash/índice canónico. Se conserva el resultado como parcial, sin atribuir respaldo no observado.",
+    "apa7ReferencesAreCandidates": true,
+    "canonicalEvidenceCreated": false,
+    "assessEntry": "No aprobado: la Evidence canónica no existe y el cotejo de todas las afirmaciones materiales está incompleto.",
+    "backupComparison": {
+      "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+      "matchedFields": [
+        "code",
+        "language",
+        "title",
+        "generated_at",
+        "article_markdown SHA-256"
+      ],
+      "backupGeneratedAt": "2026-09-16T08:33:54.907Z",
+      "canonicalGeneratedAt": "2026-09-16T08:33:54.907Z",
+      "backupArticleSha256": "beb0c6ca3fd89aa9b335e3d460e44372b2951bfe95825924c2f9eb2caedce5b3",
+      "canonicalArticleSha256": "beb0c6ca3fd89aa9b335e3d460e44372b2951bfe95825924c2f9eb2caedce5b3",
+      "articleMatches": true,
+      "versionMatches": true
+    }
+  },
+  "semanticReview": {
+    "method": "Seguimiento R33 por afirmación; lectura de la revisión previa y revisión de las fuentes primarias/localizadores disponibles.",
+    "findings": [
+      "Ortografía RAE respalda aspectos de comillas/dos puntos y el Plan Curricular describe estilo directo/indirecto; no se encontró respaldo completo para la integración sintáctica, regímenes verbales y ejemplos académicos del artículo."
+    ],
+    "limitations": [
+      "La evidencia consultada es fragmentaria y no cubre las combinaciones de cita que el artículo aconseja.",
+      "No hay Evidence canónica para este código; no se ejecutó una evaluación exitosa ni se certificó."
+    ],
+    "exceptionalDisposition": {
+      "blockingCriterion": "La evidencia consultada es fragmentaria y no cubre las combinaciones de cita que el artículo aconseja.",
+      "searches": [
+        {
+          "query": "site:rae.es/ortografía citas textuales integradas oración dos puntos comillas",
+          "portal": "RAE/ASALE search",
+          "outcome": "La fuente Ortografía confirma comillas/dos puntos para citas; no establece toda la integración sintáctica descrita."
+        },
+        {
+          "query": "site:rae.es Plan Curricular procedimientos de cita estilo directo estilo indirecto verbos anunciadores",
+          "portal": "RAE/ASALE search",
+          "outcome": "El Plan Curricular da ejemplos de estilo directo/indirecto; el consejo de cita académica sigue sin trazabilidad por afirmación."
+        }
+      ],
+      "primarySourcesInspected": [
+        {
+          "title": "Real Academia Española y Asociación de Academias de la Lengua Española. (2010). Ortografía de la lengua española. Espasa.",
+          "url": "https://www.rae.es/ortograf%C3%ADa/los-dos-puntos",
+          "locator": "§3.4.4, uso anunciativo y cita",
+          "finding": "Ortografía RAE respalda aspectos de comillas/dos puntos y el Plan Curricular describe estilo directo/indirecto; no se encontró respaldo completo para la integración sintáctica, regímenes verbales y ejemplos académicos del artículo."
+        },
+        {
+          "title": "Instituto Cervantes. (s. f.). Tácticas y estrategias pragmáticas: Inventario C1-C2. Plan curricular del Instituto Cervantes.",
+          "url": "https://cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/06_tacticas_pragmaticas_inventario_c1-c2.htm",
+          "locator": "§1.5, procedimientos de cita (estilo directo/indirecto)",
+          "finding": "Ortografía RAE respalda aspectos de comillas/dos puntos y el Plan Curricular describe estilo directo/indirecto; no se encontró respaldo completo para la integración sintáctica, regímenes verbales y ejemplos académicos del artículo."
+        }
+      ],
+      "contentCorrectionConsidered": "Consideré separar puntuación normativa de consejos de redacción/citación académica y quitar las generalizaciones sin fuente. No se editó por la restricción coordinador para PENDING.",
+      "canonicalCheck": "Se comprobó el hash vigente del artículo (beb0c6ca3fd89aa9b335e3d460e44372b2951bfe95825924c2f9eb2caedce5b3); el archivo Evidence MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0894.json no existe y el índice verified.json no incluye MLS-V10-0894. assessEntry no se puede aprobar sin Evidence; por tanto, canonicalCheck=INCOMPLETE, no VERIFIED.",
+      "nextConcreteStep": "Buscar guías universitarias gratuitas/oficiales de escritura y cotejar cada construcción con NGLE/Ortografía."
+    }
+  },
+  "originalArticleSha256": "beb0c6ca3fd89aa9b335e3d460e44372b2951bfe95825924c2f9eb2caedce5b3",
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite; node:sqlite readOnly",
+    "matchedFields": [
+      "code",
+      "language",
+      "title",
+      "generated_at",
+      "article_markdown SHA-256"
+    ],
+    "backupGeneratedAt": "2026-09-16T08:33:54.907Z",
+    "canonicalGeneratedAt": "2026-09-16T08:33:54.907Z",
+    "backupArticleSha256": "beb0c6ca3fd89aa9b335e3d460e44372b2951bfe95825924c2f9eb2caedce5b3",
+    "canonicalArticleSha256": "beb0c6ca3fd89aa9b335e3d460e44372b2951bfe95825924c2f9eb2caedce5b3",
+    "articleMatches": true,
+    "versionMatches": true
+  },
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0,
+  "apiCalls": 0,
+  "pushes": 0,
+  "merges": 0,
+  "deployments": 0,
+  "supersedesReview": {
+    "path": "docs/r33-local/review-history/MLS-V10-0894/followup-1-52e594df9af9.json",
+    "sha256": "52e594df9af93ee65717ec3d96cd7f78f9a6103e7c98a939735ded48f3cf6e95",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": null
+  },
+  "priorReviewReference": {
+    "path": "docs/r33-local/reviews/MLS-V10-0894-revision.json",
+    "sha256": "52e594df9af93ee65717ec3d96cd7f78f9a6103e7c98a939735ded48f3cf6e95",
+    "status": "PENDING_SOURCE_SUPPORT",
+    "assignmentId": "R33A-1791652690371-b069b3"
+  },
+  "canonicalCheck": {
+    "articleHash": "beb0c6ca3fd89aa9b335e3d460e44372b2951bfe95825924c2f9eb2caedce5b3",
+    "evidencePath": "MLS R32 EDITORIAL/evidence git/entries/espanol-guatemala/MLS-V10-0894.json",
+    "evidenceExists": false,
+    "verifiedIndexContainsCode": false,
+    "assessEntry": "NOT_APPROVED: no canonical Evidence entry exists."
+  }
+}

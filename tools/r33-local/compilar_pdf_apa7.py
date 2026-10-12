@@ -64,14 +64,28 @@ def register_fonts():
     arial = font_dir / "arial.ttf"
     arial_bold = font_dir / "arialbd.ttf"
     arial_italic = font_dir / "ariali.ttf"
+    cjk_fonts = {
+        "zh-TW": ("MLSChinese", font_dir / "msjh.ttc"),
+        "ja": ("MLSJapanese", font_dir / "YuGothR.ttc"),
+        "ko": ("MLSKorean", font_dir / "malgun.ttf"),
+    }
     if arial.exists() and arial_bold.exists():
         pdfmetrics.registerFont(TTFont("MLSBody", str(arial)))
         pdfmetrics.registerFont(TTFont("MLSBodyBold", str(arial_bold)))
         pdfmetrics.registerFont(TTFont("MLSBodyItalic", str(arial_italic if arial_italic.exists() else arial)))
         pdfmetrics.registerFontFamily("MLSBody", normal="MLSBody", bold="MLSBodyBold", italic="MLSBodyItalic", boldItalic="MLSBodyBold")
-        for font in ("STSong-Light", "HeiseiKakuGo-W5", "HYSMyeongJo-Medium"):
-            pdfmetrics.registerFont(UnicodeCIDFont(font))
-        return {"default": "MLSBody", "de": "MLSBody", "es": "MLSBody", "fr": "MLSBody", "en": "MLSBody", "it": "MLSBody", "pt": "MLSBody", "ru": "MLSBody", "zh-TW": "STSong-Light", "ja": "HeiseiKakuGo-W5", "ko": "HYSMyeongJo-Medium"}
+        result = {"default": "MLSBody", "de": "MLSBody", "es": "MLSBody", "fr": "MLSBody", "en": "MLSBody", "it": "MLSBody", "pt": "MLSBody", "ru": "MLSBody"}
+        cid_fallbacks = {"zh-TW": "STSong-Light", "ja": "HeiseiKakuGo-W5", "ko": "HYSMyeongJo-Medium"}
+        for language, (name, path) in cjk_fonts.items():
+            if path.exists():
+                pdfmetrics.registerFont(TTFont(name, str(path), subfontIndex=0) if path.suffix.lower() == ".ttc" else TTFont(name, str(path)))
+                pdfmetrics.registerFontFamily(name, normal=name, bold=name, italic=name, boldItalic=name)
+                result[language] = name
+            else:
+                fallback = cid_fallbacks[language]
+                pdfmetrics.registerFont(UnicodeCIDFont(fallback))
+                result[language] = fallback
+        return result
     for font in ("STSong-Light", "HeiseiKakuGo-W5", "HYSMyeongJo-Medium"):
         pdfmetrics.registerFont(UnicodeCIDFont(font))
     return {"default": "HeiseiKakuGo-W5", "de": "HeiseiKakuGo-W5", "es": "HeiseiKakuGo-W5", "fr": "HeiseiKakuGo-W5", "en": "HeiseiKakuGo-W5", "it": "HeiseiKakuGo-W5", "pt": "HeiseiKakuGo-W5", "ru": "HeiseiKakuGo-W5", "zh-TW": "STSong-Light", "ja": "HeiseiKakuGo-W5", "ko": "HYSMyeongJo-Medium"}

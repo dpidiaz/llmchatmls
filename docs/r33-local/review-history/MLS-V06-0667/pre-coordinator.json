@@ -1,0 +1,48 @@
+{
+  "schema": "MLS-R33-LOCAL-ENTRY-REVIEW-1",
+  "code": "MLS-V06-0667",
+  "language": "japones",
+  "reviewedAt": "2026-10-10T10:02:41.550Z",
+  "reviewer": "R33 local semantic source-to-claim review",
+  "workerId": "R33W-local-20261010100022-115fb1",
+  "assignmentId": "R33A-1791626422088-fd55f4",
+  "articlePath": "content/japones/MLS-V06-0667.json",
+  "articleGeneratedAt": "2026-09-19T09:15:29.182Z",
+  "articleSha256": "0c1abeff4bcd8c1ecd6683ef6661fd05e660a4c624374503a2e21235b999981f",
+  "status": "PENDING_SOURCE_SUPPORT",
+  "claimsTotal": 0,
+  "claimsVerified": 0,
+  "coverageComplete": false,
+  "citationReady": false,
+  "semanticReview": {
+    "method": "Lectura claim-level de la ficha completa, cotejo del hash y generatedAt con el respaldo SQLite abierto en modo de solo lectura, y consulta de las fuentes indicadas para cada entrada. Se conserva PENDING_SOURCE_SUPPORT cuando las fuentes consultadas no respaldan semánticamente todas las afirmaciones sustanciales.",
+    "findings": [
+      "Se leyó la ficha completa «かな duda propia» (content/japones/MLS-V06-0667.json; sha256 0c1abeff4bcd8c1ecd6683ef6661fd05e660a4c624374503a2e21235b999981f). La ficha interpreta かな como duda o reflexión propia, con ejemplos de auto-pregunta, y evita presentarla como marca exclusiva de un género. El módulo de TUFS caracteriza las partículas finales como portadoras de actitud del hablante y documenta otros usos reflexivos de か; no equivale a una verificación específica de かな."
+    ],
+    "limitations": [
+      "La fuente consultada no respalda de forma específica el valor, distribución social contemporánea o comparación estilística de かな y かしら."
+    ]
+  },
+  "consultedSources": [
+    {
+      "title": "日本語 文法 終助詞：解説",
+      "url": "https://www.coelang.tufs.ac.jp/mt/ja/gmod/contents/explanation/096.html",
+      "provider": "東京外国語大学言語モジュール",
+      "use": "Contexto general de las partículas finales y reflexión interna con か; no cubre directamente かな."
+    }
+  ],
+  "backupComparison": {
+    "database": "tools/r33-local/workspace/mls.sqlite",
+    "opened": "read-only",
+    "articleMatchesBackupHash": true,
+    "generatedAtMatchesBackup": true,
+    "articleSha256": "0c1abeff4bcd8c1ecd6683ef6661fd05e660a4c624374503a2e21235b999981f",
+    "backupSha256": "0c1abeff4bcd8c1ecd6683ef6661fd05e660a4c624374503a2e21235b999981f",
+    "articleGeneratedAt": "2026-09-19T09:15:29.182Z",
+    "backupGeneratedAt": "2026-09-19T09:15:29.182Z"
+  },
+  "originalArticleSha256": "0c1abeff4bcd8c1ecd6683ef6661fd05e660a4c624374503a2e21235b999981f",
+  "cloudflareEditorialInteractions": 0,
+  "d1Reads": 0,
+  "d1Writes": 0
+}
