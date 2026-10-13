@@ -1,6 +1,6 @@
 # SND-RU-009 — Cirílico, escritura y pronunciación
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** ruso.  
 **Dominio:** escritura / ortografía / pronunciación.  
 **Fuente ortográfica principal:** SND-SRC-0097.
@@ -115,3 +115,14 @@ No valida:
 - **Cambios lingüísticos/R33:** ninguno.
 - **Open questions bloqueantes:** ninguna.
 - **Siguiente gate:** composition-readiness.
+
+
+## 13. Composition readiness
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Versión evaluada (blob):** `b046404cf104f3cbb47406301cb0673ba2c8afac`.
+- **Handoff:** `docs/pronunciation/composition/handoffs/SND-RU-009.md`.
+- **Pronunciation Quick Layer:** `OMITTED_WITH_REASON`; la entrada trata relaciones entre escritura y pronunciación sin fijar una forma léxica concreta con respelling aprobada.
+- **Reader-facing projection:** §§1–5, fuentes relacionadas necesarias, nota editorial y navegación; tabla R33 y logs de gates quedan internos.
+- **Control:** sin cambios a claims, fuentes, localizadores, análisis o transcripciones.
