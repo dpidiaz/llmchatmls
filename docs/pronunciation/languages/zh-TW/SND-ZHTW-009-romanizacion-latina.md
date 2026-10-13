@@ -1,6 +1,6 @@
 # SND-ZHTW-009 — Romanización latina
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** romanización / consulta.
 
@@ -12,7 +12,7 @@ La búsqueda básica incluye explícitamente ambos métodos, y entradas individu
 
 Esto documenta que Hanyu Pinyin puede funcionar como una **capa latina institucional de consulta** junto a Zhuyin/Bopomofo dentro de un recurso contemporáneo del MOE taiwanés.
 
-## 2. Decisión provisional MLS-SND
+## 2. Decisión editorial MLS-SND para zh-TW
 
 Cuando una romanización latina ayude al lector, el perfil zh-TW podrá utilizar **Hanyu Pinyin**, siempre etiquetado como romanización.
 
@@ -45,11 +45,11 @@ Ministry of Education, R.O.C. (Taiwan). (2021–). *Revised Mandarin Chinese Dic
 
 La trazabilidad del antiguo ID local se conserva en `SOURCE-MAP-ROMANIZATION-WAVE-01.md`.
 
-## 6. Estado de decisión
+## 6. Alcance de la decisión editorial
 
-**PROVISIONAL_ACCEPT:** Hanyu Pinyin como romanización latina auxiliar para MLS-SND zh-TW.
+**Decisión vigente del perfil zh-TW:** Hanyu Pinyin puede utilizarse como romanización latina auxiliar cuando aporte valor de consulta.
 
-La evidencia disponible basta para sustentar ese uso como capa de consulta dentro del perfil, pero la política global de romanización del MLS sigue siendo una decisión editorial aparte.
+La evidencia disponible basta para sustentar ese uso dentro de este perfil. La política global de romanización del MLS sigue siendo una decisión editorial aparte y esta entrada no la determina.
 
 ## 7. Gate
 
@@ -83,3 +83,14 @@ Esta entrada resuelve el **mapeo mínimo de fuente** para Hanyu Pinyin en el per
 - **Claims R33:** ZHTW009-C01/C02 permanecen sin ampliación y con los mismos localizadores.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente sobre esta versión.
 
+## 11. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `17d2942e73293f8f887ebbd05274719908dc4bd9`.
+- **Resultado:** PASS_WITH_SCOPE_CLARIFICATION → `EDITORIAL_REVIEW`.
+- **Decisión local:** Hanyu Pinyin queda aceptado como romanización latina auxiliar **solo para el perfil zh-TW** cuando aporte valor de consulta.
+- **Separación de capas:** caracteres, Zhuyin, Hanyu Pinyin e IPA permanecen funcionalmente distintos; la secuencia visual sigue siendo condicional.
+- **Alcance institucional:** SND-SRC-0080 demuestra coexistencia operativa de Bopomofo y Hanyu Pinyin en el recurso MOE, no exclusividad histórica ni obligación universal.
+- **Cambio editorial:** se retira la etiqueta “provisional” de la decisión local porque la evidencia ya sustenta el uso auxiliar descrito; no se amplían claims ni se fija política global.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta versión estabilizada.
