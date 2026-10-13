@@ -1,6 +1,6 @@
 # SND-IT-008 — Grafía y pronunciación en italiano
 
-**Estado:** EDITORIAL_REVIEW  
+**Estado:** READY_FOR_COMPOSITION  
 **Idioma:** italiano.  
 **Dominio:** escritura / pronunciación.
 
@@ -68,3 +68,15 @@ Claims contrastados el 2026-10-11.
 **LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
 
 DOP continúa tratado como referencia ortoépica/lexicográfica, no como descripción exhaustiva de toda la variación regional.
+
+## 10. Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `aabb72c67bedda6d6cd817c35d787a370852141c`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** encabezado + §§1–4, §§6–8.
+- **Metadata interna excluida:** §5 (tabla R33), §9 (gate editorial) y este bloque.
+- **Fuentes y fundamento:** derivado de SND-SRC-0008; DOP se presenta como recurso ortoépico/lexicográfico, no como descripción regional exhaustiva.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — no hay una forma léxica objetivo; la entrada explica una relación de capas y usa <e> como caso institucional.
+- **Autonomía escrita:** PASS; no requiere audio.
+- **Open questions:** ninguna bloqueante para el principio grafía ≠ transcripción fonética.
+- **Regla para COMPOSITION:** no puede convertir ortografía en IPA automático, generalizar una calidad vocálica desde la letra sola ni ampliar DOP a toda la variación italiana.
