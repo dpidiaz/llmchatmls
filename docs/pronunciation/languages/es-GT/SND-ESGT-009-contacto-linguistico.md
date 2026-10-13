@@ -1,9 +1,9 @@
 # SND-ESGT-009 — Contacto lingüístico y alcance
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala; contacto K’iche’–español como caso documentado.
-**Dominio:** contacto lingüístico / sociophonética / alcance descriptivo.
+**Dominio:** contacto lingüístico / sociofonética / alcance descriptivo.
 
 ## 1. Por qué el contacto pertenece al perfil
 
@@ -75,11 +75,15 @@ La revisión preserva cuatro límites:
 
 ## 8. Relacionado con
 
-- SND-ESGT-001 — Alcance y variedades del español de Guatemala
-- SND-ESGT-004 — Consonantes y realizaciones
-- SND-FND-017 — Variación
-- SND-ESGT-010 — Ortografía y pronunciación
+- SND-ESGT-001 — Alcance y variedades del español de Guatemala.
+- SND-ESGT-004 — Consonantes y realizaciones.
+- SND-FND-017 — Variación regional, social, estilística y temporal.
+- SND-ESGT-010 — Ortografía y pronunciación.
 
-## 9. Nota editorial
+## 9. Nota editorial y gate
 
-Esta entrada no pretende catalogar todos los resultados del contacto entre español y lenguas mayas. Su objetivo inicial es establecer una política de alcance con un caso sociophonético reciente y bien delimitado.
+Esta entrada no pretende catalogar todos los resultados del contacto entre español y lenguas mayas. Su objetivo inicial es establecer una política de alcance con un caso **sociofonético** reciente y bien delimitado.
+
+**LINGUISTIC_REVIEW: PASS_WITH_CONTACT_SCOPE_WARNING. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+No se utiliza “acento maya” como categoría única nacional y no se convierte la dominancia lingüística en explicación automática de toda variación.
