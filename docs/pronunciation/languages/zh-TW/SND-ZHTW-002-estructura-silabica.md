@@ -1,6 +1,6 @@
 # SND-ZHTW-002 — Estructura silábica
 
-**Estado:** EVIDENCE_CHECKED como mapa descriptivo; análisis fonológico completo pendiente.
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa descriptivo; análisis fonológico completo pendiente.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin.
 **Dominio:** sílaba / fonotáctica / representación / fonética.
@@ -77,3 +77,15 @@ Esta entrada valida la organización institucional, una clasificación corpus de
 **R33: EVIDENCE_CHECKED como mapa descriptivo.**
 
 Siguiente gate: **LINGUISTIC_REVIEW** independiente. La entrada no debe promoverse a READY_FOR_COMPOSITION mientras la teoría silábica del perfil siga abierta.
+
+## 10. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `116744ae58aae65e4248f3acb8663d678075c72d`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Capas:** onset/rhyme de Zhuyin se conserva como organización institucional; los 12 tipos y `CGVX` se atribuyen al análisis de superficie de Wan et al. (2024); ninguno se convierte en teoría silábica universal.
+- **Variedad y muestra:** Zhang (2009) permanece delimitado a seis hombres de Taipei; sus resultados acústicos no se extrapolan a todo Taiwan Mandarin.
+- **Nasales finales:** Chiu & Lu (2021) se usa para el fenómeno específico /n/–/ŋ/ y su dependencia contextual, no como descripción total de la sílaba.
+- **Gate:** se valida la arquitectura del mapa descriptivo y sus límites; el análisis fonológico completo sigue abierto.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente del mapa. No promover a composition readiness como “teoría silábica cerrada”.
+
