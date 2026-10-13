@@ -1,6 +1,6 @@
 # SND-ESGT-010 — Ortografía y pronunciación
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** español.
 **Variedad:** Guatemala dentro del sistema ortográfico panhispánico.
 **Dominio:** escritura / pronunciación / transcripción.
@@ -67,11 +67,15 @@ La distinción central queda preservada: las convenciones ortográficas de dipto
 
 ## 8. Relacionado con
 
-- SND-REP-001 — Sonido, letra y símbolo
-- SND-REP-009 — Ortografía y pronunciación
-- SND-ESGT-005 — /s/ y variación regional
-- SND-ESGT-009 — Contacto lingüístico y alcance
+- SND-REP-001 — Sonido, letra y símbolo.
+- SND-REP-009 — Ortografía y pronunciación.
+- SND-ESGT-005 — /s/ y variación regional.
+- SND-ESGT-009 — Contacto lingüístico y alcance.
 
-## 9. Nota editorial
+## 9. Nota editorial y gate
 
 Esta entrada no intenta resumir la ortografía española. Solo define cómo debe usarse la escritura dentro del perfil fonético-fonológico de Guatemala.
+
+**LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+La ortografía permanece como capa escrita: no se usa para deducir automáticamente IPA, silabificación fonética universal ni inventario fonológico.
