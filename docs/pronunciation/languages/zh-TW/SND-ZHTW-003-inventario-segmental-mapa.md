@@ -1,7 +1,7 @@
 # SND-ZHTW-003 — Iniciales y finales: mapa fonético/fonológico
 
-**Estado:** EVIDENCE_CHECKED.
-**Alcance del estado:** mapa de evidencia segmental; no constituye un inventario fonémico definitivo de Taiwan Mandarin.
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.
+**Alcance del estado:** revisión lingüística aprobada para este mapa de evidencia segmental; no constituye un inventario fonémico definitivo de Taiwan Mandarin.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin dentro de un marco comparativo de Mandarin.
 **Dominio:** segmentos / estructura silábica / fonética / fonología.
@@ -11,6 +11,8 @@
 Fon (2020), **SND-SRC-0044**, funciona aquí como marco comparativo de Mandarin y de variantes regionales. La versión auditada de esta entrada **no usa** su inventario general como claim cuantitativo de Taiwan Mandarin mientras no exista un localizador interno suficientemente fino para esa afirmación.
 
 MLS-SND no copiará una tabla general de Mandarin y la renombrará automáticamente como “inventario de Taiwan Mandarin”.
+
+En esta entrada, **“inicial” y “final” son rótulos de organización del mapa**, no categorías fonémicas autosuficientes. Ninguna etiqueta de escritura o romanización se convierte por sí sola en IPA, y ninguna realización entre corchetes se promueve automáticamente a unidad entre barras. Cada capa conserva el alcance analítico o fonético de la fuente que la respalda.
 
 Wan & Jaeger (2003), **SND-SRC-0095**, comparan cuatro análisis vocálicos previos basados en Beijing Mandarin y proponen, con evidencia distribucional, fonética y psicolingüística, un sistema de cinco vocales para Taiwan Mandarin. Esa propuesta se trata como **ANALYTICAL_CHOICE**, no como resultado inevitable de la escritura o la romanización.
 
@@ -102,7 +104,24 @@ Permanecen abiertas, sin bloquear el estado de este **mapa**:
 
 1. **OPEN_QUESTION — análisis vocálico principal:** la propuesta de cinco vocales de Wan & Jaeger (2003) permanece como `ANALYTICAL_CHOICE`; MLS-SND no la convierte en consenso por promoción editorial.
 2. **OPEN_QUESTION — inventario integral:** deben revisarse otras propuestas modernas antes de fijar una tabla fonémica exhaustiva.
-3. **NEXT_GATE — LINGUISTIC_REVIEW:** una revisión independiente deberá comprobar la correspondencia entre las categorías tradicionales “initial/final”, las representaciones fonológicas adoptadas y las realizaciones fonéticas documentadas.
+3. **LINGUISTIC_REVIEW — CLOSED FOR THIS MAP:** la revisión independiente confirma que la versión vigente mantiene separadas las categorías de organización `initial/final`, las propuestas fonológicas y las realizaciones fonéticas documentadas. La revisión no fija una tabla fonémica exhaustiva ni resuelve los OPEN_QUESTION analíticos.
 4. **SND-SRC-0044 HOLD:** cualquier cifra o inventario tomado de Fon (2020) requiere localizador interno fino antes de volver a entrar como claim material.
 
 Una futura tabla reader-facing deberá derivarse únicamente de decisiones que hayan superado sus gates; ni Zhuyin ni Hanyu Pinyin se usarán como sustitutos automáticos del IPA o del análisis fonológico.
+
+## 11. Revisión lingüística
+
+**Versión revisada:** blob previo `18f9dda5284af0a0d264244a23ff9bfd43470083`.
+
+**Veredicto:** `PASS_WITH_SCOPE_WARNING`.
+
+La versión vigente es lingüísticamente coherente **como mapa de evidencia**, porque:
+
+- no equipara las categorías de organización `initial/final` con un inventario fonémico definitivo;
+- mantiene separadas las realizaciones fonéticas `[ ]`, las representaciones fonológicas `/ /` y la evidencia acústica;
+- trata las tablas de *phones* de SND-SRC-0094 como observaciones del corpus, no como fonemas obligatorios;
+- conserva la propuesta de cinco vocales de SND-SRC-0095 como `ANALYTICAL_CHOICE`;
+- preserva la variación documentada de sibilantes y nasales finales en lugar de imponer una única realización;
+- mantiene Zhuyin, Hanyu Pinyin e IPA como capas distintas.
+
+**Advertencias que sobreviven al gate:** el inventario integral sigue abierto; SND-SRC-0044 continúa en HOLD para cualquier claim cuantitativo sin localizador interno fino; la futura tabla reader-facing no podrá convertir automáticamente sistemas gráficos/romanizados en categorías fonológicas o fonéticas.
