@@ -1,6 +1,6 @@
 # SND-FR-009 — Variación documentada en PFC
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** francés.
 **Dominio:** variación / corpus.
 
@@ -75,3 +75,14 @@ MLS-SND combinará:
 ## 8. Gate
 
 Los claims permanecen **EVIDENCE_CHECKED**. La revisión lingüística independiente concluyó **PASS**. Pendiente: seleccionar los puntos concretos que servirán de base para la referencia editorial del perfil; esta entrada no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión de contenido evaluada:** blob `cf1ae1ca3eec8f3e3b52bca94aa4ef058c1d5a5b`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Open question no bloqueante:** la selección futura de puntos PFC para la referencia editorial del perfil no cambia el contenido aprobado de esta entrada metodológica; cualquier claim sobre una realización concreta seguirá requiriendo su punto/publicación.
+- **Reader-facing projection:** definida en `handoffs/SND-FR-009-composition.md`; la tabla R33 y metadata de gates quedan fuera de la edición de lectura.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE`; la entrada no presenta una forma concreta cuya pronunciación deba resumirse.
+- **Cambios lingüísticos/R33:** ninguno.
+
