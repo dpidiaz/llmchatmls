@@ -1,6 +1,6 @@
 # SND-REP-004 — Cómo leer vocales del IPA
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** representación / fonética.
 **Idioma:** transversal.
 
