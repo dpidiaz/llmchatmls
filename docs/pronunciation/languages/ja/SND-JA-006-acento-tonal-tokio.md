@@ -82,4 +82,14 @@ Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institu
 
 El uso de **acento tonal** sigue siendo una etiqueta editorial de consulta: no se atribuye a NINJAL como traducción oficial ni se usa para convertir el japonés en una categoría tipológica universal cerrada.
 
-Esta entrada no pasa todavía a READY_FOR_COMPOSITION mientras JA-007 y la arquitectura prosódica completa del perfil sigan pendientes de integración/reconciliación.
+JA-007 ya está `READY_FOR_COMPOSITION`, y los fundamentos prosódicos SND-FND-014 (acento tonal) y SND-FND-015 (entonación) también están cerrados para composición. La dependencia arquitectónica que bloqueaba esta entrada queda satisfecha para su alcance actual; una tipología exhaustiva de todos los patrones japoneses sigue fuera del núcleo aprobado.
+
+## 10. Reconciliación editorial de dependencias
+
+- **Fecha:** 2026-10-13.
+- **Versión de partida:** blob `8cec7ad23bc699d563bf26ecf48e09452d2a0d2d`.
+- **Resultado:** PASS_DEPENDENCIES_RESOLVED — permanece `EDITORIAL_REVIEW` y puede volver a composition readiness.
+- **Dependencias satisfechas:** SND-JA-007, SND-FND-014 y SND-FND-015 están `READY_FOR_COMPOSITION`; JA-001 ya había superado el gate de composición.
+- **Límite preservado:** Tokio/lengua común sigue siendo ancla prosódica, no representación de toda la diversidad japonesa.
+- **Terminología:** “acento tonal” sigue siendo rótulo editorial definido localmente, no traducción oficial de NINJAL ni categoría tipológica universal cerrada.
+- **Cambios lingüísticos/R33:** ninguno.
