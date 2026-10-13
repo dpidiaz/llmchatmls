@@ -1,6 +1,6 @@
 # SND-ENUS-004 — Reducción vocálica
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.  
 **Idioma:** inglés estadounidense.  
 **Dominio:** fonética / fonología / habla conectada.  
 **Referencia:** MULTI_REFERENCE.
@@ -65,4 +65,12 @@ No se enseñará una variante reducida como pronunciación obligatoria.
 - **Alcance:** Fourakis (1991) permanece como experimento pequeño/controlado; Cohen Priva & Strand (2023) permanece Buckeye-scoped.
 - **Warning:** ejemplos, porcentajes o magnitudes finas siguen requiriendo localizadores internos adicionales.
 - **Claims R33:** sin cambios.
-- **Siguiente gate:** EDITORIAL_REVIEW independiente del núcleo actualmente sustentado.
+
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `d0cf5c8204d48931a3bd3025778bce534d03a139`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Control editorial:** La entrada comunica con claridad que reducción no equivale automáticamente a schwa y mantiene separados experimento controlado y Buckeye. El warning sobre ejemplos, porcentajes y magnitudes finas permanece obligatorio.
+- **Invariantes:** sin cambios en claims R33, fuentes, localizadores, IPA, variedad ni análisis lingüístico.
