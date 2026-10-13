@@ -1,6 +1,6 @@
 # SND-REP-001 — Sonido, letra y símbolo
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS.  
 **Dominio:** representación / fonética / escritura.  
 **Idioma:** transversal.
 
@@ -58,3 +58,13 @@ La taxonomía “sonido / letra / símbolo” se fija como convención de clarid
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión lingüística wave 02
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `e9acc0736e57f89d1db22c6b851dd15c2738473f`.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Separación conceptual:** sonido/realización, letra/grafema y símbolo de transcripción permanecen como objetos distintos.
+- **IPA:** se conserva como sistema de representación, no como “el sonido” mismo.
+- **Terminología:** coherente con `editorial/terminology.md` v0.2.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente.
