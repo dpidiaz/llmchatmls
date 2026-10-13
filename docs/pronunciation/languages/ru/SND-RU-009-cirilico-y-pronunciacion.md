@@ -1,6 +1,6 @@
 # SND-RU-009 — Cirílico, escritura y pronunciación
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** ruso.  
 **Dominio:** escritura / ortografía / pronunciación.  
 **Fuente ortográfica principal:** SND-SRC-0097.
@@ -100,3 +100,18 @@ No valida:
 - **Control R33:** RU009-C01…C04 y sus localizadores quedan intactos; no se añadió ninguna correspondencia letra→sonido ni pronunciación léxica.
 - **Open questions bloqueantes:** ninguna para el alcance actual.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+
+## 12. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada (blob):** `5fdc75685d320d02cbbf711191b77b5efc1fc82e`.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Claridad/autonomía:** PASS. La entrada explica primero el límite letra–sonido, luego alfabeto, grafía de dureza/blandura y finalmente por qué la ortografía no predice toda la superficie fonética.
+- **Jerarquía:** PASS. La secuencia conceptual evita presentar una tabla letra→sonido como sustituto del análisis fonológico/fonético.
+- **Terminología:** PASS. Ortografía, fonología y fonética permanecen diferenciadas; “sonido-letra” queda atribuido a la fuente académica.
+- **Navegación:** PASS. RU-003, RU-005, RU-007 y RU-008 existen y cubren los fenómenos remitidos.
+- **Reader-facing:** PASS. La nota editorial deja visible que SND-SRC-0097 es ortográfica y que las realizaciones concretas requieren las fuentes fonéticas del perfil.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Open questions bloqueantes:** ninguna.
+- **Siguiente gate:** composition-readiness.
