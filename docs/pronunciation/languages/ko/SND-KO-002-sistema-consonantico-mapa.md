@@ -1,6 +1,6 @@
 # SND-KO-002 — Sistema consonántico: mapa de evidencia
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de evidencia, no como inventario consonántico canónico.
+**Estado:** READY_FOR_COMPOSITION — PASS_WITH_SCOPE_WARNING como mapa de evidencia, no como inventario consonántico canónico.
 **Idioma:** coreano.
 **Ancla descriptiva:** Seúl, cuando la fuente lo especifique.
 **Dominio:** consonantes / mapa de investigación.
@@ -109,3 +109,15 @@ La promoción a EVIDENCE_CHECKED no significa que todos los clusters consonánti
 - **Gaps preservados:** fricativas, africadas, nasales, líquidas y codas continúan `SOURCE_MAPPED`; esta revisión no los completa por analogía.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del mapa actual, manteniendo explícita su condición parcial.
+
+## 12. Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `9af8b7292140e3179944ea980964c9122f73fdbf`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` **como mapa parcial de evidencia**.
+- **Proyección reader-facing:** §§1, 3–5, 7 y 9; de §2 se proyectan las columnas `Cluster`, `Base histórica` y `Evidencia contemporánea`, excluyendo la columna interna `Estado`.
+- **Metadata interna excluida:** §6 (tabla R33), §8 (gate interno), §§10–11 (revisiones/workflow) y los tokens internos `EVIDENCE_AVAILABLE` / `SOURCE_MAPPED`.
+- **Fuentes y fundamento:** derivado de SND-SRC-0020, SND-SRC-0021 y SND-SRC-0033, preservando fecha, Seúl y contexto prosódico cuando sean materiales.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — la entrada no presenta una forma léxica objetivo ni una transcripción destinada a respelling.
+- **Autonomía escrita:** PASS; no requiere audio.
+- **Open questions no bloqueantes:** fricativas, africadas, nasales, líquidas y codas siguen abiertos porque el objeto publicado es precisamente un mapa de cobertura parcial.
+- **Regla para COMPOSITION:** no puede presentar este mapa como inventario consonántico final, completar clusters por analogía ni convertir VOT/f0 en pistas universales.
