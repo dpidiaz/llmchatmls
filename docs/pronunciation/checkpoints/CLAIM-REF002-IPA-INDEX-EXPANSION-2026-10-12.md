@@ -1,7 +1,7 @@
 # MLS-SND — Claim REF-002 IPA index expansion
 
 **Fecha:** 2026-10-12  
-**Base:** `feat/mls-snd-foundation` @ `7c6629e84e91d2877415fc398fba4b51109ae797`
+**Base:** `feat/mls-snd-foundation` @ `2afbec8eb45065c5ae320fef3e6cfad88f20912b`
 
 ## Alcance
 
