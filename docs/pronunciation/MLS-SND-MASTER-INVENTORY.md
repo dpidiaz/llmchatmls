@@ -241,11 +241,11 @@ Estos capítulos permanecen bloqueados hasta que los perfiles pertinentes supere
 
 - Fundamentos: 18 entradas.
 - Representación: 12 entradas.
-- Perfiles lingüísticos: 94 entradas/clusters candidatos.
+- Perfiles lingüísticos: 95 entradas/clusters candidatos.
 - Comparación: 11 entradas.
 - Aparato de consulta: 8 salidas.
 
-**Total inicial inventariado: 143 unidades editoriales candidatas.**
+**Total inventariado: 144 unidades editoriales candidatas.**
 
 Este conteo no es una cuota ni un límite. Las unidades pueden dividirse o fusionarse después de investigación.
 
