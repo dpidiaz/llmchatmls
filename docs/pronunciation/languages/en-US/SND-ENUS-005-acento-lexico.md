@@ -1,6 +1,6 @@
 # SND-ENUS-005 — Acento léxico
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SOURCE_ROLE_WARNING.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SOURCE_ROLE_WARNING.  
 **Idioma:** inglés.  
 **Variedad:** inglés estadounidense; recursos con alcance explícito.  
 **Dominio:** prosodia / acento léxico.
@@ -58,4 +58,12 @@ MLS-SND puede usar CMUdict para consultar formas concretas, pero no convierte es
 - **Rol de fuentes:** SND-SRC-0070 se usa como marco pedagógico, no para reinstalar GA como estándar fonético nacional; CMUdict y cmudict-tools son recursos lexicográfico/técnicos, no teoría fonológica general.
 - **Notación:** 0/1/2 se conserva como convención del formato CMUdict, no como notación prosódica universal.
 - **Claims R33:** sin cambios.
-- **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
+
+## 8. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `277dcc340ad78d4d43b1a999f889d58592b9c7fb`.
+- **Resultado:** PASS_WITH_SOURCE_ROLE_WARNING → `EDITORIAL_REVIEW`.
+- **Control editorial:** La entrada separa acento léxico, variedad regional y entonación, y presenta CMUdict como recurso auxiliar con limitaciones explícitas. 0/1/2 permanece convención del formato, no notación prosódica universal.
+- **Invariantes:** sin cambios en claims R33, fuentes, localizadores, IPA, variedad ni análisis lingüístico.
