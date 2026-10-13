@@ -1,6 +1,6 @@
 # SND-DE-001 — Alemán estándar y estándares nacionales
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** alemán.  
 **Dominio:** variedad / alcance descriptivo.
 
@@ -60,3 +60,15 @@ Las afirmaciones específicas de Austria y Suiza conservan sus fuentes y localiz
 **LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
 
 La síntesis **MULTI_REFERENCE** se mantiene como decisión editorial sustentada por alcances diferenciados. SND-DE-008 ya se encuentra en `READY_FOR_COMPOSITION` como mapa de cobertura con scope warning; esta integración no decide por sí sola la readiness de DE-001 ni el cierre global del perfil.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `bbebbf7836918ea4050d012c0250e774973e4720`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Arquitectura:** `MULTI_REFERENCE` permanece visible; Alemania, Austria y Suiza no se colapsan en una única pronunciación estándar.
+- **Alcance:** SND-DE-008 ya funciona como mapa de cobertura; DE-001 conserva su función de arquitectura/alcance, no de inventario nacional exhaustivo.
+- **Reader-facing:** incluir §§1–5 y 7; derivar fundamento de claims verificados; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE.
+- **Written-only:** PASS.
+

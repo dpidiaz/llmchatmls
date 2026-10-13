@@ -1,6 +1,6 @@
 # SND-DE-007 — Duden e IPA
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** alemán.  
 **Dominio:** pronunciación / transcripción / lexicografía.
 
@@ -56,3 +56,15 @@ Los claims fueron contrastados el 2026-10-11 contra la página vigente de Duden.
 **LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
 
 Duden permanece delimitado como fuente lexicográfica/ortoépica; no se utiliza como sustituto de evidencia nacional o regional. Esta integración no decide todavía `READY_FOR_COMPOSITION` para DE-007.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `5474a009ceac5e1784ee3af109041c89a73be6f9`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Rol de fuente:** Duden permanece capa lexicográfica/ortoépica; no sustituye evidencia de variedades nacionales o regionales.
+- **Representación:** IPA de Duden se conserva como convención lexicográfica documentada; no se extrapola a una realización única de DE/AT/CH.
+- **Reader-facing:** incluir §§1–4, 6–7; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; entrada sobre representación lexicográfica.
+- **Written-only:** PASS.
+
