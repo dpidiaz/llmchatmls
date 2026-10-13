@@ -1,6 +1,6 @@
 # SND-KO-001 — Estándar y habla de Seúl
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano.
 **Dominio:** variedad / norma / fonética.
 **Referencia:** REFERENCE_PROVISIONAL.
@@ -75,3 +75,13 @@ LINGUISTIC_REVIEW completado; esta entrada pasa ahora por EDITORIAL_REVIEW.
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Versión evaluada (blob):** `ea2c84adcf6f91f346219f726056fc5d3e306c66`.
+- **Handoff:** `docs/pronunciation/composition/handoffs/SND-KO-001.md`.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE`; entrada de alcance/variedad sin forma léxica concreta.
+- **Reader-facing projection:** §§1–4 y 6, fundamento visible derivado de claims verificados; tabla R33 y logs de gates internos.
+- **Control:** separación norma NIKL / habla empírica de Seúl / hangul / romanización / IPA intacta; sin cambios lingüísticos/R33.
