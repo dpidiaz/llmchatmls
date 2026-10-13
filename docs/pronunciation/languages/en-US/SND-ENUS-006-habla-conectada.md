@@ -1,6 +1,6 @@
 # SND-ENUS-006 — Habla conectada: corpus y alcance
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS.  
 **Idioma:** inglés.  
 **Variedad:** Columbus, Ohio como corpus regional inicial; no nacional.  
 **Dominio:** habla conectada / pronunciación conversacional.
@@ -52,3 +52,15 @@ Cuando la procedencia sea material, una entrada deberá identificar explícitame
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **Límite:** cualquier ejemplo concreto requerirá identificador de archivo/token/intervalo reproducible.
+
+## 8. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `cd31b84435ce6ae897f56a65fce307c894ccb48c`.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Corpus scope:** Buckeye permanece explícitamente Columbus/Central Ohio; no se usa como muestra nacional.
+- **Ejemplos:** cualquier token futuro debe conservar archivo/token/intervalo y metadatos relevantes.
+- **Función:** el corpus sirve como infraestructura para habla conversacional, no como licencia para universalizar cada reducción o proceso observado.
+- **Claims R33:** sin cambios.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
