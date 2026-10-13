@@ -1,6 +1,6 @@
 # SND-JA-004 — Consonantes: mapa general y realizaciones documentadas
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_NAVIGATION_WARNING.  
 **Idioma:** japonés.  
 **Variedad / alcance:** japonés de referencia con controles contemporáneos puntuales; no exhaustivo.  
 **Dominio:** fonología / fonética / pronunciación.  
@@ -142,7 +142,7 @@ No se generaliza desde esos casos a toda la geografía o sociedad japonesa.
 
 Para estudiantes de lenguas con /r/ alveolar aproximante o vibrante, no es adecuado identificar automáticamente el japonés /r/ con una sola “r” de otro idioma.
 
-Etiqueta recomendada: **SEMEJANZA_PARCIAL**.
+Etiqueta recomendada: **SEMEJANZA PARCIAL**.
 
 La comparación debe basarse en articulación y distribución documentadas, no en la letra latina usada en romanización.
 
@@ -156,10 +156,10 @@ La comparación debe basarse en articulación y distribución documentadas, no e
 ## 12. Entradas relacionadas
 
 - SND-JA-001 — Referencia de Tokio/lengua común y límites.
-- SND-JA-002 — Mora.
-- SND-JA-005 — Estructura moraica/silábica.
-- SND-JA-008 — Kana y pronunciación.
-- SND-JA-010 — Romanización.
+- SND-JA-002 — Mora — **candidato aún no materializado en la matriz observada**.
+- SND-JA-005 — Estructura moraica/silábica — **candidato aún no materializado en la matriz observada**.
+- SND-JA-008 — Kana y pronunciación — entrada canónica integrada.
+- SND-JA-010 — Romanización — **candidato aún no materializado en la matriz observada**.
 - SND-REP-002 — Qué es el IPA.
 - SND-REP-007 — Transcripción fonológica y fonética.
 
@@ -212,6 +212,18 @@ Comprobaciones cerradas:
 5. Kubozono (2015) se usa como baseline fonémico y control de alofonía/estratos, no como autoridad única;
 6. la fecha de Okada (1991) continúa visible como DATE_SCOPE_WARNING.
 
-Pendiente antes de EDITORIAL_REVIEW/READY_FOR_COMPOSITION:
-- reconciliar navegación y terminología con JA-002/005/008/010 a medida que esas entradas se integren;
+**EDITORIAL_REVIEW: PASS_WITH_NAVIGATION_WARNING.**
+
+Pendiente antes de `READY_FOR_COMPOSITION`:
+- reconciliar navegación con JA-002/005/010 cuando esas entradas se materialicen; JA-008 ya fue contrastada y es coherente con la separación escritura ≠ IPA de esta entrada;
+- retirar las marcas de candidato pendiente cuando existan destinos canónicos navegables;
 - conservar esta entrada como mapa general con evidencia contemporánea selectiva, no como lista exhaustiva de todas las realizaciones japonesas.
+
+
+## Revisión editorial
+
+**Versión revisada:** blob previo `933fcc94163573c4bab3f36304d9383cfedf4fa6`.
+
+**Veredicto:** `PASS_WITH_NAVIGATION_WARNING`.
+
+La estructura, jerarquía de alcance y terminología técnica son adecuadas para el lector. Se normalizó la etiqueta canónica `SEMEJANZA PARCIAL` y se hizo visible que JA-002, JA-005 y JA-010 siguen siendo destinos candidatos sin archivo canónico físico en la matriz observada. JA-008 ya está integrada y su política escritura ≠ IPA es coherente con JA-004. No se modificaron claims R33, fuentes, localizadores, transcripciones ni análisis lingüístico.
