@@ -1,6 +1,6 @@
 # SND-FND-005 — Percepción del habla
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SOURCE_SCOPE_WARNING.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** fonética / percepción.  
 **Idioma:** transversal.
 
@@ -55,7 +55,7 @@ PAM se presenta como un marco útil de referencia, no como doctrina única de ML
 
 ## 8. Nota de auditoría
 
-Claim ↔ source ↔ locator comprobados el 2026-10-11. LINGUISTIC_REVIEW completado para esta versión; falta EDITORIAL_REVIEW.
+Claim ↔ source ↔ locator comprobados el 2026-10-11. LINGUISTIC_REVIEW y EDITORIAL_REVIEW constan en §§9–10; esta nota queda como registro histórico.
 
 ## 9. Revisión lingüística wave 01
 
@@ -78,3 +78,13 @@ Claim ↔ source ↔ locator comprobados el 2026-10-11. LINGUISTIC_REVIEW comple
 - **Producción/percepción:** la relación permanece prudente; afirmaciones específicas futuras requieren fuentes especializadas.
 - **Alcance de fuente:** SND-SRC-0024 sostiene el núcleo introductorio, no comparaciones concretas entre variedades.
 - **Siguiente gate:** composition readiness con el source-scope warning preservado.
+
+## 11. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `77d7125579dda2d303f46798dacc7e316ccc5b08`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Reader-facing projection:** §§1–7 incluidas; §§8–10 excluidas como auditoría/reviews internas.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual sobre percepción; no contiene una forma léxica objetivo.
+- **Written-only gate:** PASS; la entrada es autosuficiente sin audio ni decisiones fonéticas nuevas.
+- **Handoff:** `composition/handoffs/SND-FND-005.md`.
