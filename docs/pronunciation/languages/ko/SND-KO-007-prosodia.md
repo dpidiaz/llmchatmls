@@ -1,6 +1,6 @@
 # SND-KO-007 — Prosodia de Seoul Korean: Accentual Phrase y límites
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano  
 **Variedad:** Seoul Korean  
 **Dominio:** prosodia
@@ -54,3 +54,14 @@ Esta entrada no se extiende automáticamente a dialectos tonales regionales ni a
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `1f4d724e1149351f31693b063ee53405b6c1713f`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** Seoul Korean; Accentual Phrase se mantiene como modelo analítico atribuido, no como “estrés léxico”.
+- **Reader-facing:** incluir §§1–4 y límite; excluir tabla R33 y metadata interna.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE.
+- **Written-only:** PASS.
+

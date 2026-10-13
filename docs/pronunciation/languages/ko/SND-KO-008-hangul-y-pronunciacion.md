@@ -1,6 +1,6 @@
 # SND-KO-008 — Hangul y pronunciación: escritura no es superficie fonética
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano  
 **Dominio:** escritura / pronunciación
 
@@ -60,3 +60,14 @@ La secuencia de capas es una decisión MLS-SND. Esta entrada no afirma que la or
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `3c87e8a3b678d3fda334fa5d1b6b8dd9e2fe2bba`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Representación:** hangul, Romanización Revisada, representación fonológica e IPA conservan funciones distintas.
+- **Reader-facing:** incluir §§1–3 y nota editorial; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se genera respelling adicional.
+- **Written-only/Unicode:** PASS; Hangul debe preservarse sin sustitución.
+
