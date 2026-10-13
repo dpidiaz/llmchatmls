@@ -1,6 +1,6 @@
 # SND-IT-003 — Consonantes
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** italiano.  
 **Dominio:** consonantes / fonética / fonología.  
 **Alcance:** análisis de Rogers & d’Arcangeli (2004).
@@ -56,3 +56,14 @@ Rogers, D., & d’Arcangeli, L. (2004). Italian. *JIPA, 34*(1), 117–121.
 - **Scope warning:** la afirmación regional sobre raddoppiamento permanece atribuida a la fuente y no se convierte en mapa nacional exhaustivo.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## 10. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `cfc2aeb9844fd85ffbe442828ce909210d550820`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** análisis de Rogers & d’Arcangeli; el raddoppiamento regional permanece atribuido y no forma un mapa nacional exhaustivo.
+- **Reader-facing:** incluir §§1–5 y nota de alcance; excluir R33/auditorías.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON.
+- **Written-only:** PASS.
+
