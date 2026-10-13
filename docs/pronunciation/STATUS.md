@@ -88,7 +88,7 @@ Auditoría vigente:
 
 `audits/SOURCE-ID-INTEGRITY-108-97-2026-10-11.md`
 
-Resultado estructural/referencial para el SHA indicado:
+Resultado estructural/referencial del audit congelado citado arriba:
 
 - 108 IDs canónicos únicos;
 - 97 fuentes `SND-SRC-0001…0097`, sin huecos;
