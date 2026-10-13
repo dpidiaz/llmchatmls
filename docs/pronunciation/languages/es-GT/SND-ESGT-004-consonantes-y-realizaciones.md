@@ -1,6 +1,6 @@
 # SND-ESGT-004 — Consonantes y realizaciones: mapa inicial
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SOURCE_TERMINOLOGY_WARNING.  
+**Estado:** READY_FOR_COMPOSITION — PASS_WITH_SOURCE_TERMINOLOGY_WARNING.  
 **Idioma:** español.  
 **Variedad:** Guatemala; encuesta geolingüística nacional con variación regional.  
 **Dominio:** consonantes / fonética / variación.
@@ -110,3 +110,15 @@ Decisiones cerradas:
 **Veredicto:** `PASS_WITH_SOURCE_TERMINOLOGY_WARNING`.
 
 La entrada mantiene clara su función de mapa de realizaciones y conserva como advertencia la terminología descriptiva “fricativa” de la fuente sin reanalizarla editorialmente. La navegación hacia /s/, fundamentos y variación es coherente. No se modificaron claims R33, fuentes, localizadores, IPA ni análisis lingüístico.
+
+## 12. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `4eb233ed19ee5d1ed6203b862f3d92b7f0f44f69`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como mapa inicial de realizaciones.
+- **Terminología:** “fricativa” se conserva como categoría de Utgård; COMPOSITION no la reanaliza como aproximante.
+- **Alcance:** /s/ y demás clusters pendientes permanecen fuera; no se crea inventario consonántico nacional final.
+- **Reader-facing:** incluir §§1–6, 8 y 10; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se reconstruye IPA estrecho.
+- **Written-only:** PASS.
+
