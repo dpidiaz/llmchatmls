@@ -1,6 +1,6 @@
 # SND-REP-010 — Romanización
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_INSTITUTIONAL_SCOPE_WARNING.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** representación / escritura.  
 **Idioma:** transversal.  
 **Fuente conceptual:** SND-SRC-0049 — UNGEGN, canonicalizada en el Source Registry.
@@ -67,3 +67,14 @@ La definición operativa MLS-SND identifica el **tipo de conversión**; las prop
 - **Terminología:** “romanización” permanece alineada con `editorial/terminology.md`: representación mediante letras latinas conforme a un sistema identificado; no equivale a IPA.
 - **Alcance institucional:** el requisito de reversibilidad de UNGEGN sigue limitado a los sistemas que esa institución evalúa para nombres geográficos.
 - **Siguiente gate:** composition readiness con el scope warning preservado.
+
+## 11. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `7e9349a24490f7db4d7b8e0bf545efeca70fd521`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Reader-facing projection:** §§1–7 incluidas; §§8–10 quedan como metadata interna.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual de representación; no hay forma pronunciable objetivo.
+- **Written-only gate:** PASS; no depende de audio ni de una inferencia fonética nueva.
+- **Scope guard:** El alcance institucional de UNGEGN permanece visible y no se convierte en regla universal.
+- **Handoff:** `composition/handoffs/SND-REP-010.md`.
