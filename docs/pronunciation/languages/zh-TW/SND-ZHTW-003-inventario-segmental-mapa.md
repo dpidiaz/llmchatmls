@@ -1,15 +1,16 @@
 # SND-ZHTW-003 — Iniciales y finales: mapa fonético/fonológico
 
-**Estado:** RESEARCHED_PARTIAL.
+**Estado:** EVIDENCE_CHECKED.
+**Alcance del estado:** mapa de evidencia segmental; no constituye un inventario fonémico definitivo de Taiwan Mandarin.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin dentro de un marco comparativo de Mandarin.
 **Dominio:** segmentos / estructura silábica / fonética / fonología.
 
 ## 1. Por qué sigue siendo un mapa
 
-Fon (2020), **SND-SRC-0044**, presenta un inventario canónico de Mandarin con cinco vocales, diecinueve consonantes y cuatro tonos léxicos, y después compara variantes de Taiwán, Singapur y China.
+Fon (2020), **SND-SRC-0044**, funciona aquí como marco comparativo de Mandarin y de variantes regionales. La versión auditada de esta entrada **no usa** su inventario general como claim cuantitativo de Taiwan Mandarin mientras no exista un localizador interno suficientemente fino para esa afirmación.
 
-MLS-SND no copiará esa tabla y la renombrará automáticamente como “inventario de Taiwan Mandarin”.
+MLS-SND no copiará una tabla general de Mandarin y la renombrará automáticamente como “inventario de Taiwan Mandarin”.
 
 Wan & Jaeger (2003), **SND-SRC-0095**, comparan cuatro análisis vocálicos previos basados en Beijing Mandarin y proponen, con evidencia distribucional, fonética y psicolingüística, un sistema de cinco vocales para Taiwan Mandarin. Esa propuesta se trata como **ANALYTICAL_CHOICE**, no como resultado inevitable de la escritura o la romanización.
 
@@ -69,7 +70,7 @@ No habrá una sola columna “pronunciación” que colapse todos esos niveles.
 
 | claim_id | afirmación | fuente | localizador | estado |
 |---|---|---|---|---|
-| ZHTW003-C01 | Fon 2020 presenta un inventario canónico de Mandarin con 5 vocales, 19 consonantes y 4 tonos | SND-SRC-0044 | capítulo pp. 11–36; localizador interno pendiente | SOURCED |
+| ZHTW003-C01 | Fon 2020 se conserva como marco comparativo de Mandarin/variantes; no se usa aquí para fijar un inventario cuantitativo de Taiwan Mandarin | SND-SRC-0044 | capítulo pp. 11–36; localizador interno fino pendiente para cualquier claim cuantitativo | OPEN_QUESTION / NOT_USED_FOR_GATE |
 | ZHTW003-C02 | Wan & Jaeger proponen un sistema de cinco vocales para Taiwan Mandarin tras comparar análisis previos | SND-SRC-0095 | abstract; pp. 205–257 | VERIFIED_AS_ANALYTICAL_PROPOSAL |
 | ZHTW003-C03 | Wan et al. presentan seis pares aspirado/no aspirado | SND-SRC-0094 | p. 1159, discusión previa a Table 1 | VERIFIED |
 | ZHTW003-C04 | Ogasawara encuentra long-lag VOT en aspiradas y short-lag en no aspiradas | SND-SRC-0096 | abstract; pp. 155–178 | VERIFIED |
@@ -90,13 +91,17 @@ No habrá una sola columna “pronunciación” que colapse todos esos niveles.
 - SND-SRC-0095 — Wan & Jaeger (2003), representación vocálica.
 - SND-SRC-0096 — Ogasawara (2011), VOT.
 
-## 10. Gate pendiente
+## 10. Resultado del gate
 
-Permanece **RESEARCHED_PARTIAL** porque todavía falta:
+La versión actual pasa a **EVIDENCE_CHECKED como mapa de evidencia**, no como inventario fonémico final.
 
-1. revisar SND-SRC-0044 con localizadores internos más finos para el inventario canónico;
-2. decidir si el análisis vocálico de cinco vocales será principal o alternativo;
-3. revisar otras propuestas modernas de inventario/segmentación;
-4. pasar revisión lingüística independiente de la correspondencia entre categorías “initial/final” y análisis fonológicos.
+El gate se cierra porque los claims materiales que esta versión sí afirma como resultados del perfil están vinculados a fuentes canónicas y localizadores reproducibles; el antiguo claim cuantitativo basado en SND-SRC-0044 queda explícitamente fuera del gate mientras carezca de localizador interno fino.
 
-La canonicalización de fuentes **no resuelve** esos cuatro puntos.
+Permanecen abiertas, sin bloquear el estado de este **mapa**:
+
+1. **OPEN_QUESTION — análisis vocálico principal:** la propuesta de cinco vocales de Wan & Jaeger (2003) permanece como `ANALYTICAL_CHOICE`; MLS-SND no la convierte en consenso por promoción editorial.
+2. **OPEN_QUESTION — inventario integral:** deben revisarse otras propuestas modernas antes de fijar una tabla fonémica exhaustiva.
+3. **NEXT_GATE — LINGUISTIC_REVIEW:** una revisión independiente deberá comprobar la correspondencia entre las categorías tradicionales “initial/final”, las representaciones fonológicas adoptadas y las realizaciones fonéticas documentadas.
+4. **SND-SRC-0044 HOLD:** cualquier cifra o inventario tomado de Fon (2020) requiere localizador interno fino antes de volver a entrar como claim material.
+
+Una futura tabla reader-facing deberá derivarse únicamente de decisiones que hayan superado sus gates; ni Zhuyin ni Hanyu Pinyin se usarán como sustitutos automáticos del IPA o del análisis fonológico.
