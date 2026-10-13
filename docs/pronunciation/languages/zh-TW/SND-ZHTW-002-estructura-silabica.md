@@ -1,6 +1,6 @@
 # SND-ZHTW-002 — Estructura silábica
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa descriptivo; análisis fonológico completo pendiente.
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa descriptivo; análisis fonológico completo pendiente.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin.
 **Dominio:** sílaba / fonotáctica / representación / fonética.
@@ -76,7 +76,7 @@ Esta entrada valida la organización institucional, una clasificación corpus de
 
 **R33: EVIDENCE_CHECKED como mapa descriptivo.**
 
-Siguiente gate: **LINGUISTIC_REVIEW** independiente. La entrada no debe promoverse a READY_FOR_COMPOSITION mientras la teoría silábica del perfil siga abierta.
+La revisión lingüística independiente confirmó este alcance de mapa descriptivo. La entrada puede evaluarse para composition readiness **como mapa multicapa**, pero no puede presentarse como teoría silábica cerrada ni convertir `CGVX` en plantilla universal del perfil.
 
 ## 10. Revisión lingüística wave 01
 
@@ -89,3 +89,15 @@ Siguiente gate: **LINGUISTIC_REVIEW** independiente. La entrada no debe promover
 - **Gate:** se valida la arquitectura del mapa descriptivo y sus límites; el análisis fonológico completo sigue abierto.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente del mapa. No promover a composition readiness como “teoría silábica cerrada”.
 
+## 11. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `4df8a96ee78bbc9f547f61fcb8743eae00ee6767`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Objeto editorial:** mapa descriptivo multicapa de organización institucional, análisis de superficie y efectos fonéticos; no teoría fonológica cerrada.
+- **Jerarquía:** la separación de capas se establece antes de corpus, tipos silábicos y efectos fonéticos.
+- **Atribución:** los 12 tipos y `CGVX` permanecen atribuidos a Wan et al. (2024); onset/rhyme a la organización institucional de Zhuyin.
+- **Variedad/muestra:** Zhang (2009) continúa limitado a seis hombres de Taipei; /n/–/ŋ/ se mantiene como fenómeno contextual específico.
+- **Workflow corregido:** la prohibición antigua de composition readiness se precisa: bloquea una presentación como “teoría silábica cerrada”, no la composición del mapa explícitamente parcial.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del mapa actual con el límite de §8 visible.
