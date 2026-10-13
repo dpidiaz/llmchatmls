@@ -1,9 +1,9 @@
 # SND-REP-010 — Romanización
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_INSTITUTIONAL_SCOPE_WARNING.  
 **Dominio:** representación / escritura.  
 **Idioma:** transversal.  
-**Fuente conceptual nueva:** SND-SRC-0049, pendiente de canonicalización.
+**Fuente conceptual:** SND-SRC-0049 — UNGEGN, canonicalizada en el Source Registry.
 
 ## 1. Definición operativa MLS-SND
 
@@ -48,3 +48,13 @@ La definición operativa MLS-SND identifica el **tipo de conversión**; las prop
 ## 8. Gate
 
 **EVIDENCE_CHECKED.** La fuente institucional quedó canonicalizada; falta LINGUISTIC_REVIEW.
+
+## 9. Revisión lingüística wave 02
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `3b25480aecd20fc4bb45b01414a223518c58bef4`.
+- **Resultado:** PASS_WITH_INSTITUTIONAL_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Definición:** romanización se mantiene como representación mediante letras latinas conforme a un sistema identificado; no equivale a IPA.
+- **UNGEGN:** su requisito de reversibilidad se limita a sistemas evaluados para nombres geográficos y no se universaliza.
+- **Metadata:** SND-SRC-0049 ya estaba canonicalizada; se corrige únicamente el encabezado obsoleto.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente.
