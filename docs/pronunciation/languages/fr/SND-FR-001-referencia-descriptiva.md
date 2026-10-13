@@ -1,6 +1,6 @@
 # SND-FR-001 — Selección de variedad de referencia
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** francés.
 **Dominio:** alcance / variación.
 **Política de referencia:** MULTI_REFERENCE.
@@ -102,3 +102,16 @@ El blocker `REFERENCE_PROVISIONAL` queda resuelto en esta versión mediante la p
 - **Invariante:** París, France-Nord, puntos PFC y otras referencias no son intercambiables.
 - **Cambios lingüísticos/R33:** ninguno; FR001-C01…C05, fuentes y localizadores permanecen intactos.
 - **Siguiente gate:** composition readiness sobre esta versión estabilizada.
+
+## 12. Composition readiness wave 02 — 2026-10-13
+
+- **Versión evaluada:** blob `c07d00c632552d964e21616713cf51672d22ae1e`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Blocker previo:** `REFERENCE_PROVISIONAL` resuelto por la política editorial `MULTI_REFERENCE`.
+- **Proyección reader-facing:** encabezado editorial + §§1–5, 7–9.
+- **Metadata interna excluida:** §6 (tabla R33), §10 (gate interno), §11 (revisión editorial/workflow) y este bloque.
+- **Fuentes y fundamento:** derivado de SND-SRC-0009, SND-SRC-0018 y SND-SRC-0039; la política MULTI_REFERENCE debe identificarse como decisión MLS-SND.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada de política descriptiva, sin forma léxica objetivo.
+- **Autonomía escrita:** PASS; no requiere audio.
+- **Open questions:** ninguna bloqueante para la política de referencia actual. Futuras entradas concretas siguen obligadas a declarar su propia variedad/muestra/fuente.
+- **Regla para COMPOSITION:** no puede crear `FR-STANDARD`, convertir París en sinónimo de francés ni ocultar el punto PFC/corpus cuando sea material.
