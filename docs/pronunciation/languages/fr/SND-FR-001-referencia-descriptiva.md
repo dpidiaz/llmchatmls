@@ -3,7 +3,7 @@
 **Estado:** EDITORIAL_REVIEW.
 **Idioma:** francés.
 **Dominio:** alcance / variación.
-**Propuesta de estado:** REFERENCE_PROVISIONAL.
+**Política de referencia:** MULTI_REFERENCE.
 
 ## 1. Problema
 
@@ -13,13 +13,18 @@ El proyecto PFC se construye explícitamente para documentar el francés oral en
 
 Por ello MLS-SND no etiquetará automáticamente una realización parisina como “la pronunciación francesa”.
 
-## 2. Ancla propuesta para la primera edición
+## 2. Referencia para la primera edición
 
-Cuando el tomo necesite una referencia principal para la descripción básica, utilizará provisionalmente:
+La primera edición utilizará una política **MULTI_REFERENCE**: no se seleccionará una única voz, ciudad o corpus como sustituto de todo el francés.
 
-> **una referencia metropolitana provisional, delimitada operacionalmente por el corpus que se seleccione; los datos de norte de Francia y de París conservarán siempre su etiqueta específica.**
+Cada descripción deberá conservar la referencia que realmente sustenta el claim:
 
-Esta elección sirve para mantener un perfil manejable dentro del MLS. No pretende representar toda la francofonía.
+- **París** cuando la fuente esté delimitada a una hablante o muestra parisina;
+- **France-Nord / alcance supralocal** únicamente cuando la fuente lo declare;
+- **punto PFC concreto** cuando se usen datos de una encuesta específica;
+- **otras regiones francófonas** con su etiqueta y fuente propias.
+
+Esta política permite mantener un perfil coherente sin convertir una realización metropolitana en “la pronunciación francesa”.
 
 ## 3. Por qué París puede ser un ancla pero no el universo
 
@@ -62,9 +67,11 @@ No usar `FR-STANDARD` sin definir qué norma o corpus sustenta la etiqueta.
 
 ## 7. Decisión editorial
 
-El ancla metropolitana provisional es una **decisión MLS**, no un hecho que las fuentes impongan.
+**MULTI_REFERENCE** es una **decisión MLS-SND**, no una categoría impuesta por las fuentes.
 
-Debe revisarse tras el primer cluster completo.
+El primer cluster francés ya revisado confirma que el contenido estable funciona con referencias delimitadas por fuente y variedad: una hablante parisina para determinados claims de Fougeron & Smith, datos parisinos contemporáneos cuando la fuente los ofrece, alcance supralocal/norte de Francia cuando está documentado y PFC como marco de variación con puntos identificados.
+
+Por ello no se fija una única referencia principal para todos los fenómenos. La coherencia editorial se obtiene declarando alcance y procedencia, no ocultando la variación.
 
 ## 8. Fuentes
 
@@ -81,4 +88,17 @@ Programme Phonologie du Français Contemporain. *PFC : usages, variétés, struc
 
 ## 10. Gate
 
-Los claims permanecen **EVIDENCE_CHECKED**. La revisión lingüística independiente concluyó **PASS_WITH_SCOPE_WARNING**; esta entrada no pasa a READY_FOR_COMPOSITION hasta definir operacionalmente la referencia francesa y superar el gate editorial.
+Los claims permanecen **EVIDENCE_CHECKED** y la revisión lingüística independiente mantiene **PASS_WITH_SCOPE_WARNING**.
+
+El blocker `REFERENCE_PROVISIONAL` queda resuelto en esta versión mediante la política editorial `MULTI_REFERENCE`: toda realización reader-facing debe conservar su fuente/variedad/punto cuando sea material. Esta decisión no añade claims lingüísticos y debe superar composition readiness sobre esta versión concreta.
+
+## 11. Revisión editorial de estabilización de referencia
+
+- **Fecha:** 2026-10-13.
+- **Versión de partida:** blob `667d9ed5d427dca033c29cfacfc6b1e3e2c1ecd3`.
+- **Resultado:** PASS_WITH_SCOPE_POLICY_UPDATE → `EDITORIAL_REVIEW`.
+- **Cambio editorial material:** `REFERENCE_PROVISIONAL` se sustituye por `MULTI_REFERENCE` para la primera edición.
+- **Justificación:** el cluster FR-002…009 ya aprobado utiliza referencias delimitadas por fuente/variedad en lugar de una sola voz francesa; la decisión es consistente con PFC, la muestra parisina de Fougeron & Smith y la pluralidad normativa discutida por Chalier.
+- **Invariante:** París, France-Nord, puntos PFC y otras referencias no son intercambiables.
+- **Cambios lingüísticos/R33:** ninguno; FR001-C01…C05, fuentes y localizadores permanecen intactos.
+- **Siguiente gate:** composition readiness sobre esta versión estabilizada.
