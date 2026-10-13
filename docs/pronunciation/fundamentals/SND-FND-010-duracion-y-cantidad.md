@@ -1,6 +1,6 @@
 # SND-FND-010 — Duración y cantidad
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Dominio:** fonética / fonología.  
 **Idioma:** transversal.
 
@@ -54,7 +54,7 @@ La definición operativa de “cantidad” es una convención editorial MLS-SND.
 
 ## 9. Nota de auditoría
 
-Claim ↔ fuente ↔ localizador comprobados el 2026-10-11. LINGUISTIC_REVIEW completado; falta EDITORIAL_REVIEW.
+Claim ↔ fuente ↔ localizador comprobados el 2026-10-11. LINGUISTIC_REVIEW y EDITORIAL_REVIEW completados para esta versión.
 
 
 ## 10. Revisión lingüística
@@ -62,3 +62,12 @@ Claim ↔ fuente ↔ localizador comprobados el 2026-10-11. LINGUISTIC_REVIEW co
 - **Fecha:** 2026-10-11.
 - **Resultado:** PASS → LINGUISTIC_REVIEW.
 - **Control:** duración física y cantidad/contraste permanecen separadas; los ejemplos de longitud no se universalizan entre lenguas.
+
+## 11. Revisión editorial wave 02
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Terminología:** “duración” y “cantidad” coinciden con la norma editorial v0.2; cantidad permanece reservada para función estructural/contrastiva sustentada por análisis.
+- **Lectura:** vocales, consonantes, contraste fonológico y escritura quedan separados sin inferir cantidad a partir de duración o grafía.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.

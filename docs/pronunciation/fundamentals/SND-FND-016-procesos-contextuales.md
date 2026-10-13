@@ -1,6 +1,6 @@
 # SND-FND-016 — Procesos contextuales y habla conectada
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Versión revisada:** 2026-10-12; base `2afbec8eb45065c5ae320fef3e6cfad88f20912b`.  
 **Dominio:** fonología / pronunciación.  
 **Idioma:** transversal.
@@ -64,4 +64,13 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 
 Revisión lingüística/evidencial de esta versión: 2026-10-12. Los tres claims se cotejaron directamente con §4.7 y §4.9 de `SND-SRC-0024` (manual introductorio; alcance transversal). La relación fonema → alófono que ilustra la fuente es un **marco analítico**, no una obligación de analizar de igual modo todos los fenómenos en todas las lenguas. La lista de §4 es una taxonomía editorial de remisiones, no un conjunto de claims de productividad universal. No se añaden transcripciones, corpus ni frecuencias.
 
-**Gate lingüístico/evidencial:** PASS delimitado para C01–C03 y las cautelas metodológicas de esta versión. `LINGUISTIC_REVIEW` no implica revisión editorial ni `READY_FOR_COMPOSITION`. **Pendiente:** revisión editorial independiente y nuevas fuentes/localizadores antes de cualquier ejemplificación específica por idioma.
+**Gate lingüístico/evidencial:** PASS delimitado para C01–C03 y las cautelas metodológicas de esta versión. La revisión editorial independiente también quedó completada para este núcleo; esto no implica `READY_FOR_COMPOSITION`. Se requieren nuevas fuentes/localizadores antes de cualquier ejemplificación específica por idioma.
+
+## 10. Revisión editorial wave 02
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada distingue una clase general de procesos de las reglas específicas por lengua y presenta “habla conectada” como índice editorial, no como lista universal de procesos.
+- **Scope warning:** ningún fenómeno enumerado gana productividad, frecuencia o exclusividad contextual por aparecer en la lista.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del núcleo actual.

@@ -1,6 +1,6 @@
 # SND-FND-012 — Ritmo
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Versión revisada:** 2026-10-12; base `cfbe8735e334ef0933c11beb8dd61a6483bcaa9c`.  
 **Dominio:** prosodia.  
 **Idioma:** transversal.
@@ -67,4 +67,13 @@ La entrada no niega que existan diferencias rítmicas entre lenguas. Rechaza con
 
 Revisión lingüística/evidencial de esta versión: 2026-10-12. C01–C03 contrastados directamente con §3.11 de `SND-SRC-0024`; se conserva `VERIFIED` para el **alcance introductorio/metodológico** de cada claim, no para estudios de variedades concretas. La referencia a Pamies Bertrán (1999) se mantiene como cita secundaria mencionada por el manual: **no se declara consulta directa del artículo**. No hay transcripciones IPA ni ejemplos empíricos nuevos que requieran gate propio.
 
-**Gate de revisión lingüística:** PASS para los tres claims delimitados y la formulación prudente de esta versión; el estado `LINGUISTIC_REVIEW` registra la revisión, no implica `EDITORIAL_REVIEW` ni `READY_FOR_COMPOSITION`. Pendiente revisión editorial independiente y, si se amplía el capítulo con métricas/variedades concretas, investigación especializada y nuevos claims/localizadores.
+**Gate de revisión lingüística:** PASS para los tres claims delimitados y la formulación prudente de esta versión. La revisión editorial independiente de esta versión también quedó completada; esto no implica `READY_FOR_COMPOSITION`. Si se amplía el capítulo con métricas/variedades concretas, se requieren investigación especializada y nuevos claims/localizadores.
+
+## 9. Revisión editorial wave 02
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_TERMINOLOGY_WARNING → `EDITORIAL_REVIEW`.
+- **Terminología:** “ritmo” permanece término descriptivo; la norma v0.2 mantiene las taxonomías rítmicas específicas abiertas a refinamiento por perfil.
+- **Lectura:** la advertencia contra una dicotomía rígida stress-timed/syllable-timed aparece antes de cualquier aplicación por lengua.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del núcleo actual.
