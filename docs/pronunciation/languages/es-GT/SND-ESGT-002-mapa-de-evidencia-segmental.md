@@ -1,6 +1,6 @@
 # SND-ESGT-002 — Inventario segmental: mapa de evidencia
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; inventario fonémico final pendiente.
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; inventario fonémico final pendiente.
 **Idioma:** español de Guatemala.
 **Dominio:** segmentos / alcance de evidencia / variación.
 **Objetivo:** indicar qué fenómenos cuentan con evidencia suficiente y cuáles siguen abiertos antes de redactar un inventario.
@@ -141,3 +141,14 @@ La versión vigente es lingüísticamente coherente **como mapa de cobertura** p
 - conserva clusters insuficientemente documentados como `SOURCE_MAPPED` o `ACTIVE_RESEARCH` en vez de cerrar el inventario por analogía.
 
 **Advertencias que sobreviven al gate:** el inventario fonémico nacional sigue abierto; varios clusters requieren investigación especializada; la cobertura nacional de una fuente no autoriza uniformidad nacional del fenómeno; cualquier inventario futuro será una nueva versión y deberá reabrir los gates afectados.
+
+## 12. Revisión editorial
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `42181e98a6c5bd9bbd1897ba84b3c7c994cb51aa`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Identidad editorial:** la entrada permanece explícitamente definida como **mapa de cobertura segmental**, no inventario fonémico canónico del español de Guatemala.
+- **Alcance:** se conservan separadas la base nacional, las muestras de contacto, la evidencia sociofonética y los clusters todavía `SOURCE_MAPPED` / `ACTIVE_RESEARCH`.
+- **Evidencia limitada:** `FULLTEXT_REQUIRED` para claims finos de SND-SRC-0057 sigue visible y no se sustituye por inferencia.
+- **Reader safety:** estados de cobertura evidencial no se presentan como frecuencia, obligatoriedad ni estatus fonémico.
+- **Siguiente gate:** composition readiness de esta versión-map; un inventario fonémico final será una versión distinta y reabrirá gates.
