@@ -1,9 +1,9 @@
 # SND-REP-011 — Transliteración
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_TERMINOLOGY_SCOPE_WARNING.  
 **Dominio:** representación / conversión de escritura.  
 **Idioma:** transversal.  
-**Fuente conceptual nueva:** SND-SRC-0050, pendiente de canonicalización.
+**Fuente conceptual:** SND-SRC-0050 — Unicode CLDR, canonicalizada en el Source Registry.
 
 ## 1. Definición operativa y advertencia terminológica
 
@@ -48,3 +48,14 @@ MLS-SND no utilizará “transliteración” y “transcripción fonética” co
 ## 8. Gate
 
 **EVIDENCE_CHECKED.** La fuente técnica quedó canonicalizada; falta LINGUISTIC_REVIEW.
+
+## 9. Revisión lingüística wave 02
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `102be5724de1b919199500bc02a2775383a5872c`.
+- **Resultado:** PASS_WITH_TERMINOLOGY_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Definición:** transliteración permanece orientada primariamente a conversión gráfica entre scripts y no se equipara a pronunciación.
+- **CLDR:** su uso amplio de “transliteration” se atribuye a esa tradición técnica y no se impone como definición lingüística universal.
+- **Reversibilidad:** no se presupone para toda transliteración.
+- **Metadata:** SND-SRC-0050 ya estaba canonicalizada; se corrige únicamente el encabezado obsoleto.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente.
