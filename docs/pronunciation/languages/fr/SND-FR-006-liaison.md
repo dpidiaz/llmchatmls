@@ -1,6 +1,6 @@
 # SND-FR-006 — Liaison: definición descriptiva inicial
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** francés.  
 **Dominio:** habla conectada / fonología.  
 **Alcance:** definición básica de SND-SRC-0018; distribución normativa/variable queda pendiente.
@@ -48,4 +48,14 @@ Una ampliación normativa/sociolingüística de liaison deberá conservar el est
 - **Lectura:** la definición básica de liaison queda separada de enchaînement y de cualquier taxonomía normativa aún no investigada.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del núcleo actual; una ampliación normativa/sociolingüística debe reabrir los gates afectados.
+
+## 10. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `4bc6b6f6d22ee2d11db0237c7af5c82dd2bd7723`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` para la definición descriptiva inicial.
+- **Open question no bloqueante:** taxonomía obligatoria/facultativa/prohibida y variación sociolingüística quedan fuera del alcance actual.
+- **Reader-facing:** incluir §§1–4 y nota editorial reader-facing por su función de alcance; excluir tabla R33, auditoría y metadata de revisión.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se añade ejemplo ni respelling no aprobado.
+- **Written-only:** PASS.
 

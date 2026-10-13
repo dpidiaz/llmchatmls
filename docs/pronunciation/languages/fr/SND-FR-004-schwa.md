@@ -1,6 +1,6 @@
 # SND-FR-004 — Schwa: núcleo mínimo validado
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** francés.  
 **Dominio:** vocales / schwa.  
 **Alcance:** solo claims directamente sostenidos por SND-SRC-0018.
@@ -49,3 +49,14 @@ El gate evidencial previo cubre el núcleo descrito aquí, no una futura entrada
 - **Corrección editorial:** la nota de gate se formula como gate evidencial previo, evitando presentar `EVIDENCE_CHECKED` como estado actual.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del núcleo actual; una ampliación material de schwa reabre los gates afectados.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `cf9030f4c4a4f8fe61effddbf6f5e1e7607d9cb5`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` para el núcleo mínimo validado.
+- **Open question no bloqueante:** reglas de e caduc/elisión, registro y variación regional quedan fuera del alcance actual.
+- **Reader-facing:** incluir §§1–3 y fundamento visible derivado; excluir tabla R33, nota de gate y logs internos.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se inventa una forma ejemplificadora.
+- **Written-only:** PASS.
+

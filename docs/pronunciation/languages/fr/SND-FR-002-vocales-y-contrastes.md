@@ -1,6 +1,6 @@
 # SND-FR-002 — Vocales y contrastes: mapa descriptivo
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** francés.
 **Variedad principal en esta entrada:** variable según la fuente; **parisino** cuando el estudio está delimitado a París y **supralocal/norte de Francia** únicamente cuando la fuente lo declara.
 **Dominio:** vocales / variación.
@@ -72,3 +72,14 @@ Es un gate contra dos errores:
 ## 8. Gate
 
 Los claims permanecen **EVIDENCE_CHECKED**. La revisión lingüística independiente concluyó **PASS_WITH_SCOPE_WARNING**. El inventario fonológico final sigue bloqueado hasta fijar el subcorpus/variedad primaria y superar el gate editorial.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `2fd8a47f786514f1011948f4fdbad3e8bb9a6ce8`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como **mapa descriptivo**, no como inventario fonológico final.
+- **Open question no bloqueante:** seleccionar una variedad/subcorpus primario sigue siendo requisito para una futura tabla de referencia, pero no altera los claims ni la función actual de mapa.
+- **Reader-facing:** incluir §§1–4, 6–7 y un bloque de fuentes/fundamento derivado; excluir tabla R33, gate y metadata de auditoría/revisión.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; no hay una forma léxica concreta que permita derivarla sin contenido nuevo.
+- **Written-only:** PASS; no depende de audio.
+

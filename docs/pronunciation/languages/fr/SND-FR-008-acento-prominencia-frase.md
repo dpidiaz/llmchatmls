@@ -1,6 +1,6 @@
 # SND-FR-008 — Acento, prominencia y grupo prosódico
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** francés.  
 **Dominio:** prosodia.  
 **Alcance:** descripción básica de Fougeron & Smith (1993); la entonación detallada requiere fuentes adicionales.
@@ -48,4 +48,14 @@ El gate evidencial previo cubre solo el núcleo de dominio/acento explicado aqu�
 - **Lectura:** la entrada delimita el dominio prosódico sin fingir una teoría completa de entonación.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del núcleo actual; una ampliación entonativa material debe reabrir los gates afectados.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `d29430c99d812657f0a9ae816d61bdbd40798f0d`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` para el núcleo de dominio/acento.
+- **Open question no bloqueante:** inventario de tonos de borde, contornos y teoría prosódica detallada quedan fuera del alcance actual.
+- **Reader-facing:** incluir §§1–3 y nota editorial de alcance; excluir tabla R33, auditoría y metadata de gate.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; entrada conceptual sin forma léxica concreta.
+- **Written-only:** PASS.
 
