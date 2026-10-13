@@ -1,6 +1,6 @@
 # SND-JA-001 — Tokio como ancla de referencia y sus límites
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** japonés.
 **Variedad:** Tokio / lengua común para el ancla prosódica.
 **Dominio:** variedad / prosodia.
@@ -75,3 +75,15 @@ Condiciones preservadas:
 2. los datos 1982–1984 no se presentan como frecuencia contemporánea;
 3. OJAD documenta una referencia institucional del proyecto, no una actualización continua hasta 2026;
 4. cualquier afirmación contemporánea deberá usar bibliografía actual cuando la fecha sea material.
+
+## 11. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `66ab98b7acb0994708510f1e1ef79c011bdf44eb`.
+- **Resultado:** PASS_WITH_DATE_SCOPE_WARNING → `READY_FOR_COMPOSITION`.
+- **Alcance:** Tokio/lengua común sigue siendo ancla prosódica, no japonés universal.
+- **Warning temporal:** los datos 1982–1984 y el cierre de OJAD en 2013 permanecen visibles; COMPOSITION no los presenta como frecuencia contemporánea.
+- **Reader-facing:** incluir §§1–4, 6–8; excluir tabla R33 y metadata de auditoría/gates.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; entrada de alcance/referencia sin forma léxica concreta.
+- **Written-only:** PASS.
+
