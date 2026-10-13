@@ -1,6 +1,6 @@
 # SND-FND-001 — El sonido como parte del idioma
 
-**Estado:** LINGUISTIC_REVIEW — PASS.  
+**Estado:** EDITORIAL_REVIEW — PASS.  
 **Dominio:** fundamentos / orientación.  
 **Idioma:** transversal.
 
@@ -65,3 +65,13 @@ La decisión de colocar la dimensión sonora en paralelo con gramática y escrit
 - **Arquitectura MLS:** colocar pronunciación junto a gramática y escritura sigue identificado como decisión editorial del proyecto, no como claim de la fuente.
 - **Alcance de fuente:** SND-SRC-0024 se usa en su nivel introductorio autorizado.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
+## 10. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `b87c029498cca1ae3b8d639027644cb8f4c13961`.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Claridad:** la entrada funciona como orientación transversal y separa señal física, realización/phone, fonema, prosodia y símbolo sin colapsarlos bajo “sonido”.
+- **Arquitectura:** la relación pronunciación–gramática–escritura permanece marcada como decisión intelectual MLS, no como claim atribuido a SND-SRC-0024.
+- **Terminología:** consistente con la política canónica de fonética/fonología/pronunciación.
+- **Siguiente gate:** composition readiness sobre esta versión editorial.
