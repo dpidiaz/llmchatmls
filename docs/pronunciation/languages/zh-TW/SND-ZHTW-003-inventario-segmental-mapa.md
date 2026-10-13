@@ -1,6 +1,6 @@
 # SND-ZHTW-003 — Iniciales y finales: mapa fonético/fonológico
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.
+**Estado:** READY_FOR_COMPOSITION.
 **Alcance del estado:** revisión lingüística aprobada para este mapa de evidencia segmental; no constituye un inventario fonémico definitivo de Taiwan Mandarin.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin dentro de un marco comparativo de Mandarin.
@@ -136,3 +136,14 @@ La versión vigente es lingüísticamente coherente **como mapa de evidencia**, 
 - **Advertencias visibles:** `ANALYTICAL_CHOICE`, el HOLD de SND-SRC-0044 y la variación regional/social sobreviven al gate.
 - **Proyección futura:** cualquier tabla reader-facing deberá construirse solo con decisiones ya aprobadas; esta revisión no autoriza completar huecos por inferencia.
 - **Siguiente gate:** composition readiness sobre esta versión editorial; el inventario integral futuro seguirá siendo una versión distinta y deberá reabrir gates.
+
+## 13. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `a83a70fa8bba4dc747ca7b437cb537ce778a7e31`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` **como mapa de evidencia segmental**.
+- **Reader-facing projection:** encabezado de alcance + §§1–5; §9 como base de fuentes. §§6–8 y §§10–12 quedan como infraestructura/evidencia interna; §7 (“Tabla futura”) no entra en la edición de lectura de esta versión.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — la entrada describe categorías, realizaciones y evidencia; no presenta una forma léxica objetivo para respelling.
+- **Open questions:** no bloqueantes para el mapa; sí bloquean cualquier intento de convertir esta versión en inventario fonémico definitivo.
+- **Navigation guard:** composición debe enlazar a SND-REP-002/003/007/008 para lectura de IPA y niveles de transcripción, sin alterar los símbolos aprobados.
+- **Handoff:** `composition/handoffs/SND-ZHTW-003.md`.
