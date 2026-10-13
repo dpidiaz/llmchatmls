@@ -1,6 +1,6 @@
 # SND-REP-007 — Transcripción fonológica y transcripción fonética
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** transcripción / fonología / fonética.  
 **Idioma:** transversal.
 
