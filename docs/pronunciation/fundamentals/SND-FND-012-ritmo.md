@@ -1,6 +1,6 @@
 # SND-FND-012 — Ritmo
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Versión revisada:** 2026-10-12; base `cfbe8735e334ef0933c11beb8dd61a6483bcaa9c`.  
 **Dominio:** prosodia.  
 **Idioma:** transversal.
@@ -77,3 +77,15 @@ Revisión lingüística/evidencial de esta versión: 2026-10-12. C01–C03 contr
 - **Lectura:** la advertencia contra una dicotomía rígida stress-timed/syllable-timed aparece antes de cualquier aplicación por lengua.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del núcleo actual.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `cf98e2946f8fc903026996804b3d2f242617989a`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–7.
+- **Metadata interna excluida de la edición de lectura:** §§8–9 (auditoría/gates internos).
+- **Fuentes y fundamento:** derivado de la evidencia R33 y la bibliografía ya aprobadas; los claim IDs/localizadores completos permanecen auditables en el repositorio.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual/transversal sin forma léxica cuya respelling aporte valor.
+- **Autonomía escrita:** PASS; no requiere audio para comprender el contenido aprobado.
+- **Open questions:** ninguna bloqueante para el núcleo actual. La cautela contra una dicotomía rígida stress-timed/syllable-timed permanece reader-facing; la advertencia terminológica es no bloqueante.
+- **Regla para COMPOSITION:** puede ajustar presentación visual, pero no wording lingüísticamente material, claims, alcance, fuentes/localizadores ni decisiones analíticas.

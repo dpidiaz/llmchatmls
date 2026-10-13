@@ -1,6 +1,6 @@
 # SND-FND-010 — Duración y cantidad
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** fonética / fonología.  
 **Idioma:** transversal.
 
@@ -71,3 +71,15 @@ Claim ↔ fuente ↔ localizador comprobados el 2026-10-11. LINGUISTIC_REVIEW y 
 - **Lectura:** vocales, consonantes, contraste fonológico y escritura quedan separados sin inferir cantidad a partir de duración o grafía.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `dab299cce06db9d5bac6ffce697c4f12ef33ccc7`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–8.
+- **Metadata interna excluida de la edición de lectura:** §§9–11 (auditoría y revisiones internas).
+- **Fuentes y fundamento:** derivado de la evidencia R33 y la bibliografía ya aprobadas; los claim IDs/localizadores completos permanecen auditables en el repositorio.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual/transversal sin forma léxica cuya respelling aporte valor.
+- **Autonomía escrita:** PASS; no requiere audio para comprender el contenido aprobado.
+- **Open questions:** ninguna bloqueante para el núcleo actual. La distinción duración física ≠ cantidad fonológica permanece visible y no requiere decisión de composición.
+- **Regla para COMPOSITION:** puede ajustar presentación visual, pero no wording lingüísticamente material, claims, alcance, fuentes/localizadores ni decisiones analíticas.

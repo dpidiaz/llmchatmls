@@ -1,6 +1,6 @@
 # SND-FND-017 — Variación: región, sociedad, estilo y tiempo
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** variación / sociolingüística.  
 **Idioma:** transversal.
 
@@ -81,3 +81,15 @@ Claim ↔ fuente ↔ localizador comprobados el 2026-10-11. Revisión lingüíst
 - **Navegación conceptual:** la entrada justifica la política de alcance de los perfiles sin sustituir estudios específicos de cada variedad.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `c0dee91b034489434e5ee81c4d47454c8de3b4d5`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–8.
+- **Metadata interna excluida de la edición de lectura:** §§9–11 (auditoría y revisiones internas).
+- **Fuentes y fundamento:** derivado de la evidencia R33 y la bibliografía ya aprobadas; los claim IDs/localizadores completos permanecen auditables en el repositorio.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual/transversal sin forma léxica cuya respelling aporte valor.
+- **Autonomía escrita:** PASS; no requiere audio para comprender el contenido aprobado.
+- **Open questions:** ninguna bloqueante para el núcleo actual. La variación se presenta como parte estructural del uso y no como desviación; no se sustituye evidencia dialectal específica.
+- **Regla para COMPOSITION:** puede ajustar presentación visual, pero no wording lingüísticamente material, claims, alcance, fuentes/localizadores ni decisiones analíticas.

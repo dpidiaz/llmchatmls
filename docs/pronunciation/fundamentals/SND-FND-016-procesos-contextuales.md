@@ -1,6 +1,6 @@
 # SND-FND-016 — Procesos contextuales y habla conectada
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Versión revisada:** 2026-10-12; base `2afbec8eb45065c5ae320fef3e6cfad88f20912b`.  
 **Dominio:** fonología / pronunciación.  
 **Idioma:** transversal.
@@ -74,3 +74,15 @@ Revisión lingüística/evidencial de esta versión: 2026-10-12. Los tres claims
 - **Scope warning:** ningún fenómeno enumerado gana productividad, frecuencia o exclusividad contextual por aparecer en la lista.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del núcleo actual.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `a7cfff7c7afb01918a1c113b56fae4324eb6ccf8`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–8.
+- **Metadata interna excluida de la edición de lectura:** §§9–10 (auditoría/gates internos).
+- **Fuentes y fundamento:** derivado de la evidencia R33 y la bibliografía ya aprobadas; los claim IDs/localizadores completos permanecen auditables en el repositorio.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual/transversal sin forma léxica cuya respelling aporte valor.
+- **Autonomía escrita:** PASS; no requiere audio para comprender el contenido aprobado.
+- **Open questions:** ninguna bloqueante para el núcleo actual. «Habla conectada» permanece índice editorial de fenómenos posibles, no lista universal de procesos productivos.
+- **Regla para COMPOSITION:** puede ajustar presentación visual, pero no wording lingüísticamente material, claims, alcance, fuentes/localizadores ni decisiones analíticas.
