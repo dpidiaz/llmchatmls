@@ -1,6 +1,6 @@
 # SND-PTBR-006 — Sibilante /S/ en coda y variación carioca
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** portugués.
 **Variedad:** RIO_CARIOCA — fala culta carioca en los conjuntos NURC descritos.
 **Tipo de alcance:** CORPUS_OBSERVED / DOCUMENTED_VARIANT / DATE_SCOPE_WARNING.
@@ -84,3 +84,14 @@ Callou, D. (2009). Um perfil da fala carioca. En S. S. C. Ribeiro, S. B. B. Cost
 - **Estado de workflow:** EDITORIAL_REVIEW; el gate EVIDENCE_CHECKED permanece satisfecho.
 - **Pendiente:** evidencia contemporánea explícitamente carioca antes de redactar una síntesis actual del fenómeno.
 - **No implica:** tasa urbana de 2026 ni obligatoriedad de la variante palatal.
+
+## 11. Composition readiness wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `8b43795891bfa403096043526dbfde43786a5cee`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Reader-facing projection:** §§1–7 y §9; §§8 y 10 quedan como auditoría/gate internos.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — la entrada describe un patrón variable de /S/ en coda y datos históricos, no una forma léxica objetivo.
+- **Temporal guard:** los porcentajes de los 70/90 permanecen fechados; no se presentan como tasas de 2026 ni como obligatoriedad.
+- **Analytical guard:** `/S/` conserva la notación analítica de la fuente y no se normaliza silenciosamente a `/s/`.
+- **Handoff:** `composition/handoffs/SND-PTBR-006.md`.
