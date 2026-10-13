@@ -1,6 +1,6 @@
 # SND-REP-001 — Sonido, letra y símbolo
 
-**Estado:** EDITORIAL_REVIEW — PASS.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** representación / fonética / escritura.  
 **Idioma:** transversal.
 
@@ -77,3 +77,13 @@ La taxonomía “sonido / letra / símbolo” se fija como convención de clarid
 - **Consistencia:** “sonido / letra / símbolo” se mantiene como taxonomía editorial explícita y no borra terminología técnica específica de cada tradición.
 - **Reader layer:** la regla de separar escritura, transcripción y realización es clara y no requiere material lingüístico nuevo.
 - **Siguiente gate:** composition readiness sobre esta versión editorial.
+
+## 11. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `46660137dec4fa30311612028ccfcd332971a15c`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Reader-facing projection:** §§1–7 incluidas; §§8–10 quedan como metadata interna.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual, sin forma pronunciable objetivo.
+- **Written-only gate:** PASS; no depende de audio ni de una inferencia fonética nueva.
+- **Handoff:** `composition/handoffs/SND-REP-001.md`.

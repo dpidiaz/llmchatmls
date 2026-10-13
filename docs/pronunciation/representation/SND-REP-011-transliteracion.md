@@ -1,6 +1,6 @@
 # SND-REP-011 — Transliteración
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_TERMINOLOGY_SCOPE_WARNING.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** representación / conversión de escritura.  
 **Idioma:** transversal.  
 **Fuente conceptual:** SND-SRC-0050 — Unicode CLDR, canonicalizada en el Source Registry.
@@ -68,3 +68,14 @@ MLS-SND no utilizará “transliteración” y “transcripción fonética” co
 - **Terminología:** “transliteración” conserva el uso MLS orientado primariamente a conversión gráfica; no se usa como sinónimo de traducción ni transcripción fonética.
 - **Alcance CLDR:** su empleo amplio del término permanece atribuido a esa tradición técnica y no se universaliza.
 - **Siguiente gate:** composition readiness con la advertencia terminológica preservada.
+
+## 11. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `684756157e57950734c6db50ac4fec66e0c1e8a6`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Reader-facing projection:** §§1–7 incluidas; §§8–10 quedan como metadata interna.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual de representación; no hay forma pronunciable objetivo.
+- **Written-only gate:** PASS; no depende de audio ni de una inferencia fonética nueva.
+- **Scope guard:** El alcance terminológico de CLDR permanece atribuido a esa tradición técnica; no se universaliza.
+- **Handoff:** `composition/handoffs/SND-REP-011.md`.
