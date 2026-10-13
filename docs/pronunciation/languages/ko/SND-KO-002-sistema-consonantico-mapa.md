@@ -1,6 +1,6 @@
 # SND-KO-002 — Sistema consonántico: mapa de evidencia
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de evidencia, no como inventario consonántico canónico.
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de evidencia, no como inventario consonántico canónico.
 **Idioma:** coreano.
 **Ancla descriptiva:** Seúl, cuando la fuente lo especifique.
 **Dominio:** consonantes / mapa de investigación.
@@ -97,3 +97,15 @@ La promoción a EVIDENCE_CHECKED no significa que todos los clusters consonánti
 - **Gaps preservados:** fricativas, africadas, nasales, líquidas y codas siguen abiertos; esta revisión no los completa por analogía.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente del mapa; el inventario consonántico final requiere investigación adicional antes de cualquier composición que lo presente como completo.
 
+## 11. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `4d1875c5e1bad9e51987c7f0c31e44dd86b1d61b`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Objeto editorial:** mapa parcial de evidencia, no inventario consonántico contemporáneo completo.
+- **Jerarquía:** la advertencia histórica de Lee (1993) precede a la tabla de clusters y los gaps permanecen visibles antes del gate.
+- **Temporalidad/variedad:** los datos contemporáneos de 2018/2026 siguen delimitados a Seúl y a los contextos prosódicos citados.
+- **Terminología:** lax / tense / aspirated se conserva sin reducirse a “sonora/sorda”; VOT y f0 no se presentan como pistas universales fijas.
+- **Gaps preservados:** fricativas, africadas, nasales, líquidas y codas continúan `SOURCE_MAPPED`; esta revisión no los completa por analogía.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del mapa actual, manteniendo explícita su condición parcial.
