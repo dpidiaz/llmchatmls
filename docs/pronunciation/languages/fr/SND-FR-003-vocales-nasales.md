@@ -1,6 +1,6 @@
 # SND-FR-003 — Vocales nasales
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** francés.  
 **Dominio:** vocales / nasalidad.  
 **Alcance:** hablante parisina descrita por Fougeron & Smith (1993), con observaciones generales de la fuente.
@@ -37,3 +37,12 @@ Fougeron, C., & Smith, C. L. (1993). French. *Journal of the International Phone
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 7. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada separa con claridad inventario tradicional, comportamiento de la hablante y advertencia contra universalización.
+- **Jerarquía:** la progresión contraste → articulación → variación → evidencia es suficiente para lectura autodidacta.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.

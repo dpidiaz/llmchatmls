@@ -1,6 +1,6 @@
 # SND-FR-004 — Schwa: núcleo mínimo validado
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** francés.  
 **Dominio:** vocales / schwa.  
 **Alcance:** solo claims directamente sostenidos por SND-SRC-0018.
@@ -34,9 +34,18 @@ Fougeron, C., & Smith, C. L. (1993). French. *JIPA, 23*(2), 73–76.
 
 ## 6. Nota editorial
 
-El estado EVIDENCE_CHECKED se refiere al núcleo descrito aquí, no a una futura entrada exhaustiva sobre elisión de schwa.
+El gate evidencial previo cubre el núcleo descrito aquí, no una futura entrada exhaustiva sobre elisión de schwa.
 
 ## 7. Auditoría R33
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 8. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_METADATA_FIX → `EDITORIAL_REVIEW`.
+- **Lectura:** el núcleo mínimo y sus límites están visibles antes de cualquier futura ampliación sobre elisión.
+- **Corrección editorial:** la nota de gate se formula como gate evidencial previo, evitando presentar `EVIDENCE_CHECKED` como estado actual.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del núcleo actual; una ampliación material de schwa reabre los gates afectados.
