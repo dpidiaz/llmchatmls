@@ -1,7 +1,7 @@
 # MLS-SND — Estado canónico del proyecto
 
-**Corte:** 2026-10-11  
-**SHA de coordinación:** `24d5ad1c7f2b3a9102c525145f1e0d64c0285cf4`  
+**Corte:** 2026-10-12  
+**SHA de matriz observado para esta reconciliación:** `cfbe8735e334ef0933c11beb8dd61a6483bcaa9c`  
 **Rama matriz:** `feat/mls-snd-foundation`  
 **Inventario editorial:** 143 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad:** cada archivo canónico `SND-*.md` dentro de los directorios editoriales, cotejado con el inventario.
@@ -58,7 +58,7 @@ No cuentan artefactos de `audits/`, `reviews/`, `claims/` o `editorial/`, aunque
 | Coreano KO | 10 | 9 EDITORIAL_REVIEW; 1 EVIDENCE_CHECKED |
 | Japonés JA | 6 | 2 EDITORIAL_REVIEW; 4 LINGUISTIC_REVIEW |
 | Ruso RU | 9 | 8 EDITORIAL_REVIEW; 1 EVIDENCE_CHECKED |
-| **Total** | **106** | |
+| **Total** | **108** | |
 
 ## Composición: primer bloque integrado
 
@@ -73,7 +73,7 @@ Perfiles READY_FOR_COMPOSITION:
 - **ENUS-001 — Por qué MLS-SND no usa “General American” como una sola voz.**
 - **ZHTW-007 — Zhuyin/Bopomofo.**
 
-Los diez fundamentos cuentan con Composition Handoff Manifest canónico bajo `composition/handoffs/`. ENUS-001 conserva su handoff previo. La reader-facing projection es una vista derivada; metadata R33 y reviews permanecen en repositorio.
+Las 12 entradas READY_FOR_COMPOSITION cuentan con handoff canónico: diez fundamentos, ENUS-001 y ZHTW-007. La reader-facing projection —incluida la Pronunciation Quick Layer— es derivada; metadata R33, IPA aprobado, fuentes, localizadores y reviews permanecen canónicos en repositorio.
 
 ## Entradas todavía pre-gate
 
@@ -88,7 +88,7 @@ Auditoría vigente:
 
 `audits/SOURCE-ID-INTEGRITY-108-97-2026-10-11.md`
 
-Resultado estructural/referencial para el SHA indicado:
+Resultado estructural/referencial del audit congelado citado arriba:
 
 - 108 IDs canónicos únicos;
 - 97 fuentes `SND-SRC-0001…0097`, sin huecos;
