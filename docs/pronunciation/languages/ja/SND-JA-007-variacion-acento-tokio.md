@@ -1,6 +1,6 @@
 # SND-JA-007 — Variación y cambio en el acento de Tokio
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** japonés.  
 **Variedad:** Tokio; datos recogidos principalmente entre 1982 y 1984.  
 **Dominio:** prosodia / variación.
@@ -99,3 +99,15 @@ Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institu
 - **Advertencia contemporánea:** ningún dato del corpus se presenta automáticamente como “la forma actual” en 2026; una afirmación contemporánea concreta puede requerir evidencia más reciente.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión, conservando la advertencia temporal.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `47a406025eb7a61a8119e35e6ad443754b788518`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** metadata inicial y §§1–6, 8–9.
+- **Metadata interna excluida:** §7 (tabla R33), §10 (auditoría interna) y bloques de revisión lingüística/editorial.
+- **Fuentes y fundamento:** derivado de SND-SRC-0013, manteniendo visibles la fecha de recogida 1982–1984, el tamaño de muestra y la diferencia entre corpus y diccionarios.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — la entrada describe variación/cambio de un recurso y no presenta una forma léxica objetivo para respelling.
+- **Autonomía escrita:** PASS; no requiere audio.
+- **Open questions no bloqueantes:** para afirmar patrones concretos de uso en 2026 puede requerirse evidencia más reciente; eso no impide componer la entrada histórica con su alcance explícito.
+- **Regla para COMPOSITION:** no puede borrar la advertencia temporal, presentar los 19 hablantes como muestra exhaustiva ni fusionar forma lexicográfica, patrón de hablantes, cambio generacional y referencia editorial.
