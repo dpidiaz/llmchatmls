@@ -1,6 +1,6 @@
 # SND-IT-007 — S y Z: pronunciación y ortoepía
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** italiano.  
 **Dominio:** consonantes / ortografía / ortoepía.  
 **Alcance:** claims fonológicos comprobados en SND-SRC-0017; DOP solo como recurso ortoépico de consulta.
@@ -19,7 +19,7 @@ Estas afirmaciones pertenecen al alcance de la fuente y no sustituyen un mapa co
 
 ## 3. Procesos contextuales
 
-Bertinetto & Loporcaro documentan además asimilación de sonoridad de /s/ ante consonante siguiente en Standard Italian; como esta fuente aún no está canonicalizada en el registro global, ese detalle se reserva para SND-IT-009 o una revisión posterior y no se usa aquí para promover claims nuevos.
+Bertinetto & Loporcaro documentan además asimilación de sonoridad de /s/ ante consonante siguiente en Standard Italian. La fuente ya está canonicalizada como **SND-SRC-0073**, pero ese detalle permanece fuera del núcleo R33 de esta versión y no se usa aquí para promover claims nuevos.
 
 ## 4. DOP
 
@@ -42,3 +42,12 @@ El DOP mantiene guías específicas para las letras S y Z y entradas lexicográf
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 8. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_METADATA_FIX → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada evita correspondencias rígidas letra-sonido y conserva el alcance de Rogers & d’Arcangeli.
+- **Corrección editorial:** Bertinetto & Loporcaro (2005) ya está canonicalizada como `SND-SRC-0073`; el detalle de asimilación citado en prosa permanece fuera del núcleo R33 de esta entrada y no genera un claim nuevo.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del núcleo actual.
