@@ -1,6 +1,6 @@
 # SND-REF-002 — Índice IPA de MLS-SND
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.  
 **Tipo:** aparato de consulta vivo.  
 **Fuente normativa de símbolos:** SND-SRC-0001 — International Phonetic Association, *The IPA Chart*.
 
@@ -26,7 +26,7 @@ Un signo entra en este índice cuando cumple al menos una condición:
 
 No se añadirá un signo solo porque exista en la tabla IPA.
 
-## 3. Qué registra cada símbolo
+## 3. Qué registra cada forma
 
 Cada registro puede contener:
 
@@ -61,9 +61,9 @@ La forma pertenece a una convención analítica o notación de una fuente y **no
 
 La forma fue detectada, pero necesita comprobación antes de catalogarse.
 
-## 5. Seed v0.1 — símbolos actualmente observados
+## 5. Semilla v0.1 — formas actualmente observadas
 
-Este seed se construyó a partir de entradas ya presentes en `feat/mls-snd-foundation` el 11 de octubre de 2026. Es deliberadamente parcial: se ampliará al integrarse nuevas waves.
+Esta semilla se construyó a partir de entradas ya presentes en `feat/mls-snd-foundation` el 11 de octubre de 2026. Es deliberadamente parcial: se ampliará al integrarse nuevas waves.
 
 | Forma indexada | Clase IPA | Estado | Uso observado | Entradas/idiomas | Nota |
 |---|---|---|---|---|---|
@@ -92,7 +92,7 @@ Esta pasada añade únicamente formas **ya escritas explícitamente** en entrada
 
 ### Ruso — ocurrencias canónicas adicionales
 
-| Símbolo | Clase IPA | Estado | Uso observado | Entrada | Nota |
+| Forma indexada | Clase IPA | Estado | Uso observado | Entrada | Nota |
 |---|---|---|---|---|---|
 | `v` | consonante pulmonar | USED | /v/ | SND-RU-007 | La entrada documenta realizaciones debilitadas/aproximantes sin fijar aquí una transcripción fonética más estrecha. |
 | `j` | consonante pulmonar/aproximante | USED | /j/ | SND-RU-007 | El índice registra el símbolo; las realizaciones condicionadas siguen perteneciendo a la entrada y su evidencia. |
@@ -108,14 +108,14 @@ SND-ZHTW-003 aporta ocurrencias textuales canónicas al índice. REF-002 registr
 | `p`, `t`, `k` | consonantes pulmonares | USED | [p], [t], [k] | SND-ZHTW-003 | Miembros no aspirados de pares descritos por Wan et al. (2024). |
 | `pʰ`, `tʰ`, `kʰ` | consonantes pulmonares + aspiración | USED | [pʰ], [tʰ], [kʰ] | SND-ZHTW-003 | La aspiración se conserva como `ʰ`; no se interpreta como símbolo independiente de segmento. |
 | `tʂ`, `ts`, `tɕ` | secuencias/representaciones consonánticas usadas por la fuente | USED | [tʂ], [ts], [tɕ] | SND-ZHTW-003 | Se conserva la representación escrita en el mapa; REF-002 no decide aquí su análisis fonológico. |
-| `tʂʰ`, `tsʰ`, `tɕʰ` | representaciones consonánticas + aspiración | USED | [tʂʰ], [tsʰ], [tɕʰ] | SND-ZHTW-003 | Mismo límite analítico; la entrada fuente sigue pre-gate. |
+| `tʂʰ`, `tsʰ`, `tɕʰ` | representaciones consonánticas + aspiración | USED | [tʂʰ], [tsʰ], [tɕʰ] | SND-ZHTW-003 | Mismo límite analítico; REF-002 no hereda ni redefine el gate de la entrada fuente. |
 | `s`, `ʂ`, `ɕ` | consonantes pulmonares | USED | [s], [ʂ], [ɕ] | SND-ZHTW-003 | El mapa conserva variación interhablante/contextual; el índice no la colapsa. |
 | `n`, `ŋ` | consonantes pulmonares | USED | /n/, /ŋ/ | SND-ZHTW-003 | Finales estudiadas por Chiu & Lu; el merger documentado es dependiente del contexto y potencialmente incompleto. |
 | `ʰ` | diacrítico/modificador | USED | aspiración en [pʰ tʰ kʰ tʂʰ tsʰ tɕʰ] | SND-ZHTW-003 | Se registra por separado para que el lector pueda rastrear la marca. |
 
 **Gate de alcance:** estas filas certifican indexación de formas observadas, no suficiencia R33 ni cierre analítico de SND-ZHTW-003. Si una versión futura cambia materialmente la representación adoptada, REF-002 deberá sincronizarse y reabrir los controles afectados.
 
-## 7. Suprasegmentales y tonos: pool explicado, no inventario de uso
+## 7. Suprasegmentales y tonos: conjunto explicado, no inventario de uso
 
 SND-REP-006 explica que MLS-SND puede necesitar signos IPA de:
 
@@ -206,7 +206,7 @@ International Phonetic Association. (2026). *The IPA Chart and sub-charts in fou
 
 ## 13. Estado del gate
 
-**EVIDENCE_CHECKED** certifica que esta versión del índice deriva sus inclusiones de ocurrencias canónicas explícitas y mantiene separadas las notaciones SOURCE_SPECIFIC. No certifica que el índice esté editorialmente cerrado ni que las entradas fuente pre-gate hayan avanzado de estado.
+**EVIDENCE_CHECKED** certifica que esta versión del índice deriva sus inclusiones de ocurrencias canónicas explícitas y mantiene separadas las notaciones SOURCE_SPECIFIC. No certifica que el índice esté editorialmente cerrado ni hereda, promueve o redefine el gate de las entradas fuente.
 
 La ampliación futura es mantenimiento normal del aparato REF y no obliga a mantener REF-002 en IN_PROGRESS.
 
@@ -222,7 +222,7 @@ Después de integrar las waves activas se debe ejecutar otra pasada sobre:
 - los tres perfiles piloto;
 - entradas REP-003…REP-008.
 
-La meta de REF-002 no será “tener muchos símbolos”, sino garantizar que **cada signo que el lector encuentre pueda rastrearse a una explicación y a un uso concreto**.
+La meta de REF-002 no será “tener muchas formas”, sino garantizar que **cada forma indexada que el lector encuentre pueda rastrearse a una explicación y a un uso concreto**.
 
 
 ## 15. Revisión lingüística wave 01
@@ -237,3 +237,16 @@ La meta de REF-002 no será “tener muchos símbolos”, sino garantizar que **
 - **Scope guard:** el índice registra ocurrencias de entradas canónicas sin heredar ni resolver el análisis lingüístico de esas entradas.
 - **Advertencia:** la expansión futura del índice es normal para un aparato vivo, pero toda ampliación material deberá volver a comprobar clasificación, nivel de representación y procedencia antes de heredar este gate.
 - **Siguiente gate:** EDITORIAL_REVIEW sobre esta versión concreta.
+
+
+## 16. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `8eb005f614d2593d79cf0e757e17ef472b27beb6`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Claridad:** “forma indexada” funciona como término paraguas para símbolo, diacrítico o secuencia atestiguada sin borrar la distinción técnica entre ellos.
+- **Consistencia:** se uniformó el encabezado de tablas y se sustituyeron anglicismos prescindibles en títulos internos (`Seed`, `pool`).
+- **Drift resistance:** se eliminaron formulaciones que dependían del estado momentáneo de ZHTW-003; REF-002 describe ahora relaciones por función y alcance.
+- **Navegabilidad:** los estados USED / EXPLAINED / SOURCE_SPECIFIC / PENDING_CLASSIFICATION permanecen separados y las exclusiones de Zhuyin, romanización y `/S/` continúan visibles.
+- **Cambios lingüísticos:** ninguno; no se añadieron ni reinterpretaron símbolos, transcripciones, fuentes o localizadores.
+- **Siguiente gate:** composition readiness sobre esta versión concreta.
