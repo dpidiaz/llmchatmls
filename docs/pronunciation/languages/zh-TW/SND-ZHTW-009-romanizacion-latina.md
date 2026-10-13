@@ -1,6 +1,6 @@
 # SND-ZHTW-009 — Romanización latina
 
-**Estado:** EVIDENCE_CHECKED.
+**Estado:** LINGUISTIC_REVIEW.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** romanización / consulta.
 
@@ -71,3 +71,15 @@ Siguiente gate: **LINGUISTIC_REVIEW**. La política global de romanización para
 ## 9. Nota editorial
 
 Esta entrada resuelve el **mapeo mínimo de fuente** para Hanyu Pinyin en el perfil zh-TW. No pretende reconstruir la historia de las políticas de romanización en Taiwán.
+
+## 10. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `242a056f727b6b12e3977e728311ae11cb727ccc`.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Alcance:** la evidencia institucional de SND-SRC-0080 sustenta el uso de Hanyu Pinyin como capa latina de consulta en el recurso MOE; no se extrapola a una descripción fonética de Taiwan Mandarin ni a exclusividad histórica.
+- **Separación de representaciones:** Zhuyin/Bopomofo, Hanyu Pinyin e IPA se mantienen como capas funcionalmente distintas; la romanización no se trata como IPA ni como sustituto automático de una transcripción fonética.
+- **Decisión MLS:** la secuencia visual `caracteres → Zhuyin → Hanyu Pinyin → IPA → explicación` se conserva como recomendación editorial condicional, no como claim derivado del diccionario.
+- **Claims R33:** ZHTW009-C01/C02 permanecen sin ampliación y con los mismos localizadores.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente sobre esta versión.
+
