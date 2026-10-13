@@ -1,6 +1,6 @@
 # SND-REP-012 — Sistemas locales de anotación y consulta
 
-**Estado:** LINGUISTIC_REVIEW — PASS.  
+**Estado:** EDITORIAL_REVIEW — PASS.  
 **Dominio:** representación / escritura / consulta.  
 **Idioma:** transversal con ejemplos delimitados.
 
@@ -69,3 +69,12 @@ Los ejemplos de Taiwán y Corea ilustran tipos de capa; no se usan para definir 
 - **Arquitectura:** las capas necesarias se eligen por idioma; no se obliga a una plantilla universal ortografía + romanización + IPA + sistema local.
 - **Alcance:** los ejemplos de Taiwán y Corea no se extrapolan a otras tradiciones.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
+## 11. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `6aa4308d52c463251336584f722a5f5cfb153053`.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Arquitectura:** Zhuyin, romanización, IPA y otras capas permanecen presentadas por función real; no se impone una plantilla universal.
+- **Consistencia:** los ejemplos de Taiwán y Corea están delimitados y la entrada no extrapola sus sistemas a otros perfiles.
+- **Siguiente gate:** composition readiness sobre esta versión editorial.
