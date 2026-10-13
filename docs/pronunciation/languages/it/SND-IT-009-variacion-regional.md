@@ -1,6 +1,6 @@
 # SND-IT-009 — Variación regional y referencia
 
-**Estado:** EDITORIAL_REVIEW  
+**Estado:** READY_FOR_COMPOSITION  
 **Idioma:** italiano.  
 **Dominio:** variación / referencia.  
 **Fuente regional canonicalizada:** SND-SRC-0073.
@@ -68,3 +68,13 @@ Esta entrada no pretende representar toda la diversidad regional italiana median
 - **IT009-C03:** VERIFIED contra SND-SRC-0073, pp. 131–132 y alcance explícito SI/FI/MI/RI.
 - **IT009-C04:** VERIFIED contra SND-SRC-0073, p. 137: la fuente declara divergencias entre FI, RI y MI en la distribución de vocales medias tónicas.
 - **Resultado:** evidencia reconciliada; LINGUISTIC_REVIEW PASS y EDITORIAL_REVIEW PASS_WITH_EDITORIAL_CHANGES, con advertencia de alcance preservada.
+
+## 11. Gate de composición — 2026-10-13
+
+**COMPOSITION_READINESS: PASS → READY_FOR_COMPOSITION.**
+
+La proyección de lectura conserva §§1–5, §8 y §9. La tabla R33 (§6), el gate editorial (§7), esta auditoría de integración (§10) y el presente gate (§11) permanecen como metadata interna del repositorio.
+
+La advertencia central de alcance se mantiene explícita: SI, FI, MI y RI son categorías documentadas para esta comparación y no una taxonomía exhaustiva de la diversidad italiana.
+
+**Pronunciation Quick Layer:** NOT_APPLICABLE. Esta entrada describe arquitectura de variación y referencia; no introduce una forma léxica cuya pronunciación fácil deba derivarse.
