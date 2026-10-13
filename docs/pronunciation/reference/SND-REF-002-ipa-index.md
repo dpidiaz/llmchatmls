@@ -1,6 +1,6 @@
 # SND-REF-002 — Índice IPA de MLS-SND
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.  
 **Tipo:** aparato de consulta vivo.  
 **Fuente normativa de símbolos:** SND-SRC-0001 — International Phonetic Association, *The IPA Chart*.
 
@@ -30,7 +30,7 @@ No se añadirá un signo solo porque exista en la tabla IPA.
 
 Cada registro puede contener:
 
-- **símbolo**;
+- **forma indexada** (símbolo, diacrítico o secuencia atestiguada);
 - **clase IPA**;
 - **estatus MLS-SND**;
 - **entradas donde aparece**;
@@ -39,17 +39,19 @@ Cada registro puede contener:
 - **nota de alcance**;
 - **primera evidencia o fuente pertinente**.
 
-El índice no define por sí solo el valor fonético que un símbolo tiene en una lengua concreta.
+El índice no define por sí solo el valor fonético que una forma tiene en una lengua concreta.
+
+**Guard de atomicidad:** una forma compuesta como `pʰ`, `tʂ` o `tɕʰ` puede indexarse porque aparece en una transcripción canónica, pero REF-002 no la presenta por ello como un único símbolo atómico del IPA. El índice distingue entre carácter/símbolo, diacrítico y secuencia cuando esa diferencia es material.
 
 ## 4. Estados del índice
 
 ### USED
 
-El símbolo aparece en una entrada MLS-SND integrada.
+La forma indexada aparece en una entrada MLS-SND integrada.
 
 ### EXPLAINED
 
-El símbolo o familia de símbolos está explicado en una entrada de representación aunque todavía no aparezca en un perfil.
+La forma, símbolo o familia pertinente está explicada en una entrada de representación aunque todavía no aparezca en un perfil.
 
 ### SOURCE_SPECIFIC
 
@@ -63,7 +65,7 @@ La forma fue detectada, pero necesita comprobación antes de catalogarse.
 
 Este seed se construyó a partir de entradas ya presentes en `feat/mls-snd-foundation` el 11 de octubre de 2026. Es deliberadamente parcial: se ampliará al integrarse nuevas waves.
 
-| Símbolo | Clase IPA | Estado | Uso observado | Entradas/idiomas | Nota |
+| Forma indexada | Clase IPA | Estado | Uso observado | Entradas/idiomas | Nota |
 |---|---|---|---|---|---|
 | `a` | vocal | USED | /a/ | RU, KO | La identidad del símbolo no implica identidad acústica o fonológica entre idiomas. |
 | `e` | vocal | USED | /e/ | FR, KO | En FR aparece dentro del contraste /e ~ ɛ/. |
@@ -97,11 +99,11 @@ Esta pasada añade únicamente formas **ya escritas explícitamente** en entrada
 
 `vʲ` se representa en MLS-SND como base `v` + marca de palatalización `ʲ`; no se crea un símbolo atómico nuevo.
 
-### Taiwan Mandarin — ocurrencias del mapa segmental en RESEARCHED_PARTIAL
+### Taiwan Mandarin — ocurrencias del mapa segmental
 
-SND-ZHTW-003 es todavía **RESEARCHED_PARTIAL**. Los signos siguientes se indexan como ocurrencias textuales canónicas, pero **su presencia aquí no promueve el análisis segmental ni cierra el gate de la entrada**.
+SND-ZHTW-003 aporta ocurrencias textuales canónicas al índice. REF-002 registra únicamente las formas que aparecen explícitamente en esa entrada y **no hereda ni redefine su análisis fonológico, sus gates ni sus decisiones analíticas**.
 
-| Símbolo | Clase IPA | Estado | Uso observado | Entrada | Alcance |
+| Forma indexada | Clase IPA | Estado | Uso observado | Entrada | Alcance |
 |---|---|---|---|---|---|
 | `p`, `t`, `k` | consonantes pulmonares | USED | [p], [t], [k] | SND-ZHTW-003 | Miembros no aspirados de pares descritos por Wan et al. (2024). |
 | `pʰ`, `tʰ`, `kʰ` | consonantes pulmonares + aspiración | USED | [pʰ], [tʰ], [kʰ] | SND-ZHTW-003 | La aspiración se conserva como `ʰ`; no se interpreta como símbolo independiente de segmento. |
@@ -111,7 +113,7 @@ SND-ZHTW-003 es todavía **RESEARCHED_PARTIAL**. Los signos siguientes se indexa
 | `n`, `ŋ` | consonantes pulmonares | USED | /n/, /ŋ/ | SND-ZHTW-003 | Finales estudiadas por Chiu & Lu; el merger documentado es dependiente del contexto y potencialmente incompleto. |
 | `ʰ` | diacrítico/modificador | USED | aspiración en [pʰ tʰ kʰ tʂʰ tsʰ tɕʰ] | SND-ZHTW-003 | Se registra por separado para que el lector pueda rastrear la marca. |
 
-**Gate de alcance:** estas filas certifican indexación de signos observados, no suficiencia R33 de SND-ZHTW-003. Si la revisión lingüística cambia la representación adoptada, REF-002 deberá sincronizarse.
+**Gate de alcance:** estas filas certifican indexación de formas observadas, no suficiencia R33 ni cierre analítico de SND-ZHTW-003. Si una versión futura cambia materialmente la representación adoptada, REF-002 deberá sincronizarse y reabrir los controles afectados.
 
 ## 7. Suprasegmentales y tonos: pool explicado, no inventario de uso
 
@@ -221,3 +223,17 @@ Después de integrar las waves activas se debe ejecutar otra pasada sobre:
 - entradas REP-003…REP-008.
 
 La meta de REF-002 no será “tener muchos símbolos”, sino garantizar que **cada signo que el lector encuentre pueda rastrearse a una explicación y a un uso concreto**.
+
+
+## 15. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `14489d902b89a69e2d707fc9fa8d98bd75805027`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Objeto revisado:** aparato de consulta vivo; no inventario fonémico de ninguna lengua ni reproducción integral de la tabla IPA.
+- **Representación:** se mantiene la distinción entre /fonológico/ y [fonético], y entre símbolos/diacríticos IPA, secuencias compuestas y notaciones SOURCE_SPECIFIC.
+- **Atomicidad:** cadenas como `pʰ`, `tʂ` o `tɕʰ` pueden ser formas indexadas sin tratarse como un único símbolo atómico del IPA.
+- **Sistemas externos:** Zhuyin y romanizaciones permanecen fuera del índice salvo uso explícito como IPA; `/S/` continúa SOURCE_SPECIFIC.
+- **Scope guard:** el índice registra ocurrencias de entradas canónicas sin heredar ni resolver el análisis lingüístico de esas entradas.
+- **Advertencia:** la expansión futura del índice es normal para un aparato vivo, pero toda ampliación material deberá volver a comprobar clasificación, nivel de representación y procedencia antes de heredar este gate.
+- **Siguiente gate:** EDITORIAL_REVIEW sobre esta versión concreta.
