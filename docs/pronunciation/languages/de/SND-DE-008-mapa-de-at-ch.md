@@ -1,6 +1,6 @@
 # SND-DE-008 — Mapa DE/AT/CH de variación estándar
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; perfiles nacionales completos pendientes.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; perfiles nacionales completos pendientes.  
 **Idioma:** alemán.  
 **Dominio:** variación / comparación interna / estándares nacionales.  
 **Política:** MULTI_REFERENCE.
@@ -145,4 +145,15 @@ Siguiente gate: ampliación de cobertura + LINGUISTIC_REVIEW independiente.
 - **Suiza:** SND-SRC-0031 sustenta calidad vocálica/influencia alemánica en las áreas del estudio, no toda la fonética del Swiss Standard German.
 - **Gate:** se valida el mapa y sus límites; los tres perfiles nacionales completos siguen pendientes.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente del mapa. Una ampliación material de cobertura nacional debe reabrir los gates afectados.
+
+## 11. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `ab23a88525b042f795beae4c7da7eeb4438ed1c2`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Lectura:** el objetivo de mapa, las tres capas de evidencia y la regla de publicación quedan explícitos antes de cualquier futura tabla DE/AT/CH.
+- **Jerarquía:** Alemania, Austria y Suiza conservan secciones separadas y cobertura asimétrica; no se fuerza una fila equivalente por país.
+- **Warnings:** Kohler (1990) permanece marcado como histórico; Duden como lexicográfico; Austria y Suiza como clusters de fenómeno/muestra.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness de este mapa exacto. Una ampliación material de cobertura nacional reabre los gates afectados.
 
