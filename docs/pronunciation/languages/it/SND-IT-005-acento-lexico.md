@@ -1,6 +1,6 @@
 # SND-IT-005 — Acento léxico
 
-**Estado:** EDITORIAL_REVIEW  
+**Estado:** READY_FOR_COMPOSITION  
 **Idioma:** italiano.  
 **Dominio:** prosodia / fonología / fonética.  
 **Tipo de alcance:** REFERENCE_VARIETY / BROADLY_DISTRIBUTED con límites explícitos.  
@@ -196,3 +196,16 @@ Esta integración no decide `READY_FOR_COMPOSITION`. Las antiguas dependencias d
 - **IT005-C05:** VERIFIED contra SND-SRC-0075, Abstract.
 - **IT005-C06:** conserva dependencia ya validada SND-SRC-0008 / IT-008.
 - **Resultado:** evidencia y revisión lingüística reconciliadas; EDITORIAL_REVIEW PASS_WITH_EDITORIAL_CHANGES.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `b90e0c76addbf94b0052e66e26d5e7aeee06ca05`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** encabezado + §§1–12, §14 y §15.
+- **Metadata interna excluida:** §13 (tabla R33), “Gate de salida”, “Auditoría de integración” y este bloque.
+- **Fuentes y fundamento:** derivado de SND-SRC-0074, SND-SRC-0075 y la dependencia ya validada SND-SRC-0008.
+- **Ejemplos:** `/ˈpapa/ papa` y `/paˈpa/ papà` se conservan como `EDITORIAL_EXAMPLE` para mostrar posición del acento; no sustituyen una ficha lexicográfica.
+- **Pronunciation Quick Layer:** `OMITTED_WITH_REASON` — los ejemplos ya muestran ortografía + IPA y el objetivo es contrastar posición acentual; un respelling adicional dependería del locale del lector y podría ocultar la distinción que se enseña.
+- **Autonomía escrita:** PASS; no requiere audio.
+- **Open questions no bloqueantes:** teoría métrica completa y variación regional detallada permanecen fuera del núcleo actual.
+- **Regla para COMPOSITION:** preservar la marca IPA `ˈ`, la diferencia `papa/papà`, y las separaciones acento≠duración, acento≠intensidad y marca ortográfica≠transcripción fonológica.
