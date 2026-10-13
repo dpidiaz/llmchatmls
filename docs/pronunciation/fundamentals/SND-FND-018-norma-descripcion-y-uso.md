@@ -1,6 +1,6 @@
 # SND-FND-018 — Norma, descripción y uso
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Versión revisada:** 2026-10-12; base `99ea52a843a778770be7d305fd3b1b9afdf02efb`.  
 **Dominio:** variación / metodología editorial.  
 **Idioma:** transversal.
@@ -84,4 +84,13 @@ La distinción tripartita descripción/norma/referencia MLS es una política del
 
 Revisión lingüística/evidencial de esta versión: 2026-10-12. Se corrigió el **título del localizador §1.4** para coincidir con la edición web consultada; C01 usa además §1.3. Los tres claims quedan `VERIFIED` dentro del alcance introductorio/sociolingüístico de `SND-SRC-0024`. La distinción tripartita y las decisiones de presentación de MLS-SND son **política editorial propia**, no conclusiones empíricas del manual ni resultados de corpus. No se añaden transcripciones ni afirmaciones de variedades específicas.
 
-**Gate lingüístico/evidencial:** PASS delimitado; `LINGUISTIC_REVIEW` no implica `EDITORIAL_REVIEW` ni `READY_FOR_COMPOSITION`. Pendiente revisión editorial independiente y nuevas fuentes si se atribuyen patrones fonéticos o uso real a comunidades concretas.
+**Gate lingüístico/evidencial:** PASS delimitado. La revisión editorial independiente de esta versión también quedó completada; esto no implica `READY_FOR_COMPOSITION`. Se requieren nuevas fuentes si se atribuyen patrones fonéticos o uso real a comunidades concretas.
+
+## 10. Revisión editorial wave 02
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** descripción, norma y referencia editorial MLS quedan diferenciadas antes de discutir “estándar” y pronunciación normativa.
+- **Lenguaje editorial:** las alternativas recomendadas evitan “neutral”, “sin acento” y “correcto” fuera de normas explícitas.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.
