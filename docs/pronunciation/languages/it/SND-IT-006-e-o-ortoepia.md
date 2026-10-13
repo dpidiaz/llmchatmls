@@ -1,6 +1,6 @@
 # SND-IT-006 — E y O: pronunciación y ortoepía
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** italiano.  
 **Dominio:** vocales / ortografía / ortoepía.
 
@@ -54,3 +54,14 @@ La sección O del DOP permanece como candidato de ampliación; esta versión sol
 - **Scope warning:** la sección O del DOP sigue fuera del núcleo auditado; no se rellena por simetría con E.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del núcleo actual.
+
+## 10. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `5680fc089d25014bcb38514a43f8256e7d55e882`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` para el núcleo auditado.
+- **Open question no bloqueante:** la sección O del DOP continúa fuera del núcleo; no se rellena por simetría.
+- **Reader-facing:** incluir §§1–4 y nota editorial; excluir R33/auditorías.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON.
+- **Written-only:** PASS.
+
