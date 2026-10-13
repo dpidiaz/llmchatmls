@@ -1,6 +1,6 @@
 # SND-REP-006 — Suprasegmentales, tonos y acentos de palabra en el IPA
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** representación / prosodia.
 **Idioma:** transversal.
 
