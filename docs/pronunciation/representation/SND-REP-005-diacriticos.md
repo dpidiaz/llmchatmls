@@ -1,6 +1,6 @@
 # SND-REP-005 — Diacríticos del IPA
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** representación / fonética.
 **Idioma:** transversal.
 
