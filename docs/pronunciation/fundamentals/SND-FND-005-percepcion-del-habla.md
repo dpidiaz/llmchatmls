@@ -1,6 +1,6 @@
 # SND-FND-005 — Percepción del habla
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SOURCE_SCOPE_WARNING.  
 **Dominio:** fonética / percepción.  
 **Idioma:** transversal.
 
@@ -55,4 +55,15 @@ PAM se presenta como un marco útil de referencia, no como doctrina única de ML
 
 ## 8. Nota de auditoría
 
-Claim ↔ source ↔ locator comprobados el 2026-10-11. Falta LINGUISTIC_REVIEW y EDITORIAL_REVIEW.
+Claim ↔ source ↔ locator comprobados el 2026-10-11. LINGUISTIC_REVIEW completado para esta versión; falta EDITORIAL_REVIEW.
+
+## 9. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `a2fc3f6c02c342c211f7cf591e6f53aff33e1a9a`.
+- **Resultado:** PASS_WITH_SOURCE_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Modelo:** PAM se conserva como marco introductorio de referencia, no como explicación única de la percepción/adquisición.
+- **Generalización:** no se presume dificultad perceptiva para todos los individuos ni se equipara semejanza perceptiva con identidad fonética.
+- **Producción↔percepción:** la entrada declara correctamente que las relaciones específicas requieren fuentes especializadas.
+- **Alcance de fuente:** SND-SRC-0024 basta para este núcleo introductorio, no para comparaciones concretas entre variedades.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente.
