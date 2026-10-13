@@ -1,6 +1,6 @@
 # SND-ENUS-009 — Southern Michigan como perfil documentado
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** inglés.
 **Variedad:** Southern Michigan / Northern Cities context.
 **Dominio:** perfil regional / vocales / alcance.
@@ -73,3 +73,16 @@ Hillenbrand, J. M. (2003). American English: Southern Michigan. *Journal of the 
 - **Lectura:** El perfil mantiene visibles muestra, fecha, región y límites de generalización; la organización permite reutilizar Southern Michigan como caso documentado sin convertirlo en pronunciación nacional.
 - **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
 - **Siguiente paso:** candidato a `READY_FOR_COMPOSITION` únicamente después de aplicar el gate de composition readiness a esta misma versión.
+
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `4347ccba5be81b8d146d0cc68eefc041b9aa699d`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como perfil regional documentado dentro de la arquitectura `MULTI_REFERENCE`.
+- **Reader-facing projection:** encabezado + §§1–4, §6 y §8; excluir §5 (tabla R33), §7 (auditoría) y los bloques de revisión/gate.
+- **Alcance obligatorio:** conservar Southern Michigan / Inland Northeast, composición de la muestra, fecha de los datos y la prohibición de extrapolar a todo EE. UU.
+- **Pronunciation Quick Layer:** `OMITTED_WITH_REASON` — la versión menciona el contraste *cot/caught*, pero no contiene una representación formal suficiente para derivar una pronunciación fácil sin introducir una decisión nueva.
+- **Audio:** no requerido.
+- **Guard de composición:** no añadir IPA, fusionar variedades ni presentar Southern Michigan como “General American”.
+- **Handoff:** `composition/handoffs/SND-ENUS-009.md`.
