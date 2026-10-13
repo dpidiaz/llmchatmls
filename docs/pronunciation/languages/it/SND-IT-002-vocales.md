@@ -1,6 +1,6 @@
 # SND-IT-002 — Vocales
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** italiano.  
 **Dominio:** vocales / fonética / fonología.  
 **Alcance:** hablante y marco de Rogers & d’Arcangeli (2004).
@@ -44,3 +44,12 @@ Rogers, D., & d’Arcangeli, L. (2004). Italian. *Journal of the International P
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 8. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** inventario, duración, vocales medias y secuencias vocálicas quedan separados y con alcance explícito de la Illustration.
+- **Jerarquía:** la entrada evita convertir duración fonética en contraste fonémico o grafía en silabificación automática.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.
