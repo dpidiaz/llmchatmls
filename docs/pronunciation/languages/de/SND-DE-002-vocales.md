@@ -1,6 +1,6 @@
 # SND-DE-002 — Vocales: mapa del sistema descrito
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** alemán.  
 **Dominio:** vocales / fonética.  
 **Alcance:** variedad ilustrada por Kohler (1990): muchos hablantes educados del norte; grabación de un hablante de 54 años.
@@ -56,3 +56,14 @@ Los perfiles de alemán austríaco y suizo, cuando se integren, no heredarán au
 - **Jerarquía:** inventario, realización contextual de /r/, condicionamiento por acento y evidencia aparecen en orden comprensible.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## 10. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `e20043f9d34a137b5b1193e1739ab57a136ca257`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** conservar Kohler (1990) como referencia delimitada; AT/CH no heredan automáticamente inventario ni realizaciones.
+- **Reader-facing:** incluir §§1–4 y nota editorial de alcance; excluir tabla R33, auditoría y metadata de revisión.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no hay forma léxica concreta aprobada para respelling.
+- **Written-only:** PASS.
+

@@ -1,6 +1,6 @@
 # SND-DE-008 — Mapa DE/AT/CH de variación estándar
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; perfiles nacionales completos pendientes.  
+**Estado:** READY_FOR_COMPOSITION — PASS_WITH_SCOPE_WARNING como mapa de cobertura; perfiles nacionales completos pendientes.  
 **Idioma:** alemán.  
 **Dominio:** variación / comparación interna / estándares nacionales.  
 **Política:** MULTI_REFERENCE.
@@ -156,4 +156,14 @@ Siguiente gate: ampliación de cobertura + LINGUISTIC_REVIEW independiente.
 - **Warnings:** Kohler (1990) permanece marcado como histórico; Duden como lexicográfico; Austria y Suiza como clusters de fenómeno/muestra.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness de este mapa exacto. Una ampliación material de cobertura nacional reabre los gates afectados.
+
+## 12. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `17a00802d6ae267a5c92961bede3e55ed0c84abd`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como mapa MULTI_REFERENCE.
+- **Open questions no bloqueantes:** ampliar cobertura nacional y evaluar nuevas fuentes; no se permite convertir el mapa actual en perfiles completos por composición.
+- **Reader-facing:** incluir §§1–6 y 8; derivar fundamento visible de claims verificados; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; entrada comparativa de cobertura.
+- **Written-only:** PASS.
 

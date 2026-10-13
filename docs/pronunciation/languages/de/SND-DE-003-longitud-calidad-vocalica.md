@@ -1,6 +1,6 @@
 # SND-DE-003 — Longitud y calidad vocálica
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** alemán.  
 **Dominio:** vocales / duración.  
 **Alcance:** patrón descrito por Kohler (1990) para la variedad ilustrada.
@@ -50,3 +50,15 @@ La revisión lingüística del perfil ya fue completada; cualquier decisión tra
 - **Corrección editorial:** la nota final deja de presentar la revisión lingüística como pendiente; cualquier armonización terminológica transversal futura sigue siendo editorial/terminológica.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `cab6d34261c8c28af3f0ad949f1784a59a56ba39`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** la relación calidad/duración permanece condicionada por acento, entorno y la variedad ilustrada.
+- **Open question no bloqueante:** armonización terminológica transversal futura sobre close/open, tense/lax o longitud.
+- **Reader-facing:** incluir §§1–3 y nota editorial pertinente; excluir tabla R33 y metadata interna.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; entrada conceptual de sistema.
+- **Written-only:** PASS.
+
