@@ -1,6 +1,6 @@
 # SND-DE-008 — Mapa DE/AT/CH de variación estándar
 
-**Estado:** EVIDENCE_CHECKED como mapa de cobertura; perfiles nacionales completos pendientes.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; perfiles nacionales completos pendientes.  
 **Idioma:** alemán.  
 **Dominio:** variación / comparación interna / estándares nacionales.  
 **Política:** MULTI_REFERENCE.
@@ -133,3 +133,16 @@ No valida:
 - READY_FOR_COMPOSITION.
 
 Siguiente gate: ampliación de cobertura + LINGUISTIC_REVIEW independiente.
+
+## 10. Revisión lingüística wave 02
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `7b4426555ea76bfeb7c9ea3cd8409519a8863533`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Arquitectura:** `MULTI_REFERENCE` es obligatoria; Alemania, Austria y Suiza no se colapsan en una referencia fonética única.
+- **Alemania:** Kohler (1990) permanece ancla histórica/descriptiva con warning temporal; Duden permanece capa lexicográfica.
+- **Austria:** SND-SRC-0030 sustenta solo el cluster de variación de `-ig`, no el sistema nacional completo.
+- **Suiza:** SND-SRC-0031 sustenta calidad vocálica/influencia alemánica en las áreas del estudio, no toda la fonética del Swiss Standard German.
+- **Gate:** se valida el mapa y sus límites; los tres perfiles nacionales completos siguen pendientes.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente del mapa. Una ampliación material de cobertura nacional debe reabrir los gates afectados.
+
