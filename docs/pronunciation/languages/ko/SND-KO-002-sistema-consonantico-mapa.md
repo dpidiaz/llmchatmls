@@ -1,6 +1,6 @@
 # SND-KO-002 — Sistema consonántico: mapa de evidencia
 
-**Estado:** EVIDENCE_CHECKED — como mapa de evidencia, no como inventario consonántico canónico.
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de evidencia, no como inventario consonántico canónico.
 **Idioma:** coreano.
 **Ancla descriptiva:** Seúl, cuando la fuente lo especifique.
 **Dominio:** consonantes / mapa de investigación.
@@ -84,3 +84,16 @@ La promoción a EVIDENCE_CHECKED no significa que todos los clusters consonánti
 - SND-KO-003 — Oclusivas y cambio contemporáneo en Seúl
 - SND-FND-006 — Consonantes: parámetros articulatorios
 - SND-FND-017 — Variación
+
+## 10. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `b9153a934ce582dce9b1a6fa8fe1167537442406`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Validez del gate:** se valida la arquitectura del **mapa parcial**, no una tabla consonántica canónica completa.
+- **Temporalidad:** Lee (1993) permanece como referencia histórica con advertencia de fecha; los claims contemporáneos del cluster de oclusivas se apoyan en evidencia específica de Seúl de 2018/2026.
+- **Alcance:** los resultados de Seúl no se extrapolan a todo el coreano; los clusters sin actualización específica continúan `SOURCE_MAPPED`.
+- **Análisis:** lax / tense / aspirated se mantienen como categorías del cluster estudiado; no se reducen a “sonora/sorda” ni a una única pista acústica.
+- **Gaps preservados:** fricativas, africadas, nasales, líquidas y codas siguen abiertos; esta revisión no los completa por analogía.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente del mapa; el inventario consonántico final requiere investigación adicional antes de cualquier composición que lo presente como completo.
+
