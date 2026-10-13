@@ -15,7 +15,7 @@
 
 ## Proyección reader-facing
 - **secciones/bloques incluidos en edición de lectura:** §§1–6, §8, §10 y §12.
-- **bloques internos excluidos de edición de lectura:** §7, §9, §11 y §§13–16.
+- **bloques internos excluidos de edición de lectura:** §7, §9, §11 y §§13–17.
 - **Fuentes y fundamento visible al lector:** sí; derivado de §12 y de la procedencia de las filas incluidas, sin exponer infraestructura R33 innecesaria.
 - **nota editorial visible al lector:** sí; el índice es vivo, parcial por diseño y no equivale a la tabla IPA completa ni a un inventario fonémico.
 - **secciones ambiguas:** ninguna tras esta clasificación.
