@@ -1,6 +1,6 @@
 # SND-ESGT-005 — /s/ y variación regional
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** español.
 **Variedad:** Guatemala; contraste nacional/oriental.
 **Dominio:** consonantes / variación regional.
@@ -87,3 +87,16 @@ ESGT-002 ya superó sus gates y está `READY_FOR_COMPOSITION` como mapa de evide
 - **Dependencia resuelta:** SND-ESGT-002 ya está `READY_FOR_COMPOSITION` como mapa de cobertura; no se requiere convertirlo en inventario fonémico final para componer esta entrada regional de /s/.
 - **Límites preservados:** no se infieren tasas por localidad/edad/registro, no se convierte prestigio en prescripción y no se inventa IPA estrecho.
 - **Cambios lingüísticos/R33:** ninguno.
+
+## 11. Composition readiness wave 02 — 2026-10-13
+
+- **Versión evaluada:** blob `bce97165a9010edaa622b23da6634b4cb6c42611`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Blocker previo:** dependencia de SND-ESGT-002 resuelta; ESGT-002 ya está `READY_FOR_COMPOSITION` como mapa de cobertura.
+- **Proyección reader-facing:** encabezado + §§1–4, §6 y §8.
+- **Metadata interna excluida:** §5 (tabla R33), §7 (auditoría interna), §§9–10 (gates/workflow) y este bloque.
+- **Fuentes y fundamento:** derivado de SND-SRC-0003, conservando alcance Guatemala general vs. oriente y la naturaleza sociolingüística de “prestigio”.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — no hay forma léxica objetivo ni transcripción estrecha aprobada para respelling.
+- **Autonomía escrita:** PASS; no requiere audio.
+- **Open questions no bloqueantes:** estudios fonéticos más específicos por localidad, edad y registro antes de cualquier IPA estrecho o cuantificación.
+- **Regla para COMPOSITION:** no puede convertir prestigio en prescripción, inventar tasas, generalizar rasgos orientales ni generar alófonos IPA no documentados.
