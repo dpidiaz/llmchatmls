@@ -1,6 +1,6 @@
 # SND-REP-008 — Transcripción amplia y transcripción estrecha
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** transcripción fonética.  
 **Idioma:** transversal.
 
