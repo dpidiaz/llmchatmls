@@ -1,6 +1,6 @@
 # SND-ZHTW-003 — Iniciales y finales: mapa fonético/fonológico
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.
 **Alcance del estado:** revisión lingüística aprobada para este mapa de evidencia segmental; no constituye un inventario fonémico definitivo de Taiwan Mandarin.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin dentro de un marco comparativo de Mandarin.
@@ -125,3 +125,14 @@ La versión vigente es lingüísticamente coherente **como mapa de evidencia**, 
 - mantiene Zhuyin, Hanyu Pinyin e IPA como capas distintas.
 
 **Advertencias que sobreviven al gate:** el inventario integral sigue abierto; SND-SRC-0044 continúa en HOLD para cualquier claim cuantitativo sin localizador interno fino; la futura tabla reader-facing no podrá convertir automáticamente sistemas gráficos/romanizados en categorías fonológicas o fonéticas.
+
+## 12. Revisión editorial
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `143cd6cac5fe73b1033fc0aa4f257e3274718e6a`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Identidad editorial:** el título y la apertura dejan inequívoco que esta entrada es un **mapa fonético/fonológico de evidencia**, no un inventario fonémico definitivo de Taiwan Mandarin.
+- **Separación de capas:** inicial/final, Zhuyin, Hanyu Pinyin, IPA, categorías fonológicas, realizaciones y medidas acústicas permanecen diferenciadas.
+- **Advertencias visibles:** `ANALYTICAL_CHOICE`, el HOLD de SND-SRC-0044 y la variación regional/social sobreviven al gate.
+- **Proyección futura:** cualquier tabla reader-facing deberá construirse solo con decisiones ya aprobadas; esta revisión no autoriza completar huecos por inferencia.
+- **Siguiente gate:** composition readiness sobre esta versión editorial; el inventario integral futuro seguirá siendo una versión distinta y deberá reabrir gates.
