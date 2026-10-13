@@ -1,6 +1,6 @@
 # SND-ENUS-007 — Ritmo, organización temporal y prominencia
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.  
 **Idioma:** inglés.  
 **Variedad:** Estados Unidos; evidencia regional.  
 **Dominio:** prosodia / organización temporal.
@@ -58,5 +58,13 @@ La relación con pitch accents y entonación se desarrolla en SND-ENUS-008.
 - **Variedad:** los contrastes regionales se conservan como resultados de la muestra, no como estereotipos esenciales.
 - **Terminología:** “ritmo” no se convierte en una tipología global simplista.
 - **Claims R33:** sin cambios.
-- **Siguiente gate:** EDITORIAL_REVIEW solo del núcleo validado; la prominencia fina requiere evidencia específica antes de ampliación material.
 
+
+
+## 8. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `a237bcf794d1fdb086b744ed56f18a45a180b8bb`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Control editorial:** El lector puede distinguir el núcleo validado de organización temporal de la prominencia fina aún no sustentada. El título no se usa para insinuar que prominencia ya esté cerrada ni para reinstalar una tipología simplista de ritmo.
+- **Invariantes:** sin cambios en claims R33, fuentes, localizadores, IPA, variedad ni análisis lingüístico.
