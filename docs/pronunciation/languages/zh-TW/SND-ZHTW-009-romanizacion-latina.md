@@ -1,6 +1,6 @@
 # SND-ZHTW-009 — Romanización latina
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** mandarín de Taiwán.
 **Dominio:** romanización / consulta.
 
@@ -94,3 +94,15 @@ Esta entrada resuelve el **mapeo mínimo de fuente** para Hanyu Pinyin en el per
 - **Cambio editorial:** se retira la etiqueta “provisional” de la decisión local porque la evidencia ya sustenta el uso auxiliar descrito; no se amplían claims ni se fija política global.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta versión estabilizada.
+
+## 12. Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `2ddcd954447ce8256329c497bc2363a981cba32b`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–3, §5 (referencia bibliográfica, excluyendo la frase interna de trazabilidad del ID), §6, §§8–9.
+- **Metadata interna excluida:** §4 (tabla R33), §7 (gate interno), §§10–11 (revisiones/workflow) y la referencia interna a `SOURCE-MAP-ROMANIZATION-WAVE-01.md`.
+- **Fuentes y fundamento:** derivado de SND-SRC-0080, dejando visible que se trata de un recurso institucional del MOE de Taiwán y no de un corpus fonético.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — la entrada define funciones de representación y no presenta una forma léxica objetivo cuya respelling sea necesaria.
+- **Autonomía escrita:** PASS; caracteres, Zhuyin, Hanyu Pinyin e IPA se distinguen conceptualmente sin requerir audio.
+- **Open questions no bloqueantes:** la historia completa de romanización en Taiwán y la política global del MLS quedan fuera del alcance de esta entrada.
+- **Regla para COMPOSITION:** no puede convertir Hanyu Pinyin en IPA, sustituir Zhuyin, ni transformar la secuencia visual condicional en una obligación universal.
