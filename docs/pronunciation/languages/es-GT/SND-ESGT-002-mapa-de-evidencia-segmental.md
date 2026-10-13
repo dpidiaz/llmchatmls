@@ -1,6 +1,6 @@
 # SND-ESGT-002 — Inventario segmental: mapa de evidencia
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; inventario fonémico final pendiente.
+**Estado:** READY_FOR_COMPOSITION como mapa de cobertura; inventario fonémico final pendiente.
 **Idioma:** español de Guatemala.
 **Dominio:** segmentos / alcance de evidencia / variación.
 **Objetivo:** indicar qué fenómenos cuentan con evidencia suficiente y cuáles siguen abiertos antes de redactar un inventario.
@@ -152,3 +152,14 @@ La versión vigente es lingüísticamente coherente **como mapa de cobertura** p
 - **Evidencia limitada:** `FULLTEXT_REQUIRED` para claims finos de SND-SRC-0057 sigue visible y no se sustituye por inferencia.
 - **Reader safety:** estados de cobertura evidencial no se presentan como frecuencia, obligatoriedad ni estatus fonémico.
 - **Siguiente gate:** composition readiness de esta versión-map; un inventario fonémico final será una versión distinta y reabrirá gates.
+
+## 13. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `a12da08274eaa68f6a56c99eb2ecc07872f296c3`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` **como mapa de cobertura segmental**.
+- **Reader-facing projection:** encabezado/objetivo + §§1, 3–6, 8–9. §2 queda como infraestructura de cobertura interna en esta versión; §7 y §§10–12 permanecen como evidencia/gates internos.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — el objeto es cobertura evidencial por fenómeno, no una forma léxica objetivo.
+- **Scope guards:** muestras de contacto, `FULLTEXT_REQUIRED` de SND-SRC-0057 y falta de cierre de varios clusters permanecen visibles donde sean materiales.
+- **Open questions:** no bloquean la composición del mapa; sí bloquean cualquier transformación de esta versión en inventario fonémico definitivo.
+- **Handoff:** `composition/handoffs/SND-ESGT-002.md`.
