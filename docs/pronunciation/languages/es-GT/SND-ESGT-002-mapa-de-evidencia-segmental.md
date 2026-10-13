@@ -1,6 +1,6 @@
 # SND-ESGT-002 — Inventario segmental: mapa de evidencia
 
-**Estado:** EVIDENCE_CHECKED como mapa de cobertura; inventario fonémico final pendiente.
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING como mapa de cobertura; inventario fonémico final pendiente.
 **Idioma:** español de Guatemala.
 **Dominio:** segmentos / alcance de evidencia / variación.
 **Objetivo:** indicar qué fenómenos cuentan con evidencia suficiente y cuáles siguen abiertos antes de redactar un inventario.
@@ -25,6 +25,8 @@ Por eso MLS-SND separa siempre:
 4. contexto;
 5. población;
 6. tipo de fuente.
+
+**Guard lingüístico:** los estados de las filas (`SOURCE_MAPPED`, `EVIDENCE_MAPPED`, `EVIDENCE_CHECKED_CLUSTER`, etc.) describen el grado y alcance de la **cobertura evidencial**. No equivalen a estatus fonémico, frecuencia nacional, obligatoriedad de una realización ni cierre del inventario. Del mismo modo, “base nacional” identifica el alcance de una fuente y no convierte automáticamente cada fenómeno que registra en rasgo uniforme de todo el país.
 
 ## 2. Mapa de cobertura
 
@@ -115,8 +117,27 @@ No se incluye como fila del inventario segmental porque pertenece a otro dominio
 
 Este gate valida la trazabilidad y el alcance del mapa; **no valida un inventario fonémico final**.
 
+La **LINGUISTIC_REVIEW de esta versión del mapa queda cerrada con `PASS_WITH_SCOPE_WARNING`**. Este resultado valida la arquitectura lingüística del mapa —separación entre categoría fonológica, realización, variedad, muestra y fuente—, no un inventario fonémico final.
+
 Siguientes pasos:
 1. completar estudios específicos de los clusters aún SOURCE_MAPPED;
 2. resolver róticas mediante sus waves activas;
 3. mantener FULLTEXT_REQUIRED para claims finos de SND-SRC-0057;
-4. someter cualquier inventario final a LINGUISTIC_REVIEW independiente.
+4. someter cualquier inventario final futuro a un nuevo gate sobre su versión concreta.
+
+## 11. Revisión lingüística
+
+**Versión revisada:** blob previo `0b526339e7fba945039ac34cdd9ff34cafddf25a`.
+
+**Veredicto:** `PASS_WITH_SCOPE_WARNING`.
+
+La versión vigente es lingüísticamente coherente **como mapa de cobertura** porque:
+
+- no transforma realizaciones cartografiadas en fonemas;
+- distingue fuentes nacionales, geolingüísticas, sociofonéticas, de contacto e históricas;
+- mantiene las muestras K’iche’–español y español–kaqchikel fuera de cualquier generalización automática a todo Guatemala;
+- conserva `FULLTEXT_REQUIRED` para claims finos de SND-SRC-0057;
+- trata SND-SRC-0058 como evidencia prosódica fuera del mapa segmental;
+- conserva clusters insuficientemente documentados como `SOURCE_MAPPED` o `ACTIVE_RESEARCH` en vez de cerrar el inventario por analogía.
+
+**Advertencias que sobreviven al gate:** el inventario fonémico nacional sigue abierto; varios clusters requieren investigación especializada; la cobertura nacional de una fuente no autoriza uniformidad nacional del fenómeno; cualquier inventario futuro será una nueva versión y deberá reabrir los gates afectados.
