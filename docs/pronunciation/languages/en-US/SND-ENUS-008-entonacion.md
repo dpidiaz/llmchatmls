@@ -1,6 +1,6 @@
 # SND-ENUS-008 — Entonación y variación prosódica regional
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS.  
 **Idioma:** inglés.  
 **Variedad:** Southern y Midland en la evidencia inicial.  
 **Dominio:** entonación / prosodia.
@@ -55,3 +55,15 @@ No define:
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
 - **Control:** no se extrapola habla leída Southern/Midland a conversación espontánea ni a todo Estados Unidos.
+
+## 7. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `893cec66970fd50c54a1c736e01e925601071a2a`.
+- **Resultado:** PASS → `LINGUISTIC_REVIEW`.
+- **Alcance:** Southern/Midland y habla leída permanecen visibles; los efectos de género no se reinterpretan automáticamente como diferencias regionales.
+- **Prosodia:** pausas, pitch accents y boundary tones se mantienen como dimensiones separadas.
+- **Límite:** no se deriva un inventario ToBI nacional ni una melodía obligatoria.
+- **Claims R33:** sin cambios.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
