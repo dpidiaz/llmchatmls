@@ -1,6 +1,6 @@
 # SND-JA-008 — Kana y pronunciación: ortografía, no transcripción fonética
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** japonés.  
 **Dominio:** escritura / pronunciación  
 **Alcance:** ortografía kana moderna de uso general; préstamos tratados con instrumento institucional separado
@@ -86,3 +86,14 @@ La conclusión “kana ≠ IPA” es una decisión de arquitectura MLS-SND apoya
 **Veredicto:** `PASS`.
 
 La revisión editorial confirma que la entrada mantiene una jerarquía clara entre ortografía kana, representación fonológica y representación fonética; los límites de alcance y las excepciones normativas quedan visibles para el lector. No se modificaron claims R33, fuentes, localizadores, IPA ni análisis lingüístico.
+
+## 11. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `b386347aa405bbe8782ad8455599bd0f1eb52c61`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Representación:** kana sigue siendo escritura; no se convierte en IPA ni en transcripción fonética exhaustiva.
+- **Reader-facing:** incluir §§1–6, 8–9; excluir tabla R33 y metadata de revisión.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no existe una forma léxica aprobada cuya respelling pueda derivarse sin contenido nuevo.
+- **Written-only/CJK Unicode:** PASS; conservar hiragana/katakana literalmente.
+
