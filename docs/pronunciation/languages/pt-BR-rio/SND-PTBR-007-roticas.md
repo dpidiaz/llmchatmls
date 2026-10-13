@@ -1,6 +1,6 @@
 # SND-PTBR-007 — Róticas y variación en la fala carioca
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.  
+**Estado:** READY_FOR_COMPOSITION — PASS_WITH_SCOPE_WARNING.  
 **Idioma:** portugués brasileño.  
 **Variedad:** Río de Janeiro; foco inicial en coda.  
 **Dominio:** fonética / fonología / variación.
@@ -108,3 +108,16 @@ Silva, K. L. A. da. (2026). *Um estudo sobre a variação da coda (r) com falant
 - **Open questions:** permanecen explícitas y no se convierten en promesas de contenido ya resuelto.
 - **Cambios evidenciales/lingüísticos:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta versión concreta.
+
+
+## 12. Composition readiness wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `a246d6624ed13b10d52fec2e6eec92cf34c2643e`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como mapa parcial de róticas con foco en coda.
+- **Reader-facing projection:** §§1–5 y §§7–8; §6 (R33) y §§9–12 (gates/logs) permanecen internos.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — la entrada explica variación y alcance, pero no contiene una forma léxica objetivo ni una realización formal única que deba recibir respelling.
+- **Scope guard:** mantener visibles NURC histórico, FavRio 2026 y los límites de cobertura de onset/intervocálico.
+- **Representation guard:** `R` sigue siendo rótulo de variable/rótica; composición no lo convierte en IPA ni añade realizaciones.
+- **Audio:** no requerido.
+- **Handoff:** `composition/handoffs/SND-PTBR-007.md`.
