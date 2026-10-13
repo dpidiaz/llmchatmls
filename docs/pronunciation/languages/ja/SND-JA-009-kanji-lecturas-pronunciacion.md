@@ -1,6 +1,6 @@
 # SND-JA-009 — Kanji, lecturas y pronunciación
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** japonés.  
 **Dominio:** escritura / léxico / pronunciación  
 **Referencia normativa:** 常用漢字表, con límites de alcance explícitos
@@ -96,3 +96,15 @@ a partir de esas etiquetas.
 **Veredicto:** `PASS`.
 
 La revisión editorial confirma que la entrada distingue con claridad carácter, lectura léxica en kana y capas fonológica/fonética; también mantiene visibles los límites del Jōyō Kanji Table y del índice 音訓. No se modificaron claims R33, fuentes, localizadores, IPA ni análisis lingüístico.
+
+## 10. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `1255bbc8e6afb588661d4aedc4d19a0238c29027`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Representación:** carácter, lectura léxica en kana, fonología e IPA permanecen capas distintas.
+- **Alcance:** la Jōyō Kanji Table sigue siendo guía de uso general, no inventario exhaustivo de todas las lecturas.
+- **Reader-facing:** incluir §§1–5, 7–8; excluir tabla R33 y metadata de revisión.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se inventa respelling adicional.
+- **Written-only/CJK Unicode:** PASS; conservar kanji/kana literalmente.
+
