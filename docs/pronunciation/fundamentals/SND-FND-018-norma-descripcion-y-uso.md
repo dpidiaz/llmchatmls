@@ -1,6 +1,7 @@
 # SND-FND-018 — Norma, descripción y uso
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW.  
+**Versión revisada:** 2026-10-12; base `99ea52a843a778770be7d305fd3b1b9afdf02efb`.  
 **Dominio:** variación / metodología editorial.  
 **Idioma:** transversal.
 
@@ -16,7 +17,7 @@ Estas tres capas pueden coincidir en algunos puntos, pero no son equivalentes po
 
 ## 2. Qué significa “estándar”
 
-Una variedad estándar surge de procesos de estandarización y suele asociarse con instituciones y prestigio social.
+Una variedad llamada «estándar» suele ser el resultado de procesos de estandarización asociados a instituciones, convenciones y prestigio social. Esta descripción sociolingüística no convierte la etiqueta en una propiedad fonética inherente.
 
 Eso no implica que sea lingüísticamente superior a otras variedades.
 
@@ -31,7 +32,7 @@ Diccionarios ortoépicos y recursos normativos son valiosos para documentar:
 - acento;
 - pronunciaciones codificadas.
 
-Pero una norma no describe automáticamente toda el habla espontánea de una comunidad.
+Pero una norma no describe automáticamente toda el habla espontánea de una comunidad. **Esta última es una regla de interpretación editorial de MLS-SND**, no un resultado de corpus atribuido al manual introductorio.
 
 ## 4. Referencia MLS
 
@@ -67,9 +68,9 @@ Preferir:
 
 | claim_id | afirmación | source_id | localizador exacto | alcance | estado |
 |---|---|---|---|---|---|
-| FND018-C01 | La lingüística descriptiva busca describir variedades sin jerarquizarlas como lingüísticamente mejores | SND-SRC-0024 | §1.4 “Standard language ideology and language variation” / objetivos descriptivos del capítulo | introductorio/metodológico | VERIFIED |
-| FND018-C02 | La noción de variedad estándar se relaciona con estandarización, instituciones y prestigio social | SND-SRC-0024 | §1.4, discusión de standard language | introductorio/sociolingüístico | VERIFIED |
-| FND018-C03 | La existencia de una variedad estándar no demuestra superioridad lingüística objetiva | SND-SRC-0024 | §1.4, contraste entre valoración social y descripción lingüística | introductorio/sociolingüístico | VERIFIED |
+| FND018-C01 | La lingüística descriptiva busca describir variedades sin jerarquizarlas como lingüísticamente mejores | SND-SRC-0024 | §1.3 “Studying language scientifically”, párrafos sobre enfoque descriptivo; §1.4 “Thinking about standards and ‘proper’ grammar”, párrafos iniciales | introductorio/metodológico | VERIFIED |
+| FND018-C02 | La noción de variedad estándar se relaciona con estandarización, instituciones y prestigio social | SND-SRC-0024 | §1.4 “Thinking about standards and ‘proper’ grammar”, “Language Standards and ‘Standard’ Languages” | introductorio/sociolingüístico | VERIFIED |
+| FND018-C03 | La existencia de una variedad estándar no demuestra superioridad lingüística objetiva | SND-SRC-0024 | §1.4 “Thinking about standards and ‘proper’ grammar”, “Language Standards and ‘Standard’ Languages”, párrafo “To be clear…” | introductorio/sociolingüístico | VERIFIED |
 
 ## 7. Fuente
 
@@ -79,6 +80,8 @@ Anderson, C., Bjorkman, B. M., Denis, D., Doner, J., Grant, M., Sanders, N., & T
 
 La distinción tripartita descripción/norma/referencia MLS es una política del proyecto. La fuente respalda la separación entre descripción lingüística y jerarquización social.
 
-## 9. Nota de auditoría
+## 9. Nota de auditoría y gate
 
-Claims comprobados el 2026-10-11. Falta LINGUISTIC_REVIEW y EDITORIAL_REVIEW.
+Revisión lingüística/evidencial de esta versión: 2026-10-12. Se corrigió el **título del localizador §1.4** para coincidir con la edición web consultada; C01 usa además §1.3. Los tres claims quedan `VERIFIED` dentro del alcance introductorio/sociolingüístico de `SND-SRC-0024`. La distinción tripartita y las decisiones de presentación de MLS-SND son **política editorial propia**, no conclusiones empíricas del manual ni resultados de corpus. No se añaden transcripciones ni afirmaciones de variedades específicas.
+
+**Gate lingüístico/evidencial:** PASS delimitado; `LINGUISTIC_REVIEW` no implica `EDITORIAL_REVIEW` ni `READY_FOR_COMPOSITION`. Pendiente revisión editorial independiente y nuevas fuentes si se atribuyen patrones fonéticos o uso real a comunidades concretas.
