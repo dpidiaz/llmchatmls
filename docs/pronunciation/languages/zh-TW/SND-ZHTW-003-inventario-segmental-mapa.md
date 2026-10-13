@@ -79,6 +79,7 @@ No habrá una sola columna “pronunciación” que colapse todos esos niveles.
 | ZHTW003-C07 | Zhang documenta condicionamiento vocálico por glides y nasales de coda | SND-SRC-0092 | cap. 4 Findings and discussion | VERIFIED |
 | ZHTW003-C08 | Chiu & Lu muestran merger /n/–/ŋ/ dependiente del contexto y potencialmente incompleto | SND-SRC-0093 | abstract; pp. 771–789 | VERIFIED |
 | ZHTW003-C09 | Wan et al. publican tablas de consonant phones y vowel phones del corpus | SND-SRC-0094 | Tables 1–2, pp. 1159–1160 | VERIFIED |
+| ZHTW003-C10 | Fon et al. documentan variación norte/sur en mergers de nasales finales de Taiwan Mandarin | SND-SRC-0045 | pp. 273–311 | VERIFIED |
 
 ## 9. Fuentes principales
 
