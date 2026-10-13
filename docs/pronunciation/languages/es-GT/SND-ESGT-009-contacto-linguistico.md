@@ -1,6 +1,6 @@
 # SND-ESGT-009 — Contacto lingüístico y alcance
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** español.
 **Variedad:** Guatemala; contacto K’iche’–español como caso documentado.
 **Dominio:** contacto lingüístico / sociofonética / alcance descriptivo.
@@ -87,3 +87,13 @@ Esta entrada no pretende catalogar todos los resultados del contacto entre espa�
 **LINGUISTIC_REVIEW: PASS_WITH_CONTACT_SCOPE_WARNING. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
 
 No se utiliza “acento maya” como categoría única nacional y no se convierte la dominancia lingüística en explicación automática de toda variación.
+
+## 10. Gate de composición — 2026-10-13
+
+**COMPOSITION_READINESS: PASS → READY_FOR_COMPOSITION.**
+
+La proyección reader-facing conserva §§1–5, §8 y la nota editorial de §9. La tabla R33 (§6), el gate lingüístico (§7), las líneas de gate de §9 y este §10 permanecen como metadata interna.
+
+El caso K’iche’–español conserva su muestra, frecuencia y alcance explícitos; COMPOSITION no puede extrapolarlo a todo Guatemala ni a otras comunidades mayas.
+
+**Pronunciation Quick Layer:** OMITTED_WITH_REASON. Las realizaciones [f], [h] y [p] ya están aprobadas como representación fonética; un respelling lector-dependiente no aporta claridad suficiente y podría sugerir frecuencias o alternancias no autorizadas.
