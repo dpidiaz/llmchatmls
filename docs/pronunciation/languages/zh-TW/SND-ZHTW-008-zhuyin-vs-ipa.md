@@ -1,6 +1,6 @@
 # SND-ZHTW-008 — Zhuyin e IPA: funciones distintas
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** mandarín de Taiwán.  
 **Dominio:** representación / pronunciación.
 
@@ -78,7 +78,6 @@ Fon, J., & Chuang, Y.-Y. (2024). *When a rise is not only a rise…* https://doi
 
 La secuencia visual es una decisión MLS-SND. La evidencia respalda las funciones distintas y los límites de cada capa, no una equivalencia uno-a-uno.
 
-
 ## Revisión lingüística wave 01
 
 - **Fecha:** 2026-10-11.
@@ -88,7 +87,6 @@ La secuencia visual es una decisión MLS-SND. La evidencia respalda las funcione
 - **Corrección bibliográfica:** Fon & Chuang se alinea a 2024 conforme a SND-SRC-0022; la fecha de publicación web puede ser posterior.
 - **Siguiente gate:** EDITORIAL_REVIEW.
 
-
 ## Revisión editorial wave 01
 
 - **Fecha:** 2026-10-11.
@@ -96,3 +94,11 @@ La secuencia visual es una decisión MLS-SND. La evidencia respalda las funcione
 - **Lectura:** La estructura por capas deja claro qué hace Zhuyin y qué hace IPA, y la sección de tonos evita inferir una realización acústica fija desde una convención gráfica.
 - **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
 - **Siguiente paso:** aplicar composition readiness a esta misma versión.
+
+## Gate de composición — 2026-10-13
+
+**COMPOSITION_READINESS: PASS → READY_FOR_COMPOSITION.**
+
+La proyección reader-facing conserva §§1–4 y §7. La tabla R33, bibliografía bruta y revisiones internas permanecen fuera de la edición de lectura; “Fuentes y fundamento” se deriva de SND-SRC-0011, SND-SRC-0001 y SND-SRC-0022.
+
+**Pronunciation Quick Layer:** NOT_APPLICABLE. Esta entrada explica funciones de sistemas de representación; COMPOSITION no debe inventar correspondencias Zhuyin→IPA ni un respelling adicional.

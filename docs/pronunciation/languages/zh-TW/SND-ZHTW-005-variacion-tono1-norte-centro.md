@@ -1,6 +1,6 @@
 # SND-ZHTW-005 — Variación de Tone 1 entre norte y centro
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** mandarín.
 **Variedad:** norte y centro de Taiwán.
 **Dominio:** variación tonal / fonética.
@@ -50,7 +50,6 @@ Fon, J., & Chuang, Y.-Y. (2024). When a rise is not only a rise: An acoustic ana
 
 Este estudio trata Tone 1; no debe extrapolarse automáticamente a los otros tonos ni a toda variación regional de Taiwan Mandarin.
 
-
 ## Revisión lingüística wave 01
 
 - **Fecha:** 2026-10-11.
@@ -59,7 +58,6 @@ Este estudio trata Tone 1; no debe extrapolarse automáticamente a los otros ton
 - **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
 - **Siguiente gate:** EDITORIAL_REVIEW.
 
-
 ## Revisión editorial wave 01
 
 - **Fecha:** 2026-10-11.
@@ -67,3 +65,11 @@ Este estudio trata Tone 1; no debe extrapolarse automáticamente a los otros ton
 - **Lectura:** La pregunta inicial, la muestra y la regla anti-simplificación hacen legible el hallazgo sin convertir la variación regional condicionada en una regla categórica.
 - **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
 - **Siguiente paso:** aplicar composition readiness a esta misma versión; los blockers explícitos del texto siguen vigentes.
+
+## Gate de composición — 2026-10-13
+
+**COMPOSITION_READINESS: PASS → READY_FOR_COMPOSITION.**
+
+La proyección reader-facing conserva §§1–4 y §7. La tabla R33 (§5), la referencia bibliográfica bruta (§6), las revisiones internas y este gate permanecen como metadata del repositorio; “Fuentes y fundamento” se deriva de SND-SRC-0022.
+
+**Pronunciation Quick Layer:** OMITTED_WITH_REASON. La entrada trata contornos acústicos regionales condicionados sin una forma léxica única; un respelling fácil podría convertir un patrón probabilístico en una regla categórica.

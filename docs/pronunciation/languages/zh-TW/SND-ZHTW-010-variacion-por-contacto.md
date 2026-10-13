@@ -1,6 +1,6 @@
 # SND-ZHTW-010 — Variación segmental y contacto
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin.
 **Dominio:** variación segmental / contacto lingüístico.
@@ -63,7 +63,6 @@ Fon, J., Hung, J.-M., Huang, Y.-H., & Hsu, H.-J. (2011). Dialectal variations on
 
 Esta entrada no afirma que todos estos mergers se den en todos los hablantes. Precisamente, la variabilidad forma parte central de la evidencia.
 
-
 ## Revisión lingüística wave 01
 
 - **Fecha:** 2026-10-11.
@@ -72,7 +71,6 @@ Esta entrada no afirma que todos estos mergers se den en todos los hablantes. Pr
 - **Fuente/claims:** no se amplió ningún claim más allá del localizador ya auditado.
 - **Siguiente gate:** EDITORIAL_REVIEW.
 
-
 ## Revisión editorial wave 01
 
 - **Fecha:** 2026-10-11.
@@ -80,3 +78,11 @@ Esta entrada no afirma que todos estos mergers se den en todos los hablantes. Pr
 - **Lectura:** Los mergers y variantes se mantienen ligados a región, contexto y muestra; la regla editorial impide convertir evidencia variable en correspondencias categóricas Taiwan Mandarin = X.
 - **Control:** no se modificaron claims R33, source IDs, localizadores, transcripciones ni alcance de variedad durante este gate.
 - **Siguiente paso:** aplicar composition readiness a esta misma versión.
+
+## Gate de composición — 2026-10-13
+
+**COMPOSITION_READINESS: PASS → READY_FOR_COMPOSITION.**
+
+La proyección reader-facing conserva §§1–4 y §7. La tabla R33, bibliografía bruta y revisiones internas quedan fuera; “Fuentes y fundamento” se deriva de SND-SRC-0046 y SND-SRC-0045.
+
+**Pronunciation Quick Layer:** OMITTED_WITH_REASON. Las transcripciones [s], [ʂ], [ɕ], /in/, [iŋ], /əŋ/ y [ən] describen variantes y mergers condicionados; un respelling lector-dependiente podría borrar región, contexto o nivel de representación.
