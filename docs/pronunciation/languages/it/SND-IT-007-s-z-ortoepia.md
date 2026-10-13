@@ -1,6 +1,6 @@
 # SND-IT-007 — S y Z: pronunciación y ortoepía
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** italiano.  
 **Dominio:** consonantes / ortografía / ortoepía.  
 **Alcance:** claims fonológicos comprobados en SND-SRC-0017; DOP solo como recurso ortoépico de consulta.
@@ -51,3 +51,14 @@ El DOP mantiene guías específicas para las letras S y Z y entradas lexicográf
 - **Corrección editorial:** Bertinetto & Loporcaro (2005) ya está canonicalizada como `SND-SRC-0073`; el detalle de asimilación citado en prosa permanece fuera del núcleo R33 de esta entrada y no genera un claim nuevo.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del núcleo actual.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `478e708b0cbcd7b8bef53c6b2bcce7d2d926fad3`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` para el núcleo R33 vigente.
+- **Límite:** SND-SRC-0073 puede permanecer mencionada en prosa contextual, pero COMPOSITION no la eleva a claim ni amplía la entrada.
+- **Reader-facing:** incluir §§1–4 y nota editorial pertinente; excluir R33/auditorías.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON.
+- **Written-only:** PASS.
+
