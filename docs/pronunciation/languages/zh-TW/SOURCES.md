@@ -118,3 +118,32 @@ Uso:
 
 Limitación:
 - estudio específico de fricativas; no constituye descripción segmental completa.
+
+### ZHTW-LOCAL-012 — Yin 2020 / Tone 3 sandhi Beijing–Taiwan
+
+Yin, H. (2020). Acoustic Study of Tone 3 Sandhi in Beijing and Taiwan Mandarin. *International Journal of English Linguistics, 10*(2), 98–106. https://doi.org/10.5539/ijel.v10n2p98
+
+URL editorial: https://www.ccsenet.org/journal/index.php/ijel/article/view/0/41965
+
+Uso:
+- comparación experimental de sandhied Tone 3 y lexical Tone 2 en Beijing Mandarin y Taiwan Mandarin;
+- muestra de 40 hablantes de Beijing y 40 de Taiwan Mandarin, con balance de género;
+- 15 pares de compuestos/frases bisilábicos;
+- diferencia de rango de F0 como medida acústica principal;
+- conclusión de los autores de que Taiwan Mandarin se sitúa más cerca de una reducción tonal que Beijing Mandarin dentro del continuo categórico↔reducción.
+
+Localizadores:
+- abstract;
+- §2 Method, especialmente §2.1 Participants y §2.2 Stimuli (pp. 99–101);
+- §4 Conclusions (pp. 105–106).
+
+Acceso/licencia:
+- texto completo abierto desde la página editorial;
+- la página del editor declara Creative Commons Attribution 4.0.
+
+Limitación:
+- no se usará para convertir automáticamente Tone 3 sandhi en una única regla fonética universal;
+- sus métricas, muestra y diseño no son idénticos a Myers & Tsay (2003), por lo que la aparente discrepancia requiere síntesis metodológica y revisión lingüística.
+
+Estado local: CANDIDATE_FOR_CANONICALIZATION.
+
