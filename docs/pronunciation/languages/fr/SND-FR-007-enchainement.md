@@ -1,6 +1,6 @@
 # SND-FR-007 — Enchaînement
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** francés.  
 **Dominio:** habla conectada / silabificación.  
 **Alcance:** SND-SRC-0018.
@@ -48,4 +48,14 @@ Fougeron, C., & Smith, C. L. (1993). French. *JIPA, 23*(2), 73–76.
 - **Lectura:** la distinción enchaînement ↔ liaison está expresada de forma operativa y evita derivar el proceso desde la ortografía.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## 8. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `cd33d4a485ef5a6c83d374511955ea2de8d5504a`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** mantener visible la diferencia operativa enchaînement ↔ liaison y la advertencia contra inferencia ortográfica.
+- **Reader-facing:** incluir §§1–3 y fundamento visible derivado; excluir tabla R33 y metadata interna.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no hay una forma concreta aprobada para derivación.
+- **Written-only:** PASS.
 
