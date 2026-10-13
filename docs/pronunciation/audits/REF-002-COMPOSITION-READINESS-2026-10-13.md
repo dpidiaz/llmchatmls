@@ -51,7 +51,7 @@ PASS.
 - §7: conjunto explicado con estados de indexación futura;
 - §9: reglas internas de mantenimiento;
 - §11: obligaciones internas de licencia/reproducción gráfica;
-- §§13–16: gates, expansión futura y logs de revisión.
+- §§13–17: gates, expansión futura, logs de revisión y el propio registro de composition readiness.
 
 La exclusión de metadata interna no elimina esos bloques del repositorio.
 
