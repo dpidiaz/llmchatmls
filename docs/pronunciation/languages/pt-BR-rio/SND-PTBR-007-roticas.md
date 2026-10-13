@@ -1,6 +1,6 @@
 # SND-PTBR-007 — Róticas y variación en la fala carioca
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.  
 **Idioma:** portugués brasileño.  
 **Variedad:** Río de Janeiro; foco inicial en coda.  
 **Dominio:** fonética / fonología / variación.
@@ -46,6 +46,8 @@ Toda forma carioca de R debe indicar el contexto:
 
 No se enseñará una sola realización como “la R carioca”.
 
+**Guard de representación:** en esta entrada, **R** funciona como rótulo de la variable/rótica tratada por las fuentes y por la organización editorial. No se interpreta por sí solo como símbolo IPA, archifonema universal ni análisis fonémico definitivo. Cualquier transcripción /…/ o […] futura deberá proceder de una fuente y versión específicamente auditadas.
+
 ## 6. Evidencia R33
 
 | claim_id | afirmación | source_id | localizador | alcance | estado |
@@ -79,3 +81,17 @@ Silva, K. L. A. da. (2026). *Um estudo sobre a variação da coda (r) com falant
 - **Alcance preservado:** NURC histórico para Callou–Moraes–Leite (1998); FavRio/periferias del municipio para Silva (2026).
 - **Guard:** el resumen institucional de Silva se usa para diseño/alcance; no se importan resultados finos no auditados del texto completo.
 - **Cambios materiales:** ninguno; no se añadieron IPA, realizaciones, porcentajes ni generalizaciones nuevas.
+
+
+## 10. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `6998fa6c5fc73a48330db749769ee03b317b5433`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `LINGUISTIC_REVIEW`.
+- **Variedad:** NURC histórico y FavRio permanecen subalcances distintos dentro de Río de Janeiro; ninguno se presenta como frecuencia o inventario de toda la ciudad contemporánea.
+- **Temporalidad:** los conjuntos de 1970/1990 siguen marcados como históricos.
+- **Representación:** `R` se trata como rótulo de variable/rótica; no se crea un símbolo IPA, archifonema ni análisis fonémico nuevo.
+- **Silva (2026):** el registro/abstract sigue respaldando solo diseño y alcance en esta versión; no se incorporan resultados finos.
+- **Cobertura:** onset, intervocálico y realizaciones fonéticas concretas continúan como preguntas abiertas; esa incompletitud no se oculta.
+- **Cambios evidenciales:** ninguno.
+- **Siguiente gate:** EDITORIAL_REVIEW sobre esta versión concreta.
