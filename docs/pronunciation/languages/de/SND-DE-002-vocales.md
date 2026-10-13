@@ -1,6 +1,6 @@
 # SND-DE-002 — Vocales: mapa del sistema descrito
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** alemán.  
 **Dominio:** vocales / fonética.  
 **Alcance:** variedad ilustrada por Kohler (1990): muchos hablantes educados del norte; grabación de un hablante de 54 años.
@@ -47,3 +47,12 @@ Los perfiles de alemán austríaco y suizo, cuando se integren, no heredarán au
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada mantiene visible desde el inicio que Kohler (1990) describe una referencia delimitada y no una tabla universal DE/AT/CH.
+- **Jerarquía:** inventario, realización contextual de /r/, condicionamiento por acento y evidencia aparecen en orden comprensible.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.
