@@ -3,7 +3,7 @@
 **Corte:** 2026-10-12  
 **SHA de matriz observado para esta reconciliación:** `cfbe8735e334ef0933c11beb8dd61a6483bcaa9c`  
 **Rama matriz:** `feat/mls-snd-foundation`  
-**Inventario editorial:** 143 unidades candidatas; no son una cuota fija de publicación.  
+**Inventario editorial:** 144 unidades candidatas; no son una cuota fija de publicación.  
 **Fuente de verdad:** cada archivo canónico `SND-*.md` dentro de los directorios editoriales, cotejado con el inventario.
 
 MLS-SND es el tomo independiente de pronunciación y sistemas sonoros del MLS. No modifica los tomos lingüísticos existentes. Su contenido es enciclopédico, sin ejercicios ni dependencia obligatoria de audio. R32 organiza; R33 exige evidencia, alcance y localizadores; R44 coordina las waves.
@@ -130,7 +130,7 @@ Este PASS **no** certifica:
 
 - `WORK-QUEUE.md`: gaps y prioridades.
 - `INTEGRATION-QUEUE.md`: reconciliación de waves.
-- `MLS-SND-MASTER-INVENTORY.md`: inventario de 143 candidatas.
+- `MLS-SND-MASTER-INVENTORY.md`: inventario de 144 candidatas.
 - `MLS-SND-SOURCE-REGISTRY.md`: 97 fuentes canónicas.
 - `audits/STATUS-SYNC-108-97-WAVE-05-2026-10-11.md`: corte de workflow; `audits/SOURCE-ID-INTEGRITY-108-97-2026-10-11.md`: QA referencial vigente.
 
