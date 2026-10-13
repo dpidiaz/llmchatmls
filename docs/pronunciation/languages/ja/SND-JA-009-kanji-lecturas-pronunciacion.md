@@ -1,6 +1,7 @@
 # SND-JA-009 — Kanji, lecturas y pronunciación
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** japonés  
+**Estado:** EDITORIAL_REVIEW.  
+**Idioma:** japonés.  
 **Dominio:** escritura / léxico / pronunciación  
 **Referencia normativa:** 常用漢字表, con límites de alcance explícitos
 
@@ -87,3 +88,11 @@ a partir de esas etiquetas.
 - JA-010 — Romanización
 - JA-006 — Acento tonal de Tokio
 - REP-009 — Ortografía y pronunciación
+
+## 9. Revisión editorial
+
+**Versión revisada:** blob previo `04acab3e55bbaeb662eb59493433c6423022649c`.
+
+**Veredicto:** `PASS`.
+
+La revisión editorial confirma que la entrada distingue con claridad carácter, lectura léxica en kana y capas fonológica/fonética; también mantiene visibles los límites del Jōyō Kanji Table y del índice 音訓. No se modificaron claims R33, fuentes, localizadores, IPA ni análisis lingüístico.
