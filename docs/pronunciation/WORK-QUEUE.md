@@ -1,7 +1,7 @@
 # MLS-SND — Work Queue
 
-Actualizado: 2026-10-11.  
-Corte de coordinación: **106 entradas / 91 fuentes**.
+Actualizado: 2026-10-12.  
+Corte de coordinación: **108 entradas / 97 fuentes**.
 
 Antes de reclamar trabajo:
 
@@ -47,10 +47,6 @@ Físicos:
 Ausentes:
 - ESGT-006/007/008.
 
-Estados pre-gate:
-- ESGT-002 SOURCE_MAPPED.
-- ESGT-004 DRAFTED.
-
 Antes de reclamar 006/007/008, revisar waves activas de róticas/prosodia.
 
 ### 🇺🇸 ENUS
@@ -88,15 +84,12 @@ Físicos:
 Ausente:
 - DE-005.
 
-Pre-gate:
-- DE-008 RESEARCHED.
-
 ### 🇹🇼 ZHTW
 Físicos:
-- ZHTW-001/003/004/005/007/008/009/010.
+- ZHTW-001/002/003/004/005/007/008/009/010.
 
-Ausentes:
-- ZHTW-002/006.
+Ausente:
+- ZHTW-006.
 
 Pre-gate:
 - ZHTW-003 RESEARCHED_PARTIAL.
@@ -118,17 +111,13 @@ Ausentes:
 Revisar waves activas de mora/duración/romanización antes de reclamar.
 
 ### 🇷🇺 RU
-Físicos:
-- RU-001…RU-008.
-
-Ausente:
-- RU-009.
+RU-001…RU-009: **9/9 físicos**.
 
 ## Conteo de cobertura
 
 Inventario candidato: 143.  
-Entradas físicas: 106.  
-Unidades candidatas todavía sin archivo físico: **37**.
+Entradas físicas: 108.  
+Unidades candidatas todavía sin archivo físico: **35**.
 
 Desglose de gaps físicos:
 
@@ -138,26 +127,23 @@ Desglose de gaps físicos:
 - ENUS: 1.
 - PTBR: 8.
 - DE: 1.
-- ZHTW: 2.
+- ZHTW: 1.
 - JA: 4.
-- RU: 1.
+- RU: 0.
 
 ## Trabajo prioritario no meramente volumétrico
 
 ### 1. Cerrar estados pre-gate
-- ESGT-002.
-- ESGT-004.
-- DE-008.
-- ZHTW-003.
-- REF-002 como aparato de referencia.
+- ZHTW-003 — RESEARCHED_PARTIAL.
+- REF-002 — IN_PROGRESS como aparato de referencia.
 
 ### 2. Integrar cobertura ya investigada
 Preferir clean reapply de waves con contenido útil ya producido antes de abrir investigación redundante.
 
 ### 3. Composition readiness
-El proyecto tiene 42 entradas en EDITORIAL_REVIEW y **2 en READY_FOR_COMPOSITION**.
+El proyecto tiene **39 entradas en EDITORIAL_REVIEW** y **12 en READY_FOR_COMPOSITION**.
 
-FND-002 y ENUS-001 completaron PASS con reader-facing projection y handoff manifest. ENUS-001 confirma que el gate funciona también en una entrada con alcance dialectal MULTI_REFERENCE. Las siguientes promociones deben repetir el gate por versión concreta; no copiar el estado por analogía.
+READY_FOR_COMPOSITION: FND-002/003/004/006/007/008/009/011/013/015, ENUS-001 y ZHTW-007. Cada promoción corresponde a una versión concreta con handoff; las siguientes deben repetir el gate y no heredar estado por analogía.
 
 ### 4. QA
 Repetir:
