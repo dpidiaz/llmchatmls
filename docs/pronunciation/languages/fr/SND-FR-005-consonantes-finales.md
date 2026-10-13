@@ -1,6 +1,6 @@
 # SND-FR-005 — Consonantes finales y realización contextual
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** francés.  
 **Dominio:** consonantes / fonotáctica / habla conectada.  
 **Alcance:** descripción de Fougeron & Smith (1993).
@@ -51,4 +51,14 @@ Fougeron, C., & Smith, C. L. (1993). French. *JIPA, 23*(2), 73–76.
 - **Jerarquía:** la secuencia regla general → procesos contextuales → variación → evidencia es clara.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `c1ac81f65a5c529385c0bb89528b55af59eae3ce`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** conservar separadas consonantes finales realizadas, liaison, enchaînement y variación de la rótica.
+- **Reader-facing:** incluir §§1–4 y fuente/fundamento derivado; excluir tabla R33 y metadata interna.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no hay una forma léxica aprobada para respelling.
+- **Written-only:** PASS.
 
