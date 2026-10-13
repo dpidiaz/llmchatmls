@@ -48,3 +48,15 @@ La relación con pitch accents y entonación se desarrolla en SND-ENUS-008.
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED para organización temporal.
 - **HOLD:** una descripción fina de prominencia no queda validada por esta entrada y requerirá bibliografía específica.
+
+## 7. Revisión lingüística wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `722e840d8661e20ebb60df4ca688d42babcbac38`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `LINGUISTIC_REVIEW` para organización temporal.
+- **Pendiente preservado:** una descripción fina de prominencia sigue sin estar sustentada por esta entrada y no se deriva de velocidad, pausas o variabilidad segmental.
+- **Variedad:** los contrastes regionales se conservan como resultados de la muestra, no como estereotipos esenciales.
+- **Terminología:** “ritmo” no se convierte en una tipología global simplista.
+- **Claims R33:** sin cambios.
+- **Siguiente gate:** EDITORIAL_REVIEW solo del núcleo validado; la prominencia fina requiere evidencia específica antes de ampliación material.
+
