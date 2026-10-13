@@ -83,7 +83,37 @@ Este seed se construyó a partir de entradas ya presentes en `feat/mls-snd-found
 | `◌̃` | diacrítico | USED | /œ̃/, /ɛ̃/ | FR | La tabla oficial lo identifica como nasalización. |
 | `ʲ` | diacrítico/modificador | USED | /tʲ dʲ rʲ/ | RU | La tabla oficial lo identifica como palatalización. |
 
-## 6. Suprasegmentales y tonos: pool explicado, no inventario de uso
+
+## 6. Expansión auditada v0.2 — ruso y Taiwan Mandarin
+
+Esta pasada añade únicamente formas **ya escritas explícitamente** en entradas canónicas. No completa inventarios por analogía y no deriva símbolos desde ortografía, Zhuyin o romanización.
+
+### Ruso — ocurrencias canónicas adicionales
+
+| Símbolo | Clase IPA | Estado | Uso observado | Entrada | Nota |
+|---|---|---|---|---|---|
+| `v` | consonante pulmonar | USED | /v/ | SND-RU-007 | La entrada documenta realizaciones debilitadas/aproximantes sin fijar aquí una transcripción fonética más estrecha. |
+| `j` | consonante pulmonar/aproximante | USED | /j/ | SND-RU-007 | El índice registra el símbolo; las realizaciones condicionadas siguen perteneciendo a la entrada y su evidencia. |
+
+`vʲ` se representa en MLS-SND como base `v` + marca de palatalización `ʲ`; no se crea un símbolo atómico nuevo.
+
+### Taiwan Mandarin — ocurrencias del mapa segmental en RESEARCHED_PARTIAL
+
+SND-ZHTW-003 es todavía **RESEARCHED_PARTIAL**. Los signos siguientes se indexan como ocurrencias textuales canónicas, pero **su presencia aquí no promueve el análisis segmental ni cierra el gate de la entrada**.
+
+| Símbolo | Clase IPA | Estado | Uso observado | Entrada | Alcance |
+|---|---|---|---|---|---|
+| `p`, `t`, `k` | consonantes pulmonares | USED | [p], [t], [k] | SND-ZHTW-003 | Miembros no aspirados de pares descritos por Wan et al. (2024). |
+| `pʰ`, `tʰ`, `kʰ` | consonantes pulmonares + aspiración | USED | [pʰ], [tʰ], [kʰ] | SND-ZHTW-003 | La aspiración se conserva como `ʰ`; no se interpreta como símbolo independiente de segmento. |
+| `tʂ`, `ts`, `tɕ` | secuencias/representaciones consonánticas usadas por la fuente | USED | [tʂ], [ts], [tɕ] | SND-ZHTW-003 | Se conserva la representación escrita en el mapa; REF-002 no decide aquí su análisis fonológico. |
+| `tʂʰ`, `tsʰ`, `tɕʰ` | representaciones consonánticas + aspiración | USED | [tʂʰ], [tsʰ], [tɕʰ] | SND-ZHTW-003 | Mismo límite analítico; la entrada fuente sigue pre-gate. |
+| `s`, `ʂ`, `ɕ` | consonantes pulmonares | USED | [s], [ʂ], [ɕ] | SND-ZHTW-003 | El mapa conserva variación interhablante/contextual; el índice no la colapsa. |
+| `n`, `ŋ` | consonantes pulmonares | USED | /n/, /ŋ/ | SND-ZHTW-003 | Finales estudiadas por Chiu & Lu; el merger documentado es dependiente del contexto y potencialmente incompleto. |
+| `ʰ` | diacrítico/modificador | USED | aspiración en [pʰ tʰ kʰ tʂʰ tsʰ tɕʰ] | SND-ZHTW-003 | Se registra por separado para que el lector pueda rastrear la marca. |
+
+**Gate de alcance:** estas filas certifican indexación de signos observados, no suficiencia R33 de SND-ZHTW-003. Si la revisión lingüística cambia la representación adoptada, REF-002 deberá sincronizarse.
+
+## 7. Suprasegmentales y tonos: pool explicado, no inventario de uso
 
 SND-REP-006 explica que MLS-SND puede necesitar signos IPA de:
 
@@ -108,7 +138,7 @@ La tabla oficial registra, entre otros:
 
 Los tonos y acentos de palabra se indexarán **solo cuando los perfiles adopten una convención concreta**. No se copiará automáticamente toda la subtabla tonal al aparato de consulta.
 
-## 7. Registro de exclusiones y notaciones no canónicas
+## 8. Registro de exclusiones y notaciones no canónicas
 
 ### /S/ en fuentes sobre portugués carioca
 
@@ -128,7 +158,7 @@ Se trata en SND-ZHTW-007 como sistema local de representación distinto del IPA.
 
 No se indexan aquí salvo que contengan un signo IPA utilizado explícitamente como IPA, caso que debe documentarse.
 
-## 8. Reglas de mantenimiento
+## 9. Reglas de mantenimiento
 
 Cuando una entrada nueva introduzca un símbolo IPA:
 
@@ -139,7 +169,7 @@ Cuando una entrada nueva introduzca un símbolo IPA:
 5. añadir diacríticos por separado cuando su función sea relevante;
 6. si una fuente usa el mismo símbolo con otro análisis, conservar ambas ocurrencias y explicar la diferencia.
 
-## 9. Actualización frente a nuevas versiones de la tabla IPA
+## 10. Actualización frente a nuevas versiones de la tabla IPA
 
 La International Phonetic Association indica que:
 
@@ -154,7 +184,7 @@ Por ello, MLS-SND distinguirá:
 
 Una nueva fecha de copyright no se tratará automáticamente como cambio fonético o cambio de inventario.
 
-## 10. Licencia y eventual reproducción gráfica
+## 11. Licencia y eventual reproducción gráfica
 
 La IPA informa que la tabla Kiel y sus subpartes están disponibles bajo **CC BY-SA 4.0** con atribución.
 
@@ -166,13 +196,13 @@ Si MLS-SND reproduce o adapta gráficamente la tabla/subtabla, la composición f
 
 Este índice textual no requiere reproducir la tabla completa para funcionar.
 
-## 11. Fuente
+## 12. Fuente
 
 International Phonetic Association. (2026). *The International Phonetic Alphabet and the IPA Chart*. https://www.internationalphoneticassociation.org/content/ipa-chart
 
 International Phonetic Association. (2026). *The IPA Chart and sub-charts in four fonts*. https://www.internationalphoneticassociation.org/IPAcharts/IPA_charts_E/IPA_charts_E.html
 
-## 12. Próxima expansión
+## 13. Próxima expansión
 
 Después de integrar las waves activas se debe ejecutar otra pasada sobre:
 
