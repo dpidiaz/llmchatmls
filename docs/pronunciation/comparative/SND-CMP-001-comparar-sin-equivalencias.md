@@ -1,6 +1,6 @@
 # SND-CMP-001 — Cómo comparar sonidos sin asumir identidad
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Dominio:** comparación / fonética / fonología.  
 **Idioma:** transversal.
 
@@ -184,3 +184,14 @@ es una convención editorial de MLS-SND. No se atribuye a las fuentes.
 - SND-FND-017 — Variación
 - SND-REP-007 — Transcripción fonológica y fonética
 - SND-REP-008 — Transcripción amplia y estrecha
+
+## 14. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Navegación:** la regla target-language-first aparece antes de la taxonomía, las dimensiones de comparación preceden a los controles empíricos y el gate de publicación queda explícito antes de la evidencia R33.
+- **Taxonomía MLS:** IDENTIDAD DOCUMENTADA, SEMEJANZA PARCIAL, APROXIMACIÓN ARTICULATORIA y SIN EQUIVALENTE DIRECTO ÚTIL permanecen declaradas como convenciones editoriales propias.
+- **Controles:** compartir grafía, símbolo IPA amplio o categoría funcional no se presenta como prueba de identidad fonética.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.
+
