@@ -1,6 +1,6 @@
 # SND-IT-002 — Vocales
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** italiano.  
 **Dominio:** vocales / fonética / fonología.  
 **Alcance:** hablante y marco de Rogers & d’Arcangeli (2004).
@@ -53,3 +53,14 @@ Rogers, D., & d’Arcangeli, L. (2004). Italian. *Journal of the International P
 - **Jerarquía:** la entrada evita convertir duración fonética en contraste fonémico o grafía en silabificación automática.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## 9. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `6d942a4d2772d13f2254f9a9356e994b5b4d8a6f`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** conservar la hablante/marco de Rogers & d’Arcangeli (2004); duración fonética no se convierte en longitud fonémica.
+- **Reader-facing:** incluir §§1–4; fundamento derivado; excluir R33/auditorías.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON.
+- **Written-only:** PASS.
+
