@@ -1,6 +1,6 @@
 # SND-FND-014 — Acento tonal: una etiqueta que exige definición local
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Dominio:** prosodia / tipología.  
 **Idioma:** transversal.  
 **Fuente tipológica principal:** SND-SRC-0048.
@@ -60,8 +60,17 @@ Hyman, L. M. (2009). How (not) to do phonological typology: the case of pitch-ac
 
 ## 7. Nota editorial
 
-La traducción española preferida —“acento tonal” u otra— deberá fijarse en terminología después de revisión especializada. La entrada evita convertir una etiqueta discutida en una categoría universal.
+La norma editorial v0.2 conserva **acento tonal** como rótulo de trabajo para *pitch accent*, con definición local obligatoria por perfil. La entrada evita convertir una etiqueta discutida en una categoría universal; la taxonomía sigue abierta a refinamiento por perfiles.
 
 ## 8. Gate
 
-**LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING (2026-10-11).** Se contrastó la interpretación tipológica con el artículo publicado de Hyman (2009), especialmente §§1, 3 y 4. La entrada conserva la atribución explícita de la postura a Hyman, evita universalizar una categoría discutida y no traslada datos de Tokio a otras variedades. **Pendiente:** decisión editorial sobre la traducción española y revisión editorial independiente; no promover todavía a `EDITORIAL_REVIEW` ni `READY_FOR_COMPOSITION`.
+**LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING (2026-10-11).** Se contrastó la interpretación tipológica con el artículo publicado de Hyman (2009), especialmente §§1, 3 y 4. La entrada conserva la atribución explícita de la postura a Hyman, evita universalizar una categoría discutida y no traslada datos de Tokio a otras variedades. La revisión editorial posterior conserva `acento tonal` como rótulo de trabajo de la norma v0.2 y mantiene abierta su definición por perfil; no implica `READY_FOR_COMPOSITION`.
+
+## 9. Revisión editorial wave 02
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_TERMINOLOGY_WARNING → `EDITORIAL_REVIEW`.
+- **Terminología:** se conserva “acento tonal” / *pitch accent* como etiqueta de trabajo, nunca como tercer tipo prosódico universal.
+- **Jerarquía:** la postura de Hyman permanece atribuida al autor y Tokio funciona como perfil ilustrativo, no como definición global.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness con la advertencia terminológica intacta.
