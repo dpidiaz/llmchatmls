@@ -115,16 +115,16 @@ RU-001…RU-009: **9/9 físicos**.
 
 ## Conteo de cobertura
 
-Inventario candidato: 143.  
+Inventario candidato: 144.  
 Entradas físicas: 108.  
-Unidades candidatas todavía sin archivo físico: **35**.
+Unidades candidatas todavía sin archivo físico: **36**.
 
 Desglose de gaps físicos:
 
 - CMP: 10.
 - REF: 7.
 - ESGT: 3.
-- ENUS: 1.
+- ENUS: 2 (ENUS-002 y ENUS-010; ENUS-010 permanece BLOCKED_BY_PROFILES).
 - PTBR: 8.
 - DE: 1.
 - ZHTW: 1.
