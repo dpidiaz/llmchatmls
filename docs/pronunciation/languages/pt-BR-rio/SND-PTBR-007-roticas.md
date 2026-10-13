@@ -1,6 +1,6 @@
 # SND-PTBR-007 — Róticas y variación en la fala carioca
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.  
 **Idioma:** portugués brasileño.  
 **Variedad:** Río de Janeiro; foco inicial en coda.  
 **Dominio:** fonética / fonología / variación.
@@ -36,7 +36,7 @@ El resumen de 2026 no se usa aquí para afirmar resultados que todavía no se ha
 
 ## 5. Regla editorial
 
-Toda forma carioca de R debe indicar el contexto:
+Todo tratamiento de las róticas cariocas debe indicar el contexto:
 
 - onset;
 - intervocálico;
@@ -95,3 +95,16 @@ Silva, K. L. A. da. (2026). *Um estudo sobre a variação da coda (r) com falant
 - **Cobertura:** onset, intervocálico y realizaciones fonéticas concretas continúan como preguntas abiertas; esa incompletitud no se oculta.
 - **Cambios evidenciales:** ninguno.
 - **Siguiente gate:** EDITORIAL_REVIEW sobre esta versión concreta.
+
+
+## 11. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `178b25716c4d11139c903af708b7e349cd8bb57f`.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Claridad:** la entrada se presenta como mapa inicial de variación de róticas con foco en coda, no como inventario completo.
+- **Terminología:** “R” queda visible únicamente como rótulo de variable/rótica; la prosa reader-facing evita sugerir un símbolo IPA o una única realización.
+- **Alcance:** NURC histórico y FavRio permanecen diferenciados y fechados.
+- **Open questions:** permanecen explícitas y no se convierten en promesas de contenido ya resuelto.
+- **Cambios evidenciales/lingüísticos:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta versión concreta.
