@@ -1,6 +1,6 @@
 # SND-IT-006 — E y O: pronunciación y ortoepía
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** italiano.  
 **Dominio:** vocales / ortografía / ortoepía.
 
@@ -45,3 +45,12 @@ La sección O del DOP permanece como candidato de ampliación; esta versión sol
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Lectura:** grafía, acento léxico, categoría vocálica y ortoepía DOP se mantienen diferenciados.
+- **Scope warning:** la sección O del DOP sigue fuera del núcleo auditado; no se rellena por simetría con E.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del núcleo actual.
