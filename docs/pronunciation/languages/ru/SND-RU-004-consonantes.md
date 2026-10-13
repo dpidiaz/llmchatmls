@@ -1,6 +1,6 @@
 # SND-RU-004 — Consonantes: mapa del sistema descrito
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** ruso.  
 **Dominio:** consonantes / fonología / fonética.  
 **Alcance:** sistema descrito por SND-SRC-0015.
@@ -76,3 +76,13 @@ Yanushevskaya, I., & Bunčić, D. (2015). Russian. *Journal of the International
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Versión evaluada (blob):** `83686d1c618328a5380f66e264becb5fc66f26c3`.
+- **Handoff:** `docs/pronunciation/composition/handoffs/SND-RU-004.md`.
+- **Pronunciation Quick Layer:** `OMITTED_WITH_REASON`; esta versión describe un sistema/fenómeno y no fija una única pareja forma–glosa con respelling derivada aprobada. No se inventa una ayuda fonética para llenar la capa.
+- **Reader-facing projection:** contenido explicativo aprobado, fuentes utilizadas, navegación y notas editoriales necesarias; tablas R33, auditorías y logs de revisión quedan como metadata interna.
+- **Control:** no se modificaron claims, fuentes, localizadores, transcripciones, análisis, variedad ni alcance.
