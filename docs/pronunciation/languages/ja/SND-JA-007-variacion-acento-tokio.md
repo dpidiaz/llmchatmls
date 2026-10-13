@@ -1,6 +1,6 @@
 # SND-JA-007 — Variación y cambio en el acento de Tokio
 
-**Estado:** LINGUISTIC_REVIEW.
+**Estado:** EDITORIAL_REVIEW.
 **Idioma:** japonés.  
 **Variedad:** Tokio; datos recogidos principalmente entre 1982 y 1984.  
 **Dominio:** prosodia / variación.
@@ -81,7 +81,7 @@ Shibata, T. (superv.), Mase, Y., & Sato, R. (Eds.). (1985/2013). *東京語ア�
 
 ## 10. Nota de auditoría
 
-Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional de NINJAL. La fuente tiene advertencia temporal explícita. La revisión lingüística independiente ya obtuvo PASS_WITH_NOTE; permanece pendiente EDITORIAL_REVIEW.
+Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institucional de NINJAL. La fuente tiene advertencia temporal explícita. La revisión lingüística independiente obtuvo PASS_WITH_NOTE; la revisión editorial de esta versión también quedó completada.
 
 
 ## Revisión lingüística wave 04
@@ -89,3 +89,13 @@ Claim ↔ source ↔ locator comprobados el 2026-10-11 contra la página institu
 - **Resultado:** PASS_WITH_NOTE.
 - **Control:** alcance, temporalidad y separación entre referencia de Tokio, variación interna y terminología editorial revisados de forma independiente.
 - **Siguiente gate:** EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12; reaplicación limpia 2026-10-13.
+- **Resultado:** PASS_WITH_TEMPORAL_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Lectura:** la fecha de recogida 1982–1984 aparece en metadata, dimensión generacional y regla temporal antes del cierre de evidencia.
+- **Separación:** patrones observados en hablantes, patrones de diccionario, cambio generacional y elección editorial de referencia permanecen como capas distintas.
+- **Advertencia contemporánea:** ningún dato del corpus se presenta automáticamente como “la forma actual” en 2026; una afirmación contemporánea concreta puede requerir evidencia más reciente.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión, conservando la advertencia temporal.
