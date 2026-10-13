@@ -1,6 +1,7 @@
 # SND-IT-001 — Italiano de referencia, variedades regionales y “mainstream Italian”
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
+**Estado:** EDITORIAL_REVIEW  
+**Idioma:** italiano.  
 **Dominio:** variedad / alcance descriptivo.
 
 ## 1. Problema editorial
@@ -51,6 +52,14 @@ Rogers, D., & d’Arcangeli, L. (2004). Italian. *Journal of the International P
 
 REFERENCE_PROVISIONAL es una decisión MLS-SND. La fuente no establece una jerarquía editorial para este tomo.
 
-## 8. Nota de auditoría
+## 8. Entradas relacionadas
 
-Claims contrastados el 2026-10-11. Falta LINGUISTIC_REVIEW y EDITORIAL_REVIEW.
+- SND-IT-005 — Acento léxico.
+- SND-IT-008 — Grafía y pronunciación.
+- SND-IT-009 — Variación regional y referencia.
+
+## 9. Gate editorial
+
+Claims contrastados el 2026-10-11. **LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+Se conserva **REFERENCE_PROVISIONAL**. Esta integración no decide `READY_FOR_COMPOSITION`; ese gate deberá evaluarse sobre esta versión concreta después de reconciliar la arquitectura de referencia del perfil.
