@@ -1,6 +1,6 @@
 # SND-FR-006 — Liaison: definición descriptiva inicial
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** francés.  
 **Dominio:** habla conectada / fonología.  
 **Alcance:** definición básica de SND-SRC-0018; distribución normativa/variable queda pendiente.
@@ -40,3 +40,12 @@ Una ampliación normativa/sociolingüística de liaison deberá conservar el est
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Lectura:** la definición básica de liaison queda separada de enchaînement y de cualquier taxonomía normativa aún no investigada.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness del núcleo actual; una ampliación normativa/sociolingüística debe reabrir los gates afectados.
+
