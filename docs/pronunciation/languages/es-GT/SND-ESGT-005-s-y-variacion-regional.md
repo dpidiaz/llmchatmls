@@ -77,4 +77,13 @@ Controles preservados:
 - no se infieren tasas por localidad, generación o registro sin evidencia adicional;
 - no se fija una transcripción estrecha de todos los alófonos a partir de la fuente marco.
 
-ESGT-002 permanece SOURCE_MAPPED y este bloque no pasa todavía a READY_FOR_COMPOSITION.
+ESGT-002 ya superó sus gates y está `READY_FOR_COMPOSITION` como mapa de evidencia/cobertura. La dependencia editorial que bloqueaba este bloque queda satisfecha para el alcance actual de ESGT-005; cualquier transcripción estrecha futura sigue requiriendo evidencia fonética específica.
+
+## 10. Reconciliación editorial de dependencia
+
+- **Fecha:** 2026-10-13.
+- **Versión de partida:** blob `964d143daa00a6ac6317984062cfea2d101cc2df`.
+- **Resultado:** PASS_DEPENDENCY_RESOLVED — permanece `EDITORIAL_REVIEW` y puede volver a composition readiness.
+- **Dependencia resuelta:** SND-ESGT-002 ya está `READY_FOR_COMPOSITION` como mapa de cobertura; no se requiere convertirlo en inventario fonémico final para componer esta entrada regional de /s/.
+- **Límites preservados:** no se infieren tasas por localidad/edad/registro, no se convierte prestigio en prescripción y no se inventa IPA estrecho.
+- **Cambios lingüísticos/R33:** ninguno.
