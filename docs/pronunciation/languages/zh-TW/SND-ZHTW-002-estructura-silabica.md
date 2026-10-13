@@ -1,6 +1,6 @@
 # SND-ZHTW-002 — Estructura silábica
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING como mapa descriptivo; análisis fonológico completo pendiente.
+**Estado:** READY_FOR_COMPOSITION — PASS_WITH_SCOPE_WARNING como mapa descriptivo; análisis fonológico completo pendiente.
 **Idioma:** mandarín.
 **Variedad:** Taiwan Mandarin.
 **Dominio:** sílaba / fonotáctica / representación / fonética.
@@ -101,3 +101,16 @@ La revisión lingüística independiente confirmó este alcance de mapa descript
 - **Workflow corregido:** la prohibición antigua de composition readiness se precisa: bloquea una presentación como “teoría silábica cerrada”, no la composición del mapa explícitamente parcial.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness del mapa actual con el límite de §8 visible.
+
+## 12. Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `5dc8871e12086a6d0f04ac0964b8ce6e173824b6`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` **como mapa descriptivo multicapa**.
+- **Proyección reader-facing:** §§1–5, §7 y §8.
+- **Metadata interna excluida:** §6 (tabla R33), §9 (gate interno) y §§10–11 (revisiones/workflow).
+- **Fuentes y fundamento:** derivado de SND-SRC-0011, SND-SRC-0092, SND-SRC-0093 y SND-SRC-0094, conservando función, muestra y alcance de cada fuente.
+- **Datos/ejemplos:** estadísticas de §2 y tipos `V…CGVN / CGVX` de §3 se tratan como datos de fuente; /n/–/ŋ/ de §4 conserva su alcance contextual.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — la entrada no presenta una forma léxica objetivo para respelling.
+- **Autonomía escrita:** PASS; el mapa se comprende sin audio.
+- **Open question no bloqueante:** la teoría fonológica completa y un posible árbol silábico del perfil siguen abiertos porque no forman parte del objeto aprobado de esta versión.
+- **Regla para COMPOSITION:** no puede convertir `CGVX` en plantilla universal, extrapolar la muestra de Taipei ni colapsar organización Zhuyin, estructura de superficie y realización fonética.
