@@ -1,6 +1,6 @@
 # SND-ESGT-003 — Vocales y variación
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_ABSTRACT_SCOPE_WARNING.  
+**Estado:** READY_FOR_COMPOSITION — PASS_WITH_ABSTRACT_SCOPE_WARNING.  
 **Idioma:** español.  
 **Variedad:** Guatemala; alcance nacional geolingüístico + evidencia de contacto explícitamente separada.  
 **Dominio:** vocales / fonética / variación.
@@ -102,3 +102,14 @@ La entrada no constituye un inventario acústico nacional exhaustivo.
 **Veredicto:** `PASS_WITH_ABSTRACT_SCOPE_WARNING`.
 
 La estructura presenta con claridad la separación entre evidencia geolingüística nacional y evidencia de contacto. El warning de alcance por abstract de SND-SRC-0053 permanece visible y no se transforma en afirmación nacional. No se modificaron claims R33, fuentes, localizadores, datos, transcripciones ni análisis lingüístico.
+
+## 11. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `0e95a3a49c63b8e226379a4c1576f497e71a7250`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como mapa de evidencia vocal/variación.
+- **Alcance:** Utgård permanece encuesta geolingüística delimitada; Baird (2020) permanece limitado al abstract y a grupos monolingües/bilingües del estudio.
+- **Reader-facing:** incluir §§1–5, 7 y 9; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se crea respelling ni IPA nuevo.
+- **Written-only:** PASS.
+
