@@ -83,3 +83,13 @@ La taxonomía PB_BROAD / RIO_CARIOCA es propia de MLS-SND y sirve para controlar
 - **Estado de workflow:** EDITORIAL_REVIEW; el gate EVIDENCE_CHECKED permanece satisfecho.
 - **Pendiente editorial:** el perfil no puede considerarse completo hasta integrar y revisar los fenómenos todavía abiertos en PTBR-002…010.
 - **No implica:** READY_FOR_COMPOSITION ni generalización del habla carioca a todo PB.
+
+## 11. Composition readiness wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `b3ebe10cbec6545e78276ab1bac865f87ca14660`.
+- **Resultado:** **BLOCKED** — permanece en `EDITORIAL_REVIEW`.
+- **Blocker central:** §4 mantiene la referencia principal como `REFERENCE_PROVISIONAL`; cerrar qué constituye la referencia principal del perfil es una decisión editorial/de alcance material que COMPOSITION no puede tomar.
+- **Dependencia:** integrar/revisar suficiente evidencia de los fenómenos abiertos PTBR-002…010 para estabilizar la política de referencia de esta entrada.
+- **No bloquea:** la taxonomía PB_BROAD / RIO_CARIOCA ya aprobada puede seguir usándose para controlar alcance en otras entradas.
+- **Gate de retorno:** EDITORIAL_REVIEW cuando la referencia deje de ser provisional sobre una versión concreta.
