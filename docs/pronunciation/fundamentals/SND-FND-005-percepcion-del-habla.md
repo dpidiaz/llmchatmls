@@ -1,6 +1,6 @@
 # SND-FND-005 — Percepción del habla
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SOURCE_SCOPE_WARNING.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_SOURCE_SCOPE_WARNING.  
 **Dominio:** fonética / percepción.  
 **Idioma:** transversal.
 
@@ -67,3 +67,14 @@ Claim ↔ source ↔ locator comprobados el 2026-10-11. LINGUISTIC_REVIEW comple
 - **Producción↔percepción:** la entrada declara correctamente que las relaciones específicas requieren fuentes especializadas.
 - **Alcance de fuente:** SND-SRC-0024 basta para este núcleo introductorio, no para comparaciones concretas entre variedades.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
+## 10. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `27b3e0d13592aba9858c464335032f9bcbc56b1b`.
+- **Resultado:** PASS_WITH_SOURCE_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Modelo:** PAM continúa presentado como marco introductorio de referencia, no como teoría única de percepción o adquisición.
+- **Generalización:** no se presume dificultad para todos los individuos y la semejanza perceptiva sigue separada de la identidad fonética.
+- **Producción/percepción:** la relación permanece prudente; afirmaciones específicas futuras requieren fuentes especializadas.
+- **Alcance de fuente:** SND-SRC-0024 sostiene el núcleo introductorio, no comparaciones concretas entre variedades.
+- **Siguiente gate:** composition readiness con el source-scope warning preservado.
