@@ -1,6 +1,6 @@
 # SND-DE-006 — Procesos contextuales
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** alemán.  
 **Dominio:** fonética / procesos contextuales.  
 **Alcance:** variedad ilustrada por Kohler (1990).
@@ -48,3 +48,12 @@ Las diferencias DE/AT/CH pertenecen a SND-DE-008 y a fuentes específicas de cad
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Lectura:** aspiración, /r/, golpe glotal y [ç]/[x] se presentan como procesos/contextos de la variedad ilustrada, no como reglas absolutas para DE/AT/CH.
+- **Scope warning:** la entrada conserva su función de referencia contextual; diferencias nacionales siguen fuera y remiten a DE-008/fuentes específicas.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.
