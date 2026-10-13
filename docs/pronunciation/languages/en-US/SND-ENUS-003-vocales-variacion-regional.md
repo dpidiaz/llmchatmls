@@ -1,6 +1,6 @@
 # SND-ENUS-003 — Sistemas vocálicos y variación regional
 
-**Estado:** LINGUISTIC_REVIEW — PASS.  
+**Estado:** EDITORIAL_REVIEW — PASS.  
 **Idioma:** inglés.  
 **Variedad:** Estados Unidos; arquitectura MULTI_REFERENCE.  
 **Dominio:** vocales / variación regional.
@@ -65,4 +65,12 @@ Esta entrada no fija todavía:
 - **MULTI_REFERENCE:** Southern Michigan permanece perfil regional independiente; no se eleva a referencia nacional.
 - **Generalización:** no se deriva una vocal “estadounidense neutral” ni una realización única por región.
 - **Claims R33:** sin cambios.
-- **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `7b58d1c792c3bab0d56d1becf56857817c0b169c`.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Control editorial:** La jerarquía MULTI_REFERENCE, los límites de muestra y la separación entre cobertura regional y referencia nacional están visibles y consistentes. Southern Michigan queda enlazado como perfil regional, no como norma nacional.
+- **Invariantes:** sin cambios en claims R33, fuentes, localizadores, IPA, variedad ni análisis lingüístico.
