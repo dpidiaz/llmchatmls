@@ -147,3 +147,65 @@ Debe:
 El usuario no debe actuar como dispatcher manual.
 
 Cada chat es responsable de orientarse leyendo GitHub, evitar duplicados razonables y dejar una salida auditable para los demás.
+
+
+## 14. Snapshot operativo — 2026-10-11 01:50–02:00 America/Guatemala
+
+Observado desde GitHub:
+
+- **36 PRs abiertos** hacia `feat/mls-snd-foundation`;
+- **33** siguen en draft;
+- **3** están no-draft: #7294, #7310 y #7323;
+- **33 branches `snd/*`** existen sin PR abierto hacia la base en este snapshot.
+
+### PRs no-draft
+
+- **#7294** — SND-CMP-001, comparación sin asumir identidad.
+- **#7310** — REF-002, índice vivo IPA.
+- **#7323** — es-GT, vocales y mapa consonántico.
+
+**Regla de integración:** no-draft no equivale a merge automático. Antes de integrar se revisan mergeability, cambios globales arrastrados, Source Registry y gates R33.
+
+### Frentes con PRs abiertos
+
+- fundamentos: percepción, duración/cantidad, variación, sonido/acento tonal;
+- comparación: método y equivalencias;
+- representación: escritura/sistemas locales, romanización/transliteración;
+- referencias: glosario, IPA, idioma, fenómeno, romanizaciones, cross-reference graph, bibliografía;
+- es-GT, en-US, pt-BR-rio, italiano, francés, alemán, japonés y ruso;
+- revisión editorial y gate de composición.
+
+### Frentes con branches activas pero sin PR abierto en este snapshot
+
+Incluyen trabajo en zh-TW, coreano, ruso, alemán/italiano/francés de referencia, IPA/diacríticos, auditorías R33, revisión lingüística e integración de fundamentos.
+
+Antes de abrir trabajo nuevo en esas áreas, comprobar primero las branches activas.
+
+## 15. IDs de fuentes en trabajo paralelo
+
+Para reducir colisiones, una rama trabajadora **no debe asignar un nuevo ID canónico `SND-SRC-xxxx`** si la fuente todavía no existe en el Source Registry común.
+
+Debe usar un ID local collision-safe, por ejemplo:
+
+- `ESGT-W2-S01`;
+- `CMP-PROP-001`;
+- `JA-W3-S02`.
+
+Durante integración:
+
+1. se comprueban metadatos y alcance;
+2. se asigna el ID canónico;
+3. se sustituyen los IDs locales en claims/entradas;
+4. se vuelve a comprobar claim ↔ source ↔ locator;
+5. solo después puede promoverse el gate R33 aplicable.
+
+## 16. Regla para archivos globales
+
+Las ramas de dominio deben evitar reescribir por arrastre estados no relacionados en:
+
+- `MLS-SND-MASTER-INVENTORY.md`;
+- `MLS-SND-SOURCE-REGISTRY.md`;
+- `STATUS.md`;
+- `editorial/*`.
+
+Si una branch parte de una base antigua y su diff muestra retrocesos de estados ajenos, el integrador debe preservar el estado más reciente de la base e integrar selectivamente el contenido de dominio.
