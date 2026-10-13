@@ -1,0 +1,73 @@
+# SND-KO-008 — Hangul y pronunciación: escritura no es superficie fonética
+
+**Estado:** READY_FOR_COMPOSITION.
+**Idioma:** coreano  
+**Dominio:** escritura / pronunciación
+
+## 1. Principio
+
+MLS-SND mostrará hangul como la escritura principal del coreano, pero no inferirá automáticamente la pronunciación superficial leyendo cada letra de manera aislada.
+
+Las reglas oficiales de pronunciación muestran de forma directa que una misma secuencia ortográfica puede participar en cambios condicionados por posición y contexto.
+
+## 2. Evidencia de la diferencia escritura–superficie
+
+### Coda
+La Rule 9 muestra que varias grafías consonánticas finales convergen en un conjunto más reducido de realizaciones prescritas en coda.
+
+### Ante nasal
+La Rule 18 muestra cambios de las obstruyentes finales ante ㄴ/ㅁ.
+
+### Ante determinadas consonantes
+La Rule 23 muestra tensificación de consonantes siguientes en contextos definidos.
+
+Por tanto, la escritura aporta información estructural, pero no sustituye una descripción de la pronunciación contextual.
+
+## 3. Capas recomendadas
+
+Cuando un ejemplo necesite precisión:
+
+**hangul → (Romanización Revisada, si ayuda) → /representación fonológica/ → [representación fonética]**
+
+No todas las entradas necesitan todas las capas.
+
+## 4. Evidencia R33
+
+| claim_id | afirmación | source | localizador | estado |
+|---|---|---|---|---|
+| KO008-C01 | La pronunciación estándar distingue entre grafía final y realización prescrita en coda | SND-SRC-0032 | Rule 9 | VERIFIED |
+| KO008-C02 | El contexto nasal modifica la realización prescrita de ciertas codas | SND-SRC-0032 | Rule 18 | VERIFIED |
+| KO008-C03 | El contexto consonántico puede producir tensificación prescrita no visible como simple lectura letra-a-letra | SND-SRC-0032 | Rule 23 | VERIFIED |
+
+## 5. Nota editorial
+
+La secuencia de capas es una decisión MLS-SND. Esta entrada no afirma que la ortografía sea “irregular”; describe que ortografía y realización fonética son niveles distintos.
+
+
+## Revisión lingüística 2026-10-11
+
+- Representación, alcance y separación escritura/romanización/IPA comprobados.
+- Source IDs canónicos revisados.
+- Las decisiones editoriales permanecen separadas de los claims externos.
+- Gate: **LINGUISTIC_REVIEW**; aún falta EDITORIAL_REVIEW.
+
+## Revisión editorial wave 01
+
+- **Fecha:** 2026-10-11.
+- **Resultado:** PASS.
+- **Comprobado:** claridad, jerarquía, navegación conceptual y separación entre norma, habla empírica, hangul, romanización e IPA.
+- **Cambios lingüísticos:** ninguno.
+- **Claims R33 modificados:** ninguno.
+- **Estado resultante:** EDITORIAL_REVIEW.
+- **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `3c87e8a3b678d3fda334fa5d1b6b8dd9e2fe2bba`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Representación:** hangul, Romanización Revisada, representación fonológica e IPA conservan funciones distintas.
+- **Reader-facing:** incluir §§1–3 y nota editorial; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se genera respelling adicional.
+- **Written-only/Unicode:** PASS; Hangul debe preservarse sin sustitución.
+
