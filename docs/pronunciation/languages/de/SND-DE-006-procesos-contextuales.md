@@ -1,6 +1,6 @@
 # SND-DE-006 — Procesos contextuales
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** alemán.  
 **Dominio:** fonética / procesos contextuales.  
 **Alcance:** variedad ilustrada por Kohler (1990).
@@ -57,3 +57,14 @@ Las diferencias DE/AT/CH pertenecen a SND-DE-008 y a fuentes específicas de cad
 - **Scope warning:** la entrada conserva su función de referencia contextual; diferencias nacionales siguen fuera y remiten a DE-008/fuentes específicas.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## 10. Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `54829c5fbaa621f54a24ef03532d366098a32e03`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** aspiración, /r/, golpe glotal y [ç]/[x] permanecen procesos de la variedad ilustrada, no reglas absolutas DE/AT/CH.
+- **Reader-facing:** incluir §§1–4 y nota editorial de alcance; excluir tabla R33, auditoría y metadata interna.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se añade forma concreta ni respelling.
+- **Written-only:** PASS.
+
