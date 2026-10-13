@@ -1,6 +1,6 @@
 # SND-DE-004 — Consonantes: sistema y límites del análisis
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** alemán.  
 **Dominio:** consonantes / fonología / fonética.  
 **Alcance:** variedad ilustrada por Kohler (1990).
@@ -50,3 +50,12 @@ El tratamiento de [ç]/[x] se presenta como análisis de Kohler, no como declara
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `EDITORIAL_REVIEW`.
+- **Lectura:** la distinción entre inventario fonémico, segmentos fonéticos y análisis contextual de [ç]/[x]/[ʔ] queda explícita.
+- **Jerarquía:** tabla/análisis → contextos → /r/ → evidencia ofrece una navegación clara.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.

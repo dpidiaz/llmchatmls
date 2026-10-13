@@ -1,6 +1,6 @@
 # SND-DE-003 — Longitud y calidad vocálica
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** alemán.  
 **Dominio:** vocales / duración.  
 **Alcance:** patrón descrito por Kohler (1990) para la variedad ilustrada.
@@ -35,9 +35,18 @@ Kohler, K. J. (1990). German. *Journal of the International Phonetic Association
 
 ## 6. Nota editorial
 
-La terminología definitiva para close/open, tense/lax o longitud deberá armonizarse con revisión lingüística del perfil completo y con los estándares nacionales.
+La revisión lingüística del perfil ya fue completada; cualquier decisión transversal futura sobre close/open, tense/lax o longitud deberá mantenerse coherente con la terminología canónica y con los estándares nacionales.
 
 ## 7. Auditoría R33
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 8. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_METADATA_FIX → `EDITORIAL_REVIEW`.
+- **Lectura:** la entrada evita la simplificación “larga vs. corta” y mantiene calidad, duración, acento y entorno como dimensiones relacionadas.
+- **Corrección editorial:** la nota final deja de presentar la revisión lingüística como pendiente; cualquier armonización terminológica transversal futura sigue siendo editorial/terminológica.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.
