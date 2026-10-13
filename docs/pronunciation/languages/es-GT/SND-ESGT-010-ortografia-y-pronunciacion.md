@@ -1,6 +1,6 @@
 # SND-ESGT-010 — Ortografía y pronunciación
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** español.
 **Variedad:** Guatemala dentro del sistema ortográfico panhispánico.
 **Dominio:** escritura / pronunciación / transcripción.
@@ -79,3 +79,11 @@ Esta entrada no intenta resumir la ortografía española. Solo define cómo debe
 **LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
 
 La ortografía permanece como capa escrita: no se usa para deducir automáticamente IPA, silabificación fonética universal ni inventario fonológico.
+
+## 10. Gate de composición — 2026-10-13
+
+**COMPOSITION_READINESS: PASS → READY_FOR_COMPOSITION.**
+
+La proyección reader-facing conserva §§1–5, §8 y la nota editorial de §9. La tabla R33 (§6), el gate lingüístico (§7), las líneas de gate de §9 y este §10 permanecen como metadata interna.
+
+**Pronunciation Quick Layer:** NOT_APPLICABLE. Esta entrada fija una política de separación entre ortografía y pronunciación y no presenta una forma léxica concreta que requiera una derivación de pronunciación fácil.
