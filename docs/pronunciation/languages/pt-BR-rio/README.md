@@ -23,3 +23,22 @@ Ampliar evidencia carioca reciente y separar PB_BROAD de RIO_CARIOCA.
 4. primer cluster redactado;
 5. gate R33;
 6. revisión lingüística y editorial.
+
+## Wave 01 disponible en PR #7277
+
+La primera wave sustantiva cubre alcance de variedad, vocales pretónicas, /S/ en coda, róticas, /l/ en coda y marco inicial de entonación.
+
+Principio consolidado: toda generalización debe distinguir PB_BROAD, RIO_CARIOCA y RIO_SUBSCOPE.
+
+
+## Estado de piloto
+
+Wave 01 cubre actualmente los diez IDs SND-PTBR-001…010 con 47 claims y está **REVIEW_READY**.
+
+Véanse:
+
+- `PILOT-INDEX.md`;
+- `SOURCE-MAP-wave-01.md`;
+- `LINGUISTIC-REVIEW-CHECKLIST.md`.
+
+Ninguna entrada se ha auto-promovido a LINGUISTIC_REVIEW.
