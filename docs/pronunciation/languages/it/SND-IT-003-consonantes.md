@@ -1,6 +1,6 @@
 # SND-IT-003 — Consonantes
 
-**Estado:** LINGUISTIC_REVIEW.  
+**Estado:** EDITORIAL_REVIEW.  
 **Idioma:** italiano.  
 **Dominio:** consonantes / fonética / fonología.  
 **Alcance:** análisis de Rogers & d’Arcangeli (2004).
@@ -47,3 +47,12 @@ Rogers, D., & d’Arcangeli, L. (2004). Italian. *JIPA, 34*(1), 117–121.
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS_WITH_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Lectura:** inventario, geminación, asimilación, oposiciones /s~z/ /ts~dz/ y raddoppiamento fonosintattico se presentan como fenómenos distintos.
+- **Scope warning:** la afirmación regional sobre raddoppiamento permanece atribuida a la fuente y no se convierte en mapa nacional exhaustivo.
+- **Cambios lingüísticos/R33:** ninguno.
+- **Siguiente gate:** composition readiness sobre esta misma versión.
