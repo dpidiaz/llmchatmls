@@ -1,7 +1,7 @@
 # MLS-SND — Integration Queue
 
-Actualizado: 2026-10-11.  
-Corte coordinado: **106 entradas / 91 fuentes**.
+Actualizado: 2026-10-12.  
+Corte coordinado: **108 entradas / 97 fuentes**.
 
 Este archivo registra decisiones de reconciliación entre chats. El estado lingüístico canónico vive en las entradas de `feat/mls-snd-foundation` y en `STATUS.md`.
 
@@ -19,21 +19,18 @@ Este archivo registra decisiones de reconciliación entre chats. El estado ling�
 
 Auditoría:
 
-`audits/STATUS-RECONCILIATION-106-91-2026-10-11.md`
+`audits/CLAIM-COORDINATION-DRIFT-108-2026-10-12.md`
 
 Resultado:
 
-- 106 entradas canónicas;
-- 91 fuentes canónicas;
-- 42 EDITORIAL_REVIEW;
-- 35 LINGUISTIC_REVIEW;
+- 108 entradas canónicas;
+- 97 fuentes canónicas;
+- 39 EDITORIAL_REVIEW;
+- 33 LINGUISTIC_REVIEW;
 - 22 EVIDENCE_CHECKED;
-- 1 SOURCE_MAPPED;
-- 1 DRAFTED;
-- 1 RESEARCHED;
 - 1 RESEARCHED_PARTIAL;
 - 1 IN_PROGRESS;
-- 2 READY_FOR_COMPOSITION.
+- 12 READY_FOR_COMPOSITION.
 
 ## Reconciliaciones recientes
 
@@ -74,9 +71,6 @@ No reutilizar sus conteos para describir el árbol actual.
 ## Activos / acción
 
 ### Gates pre-R33
-- ESGT-002 — SOURCE_MAPPED.
-- ESGT-004 — DRAFTED.
-- DE-008 — RESEARCHED.
 - ZHTW-003 — RESEARCHED_PARTIAL.
 - REF-002 — IN_PROGRESS.
 
@@ -86,29 +80,27 @@ Priorizar integración por ID de contenido ya producido para:
 - ESGT-006/007/008;
 - ENUS-002;
 - DE-005;
-- ZHTW-002/006;
+- ZHTW-006;
 - JA-002/003/005/010;
-- RU-009.
 
 ### Review waves
 No crear segundos canónicos para entradas ya en LINGUISTIC_REVIEW o EDITORIAL_REVIEW.
 
 ## Source-ID integrity
 
-Source Registry v0.19:
+Source Registry v0.20:
 
-`SND-SRC-0001…SND-SRC-0091`
+`SND-SRC-0001…SND-SRC-0097`
 
 El control actual es estructural/referencial. El control de localizadores y suficiencia por claim sigue siendo otro gate.
 
 ## Próximo orden sugerido
 
-1. continuar composition-readiness por lotes pequeños y heterogéneos; ya existen PASS en fundamentos y en-US;
-2. cerrar pre-gates ESGT-002 / ESGT-004 / DE-008 / ZHTW-003;
+1. continuar composition-readiness por lotes pequeños y heterogéneos; ya existen 12 PASS canónicos;
+2. cerrar pre-gates ZHTW-003 y REF-002;
 3. clean-reapply de coverage waves ya investigadas;
 4. completar aparato REF;
-5. ejecutar primer composition-readiness pilot;
-6. repetir QA global tras la siguiente ola de integraciones.
+5. repetir QA global tras la siguiente ola de integraciones.
 
 ## Regla final
 
