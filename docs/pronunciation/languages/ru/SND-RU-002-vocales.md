@@ -1,6 +1,6 @@
 # SND-RU-002 — Vocales: inventario analítico y realizaciones
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** ruso.  
 **Dominio:** vocales / fonología / fonética.  
 **Alcance:** análisis de Yanushevskaya & Bunčić (2015), con desacuerdos teóricos conservados explícitamente.
@@ -75,3 +75,13 @@ Las transcripciones de esta fuente se interpretan dentro del marco fonológico d
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Versión evaluada (blob):** `c2efe17ff3f8887970830f6d1504ab91bc4c00e6`.
+- **Handoff:** `docs/pronunciation/composition/handoffs/SND-RU-002.md`.
+- **Pronunciation Quick Layer:** `OMITTED_WITH_REASON`; esta versión describe un sistema/fenómeno y no fija una única pareja forma–glosa con respelling derivada aprobada. No se inventa una ayuda fonética para llenar la capa.
+- **Reader-facing projection:** contenido explicativo aprobado, fuentes utilizadas, navegación y notas editoriales necesarias; tablas R33, auditorías y logs de revisión quedan como metadata interna.
+- **Control:** no se modificaron claims, fuentes, localizadores, transcripciones, análisis, variedad ni alcance.

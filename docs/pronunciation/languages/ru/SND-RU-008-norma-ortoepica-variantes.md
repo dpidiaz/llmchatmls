@@ -1,6 +1,6 @@
 # SND-RU-008 — Norma ortoépica y variantes
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Idioma:** ruso.  
 **Dominio:** pronunciación / norma / variación.  
 **Alcance:** metadescripción institucional de SND-SRC-0016.
@@ -82,3 +82,13 @@ Esta entrada documenta qué tipo de evidencia aporta la obra; no reproduce ni re
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness
+
+- **Fecha:** 2026-10-12.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Versión evaluada (blob):** `b2be9edf529c40f1a0bea188a7b4195c71985a7b`.
+- **Handoff:** `docs/pronunciation/composition/handoffs/SND-RU-008.md`.
+- **Pronunciation Quick Layer:** `OMITTED_WITH_REASON`; esta versión describe norma/variación y no fija una única pareja forma–glosa con respelling derivada aprobada.
+- **Reader-facing projection:** contenido explicativo aprobado, fuentes utilizadas, navegación y notas editoriales necesarias; tablas R33, auditorías y logs de revisión quedan como metadata interna.
+- **Control:** no se modificaron claims, fuentes, localizadores, transcripciones, análisis, variedad ni alcance.
