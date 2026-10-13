@@ -1,6 +1,6 @@
 # SND-CMP-001 — Cómo comparar sonidos sin asumir identidad
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** comparación / fonética / fonología.  
 **Idioma:** transversal.
 
@@ -195,3 +195,15 @@ es una convención editorial de MLS-SND. No se atribuye a las fuentes.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
 
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `5ab68e146cb7cd5a3f879cbe205d6947462d0e6c`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–9 y §§12–13.
+- **Metadata interna excluida:** §10 (gate interno de publicación), §11 (tabla R33 bruta) y §14 (revisión editorial/workflow).
+- **Ejemplos:** §§5.1 y 5.2 = `SOURCE_EXAMPLE`; §9 = `EDITORIAL_EXAMPLE`.
+- **Fuentes y fundamento:** derivado de SND-SRC-0001, SND-SRC-0024, SND-SRC-0051 y SND-SRC-0052, con localizadores y alcance preservados en R33.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — los símbolos /p/, [ɨ] y [ɪ] son controles metodológicos, no una forma léxica objetivo para respelling.
+- **Autonomía escrita:** PASS; el argumento se comprende sin audio.
+- **Open questions:** ninguna bloqueante. La taxonomía comparativa sigue siendo convención editorial MLS-SND y no autoriza equivalencias nuevas sin evidencia de ambos lados.
+- **Regla para COMPOSITION:** no puede convertir SEMEJANZA PARCIAL o APROXIMACIÓN ARTICULATORIA en identidad, ni alterar IPA, VOT/F0, fuentes, alcance o taxonomía.
