@@ -1,6 +1,6 @@
 # SND-REP-009 — Ortografía y pronunciación
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_CROSS_PROFILE_WARNING.  
 **Dominio:** escritura / pronunciación.  
 **Idioma:** transversal.
 
@@ -60,3 +60,13 @@ Las cuatro capas enumeradas son una regla de estructura MLS-SND. No se afirma qu
 
 - **Fecha:** 2026-10-11.
 - **Resultado:** EVIDENCE_CHECKED.
+
+## 9. Revisión lingüística wave 02
+
+- **Fecha:** 2026-10-12.
+- **Versión revisada:** blob `ce5414298a7e65942c0c1939d0863ddde225d9f6`.
+- **Resultado:** PASS_WITH_CROSS_PROFILE_WARNING → `LINGUISTIC_REVIEW`.
+- **Principio:** ortografía y pronunciación permanecen capas distintas; ninguna grafía se usa como evidencia automática de realización.
+- **Ejemplos cross-profile:** las menciones de ruso, coreano y zh-TW funcionan como navegación/ilustración; su evidencia lingüística reside en las entradas específicas de esos perfiles y no crea claims autónomos aquí.
+- **Terminología:** coherente con la regla canónica `ortografía ≠ pronunciación`.
+- **Siguiente gate:** EDITORIAL_REVIEW independiente.
