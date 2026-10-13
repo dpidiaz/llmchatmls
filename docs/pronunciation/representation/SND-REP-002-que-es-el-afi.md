@@ -1,6 +1,6 @@
 # SND-REP-002 — Qué es el AFI/IPA
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Dominio:** transcripción.
 **Idioma:** transversal.
 **Variedad:** no aplica.
