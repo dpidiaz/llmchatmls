@@ -1,6 +1,6 @@
 # SND-KO-005 — Estructura silábica: marco y decisiones abiertas
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano  
 **Dominio:** fonología
 
@@ -54,3 +54,14 @@ Primero se revisarán:
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `c995cbd035328a89714f1380f1beb85cd80d2b5d`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como marco descriptivo mínimo.
+- **Open question no bloqueante:** no se adopta árbol silábico canónico; la disputa sobre /j/ permanece visible y fuera de la función de consulta.
+- **Reader-facing:** incluir §§1–3; fundamento visible derivado; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE.
+- **Written-only:** PASS.
+

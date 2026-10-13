@@ -1,6 +1,6 @@
 # SND-KO-004 — Vocales de Seoul Korean: sistema en cambio
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano  
 **Variedad:** Seoul Korean  
 **Dominio:** fonética
@@ -58,3 +58,14 @@ No se extrapolan estos resultados a todas las generaciones, registros o variedad
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `359bd9854648d33d10951ded14c6405b8e8ddb12`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** Seoul Korean; la notación del estudio no se convierte en inventario canónico universal.
+- **Reader-facing:** incluir §§1–3 y límite; excluir tabla R33 y metadata interna.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE.
+- **Written-only:** PASS.
+

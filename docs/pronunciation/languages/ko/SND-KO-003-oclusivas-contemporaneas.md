@@ -1,6 +1,6 @@
 # SND-KO-003 — Oclusivas y cambio contemporáneo en Seúl
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano.
 **Variedad:** coreano de Seúl.
 **Dominio:** consonantes / fonética acústica / cambio.
@@ -84,3 +84,14 @@ LINGUISTIC_REVIEW completado; esta entrada pasa ahora por EDITORIAL_REVIEW.
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `eff8d5400a91691e7187b6c663b27fdac6c8aafd`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Alcance:** coreano de Seúl; posición prosódica, fecha y pistas acústicas siguen siendo materiales.
+- **Reader-facing:** incluir §§1–4 y 6–7; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; entrada acústica/analítica sin forma léxica concreta.
+- **Written-only:** PASS.
+

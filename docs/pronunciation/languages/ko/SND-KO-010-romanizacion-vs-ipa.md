@@ -1,6 +1,6 @@
 # SND-KO-010 — Romanización Revisada e IPA cumplen funciones distintas
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano  
 **Dominio:** romanización / transcripción
 
@@ -55,3 +55,14 @@ La decisión de mostrar ambas capas solo cuando sean útiles forma parte de la p
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `3e0d0d2f750ceff775e7ea5e09c1ae01031b728a`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Representación:** Romanización Revisada e IPA permanecen capas distintas; símbolos visualmente iguales no se interpretan fuera de su sistema.
+- **Reader-facing:** incluir §§1–3 y nota editorial; excluir tabla R33 y metadata de gates.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE.
+- **Written-only:** PASS.
+

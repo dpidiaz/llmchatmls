@@ -1,6 +1,6 @@
 # SND-KO-009 — Romanización Revisada del coreano
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano.
 **Dominio:** romanización.
 
@@ -64,3 +64,14 @@ La secuencia visual de capas es una decisión MLS-SND.
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `3d62a6be34e4f6dbd2a0cc2e896533dd2ba03441`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Representación:** Romanización Revisada sigue siendo capa auxiliar, nunca sustituto de hangul ni transcripción fonética completa.
+- **Reader-facing:** incluir §§1–4 y nota editorial; excluir tabla R33/auditorías.
+- **Pronunciation Quick Layer:** NOT_APPLICABLE; la romanización no se recicla como pronunciación fácil.
+- **Written-only/Unicode:** PASS.
+

@@ -1,6 +1,6 @@
 # SND-KO-006 — Procesos contextuales: norma y descripción
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** coreano  
 **Variedad:** pronunciación estándar normativa  
 **Dominio:** pronunciación / fonología
@@ -58,3 +58,14 @@ Añadir evidencia de corpus sobre frecuencia, variación y condicionamiento de e
 - **Claims R33 modificados:** ninguno.
 - **Estado resultante:** EDITORIAL_REVIEW.
 - **Siguiente gate:** composition-readiness; no se promueve automáticamente a READY_FOR_COMPOSITION.
+
+## Composition readiness wave 01
+
+- **Fecha:** 2026-10-12.
+- **Versión evaluada:** blob `ed673afdfaf0c3eb0385a1855987a1cde901485b`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como entrada NORMATIVE.
+- **Open question no bloqueante:** frecuencia y variación en habla espontánea requieren corpus futuro; no alteran los claims normativos actuales.
+- **Reader-facing:** incluir §§1–5 y 7; excluir tabla R33 y logs internos.
+- **Pronunciation Quick Layer:** OMITTED_WITH_REASON; no se añaden ejemplos/respellings no aprobados.
+- **Written-only:** PASS.
+
