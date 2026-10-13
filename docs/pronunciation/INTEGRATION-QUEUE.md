@@ -1,7 +1,7 @@
 # MLS-SND — Integration Queue
 
-Actualizado: 2026-10-11.  
-Corte coordinado: **106 entradas / 91 fuentes**.
+Actualizado: 2026-10-12.  
+Corte coordinado: **108 entradas / 97 fuentes**, verificado contra la matriz `cfbe8735e334ef0933c11beb8dd61a6483bcaa9c`.
 
 Este archivo registra decisiones de reconciliación entre chats. El estado lingüístico canónico vive en las entradas de `feat/mls-snd-foundation` y en `STATUS.md`.
 
@@ -17,23 +17,26 @@ Este archivo registra decisiones de reconciliación entre chats. El estado ling�
 
 ## Corte actual
 
-Auditoría:
+Auditorías canónicas vigentes:
 
-`audits/STATUS-RECONCILIATION-106-91-2026-10-11.md`
+- `audits/STATUS-SYNC-108-97-WAVE-05-2026-10-11.md`;
+- `audits/SOURCE-ID-INTEGRITY-108-97-2026-10-11.md`.
 
-Resultado:
+Resultado coordinado:
 
-- 106 entradas canónicas;
-- 91 fuentes canónicas;
-- 42 EDITORIAL_REVIEW;
-- 35 LINGUISTIC_REVIEW;
+- 108 entradas canónicas / 108 IDs únicos;
+- 97 fuentes canónicas `SND-SRC-0001…0097`;
+- 39 EDITORIAL_REVIEW;
+- 33 LINGUISTIC_REVIEW;
 - 22 EVIDENCE_CHECKED;
-- 1 SOURCE_MAPPED;
-- 1 DRAFTED;
-- 1 RESEARCHED;
 - 1 RESEARCHED_PARTIAL;
 - 1 IN_PROGRESS;
-- 2 READY_FOR_COMPOSITION.
+- 12 READY_FOR_COMPOSITION;
+- 0 SOURCE_MAPPED;
+- 0 DRAFTED;
+- 0 RESEARCHED.
+
+Este snapshot es de coordinación: no sustituye los gates por versión concreta ni convierte el PASS referencial en validación semántica.
 
 ## Reconciliaciones recientes
 
