@@ -1,6 +1,6 @@
 # SND-FND-014 — Acento tonal: una etiqueta que exige definición local
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** prosodia / tipología.  
 **Idioma:** transversal.  
 **Fuente tipológica principal:** SND-SRC-0048.
@@ -74,3 +74,15 @@ La norma editorial v0.2 conserva **acento tonal** como rótulo de trabajo para *
 - **Jerarquía:** la postura de Hyman permanece atribuida al autor y Tokio funciona como perfil ilustrativo, no como definición global.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness con la advertencia terminológica intacta.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `b03ef843ac3ae78b34fefb4271950b089d122002`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–7.
+- **Metadata interna excluida de la edición de lectura:** §§8–9 (gates/revisión interna).
+- **Fuentes y fundamento:** derivado de la evidencia R33 y la bibliografía ya aprobadas; los claim IDs/localizadores completos permanecen auditables en el repositorio.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual/transversal sin forma léxica cuya respelling aporte valor.
+- **Autonomía escrita:** PASS; no requiere audio para comprender el contenido aprobado.
+- **Open questions:** ninguna bloqueante para el núcleo actual. «Acento tonal» se conserva como rótulo de trabajo con definición local obligatoria; la postura de Hyman sigue atribuida al autor y no se universaliza.
+- **Regla para COMPOSITION:** puede ajustar presentación visual, pero no wording lingüísticamente material, claims, alcance, fuentes/localizadores ni decisiones analíticas.
