@@ -1,6 +1,6 @@
 # SND-REP-012 — Sistemas locales de anotación y consulta
 
-**Estado:** EDITORIAL_REVIEW — PASS.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Dominio:** representación / escritura / consulta.  
 **Idioma:** transversal con ejemplos delimitados.
 
@@ -78,3 +78,14 @@ Los ejemplos de Taiwán y Corea ilustran tipos de capa; no se usan para definir 
 - **Arquitectura:** Zhuyin, romanización, IPA y otras capas permanecen presentadas por función real; no se impone una plantilla universal.
 - **Consistencia:** los ejemplos de Taiwán y Corea están delimitados y la entrada no extrapola sus sistemas a otros perfiles.
 - **Siguiente gate:** composition readiness sobre esta versión editorial.
+
+## 12. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `b8507a67f3c9ce3bc1217b2999cd76c533d110ce`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Reader-facing projection:** §§1–8 incluidas; §§9–11 quedan como metadata interna.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual de representación; no hay forma pronunciable objetivo.
+- **Written-only gate:** PASS; no depende de audio ni de una inferencia fonética nueva.
+- **Scope guard:** Zhuyin, Romanización Revisada e IPA permanecen capas funcionalmente distintas; los ejemplos de Taiwán/Corea no se extrapolan.
+- **Handoff:** `composition/handoffs/SND-REP-012.md`.
