@@ -1,6 +1,7 @@
 # SND-IT-009 — Variación regional y referencia
 
-**Estado:** LINGUISTIC_REVIEW  **Idioma:** italiano.  
+**Estado:** EDITORIAL_REVIEW  
+**Idioma:** italiano.  
 **Dominio:** variación / referencia.  
 **Fuente regional canonicalizada:** SND-SRC-0073.
 
@@ -16,7 +17,7 @@ Bertinetto & Loporcaro comparan Standard Italian (SI) con Florence Italian (FI),
 
 ## 3. Variación vocálica
 
-La fuente propuesta documenta divergencias entre FI, RI y MI en la distribución de vocales medias tónicas abiertas/cerradas y otros detalles de realización.
+La fuente comparativa documenta divergencias entre FI, RI y MI en la distribución de vocales medias tónicas abiertas/cerradas y otros detalles de realización.
 
 Por ello las entradas E/O no deben presentar una sola distribución léxica regional como propiedad universal.
 
@@ -41,22 +42,29 @@ El perfil italiano mantendrá tres niveles separados:
 | IT009-C03 | Bertinetto & Loporcaro comparan SI con FI/MI/RI y distinguen SI de la evolución local contemporánea | SND-SRC-0073 | pp. 131–132 + discusión de alcance | comparación regional | VERIFIED |
 | IT009-C04 | FI/RI/MI divergen en distribución de vocales medias tónicas | SND-SRC-0073 | p. 137, sección de variación vocálica | variedades comparadas | VERIFIED |
 
-## 7. Gate
-
-**EVIDENCE_CHECKED.**
+## 7. Gate editorial
 
 - SND-SRC-0073 está canonicalizada.
 - IT009-C03 fue re-auditado contra el alcance/introducción del artículo.
 - IT009-C04 fue re-auditado contra la discusión de variación vocálica en la p. 137.
-- La entrada conserva FI/MI/RI como comparadores documentados, no como taxonomía exhaustiva de Italia.
+- FI/MI/RI se conservan como comparadores documentados, no como taxonomía exhaustiva de Italia.
 
-## 8. Nota editorial
+**LINGUISTIC_REVIEW: PASS. EDITORIAL_REVIEW: PASS_WITH_EDITORIAL_CHANGES.**
+
+## 8. Entradas relacionadas
+
+- SND-IT-001 — Italiano de referencia y variedades.
+- SND-IT-004 — Geminación y duración consonántica.
+- SND-IT-005 — Acento léxico.
+- SND-IT-008 — Grafía y pronunciación.
+
+## 9. Nota editorial
 
 Esta entrada no pretende representar toda la diversidad regional italiana mediante cuatro etiquetas; FI/MI/RI son comparadores documentados, no el límite del panorama.
 
-## 9. Auditoría de integración — 2026-10-11
+## 10. Auditoría de integración — 2026-10-11
 
 - **IT009-C01/C02:** conservan SND-SRC-0017 y sus localizadores ya verificados.
 - **IT009-C03:** VERIFIED contra SND-SRC-0073, pp. 131–132 y alcance explícito SI/FI/MI/RI.
 - **IT009-C04:** VERIFIED contra SND-SRC-0073, p. 137: la fuente declara divergencias entre FI, RI y MI en la distribución de vocales medias tónicas.
-- **Resultado:** EVIDENCE_CHECKED; la revisión independiente #7358 ya aprobó la dirección lingüística con advertencia de alcance.
+- **Resultado:** evidencia reconciliada; LINGUISTIC_REVIEW PASS y EDITORIAL_REVIEW PASS_WITH_EDITORIAL_CHANGES, con advertencia de alcance preservada.
