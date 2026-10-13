@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="connect-src 'self'; object-src 'none'; base-uri 'self'">
+<meta name="theme-color" content="#171717">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="MASTER LANGUAGE SYSTEM">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180.png">
+<link rel="apple-touch-icon" sizes="167x167" href="assets/apple-touch-icon-167.png">
+<link rel="apple-touch-icon" sizes="152x152" href="assets/apple-touch-icon-152.png">
+<link rel="apple-touch-startup-image" href="assets/splash-iphone11-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)">
+<meta name="description" content="MASTER LANGUAGE SYSTEM — biblioteca canónica local, 10 idiomas, disponible sin conexión">
+<meta name="author" content="Josué David Díaz Ponce">
+<meta name="copyright" content="© 2026 Josué David Díaz Ponce. Guatemala. Derechos reservados sobre los materiales originales de su autoría.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/local-overrides.css">
+<title>MASTER LANGUAGE SYSTEM</title>
+</head>
+<body class="dark sidebar-hidden">
+<header class="topbar">
+  <button id="menuBtn" class="iconbtn" aria-label="Mostrar menú"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="brand" href="#home"><span class="brand-mark">MLS</span><span><b>MASTER LANGUAGE SYSTEM</b><small>Edición PDF · 10 idiomas</small></span></a>
+  <a class="top-search" href="#search" aria-label="Buscar"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><span>Buscar</span></a>
+</header>
+<div class="shell">
+<aside id="sidebar" class="sidebar">
+  <nav class="primary-nav">
+    <a href="#home" data-nav="home"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10.5H14v-6h-4v6H3.5z"/></svg><span>Inicio</span></a>
+    <a href="#search" data-nav="search"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><span>Buscar</span></a>
+    <a href="#map" data-nav="map"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.5h6l2.5 2h8.5v11H3.5zM3.5 10h17"/></svg><span>Atlas</span></a>
+  </nav>
+  <details class="side-more">
+    <summary>Más opciones</summary>
+    <nav>
+
+
+
+
+      <a href="#offline" data-nav="offline">Uso offline</a>
+      <a href="#settings" data-nav="settings">Configuración</a>
+    </nav>
+  </details>
+  <div class="side-footer"><span id="offlineState">Biblioteca local</span><small>Contenido y fuentes de los PDF compartidos</small></div>
+</aside>
+<main id="app" class="app" tabindex="-1"></main>
+</div>
+<nav class="mobile-tabbar" aria-label="Navegación principal">
+  <a href="#home" data-mobile-nav="home"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10.5H14v-6h-4v6H3.5z"/></svg><b>Inicio</b></a>
+  <a href="#search" data-mobile-nav="search"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><b>Buscar</b></a>
+  <a href="#map" data-mobile-nav="map"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.5h6l2.5 2h8.5v11H3.5zM3.5 10h17"/></svg><b>Atlas</b></a>
+  <button id="mobileMoreBtn" type="button" aria-label="Abrir más opciones"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><b>Más</b></button>
+</nav>
+<div id="offlineOverlay" class="offline-overlay" hidden aria-live="polite" aria-modal="true" role="dialog"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="data/index.js"></script>
+<script src="data/references.js?v=canonical-r33-15"></script>
+<script src="js/core.js?v=r33-10"></script>
+<script src="js/map.js?v=part-entry-number-2"></script>
+<script src="js/search.js"></script>
+<script src="js/compare.js"></script>
+<script src="js/reader.js?v=r33-22"></script>
+<script src="js/ios.js?offline-visibility-2"></script>
+<script src="js/app.js?v=offline-visibility-3"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
