@@ -1,6 +1,6 @@
 # SND-REP-011 — Transliteración
 
-**Estado:** LINGUISTIC_REVIEW — PASS_WITH_TERMINOLOGY_SCOPE_WARNING.  
+**Estado:** EDITORIAL_REVIEW — PASS_WITH_TERMINOLOGY_SCOPE_WARNING.  
 **Dominio:** representación / conversión de escritura.  
 **Idioma:** transversal.  
 **Fuente conceptual:** SND-SRC-0050 — Unicode CLDR, canonicalizada en el Source Registry.
@@ -47,7 +47,7 @@ MLS-SND no utilizará “transliteración” y “transcripción fonética” co
 
 ## 8. Gate
 
-**EVIDENCE_CHECKED.** La fuente técnica quedó canonicalizada; falta LINGUISTIC_REVIEW.
+**EVIDENCE_CHECKED histórico.** La fuente técnica quedó canonicalizada; la revisión lingüística posterior consta en §9.
 
 ## 9. Revisión lingüística wave 02
 
@@ -59,3 +59,12 @@ MLS-SND no utilizará “transliteración” y “transcripción fonética” co
 - **Reversibilidad:** no se presupone para toda transliteración.
 - **Metadata:** SND-SRC-0050 ya estaba canonicalizada; se corrige únicamente el encabezado obsoleto.
 - **Siguiente gate:** EDITORIAL_REVIEW independiente.
+
+## 10. Revisión editorial wave 01
+
+- **Fecha:** 2026-10-13.
+- **Versión revisada:** blob `ebfe86ff2c67d71e24baed8a0c61b027b6dc9620`.
+- **Resultado:** PASS_WITH_TERMINOLOGY_SCOPE_WARNING → `EDITORIAL_REVIEW`.
+- **Terminología:** “transliteración” conserva el uso MLS orientado primariamente a conversión gráfica; no se usa como sinónimo de traducción ni transcripción fonética.
+- **Alcance CLDR:** su empleo amplio del término permanece atribuido a esa tradición técnica y no se universaliza.
+- **Siguiente gate:** composition readiness con la advertencia terminológica preservada.
