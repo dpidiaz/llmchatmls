@@ -1,6 +1,6 @@
 # SND-FND-018 — Norma, descripción y uso
 
-**Estado:** EDITORIAL_REVIEW.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Versión revisada:** 2026-10-12; base `99ea52a843a778770be7d305fd3b1b9afdf02efb`.  
 **Dominio:** variación / metodología editorial.  
 **Idioma:** transversal.
@@ -94,3 +94,15 @@ Revisión lingüística/evidencial de esta versión: 2026-10-12. Se corrigió el
 - **Lenguaje editorial:** las alternativas recomendadas evitan “neutral”, “sin acento” y “correcto” fuera de normas explícitas.
 - **Cambios lingüísticos/R33:** ninguno.
 - **Siguiente gate:** composition readiness sobre esta misma versión.
+
+## Composition readiness — 2026-10-13
+
+- **Versión evaluada:** blob `d137dcca126373e23cf72dc175c33b313d9461ec`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Proyección reader-facing:** §§1–8.
+- **Metadata interna excluida de la edición de lectura:** §§9–10 (auditoría/gates internos).
+- **Fuentes y fundamento:** derivado de la evidencia R33 y la bibliografía ya aprobadas; los claim IDs/localizadores completos permanecen auditables en el repositorio.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — entrada conceptual/transversal sin forma léxica cuya respelling aporte valor.
+- **Autonomía escrita:** PASS; no requiere audio para comprender el contenido aprobado.
+- **Open questions:** ninguna bloqueante para el núcleo actual. Descripción, norma y referencia editorial MLS permanecen separadas; no se convierte una decisión editorial en hecho empírico.
+- **Regla para COMPOSITION:** puede ajustar presentación visual, pero no wording lingüísticamente material, claims, alcance, fuentes/localizadores ni decisiones analíticas.
