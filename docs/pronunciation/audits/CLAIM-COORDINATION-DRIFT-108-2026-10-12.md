@@ -24,3 +24,23 @@ Rutas principales:
 ## Motivo
 
 En el base SHA actual, `STATUS.md` declara 108 entradas / 97 fuentes / 12 READY_FOR_COMPOSITION, mientras `WORK-QUEUE.md` e `INTEGRATION-QUEUE.md` aún declaran 106 / 91 / 2. El drift es material para dispatch y anti-duplicación.
+
+## Resultado de reconciliación
+
+- Árbol canónico: **108 entradas / 108 IDs únicos**.
+- Source Registry v0.20: **97 fuentes**, `SND-SRC-0001…0097`.
+- Estados tomados del snapshot canónico documentado en `STATUS.md`: 39 EDITORIAL_REVIEW, 33 LINGUISTIC_REVIEW, 22 EVIDENCE_CHECKED, 1 RESEARCHED_PARTIAL, 1 IN_PROGRESS y 12 READY_FOR_COMPOSITION.
+- Cobertura física: **35 gaps** sobre 143 candidatas.
+- Drift físico corregido: ZHTW-002 y RU-009 ya son canónicos; no deben seguir apareciendo como ausentes.
+- Pre-gates obsoletos retirados de dispatch: ESGT-002, ESGT-004 y DE-008 ya no están por debajo de EVIDENCE_CHECKED en el snapshot canónico.
+- No se modificó ninguna entrada SND, claim, fuente, localizador, IPA ni estado editorial.
+
+## Gaps físicos vigentes
+
+CMP 10; REF 7; ESGT 3; ENUS 1; PTBR 8; DE 1; ZHTW 1; JA 4. Total: **35**.
+
+## QA
+
+- La suma de la tabla de distribución de STATUS se corrigió de 106 a **108**; sus filas ya sumaban 108.
+- WORK-QUEUE e INTEGRATION-QUEUE quedan alineadas al corte 108/97 y a los 12 handoffs READY existentes.
+- Cualquier cambio posterior al base SHA exige nueva reconciliación antes de reutilizar estos conteos.
