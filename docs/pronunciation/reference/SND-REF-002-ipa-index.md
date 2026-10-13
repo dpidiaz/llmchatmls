@@ -1,6 +1,6 @@
 # SND-REF-002 — Índice IPA de MLS-SND
 
-**Estado:** EDITORIAL_REVIEW — PASS_WITH_SCOPE_WARNING.  
+**Estado:** READY_FOR_COMPOSITION.  
 **Tipo:** aparato de consulta vivo.  
 **Fuente normativa de símbolos:** SND-SRC-0001 — International Phonetic Association, *The IPA Chart*.
 
@@ -250,3 +250,15 @@ La meta de REF-002 no será “tener muchas formas”, sino garantizar que **cad
 - **Navegabilidad:** los estados USED / EXPLAINED / SOURCE_SPECIFIC / PENDING_CLASSIFICATION permanecen separados y las exclusiones de Zhuyin, romanización y `/S/` continúan visibles.
 - **Cambios lingüísticos:** ninguno; no se añadieron ni reinterpretaron símbolos, transcripciones, fuentes o localizadores.
 - **Siguiente gate:** composition readiness sobre esta versión concreta.
+
+
+## 17. Composition readiness
+
+- **Fecha:** 2026-10-13.
+- **Versión evaluada:** blob `bbab709531d29c9b421405c42e8e022583bd0dd5`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION` como aparato de consulta vivo.
+- **Reader-facing projection:** §§1–6, §8, §10 y §12. §7, §9, §11 y §§13–17 permanecen como infraestructura/editorial interna en esta versión.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — el índice cataloga formas y niveles de representación; no presenta una forma léxica objetivo para respelling.
+- **Guard de composición:** no completar el índice, reclasificar formas, convertir notaciones SOURCE_SPECIFIC en IPA ni resolver gates de entradas fuente durante maquetación.
+- **Unicode:** preservar símbolos y diacríticos combinantes como Unicode real y evitar separarlos de su base por salto de línea.
+- **Handoff:** `composition/handoffs/SND-REF-002.md`.
