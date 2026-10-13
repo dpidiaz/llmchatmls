@@ -1,6 +1,6 @@
 # SND-ENUS-007 — Ritmo, organización temporal y prominencia
 
-**Estado:** EVIDENCE_CHECKED.  
+**Estado:** LINGUISTIC_REVIEW — PASS_WITH_SCOPE_WARNING.  
 **Idioma:** inglés.  
 **Variedad:** Estados Unidos; evidencia regional.  
 **Dominio:** prosodia / organización temporal.
