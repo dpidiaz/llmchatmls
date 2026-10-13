@@ -1,0 +1,90 @@
+# SND-PTBR-004 — Vocales pretónicas en el perfil carioca
+
+**Estado:** EVIDENCE_CHECKED con **SCOPE_WARNING**.  
+**Idioma:** portugués brasileño.  
+**Variedad:** Río de Janeiro; muestra experimental urbana joven.  
+**Dominio:** fonética acústica / variación vocálica.
+
+## 1. Alcance de esta primera entrada
+
+Esta versión cubre únicamente un bloque bien documentado de las **vocales pretónicas** cariocas.
+
+No pretende cerrar todavía:
+
+- todo el sistema vocálico de Río;
+- las vocales postónicas;
+- todas las reglas de elevación;
+- diferencias sociales o regionales fuera de la muestra estudiada.
+
+## 2. Fuente experimental
+
+Machado, Moraes, Callou y Leite (2010) estudian acústicamente realizaciones pretónicas altas derivadas y subyacentes en un corpus controlado de hablantes de Río de Janeiro.
+
+La muestra utilizada en el experimento fue de ocho estudiantes universitarios —cuatro mujeres y cuatro hombres—, de 18 a 28 años, residentes en el área urbana de la ciudad.
+
+## 3. Qué demuestra para MLS-SND
+
+El trabajo es útil porque muestra que una vocal que el oyente categoriza de manera semejante puede requerir análisis acústico más fino para describir su realización.
+
+Por tanto, MLS-SND no debe deducir el sistema pretónico carioca únicamente de la ortografía ni de etiquetas fonológicas amplias.
+
+## 4. Resultado relevante del experimento
+
+Los autores reportan diferencias en la estructura formántica entre realizaciones altas derivadas y altas subyacentes en su corpus.
+
+Ese resultado pertenece a la muestra y al diseño experimental descritos; no se generalizará automáticamente a todos los hablantes cariocas.
+
+## 5. Regla editorial
+
+Cuando una entrada futura describa vocales pretónicas deberá distinguir, cuando sea material:
+
+- vocal subyacente;
+- realización derivada;
+- proceso que favorece el alteamiento;
+- muestra y contexto experimental;
+- datos perceptivos vs. acústicos.
+
+## 6. Evidencia R33
+
+| claim_id | afirmación | source_id | localizador | alcance | estado |
+|---|---|---|---|---|---|
+| PTBR004-C01 | El estudio examina diferencias acústicas entre vocales altas derivadas y subyacentes | SND-SRC-0085 | p. 499, abstract e introducción | RIO_SUBSCOPE: experimento | VERIFIED |
+| PTBR004-C02 | La muestra se compone de ocho universitarios de 18–28 años residentes en el área urbana de Río | SND-SRC-0085 | pp. 502–503, corpus/metodología | RIO_SUBSCOPE | VERIFIED |
+| PTBR004-C03 | El experimento utiliza corpus controlado y mediciones acústicas con PRAAT | SND-SRC-0085 | pp. 500–503 | RIO_SUBSCOPE | VERIFIED |
+| PTBR004-C04 | Los autores reportan diferencias formánticas entre realizaciones derivadas y subyacentes | SND-SRC-0085 | abstract y comienzo de §3 | RIO_SUBSCOPE | VERIFIED |
+| PTBR004-C05 | El estudio no cubre por sí solo vocales postónicas ni toda la población carioca | decisión de alcance MLS | límites de muestra/objeto | editorial | VERIFIED_AS_EDITORIAL_LIMIT |
+
+## 7. Fuente
+
+Machado, L., Moraes, J., Callou, D., & Leite, Y. (2010). Sobre vogais pretônicas médias no dialeto carioca: vogal derivada versus vogal subjacente. In *Textos Seleccionados do XXV Encontro Nacional da Associação Portuguesa de Linguística* (pp. 499–511). https://apl.pt/wp-content/uploads/2017/09/36-Luana-Machado.pdf
+
+## 8. Open questions
+
+- construir SND-PTBR-002 con inventario vocálico amplio;
+- investigar vocales postónicas;
+- incorporar muestras sociolingüísticas no experimentales y de mayor amplitud;
+- determinar qué generalizaciones pueden promoverse de RIO_SUBSCOPE a RIO_CARIOCA.
+
+
+## 9. Discrepancia interna detectada
+
+El abstract del artículo informa un total de **1344 tokens**, mientras que la sección de metodología indica **1152 ocurrencias analizadas**.
+
+Hasta revisar la contabilidad completa del artículo, MLS-SND:
+
+- no utiliza ninguno de esos totales como claim cuantitativo;
+- conserva ambos localizadores como conflicto interno;
+- mantiene válidos únicamente los claims sobre diseño, hablantes y objetivo que no dependen de ese total.
+
+**Estado del conflicto:** OPEN_QUESTION.
+
+
+## 10. Clean reapply wave 01
+
+- **Fecha:** 2026-10-13.
+- **Origen:** PR #7277 / blob histórico `a8a8d7ff47ecf4e0f76080fd37a24977283a0aa7`.
+- **Resultado:** integrado como `EVIDENCE_CHECKED` con `SCOPE_WARNING`; conflicto de conteo permanece `OPEN_QUESTION`.
+- **Canonicalización:** `PTBR-W01-SRC-06 → SND-SRC-0085`.
+- **Sample guard:** se conserva la muestra experimental delimitada del estudio; no se trata como población carioca completa.
+- **Count guard:** se preservan **1344 tokens** (abstract) y **1152 ocurrencias analizadas** (metodología) como cifras en conflicto; MLS-SND no elige una hasta demostrar la relación de conteo.
+- **Cambios materiales:** ninguno; no se añadieron generalizaciones, totales reconciliados, IPA, fuentes o claims.
