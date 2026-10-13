@@ -1,6 +1,6 @@
 # SND-JA-006 — Acento tonal de Tokio como referencia
 
-**Estado:** EDITORIAL_REVIEW.
+**Estado:** READY_FOR_COMPOSITION.
 **Idioma:** japonés.  
 **Variedad:** lengua común / dialecto de Tokio como ancla prosódica.  
 **Dominio:** prosodia / acento.
@@ -93,3 +93,16 @@ JA-007 ya está `READY_FOR_COMPOSITION`, y los fundamentos prosódicos SND-FND-0
 - **Límite preservado:** Tokio/lengua común sigue siendo ancla prosódica, no representación de toda la diversidad japonesa.
 - **Terminología:** “acento tonal” sigue siendo rótulo editorial definido localmente, no traducción oficial de NINJAL ni categoría tipológica universal cerrada.
 - **Cambios lingüísticos/R33:** ninguno.
+
+## 11. Composition readiness wave 02 — 2026-10-13
+
+- **Versión evaluada:** blob `ce9287ce9d040316be528514d573a147a350a947`.
+- **Resultado:** PASS → `READY_FOR_COMPOSITION`.
+- **Blocker previo:** dependencias prosódicas resueltas; JA-007, FND-014 y FND-015 están listos para composición.
+- **Proyección reader-facing:** encabezado + §§1–5, §7 y §8.
+- **Metadata interna excluida:** §6 (tabla R33), §§9–10 (gates/reconciliación) y este bloque.
+- **Fuentes y fundamento:** derivado de SND-SRC-0014; OJAD se presenta como recurso institucional de lengua común/dialecto de Tokio para enseñanza y consulta.
+- **Pronunciation Quick Layer:** `NOT_APPLICABLE` — no hay forma léxica objetivo ni patrón individual que deba recibir respelling.
+- **Autonomía escrita:** PASS; no requiere audio.
+- **Open questions no bloqueantes:** tipología exhaustiva de patrones y variación adicional fuera del núcleo actual.
+- **Regla para COMPOSITION:** no puede convertir Tokio en representación de toda la prosodia japonesa, atribuir “acento tonal” a NINJAL como traducción oficial ni reducir pitch natural a palabra aislada.
